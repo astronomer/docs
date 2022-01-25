@@ -91,27 +91,20 @@ alertmanager:
   images:
     alertmanager:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-alertmanager
-      tag: 0.23.0
 astronomer:
   images:
     commander:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-commander
-      tag: 0.26.4
     registry:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-registry
-      tag: 3.14.2-2
     houston:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-houston-api
-      tag: 0.27.1
     astroUI:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-astro-ui
-      tag: 0.27.1
     dbBootstrapper:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-db-bootstrapper
-      tag: 0.26.1
     cliInstall:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-cli-install
-      tag: 0.26.0
   # Additionally, you can configure the images used for each Airflow deployment under astronomer.houston.config.deployments.helm
   houston:
     config:
@@ -127,37 +120,28 @@ astronomer:
               tag: null
             pgbouncer:
               repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-pgbouncer
-              tag: 1.8.1
 elasticsearch:
   images:
     es:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-elasticsearch
-      tag: 7.10.2-3
     init:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-base
-      tag: 3.14.2-1
     curator:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-curator
-      tag: 5.8.4-5
     exporter:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-elasticsearch-exporter
-      tag: 1.2.1
     nginx:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-nginx-es
-      tag: 1.21.3
 fluentd:
   images:
     fluentd:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-fluentd
-      tag: 1.14.2
 grafana:
   images:
     grafana:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-grafana
-      tag: 7.5.10
     dbBootstrapper:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-db-bootstrapper
-      tag: 0.26.1
 keda:
   keda:
     image:
@@ -167,60 +151,47 @@ kibana:
   images:
     kibana:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-kibana
-      tag: 7.10.2-2
 kube-state:
   images:
     kubeState:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-kube-state
-      tag: 1.7.2
 kubed:
   images:
     kubed:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-kubed
-      tag: 0.12.0
 nats:
   images:
     nats:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-nats-server
-      tag: 2.3.2-3
 nginx:
   images:
     nginx:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-nginx
-      tag: 0.49.3
     defaultBackend:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-default-backend
-      tag: 0.25.4
 postgresql:
   image:
     registry: 012345678910.dkr.ecr.us-east-1.amazonaws.com
     repository: myrepo/myteam-ap-postgresql
-    tag: 11.13.0
 prometheus:
   images:
     prometheus:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-prometheus
-      tag: 2.30.3
 prometheus-blackbox-exporter:
   image:
     repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-blackbox-exporter
-    tag: 0.19.0-3
 prometheus-node-exporter:
   image:
     repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-node-exporter
-    tag: v1.2.2
 prometheus-postgres-exporter:
   image:
     repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-postgres-exporter
-    tag: 0.10.0
 stan:
   images:
     init:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-base
-      tag: 3.14.2-1
     stan:
       repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/myteam-ap-nats-streaming
-      tag: 0.22.0-2
 ```
 
 ## Step 4: Fetch Airflow Helm Charts
