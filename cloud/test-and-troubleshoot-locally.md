@@ -96,6 +96,10 @@ To run Kubernetes locally:
 To instantiate the KubernetesPodOperator in a given DAG, update your DAG file to include the following code:
 
 ```python
+from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
+from airflow import configuration as conf
+# ...
+
 namespace = conf.get('kubernetes', 'NAMESPACE')
 
 # This will detect the default namespace locally and read the
