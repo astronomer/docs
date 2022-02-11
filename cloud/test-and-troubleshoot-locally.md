@@ -74,7 +74,7 @@ For example, the Apache Airflow command for viewing your entire configuration is
 
 ## Run the KubernetesPodOperator Locally
 
-By running Kubernetes on your local machine, you can test your instances of the KubernetesPodOperator locally before pushing your code to a Deployment. Doing so means that you can monitor the status and logs of individual Kubernetes Pods running your tasks.
+By running Kubernetes on your local machine, you can test your instances of the KubernetesPodOperator before pushing your code to a Deployment. Doing so means that you can monitor the status and logs of individual Kubernetes Pods running your tasks.
 
 ### Step 1: Start Running Kubernetes
 
@@ -93,9 +93,20 @@ To run Kubernetes locally:
 
 ### Step 3: Instantiate the KubernetesPodOperator
 
-In your local DAG files, update your instantiations of KubernetesPodOperator to look like the following:
+To instantiate the KubernetesPodOperator in a given DAG, update your DAG file to include the following code:
 
 ```python
+namespace = conf.get('kubernetes', 'NAMESPACE')
+
+# This will detect the default namespace locally and read the
+# environment namespace when deployed to Astronomer.
+if namespace =='default':
+    config_file = '/usr/local/airflow/include/.kube/config'
+    in_cluster=False
+else:
+    in_cluster=True
+    config_file=None
+
 with dag:
     k = KubernetesPodOperator(
         namespace=namespace,
@@ -103,7 +114,7 @@ with dag:
         labels={"foo": "bar"},
         name="airflow-test-pod",
         task_id="task-one",
-        in_cluster=in_cluster, # if set to true, will look in the cluster, if false, looks for file
+        in_cluster=in_cluster, # if set to true, will look in the cluster for configuration. if false, looks for file
         cluster_context='docker-desktop', # is ignored when in_cluster is set to True
         config_file=config_file,
         is_delete_operator_pod=True,
