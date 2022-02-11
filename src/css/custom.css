@@ -8,6 +8,8 @@
 /* You can override the default Infima variables here. */
 
 @import "~@fontsource/inter";
+@import "~@fontsource/inter/600.css";
+@import "~@fontsource/inter/800.css";
 
 :root {
   --spectra-colors-black: #1a1c1f;
@@ -114,6 +116,8 @@
 
   --ifm-code-font-size: 95%;
   --ifm-font-family-base: Inter, sans-serif;
+  --ifm-heading-font-weight: 600;
+  --ifm-font-weight-bold: 600;
 }
 
 html[data-theme="dark"] {
@@ -150,7 +154,7 @@ html[data-theme="dark"] {
 }
 
 .navbar__link {
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .main-wrapper {
@@ -255,6 +259,7 @@ html[data-theme="dark"] .DocSearch {
 /* Table Styling */
 table {
   border: solid 1px var(--ifm-table-border-color);
+  max-width: fit-content;
 }
 
 table tr th:first-child,
@@ -318,3 +323,15 @@ table::-webkit-scrollbar-thumb {
     var(15%)
   );
 }
+
+.dropdown--right {
+  margin-right: var(--ifm-navbar-item-padding-horizontal);
+  padding: calc(var(--ifm-navbar-item-padding-vertical) * 0.5) var(--ifm-navbar-item-padding-horizontal);
+}
+
+.navbar__title {
+  text-transform: uppercase;
+  border-left: 1px solid var(--spectra-colors-purple-700);
+  padding-left: 1rem;
+}
+
