@@ -1,6 +1,6 @@
 ---
-title: 'Configure Pre-Created Kubernetes Namespaces for Astronomer Software'
-sidebar_label: 'Pre-Create Namespaces'
+title: 'Configure a Kubernetes Namespace Pool for Astronomer Software'
+sidebar_label: 'Kubernetes Namespace Pool'
 id: pre-create-namespaces
 description: Manually create Kubernetes namespaces for new Deployments.
 ---
@@ -11,7 +11,7 @@ This guide explains how to configure and use pre-created namespaces on Astronome
 
 Hosting Astronomer Software in a multi-tenant Kubernetes cluster poses challenges around security and resource contention. To address these challenges, you can configure a pool of pre-created namespaces and limit Astronomer Software's permissions exclusively to these namespaces.
 
-On Astronomer, every Deployment on Astronomer requires an individual [Kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) within your wider Astronomer Software installation. If a pool of pre-created namespaces is configured, Astronomer users will be required to select a namespace from that pool whenever they create a new Deployment. Once the Deployment is created, its corresponding namespace will no longer be available for other new Deployments. If a Deployment is deleted, its namespace will be returned to the pool and again become available for use.
+Every Deployment requires an individual [Kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) within your wider Astronomer Software installation. If a pool of pre-created namespaces is configured, Astronomer users will be required to select a namespace from that pool whenever they create a new Deployment. Once the Deployment is created, its corresponding namespace will no longer be available for other new Deployments. If a Deployment is deleted, its namespace will be returned to the pool and again become available for use.
 
 ### When To Use Pre-Created Namespaces
 
