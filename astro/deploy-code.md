@@ -13,7 +13,7 @@ This guide explains how to deploy DAGs to a Deployment on Astro.
 
 Astro makes it easy for your team to test Airflow DAGs locally and push them to a Deployment in a Production or Development environment. The following diagram shows how your Astro project can be packaged and deployed to Astro via the Astro CLI:
 
-![Deployment architecture diagram](img/docs/deployment-architecture.png)
+![Deployment architecture diagram](/img/docs/deploy-architecture.png)
 
 :::info
 
