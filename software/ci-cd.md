@@ -205,7 +205,7 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
             username: _
             password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         - name: Build and push images
-          uses: docker/build-push-action
+          uses: docker/build-push-action@v2
           if: github.ref == 'refs/heads/dev'
           with:
             push: true
@@ -222,7 +222,7 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
             username: _
             password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         - name: Build and push images
-          uses: docker/build-push-action
+          uses: docker/build-push-action@v2
           if: github.ref == 'refs/heads/main'
           with:
             push: true
