@@ -147,18 +147,23 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           ORGANIZATION_ID: <organization-id> # Found in `Organization Settings` in the Cloud UI
           DEPLOYMENT_ID: <deployment-id> # Found at the end of your Deployment's URL from the Cloud UI
         steps:
+        - name: Check out the repo
         - uses: actions/checkout@v2
         - name: Get current date
           id: date
           run: echo "::set-output name=date::$(date +'%Y-%m-%d-%HT%M-%S')"
-        - name: Publish to Astronomer.io
-          uses: elgohr/Publish-Docker-Github-Action@2.6
+        - name: Log in to registry
+          uses: docker/login-action@v1
           with:
-            name: ${{ env.ORGANIZATION_ID }}/${{ env.DEPLOYMENT_ID }}:deploy-${{ steps.date.outputs.date }}
+            registry: images.astronomer.cloud
             username: ${{ secrets.ASTRONOMER_KEY_ID }}
             password: ${{ secrets.ASTRONOMER_KEY_SECRET }}
-            registry: images.astronomer.cloud
-
+        - name: Build and push images
+          uses: docker/build-push-action@v2
+          if: github.ref == 'refs/heads/master'
+          with:
+            push: true
+            tags: images.astronomer.cloud/${{ env.ORGANIZATION_ID }}/${{ env.DEPLOYMENT_ID }}:deploy-${{ steps.date.outputs.date }}
         - name: Get access token
           id: token
           run: |
