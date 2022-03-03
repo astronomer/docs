@@ -444,7 +444,6 @@ jobs:
         password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     - name: Build and push images
       uses: docker/build-push-action@v2
-      if: github.ref == 'refs/heads/dev'
       with:
         push: true
         tags: registry.gcp0001.us-east4.astronomer.io/infrared-photon-7780/airflow:ci-${{ github.sha }}
