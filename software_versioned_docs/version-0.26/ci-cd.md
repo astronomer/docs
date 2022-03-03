@@ -434,14 +434,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Publish to Astronomer.io
-      uses: elgohr/Publish-Docker-Github-Action@2.6
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Log in to registry
+      uses: docker/login-action@v1
       with:
-        name: infrared-photon-7780/airflow:ci-${{ github.sha }}
+        registry: registry.gcp0001.us-east4.astronomer.io
         username: _
         password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        registry: registry.gcp0001.us-east4.astronomer.io
+    - name: Build and push images
+      uses: docker/build-push-action@v2
+      if: github.ref == 'refs/heads/dev'
+      with:
+        push: true
+        tags: registry.gcp0001.us-east4.astronomer.io/infrared-photon-7780/airflow:ci-${{ github.sha }}
 ```
 
 > **Note:** Make sure to replace `infrared-photon-7780` in the example above with your deployment's release name and to store your Service Account Key in your GitHub repo's secrets according to [this GitHub guide]( https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables).
