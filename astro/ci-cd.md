@@ -148,7 +148,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           DEPLOYMENT_ID: <deployment-id> # Found at the end of your Deployment's URL from the Cloud UI
         steps:
         - name: Check out the repo
-        - uses: actions/checkout@v2
+          uses: actions/checkout@v2
         - name: Get current date
           id: date
           run: echo "::set-output name=date::$(date +'%Y-%m-%d-%HT%M-%S')"
