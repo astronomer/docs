@@ -160,7 +160,6 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             password: ${{ secrets.ASTRONOMER_KEY_SECRET }}
         - name: Build and push images
           uses: docker/build-push-action@v2
-          if: github.ref == 'refs/heads/master'
           with:
             push: true
             tags: images.astronomer.cloud/${{ env.ORGANIZATION_ID }}/${{ env.DEPLOYMENT_ID }}:deploy-${{ steps.date.outputs.date }}
