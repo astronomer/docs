@@ -445,7 +445,7 @@ jobs:
           username: _
           password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
       - name: Build and push images
-        uses: docker/build-push-action
+        uses: docker/build-push-action@v2
         if: github.ref == 'refs/heads/dev'
         with:
           push: true
