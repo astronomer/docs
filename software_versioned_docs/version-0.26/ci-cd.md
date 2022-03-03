@@ -194,27 +194,37 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
       dev-push:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v2
-        - name: Push to registry
-          uses: elgohr/Publish-Docker-Github-Action@2.6
+        - name: Check out the repo
+          uses: actions/checkout@v2
+        - name: Log in to registry
+          uses: docker/login-action@v1
+          with:
+            registry: registry.${BASE_DOMAIN}
+            username: _
+            password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        - name: Build and push images
+          uses: docker/build-push-action@v2
           if: github.ref == 'refs/heads/dev'
           with:
-              name: <dev-release-name>/airflow:ci-${{ github.sha }}
-              username: _
-              password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-              registry: registry.${BASE_DOMAIN}
+            push: true
+            tags: registry.${BASE_DOMAIN}/<dev-release-name>/airflow:ci-${{ github.sha }}
       prod-push:
         runs-on: ubuntu-latest
         steps:
-        - uses: actions/checkout@v2
-        - name: Push to registry
-          uses: elgohr/Publish-Docker-Github-Action@2.6
+        - name: Check out the repo
+          uses: actions/checkout@v2
+        - name: Log in to registry
+          uses: docker/login-action@v1
+          with:
+            registry: registry.${BASE_DOMAIN}
+            username: _
+            password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+        - name: Build and push images
+          uses: docker/build-push-action@v2
           if: github.ref == 'refs/heads/main'
           with:
-              name: <prod-release-name>/airflow:ci-${{ github.sha }}
-              username: _
-              password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-              registry: registry.${BASE_DOMAIN}
+            push: true
+            tags: registry.${BASE_DOMAIN}/<prod-release-name>/airflow:ci-${{ github.sha }}
     ```
 
     Ensure the branches match the names of the branches in your repository, and replace `<dev-release-name>` and `<prod-release-name>` with the respective release names of your development and production Airflow Deployments on Astronomer.
