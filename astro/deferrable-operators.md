@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Deferrable Operators'
-title: 'Deferrable Operators'
+sidebar_label: "Deferrable Operators"
+title: "Deferrable Operators"
 id: deferrable-operators
 description: Run Airflow's deferrable operators on Astro for improved performance and cost savings.
 ---
@@ -60,4 +60,26 @@ Some additional notes about using deferrable operators:
 
 Astronomer maintains [`astronomer-providers`](https://github.com/astronomer/astronomer-providers), which is an open source collection deferrable operators bundled as a provider package. This package is available by default on Astronomer Runtime and includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 
-For more information about each available operator in the package, including import statements and example DAGs, see the [`astronomer-providers` documentation](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#100-2022-03-01).
+The following table contains information about each operator that's available in the package, including their import path and an example DAG. For more information about each available operator in the package, see the [`astronomer-providers` documentation](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#100-2022-03-01).
+
+
+| Operator/ Sensor Class     | Import Path                                                                                   | Example DAG                                                                                                                                       |
+| -------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `RedshiftSQLOperatorAsync` | `from astronomer.providers.amazon.aws.operators.redshift_sql import RedshiftSQLOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/amazon/aws/example_dags/example_redshift_sql.py) |
+| `RedshiftPauseClusterOperatorAsync` | `from astronomer.providers.amazon.aws.operators.redshift_cluster import RedshiftPauseClusterOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/amazon/aws/example_dags/example_redshift_cluster_management.py) |
+| `RedshiftResumeClusterOperatorAsync` | `from astronomer.providers.amazon.aws.operators.redshift_cluster import RedshiftResumeClusterOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/amazon/aws/example_dags/example_redshift_cluster_management.py) |
+| `RedshiftClusterSensorAsync` | `from astronomer.providers.amazon.aws.sensors.redshift_cluster import RedshiftClusterSensorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/amazon/aws/example_dags/example_redshift_cluster_management.py) |
+| `S3KeySensorAsync` | `from astronomer.providers.amazon.aws.sensors.s3 import S3KeySensorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/amazon/aws/example_dags/example_s3.py) |
+| `KubernetesPodOperatorAsync` | `from astronomer_operators.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/amazon/aws/example_dags/example_s3.py) |
+| `ExternalTaskSensorAsync` | `from astronomer_operators.core.sensors.external_task import ExternalTaskSensorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/core/example_dags/example_external_task.py) |
+| `FileSensorAsync` | `from astronomer_operators.core.sensors.filesystem import FileSensorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/core/example_dags/example_file_sensor.py) |
+| `DatabricksRunNowOperatorAsync` | `from astronomer.providers.databricks.operators.databricks import DatabricksRunNowOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/databricks/example_dags/example_databricks.py) |
+| `DatabricksSubmitRunOperatorAsync` | `from astronomer.providers.databricks.operators.databricks import DatabricksSubmitRunOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/databricks/example_dags/example_databricks.py) |
+| `BigQueryCheckOperatorAsync` | `from astronomer.providers.google.cloud.operators.bigquery import BigQueryCheckOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/google/cloud/example_dags/example_bigquery_queries.py) |
+| `BigQueryGetDataOperatorAsync` | `from astronomer.providers.google.cloud.operators.bigquery import BigQueryGetDataOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/google/cloud/example_dags/example_bigquery_queries.py) |
+| `BigQueryInsertJobOperatorAsync` | `from astronomer.providers.google.cloud.operators.bigquery import  BigQueryInsertJobOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/google/cloud/example_dags/example_bigquery_queries.py) |
+| `BigQueryIntervalCheckOperatorAsync` | `from astronomer.providers.google.cloud.operators.bigquery import BigQueryIntervalCheckOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/google/cloud/example_dags/example_bigquery_queries.py) |
+| `BigQueryValueCheckOperatorAsync` | `from astronomer.providers.google.cloud.operators.bigquery import BigQueryValueCheckOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/google/cloud/example_dags/example_bigquery_queries.py) |
+| `GCSObjectExistenceSensorAsync` | `from astronomer.providers.google.cloud.sensors.gcs import GCSObjectExistenceSensorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/google/cloud/example_dags/example_gcs.py) |
+| `HttpSensorAsync` | `from astronomer.providers.http.sensors.http import HttpSensorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/http/example_dags/example_http.py) |
+| `SnowflakeOperatorAsync` | `from astronomer.providers.snowflake.operators.snowflake import SnowflakeOperatorAsync` | [Example DAG](https://github.com/astronomer/astronomer-providers/blob/1.0.0/astronomer/providers/snowflake/example_dags/example_snowflake.py) |
