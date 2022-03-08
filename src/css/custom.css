@@ -98,15 +98,15 @@
   --ifm-color-info-contrast-foreground: var(--blue-900);
   --ifm-color-info-dark: var(--blue-500);
 
-  --ifm-color-warning: var(--yellow-400);
-  --ifm-color-warning-contrast-background: var(--yellow-100);
-  --ifm-color-warning-contrast-foreground: var(--yellow-900);
-  --ifm-color-warning-dark: var(--yellow-500);
+  /* --ifm-color-warning: var(--orange-400);
+  --ifm-color-warning-contrast-background: var(--orange-100);
+  --ifm-color-warning-contrast-foreground: var(--orange-900);
+  --ifm-color-warning-dark: var(--orange-500); */
 
-  --ifm-color-danger: var(--red-400);
-  --ifm-color-danger-contrast-background: var(--red-100);
-  --ifm-color-danger-contrast-foreground: var(--red-900);
-  --ifm-color-danger-dark: var(--red-500);
+  /* --ifm-color-danger: var(--orange-400);
+  --ifm-color-danger-contrast-background: var(--orange-100);
+  --ifm-color-danger-contrast-foreground: var(--orange-900);
+  --ifm-color-danger-dark: var(--orange-500); */
 
   --ifm-color-secondary: var(--gray-2);
   --ifm-color-secondary-contrast-background: var(--gray-100);
@@ -169,7 +169,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 500;
+  font-weight: 600;
   font-family: var(--font-sans-heading);
 }
 
@@ -380,14 +380,14 @@ table::-webkit-scrollbar-thumb {
 
 .alert--caution {
   --ifm-alert-background-color-highlight: hsl(
-    var(--yellow-400),
+    var(--orange-400),
     var(15%)
   );
 }
 
 .alert--danger {
   --ifm-alert-background-color-highlight: hsl(
-    var(--red-200),
+    var(--orange-200),
     var(15%)
   );
 }

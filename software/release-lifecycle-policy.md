@@ -30,6 +30,8 @@ To meet the unique needs of different operating environments, we offer all Astro
 - **Stable:** Includes the latest Astronomer and Airflow features
 - **Long-term Support (LTS):** Includes long-term testing, stability, and maintenance for a core set of features
 
+All releases of AC are considered stable. The LTS release channel is a subset of the stable release channel that promises additional stability, reliability, and support from our team.
+
 For customers looking to access Astronomer's newest features on an incremental basis, we recommend following the stable release channel and upgrading to new versions as soon as they are made generally available. Stable releases are issued roughly once per month for Astronomer Software and the Astronomer CLI.
 
 For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel. Release channels are not binding, so you are free to upgrade to any available version of Astronomer Software at any time.
@@ -83,15 +85,25 @@ In rare instances, the Astronomer team may make an exception and backport a bug 
 
 <!--- Version-specific -->
 
-The following table contains the exact lifecycle for each published version of Astronomer Software. These timelines are based on the LTS and stable release channel maintenance policies.
+The following tables contain the exact lifecycle for each published version of Astronomer Software. These timelines are based on the LTS and stable release channel maintenance policies.
+
+### Stable
 
 | Software Version | Release Date     | End of Maintenance Date |
-| ------------------ | ---------------- | ----------------------- |
-| 0.16 (LTS)         | June 29, 2020    | June 2021               |
-| 0.23 (LTS)         | January 20, 2021 | January 2022            |
-| 0.25 (LTS)         | May 11, 2021     | December 2022*         |
-| 0.26               | Nov 23, 2021     | May 2022                |
-| 0.27               | Dec 21, 2021     | June 2022               |
-| 0.28               | Feb 15, 2022      | August 2022             |
+| ---------------- | ---------------- | ----------------------- |
+| 0.16             | June 29, 2020    | June 2021               |
+| 0.23             | January 20, 2021 | January 2022            |
+| 0.25             | May 11, 2021     | December 2022*          |
+| 0.26             | Nov 23, 2021     | May 2022                |
+| 0.27             | Dec 21, 2021     | June 2022               |
+| 0.28             | Feb 15, 2022     | August 2022             |
+
+### LTS
+
+| Software Version | Release Date     | End of Maintenance Date |
+| ---------------- | ---------------- | ----------------------- |
+| 0.16             | June 29, 2020    | June 2021               |
+| 0.23             | January 20, 2021 | January 2022            |
+| 0.25             | May 11, 2021     | December 2022*          |
 
 > *Given the wide usage of Astronomer Software v0.25, Astronomer has extended the maintenance period for this version through December 2022.

@@ -33,7 +33,7 @@ To run your Astro project locally, run the following command:
 astrocloud dev start
 ```
 
-This command builds your project and spins up 3 Docker containers on your machine, each for a different Airflow component:
+This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
 
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
@@ -72,7 +72,7 @@ Depending on the change you're making to your Astro project, you might have to r
 
 ### DAG Code Changes
 
-All changes made to the following files will be live in your local Airflow environment as soon as you save them to your code editor:
+All changes made to files in the following directories will be live in your local Airflow environment as soon as you save them to your code editor:
 
 - `dags`
 - `plugins`
@@ -153,11 +153,14 @@ To do this:
     .
     ├── airflow_settings.yaml
     ├── dags
-    │   └── example-dag.py
+    │   └── example-dag-basic.py
+    │   └── example-dag-advanced.py
     ├── Dockerfile
     ├── helper_functions
     │   └── helper.py
     ├── include
+    ├── tests
+     │   └── test_dag_integrity.py
     ├── packages.txt
     ├── plugins
     │   └── example-plugin.py
@@ -324,7 +327,11 @@ env
 
 This should output all Environment Variables that are running locally, some of which are set by you and some of which are set by Astronomer by default.
 
-> **Note:** You can also run `cat airflow.cfg` to output _all_ contents in that file.
+:::tip
+
+You can also run `cat airflow.cfg` to output _all_ contents in that file.
+
+:::
 
 ### Use multiple .env files
 

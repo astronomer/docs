@@ -35,6 +35,12 @@ To create an Airflow Deployment on Astro:
 
 4. To access the Airflow UI, select **Open Airflow** on the top right.
 
+:::tip
+
+If you prefer to work with the Astro CLI, you can also create a Deployment by running the `astrocloud deployment create` command. For more information, see [CLI Command Reference](cli-reference/astrocloud-deployment-create.md).
+
+:::
+
 ## Configure Resource Settings
 
 Once you've created a Deployment with default resources, you can always configure these settings to best fit your use case. For reference, Astro supports the `AU` as the primary resource unit. In this context,

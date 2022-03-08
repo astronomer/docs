@@ -13,6 +13,15 @@ Astronomer v0.27 is the latest Stable version of Astronomer Software, while v0.2
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
+## 0.26.7
+
+Release date: March 1, 2022
+
+### Additional improvements
+
+- Fixed several CVEs
+- Updated documentation links in the UI to point to Software documentation
+
 ## 0.26.6
 
 Release date: January 10, 2022

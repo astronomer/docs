@@ -14,15 +14,26 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest Runtime Version**: 4.1.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.1.0 ([Release notes](cli-release-notes.md))
+**Latest CLI Version**: 1.3.0 ([Release notes](cli-release-notes.md))
+
+## March 3, 2022
+
+### Additional Improvements
+
+- The threshold in order for bars in the **Worker CPU** and **Worker Memory** charts to appear red has been reduced from 95% to 90%. This is to make sure that you get an earlier warning if your workers are close to hitting their resource limits.
+
+### Bug Fixes
+
+- Fixed an issue where malformed URLs prevented users from accessing the Airflow UI of some Deployments on Astro
+- Fixed an issue where Astro Runtime 4.0.11 wasn't a selectable version in the **Astro Runtime** menu of the Deployment creation view in the Cloud UI
 
 ## February 24, 2022
 
-### Bug fixes
+### Bug Fixes
 
-- Removed the nonfunctional **Teams** tab from the Cloud UI
-- Fixed an issue where a user's Workspace membership count in the Organization view of the UI wasn't updated properly
-- Fixed an issue where updates to secret environment variable values were not applied to Deployments
+- Removed the **Teams** tab from the Cloud UI. This view was not yet functional but coming back soon
+- Fixed an issue where the number of users per Workspace displayed in the Organization view of the Cloud UI was incorrect
+- Fixed an issue where if a secret environment value was updated in the Cloud UI and no other values were modified, the change was not applied to the Deployment
 
 ## February 17, 2022
 
@@ -40,7 +51,7 @@ In addition to visual changes, we've renamed the following high-level Astro comp
 - **Astronomer UI** is now **Cloud UI**
 - **Astronomer Runtime** is now **Astro Runtime**
 
-A formal company announcement is coming soon. We're thrilled.
+We hope you find this exciting. We're thrilled.
 
 ### New Organization Roles for Users
 
@@ -60,7 +71,7 @@ All users can now create a new Workspace directly from the **Overview** tab of t
 
 When you create a new Workspace, you will automatically become a Workspace Admin within it and can create Deployments. For more information about managing Workspaces, see [Manage Workspaces](manage-workspaces.md).
 
-### Bug fixes
+### Bug Fixes
 
 - Fixed an issue where authentication tokens to Astro weren't properly applied when accessing the Airflow UI for a Deployment. This would result in an authenticated user seeing `Error: Cannot find this astro cloud user` in the Airflow UI.
 - Fixed an issue where long environment variable values would spill out of the **Value** column and onto the **Updated** column in the **Environment Variables** view of a Deployment in the Cloud UI.
@@ -259,7 +270,7 @@ For more information on this feature, read [Deployment Metrics](deployment-metri
 
 ## November 5, 2021
 
-### Bug fixes
+### Bug Fixes
 
 - Fixed an issue where a new user could not exit the Cloud UI "Welcome" screen if they hadn't yet been invited to a Workspace
 

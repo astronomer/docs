@@ -366,7 +366,7 @@ Make sure to paste your entire JSON service account key in place of `<your-key-f
 
 :::warning
 
-If you want to deploy your project to a hosted Git repository before deploying to Astronomer, be sure to save `<your-key-file>` securely. We recommend adding it to your project's [`.env` file](develop-project.md#set-environment-variables-via-env-local-development-only) and specifying this file in `.gitignore`. When you deploy to Astronomer, you should set these values as secrets via the Software UI.
+If you want to deploy your project to a hosted Git repository before deploying to Astronomer, be sure to save `<your-key-file>` securely. We recommend adding it to your project's [`.env` file](customize-image.md#add-environment-variables-locally) and specifying this file in `.gitignore`. When you deploy to Astronomer, you should set these values as secrets via the Software UI.
 
 :::
 

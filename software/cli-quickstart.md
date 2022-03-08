@@ -204,7 +204,7 @@ As you develop locally, it's worth noting that some changes made to your image a
 
 ### Code Changes
 
-All changes made to the following files will be picked up as soon as they're saved to your code editor:
+All changes made to files in the following directories will be picked up as soon as they're saved to your code editor:
 
 - `dags`
 - `plugins`

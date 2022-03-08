@@ -84,7 +84,7 @@ module.exports = {
       'registry-backend',
       'configure-platform-resources',
       'renew-tls-cert',
-      'pre-create-namespaces',
+      'namespace-pools',
       'third-party-ingress-controllers',
       ],
     },

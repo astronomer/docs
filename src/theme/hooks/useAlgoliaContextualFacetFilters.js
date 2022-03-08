@@ -18,7 +18,7 @@ export default function useAlgoliaContextualFacetFilters() {
   // limit search results to current docset
  if (currentPath.includes('software')) {
   tagsFilter = [`docusaurus_tag:${currentSoftwareTag}`]
- } else if (currentPath.includes('cloud')) {
+} else if (currentPath.includes('astro')) {
   tagsFilter = ['docusaurus_tag:docs-default-current']
  }
 

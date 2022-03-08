@@ -175,7 +175,7 @@ This process can take some time. Wait for confirmation that the installation was
 Once our team confirms that your Astro Cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](configure-deployment.md). If the installation was successful, your new Astro Cluster will be listed as an option under the **Cluster** menu:
 
 <div class="text--center">
-  <img src="/img/docs/cluster-menu.png" alt="Cloud UI New Deployment screen" />
+  <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
 </div>
 
 ## Next Steps

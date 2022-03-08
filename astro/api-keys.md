@@ -11,11 +11,10 @@ This guide provides instructions for how to create API keys for Deployments on A
 
 A Deployment API key has the following properties:
 
-- It can deploy code to Astro (customizable permissions coming soon).
-- Its key ID and secret are valid indefinitely and can be used to fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token is required by the Astro API to complete the deploy code process. For more information on using this token, read [Refresh Access Token](api-keys#refresh-access-token).
+- It can be used to deploy code to Astro via [CI/CD](ci-cd.md).
+- Its key ID and secret are valid indefinitely and can be used to access Deployments without manual authentication.
 - It is deleted permanently if its corresponding Deployment is deleted.
-
-This guide provides steps for creating and deleting Deployment API keys.
+- It can be used to fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
 
 ## Create an API Key
 
@@ -42,23 +41,13 @@ If you just need to make a single API call, you can use a temporary user authent
 
 :::
 
-## Request Access Token
+## Using Deployment API Keys
 
-In order to deploy code on Astro with a Deployment API key, you need to use the API key ID and secret to request an access token. This access token is required by the Astro API to trigger the deploy code process. It is valid only for 24 hours. To fetch a token with an existing API key ID and secret, run the following API request:
+Deployment API keys are primarily used to automate actions that otherwise require manual inputs. They allow you to:
 
-```curl
-curl --location --request POST "https://auth.astronomer.io/oauth/token" \
-        --header "content-type: application/json" \
-        --data-raw "{
-            \"client_id\": \"<api-key-id>\",
-            \"client_secret\": \"<api-key-secret>\",
-            \"audience\": \"astronomer-ee\",
-            \"grant_type\": \"client_credentials\"}" | jq -r '.access_token'
-```
-
-Make sure to replace `api-key-id` and `api-key-secret` in this request with values that correspond to your own API key.
-
-To avoid manually fetching this token, we strongly recommend adding this API request to any CI/CD pipeline that uses Deployment API keys. That way, your access token is automatically refreshed every time your CI/CD pipeline needs it to complete the deploy code process. For examples of this implementation, see [CI/CD Templates](ci-cd.md#cicd-templates).
+- Deploy code to Astro [via CI/CD](ci-cd.md) with tools such as GitHub Actions or Jenkins.
+- Deploy code to Astro [via the Astro CLI](deploy-code.md) without user authentication.
+- Automate requests to the [Airflow REST API](airflow-api.md).
 
 ## Delete an API Key
 
@@ -76,3 +65,12 @@ To delete a Deployment API Key:
     <div class="text--center">
       <img src="/img/docs/delete-api-key.png" alt="Delete API Key button" />
     </div>
+
+
+## Next Steps
+
+For more information about how to use API keys, see:
+
+- [CI/CD](ci-cd.md)
+- [Deploy Code](deploy-code.md)
+- [Airflow API](airflow-api.md)

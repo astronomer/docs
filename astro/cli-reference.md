@@ -13,6 +13,12 @@ The Astro CLI is the easiest way to run Apache Airflow on your local machine. Fr
 
 This document contains information about all commands and settings available in the Astro CLI, including examples and flags. To install the Astro CLI, see [Install the CLI](install-cli.md).
 
+:::info
+
+All reference documentation is based on the latest available version of the Astro CLI. To see the differences across various CLI versions, see the [Astro CLI Release Notes](cli-release-notes.md).
+
+:::
+
 ## Core Commands
 
 We expect that you'll use these commands most often when managing your Astro projects and Deployments:

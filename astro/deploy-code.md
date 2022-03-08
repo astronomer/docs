@@ -9,15 +9,7 @@ import {siteVariables} from '@site/src/versions';
 
 ## Overview
 
-Astro makes it easy for your team to test Airflow DAGs locally and push them to a Deployment in a Production or Development environment. The following diagram shows how your Astro project can be packaged and deployed to Astro via the Astro CLI.
-
-:::info
-
-The process for deploying an Astro project via CI/CD varies slightly from this diagram. For more information, refer to [CI/CD: Workflow Overview](ci-cd.md#workflow-overview).
-
-:::
-
-This guide explains how to deploy DAGs to a Deployment on Astro.
+This guide explains how to push Astro project code to a Deployment via the Astro CLI. This workflow is the foundation for managing changes to your deployed Astro projects. It also serves as the foundation for any [CI/CD](ci-cd.md) pipeline-based deployment model.
 
 ## Prerequisites
 
@@ -38,6 +30,12 @@ astrocloud auth login
 
 After running this command, you will be prompted to open your web browser and log in via the Cloud UI. Once you complete this login, you will be automatically authenticated to the CLI.
 
+:::tip
+
+If you have [Deployment API key](api-keys.md) credentials set as OS-level environment variables on your local machine, you can deploy directly to Astro without needing to manually authenticate. This setup is required for automating code deploys via [CI/CD](ci-cd.md).
+
+:::
+
 ## Step 2: Push DAGs to an Astro Deployment
 
 To deploy your DAGs, run:
@@ -46,7 +44,24 @@ To deploy your DAGs, run:
 astrocloud deploy
 ```
 
-This command returns a list of Airflow Deployments available in your Workspace and prompts you to pick one. Once this command is executed, all files in your Astro project directory are built into a new Docker image and pushed to Astro.
+This command returns a list of Deployments available in your Workspace and prompts you to pick one.
+
+After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astrocloud dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro will also fail.
+
+If your code passes the parse, the CLI builds your Astro project directory into a new Docker image pushes this image to Astro.
+
+:::tip
+
+To force a deploy even if your project has DAG errors, you can run `astrocloud deploy --force`.
+:::
+
+:::tip
+
+To validate your code before deploying it to Astro, you can run `astrocloud deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [Pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy will also fail. This can help you prevent your team from deploying DAGs to Astro that aren't production-grade.
+
+For more information about using Pytest, see [Test and Troubleshoot](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
+
+:::
 
 ## Step 3: Validate Your Changes
 

@@ -22,27 +22,45 @@ To create an Astro project, you need:
 
 ## Step 1: Create an Astro project
 
-To create a new Astro project folder, open the directory where you installed the CLI and run:
-Astro
-```sh
-astrocloud dev init
-```
+To create a new Astro project:
 
-This command generates the following files in the directory:
+1. Create a new directory for your Astro project:
 
-```
-.
-├── dags # Where your DAGs go
-│   └── example-dag.py # An example DAG that comes with the initialized project
-├── Dockerfile # For the Astro Runtime Docker image, environment variables, and overrides
-├── include # For any other files you'd like to include
-├── plugins # For any custom or community Airflow plugins
-├── airflow_settings.yaml # For your Airflow Connections, Variables and Pools (local only)
-├── packages.txt # For OS-level packages
-└── requirements.txt # For Python packages
-```
+    ```sh
+    mkdir <your-astro-project-name>
+    ```
 
-This set of files will build into a Docker image that you can both run on your local machine and deploy to Astro.
+2. Open the directory:
+
+    ```sh
+    cd <your-astro-project-name>
+    ```
+
+3. Run the following Astro CLI command to initialize an Astro project in the directory:
+
+    ```sh
+    astrocloud dev init
+    ```
+
+    This command generates the following files in the directory:
+
+    ```
+    .
+    ├── dags # Where your DAGs go
+    │   └── example-dag-basic.py # Example DAG that showcases a simple ETL data pipeline
+    |   └── example-dag-advanced.py # Example DAG that showcases more advanced Airflow features, such as the TaskFlow API
+    ├── Dockerfile # For the Astro Runtime Docker image, environment variables, and overrides
+    ├── include # For any other files you'd like to include
+    ├── plugins # For any custom or community Airflow plugins
+    |   └── example-plugin.py
+    ├── tests # For any DAG unit test files to be run with pytest
+    |   └── test_dag_integrity.py # Test that checks for basic errors in your DAGs
+    ├── airflow_settings.yaml # For your Airflow Connections, Variables and Pools (local only)
+    ├── packages.txt # For OS-level packages
+    └── requirements.txt # For Python packages
+    ```
+
+    This set of files will build into a Docker image that you can both run on your local machine and deploy to Astro.
 
 ### Astro Runtime
 
@@ -66,7 +84,7 @@ This command builds your project and spins up 3 Docker containers on your machin
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The Triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md).
+- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The Triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md)
 
 As your project builds locally, you should see the following output:
 
@@ -84,12 +102,14 @@ Step 1/1 : FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
 ---> 5160cfd00623
 Successfully built 5160cfd00623
 Successfully tagged astro-trial_705330/airflow:latest
-INFO[0000] [0/3] [postgres]: Starting
-INFO[0002] [1/3] [postgres]: Started
-INFO[0002] [1/3] [scheduler]: Starting
-INFO[0003] [2/3] [scheduler]: Started
-INFO[0003] [2/3] [webserver]: Starting
-INFO[0004] [3/3] [webserver]: Started
+INFO[0000] [0/4] [postgres]: Starting
+INFO[0002] [1/4] [postgres]: Started
+INFO[0002] [1/4] [scheduler]: Starting
+INFO[0003] [2/4] [scheduler]: Started
+INFO[0003] [2/4] [webserver]: Starting
+INFO[0004] [3/4] [webserver]: Started
+INFO[0003] [3/4] [triggerer]: Starting
+INFO[0004] [4/4] [triggerer]: Started
 Airflow Webserver: http://localhost:8080
 Postgres Database: localhost:5432/postgres
 The default credentials are admin:admin
@@ -113,4 +133,7 @@ After logging in, you should see the DAGs from your `dags` directory in the Airf
 
 ## Next Steps
 
-Running your project locally is the best way to test your DAGs before pushing them to Astro. For more information on running a local Airflow environment, read [Test and Troubleshoot](test-and-troubleshoot-locally.md#run-a-project-locally).
+Running your project locally is the best way to test your DAGs before pushing them to Astro. For more information on running a local Airflow environment, read:
+
+- [Develop your Astro Project](develop-project.md)
+- [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md#run-a-project-locally)

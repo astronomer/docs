@@ -26,7 +26,7 @@ To meet the unique needs of different operating environments, Astro Runtime vers
 - **Stable:** Includes the latest Astronomer and Apache Airflow features, available on release
 - **Long-term Support (LTS):** Includes additional testing, stability, and maintenance for a core set of features
 
-All releases of Astro Runtime are considered stable. The LTS release channel is a subset of the stable release channel that promises additional stability, reliablity, and support from our team.
+All releases of Astro Runtime are considered stable. The LTS release channel is a subset of the stable release channel that promises additional stability, reliability, and support from our team.
 
 For users that want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of Astro Runtime as soon as they are made generally available. This should be regardless of release channel. New versions of Runtime are issued regularly and include timely support for the latest major, minor, and patch versions of Airflow.
 

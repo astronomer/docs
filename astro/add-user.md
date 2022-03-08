@@ -26,7 +26,7 @@ If your organization integrated an [external Identity Provider (IdP)](configure-
 
 :::
 
-If the user you want to add doesn't already have an account on Astro, tell them to go to https://cloud.astronomer.io and sign up. Once they create an account, they will see the following screen:
+If the user you want to add doesn't already have an account on Astro, tell them to go to https://cloud.astronomer.io and sign up. Once they create an account, they will automatically assume the Organization Member role and see the following screen on their first login:
 
 <div class="text--center">
   <img src="/img/docs/welcome-user.png" alt="Successful account creation screen" />

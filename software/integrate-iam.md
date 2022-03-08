@@ -315,7 +315,7 @@ astronomer:
     <gsa-name>@<project-id>.iam.gserviceaccount.com
     ```
 
-### Step 4: Confirm Workload Identity is working
+### Step 5: Confirm Workload Identity is working
 
 1. Create an interactive session by running the following command:
 

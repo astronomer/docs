@@ -26,7 +26,7 @@ To meet the unique needs of different operating environments, Astronomer Certifi
 - **Stable:** Includes the latest Astronomer and Apache Airflow features, available on release
 - **Long-term Support (LTS):** Includes additional testing, stability, and maintenance for a core set of features
 
-All releases of AC are considered stable. The LTS release channel is a subset of the stable release channel that promises additional stability, reliablity, and support from our team.
+All releases of AC are considered stable. The LTS release channel is a subset of the stable release channel that promises additional stability, reliability, and support from our team.
 
 For users that want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of AC as soon as they are made generally available. This should be regardless of release channel. New versions of AC are issued regularly and depend on the Apache Airflow community release schedule.
 

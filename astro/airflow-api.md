@@ -1,8 +1,8 @@
 ---
-title: 'Make Requests to the Apache Airflow API'
-sidebar_label: 'Airflow API'
+title: 'Make Requests to the Airflow REST API'
+sidebar_label: 'Airflow REST API'
 id: airflow-api
-description: Make requests to Apache Airflow's REST API with Deployment API Keys on Astro.
+description: Make requests to the Airflow REST API with Astro Deployment API Keys.
 ---
 
 ## Overview
@@ -15,21 +15,36 @@ If you're looking to externally trigger DAG runs without needing to access your 
 
 To make an Airflow API request, you need:
 
-- A Deployment on Astro
-- [cURL](https://curl.se/)
+- A [Deployment API key](api-keys.md).
+- A Deployment on Astro.
+- [cURL](https://curl.se/).
 
 ## Step 1: Retrieve an Access Token and Deployment URL
 
-All Airflow API calls require the following two values:
+All Airflow API calls require:
 
-- An access token
-- A Deployment URL
+- An Astro access token.
+- A Deployment URL.
 
-To retrieve an access token, [create a Deployment API key](api-keys.md#create-an-api-key) on Astro and follow the instructions in [Request Access Token](api-keys.md#request-access-token). Note that you need to refresh that token every time you make a request to the Airflow API. To avoid manually doing so, we strongly recommend adding a step that fetches a new access token to any CI/CD pipeline that calls the Airflow API. That way, your access token is automatically refreshed every time your CI/CD pipeline needs it. For examples of this implementation, see [CI/CD Templates](ci-cd.md#cicd-templates).
+To retrieve an Astro access token, run the following API request with your Deployment API key ID and secret:
+
+```sh
+curl --location --request POST "https://auth.astronomer.io/oauth/token" \
+        --header "content-type: application/json" \
+        --data-raw "{
+            \"client_id\": \"<api-key-id>\",
+            \"client_secret\": \"<api-key-secret>\",
+            \"audience\": \"astronomer-ee\",
+            \"grant_type\": \"client_credentials\"}" | jq -r '.access_token'
+```
+
+Note that this token is valid only for 24 hours. You need to refresh this token every time you make a request to the Airflow API.
+
+To avoid manually refreshing tokens, we recommend adding a step that retrieves a new access token to any CI/CD pipeline that calls the Airflow API. That way, your access token is automatically refreshed every time your CI/CD pipeline needs it.
 
 :::info
 
-If you need to call the Airflow API only once, you can retrieve a temporary access token (24 hours) at `https://cloud.astronomer.io/token`. If you retrieve a token here, you can skip the instructions in [Request Access Token](api-keys.md#request-access-token).
+If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
 
 :::
 
@@ -37,7 +52,7 @@ To retrieve your Deployment URL, open your Deployment in the Cloud UI and click 
 
 ## Step 2: Make an Airflow API Request
 
-With the information from Step 1, you can now run `GET` or `POST` requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/stable/rest-api-ref.html). For example, to retrieve a list of all DAGs in a Deployment, you can run:
+With the information from Step 1, you can now run `GET` or `POST` requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). For example, to retrieve a list of all DAGs in a Deployment, you can run:
 
 ```sh
 curl -X GET <deployment-url>/api/v1/dags -H 'Accept: application/json' -H 'Cache-Control: no-cache' -H "Authorization: Bearer <access-token>"
@@ -47,7 +62,7 @@ Below, we'll walk through an example request via cURL to Airflow's "Trigger DAG"
 
 ## Example Requests
 
-Use the following example API requests to begin automating your own Airflow actions. For more examples, see Airflow's [Rest API Reference](https://airflow.apache.org/docs/stable/rest-api-ref.html).
+Use the following example API requests to begin automating your own Airflow actions. For more examples, see Airflow's [Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
 ### Trigger a DAG
 

@@ -35,3 +35,4 @@ As part of the Astro architecture, certain environment variables have preset val
 | `AIRFLOW__METRICS__STATSD_HOST` | The hostname for sending metrics to Statsd | `statsd.Hostname`|
 | `AIRFLOW__METRICS__STATSD_PORT` | The port for sending metrics to Statsd | `strconv.FormatInt(int64(statsd.IngestPort), baseTen)` |
 | `AIRFLOW__WEBSERVER__COOKIE_SECURE` | Sets a `secure` flag on server cookies | `True` |
+| `AIRFLOW__WEBSERVER__INSTANCE_NAME` | Shows the name of your Deployment in the Home view of the Airflow UI | `<Deployment-Name>` |
