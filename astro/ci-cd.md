@@ -5,6 +5,8 @@ id: ci-cd
 description: Create a CI/CD pipeline that triggers a deploy to Astro based on changes to your Airflow DAGs.
 ---
 
+import {siteVariables} from '@site/src/versions';
+
 ## Overview
 
 There are many benefits to deploying DAGs and other changes to Airflow via a CI/CD workflow. Specifically, you can:
@@ -109,11 +111,10 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script, making sure to replace `<deployment-id>` with your own Deployment ID:
 
-    ```text
-    pipeline {
-     agent any
-       stages {
-         stage('Deploy to Astronomer') {
+    <pre><code parentName="pre">{`pipeline {
+      agent any
+        stages {
+          stage('Deploy to Astronomer') {
            when {
             expression {
               return env.GIT_BRANCH == "origin/main"
@@ -121,9 +122,9 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
            }
            steps {
              script {
-               sh 'curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v1.3.0/cloud-cli_1.3.0_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz'
-               sh 'tar xzf astrocloudcli.tar.gz'
-               sh "./astrocloud deploy ${DEPLOYMENT_ID} -f"
+               sh 'curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz'
+                   sh 'tar xzf astrocloudcli.tar.gz'
+                   sh "./astrocloud deploy ${siteVariables.deploymentid} -f"
              }
            }
          }
@@ -132,8 +133,8 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
        always {
          cleanWs()
        }
-     }
+      }
     }
-    ```
+    `}</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
