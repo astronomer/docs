@@ -50,7 +50,7 @@ $ astrocloud deploy <your-deployment-id>
 
 :::info
 
-The following templates use `brew install` to install the latest version of the Astro CLI for every deploy. For a more stable CI/CD pipeline, you can install only a specific version of the CLI by tagging a specific version in the command: 
+The following templates use `brew install` to install the latest version of the Astro CLI for every deploy. For a more stable CI/CD pipeline, you can install only a specific version of the CLI by tagging a specific version in the command:
 
 ```sh
 brew install astronomer/cloud/astrocloud@<version-number>
@@ -101,6 +101,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
 1. In your Git repository, configure the following environment variables:
 
+    - `DEPLOYMENT_ID`: Your Astro Deployment ID
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
 
@@ -120,8 +121,9 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
            }
            steps {
              script {
-               brew install astronomer/cloud/astrocloud
-               astrocloud deploy <deployment-id>
+               sh 'curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v1.3.0/cloud-cli_1.3.0_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz'
+               sh 'tar xzf astrocloudcli.tar.gz'
+               sh "./astrocloud deploy ${DEPLOYMENT_ID} -f"
              }
            }
          }
