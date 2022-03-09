@@ -181,3 +181,11 @@ kubectl label namespace/<ingress namespace> network.openshift.io/policy-group=in
 ```
 
 See [Openshift's Network Policy documentation](https://docs.openshift.com/container-platform/4.1/networking/configuring-networkpolicy.html) for more details.
+
+OpenShift's default route admission policy must be configured to allow traffic from multiple namespaces.
+
+```sh
+kubectl -n openshift-ingress-operator patch ingresscontroller/default --patch '{"spec":{"routeAdmission":{"namespaceOwnership":"InterNamespaceAllowed"}}}' --type=merge
+```
+
+See [Openshift's Ingress Operator documentation](https://docs.openshift.com/container-platform/4.9/networking/ingress-operator.html) for more details and security-implications for multi-tenant clusters.
