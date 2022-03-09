@@ -99,7 +99,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astronomer project:
 
-1. In your Git repository, configure the following environment variables:
+1. In your Jenkins pipeline configuration, add the following environment variables:
 
     - `DEPLOYMENT_ID`: Your Astro Deployment ID
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
