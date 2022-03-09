@@ -2,7 +2,7 @@
 sidebar_label: "Connect to External Services"
 title: "Connect Astro to External Data Services"
 id: connectivity
-description: Learn how to connect Astro to external data sources
+description: Learn how to connect Astro to different types of external data sources.
 ---
 
 ## Overview
