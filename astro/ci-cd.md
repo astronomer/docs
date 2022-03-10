@@ -66,7 +66,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-   - `DEPLOYMENT_ID` = `<your-astro-deployment-id>`
+   - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
 
 2. Create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -92,7 +92,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         - name: Deploy to Astro
           run: |
             brew install astronomer/cloud/astrocloud
-            astrocloud deploy ${{ secrets.DEPLOYMENT_ID }}
+            astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
 
