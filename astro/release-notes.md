@@ -16,6 +16,12 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.0 ([Release notes](cli-release-notes.md))
 
+## March 10, 2022
+
+### Organizations Now Support Multiple Login Domains
+
+Organizations can now accept logins across multiple email domains, meaning that Organizations can now be comprised of users across divisions or regional branches that use different email domain services. To configure multiple login domains for an Organization, reach out to [Astronomer support](support.astornomer.io).
+
 ## March 3, 2022
 
 ### Additional Improvements
