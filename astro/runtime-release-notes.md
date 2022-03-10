@@ -47,7 +47,7 @@ These are all [deferrable operators](deferrable-operators.md) built by Astronome
 
 ### Additional improvements
 
-- The Airflow UI now shows the Deployment's Docker image tag in the footer of all pages. For more information, see [Astro Release Notes](release-notes.md).
+- The Airflow UI now shows the Deployment's Docker image tag in the footer of all pages. For more information, see [Astro Release Notes for March 10, 2022](release-notes.md#march-10-2022).
 
 ### Additional Improvements
 
