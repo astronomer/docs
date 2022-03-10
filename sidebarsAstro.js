@@ -71,25 +71,34 @@ module.exports = {
       type: 'category',
       label: 'Administration',
       items: [
-            'install-aws',
-            'manage-workspaces',
-            {
-              type: 'category',
-              label: 'User Access',
-              items: [
-                'add-user',
-                'user-permissions',
-                'configure-idp',
-              ],
-            },
-            {
-              type: 'category',
-              label: 'Manage Clusters',
-              items: [
-                'create-cluster',
-                'modify-cluster',
-              ],
-            },
+        'install-aws',
+        'manage-workspaces',
+        {
+          type: 'category',
+          label: 'User Access',
+          items: [
+            'add-user',
+            'user-permissions',
+            'configure-idp',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Manage Clusters',
+          items: [
+            'create-cluster',
+            'modify-cluster',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Release Notes',
+      items: [
+        'release-notes',
+        'cli-release-notes',
+        'runtime-release-notes',
       ],
     },
     {
@@ -98,17 +107,8 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'Release Notes',
-          items: [
-            'release-notes',
-            'cli-release-notes',
-            'runtime-release-notes',
-          ],
-        },
-        {
-          type: 'category',
           label: 'CLI Command Reference',
-          link: {type: 'doc', id: 'cli-reference'},
+          link: { type: 'doc', id: 'cli-reference' },
           items: [
             'cli-reference/astrocloud-auth-login',
             'cli-reference/astrocloud-auth-logout',
@@ -131,7 +131,7 @@ module.exports = {
             'cli-reference/astrocloud-dev-restart',
             'cli-reference/astrocloud-version',
             'cli-reference/astrocloud-workspace-list',
-            'cli-reference/astrocloud-workspace-switch',          ],
+            'cli-reference/astrocloud-workspace-switch',],
         },
         'known-limitations',
         'runtime-version-lifecycle-policy',
@@ -140,13 +140,13 @@ module.exports = {
         {
           type: 'category',
           label: 'Security',
-          link: {type: 'doc', id: 'security'},
+          link: { type: 'doc', id: 'security' },
           items: [
             'shared-responsibility-model',
             'resilience',
             'disaster-recovery',
             'data-protection',
-            'secrets-management',  ],
+            'secrets-management',],
         },
       ],
     },
