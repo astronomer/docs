@@ -16,24 +16,36 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Get Started',
       items: [
-        'install-aws',
         'install-cli',
+        'create-project',
       ],
     },
     {
       type: 'category',
       label: 'Develop',
       items: [
-        'create-project',
         'develop-project',
-        'deploy-code',
+        {
+          type: 'category',
+          label: 'Write DAGs',
+          items: [
+            'deferrable-operators',
+            'kubernetespodoperator',
+          ],
+        },
+        'upgrade-runtime',
         'airflow-api',
-        'airflow-alerts',
-        'kubernetespodoperator',
-        'deferrable-operators',
         'test-and-troubleshoot-locally',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Deploy',
+      items: [
+        'deploy-code',
+        'ci-cd',
       ],
     },
     {
@@ -42,31 +54,42 @@ module.exports = {
       items: [
         'configure-deployment',
         'api-keys',
-        'ci-cd',
-        'deployment-metrics',
-        'scheduler-logs',
         'environment-variables',
         'secrets-backend',
       ],
     },
     {
       type: 'category',
-      label: 'Administration',
+      label: 'Observability',
       items: [
-        'create-cluster',
-        'configure-idp',
-        'manage-workspaces',
-        'add-user',
-        'user-permissions',
-        'modify-cluster',
+        'deployment-metrics',
+        'scheduler-logs',
+        'airflow-alerts',
       ],
     },
     {
       type: 'category',
-      label: 'Astronomer Runtime',
+      label: 'Administration',
       items: [
-        'upgrade-runtime',
-        'runtime-version-lifecycle-policy',
+            'install-aws',
+            'manage-workspaces',
+            {
+              type: 'category',
+              label: 'User Access',
+              items: [
+                'add-user',
+                'user-permissions',
+                'configure-idp',
+              ],
+            },
+            {
+              type: 'category',
+              label: 'Manage Clusters',
+              items: [
+                'create-cluster',
+                'modify-cluster',
+              ],
+            },
       ],
     },
     {
@@ -111,6 +134,7 @@ module.exports = {
             'cli-reference/astrocloud-workspace-switch',          ],
         },
         'known-limitations',
+        'runtime-version-lifecycle-policy',
         'resource-reference-aws',
         'platform-variables',
         {
