@@ -34,7 +34,7 @@ For implementation details on deferrable operators, read the [Apache Airflow doc
 
 ## Prerequisites
 
-To use Deferrable operators, you must have an [Astro project](create-project.md) running [Astro Runtime 4.2.0+](runtime-release-notes.md#astro-runtime-411). For more information on upgrading your Deployment's Runtime version, read [Upgrade Runtime](upgrade-runtime.md).
+To use Deferrable operators, you must have an [Astro project](create-project.md) running [Astro Runtime 4.2.0+](runtime-release-notes.md#astro-runtime-420). For more information on upgrading your Deployment's Runtime version, read [Upgrade Runtime](upgrade-runtime.md).
 
 ## Using Deferrable Operators
 
