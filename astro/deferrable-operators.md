@@ -2,7 +2,7 @@
 sidebar_label: "Deferrable Operators"
 title: "Deferrable Operators"
 id: deferrable-operators
-description: Run Airflow's deferrable operators on Astro for improved performance and cost savings.
+description: Run deferrable operators on Astro for improved performance and cost savings.
 ---
 
 ## Overview
@@ -11,9 +11,9 @@ This guide explains how deferrable operators work and how to implement them in y
 
 [Apache Airflow 2.2](https://airflow.apache.org/blog/airflow-2.2.0/) introduced [**deferrable operators**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), a powerful type of Airflow operator that promises lower resource costs and improved performance.
 
-In Airflow, it's common to use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) and some [operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) to configure tasks that wait for some external condition to be met before executing or triggering another task. While tasks using standard operators and sensors take up a Worker or Scheduler slot when checking if an external condition has been met, deferrable operators suspend themselves during that process. This releases the Worker to take on other tasks. Using the deferrable versions of operators or sensors that typically spend a long time waiting for a condition to be met, such as the `S3Sensor`, the `HTTPSensor`, or the `DatabricksSubmitRunOperator`, can result in significant per-task cost savings and performance improvements.
+In Airflow, it's common to use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) and some [operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) to configure tasks that wait for some external condition to be met before executing or triggering another task. While tasks using standard operators and sensors take up a Worker slot when checking if an external condition has been met, deferrable operators, suspend themselves during that process. This releases the Worker to take on other tasks. Using the deferrable versions of operators or sensors that typically spend a long time waiting for a condition to be met, such as the `S3Sensor`, the `HTTPSensor`, or the `DatabricksSubmitRunOperator`, can result in significant per-task cost savings and performance improvements.
 
-Deferrable operators rely on a new Airflow component called the Triggerer. The Triggerer is highly available and entirely managed on Astro, meaning that you can start using deferrable operators in your DAGs as long as you're running Astro Runtime 4.0+.
+Deferrable operators rely on an Airflow component called the Triggerer. The Triggerer is highly available and entirely managed on Astro, meaning that you can start using deferrable operators in your DAGs as long as you're running Astro Runtime 4.0+.
 
 ### How It Works
 
@@ -34,7 +34,7 @@ For implementation details on deferrable operators, read the [Apache Airflow doc
 
 ## Prerequisites
 
-Deferrable operators are available by default on [Astro Runtime 4.1.1+](runtime-release-notes.md#astro-runtime-400). For more information on upgrading your Deployment's Runtime version, read [Upgrade Runtime](upgrade-runtime.md).
+To use Deferrable operators, you must have an [Astro project](create-project.md) running [Astro Runtime 4.2.0+](runtime-release-notes.md#astro-runtime-411). For more information on upgrading your Deployment's Runtime version, read [Upgrade Runtime](upgrade-runtime.md).
 
 ## Using Deferrable Operators
 
@@ -53,15 +53,14 @@ Some additional notes about using deferrable operators:
 
 - If you want to replace non-deferrable operators in an existing project with deferrable operators, we recommend importing the deferrable operator class as its non-deferrable class name. If you don't include this part of the import statement, you need to replace all instances of non-deferrable operators in your DAGs. In the above example, that would require replacing all instances of `TimeSensor` with `TimeSensorAsync`.
 - Currently, not all operators have a deferrable version. There are a few open source deferrable operators, plus additional operators designed and maintained by Astronomer.
-- If you're interested in the deferrable version of an operator that is not generally available, you can write your own and contribute these to the open source project. If you need help with writing a custom deferrable operator, reach out to Astronomer support.
+- If you're interested in the deferrable version of an operator that is not generally available, you can write your own and contribute these to the open source project. If you need help with writing a custom deferrable operator, reach out to [Astronomer support](https://support.astronomer.io).
 - There are some use cases where it can be more appropriate to use a traditional sensor instead of a deferrable operator. For example, if your task needs to wait only a few seconds for a condition to be met, we recommend using a Sensor in [`reschedule` mode](https://github.com/apache/airflow/blob/1.10.2/airflow/sensors/base_sensor_operator.py#L46-L56) to avoid unnecessary resource overhead.
 
 ## Astronomer's Deferrable Operators
 
-Astronomer maintains [`astronomer-providers`](https://github.com/astronomer/astronomer-providers), which is an open source collection deferrable operators bundled as a provider package. This package is available by default on Astronomer Runtime and includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
+Astronomer maintains [`astronomer-providers`](https://github.com/astronomer/astronomer-providers), which is an open source collection of deferrable operators bundled as a provider package. This package is installed on Astronomer Runtime by default and includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 
-The following table contains information about each operator that's available in the package, including their import path and an example DAG. For more information about each available operator in the package, see the [`astronomer-providers` documentation](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#100-2022-03-01).
-
+The following table contains information about each operator that's available in the package, including their import path and an example DAG. For more information about each available operator in the package, see the [CHANGELOG in `astronomer-providers`](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#100-2022-03-01).
 
 | Operator/ Sensor Class     | Import Path                                                                                   | Example DAG                                                                                                                                       |
 | -------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
