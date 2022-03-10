@@ -68,7 +68,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
    - `DEPLOYMENT_ID` = `<your-astro-deployment-id>`
 
-2. Add the following to a new file in .github/workflows, for example `cicd.yaml`:
+2. Create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
     name: Astronomer CI - Deploy Code
