@@ -9,11 +9,16 @@ description: Run deferrable operators on Astro for improved performance and cost
 
 This guide explains how deferrable operators work and how to implement them in your DAGs.
 
-[Apache Airflow 2.2](https://airflow.apache.org/blog/airflow-2.2.0/) introduced [**deferrable operators**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), a powerful type of Airflow operator that promises lower resource costs and improved performance.
+[Apache Airflow 2.2](https://airflow.apache.org/blog/airflow-2.2.0/) introduced [**deferrable operators**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), a powerful type of Airflow operator that's optimized for lower resource costs and improved performance.
 
-In Airflow, it's common to use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) and some [operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) to configure tasks that wait for some external condition to be met before executing or triggering another task. While tasks using standard operators and sensors take up a Worker slot when checking if an external condition has been met, deferrable operators, suspend themselves during that process. This releases the Worker to take on other tasks. Using the deferrable versions of operators or sensors that typically spend a long time waiting for a condition to be met, such as the `S3Sensor`, the `HTTPSensor`, or the `DatabricksSubmitRunOperator`, can result in significant per-task cost savings and performance improvements.
+In Airflow, it's common to use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) and some [operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) to configure tasks that wait for some external condition to be met before executing or triggering another task. While tasks using standard operators and sensors take up a worker slot when checking if an external condition has been met, deferrable operators suspend themselves during that process. This releases the worker to take on other tasks. To do so, deferrable operators rely on a new Airflow component called the Triggerer. The Triggerer is highly available and built into all Deployments on Astro, which means that you can use deferrable operators in your DAGs with no additional configuration. To ensure that you can test your DAGs locally, the Triggerer is also built into the Astro CLI local development experience.
 
-Deferrable operators rely on an Airflow component called the Triggerer. The Triggerer is highly available and entirely managed on Astro, meaning that you can start using deferrable operators in your DAGs as long as you're running Astro Runtime 4.0+.
+Deferrable operators enable two primary benefits:
+
+- Reduced resource consumption. Depending on your resources and workload, deferrable operators can lower the number of workers needed to run tasks during periods of high concurrency. Less workers can lower your infrastructure cost per Deployment.
+- Resiliency against restarts. When you push code to a Deployment on Astro, the Triggerer process that deferrable operators rely on is gracefully restarted and does not fail.
+
+In general, we recommend using deferrable versions of operators or sensors that typically spend a long time waiting for a condition to be met. This includes the `S3Sensor`, the `HTTPSensor`, the `DatabricksSubmitRunOperator`, and more.
 
 ### How It Works
 
@@ -25,16 +30,21 @@ The **Triggerer** is responsible for running Triggers and signaling tasks to res
 
 The process for running a task using a deferrable operator is as follows:
 
-1. The task is picked up by a Worker, which executes an initial piece of code that initializes the task. During this time, the task is in a "running" state and takes up a Worker slot.
-2. The task defines a Trigger and defers the function of checking on some condition to the Triggerer. Because all of the deferring work happens in the Triggerer, the task instance can now enter a "deferred" state. This frees the Worker slot to take on other tasks.
+1. The task is picked up by a worker, which executes an initial piece of code that initializes the task. During this time, the task is in a "running" state and takes up a worker slot.
+2. The task defines a Trigger and defers the function of checking on some condition to the Triggerer. Because all of the deferring work happens in the Triggerer, the task instance can now enter a "deferred" state. This frees the worker slot to take on other tasks.
 3. The Triggerer runs the task's Trigger periodically to check whether the condition has been met.
-4. Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a Worker, it begins to complete its main function.
+4. Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a worker, it begins to complete its main function.
 
-For implementation details on deferrable operators, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html).
+For more information on how deferrable operators work and how to use them, read the [Airflow Guide for Deferrable Operators](https://www.astronomer.io/guides/deferrable-operators) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html).
 
 ## Prerequisites
 
-To use Deferrable operators, you must have an [Astro project](create-project.md) running [Astro Runtime 4.2.0+](runtime-release-notes.md#astro-runtime-420). For more information on upgrading your Deployment's Runtime version, read [Upgrade Runtime](upgrade-runtime.md).
+To use deferrable operators both in a local Airflow environment and on Astro, you must have:
+
+- An [Astro project](create-project.md) running [Astro Runtime 4.2.0+](runtime-release-notes.md#astro-runtime-420).
+- The [Astro CLI v1.1.0+](https://docs.astronomer.io/astro/cli-release-notes#v110) installed.
+
+All versions of Astro Runtime 4.2.0+ support the Triggerer and have the `astronomer-providers` package installed. For more information, read [Astro Runtime Release Notes](runtime-release-notes.md) or [Upgrade Astro Runtime](upgrade-runtime.md).
 
 ## Using Deferrable Operators
 
@@ -58,9 +68,9 @@ Some additional notes about using deferrable operators:
 
 ## Astronomer's Deferrable Operators
 
-Astronomer maintains [`astronomer-providers`](https://github.com/astronomer/astronomer-providers), which is an open source collection of deferrable operators bundled as a provider package. This package is installed on Astronomer Runtime by default and includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
+In addition to the deferrable operators that are published by the Apache Airflow open source project, Astronomer maintains [`astronomer-providers`](https://github.com/astronomer/astronomer-providers), an open source collection of deferrable operators bundled as a provider package. This package is installed on Astro Runtime by default and includes deferrable versions of popular operators such as the `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 
-The following table contains information about each operator that's available in the package, including their import path and an example DAG. For more information about each available operator in the package, see the [CHANGELOG in `astronomer-providers`](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#100-2022-03-01).
+The following table contains information about each operator that's available in the package, including their import path and an example DAG. For more information about each operator in the package, see the [CHANGELOG in `astronomer-providers`](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#100-2022-03-01).
 
 | Operator/ Sensor Class     | Import Path                                                                                   | Example DAG                                                                                                                                       |
 | -------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
