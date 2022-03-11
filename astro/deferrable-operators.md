@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Deferrable Operators"
-title: "Deferrable Operators"
+sidebar_label: 'Deferrable Operators'
+title: 'Deferrable Operators'
 id: deferrable-operators
 description: Run deferrable operators on Astro for improved performance and cost savings.
 ---
