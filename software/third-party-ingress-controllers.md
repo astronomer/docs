@@ -180,7 +180,7 @@ This is typically done by labeling the namespace containing your ingress control
 kubectl label namespace/<ingress namespace> network.openshift.io/policy-group=ingress
 ```
 
-For more information, see the [Openshift Network Policy documentation](https://docs.openshift.com/container-platform/4.1/networking/configuring-networkpolicy.html).
+For more information, see the [OpenShift documentation](https://docs.openshift.com/container-platform/4.1/networking/configuring-networkpolicy.html) on configuring network policy.
 
 Additionally, OpenShift's default route admission policy must be configured to allow traffic from multiple namespaces. To do so, run the following command:
 
