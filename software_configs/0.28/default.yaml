@@ -35,6 +35,9 @@ nats:
   reconnectJitter: 150
   reconnectJitterTLS: 1000
   waitOnFirstConnect: true
+workers:
+  deleteDeploymentConfig:
+    retryCount: 5
 
 # Logging configuration.
 logging:
@@ -117,6 +120,17 @@ trial:
 ui:
   subdomain: app
   port: 5000
+  externalUrls:
+    documentation:
+      base:  https://docs.astronomer.io/software/
+      manageAirflowVersions:  https://docs.astronomer.io/software/manage-airflow-versions/
+      cliInstallWindows10:  https://docs.astronomer.io/software/cli-install-windows-10/
+      cliQuickstart:  https://docs.astronomer.io/software/cli-quickstart/
+      deployCli:  https://docs.astronomer.io/software/deploy-cli/
+      configureDeployment:  https://docs.astronomer.io/software/configure-deployment/
+      ciCd:  https://docs.astronomer.io/software/ci-cd/
+      manageWorkspaces:  https://docs.astronomer.io/software/manage-workspaces/
+    statusPage: ~
 
 # Elasticsearch configuration for Houston to pull logs.
 # This is passed striaght to the es client.
@@ -239,7 +253,7 @@ jwt:
   # API.
   #passphrase: ~
 
-  # JWT / Cookie duration in milliseconds.
+  # Duration in milliseconds after user has to be logged out, irrespective of current JWT's expiry status.
   authDuration: 86400000
 
   # Path to folder containing tls.crt and tls.key, used for signing JWT tokens
@@ -277,6 +291,9 @@ emailConfirmation: true
 
 # Subdomain under base domain.
 subdomain: houston
+
+# ui app name
+appSubName: "Astronomer Software"
 
 # Format: ${SCOPE}.${RESOURCE}.${VERB}
 roles:
@@ -335,6 +352,7 @@ roles:
       ? system.workspace.extendTrial
       ? system.airflow.admin
       ? system.deployments.images.push
+      ? system.workspace.update
 
   #
   # Workspace Roles
@@ -494,6 +512,8 @@ deployments:
   enableUpdateDeploymentImageEndpoint: false
   # feature flag that controls whether we verify the image exists and th euser has access to the image that they want to deploy
   enableUpdateDeploymentImageEndpointDockerValidation: false
+  # feature flag that controls whether a system admin can create airflows of deprecated versions
+  enableSystemAdminCanCreateDeprecatedAirflows: false
 
   # Log out final helm values whenever they are generated, before deployment.
   logHelmValues: false
