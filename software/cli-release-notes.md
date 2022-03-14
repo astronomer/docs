@@ -17,7 +17,7 @@ Release date: March 14, 2022
 
 ### Additional Improvements
 
-- You can now use the new `--no-cache` flag with `astro dev start` and `astro deploy`. This flag prevents your container engine from using images that were cached in previous builds.
+- You can now use the new `--no-cache` flag with `astro dev start` and `astro deploy`. This flag prevents your container engine from building your project with cached images from previous builds.
 - New Deployments created via `astro deployment create` now use the Celery Executor by default.
 
 ### Bug fixes
