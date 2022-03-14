@@ -15,6 +15,23 @@ Astronomer v0.28 is the latest Stable version of Astronomer Software, while v0.2
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
+## v0.28.2
+
+Release date: March 14, 2022
+
+### Additional Improvements
+
+- System Admins can now update the name and description for any Workspace on their installation.
+- You can now configure `global.external_labels` and `remote_write` options in Prometheus Helm chart.
+- You can now configure `nodeSelector`, `tolerations`, and `affinity` in the STAN and NATS Helm charts.
+
+### Bug Fixes
+
+- Fixed several CVEs
+- Fixed a few issues where some buttons in the Software UI did not link to the appropriate page
+- Fixed an issue where you could not install Astronomer Software 0.27 or 0.28 in an [airgapped environment](install-airgapped.md)
+- Fixed an issue where System and Workspace Admins were able to delete users that were part of an [IDP team](import-idp-groups.md)
+
 ## v0.28.1
 
 Release date: February 22, 2022

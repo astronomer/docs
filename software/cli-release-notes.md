@@ -9,7 +9,24 @@ description: Release notes for the Astronomer CLI.
 
 This document provides a summary of all changes made to the [Astronomer CLI](cli-quickstart.md) for the v0.28.x series of Astronomer Software. For general product release notes, go to [Astronomer Software Release Notes](release-notes.md).
 
-If you have any questions or a bug to report, don't hesitate to reach out to us via Slack or Intercom. We're here to help.
+If you have any questions or a bug to report, reach out to us via [Astronomer Support](https://support.astronomer.io).
+
+## 0.28.1
+
+Release date: March 14, 2022
+
+### Additional Improvements
+
+- You can now use the new `--no-cache` flag with `astro dev start` and `astro deploy`. This flag prevents your container engine from using images that were cached in previous builds.
+- New Deployments created via `astro deployment create` now use the Celery Executor by default.
+
+### Bug fixes
+
+- Fixed an issue where `astro dev logs` and `astro dev start` didn't work when using custom Docker container names
+- Fixed an issue where `astro deploy` did not work when using Podman in specific circumstances
+- Fixed an issue where `airflow_settings.yaml` was not properly imported to the Airflow UI when running Astro in a local Podman environment
+- Fixed an issue where updating a Deployment's deployment type via `astro deployment update` would generate an error in the Software UI
+- Added a timeout for failing to connect to Houston
 
 ## 0.28.0
 

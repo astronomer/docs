@@ -228,6 +228,7 @@ The System Admin has all of the same default permissions as the System Viewer an
 - `system.user.delete`: Delete any user
 - `system.user.verifyEmail`: Bypass email verification for any user
 - `system.workspace.delete`: Delete any Workspace
+- `system.workspace.update`: Modify the name or description of any Workspace
 - `system.airflow.admin`: Airflow admin permissions on any Deployment, including permission to configure:
 
     - Pools
