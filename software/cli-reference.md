@@ -225,7 +225,7 @@ If you run `astro deploy` without specifying `your-deployment-release-name`, the
 | `--prompt`       | None       | Forces prompt for choosing a target Deployment.                            |
 | `--save`         | None       | Saves this directory/Deployment combination for future deploys.            |
 | `--workspace-id` | String     | Lists available Deployments in your Workspace and prompts you to pick one. |
-| `--no-cache` | None     | Do not use any images from the container engine's cache when building your project |
+| `--no-cache` | None     | Do not use any images from the container engine's cache when building your project. |
 
 
 ### Related documentation
@@ -617,7 +617,7 @@ Logs for the Airflow Triggerer will only show for local environments using Defer
 | Flag    | Value Type | Usage                                                                            |
 | ------- | ---------- | -------------------------------------------------------------------------------- |
 | `--env` | String     | Specifies the filepath containing environment variables for the Airflow cluster. |
-| `--no-cache` | None     | Do not use any images from the container engine's cache when building your project |
+| `--no-cache` | None     | Do not use any images from the container engine's cache when building your project. |
 
 ## astro dev stop
 
