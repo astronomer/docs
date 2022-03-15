@@ -72,9 +72,9 @@ astrocloud dev run <airflow-cli-command>
 
 For example, the Apache Airflow command for viewing your entire configuration is `airflow config list`. To run this command with the Astronomer Cloud CLI, you would run `astrocloud dev run config list` instead.
 
-## Run the KubernetesPodOperator Locally
+## Test the KubernetesPodOperator Locally
 
-By running Kubernetes on your local machine, you can test your instances of the KubernetesPodOperator before pushing your code to a Deployment. Doing so means that you can monitor the status and logs of individual Kubernetes Pods running your tasks.
+Testing DAGs with the [KubernetesPodOperator](kubernetespodoperator.md) locally requires a local Kubernetes environment. Follow the steps in this topic to create a local Kubernetes environment and monitor the status and logs of individual Kubernetes pods running your task.
 
 ### Step 1: Start Running Kubernetes
 
@@ -88,8 +88,8 @@ To run Kubernetes locally:
 
 1. Open the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker.
 2. Open the `config` file in this directory.
-3. Under `clusters`, you should see one `cluster` with `server: http://localhost:8080`. Change this to `server: https://kubernetes.docker.internal:6443` (If this doesn't work, try `server: https://host.docker.internal:6445`).
-4. In your Astronomer project, open your `include` directory and create a new directory called `.kube`. Copy the `config` file that you edited into this directory.
+3. Under `clusters`, you should see one `cluster` with `server: http://localhost:8080`. Change this to `server: https://kubernetes.docker.internal:6443`. If this doesn't work, try `server: https://host.docker.internal:6445`.
+4. In your Astro project, open your `include` directory and create a new directory called `.kube`. Copy the `config` file that you edited into this directory.
 
 ### Step 3: Instantiate the KubernetesPodOperator
 
@@ -129,7 +129,14 @@ Specifically, your operator must have `cluster_context='docker-desktop` and `con
 
 ### Step 4: Run and Monitor the KubernetesPodOperator
 
-After updating your DAG, run `astro dev start` to rebuild your image and run your project in a local Airflow environment. You can use `kubectl get pods -n $namespace` and `kubectl logs {pod_name} -n $namespace` to examine the logs for any Pods that were created by the operator. By default, `docker-for-desktop` will run pods in the `default` namespace.
+After updating your DAG, run `astro dev restart` from the Astro CLI to rebuild your image and run your project in a local Airflow environment.
+
+To examine the logs for any pods that were created by the operator, you can use the following [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) commands:
+
+- `kubectl get pods -n $namespace`
+- `kubectl logs {pod_name} -n $namespace`
+
+By default, Docker for Desktop will run pods in a namespace called `default`.
 
 ## Hard Reset Your Local Environment
 
