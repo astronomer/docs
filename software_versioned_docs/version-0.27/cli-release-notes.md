@@ -11,6 +11,17 @@ This document provides a summary of all changes made to the [Astronomer CLI](cli
 
 If you have any questions or a bug to report, don't hesitate to reach out to us via Slack or Intercom. We're here to help.
 
+## 0.27.4
+
+Release date: March 15, 2022
+
+### Bug fixes
+
+- Fixed an issue where `astro dev logs` and `astro dev start` didn't work when using custom Docker container names
+- Fixed an issue where `astro deploy` did not work when using Podman in specific circumstances
+- Fixed an issue where `airflow_settings.yaml` was not properly imported to the Airflow UI when running Astro in a local Podman environment
+- Fixed an issue where updating a Deployment's deployment type via `astro deployment update` would generate an error in the Software UI
+
 ## 0.27.3
 
 Release date: February 15, 2022
