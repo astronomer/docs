@@ -180,6 +180,7 @@ The settings that you can update via the command line are:
 - cloud.api.token
 - context
 - contexts
+- houston.dial_timeout
 - local.houston
 - local.orbit
 - postgres.user
