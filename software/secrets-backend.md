@@ -130,7 +130,7 @@ apache-airflow-providers-hashicorp
 
 Then, add the following environment variables to your `Dockerfile`:
 
-```text
+```docker
 # Make sure to replace `<your-approle-id>` and `<your-approle-secret>` with your own values.
 ENV AIRFLOW__SECRETS__BACKEND="airflow.contrib.secrets.hashicorp_vault.VaultBackend"
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "onnections", "variables_path": variables, "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
@@ -156,7 +156,7 @@ For more information on the Airflow provider for Hashicorp Vault and how to furt
 
 To test Vault, write a simple DAG which calls your test secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
