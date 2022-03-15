@@ -1,0 +1,304 @@
+{
+  "version-0.25/software": [
+    {
+      "type": "doc",
+      "id": "version-0.25/overview"
+    },
+    {
+      "type": "category",
+      "label": "Getting Started",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/quickstart"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/faq"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Develop",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/cli-quickstart"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/customize-image"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/kubepodoperator-local"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Install",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/install-aws"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/install-azure"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/install-gcp"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Deploy",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/manage-workspaces"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/configure-deployment"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/deploy-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/deploy-nfs"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/deployment-logs"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/environment-variables"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/ci-cd"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Customize Airflow",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/manage-airflow-versions"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/access-airflow-database"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/kubepodoperator"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/kubernetes-executor"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/airflow-alerts"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/secrets-backend"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/integrate-iam"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/airflow-api"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Manage Astronomer",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/integrate-auth-system"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/workspace-permissions"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/manage-platform-users"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/houston-api"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/upgrade-astronomer-stable"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/upgrade-to-0-25"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/apply-platform-config"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/registry-backend"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/configure-platform-resources"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/renew-tls-cert"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/pre-create-namespaces"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/third-party-ingress-controllers"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Monitor",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/grafana-metrics"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/kibana-logging"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/platform-alerts"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/logs-to-s3"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Astronomer Certified",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/image-architecture"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/single-node-install"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/install-packages"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/upgrade-ac"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/ac-cve"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/ac-support-policy"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Troubleshoot",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/kubectl"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/debug-install"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/disaster-recovery"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Resources",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/release-notes"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/system-components"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/support"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/cli-reference"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/version-compatibility-reference"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.25/release-lifecycle-policy"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    }
+  ]
+}

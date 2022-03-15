@@ -1,6 +1,6 @@
-# Astronomer Cloud Documentation
+# Astronomer Documentation
 
-This repository contains all of the code and content that powers Astronomer Cloud and Enterprise [documentation](http://docs.astronomer.io).
+This repository contains all of the code and content that powers Astro and Astronomer Software [documentation](http://docs.astronomer.io).
 
 ## Suggest a Change
 
@@ -28,19 +28,19 @@ Small edits and typo fixes don't need to be linked to an issue and should be mer
 
 Every update to the `main` branch of this repository will trigger a rebuild of our production documentation page at https://www.docs.astronomer.io. It might take a few moments for your merged changes to appear.
 
-### Docs Structure 
+### Docs Structure
 
-There are two core documentation folders: `cloud` and `enterprise`. These folders contain the primary Astronomer docsets that you see by default on Astronomer's documentation site. More specifically, `enterprise `is equivalent **Latest** version of the Astronomer Enterprise docset, which is the docset that users see by default when accesssing `docs.astronomer.io/enterprise`.
+There are two core documentation folders: `astro` and `software`. These folders contain the primary Astronomer docsets that you see by default on Astronomer's documentation site. More specifically, `software `is equivalent **Latest** version of the Astronomer Software docset, which is the docset that users see by default when accesssing `docs.astronomer.io/software`.
 
 ![Screen Shot 2022-01-04 at 11 22 19 AM](https://user-images.githubusercontent.com/74574233/148051957-b739ba42-2fc7-4344-b0a0-4f78881fd68c.png)
 
-An additional `enterprise_versioned_docs` folder contains docsets for previous versions of Enterprise. Whenever there's a new release of Astronomer Enterprise, a new versioned docset is copied from `enterprise` and added to this folder, with all links and sidebars updated automatically by Docusuaurs.
+An additional `software_versioned_docs` folder contains docsets for previous versions of Software. Whenever there's a new release of Astronomer Software, a new versioned docset is copied from `software` and added to this folder, with all links and sidebars updated automatically by Docusuaurs.
 
-If you're working on a change in Enterprise docs, you should work primarily in `enterprise`. Make changes to `enterprise_versioned_docs` only if your change is version-specific or a critical fix (e.g. incorrect/ out-of-date information).
+If you're working on a change in Software docs, you should work primarily in `software`. Make changes to `software_versioned_docs` only if your change is version-specific or a critical fix (e.g. incorrect/ out-of-date information).
 
 ### Build Astronomer Docs Locally
 
-If you want to submit a screenshot, GIF, or a new documentation file, we recommend building and testing your documentation change locally. Astronomer Cloud docs are built with [Docusaurus](https://docusaurus.io/), which is our static site generator. Read the following sections for instructions on how to build and test your documentation changes locally with Docusaurus.
+If you want to submit a screenshot, GIF, or a new documentation file, we recommend building and testing your documentation change locally. Astronomer docs are built with [Docusaurus](https://docusaurus.io/), which is our static site generator. Read the following sections for instructions on how to build and test your documentation changes locally with Docusaurus.
 
 #### Installation
 
@@ -48,7 +48,7 @@ Please read the [Docusaurus documentation](https://docusaurus.io/docs/installati
 
 #### Local Development
 
-To serve a local version of the Astronomer Cloud docs site with your changes, run:
+To serve a local version of the docs site with your changes, run:
 
 ```console
 yarn start

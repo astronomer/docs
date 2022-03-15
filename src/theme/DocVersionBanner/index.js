@@ -8,7 +8,7 @@ import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
-import {useActivePlugin, useDocVersionSuggestions} from '@theme/hooks/useDocs';
+import {useActivePlugin, useDocVersionSuggestions} from '@docusaurus/plugin-content-docs/client';
 import {
   ThemeClassNames,
   useDocsPreferredVersion,
@@ -42,7 +42,7 @@ function UnmaintainedVersionLabel({siteTitle, versionMetadata}) {
         versionLabel: <b>{versionMetadata.label}</b>,
       }}>
       {
-        'The documentation for Astronomer Enterprise {versionLabel} is no longer actively maintained.'
+        'The documentation for Astronomer Software {versionLabel} is no longer actively maintained.'
       }
     </Translate>
   );
