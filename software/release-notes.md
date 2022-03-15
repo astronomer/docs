@@ -22,7 +22,7 @@ Release date: March 14, 2022
 ### Additional Improvements
 
 - System Admins can now update the name and description for any Workspace on their installation.
-- You can now configure `global.external_labels` and `remote_write` options in Prometheus Helm chart.
+- You can now specify `global.external_labels` and `remote_write` options for Prometheus through the Astronomer Helm chart.
 - You can now configure `nodeSelector`, `tolerations`, and `affinity` in the STAN and NATS Helm charts.
 
 ### Bug Fixes
