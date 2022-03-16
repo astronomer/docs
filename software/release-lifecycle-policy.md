@@ -32,7 +32,7 @@ To meet the unique needs of different operating environments, we offer all Astro
 
 All releases of AC are considered stable. The LTS release channel is a subset of the stable release channel that promises additional stability, reliability, and support from our team.
 
-For customers looking to access Astronomer's newest features on an incremental basis, we recommend following the stable release channel and upgrading to new versions as soon as they are made generally available. Stable releases are issued roughly once per month for Astronomer Software and the Astronomer CLI.
+For customers looking to access Astronomer's newest features on an incremental basis, we recommend following the stable release channel and upgrading to new versions as soon as they are made generally available. Stable releases are issued roughly once per quarter for Astronomer Software and the Astronomer CLI.
 
 For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel. Release channels are not binding, so you are free to upgrade to any available version of Astronomer Software at any time.
 
