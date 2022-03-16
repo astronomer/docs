@@ -31,7 +31,7 @@ Each Cluster has a unique external IP address that will persist for the life of 
 
 ## VPC Peering
 
-Each Cluster runs in a dedicated VPC. To set up private connectivity between the Astro VPC and your VPC, you can set up a VPC peering connection. Peered VPCs provide additional security by ensuring private connectivity, reduced network transit costs, and simplified network layouts.
+Each Cluster runs in a dedicated VPC. To set up private connectivity between the Astro VPC and a target VPC, you can set up a VPC peering connection. Peered VPCs provide additional security by ensuring private connectivity, reduced network transit costs, and simplified network layouts.
 
 To create a VPC peering connection between a Cluster's VPC and a target VPC, open a support ticket with Astronomer and provide the following information for the target VPC:
 
