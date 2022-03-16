@@ -54,7 +54,7 @@ The maintenance period for an Astronomer Software version depends on its release
 
 | Release Channel | Frequency of Releases | Maintenance Duration |
 | --------------- | --------------------- | -------------------- |
-| Stable          | Monthly               | 6 Months             |
+| Stable          | Quarterly             | 6 Months             |
 | LTS             | Yearly                | 12 Months            |
 
 For each `major.minor` pair, only the latest patch is supported at any given time.
@@ -93,7 +93,7 @@ The following tables contain the exact lifecycle for each published version of A
 | ---------------- | ---------------- | ----------------------- |
 | 0.16             | June 29, 2020    | June 2021               |
 | 0.23             | January 20, 2021 | January 2022            |
-| 0.25             | May 11, 2021     | December 2022*          |
+| 0.25             | May 11, 2021     | December 2022*         |
 | 0.26             | Nov 23, 2021     | May 2022                |
 | 0.27             | Dec 21, 2021     | June 2022               |
 | 0.28             | Feb 15, 2022     | August 2022             |
@@ -104,6 +104,6 @@ The following tables contain the exact lifecycle for each published version of A
 | ---------------- | ---------------- | ----------------------- |
 | 0.16             | June 29, 2020    | June 2021               |
 | 0.23             | January 20, 2021 | January 2022            |
-| 0.25             | May 11, 2021     | December 2022*          |
+| 0.25             | May 11, 2021     | December 2022*         |
 
 > *Given the wide usage of Astronomer Software v0.25, Astronomer has extended the maintenance period for this version through December 2022.
