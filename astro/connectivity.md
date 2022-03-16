@@ -7,12 +7,10 @@ description: Learn how to connect Astro to different types of external data sour
 
 ## Overview
 
-Before you can complete production-level work in Astro, you need to connect your cloud to external data sources. There are multiple options for connecting an Airflow deployment to data sources:
+Before you can orchestrate production-level data in Astro, you first need to make this data accessible to your Astro Clusters. This guide explains how to connect your Astro Clusters to external data sources using the following methods:
 
 - Public Endpoints
 - VPC Peering
-- Transit Gateways
-- Private Endpoints (AWS PrivateLink)
 
 ## Public Endpoints
 
