@@ -9,13 +9,13 @@ import {siteVariables} from '@site/src/versions';
 
 ## Overview
 
+This guide provides setup steps for configuring a CI/CD pipeline to deploy DAGs on Astro.
+
 There are many benefits to deploying DAGs and other changes to Airflow via a CI/CD workflow. Specifically, you can:
 
 - Deploy new and updated DAGs in a way that streamlines the development process amongst team members.
 - Decrease the maintenance cost of integrating changes, allowing your team to quickly respond in case of an error or failure.
 - Enforce continuous, automating testing, which increases code quality and protects your DAGs in production.
-
-This guide provides setup steps for configuring a CI/CD pipeline to deploy DAGs on Astro.
 
 ## Prerequisites
 
@@ -60,67 +60,6 @@ brew install astronomer/cloud/astrocloud@<version-number>
 
 :::
 
-### CircleCI
-To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
-
-1. Set the following as a [CircleCI context](https://circleci.com/docs/2.0/contexts/?utm_source=google&utm_medium=sem&utm_campaign=sem-google-dg--uscan-en-dsa-maxConv-auth-brand&utm_term=g_-_c__dsa_&utm_content=&gclid=CjwKCAjwlcaRBhBYEiwAK341jRWvW2iD6b6sBVh4U4V5Et6re9-0xSFcjhQAtDrV-7UJgmB5ZxxSEhoCmacQAvD_BwE):
-
-   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-   - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
-   
-2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
-
-    ```yaml
-   # Use the latest 2.1 version of CircleCI pipeline process engine.
-   # See: https://circleci.com/docs/2.0/configuration-reference
-   version: 2.1
-   
-   orbs:
-     docker: circleci/docker@2.0.1
-     github-cli: circleci/github-cli@2.0.0
-   
-   
-   # Define a job to be invoked later in a workflow.
-   # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-   jobs:
-   
-     build_image_and_deploy:
-       docker:
-         - image: cimg/base:stable
-       # Add steps to the job
-       # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-       steps:
-         - setup_remote_docker:
-             version: 20.10.11
-         - checkout
-         - run:
-             name: "Setup custom environment variables"
-             command: |
-               echo export ASTRONOMER_KEY_ID=${ASTRONOMER_KEY_ID} >> $BASH_ENV
-               echo export ASTRONOMER_KEY_SECRET=${ASTRONOMER_KEY_SECRET} >> $BASH_ENV
-         - run:
-             name: "Deploy to Astro"
-             command: |
-               curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v1.3.0/cloud-cli_1.3.0_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
-               tar xzf astrocloudcli.tar.gz
-               ./astrocloud deploy ${ASTRONOMER_DEPLOYMENT_ID} -f
-   
-   # Invoke jobs via workflows
-   # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-   workflows:
-     version: 2.1
-     build-and-deploy-prod:
-       jobs:
-         - build_image_and_deploy:
-             context:
-                 - cs-poc
-             filters:
-               branches:
-                 only:
-                   - main
-    ```
-
 ### GitHub Actions
 
 To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
@@ -158,14 +97,13 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
-
 ### Jenkins
 
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astronomer project:
 
 1. In your Jenkins pipeline configuration, add the following environment variables:
 
-    - `DEPLOYMENT_ID`: Your Astro Deployment ID
+    - `ASTRONOMER_DEPLOYMENT_ID`: Your Astro Deployment ID
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
 
@@ -200,3 +138,63 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
     `}</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
+
+### CircleCI
+
+To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
+
+1. Set the following as a [CircleCI context](https://circleci.com/docs/2.0/contexts/?utm_source=google&utm_medium=sem&utm_campaign=sem-google-dg--uscan-en-dsa-maxConv-auth-brand&utm_term=g_-_c__dsa_&utm_content=&gclid=CjwKCAjwlcaRBhBYEiwAK341jRWvW2iD6b6sBVh4U4V5Et6re9-0xSFcjhQAtDrV-7UJgmB5ZxxSEhoCmacQAvD_BwE):
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
+
+2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
+
+    <pre><code parentName="pre">{`# Use the latest 2.1 version of CircleCI pipeline process engine.
+    # See: https://circleci.com/docs/2.0/configuration-reference
+    version: 2.1
+
+    orbs:
+      docker: circleci/docker@2.0.1
+      github-cli: circleci/github-cli@2.0.0
+
+    # Define a job to be invoked later in a workflow.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+    jobs:
+
+      build_image_and_deploy:
+        docker:
+          - image: cimg/base:stable
+        # Add steps to the job
+        # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+         - checkout
+          - run:
+              name: "Setup custom environment variables"
+              command: |
+                echo export ASTRONOMER_KEY_ID=${siteVariables.keyid} >> $BASH_ENV
+                echo export ASTRONOMER_KEY_SECRET=${siteVariables.keysecret} >> $BASH_ENV
+          - run:
+              name: "Deploy to Astro"
+              command: |
+                curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
+                tar xzf astrocloudcli.tar.gz
+                ./astrocloud deploy ${siteVariables.deploymentid} -f
+
+    # Invoke jobs via workflows
+    # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+    workflows:
+      version: 2.1
+      build-and-deploy-prod:
+        jobs:
+          - build_image_and_deploy:
+              context:
+                 - cs-poc
+             filters:
+               branches:
+                 only:
+                   - main
+    `}</code></pre>
