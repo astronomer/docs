@@ -24,7 +24,7 @@ You can now export your task usage data from the **Usage** tab as a CSV file to 
 
 To export your task usage data as a CSV file, click the **Export** button in the **Usage** tab:
 
-![Export as CSV button in Usage tab](/img/release-notes/export-csv.png)
+![Export as CSV button in Usage tab](/img/release-notes/csv-file.png)
 
 ### Bug Fixes
 
