@@ -16,10 +16,10 @@ Before you can orchestrate production-level data in Astro, you first need to mak
 
 The fastest and easiest way to connect Astro to an external data source is by using the data source's publicly accessible API endpoints.
 
-These endpoints can be configured in either of the following ways:
+These endpoints can be configured by:
 
-- Set [Environment Variables](environment-variables.md) with your connection information.
-- Create an [Airflow Connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+- Setting [Environment Variables](environment-variables.md) with your connection information.
+- Creating an [Airflow Connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
 ### IP Whitelisting
 
