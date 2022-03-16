@@ -143,7 +143,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
 To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
 
-1. Set the following as a [CircleCI context](https://circleci.com/docs/2.0/contexts/?utm_source=google&utm_medium=sem&utm_campaign=sem-google-dg--uscan-en-dsa-maxConv-auth-brand&utm_term=g_-_c__dsa_&utm_content=&gclid=CjwKCAjwlcaRBhBYEiwAK341jRWvW2iD6b6sBVh4U4V5Et6re9-0xSFcjhQAtDrV-7UJgmB5ZxxSEhoCmacQAvD_BwE):
+1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
 
     - `ASTRONOMER_KEY_ID` = `<your-key-id>`
     - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
