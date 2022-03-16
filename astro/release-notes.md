@@ -16,6 +16,20 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.0 ([Release notes](cli-release-notes.md))
 
+## March 17, 2022
+
+### Export Task Usage as a CSV File
+
+You can now export your task usage data from the **Usage** tab as a CSV file to perform more complex data analysis related to your Airflow usage and costs. For example, you can use the file as the basis for a pivot table that shows total task usage by Workspace.
+
+To export your task usage data as a CSV file, click the **Export** button in the **Usage** tab:
+
+![Export as CSV button in Usage tab](/img/release-notes/export-csv.png)
+
+### Bug Fixes
+
+- Fixed an issue where saving new environment variables in the Cloud UI would occasionally fail
+
 ## March 10, 2022
 
 ### Running Docker Image Tag in Airflow UI
