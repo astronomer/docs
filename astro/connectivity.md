@@ -46,8 +46,8 @@ Once peering is set up, continue to work with Astronomer support and the owner o
 
 ### DNS Considerations with VPC Peering
 
-By default, a Cluster VPC has both DNS Hostnames and DNS Resolutions options enabled, as well as the **Requester DNS Resolution** option on the [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
+By default, a Cluster VPC has both **DNS Hostnames** and **DNS Resolutions** options enabled, as well as the **Requester DNS Resolution** option on the [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
 
-If you have enabled the DNS Hostnames and DNS Resolution options on the target VPC, you must enable the **Accepter DNS Resolution** option on the Peering Connection. This allows the Data Plane to resolve the public DNS names of a data source to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+If you have enabled the **DNS Hostnames** and **DNS Resolution** options on the target VPC, you must enable the **Accepter DNS Resolution** option on the Peering Connection. This allows the Data Plane to resolve the public DNS names of a data source to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If you are using Private Hosted Zones to resolve DNS names, then you will need to associate your Route53 Private Hosted Zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting Astronomer support.
