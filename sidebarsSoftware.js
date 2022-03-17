@@ -67,7 +67,7 @@ module.exports = {
         'install-azure',
         'install-gcp',
         'install-airgapped',
-        ],
+          ],
         },
         {
         type: 'category',
@@ -79,7 +79,7 @@ module.exports = {
         'renew-tls-cert',
         'namespace-pools',
         'third-party-ingress-controller'
-        ],
+          ],
         },
         {
         type: 'category',
@@ -89,8 +89,8 @@ module.exports = {
         'upgrade-astronomer-stable',
         'houston-api',
         'configure-platform-resources',
-        ],
-      },
+          ],
+        },
         {
         type: 'category',
         label: 'User Access',
@@ -102,6 +102,7 @@ module.exports = {
         'integrate-iam',
         ],
         },
+      ],
     },
     {
       type: 'category',
