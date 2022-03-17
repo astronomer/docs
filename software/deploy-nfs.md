@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Deploy DAGs via NFS'
-title: 'Deploy DAGs to Astronomer Software via NFS'
+sidebar_label: 'Configure NFS Deploys'
+title: 'Configure NFS Code Deploys'
 id: deploy-nfs
 description: Push DAGs to an Airflow Deployment on Astronomer Software using an external NFS volume.
 ---
