@@ -40,6 +40,7 @@ module.exports = {
       'kubernetes-executor',
         ],
       },
+    ],
     },
     {
       type: 'category',
