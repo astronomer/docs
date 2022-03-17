@@ -17,7 +17,7 @@ Release date: March 17, 2022
 
 ### Organizations added to Login Flow
 
-The Astro CLI will now ask you for your email when you run login. It will log you into the correct organization with your email.
+The Astro CLI will now ask you for your email when you login. It will log you into your organization with this email.
 
 ### Bug Fixes
 
