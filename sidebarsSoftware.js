@@ -30,8 +30,8 @@ module.exports = {
       'manage-airflow-versions',
       'access-airflow-database',
       'airflow-api',
-      'kubernetespodoperator',
-      'kubernetespodoperator-local',
+      'kubepodoperator',
+      'kubepodoperator-local',
       'kubernetes-executor',
       'cli-podman',
       ],
@@ -78,7 +78,7 @@ module.exports = {
         'registry-backend',
         'renew-tls-cert',
         'namespace-pools',
-        'third-party-ingress-controller'
+        'third-party-ingress-controllers',
           ],
         },
         {
