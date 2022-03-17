@@ -30,11 +30,16 @@ module.exports = {
       'manage-airflow-versions',
       'access-airflow-database',
       'airflow-api',
+      'cli-podman',
+      {
+      type: 'category',
+      label: 'Write DAGs',
+      items: [
       'kubepodoperator',
       'kubepodoperator-local',
       'kubernetes-executor',
-      'cli-podman',
-      ],
+        ],
+      },
     },
     {
       type: 'category',
