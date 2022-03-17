@@ -21,7 +21,7 @@ Release date: March 17, 2022
 
 ### Bug Fixes
 
-- Fixed an issue where airgapped upgrades and installations could fail due to a mismatched Airflow Helm chart between Astronomer components.
+- Fixed an issue where airgapped upgrades and installations could fail due to a mismatched Airflow Helm chart between Astronomer components
 
 ## v0.28.2
 
