@@ -11,6 +11,21 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, don't hesitate to reach out to us via Slack or Intercom. We're here to help.
 
+## v1.3.1
+
+Release date: March 17, 2022
+
+### Organizations added to Login Flow
+
+The Astro CLI will now ask you for your email when you run login. It will log you into the correct organization with your email.
+
+### Bug Fixes
+
+- CI/CD pipelines with `astrocloud deploy` now take less time. The command now only builds and tests one image per deploy.
+- We have added new example pytests to the example test file. Now users have more examples to follow.
+- Fixes`dev parse` permission errors on WSL. To fix this issue, delete your `.astrocloud` directory and run `astrocloud dev init`.
+
+
 ## v1.3.0
 
 Release date: March 3, 2022
