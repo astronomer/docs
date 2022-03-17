@@ -171,7 +171,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
         steps:
           - setup_remote_docker:
               version: 20.10.11
-         - checkout
+          - checkout
           - run:
               name: "Setup custom environment variables"
               command: |
@@ -192,7 +192,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
         jobs:
           - build_image_and_deploy:
               context:
-                 - cs-poc
+                 - <YOUR-CIRCLE-CI-CONTEXT>
              filters:
                branches:
                  only:
