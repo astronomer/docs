@@ -16,7 +16,7 @@ module.exports = {
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
       indexName: 'published-docs',
-
+      autoCollapseSidebarCategories: true,
       // Optional: see doc section below
       contextualSearch: true,
 
