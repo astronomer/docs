@@ -173,19 +173,23 @@ To test Vault, write a simple DAG which calls your test secret and add this DAG 
 
 ```py
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.hooks.base import BaseHook
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+    conn = BaseHook.get_connection(conn_id="<your-connection-key>")
+    print(conn.get_uri())
+
+with DAG('example_secrets_dag', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
-      python_callable=print_var,
+      python_callable=print_var
 )
 ```
 
@@ -256,6 +260,7 @@ Then, add the following environment variables to your project's `Dockerfile`:
 # Make sure to replace `<your-aws-key>` and `<your-aws-secret-key>` with your own values.
 ENV AWS_ACCESS_KEY_ID="<your-aws-key>"
 ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-key>"
+ENV AWS_DEFAULT_REGION=us-<your-aws-region>
 ENV AIRFLOW__SECRETS__BACKEND="airflow.contrib.secrets.aws_systems_manager.SystemsManagerParameterStoreBackend"
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}'
 ```
@@ -284,19 +289,23 @@ For example, you can use the following DAG to print the value of an Airflow vari
 
 ```py
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.hooks.base import BaseHook
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+    conn = BaseHook.get_connection(conn_id="<your-connection-key>")
+    print(conn.get_uri())
+
+with DAG('example_secrets_dag', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
-      python_callable=print_var,
+      python_callable=print_var
 )
 ```
 
@@ -388,20 +397,23 @@ Write a test DAG which calls the secret you created in Step 1 and add this DAG t
 
 ```py
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.hooks.base import BaseHook
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+    conn = BaseHook.get_connection(conn_id="<your-connection-key>")
+    print(conn.get_uri())
+
+with DAG('example_secrets_dag', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
 
   test_task = PythonOperator(
-
       task_id='test-task',
-      python_callable=print_var,
+      python_callable=print_var
 )
 ```
 
@@ -500,20 +512,23 @@ Write a test DAG which calls the secret you created in Step 1 and add this DAG t
 
 ```py
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.hooks.base import BaseHook
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+    conn = BaseHook.get_connection(conn_id="<your-connection-key>")
+    print(conn.get_uri())
+
+with DAG('example_secrets_dag', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
 
   test_task = PythonOperator(
-
       task_id='test-task',
-      python_callable=print_var,
+      python_callable=print_var
 )
 ```
 
@@ -617,19 +632,23 @@ Once you create a test secret, write a simple DAG which calls the secret and add
 
 ```py
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.hooks.base import BaseHook
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+    conn = BaseHook.get_connection(conn_id="<your-connection-key>")
+    print(conn.get_uri())
+
+with DAG('example_secrets_dag', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
-      python_callable=print_var,
+      python_callable=print_var
 )
 ```
 
