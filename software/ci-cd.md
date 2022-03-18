@@ -203,7 +203,7 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
           with:
             registry: registry.${BASE_DOMAIN}
             username: _
-            password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
+            password: ${{ secrets.SERVICE_ACCOUNT_KEY_DEV }}
         - name: Build and push images
           uses: docker/build-push-action@v2
           if: github.ref == 'refs/heads/dev'
