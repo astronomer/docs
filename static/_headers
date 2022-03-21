@@ -1,0 +1,7 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Access-Control-Allow-Origin: *
+  Referrer-Policy: no-referrer-when-downgrade
+  Permissions-Policy: geolocation=()
+  Content-Security-Policy: default-src https: blob: data: wss: 'self' 'unsafe-inline' 'unsafe-eval'; upgrade-insecure-requests; frame-ancestors 'self'; base-uri 'self';
