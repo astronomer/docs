@@ -188,12 +188,17 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
 4. Go to the Actions tab of your GitHub repo and create a new action with a `main.yml` file. To achieve the recommended workflow described in [Overview](ci-cd.md#overview), use the following action:
 
     ```yaml
-    name: CI
+    name: Astronomer CI - Deploy Code
     on:
       push:
-        branches: [dev, main]
+        branches: [dev]
+      pull_request:
+        types:
+          - closed
+        branches: [main]
     jobs:
       dev-push:
+        if: github.ref == 'refs/heads/dev'
         runs-on: ubuntu-latest
         steps:
         - name: Check out the repo
@@ -204,13 +209,13 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
             registry: registry.${BASE_DOMAIN}
             username: _
             password: ${{ secrets.SERVICE_ACCOUNT_KEY_DEV }}
-        - name: Build and push images
+        - name: Build and push image
           uses: docker/build-push-action@v2
-          if: github.ref == 'refs/heads/dev'
           with:
             push: true
             tags: registry.${BASE_DOMAIN}/<dev-release-name>/airflow:ci-${{ github.sha }}
       prod-push:
+        if: github.event.action == 'closed' && github.event.pull_request.merged == true
         runs-on: ubuntu-latest
         steps:
         - name: Check out the repo
@@ -221,9 +226,8 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
             registry: registry.${BASE_DOMAIN}
             username: _
             password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
-        - name: Build and push images
+        - name: Build and push image
           uses: docker/build-push-action@v2
-          if: github.ref == 'refs/heads/main'
           with:
             push: true
             tags: registry.${BASE_DOMAIN}/<prod-release-name>/airflow:ci-${{ github.sha }}
@@ -231,11 +235,11 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
 
     Ensure the branches match the names of the branches in your repository, and replace `<dev-release-name>` and `<prod-release-name>` with the respective release names of your development and production Airflow Deployments on Astronomer.
 
-5. Test the GitHub Action by making a change on your `dev` branch and committing that change. This should update your development Airflow Deployment on Astronomer, which you can confirm in the Software UI. If that update was successful, try then merging `dev` into `main` to update your production Airflow Deployment. If both updates were successful, you now have a functioning, scalable CI/CD pipeline that can automatically deploy code to multiple Airflow Deployments.
+5. Test the GitHub Action by making a change on your `dev` branch and committing that change. This should update your development Airflow Deployment on Astronomer, which you can confirm in the Software UI. If that update was successful, try opening a pull request and then merging `dev` into `main` to update your production Airflow Deployment. If both updates were successful, you now have a functioning, scalable CI/CD pipeline that can automatically deploy code to multiple Airflow Deployments.
 
-> **Note:** The prod-push action as defined here will run on any push to the `main` branch, including a pull request and merge from the `dev` branch as we recommend.
+> **Note:** The prod-push action as defined here will only run after merging a pull request from the `dev` branch as we recommend.
 >
->To further restrict this to run only on a pull request, you can limit whether your users can push directly to the `main` branch within your repository or your CI tool, or you could modify the action to make it more limited.
+>To further restrict this pipeline, you can add branch protection settings in GitHub to limit whether your users can push directly to the `main` branch within your repository or your CI tool, or you can modify the action as needed.
 
 The following sections provide basic templates for configuring single CI/CD pipelines using popular CI/CD tools. Each template can be implemented to produce a simple CI/CD pipeline similar to the one above, but they can also be reconfigured to manage any number of branches or Deployments based on your needs.
 
