@@ -11,7 +11,7 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, don't hesitate to reach out to us via Slack or Intercom. We're here to help.
 
-## v1.3.1
+## v1.3.2
 
 Release date: March 17, 2022
 
