@@ -59,7 +59,6 @@ For detailed information on each instance type, reference [AWS documentation](ht
 
 **m5**
 
-- m5.large
 - m5.xlarge (_default_)
 - m5.2xlarge
 - m5.4xlarge
