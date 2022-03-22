@@ -33,7 +33,7 @@ To better integrate with Astro's identity-based login flow, the CLI now prompts 
 ### Bug Fixes
 
 - Partially fixed `dev parse` permission errors on WSL. To fully fix this issue for an Astro project, you must delete the project's existing `.astrocloud` directory and rerun `astrocloud dev init`.
-- Fixed an issue where running `astrocloud dev parse/pytest` while a local Airflow environment was running would crash the Airflow environment. This issue was introduced in v1.3.1, which is no longer available for download.
+- Fixed an issue where running `astrocloud dev parse/pytest` while a local Airflow environment was running would crash the Airflow environment. This issue was introduced in Astro CLI 1.3.1, which is no longer available for download.
 
 ## v1.3.0
 
