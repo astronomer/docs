@@ -85,6 +85,22 @@ These metrics contain information about your Deployment's configured Airflow poo
 
     A large number of starving tasks could indicate that you should reconfigure your pools to run more tasks in parallel.
 
+## Deployment Health
+
+Deployment health appears as a real-time status at the top of your Deployment's information page. Deployment health is meant to show whether or not the most important components within your Deployment are running as expected.
+
+![Deployment Health status](/img/docs/deployment-health.png)
+
+Deployment health can have one of two statuses:
+
+- **Healthy** (Green): The Airflow Webserver and Scheduler are both healthy and running as expected.
+- **Unhealthy** (Red): This status can mean one of two things:
+
+    - Your Deployment was recently created and the Airflow Webserver and Scheduler are still spinning up.
+    - Your Deployment's Webserver and/or Scheduler are restarting or otherwise not in a healthy, running state.
+
+If your Deployment is unhealthy, we recommend checking the status of your tasks and waiting for a few minutes. If your Deployment is unhealthy for more than 5 minutes, we recommend [reviewing Scheduler logs](scheduler-logs.md) in the Cloud UI or reaching out to [Astronomer Support](https://support.astronomer.io).
+
 ## Deployment Overview
 
 Each Deployment includes four high-level performance charts which you can view from both the **Deployments** menu and individual Deployment pages. They include:
