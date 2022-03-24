@@ -15,7 +15,7 @@ Located in the Workspace view of the Astro UI, the **Analytics** page contains a
 
 To view metrics for a given Deployment, click the **Analytics** button in the left-hand menu. From here, you can select a Deployment and time range to view metrics from:
 
-![Analytics menu location](/img/docs/access-analyics.png)
+![Analytics menu location](/img/docs/access-analytics.png)
 
 You can also access analytics for a specific Deployment from the Deployment's page:
 
