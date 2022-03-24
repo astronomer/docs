@@ -25,7 +25,56 @@ Deployment health can have one of two statuses:
 
 If your Deployment is unhealthy, we recommend checking the status of your tasks and waiting for a few minutes. If your Deployment is unhealthy for more than 5 minutes, we recommend [reviewing Scheduler logs](scheduler-logs.md) in the Cloud UI or reaching out to [Astronomer Support](https://support.astronomer.io).
 
-## Deployment Performance
+## Deployment Analytics
+
+Located in the Workspace view of the Astro UI, the **Analytics** page provides detailed metrics for all Deployments in a Workspace.
+
+To view these metrics for a given Deployment, click the **Analytics** button in the lefthand menu and select a Deployment from the dropdown menu:
+
+You can also access analytics for a specific Deployment from the Deployment's page:
+
+Use the following docs to learn more about each available metric.
+
+### DAG Runs
+
+These metrics contain information about your Deployment's DAG runs over a given period of time.
+
+- **DAG Runs**: This metric shows the total number of DAG runs.
+- **Runs per Status**: This metric shows the number of failed and successful DAG runs, plotted based on the DAG run start time.
+- **P90 Run Duration per Status**: This metric shows the 90th percentile of execution times for DAG runs, plotted based on the DAG run start time. In the example above, the P90 Run Duration per Status for successful DAG runs at 5:00 was 34 seconds, which means that 90% of those DAG runs finished in 34 seconds or less.
+
+### Task Runs
+
+These metrics contain information about your Deployment's task runs over a given period of time.
+
+- **Task Runs**: This metric charts the total number of task runs.
+- **Runs per Status**: This metric charts the number of failed and successful task runs, plotted based on the DAG run start time.
+- **P90 Run Duration per Status**: This metric charts the 90th percentile of execution times for task runs, plotted based on the task run start time. In the example above, the P90 Run Duration per Status for successful task runs at 5:00 was 4 seconds, which means that 90% of those task runs finished in 4 seconds or less.
+
+### Workers / Schedulers
+
+These metrics contain information about your worker and Scheduler Pods' resource usage over time. Different worker and Scheduler Pods will appear on these charts as differently colored lines.
+
+- **CPU Usage Per Pod (%)**: This metric charts each worker/ Scheduler pod's CPU usage as a percentage of the maximum allowed CPU usage per Pod. Different worker/ Scheduler Pods will appear on this chart as differently colored lines.
+- **Memory Usage Per Pod (MB)**: This metric charts each worker/ Scheduler Pod's memory usage over time. The maximum allowed memory per Pod is charted as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines.
+- **Network Usage Per Pod (MB)**: This metric charts each worker/ Scheduler Pod's network usage over time.
+- **Pod Count per Status**: This metric charts the number of worker/ Scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of container state is also the Pod state. For more information about container states, read the [Kubernetes Documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
+- **Scheduler Heartbeat (_Scheduler Only_)**: A Scheduler emits a heartbeat at a regular rate to signal that it's healthy to other Airflow components. This metric charts the number of Scheduler heartbeats over a given time.
+
+    A Scheduler is considered "Unhealthy" if it has not emitted a heartbeat for over 1 minute. The lack of a Scheduler heartbeat is expected during a code push, but erratic restarts or an "Unhealthy" state that persists for a significant amount of time is worth investigating further.
+
+### Pools
+
+These metrics contain information about your Deployment's configured Airflow pools. They can give you insight into how your DAGs are handling concurrency.
+
+- **Status Count for ``<pool-name>``**: This metric charts both the number of open slots in your pool and the number of tasks in each pool state:
+
+    - **Open**: The number of available slots in the pool
+    - **Queued**: The number of task instances which are occupying a pool slot and waiting to be picked up by a worker
+    - **Running**: The number of tasks instances which are occupying a pool slot and running
+    - **Starving**: The number of tasks that can't be scheduled when there are 0 available pool slots
+
+## Deployment Overview
 
 Each Deployment includes four high-level performance charts which you can view from both the **Deployments** menu and individual Deployment pages. They include:
 
@@ -128,4 +177,4 @@ The bar chart on the left shows your Organization's total task runs per day for 
 
 The legend on the right side of the menu shows the colors used for each Deployment. This legend shows each Deployment's total sum of successful task runs over the last 31 days. The daily numbers on the left bar chart add up to the monthly total per Deployment on the right.
 
-To export this data as a `.csv` file, click the **Export** button above the legend. 
+To export this data as a `.csv` file, click the **Export** button above the legend.
