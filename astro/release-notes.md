@@ -16,6 +16,13 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.0 ([Release notes](cli-release-notes.md))
 
+## March 25, 2022
+
+### Monitor Deployments with a Dedicated Analytics Page
+
+
+### Increase Max Node Count for Clusters
+
 ## March 17, 2022
 
 ### Export Task Usage as a CSV File
