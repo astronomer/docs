@@ -52,7 +52,7 @@ These metrics contain information about your worker and Scheduler Pods' resource
 
 #### Available Metrics
 
-- **CPU Usage Per Pod (%)**: This metric charts a worker's peak CPU usage over given time interval. The maximum allowed CPUs per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines. This metric should be at or below 50% at any given time.
+- **CPU Usage Per Pod (%)**: This metric charts a worker's peak CPU usage over a given time interval. The maximum allowed CPUs per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines. This metric should be at or below 50% at any given time.
 - **Memory Usage Per Pod (MB)**: This metric charts a worker's peak memory usage over a given time interval. The maximum allowed memory per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines. This metric should be at or below 50% of your total allowed memory at any given time.
 
     :::info
@@ -60,7 +60,7 @@ These metrics contain information about your worker and Scheduler Pods' resource
     :::
 
 - **Network Usage Per Pod (MB)**: This metric charts each worker/ Scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
-- **Pod Count per Status**: This metric charts the number of worker/ Scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of container state is also the Pod state. For more information about container states, read the [Kubernetes Documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
+- **Pod Count per Status**: This metric charts the number of worker/ Scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. For more information about container states, read the [Kubernetes Documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
 
     If a pod is stuck in a `Waiting` state, it could indicate that your Deployment did not successfully pull and run your Runtime image.
 
