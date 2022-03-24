@@ -31,8 +31,8 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
 #### Available Metrics
 
-- **DAG/ Task Runs**: This metric shows the total number of DAG/ task runs.
-- **Runs per Status**: This metric shows the number of failed and successful DAG/ task runs, plotted based on the DAG/ task run start time. Use this metric to see exactly when recent DAG/ task runs succeeded or failed.
+- **DAG/ Task Runs**: This metric graphs the total number of DAG/ task runs.
+- **Runs per Status**: This metric graphs the number of failed and successful DAG/ task runs, plotted based on the DAG/ task run start time. Use this metric to see exactly when recent DAG/ task runs succeeded or failed.
 
   :::caution
 
@@ -40,43 +40,48 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
   :::
 
-- **P90 Run Duration per Status**: This metric shows the 90th percentile of execution times for DAG/ task runs, plotted based on the DAG/ task run start time. In the example above, the P90 Run Duration per Status for successful DAG/ task runs at 5:00 was 34 seconds, which means that 90% of those DAG/ task runs finished in 34 seconds or less.
+- **P90 Run Duration per Status**: This metric graphs the 90th percentile of execution times for DAG/ task runs, plotted based on the DAG/ task run start time. In the example above, the P90 Run Duration per Status for successful DAG/ task runs at 5:00 was 34 seconds, which means that 90% of those DAG/ task runs finished in 34 seconds or less.
 
     This metric can both help you understand how your pipelines are performing overall, as well as identify DAG/ task runs that didn't result in a failure but still took longer to run than expected.
 
 ### Workers / Schedulers
 
-These metrics contain information about your worker and Scheduler Pods' resource usage over time. Different worker and Scheduler Pods will appear on these charts as differently colored lines.
+These metrics contain information about the Kubernetes Pods running your workers and Schedulers. Different worker and Scheduler Pods will appear on these charts as differently colored lines.
 
 ![Worker analytics in the Astro UI](/img/docs/analyics-workers.png)
 
 #### Available Metrics
 
-- **CPU Usage Per Pod (%)**: This metric charts a worker's peak CPU usage over a given time interval. The maximum allowed CPUs per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines. This metric should be at or below 50% at any given time.
-- **Memory Usage Per Pod (MB)**: This metric charts a worker's peak memory usage over a given time interval. The maximum allowed memory per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines. This metric should be at or below 50% of your total allowed memory at any given time.
+- **CPU Usage Per Pod (%)**: This metric graphs a worker's peak CPU usage over a given time interval. The maximum allowed CPUs per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines.
+
+    This metric should be at or below 90% at any given time. If a Pod surpasses 90% usage, the line in the graph will turn red.  
+
+- **Memory Usage Per Pod (MB)**: This metric graphs a worker's peak memory usage over a given time interval. The maximum allowed memory per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines. This metric should be at or below 50% of your total allowed memory at any given time.
+
+    This metric should be at or below 90% at any given time. If a Pod surpasses 90% usage, the line in the graph will turn red.  
 
     :::info
     The number of Celery workers per Deployment autoscales based on a combination of worker concurrency and the number of `running` and `queued` tasks, which means that the total available CPU and memory for a single Deployment may change at any given time.
     :::
 
-- **Network Usage Per Pod (MB)**: This metric charts each worker/ Scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
-- **Pod Count per Status**: This metric charts the number of worker/ Scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. For more information about container states, read the [Kubernetes Documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
+- **Network Usage Per Pod (MB)**: This metric graphs each worker/ Scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
+- **Pod Count per Status**: This metric graphs the number of worker/ Scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. For more information about container states, read the [Kubernetes Documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
 
     If a pod is stuck in a `Waiting` state, it could indicate that your Deployment did not successfully pull and run your Runtime image.
 
-- **Scheduler Heartbeat (_Scheduler Only_)**: A Scheduler emits a heartbeat at a regular rate to signal that it's healthy to other Airflow components. This metric charts the number of Scheduler heartbeats over a given time.
+- **Scheduler Heartbeat (_Scheduler Only_)**: A Scheduler emits a heartbeat at a regular rate to signal that it's healthy to other Airflow components. This metric graphs a Scheduler's average heartbeats per minute over a given time.
 
-    A Scheduler is considered "Unhealthy" if it has not emitted a heartbeat for over 1 minute. The lack of a Scheduler heartbeat is expected during a code push, but erratic restarts or an "Unhealthy" state that persists for a significant amount of time is worth investigating further.
+   On average, a Scheduler should emit ~11-12 heartbeats per minute. A Scheduler is considered "unhealthy" if it has not emitted a heartbeat for over 1 minute. The lack of a Scheduler heartbeat is expected during a code push, but erratic restarts or an "Unhealthy" state that persists for a significant amount of time is worth investigating further.
 
 ### Pools
 
-These metrics contain information about your Deployment's configured Airflow pools. They can give you insight into how your DAGs are handling concurrency.
+These metrics contain information about your Deployment's configured [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html). They can give you insight into how your DAGs are handling concurrency.
 
 ![Pool analytics in the Astro UI](/img/docs/analyics-pools.png)
 
 #### Available Metrics
 
-- **Status Count for `<pool-name>`**: This metric charts both the number of open slots in your pool and the number of tasks in each pool state:
+- **Status Count for `<pool-name>`**: This metric graphs both the number of open slots in your pool and the number of tasks in each pool state:
 
     - **Open**: The number of available slots in the pool
     - **Queued**: The number of task instances which are occupying a pool slot and waiting to be picked up by a worker
