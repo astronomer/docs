@@ -10,7 +10,7 @@ description: A real-time reference of the latest features and bug fixes in Astro
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes officially released to Astro.
 
-If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer Support](https://support.astronomer.io).
+If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
 **Latest Runtime Version**: 4.2.0 ([Release notes](runtime-release-notes.md))
 
@@ -20,8 +20,15 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### Monitor Deployments with a Dedicated Analytics Page
 
+The Astro UI now includes an **Analytics** page that contains a suite of metrics for your Deployments. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time. For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
 
-### Increase Max Node Count for Clusters
+### Modify the Max Node Count for Clusters
+
+By default, Clusters have a max node count of 20. To help scale your Clusters for their specific use cases, you can now change the max node count of a new or existing Cluster to any value from 2 to 100. To update this setting for a Cluster, reach out to [Astronomer support](https://support.astronomer.io) and provide the name of your cluster and the desired max node count.
+
+### Additional Improvements
+
+- In **Resource Settings**, the maximum allowed value for **Worker Resources** has been increased to 400 AU.
 
 ## March 17, 2022
 

@@ -31,6 +31,7 @@ To create a new Cluster in your Organization, you must first reach out to your A
 - Your preferred Astro Cluster name.
 - The AWS region that you want to host your Cluster in.
 - Your preferred node instance type.
+- Your preferred max node count (the default is 20).
 
 If not specified, we will create a Cluster with two `m5.xlarge` nodes in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS Resource Reference](resource-reference-aws.md).
 
