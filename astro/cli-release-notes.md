@@ -17,7 +17,7 @@ Release date: March 17, 2022
 
 :::info
 
-Astro CLI 1.3.2 is a direct patch replacement for 1.3.1, which is no longer available for download because it includes a critical bug related to `astrocloud dev parse/pytest`. If you are currently using Astro CLI 1.3.1, then we recommend upgrading as soon as possible to 1.3.2+ to receive important bug fixes.
+Astro CLI 1.3.2 is a direct patch replacement for 1.3.1, which is no longer available for download because it includes a critical bug related to `astrocloud dev parse/pytest`. If you are currently using Astro CLI 1.3.1, then we recommend upgrading to 1.3.2+ as soon as possible to receive important bug fixes.
 
 :::
 
