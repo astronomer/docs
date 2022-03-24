@@ -27,13 +27,13 @@ If your Deployment is unhealthy, we recommend checking the status of your tasks 
 
 ## Deployment Analytics
 
-Located in the Workspace view of the Astro UI, the **Analytics** page provides detailed metrics for all Deployments in a Workspace.
+Located in the Workspace view of the Astro UI, the **Analytics** page provides detailed metrics for all Deployments in a Workspace. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are pulled from Splunk and Thanos in real time, you can use this page to detect irregularities in your pipelines or infrastructure at the moment they happen.
 
-To view these metrics for a given Deployment, click the **Analytics** button in the lefthand menu and select a Deployment from the dropdown menu:
+To view metrics for a given Deployment, click the **Analytics** button in the lefthand menu and select a Deployment and time range from the dropdown menus:
 
 You can also access analytics for a specific Deployment from the Deployment's page:
 
-Use the following docs to learn more about each available metric.
+Use the following topics to learn more about each available metric.
 
 ### DAG Runs
 
