@@ -298,7 +298,7 @@ If your environment variables contain sensitive information or credentials that 
 
 ### Confirm your environment variables were applied
 
-By default, the Airflow Configuration values are hidden in both the localhost and Astro deployment Airflow UIs. In order to view these settings in the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile, Astro Deployment, or `.env` (local only). 
+By default, the Airflow Configuration values are hidden in both the localhost and Astro deployment Airflow UIs. In order to view these settings in the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile, Astro Deployment, or `.env` file (local only). 
 
 Alternatively, to confirm that the environment variables you just set were applied in your local Airflow environment, first run:
 
