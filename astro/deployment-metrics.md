@@ -19,7 +19,7 @@ To view metrics for a given Deployment, click the **Analytics** button in the le
 
 You can also access analytics for a specific Deployment from the Deployment's page:
 
-![Analytics menu location](/img/docs/access-analyics-deployments.png)
+![Analytics menu location](/img/docs/access-analytics-deployments.png)
 
 The following topics contain information about each available metric.
 
