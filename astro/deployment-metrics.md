@@ -60,9 +60,11 @@ These metrics contain information about the Kubernetes Pods running your workers
 
     This metric should be at or below 90% at any given time. If a Pod surpasses 90% usage, the line in the graph will turn red.  
 
-    :::info
-    The number of Celery workers per Deployment autoscales based on a combination of worker concurrency and the number of `running` and `queued` tasks, which means that the total available CPU and memory for a single Deployment may change at any given time.
-    :::
+  :::info
+
+  The number of Celery workers per Deployment autoscales based on a combination of worker concurrency and the number of `running` and `queued` tasks, which means that the total available CPU and memory for a single Deployment may change at any given time.
+
+  :::
 
 - **Network Usage Per Pod (MB)**: This metric graphs each worker/ Scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
 - **Pod Count per Status**: This metric graphs the number of worker/ Scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. For more information about container states, read the [Kubernetes Documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
