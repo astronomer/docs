@@ -11,9 +11,9 @@ The Cloud UI exposes a suite of observability metrics that show real-time data r
 
 ## Deployment Analytics
 
-Located in the Workspace view of the Astro UI, the **Analytics** page contains a suite of metrics for your Deployments. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are pulled from Splunk and Thanos in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
+Located in the Workspace view of the Astro UI, the **Analytics** page contains a suite of metrics for your Deployments. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
 
-To view metrics for a given Deployment, click the **Analytics** button in the left-hand menu. From here, you can select a Deployment and time range to view metrics from:
+To view metrics for a given Deployment, click the **Analytics** button in the left-hand menu. From here, you can select a Deployment and a time range for your metrics:
 
 ![Analytics menu location](/img/docs/access-analytics.png)
 
