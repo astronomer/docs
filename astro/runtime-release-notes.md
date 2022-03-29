@@ -18,7 +18,7 @@ For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime
 
 ### Additional Improvements
 
-- Upgraded the `astronomer-providers` package to v1.1.0. In addition to bug fixes and performance improvements, this release includes deferrable versions of the following operators:
+- Upgraded the `astronomer-providers` package to v1.1.0 ([CHANGELOG](https://github.com/astronomer/astronomer-providers/releases/tag/1.1.0)). In addition to bug fixes and performance improvements, this release includes deferrable versions of the following operators:
 
     - `S3PrefixSensor` (`S3PrefixSensorAsync`).
     - `GCSObjectsWithPrefixExistenceSensor` (`GCSObjectsWithPrefixExistenceSensorAsync`)
