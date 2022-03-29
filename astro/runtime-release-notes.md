@@ -18,11 +18,15 @@ For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime
 
 ### Additional Improvements
 
-- Upgraded the `astronomer-providers` package to v1.1.0 ([CHANGELOG](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#110-2022-03-23)). In addition to bug fixes and performance improvements, this release includes 7 new deferrable versions of Airflow operators. Some of these include:
+- Upgraded the `astronomer-providers` package to v1.1.0 ([CHANGELOG](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#110-2022-03-23)). In addition to bug fixes and performance improvements, this release includes 7 new deferrable operators:
 
-    - `S3PrefixSensor` (`S3PrefixSensorAsync`)
-    - `GCSObjectsWithPrefixExistenceSensor` (`GCSObjectsWithPrefixExistenceSensorAsync`)
-    - `BigQueryTableExistenceSensor` (`BigQueryTableExistenceSensorAsync`)
+    - `S3KeySizeSensorAsync`
+    - `S3KeysUnchangedSensorAsync`
+    - `S3PrefixSensorAsync`
+    - `GCSObjectsWithPrefixExistenceSensorAsync`
+    - `GCSObjectUpdateSensorAsync`
+    - `GCSUploadSessionCompleteSensorAsync`
+    - `BigQueryTableExistenceSensorAsync`
 
 - Upgraded `openlineage-airflow` to v0.6.2.
 
