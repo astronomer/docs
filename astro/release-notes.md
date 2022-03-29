@@ -12,9 +12,9 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Runtime Version**: 4.2.0 ([Release notes](runtime-release-notes.md))
+**Latest Runtime Version**: 4.2.1 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.3.0 ([Release notes](cli-release-notes.md))
+**Latest CLI Version**: 1.3.2 ([Release notes](cli-release-notes.md))
 
 ## March 25, 2022
 

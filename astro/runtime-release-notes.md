@@ -11,6 +11,21 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
 
+## Astro Runtime 4.2.1
+
+- Release date: March 28, 2022
+- Airflow version: 2.2.4
+
+### Additional Improvements
+
+- Upgraded the `astronomer-providers` package to v1.1.0. In addition to bug fixes and performance improvements, this release includes deferrable versions of the following operators:
+
+    - `S3PrefixSensor` (`S3PrefixSensorAsync`).
+    - `GCSObjectsWithPrefixExistenceSensor` (`GCSObjectsWithPrefixExistenceSensorAsync`)
+    - `BigQueryTableExistenceSensor` (`BigQueryTableExistenceSensorAsync`)
+
+- Upgraded `openlineage-airflow` to v0.6.2.
+
 ## Astro Runtime 4.2.0
 
 - Release date: March 10, 2022
