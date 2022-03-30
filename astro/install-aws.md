@@ -12,7 +12,7 @@ We're excited to get you started with Astro on AWS. Below, you'll find instructi
 At a high-level, we'll ask that you come prepared with a new AWS account. From there, you can expect to:
 - Create an account on Astro.
 - Share AWS account information with our team.
-- Create an IAM role that Astro can assume within your new AWS account.
+- Create a cross-account IAM role that Astro can assume within your new AWS account.
 
 Astronomer will then create a Cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro Cluster, [reach out to us](https://support.astronomer.io).
 
@@ -90,13 +90,13 @@ If not specified, we will create a Cluster with two `m5.xlarge` nodes in `us-eas
 
 From here, our team will provision an Astro Cluster according to the specifications you provided.
 
-## Step 3: Create an IAM Role for Astro
+## Step 3: Create a cross-account IAM Role for Astro
 
 Once your Astro Cluster has been created, an Astronomer team member will provide you with an [External ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) that will allow Astronomer to connect to your AWS account. Save the External ID as a secret or in an otherwise secure format for use in the AWS CLI.
 
-Then, click the link below to create an [admin IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console) for Astro in your new AWS account:
+Then, click the link below to create an [cross-account admin IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console) for Astro in your new AWS account:
 
-- [Create IAM Role](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402)
+- [Create cross-account IAM Role](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402)
 
 Alternatively, run the following AWS CLI command:
 
@@ -154,7 +154,7 @@ To provision additional Clusters, complete the setup in [Create a Cluster](creat
 
 ## Step 4: Let Astronomer Complete the Install
 
-Let our team know once you've created the admin IAM role for Astro. From there, we will finish creating an Astronomer Cluster in your AWS account that supports Apache Airflow environments.
+Let our team know once you've created the cross-account IAM role for Astro. From there, we will finish creating an Astronomer Cluster in your AWS account that supports Apache Airflow environments.
 
 This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
 
