@@ -32,9 +32,11 @@ Starting on March 31st and continuing for the next few days, all Astro Deploymen
 [2022-03-24, 23:40:01 UTC] {client.py:74} INFO - Constructing openlineage client to send events to https://api.astro-astronomer.datakin.com
 ```
 
-Note that Astro will upgrade your Deployments on Runtime 4.2.0+ only after you complete an arbitrary [code push](deploy-code). Because Astronomer is applying this change to each customer individually over time, the exact date when you will start seeing these logs is variable.
+A few additional notes about this upgrade:
 
-This change also introduces a new automatic change to behavior for Deployments. Now, whenever you restart a Deployment on Runtime 4.2.0+ via a code push, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate other affected Deployments restarting.
+- AYour Deployments on Runtime 4.2.0+ will be updated only after you complete an arbitrary [code push](deploy-code).
+- Because Astronomer is applying this change to each customer individually over time, the exact date that you will start seeing these logs is variable.
+- When you restart a Deployment on Runtime 4.2.0+ via a code push, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate other affected Deployments restarting.
 
 ### Additional Improvements
 
