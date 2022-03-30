@@ -34,7 +34,7 @@ Starting on March 31st and continuing for the next few days, all Astro Deploymen
 
 A few additional notes about this upgrade:
 
-- AYour Deployments on Runtime 4.2.0+ will be updated only after you complete an arbitrary [code push](deploy-code).
+- Your Deployments on Runtime 4.2.0+ will be updated only after you complete an arbitrary [code push](deploy-code).
 - Because Astronomer is applying this change to each customer individually over time, the exact date that you will start seeing these logs is variable.
 - When you restart a Deployment on Runtime 4.2.0+ via a code push, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate other affected Deployments restarting.
 
