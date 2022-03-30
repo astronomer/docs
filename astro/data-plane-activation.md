@@ -8,6 +8,10 @@ description: Prepare for the activation of your data plane
 ## Data Plane Activation
 Astro is a modern data orchestration platform, powered by Apache Airflow, that enables the entire data team to build, run, and observe data pipelines. The **architecture of Astro** includes a single-tenant Data Plane in your cloud and a common control plane in Astronomer’s cloud.
 
+<div class="text--center">
+  <img src="/img/docs/architecture-overview.png" alt="High level overview of Astro's architecture" />
+</div>
+
 ### What to Expect
 We’re excited to get you started with Astro! Getting your data plane activated is simple and will allow you to see our modern data orchestration experience hands-on.
 When you meet with one of our engineers to activate your data plane, **expect it to take about an hour**. By the end of the session, you should have your **first pipeline deployed in your own Astro environment**!
