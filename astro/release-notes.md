@@ -26,14 +26,16 @@ The Astro UI now includes an **Analytics** page that contains a suite of metrics
 
 As part of [Astronomer's acquisition of Datakin](https://www.astronomer.io/blog/astronomer-acquires-datakin-the-data-lineage-tool/), data lineage features are coming soon to Astro. The first step in enabling these features is to implement lineage backends for existing Astro customers.
 
-Starting on March 31st and continuing for the next few days, all Astro Deployments on Runtime 4.2.0+ will be upgraded to include a lineage backend. As a result of this change, you might start seeing lineage-related Scheduler logs such as the following:
+Starting on March 31st and continuing over the next couple of weeks, all Astro Deployments on Runtime 4.2.0+ will be upgraded to emit lineage events. As a result of this change, you might start seeing lineage-related Scheduler logs such as the following:
 
 ```text
+[2022-03-30, 12:17:39 UTC] {great_expectations_extractor.py:17} INFO - Did not find great_expectations_provider library or failed to import it
 [2022-03-24, 23:40:01 UTC] {client.py:74} INFO - Constructing openlineage client to send events to https://api.astro-astronomer.datakin.com
 ```
 
 A few additional notes about this upgrade:
 
+- You can ignore any lineage logs that indicate an error or failed process, such as the first line in the example logs above. These logs will more accurately reflect the state of your lineage functionality once lineage features are launched on Astro.
 - Your Deployments on Runtime 4.2.0+ will be updated only after you complete an arbitrary [code push](deploy-code).
 - Because Astronomer is applying this change to each customer individually over time, the exact date that you will start seeing these logs is variable.
 - When you restart a Deployment on Runtime 4.2.0+ via a code push, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate other affected Deployments restarting.
