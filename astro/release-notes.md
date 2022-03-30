@@ -16,6 +16,47 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.2 ([Release notes](cli-release-notes.md))
 
+## March 31, 2022
+
+### Monitor Deployments with a Dedicated Analytics Page
+
+The Astro UI now includes an **Analytics** page that contains a suite of metrics for your Deployments. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time. For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
+
+### Lineage Backend Upgrade Scheduled for All Organizations
+
+As part of [Astronomer's acquisition of Datakin](https://www.astronomer.io/blog/astronomer-acquires-datakin-the-data-lineage-tool/), data lineage features are coming soon to Astro. The first step in enabling these features is to implement lineage backends for existing Astro customers.
+
+Starting on March 31st and continuing for the next few days, all Astro Deployments on Runtime 4.2.0+ will be upgraded to include a lineage backend. As a result of this change, you might start seeing lineage-related Scheduler logs such as the following:
+
+```text
+[2022-03-24, 23:40:01 UTC] {client.py:74} INFO - Constructing openlineage client to send events to https://api.astro-astronomer.datakin.com
+```
+
+Note that Astro will upgrade your Deployments on Runtime 4.2.0+ only after you complete an arbitrary [code push](deploy-code). Because Astronomer is applying this change to each customer individually over time, the exact date when you will start seeing these logs is variable.
+
+This change also introduces a new automatic change to behavior for Deployments. Now, whenever you restart a Deployment on Runtime 4.2.0+ via a code push, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate other affected Deployments restarting.
+
+### Additional Improvements
+
+- The Cloud UI now includes a button that contains links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
+
+    ![Runtime Tag banner](/img/release-notes/support-button.png)
+
+- You can now create new Clusters in:
+
+    - `af-south-1` (Cape Town)
+    - `ap-east-1` (Hong Kong)
+    - `ap-northeast-3` (Osaka)
+    - `me-south-1` (Bahrain)
+
+- You can now use the following node instance types for worker nodes:
+
+    - `m6i.large`
+    - `c6i.large`
+    - `r6i.large`
+
+    Note that some regions do not support these node instances. For a full list of regional compatibility, see [AWS Resource Referece](resource-reference-aws.md#-rds-instance-type).
+
 ## March 25, 2022
 
 ### Modify the Max Node Count for Clusters
