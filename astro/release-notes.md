@@ -18,9 +18,11 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ## March 31, 2022
 
-### Monitor Deployments with a Dedicated Analytics Page
+### New Analytics Page in Cloud UI to Monitor Deployments
 
-The Astro UI now includes an **Analytics** page that contains a suite of metrics for your Deployments. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time. For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
+The Cloud UI now includes a dedicated **Analytics** page that contains various Deployment-level metrics. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time.
+
+For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
 
 ### Lineage Backend Upgrade Scheduled for All Organizations
 
@@ -36,30 +38,15 @@ Starting on March 31st and continuing over the next couple of weeks, all Astro D
 A few additional notes about this upgrade:
 
 - You can ignore any lineage logs that indicate an error or failed process, such as the first line in the example logs above. These logs will more accurately reflect the state of your lineage functionality once lineage features are launched on Astro.
-- Your Deployments on Runtime 4.2.0+ will be updated only after you complete an arbitrary [code push](deploy-code).
+- Deployments on Runtime 4.2.0+ will be updated to emit data lineage events only after you [push code](deploy-code). Until you do so, this change will not be applied.
 - Because Astronomer is applying this change to each customer individually over time, the exact date that you will start seeing these logs is variable.
-- When you restart a Deployment on Runtime 4.2.0+ via a code push, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate other affected Deployments restarting.
+- When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
 ### Additional Improvements
 
-- The Cloud UI now includes a button that contains links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
+- The Cloud UI now includes a button that links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
 
     ![Runtime Tag banner](/img/release-notes/support-button.png)
-
-- You can now create new Clusters in:
-
-    - `af-south-1` (Cape Town)
-    - `ap-east-1` (Hong Kong)
-    - `ap-northeast-3` (Osaka)
-    - `me-south-1` (Bahrain)
-
-- You can now use the following node instance types for worker nodes:
-
-    - `m6i.large`
-    - `c6i.large`
-    - `r6i.large`
-
-    Note that some regions do not support these node instances. For a full list of regional compatibility, see [AWS Resource Referece](resource-reference-aws.md#-rds-instance-type).
 
 ## March 25, 2022
 

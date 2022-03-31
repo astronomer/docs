@@ -46,12 +46,8 @@ Astro supports the following AWS regions:
 - `ap-northeast-1`
 - `ap-southeast-1`
 - `ap-northeast-2`
-- `ap-northeast-3`
 - `ap-southeast-2`
 - `ap-south-1`
-- `ap-east-1`
-- `af-south-1`
-- `me-south-1`
 
 Modifying the region of an existing Cluster on Astro is not supported. If you're interested in an AWS region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
 
@@ -93,80 +89,10 @@ For detailed information on each instance type, reference [AWS documentation](ht
 - t3.large
 - t3.2xlarge
 
-#### m6i
-
-- m6i.large
-- m6i.xlarge
-- m6i.2xlarge
-- m6i.4xlarge
-- m6i.8xlarge
-- m6i.12xlarge
-- m6i.16xlarge
-- m6i.24xlarge
-- m6i.32xlarge
-
-#### m6i
-
-- m6i.large
-- m6i.xlarge
-- m6i.2xlarge
-- m6i.4xlarge
-- m6i.8xlarge
-- m6i.12xlarge
-- m6i.16xlarge
-- m6i.24xlarge
-- m6i.32xlarge
-
-#### c6i
-
-- c6i.large
-- c6i.xlarge
-- c6i.2xlarge
-- c6i.4xlarge
-- c6i.8xlarge
-- c6i.12xlarge
-- c6i.16xlarge
-- c6i.24xlarge
-- c6i.32xlarge
-
-#### r6i
-
-- r6i.large
-- r6i.xlarge
-- r6i.2xlarge
-- r6i.4xlarge
-- r6i.8xlarge
-- r6i.12xlarge
-- r6i.16xlarge
-- r6i.24xlarge
-- r6i.32xlarge
-
-
 :::info
 
 Currently, a single Cluster on Astro cannot be configured with more than one node instance type. In early 2022, we expect to introduce support for Worker Queues, which will allow you to run Airflow Workers of varying node types and sizes within a single Deployment. If this is something your team is interested in, reach out to us - we'd love to hear from you.
 
-:::
-
-:::info
-
-`m6i`, `c6i`, and `r6i` nodes are unsupported in the following regions:
-
-- `af-south-1`
-- `ap-east-1`
-- `ap-northeast-3`
-- `ap-southeast-3`
-- `af-south-1`
-- `af-south-1`
-- `af-south-1`
-- `af-south-1`
-- `af-south-1`
-- `eu-north-1`
-- `eu-south-1`
-- `me-south-1`
-
-
-Only `c6i` and `r6i` nodes are unsupported in `eu-central-1`.
 :::
 
 :::tip
