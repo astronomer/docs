@@ -11,7 +11,7 @@ The Cloud UI exposes a suite of observability metrics that show real-time data r
 
 ## Deployment Analytics
 
-Located in the Workspace view of the Astro UI, the **Analytics** page contains a suite of metrics for your Deployments. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
+Located in the Workspace view of the Cloud UI, the **Analytics** page contains a suite of metrics for your Deployments. This page includes metrics that give you insight into the performance of both your data pipelines and infrastructure. Because metrics are collected in real time, you can use this page to detect irregularities in your pipelines or infrastructure as they happen.
 
 To view metrics for a given Deployment, click the **Analytics** button in the left-hand menu. From here, you can select a Deployment and a time range for your metrics:
 
@@ -27,7 +27,7 @@ The following topics contain information about each available metric.
 
 These metrics contain information about your Deployment's DAG runs and task runs over a given period of time.
 
-![DAG run analytics in the Astro UI](/img/docs/analytics-dag-task-runs.png)
+![DAG run analytics in the Cloud UI](/img/docs/analytics-dag-task-runs.png)
 
 #### Available Metrics
 
@@ -48,7 +48,7 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
 These metrics contain information about the Kubernetes Pods running your workers and Schedulers. Different worker and Scheduler Pods will appear on these charts as differently colored lines.
 
-![Worker analytics in the Astro UI](/img/docs/analytics-workers.png)
+![Worker analytics in the Cloud UI](/img/docs/analytics-workers.png)
 
 #### Available Metrics
 
@@ -79,7 +79,7 @@ These metrics contain information about the Kubernetes Pods running your workers
 
 These metrics contain information about your Deployment's configured [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html). They can give you insight into how your DAGs are handling concurrency.
 
-![Pool analytics in the Astro UI](/img/docs/analytics-pools.png)
+![Pool analytics in the Cloud UI](/img/docs/analytics-pools.png)
 
 #### Available Metrics
 
