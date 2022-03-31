@@ -17,6 +17,7 @@ Release date: March 31, 2022
 
 ### Additional Improvements
 
+- The `astrocloud dev start` command should now be ~30 seconds faster
 - Error messages in `astrocloud dev parse` now indicate which DAGs are generating errors.
 - When you run `astrocloud dev init`, the new example pytests' error messages now provide more information about which part of your code caused an error. 
 
