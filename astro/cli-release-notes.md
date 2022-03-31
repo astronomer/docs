@@ -18,7 +18,7 @@ Release date: March 31, 2022
 ### Additional Improvements
 
 - Error messages in `astrocloud dev parse` now indicate which DAGs are generating errors.
-- When you run `astrocloud dev init`, pytest error messages now provide more information about which part of your code caused an error. 
+- When you run `astrocloud dev init`, the new example pytests' error messages now provide more information about which part of your code caused an error. 
 
 ### Bug Fixes
 
