@@ -20,7 +20,9 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### New Analytics Page in Cloud UI to Monitor Deployments
 
-The Cloud UI now includes a dedicated **Analytics** page that contains various Deployment-level metrics. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time.
+The Cloud UI now includes a dedicated **Analytics** page that contains various Deployment-level metrics. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time:
+
+![Analytics menu location](/img/docs/access-analytics.png)
 
 For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
 
