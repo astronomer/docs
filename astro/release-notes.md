@@ -52,6 +52,13 @@ For more information about what to expect when lineage tools go live, read Astro
 
     ![Runtime Tag banner](/img/release-notes/support-button.png)
 
+- You can now [create new Clusters](create-cluster.md) in:
+
+    - `af-south-1` (Cape Town)
+    - `ap-east-1` (Hong Kong)
+    - `ap-northeast-3` (Osaka)
+    - `me-south-1` (Bahrain)
+
 ## March 25, 2022
 
 ### Modify the Max Node Count for Clusters
