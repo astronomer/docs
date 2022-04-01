@@ -84,7 +84,7 @@ For the AWS account you created as a prerequisite, provide Astronomer with:
 - Your preferred Astro Cluster name.
 - The AWS region that you want to host your Cluster in.
 - Your preferred node instance type.
-- Your preferred max node count. 
+- Your preferred max node count.
 
 If not specified, we will create a Cluster with two `m5.xlarge` nodes in `us-east-1` by default. For information on all supported regions and configurations, see [AWS Resource Reference](resource-reference-aws.md).
 
@@ -151,6 +151,18 @@ The output of the last command is a YAML file containing information about the r
 ```
 
 To provision additional Clusters, complete the setup in [Create a Cluster](create-cluster.md) after completing your initial installation.
+
+:::caution
+
+Some AWS regions that Astronomer supports are disabled by default on AWS, including:
+
+- `af-south-1` (Cape Town)
+- `ap-east-1` (Hong Kong)
+- `me-south-1` (Bahrain)
+
+If you're setting up your first Cluster in any of these regions, you need to complete the additional setup as described in [Create a Cluster](create-cluster.md#edit-your-aws-trust-policy).
+
+:::
 
 ## Step 4: Let Astronomer Complete the Install
 
