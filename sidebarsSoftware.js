@@ -30,7 +30,6 @@ module.exports = {
       'manage-airflow-versions',
       'access-airflow-database',
       'airflow-api',
-      'cli-podman',
       {
       type: 'category',
       label: 'Write DAGs',
@@ -40,6 +39,7 @@ module.exports = {
       'kubernetes-executor',
         ],
       },
+      'cli-podman',
     ],
     },
     {
@@ -48,17 +48,6 @@ module.exports = {
       items: [
       'deploy-cli',
       'ci-cd',
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Manage Deployments',
-      items: [
-      'configure-deployment',
-      'secrets-backend',
-      'environment-variables',
-      'deploy-git-sync',
-      'deploy-nfs',
       ],
     },
     {
@@ -95,6 +84,17 @@ module.exports = {
         'upgrade-astronomer-stable',
         'houston-api',
         'configure-platform-resources',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Deployment Management',
+          items: [
+          'configure-deployment',
+          'secrets-backend',
+          'environment-variables',
+          'deploy-git-sync',
+          'deploy-nfs',
           ],
         },
         {
