@@ -114,6 +114,8 @@ Maintenance is discontinued the last day of the month for a given version. For e
 
 ## Astronomer Certified Lifecycle Schedule
 
+<!--- Version-specific -->
+
 The following tables contain the exact lifecycle for each published version of Astronomer Certified. These timelines are based on the LTS and Stable release channel maintenance policies.
 
 ### Stable Releases
