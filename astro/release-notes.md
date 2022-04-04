@@ -46,19 +46,23 @@ A few additional notes about this upgrade:
 
 For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://www.astronomer.io/guides/airflow-openlineage).
 
+### New AWS Regions Available
+
+You can now [create new Clusters](create-cluster.md) in:
+
+- `af-south-1` (Cape Town)
+- `ap-east-1` (Hong Kong)
+- `ap-northeast-3` (Osaka)  
+- `me-south-1` (Bahrain)
+
+For a full list of AWS regions supported on Astro, see [AWS Resource Reference](https://docs.astronomer.io/resource-reference-aws.md#aws-region).
+
 ### Additional Improvements
 
 - The Cloud UI now includes a button that links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
 
     ![Runtime Tag banner](/img/release-notes/support-button.png)
-
-- You can now [create new Clusters](create-cluster.md) in:
-
-    - `af-south-1` (Cape Town)
-    - `ap-east-1` (Hong Kong)
-    - `ap-northeast-3` (Osaka)
-    - `me-south-1` (Bahrain)
-
+    
 ## March 25, 2022
 
 ### Modify the Max Node Count for Clusters

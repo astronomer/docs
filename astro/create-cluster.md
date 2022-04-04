@@ -39,7 +39,7 @@ From there, your Astronomer representative will provide you with a unique `Exter
 
 ## Step 2: Edit Your AWS Trust Policy
 
-In the AWS IAM console, [edit the `astronomer-remote-management` trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) so that Astronomer has permission to manage the new Cluster in your Cloud.
+In the AWS IAM console, [edit the `astronomer-remote-management` trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) to include new trust policies and ensure that Astronomer has permission to manage your new Cluster.
 
 To do this, add the External ID that corresponds to your new Cluster to the existing `sts:ExternalId` grouping. For example, your policy for two Astro Clusters might look like the following, with `<External-ID-2>` being the External ID for your new Cluster:
 
@@ -68,13 +68,14 @@ To do this, add the External ID that corresponds to your new Cluster to the exis
 
 Once you've modified your trust policy, click **Update Trust Policy** in the AWS Console to apply the new trust relationship.
 
-:::info Additional Setup for AWS Regions that are Disabled by Default
+### Additional Setup for AWS Regions that are Disabled by Default
 
-By default, some AWS regions that Astronomer supports are disabled by default on AWS. These include:
+By default, some AWS regions that Astronomer supports are [disabled by default on AWS](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable). These regions are:
 
-- `af-south-1` (Cape Town)
-- `ap-east-1` (Hong Kong)
-- `me-south-1` (Bahrain)
+- `af-south-1` - Africa (Cape Town)
+- `ap-east-1` - Asia Pacific (Hong Kong)
+- `me-south-1` - Middle East (Bahrain)
+- `eu-south-1` - Europe (Milan)
 
 To create a cluster in one of these regions, complete the following additional setup in your AWS account:
 
@@ -125,13 +126,11 @@ To create a cluster in one of these regions, complete the following additional s
     ```
 
 2. In the AWS Management Console, enable the desired region as described in [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable).
-3. Upgrade your [global endpoint session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-manage-tokens) to version 2, which is valid in all AWS regions, by running the following command:
+3. Upgrade your [global endpoint session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-manage-tokens) to version 2, which is valid in all AWS regions, by running the following command via the [AWS CLI](https://aws.amazon.com/cli/):
 
     ```sh
     aws iam set-security-token-service-preferences --global-endpoint-token-version v2Token
     ```
-
-:::
 
 ## Step 3: Confirm with Astronomer
 
