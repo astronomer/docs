@@ -99,5 +99,5 @@ After logging in, you should see the DAGs from your `dags` directory in the Airf
 Once you've successfully created a Software project on your local machine, we recommend reading the following:
 
 * [Customize Image](customize-image.md)
-* [Configure a Deployment](condifure-deployment.md)
-* [Deploy Code](deploy-code.md)
+* [Configure a Deployment](configure-deployment.md)
+* [Deploy Code](deploy-cli.md)
