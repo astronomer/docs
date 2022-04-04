@@ -97,7 +97,7 @@ Currently, a single Cluster on Astro cannot be configured with more than one nod
 
 :::tip
 
-With the exception of `m5d` nodes, all suppported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, we recommend modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes out-of-the-box.
+With the exception of `m5d` nodes, all suppported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, we recommend modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes out of the box.
 
 Astronomer plans to support optional ephemeral storage for all node instance types in the first half of 2022.
 
