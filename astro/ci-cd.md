@@ -227,8 +227,6 @@ To automate code deploys to a Deployment using a Docker-based [Drone CI](https:/
             from_secret: ${siteVariables.keyid}
           ASTRONOMER_KEY_SECRET:
             from_secret: ${siteVariables.keysecret}
-          ASTRONOMER_DEPLOYMENT_ID:
-            from_secret: ${siteVariables.deploymentid}
         when:
           event: push
           branch: [ main, release-* ]
