@@ -91,7 +91,7 @@ Given that this file will be committed to your version control tool and to Astro
 
 To add environment variables, declare an ENV statement with the environment variable key and value. Your Dockerfile might look like this:
 
-```
+```dockerfile
 FROM quay.io/astronomer/astro-runtime:2.1.1
 ENV AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG=1
 ENV AIRFLOW__CORE__DAG_CONCURRENCY=5

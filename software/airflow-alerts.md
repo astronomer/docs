@@ -106,7 +106,7 @@ If you want to limit failure alerts to the DAG-run level, you can instead set up
 
 The code in your DAG might look something like this ([source](https://github.com/apache/airflow/blob/v1-10-stable/airflow/utils/email.py#L41)):
 
-```py
+```python
      from airflow.models.email import send_email
      def new_email_alert(self, **kwargs):
      title = "TEST MESSAGE: THIS IS A MODIFIED TEST"

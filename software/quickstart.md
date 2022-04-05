@@ -70,7 +70,7 @@ astro dev init
 
 This will generate the following files:
 
-```py
+```python
 .
 ├── dags # Where your DAGs go
 │   └── example-dag.py # An example DAG that comes with the initialized project
@@ -92,7 +92,7 @@ This Docker image is hosted on [Astronomer's Docker Registry](https://quay.io/re
 
 The Docker image you'll find in your Dockerfile by default is:
 
-```
+```dockerfile
 FROM quay.io/astronomer/ap-airflow:latest-onbuild
 ```
 

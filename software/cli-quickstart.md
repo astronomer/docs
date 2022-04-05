@@ -140,7 +140,7 @@ Once the Astronomer CLI is installed, the next step is to initialize an Airflow 
     ```
 
     This will generate the following files in that directory:
-    ```py
+    ```python
     .
     ├── dags # Where your DAGs go
     │   └── example-dag.py # An example DAG that comes with the initialized project

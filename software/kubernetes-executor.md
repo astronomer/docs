@@ -68,7 +68,7 @@ Some tasks require a more specific pod configuration than other tasks. For insta
 
 2. Add the Executor config to the task and specify your custom pod template. It should look something like this:
 
-    ```py
+    ```python
     task_with_template = PythonOperator(
         task_id="task_with_template",
         python_callable=do_something,

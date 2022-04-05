@@ -156,7 +156,7 @@ For more information on the Airflow provider for Hashicorp Vault and how to furt
 
 To test Vault, write a simple DAG which calls your test secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
@@ -265,7 +265,7 @@ To test Parameter Store, write a simple DAG which calls your secret and add this
 
 For example, you can use the following DAG to print the value of an Airflow variable to your task logs:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
@@ -376,7 +376,7 @@ To test Secret Manager, [create a secret](https://cloud.google.com/secret-manage
 
 Once you create a test secret, write a simple DAG which calls the secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
@@ -491,7 +491,7 @@ To test your Key Vault setup on Astronomer locally, [create a new secret](https:
 
 Once you create a test secret, write a simple DAG which calls the secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime

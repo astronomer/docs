@@ -528,7 +528,7 @@ Initializes a new Airflow project in your working directory. The set of files ge
 
 When you run this command, the following skeleton files are generated in your current directory:
 
-```py
+```python
 .
 ├── dags # Where your DAGs go
 │   └── example-dag.py # An example DAG that comes with the initialized project

@@ -25,7 +25,7 @@ If you're upgrading an Astronomer Certified environment running on Docker, all y
 
     In your `Dockerfile`, replace the value in the existing `FROM` statement with the new Astronomer Certified Docker image you're upgrading to. For example, to upgrade to Airflow 2.1, your Dockerfile would include the following line:
 
-    ```
+    ```dockerfile
     FROM quay.io/astronomer/ap-airflow:2.1.0-buster-onbuild
     ```
 
