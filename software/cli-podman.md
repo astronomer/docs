@@ -80,7 +80,8 @@ To set up Podman for an Astronomer project:
     ```sh
     # Store the Identity for your Podman instance
     $ export CONTAINER_SSHKEY=<your-podman-identity>
-    # Ensure that all images created via `podman build` are readable by Software Deployments. Primarily for use in CI/CD pipelines which require use of the Podman CLI.
+    # Ensure that all images created via `podman build` are readable by Software Deployments. 
+    # Primarily for use in CI/CD pipelines which require use of the Podman CLI.
     $ export BUILDAH_FORMAT=docker
     ```
 
