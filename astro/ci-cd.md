@@ -198,3 +198,39 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
                  only:
                    - main
     `}</code></pre>
+
+### Drone
+
+To automate code deploys to a Deployment using a Docker-based [Drone CI](https://circleci.com/) pipeline, complete the following setup in a Git-based repository that hosts an Astro project. Note that this setup assumes that you already have an operational Drone server and runners.  
+
+1. Set the following environment variables as secrets in your Git repository:
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
+
+2. In the top level of your Git repository, create a file called `.drone.yml` that includes the following configuration:
+
+    ```yaml
+    kind: pipeline
+    type: docker
+    name: deploy
+
+    steps:
+      - name: deploy
+        image: debian
+        commands:
+          - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz'
+          - tar xzf astrocloudcli.tar.gz
+          - ./astrocloud deploy ${siteVariables.deploymentid} -f
+        environment:
+          ASTRONOMER_KEY_ID:
+            from_secret: ${siteVariables.keyid}
+          ASTRONOMER_KEY_SECRET:
+            from_secret: ${siteVariables.keysecret}
+          ASTRONOMER_DEPLOYMENT_ID:
+            from_secret: ${siteVariables.deploymentid}
+        when:
+          event: push
+          branch: [ main, release-* ]
+    ```
