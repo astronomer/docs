@@ -13,7 +13,7 @@ For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime
 
 ## Astro Runtime 4.2.2
 
-- Release date: April 5, 2022
+- Release date: April 4, 2022
 - Airflow version: 2.2.5
 
 ### Support for Airflow 2.2.5
