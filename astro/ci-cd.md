@@ -221,12 +221,14 @@ To automate code deploys to a Deployment using a Docker-based [Drone CI](https:/
         commands:
           - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz'
           - tar xzf astrocloudcli.tar.gz
-          - ./astrocloud deploy ${siteVariables.deploymentid} -f
+          - ./astrocloud deploy ${siteVariables.deploymentiddrone} -f
         environment:
           ASTRONOMER_KEY_ID:
             from_secret: ${siteVariables.keyid}
           ASTRONOMER_KEY_SECRET:
             from_secret: ${siteVariables.keysecret}
+          ASTRONOMER_DEPLOYMENT_ID:
+            from_secret: ${siteVariables.deploymentid}
         when:
           event: push
           branch: [ main, release-* ]
