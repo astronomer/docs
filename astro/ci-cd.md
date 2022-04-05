@@ -201,7 +201,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
 
 ### Drone
 
-To automate code deploys to a Deployment using a Docker-based [Drone CI](https://circleci.com/) pipeline, complete the following setup in a Git-based repository that hosts an Astro project. Note that this setup assumes that you already have an operational Drone server and runners.  
+To automate code deploys to a Deployment using a Docker-based [Drone CI](https://www.drone.io/) pipeline, complete the following setup in a Git-based repository that hosts an Astro project. Note that this setup assumes that you already have an operational Drone server and runners.  
 
 1. Set the following environment variables as secrets in your Git repository:
 
@@ -211,14 +211,13 @@ To automate code deploys to a Deployment using a Docker-based [Drone CI](https:/
 
 2. In the top level of your Git repository, create a file called `.drone.yml` that includes the following configuration:
 
-    ```yaml
-    kind: pipeline
+    <pre><code parentName="pre">{`kind: pipeline
     type: docker
     name: deploy
 
     steps:
       - name: deploy
-        image: debian
+        image: docker
         commands:
           - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz'
           - tar xzf astrocloudcli.tar.gz
@@ -233,4 +232,4 @@ To automate code deploys to a Deployment using a Docker-based [Drone CI](https:/
         when:
           event: push
           branch: [ main, release-* ]
-    ```
+    `}</code></pre>
