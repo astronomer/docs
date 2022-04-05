@@ -16,7 +16,6 @@ Read the following document for a reference of our default resources as well as 
 | Resource                                  | Description                                                                                                                   | Quantity / Default Size |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
 | [EKS Cluster](https://aws.amazon.com/eks) | An EKS cluster is required to run the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks. | 1x                      |
-
 | [EC2 Instances](https://aws.amazon.com/ec2/instance-types/) | EC2 instances (nodes) power the system and Airflow components (Webserver, Scheduler, Workers). EC2 instances auto-scale for additional Airflow Deployments. | 2x m5.xlarge |
 | [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/) | The RDS instance is the primary database of the Astro Data Plane. It hosts a metadata database for each Airflow Deployment hosted on the EKS cluster. | 1x db.r5.large |
 | [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) | Elastic IPs are required for connectivity with the Control Plane, and other public services. | 2x |
