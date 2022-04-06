@@ -75,9 +75,15 @@ Environment Variables that are set as secret can be modified, but the variable's
 
 ### How environment variables are stored on Astro
 
-Environment variables that are set via the Cloud UI or API and are not marked as secret are stored in a database managed by Astronomer.
+Non-secret environment variables set via the Cloud UI are stored in a database that is managed by Astronomer and hosted in the Astro Control Plane.
 
-Environment variables that are set via the Cloud UI or API and _are_ marked as secret are encrypted and stored in a secrets backend that is managed by Astronomer and hosted in the Control Plane.
+Secret environment variables are stored using a different mechanism. When you configure a secret environment variable via the Cloud UI, the following happens:
+
+1. Astro generates a manifest that defines a Kubernetes secret containing your variable's key and value.
+2. Astro applies this manifest to your Deployment's namespace in the Data Plane.
+3. After the manifest is applied, the key and value of your environment variable are stored in an [etcd cluster](https://etcd.io/) at rest within the Astronomer Control Plane.
+
+This process occurs every time you update the environment variable's key or value.
 
 ## Set Environment Variables via Dockerfile
 
@@ -91,7 +97,7 @@ Given that this file will be committed to your version control tool and to Astro
 
 To add environment variables, declare an ENV statement with the environment variable key and value. Your Dockerfile might look like this:
 
-```
+```dockerfile
 FROM quay.io/astronomer/astro-runtime:2.1.1
 ENV AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG=1
 ENV AIRFLOW__CORE__DAG_CONCURRENCY=5
@@ -156,6 +162,12 @@ Here, the environment variable would read:
 ```
 ENV AIRFLOW_VAR_MY_VAR=2
 ```
+
+## View Environment Variables in the Airflow UI
+
+By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To view a Deployment's current environment variables from the Airflow UI, you can set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` either in your Dockerfile or the Cloud UI.
+
+You might want to turn on this setting if you want explicit confirmation that an environment variable change was correctly applied to a Deployment, or if you want anyone accessing the Deployment to have more convenient access to environment variable values when working in the Airflow UI.
 
 ## Environment Variable Priority
 

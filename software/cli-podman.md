@@ -13,7 +13,7 @@ By default, the Astronomer CLI uses Docker to execute a few specific commands:
 - `astro auth login`: For authenticating to Astronomer Software
 - `astro deploy`: For pushing code to a Deployment
 
-Alternatively, you can use Podman to execute these same commands.
+Alternatively, you can use [Podman](https://podman.io/) to execute these same commands.
 
 ## Prerequisites
 
@@ -75,21 +75,25 @@ To set up Podman for an Astronomer project:
 
     Copy the `Identity` and `URI` from `podman-machine-default*` for the next two steps.
 
-2. Run the following command to export the Podman Identity as a system environment variable:
+3. Run the following commands to set system environment variables for Podman:
 
     ```sh
-    export CONTAINER_SSHKEY=<your-podman-identity>
+    # Store the Identity for your Podman instance
+    $ export CONTAINER_SSHKEY=<your-podman-identity>
+    # Ensure that all images created via `podman build` are readable by Software Deployments. 
+    # Primarily for use in CI/CD pipelines which require use of the Podman CLI.
+    $ export BUILDAH_FORMAT=docker
     ```
 
-3. Run the following command to set the connection URI from the Astronomer CLI:
+4. Run the following command to set the connection URI from the Astronomer CLI:
 
     ```sh
     astro config set podman.connection_uri <your-podman-uri>
     ```
 
-4. Enable [Remote Login](https://support.apple.com/en-gb/guide/mac-help/mchlp1066/mac#:~:text=Set%20up%20Remote%20Login%20on,Sharing%20%2C%20then%20select%20Remote%20Login.&text=Select%20the%20Remote%20Login%20tickbox,access%20for%20remote%20users%E2%80%9D%20checkbox.) on your Mac.
+5. Enable [Remote Login](https://support.apple.com/en-gb/guide/mac-help/mchlp1066/mac#:~:text=Set%20up%20Remote%20Login%20on,Sharing%20%2C%20then%20select%20Remote%20Login.&text=Select%20the%20Remote%20Login%20tickbox,access%20for%20remote%20users%E2%80%9D%20checkbox.) on your Mac.
 
-5. In a separate terminal window, complete the following set of commands and configurations to mount your local Airflow project directory to the Podman machine:
+6. In a separate terminal window, complete the following set of commands and configurations to mount your local Airflow project directory to the Podman machine:
 
     ```sh
     $ podman machine --log-level=debug ssh -- exit 2>&1 | grep Executing
@@ -101,7 +105,8 @@ To set up Podman for an Astronomer project:
     $ ssh-copy-id -p 10000 <user>@127.0.0.1
     $ sudo mkdir -p airflow-dir
     $ sudo chown core:core airflow-dir
-    $ sudo vi /etc/fuse.conf # uncomment the user_allow_other line and save the file
+    $ sudo vi /etc/fuse.conf
+    # uncomment the user_allow_other line in /etc/fuse.conf and save the file
     $ sshfs -p 10000 -o allow_other <user>@127.0.0.1:<local_airflow_dir_path> airflow-dir
 
     # check if sshfs is working fine or not
@@ -114,7 +119,7 @@ To set up Podman for an Astronomer project:
 
     Copy the output of `pwd` for step 7.
 
-6. Open a new terminal window. In an empty directory, run the following commands to create a new Astronomer project, set Podman as your primary container engine, and generate a `pod-config.yml` file for your project:
+7. Open a new terminal window. In an empty directory, run the following commands to create a new Astronomer project, set Podman as your primary container engine, and generate a `pod-config.yml` file for your project:
 
     ```sh
     $ astro dev init
@@ -122,7 +127,7 @@ To set up Podman for an Astronomer project:
     $ astro dev start
     ```
 
-7. In the `pod-config.yml` file, replace the default configuration with the following values:
+8. In the `pod-config.yml` file, replace the default configuration with the following values:
 
     ```yaml
     volumes:

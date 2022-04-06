@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /src/
+Disallow: /software_versioned_docs/
+Disallow: /software_versioned_sidebars/
+Disallow: /README.md
+Disallow: /docusaurus.config.js
+
+Sitemap: https://docs.astronomer.io/sitemap.xml

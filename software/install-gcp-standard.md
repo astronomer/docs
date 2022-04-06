@@ -15,7 +15,7 @@ To install Astronomer on GCP, you'll need access to the following tools and perm
 * [Google Cloud SDK](https://cloud.google.com/sdk/install)
 * A compatible version of Kubernetes as described in Astronomer's [Version Compatibility Reference](version-compatibility-reference.md)
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-* [Helm v3.2.1](https://github.com/helm/helm/releases/tag/v3.2.1)
+* [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
 * An SMTP Service & Credentials (e.g. Mailgun, Sendgrid, etc.)
 * Permission to create and modify resources on Google Cloud Platform
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains

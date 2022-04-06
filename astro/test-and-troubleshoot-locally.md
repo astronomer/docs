@@ -108,7 +108,15 @@ To run [Apache Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stabl
 astrocloud dev run <airflow-cli-command>
 ```
 
-For example, the Apache Airflow command for viewing your entire configuration is `airflow config list`. To run this command with the Astro CLI, you would run `astrocloud dev run config list` instead.
+For example, the Airflow CLI command for viewing the values of your `airflow.cfg` file is `airflow config list`. To run this command with the Astro CLI, you would run `astrocloud dev run config list` instead. 
+
+In practice, running `astro dev run` is the equivalent of running `docker exec` in local containers and then running an Airflow CLI command within those containers.
+
+:::tip
+
+You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Airflow REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `airflow dags trigger` via the Airflow CLI.
+
+:::
 
 ## Test the KubernetesPodOperator Locally
 

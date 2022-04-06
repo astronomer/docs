@@ -80,9 +80,9 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 
     - **Connection ID**: `smtp_default`
     - **Connection Type:**: `Email`
-    - **Host**: `smtp.sendgrid.net`
-    - **Login**: `apikey`
-    - **Password**: `<your-api-key>`
+    - **Host**: `<your-smtp-host>`
+    - **Login**: `<your-aws-username>`
+    - **Password**: `<your-aws-password>`
     - **Port**: `587`
 
 6. Click **Save** to finalize your configuration.

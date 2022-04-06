@@ -21,11 +21,12 @@ astrocloud deployment create
 | --------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | `-c`, `--cluster-id`        | The Cluster in which you want to create a Deployment                                                                      | The name of any Cluster that you can create Deployments in               |
 | `-d`,`--description`        | The description for the Deployment                                    | Any string. Multiple-word descriptions should be specified in quotations (`"`) |
-| `-l`,`--name`        | The Deployment's name                                                       | Any string. Multiple-word descriptions should be specified in quotations |
+| `-n`,`--name`        | The Deployment's name                                                       | Any string. Multiple-word descriptions should be specified in quotations |
 | `-v`,`--runtime-version`    | The Astro Runtime version for the Deployment                                                   | Any version of Runtime that is supported. Major, minor, and patch versions must be specified.                                                |
 | `-s`,`--scheduler-au`       | The number of AU to allocate towards the Deployment's Scheduler(s). The default is`5`.     | Integer between `0` and `30`                                             |
 | `-a`,`--worker-au`          | The number of AU to allocate towards the Deployment's worker(s). The default is `10`.      | Integer between `0` and `175`                                            |
 | `-r`,`--scheduler-replicas` | The number of Scheduler replicas for the Deployment. The default is `1`. | Integer between `0` and `4`                                              |
+| `--workspace-id` | Specify a Workspace to create a Deployment outside of your current Workspace| Any valid Workspace ID                                            |
 
 ## Examples
 

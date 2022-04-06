@@ -9,7 +9,7 @@ description: Add and customize user permissions on Astronomer Software.
 
 In addition to Workspace-level [role-based access control (RBAC) functionality](workspace-permissions.md) core to our platform, Astronomer Software allows teams to customize *how* they want users to create accounts on Astronomer and what they're able to do on the platform - both on Astronomer and Airflow.
 
-Read below for a high-level overview of user management and guidelines around public signups, role customization and adding System Admins. For a list of each role's specific permissions, read [Reference: Platform Permissions](manage-platform-users.md#reference-platform-permissions).
+Read below for a high-level overview of user management and guidelines around public signups, role customization and adding System Admins. For a list of each role's specific permissions, read [Reference: System Permissions](manage-platform-users.md#reference-system-permissions).
 
 ## Add Users to Astronomer
 
@@ -78,7 +78,7 @@ Permissions are defined on Astronomer as `scope.entity.action`, where:
 - `entity`: The object or role being operated on
 - `action`: The verb describing the operation being performed on the `entity`
 
-For example, the `deployment.serviceAccounts.create` permission translates to the ability for a user to create a Deployment-level Service Account. To view all available platform permissions and default role configurations, see [Reference: Platform Permissions](manage-platform-users.md#reference-platform-permissions).
+For example, the `deployment.serviceAccounts.create` permission translates to the ability for a user to create a Deployment-level Service Account. To view all available platform permissions and default role configurations, see [Reference: System Permissions](manage-platform-users.md#reference-system-permissions).
 
 To customize permissions, follow the steps below.
 

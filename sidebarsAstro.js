@@ -137,6 +137,7 @@ module.exports = {
         'runtime-version-lifecycle-policy',
         'resource-reference-aws',
         'platform-variables',
+        'data-plane-activation',
         {
           type: 'category',
           label: 'Security',

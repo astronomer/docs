@@ -80,9 +80,9 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 
     - **Connection ID**: `smtp_default`
     - **Connection Type:**: `Email`
-    - **Host**: `smtp.sendgrid.net`
-    - **Login**: `apikey`
-    - **Password**: `<your-api-key>`
+    - **Host**: `<your-smtp-host>`
+    - **Login**: `<your-aws-username>`
+    - **Password**: `<your-aws-password>`
     - **Port**: `587`
 
 6. Click **Save** to finalize your configuration.
@@ -106,7 +106,7 @@ If you want to limit failure alerts to the DAG-run level, you can instead set up
 
 The code in your DAG might look something like this ([source](https://github.com/apache/airflow/blob/v1-10-stable/airflow/utils/email.py#L41)):
 
-```py
+```python
      from airflow.models.email import send_email
      def new_email_alert(self, **kwargs):
      title = "TEST MESSAGE: THIS IS A MODIFIED TEST"

@@ -36,3 +36,4 @@ As part of the Astro architecture, certain environment variables have preset val
 | `AIRFLOW__METRICS__STATSD_PORT` | The port for sending metrics to Statsd | `strconv.FormatInt(int64(statsd.IngestPort), baseTen)` |
 | `AIRFLOW__WEBSERVER__COOKIE_SECURE` | Sets a `secure` flag on server cookies | `True` |
 | `AIRFLOW__WEBSERVER__INSTANCE_NAME` | Shows the name of your Deployment in the Home view of the Airflow UI | `<Deployment-Name>` |
+| `AIRFLOW__CELERY__WORKER_CONCURRENCY` | Determines how many tasks each Celery worker can run at any given time and is the basis of worker auto-scaling logic | `16` |

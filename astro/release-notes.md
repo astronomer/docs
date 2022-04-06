@@ -10,11 +10,71 @@ description: A real-time reference of the latest features and bug fixes in Astro
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes officially released to Astro.
 
-If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer Support](https://support.astronomer.io).
+If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Runtime Version**: 4.2.0 ([Release notes](runtime-release-notes.md))
+**Latest Runtime Version**: 4.2.2 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.3.0 ([Release notes](cli-release-notes.md))
+**Latest CLI Version**: 1.3.3 ([Release notes](cli-release-notes.md))
+
+## March 31, 2022
+
+### New Analytics Page in Cloud UI to Monitor Deployments
+
+The Cloud UI now includes a dedicated **Analytics** page that contains various Deployment-level metrics. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time:
+
+![Analytics menu location](/img/docs/access-analytics.png)
+
+For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
+
+### Lineage Backend Upgrade Scheduled for All Organizations
+
+As part of [Astronomer's acquisition of Datakin](https://www.astronomer.io/blog/astronomer-acquires-datakin-the-data-lineage-tool/), data lineage features are coming soon to Astro. The first step in enabling these features is to implement lineage backends for existing Astro customers.
+
+Starting on March 31st and continuing over the next couple of weeks, all Astro Deployments on Runtime 4.2.0+ will be upgraded to emit lineage events. As a result of this change, you might start seeing lineage-related Scheduler logs such as the following:
+
+```text
+[2022-03-30, 12:17:39 UTC] {great_expectations_extractor.py:17} INFO - Did not find great_expectations_provider library or failed to import it
+[2022-03-24, 23:40:01 UTC] {client.py:74} INFO - Constructing openlineage client to send events to https://api.astro-astronomer.datakin.com
+```
+
+A few additional notes about this upgrade:
+
+- You can ignore any lineage logs that indicate an error or failed process, such as the first line in the example logs above. These logs will more accurately reflect the state of your lineage functionality once lineage features are launched on Astro.
+- Deployments on Runtime 4.2.0+ will be updated to emit data lineage events only after you [push code](deploy-code). Until you do so, this change will not be applied.
+- Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
+- When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
+
+For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://www.astronomer.io/guides/airflow-openlineage).
+
+### Additional Improvements
+
+- The Cloud UI now includes a button that links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
+
+    ![Runtime Tag banner](/img/release-notes/support-button.png)
+
+## March 25, 2022
+
+### Modify the Max Node Count for Clusters
+
+By default, Clusters have a max node count of 20. To help scale your Clusters for their specific use cases, you can now change the max node count of a new or existing Cluster to any value from 2 to 100. To update this setting for a Cluster, reach out to [Astronomer support](https://support.astronomer.io) and provide the name of your cluster and the desired max node count.
+
+### Additional Improvements
+
+- In **Resource Settings**, the maximum allowed value for **Worker Resources** has been increased to 400 AU.
+
+## March 17, 2022
+
+### Export Task Usage as a CSV File
+
+In the Cloud UI, you can now export your task usage data from the **Usage** tab as a CSV file to perform more complex data analysis related to your Airflow usage and costs. For example, you can use the file as the basis for a pivot table that shows total task usage by Workspace.
+
+To export your task usage data as a CSV file, click the **Export** button in the **Usage** tab:
+
+![Export as CSV button in Usage tab](/img/release-notes/csv-file.png)
+
+### Bug Fixes
+
+- Fixed an issue where saving new environment variables in the Cloud UI would occasionally fail
 
 ## March 10, 2022
 
@@ -153,7 +213,7 @@ This change serves as a foundation for future SSO and authentication features. I
 
 ### Additional Improvements
 
-- Significant improvements to the load times of various Cloud UI pages and and elements.
+- Significant improvements to the load times of various Cloud UI pages and elements.
 - In the Cloud UI, the tooltips in the **Resource Settings** section of a Deployment's page now show the definition of 1 AU. This should make it easier to translate AU to CPU and Memory.
 - Scheduler logs in the Cloud UI no longer show `DEBUG`-level logs.
 - To ensure that all Workers have enough resources to run basic workloads, you can no longer allocate less than 10 AU to **Worker Resources**.
@@ -257,7 +317,7 @@ For a full list of AWS regions supported on Astro, see [AWS Resource Reference](
 
 - Amazon EBS volumes have been upgraded from gp2 to [gp3](https://aws.amazon.com/about-aws/whats-new/2020/12/introducing-new-amazon-ebs-general-purpose-volumes-gp3/) for improved scale and performance.
 - EBS volumes and S3 buckets are now encrypted by default.
-- The ability to enable public access to any Amazon S3 bucket on an Astro data plane is now blocked per a new AWS account policy. Previously, public access was disabled by default but could be overridden by a user creating a new S3 bucket with public access enabled. This AWS account policy could be overriden by AWS account owners, but Astronomer strongly recommends against doing so.
+- The ability to enable public access to any Amazon S3 bucket on an Astro data plane is now blocked per a new AWS account policy. Previously, public access was disabled by default but could be overridden by a user creating a new S3 bucket with public access enabled. This AWS account policy could be overridden by AWS account owners, but Astronomer strongly recommends against doing so.
 
 ## November 19, 2021
 

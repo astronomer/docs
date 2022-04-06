@@ -298,7 +298,9 @@ If your environment variables contain sensitive information or credentials that 
 
 ### Confirm your environment variables were applied
 
-To confirm that the environment variables you just set were applied in your local Airflow environment, first run:
+By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To confirm your environment variables via the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile or `.env` file. 
+
+Alternatively, you can run:
 
 ```
 docker ps

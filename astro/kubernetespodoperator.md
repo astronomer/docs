@@ -119,7 +119,7 @@ Once Astronomer has added the Kubernetes secret to your Deployment, you will be 
 
 From here, you can run images from your private registry by importing `models` from `kubernetes.client` and configuring `image_pull_secrets` in your KubernetesPodOperator instantiation:
 
-```python {1,6}
+```python {1,5}
 from kubernetes.client import models as k8s
 
 k = kubernetes_pod_operator.KubernetesPodOperator(

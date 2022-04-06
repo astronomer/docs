@@ -180,13 +180,40 @@ By default, the KubernetesPodOperator will look for images hosted publicly on [D
 
 > **Note:** The KubernetesPodOperator doesn't support passing in `image_pull_secrets` until [Airflow 1.10.2](https://github.com/apache/airflow/blob/master/CHANGELOG.txt#L526).
 
-To pull images from a private registry on Astronomer Software, follow the guidelines below.
+To pull images from a private registry on Astronomer Software:
 
-**1.** Pull a `dockerconfigjson` file with your existing Docker credentials by following [this guide](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials) (step 1 above)
+1. Retrieve a `config.json` file that contains your Docker credentials by following the [Docker documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials). The generated file should look something like this:
 
-**2.** Follow [this Kubernetes doc](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials) to add that secret to your namespace
+   ```json
+   {
+       "auths": {
+           "https://index.docker.io/v1/": {
+               "auth": "c3R...zE2"
+           }
+       }
+   }
+   ```
 
-**3.** Call that secret in your KubePodOperator by specifying `image_pull_secrets`
+2. Follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials) to create a secret based on your credentials.
+
+3. In your DAG code, import `models` from `kubernetes.client` and specify `image_pull_secrets` with your Kubernetes secret. After configuring this value, you can pull an image as you would from a public registry like in the following example.
+
+    ```python {1,5}
+    from kubernetes.client import models as k8s
+
+    k = kubernetes_pod_operator.KubernetesPodOperator(
+        namespace=namespace,
+        image_pull_secrets=[k8s.V1LocalObjectReference('<your-secret-name>')],
+        image="<your-docker-image>",
+        cmds=["<commands-for-image>"],
+        arguments=["<arguments-for-image>"],
+        labels={"<pod-label>": "<label-name>"},
+        name="<pod-name>",
+        is_delete_operator_pod=True,
+        in_cluster=True,
+        task_id="<task-name>",
+        get_logs=True)
+    ```
 
 ## Local Testing
 

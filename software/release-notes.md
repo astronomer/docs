@@ -15,6 +15,14 @@ Astronomer v0.28 is the latest Stable version of Astronomer Software, while v0.2
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
+## v0.28.3
+
+Release date: March 17, 2022
+
+### Bug Fixes
+
+- Fixed an issue where airgapped upgrades and installations could fail due to a mismatched Airflow Helm chart between Astronomer components
+
 ## v0.28.2
 
 Release date: March 14, 2022

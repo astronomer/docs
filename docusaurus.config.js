@@ -13,10 +13,10 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
     image: 'img/meta.png',
+    autoCollapseSidebarCategories: true,
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
       indexName: 'published-docs',
-
       // Optional: see doc section below
       contextualSearch: true,
 
@@ -31,16 +31,6 @@ module.exports = {
     },
     colorMode: {
       disableSwitch: false,
-      switchConfig: {
-        darkIcon: '☾',
-        darkIconStyle: {
-          marginLeft: '1px',
-        },
-        lightIcon: '☼',
-        lightIconStyle: {
-          marginLeft: '1px',
-        },
-      },
     },
     navbar: {
       title: 'Docs',

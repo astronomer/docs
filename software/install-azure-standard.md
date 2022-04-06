@@ -15,7 +15,7 @@ To install Astronomer on AKS, you'll need access to the following tools and perm
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * A compatible version of Kubernetes as described in Astronomer's [Version Compatibility Reference](version-compatibility-reference.md)
-* [Helm v3.2.1](https://github.com/helm/helm/releases/tag/v3.2.1)
+* [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
 * SMTP Service & Credentials (e.g. Mailgun, Sendgrid, etc.)
 * Permission to create and modify resources on AKS
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
