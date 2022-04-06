@@ -75,11 +75,10 @@ By default, some AWS regions that Astronomer supports are [disabled by default o
 - `af-south-1` - Africa (Cape Town)
 - `ap-east-1` - Asia Pacific (Hong Kong)
 - `me-south-1` - Middle East (Bahrain)
-- `eu-south-1` - Europe (Milan)
 
 To create a cluster in one of these regions, complete the following additional setup in your AWS account:
 
-1. In the AWS IAM console, update the `astronomer-remote-management` trust relationship to include permissions for enabling and disabling your desired region as described in the [AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws-enable-disable-regions.html). For example, if you are configuring a new Cluster in `ap-east-1`, your complete trust relationship would look like the following:
+1. In the AWS IAM console, update the `astronomer-remote-management` trust relationship to include permissions for enabling and disabling your desired region as described in the [AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws-enable-disable-regions.html)""
 
     ```YAML
     {
@@ -101,7 +100,7 @@ To create a cluster in one of these regions, complete the following additional s
           }
         }
         {
-            "Sid": "EnableDisableHongKong",
+            "Sid": "EnableDisableRegion",
             "Effect": "Allow",
             "Action": [
                 "account:EnableRegion",
@@ -109,7 +108,7 @@ To create a cluster in one of these regions, complete the following additional s
             ],
             "Resource": "*",
             "Condition": {
-                "StringEquals": {"account:TargetRegion": "ap-east-1"}
+                "StringEquals": {"account:TargetRegion": "<your-aws-region>"}
             }
         },
         {
