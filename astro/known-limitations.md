@@ -19,6 +19,7 @@ If you have questions or thoughts about any item below, don't hesitate to reach 
 - Astro supports only the Celery Executor for executing Airflow tasks in your cloud. Support for a Kubernetes-like executor with the ability to specify task-level resources is coming soon.
 - Users cannot be directly invited to an Organization. To add a user to an Organization, you must invite them to a Workspace as described in [Add a User](add-user.md).
 - When a user first creates an account, they will be asked to validate their email address. Email validation is not currently required to access Astro, but we encourage users to follow the process anyway as we will enforce it in the future.
+- If a user changes Workspace roles on Astro, it can take a maximum of 10 minutes for corresponding Airflow permission changes to take effect.
 - Clicking on **Refresh DAG** in the Airflow UI will redirect you to `<org-name>.astronomer.run` (Astro Home Page) instead of the task instance URL. We recommend upgrading to [Runtime 4.0](runtime-release-notes.md#astro-runtime-400), as Airflow 2.2 no longer supports this refresh button in the Airflow UI.
 
 ## Coming Soon
