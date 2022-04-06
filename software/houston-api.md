@@ -154,7 +154,7 @@ mutation CreateDeployment {
   createDeployment(
     workspaceUuid: "<workspace-id>",
     type: "airflow",
-    label: "<deployment-label>",
+    label: "<deployment-name>",
     config: {executor:"<airflow-executor>"},
 
 
