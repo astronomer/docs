@@ -49,7 +49,7 @@ module.exports = {
         {
           type: 'dropdown',
           label: 'Software',
-          to: 'software/overview',
+          to: 'software/',
           activeBaseRegex: 'software',
           position: 'left',
           activeClassName: 'navbar__link--active',
@@ -114,7 +114,7 @@ module.exports = {
           items: [
             {
               label: 'Overview',
-              to: 'software/overview',
+              to: 'software/',
             },
             {
               label: 'Install on AWS',
