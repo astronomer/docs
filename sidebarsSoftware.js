@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Get Started',
       items: [
       'cli-quickstart',
       'create-project',
