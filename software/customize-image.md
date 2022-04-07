@@ -303,6 +303,7 @@ In 3 stages, this file is bundling up your SSH keys, OS-Level packages in `packa
 A few notes:
 - The `Private RSA Key` = [SSH Key generated via GitHub](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 - Make sure to replace the first line of this file (`FROM`..) with your Airflow Image (Step 2 above)
+- This method allows an SSH connection to the Github servers. If the URL to the repo that you are trying to clone starts with `https://`, git will fail to authenticate - you MUST use the SSH URL in the format similar to `git@github.com:astronomer/astronomer.git`
 - If you don't want keys in this file to be pushed back up to your GitHub repo, consider adding this file to `.gitignore`
 - Make sure your custom OS-Level packages are in `packages.txt` and your Python packages in `requirements.txt` within your repo
 - If you're running Python 3.7 on your machine, replace the reference to Python 3.6 under `# Copy requirements directory` with `/usr/lib/python3.7/site-packages/` above
