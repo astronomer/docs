@@ -35,12 +35,13 @@ Each Cluster has a pair of unique external IP address that will persist for the 
 
 Each Cluster runs in a dedicated VPC. To set up private connectivity between the Astro VPC and a target VPC, you can set up a VPC peering connection. Peered VPCs provide additional security by ensuring private connectivity, reduced network transit costs, and simplified network layouts.
 
-To create a VPC peering connection between a Cluster's VPC and a target VPC, open a support ticket with Astronomer and provide the following information about your Cluster:
+To create a VPC peering connection between a Cluster's VPC and a target VPC, open a support ticket with Astronomer and provide the following information:
 
 - Name of your Cluster
-- AWS account
-- AWS Region
-- VPC CIDR
+- AWS account for the target VPC
+- AWS Region for the target VPC
+- VPC ID of the target VPC
+- CIDR of the target VPC 
 
 In response, Astronomer will initiate a peering request. This peering request must be accepted by the owner of the target VPC.
 
