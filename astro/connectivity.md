@@ -23,6 +23,8 @@ These endpoints can be configured by:
 - Setting [Environment Variables](environment-variables.md) with your endpoint information.
 - Creating an [Airflow Connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
+Public connection traffic moves directly between your Data Plane and the external data source's API endpoint, meaning that the data in this traffic never reaches your Astronomer-managed Control Plane.
+
 ### IP Allowlist
 
 Some data services, such as Snowflake and Databricks, provide an additional layer of security by requiring you to allowlist a specific IP address before you can access the service.
