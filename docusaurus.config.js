@@ -56,7 +56,7 @@ module.exports = {
           items: [
             {
               label: '0.28 (Latest)',
-              to: '/software/overview',
+              to: '/software/',
             },
             {
               label: '0.27',
