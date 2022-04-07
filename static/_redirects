@@ -7,6 +7,9 @@
 # redirect base cloud path to astro overview
 /cloud /astro/ 301
 
+# redirect old software overview to new url
+/software/overview /software/
+
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy/ 301
 
