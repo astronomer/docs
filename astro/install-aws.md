@@ -159,7 +159,6 @@ Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 - `af-south-1` - Africa (Cape Town)
 - `ap-east-1` - Asia Pacific (Hong Kong)
 - `me-south-1` - Middle East (Bahrain)
-- `eu-south-1` - Europe (Milan)
 
 If you're setting up your first Cluster in any of these regions, you need to complete the additional setup as described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 

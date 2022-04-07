@@ -70,7 +70,7 @@ Once you've modified your trust policy, click **Update Trust Policy** in the AWS
 
 ### Additional Setup for AWS Regions that are Disabled by Default
 
-By default, some AWS regions that Astronomer supports are [disabled by default on AWS](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable). These regions are:
+Some AWS regions that Astronomer supports are [disabled by default on AWS](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable). These regions are:
 
 - `af-south-1` - Africa (Cape Town)
 - `ap-east-1` - Asia Pacific (Hong Kong)
@@ -78,7 +78,7 @@ By default, some AWS regions that Astronomer supports are [disabled by default o
 
 To create a cluster in one of these regions, complete the following additional setup in your AWS account:
 
-1. In the AWS IAM console, update the `astronomer-remote-management` trust relationship to include permissions for enabling and disabling your desired region as described in the [AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws-enable-disable-regions.html)""
+1. In the AWS IAM console, update the `astronomer-remote-management` trust relationship to include permissions for enabling and disabling your desired region as described in the [AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws-enable-disable-regions.html):
 
     ```YAML
     {
