@@ -41,9 +41,9 @@ To create a VPC peering connection between a Cluster's VPC and a target VPC, ope
 - AWS account for the target VPC
 - AWS Region for the target VPC
 - VPC ID of the target VPC
-- CIDR of the target VPC 
+- CIDR of the target VPC
 
-In response, Astronomer will initiate a peering request. This peering request must be accepted by the owner of the target VPC.
+In response, Astronomer will initiate a peering request. To connect succesfully, this peering request must be accepted by the owner of the target VPC.
 
 Once peering is set up, continue to work with [Astronomer support](https://support.astronomer.io) and the owner of the target VPC to update the routing tables of both VPCs to direct traffic to each other.
 
