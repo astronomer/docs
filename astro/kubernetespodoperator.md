@@ -91,7 +91,7 @@ KubernetesPodOperator(
 )
 ```
 
-Applying the code above ensures that Kubernetes allocates exactly 800m of CPU and 3Gi of memory to your task's Pod at all times.
+Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your Cluster. Once the task finishes, the Pod will terminate gracefully.
 
 ## Run Images from a Private Registry
 

@@ -168,9 +168,9 @@ compute_resources = k8s.V1ResourceRequirements(
 )
 ```
 
-Using this object, users can set Memory and CPU requests and limits for any given pod. For more information, reference [Kubernetes Documentation on Requests and Limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits).
+This object allows you to specify Memory and CPU requests and limits for any given task and its correspond Kubernetes Pod. For more information, read [Kubernetes Documentation on Requests and Limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits).
 
-Once you've created the object, apply it to the `resources` parameter of the task. When this DAG runs, it will launch a pod that runs the `hello-world` image, pulled from Docker Hub, in your Airflow Deployment's namespace with the resource request specified above. Once the container finishes, the pod will be removed.
+Once you've created the object, apply it to the `resources` parameter of the task. When this DAG runs, it will launch a Pod that runs the `hello-world` image, which is pulled from Docker Hub, in your Airflow Deployment's namespace with the resource requests defined above. Once the task finishes, the Pod will be gracefully terminate.
 
 :::info 
 
@@ -222,6 +222,6 @@ To pull images from a private registry on Astronomer Software:
 
 ## Local Testing
 
-Follow our [Local KubernetesPodOperator](kubepodoperator-local.md/) on using [MicroK8s](https://microk8s.io/) or [Docker for Kubernetes](https://matthewpalmer.net/kubernetes-app-developer/articles/how-to-run-local-kubernetes-docker-for-mac.html) to run tasks with the KubernetesPodOperator locally.
+We recommend testing your DAGs locally before pushing them to a Deployment on Astronomer. For more information, read [How to Run the KubernetesPodOperator Locally](kubepodoperator-local.md/). That guide provides information on how to use [MicroK8s](https://microk8s.io/) or [Docker for Kubernetes](https://matthewpalmer.net/kubernetes-app-developer/articles/how-to-run-local-kubernetes-docker-for-mac.html) to run tasks with the KubernetesPodOperator in a local environment.
 
 > **Note:** To pull images from a private registry locally, you'll have to create a secret in your local namespace and similarly call it in your operator following the guidelines above.
