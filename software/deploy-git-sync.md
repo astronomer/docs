@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Deploy DAGs via Git-Sync'
-title: 'Deploy DAGs to Astronomer Software via Git-Sync'
+sidebar_label: 'Configure Git-Sync Deploys'
+title: 'Configure Git-Sync Code Deploys'
 id: deploy-git-sync
 description: Push DAGs to your Airflow Deployment on Astronomer Software using git-sync.
 ---

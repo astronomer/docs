@@ -1,14 +1,14 @@
 # redirect base path to astro
 / /astro/ 301!
 
-# redirect base software path to overview
-/software /software/overview/ 301
-
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
 /software/0.28/* /software/:splat
 
 # redirect base cloud path to astro overview
 /cloud /astro/ 301
+
+# redirect old software overview to new url
+/software/overview /software/
 
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy/ 301
@@ -96,7 +96,7 @@
 /cloud/cli-reference/astrocloud-workspace-switch /astro/cli-reference/astrocloud-workspace-switch/ 301
 
 # redirect enterprise paths to software
-/enterprise /software/overview/ 301
+/enterprise /software/ 301
 /enterprise/ac-cve /software/ac-cve/ 301
 /enterprise/ac-support-policy /software/ac-support-policy/ 301
 /enterprise/access-airflow-database /software/access-airflow-database/ 301
@@ -139,7 +139,7 @@
 /enterprise/manage-airflow-versions /software/manage-airflow-versions/ 301
 /enterprise/manage-platform-users /software/manage-platform-users/ 301
 /enterprise/manage-workspaces /software/manage-workspaces/ 301
-/enterprise/overview /software/overview/ 301
+/enterprise/overview /software/ 301
 /enterprise/platform-alerts /software/platform-alerts/ 301
 /enterprise/pre-create-namespaces /software/namespace-pools/ 301
 /enterprise/quickstart /software/quickstart/ 301

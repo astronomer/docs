@@ -145,10 +145,10 @@ apache-airflow-providers-hashicorp
 
 Then, add the following environment variables to your `Dockerfile`:
 
-```text
+```dockerfile
 # Make sure to replace `<your-approle-id>` and `<your-approle-secret>` with your own values.
 ENV AIRFLOW__SECRETS__BACKEND="airflow.contrib.secrets.hashicorp_vault.VaultBackend"
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "onnections", "variables_path": variables, "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": variables, "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
 ```
 
 This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. In the next step, you'll test this configuration in a local Airflow environment.
@@ -213,7 +213,7 @@ Once you've confirmed that the integration with Vault works locally, you can com
 
   :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
+  Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
   :::
 
@@ -256,7 +256,7 @@ apache-airflow-providers-amazon
 
 Then, add the following environment variables to your project's `Dockerfile`:
 
-```text
+```dockerfile
 # Make sure to replace `<your-aws-key>` and `<your-aws-secret-key>` with your own values.
 ENV AWS_ACCESS_KEY_ID="<your-aws-key>"
 ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-key>"
@@ -327,11 +327,11 @@ Once you've confirmed that the integration with AWS SSM Parameter Store works lo
 
 1. In the Cloud UI, add the same environment variables found in your `Dockerfile` to your Deployment [environment variables](https://docs.astronomer.io/astro/environment-variables). Specify both `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **secret** ensure that your credentials are stored securely.
 
-  :::warning
+    :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
+    Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
-  :::
+    :::
 
 2. In your Astro project, delete the environment variables from your `Dockerfile`.
 3. [Deploy your changes](https://docs.astronomer.io/astro/deploy-code) to Astro.
@@ -377,12 +377,12 @@ apache-airflow-providers-amazon
 
 Then, add the following environment variables to your project's Dockerfile:
 
-```sh
+```dockerfile
 ENV AWS_ACCESS_KEY_ID=<your-aws-access-key-id>
 ENV AWS_SECRET_ACCESS_KEY=<your-aws-secret-access-key>
 ENV AWS_DEFAULT_REGION=us-<your-aws-region>
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS=`{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}`
 ```
 
 :::warning
@@ -435,11 +435,11 @@ Once you've confirmed that the integration with AWS Secrets Manager works locall
 
 1. In the Cloud UI, add the same environment variables found in your `Dockerfile` to your Deployment [environment variables](https://docs.astronomer.io/astro/environment-variables). Specify both `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret** to ensure that your credentials are stored securely.
 
-  :::warning
+    :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
+    Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
-  :::
+    :::
 
 2. In your Astro project, delete the environment variables from your `Dockerfile`.
 3. [Deploy your changes](https://docs.astronomer.io/astro/deploy-code) to Astro.
@@ -493,7 +493,7 @@ apache-airflow-providers-google
 
 Then, add the following environment variables to your project's Dockerfile:
 
-```sh
+```dockerfile
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": <your-key-file>}'
 ```
@@ -552,7 +552,7 @@ Once you've confirmed that the integration with Google Cloud Secret Manager work
 
   :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
+  Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
   :::
 
@@ -604,7 +604,7 @@ apache-airflow-providers-microsoft-azure
 
 In your `Dockerfile`, add the following environment variables with your own values:
 
-```yaml
+```dockerfile
 ENV AZURE_CLIENT_ID="<your-client-id>" # Found on App page > 'Application (Client) ID'
 ENV AZURE_TENANT_ID="<your-tenant-id>" # Found on Properties > 'Tenant ID'
 ENV AZURE_CLIENT_SECRET="<your-client-secret>" # Found on App Registration Page > Certificates and Secrets > Client Secrets > 'Value'
@@ -672,7 +672,7 @@ Once you've confirmed that your secrets are being imported correctly to your loc
 
   :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
+  Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
   :::
 

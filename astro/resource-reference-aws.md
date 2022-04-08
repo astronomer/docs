@@ -11,21 +11,22 @@ Unless otherwise specified, new Clusters on Astro are created with a set of defa
 
 Read the following document for a reference of our default resources as well as supported Cluster configurations, including **AWS Region** and **Node Instance Type**.
 
-## Defaults
+## Default Cluster Values
 
-| Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                       | Quantity / Default Size |
-| --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| [EKS Cluster](https://aws.amazon.com/eks)                                                           | An EKS cluster is required to run the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                          | 1x                      |
-| [EC2 Instances](https://aws.amazon.com/ec2/instance-types/)                                         | EC2 instances (nodes) power the system and Airflow components (Webserver, Scheduler, Workers). EC2 instances auto-scale for additional Airflow Deployments.                                                                                                                                                       | 2x m5.xlarge            |
-| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                          | The RDS instance is the primary database of the Astro Data Plane. It hosts a metadata database for each Airflow Deployment hosted on the EKS cluster.                                                                                                                                                  | 1x db.r5.large          |
-| [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)    | Elastic IPs are required for connectivity with the Control Plane, and other public services.                                                                                                                                                                                                                      | 2x                      |
-| [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)                        | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes. | 2x /26 and 2x /22       |
-| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)      | Required for connectivity with the Control Plane and other public services.                                                                                                                                                                                                                                       | 1x                      |
-| [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)               | NAT Gateways translate outbound traffic from private subnets to public subnets.                                                                                                                                                                                                                                   | 2x                      |
-| [Routes](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-table-routes) | Routes are necessary to direct network traffic from the subnets and gateways.                                                                                                                                                                                                                                     | 2x                      |
-| [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)              | Home for the routes.                                                                                                                                                                                                                                                                                              | 2x                      |
-| [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)                     | Virtual network for launching and hosting AWS resources.                                                                                                                                                                                                                                                          | 1x /19                  |
-| [S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html)                           | S3 bucket for storage of Airflow task logs.                                                                                                                                                                                                                                                                       | 1x                      |
+| Resource                                  | Description                                                                                                                   | Quantity / Default Size |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| [EKS Cluster](https://aws.amazon.com/eks) | An EKS cluster is required to run the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks. | 1x                      |
+| [EC2 Instances](https://aws.amazon.com/ec2/instance-types/) | EC2 instances (nodes) power the system and Airflow components (Webserver, Scheduler, Workers). EC2 instances auto-scale for additional Airflow Deployments. | 2x m5.xlarge |
+| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/) | The RDS instance is the primary database of the Astro Data Plane. It hosts a metadata database for each Airflow Deployment hosted on the EKS cluster. | 1x db.r5.large |
+| [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) | Elastic IPs are required for connectivity with the Control Plane, and other public services. | 2x |
+| [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes. | 2x /26 and 2x /22 |
+| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) | Required for connectivity with the Control Plane and other public services. | 1x |
+| [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) | NAT Gateways translate outbound traffic from private subnets to public subnets. | 2x |
+| [Routes](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-table-routes) | Routes are necessary to direct network traffic from the subnets and gateways. | 2x |
+| [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) | Home for the routes. | 2x |
+| [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) | Virtual network for launching and hosting AWS resources. | 1x /19 |
+| [S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html) | S3 bucket for storage of Airflow task logs. | 1x |
+| Max Node Count | The maximum number of EC2 nodes that your Astro Cluster can support at any given time. Once this limit is reached, your Cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
 
 ## Supported Cluster Configurations
 
@@ -37,17 +38,21 @@ To create a new Cluster on Astro with a specified configuration, read [Install o
 
 Astro supports the following AWS regions:
 
-- `us-east-1`
-- `us-east-2`
-- `us-west-1`
-- `us-west-2`
-- `ca-central-1`
-- `sa-east-1`
-- `ap-northeast-1`
-- `ap-southeast-1`
-- `ap-northeast-2`
-- `ap-southeast-2`
-- `ap-south-1`
+- `af-south-1` - Africa (Cape Town)
+- `ap-east-1` - Asia Pacific (Hong Kong)
+- `ap-northeast-1` - Asia Pacific (Tokyo)
+- `ap-northeast-2` - Asia Pacific (Seoul)
+- `ap-northeast-3` - Asia Pacific (Osaka)
+- `ap-southeast-1` - Asia Pacific (Singapore)
+- `ap-southeast-2` - Asia Pacific (Sydney)
+- `ap-south-1` - Asia Pacific (Mumbai)
+- `ca-central-1` - Canada (Central)
+- `me-south-1` - Middle East (Bahrain)
+- `sa-east-1` - South America (São Paulo)
+- `us-east-1` - US East (N. Virginia)
+- `us-east-2` - US East (Ohio)
+- `us-west-1` - US West (N. California)
+- `us-west-2` - US West (Oregon)
 
 Modifying the region of an existing Cluster on Astro is not supported. If you're interested in an AWS region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
 

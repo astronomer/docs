@@ -2,6 +2,7 @@
 title: 'Astronomer Software Documentation'
 sidebar_label: 'Overview'
 id: overview
+slug: /
 description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
 ---
 
