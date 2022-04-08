@@ -55,7 +55,7 @@ You can now [create new Clusters](create-cluster.md) in:
 - `ap-northeast-3` (Osaka)  
 - `me-south-1` (Bahrain)
 
-For a full list of AWS regions supported on Astro, see [AWS Resource Reference](https://docs.astronomer.io/resource-reference-aws.md#aws-region).
+For a full list of AWS regions supported on Astro, see [AWS Resource Reference](resource-reference-aws#aws-region).
 
 ### Additional Improvements
 
