@@ -71,7 +71,8 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import Kubernete
 from kubernetes.client import models as k8s
 
 compute_resources = k8s.V1ResourceRequirements(
-    limits={"cpu": "800m", "memory": "3Gi"}, requests={"cpu": "800m", "memory": "3Gi"}
+    limits={"cpu": "800m", "memory": "3Gi"},
+    requests={"cpu": "800m", "memory": "3Gi"}
 )
 
 namespace = conf.get("kubernetes", "NAMESPACE")
