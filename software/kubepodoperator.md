@@ -138,7 +138,8 @@ dag = DAG("example_kubernetes_pod", schedule_interval="@once", default_args=defa
 
 # This is where we define our desired resources.
 compute_resources = k8s.V1ResourceRequirements(
-    limits={"cpu": "800m", "memory": "3Gi"}, requests={"cpu": "800m", "memory": "3Gi"}
+    limits={"cpu": "800m", "memory": "3Gi"},
+    requests={"cpu": "800m", "memory": "3Gi"}
 )
 
 with dag:
