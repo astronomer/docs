@@ -168,7 +168,7 @@ compute_resources = k8s.V1ResourceRequirements(
 )
 ```
 
-This object allows you to specify Memory and CPU requests and limits for any given task and its correspond Kubernetes Pod. For more information, read [Kubernetes Documentation on Requests and Limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits).
+This object allows you to specify Memory and CPU requests and limits for any given task and its corresponding Kubernetes Pod. For more information, read [Kubernetes Documentation on Requests and Limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits).
 
 Once you've created the object, apply it to the `resources` parameter of the task. When this DAG runs, it will launch a Pod that runs the `hello-world` image, which is pulled from Docker Hub, in your Airflow Deployment's namespace with the resource requests defined above. Once the task finishes, the Pod will be gracefully terminate.
 
