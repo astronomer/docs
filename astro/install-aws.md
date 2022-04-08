@@ -84,7 +84,7 @@ For the AWS account you created as a prerequisite, provide Astronomer with:
 - Your preferred Astro Cluster name.
 - The AWS region that you want to host your Cluster in.
 - Your preferred node instance type.
-- Your preferred max node count. 
+- Your preferred max node count.
 
 If not specified, we will create a Cluster with two `m5.xlarge` nodes in `us-east-1` by default. For information on all supported regions and configurations, see [AWS Resource Reference](resource-reference-aws.md).
 

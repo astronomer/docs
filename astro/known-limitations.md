@@ -15,13 +15,11 @@ If you have questions or feedback about any item below, reach out to your Custom
 
 ## Known Limitations
 
-- Assistance from our team is required to give the first user in your Organization access to Astro.
 - In order to invite a user to a Workspace, the user must already be a member of the Organization as described in [Add a User](add-user.md). Workspace invites that can add a user to the Organization are not currently supported.
-- When a user first creates an account, they will be asked to validate their email address. Email validation is not currently required to access Astro, but we encourage users to follow the process anyway as we will enforce it in the future.
 - If a user changes Workspace roles on Astro, it can take a maximum of 10 minutes for corresponding Airflow permission changes to take effect.
-- Astro supports only the Celery Executor. If you currently use the Kubernetes Executor, you may have to modify your tasks to run on Astro. A new, feature-rich executor built by Astronomer is coming soon.
+- Astro supports only the Celery Executor. If you currently use the Kubernetes Executor, you might have to modify your tasks to run on Astro.
 - Clicking on **Refresh DAG** in the Airflow UI will redirect you to `<org-name>.astronomer.run` (Astro Home Page) instead of the task instance URL. We recommend upgrading to [Runtime 4.0](runtime-release-notes.md#astro-runtime-400), as Airflow 2.2 no longer requires this refresh button in the Airflow UI.
-- Deployment API keys cannot currently be used to automate updating the Deployment via the Astro CLI.
+- Deployment API keys can be used to automate code deploys to Astro, but they cannot be used to programmatically update other properties of the Deployment via the Astro CLI.
 
 ## Coming Soon
 
