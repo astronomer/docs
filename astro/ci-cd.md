@@ -240,7 +240,6 @@ This pipeline configuration requires:
           path: /var/run
         commands:
         - sleep 5
-        - docker ps
       - name: deploy
         image: docker:dind
         volumes:
