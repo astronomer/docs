@@ -160,7 +160,7 @@ To do this:
     │   └── helper.py
     ├── include
     ├── tests
-     │   └── test_dag_integrity.py
+    │   └── test_dag_integrity.py
     ├── packages.txt
     ├── plugins
     │   └── example-plugin.py
