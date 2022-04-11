@@ -117,7 +117,7 @@ The default credentials are admin:admin
 
 :::info
 
-By default, the Astro CLI uses port `8080` for Airflow's Webserver and port `5432` for Airflow's metadata database. If these ports are already in use on your local machine, you can change the ports for these components using the following steps:
+By default, the Astro CLI uses port `8080` for Airflow's Webserver and port `5432` for Airflow's metadata database. If these ports are already in use on your local machine, you can change the default ports for these components using the following steps:
 
 1. In your Astro project directory, open `.astrocloud/config.yaml`. This file might be hidden in graphical file browsers. You can show hidden files using `⌘ + Shift + .` on Mac or by selecting **View** > **Hidden items** in Windows file explorer.
 2. Specify alternative ports for your Webserver and/or metadata database in `config.yaml`. For example, to use `8081` for your Webserver port and `5435` for your database port, you would specify the following:
