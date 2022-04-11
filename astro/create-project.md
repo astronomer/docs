@@ -115,6 +115,26 @@ Postgres Database: localhost:5432/postgres
 The default credentials are admin:admin
 `}</code></pre>
 
+:::info
+
+By default, the Astro CLI uses port `8080` for Airflow's Webserver and port `5432` for Airflow's metadata database. If these ports are already in use on your local machine, you can change the ports for these components using the following steps:
+
+1. In your Astro project directory, open `.astrocloud/config.yaml`. This file might be hidden in graphical file browsers. You can show hidden files using `⌘ + Shift + .` on Mac or by selecting **View** > **Hidden items** in Windows file explorer.
+2. Specify alternative ports for your Webserver and/or metadata database in `config.yaml`. For example, to use `8081` for your Webserver port and `5435` for your database port, you would specify the following:
+
+    ```yaml
+    project:
+      name: <your-directory-name>
+    webserver:
+      port: 8081
+    postgres:
+      port: 5435
+    ```
+
+3. Run `astro dev restart` to rebuild and rerun your project.
+
+:::
+
 ## Step 3: Access the Airflow UI
 
 Once your project builds successfully, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password.

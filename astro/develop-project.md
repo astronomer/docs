@@ -246,7 +246,6 @@ The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compos
 
 To see what values you can override, reference the CLI's [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go). The linked file is for the original Astro CLI, but the values here are identical to those used in the Astro CLI. Common use cases for Docker Compose overrides include:
 
-- Modifying the ports at which the Airflow Webserver or Postgres database start on if another service is already running on those same ports (8080 and 5432, respectively). You can override this default and point your containers to a different port.
 - Adding extra containers to mimic services that your Airflow environment needs to interact with locally, such as an SFTP server.
 - Change the volumes mounted to any of your local containers.
 
@@ -298,7 +297,7 @@ If your environment variables contain sensitive information or credentials that 
 
 ### Confirm your environment variables were applied
 
-By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To confirm your environment variables via the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile or `.env` file. 
+By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To confirm your environment variables via the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile or `.env` file.
 
 Alternatively, you can run:
 
