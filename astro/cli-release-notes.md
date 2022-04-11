@@ -11,6 +11,15 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, don't hesitate to reach out to us via Slack or Intercom. We're here to help.
 
+## v1.3.4
+
+Release date: April 11, 2022
+
+### Additional Improvements
+
+- The astrocloud dev start command should now be slightly faster
+- Astrocloud deploy output not links to the Deployment’s page in the Astronomer UI and  its Webserver URL. For easy access to these URLs
+
 ## v1.3.3
 
 Release date: March 31, 2022
