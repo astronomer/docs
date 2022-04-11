@@ -18,7 +18,7 @@ Release date: April 11, 2022
 ### Additional Improvements
 
 - The astrocloud dev start command should now be slightly faster
-- Astrocloud deploy output not links to the Deployment’s page in the Astronomer UI and  its Webserver URL. For easy access to these URLs
+- Astrocloud deploy output not links to the Deployment’s page in the Astronomer UI and its Webserver URL. This gives users easy access to these URLs after a deploy
 
 ## v1.3.3
 
