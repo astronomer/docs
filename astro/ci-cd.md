@@ -139,6 +139,17 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
+### GitHub Actions (Multi-branch)
+
+The following steps can be used to create a multi-branch CI/CD pipeline using GitHub actions.
+
+This template assumes that you have both a `dev` and `main` branch of an Astro project hosted on a single GitHub repository, and that you have respective `dev` and `prod` Deployments on Astro where you deploy these branches.
+
+1. Create two Airflow Deployments within your Astronomer Workspace, one for dev and one for prod.
+2. Create a repository in GitHub that hosts project code for all Airflow Deployments within your Astronomer Workspace.
+3. In your GitHub code repository, create a dev branch off of your main branch.
+4. Configure your CI/CD tool to deploy to your dev Airflow Deployment whenever you push to your dev branch, and to deploy to your prod Airflow Deployment whenever you merge your dev branch into main.
+
 ### CircleCI
 
 To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
