@@ -107,7 +107,7 @@ If the upgrade was successful, you should be able to:
 We recommend cleaning up any remaining Kubernetes resources after your upgrade. To do so, run the following command:
 
 ```sh
-kubectl delete -f https://raw.githubusercontent.com/astronomer/astronomer/release-0.23/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/upgrade-0.16-to-0.23.yaml
+kubectl delete -f https://raw.githubusercontent.com/astronomer/astronomer/v0.23.18/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/upgrade-0.16-to-0.23.yaml
 ```
 
 ## Step 9: Upgrade the Astronomer CLI to v0.23
