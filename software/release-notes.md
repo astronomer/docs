@@ -29,10 +29,10 @@ Release date: April 8, 2022
 
 - Fixed an issue where deleted Teams did not disappear from the Software UI until you refreshed the page
 - Fixed an issue where Teams were still available in the Software UI even when their underlying IDP group had been deleted from the IDP
-- Fixed an issue where some Team group claims were not recognized by Astronomer
+- Fixed an issue where Teams did not respect the `claimsMapping` setting in `config.yaml`
 - Fixed an issue where creating a Deployment with the default resource configuration would result in a Deployment having a **Scheduler Count** of 1 instead of the stated default of 2
-- Fixed an issue where you could not deploy code to a Deployment that shared the namespace of a previous Deployment which was hard deleted.
-- Fixed an issue where you could not create a Deployment with a numeric-only name in a pre-created namespace.
+- Fixed an issue where you could not deploy code to a Deployment that shared the release name of a previous Deployment which was hard deleted
+- Fixed an issue where you could not create a Deployment with a numeric-only name in a pre-created namespace
 
 ## v0.28.3
 
