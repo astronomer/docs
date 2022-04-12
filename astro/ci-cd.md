@@ -208,9 +208,9 @@ To automate code deploys to a Deployment using a Docker-based [Drone CI](https:/
 This pipeline configuration requires:
 
 - A functional Drone [server](https://docs.drone.io/server/overview/) and [Docker runner](https://docs.drone.io/runner/docker/overview/).
-- Admin privileges within your Drone server.
+- A user with admin privileges to your Drone server.
 
-1. Set the following environment variables as repository-level [secrets](https://docs.drone.io/secret/repository/) in your Drone server:
+1. Set the following environment variables as repository-level [secrets](https://docs.drone.io/secret/repository/) on Drone:
 
     - `ASTRONOMER_KEY_ID` = `<your-key-id>`
     - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
