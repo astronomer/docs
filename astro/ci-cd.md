@@ -70,7 +70,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
    - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
 
-2. Create a new YAML file in `.github/workflows` that includes the following configuration:
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
     name: Astronomer CI - Deploy Code
@@ -95,6 +95,68 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           run: |
             brew install astronomer/cloud/astrocloud
             astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+    ```
+
+### GitHub Actions (Multiple Branches)
+
+The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions.
+
+This setup assumes the following prerequisites:
+- You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
+- You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches.
+- You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
+
+1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+
+   - `ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
+   - `ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
+   - `ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
+   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
+   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
+   - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
+
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
+
+    ```yaml
+    name: Astronomer CI - Deploy Code
+
+    on:
+      push:
+        branches: [dev]
+      pull_request:
+        types:
+          - closed
+        branches: [main]
+
+    jobs:
+      dev-push:
+        if: github.ref == 'refs/heads/dev'
+        env:
+          ## Sets DEV Deployment API key credentials as environment variables
+          ASTRONOMER_KEY_ID: ${{ secrets.DEV_ASTRONOMER_KEY_ID }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.DEV_ASTRONOMER_KEY_SECRET }}
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout repo
+          uses: actions/checkout@v2.3.4
+        - name: Deploy to Astro
+          run: |
+            brew install astronomer/cloud/astrocloud
+            astrocloud deploy ${{ secrets.DEV_DEPLOYMENT_ID }}
+      prod-push:
+        if: github.event.action == 'closed' && github.event.pull_request.merged == true
+        env:
+          ## Sets PROD Deployment API key credentials as environment variables
+          ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout repo
+          uses: actions/checkout@v2.3.4
+        - name: Deploy to Astro
+          run: |
+            brew install astronomer/cloud/astrocloud
+            astrocloud deploy ${{ secrets.DEPLOYMENT_ID }}
     ```
 
 ### Jenkins
@@ -138,17 +200,6 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
     `}</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
-
-### GitHub Actions (Multi-branch)
-
-The following steps can be used to create a multi-branch CI/CD pipeline using GitHub actions.
-
-This template assumes that you have both a `dev` and `main` branch of an Astro project hosted on a single GitHub repository, and that you have respective `dev` and `prod` Deployments on Astro where you deploy these branches.
-
-1. Create two Airflow Deployments within your Astronomer Workspace, one for dev and one for prod.
-2. Create a repository in GitHub that hosts project code for all Airflow Deployments within your Astronomer Workspace.
-3. In your GitHub code repository, create a dev branch off of your main branch.
-4. Configure your CI/CD tool to deploy to your dev Airflow Deployment whenever you push to your dev branch, and to deploy to your prod Airflow Deployment whenever you merge your dev branch into main.
 
 ### CircleCI
 
