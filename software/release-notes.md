@@ -24,12 +24,11 @@ Release date: April 8, 2022
 - Users added to Astronomer Software via an [IDP group](import-idp-groups.md) no longer need to be invited by email in order to join Astronomer.
 - Teams now support [Azure AD Connect sync](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/concept-azure-ad-connect-sync-user-and-contacts) for user groups.
 - System admins can no longer remove the last user from an active Workspace or Deployment. This ensures that a given Workspace or Deployment can always be deleted by an existing member. Similarly, Workspace Admins can no longer remove a Team if doing so results in a Workspace having zero Admins.
-
+- You can now map your IDP's groups claim to Astronomer's expected claim of `groups` via the `astronomer.houston.config.auth.openidConnect.<idp>.claimsMapping` setting in `config.yaml`.
 ### Bug Fixes
 
 - Fixed an issue where deleted Teams did not disappear from the Software UI until you refreshed the page
 - Fixed an issue where Teams were still available in the Software UI even when their underlying IDP group had been deleted from the IDP
-- Fixed an issue where Teams did not respect the `claimsMapping` setting in `config.yaml`
 - Fixed an issue where creating a Deployment with the default resource configuration would result in a Deployment having a **Scheduler Count** of 1 instead of the stated default of 2
 - Fixed an issue where you could not deploy code to a Deployment that shared the release name of a previous Deployment which was hard deleted
 - Fixed an issue where you could not create a Deployment with a numeric-only name in a pre-created namespace
