@@ -131,7 +131,7 @@ By default, the Astro CLI uses port `8080` for Airflow's Webserver and port `543
       port: 5435
     ```
 
-3. Run `astro dev restart` to rebuild and rerun your project.
+3. Run `astrocloud dev restart` to rebuild and rerun your project.
 
 :::
 
