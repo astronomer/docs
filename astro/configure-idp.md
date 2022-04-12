@@ -19,7 +19,7 @@ Astro supports integrations with the following IdPs:
 This guide provides setup steps for integrating both of these identity providers on Astro. Once you complete the integration for your organization:
 
 - Users will automatically be authenticated to Astro if they're already logged in to your IdP.
-- Enhanced user experience as repeated logins and remembering credentials is no longer required.
+- Users will no longer have to repeatedly login and remember credentials for their account.
 - You will have complete ownership over credential configuration and management on Astro.
 
 :::info
