@@ -99,9 +99,12 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
 ### GitHub Actions (Multiple Branches)
 
-The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions.
+The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
+
+![Diagram showing how a multibranch CI/CD pipeline works](/img/docs/multibranch.png)
 
 This setup assumes the following prerequisites:
+
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches.
 - You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
