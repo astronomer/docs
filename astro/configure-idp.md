@@ -20,7 +20,7 @@ This guide provides setup steps for integrating both of these identity providers
 
 - Users will automatically be authenticated to Astro if they're already logged in to your IdP.
 - Enhanced user experience as repeated logins and remembering credentials is no longer required.
-- Credential configuration and management is entirely owned by you (the Customer).
+- You will have complete ownership over credential configuration and management on Astro.
 
 :::info
 
