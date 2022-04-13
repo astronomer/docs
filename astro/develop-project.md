@@ -372,15 +372,17 @@ To build from a private repository, you need:
 
 - The [Astro CLI](install-cli.md).
 - An [Astro project](create-project.md).
-- A private GitHub repository with a directory of your Python packages.
+- One or more private GitHub repositories containing Python packages that can be installed by pip (see [PEP 516](https://peps.python.org/pep-0516/)).
 - An [SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repo.
 
 ### Step 1: Specify the Private Repository in Your Project
 
-To add Python packages from a private repository to your Astro project, specify the [SSH URL](https://docs.github.com/en/enterprise-server@3.1/get-started/getting-started-with-git/about-remote-repositories#cloning-with-ssh-urls) to your repository in your project's `requirements.txt` file. For example, to clone a private repository named `mypackages`, you would add the following line to `requirements.txt`
+To add a Python package from a private repository to your Astro project, specify the URL in the format `git+ssh://git@github.com/<organization_name>/<repository>.git` in your project's `requirements.txt` file in conjunction with any other packages. For example, to install the packages `mypackage1` & `mypackage2` from `myorganization` as well as numpy version 1.22.1, your `requirements.txt` should contain:
 
 ```
-git+git@github.com:myorganization/mypackages.git
+git+ssh://git@github.com/myorganization/mypackage1.git
+git+ssh://git@github.com/myorganization/mypackage2.git
+numpy==1.22.1
 ```
 
 ### Step 2: Create Dockerfile.build
