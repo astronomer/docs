@@ -264,7 +264,7 @@ To build from a private repository, you need:
 
 ### Step 1: Specify the Private Repository in Your Project
 
-To add a Python package from a private repository to your Astro project, specify repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as `git+ssh://git@github.com/<organization-name>/<repository>.git`. 
+To add a Python package from a private repository to your Software project, specify repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as `git+ssh://git@github.com/<organization-name>/<repository>.git`. 
 
 For example, to install the `mypackage1` & `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to `requirements.txt`:
 
