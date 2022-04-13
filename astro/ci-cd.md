@@ -106,7 +106,7 @@ The following setup can be used to create a multi-branch CI/CD pipeline using Gi
 This setup assumes the following prerequisites:
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
-- You have respective `dev` and `prod` Deployments on Astro where you deploy the code in your GitHub branches.
+- You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
 - You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
