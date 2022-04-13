@@ -111,9 +111,9 @@ This setup assumes the following prerequisites:
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-   - `ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
-   - `ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
-   - `ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
+   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
+   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
+   - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
    - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
@@ -145,13 +145,13 @@ This setup assumes the following prerequisites:
         - name: Deploy to Astro
           run: |
             brew install astronomer/cloud/astrocloud
-            astrocloud deploy ${{ secrets.DEV_DEPLOYMENT_ID }}
+            astrocloud deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }}
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
           ## Sets PROD Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+          ASTRONOMER_KEY_ID: ${{ secrets.PROD_ASTRONOMER_KEY_ID }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.PROD_ASTRONOMER_KEY_SECRET }}
         runs-on: ubuntu-latest
         steps:
         - name: checkout repo
@@ -159,7 +159,7 @@ This setup assumes the following prerequisites:
         - name: Deploy to Astro
           run: |
             brew install astronomer/cloud/astrocloud
-            astrocloud deploy ${{ secrets.DEPLOYMENT_ID }}
+            astrocloud deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
 ### Jenkins
