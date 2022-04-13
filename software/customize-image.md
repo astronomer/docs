@@ -257,16 +257,21 @@ To build from a private repository, you need:
 
 - The [Astronomer CLI](cli-quickstart.md).
 - A [Software project](create-project.md).
-- A private GitHub repository with a directory of your Python packages.
-- An [SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repo.
+- Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
+- A private GitHub repository for each of your custom Python packages.
+- An [SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repo(s).
 
 
 ### Step 1: Specify the Private Repository in Your Project
 
-To add Python packages from a private repository to your Software project, specify the [SSH URL](https://docs.github.com/en/enterprise-server@3.1/get-started/getting-started-with-git/about-remote-repositories#cloning-with-ssh-urls) to your repository in your project's `requirements.txt` file. For example, to clone a private repository named `mypackages`, you would add the following line to `requirements.txt`
+To add a Python package from a private repository to your Software project, specify repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as `git+ssh://git@github.com/<organization-name>/<repository>.git`. 
+
+For example, to install the `mypackage1` & `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to `requirements.txt`:
 
 ```
-git+git@github.com:myorganization/mypackages.git
+git+ssh://git@github.com/myorganization/mypackage1.git
+git+ssh://git@github.com/myorganization/mypackage2.git
+numpy==1.22.1
 ```
 
 ### Step 2. Create Dockerfile.build
