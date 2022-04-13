@@ -17,8 +17,8 @@ Release date: April 11, 2022
 
 ### Additional Improvements
 
-- The astrocloud dev start command should now be slightly faster
-- Astrocloud deploy output not links to the Deployment’s page in the Astronomer UI and its Webserver URL. This gives users easy access to these URLs after a deploy
+- Improved the performance of `astrocloud dev start`
+- When you successfully push code to a Deployment via `astrocloud deploy`, the CLI now provides URLs for accessing the Deployment's Cloud UI and Airflow UI pages.
 
 ## v1.3.3
 
