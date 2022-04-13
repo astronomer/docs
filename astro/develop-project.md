@@ -372,8 +372,7 @@ To build from a private repository, you need:
 
 - The [Astro CLI](install-cli.md).
 - An [Astro project](create-project.md).
-- Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
-- Private GitHub repositories hosting code for each of your Python packages. 
+- Private GitHub repositories hosting code for each of your Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/). 
 - An [SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repo.
 
 ### Step 1: Specify the Private Repository in Your Project
