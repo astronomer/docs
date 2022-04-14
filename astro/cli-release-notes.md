@@ -11,6 +11,26 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, don't hesitate to reach out to us via Slack or Intercom. We're here to help.
 
+## v1.4.0
+
+Release date: April 14, 2022
+
+### New Command to List and Save Deployment Environment Variables
+
+Users can now list Deployment Environment Variables and save them to a local env file with astrocloud deployment variable list. With this command users no longer have to copy and paste deployment variables from the Astronomer UI to use a deployments variables locally
+
+Users can also list a Deployment’s variables at any time. If a variable’s value is secret only the variable’s key will show in the output and be exported to an env file.
+
+### New Command to create and Load Deployment Environment Variables
+
+Users can now create Deployment Environment Variables with the CLI either from the command line or an env file. Now users will not longer need to copy and past variables from a local env file during local development or while transferring deployments.
+
+Users can also update existing env variables with the —update flag. Users can update a variables value or make it a secret but secret values cannot be unmasked.
+
+### Additional Improvements
+
+- Users can now name custom images anything they would like as long as they are based on a runtime image. Custom image names will no longer cause issues with the dev start and dev deploy commands.
+
 ## v1.3.4
 
 Release date: April 11, 2022
