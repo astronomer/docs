@@ -356,7 +356,7 @@ my_project
 
 ## Install Python Packages from a Private GitHub Repository
 
-This topic provides instructions for building your Astro project using Python packages from a private GitHub repository. At a high level, this setup creates a custom Docker image that mounts an SSH key for your repository whenever you build your project.
+This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.  At a high level, this setup entails specifying your private packages in `requirements.txt`, creating a custom Docker image that mounts a GitHub SSH key for your private GitHub repositories, and building your project with this Docker image.
 
 Although this setup is based on GitHub, the general steps can be completed with any hosted Git repository.
 
@@ -374,11 +374,15 @@ To build from a private repository, you need:
 - An [Astro project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
-- An [SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repo(s).
+- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repo(s).
 
 ### Step 1: Specify the Private Repository in Your Project
 
-To add a Python package from a private repository to your Astro project, specify repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as `git+ssh://git@github.com/<organization-name>/<repository>.git`. 
+To add a Python package from a private repository to your Astro project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as:
+
+```
+git+ssh://git@github.com/<organization-name>/<repository>.git
+```
 
 For example, to install the `mypackage1` & `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to `requirements.txt`:
 
@@ -390,21 +394,21 @@ numpy==1.22.1
 
 ### Step 2: Create Dockerfile.build
 
-1. In your Astro project, create a duplicate of your `Dockerfile` named `Dockerfile.build`.
+1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
 
 2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 4.2.10, your `FROM` line would be:
 
    ```text
-   quay.io/astronomer/astro-runtime:4.2.10 AS stage1
+   FROM quay.io/astronomer/astro-runtime:4.2.10-base AS stage1
    ```
 
-  :::caution
+  :::info
 
-  If you use a non-`base` distribution of Runtime, you need to replace it with the more customizable `base` distribution before building your project from a private registry. For more information, see [Distributions](runtime-version-lifecycle-policy.md#distribution)
+  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` distribution as demonstrated in the example above. This `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
 
   :::
 
-3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
+3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -441,7 +445,7 @@ numpy==1.22.1
 
   :::tip
 
-  If you don't want keys in this file to be pushed back up to your GitHub repo, consider adding this file to `.gitignore`.
+  If you don't want keys in this file to be pushed back up to your GitHub repository, consider adding this file to `.gitignore`.
 
   :::
 
@@ -453,16 +457,16 @@ numpy==1.22.1
 
 ### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH key file name:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH key file name and `<runtime-image>` with your Runtime image:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<airflow-image> .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<runtime-image> .
     ```
 
-    For example, if you have `quay.io/astronomer/astro-runtime:4.2.0` in your `Dockerfile.build`, this command would be:
+    For example, if you have `quay.io/astronomer/astro-runtime:4.2.10` in your `Dockerfile.build`, this command would be:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-4.2.0 .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-4.2.10-base .
     ```
 
   :::info
@@ -474,13 +478,13 @@ numpy==1.22.1
 2. Replace the contents of your Astro project's `Dockerfile` with the following:
 
    ```
-   FROM custom-<airflow-image>
+   FROM custom-<runtime-image>
    ```
 
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:4.2.0`, this line would be:
+   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:4.2.10-base`, this line would be:
 
    ```
-   FROM custom-astro-runtime:4.2.0
+   FROM custom-astro-runtime:4.2.10-base
    ```
 
 Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-cli.md).
