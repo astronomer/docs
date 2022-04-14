@@ -16,6 +16,17 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.3 ([Release notes](cli-release-notes.md))
 
+## April 14, 2022
+
+### Additional Improvements
+
+- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html), which improves security and reduces costs on your cloud.
+
+### Bug Fixes
+
+- Fixed an issue where you could invite a user to an Organization that was already a part of the Organization
+- Fixed an issue where you could not invite a new user with an email address that contained uppercase characters
+
 ## March 31, 2022
 
 ### New Analytics Page in Cloud UI to Monitor Deployments
@@ -62,7 +73,7 @@ For a full list of AWS regions supported on Astro, see [AWS Resource Reference](
 - The Cloud UI now includes a button that links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
 
     ![Runtime Tag banner](/img/release-notes/support-button.png)
-    
+
 ## March 25, 2022
 
 ### Maximum Node Count is now Configurable per Cluster
