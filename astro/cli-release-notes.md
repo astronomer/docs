@@ -29,7 +29,7 @@ For more information about this command and its options, see the [Astro CLI Refe
 
 ### Additional Improvements
 
-- Users can now name custom images anything they would like as long as they are based on a runtime image. Custom image names will no longer cause issues with the dev start and dev deploy commands.
+- You can now specify a custom image name in your Astro project's `Dockerfile` as long as the image is based on an existing Runtime image. 
 
 ## v1.3.4
 
