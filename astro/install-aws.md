@@ -23,7 +23,15 @@ For a complete list of the AWS resources that our team will provision in your AW
 Before completing this setup, make sure that you have:
 
 - A dedicated AWS account with minimum EC2 service quotas.
-- A user with `CreateRole` and `cloudformation:*` privileges.
+- A user with the following permissions:
+    - `cloudformation:*`
+    - `GetRole`
+    - `GetRolePolicy`
+    - `CreateRole`
+    - `DeleteRolePolicy`
+    - `PutRolePolicy`
+    - `ListRoles`
+    - `UpdateAssumeRolePolicy`
 - A subscription to the [Astro Status Page](https://cloud-status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
 
 Astro requires a clean AWS account with a minimum set of EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. For instructions on creating a new AWS account, follow [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
@@ -98,7 +106,7 @@ Then, click the link below to create an [cross-account admin IAM role](https://d
 
 - [Create cross-account IAM Role](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402)
 
-Alternatively, if you only have `CreateRole` permissions, you can create a cross-account IAM Role by running the following AWS CLI command:
+Using this CloudFormation link is the recommended way to create an IAM role for Astro. Alternatively, you can create a cross-account IAM Role by running the following AWS CLI commands:
 
 ```bash
 $ aws iam create-role --role-name astronomer-remote-management --assume-role-policy-document "{
