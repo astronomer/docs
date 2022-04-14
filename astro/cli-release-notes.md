@@ -17,11 +17,9 @@ Release date: April 14, 2022
 
 ### New Command to List and Save Deployment Environment Variables
 
-Users can now list Deployment Environment Variables and save them to a local env file with astrocloud deployment variable list. With this command users no longer have to copy and paste deployment variables from the Astronomer UI to use a deployments variables locally
+You can now list a Deployment's Environment Variables and save them to a local `.env` file with the new `astrocloud deployment variable list` command, which makes it easy to export environment-level settings from a Deployment and test them in a local Airflow environment. For more information about this command, see the [Astro CLI Reference Guide](cli-reference/astrocloud-deployment-variable-list).
 
-Users can also list a Deployment’s variables at any time. If a variable’s value is secret only the variable’s key will show in the output and be exported to an env file.
-
-### New Command to create and Load Deployment Environment Variables
+### New Command to Create and Load Deployment Environment Variables
 
 Users can now create Deployment Environment Variables with the CLI either from the command line or an env file. Now users will not longer need to copy and past variables from a local env file during local development or while transferring deployments.
 
