@@ -20,11 +20,11 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### Additional Improvements
 
-- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html), which improves security and reduces costs on your cloud.
+- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html). This ensures that traffic to AWS services is kept private and does not traverse the NAT and Internet gateways, reducing the risk of exposing your resources to the internet. 
 
 ### Bug Fixes
 
-- Fixed an issue where you could invite a user to an Organization that was already a part of the Organization
+- Fixed an issue where you could invite a user to an Organization who was already part of the Organization
 - Fixed an issue where you could not invite a new user with an email address that contained uppercase characters
 
 ## March 31, 2022
