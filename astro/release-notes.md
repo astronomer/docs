@@ -14,7 +14,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest Runtime Version**: 4.2.4 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.3.3 ([Release notes](cli-release-notes.md))
+**Latest CLI Version**: 1.4.0 ([Release notes](cli-release-notes.md))
 
 ## March 31, 2022
 
@@ -62,7 +62,7 @@ For a full list of AWS regions supported on Astro, see [AWS Resource Reference](
 - The Cloud UI now includes a button that links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
 
     ![Runtime Tag banner](/img/release-notes/support-button.png)
-    
+
 ## March 25, 2022
 
 ### Maximum Node Count is now Configurable per Cluster
