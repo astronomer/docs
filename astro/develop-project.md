@@ -394,6 +394,8 @@ git+ssh://git@github.com/myorganization/mypackage2.git
 numpy==1.22.1
 ```
 
+This example assumes that the name of each of your Python packages is identical to the name of its corresponding GitHub repository. In other words,`mypackage1` is both the name of the package and the name of the repository.
+
 ### Step 2: Create Dockerfile.build
 
 1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
