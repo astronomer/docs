@@ -24,8 +24,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### Bug Fixes
 
-- Fixed an issue where you could invite a user to an Organization who was already part of the Organization
-- Fixed an issue where you could not invite a new user with an email address that contained uppercase characters
+- Fixed an issue where you could not add a new user with an email address that contained uppercase characters to a Workspace
 
 ## March 31, 2022
 
