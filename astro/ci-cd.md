@@ -341,3 +341,87 @@ This pipeline configuration requires:
       event:
       - push
     `}</code></pre>
+
+### GitLab
+
+To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
+
+1. Set the following environment variables in your project. Variables can be set under Project Settings >> CICD >> Variables:
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+    - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
+   
+2. Go to the Editor option in your project's CI/CD section and commit the following:
+
+   <pre><code parentName="pre">{`---
+      astro_deploy:
+      stage: deploy
+      image: docker:latest
+      services:
+       - docker:dind
+      variables:
+         ASTRONOMER_KEY_ID: $ASTRONOMER_KEY_ID
+         ASTRONOMER_KEY_SECRET: $ASTRONOMER_KEY_SECRET
+      before_script:
+       - apk add --update curl && rm -rf /var/cache/apk/*
+      script:
+       - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
+       - tar xzf astrocloudcli.tar.gz
+       - ./astrocloud deploy $ASTRONOMER_DEPLOYMENT_ID -f
+      only:
+       - main
+   `}</code></pre>
+
+### GitLab (Multiple Branches)
+
+To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
+
+1. Set the following environment variables in your project. Variables can be set under Project Settings >> CICD >> Variables:
+
+    - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
+    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
+    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
+    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
+    - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
+    - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
+   
+   >IMPORTANT: When creating variables that will be used in branches other than `main`/`master`, you will need to either protect the branch they are being used in (i.e. `dev`) or uncheck the `Protect variable` flag when creating the variable. For more information on protected branches, review GitLab's official docs [here](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
+   
+2. Go to the Editor option in your project's CI/CD section and commit the following:
+
+   <pre><code parentName="pre">{`---
+      astro_deploy_dev:
+        stage: deploy
+        image: docker:latest
+        services:
+          - docker:dind
+        variables:
+            ASTRONOMER_KEY_ID: $DEV_ASTRONOMER_KEY_ID
+            ASTRONOMER_KEY_SECRET: $DEV_ASTRONOMER_KEY_SECRET
+        before_script:
+          - apk add --update curl && rm -rf /var/cache/apk/*
+        script:
+          - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
+          - tar xzf astrocloudcli.tar.gz
+          - ./astrocloud deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
+        only:
+          - dev
+      
+      astro_deploy_prod:
+        stage: deploy
+        image: docker:latest
+        services:
+          - docker:dind
+        variables:
+            ASTRONOMER_KEY_ID: $PROD_ASTRONOMER_KEY_ID
+            ASTRONOMER_KEY_SECRET: $PROD_ASTRONOMER_KEY_SECRET
+        before_script:
+          - apk add --update curl && rm -rf /var/cache/apk/*
+        script:
+          - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
+          - tar xzf astrocloudcli.tar.gz
+          - ./astrocloud deploy $PROD_ASTRONOMER_DEPLOYMENT_ID -f
+        only:
+          - main
+   `}</code></pre>
