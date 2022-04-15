@@ -368,23 +368,25 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 ### Prerequisites
 
-To build from a private repository, you need:
+To install Python packages from a private GitHub repository on Astro, you need:
 
 - The [Astro CLI](install-cli.md).
 - An [Astro project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
-- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repo(s).
+- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+
+This setup assumes that each custom Python package is hosted within its own private GitHub repository. Installing multiple custom packages from a single private GitHub repository is not supported.
 
 ### Step 1: Specify the Private Repository in Your Project
 
 To add a Python package from a private repository to your Astro project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as:
 
 ```
-git+ssh://git@github.com/<organization-name>/<repository>.git
+git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git
 ```
 
-For example, to install the `mypackage1` & `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to `requirements.txt`:
+For example, to install `mypackage1` & `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to your `requirements.txt` file:
 
 ```
 git+ssh://git@github.com/myorganization/mypackage1.git
@@ -404,7 +406,7 @@ numpy==1.22.1
 
   :::info
 
-  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` distribution as demonstrated in the example above. This `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
+  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image as demonstrated in the example above. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
 
   :::
 
@@ -439,8 +441,8 @@ numpy==1.22.1
 
     In order, these commands:
 
-    - Complete the standard installation of OS-level packages in `packages.txt`.
-    - Securely mount your SSH key during build, which ensures that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Install any OS-level packages specified in `packages.txt`.
+    - Securely mount your SSH key at build time. This ensures that the key itself is not stored in the resulting Docker image filesystem or metadata.
     - Install Python-level packages from your private repository as specified in your `requirements.txt` file.
 
   :::tip
@@ -457,13 +459,13 @@ numpy==1.22.1
 
 ### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH key file name and `<runtime-image>` with your Runtime image:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH key file name and `<astro-runtime-image>` with your Astro Runtime image:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<runtime-image> .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
     ```
 
-    For example, if you have `quay.io/astronomer/astro-runtime:4.2.10` in your `Dockerfile.build`, this command would be:
+    For example, if you have `quay.io/astronomer/astro-runtime:4.2.10-base` in your `Dockerfile.build`, this command would be:
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-4.2.10-base .

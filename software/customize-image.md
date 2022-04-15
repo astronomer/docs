@@ -253,18 +253,20 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 ### Prerequisites
 
-To build from a private repository, you need:
+To install Python packages from a private GitHub repository on Astronomer Software, you need:
 
 - The [Astronomer CLI](cli-quickstart.md).
 - A [Software project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
-- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repo(s).
+- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+
+This setup assumes that each custom Python package is hosted within its own private GitHub repository. Installing multiple packages from a single private GitHub repository is not supported.
 
 
 ### Step 1: Specify the Private Repository in Your Project
 
-To add a Python package from a private repository to your Software project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as `git+ssh://git@github.com/<organization-name>/<repository>.git`.
+To add a Python package from a private repository to your Software project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as `git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git`.
 
 For example, to install the `mypackage1` & `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to `requirements.txt`:
 
@@ -286,7 +288,7 @@ numpy==1.22.1
 
   :::caution
 
-  If you use an `-onbuild` distribution of Certified, you need to replace it with the more customizable base distribution before building your project from a private registry. This base distribution is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution)
+  If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution)
 
   :::
 
@@ -321,9 +323,9 @@ numpy==1.22.1
 
     In order, these commands:
 
-    - Complete the standard installation of OS-level packages in `packages.txt`.
-    - Securely mount your SSH key during build, which ensures that the key itself is not stored in the resulting Docker image filesystem or metadata.
-    - Install Python-level packages from your private repository as specified in your `requirements.txt` file.
+    - Install any OS-level packages specified in `packages.txt`.
+    - Securely mount your GitHub SSH key at build time. This ensures that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Install all Python-level packages in `requirements.txt` file, including those from a private GitHub repository.
 
   :::tip
 
