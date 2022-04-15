@@ -16,6 +16,17 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.4.0 ([Release notes](cli-release-notes.md))
 
+## April 14, 2022
+
+### Additional Improvements
+
+- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html). This ensures that traffic to AWS services is kept private and does not traverse the NAT and Internet gateways, reducing the risk of exposing your resources to the internet. 
+
+### Bug Fixes
+
+- Fixed an issue where you could invite a user to an Organization who was already part of the Organization
+- Fixed an issue where you could not invite a new user with an email address that contained uppercase characters
+
 ## March 31, 2022
 
 ### New Analytics Page in Cloud UI to Monitor Deployments
