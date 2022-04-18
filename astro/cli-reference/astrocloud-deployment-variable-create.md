@@ -37,7 +37,7 @@ astrocloud deployment variable create
 $ astrocloud deployment variable create cl03oiq7d80402nwn7fsl3dmv --key AIRFLOW__SECRETS__BACKEND_KWARGS --value <my-secret-value> --secret
 
 # Create multiple environment variables for a Deployment at once by loading them from a .env file
-$ astrocloud deployment variable create cl03oiq7d80402nwn7fsl3dmv --load --env /users/documents/my-astro-project/.env
+$ astrocloud deployment variable create cl03oiq7d80402nwn7fsl3dmv --load --env .env.dev
 
 # Update the value of an existing environment variable
 $ astrocloud deployment variable create cl03oiq7d80402nwn7fsl3dmv --update AIRFLOW__CORE__PARALLELISM --value <my-new-value>
