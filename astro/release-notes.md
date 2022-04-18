@@ -24,7 +24,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### Bug Fixes
 
-- Fixed an issue where you could not add a new user with an email address that contained uppercase characters to a Workspace
+- Fixed an issue where you could not add a new user to a Workspace if the user had an email address that contained uppercase characters
 
 ## March 31, 2022
 
