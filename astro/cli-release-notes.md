@@ -15,21 +15,21 @@ If you have any questions or a bug to report, don't hesitate to reach out to us 
 
 Release date: April 14, 2022
 
+### New Command to Create Environment Variables
+
+`astrocloud deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually via the Cloud UI.
+
+For more information about this command and its options, see the [Astro CLI Command Reference](cli-reference/astrocloud-deployment-variable-create.md).
+
 ### New Command to List and Save Deployment Environment Variables
 
-You can now list a Deployment's Environment Variables and save them to a local `.env` file with the new `astrocloud deployment variable list` command, which makes it easy to export environment-level settings from a Deployment and test them in a local Airflow environment.
+You can now list existing environment variables for a given Deployment and save them to a local `.env` file with a new `astrocloud deployment variable list` command. This command makes it easy to export existing environment variables for a given Deployment on Astro and test DAGs with them in a local Airflow environment.
 
-For more information about this command and its options, see the [Astro CLI Reference Guide](cli-reference/astrocloud-deployment-variable-list).
-
-### New Command to Create Deployment Environment Variables
-
-You can use the new `astrocloud deployment variable create` command to create and update environment variables in a Deployment. New environment variables can be specified either from an `.env` file or directly in the CLI command. This command makes it easy to export environment variables from a locally hosted Astro project to a Deployment.
-
-For more information about this command and its options, see the [Astro CLI Reference Guide](cli-reference/astrocloud-deployment-variable-create).
+For more information about this command and its options, see the [Astro CLI Command Reference](cli-reference/astrocloud-deployment-variable-list.md).
 
 ### Additional Improvements
 
-- You can now specify a custom image name in your Astro project's `Dockerfile` as long as the image is based on an existing Runtime image. 
+- You can now specify a custom image name in your Astro project's `Dockerfile` as long as the image is based on an existing Astro Runtime image
 
 ## v1.3.4
 

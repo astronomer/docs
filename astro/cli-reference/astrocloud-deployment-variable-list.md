@@ -7,7 +7,7 @@ description: Reference documentation for astrocloud deployment variable list.
 
 ## Description
 
-List a Deployment's environment variables and save them to a local `.env` file. If an environment variable is secret, the CLI will list only its key.
+List a Deployment's environment variables and save them to a local `.env` file. If an environment variable value is set as secret, the CLI will list only its key.
 
 ## Usage
 
@@ -19,20 +19,20 @@ astrocloud deployment variable list
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `-d`,`--deployment-id`           |     The Deployment to list variables for                                                | Any valid Deployment ID |
+| `-d`,`--deployment-id`           |    The Deployment for which to list environment variables                                                | Any valid Deployment ID |
 | `-e`,`--env`                  | The directory where the `.env` file will be generated (default is your current directory)                                                                 | Any valid filepath       |
 | `-k`,`--key`             | Only list the variable with the provided key                                                  | Any string |
 | `-s`,`--save`    | Save environment variables to an environment file               |`` |
-| `-w`,`--workspace-id`          | List environment variables for a Deployment outside of your current Workspace           | Any valid Workspace ID                                                         |
+| `-w`,`--workspace-id`          | List environment variables for a Deployment that is not in your current Workspace. If not specified, your current Workspace is assumed           | Any valid Workspace ID                                                         |
 
 ## Examples
 
 ```sh
-# Save environment variables from a specific Directory as an `.env` file in your current directory
+# Save all environment variables currently running on an Astro Deployment to the `.env` file in your current directory
 $ astrocloud deployment variable list cl03oiq7d80402nwn7fsl3dmv --save
 
-# Save a single variable to an `.env` file outside of your current directory
-$ astrocloud deployment variable list cl03oiq7d80402nwn7fsl3dmv --save --env /users/myaccount/documents/myproject --key AIRFLOW_VAR_MY_VAR
+# Save only a single environment variable from a Deployment on Astro to a `.env` file that is outside of your current directory
+$ astrocloud deployment variable list cl03oiq7d80402nwn7fsl3dmv --key AIRFLOW__CORE__PARALLELISM --save --env /users/documents/my-astro-project/.env
 ```
 
 ## Related Commands
