@@ -7,7 +7,7 @@ description: Learn how to connect your Astro Data Plane to different types of ex
 
 ## Overview
 
-Before you can run pipelines on Astro with real data, you first need to make your data services accessible to the Data Plane. This guide explains how to securely connect your Astro Clusters to external data services using the following methods:
+Before you can run pipelines on Astro with real data, you first need to make your data services accessible to Deployments in your Data Plane. This guide explains how to securely connect Astro to external data services using the following methods:
 
 - Public Endpoints
 - VPC Peering
@@ -51,6 +51,6 @@ Once peering is set up, the owner of the target VPC can expect to continue to wo
 
 To resolve DNS hostnames from your target VPC, your Cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled via AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
 
-If your target VPC also resolves DNS hostnames via **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the Data Plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+If your target VPC resolves DNS hostnames via **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the Data Plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting [Astronomer support](https://support.astronomer.io).
