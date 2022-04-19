@@ -15,7 +15,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to us 
 
 Release date: April 14, 2022
 
-### New Command to Create Environment Variables
+### New Command to Create and Update Environment Variables
 
 `astrocloud deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually via the Cloud UI.
 
