@@ -119,6 +119,8 @@ module.exports = {
             'cli-reference/astrocloud-deployment-list',
             'cli-reference/astrocloud-deployment-logs',
             'cli-reference/astrocloud-deployment-update',
+            'cli-reference/astrocloud-deployment-variable-create',
+            'cli-reference/astrocloud-deployment-variable-list',
             'cli-reference/astrocloud-dev-init',
             'cli-reference/astrocloud-dev-kill',
             'cli-reference/astrocloud-dev-logs',
