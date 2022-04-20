@@ -490,4 +490,4 @@ This example assumes that the name of each of your Python packages is identical 
    FROM custom-astro-runtime:4.2.10-base
    ```
 
-Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-cli.md).
+Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
