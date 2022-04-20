@@ -375,7 +375,7 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
 
 ### GitLab (Multiple Branches)
 
-To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
+To automate code deploys to Astro across multiple environments using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
 
 1. Set the following environment variables in your project. Variables can be set under Project Settings >> CICD >> Variables:
 
