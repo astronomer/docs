@@ -386,7 +386,11 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
     - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
     - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
    
-   >IMPORTANT: When creating variables that will be used in branches other than `main`/`master`, you will need to either protect the branch they are being used in (i.e. `dev`) or uncheck the `Protect variable` flag when creating the variable. For more information on protected branches, review GitLab's official docs [here](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
+:::caution
+
+When you create environment variables that will be used in multiple branches, you may want to protect the branch they are being used in. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. For more information on protected branches, see [GitLab documentation](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
+
+:::
    
 2. Go to the Editor option in your project's CI/CD section and commit the following:
 
