@@ -69,7 +69,7 @@ Use the following example API requests to begin automating your own Airflow acti
 To trigger a DAG, you can run a simple cURL command that makes a POST request to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) of the Airflow REST API:
 
 ```
-POST /airflow/api/v1/dags/<dag-id>/dagRuns
+POST /dags/<dag-id>/dagRuns
 ```
 
 The command for your request should look like this:
@@ -123,7 +123,7 @@ curl -v -X POST
 To list all pools for your Deployment, you can run a simple command that makes a GET request to the [`pools` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Pool) of the Airflow REST API:
 
 ```
-GET /api/v1/pools
+GET /pools
 ```
 
 Here, your request would look like this:
