@@ -84,7 +84,7 @@ The command for your request should look like this:
 
 ```
 curl -v -X POST
-https://<AIRFLOW-DOMAIN>/airflow/api/experimental/dags/<DAG-ID>/dagRuns
+https://<AIRFLOW-DOMAIN>/api/v1/dags/<DAG-ID>/dagRuns
 -H 'Authorization: <API-Key> '
 -H 'Cache-Control: no-cache'
 -H 'content-type: application/json' -d '{}'
@@ -120,7 +120,7 @@ Here, your request becomes:
 
 ```
 curl -v -X POST
-https://<AIRFLOW_DOMAIN>/api/experimental/dags/customer_health_score/dagRuns
+https://<AIRFLOW_DOMAIN>/api/v1/dags/<DAG-ID>/dagRuns
 -H 'Authorization: <API-Key>'
 -H 'Cache-Control: no-cache'
 -H 'content-type: application/json' -d '{"execution_date":"2019-11-16T11:34:00"}'
@@ -132,12 +132,12 @@ The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2+.
 
 :::
 
-### Get all Pools
+### List Pools
 
-If you'd like to get all existing Pools from your Airflow Deployment, you can start with a generic Python command to Airflow's `GET` endpoint:
+To list all Airflow pools for your Deployment, you can run a simple command that makes a GET request to the [`pools` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Pool) of the Airflow REST API:
 
 ```
-GET /api/experimental/pools
+GET /pools
 ```
 
 Here, your request would look like this:
@@ -148,7 +148,7 @@ import requests
 token="<API-Key>"
 base_url="https://<your-base-domain/"
 resp = requests.get(
-   url=base_url + "<deployment-release-name>/airflow/api/experimental/pools",
+   url=base_url + "<deployment-release-name>/api/v1/pools",
    headers={"Authorization": token},
    data={}
 )
@@ -193,7 +193,7 @@ Here, your cURL request would look like the following:
 
 ```
 curl -X GET \
-https://<AIRFLOW-DOMAIN>/airflow/api/v1/config \
+https://<AIRFLOW-DOMAIN>/api/v1/config \
 -H 'Authorization: <API-Key>' \
 -H 'Cache-Control: no-cache'
 ```
