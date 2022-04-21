@@ -88,11 +88,11 @@ Make sure to replace the following values with your own:
 - `<deployment-url>`
 - `<access-token>`
 
-This will trigger a DAG run for the DAG you specify with an `execution_date` value of `NOW()`, which is equivalent to clicking the **Play** button in the main **DAGs** view of the Airflow UI.
+This will trigger a DAG run for the DAG you specify with an `logical_date` value of `NOW()`, which is equivalent to clicking the **Play** button in the main **DAGs** view of the Airflow UI.
 
 #### Specify Execution Date
 
-If you have a specific `execution_date` to trigger your DAG on, you can pass in a timestamp with the parameter's JSON value `("-d'{}')`.
+If you have a specific `logical_date` to trigger your DAG on, you can pass in a timestamp with the parameter's JSON value `("-d'{}')`.
 
 The string needs to be in the following format (in UTC):
 
@@ -115,7 +115,7 @@ curl -v -X POST
 <deployment-url>/api/v1/dags/<dag-id>/dagRuns
 -H ‘Authorization: <access-token>’
 -H ‘Cache-Control: no-cache’
--H ‘content-type: application/json’ -d ‘{“execution_date”:“2021-11-16T11:34:00”}’
+-H ‘content-type: application/json’ -d ‘{“logical_date”:“2021-11-16T11:34:00”}’
 ```
 
 ### List All Pools
