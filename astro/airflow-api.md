@@ -88,7 +88,7 @@ Make sure to replace the following values with your own:
 - `<deployment-url>`
 - `<access-token>`
 
-This will trigger a DAG run for the DAG you specify with an `logical_date` value of `NOW()`, which is equivalent to clicking the **Play** button in the main **DAGs** view of the Airflow UI.
+This will trigger a DAG run for the DAG you specify with a `logical_date` value of `NOW()`, which is equivalent to clicking the **Play** button in the main **DAGs** view of the Airflow UI.
 
 #### Specify Execution Date
 
