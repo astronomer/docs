@@ -13,11 +13,14 @@ jobs:
         uses: actions/checkout@v2
         with:
           path: docs
-      - name: Create CONFIG env var
+      - name: Create CONFIG env var from algolia-config.json
+        # Uses solution for multiline string env vars
+        # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
         run: |
           echo "CONFIG<<EOF" >> $GITHUB_ENV
           echo "$(cat docs/algolia-config.json)" >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-          # echo "CONFIG=$(cat /path/to/your/config.json | jq -r tostring)" >> $GITHUB_ENV
+      - run: pwd
+      - run: ls -altr
       - name: Run Algolia
         run: "pipenv run python -m src.index"
