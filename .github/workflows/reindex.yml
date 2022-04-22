@@ -11,8 +11,7 @@ jobs:
     steps:
       - run: pwd
       - run: ls -altr
-        with:
-          workdir: /root
+        working-directory: /root
       - name: Check out the repo
         uses: actions/checkout@v2
         with:
