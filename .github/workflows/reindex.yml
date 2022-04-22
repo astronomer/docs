@@ -7,9 +7,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-      image: algolia/docsearch-scraper-base
+      image: algolia/docsearch-scraper
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
+        with:
+          path: docs
+      - name: Create CONFIG env var
+        run: |
+          echo "CONFIG=$(cat docs/algolia-config.json)" >> $GITHUB_ENV
+          # echo "CONFIG=$(cat /path/to/your/config.json | jq -r tostring)" >> $GITHUB_ENV
       - name: Run Algolia
         run: "pipenv run python -m src.index"
