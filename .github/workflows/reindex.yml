@@ -11,6 +11,8 @@ jobs:
     steps:
       - run: pwd
       - run: ls -altr
+        with:
+          workdir: /root
       - name: Check out the repo
         uses: actions/checkout@v2
         with:
@@ -26,3 +28,5 @@ jobs:
       - run: ls -altr
       - name: Run Algolia
         run: "pipenv run python -m src.index"
+        with:
+          workdir: /root
