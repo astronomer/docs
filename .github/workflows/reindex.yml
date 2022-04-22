@@ -9,6 +9,8 @@ jobs:
     container:
       image: algolia/docsearch-scraper
     steps:
+      - run: pwd
+      - run: ls -altr
       - name: Check out the repo
         uses: actions/checkout@v2
         with:
