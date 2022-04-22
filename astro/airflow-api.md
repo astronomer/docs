@@ -94,7 +94,7 @@ This will trigger a DAG run for the DAG you specify with a `logical_date` value 
 
 If you have a specific `logical_date` to trigger your DAG on, you can pass in a timestamp with the parameter's JSON value `("-d'{}')`.
 
-The string needs to be in the following format (in UTC):
+The timestamp string is expressed in UTC and must be specified in the following format:
 
 ```
 “YYYY-MM-DDTHH:MM:SS”
