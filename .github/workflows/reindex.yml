@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
-      - uses: darrenjennings/algolia-docsearch-action@master
+      - uses: darrenjennings/algolia-docsearch-action@v0.2.0
         with:
           algolia_application_id: ${{ secrets.ALGOLIA_APP_ID }}
           algolia_api_key: ${{ secrets.ALGOLIA_API_KEY }}
