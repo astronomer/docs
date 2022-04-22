@@ -1,0 +1,41 @@
+- name: Reindex Algolia
+  on:
+    push:
+      branches:
+        - main
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Installing Homebrew
+        run: |
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+          test -d ~/.linuxbrew && eval $(~/.linuxbrew/bin/brew shellenv)
+          test -d /home/linuxbrew/.linuxbrew && eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+          echo "eval \$($(brew --prefix)/bin/brew shellenv)" >>~/.profile
+          echo "::add-path::/home/linuxbrew/.linuxbrew/bin"
+          brew --version
+
+      - name: Verify Homebrew's Installation
+        run: brew --version
+
+      - name: Install jq
+        run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        run: brew install jq
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          envkey_ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          envkey_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+          file_name: .env
+          fail_on_empty: false
+
+      - name: Run Docker
+        uses: actions-hub/docker@v1.0.2
+        run: docker run -it --env-file=.env -e "CONFIG=$(cat algolia-config.json | jq -r tostring)" algolia/docsearch-scraper
