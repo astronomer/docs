@@ -28,5 +28,4 @@ jobs:
       - run: ls -altr
       - name: Run Algolia
         run: "pipenv run python -m src.index"
-        with:
-          workdir: /root
+        working-directory: /root
