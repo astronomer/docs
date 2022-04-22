@@ -15,7 +15,9 @@ jobs:
           path: docs
       - name: Create CONFIG env var
         run: |
-          echo "CONFIG=$(cat docs/algolia-config.json)" >> $GITHUB_ENV
+          echo "CONFIG<<EOF" >> $GITHUB_ENV
+          echo "$(cat docs/algolia-config.json)" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
           # echo "CONFIG=$(cat /path/to/your/config.json | jq -r tostring)" >> $GITHUB_ENV
       - name: Run Algolia
         run: "pipenv run python -m src.index"
