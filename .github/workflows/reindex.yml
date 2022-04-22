@@ -4,10 +4,14 @@ on:
     # branches:
     #   - main
 jobs:
-  build:
+  Reindex Algolia:
     runs-on: ubuntu-latest
     container:
       image: algolia/docsearch-scraper
+      env: |
+        ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+        ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+        # SECRET_KEY: ${{ secrets.SECRET_KEY }}
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
