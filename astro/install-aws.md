@@ -38,11 +38,10 @@ Astro requires a clean AWS account with a minimum set of EC2 service quotas. For
 
 The required [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html) are:
 
-| QuotaCode  | QuotaName                                                        | Minimum Required Value  |
-| -----------| ---------------------------------------------------------------- | ----------------------- |
-| L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40                      |
-| L-43DA4232 | Running On-Demand High Memory instances                          | 40                      |
-| L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40                      |
+| QuotaCode  | QuotaName                                                        | Minimum Value  |
+| -----------| ---------------------------------------------------------------- | ---------------|
+| L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40             |
+| L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40             |
 
 These are required to mitigate near term capacity risks and ensure a smooth onboarding experience on Astro. If you need to modify or increase a specific quota, see Amazon’s documentation on [requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html).
 
