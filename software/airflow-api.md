@@ -22,7 +22,7 @@ You can create a Service Account via either the Software UI or the Astronomer CL
 
 :::info
 
-If you just need to call the Airflow REST API once, you can create a temporary Authentication Token (_expires in 24 hours_) on Astronomer in place of a long-lasting Service Account. To do so, simply navigate to: `https://<your-base-domain>/token` and skip to Step 2.
+If you just need to call the Airflow REST API once, you can create a temporary Authentication Token (_expires in 24 hours_) on Astronomer in place of a long-lasting Service Account. To do so, simply navigate to: `https://app.<BASE-DOMAIN>/token` (e.g. `https://app.astronomer.yourcompany.com/token`) and skip to Step 2.
 
 :::
 
@@ -47,7 +47,7 @@ To create a Deployment-level Service Account via the Astronomer CLI:
 
 1. Authenticate to the Astronomer CLI by running:
    ```
-   astro auth login <your-base-domain>
+   astro auth login <BASE-DOMAIN>
    ```
 2. Identify your Airflow Deployment's Deployment ID. To do so, run:
    ```
@@ -62,39 +62,54 @@ To create a Deployment-level Service Account via the Astronomer CLI:
 
 ## Step 2: Make an Airflow REST API Request
 
-Now that you've created a Service Account, you're free to generate both `GET` or `POST` requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/stable/rest-api-ref.html) via the following base URL:
+Now that you've created a Service Account, you're free to generate REST API requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/stable/rest-api-ref.html) via the following base URL:
 
 ```
-https://<your-base-domain>/<deployment-release-name>
+https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
 ```
 
-In the examples below, we'll refer to this URL as the `AIRFLOW-DOMAIN`, where you'll replace `<your-base-domain>` (e.g. `mycompany.astronomer.io`) and `<deployment-release-name>` (e.g. `galactic-stars-1234`) with your own.
+In the examples below, you'll replace `<BASE-DOMAIN>` (e.g. `mycompany.astronomer.io`) and `<DEPLOYMENT-NAME>` (e.g. `galactic-stars-1234`) with your own.
 
-You can make requests via the method of your choosing. Below, we'll walk through an example request via cURL to Airflow's "Trigger DAG" endpoint and an example request via Python to the "Get all Pools" endpoint. In all cases, your request will have the same permissions as the role of the Service Account you created on Astronomer.
+You can make requests via the method of your choosing. Below, we'll share example requests via cURL and Python to Airflow's "Trigger DAG" and "Get all Pools" endpoints. In all cases, your request will have the same permissions as the role of the Service Account you created on Astronomer.
 
 ### Trigger DAG
 
-To trigger a DAG, run a simple cURL command that makes a POST request to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) of the Airflow REST API:
+To trigger a DAG, execute a POST request to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) of the Airflow REST API:
 
 ```
 POST /dags/<dag-id>/dagRuns
 ```
 
-The command for your request should look like this:
-
+#### cURL
 ```
-curl -v -X POST
-https://<AIRFLOW-DOMAIN>/api/v1/dags/<DAG-ID>/dagRuns
--H 'Authorization: <API-Key> '
--H 'Cache-Control: no-cache'
--H 'content-type: application/json' -d '{}'
+curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1/dags/<DAG-ID>/dagRuns \
+  -H 'Authorization: <API-KEY>' \
+  -H 'Cache-Control: no-cache' \
+  -H 'content-type: application/json' -d '{}'
+```
+
+#### Python
+```python
+import requests
+
+token = "<API-KEY>"
+base_domain = "<BASE-DOMAIN>"
+deployment_name = "<DEPLOYMENT-NAME>"
+resp = requests.post(
+    url=f"https://deployments.{base_domain}/{deployment_name}/airflow/api/v1/dags/example_dag/dagRuns",
+    headers={"Authorization": token, "Content-Type": "application/json"},
+    data='{}'
+)
+print(resp.json())
+# {'conf': {}, 'dag_id': 'example_dag', 'dag_run_id': 'manual__2022-04-26T21:57:23.572567+00:00', 'end_date': None, 'execution_date': '2022-04-26T21:57:23.572567+00:00', 'external_trigger': True, 'logical_date': '2022-04-26T21:57:23.572567+00:00', 'start_date': None, 'state': 'queued'}
 ```
 
 To run this, replace the following placeholder values:
 
-- `<AIRFLOW-DOMAIN>`: Use `https://<your-base-domain>/<deployment-release-name>`
+- `<BASE-DOMAIN>`: Use your base domain name, i.e. the domain name used when authenticating to the `astro` cli
+- `<DEPLOYMENT-NAME>`: Use the name of your deployment release name
 - `<DAG-ID>`: Name of your DAG (_case-sensitive_)
-- `<API-Key>`: API Key from your Service Account
+- `<API-KEY>`: API Key from your Service Account
 
 This will trigger a DAG run for your desired DAG with a `execution_date` value of `NOW()`, which is equivalent to clicking the "Play" button in the main "DAGs" view of the Airflow UI.
 
@@ -119,11 +134,10 @@ For example:
 Here, your request becomes:
 
 ```
-curl -v -X POST
-https://<AIRFLOW_DOMAIN>/api/v1/dags/<DAG-ID>/dagRuns
--H 'Authorization: <API-Key>'
--H 'Cache-Control: no-cache'
--H 'content-type: application/json' -d '{"execution_date":"2019-11-16T11:34:00"}'
+curl -v -X POST https://deployments.<AIRFLOW_DOMAIN>/airflow/api/v1/dags/<DAG-ID>/dagRuns \
+  -H 'Authorization: <API-KEY>' \
+  -H 'Cache-Control: no-cache' \
+  -H 'content-type: application/json' -d '{"execution_date":"2019-11-16T11:34:00"}'
 ```
 
 :::info
@@ -134,35 +148,41 @@ The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2+.
 
 ### List Pools
 
-To list all Airflow pools for your Deployment, you can run a simple command that makes a GET request to the [`pools` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Pool) of the Airflow REST API:
+To list all Airflow pools for your Deployment, execute a GET request to the [`pools` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Pool) of the Airflow REST API:
 
 ```
 GET /pools
 ```
-
+#### cURL
+```
+curl -X GET https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1/pools \
+  -H 'Authorization: <API-KEY>'
+```
+#### Python
 Here, your request would look like this:
 
 ```python
-python
 import requests
-token="<API-Key>"
-base_url="https://<your-base-domain/"
+
+token = "<API-KEY>"
+base_domain = "<BASE-DOMAIN>"
+deployment_name = "<DEPLOYMENT-NAME>"
 resp = requests.get(
-   url=base_url + "<deployment-release-name>/api/v1/pools",
-   headers={"Authorization": token},
-   data={}
+    url=f"https://deployments.{base_domain}/{deployment_name}/airflow/api/v1/pools",
+    headers={"Authorization": token, "Content-Type": "application/json"},
+    data='{}'
 )
 print(resp.json())
->>>>  [{'description': 'Default pool', 'id': 1, 'pool': 'default_pool', 'slots': 128}]
+# {'pools': [{'name': 'default_pool', 'occupied_slots': 0, 'open_slots': 128, 'queued_slots': 0, 'running_slots': 0, 'slots': 128}], 'total_entries': 1}
 ```
 
 To run this, replace the following placeholder values:
 
-- `<your-base-domain>`: Your Astronomer Software base domain
-- `<API-Key>`: API Key from your Service Account
-- `<deployment-release-name>`: Your Airflow Deployment Release Name
+- `<API-KEY>`: API Key from your Service Account
+- `<BASE-DOMAIN>`: Use your base domain name, i.e. the domain name used when authenticating to the `astro` cli
+- `<DEPLOYMENT-NAME>`: Use the name of your deployment release name
 
-## Airflow 2.0 Stable REST API
+## A Note on Airflow 2.x Stable REST API
 
 ### What's new
 
@@ -193,12 +213,13 @@ Here, your cURL request would look like the following:
 
 ```
 curl -X GET \
-https://<AIRFLOW-DOMAIN>/api/v1/config \
--H 'Authorization: <API-Key>' \
--H 'Cache-Control: no-cache'
+  https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/api/v1/config \
+  -H 'Authorization: <API-KEY>' \
+  -H 'Cache-Control: no-cache'
 ```
 
 To run this, update the following placeholder values:
 
-- `<AIRFLOW-DOMAIN>`: Use `https://<your-base-domain>/<deployment-release-name>`
-- `<API-Key>`: API Key from your Service Account
+- `<BASE-DOMAIN>`: Use your base domain name, i.e. the domain name used when authenticating to the `astro` cli
+- `<DEPLOYMENT-NAME>`: Use the name of your deployment release name
+- `<API-KEY>`: API Key from your Service Account
