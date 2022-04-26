@@ -55,7 +55,10 @@ To retrieve your Deployment URL, open your Deployment in the Cloud UI and click 
 With the information from Step 1, you can now run `GET` or `POST` requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). For example, to retrieve a list of all DAGs in a Deployment, you can run:
 
 ```sh
-curl -X GET <deployment-url>/api/v1/dags -H 'Accept: application/json' -H 'Cache-Control: no-cache' -H "Authorization: Bearer <access-token>"
+curl -X GET <deployment-url>/api/v1/dags \
+  -H 'Accept: application/json' \
+  -H 'Cache-Control: no-cache' \
+  -H "Authorization: Bearer <access-token>"
 ```
 
 Below, we'll walk through an example request via cURL to Airflow's "Trigger DAG" endpoint and an example request via Python to the "Get all Pools" endpoint.
@@ -75,11 +78,10 @@ POST /dags/<dag-id>/dagRuns
 The command for your request should look like this:
 
 ```
-curl -v -X POST
-<deployment-url>/api/v1/dags/<dag-id>/dagRuns
--H 'Authorization: Bearer <access-token>’
--H ‘Cache-Control: no-cache’
--H ‘content-type: application/json’ -d ‘{}’
+curl -v -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
+  -H "Authorization: Bearer <access-token>" \
+  -H "Cache-Control: no-cache" \
+  -H "content-type: application/json" -d "{}"
 ```
 
 Make sure to replace the following values with your own:
@@ -111,11 +113,10 @@ For example:
 Here, your request becomes:
 
 ```
-curl -v -X POST
-<deployment-url>/api/v1/dags/<dag-id>/dagRuns
--H ‘Authorization: <access-token>’
--H ‘Cache-Control: no-cache’
--H ‘content-type: application/json’ -d ‘{“logical_date”:“2021-11-16T11:34:00”}’
+curl -v -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
+  -H "Authorization: <access-token>" \
+  -H "Cache-Control: no-cache" \
+  -H "content-type: application/json" -d '{"logical_date”:“2021-11-16T11:34:00"}'
 ```
 
 ### List All Pools
@@ -129,7 +130,6 @@ GET /pools
 Here, your request would look like this:
 
 ```python
-python
 import requests
 token="<access-token>"
 base_url="<deployment-url>"
