@@ -33,10 +33,10 @@ astrocloud deployment variable list
 
 ```sh
 # Save all environment variables currently running on an Astro Deployment to the `.env` file in your current directory
-$ astrocloud deployment variable list cl03oiq7d80402nwn7fsl3dmv --save
+$ astrocloud deployment variable list --deployment-id cl03oiq7d80402nwn7fsl3dmv --save
 
 # Save only a single environment variable from a Deployment on Astro to a `.env` file that is outside of your current directory
-$ astrocloud deployment variable list cl03oiq7d80402nwn7fsl3dmv --key AIRFLOW__CORE__PARALLELISM --save --env /users/documents/my-astro-project/.env
+$ astrocloud deployment variable list --deployment-id cl03oiq7d80402nwn7fsl3dmv --key AIRFLOW__CORE__PARALLELISM --save --env /users/documents/my-astro-project/.env
 ```
 
 ## Related Commands
