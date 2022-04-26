@@ -43,7 +43,7 @@ module.exports = {
       },
       items: [
         {
-          to: 'astro/',
+          to: 'astro',
           label: 'Astro',
           position: 'left',
         },
