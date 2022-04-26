@@ -40,7 +40,7 @@ $ astrocloud deployment variable create --deployment-id cl03oiq7d80402nwn7fsl3dm
 $ astrocloud deployment variable create --deployment-id cl03oiq7d80402nwn7fsl3dmv --load --env .env.dev
 
 # Update the value of an existing environment variable
-$ astrocloud deployment variable create --deployment-id cl03oiq7d80402nwn7fsl3dmv --update AIRFLOW__CORE__PARALLELISM --value <my-new-value>
+$ astrocloud deployment variable create --deployment-id cl03oiq7d80402nwn7fsl3dmv --update --key AIRFLOW__CORE__PARALLELISM --value <my-new-value>
 ```
 
 ## Related Commands
