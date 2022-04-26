@@ -11,6 +11,22 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
 
+## Astro Runtime 4.2.6
+- Release date: April 19, 2022
+- Airflow version: 2.2.5
+
+### Additional Improvements
+
+- Add initial support for Astro Runtime on Google Cloud Platform (GCP), including logging in Google Cloud Storage (GCS). Support for Astro on GCP is coming soon.
+
+## Astro Runtime 4.2.5
+- Release date: April 11, 2022
+- Airflow version: 2.2.5
+
+### Bug Fixes
+
+- Bug Fix: Apply a [new constraints file](https://raw.githubusercontent.com/apache/airflow/constraints-2.2.5/constraints-3.9.txt) to fix a version incompatibility error with `apache-airflow-providers-elasticsearch` that made task logs inaccessible to users in the Airflow UI. This change was required by Astronomer Software and did not impact users on Astro.
+
 ## Astro Runtime 4.2.4
 
 - Release date: April 6, 2022
