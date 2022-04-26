@@ -5,8 +5,6 @@ id: shared-responsibility-model
 description: Astronomer's policy on shared responsibilities between our team and our customers.
 ---
 
-## Overview
-
 Astronomer's highest priority is the security and reliability of your tasks. As an Astro customer, you benefit from a fully-managed data orchestration platform that meets the requirements of the most security-sensitive organizations.
 
 Astro operates on a model of shared responsibility, which means that both the Astronomer team and Astronomer customers are responsible for the security of the platform. This document specifies areas of security ownership for both Astronomer customers and the Astronomer team.

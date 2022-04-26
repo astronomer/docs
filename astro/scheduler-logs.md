@@ -5,8 +5,6 @@ id: scheduler-logs
 description: View your Deployments' Airflow Scheduler logs in the Cloud UI.
 ---
 
-## Overview
-
 Astro exposes your Airflow Deployment's Scheduler logs in the **Scheduler Logs** page of the Cloud UI. While Airflow task logs available in the Airflow UI are most critical to common troubleshooting, errors specific to the Scheduler component are often helpful to understand task failures.
 
 This guide explains how to access your Deployments' Scheduler logs via the Cloud UI. For more information about viewing component logs in a local Airflow environment, see [Access Airflow Component Logs](test-and-troubleshoot-locally.md#access-airflow-component-logs). For Deployments on Astro, logs for the Airflow Webserver, Workers, and Triggerer are not available.

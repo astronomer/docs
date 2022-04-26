@@ -5,8 +5,6 @@ id: data-protection
 description: Learn how Astronomer uses encryption to protect Clusters and data.
 ---
 
-## Overview
-
 Astro uses both encryption in transit and encryption at rest to protect data across and within the Data and Control Planes. This document contains details about each type of encryption used in Astro processes.
 
 ## Encryption in Transit

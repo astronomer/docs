@@ -5,8 +5,6 @@ id: astrocloud-workspace-switch
 description: Reference documentation for astrocloud workspace switch.
 ---
 
-## Description
-
 Switch to another Workspace. After running the command, you will be prompted to select from a list of all Workspaces in your Organization that you have access to. To switch to a given Workspace, enter the number next to the Workspace's name in the list.
 
 ## Usage

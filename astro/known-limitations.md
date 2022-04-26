@@ -5,8 +5,6 @@ id: known-limitations
 description: Reference a real-time view of known limitations and planned features for Astro.
 ---
 
-## Overview
-
 As we build and grow Astro, our team is committed to maintaining transparency about the current limitations of the product as well as the roadmap ahead of us.
 
 The list below represents known issues at the time of writing. We're moving fast to address these and are excited to work with you to identify solutions to some of these foundational questions.

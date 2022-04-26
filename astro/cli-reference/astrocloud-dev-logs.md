@@ -5,8 +5,6 @@ id: astrocloud-dev-logs
 description: Reference documentation for astrocloud dev logs.
 ---
 
-## Description
-
 Show Webserver, Scheduler, and Celery worker logs from your local Airflow environment.
 
 ## Usage

@@ -7,8 +7,6 @@ description: Learn about every command that you can run with the Astro CLI.
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 The Astro CLI is the easiest way to run Apache Airflow on your local machine. From the CLI, you can run a local Apache Airflow environment with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astro user, you can also create and manage users, Workspaces, Deployments, and more.
 
 This document contains information about all commands and settings available in the Astro CLI, including examples and flags. To install the Astro CLI, see [Install the CLI](install-cli.md).

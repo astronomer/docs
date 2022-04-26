@@ -7,8 +7,6 @@ description: Create a CI/CD pipeline that triggers a deploy to Astro based on ch
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 This guide provides setup steps for configuring a CI/CD pipeline to deploy DAGs on Astro.
 
 There are many benefits to deploying DAGs and other changes to Airflow via a CI/CD workflow. Specifically, you can:

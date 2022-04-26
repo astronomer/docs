@@ -5,8 +5,6 @@ id: disaster-recovery
 description: Learn how Astronomer handles disaster recovery scenarios and how to best prepare your environment.
 ---
 
-## Overview
-
 The Astro Data Plane is designed to withstand and survive in-region Availability Zone (AZ) degradations and outages as described in [Resilience](resilience.md).
 
 To withstand a full region outage and achieve near real-time recovery, Astronomer recommends provisioning at least two Astro Clusters in alternate regions. For example, one Cluster in AWS `us-east-1` and another in `us-west-2`. To ensure that both the primary and secondary Clusters are in sync, we recommend deploying all changes to both.

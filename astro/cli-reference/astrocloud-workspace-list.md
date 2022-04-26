@@ -5,8 +5,6 @@ id: astrocloud-workspace-list
 description: Reference documentation for astrocloud workspace list.
 ---
 
-## Description
-
 Show the names and IDs of all Workspaces in your Organization that you have access to.
 
 ## Usage

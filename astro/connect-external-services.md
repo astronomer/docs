@@ -5,8 +5,6 @@ id: connect-external-services
 description: Learn how to connect your Astro Data Plane to different types of external data services.
 ---
 
-## Overview
-
 Before you can run pipelines on Astro with real data, you first need to make your data services accessible to your Data Plane and the Deployments running within it. This guide explains how to securely connect Astro to external data services using the following methods:
 
 - Public Endpoints

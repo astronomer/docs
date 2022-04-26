@@ -5,8 +5,6 @@ id: astrocloud-dev-parse
 description: Reference documentation for astrocloud dev parse.
 ---
 
-## Description
-
 Parse the DAGs in a locally hosted Astro project to quickly check them for errors. For more information about testing DAGs locally, read [Run Tests with the Astro CLI](test-and-troubleshoot-locally.md#run-tests-with-the-astro-cli).
 
 ## Usage

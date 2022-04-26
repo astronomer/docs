@@ -5,7 +5,6 @@ id: release-notes
 description: A real-time reference of the latest features and bug fixes in Astro.
 ---
 
-## Overview
 <!--- Version-specific -->
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes officially released to Astro.

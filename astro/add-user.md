@@ -5,8 +5,6 @@ id: add-user
 description: Add a user to a Workspace on Astro.
 ---
 
-## Overview
-
 As a Workspace Admin, you can add team members to your Astro Workspace. From here, you can grant them user roles with permissions for specific actions across the Workspace and the Deployments within it.
 
 This guide provides steps for adding a user to an Astro Workspace.

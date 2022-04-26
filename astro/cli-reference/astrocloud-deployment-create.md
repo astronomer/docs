@@ -5,8 +5,6 @@ id: astrocloud-deployment-create
 description: Reference documentation for astrocloud deployment create.
 ---
 
-## Description
-
 Create a Deployment on Astro. This command is functionally identical to [creating a Deployment](configure-deployment.md) via the Cloud UI.
 
 ## Usage

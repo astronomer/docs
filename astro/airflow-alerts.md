@@ -5,8 +5,6 @@ id: airflow-alerts
 description: Set up email alerts for Airflow task successes and failures.
 ---
 
-## Overview
-
 You can utilize Airflow's alerting framework to monitor the health of individual tasks and DAGs across your Airflow Deployments. This guide provides information about configuring various Airflow alerts on Astro.
 
 ## Configure Slack Notifications, Custom Notifications, and SLAs

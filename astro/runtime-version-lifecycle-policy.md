@@ -5,8 +5,6 @@ id: runtime-version-lifecycle-policy
 description: Learn how Astronomer releases and maintains Astro Runtime, the core component that powers a differentiated Apache Airflow experience on Astro.
 ---
 
-## Overview
-
 Astro Runtime is a Debian-based, production-ready distribution of Apache Airflow that extends the open source project to provide you with differentiated functionality that centers around reliability, efficiency, and performance.
 
 Astro Runtime Docker images are hosted on [Astronomer's Docker registry](https://quay.io/repository/astronomer/astro-runtime) and enable Airflow on Astro. All Astro projects require that you specify an Astro Runtime image in your `Dockerfile`, and all Deployments on Astro must run only one version of Runtime. Every version of Astro Runtime correlates to one version of Apache Airflow. Depending on the needs of your pipelines, you can run different versions of Astro Runtime on different Deployments within a given Workspace or Cluster.

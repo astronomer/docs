@@ -5,8 +5,6 @@ id: cli-release-notes
 description: Release notes for the Astro CLI.
 ---
 
-## Overview
-
 This document provides a summary of all changes made to the [Astro CLI](install-cli.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
 
 If you have any questions or a bug to report, don't hesitate to reach out to us via Slack or Intercom. We're here to help.

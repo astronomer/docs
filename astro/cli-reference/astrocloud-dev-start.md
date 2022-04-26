@@ -5,8 +5,6 @@ id: astrocloud-dev-start
 description: Reference documentation for astrocloud dev start.
 ---
 
-## Description
-
 Build your Astro project into a Docker image and spin up local a local Docker container for each Airflow component.
 
 This command can be used to rebuild an Astro project and run it locally. For more information, read [Develop and Run a Project Locally](develop-project.md#build-and-run-a-project-locally).

@@ -5,8 +5,6 @@ id: astrocloud-dev-restart
 description: Reference documentation for astrocloud dev restart.
 ---
 
-## Description
-
 Stop your Airflow environment, rebuild your Astronomer project into a Docker image, and restart your Airflow environment with the new Docker image.
 
 This command can be used to rebuild an Astronomer project and run it locally. For more information, read [Develop and Run a Project Locally](develop-project.md#build-and-run-a-project-locally).
