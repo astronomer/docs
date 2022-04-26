@@ -34,13 +34,13 @@ astrocloud deployment variable create
 
 ```sh
 # Create a new secret environment variable
-$ astrocloud deployment variable create cl03oiq7d80402nwn7fsl3dmv --key AIRFLOW__SECRETS__BACKEND_KWARGS --value <my-secret-value> --secret
+$ astrocloud deployment variable create --deployment-id cl03oiq7d80402nwn7fsl3dmv --key AIRFLOW__SECRETS__BACKEND_KWARGS --value <my-secret-value> --secret
 
 # Create multiple environment variables for a Deployment at once by loading them from a .env file
-$ astrocloud deployment variable create cl03oiq7d80402nwn7fsl3dmv --load --env .env.dev
+$ astrocloud deployment variable create --deployment-id cl03oiq7d80402nwn7fsl3dmv --load --env .env.dev
 
 # Update the value of an existing environment variable
-$ astrocloud deployment variable create cl03oiq7d80402nwn7fsl3dmv --update AIRFLOW__CORE__PARALLELISM --value <my-new-value>
+$ astrocloud deployment variable create --deployment-id cl03oiq7d80402nwn7fsl3dmv --update --key AIRFLOW__CORE__PARALLELISM --value <my-new-value>
 ```
 
 ## Related Commands
