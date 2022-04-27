@@ -46,6 +46,8 @@ To get started with SendGrid:
 
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.sendgrid.utils.emailer.send_email`
+    
+    For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
 
 7. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
 
@@ -53,7 +55,7 @@ To get started with SendGrid:
     - **Connection Type:**: `Email`
     - **Host**: `smtp.sendgrid.net`
     - **Login**: `apikey`
-    - **Password**: `<your-api-key>`
+    - **Password**: `<your-sendgrid-api-key>`
     - **Port**: `587`
 
 8. Click **Save** to finalize your configuration.
@@ -81,12 +83,12 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 
 5. In the Deployment view of the Cloud UI, create an environment variable with the following values:
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
-    - **Value**: `airflow.providers.sendgrid.utils.emailer.send_email`
+    - **Value**: `airflow.providers.amazon.aws.utils.emailer.send_email`
 
 6. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
 
    - **Connection ID**: `smtp_default`
-   - **Connection Type:**: `Email`
+   - **Connection Type:** `Email`
    - **Host**: `<your-smtp-host>`
    - **Login**: `<your-aws-username>`
    - **Password**: `<your-aws-password>`
