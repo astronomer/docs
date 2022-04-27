@@ -84,6 +84,8 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 5. In the Deployment view of the Cloud UI, create an environment variable with the following values:
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.amazon.aws.utils.emailer.send_email`
+    
+    For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-aws-ses).
 
 6. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
 
