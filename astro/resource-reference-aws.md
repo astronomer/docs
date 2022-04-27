@@ -56,6 +56,34 @@ Astro supports the following AWS regions:
 
 Modifying the region of an existing Cluster on Astro is not supported. If you're interested in an AWS region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
 
+### RDS Instance Type
+
+Every Astro Cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the Data Plane and powers the metadata database of each Astro Deployment within a single Cluster. During the Cluster creation process, you'll be asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
+
+Astro supports a variety of AWS RDS instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
+
+#### db.r5
+
+- db.r5.large (_default_)
+- db.r5.xlarge
+- db.r5.2xlarge
+- db.r5.4xlarge
+- db.r5.8xlarge
+- db.r5.12xlarge
+- db.r5.16xlarge
+- db.r5.24xlarge
+
+#### db.m5
+
+- db.m5.large
+- db.m5.xlarge
+- db.m5.2xlarge
+- db.m5.4xlarge
+- db.m5.8xlarge
+- db.m5.12xlarge
+- db.m5.16xlarge
+- db.m5.24xlarge
+
 ### Node Instance Type
 
 Astro supports a variety of AWS EC2 instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. While the resources allocated to system and Airflow components are managed by Astronomer, the node instance type you select for your Cluster powers the workers of all Deployments within that Cluster.
@@ -99,9 +127,9 @@ A single Cluster on Astro cannot currently be configured with more than one node
 
 :::
 
-### Worker Size Limits per Node Instance Type
+## Deployment Worker Size Limits
 
-In addition to the node instance type that is set per Cluster, each Deployment within that Cluster can be configured with a unique worker size. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as that worker size is supported by the node instance type that your Cluster is configured with. If you attempt to provision a worker size that is not supported by your Cluster's instance type, you will see an error in the Cloud UI.
+In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each deployment within a Cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. If you attempt to provision a worker size that isn't supported by your Cluster's instance type, you will see an error in the Cloud UI.
 
 This table lists the maximum worker size that is supported on Astro for each node instance type.
 
@@ -131,38 +159,10 @@ The maximum worker size in the Cloud UI is currently 400 AU. If your team is int
 
 :::tip
 
-With the exception of `m5d` nodes, all suppported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, we recommend modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes out of the box.
+With the exception of `m5d` nodes, all suppported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, Astronomer recommends modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes.
 
 Astronomer plans to support optional ephemeral storage for all node instance types in the first half of 2022.
 
-If you need to pass significant data between Airflow tasks, we recommend using an [XCom backend](https://airflow.apache.org/docs/apache-airflow/stable/concepts/xcoms.html) such as [AWS S3](https://aws.amazon.com/s3/) or [Google Cloud Storage (GCS)](https://cloud.google.com/storage). For more information and best practices, read our Airflow Guide on [Passing Data Between Airflow Tasks](https://www.astronomer.io/guides/airflow-passing-data-between-tasks).
+If you need to pass significant data between Airflow tasks, Astronomer recommends using an [XCom backend](https://airflow.apache.org/docs/apache-airflow/stable/concepts/xcoms.html) such as [AWS S3](https://aws.amazon.com/s3/) or [Google Cloud Storage (GCS)](https://cloud.google.com/storage). For more information and best practices, read our Airflow Guide on [Passing Data Between Airflow Tasks](https://www.astronomer.io/guides/airflow-passing-data-between-tasks).
 
 :::
-
-### RDS Instance Type
-
-Every Astro Cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the Data Plane and powers the metadata database of each Astro Deployment within a single Cluster. During the Cluster creation process, you'll be asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
-
-Astro supports a variety of AWS RDS instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
-
-#### db.r5
-
-- db.r5.large (_default_)
-- db.r5.xlarge
-- db.r5.2xlarge
-- db.r5.4xlarge
-- db.r5.8xlarge
-- db.r5.12xlarge
-- db.r5.16xlarge
-- db.r5.24xlarge
-
-#### db.m5
-
-- db.m5.large
-- db.m5.xlarge
-- db.m5.2xlarge
-- db.m5.4xlarge
-- db.m5.8xlarge
-- db.m5.12xlarge
-- db.m5.16xlarge
-- db.m5.24xlarge
