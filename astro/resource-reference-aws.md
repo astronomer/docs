@@ -58,9 +58,9 @@ Modifying the region of an existing Cluster on Astro is not supported. If you're
 
 ### Node Instance Type
 
-Astro supports a variety of AWS EC2 instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. All system and Airflow components within a single Cluster are powered by the nodes specified during the Cluster creation or modification process.
+Astro supports a variety of AWS EC2 instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. While the resources allocated to system and Airflow components are managed by Astronomer, the node instance type you select for your Cluster powers the workers of all Deployments within that Cluster.
 
-For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/ec2/instance-types/). If you're interested in a node type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io). Not all instance types are supported in all AWS regions.
+For detailed information on each instance type, refer to [AWS documentation](https://aws.amazon.com/ec2/instance-types/). If you're interested in a node type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io). Not all instance types are supported in all AWS regions.
 
 #### m5
 
@@ -75,7 +75,6 @@ For detailed information on each instance type, reference [AWS documentation](ht
 
 #### m5d
 
-- m5d.large
 - m5d.xlarge
 - m5d.2xlarge
 - m5d.4xlarge
@@ -96,9 +95,41 @@ For detailed information on each instance type, reference [AWS documentation](ht
 
 :::info
 
-Currently, a single Cluster on Astro cannot be configured with more than one node instance type. In early 2022, we expect to introduce support for Worker Queues, which will allow you to run Airflow Workers of varying node types and sizes within a single Deployment. If this is something your team is interested in, reach out to us - we'd love to hear from you.
+A single Cluster on Astro cannot currently be configured with more than one node instance type. In the first half of 2022, we expect to introduce support for Worker Queues, which will allow you to run workers of varying node types and sizes within a single Deployment. If this is something that your team is interested in, reach out to us. We'd love to hear from you.
 
 :::
+
+### Worker Size Limits per Node Instance Type
+
+In addition to the node instance type that is set per Cluster, each Deployment within that Cluster can be configured with a unique worker size. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as that worker size is supported by the node instance type that your Cluster is configured with.
+
+This table lists the maximum worker size that is supported on Astro for each node instance type.
+
+| Node Instance Type | Maximum AU | CPU       | Memory       |
+|--------------------|------------|-----------|--------------|
+| m5.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
+| m5.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
+| m5.4xlarge         | 147        | 14.7 CPUs | 55.1 GiB MEM |
+| m5.8xlarge         | 307        | 30.7 CPUs | 115 GiB MEM  |
+| m5.12xlarge        | 467        | 46.7 CPUs | 175 GiB MEM  |
+| m5.16xlarge        | 627        | 62.7 CPUs | 235 GiB MEM  |
+| m5.24xlarge        | 947        | 94.7 CPUs | 355 Gib MEM  |
+| m5.metal           | 947        | 94.7 CPUs | 355 Gib MEM  |
+| m5d.large          | 7          | 0.7 CPUs  | 2.63 GiB MEM |
+| m5d.xlarge         | 27         | 2.7 CPUs  | 10.1 GiB MEM |
+| m5d.2xlarge        | 67         | 6.7 CPUs  | 25.1 GiB MEM |
+| m5d.4xlarge        | 147        | 14.7 CPUs | 55.1 GiB MEM |
+| m5d.8xlarge        | 307        | 30.7 CPUs | 115 GiB MEM  |
+| m5d.12xlarge       | 467        | 46.7 CPUs | 175 GiB MEM  |
+| m5d.16xlarge       | 627        | 62.7 CPUs | 235 GiB MEM  |
+| m5d.24xlarge       | 947        | 94.7 CPUs | 355 Gib MEM  |
+| m5d.metal          | 947        | 94.7 CPUs | 355 Gib MEM  |
+| t2.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
+| t3.large           | 7          | 0.7 CPUs  | 2.63 GiB MEM |
+| t3.xlarge          |            |           |              |
+| t3.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
+
+If you attempt to provision a worker size that is not supported by your Cluster's instance type, you will see an error in the Cloud UI.
 
 :::tip
 
@@ -112,7 +143,7 @@ If you need to pass significant data between Airflow tasks, we recommend using a
 
 ### RDS Instance Type
 
-Every Astro Cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the Data Plane and powers the metadata database of each Airflow Deployment within a single Cluster. During the Cluster creation process, you'll be asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
+Every Astro Cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the Data Plane and powers the metadata database of each Astro Deployment within a single Cluster. During the Cluster creation process, you'll be asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
 
 Astro supports a variety of AWS RDS instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
 
