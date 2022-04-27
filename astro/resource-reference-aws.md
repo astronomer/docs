@@ -118,7 +118,6 @@ For detailed information on each instance type, refer to [AWS documentation](htt
 
 #### t3
 
-- t3.large
 - t3.2xlarge
 
 :::info
