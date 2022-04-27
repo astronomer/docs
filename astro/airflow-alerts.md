@@ -7,13 +7,15 @@ description: Set up email alerts for Airflow task successes and failures.
 
 ## Overview
 
-You can utilize Airflow's alerting framework to monitor the health of individual tasks and DAGs across your Airflow Deployments. This guide provides information about configuring various Airflow alerts on Astro.
+For all teams, incorporating an alerting framework is critical to the health of your data pipelines. In addition to the observability functionality provided on Astro, Airflow's alerting framework includes support for:
 
-## Configure Slack Notifications, Custom Notifications, and SLAs
+- Slack notifications
+- SLAs
+- Email alerts
 
-Most built-in Airflow alerts, including Slack alerts and SLAs, work out of the box on Astro. You can also write custom alerts that trigger a certain behavior whenever a given task or DAG succeeds or fails. For more information on configuring event-based notifications in Airflow generally, read Astronomer's guide on [Airflow Alerts](https://www.astronomer.io/guides/error-notifications-in-airflow).
+Slack alerts and SLAs do not require additional configuration on Astro. For best practices, see the Astronomer guide on [Airflow Alerts](https://www.astronomer.io/guides/error-notifications-in-airflow).
 
-Unlike Slack alerts, Airflow email alerts require additional configuration on Astro. The following section covers how to set up an SMTP service to enable Airflow email alerts.
+This guide focuses on setting up email alerts on Astro with an SMTP service.
 
 ## Configure Airflow Email Alerts
 
@@ -24,7 +26,7 @@ If your team isn't already using an SMTP service, we recommend one of the follow
 - [SendGrid](https://sendgrid.com/)
 - [Amazon SES](https://aws.amazon.com/ses/)
 
-The following topics provide setup steps for integrating each of these external SMTP services on Astro, but note that any external SMTP service can be used.
+The following topics provide setup steps for integrating each of these external SMTP services on Astro, but any external SMTP service can be used.
 
 ### Integrate with SendGrid
 
