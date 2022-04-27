@@ -36,7 +36,9 @@ To get started with SendGrid:
 
 2. [Verify a Single Sender Identity](https://sendgrid.com/docs/ui/sending-email/sender-verification/). Because you're sending emails only for internal administrative purposes, a single sender identity is sufficient for integrating with Astro. The email address you verify here is used as the sender for your Airflow alert emails.
 
-3. Create a key using SendGrid's web API. In SendGrid, go to **Email API** > **Integration Guide**. Follow the steps to generate a new API key using SendGrid's Web API and cURL.
+3. Create a Sendgrid API key. In SendGrid, go to **Email API** > **Integration Guide**. Follow the steps to generate a new API key using SendGrid's Web API and cURL.
+
+    For more information, see [Sendgrid documentation](https://docs.sendgrid.com/ui/account-and-settings/api-keys#creating-an-api-key).
 
 4. Skip the step for exporting your API key to your development environment. Instead, execute the generated curl code directly in your command line, making sure to replace `$SENDGRID_API_KEY` in the `--header` field with your copied key.
 
@@ -60,12 +62,12 @@ To get started with SendGrid:
 
 8. Click **Save** to finalize your configuration.
 
-To begin receiving emails about Airflow alerts from a given DAG, configure the following values in the DAG's `default_args`:
+9. To begin receiving Airflow alerts via email for task failures within a given DAG, configure the following values in the DAG's `default_args`:
 
-```text
-'email_on_failure': True,
-'email': ['<recipient-address>'],
-```
+    ```python
+    'email_on_failure': True,
+    'email': ['<recipient-address>'],
+    ```
 
 ### Integrate with Amazon SES
 
@@ -98,9 +100,9 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 
 7. Click **Save** to finalize your configuration.
 
-To begin receiving emails about Airflow alerts from a given DAG, configure the following values in the DAG's `default_args`:
+8. To begin receiving Airflow alerts via email for task failures within a given DAG, configure the following values in the DAG's `default_args`:
 
-```text
-'email_on_failure': True,
-'email': ['<recipient-address>'],
-```
+    ```python
+    'email_on_failure': True,
+    'email': ['<recipient-address>'],
+    ```
