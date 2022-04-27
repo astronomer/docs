@@ -101,7 +101,7 @@ A single Cluster on Astro cannot currently be configured with more than one node
 
 ### Worker Size Limits per Node Instance Type
 
-In addition to the node instance type that is set per Cluster, each Deployment within that Cluster can be configured with a unique worker size. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as that worker size is supported by the node instance type that your Cluster is configured with.
+In addition to the node instance type that is set per Cluster, each Deployment within that Cluster can be configured with a unique worker size. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as that worker size is supported by the node instance type that your Cluster is configured with. If you attempt to provision a worker size that is not supported by your Cluster's instance type, you will see an error in the Cloud UI.
 
 This table lists the maximum worker size that is supported on Astro for each node instance type.
 
@@ -127,7 +127,7 @@ This table lists the maximum worker size that is supported on Astro for each nod
 | t3.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
 | t3.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
 
-If you attempt to provision a worker size that is not supported by your Cluster's instance type, you will see an error in the Cloud UI.
+The maximum worker size in the Cloud UI is currently 400 AU. If your team is interested in using an instance type that supports higher limits, reach out to [Astronomer Support](https://support.astronomer.io). For more information on configuring worker size on Astro, see [Configure a Deployment](configure-deployment.md#worker-resources).
 
 :::tip
 
