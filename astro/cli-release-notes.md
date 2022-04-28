@@ -29,7 +29,7 @@ This command replaces the —update flag functionality used in the `astrocloud d
 ### Bug Fixes
 
 - Fixed an issue were the command `astrocloud deployment variable create —load` would break if the specified .env file had a comment in it
-- Fixed an issue were Deployment API Keys would break if used locally by some user
+- Fixed an issue were Deployment API Keys would break if used locally by some users
 
 ## v1.4.0
 
