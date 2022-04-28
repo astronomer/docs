@@ -405,7 +405,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime ${siteVariables.runtimeVersion}, your `FROM` line would be:
 
-  <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}-base`}</code></pre>
+  <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}-base AS stage1`}</code></pre>
 
   :::info
 
@@ -486,11 +486,10 @@ This example assumes that the name of each of your Python packages is identical 
    FROM custom-<runtime-image>
    ```
 
-   For example, if your base Runtime image was <pre>{quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}}</pre>, this line would be:
+   For example, if your base Runtime image was <code>{${siteVariables.runtimeVersion}}</code>, this line would be:
 
    ```
    <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}`}</code></pre>
-   FROM custom-astro-runtime:4.2.10-base
    ```
 
 Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
