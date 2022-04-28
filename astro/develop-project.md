@@ -403,11 +403,9 @@ This example assumes that the name of each of your Python packages is identical 
 
 1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 4.2.10, your `FROM` line would be:
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime ${siteVariables.runtimeVersion}, your `FROM` line would be:
 
-   ```text
-   FROM quay.io/astronomer/astro-runtime:4.2.10-base AS stage1
-   ```
+  <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}-base`}</code></pre>
 
   :::info
 
@@ -470,10 +468,10 @@ This example assumes that the name of each of your Python packages is identical 
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
     ```
 
-    For example, if you have `quay.io/astronomer/astro-runtime:4.2.10-base` in your `Dockerfile.build`, this command would be:
+    For example, if you have `quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}-base` in your `Dockerfile.build`, this command would be:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-4.2.10-base .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-${siteVariables.runtimeVersion}-base .
     ```
 
   :::info
