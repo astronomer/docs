@@ -25,6 +25,7 @@ This command replaces the —update flag functionality used in the `astrocloud d
 
 - Users can now specify which workspace the wish to switch to with `astrocloud workspace switch <workspace-id>`
 - User now only need to provide `astrocloud auth login` command an email the first time they login
+- Commands `astrocloud deploy` and `astrocloud dev start` will now tell users when new runtime versions are available
 
 ### Bug Fixes
 
