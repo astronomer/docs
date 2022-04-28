@@ -11,6 +11,26 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, don't hesitate to reach out to us via Slack or Intercom. We're here to help.
 
+## v1.5.0
+
+Release date: April 28, 2022
+
+### New Command to Update Deployment Environment Variables
+
+With `astrocloud deployment variable update` users can now update Deployment Environment Variables with the CLI either from the command line or an env file.
+
+This command replaces the —update flag functionality used in the `astrocloud deployment variable create` command.
+
+### Additional Improvements
+
+- Users can now specify which workspace the wish to switch to with `astrocloud workspace switch <workspace-id>`
+- User now only need to provide `astrocloud auth login` command an email the first time they login
+
+### Bug Fixes
+
+- Fixed an issue were the command `astrocloud deployment variable create —load` would break if the specified .env file had a comment in it
+- Fixed an issue were Deployment API Keys would break if used locally by some user
+
 ## v1.4.0
 
 Release date: April 14, 2022
