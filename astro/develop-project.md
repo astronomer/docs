@@ -488,9 +488,10 @@ This example assumes that the name of each of your Python packages is identical 
    FROM custom-<runtime-image>
    ```
 
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:4.2.10-base`, this line would be:
+   For example, if your base Runtime image was <pre>{quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}}</pre>, this line would be:
 
    ```
+   <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}`}</code></pre>
    FROM custom-astro-runtime:4.2.10-base
    ```
 
