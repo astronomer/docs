@@ -16,6 +16,32 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.4.0 ([Release notes](cli-release-notes.md))
 
+## April 28, 2022
+
+### New AWS Node Instance Types Available
+
+To widen our support for complex use cases at scale, we've grown the types of AWS node instances that are supported on Astro. You can now create Clusters with:
+
+- [General Purpose M6i instances](https://aws.amazon.com/ec2/instance-types/m6i/)
+- [Compute Optimized C6i instances](https://aws.amazon.com/ec2/instance-types/c6i/)
+- [Memory Optimized R6i instances](https://aws.amazon.com/ec2/instance-types/r6i/)
+
+For a full list of node instance types that are supported on Astro, see [AWS Resource Reference](resource-reference-aws.md#node-instance-type). To modify an existing Astro Cluster to use any of these instance types, see [Modify a Cluster](modify-cluster.md).
+
+### Additional Improvements
+
+- Improve the error message that renders in the Cloud UI if you try to create a worker that is too large for the Deployment's node instance type to support. This error message now specifies a clear call to action
+
+## April 21, 2022
+
+### Feedback in Cloud UI on Worker Size Limits
+
+The Cloud UI now renders an error if you try to modify the **Worker Resources**  to a combination of CPU and memory that is not supported by the node instance type of the Cluster that the Deployment is hosted on. This validation ensures that the worker size you request is supported by the infrastructure available in your Astro Cluster, and minimizes silent task failures that might have occurred due to invalid resource requests.
+
+If your Astro Cluster is configured with the `m5.xlarge` node type, for example, the Cloud UI will show an error if you try to set **Worker Resources** to 100 AU. This is because the maximum worker size an `m5.xlarge` node can support is 27 AU.
+
+For a reference of all node instance types Astro supports and their corresponding worker size limits, see [AWS Resource Reference](resource-reference-aws.md#node-instance-type).
+
 ## April 14, 2022
 
 ### Additional Improvements
