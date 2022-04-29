@@ -112,8 +112,6 @@ print(resp.json())
 
 To run this, replace the following placeholder values:
 
-- `<BASE-DOMAIN>`: Use your base domain name, i.e. the domain name used when authenticating to the `astro` cli
-- `<DEPLOYMENT-NAME>`: Use the name of your deployment release name
 - `<DAG-ID>`: Name of your DAG (_case-sensitive_)
 - `<API-KEY>`: API Key from your Service Account
 
