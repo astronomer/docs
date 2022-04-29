@@ -62,7 +62,7 @@ To create a Deployment-level Service Account via the Astronomer CLI:
 
 ## Step 2: Make an Airflow REST API Request
 
-Now that you've created a Service Account, you're free to generate REST API requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/stable/rest-api-ref.html) via the following base URL:
+With the information from Step 1, you can now run `GET` or `POST` requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) via the following base URL:
 
 ```
 https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
