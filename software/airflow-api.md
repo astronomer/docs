@@ -158,7 +158,7 @@ GET /pools
 ```
 #### cURL
 ```
-curl -X GET https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1/pools \
+curl -X GET https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airflow/api/v1/pools \
   -H 'Authorization: <API-KEY>'
 ```
 #### Python
