@@ -137,7 +137,7 @@ For example:
 Here, your request becomes:
 
 ```
-curl -v -X POST https://deployments.<AIRFLOW_DOMAIN>/airflow/api/v1/dags/<DAG-ID>/dagRuns \
+curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airflow/api/v1/dags/<DAG-ID>/dagRuns \
   -H 'Authorization: <API-KEY>' \
   -H 'Cache-Control: no-cache' \
   -H 'content-type: application/json' -d '{"execution_date":"2019-11-16T11:34:00"}'
