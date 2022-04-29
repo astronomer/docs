@@ -94,7 +94,7 @@ import requests
 
 token = "<API-KEY>"
 base_domain = "<BASE-DOMAIN>"
-deployment_name = "<DEPLOYMENT-NAME>"
+deployment_name = "<DEPLOYMENT-RELEASE-NAME>"
 resp = requests.post(
     url=f"https://deployments.{base_domain}/{deployment_name}/airflow/api/v1/dags/example_dag/dagRuns",
     headers={"Authorization": token, "Content-Type": "application/json"},
