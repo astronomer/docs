@@ -20,7 +20,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### New AWS Node Instance Types Available
 
-To widen our support for complex use cases at scale, we've grown the types of AWS node instances that are supported on Astro. You can now create Clusters with:
+To widen our support for various use cases and levels of scale, we've expanded the types of AWS node instances that are supported on Astro. You can now create Clusters with:
 
 - [General Purpose M6i instances](https://aws.amazon.com/ec2/instance-types/m6i/)
 - [Compute Optimized C6i instances](https://aws.amazon.com/ec2/instance-types/c6i/)
