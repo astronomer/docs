@@ -81,6 +81,7 @@ POST /dags/<dag-id>/dagRuns
 ```
 
 #### cURL
+
 ```
 curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airflow/api/v1/dags/<DAG-ID>/dagRuns \
   -H 'Authorization: <API-KEY>' \
