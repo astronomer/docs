@@ -62,6 +62,18 @@ Astro supports a variety of AWS EC2 instance types. Instance types comprise of v
 
 For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/ec2/instance-types/). If you're interested in a node type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io). Not all instance types are supported in all AWS regions.
 
+#### c6i
+
+- c6i.xlarge
+- c6i.2xlarge
+- c6i.4xlarge
+- c6i.8xlarge
+- c6i.12xlarge
+- c6i.16xlarge
+- c6i.24xlarge
+- c6i.32xlarge
+- c6i.metal
+
 #### m5
 
 - m5.xlarge (_default_)
@@ -75,7 +87,6 @@ For detailed information on each instance type, reference [AWS documentation](ht
 
 #### m5d
 
-- m5d.large
 - m5d.xlarge
 - m5d.2xlarge
 - m5d.4xlarge
@@ -84,6 +95,30 @@ For detailed information on each instance type, reference [AWS documentation](ht
 - m5d.16xlarge
 - m5d.24xlarge
 - m5d.metal
+
+#### m6i
+
+- m6i.xlarge
+- m6i.2xlarge
+- m6i.4xlarge
+- m6i.8xlarge
+- m6i.12xlarge
+- m6i.16xlarge
+- m6i.24xlarge
+- m6i.32xlarge
+- m6i.metal
+
+#### r6i
+
+- r6i.xlarge
+- r6i.2xlarge
+- r6i.4xlarge
+- r6i.8xlarge
+- r6i.12xlarge
+- r6i.16xlarge
+- r6i.24xlarge
+- r6i.32xlarge
+- r6i.metal
 
 #### t2
 
