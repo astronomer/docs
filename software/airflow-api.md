@@ -94,6 +94,7 @@ curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airf
 ```
 
 #### Python
+
 ```python
 import requests
 
