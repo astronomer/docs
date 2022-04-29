@@ -186,6 +186,7 @@ module.exports = {
         googleAnalytics: {
           trackingID: 'UA-54102728-4',
           anonymizeIP: true,
+          siteSpeedSampleRate: 20,
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
