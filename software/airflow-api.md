@@ -214,7 +214,7 @@ Here, your cURL request would look like the following:
 
 ```
 curl -X GET \
-  https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/api/v1/config \
+  https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/api/v1/config \
   -H 'Authorization: <API-KEY>' \
   -H 'Cache-Control: no-cache'
 ```
