@@ -187,7 +187,7 @@ To run this, replace the following placeholder values:
 - `<BASE-DOMAIN>`: Use your base domain name, i.e. the domain name used when authenticating to the `astro` cli
 - `<DEPLOYMENT-NAME>`: Use the name of your deployment release name
 
-## A Note on Airflow 2.x Stable REST API
+## A Note on Airflow 2 Stable REST API
 
 ### What's new
 
