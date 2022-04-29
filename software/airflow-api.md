@@ -68,7 +68,11 @@ With the information from Step 1, you can now run `GET` or `POST` requests to an
 https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
 ```
 
-In the examples below, you'll replace `<BASE-DOMAIN>` (e.g. `mycompany.astronomer.io`) and `<DEPLOYMENT-NAME>` (e.g. `galactic-stars-1234`) with your own.
+In the examples below, you'll replace the following values with your own:
+
+- `<BASE-DOMAIN>`: The base domain for your organization on Astronomer Software. For example: `mycompany.astronomer.io`.
+- `<DEPLOYMENT-RELEASE-NAME>`: The release name of your Deployment. For example: `galactic-stars-1234`.
+- `<API-KEY>`: The API key for your Deployment Service Account.
 
 You can make requests via the method of your choosing. Below, we'll share example requests via cURL and Python to Airflow's "Trigger DAG" and "Get all Pools" endpoints. In all cases, your request will have the same permissions as the role of the Service Account you created on Astronomer.
 
