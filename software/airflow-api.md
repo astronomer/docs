@@ -223,8 +223,6 @@ curl -X GET \
   -H 'Cache-Control: no-cache'
 ```
 
-To run this, update the following placeholder values:
-
 - `<BASE-DOMAIN>`: Use your base domain name, i.e. the domain name used when authenticating to the `astro` cli
 - `<DEPLOYMENT-NAME>`: Use the name of your deployment release name
 - `<API-KEY>`: API Key from your Service Account
