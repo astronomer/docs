@@ -169,7 +169,7 @@ import requests
 
 token = "<API-KEY>"
 base_domain = "<BASE-DOMAIN>"
-deployment_name = "<DEPLOYMENT-NAME>"
+deployment_name = "<DEPLOYMENT-RELEASE-NAME>"
 resp = requests.get(
     url=f"https://deployments.{base_domain}/{deployment_name}/airflow/api/v1/pools",
     headers={"Authorization": token, "Content-Type": "application/json"},
