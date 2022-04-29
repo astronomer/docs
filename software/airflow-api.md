@@ -113,7 +113,6 @@ print(resp.json())
 To run this, replace the following placeholder values:
 
 - `<DAG-ID>`: Name of your DAG (_case-sensitive_)
-- `<API-KEY>`: API Key from your Service Account
 
 This will trigger a DAG run for your desired DAG with a `execution_date` value of `NOW()`, which is equivalent to clicking the "Play" button in the main "DAGs" view of the Airflow UI.
 
