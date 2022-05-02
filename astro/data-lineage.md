@@ -37,7 +37,7 @@ By default, when you directly access the **Lineage** page from the left-hand men
 
 :::info
 
-The **Lineage** page shows lineage data only for the most recent run of a given Deployment. To explore lineage data from previous runs, see [Compare Lineage Graphs from Previous Runs](lineage.md#compare-lineage-graphs-from-previous-runs).
+The **Lineage** page shows lineage data only for the most recent run of a given Deployment. To explore lineage data from previous runs, see [Compare Lineage Graphs from Previous Runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
 
 :::
 
@@ -63,7 +63,7 @@ To learn more information about a dataset or job, you can either hover over or c
 - **Run information (job only)**: Metadata and status information about the job run
 - **Quality checks (dataset only)**: The status of a dataset's data quality checks
 
-Clicking a node populates the information pane with detailed information about the node. For more information about how to use this view, see [Using the Information Pane](lineage.md#using-the-information-page).
+Clicking a node populates the information pane with detailed information about the node. For more information about how to use this view, see [View Metrics for a Specific Job or Dataset](data-lineage.md#view-metrics-for-a-specific-job-or-dataset).
 
 ### Access the Graph Legend
 
