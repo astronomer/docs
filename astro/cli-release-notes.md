@@ -17,20 +17,20 @@ Release date: April 28, 2022
 
 ### New Command to Update Deployment Environment Variables
 
-With `astrocloud deployment variable update` users can now update Deployment Environment Variables with the CLI either from the command line or an env file.
+A new `astrocloud deployment variable update` command allows you to more easily update Deployment Environment Variables by typing them directly into your command line or adding them to a `.env` file.
 
-This command replaces the —update flag functionality used in the `astrocloud deployment variable create` command.
+This command replaces the `—update` flag that was previously released as part of the `astrocloud deployment variable create` command.
 
 ### Additional Improvements
 
-- Users can now specify which workspace the wish to switch to with `astrocloud workspace switch <workspace-id>`
-- User now only need to provide `astrocloud auth login` command an email the first time they login
-- Commands `astrocloud deploy` and `astrocloud dev start` will now tell users when new runtime versions are available
+- When you run `astrocloud workspace switch`, you can now specify a `<workspace-id>` as part of the command and avoid the prompt to manually select a Workspace
+- You now need to provide an email address only the first time you run `astrocloud auth login`. After you run that command once successfully, the Astro CLI will cache your email address in your `config.yaml` file and not prompt you to enter it again
+- The `astrocloud deploy` and `astrocloud dev start` commands will now inform you if there is a new version of Astro Runtime available
 
 ### Bug Fixes
 
-- Fixed an issue were the command `astrocloud deployment variable create —load` would break if the specified .env file had a comment in it
-- Fixed an issue were Deployment API Keys would break if used locally by some users
+- Fixed an issue were the `astrocloud deployment variable create —load` command would fail if the specified `.env` file had a comment (e.g. `#  <comment>`) in it
+- Fixed an issue were Deployment API Keys would not work locally for some users
 
 ## v1.4.0
 
