@@ -17,9 +17,9 @@ Release date: April 28, 2022
 
 ### New Command to Update Deployment Environment Variables
 
-A new `astrocloud deployment variable update` command allows you to more easily update Deployment Environment Variables by typing them directly into your command line or adding them to a `.env` file.
+A new `astrocloud deployment variable update` command allows you to more easily update an existing environment variable by typing a new value directly into your command line or adding the updated variable to a `.env` file.
 
-This command replaces the `—update` flag that was previously released as part of the `astrocloud deployment variable create` command.
+This command replaces the `—update` flag that was previously released with the `astrocloud deployment variable create` command. For more information, see the [Astro CLI Command Reference](cli-reference/astrocloud-deployment-variable-create.md).
 
 ### Additional Improvements
 

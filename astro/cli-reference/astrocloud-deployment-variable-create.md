@@ -13,7 +13,7 @@ If you choose to specify `--key` and `--value` instead of loading a file, you ca
 
 :::tip
 
-This command has an `--update` flag that allows you to change the `value` of an existing environment variable, but Astronomer recommends using the [`astrocloud deployment variable update` command](cli-reference/astrocloud-deployment-variable-update.md) to do so.
+This command has an `--update` flag that allows you to change the `value` of an existing environment variable at any time. For a better user experience, we recommend using the [`astrocloud deployment variable update` command](cli-reference/astrocloud-deployment-variable-update.md) to update environment variables instead.
 
 :::
 
