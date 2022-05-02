@@ -21,7 +21,7 @@ For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime
 Astro Runtime 5.0.0 provides support for [Airflow 2.3.0](https://airflow.apache.org/blog/airflow-2.3.0/), which is a significant open source release. The most notable new features in Airflow 2.3.0 are:
 
 - [Dynamic task mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html), which allows you to generate task instances at runtime based on changing data.
-- A new "Grid" view in the Airflow UI that replaces the "Tree" view and provides a more intuitive way to visualize the state of your tasks and troubleshoot failures.
+- A new **Grid** view in the Airflow UI that replaces the **Tree** view and provides a more intuitive way to visualize the state of your tasks.
 - The ability to [define Airflow Connections in JSON](https://airflow.apache.org/docs/apache-airflow/2.3.0/howto/connection.html#json-format-example).
 - The ability to[reuse a decorated task](https://airflow.apache.org/docs/apache-airflow/2.3.0/tutorial_taskflow_api.html#reusing-a-decorated-task), which allows you to override task parameters and reuse decorated task functions between DAGs.
 
