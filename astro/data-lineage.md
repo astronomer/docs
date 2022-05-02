@@ -7,15 +7,15 @@ description: "Track and visualize the movement of your data with data lineage on
 
 ## Overview
 
-Data lineage is a critical part of data orchestration tooling. This guide explains how to navigate the **Lineage** page in the Cloud UI and configure views that can help you both troubleshoot issues with your data pipelines as well as understand the movement of data across your Organization.
+This guide explains how to navigate the **Lineage** page in the Cloud UI and configure views that can help you both troubleshoot issues with your data pipelines as well as understand the movement of data across your Organization.
 
-The Lineage tab on Astro has three pages:
+Data lineage is a critical part of data orchestration tooling.  The **Lineage** tab on Astro has three pages:
 
 - **Explore**: A real-time overview of all jobs that emit data lineage across your Organization
 - **Issues**: A view of potential issues or statistical inconsistencies related to your jobs or datasets
 - **Lineage**: A graph view that visualizes data movements across DAGs, tasks, and Deployments
 
-Generally speaking, these views map your organization's data ecosystem and can help you diagnose issues that may otherwise be difficult to identify across environments and tools. For example, if an Airflow task failed because the schema of a database changed, you might go to the **Lineage** page on Astro to determine which job caused that change and which downstream tasks failed because of it.
+Generally speaking, you can use these pages to diagnose issues that may otherwise be difficult to identify across environments and tools. For example, if an Airflow task failed because the schema of a database changed, you might go to the **Lineage** page on Astro to determine which job caused that change and which downstream tasks failed because of it.
 
 Views in the **Lineage** page are available to all members of your Organization on Astro.
 
