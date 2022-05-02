@@ -11,7 +11,24 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
 
+## Astro Runtime 5.0.0
+
+- Release date: April 30, 2022
+- Airflow version: 2.3.0
+
+### Support for Airflow 2.3 & Dynamic Task Mapping
+
+Astro Runtime 5.0.0 is based on [Airflow 2.3.0](https://airflow.apache.org/blog/airflow-2.3.0/), an exciting and significant open source release. Airflow 2.3 includes support for:
+
+- [Dynamic task mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html), which allows you to generate task instances at runtime based on changing data.
+- A new "Grid" view in the Airflow UI that replaces the "Tree" view and provides a more intuitive way to visualize the state of your tasks and troubleshoot failures.
+- [Defining Airflow Connections in JSON](https://airflow.apache.org/docs/apache-airflow/2.3.0/howto/connection.html#json-format-example) in addition to the Connection URI format that Airflow has always supported.
+- [Reusing a decorated task](https://airflow.apache.org/docs/apache-airflow/2.3.0/tutorial_taskflow_api.html#reusing-a-decorated-task), which allows you to override task parameters and reuse decorated task functions between DAGs.
+
+For more information on Airflow 2.3, see ["Apache Airflow 2.3 — Everything You Need to Know"](https://www.astronomer.io/blog/apache-airflow-2-3-everything-you-need-to-know) by Astronomer. For more information on dyanmic task mapping, see the [Astronomer Airflow Guide](LINK).
+
 ## Astro Runtime 4.2.6
+
 - Release date: April 19, 2022
 - Airflow version: 2.2.5
 
