@@ -7,64 +7,133 @@ description: "Track and visualize the movement of your data with data lineage on
 
 ## Overview
 
-Data lineage is a critical part of data orchestration tooling. This guide explains how to navigate the **Lineage** tab in the Cloud UI and configure views that can help you both troubleshoot issues with your data pipelines as well as understand the movement of data across your Organization.
+Data lineage is a critical part of data orchestration tooling. This guide explains how to navigate the **Lineage** page in the Cloud UI and configure views that can help you both troubleshoot issues with your data pipelines as well as understand the movement of data across your Organization.
 
 The Lineage tab on Astro has three pages:
 
-- **Explore**: A real-time overview of all jobs that emit data lineage across your Organization. This includes a heatmap of jobs that have run within the last year as well as a more detailed list of recent job runs.
-- **Issues**: A view of potential issues or statistical inconsistencies related to your jobs or datasets. On this page, you can see metadata for job duration, job failures, and data quality checks.
-- **Lineage**: A graph view that visualizes data movements across DAGs, tasks, and Deployments. The graph primarily shows relationships between datasets and jobs.
+- **Explore**: A real-time overview of all jobs that emit data lineage across your Organization
+- **Issues**: A view of potential issues or statistical inconsistencies related to your jobs or datasets
+- **Lineage**: A graph view that visualizes data movements across DAGs, tasks, and Deployments
 
-Generally speaking, these views map your organization's data ecosystem and can help you diagnose issues that may otherwise be difficult to identify across environments and tools. For example, if an Airflow task failed because the schema of a database changed, you might go to the **Lineage** tab on Astro to determine which job caused that change and which downstream tasks failed because of it.
+Generally speaking, these views map your organization's data ecosystem and can help you diagnose issues that may otherwise be difficult to identify across environments and tools. For example, if an Airflow task failed because the schema of a database changed, you might go to the **Lineage** page on Astro to determine which job caused that change and which downstream tasks failed because of it.
 
-Views in the **Lineage** tab are available to all members of your Organization on Astro.
+Views in the **Lineage** page are available to all members of your Organization on Astro.
 
-## Explore
+## View the Lineage Graph for a Deployment
 
-[Info about Explore]
+To view the lineage graph for one of your Deployments, search for the name of a DAG or task in the Deployment with the lineage search bar at the top of the UI.
 
-## Issues
+![Example query in the lineage search bar](/img/docs/lineage-search.png)
 
-The **Issues** page contains metadata that can help you identify irregularities related to the behavior of your data pipelines. Specifically, this page has information on:
+Clicking a search result will open the **Lineage** page and show the lineage graph for the Deployment's most recent DAG run.
 
-- Job execution
-- Job duration
-- Data quality
+You can also access the lineage graph for recent DAG run in the **Explore** page under **Most Recent Runs**.
 
-![Lineage summary page](/img/docs/lineage-summary.png)
+:::info
 
-To see an issue in the context of a lineage graph, click the name of the related dataset or job in the table.
+By default, when you directly access the **Lineage** page from the left-hand menu, the page shows your most recently accessed lineage graph. If you go to the **Lineage** page before first accessing the graph, you will not see any lineage graph data. If this happens, try first accessing a task using the search bar or **Explore** page to populate the **Lineage** page with data.
 
-### Job execution
+:::
 
-[Info about job execution]
+:::info
 
-### Job duration
+The **Lineage** page only shows lineage data for the most recent run of a given Deployment. To explore lineage data from previous runs, see [Compare Lineage Graphs from Previous Runs](lineage.md#compare-lineage-graphs-from-previous-runs).
 
-[Info about job duration]
+:::
 
-### Data quality
+## Navigating the Lineage Graph
 
-If you integrate with [Great Expectations](https://www.astronomer.io/guides/airflow-great-expectations/), an open source data quality tool, the **Quality** tab of the **Issues** page in the Cloud UI will show metadata on data quality checks for both your jobs and datasets. Use this tab to detect data quality failures that could indicate an upstream problem.
+In the **Lineage** page, Astronomer renders your data pipeline as a directed graph of **job** and **dataset** nodes:
+
+- Each job node represents an individual step in your data pipeline, such as an Airflow task in your Deployment or a Spark job.
+- Each dataset node represents a data source that your tasks interact with, such as a Snowflake database.
+
+Directed vertices connect jobs to datasets and vice versa. A single vertex will never connect two jobs or two datasets together.
+
+In the following example, `insert` is a job that exists as part of the `etl_menu_items` grouping. A vertex connects `insert` to the `menu_items` dataset to indicate that `insert` interacted with data in this dataset.
+
+![Lineage graph example showing different nodes and vertices](/img/docs/lineage-overview.png)
+
+To navigate larger graphs, click and drag your mouse across the screen. To zoom in on a specific section of a graph, you can either scroll your mouse or click the magnifying glass icons in the information pane on the bottom-left of the screen.
+
+To learn more information about a dataset or job, you can either hover over or click a node. Hovering over a node gives you high level information about the node at a glance. Specifically you'll see:
+
+- **Namespace**: The namespace of the Deployment in which the job ran
+- **Name**: The DAG ID and task ID of the job, formatted as `<dag-id>.<task-id>`
+- **Run information (job only)**: Metadata and status information about the job run
+- **Quality checks (dataset only)**: The status of a dataset's data quality checks
+
+Clicking a node populates the information pane with detailed information about the node. For more information about how to use this view, see [Using the Information Pane](lineage.md#using-the-information-page).
+
+### Access the Graph Legend
+
+Clicking on the key icon in the information pane opens the graph legend. The legend provides a visual guide to help you distinguish between:
+
+- Job nodes and dataset nodes.
+- User-selected and unselected nodes.
+- Completed, running, failed, and aborted jobs
+- Completed, running, failed, and aborted dataset checks
+
+:::info
+
+Dataset and job statuses are based on checks of metadata attached to your data. To see the specifics of why a database check failed, you can click on the failed database node and check the **Quality** tab in the information pane. To check why a job failed, you might need to check the source of the job, such as your DAG or task.
+
+:::
+
+You can also customize how the graph appears in the legend via the **Cluster Mode** and **Edge Drawing Mode** settings.
+
+## View Metrics for a Specific Job or Dataset
+
+Below the lineage graph is the **information pane**: a collection of information and metrics for a single selected node.
+
+The information pane is split into the following tabs:
+
+- **Info**: Shows the code for a job or the schema for a dataset. Also shows the difference between job runs when you create a comparison in the **Compare** tab
+- **Inputs/Outputs**: Shows the inputs and outputs for a job or dataset. This information is equivalent to the upstream and downstream nodes in the graph view
+- **Quality (Dataset only)**: Shows the data quality checks performed on each element of a dataset. You can drill down further into these checks by expanding a listed dataset element
+- **Duration (Job only)**: Shows the duration of upstream job runs, starting with the most upstream job run and descending to the currently selected job run
+- **Compare (Job only)**: Shows other job runs of the currently selected job. Select any two job runs and go to the **Info** tab to see how the code changed between the two job runs. Use this tab to compare job runs with different statuses or run times to measure performance between code changes
+
+### Using the Quality Tab
+
+The **Quality** tab appears in the information pane whenever you select a dataset node from the graph. It contains both high level charts that provide information about the entire dataset, as well as charts for each individual column of the dataset. These graphs appear only if there is underlying metadata generated by an integrated data check tool, such as Great Expectations.
 
 ![Quality tab example](/img/docs/quality-tab.png)
 
-#### Data quality for datasets
+Use the **Quality** tab to detect looking for sudden, unexplained changes in your dataset that could indicate an upstream failure. The following topics explain each available chart in the tab.
 
-This view has the following:
+#### Rows
 
-- A **Bytes** chart that shows the total size of the dataset over time. A sudden increase in dataset size usually means something has changed in the definition of the data. For example, a new column might have been added to your table containing the description of a restaurant order, where before it contained only the order number.
-- A **Quality Metrics** chart that shows the pass/fail status of quality assertions, as defined in Great Expectations. To see details on the assertions that have failed, hover over a point on the chart.
-- A **Distinct Count** chart that shows the total number of distinct values for a given column. If distinct count changes significantly, it might indicate an upstream data problem.
-- A **Null** chart shows the number of rows in the dataset where a given column contains a null value.
+The Rows chart shows the total number of rows in the dataset over time. A drastic change in rows can occur naturally (for example: when a rapid increase of customer orders during the holiday season). However, it can also indicate an error in an upstream job, especially if it is sudden or unexpected.
+
+#### Bytes
+
+The Bytes chart shows the total size of the dataset over time. A sudden increase in dataset size usually means something has changed in the definition of the data. For example, a new column might have been added to your table containing the description of an order, where before it contained only part numbers and quantities.
+
+#### Quality Metrics
+
+The Quality Metrics chart shows the pass/fail status of quality assertions in a Great Expectations suite.
+To see details on the assertions that have failed, hover over a point on the chart.
+
+#### Distinct Count (Column-level)
+
+The Distinct Count chart shows the total number of distinct values for a given column.
+
+A distinct count can sometimes grow unexpectedly, perhaps if a successful campaign creates a set of new `customer_id` values in an order table suddenly. However, it can also suggest an underlying problem if, for example, a `menu_item_id` field shows that thousands of new menu items have been added overnight.
+
+#### Null (Column-level)
+
+The Null chart shows the number of rows in the dataset where a given column contains a null value.
 
 A large number of null values can be normal, such as when most orders on your system do not include a discount. However, an increase in null values on a column representing a ubiquitous piece of data, such as `quantity`, might indicate an issue.
 
-#### Data quality for jobs
+#### Quality Metrics (Column-level)
 
-[Info about job duration]
+The Quality Metrics chart shows the pass/fail status of quality assertions in a Great Expectations suite for a given column.
 
-#### Compare Lineage Between Runs Using the Compare Tab
+To see details on the assertions that have failed, hover over a given point on the chart.
+
+### Compare Lineage Graphs from Previous Runs
 
 The **Compare** tab shows a list of past job runs for a given job. Using the compare tab, you can select pairs of job runs to see what changed in your pipelines between the two runs. The general Compare tab workflow is as follows:
 
@@ -87,64 +156,22 @@ The **Compare** tab shows a list of past job runs for a given job. Using the com
 
     ![Info tab when comparing two code sources](/img/docs/compare-code.png)
 
-## Lineage
+## View a Summary of Issues across Deployments
 
-In the **Lineage** page of the Cloud UI, there is a graph that visualizes your organization's data ecosystem as a set of nodes. In this view, a node can be either:
+The **Issues** page contains metrics that can help you identify irregularities related to the behavior of your data pipelines.
 
-- A **job** that represents an individual task in your data pipeline, such as an Airflow task or Spark job.
-- A **dataset** that represents a data source that your tasks interact with, such as a Snowflake database.
+![Lineage issues page](/img/docs/lineage-issues.png)
 
-Directed vertices connect jobs to datasets and vice versa. A single vertex will never connect two jobs or two datasets to each other.
+Specifically, this page tracks following types of issues
 
-In the Lineage page, you can:
+- **Job Execution Issues**: A job execution issue occurs when a job emits an error that it did not successfully complete. Note that this metric works only for Deployments using Runtime 5.0.0+.
+- **Job Duration Issues**: A job duration issue occurs when a job run's duration is more than three standard deviations longer than the average run time for that specific job.
+- **Data Quality Issues**: If you integrate with [Great Expectations](https://www.astronomer.io/guides/airflow-great-expectations/), an open source data quality tool, this metric will track issues generated by expectation quality checks for both your jobs and datasets. Use this tab to detect data quality failures that could indicate an upstream problem.
 
-- View metadata for any job in your Organization, including inputs and outputs.
-- Look at the SQL code that ran for any given task in your Organization.
-- Confirm which datasets have been read from or written to, and by which tasks.
-- See the downstream effects and upstream dependencies between tasks.
+## View Past Runs
 
-### View Job Metadata
-
-To learn more information about a dataset or job, you can either hover over or click on its node. Hovering over a node gives you high level information about the node at a glance. Specifically, you'll see:
-
-- **Namespace**: The namespace of the Deployment in which the job ran.
-- **Name**: The DAG ID and task ID of the job, formatted as `<dag-id>.<task-id>`.
-- **Run information**: Metadata and status information about the job run. This applies to jobs only.
-- **Quality checks**: The status of a dataset's data quality checks. This applies to datasets only.
-
-In the following example, `insert` is a job that exists as part of the `etl_menu_items` group. A vertex connects the `insert` job to the `menu_items` dataset to indicate that `insert` interacted with this dataset.
-
-![Lineage graph example showing different nodes and vertices](/img/docs/lineage-overview.png)
-
-Clicking a node populates the information pane with detailed information about the node. For more information about how to use this view, see [Using the Information Pane](lineage.md#using-the-information-page).
-
-### Manage groupings
-
-To reduce the complexity of the graph, nodes are automatically organized into groups based on an assumed shared context between jobs and datasets. A group is represented by a transparent grey box surrounding a subset of nodes. You can change how your graph is grouped by using the **Graph Cluster Mode** settings in the **Graph Legend**:
-
-- The ***Job Groups*** cluster mode creates groups based on relations between different jobs. This mode prioritizes visualizing the sequence, inputs, and outputs within jobs.
-- The ***Dataset Groups*** cluster mode creates groups based on relations between different databases. This mode prioritizes showing which datasets share a common source or infrastructure.
-
-Note that changing to a different graph cluster mode will change where certain nodes appear on the graph. All nodes and the vertices between them, however, remain structurally the same regardless of your cluster mode.
-
-## Using the Information Pane
-
-Below the lineage graph is the **information pane**: a collection of information and metrics for a single selected node. When you click on a node in the graph, the information pane populates all of that nodes information.
-
-The information pane is split into the following tabs:
-
-- **Info**: Shows the code for a job or the schema for a dataset. Also shows the difference between job runs when you create a comparison in the **Compare** tab.
-- **Inputs/Outputs**: Shows the inputs and outputs for a job or dataset. This information is equivalent to the upstream and downstream nodes in the graph view.
-- **Quality (Dataset only)**: Shows the data quality checks performed on each element of a dataset. You can drill down further into these checks by expanding a listed dataset element.
-- **Duration (Job only)**: Shows the duration of upstream job runs, starting with the most upstream job run and descending to the currently selected job run.
-- **Compare (Job only)**: Shows other job runs of the currently selected job. Select any two job runs and go to the **Info** tab to see how the code changed between the two job runs. Use this tab to compare job runs with different statuses or run times to measure performance between code changes.
-
-## View Graphs from Past Runs
-
-By default, the lineage graph shows the information based on your Deployment's most recent job runs. To see the lineage graph for a previous job run and high level metrics about all of your job runs, open the **Explore** page on the lefthand sidebar. This page is structured similarly to the Airflow UI's calendar view: It contains a list of your most recent runs, as well as a calendar that shows all runs over the last year.
+By default, the **Lineage** page shows the last lineage graph you accessed. To se high level metrics about all of your job runs and access lineage graphs for different Deployments, open the **Explore** page on the lefthand sidebar. This page is structured similarly to the Airflow UI's calendar view: It contains a list of your most recent runs, as well as a calendar that shows all runs over the last year.
 
 ![Lineage summary page](/img/docs/lineage-explore.png)
 
 This view can help you get a better sense of the scope of your lineage integrations. It can also help you confirm that a recent run was picked up by the lineage backend as expected.
-
-To view the lineage graph from a previous date, click that date in the calendar and click on any of the tasks that appear in the **Runs on [Date]** table. This will bring up the lineage graph for the selected date and focus on the specific task that you clicked.
