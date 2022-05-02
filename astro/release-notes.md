@@ -12,7 +12,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Astro Runtime Version**: 4.2.6 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 5.0.0 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.4.0 ([Release notes](cli-release-notes.md))
 
@@ -46,7 +46,7 @@ For a reference of all node instance types Astro supports and their correspondin
 
 ### Additional Improvements
 
-- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html). This ensures that traffic to AWS services is kept private and does not traverse the NAT and Internet gateways, reducing the risk of exposing your resources to the internet. 
+- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html). This ensures that traffic to AWS services is kept private and does not traverse the NAT and Internet gateways, reducing the risk of exposing your resources to the internet.
 
 ### Bug Fixes
 
