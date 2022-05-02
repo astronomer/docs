@@ -7,9 +7,15 @@ description: Reference documentation for astrocloud deployment variable create.
 
 ## Description
 
-Create or update environment variables via the Astro CLI by supplying either a key and value pair or a file (e.g. `.env`) with a list of keys and values. This command is functionally identical to creating or modifying an environment variable for a given Deployment via the Cloud UI. For more information, see [Set Environment Variables on Astro](environment-variables.md).
+For a given Deployment on Astro, create environment variables via the Astro CLI by supplying either a key and value pair or a file (e.g. `.env`) with a list of keys and values. This command is functionally identical to creating an environment variable via the Cloud UI. For more information, see [Set Environment Variables on Astro](environment-variables.md).
 
-If you choose to specify `--key` and `--value` instead of loading a file, you can only create or update one environment variable at a time.
+If you choose to specify `--key` and `--value` instead of loading a file, you can only create one environment variable at a time.
+
+:::tip
+
+This command has an `--update` flag that allows you to change the `value` of an existing environment variable, but Astronomer recommends using the [`astrocloud deployment variable update` command](cli-reference/astrocloud-deployment-variable-update.md) to do so.
+
+:::
 
 ## Usage
 
@@ -21,10 +27,10 @@ astrocloud deployment variable create
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| `-d`,`--deployment-id`           |       The Deployment in which to create or update environment variable(s)                           | Any valid Deployment ID |
-| `-e`,`--env`                  | The path to a file that contains a list of environment variables.  If a filepath isn't specified, this points to the `.env` file in your current directory. If `.env` doesn't exist, this flag will create it for you                                                                 | Any valid filepath       |
+| `-d`,`--deployment-id`           |       The Deployment in which to create environment variable(s)                           | Any valid Deployment ID |
+| `-e`,`--env`                  | The path to a file that contains a list of environment variables.  If a filepath isn't specified, this looks for a `.env` file in your current directory. If `.env` doesn't exist, this flag will create it for you                                                                 | Any valid filepath       |
 | `-k`,`--key`             | The environment variable key                                                  | Any string |
-| `-l`,`--load`    | Load new environment variables from a file. Specify this flag if the variables you want to create are in that file. This is an alternative to creating an environment variable by specifying `--key` and `--value`             |`` |
+| `-l`,`--load`    | Load new environment variables from a file. Specify this flag if the variables you want to create are in that file. This is an alternative to creating an environment variable by manually specifying `--key` and `--value`             |`` |
 | `-s`,`--secret`    | Set the value of the new environment variable as secret      |`` |
 | `-u`,`--update`    | Update the value of an existing environment variable. Make sure to specify the `--key` to which this new value will be applied          | Any string |
 | `-v`,`--value`    | The environment variable value          |`` |
@@ -46,3 +52,4 @@ $ astrocloud deployment variable create --deployment-id cl03oiq7d80402nwn7fsl3dm
 ## Related Commands
 
 - [`astrocloud deployment variable list`](cli-reference/astrocloud-deployment-variable-list.md)
+- [`astrocloud deployment variable update`](cli-reference/astrocloud-deployment-variable-update.md)

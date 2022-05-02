@@ -42,3 +42,5 @@ $ astrocloud deployment variable list --deployment-id cl03oiq7d80402nwn7fsl3dmv 
 ## Related Commands
 
 - [`astrocloud deployment variable create`](cli-reference/astrocloud-deployment-variable-create.md)
+- [`astrocloud deployment variable update`](cli-reference/astrocloud-deployment-variable-update.md)
+
