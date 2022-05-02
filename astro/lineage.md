@@ -21,23 +21,23 @@ Views in the **Lineage** page are available to all members of your Organization 
 
 ## View the Lineage Graph for a Deployment
 
-To view the lineage graph for one of your Deployments, search for the name of a DAG or task in the Deployment with the lineage search bar at the top of the UI.
+To view the lineage graph for one of your Deployments, search for a DAG or task in the Deployment with the search bar at the top of the UI.
 
 ![Example query in the lineage search bar](/img/docs/lineage-search.png)
 
 Clicking a search result will open the **Lineage** page and show the lineage graph for the Deployment's most recent DAG run.
 
-You can also access the lineage graph for recent DAG run in the **Explore** page under **Most Recent Runs**.
+You can also access the lineage graph for a recent DAG run in the **Explore** page under **Most Recent Runs**.
 
 :::info
 
-By default, when you directly access the **Lineage** page from the left-hand menu, the page shows your most recently accessed lineage graph. If you go to the **Lineage** page before first accessing the graph, you will not see any lineage graph data. If this happens, try first accessing a task using the search bar or **Explore** page to populate the **Lineage** page with data.
+By default, when you directly access the **Lineage** page from the left-hand menu, the page shows your most recently accessed lineage graph. If you go to the **Lineage** page before first accessing a lineage graph, you will not see any lineage graph data. If this happens, try first accessing a task using the search bar or **Explore** page to populate the **Lineage** page with data.
 
 :::
 
 :::info
 
-The **Lineage** page only shows lineage data for the most recent run of a given Deployment. To explore lineage data from previous runs, see [Compare Lineage Graphs from Previous Runs](lineage.md#compare-lineage-graphs-from-previous-runs).
+The **Lineage** page shows lineage data only for the most recent run of a given Deployment. To explore lineage data from previous runs, see [Compare Lineage Graphs from Previous Runs](lineage.md#compare-lineage-graphs-from-previous-runs).
 
 :::
 
@@ -45,8 +45,8 @@ The **Lineage** page only shows lineage data for the most recent run of a given 
 
 In the **Lineage** page, Astronomer renders your data pipeline as a directed graph of **job** and **dataset** nodes:
 
-- Each job node represents an individual step in your data pipeline, such as an Airflow task in your Deployment or a Spark job.
-- Each dataset node represents a data source that your tasks interact with, such as a Snowflake database.
+- A **job** node represents an individual step in your data pipeline, such as an Airflow task in your Deployment or a Spark job.
+- A **dataset** node represents a data source that your tasks interact with, such as a Snowflake database.
 
 Directed vertices connect jobs to datasets and vice versa. A single vertex will never connect two jobs or two datasets together.
 
@@ -112,24 +112,24 @@ The Bytes chart shows the total size of the dataset over time. A sudden increase
 
 #### Quality Metrics
 
-The Quality Metrics chart shows the pass/fail status of quality assertions in a Great Expectations suite.
+The **Quality Metrics** chart shows the pass/fail status of quality assertions in a Great Expectations suite.
 To see details on the assertions that have failed, hover over a point on the chart.
 
 #### Distinct Count (Column-level)
 
-The Distinct Count chart shows the total number of distinct values for a given column.
+The **Distinct Count** chart shows the total number of distinct values for a given column.
 
 A distinct count can sometimes grow unexpectedly, perhaps if a successful campaign creates a set of new `customer_id` values in an order table suddenly. However, it can also suggest an underlying problem if, for example, a `menu_item_id` field shows that thousands of new menu items have been added overnight.
 
-#### Null (Column-level)
+#### Null Count (Column-level)
 
-The Null chart shows the number of rows in the dataset where a given column contains a null value.
+The **Null Count** chart shows the number of rows in the dataset where a given column contains a null value.
 
 A large number of null values can be normal, such as when most orders on your system do not include a discount. However, an increase in null values on a column representing a ubiquitous piece of data, such as `quantity`, might indicate an issue.
 
 #### Quality Metrics (Column-level)
 
-The Quality Metrics chart shows the pass/fail status of quality assertions in a Great Expectations suite for a given column.
+The **Quality Metrics** chart shows the pass/fail status of quality assertions in a Great Expectations suite for a given column.
 
 To see details on the assertions that have failed, hover over a given point on the chart.
 
@@ -168,9 +168,9 @@ Specifically, this page tracks following types of issues
 - **Job Duration Issues**: A job duration issue occurs when a job run's duration is more than three standard deviations longer than the average run time for that specific job.
 - **Data Quality Issues**: If you integrate with [Great Expectations](https://www.astronomer.io/guides/airflow-great-expectations/), an open source data quality tool, this metric will track issues generated by expectation quality checks for both your jobs and datasets. Use this tab to detect data quality failures that could indicate an upstream problem.
 
-## View Past Runs
+## View a Summary of Past Runs
 
-By default, the **Lineage** page shows the last lineage graph you accessed. To se high level metrics about all of your job runs and access lineage graphs for different Deployments, open the **Explore** page on the lefthand sidebar. This page is structured similarly to the Airflow UI's calendar view: It contains a list of your most recent runs, as well as a calendar that shows all runs over the last year.
+By default, the **Lineage** page shows the last lineage graph you accessed. To see high level metrics about all of your job runs and access lineage graphs for different Deployments, open the **Explore** page on the lefthand sidebar. This page is structured similarly to the Airflow UI's calendar view: It contains a list of your most recent runs, as well as a calendar that shows all runs over the last year.
 
 ![Lineage summary page](/img/docs/lineage-explore.png)
 
