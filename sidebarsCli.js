@@ -6,9 +6,13 @@ module.exports = {
       label: 'Reference',
       items: [
         {
+          {
+            type: 'doc',
+            label: 'CLI Overview',
+            id: 'cli-reference'
+          },
           type: 'category',
           label: 'CLI Command Reference',
-          link: { type: 'doc', id: 'cli-reference' },
           items: [
             'cli-reference/astrocloud-auth-login',
             'cli-reference/astrocloud-auth-logout',
