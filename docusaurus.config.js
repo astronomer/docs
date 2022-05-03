@@ -218,5 +218,18 @@ module.exports = {
        },
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cli',
+        routeBasePath: 'cli',
+        editUrl: ({ docPath }) =>
+          `https://github.com/astronomer/docs/blob/main/cli/${docPath}`,
+        editCurrentVersion: true,
+        sidebarPath: require.resolve('./sidebarsCli.js'),
+        path: 'cli',
+        lastVersion: 'current',
+      },
+    ],
   ],
 };
