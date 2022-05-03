@@ -24,7 +24,7 @@ To complete this setup, you need to have:
 - A Cluster on Astro.
 - Permission from your team.
 
-If you don't have a Cluster on Astro, follow [Install Astro on AWS](install-aws.md). If you have an existing Cluster and are interested in creating additional Clusters, read [Create a Cluster](create-cluster.md).
+If you don't have a Cluster on Astro, follow the instructions to [Install Astro on AWS](install-aws.md) or [GCP](install-gcp.md). If you have an existing Cluster and are interested in creating additional Clusters, read [Create a Cluster](create-cluster.md).
 
 ## Step 1: Submit a Request to Astronomer
 
