@@ -36,6 +36,4 @@ module.exports = {
         'cli-reference/astrocloud-workspace-switch',],
     },
   ],
-},
-],
 };
