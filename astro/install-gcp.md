@@ -14,9 +14,11 @@ This guide provides steps for getting started with Astro on your Google Cloud . 
 To install Astro on GCP, you need:
 
 - A clean [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects). For security reasons, the install process is not currently supported on an Google Cloud project that has other tooling running in it.
-- A minimum [CPU quota](https://cloud.google.com/compute/quotas#cpu_quota) of 36.
+- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36.
 - A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24.
 - A subscription to the Astro Status Page. This will ensure that you're alerted in the case of an incident or scheduled maintenance.
+
+For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
 
 ### VPC Peering Prerequisites (Optional)
 
@@ -30,7 +32,7 @@ If you want to access resources using a VPC peering connection additionally need
 - **Subnet CIDR**: Used by nodes in your GKE cluster
 - **Pod CIDR**: Used by GKE pods
 - **Service Address CIDR**: Used by GKE services
-- **Service VPC Peering**: Used by Private Service Connections  
+- **Service VPC Peering**: Used by Private Service Connections
 
 ## Step 1: Access Astro
 
@@ -95,9 +97,9 @@ Provide Astronomer with the following details about your installation:
 - Your preferred CloudSQL instance type
 - Your preferred maximum node count
 
-If you have no preferred values for your first Cluster, Astronomer will create a Cluster with e2-medium-4 nodes and a Medium General Purpose (4vCPU, 16GB) CloudSQL instance in us-central1, with a maximum node count of 20.
+If you have no preferred values for your first Cluster, Astronomer will create a Cluster with e2-medium-4 nodes, one Medium General Purpose (4vCPU, 16GB) CloudSQL instance, and a maximum node count of 20 in `us-central1`.
 
-For information on all supported regions and configurations, see [GCP Resource Reference](resource-reference-gcp).  
+For information on all supported regions and configurations, see [GCP Resource Reference](resource-reference-gcp.md).  
 
 :::info
 
