@@ -13,7 +13,7 @@ This guide provides steps for upgrading your Astronomer Software platform from v
 
 A few important notes before you start:
 
-- In version 0.26+, the the Astronomer airflow chart uses Apache’s airflow chart as a subchart dependency to provide users with access to new Airflow features more quickly. There are some differences in the schema. If you are setting airflow-chart defaults in your `config.yaml`, you will need to make small adjustment to the file. More information below.
+- In version 0.26.0+, the the Astronomer airflow chart uses Apache’s airflow chart as a subchart dependency to provide users with access to new Airflow features more quickly. There are some differences in the schema. If you are setting airflow-chart defaults in your `config.yaml`, you will need to make small adjustment to the file. More information below.
 - You must be on Astronomer Software v0.25+ in order to upgrade to Astronomer v0.28+. If you are running v0.23, please follow the instructions for [upgrading from v0.23 to v0.25](https://docs.astronomer.io/software/0.25/upgrade-to-0-25). If you are running a version of Astronomer that's lower than v0.23, submit a request to [Astronomer Support](https://support.astronomer.io/) and our team will help you define an alternate upgrade path.
 - The guidelines below only apply to users who are upgrading to the Astronomer v0.28 series for the first time. Once you've completed the upgrade to any v0.28 version, you'll be free to upgrade to subsequent v0.28.x patch versions as they are released by our team. For instructions, read [Upgrade to a Patch Version](https://docs.astronomer.io/software/upgrade-astronomer-stable).
 
