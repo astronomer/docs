@@ -22,7 +22,16 @@ By default, the Astronomer account has no access to your data services. We’ll 
 ### Pre-Flight Checklist
 When you arrive at your data plane activation appointment, please ensure you have:
 - [ ] [Astro CLI](install-cli.md) installed for any users who will develop pipelines
-- [ ] Clean AWS Account created, which you have CreateRole permissions on
+- [ ] A clean AWS Account
+- [ ] A user with the following permissions to that AWS account:
+  - `cloudformation:*`
+  - `GetRole`
+  - `GetRolePolicy`
+  - `CreateRole`
+  - `DeleteRolePolicy`
+  - `PutRolePolicy`
+  - `ListRoles`
+  - `UpdateAssumeRolePolicy`
 - [ ] Desired region for Astro Cluster deployment identified, from the list of [supported regions](resource-reference-aws.md#aws-region)
 - [ ] _If peering VPCs_, preferred subnet CIDR range identified (no smaller than a /19 range)
 

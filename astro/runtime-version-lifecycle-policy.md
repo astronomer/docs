@@ -105,6 +105,8 @@ Maintenance is discontinued the last day of the month for a given version. For e
 
 ## Astro Runtime Lifecycle Schedule
 
+<!--- Version-specific -->
+
 The following table contains the exact lifecycle for each published version of Astro Runtime. These timelines are based on the LTS and Stable release channel maintenance policies.
 
 ### Stable Releases
@@ -115,5 +117,6 @@ The following table contains the exact lifecycle for each published version of A
 | [4.0.x](runtime-release-notes.md#astro-runtime-400)      | Oct 12, 2021    |  April 2022             |
 | [4.1.x](runtime-release-notes.md#astro-runtime-410)      | Feb 22, 2022    |  August 2022            |
 | [4.2.x](runtime-release-notes.md#astro-runtime-420)      | March 10, 2022  |  September 2022         |
+| [5.0.x](runtime-release-notes.md#astro-runtime-500)      | April 30, 2022  |  October 2022         |
 
 If you have any questions or concerns, reach out to [Astronomer Support](https://support.astronomer.io).
