@@ -7,8 +7,8 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'error',
-  onBrokenMarkdownLinks: 'error',
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.svg',
   organizationName: 'astronomer', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
@@ -80,6 +80,12 @@ module.exports = {
               to: '/software/0.16/overview'
             },
           ],
+        },
+        {
+          to: 'cli/',
+          activeBaseRegex: 'cli',
+          label: 'Astro CLI',
+          position: 'left',
         },
       ],
     },
