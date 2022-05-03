@@ -1,9 +1,0 @@
-# Config file for typos. This is run as a GitHub Action.
-# https://github.com/crate-ci/typos
-
-[default]
-# Don't check filenames, only contents.
-check-filename	= false
-
-[files]
-extend-exclude = ["*.css", "yarn.lock"]
