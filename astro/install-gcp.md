@@ -37,12 +37,12 @@ If any of your GCP resources are on a private network, you can access them using
 - Private Services Connect
 - A VPC Peering connection between Astronomer's VPC and the VPCs for your broader network
 
-Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer Cluster.  If you plan on peering with an existing VPC want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
+Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer Cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
 
-- **Subnet CIDR**: Used by nodes in your GKE cluster, defaults to `172.20.0.0/19`
-- **Pod CIDR**: Used by GKE pods, defaults to `172.21.0.0/19`
-- **Service Address CIDR**: Used by GKE services, defaults to `172.21.0.0/19`
-- **Service VPC Peering**: Used by Private Service Connections, defaults to `172.21.0.0/19`
+- **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/19`)
+- **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
+- **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
+- **Service VPC Peering**: Used by Private Service Connections (Default: `172.21.0.0/19`)
 
 ## Step 1: Access Astro
 
@@ -91,7 +91,7 @@ To activate the Data Plane on your GCP project:
     ```sh
     $ export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
     $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
-    $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt-dev.iam.gserviceaccount.com --role=roles/owner
+    $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
     ```
 
 ## Step 3: Provide Setup Information to Astronomer
@@ -107,7 +107,7 @@ To start the installation of your first Astro Cluster, provide Astronomer with:
 
 If not specified, Astronomer will create a Cluster with the following resources in `us-central1`:
 
-- Two `e2-medium-4` nodes.
+- `e2-medium-4` nodes.
 - A Medium General Purpose CloudSQL instance (4vCPU, 16GB).
 - A maximum node count of 20.
 - A Subnet CIDR of `172.20.0.0/19`.
