@@ -27,7 +27,7 @@ Astro's architecture enables a few key features, available today:
 
 ## Architecture
 
-The following diagram outlines how the control plane, data plane, and users are connected to enable these features:
+The following diagram outlines how the Control Plane, Data Plane, and users are connected to enable these features:
 
 <div class="text--center">
   <img src="/img/docs/architecture-overview.png" alt="High level overview of Astro's architecture" />
