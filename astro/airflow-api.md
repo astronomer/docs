@@ -48,17 +48,18 @@ In automated processes (such as a [CI/CD pipeline](https://docs.astronomer.io/as
 
 :::
 
-To retrieve your Deployment URL, open your Deployment in the Cloud UI and click **Open Airflow**. The URL for the Airflow UI is your Deployment URL minus `/home`. It includes the name of your Organization and a short Deployment ID. For example, your Deployment URL will look similar to `https://mycompany.astronomer.run/dhbhijp0`.
+To retrieve your Deployment URL, open your Deployment in the Cloud UI and click **Open Airflow**. The URL for the Airflow UI is your Deployment URL minus `/home`. It includes the name of your Organization and a short Deployment ID. For a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany`, for example, the Deployment URL would be: `https://mycompany.astronomer.run/dhbhijp0`.
 
 ## Step 2: Make an Airflow API Request
 
 With the information from Step 1, you can now execute requests against any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
-For all examples, replace `<access-token>` and `<deployment-url>` with the values obtained in Step 1, and replace `<dag-id>` with the ID of a DAG that you want to interact with using the Airflow API where it is appropriate to do so.
+For all requests, replace `<access-token>` and `<deployment-url>` with the values obtained in Step 1, and replace `<dag-id>` with your own DAG ID where applicable.
 
 For example, to retrieve a list of all DAGs in a Deployment, you can run a `GET` request to the [`dags` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_dags)
 
 Using cURL:
+
 ```sh
 curl -X GET <deployment-url>/api/v1/dags \
    -H 'Cache-Control: no-cache' \
