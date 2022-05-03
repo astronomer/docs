@@ -74,6 +74,7 @@ module.exports = {
         'renew-tls-cert',
         'namespace-pools',
         'third-party-ingress-controllers',
+        'upgrade-to-0-28',
           ],
         },
         {

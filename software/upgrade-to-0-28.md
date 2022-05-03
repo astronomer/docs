@@ -13,7 +13,7 @@ This guide provides steps for upgrading your Astronomer Software platform from v
 
 A few important notes before you start:
 
-- In version 0.26.0+, the the Astronomer airflow chart uses Apache’s airflow chart as a subchart dependency to provide users with access to new Airflow features more quickly. There are some differences in the schema. If you are setting airflow-chart defaults in your `config.yaml`, you will need to make small adjustment to the file. More information below.
+- In version 0.26.0+, the the Astronomer Airflow chart uses Apache’s Airflow chart as a dependency to provide users with access to new Airflow features more quickly. Because of this dependency, the schema for the Astronomer Airflow chart has changed, and any existing `airflow-chart` configuration in `config.yaml` might break upon upgrade. For more information on how update your configuration based on this change, see [Step 6](upgrade-to-0-28.md#step-6-update-config-file-if-necessary).
 - You must be on Astronomer Software v0.25+ in order to upgrade to Astronomer v0.28+. If you are running v0.23, please follow the instructions for [upgrading from v0.23 to v0.25](https://docs.astronomer.io/software/0.25/upgrade-to-0-25). If you are running a version of Astronomer that's lower than v0.23, submit a request to [Astronomer Support](https://support.astronomer.io/) and our team will help you define an alternate upgrade path.
 - The guidelines below only apply to users who are upgrading to the Astronomer v0.28 series for the first time. Once you've completed the upgrade to any v0.28 version, you'll be free to upgrade to subsequent v0.28.x patch versions as they are released by our team. For instructions, read [Upgrade to a Patch Version](https://docs.astronomer.io/software/upgrade-astronomer-stable).
 
@@ -22,20 +22,15 @@ A few important notes before you start:
 Ensure that the following software is updated to the appropriate version:
 
 - **Kubernetes**: Your version must be 1.19 or greater. If you need to upgrade Kubernetes, contact your cloud provider's support or your Kubernetes administrator.
-- **Airflow Images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.5 or greater. In addition, your image should be in the following format:
-
-    `quay.io/astronomer/ap-airflow:<airflow-version>-<build-number>-<distribution>-onbuild`
+- **Airflow Images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.5 or greater.
 
     For example, all of the following images would work for this upgrade:
 
-    `quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild`
+    - `quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild`
+    - `quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild`
+    - `quay.io/astronomer/ap-airflow:1.10.15-7-buster`
+    - `quay.io/astronomer/ap-airflow:2.2.2-onbuild`
 
-    `quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild`
-
-    `quay.io/astronomer/ap-airflow:``1.10.15-7-buster`
-
-    > Note: While -onbuild and <build-number> are optional, we recommend including them for most upgrades. If you have your own build, test, and publish workflows that are layered on top of the Astronomer Airflow images, then removing <build-number> is appropriate because images including <build-number> are immutable.
-    >
 - **Helm**: Your version must be 3.6 ≤ 3.8.
 
 ## Step 2: Check Permissions
@@ -46,11 +41,11 @@ Minor version upgrades can be initiated only by a user with System Admin permiss
 
 You also need permission to create Kubernetes resources. To confirm you have those permissions, run the following commands:
 
-`kubectl auth can-i create pods --namespace <your-astronomer-namespace>`
-
-`kubectl auth can-i create sa --namespace <your-astronomer-namespace>`
-
-`kubectl auth can-i create jobs --namespace <your-astronomer-namespace>`
+```sh
+kubectl auth can-i create pods --namespace <your-astronomer-namespace>
+kubectl auth can-i create sa --namespace <your-astronomer-namespace>
+kubectl auth can-i create jobs --namespace <your-astronomer-namespace>
+```
 
 If all commands return `yes`, then you have the appropriate Kubernetes permissions.
 
@@ -62,7 +57,9 @@ Backup your entire Astronomer database instance using your cloud provider's func
 
 Before you proceed with the upgrade, ensure that the Kubernetes Pods in your platform namespace are healthy. To do so, run:
 
-`kubectl get pods -n <your-astronomer-namespace>`
+```sh
+kubectl get pods -n <your-astronomer-namespace>
+```
 
 All pods should be in either the `Running` or `Completed` state. If any of your pods are in a `CrashLoopBackOff` state or are otherwise unhealthy, make sure that's expected behavior before you proceed.
 
@@ -71,7 +68,10 @@ All pods should be in either the `Running` or `Completed` state. If any of your 
 Ensure you have a copy of the `config.yaml` file for your platform namespace.
 
 To do this, you can run:
-`helm get values <your-platform-release-name> -n <your-platform-namespace>  > config.yaml`
+
+```sh
+helm get values <your-platform-release-name> -n <your-platform-namespace>  > config.yaml
+```
 
 Review this configuration and delete the line `"USER-SUPPLIED VALUES:"` if you see it.
 
@@ -79,9 +79,9 @@ Create a copy of `config.yaml` called `old_config.yaml`. This should saved in ca
 
 ## Step 6: Update Config File (if necessary)
 
-Check your `config.yaml` to see if you have anything listed under `astronomer.houston.config.deployments.helm`. If so, you may need to adjust some values.
+Check your `config.yaml` file to see if you have any configuration listed under `astronomer.houston.config.deployments.helm`. If so, you will need to update all key-value pairs in this section to instead be under `astronomer.houston.config.deployments.helm.airflow`.
 
-For example, this config file is overriding the `webserver.allowPodLogReading` config.
+For example, consider an existing `config.yaml` file that includes an override of `webserver.allowPodLogReading`:
 
 ```yaml
 astronomer:
@@ -91,10 +91,9 @@ astronomer:
         helm:
           webserver:
             allowPodLogReading: true
-
 ```
 
-In this example, you will need to add an `airflow` key after `helm`.
+In this was your configuration, you would need to modify your `config.yaml` file to include an `airflow` key after `helm`:
 
 ```yaml
 astronomer:
@@ -107,7 +106,7 @@ astronomer:
               allowPodLogReading: true
 ```
 
-Most commonly, this is the only change that is needed however you should compare your values with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open-source Airflow chart](https://github.com/apache/airflow/blob/main/chart/values.yaml).
+Once you complete this change, compare any values under the `airflow` section with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open-source Airflow chart](https://github.com/apache/airflow/blob/main/chart/values.yaml) to ensure that they are formatted correctly. Incorrectly formatted values for these configurations might result in an error during upgrade.
 
 ## Step 6: Upgrade Astronomer to v0.28
 
@@ -182,7 +181,7 @@ To do so via Homebrew, run:
 
 `brew install astronomer/tap/astro@0.28`
 
-Earlier versions of the Astronomer CLI are backwards incompatible with Astronomer v0.28. All team members within your organization must upgrade the Astronomer CLI individually before taking any further action on the platform or in a local Airflow environment. For a detailed breakdown of CLI changes between versions, refer to [Astronomer CLI releases](https://github.com/astronomer/astro-cli/releases). For detailed install guidelines and more information on the Astronomer CLI, refer to [Astronomer CLI Quickstart](https://docs.astronomer.io/software/0.25/cli-quickstart).
+Earlier versions of the Astronomer CLI are backwards incompatible with Astronomer v0.28. All team members within your organization must upgrade the Astronomer CLI individually before taking any further action on the platform or in a local Airflow environment. For a detailed breakdown of CLI changes between versions, refer to the [CLI Release Notes](cli-release-notes.md). For detailed install guidelines and more information on the Astronomer CLI, refer to [Astronomer CLI Quickstart](cli-quickstart.md).
 
 ## Roll Back to Software v0.25
 
