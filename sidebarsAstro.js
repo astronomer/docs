@@ -88,6 +88,7 @@ module.exports = {
           items: [
             'create-cluster',
             'modify-cluster',
+            'connect-external-services',
           ],
         },
       ],
@@ -119,6 +120,9 @@ module.exports = {
             'cli-reference/astrocloud-deployment-list',
             'cli-reference/astrocloud-deployment-logs',
             'cli-reference/astrocloud-deployment-update',
+            'cli-reference/astrocloud-deployment-variable-create',
+            'cli-reference/astrocloud-deployment-variable-list',
+            'cli-reference/astrocloud-deployment-variable-update',
             'cli-reference/astrocloud-dev-init',
             'cli-reference/astrocloud-dev-kill',
             'cli-reference/astrocloud-dev-logs',
@@ -137,6 +141,7 @@ module.exports = {
         'runtime-version-lifecycle-policy',
         'resource-reference-aws',
         'platform-variables',
+        'data-plane-activation',
         {
           type: 'category',
           label: 'Security',

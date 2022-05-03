@@ -75,7 +75,7 @@ The port will be set to 5342 by default but if youâ€™ve set a custom port, youâ€
 
 Here's an example DAG, where `postgres_conn_id` is set to `airflow_db`:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook

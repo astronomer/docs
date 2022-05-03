@@ -52,7 +52,7 @@ Over time, these units are subject to change. Read below for guidelines on how t
 
 ### Worker Resources
 
-Task execution on Astro is powered by [Airflow's Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) with [KEDA](https://www.astronomer.io/blog/the-keda-autoscaler), which enables a Deployment's worker count to auto-scale between 1 and 10 depending on real-time workload.
+In Airflow, a worker is responsible for executing tasks that are scheduled and queued by the Scheduler. On Astro, task execution is powered by the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) with [KEDA](https://www.astronomer.io/blog/the-keda-autoscaler), which enables a Deployment's worker count to auto-scale between 1 and 10 depending on real-time workload. Each worker is a Kubernetes Pod in your Astro Cluster.
 
 All Celery workers assume the same resources. If you set **Worker Resources** to 10 AU, for example, your Deployment might scale up to 3 workers using 10 AU each for a total of 30 AU (3 CPU, 11.25 GB Memory). By default, the minimum AU allocated towards workers is 10.
 
@@ -62,9 +62,9 @@ The ability to set minimum and/or maximum number of workers is coming soon.
 
 While the **Worker Resources** setting affects the amount of computing power allocated to each worker, the number of workers running on your Deployment is based solely on the number of tasks in a queued or running state.
 
-The maximum number of tasks that a single worker can execute at once, known in Airflow as Worker Concurrency, is 16. This is currently a system-wide setting on Astro that cannot be changed. As soon as there are more than 16 tasks queued or running at any given time, one or more new workers is spun up to execute the additional tasks. The number of workers running on a Deployment at any given time can be calculated by the following expression:
+The maximum number of tasks that a single worker can execute at once, known in Airflow as Worker Concurrency, is 16. This is currently a [system-wide setting on Astro](platform-variables.md) that cannot be changed. As soon as there are more than 16 tasks queued or running at any given time, one or more new workers is spun up to execute the additional tasks. The number of workers running on a Deployment at any given time can be calculated by the following expression, where Worker Concurrency is 16:
 
-`[Number of Workers]= ([Queued tasks]+[Running tasks])/16`
+`[Number of Workers]= ([Queued tasks]+[Running tasks])/(Worker Concurrency)`
 
 This calculation is computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, read [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
 :::

@@ -66,17 +66,17 @@ Use the following example API requests to begin automating your own Airflow acti
 
 ### Trigger a DAG
 
-If you'd like to externally trigger a DAG run, you can start with a generic cURL command to Airflow's POST endpoint:
+To trigger a DAG, you can run a simple cURL command that makes a POST request to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) of the Airflow REST API:
 
 ```
-POST /airflow/api/v1/dags/<dag-id>/dag_runs
+POST /dags/<dag-id>/dagRuns
 ```
 
 The command for your request should look like this:
 
 ```
 curl -v -X POST
-<deployment-url>/api/v1/dags/<dag-id>/dag_runs
+<deployment-url>/api/v1/dags/<dag-id>/dagRuns
 -H 'Authorization: Bearer <access-token>’
 -H ‘Cache-Control: no-cache’
 -H ‘content-type: application/json’ -d ‘{}’
@@ -88,13 +88,13 @@ Make sure to replace the following values with your own:
 - `<deployment-url>`
 - `<access-token>`
 
-This will trigger a DAG run for your desired DAG with an `execution_date` value of `NOW()`, which is equivalent to clicking the **Play** button in the main **DAGs** view of the Airflow UI.
+This will trigger a DAG run for the DAG you specify with a `logical_date` value of `NOW()`, which is equivalent to clicking the **Play** button in the main **DAGs** view of the Airflow UI.
 
 #### Specify Execution Date
 
-If you have a specific `execution_date` (i.e. start timestamp) to trigger your DAG on, you can pass that in with the data parameter's JSON value `("-d'{}')`.
+If you have a specific `logical_date` to trigger your DAG on, you can pass in a timestamp with the parameter's JSON value `("-d'{}')`.
 
-The string needs to be in the following format (in UTC):
+The timestamp string is expressed in UTC and must be specified in the following format:
 
 ```
 “YYYY-MM-DDTHH:MM:SS”
@@ -105,25 +105,25 @@ Where, `YYYY`: Year, `MM`: Month, `DD`: Day, `HH`: Hour, `MM`: Minute, `SS`: Sec
 For example:
 
 ```
-“2019-11-16T11:34:00”
+“2021-11-16T11:34:00”
 ```
 
 Here, your request becomes:
 
 ```
 curl -v -X POST
-<deployment-url>/api/v1/dags/<dag-id>/dag_runs
+<deployment-url>/api/v1/dags/<dag-id>/dagRuns
 -H ‘Authorization: <access-token>’
 -H ‘Cache-Control: no-cache’
--H ‘content-type: application/json’ -d ‘{“execution_date”:“2019-11-16T11:34:00”}’
+-H ‘content-type: application/json’ -d ‘{“logical_date”:“2021-11-16T11:34:00”}’
 ```
 
-### Get All Pools
+### List All Pools
 
-If you want to get all existing Pools from your Deployment, you can start with a generic Python command to Airflow's `GET` endpoint:
+To list all pools for your Deployment, you can run a simple command that makes a GET request to the [`pools` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Pool) of the Airflow REST API:
 
 ```
-GET /api/v1/pools
+GET /pools
 ```
 
 Here, your request would look like this:

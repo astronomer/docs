@@ -13,7 +13,7 @@ IAM roles on [AWS](https://aws.amazon.com/iam/faqs/) and other platforms are oft
 
 A few clarifying notes:
 
-* Webserver, Scheduler and Worker pods within your Airflow Deployment will assume the IAM role. There is currently no way to use more than 1 IAM role per deployment.
+* All pods within your Airflow Deployment will assume the IAM role. There is currently no way to use more than 1 IAM role per deployment.
 * If you’d like your IAM role to apply to more than 1 deployment, you must annotate each deployment.
 * You must use the Astronomer CLI to pass IAM role annotations.
 * Only Workspace Admins can pass IAM role annotations.
@@ -59,21 +59,21 @@ Before you can integrate IAM with an Airflow Deployment on Astronomer, you'll ne
     aws eks describe-cluster --name <your-cluster> --query "cluster.identity.oidc.issuer" --output text
     ```
 
-    The output of this command should be a URL starting with `https://oidc.eks`.
+    The output of this command should be a URL with the format `https://oidc.eks.[region].amazonaws.com/id/[id]`. 
 
 3. Open the [IAM console](https://console.aws.amazon.com/iam/).
 4. In the navigation pane, click **Identity Providers** > **Create Provider**.
 5. For **Provider Type**, click **Choose a provider type** > **OpenID Connect**.
 6. For **Provider URL**, use the OIDC issuer URL for your cluster.
 7. For **Audience**, use `sts.amazonaws.com`.
-8. Verify that the provider information is correct, and then click **Create** to create your identity provider.
+8. Verify that the provider information is correct, and then click **Add provider** to create your identity provider.
 
 For additional information, refer to [Enable IAM Roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
 
 ### Step 2: Create an IAM policy
 
 1. Open the IAM console at https://console.aws.amazon.com/iam/.
-2. In the navigation panel, click **Policies** > **Create policy**.
+2. In the navigation panel, click **Policies** > **Create Policy**.
 3. Open the **JSON** tab.
 4. In the Policy Document field, specify the permissions you'd like to apply (or restrict) to the resource in question (e.g. read / write access to an AWS S3 bucket). You can also use the visual editor to construct your own policy.
 
@@ -112,10 +112,9 @@ For additional information, refer to [Enable IAM Roles for service accounts](htt
 
 1. Open the IAM console at https://console.aws.amazon.com/iam/.
 2. In the navigation panel, go to **Roles** > **Create Role**.
-3. In the **Select type of trusted entity** section, choose **AWS service** and **EC2**. Choose **Next: Permissions**.
-4. In the **Attach Policy** section, select your policy created in the previous section. Choose **Next: Tags.**
-5. On the Add tags (optional) screen, you can add tags for the account. Choose **Next: Review.**
-6. Enter a name for your role and click **Create Role**.
+3. In the **Select trusted entity** section, choose **AWS service** and **EC2**. Choose **Next**.
+4. In the **Add permissions** section, select your policy created in the previous section. Choose **Next.**
+5. In the **Name, review, and create** section, enter a name for your role and click **Create role**.
 
 For additional information, refer to [Create service account IAM Policy and Role](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html).
 
@@ -124,8 +123,8 @@ For additional information, refer to [Create service account IAM Policy and Role
 To create a trust relationship between your IAM role and OIDC identity provider:
 
 1. Open the IAM console at https://console.aws.amazon.com/iam/.
-2. In the navigation panel, choose **Roles** and select your role created in the previous section.
-3. Select the **Trust relationships** tab and choose **Edit trust relationship**.
+2. In the navigation panel, choose **Roles** and open your role created in the previous section.
+3. Select the **Trust relationships** tab and choose **Edit trust policy**.
 4. Create a trust relationship between your IAM role and OIDC identity provider with the following format:
 
     ```json
@@ -199,19 +198,12 @@ In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll 
     Example:
 
     ```yaml
-    global:
-      baseDomain: astro.mydomain.com
-      tlsSecret: astronomer-tls
-      postgresqlEnabled: false
-    nginx:
-      privateLoadBalancer: true
     astronomer:
       houston:
         config:
           deployments:
             serviceAccountAnnotationKey: eks.amazonaws.com/role-arn
     ```
-
 
 2. Push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
 

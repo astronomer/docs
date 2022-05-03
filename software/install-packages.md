@@ -15,7 +15,7 @@ Depending on your use case and distribution of Astronomer Certified, you might w
 
 If you use the Astronomer Certified Docker image to run Airflow, you can install packages directly onto your image via your `Dockerfile`. To install OS-level packages, you can specify them using a `RUN` directive with `apt-get`. For example, the following `Dockerfile` would install `your-os-package` on the image:
 
-```
+```dockerfile
 FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -33,7 +33,7 @@ apt-get install <your-os-package>=<version> -V
 
 To install a Python-level package, specify the package using a `RUN` directive with `pip install` instead. For example:
 
-```
+```dockerfile
 FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild
 RUN pip install --no-cache-dir --user <your-python-package>
 ```

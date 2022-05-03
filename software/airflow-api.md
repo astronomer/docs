@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Airflow API'
-title: 'Make Requests to the Airflow API'
+title: 'Make Requests to the Airflow REST API'
 id: airflow-api
 description: Call the Apache Airflow REST API on Astronomer Software.
 
@@ -8,19 +8,23 @@ description: Call the Apache Airflow REST API on Astronomer Software.
 
 ## Overview
 
-Apache Airflow is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2.0, and an ["experimental" REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You're free to leverage both on Astronomer.
+Apache Airflow is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2, and an ["experimental" REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You can use both on Astronomer.
 
-If you're looking to externally trigger DAG runs without needing to access your Airflow Deployment directly, for example, you can make an HTTP request (in Python, cURL etc.) to the corresponding endpoint in Airflow's API that calls for that exact action.
+To externally trigger DAG runs without needing to access your Airflow Deployment directly, for example, you can make an HTTP request in Python or cURL to the corresponding endpoint in the Airflow REST API that calls for that exact action.
 
-To get started, you'll need a Service Account on Astronomer to authenticate. Read below for guidelines.
+To get started, you need a Service Account on Astronomer to authenticate. Read below for guidelines.
 
 ## Step 1: Create a Service Account on Astronomer
 
-The first step to calling the Airflow API on Astronomer is to create a Deployment-level Service Account, which will assume a user role and set of permissions and output an API Key that you can use to authenticate with your request.
+The first step to calling the Airflow REST API on Astronomer is to create a Deployment-level Service Account, which will assume a user role and set of permissions and output an API Key that you can use to authenticate with your request.
 
 You can create a Service Account via either the Software UI or the Astronomer CLI.
 
-> **Note:** If you just need to call the Airflow API once, you can create a temporary Authentication Token (_expires in 24 hours_) on Astronomer in place of a long-lasting Service Account. To do so, simply navigate to: `https://<your-base-domain>/token` and skip to Step 2.
+:::info
+
+If you just need to call the Airflow REST API once, you can create a temporary Authentication Token (_expires in 24 hours_) on Astronomer in place of a long-lasting Service Account. To do so, simply navigate to: `https://<your-base-domain>/token` and skip to Step 2.
+
+:::
 
 ### Create a Service Account via the Software UI
 
@@ -56,7 +60,7 @@ To create a Deployment-level Service Account via the Astronomer CLI:
    ```
 4.  Save the API Key that was generated. Depending on your use case, you might want to store this key in an Environment Variable or secret management tool of choice.
 
-## Step 2: Make an Airflow API Request
+## Step 2: Make an Airflow REST API Request
 
 Now that you've created a Service Account, you're free to generate both `GET` or `POST` requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/stable/rest-api-ref.html) via the following base URL:
 
@@ -66,21 +70,21 @@ https://<your-base-domain>/<deployment-release-name>
 
 In the examples below, we'll refer to this URL as the `AIRFLOW-DOMAIN`, where you'll replace `<your-base-domain>` (e.g. `mycompany.astronomer.io`) and `<deployment-release-name>` (e.g. `galactic-stars-1234`) with your own.
 
-You can make requests via the method of your choosing. Below, we'll walk through an example request via cURL to Airflow's "Trigger DAG" endpoint and an example request via Python to the "Get all Pools" endpoint.
+You can make requests via the method of your choosing. Below, we'll walk through an example request via cURL to Airflow's "Trigger DAG" endpoint and an example request via Python to the "Get all Pools" endpoint. In all cases, your request will have the same permissions as the role of the Service Account you created on Astronomer.
 
 ### Trigger DAG
 
-If you'd like to externally trigger a DAG run, you can start with a generic cURL command to Airflow's POST endpoint:
+To trigger a DAG, run a simple cURL command that makes a POST request to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) of the Airflow REST API:
 
 ```
-POST /airflow/api/experimental/dags/<DAG_ID>/dag_runs
+POST /dags/<dag-id>/dagRuns
 ```
 
 The command for your request should look like this:
 
 ```
 curl -v -X POST
-https://<AIRFLOW-DOMAIN>/airflow/api/experimental/dags/<DAG-ID>/dag_runs
+https://<AIRFLOW-DOMAIN>/api/v1/dags/<DAG-ID>/dagRuns
 -H 'Authorization: <API-Key> '
 -H 'Cache-Control: no-cache'
 -H 'content-type: application/json' -d '{}'
@@ -92,13 +96,11 @@ To run this, replace the following placeholder values:
 - `<DAG-ID>`: Name of your DAG (_case-sensitive_)
 - `<API-Key>`: API Key from your Service Account
 
-This will trigger a DAG run for your desired DAG with an `execution_date` value of `NOW()`, which is equivalent to clicking the "Play" button in the main "DAGs" view of the Airflow UI.
-
-> **Note:** Your request will have the same permissions as the role of the Service Account you created on Astronomer.
+This will trigger a DAG run for your desired DAG with a `execution_date` value of `NOW()`, which is equivalent to clicking the "Play" button in the main "DAGs" view of the Airflow UI.
 
 #### Specify Execution Date
 
-If you'd like to choose a specific `execution_date` (i.e. start timestamp) to trigger your DAG on, you can pass that in with the data parameter's JSON value `("-d'{}')`.
+To set a specific `execution_date` for your DAG, you can pass in a timestamp with the parameter's JSON value `("-d'{}')`.
 
 The string needs to be in the following format (in UTC):
 
@@ -118,18 +120,24 @@ Here, your request becomes:
 
 ```
 curl -v -X POST
-https://<AIRFLOW_DOMAIN>/api/experimental/dags/customer_health_score/dag_runs
+https://<AIRFLOW_DOMAIN>/api/v1/dags/<DAG-ID>/dagRuns
 -H 'Authorization: <API-Key>'
 -H 'Cache-Control: no-cache'
 -H 'content-type: application/json' -d '{"execution_date":"2019-11-16T11:34:00"}'
 ```
 
-### Get all Pools
+:::info
 
-If you'd like to get all existing Pools from your Airflow Deployment, you can start with a generic Python command to Airflow's `GET` endpoint:
+The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2+. If you run Astronomer Certified 2.2+, replace `execution_date` with `logical_date`. For more information, see [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html?highlight=pass%20data#data-interval).
+
+:::
+
+### List Pools
+
+To list all Airflow pools for your Deployment, you can run a simple command that makes a GET request to the [`pools` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Pool) of the Airflow REST API:
 
 ```
-GET /api/experimental/pools
+GET /pools
 ```
 
 Here, your request would look like this:
@@ -140,7 +148,7 @@ import requests
 token="<API-Key>"
 base_url="https://<your-base-domain/"
 resp = requests.get(
-   url=base_url + "<deployment-release-name>/airflow/api/experimental/pools",
+   url=base_url + "<deployment-release-name>/api/v1/pools",
    headers={"Authorization": token},
    data={}
 )
@@ -165,7 +173,11 @@ As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-air
 * Implements CRUD (Create, Update, Delete) operations on *all* Airflow resources.
 * Includes authorization capabilities.
 
-> **Note:** To get started with Airflow 2.0 locally, read [Get Started with Apache Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.14. For questions, reach out to [Astronomer Support](https://support.astronomer.io).
+:::tip
+
+To get started with Airflow 2.0 locally, read [Get Started with Apache Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.15. For questions, reach out to [Astronomer Support](https://support.astronomer.io).
+
+:::
 
 ### Make a Request
 
@@ -181,7 +193,7 @@ Here, your cURL request would look like the following:
 
 ```
 curl -X GET \
-https://<AIRFLOW-DOMAIN>/airflow/api/v1/config \
+https://<AIRFLOW-DOMAIN>/api/v1/config \
 -H 'Authorization: <API-Key>' \
 -H 'Cache-Control: no-cache'
 ```

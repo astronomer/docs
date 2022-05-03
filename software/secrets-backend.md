@@ -130,10 +130,10 @@ apache-airflow-providers-hashicorp
 
 Then, add the following environment variables to your `Dockerfile`:
 
-```text
+```dockerfile
 # Make sure to replace `<your-approle-id>` and `<your-approle-secret>` with your own values.
 ENV AIRFLOW__SECRETS__BACKEND="airflow.contrib.secrets.hashicorp_vault.VaultBackend"
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "onnections", "variables_path": variables, "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
 ```
 
 This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. In the next step, you'll test this configuration in a local Airflow environment.
@@ -156,11 +156,12 @@ For more information on the Airflow provider for Hashicorp Vault and how to furt
 
 To test Vault, write a simple DAG which calls your test secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
-```py
+```python
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.hooks.base import BaseHook
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
@@ -194,7 +195,7 @@ Once you've confirmed that the integration with Vault works locally, you can com
 
   :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astronomer Software.
+  Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
   :::
 
@@ -235,7 +236,7 @@ apache-airflow-providers-amazon
 
 Then, add the following environment variables to your project's `Dockerfile`:
 
-```text
+```dockerfile
 # Make sure to replace `<your-aws-key>` and `<your-aws-secret-key>` with your own values.
 ENV AWS_ACCESS_KEY_ID="<your-aws-key>"
 ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-key>"
@@ -265,7 +266,7 @@ To test Parameter Store, write a simple DAG which calls your secret and add this
 
 For example, you can use the following DAG to print the value of an Airflow variable to your task logs:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
@@ -303,7 +304,7 @@ Once you've confirmed that the integration with AWS SSM Parameter Store works lo
 
   :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astronomer Software.
+  Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
   :::
 
@@ -357,7 +358,7 @@ apache-airflow-providers-google
 
 Then, add the following environment variables to your project's Dockerfile:
 
-```sh
+```dockerfile
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": <your-key-file>}'
 ```
@@ -376,7 +377,7 @@ To test Secret Manager, [create a secret](https://cloud.google.com/secret-manage
 
 Once you create a test secret, write a simple DAG which calls the secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
@@ -415,7 +416,7 @@ Once you've confirmed that the integration with Google Cloud Secret Manager work
 
   :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astronomer Software.
+  Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
   :::
 
@@ -465,7 +466,7 @@ apache-airflow-providers-microsoft-azure
 
 In your `Dockerfile`, add the following environment variables with your own values:
 
-```yaml
+```dockerfile
 ENV AZURE_CLIENT_ID="<your-client-id>" # Found on App page > 'Application (Client) ID'
 ENV AZURE_TENANT_ID="<your-tenant-id>" # Found on Properties > 'Tenant ID'
 ENV AZURE_CLIENT_SECRET="<your-client-secret>" # Found on App Registration Page > Certificates and Secrets > Client Secrets > 'Value'
@@ -491,7 +492,7 @@ To test your Key Vault setup on Astronomer locally, [create a new secret](https:
 
 Once you create a test secret, write a simple DAG which calls the secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
-```py
+```python
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
@@ -529,7 +530,7 @@ Once you've confirmed that your secrets are being imported correctly to your loc
 
   :::warning
 
-  Make sure to strip the quotations (`"`) from your environment variable values. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astronomer Software.
+  Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
 
   :::
 

@@ -24,6 +24,7 @@ astrocloud deployment logs
 | `-w`,`--warn`            | Show only logs with a log level of `WARNING`    | ``                                  |
 | `-i`,`--info`            | Show only logs with a log level of `INFO`       | ``                                  |
 | `-c`,`--log-count`       | The number of log lines to show. The default is`500` | Any integer                         |
+| `--workspace-id` | Specify a Workspace to show logs for a Deployment outside of your current Workspace| Any valid Workspace ID                                            |
 
 ## Examples
 

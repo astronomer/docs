@@ -18,9 +18,15 @@ Astro supports integrations with the following IdPs:
 
 This guide provides setup steps for integrating both of these identity providers on Astro. Once you complete the integration for your organization:
 
-- Astro will be listed in your IdP's set of supported applications.
-- Workspace Admins can invite a user to a Workspace directly without that user having to separately sign up for an account first.
 - Users will automatically be authenticated to Astro if they're already logged in to your IdP.
+- Users will no longer have to repeatedly login and remember credentials for their account.
+- You will have complete ownership over credential configuration and management on Astro.
+
+:::info
+
+Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in via the [Cloud UI](https://cloud.astronomer.io/)
+
+:::
 
 ## Configure Okta as Your Identity Provider
 

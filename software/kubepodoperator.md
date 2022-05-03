@@ -7,11 +7,11 @@ description: Run the KubernetesPodOperator on Astronomer Software.
 
 ## Overview
 
-A widely-used and performant alternative to Airflow's older DockerOperator, the [KubernetesPodOperator](https://github.com/apache/airflow/blob/v1-10-stable/airflow/contrib/operators/kubernetes_pod_operator.py) is able to natively launch a Kubernetes Pod to run an individual task - and terminate that pod when the task is completed. Similarly to the Kubernetes Executor, the operator uses the [Kube Python Client](https://github.com/kubernetes-client/python) to generate a Kubernetes API request that dynamically launches those individual pods.
+A widely-used and performant alternative to Airflow's older DockerOperator, the [KubernetesPodOperator](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py) is able to natively launch a Kubernetes Pod to run an individual task - and terminate that pod when the task is completed. Similarly to the Kubernetes Executor, the operator uses the [Kubernetes Python Client](https://github.com/kubernetes-client/python) to generate a Kubernetes API request that dynamically launches those individual pods.
 
 The KubernetesPodOperator enables task-level resource configuration and is optimal for those who have custom Python dependencies. Ultimately, it allows Airflow to act a job orchestrator - no matter the language those jobs are written in.
 
-At its core, the KubernetesPodOperator is built to run any docker image with Airflow regardless of the language it's written in. It's the next generation of the DockerOperator and is optimized to leverage Kubernetes functionality, allowing users to specify resource requests and pass Kubernetes specific parameters into the task.
+At its core, the KubernetesPodOperator is built to run any Docker image with Airflow regardless of the language it's written in. It's the next generation of the DockerOperator and is optimized to leverage Kubernetes functionality, allowing users to specify resource requests and pass Kubernetes specific parameters into the task.
 
 If you're using the Kubernetes Executor, you can also configure task-level Kubernetes resources using a pod template. For more information, read [Use a Pod Template in a Task](kubernetes-executor.md#use-a-pod-template-in-a-task).
 
@@ -22,16 +22,22 @@ To run the KubernetesPodOperator on Astronomer, make sure you:
 - Have a running Airflow Deployment on Astronomer Software
 - Run Astronomer Airflow 1.10+
 
-> **Note:** If you haven't already, we'd encourage you to first test the KubernetesPodOperator in your local environment. Follow our [Running KubePodOperator Locally](kubepodoperator-local.md) for guidelines.
+> **Note:** If you haven't already, we'd encourage you to first test the KubernetesPodOperator in your local environment. Follow our [Running KubernetesPodOperator Locally](kubepodoperator-local.md) for guidelines.
 
 ## The KubernetesPodOperator on Astronomer
 
 ### Import the Operator
 
-You can import the KubernetesPodOperator as you would any other plugin in its [GitHub Contrib Folder](https://github.com/apache/airflow/blob/v1-10-stable/airflow/contrib/operators/kubernetes_pod_operator.py).
+First ensure you have the `apache-airflow-providers-cncf-kubernetes` package installed:
+
+```bash
+pip install apache-airflow-providers-cncf-kubernetes
+```
+
+You can then import the KubernetesPodOperator:
 
 ```python
-from airflow.contrib.operators.kubernetes_pod_operator import kubernetes_pod_operator
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 ```
 
 ### Specify Parameters
@@ -39,12 +45,13 @@ from airflow.contrib.operators.kubernetes_pod_operator import kubernetes_pod_ope
 From here, instantiate the operator based on your image and setup:
 
 ```python
-from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow import configuration as conf
-...
+from airflow.configuration import conf
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 
-namespace = conf.get('kubernetes', 'NAMESPACE')
-k = kubernetes_pod_operator.KubernetesPodOperator(
+
+namespace = conf.get("kubernetes", "NAMESPACE")
+
+KubernetesPodOperator(
     namespace=namespace,
     image="ubuntu:16.04",
     cmds=["bash", "-cx"],
@@ -54,7 +61,8 @@ k = kubernetes_pod_operator.KubernetesPodOperator(
     is_delete_operator_pod=True,
     in_cluster=True,
     task_id="task-two",
-    get_logs=True)
+    get_logs=True,
+)
 ```
 
 To successfully instantiate the operator, you'll need to make note of a few parameters.
@@ -91,25 +99,19 @@ On Astronomer Software, the largest node a single pod can occupy is dependent on
 
 #### Define Resources per Task
 
-A notable advantage of leveraging Airflow's KubernetesPodOperator is that you can specify compute [resources](https://github.com/apache/airflow/blob/master/airflow/contrib/operators/kubernetes_pod_operator.py#L85) in the task definition.
+A notable advantage of leveraging Airflow's KubernetesPodOperator is that you can control compute resources in the task definition.
 
-```
-    :param resources: A dict containing resources requests and limits.
-        Possible keys are request_memory, request_cpu, limit_memory, limit_cpu,
-        and limit_gpu, which will be used to generate airflow.kubernetes.pod.Resources.
-        See also kubernetes.io/docs/concepts/configuration/manage-compute-resources-container
-    :type resources: dict
-```
-
-> **Note:** If you're using the KubernetesExecutor, note that this value is separate from the `executor_config` parameter. In this case, the `executor_config` would only define the Airflow worker that is launching your k8s task.
+> **Note:** If you're using the KubernetesExecutor, note that this value is separate from the `executor_config` parameter. In this case, the `executor_config` would only define the Airflow worker that is launching your Kubernetes task.
 
 ### Example Task Definition:
 
 ```python
-from airflow import DAG
 from datetime import datetime, timedelta
-from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow import configuration as conf
+
+from airflow import DAG
+from airflow.configuration import conf
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from kubernetes.client import models as k8s
 
 default_args = {
     'owner': 'airflow',
@@ -127,69 +129,100 @@ namespace = conf.get('kubernetes', 'NAMESPACE')
 # environment namespace when deployed to Astronomer.
 if namespace =='default':
     config_file = '/usr/local/airflow/include/.kube/config'
-    in_cluster=False
+    in_cluster = False
 else:
-    in_cluster=True
-    config_file=None
+    in_cluster = True
+    config_file = None
 
-dag = DAG('example_kubernetes_pod',
-          schedule_interval='@once',
-          default_args=default_args)
+dag = DAG("example_kubernetes_pod", schedule_interval="@once", default_args=default_args)
 
 # This is where we define our desired resources.
-compute_resources = \
-  {'request_cpu': '800m',
-  'request_memory': '3Gi',
-  'limit_cpu': '800m',
-  'limit_memory': '3Gi'}
+compute_resources = k8s.V1ResourceRequirements(
+    limits={"cpu": "800m", "memory": "3Gi"},
+    requests={"cpu": "800m", "memory": "3Gi"}
+)
 
 with dag:
-    k = KubernetesPodOperator(
+    KubernetesPodOperator(
         namespace=namespace,
         image="hello-world",
         labels={"foo": "bar"},
         name="airflow-test-pod",
         task_id="task-one",
-        in_cluster=in_cluster, # if set to true, will look in the cluster, if false, looks for file
-        cluster_context='docker-for-desktop', # is ignored when in_cluster is set to True
+        in_cluster=in_cluster,  # if set to true, will look in the cluster, if false, looks for file
+        cluster_context="docker-for-desktop",  # is ignored when in_cluster is set to True
         config_file=config_file,
         resources=compute_resources,
         is_delete_operator_pod=True,
-        get_logs=True)
+        get_logs=True,
+    )
 ```
 
-In the example above, we define resources by building the following dict:
+In the example above, we define resources by building the following `V1ResourceRequirements` object:
 
 ```python
-compute_resources = \
-  {'request_cpu': '800m',
-  'request_memory': '3Gi',
-  'limit_cpu': '800m',
-  'limit_memory': '3Gi'}
+from kubernetes.client import models as k8s
+
+compute_resources = k8s.V1ResourceRequirements(
+    limits={"cpu": "800m", "memory": "3Gi"},
+    requests={"cpu": "800m", "memory": "3Gi"}
+)
 ```
 
-Using this dict, users can set Memory and CPU requests and limits for any given pod. For more information, reference [Kubernetes Documentation on Requests and Limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits).
+This object allows you to specify Memory and CPU requests and limits for any given task and its corresponding Kubernetes Pod. For more information, read [Kubernetes Documentation on Requests and Limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits).
 
-Once you've created the object, simply apply it to the `resources` parameter of the task. When this DAG runs, it will launch a pod that runs the `hello-world` image, pulled from DockerHub, in your Airflow Deployment's namespace with the resource request specified above. Once it finishes running, it will delete the pod.
+Once you've created the object, apply it to the `resources` parameter of the task. When this DAG runs, it will launch a Pod that runs the `hello-world` image, which is pulled from Docker Hub, in your Airflow Deployment's namespace with the resource requests defined above. Once the task finishes, the Pod will be gracefully terminate.
 
-> **Note:** On Astronomer, the equivalent of 1AU is: `"request_cpu": "100m", "request_memory": "384Mi", "limit_cpu": "100m", "limit_memory": "384Mi"}`
+:::info 
+
+On Astronomer, the equivalent of 1AU is: `requests={"cpu": "100m", "memory": "384Mi"}, limits={"cpu": "100m", "memory": "384Mi"}`.
+
+:::
 
 ## Pulling Images from a Private Registry
 
-By default, the KubernetesPodOperator will look for images hosted publicly on [Dockerhub](https://hub.docker.com/). If you want to pull images from a private registry, you may do so.
+By default, the KubernetesPodOperator will look for images hosted publicly on [Docker Hub](https://hub.docker.com/). If you want to pull images from a private registry, you may do so.
 
 > **Note:** The KubernetesPodOperator doesn't support passing in `image_pull_secrets` until [Airflow 1.10.2](https://github.com/apache/airflow/blob/master/CHANGELOG.txt#L526).
 
-To pull images from a private registry on Astronomer Software, follow the guidelines below.
+To pull images from a private registry on Astronomer Software:
 
-**1.** Pull a `dockerconfigjson` file with your existing Docker credentials by following [this guide](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials) (step 1 above)
+1. Retrieve a `config.json` file that contains your Docker credentials by following the [Docker documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials). The generated file should look something like this:
 
-**2.** Follow [this Kubernetes doc](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials) to add that secret to your namespace
+   ```json
+   {
+       "auths": {
+           "https://index.docker.io/v1/": {
+               "auth": "c3R...zE2"
+           }
+       }
+   }
+   ```
 
-**3.** Call that secret in your KubePodOperator by specifying `image_pull_secrets`
+2. Follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials) to create a secret based on your credentials.
+
+3. In your DAG code, import `models` from `kubernetes.client` and specify `image_pull_secrets` with your Kubernetes secret. After configuring this value, you can pull an image as you would from a public registry like in the following example.
+
+    ```python {1,5}
+    from kubernetes.client import models as k8s
+
+    KubernetesPodOperator(
+        namespace=namespace,
+        image_pull_secrets=[k8s.V1LocalObjectReference("<your-secret-name>")],
+        image="<your-docker-image>",
+        cmds=["<commands-for-image>"],
+        arguments=["<arguments-for-image>"],
+        labels={"<pod-label>": "<label-name>"},
+        name="<pod-name>",
+        is_delete_operator_pod=True,
+        in_cluster=True,
+        task_id="<task-name>",
+        get_logs=True,
+    )
+    ```
 
 ## Local Testing
 
-Follow our [CLI doc](kubepodoperator-local.md/) on using [Microk8s](https://microk8s.io/) or [Docker for Kubernetes](https://matthewpalmer.net/kubernetes-app-developer/articles/how-to-run-local-kubernetes-docker-for-mac.html) to run tasks with the KubernetesPodOperator locally.
+We recommend testing your DAGs locally before pushing them to a Deployment on Astronomer. For more information, read [How to Run the KubernetesPodOperator Locally](kubepodoperator-local.md/). That guide provides information on how to use [MicroK8s](https://microk8s.io/) or [Docker for Kubernetes](https://matthewpalmer.net/kubernetes-app-developer/articles/how-to-run-local-kubernetes-docker-for-mac.html) to run tasks with the KubernetesPodOperator in a local environment.
 
 > **Note:** To pull images from a private registry locally, you'll have to create a secret in your local namespace and similarly call it in your operator following the guidelines above.

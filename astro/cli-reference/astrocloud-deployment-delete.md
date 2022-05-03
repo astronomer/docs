@@ -29,6 +29,7 @@ astrocloud deployment delete
 | ----------------- | ------------------------------------------------------------------- | ----------------------- |
 | `<deployment-id>` | The ID of the Deployment to delete         | Any valid Deployment ID |
 | `-f`,`--force`    | Do not include a confirmation prompt before deleting the Deployment | ``                      |
+| `--workspace-id` | Specify a Workspace to delete a Deployment outside of your current Workspace | Any valid Workspace ID                                            |
 
 ## Examples
 

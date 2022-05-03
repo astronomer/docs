@@ -72,7 +72,7 @@ docker exec -it <scheduler-container-id> pip freeze | grep pymongo
 pymongo==3.7.2
 ```
 
-> **Note:** Astronomer Certified, Astronomer's distribution of Apache Airflow, is available both as a Debian and Alpine base. We strongly recommend using Debian, as it's much easier to install dependencies and often presents less incompatability issues than an Alpine Linux image. For details on both, refer to our [Airflow Versioning Doc](manage-airflow-versions.md).
+> **Note:** Astronomer Certified, Astronomer's distribution of Apache Airflow, is available both as a Debian and Alpine base. We strongly recommend using Debian, as it's much easier to install dependencies and often presents less incompatibility issues than an Alpine Linux image. For details on both, refer to our [Airflow Versioning Doc](manage-airflow-versions.md).
 
 ## Add Other Dependencies
 
@@ -83,7 +83,6 @@ In the example below, we'll add a folder of `helper_functions` with a file (or s
 ### Add the folder into your project directory
 
 ```bash
-virajparekh@orbiter:~/cli_tutorial$ tree
 .
 ├── airflow_settings.yaml
 ├── dags
@@ -125,15 +124,19 @@ When you first initialize a new Airflow project on Astronomer, a file titled `ai
 
 For security reasons, the `airflow_settings.yaml` file is currently _only_ for local development and should not be used for pushing up code to Astronomer via `$ astro deploy`. For the same reason, we'd recommend adding this file to your `.gitignore`.
 
-> **Note:** If you're interested in programmatically managing Airflow Connections, Variables or Environment Variables, we'd recommend integrating a ["Secret Backend"](secrets-backend.md) to help you do so.
+:::tip
+
+If you're interested in programmatically managing Airflow Connections, Variables or Environment Variables on Astronomer Software, we recommend integrating a [Secret Backend](secrets-backend.md).
+
+:::
 
 ### Add Airflow Connections, Pools, Variables
 
-By default, the `airflow_settings.yaml` file will be structured as following:
+By default, the `airflow_settings.yaml` file includes the following template:
 
 ```yaml
 airflow:
-  connections:
+  connections: ## conn_id and conn_type are required
     - conn_id: my_new_connection
       conn_type: postgres
       conn_host: 123.0.0.4
@@ -142,14 +145,16 @@ airflow:
       conn_password: pw
       conn_port: 5432
       conn_extra:
-  pools:
+  pools: ## pool_name, pool_slot, and pool_description are required
     - pool_name: my_new_pool
       pool_slot: 5
       pool_description:
-  variables:
+  variables: ## variable_name and variable_value are required
     - variable_name: my_variable
       variable_value: my_value
 ```
+
+Make sure to specify all required fields that correspond to the objects you create. If you don't specify them, you will see a build error on `$ astro dev start`.
 
 ### Additional Entries
 
@@ -238,113 +243,142 @@ astro dev start --env .env
 >
 > For more detail on how to add Environment Variables both locally and on Astronomer, refer to our [Environment Variables doc](environment-variables.md).
 
-## Build from a Private Repository
 
-If you're interested in bringing in custom Python Packages stored in a Private GitHub repo, you're free to do that on Astronomer.
+## Install Python Packages from a Private GitHub Repository
 
-Read below for guidelines.
+This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.  At a high level, this setup entails specifying your private packages in `requirements.txt`, creating a custom Docker image that mounts a GitHub SSH key for your private GitHub repositories, and building your project with this Docker image.
+
+Although this setup is based on GitHub, the general steps can be completed with any hosted Git repository.
+
+:::info
+
+The following setup has been validated only with a single SSH key. Due to the nature of `ssh-agent`, you might need to modify this setup when using more than one SSH key per Docker image.
+
+:::
 
 ### Prerequisites
 
-- The Astronomer CLI
-- An intialized Astronomer Airflow project and corresponding directory
-- An [SSH Key](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) to your Private GitHub repo
+To install Python packages from a private GitHub repository on Astronomer Software, you need:
 
-If you haven't initialized an Airflow Project on Astronomer (by running `$ astro dev init`), reference our [CLI Quickstart Guide](cli-quickstart.md).
+- The [Astronomer CLI](cli-quickstart.md).
+- A [Software project](create-project.md).
+- Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
+- A private GitHub repository for each of your custom Python packages.
+- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
 
-### Step 1. Create a file called Dockerfile.build
+This setup assumes that each custom Python package is hosted within its own private GitHub repository. Installing multiple packages from a single private GitHub repository is not supported.
 
-1. In your directory, create a file called `Dockerfile.build` that's parallel to your `Dockerfile`.
 
-2. To the first line of that file, add a "FROM" statement that specifies the Airflow Image you want to run on Astronomer and ends with `AS stage`.
+### Step 1: Specify the Private Repository in Your Project
 
-If you're running the Debian-based Astronomer Certified image for Airflow 1.10.12, this would be:
+To add a Python package from a private repository to your Software project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as `git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git`.
 
-```
-FROM quay.io/astronomer/ap-airflow:1.10.12-buster AS stage1
-```
-
-For a list of all Airflow Images supported on Astronomer, refer to [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md).
-
-> **Note:** Do NOT include `-onbuild` at the end of your Airflow Image as you typically would in your `Dockerfile`.
-
-3. Immediately below the `FROM...` line specified above, add the folllowing:
+For example, to install the `mypackage1` & `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to `requirements.txt`:
 
 ```
-LABEL maintainer="Astronomer <humans@astronomer.io>"
-ARG BUILD_NUMBER=-1
-LABEL io.astronomer.docker=true
-LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
-LABEL io.astronomer.docker.airflow.onbuild=true
-# Install Python and OS-Level Packages
-COPY packages.txt .
-RUN cat packages.txt | xargs apk add --no-cache
-
-FROM stage1 AS stage2
-RUN mkdir -p /root/.ssh
-ARG PRIVATE_RSA_KEY=""
-ENV PRIVATE_RSA_KEY=${PRIVATE_RSA_KEY}
-RUN echo "${PRIVATE_RSA_KEY}" >> /root/.ssh/id_rsa
-RUN chmod 600 /root/.ssh/id_rsa
-RUN apk update && apk add openssh-client
-RUN ssh-keyscan -H github.com >> /root/.ssh/known_hosts
-# Install Python Packages
-COPY requirements.txt .
-RUN pip install --no-cache-dir -q -r requirements.txt
-
-FROM stage1 AS stage3
-# Copy requirements directory
-COPY --from=stage2 /usr/lib/python3.6/site-packages/ /usr/lib/python3.6/site-packages/
-COPY . .
+git+ssh://git@github.com/myorganization/mypackage1.git
+git+ssh://git@github.com/myorganization/mypackage2.git
+numpy==1.22.1
 ```
 
-In 3 stages, this file is bundling up your SSH keys, OS-Level packages in `packages.txt` and Python Packages in `requirements.txt` from your private directory into a Docker image.
+This example assumes that the name of each of your Python packages is identical to the name of its corresponding GitHub repository. In other words,`mypackage1` is both the name of the package and the name of the repository.
 
-A few notes:
-- The `Private RSA Key` = [SSH Key generated via GitHub](https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-- Make sure to replace the first line of this file (`FROM`..) with your Airflow Image (Step 2 above)
-- If you don't want keys in this file to be pushed back up to your GitHub repo, consider adding this file to `.gitignore`
-- Make sure your custom OS-Level packages are in `packages.txt` and your Python packages in `requirements.txt` within your repo
-- If you're running Python 3.7 on your machine, replace the reference to Python 3.6 under `# Copy requirements directory` with `/usr/lib/python3.7/site-packages/` above
+### Step 2. Create Dockerfile.build
 
-### Step 2. Build your Image
+1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
 
-Now, let's build a Docker image based on the requirements above that we'll then reference in your Dockerfile, tag, and push to Astronomer.
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Astronomer Certified image. For example, if you use Certified 2.2.5, your `FROM` line would be:
 
-Run the following in your terminal:
+   ```text
+   FROM quay.io/astronomer/ap-airflow:2.2.5 AS stage1
+   ```
 
-```
-docker build -f Dockerfile.build --build-arg PRIVATE_RSA_KEY="$(cat ~/.ssh/id_rsa)" -t custom-<airflow-image> .
-```
+  :::caution
 
-If you have `quay.io/astronomer/ap-airflow:1.10.12-buster` in your `Dockerfile.build`, for example, this command would be:
+  If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution)
 
-```
-docker build -f Dockerfile.build --build-arg PRIVATE_RSA_KEY="$(cat ~/.ssh/id_rsa)" -t custom-ap-airflow:1.10.12-buster .
-```
+  :::
 
-### Step 3. Replace your Dockerfile
+3. In `Dockerfile.build` after the `FROM` line specifying your Certified image, add the following configuration:
 
-Now that we've built your custom image, let's reference that custom image in your `Dockerfile`. Replace the current contents of your `Dockerfile` with the following:
+    ```docker
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
+    ARG BUILD_NUMBER=-1
+    LABEL io.astronomer.docker=true
+    LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
+    LABEL io.astronomer.docker.airflow.onbuild=true
+    # Install Python and OS-Level Packages
+    COPY packages.txt .
+    RUN cat packages.txt | xargs apk add --no-cache
 
-```
-FROM custom-<airflow-image>
-```
+    FROM stage1 AS stage2
+    RUN --mount=type=ssh,id=github apk add --no-cache --virtual .build-deps \
+        build-base \
+        git \
+        python3 \
+        openssh-client \
+    && mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts \
+    # Install Python Packages
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -q -r requirements.txt
 
-If you're running `quay.io/astronomer/ap-airflow:1.10.10-alpine3.10` as specified above, this line would read:
+    FROM stage1 AS stage3
+    # Copy requirements directory
+    COPY --from=stage2 /usr/lib/python3.9/site-packages/ /usr/lib/python3.9/site-packages/
+    COPY . .
+    ```
 
-```
-FROM custom-ap-airflow:1.10.12-buster
-```
+    In order, these commands:
 
-### Step 4. Push your Custom Image to Astronomer
+    - Install any OS-level packages specified in `packages.txt`.
+    - Securely mount your GitHub SSH key at build time. This ensures that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Install all Python-level packages in `requirements.txt` file, including those from a private GitHub repository.
 
-Now, let's push your new image to Astronomer.
+  :::tip
 
-- If you're developing locally, run `$ astro dev stop` > `$ astro dev start`
-- If you're pushing up to Astronomer, you're free to deploy by running `$ astro deploy` or by triggering your CI/CD pipeline
+  If you don't want keys in this file to be pushed back up to your GitHub repository, consider adding this file to `.gitignore`.
 
-For more detail on the Astronomer deployment process, refer to [Deploy to Astronomer via the CLI](deploy-cli.md).
+  :::
+
+  :::info
+
+  If your repository is hosted somewhere other than GitHub, replace the location of your SSH key in the `ssh-keyscan` command.
+
+  :::
+
+### Step 3. Build a Custom Docker Image
+
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH key file name and `<certified-image>` with your Certified image:
+
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<certified-image> .
+    ```
+
+    For example, if you have `quay.io/astronomer/ap-airflow:2.2.5` in your `Dockerfile.build`, this command would be:
+
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-ap-airflow:2.2.5 .
+    ```
+
+  :::info
+
+  If your repository is hosted somewhere other than GitHub, replace the location of your SSH key in the `--ssh` flag.
+
+  :::
+
+2. Replace the contents of your Software project's `Dockerfile` with the following:
+
+   ```
+   FROM custom-<certified-image>
+   ```
+
+   For example, if your base Certified image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
+
+   ```
+   FROM custom-ap-airflow:2.2.5
+   ```
+
+Your Software project can now utilize Python packages from your private GitHub repository.
 
 ## Build with a Different Python Version
 
