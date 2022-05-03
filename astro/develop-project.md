@@ -377,7 +377,13 @@ To install Python packages from a private GitHub repository on Astro, you need:
 - An [Astro project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
-- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+- A [GitHub SSH Private Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+
+:::warning
+
+If your organization enforces SAML Single Sign On (SSO), you must first authorize your key to allow it to be used by following [this guide](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on).
+
+:::
 
 This setup assumes that each custom Python package is hosted within its own private GitHub repository. Installing multiple custom packages from a single private GitHub repository is not supported.
 
@@ -425,22 +431,19 @@ This example assumes that the name of each of your Python packages is identical 
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install Python and OS-Level Packages
     COPY packages.txt .
-    RUN cat packages.txt | xargs apk add --no-cache
+    RUN apt-get update && cat packages.txt | xargs apt-get install -y
 
     FROM stage1 AS stage2
-    RUN --mount=type=ssh,id=github apk add --no-cache --virtual .build-deps \
-        build-base \
-        git \
-        python3 \
-        openssh-client \
-    && mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts \
+    USER root
+    RUN apt-get -y install git python3 openssh-client \
+      && mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
     # Install Python Packages
     COPY requirements.txt .
-    RUN pip install --no-cache-dir -q -r requirements.txt
+    RUN --mount=type=ssh,id=github pip install --no-cache-dir -q -r requirements.txt
 
     FROM stage1 AS stage3
     # Copy requirements directory
-    COPY --from=stage2 /usr/lib/python3.9/site-packages/ /usr/lib/python3.9/site-packages/
+    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY . .
     ```
 
@@ -464,7 +467,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 ### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH key file name and `<astro-runtime-image>` with your Astro Runtime image:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<astro-runtime-image>` with your Astro Runtime image:
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
@@ -475,12 +478,6 @@ This example assumes that the name of each of your Python packages is identical 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-4.2.10-base .
     ```
-
-  :::info
-
-  If your repository is hosted somewhere other than GitHub, replace the location of your SSH key in the `--ssh` flag.
-
-  :::
 
 2. Replace the contents of your Astro project's `Dockerfile` with the following:
 
