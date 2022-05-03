@@ -15,7 +15,7 @@ This guide provides steps for adding a user to an Astro Workspace.
 
 To add a user to a Workspace, you must have:
 
-- An [Organization on Astro](install-aws.md).
+- An Organization on Astro.
 - Workspace Admin permissions.
 
 ## Step 1: Invite the User to Astro

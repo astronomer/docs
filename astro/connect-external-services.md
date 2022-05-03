@@ -38,8 +38,8 @@ Each Cluster on Astro runs in a dedicated VPC. To set up private connectivity be
 To create a VPC peering connection between an Astro Cluster's VPC and a target VPC, reach out to [Astronomer support](https://support.astronomer.io) and provide the following information:
 
 - Astro Cluster ID and Name
-- AWS Account ID of the target VPC
-- AWS Region of the target VPC
+- AWS Account ID or GCP Project ID of the target VPC
+- GCP Region of the target VPC
 - VPC ID of the target VPC
 - CIDR of the target VPC
 
@@ -47,10 +47,28 @@ From there, Astronomer will initiate a peering request. To connect successfully,
 
 Once peering is set up, the owner of the target VPC can expect to continue to work with our team to update the routing tables of both VPCs to direct traffic to each other.
 
-### DNS Considerations with VPC Peering
+### DNS Considerations with VPC Peering (_AWS Only_)
 
 To resolve DNS hostnames from your target VPC, your Cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled via AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
 
 If your target VPC resolves DNS hostnames via **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the Data Plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting [Astronomer support](https://support.astronomer.io).
+
+## Use Workload Identity to Connect to GCP Services (_GCP Only_)
+
+By default, all Deployments have [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) enabled. This means that you can grant your Deployment access to GCP services such as BigQuery via a service account that's automatically created by Astro.
+
+To grant a Deployment access to a GCP service, you need to attach an IAM policy to the Deployment's service account. All Deployment service accounts are formatted as follows:
+
+```text
+astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com
+```
+
+You can find a Deployment's namespace in the Deployment view of the Cloud UI. For example, if your GCP project was called `astronomer-prod-deployment` and your Deployment namespace `geometrical-gyroscope-9932`, your service account would be:
+
+```text
+astro-geometrical-gyroscope-9932@astronomer-prod-deployment.iam.gserviceaccount.com
+```
+
+For more information about configuring service accounts on GCP, read [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).

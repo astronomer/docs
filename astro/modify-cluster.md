@@ -9,7 +9,13 @@ description: Request changes to an existing Astro Cluster.
 
 Unless otherwise specified, new Clusters on Astro are created with a set of [default configurations](resource-reference-aws.md#defaults). Depending on your use case, you may decide that you want to modify an existing Cluster to run a different configuration.
 
-For example, if you have a new set of DAGs that require significantly more CPU and Memory than your existing workloads, you may be interested in modifying your Cluster from running `m5.4xlarge` nodes to running `m5.8xlarge` nodes. You might also want to modify a Cluster's max node count from the default of 20 to better suit the amount of work you run on it. 
+For example, if you have a new set of DAGs that require significantly more CPU and Memory than your existing workloads, you may be interested in modifying your Cluster from running `m5.4xlarge` nodes to running `m5.8xlarge` nodes. You might also want to modify a Cluster's max node count from the default of 20 to better suit the amount of work you run on it.
+
+:::info
+
+Modifying an existing Cluster's configuration is currently not available on GCP, but will be available soon.
+
+:::
 
 ## Prerequisites
 
