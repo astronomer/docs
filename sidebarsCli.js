@@ -1,10 +1,15 @@
 
 module.exports = {
   cli: [
-    {
+      {
         type: 'doc',
         label: 'CLI Overview',
         id: 'cli-reference'
+      },
+      {
+        type: 'doc',
+        label: 'Quickstart',
+        id: 'cli-quickstart'
       },
       {
       type: 'category',
@@ -34,6 +39,11 @@ module.exports = {
         'cli-reference/astrocloud-version',
         'cli-reference/astrocloud-workspace-list',
         'cli-reference/astrocloud-workspace-switch',],
+    },
+    {
+      type: 'doc',
+      label: 'Release Notes',
+      id: 'cli-release-notes'
     },
   ],
 };

@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'CLI Overview'
+sidebar_label: 'Overview'
 title: 'Astro CLI'
 id: cli-reference
 slug: /
