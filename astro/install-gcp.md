@@ -37,12 +37,12 @@ If any of your GCP resources are on a private network, you can access them using
 - Private Services Connect
 - A VPC Peering connection between Astronomer's VPC and the VPCs for your broader network
 
-If you want to access resources using a VPC peering connection, you additionally need to provide a CIDR block (RFC 1918 IP Space) no smaller than a `/19` range for each of the following services:
+Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer Cluster.  If you plan on peering with an existing VPC want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
 
-- **Subnet CIDR**: Used by nodes in your GKE cluster
-- **Pod CIDR**: Used by GKE pods
-- **Service Address CIDR**: Used by GKE services
-- **Service VPC Peering**: Used by Private Service Connections
+- **Subnet CIDR**: Used by nodes in your GKE cluster, defaults to `172.20.0.0/19`
+- **Pod CIDR**: Used by GKE pods, defaults to `172.21.0.0/19`
+- **Service Address CIDR**: Used by GKE services, defaults to `172.21.0.0/19`
+- **Service VPC Peering**: Used by Private Service Connections, defaults to `172.21.0.0/19`
 
 ## Step 1: Access Astro
 
@@ -103,8 +103,17 @@ To start the installation of your first Astro Cluster, provide Astronomer with:
 - Your preferred node instance type.
 - Your preferred CloudSQL instance type.
 - Your preferred maximum node count.
+- (_Optional_) Your custom CIDR ranges for connecting to Astronomer's services.
 
-If not specified, Astronomer will create a Cluster with two e2-medium-4 nodes, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.
+If not specified, Astronomer will create a Cluster with the following resources in `us-central1`:
+
+- Two `e2-medium-4` nodes.
+- A Medium General Purpose CloudSQL instance (4vCPU, 16GB).
+- A maximum node count of 20.
+- A Subnet CIDR of `172.20.0.0/19`.
+- A Pod CIDR of `172.21.0.0/19`.
+- A Service Address CIDR of `172.22.0.0/19`.
+- A VPC Peering CIDR of `172.23.0.0/9`.
 
 For information on all supported regions and configurations, see [GCP Resource Reference](resource-reference-gcp.md).  
 
@@ -112,7 +121,6 @@ For information on all supported regions and configurations, see [GCP Resource R
 
 If you need to VPC peer with Astronomer, additionally provide the following information to Astronomer:
 
-- Subnet CIDRs (RFC 1918 IP Space).
 - VPC Name/ID and region for peering with Astronomer.
 - The IPs of your DNS servers.
 
@@ -120,7 +128,7 @@ You then need to accept a VPC peering request from Astronomer after Astro is ins
 
 Once VPC peered with Astronomer, configure and validate the following to ensure successful network communications between Astro and your resources:
 
-- Egress Routes on Astronomer Route Table
+- [Egress routes](https://cloud.google.com/vpc/docs/routes#routing_in) on Astronomer's route table
 - [Network ACLs](https://cloud.google.com/storage/docs/access-control/lists) and/or [Security Group](https://cloud.google.com/identity/docs/how-to/update-group-to-security-group) rules of your resources
 
 :::
