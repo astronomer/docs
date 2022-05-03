@@ -138,23 +138,31 @@ This table lists the maximum worker size that is supported on Astro for each nod
 | m5.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
 | m5.4xlarge         | 147        | 14.7 CPUs | 55.1 GiB MEM |
 | m5.8xlarge         | 307        | 30.7 CPUs | 115 GiB MEM  |
-| m5.12xlarge        | 467        | 46.7 CPUs | 175 GiB MEM  |
-| m5.16xlarge        | 627        | 62.7 CPUs | 235 GiB MEM  |
-| m5.24xlarge        | 947        | 94.7 CPUs | 355 Gib MEM  |
-| m5.metal           | 947        | 94.7 CPUs | 355 Gib MEM  |
+| m5.12xlarge        | 467*       | 46.7 CPUs | 175 GiB MEM  |
+| m5.16xlarge        | 627*       | 62.7 CPUs | 235 GiB MEM  |
+| m5.24xlarge        | 947*       | 94.7 CPUs | 355 Gib MEM  |
+| m5.metal           | 947*       | 94.7 CPUs | 355 Gib MEM  |
 | m5d.xlarge         | 27         | 2.7 CPUs  | 10.1 GiB MEM |
 | m5d.2xlarge        | 67         | 6.7 CPUs  | 25.1 GiB MEM |
 | m5d.4xlarge        | 147        | 14.7 CPUs | 55.1 GiB MEM |
 | m5d.8xlarge        | 307        | 30.7 CPUs | 115 GiB MEM  |
-| m5d.12xlarge       | 467        | 46.7 CPUs | 175 GiB MEM  |
-| m5d.16xlarge       | 627        | 62.7 CPUs | 235 GiB MEM  |
-| m5d.24xlarge       | 947        | 94.7 CPUs | 355 Gib MEM  |
-| m5d.metal          | 947        | 94.7 CPUs | 355 Gib MEM  |
+| m5d.12xlarge       | 467*       | 46.7 CPUs | 175 GiB MEM  |
+| m5d.16xlarge       | 627*       | 62.7 CPUs | 235 GiB MEM  |
+| m5d.24xlarge       | 947*       | 94.7 CPUs | 355 Gib MEM  |
+| m5d.metal          | 947*       | 94.7 CPUs | 355 Gib MEM  |
 | t2.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
 | t3.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
 | t3.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
 
-The maximum worker size in the Cloud UI is currently 400 AU. If your team is interested in using an instance type that supports a higher worker size limit, reach out to [Astronomer Support](https://support.astronomer.io). For more information on configuring worker size on Astro, see [Configure a Deployment](configure-deployment.md#worker-resources).
+The maximum worker size in the Cloud UI is currently 400 AU, which means that an Astro Cluster may not make full use of the CPU and memory capacity of some nodes. If your team is interested in using an instance type that supports a worker size limit higher than 400 AU, reach out to [Astronomer Support](https://support.astronomer.io). For more information on configuring worker size on Astro, see [Configure a Deployment](configure-deployment.md#worker-resources).
+
+:::info
+
+The size limits defined here apply only to **Worker Resources** and do not apply to **Scheduler Resources**, which allows you to define the CPU and memory allocated to the Airflow Scheduler.
+
+The infrastructure required to maintain any supported size of the Airflow Scheduler is managed by Astronomer.
+
+:::
 
 :::tip
 
