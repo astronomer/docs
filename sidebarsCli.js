@@ -5,12 +5,12 @@ module.exports = {
       type: 'category',
       label: 'Reference',
       items: [
-        {
           {
             type: 'doc',
             label: 'CLI Overview',
             id: 'cli-reference'
           },
+          {
           type: 'category',
           label: 'CLI Command Reference',
           items: [
