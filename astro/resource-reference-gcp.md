@@ -7,7 +7,7 @@ description: Reference of all supported configurations for new Clusters on Astro
 
 ## Overview
 
-Unless otherwise specified, new Clusters on Astro are created with a set of default GCP resources that our team has deemed appropriate for most use cases.
+Unless otherwise specified, new Clusters on Google Cloud Platform (GCP) are created with a set of default resources that our team has deemed appropriate for most use cases.
 
 Read the following document for a reference of our default resources as well as supported Cluster configurations.
 
@@ -41,13 +41,13 @@ Astro supports the following GCP regions:
 - `us-central1`
 - `us-west1`
 
-Modifying the region of an existing Cluster on Astro is not supported. If you're interested in an AWS region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
+Modifying the region of an existing Cluster on Astro is not supported. If you're interested in a GCP region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
 
 ### Node Instance Type
 
-Astro supports the following general-purpose nodes for powering the Data Plane:
+Astro supports different GCP machine types. Machine types comprise of varying combinations of CPU, memory, storage, and networking capacity. All system and Airflow components within a single Cluster are powered by the nodes specified during the Cluster creation or modification process.
 
 - e2-standard-4
 - e2-standard-8
 
-For more information about these node types, see [About Machine Families](https://cloud.google.com/compute/docs/machine-types).
+For detailed information on each instance type, see [GCP documentation](https://cloud.google.com/compute/docs/machine-types). If you're interested in a machine type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io/). Not all machine types are supported in all GCP regions.

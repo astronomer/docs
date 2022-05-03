@@ -147,7 +147,7 @@ module.exports = {
         'runtime-version-lifecycle-policy',
         {
           type: 'category',
-          label: 'Cloud Configuration References',
+          label: 'Cloud Configuration Reference',
           items: [
             'resource-reference-aws',
             'resource-reference-gcp',
