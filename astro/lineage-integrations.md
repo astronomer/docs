@@ -1,7 +1,8 @@
 ---
-sidebar_label: 'Set Up Lineage'
+sidebar_label: 'Set Up Data Lineage'
 title: "Enable Data Lineage for External Systems"
-id: lineage-integrations
+id: set-up-data-lineage
+description: Configure your external systems to emit lineage data to Astro.
 ---
 
 ## Overview
@@ -70,7 +71,7 @@ To configure lineage on an existing Deployment on Runtime <4.2.0 without upgradi
     ```
     AIRFLOW__LINEAGE__BACKEND=openlineage.lineage_backend.OpenLineageBackend
     OPENLINEAGE_NAMESPACE=<your-deployment-namespace>
-    OPENLINEAGE_URL=https://api.<your-astro-base-domain>
+    OPENLINEAGE_URL=https://<your-astro-base-domain>
     OPENLINEAGE_API_KEY=<your-lineage-api-key>
     ```
 
@@ -111,7 +112,7 @@ To complete this setup, you need:
    ```bash
    spark.driver.extraJavaOptions -Djava.security.properties=
    spark.executor.extraJavaOptions -Djava.security.properties=
-   spark.openlineage.url https://api.<your-astro-base-domain>
+   spark.openlineage.url https://<your-astro-base-domain>
    spark.openlineage.apiKey <your-lineage-api-key>
    spark.openlineage.namespace <NAMESPACE_NAME> // We recommend a meaningful namespace like `spark-dev`, `spark-prod`, etc.
    ```
@@ -133,7 +134,7 @@ This guide outlines how to set up lineage collection for a dbt project.
 To complete this setup, you need:
 
 - A [dbt project](https://docs.getdbt.com/docs/building-a-dbt-project/projects).
-- The [dbt CLI](https://docs.getdbt.com/dbt-cli/cli-overview).
+- The [dbt CLI](https://docs.getdbt.com/dbt-cli/cli-overview) v0.20+.
 - Your Astro base domain.
 - Your Organization's OpenLineage API key.
 
@@ -148,7 +149,7 @@ To complete this setup, you need:
 2. Configure the following environment variables in your shell:
 
    ```bash
-   OPENLINEAGE_URL=https://api.<your-astro-base-domain>
+   OPENLINEAGE_URL=https://<your-astro-base-domain>
    OPENLINEAGE_API_KEY=<your-lineage-api-key>
    OPENLINEAGE_NAMESPACE=<NAMESPACE_NAME> # Replace with the name of your dbt project.
                                           # We recommend a meaningful namespace like `dbt-dev`, `dbt-prod`, etc.
@@ -197,7 +198,7 @@ To complete this setup, you need:
             action:
               class_name: OpenLineageValidationAction
               module_name: openlineage.common.provider.great_expectations
-              openlineage_host: https://api.<your-astro-base-domain>
+              openlineage_host: https://<your-astro-base-domain>
               openlineage_apiKey: <your-lineage-api-key>
               openlineage_namespace: <NAMESPACE_NAME> # Replace with your job namespace; we recommend a meaningful namespace like `dev` or `prod`, etc.
               job_name: validate_my_dataset
@@ -244,7 +245,7 @@ In your Spark application, set the following properties to configure your lineag
    SparkSession.builder \
      .config('spark.jars.packages', 'io.openlineage:openlineage-spark:0.2.+')
      .config('spark.extraListeners', 'io.openlineage.spark.agent.OpenLineageSparkListener')
-     .config('spark.openlineage.host', 'https://api.<your-astro-base-domain>')
+     .config('spark.openlineage.host', 'https://<your-astro-base-domain>')
      .config('spark.openlineage.apiKey', '<your-lineage-api-key>')
      .config('spark.openlineage.namespace', '<NAMESPACE_NAME>') # Replace with the name of your Spark cluster.
      .getOrCreate()                                             # We recommend a meaningful namespace like `spark-dev`, `spark-prod`, etc.
