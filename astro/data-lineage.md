@@ -11,7 +11,7 @@ This guide explains how to navigate the **Lineage** tab in the Cloud UI and conf
 
 The **Lineage** tab on Astro has three pages:
 
-- **Explore**: A real-time overview of all jobs that emit data lineage across your Organization
+- **Explore**: A real-time overview of all **jobs** that emit data lineage across your Organization. A job can be an Airflow task or any other process configured to emit lineage data to Astronomer, such as a Spark job.
 - **Issues**: A view of potential issues or statistical inconsistencies related to your jobs or datasets
 - **Lineage**: A graph view that visualizes data lineage
 
@@ -25,9 +25,9 @@ To view the lineage graph for one of your data pipelines, search for a DAG, task
 
 ![Example query in the lineage search bar](/img/docs/lineage-search.png)
 
-The search results include the namespace that emitted the matching event. If an Astro Deployment emitted the lineage event, then this namespace will match Deployment's namespace as shown in the **Deployments** page of the Cloud UI. Clicking a search result will open the **Lineage** page and show the lineage graph for the Deployment's most recent job run.
+The search results include the namespace that emitted the matching event. If an Astro Deployment emitted the lineage event, then this namespace will match Deployment's namespace as shown in the **Deployments** page of the Cloud UI. Clicking a search result will open the **Lineage** page and show the lineage graph for the selected job or dataset. You can also access the lineage graph for a recent job run in the **Explore** page under **Most Recent Runs**.
 
-You can also access the lineage graph for a recent job run in the **Explore** page under **Most Recent Runs**.
+The **Lineage** page shows lineage data only for the most recent run of a given data pipeline. To explore lineage data from previous runs, see [Compare Lineage Graphs from Previous Runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
 
 :::info
 
@@ -37,7 +37,7 @@ By default, when you directly access the **Lineage** page from the left-hand men
 
 :::info
 
-The **Lineage** page shows lineage data only for the most recent run of a given data pipeline. To explore lineage data from previous runs, see [Compare Lineage Graphs from Previous Runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
+If the Lineage graph only shows you a single node, it indicates that the job you selected did not emit any information about input or output datasets. This is likely because the single node represents an Airflow task that isn't using a [supported Airflow operator](data-lineage-support-and-compatibility.md). You will still be able to view the duration of this job over time.
 
 :::
 
@@ -76,7 +76,7 @@ Clicking on the key icon in the information pane opens the graph legend. The leg
 
 :::info
 
-Dataset and job statuses are based on checks of metadata attached to your data. To see the specifics of why a database check failed, you can click on the failed database node and check the **Quality** tab in the information pane. To check why a job failed, you might need to check the source of the job, such as your DAG or task.
+Dataset and job statuses are based on checks of metadata attached to your data. To see the specifics of why a dataset failed, you can click on the failed dataset node and check the **Quality** tab in the information pane. To check why a job failed, you might need to check the source of the job, such as your DAG or task.
 
 :::
 
