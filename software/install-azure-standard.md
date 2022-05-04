@@ -5,7 +5,7 @@ id: install-azure
 description: Install Astronomer Software on Azure Kubernetes Service (AKS).
 ---
 
-Install Astronomer Software on Azure to deploy and scale [Apache Airflow](https://airflow.apache.org/) on an [Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/) (AKS) cluster.
+This guide describes the steps to install Astronomer Software on Azure, which allows you to deploy and scale [Apache Airflow](https://airflow.apache.org/) on an [Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/) (AKS) cluster.
 
 ## Prerequisites
 
@@ -77,19 +77,12 @@ az group create --location <location> --name <my_resource_group>
 
 ### Create an AKS Cluster
 
-Astronomer is deployed to the Azure Kubernetes Service (AKS). Learn more about AKS [here.](https://docs.microsoft.com/en-us/azure/aks/)
-You can choose the machine type, but Astronomer recommends using larger nodes and not smaller nodes.
+Astronomer will deploy to Azure's Kubernetes service (AKS). Learn more about AKS [here.](https://docs.microsoft.com/en-us/azure/aks/)
+You can choose the machine type to use, but we recommend using larger nodes vs smaller nodes.
 
-Verify your Kubernetes version is supported by Astronomer Software:
+Create your Kubernetes cluster:
 ```
-az aks get-versions --location <your-region> --output table
-```
-
-The Kubernetes version returned must be supported by Astronomer Software. See [Version Compatibility Reference](version-compatibility-reference.md).
-
-Create and autoscale your Kubernetes cluster:
-```
-az aks create --name <name_of_cluster> --resource-group <your_resource_group> --kubernetes-version <X.X.X> --node-vm-size Standard_D8s_v3 --node-count 3 --enable-cluster-autoscaler --min-count 3 --max-count 10
+az aks create --name <my_cluster_name> --resource-group <my_resource_group> --node-vm-size Standard_D8s_v3 --node-count 3
 ```
 
 You may need to increase your resource quota in order to provision these nodes.
