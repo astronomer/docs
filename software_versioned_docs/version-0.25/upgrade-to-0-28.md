@@ -13,31 +13,31 @@ This guide provides steps for upgrading your Astronomer Software platform from v
 
 A few important notes before you start:
 
-- In version 0.26.0+, the the Astronomer Airflow chart uses Apache’s Airflow chart as a dependency to provide users with access to new Airflow features more quickly. Because of this dependency, the schema for the Astronomer Airflow chart has changed, and any existing `airflow-chart` configuration in `config.yaml` might break upon upgrade. For more information on how update your configuration based on this change, see [Step 6](upgrade-to-0-28.md#step-6-update-config-file-if-necessary).
-- You must be on Astronomer Software v0.25+ in order to upgrade to Astronomer v0.28+. If you are running v0.23, please follow the instructions for [upgrading from v0.23 to v0.25](https://docs.astronomer.io/software/0.25/upgrade-to-0-25). If you are running a version of Astronomer that's lower than v0.23, submit a request to [Astronomer Support](https://support.astronomer.io/) and our team will help you define an alternate upgrade path.
-- The guidelines below only apply to users who are upgrading to the Astronomer v0.28 series for the first time. Once you've completed the upgrade to any v0.28 version, you'll be free to upgrade to subsequent v0.28.x patch versions as they are released by our team. For instructions, read [Upgrade to a Patch Version](https://docs.astronomer.io/software/upgrade-astronomer-stable).
+- As of Astronomer Software v0.26.0, Astronomer uses the Apache Airflow Helm chart to provide users with access to new Airflow features more quickly. Because of this dependency, the schema for the Astronomer Airflow chart has changed, and any existing `airflow-chart` configuration in `config.yaml` might break upon upgrade. For more information on how update your configuration based on this change, see [Step 6](upgrade-to-0-28.md#step-6-update-config-file-if-necessary).
+- You must be on Astronomer Software v0.25+ in order to upgrade to Astronomer v0.28+. If you are running v0.23, you must first [upgrade from v0.23 to v0.25](https://docs.astronomer.io/software/0.25/upgrade-to-0-25). If you are running a version of Astronomer that's lower than v0.23, submit a request to [Astronomer Support](https://support.astronomer.io/) and our team will help you define an alternate upgrade path.
+- The guidelines below apply only to users who are upgrading to the Astronomer v0.28 series for the first time. Once you've completed the upgrade to any v0.28 version, you can upgrade to subsequent v0.28.x patch versions as they are released by our team. For instructions, read [Upgrade to a Patch Version](https://docs.astronomer.io/software/upgrade-astronomer-stable).
 
 ## Step 1: Check Version Compatibility
 
 Ensure that the following software is updated to the appropriate version:
 
-- **Kubernetes**: Your version must be 1.19 or greater. If you need to upgrade Kubernetes, contact your cloud provider's support or your Kubernetes administrator.
-- **Airflow Images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.5 or greater.
+- **Kubernetes**: Your version must be 1.19 or greater. If you need to upgrade Kubernetes, contact your cloud provider or your Kubernetes administrator.
+- **Airflow Images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.15 or greater.
 
     For example, all of the following images would work for this upgrade:
 
+    - `quay.io/astronomer/ap-airflow:1.10.15-7-buster`
     - `quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild`
     - `quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild`
-    - `quay.io/astronomer/ap-airflow:1.10.15-7-buster`
     - `quay.io/astronomer/ap-airflow:2.2.2-onbuild`
 
 - **Helm**: Your version must be 3.6 ≤ 3.8.
 
 ## Step 2: Check Permissions
 
-Minor version upgrades can be initiated only by a user with System Admin permissions on Astronomer. To confirm you're an Astronomer SysAdmin, confirm that you have access to **System Admin** features in the Software UI:
+Minor version upgrades can be initiated only by a user with System Admin permissions on Astronomer. To confirm you're an Astronomer System Admin, confirm that you have access to the **System Admin** menu in the Software UI:
 
-![https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
+![System Admin panel](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
 
 You also need permission to create Kubernetes resources. To confirm you have those permissions, run the following commands:
 
@@ -51,7 +51,7 @@ If all commands return `yes`, then you have the appropriate Kubernetes permissio
 
 ## Step 3: Backup Your Database
 
-Backup your entire Astronomer database instance using your cloud provider's functionality for doing so, or make a backup request to your database administrator based on your organization's guidelines.
+Before you perform an upgrade, backup your Astronomer database by following recommendations from your cloud provider or making a backup request to your organization's database administrator.
 
 ## Step 4: Check the Status of Your Kubernetes Pods
 
@@ -67,7 +67,7 @@ All pods should be in either the `Running` or `Completed` state. If any of your 
 
 Ensure you have a copy of the `config.yaml` file for your platform namespace.
 
-To do this, you can run:
+To do this, run:
 
 ```sh
 helm get values <your-platform-release-name> -n <your-platform-namespace>  > config.yaml
@@ -75,7 +75,7 @@ helm get values <your-platform-release-name> -n <your-platform-namespace>  > con
 
 Review this configuration and delete the line `"USER-SUPPLIED VALUES:"` if you see it.
 
-Create a copy of `config.yaml` called `old_config.yaml`. This should saved in case you need to rollback.
+Then, create a copy of `config.yaml` called `old_config.yaml`. This should saved in case you need to rollback.
 
 ## Step 6: Update Config File (if necessary)
 
@@ -137,7 +137,7 @@ $RELEASE_NAME \
 astronomer/astronomer
 ```
 
-While your platform is upgrading, monitor your pods to ensure that no errors occur. To do so, first find the names of your pods by running the following command:
+While your platform is upgrading, monitor your pods to ensure that no errors occur. To do so, first identify your Kubernetes Pods by running the following command:
 
 `kubectl get pods | grep upgrade-astronomer`
 
@@ -154,11 +154,11 @@ If the upgrade was successful, you should be able to:
 - Access the **Settings** tab for each of your Deployments in the Software UI.
 - See metrics on the **Metrics** tab in the Software UI.
 - Successfully run `$ astro deploy` using the Astronomer CLI.
-- Open the Airflow UI for each of your Deployments
+- Open the Airflow UI for each of your Deployments.
 - Access logs for your DAGs in the Airflow UI.
-- Create a new Airflow Deployment and ensure it comes up healthy
+- Create a new Airflow Deployment and ensure it comes up healthy.
 
-If there is a problem when creating your Airflow Deployment, check the commander logs for references. Here is an example of what you will be looking for:
+If there is a problem creating your Airflow Deployment, check the commander logs to troubleshoot. Here is an example of what you will be looking for:
 
 ```
 2022-04-14T05:10:45 INFO Calling commander method #updateDeployment
@@ -167,15 +167,15 @@ If there is a problem when creating your Airflow Deployment, check the commander
 
 ```
 
-Make corrections as needed, and rerun the upgrade command from Step 6. Do not continue to Step 8 until you have successfully created a new Airflow Deployment.
+Make changes as needed and rerun the upgrade command from Step 6. Do not continue to Step 8 until you have successfully created a new Airflow Deployment.
 
 ## Step 8: Upgrade the Astronomer CLI to v0.28
 
-To ensure reliability and full access to features included in Astronomer Software v0.28, all users must upgrade to v0.28 of the Astronomer CLI. We recommend the latest available version, though you may choose to install a particular patch release within the v0.28 series.
+To ensure reliability and full access to features included in Astronomer Software v0.28, all users must upgrade to v0.28 of the Astronomer CLI. We recommend the latest available version, though you can install any patch release within the v0.28 series.
 
 To upgrade to the latest available v0.28 version of the Astronomer CLI, run:
 
-`curl -sSL https://install.astronomer.io | sudo bash -s -- v0.28.0`
+`curl -sSL https://install.astronomer.io | sudo bash -s -- v0.28`
 
 To do so via Homebrew, run:
 
