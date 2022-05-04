@@ -52,9 +52,9 @@ alertmanager:
     platform:
 
     platformCritical:
-        slack_configs:
-        - api_url: https://hooks.slack.com/services/T02J89GPR/BDBSG6L1W/4Vm7zo542XYgvv3
-          channel: '#astronomer_platform_alerts'
+      slack_configs:
+        - api_url: https://hooks.slack.com/services/abc12345/abcXYZ/xyz67890
+          channel: '#<your-slack-channel-name>'
           text: |-
             {{ range .Alerts }}{{ .Annotations.description }}
             {{ end }}
