@@ -49,20 +49,25 @@ To create a Deployment-level Service Account via the Astronomer CLI:
    ```
    astro auth login <BASE-DOMAIN>
    ```
+   To identify your `<BASE-DOMAIN>`, you can run `astro cluster list`, and select the domain name corresponding to the cluster that you wish to interact with.
+
 2. Identify your Airflow Deployment's Deployment ID. To do so, run:
    ```
    astro deployment list
    ```
-   This will output the list of Airflow Deployments you have access to and their corresponding Deployment ID.
+   This will output the list of Airflow Deployments you have access to and their corresponding Deployment ID in the `DEPLOYMENT ID` column.
+
 3. With that Deployment ID, run:
    ```
    astro deployment service-account create -d <deployment-id> --label <service-account-label> --role <deployment-role>
    ```
+   Note that the `<deployment-role>` must be at least `editor`
+   
 4.  Save the API Key that was generated. Depending on your use case, you might want to store this key in an Environment Variable or secret management tool of choice.
 
 ## Step 2: Make an Airflow REST API Request
 
-With the information from Step 1, you can now run `GET` or `POST` requests to any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) via the following base URL:
+With the information from Step 1, you can now execute requests against any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) via the following base URL:
 
 ```
 https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
@@ -92,7 +97,7 @@ POST /dags/<dag-id>/dagRuns
 curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airflow/api/v1/dags/<DAG-ID>/dagRuns \
   -H 'Authorization: <API-KEY>' \
   -H 'Cache-Control: no-cache' \
-  -H 'content-type: application/json' -d '{}'
+  -H 'Content-Type: application/json' -d '{}'
 ```
 
 #### Python
@@ -123,16 +128,11 @@ To set a specific `execution_date` for your DAG, you can pass in a timestamp wit
 The string needs to be in the following format (in UTC):
 
 ```
-"YYYY-MM-DDTHH:MM:SS"
+"YYYY-MM-DDTHH:mm:SS"
 ```
 
-Where, `YYYY`: Year, `MM`: Month, `DD`: Day, `HH`: Hour, `MM`: Minute, `SS`: Second.
+Where, `YYYY` represents the year, `MM` represents the month, `DD` represents the day, `HH` represents the hour, `mm` represents the minute, and `SS` represents the second of your timestamp. For example: `"2019-11-16T11:34:00"` would create DAG run with an execution date of November 16, 2019 at 11:34AM.
 
-For example:
-
-```
-"2019-11-16T11:34:00"
-```
 
 Here, your request becomes:
 
@@ -140,12 +140,12 @@ Here, your request becomes:
 curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airflow/api/v1/dags/<DAG-ID>/dagRuns \
   -H 'Authorization: <API-KEY>' \
   -H 'Cache-Control: no-cache' \
-  -H 'content-type: application/json' -d '{"execution_date":"2019-11-16T11:34:00"}'
+  -H 'Content-Type: application/json' -d '{"execution_date": "2019-11-16T11:34:00"}'
 ```
 
 :::info
 
-The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2+. If you run Astronomer Certified 2.2+, replace `execution_date` with `logical_date`. For more information, see [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html?highlight=pass%20data#data-interval).
+The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2+. If you run Astronomer Certified 2.2+, replace `execution_date` with `logical_date`, and add a "Z" to the end of your timestamp, e.g. "logical_date": "2019-11-16T11:34:00Z". For more information, see [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html?highlight=pass%20data#data-interval).
 
 :::
 
@@ -186,7 +186,7 @@ As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-air
 
 * Makes for easy access by third-parties.
 * Is based on the [Swagger/OpenAPI Spec](https://swagger.io/specification/).
-* Implements CRUD (Create, Update, Delete) operations on *all* Airflow resources.
+* Implements CRUD (Create, Read, Update, Delete) operations on *all* Airflow resources.
 * Includes authorization capabilities.
 
 :::tip
@@ -199,13 +199,23 @@ To get started with Airflow 2.0 locally, read [Get Started with Apache Airflow 2
 
 To convert a call from Airflow's experimental API, simply update the URL to use the endpoint specified in Airflow's [Stable REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
-For example, take Airflow's "Get Current Configuration" endpoint:
+For example, take Airflow's ["Get Current Configuration" endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_config):
 
 ```
 GET /api/v1/config
 ```
 
-Here, your cURL request would look like the following:
+Prior to Airflow 2.0, a cURL request to get the current configuration would look as follows:
+
+```
+curl -X GET \
+  https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/api/experimental/config \
+  -H 'Authorization: <API-KEY>' \
+  -H 'Cache-Control: no-cache'
+```
+
+
+With the stable REST API in Airflow 2.0+, your cURL request would look like the following:
 
 ```
 curl -X GET \
