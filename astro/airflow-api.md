@@ -21,7 +21,7 @@ To make an Airflow API request, you need:
 
 ## Step 1: Retrieve an Access Token and Deployment URL
 
-All calls to your Deployment's Airflow API require:
+Calling the Airflow REST API for a Deployment requires:
 
 - An Astro access token.
 - A Deployment URL.
@@ -40,25 +40,31 @@ curl --location --request POST "https://auth.astronomer.io/oauth/token" \
 
 :::info
 
-Note that this token is only valid for 24 hours.
+Note that this token is only valid for 24 hours. If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
 
-If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
-
-In automated processes (such as a [CI/CD pipeline](https://docs.astronomer.io/astro/ci-cd)), we recommend including logic to generate a fresh access token. For example, adding a step in in a CI/CD pipeline that automatically generates an API access token would remove the need to generate that token manually every 24 hours.
+If you have an automated [CI/CD process](ci-cd.md) configured, we recommend including logic to generate a fresh access token. If you add a step to your CI/CD pipeline that automatically generates an API access token, for example, you can avoid having to generate the token manually.
 
 :::
 
-To retrieve your Deployment URL, open your Deployment in the Cloud UI and click **Open Airflow**. The URL for the Airflow UI is your Deployment URL minus `/home`. It includes the name of your Organization and a short Deployment ID. For a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany`, for example, the Deployment URL would be: `https://mycompany.astronomer.run/dhbhijp0`.
+To retrieve your Deployment URL, open your Deployment in the Cloud UI and click **Open Airflow**. The Deployment URL is the URL for the Airflow UI homepage up until `/home`. It includes the name of your Organization and a short Deployment ID. For example, a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany` would have a Deployment URL of `https://mycompany.astronomer.run/dhbhijp0`.
 
 ## Step 2: Make an Airflow API Request
 
-With the information from Step 1, you can now execute requests against any supported endpoints in Airflow's [Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+You can now execute requests against any endpoint that is listed in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+To make a request based on Airflow documentation, make sure to:
 
-For all requests, replace `<access-token>` and `<deployment-url>` with the values obtained in Step 1, and replace `<dag-id>` with your own DAG ID where applicable.
+- Replace `https://airflow.apache.org` with your Deployment URL
+- Use the Astro access token for authentication
 
-For example, to retrieve a list of all DAGs in a Deployment, you can run a `GET` request to the [`dags` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_dags)
+## Example API Requests
 
-Using cURL:
+The following topic contains common examples of API requests that you can run against a Deployment.
+
+### List DAGs
+
+To retrieve a list of all DAGs in a Deployment, you can run a `GET` request to the [`dags` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/get_dags)
+
+#### cURL
 
 ```sh
 curl -X GET <deployment-url>/api/v1/dags \
@@ -66,7 +72,8 @@ curl -X GET <deployment-url>/api/v1/dags \
    -H 'Authorization: Bearer <access-token>'
 ```
 
-Using Python:
+#### Python
+
 ```python
 import requests
 token = "<access-token>"
@@ -79,9 +86,14 @@ print(response.json())
 # Prints data about all DAGs in your Deployment
 ```
 
-Let's walk through another example. Below, we'll trigger a DAG Run by executing a `POST` request to Airflow's [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
+### Trigger a DAG Run
 
-Using cURL:
+You can trigger a DAG run by executing a `POST` request to Airflow's [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
+
+This will trigger a DAG run for the DAG you specify with a `logical_date` value of `NOW()`, which is equivalent to clicking the **Play** button in the main **DAGs** view of the Airflow UI.
+
+#### cURL
+
 ```sh
 curl -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
    -H 'Content-Type: application/json' \
@@ -90,7 +102,8 @@ curl -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
    -d '{}'
 ```
 
-Using Python:
+#### Python
+
 ```python
 import requests
 token = "<access-token>"
@@ -108,11 +121,20 @@ print(response.json())
 # Prints metadata of the DAG Run that was just triggered
 ```
 
-This will trigger a DAG run for the DAG you specify with a `logical_date` value of `NOW()`, which is equivalent to clicking the **Play** button in the main **DAGs** view of the Airflow UI.
+### Trigger a DAG Run by Date
 
-You can also specify a `logical_date` at the time in which you wish to trigger the DAG run by passing the `logical_date` with the desired timestamp with the request's `data` field. The timestamp string is expressed in UTC and must be specified in the format `"YYYY-MM-DDTHH:MM:SSZ"` where, `YYYY` represents the year, `MM` represents the month, `DD` represents the day, `HH` represents the hour, `MM` represents the minute, and `SS` represents the second, and `Z` stands for "Zulu" time, which represents UTC. For example:
+You can also specify a `logical_date` at the time in which you wish to trigger the DAG run by passing the `logical_date` with the desired timestamp with the request's `data` field. The timestamp string is expressed in UTC and must be specified in the format `"YYYY-MM-DDTHH:MM:SSZ"`, where:
 
-Using cURL:
+- `YYYY` represents the year.
+- `MM` represents the month.
+- `DD` represents the day.
+- `HH` represents the hour.
+- `MM` represents the minute.
+- `SS` represents the second.
+- `Z` stands for "Zulu" time, which represents UTC.
+
+#### cURL
+
 ```sh
 curl -v -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
    -H 'Authorization: Bearer <access-token>' \
@@ -120,6 +142,8 @@ curl -v -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
    -H 'content-type: application/json' \
    -d '{"logical_date":"2021-11-16T11:34:00Z"}'
 ```
+
+#### Python
 
 Using Python:
 ```python
@@ -139,9 +163,12 @@ print(response.json())
 # Prints metadata of the DAG Run that was just triggered
 ```
 
-As a final example, we'll demonstrate pausing a given DAG by executing a `PATCH` command against the [`dag` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/patch_dag).
+### Pause a DAG
 
-Using cURL:
+You can pause a given DAG by executing a `PATCH` command against the [`dag` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/patch_dag).
+
+#### cURL
+
 ```sh
 curl -X PATCH <deployment-url>/api/v1/dags/<dag-id> \
    -H 'Content-Type: application/json' \
@@ -150,7 +177,8 @@ curl -X PATCH <deployment-url>/api/v1/dags/<dag-id> \
    -d '{"is_paused": true}'
 ```
 
-Using Python:
+#### Python
+
 ```python
 import requests
 token = "<access-token>"
