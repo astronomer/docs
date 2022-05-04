@@ -21,8 +21,8 @@ Astronomer will then create a Cluster within your GCP account that hosts the res
 
 To install Astro on GCP, you need:
 
-- A clean [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects). For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
-- [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles).
+- A clean [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
+- A user with [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles) in your project.
 - [Google Cloud Shell](https://cloud.google.com/shell).
 - A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36.
 - A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24.
