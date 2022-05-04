@@ -68,13 +68,15 @@ With the information from Step 1, you can now run `GET` or `POST` requests to an
 https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
 ```
 
-In the examples below, you'll replace the following values with your own:
+## Example API Calls
+
+In the following examples, you'll replace the following values with your own:
 
 - `<BASE-DOMAIN>`: The base domain for your organization on Astronomer Software. For example: `mycompany.astronomer.io`.
 - `<DEPLOYMENT-RELEASE-NAME>`: The release name of your Deployment. For example: `galactic-stars-1234`.
 - `<API-KEY>`: The API key for your Deployment Service Account.
 
-You can make requests via the method of your choosing. Below, we'll share example requests via cURL and Python to Airflow's "Trigger DAG" and "Get all Pools" endpoints. In all cases, your request will have the same permissions as the role of the Service Account you created on Astronomer.
+The following example calls are made via cURL and Python, but you can make requests via any standard method. In all cases, your request will have the same permissions as the role of the Service Account you created on Astronomer.
 
 ### Trigger DAG
 
@@ -109,8 +111,6 @@ resp = requests.post(
 print(resp.json())
 # {'conf': {}, 'dag_id': 'example_dag', 'dag_run_id': 'manual__2022-04-26T21:57:23.572567+00:00', 'end_date': None, 'execution_date': '2022-04-26T21:57:23.572567+00:00', 'external_trigger': True, 'logical_date': '2022-04-26T21:57:23.572567+00:00', 'start_date': None, 'state': 'queued'}
 ```
-
-To run this, replace the following placeholder values:
 
 - `<DAG-ID>`: Name of your DAG (_case-sensitive_)
 
@@ -179,12 +179,8 @@ print(resp.json())
 # {'pools': [{'name': 'default_pool', 'occupied_slots': 0, 'open_slots': 128, 'queued_slots': 0, 'running_slots': 0, 'slots': 128}], 'total_entries': 1}
 ```
 
-To run this, replace the following placeholder values:
 
-
-## A Note on Airflow 2 Stable REST API
-
-### What's new
+## Notes on Airflow 2.0's Stable REST API
 
 As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-airflow-2-0), the Apache Airflow project now supports an official and more robust Stable REST API. Among other things, Airflow's new REST API:
 
