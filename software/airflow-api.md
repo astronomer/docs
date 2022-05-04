@@ -77,10 +77,10 @@ https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
 
 In the following examples, replace the following values with your own:
 
-- **<BASE-DOMAIN>**: The base domain for your organization on Astronomer Software. For example: `mycompany.astronomer.io`.
-- **<DEPLOYMENT-RELEASE-NAME>**: The release name of your Deployment. For example: `galactic-stars-1234`.
-- **<API-KEY>**: The API key for your Deployment Service Account.
-- **<DAG-ID>**: Name of your DAG (_case-sensitive_).
+- `<BASE-DOMAIN>`: The base domain for your organization on Astronomer Software. For example: `mycompany.astronomer.io`.
+- `<DEPLOYMENT-RELEASE-NAME>`: The release name of your Deployment. For example: `galactic-stars-1234`.
+- `<API-KEY>`: The API key for your Deployment Service Account.
+- `<DAG-ID>`: Name of your DAG (_case-sensitive_).
 
 
 The example requests listed below are made via cURL and Python, but you can make requests via any standard method. In all cases, your request will have the same permissions as the role of the Service Account you created on Astronomer.
