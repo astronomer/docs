@@ -69,15 +69,15 @@ To retrieve a list of all DAGs in a Deployment, you can run a `GET` request to t
 ```sh
 curl -X GET <deployment-url>/api/v1/dags \
    -H 'Cache-Control: no-cache' \
-   -H 'Authorization: Bearer <access-token>'
+   -H 'Authorization: Bearer <your-access-token>'
 ```
 
 #### Python
 
 ```python
 import requests
-token = "<access-token>"
-deployment_url = "<deployment-url>"
+token = "<your-access-token>"
+deployment_url = "<your-deployment-url>"
 response = requests.get(
    url=f"{deployment_url}/api/v1/dags",
    headers={"Authorization": f"Bearer {token}"}
@@ -95,10 +95,10 @@ This will trigger a DAG run for the DAG you specify with a `logical_date` value 
 #### cURL
 
 ```sh
-curl -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
+curl -X POST <your-deployment-url>/api/v1/dags/<your-dag-id>/dagRuns \
    -H 'Content-Type: application/json' \
    -H 'Cache-Control: no-cache' \
-   -H 'Authorization: Bearer <access-token>' \
+   -H 'Authorization: Bearer <your-access-token>' \
    -d '{}'
 ```
 
@@ -106,9 +106,9 @@ curl -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
 
 ```python
 import requests
-token = "<access-token>"
-deployment_url = "<deployment-url>"
-dag_id = "<dag-id>"
+token = "<your-access-token>"
+deployment_url = "<your-deployment-url>"
+dag_id = "<your-dag-id>"
 response = requests.post(
     url=f"{deployment_url}/api/v1/dags/{dag_id}/dagRuns",
     headers={
@@ -136,8 +136,8 @@ You can also specify a `logical_date` at the time in which you wish to trigger t
 #### cURL
 
 ```sh
-curl -v -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
-   -H 'Authorization: Bearer <access-token>' \
+curl -v -X POST <your-deployment-url>/api/v1/dags/<your-dag-id>/dagRuns \
+   -H 'Authorization: Bearer <your-access-token>' \
    -H 'Cache-Control: no-cache' \
    -H 'content-type: application/json' \
    -d '{"logical_date":"2021-11-16T11:34:00Z"}'
@@ -148,9 +148,9 @@ curl -v -X POST <deployment-url>/api/v1/dags/<dag-id>/dagRuns \
 Using Python:
 ```python
 import requests
-token = "<access-token>"
-deployment_url = "<deployment-url>"
-dag_id = "<dag-id>"
+token = "<your-access-token>"
+deployment_url = "<your-deployment-url>"
+dag_id = "<your-dag-id>"
 response = requests.post(
     url=f"{deployment_url}/api/v1/dags/{dag_id}/dagRuns",
     headers={
@@ -170,10 +170,10 @@ You can pause a given DAG by executing a `PATCH` command against the [`dag` endp
 #### cURL
 
 ```sh
-curl -X PATCH <deployment-url>/api/v1/dags/<dag-id> \
+curl -X PATCH <your-deployment-url>/api/v1/dags/<your-dag-id> \
    -H 'Content-Type: application/json' \
    -H 'Cache-Control: no-cache' \
-   -H 'Authorization: Bearer <access-token>' \
+   -H 'Authorization: Bearer <your-access-token>' \
    -d '{"is_paused": true}'
 ```
 
@@ -181,9 +181,9 @@ curl -X PATCH <deployment-url>/api/v1/dags/<dag-id> \
 
 ```python
 import requests
-token = "<access-token>"
-deployment_url = "<deployment-url>"
-dag_id = "<dag-id>"
+token = "<your-access-token>"
+deployment_url = "<your-deployment-url>"
+dag_id = "<your-dag-id>"
 response = requests.patch(
     url=f"{deployment_url}/api/v1/dags/{dag_id}",
     headers={
