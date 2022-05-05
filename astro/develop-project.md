@@ -381,7 +381,7 @@ To install Python packages from a private GitHub repository on Astro, you need:
 
 :::warning
 
-If your organization enforces SAML Single Sign On (SSO), you must first authorize your key to allow it to be used by following [this guide](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on).
+If your organization enforces SAML single sign-on (SSO), you must first authorize your key to be used with that authentication method. For instructions, see [GitHub documentation](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on).
 
 :::
 
@@ -455,18 +455,20 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-  Older versions of the Astro runtime contain different versions of Python. To
-  find the python version in an image, use
-  `docker run quay.io/astronomer/astro-runtime:5.0.0-base python --version`.
-  The version numbers in the *Copy requirements directory* command above may
-  need to be changed if a different version of Python is being used.
+  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astro Runtime may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
+  
+  To identify the Python version in your Astro Runtime image, run:
+  
+  `
+  docker run quay.io/astronomer/astro-runtime:<runtime-version>-base python --version`
+  
+  Make sure to replace `<runtime-version>` with your own. 
 
   :::
 
   :::info
 
-  If your repository is hosted somewhere other than GitHub, replace the domain
-  in the `ssh-keyscan` command with the domain where the package is hosted.
+  If your repository is hosted somewhere other than GitHub, replace the domain in the `ssh-keyscan` command with the domain where the package is hosted.
 
   :::
 
