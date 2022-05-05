@@ -34,8 +34,8 @@ For more information about the resources required to run Astro on GCP, see [GCP 
 
 If any of your GCP resources are on a private network, you can access them using one of the following options:
 
-- Private Services Connect
-- A VPC Peering connection between Astronomer's VPC and the VPCs for your broader network
+- [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect)
+- A [VPC Peering connection](https://cloud.google.com/vpc/docs/vpc-peering) between Astronomer's VPC and the VPCs for your broader network
 
 Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer Cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
 
@@ -46,7 +46,7 @@ Astro uses 4 different CIDR blocks for creating the infrastructure for your Astr
 
 ## Step 1: Access Astro
 
-To begin the Astro install process, first create an account at https://cloud.astronomer.io/.
+To get started with Astro, create an account at https://cloud.astronomer.io/.
 
 When you first authenticate to Astro, you can sign in with a Google account, a GitHub account, or an email and password.
 
@@ -96,7 +96,7 @@ To activate the Data Plane on your GCP project:
 
 ## Step 3: Provide Setup Information to Astronomer
 
-To start the installation of your first Astro Cluster, provide Astronomer with:
+Once you've activated your Data Plane, provide Astronomer with:
 
 - Your preferred Astro Cluster name.
 - The GCP region that you want to host your Cluster in.
@@ -163,7 +163,7 @@ You can find a Deployment's namespace in the Deployment view of the Cloud UI. Fo
 astro-geometrical-gyroscope-9932@astronomer-prod-deployment.iam.gserviceaccount.com
 ```
 
-For more information about configuring service accounts on GCP, read [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to)
+For more information about configuring service accounts on GCP, read [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
 
 :::
 
