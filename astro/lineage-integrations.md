@@ -169,7 +169,7 @@ To complete this setup, you need:
 
 #### Verify Setup
 
-To confirm that your setup was successful, run a `dbt` model in your project. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Explore** page. If the setup was successful, you should see the run that you triggered in the **Most Recent Runs** table.
+To confirm that your setup was successful, run a dbt model in your project. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Explore** page. If the setup was successful, you should see the run that you triggered in the **Most Recent Runs** table.
 
 </TabItem>
 

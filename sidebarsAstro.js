@@ -73,7 +73,7 @@ module.exports = {
       items: [
         'install-aws',
         'manage-workspaces',
-        'lineage-integrations',
+        'set-up-data-lineage',
         {
           type: 'category',
           label: 'User Access',
