@@ -459,8 +459,9 @@ This example assumes that the name of each of your Python packages is identical 
   
   To identify the Python version in your Astro Runtime image, run:
   
-  `
-  docker run quay.io/astronomer/astro-runtime:<runtime-version>-base python --version`
+     ```
+     docker run quay.io/astronomer/astro-runtime:<runtime-version>-base python --version
+     ```
   
   Make sure to replace `<runtime-version>` with your own. 
 

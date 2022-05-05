@@ -343,8 +343,9 @@ This example `Dockerfile.build` assumes Python 3.9, but some versions of Astrono
   
   To identify the Python version in your AC image, run:
   
-  `
-  docker run quay.io/astronomer/ap-airflow:<astronomer-certified-version> python --version`
+     ```
+     docker run quay.io/astronomer/ap-airflow:<astronomer-certified-version> python --version
+     ```
   
   Make sure to replace `<astronomer-certified-version>` with your own. 
 
