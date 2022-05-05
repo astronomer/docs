@@ -456,8 +456,10 @@ This example assumes that the name of each of your Python packages is identical 
   :::tip
 
   Older versions of the Astro runtime contain different versions of Python. To
-  find the python version in an image, use `docker run quay.io/astronomer/astro-runtime:5.0.0-base`. The version numbers in the *Copy requirements directory*
-  command above may need to be changed if a different version of Python is used.
+  find the python version in an image, use
+  `docker run quay.io/astronomer/astro-runtime:5.0.0-base python --version`.
+  The version numbers in the *Copy requirements directory* command above may
+  need to be changed if a different version of Python is being used.
 
   :::
 
