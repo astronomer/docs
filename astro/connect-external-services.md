@@ -62,8 +62,8 @@ All Astro Clusters on GCP have [Workload Identity](https://cloud.google.com/kube
 To grant an Astro Deployment access to GCP services such as BigQuery, you must:
 
 - Go to the Google Cloud project in which your external data service is hosted 
-- Add the Google Service Account of your Astro Deployment to the principal of that Google Cloud Project
-- Bind the Deployment service account to a role that has access to your target data source
+- Add the Kubernetes service account for your Astro Deployment to the principal of that Google Cloud project
+- Bind the service account to a role that has access to your target data source
 
 Kubernetes service accounts for Deployments on Astro are formatted as follows:
 
