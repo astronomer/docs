@@ -16,6 +16,31 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.5.0 ([Release notes](cli-release-notes.md))
 
+## May 5, 2022
+
+### Gain New Insights into Your Data Pipelines with Data Lineage
+
+We are excited to introduce data lineage functionality to Astro. Using the new **Lineage** tab in the Cloud UI, you can now monitor your Deployments based on the real-time flow of data through your pipelines.
+
+Data lineage in Astro is a significant milestone towards comprehensive observability of your data. Using OpenLineage, Astro automatically traces data and visualizes it in a way that traditional metrics can't. Lineage graphs show information about not just about your Airflow tasks, but also the datasets they interact with and the external workloads they trigger.
+
+![Lineage graph example](/img/release-notes/lineage-example.png)
+
+Use the following new docs to help you get started with understanding, configuring, and using data lineage features in Astro:
+
+- [Data Lineage Concepts](data-lineage-concepts.md)
+- [Set Up Data Lineage](set-up-data-lineage.md)
+- [Data Lineage UI](data-lineage.md)
+- [Data Lineage Support and Compatibility](data-lineage-support-and-compatibility.md)
+
+### Astro is Now Available on Google Cloud Platform
+
+Astronomer now officially supports installations of Astro on Google Cloud Platform. For more information about the installation process and current support, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp.md).
+
+### Additional Improvements
+
+- Improved error messaging behavior on the **DAGs** and **Usage** pages of the Cloud UI.
+
 ## April 28, 2022
 
 ### New AWS Node Instance Types Available
