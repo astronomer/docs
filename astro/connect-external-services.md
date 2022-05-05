@@ -40,7 +40,7 @@ To create a VPC peering connection between an Astro Cluster's VPC and a target V
 
 - Astro Cluster ID and Name
 - AWS Account ID or GCP Project ID of the target VPC
-- GCP Region of the target VPC
+- Region of the target VPC (_AWS only_)
 - VPC ID of the target VPC
 - CIDR of the target VPC
 
@@ -56,20 +56,28 @@ If your target VPC resolves DNS hostnames via **DNS Hostnames** and **DNS Resolu
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting [Astronomer support](https://support.astronomer.io).
 
-## Use Workload Identity to Connect to GCP Services (_GCP Only_)
+## Workload Identity (_GCP Only_)
 
-By default, all Deployments have [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) enabled. This means that you can grant your Deployment access to GCP services such as BigQuery via a service account that's automatically created by Astro.
+[Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) is recommended by Google as the best way for data pipelines running on GCP to access Google Cloud services in a secure and manageable way. All Astro Clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Kubernetes service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
 
-To grant a Deployment access to a GCP service, you need to attach an IAM policy to the Deployment's service account. All Deployment service accounts are formatted as follows:
+To grant a Deployment on Astro access to GCP services such as BigQuery, you must:
+
+- Go to the Google Cloud project in which your external data service is hosted 
+- Add the Kubernetes service account for your Astro Deployment to the principal of that Google Cloud project
+- Bind the service account to a role that has access to your external data service
+
+Kubernetes service accounts for Astro Deployments are formatted as follows:
 
 ```text
 astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com
 ```
 
-You can find a Deployment's namespace in the Deployment view of the Cloud UI. For example, if your GCP project was called `astronomer-prod-deployment` and your Deployment namespace `geometrical-gyroscope-9932`, your service account would be:
+To find the namespace of your Deployment, go to your Deployment page in the Cloud UI and copy paste the value in the **Namespace** field.
+
+For a Google Cloud project called `astronomer-prod-deployment` and a Deployment namespace called `geometrical-gyroscope-9932`, for example, the service account for the Deployment would be:
 
 ```text
 astro-geometrical-gyroscope-9932@astronomer-prod-deployment.iam.gserviceaccount.com
 ```
 
-For more information about configuring service accounts on GCP, read [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
+For more information about configuring service accounts on GCP, see [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
