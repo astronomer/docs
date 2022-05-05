@@ -12,15 +12,102 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Runtime Version**: 4.2.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 5.0.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.3.0 ([Release notes](cli-release-notes.md))
+**Latest CLI Version**: 1.5.0 ([Release notes](cli-release-notes.md))
+
+## April 28, 2022
+
+### New AWS Node Instance Types Available
+
+To widen our support for various use cases and levels of scale, we've expanded the types of AWS node instances that are supported on Astro. You can now create Clusters with:
+
+- [General Purpose M6i instances](https://aws.amazon.com/ec2/instance-types/m6i/)
+- [Compute Optimized C6i instances](https://aws.amazon.com/ec2/instance-types/c6i/)
+- [Memory Optimized R6i instances](https://aws.amazon.com/ec2/instance-types/r6i/)
+
+For a full list of node instance types that are supported on Astro, see [AWS Resource Reference](resource-reference-aws.md#node-instance-type). To modify an existing Astro Cluster to use any of these instance types, see [Modify a Cluster](modify-cluster.md).
+
+### Additional Improvements
+
+- Improve the error message that renders in the Cloud UI if you try to create a worker that is too large for the Deployment's node instance type to support. This error message now specifies a clear call to action
+
+## April 21, 2022
+
+### Feedback in Cloud UI on Worker Size Limits
+
+The Cloud UI now renders an error if you try to modify the **Worker Resources**  to a combination of CPU and memory that is not supported by the node instance type of the Cluster that the Deployment is hosted on. This validation ensures that the worker size you request is supported by the infrastructure available in your Astro Cluster, and minimizes silent task failures that might have occurred due to invalid resource requests.
+
+If your Astro Cluster is configured with the `m5.xlarge` node type, for example, the Cloud UI will show an error if you try to set **Worker Resources** to 100 AU. This is because the maximum worker size an `m5.xlarge` node can support is 27 AU.
+
+For a reference of all node instance types Astro supports and their corresponding worker size limits, see [AWS Resource Reference](resource-reference-aws.md#node-instance-type).
+
+## April 14, 2022
+
+### Additional Improvements
+
+- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html). This ensures that traffic to AWS services is kept private and does not traverse the NAT and Internet gateways, reducing the risk of exposing your resources to the internet.
+
+### Bug Fixes
+
+- Fixed an issue where you could not add a new user to a Workspace if the user had an email address that contained uppercase characters
+
+## March 31, 2022
+
+### New Analytics Page in Cloud UI to Monitor Deployments
+
+The Cloud UI now includes a dedicated **Analytics** page that contains various Deployment-level metrics. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time:
+
+![Analytics menu location](/img/docs/access-analytics.png)
+
+For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
+
+### Lineage Backend Upgrade Scheduled for All Organizations
+
+As part of [Astronomer's acquisition of Datakin](https://www.astronomer.io/blog/astronomer-acquires-datakin-the-data-lineage-tool/), data lineage features are coming soon to Astro. The first step in enabling these features is to implement lineage backends for existing Astro customers.
+
+Starting on March 31st and continuing over the next couple of weeks, all Astro Deployments on Runtime 4.2.0+ will be upgraded to emit lineage events. As a result of this change, you might start seeing lineage-related Scheduler logs such as the following:
+
+```text
+[2022-03-30, 12:17:39 UTC] {great_expectations_extractor.py:17} INFO - Did not find great_expectations_provider library or failed to import it
+[2022-03-24, 23:40:01 UTC] {client.py:74} INFO - Constructing openlineage client to send events to https://api.astro-astronomer.datakin.com
+```
+
+A few additional notes about this upgrade:
+
+- You can ignore any lineage logs that indicate an error or failed process, such as the first line in the example logs above. These logs will more accurately reflect the state of your lineage functionality once lineage features are launched on Astro.
+- Deployments on Runtime 4.2.0+ will be updated to emit data lineage events only after you [push code](deploy-code). Until you do so, this change will not be applied.
+- Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
+- When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
+
+For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://www.astronomer.io/guides/airflow-openlineage).
+
+### New AWS Regions Available
+
+You can now [create new Clusters](create-cluster.md) in:
+
+- `af-south-1` (Cape Town)
+- `ap-east-1` (Hong Kong)
+- `ap-northeast-3` (Osaka)  
+- `me-south-1` (Bahrain)
+
+For a full list of AWS regions supported on Astro, see [AWS Resource Reference](resource-reference-aws.md#aws-region).
+
+### Additional Improvements
+
+- The Cloud UI now includes a button that links to Astronomer [support](https://support.astronomer.io/) and [status](https://status.astronomer.io/) pages:
+
+    ![Runtime Tag banner](/img/release-notes/support-button.png)
 
 ## March 25, 2022
 
-### Modify the Max Node Count for Clusters
+### Maximum Node Count is now Configurable per Cluster
 
-By default, Clusters have a max node count of 20. To help scale your Clusters for their specific use cases, you can now change the max node count of a new or existing Cluster to any value from 2 to 100. To update this setting for a Cluster, reach out to [Astronomer support](https://support.astronomer.io) and provide the name of your cluster and the desired max node count.
+As of this release, **Maximum Node Count** is now a configurable setting for new and existing Clusters. On Astro, maximum node count represents the total number of EC2 nodes that your Cluster can support at any given time. For an Astro Cluster on AWS, EC2 nodes are the primary unit of infrastructure required to run a Deployment and its components, including workers and the Airflow Scheduler. New Clusters have a maximum node count of 20 by default, but the setting can be modified to any value from 2 to 100 at any time.
+
+Previously, maximum node count was a fixed, global setting that applied to all customers on Astro and could not be configured per Cluster. Now, your organization can modify this setting as your workloads evolve and more Deployments are created. Once the limit is reached, your Cluster will not be able to auto-scale and worker pods may fail to schedule.
+
+To update this setting for an existing Cluster, reach out to [Astronomer support](https://support.astronomer.io) and provide the name of your cluster and the desired maximum node count.
 
 ### Additional Improvements
 

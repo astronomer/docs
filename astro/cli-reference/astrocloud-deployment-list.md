@@ -20,6 +20,7 @@ astrocloud deployment list
 | Option  | Description                             | Possible Values |
 | ------- | --------------------------------------- | --------------- |
 | `-a`,`--all` | Show Deployments across all Workspaces that you have access to. | ``              |
+| `--workspace-id` | Specify a Workspace to list Deployments outside of your current Workspace | Any valid Workspace ID                                            |
 
 ## Examples
 
