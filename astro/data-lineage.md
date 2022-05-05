@@ -19,6 +19,12 @@ Generally speaking, you can use these pages to diagnose issues that may otherwis
 
 Views in the **Lineage** page are available to all members of your Organization on Astro. For more information on data lineage and related concepts, see [Lineage Overview](lineage-overview.md).
 
+:::info 
+
+This functionality is early access and under active development. If you have any questions or feedback about this feature, reach out to [Astronomer Support](https://support.astronomer.io/).
+
+:::
+
 ## View the Lineage Graph for a Data Pipeline
 
 To view the lineage graph for one of your data pipelines, search for a DAG, task, or dataset with the search bar at the top of the UI. You can also search for jobs from other tools with lineage integrations, including dbt or Spark.
