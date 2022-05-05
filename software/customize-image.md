@@ -339,7 +339,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-This example `Dockerfile.build` assumes Python 3.9, but some versions of Astronomer Certified may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
+  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astronomer Certified may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
   
   To identify the Python version in your AC image, run:
   
