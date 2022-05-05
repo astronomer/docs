@@ -15,7 +15,7 @@ At a high-level, we'll ask that you come prepared with a new Google Cloud Projec
 - Activate Google Cloud Project by enabling APIs and adding the Astronomer Service Account to your Project's IAM
 - Share GCP account information with our team.
 
-Astronomer will then create a Cluster within your GCP project that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
+Astronomer will then create a Cluster within your Google Cloud project that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
 ## Prerequisites
 
