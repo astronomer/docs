@@ -409,10 +409,10 @@ This example assumes that the name of each of your Python packages is identical 
 
 1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 4.2.10, your `FROM` line would be:
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
    ```text
-   FROM quay.io/astronomer/astro-runtime:4.2.10-base AS stage1
+   FROM quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
    ```
 
   :::info
@@ -456,7 +456,7 @@ This example assumes that the name of each of your Python packages is identical 
   :::tip
 
   Older versions of the Astro runtime contain different versions of Python. To
-  find the python version in an image, use `docker run quay.io/astronomer/astro-runtime:4.3.0-base`. The version numbers in the *Copy requirements directory*
+  find the python version in an image, use `docker run quay.io/astronomer/astro-runtime:5.0.0-base`. The version numbers in the *Copy requirements directory*
   command above may need to be changed if a different version of Python is used.
 
   :::
@@ -464,7 +464,7 @@ This example assumes that the name of each of your Python packages is identical 
   :::info
 
   If your repository is hosted somewhere other than GitHub, replace the domain
-  in the `ssh-keyscan` command with the domain where the package is hosted. 
+  in the `ssh-keyscan` command with the domain where the package is hosted.
 
   :::
 
@@ -476,10 +476,10 @@ This example assumes that the name of each of your Python packages is identical 
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
     ```
 
-    For example, if you have `quay.io/astronomer/astro-runtime:4.2.10-base` in your `Dockerfile.build`, this command would be:
+    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0-base` in your `Dockerfile.build`, this command would be:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-4.2.10-base .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-5.0.0-base .
     ```
 
 2. Replace the contents of your Astro project's `Dockerfile` with the following:
@@ -488,10 +488,10 @@ This example assumes that the name of each of your Python packages is identical 
    FROM custom-<runtime-image>
    ```
 
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:4.2.10-base`, this line would be:
+   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0-base`, this line would be:
 
    ```
-   FROM custom-astro-runtime:4.2.10-base
+   FROM custom-astro-runtime:5.0.0-base
    ```
 
 Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
