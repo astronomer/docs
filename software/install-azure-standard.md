@@ -77,7 +77,7 @@ az group create --location <location> --name <my_resource_group>
 
 ### Create an AKS Cluster
 
-Astronomer is deployed to the Azure Kubernetes Service (AKS). Learn more about AKS [here.](https://docs.microsoft.com/en-us/azure/aks/)
+Once you've created an Azure Resource Group, you can create an AKS cluster using the Azure CLI, Azure PowerShell, or Azure Portal. For instructions, see [Microsoft documentation](https://docs.microsoft.com/en-us/azure/aks/).
 You can choose the machine type, but Astronomer recommends using larger nodes and not smaller nodes.
 
 Verify your Kubernetes version is supported by Astronomer Software:
