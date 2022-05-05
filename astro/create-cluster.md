@@ -13,18 +13,18 @@ import TabItem from '@theme/TabItem';
 The Astro install typically starts with 1 Cluster per Organization. Depending on your use case, however, your team can choose to configure multiple Astro Clusters. This could enable a few benefits, including:
 
 - Clusters in different regions
-- Different Clusters for Development and Production
+- Different Clusters for development and production environments
 
-Within a single Workspace, you can host Deployments across multiple Clusters. For example, you can have Production Deployments running in your Production Cluster and Development Deployments running in your Development Cluster.
+Within a single Workspace, you can host Deployments across multiple Clusters. For example, you might have a production Deployment running in a production Cluster and a development Deployment running in a development Cluster. Both of those Deployments can be in the same Workspace.
 
 This guide provides instructions for provisioning additional Clusters within your Astro Organization.
 
 ## Prerequisites
 
-To complete this setup, you need to have:
+To create an Astro Cluster, you need to have:
 
-- An Astronomer installation.
-- Permissions to edit trust policies in the dedicated account for Astro on your cloud.
+- An activated Data Plane.
+- Permissions to configure IAM in the dedicated account for Astro on your cloud.
 
 <Tabs
     defaultValue="aws"
@@ -36,15 +36,15 @@ To complete this setup, you need to have:
 
 #### Step 1: Submit a Request to Astronomer
 
-To create a new Cluster in your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, you'll need to provide our team with the following information:
+To create a new Astro Cluster on AWS for your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, provide our team with the following information:
 
 - Your AWS Account ID.
 - Your preferred Astro Cluster name.
 - The AWS region that you want to host your Cluster in.
 - Your preferred node instance type.
-- Your preferred max node count (the default is 20).
+- Your preferred max node count.
 
-If not specified, we will create a Cluster with two `m5.xlarge` nodes in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS Resource Reference](resource-reference-aws.md).
+If not specified, Astronomer will create a Cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS Resource Reference](resource-reference-aws.md).
 
 From there, your Astronomer representative will provide you with a unique `External ID` for each new Cluster. Make note of this value for the next step.
 
@@ -144,7 +144,7 @@ To create a cluster in one of these regions, complete the following additional s
 
 #### Step 3: Confirm with Astronomer
 
-Astronomer will notify you once your cluster has been created. Once your Cluster is available, you should be able to [configure a new Deployment](configure-deployment.md) within that cluster.
+Astronomer will notify you once your Cluster has been created. Once your Cluster is available, you should be able to [configure a new Deployment](configure-deployment.md) within that Cluster.
 
 </TabItem>
 
@@ -152,7 +152,7 @@ Astronomer will notify you once your cluster has been created. Once your Cluster
 
 #### Step 1: Submit a Request to Astronomer
 
-To create a new Cluster in your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, you'll need to provide our team with the following information:
+To create a new Astro Cluster on GCP for your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, provide our team with the following information:
 
 - Your preferred Astro Cluster name.
 - The GCP region that you want to host your Cluster in.
