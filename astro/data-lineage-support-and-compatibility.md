@@ -37,6 +37,7 @@ The following operators are partially supported by the Airflow integration with 
 
 Airflow tasks that are run with partially supported operators:
 
+- Emit source code to the lineage backend.
 - Emit task run data to the lineage backend.
 - Appear in the graph view of the **Lineage** tab in the Cloud UI as nodes.
 - Do not emit lineage data about input or output datasets.
@@ -49,5 +50,6 @@ If an Airflow task runs with an operator that is not supported, the lineage back
 
 Lineage on Astro is still in active development. Keep in mind the following limitations when using lineage functionality:
 
+- Source code emitted by partially supported operators does not appear in the lineage UI.
 - Airflow operators will emit lineage data about failed task runs only for Deployments on Astro Runtime v5.0+.
 - Data Lineage cannot currently be extracted from datasets whose Airflow connections are stored in a [secrets backend](secrets-backend.md).
