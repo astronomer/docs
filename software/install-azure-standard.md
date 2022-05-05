@@ -78,7 +78,7 @@ az group create --location <location> --name <my_resource_group>
 ### Create an AKS Cluster
 
 Once you've created an Azure Resource Group, you can create an AKS cluster using the Azure CLI, Azure PowerShell, or Azure Portal. For instructions, see [Microsoft documentation](https://docs.microsoft.com/en-us/azure/aks/).
-You can choose the machine type, but Astronomer recommends using larger nodes and not smaller nodes.
+You can create a cluster with any machine type, but Astronomer recommends using larger nodes and not smaller nodes.
 
 Verify your Kubernetes version is supported by Astronomer Software:
 ```
