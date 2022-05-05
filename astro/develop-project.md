@@ -455,13 +455,16 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-  If you don't want keys in this file to be pushed back up to your GitHub repository, consider adding this file to `.gitignore`.
+  Older versions of the Astro runtime contain different versions of Python. To
+  find the python version in an image, use `docker run quay.io/astronomer/astro-runtime:4.3.0-base`. The version numbers in the *Copy requirements directory*
+  command above may need to be changed if a different version of Python is used.
 
   :::
 
   :::info
 
-  If your repository is hosted somewhere other than GitHub, replace the location of your SSH key in the `ssh-keyscan` command.
+  If your repository is hosted somewhere other than GitHub, replace the domain
+  in the `ssh-keyscan` command with the domain where the package is hosted. 
 
   :::
 
