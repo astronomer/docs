@@ -264,7 +264,7 @@ To install Python packages from a private GitHub repository on Astronomer Softwa
 - A [Software project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
-- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+- A [GitHub SSH Private Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
 
 :::warning
 
@@ -339,9 +339,11 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-  Older versions of the Astronomer Certified image contain different versions of Python. To
-  find the python version in an image, use `docker run quay.io/astronomer/ap-airflow:2.2.5 python --version`. The version numbers in the *Copy requirements directory*
-  command above may need to be changed if a different version of Python is being used.
+  Older versions of the Astronomer Certified image contain different versions of
+  Python. To find the python version in an image, use
+  `docker run quay.io/astronomer/ap-airflow:2.2.5 python --version`. The version
+  numbers in the *Copy requirements directory* command above may need to be
+  changed if a different version of Python is being used.
 
   :::
 
@@ -354,7 +356,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 ### Step 3. Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH key file name and `<certified-image>` with your Certified image:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<certified-image>` with your Certified image:
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<certified-image> .
