@@ -12,8 +12,8 @@ This guide provides steps for getting started with Astro on Google Cloud Platfor
 At a high-level, we'll ask that you come prepared with a new Google Cloud project. From there, you can expect to:
 
 - Create an account on Astro.
-- Activate Google Cloud Project by enabling APIs and adding the Astronomer Service Account to your Project's IAM
-- Share GCP account information with our team.
+- Activate your Astro Data Plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
+- Share information about your Google Cloud project with our team.
 
 Astronomer will then create a Cluster within your Google Cloud project that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
