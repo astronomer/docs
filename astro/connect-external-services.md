@@ -57,15 +57,23 @@ If your target VPC resolves DNS hostnames using [private hosted zones](https://d
 
 ## Use Workload Identity to Connect to GCP Services (_GCP Only_)
 
-By default, all Deployments have [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) enabled. This means that you can grant your Deployment access to GCP services such as BigQuery via a service account that's automatically created by Astro.
+All Astro Clusters on GCP have [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) enabled by default. Each Deployment is associated with a Google Service Account that's created by Astronomer and is bound to an identity from the fixed workload identity pool for the Google Cloud Project.
 
-To grant a Deployment access to a GCP service, you need to attach an IAM policy to the Deployment's service account. All Deployment service accounts are formatted as follows:
+To grant an Astro Deployment access to GCP services such as BigQuery, you must:
+
+- Go to the Google Cloud Project in which your external data service is hosted 
+- Add the Google Service Account of your Astro Deployment to the principal of that Google Cloud Project
+- Bind the Deployment service account to a role that has access to your target data source
+
+Google Service Accounts for Deployments on Astro are formatted as follows:
 
 ```text
 astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com
 ```
 
-You can find a Deployment's namespace in the Deployment view of the Cloud UI. For example, if your GCP project was called `astronomer-prod-deployment` and your Deployment namespace `geometrical-gyroscope-9932`, your service account would be:
+To find the namespace of your Deployment, go to your Deployment page in the Cloud UI and copy paste the value in the **Namespace** field.
+
+For a GCP project called `astronomer-prod-deployment` and a Deployment namespace called `geometrical-gyroscope-9932`, for example, the service account for the Deployment would be:
 
 ```text
 astro-geometrical-gyroscope-9932@astronomer-prod-deployment.iam.gserviceaccount.com
