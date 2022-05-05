@@ -34,6 +34,22 @@ If you are upgrading from Astronomer Software v0.25, you first need to upgrade t
 
 :::
 
+
+## Step 0: Obtain Snapshots of Your MetaData Database for Astronomer and Airflow
+
+:::warning
+
+Astronomer does not guarantee the ability to downgrade database schemas after an upgrade. This means that in the event
+that you need to revert an upgrade, it may require you to recover database state from a backup.
+
+:::
+
+Before begining any upgrade, you should make sure to backup and snapshot any and all resources
+that store operational state for your platform or DAG runs. This snapshot may be required to restore 
+your database if you choose to rollback after an upgrade is begun. Work with your database administrator 
+to find the best way to plan for taking a snapshot and recovering state from a snapshot. 
+
+
 ## Step 1: Ensure You Have a Copy of Your Astronomer `config.yaml` File
 
 First, ensure you have a copy of the `config.yaml` file of your platform namespace.
