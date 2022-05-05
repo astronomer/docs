@@ -52,20 +52,20 @@ alertmanager:
     # Configs for platform alerts
     platform:
       email_configs:
-      - smarthost: smtp.sendgrid.net:587
-        from: <your-astronomer-alert-email@company.com>
-        to: <your-email@company.com>
-        auth_username: apikey
-        auth_password: SG.myapikey1234567891234abcdef_bKY
-        send_resolved: true
+        - smarthost: smtp.sendgrid.net:587
+          from: <your-astronomer-alert-email@company.com>
+          to: <your-email@company.com>
+          auth_username: apikey
+          auth_password: SG.myapikey1234567891234abcdef_bKY
+          send_resolved: true
     platformCritical:
       slack_configs:
-      - api_url: https://hooks.slack.com/services/abc12345/abcXYZ/xyz67890
-        channel: '#<your-slack-channel-name>'
-        text: |-
-          {{ range .Alerts }}{{ .Annotations.description }}
-          {{ end }}
-        title: '{{ .CommonAnnotations.summary }}'
+        - api_url: https://hooks.slack.com/services/abc12345/abcXYZ/xyz67890
+          channel: '#<your-slack-channel-name>'
+          text: |-
+            {{ range .Alerts }}{{ .Annotations.description }}
+            {{ end }}
+          title: '{{ .CommonAnnotations.summary }}'
 ```
 
 By default, the Alertmanager Helm Chart includes alert objects for platform, critical platform, and Deployment alerts. To configure a receiver for a non-default alert type, such as Deployment alerts with high severity, add that receiver to the `customRoutes` list with the appropriate `match_re` and receiver configuration values. For example:

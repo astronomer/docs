@@ -41,28 +41,35 @@ If you prefer to work with the Astro CLI, you can also create a Deployment by ru
 
 :::
 
-## Configure Resource Settings
+## Configure Deployment Resources
 
-Once you've created a Deployment with default resources, you can always configure these settings to best fit your use case. For reference, Astro supports the `AU` as the primary resource unit. In this context,
+Once you create a Deployment, you can choose to modify its resources and configurations to best fit the needs of your tasks. Specifically, you can modify these two components:
+
+- Worker(s)
+- Scheduler
+
+For reference, Astro supports the `AU` as the primary resource unit. In this context,
 
 - 1 AU = 0.1 CPU, .375 GB Memory
 - 10 AU = 1 CPU, 3.75 GB Memory
 
-Over time, these units are subject to change. Read below for guidelines on how to configure each resource component.
+Read below for guidelines on how to configure each component.
 
 ### Worker Resources
 
-In Airflow, a worker is responsible for executing tasks that are scheduled and queued by the Scheduler. On Astro, task execution is powered by the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) with [KEDA](https://www.astronomer.io/blog/the-keda-autoscaler), which enables a Deployment's worker count to auto-scale between 1 and 10 depending on real-time workload. Each worker is a Kubernetes Pod in your Astro Cluster.
+A worker is responsible for executing tasks, which are first scheduled and queued by the Scheduler. On Astro, task execution is powered by the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) with [KEDA](https://www.astronomer.io/blog/the-keda-autoscaler), which enables workers to autoscale between 1 and 10 depending on real-time workload. Each worker is a Kubernetes Pod that is hosted within a Kubernetes Node in your Astro Cluster.
 
-All Celery workers assume the same resources. If you set **Worker Resources** to 10 AU, for example, your Deployment might scale up to 3 workers using 10 AU each for a total of 30 AU (3 CPU, 11.25 GB Memory). By default, the minimum AU allocated towards workers is 10.
+To modify the resources allocated to the workers in your Deployment, specify a quantity of AUs in the **Worker Resources** field of the Cloud UI. This value determines the size of each worker in your Deployment. While the total number of workers running at any given time may change, all workers will be created with the amount of CPU and memory you specify here. If you set **Worker Resources** to 10 AU, for example, your Deployment might scale up to 3 workers using 10 AU each for a total consumption of 30 AU.
 
-The ability to set minimum and/or maximum number of workers is coming soon.
+To ensure reliability, the minimum worker size supported is 10 AU. Beyond that, the maximum worker size you can set depends on the node instance type that is configured for the Cluster in which your Deployment is hosted. If you attempt to provision a worker size that is not supported by your Cluster's instance type, you will see an error in the Cloud UI. For example, if the node instance type for a given Cluster is set to `m5.xlarge`, the maximum worker size supported for any Deployment within that Cluster is 27 AU (2.7 CPUs, 10.1 GiB memory). This limit accounts for overhead that is required for system components.
+
+For a list of supported node instance types and their corresponding worker size limits, see [AWS Resource Reference](aws-resource-reference.md#deployment-worker-size-limits). To request a different instance type for your Cluster, reach out to [Astronomer Support](https://support.astronomer.io).
 
 :::info Worker Autoscaling Logic
 
 While the **Worker Resources** setting affects the amount of computing power allocated to each worker, the number of workers running on your Deployment is based solely on the number of tasks in a queued or running state.
 
-The maximum number of tasks that a single worker can execute at once, known in Airflow as Worker Concurrency, is 16. This is currently a [system-wide setting on Astro](platform-variables.md) that cannot be changed. As soon as there are more than 16 tasks queued or running at any given time, one or more new workers is spun up to execute the additional tasks. The number of workers running on a Deployment at any given time can be calculated by the following expression, where Worker Concurrency is 16:
+The maximum number of tasks that a single worker can execute at once is 16. This value is known in Airflow as **Worker Concurrency**. Worker Concurrency is currently a [system-wide setting on Astro](platform-variables.md) that cannot be changed. As soon as there are more than 16 tasks queued or running at any given time, one or more new workers is spun up to execute the additional tasks. The number of workers running on a Deployment at any given time can be calculated by the following expression, where Worker Concurrency is 16:
 
 `[Number of Workers]= ([Queued tasks]+[Running tasks])/(Worker Concurrency)`
 

@@ -22,7 +22,7 @@ To add a user to a Workspace, you must have:
 
 :::info
 
-If your organization integrated an [external Identity Provider (IdP)](configure-idp.md) such as Okta or Azure AD, skip this step and instead invite your user to Astro via your IDP's own user management system.
+If your organization integrated an [external Identity Provider (IdP)](configure-idp.md) such as Okta or Azure AD, invite your user to Astro via your IDP's own user management system.
 
 :::
 
@@ -56,8 +56,8 @@ Once you add the user, their information will appear in the **Access** tab as a 
 If you attempt to invite a user that does not have an account on Astro, you will see an error in the Cloud UI that reads:
 
 ```
-An error has occurred
-<user-email-address> is not a platform user.
+An error occurred
+<user-email-address> is not a user in your Organization. This user must first create an account at https://cloud.astronomer.io before they can be invited to a Workspace.
 ```
 
 If you see this error:

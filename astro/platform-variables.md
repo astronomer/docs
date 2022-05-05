@@ -37,3 +37,4 @@ As part of the Astro architecture, certain environment variables have preset val
 | `AIRFLOW__WEBSERVER__COOKIE_SECURE` | Sets a `secure` flag on server cookies | `True` |
 | `AIRFLOW__WEBSERVER__INSTANCE_NAME` | Shows the name of your Deployment in the Home view of the Airflow UI | `<Deployment-Name>` |
 | `AIRFLOW__CELERY__WORKER_CONCURRENCY` | Determines how many tasks each Celery worker can run at any given time and is the basis of worker auto-scaling logic | `16` |
+| `AIRFLOW__WEBSERVER__NAVBAR_COLOR` | The color of the main navigation bar in the Airflow UI | `#4a4466` |

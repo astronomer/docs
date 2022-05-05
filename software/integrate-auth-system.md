@@ -198,7 +198,7 @@ You'll need an Auth0 account in order to set up connections with the identity ma
 
 #### Create Auth0 Tenant Domain
 
-When you log into Auht0 you'll be prompted to create a tenant domain. You can use the default or your own unique `tenant-name`. Your full tenant domain will look something like `astronomer.auth0.com`.
+When you log into Auth0 you'll be prompted to create a tenant domain. You can use the default or your own unique `tenant-name`. Your full tenant domain will look something like `astronomer.auth0.com`.
 
 > **Note:** Your full tenant domain may differ if you've created it outside of the United States.
 
