@@ -21,7 +21,7 @@ This guide provides instructions for provisioning additional Clusters within you
 
 ## Prerequisites
 
-To complete this setup, you need to have:
+To create an Astro Cluster, you need to have:
 
 - An Astronomer installation.
 - Permissions to edit trust policies in the dedicated account for Astro on your cloud.
@@ -144,7 +144,7 @@ To create a cluster in one of these regions, complete the following additional s
 
 #### Step 3: Confirm with Astronomer
 
-Astronomer will notify you once your cluster has been created. Once your Cluster is available, you should be able to [configure a new Deployment](configure-deployment.md) within that cluster.
+Astronomer will notify you once your Cluster has been created. Once your Cluster is available, you should be able to [configure a new Deployment](configure-deployment.md) within that Cluster.
 
 </TabItem>
 
@@ -152,7 +152,7 @@ Astronomer will notify you once your cluster has been created. Once your Cluster
 
 #### Step 1: Submit a Request to Astronomer
 
-To create a new Cluster in your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, you'll need to provide our team with the following information:
+To create a new Astro Cluster on GCP for your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, provide our team with the following information:
 
 - Your preferred Astro Cluster name.
 - The GCP region that you want to host your Cluster in.
@@ -160,13 +160,13 @@ To create a new Cluster in your Organization, you must first reach out to your A
 - Your preferred CloudSQL instance type.
 - Your preferred maximum node count.
 
-If not specified, Astronomer will create a Cluster with two e2-medium-4 nodes, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.
+If not specified, Astronomer will create a Cluster with `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.
 
 For information on all supported regions and configurations, see [GCP Resource Reference](resource-reference-gcp.md).  
 
 #### Step 2: Confirm with Astronomer
 
-Astronomer will notify you once your cluster has been created. Once your Cluster is available, you should be able to [configure a new Deployment](configure-deployment.md) within that cluster.
+Astronomer will notify you once your Cluster has been created. Once your Cluster is available, you should be able to [configure a new Deployment](configure-deployment.md) within that Cluster.
 
 </TabItem>
 </Tabs>
