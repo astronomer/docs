@@ -7,15 +7,9 @@ description: Request changes to an existing Astro Cluster.
 
 ## Overview
 
-Unless otherwise specified, new Clusters on Astro are created with a set of [default configurations](resource-reference-aws.md#defaults). Depending on your use case, you may decide that you want to modify an existing Cluster to run a different configuration.
+Unless otherwise specified, new Clusters on Astro are created with a set of default configurations. Depending on your use case, you may decide that you want to modify an existing Cluster to run a different configuration.
 
-For example, if you have a new set of DAGs that require significantly more CPU and Memory than your existing workloads, you may be interested in modifying your Cluster from running `m5.4xlarge` nodes to running `m5.8xlarge` nodes. You might also want to modify a Cluster's max node count from the default of 20 to better suit the amount of work you run on it.
-
-:::info
-
-Modifying an existing Cluster's configuration is currently not available on GCP, but will be available soon.
-
-:::
+For example, if you have a new set of DAGs that require significantly more CPU and Memory than your existing workloads, you may be interested in modifying a Cluster on AWS to run `m5.8xlarge` nodes instead of `m5.4xlarge` nodes. You might also want to modify a Cluster's max node count from the default of 20 to better suit the amount of work you run on it.
 
 ## Prerequisites
 
@@ -28,7 +22,7 @@ If you don't have a Cluster on Astro, follow the instructions to [Install Astro 
 
 ## Step 1: Submit a Request to Astronomer
 
-To modify an existing Cluster in your Organization, first verify that the change you want to make is supported by reading [AWS Resource Reference](resource-reference-aws.md). Then, reach out to [Astronomer Support](https://support.astronomer.io).
+To modify an existing Cluster in your Organization, first verify that the change you want to make is supported by reading the resource reference documentation for either [AWS](resource-reference-aws.md) or [GCP](resource-reference-gcp.md). Then, reach out to [Astronomer Support](https://support.astronomer.io).
 
 ## Step 2: Confirm with Astronomer
 
