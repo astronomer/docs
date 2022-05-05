@@ -151,7 +151,7 @@ Once Astronomer confirms that your Astro Cluster has been created, you are ready
 
 By default, all Deployments have [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) enabled. This means that you can grant your Deployment access to GCP services such as BigQuery via a service account that's automatically created by Astro.
 
-To grant your Deployment access to a GCP service, you need to attach an IAM policy to the Deployment's service account. For more information about configuring these service accounts, see [Connect to External Services](connect-external-services.md#workload-identity-gcp-only)
+To grant your Deployment access to a GCP service, you need to attach an IAM policy to the Deployment's service account. For more information about configuring these service accounts, see [Connect to External Services](connect-external-services.md#workload-identity-gcp-only).
 
 :::
 
