@@ -560,7 +560,7 @@ Privately hosted packages should already be built and pushed to the private repo
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install Python and OS-Level Packages
     COPY packages.txt .
-    RUN cat packages.txt | xargs apk add --no-cache
+    RUN apt-get update && cat packages.txt | xargs apt-get install -y
 
     FROM stage1 AS stage2
     # Install Python Packages
@@ -571,7 +571,7 @@ Privately hosted packages should already be built and pushed to the private repo
 
     FROM stage1 AS stage3
     # Copy requirements directory
-    COPY --from=stage2 /usr/lib/python3.9/site-packages/ /usr/lib/python3.9/site-packages/
+    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY . .
     ```
 
