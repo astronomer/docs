@@ -82,7 +82,7 @@ astro-nuclear-science-2730@astronomer-prod.iam.gserviceaccount.com
 
 :::info
 
-GCP has a 30 character limit for service account names. For Deployment namespaces which are longer than 24 characters, use only the first 24 characters for the service account name. For example, if your Google cloud project was called `astronomer-prod` and your Deployment namespace was `nuclear-scintillation-2730`, your service account would be:
+GCP has a 30 character limit for service account names. For Deployment namespaces which are longer than 24 characters, use only the first 24 characters when determining your service account name. For example, if your GCP project was called `astronomer-prod` and your Deployment namespace was `nuclear-scintillation-2730`, your service account would be:
 
 ```text
 astro-nuclear-scintillation-27@astronomer-pmm.iam.gserviceaccount.com
