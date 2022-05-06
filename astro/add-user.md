@@ -2,7 +2,7 @@
 sidebar_label: 'Add a User'
 title: 'Add a User to Astro'
 id: add-user
-description: Add a user to a either a Worksapce or an Organization on Astro.
+description: Add a user to a either a Workspace or an Organization on Astro.
 ---
 
 ## Overview
