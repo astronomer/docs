@@ -49,12 +49,13 @@ For more information about the installation process and supported configurations
 
 ### Support for Organization-Level User Invites
 
-You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI. 
+You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
 
 ### Additional Improvements
 
 - Improved the templated emails sent out for user invites with clear instructions for how to get started on Astro
 - Improved error messaging behavior on the **DAGs** and **Usage** pages of the Cloud UI
+- New user accounts must now be verified via email before they can access Astro
 
 ## April 28, 2022
 
