@@ -41,5 +41,7 @@ To add a user to an Organization:
     ![Organization user invite button](/img/docs/invite-org-user.png)
 
 3. Enter the user's email.
-4. Set an Organization role for the user. 
+4. Set an Organization role for the user.
 5. Click **Add member**.
+
+Once you add the user, their information will appear in the **People** tab as a new entry in the **Members** table. The user will then need to accept an invite to the Organization via email before they have access to it in the Cloud UI.
