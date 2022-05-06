@@ -70,7 +70,7 @@ The Data Plane is a collection of infrastructure components for Astro that run i
 
 To activate the Data Plane on your GCP project:
 
-1. Run the following commands in your Google Cloud Shell:
+1. Run the following commands in your Google Cloud Shell (if you aren't using the Google Cloud Shell, you will need to set $GOOGLE_CLOUD_PROJECT to your Project ID):
 
     ```sh
     $ gcloud services enable storage-component.googleapis.com
@@ -88,7 +88,7 @@ To activate the Data Plane on your GCP project:
     --header 'Accept: application/json'   --compressed
     ```
 
-2. Run the following commands in your Google Cloud Shell:
+2. Run the following commands in your Google Cloud Shell  (if you aren't using the Google Cloud Shell, you will need to set $GOOGLE_CLOUD_PROJECT to your Project ID:
 
     ```sh
     $ export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
