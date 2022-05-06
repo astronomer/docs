@@ -18,7 +18,7 @@ Astronomer is responsible for providing a secure and reliable managed service of
 - Managing the Control Plane and core services (Cloud UI, Cloud API, Deployment Access, and Cloud Image Repository).
 - Securing authentication and authorization to all interfaces (UI, API, and CLI).
 - Automating provisioning, scaling, and configuration management of Astro resources in the Data Plane.
-- Completing ongoing maintenance (currency, hardening, patching) and uptime monitoring of Astro [resources](resource-reference-aws.md) in the Data Plane.
+- Completing ongoing maintenance (currency, hardening, patching) and uptime monitoring of Astro resources in the Data Plane.
 - Maintaining data encryption (at rest/in flight) of Astro managed components (Control and Data Planes).
 - Consistently releasing production-ready and supported distributions of [Astro Runtime](upgrade-runtime.md) for net-new and to-be-upgraded Deployments.
 
@@ -32,7 +32,7 @@ The customer is responsible for managing certain security aspects of their Astro
 - Developing and maintaining data pipelines with security and quality coding best practices, inclusive of vulnerability management of plugins and dependencies.
 - Regularly [upgrading their Deployment(s)](upgrade-runtime.md) to the latest Astro Runtime version to take advantage of new functionality, as well as bug and security fixes.
 - [Configuring and managing Deployment resource settings](configure-deployment.md) for data pipeline workloads.
-- [Securing the network communications](install-aws.md#step-4-let-astronomer-complete-the-install) between their Data Plane and sensitive data resources.
+- [Securing the network communications](connect-external-services.md) between their Data Plane and sensitive data resources.
 
 ## Cloud Provider Security Responsibilities
 

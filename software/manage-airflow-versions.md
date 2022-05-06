@@ -141,6 +141,7 @@ For our platform's full collection of Docker Images, reference [Astronomer on Qu
 | [2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.2-onbuild          |
 | [2.2.4](https://github.com/astronomer/ap-airflow/blob/master/2.2.4/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.4-onbuild          |
 | [2.2.5](https://github.com/astronomer/ap-airflow/blob/master/2.2.5/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.5-onbuild          |
+| [2.3.0](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.3.0-onbuild          |
 
 > **Note:** In November of 2020, Astronomer migrated its Docker Registry from [Docker Hub](https://hub.docker.com/r/astronomerinc/ap-airflow) to [Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags) due to a [change](https://www.docker.com/blog/what-you-need-to-know-about-upcoming-docker-hub-rate-limiting/) in Docker Hub's rate limit policy. If you're using a legacy `astronomerinc/ap-airflow` image, replace it with a corresponding `quay.io/astronomer/ap-airflow` image to avoid rate limiting errors from DockerHub when you deploy to Astronomer (e.g. `toomanyrequests: You have reached your pull rate limit`).
 

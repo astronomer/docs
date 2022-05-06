@@ -3,8 +3,9 @@
 module.exports = {
   title: 'Astronomer Documentation',
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
-  url: 'https://docs.astronomer.io/',
+  url: 'https://docs.astronomer.io',
   baseUrl: '/',
+  trailingSlash: false,
   noIndex: false,
   onBrokenLinks: 'error',
   onBrokenMarkdownLinks: 'error',
@@ -92,8 +93,12 @@ module.exports = {
               href: 'https://cloud.astronomer.io/login',
             },
             {
-              label: 'Install Astro',
+              label: 'Install on AWS',
               to: 'astro/install-aws',
+            },
+            {
+              label: 'Install on GCP',
+              to: 'astro/install-gcp',
             },
             {
               label: 'Install the CLI',

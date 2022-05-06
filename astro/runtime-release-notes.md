@@ -11,6 +11,39 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
 
+## Astro Runtime 5.0.0
+
+- Release date: April 30, 2022
+- Airflow version: 2.3.0
+
+### Support for Airflow 2.3 & Dynamic Task Mapping
+
+Astro Runtime 5.0.0 provides support for [Airflow 2.3.0](https://airflow.apache.org/blog/airflow-2.3.0/), which is a significant open source release. The most notable new features in Airflow 2.3.0 are:
+
+- [Dynamic task mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html), which allows you to generate task instances at runtime based on changing data and input conditions.
+- A new **Grid** view in the Airflow UI that replaces the **Tree** view and provides a more intuitive way to visualize the state of your tasks.
+- The ability to [define Airflow Connections in JSON](https://airflow.apache.org/docs/apache-airflow/2.3.0/howto/connection.html#json-format-example) instead of as a Connection URI.
+- The ability to [reuse a decorated task function](https://airflow.apache.org/docs/apache-airflow/2.3.0/tutorial_taskflow_api.html#reusing-a-decorated-task) between DAGs.
+
+For more information on Airflow 2.3, see ["Apache Airflow 2.3 — Everything You Need to Know"](https://www.astronomer.io/blog/apache-airflow-2-3-everything-you-need-to-know) by Astronomer.
+
+## Astro Runtime 4.2.6
+
+- Release date: April 19, 2022
+- Airflow version: 2.2.5
+
+### Additional Improvements
+
+- Add initial support for Astro Runtime on Google Cloud Platform (GCP), including logging in Google Cloud Storage (GCS). Support for Astro on GCP is coming soon.
+
+## Astro Runtime 4.2.5
+- Release date: April 11, 2022
+- Airflow version: 2.2.5
+
+### Bug Fixes
+
+- Bug Fix: Apply a [new constraints file](https://raw.githubusercontent.com/apache/airflow/constraints-2.2.5/constraints-3.9.txt) to fix a version incompatibility error with `apache-airflow-providers-elasticsearch` that made task logs inaccessible to users in the Airflow UI. This change was required by Astronomer Software and did not impact users on Astro.
+
 ## Astro Runtime 4.2.4
 
 - Release date: April 6, 2022

@@ -59,6 +59,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 | 2.2.3                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
 | 2.2.4                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
 | 2.2.5                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.0                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
 
 For more detail on each version of Astronomer Certified and instructions on how to upgrade, refer to [Upgrade Apache Airflow](manage-airflow-versions.md).
 
