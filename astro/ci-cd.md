@@ -164,15 +164,19 @@ This setup assumes the following prerequisites:
 
 ### GitHub Actions (With Pre-Build Base Image)
 
-This workflow uses the docker/build-push-action@v2 action
-The process for consuming secrets during the build of images with dependancies in private repositories is described here: [Install Python Packages from a Private GitHub Repository](develop-project.md). Special considerations have to be made for setting up GitHub Actions workflow to build and deploy these images. This workflow uses the [docker/build-push-action@v2](https://github.com/docker/build-push-action) action to pre-build the image that is then deployed with `astrocloud`.
+The process for consuming secrets during the build of images with dependancies in private repositories is described here: [Install Python Packages from a Private GitHub Repository](develop-project.md). Special considerations have to be made for setting up GitHub Actions workflow to build and deploy these images.
+
+This setup assumes the following prerequisites:
+
+- You have completed the instructions to [Install Python Packages from a Private GitHub Repository](develop-project.md)
+- The Private Key file that was used to authenticate to GitHub is still available.
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
    - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
-   - `GITHUB_SSH_KEY` = `<your-github-ssh-key>`
+   - `GITHUB_SSH_KEY` = `<your-github-ssh-private-key>`
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -193,14 +197,20 @@ The process for consuming secrets during the build of images with dependancies i
         steps:
         - name: Check out the repo
           uses: actions/checkout@v2
-        - name: Build Dockerfile.build image
+        - name: Create SSH Socket
+          uses: webfactory/ssh-agent@v0.5.4
+          with:
+            ssh-private-key: ${{ secrets.GITHUB_SSH_KEY }}
+        - name: (Optional) Test SSH Connection - Should print hello message.
+          run: (ssh git@github.com) || true
+        - name: Build Dockerfile.build images
           uses: docker/build-push-action@v2
           with:
             tags: custom-<astro-runtime-image>
             load: true
             file: Dockerfile.build
-            secrets: |
-              "github=${{ secrets.GITHUB_SSH_KEY }}"
+            ssh: |
+              github=${{ env.SSH_AUTH_SOCK }}
         - name: Deploy to Astro
           run: |
             brew install astronomer/cloud/astrocloud
@@ -213,6 +223,22 @@ The image tag for the pre-build, `custom-<astro-runtime-image>`, must exactly ma
 
 :::
 
+In order, these steps:
+
+- Checkout the projects code.
+- Setup an SSH Socket that can be injected to the Docker build to authenticate to the private GitHub repository. [The webfactory/ssh-agent action](https://github.com/marketplace/actions/webfactory-ssh-agent) sets the environment variable `${{ env.SSH_AUTH_SOCK }}` that is consumed by the `Build Dockerfile.build images` step.
+- Use the `ssh` command to test the SSH Socket created in the previous step. This optional step will print out `Hi <github username>! You've successfully authenticated, but GitHub does not provide shell access.` if successful.
+- Build the Dockerfile.build using [docker/build-push-action](https://github.com/docker/build-push-action). This action is the equivalent of the following docker command:
+
+  ```
+  docker buildx build \
+    --tag custom-<astro-runtime-image> \
+    --load
+    --file Dockerfile.build \
+    --ssh github=<socket created by webfactory/ssh-agent> \
+  ```
+
+- Run the astrocloud cli.
 
 ### Jenkins
 
@@ -403,7 +429,7 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
     - `ASTRONOMER_KEY_ID` = `<your-key-id>`
     - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
     - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
-   
+
 2. Go to the Editor option in your project's CI/CD section and commit the following:
 
    <pre><code parentName="pre">{`---
@@ -437,13 +463,13 @@ To automate code deploys to Astro across multiple environments using [GitLab](ht
     - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
     - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
     - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
-   
+
 :::caution
 
 When you create environment variables that will be used in multiple branches, you may want to protect the branch they are being used in. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. For more information on protected branches, see [GitLab documentation](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
 
 :::
-   
+
 2. Go to the Editor option in your project's CI/CD section and commit the following:
 
    <pre><code parentName="pre">{`---
@@ -463,7 +489,7 @@ When you create environment variables that will be used in multiple branches, yo
           - ./astrocloud deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - dev
-      
+
       astro_deploy_prod:
         stage: deploy
         image: docker:latest
