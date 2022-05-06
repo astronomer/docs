@@ -83,7 +83,7 @@ After completing your initial installation, we recommend [setting up an identity
 
 :::
 
-## Step 2: Share Information with Astronomer
+## Step 2: Provide Setup Information to Astronomer
 
 For the AWS account you created as a prerequisite, provide Astronomer with:
 

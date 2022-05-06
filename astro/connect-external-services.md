@@ -11,6 +11,7 @@ Before you can run pipelines on Astro with real data, you first need to make you
 
 - Public Endpoints
 - VPC Peering
+- Workload Identity (_GCP only_)
 
 If you need to connect to a type of data service that requires a connectivity method that is not documented here, reach out to [Astronomer support](https://support.astronomer.io).
 
@@ -38,8 +39,8 @@ Each Cluster on Astro runs in a dedicated VPC. To set up private connectivity be
 To create a VPC peering connection between an Astro Cluster's VPC and a target VPC, reach out to [Astronomer support](https://support.astronomer.io) and provide the following information:
 
 - Astro Cluster ID and Name
-- AWS Account ID of the target VPC
-- AWS Region of the target VPC
+- AWS Account ID or GCP Project ID of the target VPC
+- Region of the target VPC (_AWS only_)
 - VPC ID of the target VPC
 - CIDR of the target VPC
 
@@ -47,10 +48,36 @@ From there, Astronomer will initiate a peering request. To connect successfully,
 
 Once peering is set up, the owner of the target VPC can expect to continue to work with our team to update the routing tables of both VPCs to direct traffic to each other.
 
-### DNS Considerations with VPC Peering
+### DNS Considerations with VPC Peering (_AWS Only_)
 
 To resolve DNS hostnames from your target VPC, your Cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled via AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
 
 If your target VPC resolves DNS hostnames via **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the Data Plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting [Astronomer support](https://support.astronomer.io).
+
+## Workload Identity (_GCP Only_)
+
+[Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) is recommended by Google as the best way for data pipelines running on GCP to access Google Cloud services in a secure and manageable way. All Astro Clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Kubernetes service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
+
+To grant a Deployment on Astro access to GCP services such as BigQuery, you must:
+
+- Go to the Google Cloud project in which your external data service is hosted 
+- Add the Kubernetes service account for your Astro Deployment to the principal of that Google Cloud project
+- Bind the service account to a role that has access to your external data service
+
+Kubernetes service accounts for Astro Deployments are formatted as follows:
+
+```text
+astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com
+```
+
+To find the namespace of your Deployment, go to your Deployment page in the Cloud UI and copy paste the value in the **Namespace** field.
+
+For a Google Cloud project called `astronomer-prod-deployment` and a Deployment namespace called `geometrical-gyroscope-9932`, for example, the service account for the Deployment would be:
+
+```text
+astro-geometrical-gyroscope-9932@astronomer-prod-deployment.iam.gserviceaccount.com
+```
+
+For more information about configuring service accounts on GCP, see [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).

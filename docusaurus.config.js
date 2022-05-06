@@ -93,8 +93,12 @@ module.exports = {
               href: 'https://cloud.astronomer.io/login',
             },
             {
-              label: 'Install Astro',
+              label: 'Install on AWS',
               to: 'astro/install-aws',
+            },
+            {
+              label: 'Install on GCP',
+              to: 'astro/install-gcp',
             },
             {
               label: 'Install the CLI',
