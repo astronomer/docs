@@ -66,7 +66,7 @@ To grant a Deployment on Astro access to GCP services such as BigQuery, you must
 - Add the Kubernetes service account for your Astro Deployment to the principal of that Google Cloud project
 - Bind the service account to a role that has access to your external data service
 
-Kubernetes service accounts for Astro Deployments are formatted as follows:
+Kubernetes service accounts for Astro Deployments are formatted as follows: 
 
 ```text
 astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com
@@ -74,10 +74,10 @@ astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com
 
 To find the namespace of your Deployment, go to your Deployment page in the Cloud UI and copy paste the value in the **Namespace** field.
 
-For a Google Cloud project called `astronomer-prod-deployment` and a Deployment namespace called `geometrical-gyroscope-9932`, for example, the service account for the Deployment would be:
+For a Google Cloud project called `astronomer-prod` and a Deployment namespace called `nuclear-science-2730`, for example, the service account for the Deployment would be:
 
 ```text
-astro-geometrical-gyroscope-9932@astronomer-prod-deployment.iam.gserviceaccount.com
+astro-nuclear-science-2730@astronomer-prod.iam.gserviceaccount.com
 ```
 
 For more information about configuring service accounts on GCP, see [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
