@@ -18,28 +18,43 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ## May 5, 2022
 
-### Gain New Insights into Your Data Pipelines with Data Lineage
+### Data Lineage Is Now Available on Astro
 
-We are excited to introduce data lineage functionality to Astro. Using the new **Lineage** tab in the Cloud UI, you can now monitor your Deployments based on the real-time flow of data through your pipelines.
+We are excited to introduce data lineage to Astro. You now have access to a new **Lineage** view in the Cloud UI that visualizes data movement across datasets in your Organization based on integrations with Airflow, Apache Spark, dbt, Great Expectations, and more.
 
-Data lineage in Astro is a significant milestone towards comprehensive observability of your data. Using OpenLineage, Astro automatically traces data and visualizes it in a way that traditional metrics can't. Lineage graphs show information about not just about your Airflow tasks, but also the datasets they interact with and the external workloads they trigger.
+Built around the [OpenLineage](https://openlineage.io/) open source standard, the data lineage graphs and metadata in the Cloud UI can help you better understand your ecosystem and diagnose issues that may otherwise be difficult to identify.
 
 ![Lineage graph example](/img/release-notes/lineage-example.png)
 
-Use the following new docs to help you get started with understanding, configuring, and using data lineage features in Astro:
+For example, if an Airflow task failed because the schema of a database changed, you might go to the Lineage page on Astro to determine which job caused that change and which downstream tasks failed because of it.
+
+To learn more about data lineage and how you can configure it on Astro, see:
 
 - [Data Lineage Concepts](data-lineage-concepts.md)
-- [Set Up Data Lineage](set-up-data-lineage.md)
-- [Data Lineage UI](data-lineage.md)
+- [Enable Data Lineage for External Services](set-up-data-lineage.md)
+- [Data Lineage on Astro](data-lineage.md)
 - [Data Lineage Support and Compatibility](data-lineage-support-and-compatibility.md)
 
-### Astro is Now Available on Google Cloud Platform
+:::info
 
-Astronomer now officially supports installations of Astro on Google Cloud Platform. For more information about the installation process and current support, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp.md).
+This functionality is still early access and under active development. If you have any questions or feedback about this feature, reach out to [Astronomer Support](https://support.astronomer.io).
+
+:::
+
+### Support for Astro on Google Cloud Platform (GCP)
+
+Astro now officially supports Astro Clusters on Google Cloud Platform (GCP). This includes support for an initial set of GCP regions as well as [Workload Identity](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) for secure connection to other GCP data services in your ecosystem.
+
+For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp.md).
+
+### Support for Organization-Level User Invites
+
+You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI. 
 
 ### Additional Improvements
 
-- Improved error messaging behavior on the **DAGs** and **Usage** pages of the Cloud UI.
+- Improved the templated emails sent out for user invites with clear instructions for how to get started on Astro
+- Improved error messaging behavior on the **DAGs** and **Usage** pages of the Cloud UI
 
 ## April 28, 2022
 
