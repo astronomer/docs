@@ -235,7 +235,7 @@ In order, these steps:
     --tag custom-<astro-runtime-image> \
     --load
     --file Dockerfile.build \
-    --ssh github=<socket created by webfactory/ssh-agent> \
+    --ssh github=<socket created by webfactory/ssh-agent> .
   ```
 
 - Run the astrocloud cli.
