@@ -538,10 +538,10 @@ Privately hosted packages should already be built and pushed to the private repo
 
 1. In your Astro project, create a duplicate of your `Dockerfile` named `Dockerfile.build`.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 4.2.10, your `FROM` line would be:
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
    ```text
-   quay.io/astronomer/astro-runtime:4.2.10 AS stage1
+   quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
    ```
 
   :::caution
@@ -590,10 +590,10 @@ Privately hosted packages should already be built and pushed to the private repo
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-<airflow-image> .
     ```
 
-    For example, if you have `quay.io/astronomer/astro-runtime:4.2.0` in your `Dockerfile.build`, this command would be:
+    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0` in your `Dockerfile.build`, this command would be:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-4.2.0 .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-5.0.0 .
     ```
 
 
@@ -603,10 +603,10 @@ Privately hosted packages should already be built and pushed to the private repo
    FROM custom-<airflow-image>
    ```
 
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:4.2.0`, this line would be:
+   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0`, this line would be:
 
    ```
-   FROM custom-astro-runtime:4.2.0
+   FROM custom-astro-runtime:5.0.0
    ```
 
    Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
