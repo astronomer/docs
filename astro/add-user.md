@@ -29,7 +29,7 @@ To add a user to a Workspace:
 4. Set a Workspace role for the user. For a list of available roles and their permissions, see [Workspace Roles](user-permissions.md#workspace-roles)
 5. Click **Add member**.
 
-Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user will then need to accept an invite to the Workspace via email before they have access to it in the Cloud UI.
+Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Workspace via email and either create an Astro account or log in before they can access the Workspace.
 
 ## Add a User to an Organization
 
@@ -44,4 +44,4 @@ To add a user to an Organization:
 4. Set an Organization role for the user.
 5. Click **Add member**.
 
-Once you add the user, their information will appear in the **People** tab as a new entry in the **Members** table. The user will then need to accept an invite to the Organization via email before they have access to it in the Cloud UI.
+Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Organization via email and either create an Astro account or log in before they can access the Organization.
