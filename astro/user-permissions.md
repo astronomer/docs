@@ -21,7 +21,7 @@ An Organization role grants a user some level of access to an Astro Organization
 | View Organization details and user membership       | ✔️                      | ✔️                             | ✔️                     |
 | Update Organization billing information and settings          |                         | ✔️                             | ✔️                     |
 | Update Organization user membership |                         |                                | ✔️                     |
-| Workspace Admin permissions to all Workspaces       |                       |                              | ✔️                     |
+| Invite new user to Organization       |                       |                              | ✔️                     |
 
 :::info Default Roles in New Organizations
 
@@ -30,12 +30,6 @@ The first 3 users that log in to a new Organization will automatically become Or
 :::
 
 ### Update Organization Roles
-
-:::info
-
-Currently, you cannot invite users directly to an Organization. To add a user to an Organization, add them through a Workspace invite as described in [Add User](add-user.md). Organization invites are coming soon.
-
-:::
 
 To update a user's Organization role:
 
@@ -55,6 +49,6 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Update Deployment settings           |                      | ✔️                   | ✔️                  |
 | Update user roles and information    |                      |                      | ✔️                  |
 
-### Set Workspace Roles
+### Update Workspace Roles
 
 Workspace Admins can set user roles via the **Access** tab in the Cloud UI. For more information, see [Manage Workspaces](manage-workspaces.md#manage-workspace-users).
