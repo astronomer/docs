@@ -39,7 +39,7 @@ Finish the installation and start the deployment DAGs. See [CLI Quickstart Guide
 
 Use the following instructions to install a Windows adapted version of the Astronomer CLI.
 
-### Step 1. Prerequisite Confirmation
+### Prerequisites
 
 Make sure you have the following installed:
 
