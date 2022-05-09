@@ -54,7 +54,6 @@ If you have any issues with Docker, see [Docker's Troubleshooting Guide for Wind
 
 ### Step 3. Download the Astronomer CLI
 
-Currently, Astronomer on Windows outside of WSL is only supported by Astronomer CLI versions 0.28 and later.
 
 You can download the latest version of the CLI [here](https://github.com/astronomer/astro-cli/releases/). Select an asset that includes windows_386.zip in the filepath.
 
