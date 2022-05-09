@@ -19,7 +19,7 @@ Before you start the setup and configuration process for the Astronomer CLI on t
  - You have [WSL enabled](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
  - You're running Windows 10 version 2004 or later (Build 19041 or later) or Windows 11
 
-**Note:** Astronomer recommends using Ubuntu.
+**Note:** Astronomer recommends using Ubuntu as your linux distribution for WSL.
 
 The complete WSL installation guide is available here: [Install WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
