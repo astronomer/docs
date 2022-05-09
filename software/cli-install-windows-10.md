@@ -7,8 +7,8 @@ description: Install the Windows-based CLI or the Unix-based CLI a Windows Subsy
 
 To install the Astronomer CLI on Windows, you have the following options:
 
-- Install the Unix-based CLI on Windows Subsystem for Linux (WSL)
-- Install the Windows-based CLI
+- Install the Unix-based CLI on Windows Subsystem for Linux (WSL).
+- Install the Windows-based CLI.
 
 > **Note:** Both options require Windows 10 or later.
 
