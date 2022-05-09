@@ -55,7 +55,7 @@ If you have any issues with Docker, see [Docker's Troubleshooting Guide for Wind
 ### Step 3. Download the Astronomer CLI
 
 
-You can download the latest version of the CLI [here](https://github.com/astronomer/astro-cli/releases/). Select an asset that includes windows_386.zip in the filepath.
+You can download the latest version of the CLI on the [Astronomer GitHub](https://github.com/astronomer/astro-cli/releases/). Select an asset that includes windows_386.zip in the filepath.
 
 ### Step 4. Extract the contents
 
