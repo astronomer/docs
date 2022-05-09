@@ -14,7 +14,7 @@ To install the Astronomer CLI on Windows, you have the following options:
 
 ## Astronomer CLI on Windows Subsystem for Linux
 
-Before you start the setup and configuration process for the Astronomer CLI on the WSL  make sure:
+Before you start the setup and configuration process for the Astronomer CLI on the WSL, make sure:
  - You're running the bash terminal
  - You have [WSL enabled](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
  - You're running Windows 10 version 2004 or later (Build 19041 or later) or Windows 11
