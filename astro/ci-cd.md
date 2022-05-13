@@ -5,6 +5,8 @@ id: ci-cd
 description: Create a CI/CD pipeline that triggers a deploy to Astro based on changes to your Airflow DAGs.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
 ## Overview
@@ -62,6 +64,15 @@ brew install astronomer/cloud/astrocloud@<version-number>
 
 ### GitHub Actions
 
+<Tabs
+    defaultValue="standard"
+    values={[
+        {label: 'Standard', value: 'standard'},
+        {label: 'Multi-branch', value: 'multibranch'},
+        {label: 'Custom Image', value: 'custom'},
+    ]}>
+<TabItem value="standard">
+
 To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
@@ -97,7 +108,9 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
-### GitHub Actions (Multiple Branches)
+</TabItem>
+
+<TabItem value="multibranch">
 
 The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline makes can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
 
@@ -162,14 +175,16 @@ This setup assumes the following prerequisites:
             astrocloud deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
-### GitHub Actions (With Pre-Build Base Image)
+</TabItem>
+
+<TabItem value="custom">
 
 The process for consuming secrets during the build of images with dependancies in private repositories is described here: [Install Python Packages from a Private GitHub Repository](develop-project.md). Special considerations have to be made for setting up GitHub Actions workflow to build and deploy these images.
 
 This setup assumes the following prerequisites:
 
-- You have completed the instructions to [Install Python Packages from a Private GitHub Repository](develop-project.md)
-- The Private Key file that was used to authenticate to GitHub is still available.
+- You have completed the instructions to [Install Python Packages from a Private GitHub Repository](develop-project.md#install-python-packages-from-a-private-github-repository)
+- You have access to the private key file used to authenticate to GitHub.
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
@@ -223,22 +238,8 @@ The image tag for the pre-build, `custom-<astro-runtime-image>`, must exactly ma
 
 :::
 
-In order, these steps:
-
-- Checkout the projects code.
-- Setup an SSH Socket that can be injected to the Docker build to authenticate to the private GitHub repository. [The webfactory/ssh-agent action](https://github.com/marketplace/actions/webfactory-ssh-agent) sets the environment variable `${{ env.SSH_AUTH_SOCK }}` that is consumed by the `Build Dockerfile.build images` step.
-- Use the `ssh` command to test the SSH Socket created in the previous step. This optional step will print out `Hi <github username>! You've successfully authenticated, but GitHub does not provide shell access.` if successful.
-- Build the Dockerfile.build using [docker/build-push-action](https://github.com/docker/build-push-action). This action is the equivalent of the following docker command:
-
-  ```
-  docker buildx build \
-    --tag custom-<astro-runtime-image> \
-    --load
-    --file Dockerfile.build \
-    --ssh github=<socket created by webfactory/ssh-agent> .
-  ```
-
-- Run the astrocloud cli.
+</TabItem>
+</Tabs>
 
 ### Jenkins
 
