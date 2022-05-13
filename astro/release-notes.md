@@ -117,7 +117,7 @@ Starting on March 31st and continuing over the next couple of weeks, all Astro D
 A few additional notes about this upgrade:
 
 - You can ignore any lineage logs that indicate an error or failed process, such as the first line in the example logs above. These logs will more accurately reflect the state of your lineage functionality once lineage features are launched on Astro.
-- Deployments on Runtime 4.2.0+ will be updated to emit data lineage events only after you [push code](deploy-code). Until you do so, this change will not be applied.
+- Deployments on Runtime 4.2.0+ will be updated to emit data lineage events only after you [push code](deploy-code.md). Until you do so, this change will not be applied.
 - Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
 - When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
@@ -258,7 +258,7 @@ You can view key metrics about recent DAG runs through the new **DAGs** page in 
 
 ![DAGs page](/img/docs/dags-page.png)
 
-For more information about the **DAGs** page, see [Deployment Metrics](deployment-metrics#dag-runs).
+For more information about the **DAGs** page, see [Deployment Metrics](deployment-metrics.md#dag-runs).
 
 ### Additional Improvements
 
