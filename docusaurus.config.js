@@ -230,6 +230,12 @@ module.exports = {
         id: 'software',
         changefreq: 'daily',
         priority: 0.3,
+        ignorePatterns: [
+          '/0.16/',
+          '/0.23/',
+          '/0.25/',
+          '/0.26/',
+          '/0.27/',]
       },
     ],
   ],
