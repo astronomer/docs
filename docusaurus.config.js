@@ -5,7 +5,7 @@ module.exports = {
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
   url: 'https://docs.astronomer.io',
   baseUrl: '/',
-  trailingSlash: false,
+  trailingSlash: true,
   noIndex: false,
   onBrokenLinks: 'error',
   onBrokenMarkdownLinks: 'error',
@@ -14,7 +14,9 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
     image: 'img/meta.png',
-    autoCollapseSidebarCategories: true,
+    sidebar: {
+      autoCollapseSidebarCategories: true,
+    },
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
       indexName: 'published-docs',
@@ -195,8 +197,8 @@ module.exports = {
           customCss: require.resolve('./src/css/custom.css'),
         },
         sitemap: {
-          changefreq: 'hourly',
-          priority: 0.5,
+          changefreq: 'daily',
+          priority: 0.7,
         },
       },
     ],
@@ -220,6 +222,21 @@ module.exports = {
           banner: 'none',
          },
        },
+      },
+    ],
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+        id: 'software',
+        changefreq: 'daily',
+        priority: 0.3,
+        ignorePatterns: [
+          '/0.16/**',
+          '/0.23/**',
+          '/0.25/**',
+          '/0.26/**',
+          '/0.27/**',
+          '/0.16/**']
       },
     ],
   ],
