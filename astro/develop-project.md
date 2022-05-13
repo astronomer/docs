@@ -373,7 +373,6 @@ be injected before the ONBUILD instructions are executed.
     values={[
         {label: 'Private GitHub Repo', value: 'github'},
         {label: 'Private PyPi Index', value: 'pypi'},
-        {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="github">
 
