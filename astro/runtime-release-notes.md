@@ -11,6 +11,27 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
 
+## Astro Runtime 5.0.1
+
+- Rlease date: May 9, 2022
+- Airflow version: 2.3.0
+
+### Astronomer Providers 1.2.0
+
+Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#110-2022-03-23)). This release includes 5 new [deferrable operators](deferrable-operators.md):
+
+    - `DataprocSubmitJobOperatorAsync`
+    - `EmrContainerSensorAsync`
+    - `EmrStepSensorAsync`
+    - `EmrJobFlowSensorAsync`
+    - `LivyOperatorAsync`
+
+To access the source code of this package, visit the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
+
+### Additional Improvements
+
+- Bumped the [`openlineage-airflow` provider package](https://openlineage.io/integration/apache-airflow/) to `v0.8.1`
+
 ## Astro Runtime 5.0.0
 
 - Release date: April 30, 2022
