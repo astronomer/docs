@@ -115,7 +115,7 @@ If not specified, Astronomer will create a Cluster with the following resources 
 - A Subnet CIDR of `172.20.0.0/19`.
 - A Pod CIDR of `172.21.0.0/19`.
 - A Service Address CIDR of `172.22.0.0/19`.
-- A VPC Peering CIDR of `172.23.0.0/9`.
+- A VPC Peering CIDR of `172.23.0.0/19`.
 
 For information on all supported regions and configurations, see [GCP Resource Reference](resource-reference-gcp.md).  
 
