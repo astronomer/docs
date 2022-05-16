@@ -85,6 +85,8 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
     - To add a new email address, click **Create Identity**, add the email address, and then click **Create Identity**.
     
     For email alerts, Astronomer recommends using one email address as the sender and a second email address as the recipient. All email addresses must be verified. 
+    
+    See  [Creating an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#:~:text=of%20those%20Regions.-,Creating%20an%20email%20address%20identity,-Complete%20the%20following) and  [Verifying an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#:~:text=address%20identity.-,Verifying%20an%20email%20address%20identity,-After%20you%E2%80%99ve%20created).
 
 4. Click **Account dashboard**.
 
