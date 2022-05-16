@@ -103,7 +103,7 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
    
 8. In the Environment Variables area, click **Edit Variables** and add these variables:
     - ENV AIRFLOW__SMTP__SMTP_HOST: Enter the value you copied in step 5
-    - ENV AIRFLOW__SMTP__SMTP_STARTTLS: Enter True
+    - `ENV AIRFLOW__SMTP__SMTP_STARTTLS`: Enter `True`
     - ENV AIRFLOW__SMTP__SMTP_SSL: Enter False
     - ENV AIRFLOW__SMTP__SMTP_USER: Enter the value you copied in step 6
     - ENV AIRFLOW__SMTP__SMTP_PASSWORD: Enter the value you copied in step 6
