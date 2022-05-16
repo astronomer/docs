@@ -231,11 +231,11 @@ module.exports = {
         changefreq: 'daily',
         priority: 0.3,
         ignorePatterns: [
-          '/software/0.16/**',
-          '/software/0.23/**',
-          '/software/0.25/**',
-          '/software/0.26/**',
-          '/software/0.27/**',]
+          '/software_versioned_docs/version-0.16/**',
+          '/software_versioned_docs/version-0.23/**',
+          '/software_versioned_docs/version-0.25/**',
+          '/software_versioned_docs/version-0.26/**',
+          '/software_versioned_docs/version-0.27/**',]
       },
     ],
   ],
