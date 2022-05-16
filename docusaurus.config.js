@@ -230,12 +230,6 @@ module.exports = {
         id: 'software',
         changefreq: 'daily',
         priority: 0.3,
-        ignorePatterns: [
-          '/software_versioned_docs/version-0.16/**',
-          '/software_versioned_docs/version-0.23/**',
-          '/software_versioned_docs/version-0.25/**',
-          '/software_versioned_docs/version-0.26/**',
-          '/software_versioned_docs/version-0.27/**',]
       },
     ],
   ],
