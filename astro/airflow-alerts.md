@@ -99,17 +99,17 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
     - Click **Download Credentials** or copy them and store them in a safe place.
     - Click **Close Window**.
 
-7. Log in to the Astronomer Cloud UI, click **Deployments**, and then select an existing Airflow deployment.
+7. Log in to the Cloud UI, click **Deployments**, and then select an existing Airflow deployment.
    
 8. In the Environment Variables area, click **Edit Variables** and add these variables:
-    - ENV AIRFLOW__SMTP__SMTP_HOST: Enter the value you copied in step 5
-    - `ENV AIRFLOW__SMTP__SMTP_STARTTLS`: Enter `True`
-    - ENV AIRFLOW__SMTP__SMTP_SSL: Enter False
-    - ENV AIRFLOW__SMTP__SMTP_USER: Enter the value you copied in step 6
-    - ENV AIRFLOW__SMTP__SMTP_PASSWORD: Enter the value you copied in step 6
-    - ENV AIRFLOW__SMTP__SMTP_PORT: Enter 587
-    - ENV AIRFLOW__SMTP__SMTP_MAIL_FROM: Enter your from email 
-    - ENV AIRFLOW__EMAIL__EMAIL_BACKEND: Enter airflow.utils.email.send_email_smtp
+    - `ENV AIRFLOW__SMTP__SMTP_HOST`: Enter the value you copied in step 5
+    - `ENV AIRFLOW__SMTP__SMTP_STARTTLS`: Enter `True`.
+    - `ENV AIRFLOW__SMTP__SMTP_SSL`: Enter `False`.
+    - `ENV AIRFLOW__SMTP__SMTP_USER`: Enter the value you copied in step 6.
+    - `ENV AIRFLOW__SMTP__SMTP_PASSWORD`: Enter the value you copied in step 6.
+    - `ENV AIRFLOW__SMTP__SMTP_PORT`: Enter `587`.
+    - `ENV AIRFLOW__SMTP__SMTP_MAIL_FROM`: Enter your from email. 
+    - `ENV AIRFLOW__EMAIL__EMAIL_BACKEND`: Enter `airflow.utils.email.send_email_smtp`.
 
     See [Set Environment Variables on Astro](https://docs.astronomer.io/astro/environment-variables).
 
