@@ -18,7 +18,7 @@ For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime
 
 ### Astronomer Providers 1.2.0
 
-Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#110-2022-03-23)). This release includes 5 new [deferrable operators](deferrable-operators.md):
+Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/)). This release includes 5 new [deferrable operators](deferrable-operators.md):
 
     - `DataprocSubmitJobOperatorAsync`
     - `EmrContainerSensorAsync`
