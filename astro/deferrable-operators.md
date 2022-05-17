@@ -70,4 +70,4 @@ Some additional notes about using deferrable operators:
 
 In addition to the deferrable operators that are published by the Apache Airflow open source project, Astronomer maintains [`astronomer-providers`](https://github.com/astronomer/astronomer-providers), an open source collection of deferrable operators bundled as a provider package. This package is installed on Astro Runtime by default and includes deferrable versions of popular operators such as the `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 
-For a complete list of available deferrable operators in `astronomer-providers` , see the [`astronomer-providers` CHANGELOG](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#100-2022-03-01). This page includes both import statements and example DAGs for each available operator.
+For a complete list of available deferrable operators in `astronomer-providers` , see the [`astronomer-providers` CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/). This page includes both import statements and example DAGs for each available operator.
