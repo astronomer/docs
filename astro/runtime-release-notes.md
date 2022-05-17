@@ -30,6 +30,7 @@ To access the source code of this package, visit the [Astronomer Providers GitHu
 
 ### Additional Improvements
 
+- Improved performance when upgrading to Astro Runtime 5.0.x
 - Bumped the [`openlineage-airflow` dependency](https://openlineage.io/integration/apache-airflow/) to `v0.8.1`
 
 ## Astro Runtime 5.0.0
