@@ -107,7 +107,7 @@ Once you've activated your Data Plane, provide Astronomer with:
 - Your preferred maximum node count.
 - (_Optional_) Your custom CIDR ranges for connecting to Astronomer's services.
 
-If you don't provide information that is specific to your organization, a Cluster with the default configurations is created in `us-central1`. For more infomation about the default configurations, see [GCP Resource Reference](resource-reference-gcp.md).  
+If you don't specify your organization's preferred configurations, Astronomer will create a Cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP Resource Reference](resource-reference-gcp.md).
 
 :::info
 
