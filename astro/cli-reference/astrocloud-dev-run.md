@@ -18,7 +18,7 @@ astrocloud dev run <airflow-command>
 ## Examples
 
 ```sh
-$ astrocloud dev run create_user -r Admin -u admin -e admin@example.com -f admin -l user -p admin
+$ astrocloud dev run users create -r Admin -u username -e email@example.com -f YourFirstName -l YourLastName -p admin
 # Run the Airflow CLI's `create_user` command in your local Airflow environment
 ```
 
