@@ -552,11 +552,11 @@ Ensure that the name of the package on the private repository does not clash wit
    quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
    ```
 
-  :::caution
+   :::info
 
-  If you use a non-`base` distribution of Runtime, you need to replace it with the more customizable `base` distribution before building your project from a private registry. For more information, see [Distributions](runtime-version-lifecycle-policy.md#distribution)
+   If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image as demonstrated in the example above. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
 
-  :::
+   :::
 
 3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
 
