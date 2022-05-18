@@ -262,7 +262,7 @@ OR
 
 :::info
 
-The image tag for the pre-build, `custom-<astro-runtime-image>`, must exactly match the image tag in the FROM line of `Dockerfile`.
+The image tag for the image built with Dockerfile.build, `custom-<astro-runtime-image>`, must exactly match the image tag in the FROM line of `Dockerfile`.
 
 :::
 
