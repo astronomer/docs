@@ -523,7 +523,7 @@ Your Astro project can now utilize Python packages from your private GitHub repo
 
 #### Install Python Packages from a Private PyPI Index
 
-This topic provides instructions for building your Astro project using Python packages from a private PyPI index. In some organizations, python packages will be prebuilt and pushed to a hosted private pip server (such as pypiserver, or Nexus Repository) or managed service (such as PackageCloud or Gitlab). Similar to [installing from a private GitHub Repository](Install Python Packages from a Private GitHub Repository), builds that require packages from a private PyPI index must be done using a multi-stage build.
+This topic provides instructions for building your Astro project using Python packages from a private PyPI index. In some organizations, python packages are prebuilt and pushed to a hosted private pip server (such as pypiserver or Nexus Repository) or managed service (such as PackageCloud or Gitlab). At a high level, this setup requires specifying your private packages in `requirements.txt`, creating a custom Docker image that changes where pip looks for packages, and building your project with this Docker image.
 
 #### Prerequisites
 
