@@ -590,7 +590,6 @@ Privately hosted packages should already be built and pushed to the private repo
     - Add the environment variable `PIP_EXTRA_INDEX_URL` to instruct pip on where to look for non-public packages.
     - Install public and private Python-level packages from your `requirements.txt` file.
 
-
 #### Step 3: Build a Custom Docker Image
 
 1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to substitute in the pip repository and associated credentials:
@@ -618,7 +617,7 @@ Privately hosted packages should already be built and pushed to the private repo
    FROM custom-astro-runtime:5.0.0
    ```
 
-   Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
+   Your Astro project can now utilize Python packages from your private PyPi index. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
 
 </TabItem>
 </Tabs>
