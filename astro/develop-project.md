@@ -363,9 +363,7 @@ my_project
 
 Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
-The image usually used to build (quay.io/astronomer/astro-runtime:4.2.10) contains [ONBUILD](https://docs.docker.com/engine/reference/builder/#onbuild) instructions that will automatically
-install the dependancies from `packages.txt` and `requirements.txt`. For packages to be installed from private sources, an *unpacked* version of the image must be used to allow credentials to
-be injected before the ONBUILD instructions are executed.
+Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image. 
 
 <Tabs
     defaultValue="github"
