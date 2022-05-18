@@ -534,7 +534,7 @@ To build from a private repository, you need:
 
 #### Step 1: Add privately hosted packages to requirements.txt
 
-Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
+Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](https://pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
 
 :::caution
 

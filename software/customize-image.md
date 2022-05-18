@@ -353,7 +353,7 @@ This example assumes that the name of each of your Python packages is identical 
   :::tip
 
   This example `Dockerfile.build` assumes Python 3.9, but some versions of Astronomer Certified may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
-  
+
   To identify the Python version in your AC image, run:
 
      ```
@@ -421,7 +421,7 @@ To build from a private repository, you need:
 
 #### Step 1: Add privately hosted packages to requirements.txt
 
-Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
+Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](https://pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
 
 :::caution
 
