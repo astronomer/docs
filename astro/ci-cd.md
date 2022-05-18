@@ -179,24 +179,27 @@ This setup assumes the following prerequisites:
 
 <TabItem value="custom">
 
-The process for consuming secrets during the build of images with dependancies in private repositories is described here: [Install Python Packages from a Private GitHub Repository](develop-project.md). Special considerations have to be made for setting up GitHub Actions workflow to build and deploy these images.
+When building images that consume secrets or buildtime arguments, special considerations have to be made for setting up GitHub Actions workflow. These images are build in two stages to allow extra options to be set during the first build. Some examples of custom images that are built in two stages can be found in [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources).  to build and deploy these images.
 
 This setup assumes the following prerequisites:
 
-- You have completed the instructions to [Install Python Packages from a Private GitHub Repository](develop-project.md#install-python-packages-from-a-private-github-repository)
-- You have access to the private key file used to authenticate to GitHub.
+- You have completed the instructions to [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources) and can build the image locally.
+- If installing from a private GitHub Repo, you have access to the private key file used to authenticate to GitHub.
+- If installing from a private PyPi Index, you have a username and password to authenticate to the index.
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
-   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-   - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
-   - `GITHUB_SSH_KEY` = `<your-github-ssh-private-key>`
+  - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+  - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+  - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
+  - `GITHUB_SSH_KEY` = `<your-github-ssh-private-key>`
+  OR
+  - `PIP_EXTRA_INDEX_URL` = `https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name>`
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
-    name: Astronomer CI - Pre-build base image
+    name: Astronomer CI - Custom base image
 
     on:
       push:
@@ -212,13 +215,17 @@ This setup assumes the following prerequisites:
         steps:
         - name: Check out the repo
           uses: actions/checkout@v2
+    ```
+
+    If installing from a private GitHub Repo, add the following steps:
+    ```yaml
         - name: Create SSH Socket
           uses: webfactory/ssh-agent@v0.5.4
           with:
             ssh-private-key: ${{ secrets.GITHUB_SSH_KEY }}
         - name: (Optional) Test SSH Connection - Should print hello message.
           run: (ssh git@github.com) || true
-        - name: Build Dockerfile.build images
+        - name: Build Dockerfile.build image
           uses: docker/build-push-action@v2
           with:
             tags: custom-<astro-runtime-image>
@@ -232,9 +239,25 @@ This setup assumes the following prerequisites:
             astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
+    If installing from a private PyPi Index, add the following steps:
+    ```yaml
+        - name: Build Dockerfile.build image
+          uses: docker/build-push-action@v2
+          with:
+            tags: custom-<astro-runtime-image>
+            load: true
+            file: Dockerfile.build
+            build-args: |
+              PIP_EXTRA_INDEX_URL=${{ secrets.PIP_EXTRA_INDEX_URL }}
+        - name: Deploy to Astro
+          run: |
+            brew install astronomer/cloud/astrocloud
+            astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+    ```
+
 :::info
 
-The image tag for the pre-build, `custom-<astro-runtime-image>`, must exactly match the image tag in the FROM line of Dockerfile.
+The image tag for the pre-build, `custom-<astro-runtime-image>`, must exactly match the image tag in the FROM line of `Dockerfile`.
 
 :::
 
