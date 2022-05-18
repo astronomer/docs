@@ -363,7 +363,7 @@ my_project
 
 Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
-Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image. 
+Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image.
 
 <Tabs
     defaultValue="github"
@@ -536,12 +536,11 @@ To build from a private repository, you need:
 
 Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
 
+:::caution
 
-  :::caution
+Ensure that the name of the package on the private repository does not clash with any existing python packages. The order that pip will search indices might produce unexpected results.
 
-  Ensure that the name of the package on the private repository does not clash with any existing python packages. The order that pip will search indices might produce unexpected results.
-
-  :::
+:::
 
 #### Step 2: Create Dockerfile.build
 
