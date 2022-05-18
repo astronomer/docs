@@ -63,7 +63,7 @@ To modify the resources allocated to the workers in your Deployment, specify a q
 
 To ensure reliability, the minimum worker size supported is 10 AU. Beyond that, the maximum worker size you can set depends on the node instance type that is configured for the Cluster in which your Deployment is hosted. If you attempt to provision a worker size that is not supported by your Cluster's instance type, you will see an error in the Cloud UI. For example, if the node instance type for a given Cluster is set to `m5.xlarge`, the maximum worker size supported for any Deployment within that Cluster is 27 AU (2.7 CPUs, 10.1 GiB memory). This limit accounts for overhead that is required for system components.
 
-For a list of supported node instance types and their corresponding worker size limits, see [AWS Resource Reference](aws-resource-reference.md#deployment-worker-size-limits). To request a different instance type for your Cluster, reach out to [Astronomer Support](https://support.astronomer.io).
+For a list of supported node instance types and their corresponding worker size limits, see [AWS Resource Reference](resource-reference-aws.md#deployment-worker-size-limits). To request a different instance type for your Cluster, reach out to [Astronomer Support](https://support.astronomer.io).
 
 :::info Worker Autoscaling Logic
 

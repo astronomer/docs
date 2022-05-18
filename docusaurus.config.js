@@ -14,7 +14,9 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
     image: 'img/meta.png',
-    autoCollapseSidebarCategories: true,
+    sidebar: {
+      autoCollapseSidebarCategories: true,
+    },
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
       indexName: 'published-docs',
@@ -32,6 +34,10 @@ module.exports = {
     },
     colorMode: {
       disableSwitch: false,
+    },
+    sitemap: {
+      changefreq: 'daily',
+      priority: 0.7,
     },
     navbar: {
       title: 'Docs',
@@ -93,8 +99,12 @@ module.exports = {
               href: 'https://cloud.astronomer.io/login',
             },
             {
-              label: 'Install Astro',
+              label: 'Install on AWS',
               to: 'astro/install-aws',
+            },
+            {
+              label: 'Install on GCP',
+              to: 'astro/install-gcp',
             },
             {
               label: 'Install the CLI',
@@ -189,10 +199,6 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        },
-        sitemap: {
-          changefreq: 'hourly',
-          priority: 0.5,
         },
       },
     ],

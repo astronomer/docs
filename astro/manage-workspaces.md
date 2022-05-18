@@ -37,7 +37,7 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 
 ## Manage Workspace Users
 
-As a Workspace Admin, you can add or remove users from your Workspace at any time. Before adding a user, make sure that the user is an existing member of your Organization. If the user is not, [invite them to Astro](add-user.md#step-1-invite-the-user-to-astro) before following the steps below.
+As a Workspace Admin, you can add or remove users from your Workspace at any time. Before adding a user, make sure that the user is an existing member of your Organization. If the user is not, [invite them to Astro](add-user.md#add-a-user-to-an-organization) before following the steps below.
 
 To add a user to a Workspace:
 

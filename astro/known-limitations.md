@@ -15,7 +15,7 @@ If you have questions or feedback about any item below, reach out to your Custom
 
 ## Known Limitations
 
-- In order to invite a user to a Workspace, the user must already be a member of the Organization as described in [Add a User](add-user.md). Workspace invites that can add a user to the Organization are not currently supported.
+- In order to invite a user to a Workspace, the user must already be a member of the Organization as described in [Add a User](add-user.md). 
 - If a user changes Workspace roles on Astro, it can take a maximum of 10 minutes for corresponding Airflow permission changes to take effect.
 - Astro supports only the Celery Executor. If you currently use the Kubernetes Executor, you might have to modify your tasks to run on Astro.
 - Clicking on **Refresh DAG** in the Airflow UI will redirect you to `<org-name>.astronomer.run` (Astro Home Page) instead of the task instance URL. We recommend upgrading to [Runtime 4.0](runtime-release-notes.md#astro-runtime-400), as Airflow 2.2 no longer requires this refresh button in the Airflow UI.
