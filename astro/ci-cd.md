@@ -185,6 +185,9 @@ This setup assumes the following prerequisites:
 
 - You have completed the instructions to [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources) and can build the image locally.
 - If installing from a private GitHub Repo, you have access to the private key file used to authenticate to GitHub.
+
+OR
+
 - If installing from a private PyPi Index, you have a username and password to authenticate to the index.
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
@@ -193,7 +196,9 @@ This setup assumes the following prerequisites:
   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
   - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
   - `GITHUB_SSH_KEY` = `<your-github-ssh-private-key>`
+
   OR
+
   - `PIP_EXTRA_INDEX_URL` = `https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name>`
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
