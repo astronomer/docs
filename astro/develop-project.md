@@ -600,7 +600,7 @@ Ensure that the name of the package on the private repository does not clash wit
     For example, if you have `quay.io/astronomer/astro-runtime:5.0.0` in your `Dockerfile.build`, this command would be:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-5.0.0 .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-astro-runtime-5.0.0 .
     ```
 
 
