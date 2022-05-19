@@ -51,3 +51,22 @@ Astro supports different GCP machine types. Machine types comprise of varying co
 - e2-standard-8
 
 For detailed information on each instance type, see [GCP documentation](https://cloud.google.com/compute/docs/machine-types). If you're interested in a machine type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io/). Not all machine types are supported in all GCP regions.
+
+## Deployment Worker Size Limits
+
+In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a Cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 65 AU (6.5 CPUs, 24.4 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. If you attempt to provision a worker size that isn't supported by your Cluster's instance type, you will see an error in the Cloud UI.
+
+This table lists the maximum worker size that is supported on Astro for each node instance type. These numbers may vary slightly over time.
+
+| Node Instance Type | Maximum AU | CPU       | Memory       |
+|--------------------|------------|-----------|--------------|
+| e2-standard-4      | 25         | 2.5 CPUs  | 9.4  GiB MEM |
+| e2-standard-8      | 65         | 6.5 CPUs  | 24.4 GiB MEM |
+
+:::info
+
+The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum Scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
+
+For more information about the Scheduler, see [Configure a Deployment](configure-deployment.md#scheduler).
+
+:::
