@@ -40,6 +40,8 @@ Astro supports the following GCP regions:
 
 - `us-central1`
 - `us-west1`
+- `us-east1`
+- `europe-west4`
 
 Modifying the region of an existing Cluster on Astro is not supported. If you're interested in a GCP region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
 
