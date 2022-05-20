@@ -122,7 +122,7 @@ To set up Podman for an Astronomer project:
 7. Open a new terminal window. In an empty directory, run the following commands to create a new Astronomer project, set Podman as your primary container engine, and generate a `pod-config.yml` file for your project:
 
     ```sh
-    $ astro dev init
+    $ astro dev init --use-astronomer-certified
     $ astro config set container.engine podman
     $ astro dev start
     ```

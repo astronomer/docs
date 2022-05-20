@@ -463,7 +463,7 @@ Finally, try running `$ astro deploy` on a test deployment. Create a deployment 
 ```sh
 mkdir demo
 cd demo
-astro dev init
+astro dev init --use-astronomer-certified
 astro deploy -f
 ```
 

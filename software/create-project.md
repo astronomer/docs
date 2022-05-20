@@ -24,7 +24,7 @@ mkdir <your-new-directory> && cd <your-new-directory>
 From this directory, run the following Astronomer CLI command:
 
 ```sh
-astro dev init
+astro dev init --use-astronomer-certified
 ```
 
 This will generate the following files:
