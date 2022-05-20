@@ -14,7 +14,9 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
     image: 'img/meta.png',
-    autoCollapseSidebarCategories: true,
+    sidebar: {
+      autoCollapseSidebarCategories: true,
+    },
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
       indexName: 'published-docs',
@@ -32,6 +34,10 @@ module.exports = {
     },
     colorMode: {
       disableSwitch: false,
+    },
+    sitemap: {
+      changefreq: 'daily',
+      priority: 0.7,
     },
     navbar: {
       title: 'Docs',
@@ -193,10 +199,6 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        },
-        sitemap: {
-          changefreq: 'hourly',
-          priority: 0.5,
         },
       },
     ],

@@ -260,7 +260,7 @@ Then, add the following environment variables to your project's `Dockerfile`:
 # Make sure to replace `<your-aws-key>` and `<your-aws-secret-key>` with your own values.
 ENV AWS_ACCESS_KEY_ID="<your-aws-key>"
 ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-key>"
-ENV AWS_DEFAULT_REGION=us-<your-aws-region>
+ENV AWS_DEFAULT_REGION="<your-aws-region>"
 ENV AIRFLOW__SECRETS__BACKEND="airflow.contrib.secrets.aws_systems_manager.SystemsManagerParameterStoreBackend"
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}'
 ```
@@ -378,11 +378,11 @@ apache-airflow-providers-amazon
 Then, add the following environment variables to your project's Dockerfile:
 
 ```dockerfile
-ENV AWS_ACCESS_KEY_ID=<your-aws-access-key-id>
-ENV AWS_SECRET_ACCESS_KEY=<your-aws-secret-access-key>
-ENV AWS_DEFAULT_REGION=us-<your-aws-region>
-ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS=`{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}`
+ENV AWS_ACCESS_KEY_ID="<your-aws-access-key-id>"
+ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-access-key>"
+ENV AWS_DEFAULT_REGION="<your-aws-region>"
+ENV AIRFLOW__SECRETS__BACKEND="airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend"
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}'
 ```
 
 :::warning

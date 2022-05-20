@@ -37,7 +37,7 @@ By default, the Astronomer account has no access to your data services. We’ll 
 When you arrive at your data plane activation appointment, please ensure you have:
 - [ ] [Astro CLI](install-cli.md) installed for any users who will develop pipelines
 - [ ] A clean AWS Account
-- [ ] A user with the following permissions to that AWS account:
+- [ ] The following permissions to that AWS account:
   - `cloudformation:*`
   - `GetRole`
   - `GetRolePolicy`

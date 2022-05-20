@@ -1,67 +1,47 @@
 ---
 sidebar_label: 'Add a User'
-title: 'Add a User to a Workspace'
+title: 'Add a User to Astro'
 id: add-user
-description: Add a user to a Workspace on Astro.
+description: Add a user to a either a Workspace or an Organization on Astro.
 ---
 
 ## Overview
 
-As a Workspace Admin, you can add team members to your Astro Workspace. From here, you can grant them user roles with permissions for specific actions across the Workspace and the Deployments within it.
-
-This guide provides steps for adding a user to an Astro Workspace.
+This guide provides steps for adding a user to an Astro Workspace. As a Workspace Admin or Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Organization.
 
 ## Prerequisites
 
-To add a user to a Workspace, you must have:
+To add a user to Astro, you must have at least one of the following permissions:
 
-- An Organization on Astro.
-- Workspace Admin permissions.
+- To invite a user to your Organization, you need Organization Owner permissions.
+- To invite a user to a specific Workspace, you need Workspace Admin permissions for that Workspace. The user must also already be a part of the Organization that hosts the Workspace.
 
-## Step 1: Invite the User to Astro
+## Add a User to an Organization
 
-:::info
+To add a user to an Organization:
 
-If your organization integrated an [external Identity Provider (IdP)](configure-idp.md) such as Okta or Azure AD, invite your user to Astro via your IDP's own user management system.
+1. In the Cloud UI's Organization view, open the **People** tab.
+2. Click **Invite member**:
 
-:::
+    ![Organization user invite button](/img/docs/invite-org-user.png)
 
-If the user you want to add doesn't already have an account on Astro, tell them to go to https://cloud.astronomer.io and sign up. Once they create an account, they will automatically assume the Organization Member role and see the following screen on their first login:
+3. Enter the user's email.
+4. Set an Organization role for the user.
+5. Click **Add member**.
 
-<div class="text--center">
-  <img src="/img/docs/welcome-user.png" alt="Successful account creation screen" />
-</div>
+Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Organization via email and either create an Astro account or log in before they can access the Organization.
 
-Make note of the user's account email for the next step.
+## Add a User to a Workspace
 
-## Step 2: Add the User
-
-To add a user with an Astro account to your Workspace:
+To add an existing user from an Organization to a Workspace:
 
 1. In the Cloud UI, open your Workspace and go to the **Access** tab.
 2. Click **Add member**:
 
-    <div class="text--center">
-      <img src="/img/docs/add-user.png" alt="Add member button in the access menu" />
-    </div>
+    ![Workspace user invite button](/img/docs/add-user.png)
 
-3. Enter the user's email from Step 1.
+3. Enter the user's email.
 4. Set a Workspace role for the user. For a list of available roles and their permissions, see [Workspace Roles](user-permissions.md#workspace-roles)
 5. Click **Add member**.
 
-Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table.
-
-:::caution
-
-If you attempt to invite a user that does not have an account on Astro, you will see an error in the Cloud UI that reads:
-
-```
-An error occurred
-<user-email-address> is not a user in your Organization. This user must first create an account at https://cloud.astronomer.io before they can be invited to a Workspace.
-```
-
-If you see this error:
-- Complete Step 1 above. Ask the user to sign up at https://cloud.astronomer.io. Once their account is created, add the user to your Workspace.
-- Make sure that the user's email address is consistent with the email address you're using to add them to your Workspace. The emails must match.
-
-:::
+Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Workspace via email and log in before they can access the Workspace.
