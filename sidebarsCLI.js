@@ -13,6 +13,7 @@ module.exports = {
       {
       type: 'category',
       label: 'CLI Command Reference',
+      link: { type: 'doc', id: 'reference' },
       items: [
         'cli/astro-login',
         'cli/astro-logout',
