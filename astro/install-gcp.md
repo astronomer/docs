@@ -44,7 +44,7 @@ Astro uses 4 different CIDR blocks for creating the infrastructure for your Astr
 - **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/19`)
 - **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
 - **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
-- **Service VPC Peering**: Used by Private Service Connections (Default: `172.21.0.0/19`)
+- **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/19`)
 
 ## Step 1: Access Astro
 
