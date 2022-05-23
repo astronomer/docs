@@ -11,6 +11,28 @@ This document provides a summary of all changes made to the [Astro CLI](cli-quic
 
 If you have any questions or a bug to report, reach out to us via [Astronomer Support](https://support.astronomer.io).
 
+## Astro CLI v1.0.0
+
+Release date: May 25, 2022
+
+### A Shared CLI for All Astronomer Users
+
+:::danger Breaking Change
+
+Astro CLI v1.0.0 includes breaking changes that might effect your existing CI/CD pipelines. Before upgrading the CLI, carefully read through [Upgrade to Astro CLI v1.0](upgrade-cli.md) to learn more about these breaking changes and how they can affect your pipelines.
+
+:::
+
+The Astro CLI is now a single CLI executable shared between Astro and Software users. With this new generation of the CLI, you can work between Astro and Software installations without having to switch out your essential tools.
+
+To establish a shared framework between products, the syntax of several Software CLI commands has been updated. Due to the scale of these changes, all breaking changes related to using the CLI have been documented in [Upgrade to Astro CLI v1.0](upgrade-cli.md).
+
+### New Command To Switch Between Astronomer Installations
+
+You can now use the `astro context list` and `astro context switch` to show all Astronomer installations you have access to and switch between those installations. An Astronomer installation will appear as an available context if you have logged into it at least once. This command is primarily designed for users who need to work in both Astro and Astronomer Software installations.
+
+These new commands replace `astro cluster list` and `astro cluster switch` respectively. For more information, see the [CLI Command Reference Guide](cli/astro-context-switch.md).
+
 ## 0.28.1
 
 Release date: March 14, 2022
