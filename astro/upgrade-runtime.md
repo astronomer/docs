@@ -13,7 +13,6 @@ Follow this guide to upgrade Astro Runtime locally or for a Deployment on Astro.
 
 As you plan to upgrade, keep in mind that:
 
-- We strongly recommend testing new versions of Astro Runtime locally before upgrading a Deployment on Astro.
 - All versions of the Astro CLI support all versions of Astro Runtime. There are no dependencies between the two products.
 - Upgrading to certain versions of Runtime might result in extended upgrade times or otherwise disruptive changes to your environment. To learn more, see [Upgrade Considerations](upgrade-runtime.md#upgrade-considerations).
 - Astronomer does not support downgrading a Deployment on Astro to a lower version of Astro Runtime.
