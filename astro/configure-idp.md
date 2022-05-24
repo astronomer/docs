@@ -5,6 +5,10 @@ id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
 ## Overview
 
 This guide provides setup steps for integrating various third party identity providers (IdP) with Astro.
@@ -28,7 +32,15 @@ Astro only supports Service Provider (SP)-initiated SSO. Users are required to l
 
 :::
 
-## Configure Okta as Your Identity Provider
+## Configure Your Identity Provider
+
+<Tabs
+    defaultValue="Okta"
+    values={[
+        {label: 'Okta', value: 'Okta'},
+        {label: 'Azure AD', value: 'Azure AD'},
+    ]}>
+<TabItem value="Okta">
 
 This section provides setup steps for setting up Okta as your IdP on Astro. After completing this setup, all users in your organization can use Okta to log in to Astro.
 
@@ -92,7 +104,9 @@ On the page for your Okta app integration, open the **Assignments** tab. Ensure 
 
 When a user assigned to the integration accesses Astro, they will be brought automatically to Okta after entering their email in the Cloud UI.
 
-## Configure Azure AD as your Identity Provider
+</TabItem>
+
+<TabItem value="Azure AD">
 
 This section provides setup steps for setting up Azure AD as your IdP on Astro. After completing this setup, your organization's users can use Azure AD to log in to Astro.
 
@@ -150,3 +164,5 @@ From here, Astronomer will complete the integration and add Azure as your organi
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
 
 When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
+
+</TabItem>
