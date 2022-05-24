@@ -9,7 +9,7 @@ description: Upgrade your Deployment's version of Astro Runtime.
 
 New versions of Astro Runtime are released regularly to support new features from both Astro and Apache Airflow. To take advantage of new functionality, as well as bug and security fixes, we recommend regularly upgrading Astro Runtime as new versions are released.
 
-Follow this guide to upgrade Astro Runtime locally or for a Deployment on Astro. You can use these steps to upgrade to any major, minor, or patch version.
+Follow this guide to upgrade Astro Runtime locally or for a Deployment on Astro. You can use these steps to upgrade to any major, minor, or patch version of Astro Runtime.
 
 As you plan to upgrade, keep in mind that:
 
@@ -49,6 +49,8 @@ If you're only upgrading a local Airflow environment, you do not need an Astro D
     You must always specify the major, minor, and patch version of any given Astro Runtime version.
 
 ## Step 2: Test Astro Runtime Locally
+
+We strongly recommend testing new versions of Astro Runtime locally before upgrading a Deployment on Astro. 
 
 To test your upgrade locally:
 
