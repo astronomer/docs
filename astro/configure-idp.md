@@ -42,6 +42,8 @@ Astro only supports Service Provider (SP)-initiated SSO. Users are required to l
     ]}>
 <TabItem value="Okta">
 
+## Okta
+
 This section provides setup steps for setting up Okta as your IdP on Astro. After completing this setup, all users in your organization can use Okta to log in to Astro.
 
 ### Prerequisites
@@ -107,6 +109,8 @@ When a user assigned to the integration accesses Astro, they will be brought aut
 </TabItem>
 
 <TabItem value="Azure AD">
+
+## Azure AD
 
 This section provides setup steps for setting up Azure AD as your IdP on Astro. After completing this setup, your organization's users can use Azure AD to log in to Astro.
 
