@@ -148,7 +148,7 @@ Then, add the following environment variables to your `Dockerfile`:
 ```dockerfile
 # Make sure to replace `<your-approle-id>` and `<your-approle-secret>` with your own values.
 ENV AIRFLOW__SECRETS__BACKEND="airflow.contrib.secrets.hashicorp_vault.VaultBackend"
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": variables, "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
 ```
 
 This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. In the next step, you'll test this configuration in a local Airflow environment.
