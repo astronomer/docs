@@ -19,27 +19,25 @@ astro config get <option>
 
 ## Options
 
-| Option              | Description | Possible Values |
-| ------------------- | ----------- | --------------- |
-| `CloudAPIProtocol`  | TBD         | TBD             |
-| `CloudAPIPort`      | TBD         | TBD             |
-| `CloudWSProtocol`   | TBD         | TBD             |
-| `CloudAPIToken`     | TBD         | TBD             |
-| `Context`           | TBD         | TBD             |
-| `Contexts`          | TBD         | TBD             |
-| `LocalEnabled`      | TBD         | TBD             |
-| `LocalAstro`        | TBD         | TBD             |
-| `LocalPublicAstro`  | TBD         | TBD             |
-| `LocalRegistry`     | TBD         | TBD             |
-| `PostgresUser`      | TBD         | TBD             |
-| `PostgresPassword`  | TBD         | TBD             |
-| `PostgresHost`      | TBD         | TBD             |
-| `PostgresPort`      | TBD         | TBD             |
-| `ProjectName`       | TBD         | TBD             |
-| `ProjectDeployment` | TBD         | TBD             |
-| `ProjectWorkspace`  | TBD         | TBD             |
-| `WebserverPort`     | TBD         | TBD             |
-| `ShowWarnings`      | TBD         | TBD             |
+| Option              | Description                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------- |
+| `CloudAPIProtocol`  | The type of protocol to use when calling the Airflow API in a local Airflow environment |
+| `CloudAPIPort`      | The port to use when calling the Airflow API in a local environment                     |
+| `Context`           | The context for your Astro project                                                      |
+| `LocalRegistry`     | The location of your local Docker container running Airflow                             |
+| `PostgresUser`      | Your username for the Postgres metadata DB                                              |
+| `PostgresPassword`  | Your password for the Postgres metadata DB                                              |
+| `PostgresHost`      | The host for the Postgres metadata DB                                                   |
+| `PostgresPort`      | The port for the Postgres metadata DB                                                   |
+| `ProjectName`       | The name of your Astro project                                                       |
+| `WebserverPort`     | The port for the Webserver in your local Airflow environment                           |
+| `ShowWarnings`      | Determines whether warning messages appear when starting up a local Airflow environment |
+
+:::info
+
+Some possible configurations are not documented here because they are used only on Astronomer Software.
+
+:::
 
 ## Examples
 
