@@ -166,3 +166,5 @@ Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-d
 When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
 
 </TabItem>
+
+</Tabs>
