@@ -61,7 +61,8 @@ For more information about these commands, see the [CLI Command Reference ](cli/
 
 ### Additional Improvements
 
-- Removed the nonfunctional `--update` flag from `astro deployment variable create`. To update existing environment variables for a given Deployment, use `astro deployment variable update`.
+- Astro CLI documentation has been refactored. You can now find all information about the CLI, including installation steps and the command reference, under the [Astro CLI tab](cli/overview.md).
+- The nonfunctional `--update` flag has been removed from `astro deployment variable create`. To update existing environment variables for a given Deployment, use `astro deployment variable update`.
 
 ## v1.5.0 (`astrocloud`)
 
