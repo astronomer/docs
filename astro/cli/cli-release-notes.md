@@ -23,7 +23,7 @@ Astro CLI v1.0.0 includes breaking changes that might effect your existing CI/CD
 
 :::
 
-The Astro CLI is now a single CLI executable shared between Astro and Software users. With this new generation of the CLI, you can work between Astro and Software installations without having to switch out your essential tools.
+The Astro CLI is now a single CLI executable built for all Astronomer products. This new generation of the CLI optimizes for a consistent local experience with Astro Runtime as well as the ability to more easily upgrade to Astro from other products hosted on Astronomer.
 
 To establish a shared framework between products, the Astro CLI now uses a single `astro` executable:
 
@@ -34,7 +34,7 @@ astrocloud dev init
 astro dev init
 ```
 
-Additionally, some commands have been standardized so that they can be shared between Astro and Software users. As part of this change, `astro auth login/logout` has been renamed to `astro login/logout`:
+Additionally, some commands have been standardized so that they can be shared between Astro and Astronomer Software users. As part of this change, `astro auth login/logout` has been renamed to `astro login/logout`:
 
 ```sh
 # Before upgrade
@@ -43,25 +43,27 @@ astrocloud auth login
 astro login
 ```
 
-For Astro users, these are the only automatic changes to CLI functionality. All other commands will continue to work as expected.
+For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. To upgrade, see [Configure the CLI](cli/configure-cli.md).
 
 ### New Command To Set Astro Project Configurations
 
-You can now use `astro config get` and `astro config set` to retrieve and modify an Astro project's configuration. This configuration, located in the `.astro/config.yaml` file of your project, determines details about how your project runs in a local Airflow environment, such as your Postgres username and password, your Webserver port, and your project name.
+You can now use `astro config get` and `astro config set` to retrieve and modify the configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your Webserver port, and your project name.
 
-For more information about these commands, see the [CLI Command Reference Guide](cli/astro-config-set.md).
+For more information about these commands, see the [CLI Command Reference](cli/astro-config-set.md).
 
-### New Command To Switch Between Astronomer Installations
+### New Command To Switch Between Astronomer Contexts
 
-You can now use the `astro context list` and `astro context switch` to show all Astronomer installations you have access to and switch between those installations. An Astronomer installation will appear as an available context if you have logged into it at least once. This command is primarily designed for users who need to work in both Astro and Astronomer Software installations.
+You can now use `astro context list` and `astro context switch` to show all the Astronomer contexts that you have access to and switch between them. An Astronomer context is defined as a base domain that you can use to access either Astro or an installation of Astronomer Software. A domain will appear as an available context if you have authenticated to it at least once.
 
-For more information about these commands, see the [CLI Command Reference Guide](cli/astro-context-switch.md).
+This command is primarily designed for users who need to work in both Astro and Astronomer Software installations. If you're an Astro user with no ties to Astronomer Software, ignore this command.
+
+For more information about these commands, see the [CLI Command Reference ](cli/astro-context-switch.md).
 
 ### Additional Improvements
 
-- Removed the nonfunctional `--update` flag from `astro deployment variable create`
+- Removed the nonfunctional `--update` flag from `astro deployment variable create`. To update existing environment variables for a given Deployment, use `astro deployment variable update`.
 
-## v1.5.0 (Pre-convergence)
+## v1.5.0 (`astrocloud`)
 
 Release date: April 28, 2022
 
@@ -82,7 +84,7 @@ This command replaces the `—update` flag that was previously released with the
 - Fixed an issue were the `astro deployment variable create —load` command would fail if the specified `.env` file had a comment (e.g. `#  <comment>`) in it
 - Fixed an issue were Deployment API Keys would not work locally for some users
 
-## v1.4.0 (Pre-convergence)
+## v1.4.0 (`astrocloud`)
 
 Release date: April 14, 2022
 
@@ -102,7 +104,7 @@ For more information about this command and its options, see the [Astro CLI Comm
 
 - You can now specify a custom image name in your Astro project's `Dockerfile` as long as the image is based on an existing Astro Runtime image
 
-## v1.3.4 (Pre-convergence)
+## v1.3.4 (`astrocloud`)
 
 Release date: April 11, 2022
 
@@ -111,7 +113,7 @@ Release date: April 11, 2022
 - Improved the performance of `astro dev start`
 - When you successfully push code to a Deployment via `astro deploy`, the CLI now provides URLs for accessing the Deployment's Cloud UI and Airflow UI pages.
 
-## v1.3.3 (Pre-convergence)
+## v1.3.3 (`astrocloud`)
 
 Release date: March 31, 2022
 
@@ -127,7 +129,7 @@ Release date: March 31, 2022
 - Fixed an issue where `astro dev parse/pytest` would crash when parsing projects with a large number of DAGs
 - Fixed an issue were some `docker-compose.override.yml` files would cause `astro dev parse/pytest` to stop working
 
-## v1.3.2 (Pre-convergence)
+## v1.3.2 (`astrocloud`)
 
 Release date: March 17, 2022
 
@@ -151,7 +153,7 @@ To better integrate with Astro's identity-based login flow, the CLI now prompts 
 - Partially fixed `dev parse` permission errors on WSL. To fully fix this issue for an Astro project, you must delete the project's existing `.astro` directory and rerun `astro dev init`.
 - Fixed an issue where running `astro dev parse/pytest` while a local Airflow environment was running would crash the Airflow environment. This issue was introduced in Astro CLI 1.3.1, which is no longer available for download.
 
-## v1.3.0 (Pre-convergence)
+## v1.3.0 (`astrocloud`)
 
 Release date: March 3, 2022
 
@@ -189,7 +191,7 @@ You can now use `astro deployment update` to update certain configurations for a
 
 This is the same set of configurations that you can modify via the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment.md). For more information on this command, see [CLI Command Reference](cli/astro-deployment-update.md).
 
-## v1.2.0 (Pre-convergence)
+## v1.2.0 (`astrocloud`)
 
 Release date: February 25, 2022
 
@@ -238,7 +240,7 @@ You can now use the Astro CLI to create and delete Deployments on Astro with two
 
 These commands are functionally identical to the [Deployment configuration](configure-deployment.md) and deletion process in the Cloud UI. For more information, see the [CLI Command Reference](cli/astro-deployment-create.md).
 
-## v1.1.0 (Pre-convergence)
+## v1.1.0 (`astrocloud`)
 
 Release date: February 17, 2022
 
@@ -256,7 +258,7 @@ The Triggerer will only be created in local environments running Astro Runtime 4
 
 - Postgres has been upgraded from 12.2 to [12.6](https://www.postgresql.org/docs/12/release-12-6.html) for local Airflow environments.
 
-## v1.0.0 (Pre-convergence)
+## v1.0.0 (`astrocloud`)
 
 Release date: February 3, 2022
 
@@ -291,7 +293,7 @@ Astro CLI v1.0.0 includes several improvements to the local development experien
 
 - `astro deploy` now shows a list of your Deployments in the order by which they were created instead of at random.
 
-## v1.0.4 (`astro`) (Pre-convergence)
+## v1.0.4 (`astro`) (`astrocloud`)
 
 Release date: December 9, 2021
 
@@ -309,32 +311,32 @@ The basic DAG showcases a simple ETL data pipeline and the advanced DAG showcase
 
 Fixed a broken documentation link and outdated description in the `airflow_settings.yaml` file, which you can use to programmatically set Airflow Connections, Variables, and Pools locally.
 
-## v1.0.3 (`astro`) (Pre-convergence)
+## v1.0.3 (`astro`) (`astrocloud`)
 
 Release date: November 5, 2021
 
 - Bug Fix: Fixed an issue where users saw errors related to S3 in Webserver logs when running locally (e.g. `Failed to verify remote log exists s3:///`).
 
-## v1.0.2 (`astro`) (Pre-convergence)
+## v1.0.2 (`astro`) (`astrocloud`)
 
 Release date: October 25, 2021
 
 - Improved help text throughout the CLI
 
-## v1.0.1 (`astro`) (Pre-convergence)
+## v1.0.1 (`astro`) (`astrocloud`)
 
 Release date: October 15, 2021
 
 - This release contains changes exclusively related to the Astro CLI developer experience.
 
-## v1.0.0 (`astro`) (Pre-convergence)
+## v1.0.0 (`astro`) (`astrocloud`)
 
 Release date: September 28, 2021
 
 - Improvement: `astro dev init` now always pulls the latest version of Astro Runtime for new projects. This means that you no longer have to upgrade the CLI in order to take advantage of a new Runtime release. Note that you still need to manually [upgrade Runtime](upgrade-runtime.md) for existing projects.
 - Improvement: Updated error messages throughout the CLI to be more clear and useful
 
-## v0.2.9-beta (`astro`) (Pre-convergence)
+## v0.2.9-beta (`astro`) (`astrocloud`)
 
 Release date: September 20, 2021
 
@@ -342,7 +344,7 @@ Release date: September 20, 2021
 - Improvement: You can now use `astro dev run` to run Airflow CLI commands
 - Improvement: You can now use `astro dev logs` to show logs for the Airflow Scheduler and Webserver when developing locally
 
-## v0.2.8-beta (`astro`) (Pre-convergence)
+## v0.2.8-beta (`astro`) (`astrocloud`)
 
 Release date: August 31, 2021
 
@@ -350,13 +352,13 @@ Release date: August 31, 2021
 - Improvement: Updated help text throughout the CLI
 - Improvement: Projects created with `astro dev init` now include a README file
 
-## v0.2.7-beta (`astro`) (Pre-convergence)
+## v0.2.7-beta (`astro`) (`astrocloud`)
 
 Release date: July 31, 2021
 
 - Bug Fix: Fixed an issue where users could not push DAGs to Deployments on Astro via the CLI.
 
-## v0.2.6-beta (`astro`) (Pre-convergence)
+## v0.2.6-beta (`astro`) (`astrocloud`)
 
 Release date: July 30, 2021
 
