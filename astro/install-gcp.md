@@ -82,6 +82,7 @@ To activate the Data Plane on your GCP project:
     $ gcloud services enable cloudkms.googleapis.com
     $ gcloud services enable sqladmin.googleapis.com
     $ gcloud services enable servicenetworking.googleapis.com
+    $ gcloud services enable dns.googleapis.com
     $ curl \
     https://storage.googleapis.com/storage/v1/projects/$GOOGLE_CLOUD_PROJECT/serviceAccount \
     --header "Authorization: Bearer `gcloud auth application-default print-access-token`"   \
