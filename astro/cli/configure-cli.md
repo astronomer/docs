@@ -27,6 +27,8 @@ To use the Astro CLI on Mac, you must have:
 - [Homebrew](https://brew.sh/)
 - [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 
+#### Installation
+
 To install the latest version of the Astro CLI, run the following command:
 
 ```sh
@@ -36,8 +38,10 @@ brew install astronomer/tap/astro
 To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
 
 ```sh
-brew install astronomer/tap/astro@0.XX
+brew install astronomer/tap/astro@<major.minor.patch-version>
 ```
+
+If you specify only a major version, this command will install the latest minor/patch version available for that major version.
 
 </TabItem>
 
@@ -47,17 +51,16 @@ brew install astronomer/tap/astro@0.XX
 
 To use the Astro CLI on Windows, you must have:
 
-- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for windows.
+- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
 - [Docker Engine](https://docs.docker.com/engine/install/) (v0.13.1 or higher).
 - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
 -  Windows 10 or Windows 11.
 
 #### Installation
 
+1. Go to the [**Releases** page of the Astro CLI GitHub repository](https://github.com/astro-projects/astro-cli/releases). Based on your desired CLI version and the CPU architecture of your machine, download one of the `.zip` files available on this page.
 
-1. Go to the [**Releases** page of the Astro CLI GitHub](https://github.com/astro-projects/astro-cli/releases). Based on your desired CLI version and CPU architecture, download one of the `.zip` files available on this page.
-
-    For example, if you wanted to install v1.0.0 of the Astro CLI on a Windows Machine with an AMD 64 architecture, you would download `astro_1.0.0-converged_windows_amd64.zip`.
+    For example, to install v1.0.0 of the Astro CLI on a Windows Machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.zip`.
 
 2. Run the following command to unzip the executable:
 
@@ -65,7 +68,7 @@ To use the Astro CLI on Windows, you must have:
     tar -xvzf .\astrocli.tar.gz
     ```
 
-3. Save `astro.exe` in a secure location on your machine and add its filepath in the Windows PATH environment variable. For more information about configuring the PATH environment variable, read [Java documentation](https://www.java.com/en/download/help/path.html).
+3. Save `astro.exe` in a secure location on your machine and add its filepath as a Windows PATH environment variable. For more information about configuring the PATH environment variable, read [Java documentation](https://www.java.com/en/download/help/path.html).
 
 </TabItem>
 
@@ -75,7 +78,7 @@ To use the Astro CLI on Windows, you must have:
 
 To use the Astro CLI on Linux, you must have:
 
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.13.1 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
 
 #### Installation
 
@@ -90,6 +93,8 @@ To install a specific version of the CLI, specify the version number as a flag a
 ```sh
 curl -sSL install.astronomer.io | sudo bash -s -- v1.0.0
 ```
+
+If you specify only a major version, this command will install the latest minor/patch version available for that major version.
 
 </TabItem>
 
@@ -107,7 +112,7 @@ curl -sSL install.astronomer.io | sudo bash -s -- v1.0.0
     ]}>
 <TabItem value="mac">
 
-To upgrade the Astro CLI, you can run the same command as you did to install the CLI for the first time:
+To upgrade the Astro CLI to the latest version, you can run the same command as you did to install the CLI for the first time:
 
 ```sh
 brew install astronomer/tap/astro
@@ -117,11 +122,13 @@ brew install astronomer/tap/astro
 
 <TabItem value="windows">
 
+To upgrade the Astro CLI on Windows:
+
 1. Remove the existing `astro.exe` file on your machine.
 
-2. Go to the [**Releases** page of the Astro CLI GitHub](https://github.com/astro-projects/astro-cli/releases). Based on your desired CLI version and CPU architecture, download one of the `.zip` files available on this page.
+2. Go to the [**Releases** page of the Astro CLI GitHub repository](https://github.com/astro-projects/astro-cli/releases). Based on the version of the CLI you want and your CPU architecture, download one of the `.zip` files available on this page.
 
-    For example, if you wanted to install v1.0.0 of the Astro CLI on a Windows Machine with an AMD 64 architecture, you would download `astro_1.0.0-converged_windows_amd64.zip`.
+     For example, if you wanted to upgrade to v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, you would download `astro_1.0.0-converged_windows_amd64.zip`.
 
 3. Run the following command to unzip the executable:
 
@@ -129,7 +136,7 @@ brew install astronomer/tap/astro
     tar -xvzf .\astrocli.tar.gz
     ```
 
-4. Save the new `astro.exe` file that you just unzipped in a secure location on your machine and add its filepath in the Windows PATH environment variable. For more information about configuring the PATH environment variable, read [Java documentation](https://www.java.com/en/download/help/path.html).
+4. Save the new `astro.exe` file that you just unzipped in a secure location on your machine and add its filepath as a Windows PATH environment variable. For more information about configuring the PATH environment variable, read [Java documentation](https://www.java.com/en/download/help/path.html).
 
 </TabItem>
 
@@ -156,7 +163,7 @@ curl -sSL install.astronomer.io | sudo bash -s
     ]}>
 <TabItem value="mac">
 
-To uninstall the Astro CLI, run the following command:
+To uninstall the Astro CLI on Mac, run:
 
 ```sh
 brew uninstall astronomer/tap/astro
@@ -166,16 +173,16 @@ brew uninstall astronomer/tap/astro
 
 <TabItem value="windows">
 
-To uninstall the Astro CLI:
+To uninstall the Astro CLI on Windows:
 
 1. Remove the filepath for `astro.exe` from your Windows PATH environment variable.
-1. Delete `astro.exe`.
+2. Delete `astro.exe`.
 
 </TabItem>
 
 <TabItem value="linux">
 
-To uninstall the Astro CLI, run the following command:
+To uninstall the Astro CLI on Linux, run the following command:
 
 ```sh
 sudo rm /usr/local/bin/astro
@@ -187,12 +194,14 @@ sudo rm /usr/local/bin/astro
 
 ## Migrate from `astrocloud` to `astro`
 
-Complete this migration if all of the following are true:
+A new `astro` executable for the Astro CLI is now available. Complete this migration if all of the following are true:
 
 - You are an Astro user.
-- You used a pre-1.0 version of the Astro CLI. For these versions, the CLI executable was `astrocloud`.
+- You're currently using the `astrocloud` CLI executable.
 
-### Step 1: Uninstall the `astrocloud` Executable
+For more information on Astro CLI v1.0.0, see [Astro CLI Release Notes](cli-release-notes.md).
+
+### Step 1: Uninstall `astrocloud`
 
 <Tabs
     defaultValue="mac"
@@ -203,7 +212,7 @@ Complete this migration if all of the following are true:
     ]}>
 <TabItem value="mac">
 
-To uninstall the `astrocloud` executable, run the following command:
+To uninstall `astrocloud` on Mac, run:
 
 ```sh
 brew uninstall astronomer/cloud/astrocloud
@@ -213,17 +222,19 @@ brew uninstall astronomer/cloud/astrocloud
 
 <TabItem value="windows">
 
+To uninstall `astrocloud` on Windows:
+
 1. Remove the filepath for `astrocloud.exe` from your Windows PATH environment variable.
-2. Delete `astrocloud.exe`.
+2. Delete `astrocloud.exe` from your machine.
 
 </TabItem>
 
 <TabItem value="linux">
 
-To uninstall `astrocloud`:
+To uninstall `astrocloud` on Linux:
 
 1. Remove the filepath for `astrocloud.exe` from your Linux PATH environment variable.
-2. Delete `astrocloud.exe`.
+2. Delete `astrocloud.exe` from your machine.
 
 </TabItem>
 
@@ -235,7 +246,7 @@ For more details, see [Install the CLI](configure-cli.md#install-the-cli.md).
 
 ### Step 3: Migrate Project Configurations (_Optional_)
 
-For each Astro project where you manually updated the `.astrocloud/config.yaml` file:
+If you manually updated the `.astrocloud/config.yaml` file of an existing Astro project:
 
 1. In your terminal, open your Astro project.
 2. Run `astro dev init` to generate a new `.astro` directory in your project. This subdirectory might be hidden in graphical file browsers. You can show hidden files using `⌘ + Shift + .` on Mac or by selecting **View > Hidden items** in Windows file explorer.
@@ -243,4 +254,4 @@ For each Astro project where you manually updated the `.astrocloud/config.yaml` 
     If the CLI prompts you about whether you want to create a project in a non-empty directory, enter `Yes`. The CLI will only create files that aren't yet in your directory. In this case, the only file that it will create is `.astro/config.yaml`.
 
 3. Copy the contents from `.astrocloud/config.yaml` into `.astro/config.yaml`.
-4. Delete `.astrocloud/config.yaml`.
+4. Delete `.astrocloud/config.yaml` your project.

@@ -11,7 +11,7 @@ import {siteVariables} from '@site/src/versions';
 
 ## Overview
 
-The Astro CLI is the easiest way to run Apache Airflow on your machine. By the end of this quickstart, you'll be able to run an Airflow project on your local machine with just a few commands.
+The Astro CLI is an open source command line for modern data orchestration. It is the easiest way to run Apache Airflow on your machine. By the end of this quickstart, you'll have an Airflow environment running locally with just a few commands. From there, you can start building your project with your own DAGs, dependencies, and tests.
 
 ## Step 1: Install the Astro CLI
 
@@ -24,7 +24,16 @@ The Astro CLI is the easiest way to run Apache Airflow on your machine. By the e
     ]}>
 <TabItem value="mac">
 
-Install the Astro CLI by running the following command:
+#### Prerequisites
+
+To use the Astro CLI on Mac, you must have:
+
+- [Homebrew](https://brew.sh/)
+- [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
+
+#### Installation
+
+To install the latest version of the Astro CLI, run the following command:
 
 ```sh
 brew install astronomer/tap/astro
@@ -38,17 +47,16 @@ brew install astronomer/tap/astro
 
 To use the Astro CLI on Windows, you must have:
 
-- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for windows.
+- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
 - [Docker Engine](https://docs.docker.com/engine/install/) (v0.13.1 or higher).
 - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
 -  Windows 10 or Windows 11.
 
 #### Installation
 
+1. Go to the [**Releases** page of the Astro CLI GitHub repository](https://github.com/astro-projects/astro-cli/releases). Based on your desired CLI version and the CPU architecture of your machine, download one of the `.zip` files available on this page.
 
-1. Go to the [**Releases** page of the Astro CLI GitHub](https://github.com/astro-projects/astro-cli/releases). Based on your desired CLI version and CPU architecture, download one of the `.zip` files available on this page.
-
-    For example, if you wanted to install v1.0.0 of the Astro CLI on a Windows Machine with an AMD 64 architecture, you would download `astro_1.0.0-converged_windows_amd64.zip`.
+    For example, to install v1.0.0 of the Astro CLI on a Windows Machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.zip`.
 
 2. Run the following command to unzip the executable:
 
@@ -56,7 +64,7 @@ To use the Astro CLI on Windows, you must have:
     tar -xvzf .\astrocli.tar.gz
     ```
 
-3. Save `astro.exe` in a secure location on your machine and add its filepath in the Windows PATH environment variable. For more information about configuring the PATH environment variable, read [Java documentation](https://www.java.com/en/download/help/path.html).
+3. Save `astro.exe` in a secure location on your machine and add its filepath as a Windows PATH environment variable. For more information about configuring the PATH environment variable, read [Java documentation](https://www.java.com/en/download/help/path.html).
 
 </TabItem>
 
@@ -66,7 +74,7 @@ To use the Astro CLI on Windows, you must have:
 
 To use the Astro CLI on Linux, you must have:
 
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.13.1 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
 
 #### Installation
 
@@ -84,7 +92,7 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 To confirm the CLI was installed properly, run the following CLI command:
 
-```
+```sh
 astro version
 ```
 
@@ -95,7 +103,9 @@ Astro CLI Version: ${siteVariables.cliVersion}`}</code></pre>
 
 ## Step 3: Create an Astro Project
 
-The CLI can create an Astro project which contains all of the files you need to run Airflow locally. To create a new Astro project:
+To start developing locally, you first need to create an Astro project, which contains all of the files you need to run Apache Airflow locally.
+
+To create a new Astro project:
 
 1. Create a new directory for your Astro project:
 
@@ -115,7 +125,7 @@ The CLI can create an Astro project which contains all of the files you need to 
     astro dev init
     ```
 
-    This command generates all of the necessary files to run Airflow locally, including Docker configurations and example DAGs.
+    This command generates all of the necessary files to run Airflow locally in your new directory. This includes dedicated folders for your DAG files, plugins, and dependencies.
 
 ## Step 4: Run Airflow Locally
 
@@ -125,7 +135,7 @@ To confirm that you successfully initialized an Astro project, run the following
 astro dev start
 ```
 
-This command builds your project and spins up 3 Docker containers on your machine, each for a different Airflow component:
+This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
 
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
@@ -136,18 +146,19 @@ This command builds your project and spins up 3 Docker containers on your machin
 
 Once your project builds successfully, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password.
 
-After logging in, you should see the DAGs from your `dags` directory in the Airflow UI.
+After logging in, you should see Astronomer's example DAGs from your `dags` directory in the Airflow UI.
 
 <div class="text--center">
 <img src="/img/docs/sample-dag.png" alt="Example DAG in the Airflow UI" />
 </div>
 
-That's all it takes to run Airflow locally using Astro! From here, you can manage your entire local Airflow environment directly for your Astro project.
+That's all it takes to run Airflow locally using Astro! From here, you can run Astronomer's example DAGs and manage your entire local Airflow environment directly for your Astro project.
 
 ## Next Steps
 
 Once you install the CLI, there are a few different paths you can take:
 
-- To learn more about the available commands in the CLI, see the [CLI Command Reference] or run `astro help`.
-- To develop your Astro project and configure your local Airflow environment, see [Develop Project](develop-project.md).
+- To learn more about the available commands in the CLI, see the [CLI Command Reference](cli/reference.md) or run `astro help`.
+- To create new DAGs, develop your Astro project, and configure your local Airflow environment, see [Develop Project](develop-project.md).
+- To tourbleshoot your local Airflow environment, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md).
 - If you're ready to deploy your project to a production environment on Astro, see [Deploy Code](deploy-code.md).
