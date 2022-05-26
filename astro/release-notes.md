@@ -16,6 +16,12 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.5.0 ([Release notes](cli-release-notes.md))
 
+## May 25, 2022
+
+### New Datasets View for Data Lineage
+
+
+
 ## May 5, 2022
 
 ### Data Lineage Is Now Available on Astro
