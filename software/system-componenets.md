@@ -13,7 +13,7 @@ Astronomer Software utilizes a variety of tools to run Airflow securely and reli
 
 Astronomer Software brings together best-of-class components into a complete "Managed Airflow on Kubernetes" system:
 
-* [Astronomer CLI](https://github.com/astronomer/astro-cli) - Command line tool for pushing deployments from your local machine to your workspaces running on Kubernetes. The CLI also provides the ability to launch a local stack via docker for local development and testing of DAGs, hooks and operators.
+* [Astro CLI](https://github.com/astronomer/astro-cli) - Command line tool for pushing deployments from your local machine to your workspaces running on Kubernetes. The CLI also provides the ability to launch a local stack via docker for local development and testing of DAGs, hooks and operators.
 * Software UI (React) - A modern web based interface to create manage workspaces and deployments. Through the UI you can scale up or down your resources per deployment, invite new users and monitor Airflow logs
 * Houston (GraphQL API) - The core GraphQL API layer to interact with your astronomer workspaces and deployments. Use GraphQL queries directly, or integrate with your CI/CD platform to automate Airflow deployments.
 * [Docker Registry](https://docs.docker.com/registry/) - Each Airflow deployment on your cluster will have it’s own set of required libraries and environment settings. Every time you create/update a deployment, a new docker image is built and pushed to a private registry created for your Astronomer platform. Kubernetes will pull from this registry when creating new pods.

@@ -1,20 +1,20 @@
 ---
 sidebar_label: 'Windows 10'
-title: 'Astronomer CLI Installation for Windows 10'
+title: 'Astro CLI Installation for Windows 10'
 id: cli-install-windows-10
 description: Install the Windows-based CLI or the Unix-based CLI a Windows Subsystem for Linux (WSL).
 ---
 
-To install the Astronomer CLI on Windows, you have the following options:
+To install the Astro CLI on Windows, you have the following options:
 
 - Install the Unix-based CLI on Windows Subsystem for Linux (WSL).
 - Install the Windows-based CLI.
 
 > **Note:** Both options require Windows 10 or later.
 
-## Astronomer CLI on Windows Subsystem for Linux
+## Astro CLI on Windows Subsystem for Linux
 
-Before you start the setup and configuration process for the Astronomer CLI on the WSL, make sure:
+Before you start the setup and configuration process for the Astro CLI on the WSL, make sure:
  - You're running the bash terminal
  - You have [WSL enabled](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
  - You're running Windows 10 version 2004 or later (Build 19041 or later) or Windows 11
@@ -35,9 +35,9 @@ When you run Docker-compose up, go to `/c/Users/name/dev/myapplication` first, o
 
 Finish the installation and start the deployment DAGs. See [CLI Quickstart Guide](cli-quickstart.md).
 
-## Astronomer CLI on Windows 10 (PowerShell)
+## Astro CLI on Windows 10 (PowerShell)
 
-Use the following instructions to install a Windows adapted version of the Astronomer CLI.
+Use the following instructions to install a Windows adapted version of the Astro CLI.
 
 ### Prerequisites
 
@@ -52,7 +52,7 @@ Make sure that the WSL 2 based engine is enabled in Docker Settings (preferred).
 
 If you have any issues with Docker, see [Docker's Troubleshooting Guide for Windows](https://docs.docker.com/docker-for-windows/troubleshoot/).
 
-### Step 3. Download the Astronomer CLI
+### Step 3. Download the Astro CLI
 
 
 You can download the latest version of the CLI on the [Astronomer GitHub](https://github.com/astronomer/astro-cli/releases/). Select an asset that includes windows_386.zip in the filepath.
@@ -77,7 +77,7 @@ Open your Terminal or PowerShell console and run the following:
 
 ```
 C:\Windows\system32>astro version
-Astronomer CLI Version: 0.8.2
+Astro CLI Version: 0.8.2
 Git Commit: f5cdab8f832da3c6184a7ac167b491e3bac3c022
 ```
 

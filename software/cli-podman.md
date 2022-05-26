@@ -1,13 +1,13 @@
 ---
 sidebar_label: 'Run the CLI with Podman'
-title: 'Run the Astronomer CLI in Podman Containers'
+title: 'Run the Astro CLI in Podman Containers'
 id: cli-podman
-description: Use Podman instead of Docker to run specific Astronomer CLI commands.
+description: Use Podman instead of Docker to run specific Astro CLI commands.
 ---
 
 ## Overview
 
-By default, the Astronomer CLI uses Docker to execute a few specific commands:
+By default, the Astro CLI uses Docker to execute a few specific commands:
 
 - `astro dev [...]`: For running an Airflow environment on your local machine
 - `astro login`: For authenticating to Astronomer Software
@@ -20,7 +20,7 @@ Alternatively, you can use [Podman](https://podman.io/) to execute these same co
 To complete this setup, you need:
 
 - Podman 3.1.0+ installed on your local machine.
-- The Astronomer CLI.
+- The Astro CLI.
 
 ## Linux Setup
 
@@ -85,7 +85,7 @@ To set up Podman for an Astronomer project:
     $ export BUILDAH_FORMAT=docker
     ```
 
-4. Run the following command to set the connection URI from the Astronomer CLI:
+4. Run the following command to set the connection URI from the Astro CLI:
 
     ```sh
     astro config set podman.connection_uri <your-podman-uri>
@@ -145,11 +145,11 @@ To set up Podman for an Astronomer project:
         name: airflow-include-dir
     ```
 
-You can now run the Astronomer CLI in Podman containers for this Astronomer project.
+You can now run the Astro CLI in Podman containers for this Astronomer project.
 
 ## Switch Between Using Docker and Podman
 
-Once you set up the Astronomer CLI to use Podman on your local machine, the CLI will automatically run Podman containers whenever you run a command that requires them. To revert back to default behavior and run CLI commands in Docker containers, run the following command:
+Once you set up the Astro CLI to use Podman on your local machine, the CLI will automatically run Podman containers whenever you run a command that requires them. To revert back to default behavior and run CLI commands in Docker containers, run the following command:
 
 ```sh
 astro config set container.engine docker

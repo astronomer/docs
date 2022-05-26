@@ -1,30 +1,30 @@
 ---
-sidebar_label: "CLI Reference Guide"
-title: "Astronomer CLI Reference Guide"
+sidebar_label: 'CLI Reference Guide'
+title: 'Astro CLI Reference Guide'
 id: cli-reference
-description: A list of every command and setting in the Astronomer CLI.
+description: A list of every command and setting in the Astro CLI.
 ---
 
 ## Overview
 
-Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astronomer CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
+Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astro CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
 
-This document contains information about all commands and settings available in the Astronomer CLI, including examples and flags. It does not contain detailed guidelines on each command, but each section provides resources for additional information in a **Related documentation** section if it's available.
+This document contains information about all commands and settings available in the Astro CLI, including examples and flags. It does not contain detailed guidelines on each command, but each section provides resources for additional information in a **Related documentation** section if it's available.
 
 ## Installation
 
-There are two ways to install any version of the Astronomer CLI:
+There are two ways to install any version of the Astro CLI:
 
 - [Homebrew](https://brew.sh/)
 - cURL
 
-For a detailed changelog of all Astronomer CLI versions, see [GitHub Releases](https://github.com/astronomer/astro-cli/releases).
+For a detailed changelog of all Astro CLI versions, see [GitHub Releases](https://github.com/astronomer/astro-cli/releases).
 
 > **Note:** Both methods only work for Unix (Linux+Mac) based systems. If you're running on Windows 10, follow [this guide](cli-install-windows-10.md) to get set up with Docker for WSL.
 
 ### Prerequisites
 
-The Astronomer CLI installation process requires [Docker](https://www.docker.com/) (v18.09 or higher).
+The Astro CLI installation process requires [Docker](https://www.docker.com/) (v18.09 or higher).
 
 ### Install with Homebrew
 
@@ -34,7 +34,7 @@ If you have Homebrew installed, run:
 brew install astronomer/tap/astro
 ```
 
-To install a specific version of the Astronomer CLI, you'll have to specify `@major.minor.patch`. To install v0.16.1, for example, run:
+To install a specific version of the Astro CLI, you'll have to specify `@major.minor.patch`. To install v0.16.1, for example, run:
 
 ```sh
 brew install astronomer/tap/astro@0.16.1
@@ -42,13 +42,13 @@ brew install astronomer/tap/astro@0.16.1
 
 ### Install with cURL
 
-To install the latest version of the Astronomer CLI, run:
+To install the latest version of the Astro CLI, run:
 
 ```
 curl -sSL https://install.astronomer.io | sudo bash
 ```
 
-To install a specific version of the Astronomer CLI, specify `-s -- major.minor.patch` as a flag at the end of the cURL command. To install v0.16.1, for example, run:
+To install a specific version of the Astro CLI, specify `-s -- major.minor.patch` as a flag at the end of the cURL command. To install v0.16.1, for example, run:
 
 ```
 curl -sSL https://install.astronomer.io | sudo bash -s -- v0.16.1
@@ -69,7 +69,7 @@ curl -sSL https://install.astronomer.io | sudo bash -s < /dev/null
 
 ### Confirm the install
 
-To make sure that you have the Astronomer CLI installed on your machine, run:
+To make sure that you have the Astro CLI installed on your machine, run:
 
 ```bash
 astro version
@@ -78,7 +78,7 @@ astro version
 If the installation was successful, you should see the version of the CLI that you installed in the output:
 
 ```
-Astronomer CLI Version: 0.15.0
+Astro CLI Version: 0.15.0
 Git Commit: c4fdeda96501ac9b1f3526c97a1c5c9b3f890d71
 ```
 
@@ -99,9 +99,9 @@ Available Commands:
   deployment      Manage airflow deployments
   dev             Manage airflow projects
   help            Help about any command
-  upgrade         Check for newer version of Astronomer CLI
+  upgrade         Check for newer version of Astro CLI
   user            Manage astronomer user
-  version         Astronomer CLI version
+  version         Astro CLI version
   workspace       Manage Astronomer workspaces
 
 Flags:
@@ -220,7 +220,7 @@ If you have the appropriate Workspace and Deployment-level permissions, your cod
 
 To identify your Deployment's release name, go to **Settings** > **Basics** > **Release Name** in the Software UI or run `astro deployment list`.
 
-If you run `astro deploy` without specifying `your-deployment-release-name`, the Astronomer CLI will list all Airflow Deployments in your Workspace to choose from.
+If you run `astro deploy` without specifying `your-deployment-release-name`, the Astro CLI will list all Airflow Deployments in your Workspace to choose from.
 
 ### Flags
 
@@ -258,7 +258,7 @@ Initializes the Airflow version upgrade process on any Airflow Deployment on Ast
 
 Run `astro deployment airflow upgrade --deployment-id` to initialize the Airflow upgrade process. To finalize the Airflow upgrade process, complete all of the steps as described in [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md).
 
-If you do not specify `--desired-airflow-version`, this command will output a list of available versions of Airflow you can choose from and prompt you to pick one. The Astronomer CLI will only make available versions of Airflow that are higher than the version you're currently running in your `Dockerfile`.
+If you do not specify `--desired-airflow-version`, this command will output a list of available versions of Airflow you can choose from and prompt you to pick one. The Astro CLI will only make available versions of Airflow that are higher than the version you're currently running in your `Dockerfile`.
 
 ### Flags
 
@@ -660,13 +660,13 @@ If you have access to more than one Astronomer installation, each will have a un
 
 ## astro upgrade
 
-Checks for the latest version of the Astronomer CLI, but does not perform the upgrade.
+Checks for the latest version of the Astro CLI, but does not perform the upgrade.
 
 ### Usage
 
 `astro upgrade`
 
-> **Note:** This command only checks whether or not a new version of the Astronomer CLI is available. To actually upgrade the CLI to the latest version, run:
+> **Note:** This command only checks whether or not a new version of the Astro CLI is available. To actually upgrade the CLI to the latest version, run:
 >
 > ```sh
 > brew install astronomer/tap/astro
@@ -694,7 +694,7 @@ Creates a new user on Astronomer. An invitation email will be sent to the email 
 
 ## astro version
 
-Displays the running versions of both the Astronomer CLI and the Astronomer platform to which you are authenticated. If the minor versions of the Astronomer CLI and your Astronomer platform don't match, we encourage you to upgrade.
+Displays the running versions of both the Astro CLI and the Astronomer platform to which you are authenticated. If the minor versions of the Astro CLI and your Astronomer platform don't match, we encourage you to upgrade.
 
 ### Usage
 

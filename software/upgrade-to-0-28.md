@@ -153,7 +153,7 @@ If the upgrade was successful, you should be able to:
 - See Workspaces and Airflow Deployments in the Software UI.
 - Access the **Settings** tab for each of your Deployments in the Software UI.
 - See metrics on the **Metrics** tab in the Software UI.
-- Successfully run `$ astro deploy` using the Astronomer CLI.
+- Successfully run `$ astro deploy` using the Astro CLI.
 - Open the Airflow UI for each of your Deployments.
 - Access logs for your DAGs in the Airflow UI.
 - Create a new Airflow Deployment and ensure it comes up healthy.
@@ -169,11 +169,11 @@ If there is a problem creating your Airflow Deployment, check the commander logs
 
 Make changes as needed and rerun the upgrade command from Step 6. Do not continue to Step 8 until you have successfully created a new Airflow Deployment.
 
-## Step 8: Upgrade the Astronomer CLI to v0.28
+## Step 8: Upgrade the Astro CLI to v0.28
 
-To ensure reliability and full access to features included in Astronomer Software v0.28, all users must upgrade to v0.28 of the Astronomer CLI. We recommend the latest available version, though you can install any patch release within the v0.28 series.
+To ensure reliability and full access to features included in Astronomer Software v0.28, all users must upgrade to v0.28 of the Astro CLI. We recommend the latest available version, though you can install any patch release within the v0.28 series.
 
-To upgrade to the latest available v0.28 version of the Astronomer CLI, run:
+To upgrade to the latest available v0.28 version of the Astro CLI, run:
 
 `curl -sSL https://install.astronomer.io | sudo bash -s -- v0.28`
 
@@ -181,7 +181,7 @@ To do so via Homebrew, run:
 
 `brew install astronomer/tap/astro@0.28`
 
-Earlier versions of the Astronomer CLI are backwards incompatible with Astronomer v0.28. All team members within your organization must upgrade the Astronomer CLI individually before taking any further action on the platform or in a local Airflow environment. For a detailed breakdown of CLI changes between versions, refer to the [CLI Release Notes](cli-release-notes.md). For detailed install guidelines and more information on the Astronomer CLI, refer to [Astronomer CLI Quickstart](cli-quickstart.md).
+Earlier versions of the Astro CLI are backwards incompatible with Astronomer v0.28. All team members within your organization must upgrade the Astro CLI individually before taking any further action on the platform or in a local Airflow environment. For a detailed breakdown of CLI changes between versions, refer to the [CLI Release Notes](cli-release-notes.md). For detailed install guidelines and more information on the Astro CLI, refer to [Astro CLI Quickstart](cli-quickstart.md).
 
 ## Roll Back to Software v0.25
 

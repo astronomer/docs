@@ -18,7 +18,7 @@ To get started, you need a Service Account on Astronomer to authenticate. Read b
 
 The first step to calling the Airflow REST API on Astronomer is to create a Deployment-level Service Account, which will assume a user role and set of permissions and output an API Key that you can use to authenticate with your request.
 
-You can create a Service Account via either the Software UI or the Astronomer CLI.
+You can create a Service Account via either the Software UI or the Astro CLI.
 
 :::info
 
@@ -41,11 +41,11 @@ To create a Service Account via the Software UI:
 
    ![Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-api-key.png)
 
-### Create a Service Account via the Astronomer CLI
+### Create a Service Account via the Astro CLI
 
-To create a Deployment-level Service Account via the Astronomer CLI:
+To create a Deployment-level Service Account via the Astro CLI:
 
-1. Authenticate to the Astronomer CLI by running:
+1. Authenticate to the Astro CLI by running:
    ```
    astro login <BASE-DOMAIN>
    ```

@@ -39,9 +39,9 @@ When a Workspace Admin invites a user to a Workspace in which one or more Airflo
 
 If a Workspace Admin invites a user to a Workspace that has 0 Airflow Deployments, the **Deployment Roles** modal above will not appear.
 
-#### via Astronomer CLI
+#### via Astro CLI
 
-To invite a user to a Workspace via the Astronomer CLI, run:
+To invite a user to a Workspace via the Astro CLI, run:
 
 ```bash
 astro workspace user add --email <email-address> --workspace-id <workspace-id> --role <workspace-role>
@@ -103,9 +103,9 @@ From there:
 
 ![Invite Deployment User](https://assets2.astronomer.io/main/docs/astronomer-ui/invite-user-deployment.gif)
 
-#### via Astronomer CLI
+#### via Astro CLI
 
-To invite a Workspace user to an Airflow Deployment via the Astronomer CLI, run:
+To invite a Workspace user to an Airflow Deployment via the Astro CLI, run:
 
 ```
 astro deployment user add --email=<email-address> --deployment-id=<deployment-id> --role=<deployment-role>
@@ -155,7 +155,7 @@ To view roles within a Workspace via the Software UI, navigate to **Workspace** 
 
 ![View Workspace Users](https://assets2.astronomer.io/main/docs/astronomer-ui/view-workspace-users.png)
 
-To list Workspace users via the Astronomer CLI, run:
+To list Workspace users via the Astro CLI, run:
 
 ```bash
 astro workspace user list
@@ -169,7 +169,7 @@ If you're a Workspace _Admin_, you can edit both Workspace and deployment-level 
 
 ![Configure Access](https://assets2.astronomer.io/main/docs/astronomer-ui/configure_access-0.22.png)
 
-To edit a user's role via the Astronomer CLI, run:
+To edit a user's role via the Astro CLI, run:
 
 ```bash
 astro workspace user update <email> --workspace-id=<workspace-id> --role=<workspace-role>
@@ -183,7 +183,7 @@ Workspace _Admins_ can remove users from a Workspace by navigating to: **Workspa
 
 ![Remove Workspace User](https://assets2.astronomer.io/main/docs/astronomer-ui/remove-workspace-user.gif)
 
-To remove a user from a Workspace via the Astronomer CLI, make sure you're first operating in that Workspace. Then, run:
+To remove a user from a Workspace via the Astro CLI, make sure you're first operating in that Workspace. Then, run:
 
 ```bash
 astro workspace user remove <email>
@@ -199,7 +199,7 @@ To list all users within a Deployment and their corresponding roles, navigate to
 
 ![Deployment Users](https://assets2.astronomer.io/main/docs/astronomer-ui/deployment_users_0.22.png)
 
-To list Deployment users via the Astronomer CLI, run:
+To list Deployment users via the Astro CLI, run:
 
 ```bash
 astro deployment user list --deployment-id=<deployment-id>
@@ -211,7 +211,7 @@ Deployment _Admins_ can edit permissions using the dropdown menu in the **Access
 
 ![Configure Deployment Access](https://assets2.astronomer.io/main/docs/astronomer-ui/configure-deployment-user-access.png)
 
-To edit a user's role via the Astronomer CLI, run:
+To edit a user's role via the Astro CLI, run:
 
 ```bash
 astro deployment user update <email> --deployment-id=<deployment-id> --role=<deployment-role>
@@ -223,7 +223,7 @@ astro deployment user update <email> --deployment-id=<deployment-id> --role=<dep
 
 To delete a user from an Airflow Deployment via the Software UI, Deployment _Admins_ can click on the red "wastebasket" icon within the **Access** tab shown in the screenshot above.
 
-To delete a user from an Airflow Deployment via the Astronomer CLI, run:
+To delete a user from an Airflow Deployment via the Astro CLI, run:
 
 ```bash
 astro deployment user remove <email> --deployment-id=<deployment-id>
