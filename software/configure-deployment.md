@@ -7,14 +7,14 @@ description: Configure your Airflow Deployment's resources on Astronomer Softwar
 
 ## Overview
 
-An Airflow Deployment on Astronomer is an instance of Apache Airflow that was created either via the Software UI or the Astronomer CLI. Each Airflow Deployment on Astronomer is hosted on a single Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres Metadata Database.
+An Airflow Deployment on Astronomer is an instance of Apache Airflow that was created either via the Software UI or the Astro CLI. Each Airflow Deployment on Astronomer is hosted on a single Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres Metadata Database.
 
 This guide walks you through the process of creating and configuring an Airflow Deployment on Astronomer.
 
 ## Prerequisites
 
 To create an Airflow Deployment, you'll need:
-* [The Astronomer CLI](cli-quickstart.md) installed.
+* [The Astro CLI](cli-quickstart.md) installed.
 * An Astronomer platform at `app.BASEDOMAIN`.
 * An Astronomer [Workspace](manage-workspaces.md).
 
@@ -209,7 +209,7 @@ By default, you can deploy DAGs to an Airflow Deployment by building them into a
 
 This mechanism builds your DAGs into a Docker image alongside all other files in your Airflow project directory, including your Python and OS-level packages, your Dockerfile, and your plugins.
 
-The resulting image is then used to generate a set of Docker containers for each of Airflow's core components. Every time you run `astro deploy` via the Astronomer CLI, your DAGs are rebuilt into a new Docker image and all Docker containers are restarted.
+The resulting image is then used to generate a set of Docker containers for each of Airflow's core components. Every time you run `astro deploy` via the Astro CLI, your DAGs are rebuilt into a new Docker image and all Docker containers are restarted.
 
 Since the image-based deploy does not require additional setup, we recommend it for those getting started with Airflow.
 
@@ -239,7 +239,7 @@ In your Astronomer database, the corresponding `Deployment` record will be given
 
 > **Note:** This feature must first be enabled at the platform level before it can be used. To enable this feature, set `astronomer.houston.config.deployments.hardDeleteDeployment: true` in your `config.yaml` file and push the changes to your platform as described in [Apply a Config Change](apply-platform-config.md).
 
-To reuse a custom release name given to an existing Deployment, you need to first hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. To do so, select the **Hard Delete?** checkbox before clicking **Delete Deployment**. Alternatively, you can run `astro deployment delete --hard` via the Astronomer CLI.
+To reuse a custom release name given to an existing Deployment, you need to first hard delete both the Deployment's metadata database and the Deployment's entry in your Astronomer database. To do so, select the **Hard Delete?** checkbox before clicking **Delete Deployment**. Alternatively, you can run `astro deployment delete --hard` via the Astro CLI.
 
 ![Hard delete checkbox](https://assets2.astronomer.io/main/docs/astronomer-ui/hard-delete.png)
 

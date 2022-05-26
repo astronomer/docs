@@ -1,13 +1,13 @@
 ---
-sidebar_label: 'Astronomer CLI'
-title: 'Astronomer CLI Release Notes'
+sidebar_label: 'Astro CLI'
+title: 'Astro CLI Release Notes'
 id: cli-release-notes
-description: Release notes for the Astronomer CLI.
+description: Release notes for the Astro CLI.
 ---
 
 ## Overview
 
-This document provides a summary of all changes made to the [Astronomer CLI](cli-quickstart.md) for the v0.28.x series of Astronomer Software. For general product release notes, go to [Astronomer Software Release Notes](release-notes.md).
+This document provides a summary of all changes made to the [Astro CLI](cli-quickstart.md) for the v0.28.x series of Astronomer Software. For general product release notes, go to [Astronomer Software Release Notes](release-notes.md).
 
 If you have any questions or a bug to report, reach out to us via [Astronomer Support](https://support.astronomer.io).
 

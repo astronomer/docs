@@ -40,7 +40,7 @@ RUN pip install --no-cache-dir --user <your-python-package>
 
 To install a specific version of a Python-level package, include your package version in a pip [constraints file](https://pip-python3.readthedocs.io/en/latest/user_guide.html#constraints-files) and copy it into your Dockerfile. The base Docker image already has a pip constraints file which can be found [on GitHub](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/build-time-pip-constraints.txt).
 
-> **Note:** Installing dependencies will look different if you are deploying your Docker image to Astronomer via the Astronomer CLI. For an Astronomer platform-based setup, read [Install Packages via the Astronomer CLI](install-packages.md#install-packages-via-the-astronomer-cli).
+> **Note:** Installing dependencies will look different if you are deploying your Docker image to Astronomer via the Astro CLI. For an Astronomer platform-based setup, read [Install Packages via the Astro CLI](install-packages.md#install-packages-via-the-astronomer-cli).
 
 Once you rebuild your image with `docker-build`, the image will have access to any packages that you specified. To confirm that a package was installed:
 
@@ -70,4 +70,4 @@ You can also create your own Python packages and install them into your Airflow 
 
 ## Install Packages via Astronomer
 
-If you're deploying the Astronomer Certified Docker image via Astronomer CLI, there are alternative workflows for installing packages and other dependencies to your image. For more information, read [Customize Images](customize-image.md).
+If you're deploying the Astronomer Certified Docker image via Astro CLI, there are alternative workflows for installing packages and other dependencies to your image. For more information, read [Customize Images](customize-image.md).

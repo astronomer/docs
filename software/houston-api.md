@@ -181,7 +181,7 @@ To delete a Deployment, you'll need:
 
 > **Note:** For more information about the SysAdmin role, reference our ["User Management" doc](manage-platform-users.md).
 
-If you don't already have a Deployment ID, run `astro deployment list` via the Astronomer CLI or follow the steps in the "Query an Airflow Deployment" section above.
+If you don't already have a Deployment ID, run `astro deployment list` via the Astro CLI or follow the steps in the "Query an Airflow Deployment" section above.
 
 Then, to delete a Deployment, run the following:
 
@@ -202,7 +202,7 @@ To create a Deployment user, you'll need:
 1. Workspace Admin privileges
 2. A Deployment ID
 
-If you don't already have a Deployment ID, run `astro deployment list` via the Astronomer CLI or follow the steps in the "Query an Airflow Deployment" section above.
+If you don't already have a Deployment ID, run `astro deployment list` via the Astro CLI or follow the steps in the "Query an Airflow Deployment" section above.
 
 First, add the following to your GraphQL playground:
 
@@ -361,7 +361,7 @@ To programmatically update environment variables, you'll need:
 1. A Deployment ID
 2. A Deployment release name
 
-If you don't already have a Deployment ID, run `astro deployment list` via the Astronomer CLI or follow the steps in the "Query an Airflow Deployment" section above.
+If you don't already have a Deployment ID, run `astro deployment list` via the Astro CLI or follow the steps in the "Query an Airflow Deployment" section above.
 
 Then, in your GraphQL Playground, run the following:
 
@@ -402,7 +402,7 @@ As input, you need:
 2. Email address of the user
 3. Role you'd like to designate that user (e.g. Workspace "Admin", "Editor" or "Viewer")
 
-If you don't already have a Workspace ID, run `astro workspace list` via the Astronomer CLI.
+If you don't already have a Workspace ID, run `astro workspace list` via the Astro CLI.
 
 With that information, run the following:
 

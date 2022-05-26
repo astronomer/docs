@@ -288,7 +288,7 @@ For a given Deployment, the Deployment Editor has all of the same default permis
 
 - `deployment.airflow.user`: Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for all Deployments, including modifying task runs and DAG runs
 - `deployment.config.update`: Modify the Deployment's settings
-- `deployment.images.push`: Push code to the Deployment via the Astronomer CLI
+- `deployment.images.push`: Push code to the Deployment via the Astro CLI
 - `deployment.serviceAccounts.create`: Create a Deployment-level service account
 - `deployment.serviceAccounts.update`: Modify a Deployment-level service account
 - `deployment.serviceAccounts.delete`: Delete a Deployment-level service account

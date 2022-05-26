@@ -48,7 +48,7 @@ To install and use the Astro CLI on Windows or Linux, you must have:
 Install the Astro CLI by running the following command:
 
 ```sh
-brew install astronomer/cloud/astro
+brew install astronomer/tap/astro
 ```
 
 </TabItem>
