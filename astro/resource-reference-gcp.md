@@ -63,6 +63,8 @@ This table lists the maximum worker size that is supported on Astro for each nod
 | e2-standard-4      | 25         | 2.5 CPUs  | 9.4  GiB MEM |
 | e2-standard-8      | 65         | 6.5 CPUs  | 24.4 GiB MEM |
 
+The maximum worker size values may increase or decrease as the CPU and memory requirements of Astro cloud change.
+
 :::info
 
 The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum Scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
