@@ -7,7 +7,7 @@ description: Reference documentation for astro context switch.
 
 ## Description
 
-Switch to a different Astronomer installation. You can switch to a given Astronomer installation if you have authenticated to it at least once via `astro login`.
+Switch to a different Astronomer installation. You can switch to a given Astronomer installation only if you have authenticated to it at least once via `astro login`. If you have not authenticated, run `astro login <base-domain>` instead.
 
 Note that after switching to a different Astronomer installation, you might have to re-authenticate to the installation via `astro login`.  
 

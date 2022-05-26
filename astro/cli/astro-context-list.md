@@ -9,6 +9,8 @@ description: Reference documentation for astro context list.
 
 View a list of domains for all Astronomer installations that you have access to. An Astronomer installation will appear on this list if you have authenticated to it at least once via `astro login`.
 
+If you're an Astro user, you should only see `cloud.astronomer.io` on this list.
+
 ## Usage
 
 ```sh

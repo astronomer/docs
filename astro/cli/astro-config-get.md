@@ -7,7 +7,7 @@ description: Reference documentation for astro config get.
 
 ## Description
 
-View the current configuration for a locally hosted Astro project.
+View the current configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your Webserver port, and your project name.
 
 ## Usage
 
@@ -25,10 +25,10 @@ astro config get <option>
 | `cloud.api.port`      | The port to use when calling the Airflow API in a local environment                     |
 | `context`           | The context for your Astro project                                                      |
 | `local.registry`     | The location of your local Docker container running Airflow                             |
-| `postgres.user`      | Your username for the Postgres metadata DB                                              |
-| `postgres.password`  | Your password for the Postgres metadata DB                                              |
-| `postgres.host`      | The host for the Postgres metadata DB                                                   |
-| `postgres.port`      | The port for the Postgres metadata DB                                                   |
+| `postgres.user`      | Your username for the local Airflow metadata database                                           |
+| `postgres.password`  | Your password for the local Airflow metadata database                                              |
+| `postgres.host`      | The host for the local Airflow metadata database                                                   |
+| `postgres.port`      | The port for the local Airflow metadata database                                                    |
 | `project.name`       | The name of your Astro project                                                       |
 | `webserver.port`     | The port for the Webserver in your local Airflow environment                           |
 | `show_warnings`      | Determines whether warning messages appear when starting up a local Airflow environment |
@@ -43,7 +43,7 @@ Some possible configurations are not documented here because they are used only 
 
 ```sh
 ## View the username for your project's postgres user
-$ astro config get PostgresUser
+$ astro config get postgres.user
 ```
 
 ## Related Commands

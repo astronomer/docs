@@ -7,7 +7,7 @@ description: Reference documentation for astro config set.
 
 ## Description
 
-Update configurations for a locally hosted Astro project.
+Update any part of the current configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your Webserver port, and your project name.
 
 ## Usage
 
@@ -42,8 +42,8 @@ Some possible configurations are not documented here because they are used only 
 ## Examples
 
 ```sh
-## Set a username for your project's postgres user
-$ astro config set postgres.user postgres
+## Set your Webserver port to 8081
+$ astro config set webserver.port 8081
 ```
 
 ## Related Commands

@@ -7,7 +7,7 @@ description: Learn about every command that you can run with the Astro CLI.
 
 ## Overview
 
-This document contains information about all commands and settings available in the Astro CLI, including examples and flags. To install the Astro CLI, see [Quickstart](cli/quickstart.md).
+This document contains information about all commands and settings available in the Astro CLI, including examples and flags. To get started with the Astro CLI, see [CLI Quickstart](cli/quickstart.md).
 
 :::info
 
@@ -23,6 +23,7 @@ We expect that you'll use these commands most often when managing your Astro pro
 - [`astro dev init`](cli/astro-init.md)
 - [`astro dev start`](cli/astro-dev-start.md)
 - [`astro dev stop`](cli/astro-dev-stop.md)
+- [`astro dev restart`](cli/astro-dev-restart.md)
 - [`astro deploy`](cli/astro-deploy.md)
 
 Each of these commands has a dedicated documentation page with additional notes and examples.
