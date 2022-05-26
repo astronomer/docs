@@ -110,7 +110,7 @@ To use Vault as a secrets backend, we recommend configuring a Vault AppRole with
 
     Save these values for Step 3.
 
-#### Step 2: Write an Airflow Variable or Connection to Vault
+#### Step 2: Create an Airflow Variable or Connection in Vault
 
 To test whether your Vault server is set up properly, create a test Airflow variable or connection to store as a secret. You will use this secret to test your backend's functionality in Step 4, so it can be either a real or placeholder value.
 
@@ -238,7 +238,7 @@ To use this feature, you need:
 - Access to AWS SSM Parameter Store.
 - A valid AWS Access Key ID and Secret Access Key.
 
-#### Step 1: Write an Airflow Variable or Connection to AWS Parameter Store
+#### Step 1: Create an Airflow Variable or Connection in AWS Parameter Store
 
 To start, add an Airflow variable or connection as a secret to Parameter Store for testing. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value. For instructions, read AWS documentation on how to do so via the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html).
 
@@ -354,14 +354,33 @@ To use AWS Secrets Manager as your Airflow secrets backend, you need:
 - An AWS account with the `SecretsManagerReadWrite` policy.
 - A valid AWS Access Key ID and Secret Access Key.
 
-#### Step 1: Write an Airflow Variable or Connection to AWS Secrets Manager
+#### Step 1: Create an Airflow Variable or Connection in AWS Secrets Manager
 
 To start, add an Airflow variable or connection as a secret to AWS Secrets Manager. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value.
+    
+- When setting the secret type, choose `Other type of secret` and select the `Plaintext` option.
+- If creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
+- The secret name is assigned after providing the plaintext value and clicking `Next`.
 
-Secrets must be formatted such that:
+Secret names must correspond with the `connections_prefix` and `variables_prefix` set below in step 2. For example:
 
-- Airflow variables are stored in `airflow/variables/<variable-key>`.
-- Airflow connections are stored in `airflow/connections/<connection-id>`.
+- If using `"variables_prefix": "airflow/variables"`, Airflow variable names must be set as: 
+    ```
+    airflow/variables/<variable-key>
+    ```
+    - The `<variable-key>` is how you will retrieve that variable's value in a DAG. For example: 
+    ```python
+    my_var = Variable.get("variable-key>")
+    ```
+- If using `"connections_prefix": "airflow/connections"`, Airflow connections must be set as: 
+    ```
+    airflow/connections/<connection-id>
+    ```
+    - The `<connection-id>` is how you will retrieve that connection's URI in a DAG. For example: 
+    ```python
+    conn = BaseHook.get_connection(conn_id="<connection-id>")
+    ```
+- Be sure to not include a leading `/` at the beginning of your variable or connection name
 
 For more information on adding secrets to Secrets Manager, see [AWS documentation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html).
 
@@ -382,7 +401,7 @@ ENV AWS_ACCESS_KEY_ID="<your-aws-access-key-id>"
 ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-access-key>"
 ENV AWS_DEFAULT_REGION="<your-aws-region>"
 ENV AIRFLOW__SECRETS__BACKEND="airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend"
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}'
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables"}'
 ```
 
 :::warning
@@ -464,7 +483,7 @@ To use Google Cloud Secret Manager as your Airflow secrets backend, you need:
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
 - A [JSON service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) for the service account.
 
-#### Step 1: Write an Airflow Variable or Connection to Google Cloud Secret Manager
+#### Step 1: Create an Airflow Variable or Connection in Google Cloud Secret Manager
 
 To start, add an Airflow variable or connection as a secret to Google Cloud Secret Manager. You can do so via the Cloud Console or the gcloud CLI. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value.
 
