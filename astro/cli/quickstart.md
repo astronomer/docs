@@ -56,7 +56,7 @@ To use the Astro CLI on Windows, you must have:
 
 1. Go to the [**Releases** page of the Astro CLI GitHub repository](https://github.com/astro-projects/astro-cli/releases). Based on your desired CLI version and the CPU architecture of your machine, download one of the `.zip` files available on this page.
 
-    For example, to install v1.0.0 of the Astro CLI on a Windows Machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.zip`.
+    For example, to install v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.zip`.
 
 2. Run the following command to unzip the executable:
 
@@ -121,7 +121,7 @@ To create a new Astro project:
     cd <your-astro-project-name>
     ```
 
-3. Run the following Astro CLI command to initialize an Astro project in the directory:
+3. Initialize an Astro project in the directory:
 
     ```sh
     astro dev init

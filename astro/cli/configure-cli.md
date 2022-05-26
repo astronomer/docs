@@ -60,7 +60,7 @@ To use the Astro CLI on Windows, you must have:
 
 1. Go to the [**Releases** page of the Astro CLI GitHub repository](https://github.com/astro-projects/astro-cli/releases). Based on your desired CLI version and the CPU architecture of your machine, download one of the `.zip` files available on this page.
 
-    For example, to install v1.0.0 of the Astro CLI on a Windows Machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.zip`.
+    For example, to install v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.zip`.
 
 2. Run the following command to unzip the executable:
 
@@ -68,7 +68,7 @@ To use the Astro CLI on Windows, you must have:
     tar -xvzf .\astrocli.tar.gz
     ```
 
-3. Add the filepath for the directory containing `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astrocloud.exe`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
+3. Add the filepath for the directory containing `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astro.exe`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
 
 4. Restart your machine.
 
@@ -126,7 +126,7 @@ brew install astronomer/tap/astro
 
 To upgrade the Astro CLI on Windows:
 
-1. Remove the existing `astro.exe` file on your machine.
+1. Delete the existing `astro.exe` file on your machine.
 
 2. Go to the [**Releases** page of the Astro CLI GitHub repository](https://github.com/astro-projects/astro-cli/releases). Based on the version of the CLI you want and your CPU architecture, download one of the `.zip` files available on this page.
 
@@ -138,7 +138,7 @@ To upgrade the Astro CLI on Windows:
     tar -xvzf .\astrocli.tar.gz
     ```
 
-4. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astrocloud.exe`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
+4. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astro.exe`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
 
 5. Restart your machine.
 
@@ -179,7 +179,7 @@ brew uninstall astronomer/tap/astro
 
 To uninstall the Astro CLI on Windows:
 
-1. Remove the filepath for `astro.exe` from your Windows PATH environment variable.
+1. Delete the filepath for `astro.exe` from your Windows PATH environment variable.
 2. Delete `astro.exe`.
 
 </TabItem>
@@ -228,7 +228,7 @@ brew uninstall astronomer/cloud/astrocloud
 
 To uninstall `astrocloud` on Windows:
 
-1. Remove the filepath for `astrocloud.exe` from your Windows PATH environment variable.
+1. Delete the filepath for `astrocloud.exe` from your Windows PATH environment variable.
 2. Delete `astrocloud.exe` from your machine.
 
 </TabItem>
@@ -237,7 +237,7 @@ To uninstall `astrocloud` on Windows:
 
 To uninstall `astrocloud` on Linux:
 
-1. Remove the filepath for `astrocloud.exe` from your Linux PATH environment variable.
+1. Delete the filepath for `astrocloud.exe` from your Linux PATH environment variable.
 2. Delete `astrocloud.exe` from your machine.
 
 </TabItem>
@@ -246,16 +246,23 @@ To uninstall `astrocloud` on Linux:
 
 ### Step 2: Install Astro CLI v1.0+
 
-For more details, see [Install the CLI](configure-cli.md#install-the-cli.md).
+Once you've uninstalled the `astrocloud` executable, install the latest version of `astro` on your machine.
 
-### Step 3: Migrate Project Configurations (_Optional_)
+For instructions, see [Install the CLI](configure-cli.md#install-the-cli.md).
 
-If you manually updated the `.astrocloud/config.yaml` file of an existing Astro project:
+### Step 3: Migrate Existing Astro Projects
+
+In order to run and deploy your existing Astro projects using the `astro` executable, you need to populate these projects with a new `.astro` directory of files. For any existing Astro projects on your machine:
 
 1. In your terminal, open your Astro project.
 2. Run `astro dev init` to generate a new `.astro` directory in your project. This subdirectory might be hidden in graphical file browsers. You can show hidden files using `⌘ + Shift + .` on Mac or by selecting **View > Hidden items** in Windows file explorer.
 
-    If the CLI prompts you about whether you want to create a project in a non-empty directory, enter `Yes`. The CLI will only create files that aren't yet in your directory. In this case, the only file that it will create is `.astro/config.yaml`.
+    If the CLI prompts you about whether you want to create a project in a non-empty directory, enter `Yes`. The CLI will only create files that aren't yet in your directory. In this case, the only files that it creates are `./astro/test_dag_integrity_default.py` and `.astro/config.yaml`.
 
-3. Copy the contents from `.astrocloud/config.yaml` into `.astro/config.yaml`.
-4. Delete `.astrocloud/config.yaml` your project.
+### Step 4: Migrate Project Configurations (_Optional_)
+
+If you manually updated the `.astrocloud/config.yaml` file of an existing Astro project:
+
+1. In your terminal, open your Astro project.
+2. Copy the contents from `.astrocloud/config.yaml` into `.astro/config.yaml`.
+3. Delete `.astrocloud/config.yaml` from your project.
