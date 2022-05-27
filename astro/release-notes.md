@@ -18,9 +18,17 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ## May 25, 2022
 
-### New Datasets View for Data Lineage
+### New Datasets Page for Data Lineage
 
+You can now use the new **Datasets** page in the **Lineage** tab to view a table of the most recent datasets that have been either accessed or updated by your data pipelines. This page can help you get a high level overview over which datasets your pipelines are currently accessing.
 
+![Datasets page](/img/release-notes/datasets-page.png)
+
+To learn more about a recent dataset change, you can click the dataset's name in the table. This shows the dataset within the context of its lineage graph.  
+
+### Bug Fixes
+
+- Fixed an issue where Deployments using an unsupported version of Astro Runtime appeared with a Runtime version of **Unknown**
 
 ## May 5, 2022
 
