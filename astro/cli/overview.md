@@ -5,34 +5,29 @@ id: overview
 description: Learn about every command that you can run with the Astro CLI.
 ---
 
-import {siteVariables} from '@site/src/versions';
+## Run Airflow Locally
 
-## Overview
+The Astro CLI is the command line interface for data orchestration. It's the easiest way to get started with [Apache Airflow](https://airflow.apache.org/) and can be used with all Astronomer products.
 
-The Astro CLI is the easiest way to run Apache Airflow on your local machine. From the CLI, you can run a local Apache Airflow environment with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astro user, you can also create and manage users, Workspaces, Deployments, and more.
+The Astro CLI is open source and built for data practitioners everywhere. The binary is maintained in the public [Astro CLI GitHub repository](https://github.com/astronomer/astro-cli), where pull requests and GitHub issues are welcome.
 
-This document contains information about all commands and settings available in the Astro CLI, including examples and flags. To install the Astro CLI, see [Install the CLI](install-cli.md).
+## Quickstart
 
-:::info
+Follow the [Astro CLI Quickstart](cli-quickstart.md) to install the CLI and run your first locally hosted Airflow project.
 
-All reference documentation is based on the latest available version of the Astro CLI. To see the differences across various CLI versions, see the [Astro CLI Release Notes](cli-release-notes.md).
+## Features
 
-:::
+Specifically, the Astro CLI includes:
 
-## Core Commands
+- A built-in Astro project directory that includes all the files required to run Airflow, including dedicated folders for your DAGs, packages, and unit tests.
+- Commands to enhance the local development experience. Using the CLI, you can run a local Airfow environment, apply code changes, and view logs for all Airflow components.
+- A set of example pytests and example DAGs that showcase important Airflow best practices and can help your team learn quickly and identify errors in your DAGs ahead of time.
+- Easy and secure browser-based authentication for Astro and Astronomer Software.
+- A robust set of commands to match functionality in the Cloud UI, including commands to create a Deployment and modify environment variables.
+- Support for Deployment API keys, which you can use to automate commands as part of CI/CD workflows.
 
-We expect that you'll use these commands most often when managing your Astro projects and Deployments:
+To stay up to date on the latest features, see [Astro CLI Release Notes](https://github.com/astronomer/docs/pull/730/cli-release-notes.md).
 
-- [`astro auth login`](cli/astro-auth-login.md)
-- [`astro dev init`](cli/astro-dev-init.md)
-- [`astro dev start`](cli/astro-dev-start.md)
-- [`astro dev stop`](cli/astro-dev-stop.md)
-- [`astro deploy`](cli/astro-deploy.md)
+## CLI Reference
 
-Each of these commands has a dedicated documentation page with additional notes and examples. As we expand functionality for the Astro CLI, new commands will be listed here.
-
-## Global Options
-
-The Astro CLI has one global flag that can be used with any command:
-
-- `-h`, `--help`: Output more information about a given command to the CLI.
+For a full list of available CLI commands, see the [CLI Command Reference](cli-reference.md).

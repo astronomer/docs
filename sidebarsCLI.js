@@ -13,9 +13,16 @@ module.exports = {
       {
       type: 'category',
       label: 'CLI Command Reference',
+      link: { type: 'doc', id: 'reference' },
       items: [
-        'cli/astro-auth-login',
-        'cli/astro-auth-logout',
+        'cli/astro-login',
+        'cli/astro-logout',
+        'cli/astro-completion',
+        'cli/astro-config-get',
+        'cli/astro-config-set',
+        'cli/astro-context-delete',
+        'cli/astro-context-list',
+        'cli/astro-context-switch',
         'cli/astro-completion',
         'cli/astro-deploy',
         'cli/astro-deployment-create',

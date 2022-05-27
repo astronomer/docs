@@ -30,7 +30,7 @@ In order to push up DAGs to a Deployment on Astronomer, you must have:
 To authenticate via the Astro CLI, run:
 
 ```sh
-astro auth login BASEDOMAIN
+astro login BASEDOMAIN
 ```
 
 ## Step 2: Confirm Your Workspace and Deployment

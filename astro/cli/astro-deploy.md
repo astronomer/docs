@@ -49,6 +49,6 @@ $ astro deploy ckvvfp9tf509941drl4vela81n --save
 
 ## Related Commands
 
-- [`astro auth login`](cli/astro-auth-login.md)
+- [`astro login`](cli/astro-login.md)
 - [`astro deployment list`](cli/astro-deployment-list.md)
 - [`astro dev parse`](cli/astro-dev-parse.md)

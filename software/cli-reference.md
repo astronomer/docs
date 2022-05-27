@@ -112,38 +112,6 @@ Use "astro [command] --help" for more information about a command.
 
 Once you've successfully installed the CLI, use the remainder of this guide to learn more about the CLI's available commands.
 
-## astro auth
-
-Authenticates you to Astronomer.
-
-### Usage
-
-Run `astro auth <subcommand> <base-domain>` in your terminal to log in or out of your Astronomer platform. This is equivalent to using the login screen of the Software UI.
-
-If you have access to more than one Astronomer platform, each will have a unique `<base-domain>`. When switching between platforms, make sure to log out of one `<base domain>` before logging into another.
-
-### Subcommands
-
-| Subcommand | Usage                                                                                                                                              |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `login`    | To log in to Astro, run `astro auth login`. For Software, run `astro auth login <base-domain>`.    |
-| `logout`   | To log out of Astro, run `astro auth logout`. For Software, run `astro auth logout <base-domain>`. |
-
-## astro cluster
-
-Allows Astronomer Software users to switch between the Software installations they have access to.
-
-### Usage
-
-Run `astro cluster <subcommand>` in your terminal to see or access available Software installations.
-
-### Subcommands
-
-| Subcommand | Usage                                                                                                                                                                                                                                              |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `list`     | Run `astro cluster list` to retrieve a list of all clusters to which you've previously authenticated.                                                                                                                                            |
-| `switch`   | Run `astro cluster switch` to retrieve a list of available clusters, then enter the ID number of the cluster you want to switch to. Once that command is successful, authenticate to that cluster by running `astro auth login <base-domain>`. |
-
 ## astro completion
 
 Generates autocompletion scripts for Astronomer.
@@ -153,16 +121,17 @@ Generates autocompletion scripts for Astronomer.
 Use `astro completion <subcommand>` to generate autocompletion scripts, which can be used to automate workflows on Astronomer that require multiple CLI commands.
 
 > **Note:** If you're running on MacOS, make sure to install [Bash Completion](https://github.com/scop/bash-completion) before creating autocompletion scripts. To do so via Homebrew, run:
+
     ```sh
     brew install bash-completion
     ```
 
 ### Subcommands
 
-| Subcommand | Usage                                                                                                                                                        |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Subcommand | Usage                                                                                                                                                      |
+| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `bash`     | Run `astro completion bash` to show the bash shell script for autocompletion in Astronomer. Use this output to modify or view your autocompletion scripts. |
-| `zsh`      | Run `astro completion zsh` to show the zsh shell script for autocompletion in Astronomer. Use this output to modify or view your autocompletion scripts.  |
+| `zsh`      | Run `astro completion zsh` to show the zsh shell script for autocompletion in Astronomer. Use this output to modify or view your autocompletion scripts.   |
 
 ## astro config
 
@@ -174,35 +143,70 @@ Run `astro config get <setting-name>` to list the value for a particular setting
 
 The settings that you can update via the command line are:
 
-- cloud.api.protocol
-- cloud.api.port
-- cloud.api.ws_protocol
-- cloud.api.token
-- context
-- contexts
-- houston.dial_timeout
-- local.houston
-- local.orbit
-- postgres.user
-- postgres.password
-- postgres.host
-- postgres.port
-- project.deployment
-- project.name
-- project.workspace
-- webserver.port
-- show_warnings
+- `cloud.api.protocol`
+- `cloud.api.port`
+- `cloud.api.ws_protocol`
+- `cloud.api.token`
+- `container.engine`
+- `context`
+- `contexts`
+- `houston.dial_timeout`
+- `local.houston`
+- `local.orbit`
+- `postgres.user`
+- `postgres.password`
+- `postgres.host`
+- `postgres.port`
+- `project.deployment`
+- `project.name`
+- `project.workspace`
+- `webserver.port`
+- `show_warnings`
 
 ### Subcommands
 
-| Subcommand | Usage                                              |
-| ---------- | -------------------------------------------------- |
+| Subcommand | Usage                                                     |
+| ---------- | --------------------------------------------------------- |
 | `get`      | Show current values for the above configuration settings. |
-| `set`      | Updates a setting in your platform to a new value. |
+| `set`      | Updates a setting in your platform to a new value.        |
 
 ### Related documentation
 
 - [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md)
+
+## astro context delete
+
+Delete the locally stored information for a given Astronomer installation. After running this command, the domain for the installation that you specify will no longer appear when you run `astro context list`, and you will not be able to switch to the installation via `astro context switch`.
+
+If you re-authenticate to an installation that you previously deleted via this command, its information will again be available from `astro context list` and `astro context switch`.
+
+### Usage
+
+```sh
+astro context delete <basedomain>
+```
+
+## astro context list
+
+View a list of domains for all Astronomer installations that you have access to. An Astronomer installation will appear on this list if you have authenticated to it at least once via `astro login`.
+
+### Usage
+
+```sh
+astro context list
+```
+
+## astro context switch
+
+Switch to a different Astronomer installation. You can switch to a given Astronomer installation if you have authenticated to it at least once via `astro login`.
+
+Note that after switching to a different Astronomer installation, you might have to re-authenticate to the installation via `astro login`.
+
+### Usage
+
+```sh
+astro context switch <basedomain>
+```
 
 ## astro deploy
 
@@ -220,14 +224,13 @@ If you run `astro deploy` without specifying `your-deployment-release-name`, the
 
 ### Flags
 
-| Flag             | Value Type | Usage                                                                      |
-| ---------------- | ---------- | -------------------------------------------------------------------------- |
-| `--force`        | None       | Forces deploy even if there are uncommitted changes.                       |
-| `--prompt`       | None       | Forces prompt for choosing a target Deployment.                            |
-| `--save`         | None       | Saves this directory/Deployment combination for future deploys.            |
-| `--workspace-id` | String     | Lists available Deployments in your Workspace and prompts you to pick one. |
-| `--no-cache` | None     | Do not use any images from the container engine's cache when building your project. |
-
+| Flag             | Value Type | Usage                                                                               |
+| ---------------- | ---------- | ----------------------------------------------------------------------------------- |
+| `--force`        | None       | Forces deploy even if there are uncommitted changes.                                |
+| `--prompt`       | None       | Forces prompt for choosing a target Deployment.                                     |
+| `--save`         | None       | Saves this directory/Deployment combination for future deploys.                     |
+| `--workspace-id` | String     | Lists available Deployments in your Workspace and prompts you to pick one.          |
+| `--no-cache`     | None       | Do not use any images from the container engine's cache when building your project. |
 
 ### Related documentation
 
@@ -259,10 +262,10 @@ If you do not specify `--desired-airflow-version`, this command will output a li
 
 ### Flags
 
-| Flag                        | Value Type | Usage                                                                                                                      |
-| --------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| Flag                        | Value Type | Usage                                                                                                                    |
+| --------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `--deployment-id`           | String     | The ID of the Deployment for which you want to upgrade Airflow. To find your Deployment ID, run `astro deployment list`. |
-| `--desired-airflow-version` | String     | The Airflow version you're upgrading to (e.g. `1.10.14`).                                                                  |
+| `--desired-airflow-version` | String     | The Airflow version you're upgrading to (e.g. `2.2.0`).                                                                |
 
 ### Related documentation
 
@@ -279,15 +282,15 @@ Run `astro deployment create <new-deployment-name> [flags]` to create a new Depl
 
 ### Flags
 
-| Flag                | Value Type | Usage                                                                                                                                |
-| ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `--airflow-version` | String     | The Airflow version for the new Deployment.                                                                                          |
-| `--cloud-role`      | String     | Append an AWS or GCP IAM role to your Airflow Deployment's Webserver, Scheduler, and Worker Pods.                                    |
-| `--executor`        | String     | The Executor type for the Deployment. Can be `local`, `celery`, or `kubernetes`. If no executor is specified, then `celery` is used. |
-| `--release-name`    | String     | A custom release name for the Airflow Deployment. Applies only to Deployments on Astronomer Software.                              |
-| `--dag-deployment-type` | String     | The DAG deploy method for the Deployment. Can be either `image` or `volume`. The default value is `image`.                                                               |
-| `--nfs-location` | String     | The location for an NFS volume mount, specified as: `<IP>:/<path>`. Must be specified when `--dag-deployment-type=volume`. Input is automatically prepended with `nfs:/` - do not include this in your input.                                  |
-| `--triggerer-replicas` | Integer     | The number of replica Triggerers to provision for the Deployment.                      |
+| Flag                    | Value Type | Usage                                                                                                                                                                                                         |
+| ----------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--airflow-version`     | String     | The Airflow version for the new Deployment.                                                                                                                                                                   |
+| `--cloud-role`          | String     | Append an AWS or GCP IAM role to your Airflow Deployment's Webserver, Scheduler, and Worker Pods.                                                                                                             |
+| `--executor`            | String     | The Executor type for the Deployment. Can be `local`, `celery`, or `kubernetes`. If no executor is specified, then `celery` is used.                                                                          |
+| `--release-name`        | String     | A custom release name for the Airflow Deployment. Applies only to Deployments on Astronomer Software.                                                                                                         |
+| `--dag-deployment-type` | String     | The DAG deploy method for the Deployment. Can be either `image` or `volume`. The default value is `image`.                                                                                                    |
+| `--nfs-location`        | String     | The location for an NFS volume mount, specified as: `<IP>:/<path>`. Must be specified when `--dag-deployment-type=volume`. Input is automatically prepended with `nfs:/` - do not include this in your input. |
+| `--triggerer-replicas`  | Integer    | The number of replica Triggerers to provision for the Deployment.                                                                                                                                             |
 
 ### Related documentation
 
@@ -351,14 +354,12 @@ Creates a Deployment-level service account on Astronomer, which you can use to c
 
 ### Flags
 
-| Flag                         | Value Type | Usage                                                                                                                             |
-| ---------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Flag                         | Value Type | Usage                                                                                                                           |
+| ---------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------- |
 | `--category`                 | String     | The category for the new service account as displayed in the Software UI. This is optional, and the default value is `Not set`. |
-| `--deployment-id` (Required) | String     | The Deployment you're creating a service account for.                                                                             |
-| `--label` (Required)         | String     | The name or label for the new service account.                                                                                    |
-| `--role`                     | String     | The User Role for the new service account. Can be `viewer`, `editor`, or `admin`. The default value is `viewer`.                  |
-| `--system-sa`                | Boolean    | Whether this service account is a System service account. Default value is `false`.                                               |
-| `--user-id`                  | String     | The ID for the new service account.                                                                                               |
+| `--deployment-id` (Required) | String     | The Deployment you're creating a service account for.                                                                           |
+| `--label` (Required)         | String     | The name or label for the new service account.                                                                                  |
+| `--role`                     | String     | The User Role for the new service account. Can be `viewer`, `editor`, or `admin`. The default value is `viewer`.                |
 
 ### Related documentation
 
@@ -374,27 +375,27 @@ Deletes a service account for a given Deployment.
 
 ### Flags
 
-| Flag              | Value Type | Usage                                                                                                                                                                                           |
-| ----------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Flag                        | Value Type | Usage                                                                                                                                                                                         |
+| --------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--deployment-id`(Required) | String     | The Airflow Deployment in which the service account is configured. Use this flag as an alternative to specifying `<your-service-account-id>`. To get this value, run `astro deployment list`. |
 
 ### Related documentation
 
 - [Deploy to Astronomer via CI/CD](ci-cd.md)
 
-## astro deployment service-account get
+## astro deployment service-account list
 
 Shows the name, ID, and API key for each service account on a given Deployment.
 
 ### Usage
 
-Run `astro deployment service-account get <service-account-id> --deployment-id=<your-deployment-id>` to get information on a single deployment-level service account. To see a list of all service accounts on a Deployment, run `astro deployment service-account get --deployment-id=<your-deployment-id>`.
+Run `astro deployment service-account list <service-account-id> --deployment-id=<your-deployment-id>` to get information on a single deployment-level service account. To see a list of all service accounts on a Deployment, run `astro deployment service-account list --deployment-id=<your-deployment-id>`.
 
 ### Flags
 
-| Flag              | Value Type | Usage                                                                                                                              |
-| ----------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| `--deployment-id` (Required) | String     | `--deployment-id` (Required) | String     | The Deployment ID of the Deployment in which your service account is configured. |
+| Flag                         | Value Type | Usage                        |
+| ---------------------------- | ---------- | ---------------------------- |
+| `--deployment-id` (Required) | String     | `--deployment-id` (Required) | String | The Deployment ID of the Deployment in which your service account is configured. |
 
 ### Related documentation
 
@@ -412,19 +413,18 @@ Run `astro deployment update <your-deployment-id> [flags]` to update a Deploymen
 
 ### Flags
 
-| Flag           | Value Type | Usage                                                                                   |
-| -------------- | ---------- | --------------------------------------------------------------------------------------- |
-| `--cloud-role` | String     | The ARN for the IAM role.                                                               |
-| `--dag-deployment-type` | String     | The DAG deploy method for the Deployment. Can be either `image` or `volume`. The default value is `image`.                                                               |
-| `--nfs-location` | String     | The location for an NFS volume mount, specified as: `<IP>:/<path>`. Must be specified when `--dag-deployment-type=volume`. Input is automatically prepended with `nfs:/` - do not include this in your input.                                  |
-| `label`        | String     | The label for the Deployment.                                                           |
-| `description`  | String     | The description for a Deployment.                                                       |
-| `version`      | String     | The Airflow version for the Deployment (e.g. `v2.0.0`).                                 |
-| `releaseName`  | String     | The release name for the Deployment (e.g. `planetary-fusion-1382`).                     |
-| `alert_emails` | String     | An email address which receives Airflow alerts from the Deployment.                     |
-| `type`         | String     | The type of Deployment. Can be either `airflow` or `flower`.                            |
-| `executor`     | String     | The Executor type for the Deployment. Can be either `local`, `kubernetes`, or `celery`. |
-
+| Flag                    | Value Type | Usage                                                                                                                                                                                                         |
+| ----------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--cloud-role`          | String     | The ARN for the IAM role.                                                                                                                                                                                     |
+| `--dag-deployment-type` | String     | The DAG deploy method for the Deployment. Can be either `image` or `volume`. The default value is `image`.                                                                                                    |
+| `--nfs-location`        | String     | The location for an NFS volume mount, specified as: `<IP>:/<path>`. Must be specified when `--dag-deployment-type=volume`. Input is automatically prepended with `nfs:/` - do not include this in your input. |
+| `label`                 | String     | The label or name for the Deployment.                                                                                                                                                                                 |
+| `description`           | String     | The description for a Deployment.                                                                                                                                                                             |
+| `version`               | String     | The Airflow version for the Deployment (e.g. `v2.0.0`).                                                                                                                                                       |
+| `releaseName`           | String     | The release name for the Deployment (e.g. `planetary-fusion-1382`).                                                                                                                                           |
+| `alert_emails`          | String     | An email address which receives Airflow alerts from the Deployment.                                                                                                                                           |
+| `type`                  | String     | The type of Deployment. Can be either `airflow` or `flower`.                                                                                                                                                  |
+| `executor`              | String     | The Executor type for the Deployment. Can be either `local`, `kubernetes`, or `celery`.                                                                                                                       |
 
 ### Related documentation
 
@@ -437,31 +437,33 @@ Gives an existing user in a Workspace access to an Airflow Deployment within tha
 
 ### Usage
 
-`astro deployment user add <user-email-address> --deployment-id=<user-deployment-id> --role<user-role>`
+`astro deployment user add --email=<user-email-address> --deployment-id=<user-deployment-id> --role<user-role>`
 
 ### Flags
 
 | Flag                         | Value Type | Usage                                                                                                                                            |
 | ---------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `--deployment-id` (Required) | String     | The ID of the Deployment that the user will be added to. To find this value, run `astro deployment list`.                                      |
+| `--deployment-id` (Required) | String     | The ID of the Deployment that the user will be added to. To find this value, run `astro deployment list`.                                        |
+| `--email` (Required)         | String     | The email for the user.                                                                                                                          |
 | `--role` (Required)          | String     | The role assigned to the user. Can be `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`. The default value is `DEPLOYMENT_VIEWER`. |
 
 ### Related documentation
 
 - [Manage User Permissions on Astronomer](workspace-permissions.md)
 
-## astro deployment user delete
+## astro deployment user remove
 
 Removes access to an Airflow Deployment for an existing Workspace user. To grant that same user a different set of permissions instead, modify their existing Deployment-level role by running `astro deployment user update`. You must be a Deployment Admin to perform this action.
 
 ### Usage
 
-`astro deployment user delete --deployment-id=<deployment-id> <user-email-address>`
+`astro deployment user remove --deployment-id=<deployment-id> --email=<user-email-address>`
 
 ### Flags
 
 | Flag                         | Value Type | Usage                                              |
 | ---------------------------- | ---------- | -------------------------------------------------- |
+| `--email` (Required)         | String     | The email for the user.                            |
 | `--deployment-id` (Required) | String     | The Deployment that the user will be removed from. |
 
 ### Related documentation
@@ -483,7 +485,6 @@ Outputs a list of all Workspace users who have access to a given Deployment. Use
 | `--deployment-id` (Required) | String     | The Deployment that you're searching in.     |
 | `--email`                    | String     | The email for the user you're searching for. |
 | `--name`                     | String     | The name of the user to search for.          |
-| `--user-id`                  | String     | The ID of the user to search for.            |
 
 ### Related documentation
 
@@ -520,7 +521,13 @@ Refer to the following sections for information on each subcommand.
 
 ## astro dev init
 
-Initializes a new Airflow project in your working directory. The set of files generated by this command are required to run Airflow locally and can be deployed to an Airflow Deployment on Astronomer.
+Initializes a new Astro project in your working directory. The set of files generated by this command are required to run Airflow locally and can be pushed to a Deployment on Astronomer.
+
+:::info
+
+To deploy your project to a Software Deployment, you must either specify the `--use-astronomer-certified` flag when running `astro dev init` or update the image in your project's `Dockerfile` to a supported Astronomer Certified image. For more information, see [Deploy DAGs via Astro CLI](deploy-cli.md).
+
+:::
 
 ### Usage
 
@@ -542,10 +549,11 @@ When you run this command, the following skeleton files are generated in your cu
 
 ### Flags
 
-| Flag                | Value Type | Usage                                                                                              |
-| ------------------- | ---------- | -------------------------------------------------------------------------------------------------- |
-| `--airflow-version` | String     | The version of Airflow you want to use. The default value is the latest Airflow version available. |
-| `--name`            | String     | The name for the Airflow project.                                                                  |
+| Flag                         | Value Type                                                                                                                                                      | Usage                                                                                              |
+| ---------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `--airflow-version`          | String                                                                                                                                                          | The version of Airflow you want to use. The default value is the latest Airflow version available for Astronomer Certified. |
+| `--use-astronomer-certified` | `` | Create the new project with the latest version of Astronomer Certified. If you don't use this flag, your project is created with the latest version of Astronomer Runtime. |
+| `--name`                     | String                                                                                                                                                          | The name for the Airflow project.                                                                  |
 
 ## astro dev kill
 
@@ -615,10 +623,10 @@ Logs for the Airflow Triggerer will only show for local environments using Defer
 
 ### Flags
 
-| Flag    | Value Type | Usage                                                                            |
-| ------- | ---------- | -------------------------------------------------------------------------------- |
-| `--env` | String     | Specifies the filepath containing environment variables for the Airflow cluster. |
-| `--no-cache` | None     | Do not use any images from the container engine's cache when building your project. |
+| Flag         | Value Type | Usage                                                                               |
+| ------------ | ---------- | ----------------------------------------------------------------------------------- |
+| `--env`      | String     | Specifies the filepath containing environment variables for the Airflow cluster.    |
+| `--no-cache` | None       | Do not use any images from the container engine's cache when building your project. |
 
 ## astro dev stop
 
@@ -639,6 +647,16 @@ Runs a script that checks whether all files in your local Airflow project are co
 ### Related documentation
 
 - [Running the Airflow Upgrade Check Package](https://airflow.apache.org/docs/apache-airflow/stable/upgrade-check.html#upgrade-check)
+
+## astro login/ logout
+
+Logs you in and out of an installation on Astronomer Software.
+
+### Usage
+
+Run `astro login <base-domain>` or `astro logout <base-domain>` to log in or out of your Astronomer platform respectively. This is equivalent to using the login screen of the Software UI.
+
+If you have access to more than one Astronomer installation, each will have a unique `<base-domain>`. When switching between platforms, make sure to log out of one `<base domain>` before logging into another.
 
 ## astro upgrade
 
@@ -698,13 +716,14 @@ Creates a new Workspace.
 
 ### Usage
 
-`astro workspace create <new-workspace-name> [flags]`
+`astro workspace create --name=<new-workspace-name> [flags]`
 
 ### Flags
 
-| Flag     | Value Type | Usage                                  |
-| -------- | ---------- | -------------------------------------- |
-| `--desc` | String     | The description for the new Workspace. |
+| Flag                  | Value Type | Usage                                  |
+| --------------------- | ---------- | -------------------------------------- |
+| `--label` (_required_) | String     | The label/name for the new Workspace.        |
+| `--description`       | String     | The description for the new Workspace. |
 
 ### Related documentation
 
@@ -744,14 +763,12 @@ Creates a service account for a given Workspace.
 
 ### Flags
 
-| Flag                        | Value Type | Usage                                                                                                        |
-| --------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
-| `--workspace-id` (Required) | String     | The Workspace you're creating a service account for.                                                         |
-| `--label` (Required)        | String     | A label for the service account.                                                                             |
-| `--category`                | String     | The Category for the service account. The default value is `Not set`.                                        |
-| `role`                      | String     | The User Role for the service account. Can be `viewer`, `editor`, or `admin`. The default value is `viewer`. |
-| `--system-sa`               | Boolean    | Whether this service account is a System service account. Default value is `false`.                          |
-| `--user-id`                 | String     | The ID for the new service account.                                                                          |
+| Flag                        | Value Type | Usage                                                                                                                                                |
+| --------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--workspace-id` (Required) | String     | The Workspace you're creating a service account for.                                                                                                 |
+| `--label` (Required)        | String     | A label for the service account.                                                                                                                     |
+| `--category`                | String     | The Category for the service account. The default value is `Not set`.                                                                                |
+| `role`                      | String     | The User Role for the service account. Can be `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. The default value is `WORKSPACE_VIEWER`. |
 
 ### Related documentation
 
@@ -818,11 +835,10 @@ At least one flag must be specified.
 
 ### Flags
 
-| Flag        | Value Type | Usage                            |
-| ----------- | ---------- | -------------------------------- |
-| id          | String     | The ID for the Workspace.        |
-| description | String     | A description for the Workspace. |
-| label       | String     | A label for the Workspace        |
+| Flag            | Value Type | Usage                            |
+| --------------- | ---------- | -------------------------------- |
+| `--label`       | String     | The ID for the Workspace.        |
+| `--description` | String     | A description for the Workspace. |
 
 ### Related documentation
 
@@ -834,14 +850,15 @@ Creates a new user in your current Workspace. If the user has already authentica
 
 ### Usage
 
-`astro workspace user add [flags] <user-email-address>`
+`astro workspace user add --email <user-email-address> [flags]`
 
 ### Flags
 
-| Flag                        | Value Type | Usage                                                                                                                                                                     |
-| --------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `--workspace-id`            | String     | The Workspace that the user will be added to. Specify this flag if you want to create a user in a Workspace other than your current Workspace.                                                                                                                             |
-| `--role`                    | String     | The role assigned to the user. Can be `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. If `--role` is not specified, the default role is `WORKSPACE_VIEWER`. |
+| Flag                   | Value Type | Usage                                                                                                                                                                     |
+| ---------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--email` (_Required_) | String     | The user's email.                                                                                                                                                         |
+| `--workspace-id`       | String     | The Workspace that the user will be added to. Specify this flag if you want to create a user in a Workspace other than your current Workspace.                            |
+| `--role`               | String     | The role assigned to the user. Can be `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. If `--role` is not specified, the default role is `WORKSPACE_VIEWER`. |
 
 ### Related documentation
 
@@ -854,7 +871,13 @@ Removes an existing user from your current Workspace.
 
 ### Usage
 
-`astro workspace user remove <user-email-address>`
+`astro workspace user remove --email <user-email-address>`
+
+### Flags
+
+| Flag                   | Value Type | Usage             |
+| ---------------------- | ---------- | ----------------- |
+| `--email` (_Required_) | String     | The user's email. |
 
 ### Related documentation
 
@@ -876,7 +899,6 @@ Outputs a list of all users with access to your current Workspace.
 | `--workspace-id` | String     | The Workspace that you're searching in. Specify this flag if you want to search for users in a Workspace other than your current Workspace. |
 | `--email`        | String     | The email for the user you're searching for.                                                                                                |
 | `--name`         | String     | The name of the user to search for.                                                                                                         |
-| `--user-id`      | String     | The ID of the user to search for.                                                                                                           |
 
 ### Related documentation
 
@@ -889,13 +911,14 @@ Updates a user's role in your current Workspace.
 
 ### Usage
 
-`astro workspace user update <user-id> [flags]`
+`astro workspace user update --email <user-email-address> [flags]`
 
 ### Flags
 
-| Flag | Value Type | Usage |
-| --------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `--role` | String | The role you're updating the user to. Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. If `--role` is not specified, the user is updated to `WORKSPACE_VIEWER` by default. |
+| Flag      | Value Type | Usage                                                                                                                                                                                                       |
+| --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--email` | String     | The email for the user.                                                                                                                                                                                     |
+| `--role`  | String     | The role you're updating the user to. Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. If `--role` is not specified, the user is updated to `WORKSPACE_VIEWER` by default. |
 
 ### Related documentation
 

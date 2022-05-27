@@ -10,7 +10,7 @@ description: Use Podman instead of Docker to run specific Astro CLI commands.
 By default, the Astro CLI uses Docker to execute a few specific commands:
 
 - `astro dev [...]`: For running an Airflow environment on your local machine
-- `astro auth login`: For authenticating to Astronomer Software
+- `astro login`: For authenticating to Astronomer Software
 - `astro deploy`: For pushing code to a Deployment
 
 Alternatively, you can use [Podman](https://podman.io/) to execute these same commands.
@@ -122,7 +122,7 @@ To set up Podman for an Astronomer project:
 7. Open a new terminal window. In an empty directory, run the following commands to create a new Astronomer project, set Podman as your primary container engine, and generate a `pod-config.yml` file for your project:
 
     ```sh
-    $ astro dev init
+    $ astro dev init --use-astronomer-certified
     $ astro config set container.engine podman
     $ astro dev start
     ```

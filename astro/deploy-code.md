@@ -25,7 +25,7 @@ To deploy DAGs to Astro, you must have:
 Once you've tested your DAGs locally, you're ready to push them to Astro. To start, authenticate via the Astro CLI by running:
 
 ```
-astro auth login
+astro login
 ```
 
 After running this command, you will be prompted to open your web browser and log in via the Cloud UI. Once you complete this login, you will be automatically authenticated to the CLI.

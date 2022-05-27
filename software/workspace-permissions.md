@@ -44,7 +44,7 @@ If a Workspace Admin invites a user to a Workspace that has 0 Airflow Deployment
 To invite a user to a Workspace via the Astro CLI, run:
 
 ```bash
-astro workspace user add <email-address> --workspace-id=<workspace-id> --role=<workspace-role>
+astro workspace user add --email <email-address> --workspace-id <workspace-id> --role <workspace-role>
 ```
 
 Only Workspace _Admins_ can invite other users and set their permissions.
@@ -108,7 +108,7 @@ From there:
 To invite a Workspace user to an Airflow Deployment via the Astro CLI, run:
 
 ```
-astro deployment user add <email-address> --deployment-id=<deployment-id> --role=<deployment-role>
+astro deployment user add --email=<email-address> --deployment-id=<deployment-id> --role=<deployment-role>
 ```
 
 Only Deployment _Admins_ can invite other users and set their permissions.
@@ -202,7 +202,7 @@ To list all users within a Deployment and their corresponding roles, navigate to
 To list Deployment users via the Astro CLI, run:
 
 ```bash
-astro deployment user list <deployment-id>
+astro deployment user list --deployment-id=<deployment-id>
 ```
 
 #### Edit Deployment User Role
@@ -226,7 +226,7 @@ To delete a user from an Airflow Deployment via the Software UI, Deployment _Adm
 To delete a user from an Airflow Deployment via the Astro CLI, run:
 
 ```bash
-astro deployment user delete <email> --deployment-id=<deployment-id>
+astro deployment user remove <email> --deployment-id=<deployment-id>
 ```
 
 ## User Permissions Reference

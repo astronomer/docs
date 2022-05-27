@@ -44,7 +44,7 @@ $ export ASTRONOMER_KEY_ID="<your-api-key-id>"
 $ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
 
 # Install the Astro CLI
-$ brew install astronomer/cloud/astro@1.2.0
+$ brew install astronomer/tap/astro@1.0.0
 
 # Build your Astro project into a Docker image and push the image to your Deployment
 $ astro deploy <your-deployment-id>
@@ -52,11 +52,7 @@ $ astro deploy <your-deployment-id>
 
 :::info
 
-The following templates use `brew install` to install the latest version of the Astro CLI for every deploy. For a more stable CI/CD pipeline, you can install only a specific version of the CLI by tagging a specific version in the command:
-
-```sh
-brew install astronomer/cloud/astro@<version-number>
-```
+The following templates use [Astro CLI v1.0.0+](cli/cli-release-notes.md) to deploy via CI/CD. These templates will not work if you use a pre-1.0.0 version of the CLI.
 
 :::
 
@@ -93,7 +89,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/cloud/astro
+            brew install astronomer/tap/astro
             astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
@@ -144,7 +140,7 @@ This setup assumes the following prerequisites:
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/cloud/astro
+            brew install astronomer/tap/astro
             astro deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }}
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
@@ -158,7 +154,7 @@ This setup assumes the following prerequisites:
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/cloud/astro
+            brew install astronomer/tap/astro
             astro deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
@@ -187,9 +183,8 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
            }
            steps {
              script {
-                   sh 'curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocli.tar.gz'
-                   sh 'tar xzf astrocli.tar.gz'
-                   sh './astro deploy ${siteVariables.deploymentid} -f'
+                   sh 'curl -sSL install.astronomer.io | sudo bash -s'
+                   sh 'astro deploy ${siteVariables.deploymentid} -f'
              }
            }
          }
@@ -245,9 +240,8 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
           - run:
               name: "Deploy to Astro"
               command: |
-                curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocli.tar.gz
-                tar xzf astrocli.tar.gz
-                ./astro deploy ${siteVariables.deploymentid} -f
+                curl -sSL install.astronomer.io | sudo bash -s
+                astro deploy ${siteVariables.deploymentid} -f
 
     # Invoke jobs via workflows
     # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -296,8 +290,7 @@ This pipeline configuration requires:
         commands:
         - apt-get update
         - apt-get -y install curl
-        - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocli.tar.gz
-        - tar xzf astrocli.tar.gz        
+        - curl -sSL install.astronomer.io | sudo bash -s
       - name: wait
         image: docker:dind
         volumes:
@@ -311,7 +304,7 @@ This pipeline configuration requires:
         - name: dockersock
           path: /var/run
         commands:
-        - ./astro deploy ${siteVariables.deploymentiddrone} -f
+        - astro deploy ${siteVariables.deploymentiddrone} -f
         depends on:
         - wait
 
@@ -368,7 +361,7 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
       script:
        - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocli.tar.gz
        - tar xzf astrocli.tar.gz
-       - ./astro deploy $ASTRONOMER_DEPLOYMENT_ID -f
+       - astro deploy $ASTRONOMER_DEPLOYMENT_ID -f
       only:
        - main
    `}</code></pre>
@@ -406,9 +399,8 @@ When you create environment variables that will be used in multiple branches, yo
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
         script:
-          - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocli.tar.gz
-          - tar xzf astrocli.tar.gz
-          - ./astro deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
+          - curl -sSL install.astronomer.io | sudo bash -s
+          - astro deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - dev
 
@@ -423,9 +415,8 @@ When you create environment variables that will be used in multiple branches, yo
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
         script:
-          - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocli.tar.gz
-          - tar xzf astrocli.tar.gz
-          - ./astro deploy $PROD_ASTRONOMER_DEPLOYMENT_ID -f
+          - curl -sSL install.astronomer.io | sudo bash -s
+          - astro deploy $PROD_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - main
    `}</code></pre>

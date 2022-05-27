@@ -17,5 +17,5 @@ astro workspace list
 
 ## Related Commands
 
-- [`astro auth login`](cli/astro-auth-login.md)
+- [`astro login`](cli/astro-login.md)
 - [`astro workspace switch`](cli/astro-workspace-switch.md)

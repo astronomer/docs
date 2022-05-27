@@ -79,7 +79,7 @@ This command replaces the `—update` flag that was previously released with the
 ### Additional Improvements
 
 - When you run `astro workspace switch`, you can now specify a `<workspace-id>` as part of the command and avoid the prompt to manually select a Workspace
-- You now need to provide an email address only the first time you run `astro auth login`. After you run that command once successfully, the Astro CLI will cache your email address in your `config.yaml` file and not prompt you to enter it again
+- You now need to provide an email address only the first time you run `astro login`. After you run that command once successfully, the Astro CLI will cache your email address in your `config.yaml` file and not prompt you to enter it again
 - The `astro deploy` and `astro dev start` commands will now inform you if there is a new version of Astro Runtime available
 
 ### Bug Fixes
@@ -144,7 +144,7 @@ Astro CLI 1.3.2 is a direct patch replacement for 1.3.1, which is no longer avai
 
 ### Support for Identity-Based Login Flow
 
-To better integrate with Astro's identity-based login flow, the CLI now prompts you for your login email after you run `astro auth login`. Based on your email, the CLI assumes your Astro Organization and automatically brings you to your Organization's login flow via web browser.
+To better integrate with Astro's identity-based login flow, the CLI now prompts you for your login email after you run `astro login`. Based on your email, the CLI assumes your Astro Organization and automatically brings you to your Organization's login flow via web browser.
 
 ### Additional Improvements
 
@@ -365,4 +365,4 @@ Release date: July 31, 2021
 
 Release date: July 30, 2021
 
-- Improvement: You can now run `astro auth login` without specifying a domain (`astronomer.io` is always assumed).
+- Improvement: You can now run `astro login` without specifying a domain (`astronomer.io` is always assumed).

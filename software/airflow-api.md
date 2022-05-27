@@ -47,9 +47,9 @@ To create a Deployment-level Service Account via the Astro CLI:
 
 1. Authenticate to the Astro CLI by running:
    ```
-   astro auth login <BASE-DOMAIN>
+   astro login <BASE-DOMAIN>
    ```
-   To identify your `<BASE-DOMAIN>`, run `astro cluster list` and select the domain name that corresponds to the cluster you're working in.
+   To identify your `<BASE-DOMAIN>`, run `astro context list` and select the domain name that corresponds to the cluster you're working in.
 
 2. Identify your Airflow Deployment's Deployment ID. To do so, run:
    ```
