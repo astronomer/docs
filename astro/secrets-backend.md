@@ -394,19 +394,29 @@ First, install the [Airflow provider for Amazon](https://airflow.apache.org/docs
 apache-airflow-providers-amazon
 ```
 
-Then, add the following environment variables to your project's Dockerfile:
+- **Option 1**: Add the following environment variables to your project's `.env` file:
 
+```dockerfile
+AWS_ACCESS_KEY_ID="<your-aws-access-key-id>"
+AWS_SECRET_ACCESS_KEY="<your-aws-secret-access-key>"
+AWS_DEFAULT_REGION="<your-aws-region>"
+AIRFLOW__SECRETS__BACKEND="airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend"
+AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables"}'
+```
+
+- **Option 2**: Add the following environment variables to your project's `Dockerfile` (note the addition of `ENV` before the environment variables when compared to Option 1):
 ```dockerfile
 ENV AWS_ACCESS_KEY_ID="<your-aws-access-key-id>"
 ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-access-key>"
 ENV AWS_DEFAULT_REGION="<your-aws-region>"
 ENV AIRFLOW__SECRETS__BACKEND="airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend"
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables"}'
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}'
 ```
 
-:::warning
+:::info
 
-If you want to deploy your project to a hosted Git repository before deploying to Astro, be sure to save `<your-aws-access-key-id>` and `<your-aws-secret-access-key>` securely. We recommend adding it to your project's [`.env` file](develop-project.md#set-environment-variables-via-env-local-development-only) and specifying this file in `.gitignore`. When you deploy to Astro, you should set these values as secrets via the Cloud UI.
+Adding these environment variables to your project's [.env file](develop-project.md#set-environment-variables-via-env-local-development-only) helps keep `<your-aws-access-key-id>` and `<your-aws-secret-access-key>` secure as this file is included in the `.gitignore` file within your Astronomer project. When you deploy to Astro, this file will be ignored and thus not sent to your repository. Step 4 below provides a method for securely sending contents of your `.env` file directly to your Astro Cloud UI.
+If you were to use Option 2 instead, the contents of your Dockerfile would be deployed to your repository.
 
 :::
 
@@ -450,18 +460,27 @@ Once you confirm that the setup was successful, you can delete this DAG.
 
 #### Step 4: Deploy to Astro
 
-Once you've confirmed that the integration with AWS Secrets Manager works locally, you can complete a similar set up with a Deployment on Astro.
+Once you've confirmed that the integration with AWS Secrets Manager works locally, you can now add these environment variables to your Deployment on Astro.
 
-1. In the Cloud UI, add the same environment variables found in your `Dockerfile` to your Deployment [environment variables](https://docs.astronomer.io/astro/environment-variables). Specify both `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret** to ensure that your credentials are stored securely.
+- **Option 1**: In the Cloud UI, manually add the same environment variables found in your `.env` or `Dockerfile` file to your Deployment [environment variables](https://docs.astronomer.io/astro/environment-variables). Specify both `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret** to ensure that your credentials are stored securely.
+    
+- **Option 2**: Using the [astrocloud deployment variable update](https://docs.astronomer.io/astro/cli-reference/astrocloud-deployment-variable-update) CLI command, deploy the contents of your `.env` file directly to your Cloud UI. For example:
+
+    ```text
+    astrocloud deployment variable update --deployment-id <your-deployment-id> --load --env .env
+    ```
+
+    - If using this command, be sure to navigate to the Cloud UI once deployed and mark your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret**.
 
     :::warning
 
-    Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
+    If using Option 2 in Step 2 (using `Dockerfile` for testing these environment variables instead of `.env`):
+    - Be sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your `Dockerfile`. If you add these values with the quotation marks included in your `Dockerfile`, your configuration will not work on Astro.
+    - Delete the environment variables from your `Dockerfile` before deploying, as these environment variable values would be exposed in your repository. 
+    
 
     :::
 
-2. In your Astro project, delete the environment variables from your `Dockerfile`.
-3. [Deploy your changes](https://docs.astronomer.io/astro/deploy-code) to Astro.
 
 You now should be able to see your secret information being pulled from AWS Secrets Manager on Astro. From here, you can store any Airflow variables or connections as secrets on AWS Secrets Manager and use them in your project.
 
