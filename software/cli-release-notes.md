@@ -13,7 +13,7 @@ If you have any questions or a bug to report, reach out to us via [Astronomer Su
 
 ## Astro CLI v1.0.0
 
-Release date: May 25, 2022
+Release date: May 27, 2022
 
 ### A Shared CLI for All Astronomer Users
 
@@ -25,13 +25,13 @@ Astro CLI v1.0.0 includes breaking changes that might effect your existing CI/CD
 
 The Astro CLI is now a single CLI executable built for all Astronomer products. This new generation of the CLI optimizes for a consistent local development experience and will result in more value, more quickly to Astronomer Software customers. For teams moving from Astronomer Software to [Astro](https://docs.astronomer.io/astro), this change will also make that transition easier.
 
-To establish a shared framework between products, the syntax of several Software CLI commands has been updated. Due to the scale of these changes, all breaking changes related to using the CLI have been documented in [Upgrade to Astro CLI v1.0](upgrade-cli.md). Astro CLI v1.0.0 is only compatible with Astronomer Software v0.28+.
+To establish a shared framework between products, the syntax of several Software CLI commands has been updated. Due to the quantity of these changes, all breaking changes introduced in this release have been documented in [Upgrade to Astro CLI v1.0](upgrade-cli.md). Astro CLI v1.0.0 is only compatible with Astronomer Software v0.28+.
 
 ### New Command To Switch Between Astronomer Installations
 
 You can now use `astro context list` and `astro context switch` to show all the Astronomer contexts that you have access to and switch between them. An Astronomer context is defined as a base domain that pertains to either Astro or a particular Cluster on Astronomer Software. A domain will appear as an available context if you have authenticated to it at least once.
 
-These commands are primarily designed for users who need to work across multiple Astronomer Software clusters or installations. They replace `astro cluster list` and `astro cluster switch`, respectively. For more information, see the [CLI Command Reference](cli-reference.md).
+These commands are primarily designed for users who need to work across multiple Astronomer Software clusters or installations. They replace `astro cluster list` and `astro cluster switch`, respectively. For more information, see the [CLI Command Reference](cli-reference.md#astro-context-switch).
 
 ## 0.28.1
 

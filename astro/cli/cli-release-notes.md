@@ -13,7 +13,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to us 
 
 ## Astro CLI v1.0.0
 
-Release date: May 25, 2022
+Release date: May 27, 2022
 
 ### A Shared CLI for All Astronomer Users
 
@@ -30,20 +30,22 @@ To establish a shared framework between products, the Astro CLI now uses a singl
 ```sh
 # Before upgrade
 astrocloud dev init
+
 # After upgrade
 astro dev init
 ```
 
-Additionally, some commands have been standardized so that they can be shared between Astro and Astronomer Software users. As part of this change, `astro auth login/logout` has been renamed to `astro login/logout`:
+Additionally, some commands have been standardized so that they can be shared between Astro and Astronomer Software users. As part of this change, `astro auth login` and `astro auth logout` have been renamed to `astro login` and `astro logout`:
 
 ```sh
 # Before upgrade
 astrocloud auth login
+
 # After upgrade
 astro login
 ```
 
-For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. To upgrade, see [Configure the CLI](cli/configure-cli.md).
+For Astro users, these are the only changes to existing CLI functionality. All other commands will continue to work as expected. We strongly recommend that all users upgrade. For instructions, see [Configure the CLI](cli/configure-cli.md).
 
 ### New Command To Set Astro Project Configurations
 
@@ -55,14 +57,14 @@ For more information about these commands, see the [CLI Command Reference](cli/a
 
 You can now use `astro context list` and `astro context switch` to show all the Astronomer contexts that you have access to and switch between them. An Astronomer context is defined as a base domain that you can use to access either Astro or an installation of Astronomer Software. A domain will appear as an available context if you have authenticated to it at least once.
 
-This command is primarily designed for users who need to work in both Astro and Astronomer Software installations. If you're an Astro user with no ties to Astronomer Software, ignore this command.
+This command is primarily for users who need to work in both Astro and Astronomer Software installations. If you're an Astro user with no ties to Astronomer Software, ignore this command. For more information, see the [CLI Command Reference ](cli/astro-context-switch.md).
 
 For more information about these commands, see the [CLI Command Reference ](cli/astro-context-switch.md).
 
 ### Additional Improvements
 
 - Astro CLI documentation has been refactored. You can now find all information about the CLI, including installation steps and the command reference, under the [Astro CLI tab](cli/overview.md).
-- The nonfunctional `--update` flag has been removed from `astro deployment variable create`. To update existing environment variables for a given Deployment, use `astro deployment variable update`.
+- The nonfunctional `--update` flag has been removed from `astro deployment variable create`. To update existing environment variables for a given Deployment, use `astro deployment variable update` instead.
 
 ## v1.5.0 (`astrocloud`)
 
