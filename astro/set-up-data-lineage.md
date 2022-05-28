@@ -89,37 +89,39 @@ To view lineage metadata, go to the Organization view of the Cloud UI and open t
 
 <TabItem value="databricks">
 
-This guide outlines how to set up lineage collection for Spark running on a Databricks cluster.
+Use the information provided here to set up lineage collection for Spark running on a Databricks cluster.
 
 #### Prerequisites
 
 To complete this setup, you need:
 
 - A Databricks cluster.
-- Your Astro base domain.
-- Your Organization's OpenLineage API key.
 
 #### Setup
 
-1. In Databricks, create a [cluster-scoped init script](https://docs.databricks.com/libraries/cluster-libraries.html#init-script-1) with the following command to install the `openlineage-spark` library at cluster initialization:
+1. In your Databricks File System [(DBFS)](https://docs.databricks.com/data/databricks-file-system.html), create a new directory at `dbfs:/databricks/openlineage/`.
+2. Download the latest OpenLineage `jar` file to the new directory. See [Maven Central Repository](https://search.maven.org/artifact/io.openlineage/openlineage-spark).
+3. Download the `open-lineage-init-script.sh` file to the new directory. See [OpenLineage GitHub](https://github.com/OpenLineage/OpenLineage/blob/main/integration/spark/databricks/open-lineage-init-script.sh).
+4. In Databricks, run this command to create a [cluster-scoped init script](https://docs.databricks.com/clusters/init-scripts.html#example-cluster-scoped-init-script) and install the `openlineage-spark` library at cluster initialization:
 
     ```sh
-    #!/bin/bash
-
-    /databricks/python/bin/pip install openlineage-spark
+        dbfs:/databricks/openlineage/open-lineage-init-script.sh
     ```
 
-2. In the cluster configuration page for your Databricks cluster, specify the following [Spark configuration](https://docs.databricks.com/clusters/configure.html#spark-configuration):
+5. In the cluster configuration page for your Databricks cluster, specify the following [Spark configuration](https://docs.databricks.com/clusters/configure.html#spark-configuration):
 
-   ```bash
+   ```sh
+      bash
    spark.driver.extraJavaOptions -Djava.security.properties=
    spark.executor.extraJavaOptions -Djava.security.properties=
    spark.openlineage.url https://<your-astro-base-domain>
    spark.openlineage.apiKey <your-lineage-api-key>
-   spark.openlineage.namespace <NAMESPACE_NAME> // We recommend a meaningful namespace like `spark-dev`, `spark-prod`, etc.
+   spark.openlineage.namespace <NAMESPACE_NAME> // Astronomer recommends using a meaningful namespace like `spark-dev`or `spark-prod`.
    ```
 
-After you save this configuration, lineage will be enabled for all Spark jobs running on your cluster.
+> **Note:** You override the JVM security properties for the spark _driver_ and _executor_ with an _empty_ string as some TLS algorithms are disabled by default. For a more information, see [this](https://docs.microsoft.com/en-us/answers/questions/170730/handshake-fails-trying-to-connect-from-azure-datab.html) discussion.
+
+After you save this configuration, lineage is enabled for all Spark jobs running on your cluster.
 
 #### Verify Setup
 
