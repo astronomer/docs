@@ -121,7 +121,7 @@ The Rows chart shows the total number of rows in the dataset over time. A signif
 
 #### Bytes
 
-The Bytes chart shows the total size of the dataset over time. A sudden increase in dataset size usually indicates something has changed in the definition of the data. For example, a new column might have been added to your table containing the description of an order, where before it contained only part numbers and quantities.
+The Bytes chart shows the total size of the dataset over time. A sudden increase in dataset size usually indicates that something has changed in the definition of the data. For example, a new column might have been added to your table containing the description of an order, where before it contained only part numbers and quantities.
 
 #### Quality Metrics
 
