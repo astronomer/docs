@@ -37,10 +37,10 @@ To create a new Cluster on Astro with a specified configuration, read [Install o
 
 Astro supports the following GCP regions:
 
-- `us-central1`
-- `us-west1`
-- `us-east1`
-- `europe-west4`
+- `us-central1` - Iowa, North America
+- `us-west1` - Oregon, North America
+- `us-east1` - South Carolina, North America
+- `europe-west4` - Netherlands, Europe
 
 Modifying the region of an existing Cluster on Astro is not supported. If you're interested in a GCP region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
 
