@@ -73,17 +73,17 @@ To activate the Data Plane on your GCP project:
 1. Run the following commands in your Google Cloud Shell:
 
     ```sh
-    $ gcloud services enable storage-component.googleapis.com
-    $ gcloud services enable storage-api.googleapis.com
-    $ gcloud services enable compute.googleapis.com
-    $ gcloud services enable container.googleapis.com
-    $ gcloud services enable deploymentmanager.googleapis.com
-    $ gcloud services enable cloudresourcemanager.googleapis.com
-    $ gcloud services enable cloudkms.googleapis.com
-    $ gcloud services enable sqladmin.googleapis.com
-    $ gcloud services enable servicenetworking.googleapis.com
-    $ gcloud services enable dns.googleapis.com
-    $ curl \
+    gcloud services enable storage-component.googleapis.com
+    gcloud services enable storage-api.googleapis.com
+    gcloud services enable compute.googleapis.com
+    gcloud services enable container.googleapis.com
+    gcloud services enable deploymentmanager.googleapis.com
+    gcloud services enable cloudresourcemanager.googleapis.com
+    gcloud services enable cloudkms.googleapis.com
+    gcloud services enable sqladmin.googleapis.com
+    gcloud services enable servicenetworking.googleapis.com
+    gcloud services enable dns.googleapis.com
+    curl \
     https://storage.googleapis.com/storage/v1/projects/$GOOGLE_CLOUD_PROJECT/serviceAccount \
     --header "Authorization: Bearer `gcloud auth application-default print-access-token`"   \
     --header 'Accept: application/json'   --compressed
@@ -92,9 +92,9 @@ To activate the Data Plane on your GCP project:
 2. Run the following commands in your Google Cloud Shell:
 
     ```sh
-    $ export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
-    $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
-    $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
+    export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
     ```
 
 ## Step 3: Provide Setup Information to Astronomer
