@@ -470,7 +470,7 @@ Once you've confirmed that the integration with AWS Secrets Manager works locall
     astrocloud deployment variable update --deployment-id <your-deployment-id> --load --env .env
     ```
 
-    - If using this command, be sure to navigate to the Cloud UI once deployed and mark your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret**.
+    - If you use this command, after deployment navigate to the Cloud UI and mark your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret**.
 
     :::warning
 
