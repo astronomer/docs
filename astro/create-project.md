@@ -79,7 +79,7 @@ To confirm that you successfully initialized an Astro project, run the following
 astrocloud dev start
 ```
 
-This command builds your project and spins up 3 Docker containers on your machine, each for a different Airflow component:
+This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
 
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
