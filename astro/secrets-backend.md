@@ -476,7 +476,7 @@ Once you've confirmed that the integration with AWS Secrets Manager works locall
 
     If using Option 2 in Step 2 (using `Dockerfile` for testing these environment variables instead of `.env`):
     - Be sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your `Dockerfile`. If you add these values with the quotation marks included in your `Dockerfile`, your configuration won't work on Astro.
-    - Delete the environment variables from your `Dockerfile` before deploying, as these environment variable values would be exposed in your repository. 
+    - To prevent the environment variable values from being exposed in your repository, delete the environment variables from your `Dockerfile` before deploying. 
     
 
     :::
