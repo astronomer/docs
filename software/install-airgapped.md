@@ -44,7 +44,7 @@ You can also set up your own registry using a dedicated registry service such as
 **Note**: If you utilize features such as [third party ingress controllers](./third-party-ingress-controllers.md), you may need to synchronize other images not listed here.
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. 
-Image tags are subject to change, even within existing versions, for example to resolve critical security issues, and therefore not listed here. 
+Image tags are subject to change, even within existing versions. 
 To gather a list of exact images and tags required for your Astronomer Helm chart version, you can template the Helm chart and fetch the rendered image tags:
 
 ```bash
