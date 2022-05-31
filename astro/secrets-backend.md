@@ -460,7 +460,7 @@ Once you confirm that the setup was successful, you can delete this DAG.
 
 #### Step 4: Deploy to Astro
 
-Once you've confirmed that the integration with AWS Secrets Manager works locally, you can now add these environment variables to your Deployment on Astro.
+Once you've confirmed that the integration with AWS Secrets Manager works locally, you can now add these environment variables to your Astro Deployment.
 
 - **Option 1**: In the Cloud UI, manually add the same environment variables found in your `.env` or `Dockerfile` file to your Deployment [environment variables](https://docs.astronomer.io/astro/environment-variables). Specify both `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret** to ensure that your credentials are stored securely.
     
