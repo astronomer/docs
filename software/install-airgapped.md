@@ -39,7 +39,7 @@ Astronomer's Docker images are hosted on a public registry which isn't accessibl
 You can also set up your own registry using a dedicated registry service such as [JFrog Artifactory](https://jfrog.com/artifactory/). Regardless of which service you use, follow the product documentation to configure a private registry according to your organization's security requirements.
 
 ## Step 2: Fetch Images from Astronomer's Helm Template
-**Note**: You should set up a `config.yaml` before running the below steps. Example `config.yaml` files are in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guides
+**Note**: Astronomer recommends creating a YAML configuration file before completing this task. Sample `config.yaml` files are available here: [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), [GCP](install-gcp-standard.md).
 
 **Note**: If you utilize other features such as [third party ingress controllers](./third-party-ingress-controllers.md), you made need to synchronize other images not listed with this snippet
 
