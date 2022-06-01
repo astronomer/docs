@@ -603,12 +603,6 @@ Initializes a local Airflow environment on your machine by creating a Docker con
 - Webserver
 - Triggerer
 
-:::info
-
-Logs for the Airflow Triggerer will only show for local environments using Deferrable Operators and running Astronomer Certified 2.0+.
-
-:::
-
 ### Usage
 
 `astro dev start [flags]`

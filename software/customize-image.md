@@ -2,7 +2,7 @@
 sidebar_label: 'Customize Image'
 title: 'Customize Your Image on Astronomer Software'
 id: customize-image
-description: Customize your Astronomer Certified image, including adding dependencies and running commands on build.
+description: Customize your Astronomer image, including adding dependencies and running commands on build.
 ---
 
 ## Overview
@@ -71,8 +71,6 @@ docker exec -it <scheduler-container-id> pip freeze | grep pymongo
 
 pymongo==3.7.2
 ```
-
-> **Note:** Astronomer Certified, Astronomer's distribution of Apache Airflow, is available both as a Debian and Alpine base. We strongly recommend using Debian, as it's much easier to install dependencies and often presents less incompatibility issues than an Alpine Linux image. For details on both, refer to our [Airflow Versioning Doc](manage-airflow-versions.md).
 
 ## Add Other Dependencies
 
@@ -306,7 +304,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Astronomer Certified image. For example, if you use Certified 2.2.5, your `FROM` line would be:
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Astronomer image. For example, if you use Astronomer Certified 2.2.5, your `FROM` line would be:
 
    ```text
    FROM quay.io/astronomer/ap-airflow:2.2.5 AS stage1
@@ -314,11 +312,13 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::caution
 
-  If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution)
+  If you use the default distribution of an Astronomer Certified image, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution).
+
+  Similarly, if you use a Runtime image, ensure that the distribution you're using is the `-base` image.
 
   :::
 
-3. In `Dockerfile.build` after the `FROM` line specifying your Certified image, add the following configuration:
+3. In `Dockerfile.build` after the `FROM` line specifying your image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -352,15 +352,15 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astronomer Certified may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
+  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astronomer images may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
 
   To identify the Python version in your AC image, run:
 
      ```
-     docker run quay.io/astronomer/ap-airflow:<astronomer-certified-version> python --version
+     docker run quay.io/astronomer/ap-airflow:<astronomer-image-version> python --version
      ```
 
-  Make sure to replace `<astronomer-certified-version>` with your own.
+  Make sure to replace `<astronomer-image-version>` with your own.
 
   :::
 
@@ -372,10 +372,10 @@ This example assumes that the name of each of your Python packages is identical 
 
 ### Step 3. Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<certified-image>` with your Certified image:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<your-image>` with your Astronomer image:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<certified-image> .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<your-image> .
     ```
 
     For example, if you have `quay.io/astronomer/ap-airflow:2.2.5` in your `Dockerfile.build`, this command would be:
@@ -393,10 +393,10 @@ This example assumes that the name of each of your Python packages is identical 
 2. Replace the contents of your Software project's `Dockerfile` with the following:
 
    ```
-   FROM custom-<certified-image>
+   FROM custom-<your-image>
    ```
 
-   For example, if your base Certified image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
+   For example, if your base image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
 
    ```
    FROM custom-ap-airflow:2.2.5
@@ -441,7 +441,9 @@ Ensure that the name of the package on the private repository does not clash wit
 
    :::caution
 
-   If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution)
+   If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution).
+
+   Similarly, if you use a Runtime image, ensure that the distribution you're using is the `-base` image.
 
    :::
 
@@ -494,10 +496,10 @@ Ensure that the name of the package on the private repository does not clash wit
 2. Replace the contents of your Software project's `Dockerfile` with the following:
 
    ```
-   FROM custom-<certified-image>
+   FROM custom-<astronomer-image>
    ```
 
-   For example, if your base Certified image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
+   For example, if your base image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
 
    ```
    FROM custom-ap-airflow:2.2.5
@@ -508,7 +510,7 @@ Ensure that the name of the package on the private repository does not clash wit
 </TabItem>
 </Tabs>
 
-## Build with a Different Python Version
+## Build with a Different Python Version (_Astronomer Certified Only_)
 
 While the Astronomer Certified (AC) Python Wheel supports Python versions 3.6, 3.7, and 3.8, AC Docker images have been tested and built only for Python 3.7.
 

@@ -18,3 +18,29 @@ We're committed to testing all Astronomer Software versions for scale, reliabili
 ## v0.29.0
 
 Release date: June 1, 2022
+
+### Support for Astro Runtime Images on Software
+
+You can now use Astro Runtime images in your Software Deployments. Additionally, you can now select Runtime images when setting **Image Version** for a Deployment in the Software UI.
+
+Functionally, Runtime images are similar to Certified images. They both include:
+
+- Same-day support for Apache Airflow releases
+- Extended support lifecycles
+- Regularly backported bug and security fixes
+
+Astronomer Runtime includes additional features which are not available in Astronomer Certified images, including:
+
+- The `astronomer-providers` package, which includes a set of deferrable operators build and maintained by Astronomer
+- Airflow UI improvements, such as the showing your Deployment's Docker image tag in the footer of all UI pages
+- Future Runtime-exclusive features, such as new Airflow components and improvements to the DAG development experience
+
+To upgrade a Deployment to Runtime, follow the steps in Upgrade Airflow, making sure to replace the Astronomer Certified image in your Dockerfile with an Astronomer Runtime version.
+
+### Export Task Logs Using Logging Sidecars
+
+You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that that Astronomer Software in a multi-tenant cluster and need to prioritize security.To configure this feature, see [Export Task Logs](export-task-logs.md).
+
+### Simplified Configuration for Namespace Pools
+
+The process for configuring namespace pools has been simplified. As an alternative to manually creating namespaces, you can now delegate the creation of each namespace, including roles and rolebindings, to Astronomer Software. While this feature is suitable for most use cases, you can still manually create namespaces if you want more fine-grained control over the namespace's resources and permissions. For more information, see [Namespace Pools](namespace-pools.md).

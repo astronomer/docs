@@ -62,7 +62,7 @@ To create a Deployment-level Service Account via the Astronomer CLI:
    astro deployment service-account create -d <deployment-id> --label <service-account-label> --role <deployment-role>
    ```
    The `<deployment-role>` must be either `editor` or `admin`.
-   
+
 4.  Save the API Key that was generated. Depending on your use case, you might want to store this key in an Environment Variable or secret management tool.
 
 ## Step 2: Make an Airflow REST API Request
@@ -144,7 +144,7 @@ curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airf
 
 :::tip
 
-The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2. If you run Astronomer Certified 2.2+, replace `execution_date` with `logical_date` and add a "Z" to the end of your timestamp. For example, `"logical_date": "2019-11-16T11:34:00Z"`.
+The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2. If you run Airflow 2.2+, replace `execution_date` with `logical_date` and add a "Z" to the end of your timestamp. For example, `"logical_date": "2019-11-16T11:34:00Z"`.
 
 For more information, see [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html?highlight=pass%20data#data-interval).
 
@@ -224,4 +224,3 @@ curl -X GET \
   -H 'Authorization: <API-KEY>' \
   -H 'Cache-Control: no-cache'
 ```
-

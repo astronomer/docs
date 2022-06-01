@@ -19,7 +19,7 @@ For information on the latest Astronomer Software releases, see [release notes](
 
 :::info
 
-These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astronomer Certified, see [Astronomer Certified Versioning and Support](ac-support-policy.md).
+These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astronomer images, see [Astronomer Certified Versioning and Support](ac-support-policy.md) and [Runtime Release and Lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
 
 :::
 
@@ -36,7 +36,7 @@ For customers looking to access Astronomer's newest features on an incremental b
 
 For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel. Release channels are not binding, so you are free to upgrade to any available version of Astronomer Software at any time.
 
-> **Note:** Release channels apply to Astronomer Software and Astronomer Certified versions. We do not currently support a long-term release channel for the Astronomer CLI.
+> **Note:** Release channels apply to Astronomer Software and Astronomer image versions. We do not currently support a long-term release channel for the Astronomer CLI.
 
 ## Astronomer Software Versioning
 

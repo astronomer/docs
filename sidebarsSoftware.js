@@ -73,6 +73,7 @@ module.exports = {
         'registry-backend',
         'renew-tls-cert',
         'namespace-pools',
+        'export-task-logs',
         'third-party-ingress-controllers',
         'upgrade-to-0-28',
           ],
