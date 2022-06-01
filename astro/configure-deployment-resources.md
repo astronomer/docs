@@ -1,61 +1,32 @@
 ---
-sidebar_label: 'Configure a Deployment'
-title: 'Configure a Deployment'
-id: configure-deployment
-description: Learn how to create and configure an Astro Deployment.
+sidebar_label: 'Configure Deployment Resources'
+title: 'Configure Deployment Resources'
+id: configure-deployment-resources
+description: Learn how to create and configure Astro Deployment resources.
 ---
 
 ## Overview
 
-A Deployment on Astro is an instance of Astro Runtime that is powered by Apache Airflow's core components - a metadata database, a Webserver, one or more Schedulers, and one or more Workers. Every Deployment is hosted on a single Astro Cluster, has an isolated set of resources, and operates with a dedicated Postgres metadata database.
+After you create an Astro Deployment, you can modify its resource settings to make sure that your tasks have the CPU and memory required to complete successfully.
 
-This guide walks you through the process of creating and configuring an Airflow Deployment.
-
-## Configure a Workspace
-
-When you first sign up for Astro, you can expect to be invited to a Workspace created for your team. Within a Workspace, you can create Deployments and push DAGs to any Deployment from the Astro CLI or from a CI/CD process. You're free to invite other users to that Workspace and create as many Deployments as you'd like.
-
-## Create a Deployment
-
-To create an Airflow Deployment on Astro:
-
-1. Log in to the [Cloud UI](https://cloud.astronomer.io) and go to the **Deployments** tab on the left navigation bar.
-2. On the top right-hand side of the Deployments page, click **New Deployment**.
-3. Set the following:
-    - **Name**
-    - **Description**
-    - **Astro Runtime**: By default, the latest version of Astro Runtime is selected
-    - **Deployment Location**: The Astro Cluster in which you want to create this Deployment
-
-3. Click **Create Deployment** and give it a few moments to spin up. Within a few seconds, you should see the following:
-
-    ![Cloud UI Deployment Configuration](/img/docs/deployment-configuration.png)
-
-    All Deployments show an initial health status of `UNHEALTHY` after their creation. This indicates that the Deployment's Webserver and Scheduler are still spinning up in your cloud. Wait a few minutes for this status to become `HEALTHY` before proceeding to the next step.
-
-4. To access the Airflow UI, select **Open Airflow** on the top right.
-
-:::tip
-
-If you prefer to work with the Astro CLI, you can also create a Deployment by running the `astrocloud deployment create` command. For more information, see [CLI Command Reference](cli-reference/astrocloud-deployment-create.md).
-
-:::
-
-## Configure Deployment Resources
-
-Once you create a Deployment, you can choose to modify its resources and configurations to best fit the needs of your tasks. Specifically, you can modify these two components:
-
-- Worker(s)
-- Scheduler
-
-For reference, Astro supports the `AU` as the primary resource unit. In this context,
+Astro supports the `AU` as the primary resource unit. In this context,
 
 - 1 AU = 0.1 CPU, .375 GB Memory
 - 10 AU = 1 CPU, 3.75 GB Memory
 
-Read below for guidelines on how to configure each component.
+If you haven't created your Astro Deployment, see [Create a Deployment](create-deployment.md).
 
-### Worker Resources
+## Edit Deployment Resource Settings
+
+1. Log in to the [Cloud UI](https://cloud.astronomer.io) and select a Workspace.
+2. Select a Deployment.
+3. Click **Edit Configuration**.
+4. Edit the Deployment resource settings. For more information about these settings, review the content in this topic.
+5. Click **Update Deployment**.
+
+    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
+
+## Worker Resources
 
 A worker is responsible for executing tasks, which are first scheduled and queued by the Scheduler. On Astro, task execution is powered by the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) with [KEDA](https://www.astronomer.io/blog/the-keda-autoscaler), which enables workers to autoscale between 1 and 10 depending on real-time workload. Each worker is a Kubernetes Pod that is hosted within a Kubernetes Node in your Astro Cluster.
 
@@ -65,7 +36,7 @@ To ensure reliability, the minimum worker size supported is 10 AU. Beyond that, 
 
 For a list of supported node instance types and their corresponding worker size limits, see [AWS Resource Reference](resource-reference-aws.md#deployment-worker-size-limits). To request a different instance type for your Cluster, reach out to [Astronomer Support](https://support.astronomer.io).
 
-:::info Worker Autoscaling Logic
+### Worker Autoscaling Logic
 
 While the **Worker Resources** setting affects the amount of computing power allocated to each worker, the number of workers running on your Deployment is based solely on the number of tasks in a queued or running state.
 
@@ -74,9 +45,8 @@ The maximum number of tasks that a single worker can execute at once is 16. This
 `[Number of Workers]= ([Queued tasks]+[Running tasks])/(Worker Concurrency)`
 
 This calculation is computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, read [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
-:::
 
-### Scheduler
+## Scheduler Resources
 
 The [Airflow Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met. By adjusting the **Scheduler Count** slider in the Cloud UI, you can configure up to 4 Schedulers, each of which will be provisioned with the AU specified in **Scheduler Resources**.
 
@@ -84,10 +54,8 @@ For example, if you set Scheduler Resources to 10 AU and Scheduler Count to 2, y
 
 If you experience delays in task execution, which you can track via the Gantt Chart view of the Airflow UI, we recommend increasing the AU allocated towards the Scheduler. The default resource allocation is 10 AU.
 
-## Set Environment Variables
+## Next Steps
 
-Environment Variables can be used to set [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) and custom values, both of which can be applied to your Deployment. For example, you can configure Airflow Parallelism or a secrets backend to manage Airflow Connections.
+[Set Environment Variables on Astro](environment-variables.md).
 
-To set Environment Variables, add them to the corresponding section of the Cloud UI or in your project's `Dockerfile`. If you're developing locally, they can also be added to a local `.env` file.
-
-For more information on configuring Environment Variables, read [Environment Variables on Astro](environment-variables.md).
+[Manage Deployment API Keys](api-keys.md).
