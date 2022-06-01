@@ -148,6 +148,11 @@ module.exports = {
               label: 'Privacy Policy',
               to: 'https://www.astronomer.io/privacy/',
             },
+            {
+              label: 'Cookie Preferences',
+              to: '#',
+              id: 'cookiePref',
+            },
           ],
         },
         {
