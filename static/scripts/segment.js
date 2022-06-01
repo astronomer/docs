@@ -4,7 +4,7 @@
     analytics.page();
   }
   var elemDiv = document.createElement('div');
-  elemDiv.style.cssText = 'position:absolute;width:100%;left:0;right:0;bottom:0;z-index:100;';
+  elemDiv.style.cssText = 'position:fixed;width:100%;left:0;right:0;bottom:0;z-index:100;';
   elemDiv.id = 'consentManager';
   document.body.appendChild(elemDiv);
 
