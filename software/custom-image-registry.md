@@ -2,7 +2,7 @@
 title: 'Configure a Custom Registry for Deployment Images'
 sidebar_label: 'Configure a Custom Image Registry'
 id: custom-image-registry
-description: Replace Astronomer's built in container image registry with your own.
+description: Replace Astronomer's built-in container image registry with your own.
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
