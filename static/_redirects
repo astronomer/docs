@@ -2,7 +2,7 @@
 / /astro 301!
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
-/software/0.28/* /software/:splat
+/software/0.29/* /software/:splat
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
