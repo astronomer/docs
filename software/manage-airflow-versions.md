@@ -100,7 +100,7 @@ To complete the upgrade, all you have to do is add a corresponding AC image to y
 
 ### 1. Locate your Dockerfile in your Project Directory
 
-First, open the `Dockerfile` within your Astronomer directory. When you initialized an Airflow project via the Astronomer CLI, the following files should have been automatially generated:
+First, open the `Dockerfile` within your Astronomer directory. When you initialized an Airflow project via the Astronomer CLI, the following files should have been automatically generated:
 
 ```
 .
@@ -185,7 +185,7 @@ Once there, you should see your correct Airflow version listed.
 
 If you're on Astronomer Software, navigate to your Airflow Deployment page on the Software UI.
 
-> **Note:** In Airflow 2.0, the **Version** page referenced above will be deprecated. Check the footer of the Airflow UI to validate Airflow version instead.
+> **Note:** In Airflow 2.0, the **Version** page referenced above will be deprecated. Check the footer of the Airflow UI to validate your Airflow version instead.
 
 ## Cancel Airflow Upgrade Initialization
 
