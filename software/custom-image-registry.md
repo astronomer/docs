@@ -2,7 +2,7 @@
 title: 'Configure a Custom Registry for Deployment Images'
 sidebar_label: 'Configure a Custom Image Registry'
 id: custom-image-registry
-description: Replace Astronomer's built in Docker image registry with your own.
+description: Replace Astronomer's built in container image registry with your own.
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -12,11 +12,15 @@ import {siteVariables} from '@site/src/versions';
 
 Astronomer Software includes an internal image registry for Deployment container images. Based on your deploy method, these images can include OS and Python dependencies, pipeline code, and Airflow itself. Using Astronomer's internal registry is easiest if you're just getting started or comfortable deploying code using the standard deploy process as described in [Deploy DAGs via CLI](deploy-cli.md)
 
-Alternatively, you can configure a custom Docker image registry to deploy to in place of Astronomer's default registry. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVE’s, malicious code, and approved/ unapproved Python and OS-level dependencies prior to deploying to code.
+Alternatively, you can configure a custom container image registry in place of Astronomer's default registry. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and approved/ unapproved Python and OS-level dependencies prior to deploying code.
 
 ## Implementation Considerations
 
-Deploying code changes to a custom image registry requires triggering a GraphQL mutation to provide a Deployment release name, image name, and Airflow version to the registry. Because this process is difficult to manually trigger, Astronomer recommends configuring a custom image registry only if your DAG authors can deploy code changes via CI/CD pipelines.
+Deploying code changes to a custom image registry requires triggering a GraphQL mutation to provide a Deployment release name, image name, and Airflow version to the registry. Because this process is difficult to manually trigger, Astronomer recommends configuring a custom image registry only if your DAG authors can deploy code changes via CI/CD pipelines. In this implementation, you would use your CI/CD tool to:
+
+1. Build your Astro project into a container image.
+2. Deploy the image to your custom registry.
+3. Run a query to push the image from your registry to Astronomer Software.
 
 ## Prerequisites
 
@@ -24,7 +28,7 @@ To configure this feature, you need:
 
 - Helm.
 - kubectl.
-- A custom Docker image registry.
+- A custom container image registry.
 - A process for building and pushing your Astro projects as images to your custom registry.
 
 ## Setup
@@ -51,7 +55,7 @@ To configure this feature, you need:
 
   ::: info
 
-  To use different registries for each Deployment, create the same secret in each Deployment namespace and specify different custom registries using `--docker-server`. Do not add the annotation as described in this step.
+  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace, making sure to specify different custom registries using `--docker-server`. Because you don’t need to sync secrets between Deployments, you should not add the annotation as described in this step.
 
   :::
 
@@ -118,7 +122,7 @@ To configure this feature, you need:
 
   ::: info
 
-  To use different registries for each Deployment, create the same secret in each Deployment namespace and specify different custom registries using `--docker-server`. Do not add the annotation as described in this step.
+  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace, making sure to specify different custom registries using `--docker-server`. Because you don’t need to sync secrets between Deployments, you should not add the annotation as described in this step.
 
   :::
 

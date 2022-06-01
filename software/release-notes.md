@@ -37,10 +37,18 @@ Astronomer Runtime includes additional features which are not available in Astro
 
 To upgrade a Deployment to Runtime, follow the steps in Upgrade Airflow, making sure to replace the Astronomer Certified image in your Dockerfile with an Astronomer Runtime version.
 
+### Use a Custom Container Image Registry To Deploy Code
+
+You can now configure a custom container image registry in place of Astronomer's default registry. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and approved/ unapproved Python and OS-level dependencies prior to deploying code. To configure this feature, see [Configure a Custom Image Registry](custom-image-registry.md).
+
 ### Export Task Logs Using Logging Sidecars
 
-You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster and need to prioritize security.To configure this feature, see [Export Task Logs](export-task-logs.md).
+You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster and need to prioritize security. To configure this feature, see [Export Task Logs](export-task-logs.md).
 
 ### Simplified Configuration for Namespace Pools
 
 The process for configuring namespace pools has been simplified. As an alternative to manually creating namespaces, you can now delegate the creation of each namespace, including roles and rolebindings, to Astronomer Software. While this feature is suitable for most use cases, you can still manually create namespaces if you want more fine-grained control over the namespace's resources and permissions. For more information, see [Namespace Pools](namespace-pools.md).
+
+### Additional Improvements
+
+- Added support for [Kubernetes 1.22](https://kubernetes.io/blog/2021/08/04/kubernetes-1-22-release-announcement/)
