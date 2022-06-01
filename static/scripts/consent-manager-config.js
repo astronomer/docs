@@ -19,7 +19,7 @@ window.consentManagerConfig = function (exports) {
 
   return {
     container: "#consentManager",
-    writeKey: "BgDxAvLrlb6vgtAJ0rUfwG5mYdDmpN0j",
+    writeKey: "D2wC7j10rVFq4PPQOGqGPHpyujDhtbjM",
     bannerActionsBlock: true,
     bannerContent: bannerContent,
     bannerSubContent: "You can change your preferences.",
