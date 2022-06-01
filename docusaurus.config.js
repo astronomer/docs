@@ -144,6 +144,10 @@ module.exports = {
               label: 'Astronomer Registry',
               to: 'https://registry.astronomer.io/',
             },
+            {
+              label: 'Privacy Policy',
+              to: 'https://www.astronomer.io/privacy/',
+            },
           ],
         },
         {
@@ -208,12 +212,12 @@ module.exports = {
         path: 'software',
         lastVersion: 'current',
         versions: {
-        current: {
-          label: '0.28',
-          path: '',
-          banner: 'none',
-         },
-       },
+          current: {
+            label: '0.28',
+            path: '',
+            banner: 'none',
+          },
+        },
       },
     ],
   ],
