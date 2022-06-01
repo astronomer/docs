@@ -5,43 +5,41 @@ id: cli-install-windows-10
 description: Install the Windows-based CLI or the Unix-based CLI a Windows Subsystem for Linux (WSL).
 ---
 
-Welcome to Astronomer!
+To install the Astronomer CLI on Windows, you have the following options:
 
-If you're a Windows User looking to install and use the Astronomer CLI, you have 2 options:
+- Install the Unix-based CLI on Windows Subsystem for Linux (WSL).
+- Install the Windows-based CLI.
 
-1. Install the Unix-based CLI on Windows Subsystem for Linux (WSL)
-2. Install the Windows-based CLI
+> **Note:** Both options require Windows 10 or later.
 
-> **Note:** Either option will require Windows 10 or greater.
+## Astronomer CLI on Windows Subsystem for Linux
 
-## Astronomer CLI on Windows Subsystem for Linux (WSL)
-
-This guide will walk you through the setup and configuration process for using the Astronomer CLI in the Windows Subsystem for Linux (WSL) on Windows 10. Before you start, make sure:
+Before you start the setup and configuration process for the Astronomer CLI on the WSL, make sure:
  - You're running the bash terminal
  - You have [WSL enabled](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
- - You're running Windows 10 version 2004 and higher (Build 19041 and higher) or Windows 11.
+ - You're running Windows 10 version 2004 or later (Build 19041 or later) or Windows 11
 
-**Note:** We use Ubuntu as our Linux flavor of choice, but this guide should work for other distributions as well.
+**Note:** Astronomer recommends using Ubuntu as your linux distribution for WSL.
 
-Find the full WSL installation guide here: [Install WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+The complete WSL installation guide is available here: [Install WSL](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
 
 ### Step 1. Install Docker CE for Windows
 
-Follow the [Docker for Windows Install Guide](https://docs.docker.com/docker-for-windows/install/).
+See [Docker for Windows Install Guide](https://docs.docker.com/docker-for-windows/install/).
 
-Once you finish this installation, open a new WSL session, using the distro shell or Windows Terminal. You can now run `docker run hello-world` through your WSL instance to ensure everything works as expected.
+After finishing the installation, use the distro shell or a Windows Terminal to open a new WSL session. Run `docker run hello-world` in your WSL instance to ensure everything works as expected.
 
-**Last thing**: Whenever you run Docker-compose up, you'll want to make sure you navigate to the `/c/Users/name/dev/myapplication` first, otherwise your volume won't work. In other words, never access `/mnt/c` directly.
+When you run Docker-compose up, go to `/c/Users/name/dev/myapplication` first, or your volume won't work. Don't access `/mnt/c` directly.
 
 ### Step 2. CLI Install
 
-Once you've completed the steps above, head over to our [CLI Quickstart Guide](cli-quickstart.md) to finish the installation and start deployment DAGs.
+Finish the installation and start the deployment DAGs. See [CLI Quickstart Guide](cli-quickstart.md).
 
 ## Astronomer CLI on Windows 10 (PowerShell)
 
-You can install a Windows adapted version of the Astronomer CLI directly by following the instructions below.
+Use the following instructions to install a Windows adapted version of the Astronomer CLI.
 
-### Step 1. Pre-Flight Checklist
+### Prerequisites
 
 Make sure you have the following installed:
 
@@ -52,31 +50,30 @@ Make sure you have the following installed:
 
 Make sure that the WSL 2 based engine is enabled in Docker Settings (preferred). If this is not possible, enable Hyper-V (legacy). This is required to run Docker and Linux Containers.
 
-If you have any issues with Docker, check out [Docker's Troubleshooting Guide for Windows](https://docs.docker.com/docker-for-windows/troubleshoot/).
+If you have any issues with Docker, see [Docker's Troubleshooting Guide for Windows](https://docs.docker.com/docker-for-windows/troubleshoot/).
 
 ### Step 3. Download the Astronomer CLI
 
-Currently, Astronomer on Windows outside of WSL is only supported by Astronomer CLI versions 0.8 and beyond.
 
-You can download the latest version of the CLI [here](https://github.com/astronomer/astro-cli/releases/).
+You can download the latest version of the CLI on the [Astronomer GitHub](https://github.com/astronomer/astro-cli/releases/). Select an asset that includes windows_386.zip in the filepath.
 
 ### Step 4. Extract the contents
 
-After following step 3, you should see a zip file on your machine that contains the following:
+You should now have a zip file on your computer that contains the following:
 
 - CHANGELOG
 - README
 - LICENSE
 - A file titled `astro.exe`
 
-Grab that `astro.exe` file and move it to a location that won't be deleted.
+Move `astro.exe` to a location where it can't be deleted.
 
 ### Step 5. Add Executable to Path
-Add the location of `astro.exe` in your %PATH%. If you don't know how to do this, check out [this helpful guide](https://helpdeskgeek.com/windows-10/add-windows-path-environment-variable/).
+Add the location of `astro.exe` to your %PATH% environment variable. See [How to Add to Windows PATH Environment Variable](https://helpdeskgeek.com/windows-10/add-windows-path-environment-variable/).
 
 ### Step 6. Final Command
 
-Now, open your Terminal or PowerShell console and run the following:
+Open your Terminal or PowerShell console and run the following:
 
 ```
 C:\Windows\system32>astro version
@@ -84,11 +81,11 @@ Astronomer CLI Version: 0.8.2
 Git Commit: f5cdab8f832da3c6184a7ac167b491e3bac3c022
 ```
 
-If you get a response like the above, you're all set! Happy Airflow-ing.
+If you receive a response similar to what is shown, your set up is complete.
 
 ## Potential Postgres Error
 
-As a Windows user, you might see the following error when trying to call `astro dev start` on your newly created workspace:
+The following error might appear when you run `astro dev start` on your newly created workspace:
 
 ```
 Sending build context to Docker daemon  8.192kB
@@ -110,7 +107,7 @@ github.com/astronomer/astro-cli/vendor/github.com/Nvveen/Gotty.readTermInfo(0xc4
 ....
 ```
 
-This is an issue pulling Postgres that should be fixed by running the following:
+This is an issue pulling Postgres. To correct it, run:
 
 ```
 Docker pull postgres:10.1-alpine

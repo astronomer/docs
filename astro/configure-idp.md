@@ -5,6 +5,10 @@ id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
 ## Overview
 
 This guide provides setup steps for integrating various third party identity providers (IdP) with Astro.
@@ -18,19 +22,33 @@ Astro supports integrations with the following IdPs:
 
 This guide provides setup steps for integrating both of these identity providers on Astro. Once you complete the integration for your organization:
 
-- Astro will be listed in your IdP's set of supported applications.
-- Workspace Admins can invite a user to a Workspace directly without that user having to separately sign up for an account first.
 - Users will automatically be authenticated to Astro if they're already logged in to your IdP.
+- Users will no longer have to repeatedly login and remember credentials for their account.
+- You will have complete ownership over credential configuration and management on Astro.
 
-## Configure Okta as Your Identity Provider
+:::info
+
+Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in via the [Cloud UI](https://cloud.astronomer.io/)
+
+:::
+
+## Configure Your Identity Provider
+
+<Tabs
+    defaultValue="Okta"
+    values={[
+        {label: 'Okta', value: 'Okta'},
+        {label: 'Azure AD', value: 'Azure AD'},
+    ]}>
+<TabItem value="Okta">
 
 This section provides setup steps for setting up Okta as your IdP on Astro. After completing this setup, all users in your organization can use Okta to log in to Astro.
 
-### Prerequisites
+#### Prerequisites
 
 To integrate Okta as your IdP for Astro, you must have an [Okta account](https://www.okta.com/) with administrative access.
 
-### Step 1: Reach out to Astronomer
+#### Step 1: Reach out to Astronomer
 
 Reach out to [Astronomer Support](https://support.astronomer.io) with a request to integrate Okta as an IdP on Astro. From here, an Astronomer Representative will provide you with two things:
 
@@ -39,7 +57,7 @@ Reach out to [Astronomer Support](https://support.astronomer.io) with a request 
 
 Save these values for Step 2.
 
-### Step 2: Configure Okta
+#### Step 2: Configure Okta
 
 1. Follow the [Okta documentation](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm) to create a SAML App Integration via Okta's Admin Console. Configure the following SAML settings:
 
@@ -74,37 +92,39 @@ Save these values for Step 2.
 
 4. Complete the remainder of the setup as documented in Okta until you finish creating your integration.
 
-### Step 3: Provide Astronomer with your integration information
+#### Step 3: Provide Astronomer with your integration information
 
 On the page for your Okta app integration, click **View Setup Instructions**. Copy the values for `Single Sign-on URL` and `X.509 Certificate` that appear and send them to Astronomer Support.
 
 From here, Astronomer will finalize your organization's integration with Okta.
 
-### Step 4: Assign users to your Okta application
+#### Step 4: Assign users to your Okta application
 
 On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, read [Okta Documentation](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
 
 When a user assigned to the integration accesses Astro, they will be brought automatically to Okta after entering their email in the Cloud UI.
 
-## Configure Azure AD as your Identity Provider
+</TabItem>
+
+<TabItem value="Azure AD">
 
 This section provides setup steps for setting up Azure AD as your IdP on Astro. After completing this setup, your organization's users can use Azure AD to log in to Astro.
 
-### Prerequisites
+#### Prerequisites
 
 To integrate Azure as your IdP for Astro you must have:
 
 - An Azure subscription.
 - An [Azure AD tenant](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant) with `Global Administrator` privileges.
 
-### Step 1: Register Astro as an application on Azure
+#### Step 1: Register Astro as an application on Azure
 
 Follow [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to register a new app. When configuring the application, set the following values:
 
 - **Name** and **Supported account types**: Set these according to your organization's needs.
 - **Redirect URI**: Select **Web** and specify `https://auth.astronomer.io/login/callback`.
 
-### Step 2: Create a client secret
+#### Step 2: Create a client secret
 
 Follow [Microsoft' documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the secret value for Step 4.
 
@@ -114,7 +134,7 @@ If you configure an expiring secret, make sure to record the expiration date and
 
 :::
 
-### Step 3: Configure API permissions
+#### Step 3: Configure API permissions
 
 Follow [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-access-web-apis#add-permissions-to-access-web-apis) to add the following **Delegated** permissions to **Microsoft Graph**:
 
@@ -129,7 +149,7 @@ If your Azure Active Directory is configured to require admin approval on API pe
 
 :::
 
-### Step 4: Provide Astronomer with your Azure AD app information
+#### Step 4: Provide Astronomer with your Azure AD app information
 
 Reach out to [Astronomer Support](https://support.astronomer.io) and provide the following information from your Azure AD application:
 
@@ -139,8 +159,12 @@ Reach out to [Astronomer Support](https://support.astronomer.io) and provide the
 
 From here, Astronomer will complete the integration and add Azure as your organization's IDP.
 
-### Step 5: Assign users to your Azure AD application
+#### Step 5: Assign users to your Azure AD application
 
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
 
 When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
+
+</TabItem>
+
+</Tabs>

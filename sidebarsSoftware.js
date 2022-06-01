@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Getting Started',
+      label: 'Get Started',
       items: [
       'cli-quickstart',
       'create-project',
@@ -74,6 +74,7 @@ module.exports = {
         'renew-tls-cert',
         'namespace-pools',
         'third-party-ingress-controllers',
+        'upgrade-to-0-28',
           ],
         },
         {

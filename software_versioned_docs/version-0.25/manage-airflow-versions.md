@@ -1,7 +1,8 @@
 ---
-title: 'Upgrade Apache Airflow on Astronomer Software'
-sidebar_label: 'Upgrade Airflow'
+title: "Upgrade Apache Airflow on Astronomer Software"
+sidebar_label: "Upgrade Airflow"
 id: manage-airflow-versions
+description: Adjust and upgrade Airflow versions on Astronomer Software.
 ---
 
 ## Overview
@@ -26,11 +27,11 @@ Starting with Astronomer Software v0.23, new versions of Astronomer Certified ar
 
 > **Note:** If you don't want to wait for new versions of Astronomer Certified to appear on their own, you can manually trigger the cron job with the following Kubernetes command:
 >
->    ```sh    
->    kubectl create job --namespace astronomer --from=cronjob/astronomer-houston-update-airflow-check airflow-update-check-first-run
->    ```
+> ```sh
+> kubectl create job --namespace astronomer --from=cronjob/astronomer-houston-update-airflow-check airflow-update-check-first-run
+> ```
 >
->    If you get a message indicating that a job already exists, delete the job and rerun the command.
+> If you get a message indicating that a job already exists, delete the job and rerun the command.
 
 ## Step 1. Initialize the Upgrade Process
 
@@ -106,7 +107,7 @@ First, open the `Dockerfile` within your Astronomer directory. When you initiali
 ```
 .
 ├── dags # Where your DAGs go
-│   ├── example-dag.py # An example dag that comes with the initialized project
+│   └── example-dag.py # An example DAG that comes with the initialized project
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include # For any other files you'd like to include
 ├── packages.txt # For OS-level packages
@@ -118,27 +119,27 @@ Depending on the OS distribution and version of Airflow you want to run, you'll 
 
 ### 2. Choose your new Astronomer Certified Image
 
+<!--- Version-specific -->
+
 Depending on the Airflow version you'd like to run or upgrade to, copy one of the images in the following table to your `Dockerfile` and proceed to Step 3.
 
 Once you upgrade Airflow versions, you CANNOT downgrade to an earlier version. The Airflow metadata database structurally changes with each release, making for backwards incompatibility across versions.
 
-For our platform's full collection of Docker Images, reference [Astronomer on Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags). For more information on Alpine and Debian as distinct system distributions, read the "Migrate from Alpine to Debian" section below.
+For our platform's full collection of Docker Images, reference [Astronomer on Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags).
 
-| Airflow Version                                                                      | Debian-based Image                                        | Alpine-based Image                                            |
-| -------------------------------------------------------------------------------------| --------------------------------------------------------- | --------------------------------------------------------------|
-| [1.10.10](https://github.com/astronomer/ap-airflow/blob/master/1.10.10/CHANGELOG.md) | FROM quay.io/astronomer/ap-airflow:1.10.10-buster-onbuild | FROM quay.io/astronomer/ap-airflow:1.10.10-alpine3.10-onbuild |
-| [1.10.12](https://github.com/astronomer/ap-airflow/blob/master/1.10.12/CHANGELOG.md) | FROM quay.io/astronomer/ap-airflow:1.10.12-buster-onbuild | FROM quay.io/astronomer/ap-airflow:1.10.12-alpine3.10-onbuild |
-| [1.10.14](https://github.com/astronomer/ap-airflow/blob/master/1.10.14/CHANGELOG.md) | FROM quay.io/astronomer/ap-airflow:1.10.14-buster-onbuild | N/A                                                           |
-| [1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md) | FROM quay.io/astronomer/ap-airflow:1.10.15-buster-onbuild | N/A                                                           |
-| [2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.0.0-buster-onbuild   | N/A                                                           |
-| [2.0.2](https://github.com/astronomer/ap-airflow/blob/master/2.0.2/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild   | N/A                                                           |
-| [2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.0-buster-onbuild   | N/A                                                           |
-| [2.1.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.1/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.1-buster-onbuild   | N/A                                                           |
-| [2.1.3](https://github.com/astronomer/ap-airflow/blob/master/2.1.3/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.3-buster-onbuild   | N/A                                                           |
-| [2.1.4](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.4-buster-onbuild   | N/A                                                           |
-| [2.2.0](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild   | N/A                                                           |
-| [2.2.1](https://github.com/astronomer/ap-airflow/blob/master/2.2.1/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.1-onbuild   | N/A                                                           |
-| [2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.2-onbuild   | N/A      
+| Airflow Version                                                                      | Debian-based Image                                        |
+| ------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| [1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md) | FROM quay.io/astronomer/ap-airflow:1.10.15-buster-onbuild |
+| [2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.0-buster-onbuild   |
+| [2.1.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.1/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.1-buster-onbuild   |
+| [2.1.3](https://github.com/astronomer/ap-airflow/blob/master/2.1.3/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.3-buster-onbuild   |
+| [2.1.4](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.4-buster-onbuild   |
+| [2.2.0](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild   |
+| [2.2.1](https://github.com/astronomer/ap-airflow/blob/master/2.2.1/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.1-onbuild          |
+| [2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.2-onbuild          |
+| [2.2.4](https://github.com/astronomer/ap-airflow/blob/master/2.2.4/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.4-onbuild          |
+| [2.2.5](https://github.com/astronomer/ap-airflow/blob/master/2.2.5/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.2.5-onbuild          |
+| [2.3.0](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.3.0-onbuild          |
 
 > **Note:** In November of 2020, Astronomer migrated its Docker Registry from [Docker Hub](https://hub.docker.com/r/astronomerinc/ap-airflow) to [Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags) due to a [change](https://www.docker.com/blog/what-you-need-to-know-about-upcoming-docker-hub-rate-limiting/) in Docker Hub's rate limit policy. If you're using a legacy `astronomerinc/ap-airflow` image, replace it with a corresponding `quay.io/astronomer/ap-airflow` image to avoid rate limiting errors from DockerHub when you deploy to Astronomer (e.g. `toomanyrequests: You have reached your pull rate limit`).
 
@@ -159,6 +160,7 @@ If you're developing locally, make sure to save your changes and issue the follo
 ### On Astronomer
 
 If you don't need to test this locally and just want to push to your Astronomer Software installation, you can run:
+
 ```sh
 astro deploy
 ```
@@ -199,7 +201,7 @@ To avoid unexpected impact to your Airflow Deployment, we strongly recommend two
 1. Do not upgrade Airflow versions simultaneously.
 2. Test your changes locally before you push a new image to Astronomer.
 
-If you're runnning an Alpine-based 1.10.12 image, for example, try the Debian-based AC 1.10.12 image locally *before* you push that image to Astronomer and before you upgrade to a higher version of Airflow.
+If you're running an Alpine-based 1.10.12 image, for example, try the Debian-based AC 1.10.12 image locally *before* you push that image to Astronomer and before you upgrade to a higher version of Airflow.
 
 > **Note:** If your `packages.txt` file is empty, skip to step 3.
 
@@ -212,7 +214,6 @@ If you have any packages installed primarily *because* they're native to another
 If you test a Debian-based image and encounter an error, you can always add packages back as needed.
 
 > **Note:** If you need a particular version of any package, make sure to pin it in your `requirements.txt` or `packages.txt` files (i.e. `<package-name>==<version>`). For Python packages that are pre-built into Astronomer's Debian image *and* listed in your `requirements.txt` file, the version of the package that's specified in `requirements.txt` will take precedence.
-
 ### Step 2. Rename Existing Packages
 
 For the dependencies you *do* have installed, a primary concern in migrating from Alpine to Debian is that Python and OS-level packages may be named differently.

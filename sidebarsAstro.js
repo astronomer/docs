@@ -63,6 +63,7 @@ module.exports = {
       label: 'Observability',
       items: [
         'deployment-metrics',
+        'data-lineage',
         'scheduler-logs',
         'airflow-alerts',
       ],
@@ -71,8 +72,16 @@ module.exports = {
       type: 'category',
       label: 'Administration',
       items: [
-        'install-aws',
+        {
+          type: 'category',
+          label: 'Install Astro',
+          items: [
+            'install-aws',
+            'install-gcp',
+          ],
+        },
         'manage-workspaces',
+        'set-up-data-lineage',
         {
           type: 'category',
           label: 'User Access',
@@ -88,6 +97,7 @@ module.exports = {
           items: [
             'create-cluster',
             'modify-cluster',
+            'connect-external-services',
           ],
         },
       ],
@@ -119,6 +129,9 @@ module.exports = {
             'cli-reference/astrocloud-deployment-list',
             'cli-reference/astrocloud-deployment-logs',
             'cli-reference/astrocloud-deployment-update',
+            'cli-reference/astrocloud-deployment-variable-create',
+            'cli-reference/astrocloud-deployment-variable-list',
+            'cli-reference/astrocloud-deployment-variable-update',
             'cli-reference/astrocloud-dev-init',
             'cli-reference/astrocloud-dev-kill',
             'cli-reference/astrocloud-dev-logs',
@@ -135,9 +148,23 @@ module.exports = {
         },
         'known-limitations',
         'runtime-version-lifecycle-policy',
-        'resource-reference-aws',
+        {
+          type: 'category',
+          label: 'Cloud Configuration Reference',
+          items: [
+            'resource-reference-aws',
+            'resource-reference-gcp',
+          ],
+        },
         'platform-variables',
         'data-plane-activation',
+        {
+          type: 'category',
+          label: 'Data Lineage',
+          items: [
+            'data-lineage-support-and-compatibility',
+            'data-lineage-concepts',],
+        },
         {
           type: 'category',
           label: 'Security',

@@ -36,10 +36,11 @@ microk8s.config > /include/.kube/config
 The `config_file` is pointing to the `/include/.kube/config` file you just edited. Run `astro dev start` to build this config into your image.
 
 ```python
-from airflow import DAG
 from datetime import datetime, timedelta
-from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow import configuration as conf
+
+from airflow import DAG
+from airflow.configuration import conf
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 
 default_args = {
     'owner': 'airflow',
@@ -57,29 +58,27 @@ namespace = conf.get('kubernetes', 'NAMESPACE')
 # environment namespace when deployed to Astronomer.
 if namespace =='default':
     config_file = '/usr/local/airflow/include/.kube/config'
-    in_cluster=False
+    in_cluster = False
 else:
-    in_cluster=True
-    config_file=None
+    in_cluster = True
+    config_file = None
 
-dag = DAG('example_kubernetes_pod',
-          schedule_interval='@once',
-          default_args=default_args)
-
+dag = DAG('example_kubernetes_pod', schedule_interval='@once', default_args=default_args)
 
 
 with dag:
-    k = KubernetesPodOperator(
+    KubernetesPodOperator(
         namespace=namespace,
         image="hello-world",
         labels={"foo": "bar"},
         name="airflow-test-pod",
         task_id="task-one",
-        in_cluster=in_cluster, # if set to true, will look in the cluster, if false, looks for file
-        cluster_context='docker-desktop', # is ignored when in_cluster is set to True
+        in_cluster=in_cluster,  # if set to true, will look in the cluster, if false, looks for file
+        cluster_context="docker-desktop",  # is ignored when in_cluster is set to True
         config_file=config_file,
         is_delete_operator_pod=True,
-        get_logs=True)
+        get_logs=True,
+    )
 
 ```
 
@@ -100,4 +99,4 @@ Run the same commands as above prefixed with microk8s:
 microk8s.kubectl get pods -n $namespace
 ```
 
-When you are ready to deploy this up into Astronomer, follow the [KubePodOperator doc](kubepodoperator.md) to find a list of the necessary changes that will need to be made.
+When you are ready to deploy this up into Astronomer, follow the [KubernetesPodOperator doc](kubepodoperator.md) to find a list of the necessary changes that will need to be made.

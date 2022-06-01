@@ -158,9 +158,10 @@ To test Vault, write a simple DAG which calls your test secret and add this DAG 
 
 ```python
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.hooks.base import BaseHook
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")

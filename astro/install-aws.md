@@ -23,18 +23,25 @@ For a complete list of the AWS resources that our team will provision in your AW
 Before completing this setup, make sure that you have:
 
 - A dedicated AWS account with minimum EC2 service quotas.
-- A user that has `CreateRole` permissions on that account.
-- Subscribed to the [Astro Status Page](https://cloud-status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
+- A user with the following permissions:
+    - `cloudformation:*`
+    - `GetRole`
+    - `GetRolePolicy`
+    - `CreateRole`
+    - `DeleteRolePolicy`
+    - `PutRolePolicy`
+    - `ListRoles`
+    - `UpdateAssumeRolePolicy`
+- A subscription to the [Astro Status Page](https://cloud-status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
 
-Astro requires a dedicated AWS account with a minimum set of EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. For instructions on creating a new AWS account, follow [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
+Astro requires a clean AWS account with a minimum set of EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. For instructions on creating a new AWS account, follow [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
 
 The required [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html) are:
 
-| QuotaCode  | QuotaName                                                        | Minimum Required Value  |
-| -----------| ---------------------------------------------------------------- | ----------------------- |
-| L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40                      |
-| L-43DA4232 | Running On-Demand High Memory instances                          | 40                      |
-| L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40                      |
+| QuotaCode  | QuotaName                                                        | Minimum Value  |
+| -----------| ---------------------------------------------------------------- | ---------------|
+| L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40             |
+| L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40             |
 
 These are required to mitigate near term capacity risks and ensure a smooth onboarding experience on Astro. If you need to modify or increase a specific quota, see Amazon’s documentation on [requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html).
 
@@ -76,7 +83,7 @@ After completing your initial installation, we recommend [setting up an identity
 
 :::
 
-## Step 2: Share Information with Astronomer
+## Step 2: Provide Setup Information to Astronomer
 
 For the AWS account you created as a prerequisite, provide Astronomer with:
 
@@ -84,13 +91,13 @@ For the AWS account you created as a prerequisite, provide Astronomer with:
 - Your preferred Astro Cluster name.
 - The AWS region that you want to host your Cluster in.
 - Your preferred node instance type.
-- Your preferred max node count. 
+- Your preferred maximum node count.
 
-If not specified, we will create a Cluster with two `m5.xlarge` nodes in `us-east-1` by default. For information on all supported regions and configurations, see [AWS Resource Reference](resource-reference-aws.md).
+If not specified, Astronomer will create a Cluster with two `m5.xlarge` nodes in `us-east-1` and a maximum node count of 20 by default. For information on all supported regions and configurations, see [AWS Resource Reference](resource-reference-aws.md).
 
 From here, our team will provision an Astro Cluster according to the specifications you provided.
 
-## Step 3: Create a cross-account IAM Role for Astro
+## Step 3: Create a Cross-Account IAM Role for Astro
 
 Once your Astro Cluster has been created, an Astronomer team member will provide you with an [External ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) that will allow Astronomer to connect to your AWS account. Save the External ID as a secret or in an otherwise secure format for use in the AWS CLI.
 
@@ -98,7 +105,7 @@ Then, click the link below to create an [cross-account admin IAM role](https://d
 
 - [Create cross-account IAM Role](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402)
 
-Alternatively, run the following AWS CLI command:
+Using this CloudFormation link is the recommended way to create an IAM role for Astro. Alternatively, you can create a cross-account IAM Role by running the following AWS CLI commands:
 
 ```bash
 $ aws iam create-role --role-name astronomer-remote-management --assume-role-policy-document "{
@@ -151,6 +158,18 @@ The output of the last command is a YAML file containing information about the r
 ```
 
 To provision additional Clusters, complete the setup in [Create a Cluster](create-cluster.md) after completing your initial installation.
+
+:::caution
+
+Some AWS regions that Astronomer supports are disabled by default on AWS, including:
+
+- `af-south-1` - Africa (Cape Town)
+- `ap-east-1` - Asia Pacific (Hong Kong)
+- `me-south-1` - Middle East (Bahrain)
+
+If you're setting up your first Cluster in any of these regions, you need to complete the additional setup as described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
+
+:::
 
 ## Step 4: Let Astronomer Complete the Install
 
