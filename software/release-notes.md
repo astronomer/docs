@@ -60,6 +60,7 @@ The process for configuring namespace pools has been simplified. As an alternati
 - System Admins can now view all Workspaces on their installation by default
 - User auth tokens for the Software UI are now stored in httpOnly cookies
 - When importing IDP groups as teams, you can now configure a `teamFilterRegex` in `config.yaml` to filter out IDP groups from being imported using regex
+- Added support for audit logging when a user interacts with the Houston API
 
 ### Bug fixes
 
