@@ -17,7 +17,7 @@ For more information about Software version support, see [Release and Lifecycle 
 
 ## Documentation Maintenance Policy
 
-Documentation for the latest version of Astronomer Software is regularly updated to reflect the latest improvements to Software. This includes fixes, enhancements to existing content, and quality-of-life improvements made by the Astronomer team and community.
+Documentation for the latest version of Astronomer Software is regularly updated to reflect the latest improvements to the product. This includes fixes, enhancements to existing content, and quality-of-life improvements made by the Astronomer team and community.
 
 Documentation sets for other maintained versions of Astronomer are updated to ensure accuracy and reflect existing functionality. This includes critical content fixes and updates based on bug fixes and minor features. These documentation sets, however, are not updated with enhanced content and quality-of-life improvements.
 
