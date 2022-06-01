@@ -159,11 +159,11 @@ To configure this feature, you need:
             secretName: <name-of-secret-containing-image-repo-creds>
     ```
 
-    ::: info
+  ::: info
 
-    To use different registries for each Deployment, do not set `astronomer.registry.protectedCustomRegistry.updateRegistry.host` or `astronomer.registry.protectedCustomRegistry.baseRegistry.host`.
+  To use different registries for each Deployment, do not set `astronomer.registry.protectedCustomRegistry.updateRegistry.host` or `astronomer.registry.protectedCustomRegistry.baseRegistry.host`.
 
-    :::
+  :::
 
 4. Push the configuration change as described in [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
 5. For any existing Deployments, run the following command to sync registry credentials.
@@ -172,11 +172,12 @@ To configure this feature, you need:
     kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
     ```
 
-    ::: info
+  ::: info
 
-    If you're using different registries for each Deployment, skip this step.
+  If you're using different registries for each Deployment, skip this step.
 
-    :::
+  :::
+
 </TabItem>
 </Tabs>
 
