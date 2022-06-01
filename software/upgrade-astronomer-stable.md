@@ -95,3 +95,26 @@ To upgrade to Astronomer Software v0.27.0, for example, set `ASTRO_VERSION=0.27.
 If you do not specify a patch version above, the script will automatically pull the latest Astronomer Software patch available in the [Astronomer Helm Chart](https://github.com/astronomer/astronomer/releases). If you set `ASTRO_VERSION=0.26` for example, Astronomer v0.26.5 will be installed if it is the latest v0.26 patch available.
 
 :::
+
+## Upgrade Considerations
+
+This topic contains information about upgrading to specific versions of Astronomer Software. This includes notes on breaking changes, database migrations, and other considerations that might depend on your use case.
+
+### Upgrading from Earlier Minor Versions to 0.29
+
+As part of the 0.29 release, Astronomer has deprecated its usage of [kubed](https://appscode.com/products/kubed/) for performance and security reasons. Kubed was responsible for syncing Astronomer's signing certificate to Deployment namespaces and is now replaced by an in-house utility. While this change does not directly affect users, you need to run a one-time command during upgrade in order to can sync Astronomer's signing certificate.
+
+When upgrading to v0.29 from any earlier minor version, complete the following additional setup between Steps 2 and 3 in the standard procedure:
+
+1. Locate your Astronomer Software `config.yaml`. To retrieve it programmatically, run the following:
+
+    ```bash
+    # platform-release-name is usually "astronomer"
+    helm get values <your-platform-release-name> astronomer/astronomer -n <your-platform-namespace>
+    ```
+
+2. Run the following command to annotate the certificate secret:
+
+    ```bash
+    kubectl -n <your-platform-namespace> annotate secret astronomer-houston-jwt-signing-certificate "astronomer.io/commander-sync"="platform=astronomer"
+    ```

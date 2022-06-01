@@ -75,6 +75,7 @@ module.exports = {
         'namespace-pools',
         'export-task-logs',
         'third-party-ingress-controllers',
+        'custom-image-registry',
         'upgrade-to-0-28',
           ],
         },
