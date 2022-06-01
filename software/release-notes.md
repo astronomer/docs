@@ -58,6 +58,7 @@ The process for configuring namespace pools has been simplified. As an alternati
 - You can now use Azure DevOps repos in your [Git Sync](deploy-git-sync.md) configurations
 - You can now disable all network policies for Airflow components using the Astronomer Helm chart
 - System Admins can now view all Workspaces on their installation by default
+- User auth tokens for the Software UI are now stored in httpOnly cookies
 
 ### Bug fixes
 
