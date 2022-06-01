@@ -1,5 +1,5 @@
 ---
-title: 'Astronomer Software v0.28 Release Notes'
+title: 'Astronomer Software v0.29 Release Notes'
 sidebar_label: 'Astronomer Software'
 id: release-notes
 description: Astronomer Software release notes.
