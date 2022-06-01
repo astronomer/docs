@@ -21,7 +21,7 @@ Documentation for the latest version of Astronomer Software is regularly updated
 
 Documentation sets for other maintained versions of Astronomer are updated to ensure accuracy and reflect existing functionality. This includes critical content fixes and updates based on bug fixes and minor features. These documentation sets, however, are not updated with enhanced content and quality-of-life improvements.
 
-Documentation sets for unmaintained versions of Astronomer Software are no longer maintained and are not accessible from the Astronomer Software documentation menu. However, these documentation sets are still accessible from this page.
+Documentation sets for unmaintained versions of Astronomer Software no longer receive updates are not accessible from the Astronomer Software documentation menu. However, these documentation sets are still accessible from this archive.
 
 If you notice an error or misleading information in any part of Astronomer's documentation, [create a GitHub issue](https://github.com/astronomer/docs/issues) in this repo or [reach out to Astronomer Support](https://support.astronomer.io).
 
