@@ -43,7 +43,7 @@ You can now configure a custom container image registry in place of Astronomer's
 
 ### Export Task Logs Using Logging Sidecars
 
-You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster where security is a concern. To configure this feature, see [Export Task Logs](export-task-logs.md).
+You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster where security is a concern, as well as for organizations running many small tasks using the Kubernetes Executor. To configure this feature, see [Export Task Logs](export-task-logs.md).
 
 ### Simplified Configuration for Namespace Pools
 
@@ -52,3 +52,15 @@ The process for configuring namespace pools has been simplified. As an alternati
 ### Additional Improvements
 
 - Added support for [Kubernetes 1.22](https://kubernetes.io/blog/2021/08/04/kubernetes-1-22-release-announcement/)
+- Deprecated usage of [kubed](https://appscode.com/products/kubed/) for security and performance improvements
+- Redis containers can now run as non-root users
+- Added minimum security requirements for user passwords when using local auth
+- You can now use Azure DevOps repos in your [Git Sync](deploy-git-sync.md) configurations
+- You can now disable all network policies for Airflow components using the Astronomer Helm chart
+- System Admins can now view all Workspaces on their installation by default
+
+### Bug fixes
+
+- Fixed a typo in the `loadBalancerIP` key in the Nginx Helm chart
+- Fixed an issue where Azure AD connect sync did not work with Astronomer's Teams feature
+- Fixed an issue where upgrades would fail if you had changed `networkNSLabels` from `true` to `false` in `config.yaml`
