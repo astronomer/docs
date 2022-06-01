@@ -159,7 +159,7 @@ module.exports = {
       'cli-reference',
       'version-compatibility-reference',
       'release-lifecycle-policy',
-      'documentation-versions',
+      'documentation-archive',
       ],
     },
   ],
