@@ -39,7 +39,7 @@ To upgrade a Deployment to Runtime, follow the steps in Upgrade Airflow, making 
 
 ### Export Task Logs Using Logging Sidecars
 
-You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that that Astronomer Software in a multi-tenant cluster and need to prioritize security.To configure this feature, see [Export Task Logs](export-task-logs.md).
+You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster and need to prioritize security.To configure this feature, see [Export Task Logs](export-task-logs.md).
 
 ### Simplified Configuration for Namespace Pools
 
