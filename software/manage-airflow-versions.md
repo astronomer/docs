@@ -5,6 +5,8 @@ id: manage-airflow-versions
 description: Adjust and upgrade Airflow versions on Astronomer Software.
 ---
 
+import {siteVariables} from '@site/src/versions';
+
 ## Overview
 
 On Astronomer, the process of pushing up your code to an individual Airflow Deployment involves customizing a locally built Docker image —— with your DAG code, dependencies, plugins, and so on —— that's then bundled, tagged, and pushed to your Docker Registry.
