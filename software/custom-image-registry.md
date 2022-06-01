@@ -10,9 +10,11 @@ import {siteVariables} from '@site/src/versions';
 
 ## Overview
 
-Astronomer Software includes an internal image registry for Deployment container images. Based on your deploy method, these images can include OS and Python dependencies, pipeline code, and Airflow itself. Using Astronomer's internal registry is easiest if you're just getting started or comfortable deploying code using the standard deploy process as described in [Deploy DAGs via CLI](deploy-cli.md)
+Astronomer Software includes access to a Docker image registry that is managed by Astronomer. Every time a user deploys to Astronomer Software, a Docker image is generated and pushed to this registry. Depending on your deploy method, these Docker images can include OS and Python dependencies, DAG code, and the Airflow service itself.
 
-Alternatively, you can configure a custom container image registry in place of Astronomer's default registry. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and approved/ unapproved Python and OS-level dependencies prior to deploying code.
+Using Astronomer's registry is easiest if you're just getting started and your team is comfortable deploying code as described in [Deploy DAGs via CLI](deploy-cli.md), but it might not comply with the security requirements of your organization.
+
+If your organization cannot support Astronomer's default internal registry, you can configure a custom container image registry instead. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and unapproved Python and OS-level packages contained in the Docker images that are generated during the code deploy process.
 
 ## Implementation Considerations
 

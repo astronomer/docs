@@ -11,7 +11,7 @@ import {siteVariables} from '@site/src/versions';
 
 On Astronomer, the process of pushing up your code to an individual Airflow Deployment involves customizing a locally built Docker image —— with your DAG code, dependencies, plugins, and so on —— that's then bundled, tagged, and pushed to your Docker Registry.
 
-Included in that build is your `Dockerfile`, a file that is automatically generated when you initialize an Airflow project on Astronomer via our CLI. Every successful build on Astronomer must include a `Dockerfile` that references an Astronomer Certified or Astro Runtime Docker image. Astronomer Certified (AC) and Astro Runtime are production-ready distributions of Apache Airflow that mirror the open source project and undergo additional levels of testing and development.
+Included in that build is your `Dockerfile`, a file that is automatically generated when you initialize an Astro project on Astronomer with the Astro CLI. Every successful build on Astronomer must include a `Dockerfile` that references an Astronomer Certified or Astro Runtime Docker image. Astronomer Certified (AC) and Astro Runtime are production-ready distributions of Apache Airflow that mirror the open source project and undergo additional levels of testing and development. Astro Runtime provides an additional layer of differentiation and was introduced to Astronomer Software in v0.29.
 
 To upgrade your Airflow Deployment to a higher version of Airflow, there are three steps:
 
@@ -136,7 +136,7 @@ Once you upgrade Airflow versions, you cannot downgrade to an earlier version. T
 
 :::
 
-For our platform's full collection of Docker Images, see [Astronomer on Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags).
+For Astronomer's full collection of Docker images, see [Astronomer Certified on Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags) and [Astro Runtime on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
 ### 3. Test Your Upgrade Locally (_Optional_)
 
@@ -213,18 +213,18 @@ Airflow upgrade process has been successfully canceled. Your Deployment was not 
 
 Canceling the Airflow upgrade process will NOT interrupt or otherwise impact your Airflow Deployment or code that's running with it. To re-initialize an upgrade, follow the steps above.
 
-## Upgrade to a Hotfix Version of an Astronomer Image
+## Upgrade to a Hotfix Version of Astronomer Certified
 
-To upgrade to the latest hotfix version of an Astronomer image, replace the image referenced in your `Dockerfile` with a pinned version that specifies a particular hotfix.
+To upgrade to the latest hotfix version of Astronomer Certified, replace the image referenced in your `Dockerfile` with a pinned version that specifies a particular hotfix. This is applicable only for Astronomer Certified, as Astro Runtime does not support hotfix versions.
 
 To upgrade to the latest Astronomer Certified 2.3.0 patch fix, for example, you would:
 
-1. Check the AC [2.3.0 Changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.10/CHANGELOG.md).
-2. Identify the latest patch (e.g. `2.3.0-1`).
+1. Check the AC [2.3.0 Changelog](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md).
+2. Identify the latest patch (e.g. `2.3.0-5`).
 3. Pin the image in your Dockerfile to that patch version.
 
-In this case, that would be: `FROM quay.io/astronomer/ap-airflow:2.3.0-1-onbuild` (Debian).
+In this case, that would be: `FROM quay.io/astronomer/ap-airflow:2.3.0-5-onbuild` (Debian).
 
-> **Note:** If you're pushing code to an Airflow Deployment via the Astronomer CLI and install a new Astronomer image for the first time _without_ pinning a specific patch, the latest version available will automatically be pulled.
+> **Note:** If you're pushing code to an Airflow Deployment via the Astro CLI and install a new Astronomer Certified image for the first time _without_ pinning a specific hotfix version, the latest version available will automatically be pulled.
 >
-> If a patch release becomes available _after_ you've already built an Astronomer image for the first time, subsequent code pushes will _not_ automatically pull the latest corresponding patch. You must follow the process above to pin your image to a particular version.
+> If a hotfix release becomes available _after_ you've already built an Astronomer Certified image for the first time, subsequent code pushes will _not_ automatically pull the latest corresponding hotfix. You must follow the process above to pin your image to a particular version.

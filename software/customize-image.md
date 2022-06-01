@@ -318,7 +318,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   If you use the default distribution of an Astronomer Certified image, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution).
 
-  Similarly, if you use a Runtime image, ensure that the distribution you're using is the `-base` image.
+  Similarly, if you use an Astro Runtime image, ensure that the distribution you're using is the `-base` image.
 
   :::
 
@@ -361,10 +361,10 @@ This example assumes that the name of each of your Python packages is identical 
   To identify the Python version in your AC image, run:
 
      ```
-     docker run quay.io/astronomer/ap-airflow:<astronomer-image-version> python --version
+     docker run quay.io/astronomer/<astronomer-image>:<astronomer-image-version> python --version
      ```
 
-  Make sure to replace `<astronomer-image-version>` with your own.
+  Make sure to replace  `<astronomer-image>` `<astronomer-image-version>` with your own.
 
   :::
 
@@ -447,8 +447,8 @@ Ensure that the name of the package on the private repository does not clash wit
 
    If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution).
 
-   Similarly, if you use a Runtime image, ensure that the distribution you're using is the `-base` image.
-
+   Similarly, if you use an Astro Runtime image, ensure that the distribution you're using is the `-base` image.
+   
    :::
 
 3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:

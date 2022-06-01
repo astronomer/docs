@@ -19,7 +19,7 @@ We're committed to testing all Astronomer Software versions for scale, reliabili
 
 Release date: June 1, 2022
 
-### Support for Astro Runtime Images on Software
+### Support for Astro Runtime Images
 
 You can now use Astro Runtime images in your Software Deployments. Additionally, you can now select Runtime images when setting **Image Version** for a Deployment in the Software UI.
 
@@ -31,11 +31,11 @@ Functionally, Runtime images are similar to Certified images. They both include:
 
 Astronomer Runtime includes additional features which are not available in Astronomer Certified images, including:
 
-- The `astronomer-providers` package, which includes a set of deferrable operators build and maintained by Astronomer
-- Airflow UI improvements, such as the showing your Deployment's Docker image tag in the footer of all UI pages
-- Future Runtime-exclusive features, such as new Airflow components and improvements to the DAG development experience
+- The `astronomer-providers` package, which includes a set of operators that are built and maintained by Astronomer
+- Airflow UI improvements, such as showing your Deployment's Docker image tag in the footer
+- Features that are exclusive to Astro Runtime and coming soon, such as new Airflow components and improvements to the DAG development experience
 
-To upgrade a Deployment to Runtime, follow the steps in [Upgrade Airflow](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astronomer Runtime version.
+To upgrade a Deployment to Runtime, follow the steps in [Upgrade Airflow](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astro Runtime version.
 
 ### Use a Custom Container Image Registry To Deploy Code
 
@@ -59,6 +59,7 @@ The process for configuring namespace pools has been simplified. As an alternati
 - You can now disable all network policies for Airflow components using the Astronomer Helm chart
 - System Admins can now view all Workspaces on their installation by default
 - User auth tokens for the Software UI are now stored in httpOnly cookies
+- When importing IDP groups as teams, you can now configure a `teamFilterRegex` in `config.yaml` to filter out IDP groups from being imported using regex
 
 ### Bug fixes
 
