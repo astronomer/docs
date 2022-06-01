@@ -148,6 +148,10 @@ module.exports = {
               label: 'Astronomer Registry',
               to: 'https://registry.astronomer.io/',
             },
+            {
+              label: 'Privacy Policy',
+              to: 'https://www.astronomer.io/privacy/',
+            },
           ],
         },
         {
