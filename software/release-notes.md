@@ -35,7 +35,7 @@ Astronomer Runtime includes additional features which are not available in Astro
 - Airflow UI improvements, such as the showing your Deployment's Docker image tag in the footer of all UI pages
 - Future Runtime-exclusive features, such as new Airflow components and improvements to the DAG development experience
 
-To upgrade a Deployment to Runtime, follow the steps in Upgrade Airflow, making sure to replace the Astronomer Certified image in your Dockerfile with an Astronomer Runtime version.
+To upgrade a Deployment to Runtime, follow the steps in [Upgrade Airflow](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astronomer Runtime version.
 
 ### Use a Custom Container Image Registry To Deploy Code
 
@@ -43,7 +43,7 @@ You can now configure a custom container image registry in place of Astronomer's
 
 ### Export Task Logs Using Logging Sidecars
 
-You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster and need to prioritize security. To configure this feature, see [Export Task Logs](export-task-logs.md).
+You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster where security is a concern. To configure this feature, see [Export Task Logs](export-task-logs.md).
 
 ### Simplified Configuration for Namespace Pools
 
