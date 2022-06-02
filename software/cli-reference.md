@@ -46,37 +46,6 @@ Run `astro cluster <subcommand>` in your terminal to see or access available Sof
 | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `list`     | Run `astro cluster list` to retrieve a list of all clusters to which you've previously authenticated.                                                                                                                                            |
 | `switch`   | Run `astro cluster switch` to retrieve a list of available clusters, then enter the ID number of the cluster you want to switch to. Once that command is successful, authenticate to that cluster by running `astro auth login <base-domain>`. |
-## astro auth
-
-Authenticates you to Astronomer.
-
-### Usage
-
-Run `astro auth <subcommand> <base-domain>` in your terminal to log in or out of your Astronomer platform. This is equivalent to using the login screen of the Software UI.
-
-If you have access to more than one Astronomer platform, each will have a unique `<base-domain>`. When switching between platforms, make sure to log out of one `<base domain>` before logging into another.
-
-### Subcommands
-
-| Subcommand | Usage                                                                                                                                              |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `login`    | To log in to Astro, run `astro auth login`. For Software, run `astro auth login <base-domain>`.    |
-| `logout`   | To log out of Astro, run `astro auth logout`. For Software, run `astro auth logout <base-domain>`. |
-
-## astro cluster
-
-Allows Astronomer Software users to switch between the Software installations they have access to.
-
-### Usage
-
-Run `astro cluster <subcommand>` in your terminal to see or access available Software installations.
-
-### Subcommands
-
-| Subcommand | Usage                                                                                                                                                                                                                                              |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `list`     | Run `astro cluster list` to retrieve a list of all clusters to which you've previously authenticated.                                                                                                                                            |
-| `switch`   | Run `astro cluster switch` to retrieve a list of available clusters, then enter the ID number of the cluster you want to switch to. Once that command is successful, authenticate to that cluster by running `astro auth login <base-domain>`. |
 
 ## astro deployment create
 
