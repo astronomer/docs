@@ -260,9 +260,9 @@ Migrate an existing Software Deployment from Astronomer Certified to Astro Runti
 | `--cancel` | None                                          | Cancel the migration.                                      |
 | `--deployment-id` | String                                        | The Deployment that you want to migrate. |
 
-## astro deployment runtime update
+## astro deployment runtime upgrade
 
-Update an existing Software Deployment's Astro Runtime version
+Upgrade an existing Software Deployment's Astro Runtime version
 
 ### Usage
 
@@ -273,7 +273,7 @@ Update an existing Software Deployment's Astro Runtime version
 | Flag       | Value Type                                    | Usage                                                               |
 | ---------- | --------------------------------------------- | ------------------------------------------------------------------- |
 | `--cancel` | None                                          | Cancel the migration.                                      |
-| `--deployment-id` | String                                        | The Deployment that you want to migrate. |
+| `--deployment-id` (_Required_) | String                                        | The Deployment that you want to upgrade. |
 | `--desired-runtime-version` | String                                        | The Astro Runtime version you want to upgrade to. |
 
 ## astro deployment service-account create
