@@ -193,7 +193,7 @@ astro context list
 
 Switch to a different Astronomer installation. You can switch to a given Astronomer installation if you have authenticated to it at least once using `astro login`.
 
-Note that after switching to a different Astronomer installation, you might have to re-authenticate to the installation using `astro login`.
+After you switch to a different Astronomer installation, you might need to run `astro login` to reauthenticate to the installation.
 
 ### Usage
 
@@ -416,7 +416,7 @@ Run `astro deployment update <your-deployment-id> [flags]` to update a Deploymen
 | `label`                 | String     | The label or name for the Deployment.                                                                                                                                                                                 |
 | `description`           | String     | The description for a Deployment.                                                                                                                                                                             |
 | `version`               | String     | The Airflow version for the Deployment (for example, `v2.0.0`).                                                                                                                                                       |
-| `releaseName`           | String     | The release name for the Deployment (e.g. `planetary-fusion-1382`).                                                                                                                                           |
+| `releaseName`           | String     | The release name for the Deployment (for example, `planetary-fusion-1382`).                                                                                                                                           |
 | `alert_emails`          | String     | The email address for Airflow alerts sent from the Deployment.                                                                                                                                           |
 | `type`                  | String     | The type of Deployment. Can be either `airflow` or `flower`.                                                                                                                                                  |
 | `executor`              | String     | The Executor type for the Deployment. Can be either `local`, `kubernetes`, or `celery`.                                                                                                                       |
