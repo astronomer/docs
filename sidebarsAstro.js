@@ -20,6 +20,7 @@ module.exports = {
       items: [
         'install-cli',
         'create-project',
+        'create-deployment',
       ],
     },
     {
@@ -52,7 +53,6 @@ module.exports = {
       type: 'category',
       label: 'Manage Deployments',
       items: [
-        'create-deployment',
         'configure-deployment-resources',
         'api-keys',
         'environment-variables',
