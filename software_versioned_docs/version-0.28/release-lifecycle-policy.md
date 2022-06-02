@@ -19,7 +19,7 @@ For information on the latest Astronomer Software releases, see [release notes](
 
 :::info
 
-These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astronomer Certified, see [Astronomer Certified Versioning and Support](ac-support-policy.md).
+These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astronomer images, see [Astronomer Certified Versioning and Support](ac-support-policy.md) and [Runtime Release and Lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
 
 :::
 
@@ -32,11 +32,11 @@ To meet the unique needs of different operating environments, we offer all Astro
 
 All releases of AC are considered stable. The LTS release channel is a subset of the stable release channel that promises additional stability, reliability, and support from our team.
 
-For customers looking to access Astronomer's newest features on an incremental basis, we recommend following the stable release channel and upgrading to new versions as soon as they are made generally available. Stable releases are issued roughly once per quarter for Astronomer Software and the Astronomer CLI.
+For customers looking to access Astronomer's newest features on an incremental basis, Astronomer recommends following the stable release channel and upgrading to new versions as soon as they are made available. Stable releases are issued approximately once per quarter for Astronomer Software and the Astro CLI.
 
 For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel. Release channels are not binding, so you are free to upgrade to any available version of Astronomer Software at any time.
 
-> **Note:** Release channels apply to Astronomer Software and Astronomer Certified versions. We do not currently support a long-term release channel for the Astronomer CLI.
+> **Note:** Release channels apply to Astronomer Software and Astronomer image versions. We do not currently support a long-term release channel for the Astro CLI.
 
 ## Astronomer Software Versioning
 
@@ -94,6 +94,8 @@ The following tables contain the exact lifecycle for each published version of A
 | 0.25             | May 11, 2021     | December 2022*         |
 | 0.26             | Nov 23, 2021     | May 2022                |
 | 0.27             | Dec 21, 2021     | June 2022               |
+| 0.28             | Feb 15, 2022     | February 2023           |
+| 0.29             | June 1, 2022     | December 2022           |
 
 ### LTS
 

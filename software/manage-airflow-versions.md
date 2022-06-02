@@ -56,7 +56,7 @@ Once you select a version, you can expect to see a banner next to **Airflow Vers
 
 ### with the Astro CLI
 
-To use the Astro CLI to initialize the Airflow upgrade process, run `$ astro login <base-domain>` first to make sure you're authenticated .
+To use the Astro CLI to initialize the Airflow upgrade process, run `$ astro auth login <base-domain>` first to make sure you're authenticated .
 
 Once authenticated, grab the `Deployment ID` of the Airflow Deployment you'd like to upgrade by running:
 

@@ -112,7 +112,7 @@ When the maintenance window for a version of AC ends, the following is true:
 - New Airflow Deployments cannot be created with that version of AC. Unsupported versions will _not_ render as an option in the Deployment creation process from the Software UI, API, or CLI.
 - In the latest version of the Astro CLI,  a warning appears when a user pushes a Docker image to Astronomer that corresponds to that version.
 
-To ensure reliability, service is not interrupted when Astronomer Deployments are running unsupported versions of AC. You can use he Astro CLI to access unsupported AC versions for local development and testing.
+To ensure reliability, service is not interrupted when Astronomer Deployments are running unsupported versions of AC. You can use the Astro CLI to access unsupported AC versions for local development and testing.
 
 ### End of Maintenance Date
 

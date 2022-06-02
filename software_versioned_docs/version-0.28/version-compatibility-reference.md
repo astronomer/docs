@@ -15,16 +15,17 @@ While the tables below reference the minimum compatible versions, we typically r
 
 <!--- Version-specific -->
 
-| Astronomer Platform | Kubernetes                   | Helm | Terraform | Postgres | Python                                    | Astronomer CLI | Astronomer Certified |
+| Astronomer Platform | Kubernetes                   | Helm | Terraform | Postgres | Python                                    | Astro CLI | Astronomer Certified / Runtime |
 | ------------------- | ---------------------------- | ---- | --------- | -------- | ----------------------------------------- | -------------- | -------------------- |
-| v0.25               | 1.17, 1.18, 1.19, 1.20, 1.21 | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.25.x         | All                  |
-| v0.26               | 1.17, 1.18, 1.19, 1.20, 1.21 | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.26.x         | All                  |
-| v0.27               | 1.18, 1.19, 1.20, 1.21       | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.27.x         | All                  |
-| v0.28               | 1.19, 1.20, 1.21             | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.28.x         | All                  |
+| v0.25               | 1.17, 1.18, 1.19, 1.20, 1.21 | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.25.x         | All Certified versions                  |
+| v0.26               | 1.17, 1.18, 1.19, 1.20, 1.21 | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.26.x         | All Certified versions                  |
+| v0.27               | 1.18, 1.19, 1.20, 1.21       | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.27.x         | All Certified versions                  |
+| v0.28               | 1.19, 1.20, 1.21             | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.28.x         | All Certified versions                  |
+| v0.29               | 1.19, 1.20, 1.21, 1.22             | 3.6  | 0.13.5    | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.29.x         | All Certified and Runtime versions    |
 
 For more detail on changes between Software versions, refer to [Astronomer Software Release Notes](release-notes.md).
 
-> **Note:** On Astronomer v0.23+, new versions of Apache Airflow on Astronomer Certified are automatically made available in the Software UI and CLI within 24 hours of their publication. For more information, refer to [Available Astronomer Certified Versions](ac-support-policy.md#astronomer-certified-lifecycle-schedule).
+> **Note:** On Astronomer v0.23+, new versions of Apache Airflow on Astronomer Certified and Runtime are automatically made available in the Software UI and CLI within 24 hours of their publication. For more information, refer to [Available Astronomer Certified Versions](ac-support-policy.md#astronomer-certified-lifecycle-schedule).
 
 > **Note:** Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer Support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
 

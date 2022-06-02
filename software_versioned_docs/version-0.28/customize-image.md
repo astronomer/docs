@@ -2,12 +2,16 @@
 sidebar_label: 'Customize Image'
 title: 'Customize Your Image on Astronomer Software'
 id: customize-image
-description: Customize your Astronomer Certified image, including adding dependencies and running commands on build.
+description: Customize your Astronomer image, including adding dependencies and running commands on build.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
 
 ## Overview
 
-The Astronomer CLI was built to be the easiest way to develop with Apache Airflow, whether you're developing on your local machine or deploying code to Astronomer. The guidelines below will cover a few ways you can customize the Docker Image that gets pushed up to Airflow every time you rebuild your image locally via `$ astro dev start` or deploy to Astronomer via `$ astro deploy`.
+The Astro CLI is intended to make it easier to develop with Apache Airflow, whether you're developing on your local machine or deploying code to Astronomer. The following guidelines describe a few of the methods you can use to customize the Docker Image that gets pushed to Airflow every time you rebuild your image locally using `$ astro dev start` or deploy to Astronomer using `$ astro deploy`.
 
 More specifically, this doc includes instructions for how to:
 
@@ -18,7 +22,7 @@ More specifically, this doc includes instructions for how to:
 - Add Environment Variables Locally
 - Build from a Private Repository
 
-> **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](cli-quickstart.md).
+> **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](install-cli.md).
 
 ## Add Python and OS-level Packages
 
@@ -71,8 +75,6 @@ docker exec -it <scheduler-container-id> pip freeze | grep pymongo
 
 pymongo==3.7.2
 ```
-
-> **Note:** Astronomer Certified, Astronomer's distribution of Apache Airflow, is available both as a Debian and Alpine base. We strongly recommend using Debian, as it's much easier to install dependencies and often presents less incompatibility issues than an Alpine Linux image. For details on both, refer to our [Airflow Versioning Doc](manage-airflow-versions.md).
 
 ## Add Other Dependencies
 
@@ -181,7 +183,7 @@ RUN ls
 
 ## Docker Compose Override
 
-The Astronomer CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're interested in overriding any of our CLI's default configurations ([found here](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go)), you're free to do so by adding a `docker-compose.override.yml` file to your Astronomer project directory. Any values in this file will override default settings run upon every `$ astro dev start`.
+The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. To override the default CLI configurations ([found here](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go)), add a `docker-compose.override.yml` file to your Astronomer project directory. The values in this file override the default settings when you run `$ astro dev start`.
 
 To add another volume mount for a directory named `custom_dependencies`, for example, add the following to your `docker-compose.override.yml`:
 
@@ -217,7 +219,7 @@ drwxrwxr-x    2 1000     1000          4096 Oct  8 00:07 plugins
 -rw-r--r--    1 astro    astro         2338 Dec 30 17:21 unittests.cfg
 ```
 
-> **Note:** The Astronomer CLI does _not_ currently support overrides to Environment Variables. For more information on how to set, configure and customize those values, refer to our ["Environment Variables" doc](environment-variables.md).
+> **Note:** The Astro CLI does _not_ support overrides to Environment Variables. For more information on how to set, configure and customize those values, see ["Environment Variables" doc](environment-variables.md).
 
 ## Access to the Airflow CLI
 
@@ -233,7 +235,7 @@ Refer to the native [Airflow CLI](https://airflow.apache.org/docs/apache-airflow
 
 ## Add Environment Variables Locally
 
-The Astronomer CLI comes with the ability to  bring in Environment Variables from a specified file by running `$ astro dev start` with an `--env` flag as seen below:
+To import Environment Variables from a specific file, run `$ astro dev start` with an `--env` flag:
 
 ```
 astro dev start --env .env
@@ -273,7 +275,7 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 To install Python packages from a private GitHub repository on Astronomer Software, you need:
 
-- The [Astronomer CLI](cli-quickstart.md).
+- The [Astro CLI](install-cli.md).
 - A [Software project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
@@ -306,7 +308,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Astronomer Certified image. For example, if you use Certified 2.2.5, your `FROM` line would be:
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Astronomer image. For example, if you use Astronomer Certified 2.2.5, your `FROM` line would be:
 
    ```text
    FROM quay.io/astronomer/ap-airflow:2.2.5 AS stage1
@@ -314,11 +316,13 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::caution
 
-  If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution)
+  If you use the default distribution of an Astronomer Certified image, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution).
+
+  Similarly, if you use an Astro Runtime image, ensure that the distribution you're using is the `-base` image.
 
   :::
 
-3. In `Dockerfile.build` after the `FROM` line specifying your Certified image, add the following configuration:
+3. In `Dockerfile.build` after the `FROM` line specifying your image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -352,15 +356,15 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astronomer Certified may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
+  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astronomer images may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
 
   To identify the Python version in your AC image, run:
 
      ```
-     docker run quay.io/astronomer/ap-airflow:<astronomer-certified-version> python --version
+     docker run quay.io/astronomer/<astronomer-image>:<astronomer-image-version> python --version
      ```
 
-  Make sure to replace `<astronomer-certified-version>` with your own.
+  Make sure to replace  `<astronomer-image>` `<astronomer-image-version>` with your own.
 
   :::
 
@@ -372,10 +376,10 @@ This example assumes that the name of each of your Python packages is identical 
 
 ### Step 3. Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<certified-image>` with your Certified image:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<your-image>` with your Astronomer image:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<certified-image> .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<your-image> .
     ```
 
     For example, if you have `quay.io/astronomer/ap-airflow:2.2.5` in your `Dockerfile.build`, this command would be:
@@ -393,10 +397,10 @@ This example assumes that the name of each of your Python packages is identical 
 2. Replace the contents of your Software project's `Dockerfile` with the following:
 
    ```
-   FROM custom-<certified-image>
+   FROM custom-<your-image>
    ```
 
-   For example, if your base Certified image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
+   For example, if your base image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
 
    ```
    FROM custom-ap-airflow:2.2.5
@@ -441,7 +445,9 @@ Ensure that the name of the package on the private repository does not clash wit
 
    :::caution
 
-   If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution)
+   If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution).
+
+   Similarly, if you use an Astro Runtime image, ensure that the distribution you're using is the `-base` image.
 
    :::
 
@@ -494,10 +500,10 @@ Ensure that the name of the package on the private repository does not clash wit
 2. Replace the contents of your Software project's `Dockerfile` with the following:
 
    ```
-   FROM custom-<certified-image>
+   FROM custom-<astronomer-image>
    ```
 
-   For example, if your base Certified image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
+   For example, if your base image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
 
    ```
    FROM custom-ap-airflow:2.2.5
@@ -508,7 +514,7 @@ Ensure that the name of the package on the private repository does not clash wit
 </TabItem>
 </Tabs>
 
-## Build with a Different Python Version
+## Build with a Different Python Version (_Astronomer Certified Only_)
 
 While the Astronomer Certified (AC) Python Wheel supports Python versions 3.6, 3.7, and 3.8, AC Docker images have been tested and built only for Python 3.7.
 

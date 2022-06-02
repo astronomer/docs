@@ -400,7 +400,7 @@ As input, you need:
 
 1. A Workspace ID
 2. Email address of the user
-3. Role you'd like to designate that user (e.g. Workspace "Admin", "Editor" or "Viewer")
+3. The designated role for the user (for example,. Workspace "Admin", "Editor" or "Viewer")
 
 If you don't already have a Workspace ID, run `astro workspace list` in the Astro CLI.
 

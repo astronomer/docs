@@ -18,7 +18,7 @@ To get started, you need a Service Account on Astronomer to authenticate. Read b
 
 The first step to calling the Airflow REST API on Astronomer is to create a Deployment-level Service Account, which will assume a user role and set of permissions and output an API Key that you can use to authenticate with your request.
 
-You can create a Service Account via either the Software UI or the Astronomer CLI.
+You can use the Software UI or the Astro CLI to create a Service Account.
 
 :::info
 
@@ -41,15 +41,15 @@ To create a Service Account via the Software UI:
 
    ![Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-api-key.png)
 
-### Create a Service Account via the Astronomer CLI
+### Create a Service Account with the Astro CLI
 
-To create a Deployment-level Service Account via the Astronomer CLI:
+To use the Astro CLI to create a Deployment-level Service Account:
 
-1. Authenticate to the Astronomer CLI by running:
+1. Authenticate to the Astro CLI by running:
    ```
-   astro auth login <BASE-DOMAIN>
+   astro login <BASE-DOMAIN>
    ```
-   To identify your `<BASE-DOMAIN>`, run `astro cluster list` and select the domain name that corresponds to the cluster you're working in.
+   To identify your `<BASE-DOMAIN>`, run `astro context list` and select the domain name that corresponds to the cluster you're working in.
 
 2. Identify your Airflow Deployment's Deployment ID. To do so, run:
    ```
@@ -62,7 +62,7 @@ To create a Deployment-level Service Account via the Astronomer CLI:
    astro deployment service-account create -d <deployment-id> --label <service-account-label> --role <deployment-role>
    ```
    The `<deployment-role>` must be either `editor` or `admin`.
-   
+
 4.  Save the API Key that was generated. Depending on your use case, you might want to store this key in an Environment Variable or secret management tool.
 
 ## Step 2: Make an Airflow REST API Request
@@ -144,7 +144,7 @@ curl -v -X POST https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/airf
 
 :::tip
 
-The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2. If you run Astronomer Certified 2.2+, replace `execution_date` with `logical_date` and add a "Z" to the end of your timestamp. For example, `"logical_date": "2019-11-16T11:34:00Z"`.
+The `execution_date` parameter was replaced with `logical_date` in Airflow 2.2. If you run Airflow 2.2+, replace `execution_date` with `logical_date` and add a "Z" to the end of your timestamp. For example, `"logical_date": "2019-11-16T11:34:00Z"`.
 
 For more information, see [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html?highlight=pass%20data#data-interval).
 
@@ -224,4 +224,3 @@ curl -X GET \
   -H 'Authorization: <API-KEY>' \
   -H 'Cache-Control: no-cache'
 ```
-

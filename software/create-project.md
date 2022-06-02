@@ -11,7 +11,7 @@ This guide will help you get started on Astronomer Software by walking through t
 
 ## Prerequisites
 
-Creating an Astronomer project requires the [Astro CLI](cli-quickstart.md).
+Creating an Astronomer project requires the [Astro CLI](install-cli.md).
 
 ## Step 1: Create a Project Directory
 

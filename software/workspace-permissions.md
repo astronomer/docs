@@ -44,7 +44,7 @@ If a Workspace Admin invites a user to a Workspace that has 0 Airflow Deployment
 To invite a user to a Workspace using the Astro CLI, run:
 
 ```bash
-astro workspace user add --email <email-address> --workspace-id <workspace-id> --role <workspace-role>
+astro workspace user add <email-address> --workspace-id <workspace-id> --role <workspace-role>
 ```
 
 Only Workspace _Admins_ can invite other users and set their permissions.

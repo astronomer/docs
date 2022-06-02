@@ -47,14 +47,6 @@ To install the latest version of the Astro CLI, run the following command:
 brew install astronomer/tap/astro
 ```
 
-:::warning
-
-If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and v1.0.0. To install this release run the following command:  
-
-brew install astronomer/tap/astro@0.29
-
-:::
-
 To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
 
 ```sh

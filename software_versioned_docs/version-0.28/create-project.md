@@ -11,7 +11,7 @@ This guide will help you get started on Astronomer Software by walking through t
 
 ## Prerequisites
 
-Creating an Astronomer project requires the [Astronomer CLI](cli-quickstart.md).
+Creating an Astronomer project requires the [Astro CLI](install-cli.md).
 
 ## Step 1: Create a Project Directory
 
@@ -21,13 +21,13 @@ Before you create a Software project, create an empty directory and open it:
 mkdir <your-new-directory> && cd <your-new-directory>
  ```
 
-From this directory, run the following Astronomer CLI command:
+From this directory, run the following Astro CLI command:
 
 ```sh
-astro dev init
+astro dev init --use-astronomer-certified
 ```
 
-This will generate the following files:
+This generates the following files:
 
 ```py
 .
@@ -56,6 +56,12 @@ FROM quay.io/astronomer/ap-airflow:latest-onbuild
 ```
 
 This will install a Debian-based AC image for the latest version of Airflow we support. To specify a particular Airflow version, read [Upgrade Airflow](manage-airflow-versions.md) and the _Customize your Image_ topic below.
+
+:::tip
+
+To use an Astro Runtime image with your new project, remove `--use-astronomer-certified` from your command. Note that projects using Astro Runtime can only be deployed to Astronomer Software installations on version 0.29 and above.
+
+:::
 
 ### Example DAG
 

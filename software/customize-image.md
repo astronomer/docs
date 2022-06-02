@@ -22,7 +22,7 @@ More specifically, this doc includes instructions for how to:
 - Add Environment Variables Locally
 - Build from a Private Repository
 
-> **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](cli-quickstart.md).
+> **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](install-cli.md).
 
 ## Add Python and OS-level Packages
 
@@ -275,7 +275,7 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 To install Python packages from a private GitHub repository on Astronomer Software, you need:
 
-- The [Astro CLI](cli-quickstart.md).
+- The [Astro CLI](install-cli.md).
 - A [Software project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.

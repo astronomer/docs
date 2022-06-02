@@ -50,13 +50,13 @@ To initialize the Airflow upgrade process via the Software UI, navigate to **Dep
 
 This action will NOT interrupt or otherwise impact your Airflow Deployment or trigger a code change - it is simply a signal to our platform that you _intend_ to upgrade such that we can guide your experience through the rest of the process.
 
-Once you select a version, you can expect to see a banner next to **Airflow Version** indicating that the upgrade is in progress. For a user upgrading from 1.10.7 to 1.10.12, that banner would read `Upgrade from 1.10.7 to 1.10.12 initiated…`
+Once you select a version, you can expect to see a banner next to **Airflow Version** indicating that the upgrade is in progress. For a user upgrading from 1.10.7 to 1.10.12, that banner would read `Upgrade from 1.10.7 to 1.10.12 in progress…`
 
 > **Note:** If you'd like to change the version of Airflow you'd like to upgrade to, you can do so at anytime by clicking **Cancel**, re-selecting a new version and once again clicking **Upgrade**. More on that below.
 
-### via the Astronomer CLI
+### with the Astro CLI
 
-To initialize the Airflow upgrade process via the Astronomer CLI, first make sure you're authenticated by running `$ astro auth login <your-base-domain>`.
+To use the Astro CLI to initialize the Airflow upgrade process, run `$ astro login <base-domain>` first to make sure you're authenticated .
 
 Once authenticated, grab the `Deployment ID` of the Airflow Deployment you'd like to upgrade by running:
 
@@ -102,7 +102,7 @@ To complete the upgrade, all you have to do is add a corresponding AC image to y
 
 ### 1. Locate your Dockerfile in your Project Directory
 
-First, open the `Dockerfile` within your Astronomer directory. When you initialized an Airflow project via the Astronomer CLI, the following files should have been automatially generated:
+First, open the `Dockerfile` within your Astronomer directory. When you used the Astro CLI to initialize an Airflow project, the following files should have been automatically generated:
 
 ```
 .
@@ -169,7 +169,7 @@ astro deploy
 
 Due to a schema change in the Airflow metadata database, upgrading a Software Deployment to [AC 2.3.0](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md) can take significantly longer than usual. Depending on the size of your metadata database, upgrades can take anywhere from 10 minutes to an hour or longer depending on the number of task instances that have been recorded in the Airflow metadata database. During this time, scheduled tasks will continue to execute but new tasks will not be scheduled.
 
-If you need to minimize the upgrade time for a given Deployment, reach out to [Astronomer Support](https://support.astronomer.io). Note that minimizing your upgrade time requires removing records from your metadata database. 
+If you need to minimize the upgrade time for a given Deployment, reach out to [Astronomer Support](https://support.astronomer.io). Note that minimizing your upgrade time requires removing records from your metadata database.
 
 :::
 
@@ -202,7 +202,7 @@ Via the Software UI, select **Cancel** next to **Airflow Version**.
 
 ![Cancel Airflow Upgrade via Software UI](https://assets2.astronomer.io/main/docs/manage-airflow-versions/airflow-upgrade-astro-ui-cancel.gif)
 
-Via the Astronomer CLI, run:
+Via the Astro CLI, run:
 
 ```
 astro deployment airflow upgrade --cancel --deployment-id=<deployment-id>
@@ -230,6 +230,6 @@ If you're looking for the latest Astronomer Certified 1.10.10, for example, you 
 
 In this case, that would be: `FROM quay.io/astronomer/ap-airflow:1.10.10-5-buster-onbuild` (Debian).
 
-> **Note:** If you're pushing code to an Airflow Deployment via the Astronomer CLI and install a new Astronomer Certified image for the first time _without_ pinning a specific patch, the latest version available will automatically be pulled.
+> **Note:** If you're pushing code to an Airflow Deployment via the Astro CLI and install a new Astronomer Certified image for the first time _without_ pinning a specific patch, the latest version available will automatically be pulled.
 >
 > If a patch release becomes available _after_ you've already built an Astronomer Certified image for the first time, subsequent code pushes will _not_ automatically pull the latest corresponding patch. You must follow the process above to pin your image to a particular version.
