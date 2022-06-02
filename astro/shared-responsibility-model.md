@@ -31,7 +31,7 @@ The customer is responsible for managing certain security aspects of their Astro
 - Integrating with their federated identity management platform for secure single sign-on (SSO) authentication and customer managed credentials.
 - Developing and maintaining data pipelines with security and quality coding best practices, inclusive of vulnerability management of plugins and dependencies.
 - Regularly [upgrading their Deployment(s)](upgrade-runtime.md) to the latest Astro Runtime version to take advantage of new functionality, as well as bug and security fixes.
-- [Configuring and managing Deployment resource settings](configure-deployment.md) for data pipeline workloads.
+- [Configuring and managing Deployment resource settings](configure-deployment-resources.md) for data pipeline workloads.
 - [Securing the network communications](connect-external-services.md) between their Data Plane and sensitive data resources.
 
 ## Cloud Provider Security Responsibilities

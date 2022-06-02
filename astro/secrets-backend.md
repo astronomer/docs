@@ -72,7 +72,7 @@ This topic provides steps for how to use [Hashicorp Vault](https://www.vaultproj
 
 To use this feature, you need:
 
-- A [Deployment](configure-deployment.md) on Astro.
+- A [Deployment](create-deployment.md) on Astro.
 - [The Astro CLI](cli/get-started.md).
 - A [Hashicorp Vault server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started).
 - An [Astro project](create-project.md).
@@ -232,7 +232,7 @@ In this section, we'll walk through how to use [AWS Systems Manager (SSM) Parame
 
 To use this feature, you need:
 
-- A [Deployment](configure-deployment.md).
+- A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - Access to AWS SSM Parameter Store.
@@ -348,7 +348,7 @@ This topic provides setup steps for configuring [AWS Secrets Manager](https://aw
 
 To use AWS Secrets Manager as your Airflow secrets backend, you need:
 
-- A [Deployment](configure-deployment.md).
+- A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - An AWS account with the `SecretsManagerReadWrite` policy.
@@ -456,7 +456,7 @@ This topic provides setup steps for configuring [Google Cloud Secret Manager](ht
 
 To use Google Cloud Secret Manager as your Airflow secrets backend, you need:
 
-- A [Deployment](configure-deployment.md).
+- A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
@@ -571,7 +571,7 @@ This topic provides setup steps for configuring [Azure Key Vault](https://azure.
 
 To use Azure Key Vault as a secrets backend, you need:
 
-- A [Deployment](configure-deployment.md).
+- A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - An existing Azure Key Vault linked to a resource group.

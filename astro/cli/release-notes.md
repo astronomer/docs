@@ -194,7 +194,7 @@ You can now use `astro deployment update` to update certain configurations for a
 - Scheduler replicas
 - Worker resources
 
-This is the same set of configurations that you can modify via the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment.md). For more information on this command, see [CLI Command Reference](cli/astro-deployment-update.md).
+This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment-resources.md). For more information about this command, see [CLI Command Reference](cli/astro-deployment-update.md).
 
 ## v1.2.0 (`astrocloud`)
 
@@ -243,7 +243,7 @@ You can now use the Astro CLI to create and delete Deployments on Astro with two
 - `astro deployment create`
 - `astro deployment delete`
 
-These commands are functionally identical to the [Deployment configuration](configure-deployment.md) and deletion process in the Cloud UI. For more information, see the [CLI Command Reference](cli/astro-deployment-create.md).
+These commands are functionally identical to the [Deployment configuration](configure-deployment-resources.md) and deletion process in the Cloud UI. For more information, see the [CLI Command Reference](cli/astro-deployment-create.md).
 
 ## v1.1.0 (`astrocloud`)
 

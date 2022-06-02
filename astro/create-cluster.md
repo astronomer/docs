@@ -144,7 +144,7 @@ To create a cluster in one of these regions, complete the following additional s
 
 #### Step 3: Confirm with Astronomer
 
-Astronomer will notify you once your Cluster has been created. Once your Cluster is available, you should be able to [configure a new Deployment](configure-deployment.md) within that Cluster.
+A notification is sent from Astronomer when your Cluster is created. After your Cluster is created, you can create a new Deployment in the Cluster. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 
@@ -166,7 +166,7 @@ For information on all supported regions and configurations, see [GCP Resource R
 
 #### Step 2: Confirm with Astronomer
 
-Astronomer will notify you once your Cluster has been created. Once your Cluster is available, you should be able to [configure a new Deployment](configure-deployment.md) within that Cluster.
+A notification is sent from Astronomer when your Cluster is created. After your Cluster is created, you can create a new Deployment in the Cluster. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 </Tabs>

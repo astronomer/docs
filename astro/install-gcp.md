@@ -134,7 +134,7 @@ This process can take some time. Wait for confirmation that the installation was
 
 ## Step 5: Create a Deployment
 
-Once Astronomer confirms that your Astro Cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) and [create a new Deployment](configure-deployment.md). If the installation was successful, your new Astro Cluster will be listed as an option under the **Cluster** menu:
+When Astronomer confirms that your Astro Cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro Cluster is listed as an option below the **Cluster** menu:
 
 <div class="text--center">
   <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
@@ -146,6 +146,6 @@ Now that you have an Astro Cluster up and running, take a look at the docs below
 
 - [Set Up an Identity Provider](configure-idp.md)
 - [Install CLI](cli/get-started.md)
-- [Configure Deployments](configure-deployment.md)
+- [Configure Deployments](configure-deployment-resources.md)
 - [Deploy Code](deploy-code.md)
 - [Add Users](add-user.md)
