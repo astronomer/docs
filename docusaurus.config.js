@@ -119,7 +119,7 @@ module.exports = {
             },
             {
               label: 'Install the CLI',
-              to: 'astro/install-cli',
+              to: 'astro/cli/get-started',
             },
             {
               label: 'Create a Project',

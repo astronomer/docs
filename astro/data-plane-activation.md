@@ -35,7 +35,7 @@ By default, the Astronomer account has no access to your data services. We’ll 
 <TabItem value="aws">
 
 When you arrive at your data plane activation appointment, please ensure you have:
-- [ ] [Astro CLI](install-cli.md) installed for any users who will develop pipelines
+- [ ] [Astro CLI](cli/get-started.md) installed for any users who will develop pipelines
 - [ ] A clean AWS Account
 - [ ] The following permissions to that AWS account:
   - `cloudformation:*`
@@ -53,7 +53,7 @@ When you arrive at your data plane activation appointment, please ensure you hav
 <TabItem value="gcp">
 
 When you arrive at your data plane activation appointment, please ensure you have:
-- [ ] [Astro CLI](install-cli.md) installed for any users who will develop pipelines
+- [ ] [Astro CLI](cli/get-started.md) installed for any users who will develop pipelines
 - [ ] A clean GCP project
 - [ ] A user with [Owner access](https://cloud.google.com/iam/docs/understanding-roles#basic-definitions) to your project
 - [ ] Desired region for Astro Cluster deployment identified, from the list of [supported regions](resource-reference-gcp.md#gcp-region)

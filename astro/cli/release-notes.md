@@ -7,7 +7,7 @@ description: Release notes for the Astro CLI.
 
 ## Overview
 
-This document provides a summary of all changes made to the [Astro CLI](install-cli.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
+This document provides a summary of all changes made to the [Astro CLI](cli/get-started.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
 
 If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io)
 
@@ -279,7 +279,7 @@ The Astro CLI can be installed via Homebrew. Commands take the form of:
 astro <command> # E.g. `astro dev start`
 ```
 
-We strongly recommend that all users install the Astro CLI and delete the `./astro` executable from local directories as soon as possible. For guidelines, read [Install the Astro CLI](install-cli.md). As of February 2022, `./astro` will no longer be maintained by our team. With that said, the release of the Astro CLI does not have any impact on your existing Deployments or DAGs.
+We strongly recommend that all users install the Astro CLI and delete the `./astro` executable from local directories as soon as possible. For guidelines, read [Install the Astro CLI](cli/get-started.md). As of February 2022, `./astro` will no longer be maintained by our team. With that said, the release of the Astro CLI does not have any impact on your existing Deployments or DAGs.
 
 ### New Authentication Flow
 

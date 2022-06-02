@@ -11,9 +11,9 @@ The Astro CLI is the command line interface for data orchestration. It's the eas
 
 The Astro CLI is open source and built for data practitioners everywhere. The binary is maintained in the public [Astro CLI GitHub repository](https://github.com/astronomer/astro-cli), where pull requests and GitHub issues are welcome.
 
-## Quickstart
+## Get Started
 
-Follow the [Astro CLI Quickstart](get-started.md) to install the CLI and run your first Astro project locally.
+Follow [Get Started](get-started.md) to install the CLI and run your first Astro project locally.
 
 ## Features
 
@@ -30,4 +30,4 @@ To stay up to date on the latest features, see [Astro CLI Release Notes](https:/
 
 ## CLI Reference
 
-For a full list of available CLI commands, see the [CLI Command Reference](cli-reference.md).
+For a full list of available CLI commands, see the [CLI Command Reference](cli/reference.md).

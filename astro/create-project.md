@@ -17,7 +17,7 @@ This guide provides instructions for creating a new Astro project, as well as in
 
 To create an Astro project, you need:
 
-- [The Astro CLI](install-cli.md)
+- [The Astro CLI](cli/get-started.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
 ## Step 1: Create an Astro project

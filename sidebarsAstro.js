@@ -155,7 +155,7 @@ module.exports = {
       },
       {
         type: 'doc',
-        label: 'Quickstart',
+        label: 'Get Started',
         id: 'cli/get-started'
       },
     {

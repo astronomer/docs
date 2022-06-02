@@ -73,7 +73,7 @@ This topic provides steps for how to use [Hashicorp Vault](https://www.vaultproj
 To use this feature, you need:
 
 - A [Deployment](configure-deployment.md) on Astro.
-- [The Astro CLI](install-cli.md).
+- [The Astro CLI](cli/get-started.md).
 - A [Hashicorp Vault server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started).
 - An [Astro project](create-project.md).
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
@@ -148,7 +148,7 @@ Then, add the following environment variables to your `Dockerfile`:
 ```dockerfile
 # Make sure to replace `<your-approle-id>` and `<your-approle-secret>` with your own values.
 ENV AIRFLOW__SECRETS__BACKEND="airflow.contrib.secrets.hashicorp_vault.VaultBackend"
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
 ```
 
 This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. In the next step, you'll test this configuration in a local Airflow environment.
@@ -233,7 +233,7 @@ In this section, we'll walk through how to use [AWS Systems Manager (SSM) Parame
 To use this feature, you need:
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - Access to AWS SSM Parameter Store.
 - A valid AWS Access Key ID and Secret Access Key.
@@ -349,7 +349,7 @@ This topic provides setup steps for configuring [AWS Secrets Manager](https://aw
 To use AWS Secrets Manager as your Airflow secrets backend, you need:
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - An AWS account with the `SecretsManagerReadWrite` policy.
 - A valid AWS Access Key ID and Secret Access Key.
@@ -457,7 +457,7 @@ This topic provides setup steps for configuring [Google Cloud Secret Manager](ht
 To use Google Cloud Secret Manager as your Airflow secrets backend, you need:
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
 - A Google Cloud environment with [Secret Manager](https://cloud.google.com/secret-manager/docs/configuring-secret-manager) configured.
@@ -572,7 +572,7 @@ This topic provides setup steps for configuring [Azure Key Vault](https://azure.
 To use Azure Key Vault as a secrets backend, you need:
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - An existing Azure Key Vault linked to a resource group.
 - Your Key Vault URL. To find this, go to your Key Vault overview page > **Vault URI**.

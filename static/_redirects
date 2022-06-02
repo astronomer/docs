@@ -137,7 +137,7 @@
 /enterprise/ci-cd /software/ci-cd 301
 /enterprise/cli-install-windows-10 /software/cli-install-windows-10 301
 /enterprise/cli-podman /software/cli-podman 301
-/enterprise/cli-quickstart /software/cli-quickstart 301
+/enterprise/cli-quickstart /software/install-cli 301
 /enterprise/cli-reference /software/cli-reference 301
 /enterprise/configure-deployment /software/configure-deployment 301
 /enterprise/configure-platform-resources /software/configure-platform-resources 301
@@ -173,7 +173,7 @@
 /enterprise/overview /software 301
 /enterprise/platform-alerts /software/platform-alerts 301
 /enterprise/pre-create-namespaces /software/namespace-pools 301
-/enterprise/quickstart /software/cli-quickstart 301
+/enterprise/quickstart /software/install-cli 301
 /enterprise/registry-backend /software/registry-backend 301
 /enterprise/release-lifecycle-policy /software/release-lifecycle-policy 301
 /enterprise/release-notes /software/release-notes 301
