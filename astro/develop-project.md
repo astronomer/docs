@@ -24,7 +24,7 @@ This document explains the various ways you can modify and build your Astro proj
 To develop an Astro project and test it locally, you need:
 
 - An existing [Astro project](create-project.md).
-- [The Astro CLI](install-cli.md)
+- [The Astro CLI](cli/quickstart.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
 ## Build and Run a Project Locally
@@ -281,7 +281,7 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 ## Set Environment Variables via .env (Local Development Only)
 
-For Astro projects deployed on Astro, we generally recommend [setting environment variables via the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](install-cli.md) to set environment variables in your project's `.env` file.
+For Astro projects deployed on Astro, we generally recommend [setting environment variables via the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](cli/quickstart.md) to set environment variables in your project's `.env` file.
 
 To add Environment Variables locally:
 
@@ -389,7 +389,7 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 To install Python packages from a private GitHub repository on Astro, you need:
 
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](cli/quickstart.md).
 - An [Astro project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.

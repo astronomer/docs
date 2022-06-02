@@ -299,7 +299,7 @@ For more information about this feature read [Set Up an Identity Provider](confi
 
 The Astro CLI (`astro`) is now generally available as the official command-line tool for Astro. It is a direct replacement of the previously released `astro` executable and comes with various significant improvements. We encourage all customers to upgrade.
 
-For more information on the Astro CLI, see [CLI Release Notes](cli-release-notes.md). For install instructions, read [Install the CLI](install-cli.md).
+For more information on the Astro CLI, see [CLI Release Notes](cli-release-notes.md). For install instructions, read [Install the CLI](cli/quickstart.md).
 
 ### Multiple Authentication Methods for a Single User Account
 
