@@ -15,7 +15,7 @@ This guide explains how to push Astro project code to a Deployment via the Astro
 
 To deploy DAGs to Astro, you must have:
 
-- The [Astro CLI](cli/quickstart.md) installed in an empty directory.
+- The [Astro CLI](cli/get-started.md) installed in an empty directory.
 - An Astro Workspace with at least one [Deployment](configure-deployment.md).
 - An [Astro project](create-project.md).
 - [Docker](https://www.docker.com/products/docker-desktop).
