@@ -70,6 +70,6 @@ If your Organization is interested in using an instance type that supports a wor
 
 The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum Scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
 
-For more information about the Scheduler, see [Configure a Deployment](configure-deployment-resources.md#scheduler).
+For more information about the Scheduler, see [Configure a Deployment](configure-deployment-resources.md#scheduler-resources).
 
 :::
