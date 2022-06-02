@@ -31,7 +31,7 @@
           ]
         },
         "cli-podman",
-        "upgrade-astro-cli",
+        "upgrade-astro-cli"
       ]
     },
     {
