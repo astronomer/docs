@@ -31,4 +31,4 @@ All pods and services specific to a single Deployment on Astro is isolated to a 
 
 This level of network isolation is achieved using [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) enabled by the [Calico](https://kubernetes.io/docs/concepts/cluster-administration/networking/#calico) kubernetes network plugin.
 
-The network isolation between and within deployment namespaces ensures communication is restricted to only allow necessary communications within a namespace, and communication between deployments is denied, ensuring unintended communications and attempted data exchanges are blocked.
+The network isolation between and within Deployment namespaces ensures that communication is restricted to only allow necessary communications within a namespace, and that communication between Deployments is denied. This ensures that unintended communications and attempted data exchanges are blocked.
