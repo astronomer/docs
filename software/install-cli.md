@@ -47,7 +47,7 @@ To install the latest version of the Astro CLI, run the following command:
 brew install astronomer/tap/astro
 ```
 
-:::warning
+:::caution
 
 If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and version 1.0. To install this release run the following command:  
 
@@ -82,7 +82,7 @@ To use the Astro CLI on Windows, you must have:
 
     For example, to install v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.zip`.
 
-  :::warning
+  :::caution
 
   If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and version 1.0. To install this release, download a `.zip` file that includes `astro_0.29.0`.
 
@@ -116,7 +116,7 @@ Run the following command to install the latest version of the Astro CLI directl
 curl -sSL install.astronomer.io | sudo bash -s
 ```
 
-:::warning
+:::caution
 
 If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and version 1.0. To install this release run the following command:  
 
