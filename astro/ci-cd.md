@@ -179,7 +179,7 @@ This setup assumes the following prerequisites:
 
 <TabItem value="custom">
 
-When building images that consume secrets or buildtime arguments, special considerations have to be made for setting up GitHub Actions workflow. These images are build in two stages to allow extra options to be set during the first build. Some examples of custom images that are built in two stages can be found in [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources).  to build and deploy these images.
+When building images that consume secrets or build-time arguments, special considerations have to be made for setting up GitHub Actions workflows. The images are build in two stages to allow extra options to be set during the first build. Some examples of custom images that are built in two stages can be found in [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources).
 
 This setup assumes the following prerequisites:
 
