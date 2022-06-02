@@ -121,7 +121,7 @@ Depending on the OS distribution and version of Airflow you want to run, you'll 
 
 <!--- Version-specific -->
 
-Depending on the Airflow version you'd like to upgrade to, update the `FROM` line of your project's `Dockerfile` to reference a new Astronomer image. For example, to upgrade to Astro Runtime 5.0.1, you would change the `FROM` line to:
+Depending on the Airflow version you'd like to upgrade to, update the `FROM` line of your project's `Dockerfile` to reference a new Astronomer image. For example, to upgrade to the latest version of Astro Runtime, you would change the `FROM` line to:
 
 <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}`}</code></pre>
 
