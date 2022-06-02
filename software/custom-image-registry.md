@@ -55,7 +55,7 @@ To configure this feature, you need:
     kubectl -n <release-namespace> annotate secret <name-of-secret> "astronomer.io/commander-sync"="platform=astronomer"
     ```
 
-  ::: info
+  :::info
 
   To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace, making sure to specify different custom registries using `--docker-server`. Because you don’t need to sync secrets between Deployments, you should not add the annotation as described in this step.
 
@@ -85,7 +85,7 @@ To configure this feature, you need:
         	        secretName: <name-of-secret>
     ```
 
-  ::: info
+  :::info
 
   To use different registries for each Deployment, do not set `astronomer.houston.config.deployments.registry.protectedCustomRegistry.updateRegistry.host`.
 
@@ -98,7 +98,7 @@ To configure this feature, you need:
     kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
     ```
 
-    ::: info
+    :::info
 
     If you're using different registries for each Deployment, skip this step.
 
@@ -122,7 +122,7 @@ To configure this feature, you need:
     kubectl -n <release-namespace> annotate secret <name-of-secret> "astronomer.io/commander-sync"="platform=astronomer"
     ```
 
-  ::: info
+  :::info
 
   To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace, making sure to specify different custom registries using `--docker-server`. Because you don’t need to sync secrets between Deployments, you should not add the annotation as described in this step.
 
@@ -161,7 +161,7 @@ To configure this feature, you need:
             secretName: <name-of-secret-containing-image-repo-creds>
     ```
 
-  ::: info
+  :::info
 
   To use different registries for each Deployment, do not set `astronomer.registry.protectedCustomRegistry.updateRegistry.host` or `astronomer.registry.protectedCustomRegistry.baseRegistry.host`.
 
@@ -174,7 +174,7 @@ To configure this feature, you need:
     kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
     ```
 
-  ::: info
+  :::info
 
   If you're using different registries for each Deployment, skip this step.
 

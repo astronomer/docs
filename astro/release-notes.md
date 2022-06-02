@@ -196,7 +196,7 @@ When you push code to a Deployment on Astro via the Astro CLI or CI/CD, referenc
 
 This feature requires Astro Runtime [4.0.10+](runtime-release-notes.md#4010). To upgrade a Deployment to the latest Runtime version, see [Upgrade Runtime](upgrade-runtime.md).
 
-::: info
+:::info
 
 While it is a good proxy, the tag shown in the Airflow UI does not forcibly represent the Docker image that is running on your Deployment's Scheduler, Triggerer, or workers.
 
