@@ -11,8 +11,39 @@ After you create an Astro Deployment, you can modify its resource settings to ma
 
 Astro supports the `AU` as the primary resource unit. In this context,
 
-- 1 AU = 0.1 CPU, .375 GB Memory
-- 10 AU = 1 CPU, 3.75 GB Memory
+## Configure a Workspace
+
+When you first sign up for Astro, you can expect to be invited to a Workspace created for your team. Within a Workspace, you can create Deployments and push DAGs to any Deployment from the Astro CLI or from a CI/CD process. You're free to invite other users to that Workspace and create as many Deployments as you'd like.
+
+## Create a Deployment
+
+To create an Airflow Deployment on Astro:
+
+1. Log in to the [Cloud UI](https://cloud.astronomer.io) and go to the **Deployments** tab on the left navigation bar.
+2. On the top right-hand side of the Deployments page, click **New Deployment**.
+3. Set the following:
+    - **Name**
+    - **Description**
+    - **Astro Runtime**: By default, the latest version of Astro Runtime is selected
+    - **Deployment Location**: The Astro Cluster in which you want to create this Deployment
+
+3. Click **Create Deployment** and give it a few moments to spin up. Within a few seconds, you should see the following:
+
+    ![Cloud UI Deployment Configuration](/img/docs/deployment-configuration.png)
+
+    All Deployments show an initial health status of `UNHEALTHY` after their creation. This indicates that the Deployment's Webserver and Scheduler are still spinning up in your cloud. Wait a few minutes for this status to become `HEALTHY` before proceeding to the next step.
+
+4. To access the Airflow UI, select **Open Airflow** on the top right.
+
+:::tip
+
+If you prefer to work with the Astro CLI, you can also create a Deployment by running the `astro deployment create` command. For more information, see [CLI Command Reference](cli/astro-deployment-create.md).
+
+:::
+
+## Configure Deployment Resources
+
+Once you create a Deployment, you can choose to modify its resources and configurations to best fit the needs of your tasks. Specifically, you can modify these two components:
 
 If you haven't created your Astro Deployment, see [Create a Deployment](create-deployment.md).
 

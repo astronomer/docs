@@ -361,4 +361,4 @@ If you configured a fully custom OAuth flow, you should see a new **Log in with 
 
 ![Custom login button on the Astronomer login screen](/img/docs/custom-oauth.png)
 
-You will also see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME` when authenticating via the Astronomer CLI.
+You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME` when authenticating using the Astro CLI.

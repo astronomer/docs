@@ -30,7 +30,7 @@
 /disaster-recovery /astro/disaster-recovery 301
 /environment-variables /astro/environment-variables 301
 /install-aws /astro/install-aws 301
-/install-cli /astro/install-cli 301
+
 /known-limitations /astro/known-limitations 301
 /modify-cluster /astro/modify-cluster 301
 /platform-variables /astro/platform-variables 301
@@ -95,6 +95,37 @@
 /cloud/cli-reference/astrocloud-workspace-list /astro/cli-reference/astrocloud-workspace-list 301
 /cloud/cli-reference/astrocloud-workspace-switch /astro/cli-reference/astrocloud-workspace-switch 301
 
+# Redirect to converged CLI docs
+/install-cli /astro/install-cli 301
+/astro/install-cli /astro/cli/get-started 301
+/astro/cli-reference /astro/cli/reference 301
+/astro/cli-release-notes /astro/cli/release-notes 301
+/software/cli-quickstart /software/install-cli 301
+/software/cli-install-windows-10 /software/install-cli 301
+/astro/cli-reference/astrocloud-auth-login /astro/cli/astro-login 301
+/astro/cli-reference/astrocloud-auth-logout /astro/cli-reference/astro-logout 301
+/astro/cli-reference/astrocloud-completion /astro/cli-reference/astro-completion 301
+/astro/cli-reference/astrocloud-deploy /astro/cli-reference/astro-deploy 301
+/astro/cli-reference/astrocloud-deployment-list /astro/cli-reference/astro-deployment-list 301
+/astro/cli-reference/astrocloud-deployment-logs /astro/cli-reference/astro-deployment-logs 301
+/astro/cli-reference/astrocloud-deployment-update /astro/cli-reference/astro-deployment-update 301
+/astro/cli-reference/astrocloud-deployment-variable-create /astro/cli-reference/astro-deployment-variable-create 301
+/astro/cli-reference/astrocloud-deployment-variable-list /astro/cli-reference/astro-deployment-variable-list 301
+/astro/cli-reference/astrocloud-deployment-variable-update /astro/cli-reference/astro-deployment-variable-update 301
+/astro/cli-reference/astrocloud-dev-init /astro/cli-reference/astro-dev-init 301
+/astro/cli-reference/astrocloud-dev-kill /astro/cli-reference/astro-dev-kill 301
+/astro/cli-reference/astrocloud-dev-logs /astro/cli-reference/astro-dev-logs 301
+/astro/cli-reference/astrocloud-dev-parse /astro/cli-reference/astro-dev-parse 301
+/astro/cli-reference/astrocloud-dev-ps /astro/cli-reference/astro-dev-ps 301
+/astro/cli-reference/astrocloud-dev-pytest /astro/cli-reference/astro-dev-pytest 301
+/astro/cli-reference/astrocloud-dev-run /astro/cli-reference/astro-dev-run 301
+/astro/cli-reference/astrocloud-dev-start /astro/cli-reference/astro-dev-start 301
+/astro/cli-reference/astrocloud-dev-stop /astro/cli-reference/astro-dev-stop 301
+/astro/cli-reference/astrocloud-dev-restart /astro/cli-reference/astro-dev-restart 301
+/astro/cli-reference/astrocloud-version /astro/cli-reference/astro-version 301
+/astro/cli-reference/astrocloud-workspace-list /astro/cli-reference/astro-workspace-list 301
+/astro/cli-reference/astrocloud-workspace-switch /astro/cli-reference/astro-workspace-switch 301
+
 # redirect enterprise paths to software
 /enterprise /software 301
 /enterprise/ac-cve /software/ac-cve 301
@@ -106,7 +137,7 @@
 /enterprise/ci-cd /software/ci-cd 301
 /enterprise/cli-install-windows-10 /software/cli-install-windows-10 301
 /enterprise/cli-podman /software/cli-podman 301
-/enterprise/cli-quickstart /software/cli-quickstart 301
+/enterprise/cli-quickstart /software/install-cli 301
 /enterprise/cli-reference /software/cli-reference 301
 /enterprise/configure-deployment /software/configure-deployment 301
 /enterprise/configure-platform-resources /software/configure-platform-resources 301
@@ -142,7 +173,7 @@
 /enterprise/overview /software 301
 /enterprise/platform-alerts /software/platform-alerts 301
 /enterprise/pre-create-namespaces /software/namespace-pools 301
-/enterprise/quickstart /software/cli-quickstart 301
+/enterprise/quickstart /software/install-cli 301
 /enterprise/registry-backend /software/registry-backend 301
 /enterprise/release-lifecycle-policy /software/release-lifecycle-policy 301
 /enterprise/release-notes /software/release-notes 301

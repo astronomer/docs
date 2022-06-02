@@ -17,7 +17,7 @@ This guide provides instructions for creating a new Astro project, as well as in
 
 To create an Astro project, you need:
 
-- [The Astro CLI](install-cli.md)
+- [The Astro CLI](cli/configure-cli.md#install-the-cli)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
 ## Step 1: Create an Astro project
@@ -39,7 +39,7 @@ To create a new Astro project:
 3. Run the following Astro CLI command to initialize an Astro project in the directory:
 
     ```sh
-    astrocloud dev init
+    astro dev init
     ```
 
     This command generates the following files in the directory:
@@ -76,7 +76,7 @@ By default, the Docker image in your Dockerfile is:
 To confirm that you successfully initialized an Astro project, run the following command from your project directory:
 
 ```sh
-astrocloud dev start
+astro dev start
 ```
 
 This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
@@ -88,7 +88,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 
 As your project builds locally, you should see the following output:
 
-<pre><code parentName="pre">{`% astrocloud dev start
+<pre><code parentName="pre">{`% astro dev start
 Env file ".env" found. Loading...
 Sending build context to Docker daemon  10.75kB
 Step 1/1 : FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
@@ -119,7 +119,7 @@ The default credentials are admin:admin
 
 By default, the Astro CLI uses port `8080` for the Airflow Webserver and port `5432` for the Airflow metadata database. If these ports are already in use on your local machine, you can change the default ports for these components by following these steps:
 
-1. In your Astro project directory, open `.astrocloud/config.yaml`. This file might be hidden in graphical file browsers. You can show hidden files using `⌘ + Shift + .` on Mac or by selecting **View** > **Hidden items** in Windows file explorer.
+1. In your Astro project directory, open `.astro/config.yaml`. This file might be hidden in graphical file browsers. You can show hidden files using `⌘ + Shift + .` on Mac or by selecting **View** > **Hidden items** in Windows file explorer.
 2. Specify alternative ports for your Webserver and/or metadata database in `config.yaml`. For example, to use `8081` for your Webserver port and `5435` for your database port, you would specify the following:
 
     ```yaml
@@ -131,7 +131,7 @@ By default, the Astro CLI uses port `8080` for the Airflow Webserver and port `5
       port: 5435
     ```
 
-3. Run `astrocloud dev restart` to rebuild and rerun your project.
+3. Run `astro dev restart` to rebuild and rerun your project.
 
 :::
 

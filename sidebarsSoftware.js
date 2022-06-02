@@ -18,7 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get Started',
       items: [
-      'cli-quickstart',
+      'install-cli',
       'create-project',
       ],
     },

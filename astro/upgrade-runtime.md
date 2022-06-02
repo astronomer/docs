@@ -24,12 +24,12 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime R
 To upgrade to a new version of Astro Runtime, you must have:
 
 - An [Astro project](create-project.md).
-- An [Astro Deployment](configure-deployment.md).
+- An [Astro Deployment](create-deployment.md).
 - The [Astro CLI](install-cli.md).
 
 :::info
 
-If you're only upgrading a local Airflow environment, you do not need an Astro Deployment and can skip steps 3-4 of this guide. 
+If you're only upgrading a local Airflow environment, you do not need an Astro Deployment and can skip steps 3-4 of this guide.
 
 :::
 

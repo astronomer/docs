@@ -9,7 +9,7 @@
       "type": "category",
       "label": "Get Started",
       "items": [
-        "cli-quickstart",
+        "install-cli",
         "create-project"
       ]
     },
@@ -30,7 +30,8 @@
             "kubernetes-executor"
           ]
         },
-        "cli-podman"
+        "cli-podman",
+        "upgrade-astro-cli"
       ]
     },
     {

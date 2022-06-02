@@ -11,7 +11,7 @@ This guide will help you get started on Astronomer Software by walking through t
 
 ## Prerequisites
 
-Creating an Astronomer project requires the [Astronomer CLI](cli-quickstart.md).
+Creating an Astronomer project requires the [Astro CLI](install-cli.md).
 
 ## Step 1: Create a Project Directory
 
@@ -21,13 +21,13 @@ Before you create a Software project, create an empty directory and open it:
 mkdir <your-new-directory> && cd <your-new-directory>
  ```
 
-From this directory, run the following Astronomer CLI command:
+From this directory, run the following Astro CLI command:
 
 ```sh
 astro dev init --use-astronomer-certified
 ```
 
-This will generate the following files:
+This generates the following files:
 
 ```py
 .

@@ -23,7 +23,7 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 To use the KubernetesPodOperator, you need:
 
 - An [Astro project](create-project.md).
-- An Astro [Deployment](configure-deployment.md).
+- An Astro [Deployment](create-deployment.md).
 
 ## Set Up the KubernetesPodOperator
 
@@ -103,7 +103,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 To complete this setup, you need:
 
 - An [Astro project](create-project.md).
-- An [Astro Deployment](configure-deployment.md).
+- An [Astro Deployment](configure-deployment-resources.md).
 - Access to a private Docker registry.
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/), the command line tool for Kubernetes.
 

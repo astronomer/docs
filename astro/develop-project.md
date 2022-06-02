@@ -24,7 +24,7 @@ This document explains the various ways you can modify and build your Astro proj
 To develop an Astro project and test it locally, you need:
 
 - An existing [Astro project](create-project.md).
-- [The Astro CLI](install-cli.md)
+- [The Astro CLI](cli/get-started.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
 ## Build and Run a Project Locally
@@ -32,7 +32,7 @@ To develop an Astro project and test it locally, you need:
 To run your Astro project locally, run the following command:
 
 ```sh
-astrocloud dev start
+astro dev start
 ```
 
 This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
@@ -46,7 +46,7 @@ Once the project builds, you can access the Airflow UI by going to `http://local
 
 :::info
 
-The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astrocloud dev start` command, for example, is functionally equivalent to `docker compose start`.
+The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astro dev start` command, for example, is functionally equivalent to `docker compose start`.
 
 :::
 
@@ -61,10 +61,10 @@ If you see `Error: cannot start, project already running` when you run this comm
 To restart your local Airflow environment, run the following command:
 
 ```sh
-astrocloud dev restart
+astro dev restart
 ```
 
-These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astrocloud dev stop` to stop your Docker containers without restarting or rebuilding your project.
+These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astro dev stop` to stop your Docker containers without restarting or rebuilding your project.
 
 ## Make Changes to Your Project
 
@@ -248,7 +248,7 @@ This is supported both on Astro and in the context of local development.
 
 ## Override the CLI's Docker Compose File (Local Development Only)
 
-The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), which is a tool for defining and running multi-container Docker applications. You can override the CLI's Docker Compose configurations by adding a `docker-compose.override.yml` file to your Astro project. Any values in this file override the CLI's default settings whenever you run `astrocloud dev start`.
+The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), which is a tool for defining and running multi-container Docker applications. To override CLI Docker Compose configurations, add a `docker-compose.override.yml` file to your Astro project. Any values in this file override the default CLI settings whenever you run `astro dev start`.
 
 To see what values you can override, reference the CLI's [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go). The linked file is for the original Astro CLI, but the values here are identical to those used in the Astro CLI. Common use cases for Docker Compose overrides include:
 
@@ -281,13 +281,13 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 ## Set Environment Variables via .env (Local Development Only)
 
-For Astro projects deployed on Astro, we generally recommend [setting environment variables via the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](install-cli.md) to set environment variables in your project's `.env` file.
+For Astro projects deployed on Astro, we generally recommend [setting environment variables via the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](cli/get-started.md) to set environment variables in your project's `.env` file.
 
 To add Environment Variables locally:
 
 1. Open the `.env` file in your Astro project directory.
 2. Add your environment variables to the `.env` file.
-3. Rebuild your image by running `astrocloud dev start --env .env`.
+3. Rebuild your image by running `astro dev start --env .env`.
 
 When setting environment variables in your `.env` file, use the following format:
 
@@ -389,7 +389,7 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 To install Python packages from a private GitHub repository on Astro, you need:
 
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.

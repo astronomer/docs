@@ -255,12 +255,14 @@ Run `astro deployment airflow upgrade --deployment-id` to initialize the Airflow
 
 If you do not specify `--desired-airflow-version`, this command creates a list of available Airflow versions that you can select. The Astro CLI lists only the available Airflow versions that are later than the version currently specified in your `Dockerfile`.
 
+
 ### Flags
 
 | Flag                        | Value Type | Usage                                                                                                                    |
 | --------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `--deployment-id`           | String     | The ID of the Deployment for which you want to upgrade Airflow. To find your Deployment ID, run `astro deployment list`. |
 | `--desired-airflow-version` | String     | The Airflow version you're upgrading to (for example, `2.2.0`).                                                                |
+
 
 ### Related documentation
 
@@ -355,6 +357,7 @@ Creates a Deployment-level service account on Astronomer, which you can use to c
 | `--deployment-id` (Required) | String     | The Deployment you're creating a service account for.                                                                           |
 | `--label` (Required)         | String     | The name or label for the new service account.                                                                                  |
 | `--role`                     | String     | The User Role for the new service account. Select `viewer`, `editor`, or `admin`. The default is `viewer`.                |
+
 
 ### Related documentation
 
@@ -632,7 +635,6 @@ astro dev restart
 | ------------- | ---------- | -------------------------------------------------- |
 | `--env`       | string     | The filepath to your environment variables. The default is `.env`  |
 
-
 ## astro dev run
 
 Runs a single [Airflow CLI command](https://airflow.apache.org/docs/apache-airflow/stable/cli-ref.html) on your local Airflow environment. This command only applies to local development and is not supported for Airflow Deployments on Astronomer.
@@ -653,12 +655,6 @@ Initializes a local Airflow environment on your machine by creating a Docker con
 - Scheduler
 - Webserver
 - Triggerer
-
-:::info
-
-Logs for the Airflow Triggerer will only show for local environments using Deferrable Operators and running Astronomer Certified 2.0+.
-
-:::
 
 ### Usage
 

@@ -15,7 +15,7 @@ module.exports = {
   themeConfig: {
     image: 'img/meta.png',
     sidebar: {
-      autoCollapseSidebarCategories: true,
+      autoCollapseCategories: true,
     },
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
@@ -49,9 +49,23 @@ module.exports = {
       },
       items: [
         {
-          to: 'astro',
+          type: 'dropdown',
+          to: '/astro/',
           label: 'Astro',
           position: 'left',
+          activeClassName: 'navbar__link--active',
+          items: [
+            {
+              label: 'Cloud',
+              to: '/astro/',
+              activeBaseRegex: 'astro/(?!cli)',
+            },
+            {
+              label: 'Astro CLI',
+              to: 'astro/cli/overview',
+              activeBaseRegex: 'astro/cli',
+            },
+          ],
         },
         {
           type: 'dropdown',
@@ -105,7 +119,7 @@ module.exports = {
             },
             {
               label: 'Install the CLI',
-              to: 'astro/install-cli',
+              to: 'astro/cli/get-started',
             },
             {
               label: 'Create a Project',

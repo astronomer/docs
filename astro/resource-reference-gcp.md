@@ -64,12 +64,12 @@ This table lists the approximate maximum worker size that is supported on Astro 
 | e2-standard-4      | 25         | 2.5 CPUs  | 9.4  GiB MEM |
 | e2-standard-8      | 65         | 6.5 CPUs  | 24.4 GiB MEM |
 
-If your team is interested in using an instance type that supports a worker size limit higher than 65 AU, reach out to [Astronomer Support](https://support.astronomer.io). For more information on configuring worker size on Astro, see [Configure a Deployment](configure-deployment.md#worker-resources).
+If your Organization is interested in using an instance type that supports a worker size limit higher than 65 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
 :::info
 
 The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum Scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
 
-For more information about the Scheduler, see [Configure a Deployment](configure-deployment.md#scheduler).
+For more information about the Scheduler, see [Configure a Deployment](configure-deployment-resources.md#scheduler-resources).
 
 :::
