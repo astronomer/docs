@@ -76,9 +76,13 @@ module.exports = {
           activeClassName: 'navbar__link--active',
           items: [
             {
-              label: '0.28 (Latest)',
+              label: '0.29 (Latest)',
               to: '/software/',
-              activeBaseRegex: 'software/(?!(0.27|0.26|0.25|0.23|0.16))',
+              activeBaseRegex: 'software/(?!(0.28|0.27|0.26|0.25))',
+            },
+            {
+              label: '0.28',
+              to: '/software/0.28/overview',
             },
             {
               label: '0.27',
@@ -91,14 +95,6 @@ module.exports = {
             {
               label: '0.25',
               to: '/software/0.25/overview'
-            },
-            {
-              label: '0.23',
-              to: '/software/0.23/overview'
-            },
-            {
-              label: '0.16 (Deprecated)',
-              to: '/software/0.16/overview'
             },
           ],
         },
@@ -167,6 +163,15 @@ module.exports = {
               label: 'Astronomer Registry',
               to: 'https://registry.astronomer.io/',
             },
+            {
+              label: 'Privacy Policy',
+              to: 'https://www.astronomer.io/privacy/',
+            },
+            {
+              label: 'Cookie Preferences',
+              to: '#',
+              id: 'cookiePref',
+            },
           ],
         },
         {
@@ -204,14 +209,6 @@ module.exports = {
           admonitions: {
           },
         },
-        gtag: {
-          trackingID: 'G-DKTB1B78FV',
-          anonymizeIP: true,
-        },
-        googleAnalytics: {
-          trackingID: 'UA-54102728-4',
-          anonymizeIP: true,
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -232,12 +229,25 @@ module.exports = {
         lastVersion: 'current',
         versions: {
         current: {
-          label: '0.28',
+          label: '0.29',
           path: '',
           banner: 'none',
          },
        },
       },
     ],
+  ],
+  scripts: [
+    {
+      src: './scripts/segment.js',
+      defer: true,
+    },
+    {
+      src: './scripts/consent-manager.js',
+      defer: true,
+    },
+    {
+      src: './scripts/consent-manager-config.js',
+    },
   ],
 };

@@ -11,6 +11,28 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
 
+## Astro Runtime 5.0.2
+
+- Release date: May 27, 2022
+- Airflow version: 2.3.1
+
+### Support for Airflow 2.3.1
+
+Astro Runtime 5.0.2 includes same-day support for Airflow 2.3.1, a release that follows Airflow 2.3.0 with a collection of bug fixes.
+
+Fixes include:
+
+- Automatically reschedule stalled queued tasks in Celery Executor ([#23690](https://github.com/apache/airflow/pull/23690))
+- Fix secrets rendered in Airflow UI when task is not executed ([#22754](https://github.com/apache/airflow/pull/22754))
+- Performance improvements for faster database migrations to Airflow 2.3
+
+For more information, see the [Apache Airflow changelog](https://github.com/apache/airflow/releases/tag/2.3.1).
+
+### Additional Improvements
+
+- Update `astronomer-providers` to v1.3.1. For more information, see the [Astronomer Providers Changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id5).
+- Update `openlineage-airflow` to v0.8.2. For more information, see the [OpenLineage GitHub repository](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow).
+
 ## Astro Runtime 5.0.1
 
 - Rlease date: May 9, 2022

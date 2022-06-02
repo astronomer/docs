@@ -57,6 +57,12 @@ FROM quay.io/astronomer/ap-airflow:latest-onbuild
 
 This will install a Debian-based AC image for the latest version of Airflow we support. To specify a particular Airflow version, read [Upgrade Airflow](manage-airflow-versions.md) and the _Customize your Image_ topic below.
 
+:::tip
+
+To use an Astro Runtime image with your new project, remove `--use-astronomer-certified` from your command. Note that projects using Astro Runtime can only be deployed to Astronomer Software installations on version 0.29 and above.
+
+:::
+
 ### Example DAG
 
 To help you get started, your initialized project includes an `example-dag` in `/dags`. This DAG simply prints today's date, but it'll give you a chance to become familiar with how to deploy on Astronomer.

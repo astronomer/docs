@@ -38,7 +38,9 @@ Astronomer is a global remote company first. We have some small offices in the U
 
 Astro is AICPA SOC 2 Type I certified with respect to the security, availability, and confidentiality Trust Service Categories. If you are interested in obtaining (NDA required) our SOC 2 Report and Penetration Test report, contact [sales@astronomer.io](https://www.notion.so/Sales-Operations-36c4d78df58747a2815449b7acbe97bd)
 
-Astronomer is committed to pursuing SOC 2 Type II, GDPR, and HIPAA compliance in 2022.
+Astronomer is also GDPR-compliant as an organization, and the Astro platform is GDPR-ready. Astronomer offers a Data Processing Agreement (DPA), which satisfies the requirements the GDPR imposes on data controllers with respect to data processors.
+
+Astronomer is committed to pursuing HIPPA, and AICPA SOC 2 Type II compliance in 2022.
 
 ## Data Protection
 

@@ -2,7 +2,7 @@
 / /astro 301!
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
-/software/0.28/* /software/:splat
+/software/0.29/* /software/:splat
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
@@ -187,6 +187,9 @@
 /enterprise/upgrade-astronomer-stable /software/upgrade-astronomer-stable 301
 /enterprise/version-compatibility-reference /software/version-compatibility-reference 301
 /enterprise/workspace-permissions /software/workspace-permissions 301
+
+# redirect links to renamed files
+/astro/configure-deployment /astro/configure-deployment-resources 301
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301

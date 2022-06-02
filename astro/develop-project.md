@@ -361,7 +361,7 @@ my_project
 
 ## Install Python Packages from Private Sources
 
-Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
+Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](customize-image.md#add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
 Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image.
 
@@ -515,7 +515,7 @@ This example assumes that the name of each of your Python packages is identical 
    FROM custom-astro-runtime:5.0.0-base
    ```
 
-Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-cli.md).
+Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
 
 </TabItem>
 
