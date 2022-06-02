@@ -57,7 +57,7 @@ The Astro CLI includes a new command for upgrading existing Software Deployments
 astro deployment runtime upgrade --deployment-id=<deployment-id> --desired-runtime-version=<desired-runtime-version>
 ```
 
-For more information, see the [CLI Reference Guide](cli-reference.md#astro-deployment-runtime-updgrade).
+For more information, see the [CLI Reference Guide](cli-reference.md#astro-deployment-runtime-upgrade).
 
 ### Additional Improvements
 
