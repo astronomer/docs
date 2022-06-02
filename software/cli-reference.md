@@ -47,6 +47,131 @@ Run `astro cluster <subcommand>` in your terminal to see or access available Sof
 | `list`     | Run `astro cluster list` to retrieve a list of all clusters to which you've previously authenticated.                                                                                                                                            |
 | `switch`   | Run `astro cluster switch` to retrieve a list of available clusters, then enter the ID number of the cluster you want to switch to. Once that command is successful, authenticate to that cluster by running `astro auth login <base-domain>`. |
 
+## astro completion
+
+Generates autocompletion scripts for Astronomer.
+
+### Usage
+
+Use `astro completion <subcommand>` to generate autocompletion scripts, which can be used to automate workflows on Astronomer that require multiple CLI commands.
+
+> **Note:** If you're running on MacOS, make sure to install [Bash Completion](https://github.com/scop/bash-completion) before creating autocompletion scripts. To do so via Homebrew, run:
+    ```sh
+    brew install bash-completion
+    ```
+
+### Subcommands
+
+| Subcommand | Usage                                                                                                                                                        |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `bash`     | Run `astro completion bash` to show the bash shell script for autocompletion in Astronomer. Use this output to modify or view your autocompletion scripts. |
+| `zsh`      | Run `astro completion zsh` to show the zsh shell script for autocompletion in Astronomer. Use this output to modify or view your autocompletion scripts.  |
+
+## astro config
+
+Modifies certain platform-level settings on Astronomer Software without needing to manually adjust them in your `config.yaml` file.
+
+### Usage
+
+Run `astro config get <setting-name>` to list the value for a particular setting in your `config.yaml` file. To update or override a value, run `astro config set <setting-name> <value>`.
+
+The settings that you can update via the command line are:
+
+- cloud.api.protocol
+- cloud.api.port
+- cloud.api.ws_protocol
+- cloud.api.token
+- context
+- contexts
+- houston.dial_timeout
+- local.houston
+- local.orbit
+- postgres.user
+- postgres.password
+- postgres.host
+- postgres.port
+- project.deployment
+- project.name
+- project.workspace
+- webserver.port
+- show_warnings
+
+### Subcommands
+
+| Subcommand | Usage                                              |
+| ---------- | -------------------------------------------------- |
+| `get`      | Show current values for the above configuration settings. |
+| `set`      | Updates a setting in your platform to a new value. |
+
+### Related documentation
+
+- [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md)
+
+## astro deploy
+
+Deploys code in your Airflow project directory to any Airflow Deployment on Astronomer.
+
+### Usage
+
+Run `astro deploy <your-deployment-release-name> [flags]` in your terminal to push a local Airflow project as a Docker image to your Airflow Deployment on Astronomer.
+
+If you have the appropriate Workspace and Deployment-level permissions, your code is packaged into a Docker image, pushed to Astronomer's Docker Registry, and applied to your Airflow Webserver, Scheduler(s), and Worker(s).
+
+To identify your Deployment's release name, go to **Settings** > **Basics** > **Release Name** in the Software UI or run `astro deployment list`.
+
+If you run `astro deploy` without specifying `your-deployment-release-name`, the Astronomer CLI will list all Airflow Deployments in your Workspace to choose from.
+
+### Flags
+
+| Flag             | Value Type | Usage                                                                      |
+| ---------------- | ---------- | -------------------------------------------------------------------------- |
+| `--force`        | None       | Forces deploy even if there are uncommitted changes.                       |
+| `--prompt`       | None       | Forces prompt for choosing a target Deployment.                            |
+| `--save`         | None       | Saves this directory/Deployment combination for future deploys.            |
+| `--workspace-id` | String     | Lists available Deployments in your Workspace and prompts you to pick one. |
+| `--no-cache` | None     | Do not use any images from the container engine's cache when building your project. |
+
+
+### Related documentation
+
+- [Deploy to Astronomer via the CLI](deploy-cli.md)
+
+## astro deployment
+
+Manages various Deployment-level actions on Astronomer.
+
+### Usage
+
+Run `astro deployment <subcommand>` in your terminal to create, delete, or manage an Airflow Deployment on Astronomer. See the following entries of this guide for more information on each subcommand.
+
+When managing an existing Deployment using subcommands such as `delete` and `logs`, you additionally need to specify a Deployment in your command. In this case, you would run `astro deployment <subcommand> --deployment-id=<deployment-id>`.
+
+### Related documentation
+
+- [Configure an Airflow Deployment on Astronomer](manage-workspaces.md)
+
+## astro deployment airflow upgrade
+
+Initializes the Airflow version upgrade process on any Airflow Deployment on Astronomer.
+
+### Usage
+
+Run `astro deployment airflow upgrade --deployment-id` to initialize the Airflow upgrade process. To finalize the Airflow upgrade process, complete all of the steps as described in [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md).
+
+If you do not specify `--desired-airflow-version`, this command will output a list of available versions of Airflow you can choose from and prompt you to pick one. The Astronomer CLI will only make available versions of Airflow that are higher than the version you're currently running in your `Dockerfile`.
+
+### Flags
+
+| Flag                        | Value Type | Usage                                                                                                                      |
+| --------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `--deployment-id`           | String     | The ID of the Deployment for which you want to upgrade Airflow. To find your Deployment ID, run `astro deployment list`. |
+| `--desired-airflow-version` | String     | The Airflow version you're upgrading to (e.g. `1.10.14`).                                                                  |
+
+### Related documentation
+
+- [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md)
+- [Manage User Permissions on Astronomer](workspace-permissions.md)
+
 ## astro deployment create
 
 Creates a new Airflow Deployment in your current Astronomer Workspace.
