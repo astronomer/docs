@@ -27,6 +27,8 @@ Specifically, Control Plane data is encrypted on disk with a platform-managed ke
 
 ## Deployment Network Isolation
 
-All deployment namespaces on Astro, including those running on the same cluster, are network isolated from each other by default. In addition to the isolation between deployment namespaces, we also restrict communications within a namespace to only required communication between components and associated ports. This level of network isolation is achieved using [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) enabled by the [Calico](https://kubernetes.io/docs/concepts/cluster-administration/networking/#calico) kubernetes network plugin.
+All pods and services specific to a single Deployment on Astro is isolated to a corresponding Kubernetes namespace within the Astro Cluster in which the Deployment is hosted. All Deployment namespaces on Astro, including those running on the same Cluster, are network isolated from each other by default. In addition to the isolation between Deployment namespaces, we also restrict communication within a namespace to only what is required between components and associated ports.
+
+This level of network isolation is achieved using [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) enabled by the [Calico](https://kubernetes.io/docs/concepts/cluster-administration/networking/#calico) kubernetes network plugin.
 
 The network isolation between and within deployment namespaces ensures communication is restricted to only allow necessary communications within a namespace, and communication between deployments is denied, ensuring unintended communications and attempted data exchanges are blocked.
