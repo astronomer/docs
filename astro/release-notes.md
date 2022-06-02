@@ -14,7 +14,13 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest Astro Runtime Version**: 5.0.1 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.5.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.0.0 ([Release notes](cli/release-notes.md))
+
+## June 2, 2022
+
+### Additional Improvements
+
+- You can now [create new GCP Clusters](create-cluster.md) `us-east4`
 
 ## May 26, 2022
 
