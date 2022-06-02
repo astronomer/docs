@@ -30,4 +30,4 @@ To stay up to date on the latest features, see [Astro CLI Release Notes](https:/
 
 ## CLI Reference
 
-For a full list of available CLI commands, see the [CLI Command Reference](cli-reference.md).
+For a full list of available CLI commands, see the [CLI Command Reference](cli/reference.md).
