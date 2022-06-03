@@ -24,7 +24,7 @@ You can now use the new **Datasets** page in the **Lineage** tab to view a table
 
 ![Datasets page](/img/release-notes/datasets-page.png)
 
-Click on the name of a dataset to show its lineage graph. For more information, see [Data Lineage on Astro](data-lineage.md#view-recently-accessed-datasets).
+Click the name of a dataset to show its lineage graph. For more information, see [Data Lineage on Astro](data-lineage.md#view-recently-accessed-datasets).
 
 ### Bug Fixes
 
