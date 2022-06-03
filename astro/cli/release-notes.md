@@ -251,7 +251,7 @@ Release date: February 17, 2022
 
 ### New `astro dev restart` Command to Test Local Changes
 
-For users making quick and continuous changes to an Astronomer project locally, the Astro CLI now supports a new `astro dev restart` command. This command makes local testing significantly easier and is equivalent to running `astro dev stop` followed by `astro dev start`.
+For users making quick and continuous changes to an Astro project locally, the Astro CLI now supports a new `astro dev restart` command. This command makes local testing significantly easier and is equivalent to running `astro dev stop` followed by `astro dev start`.
 
 ### Support for the Triggerer in Local Airflow Environments
 

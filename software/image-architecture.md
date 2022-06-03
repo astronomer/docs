@@ -91,7 +91,7 @@ The following table lists the essential environment variables used when running 
 | Variable                                        | Description                                                                   | Default Value                                     |
 | ----------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------- |
 | `AIRFLOW_PIP_VERSION`                             | The version of pip that is used to install Python packages and Airflow itself.            | 19.3.1                                            |
-| `AIRFLOW_HOME`                                    | Filepath for your Airflow project directory.                                  | usr/local/airflow                                 |
+| `AIRFLOW_HOME`                                    | Filepath for your Astro project directory.                                  | usr/local/airflow                                 |
 | `AIRFLOW__WEBSERVER__BASE_URL`                    | The URL used to access the Airflow UI.                                        | http://localhost:8080                             |
 | `ASTRONOMER_USER`                                 | The username for your Airflow user.                                           | astro                                             |
 | `ASTRONOMER_UID `                                 | The ID for your Airflow user.                                                 | 5000                                              |

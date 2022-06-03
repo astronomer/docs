@@ -9,7 +9,7 @@ description: How to push DAGs to your Airflow Deployment on Astronomer Software 
 
 This guide provides the setup steps for deploying DAGs to Astronomer using the Astro CLI.
 
-If you've used the Astro CLI to develop locally, the process for deploying your DAGs to an Airflow Deployment on Astronomer should be equally familiar. The Astro CLI builds your DAGs into a Docker image alongside all the other files in your Airflow project directory, including your Python and OS-level packages, your Dockerfile, and your plugins. The resulting image is then used to generate a set of Docker containers for each core Airflow component.
+If you've used the Astro CLI to develop locally, the process for deploying your DAGs to an Airflow Deployment on Astronomer should be equally familiar. The Astro CLI builds your DAGs into a Docker image alongside all the other files in your Astro project directory, including your Python and OS-level packages, your Dockerfile, and your plugins. The resulting image is then used to generate a set of Docker containers for each core Airflow component.
 
 For guidance on automating this process, refer to [Deploy to Astronomer via CI/CD](ci-cd.md). To learn how to add Python and OS-level packages or otherwise customize your Docker image, read [Customize your Image](customize-image.md).
 
@@ -61,7 +61,7 @@ For more specific CLI guidelines and commands, read [CLI Quickstart](install-cli
 
 ## Step 3: Deploy to Astronomer
 
-Finally, make sure you're in the correct Airflow project directory.
+Finally, make sure you're in the correct Astro project directory.
 
 When you're ready to deploy your DAGs, run:
 
@@ -69,7 +69,7 @@ When you're ready to deploy your DAGs, run:
 astro deploy
 ```
 
-This command returns a list of Airflow Deployments available in your Workspace and prompts you to pick one. Once this command is executed, all files in your Airflow project directory are built into a new Docker image and Docker containers for all Airflow components are restarted.
+This command returns a list of Airflow Deployments available in your Workspace and prompts you to pick one. Once this command is executed, all files in your Astro project directory are built into a new Docker image and Docker containers for all Airflow components are restarted.
 
 ## Step 4: Validate Your Changes
 

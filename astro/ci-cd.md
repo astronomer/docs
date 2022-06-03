@@ -160,7 +160,7 @@ This setup assumes the following prerequisites:
 
 ### Jenkins
 
-To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astronomer project:
+To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
 1. In your Jenkins pipeline configuration, add the following environment variables:
 
