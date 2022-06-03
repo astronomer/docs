@@ -39,18 +39,12 @@ Astronomer's Docker images are hosted on a public registry which isn't accessibl
 You can also set up your own registry using a dedicated registry service such as [JFrog Artifactory](https://jfrog.com/artifactory/). Regardless of which service you use, follow the product documentation to configure a private registry according to your organization's security requirements.
 
 ## Step 2: Fetch Images from Astronomer's Helm Template
+<!--Version-specific-->
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. Image tags are subject to change, even within existing versions, for example to resolve critical security issues, and therefore not listed here. To gather a list of exact images and tags required for your Astronomer Helm chart version, you can template the Helm chart and fetch the rendered image tags:
 
 ```bash
-$ helm template astronomer/astronomer --version 0.27 | grep "image: " | sed 's/^ *//g' | sort | uniq
-
-image: "quay.io/prometheus/node-exporter:v1.3.0"
-image: quay.io/astronomer/ap-alertmanager:0.23.0
-image: quay.io/astronomer/ap-astro-ui:0.27.5
-image: quay.io/astronomer/ap-base:3.15.0
-image: quay.io/astronomer/ap-cli-install:0.26.1
-...
+$ helm template astronomer/astronomer --version 0.29 | grep "image: " | sed 's/^ *//g' | sort | uniq
 ```
 
 Once you have this list of images, add them to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
@@ -268,13 +262,13 @@ Before completing this step, double-check that the following statements are true
 After this check, you can install the Astronomer Helm chart by running the following commands:
 
 ```bash
-curl -L https://github.com/astronomer/astronomer/archive/v0.27.1.tar.gz -o astronomer-0.27.1.tgz
+curl -L https://github.com/astronomer/astronomer/archive/v0.29.1.tar.gz -o astronomer-0.29.1.tgz
 # Alternatively, use helm pull
-helm pull astronomer/astronomer --version 0.27.1
+helm pull astronomer/astronomer --version 0.29.1
 
 # ... If necessary, copy to a place where you can access Kubernetes ...
 
-helm install astronomer -f config.yaml -n astronomer astronomer-0.27.1.tgz
+helm install astronomer -f config.yaml -n astronomer astronomer-0.29.1.tgz
 ```
 
 After these commands are finished running, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws-standard.md#step-10-verify-pods-are-up), [Azure](install-azure-standard.md#step-10-verify-all-pods-are-up), or [GCP](install-gcp-standard.md#step-10-verify-that-all-pods-are-up) installation guide.
