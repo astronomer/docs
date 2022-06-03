@@ -1,5 +1,5 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
-
+const versions = require('./software_versions.json')
 module.exports = {
   title: 'Astronomer Documentation',
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
@@ -27,8 +27,7 @@ module.exports = {
 
       // Optional: see doc section below
       appId: 'TTRQ0VJY4D',
-      inputSelector: '.DocSearch',
-      // Optional: Algolia search parameters
+      inputSelector: '.DocSearch',      // Optional: Algolia search parameters
       searchParameters: {
       },
 
@@ -60,12 +59,12 @@ module.exports = {
             {
               label: 'Cloud',
               to: '/astro/',
-              activeBaseRegex: 'astro/(?!cli)',
+              activeBaseRegex: 'astro(?!\/cli)',
             },
             {
               label: 'Astro CLI',
               to: 'astro/cli/overview',
-              activeBaseRegex: 'astro/cli',
+              activeBaseRegex: 'astro/cli+',
             },
           ],
         },
@@ -80,23 +79,27 @@ module.exports = {
             {
               label: '0.29 (Latest)',
               to: '/software/',
-              activeBaseRegex: 'software/(?!(0.28|0.27|0.26|0.25))',
+              activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
             },
             {
               label: '0.28',
               to: '/software/0.28/overview',
+              activeBaseRegex: '(software\/0.28)+',
             },
             {
               label: '0.27',
               to: '/software/0.27/overview',
+              activeBaseRegex: '(software\/0.27)+',
             },
             {
               label: '0.26',
               to: '/software/0.26/overview',
+              activeBaseRegex: '(software\/0.26)+',
             },
             {
               label: '0.25',
-              to: '/software/0.25/overview'
+              to: '/software/0.25/overview',
+              activeBaseRegex: '(software\/0.25)+',
             },
           ],
         },
