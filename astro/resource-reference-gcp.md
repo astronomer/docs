@@ -40,7 +40,7 @@ Astro supports the following GCP regions:
 - `us-central1` - Iowa, North America
 - `us-west1` - Oregon, North America
 - `us-east1` - South Carolina, North America
-- `use-east4` - Ashburn, Virginia, North America
+- `us-east4` - Virginia, North America
 - `europe-west4` - Netherlands, Europe
 
 Modifying the region of an existing Cluster on Astro is not supported. If you're interested in a GCP region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
