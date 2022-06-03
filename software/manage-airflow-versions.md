@@ -9,23 +9,21 @@ import {siteVariables} from '@site/src/versions';
 
 ## Overview
 
-On Astronomer, the process of pushing up your code to an individual Airflow Deployment involves customizing a locally built Docker image —— with your DAG code, dependencies, plugins, and so on —— that's then bundled, tagged, and pushed to your Docker Registry.
+On Astronomer, when you push your code to an individual Airflow Deployment your  locally built Docker image is bundled, tagged, and then pushed to your Docker Registry. In addition to the DAG code, dependencies, and plugins, the Docker image includes a `Dockerfile` that is automatically generated when you initialize an Astro project on Astronomer with the Astro CLI. 
 
-Included in that build is your `Dockerfile`, a file that is automatically generated when you initialize an Astro project on Astronomer with the Astro CLI. Every successful build on Astronomer must include a `Dockerfile` that references an Astronomer Certified or Astro Runtime Docker image. Astronomer Certified (AC) and Astro Runtime are production-ready distributions of Apache Airflow that mirror the open source project and undergo additional levels of testing and development. Astro Runtime provides an additional layer of differentiation and was introduced to Astronomer Software in v0.29.
+Every Astronomer build must include a `Dockerfile` that references an Astronomer Certified (AC) or Astro Runtime Docker image. AC and Astro Runtime Docker images are production-ready distributions of Apache Airflow that mirror the open source project and they undergo additional testing and development. Astro Runtime was introduced in Astronomer Software version 0.29.
 
-To upgrade your Airflow Deployment to a higher version of Airflow, there are three steps:
+To upgrade your Airflow Deployment to a later version of Airflow:
 
-1. Initialize the upgrade by selecting a new Airflow version via the Software UI or CLI.
-2. Change the FROM statement in your project's `Dockerfile` to reference an AC image that corresponds to the Airflow version indicated in Step 1.
-3. Deploy to Astronomer.
-
-> **Note:** For more thorough guidelines on customizing your image, see [Customize Your Image](customize-image.md).
+- Select a new Airflow version with the Software UI or CLI to initialize the upgrade.
+- Change the FROM statement in your project's `Dockerfile` to reference an AC or Astro Runtime image that corresponds to your current Airflow version. See [Customize Your Image](customize-image.md).
+- Deploy to Astronomer.
 
 ## Available Astronomer Image Versions
 
-New versions of Astronomer images are automatically pulled into the Software UI and CLI within 24 hours of their publication via a cron job that pulls from Astronomer's [update service](http://updates.astronomer.io/). In other words, you don't have to upgrade Astronomer in order to upgrade Airflow.
+A cron job automatically pulls new Astronomer image versions from the Astronomer [update service](http://updates.astronomer.io/) and adds them to the Software UI and CLI within 24 hours of their publication. You don't have to upgrade Astronomer to upgrade Airflow.
 
-> **Note:** If you don't want to wait for new versions of Astronomer images to appear on their own, you can manually trigger the cron job with the following Kubernetes command:
+> **Note:** If you don't want to wait for new Astronomer image versions, you can manually trigger the cron job with the following Kubernetes command:
 >
 > ```sh
 > kubectl create job --namespace astronomer --from=cronjob/astronomer-houston-update-airflow-check airflow-update-check-first-run
@@ -35,30 +33,29 @@ New versions of Astronomer images are automatically pulled into the Software UI 
 
 ## Step 1. Initialize the Upgrade Process
 
-The first step to upgrading your Deployment to a higher version of Apache Airflow is to indicate your intent to do so via the Software UI or CLI.
+The first step to upgrading your Deployment to a later version of Apache Airflow is to use the Software UI or CLI to indicate your intent.
 
-> **Note:** The Software UI and CLI will only make available versions of Airflow that are _higher_ than the version you're currently running in your `Dockerfile`. For example, Airflow `1.10.7` would not be available for an Airflow Deployment running `1.10.10`.
+> **Note:** The Software UI and CLI only provide Airflow versions that are _later_ than the version currently running in your `Dockerfile`. For example, Airflow `1.10.7` is not available for an Airflow Deployment running `1.10.10`.
 
-### via the Software UI
+### With the Software UI
 
-To initialize the Airflow upgrade process via the Software UI, navigate to **Deployment** > **Settings** > **Basics** > **Airflow Version**. Next to **Airflow Version**,
+1. Go to **Deployment** > **Settings** > **Basics** > **Airflow Version**.
+2. Select an Airflow version.
+3. Click **Upgrade**.
 
-1. Select your desired version of Airflow
-2. Click **Upgrade**
+![Airflow Upgrade with the Software UI](https://assets2.astronomer.io/main/docs/manage-airflow-versions/airflow-upgrade-astro-ui.gif)
 
-![Airflow Upgrade via Software UI](https://assets2.astronomer.io/main/docs/manage-airflow-versions/airflow-upgrade-astro-ui.gif)
+An upgrade doesn't interrupt or otherwise impact your Airflow Deployment or trigger a code change - it signals to Astronomer your _intent_ to upgrade.
 
-This action will NOT interrupt or otherwise impact your Airflow Deployment or trigger a code change - it is simply a signal to our platform that you _intend_ to upgrade such that we can guide your experience through the rest of the process.
+After you select a version, a message appears next to **Airflow Version** indicating that the upgrade is in progress.
 
-Once you select a version, you can expect to see a banner next to **Airflow Version** indicating that the upgrade is in progress. For a user upgrading from 1.10.7 to 1.10.12, that banner would read `Upgrade from 1.10.7 to 1.10.12 initiated…`
+> **Note:** To change the Airflow upgrade version, click **Cancel**, select a new version, and click **Upgrade**.
 
-> **Note:** If you'd like to change the version of Airflow you'd like to upgrade to, you can do so at anytime by clicking **Cancel**, re-selecting a new version and once again clicking **Upgrade**. More on that below.
+### With the Astro CLI
 
-### with the Astro CLI
+Run `$ astro auth login <base-domain>` to confirm you're authenticated.
 
-To use the Astro CLI to initialize the Airflow upgrade process, run `$ astro auth login <base-domain>` first to make sure you're authenticated .
-
-Once authenticated, grab the `Deployment ID` of the Airflow Deployment you'd like to upgrade by running:
+Run the following command to view your Airflow Deployment `Deployment ID`:
 
 ```
 astro deployment list
@@ -72,13 +69,13 @@ astro deployment list
  new-deployment-1-10-10-airflow-k8s-2            elementary-rotation-5522        ckgwdq8cs037169xtbt2rtu15     1.10.12
 ```
 
-With that `Deployment ID`, run:
+Copy the `Deployment ID` and run:
 
 ```
 astro deployment airflow upgrade --deployment-id=<deployment-id>
 ```
 
-This command will output a list of available versions of Airflow you can choose from and prompt you to pick one. For example, a user upgrading from Airflow 1.10.5 to Airflow 1.10.12 should see the following:
+This command lists the available Airflow versions you can select and prompts you for a selection. For example, a user upgrading from Airflow 1.10.5 to Airflow 1.10.12 should see the following:
 
 ```
 astro deployment airflow upgrade --deployment-id=ckguogf6x0685ewxtebr4v04x
@@ -94,9 +91,9 @@ astro deployment airflow upgrade --deployment-id=ckguogf6x0685ewxtebr4v04x
 The upgrade from Airflow 1.10.5 to 1.10.12 has been started. To complete this process, add an Airflow 1.10.12 image to your Dockerfile and deploy to Astronomer.
 ```
 
-As noted above, this action will NOT interrupt or otherwise impact your Airflow Deployment or trigger a code change - it is simply a signal to our platform that you _intend_ to upgrade such that we can guide your experience through the rest of the process.
+An upgrade doesn't interrupt or otherwise impact your Airflow Deployment or trigger a code change - it signals to Astronomer your _intent_ to upgrade.
 
-To complete the upgrade, all you have to do is add a corresponding AC image to your `Dockerfile`.
+Add an AC image to your `Dockerfile`.
 
 ## Step 2: Deploy a New Astronomer Image
 
@@ -203,7 +200,7 @@ Using the Astro CLI, run:
 astro deployment airflow upgrade --cancel --deployment-id=<deployment-id>
 ```
 
-For example, if a user cancels an initialized upgrade from Airflow 1.10.7 to Airflow 1.10.12 via the CLI, they would see the following:
+For example, if you cancel an initialized upgrade from Airflow 1.10.7 to Airflow 1.10.12 in the CLI, the following message appears:
 
 ```bash
 astro deployment airflow upgrade --cancel --deployment-id=ckguogf6x0685ewxtebr4v04x
@@ -225,6 +222,6 @@ To upgrade to the latest Astronomer Certified 2.3.0 patch fix, for example, you 
 
 In this case, that would be: `FROM quay.io/astronomer/ap-airflow:2.3.0-5-onbuild` (Debian).
 
-> **Note:** If you're pushing code to an Airflow Deployment via the Astro CLI and install a new Astronomer Certified image for the first time _without_ pinning a specific hotfix version, the latest version available will automatically be pulled.
+> **Note:** If you're pushing code to an Airflow Deployment using the Astro CLI and install a new Astronomer Certified image for the first time _without_ pinning a specific hotfix version, the latest version available will automatically be pulled.
 >
 > If a hotfix release becomes available _after_ you've already built an Astronomer Certified image for the first time, subsequent code pushes will _not_ automatically pull the latest corresponding hotfix. You must follow the process above to pin your image to a particular version.
