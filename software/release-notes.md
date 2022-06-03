@@ -17,6 +17,14 @@ We're committed to testing all Astronomer Software versions for scale, reliabili
 
 ## v0.29.0
 
+Release date: June 3, 2022
+
+### Bug Fixes 
+
+- Fixed an issue where you couldn't run Houston API queries for Deployments using `releaseName` and `label`
+
+## v0.29.0
+
 Release date: June 1, 2022
 
 ### Support for Astro Runtime Images
