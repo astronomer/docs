@@ -20,7 +20,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### Additional Improvements
 
-- You can now [create new GCP Clusters](create-cluster.md) `us-east4`
+- You can now [create new GCP Clusters](create-cluster.md) `us-east4`.
 
 ## May 26, 2022
 
