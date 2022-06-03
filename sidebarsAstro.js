@@ -166,7 +166,7 @@ module.exports = {
     {
       type: 'doc',
       label: 'Release Notes',
-      id: 'cli/cli-release-notes'
+      id: 'cli/release-notes'
     },
     {
     type: 'category',

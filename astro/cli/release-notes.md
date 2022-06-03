@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Release Notes'
 title: 'Astro CLI Release Notes'
-id: cli-release-notes
+id: release-notes
 description: Release notes for the Astro CLI.
 ---
 
@@ -13,7 +13,7 @@ If you have any questions or a bug to report, reach out to [Astronomer Support](
 
 ## Astro CLI v1.0.0
 
-Release date: May 27, 2022
+Release date: June 2, 2022
 
 ### A Shared CLI for All Astronomer Users
 

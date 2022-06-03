@@ -203,7 +203,7 @@ A new `astro` executable for the Astro CLI is now available. Complete this migra
 - You are an Astro user.
 - You're currently using the `astrocloud` CLI executable.
 
-For more information on Astro CLI v1.0.0, see [Astro CLI Release Notes](cli-release-notes.md).
+For more information on Astro CLI v1.0.0, see [Astro CLI Release Notes](cli/release-notes.md).
 
 ### Step 1: Uninstall `astrocloud`
 
@@ -248,7 +248,7 @@ To uninstall `astrocloud` on Linux:
 
 Once you've uninstalled the `astrocloud` executable, install the latest version of `astro` on your machine.
 
-For instructions, see [Install the CLI](configure-cli.md#install-the-cli.md).
+For instructions, see [Install the CLI](cli/configure-cli.md#install-the-cli).
 
 ### Step 3: Migrate Existing Astro Projects
 

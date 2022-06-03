@@ -25,7 +25,7 @@ To upgrade to a new version of Astro Runtime, you must have:
 
 - An [Astro project](create-project.md).
 - An [Astro Deployment](create-deployment.md).
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](cli/configure-cli.md#install-the-cli).
 
 :::info
 

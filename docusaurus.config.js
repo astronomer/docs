@@ -14,8 +14,10 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
     image: 'img/meta.png',
-    sidebar: {
-      autoCollapseCategories: true,
+    docs: {
+      sidebar: {
+        autoCollapseCategories: true,
+      },
     },
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',

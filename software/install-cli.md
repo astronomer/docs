@@ -51,7 +51,9 @@ brew install astronomer/tap/astro
 
 If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and version 1.0. To install this release run the following command:  
 
+```sh
 brew install astronomer/tap/astro@0.29.0
+```
 
 :::
 
@@ -120,7 +122,9 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and version 1.0. To install this release run the following command:  
 
+```sh
 curl -sSL install.astronomer.io | sudo bash -s -- v0.29.0
+```
 
 :::
 
