@@ -11,6 +11,29 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
 
+## Astro Runtime 5.0.3
+
+- Release date: June 4, 2022
+- Airflow version: 2.3.2
+
+### Support for Airflow 2.3.2
+
+Astro Runtime 5.0.3 includes same-day support for Airflow 2.3.2, a release that follows Airflow 2.3.1 with a collection of bug fixes.
+
+Fixes include:
+
+- Fix grid view with removed tasks; faster grid view for large DAGs ([#23947](https://github.com/apache/airflow/pull/23947))
+- Enable clicking on DAG owner in autocomplete dropdown ([#23804](https://github.com/apache/airflow/pull/23804))
+- Mask sensitive values for not-yet-running TIs ([#23807](https://github.com/apache/airflow/pull/23807))
+- Add cascade to `dag_tag` to `dag` foreign key ([#23444](https://github.com/apache/airflow/pull/23444))
+
+For more information, see the [Apache Airflow changelog](https://github.com/apache/airflow/releases/tag/2.3.2).
+
+### Additional Improvements
+
+- Update `astronomer-providers` to v1.4.0. For more information, see the [Astronomer Providers Changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id1).
+- Update `openlineage-airflow` to v0.9.0. For more information, see the [OpenLineage GitHub repository](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow).
+
 ## Astro Runtime 5.0.2
 
 - Release date: May 27, 2022
