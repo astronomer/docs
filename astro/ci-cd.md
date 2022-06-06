@@ -358,8 +358,9 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
          ASTRONOMER_KEY_SECRET: $ASTRONOMER_KEY_SECRET
       before_script:
        - apk add --update curl && rm -rf /var/cache/apk/*
+       - apk add bash
       script:
-       - curl -sSL install.astronomer.io | sudo bash -s
+       - curl -sSL install.astronomer.io | bash -s
        - astro deploy $ASTRONOMER_DEPLOYMENT_ID -f
       only:
        - main
