@@ -191,11 +191,11 @@ To complete this setup:
             - containerPort: 80
             volumeMounts:
             - name: astronomer-certified
-	      mountPath: /usr/share/nginx/html/astronomer-certified
-	      subPath: astronomer-certified.json
-	    - name: astronomer-runtime
-	      mountPath: /usr/share/nginx/html/astronomer-runtime
-	      subPath: astronomer-runtime.json
+              mountPath: /usr/share/nginx/html/astronomer-certified
+              subPath: astronomer-certified.json
+            - name: astronomer-runtime
+              mountPath: /usr/share/nginx/html/astronomer-runtime
+              subPath: astronomer-runtime.json
           volumes:
           - name: astronomer-certified
             configMap:
