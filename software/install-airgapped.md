@@ -267,7 +267,7 @@ Before completing this step, double-check that the following statements are true
 - You made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
 - You completed Steps 1 through 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guide.
 
-After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace <your-image-tag> with the version of Astronomer that you want to install:
+After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace `<your-image-tag>` with the version of Astronomer that you want to install:
 
 ```bash
 curl -L https://github.com/astronomer/astronomer/archive/v<your-image-tag>.tar.gz -o astronomer.tgz
