@@ -266,3 +266,24 @@ If you manually updated the `.astrocloud/config.yaml` file of an existing Astro 
 1. In your terminal, open your Astro project.
 2. Copy the contents from `.astrocloud/config.yaml` into `.astro/config.yaml`.
 3. Delete `.astrocloud/config.yaml` from your project.
+    
+### Step 5: Update CI/CD Scripts (_Optional_)
+    
+If you have an existing CI/CD script referencing the old `brew install astronomer/cloud/astrocloud` and `astrocloud deploy` commands, update it to reflect the updated `brew install astronomer/tap/astro` and [astro deploy](https://docs.astronomer.io/astro/cli/astro-deploy) commands. For example:
+
+ **Before**:
+
+
+    - name: Deploy to Astro
+      run: |
+        brew install astronomer/cloud/astrocloud
+        astrocloud deploy ${{ secrets.DEPLOYMENT_ID }}
+
+
+**After:**
+
+    - name: Deploy to Astro
+      run: |
+        brew install astronomer/tap/astro
+        astro deploy ${{ secrets.DEPLOYMENT_ID }}
+
