@@ -22,17 +22,17 @@ Astro Runtime 5.0.3 includes same-day support for Airflow 2.3.2, a release that 
 
 Fixes include:
 
-- Fix grid view with removed tasks; faster grid view for large DAGs ([#23947](https://github.com/apache/airflow/pull/23947))
+- Improvements to the Grid view of the Airflow UI, including faster load times for large DAGs and a fix for an issue where some tasks would not render properly ([#23947](https://github.com/apache/airflow/pull/23947))
 - Enable clicking on DAG owner in autocomplete dropdown ([#23804](https://github.com/apache/airflow/pull/23804))
-- Mask sensitive values for not-yet-running TIs ([#23807](https://github.com/apache/airflow/pull/23807))
+- Mask sensitive values for task instances that are not yet running ([#23807](https://github.com/apache/airflow/pull/23807))
 - Add cascade to `dag_tag` to `dag` foreign key ([#23444](https://github.com/apache/airflow/pull/23444))
 
-For more information, see the [Apache Airflow changelog](https://github.com/apache/airflow/releases/tag/2.3.2).
+For more information, see the [changelog for Apache Airflow 2.3.2](https://github.com/apache/airflow/releases/tag/2.3.2).
 
 ### Additional Improvements
 
 - Update `astronomer-providers` to v1.4.0. For more information, see the [Astronomer Providers Changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id1).
-- Update `openlineage-airflow` to v0.9.0. For more information, see the [OpenLineage GitHub repository](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow).
+- Update `openlineage-airflow` to v0.9.0. This release includes a fix for an issue present in v0.7.1, v0.8.1, and v0.8.2 where some tasks run with the Snowflake Operator would deadlock and not execute. For more information, see the [OpenLineage GitHub repository](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow).
 
 ## Astro Runtime 5.0.2
 
