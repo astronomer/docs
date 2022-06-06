@@ -11,6 +11,14 @@ This document provides a summary of all changes made to the [Astro CLI](cli/get-
 
 If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io)
 
+## Astro CLI v1.0.1
+
+Release date: June 6, 2022
+
+### Patch to Fix Issues with The Parse and Pytest Comamnd
+
+This patch fixes an issue wehere the `dev parse` and `dev pytest` command where failing to execute for Some users. This patach also fixes parse process that happens during `astro deploy`.
+
 ## Astro CLI v1.0.0
 
 Release date: June 2, 2022
