@@ -27,6 +27,7 @@ To complete this setup, you need:
 - Private Kubernetes.
 - A Postgres instance accessible from that environment.
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
+- A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
 
 ## Step 1: Configure a Private Docker Registry
 
@@ -39,35 +40,22 @@ Astronomer's Docker images are hosted on a public registry which isn't accessibl
 You can also set up your own registry using a dedicated registry service such as [JFrog Artifactory](https://jfrog.com/artifactory/). Regardless of which service you use, follow the product documentation to configure a private registry according to your organization's security requirements.
 
 ## Step 2: Fetch Images from Astronomer's Helm Template
-**Note**: Astronomer recommends creating a YAML configuration file before completing this task. Sample `config.yaml` files are available here: [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), [GCP](install-gcp-standard.md).
 
-**Note**: If you utilize features such as [third party ingress controllers](./third-party-ingress-controllers.md), you may need to synchronize other images not listed here.
+The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
 
-The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. 
-Image tags are subject to change, even within existing versions. 
-To gather a list of exact images and tags required for your Astronomer Helm chart version, you can template the Helm chart and fetch the rendered image tags:
+1. Run the following command to template the Astronomer Helm chart and fetch its rendered image tags:
 
 ```bash
 $ helm template astronomer/astronomer | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq                          
-quay.io/astronomer/ap-alertmanager:0.23.0
-quay.io/astronomer/ap-astro-ui:0.28.7
-quay.io/astronomer/ap-base:3.15.0-3
-quay.io/astronomer/ap-cli-install:0.26.1
-quay.io/astronomer/ap-commander:0.28.1
-...
 ```
 
-also - you will need to synchronize the images for the Airflow chart
-```shell
-$ helm template astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq
-quay.io/astronomer/ap-airflow:2.0.0-buster
-quay.io/astronomer/ap-pgbouncer-exporter:0.13.0
-quay.io/astronomer/ap-pgbouncer:1.16.1
-quay.io/astronomer/ap-redis:6.2.6
-...
-```
+2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
 
-Once you have this list of images, add them to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
+    ```shell
+    $ helm template astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true     --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e     's/image:[ ]//' -e 's/^ *//g' | sort | uniq
+    ```
+
+These commands generate a list of images required for your version of Astronomer. Add these images to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
 
 > **Note:** If you have already enabled/disabled Astronomer platform components in your `config.yaml`, you can pass `-f/--values config.yaml` to `helm template` to print a list specific to your `config.yaml` configuration.
 
@@ -165,71 +153,71 @@ To complete this setup:
 
 1. Host an updates JSON in a Kubernetes configmap by running the following commands:
 
-```bash
-$ curl -L https://updates.astronomer.io/astronomer-certified --output astronomer-certified.json
-$ kubectl create configmap astronomer-certified --from-file=astronomer-certified.json=./astronomer-certified.json -n astronomer
-```
+    ```bash
+    $ curl -L https://updates.astronomer.io/astronomer-certified --output astronomer-certified.json
+    $ kubectl create configmap astronomer-certified --from-file=astronomer-certified.json=./astronomer-certified.json -n astronomer
+    ```
 
-2. Add an Nginx deployment and service to a new file named `nginx-astronomer-certified.yaml`:
+2. Add an Nginx deployment and service configuration to a new file named `nginx-astronomer-certified.yaml`:
 
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: astronomer-certified
-  namespace: astronomer
-spec:
-  strategy:
-    type: Recreate
-  selector:
-    matchLabels:
-      app: astronomer-certified
-  template:
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
     metadata:
-      labels:
-        app: astronomer-certified
+      name: astronomer-certified
+      namespace: astronomer
     spec:
-      containers:
-      - name: astronomer-certified
-        image: 012345678910.dkr.ecr.us-east-1.amazonaws.com/nginx:stable # Replace with own image
-        resources:
-          requests:
-            memory: "32Mi"
-            cpu: "100m"
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: astronomer-certified
-          mountPath: /usr/share/nginx/html
-      volumes:
-      - name: astronomer-certified
-        configMap:
-          name: astronomer-certified
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: astronomer-certified
-  namespace: astronomer
-spec:
-  type: ClusterIP
-  selector:
-    app: astronomer-certified
-  ports:
-  - port: 80
-    targetPort: 80
-```
+      strategy:
+        type: Recreate
+      selector:
+        matchLabels:
+          app: astronomer-certified
+      template:
+        metadata:
+          labels:
+            app: astronomer-certified
+        spec:
+          containers:
+          - name: astronomer-certified
+            image: 012345678910.dkr.ecr.us-east-1.amazonaws.com/nginx:stable # Replace with own image
+            resources:
+              requests:
+                memory: "32Mi"
+                cpu: "100m"
+              limits:
+                memory: "128Mi"
+                cpu: "500m"
+            ports:
+            - containerPort: 80
+            volumeMounts:
+            - name: astronomer-certified
+              mountPath: /usr/share/nginx/html
+          volumes:
+          - name: astronomer-certified
+            configMap:
+              name: astronomer-certified
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: astronomer-certified
+      namespace: astronomer
+    spec:
+      type: ClusterIP
+      selector:
+        app: astronomer-certified
+      ports:
+      - port: 80
+        targetPort: 80
+    ```
 
     Note the Docker image in the deployment and ensure that this is also accessible from within your environment.
 
 3. Save this file and apply it to your cluster by running the following command:
 
-```sh
-kubectl apply -f nginx-astronomer-certified.yaml
-```
+    ```sh
+    kubectl apply -f nginx-astronomer-certified.yaml
+    ```
 
     The updates JSON will be accessible by the service name from pods in the Kubernetes cluster via `http://astronomer-certified.astronomer.svc.cluster.local/astronomer-certified.json`.
 
@@ -237,25 +225,25 @@ To validate if the updates JSON is accessible you have several options:
 
 - If an image with `curl` is available in your network, you can run:
 
-```bash
-$ kubectl run --rm -it [container name] --image=[image] --restart=Never -- /bin/sh
-$ curl http://astronomer-certified.astronomer.svc.cluster.local/astronomer-certified.json
-```
+    ```bash
+    $ kubectl run --rm -it [container name] --image=[image] --restart=Never -- /bin/sh
+    $ curl http://astronomer-certified.astronomer.svc.cluster.local/astronomer-certified.json
+    ```
 
 - If you have `curl` installed on your client machine:
 
-```bash
-$ kubectl proxy
-# In a separate terminal window:
-$ curl http://localhost:8001/api/v1/namespaces/astronomer/services/astronomer-certified/astronomer-certified.json
-```
+    ```bash
+    $ kubectl proxy
+    # In a separate terminal window:
+    $ curl http://localhost:8001/api/v1/namespaces/astronomer/services/astronomer-certified/astronomer-certified.json
+    ```
 
 - Complete the entire Software installation, then use one of the `astro-ui` pods which include `bash` and `curl`:
 
-```bash
-$ kubectl exec -it astronomer-astro-ui-7cfbbb97fd-fv8kl -n=astronomer -- /bin/bash
-$ curl http://astronomer-certified.astronomer.svc.cluster.local/astronomer-certified.json
-```
+    ```bash
+    $ kubectl exec -it astronomer-astro-ui-7cfbbb97fd-fv8kl -n=astronomer -- /bin/bash
+    $ curl http://astronomer-certified.astronomer.svc.cluster.local/astronomer-certified.json
+    ```
 
 No matter what option you choose, the commands that you run should return the updates JSON if the service was configured correctly.
 
@@ -279,17 +267,16 @@ Before completing this step, double-check that the following statements are true
 - You made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
 - You completed Steps 1 through 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guide.
 
-After this check, you can install the Astronomer Helm chart by running the following commands:
+After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace <your-image-tag> with the version of Astronomer that you want to install:
 
-*NOTE*: make sure to change the [version to the correct tag](https://github.com/astronomer/astronomer/tags) for your installation 
 ```bash
-curl -L https://github.com/astronomer/astronomer/archive/v<TAG>.tar.gz -o astronomer.tgz
-# Alternatively, use helm pull
+curl -L https://github.com/astronomer/astronomer/archive/v<your-image-tag>.tar.gz -o astronomer.tgz
+
+# Alternatively, use helm pull to pull the latest version of Astronomer
 helm pull astronomer/astronomer
 
 # ... If necessary, copy to a place where you can access Kubernetes ...
-
 helm install astronomer -f config.yaml -n astronomer astronomer.tgz
 ```
 
-After these commands are finished running, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws-standard.md#step-10-verify-pods-are-up), [Azure](install-azure-standard.md#step-10-verify-all-pods-are-up), or [GCP](install-gcp-standard.md#step-10-verify-that-all-pods-are-up) installation guide.
+After these commands finish, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws-standard.md#step-10-verify-pods-are-up), [Azure](install-azure-standard.md#step-10-verify-all-pods-are-up), or [GCP](install-gcp-standard.md#step-10-verify-that-all-pods-are-up) installation guide.
