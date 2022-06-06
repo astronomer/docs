@@ -12,9 +12,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Astro Runtime Version**: 5.0.1 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 5.0.3 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.5.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.0.0 ([Release notes](cli/release-notes.md))
+
+## June 2, 2022
+
+### Support for the `us-east4` GCP Region
+
+You can now [create an Astro Cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
+
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
 
 ## May 26, 2022
 

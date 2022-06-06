@@ -47,7 +47,7 @@ $ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
 $ brew install astronomer/tap/astro
 
 # Build your Astro project into a Docker image and push the image to your Deployment
-$ astro deploy <your-deployment-id>
+$ astro deploy <your-deployment-id> -f
 ```
 
 :::info
@@ -90,7 +90,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }} -f
     ```
 
 ### GitHub Actions (Multiple Branches)
@@ -141,7 +141,7 @@ This setup assumes the following prerequisites:
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }}
+            astro deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }} -f
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
@@ -155,7 +155,7 @@ This setup assumes the following prerequisites:
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
+            astro deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }} -f
     ```
 
 ### Jenkins
