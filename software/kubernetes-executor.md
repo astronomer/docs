@@ -5,7 +5,7 @@ id: kubernetes-executor
 description: Run and configure the Kubernetes Executor on Astronomer.
 ---
 
-Apache Airflow's [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html) relies on a fixed single Pod that dynamically delegates work and resources. For each task that needs to run, the Executor talks to the Kubernetes API to dynamically launch Pods which terminate when that task is completed.
+The Apache Airflow [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html) relies on a fixed single Pod that dynamically delegates work and resources. For each task that needs to run, the Executor talks to the Kubernetes API to dynamically launch Pods which terminate when that task is completed.
 
 This enables the Executor to scale depending on how many Airflow tasks you're running at a given time. It also means you can configure the following for each individual Airflow task:
 
@@ -13,9 +13,11 @@ This enables the Executor to scale depending on how many Airflow tasks you're ru
 - Service accounts
 - Airflow image
 
-To configure these resources for each pod, you configure a pod template. Read this guide to learn how to configure a pod template and apply it to both Airflow Deployments and individual Airflow tasks. For more information on configuring pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
+To configure these resources for each pod, you configure a pod template. For more information on configuring pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
 
-Note that you must have an Airflow Deployment on Astronomer running with the Kubernetes Executor to follow this setup. For more information on configuring an Executor, read [Configure a Deployment](configure-deployment.md). To learn more about different Executor types, read [Airflow Executors Explained](https://www.astronomer.io/guides/airflow-executors-explained).
+## Prerequisites
+
+You must have an Airflow Deployment on Astronomer running with the Kubernetes Executor. For more information on configuring an Executor, see [Configure a Deployment](configure-deployment.md). To learn more about different Executor types, see [Airflow Executors Explained](https://www.astronomer.io/guides/airflow-executors-explained).
 
 ## Configure the Kubernetes Executor Using Pod Templates
 
