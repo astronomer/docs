@@ -55,7 +55,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::info
 
-  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace. Make sure to specify different custom registries using `--docker-server`. You don't need to add the annotation if you're not synccing secrets between Deployments.
+  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace. Make sure to specify different custom registries using `--docker-server`. If you don't need to synch your secrets between deployments, you don't need to add the secret annotation.
 
   :::
 
