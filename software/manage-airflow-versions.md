@@ -23,7 +23,6 @@ A cron job automatically pulls new Astronomer image versions from the Astronomer
 
 If you don't want to wait for new Astronomer image versions, you can manually trigger the cron job with the following Kubernetes command:
 
->
 > ```sh
 > kubectl create job --namespace astronomer --from=cronjob/astronomer-houston-update-airflow-check airflow-update-check-first-run
 > ```
