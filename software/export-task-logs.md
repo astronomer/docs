@@ -36,7 +36,7 @@ You can use a logging sidecar container to collect and export logs. In this impl
 
 - Each container running an Airflow component for a Deployment receives its own [Vector](https://vector.dev/) sidecar.
 - Task logs are written to a shared directory.
-- The Vector sidecar reads logs from the shared directory and writes them to ElasticSearch .
+- The Vector sidecar reads logs from the shared directory and writes them to ElasticSearch.
 
 This implementation is recommended for organizations that:
 
