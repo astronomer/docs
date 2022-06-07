@@ -147,7 +147,7 @@ Open the Airflow UI and confirm that you're running the correct Airflow version.
 
     Port 8080 is the default. To change this settiong, see [this forum post](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
 
-2. Go to `About` > `Version`. 
+2. Go to **About** > **Version**. 
 
 #### On Astronomer
 
