@@ -34,7 +34,7 @@ For example, consider the Astronomer Commander service, which controls creating,
 
 To create a namespace pool you have the following options:
 
-- Delegate the creation of each namespace, including roles and rolebindings, to the Astronomer helm chart. This option is suitable for most Organizations.
+- Delegate the creation of each namespace, including roles and rolebindings, to the Astronomer helm chart. This option is suitable for most organizations.
 - Create each namespace manually, including roles and rolebindings. This option is suitable if you need to further restrict Astronomer Kubernetes resource permissions. However, using this methodology to limit permissions can prevent Deployments from functioning as expected.
 
 ## Prerequisites
