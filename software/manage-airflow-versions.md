@@ -157,7 +157,7 @@ In the Software UI, go to the Airflow Deployment page.
 
 ## Cancel Airflow Upgrade Initialization
 
-You can cancel an Airflow Deployment upgrade at any time if you have NOT changed the Astronomer image in your `Dockerfile` and deployed it.
+You can cancel an Airflow Deployment upgrade at any time if you haven't yet changed the Astronomer image in your `Dockerfile` and deployed it.
 
 In the Software UI, select **Cancel** next to **Airflow Version**.
 
