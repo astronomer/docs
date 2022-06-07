@@ -181,7 +181,7 @@ This setup assumes the following prerequisites:
 
 When building images that consume secrets or build-time arguments, special considerations have to be made for setting up GitHub Actions workflows. The images are build in two stages to allow extra options to be set during the first build. Some examples of custom images that are built in two stages can be found in [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources).
 
-This setup assumes the following prerequisites:
+#### Prerequisites
 
 - You have completed the instructions to [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources) and can build the image locally.
 - If installing from a private GitHub Repo, you have access to the private key file used to authenticate to GitHub.
@@ -240,8 +240,8 @@ OR
               github=${{ env.SSH_AUTH_SOCK }}
         - name: Deploy to Astro
           run: |
-            brew install astronomer/cloud/astrocloud
-            astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+            brew install astronomer/tap/astro
+            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
     If installing from a private PyPi Index, add the following steps:
@@ -256,8 +256,8 @@ OR
               PIP_EXTRA_INDEX_URL=${{ secrets.PIP_EXTRA_INDEX_URL }}
         - name: Deploy to Astro
           run: |
-            brew install astronomer/cloud/astrocloud
-            astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+            brew install astronomer/tap/astro
+            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
 :::info
