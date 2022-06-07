@@ -4,8 +4,6 @@ title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
 
-This guide provides steps for configuring and running the KubernetesPodOperator on DAGs deployed to Astro.
-
 The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of Apache Airflow's most powerful operators. Similar to the Kubernetes Executor, this operator talks to the Kubernetes API to dynamically launch a Pod in Kubernetes for each task that needs to run and terminates each Pod once the task is completed. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers. The KubernetesPodOperator enables you to:
 
 - Execute a custom Docker image per task with Python packages and dependencies that would otherwise conflict with the rest of your Deployment's dependencies. This includes Docker images in a private registry or repository.

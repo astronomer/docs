@@ -5,9 +5,7 @@ id: create-project
 description: Get started on Astronomer Software.
 ---
 
-## Overview
-
-This guide will help you get started on Astronomer Software by walking through the process of creating a project and running it in a local Airflow environment.
+This is where you'll find information about creating a project and running it in a local Airflow environment.
 
 ## Prerequisites
 

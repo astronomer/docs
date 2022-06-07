@@ -5,8 +5,6 @@ id: export-task-logs
 description: Configure how Astronomer exports task logs to your ElasticSearch instance.
 ---
 
-## Overview
-
 Because Software Deployments run on Kubernetes Pods that are ephemeral by nature, Airflow task logs must be stored in a logging backend to ensure they can continue to be accessed even after your Pods terminate. By default, Astronomer uses [Fluentd](https://www.fluentd.org/) to collect task logs and export them to an ElasticSearch instance.
 
 To have more control over how your system reads your Airflow task logs, you can configure how Astronomer collects Deployment task logs and exports them to ElasticSearch.

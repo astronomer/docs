@@ -7,8 +7,6 @@ description: Links to all current and previous versions of Astronomer Software d
 
 <!--version-specific-->
 
-## Overview
-
 This document lists all available versions of Astronomer Software documentation, organized by their current support status.
 
 While only maintained documentation sets appear under the Astronomer Software documentation menu, Astronomer preserves all versions for historical reference. The support timeline for a given set of documentation is the same as the support timeline for the corresponding version of Astronomer Software.

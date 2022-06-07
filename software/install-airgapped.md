@@ -5,8 +5,6 @@ description: "Infrastructure considerations and Helm configuration to install As
 id: install-airgapped
 ---
 
-## Overview
-
 By default, the Software installation process requires accessing public repositories to download various components:
 
 - Docker images from `quay.io/astronomer`, `docker.io`, and `gcr.io`

@@ -5,8 +5,6 @@ id: release-lifecycle-policy
 description: Astronomer's release and lifecycle policy for Astronomer Software.
 ---
 
-## Overview
-
 Astronomer supports a variety of policies that drives the naming, release cadence, and maintenance commitments associated with all published software.
 
 This document offers guidelines on the version lifecycle of Astronomer Software. It includes a description of:

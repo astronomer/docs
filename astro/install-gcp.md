@@ -5,9 +5,7 @@ id: install-gcp
 description: Get started on Astro by creating your first Astro Cluster on Google Cloud Platform (GCP).
 ---
 
-## Overview
-
-This guide provides steps for getting started with Astro on Google Cloud Platform (GCP). Below, you'll find instructions for how to complete the Astro install process, including prerequisites and the steps required for our team to provision resources in your network.
+This is where you'll find instructions for completing the Astro installation process, including prerequisites and the steps required for our team to provision resources in your network.
 
 At a high-level, we'll ask that you come prepared with a new Google Cloud project. From there, you can expect to:
 

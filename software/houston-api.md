@@ -5,15 +5,13 @@ id: houston-api
 description: Use the GraphQL Playground to interact with Astronomer Software's API.
 ---
 
-## Overview
-
-Astronomer's Houston API is the source of truth across the entire Astronomer platform.
+The Astronomer Houston API is the source of truth across the entire Astronomer platform.
 
 For Astronomer Software users, our API is an easy way to do any of the following:
 
-1. Query the platform's database for information about a user, Workspace, or Deployment
-2. Make changes to the platform's database (with the right permissions)
-3. Perform CRUD operations on entities scoped to the Astronomer platform, including Airflow deployments, workspaces, and users.
+- Query the platform's database for information about a user, Workspace, or Deployment
+- Make changes to the platform's database (with the right permissions)
+- Perform CRUD operations on entities scoped to the Astronomer platform, including Airflow deployments, workspaces, and users.
 
 For example, you can:
 - Delete a deployment

@@ -5,8 +5,6 @@ id: upgrade-to-0-28
 description: "How to upgrade the Astronomer Software Platform."
 ---
 
-## Overview
-
 Astronomer releases are made generally available to Software customers on a quarterly basis as part of a long-term support (LTS) release model.
 
 This guide provides steps for upgrading your Astronomer Software platform from v0.25.x to v0.28.x, which is the latest available LTS release.

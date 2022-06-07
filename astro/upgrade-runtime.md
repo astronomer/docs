@@ -7,8 +7,6 @@ description: Upgrade your Deployment's version of Astro Runtime.
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 New versions of Astro Runtime are released regularly to support new functionality from both Astro and the Apache Airflow open source project. To take advantage of new features as well as bug and security fixes, we recommend regularly upgrading Astro Runtime as new versions are released.
 
 Follow this guide to upgrade Astro Runtime locally or for a Deployment on Astro. You can use these steps to upgrade to any major, minor, or patch version of Astro Runtime.

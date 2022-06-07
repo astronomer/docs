@@ -8,8 +8,6 @@ description: Create a new Astro Cluster for your Organization.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Overview
-
 The Astro install typically starts with 1 Cluster per Organization. Depending on your use case, however, your team can choose to configure multiple Astro Clusters. This could enable a few benefits, including:
 
 - Clusters in different regions

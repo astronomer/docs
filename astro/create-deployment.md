@@ -5,8 +5,6 @@ id: create-deployment
 description: Learn how to create an Astro Deployment.
 ---
 
-## Overview
-
 A Deployment on Astro is an instance of Astro Runtime that is powered by the core components of Apache Airflow. This includes: the Airflow Webserver, the Triggerer, a Postgres metadata database, one or more Schedulers, and one or more workers. Every Deployment is hosted on a single Astro Cluster with its own dedicated resources and you can customize it to meet the unique requirements of your Organization. Every Astro Cluster operates with a primary database that hosts the individual databases for each Deployment.
 
 ## Step 1: Select a Workspace

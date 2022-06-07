@@ -5,8 +5,6 @@ id: environment-variables
 description: Manage environment variables on Astronomer Software.
 ---
 
-## Overview
-
 Environment Variables on Astronomer can be used to set both Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) or custom values, which are then applied to your Airflow Deployment either locally or on Astronomer.
 
 Environment Variables can be used to set any of the following (and much more):

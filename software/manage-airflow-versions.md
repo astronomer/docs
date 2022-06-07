@@ -7,8 +7,6 @@ description: Adjust and upgrade Airflow versions on Astronomer Software.
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 On Astronomer, the process of pushing up your code to an individual Airflow Deployment involves customizing a locally built Docker image —— with your DAG code, dependencies, plugins, and so on —— that's then bundled, tagged, and pushed to your Docker Registry.
 
 Included in that build is your `Dockerfile`, a file that is automatically generated when you initialize an Astro project on Astronomer with the Astro CLI. Every successful build on Astronomer must include a `Dockerfile` that references an Astronomer Certified or Astro Runtime Docker image. Astronomer Certified (AC) and Astro Runtime are production-ready distributions of Apache Airflow that mirror the open source project and undergo additional levels of testing and development. Astro Runtime provides an additional layer of differentiation and was introduced to Astronomer Software in v0.29.

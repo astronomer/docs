@@ -5,8 +5,6 @@ id: airflow-alerts
 description: Set up email alerts for Airflow task successes and failures.
 ---
 
-## Overview
-
 For all teams, incorporating an alerting framework is critical to the health of your data pipelines. In addition to the observability functionality provided on Astro, Airflow's alerting framework includes support for:
 
 - Slack notifications

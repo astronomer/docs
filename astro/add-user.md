@@ -5,8 +5,6 @@ id: add-user
 description: Add a user to a either a Workspace or an Organization on Astro.
 ---
 
-## Overview
-
 This guide provides steps for adding a user to an Astro Workspace. As a Workspace Admin or Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Organization.
 
 ## Prerequisites

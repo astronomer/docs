@@ -5,8 +5,6 @@ id: secrets-backend
 description: Configure a secrets backend on Astronomer Software to store Airflow variables and connections in a centralized place.
 ---
 
-## Overview
-
 Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
 
 Integrating a secrets backend tool on Astronomer Software allows you to:

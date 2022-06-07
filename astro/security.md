@@ -5,8 +5,6 @@ id: security
 description: Learn how Astro responds to and implements a variety of security concepts
 ---
 
-## Overview
-
 Astro is a fully managed data orchestration service that allows you to run your data pipelines in your public cloud account on Amazon Web Services (AWS) or Google Cloud Platform (GCP), respecting the need to keep your data private, secure, and within corporate boundaries.
 
 The Astro architecture is secure by default, using encryption in transit, encryption at rest, strong cryptographic protocols, authentication, and role-based access control for authorization to your data pipelines, with a host of flexible and secure connectivity options to your critical data sources. This page serves as a summary of all Astro features that ensure the security and reliability of your systems.
