@@ -32,9 +32,9 @@ If you get a message indicating that a job already exists, delete the job and re
 
 ## Step 1. Initialize the Upgrade Process
 
-An upgrade doesn't interrupt or otherwise impact your Airflow Deployment or trigger a code change - it signals to Astronomer your _intent_ to upgrade.
+An upgrade doesn't interrupt or otherwise impact your Airflow Deployment. It only signals to Astronomer your intent to upgrade.
 
-The Software UI and CLI only provide Airflow versions that are _later_ than the version currently running in your `Dockerfile`. For example, Airflow `1.10.7` is not available for an Airflow Deployment running `1.10.10`.
+The Software UI and CLI only provide Airflow versions that are later than the version currently running in your `Dockerfile`. For example, Airflow `1.10.7` is not available for an Airflow Deployment running `1.10.10`.
 
 ### With the Software UI
 
