@@ -113,7 +113,7 @@ To test a new version of Astronomer Certified on your local machine, save all of
 $ astro dev stop
 ```
 
-All 3 running Docker containers for each of the Airflow components (Webserver, Scheduler, Postgres) stop. 
+All 4 running Docker containers for each of the Airflow components (Webserver, Scheduler, Postgres, Triggerer) stop. 
 
 Run the following command to apply your changes:
 
@@ -147,7 +147,7 @@ Open the Airflow UI and confirm that you're running the correct Airflow version.
 
     Port 8080 is the default. To change this settiong, see [this forum post](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
 
-2. Go to `About` > `Version`. 
+2. Go to **About** > **Version**. 
 
 #### On Astronomer
 
