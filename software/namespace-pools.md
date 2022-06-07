@@ -15,7 +15,7 @@ When you configure a pool of pre-created namespaces, Astronomer users are requir
 
 A pre-created namespace pool provides the following benefits:
 
-- It limits the cluster-level permissions your organization needs to give to Astronomer Software.  Astronomer Software requires permissions only for the individual namespaces you configure. Pre-created namespaces are recommended when your organization does not want to give Astronomer Software cluster-level permissions in a multi-tenant cluster.
+- It limits the cluster-level permissions your organization needs to give to Astronomer Software. Astronomer Software requires permissions only for the individual namespaces you configure. Pre-created namespaces are recommended when your organization does not want to give Astronomer Software cluster-level permissions in a multi-tenant cluster.
 - It can reduce costs and resource consumption. By default, Astronomer Software allows users to create Deployments until there is no more unreserved space in your cluster. If you use a pool, you can limit the number of active Deployments running at a time. This is especially important if you run other Elastic workloads on your Software cluster and need to prevent users from accidentally claiming your entire pool of unallocated resources.
 
 :::info Technical Details
