@@ -79,6 +79,11 @@ astronomer:
     houston:
         deployments:
           helm:
+            runtimeImages:
+              airflow:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
+              flower:
+                repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/astro-runtime
             airflow:
               defaultAirflowRepository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-airflow
               images:
@@ -234,7 +239,8 @@ To validate if the updates JSON is accessible you have several options:
 
     ```bash
     $ kubectl run --rm -it [container name] --image=[image] --restart=Never -- /bin/sh
-    $ curl http://astronomer-releases.astronomer.svc.cluster.local/astronomer-certified.json
+    $ curl http://astronomer-releases.astronomer.svc.cluster.local/astronomer-certified
+    $ curl http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
     ```
 
 - If you have `curl` installed on your client machine:
@@ -242,14 +248,16 @@ To validate if the updates JSON is accessible you have several options:
     ```bash
     $ kubectl proxy
     # In a separate terminal window:
-    $ curl http://localhost:8001/api/v1/namespaces/astronomer/services/astronomer-releases/astronomer-certified.json
+    $ curl http://localhost:8001/api/v1/namespaces/astronomer/services/astronomer-releases/astronomer-certified
+    $ curl http://localhost:8001/api/v1/namespaces/astronomer/services/astronomer-releases/astronomer-runtime
     ```
 
 - Complete the entire Software installation, then use one of the `astro-ui` pods which include `bash` and `curl`:
 
     ```bash
     $ kubectl exec -it astronomer-astro-ui-7cfbbb97fd-fv8kl -n=astronomer -- /bin/bash
-    $ curl http://astronomer-releases.astronomer.svc.cluster.local/astronomer-certified.json
+    $ curl http://astronomer-releases.astronomer.svc.cluster.local/astronomer-certified
+    $ curl http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
     ```
 
 No matter what option you choose, the commands that you run should return the updates JSON if the service was configured correctly.
