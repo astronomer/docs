@@ -59,27 +59,13 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
     new-deployment-1-10-10-airflow-k8s-2            elementary-rotation-5522        ckgwdq8cs037169xtbt2rtu15     1.10.12
     ```
 
-3. Copy the `Deployment ID` and run:
+3. Copy the `Deployment ID` and run the following command to list the available Airflow versions:
 
     ```
     astro deployment airflow upgrade --deployment-id=<deployment-id>
     ```
 
-    This command lists the available Airflow versions you can select and prompts you for a selection. For example, a user upgrading from Airflow 1.10.5 to Airflow 1.10.12 has the following options:
-
-    ```
-    astro deployment airflow upgrade --deployment-id=ckguogf6x0685ewxtebr4v04x
-    #     AIRFLOW VERSION
-    1     1.10.7
-    2     1.10.10
-    3     1.10.12
-
-    >
-    NAME                  DEPLOYMENT NAME       ASTRO       DEPLOYMENT ID                 AIRFLOW VERSION
-    Astronomer Stagings   new-velocity-8501     v0.17.0     ckguogf6x0685ewxtebr4v04x     1.10.12
-
-    After you make a selection, the upgrade from Airflow 1.10.5 to 1.10.12 is started. To complete this process, add an Airflow 1.10.12 image to your Dockerfile and deploy to Astronomer.
-    ```
+4. Enter the Airflow version you want to upgrade to and press `Enter`.
 
 ## Step 2: Deploy a New Astronomer Image
 
