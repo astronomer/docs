@@ -77,6 +77,7 @@ This configuration automatically pulls most Docker images required in the Astron
 ```yaml
 astronomer:
     houston:
+      config:
         deployments:
           helm:
             runtimeImages:
