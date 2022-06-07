@@ -44,42 +44,42 @@ The Software UI and CLI only provide Airflow versions that are _later_ than the 
 
 ### With the Astro CLI
 
-Run `$ astro auth login <base-domain>` to confirm you're authenticated.
+1. Run `$ astro auth login <base-domain>` to confirm you're authenticated.
 
-Run the following command to view your Airflow Deployment `Deployment ID`:
+2. Run the following command to view your Airflow Deployment `Deployment ID`:
 
-```
-astro deployment list
-```
-You can expect the following output:
+    ```
+    astro deployment list
+    ```
+    You can expect the following output:
 
-```
-astro deployment list
- NAME                                            DEPLOYMENT NAME                 DEPLOYMENT ID                 AIRFLOW VERSION
- new-deployment-1-10-10-airflow-k8s-2            elementary-rotation-5522        ckgwdq8cs037169xtbt2rtu15     1.10.12
-```
+    ```
+    astro deployment list
+    NAME                                            DEPLOYMENT NAME                 DEPLOYMENT ID                 AIRFLOW VERSION
+    new-deployment-1-10-10-airflow-k8s-2            elementary-rotation-5522        ckgwdq8cs037169xtbt2rtu15     1.10.12
+    ```
 
-Copy the `Deployment ID` and run:
+3. Copy the `Deployment ID` and run:
 
-```
-astro deployment airflow upgrade --deployment-id=<deployment-id>
-```
+    ```
+    astro deployment airflow upgrade --deployment-id=<deployment-id>
+    ```
 
-This command lists the available Airflow versions you can select and prompts you for a selection. For example, a user upgrading from Airflow 1.10.5 to Airflow 1.10.12 has the following options:
+    This command lists the available Airflow versions you can select and prompts you for a selection. For example, a user upgrading from Airflow 1.10.5 to Airflow 1.10.12 has the following options:
 
-```
-astro deployment airflow upgrade --deployment-id=ckguogf6x0685ewxtebr4v04x
-#     AIRFLOW VERSION
-1     1.10.7
-2     1.10.10
-3     1.10.12
+    ```
+    astro deployment airflow upgrade --deployment-id=ckguogf6x0685ewxtebr4v04x
+    #     AIRFLOW VERSION
+    1     1.10.7
+    2     1.10.10
+    3     1.10.12
 
->
- NAME                  DEPLOYMENT NAME       ASTRO       DEPLOYMENT ID                 AIRFLOW VERSION
- Astronomer Stagings   new-velocity-8501     v0.17.0     ckguogf6x0685ewxtebr4v04x     1.10.12
+    >
+    NAME                  DEPLOYMENT NAME       ASTRO       DEPLOYMENT ID                 AIRFLOW VERSION
+    Astronomer Stagings   new-velocity-8501     v0.17.0     ckguogf6x0685ewxtebr4v04x     1.10.12
 
-After you make a selection, the upgrade from Airflow 1.10.5 to 1.10.12 is started. To complete this process, add an Airflow 1.10.12 image to your Dockerfile and deploy to Astronomer.
-```
+    After you make a selection, the upgrade from Airflow 1.10.5 to 1.10.12 is started. To complete this process, add an Airflow 1.10.12 image to your Dockerfile and deploy to Astronomer.
+    ```
 
 ## Step 2: Deploy a New Astronomer Image
 
