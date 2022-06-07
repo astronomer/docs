@@ -47,7 +47,7 @@ $ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
 $ brew install astronomer/tap/astro
 
 # Build your Astro project into a Docker image and push the image to your Deployment
-$ astro deploy <your-deployment-id> -f
+$ astro deploy <your-deployment-id>
 ```
 
 :::info
@@ -90,7 +90,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }} -f
+            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
 ### GitHub Actions (Multiple Branches)
@@ -141,7 +141,7 @@ This setup assumes the following prerequisites:
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }} -f
+            astro deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }}
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
@@ -155,7 +155,7 @@ This setup assumes the following prerequisites:
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }} -f
+            astro deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
 ### Jenkins
@@ -358,8 +358,9 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
          ASTRONOMER_KEY_SECRET: $ASTRONOMER_KEY_SECRET
       before_script:
        - apk add --update curl && rm -rf /var/cache/apk/*
+       - apk add bash
       script:
-       - curl -sSL install.astronomer.io | sudo bash -s
+       - curl -sSL install.astronomer.io | bash -s
        - astro deploy $ASTRONOMER_DEPLOYMENT_ID -f
       only:
        - main
@@ -397,8 +398,9 @@ When you create environment variables that will be used in multiple branches, yo
             ASTRONOMER_KEY_SECRET: $DEV_ASTRONOMER_KEY_SECRET
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
+          - apk add bash
         script:
-          - curl -sSL install.astronomer.io | sudo bash -s
+          - curl -sSL install.astronomer.io | bash -s
           - astro deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - dev
@@ -413,8 +415,9 @@ When you create environment variables that will be used in multiple branches, yo
             ASTRONOMER_KEY_SECRET: $PROD_ASTRONOMER_KEY_SECRET
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
+          - apk add bash
         script:
-          - curl -sSL install.astronomer.io | sudo bash -s
+          - curl -sSL install.astronomer.io | bash -s
           - astro deploy $PROD_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - main

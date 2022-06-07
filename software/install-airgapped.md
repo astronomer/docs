@@ -27,6 +27,7 @@ To complete this setup, you need:
 - Private Kubernetes.
 - A Postgres instance accessible from that environment.
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
+- A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
 
 ## Step 1: Configure a Private Docker Registry
 
@@ -40,20 +41,21 @@ You can also set up your own registry using a dedicated registry service such as
 
 ## Step 2: Fetch Images from Astronomer's Helm Template
 
-The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. Image tags are subject to change, even within existing versions, for example to resolve critical security issues, and therefore not listed here. To gather a list of exact images and tags required for your Astronomer Helm chart version, you can template the Helm chart and fetch the rendered image tags:
+The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
+
+1. Run the following command to template the Astronomer Helm chart and fetch its rendered image tags:
 
 ```bash
-$ helm template astronomer/astronomer --version 0.27 | grep "image: " | sed 's/^ *//g' | sort | uniq
-
-image: "quay.io/prometheus/node-exporter:v1.3.0"
-image: quay.io/astronomer/ap-alertmanager:0.23.0
-image: quay.io/astronomer/ap-astro-ui:0.27.5
-image: quay.io/astronomer/ap-base:3.15.0
-image: quay.io/astronomer/ap-cli-install:0.26.1
-...
+$ helm template astronomer/astronomer | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq                          
 ```
 
-Once you have this list of images, add them to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
+2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
+
+    ```shell
+    $ helm template astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true     --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e     's/image:[ ]//' -e 's/^ *//g' | sort | uniq
+    ```
+
+These commands generate a list of images required for your version of Astronomer. Add these images to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
 
 > **Note:** If you have already enabled/disabled Astronomer platform components in your `config.yaml`, you can pass `-f/--values config.yaml` to `helm template` to print a list specific to your `config.yaml` configuration.
 
@@ -93,7 +95,7 @@ astronomer:
                 pgbouncerExporter:
                   repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer-exporter
 ```
-​
+
 ## Step 4: Fetch Airflow Helm Charts
 
 There are two Helm charts required for Astronomer:
@@ -156,7 +158,7 @@ To complete this setup:
     $ kubectl create configmap astronomer-certified --from-file=astronomer-certified.json=./astronomer-certified.json -n astronomer
     ```
 
-2. Add an Nginx deployment and service to a new file named `nginx-astronomer-certified.yaml`:
+2. Add an Nginx deployment and service configuration to a new file named `nginx-astronomer-certified.yaml`:
 
     ```yaml
     apiVersion: apps/v1
@@ -265,16 +267,16 @@ Before completing this step, double-check that the following statements are true
 - You made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
 - You completed Steps 1 through 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guide.
 
-After this check, you can install the Astronomer Helm chart by running the following commands:
+After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace `<your-image-tag>` with the version of Astronomer that you want to install:
 
 ```bash
-curl -L https://github.com/astronomer/astronomer/archive/v0.27.1.tar.gz -o astronomer-0.27.1.tgz
-# Alternatively, use helm pull
-helm pull astronomer/astronomer --version 0.27.1
+curl -L https://github.com/astronomer/astronomer/archive/v<your-image-tag>.tar.gz -o astronomer.tgz
+
+# Alternatively, use helm pull to pull the latest version of Astronomer
+helm pull astronomer/astronomer
 
 # ... If necessary, copy to a place where you can access Kubernetes ...
-
-helm install astronomer -f config.yaml -n astronomer astronomer-0.27.1.tgz
+helm install astronomer -f config.yaml -n astronomer astronomer.tgz
 ```
 
-After these commands are finished running, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws-standard.md#step-10-verify-pods-are-up), [Azure](install-azure-standard.md#step-10-verify-all-pods-are-up), or [GCP](install-gcp-standard.md#step-10-verify-that-all-pods-are-up) installation guide.
+After these commands finish, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws-standard.md#step-10-verify-pods-are-up), [Azure](install-azure-standard.md#step-10-verify-all-pods-are-up), or [GCP](install-gcp-standard.md#step-10-verify-that-all-pods-are-up) installation guide.
