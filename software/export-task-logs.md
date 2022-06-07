@@ -26,7 +26,7 @@ This implementation is recommended for organizations that:
 
 - Run longer tasks using CeleryExecutor.
 - Run Astronomer Software in a dedicated cluster.
-- Run privileged containers in a cluster with a clusterrole.
+- Run privileged containers in a cluster with a ClusterRole.
 
 This approach is not suited for organizations that run many small tasks using the KubernetesExecutor. Because task logs exist only for the lifetime of the pod, your pods running small tasks might complete before Fluentd can collect their task logs.
 
