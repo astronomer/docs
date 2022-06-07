@@ -41,7 +41,7 @@ astronomer:
 
 ## Configure a Git Repo for Git-Sync Deploys
 
-The Git repo you want to sync should contain a directory of DAGs that you want to deploy to Astronomer. You can include additional files in the repo, such as your other Astronomer project files, but note that this might affect performance when deploying new changes to DAGs.
+The Git repo you want to sync should contain a directory of DAGs that you want to deploy to Astronomer. You can include additional files in the repo, such as your other Astro project files, but note that this might affect performance when deploying new changes to DAGs.
 
 If you want to deploy DAGs via a private Git repo, you additionally need to configure SSH so that your Astronomer Deployment can access the contents of the repo. This process varies slightly between Git repository management tools. For an example of this configuration, read GitLab's [SSH Key](https://docs.gitlab.com/ee/ssh/) documentation.
 
@@ -54,13 +54,13 @@ Workspace editors can configure a new or existing Airflow Deployment to use a gi
 3. For your **Mechanism**, select **Git Sync.**
 4. Configure the following values:
 
-    - **Repository URL**: The URL for the Git repository that hosts your Astronomer project
+    - **Repository URL**: The URL for the Git repository that hosts your Astro project
     - **Branch Name**: The name of the Git branch that you want to sync with your Deployment
     - **Sync Interval**: The time interval between checks for updates in your Git repository, in seconds. A sync is only performed when an update is detected. We recommend a 1 second interval
     - **DAGs Directory:** The directory in your Git repository that hosts your DAGs. Specify the directory's path as relative to the repository's root directory. To use your root directory as your DAGs directory, specify this value as `./`. Other changes outside the DAGs directory in your Git repository must be deployed using `astro deploy`
     - **Rev**: The commit reference of the branch that you want to sync with your Deployment
     - **Ssh Key**: The SSH private key for your Git repository
-    - **Known Hosts**: The known_hosts for your Git provider, formatted as: `<host1>,<ip1> <public_key>`
+    - **Known Hosts**: The public key for your Git provider, which can be retrieved using `ssh-keyscan -t rsa <provider-domain>`. For an example of how to retrieve GitHub's public key, refer to [Apache Airflow documentation](https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#production-guide-knownhosts).
     - **Ephemeral Storage Overwrite Gigabytes**: The storage limit for your Git repository. If your Git repo is larger than 2GB, we recommend setting this slider to your repo size + 1 Gi
     - **Sync Timeout**: The maximum amount of seconds allowed for a sync. We recommend increasing this value if your repo is larger than 1GB
 

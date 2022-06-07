@@ -30,6 +30,7 @@ The Astronomer Certified Docker image is built from the Python wheel and incorpo
 
 Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all supported Astronomer Certified images can be found in [Astronomer's `ap-airflow` GitHub repository](https://github.com/astronomer/ap-airflow):
 
+- [Airflow 2.3.0](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/bullseye/Dockerfile)
 - [Airflow 2.2.5](https://github.com/astronomer/ap-airflow/blob/master/2.2.5/bullseye/Dockerfile)
 - [Airflow 2.2.4](https://github.com/astronomer/ap-airflow/blob/master/2.2.4/bullseye/Dockerfile)
 - [Airflow 2.2.3](https://github.com/astronomer/ap-airflow/blob/master/2.2.3/bullseye/Dockerfile)
@@ -41,6 +42,22 @@ Every supported version of the Astronomer Certified Python wheel is available at
 - [Airflow 2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/buster/Dockerfile)
 - [Airflow 1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/buster/Dockerfile)
 
+### Differences Between Astronomer Runtime and Astronomer Certified
+
+Starting with Software version 0.29, you can use Astro Runtime images in your Software Deployments. Functionally, Runtime images are similar to Certified images. They both include:
+
+- Same-day support for Apache Airflow releases.
+- Extended support lifecycles.
+- Regularly backported bug and security fixes.
+
+Astronomer Runtime includes additional features which are not available in Astronomer Certified images, including:
+
+- The `astronomer-providers` package, which includes a set of deferrable operators build and maintained by Astronomer.
+- Airflow UI improvements, such as the showing your Deployment's Docker image tag in the footer of all UI pages.
+- Future Runtime-exclusive features, such as new Airflow components and improvements to the DAG development experience.
+
+For more information on using Runtime in your Deployments, see [Upgrade Runtime](https://docs.astronomer.io/astro/upgrade-runtime).
+
 ## Image Requirements
 
 Running Airflow with the Astronomer Certified Docker image requires specific versions for key system components.  
@@ -49,7 +66,7 @@ Running Airflow with the Astronomer Certified Docker image requires specific ver
 - Database: PostgreSQL (11, 12), MySQL (5.7, 8.0+)
 - System Distribution: Debian 10 (Buster)
 
-> **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. To run Astronomer Certified on Docker with Python 3.6 or 3.8, you can create a custom image with a different Python version specified. For more information, read [Change Python Versions](https://www.astronomer.iocustomize-image#build-with-a-different-python-version).
+> **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. To run Astronomer Certified on Docker with Python 3.6 or 3.8, you can create a custom image with a different Python version specified. For more information, read [Change Python Versions](customize-image.md#build-with-a-different-python-version).
 
 These requirements are slightly different for running only the Python wheel. For the Python wheel, you can use:
 
@@ -74,7 +91,7 @@ The following table lists the essential environment variables used when running 
 | Variable                                        | Description                                                                   | Default Value                                     |
 | ----------------------------------------------- | ----------------------------------------------------------------------------- | ------------------------------------------------- |
 | `AIRFLOW_PIP_VERSION`                             | The version of pip that is used to install Python packages and Airflow itself.            | 19.3.1                                            |
-| `AIRFLOW_HOME`                                    | Filepath for your Airflow project directory.                                  | usr/local/airflow                                 |
+| `AIRFLOW_HOME`                                    | Filepath for your Astro project directory.                                  | usr/local/airflow                                 |
 | `AIRFLOW__WEBSERVER__BASE_URL`                    | The URL used to access the Airflow UI.                                        | http://localhost:8080                             |
 | `ASTRONOMER_USER`                                 | The username for your Airflow user.                                           | astro                                             |
 | `ASTRONOMER_UID `                                 | The ID for your Airflow user.                                                 | 5000                                              |
@@ -99,6 +116,7 @@ Starting in version 2.0.0, the Astronomer Certified image includes provider pack
 |**2.2.3**|1!2.3.0|1!3.3.0|1!2.1.0|1!2.1.0|1!2.1.0|1!2.0.1|1!6.1.0|1!2.0.1|1!2.0.1|1!2.1.1|1!2.3.0|1!2.0.1|1!4.1.0|1!2.0.1|1!2.3.0|
 |**2.2.4**|1!3.0.0|1!3.6.0|1!2.1.0|1!3.0.2|1!2.2.0|1!2.0.1|1!6.4.0|1!2.0.3|1!2.2.0|1!2.2.0|1!3.0.0|1!2.0.1|1!4.2.0|1!2.1.0|1!2.4.0|
 |**2.2.5**|1!3.2.0|1!3.7.2|1!2.1.0|1!3.0.0|1!3.0.2|1!2.1.2|1!6.7.0|1!2.1.1|1!2.2.3|1!2.2.3|1!4.1.0|1!2.0.4|1!4.2.3|1!2.1.3|1!2.4.3|
+|**2.3.0**|1!3.3.0|1!3.8.0|1!2.1.0|1!4.0.1|1!3.0.3|1!2.1.2|1!6.8.0|1!2.1.2|1!2.2.3|1!2.2.3|1!4.1.0|1!2.0.4|1!4.2.3|1!2.1.3|1!2.4.3|
 
 
 ## System Dependencies

@@ -1,6 +1,6 @@
 ---
-title: 'Configure a Kubernetes Namespace Pool for Astronomer Software'
-sidebar_label: 'Configure Namespace Pools'
+title: "Configure a Kubernetes Namespace Pool for Astronomer Software"
+sidebar_label: "Configure Namespace Pools"
 id: namespace-pools
 description: Manually create Kubernetes namespaces for new Deployments.
 ---
@@ -36,6 +36,13 @@ For example, consider Astronomer's Commander service, which controls creating, u
 
 :::
 
+## Setup
+
+There are two options for creating a namespace pool:
+
+- Option 1: Delegate the creation of each namespace, including roles and rolebindings, to the Astronomer helm chart. This option is suitable for most use cases.
+- Option 2: Manually create each namespace, including roles and rolebindings. This option is suitable if you need to further restrict permissions for Astronomer’s Kubernetes resources. Note that limiting permissions this way can prevent Deployments from functioning as expected depending on which features you use. Proceed with caution.
+
 ## Prerequisites
 
 To configure pre-created namespaces, you need:
@@ -43,183 +50,211 @@ To configure pre-created namespaces, you need:
 - [Helm](https://helm.sh/).
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) with access to the cluster hosting Astronomer Software.
 
-## Step 1: Configure Namespaces
+## Option 1: Use the Astronomer Helm Chart
+
+1. Set the following configuration in your `config.yaml` file:
+
+```yaml
+global:
+  features:
+    namespacePools:
+      # if this is false, everything in this section can be ignored. default should be false
+      enabled: true
+      namespaces:
+        # automatically creates namespace, role and rolebinding for commander if set to true
+        create: true
+        # this needs to be populated (something other than null) if global.features.namespacePools.enabled is true
+        names:
+          - <your-namespace-1>
+          - <your-namespace-2>
+```
+
+2. Save the changes in your `config.yaml` file and update Astronomer Software as described in [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+
+Based on the namespace names that you specified, Astronomer creates the necessary namespaces and Kubernetes resources. These resources have permissions scoped appropriately for most use-cases.
+
+Once you apply your configuration, you should be able to create new Deployments using a namespace from your pre-created namespace pool. You should also be able to see the namespaces you specified inside your cluster resources.
+
+## Option 2: Manually Create Namespaces, Roles, and Rolebindings
+
+Complete this setup if you want to further limit your namespaces’ permissions than what Astronomer allows by default.
+
+### Step 1: Configure Namespaces
 
 For every namespace you want to add to a pool, you must create a [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), [role](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole), and [rolebinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) for Astronomer Software to access the namespace with. The `rolebinding` must be scoped to the `astronomer-commander` service account and the `namespace` you are creating.
 
 1. In a new manifest file, add the following configuration. Make sure to replace `<your-namespace-name>` with the namespace you want to add to the pool.
 
-    ```yaml
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: <your-namespace-name>
-    ---
-    apiVersion: rbac.authorization.k8s.io/v1
-       kind: Role
-       metadata:
-         name: deployment-commander-role
-         namespace: <your-namespace-name>
-       rules:
-       - apiGroups: ["*"]
-         resources: ["*"]
-         verbs: ["list", "watch"]
-       - apiGroups: [""]
-         resources: ["configmaps"]
-         verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-       - apiGroups: ["keda.k8s.io"]
-         resources: ["scaledobjects"]
-         verbs: ["get", "create", "delete"]
-       - apiGroups: [""]
-         resources: ["secrets"]
-         verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
-       - apiGroups: [""]
-         resources: ["namespaces"]
-         verbs: ["get", "list", "patch", "update", "watch"]
-       - apiGroups: [""]
-         resources: ["serviceaccounts"]
-         verbs: ["create", "delete", "get", "patch"]
-       - apiGroups: ["rbac.authorization.k8s.io"]
-         resources: ["roles"]
-         verbs: ["*"]
-       - apiGroups: [""]
-         resources: ["persistentvolumeclaims"]
-         verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patch"]
-       - apiGroups: [""]
-         resources: ["pods"]
-         verbs: ["get", "list", "watch"]
-       - apiGroups: [""]
-         resources: ["endpoints"]
-         verbs: ["create", "delete", "get", "list", "update", "watch"]
-       - apiGroups: [""]
-         resources: ["limitranges"]
-         verbs: ["create", "delete", "get", "list", "watch", "patch"]
-       - apiGroups: [""]
-         resources: ["nodes"]
-         verbs: ["get", "list", "watch"]
-       - apiGroups: [""]
-         resources: ["nodes/proxy"]
-         verbs: ["get"]
-       - apiGroups: [""]
-         resources: ["persistentvolumes"]
-         verbs: ["create", "delete", "get", "list", "watch", "patch"]
-       - apiGroups: [""]
-         resources: ["replicationcontrollers"]
-         verbs: ["list", "watch"]
-       - apiGroups: [""]
-         resources: ["resourcequotas"]
-         verbs: ["create", "delete", "get", "list", "patch", "watch"]
-       - apiGroups: [""]
-         resources: ["services"]
-         verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-       - apiGroups: ["apps"]
-         resources: ["statefulsets"]
-         verbs: ["create", "delete", "get", "list", "patch", "watch"]
-       - apiGroups: ["apps"]
-         resources: ["deployments"]
-         verbs: ["create", "delete", "get", "patch","update"]
-       - apiGroups: ["autoscaling"]
-         resources: ["horizontalpodautoscalers"]
-         verbs: ["list", "watch"]
-       - apiGroups: ["batch"]
-         resources: ["jobs"]
-         verbs: ["list", "watch", "create", "delete"]
-       - apiGroups: ["batch"]
-         resources: ["cronjobs"]
-         verbs: ["create", "delete", "get", "list", "patch", "watch"]
-       - apiGroups: ["extensions"]
-         resources: ["daemonsets", "replicasets"]
-         verbs: ["list", "watch"]
-       - apiGroups: ["extensions"]
-         resources: ["deployments"]
-         verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-       - apiGroups: [""]
-         resources: ["events"]
-         verbs: ["create", "delete", "patch"]
-       - apiGroups: ["extensions"]
-         resources: ["ingresses"]
-         verbs: ["create", "delete", "get", "patch"]
-       - apiGroups: ["extensions"]
-         resources: ["ingresses/status"]
-         verbs: ["update"]
-       - apiGroups: ["networking.k8s.io"]
-         resources: ["ingresses"]
-         verbs: ["get", "create", "delete", "patch"]
-       - apiGroups: ["networking.k8s.io"]
-         resources: ["ingresses/status"]
-         verbs: ["update"]
-       - apiGroups: ["networking.k8s.io"]
-         resources: ["networkpolicies"]
-         verbs: ["create", "delete", "get", "patch"]
-       - apiGroups: ["rbac.authorization.k8s.io"]
-         resources: ["rolebindings"]
-         verbs: ["create", "delete", "get", "patch"]
-       - apiGroups: ["authentication.k8s.io"]
-         resources: ["tokenreviews"]
-         verbs: ["create", "delete"]
-       - apiGroups: ["authorization.k8s.io"]
-         resources: ["subjectaccessreviews"]
-         verbs: ["create", "delete"]
-       - apiGroups: ["kubed.appscode.com"]
-         resources: ["searchresults"]
-         verbs: ["get"]
-       - apiGroups: ["policy"]
-         resources: ["poddisruptionbudgets"]
-         verbs: ["create", "delete", "get"]
-       ---
-       apiVersion: rbac.authorization.k8s.io/v1
-       kind: RoleBinding
-       metadata:
-         name: deployment-commander-rolebinding
-         namespace: <your-namespace-name> # Should be namespace you are granting access to
-       roleRef:
-         apiGroup: rbac.authorization.k8s.io
-         kind: Role
-         name: deployment-commander-role # Should match name of Role
-       subjects:
-       - namespace: astronomer # Should match namespace where SA lives
-         kind: ServiceAccount
-         name: astronomer-commander # Should match service account name, above
-       ```
+   ```yaml
+   apiVersion: v1
+   kind: Namespace
+   metadata:
+     name: <your-namespace-name>
+   ---
+   apiVersion: rbac.authorization.k8s.io/v1
+      kind: Role
+      metadata:
+        name: deployment-commander-role
+        namespace: <your-namespace-name>
+      rules:
+      - apiGroups: ["*"]
+        resources: ["*"]
+        verbs: ["list", "watch"]
+      - apiGroups: [""]
+        resources: ["configmaps"]
+        verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+      - apiGroups: ["keda.k8s.io"]
+        resources: ["scaledobjects"]
+        verbs: ["get", "create", "delete"]
+      - apiGroups: [""]
+        resources: ["secrets"]
+        verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
+      - apiGroups: [""]
+        resources: ["namespaces"]
+        verbs: ["get", "list", "patch", "update", "watch"]
+      - apiGroups: [""]
+        resources: ["serviceaccounts"]
+        verbs: ["create", "delete", "get", "patch"]
+      - apiGroups: ["rbac.authorization.k8s.io"]
+        resources: ["roles"]
+        verbs: ["*"]
+      - apiGroups: [""]
+        resources: ["persistentvolumeclaims"]
+        verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patch"]
+      - apiGroups: [""]
+        resources: ["pods"]
+        verbs: ["get", "list", "watch"]
+      - apiGroups: [""]
+        resources: ["endpoints"]
+        verbs: ["create", "delete", "get", "list", "update", "watch"]
+      - apiGroups: [""]
+        resources: ["limitranges"]
+        verbs: ["create", "delete", "get", "list", "watch", "patch"]
+      - apiGroups: [""]
+        resources: ["nodes"]
+        verbs: ["get", "list", "watch"]
+      - apiGroups: [""]
+        resources: ["nodes/proxy"]
+        verbs: ["get"]
+      - apiGroups: [""]
+        resources: ["persistentvolumes"]
+        verbs: ["create", "delete", "get", "list", "watch", "patch"]
+      - apiGroups: [""]
+        resources: ["replicationcontrollers"]
+        verbs: ["list", "watch"]
+      - apiGroups: [""]
+        resources: ["resourcequotas"]
+        verbs: ["create", "delete", "get", "list", "patch", "watch"]
+      - apiGroups: [""]
+        resources: ["services"]
+        verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+      - apiGroups: ["apps"]
+        resources: ["statefulsets"]
+        verbs: ["create", "delete", "get", "list", "patch", "watch"]
+      - apiGroups: ["apps"]
+        resources: ["deployments"]
+        verbs: ["create", "delete", "get", "patch","update"]
+      - apiGroups: ["autoscaling"]
+        resources: ["horizontalpodautoscalers"]
+        verbs: ["list", "watch"]
+      - apiGroups: ["batch"]
+        resources: ["jobs"]
+        verbs: ["list", "watch", "create", "delete"]
+      - apiGroups: ["batch"]
+        resources: ["cronjobs"]
+        verbs: ["create", "delete", "get", "list", "patch", "watch"]
+      - apiGroups: ["extensions"]
+        resources: ["daemonsets", "replicasets"]
+        verbs: ["list", "watch"]
+      - apiGroups: ["extensions"]
+        resources: ["deployments"]
+        verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+      - apiGroups: [""]
+        resources: ["events"]
+        verbs: ["create", "delete", "patch"]
+      - apiGroups: ["extensions"]
+        resources: ["ingresses"]
+        verbs: ["create", "delete", "get", "patch"]
+      - apiGroups: ["extensions"]
+        resources: ["ingresses/status"]
+        verbs: ["update"]
+      - apiGroups: ["networking.k8s.io"]
+        resources: ["ingresses"]
+        verbs: ["get", "create", "delete", "patch"]
+      - apiGroups: ["networking.k8s.io"]
+        resources: ["ingresses/status"]
+        verbs: ["update"]
+      - apiGroups: ["networking.k8s.io"]
+        resources: ["networkpolicies"]
+        verbs: ["create", "delete", "get", "patch"]
+      - apiGroups: ["rbac.authorization.k8s.io"]
+        resources: ["rolebindings"]
+        verbs: ["create", "delete", "get", "patch"]
+      - apiGroups: ["authentication.k8s.io"]
+        resources: ["tokenreviews"]
+        verbs: ["create", "delete"]
+      - apiGroups: ["authorization.k8s.io"]
+        resources: ["subjectaccessreviews"]
+        verbs: ["create", "delete"]
+      - apiGroups: ["kubed.appscode.com"]
+        resources: ["searchresults"]
+        verbs: ["get"]
+      - apiGroups: ["policy"]
+        resources: ["poddisruptionbudgets"]
+        verbs: ["create", "delete", "get"]
+      ---
+      apiVersion: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      metadata:
+        name: deployment-commander-rolebinding
+        namespace: <your-namespace-name> # Should be namespace you are granting access to
+      roleRef:
+        apiGroup: rbac.authorization.k8s.io
+        kind: Role
+        name: deployment-commander-role # Should match name of Role
+      subjects:
+      - namespace: astronomer # Should match namespace where SA lives
+        kind: ServiceAccount
+        name: astronomer-commander # Should match service account name, above
+   ```
 
 2. Save this file and name it `commander.yaml`.
 3. In the Kubernetes cluster hosting Astronomer Software, run `kubectl apply -f commander.yaml`.
 4. Repeat steps 1-3 for every namespace you want to add to your pool.
 
-## Step 2: Configure a Namespace Pool in Astronomer
+### Step 2: Configure a Namespace Pool in Astronomer
 
 To enable pre-created namespaces on Astronomer Software:
 
 1. Set the following values in your `config.yaml` file, making sure to specify all of the namespaces you configured in the `preCreatedNamespaces` object:
 
-    ```yaml
-    global:
-      # Make fluentd gather logs from all available namespaces
-      manualNamespaceNamesEnabled: true
-      clusterRoles: false
+   ```yaml
+   global:
+     # Make fluentd gather logs from all available namespaces
+     manualNamespaceNamesEnabled: true
+     clusterRoles: false
 
-    astronomer:
-      houston:
-        config:
-          deployments:
+   astronomer:
+     houston:
+       config:
+         deployments:
+           # Enable manual namespace names
+           manualNamespaceNames: true
+           # Pre-created namespace names
+           preCreatedNamespaces:
+             - name: <namespace-name-1>
+             - name: <namespace-name-2>
+             - name: <namespace-name-x>
 
-            # Enable manual namespace names
-            manualNamespaceNames: true
-            # Pre-created namespace names
-            preCreatedNamespaces:
-              - name: <namespace-name-1>
-              - name: <namespace-name-2>
-              - name: <namespace-name-x>
+           # Allows users to immediately reuse a pre-created namespace by hard deleting the associated Deployment
+           # If set to false, you'll need to wait until a cron job runs before the Deployment record is deleted and the namespace is added back to the pool
+           hardDeleteDeployment: true
 
-            # Allows users to immediately reuse a pre-created namespace by hard deleting the associated Deployment
-            # If set to false, you'll need to wait until a cron job runs before the Deployment record is deleted and the namespace is added back to the pool
-            hardDeleteDeployment: true
-
-      commander:
-        env:
-          - name: "COMMANDER_MANUAL_NAMESPACE_NAMES"
-            value: true
-    ```
+     commander:
+       env:
+         - name: "COMMANDER_MANUAL_NAMESPACE_NAMES"
+           value: true
+   ```
 
 2. Save the changes in your `config.yaml` and update Astronomer Software as described in [Apply a Config Change](apply-platform-config.md).
 
@@ -234,6 +269,52 @@ After enabling the pre-created namespace pool, the namespaces you registered ear
 When you create Deployments via the CLI, you will be prompted to select one of the available namespaces for your new Deployment.
 
 If no namespaces are available, you will receive an error when creating new Deployments in both the UI and CLU. To reuse a pre-created namespace, you first need to return the namespace to the pool by deleting its associated Deployment.
+
+## Advanced Settings
+
+The settings previously described in this guide are a wrapper for multiple low-level configurations. If your namespace configurations require more granularity, use the following settings in your `config.yaml` file.
+
+Note that mixing the global and fine-grained settings might result in unexpected behavior. If you decide to use low-level settings, we recommend keeping `global.features.namespacePools.enabled` set to `false`.
+
+| Setting                                                     | Description                                                                                                                                                                                                                                                                    |
+| ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `global.manualNamespaceNamesEnabled`                         | Expands the Fluentd rule to look for Deployment component logs in all namespaces                                                                                                                                                                                                  |
+| `global.clusterRoles`                                        | When set to false, Astronomer does not create a cluster role for Commander                                                                                                                                                                                                     |
+| `astronomer.houston.config.deployments.manualNamespaceNames` | When set to true, a dropdown field is added to the Software UI’s Deployment settings for namespace selection                                                                                                                                                                   |
+| `astronomer.houston.config.deployments.preCreatedNamespaces` | List of namespaces that were manually created for the namespace pool                                                                                                                                                                                                           |
+| `astronomer.commander.env`                                   | Inject an environment variable for Commander that prevents namespaces from being created when a new Deployment is triggered. The values specified here must be `astronomer.commander.env.name: "COMMANDER_MANUAL_NAMESPACE_NAMES"` and `astronomer.commander.env.value= true`. |
+
+When implementing using these settings, we strongly recommend enabling [hard deletion](configure-deployment.md#hard-delete-a-deployment) for Deployments.
+
+In the following example `config.yaml` file, these settings are configured so that you don't configure namespace pools at a global level:
+
+```yaml
+global:
+  # Make fluentd gather logs from all available namespaces
+  manualNamespaceNamesEnabled: true
+  clusterRoles: false
+
+astronomer:
+  houston:
+    config:
+      deployments:
+        # Enable manual namespace names
+        manualNamespaceNames: true
+        # Pre-created namespace names
+        preCreatedNamespaces:
+          - name: <namespace-name-1>
+          - name: <namespace-name-2>
+          - name: <namespace-name-x>
+
+        # Allows users to immediately reuse a pre-created namespace by hard deleting the associated Deployment
+        # If set to false, you'll need to wait until a cron job runs before the Deployment record is deleted and the namespace is added back to the pool
+        hardDeleteDeployment: true
+
+  commander:
+    env:
+      - name: "COMMANDER_MANUAL_NAMESPACE_NAMES"
+        value: tru
+```
 
 ## Troubleshooting
 

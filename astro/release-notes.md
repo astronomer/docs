@@ -11,15 +11,106 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Runtime Version**: 4.2.4 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 5.0.3 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.4.0 ([Release notes](cli-release-notes.md))
+**Latest CLI Version**: 1.0.1 ([Release notes](cli/release-notes.md))
+
+## June 2, 2022
+
+### Support for the `us-east4` GCP Region
+
+You can now [create an Astro Cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
+
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+
+## May 26, 2022
+
+### New Datasets Page in the Cloud UI
+
+You can now use the new **Datasets** page in the **Lineage** tab to view a table of datasets that your DAGs have read or written to. This information can help you quickly identify dataset dependencies and data pipeline access requirements.
+
+![Datasets page](/img/release-notes/datasets-page.png)
+
+Click on the name of a dataset to show its lineage graph. For more information, see [Data Lineage on Astro](data-lineage.md).
+
+### Bug Fixes
+
+- Fixed an issue where the **Astro Runtime** field of the Cloud UI listed the running version as **Unknown**  for Deployments using an unsupported version of Astro Runtime
+
+## May 5, 2022
+
+### Data Lineage Is Now Available on Astro
+
+We are excited to introduce data lineage to Astro. You now have access to a new **Lineage** view in the Cloud UI that visualizes data movement across datasets in your Organization based on integrations with Airflow, Apache Spark, dbt, Great Expectations, and more.
+
+Built around the [OpenLineage](https://openlineage.io/) open source standard, the data lineage graphs and metadata in the Cloud UI can help you better understand your ecosystem and diagnose issues that may otherwise be difficult to identify.
+
+![Lineage graph example](/img/release-notes/lineage-example.png)
+
+For example, if an Airflow task failed because the schema of a database changed, you might go to the Lineage page on Astro to determine which job caused that change and which downstream tasks failed because of it.
+
+To learn more about data lineage and how you can configure it on Astro, see:
+
+- [Data Lineage Concepts](data-lineage-concepts.md)
+- [Enable Data Lineage for External Services](set-up-data-lineage.md)
+- [Data Lineage on Astro](data-lineage.md)
+- [Data Lineage Support and Compatibility](data-lineage-support-and-compatibility.md)
+
+:::info
+
+This functionality is still early access and under active development. If you have any questions or feedback about this feature, reach out to [Astronomer Support](https://support.astronomer.io).
+
+:::
+
+### Support for Astro on Google Cloud Platform (GCP)
+
+Astro now officially supports Astro Clusters on Google Cloud Platform (GCP). This includes support for an initial set of GCP regions as well as [Workload Identity](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) for secure connection to other GCP data services in your ecosystem.
+
+For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp.md).
+
+### Support for Organization-Level User Invites
+
+You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
+
+### Additional Improvements
+
+- Improved the templated emails sent out for user invites with clear instructions for how to get started on Astro
+- Improved error messaging behavior on the **DAGs** and **Usage** pages of the Cloud UI
+- New user accounts must now be verified via email before they can access Astro
+
+## April 28, 2022
+
+### New AWS Node Instance Types Available
+
+To widen our support for various use cases and levels of scale, we've expanded the types of AWS node instances that are supported on Astro. You can now create Clusters with:
+
+- [General Purpose M6i instances](https://aws.amazon.com/ec2/instance-types/m6i/)
+- [Compute Optimized C6i instances](https://aws.amazon.com/ec2/instance-types/c6i/)
+- [Memory Optimized R6i instances](https://aws.amazon.com/ec2/instance-types/r6i/)
+
+For a full list of node instance types that are supported on Astro, see [AWS Resource Reference](resource-reference-aws.md#node-instance-type). To modify an existing Astro Cluster to use any of these instance types, see [Modify a Cluster](modify-cluster.md).
+
+### Additional Improvements
+
+- Improve the error message that renders in the Cloud UI if you try to create a worker that is too large for the Deployment's node instance type to support. This error message now specifies a clear call to action
+
+## April 21, 2022
+
+### Feedback in Cloud UI on Worker Size Limits
+
+The Cloud UI now renders an error if you try to modify the **Worker Resources**  to a combination of CPU and memory that is not supported by the node instance type of the Cluster that the Deployment is hosted on. This validation ensures that the worker size you request is supported by the infrastructure available in your Astro Cluster, and minimizes silent task failures that might have occurred due to invalid resource requests.
+
+If your Astro Cluster is configured with the `m5d.8xlarge` node type, for example, the Cloud UI will show an error if you try to set **Worker Resources** to 350 AU. This is because the maximum worker size an `m5d.8xlarge` node can support is 307 AU.
+
+![Worker size error](/img/release-notes/worker-size-error.png)
+
+For a reference of all node instance types Astro supports and their corresponding worker size limits, see [AWS Resource Reference](resource-reference-aws.md#node-instance-type).
 
 ## April 14, 2022
 
 ### Additional Improvements
 
-- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html). This ensures that traffic to AWS services is kept private and does not traverse the NAT and Internet gateways, reducing the risk of exposing your resources to the internet. 
+- The Data Plane now connects to various AWS services via [AWS PrivateLink](https://docs.aws.amazon.com/vpc/latest/privatelink/endpoint-services-overview.html). This ensures that traffic to AWS services is kept private and does not traverse the NAT and Internet gateways, reducing the risk of exposing your resources to the internet.
 
 ### Bug Fixes
 
@@ -49,7 +140,7 @@ Starting on March 31st and continuing over the next couple of weeks, all Astro D
 A few additional notes about this upgrade:
 
 - You can ignore any lineage logs that indicate an error or failed process, such as the first line in the example logs above. These logs will more accurately reflect the state of your lineage functionality once lineage features are launched on Astro.
-- Deployments on Runtime 4.2.0+ will be updated to emit data lineage events only after you [push code](deploy-code). Until you do so, this change will not be applied.
+- Deployments on Runtime 4.2.0+ will be updated to emit data lineage events only after you [push code](deploy-code.md). Until you do so, this change will not be applied.
 - Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
 - When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
@@ -104,19 +195,19 @@ To export your task usage data as a CSV file, click the **Export** button in the
 
 ### Running Docker Image Tag in Airflow UI
 
-The Docker image that is running on the Airflow Webserver of your Deployment is now shown as a tag in the footer of the Airflow UI. Depending on how your team deploys to Astro, this tag is either a unique identifier generated by a CI tool or a timestamp generated by the Astro CLI on `astrocloud deploy`. Both represent a unique version of your Astro project.
+The Docker image that is running on the Airflow Webserver of your Deployment is now shown as a tag in the footer of the Airflow UI. Depending on how your team deploys to Astro, this tag is either a unique identifier generated by a CI tool or a timestamp generated by the Astro CLI on `astro deploy`. Both represent a unique version of your Astro project.
 
-![Runtime Tag banner](/img/docs/image-tag-airflow-ui.png)
+![Runtime Tag banner](/img/docs/image-tag-airflow-ui-astro.png)
 
 When you push code to a Deployment on Astro via the Astro CLI or CI/CD, reference this tag in the Airflow UI to verify that your changes were successfully applied.
 
 This feature requires Astro Runtime [4.0.10+](runtime-release-notes.md#4010). To upgrade a Deployment to the latest Runtime version, see [Upgrade Runtime](upgrade-runtime.md).
 
-::: info
+:::info
 
 While it is a good proxy, the tag shown in the Airflow UI does not forcibly represent the Docker image that is running on your Deployment's Scheduler, Triggerer, or workers.
 
-This value is also distinct from the **Docker Image** that is shown in the Deployment view of the Cloud UI, which displays the image tag as specified in the Cloud API request that is triggered on `astrocloud deploy`. The image tag in the Airflow UI can generally be interpreted to be a more accurate proxy to what is running on all components of your Deployment.
+This value is also distinct from the **Docker Image** that is shown in the Deployment view of the Cloud UI, which displays the image tag as specified in the Cloud API request that is triggered on `astro deploy`. The image tag in the Airflow UI can be interpreted to be a more accurate proxy to what is running on all components of your Deployment.
 
 If you ever have trouble verifying a code push to a Deployment on Astro, reach out to [Astronomer Support](https://support.astronomer.io).
 
@@ -190,7 +281,7 @@ You can view key metrics about recent DAG runs through the new **DAGs** page in 
 
 ![DAGs page](/img/docs/dags-page.png)
 
-For more information about the **DAGs** page, see [Deployment Metrics](deployment-metrics#dag-runs).
+For more information about the **DAGs** page, see [Deployment Metrics](deployment-metrics.md#dag-runs).
 
 ### Additional Improvements
 
@@ -213,9 +304,9 @@ For more information about this feature read [Set Up an Identity Provider](confi
 
 ### Support for the Astro CLI
 
-The Astro CLI (`astrocloud`) is now generally available as the official command-line tool for Astro. It is a direct replacement of the previously released `astro` executable and comes with various significant improvements. We encourage all customers to upgrade.
+The Astro CLI (`astro`) is now generally available as the official command-line tool for Astro. It is a direct replacement of the previously released `astro` executable and comes with various significant improvements. We encourage all customers to upgrade.
 
-For more information on the Astro CLI, see [CLI Release Notes](cli-release-notes.md). For install instructions, read [Install the CLI](install-cli.md).
+For more information on the Astro CLI, see [CLI Release Notes](cli/release-notes.md). For install instructions, read [Install the CLI](cli/get-started.md).
 
 ### Multiple Authentication Methods for a Single User Account
 
@@ -470,7 +561,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 :::danger
 
-This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0 of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli-release-notes.md).
+This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 
 :::
 

@@ -18,7 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get Started',
       items: [
-      'cli-quickstart',
+      'install-cli',
       'create-project',
       ],
     },
@@ -73,7 +73,9 @@ module.exports = {
         'registry-backend',
         'renew-tls-cert',
         'namespace-pools',
+        'export-task-logs',
         'third-party-ingress-controllers',
+        'custom-image-registry',
           ],
         },
         {
@@ -84,6 +86,7 @@ module.exports = {
         'upgrade-astronomer-stable',
         'houston-api',
         'configure-platform-resources',
+        'upgrade-to-0-28',
           ],
         },
         {
@@ -159,6 +162,7 @@ module.exports = {
       'cli-reference',
       'version-compatibility-reference',
       'release-lifecycle-policy',
+      'documentation-archive',
       ],
     },
   ],

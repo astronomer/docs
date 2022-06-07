@@ -17,7 +17,7 @@ Beyond architecture, Astro offers a suite of first-class features that make it e
 Astro's architecture enables a few key features, available today:
 
 - Worker auto-scaling, powered by Airflow's Celery Executor + KEDA
-- The ability to run multiple clusters in your organization's network on AWS
+- The ability to run multiple clusters in your organization's network on either AWS or GCP
 - Astro Runtime, a collection of Docker images that provides a differentiated data orchestration experience
 - Timely support for the latest major, minor, and patch versions of the Apache Airflow open source project
 - Support for role-based access control (RBAC) and single sign-on (SSO) for secure user management and authentication
@@ -25,7 +25,7 @@ Astro's architecture enables a few key features, available today:
 
 ## Architecture
 
-The following diagram outlines how the control plane, data plane, and users are connected to enable these features:
+The following diagram outlines how the Control Plane, Data Plane, and users are connected to enable these features:
 
 <div class="text--center">
   <img src="/img/docs/architecture-overview.png" alt="High level overview of Astro's architecture" />
@@ -33,11 +33,11 @@ The following diagram outlines how the control plane, data plane, and users are 
 
 ## Get Started
 
-The Astronomer team will schedule an onboarding session for your initial install. From there, we recommend reading through the following docs:
+The Astronomer team will schedule an onboarding session for your initial install. From there, Astronomer recommends reading the following topics:
 
-- [Install the Astro CLI](install-cli.md)
+- [Install the Astro CLI](cli/get-started.md)
 - [Develop Project](develop-project.md)
-- [Configure your Deployment](configure-deployment.md)
+- [Configure your Deployment](configure-deployment-resources.md)
 
 If you have a feature request or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io). We're here to help.
 

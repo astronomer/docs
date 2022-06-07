@@ -118,7 +118,7 @@ ui:
   port: 5000
 
 # Elasticsearch configuration for Houston to pull logs.
-# This is passed striaght to the es client.
+# This is passed straight to the es client.
 elasticsearch:
   # Enable or disable querying for logs in ES. This supersedes mock configuration below.
   enabled: false
@@ -432,7 +432,7 @@ deployments:
   releaseVerification: STABLE
 
   airflowReleasesFile: 'airflow_releases.json'
-  # Labels specifed here are applied to Airflow deployment namespaces.
+  # Labels specified here are applied to Airflow deployment namespaces.
   namespaceLabels: {}
 
   # configureDagDeployment

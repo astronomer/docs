@@ -158,21 +158,21 @@ This command will generate a report. If the `X509v3 Subject Alternative Name` se
 
 Depending on your organization, you may receive either a globally trusted certificate or a certificate from a private CA. The certificate from your private CA may include a domain certificate, a root certificate, and/or intermediate certificates, all of which need to be in proper certificate order. To verify certificate order, follow the guidelines below.
 
-#### Verify certificate order (private CA only)
+#### Confirm certificate chain order
 
-To confirm that your certificate has the proper certificate order, first run the following command using the `openssl` CLI:
+If your organization is using a private certificate authority, you'll need to confirm that your certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
 
 ```sh
 openssl crl2pkcs7 -nocrl -certfile <your-certificate-filepath> | openssl pkcs7 -print_certs -noout
 ```
 
-This command will generate a report of all certificates included. Verify that the order of these certificates is as follows:
+The command generates a report of all certificates. Verify the order of the certificates is as follows:
 
-1. Domain
-2. Intermediate (optional)
-3. Root
+- Domain
+- Intermediate (optional)
+- Root
 
-If the order of all certificates is correct, proceed to the next step.
+If the certificate order is correct, proceed to step 5.
 
 ## Step 5: Create a Kubernetes TLS Secret
 
@@ -367,10 +367,10 @@ helm repo update
 This will ensure that you pull the latest from our Helm repository. Finally, run:
 
 ```sh
-helm install -f config.yaml --version=0.28 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
+helm install -f config.yaml --version=0.29 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
 ```
 
-This command will install the latest available patch version of Astronomer Software v0.28. To override latest and specify a patch, add it to the `--version=` flag in the format of `0.28.x`. To install Astronomer Software v0.28.0, for example, specify `--version=0.28.0`. For information on all available patch versions, refer to [Software Release Notes](release-notes.md).
+This command will install the latest available patch version of Astronomer Software v0.29. To override latest and specify a patch, add it to the `--version=` flag in the format of `0.29.x`. To install Astronomer Software v0.29.0, for example, specify `--version=0.29.0`. For information on all available patch versions, refer to [Software Release Notes](release-notes.md).
 
 Once you run the commands above, a set of Kubernetes pods will be generated in your namespace. These pods power the individual services required to run our platform, including the Software UI and Houston API.
 
@@ -486,7 +486,7 @@ Verify that this output matches with that of the following command, which doesn'
 curl -v -k -X POST https://houston.BASEDOMAIN/v1 -H "Authorization: Bearer <token>"
 ```
 
-Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astronomer CLI:
+Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astro CLI:
 
 ```sh
 astro auth login <your-astronomer-base-domain>

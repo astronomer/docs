@@ -18,8 +18,8 @@ module.exports = {
       type: 'category',
       label: 'Get Started',
       items: [
-        'install-cli',
         'create-project',
+        'create-deployment',
       ],
     },
     {
@@ -52,7 +52,7 @@ module.exports = {
       type: 'category',
       label: 'Manage Deployments',
       items: [
-        'configure-deployment',
+        'configure-deployment-resources',
         'api-keys',
         'environment-variables',
         'secrets-backend',
@@ -63,6 +63,7 @@ module.exports = {
       label: 'Observability',
       items: [
         'deployment-metrics',
+        'data-lineage',
         'scheduler-logs',
         'airflow-alerts',
       ],
@@ -71,8 +72,16 @@ module.exports = {
       type: 'category',
       label: 'Administration',
       items: [
-        'install-aws',
+        {
+          type: 'category',
+          label: 'Install Astro',
+          items: [
+            'install-aws',
+            'install-gcp',
+          ],
+        },
         'manage-workspaces',
+        'set-up-data-lineage',
         {
           type: 'category',
           label: 'User Access',
@@ -98,7 +107,6 @@ module.exports = {
       label: 'Release Notes',
       items: [
         'release-notes',
-        'cli-release-notes',
         'runtime-release-notes',
       ],
     },
@@ -106,41 +114,25 @@ module.exports = {
       type: 'category',
       label: 'Reference',
       items: [
-        {
-          type: 'category',
-          label: 'CLI Command Reference',
-          link: { type: 'doc', id: 'cli-reference' },
-          items: [
-            'cli-reference/astrocloud-auth-login',
-            'cli-reference/astrocloud-auth-logout',
-            'cli-reference/astrocloud-completion',
-            'cli-reference/astrocloud-deploy',
-            'cli-reference/astrocloud-deployment-create',
-            'cli-reference/astrocloud-deployment-delete',
-            'cli-reference/astrocloud-deployment-list',
-            'cli-reference/astrocloud-deployment-logs',
-            'cli-reference/astrocloud-deployment-update',
-            'cli-reference/astrocloud-deployment-variable-create',
-            'cli-reference/astrocloud-deployment-variable-list',
-            'cli-reference/astrocloud-dev-init',
-            'cli-reference/astrocloud-dev-kill',
-            'cli-reference/astrocloud-dev-logs',
-            'cli-reference/astrocloud-dev-parse',
-            'cli-reference/astrocloud-dev-ps',
-            'cli-reference/astrocloud-dev-pytest',
-            'cli-reference/astrocloud-dev-run',
-            'cli-reference/astrocloud-dev-start',
-            'cli-reference/astrocloud-dev-stop',
-            'cli-reference/astrocloud-dev-restart',
-            'cli-reference/astrocloud-version',
-            'cli-reference/astrocloud-workspace-list',
-            'cli-reference/astrocloud-workspace-switch',],
-        },
         'known-limitations',
         'runtime-version-lifecycle-policy',
-        'resource-reference-aws',
+        {
+          type: 'category',
+          label: 'Cloud Configuration Reference',
+          items: [
+            'resource-reference-aws',
+            'resource-reference-gcp',
+          ],
+        },
         'platform-variables',
         'data-plane-activation',
+        {
+          type: 'category',
+          label: 'Data Lineage',
+          items: [
+            'data-lineage-support-and-compatibility',
+            'data-lineage-concepts',],
+        },
         {
           type: 'category',
           label: 'Security',
@@ -154,5 +146,57 @@ module.exports = {
         },
       ],
     },
+  ],
+  cli: [
+      {
+        type: 'doc',
+        label: 'CLI Overview',
+        id: 'cli/overview'
+      },
+      {
+        type: 'doc',
+        label: 'Get Started',
+        id: 'cli/get-started'
+      },
+    {
+      type: 'doc',
+      label: 'Configure the CLI',
+      id: 'cli/configure-cli'
+    },
+    {
+      type: 'doc',
+      label: 'Release Notes',
+      id: 'cli/release-notes'
+    },
+    {
+    type: 'category',
+    label: 'Command Reference',
+    link: { type: 'doc', id: 'cli/reference' },
+    items: [
+      'cli/astro-login',
+      'cli/astro-logout',
+      'cli/astro-completion',
+      'cli/astro-deploy',
+      'cli/astro-deployment-create',
+      'cli/astro-deployment-delete',
+      'cli/astro-deployment-list',
+      'cli/astro-deployment-logs',
+      'cli/astro-deployment-update',
+      'cli/astro-deployment-variable-create',
+      'cli/astro-deployment-variable-list',
+      'cli/astro-dev-init',
+      'cli/astro-dev-kill',
+      'cli/astro-dev-logs',
+      'cli/astro-dev-parse',
+      'cli/astro-dev-ps',
+      'cli/astro-dev-pytest',
+      'cli/astro-dev-run',
+      'cli/astro-dev-start',
+      'cli/astro-dev-stop',
+      'cli/astro-dev-restart',
+      'cli/astro-version',
+      'cli/astro-workspace-list',
+      'cli/astro-workspace-switch',],
+  },
   ],
 };

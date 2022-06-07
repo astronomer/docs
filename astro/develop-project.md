@@ -6,6 +6,8 @@ description: Learn how to add Airflow dependencies and customize an Astro projec
 ---
 
 import {siteVariables} from '@site/src/versions';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 This document explains the various ways you can modify and build your Astro project to fit your team's use case. Specifically, this guide provides instructions on how to:
 
@@ -20,7 +22,7 @@ This document explains the various ways you can modify and build your Astro proj
 To develop an Astro project and test it locally, you need:
 
 - An existing [Astro project](create-project.md).
-- [The Astro CLI](install-cli.md)
+- [The Astro CLI](cli/get-started.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
 ## Build and Run a Project Locally
@@ -28,7 +30,7 @@ To develop an Astro project and test it locally, you need:
 To run your Astro project locally, run the following command:
 
 ```sh
-astrocloud dev start
+astro dev start
 ```
 
 This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
@@ -42,7 +44,7 @@ Once the project builds, you can access the Airflow UI by going to `http://local
 
 :::info
 
-The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astrocloud dev start` command, for example, is functionally equivalent to `docker compose start`.
+The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astro dev start` command, for example, is functionally equivalent to `docker compose start`.
 
 :::
 
@@ -57,10 +59,10 @@ If you see `Error: cannot start, project already running` when you run this comm
 To restart your local Airflow environment, run the following command:
 
 ```sh
-astrocloud dev restart
+astro dev restart
 ```
 
-These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astrocloud dev stop` to stop your Docker containers without restarting or rebuilding your project.
+These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astro dev stop` to stop your Docker containers without restarting or rebuilding your project.
 
 ## Make Changes to Your Project
 
@@ -244,7 +246,7 @@ This is supported both on Astro and in the context of local development.
 
 ## Override the CLI's Docker Compose File (Local Development Only)
 
-The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), which is a tool for defining and running multi-container Docker applications. You can override the CLI's Docker Compose configurations by adding a `docker-compose.override.yml` file to your Astro project. Any values in this file override the CLI's default settings whenever you run `astrocloud dev start`.
+The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), which is a tool for defining and running multi-container Docker applications. To override CLI Docker Compose configurations, add a `docker-compose.override.yml` file to your Astro project. Any values in this file override the default CLI settings whenever you run `astro dev start`.
 
 To see what values you can override, reference the CLI's [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go). The linked file is for the original Astro CLI, but the values here are identical to those used in the Astro CLI. Common use cases for Docker Compose overrides include:
 
@@ -277,13 +279,13 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 ## Set Environment Variables via .env (Local Development Only)
 
-For Astro projects deployed on Astro, we generally recommend [setting environment variables via the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](install-cli.md) to set environment variables in your project's `.env` file.
+For Astro projects deployed on Astro, we generally recommend [setting environment variables via the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](cli/get-started.md) to set environment variables in your project's `.env` file.
 
 To add Environment Variables locally:
 
 1. Open the `.env` file in your Astro project directory.
 2. Add your environment variables to the `.env` file.
-3. Rebuild your image by running `astrocloud dev start --env .env`.
+3. Rebuild your image by running `astro dev start --env .env`.
 
 When setting environment variables in your `.env` file, use the following format:
 
@@ -355,7 +357,21 @@ my_project
     └── prod.env
 ```
 
-## Install Python Packages from a Private GitHub Repository
+## Install Python Packages from Private Sources
+
+Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](develop-project.md#add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
+
+Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image.
+
+<Tabs
+    defaultValue="github"
+    values={[
+        {label: 'Private GitHub Repo', value: 'github'},
+        {label: 'Private PyPi Index', value: 'pypi'},
+    ]}>
+<TabItem value="github">
+
+#### Install Python Packages from Private GitHub Repositories
 
 This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.  At a high level, this setup entails specifying your private packages in `requirements.txt`, creating a custom Docker image that mounts a GitHub SSH key for your private GitHub repositories, and building your project with this Docker image.
 
@@ -367,19 +383,25 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 :::
 
-### Prerequisites
+#### Prerequisites
 
 To install Python packages from a private GitHub repository on Astro, you need:
 
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
-- A [GitHub SSH Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+- A [GitHub SSH Private Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+
+:::warning
+
+If your organization enforces SAML single sign-on (SSO), you must first authorize your key to be used with that authentication method. For instructions, see [GitHub documentation](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on).
+
+:::
 
 This setup assumes that each custom Python package is hosted within its own private GitHub repository. Installing multiple custom packages from a single private GitHub repository is not supported.
 
-### Step 1: Specify the Private Repository in Your Project
+#### Step 1: Specify the Private Repository in Your Project
 
 To add a Python package from a private repository to your Astro project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as:
 
@@ -397,14 +419,14 @@ numpy==1.22.1
 
 This example assumes that the name of each of your Python packages is identical to the name of its corresponding GitHub repository. In other words,`mypackage1` is both the name of the package and the name of the repository.
 
-### Step 2: Create Dockerfile.build
+#### Step 2: Create Dockerfile.build
 
 1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 4.2.10, your `FROM` line would be:
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
    ```text
-   FROM quay.io/astronomer/astro-runtime:4.2.10-base AS stage1
+   FROM quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
    ```
 
   :::info
@@ -423,22 +445,19 @@ This example assumes that the name of each of your Python packages is identical 
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install Python and OS-Level Packages
     COPY packages.txt .
-    RUN cat packages.txt | xargs apk add --no-cache
+    RUN apt-get update && cat packages.txt | xargs apt-get install -y
 
     FROM stage1 AS stage2
-    RUN --mount=type=ssh,id=github apk add --no-cache --virtual .build-deps \
-        build-base \
-        git \
-        python3 \
-        openssh-client \
-    && mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts \
+    USER root
+    RUN apt-get -y install git python3 openssh-client \
+      && mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
     # Install Python Packages
     COPY requirements.txt .
-    RUN pip install --no-cache-dir -q -r requirements.txt
+    RUN --mount=type=ssh,id=github pip install --no-cache-dir -q -r requirements.txt
 
     FROM stage1 AS stage3
     # Copy requirements directory
-    COPY --from=stage2 /usr/lib/python3.9/site-packages/ /usr/lib/python3.9/site-packages/
+    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY . .
     ```
 
@@ -450,35 +469,37 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-  If you don't want keys in this file to be pushed back up to your GitHub repository, consider adding this file to `.gitignore`.
+  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astro Runtime may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
+
+  To identify the Python version in your Astro Runtime image, run:
+
+     ```
+     docker run quay.io/astronomer/astro-runtime:<runtime-version>-base python --version
+     ```
+
+  Make sure to replace `<runtime-version>` with your own.
 
   :::
 
   :::info
 
-  If your repository is hosted somewhere other than GitHub, replace the location of your SSH key in the `ssh-keyscan` command.
+  If your repository is hosted somewhere other than GitHub, replace the domain in the `ssh-keyscan` command with the domain where the package is hosted.
 
   :::
 
-### Step 3: Build a Custom Docker Image
+#### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH key file name and `<astro-runtime-image>` with your Astro Runtime image:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<astro-runtime-image>` with your Astro Runtime image:
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
     ```
 
-    For example, if you have `quay.io/astronomer/astro-runtime:4.2.10-base` in your `Dockerfile.build`, this command would be:
+    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0-base` in your `Dockerfile.build`, this command would be:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-4.2.10-base .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-5.0.0-base .
     ```
-
-  :::info
-
-  If your repository is hosted somewhere other than GitHub, replace the location of your SSH key in the `--ssh` flag.
-
-  :::
 
 2. Replace the contents of your Astro project's `Dockerfile` with the following:
 
@@ -486,10 +507,114 @@ This example assumes that the name of each of your Python packages is identical 
    FROM custom-<runtime-image>
    ```
 
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:4.2.10-base`, this line would be:
+   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0-base`, this line would be:
 
    ```
-   FROM custom-astro-runtime:4.2.10-base
+   FROM custom-astro-runtime:5.0.0-base
    ```
 
 Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
+
+</TabItem>
+
+<TabItem value="pypi">
+
+#### Install Python Packages from a Private PyPI Index
+
+This topic provides instructions for building your Astro project using Python packages from a private PyPI index. In some organizations, python packages are prebuilt and pushed to a hosted private pip server (such as pypiserver or Nexus Repository) or managed service (such as PackageCloud or Gitlab). At a high level, this setup requires specifying your private packages in `requirements.txt`, creating a custom Docker image that changes where pip looks for packages, and building your project with this Docker image.
+
+#### Prerequisites
+
+To build from a private repository, you need:
+
+- An [Astro project](create-project.md).
+- A private PyPI index with username and password authentication.
+
+#### Step 1: Add privately hosted packages to requirements.txt
+
+Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](https://pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
+
+:::caution
+
+Ensure that the name of the package on the private repository does not clash with any existing python packages. The order that pip will search indices might produce unexpected results.
+
+:::
+
+#### Step 2: Create Dockerfile.build
+
+1. In your Astro project, create a duplicate of your `Dockerfile` named `Dockerfile.build`.
+
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+
+   ```text
+   quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
+   ```
+
+   :::info
+
+   If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image as demonstrated in the example above. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
+
+   :::
+
+3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
+
+    ```docker
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
+    ARG BUILD_NUMBER=-1
+    LABEL io.astronomer.docker=true
+    LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
+    LABEL io.astronomer.docker.airflow.onbuild=true
+    # Install Python and OS-Level Packages
+    COPY packages.txt .
+    RUN apt-get update && cat packages.txt | xargs apt-get install -y
+
+    FROM stage1 AS stage2
+    # Install Python Packages
+    ARG PIP_EXTRA_INDEX_URL
+    ENV PIP_EXTRA_INDEX_URL=${PIP_EXTRA_INDEX_URL}
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -q -r requirements.txt
+
+    FROM stage1 AS stage3
+    # Copy requirements directory
+    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+    COPY . .
+    ```
+
+    In order, these commands:
+
+    - Complete the standard installation of OS-level packages in `packages.txt`.
+    - Add the environment variable `PIP_EXTRA_INDEX_URL` to instruct pip on where to look for non-public packages.
+    - Install public and private Python-level packages from your `requirements.txt` file.
+
+#### Step 3: Build a Custom Docker Image
+
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to substitute in the pip repository and associated credentials:
+
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-<airflow-image> .
+    ```
+
+    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0` in your `Dockerfile.build`, this command would be:
+
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-astro-runtime-5.0.0 .
+    ```
+
+
+2. Replace the contents of your Astro project's `Dockerfile` with the following:
+
+   ```
+   FROM custom-<airflow-image>
+   ```
+
+   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0`, this line would be:
+
+   ```
+   FROM custom-astro-runtime:5.0.0
+   ```
+
+   Your Astro project can now utilize Python packages from your private PyPi index. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
+
+</TabItem>
+</Tabs>

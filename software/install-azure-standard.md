@@ -5,7 +5,7 @@ id: install-azure
 description: Install Astronomer Software on Azure Kubernetes Service (AKS).
 ---
 
-This guide describes the steps to install Astronomer Software on Azure, which allows you to deploy and scale [Apache Airflow](https://airflow.apache.org/) on an [Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/) (AKS) cluster.
+Install Astronomer Software on Azure to deploy and scale [Apache Airflow](https://airflow.apache.org/) on a [Microsoft Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/) (AKS) cluster.
 
 ## Prerequisites
 
@@ -77,12 +77,19 @@ az group create --location <location> --name <my_resource_group>
 
 ### Create an AKS Cluster
 
-Astronomer will deploy to Azure's Kubernetes service (AKS). Learn more about AKS [here.](https://docs.microsoft.com/en-us/azure/aks/)
-You can choose the machine type to use, but we recommend using larger nodes vs smaller nodes.
+Once you've created an Azure Resource Group, you can create an AKS cluster using the Azure CLI, Azure PowerShell, or Azure Portal. For instructions, see [Microsoft documentation](https://docs.microsoft.com/en-us/azure/aks/).
+You can create a cluster with any machine type, but Astronomer recommends using larger nodes and not smaller nodes.
 
-Create your Kubernetes cluster:
+Verify your Kubernetes version is supported by Astronomer Software:
 ```
-az aks create --name <my_cluster_name> --resource-group <my_resource_group> --node-vm-size Standard_D8s_v3 --node-count 3
+az aks get-versions --location <your-region> --output table
+```
+
+The Kubernetes version returned must be supported by Astronomer Software. See [Version Compatibility Reference](version-compatibility-reference.md).
+
+Create and autoscale your Kubernetes cluster:
+```
+az aks create --name <name_of_cluster> --resource-group <your_resource_group> --kubernetes-version <X.X.X> --node-vm-size Standard_D8s_v3 --node-count 3 --enable-cluster-autoscaler --min-count 3 --max-count 10
 ```
 
 You may need to increase your resource quota in order to provision these nodes.
@@ -156,21 +163,21 @@ This command will generate a report. If the `X509v3 Subject Alternative Name` se
 
 Depending on your organization, you may receive either a globally trusted certificate or a certificate from a private CA. The certificate from your private CA may include a domain certificate, a root certificate, and/or intermediate certificates, all of which need to be in proper certificate order. To verify certificate order, follow the guidelines below.
 
-#### Verify certificate order (private CA only)
+#### Confirm certificate chain order
 
-To confirm that your certificate has the proper certificate order, first run the following command using the `openssl` CLI:
+If your organization is using a private certificate authority, you'll need to confirm that your certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
 
 ```sh
 openssl crl2pkcs7 -nocrl -certfile <your-certificate-filepath> | openssl pkcs7 -print_certs -noout
 ```
 
-This command will generate a report of all certificates included. Verify that the order of these certificates is as follows:
+The command generates a report of all certificates. Verify the order of the certificates is as follows:
 
-1. Domain
-2. Intermediate (optional)
-3. Root
+- Domain
+- Intermediate (optional)
+- Root
 
-If the order of all certificates is correct, proceed to the next step.
+If the certificate order is correct, proceed to step 5.
 
 ## Step 5: Create a Kubernetes TLS Secret
 
@@ -500,7 +507,7 @@ Verify that this output matches with that of the following command, which doesn'
 curl -v -k -X POST https://houston.BASEDOMAIN/v1 -H "Authorization: Bearer <token>"
 ```
 
-Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astronomer CLI:
+Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astro CLI:
 
 ```sh
 astro auth login <your-astronomer-base-domain>
@@ -517,7 +524,7 @@ Finally, try running `$ astro deploy` on a test deployment. Create a deployment 
 ```sh
 $ mkdir demo
 $ cd demo
-$ astro dev init
+$ astro dev init --use-astronomer-certified
 $ astro deploy -f
 ```
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.

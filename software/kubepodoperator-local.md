@@ -25,7 +25,7 @@ Navigate to the `$HOME/.kube` that was created when you enabled Kubernetes in Do
 
 ### Linux
 
-In a `.kube` folder in your Astronomer project, create a config file with:
+In a `.kube` folder in your Astro project, create a config file with:
 
 ```bash
 microk8s.config > /include/.kube/config
