@@ -69,7 +69,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
 ## Step 2: Deploy a New Astronomer Image
 
-### 1. Locate your Dockerfile in your Project Directory
+### 1. Locate Your Dockerfile in Your Project Directory
 
 Open the `Dockerfile` in your Astronomer directory. When you initialized an Astro project with the Astro CLI, the following files were automatically generated:
 
@@ -84,7 +84,7 @@ Open the `Dockerfile` in your Astronomer directory. When you initialized an Astr
 └── requirements.txt # For any Python packages
 ```
 
-### 2. Choose your new Astronomer Image
+### 2. Choose Your New Astronomer Image
 
 <!--- Version-specific -->
 
@@ -137,7 +137,7 @@ To minimize the upgrade time for a Deployment, contact [Astronomer Support](http
 
 :::
 
-### 5. Confirm your version in the Airflow UI
+### 5. Confirm Your Version in the Airflow UI
 
 Open the Airflow UI and confirm that you're running the correct Airflow version.
 
