@@ -14,7 +14,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest Astro Runtime Version**: 5.0.3 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.0.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.0.1 ([Release notes](cli/release-notes.md))
 
 ## June 2, 2022
 
@@ -562,7 +562,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 :::danger
 
-This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0 of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
+This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 
 :::
 
