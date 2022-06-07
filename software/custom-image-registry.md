@@ -166,7 +166,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
+4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials. If you're using different registries for each Deployment, you can skip this step.
 
     ```bash
