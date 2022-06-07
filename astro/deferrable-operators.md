@@ -7,18 +7,18 @@ description: Run deferrable operators on Astro for improved performance and cost
 
 [Apache Airflow 2.2](https://airflow.apache.org/blog/airflow-2.2.0/) introduced [**deferrable operators**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), a powerful type of Airflow operator that's optimized for lower resource costs and improved performance. In Airflow, it's common to use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) and some [operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) to configure tasks that wait for some external condition to be met before executing or triggering another task. While tasks using standard operators and sensors take up a worker slot when checking if an external condition has been met, deferrable operators suspend themselves during that process. This releases the worker to take on other tasks.
 
-Deferrable operators rely on a new Airflow component called the Triggerer. The Triggerer is highly available and built into all Deployments on Astro, which means that you can use deferrable operators in your DAGs with no additional configuration. To ensure that you can test your DAGs locally, the Triggerer is also built into the Astro CLI local development experience.
+## Benefits of Deferrable Operators
 
-Deferrable operators enable two primary benefits:
+ Deferrable operators provide the following benefits:
 
 - Reduced resource consumption. Depending on your resources and workload, deferrable operators can lower the number of workers needed to run tasks during periods of high concurrency. Less workers can lower your infrastructure cost per Deployment.
 - Resiliency against restarts. When you push code to a Deployment on Astro, the Triggerer process that deferrable operators rely on is gracefully restarted and does not fail.
 
-In general, we recommend using deferrable versions of operators or sensors that typically spend a long time waiting for a condition to be met. This includes the `S3Sensor`, the `HTTPSensor`, the `DatabricksSubmitRunOperator`, and more.
+In general, Astronomer recommends using deferrable versions of operators or sensors that typically spend a long time waiting for a condition to be met. This includes the `S3Sensor`, the `HTTPSensor`, the `DatabricksSubmitRunOperator`, and more.
 
 ### How It Works
 
-Airflow 2.2 introduces two new concepts to support deferrable operators: the Trigger and the Triggerer.
+Airflow 2.2 introduces two new concepts to support deferrable operators: the Trigger and the Triggerer. The Triggerer is built into all Astro Deployments, which means that you can use deferrable operators in your DAGs with no additional configuration. The Triggerer is also built into the Astro CLI.
 
 A **Trigger** is a small, asynchronous Python function that quickly and continuously evaluates a given condition. Because of its design, thousands of Triggers can be run at once in a single process. In order for an operator to be deferrable, it must have its own Trigger code that determines when and how operator tasks are deferred.
 
@@ -26,10 +26,10 @@ The **Triggerer** is responsible for running Triggers and signaling tasks to res
 
 The process for running a task using a deferrable operator is as follows:
 
-1. The task is picked up by a worker, which executes an initial piece of code that initializes the task. During this time, the task is in a "running" state and takes up a worker slot.
-2. The task defines a Trigger and defers the function of checking on some condition to the Triggerer. Because all of the deferring work happens in the Triggerer, the task instance can now enter a "deferred" state. This frees the worker slot to take on other tasks.
-3. The Triggerer runs the task's Trigger periodically to check whether the condition has been met.
-4. Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a worker, it begins to complete its main function.
+- The task is picked up by a worker, which executes an initial piece of code that initializes the task. During this time, the task is in a "running" state and takes up a worker slot.
+- The task defines a Trigger and defers the function of checking on some condition to the Triggerer. Because all of the deferring work happens in the Triggerer, the task instance can now enter a "deferred" state. This frees the worker slot to take on other tasks.
+- The Triggerer runs the task's Trigger periodically to check whether the condition has been met.
+- Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a worker, it begins to complete its main function.
 
 For more information on how deferrable operators work and how to use them, read our [Airflow Guide for Deferrable Operators](https://www.astronomer.io/guides/deferrable-operators) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html).
 
