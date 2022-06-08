@@ -66,11 +66,16 @@ For the smoothest, out-of-the-box Airflow experience, we strongly recommend and 
 
 ## Backport Policy for Bug and Security Fixes
 
-If a major stability bug in Astro Runtime is identified by Astronomer, a fix will be backported to all LTS versions and only the latest stable version. For users on a stable version that is not latest, our team will recommend that you upgrade. Major issues in this category may result in significant delays in task scheduling as well as potential data loss.
+When Astronomer identifies a significant Astro Runtime bug, a fix is backported to all Long Term Support (LTS) versions and the latest stable version. Astronomer recommends that you upgrade Astro Runtime if you are not using the latest, stable version. The timely implementation of bug fixes is recommended to avoid task scheduling delays and data loss.
 
-If a major security issue is identified, a fix will be backported and made available as a new Runtime patch version for all stable and LTS releases in maintenance. Major issues in this category are classified by a combination of impact and exploitability.
+When Astronomer identifies a significant Astro Runtime security vulnerability, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
 
-In rare instances, the Astronomer team may make an exception and backport a bug or security fix to a release that is beyond the commitment stated above. To submit a request for consideration, please reach out to your customer success manager.
+Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
+
+### The Quay Common Vulnerabilities and Exposures Report
+
+Astronomer is aware of the Quay Common Vulnerabilities and Exposures (CVE) report and monitors it frequently. Many of the medium and low-level vulnerabilities identified in the report pose no risk to Astronomer customers. Some high-level vulnerabilities identified in the report must be corrected by vendors and Astronomer adds the fixes to stable and LTS releases as soon as they are available. All vulnerabilities that are the responsibility of Astronomer are addressed quickly and fixes are provided regularly. 
+
 
 ## Astro Runtime Maintenance Policy
 
