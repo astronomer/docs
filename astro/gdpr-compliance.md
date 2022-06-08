@@ -2,7 +2,7 @@
 sidebar_label: 'GDPR Compliance'
 title: "GDPR Compliance"
 id: gdpr-compliance
-description: Learn how Astronomer and Astro are GDPR ready.
+description: Learn how Astronomer and Astro are GDPR compliant.
 ---
 
 ## What is the GDPR?
