@@ -48,11 +48,7 @@ The Dockerfiles for all supported Astro Runtime images are located in the [Astro
 
 Executors are used to schedule, monitor, and execute tasks. Only a single executor can be configured at a time. 
 
-Astro Runtime supports the following executors:
-
-- [Local Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html)
-- [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html)
-- [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html)
+Astro Runtime supports the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html).
 
 ## Provider Packages
 
