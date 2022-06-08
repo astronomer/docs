@@ -16,7 +16,7 @@ If your organization can't support the Astronomer default internal registry, you
 
 ## Implementation Considerations
 
-Deploying code changes to a custom image registry requires triggering a GraphQL mutation to provide a Deployment release name, image name, and Airflow version to the registry. Because this process is difficult to manually trigger, Astronomer recommends configuring a custom image registry only if your DAG authors can deploy code changes via CI/CD pipelines. In this implementation, you would use your CI/CD tool to:
+Deploying code changes to a custom image registry requires triggering a GraphQL mutation to provide a Deployment release name, image name, and Airflow version to the registry. Because this process is difficult to manually trigger, Astronomer recommends configuring a custom image registry only if your DAG authors can deploy code changes using continuous integration and continuous delivery (CI/CD) pipelines. In this implementation, you use your CI/CD tool to:
 
 - Build your Astro project into a container image.
 - Deploy the image to your custom registry.
@@ -53,7 +53,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::info
 
-  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace, making sure to specify different custom registries using `--docker-server`. Because you don’t need to sync secrets between Deployments, you should not add the annotation as described in this step.
+  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace. Make sure to specify different custom registries using `--docker-server`. If you don't need to synch your secrets between deployments, you don't need to add the secret annotation.
 
   :::
 
@@ -87,8 +87,8 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change as described in [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
-5. For any existing Deployments, run the following command to sync registry credentials.
+4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+5. For any existing Deployments, run the following command to sync the registry credentials.
 
     ```bash
     kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
@@ -120,7 +120,8 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::info
 
-  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace, making sure to specify different custom registries using `--docker-server`. Because you don’t need to sync secrets between Deployments, you should not add the annotation as described in this step.
+  To use different registries for each Deployment, create the same secret in each Deployment namespace instead of your Astronomer namespace. Make sure to specify different custom registries using `--docker-server`. You don't need to add the annotation if you're not synccing secrets between Deployments.
+
 
   :::
 
@@ -163,18 +164,13 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change as described in [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
-5. For any existing Deployments, run the following command to sync registry credentials.
+4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+5. For any existing Deployments, run the following command to sync the registry credentials. If you're using different registries for each Deployment, you can skip this step.
 
     ```bash
     kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
     ```
 
-  :::info
-
-  If you're using different registries for each Deployment, skip this step.
-
-  :::
 
 </TabItem>
 </Tabs>
