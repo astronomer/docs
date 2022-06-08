@@ -591,32 +591,32 @@ Ensure that the name of the package on the private repository does not clash wit
 
 #### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to substitute in the pip repository and associated credentials:
+1. Run the following command to create a copy of the Astro `Dockerfile` in an Amazon ECR repository:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-<airflow-image> .
+    [create ECR registry]
+    aws ecr get-login-password --region [region] | docker login --username AWS --password-stdin [account].dkr.ecr.[region].amazonaws.com
+    docker build -f Dockerfile.base -t [account].dkr.ecr.[region].amazonaws.com/[registry]:[tag] .
+    docker push [account].dkr.ecr.[region].amazonaws.com/[registry]:[tag].
     ```
 
-    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0` in your `Dockerfile.build`, this command would be:
+2. In the `Dockerfile` add the following:
 
-    ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-astro-runtime-5.0.0 .
-    ```
+   ```
+   [account].dkr.ecr.[region].amazonaws.com/[registry]:[tag]
+   ```
 
-
-2. Replace the contents of your Astro project's `Dockerfile` with the following:
+3. Update the following entry in the  `Dockerfile`:
 
    ```
    FROM custom-<airflow-image>
    ```
 
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0`, this line would be:
+   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0`, this line would be: 
 
    ```
-   FROM custom-astro-runtime:5.0.0
-   ```
-
-   Your Astro project can now utilize Python packages from your private PyPi index. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
+   FROM custom-astro-runtime:5.0.0-base
+   ```   
 
 </TabItem>
 </Tabs>
