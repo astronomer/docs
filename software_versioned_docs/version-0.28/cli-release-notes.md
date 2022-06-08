@@ -13,7 +13,7 @@ If you have any questions or a bug to report, reach out to us via [Astronomer Su
 
 ## Astro CLI v1.0.0
 
-Release date: May 27, 2022
+Release date: June 2, 2022
 
 ### A Shared CLI for All Astronomer Users
 

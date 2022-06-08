@@ -9,8 +9,6 @@ description: Learn how to create and configure Astro Deployment resources.
 
 After you create an Astro Deployment, you can modify its resource settings to make sure that your tasks have the CPU and memory required to complete successfully.
 
-Astro supports the `AU` as the primary resource unit. In this context,
-
 ## Configure a Workspace
 
 When you first sign up for Astro, you can expect to be invited to a Workspace created for your team. Within a Workspace, you can create Deployments and push DAGs to any Deployment from the Astro CLI or from a CI/CD process. You're free to invite other users to that Workspace and create as many Deployments as you'd like.

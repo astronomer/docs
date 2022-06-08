@@ -26,7 +26,7 @@ Specifically, the Astro CLI includes:
 - A robust set of commands to match functionality in the Cloud UI, including commands to create a Deployment and modify environment variables.
 - Support for Deployment API keys, which you can use to automate commands as part of CI/CD workflows.
 
-To stay up to date on the latest features, see [Astro CLI Release Notes](https://github.com/astronomer/docs/pull/730/cli-release-notes.md).
+To stay up to date on the latest features, see [Astro CLI Release Notes](cli/release-notes.md).
 
 ## CLI Reference
 

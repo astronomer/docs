@@ -20,7 +20,7 @@ All reference documentation is based on the latest available version of the Astr
 We expect that you'll use these commands most often when managing your Astro projects and Deployments:
 
 - [`astro login`](cli/astro-login.md)
-- [`astro dev init`](cli/astro-init.md)
+- [`astro dev init`](cli/astro-dev-init.md)
 - [`astro dev start`](cli/astro-dev-start.md)
 - [`astro dev stop`](cli/astro-dev-stop.md)
 - [`astro dev restart`](cli/astro-dev-restart.md)

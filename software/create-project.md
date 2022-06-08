@@ -11,7 +11,7 @@ This guide will help you get started on Astronomer Software by walking through t
 
 ## Prerequisites
 
-Creating an Astronomer project requires the [Astro CLI](install-cli.md).
+Creating an Astro project requires the [Astro CLI](install-cli.md).
 
 ## Step 1: Create a Project Directory
 
@@ -77,7 +77,7 @@ To confirm that you successfully initialized an Astro project, run the following
 astro dev start
 ```
 
-This command builds your project and spins up 3 Docker containers on your machine, each for a different Airflow component:
+This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
 
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI

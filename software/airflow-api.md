@@ -184,7 +184,7 @@ print(resp.json())
 
 ## Notes on the Airflow 2 Stable REST API
 
-As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-airflow-2-0), the Apache Airflow project now supports an official and more robust Stable REST API. Among other things, Airflow's new REST API:
+As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-airflow-2-0), the Apache Astro project now supports an official and more robust Stable REST API. Among other things, Airflow's new REST API:
 
 - Makes for easy access by third-parties.
 - Is based on the [Swagger/OpenAPI Spec](https://swagger.io/specification/).

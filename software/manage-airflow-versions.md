@@ -102,7 +102,7 @@ To complete the upgrade, all you have to do is add a corresponding AC image to y
 
 ### 1. Locate your Dockerfile in your Project Directory
 
-First, open the `Dockerfile` within your Astronomer directory. When you initialized an Airflow project via the Astro CLI, the following files should have been automatically generated:
+First, open the `Dockerfile` within your Astronomer directory. When you initialized an Astro project with the Astro CLI, the following files should have been automatically generated:
 
 ```
 .

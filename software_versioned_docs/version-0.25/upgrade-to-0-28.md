@@ -108,7 +108,7 @@ astronomer:
 
 Once you complete this change, compare any values under the `airflow` section with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open-source Airflow chart](https://github.com/apache/airflow/blob/main/chart/values.yaml) to ensure that they are formatted correctly. Incorrectly formatted values for these configurations might result in an error during upgrade.
 
-## Step 6: Upgrade Astronomer to v0.28
+## Step 7: Upgrade Astronomer to v0.28
 
 Run the following script to begin the upgrade process:
 
@@ -145,7 +145,7 @@ Then, run the following command for each pod you find:
 
 `kubectl logs <your-pod-name>`
 
-## Step 7: Confirm That the Upgrade to 0.28 Was Successful
+## Step 8: Confirm That the Upgrade to 0.28 Was Successful
 
 If the upgrade was successful, you should be able to:
 
@@ -169,7 +169,7 @@ If there is a problem creating your Airflow Deployment, check the commander logs
 
 Make changes as needed and rerun the upgrade command from Step 6. Do not continue to Step 8 until you have successfully created a new Airflow Deployment.
 
-## Step 8: Upgrade the Astronomer CLI to v0.28
+## Step 9: Upgrade the Astronomer CLI to v0.28
 
 To ensure reliability and full access to features included in Astronomer Software v0.28, all users must upgrade to v0.28 of the Astronomer CLI. We recommend the latest available version, though you can install any patch release within the v0.28 series.
 

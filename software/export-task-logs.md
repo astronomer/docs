@@ -58,7 +58,7 @@ To enable sidecar logging, please follow the steps below:
     helm get values <your-platform-release-name> astronomer/astronomer -n astronomer
     ```
 
-2. And the below to your `config.yaml:`
+2. Add the below to your `config.yaml:`
 
     ```yaml
     global:

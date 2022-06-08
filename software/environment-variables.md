@@ -37,11 +37,11 @@ Read below for instructions on how to configure them via all 3 methods.
 
 ### via `.env` (_Local Only_)
 
-You can use the [Astro CLI](install-cli.md) to import Environment Variables from the `.env` file that was automatically generated when you initialized an Airflow project on Astronomer using`$ astro dev init`.
+You can use the [Astro CLI](install-cli.md) to import Environment Variables from the `.env` file that was automatically generated when you initialized an Astro project on Astronomer using`$ astro dev init`.
 
 To add Environment Variables locally,
 
-1. Find your `.env` file in your Airflow project directory
+1. Find your `.env` file in your Astro project directory
 2. Add your Environment Variables of choice to that `.env` file
 3. Rebuild your image to apply those changes by running `$ astro dev start --env .env`
 
@@ -109,7 +109,7 @@ my_project
 
 ### via your `Dockerfile`
 
-If you're working on an Airflow project locally but intend to deploy to Astronomer and want to commit your Environment Variables to your source control tool, you can set them in your `Dockerfile`. This file was automatically created when you first initialized your Airflow project on Astronomer (via `$ astro dev init`).
+If you're working on an Astro project locally but intend to deploy to Astronomer and want to commit your Environment Variables to your source control tool, you can set them in your `Dockerfile`. This file was automatically created when you first initialized your Astro project on Astronomer (via `$ astro dev init`).
 
 > **Note:** Given that this file will be committed upstream, we strongly recommend witholding Environment Variables containing sensitive credentials from your `Dockerfile` and instead inserting them via your `.env` file locally (while adding the file to your `.gitignore`) or setting them as 'secret' via the Software UI, as described in a dedicated section below.
 

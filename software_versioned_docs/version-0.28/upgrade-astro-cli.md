@@ -52,7 +52,7 @@ This topic does not include information about new features and changes that are 
 
 ### `astro dev init`: New `--use-astronomer-certified` Flag Required for All New Projects Deployed to Software
 
-When you create a new Astro project via `astro dev init`, you must now specify the `--use-astronomer-certified` flag if you want to [deploy the project](deploy-code.md) to a Deployment on Astronomer Software. This flag initializes your project with the latest version of Astronomer Certified.
+When you create a new Astro project via `astro dev init`, you must now specify the `--use-astronomer-certified` flag if you want to [deploy the project](deploy-cli.md) to a Deployment on Astronomer Software. This flag initializes your project with the latest version of Astronomer Certified.
 
 If you don't specify this flag, the project will be generated with an Astro Runtime image. Support for Astro Runtime on Astronomer Software is coming soon.
 

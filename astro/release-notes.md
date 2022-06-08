@@ -12,9 +12,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Astro Runtime Version**: 5.0.1 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 5.0.3 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.5.0 ([Release notes](cli-release-notes.md))
+**Latest CLI Version**: 1.0.1 ([Release notes](cli/release-notes.md))
+
+## June 2, 2022
+
+### Support for the `us-east4` GCP Region
+
+You can now [create an Astro Cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
+
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
 
 ## May 26, 2022
 
@@ -299,7 +307,7 @@ For more information about this feature read [Set Up an Identity Provider](confi
 
 The Astro CLI (`astro`) is now generally available as the official command-line tool for Astro. It is a direct replacement of the previously released `astro` executable and comes with various significant improvements. We encourage all customers to upgrade.
 
-For more information on the Astro CLI, see [CLI Release Notes](cli-release-notes.md). For install instructions, read [Install the CLI](cli/get-started.md).
+For more information on the Astro CLI, see [CLI Release Notes](cli/release-notes.md). For install instructions, read [Install the CLI](cli/get-started.md).
 
 ### Multiple Authentication Methods for a Single User Account
 
@@ -554,7 +562,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 :::danger
 
-This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0 of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli-release-notes.md).
+This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 
 :::
 

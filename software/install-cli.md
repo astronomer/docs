@@ -51,7 +51,9 @@ brew install astronomer/tap/astro
 
 If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and version 1.0. To install this release run the following command:  
 
+```sh
 brew install astronomer/tap/astro@0.29.0
+```
 
 :::
 
@@ -94,7 +96,7 @@ To use the Astro CLI on Windows, you must have:
     tar -xvzf .\astrocli.tar.gz
     ```
 
-3. Add the filepath for the directory containing `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astrocloud.exe`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
+3. Add the filepath for the directory containing `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astro.exe`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
 
 4. Restart your machine.
 
@@ -120,7 +122,9 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and version 1.0. To install this release run the following command:  
 
+```sh
 curl -sSL install.astronomer.io | sudo bash -s -- v0.29.0
+```
 
 :::
 

@@ -65,8 +65,7 @@
             "registry-backend",
             "renew-tls-cert",
             "namespace-pools",
-            "third-party-ingress-controllers",
-            "upgrade-to-0-28"
+            "third-party-ingress-controllers"
           ]
         },
         {
@@ -76,7 +75,8 @@
             "apply-platform-config",
             "upgrade-astronomer-stable",
             "houston-api",
-            "configure-platform-resources"
+            "configure-platform-resources",
+            "upgrade-to-0-28"
           ]
         },
         {

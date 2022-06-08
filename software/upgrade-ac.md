@@ -21,7 +21,7 @@ If you're upgrading an Astronomer Certified environment running on Docker, all y
 
 1. Choose a new Astronomer Certified image based on the Airflow version you want to upgrade to. For a list of supported Astronomer Certified images, see [Downloads](https://www.astronomer.io/downloads/) or our [Quay.io repository](https://quay.io/repository/astronomer/ap-airflow?tab=tags).
 
-2. Open the `Dockerfile` in your Airflow project directory.
+2. Open the `Dockerfile` in your Astro project directory.
 
     In your `Dockerfile`, replace the value in the existing `FROM` statement with the new Astronomer Certified Docker image you're upgrading to. For example, to upgrade to Airflow 2.1, your Dockerfile would include the following line:
 

@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Release Notes'
 title: 'Astro CLI Release Notes'
-id: cli-release-notes
+id: release-notes
 description: Release notes for the Astro CLI.
 ---
 
@@ -11,9 +11,17 @@ This document provides a summary of all changes made to the [Astro CLI](cli/get-
 
 If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io)
 
+## Astro CLI v1.0.1
+
+Release date: June 6, 2022
+
+### Bug Fixes
+
+- Fixed an issue where `astro deploy`, `astro dev parse`, and `astro dev pytest` failed for some users
+
 ## Astro CLI v1.0.0
 
-Release date: May 27, 2022
+Release date: June 2, 2022
 
 ### A Shared CLI for All Astronomer Users
 
@@ -251,7 +259,7 @@ Release date: February 17, 2022
 
 ### New `astro dev restart` Command to Test Local Changes
 
-For users making quick and continuous changes to an Astronomer project locally, the Astro CLI now supports a new `astro dev restart` command. This command makes local testing significantly easier and is equivalent to running `astro dev stop` followed by `astro dev start`.
+For users making quick and continuous changes to an Astro project locally, the Astro CLI now supports a new `astro dev restart` command. This command makes local testing significantly easier and is equivalent to running `astro dev stop` followed by `astro dev start`.
 
 ### Support for the Triggerer in Local Airflow Environments
 

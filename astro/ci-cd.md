@@ -52,7 +52,7 @@ $ astro deploy <your-deployment-id>
 
 :::info
 
-The following templates use [Astro CLI v1.0+](cli/cli-release-notes.md) to deploy via CI/CD. These templates will not work if you use the `astrocloud` executable. To upgrade, see [Install the Astro CLI](configure-cli.md).
+The following templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy via CI/CD. These templates will not work if you use the `astrocloud` executable. To upgrade, see [Install the Astro CLI](cli/configure-cli.md).
 
 :::
 
@@ -160,7 +160,7 @@ This setup assumes the following prerequisites:
 
 ### Jenkins
 
-To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astronomer project:
+To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
 1. In your Jenkins pipeline configuration, add the following environment variables:
 
@@ -358,8 +358,9 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
          ASTRONOMER_KEY_SECRET: $ASTRONOMER_KEY_SECRET
       before_script:
        - apk add --update curl && rm -rf /var/cache/apk/*
+       - apk add bash
       script:
-       - curl -sSL install.astronomer.io | sudo bash -s
+       - curl -sSL install.astronomer.io | bash -s
        - astro deploy $ASTRONOMER_DEPLOYMENT_ID -f
       only:
        - main
@@ -397,8 +398,9 @@ When you create environment variables that will be used in multiple branches, yo
             ASTRONOMER_KEY_SECRET: $DEV_ASTRONOMER_KEY_SECRET
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
+          - apk add bash
         script:
-          - curl -sSL install.astronomer.io | sudo bash -s
+          - curl -sSL install.astronomer.io | bash -s
           - astro deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - dev
@@ -413,8 +415,9 @@ When you create environment variables that will be used in multiple branches, yo
             ASTRONOMER_KEY_SECRET: $PROD_ASTRONOMER_KEY_SECRET
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
+          - apk add bash
         script:
-          - curl -sSL install.astronomer.io | sudo bash -s
+          - curl -sSL install.astronomer.io | bash -s
           - astro deploy $PROD_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - main

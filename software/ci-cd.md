@@ -19,7 +19,7 @@ This guide will walk you through configuring a CI/CD pipeline on Astronomer.
 
 ### Example CI/CD Workflow
 
-Consider an Airflow project hosted on GitHub and deployed to Astronomer. In this scenario, a set of `dev` and `main` branches of an Astronomer project are hosted on a single GitHub repository, and `dev` and `prod` Airflow Deployments are hosted on an Astronomer Workspace.
+Consider an Astro project hosted on GitHub and deployed to Astronomer. In this scenario, a set of `dev` and `main` branches of an Astro project are hosted on a single GitHub repository, and `dev` and `prod` Airflow Deployments are hosted on an Astronomer Workspace.
 
 Using CI/CD, you can automatically deploy DAGs to your Airflow Deployment on Astronomer by pushing or merging code to a corresponding branch in GitHub. The general setup would look something like this:
 
@@ -182,7 +182,7 @@ At its core, your CI/CD pipeline will first authenticate to Astronomer's private
 
 The following setup is an example implementation of CI/CD using GitHub Actions. These steps cover both the implementation and the workflow necessary to create a fully functional CI/CD pipeline.
 
-1. Create a GitHub repository for an Astronomer project. Ensure your repo has a development branch and a main branch. In this example, the branches are named `dev` and `main`.
+1. Create a GitHub repository for an Astro project. Ensure your repo has a development branch and a main branch. In this example, the branches are named `dev` and `main`.
 2. Create two [Deployment-level service accounts](ci-cd.md#step-1-create-a-service-account): One for your Dev Deployment and one for your Production Deployment.
 3. Follow instructions in [GitHub documentation](https://docs.github.com/en/actions/reference/encrypted-secrets) to add your service accounts as secrets to your repository. In the example below, these secrets are named `SERVICE_ACCOUNT_KEY` and `SERVICE_ACCOUNT_KEY_DEV`.
 4. Go to the Actions tab of your GitHub repo and create a new action with a `main.yml` file. To achieve the recommended workflow described in [Overview](ci-cd.md#overview), use the following action:
@@ -459,7 +459,7 @@ jobs:
 
 ## Azure DevOps
 
-In this example configuration, you can automatically deploy your Astronomer project from a GitHub repository using an [Azure Devops](https://azure.microsoft.com/en-us/services/devops/) pipeline connected to the GitHub repository.
+In this example configuration, you can automatically deploy your Astro project from a GitHub repository using an [Azure Devops](https://azure.microsoft.com/en-us/services/devops/) pipeline connected to the GitHub repository.
 
 :::tip
 
@@ -469,10 +469,10 @@ To see an example GitHub project that utilizes this configuration, visit [Astron
 
 To set up this workflow, make sure you have:
 
-- A GitHub repository hosting your Astronomer project.
+- A GitHub repository hosting your Astro project.
 - An Azure DevOps account with permissions to create new pipelines.
 
-1. Create a new file called `astro-devops-cicd.yaml` in your Astronomer project repository with the following configuration:
+1. Create a new file called `astro-devops-cicd.yaml` in your Astro project repository with the following configuration:
 
     ```yaml
     # Control which branches have CI triggers:

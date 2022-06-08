@@ -76,7 +76,6 @@ module.exports = {
         'export-task-logs',
         'third-party-ingress-controllers',
         'custom-image-registry',
-        'upgrade-to-0-28',
           ],
         },
         {
@@ -87,6 +86,7 @@ module.exports = {
         'upgrade-astronomer-stable',
         'houston-api',
         'configure-platform-resources',
+        'upgrade-to-0-28',
           ],
         },
         {

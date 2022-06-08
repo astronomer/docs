@@ -20,7 +20,7 @@ astro dev init
 | Option              | Description                                                                                                        | Possible Values             |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------- |
 | `-v`, `runtime-version` | Initialize a project with a specific Runtime version | Any supported Runtime version |
-| `-n`,`--name`            | Name of your Astronomer project                                                                                    | Any string                  |
+| `-n`,`--name`            | Name of your Astro project                                                                                    | Any string                  |
 | `--use-astronomer-certified`            | Only for use on Astronomer Software. Initializes your project with an Astronomer Certified image.                                                 | ``                 |
 
 ## Examples

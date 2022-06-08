@@ -34,7 +34,7 @@ To complete this setup, you need:
     Avoid running this command from a directory containing a Dockerfile.
     :::
 
-2. Run the following command to create a new Astronomer project:
+2. Run the following command to create a new Astro project:
 
     ```sh
     astro dev init
@@ -50,7 +50,7 @@ To complete this setup, you need:
 
 ## Mac Setup
 
-To set up Podman for an Astronomer project:
+To set up Podman for an Astro project:
 
 
 1. Run the following commands to start Podman:
@@ -93,7 +93,7 @@ To set up Podman for an Astronomer project:
 
 5. Enable [Remote Login](https://support.apple.com/en-gb/guide/mac-help/mchlp1066/mac#:~:text=Set%20up%20Remote%20Login%20on,Sharing%20%2C%20then%20select%20Remote%20Login.&text=Select%20the%20Remote%20Login%20tickbox,access%20for%20remote%20users%E2%80%9D%20checkbox.) on your Mac.
 
-6. In a separate terminal window, complete the following set of commands and configurations to mount your local Airflow project directory to the Podman machine:
+6. In a separate terminal window, complete the following set of commands and configurations to mount your local Astro project directory to the Podman machine:
 
     ```sh
     $ podman machine --log-level=debug ssh -- exit 2>&1 | grep Executing
@@ -119,7 +119,7 @@ To set up Podman for an Astronomer project:
 
     Copy the output of `pwd` for step 7.
 
-7. Open a new terminal window. In an empty directory, run the following commands to create a new Astronomer project, set Podman as your primary container engine, and generate a `pod-config.yml` file for your project:
+7. Open a new terminal window. In an empty directory, run the following commands to create a new Astro project, set Podman as your primary container engine, and generate a `pod-config.yml` file for your project:
 
     ```sh
     $ astro dev init --use-astronomer-certified
@@ -145,7 +145,7 @@ To set up Podman for an Astronomer project:
         name: airflow-include-dir
     ```
 
-You can now run the Astro CLI in Podman containers for this Astronomer project.
+You can now run the Astro CLI in Podman containers for this Astro project.
 
 ## Switch Between Using Docker and Podman
 
