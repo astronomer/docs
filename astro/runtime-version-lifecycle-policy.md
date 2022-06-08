@@ -74,7 +74,7 @@ Occasionally, Astronomer might deviate from the defined response policy and back
 
 ### The Quay Common Vulnerabilities and Exposures Report
 
-Astronomer is aware of the Quay Common Vulnerabilities and Exposures (CVE) report and monitors it frequently. Many of the medium and low-level vulnerabilities identified in the report pose no risk to Astronomer customers. Some high-level vulnerabilities identified in the report must be corrected by vendors and Astronomer adds the fixes to stable and LTS releases as soon as they are available. All vulnerabilities that are the responsibility of Astronomer are addressed quickly and fixes are provided regularly. 
+Astronomer is aware of the Quay Common Vulnerabilities and Exposures (CVE) report and monitors it frequently to reduce or eliminate customer exposure to high-level threats. Many of the medium and low-level vulnerabilities identified in the report pose no risk to Astronomer customers. Some high-level vulnerabilities identified in the report must be corrected by vendors. Astronomer adds the fixes provided by vendors to stable and LTS releases as soon as they are available. All vulnerabilities that are the responsibility of Astronomer are addressed quickly and fixes are released regularly. If there is a high-level vulnerability in the CVE report that is causing concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
 
 
 ## Astro Runtime Maintenance Policy
