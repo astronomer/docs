@@ -59,7 +59,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
     new-deployment-1-10-10-airflow-k8s-2            elementary-rotation-5522        ckgwdq8cs037169xtbt2rtu15     1.10.12
     ```
 
-3. Copy the `Deployment ID` and run the following command to list the available Airflow versions:
+3. Copy the `DEPLOYMENT ID` value and run the following command to list the available Airflow versions:
 
     ```
     astro deployment airflow upgrade --deployment-id=<deployment-id>
