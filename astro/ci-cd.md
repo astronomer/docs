@@ -185,7 +185,7 @@ If your Astro project uses a custom Runtime image with additional build-time arg
 
 To complete this setup, you need:
 
-- An Astro project with a custom Runtime image.
+- An Astro project that builds a custom Runtime image.
 
 #### Setup
 
@@ -221,7 +221,7 @@ To complete this setup, you need:
             tags: custom-<astro-runtime-image>
             load: true
             file: Dockerfile.build
-            # Define your custom image's build arguments, contexts, and connections here using the available GitHub Action settings: https://github.com/docker/build-push-action#customizing . This example uses `build-args` , but your use case might require configuring a different value.
+            # Define your custom image's build arguments, contexts, and connections here using the available GitHub Action settings: https://github.com/docker/build-push-action#customizing . This example uses `build-args` , but your use case might require configuring different values.
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
@@ -252,6 +252,7 @@ To complete this setup, you need:
         - name: Create SSH Socket
           uses: webfactory/ssh-agent@v0.5.4
           with:
+            # GITHUB_SSH_KEY must be defined as a GitHub secret.
             ssh-private-key: ${{ secrets.GITHUB_SSH_KEY }}
         - name: (Optional) Test SSH Connection - Should print hello message.
           run: (ssh git@github.com) || true
@@ -262,7 +263,6 @@ To complete this setup, you need:
             tags: custom-<astro-runtime-image>
             load: true
             file: Dockerfile.build
-            # SSH_AUTH_SOCK must be defined as a GitHub environment variable.
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
