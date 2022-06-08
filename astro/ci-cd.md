@@ -183,12 +183,9 @@ Complete this setup if your Astro project uses a custom Runtime image with addit
 
 #### Prerequisites
 
-- You have completed the instructions to [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources) and can build the image locally.
-- If installing from a private GitHub Repo, you have access to the private key file used to authenticate to GitHub.
+To complete this setup, you need:
 
-OR
-
-- If installing from a private PyPi Index, you have a username and password to authenticate to the index.
+- An Astro project with a custom Runtime image. For an example implementation of this, see [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources).
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
