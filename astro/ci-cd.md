@@ -217,7 +217,11 @@ To complete this setup, you need:
             tags: custom-<astro-runtime-image>
             load: true
             file: Dockerfile.build
-            # Define your custom image's build arguments, contexts, and connections here using the available GitHub Action settings: https://github.com/docker/build-push-action#customizing . This example uses `build-args` , but your use case might require configuring different values.
+            # Define your custom image's build arguments, contexts, and connections here using
+            # the available GitHub Action settings:
+            # https://github.com/docker/build-push-action#customizing .
+            # This example uses `build-args` , but your use case might require configuring
+            # different values.
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
