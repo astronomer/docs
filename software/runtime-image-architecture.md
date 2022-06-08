@@ -5,7 +5,7 @@ id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, Astronomer Software's Docker image for Apache Airflow.
 ---
 
-Astro Runtime is a Debian-based, production-ready distribution of Apache Airflow. The intent of this offering is to provide organizations improved functionality, reliability, efficiency, and performance.
+Astro Runtime is a Debian-based, production-ready distribution of Apache Airflow. The Astro Runtime image is intended to provide organizations improved functionality, reliability, efficiency, and performance.
 
 Astro Runtime Docker images are hosted on the Astronomer Docker registry and enable Airflow on Astro. All Astro projects require that you specify an Astro Runtime image in your Dockerfile, and all Deployments on Astro must run only one version of Astro Runtime. Every version of Astro Runtime correlates to one version of Apache Airflow. Depending on the needs of your organization, you can run different versions of Astro Runtime on different Deployments within a given Workspace or Cluster.
 
