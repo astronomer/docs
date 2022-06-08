@@ -87,7 +87,7 @@ To customize permissions, follow the steps below.
 
 <!--- Version-specific -->
 
-First, take a look at our default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.28/default.yaml) and identify two things:
+First, take a look at our default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.29/default.yaml) and identify two things:
 
 1. What role do you want to configure? (e.g. `DEPLOYMENT_EDITOR`)
 2. What permission(s) would you like to add to or remove from that role? (e.g. `deployment.images.push`)
@@ -165,7 +165,7 @@ In addition to the commonly used System Admin role, the Astronomer platform also
 
 No user is assigned the System Editor or Viewer Roles by default, but they can be added by System Admins via our API. Once assigned, System Viewers, for example, can access both Grafana and Kibana but don't have permission to delete a Workspace they're not a part of.
 
-All three permission sets are entirely customizable on Astronomer Software. For a full breakdown of the default configurations attached to the System Admin, Editor and Viewer Roles, refer to the [Houston API source code](https://github.com/astronomer/docs/tree/main/software_configs/0.28/default.yaml).
+All three permission sets are entirely customizable on Astronomer Software. For a full breakdown of the default configurations attached to the System Admin, Editor and Viewer Roles, refer to the [Houston API source code](https://github.com/astronomer/docs/tree/main/software_configs/0.29/default.yaml).
 
 For guidelines on assigning users any System Level role, read below.
 
@@ -288,7 +288,7 @@ For a given Deployment, the Deployment Editor has all of the same default permis
 
 - `deployment.airflow.user`: Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for all Deployments, including modifying task runs and DAG runs
 - `deployment.config.update`: Modify the Deployment's settings
-- `deployment.images.push`: Push code to the Deployment via the Astronomer CLI
+- `deployment.images.push`: Push code to the Deployment using the Astro CLI
 - `deployment.serviceAccounts.create`: Create a Deployment-level service account
 - `deployment.serviceAccounts.update`: Modify a Deployment-level service account
 - `deployment.serviceAccounts.delete`: Delete a Deployment-level service account

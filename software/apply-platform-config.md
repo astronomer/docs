@@ -32,7 +32,7 @@ This file was created when you installed Astronomer using one of the following g
 
 <!--- Version-specific -->
 
-To update any of your existing settings, modify them directly in your `config.yaml` file. To update a setting you haven't already specified, copy the corresponding key-value pair from the [default configuration file](https://github.com/astronomer/docs/blob/main/software_configs/0.28/default.yaml) into your `config.yaml` file and modify the value from there.
+To update any of your existing settings, modify them directly in your `config.yaml` file. To update a setting you haven't already specified, copy the corresponding key-value pair from the [default configuration file](https://github.com/astronomer/docs/blob/main/software_configs/0.29/default.yaml) into your `config.yaml` file and modify the value from there.
 
 When you have finished updating the key-value pairs, ensure that they have the same relative order and indentation as they do in the default configuration file. If they don't, your changes might not be properly applied.
 

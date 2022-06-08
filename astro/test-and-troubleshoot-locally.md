@@ -17,27 +17,27 @@ Whenever you want to test your code, the first step is always to start a local A
 
 To enhance the testing experience for data pipelines, Astro enables users to run DAG unit tests with two different Astro CLI commands:
 
-- `astrocloud dev parse`
-- `astrocloud dev pytest`
+- `astro dev parse`
+- `astro dev pytest`
 
 ### Parse DAGs
 
 To quickly parse your DAGs, you can run:
 
 ```sh
-astrocloud dev parse
+astro dev parse
 ```
 
 This command parses your DAGs to ensure that they don't contain any basic syntax or import errors and that they can successfully render in the Airflow UI.
 
-Generally speaking, `astrocloud dev parse` is a more convenient but less customizable version of `astrocloud dev pytest`. If you don't have any specific test files that you want to run on your DAGs, then we recommend using `astrocloud dev parse` as your primary testing tool. For more information about this command, see the [CLI Command Reference](cli-reference/astrocloud-dev-parse.md).
+The command `astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI Command Reference](cli/astro-dev-parse.md).
 
 ### Run Tests with Pytest
 
 To perform unit tests on your Astro project, you can run:
 
 ```sh
-astrocloud dev pytest
+astro dev pytest
 ```
 
 This command runs all tests in your project's `tests` directory with [pytest](https://docs.pytest.org/en/7.0.x/index.html#), a testing framework for Python. With pytest, you can test custom Python code and operators locally without having to start a local Airflow environment.
@@ -49,7 +49,7 @@ By default, the `tests` directory in your Astro project includes a default DAG i
 - DAGs have no cycles.
 - There are no general import or syntax errors.
 
-`astrocloud dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI Command Reference](cli-reference/astrocloud-dev-pytest.md).
+`astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI Command Reference](cli/astro-dev-pytest.md).
 
 ## View Airflow Task Logs
 
@@ -87,28 +87,28 @@ To access these logs:
 To show logs for your Airflow Scheduler, Webserver, or metadata database locally, run the following command:
 
 ```sh
-astrocloud dev logs
+astro dev logs
 ```
 
 Once you run this command, the most recent logs for these components appear in your terminal window.
 
-By default, running `astrocloud dev logs` shows logs for all Airflow components. If you want to see logs for a specific component, add any of the following flags to your command:
+By default, running `astro dev logs` shows logs for all Airflow components. If you want to see logs for a specific component, add any of the following flags to your command:
 
 - `--scheduler`
 - `--webserver`
 - `--triggerer`
 
-To continue monitoring logs, run `astrocloud dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli-reference/astrocloud-dev-logs.md)
+To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli/astro-dev-logs.md)
 
 ## Run Airflow CLI Commands
 
 To run [Apache Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) commands locally, run the following:
 
 ```sh
-astrocloud dev run <airflow-cli-command>
+astro dev run <airflow-cli-command>
 ```
 
-For example, the Airflow CLI command for viewing the values of your `airflow.cfg` file is `airflow config list`. To run this command with the Astro CLI, you would run `astrocloud dev run config list` instead.
+For example, the Airflow CLI command for viewing the values of your `airflow.cfg` file is `airflow config list`. To run this command with the Astro CLI, you would run `astro dev run config list` instead.
 
 In practice, running `astro dev run` is the equivalent of running `docker exec` in local containers and then running an Airflow CLI command within those containers.
 
@@ -189,7 +189,7 @@ By default, Docker for Desktop will run pods in a namespace called `default`.
 In most cases, [restarting your local project](develop-project.md#restart-your-local-environment) is sufficient for testing and making changes to your project. However, it is sometimes necessary to kill your Docker containers and metadata database for testing purposes. To do so, run the following command:
 
 ```sh
-astrocloud dev kill
+astro dev kill
 ```
 
 This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.

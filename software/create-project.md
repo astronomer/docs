@@ -11,7 +11,7 @@ This guide will help you get started on Astronomer Software by walking through t
 
 ## Prerequisites
 
-Creating an Astronomer project requires the [Astronomer CLI](cli-quickstart.md).
+Creating an Astro project requires the [Astro CLI](install-cli.md).
 
 ## Step 1: Create a Project Directory
 
@@ -21,13 +21,13 @@ Before you create a Software project, create an empty directory and open it:
 mkdir <your-new-directory> && cd <your-new-directory>
  ```
 
-From this directory, run the following Astronomer CLI command:
+From this directory, run the following Astro CLI command:
 
 ```sh
-astro dev init
+astro dev init --use-astronomer-certified
 ```
 
-This will generate the following files:
+This generates the following files:
 
 ```py
 .
@@ -57,6 +57,12 @@ FROM quay.io/astronomer/ap-airflow:latest-onbuild
 
 This will install a Debian-based AC image for the latest version of Airflow we support. To specify a particular Airflow version, read [Upgrade Airflow](manage-airflow-versions.md) and the _Customize your Image_ topic below.
 
+:::tip
+
+To use an Astro Runtime image with your new project, remove `--use-astronomer-certified` from your command. Note that projects using Astro Runtime can only be deployed to Astronomer Software installations on version 0.29 and above.
+
+:::
+
 ### Example DAG
 
 To help you get started, your initialized project includes an `example-dag` in `/dags`. This DAG simply prints today's date, but it'll give you a chance to become familiar with how to deploy on Astronomer.
@@ -71,7 +77,7 @@ To confirm that you successfully initialized an Astro project, run the following
 astro dev start
 ```
 
-This command builds your project and spins up 3 Docker containers on your machine, each for a different Airflow component:
+This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
 
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI

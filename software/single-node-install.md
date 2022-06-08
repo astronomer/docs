@@ -83,7 +83,7 @@ Airflow can run as any user, but for this setup we configure a new user called `
 sudo useradd --create-home astro
 ```
 
-## Step 3: Create an Airflow Project Directory
+## Step 3: Create an Astro Project Directory
 
 You also need to configure an `AIRFLOW_HOME` directory (not to be confused with the user's home directory) where you'll store your DAGs and other necessary files. We recommend using the path `/usr/local/airflow` as your project directory and `/usr/local/airflow/dags` as your DAG directory, but any path can be chosen as long as the `astro` user has write access to it. To do this, run the following commands:
 

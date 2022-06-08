@@ -44,7 +44,7 @@ Astro uses 4 different CIDR blocks for creating the infrastructure for your Astr
 - **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/19`)
 - **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
 - **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
-- **Service VPC Peering**: Used by Private Service Connections (Default: `172.21.0.0/19`)
+- **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/19`)
 
 ## Step 1: Access Astro
 
@@ -73,16 +73,17 @@ To activate the Data Plane on your GCP project:
 1. Run the following commands in your Google Cloud Shell:
 
     ```sh
-    $ gcloud services enable storage-component.googleapis.com
-    $ gcloud services enable storage-api.googleapis.com
-    $ gcloud services enable compute.googleapis.com
-    $ gcloud services enable container.googleapis.com
-    $ gcloud services enable deploymentmanager.googleapis.com
-    $ gcloud services enable cloudresourcemanager.googleapis.com
-    $ gcloud services enable cloudkms.googleapis.com
-    $ gcloud services enable sqladmin.googleapis.com
-    $ gcloud services enable servicenetworking.googleapis.com
-    $ curl \
+    gcloud services enable storage-component.googleapis.com
+    gcloud services enable storage-api.googleapis.com
+    gcloud services enable compute.googleapis.com
+    gcloud services enable container.googleapis.com
+    gcloud services enable deploymentmanager.googleapis.com
+    gcloud services enable cloudresourcemanager.googleapis.com
+    gcloud services enable cloudkms.googleapis.com
+    gcloud services enable sqladmin.googleapis.com
+    gcloud services enable servicenetworking.googleapis.com
+    gcloud services enable dns.googleapis.com
+    curl \
     https://storage.googleapis.com/storage/v1/projects/$GOOGLE_CLOUD_PROJECT/serviceAccount \
     --header "Authorization: Bearer `gcloud auth application-default print-access-token`"   \
     --header 'Accept: application/json'   --compressed
@@ -91,9 +92,9 @@ To activate the Data Plane on your GCP project:
 2. Run the following commands in your Google Cloud Shell:
 
     ```sh
-    $ export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
-    $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
-    $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
+    export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
     ```
 
 ## Step 3: Provide Setup Information to Astronomer
@@ -133,7 +134,7 @@ This process can take some time. Wait for confirmation that the installation was
 
 ## Step 5: Create a Deployment
 
-Once Astronomer confirms that your Astro Cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) and [create a new Deployment](configure-deployment.md). If the installation was successful, your new Astro Cluster will be listed as an option under the **Cluster** menu:
+When Astronomer confirms that your Astro Cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro Cluster is listed as an option below the **Cluster** menu:
 
 <div class="text--center">
   <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
@@ -144,7 +145,7 @@ Once Astronomer confirms that your Astro Cluster has been created, you are ready
 Now that you have an Astro Cluster up and running, take a look at the docs below for information on how to start working in Astro:
 
 - [Set Up an Identity Provider](configure-idp.md)
-- [Install CLI](install-cli.md)
-- [Configure Deployments](configure-deployment.md)
+- [Install CLI](cli/get-started.md)
+- [Configure Deployments](configure-deployment-resources.md)
 - [Deploy Code](deploy-code.md)
 - [Add Users](add-user.md)

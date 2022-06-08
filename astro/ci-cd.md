@@ -24,7 +24,7 @@ There are many benefits to deploying DAGs and other changes to Airflow via a CI/
 To set up CI/CD for a given Deployment, you need:
 
 - A [Deployment API key ID and secret](api-keys.md)
-- A Deployment ID. To find this, open your Deployment in the Cloud UI and copy the unique string at the end of the URL. For example, `cktogz2eg847343yzo9pru1b0d` is the Deployment ID in `https://cloud.astronomer.io/<workspace-ID>/deployments/cktogz2eg847343yzo9pru1b0d`. You can also find this value by running `astrocloud deployment list` via the Astro CLI.
+- A Deployment ID. To find this, open your Deployment in the Cloud UI and copy the unique string at the end of the URL. For example, `cktogz2eg847343yzo9pru1b0d` is the Deployment ID in `https://cloud.astronomer.io/<workspace-ID>/deployments/cktogz2eg847343yzo9pru1b0d`. You can also find this value by running `astro deployment list` via the Astro CLI.
 - A CI/CD management tool, such as [GitHub Actions](https://docs.github.com/en/actions).
 - An [Astro project](create-project.md) that is hosted in a place that your CI/CD tool can access.
 
@@ -36,7 +36,7 @@ At a high level, these CI/CD pipelines will:
 
 1. Access Deployment API key credentials. These credentials must be set as OS-level environment variables called `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
 2. Install the latest version of the Astro CLI.
-3. Run `astrocloud deploy`. This builds your Astro project into a Docker image, authenticates to Astro using your Deployment API key, and pushes the image to your Deployment.
+3. Run `astro deploy`. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image to your Deployment.
 
 This workflow is equivalent to the following bash script:
 
@@ -45,20 +45,16 @@ This workflow is equivalent to the following bash script:
 $ export ASTRONOMER_KEY_ID="<your-api-key-id>"
 $ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
 
-# Install the Astro CLI
-$ brew install astronomer/cloud/astrocloud@1.2.0
+# Install the latest version of Astro CLI
+$ brew install astronomer/tap/astro
 
 # Build your Astro project into a Docker image and push the image to your Deployment
-$ astrocloud deploy <your-deployment-id>
+$ astro deploy <your-deployment-id>
 ```
 
 :::info
 
-The following templates use `brew install` to install the latest version of the Astro CLI for every deploy. For a more stable CI/CD pipeline, you can install only a specific version of the CLI by tagging a specific version in the command:
-
-```sh
-brew install astronomer/cloud/astrocloud@<version-number>
-```
+The following templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy via CI/CD. These templates will not work if you use the `astrocloud` executable. To upgrade, see [Install the Astro CLI](cli/configure-cli.md).
 
 :::
 
@@ -104,8 +100,8 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/cloud/astrocloud
-            astrocloud deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+            brew install astronomer/tap/astro
+            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
 </TabItem>
@@ -157,8 +153,8 @@ This setup assumes the following prerequisites:
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/cloud/astrocloud
-            astrocloud deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }}
+            brew install astronomer/tap/astro
+            astro deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }}
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
@@ -171,8 +167,8 @@ This setup assumes the following prerequisites:
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/cloud/astrocloud
-            astrocloud deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
+            brew install astronomer/tap/astro
+            astro deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
 </TabItem>
@@ -282,7 +278,7 @@ To complete this setup, you need:
 
 ### Jenkins
 
-To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astronomer project:
+To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
 1. In your Jenkins pipeline configuration, add the following environment variables:
 
@@ -305,9 +301,8 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
            }
            steps {
              script {
-                   sh 'curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz'
-                   sh 'tar xzf astrocloudcli.tar.gz'
-                   sh './astrocloud deploy ${siteVariables.deploymentid} -f'
+                   sh 'curl -sSL install.astronomer.io | sudo bash -s'
+                   sh 'astro deploy ${siteVariables.deploymentid} -f'
              }
            }
          }
@@ -363,9 +358,8 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
           - run:
               name: "Deploy to Astro"
               command: |
-                curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
-                tar xzf astrocloudcli.tar.gz
-                ./astrocloud deploy ${siteVariables.deploymentid} -f
+                curl -sSL install.astronomer.io | sudo bash -s
+                astro deploy ${siteVariables.deploymentid} -f
 
     # Invoke jobs via workflows
     # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -414,8 +408,7 @@ This pipeline configuration requires:
         commands:
         - apt-get update
         - apt-get -y install curl
-        - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
-        - tar xzf astrocloudcli.tar.gz        
+        - curl -sSL install.astronomer.io | sudo bash -s
       - name: wait
         image: docker:dind
         volumes:
@@ -429,7 +422,7 @@ This pipeline configuration requires:
         - name: dockersock
           path: /var/run
         commands:
-        - ./astrocloud deploy ${siteVariables.deploymentiddrone} -f
+        - astro deploy ${siteVariables.deploymentiddrone} -f
         depends on:
         - wait
 
@@ -483,10 +476,10 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
          ASTRONOMER_KEY_SECRET: $ASTRONOMER_KEY_SECRET
       before_script:
        - apk add --update curl && rm -rf /var/cache/apk/*
+       - apk add bash
       script:
-       - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
-       - tar xzf astrocloudcli.tar.gz
-       - ./astrocloud deploy $ASTRONOMER_DEPLOYMENT_ID -f
+       - curl -sSL install.astronomer.io | bash -s
+       - astro deploy $ASTRONOMER_DEPLOYMENT_ID -f
       only:
        - main
    `}</code></pre>
@@ -523,10 +516,10 @@ When you create environment variables that will be used in multiple branches, yo
             ASTRONOMER_KEY_SECRET: $DEV_ASTRONOMER_KEY_SECRET
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
+          - apk add bash
         script:
-          - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
-          - tar xzf astrocloudcli.tar.gz
-          - ./astrocloud deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
+          - curl -sSL install.astronomer.io | bash -s
+          - astro deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - dev
 
@@ -540,10 +533,10 @@ When you create environment variables that will be used in multiple branches, yo
             ASTRONOMER_KEY_SECRET: $PROD_ASTRONOMER_KEY_SECRET
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
+          - apk add bash
         script:
-          - curl https://goreleaserdev.blob.core.windows.net/goreleaser-test-container/releases/v${siteVariables.cliVersion}/cloud-cli_${siteVariables.cliVersion}_Linux_x86_64.tar.gz -o astrocloudcli.tar.gz
-          - tar xzf astrocloudcli.tar.gz
-          - ./astrocloud deploy $PROD_ASTRONOMER_DEPLOYMENT_ID -f
+          - curl -sSL install.astronomer.io | bash -s
+          - astro deploy $PROD_ASTRONOMER_DEPLOYMENT_ID -f
         only:
           - main
    `}</code></pre>

@@ -1,116 +1,19 @@
 ---
 sidebar_label: 'CLI Reference Guide'
-title: 'Astronomer CLI Reference Guide'
+title: 'Astro CLI Reference Guide'
 id: cli-reference
-description: A list of every command and setting in the Astronomer CLI.
+description: A list of every command and setting in the Astro CLI.
 ---
 
 ## Overview
 
-Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astronomer CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
+Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astro CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
 
-This document contains information about all commands and settings available in the Astronomer CLI, including examples and flags. It does not contain detailed guidelines on each command, but each section provides resources for additional information in a **Related documentation** section if it's available.
+This document contains information about all commands and settings available in the Astro CLI, including examples and flags. It does not contain detailed guidelines on each command, but each section provides resources for additional information in a **Related documentation** section if it's available.
 
 ## Installation
 
-There are two ways to install any version of the Astronomer CLI:
-
-- [Homebrew](https://brew.sh/)
-- cURL
-
-For a detailed changelog of all Astronomer CLI versions, see [GitHub Releases](https://github.com/astronomer/astro-cli/releases).
-
-> **Note:** Both methods only work for Unix (Linux+Mac) based systems. If you're running on Windows 10, follow [this guide](cli-install-windows-10.md) to get set up with Docker for WSL.
-
-### Prerequisites
-
-The Astronomer CLI installation process requires [Docker](https://www.docker.com/) (v18.09 or higher).
-
-### Install with Homebrew
-
-If you have Homebrew installed, run:
-
-```sh
-brew install astronomer/tap/astro
-```
-
-To install a specific version of the Astronomer CLI, you'll have to specify `@major.minor.patch`. To install v0.16.1, for example, run:
-
-```sh
-brew install astronomer/tap/astro@0.16.1
-```
-
-### Install with cURL
-
-To install the latest version of the Astronomer CLI, run:
-
-```
-curl -sSL https://install.astronomer.io | sudo bash
-```
-
-To install a specific version of the Astronomer CLI, specify `-s -- major.minor.patch` as a flag at the end of the cURL command. To install v0.16.1, for example, run:
-
-```
-curl -sSL https://install.astronomer.io | sudo bash -s -- v0.16.1
-```
-
-#### Note for MacOS Catalina Users:
-
-As of macOS Catalina, Apple [replaced bash with ZSH](https://www.theverge.com/2019/6/4/18651872/apple-macos-catalina-zsh-bash-shell-replacement-features) as the default shell. Our CLI install cURL command currently presents an incompatibility error with ZSH, sudo and the pipe syntax.
-
-If you're running macOS Catalina and beyond, do the following:
-
-1. Run `sudo -K` to reset/un-authenticate
-2. Run the following to install the CLI properly:
-
-```
-curl -sSL https://install.astronomer.io | sudo bash -s < /dev/null
-```
-
-### Confirm the install
-
-To make sure that you have the Astronomer CLI installed on your machine, run:
-
-```bash
-astro version
-```
-
-If the installation was successful, you should see the version of the CLI that you installed in the output:
-
-```
-Astronomer CLI Version: 0.15.0
-Git Commit: c4fdeda96501ac9b1f3526c97a1c5c9b3f890d71
-```
-
-For a breakdown of subcommands and corresponding descriptions, you can always run `astro` or `astro --help`.
-
-```
-astro is a command line interface for working with the Astronomer Platform.
-
-Usage:
-  astro [command]
-
-Available Commands:
-  auth            Manage astronomer identity
-  cluster         Manage Astronomer EE clusters
-  completion      Generate autocompletions script for the specified shell (bash or zsh)
-  config          Manage astro project configurations
-  deploy          Deploy an airflow project
-  deployment      Manage airflow deployments
-  dev             Manage airflow projects
-  help            Help about any command
-  upgrade         Check for newer version of Astronomer CLI
-  user            Manage astronomer user
-  version         Astronomer CLI version
-  workspace       Manage Astronomer workspaces
-
-Flags:
-  -h, --help   help for astro
-
-Use "astro [command] --help" for more information about a command.
-```
-
-Once you've successfully installed the CLI, use the remainder of this guide to learn more about the CLI's available commands.
+To install the CLI, see [Install the CLI](install-cli.md)
 
 ## astro auth
 
@@ -206,11 +109,11 @@ The settings that you can update via the command line are:
 
 ## astro deploy
 
-Deploys code in your Airflow project directory to any Airflow Deployment on Astronomer.
+Deploys code in your Astro project directory to any Airflow Deployment on Astronomer.
 
 ### Usage
 
-Run `astro deploy <your-deployment-release-name> [flags]` in your terminal to push a local Airflow project as a Docker image to your Airflow Deployment on Astronomer.
+Run `astro deploy <your-deployment-release-name> [flags]` in your terminal to push a local Astro project as a Docker image to your Airflow Deployment on Astronomer.
 
 If you have the appropriate Workspace and Deployment-level permissions, your code is packaged into a Docker image, pushed to Astronomer's Docker Registry, and applied to your Airflow Webserver, Scheduler(s), and Worker(s).
 
@@ -279,15 +182,16 @@ Run `astro deployment create <new-deployment-name> [flags]` to create a new Depl
 
 ### Flags
 
-| Flag                | Value Type | Usage                                                                                                                                |
-| ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `--airflow-version` | String     | The Airflow version for the new Deployment.                                                                                          |
-| `--cloud-role`      | String     | Append an AWS or GCP IAM role to your Airflow Deployment's Webserver, Scheduler, and Worker Pods.                                    |
-| `--executor`        | String     | The Executor type for the Deployment. Can be `local`, `celery`, or `kubernetes`. If no executor is specified, then `celery` is used. |
-| `--release-name`    | String     | A custom release name for the Airflow Deployment. Applies only to Deployments on Astronomer Software.                              |
-| `--dag-deployment-type` | String     | The DAG deploy method for the Deployment. Can be either `image` or `volume`. The default value is `image`.                                                               |
-| `--nfs-location` | String     | The location for an NFS volume mount, specified as: `<IP>:/<path>`. Must be specified when `--dag-deployment-type=volume`. Input is automatically prepended with `nfs:/` - do not include this in your input.                                  |
-| `--triggerer-replicas` | Integer     | The number of replica Triggerers to provision for the Deployment.                      |
+| Flag                    | Value Type | Usage                                                                                                                                                                                                         |
+| ----------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `--airflow-version`     | String     | The Astronomer Certified version for the new Deployment.                                                                                                                                                                   |
+| `--runtime-version`     | String     | The Astro Runtime version for the new Deployment.                                                                                                                                                                   |
+| `--cloud-role`          | String     | Append an AWS or GCP IAM role to your Airflow Deployment's Webserver, Scheduler, and Worker Pods.                                                                                                             |
+| `--executor`            | String     | The Executor type for the Deployment. Can be `local`, `celery`, or `kubernetes`. If no executor is specified, then `celery` is used.                                                                          |
+| `--release-name`        | String     | A custom release name for the Airflow Deployment. Applies only to Deployments on Astronomer Software.                                                                                                         |
+| `--dag-deployment-type` | String     | The DAG deploy method for the Deployment. Can be either `image` or `volume`. The default value is `image`.                                                                                                    |
+| `--nfs-location`        | String     | The location for an NFS volume mount, specified as: `<IP>:/<path>`. Must be specified when `--dag-deployment-type=volume`. Input is automatically prepended with `nfs:/` - do not include this in your input. |
+| `--triggerer-replicas`  | Integer    | The number of replica Triggerers to provision for the Deployment.                                                                                                                                             |
 
 ### Related documentation
 
@@ -340,6 +244,37 @@ You can run any of the following commands depending on which logs you want to st
 ### Related documentation
 
 - [Deployment Logs](deployment-logs.md)
+
+## astro deployment runtime migrate
+
+Migrate an existing Software Deployment from Astronomer Certified to Astro Runtime
+
+### Usage
+
+`astro deployment runtime migrate --deployment-id=<deployment-id>`
+
+### Flags
+
+| Flag       | Value Type                                    | Usage                                                               |
+| ---------- | --------------------------------------------- | ------------------------------------------------------------------- |
+| `--cancel` | None                                          | Cancel the migration.                                      |
+| `--deployment-id` | String                                        | The Deployment that you want to migrate. |
+
+## astro deployment runtime upgrade
+
+Upgrade an existing Software Deployment's Astro Runtime version
+
+### Usage
+
+`astro deployment runtime upgrade --deployment-id=<deployment-id> `
+
+### Flags
+
+| Flag       | Value Type                                    | Usage                                                               |
+| ---------- | --------------------------------------------- | ------------------------------------------------------------------- |
+| `--cancel` | None                                          | Cancel the migration.                                      |
+| `--deployment-id` (_Required_) | String                                        | The Deployment that you want to upgrade. |
+| `--desired-runtime-version` | String                                        | The Astro Runtime version you want to upgrade to. |
 
 ## astro deployment service-account create
 
@@ -520,7 +455,7 @@ Refer to the following sections for information on each subcommand.
 
 ## astro dev init
 
-Initializes a new Airflow project in your working directory. The set of files generated by this command are required to run Airflow locally and can be deployed to an Airflow Deployment on Astronomer.
+Initializes a new Astro project in your working directory. The set of files generated by this command are required to run Airflow locally and can be deployed to an Airflow Deployment on Astronomer.
 
 ### Usage
 
@@ -545,7 +480,7 @@ When you run this command, the following skeleton files are generated in your cu
 | Flag                | Value Type | Usage                                                                                              |
 | ------------------- | ---------- | -------------------------------------------------------------------------------------------------- |
 | `--airflow-version` | String     | The version of Airflow you want to use. The default value is the latest Airflow version available. |
-| `--name`            | String     | The name for the Airflow project.                                                                  |
+| `--name`            | String     | The name for the Astro project.                                                                  |
 
 ## astro dev kill
 
@@ -603,12 +538,6 @@ Initializes a local Airflow environment on your machine by creating a Docker con
 - Webserver
 - Triggerer
 
-:::info
-
-Logs for the Airflow Triggerer will only show for local environments using Deferrable Operators and running Astronomer Certified 2.0+.
-
-:::
-
 ### Usage
 
 `astro dev start [flags]`
@@ -622,7 +551,7 @@ Logs for the Airflow Triggerer will only show for local environments using Defer
 
 ## astro dev stop
 
-Stops all 3 running Docker containers on your local Airflow environment. Running this command followed by `astro dev start` is required to push certain types of changes to your Airflow project. Unlike `astro dev kill`, this command does not prune mounted volumes and will preserve data associated with your local Postgres Metadata Database.
+Stops all 3 running Docker containers on your local Airflow environment. Running this command followed by `astro dev start` is required to push certain types of changes to your Astro project. Unlike `astro dev kill`, this command does not prune mounted volumes and will preserve data associated with your local Postgres Metadata Database.
 
 ### Usage
 
@@ -630,7 +559,7 @@ Stops all 3 running Docker containers on your local Airflow environment. Running
 
 ## astro dev upgrade-check
 
-Runs a script that checks whether all files in your local Airflow project are compatible with Airflow 2.0 by reviewing your DAG code, deployment-level configurations, and Environment Variables, as well as metadata from the Airflow Database. You must be on Airflow 1.10.14+ and in your Airflow project directory to run this command.
+Runs a script that checks whether all files in your local Astro project are compatible with Airflow 2.0 by reviewing your DAG code, deployment-level configurations, and Environment Variables, as well as metadata from the Airflow Database. You must be on Airflow 1.10.14+ and in your Astro project directory to run this command.
 
 ### Usage
 

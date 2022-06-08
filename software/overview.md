@@ -18,7 +18,7 @@ Astronomer Software's key features ensure that enterprise organizations can run 
 - Role-based access control (RBAC) for configurable and secure user management
 - Extensive cloud, network, third party provider, and system component configurations via Helm
 - System logging, monitoring, and alerts via Grafana and Kibana
-- Astronomer Certified, a collection of Docker images that provides a differentiated data orchestration experience. Astronomer Certified includes timely support for the latest major, minor, and patch versions of Airflow
+- Astronomer Certified and Astro Runtime, two collections of Docker images that provide a differentiated data orchestration experience. These images include timely support for the latest major, minor, and patch versions of Airflow
 
 ## Architecture
 

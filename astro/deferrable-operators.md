@@ -72,4 +72,4 @@ In addition to the deferrable operators that are published by the Apache Airflow
 
 This package is installed on Astro Runtime by default and includes deferrable versions of commonly used operators, including the `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 
-For a complete list of available deferrable operators in `astronomer-providers` , see the [`astronomer-providers` CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/). This page includes both import statements and example DAGs for each available operator.
+For a complete list of available deferrable operators in `astronomer-providers` , see the [`astronomer-providers` CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/changelog.html). This page includes both import statements and example DAGs for each available operator.

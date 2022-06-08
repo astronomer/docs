@@ -1,5 +1,5 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
-
+const versions = require('./software_versions.json')
 module.exports = {
   title: 'Astronomer Documentation',
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
@@ -14,8 +14,10 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
     image: 'img/meta.png',
-    sidebar: {
-      autoCollapseSidebarCategories: true,
+    docs: {
+      sidebar: {
+        autoCollapseCategories: true,
+      },
     },
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
@@ -25,8 +27,7 @@ module.exports = {
 
       // Optional: see doc section below
       appId: 'TTRQ0VJY4D',
-      inputSelector: '.DocSearch',
-      // Optional: Algolia search parameters
+      inputSelector: '.DocSearch',      // Optional: Algolia search parameters
       searchParameters: {
       },
 
@@ -49,9 +50,23 @@ module.exports = {
       },
       items: [
         {
-          to: 'astro',
+          type: 'dropdown',
+          to: '/astro/',
           label: 'Astro',
           position: 'left',
+          activeClassName: 'navbar__link--active',
+          items: [
+            {
+              label: 'Cloud',
+              to: '/astro/',
+              activeBaseRegex: 'astro(?!\/cli)',
+            },
+            {
+              label: 'Astro CLI',
+              to: 'astro/cli/overview',
+              activeBaseRegex: 'astro/cli+',
+            },
+          ],
         },
         {
           type: 'dropdown',
@@ -62,28 +77,29 @@ module.exports = {
           activeClassName: 'navbar__link--active',
           items: [
             {
-              label: '0.28 (Latest)',
+              label: '0.29 (Latest)',
               to: '/software/',
+              activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+            },
+            {
+              label: '0.28',
+              to: '/software/0.28/overview',
+              activeBaseRegex: '(software\/0.28)+',
             },
             {
               label: '0.27',
               to: '/software/0.27/overview',
+              activeBaseRegex: '(software\/0.27)+',
             },
             {
               label: '0.26',
               to: '/software/0.26/overview',
+              activeBaseRegex: '(software\/0.26)+',
             },
             {
               label: '0.25',
-              to: '/software/0.25/overview'
-            },
-            {
-              label: '0.23',
-              to: '/software/0.23/overview'
-            },
-            {
-              label: '0.16 (Deprecated)',
-              to: '/software/0.16/overview'
+              to: '/software/0.25/overview',
+              activeBaseRegex: '(software\/0.25)+',
             },
           ],
         },
@@ -108,7 +124,7 @@ module.exports = {
             },
             {
               label: 'Install the CLI',
-              to: 'astro/install-cli',
+              to: 'astro/cli/get-started',
             },
             {
               label: 'Create a Project',
@@ -152,6 +168,15 @@ module.exports = {
               label: 'Astronomer Registry',
               to: 'https://registry.astronomer.io/',
             },
+            {
+              label: 'Privacy Policy',
+              to: 'https://www.astronomer.io/privacy/',
+            },
+            {
+              label: 'Cookie Preferences',
+              to: '#',
+              id: 'cookiePref',
+            },
           ],
         },
         {
@@ -189,14 +214,6 @@ module.exports = {
           admonitions: {
           },
         },
-        gtag: {
-          trackingID: 'G-DKTB1B78FV',
-          anonymizeIP: true,
-        },
-        googleAnalytics: {
-          trackingID: 'UA-54102728-4',
-          anonymizeIP: true,
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -217,12 +234,25 @@ module.exports = {
         lastVersion: 'current',
         versions: {
         current: {
-          label: '0.28',
+          label: '0.29',
           path: '',
           banner: 'none',
          },
        },
       },
     ],
+  ],
+  scripts: [
+    {
+      src: './scripts/segment.js',
+      defer: true,
+    },
+    {
+      src: './scripts/consent-manager.js',
+      defer: true,
+    },
+    {
+      src: './scripts/consent-manager-config.js',
+    },
   ],
 };

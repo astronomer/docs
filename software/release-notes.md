@@ -1,5 +1,5 @@
 ---
-title: 'Astronomer Software v0.28 Release Notes'
+title: 'Astronomer Software v0.29 Release Notes'
 sidebar_label: 'Astronomer Software'
 id: release-notes
 description: Astronomer Software release notes.
@@ -9,86 +9,69 @@ description: Astronomer Software release notes.
 
 <!--- Version-specific -->
 
-This document includes all release notes for Astronomer Software v0.28.
+This document includes all release notes for Astronomer Software version 0.29.
 
-This is the latest LTS long-term support (LTS) version of Astronomer Software. To upgrade to Astronomer v0.28 from v0.25+, read [Upgrade to v0.28](upgrade-to-0-28.md). For more information about Software release channels, read [Release and Lifecycle Policies](release-lifecycle-policy.md). To read release notes specifically for the Astronomer CLI, see [Astronomer CLI Release Notes](cli-release-notes.md).
+0.29 is the latest stable version of Astronomer Software, while 0.28 remains  the latest LTS long-term support (LTS) version of Astronomer Software. To upgrade to 0.29, read [Upgrade Astronomer](upgrade-astronomer-stable.md). For more information about Software release channels, read [Release and Lifecycle Policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI Release Notes](cli-release-notes.md).
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
-## v0.28.4
+## v0.29.1
 
-Release date: April 8, 2022
+Release date: June 3, 2022
+
+### Bug Fixes
+
+- Fixed an issue where you couldn't run Houston API queries for Deployments using `releaseName` and `label`
+
+## v0.29.0
+
+Release date: June 1, 2022
+
+### Support for Astro Runtime Images
+
+You can now use Astro Runtime images in your Software Deployments. Additionally, you can now select Runtime images when setting **Image Version** for a Deployment in the Software UI.
+
+Functionally, Runtime images are similar to Certified images. They both include:
+
+- Same-day support for Apache Airflow releases
+- Extended support lifecycles
+- Regularly backported bug and security fixes
+
+Astronomer Runtime includes additional features which are not available in Astronomer Certified images, including:
+
+- The `astronomer-providers` package, which includes a set of operators that are built and maintained by Astronomer
+- Airflow UI improvements, such as showing your Deployment's Docker image tag in the footer
+- Features that are exclusive to Astro Runtime and coming soon, such as new Airflow components and improvements to the DAG development experience
+
+To upgrade a Deployment to Runtime, follow the steps in [Upgrade Airflow](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astro Runtime version.
+
+### Use a Custom Container Image Registry To Deploy Code
+
+You can now configure a custom container image registry in place of Astronomer's default registry. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and approved/ unapproved Python and OS-level dependencies prior to deploying code. To configure this feature, see [Configure a Custom Image Registry](custom-image-registry.md).
+
+### Export Task Logs Using Logging Sidecars
+
+You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster where security is a concern, as well as for organizations running many small tasks using the Kubernetes Executor. To configure this feature, see [Export Task Logs](export-task-logs.md).
+
+### Simplified Configuration for Namespace Pools
+
+The process for configuring namespace pools has been simplified. As an alternative to manually creating namespaces, you can now delegate the creation of each namespace, including roles and rolebindings, to Astronomer Software. While this feature is suitable for most use cases, you can still manually create namespaces if you want more fine-grained control over the namespace's resources and permissions. For more information, see [Namespace Pools](namespace-pools.md).
 
 ### Additional Improvements
 
-- Users added to Astronomer Software via an [IDP group](import-idp-groups.md) no longer need to be invited by email in order to join Astronomer.
-- Teams now support [Azure AD Connect sync](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/concept-azure-ad-connect-sync-user-and-contacts) for user groups.
-- System admins can no longer remove the last user from an active Workspace or Deployment. This ensures that a given Workspace or Deployment can always be deleted by an existing member. Similarly, Workspace Admins can no longer remove a Team if doing so results in a Workspace having zero Admins.
-- You can now map your IDP's groups claim to Astronomer's expected claim of `groups` via the `astronomer.houston.config.auth.openidConnect.<idp>.claimsMapping` setting in `config.yaml`.
-### Bug Fixes
-
-- Fixed an issue where deleted Teams did not disappear from the Software UI until you refreshed the page
-- Fixed an issue where Teams were still available in the Software UI even when their underlying IDP group had been deleted from the IDP
-- Fixed an issue where creating a Deployment with the default resource configuration would result in a Deployment having a **Scheduler Count** of 1 instead of the stated default of 2
-- Fixed an issue where you could not deploy code to a Deployment that shared the release name of a previous Deployment which was hard deleted
-- Fixed an issue where you could not create a Deployment with a numeric-only name in a pre-created namespace
-
-## v0.28.3
-
-Release date: March 17, 2022
-
-### Bug Fixes
-
-- Fixed an issue where airgapped upgrades and installations could fail due to a mismatched Airflow Helm chart between Astronomer components
-
-## v0.28.2
-
-Release date: March 14, 2022
-
-### Additional Improvements
-
-- System Admins can now update the name and description for any Workspace on their installation.
-- You can now specify `global.external_labels` and `remote_write` options for Prometheus through the Astronomer Helm chart.
-- You can now configure `nodeSelector`, `tolerations`, and `affinity` in the STAN and NATS Helm charts.
-
-### Bug Fixes
-
-- Fixed several CVEs
-- Fixed a few issues where some buttons in the Software UI did not link to the appropriate page
-- Fixed an issue where you could not install Astronomer Software 0.27 or 0.28 in an [airgapped environment](install-airgapped.md)
-- Fixed an issue where System and Workspace Admins were able to delete users that were part of an [IDP team](import-idp-groups.md)
-
-## v0.28.1
-
-Release date: February 22, 2022
+- Added support for [Kubernetes 1.22](https://kubernetes.io/blog/2021/08/04/kubernetes-1-22-release-announcement/)
+- Deprecated usage of [kubed](https://appscode.com/products/kubed/) for security and performance improvements
+- Redis containers can now run as non-root users
+- Added minimum security requirements for user passwords when using local auth
+- You can now use Azure DevOps repos in your [Git Sync](deploy-git-sync.md) configurations
+- You can now disable all network policies for Airflow components using the Astronomer Helm chart
+- System Admins can now view all Workspaces on their installation by default
+- User auth tokens for the Software UI are now stored in httpOnly cookies
+- When importing IDP groups as teams, you can now configure a `teamFilterRegex` in `config.yaml` to filter out IDP groups from being imported using regex
+- Added support for audit logging when a user interacts with the Houston API. This includes actions within the Software UI
 
 ### Bug fixes
 
-- Fixed an issue where users could not successfully log in through Azure AD
-
-## v0.28.0
-
-Release date: February 15, 2022
-
-### Import Identity Provider User Groups as Teams
-
-You now can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IDP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.
-
-For more information about configuring this feature, read [Import IDP Groups](import-idp-groups.md). To learn more about adding and setting permissions for Teams via the Astronomer UI, read [User Permissions](workspace-permissions.md#via-teams).
-
-### Additional Improvements
-
-- Astronomer now supports `prefer` and `require` SSL modes for connecting to PGBouncer. You can set this SSL mode via the `global.ssl.mode` value in your `config.yaml` file. Note that in v0.28.0, this feature works only with AWS and Azure.
-- You can now set [Grafana environment variables](https://grafana.com/docs/grafana/latest/administration/configuration/#override-configuration-with-environment-variables) using the `grafana.extraEnvVars` setting in your `config.yaml` file.
-- Added a new **Ephemeral Storage Overwrite Gigabytes** slider to the Git Sync configuration screen. You can configure this slider to allocate more memory for syncing larger Git repos.
-- Added a new **Sync Timeout** slider to the Git Sync configuration screen. You can configure this slider to set a maximum allowed length of time for syncing a Git repo.
-
-### Bug Fixes
-
-- Removed root user permissions for authSidecar
-- Added AWS RDS certificates to list of trusted certificates
-- Removed support for Kubernetes 1.18
-- Fixed some confusing behavior with the Git-Sync **SSH Key** field in the UI  
-- Fixed an issue where the Astronomer platform and Airflow could not communicate in environments where inter-namespace communication is disabled
-- Fixed an issue where users would frequently get 502 errors when logging in to the Astronomer UI
-- Fixed an issue where users would get timeout issues when attempting to log in to an Astronomer installation on OpenShift
+- Fixed a typo in the `loadBalancerIP` key in the Nginx Helm chart
+- Fixed an issue where Azure AD connect sync did not work with Astronomer's Teams feature
+- Fixed an issue where upgrades would fail if you had changed `networkNSLabels` from `true` to `false` in `config.yaml`

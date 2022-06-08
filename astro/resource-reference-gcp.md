@@ -21,11 +21,10 @@ Read the following document for a reference of our default resources as well as 
 | [NAT Router (External)](https://cloud.google.com/nat/docs/overview)   | Required for connectivity with the Astro Control Plane and other public services                     | 1                            |
 | [GKE Cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/kubernetes-engine-overview)             | A GKE cluster is required to run the Astro Data Plane. Workload Identity is enabled on this cluster. | 1, IP Ranges are `172.21.0.0/19` for Cluster IPs and `172.22.0.0/19` for Cluster Services |
 | [Workload Identity Pool](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) | Astro uses the fixed Workload Identity Pool for your project; one is created if it does not exist | The default pool (PROJECT_ID.svc.id.goog) is used |
-| Cloud SQL for Postgres | The CloudSQL Instance is the primary database of the Astro Data Plane; it hosts the metadata database for each Airflow Deployment hosted on the GKE cluster | 1 Regional Instance with 4 vCPUs, 16GB Memory |
+| [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres) | The Cloud SQL instance is the primary database for the Astro Data Plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster | 1 Regional Instance with 4 vCPUs, 16GB Memory |
 | Storage Bucket | GCS Bucket for storage of Airflow task logs | 1 bucket with name `airflow-logs-<clusterid>` |
 | Nodes | Nodes power the Data Plane and Airflow components. Nodes autoscale as deployments are added. | 3x n2-medium-4 for the system nodes; worker nodes default to e2-medium-4 and are provisioned as required, up to Max Node Count |
 | Max Node Count | The maximum number of EC2 nodes that your Astro Cluster can support at any given time. Once this limit is reached, your Cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
-| [CloudSQL Instance](https://cloud.google.com/sql/docs/mysql/create-instance) | The CloudSQL instance is the primary database of the Astro Data Plane. It hosts a metadata database for each Airflow Deployment hosted on the GKE cluster. | Medium General Purpose (4vCPU, 16GB) |
 
 
 ## Supported Cluster Configurations
@@ -38,10 +37,13 @@ To create a new Cluster on Astro with a specified configuration, read [Install o
 
 Astro supports the following GCP regions:
 
-- `us-central1`
-- `us-west1`
+- `us-central1` - Iowa, North America
+- `us-west1` - Oregon, North America
+- `us-east1` - South Carolina, North America
+- `us-east4` - Virginia, North America
+- `europe-west4` - Netherlands, Europe
 
-Modifying the region of an existing Cluster on Astro is not supported. If you're interested in a GCP region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
+Modifying the region of an existing Astro Cluster isn't supported. If you're interested in a GCP region that isn't on this list, contact [Astronomer Support](https://support.astronomer.io).
 
 ### Node Instance Type
 
@@ -51,3 +53,24 @@ Astro supports different GCP machine types. Machine types comprise of varying co
 - e2-standard-8
 
 For detailed information on each instance type, see [GCP documentation](https://cloud.google.com/compute/docs/machine-types). If you're interested in a machine type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io/). Not all machine types are supported in all GCP regions.
+
+## Deployment Worker Size Limits
+
+In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a Cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. For Deployments on GCP, you can select any worker size up to 65 AU (6.5 CPUs, 24.4 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. When you attempt to provision a worker size that isn't supported by the Cluster instance type, an error message appears in the Cloud UI.
+
+This table lists the approximate maximum worker size that is supported on Astro for each node instance type. Maximum worker size values may increase or decrease over time as the system requirements of Astro change.
+
+| Node Instance Type | Maximum AU | CPU       | Memory       |
+|--------------------|------------|-----------|--------------|
+| e2-standard-4      | 25         | 2.5 CPUs  | 9.4  GiB MEM |
+| e2-standard-8      | 65         | 6.5 CPUs  | 24.4 GiB MEM |
+
+If your Organization is interested in using an instance type that supports a worker size limit higher than 65 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
+
+:::info
+
+The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum Scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
+
+For more information about the Scheduler, see [Configure a Deployment](configure-deployment-resources.md#scheduler-resources).
+
+:::

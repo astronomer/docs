@@ -40,7 +40,7 @@ RUN pip install --no-cache-dir --user <your-python-package>
 
 To install a specific version of a Python-level package, include your package version in a pip [constraints file](https://pip-python3.readthedocs.io/en/latest/user_guide.html#constraints-files) and copy it into your Dockerfile. The base Docker image already has a pip constraints file which can be found [on GitHub](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/build-time-pip-constraints.txt).
 
-> **Note:** Installing dependencies will look different if you are deploying your Docker image to Astronomer via the Astronomer CLI. For an Astronomer platform-based setup, read [Install Packages via the Astronomer CLI](install-packages.md#install-packages-via-the-astronomer-cli).
+> **Note:** The process for installing dependencies is different if you are using the Astro CLI to deploy your Docker image to Astronomer. For an Astronomer platform-based setup, see [Install Packages via the Astro CLI](install-packages.md#install-packages-via-the-astronomer-cli).
 
 Once you rebuild your image with `docker-build`, the image will have access to any packages that you specified. To confirm that a package was installed:
 
@@ -66,8 +66,8 @@ To build Python and OS-level packages into a machine running the Python wheel di
 sudo -u astro ~astro/airflow-venv/bin/pip install --extra-index-url=https://pip.astronomer.io/simple/ 'astronomer-certified[<your-package>]==<airflow-version>.*'
 ```
 
-You can also create your own Python packages and install them into your Airflow environment via a Python wheel, or you can configure an environment variable to automatically add the packages to your Airflow project directory. For more information on this setup, read the [Apache Airflow documentation on managing modules](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/latest/modules_management.html).
+You can also create your own Python packages and install them into your Airflow environment via a Python wheel, or you can configure an environment variable to automatically add the packages to your Astro project directory. For more information on this setup, read the [Apache Airflow documentation on managing modules](http://apache-airflow-docs.s3-website.eu-central-1.amazonaws.com/docs/apache-airflow/latest/modules_management.html).
 
 ## Install Packages via Astronomer
 
-If you're deploying the Astronomer Certified Docker image via Astronomer CLI, there are alternative workflows for installing packages and other dependencies to your image. For more information, read [Customize Images](customize-image.md).
+If you're using the Astro CLI to deploy the Astronomer Certified Docker image, there are alternative workflows for installing packages and other dependencies to your image. For more information, see [Customize Images](customize-image.md).
