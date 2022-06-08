@@ -544,7 +544,7 @@ Add the name and, optionally, the version of your packages to `requirements.txt`
 
 :::caution
 
-Ensure that the name of the package on the private repository does not clash with any existing python packages.
+Ensure that the name of the package on the private repository does not clash with any existing python packages on [PyPI](https://pypi.org). If pip parses multiple repositories with the same name, it can produce unexpected results. 
 
 :::
 
