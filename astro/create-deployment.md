@@ -24,14 +24,14 @@ If you prefer, you can run the `astrocloud deployment create` command in the Ast
 4. Optional. Edit the Deployment resource settings. See [Configure Deployment Resources](configure-deployment-resources.md). 
 5. Click **Create Deployment**. 
 
-    The initial status of all new Deployments is `UNHEALTHY`. This indicates that the Webserver and Scheduler for the DEployment are being created in your Astro Cluster. In a few minutes, the status changes to `HEALTHY`.
+    The initial status of all new Deployments is `UNHEALTHY`. This indicates that the Webserver and Scheduler for the Deployment are being created in your Astro Cluster. In a few minutes, the status changes to `HEALTHY`.
 
 6. Optional. Click **Open Airflow** to access the Airflow UI.
 
 ## Next Steps
 
-- [Configure Deployment Resources](configure-deployment-resources.md).
+- [Configure Deployment Resources](configure-deployment-resources.md)
 
-- [Set Environment Variables on Astro](environment-variables.md).
+- [Set Environment Variables on Astro](environment-variables.md)
 
-- [Manage Deployment API Keys](api-keys.md).
+- [Manage Deployment API Keys](api-keys.md)
