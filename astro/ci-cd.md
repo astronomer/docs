@@ -179,24 +179,21 @@ This setup assumes the following prerequisites:
 
 <TabItem value="custom">
 
-Complete this setup if your Astro project uses a custom Runtime image with additional build-time arguments. For examples of how you can customize your Runtime image, see [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources).
+If your Astro project uses a custom Runtime image with additional build-time arguments, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
 
 #### Prerequisites
 
 To complete this setup, you need:
 
-- An Astro project with a custom Runtime image. For an example implementation of this, see [Install Python Packages from Private Sources](develop-project.md#install-python-packages-from-private-sources).
+- An Astro project with a custom Runtime image.
+
+#### Setup
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
   - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
-  - `GITHUB_SSH_KEY` = `<your-github-ssh-private-key>`
-
-  OR
-
-  - `PIP_EXTRA_INDEX_URL` = `https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name>`
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -217,10 +214,41 @@ To complete this setup, you need:
         steps:
         - name: Check out the repo
           uses: actions/checkout@v2
+        - name: Build Dockerfile.build image
+          uses: docker/build-push-action@v2
+          with:
+            # This image tag must match the image tag in the FROM line of your `Dockerfile`.
+            tags: custom-<astro-runtime-image>
+            load: true
+            file: Dockerfile.build
+            # Define your custom image's build arguments, contexts, and connections here using the available GitHub Action settings: https://github.com/docker/build-push-action#customizing . This example uses `build-args` , but your use case might require configuring a different value.
+            build-args: |
+              <your-build-arguments>
+        - name: Deploy to Astro
+          run: |
+            brew install astronomer/tap/astro
+            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
-    If installing from a private GitHub Repo, add the following steps:
+    For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
+
     ```yaml
+    name: Astronomer CI - Custom base image
+
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        env:
+          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+        steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
         - name: Create SSH Socket
           uses: webfactory/ssh-agent@v0.5.4
           with:
@@ -230,38 +258,24 @@ To complete this setup, you need:
         - name: Build Dockerfile.build image
           uses: docker/build-push-action@v2
           with:
+            # This image tag must match the image tag in the FROM line of your `Dockerfile`.
             tags: custom-<astro-runtime-image>
             load: true
             file: Dockerfile.build
+            # SSH_AUTH_SOCK must be defined as a GitHub environment variable.
             ssh: |
-              github=${{ env.SSH_AUTH_SOCK }}
+              github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
             astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
-    If installing from a private PyPi Index, add the following steps:
-    ```yaml
-        - name: Build Dockerfile.build image
-          uses: docker/build-push-action@v2
-          with:
-            tags: custom-<astro-runtime-image>
-            load: true
-            file: Dockerfile.build
-            build-args: |
-              PIP_EXTRA_INDEX_URL=${{ secrets.PIP_EXTRA_INDEX_URL }}
-        - name: Deploy to Astro
-          run: |
-            brew install astronomer/tap/astro
-            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
-    ```
+  :::info
 
-:::info
+  If you need guidance configuring a CI/CD pipeline for a more complex use case involving custom Runtime images, reach out to [Astronomer support](https://support.astronomer.io/).
 
-The image tag for the image built with Dockerfile.build, `custom-<astro-runtime-image>`, must exactly match the image tag in the FROM line of `Dockerfile`.
-
-:::
+  :::
 
 </TabItem>
 </Tabs>
