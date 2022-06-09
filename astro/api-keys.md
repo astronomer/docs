@@ -53,7 +53,7 @@ Deployment API keys are primarily used to automate actions that otherwise requir
 - Deploy code and configuration changes to Astro [using the Astro CLI](deploy-code.md) without user authentication.
 - Automate requests to the [Airflow REST API](airflow-api.md).
 
-To use API keys with the Astro CLI, you need to make your Deployment API key ID and secret accessible to the machine running the CLI via the following OS-level environment variables:
+To use API keys with the Astro CLI, you must make your Deployment API key ID and secret accessible to the CLI by setting the following OS-level environment variables:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
