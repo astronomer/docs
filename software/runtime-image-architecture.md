@@ -5,15 +5,11 @@ id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, Astronomer Software's Docker image for Apache Airflow.
 ---
 
-Astro Runtime is a Debian-based, production-ready distribution of Apache Airflow. The Astro Runtime image is intended to provide organizations improved functionality, reliability, efficiency, and performance.
+Astro Runtime is a discrete, production ready, data orchestration tool based on Apache Airflow. The Astro Runtime image is intended to provide organizations improved functionality, reliability, efficiency, and performance.
 
-Astro Runtime Docker images are hosted on the Astronomer Docker registry and enable Airflow on Astro. All Astro projects require that you specify an Astro Runtime image in your Dockerfile, and all Deployments on Astro must run only one version of Astro Runtime. Every version of Astro Runtime correlates to one version of Apache Airflow. Depending on the needs of your organization, you can run different versions of Astro Runtime on different Deployments within a given Workspace or Cluster.
+If your organization is using Software version 0.29 or later, you can use Astro Runtime images in your Software Deployments. Astro Runtime images include the following features:
 
-## Astro Runtime Advantages
-
-If your organization is using Software version 0.29 or later, you can use Astro Runtime images in your Software Deployments. Astro Runtime images include the following features that are not available in Astronomer Certified images:
-
-- The `astronomer-providers` package, which includes a set of deferrable operators created and maintained by Astronomer.
+- The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules that is maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 - Airflow UI improvements. For example, showing the Deployment Docker image tag in the footer of all UI pages.
 - Exclusive features such as new Airflow components and improvements to the DAG development experience.
 
@@ -35,6 +31,8 @@ To install or upgrade Astro Runtime, see [Upgrade Runtime](https://docs.astronom
 
 Astro Runtime is distributed as a Debian-based Docker image. The Docker image is functionally identical to open source Apache Airflow. However, Astro Runtime includes performance and stability improvements, including critical bug fixes and security patches.
 
+Astro Runtime Docker images are hosted on the Astronomer Docker registry and enable Airflow on Astro. All Astro projects require that you specify an Astro Runtime image in your Dockerfile, and all Deployments on Astro must run only one version of Astro Runtime. Every version of Astro Runtime correlates to an Apache Airflow version. You can run different versions of Astro Runtime on different Deployments within a given Workspace or Cluster.
+
 The Astro Runtime Docker image incorporates additional functionality that makes it easier for organizations to get started with Airflow implementations. This includes:
 
 - A robust testing suite that includes performance benchmarking and end-to-end functionality and upgrade testing.
@@ -46,9 +44,9 @@ The Dockerfiles for all supported Astro Runtime images are located in the [Astro
 
 ## Executors
 
-Executors are used to schedule, monitor, and execute tasks. Only a single executor can be configured at a time. 
+Executors are the mechanism used to run task instances. Astro Runtime supports the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html).
 
-Astro Runtime supports the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html).
+Soon, Astronomer will provide a new executor with intelligent worker packing, task-level resource requests, improved logging, and Kubernetes-like task isolation.
 
 ## Provider Packages
 
@@ -64,7 +62,7 @@ This table lists the provider packages and version information for each provider
 
 ## Python Packages
 
-This table lists the Python packages supported by Astro Runtime.
+This table lists the Python packages supported by Astro Runtime. You can't modify the Python versions.
 
 | Astro Runtime                                   | Python Package                                                                | 
 | ----------------------------------------------- | ----------------------------------------------------------------------------- |
