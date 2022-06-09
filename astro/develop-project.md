@@ -361,9 +361,15 @@ my_project
 
 ## Install Python Packages from Private Sources
 
-Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](develop-project.md#add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
+Python packages can be installed from both public and private locations into your image. To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
-Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image.
+Depending on where your private packages are stored, use one of the following setups to install these packages to an Astro project by customizing your Runtime image.
+
+:::info
+
+Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see [GitHub Actions CI/CD templates](ci-cd.md#github-actions).
+
+:::
 
 <Tabs
     defaultValue="github"
@@ -375,13 +381,13 @@ Depending on where your private packages are stored, use one of the following se
 
 #### Install Python Packages from Private GitHub Repositories
 
-This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.  At a high level, this setup entails specifying your private packages in `requirements.txt`, creating a custom Docker image that mounts a GitHub SSH key for your private GitHub repositories, and building your project with this Docker image.
+This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.
 
-Although this setup is based on GitHub, the general steps can be completed with any hosted Git repository.
+Although this setup is based on GitHub, the high level steps can be completed with any hosted Git repository.
 
 :::info
 
-The following setup has been validated only with a single SSH key. Due to the nature of `ssh-agent`, you might need to modify this setup when using more than one SSH key per Docker image.
+The following setup has been validated only with a single SSH key. You might need to modify this setup when using more than one SSH key per Docker image.
 
 :::
 
@@ -523,7 +529,7 @@ Your Astro project can now utilize Python packages from your private GitHub repo
 
 #### Install Python Packages from a Private PyPI Index
 
-This topic provides instructions for building your Astro project using Python packages from a private PyPI index. In some organizations, python packages are prebuilt and pushed to a hosted private pip server (such as pypiserver or Nexus Repository) or managed service (such as PackageCloud or Gitlab). At a high level, this setup requires specifying your private packages in `requirements.txt`, creating a custom Docker image that changes where pip looks for packages, and building your project with this Docker image.
+In some organizations, python packages are prebuilt and pushed to a hosted private pip server (such as pypiserver or Nexus Repository) or managed service (such as PackageCloud or Gitlab).
 
 #### Prerequisites
 
@@ -534,11 +540,11 @@ To build from a private repository, you need:
 
 #### Step 1: Add privately hosted packages to requirements.txt
 
-Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](https://pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
+Add the name and, optionally, the version of your packages to `requirements.txt`. This is the same syntax as you would use when adding public packages from [PyPI](https://pypi.org). `requirements.txt` can contain a mixture of both publicly accessible and private packages.
 
 :::caution
 
-Ensure that the name of the package on the private repository does not clash with any existing python packages. The order that pip will search indices might produce unexpected results.
+Ensure that the name of the package on the private repository does not clash with any existing python packages on [PyPI](https://pypi.org). If pip parses multiple repositories with the same name, it can produce unexpected results. 
 
 :::
 
@@ -554,7 +560,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
    :::info
 
-   If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image as demonstrated in the example above. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
+   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
 
    :::
 
