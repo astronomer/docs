@@ -58,7 +58,7 @@ To use API keys with the Astro CLI, you need to make your Deployment API key ID 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
 
-For example, to update a given Deployment using the Astro CLI on a Mac machine, you can set temporary OS-level environment variables using the following command:
+For example, to update a given Deployment using the Astro CLI on a Mac machine, set temporary OS-level environment variables with the following commands:
 
 ```sh
 export ASTRONOMER_KEY_ID=<your-key-id>
