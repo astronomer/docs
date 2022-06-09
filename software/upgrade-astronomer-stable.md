@@ -15,23 +15,52 @@ A few notes before you get started:
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
 - Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
 
-## Review Upgrade Considerations
+## Step 1: Review Upgrade Considerations
 
 The [Upgrade Considerations](upgrade-astronomer.md#upgrade-considerations) section of this document contains upgrade information for specific Astronomer versions. Review these notes before starting your own upgrade process.  
 
-## Step 1: Get a Copy of Your `config.yaml` File and Confirm Values
+## Step 2: Check Permissions
 
-First, ensure you have a copy of the `config.yaml` file of your platform namespace.
+Version upgrades can be initiated only by a user with System Admin permissions. To confirm you're an Astronomer System Admin, check that you have access to the **System Admin** menu in the Software UI:
 
-To do this, you can run:
+![System Admin panel](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
+
+You also need permissions to create Kubernetes resources. To confirm you have those permissions, run the following commands:
 
 ```sh
-helm get values <your-platform-release-name> -n <your-platform-namespace>  > config.yaml
+kubectl auth can-i create pods --namespace <your-astronomer-namespace>
+kubectl auth can-i create sa --namespace <your-astronomer-namespace>
+kubectl auth can-i create jobs --namespace <your-astronomer-namespace>
 ```
 
-Review this configuration. If you see the line `"USER-SUPPLIED VALUES:"`, delete it.
+If all commands return `yes`, then you have the appropriate Kubernetes permissions.
 
-## Step 2: Verify Your Current Platform Version
+## Step 3: Back Up Your Database
+
+Before you perform an upgrade, back up your Astronomer database by following recommendations from your cloud provider or making a backup request to your organization's database administrator.
+
+## Step 4: Check the Status of Your Kubernetes Pods
+
+Before you proceed with the upgrade, ensure that the Kubernetes Pods in your platform namespace are healthy by running:
+
+```sh
+kubectl get pods -n <your-astronomer-namespace>
+```
+
+All pods should be in either the `Running` or `Completed` state. If any of your pods are in a `CrashLoopBackOff` state or are otherwise unhealthy, make sure that's expected behavior before you proceed.
+
+## Step 5: Get a Copy of Your `config.yaml` File and Confirm Values
+
+1. Run the following command to retrieve your current platform configuration:
+
+    ```sh
+    helm get values <your-platform-release-name> -n <your-platform-namespace>  > config.yaml
+    ```
+
+2. Review this configuration. If you see the line `"USER-SUPPLIED VALUES:"`, delete it.
+3. Create a copy of `config.yaml` called `old_config.yaml`. Save this case you need to roll back your upgrade.
+
+## Step 6: Verify Your Current Platform Version
 
 To verify your current version of Astronomer, run:
 
@@ -39,7 +68,7 @@ To verify your current version of Astronomer, run:
 helm list --all-namespaces | grep astronomer
 ```
 
-## Step 3: Run Astronomer's Upgrade Script
+## Step 7: Run Astronomer's Upgrade Script
 
 Review and run the script below to upgrade to the version of your choice.
 
@@ -81,6 +110,30 @@ If you do not specify a patch version above, the script will automatically pull 
 
 :::
 
+## Step 8: Confirm That the Installation Was Successful
+
+If the upgrade was successful, you should be able to:
+
+- Log in to Astronomer at `https://app.BASEDOMAIN`.
+- See Workspaces and Airflow Deployments in the Software UI.
+- Access the **Settings** tab for each of your Deployments in the Software UI.
+- See metrics on the **Metrics** tab in the Software UI.
+- Successfully run `$ astro deploy` using the Astronomer CLI.
+- Open the Airflow UI for each of your Deployments.
+- Access logs for your DAGs in the Airflow UI.
+- Create a new Airflow Deployment and ensure it comes up healthy.
+
+If there is a problem creating your Airflow Deployment, check the commander logs to troubleshoot. Here is an example of what you will be looking for:
+
+```
+2022-04-14T05:10:45 INFO Calling commander method #updateDeployment
+2022-04-14T05:10:48 INFO Response from #updateDeployment: {"result":{"message":"values don't meet the specifications of the schema(s) in the following chart(s):\nairflow:\ ... },"deployment":{}}
+2022-04-14T05:10:48 INFO Deployment some-deployment successfully updated
+
+```
+
+Make changes as needed and rerun the upgrade command from Step 7. Do not continue to Step 8 until you have successfully created a new Airflow Deployment.
+
 ## Upgrade Considerations
 
 This topic contains information about upgrading to specific versions of Astronomer Software. This includes notes on breaking changes, database migrations, and other considerations that might depend on your use case.
@@ -104,9 +157,93 @@ When upgrading to v0.29 from any earlier minor version, complete the following a
     kubectl -n <your-platform-namespace> annotate secret astronomer-houston-jwt-signing-certificate "astronomer.io/commander-sync"="platform=astronomer"
     ```
 
-### Upgrading from Astronomer Software v0.25
+### Upgrading to Astronomer Software 0.28
+
+#### Version Compatibility
+
+Before upgrading to 0.28, ensure that the following software is updated to the appropriate version:
+
+- **Kubernetes**: Your version must be 1.19 or greater. If you need to upgrade Kubernetes, contact your cloud provider or your Kubernetes administrator.
+- **Airflow Images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.15 or greater.
+
+    For example, all of the following images would work for this upgrade:
+
+    - `quay.io/astronomer/ap-airflow:1.10.15-7-buster`
+    - `quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild`
+    - `quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild`
+    - `quay.io/astronomer/ap-airflow:2.2.2-onbuild`
+
+- **Helm**: Your version must be 3.6 ≤ 3.8.
+
+#### Modify `config.yaml` values
+
+During Step 5 of the standard upgrade process, check your `config.yaml` file to see if you have any configuration listed under `astronomer.houston.config.deployments.helm`. You must update all key-value pairs in this section to be under `astronomer.houston.config.deployments.helm.airflow` instead.
+
+For example, consider an existing `config.yaml` file that includes an override of `webserver.allowPodLogReading`:
+
+```yaml
+astronomer:
+  houston:
+    config:
+      deployments:
+        helm:
+          webserver:
+            allowPodLogReading: true
+```
+
+In this case, you need to modify the configuration to include an `airflow` key after `helm`:
+
+```yaml
+astronomer:
+  houston:
+    config:
+      deployments:
+        helm:
+          airflow:  ## added this key as this config is coming from the subchart
+            webserver:
+              allowPodLogReading: true
+```
+
+Once you complete this change, compare any values under the `airflow` section with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open-source Airflow chart](https://github.com/apache/airflow/blob/main/chart/values.yaml) to ensure that they are formatted correctly. Incorrectly formatted values for these configurations might result in an error during upgrade.
+
+### Upgrading from Astronomer Software 0.25
 
 If you are upgrading from Astronomer Software v0.25, you first need to upgrade to the latest patch version of v0.26.x before upgrading to any subsequent stable release. To complete this upgrade:
 
 1. Complete the upgrade steps as described in this document. When you get to Step 3, set `ASTRO_VERSION` in Step 3 of this guide to the [latest patch version of Software v0.26](https://docs.astronomer.io/software/0.26/release-notes).
 2. Complete the same upgrade process. This time, when you get to Step 3, set `ASTRO_VERSION` to your desired v0.27+ version.
+
+### Upgrading to Astronomer Software 0.25
+
+#### Version Compatibility
+
+Before upgrading to 0.25, ensure that the following software is updated to the appropriate version:
+
+- **Astronomer**: Your current Software version must be at least v0.23.
+- **Kubernetes**: Your version must be 1.17 or 1.18. If you need to upgrade Kubernetes, contact your cloud provider's support or your Kubernetes administrator.
+- **Airflow Images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.5 or greater. In addition, your image should be in the following format:
+
+    ```
+    quay.io/astronomer/ap-airflow:<airflow-version>-<build-number>-<distribution>-onbuild
+    ```
+
+    For example, all of the following images would work for this upgrade:
+
+    ```sh
+    quay.io/astronomer/ap-airflow:1.10.10-5-alpine3.10-onbuild
+    quay.io/astronomer/ap-airflow:2.0.0-3-buster-onbuild
+    quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild
+    quay.io/astronomer/ap-airflow:1.10.5-9-buster
+    ```
+
+    > **Note:** While `-onbuild` and `<build-number>` are optional, we recommend including them for most upgrades. If you have your own build, test, and publish workflows that are layered on top of the Astronomer Airflow images, then removing `<build-number>` is appropriate because images including `<build-number>` are immutable.
+
+- **Helm**: Your version must be 3.6 or greater.
+
+#### Change to Upgrade Script
+
+Upgrading to 0.25 requires a non-standard upgrade script. Ignore Step 4 in the standard upgrade process and run the following command instead:
+
+```sh
+kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/release-0.25/migrations/scripts/lts-to-lts/0.23-to-0.25/manifests/upgrade-0.23-to-0.25.yaml
+```

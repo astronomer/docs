@@ -78,15 +78,14 @@ module.exports = {
         'custom-image-registry',
           ],
         },
+        'upgrade-astronomer-stable',
         {
         type: 'category',
         label: 'Platform Management',
         items: [
         'apply-platform-config',
-        'upgrade-astronomer-stable',
         'houston-api',
         'configure-platform-resources',
-        'upgrade-to-0-28',
           ],
         },
         {
