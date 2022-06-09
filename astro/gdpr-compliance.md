@@ -25,7 +25,7 @@ If there is a possibility that your company collects or processes personal data 
 
 ## How does using Astro help me comply with the GDPR?
 
-Simply using Astro does not ensure compliance with GDPR, but the combination of a Data Processing Agreement (DPA), Astro architecture, and various controls, features, and modules available in Astro, Astro Runtime, and Astronomer Registry may help you with your GDPR compliance.
+Simply using Astro does not ensure compliance with GDPR, but the combination of a Data Processing Agreement (DPA), Astro architecture, and various controls, features, and modules available in Astro, Astro Runtime, and Astronomer Registry can help you with your GDPR compliance.
 
 Astro is designed and architected with security and privacy by default. Astro boasts a hybrid deployment model founded on a Control Plane hosted by Astronomer and a Data Plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries.
 
