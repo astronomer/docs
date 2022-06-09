@@ -20,7 +20,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### Update Deployment Configurations with the Astro CLI
 
-You can now programmatically update the configurations for your Astro Deployments using Deployment API Keys and the Astro CLI. Updating Deployments this way doesn't require manual user authentication, meaning that you can now integrate Deployment configuration steps into automated processes such as CI/CD pipelines.
+You can now programmatically update the configurations for your Astro Deployments using Deployment API Keys and the Astro CLI. Updating a Deployment with an API key doesn't require manual user authentication, meaning that you can now add Deployment configuration steps to automated processes such as CI/CD pipelines.
 
 Specifically, you can now run the following commands with Deployment API keys:
 
