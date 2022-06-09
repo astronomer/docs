@@ -9,6 +9,8 @@ description: Learn how Astronomer and Astro are GDPR compliant.
 
 The [General Data Protection Regulation](https://gdpr-info.eu/) (GDPR) is a legal framework that sets guidelines for the collection and processing of personal information from individuals who live in the [European Economic Area](https://www.gov.uk/eu-eea) (EEA). The European privacy law became enforceable on May 25, 2018, and replaces the EU’s [Data Protection Directive](http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=CELEX:31995L0046:en:HTML), which went into effect in 1995. The GDPR is intended to harmonize national data privacy laws throughout the EEA and enhance the protection of all EEA residents with respect to their personal data.
 
+The European Commission provides official definitions about the legislation [here](https://ec.europa.eu/info/law/law-topic/data-protection/data-protection-eu_en). 
+
 ## Who is impacted by GDPR?
 
 The GDPR applies to companies that are established within and outside of the EU that offer goods or services to EEA residents, or monitor their behavior. In essence, it impacts and applies to all companies processing and holding the personal data of data subjects located in the EEA.
