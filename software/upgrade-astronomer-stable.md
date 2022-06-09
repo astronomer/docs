@@ -9,30 +9,11 @@ description: Upgrade to a new stable or patch version of Astronomer Software.
 
 For Astronomer Software customers, new product features are regularly made available in stable and long-term support (LTS) releases as described in [Release and Lifecycle Policy](release-lifecycle-policy.md). Patch versions of Astronomer Software with additional bug and security fixes are also released on a regular basis.
 
-All stable and patch releases of Astronomer Software require a simple upgrade process. When an [LTS version](release-lifecycle-policy.md#release-channels) is released, additional upgrade guidance specific to that version will be made available.
-
 Follow this guide to upgrade to any stable or patch version of Astronomer Software. For information on new features and changes, refer to [Software Release Notes](release-notes.md).
 
 A few notes before you get started:
-- The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in the script below.
-- Patch and stable version updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
-
-:::info
-
-Astronomer v0.16.5 and beyond includes an improved upgrade process that allows Airflow Deployments to remain unaffected through a platform upgrade that includes changes to the [Astronomer Airflow Chart](https://github.com/astronomer/airflow-chart).
-
-Now, Airflow Chart changes only take effect when another restart event is triggered by a user. This includes a code push, a change to Environment Variables, or an adjustment to Deployment resources.
-
-:::
-
-:::caution
-
-If you are upgrading from Astronomer Software v0.25, you first need to upgrade to the latest patch version of v0.26.x before upgrading to any subsequent stable release. To complete this upgrade:
-
-1. Complete the upgrade steps as described in this document. When you get to Step 3, set `ASTRO_VERSION` in Step 3 of this guide to the [latest patch version of Software v0.26](https://docs.astronomer.io/software/0.26/release-notes).
-2. Complete the same upgrade process. This time, when you get to Step 3, set `ASTRO_VERSION` to your desired v0.27+ version.
-
-:::
+- The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
+- Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
 
 ## Step 1: Ensure You Have a Copy of Your Astronomer `config.yaml` File
 
@@ -118,3 +99,10 @@ When upgrading to v0.29 from any earlier minor version, complete the following a
     ```bash
     kubectl -n <your-platform-namespace> annotate secret astronomer-houston-jwt-signing-certificate "astronomer.io/commander-sync"="platform=astronomer"
     ```
+
+### Upgrading from Astronomer Software v0.25
+
+If you are upgrading from Astronomer Software v0.25, you first need to upgrade to the latest patch version of v0.26.x before upgrading to any subsequent stable release. To complete this upgrade:
+
+1. Complete the upgrade steps as described in this document. When you get to Step 3, set `ASTRO_VERSION` in Step 3 of this guide to the [latest patch version of Software v0.26](https://docs.astronomer.io/software/0.26/release-notes).
+2. Complete the same upgrade process. This time, when you get to Step 3, set `ASTRO_VERSION` to your desired v0.27+ version.
