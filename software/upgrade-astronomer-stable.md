@@ -206,13 +206,6 @@ astronomer:
 
 Once you complete this change, compare any values under the `airflow` section with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open-source Airflow chart](https://github.com/apache/airflow/blob/main/chart/values.yaml) to ensure that they are formatted correctly. Incorrectly formatted values for these configurations might result in an error during upgrade.
 
-### Upgrading from Astronomer Software 0.25
-
-If you are upgrading from Astronomer Software v0.25, you first need to upgrade to the latest patch version of v0.26.x before upgrading to any subsequent stable release. To complete this upgrade:
-
-1. Complete the upgrade steps as described in this document. When you get to Step 3, set `ASTRO_VERSION` in Step 3 of this guide to the [latest patch version of Software v0.26](https://docs.astronomer.io/software/0.26/release-notes).
-2. Complete the same upgrade process. This time, when you get to Step 3, set `ASTRO_VERSION` to your desired v0.27+ version.
-
 ### Upgrading to Astronomer Software 0.25
 
 #### Version Compatibility
