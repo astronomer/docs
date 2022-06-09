@@ -21,7 +21,7 @@ Astronomer is subject to GDPR because the personal data of EEA residents is proc
 
 ## Is my company subject to GDPR?
 
-Most likely if there is a possibility that your company collects or processes personal data of individuals located in the EEA. Confirm with your privacy and legal counsel.
+If there is a possibility that your company collects or processes personal data of individuals located in the EEA, you are most likely subject to GDPR. Confirm with your privacy and legal counsel.
 
 ## How does using Astro help me comply with the GDPR?
 
