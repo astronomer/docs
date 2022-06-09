@@ -1,8 +1,8 @@
 ---
-title: 'Upgrade to a Stable or Patch Version of Astronomer Software'
+title: 'Upgrade Astronomer Software'
 sidebar_label: 'Upgrade Astronomer'
 id: upgrade-astronomer-stable
-description: Upgrade to a new stable or patch version of Astronomer Software.
+description: Upgrade to a new LTS, stable, or patch version of Astronomer Software.
 ---
 
 ## Overview
@@ -15,7 +15,11 @@ A few notes before you get started:
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
 - Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
 
-## Step 1: Ensure You Have a Copy of Your Astronomer `config.yaml` File
+## Review Upgrade Considerations
+
+The [Upgrade Considerations](upgrade-astronomer.md#upgrade-considerations) section of this document contains upgrade information for specific Astronomer versions. Review these notes before starting your own upgrade process.  
+
+## Step 1: Get a Copy of Your `config.yaml` File and Confirm Values
 
 First, ensure you have a copy of the `config.yaml` file of your platform namespace.
 
@@ -25,11 +29,11 @@ To do this, you can run:
 helm get values <your-platform-release-name> -n <your-platform-namespace>  > config.yaml
 ```
 
-Review this configuration and delete the line `"USER-SUPPLIED VALUES:"` if you see it.
+Review this configuration. If you see the line `"USER-SUPPLIED VALUES:"`, delete it.
 
 ## Step 2: Verify Your Current Platform Version
 
-To verify the version of Astronomer you're currently operating with, run:
+To verify your current version of Astronomer, run:
 
 ```sh
 helm list --all-namespaces | grep astronomer
@@ -37,7 +41,7 @@ helm list --all-namespaces | grep astronomer
 
 ## Step 3: Run Astronomer's Upgrade Script
 
-Now, review and run the script below to upgrade to the version of your choice.
+Review and run the script below to upgrade to the version of your choice.
 
 ```sh
 #!/bin/bash
