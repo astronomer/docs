@@ -9,10 +9,16 @@ An Astro Deployment is an Astro Runtime instance that is powered by the core com
 
 Within a Workspace, you can create Deployments and push DAGs to any Deployment from the Astro CLI or from a continuous integration and continuous delivery (CI/CD) process. You can also invite other users to the Workspace and create Deployments.
 
+## Prerequisites
+
+- A [Workspace](manage-workspaces.md)
+
+## Create a Deployment
+
 If you prefer, you can run the `astrocloud deployment create` command in the Astro CLI to create a Deployment. See [CLI Command Reference](cli-reference/astrocloud-deployment-create.md).
 
 1. Log in to the [Cloud UI](https://cloud.astronomer.io) and select a Workspace.
-2. Click **Deployment**.
+2. Click the **Deployment** button.
 3. Complete the following fields:
     - **Name**: Enter a name for your Deployment.
     - **Astro Runtime**: By default, the latest version of Astro Runtime is selected. The Astro Runtime versions provided in the Cloud UI are limited to patches for the most recent major and minor releases. Deprecated versions of Astro Runtime aren't available.
@@ -25,8 +31,6 @@ If you prefer, you can run the `astrocloud deployment create` command in the Ast
 5. Click **Create Deployment**. 
 
     The initial status of all new Deployments is `UNHEALTHY`. This indicates that the Webserver and Scheduler for the Deployment are being created in your Astro Cluster. In a few minutes, the status changes to `HEALTHY`.
-
-6. Optional. Click **Open Airflow** to access the Airflow UI.
 
 ## Next Steps
 
