@@ -13,8 +13,7 @@ The European Commission provides official definitions about the legislation [her
 
 ## Who is impacted by GDPR?
 
-The GDPR applies to companies that are established within and outside of the EU that offer goods or services to EEA residents, or monitor their behavior. In essence, it impacts and applies to all companies processing and holding the personal data of data subjects located in the EEA.
-The GDPR defines personal data to include any information relating to an identified or identifiable natural person.
+The GDPR applies to companies that are established within and outside of the EU that offer goods or services to EEA residents, or monitor their behavior. In essence, it impacts and applies to all companies processing and holding the personal data of data subjects located in the EEA. The GDPR defines "[personal data](https://gdpr-info.eu/issues/personal-data/)" to be "any information which are related to an identified or identifiable natural person".
 
 ## Is Astronomer subject to GDPR?
 
