@@ -37,7 +37,7 @@ Some basic personal information about Astro users, such as email addresses, name
 
 Yes, Astronomer offers a Data Processing Agreement which complies with the requirements of the current GDPR legal framework in relation to data processing. If your company requires a DPA with Astronomer to satisfy the requirements the GDPR imposes on data controllers with respect to data processors, contact [privacy@astronomer.io](mailto:privacy@astronomer.io).
 
-Please note that if you have previously executed a DPA with Astronomer, it is likely that the DPA already contains sufficient provisions to satisfy the requirements the GDPR imposes on data controllers with respect to data processors. If you believe a new DPA is required, reach out to us at [privacy@astronomer.io](mailto:privacy@astronomer.io) with any questions or concerns.
+Please note that if you have previously executed a DPA with Astronomer, it is likely that the DPA already contains sufficient provisions to satisfy the requirements the GDPR imposes on data controllers with respect to data processors. If you believe a new DPA is required, contact [privacy@astronomer.io](mailto:privacy@astronomer.io) with any questions or concerns.
 
 ## How does Astronomer perform transfer of personal data outside of the EEA?
 
