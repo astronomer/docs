@@ -17,7 +17,7 @@ The GDPR applies to companies that are established within and outside of the EU 
 
 ## Is Astronomer subject to GDPR?
 
-Yes Astronomer is subject to GDPR, given we process and store personal data of EEA residents, through consumption of our services.
+Astronomer is subject to GDPR because the personal data of EEA residents is processed and stored through consumption of Astronomer services.
 
 ## Is my company subject to GDPR?
 
