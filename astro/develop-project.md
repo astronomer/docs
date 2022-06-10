@@ -292,7 +292,7 @@ If your environment variables contain sensitive information or credentials that 
     AIRFLOW__CORE__DAG_CONCURRENCY=5
     ```
 3. Run `astro dev start --env .env` to rebuild your image.
-4. Optional. Run `astro deployment variable create/update --load` to send environment variables from your `.env` file to a Deployment.
+4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment Variables](environment-variables.md).
 
 
 ### Confirm your environment variables were applied
