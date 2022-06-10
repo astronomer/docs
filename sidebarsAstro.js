@@ -142,6 +142,7 @@ module.exports = {
             'resilience',
             'disaster-recovery',
             'data-protection',
+            'gdpr-compliance',
             'secrets-management',],
         },
       ],
