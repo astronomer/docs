@@ -51,4 +51,4 @@ Astronomer is subject to the new SCCs to transfer personal data to countries out
 
 This page is for informational purposes only. Customers should not consider the information or recommendations presented here to constitute legal advice. Customers should engage their own legal and privacy counsel to properly evaluate their use of Astronomer services, with respect to their legal and compliance requirements and objectives.
 
-::
+:::
