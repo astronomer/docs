@@ -65,7 +65,7 @@ export ASTRONOMER_KEY_ID=<your-key-id>
 export ASTRONOMER_KEY_SECRET=<your-key-id>
 ```
 
-After setting the variables, running `astro deployment update` works for the Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
+After setting the variables, running `astro deployment update` works for the Deployment and you don't need to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
 
 ## Delete an API Key
 
