@@ -30,7 +30,7 @@ astro deployment variable create
 | `-d`,`--deployment-id`           |       The Deployment in which to create environment variable(s)                           | Any valid Deployment ID |
 | `-e`,`--env`                  | The path to a file that contains a list of environment variables.  If a filepath isn't specified, this looks for a `.env` file in your current directory. If `.env` doesn't exist, this flag will create it for you                                                                 | Any valid filepath       |
 | `-k`,`--key`             | The environment variable key                                                  | Any string |
-| `-l`,`--load`    | Load new environment variables from a file. Specify this flag if the variables you want to create are in that file. This is an alternative to creating an environment variable by manually specifying `--key` and `--value`             |`` |
+| `-l`,`--load`    | Export new environment variables from your Astro project's `.env` file to the Deployment. This is an alternative to creating an environment variable by manually specifying `--key` and `--value`. By default, this flag exports all new environment variables based on the file specified with `--env`            |`` |
 | `-s`,`--secret`    | Set the value of the new environment variable as secret      |`` |
 | `-v`,`--value`    | The environment variable value          |`` |
 | `-w`,`--workspace-id`          | Create or update an environment variable for a Deployment that is not in your current Workspace. If this is not specified, your current Workspace is assumed           | Any valid Workspace ID                                                         |
