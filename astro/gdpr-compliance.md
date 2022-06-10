@@ -45,7 +45,7 @@ Please note that if you have previously executed a DPA with Astronomer, it is li
 
 The [European Commission](https://ec.europa.eu/info/index_en) (EC) issued modernized [Standard Contractual Clauses](https://ec.europa.eu/info/law/law-topic/data-protection/international-dimension-data-protection/standard-contractual-clauses-scc_en) (SCCs) on June 4, 2021, under the GDPR (Article 46) for data transfers from controllers or processors in the EU/EEA (or otherwise subject to the GDPR) to controllers or processors established outside the EU/EEA (and not subject to the GDPR).
 
-Astronomer is subject to the new SCCs to transfer personal data to countries outside of the EEA where necessary, and has incorporated them into our standard Data Processing Agreement for the purposes of providing our Services (inclusive of support). 
+Astronomer is subject to the new SCCs to transfer personal data to countries outside of the EEA where necessary, and has incorporated them into a standard Data Processing Agreement for the purposes of providing our Services (inclusive of support). 
 
 :::info
 
