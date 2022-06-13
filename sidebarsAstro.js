@@ -33,6 +33,7 @@ module.exports = {
           items: [
             'deferrable-operators',
             'kubernetespodoperator',
+            'kubepodoperator-local',
           ],
         },
         'upgrade-runtime',
