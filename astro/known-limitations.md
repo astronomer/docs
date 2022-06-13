@@ -19,7 +19,6 @@ If you have questions or feedback about any item below, reach out to your Custom
 - If a user changes Workspace roles on Astro, it can take a maximum of 10 minutes for corresponding Airflow permission changes to take effect.
 - Astro supports only the Celery Executor. If you currently use the Kubernetes Executor, you might have to modify your tasks to run on Astro.
 - Clicking on **Refresh DAG** in the Airflow UI will redirect you to `<org-name>.astronomer.run` (Astro Home Page) instead of the task instance URL. We recommend upgrading to [Runtime 4.0](runtime-release-notes.md#astro-runtime-400), as Airflow 2.2 no longer requires this refresh button in the Airflow UI.
-- Deployment API keys can be used to automate code deploys to Astro, but they cannot be used to programmatically update other properties of the Deployment via the Astro CLI.
 
 ## Coming Soon
 

@@ -16,6 +16,24 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.0.1 ([Release notes](cli/release-notes.md))
 
+## June 9, 2022
+
+### Update Deployment Configurations with the Astro CLI
+
+You can now programmatically update the configurations for your Astro Deployments using Deployment API Keys and the Astro CLI. Updating a Deployment with an API key doesn't require manual user authentication, meaning that you can now add Deployment configuration steps to automated processes such as CI/CD pipelines.
+
+Specifically, you can now run the following commands with Deployment API keys:
+
+- [`astro deployment list`](cli/astro-deployment-list.md)
+- [`astro deployment update`](cli/astro-deployment-update.md)
+- [`astro deployment variable create`](cli/astro-deployment-variable-create.md)
+- [`astro deployment variable list`](cli/astro-deployment-variable-list.md)
+- [`astro deployment variable update`](cli/astro-deployment-variable-update.md)
+
+### Bug Fixes
+
+- Fixed an issue where a Deployment's logs wouldn't load in the Cloud UI if it was the only Deployment in the Workspace
+
 ## June 2, 2022
 
 ### Support for the `us-east4` GCP Region
