@@ -9,12 +9,16 @@ description: Create Deployment API keys to make requests to Airflow's REST API a
 
 This guide provides instructions for how to create API keys for Deployments on Astro. You can use API keys to programmatically deploy DAGs to a Deployment on Astro.
 
-A Deployment API key has the following properties:
+You can use a Deployment API key to:
 
-- It can be used to deploy code to Astro via [CI/CD](ci-cd.md).
-- Its key ID and secret are valid indefinitely and can be used to access Deployments without manual authentication.
-- It is deleted permanently if its corresponding Deployment is deleted.
-- It can be used to fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
+- Deploy code to Astro in a [CI/CD pipeline](ci-cd.md).
+- Programmatically update [Deployment configurations](configure-deployment-resources.md) and [environment variables](environment-variables.md).
+- Fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
+
+When using Deployment API keys, keep in mind the following:
+
+- A Deployment API key ID and secret are valid indefinitely and can be used to access Deployments without manual authentication.
+- Deployment API keys are deleted permanently if their corresponding Deployment is deleted.
 
 ## Create an API Key
 
@@ -45,9 +49,23 @@ If you just need to make a single API call, you can use a temporary user authent
 
 Deployment API keys are primarily used to automate actions that otherwise require manual inputs. They allow you to:
 
-- Deploy code to Astro [via CI/CD](ci-cd.md) with tools such as GitHub Actions or Jenkins.
-- Deploy code to Astro [via the Astro CLI](deploy-code.md) without user authentication.
+- Deploy code to Astro [using CI/CD](ci-cd.md) with tools such as GitHub Actions or Jenkins.
+- Deploy code and configuration changes to Astro [using the Astro CLI](deploy-code.md) without user authentication.
 - Automate requests to the [Airflow REST API](airflow-api.md).
+
+To use API keys with the Astro CLI, you must make your Deployment API key ID and secret accessible to the CLI by setting the following OS-level environment variables:
+
+- `ASTRONOMER_KEY_ID`
+- `ASTRONOMER_KEY_SECRET`
+
+For example, to update a given Deployment using the Astro CLI on a Mac machine, set temporary OS-level environment variables with the following commands:
+
+```sh
+export ASTRONOMER_KEY_ID=<your-key-id>
+export ASTRONOMER_KEY_SECRET=<your-key-id>
+```
+
+After setting the variables, running `astro deployment update` works for the Deployment and you don't need to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
 
 ## Delete an API Key
 
