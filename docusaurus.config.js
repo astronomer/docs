@@ -255,7 +255,7 @@ module.exports = {
       src: './scripts/consent-manager-config.js',
     },
     {
-      src: '/js/script.outbound-links.js',
+      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
       "data-domain": 'docs.astronomer.io',
       defer: true,
     }
