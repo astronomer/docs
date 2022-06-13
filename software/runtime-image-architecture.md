@@ -50,15 +50,24 @@ Soon, Astronomer will provide a new executor with intelligent worker packing, ta
 
 ## Provider Packages
 
-This table lists the provider packages and version information for each provider package that is included with Astro Runtime.
+When you install the Astro Runtime image, the supported Apache Airflow open-source software (OSS) provider packages are included. The following are the provider packages Astro Runtime supports:
 
-| Astro Runtime | [amazon](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html) |[azure](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/index.html) | [celery](https://airflow.apache.org/docs/apache-airflow-providers-celery/stable/index.html) | [cncf.kubernetes](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html) | [elasticsearch](https://airflow.apache.org/docs/apache-airflow-providers-elasticsearch/stable/index.html) | [ftp](https://airflow.apache.org/docs/apache-airflow-providers-ftp/stable/index.html) | [google](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/index.html) |   [http](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/index.html) |[imap](https://airflow.apache.org/docs/apache-airflow-providers-imap/stable/index.html) | [mysql](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-mssql/stable/index.html) | [postgres](https://airflow.apache.org/docs/apache-airflow-providers-postgres/stable/index.html) | [redis](https://airflow.apache.org/docs/apache-airflow-providers-redis/stable/index.html) | [slack](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/index.html) | [sqlite](https://airflow.apache.org/docs/apache-airflow-providers-sqlite/stable/index.html) | [ssh](https://airflow.apache.org/docs/apache-airflow-providers-ssh/stable/index.html) |
-| -------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-|**3.0.x**|1.0.0|1.1.0|1.0.0|1.0.1|1.0.4|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|
-|**4.0.x**|1.3.0|1.3.0|1.0.1|1.2.0|1.0.4|1.0.1|2.2.0|1.1.1|1.0.1|1.1.0|1.0.1|1.0.1|3.0.0|1.0.2|1.3.0|
-|**4.1.x**|1.4.0|2.0.0|1.0.1|1!1.2.1|1.0.4|1.1.0|3.0.0|2.0.0|1.0.1|1.1.0|1.0.2|1.0.1|3.0.0|1.0.2|1.3.0|
-|**4.2.x**|1!2.0.0|1!3.0.0|1!2.0.0|1!2.0.0|1!2.0.1|1!2.0.0|1!4.0.0|1!2.0.0|1!2.0.0|1!2.0.0|1!2.0.0|1!2.0.0|1!4.0.0|1!2.0.0|1!2.0.0|
-|**5.0.x**|1!2.1.0|1!3.1.0|1!2.0.0|1!2.0.2|1!2.0.2|1!2.0.0|1!5.0.0|1!2.0.0|1!2.0.0|1!2.1.0|1!2.0.0|1!2.0.0|1!4.0.0|1!2.0.0|1!2.1.0|
+- Amazon
+- Elasticsearch
+- Celery
+- Google
+- Password
+- Cloud Native Computing Foundation (CNCF) Kubernetes
+- PostgreSQL (Postgres)
+- Redis
+- StatsD
+- Virtualenv
+- OpenLineage with Airflow
+- astronomer-providers
+
+OpenLineage with Airflow standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. OpenLineage with Airflow is intended to make it easier for organizations to integrate their lineage tools with Apache Airflow. See [OpenLineage and Airflow](https://docs.astronomer.io/astro/data-lineage-concepts#openlineage-and-airflow).
+
+The `astronomer-providers` package is a collection of Apache Airflow OSS providers and modules. The package is installed on Astro Runtime by default and is maintained by Astronomer. The package includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Deferrable Operators](https://docs.astronomer.io/astro/deferrable-operators). To access the source code for this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ## Python Packages
 
