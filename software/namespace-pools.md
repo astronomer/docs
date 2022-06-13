@@ -218,21 +218,21 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
 
 1. Set the following values in your `config.yaml` file, making sure to specify all of the namespaces you created in the `namespaces.names` object:
 
-  ```yaml
-  global:
-    features:
-      namespacePools:
-        # if this is false, everything in this section can be ignored. default should be false
-        enabled: true
-        namespaces:
-          # automatically creates namespace, role and rolebinding for commander if set to true
-          create: false
-          # this needs to be populated (something other than null) if global.features.namespacePools.enabled is true
-          # add the namespace names that were created in the previous setp
-          names:
-            - <your-namespace-1>
-            - <your-namespace-2>
-  ```
+    ```yaml
+    global:
+      features:
+        namespacePools:
+          # if this is false, everything in this section can be ignored. default should be false
+          enabled: true
+          namespaces:
+            # automatically creates namespace, role and rolebinding for commander if set to true
+            create: false
+            # this needs to be populated (something other than null) if global.features.namespacePools.enabled is true
+            # add the namespace names that were created in the previous setp
+            names:
+              - <your-namespace-1>
+              - <your-namespace-2>
+    ```
 
 2. Save the changes in your `config.yaml` and update Astronomer Software. See [Apply a Config Change](apply-platform-config.md).
 
