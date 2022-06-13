@@ -279,7 +279,7 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 ## Set Environment Variables with the env Command
 
-For Astro projects deployed on Astro, Astronomer recommends [setting environment variables with the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](cli/get-started.md) to set environment variables in your project's `.env` file.
+For Astro projects deployed on Astro, you can use the the [Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui) or the [Astro CLI](cli/get-started.md) to set environment variables in the project `.env` file.
 
 If your environment variables contain sensitive information or credentials that you don't want exposed in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
 
