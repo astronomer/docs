@@ -138,24 +138,29 @@ Make changes as needed and rerun the upgrade command from Step 7. Do not continu
 
 This topic contains information about upgrading to specific versions of Astronomer Software. This includes notes on breaking changes, database migrations, and other considerations that might depend on your use case.
 
-### Upgrading from Earlier Minor Versions to 0.29
+### Upgrading to 0.29
+
+#### Minimum Pre-Upgrade Version
+
+If you are currently on a pre-0.28 version of Software, you must upgrade to Software 0.28 before upgrading to 0.29. A direct upgrade from a pre-0.28 version to 0.29 is not possible.
+
+Follow the standard installation guide to upgrade to Software 0.28, then repeat the process to upgrade to 0.29.
+
+#### Resync Astronomer's Signing Certificate  
 
 As part of the 0.29 release, Astronomer has deprecated its usage of [kubed](https://appscode.com/products/kubed/) for performance and security reasons. Kubed was responsible for syncing Astronomer's signing certificate to Deployment namespaces and is now replaced by an in-house utility. While this change does not directly affect users, you need to run a one-time command during upgrade in order to sync Astronomer's signing certificate.
 
-When upgrading to v0.29 from any earlier minor version, complete the following additional setup between Steps 2 and 3 in the standard procedure:
+When upgrading to v0.29 from any earlier minor version, run the following command between Steps 2 and 3 in the standard procedure to annotate the certificate secret:
 
-1. Locate your Astronomer Software `config.yaml`. To retrieve it programmatically, run the following:
+```bash
+kubectl -n <your-platform-namespace> annotate secret astronomer-houston-jwt-signing-certificate "astronomer.io/commander-sync"="platform=astronomer"
+```
 
-    ```bash
-    # platform-release-name is usually "astronomer"
-    helm get values <your-platform-release-name> astronomer/astronomer -n <your-platform-namespace>
-    ```
+If you completed this upgrade before annotating the secret, you can still complete the sync with the following command:
 
-2. Run the following command to annotate the certificate secret:
-
-    ```bash
-    kubectl -n <your-platform-namespace> annotate secret astronomer-houston-jwt-signing-certificate "astronomer.io/commander-sync"="platform=astronomer"
-    ```
+```bash
+kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
+```
 
 ### Upgrading to Astronomer Software 0.28
 
