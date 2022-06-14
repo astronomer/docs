@@ -66,7 +66,7 @@ For the smoothest, out-of-the-box Airflow experience, we strongly recommend and 
 
 ## Backport Policy for Bug and Security Fixes
 
-When Astronomer identifies a significant Astro Runtime bug, a fix is backported to all Long Term Support (LTS) versions and the latest stable version. Astronomer recommends that you upgrade Astro Runtime if you are not using the latest, stable version. The timely implementation of bug fixes is recommended to avoid task scheduling delays and data loss.
+When Astronomer identifies a significant bug in Astro Runtime, a fix is backported to all Long Term Support (LTS) versions and the latest stable version. To avoid the impact of previously identified bugs, Astronomer recommends that you upgrade Astro Runtime if you are not using the latest stable version.
 
 When Astronomer identifies a significant Astro Runtime security vulnerability, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
 
