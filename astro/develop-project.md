@@ -11,17 +11,15 @@ import TabItem from '@theme/TabItem';
 
 ## Overview
 
-This document explains the various ways you can modify and build your Astro project to fit your team's use case. Specifically, this guide provides instructions on how to:
+This is where you'll find information about:
 
-- Build and run a project
-- Deploy changes to a project
-- Add dependencies to your project
-- Run on-build commands
-- Add connections, pools, and environment variables locally
+- Building and running a project
+- Deploying changes to a project
+- Adding dependencies to a project
+- Running on-build commands
+- Adding connections, pools, and environment variables locally
 
 ## Prerequisites
-
-To develop an Astro project and test it locally, you need:
 
 - An existing [Astro project](create-project.md).
 - [The Astro CLI](cli/get-started.md)
@@ -279,31 +277,27 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 :::
 
-## Set Environment Variables via .env (Local Development Only)
+## Set Environment Variables with the env Command
 
-For Astro projects deployed on Astro, we generally recommend [setting environment variables via the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](cli/get-started.md) to set environment variables in your project's `.env` file.
+For Astro projects deployed on Astro, you can use the the [Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui) or the [Astro CLI](cli/get-started.md) to set environment variables in the project `.env` file.
 
-To add Environment Variables locally:
+If your environment variables contain sensitive information or credentials that you don't want exposed in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
 
 1. Open the `.env` file in your Astro project directory.
-2. Add your environment variables to the `.env` file.
-3. Rebuild your image by running `astro dev start --env .env`.
+2. Add your environment variables to the `.env` file, or open the Astro CLI and run `astro deployment variable list --save` to copy environment variables from an existing Deployment to the file.
 
-When setting environment variables in your `.env` file, use the following format:
+    Use the following format when you set environment variables in your `.env` file:
 
-```
-AIRFLOW__CORE__DAG_CONCURRENCY=5
-```
+    ```
+    AIRFLOW__CORE__DAG_CONCURRENCY=5
+    ```
+3. Run `astro dev start --env .env` to rebuild your image.
+4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment Variables](environment-variables.md).
 
-:::tip
-
-If your environment variables contain sensitive information or credentials that you don't want to expose in plain-text, you may want to add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
-
-:::
 
 ### Confirm your environment variables were applied
 
-By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To confirm your environment variables via the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile or `.env` file.
+By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To confirm your environment variables with the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile or `.env` file.
 
 Alternatively, you can run:
 
@@ -311,7 +305,7 @@ Alternatively, you can run:
 docker ps
 ```
 
-This will output the 3 Docker containers that comprise the Airflow environment on your local machine: the Airflow Scheduler, Webserver, and Postgres metadata database.
+This outputs the 3 Docker containers that comprise the Airflow environment on your local machine: the Airflow Scheduler, Webserver, and Postgres metadata database.
 
 Now, create a [Bash session](https://docs.docker.com/engine/reference/commandline/exec/#examples) in your scheduler container by running:
 
@@ -397,7 +391,7 @@ To install Python packages from a private GitHub repository on Astro, you need:
 
 - The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
-- Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
+- Custom Python packages that are [installable with pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
 - A [GitHub SSH Private Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
 

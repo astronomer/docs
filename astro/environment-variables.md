@@ -49,6 +49,8 @@ To avoid exposing secret values in task logs, instruct your team to not log envi
 
 :::
 
+If you prefer to work with the Astro CLI, you can create and update environment variables using the `astro deployment variable create` and `astro deployment variable update` commands. For more information, see [CLI Command Reference](cli/astro-deployment-variable-create.md).
+
 ### Edit existing values
 
 If you want to make changes to an existing environment variable, you can modify the variable's value at any time. To do so:

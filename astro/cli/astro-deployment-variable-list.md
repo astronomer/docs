@@ -19,6 +19,17 @@ If an environment variable value is set as secret, the CLI will list only its ke
 astro deployment variable list
 ```
 
+:::tip
+
+To run this command in an automated process such as a [CI/CD pipeline](ci-cd.md), set the following OS-level environment variables in a way that the Astro CLI can access them:
+
+- `ASTRONOMER_KEY_ID`
+- `ASTRONOMER_KEY_SECRET`
+
+After setting the variables, this command works for a Deployment without you having to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
+
+:::
+
 ## Options
 
 | Option                         | Description                                                                            | Possible Values                                                                |
@@ -43,4 +54,3 @@ $ astro deployment variable list --deployment-id cl03oiq7d80402nwn7fsl3dmv --key
 
 - [`astro deployment variable create`](cli/astro-deployment-variable-create.md)
 - [`astro deployment variable update`](cli/astro-deployment-variable-update.md)
-
