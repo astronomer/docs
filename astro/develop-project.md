@@ -611,6 +611,16 @@ Ensure that the name of the package on the private repository does not clash wit
    ```
    FROM custom-<airflow-image>
    ```
+   :::tip
+
+    You must add the architecture name to the `FROM` statement when your operating system and the image architecture are different. For example, this is the format for the Apple M1 architecture:
+
+    ```
+   FROM --platform=linux/amd64 astrobase:latest
+   ```
+
+  :::
+
 
    For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0`, this line would be: 
 
