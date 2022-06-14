@@ -604,7 +604,7 @@ Ensure that the name of the package on the private repository does not clash wit
     ```
 
 
-2. Update the following entry in the  `Dockerfile`::
+2. Update the following entry in the  `Dockerfile`:
 
    ```
    FROM custom-<airflow-image>
