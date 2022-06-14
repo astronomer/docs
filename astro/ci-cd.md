@@ -5,6 +5,8 @@ id: ci-cd
 description: Create a CI/CD pipeline that triggers a deploy to Astro based on changes to your Airflow DAGs.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
 ## Overview
@@ -58,6 +60,15 @@ The following templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy vi
 
 ### GitHub Actions
 
+<Tabs
+    defaultValue="standard"
+    values={[
+        {label: 'Standard', value: 'standard'},
+        {label: 'Multi-branch', value: 'multibranch'},
+        {label: 'Custom Image', value: 'custom'},
+    ]}>
+<TabItem value="standard">
+
 To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
@@ -93,7 +104,9 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
     ```
 
-### GitHub Actions (Multiple Branches)
+</TabItem>
+
+<TabItem value="multibranch">
 
 The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline makes can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
 
@@ -157,6 +170,115 @@ This setup assumes the following prerequisites:
             brew install astronomer/tap/astro
             astro deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
     ```
+
+</TabItem>
+
+<TabItem value="custom">
+
+If your Astro project uses a custom Runtime image with additional build-time arguments, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+
+#### Prerequisites
+
+To complete this setup, you need:
+
+- An Astro project that builds a custom Runtime image.
+
+#### Setup
+
+1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+
+  - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+  - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+  - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
+
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
+
+    ```yaml
+    name: Astronomer CI - Custom base image
+
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        env:
+          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+        steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
+        - name: Build Dockerfile.build image
+          uses: docker/build-push-action@v2
+          with:
+            # This image tag must match the image tag in the FROM line of your `Dockerfile`.
+            tags: custom-<astro-runtime-image>
+            load: true
+            file: Dockerfile.build
+            # Define your custom image's build arguments, contexts, and connections here using
+            # the available GitHub Action settings:
+            # https://github.com/docker/build-push-action#customizing .
+            # This example uses `build-args` , but your use case might require configuring
+            # different values.
+            build-args: |
+              <your-build-arguments>
+        - name: Deploy to Astro
+          run: |
+            brew install astronomer/tap/astro
+            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+    ```
+
+    For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
+
+    ```yaml
+    name: Astronomer CI - Custom base image
+
+    on:
+      push:
+        branches:
+          - main
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        env:
+          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+        steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
+        - name: Create SSH Socket
+          uses: webfactory/ssh-agent@v0.5.4
+          with:
+            # GITHUB_SSH_KEY must be defined as a GitHub secret.
+            ssh-private-key: ${{ secrets.GITHUB_SSH_KEY }}
+        - name: (Optional) Test SSH Connection - Should print hello message.
+          run: (ssh git@github.com) || true
+        - name: Build Dockerfile.build image
+          uses: docker/build-push-action@v2
+          with:
+            # This image tag must match the image tag in the FROM line of your `Dockerfile`.
+            tags: custom-<astro-runtime-image>
+            load: true
+            file: Dockerfile.build
+            ssh: |
+              github=${{ env.SSH_AUTH_SOCK }
+        - name: Deploy to Astro
+          run: |
+            brew install astronomer/tap/astro
+            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+    ```
+
+  :::info
+
+  If you need guidance configuring a CI/CD pipeline for a more complex use case involving custom Runtime images, reach out to [Astronomer support](https://support.astronomer.io/).
+
+  :::
+
+</TabItem>
+</Tabs>
 
 ### Jenkins
 
