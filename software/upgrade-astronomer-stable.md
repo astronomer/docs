@@ -142,7 +142,7 @@ This topic contains information about upgrading to specific versions of Astronom
 
 #### Minimum Pre-Upgrade Version
 
-If you are currently on a pre-0.28 version of Software, you must upgrade to Software 0.28 before upgrading to 0.29. A direct upgrade from a pre-0.28 version to 0.29 is not possible.
+If you are currently on a pre-0.28 version of Software, you must upgrade to Software 0.28 before upgrading to 0.29. A direct upgrade from a pre-0.28 version to 0.29 is not possible. This is because the Software 0.28 upgrade process includes a database migration that's necessary for some of the tooling in 0.29.
 
 Follow the standard installation guide to upgrade to Software 0.28, then repeat the process to upgrade to 0.29.
 
