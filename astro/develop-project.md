@@ -513,7 +513,7 @@ This example assumes that the name of each of your Python packages is identical 
     Astro runtime base images are built on the `linux/amd64` architecture. You must add the architecture name to the `FROM` statement when your operating system and the image architecture are different. For example, this is the format for the Apple M1 architecture:
 
     ```
-   FROM --platform=linux/amd64 astrobase:latest
+   FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
    ```
     :::
 
@@ -616,7 +616,7 @@ Ensure that the name of the package on the private repository does not clash wit
     Astro runtime base images are built on the `linux/amd64` architecture. You must add the architecture name to the `FROM` statement when your operating system and the image architecture are different. For example, this is the format for the Apple M1 architecture:
 
    ```
-    FROM --platform=linux/amd64 astrobase:latest
+    FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
     ```
     :::
       
