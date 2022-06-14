@@ -7,7 +7,7 @@ description: Run deferrable operators to improve performance and and reduce cost
 
 [Apache Airflow 2.2](https://airflow.apache.org/blog/airflow-2.2.0/) introduced [**deferrable operators**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), a powerful type of Airflow operator that's optimized for lower resource costs and improved performance. In Airflow, it's common to use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) and some [operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) to configure tasks that wait for some external condition to be met before executing or triggering another task. While tasks using standard operators and sensors take up a worker slot when checking if an external condition has been met, deferrable operators suspend themselves during that process. This releases the worker to take on other tasks.
 
-Deferrable operators rely on a new Airflow component called the Triggerer. The Triggerer is highly available and built into all Astronomer Software Deployments, which means that you can use deferrable operators in your DAGs with no additional configuration. To ensure that you can test your DAGs locally, the Triggerer is also built into the Astro CLI.
+Deferrable operators rely on a new Airflow component called the Triggerer. The Triggerer is highly available and built into all Astronomer Software Deployments. To ensure that you can test your DAGs locally, the Triggerer is also built into the Astro CLI.
 
 Deferrable operators provide the following benefits:
 
