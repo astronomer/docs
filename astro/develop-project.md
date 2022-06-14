@@ -591,42 +591,36 @@ Ensure that the name of the package on the private repository does not clash wit
 
 #### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a copy of the Astro `Dockerfile` in an Amazon ECR repository:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file. Replace the pip repository and associated credentials values with your own.
 
     ```sh
-    [create ECR registry]
-    aws ecr get-login-password --region [region] | docker login --username AWS --password-stdin [account].dkr.ecr.[region].amazonaws.com
-    docker build -f Dockerfile.base -t [account].dkr.ecr.[region].amazonaws.com/[registry]:[tag] .
-    docker push [account].dkr.ecr.[region].amazonaws.com/[registry]:[tag].
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-<airflow-image> .
     ```
 
-2. In the `Dockerfile` add the following:
+    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0` in your `Dockerfile.build`, this command would be:
 
-   ```
-   [account].dkr.ecr.[region].amazonaws.com/[registry]:[tag]
-   ```
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-astro-runtime-5.0.0 .
+    ```
 
-3. Update the following entry in the  `Dockerfile`:
+
+2. Update the following entry in the  `Dockerfile`::
 
    ```
    FROM custom-<airflow-image>
    ```
-   :::tip
+        :::tip
 
-    You must add the architecture name to the `FROM` statement when your operating system and the image architecture are different. For example, this is the format for the Apple M1 architecture:
+      Astro runtime base images are built on the `linux/amd64` architecture. You must add the architecture name to the `FROM` statement when your operating system and the image architecture are different. For example, this is the format for the Apple M1 architecture:
 
-    ```
-   FROM --platform=linux/amd64 astrobase:latest
-   ```
+            ```
+          FROM --platform=linux/amd64 astrobase:latest
+          ```
+        :::
 
-  :::
-
-
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0`, this line would be: 
-
-   ```
-   FROM custom-astro-runtime:5.0.0-base
-   ```   
+      Your Astro project can now utilize Python packages from your private PyPi index. 
+   
+3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
 </TabItem>
 </Tabs>
