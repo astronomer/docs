@@ -233,12 +233,12 @@ module.exports = {
         path: 'software',
         lastVersion: 'current',
         versions: {
-        current: {
-          label: '0.29',
-          path: '',
-          banner: 'none',
-         },
-       },
+          current: {
+            label: '0.29',
+            path: '',
+            banner: 'none',
+          },
+        },
       },
     ],
   ],
@@ -254,5 +254,10 @@ module.exports = {
     {
       src: './scripts/consent-manager-config.js',
     },
+    {
+      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
+      "data-domain": 'docs.astronomer.io',
+      defer: true,
+    }
   ],
 };
