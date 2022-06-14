@@ -216,35 +216,23 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
 
 ### Step 2: Configure a Namespace Pool in Astronomer
 
-1. Set the following values in your `config.yaml` file, making sure to specify all of the namespaces you configured in the `preCreatedNamespaces` object:
+1. Set the following values in your `config.yaml` file, making sure to specify all of the namespaces you created in the `namespaces.names` object:
 
-   ```yaml
-   global:
-     # Make fluentd gather logs from all available namespaces
-     manualNamespaceNamesEnabled: true
-     clusterRoles: false
-
-   astronomer:
-     houston:
-       config:
-         deployments:
-           # Enable manual namespace names
-           manualNamespaceNames: true
-           # Pre-created namespace names
-           preCreatedNamespaces:
-             - name: <namespace-name-1>
-             - name: <namespace-name-2>
-             - name: <namespace-name-x>
-
-           # Allows users to immediately reuse a pre-created namespace by hard deleting the associated Deployment
-           # If set to false, you'll need to wait until a cron job runs before the Deployment record is deleted and the namespace is added back to the pool
-           hardDeleteDeployment: true
-
-     commander:
-       env:
-         - name: "COMMANDER_MANUAL_NAMESPACE_NAMES"
-           value: true
-   ```
+    ```yaml
+    global:
+      features:
+        namespacePools:
+          # if this is false, everything in this section can be ignored. default should be false
+          enabled: true
+          namespaces:
+            # automatically creates namespace, role and rolebinding for commander if set to true
+            create: false
+            # this needs to be populated (something other than null) if global.features.namespacePools.enabled is true
+            # add the namespace names that were created in the previous setp
+            names:
+              - <your-namespace-1>
+              - <your-namespace-2>
+    ```
 
 2. Save the changes in your `config.yaml` and update Astronomer Software. See [Apply a Config Change](apply-platform-config.md).
 
