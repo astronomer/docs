@@ -517,7 +517,7 @@ This example assumes that the name of each of your Python packages is identical 
    ```
     :::
 
-      Your Astro project can now utilize Python packages from your private PyPi index. 
+    Your Astro project can now utilize Python packages from your private PyPi index. 
    
 3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
@@ -620,7 +620,7 @@ Ensure that the name of the package on the private repository does not clash wit
     ```
     :::
       
-      Your Astro project can now utilize Python packages from your private PyPi index. 
+    Your Astro project can now utilize Python packages from your private PyPi index. 
    
 3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
