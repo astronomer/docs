@@ -1,3 +1,8 @@
+# Proxying Pluasible Analytics Script through Netlify to help avoid adblockers
+# https://plausible.io/docs/proxy/guides/netlify
+/js/script.outbound-links.js https://plausible.io/js/script.outbound-links.js 200
+/api/event https://plausible.io/api/event 200
+
 # redirect base path to astro
 / /astro 301!
 
