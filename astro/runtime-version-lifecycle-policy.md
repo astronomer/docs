@@ -32,38 +32,6 @@ For users that want to keep up with the latest Astronomer and Airflow features o
 
 For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel exclusively.
 
-## Versioning Scheme
-
-Astro Runtime follows [Semantic Versioning](https://semver.org/). This means that Astronomer ships major, minor, and patch releases of Runtime in the format of `major.minor.patch`.
-
-- **Major** versions are released for significant feature additions, including backward-incompatible changes to an API or DAG specification.
-- **Minor** versions are released for functional changes, including backward-compatible changes to an API or DAG specification.
-- **Patch** versions are released for bug and security fixes that resolve incorrect behavior.
-
-For Runtime `4.0.6`, for example:
-
-- Major = `4.`
-- Minor = `.0`
-- Patch = `.6`
-
-A Runtime Docker image will be published for most major and minor versions of Apache Airflow. Astronomer is committed to same-day releases of Runtime images for supported community Airflow versions.
-
-It is considered safe to upgrade to minor and patch versions within a major version. Upgrade guidance for major and LTS versions is provided with each release. There is no relation between a Runtime release's version number and its release channel.
-
-### Distribution
-
-Runtime Docker images are formatted as:
-
-- `quay.io/astronomer/astro-runtime:<version>`
-- `quay.io/astronomer/astro-runtime:<version>-base`
-
-For example, the images for Astro Runtime 4.0.6 would be:
-
-- `quay.io/astronomer/astro-runtime:4.0.6`
-- `quay.io/astronomer/astro-runtime:4.0.6-base`
-
-For the smoothest, out-of-the-box Airflow experience, we strongly recommend and default to non-`base` images in your project's `Dockerfile`. These images incorporate Docker ONBUILD commands to copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. For complex use cases that require additional customization, a `base` Astro Runtime image might work best.
-
 ## Backport Policy for Bug and Security Fixes
 
 If a major stability bug in Astro Runtime is identified by Astronomer, a fix will be backported to all LTS versions and only the latest stable version. For users on a stable version that is not latest, our team will recommend that you upgrade. Major issues in this category may result in significant delays in task scheduling as well as potential data loss.
@@ -120,3 +88,7 @@ The following table contains the exact lifecycle for each published version of A
 | [5.0.x](runtime-release-notes.md#astro-runtime-500)      | April 30, 2022  |  October 2022         |
 
 If you have any questions or concerns, reach out to [Astronomer Support](https://support.astronomer.io).
+
+## See Also
+
+- [Astro Runtime Architecture](/software/runtime-image-architecture.md)

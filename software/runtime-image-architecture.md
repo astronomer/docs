@@ -13,7 +13,9 @@ If your organization is using Software version 0.29 or later, you can use Astro 
 - Airflow UI improvements. For example, showing the Deployment Docker image tag in the footer of all UI pages.
 - Exclusive features such as new Airflow components and improvements to the DAG development experience.
 
-For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime Release Notes](https://docs.astronomer.io/astro/runtime-release-notes).
+For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime Release Notes](/astro/runtime-release-notes).
+
+If you're curious about the differences between Astro Runtime and Astronomer Certified, see [Differences Between Astronomer Runtime and Astronomer Certified](image-architecture.md#differences-between-astronomer-runtime-and-astronomer-certified)
 
 ## Runtime Versioning
 
@@ -30,6 +32,13 @@ To install or upgrade Astro Runtime, see [Upgrade Runtime](https://docs.astronom
 ## Distribution
 
 Astro Runtime is distributed as a Debian-based Docker image. The Docker image is functionally identical to open source Apache Airflow. However, Astro Runtime includes performance and stability improvements, including critical bug fixes and security patches.
+
+Runtime Docker images have the following format:
+
+- `quay.io/astronomer/astro-runtime:<version>`
+- `quay.io/astronomer/astro-runtime:<version>-base`
+
+Astronomer recommends using non-`base` images in your project's `Dockerfile`. These images incorporate Docker ONBUILD commands to copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization.
 
 Astro Runtime Docker images are hosted on the Astronomer Docker registry and enable Airflow on Astro. All Astro projects require that you specify an Astro Runtime image in your Dockerfile, and all Deployments on Astro must run only one version of Astro Runtime. Every version of Astro Runtime correlates to an Apache Airflow version. You can run different versions of Astro Runtime on different Deployments within a given Workspace or Cluster.
 
@@ -65,6 +74,11 @@ When you install the Astro Runtime image, the supported Apache Airflow open-sour
 - OpenLineage with Airflow
 - astronomer-providers
 
+To determine the supported provider package version for a specific Astronomer Software release, see the release notes. Run the following command to determine the provider package versions that are supported by your current Astro Runtime image:
+
+```
+docker run --rm {image} pip freeze | grep apache-airflow-provider
+```
 OpenLineage with Airflow standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. OpenLineage with Airflow is intended to make it easier for organizations to integrate their lineage tools with Apache Airflow. See [OpenLineage and Airflow](https://docs.astronomer.io/astro/data-lineage-concepts#openlineage-and-airflow).
 
 The `astronomer-providers` package is a collection of Apache Airflow OSS providers and modules. The package is installed on Astro Runtime by default and is maintained by Astronomer. The package includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Deferrable Operators](https://docs.astronomer.io/astro/deferrable-operators). To access the source code for this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
