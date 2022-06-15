@@ -7,7 +7,7 @@ description: Get started on Astro by creating your first Astro Cluster on Google
 
 ## Overview
 
-This is where you'll find instructions for installing Astro on the Google Cloud Platform (GCP), including prerequisites and the steps required to allow Astronomer to provision your network resources.
+This is where you'll find instructions for installing Astro on the Google Cloud Platform (GCP).
 
 To complete the installation process, you'll:
 
@@ -24,7 +24,7 @@ For more information about managing Google Cloud projects, see [GCP documentatio
 - A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
 - A user with [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles) in your project.
 - [Google Cloud Shell](https://cloud.google.com/shell).
-- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36.
+- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36. To adjust your project's quota limits up or down, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console).
 - A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24. To adjust your project's quota limits up or down, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console).
 - A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or scheduled maintenance is required.
 
