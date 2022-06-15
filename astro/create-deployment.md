@@ -9,6 +9,8 @@ An Astro Deployment is an Astro Runtime instance that is powered by the core com
 
 Within a Workspace, you can create Deployments and push DAGs to any Deployment from the Astro CLI or from a continuous integration and continuous delivery (CI/CD) process. You can also invite other users to the Workspace and create Deployments.
 
+To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace in the Data Plane. See [Deployment Network Isolation](data-protection.md#deployment-network-isolation).
+
 ## Prerequisites
 
 - A [Workspace](manage-workspaces.md)

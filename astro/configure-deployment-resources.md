@@ -9,8 +9,6 @@ description: Learn how to create and configure Astro Deployment resources.
 
 After you create an Astro Deployment, you can modify its resource settings to make sure that your tasks have the CPU and memory required to complete successfully.
 
-Deployment resources can't be shared and your Astro Cluster can't be provisioned by another Deployment. Resources for each Deployment are isolated within a Kubernetes namespace. See [Deployment Network Isolation](data-protection.md#deployment-network-isolation).
-
 ## Worker Resources
 
 A worker is responsible for executing tasks, which are first scheduled and queued by the Scheduler. On Astro, task execution is powered by the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) with [KEDA](https://www.astronomer.io/blog/the-keda-autoscaler), which enables workers to autoscale between 1 and 10 depending on real-time workload. Each worker is a Kubernetes Pod that is hosted within a Kubernetes Node in your Astro Cluster.
