@@ -515,7 +515,7 @@ This example assumes that the name of each of your Python packages is identical 
     ```
    FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
    ```
-    :::
+  :::
 
     Your Astro project can now utilize Python packages from your private PyPi index. 
    
