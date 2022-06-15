@@ -17,21 +17,31 @@ Release date: June 13, 2022
 
 ### Deployment API Keys Now Work with Deployment Commands
 
-Users using the CLI with Deployment API Keys will now be able to use commands `astro deployment list`, `logs`, `update`, `delete`, `variable list`, `variable create`, and `variable update` in addtion to `astro deploy`.
+You can now run the following commands without specifying a Deployment ID by using a Deployment API key:  
 
-### New Deployment Selection process
+- `astro deploy`
+- `astro deployment list`
+- `astro deployment logs`
+- `astro deployment update`
+- `astro deployment delete`
+- `astro deployment variable list`
+- `astro deployment variable create`
+- `astro deployment variable update` 
 
-The CLI will now undergo a new process when determining what deployments to run commands with:
 
-- First, it will look for a deployment ID supplied to the command or in the `./astro/config.yaml` file
-- Next If there is only one deployment it will use that one by default
-- If a deployment API key is used it will use the deployment associated with the key by defualt
-- lastly if there are deployments you will be prompted to create one
+### New Process for Determining Which Deployment to Run Commands Against
+
+The CLI now follows a new process when looking for a target Deployment to run a command against:
+
+- It looks for a Deployment ID supplied within the command.
+- It looks for a  Deployment ID in the `./astro/config.yaml` file.
+- If only one Deployment is specified between these sources, the CLI automatically runs the command for that Deployment.
+- If more than one Deployment is specified between these sources, it looks for a Deployment API key set as an OS-level environment variable. If an API key exists, it automatically runs a command for the associated Deployment. 
+- If it doesn't detect any Deployment information across your system, you are prompted to create one. 
 
 ### Bug Fix
 
-- Fixed an issue causing `astro dev` commands to not work with Colima container engine
-- Fixes an issue were a non-system admin could not create a deployment
+- Fixed an issue were users who were not System Admins could not create Deployments.
 
 ## Astro CLI v1.0.1
 
