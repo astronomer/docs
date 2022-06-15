@@ -34,11 +34,6 @@
       ]
     },
     {
-      "type": "doc",
-      "id": "upgrade-astronomer",
-      "label": "Upgrade Astronomer"
-    },
-    {
       "type": "category",
       "label": "Deploy",
       "items": [
@@ -70,6 +65,7 @@
       "type": "category",
       "label": "Manage Astronomer",
       "items": [
+        "upgrade-astronomer",
         "integrate-auth-system",
         "workspace-permissions",
         "manage-platform-users",

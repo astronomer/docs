@@ -61,10 +61,6 @@
       "collapsed": true
     },
     {
-      "type": "doc",
-      "id": "version-0.25/upgrade-astronomer"
-    },
-    {
       "type": "category",
       "label": "Deploy",
       "items": [
@@ -144,6 +140,10 @@
       "type": "category",
       "label": "Manage Astronomer",
       "items": [
+        {
+          "type": "doc",
+          "id": "version-0.25/upgrade-astronomer"
+        },
         {
           "type": "doc",
           "id": "version-0.25/integrate-auth-system"
