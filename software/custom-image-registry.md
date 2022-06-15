@@ -78,7 +78,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
         	    protectedCustomRegistry:
         	      enabled: true
         	      updateRegistry:
-        	        enabled: false
+        	        enabled: true
         	        host: <your-airflow-image-repo>
         	        secretName: <name-of-secret>
     ```
