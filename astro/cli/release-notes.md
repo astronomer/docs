@@ -42,7 +42,7 @@ The CLI now follows a new process when looking for a target Deployment to run a 
 
 ### Bug Fix
 
-- Fixed an issue were users who were not Organization Admins could not create Deployments.
+- Fixed an issue were users who were not a Workspace Admin could not create Deployments.
 
 ## Astro CLI v1.0.1
 
