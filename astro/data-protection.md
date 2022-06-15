@@ -25,3 +25,11 @@ All data at rest across Control and Data Planes is encrypted with AES-256, one o
 
 Specifically, Control Plane data is encrypted on disk with a platform-managed key, including backups and the temporary files created while DB queries are running. Likewise, Data Plane data is server-side encrypted and volume encrypted, using encryption keys managed by the cloud provider and anchored by hardware security appliances. By early 2022, all resources provisioned across both planes will leverage cloud provider envelope encryption wherever possible in accordance with a [defense in depth security strategy](https://www.us-cert.gov/bsi/articles/knowledge/principles/defense-in-depth).
 
+## Deployment Network Isolation
+
+All pods and services specific to a single Deployment on Astro are isolated to a corresponding Kubernetes namespace within the Astro Cluster in which the Deployment is hosted. All Deployment namespaces on Astro, including those running on the same Cluster, are network isolated from each other by default. In addition to the isolation between Deployment namespaces, Astronomer also restricts communication within a namespace to only what is required between components and associated ports.
+
+This level of network isolation is achieved using [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) enabled by the [Calico](https://kubernetes.io/docs/concepts/cluster-administration/networking/#calico) kubernetes network plugin.
+
+The network isolation between and within Deployment namespaces ensures that communication is restricted to only allow necessary communications within a namespace, and that communication between Deployments is denied. This ensures that unintended communications and attempted data exchanges are blocked.
+

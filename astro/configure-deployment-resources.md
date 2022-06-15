@@ -9,6 +9,8 @@ description: Learn how to create and configure Astro Deployment resources.
 
 After you create an Astro Deployment, you can modify its resource settings to make sure that your tasks have the CPU and memory required to complete successfully.
 
+Deployment resources can't be shared and your Astro Cluster can't be provisioned by another Deployment. Resources for each Deployment are isolated within a Kubernetes namespace. See [Deployment Network Isolation](data-protection.md#deployment-network-isolation).
+
 ## Worker Resources
 
 A worker is responsible for executing tasks, which are first scheduled and queued by the Scheduler. On Astro, task execution is powered by the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html) with [KEDA](https://www.astronomer.io/blog/the-keda-autoscaler), which enables workers to autoscale between 1 and 10 depending on real-time workload. Each worker is a Kubernetes Pod that is hosted within a Kubernetes Node in your Astro Cluster.
@@ -36,14 +38,6 @@ The [Airflow Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/co
 For example, if you set Scheduler Resources to 10 AU and Scheduler Count to 2, your Airflow Deployment will run with 2 Airflow Schedulers using 10 AU each.
 
 If you experience delays in task execution, which you can track via the Gantt Chart view of the Airflow UI, we recommend increasing the AU allocated towards the Scheduler. The default resource allocation is 10 AU.
-
-## Deployment Network Isolation
-
-All pods and services specific to a single Deployment on Astro are isolated to a corresponding Kubernetes namespace within the Astro Cluster in which the Deployment is hosted. All Deployment namespaces on Astro, including those running on the same Cluster, are network isolated from each other by default. In addition to the isolation between Deployment namespaces, Astronomer also restricts communication within a namespace to only what is required between components and associated ports.
-
-This level of network isolation is achieved using [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) enabled by the [Calico](https://kubernetes.io/docs/concepts/cluster-administration/networking/#calico) kubernetes network plugin.
-
-The network isolation between and within Deployment namespaces ensures that communication is restricted to only allow necessary communications within a namespace, and that communication between Deployments is denied. This ensures that unintended communications and attempted data exchanges are blocked.
 
 ## Edit Deployment Resource Settings
 
