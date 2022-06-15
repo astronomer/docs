@@ -64,6 +64,7 @@ module.exports = {
         'install-airgapped',
           ],
         },
+        'upgrade-astronomer',
         {
         type: 'category',
         label: 'Platform Setup',
@@ -83,10 +84,8 @@ module.exports = {
         label: 'Platform Management',
         items: [
         'apply-platform-config',
-        'upgrade-astronomer-stable',
         'houston-api',
         'configure-platform-resources',
-        'upgrade-to-0-28',
           ],
         },
         {

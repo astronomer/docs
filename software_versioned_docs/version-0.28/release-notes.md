@@ -11,7 +11,7 @@ description: Astronomer Software release notes.
 
 This document includes all release notes for Astronomer Software v0.28.
 
-This is the latest LTS long-term support (LTS) version of Astronomer Software. To upgrade to Astronomer v0.28 from v0.25+, see [Upgrade to v0.28](upgrade-to-0-28.md). For more information about Software release channels, read [Release and Lifecycle Policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI Release Notes](cli-release-notes.md).
+This is the latest LTS long-term support (LTS) version of Astronomer Software. To upgrade to Astronomer v0.28 from v0.25+, see [Upgrade to v0.28](upgrade-astronomer.md). For more information about Software release channels, read [Release and Lifecycle Policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI Release Notes](cli-release-notes.md).
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
