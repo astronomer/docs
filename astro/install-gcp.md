@@ -7,28 +7,26 @@ description: Get started on Astro by creating your first Astro Cluster on Google
 
 ## Overview
 
-This guide provides steps for getting started with Astro on Google Cloud Platform (GCP). Below, you'll find instructions for how to complete the Astro install process, including prerequisites and the steps required for our team to provision resources in your network.
+This is where you'll find instructions for installing Astro on the Google Cloud Platform (GCP).
 
-At a high-level, we'll ask that you come prepared with a new Google Cloud project. From there, you can expect to:
+To complete the installation process, you'll:
 
 - Create an account on Astro.
 - Activate your Astro Data Plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
-- Share information about your Google Cloud project with our team.
+- Share information about your Google Cloud project with Astronomer.
 
-Astronomer will then create a Cluster within your Google Cloud project that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
+When you've completed the installaion process, Astronomer will create a Cluster within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
-For more information on managing Google Cloud projects, see [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+For more information about managing Google Cloud projects, see [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
 
 ## Prerequisites
 
-To install Astro on GCP, you need:
-
-- A clean [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
+- A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
 - A user with [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles) in your project.
 - [Google Cloud Shell](https://cloud.google.com/shell).
-- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36.
-- A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24.
-- A subscription to the [Astro Status Page](https://status.astronomer.io). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
+- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36. To adjust your project's quota limits up or down, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console).
+- A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24. To adjust your project's quota limits up or down, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console).
+- A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or scheduled maintenance is required.
 
 For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
 
@@ -56,7 +54,7 @@ When you first authenticate to Astro, you can sign in with a Google account, a G
   <img src="/img/docs/login.png" alt="Astro login screen" />
 </div>
 
-If you're the first person from your team to authenticate, the Astronomer team will add you as a Workspace Admin to a new Workspace named after your Organization. From there, you'll be able to add other team members to that Workspace without Astronomer's assistance.
+If you're the first person from your team to authenticate, Astronomer adds you as a Workspace Admin to a new Workspace named after your Organization. From there, you'll be able to add other team members to that Workspace without the assistance of Astronomer.
 
 :::tip
 
@@ -108,7 +106,7 @@ Once you've activated your Data Plane, provide Astronomer with:
 - Your preferred maximum node count.
 - (_Optional_) Your custom CIDR ranges for connecting to Astronomer's services.
 
-If you don't specify your organization's preferred configurations, Astronomer will create a Cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP Resource Reference](resource-reference-gcp.md).
+If you don't specify your organization's preferred configurations, Astronomer creates a Cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP Resource Reference](resource-reference-gcp.md).
 
 :::info
 
@@ -128,9 +126,9 @@ Once VPC peered with Astronomer, configure and validate the following to ensure 
 
 ## Step 4: Let Astronomer Complete the Install
 
-Once you've provided Astronomer with the information for your setup, the Astronomer team will finish creating your first Cluster on GCP.
+Once you've provided Astronomer with the information for your setup, Astronomer finishes creating your first Cluster on GCP.
 
-This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
+This process can take some time. Wait for confirmation that the installation is successful before proceeding to the next step.
 
 ## Step 5: Create a Deployment
 
