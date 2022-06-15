@@ -56,7 +56,11 @@
             "install-airgapped"
           ]
         },
-        "upgrade-astronomer",
+        {
+          "type": "doc",
+          "id": "upgrade-astronomer",
+          "label": "Upgrade Astronomer"
+        },
         {
           "type": "category",
           "label": "Platform Setup",
