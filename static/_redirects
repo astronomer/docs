@@ -194,7 +194,7 @@
 /software/0.28/upgrade-astronomer-stable /software/0.28/upgrade-astronomer 301
 /software/0.27/upgrade-astronomer-stable /software/0.27/upgrade-astronomer 301
 /software/0.26/upgrade-astronomer-stable /software/0.26/upgrade-astronomer 301
-/software/0.25/upgrade-astronomer-stable /software/0.25/upgrade-astronomer 301
+/software/0.25/upgrade-astronomer-patch /software/0.25/upgrade-astronomer 301
 /software/upgrade-to-0-28 /software/upgrade-astronomer 301
 /software/0.28/upgrade-to-0-28 /software/0.28/upgrade-astronomer 301
 /software/0.27/upgrade-to-0-28 /software/0.27/upgrade-astronomer 301
