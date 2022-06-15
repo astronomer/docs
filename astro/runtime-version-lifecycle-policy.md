@@ -76,7 +76,7 @@ Occasionally, Astronomer might deviate from the defined response policy and back
 
 Astronomer is aware of the **Security Scan** results that are provided by [Project Quay](https://www.projectquay.io/) for each Astro Runtime image and are publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
-Astronomer monitors these results regularly to determine if any of the vulnerabilities identified pose a risk to organizations using Astro Runtime. If a vulnerability with a high risk of exploitability is identified, Astronomer works with vendors to correct it and incorporate a fix into stable and LTS releases of Astro Runtime.
+Astronomer monitors these results regularly to determine if any of the vulnerabilities identified pose a risk to organizations using Astro Runtime. If a vulnerability with a high risk of exploitability is identified, Astronomer works with vendors to correct it and incorporate a fix into stable and LTS releases of Astro Runtime in accordance to our security policy.
 
 If there is a critical vulnerability in the Security Scan results that causes concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
 
