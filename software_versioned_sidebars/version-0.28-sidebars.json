@@ -79,7 +79,7 @@
           "items": [
             "apply-platform-config",
             "houston-api",
-            "configure-platform-resources",
+            "configure-platform-resources"
           ]
         },
         {

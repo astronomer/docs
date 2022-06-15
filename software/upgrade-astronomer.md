@@ -1,7 +1,7 @@
 ---
 title: 'Upgrade Astronomer Software'
 sidebar_label: 'Upgrade Astronomer'
-id: upgrade-astronomer-stable
+id: upgrade-astronomer
 description: Upgrade to a new LTS, stable, or patch version of Astronomer Software.
 ---
 
