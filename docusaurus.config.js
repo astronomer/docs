@@ -36,10 +36,6 @@ module.exports = {
     colorMode: {
       disableSwitch: false,
     },
-    sitemap: {
-      changefreq: 'daily',
-      priority: 0.7,
-    },
     navbar: {
       title: 'Docs',
       logo: {
@@ -211,8 +207,12 @@ module.exports = {
           editLocalizedFiles: true,
           routeBasePath: 'astro',
           path: 'astro',
-          admonitions: {
-          },
+        },
+        sitemap: {
+        id: 'default',
+        changefreq: 'daily',
+        priority: 0.7,
+        filename: 'sitemap.xml',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -241,6 +241,16 @@ module.exports = {
         },
       },
     ],
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+       id: 'software',
+       changefreq: 'weekly',
+       priority: 0.3,
+       ignorePatterns: ['/0.28/**'],
+       filename: 'software-sitemap.xml',
+      },
+    ]
   ],
   scripts: [
     {
