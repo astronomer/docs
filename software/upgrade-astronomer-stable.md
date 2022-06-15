@@ -21,7 +21,7 @@ The [Upgrade Considerations](upgrade-astronomer.md#upgrade-considerations) secti
 
 ## Step 2: Check Permissions
 
-Version upgrades can be initiated only by a user with System Admin permissions. To confirm you're an Astronomer System Admin, check that you have access to the **System Admin** menu in the Software UI:
+You need Astronomer System Admin permissions to complete version upgrades. To confirm you're an Astronomer System Admin, check that you have access to the **System Admin** menu in the Software UI:
 
 ![System Admin panel](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
 
@@ -37,7 +37,7 @@ If all commands return `yes`, then you have the appropriate Kubernetes permissio
 
 ## Step 3: Back Up Your Database
 
-Before you perform an upgrade, back up your Astronomer database by following recommendations from your cloud provider or making a backup request to your organization's database administrator.
+Before you perform an upgrade, back up your Astronomer database. To create a backup, follow the instructions provided by your cloud provider, or ask your organization's database administrator for assistance.
 
 ## Step 4: Check the Status of Your Kubernetes Pods
 
