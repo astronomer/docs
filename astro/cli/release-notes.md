@@ -36,7 +36,8 @@ The CLI now follows a new process when looking for a target Deployment to run a 
 - It looks for a Deployment ID supplied within the command.
 - It looks for a  Deployment ID in the `./astro/config.yaml` file.
 - If only one Deployment is specified between these sources, the CLI automatically runs the command for that Deployment.
-- If more than one Deployment is specified between these sources, it looks for a Deployment API key set as an OS-level environment variable. If an API key exists, it automatically runs a command for the associated Deployment. 
+- If a Deployment API key set as an OS-level environment variable, it automatically runs a command for the associated Deployment.
+- If muliple Deployments exist and a Deployment API key are not used, the CLI will prompt you to select a Deployment
 - If it doesn't detect any Deployment information across your system, you are prompted to create one. 
 
 ### Bug Fix
