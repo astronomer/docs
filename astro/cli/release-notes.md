@@ -29,6 +29,7 @@ You can now run the following commands with a Deployment API key:
 - `astro deployment variable update` 
 
 Previously, you could run only the `astro deploy` command with a Deployment API key. For more information on API keys, see [Manage Deployment API Keys](api-keys.md).
+
 ### Easier Way to Determine Deployment ID on Deployment Commands
 
 The Astro CLI now follows a new process to determine which Deployment to run a command against. Specifically:
@@ -44,9 +45,9 @@ These changes make it easier to run and automate Deployment-level commands with 
 
 If your CI/CD pipelines currently define one or more Deployment IDs, you may remove those IDs and their corresponding environment variables as they are no longer required. For up-to-date CI/CD templates, see [Automate Code Deploys with CI/CD](ci-cd.md).
 
-### Bug Fix
+### Bug Fixes
 
-- Fixed an issue where only Workspace Admins could create Deployments.
+- Fixed an issue where only Workspace Admins could create Deployments
 
 ## Astro CLI v1.0.1
 
