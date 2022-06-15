@@ -43,6 +43,7 @@ The Astro CLI now follows a new process to determine which Deployment to run a c
 These changes make it easier to run and automate Deployment-level commands with the Astro CLI. Most notably, it means that you no longer need to specify a Deployment ID in cases where it can be automatically implied by our system.
 
 If your CI/CD pipelines currently define one or more Deployment IDs, you may remove those IDs and their corresponding environment variables as they are no longer required. For up-to-date CI/CD templates, see [Automate Code Deploys with CI/CD](ci-cd.md).
+
 ### Bug Fix
 
 - Fixed an issue where only Workspace Admins could create Deployments.
