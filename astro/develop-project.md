@@ -517,7 +517,7 @@ This example assumes that the name of each of your Python packages is identical 
    ```
   :::
 
-    Your Astro project can now utilize Python packages from your private PyPi index. 
+  Your Astro project can now utilize Python packages from your private GitHub repository. 
    
 3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
@@ -608,18 +608,18 @@ Ensure that the name of the package on the private repository does not clash wit
     ```
 2. Update the following entry in the  `Dockerfile`:
 
-   ```
+  ```
    FROM custom-astro-runtime:5.0.0
    ```
-    :::tip
+  :::info
 
     Astro runtime base images are built on the `linux/amd64` architecture. You must add the architecture name to the `FROM` statement when your operating system and the image architecture are different. For example, this is the format for the Apple M1 architecture:
 
-   ```
-    FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
     ```
-    :::
-      
+   FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
+   ```
+  :::
+     
     Your Astro project can now utilize Python packages from your private PyPi index. 
    
 3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
