@@ -61,6 +61,10 @@
       "collapsed": true
     },
     {
+      "type": "doc",
+      "id": "version-0.26/upgrade-astronomer"
+    },
+    {
       "type": "category",
       "label": "Deploy",
       "items": [
@@ -155,10 +159,6 @@
         {
           "type": "doc",
           "id": "version-0.26/houston-api"
-        },
-        {
-          "type": "doc",
-          "id": "version-0.26/upgrade-astronomer-stable"
         },
         {
           "type": "doc",

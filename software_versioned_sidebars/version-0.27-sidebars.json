@@ -33,6 +33,7 @@
         "install-airgapped"
       ]
     },
+    "upgrade-astronomer",
     {
       "type": "category",
       "label": "Deploy",
@@ -69,7 +70,6 @@
         "workspace-permissions",
         "manage-platform-users",
         "houston-api",
-        "upgrade-astronomer-stable",
         "apply-platform-config",
         "registry-backend",
         "configure-platform-resources",

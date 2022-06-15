@@ -9,7 +9,7 @@ description: Upgrade to a new LTS, stable, or patch version of Astronomer Softwa
 
 For Astronomer Software customers, new product features are regularly made available in stable and long-term support (LTS) releases as described in [Release and Lifecycle Policy](release-lifecycle-policy.md). Patch versions of Astronomer Software with additional bug and security fixes are also released on a regular basis.
 
-Follow this guide to upgrade to any stable or patch version of Astronomer Software. For information on new features and changes, refer to [Software Release Notes](release-notes.md).
+Follow this guide to upgrade to any version of Astronomer Software. For information on new features and changes, refer to [Software Release Notes](release-notes.md).
 
 A few notes before you get started:
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
@@ -17,15 +17,15 @@ A few notes before you get started:
 
 ## Step 1: Review Upgrade Considerations
 
-The [Upgrade Considerations](upgrade-astronomer.md#upgrade-considerations) section of this document contains upgrade information for specific Astronomer versions. Review these notes before starting your own upgrade process.  
+The [Upgrade Considerations](upgrade-astronomer.md#upgrade-considerations) section of this document contains upgrade information for specific Astronomer versions. Review these notes before starting the upgrade process.
 
 ## Step 2: Check Permissions
 
-Version upgrades can be initiated only by a user with System Admin permissions. To confirm you're an Astronomer System Admin, check that you have access to the **System Admin** menu in the Software UI:
+You need Astronomer System Admin permissions to complete version upgrades. To confirm that you're a System Admin, check that you have access to the **System Admin** menu in the Software UI:
 
 ![System Admin panel](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
 
-You also need permissions to create Kubernetes resources. To confirm you have those permissions, run the following commands:
+You also need permissions to create Kubernetes resources. To confirm that you have the required permissions, run the following commands:
 
 ```sh
 kubectl auth can-i create pods --namespace <your-astronomer-namespace>
@@ -37,17 +37,17 @@ If all commands return `yes`, then you have the appropriate Kubernetes permissio
 
 ## Step 3: Back Up Your Database
 
-Before you perform an upgrade, back up your Astronomer database by following recommendations from your cloud provider or making a backup request to your organization's database administrator.
+Before you perform an upgrade, back up your Astronomer database. To create a backup, follow the instructions provided by your cloud provider, or ask your organization's database administrator for assistance.
 
 ## Step 4: Check the Status of Your Kubernetes Pods
 
-Before you proceed with the upgrade, ensure that the Kubernetes Pods in your platform namespace are healthy by running:
+Then, ensure that all Kubernetes Pods in your Astronomer namespace are healthy by running:
 
 ```sh
 kubectl get pods -n <your-astronomer-namespace>
 ```
 
-All pods should be in either the `Running` or `Completed` state. If any of your pods are in a `CrashLoopBackOff` state or are otherwise unhealthy, make sure that's expected behavior before you proceed.
+All Pods should be in either the `Running` or `Completed` state. If any of your Pods are in a `CrashLoopBackOff` state or are otherwise unhealthy, make sure that that is expected behavior before you proceed.
 
 ## Step 5: Get a Copy of Your `config.yaml` File and Confirm Values
 
@@ -58,7 +58,7 @@ All pods should be in either the `Running` or `Completed` state. If any of your 
     ```
 
 2. Review this configuration. If you see the line `"USER-SUPPLIED VALUES:"`, delete it.
-3. Create a copy of `config.yaml` called `old_config.yaml`. Save this case you need to roll back your upgrade.
+3. Create a copy of `config.yaml` called `old_config.yaml`. Save this in case you need to roll back your upgrade.
 
 ## Step 6: Verify Your Current Platform Version
 
@@ -114,16 +114,16 @@ If you do not specify a patch version above, the script will automatically pull 
 
 If the upgrade was successful, you should be able to:
 
-- Log in to Astronomer at `https://app.BASEDOMAIN`.
+- Log in to Astronomer at `https://app.<BASEDOMAIN>`.
 - See Workspaces and Airflow Deployments in the Software UI.
 - Access the **Settings** tab for each of your Deployments in the Software UI.
 - See metrics on the **Metrics** tab in the Software UI.
-- Successfully run `$ astro deploy` using the Astronomer CLI.
+- Run `$ astro deploy` for an existing Deployment using the Astro CLI.
 - Open the Airflow UI for each of your Deployments.
-- Access logs for your DAGs in the Airflow UI.
-- Create a new Airflow Deployment and ensure it comes up healthy.
+- Access task logs for your DAGs in the Airflow UI.
+- Create a new Airflow Deployment that is healthy.
 
-If there is a problem creating your Airflow Deployment, check the commander logs to troubleshoot. Here is an example of what you will be looking for:
+If there is a problem creating a new Airflow Deployment, check the commander logs to troubleshoot. Here is an example of what to look for:
 
 ```
 2022-04-14T05:10:45 INFO Calling commander method #updateDeployment
@@ -142,21 +142,21 @@ This topic contains information about upgrading to specific versions of Astronom
 
 #### Minimum Pre-Upgrade Version
 
-If you are currently on a pre-0.28 version of Software, you must upgrade to Software 0.28 before upgrading to 0.29. A direct upgrade from a pre-0.28 version to 0.29 is not possible. This is because the Software 0.28 upgrade process includes a database migration that's necessary for some of the tooling in 0.29.
+If you are currently on Astronomer Software 0.25, 0.26, or 0.27, you must upgrade to version 0.28 before upgrading to 0.29. A direct upgrade to 0.29 from a version lower than 0.28 is not possible.
 
 Follow the standard installation guide to upgrade to Software 0.28, then repeat the process to upgrade to 0.29.
 
 #### Resync Astronomer's Signing Certificate  
 
-As part of the 0.29 release, Astronomer has deprecated its usage of [kubed](https://appscode.com/products/kubed/) for performance and security reasons. Kubed was responsible for syncing Astronomer's signing certificate to Deployment namespaces and is now replaced by an in-house utility. While this change does not directly affect users, you need to run a one-time command during upgrade in order to sync Astronomer's signing certificate.
+As part of the 0.29 release, Astronomer deprecated its usage of [kubed](https://appscode.com/products/kubed/) for performance and security reasons. Kubed was responsible for syncing Astronomer's signing certificate to Deployment namespaces and is now replaced by an in-house utility. While this change does not directly affect users, you need to run a one-time command to reset Astronomer's signing certificate as part of the upgrade process to 0.29.
 
-When upgrading to v0.29 from any earlier minor version, run the following command between Steps 2 and 3 in the standard procedure to annotate the certificate secret:
+When upgrading to 0.29 from any earlier minor version, run the following command between Steps 2 and 3 in the standard procedure to annotate the certificate secret:
 
 ```bash
 kubectl -n <your-platform-namespace> annotate secret astronomer-houston-jwt-signing-certificate "astronomer.io/commander-sync"="platform=astronomer"
 ```
 
-If you completed this upgrade before annotating the secret, you can still complete the sync with the following command:
+If you upgraded to Astronomer Software 0.29 without annotating this secret, you can still complete the sync by running the following command after the upgrade:
 
 ```bash
 kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
@@ -166,7 +166,7 @@ kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-synce
 
 #### Version Compatibility
 
-Before upgrading to 0.28, ensure that the following software is updated to the appropriate version:
+Before upgrading to Astronomer Software 0.28, ensure that the following tools are running compatible versions:
 
 - **Kubernetes**: Your version must be 1.19 or greater. If you need to upgrade Kubernetes, contact your cloud provider or your Kubernetes administrator.
 - **Airflow Images**: You must be using an Astronomer Certified Airflow image, and the version of your image must be 1.10.15 or greater.
@@ -182,7 +182,7 @@ Before upgrading to 0.28, ensure that the following software is updated to the a
 
 #### Modify `config.yaml` values
 
-During Step 5 of the standard upgrade process, check your `config.yaml` file to see if you have any configuration listed under `astronomer.houston.config.deployments.helm`. You must update all key-value pairs in this section to be under `astronomer.houston.config.deployments.helm.airflow` instead.
+During Step 5 of the upgrade process, check your `config.yaml` file to see if you have any configuration listed under `astronomer.houston.config.deployments.helm`. You must update all key-value pairs in this section to be under `astronomer.houston.config.deployments.helm.airflow` instead.
 
 For example, consider an existing `config.yaml` file that includes an override of `webserver.allowPodLogReading`:
 
@@ -209,7 +209,7 @@ astronomer:
               allowPodLogReading: true
 ```
 
-Once you complete this change, compare any values under the `airflow` section with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open-source Airflow chart](https://github.com/apache/airflow/blob/main/chart/values.yaml) to ensure that they are formatted correctly. Incorrectly formatted values for these configurations might result in an error during upgrade.
+Once you complete this change, compare any values under the `airflow` section with the [default values from airflow-chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml) and [open source Airflow chart](https://github.com/apache/airflow/blob/main/chart/values.yaml) to ensure that they are formatted correctly. Incorrectly formatted values for these configurations might result in an error during upgrade.
 
 ### Upgrading to Astronomer Software 0.25
 

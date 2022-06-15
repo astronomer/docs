@@ -64,6 +64,7 @@ module.exports = {
         'install-airgapped',
           ],
         },
+        'upgrade-astronomer',
         {
         type: 'category',
         label: 'Platform Setup',
@@ -78,7 +79,6 @@ module.exports = {
         'custom-image-registry',
           ],
         },
-        'upgrade-astronomer-stable',
         {
         type: 'category',
         label: 'Platform Management',
