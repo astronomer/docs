@@ -118,7 +118,6 @@ with dag:
         in_cluster=in_cluster,  # when set to True, it looks in the cluster, if False, it looks for a file
         cluster_context="docker-desktop",  # is ignored when in_cluster is set to True
         config_file=config_file,
-        is_delete_operator_pod=True,
         get_logs=True,
     )
 
