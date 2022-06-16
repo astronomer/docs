@@ -14,7 +14,7 @@ Deferrable operators provide the following benefits:
 - Reduced resource consumption. Deferrable operators can lower the number of workers needed to run tasks during periods of high concurrency. Less workers can lower your infrastructure cost per Deployment.
 - Resiliency against restarts. When you push code to a Astronomer Software Deployment, the Triggerer process that deferrable operators rely on is gracefully restarted and does not fail.
 
-Astronomer recommends using deferrable with operators or sensors that typically spend a long time waiting for a condition to be met. This includes `S3Sensor`, `HTTPSensor`, and `DatabricksSubmitRunOperator`.
+Astronomer recommends using deferrable versions of operators or sensors that typically spend a long time waiting for a condition to be met. This includes `S3Sensor`, `HTTPSensor`, and `DatabricksSubmitRunOperator`.
 
 ### How It Works
 
