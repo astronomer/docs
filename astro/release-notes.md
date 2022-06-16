@@ -12,9 +12,9 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Astro Runtime Version**: 5.0.3 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 5.0.4 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.0.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.1.0 ([Release notes](cli/release-notes.md))
 
 ## June 9, 2022
 
@@ -50,7 +50,7 @@ You can now use the new **Datasets** page in the **Lineage** tab to view a table
 
 ![Datasets page](/img/release-notes/datasets-page.png)
 
-Click on the name of a dataset to show its lineage graph. For more information, see [Data Lineage on Astro](data-lineage.md).
+Click the name of a dataset to show its lineage graph. For more information, see [Data Lineage on Astro](data-lineage.md#view-recently-accessed-datasets).
 
 ### Bug Fixes
 

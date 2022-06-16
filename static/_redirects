@@ -193,6 +193,22 @@
 /enterprise/version-compatibility-reference /software/version-compatibility-reference 301
 /enterprise/workspace-permissions /software/workspace-permissions 301
 
+# redirect Software upgrade docs
+
+/software/upgrade-astronomer-stable /software/upgrade-astronomer 301
+/software/0.28/upgrade-astronomer-stable /software/0.28/upgrade-astronomer 301
+/software/0.27/upgrade-astronomer-stable /software/0.27/upgrade-astronomer 301
+/software/0.26/upgrade-astronomer-stable /software/0.26/upgrade-astronomer 301
+/software/0.25/upgrade-astronomer-patch /software/0.25/upgrade-astronomer 301
+/software/upgrade-to-0-28 /software/upgrade-astronomer 301
+/software/0.28/upgrade-to-0-28 /software/0.28/upgrade-astronomer 301
+/software/0.27/upgrade-to-0-28 /software/0.27/upgrade-astronomer 301
+/software/0.26/upgrade-to-0-28 /software/0.26/upgrade-astronomer 301
+/software/0.25/upgrade-to-0-28 /software/0.25/upgrade-astronomer 301
+/software/upgrade-to-0-25 /software/upgrade-astronomer 301
+/software/0.25/upgrade-to-0-25 /software/0.25/upgrade-astronomer 301
+
+
 # redirect links to renamed files
 /astro/configure-deployment /astro/configure-deployment-resources 301
 

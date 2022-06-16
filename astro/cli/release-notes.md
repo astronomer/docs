@@ -9,7 +9,45 @@ description: Release notes for the Astro CLI.
 
 This document provides a summary of all changes made to the [Astro CLI](cli/get-started.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
 
-If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io)
+If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
+
+## Astro CLI v1.1.0
+
+Release date: June 13, 2022
+
+### Deployment API Keys Now Work with Deployment Commands
+
+You can now run the following commands with a Deployment API key:
+
+- `astro deploy`
+- `astro deployment list`
+- `astro deployment logs`
+- `astro deployment update`
+- `astro deployment delete`
+- `astro deployment variable list`
+- `astro deployment variable create`
+- `astro deployment variable update` 
+
+Previously, you could run only the `astro deploy` command with a Deployment API key. For more information on API keys, see [Manage Deployment API Keys](api-keys.md).
+
+### Easier Way to Determine Deployment ID on Deployment Commands
+
+The Astro CLI now follows a new process to determine which Deployment to run a command against. Specifically:
+
+- The Astro CLI first checks if a Deployment ID is specified as an argument to the command. For example, `astro deployment update <deployment-id>`.
+- If not found, it checks for a Deployment ID in the `./astro/config.yaml` file of your Astro project. In this file, you can set up to one Deployment ID as default. This is an alternative to manually specifying it or using a Deployment API key.
+- If only one Deployment exists in your Workspace, the CLI automatically runs the command for that Deployment without requiring that you specify its Deployment ID.
+- If a Deployment API key is set as an OS-level environment variable on your machine or in a CI/CD pipeline, the CLI automatically runs the command for that Deployment without requiring a Deployment ID.
+- If multiple Deployments exist in your Workspace and a Deployment API key is not found, the CLI will prompt you to select a Deployment from a list of all Deployments in that Workspace.
+- If the Astro CLI doesn't detect a Deployment across your system, it will prompt you to create one.
+
+These changes make it easier to run and automate Deployment-level commands with the Astro CLI. Most notably, it means that you no longer need to specify a Deployment ID in cases where it can be automatically implied by our system.
+
+If your CI/CD pipelines currently define one or more Deployment IDs, you may remove those IDs and their corresponding environment variables as they are no longer required. For up-to-date CI/CD templates, see [Automate Code Deploys with CI/CD](ci-cd.md).
+
+### Bug Fixes
+
+- Fixed an issue where only Workspace Admins could create Deployments
 
 ## Astro CLI v1.0.1
 
