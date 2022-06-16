@@ -31,6 +31,7 @@ Deployments now autoscale to the Airflow [`parallelism`](https://airflow.apache.
 A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that you won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-deployment-resources.md#worker-autoscaling-logic) for more information. 
 
 Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
+
 ### Bug Fixes
 
 - Fixed a rare issue where some user emails would be associated with the wrong username.
