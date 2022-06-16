@@ -26,9 +26,9 @@ To access the Support Request form in the Cloud UI, see [Submit a Support Reques
 
 ### A Deployment's Parallelism Now Autoscales with Worker Count
 
-Deployments now autoscale Airflow's [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism) setting, which determines maximum number of tasks that can run concurrently within a single Airflow environment.
+Deployments now autoscale to the Airflow [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism) setting, which determines the maximum number of tasks that can run concurrently within a single Airflow environment.
 
-A Deployment's `parallelism` is now equal to the current number of workers multiplied by the value of [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency). This ensures that you won't be limited by a static parallelism limit as workers autoscale in your Deployment. 
+A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that you won't be limited by a static parallelism limit as workers autoscale in your Deployment. 
 ### Bug Fixes
 
 - Fixed a rare issue where some user emails would be associated with the wrong username.
