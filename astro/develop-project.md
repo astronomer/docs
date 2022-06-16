@@ -613,7 +613,7 @@ Ensure that the name of the package on the private repository does not clash wit
    ```
   :::info
 
-    Astro runtime base images are built on the `linux/amd64` architecture. You must add the architecture name to the `FROM` statement when your ocomputer and the image architecture are different. For example, this is the format for the Apple M1 architecture:
+    Astro runtime base images are built on the `linux/amd64` architecture. You must add the architecture name to the `FROM` statement when your computer and the image architecture are different. For example, this is the format for the Apple M1 architecture:
 
     ```
    FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
