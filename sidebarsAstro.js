@@ -116,6 +116,7 @@ module.exports = {
       items: [
         'known-limitations',
         'runtime-version-lifecycle-policy',
+        'support',
         {
           type: 'category',
           label: 'Cloud Configuration Reference',

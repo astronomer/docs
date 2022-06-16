@@ -10,20 +10,14 @@ If you're an Astro user and need answers to common questions, the following reso
 - [Astronomer Forum](https://forum.astronomer.io)
 - [Airflow Guides](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
 
-If you've encountered a more serious issue and need Astronomer expertise,  you can use one of the following methods to contact Astronomer Support:
+If you're experiencing a more serious issue and need Astronomer expertise, you can use one of the following methods to contact Astronomer Support:
 
-- Submit a support request in the Cloud UI
+- Submit a support request in the [Cloud UI](#submit-a-support-request-in-the-cloud-ui)
 - File a support request on the [Astronomer Support Portal](https://support.astronomer.io/hc/en-us)
 - Send an email to [support@astronomer.io](mailto:support@astronomer.io)
 - Call +1 (831) 777-2768
 
-## Submit a Support Request on the Astronomer Support Portal
-
-To submit a support request to Astronomer Support, you need to create an account on the [Astronomer Support Portal](https://support.astronomer.io).
-
-If you're working with a team, create an account with your work email or the domain you share with your team members. This lets you view support tickets created by other team members.
-
-> **Note:** If your team uses more than one email domain (e.g. @astronomer.io), contact Astronomer to have it added manually to your organization.
+## Best Practices for Support Request Submissions
 
 The following are the best practices for submitting support requests on the Astronomer Support Portal:
 
@@ -80,12 +74,37 @@ The following are the best practices for submitting support requests on the Astr
 
     The more context you can give, the better we can help you.
 
-## Track existing support requests
+## Submit a Support Request in the Cloud UI
 
-Once you've submitted your support request to Astronomer Support, you can monitor progress on the Astronomer Support Portal.
+If you're using Astro version 5.0.4 or later, you can submit your support request in the Cloud UI.
 
-- See and comment on requests from your team
-- Check the status of your requests
-- Get responses from us by email
+1. In the Cloud UI, click **Help** > **Submit Support Request**.
 
-> **Note:** To add a teammate to an existing ticket, cc them in a followup message within the email thread automatically generated when the ticket was created.
+2. Complete the following fields:
+
+    - **Problem Statement**: Enter a description of the issue you are experiencing. Provide as much detail as possible.
+    - **Workspace**: Optional. Select the Workspace where the issue is occurring. This list is auto-populated when you submit a support request from a Workspace or a Deployment.
+    - **Deployment**: Optional. Select the Deployment where the issue is occurring. This list is auto-populated when you submit a support request from a Workspace or a Deployment.
+    - **Problem Start**: Optional. Select the date and time the issue started.
+    - **Description**: Enter a thorough description of the issue. Provide as much detail as possible. 
+    - **Priority**: Select the severity of your issue. For severity level explanations, see [Best Practices for Submitting Support Requests](#best-practices-for-submitting-support-requests).
+    - **Business Impact**: Optional. Describe how this issue is affecting your organization.
+    - **CC Emails**: Optional. Enter the email address of a team member that you want to notify about this issue. Click **Add Additional Email** to add additional email addresses.
+
+3. Click **Submit**.
+
+## Submit a Support Request on the Astronomer Support Portal
+
+If you're new to Astronomer, you'll need to create an account on the [Astronomer Support Portal](https://support.astronomer.io) to submit a support request. If you're working with a team and want to view support tickets created by other team members, use your work email or the domain you share with your team members for your account. If your team uses more than one email domain (for example, @astronomer.io), contact Astronomer and ask to have it added manually to your organization
+
+If you're an existing customer, sign in to the Astronomer Support Portal and create a new support request.
+
+## Monitor Existing Support Requests
+
+After you've submitted your support request, sign in to the [Astronomer Support Portal](https://support.astronomer.io) to:
+
+- Review and comment on requests from your team
+- Monitor the status of your requests
+- Communicate with Astronomer Support
+
+> **Note:** To add a teammate to an existing ticket, cc them in a followup message within the email thread that was automatically generated when the ticket was created.
