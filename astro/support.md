@@ -1,11 +1,11 @@
 ---
-title: 'Astro Support'
+title: 'Submit a Support Request'
 navTitle: 'Astro Support'
 id: support
 description: Get Astro support when you need it.
 ---
 
-If you're an Astro user and need answers to common questions, the following resources are available:
+If you're an Astro user and haven't found the answer in Astronomer documentation, the following resources are available:
 
 - [Astronomer Forum](https://forum.astronomer.io)
 - [Airflow Guides](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
