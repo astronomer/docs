@@ -19,7 +19,7 @@ If you're experiencing a more serious issue and need Astronomer expertise, you c
 
 ## Best Practices for Support Request Submissions
 
-The following are the best practices for submitting support requests on the Astronomer Support Portal:
+The following are the best practices for submitting support requests in the Cloud UI or the Astronomer Support Portal:
 
 - Always indicate priority
 
