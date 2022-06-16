@@ -42,13 +42,6 @@ Astronomer recommends using non-`base` images in your project's `Dockerfile`. Th
 
 Astro Runtime Docker images are hosted on the Astronomer Docker registry and enable Airflow on Astro. All Astro projects require that you specify an Astro Runtime image in your Dockerfile, and all Deployments on Astro must run only one version of Astro Runtime. Every version of Astro Runtime correlates to an Apache Airflow version. You can run different versions of Astro Runtime on different Deployments within a given Workspace or Cluster.
 
-The Astro Runtime Docker image incorporates additional functionality that makes it easier for organizations to get started with Airflow implementations. This includes:
-
-- A robust testing suite that includes performance benchmarking and end-to-end functionality and upgrade testing.
-- A built-in directory of sample DAGs that fully utilize Airflow functionality.
-- A collection of pre-installed Airflow provider packages.
-- Compatibility with the Astronomer Platform.
-
 The Dockerfiles for all supported Astro Runtime images are located in the [Astronomer `astro-runtime` GitHub repository](https://github.com/astronomer/astro-runtime).
 
 ## Executors
