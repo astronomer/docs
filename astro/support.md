@@ -107,4 +107,4 @@ After you've submitted your support request, sign in to the [Astronomer Support 
 - Monitor the status of your requests
 - Communicate with Astronomer Support
 
-> **Note:** To add a teammate to an existing ticket, cc them in a followup message within the email thread that was automatically generated when the ticket was created.
+> **Note:** To add a teammate to an existing support request, cc them in a followup message within the email thread that was automatically generated when the ticket was created.
