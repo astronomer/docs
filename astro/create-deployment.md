@@ -5,9 +5,11 @@ id: create-deployment
 description: Learn how to create an Astro Deployment.
 ---
 
-An Astro Deployment is an Astro Runtime instance that is powered by the core components of Apache Airflow. This includes: the Airflow Webserver, the Triggerer, a Postgres metadata database, one or more Schedulers, and one or more workers. Every Deployment is hosted on a single Astro Cluster with its own dedicated resources and you can customize it to meet the unique requirements of your Organization. Every Astro Cluster operates with a primary database that hosts the individual databases for each Deployment.
+An Astro Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow, including the Airflow Webserver, Scheduler, and one or more workers.
 
-Within a Workspace, you can create Deployments and push DAGs to any Deployment from the Astro CLI or from a continuous integration and continuous delivery (CI/CD) process. You can also invite other users to the Workspace and create Deployments.
+You can create a Deployment from a Workspace on Astro. After you create a Deployment, you can deploy DAGs to it from the Astro CLI or from a continuous delivery (CI/CD) process. All DAGs and tasks on Astro are executed within a Deployment.
+
+Every Deployment is hosted on a single Astro Cluster with its own dedicated resources, which you can customize to meet the unique requirements of your Organization. Every Astro Cluster operates with a primary database that hosts the individual databases for each Deployment.  To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace in the Data Plane. See [Deployment Network Isolation](data-protection.md#deployment-network-isolation).
 
 ## Prerequisites
 
