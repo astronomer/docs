@@ -67,7 +67,7 @@ The following are the best practices for submitting support requests in the Clou
 
 - Include logs or code snippets
 
-    If you've already taken note of any task-level Airflow logs or Astronomer platform logs, don't hesitate to send them as a part of your original ticket.
+    If you've already taken note of task logs or Airflow component logs, send them as a part of your request.
 
     The more context you can give, the better we can help you.
 
