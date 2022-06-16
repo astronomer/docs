@@ -5,7 +5,7 @@ id: astro-support
 description: Get Astro support when you need it.
 ---
 
-If you're an Astro user and haven't found the answer in Astronomer documentation, the following resources are available:
+If you're an Astro user and haven't been able to resolve an issue using Astronomer documentation, the following resources are available:
 
 - [Astronomer Forum](https://forum.astronomer.io)
 - [Airflow Guides](https://www.astronomer.io/guides/)
@@ -21,55 +21,55 @@ If you're experiencing a more serious issue and need Astronomer expertise, you c
 
 The following are the best practices for submitting support requests in the Cloud UI or the Astronomer Support Portal:
 
-- Always indicate priority
+### Always indicate priority
 
-    To help Astronomer Support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
+   To help Astronomer Support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
 
-    - **P1:** Critical impact, service is unusable in production.
+    **P1**: Critical impact, service is unusable in production.
 
-        Examples:
+    Examples:
 
-        - Your tasks are not running and restarting them didn't fix the issue.
-        - Astronomer is experiencing an incident or downtime that is affecting your data pipelines in production.
+    - Your tasks are not running and restarting them didn't fix the issue.
+    - Astronomer is experiencing an incident or downtime that is affecting your data pipelines in production.
 
-    - **P2:** High impact. Ability to use Astro is severely impaired but does not affect critical pipelines in production.
+    **P2:** High impact. Ability to use Astro is severely impaired but does not affect critical pipelines in production.
 
-        Examples:
+    Examples:
 
-        - The Airflow UI is unavailable.
-        - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
-        - Task logs are missing in the Airflow UI.
+    - The Airflow UI is unavailable.
+    - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
+    - Task logs are missing in the Airflow UI.
 
-    - **P3:** Medium impact, service is partiallly impaired.
+    **P3:** Medium impact, service is partiallly impaired.
 
-        Examples:
+    Examples:
 
-        - There is a bug in the Software UI.
-        - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
-        - There is an Airflow issue that has a code-based solution.
-        - You received a log alert on Astronomer.
+    - There is a bug in the Software UI.
+    - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
+    - There is an Airflow issue that has a code-based solution.
+    - You received a log alert on Astronomer.
 
-    - **P4:** Low impact, service fully usable.
+    **P4:** Low impact, service fully usable.
 
-        Examples:
+    Examples:
 
-        - You can't find your Workspace.
-        - There are package incompatibilities caused by a specific, complex use case.
-        - You have questions about best practices for an action in Airflow or on Astronomer.
+    - You can't find your Workspace.
+    - There are package incompatibilities caused by a specific, complex use case.
+    - You have questions about best practices for an action in Airflow or on Astronomer.
 
-- Be as descriptive as possible
+### Be as descriptive as possible
 
-    The more information you can provide about the issue you're experiencing, the quicker Astronomer Support can start the troubleshooting and resolution process. When submitting a support request, include the following information:
+The more information you can provide about the issue you're experiencing, the quicker Astronomer Support can start the troubleshooting and resolution process. When submitting a support request, include the following information:
 
-    - What project/deployment does this question/issue apply to?
-    - What did you already try?
-    - Have you made any recent changes to your Deployment or running DAGs?
+- What project/deployment does this question/issue apply to?
+- What did you already try?
+- Have you made any recent changes to your Deployment or running DAGs?
 
-- Include logs or code snippets
+## Include logs or code snippets
 
-    If you've already taken note of task logs or Airflow component logs, send them as a part of your request.
+If you've already taken note of task logs or Airflow component logs, send them as a part of your request.
 
-    The more context you can give, the better we can help you.
+The more context you can give, the better we can help you.
 
 ## Submit a Support Request in the Cloud UI
 
