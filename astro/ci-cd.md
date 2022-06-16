@@ -24,7 +24,6 @@ There are many benefits to deploying DAGs and other changes to Airflow via a CI/
 To set up CI/CD for a given Deployment, you need:
 
 - A [Deployment API key ID and secret](api-keys.md)
-- A Deployment ID. To find this, open your Deployment in the Cloud UI and copy the unique string at the end of the URL. For example, `cktogz2eg847343yzo9pru1b0d` is the Deployment ID in `https://cloud.astronomer.io/<workspace-ID>/deployments/cktogz2eg847343yzo9pru1b0d`. You can also find this value by running `astro deployment list` via the Astro CLI.
 - A CI/CD management tool, such as [GitHub Actions](https://docs.github.com/en/actions).
 - An [Astro project](create-project.md) that is hosted in a place that your CI/CD tool can access.
 
@@ -49,7 +48,7 @@ $ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
 $ brew install astronomer/tap/astro
 
 # Build your Astro project into a Docker image and push the image to your Deployment
-$ astro deploy <your-deployment-id>
+$ astro deploy
 ```
 
 :::info
@@ -75,7 +74,6 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-   - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -101,7 +99,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+            astro deploy
     ```
 
 </TabItem>
@@ -122,10 +120,8 @@ This setup assumes the following prerequisites:
 
    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
    - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
-   - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
    - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
-   - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -154,7 +150,7 @@ This setup assumes the following prerequisites:
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.DEV_ASTRONOMER_DEPLOYMENT_ID }}
+            astro deploy
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
@@ -168,7 +164,7 @@ This setup assumes the following prerequisites:
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.PROD_ASTRONOMER_DEPLOYMENT_ID }}
+            astro deploy
     ```
 
 </TabItem>
@@ -189,7 +185,6 @@ To complete this setup, you need:
 
   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-  - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
 
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
@@ -227,7 +222,7 @@ To complete this setup, you need:
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+            astro deploy
     ```
 
     For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
@@ -268,7 +263,7 @@ To complete this setup, you need:
         - name: Deploy to Astro
           run: |
             brew install astronomer/tap/astro
-            astro deploy ${{ secrets.ASTRONOMER_DEPLOYMENT_ID }}
+            astro deploy
     ```
 
   :::info
@@ -286,13 +281,12 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
 1. In your Jenkins pipeline configuration, add the following environment variables:
 
-    - `ASTRONOMER_DEPLOYMENT_ID`: Your Astro Deployment ID
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
 
     Be sure to set the values for your API credentials as secret.
 
-2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script, making sure to replace `<deployment-id>` with your own Deployment ID:
+2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
     <pre><code parentName="pre">{`pipeline {
       agent any
@@ -306,7 +300,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
            steps {
              script {
                    sh 'curl -sSL install.astronomer.io | sudo bash -s'
-                   sh 'astro deploy ${siteVariables.deploymentid} -f'
+                   sh 'astro deploy -f'
              }
            }
          }
@@ -329,7 +323,6 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
 
     - `ASTRONOMER_KEY_ID` = `<your-key-id>`
     - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-    - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
 
 2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
 
@@ -363,7 +356,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
               name: "Deploy to Astro"
               command: |
                 curl -sSL install.astronomer.io | sudo bash -s
-                astro deploy ${siteVariables.deploymentid} -f
+                astro deploy -f
 
     # Invoke jobs via workflows
     # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -395,7 +388,6 @@ This pipeline configuration requires:
 
     - `ASTRONOMER_KEY_ID` = `<your-key-id>`
     - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-    - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
 
 2. In your Drone server, open your Astro project repository and go to **Settings** > **General**. Under **Project Settings**, turn on the **Trusted** setting.
 
@@ -426,7 +418,7 @@ This pipeline configuration requires:
         - name: dockersock
           path: /var/run
         commands:
-        - astro deploy ${siteVariables.deploymentiddrone} -f
+        - astro deploy -f
         depends on:
         - wait
 
@@ -435,8 +427,6 @@ This pipeline configuration requires:
             from_secret: ASTRONOMER_KEY_ID
           ASTRONOMER_KEY_SECRET:
             from_secret: ASTRONOMER_KEY_SECRET
-          ASTRONOMER_DEPLOYMENT_ID:
-            from_secret: ASTRONOMER_DEPLOYMENT_ID
 
     services:
     - name: docker
@@ -465,7 +455,6 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
 
     - `ASTRONOMER_KEY_ID` = `<your-key-id>`
     - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-    - `ASTRONOMER_DEPLOYMENT_ID` = `<your-astro-deployment-id>`
 
 2. Go to the Editor option in your project's CI/CD section and commit the following:
 
@@ -483,7 +472,7 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
        - apk add bash
       script:
        - curl -sSL install.astronomer.io | bash -s
-       - astro deploy $ASTRONOMER_DEPLOYMENT_ID -f
+       - astro deploy -f
       only:
        - main
    `}</code></pre>
@@ -496,10 +485,8 @@ To automate code deploys to Astro across multiple environments using [GitLab](ht
 
     - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
     - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
-    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
     - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
     - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
-    - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
 
 :::caution
 
@@ -523,7 +510,7 @@ When you create environment variables that will be used in multiple branches, yo
           - apk add bash
         script:
           - curl -sSL install.astronomer.io | bash -s
-          - astro deploy $DEV_ASTRONOMER_DEPLOYMENT_ID -f
+          - astro deploy -f
         only:
           - dev
 
@@ -540,7 +527,7 @@ When you create environment variables that will be used in multiple branches, yo
           - apk add bash
         script:
           - curl -sSL install.astronomer.io | bash -s
-          - astro deploy $PROD_ASTRONOMER_DEPLOYMENT_ID -f
+          - astro deploy -f
         only:
           - main
    `}</code></pre>
