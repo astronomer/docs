@@ -595,7 +595,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
 #### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file. Replace the pip repository and associated credentials values with your own.
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file. Replace the pip repository and associated credential values with your own.
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-<airflow-image> .
