@@ -8,7 +8,7 @@ description: Get Astro support when you need it.
 If you're an Astro user and haven't found the answer in Astronomer documentation, the following resources are available:
 
 - [Astronomer Forum](https://forum.astronomer.io)
-- [Airflow Guides](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
+- [Airflow Guides](https://www.astronomer.io/guides/)
 
 If you're experiencing a more serious issue and need Astronomer expertise, you can use one of the following methods to contact Astronomer Support:
 
