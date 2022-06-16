@@ -29,7 +29,7 @@ The following are the best practices for submitting support requests in the Clou
 
         Examples:
 
-        - The Scheduler is not heartbeating, and restarting didn't fix the issue.
+        - Your tasks are not running and restarting them didn't fix the issue.
         - All Celery workers are offline.
         - Kubernetes pod executors are not starting.
         - There are extended periods of `503` errors that are not solved by allocating more resources to the Webserver.
