@@ -14,7 +14,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest Astro Runtime Version**: 5.0.3 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.0.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.1.0 ([Release notes](cli/release-notes.md))
 
 ## June 9, 2022
 
