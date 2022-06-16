@@ -73,7 +73,6 @@ The following are the best practices for submitting support requests in the Clou
 
 ## Submit a Support Request in the Cloud UI
 
-
 1. In the Cloud UI, click **Help** > **Submit Support Request**.
 
 2. Complete the following fields:
