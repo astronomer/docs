@@ -82,7 +82,7 @@ OpenLineage with Airflow standardizes the definition of data lineage, the metada
 
 The `astronomer-providers` package is a collection of Apache Airflow OSS providers and modules. The package is installed on Astro Runtime by default and is maintained by Astronomer. The package includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Deferrable Operators](https://docs.astronomer.io/astro/deferrable-operators). To access the source code for this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
-## Python Packages
+## Python Versioning
 
 This table lists the Python packages supported by Astro Runtime. You can't modify the Python versions.
 
