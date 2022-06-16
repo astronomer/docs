@@ -208,6 +208,11 @@ module.exports = {
           routeBasePath: 'astro',
           path: 'astro',
         },
+        sitemap: {
+        id: 'default',
+        changefreq: 'daily',
+        filename: 'sitemap.xml',
+        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -239,7 +244,8 @@ module.exports = {
       '@docusaurus/plugin-sitemap',
       {
        id: 'software',
-       changefreq: 'daily',
+       changefreq: 'weekly',
+       priority: '0.5',
        ignorePatterns: ['/software/0.28/**','/software/0.27/**','/software/0.26/**','/software/0.25/**','/software/0.23/**','/software/0.16/**'],
        filename: 'sitemap.xml',
       },
