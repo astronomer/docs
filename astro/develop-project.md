@@ -494,7 +494,7 @@ This example assumes that the name of each of your Python packages is identical 
 1. Run the following command to create a new Docker image from your `Dockerfile.build` file. Replace `<ssh-key>` with your SSH private key file name and `<astro-runtime-image>` with your Astro Runtime image.
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image>.
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
     ```
 
     For example, if you have `quay.io/astronomer/astro-runtime:5.0.0-base` in your `Dockerfile.build`, this command would be:
