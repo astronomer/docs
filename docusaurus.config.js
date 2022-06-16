@@ -208,11 +208,6 @@ module.exports = {
           routeBasePath: 'astro',
           path: 'astro',
         },
-        sitemap: {
-        id: 'default',
-        changefreq: 'daily',
-        filename: 'sitemap.xml',
-        },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
