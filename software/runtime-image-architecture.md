@@ -56,7 +56,7 @@ Soon, Astronomer will provide a new executor with intelligent worker packing, ta
 
 ## Provider Packages
 
-When you install the Astro Runtime image, the supported Apache Airflow open-source software (OSS) provider packages are included. The following are the provider packages Astro Runtime supports:
+To make it easy to get started with Airflow, all Astro Runtime images have the following set of open source provider packages pre-installed:
 
 - Amazon
 - Elasticsearch
