@@ -58,7 +58,7 @@ Soon, Astronomer will provide a new executor with intelligent worker packing, ta
 
 When you install the Astro Runtime image, the supported Apache Airflow open-source software (OSS) provider packages are included. The following are the provider packages Astro Runtime supports:
 
-- Amazon
+- Amazon (apache-airflow-providers-amazon)
 - Elasticsearch
 - Celery
 - Google
@@ -69,7 +69,7 @@ When you install the Astro Runtime image, the supported Apache Airflow open-sour
 - StatsD
 - Virtualenv
 - OpenLineage with Airflow
-- astronomer-providers
+- Astronomer Providers (astronomer-providers)
 
 To determine the supported provider package version for a specific Astronomer Software release, see the release notes. Run the following command to determine the provider package versions that are supported by your current Astro Runtime image:
 
