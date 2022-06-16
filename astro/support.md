@@ -88,7 +88,7 @@ The following are the best practices for submitting support requests in the Clou
 
 3. Click **Submit**.
 
-    When Astronomer Support start working on your issue, you'll receive email notifications. To check the status of a support request, sign in to the [Astronomer Support Portal](https://support.astronomer.io). 
+When Astronomer Support start working on your issue, you'll receive email notifications. To check the status of a support request, sign in to the [Astronomer Support Portal](https://support.astronomer.io). 
 
 ## Submit a Support Request on the Astronomer Support Portal
 
