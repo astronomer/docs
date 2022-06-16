@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Astro Runtime Architecture'
-title: 'Astro Image Architecture'
+title: 'Astro Runtime Architecture'
 id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, Astronomer Software's Docker image for Apache Airflow.
 ---
