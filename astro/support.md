@@ -36,7 +36,7 @@ The following are the best practices for submitting support requests in the Clou
 
         Examples:
 
-        - The Airflow Webserver is unavailable.
+        - The Airflow UI is unavailable.
         - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
         - Task logs are missing in the Airflow UI.
 
