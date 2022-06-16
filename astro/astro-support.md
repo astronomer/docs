@@ -67,9 +67,7 @@ The more information you can provide about the issue you're experiencing, the qu
 
 ### Include logs or code snippets
 
-If you've already taken note of task logs or Airflow component logs, send them as a part of your request.
-
-The more context you can give, the better we can help you.
+If you've already copied task logs or Airflow component logs, send them as a part of your request. The more context you can provide, the better.
 
 ## Submit a Support Request in the Cloud UI
 
