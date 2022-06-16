@@ -23,7 +23,7 @@ The following are the best practices for submitting support requests on the Astr
 
 - Always indicate priority
 
-    To help Astronomer Support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the catergories that Astronomer uses to determine the severity of your support request:
+    To help Astronomer Support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
 
     - **P1:** Critical systems are unavailable, no workaround is immediately available
 
