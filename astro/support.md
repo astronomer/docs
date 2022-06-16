@@ -89,6 +89,8 @@ The following are the best practices for submitting support requests in the Clou
 
 3. Click **Submit**.
 
+    When Astronomer Support start working on your issue, you'll receive email notifications. To check the status of a support request, sign in to the [Astronomer Support Portal](https://support.astronomer.io). 
+
 ## Submit a Support Request on the Astronomer Support Portal
 
 If you're new to Astronomer, you'll need to create an account on the [Astronomer Support Portal](https://support.astronomer.io) to submit a support request. If you're working with a team and want to view support tickets created by other team members, use your work email or the domain you share with your team members for your account. If your team uses more than one email domain (for example, @astronomer.io), contact Astronomer and ask to have it added manually to your organization
