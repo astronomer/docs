@@ -46,7 +46,11 @@ The Dockerfiles for all supported Astro Runtime images are located in the [Astro
 
 ## Executors
 
-Executors are the mechanism used to run task instances. Astro Runtime supports the [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html).
+In Airflow, the executor is responsible for determining how and where a task is completed. On Astronomer Software, Astro Runtime supports the following executors:
+
+- Local Executor
+- [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html)
+- Kubernetes Executor
 
 Soon, Astronomer will provide a new executor with intelligent worker packing, task-level resource requests, improved logging, and Kubernetes-like task isolation.
 
