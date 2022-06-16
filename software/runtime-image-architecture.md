@@ -59,16 +59,16 @@ Soon, Astronomer will provide a new executor with intelligent worker packing, ta
 When you install the Astro Runtime image, the supported Apache Airflow open-source software (OSS) provider packages are included. The following are the provider packages Astro Runtime supports:
 
 - Amazon (apache-airflow-providers-amazon)
-- Elasticsearch
-- Celery
-- Google
-- Password
-- Cloud Native Computing Foundation (CNCF) Kubernetes
-- PostgreSQL (Postgres)
-- Redis
-- StatsD
-- Virtualenv
-- OpenLineage with Airflow
+- Elasticsearch (apache-airflow-providers-elasticsearch)
+- Celery (apache-airflow-providers-celery)
+- Google (apache-airflow-providers-google)
+- Password (apache-airflow-password)
+- Cloud Native Computing Foundation (CNCF) Kubernetes (apache-airflow[cncf.kubernetes)
+- PostgreSQL (Postgres) (apache-airflow-providers-postgres)
+- Redis (apache-airflow-providers-redis)
+- StatsD (apache-airflow-statsd)
+- Virtualenv (apache-airflow-virtualenv)
+- OpenLineage with Airflow (openlineage-airflow)
 - Astronomer Providers (astronomer-providers)
 
 To determine the supported provider package version for a specific Astronomer Software release, see the release notes. Run the following command to determine the provider package versions that are supported by your current Astro Runtime image:
