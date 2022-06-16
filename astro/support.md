@@ -30,10 +30,7 @@ The following are the best practices for submitting support requests in the Clou
         Examples:
 
         - Your tasks are not running and restarting them didn't fix the issue.
-        - All Celery workers are offline.
-        - Kubernetes pod executors are not starting.
-        - There are extended periods of `503` errors that are not solved by allocating more resources to the Webserver.
-        - There is an Astronomer outage, such as downtime in the Astronomer Docker Registry.
+        - Astronomer is experiencing an incident or downtime that is affecting your data pipelines in production.
 
     - **P2:** High impact, service is severely impaired.
 
