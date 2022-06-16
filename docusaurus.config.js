@@ -240,7 +240,7 @@ module.exports = {
       {
        id: 'software',
        changefreq: 'daily',
-       ignorePatterns: ['/software/0.28/**','/software/0.27/**','/software/0.26/**','/software/0.25/**','/software/0.23/**','/software/0.16/**'],
+       ignorePatterns: ['/software/0.28/**'],
       },
     ]
   ],
