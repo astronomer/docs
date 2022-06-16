@@ -71,7 +71,7 @@ To make it easy to get started with Airflow, all Astro Runtime images have the f
 - OpenLineage with Airflow (openlineage-airflow)
 - Astronomer Providers (astronomer-providers)
 
-If a release of Astro Runtime includes a change to the installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), that version change will be reflected in [Astro Runtime Release Notes](runtime-release-notes.md).
+If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime Release Notes](/astro/runtime-release-notes.md).
 
 To determine the version of a provider package installed in your current Astro Runtime image, run:
 
