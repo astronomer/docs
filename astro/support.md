@@ -1,6 +1,6 @@
 ---
 title: 'Submit a Support Request'
-navTitle: 'Astro Support'
+sidebar_label: 'Astro Support'
 id: support
 description: Get Astro support when you need it.
 ---
