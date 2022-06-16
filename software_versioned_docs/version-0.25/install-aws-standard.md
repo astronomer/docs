@@ -34,7 +34,7 @@ For the base domain `astro.mydomain.com`, for example, here are some correspondi
 
 For the full list of subdomains, see Step 4.
 
-## Step 2: Spin up the EKS Control Plane and a Kubernetes Cluster
+## Step 2: Spin up the EKS control plane and a Kubernetes Cluster
 
 To proceed with the installation, you'll need to spin up an [EKS Control Plane](https://aws.amazon.com/eks/) as well as worker nodes in your Kubernetes cluster by following [this AWS guide](https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html).
 

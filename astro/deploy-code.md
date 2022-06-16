@@ -75,7 +75,7 @@ When you deploy code to Astro, your Astro project is built into a Docker image. 
 
 ![Deploy Code](/img/docs/deploy-architecture.png)
 
-With the exception of the Airflow Webserver and some Celery Workers, Kubernetes gracefully terminates all containers during this process. This forces them to restart and begin running your latest code.
+With the exception of the Airflow webserver and some Celery Workers, Kubernetes gracefully terminates all containers during this process. This forces them to restart and begin running your latest code.
 
 If you deploy code to a Deployment that is running a previous version of your code, then the following happens:
 

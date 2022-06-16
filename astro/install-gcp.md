@@ -12,7 +12,7 @@ This is where you'll find instructions for installing Astro on the Google Cloud 
 To complete the installation process, you'll:
 
 - Create an account on Astro.
-- Activate your Astro Data Plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
+- Activate your Astro data plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
 - Share information about your Google Cloud project with Astronomer.
 
 When you've completed the installation process, Astronomer will create a Cluster within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
@@ -64,9 +64,9 @@ After completing your initial installation, we recommend [setting up an identity
 
 ## Step 2: Activate the Data Plane
 
-The Data Plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
+The data plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
-To activate the Data Plane on your GCP project:
+To activate the data plane on your GCP project:
 
 1. Run the following commands in your Google Cloud Shell:
 

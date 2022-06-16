@@ -52,8 +52,8 @@ Release Date: April 27, 2021
 Astronomer Software v0.23 now offers full support for [Airflow 2.0.2](https://github.com/apache/airflow/releases/tag/2.0.2). Airflow 2.0.2 builds upon the success of Airflow 2.0.0 and 2.0.1 with more bug fixes and performance improvements, including:
 
 - Gracefully handling missing `start_date` and `end_date` for DagRuns ([Source](https://github.com/apache/airflow/pull/14452))
-- Faster default role syncing during Webserver start ([Source](https://github.com/apache/airflow/pull/15017))
-- Increased Webserver start-up speed when there are many DAGs ([Source](https://github.com/apache/airflow/pull/14993))
+- Faster default role syncing during webserver start ([Source](https://github.com/apache/airflow/pull/15017))
+- Increased webserver start-up speed when there are many DAGs ([Source](https://github.com/apache/airflow/pull/14993))
 - Authenticated plugins endpoints ([Source](https://github.com/apache/airflow/pull/14570))
 
 For a list of Astronomer-only changes, read the [Astronomer Certified 2.0.2 changelog](https://github.com/astronomer/ap-airflow/blob/master/2.0.2/CHANGELOG.md).
@@ -63,23 +63,23 @@ In addition, some bug fixes from Airflow 2.0.2 have been backported to Astronome
 ### Bug Fixes
 
 - Fixed an issue where IAM roles for service accounts ([IRSA](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html)) would not connect to S3 back-end registries. ([Source](https://github.com/astronomer/astronomer/pull/1065))
-- Fixed an issue where a Deployment would not have correctly labeled Kubernetes pods when using the Kubernetes Executor and the KubernetesPodOperator at the same time. ([Source](https://github.com/astronomer/astronomer/pull/1059))
+- Fixed an issue where a Deployment would not have correctly labeled Kubernetes pods when using the Kubernetes executor and the KubernetesPodOperator at the same time. ([Source](https://github.com/astronomer/astronomer/pull/1059))
 
 ## v0.23.13
 
 Release Date: April 13, 2021
 
-### Zero Webserver Downtime for Airflow 2.0+ Deployments
+### Zero webserver Downtime for Airflow 2.0+ Deployments
 
-We're excited to announce that Astronomer v0.23.13 introduces zero Webserver downtime for Deployments running Airflow 2.0+. This feature is automatically enabled and requires no configuration in your system.
+We're excited to announce that Astronomer v0.23.13 introduces zero webserver downtime for Deployments running Airflow 2.0+. This feature is automatically enabled and requires no configuration in your system.
 
 This change has a few effects:
-- The Airflow Webserver now requires less CPU and Memory.
-- Increasing your total # of DAGs no longer requires proportionally increasing your Webserver resources.
+- The Airflow webserver now requires less CPU and Memory.
+- Increasing your total # of DAGs no longer requires proportionally increasing your webserver resources.
 - When you deploy code or configuration changes via `astro deploy`, these changes will appear in the Airflow UI in real time without an intermediary "Airflow is Starting Up" page.
-- The Webserver still restarts when you deploy code, but a "rolling restart" is applied so that the Webserver pod is slowly replaced by another instead of stopping entirely.
+- The webserver still restarts when you deploy code, but a "rolling restart" is applied so that the webserver pod is slowly replaced by another instead of stopping entirely.
 
-For context, this functionality is possible because Airflow 2.0 requires [DAG Serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html), which is an open source feature that makes the Webserver stateless.
+For context, this functionality is possible because Airflow 2.0 requires [DAG Serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html), which is an open source feature that makes the webserver stateless.
 
 ### Minor Improvements and Bug Fixes
 
@@ -116,12 +116,12 @@ Specifically, Airflow 1.10.15 includes the following changes:
 - Fix sync-perm to work correctly when update_fab_perms = False [(commit)](https://github.com/astronomer/airflow/commit/950028f93e1220d49629aea10dfbaf1173b8910b)
 - Pin SQLAlchemy to <1.4 due to breakage of sqlalchemy-utils [(commit)](https://github.com/astronomer/airflow/commit/331f0d23260a77212e7b15707e04bee02bdab1f2)
 - Enable DAG Serialization by default [(commit)](https://github.com/apache/airflow/commit/cd1961873783389ee51748f7f2a481900cce85b9)
-- Stop showing Import Errors for Plugins in Webserver [(commit)](https://github.com/apache/airflow/commit/a386fd542fe1c46bd3e345371eed10a9c230f690)
+- Stop showing Import Errors for Plugins in webserver [(commit)](https://github.com/apache/airflow/commit/a386fd542fe1c46bd3e345371eed10a9c230f690)
 - Add role-based authentication backend [(commit)](https://github.com/apache/airflow/commit/16461c3c8dcb1d1d2766844d32f3cdec31c89e69)
 - Show a "Warning" to Users with duplicate connections [(commit)](https://github.com/apache/airflow/commit/c037d48c9e383a6fd0b1b0d88407489d0ed02194)
 - `KubernetesExecutor` should accept images from `executor_config` [(commit)](https://github.com/apache/airflow/pull/13074)
 - Fixed inability to import Airflow plugins on Python 3.8 [(commit)](https://github.com/apache/airflow/pull/12859)
-- Fixed Scheduler not acknowledging active runs properly [(commit)](https://github.com/apache/airflow/pull/13803)
+- Fixed scheduler not acknowledging active runs properly [(commit)](https://github.com/apache/airflow/pull/13803)
 
 For detailed guidelines on how to upgrade Airflow on Astronomer, read [Upgrade Airflow](manage-airflow-versions.md). For more information on 1.10.15, check out the [Airflow Release](https://airflow.apache.org/docs/apache-airflow/1.10.15/changelog.html) or the corresponding [AC 1.10.15 changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md).
 
@@ -133,7 +133,7 @@ For detailed guidelines on how to upgrade Airflow on Astronomer, read [Upgrade A
 - Airflow task logs are no longer missing in the Airflow UI for users running Astronomer v0.23.9 on IKS. ([Source](https://github.com/astronomer/astronomer/pull/1023))
 - Setting `AIRFLOW__KUBERNETES__FS_GROUP:50000` in the Software UI now properly forces the `fsGroup` setting in the pod template file. ([Source](https://github.com/astronomer/airflow-chart/pull/190))
 - Nginx ingress scraping for Prometheus now scrapes and reports metrics for all `nginx` replicas in aggregate, as opposed to one pod at a time. ([Source](https://github.com/astronomer/astronomer/pull/1010))
-- Fixed an issue where Airflow Schedulers were unable to adopt running Kubernetes Executor tasks due to a permissions error, causing those tasks to be queued and then terminated. ([Source](https://github.com/astronomer/airflow-chart/pull/191))
+- Fixed an issue where Airflow Schedulers were unable to adopt running Kubernetes executor tasks due to a permissions error, causing those tasks to be queued and then terminated. ([Source](https://github.com/astronomer/airflow-chart/pull/191))
 
 ## v0.23.11
 
@@ -168,7 +168,7 @@ For local development guidelines, read [Get Started with Airflow 2.0](https://ww
 
 Airflow 2.0 allows users to provision multiple Airflow Schedulers for ultimate high-availability and scale. In tandem with full support for Airflow 2.0 on Astronomer, v0.23 supports the ability to provision up to 4 Schedulers via the Software UI for Airflow Deployments running Airflow 2.0+.
 
-For guidelines, refer to [Configure an Airflow Deployment on Astronomer](configure-deployment.md#scale-core-resources). For Scheduler performance benchmarks and a technical deep-dive into Airflow's critical component, read ["The Airflow 2.0 Scheduler"](https://www.astronomer.io/blog/airflow-2-scheduler).
+For guidelines, refer to [Configure an Airflow Deployment on Astronomer](configure-deployment.md#scale-core-resources). For scheduler performance benchmarks and a technical deep-dive into Airflow's critical component, read ["The Airflow 2.0 Scheduler"](https://www.astronomer.io/blog/airflow-2-scheduler).
 
 ### Airflow Version Selection & Upgrade in Software UI/CLI
 
@@ -204,15 +204,15 @@ While this change largely sets the foundation for new features in later releases
 - Refined logic for **Deployment Health Status** (Unhealthy/Red, Healthy/Green, Deploying/Blue and Unknown/Gray) that's visible as a "bubble" next to all Airflow Deployments in the Software UI.
 - A set of error messages to alert you if a deploy failed or was otherwise not completed.
 
-### Improved Celery Worker Update Strategy
+### Improved Celery worker Update Strategy
 
 Astronomer Software v0.23 includes an improvement to the process by which new Celery Workers are created and begin to pick up tasks following a deploy to an Airflow Deployment on Astronomer.
 
-Previously, the number of Celery Worker replicas that could be immediately created following a deploy was restricted to 25% of the total number of desired Celery Workers, until the original Workers shut down. This meant that it took longer for replacement Celery Workers to be created and start picking up Airflow tasks. Defined as `maxSurge`, that percentage is now set to 100%, allowing the maximum number of Celery Worker replicas to exist and push your data pipelines forward.
+Previously, the number of Celery worker replicas that could be immediately created following a deploy was restricted to 25% of the total number of desired Celery Workers, until the original Workers shut down. This meant that it took longer for replacement Celery Workers to be created and start picking up Airflow tasks. Defined as `maxSurge`, that percentage is now set to 100%, allowing the maximum number of Celery worker replicas to exist and push your data pipelines forward.
 
 For users, this change will result in a quicker, more efficient, and more graceful deploy process.
 
-> **Note:** This improvement applies only to those running Airflow with the Celery Executor on Astronomer. For more information on Airflow Executors, refer to ["Airflow Executors Explained"](https://www.astronomer.io/guides/airflow-executors-explained) or [Configure an Airflow Deployment on Astronomer](configure-deployment.md).
+> **Note:** This improvement applies only to those running Airflow with the Celery executor on Astronomer. For more information on Airflow Executors, refer to ["Airflow Executors Explained"](https://www.astronomer.io/guides/airflow-executors-explained) or [Configure an Airflow Deployment on Astronomer](configure-deployment.md).
 
 ### Houston API Improvements
 

@@ -67,7 +67,7 @@ This process stops your running Docker containers and restarts them with your up
 If you added `pymongo` to your `requirements.txt` file, for example, you can confirm that it was properly installed by running a `$ docker exec` command into your Scheduler.
 
 1. Run `$ docker ps` to identify the 3 running docker containers on your machine
-2. Grab the container ID of your Scheduler container
+2. Grab the container ID of your scheduler container
 3. Run the following:
 
 ```
@@ -108,7 +108,7 @@ Follow the instructions in the "Rebuild your Image" section above.
 Similar to the `pymongo` example above, you can confirm that `helper.py` was properly built into your image by running a `$ docker exec` command into your Scheduler.
 
 1. Run `$ docker ps` to identify the 3 running docker containers on your machine
-2. Grab the container ID of your Scheduler container
+2. Grab the container ID of your scheduler container
 3. Run the following:
 
 ```bash

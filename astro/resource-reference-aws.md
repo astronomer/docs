@@ -20,7 +20,7 @@ Read the following document for a reference of our default resources as well as 
 | [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/) | The RDS instance is the primary database of the Astro Data Plane. It hosts a metadata database for each Airflow Deployment hosted on the EKS cluster. | 1x db.r5.large |
 | [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) | Elastic IPs are required for connectivity with the Control Plane, and other public services. | 2x |
 | [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes. | 2x /26 (public) and 1x /20 + 1x /21 (private) |
-| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) | Required for connectivity with the Control Plane and other public services. | 1x |
+| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) | Required for connectivity with the control plane and other public services. | 1x |
 | [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) | NAT Gateways translate outbound traffic from private subnets to public subnets. | 2x |
 | [Routes](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-table-routes) | Routes are necessary to direct network traffic from the subnets and gateways. | 2x |
 | [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) | Home for the routes. | 2x |
@@ -64,7 +64,7 @@ Modifying the region of an existing Cluster on Astro is not supported. If you're
 
 ### RDS Instance Type
 
-Every Astro Cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the Data Plane and powers the metadata database of each Astro Deployment within a single Cluster. During the Cluster creation process, you'll be asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
+Every Astro Cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the data plane and powers the metadata database of each Astro Deployment within a single Cluster. During the Cluster creation process, you'll be asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
 
 Astro supports a variety of AWS RDS instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
 
@@ -164,13 +164,13 @@ For detailed information on each instance type, refer to [AWS documentation](htt
 
 :::info
 
-A single Cluster on Astro cannot currently be configured with more than one node instance type. In the first half of 2022, we expect to introduce support for Worker Queues, which will allow you to run workers of varying node types and sizes within a single Deployment. If this is something that your team is interested in, reach out to us. We'd love to hear from you.
+A single Cluster on Astro cannot currently be configured with more than one node instance type. In the first half of 2022, we expect to introduce support for worker Queues, which will allow you to run workers of varying node types and sizes within a single Deployment. If this is something that your team is interested in, reach out to us. We'd love to hear from you.
 
 :::
 
-## Deployment Worker Size Limits
+## Deployment worker Size Limits
 
-In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a Cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. When you attempt to provision a worker size that isn't supported by the Cluster instance type, an error message appears in the Cloud UI.
+In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a Cluster. worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. When you attempt to provision a worker size that isn't supported by the Cluster instance type, an error message appears in the Cloud UI.
 
 This table lists the maximum worker size that is supported on Astro for each node instance type. Maximum worker size values may increase or decrease over time as the system requirements of Astro change.
 
@@ -224,7 +224,7 @@ The maximum supported worker size on Astro is currently 400 AU, which means that
 
 :::info
 
-The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum Scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
+The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
 
 For more information about the Scheduler, see [Configure a Deployment](configure-deployment-resources.md#scheduler-resources).
 

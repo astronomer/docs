@@ -18,7 +18,7 @@ Astro operates on a model of shared responsibility, which means that both the As
 
 ## Architecture
 
-Astro boasts a hybrid deployment model founded on a Control Plane hosted by Astronomer and a Data Plane that is hosted in your cloud environment. It optimizes for security whilst relieving your team of operational overhead. For more information, see [Architecture](overview.md#architecture).
+Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. It optimizes for security whilst relieving your team of operational overhead. For more information, see [Architecture](overview.md#architecture).
 
 ## Resilience
 
@@ -26,7 +26,7 @@ The Astro Control and Data Planes are architected and deployed on major public c
 
 ## Disaster Recovery
 
-While Astro Data Plane is designed to withstand and survive in-region Availability Zone (AZ) degradations and outages, rest assured Astronomer can also help you recover from major region failures by restoring configuration and secrets from a secure and highly available data store. For more information, read [Disaster Recovery](disaster-recovery.md).
+While Astro data plane is designed to withstand and survive in-region Availability Zone (AZ) degradations and outages, rest assured Astronomer can also help you recover from major region failures by restoring configuration and secrets from a secure and highly available data store. For more information, read [Disaster Recovery](disaster-recovery.md).
 
 ## Physical and Environment Security
 

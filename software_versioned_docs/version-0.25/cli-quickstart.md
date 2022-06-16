@@ -9,7 +9,7 @@ description: Establish a local testing environment and deploy to Astronomer Soft
 
 Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your machine.
 
-From the CLI, both Astronomer and non-Astronomer users can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. Once you initialize a project on Astronomer, you can easily customize your image (e.g. add Python or OS-level packages, plugins etc.) and push that image to run on your local machine.
+From the CLI, both Astronomer and non-Astronomer users can create a local Apache Airflow instance with a dedicated Webserver, scheduler and Postgres Database. Once you initialize a project on Astronomer, you can easily customize your image (e.g. add Python or OS-level packages, plugins etc.) and push that image to run on your local machine.
 
 If you're an Astronomer Software user, you might use the Astronomer CLI to do the following:
 
@@ -194,7 +194,7 @@ You can now push your project to a local instance of Airflow. To do so:
 
    You should also be able to access your Postgres Database at: `localhost:5432/postgres`. For guidelines on accessing your Postgres database both locally and on Astronomer, refer to the [Access Airflow Database](access-airflow-database.md) guide.
 
-   > **Note**: Running `$ astro dev start` will start your project with the Airflow Webserver exposed at port 8080 and Postgres exposed at port 5432.
+   > **Note**: Running `$ astro dev start` will start your project with the Airflow webserver exposed at port 8080 and Postgres exposed at port 5432.
    >
    > If you already have either of those ports allocated, you can either [stop existing docker containers](https://forum.astronomer.io/t/docker-error-in-cli-bind-for-0-0-0-0-5432-failed-port-is-already-allocated/151) or [change the port](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
 
@@ -224,7 +224,7 @@ All changes made to the following files will be picked up as soon as they're sav
 - `plugins`
 - `include`
 
-Once you save your changes, refresh the Airflow Webserver in your browser to see them render.
+Once you save your changes, refresh the Airflow webserver in your browser to see them render.
 
 ### Other Changes
 

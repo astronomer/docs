@@ -10,7 +10,7 @@ description: Learn about Astro, the managed service that makes data pipelines ea
 
 Astro is a managed software service that offers a next-generation experience for modern data teams running Apache Airflow, the open source industry standard for data orchestration.
 
-Astro boasts a hybrid deployment model founded on a Control Plane hosted by Astronomer and a Data Plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. It optimizes for security whilst relieving your team of operational overhead.
+Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. It optimizes for security whilst relieving your team of operational overhead.
 
 Beyond architecture, Astro offers a suite of first-class features that make it easy to author, run, and monitor data pipelines.
 
@@ -18,7 +18,7 @@ Beyond architecture, Astro offers a suite of first-class features that make it e
 
 Astro's architecture enables a few key features, available today:
 
-- Worker auto-scaling, powered by Airflow's Celery Executor + KEDA
+- worker auto-scaling, powered by Airflow's Celery executor + KEDA
 - The ability to run multiple clusters in your organization's network on either AWS or GCP
 - Astro Runtime, a collection of Docker images that provides a differentiated data orchestration experience
 - Timely support for the latest major, minor, and patch versions of the Apache Airflow open source project

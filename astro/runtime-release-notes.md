@@ -55,7 +55,7 @@ Astro Runtime 5.0.2 includes same-day support for Airflow 2.3.1, a release that 
 
 Fixes include:
 
-- Automatically reschedule stalled queued tasks in Celery Executor ([#23690](https://github.com/apache/airflow/pull/23690))
+- Automatically reschedule stalled queued tasks in Celery executor ([#23690](https://github.com/apache/airflow/pull/23690))
 - Fix secrets rendered in Airflow UI when task is not executed ([#22754](https://github.com/apache/airflow/pull/22754))
 - Performance improvements for faster database migrations to Airflow 2.3
 
@@ -246,9 +246,9 @@ Airflow 2.2.3 exclusively contains bug fixes, including:
 
 ### Astronomer Monitoring DAG
 
-Astro Runtime 4.0.7 includes a monitoring DAG that is pre-installed in the Docker image and enabled for all customers. In addition to existing Deployment health and metrics functionality, this DAG allows the Astronomer team to better monitor the health of your Data Plane by enabling real-time visibility into whether your Workers are healthy and tasks are running.
+Astro Runtime 4.0.7 includes a monitoring DAG that is pre-installed in the Docker image and enabled for all customers. In addition to existing Deployment health and metrics functionality, this DAG allows the Astronomer team to better monitor the health of your data plane by enabling real-time visibility into whether your Workers are healthy and tasks are running.
 
-The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow Scheduler and Workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot.
+The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow scheduler and Workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot.
 
 Because this DAG is essential to Astro's managed service, your organization will not be charged for its task runs. For the same reasons, this DAG can't be modified or disabled via the Airflow UI. To modify how frequently this DAG runs, you can specify an alternate schedule as a cron expression by setting `AIRFLOW_MONITORING_DAG_SCHEDULE_INTERVAL` as an environment variable.
 
@@ -334,7 +334,7 @@ For more information on using timetables, read the [Apache Airflow Documentation
 
 #### Deferrable Operators
 
-[Deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html) are a new type of Airflow operator that promises improved performance and lower resource costs. While standard operators and sensors take up a Worker slot even when they are waiting for an external trigger, deferrable operators are designed to suspend themselves and free up that Worker slot while they wait. This is made possible by a new, lightweight Airflow component called the Triggerer.
+[Deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html) are a new type of Airflow operator that promises improved performance and lower resource costs. While standard operators and sensors take up a worker slot even when they are waiting for an external trigger, deferrable operators are designed to suspend themselves and free up that worker slot while they wait. This is made possible by a new, lightweight Airflow component called the Triggerer.
 
 Existing Airflow operators have to be re-written according to the deferrable operator framework. In addition to supporting those available in the open source project, Astronomer has built an exclusive collection of deferrable operators in Runtime 4.0.0. This collection includes the `DatabricksSubmitRunOperator`, the `DatabricksRunNowOperator`, and the `ExternalTaskSensor`. These are designed to be drop-in replacements for corresponding operators currently in use.
 
@@ -390,7 +390,7 @@ As part of supporting deferrable operators, the Triggerer is now available as a 
 
 ### Additional improvements
 
-- The Webserver is now the only Airflow component with access to logs, which reduces the risk of exposing sensitive information in logs ([commit](https://github.com/apache/airflow/pull/16754))
+- The webserver is now the only Airflow component with access to logs, which reduces the risk of exposing sensitive information in logs ([commit](https://github.com/apache/airflow/pull/16754))
 - Added support for Python 3.9 ([commit](https://github.com/apache/airflow/pull/15515))
 - `token` keys in connections are now marked as masked by default ([commit](https://github.com/apache/airflow/pull/16474))
 

@@ -7,7 +7,7 @@ description: A list of every command and setting in the Astronomer CLI.
 
 ## Overview
 
-Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astronomer CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
+Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astronomer CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
 
 This document contains information about all commands and settings available in the Astronomer CLI, including examples and flags. It does not contain detailed guidelines on each command, but each section provides resources for additional information in a **Related documentation** section if it's available.
 
@@ -279,8 +279,8 @@ Run `astro deployment create <new-deployment-name> [flags]` to create a new Depl
 | Flag                | Value Type | Usage                                                                                                                                |
 | ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `--airflow-version` | String     | The Airflow version for the new Deployment.                                                                                          |
-| `--cloud-role`      | String     | Append an AWS or GCP IAM role to your Airflow Deployment's Webserver, Scheduler, and Worker Pods.                                    |
-| `--executor`        | String     | The Executor type for the Deployment. Can be `local`, `celery`, or `kubernetes`. If no executor is specified, then `celery` is used. |
+| `--cloud-role`      | String     | Append an AWS or GCP IAM role to your Airflow Deployment's Webserver, Scheduler, and worker Pods.                                    |
+| `--executor`        | String     | The executor type for the Deployment. Can be `local`, `celery`, or `kubernetes`. If no executor is specified, then `celery` is used. |
 | `--release-name`    | String     | A custom release name for the Airflow Deployment. Applies only to Deployments on Astronomer Software.                              |
 | `--dag-deployment-type` | String     | The DAG deploy method for the Deployment. Can be either `image` or `volume`. The default value is `image`.                                                               |
 | `--nfs-location` | String     | The location for an NFS volume mount, specified as: `<IP>:/<path>`. Must be specified when `--dag-deployment-type=volume`. Input is automatically prepended with `nfs:/` - do not include this in your input.                                  |
@@ -398,7 +398,7 @@ Run `astro deployment service-account get <service-account-id> --deployment-id=<
 
 ## astro deployment update
 
-Updates various parts of an Airflow Deployment on Astronomer, including metadata, deployment methods, and Executor type. Can also be used to append IAM roles to the Webserver, Scheduler, and Worker pods for Deployments running on Amazon EKS or Google GCP.
+Updates various parts of an Airflow Deployment on Astronomer, including metadata, deployment methods, and executor type. Can also be used to append IAM roles to the Webserver, Scheduler, and worker pods for Deployments running on Amazon EKS or Google GCP.
 
 ### Usage
 
@@ -419,7 +419,7 @@ Run `astro deployment update <your-deployment-id> [flags]` to update a Deploymen
 | `releaseName`  | String     | The release name for the Deployment (e.g. `planetary-fusion-1382`).                     |
 | `alert_emails` | String     | An email address which receives Airflow alerts from the Deployment.                     |
 | `type`         | String     | The type of Deployment. Can be either `airflow` or `flower`.                            |
-| `executor`     | String     | The Executor type for the Deployment. Can be either `local`, `kubernetes`, or `celery`. |
+| `executor`     | String     | The executor type for the Deployment. Can be either `local`, `kubernetes`, or `celery`. |
 
 
 ### Related documentation
@@ -555,7 +555,7 @@ In your project directory, run `astro dev kill` to delete all data associated wi
 
 ## astro dev logs
 
-Shows logs for the Scheduler or Webserver in your local Airflow environment.
+Shows logs for the scheduler or webserver in your local Airflow environment.
 
 ### Usage
 
@@ -566,8 +566,8 @@ Run `astro dev logs [flags]` to start tracking logs for your Scheduler, Webserve
 | Flag          | Value Type | Usage                                              |
 | ------------- | ---------- | -------------------------------------------------- |
 | `--follow`    | None       | Continues to show the latest outputs from the log. |
-| `--scheduler` | None       | Outputs only Scheduler logs.                       |
-| `--webserver` | None       | Outputs only Webserver logs.                       |
+| `--scheduler` | None       | Outputs only scheduler logs.                       |
+| `--webserver` | None       | Outputs only webserver logs.                       |
 | `--triggerer` | None       | Outputs only Triggerer logs.                       |
 
 ## astro dev ps

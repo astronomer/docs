@@ -128,7 +128,7 @@ Once you've saved these packages in your project files, [restart your local envi
 If you added `pymongo` to your `requirements.txt` file, for example, you can confirm that it was properly installed by running a `docker exec` command into your Scheduler:
 
 1. Run `docker ps` to identify the docker containers running on your machine
-2. Copy the container ID of the Scheduler container
+2. Copy the container ID of the scheduler container
 3. Run the following:
 
 ```
@@ -174,7 +174,7 @@ To do this:
 To confirm that your helper functions were successfully installed:
 
 1. Run `docker ps` to identify the 3 running docker containers on your machine
-2. Copy the container ID of your Scheduler container
+2. Copy the container ID of your scheduler container
 3. Run the following command to see your new directory in the container:
 
     ```bash

@@ -49,7 +49,7 @@ In order for our team to serve you most effectively, it's critical that we under
 
     Examples:
 
-    - The Scheduler is not heartbeating, and restarting didn't fix the issue.
+    - The scheduler is not heartbeating, and restarting didn't fix the issue.
     - All Celery workers are offline.
     - Kubernetes pod executors are not starting.
     - There are extended periods of `503` errors that are not solved by allocating more resources to the Webserver.
@@ -59,7 +59,7 @@ In order for our team to serve you most effectively, it's critical that we under
 
     Examples:
 
-    - The Airflow Webserver is unavailable.
+    - The Airflow webserver is unavailable.
     - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
     - Task logs are missing in the Airflow UI.
 

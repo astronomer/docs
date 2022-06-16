@@ -97,7 +97,7 @@ For updated CI/CD examples, see [CI/CD](ci-cd.md).
 
 ### New Command To Set Astro Project Configurations
 
-You can now use `astro config get` and `astro config set` to retrieve and modify the configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your Webserver port, and your project name.
+You can now use `astro config get` and `astro config set` to retrieve and modify the configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your webserver port, and your project name.
 
 For more information about these commands, see the [CLI Command Reference](cli/astro-config-set.md).
 
@@ -236,9 +236,9 @@ You can now use `astro deployment update` to update certain configurations for a
 
 - Deployment name
 - Deployment description
-- Scheduler resources
-- Scheduler replicas
-- Worker resources
+- scheduler resources
+- scheduler replicas
+- worker resources
 
 This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment-resources.md). For more information about this command, see [CLI Command Reference](cli/astro-deployment-update.md).
 
@@ -276,11 +276,11 @@ These tests don't require a fully functional Airflow environment in order to exe
 
 In addition to running tests locally, you can also run pytest as part of the Astro deploy process. To do so, specify the `--pytest` flag when running `astro deploy`. This ensures that your code push to Astro automatically fails if any DAGs do not pass all pytests specified in the `tests` directory of your Astro project. For more information, see [Test DAGs Locally with pytest](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
 
-### New Command to View Deployment Scheduler Logs
+### New Command to View Deployment scheduler Logs
 
-If you prefer to troubleshoot DAGs and monitor your Deployments from the command line, you can now run `astro deployment logs`, a new Astro CLI command that allows you to view the same Scheduler logs that appear in the **Logs** tab of the Cloud UI.
+If you prefer to troubleshoot DAGs and monitor your Deployments from the command line, you can now run `astro deployment logs`, a new Astro CLI command that allows you to view the same scheduler logs that appear in the **Logs** tab of the Cloud UI.
 
-When you run this command, all Scheduler logs emitted by a Deployment over the last 24 hours appear in your terminal. Similarly to the Cloud UI, you can filter logs by log level using command flags. For more information about this command, see the [CLI Command Reference](cli/astro-deployment-logs.md).
+When you run this command, all scheduler logs emitted by a Deployment over the last 24 hours appear in your terminal. Similarly to the Cloud UI, you can filter logs by log level using command flags. For more information about this command, see the [CLI Command Reference](cli/astro-deployment-logs.md).
 
 ### New Commands to Create and Delete Deployments on Astro
 
@@ -301,7 +301,7 @@ For users making quick and continuous changes to an Astro project locally, the A
 
 ### Support for the Triggerer in Local Airflow Environments
 
-The Astro CLI now supports the Apache Airflow [Triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](deferrable-operators.md) locally before pushing them to a Deployment on Astronomer. Additionally, Triggerer logs appear alongside Webserver and Scheduler logs when you run `astro dev logs`.
+The Astro CLI now supports the Apache Airflow [Triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](deferrable-operators.md) locally before pushing them to a Deployment on Astronomer. Additionally, Triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
 
 The Triggerer will only be created in local environments running Astro Runtime 4.0.0+.
 
@@ -338,7 +338,7 @@ Built with refresh tokens, the Astro CLI also does not require that users re-aut
 Astro CLI v1.0.0 includes several improvements to the local development experience:
 
 - You can now run `astrocloud dev start` with [Docker Buildkit](https://docs.docker.com/develop/develop-images/build_enhancements/) enabled. This resolves a [common issue](https://forum.astronomer.io/t/buildkit-not-supported-by-daemon-error-command-docker-build-t-airflow-astro-bcb837-airflow-latest-failed-failed-to-execute-cmd-exit-status-1/857) where users with Docker Buildkit enabled could not run this command.
-- After running `astrocloud dev start`, the CLI no shows you the status of the Webserver container as it spins up on your local machine. This makes it easier to know whether the Airflow UI is unavailable because the Airflow Webserver container is still spinning up.
+- After running `astrocloud dev start`, the CLI no shows you the status of the webserver container as it spins up on your local machine. This makes it easier to know whether the Airflow UI is unavailable because the Airflow webserver container is still spinning up.
 
 ### Additional Improvements
 
@@ -366,7 +366,7 @@ Fixed a broken documentation link and outdated description in the `airflow_setti
 
 Release date: November 5, 2021
 
-- Bug Fix: Fixed an issue where users saw errors related to S3 in Webserver logs when running locally (e.g. `Failed to verify remote log exists s3:///`).
+- Bug Fix: Fixed an issue where users saw errors related to S3 in webserver logs when running locally (e.g. `Failed to verify remote log exists s3:///`).
 
 ## v1.0.2 (`./astro`)
 Release date: October 25, 2021
@@ -392,7 +392,7 @@ Release date: September 20, 2021
 
 - Improvement: Bumped the default Astro Runtime version for new projects to [`3.0.2`](runtime-release-notes.md#astro-runtime-302)
 - Improvement: You can now use `./astro dev run` to run Airflow CLI commands
-- Improvement: You can now use `./astro dev logs` to show logs for the Airflow Scheduler and Webserver when developing locally
+- Improvement: You can now use `./astro dev logs` to show logs for the Airflow scheduler and webserver when developing locally
 
 ## v0.2.8-beta (`./astro`)
 

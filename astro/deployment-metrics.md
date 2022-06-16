@@ -46,17 +46,17 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
 ### Workers / Schedulers
 
-These metrics contain information about the Kubernetes Pods running your workers and Schedulers. Different worker and Scheduler Pods will appear on these charts as differently colored lines.
+These metrics contain information about the Kubernetes Pods running your workers and Schedulers. Different worker and scheduler Pods will appear on these charts as differently colored lines.
 
 ![Worker analytics in the Cloud UI](/img/docs/analytics-workers.png)
 
 #### Available Metrics
 
-- **CPU Usage Per Pod (%)**: This metric graphs a worker's peak CPU usage over a given time interval. The maximum allowed CPUs per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines.
+- **CPU Usage Per Pod (%)**: This metric graphs a worker's peak CPU usage over a given time interval. The maximum allowed CPUs per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ scheduler Pods will appear on this chart as differently colored lines.
 
     This metric should be at or below 90% at any given time. If a Pod surpasses 90% usage, the line in the graph will turn red.  
 
-- **Memory Usage Per Pod (MB)**: This metric graphs a worker's peak memory usage over a given time interval. The maximum allowed memory per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ Scheduler Pods will appear on this chart as differently colored lines. This metric should be at or below 50% of your total allowed memory at any given time.
+- **Memory Usage Per Pod (MB)**: This metric graphs a worker's peak memory usage over a given time interval. The maximum allowed memory per Pod as defined in **Worker Resources** appears as a dotted red line. Different worker/ scheduler Pods will appear on this chart as differently colored lines. This metric should be at or below 50% of your total allowed memory at any given time.
 
     This metric should be at or below 90% at any given time. If a Pod surpasses 90% usage, the line in the graph will turn red.  
 
@@ -66,14 +66,14 @@ These metrics contain information about the Kubernetes Pods running your workers
 
   :::
 
-- **Network Usage Per Pod (MB)**: This metric graphs each worker/ Scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
-- **Pod Count per Status**: This metric graphs the number of worker/ Scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. For more information about container states, read the [Kubernetes Documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
+- **Network Usage Per Pod (MB)**: This metric graphs each worker/ scheduler Pod's peak network usage over time. Sudden, irregular spikes in this metric should be investigated as a possible error in your project code.
+- **Pod Count per Status**: This metric graphs the number of worker/ scheduler Pods in a given Kubernetes container state. Because Astro operates on a one-container-per-pod model, the state of the container state is also the Pod state. For more information about container states, read the [Kubernetes Documentation](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-states).
 
     If a pod is stuck in a `Waiting` state, it could indicate that your Deployment did not successfully pull and run your Runtime image.
 
-- **Scheduler Heartbeat (_Scheduler Only_)**: A Scheduler emits a heartbeat at a regular rate to signal that it's healthy to other Airflow components. This metric graphs a Scheduler's average heartbeats per minute over a given time.
+- **Scheduler Heartbeat (_Scheduler Only_)**: A scheduler emits a heartbeat at a regular rate to signal that it's healthy to other Airflow components. This metric graphs a Scheduler's average heartbeats per minute over a given time.
 
-   On average, a Scheduler should emit ~11-12 heartbeats per minute. A Scheduler is considered "unhealthy" if it has not emitted a heartbeat for over 1 minute. The lack of a Scheduler heartbeat is expected during a code push, but erratic restarts or an "Unhealthy" state that persists for a significant amount of time is worth investigating further.
+   On average, a scheduler should emit ~11-12 heartbeats per minute. A scheduler is considered "unhealthy" if it has not emitted a heartbeat for over 1 minute. The lack of a scheduler heartbeat is expected during a code push, but erratic restarts or an "Unhealthy" state that persists for a significant amount of time is worth investigating further.
 
 ### Pools
 
@@ -100,13 +100,13 @@ Deployment health appears as a real-time status at the top of your Deployment's 
 
 Deployment health can have one of two statuses:
 
-- **Healthy** (Green): The Airflow Webserver and Scheduler are both healthy and running as expected.
+- **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
 - **Unhealthy** (Red): This status can mean one of two things:
 
-    - Your Deployment was recently created and the Airflow Webserver and Scheduler are still spinning up.
-    - Your Deployment's Webserver and/or Scheduler are restarting or otherwise not in a healthy, running state.
+    - Your Deployment was recently created and the Airflow webserver and scheduler are still spinning up.
+    - Your Deployment's webserver and/or scheduler are restarting or otherwise not in a healthy, running state.
 
-If your Deployment is unhealthy, we recommend checking the status of your tasks and waiting for a few minutes. If your Deployment is unhealthy for more than 5 minutes, we recommend [reviewing Scheduler logs](scheduler-logs.md) in the Cloud UI or reaching out to [Astronomer Support](https://support.astronomer.io).
+If your Deployment is unhealthy, we recommend checking the status of your tasks and waiting for a few minutes. If your Deployment is unhealthy for more than 5 minutes, we recommend [reviewing scheduler logs](scheduler-logs.md) in the Cloud UI or reaching out to [Astronomer Support](https://support.astronomer.io).
 
 ## Deployment Overview
 
@@ -114,8 +114,8 @@ Each Deployment includes four high-level performance charts which you can view f
 
 - DAG Runs
 - Task Instances
-- Worker CPU
-- Worker Memory
+- worker CPU
+- worker Memory
 
 <div class="text--center">
   <img src="/img/docs/deployment-metrics.png" alt="Metrics dashboard in the Cloud UI" />

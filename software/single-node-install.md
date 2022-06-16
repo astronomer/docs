@@ -220,9 +220,9 @@ For more information on this feature, read [Integrating Airflow and Hashicorp Va
 
 ## Step 8: Set Up the Scheduler
 
-In Airflow, [the Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for reading from the metadata database to check on the status of each task and decides the order in which tasks should be completed. To get your Scheduler running:  
+In Airflow, [the Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html) is responsible for reading from the metadata database to check on the status of each task and decides the order in which tasks should be completed. To get your scheduler running:  
 
-1. Enable the Scheduler by running the following command:
+1. Enable the scheduler by running the following command:
 
     ```sh
     sudo systemctl enable astronomer-certified@scheduler.service
@@ -253,19 +253,19 @@ In Airflow, [the Scheduler](https://airflow.apache.org/docs/apache-airflow/stabl
 
 [The Webserver](https://airflow.apache.org/docs/apache-airflow/stable/security/webserver.html) is a core Airflow component that is responsible for rendering the Airflow UI. To configure it on its own machine, follow the steps below.
 
-1. Enable the Webserver by running the following:
+1. Enable the webserver by running the following:
 
     ```sh
     sudo systemctl enable astronomer-certified@webserver.service
     ```
 
-2. Start the Webserver by running the following:
+2. Start the webserver by running the following:
 
     ```sh
     sudo systemctl start astronomer-certified@webserver.service
     ```
 
-> **Note:** For added security and stability, we recommend running the Webserver behind a reverse proxy and load balancer such as [nginx](https://www.nginx.com/). For more information on this feature, read the [Apache Airflow documentation](https://airflow.apache.org/docs/stable/howto/run-behind-proxy.html).
+> **Note:** For added security and stability, we recommend running the webserver behind a reverse proxy and load balancer such as [nginx](https://www.nginx.com/). For more information on this feature, read the [Apache Airflow documentation](https://airflow.apache.org/docs/stable/howto/run-behind-proxy.html).
 
 ## Step 10: Set Up Workers (Celery Only)
 
@@ -302,7 +302,7 @@ Workers are an essential component for running Airflow with the Celery Executor.
 
     > **Note:** You don't need to edit this unit file for Airflow versions earlier than 2.0.
 
-3. Enable the Worker service by running the following command:
+3. Enable the worker service by running the following command:
 
     ```sh
     sudo systemctl enable astronomer-certified-worker.service

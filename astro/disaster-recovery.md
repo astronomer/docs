@@ -7,7 +7,7 @@ description: Learn how Astronomer handles disaster recovery scenarios and how to
 
 ## Overview
 
-The Astro Data Plane is designed to withstand and survive in-region Availability Zone (AZ) degradations and outages as described in [Resilience](resilience.md).
+The Astro data plane is designed to withstand and survive in-region Availability Zone (AZ) degradations and outages as described in [Resilience](resilience.md).
 
 To withstand a full region outage and achieve near real-time recovery, Astronomer recommends provisioning at least two Astro Clusters in alternate regions. For example, one Cluster in AWS `us-east-1` and another in `us-west-2`. To ensure that both the primary and secondary Clusters are in sync, we recommend deploying all changes to both.
 
@@ -33,6 +33,6 @@ Astronomer will not be able to restore:
 - XComs.
 - Airflow configurations (Variables, Connections, Pools) configured via the Airflow UI. Any configurations set via your deployed Astro project image can still be recovered.
 
-Organization settings, Workspace settings, and user management configured in Astro's Control Plane will be unaffected by a region failure in the Data Plane.
+Organization settings, Workspace settings, and user management configured in Astro's control plane will be unaffected by a region failure in the Data Plane.
 
 Astronomer plans to introduce self-serve and automation enhancements as part of our 2022 roadmap. Please submit feedback to [Astronomer Support](https://support.astronomer.io/) if you are interested in joining the conversation.

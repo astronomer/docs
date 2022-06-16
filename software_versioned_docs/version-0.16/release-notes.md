@@ -46,7 +46,7 @@ Airflow 1.10.14 was built to make testing and migration to [Airflow 2.0](https:/
 - Support for Airflow 2.0 CLI commands ([commit](https://github.com/apache/airflow/pull/12725))
 - Bugfix: Unable to import Airflow plugins on Python 3.8 ([commit](https://github.com/apache/airflow/pull/12859))
 - BugFix: Tasks with depends_on_past or task_concurrency are stuck ([commit](https://github.com/apache/airflow/pull/12663))
-- Security Fix: Incorrect Session Validation in Airflow Webserver with default config allows a an authorized Airflow user on site A access an unauthorized Airflow Webserver on Site B through the session from Site A. ([Details](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-17526))
+- Security Fix: Incorrect Session Validation in Airflow webserver with default config allows a an authorized Airflow user on site A access an unauthorized Airflow webserver on Site B through the session from Site A. ([Details](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-17526))
 
 To upgrade to AC 1.10.14, add our new Debian image to your Dockerfile:
 
@@ -121,7 +121,7 @@ Astronomer v0.16.9 comes with support for [Airflow 1.10.12](https://airflow.apac
 
 Airflow 1.10.12 notably includes:
 
-- The ability to configure and launch pods via YAML files with the Kubernetes Executor and KubernetesPodOperator ([commit](https://github.com/apache/airflow/pull/6230))
+- The ability to configure and launch pods via YAML files with the Kubernetes executor and KubernetesPodOperator ([commit](https://github.com/apache/airflow/pull/6230))
 - A new `on_kill` method that ensures a KubernetesPodOperator task is killed when it's cleared in the Airflow UI ([commit](https://github.com/apache/airflow/commit/ce94497cc))
 - Ability to define a custom XCom class ([commit](https://github.com/apache/airflow/pull/8560))
 - Support for grabbing Airflow configs with sensitive data from Secret Backends ([commit](https://github.com/apache/airflow/pull/9645))
@@ -314,7 +314,7 @@ Release Date: June 8, 2020
 
 As of v0.15, Astronomer users are free to run our [Astronomer Certified (AC) 1.10.10 image](https://www.astronomer.io/downloads/ac/v1-10-10), which is based on the [Airflow 1.10.10](https://airflow.apache.org/blog/airflow-1.10.10/) open source version released in early April.
 
-Airflow 1.10.10 notably includes the ability to choose a timezone in the Airflow UI, DAG Serialization functionality for improved Webserver performance, and the [ability to sync Airflow Connections and Variables](https://forum.astronomer.io/t/aws-parameter-store-as-secrets-backend-airflow-1-10-10/606) with a Secret Backend tool (e.g. AWS Secret Manager, Hashicorp Vault, etc.)
+Airflow 1.10.10 notably includes the ability to choose a timezone in the Airflow UI, DAG Serialization functionality for improved webserver performance, and the [ability to sync Airflow Connections and Variables](https://forum.astronomer.io/t/aws-parameter-store-as-secrets-backend-airflow-1-10-10/606) with a Secret Backend tool (e.g. AWS Secret Manager, Hashicorp Vault, etc.)
 
 For more detail on what's included in AC 1.10.10, reference the [changelog](https://github.com/astronomer/ap-airflow/blob/master/1.10.10/CHANGELOG.md).
 

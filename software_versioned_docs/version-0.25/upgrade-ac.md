@@ -67,4 +67,4 @@ Then, for each machine running Airflow:
 
 3. In a web browser, access the Airflow UI at http://localhost:8080 and click **About** > **Version**. Once there, you should see the correct Airflow version listed.
 
-    > **Note:** The URL listed above assumes your Webserver is at port 8080 (default). To change that default, read [this forum post](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
+    > **Note:** The URL listed above assumes your webserver is at port 8080 (default). To change that default, read [this forum post](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).

@@ -9,7 +9,7 @@ description: Configure Astronomer Software to forward logs to Amazon S3.
 
 If you're running Astronomer Software and are interested in making Airflow task logs available in an Amazon S3 bucket, you're more than free to do so on the platform.
 
-For context, Astronomer Software leverages [Fluentd](https://www.fluentd.org/) as a data collector that is responsible for scraping and cleaning Airflow task logs to then send to [Elasticsearch](https://www.elastic.co/elasticsearch/), a search engine used to centralize and index logs from Airflow. The Airflow Webserver pulls from Elasticsearch to render those logs directly to the user in the Airflow UI.
+For context, Astronomer Software leverages [Fluentd](https://www.fluentd.org/) as a data collector that is responsible for scraping and cleaning Airflow task logs to then send to [Elasticsearch](https://www.elastic.co/elasticsearch/), a search engine used to centralize and index logs from Airflow. The Airflow webserver pulls from Elasticsearch to render those logs directly to the user in the Airflow UI.
 
 The guidelines below will outline how to forward Airflow logs from Fluentd via an existing Fluentd to S3 plugin. For more information on the plugin itself, reference the following:
 
@@ -72,7 +72,7 @@ Now, create an IAM Role and attach the Policy created above. You can do so via t
 
 For more information, refer to the ["Creating IAM Roles" doc from AWS](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html).
 
-### Configure EKS Worker Node Policy
+### Configure EKS worker Node Policy
 
 **1. Allow your EKS nodes to assume your new IAM Role**
 

@@ -32,7 +32,7 @@ If you prefer, you can run the `astrocloud deployment create` command in the Ast
 4. Optional. Edit the Deployment resource settings. See [Configure Deployment Resources](configure-deployment-resources.md). 
 5. Click **Create Deployment**. 
 
-    The initial status of all new Deployments is `UNHEALTHY`. This indicates that the Webserver and Scheduler for the Deployment are being created in your Astro Cluster. In a few minutes, the status changes to `HEALTHY`.
+    The initial status of all new Deployments is `UNHEALTHY`. This indicates that the webserver and scheduler for the Deployment are being created in your Astro Cluster. In a few minutes, the status changes to `HEALTHY`.
 
 ## Next Steps
 
