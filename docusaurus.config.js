@@ -5,7 +5,7 @@ module.exports = {
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
   url: 'https://docs.astronomer.io',
   baseUrl: '/',
-  trailingSlash: false,
+  trailingSlash: true,
   noIndex: false,
   onBrokenLinks: 'error',
   onBrokenMarkdownLinks: 'error',
