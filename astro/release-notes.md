@@ -20,15 +20,15 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### Submit Support Requests in the Cloud UI
 
-Support requests can now be created and submitted in the Cloud UI. You no longer need to open an account on the Astronomer support portal to submit a support request. To simplify and speed the submission of support requests, the Support Request form is auto-populated with Workspace and Deployment selections for your organization.
+Support requests can now be created and submitted in the Cloud UI. You no longer need to open an account on the Astronomer support portal to reach the Astronomer team. To streamline the request process, the **Submit Support Request** form auto-populates your currently selected Workspace and Deployment in the Cloud UI.
 
-To access the Support Request form in the Cloud UI, see [Submit a Support Request in the Cloud UI](astro-support.md#submit-a-support-request-in-the-cloud-ui).
+For more information, see [Submit a Support Request in the Cloud UI](astro-support.md#submit-a-support-request-in-the-cloud-ui).
 
-### A Deployment's Parallelism Now Autoscales with Worker Count
+### Parallelism Now Autoscales with a Deployment's Worker Count
 
-Deployments now autoscale to the Airflow [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism) setting, which determines the maximum number of tasks that can run concurrently within a single Airflow environment.
+To better scale concurrent task runs, Astro now dynamically calculates [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is an Airflow configuration that determines the maximum number of tasks that can run concurrently within a single Deployment.
 
-A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that you won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-deployment-resources.md#worker-autoscaling-logic) for more information. 
+A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-deployment-resources.md#worker-autoscaling-logic) for more information. 
 
 Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
 

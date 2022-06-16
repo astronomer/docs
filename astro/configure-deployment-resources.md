@@ -27,7 +27,7 @@ The maximum number of tasks that a single worker can execute at once is 16. This
 
 `[Number of Workers]= ([Queued tasks]+[Running tasks])/(Worker Concurrency)`
 
-The number of workers subsequently effects the Deployment's [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is the maximum number of tasks which can run concurrently across the entire Deployment. Parallelism can be calculated with the following expression:
+The number of workers subsequently determines the Deployment's [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is the maximum number of tasks which can run concurrently within a single Deployment. To ensure that you can always run as many tasks as your workers allow, parallelism is calculated with the following expression:
 
 `[Parallelism]= [Number of Workers] * [Worker Concurrency]`
 
