@@ -22,6 +22,8 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 Support requests can now be created and submitted in the Cloud UI. You no longer need to open an account on the Astronomer support portal to reach the Astronomer team. To streamline the request process, the **Submit Support Request** form auto-populates your currently selected Workspace and Deployment in the Cloud UI.
 
+![Location of the "Submit Support Request" button in the Cloud UI](/img/release-notes/support-form.png)
+
 For more information, see [Submit a Support Request in the Cloud UI](astro-support.md#submit-a-support-request-in-the-cloud-ui).
 
 ### Parallelism Now Autoscales with a Deployment's Worker Count
