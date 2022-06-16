@@ -19,7 +19,7 @@ For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime
 ### Additional Improvements
 
 - Update `astronomer-providers` to v1.5.0. For more information, see the [Astronomer Providers Changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id1).
-- Handle istio-proxy for Kubernetes Pods
+- Add support for Astro Clusters with [Istio](https://istio.io/) enabled.
 
 ## Astro Runtime 5.0.3
 
