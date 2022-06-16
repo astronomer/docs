@@ -25,7 +25,7 @@ The following are the best practices for submitting support requests in the Clou
 
     To help Astronomer Support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
 
-    - **P1:** Critical systems are unavailable, no workaround is immediately available
+    - **P1:** Critical impact, service is unusable in production.
 
         Examples:
 
@@ -35,7 +35,7 @@ The following are the best practices for submitting support requests in the Clou
         - There are extended periods of `503` errors that are not solved by allocating more resources to the Webserver.
         - There is an Astronomer outage, such as downtime in the Astronomer Docker Registry.
 
-    - **P2:** Significant Astronomer/Astronomer-owned Airflow functionality is impaired, but your organization is still able to run essential DAGs.
+    - **P2:** High impact, service is severely impaired.
 
         Examples:
 
@@ -43,7 +43,7 @@ The following are the best practices for submitting support requests in the Clou
         - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
         - Task logs are missing in the Airflow UI.
 
-    - **P3:** Partial, non-critical loss of Astronomer/Astronomer-owned Airflow functionality.
+    - **P3:** Medium impact, service is partiallly impaired.
 
         Examples:
 
@@ -52,7 +52,7 @@ The following are the best practices for submitting support requests in the Clou
         - There is an Airflow issue that has a code-based solution.
         - You received a log alert on Astronomer.
 
-    - **P4:** General questions, issues with code inside specific DAGs, and issues with Airflow that are not primarily owned by Astronomer.
+    - **P4:** Low impact, service fully usable.
 
         Examples:
 
