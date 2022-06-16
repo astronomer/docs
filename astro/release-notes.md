@@ -24,6 +24,11 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 To access the Support Request form in the Cloud UI, see [Submit a Support Request in the Cloud UI](astro-support.md#submit-a-support-request-in-the-cloud-ui).
 
+### Bug Fixes
+
+- Fixed a rare issue where some user emails would be associated with the wrong username.
+- Fixed an issue where you could not properly sort entries in the **People** tab by name.
+
 ## June 9, 2022
 
 ### Update Deployment Configurations with the Astro CLI
