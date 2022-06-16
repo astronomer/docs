@@ -15,7 +15,7 @@ To complete the installation process, you'll:
 - Activate your Astro Data Plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
 - Share information about your Google Cloud project with Astronomer.
 
-When you've completed the installaion process, Astronomer will create a Cluster within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
+When you've completed the installation process, Astronomer will create a Cluster within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
 For more information about managing Google Cloud projects, see [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
 
