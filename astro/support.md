@@ -29,11 +29,8 @@ The following are the best practices for submitting support requests in the Clou
 
         Examples:
 
-        - The Scheduler is not heartbeating, and restarting didn't fix the issue.
-        - All Celery workers are offline.
-        - Kubernetes pod executors are not starting.
-        - There are extended periods of `503` errors that are not solved by allocating more resources to the Webserver.
-        - There is an Astronomer outage, such as downtime in the Astronomer Docker Registry.
+        - Your tasks are not running and restarting them didn't fix the issue.
+        - Astronomer is experiencing an incident or downtime that is affecting your data pipelines in production.
 
     - **P2:** High impact. Ability to use Astro is severely impaired but does not affect critical pipelines in production.
 
@@ -76,7 +73,6 @@ The following are the best practices for submitting support requests in the Clou
 
 ## Submit a Support Request in the Cloud UI
 
-If you're using Astro version 5.0.4 or later, you can submit your support request in the Cloud UI.
 
 1. In the Cloud UI, click **Help** > **Submit Support Request**.
 
