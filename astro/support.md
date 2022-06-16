@@ -35,7 +35,7 @@ The following are the best practices for submitting support requests in the Clou
         - There are extended periods of `503` errors that are not solved by allocating more resources to the Webserver.
         - There is an Astronomer outage, such as downtime in the Astronomer Docker Registry.
 
-    - **P2:** High impact, service is severely impaired.
+    - **P2:** High impact. Ability to use Astro is severely impaired but does not affect critical pipelines in production.
 
         Examples:
 
