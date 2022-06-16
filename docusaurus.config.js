@@ -248,7 +248,7 @@ module.exports = {
        id: 'software',
        changefreq: 'weekly',
        priority: 0.3,
-       ignorePatterns: ['/software/0.28/**'],
+       ignorePatterns: ['/software/0.28/**','/software/0.27/**'],
        filename: 'sitemap.xml',
       },
     ]
