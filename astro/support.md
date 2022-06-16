@@ -63,7 +63,7 @@ The following are the best practices for submitting support requests in the Clou
 
     - What project/deployment does this question/issue apply to?
     - What did you already try?
-    - Have you made any recent changes to your Airflow deployment, code, or image?
+    - Have you made any recent changes to your Deployment or running DAGs?
 
 - Include logs or code snippets
 
