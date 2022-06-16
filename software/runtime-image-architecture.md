@@ -7,7 +7,7 @@ description: Reference documentation for Astro Runtime, a differentiated distrib
 
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and required by all Astronomer products. It is intended to provide organizations improved functionality, reliability, efficiency, and performance.
 
-If your organization is using Software version 0.29 or later, you can use Astro Runtime images in your Software Deployments. Astro Runtime images include the following features:
+If your organization is using Software version 0.29 or later, you can deploy Astro Runtime images. Astro Runtime includes the following features:
 
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules that is maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 - Airflow UI improvements. For example, showing the Deployment Docker image tag in the footer of all UI pages.
