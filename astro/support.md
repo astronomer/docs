@@ -36,7 +36,7 @@ The following are the best practices for submitting support requests in the Clou
 
         Examples:
 
-        - The Airflow Webserver is unavailable.
+        - The Airflow UI is unavailable.
         - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
         - Task logs are missing in the Airflow UI.
 
@@ -63,11 +63,11 @@ The following are the best practices for submitting support requests in the Clou
 
     - What project/deployment does this question/issue apply to?
     - What did you already try?
-    - Have you made any recent changes to your Airflow deployment, code, or image?
+    - Have you made any recent changes to your Deployment or running DAGs?
 
 - Include logs or code snippets
 
-    If you've already taken note of any task-level Airflow logs or Astronomer platform logs, don't hesitate to send them as a part of your original ticket.
+    If you've already taken note of task logs or Airflow component logs, send them as a part of your request.
 
     The more context you can give, the better we can help you.
 
