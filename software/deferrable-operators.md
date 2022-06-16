@@ -24,7 +24,7 @@ A **Trigger** is a small, asynchronous Python function that quickly and continuo
 
 The **Triggerer** is responsible for running Triggers and signaling tasks to resume when their conditions are met. Like the Scheduler, it is designed to be highly-available. If a machine running Triggers shuts down unexpectedly, Triggers can be recovered and moved to another machine also running a Triggerer.
 
-The following is the workflow for running a task using a deferrable operator:
+Tasks that are defined with a deferrable operator run according to the following process:
 
 - The task is picked up by a worker, which executes an initial piece of code that initializes the task. During this time, the task is in a "running" state and takes up a worker slot.
 - The task defines a Trigger and defers the function of checking on some condition to the Triggerer. Because all of the deferring work happens in the Triggerer, the task instance can now enter a "deferred" state. This frees the worker slot to take on other tasks.
