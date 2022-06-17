@@ -69,11 +69,15 @@ The more information you can provide about the issue you're experiencing, the qu
 
 If you've already taken note of task logs or Airflow component logs, send them as a part of your request.
 
-The more context you can give, the better we can help you.
+The more context you can provide, the sooner Astronomer Support can start resolving your issue.
 
 ## Submit a Support Request in the Cloud UI
 
 1. In the Cloud UI, click **Help** > **Submit Support Request**.
+
+    <div class="text--center">
+    <img src="/img/docs/support-request-location.png" alt="Submit Support Request menu location" />
+    </div>
 
 2. Complete the following fields:
 
@@ -88,7 +92,7 @@ The more context you can give, the better we can help you.
 
 3. Click **Submit**.
 
-When Astronomer Support start working on your issue, you'll receive email notifications. To check the status of a support request, sign in to the [Astronomer Support Portal](https://support.astronomer.io). 
+    You'll receive an email when your ticket is created and follow-up emails as Astronomer Support processes your request. To check the status of a support request, sign in to the [Astronomer Support Portal](https://support.astronomer.io). 
 
 ## Submit a Support Request on the Astronomer Support Portal
 
@@ -100,7 +104,7 @@ If you're an existing customer, sign in to the Astronomer Support Portal and cre
 
 ## Monitor Existing Support Requests
 
-After you've submitted your support request, sign in to the [Astronomer Support Portal](https://support.astronomer.io) to:
+If you've submitted your support request on the Astronomer Support Portal, sign in to the [Astronomer Support Portal](https://support.astronomer.io) to:
 
 - Review and comment on requests from your team.
 - Monitor the status of your requests.
