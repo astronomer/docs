@@ -509,7 +509,9 @@ To use Google Cloud Secret Manager as your Airflow secrets backend, you need:
 
 #### Step 1: Create an Airflow Variable or Connection in Google Cloud Secret Manager
 
-To start, add an Airflow variable or connection as a secret to Google Cloud Secret Manager. You can do so via the Cloud Console or the gcloud CLI. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value.
+To start, create an Airflow variable or connection in Google Cloud Secret Manager that you want to store as a secret. You can do so via the Cloud Console or the gcloud CLI.
+
+You will use this secret to test your backend's functionality in Step 3, so it can be either a real or test value.
 
 Secrets must be formatted such that:
 - Airflow variables are set as `airflow-variables-<variable-key>`.
