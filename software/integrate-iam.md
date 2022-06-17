@@ -11,7 +11,7 @@ IAM roles on [AWS](https://aws.amazon.com/iam/faqs/) and other platforms are oft
 
 ## Limitations
 
-The following are the known limitations when you integrate IAM roles:
+Consider the following when you integrate IAM roles:
 
 * All pods within your Airflow Deployment assume the IAM role. There is currently no way to use more than 1 IAM role per deployment.
 * If you’d like your IAM role to apply to more than 1 deployment, you must annotate each deployment.
