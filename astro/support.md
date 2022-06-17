@@ -86,7 +86,7 @@ The more context you can provide, the sooner Astronomer Support can start resolv
     - **Deployment**: Optional. Select the Deployment where the issue is occurring. This list is auto-populated when you submit a support request from a Workspace or a Deployment.
     - **Problem Start**: Optional. Select the date and time the issue started.
     - **Description**: Enter a thorough description of the issue. Provide as much detail as possible. 
-    - **Priority**: Select the severity of your issue. For severity level explanations, see [Best Practices for Submitting Support Requests](astro-support.md#best-practices-for-submitting-support-requests).
+    - **Priority**: Select the severity of your issue. For severity level explanations, see [Best Practices for Submitting Support Requests](astro-support.md#best-practices-for-support-request-submissions).
     - **Business Impact**: Optional. Describe how this issue is affecting your organization.
     - **CC Emails**: Optional. Enter the email address of a team member that you want to notify about this issue. Click **Add Additional Email** to add additional email addresses.
 
