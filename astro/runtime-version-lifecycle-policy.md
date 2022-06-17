@@ -96,4 +96,4 @@ If you have any questions or concerns, reach out to [Astronomer Support](https:/
 
 ## See Also
 
-- [Astro Runtime Architecture](/software/runtime-image-architecture.md)
+- [Astro Runtime Architecture](runtime-image-architecture.md)
