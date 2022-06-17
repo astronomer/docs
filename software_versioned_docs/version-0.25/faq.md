@@ -172,4 +172,4 @@ Minor bugfix/CVE patches are applied to individual releases for 18 months.
 
 ### How does patching work for this setup?
 
-Kubernetes and node upgrades are generally managed by the customer. Platform version upgrades are performed with Helm, assisted by Astronomer support team if required. See [Upgrade to a Stable or Patch Version](upgrade-astronomer-stable.md).
+Kubernetes and node upgrades are generally managed by the customer. Platform version upgrades are performed with Helm, assisted by Astronomer support team if required. See [Upgrade to a Stable or Patch Version](upgrade-astronomer.md).

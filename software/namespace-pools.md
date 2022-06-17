@@ -289,7 +289,7 @@ astronomer:
   commander:
     env:
       - name: "COMMANDER_MANUAL_NAMESPACE_NAMES"
-        value: tru
+        value: true
 ```
 
 ## Troubleshooting
