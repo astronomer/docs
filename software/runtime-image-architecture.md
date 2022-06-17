@@ -58,18 +58,18 @@ Soon, Astronomer will provide a new executor with intelligent worker packing, ta
 
 To make it easy to get started with Airflow, all Astro Runtime images have the following set of open source provider packages pre-installed:
 
-- Amazon (apache-airflow-providers-amazon)
-- Elasticsearch (apache-airflow-providers-elasticsearch)
-- Celery (apache-airflow-providers-celery)
-- Google (apache-airflow-providers-google)
-- Password (apache-airflow-password)
-- Cloud Native Computing Foundation (CNCF) Kubernetes (apache-airflow[cncf.kubernetes)
-- PostgreSQL (Postgres) (apache-airflow-providers-postgres)
-- Redis (apache-airflow-providers-redis)
-- StatsD (apache-airflow-statsd)
-- Virtualenv (apache-airflow-virtualenv)
-- OpenLineage with Airflow (openlineage-airflow)
-- Astronomer Providers (astronomer-providers)
+- Amazon (`apache-airflow-providers-amazon`)
+- Elasticsearch (`apache-airflow-providers-elasticsearch`)
+- Celery (`apache-airflow-providers-celery`)
+- Google (`apache-airflow-providers-google`)
+- Password (`apache-airflow-password`)
+- Cloud Native Computing Foundation (CNCF) Kubernetes (`apache-airflow-cncf.kubernetes`)
+- PostgreSQL (Postgres) (`apache-airflow-providers-postgres`)
+- Redis (`apache-airflow-providers-redis`)
+- StatsD (`apache-airflow-statsd`)
+- Virtualenv (`apache-airflow-virtualenv`)
+- OpenLineage with Airflow (`openlineage-airflow`)
+- Astronomer Providers (`astronomer-providers`)
 
 If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime Release Notes](/astro/runtime-release-notes.md).
 
