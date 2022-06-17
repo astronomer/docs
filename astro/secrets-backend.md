@@ -380,7 +380,8 @@ Secret names must correspond with the `connections_prefix` and `variables_prefix
     ```
     airflow/connections/<connection-id>
     ```
-    - The `<connection-id>` is how you will retrieve that connection's URI in a DAG. For example: 
+
+- The `<connection-id>` is how you will retrieve that connection's URI in a DAG. For example: 
     ```python
     conn = BaseHook.get_connection(conn_id="<connection-id>")
     ```
