@@ -110,6 +110,6 @@ If you've submitted your support request on the Astronomer Support Portal, sign 
 
 :::tip
 
-To add a teammate to an existing support request, cc them in a followup message within the email thread that was automatically generated when the ticket was created.
+To add a teammate to an existing support request, cc them when replying on the support ticket email thread.
 
 :::
