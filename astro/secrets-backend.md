@@ -364,7 +364,7 @@ To start, create an Airflow variable or connection in AWS Secrets Manager that y
 - If creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
 - The secret name is assigned after providing the plaintext value and clicking `Next`.
 
-Secret names must correspond with the `connections_prefix` and `variables_prefix` set below in step 2. For example:
+Secret names must correspond with the `connections_prefix` and `variables_prefix` set below in step 2. Specifically:
 
 - If you use `"variables_prefix": "airflow/variables"`, you must set Airflow variable names as:
     ```
