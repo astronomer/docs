@@ -85,7 +85,7 @@ docker run --rm {image} pip freeze | grep apache-airflow-provider
 
 ## Python Versioning
 
-Astro Runtime supports Python package version 3.9.
+Astro Runtime supports Python 3.9.
 
 ## Astro Runtime and Apache Airflow Parity
 
