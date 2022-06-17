@@ -366,14 +366,16 @@ To start, create an Airflow variable or connection in AWS Secrets Manager that y
 
 Secret names must correspond with the `connections_prefix` and `variables_prefix` set below in step 2. For example:
 
-- If using `"variables_prefix": "airflow/variables"`, Airflow variable names must be set as: 
+- If you use `"variables_prefix": "airflow/variables"`, you must set Airflow variable names as:
     ```
     airflow/variables/<variable-key>
     ```
-    - The `<variable-key>` is how you will retrieve that variable's value in a DAG. For example: 
+
+- The `<variable-key>` is how you will retrieve that variable's value in a DAG. For example: 
     ```python
     my_var = Variable.get("variable-key>")
     ```
+
 - If using `"connections_prefix": "airflow/connections"`, Airflow connections must be set as: 
     ```
     airflow/connections/<connection-id>
