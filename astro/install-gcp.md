@@ -96,6 +96,7 @@ Once you've activated your Data Plane, provide Astronomer with:
 If you don't specify your organization's preferred configurations, Astronomer will create a Cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP Resource Reference](resource-reference-gcp.md).
 
 :::info VPC Peering with Astronomer
+
 Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
 
 - VPC Name/ID and region for peering with Astronomer.
