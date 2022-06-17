@@ -13,7 +13,7 @@ If your organization is using Software version 0.29 or later, you can deploy Ast
 - Airflow UI improvements. For example, showing the Deployment Docker image tag in the footer of all UI pages.
 - Exclusive features such as new Airflow components and improvements to the DAG development experience.
 
-For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime Release Notes](/astro/runtime-release-notes).
+For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime Release Notes](https://docs.astronomer.io/astro/runtime-release-notes).
 
 If you're curious about the differences between Astro Runtime and Astronomer Certified, see [Differences Between Astronomer Runtime and Astronomer Certified](image-architecture.md#differences-between-astronomer-runtime-and-astronomer-certified).
 
