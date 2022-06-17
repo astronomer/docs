@@ -9,7 +9,7 @@ On Astronomer, IAM roles can be appended to the Webserver, Scheduler and Worker 
 
 IAM roles on [AWS](https://aws.amazon.com/iam/faqs/) and other platforms are often used to manage the level of access a specific user (or object, or group of users) has to some resource (or set of resources). The resource in question could be an S3 bucket or Secret Backend, both of which are commonly used in tandem with Airflow and Astronomer and can now be configured to be accessible only to a subset of Kubernetes pods within your wider Astronomer cluster.
 
-## Limitations
+## Implementation Considerations
 
 Consider the following when you integrate IAM roles:
 
