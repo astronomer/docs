@@ -112,7 +112,7 @@ To use Vault as a secrets backend, we recommend configuring a Vault AppRole with
 
 #### Step 2: Create an Airflow Variable or Connection in Vault
 
-To test whether your Vault server is set up properly, create a test Airflow variable or connection to store as a secret. You will use this secret to test your backend's functionality in Step 4, so it can be either a real or placeholder value.
+To start, create an Airflow variable or connection in Vault that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality in Step 4.
 
 To store an Airflow variable in Vault as a secret, run the following Vault CLI command with your own values:
 
