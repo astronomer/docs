@@ -1,7 +1,7 @@
 ---
 title: 'Submit a Support Request'
 navTitle: 'Astro Support'
-id: support
+id: astro-support
 description: Get Astro support when you need it.
 ---
 
