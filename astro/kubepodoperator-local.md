@@ -145,7 +145,7 @@ Testing DAGs with the [KubernetesPodOperator](kubernetespodoperator.md) locally 
 
 ### Step 2: Add a KubernetesPodOperator Task
 
-To instantiate the KubernetesPodOperator in a given DAG, update your DAG file to include the following code:
+To add the KubernetesPodOperator task in a DAG, update your DAG file to include the following code:
 
 ```python
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
