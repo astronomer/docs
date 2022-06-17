@@ -19,7 +19,7 @@ Integrating a secrets backend tool with Astro allows you to:
 - Recover in the case of an incident.
 - Automatically pull Airflow variables and connections that are already stored in your secrets backend when you create a new Deployment instead of having to set them manually in the Airflow UI.
 
-Astronomer Software supports integration with a variety of secrets backend tools including::
+Astro supports integration with a variety of secrets backend tools including::
 
 - Hashicorp Vault
 - AWS Systems Manager Parameter Store
