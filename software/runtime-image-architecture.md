@@ -15,7 +15,11 @@ If your organization is using Software version 0.29 or later, you can deploy Ast
 
 For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime Release Notes](/astro/runtime-release-notes).
 
-If you're curious about the differences between Astro Runtime and Astronomer Certified, see [Differences Between Astronomer Runtime and Astronomer Certified](image-architecture.md#differences-between-astronomer-runtime-and-astronomer-certified)
+If you're curious about the differences between Astro Runtime and Astronomer Certified, see [Differences Between Astronomer Runtime and Astronomer Certified](image-architecture.md#differences-between-astronomer-runtime-and-astronomer-certified).
+
+OpenLineage with Airflow standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. OpenLineage with Airflow is intended to make it easier for organizations to integrate their lineage tools with Apache Airflow. See [OpenLineage and Airflow](https://docs.astronomer.io/astro/data-lineage-concepts#openlineage-and-airflow).
+
+The `astronomer-providers` package is a collection of Apache Airflow OSS providers and modules. The package is installed on Astro Runtime by default and is maintained by Astronomer. The package includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Deferrable Operators](https://docs.astronomer.io/astro/deferrable-operators). To access the source code for this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ## Runtime Versioning
 
@@ -58,18 +62,18 @@ Soon, Astronomer will provide a new executor with intelligent worker packing, ta
 
 To make it easy to get started with Airflow, all Astro Runtime images have the following set of open source provider packages pre-installed:
 
-- Amazon (`apache-airflow-providers-amazon`)
-- Elasticsearch (`apache-airflow-providers-elasticsearch`)
-- Celery (`apache-airflow-providers-celery`)
-- Google (`apache-airflow-providers-google`)
-- Password (`apache-airflow-password`)
-- Cloud Native Computing Foundation (CNCF) Kubernetes (`apache-airflow-cncf.kubernetes`)
-- PostgreSQL (Postgres) (`apache-airflow-providers-postgres`)
-- Redis (`apache-airflow-providers-redis`)
-- StatsD (`apache-airflow-statsd`)
-- Virtualenv (`apache-airflow-virtualenv`)
-- OpenLineage with Airflow (`openlineage-airflow`)
-- Astronomer Providers (`astronomer-providers`)
+- Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
+- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
+- Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
+- Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
+- Password [`apache-airflow-password`](https://pypi.org/project/apache-airflow/)
+- Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-cncf.kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
+- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
+- Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
+- StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
+- Virtualenv [`apache-airflow-virtualenv`](https://pypi.org/project/virtualenv/)
+- OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
+- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
 
 If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime Release Notes](/astro/runtime-release-notes.md).
 
@@ -78,9 +82,6 @@ To determine the version of a provider package installed in your current Astro R
 ```
 docker run --rm {image} pip freeze | grep apache-airflow-provider
 ```
-OpenLineage with Airflow standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. OpenLineage with Airflow is intended to make it easier for organizations to integrate their lineage tools with Apache Airflow. See [OpenLineage and Airflow](https://docs.astronomer.io/astro/data-lineage-concepts#openlineage-and-airflow).
-
-The `astronomer-providers` package is a collection of Apache Airflow OSS providers and modules. The package is installed on Astro Runtime by default and is maintained by Astronomer. The package includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Deferrable Operators](https://docs.astronomer.io/astro/deferrable-operators). To access the source code for this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ## Python Versioning
 
