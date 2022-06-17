@@ -12,7 +12,7 @@ If you're an Astro user and haven't found the answer in Astronomer documentation
 
 If you're experiencing a more serious issue and need Astronomer expertise, you can use one of the following methods to contact Astronomer Support:
 
-- Submit a support request in the [Cloud UI](#submit-a-support-request-in-the-cloud-ui)
+- Submit a support request in the [Cloud UI](astro-support.md#submit-a-support-request-in-the-cloud-ui)
 - File a support request on the [Astronomer Support Portal](https://support.astronomer.io/hc/en-us)
 - Send an email to [support@astronomer.io](mailto:support@astronomer.io)
 - Call +1 (831) 777-2768
