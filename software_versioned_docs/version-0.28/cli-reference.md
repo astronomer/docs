@@ -24,13 +24,13 @@ The Astro CLI installation process requires [Docker](https://www.docker.com/) (v
 If you have Homebrew installed, run:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 To install a specific version of the Astro CLI, you'll have to specify `@major.minor.patch`. To install v0.16.1, for example, run:
 
 ```sh
-brew install astronomer/tap/astro@0.16.1
+brew install astro@0.16.1
 ```
 
 ### Install with cURL
@@ -706,7 +706,7 @@ Checks for the latest version of the Astro CLI, but does not perform the upgrade
 > **Note:** This command only checks whether or not a new version of the Astro CLI is available. To upgrade the Astro CLI to the latest version, run:
 >
 > ```sh
-> brew install astronomer/tap/astro
+> brew install astro
 > ```
 
 ## astro user create
