@@ -358,7 +358,7 @@ To use AWS Secrets Manager as your Airflow secrets backend, you need:
 
 #### Step 1: Create an Airflow Variable or Connection in AWS Secrets Manager
 
-To start, add an Airflow variable or connection as a secret to AWS Secrets Manager. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value.
+To start, create an Airflow variable or connection in AWS Secrets Manager that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality in Step 3.
     
 - When setting the secret type, choose `Other type of secret` and select the `Plaintext` option.
 - If creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
