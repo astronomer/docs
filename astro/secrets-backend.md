@@ -376,7 +376,7 @@ Secret names must correspond with the `connections_prefix` and `variables_prefix
     my_var = Variable.get("variable-key>")
     ```
 
-- If using `"connections_prefix": "airflow/connections"`, Airflow connections must be set as: 
+- If you use `"connections_prefix": "airflow/connections"`, you must set Airflow connections as: 
     ```
     airflow/connections/<connection-id>
     ```
