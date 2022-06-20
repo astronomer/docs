@@ -30,20 +30,6 @@ For more information about managing Google Cloud projects, see [GCP documentatio
 
 For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
 
-### VPC Peering Prerequisites (Optional)
-
-If any of your GCP resources are on a private network, you can access them using one of the following options:
-
-- [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect)
-- A [VPC Peering connection](https://cloud.google.com/vpc/docs/vpc-peering) between Astronomer's VPC and the VPCs for your broader network
-
-Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer Cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
-
-- **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/19`)
-- **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
-- **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
-- **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/19`)
-
 ## Step 1: Access Astro
 
 To get started with Astro, create an account at https://cloud.astronomer.io/.
@@ -108,9 +94,9 @@ Once you've activated your Data Plane, provide Astronomer with:
 
 If you don't specify your organization's preferred configurations, Astronomer creates a Cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP Resource Reference](resource-reference-gcp.md).
 
-:::info
+:::info VPC Peering with Astronomer
 
-If you need to VPC peer with Astronomer, additionally provide the following information to Astronomer:
+Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
 
 - VPC Name/ID and region for peering with Astronomer.
 - The IPs of your DNS servers.
