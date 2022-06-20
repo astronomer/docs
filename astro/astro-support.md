@@ -61,9 +61,9 @@ Examples:
 
 The more information you can provide about the issue you're experiencing, the quicker Astronomer Support can start the troubleshooting and resolution process. When submitting a support request, include the following information:
 
-- What project/deployment does this question/issue apply to?
-- What did you already try?
 - Have you made any recent changes to your Deployment or running DAGs?
+- What solutions have you already tried?
+- Is this a problem in more than one Deployment?
 
 ### Include logs or code snippets
 
