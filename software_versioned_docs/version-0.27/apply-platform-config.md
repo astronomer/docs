@@ -18,7 +18,7 @@ For example, you can:
 
 To configure these settings, follow the steps below.
 
-> **Note:** If you're interested in upgrading Astronomer to a new patch version of the platform, read [Upgrade to a Patch Version](upgrade-astronomer-stable.md).
+> **Note:** If you're interested in upgrading Astronomer to a new patch version of the platform, read [Upgrade to a Patch Version](upgrade-astronomer.md).
 
 ## Step 1: Open Your config.yaml File
 

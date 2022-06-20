@@ -491,7 +491,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 #### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<astro-runtime-image>` with your Astro Runtime image:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file. Replace `<ssh-key>` with your SSH private key file name and `<astro-runtime-image>` with your Astro Runtime image.
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
@@ -503,19 +503,23 @@ This example assumes that the name of each of your Python packages is identical 
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-5.0.0-base .
     ```
 
-2. Replace the contents of your Astro project's `Dockerfile` with the following:
+2. Update the following entry in the  `Dockerfile`:
 
    ```
-   FROM custom-<runtime-image>
+   FROM custom-astro-runtime:5.0.0
    ```
+  :::info
 
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0-base`, this line would be:
+    Astro runtime base images are built on AMD64 architecture. You must add the architecture name to the `FROM` statement when your computer and the image architecture are different. For example, this is the format for the Apple M1 architecture:
 
+    ```
+   FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
    ```
-   FROM custom-astro-runtime:5.0.0-base
-   ```
+  :::
 
-Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
+  Your Astro project can now utilize Python packages from your private GitHub repository. 
+   
+3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
 </TabItem>
 
@@ -591,7 +595,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
 #### Step 3: Build a Custom Docker Image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to substitute in the pip repository and associated credentials:
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file. Replace the pip repository and associated credential values with your own.
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-<airflow-image> .
@@ -602,21 +606,23 @@ Ensure that the name of the package on the private repository does not clash wit
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-astro-runtime-5.0.0 .
     ```
+2. Update the following entry in the  `Dockerfile`:
 
-
-2. Replace the contents of your Astro project's `Dockerfile` with the following:
-
-   ```
-   FROM custom-<airflow-image>
-   ```
-
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0`, this line would be:
-
-   ```
+  ```
    FROM custom-astro-runtime:5.0.0
    ```
+  :::info
 
-   Your Astro project can now utilize Python packages from your private PyPi index. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
+    Astro runtime base images are built on the `linux/amd64` architecture. You must add the architecture name to the `FROM` statement when your computer and the image architecture are different. For example, this is the format for the Apple M1 architecture:
+
+    ```
+   FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
+   ```
+  :::
+     
+    Your Astro project can now utilize Python packages from your private PyPi index. 
+   
+3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
 </TabItem>
 </Tabs>

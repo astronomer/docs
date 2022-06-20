@@ -57,6 +57,11 @@
           ]
         },
         {
+          "type": "doc",
+          "id": "upgrade-astronomer",
+          "label": "Upgrade Astronomer"
+        },
+        {
           "type": "category",
           "label": "Platform Setup",
           "items": [
@@ -73,10 +78,8 @@
           "label": "Platform Management",
           "items": [
             "apply-platform-config",
-            "upgrade-astronomer-stable",
             "houston-api",
-            "configure-platform-resources",
-            "upgrade-to-0-28"
+            "configure-platform-resources"
           ]
         },
         {
