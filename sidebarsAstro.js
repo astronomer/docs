@@ -64,7 +64,7 @@ module.exports = {
       items: [
         'deployment-metrics',
         'data-lineage',
-        'scheduler-logs',
+        'view-logs',
         'airflow-alerts',
       ],
     },
