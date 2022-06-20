@@ -81,7 +81,7 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
     - **Problem Statement**: Enter a description of the issue you are experiencing. Provide as much detail as possible.
     - **Workspace**: Optional. Select the Workspace where the issue is occurring. This list is auto-populated when you submit a support request from a Workspace or a Deployment.
-    - **Deployment**: Optional. Select the Deployment where the issue is occurring. This list is auto-populated when you submit a support request from a Workspace or a Deployment.
+    - **Deployment**: Optional. Select the Deployment where the issue is occurring. This list is auto-populated when you submit a support request from a Deployment. If you submit it from the Workspace view, you'll be prompted to select from the list of Deployments in that Workspace. 
     - **Problem Start**: Optional. Select the date and time the issue started.
     - **Description**: Enter a thorough description of the issue. Provide as much detail as possible. 
     - **Priority**: Select the severity of your issue based on how the issue is affecting your organization. For severity level explanations, see [Best Practices for Submitting Support Requests](astro-support.md#best-practices-for-support-request-submissions).
