@@ -13,7 +13,7 @@ import {siteVariables} from '@site/src/versions';
 
 This guide provides instructions for how to install the Astro CLI.
 
-The Astro CLI is the easiest way to run Apache Airflow on your machine. From the Astro CLI, you can run a local Apache Airflow environment with a dedicated Webserver, scheduler and Postgres Database. Once you create an Astronomer Software project, you can customize it (for example, add Python or OS-level packages or add plugins) and test it on your local machine.
+The Astro CLI is the easiest way to run Apache Airflow on your machine. From the Astro CLI, you can run a local Apache Airflow environment with a dedicated webserver, scheduler and Postgres database. Once you create an Astronomer Software project, you can customize it (for example, add Python or OS-level packages or add plugins) and test it on your local machine.
 
 You can also use the CLI to:
 
@@ -140,7 +140,7 @@ If you specify only a major version, this command installs the latest minor or p
 
 </Tabs>
 
-## Confirm the Install
+## Confirm the install
 
 To confirm the CLI was installed properly, run the following CLI command:
 

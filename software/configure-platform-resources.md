@@ -1,11 +1,11 @@
 ---
-sidebar_label: 'Configure Platform Resources'
-title: 'Astronomer Software Platform Resources'
+sidebar_label: 'Configure platform resources'
+title: 'Astronomer Software platform resources'
 id: configure-platform-resources
 description: A summary of how platform and Airflow deployment resources are created in the context of Astronomer Software.
 ---
 
-## Configuring Platform Resources
+## Configuring platform resources
 
 By default, Astronomer needs around 10 CPUs and 44Gi of memory:
 
@@ -32,7 +32,7 @@ By default, Astronomer needs around 10 CPUs and 44Gi of memory:
 | `kubeState`                      | 250m        | 512Mi       | 500m      | 1024Mi    | NA      |
 | Total                            | 10.7        | 23.5Gi      | 21.3      | 44Gi      | 460Gi   |
 
-### Changing Values
+### Changing values
 
 You can change the request and limit of any of the components above in your `config.yaml` or in `values.yaml` (`config.yaml` will overwrite `values.yaml`).
 
@@ -62,7 +62,7 @@ helm upgrade <platform-release-name> -f config.yaml --version=<platform-version>
 
 Be sure to specify the platform namespace, not an Airflow namespace.
 
-### Infrastructure Cost Estimates
+### Infrastructure cost estimates
 
 To ensure reliability with a starting set of Airflow Deployments, these estimates apply to our general recommendation for an Astronomer Software installation in a US East region.
 
@@ -95,7 +95,7 @@ For more information, reference the [GCP Pricing Calculator](https://cloud.googl
 
 For more information, reference the [Azure Price Calculator](https://azure.microsoft.com/en-us/pricing/calculator/?service=kubernetes-service).
 
-## Configuring Deployment Resources
+## Configuring Deployment resources
 
 Most of the key components that you will need to run Airflow can be controlled via the sliders in our UI. However, you may find that there are some discrepancies between the number in the UI and what exists in Kubernetes at any given moment. Below is a summary the less-visible resources that get provisioned with each Airflow deployment you create on Astronomer. All of these resources will exist within the namespace created for your Airflow deployment.
 

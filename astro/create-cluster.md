@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Create a Cluster'
-title: "Create a New Cluster on Astro"
+title: "Create a new Cluster on Astro"
 id: create-cluster
 description: Create a new Astro Cluster for your Organization.
 ---
@@ -23,7 +23,7 @@ This guide provides instructions for provisioning additional Clusters within you
 
 To create an Astro Cluster, you need to have:
 
-- An activated Data Plane.
+- An activated data plane.
 - Permissions to configure IAM in the dedicated account for Astro on your cloud.
 
 <Tabs
@@ -34,7 +34,7 @@ To create an Astro Cluster, you need to have:
     ]}>
 <TabItem value="aws">
 
-#### Step 1: Submit a Request to Astronomer
+#### Step 1: Submit a request to Astronomer
 
 To create a new Astro Cluster on AWS for your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, provide our team with the following information:
 
@@ -48,7 +48,7 @@ If not specified, Astronomer will create a Cluster with two `m5.xlarge` nodes an
 
 From there, your Astronomer representative will provide you with a unique `External ID` for each new Cluster. Make note of this value for the next step.
 
-#### Step 2: Edit Your AWS Trust Policy
+#### Step 2: Edit your AWS trust policy
 
 In the AWS IAM console, [edit the `astronomer-remote-management` trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) to include new trust policies and ensure that Astronomer has permission to manage your new Cluster.
 
@@ -79,7 +79,7 @@ To do this, add the External ID that corresponds to your new Cluster to the exis
 
 Once you've modified your trust policy, click **Update Trust Policy** in the AWS Console to apply the new trust relationship.
 
-#### Additional Setup for AWS Regions that are Disabled by Default
+#### Additional setup for AWS regions that are disabled by default
 
 Some AWS regions that Astronomer supports are [disabled by default on AWS](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable). These regions are:
 
@@ -150,7 +150,7 @@ A notification is sent from Astronomer when your Cluster is created. After your 
 
 <TabItem value="gcp">
 
-#### Step 1: Submit a Request to Astronomer
+#### Step 1: Submit a request to Astronomer
 
 To create a new Astro Cluster on GCP for your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, provide our team with the following information:
 

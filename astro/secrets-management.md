@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Secrets Management'
-title: "Secrets Management"
+sidebar_label: 'Secrets management'
+title: "Secrets management"
 id: secrets-management
 description: Learn how Astronomer secures your sensitive information and supports secrets management integration
 ---

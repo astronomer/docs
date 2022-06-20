@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Get Started',
+      label: 'Get started',
       items: [
         'create-project',
         'create-deployment',
@@ -128,7 +128,7 @@ module.exports = {
         'data-plane-activation',
         {
           type: 'category',
-          label: 'Data Lineage',
+          label: 'Data lineage',
           items: [
             'data-lineage-support-and-compatibility',
             'data-lineage-concepts',],
@@ -156,7 +156,7 @@ module.exports = {
       },
       {
         type: 'doc',
-        label: 'Get Started',
+        label: 'Get started',
         id: 'cli/get-started'
       },
     {

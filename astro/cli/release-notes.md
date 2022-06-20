@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Release Notes'
-title: 'Astro CLI Release Notes'
+sidebar_label: 'Release notes'
+title: 'Astro CLI release notes'
 id: release-notes
 description: Release notes for the Astro CLI.
 ---
@@ -15,7 +15,7 @@ If you have any questions or a bug to report, reach out to [Astronomer Support](
 
 Release date: June 13, 2022
 
-### Deployment API Keys Now Work with Deployment Commands
+### Deployment API keys Now Work with Deployment Commands
 
 You can now run the following commands with a Deployment API key:
 
@@ -26,9 +26,9 @@ You can now run the following commands with a Deployment API key:
 - `astro deployment delete`
 - `astro deployment variable list`
 - `astro deployment variable create`
-- `astro deployment variable update` 
+- `astro deployment variable update`
 
-Previously, you could run only the `astro deploy` command with a Deployment API key. For more information on API keys, see [Manage Deployment API Keys](api-keys.md).
+Previously, you could run only the `astro deploy` command with a Deployment API key. For more information on API keys, see [Manage Deployment API keys](api-keys.md).
 
 ### Easier Way to Determine Deployment ID on Deployment Commands
 
@@ -43,9 +43,9 @@ The Astro CLI now follows a new process to determine which Deployment to run a c
 
 These changes make it easier to run and automate Deployment-level commands with the Astro CLI. Most notably, it means that you no longer need to specify a Deployment ID in cases where it can be automatically implied by our system.
 
-If your CI/CD pipelines currently define one or more Deployment IDs, you may remove those IDs and their corresponding environment variables as they are no longer required. For up-to-date CI/CD templates, see [Automate Code Deploys with CI/CD](ci-cd.md).
+If your CI/CD pipelines currently define one or more Deployment IDs, you may remove those IDs and their corresponding environment variables as they are no longer required. For up-to-date CI/CD templates, see [Automate code deploys with CI/CD](ci-cd.md).
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue where only Workspace Admins could create Deployments
 
@@ -53,7 +53,7 @@ If your CI/CD pipelines currently define one or more Deployment IDs, you may rem
 
 Release date: June 6, 2022
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue where `astro deploy`, `astro dev parse`, and `astro dev pytest` failed for some users
 
@@ -109,7 +109,7 @@ This command is primarily for users who need to work in both Astro and Astronome
 
 For more information about these commands, see the [CLI Command Reference ](cli/astro-context-switch.md).
 
-### Additional Improvements
+### Additional improvements
 
 - Astro CLI documentation has been refactored. You can now find all information about the CLI, including installation steps and the command reference, under the [Astro CLI tab](cli/overview.md).
 - The nonfunctional `--update` flag has been removed from `astro deployment variable create`. To update existing environment variables for a given Deployment, use `astro deployment variable update` instead.
@@ -124,16 +124,16 @@ A new `astro deployment variable update` command allows you to more easily updat
 
 This command replaces the `—update` flag that was previously released with the `astro deployment variable create` command. For more information, see the [Astro CLI Command Reference](cli/astro-deployment-variable-create.md).
 
-### Additional Improvements
+### Additional improvements
 
 - When you run `astro workspace switch`, you can now specify a `<workspace-id>` as part of the command and avoid the prompt to manually select a Workspace
 - You now need to provide an email address only the first time you run `astro login`. After you run that command once successfully, the Astro CLI will cache your email address in your `config.yaml` file and not prompt you to enter it again
 - The `astro deploy` and `astro dev start` commands will now inform you if there is a new version of Astro Runtime available
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue were the `astro deployment variable create —load` command would fail if the specified `.env` file had a comment (e.g. `#  <comment>`) in it
-- Fixed an issue were Deployment API Keys would not work locally for some users
+- Fixed an issue were Deployment API keys would not work locally for some users
 
 ## v1.4.0 (`astrocloud`)
 
@@ -151,7 +151,7 @@ You can now list existing environment variables for a given Deployment and save 
 
 For more information about this command and its options, see the [Astro CLI Command Reference](cli/astro-deployment-variable-list.md).
 
-### Additional Improvements
+### Additional improvements
 
 - You can now specify a custom image name in your Astro project's `Dockerfile` as long as the image is based on an existing Astro Runtime image
 
@@ -159,7 +159,7 @@ For more information about this command and its options, see the [Astro CLI Comm
 
 Release date: April 11, 2022
 
-### Additional Improvements
+### Additional improvements
 
 - Improved the performance of `astro dev start`
 - When you successfully push code to a Deployment via `astro deploy`, the CLI now provides URLs for accessing the Deployment's Cloud UI and Airflow UI pages.
@@ -168,13 +168,13 @@ Release date: April 11, 2022
 
 Release date: March 31, 2022
 
-### Additional Improvements
+### Additional improvements
 
 - The `astro dev start` command should now be ~30 seconds faster
 - When `astro dev parse` results in an error, the error messages now specify which DAGs they apply to
 - If your DAGs don't pass the basic unit test that's included in your Astro project (`test_dag_integrity.py` ), running them with `astro dev pytest` will now provide more information about which part of your code caused an error
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue where running `astro dev parse/pytest` would occasionally result in an "orphaned containers" warning
 - Fixed an issue where `astro dev parse/pytest` would crash when parsing projects with a large number of DAGs
@@ -194,12 +194,12 @@ Astro CLI 1.3.2 is a direct patch replacement for 1.3.1, which is no longer avai
 
 To better integrate with Astro's identity-based login flow, the CLI now prompts you for your login email after you run `astro login`. Based on your email, the CLI assumes your Astro Organization and automatically brings you to your Organization's login flow via web browser.
 
-### Additional Improvements
+### Additional improvements
 
 - `astro deploy` now builds and tests only one image per deploy. This should result in improved deployment times in CI/CD pipelines which use this command.
 - The `test` directory generated by `astro dev init` now includes more example pytests.
 
-### Bug Fixes
+### Bug fixes
 
 - Partially fixed `dev parse` permission errors on WSL. To fully fix this issue for an Astro project, you must delete the project's existing `.astro` directory and rerun `astro dev init`.
 - Fixed an issue where running `astro dev parse/pytest` while a local Airflow environment was running would crash the Airflow environment. This issue was introduced in Astro CLI 1.3.1, which is no longer available for download.
@@ -246,7 +246,7 @@ This is the same set of configurations that you can modify with the **Edit Confi
 
 Release date: February 25, 2022
 
-### Deploy to Astro with Deployment API Keys for Simpler CI/CD
+### Deploy to Astro with Deployment API keys for Simpler CI/CD
 
 You can now use [Deployment API keys](api-keys.md) to run `astro deploy` either from the CLI directly or via a CI/CD script. This update simplifies deploying code to Astro via CI/CD.
 
@@ -299,13 +299,13 @@ Release date: February 17, 2022
 
 For users making quick and continuous changes to an Astro project locally, the Astro CLI now supports a new `astro dev restart` command. This command makes local testing significantly easier and is equivalent to running `astro dev stop` followed by `astro dev start`.
 
-### Support for the Triggerer in Local Airflow Environments
+### Support for the triggerer in Local Airflow Environments
 
-The Astro CLI now supports the Apache Airflow [Triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](deferrable-operators.md) locally before pushing them to a Deployment on Astronomer. Additionally, Triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
+The Astro CLI now supports the Apache Airflow [Triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](deferrable-operators.md) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
 
-The Triggerer will only be created in local environments running Astro Runtime 4.0.0+.
+The triggerer will only be created in local environments running Astro Runtime 4.0.0+.
 
-### Additional Improvements
+### Additional improvements
 
 - Postgres has been upgraded from 12.2 to [12.6](https://www.postgresql.org/docs/12/release-12-6.html) for local Airflow environments.
 
@@ -340,7 +340,7 @@ Astro CLI v1.0.0 includes several improvements to the local development experien
 - You can now run `astrocloud dev start` with [Docker Buildkit](https://docs.docker.com/develop/develop-images/build_enhancements/) enabled. This resolves a [common issue](https://forum.astronomer.io/t/buildkit-not-supported-by-daemon-error-command-docker-build-t-airflow-astro-bcb837-airflow-latest-failed-failed-to-execute-cmd-exit-status-1/857) where users with Docker Buildkit enabled could not run this command.
 - After running `astrocloud dev start`, the CLI no shows you the status of the webserver container as it spins up on your local machine. This makes it easier to know whether the Airflow UI is unavailable because the Airflow webserver container is still spinning up.
 
-### Additional Improvements
+### Additional improvements
 
 - `astrocloud deploy` now shows a list of your Deployments in the order by which they were created instead of at random.
 
@@ -358,9 +358,9 @@ The file names are:
 
 The basic DAG showcases a simple ETL data pipeline and the advanced DAG showcases a series of more powerful Airflow features, including the TaskFlow API, jinja templating, branching and more. Both DAGs can be deleted at any time.
 
-### Bug Fixes
+### Bug fixes
 
-Fixed a broken documentation link and outdated description in the `airflow_settings.yaml` file, which you can use to programmatically set Airflow Connections, Variables, and Pools locally.
+Fixed a broken documentation link and outdated description in the `airflow_settings.yaml` file, which you can use to programmatically set Airflow connections, Variables, and Pools locally.
 
 ## v1.0.3 (`./astro`)
 

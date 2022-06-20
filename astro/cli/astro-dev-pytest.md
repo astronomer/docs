@@ -9,7 +9,7 @@ description: Reference documentation for astro dev pytest.
 
 Run unit tests for your data pipelines on Astro with `pytest`, a testing framework for Python. When you run this command, the Astro CLI creates a local Python environment that includes your DAG code, dependencies, and Astro Runtime Docker image. The CLI then runs any pytests in the `tests` directory of your Astro project and shows you the results of those tests in your terminal.
 
-For more information on this functionality, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md).
+For more information on this functionality, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 
 :::info
 

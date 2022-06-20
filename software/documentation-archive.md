@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Documentation Archive'
-title: 'Astronomer Software Documentation Archive'
+sidebar_label: 'Documentation archive'
+title: 'Astronomer Software documentation archive'
 id: documentation-archive
 description: Links to all current and previous versions of Astronomer Software documentation.
 ---
@@ -15,7 +15,7 @@ While only maintained documentation sets appear under the Astronomer Software do
 
 For more information about Software version support, see [Release and Lifecycle Policy](release-lifecycle-policy.md).
 
-## Documentation Maintenance Policy
+## Documentation maintenance policy
 
 Documentation for the latest version of Astronomer Software is regularly updated to reflect the latest improvements to the product. This includes fixes, enhancements to existing content, and quality-of-life improvements made by the Astronomer team and community.
 
@@ -25,22 +25,22 @@ Documentation sets for unmaintained versions of Astronomer Software no longer re
 
 If you notice an error or misleading information in any part of Astronomer's documentation, [create a GitHub issue](https://github.com/astronomer/docs/issues) in this repo or [reach out to Astronomer Support](https://support.astronomer.io).
 
-## Documentation Versions
+## Documentation versions
 
 This section contains links to documentation sets that correspond to all previous versions of Astronomer Software.
 
-### Latest Version
+### Latest version
 
 - [v0.29](https://docs.astronomer.io/software/overview)
 
-### Maintained Versions
+### Maintained versions
 
 - [v0.28](https://docs.astronomer.io/software/0.28/overview)
 - [v0.27](https://docs.astronomer.io/software/0.27/overview)
 - [v0.26](https://docs.astronomer.io/software/0.26/overview)
 - [v0.25](https://docs.astronomer.io/software/0.25/overview)
 
-### Unmaintained Versions
+### Unmaintained versions
 
 - [v0.23](https://docs.astronomer.io/software/0.23/overview)
 - [v0.16](https://docs.astronomer.io/software/0.16/overview)

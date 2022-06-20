@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Get Started',
+      label: 'Get started',
       items: [
       'install-cli',
       'create-project',

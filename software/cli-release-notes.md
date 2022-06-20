@@ -15,7 +15,7 @@ If you have any questions or a bug to report, reach out to us via [Astronomer Su
 
 Release date: June 1, 2022
 
-### Create New Projects With Astro Runtime Images
+### Create New Projects With Astro Runtime images
 
 `astro dev init` now initializes Astro projects with the latest Astro Runtime image by default. To use a specific Runtime version, run:
 
@@ -59,6 +59,6 @@ astro deployment runtime upgrade --deployment-id=<deployment-id> --desired-runti
 
 For more information, see the [CLI Reference Guide](cli-reference.md#astro-deployment-runtime-upgrade).
 
-### Additional Improvements
+### Additional improvements
 
 - When running `astro dev start`, the containers running Airflow components now include your project directory in their names.

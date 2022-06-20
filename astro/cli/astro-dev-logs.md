@@ -7,7 +7,7 @@ description: Reference documentation for astro dev logs.
 
 ## Description
 
-Show Webserver, Scheduler, and Celery worker logs from your local Airflow environment.
+Show webserver, scheduler, and Celery worker logs from your local Airflow environment.
 
 ## Usage
 
@@ -22,7 +22,7 @@ astro dev logs
 | `-f`,`--follow` | Continue streaming most recent log output to your terminal. | ``|
 | `-s`,`--scheduler`            | Show only scheduler logs                                                                                  | ``                  |
 | `-w`,`--webserver`            | Show only webserver logs                                                                                  | ``                 |
-| `-t`,`--triggerer`            | Show only Triggerer logs                                                                                  | ``                 |
+| `-t`,`--triggerer`            | Show only triggerer logs                                                                                  | ``                 |
 
 
 ## Examples

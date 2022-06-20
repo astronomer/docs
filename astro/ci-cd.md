@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'CI/CD'
-title: 'Automate Code Deploys with CI/CD'
+title: 'Automate code deploys with CI/CD'
 id: ci-cd
 description: Create a CI/CD pipeline that triggers a deploy to Astro based on changes to your Airflow DAGs.
 ---
@@ -27,7 +27,7 @@ To set up CI/CD for a given Deployment, you need:
 - A CI/CD management tool, such as [GitHub Actions](https://docs.github.com/en/actions).
 - An [Astro project](create-project.md) that is hosted in a place that your CI/CD tool can access.
 
-## CI/CD Templates
+## CI/CD templates
 
 The following section provides basic templates for configuring individual CI pipelines using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline, but we recommend reconfiguring the templates to work with your own directory structures, workflows, and best practices. More templates are coming soon.
 
@@ -78,7 +78,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
-    name: Astronomer CI - Deploy Code
+    name: Astronomer CI - Deploy code
 
     on:
       push:
@@ -126,7 +126,7 @@ This setup assumes the following prerequisites:
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
-    name: Astronomer CI - Deploy Code (Multiple Branches)
+    name: Astronomer CI - Deploy code (Multiple Branches)
 
     on:
       push:

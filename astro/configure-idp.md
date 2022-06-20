@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Set Up an Identity Provider"
-title: "Set Up an Identity Provider for Astro"
+sidebar_label: "Set up an identity provider"
+title: "Set up an identity provider (IDP) for Astro"
 id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
 ---
@@ -32,7 +32,7 @@ Astro only supports Service Provider (SP)-initiated SSO. Users are required to l
 
 :::
 
-## Configure Your Identity Provider
+## Configure your identity provider
 
 <Tabs
     defaultValue="Okta"

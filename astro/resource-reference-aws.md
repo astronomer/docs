@@ -1,6 +1,6 @@
 ---
-sidebar_label: "AWS Resource Reference"
-title: "Resources Required for Astro on AWS"
+sidebar_label: "AWS Resource reference"
+title: "Resources required for Astro on AWS"
 id: resource-reference-aws
 description: Reference of all supported configurations for new Clusters on Astro in AWS.
 ---
@@ -15,10 +15,10 @@ Read the following document for a reference of our default resources as well as 
 
 | Resource                                  | Description                                                                                                                   | Quantity / Default Size |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
-| [EKS Cluster](https://aws.amazon.com/eks) | An EKS cluster is required to run the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks. | 1x                      |
-| [EC2 Instances](https://aws.amazon.com/ec2/instance-types/) | EC2 instances (nodes) power the system and Airflow components (Webserver, Scheduler, Workers). EC2 instances auto-scale for additional Airflow Deployments. | 2x m5.xlarge |
-| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/) | The RDS instance is the primary database of the Astro Data Plane. It hosts a metadata database for each Airflow Deployment hosted on the EKS cluster. | 1x db.r5.large |
-| [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) | Elastic IPs are required for connectivity with the Control Plane, and other public services. | 2x |
+| [EKS Cluster](https://aws.amazon.com/eks) | An EKS cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks. | 1x                      |
+| [EC2 Instances](https://aws.amazon.com/ec2/instance-types/) | EC2 instances (nodes) power the system and Airflow components (webserver, scheduler, workers). EC2 instances auto-scale for additional Airflow Deployments. | 2x m5.xlarge |
+| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/) | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Airflow Deployment hosted on the EKS cluster. | 1x db.r5.large |
+| [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) | Elastic IPs are required for connectivity with the control plane, and other public services. | 2x |
 | [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes. | 2x /26 (public) and 1x /20 + 1x /21 (private) |
 | [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html) | Required for connectivity with the control plane and other public services. | 1x |
 | [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html) | NAT Gateways translate outbound traffic from private subnets to public subnets. | 2x |
@@ -226,7 +226,7 @@ The maximum supported worker size on Astro is currently 400 AU, which means that
 
 The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
 
-For more information about the Scheduler, see [Configure a Deployment](configure-deployment-resources.md#scheduler-resources).
+For more information about the scheduler, see [Configure a Deployment](configure-deployment-resources.md#scheduler-resources).
 
 :::
 

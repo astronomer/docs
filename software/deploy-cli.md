@@ -73,7 +73,7 @@ This command returns a list of Airflow Deployments available in your Workspace a
 
 ## Step 4: Validate Your Changes
 
-If it's your first time deploying, expect to wait a few minutes for the Docker Image to build.
+If it's your first time deploying, expect to wait a few minutes for the Docker image to build.
 
 To confirm that your deploy was successful, navigate to your Deployment in the Software UI and click **Open Airflow** to see your changes in the Airflow UI.
 
@@ -81,11 +81,11 @@ To confirm that your deploy was successful, navigate to your Deployment in the S
 
 Everything in the project directory where you ran `$ astro dev init` is bundled into a Docker image and deployed to your Airflow Deployment on your Astronomer platform. This includes system-level dependencies, Python-level dependencies, DAGs, and your `Dockerfile`.
 
-Astronomer exclusively deploys the code in your project and does not push any of the metadata associated with your local Airflow environment, including task history and Airflow Connections or variables set locally in the Airflow UI.
+Astronomer exclusively deploys the code in your project and does not push any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables set locally in the Airflow UI.
 
 For more information about what gets built into your image, read [Customize your Image](customize-image.md).
 
-## Next Steps: Organize Astronomer
+## Next steps: Organize Astronomer
 
 While the specific needs of your organization might require a slightly different structure than what's described here, these are some general best practices to consider when working with Astronomer:
 

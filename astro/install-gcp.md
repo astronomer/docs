@@ -62,7 +62,7 @@ After completing your initial installation, we recommend [setting up an identity
 
 :::
 
-## Step 2: Activate the Data Plane
+## Step 2: Activate the data plane
 
 The data plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
@@ -95,9 +95,9 @@ To activate the data plane on your GCP project:
     gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
     ```
 
-## Step 3: Provide Setup Information to Astronomer
+## Step 3: Provide setup information to Astronomer
 
-Once you've activated your Data Plane, provide Astronomer with:
+Once you've activated your data plane, provide Astronomer with:
 
 - Your preferred Astro Cluster name.
 - The GCP region that you want to host your Cluster in.
@@ -124,7 +124,7 @@ Once VPC peered with Astronomer, configure and validate the following to ensure 
 
 :::
 
-## Step 4: Let Astronomer Complete the Install
+## Step 4: Let Astronomer complete the install
 
 Once you've provided Astronomer with the information for your setup, Astronomer finishes creating your first Cluster on GCP.
 
@@ -138,12 +138,12 @@ When Astronomer confirms that your Astro Cluster has been created, you are ready
   <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
 </div>
 
-## Next Steps
+## Next steps
 
 Now that you have an Astro Cluster up and running, take a look at the docs below for information on how to start working in Astro:
 
-- [Set Up an Identity Provider](configure-idp.md)
+- [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/get-started.md)
 - [Configure Deployments](configure-deployment-resources.md)
-- [Deploy Code](deploy-code.md)
+- [Deploy code](deploy-code.md)
 - [Add Users](add-user.md)

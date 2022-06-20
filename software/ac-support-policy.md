@@ -1,6 +1,6 @@
 ---
-title: "Astronomer Certified Versioning and Support"
-sidebar_label: "Versioning and Support Policy"
+title: "Astronomer Certified versioning and support"
+sidebar_label: "Versioning and support policy"
 id: ac-support-policy
 description: Versioning and lifecycle policy for Astronomer Certified, our Apache Airflow offering for Astronomer Software.
 ---
@@ -78,7 +78,7 @@ Earlier versions of Astronomer Certified might use different formatting in their
 
 For the smoothest, out-of-the-box Airflow experience, we strongly recommend and default to `buster-onbuild` images in your project's `Dockerfile`. These images incorporate Docker ONBUILD commands to copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component.
 
-For complex use cases that require customizing AC base image, read [Customize your Airflow Image on Astronomer](customize-image.md).
+For complex use cases that require customizing AC base image, read [Customize your Airflow image on Astronomer](customize-image.md).
 
 ## Backport Policy for Bug and Security Fixes
 

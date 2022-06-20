@@ -13,7 +13,7 @@ To withstand a full region outage and achieve near real-time recovery, Astronome
 
 To simplify the responsibility of maintaining two Clusters, Astronomer plans to invest in Cluster and Deployment syncing strategies in 2022. If you're interested in this functionality, please reach out and share feedback with [Astronomer Support](https://support.astronomer.io/).
 
-## Full Region Outages
+## Full region outages
 
 In the case of a full region outage, Astronomer can re-provision your Cluster(s) and all Deployments in an alternate region. The re-provisioning includes:
 
@@ -22,7 +22,7 @@ In the case of a full region outage, Astronomer can re-provision your Cluster(s)
 - VPC Peering. Customers will need to re-accept peering request.
 - Deployments and data pipelines.
 - Environment Variables.
-- API Keys.
+- API keys.
 - Alert Emails.
 
 Astronomer will not be able to restore:
@@ -33,6 +33,6 @@ Astronomer will not be able to restore:
 - XComs.
 - Airflow configurations (Variables, Connections, Pools) configured via the Airflow UI. Any configurations set via your deployed Astro project image can still be recovered.
 
-Organization settings, Workspace settings, and user management configured in Astro's control plane will be unaffected by a region failure in the Data Plane.
+Organization settings, Workspace settings, and user management configured in Astro's control plane will be unaffected by a region failure in the data plane.
 
 Astronomer plans to introduce self-serve and automation enhancements as part of our 2022 roadmap. Please submit feedback to [Astronomer Support](https://support.astronomer.io/) if you are interested in joining the conversation.

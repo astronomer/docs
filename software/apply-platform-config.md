@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Apply a Config Change'
-title: 'Apply a Software Platform Configuration Change'
+sidebar_label: 'Apply a config change'
+title: 'Apply a Software platform configuration change'
 id: apply-platform-config
 description: Apply platform-wide configuration changes to Astronomer via Helm.
 ---
@@ -20,7 +20,7 @@ To configure these settings, follow the steps below.
 
 > **Note:** If you're interested in upgrading Astronomer to a new patch version of the platform, read [Upgrade to a Patch Version](upgrade-astronomer.md).
 
-## Step 1: Open Your config.yaml File
+## Step 1: Open your config.yaml file
 
 This file was created when you installed Astronomer using one of the following guides:
 
@@ -28,7 +28,7 @@ This file was created when you installed Astronomer using one of the following g
 * [GCP GKE Installation Guide](install-gcp-standard.md#step-7-configure-your-helm-chart)
 * [Azure AKS Installation Guide](install-azure-standard.md#step-7-configure-your-helm-chart)
 
-## Step 2: Update Key-Value Pairs
+## Step 2: Update key-value pairs
 
 <!--- Version-specific -->
 
@@ -36,7 +36,7 @@ To update any of your existing settings, modify them directly in your `config.ya
 
 When you have finished updating the key-value pairs, ensure that they have the same relative order and indentation as they do in the default configuration file. If they don't, your changes might not be properly applied.
 
-## Step 3: Push Changes to Astronomer
+## Step 3: Push changes to Astronomer
 
 1. Identify your platform namespace and release name. Your platform release name can be found in your list of active namespaces. To show this list, run:
 ```sh

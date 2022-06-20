@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Global Environment Variables'
-title: 'Global Environment Variables'
+sidebar_label: 'Global environment variables'
+title: 'Global environment variables'
 id: platform-variables
 description: A list of environment variables that are set globally on Astro and cannot be modified.
 ---
@@ -9,7 +9,7 @@ description: A list of environment variables that are set globally on Astro and 
 
 As part of the Astro architecture, certain environment variables have preset values that cannot be overridden by your organization. This reference page contains information about each global environment variable set by Astronomer.
 
-## Global Environment Variables
+## Global environment variables
 
 |Environment Variable | Description | Value |
 |---------------------|-------|------------|
@@ -26,7 +26,7 @@ As part of the Astro architecture, certain environment variables have preset val
 | `AIRFLOW__CORE__FERNET_KEY` |The secret key for saving connection passwords in the metadata DB | `fernetKeySecret` |
 | `AIRFLOW__CORE__EXECUTOR`  | The executor class that Airflow uses. Astro exclusively supports the Celery executor | `executor` |
 | `AIRFLOW_HOME`  | The home directory for an Astro project | `usr/local/airflow` |
-| `AIRFLOW__KUBERNETES__NAMESPACE`| The Kubernetes namespace where Airflow Workers are created | `namespace` |
+| `AIRFLOW__KUBERNETES__NAMESPACE`| The Kubernetes namespace where Airflow workers are created | `namespace` |
 | `AIRFLOW__CORE__HOSTNAME_CALLABLE` | Path to a callable, which resolves to the hostname | `airflow.utils.net.get_host_ip_address`|
 | `AIRFLOW__SCHEDULER__STATSD_ON` | Determines whether Statsd is on | `True` |
 | `AIRFLOW__SCHEDULER__STATSD_HOST` |The hostname for Statsd | `statsd.Hostname`|

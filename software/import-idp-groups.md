@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Import IDP Groups'
-title: 'Import Identity Provider Groups into Astronomer Software'
+sidebar_label: 'Import IDP groups'
+title: 'Import identity provider groups into Astronomer Software'
 id: import-idp-groups
 description: Import your identity provider's organization structure into Astronomer Software.
 ---
@@ -37,13 +37,13 @@ For example, consider a user who has been a Workspace Editor in `Production Work
 
 To complete this setup, you need:
 
-- A configured third party identity provider as described in [Integrate an Auth System](integrate-auth-system.md).
+- A configured third party identity provider as described in [Integrate an auth system](integrate-auth-system.md).
 - System Admin permissions for configuring the feature.
 - Workspace or Deployment Admin permissions for managing Teams.
 - An [integrated IDP](integrate-auth-system.md).
 - An IDP group.
 
-## Step 1: Enable Astronomer Teams
+## Step 1: Enable Astronomer teams
 
 In your `config.yaml` file, set the following value.
 
@@ -56,7 +56,7 @@ auth:
 
 Save this configuration and push it to your platform as described in [Apply a Platform Config Change](apply-platform-config.md).
 
-## Step 2: Add a Group Claim to Your IDP Group
+## Step 2: Add a group claim to your IDP group
 
 To add your IDP group to Astronomer as a Team, Astronomer needs to be able to recognize the IDP group through a group claim and assign members from the group through tokens.
 

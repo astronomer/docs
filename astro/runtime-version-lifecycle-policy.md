@@ -1,6 +1,6 @@
 ---
-title: "Astro Runtime Versioning and Lifecycle Policy"
-sidebar_label: "Versioning and Lifecycle Policy"
+title: "Astro Runtime versioning and lifecycle policy"
+sidebar_label: "versioning and lifecycle policy"
 id: runtime-version-lifecycle-policy
 description: Learn how Astronomer releases and maintains Astro Runtime, the core component that powers a differentiated Apache Airflow experience on Astro.
 ---
@@ -19,7 +19,7 @@ This document provides information on the following:
 
 For guidelines on how to upgrade to a new version of Runtime, read [Upgrade Runtime](upgrade-runtime.md). For a summary of each version's changes, read [Runtime Release Notes](runtime-release-notes.md).
 
-## Release Channels
+## Release channels
 
 To meet the unique needs of different operating environments, Astro Runtime versions are associated with the following release channels:
 
@@ -32,7 +32,7 @@ For users that want to keep up with the latest Astronomer and Airflow features o
 
 For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel exclusively.
 
-## Versioning Scheme
+## Versioning scheme
 
 Astro Runtime follows [Semantic Versioning](https://semver.org/). This means that Astronomer ships major, minor, and patch releases of Runtime in the format of `major.minor.patch`.
 
@@ -64,7 +64,7 @@ For example, the images for Astro Runtime 4.0.6 would be:
 
 For the smoothest, out-of-the-box Airflow experience, we strongly recommend and default to non-`base` images in your project's `Dockerfile`. These images incorporate Docker ONBUILD commands to copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. For complex use cases that require additional customization, a `base` Astro Runtime image might work best.
 
-## Backport Policy for Bug and Security Fixes
+## Backport policy for bug and security fixes
 
 When Astronomer identifies a significant bug in Astro Runtime, a fix is backported to all Long Term Support (LTS) versions and the latest stable version. To avoid the impact of previously identified bugs, Astronomer recommends that you upgrade Astro Runtime if you are not using the latest stable version.
 
@@ -76,8 +76,7 @@ Occasionally, Astronomer might deviate from the defined response policy and back
 
 Astronomer is aware of the Quay Common Vulnerabilities and Exposures (CVE) report and monitors it frequently to determine if the vulnerabilities identified in the report pose a risk to organizations using Astro Runtime images. Astronomer works with vendors to correct vulnerabilities and regularly adds fixes to stable and LTS releases. If there is a high-level vulnerability in the CVE report that is causing concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
 
-
-## Astro Runtime Maintenance Policy
+## Astro Runtime maintenance policy
 
 The maintenance period for an Astro Runtime version depends on its release channel:
 
@@ -104,17 +103,17 @@ When the maintenance window for a given version of Runtime ends, the following i
 
 To ensure reliability, service will not be interrupted for Deployments running a version of Runtime that is no longer supported. Unsupported versions will also continue to be available for local development and testing via the Astro CLI.
 
-### End of Maintenance Date
+### End of maintenance date
 
 Maintenance is discontinued the last day of the month for a given version. For example, if the maintenance window for a version of Astro Runtime is January - June of a given year, that version will be maintained by Astronomer until the last day of June.
 
-## Astro Runtime Lifecycle Schedule
+## Astro Runtime lifecycle schedule
 
 <!--- Version-specific -->
 
 The following table contains the exact lifecycle for each published version of Astro Runtime. These timelines are based on the LTS and Stable release channel maintenance policies.
 
-### Stable Releases
+### Stable releases
 
 | Runtime Version                                          | Release Date    | End of Maintenance Date |
 | ---------------------------------------------------------| ----------------| ------------------------|
