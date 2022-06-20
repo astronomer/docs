@@ -5,7 +5,7 @@ id: astro-support
 description: Get Astro support when you need it.
 ---
 
-If you're an Astro user and haven't been able to resolve an issue using Astronomer documentation, the following resources are available:
+In addition to product documentation, the following resources are available to help you resolve issues:
 
 - [Astronomer Forum](https://forum.astronomer.io)
 - [Airflow Guides](https://www.astronomer.io/guides/)
