@@ -40,7 +40,7 @@ Examples:
 - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
 - Task logs are missing in the Airflow UI.
 
-**P3:** Medium impact, service is partiallly impaired.
+**P3:** Medium impact. Service is partially impaired.
 
 Examples:
 
