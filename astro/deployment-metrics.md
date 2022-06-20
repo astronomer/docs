@@ -112,7 +112,7 @@ If your Deployment is unhealthy, we recommend checking the status of your tasks 
 
 Each Deployment includes four high-level performance charts which you can view from both the **Deployments** menu and individual Deployment pages. They include:
 
-- DAG Runs
+- DAG runs
 - Task Instances
 - worker CPU
 - worker Memory
@@ -131,7 +131,7 @@ The following sections describe each of the 4 available charts.
 
 ### Total DAG runs
 
-The **DAG Runs** metric records successful and failed DAG runs over hour-long intervals. A [DAG run](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html) is defined as an instantiation of a DAG at a specific point in time.
+The **DAG runs** metric records successful and failed DAG runs over hour-long intervals. A [DAG run](https://airflow.apache.org/docs/apache-airflow/stable/dag-run.html) is defined as an instantiation of a DAG at a specific point in time.
 
 You can hover over each bar to see the corresponding hour interval displayed in both UTC and your local timezone. Below that, you can see the number of successful DAG runs and the number of failed DAG runs. If a bar is partially or fully red, it means that one or more DAG runs failed within that hour interval.
 

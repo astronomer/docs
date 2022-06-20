@@ -294,7 +294,7 @@ When you create a new Workspace, you will automatically become a Workspace Admin
 
 ## February 11, 2022
 
-### Monitor DAG Runs Across All Deployments in a Workspace
+### Monitor DAG runs Across All Deployments in a Workspace
 
 You can view key metrics about recent DAG runs through the new **DAGs** page in the Cloud UI. Use this page to view DAG runs at a glance, including successes and failures, across all Deployments in a given Workspace. You can also drill down to a specific DAG and see metrics about its recent runs.
 

@@ -86,7 +86,7 @@ print(response.json())
 # Prints data about all DAGs in your Deployment
 ```
 
-### Trigger a DAG Run
+### Trigger a DAG run
 
 You can trigger a DAG run by executing a `POST` request to Airflow's [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
 
@@ -118,10 +118,10 @@ response = requests.post(
     data='{}'
 )
 print(response.json())
-# Prints metadata of the DAG Run that was just triggered
+# Prints metadata of the DAG run that was just triggered
 ```
 
-### Trigger a DAG Run by Date
+### Trigger a DAG run by Date
 
 You can also specify a `logical_date` at the time in which you wish to trigger the DAG run by passing the `logical_date` with the desired timestamp with the request's `data` field. The timestamp string is expressed in UTC and must be specified in the format `"YYYY-MM-DDTHH:MM:SSZ"`, where:
 
@@ -160,7 +160,7 @@ response = requests.post(
     data='{"logical_date": "2021-11-16T11:34:01Z"}'
 )
 print(response.json())
-# Prints metadata of the DAG Run that was just triggered
+# Prints metadata of the DAG run that was just triggered
 ```
 
 ### Pause a DAG
