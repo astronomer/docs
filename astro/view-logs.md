@@ -31,28 +31,10 @@ Submit a support request if you're using Amazon S3 and need your Airflow task lo
 
 1. Open a browser and go to `http://localhost:8080`.
 2. Click a DAG.
-
-<div class="text--center">
-<img src="/img/docs/open-dag.png" alt="Access DAG from Airflow UI" />
-</div>
-
-3. In the **Tree View**, click a task run.
-
-<div class="text--center">
-<img src="/img/docs/tree-view.png" alt="Task runs in the tree view" />
-</div>
-
-4. Click **Instance Details**.
-
-<div class="text--center">
-<img src="/img/docs/instance-details.png" alt="Instance details button in the task log menu" />
-</div>
-
-5. Click **Log**.
-
-<div class="text--center">
-<img src="/img/docs/task-log.png" alt="Log button from a task instance" />
-</div>
+3. Click **Graph**.
+4. Click a task run.
+5. Click **Instance Details**.
+6. Click **Log**.
 
 ## Access Airflow Component Logs
 
