@@ -54,7 +54,8 @@ Examples:
 Examples:
 
 - There are package incompatibilities caused by a specific, complex use case.
-- You have questions about best practices for an action in Airflow or on Astronomer.
+- You have questions about best practices for an action in Airflow or on Astro.
+- You have a feature request related to Astro or Airflow.
 
 ### Be as descriptive as possible
 
