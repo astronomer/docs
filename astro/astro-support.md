@@ -90,7 +90,7 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
 3. Click **Submit**.
 
-    You'll receive an email when your ticket is created and follow-up emails as Astronomer Support processes your request. To check the status of a support request, sign in to the [Astronomer Support Portal](https://support.astronomer.io). 
+    You'll receive an email when your ticket is created and follow-up emails as Astronomer Support replies to your request. To check the status of a support request, you can also sign in to the [Astronomer Support Portal](https://support.astronomer.io). 
 
 ## Submit a Support Request on the Astronomer Support Portal
 
