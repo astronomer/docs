@@ -53,7 +53,6 @@ Examples:
 
 Examples:
 
-- You can't find your Workspace.
 - There are package incompatibilities caused by a specific, complex use case.
 - You have questions about best practices for an action in Airflow or on Astronomer.
 
