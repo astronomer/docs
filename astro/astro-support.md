@@ -49,7 +49,7 @@ Examples:
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
 
-**P4:** Low impact, service fully usable.
+**P4:** Low impact. Astro is fully usable but you have a question for our team.
 
 Examples:
 
