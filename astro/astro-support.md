@@ -104,7 +104,7 @@ If you're an existing customer, sign in to the [Astronomer Support Portal](https
 
 If you've submitted your support request on the Astronomer Support Portal, sign in to the [Astronomer Support Portal](https://support.astronomer.io) to:
 
-- Review and comment on other requests from your team.
+- Review and comment on requests from your team.
 - Monitor the status of all requests in your organization.
 
 :::tip
