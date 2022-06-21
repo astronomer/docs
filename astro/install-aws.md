@@ -156,7 +156,7 @@ Astronomer recommends using the AWS Management Console to add the external ID to
     ```bash
     $ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AdministratorAccess --role-name astronomer-remote-management
     ```
-    This command returns a YAML file containing information about the role:
+    This command returns a YAML file containing role information:
 
     ```yaml
     {
@@ -184,10 +184,10 @@ Astronomer recommends using the AWS Management Console to add the external ID to
     }
     ```
    
-To provision additional Clusters after completing your initial installation, see [Create a Cluster](create-cluster.md).
-
 </TabItem>
 </Tabs>
+
+To provision additional Clusters after completing your initial installation, see [Create a Cluster](create-cluster.md).
 
 :::caution
 
