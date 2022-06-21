@@ -186,6 +186,9 @@ Astronomer recommends using the AWS Management Console to add the external ID to
    
 To provision additional Clusters after completing your initial installation, see [Create a Cluster](create-cluster.md).
 
+</TabItem>
+</Tabs>
+
 :::caution
 
 Some AWS regions that Astronomer supports are disabled by default on AWS, includ
@@ -195,8 +198,6 @@ Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 If you're setting up your first Cluster in any of these regions, you need to complete the additional setup described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 
 :::
-</TabItem>
-</Tabs>
 
 ## Step 4: Let Astronomer Complete the Install
 
