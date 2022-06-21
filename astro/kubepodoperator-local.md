@@ -26,7 +26,7 @@ If you're using a Windows computer and want to make sure your environment is rea
 
 If you're using a Mac cpmputer and want to make sure your environment is ready for Kubernetes, see [Docker Desktop for Mac user manual](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). 
 
-It isn't nevessary to install docker-compose.
+It isn't necessary to install docker-compose.
 
 1. Open Docker and go to **Settings** > **Kubernetes**.
 
