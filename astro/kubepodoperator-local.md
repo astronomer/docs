@@ -180,7 +180,7 @@ Testing DAGs with the [KubernetesPodOperator](kubernetespodoperator.md) locally 
 ### Step 1: Prepare Your Environment
 
 1. Set up Kubernetes in Docker. See [Set up Kubernetes](#set-up-kubernetes).
-2. Update the kubeconfig File. See [Update the kubeconfig File](#update-the-kubeconfig-file).
+2. Update the kubeconfig file. See [Update the kubeconfig File](#update-the-kubeconfig-file).
 
 ### Step 2: Add a KubernetesPodOperator Task
 
