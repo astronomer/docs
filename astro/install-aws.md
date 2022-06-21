@@ -125,33 +125,33 @@ Astronomer recommends using the AWS Management Console to add the external ID to
 
 <TabItem value="command line">
 
-1. Open the AWS CLI  and run the following command to create a cross-account IAM Role:
+1. Open the AWS CLI and run the following command to create a cross-account IAM Role:
 
-```bash
+    ```bash
     $ aws iam create-role --role-name astronomer-remote-management --assume-role-policy-document "{
-    \"Version\": \"2012-10-17\",
-    \"Statement\": [
-        {
-            \"Effect\": \"Allow\",
-            \"Principal\": {
-                \"AWS\": \"arn:aws:iam::406882777402:root\"
-            },
-            \"Action\": \"sts:AssumeRole\",
-            \"Condition\": {
-                \"StringEquals\": {
-                \"sts:ExternalId\": \"$EXTERNAL_ID\"
+        \"Version\": \"2012-10-17\",
+        \"Statement\": [
+            {
+                \"Effect\": \"Allow\",
+                \"Principal\": {
+                    \"AWS\": \"arn:aws:iam::406882777402:root\"
+                },
+                \"Action\": \"sts:AssumeRole\",
+                \"Condition\": {
+                    \"StringEquals\": {
+                    \"sts:ExternalId\": \"$EXTERNAL_ID\"
+                    }
                 }
             }
-        }
-    ]
-}"
-```
+        ]
+    }"
+    ```
 
 2. Run the following command to attach a managed policy to the Astronomer remote management role.
 
-  ```bash
-  $ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AdministratorAccess --role-name astronomer-remote-management
-  ```
+    ```bash
+    $ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AdministratorAccess --role-name astronomer-remote-management
+    ```
     This command returns a YAML file containing information about the role:
 
     ```yaml
@@ -180,7 +180,9 @@ Astronomer recommends using the AWS Management Console to add the external ID to
     }
     ```
    
-To provision additional Clusters, complete the setup in [Create a Cluster](create-cluster.md) after completing your initial installation.
+To provision additional Clusters after completing your initial installation, see [Create a Cluster](create-cluster.md).
+
+:::caution
 
 Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 - `ap-east-1` - Asia Pacific (Hong Kong)
@@ -189,13 +191,12 @@ Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 If you're setting up your first Cluster in any of these regions, you need to complete the additional setup described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 
 :::
-
 </TabItem>
 </Tabs>
 
 ## Step 4: Let Astronomer Complete the Install
 
-Let our team know once you've created the cross-account IAM role for Astro. From there, we will finish creating an Astronomer Cluster in your AWS account that supports Apache Airflow environments.
+Contact Astronomer after you've created the cross-account IAM role for Astro. From there, we will finish creating an Astronomer Cluster in your AWS account that supports Apache Airflow environments.
 
 This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
 
