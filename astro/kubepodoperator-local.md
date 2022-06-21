@@ -5,13 +5,28 @@ id: kubepodoperator-local
 description: Test and troubleshoot the KubernetesPodOperator locally.
 ---
 
-The `KubernetesPodOperator` completes work within Kubernetes Pods on a Kubernetes cluster that Airflow can communicate with. Use this document to test the `KubernetesPodOperator` locally before running it in a production Kubernetes cluster. 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
+The `KubernetesPodOperator` completes work within Kubernetes Pods in a Kubernetes cluster. Test the `KubernetesPodOperator` locally before running it in a production Kubernetes cluster. 
 
 ## Set up Kubernetes
+<Tabs
+    defaultValue="windows and mac"
+    values={[
+        {label: 'Windows and Mac', value: 'windows and mac'},
+        {label: 'Linux', value: 'linux'},
+    ]}>
+<TabItem value="windows and mac">
 
-### Windows and Mac
+The latest versions of Docker for Windows and Mac both support running a single-node Kubernetes cluster locally. 
 
-The latest versions of Docker for Windows and Mac let you run a single node Kubernetes cluster locally. If you are using Windows, see [Setting Up Docker for Windows and WSL to Work Flawlessly](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). If you are using Mac, see [Docker Desktop for Mac user manual](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). It isn't nevessary to install docker-compose.
+If you're using a Windows computer and want to make sure your environment is ready for Kubernetes, see [Setting Up Docker for Windows and WSL to Work Flawlessly](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). 
+
+If you're using a Mac cpmputer and want to make sure your environment is ready for Kubernetes, see [Docker Desktop for Mac user manual](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). 
+
+It isn't nevessary to install docker-compose.
 
 1. Open Docker and go to **Settings** > **Kubernetes**.
 
@@ -23,15 +38,25 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
     Docker restarts and the status indicator changes to green to indicate Kubernetes is running.
 
-### Linux
+</TabItem>
+
+<TabItem value="linux">
 
 1. Install Microk8s. See [Microk8s](https://microk8s.io/).
 
 2. Run `microk8s.start` to start Kubernetes.
 
-## Update the kubeconfig File
+</TabItem>
+</Tabs>
 
-### Windows and Mac
+## Update the kubeconfig File
+<Tabs
+    defaultValue="windows and mac"
+    values={[
+        {label: 'Windows and Mac', value: 'windows and mac'},
+        {label: 'Linux', value: 'linux'},
+    ]}>
+<TabItem value="windows and mac">
 
 1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubePodOperator uses to connect to your cluster. For example:
     ```apiVersion: v1
@@ -61,13 +86,17 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 4. Optional. Add the `.kube` folder to `.gitignore` if your project is configureed as a GitHub repository and you want to prevent the file from being tracked by your version control tool.
 5. Optional. Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.
 
-### Linux
+</TabItem>
+
+<TabItem value="linux">
 
 In a `.kube` folder in your Astro project, create a default `config` file with:
 
 ```bash
 microk8s config > /include/.kube/config
 ```
+</TabItem>
+</Tabs>
 
 ## Run Your Container
 
@@ -75,7 +104,7 @@ The `config_file` points to the `/include/.kube/config` file you just edited.
 
 You can use the following example DAG to test your configurations. This DAG runs the `hello-world` Docker image in a different cluster based on whether you're running the DAG locally or on Astro. 
 
-Note that if you are using Linux, you need to change the value for `cluster_context` in this DAG to `microk8s`.
+If you are using Linux, you need to change the value for `cluster_context` in this DAG to `microk8s`.
 
 Run `astro dev start` to build this config into your image.
 
@@ -98,7 +127,7 @@ default_args = {
 
 namespace = conf.get('kubernetes', 'NAMESPACE')
 
-# This will detect the default namespace locally and read the
+# This detects the default namespace locally and reads the
 # environment namespace when deployed to Astronomer.
 if namespace =='default':
     config_file = '/usr/local/airflow/include/.kube/config'
@@ -117,7 +146,7 @@ with dag:
         labels={"foo": "bar"},
         name="airflow-test-pod",
         task_id="task-one",
-        in_cluster=in_cluster,  # when set to True, it looks in the cluster, if False, it looks for a file
+        in_cluster=in_cluster,  # when set to True, it looks in the cluster, when set to False, it looks for a file
         cluster_context="docker-desktop",  # is ignored when in_cluster is set to True
         config_file=config_file,
         get_logs=True,
@@ -125,17 +154,25 @@ with dag:
 
 ```
 ## View Kubernetes Logs
-
-### Windows and Mac
+<Tabs
+    defaultValue="windows and mac"
+    values={[
+        {label: 'Windows and Mac', value: 'windows and mac'},
+        {label: 'Linux', value: 'linux'},
+    ]}>
+<TabItem value="windows and mac">
 
 Run `kubectl get pods -n <your-namespace>` or `kubectl logs {pod_name} -n <your-namespace>` to examine the logs for the pod that just ran. By default, `docker-for-desktop` and `microk8s` run pods in the `default` namespace.
 
-### Linux
+</TabItem>
 
-Run the same commands prefixed with microk8s. For example:
-```
-microk8s.kubectl get pods -n $namespace
-```
+<TabItem value="linux">
+
+Run `microk8s.kubectl get pods -n <your-namespace>` or `microk8s.kubectl logs {pod_name} -n <your-namespace>` to examine the logs for the pod that just ran. By default, `docker-for-desktop` and `microk8s` run pods in the `default` namespace.
+
+</TabItem>
+</Tabs>
+
 ## Test the KubernetesPodOperator Locally
 
 Testing DAGs with the [KubernetesPodOperator](kubernetespodoperator.md) locally requires a local Kubernetes environment.
