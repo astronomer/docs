@@ -125,66 +125,39 @@ Astronomer recommends using the AWS Management Console to add the external ID to
 
 <TabItem value="command line">
 
-Run the following AWS CLI commands to create a cross-account IAM Role:
-
 1. Open the AWS CLI  and run the following command to create a cross-account IAM Role:
 
-    ```bash
+```bash
     $ aws iam create-role --role-name astronomer-remote-management --assume-role-policy-document "{
-        \"Version\": \"2012-10-17\",
-        \"Statement\": [
-            {
-                \"Effect\": \"Allow\",
-                \"Principal\": {
-                    \"AWS\": \"arn:aws:iam::406882777402:root\"
-                },
-                \"Action\": \"sts:AssumeRole\",
-                \"Condition\": {
-                    \"StringEquals\": {
-                    \"sts:ExternalId\": \"$EXTERNAL_ID\"
-                    }
+    \"Version\": \"2012-10-17\",
+    \"Statement\": [
+        {
+            \"Effect\": \"Allow\",
+            \"Principal\": {
+                \"AWS\": \"arn:aws:iam::406882777402:root\"
+            },
+            \"Action\": \"sts:AssumeRole\",
+            \"Condition\": {
+                \"StringEquals\": {
+                \"sts:ExternalId\": \"$EXTERNAL_ID\"
                 }
             }
         }
     ]
 }"
-
-$ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AdministratorAccess --role-name astronomer-remote-management
 ```
-        ]
-    }"
-    ```
+
 2. Run the following command to attach a managed policy to the Astronomer remote management role.
 
-The output of the last command is a YAML file containing information about the role:
-    ```bash
-    $ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AdministratorAccess --role-name astronomer-remote-management
-    ```
+  ```bash
+  $ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AdministratorAccess --role-name astronomer-remote-management
+  ```
     This command returns a YAML file containing information about the role:
 
-```yaml
-{
-  "Role":
     ```yaml
     {
-      "Path": "/",
-      "RoleName": "astronomer-remote-management",
-      "RoleId": "AROAZZTAM6QSYIFGCB37R",
-      "Arn": "arn:aws:iam::673438299173:role/astronomer-remote-management",
-      "CreateDate": "2021-06-30T17:47:39+00:00",
-      "AssumeRolePolicyDocument":
       "Role":
         {
-          "Version": "2012-10-17",
-          "Statement":
-            [
-              {
-                "Effect": "Allow",
-                "Principal": { "AWS": "arn:aws:iam::406882777402:root" },
-                "Action": "sts:AssumeRole",
-                "Condition": { "StringEquals": { "sts:ExternalId": "" } },
-              },
-            ],
           "Path": "/",
           "RoleName": "astronomer-remote-management",
           "RoleId": "AROAZZTAM6QSYIFGCB37R",
@@ -204,19 +177,15 @@ The output of the last command is a YAML file containing information about the r
                 ],
             },
         },
-    },
-}
-```
     }
     ```
-
+   
 To provision additional Clusters, complete the setup in [Create a Cluster](create-cluster.md) after completing your initial installation.
 
-@ -181,10 +189,9 @@ Some AWS regions that Astronomer supports are disabled by default on AWS, includ
+Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 - `ap-east-1` - Asia Pacific (Hong Kong)
 - `me-south-1` - Middle East (Bahrain)
 
-If you're setting up your first Cluster in any of these regions, you need to complete the additional setup as described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 If you're setting up your first Cluster in any of these regions, you need to complete the additional setup described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 
 :::
