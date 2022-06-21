@@ -1,11 +1,11 @@
 ---
 title: 'Test and Troubleshoot the KubernetesPodOperator Locally'
-sidebar_label: 'Local KubernetesPodOperator'
+sidebar_label: 'Run the KubernetesPodOperator Locally'
 id: kubepodoperator-local
 description: Test and troubleshoot the KubernetesPodOperator locally.
 ---
 
-You use the `KubernetesPodOperator` to create and run Kubernetes pods on a  Kubernetes cluster in a local Kubernetes environment. Using the `KubernetesPodOperator` locally allows you to create, test, and modify your code before you move to production.
+The `KubernetesPodOperator` completes work within Kubernetes Pods on a Kubernetes cluster that Airflow can communicate with. Use this document to test the `KubernetesPodOperator` locally before running it in a production Kubernetes cluster. 
 
 ## Set up Kubernetes
 
@@ -37,7 +37,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     ```apiVersion: v1
     clusters:
     - cluster:
-        certificate-authority-data: CERT_AUTHORITY_DATA
+        certificate-authority-data: <cert-authority-data>
         server: https://kubernetes.docker.internal:6443/
     name: docker-desktop
     contexts:
@@ -54,7 +54,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
         client-certificate-data: CERT_CLIENT_DATA
         client-key-data: CERT_KEY_DATA
     ```
-    The cluster `name` should be searchable as `docker-desktop` in your local `$HOME/.kube``config` file. Do not add any additional data to the `config` file.
+    The `clusters.cluster.name` should be searchable as `docker-desktop` in your local `$HOME/.kube``config` file.
 
 2. Update the `CERT_AUTHORITY_DATA`, `CERT_CLIENT_DATA`, and `CERT_KEY_DATA` values in the `config` file with the values for your organization.
 3. Under cluster, change `server: https://localhost:6445` to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
@@ -63,17 +63,19 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
 ### Linux
 
-In a `.kube` folder in your Astro project, create a config file with:
+In a `.kube` folder in your Astro project, create a default `config` file with:
 
 ```bash
-microk8s.config > /include/.kube/config
+microk8s config > /include/.kube/config
 ```
 
 ## Run Your Container
 
 The `config_file` points to the `/include/.kube/config` file you just edited. 
 
-The following example runs the docker `hello-world` image and reads environment variables to determine where it is run. If you are using Linux, the `cluster_context` is `microk8s`.
+You can use the following example DAG to test your configurations. This DAG runs the `hello-world` Docker image in a different cluster based on whether you're running the DAG locally or on Astro. 
+
+Note that if you are using Linux, you need to change the value for `cluster_context` in this DAG to `microk8s`.
 
 Run `astro dev start` to build this config into your image.
 
@@ -126,7 +128,7 @@ with dag:
 
 ### Windows and Mac
 
-Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `docker-for-desktop` and `microk8s` run pods in the `default` namespace.
+Run `kubectl get pods -n <your-namespace>` or `kubectl logs {pod_name} -n <your-namespace>` to examine the logs for the pod that just ran. By default, `docker-for-desktop` and `microk8s` run pods in the `default` namespace.
 
 ### Linux
 
