@@ -153,9 +153,9 @@ The **Worker CPU** and **Worker Memory** charts in the Cloud UI provide visibili
 
 :::info
 
- A known issue with Celery might cause worker memory allocation to increase without a corresponding increase in task count or DAG memory use. To correct this issue, redeploy your code without making any changes to restart the Celery worker and reset memory requests. See [Deploy Code to Astro](deploy-code.md). This issue should not affect your tasks or cause OutOfMemory (OOM) errors. If you experience complications, contact Astronomer Support.
+A known issue with Celery might cause worker memory allocation to increase without a corresponding increase in task count or DAG memory use. To correct this issue, redeploy your code without making any changes to restart the Celery worker and reset memory requests. See [Deploy Code to Astro](deploy-code.md). This issue should not affect your tasks or cause OutOfMemory (OOM) errors. If you experience complications, contact Astronomer Support.
 
- :::
+:::
 
 ## DAG Runs
 

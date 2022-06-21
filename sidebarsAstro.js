@@ -117,6 +117,7 @@ module.exports = {
       items: [
         'known-limitations',
         'runtime-version-lifecycle-policy',
+        'astro-support',
         {
           type: 'category',
           label: 'Cloud Configuration Reference',
