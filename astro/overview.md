@@ -18,7 +18,7 @@ Beyond architecture, Astro offers a suite of first-class features that make it e
 
 Astro's architecture enables a few key features, available today:
 
-- worker auto-scaling, powered by Airflow's Celery executor + KEDA
+- Worker auto-scaling, powered by Airflow's Celery executor + KEDA
 - The ability to run multiple clusters in your organization's network on either AWS or GCP
 - Astro Runtime, a collection of Docker images that provides a differentiated data orchestration experience
 - Timely support for the latest major, minor, and patch versions of the Apache Airflow open source project

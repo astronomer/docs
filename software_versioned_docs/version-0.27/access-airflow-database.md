@@ -192,7 +192,7 @@ On Astronomer, your deployment's Postgres credentials are also stored as a [Kube
 
 ### Pre-Requisites
 
-- Access to your Kubernetes Cluster with permissions to:
+- Access to your Kubernetes cluster with permissions to:
     - List Namespaces
     - List Pods
     - List Kubernetes Secrets
@@ -203,9 +203,9 @@ On Astronomer, your deployment's Postgres credentials are also stored as a [Kube
 
 **1. Switch into your Kubernetes Cluster**
 
-The rest of this guide will assume the use of [kubectx](https://github.com/ahmetb/kubectx) - a command line tool that allows you to easily switch between Kubernetes Clusters and Namespaces.
+The rest of this guide will assume the use of [kubectx](https://github.com/ahmetb/kubectx) - a command line tool that allows you to easily switch between Kubernetes clusters and Namespaces.
 
-To start, switch into the Kubernetes Cluster that hosts Astronomer Software.
+To start, switch into the Kubernetes cluster that hosts Astronomer Software.
 
 ```
 kubectx

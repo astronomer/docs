@@ -22,7 +22,7 @@ A few clarifying notes:
 
 * [The Astronomer CLI](cli-quickstart.md)
 * Admin access on an Astronomer Workspace
-* Direct access to your Kubernetes Cluster (e.g. permission to run `$ kubectl describe po`)
+* Direct access to your Kubernetes cluster (e.g. permission to run `$ kubectl describe po`)
 * A compatible version of Kubernetes as described in Astronomer's [Version Compatibility Reference](version-compatibility-reference.md)
 
 ## AWS

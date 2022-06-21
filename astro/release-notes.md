@@ -38,7 +38,7 @@ Specifically, you can now run the following commands with Deployment API keys:
 
 ### Support for the `us-east4` GCP Region
 
-You can now [create an Astro Cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
+You can now [create an Astro cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
 
 For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
 
@@ -83,7 +83,7 @@ This functionality is still early access and under active development. If you ha
 
 ### Support for Astro on Google Cloud Platform (GCP)
 
-Astro now officially supports Astro Clusters on Google Cloud Platform (GCP). This includes support for an initial set of GCP regions as well as [Workload Identity](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) for secure connection to other GCP data services in your ecosystem.
+Astro now officially supports Astro clusters on Google Cloud Platform (GCP). This includes support for an initial set of GCP regions as well as [Workload Identity](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) for secure connection to other GCP data services in your ecosystem.
 
 For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp.md).
 
@@ -101,13 +101,13 @@ You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an
 
 ### New AWS Node Instance Types Available
 
-To widen our support for various use cases and levels of scale, we've expanded the types of AWS node instances that are supported on Astro. You can now create Clusters with:
+To widen our support for various use cases and levels of scale, we've expanded the types of AWS node instances that are supported on Astro. You can now create clusters with:
 
 - [General Purpose M6i instances](https://aws.amazon.com/ec2/instance-types/m6i/)
 - [Compute Optimized C6i instances](https://aws.amazon.com/ec2/instance-types/c6i/)
 - [Memory Optimized R6i instances](https://aws.amazon.com/ec2/instance-types/r6i/)
 
-For a full list of node instance types that are supported on Astro, see [AWS Resource Reference](resource-reference-aws.md#node-instance-type). To modify an existing Astro Cluster to use any of these instance types, see [Modify a Cluster](modify-cluster.md).
+For a full list of node instance types that are supported on Astro, see [AWS Resource Reference](resource-reference-aws.md#node-instance-type). To modify an existing Astro cluster to use any of these instance types, see [Modify a Cluster](modify-cluster.md).
 
 ### Additional improvements
 
@@ -117,9 +117,9 @@ For a full list of node instance types that are supported on Astro, see [AWS Res
 
 ### Feedback in Cloud UI on worker Size Limits
 
-The Cloud UI now renders an error if you try to modify the **Worker Resources**  to a combination of CPU and memory that is not supported by the node instance type of the Cluster that the Deployment is hosted on. This validation ensures that the worker size you request is supported by the infrastructure available in your Astro Cluster, and minimizes silent task failures that might have occurred due to invalid resource requests.
+The Cloud UI now renders an error if you try to modify the **Worker Resources**  to a combination of CPU and memory that is not supported by the node instance type of the cluster that the Deployment is hosted on. This validation ensures that the worker size you request is supported by the infrastructure available in your Astro Cluster, and minimizes silent task failures that might have occurred due to invalid resource requests.
 
-If your Astro Cluster is configured with the `m5d.8xlarge` node type, for example, the Cloud UI will show an error if you try to set **Worker Resources** to 350 AU. This is because the maximum worker size an `m5d.8xlarge` node can support is 307 AU.
+If your Astro cluster is configured with the `m5d.8xlarge` node type, for example, the Cloud UI will show an error if you try to set **Worker Resources** to 350 AU. This is because the maximum worker size an `m5d.8xlarge` node can support is 307 AU.
 
 ![Worker size error](/img/release-notes/worker-size-error.png)
 
@@ -186,9 +186,9 @@ For a full list of AWS regions supported on Astro, see [AWS Resource Reference](
 
 ### Maximum Node Count is now Configurable per Cluster
 
-As of this release, **Maximum Node Count** is now a configurable setting for new and existing Clusters. On Astro, maximum node count represents the total number of EC2 nodes that your Cluster can support at any given time. For an Astro Cluster on AWS, EC2 nodes are the primary unit of infrastructure required to run a Deployment and its components, including workers and the Airflow scheduler. New Clusters have a maximum node count of 20 by default, but the setting can be modified to any value from 2 to 100 at any time.
+As of this release, **Maximum Node Count** is now a configurable setting for new and existing clusters. On Astro, maximum node count represents the total number of EC2 nodes that your cluster can support at any given time. For an Astro cluster on AWS, EC2 nodes are the primary unit of infrastructure required to run a Deployment and its components, including workers and the Airflow scheduler. New clusters have a maximum node count of 20 by default, but the setting can be modified to any value from 2 to 100 at any time.
 
-Previously, maximum node count was a fixed, global setting that applied to all customers on Astro and could not be configured per Cluster. Now, your organization can modify this setting as your workloads evolve and more Deployments are created. Once the limit is reached, your Cluster will not be able to auto-scale and worker pods may fail to schedule.
+Previously, maximum node count was a fixed, global setting that applied to all customers on Astro and could not be configured per cluster. Now, your organization can modify this setting as your workloads evolve and more Deployments are created. Once the limit is reached, your cluster will not be able to auto-scale and worker pods may fail to schedule.
 
 To update this setting for an existing Cluster, reach out to [Astronomer support](https://support.astronomer.io) and provide the name of your cluster and the desired maximum node count.
 
@@ -335,7 +335,7 @@ This also means that all Organizations now have GitHub, Google, and username/pas
 
 ### Additional improvements
 
-- Changed the default RDS instance type for new Clusters from `db.r5.xlarge` to `db.r5.large`, which represents a monthly cost reduction of ~50% for newly provisioned clusters. Customers with existing clusters will need to request a downscale via [Astronomer Support](https://support.astronomer.io)
+- Changed the default RDS instance type for new clusters from `db.r5.xlarge` to `db.r5.large`, which represents a monthly cost reduction of ~50% for newly provisioned clusters. Customers with existing clusters will need to request a downscale via [Astronomer Support](https://support.astronomer.io)
 
 ## January 13, 2022
 
@@ -349,7 +349,7 @@ This change serves as a foundation for future SSO and authentication features. I
 
 - Significant improvements to the load times of various Cloud UI pages and elements.
 - In the Cloud UI, the tooltips in the **Resource Settings** section of a Deployment's page now show the definition of 1 AU. This should make it easier to translate AU to CPU and Memory.
-- scheduler logs in the Cloud UI no longer show `DEBUG`-level logs.
+- Scheduler logs in the Cloud UI no longer show `DEBUG`-level logs.
 - To ensure that all workers have enough resources to run basic workloads, you can no longer allocate less than 10 AU to **Worker Resources**.
 
 ## January 6, 2022
@@ -378,7 +378,7 @@ This does not change or affect execution behavior for new or existing Deployment
 
 ### Additional improvements
 
-- Removed _Kubernetes Version_ column from the **Clusters** table. This value was previously inaccurate and is not needed. The Kubernetes version of any particular Astro Cluster is set and modified exclusively by Astro as part of our managed service.
+- Removed _Kubernetes Version_ column from the **Clusters** table. This value was previously inaccurate and is not needed. The Kubernetes version of any particular Astro cluster is set and modified exclusively by Astro as part of our managed service.
 
 ## December 16, 2021
 
@@ -420,7 +420,7 @@ For more information about the **Usage** tab, read [Deployment metrics](deployme
 
 ### New AWS Regions Available
 
-You can now create new Clusters in:
+You can now create new clusters in:
 
 - `us-west-1`
 - `ap-northeast-1 `
@@ -465,7 +465,7 @@ For more information, read [Set environment variables via the Cloud UI](environm
 
 ### Additional improvements
 
-- You can now create new Clusters in AWS `sa-east-1`.
+- You can now create new clusters in AWS `sa-east-1`.
 - Extra whitespace at the end of any environment variable that is set via the Cloud UI is now automatically removed to ensure the variable is passed correctly.
 
 ## November 11, 2021
@@ -522,9 +522,9 @@ All user configurations can be found by clicking your user profile picture in th
 
 ### Additional improvements
 
-- You can now create new Clusters in `us-east-2` and `ca-central-1`.
+- You can now create new clusters in `us-east-2` and `ca-central-1`.
 - In the Deployment detail page, **Astro Runtime** now shows the version of Apache Airflow that the Deployment's Astro Runtime version is based on.
-- You can now create or modify an existing Astro Cluster to run any size of the `t2`,`t3`, `m5`, or `m5d` [AWS EC2 instances](resource-reference-aws.md).
+- You can now create or modify an existing Astro cluster to run any size of the `t2`,`t3`, `m5`, or `m5d` [AWS EC2 instances](resource-reference-aws.md).
 
 ### Bug fixes
 
@@ -665,9 +665,9 @@ You can now programmatically trigger DAGs and update your Airflow Deployments on
 
 ### Improvements
 
-- Increased the limit of **Worker Resources** from 30 AU to 175 AU (17.5 CPU, 65.625 GB RAM). If your tasks require this many resources, reach out to us to make sure that your Cluster is sized appropriately
+- Increased the limit of **Worker Resources** from 30 AU to 175 AU (17.5 CPU, 65.625 GB RAM). If your tasks require this many resources, reach out to us to make sure that your cluster is sized appropriately
 - Collapsed the **People** and **Teams** tabs on the left-hand navigation bar into a single **Access** tab
-- Added a **Cluster** field to the Deployments tab in the Cloud UI. Now, you can reference which Cluster each of your Deployments is in
+- Added a **Cluster** field to the Deployments tab in the Cloud UI. Now, you can reference which cluster each of your Deployments is in
 - Replaced our white "A" favicon to one that supports color mode
 - Informational tooltips are now available in **Deployment Configuration**
 

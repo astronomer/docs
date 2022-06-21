@@ -114,8 +114,8 @@ Each Deployment includes four high-level performance charts which you can view f
 
 - DAG runs
 - Task Instances
-- worker CPU
-- worker Memory
+- Worker CPU
+- Worker Memory
 
 <div class="text--center">
   <img src="/img/docs/deployment-metrics.png" alt="Metrics dashboard in the Cloud UI" />

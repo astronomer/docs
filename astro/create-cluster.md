@@ -1,8 +1,8 @@
 ---
 sidebar_label: 'Create a Cluster'
-title: "Create a new Cluster on Astro"
+title: "Create a new cluster on Astro"
 id: create-cluster
-description: Create a new Astro Cluster for your Organization.
+description: Create a new Astro cluster for your Organization.
 ---
 
 import Tabs from '@theme/Tabs';
@@ -10,14 +10,14 @@ import TabItem from '@theme/TabItem';
 
 ## Overview
 
-The Astro install typically starts with 1 Cluster per Organization. Depending on your use case, however, your team can choose to configure multiple Astro Clusters. This could enable a few benefits, including:
+The Astro install typically starts with 1 cluster per Organization. Depending on your use case, however, your team can choose to configure multiple Astro clusters. This could enable a few benefits, including:
 
-- Clusters in different regions
-- Different Clusters for development and production environments
+- clusters in different regions
+- Different clusters for development and production environments
 
-Within a single Workspace, you can host Deployments across multiple Clusters. For example, you might have a production Deployment running in a production Cluster and a development Deployment running in a development Cluster. Both of those Deployments can be in the same Workspace.
+Within a single Workspace, you can host Deployments across multiple clusters. For example, you might have a production Deployment running in a production cluster and a development Deployment running in a development cluster. Both of those Deployments can be in the same Workspace.
 
-This guide provides instructions for provisioning additional Clusters within your Astro Organization.
+This guide provides instructions for provisioning additional clusters within your Astro Organization.
 
 ## Prerequisites
 
@@ -36,23 +36,23 @@ To create an Astro Cluster, you need to have:
 
 #### Step 1: Submit a request to Astronomer
 
-To create a new Astro Cluster on AWS for your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, provide our team with the following information:
+To create a new Astro cluster on AWS for your Organization, you must first reach out to your Astronomer representative. For each new cluster that you want to provision, provide our team with the following information:
 
 - Your AWS Account ID.
-- Your preferred Astro Cluster name.
-- The AWS region that you want to host your Cluster in.
+- Your preferred Astro cluster name.
+- The AWS region that you want to host your cluster in.
 - Your preferred node instance type.
 - Your preferred max node count.
 
-If not specified, Astronomer will create a Cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS Resource Reference](resource-reference-aws.md).
+If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS Resource Reference](resource-reference-aws.md).
 
-From there, your Astronomer representative will provide you with a unique `External ID` for each new Cluster. Make note of this value for the next step.
+From there, your Astronomer representative will provide you with a unique `External ID` for each new cluster. Make note of this value for the next step.
 
 #### Step 2: Edit your AWS trust policy
 
-In the AWS IAM console, [edit the `astronomer-remote-management` trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) to include new trust policies and ensure that Astronomer has permission to manage your new Cluster.
+In the AWS IAM console, [edit the `astronomer-remote-management` trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) to include new trust policies and ensure that Astronomer has permission to manage your new cluster.
 
-To do this, add the External ID that corresponds to your new Cluster to the existing `sts:ExternalId` grouping. For example, your policy for two Astro Clusters might look like the following, with `<External-ID-2>` being the External ID for your new Cluster:
+To do this, add the External ID that corresponds to your new cluster to the existing `sts:ExternalId` grouping. For example, your policy for two Astro clusters might look like the following, with `<External-ID-2>` being the External ID for your new Cluster:
 
 ```yaml {14}
 {
@@ -144,7 +144,7 @@ To create a cluster in one of these regions, complete the following additional s
 
 #### Step 3: Confirm with Astronomer
 
-A notification is sent from Astronomer when your Cluster is created. After your Cluster is created, you can create a new Deployment in the Cluster. See [Create a Deployment](create-deployment.md).
+A notification is sent from Astronomer when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 
@@ -152,21 +152,21 @@ A notification is sent from Astronomer when your Cluster is created. After your 
 
 #### Step 1: Submit a request to Astronomer
 
-To create a new Astro Cluster on GCP for your Organization, you must first reach out to your Astronomer representative. For each new Cluster that you want to provision, provide our team with the following information:
+To create a new Astro cluster on GCP for your Organization, you must first reach out to your Astronomer representative. For each new cluster that you want to provision, provide our team with the following information:
 
-- Your preferred Astro Cluster name.
-- The GCP region that you want to host your Cluster in.
+- Your preferred Astro cluster name.
+- The GCP region that you want to host your cluster in.
 - Your preferred node instance type.
 - Your preferred CloudSQL instance type.
 - Your preferred maximum node count.
 
-If not specified, Astronomer will create a Cluster with `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.
+If not specified, Astronomer will create a cluster with `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.
 
 For information on all supported regions and configurations, see [GCP Resource Reference](resource-reference-gcp.md).  
 
 #### Step 2: Confirm with Astronomer
 
-A notification is sent from Astronomer when your Cluster is created. After your Cluster is created, you can create a new Deployment in the Cluster. See [Create a Deployment](create-deployment.md).
+A notification is sent from Astronomer when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 </Tabs>

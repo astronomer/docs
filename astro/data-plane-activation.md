@@ -48,7 +48,7 @@ When you arrive at your data plane activation appointment, please ensure you hav
   - `PutRolePolicy`
   - `ListRoles`
   - `UpdateAssumeRolePolicy`
-- [ ] Desired region for Astro Cluster deployment identified, from the list of [supported regions](resource-reference-aws.md#aws-region)
+- [ ] Desired region for Astro cluster deployment identified, from the list of [supported regions](resource-reference-aws.md#aws-region)
 - [ ] _If peering VPCs_, preferred subnet CIDR range identified (no smaller than a /19 range)
 
 </TabItem>
@@ -58,7 +58,7 @@ When you arrive at your data plane activation appointment, please ensure you hav
 - [ ] [Astro CLI](cli/get-started.md) installed for any users who will develop pipelines
 - [ ] A clean GCP project
 - [ ] A user with [Owner access](https://cloud.google.com/iam/docs/understanding-roles#basic-definitions) to your project
-- [ ] Desired region for Astro Cluster deployment identified, from the list of [supported regions](resource-reference-gcp.md#gcp-region)
+- [ ] Desired region for Astro cluster deployment identified, from the list of [supported regions](resource-reference-gcp.md#gcp-region)
 - [ ] _If peering VPCs_, preferred subnet CIDR range identified (no smaller than a /19 range)
 
 </TabItem>

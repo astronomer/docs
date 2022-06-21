@@ -236,9 +236,9 @@ You can now use `astro deployment update` to update certain configurations for a
 
 - Deployment name
 - Deployment description
-- scheduler resources
-- scheduler replicas
-- worker resources
+- Scheduler resources
+- Scheduler replicas
+- Worker resources
 
 This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment-resources.md). For more information about this command, see [CLI Command Reference](cli/astro-deployment-update.md).
 

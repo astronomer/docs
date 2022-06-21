@@ -28,12 +28,12 @@ Unlike other tools that directly access the [Kubernetes etcd database](https://k
 
 To recover the Astronomer platform in the case of an incident, there are two main components that need to be backed up:
 
-1. The Kubernetes Cluster State
+1. The Kubernetes cluster State
 2. The Astronomer Postgres Database
 
 Read below for specific instructions for how to backup both components.
 
-### Kubernetes Cluster Backup
+### Kubernetes cluster Backup
 
 With Velero, you can back up or restore all objects in your cluster, or you can filter objects by type, namespace, and/or label. There are two types of backups:
 
@@ -193,7 +193,7 @@ Following these steps, the restored Airflow Deployment should render in the Soft
 
 In case your team ever needs to migrate to new infrastructure or your existing infrastructure is no longer accessible and you need to restore the Astronomer Platform in its entirety, including all Airflow Deployments within it, follow the steps below.
 
-1. Create a new Kubernetes Cluster _without_ Astronomer installed
+1. Create a new Kubernetes cluster _without_ Astronomer installed
 2. Install Velero into the new cluster, ensuring that it can reach the previous backups in their storage location (e.g. S3 storage or GCS Bucket)
 3. Set the Velero backup storage location to `readonly` to prevent accidentally overwriting any backups by running:
 

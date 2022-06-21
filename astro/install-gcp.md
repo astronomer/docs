@@ -2,7 +2,7 @@
 sidebar_label: 'Install Astro on GCP'
 title: 'Install Astro on GCP'
 id: install-gcp
-description: Get started on Astro by creating your first Astro Cluster on Google Cloud Platform (GCP).
+description: Get started on Astro by creating your first Astro cluster on Google Cloud Platform (GCP).
 ---
 
 ## Overview
@@ -15,7 +15,7 @@ To complete the installation process, you'll:
 - Activate your Astro data plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
 - Share information about your Google Cloud project with Astronomer.
 
-When you've completed the installation process, Astronomer will create a Cluster within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
+When you've completed the installation process, Astronomer will create a cluster within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
 For more information about managing Google Cloud projects, see [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
 
@@ -37,7 +37,7 @@ If any of your GCP resources are on a private network, you can access them using
 - [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect)
 - A [VPC Peering connection](https://cloud.google.com/vpc/docs/vpc-peering) between Astronomer's VPC and the VPCs for your broader network
 
-Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer Cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
+Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
 
 - **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/19`)
 - **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
@@ -99,14 +99,14 @@ To activate the data plane on your GCP project:
 
 Once you've activated your data plane, provide Astronomer with:
 
-- Your preferred Astro Cluster name.
-- The GCP region that you want to host your Cluster in.
+- Your preferred Astro cluster name.
+- The GCP region that you want to host your cluster in.
 - Your preferred node instance type.
 - Your preferred CloudSQL instance type.
 - Your preferred maximum node count.
 - (_Optional_) Your custom CIDR ranges for connecting to Astronomer's services.
 
-If you don't specify your organization's preferred configurations, Astronomer creates a Cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP Resource Reference](resource-reference-gcp.md).
+If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP Resource Reference](resource-reference-gcp.md).
 
 :::info
 
@@ -126,13 +126,13 @@ Once VPC peered with Astronomer, configure and validate the following to ensure 
 
 ## Step 4: Let Astronomer complete the install
 
-Once you've provided Astronomer with the information for your setup, Astronomer finishes creating your first Cluster on GCP.
+Once you've provided Astronomer with the information for your setup, Astronomer finishes creating your first cluster on GCP.
 
 This process can take some time. Wait for confirmation that the installation is successful before proceeding to the next step.
 
 ## Step 5: Create a Deployment
 
-When Astronomer confirms that your Astro Cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro Cluster is listed as an option below the **Cluster** menu:
+When Astronomer confirms that your Astro cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option below the **Cluster** menu:
 
 <div class="text--center">
   <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
@@ -140,7 +140,7 @@ When Astronomer confirms that your Astro Cluster has been created, you are ready
 
 ## Next steps
 
-Now that you have an Astro Cluster up and running, take a look at the docs below for information on how to start working in Astro:
+Now that you have an Astro cluster up and running, take a look at the docs below for information on how to start working in Astro:
 
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/get-started.md)

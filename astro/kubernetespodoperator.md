@@ -16,7 +16,7 @@ The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-provi
 - Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.
 - Set Kubernetes-native configurations in a YAML file, including volumes, secrets, and affinities.
 
-On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperator is built into every Cluster in the data plane and is managed by Astronomer.
+On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperator is built into every cluster in the data plane and is managed by Astronomer.
 
 ## Prerequisites
 
@@ -52,16 +52,16 @@ KubernetesPodOperator(
 
 For each instantiation of the KubernetesPodOperator, you must specify the following values:
 
-- `namespace = conf.get("kubernetes", "NAMESPACE")`: Every Deployment runs on its own Kubernetes namespace within a Cluster. Information about this namespace can be programmatically imported as long as you set this variable.
+- `namespace = conf.get("kubernetes", "NAMESPACE")`: Every Deployment runs on its own Kubernetes namespace within a cluster. Information about this namespace can be programmatically imported as long as you set this variable.
 - `image`: This is the Docker image that the operator will use to run its defined task, commands, and arguments. The value you specify is assumed to be an image tag that's publicly available on [Docker Hub](https://hub.docker.com/). To pull an image from a private registry, read [Pull images from a Private Registry](kubernetespodoperator.md#run-images-from-a-private-registry).
-- `in_cluster=True`: When this value is set, your task will run within the Cluster from which it's instantiated on Astro. This ensures that the Kubernetes Pod running your task has the correct permissions within the Cluster.
-- `is_delete_operator_pod=True`: This setting ensures that once a KubernetesPodOperator task is complete, the Kubernetes Pod that ran that task is terminated. This ensures that there are no unused pods in your Cluster taking up resources.
+- `in_cluster=True`: When this value is set, your task will run within the cluster from which it's instantiated on Astro. This ensures that the Kubernetes Pod running your task has the correct permissions within the cluster.
+- `is_delete_operator_pod=True`: This setting ensures that once a KubernetesPodOperator task is complete, the Kubernetes Pod that ran that task is terminated. This ensures that there are no unused pods in your cluster taking up resources.
 
 This is the minimum configuration required to run tasks with the KubernetesPodOperator on Astro. To further customize the way your tasks are run, see the topics below.
 
 ## Configure Task-Level Pod Resources
 
-Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, meaning that the operator could theoretically use any CPU and memory that's available in your Cluster to complete a task. Because of this, we recommend specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) per task.
+Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, meaning that the operator could theoretically use any CPU and memory that's available in your cluster to complete a task. Because of this, we recommend specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) per task.
 
 To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `resources` argument of the KubernetesPodOperator:
 
@@ -92,7 +92,7 @@ KubernetesPodOperator(
 )
 ```
 
-Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your Cluster. Once the task finishes, the Pod will terminate gracefully.
+Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod will terminate gracefully.
 
 ## Run images from a Private Registry
 

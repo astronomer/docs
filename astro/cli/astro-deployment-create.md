@@ -19,7 +19,7 @@ astro deployment create
 
 | Option                      | Description                                                                        | Possible Values                                                          |
 | --------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `-c`, `--cluster-id`        | The Cluster in which you want to create a Deployment                                                                      | The name of any Cluster that you can create Deployments in               |
+| `-c`, `--cluster-id`        | The cluster in which you want to create a Deployment                                                                      | The name of any cluster that you can create Deployments in               |
 | `-d`,`--description`        | The description for the Deployment                                    | Any string. Multiple-word descriptions should be specified in quotations (`"`) |
 | `-n`,`--name`        | The Deployment's name                                                       | Any string. Multiple-word descriptions should be specified in quotations |
 | `-v`,`--runtime-version`    | The Astro Runtime version for the Deployment                                                   | Any supported version of Astro Runtime. Major, minor, and patch versions must be specified.                                                |

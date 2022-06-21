@@ -2,7 +2,7 @@
 sidebar_label: 'Install Astro on AWS'
 title: 'Install Astro on AWS'
 id: install-aws
-description: Get started on Astro by installing your first Astro Cluster on AWS.
+description: Get started on Astro by installing your first Astro cluster on AWS.
 ---
 
 ## Overview
@@ -14,7 +14,7 @@ At a high-level, we'll ask that you come prepared with a new AWS account. From t
 - Share AWS account information with our team.
 - Create a cross-account IAM role that Astro can assume within your new AWS account.
 
-Astronomer will then create a Cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro Cluster, [reach out to us](https://support.astronomer.io).
+Astronomer will then create a cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro Cluster, [reach out to us](https://support.astronomer.io).
 
 For a complete list of the AWS resources that our team will provision in your AWS account, see [Resource Usage](resource-reference-aws.md).
 
@@ -88,18 +88,18 @@ After completing your initial installation, we recommend [setting up an identity
 For the AWS account you created as a prerequisite, provide Astronomer with:
 
 - Your AWS Account ID.
-- Your preferred Astro Cluster name.
-- The AWS region that you want to host your Cluster in.
+- Your preferred Astro cluster name.
+- The AWS region that you want to host your cluster in.
 - Your preferred node instance type.
 - Your preferred maximum node count.
 
-If not specified, Astronomer will create a Cluster with two `m5.xlarge` nodes in `us-east-1` and a maximum node count of 20 by default. For information on all supported regions and configurations, see [AWS Resource Reference](resource-reference-aws.md).
+If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes in `us-east-1` and a maximum node count of 20 by default. For information on all supported regions and configurations, see [AWS Resource Reference](resource-reference-aws.md).
 
-From here, our team will provision an Astro Cluster according to the specifications you provided.
+From here, our team will provision an Astro cluster according to the specifications you provided.
 
 ## Step 3: Create a cross-account IAM role for Astro
 
-Once your Astro Cluster has been created, an Astronomer team member will provide you with an [External ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) that will allow Astronomer to connect to your AWS account. Save the External ID as a secret or in an otherwise secure format for use in the AWS CLI.
+Once your Astro cluster has been created, an Astronomer team member will provide you with an [External ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) that will allow Astronomer to connect to your AWS account. Save the External ID as a secret or in an otherwise secure format for use in the AWS CLI.
 
 Then, click the link below to create an [cross-account admin IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console) for Astro in your new AWS account:
 
@@ -167,13 +167,13 @@ Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 - `ap-east-1` - Asia Pacific (Hong Kong)
 - `me-south-1` - Middle East (Bahrain)
 
-If you're setting up your first Cluster in any of these regions, you need to complete the additional setup as described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
+If you're setting up your first cluster in any of these regions, you need to complete the additional setup as described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 
 :::
 
 ## Step 4: Let Astronomer complete the install
 
-Let our team know once you've created the cross-account IAM role for Astro. From there, we will finish creating an Astronomer Cluster in your AWS account that supports Apache Airflow environments.
+Let our team know once you've created the cross-account IAM role for Astro. From there, we will finish creating an Astronomer cluster in your AWS account that supports Apache Airflow environments.
 
 This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
 
@@ -192,7 +192,7 @@ This process can take some time. Wait for confirmation that the installation was
 
 ## Step 5: Create a Deployment
 
-When Astronomer confirms that your Astro Cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro Cluster is listed as an option below the **Cluster** menu:
+When Astronomer confirms that your Astro cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option below the **Cluster** menu:
 
 <div class="text--center">
   <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
@@ -200,7 +200,7 @@ When Astronomer confirms that your Astro Cluster has been created, you are ready
 
 ## Next steps
 
-Now that you have an Astro Cluster up and running, take a look at the docs below for information on how to start working in Astro:
+Now that you have an Astro cluster up and running, take a look at the docs below for information on how to start working in Astro:
 
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/get-started.md)

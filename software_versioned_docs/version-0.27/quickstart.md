@@ -46,7 +46,7 @@ For more information on the Astronomer CLI, read [CLI Quickstart](cli-quickstart
 
 ## Step 2: Install Astronomer Software
 
-If you are in charge of setting up Astronomer for your team, follow one of our Software installation guides to get Astronomer running on your Kubernetes Cluster.
+If you are in charge of setting up Astronomer for your team, follow one of our Software installation guides to get Astronomer running on your Kubernetes cluster.
 
 We have documentation for deploying Astronomer on:
 

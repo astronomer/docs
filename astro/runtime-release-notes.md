@@ -19,7 +19,7 @@ For instructions on how to upgrade, read [Upgrade Astro Runtime](upgrade-runtime
 ### Additional improvements
 
 - Update `astronomer-providers` to v1.5.0. For more information, see the [Astronomer Providers Changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id1).
-- Add support for Astro Clusters with [Istio](https://istio.io/) enabled.
+- Add support for Astro clusters with [Istio](https://istio.io/) enabled.
 
 ## Astro Runtime 5.0.3
 

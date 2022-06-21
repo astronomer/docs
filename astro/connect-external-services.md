@@ -30,15 +30,15 @@ Public connection traffic moves directly between your data plane and the externa
 
 Some data services, including Snowflake and Databricks, provide an additional layer of security by requiring you to allowlist a specific IP address before you can access the service.
 
-On Astro, each Cluster has a pair of unique external IP address that will persist throughout the lifetime of the Cluster. These IP addresses are assigned for network address translation, which means that they are responsible for all outbound traffic from your Astro Cluster to the internet. To retrieve the IP addresses for a given Cluster, open a ticket with [Astronomer support](https://support.astronomer.io) and request it. If you have more than one Cluster, you will need to allowlist each Cluster individually on your data service provider.
+On Astro, each cluster has a pair of unique external IP address that will persist throughout the lifetime of the cluster. These IP addresses are assigned for network address translation, which means that they are responsible for all outbound traffic from your Astro cluster to the internet. To retrieve the IP addresses for a given Cluster, open a ticket with [Astronomer support](https://support.astronomer.io) and request it. If you have more than one Cluster, you will need to allowlist each cluster individually on your data service provider.
 
 ## VPC peering
 
-Each Cluster on Astro runs in a dedicated VPC. To set up private connectivity between an Astro VPC and another VPC, you can set up a VPC peering connection. Peered VPCs provide additional security by ensuring private connectivity, reduced network transit costs, and simplified network layouts.
+Each cluster on Astro runs in a dedicated VPC. To set up private connectivity between an Astro VPC and another VPC, you can set up a VPC peering connection. Peered VPCs provide additional security by ensuring private connectivity, reduced network transit costs, and simplified network layouts.
 
 To create a VPC peering connection between an Astro Cluster's VPC and a target VPC, reach out to [Astronomer support](https://support.astronomer.io) and provide the following information:
 
-- Astro Cluster ID and Name
+- Astro cluster ID and Name
 - AWS Account ID or GCP Project ID of the target VPC
 - Region of the target VPC (_AWS only_)
 - VPC ID of the target VPC
@@ -50,7 +50,7 @@ Once peering is set up, the owner of the target VPC can expect to continue to wo
 
 ### DNS considerations with VPC peering (_AWS only_)
 
-To resolve DNS hostnames from your target VPC, your Cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled via AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
+To resolve DNS hostnames from your target VPC, your cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled via AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
 
 If your target VPC resolves DNS hostnames via **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the data plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
@@ -58,7 +58,7 @@ If your target VPC resolves DNS hostnames using [private hosted zones](https://d
 
 ## Workload Identity (_GCP only_)
 
-[Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) is recommended by Google as the best way for data pipelines running on GCP to access Google Cloud services in a secure and manageable way. All Astro Clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Kubernetes service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
+[Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) is recommended by Google as the best way for data pipelines running on GCP to access Google Cloud services in a secure and manageable way. All Astro clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Kubernetes service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
 
 To grant a Deployment on Astro access to GCP services such as BigQuery, you must:
 

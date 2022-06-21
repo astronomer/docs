@@ -2,7 +2,7 @@
 sidebar_label: 'Data protection'
 title: "Data protection"
 id: data-protection
-description: Learn how Astronomer uses encryption to protect Clusters and data.
+description: Learn how Astronomer uses encryption to protect clusters and data.
 ---
 
 ## Overview
@@ -17,7 +17,7 @@ All customer data flows within the control plane transit through a mTLS mesh, en
 
 All internal service communication within the data plane is transmitted using TLS 1.2 and secure ciphers. Astronomer plans to enforce an mTLS mesh to all Airflow Deployment namespaces in 2022.
 
-Each Cluster in your data plane has its own certificates which were generated when the Cluster was created and signed by the Let’s Encrypt certificate authority (CA). In 2022, Astronomer will enhance the security posture of Clusters in the data plane by removing public IPs and the need to sign certificates with a public CA.
+Each cluster in your data plane has its own certificates which were generated when the cluster was created and signed by the Let’s Encrypt certificate authority (CA). In 2022, Astronomer will enhance the security posture of clusters in the data plane by removing public IPs and the need to sign certificates with a public CA.
 
 ## Encryption at rest
 
@@ -27,7 +27,7 @@ Specifically, control plane data is encrypted on disk with a platform-managed ke
 
 ## Deployment network isolation
 
-All pods and services specific to a single Deployment on Astro are isolated to a corresponding Kubernetes namespace within the Astro Cluster in which the Deployment is hosted. All Deployment namespaces on Astro, including those running on the same Cluster, are network isolated from each other by default. In addition to the isolation between Deployment namespaces, Astronomer also restricts communication within a namespace to only what is required between components and associated ports.
+All pods and services specific to a single Deployment on Astro are isolated to a corresponding Kubernetes namespace within the Astro cluster in which the Deployment is hosted. All Deployment namespaces on Astro, including those running on the same Cluster, are network isolated from each other by default. In addition to the isolation between Deployment namespaces, Astronomer also restricts communication within a namespace to only what is required between components and associated ports.
 
 This level of network isolation is achieved using [network policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) enabled by the [Calico](https://kubernetes.io/docs/concepts/cluster-administration/networking/#calico) kubernetes network plugin.
 
