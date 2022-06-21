@@ -5,11 +5,12 @@ id: view-logs
 description: View Deployment Airflow logs in the Cloud UI.
 ---
 
-You can access the recorded Scheduler logs for a 24 hour period for a Deployment on the Cloud UI **Scheduler Logs** page. When a Deployment generates more than 500 logs in 24 hours, only the most recent 500 logs are available. Logs are color-coded to simplify log type identification. The scheduler logs can help you understand why specific tasks failed.
+Review logs in the Cloud UI or in Airflow to troubleshoot and resolve issues.
 
-Airflow task logs are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
 
 ## View Scheduler Logs
+
+You can access the recorded Scheduler logs for a 24 hour period for a Deployment on the Cloud UI **Scheduler Logs** page. When a Deployment generates more than 500 logs in 24 hours, only the most recent 500 logs are available. Logs are color-coded to simplify log type identification. The scheduler logs can help you understand why specific tasks failed.
 
 1. In the Cloud UI, select a Workspace.
 2. Click **Logs**.
@@ -26,6 +27,8 @@ Airflow task logs are available in the Airflow UI. Task logs can help you troubl
 5. Optional. To view the Scheduler logs for another Deployment, select a different Deployment in the **Select a deployment list**.
 
 ## View Airflow Task Logs
+
+Airflow task logs are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
 
 Submit a support request if you're using Amazon S3 and need your Airflow task logs forwarded to Datadog. You'll need to provide your Datadog API key and identify on which cluster(s) you want integration enabled. See [Submit a Support Request](astro-support.md).
 
