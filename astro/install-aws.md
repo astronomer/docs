@@ -104,12 +104,12 @@ After your Astro Cluster is created, Astronomer provides you with an external ID
 Astronomer recommends using the AWS Management Console to add the external ID to your AWS instance.
 
 <Tabs
-    defaultValue="management console"
+    defaultValue="console"
     values={[
-        {label: 'AWS Management Console', value: 'management console'},
-        {label: 'AWS Command Line', value: 'command line'},
+        {label: 'AWS Management Console', value: 'console'},
+        {label: 'AWS Command Line', value: 'command'},
     ]}>
-<TabItem value="management console">
+<TabItem value="console">
 
 1. Create an AWS administrator IAM user and user group. See [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
 
@@ -123,7 +123,7 @@ Astronomer recommends using the AWS Management Console to add the external ID to
 
 </TabItem>
 
-<TabItem value="command line">
+<TabItem value="command">
 
 1. Open the AWS CLI and run the following command to create a cross-account IAM Role:
 
