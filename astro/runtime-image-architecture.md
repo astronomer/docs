@@ -7,6 +7,8 @@ description: Reference documentation for Astro Runtime, a differentiated distrib
 
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and required by all Astronomer products. It is intended to provide organizations improved functionality, reliability, efficiency, and performance.
 
+## Differences Between Astro Runtime and Apache Airflow
+
 If your organization is using Software version 0.29 or later, you can deploy Astro Runtime images. Astro Runtime includes the following features:
 
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules that is maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
@@ -93,14 +95,12 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 
 | Astro Runtime                                   | Apache Airflow Version                                                                | 
 | ----------------------------------------------- | ----------------------------------------------------------------------------- |
-| 3.0.x                                       |       2.1.x                                                                       |
-| 4.0.x                                       |       2.2.x                                                                    | 
-| 4.1.x                                       |       2.2.x                                                                    |
-| 4.2.x                                       |       2.2.x                                                                      | 
-| 5.0.x                                       |       2.3.x                                                                        | 
+| 3.0.x                                       |       2.1.1                                                                       |
+| 4.0.x                                       |       2.2.0                                                                    | 
+| 4.1.x                                       |       2.2.4                                                                    |
+| 4.2.x                                       |       2.2.4                                                                      | 
+| 5.0.x                                       |       2.3.0                                                                        | 
 
 ## System Dependencies
 
-The following are the operating system (OS) level dependencies for running basic Astro Runtime system processes:
-
-- Debian 11.3 or later (bullseye). See [Installing Debian 11.3](https://www.debian.org/releases/bullseye/debian-installer/).
+Astro Runtime images are based on Debian 11.3 (bullseye).
