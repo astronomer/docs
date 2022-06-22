@@ -56,7 +56,7 @@ For detailed information on each instance type, see [GCP documentation](https://
 
 ## Deployment Worker Size Limits
 
-In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a Cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. For Deployments on GCP, you can select any worker size up to 65 AU (6.4 CPUs, 24 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. When you attempt to provision a worker size that isn't supported by the Cluster instance type, an error message appears in the Cloud UI.
+In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a Cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. For Deployments on GCP, you can select any worker size up to 64 AU (6.4 CPUs, 24 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. When you attempt to provision a worker size that isn't supported by the Cluster instance type, an error message appears in the Cloud UI.
 
 This table lists the approximate maximum worker size that is supported on Astro for each node instance type. Maximum worker size values may increase or decrease over time as the system requirements of Astro change.
 
