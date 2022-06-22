@@ -5,8 +5,7 @@ id: view-logs
 description: View Deployment Airflow logs in the Cloud UI.
 ---
 
-Review logs in the Cloud UI or in Airflow to troubleshoot and resolve issues.
-
+Review logs in the Cloud UI or in Airflow to troubleshoot and resolve issues with your data pipelines.
 
 ## View Scheduler Logs
 
