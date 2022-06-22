@@ -27,11 +27,11 @@ You can access the recorded Scheduler logs for a 24 hour period for a Deployment
 
 ## View Airflow Task Logs
 
-Airflow task logs are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
+Airflow task logs for local and deployed Airflow environments are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
 
 Submit a support request if you're using Amazon S3 and need your Airflow task logs forwarded to Datadog. You'll need to provide your Datadog API key and identify on which cluster(s) you want integration enabled. See [Submit a Support Request](astro-support.md).
 
-1. Open a browser and go to `http://localhost:8080`.
+1.  Access the Airflow UI. To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**. To access the Airflow UI in a local environment, open a browser and go to `http://localhost:8080`.
 2. Click a DAG.
 3. Click **Graph**.
 4. Click a task run.
