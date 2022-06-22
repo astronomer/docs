@@ -59,14 +59,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-2. Locate your `config.yaml` file. To retrieve it programmatically, run:
-
-    ```bash
-    # platform-release-name is usually "astronomer"
-    helm get values <your-platform-release-name> astronomer/astronomer -n astronomer
-    ```
-
-3. Add the following to your `config.yaml` file:
+2. Add the following to your `config.yaml` file:
 
     ```yaml
     astronomer:
@@ -89,8 +82,8 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
-5. For any existing Deployments, run the following command to sync the registry credentials.
+3. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+4. For any existing Deployments, run the following command to sync the registry credentials.
 
     ```bash
     kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
