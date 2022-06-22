@@ -138,7 +138,7 @@ To obtain a TLS certificate, complete one of the following setups:
 * **Option 1:** Obtain a TLS certificate from Let's Encrypt. We recommend this option for smaller organizations where your DNS administrator and Kubernetes cluster administrator are either the same person or on the same team.
 * **Option 2:** Request a TLS certificate from your organization's security team. We recommend this option for large organizations with their own  protocols for generating TLS certificates.
 
-> **Note:** Private CAs support on Azure is only available for clusters running containerd 1.5+, which is available on Kubernetes 1.22+. If you use a private CA, contact [Astronomer support](https://support.astronomer.io) before upgrading on AKS.
+> **Note:** Private CAs support on Azure is only available for clusters running containerd 1.5+, which is available on Kubernetes 1.22+.
 
 ### Option 1: Create TLS certificates using Let's Encrypt
 
