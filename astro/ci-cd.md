@@ -367,10 +367,10 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
           - build_image_and_deploy:
               context:
                  - <YOUR-CIRCLE-CI-CONTEXT>
-             filters:
-               branches:
-                 only:
-                   - main
+              filters:
+                branches:
+                  only:
+                    - main
     `}</code></pre>
 
 ### Drone
