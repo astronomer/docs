@@ -34,6 +34,11 @@ To access your `config.yaml` file directly from an existing Software installatio
 
 ```sh
 helm get values <your-installation-release-name> -n <your-installation-namespace> > config.yaml
+```
+
+If you retrieve your file this way, delete `USER-SUPPLIED VALUES:` from the first line before changing any other configurations.
+:::
+
 ## Step 2: Update Key-Value Pairs
 
 <!--- Version-specific -->
