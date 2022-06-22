@@ -413,7 +413,7 @@ To access logs directly for a given Deployment, click the new **Logs** button on
 
 ![Logging direct access button](/img/release-notes/logs-button.png)
 
-For more information on how to view logs, read [Deployment Logs](scheduler-logs.md).
+For more information on how to view logs, read [Deployment Logs](view-logs.md).
 
 ### Bug Fixes
 

@@ -106,7 +106,7 @@ Deployment health can have one of two statuses:
     - Your Deployment was recently created and the Airflow Webserver and Scheduler are still spinning up.
     - Your Deployment's Webserver and/or Scheduler are restarting or otherwise not in a healthy, running state.
 
-If your Deployment is unhealthy, we recommend checking the status of your tasks and waiting for a few minutes. If your Deployment is unhealthy for more than 5 minutes, we recommend [reviewing Scheduler logs](scheduler-logs.md) in the Cloud UI or reaching out to [Astronomer Support](https://support.astronomer.io).
+If your Deployment is unhealthy, we recommend checking the status of your tasks and waiting for a few minutes. If your Deployment is unhealthy for more than 5 minutes, we recommend [reviewing Scheduler logs](view-logs.md) in the Cloud UI or reaching out to [Astronomer Support](https://support.astronomer.io).
 
 ## Deployment Overview
 
