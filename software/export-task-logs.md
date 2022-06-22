@@ -51,14 +51,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 
 ### Configure Logging Sidecars
 
-1. Locate your Astronomer Software `config.yaml`. To retrieve it programatically, run the following:
-
-    ```bash
-    # platform-release-name is usually "astronomer"
-    helm get values <your-platform-release-name> astronomer/astronomer -n astronomer
-    ```
-
-2. Add the following entry to your `config.yaml:`
+1. Add the following entry to your `config.yaml:`
 
     ```yaml
     global:
@@ -70,7 +63,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
         terminationEndpoint: http://localhost:8000/quitquitquit
     ```
 
-3. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
+2. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
 
 
 :::info
