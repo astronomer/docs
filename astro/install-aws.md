@@ -103,7 +103,7 @@ From here, our team will provision an Astro Cluster according to the specificati
 
 ## Step 3: Create a Cross-Account IAM Role for Astro
 
-After your Astro Cluster is created, Astronomer provides you with an external ID. Save the external ID as a secret or in another secure format. You need to add the external ID to AWS to allow Astronomer to access your AWS resources. For more information about using an external ID in AWS, see [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
+After your Astro Cluster is created, Astronomer provides you with an external ID. Save the external ID as a secret or in another secure format. You need to add the external ID to AWS to allow Astronomer to access your AWS resources. For more information, see [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
 Astronomer recommends using the AWS Management Console to add the external ID to your AWS instance.
 
@@ -117,7 +117,7 @@ Astronomer recommends using the AWS Management Console to add the external ID to
 
 1. Create an AWS administrator IAM user and user group. See the AWS topic [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
 
-2. Open the [Astronomer cross-account role template](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402).
+2. Open the [Astronomer cross-account role CloudFormation template](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402).
 
 3. Enter the external ID provided by Astronomer in the **ExternalId** field. 
 
