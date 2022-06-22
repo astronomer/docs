@@ -1,0 +1,31 @@
+name: Reindex Algolia
+concurrency: algolia
+on:
+  push:
+    branches:
+      - main
+jobs:
+  reindex:
+    runs-on: ubuntu-latest
+    container:
+      image: algolia/docsearch-scraper
+      env:
+        ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+        ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+        with:
+          path: docs
+      - name: Create CONFIG env var from algolia-config.json
+        # Uses solution for multiline string env vars
+        # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#multiline-strings
+        run: |
+          echo "CONFIG<<EOF" >> $GITHUB_ENV
+          echo "$(cat docs/algolia-config.json)" >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+      - name: Run Algolia
+        run: |
+          pipenv install
+          pipenv run python -m src.index
+        working-directory: /root

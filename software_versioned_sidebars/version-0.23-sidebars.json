@@ -1,0 +1,292 @@
+{
+  "version-0.23/software": [
+    {
+      "type": "doc",
+      "id": "version-0.23/overview"
+    },
+    {
+      "type": "category",
+      "label": "Getting Started",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/quickstart"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/faq"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Develop",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/cli-quickstart"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/customize-image"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/kubepodoperator-local"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Install",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/install-aws"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/install-azure"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/install-gcp"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Deploy",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/manage-workspaces"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/configure-deployment"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/deploy-cli"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/deployment-logs"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/environment-variables"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/ci-cd"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Customize Airflow",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/manage-airflow-versions"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/access-airflow-database"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/kubepodoperator"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/kubernetes-executor"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/airflow-alerts"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/secrets-backend"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/integrate-iam"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/airflow-api"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Manage Astronomer",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/integrate-auth-system"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/workspace-permissions"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/manage-platform-users"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/houston-api"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/upgrade-astronomer-stable"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/upgrade-to-0-23"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/apply-platform-config"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/registry-backend"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/configure-platform-resources"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/renew-tls-cert"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Monitor",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/grafana-metrics"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/kibana-logging"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/platform-alerts"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/logs-to-s3"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Astronomer Certified",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/image-architecture"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/single-node-install"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/install-packages"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/upgrade-ac"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/ac-cve"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/ac-support-policy"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Troubleshoot",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/kubectl"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/debug-install"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/disaster-recovery"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Resources",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.23/release-notes"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/system-components"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/support"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/cli-reference"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/version-compatibility-reference"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.23/release-lifecycle-policy"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    }
+  ]
+}
