@@ -87,7 +87,7 @@ docker run --rm {image} pip freeze | grep apache-airflow-provider
 
 ## Python Versioning
 
-Astro Runtime supports Python package version 3.9.
+Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version, Astronomer recommends that you use the KuberentesPodOperator. See [Run the KubernetesPodOperator on Astronomer Software](kubernetespodoperator.md).
 
 ## Astro Runtime and Apache Airflow Parity
 
