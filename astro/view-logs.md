@@ -38,7 +38,7 @@ Submit a support request if you're using Amazon S3 and need your Airflow task lo
 5. Click **Instance Details**.
 6. Click **Log**.
 
-## Access Airflow Component Logs
+## Access Airflow Component Logs (Local Development Only)
 
 Airflow Webserver, Worker, and Triggerer logs are not available for Astro Deployments.
 
