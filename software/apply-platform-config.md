@@ -28,18 +28,12 @@ This file was created when you installed Astronomer using one of the following g
 * [GCP GKE Installation Guide](install-gcp-standard.md#step-7-configure-your-helm-chart)
 * [Azure AKS Installation Guide](install-azure-standard.md#step-7-configure-your-helm-chart)
 
-
 :::tip
 
-If you do not have access to the existing config.yaml file, it can be retrieved using the following command:
+To access your `config.yaml` file directly from an existing Software installation, run the following command:
 
 ```sh
-helm get values <your-platform-release-name> -n <your-platform-namespace> > config.yaml
-```
-
-The first line from the created config.yaml file, `USER-SUPPLIED VALUES:`, must be deleted before the file can be used.
-:::
-
+helm get values <your-installation-release-name> -n <your-installation-namespace> > config.yaml
 ## Step 2: Update Key-Value Pairs
 
 <!--- Version-specific -->
