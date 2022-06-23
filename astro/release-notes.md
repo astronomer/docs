@@ -27,7 +27,7 @@ You can now [create an Astro cluster on GCP](create-cluster.md) in the following
 - `europe-west1` (Belgium)
 - `europe-west2` (England)
 - `europe-west3` (Frankfurt)
-- `southamerica-east1` (Sau Paolo)
+- `southamerica-east1` (São Paulo)
 - `us-west2` (Los Angeles)
 - `us-west4` (Nevada)
 
