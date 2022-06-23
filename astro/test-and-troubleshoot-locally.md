@@ -53,7 +53,7 @@ By default, the `tests` directory in your Astro project includes a default DAG i
 
 ## View Airflow Logs
 
-You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change. See [View Logs](view-logs.md).
+You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change. See [View logs](view-logs.md).
 
 ## Run Airflow CLI Commands
 
