@@ -45,15 +45,15 @@ Astronomer Runtime includes additional features which are not available in Astro
 
 To upgrade a Deployment to Runtime, follow the steps in [Upgrade Airflow](manage-airflow-versions.md), making sure to replace the Astronomer Certified image in your Dockerfile with an Astro Runtime version.
 
-### Use a Custom Container image Registry To Deploy code
+### Use a custom container image registry to deploy code
 
 You can now configure a custom container image registry in place of Astronomer's default registry. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and approved/ unapproved Python and OS-level dependencies prior to deploying code. To configure this feature, see [Configure a Custom image Registry](custom-image-registry.md).
 
-### Export Task Logs Using Logging Sidecars
+### Export task logs using logging sidecars
 
 You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster where security is a concern, as well as for organizations running many small tasks using the Kubernetes executor. To configure this feature, see [Export Task Logs](export-task-logs.md).
 
-### Simplified Configuration for namespace Pools
+### Simplified configuration for namespace pools
 
 The process for configuring namespace pools has been simplified. As an alternative to manually creating namespaces, you can now delegate the creation of each namespace, including roles and rolebindings, to Astronomer Software. While this feature is suitable for most use cases, you can still manually create namespaces if you want more fine-grained control over the namespace's resources and permissions. For more information, see [Namespace Pools](namespace-pools.md).
 

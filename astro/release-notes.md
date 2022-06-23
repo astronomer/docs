@@ -18,7 +18,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ## June 9, 2022
 
-### Update Deployment Configurations with the Astro CLI
+### Update Deployment configurations with the Astro CLI
 
 You can now programmatically update the configurations for your Astro Deployments using Deployment API keys and the Astro CLI. Updating a Deployment with an API key doesn't require manual user authentication, meaning that you can now add Deployment configuration steps to automated processes such as CI/CD pipelines.
 
@@ -36,7 +36,7 @@ Specifically, you can now run the following commands with Deployment API keys:
 
 ## June 2, 2022
 
-### Support for the `us-east4` GCP Region
+### Support for the `us-east4` GCP region
 
 You can now [create an Astro cluster on GCP](create-cluster.md) in the `us-east4` region, which is located in northern Virginia, USA.
 
@@ -44,7 +44,7 @@ For a list of all GCP regions that Astro supports, see [GCP Resource Reference](
 
 ## May 26, 2022
 
-### New Datasets Page in the Cloud UI
+### New Datasets page in the Cloud UI
 
 You can now use the new **Datasets** page in the **Lineage** tab to view a table of datasets that your DAGs have read or written to. This information can help you quickly identify dataset dependencies and data pipeline access requirements.
 
@@ -58,7 +58,7 @@ Click the name of a dataset to show its lineage graph. For more information, see
 
 ## May 5, 2022
 
-### Data lineage Is Now Available on Astro
+### Data lineage Is now available on Astro
 
 We are excited to introduce data lineage to Astro. You now have access to a new **Lineage** view in the Cloud UI that visualizes data movement across datasets in your Organization based on integrations with Airflow, Apache Spark, dbt, Great Expectations, and more.
 
@@ -87,7 +87,7 @@ Astro now officially supports Astro clusters on Google Cloud Platform (GCP). Thi
 
 For more information about the installation process and supported configurations, see [Install Astro on GCP](install-gcp.md) and [Resource Reference GCP](resource-reference-gcp.md).
 
-### Support for Organization-Level User Invites
+### Support for Organization-Level user invites
 
 You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an-organization) without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.
 
@@ -99,7 +99,7 @@ You can now [invite users to an Astro Organization](add-user.md#add-a-user-to-an
 
 ## April 28, 2022
 
-### New AWS Node Instance Types Available
+### New AWS node instance types available
 
 To widen our support for various use cases and levels of scale, we've expanded the types of AWS node instances that are supported on Astro. You can now create clusters with:
 
@@ -115,7 +115,7 @@ For a full list of node instance types that are supported on Astro, see [AWS Res
 
 ## April 21, 2022
 
-### Feedback in Cloud UI on worker Size Limits
+### Feedback in Cloud UI on worker size limits
 
 The Cloud UI now renders an error if you try to modify the **Worker Resources**  to a combination of CPU and memory that is not supported by the node instance type of the cluster that the Deployment is hosted on. This validation ensures that the worker size you request is supported by the infrastructure available in your Astro Cluster, and minimizes silent task failures that might have occurred due to invalid resource requests.
 
@@ -137,7 +137,7 @@ For a reference of all node instance types Astro supports and their correspondin
 
 ## March 31, 2022
 
-### New Analytics Page in Cloud UI to Monitor Deployments
+### New analytics page in Cloud UI to monitor Deployments
 
 The Cloud UI now includes a dedicated **Analytics** page that contains various Deployment-level metrics. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time:
 
@@ -145,7 +145,7 @@ The Cloud UI now includes a dedicated **Analytics** page that contains various D
 
 For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
 
-### Lineage Backend Upgrade Scheduled for All Organizations
+### Lineage backend upgrade scheduled for all Organizations
 
 As part of [Astronomer's acquisition of Datakin](https://www.astronomer.io/blog/astronomer-acquires-datakin-the-data-lineage-tool/), data lineage features are coming soon to Astro. The first step in enabling these features is to implement lineage backends for existing Astro customers.
 
@@ -165,7 +165,7 @@ A few additional notes about this upgrade:
 
 For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://www.astronomer.io/guides/airflow-openlineage).
 
-### New AWS Regions Available
+### New AWS regions available
 
 You can now [create new Clusters](create-cluster.md) in:
 
@@ -184,7 +184,7 @@ For a full list of AWS regions supported on Astro, see [AWS Resource Reference](
 
 ## March 25, 2022
 
-### Maximum Node Count is now Configurable per Cluster
+### Maximum node count is now configurable per Cluster
 
 As of this release, **Maximum Node Count** is now a configurable setting for new and existing clusters. On Astro, maximum node count represents the total number of EC2 nodes that your cluster can support at any given time. For an Astro cluster on AWS, EC2 nodes are the primary unit of infrastructure required to run a Deployment and its components, including workers and the Airflow scheduler. New clusters have a maximum node count of 20 by default, but the setting can be modified to any value from 2 to 100 at any time.
 
@@ -198,7 +198,7 @@ To update this setting for an existing Cluster, reach out to [Astronomer support
 
 ## March 17, 2022
 
-### Export Task Usage as a CSV File
+### Export task usage as a CSV file
 
 In the Cloud UI, you can now export your task usage data from the **Usage** tab as a CSV file to perform more complex data analysis related to your Airflow usage and costs. For example, you can use the file as the basis for a pivot table that shows total task usage by Workspace.
 
@@ -212,7 +212,7 @@ To export your task usage data as a CSV file, click the **Export** button in the
 
 ## March 10, 2022
 
-### Running Docker image Tag in Airflow UI
+### Running Docker image tag in Airflow UI
 
 The Docker image that is running on the Airflow webserver of your Deployment is now shown as a tag in the footer of the Airflow UI. Depending on how your team deploys to Astro, this tag is either a unique identifier generated by a CI tool or a timestamp generated by the Astro CLI on `astro deploy`. Both represent a unique version of your Astro project.
 
@@ -253,7 +253,7 @@ If you ever have trouble verifying a code push to a Deployment on Astro, reach o
 
 ## February 17, 2022
 
-### Introducing Astro and a New Look
+### Introducing Astro and a new look
 
 This week's release introduces a reimagined Astronomer brand that embraces **Astro** as a rename of Astronomer Cloud. The rebrand includes a new Astronomer logo, color palette, and font.
 
@@ -269,7 +269,7 @@ In addition to visual changes, we've renamed the following high-level Astro comp
 
 We hope you find this exciting. We're thrilled.
 
-### New Organization Roles for Users
+### New Organization roles for users
 
 The following Organization-level roles are now supported on Astro:
 
@@ -279,7 +279,7 @@ The following Organization-level roles are now supported on Astro:
 
 Organization roles can be updated by an Organization Owner in the **People** tab of the Cloud UI. For more information about these roles, see [User permissions](user-permissions.md).
 
-### Create New Workspaces from the Cloud UI
+### Create new Workspaces from the Cloud UI
 
 All users can now create a new Workspace directly from the **Overview** tab of the Cloud UI:
 
@@ -294,7 +294,7 @@ When you create a new Workspace, you will automatically become a Workspace Admin
 
 ## February 11, 2022
 
-### Monitor DAG runs Across All Deployments in a Workspace
+### Monitor DAG runs across all Deployments in a Workspace
 
 You can view key metrics about recent DAG runs through the new **DAGs** page in the Cloud UI. Use this page to view DAG runs at a glance, including successes and failures, across all Deployments in a given Workspace. You can also drill down to a specific DAG and see metrics about its recent runs.
 
@@ -315,7 +315,7 @@ For more information about the **DAGs** page, see [Deployment metrics](deploymen
 
 ## February 3, 2022
 
-### Support for Third-Party Identity Providers
+### Support for third-party identity providers
 
 You can now integrate both Azure AD and Okta as identity providers (IdPs) for federated authentication on Astro. By setting up a third-party identity provider, a user in your organization will be automatically logged in to Astro if they're already logged in via your IdP. By adding new Astro users through your IdP's own user management system, Workspace admins can automatically add new users to their Workspace without those users needing to individually sign up for Astro.
 
@@ -327,7 +327,7 @@ The Astro CLI (`astro`) is now generally available as the official command-line 
 
 For more information on the Astro CLI, see [CLI Release Notes](cli/release-notes.md). For install instructions, read [Install the CLI](cli/get-started.md).
 
-### Multiple Authentication Methods for a Single User Account
+### Multiple authentication methods for a single user account
 
 Astro now supports multiple authentication methods for a single user account. This means that as long as you're using a consistent email address, you now have the flexibility to authenticate with GitHub, Google, username/password, and/or [an external identity provider (idP)](configure-idp.md) at any time. Previously, a single user account could only be associated with one authentication method, which could not be changed after the account was created.
 
@@ -339,7 +339,7 @@ This also means that all Organizations now have GitHub, Google, and username/pas
 
 ## January 13, 2022
 
-### Identity-Based Login Flow
+### Identity-based login flow
 
 Astro now utilizes an identity-based login flow for all users. When you first log in via the Cloud UI, you now only need to enter the email address for your account. Astro assumes your Organization and brings you directly to your Astro Organization's login screen.
 
@@ -365,7 +365,7 @@ The **Scheduler Logs** tab in the Cloud UI has been updated to make logs easier 
 
 ![Logs page in the UI](/img/release-notes/log-improvements.png)
 
-### Removal of worker Termination Grace Period
+### Removal of worker termination grace period
 
 The **Worker Termination Grace Period** setting is no longer available in the Cloud UI or API. Previously, users could set this to anywhere between 1 minute and 24 hours per Deployment. This was to prevent running tasks from being interrupted by a code push. Today, however, existing Celery workers don't have to terminate in order for new workers to spin up and start executing tasks. Instead, existing workers will continue to execute running tasks while a new set of workers gets spun up concurrently to start executing most recent code.
 
@@ -382,7 +382,7 @@ This does not change or affect execution behavior for new or existing Deployment
 
 ## December 16, 2021
 
-### View scheduler Error Logs from the Cloud UI
+### View scheduler error logs from the Cloud UI
 
 The new **Logs** tab in the Cloud UI shows scheduler error and warning logs for all Deployments in your Workspace. When you select a Deployment in this menu, all error logs generated over the last 30 minutes appear in the UI.
 
@@ -410,7 +410,7 @@ Fixed various bugs in the Cloud UI to better handle nulls and unknowns in Deploy
 
 ## December 6, 2021
 
-### New "Usage" Tab in the Cloud UI
+### New "Usage" tab in the Cloud UI
 
 Total task volume for your Organization is now available in a new **Usage** tab in the Cloud UI. Astro is priced based on successful task runs, so this view can help you monitor both Astro cost as well as Airflow usage in aggregate and between Deployments.
 
@@ -418,7 +418,7 @@ Total task volume for your Organization is now available in a new **Usage** tab 
 
 For more information about the **Usage** tab, read [Deployment metrics](deployment-metrics.md#usage).
 
-### New AWS Regions Available
+### New AWS regions available
 
 You can now create new clusters in:
 
@@ -447,7 +447,7 @@ For a full list of AWS regions supported on Astro, see [AWS Resource Reference](
 - The Cloud UI now has error handling for attempts to access a Deployment that does not exist.
 - If you attempt to modify an existing secret environment variable, the **Value** field is now blank instead of showing hidden characters.
 
-### data plane Improvements
+### Data plane improvements
 
 - Amazon EBS volumes have been upgraded from gp2 to [gp3](https://aws.amazon.com/about-aws/whats-new/2020/12/introducing-new-amazon-ebs-general-purpose-volumes-gp3/) for improved scale and performance.
 - EBS volumes and S3 buckets are now encrypted by default.
@@ -455,7 +455,7 @@ For a full list of AWS regions supported on Astro, see [AWS Resource Reference](
 
 ## November 19, 2021
 
-### Secret Environment Variables
+### Secret environment variables
 
 You can now set secret environment variables via the Cloud UI. The values of secret environment variables are hidden from all users in your Workspace, making them ideal for storing sensitive information related to your Astro projects.
 
@@ -470,7 +470,7 @@ For more information, read [Set environment variables via the Cloud UI](environm
 
 ## November 11, 2021
 
-### Deployment metrics Dashboard
+### Deployment metrics dashboard
 
 In the Cloud UI, your Deployment pages now show high-level metrics for Deployment health and performance over the past 24 hours.
 
@@ -492,7 +492,7 @@ For more information on this feature, read [Deployment metrics](deployment-metri
 
 ## October 29, 2021
 
-### Cloud UI Redesign
+### Cloud UI redesign
 
 The Cloud UI has been redesigned so that you can more intuitively manage Organizations, Workspaces, and your user profile.
 
