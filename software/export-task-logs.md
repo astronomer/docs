@@ -51,7 +51,8 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 
 ### Configure Logging Sidecars
 
-1. Add the following entry to your `config.yaml:`
+1. Retrieve your `config.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
+2. Add the following entry to your `config.yaml` file:
 
     ```yaml
     global:
@@ -62,8 +63,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
         # needed to prevent zombie deployment worker pods when using KubernetesExecutor
         terminationEndpoint: http://localhost:8000/quitquitquit
     ```
-
-2. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
+3. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
 
 
 :::info
