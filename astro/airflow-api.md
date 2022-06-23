@@ -121,7 +121,7 @@ print(response.json())
 # Prints metadata of the DAG run that was just triggered
 ```
 
-### Trigger a DAG run by Date
+### Trigger a DAG run by date
 
 You can also specify a `logical_date` at the time in which you wish to trigger the DAG run by passing the `logical_date` with the desired timestamp with the request's `data` field. The timestamp string is expressed in UTC and must be specified in the format `"YYYY-MM-DDTHH:MM:SSZ"`, where:
 
