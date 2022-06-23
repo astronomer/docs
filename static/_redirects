@@ -210,7 +210,7 @@
 
 # redirect links to renamed files
 /astro/configure-deployment /astro/configure-deployment-resources 301
-/astro/scheduler-logs /astro/cli/astro-view-logs 301
+/astro/scheduler-logs /astro/view-logs 301
 
 
 # redirect links out in the wild (beyond our control)

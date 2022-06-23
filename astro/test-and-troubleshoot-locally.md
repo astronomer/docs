@@ -51,6 +51,10 @@ By default, the `tests` directory in your Astro project includes a default DAG i
 
 `astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI Command Reference](cli/astro-dev-pytest.md).
 
+## View Airflow Logs
+
+You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change. See [View Logs](view-logs.md).
+
 ## Run Airflow CLI Commands
 
 To run [Apache Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) commands locally, run the following:
