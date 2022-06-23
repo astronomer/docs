@@ -89,7 +89,7 @@ To install the Astronomer CLI on a machine with an [Apple M1 chip](https://www.a
 3. Run the following command to install the Astronomer CLI:
 
     ```sh
-    arch -x86_64 /usr/local/Homebrew/bin/brew install astronomer/tap/astro@0.25.5
+    arch -x86_64 /usr/local/Homebrew/bin/brew install astro
     ```
 
 If you still have issues during installation, ensure that [Rosetta 2](https://support.apple.com/en-us/HT211861) is installed on your machine and try again.
