@@ -61,7 +61,7 @@ For example, if Astronomer Software v0.26 were a stable version first released i
 - If Astronomer Software v0.27 came out as a new stable release, bug fixes would no longer be backported to Astronomer v0.26 and customers would be encouraged to upgrade.
 - If a major security issue was identified in v0.26, a fix would be backported and released as a patch at any time during its 6 month maintenance period. If v0.27 came out and succeeded v0.26 as the latest stable version of Astronomer Software, a security fix would still be backported to v0.26.
 
-If you contact [Astronomer support](https://support.astronomer.io) about an issue you are experiencing while running an unmaintained version, our team will invite you to upgrade as an initial mitigation step.
+If you contact [Astronomer Support](https://support.astronomer.io) about an issue you are experiencing while running an unmaintained version, our team will invite you to upgrade as an initial mitigation step.
 
 ### End of Maintenance Date
 

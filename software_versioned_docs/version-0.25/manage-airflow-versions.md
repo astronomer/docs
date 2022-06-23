@@ -249,7 +249,7 @@ Now, test your changes locally via the Astronomer CLI by running:
 
 If your image does not build successfully, it's likely that you're either missing additional dependencies or one of your packages is not named properly. Add and modify as needed.
 
-For help from our team, reach out to [Astronomer support](https://support.astronomer.io).
+For help from our team, reach out to [Astronomer Support](https://support.astronomer.io).
 
 ### Step 5. Push to Astronomer
 

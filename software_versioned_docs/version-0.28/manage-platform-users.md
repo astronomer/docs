@@ -18,7 +18,7 @@ When Astronomer Software is first deployed, the first user to log in is granted 
 - Invitation to a Workspace by a Workspace Admin
 - Invitation to Astronomer by a System Admin
 - Signing up via the Software UI without an invitation (requires "Public Signups")
-- Imported to Astronomer through an [IdP group](import-idp-groups.md)
+- Imported to Astronomer through an [IDP group](import-idp-groups.md)
 
 On Astronomer, administrators have the option to either open the platform to public signups or limit account creation to users invited by others.
 

@@ -21,14 +21,14 @@ Release date: April 8, 2022
 
 ### Additional Improvements
 
-- Users added to Astronomer Software via an [IdP group](import-idp-groups.md) no longer need to be invited by email in order to join Astronomer.
+- Users added to Astronomer Software via an [IDP group](import-idp-groups.md) no longer need to be invited by email in order to join Astronomer.
 - Teams now support [Azure AD Connect sync](https://docs.microsoft.com/en-us/azure/active-directory/hybrid/concept-azure-ad-connect-sync-user-and-contacts) for user groups.
 - System admins can no longer remove the last user from an active Workspace or Deployment. This ensures that a given Workspace or Deployment can always be deleted by an existing member. Similarly, Workspace Admins can no longer remove a Team if doing so results in a Workspace having zero Admins.
-- You can now map your IdP's groups claim to Astronomer's expected claim of `groups` via the `astronomer.houston.config.auth.openidConnect.<idp>.claimsMapping` setting in `config.yaml`.
+- You can now map your IDP's groups claim to Astronomer's expected claim of `groups` via the `astronomer.houston.config.auth.openidConnect.<idp>.claimsMapping` setting in `config.yaml`.
 ### Bug Fixes
 
 - Fixed an issue where deleted Teams did not disappear from the Software UI until you refreshed the page
-- Fixed an issue where Teams were still available in the Software UI even when their underlying IdP group had been deleted from the IdP
+- Fixed an issue where Teams were still available in the Software UI even when their underlying IDP group had been deleted from the IDP
 - Fixed an issue where creating a Deployment with the default resource configuration would result in a Deployment having a **Scheduler Count** of 1 instead of the stated default of 2
 - Fixed an issue where you could not deploy code to a Deployment that shared the release name of a previous Deployment which was hard deleted
 - Fixed an issue where you could not create a Deployment with a numeric-only name in a pre-created namespace
@@ -56,7 +56,7 @@ Release date: March 14, 2022
 - Fixed several CVEs
 - Fixed a few issues where some buttons in the Software UI did not link to the appropriate page
 - Fixed an issue where you could not install Astronomer Software 0.27 or 0.28 in an [airgapped environment](install-airgapped.md)
-- Fixed an issue where System and Workspace Admins were able to delete users that were part of an [IdP team](import-idp-groups.md)
+- Fixed an issue where System and Workspace Admins were able to delete users that were part of an [IDP team](import-idp-groups.md)
 
 ## v0.28.1
 
@@ -72,9 +72,9 @@ Release date: February 15, 2022
 
 ### Import Identity Provider User Groups as Teams
 
-You now can import existing identity provider (IdP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IdP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.
+You now can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IDP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.
 
-For more information about configuring this feature, read [Import IdP Groups](import-idp-groups.md). To learn more about adding and setting permissions for Teams via the Astronomer UI, read [User Permissions](workspace-permissions.md#via-teams).
+For more information about configuring this feature, read [Import IDP Groups](import-idp-groups.md). To learn more about adding and setting permissions for Teams via the Astronomer UI, read [User Permissions](workspace-permissions.md#via-teams).
 
 ### Additional Improvements
 
