@@ -193,7 +193,7 @@ As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-air
 
 :::tip
 
-To get started with Airflow 2 locally, read [Get started with Apache Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.15. For questions, reach out to [Astronomer Support](https://support.astronomer.io).
+To get started with Airflow 2 locally, read [Get started with Apache Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.15. For questions, reach out to [Astronomer support](https://support.astronomer.io).
 
 :::
 

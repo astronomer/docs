@@ -59,7 +59,7 @@ To force a deploy even if your project has DAG errors, you can run `astro deploy
 
 To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [Pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy will also fail. This can help you prevent your team from deploying DAGs to Astro that aren't production-grade.
 
-For more information about using Pytest, see [Test and Troubleshoot](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
+For more information about using Pytest, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
 
 :::
 
@@ -98,9 +98,9 @@ If you want to force long-running tasks to terminate sooner than 24 hours, speci
 
 Now that you're familiar with deploying DAGs to Astro, consider reading:
 
-- [Develop your Project](develop-project.md)
-- [Set Environment Variables](environment-variables.md)
+- [Develop your project](develop-project.md)
+- [Set environment variables](environment-variables.md)
 
-For up-to-date information about product limitations, read [Known Limitations](known-limitations.md).
+For up-to-date information about product limitations, read [Known limitations](known-limitations.md).
 
 If you have any questions, reach out to us. We're here to help.

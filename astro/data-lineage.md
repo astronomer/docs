@@ -19,11 +19,11 @@ From the **Lineage** tab on Astro, you can access the following four pages:
 
 You can use these pages to diagnose issues that may be difficult to troubleshoot in other environments. For example, if an Airflow task failed because a database schema changed, you can use the **Lineage** page on Astro to determine which job caused the change and which downstream tasks failed as a result.
 
-All members of your Organization can view the **Lineage** page. For more information on data lineage and related concepts, see [Data lineage Concepts](data-lineage-concepts.md).
+All members of your Organization can view the **Lineage** page. For more information on data lineage and related concepts, see [Data lineage concepts](data-lineage-concepts.md).
 
 :::info
 
-This functionality is early access and under active development. If you have any questions or feedback about this feature, contact [Astronomer Support](https://support.astronomer.io/).
+This functionality is early access and under active development. If you have any questions or feedback about this feature, contact [Astronomer support](https://support.astronomer.io/).
 
 :::
 
@@ -35,7 +35,7 @@ You can use the search field at the top of the Cloud UI to view the lineage grap
 
 The search results include the namespace that emitted the matching event. When an Astro Deployment emits the lineage event, the namespace matches the Deployment namespace shown in the **Deployments** page of the Cloud UI. Clicking a search result opens the **Lineage** page and shows the lineage graph for the selected job or dataset. You can also access the lineage graph for a recent job run in the **Explore** page below **Most Recent Runs**.
 
-The **Lineage** page shows lineage data only for the most recent run of a given data pipeline. To explore lineage data from previous runs, see [Compare Lineage Graphs from Previous Runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
+The **Lineage** page shows lineage data only for the most recent run of a given data pipeline. To explore lineage data from previous runs, see [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
 
 :::info
 
@@ -118,11 +118,11 @@ Use the **Quality** tab to detect unexpected changes or statistical variance in 
 
 #### Rows
 
-The Rows chart shows the total number of rows in the dataset over time. A significant change in rows can occur naturally. For example, a rapid increase of customer orders occurs during the holiday season. However, it can also indicate an error in an upstream job, especially if it is sudden or unexpected.
+The **Rows** chart shows the total number of rows in the dataset over time. A significant change in rows can occur naturally. For example, a rapid increase of customer orders occurs during the holiday season. However, it can also indicate an error in an upstream job, especially if it is sudden or unexpected.
 
 #### Bytes
 
-The Bytes chart shows the total size of the dataset over time. A sudden increase in dataset size usually indicates that something has changed in the definition of the data. For example, a new column might have been added to your table containing the description of an order, where before it contained only part numbers and quantities.
+The **Bytes** chart shows the total size of the dataset over time. A sudden increase in dataset size usually indicates that something has changed in the definition of the data. For example, a new column might have been added to your table containing the description of an order, where before it contained only part numbers and quantities.
 
 #### Quality metrics
 

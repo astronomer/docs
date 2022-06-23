@@ -15,7 +15,7 @@ On Astronomer Software, a Postgres metadata database will be created for each in
 This guide will cover guidelines for the following:
 
 - Risks associated with and use cases for database Access
-- Access to Airflow's database in Local Development
+- Access to Airflow's database in local development
 - Decode Astronomer's metadata Secret
 - Access to Airflow's database on Astronomer
 - Example DAG that incorporates a query to the database
@@ -348,7 +348,7 @@ In this example, that'd be:
 
 To finish creating and confirming your connection, enter the credentials from Step 7 into the `airflow_db` connection in the Airflow UI.
 
-If you want to store this connection and access it programmatically, you're also free to store it in a [Secret Backend](secrets-backend.md).
+If you want to store this connection and access it programmatically, you're also free to store it in a [secret backend](secrets-backend.md).
 
 ## What's next
 

@@ -43,13 +43,13 @@ Environment variables can be set directly in the Cloud UI. To do so:
 
 :::caution
 
-Environment variables marked as secret are stored securely by Astronomer and will never be shown in the Cloud UI, but it's possible for a user in your organization to proactively create or configure a DAG that exposes those values in Airflow task logs. Airflow task logs are visible to all Workspace members in the Airflow UI and accessible in your Astro Cluster's Amazon S3 bucket.
+Environment variables marked as secret are stored securely by Astronomer and will never be shown in the Cloud UI, but it's possible for a user in your organization to proactively create or configure a DAG that exposes those values in Airflow task logs. Airflow task logs are visible to all Workspace members in the Airflow UI and accessible in your Astro cluster's Amazon S3 bucket.
 
 To avoid exposing secret values in task logs, instruct your team to not log environment variables in DAG code. At this time, there is no way for Astronomer to prohibit this.
 
 :::
 
-If you prefer to work with the Astro CLI, you can create and update environment variables using the `astro deployment variable create` and `astro deployment variable update` commands. For more information, see [CLI Command Reference](cli/astro-deployment-variable-create.md).
+If you prefer to work with the Astro CLI, you can create and update environment variables using the `astro deployment variable create` and `astro deployment variable update` commands. For more information, see [CLI command reference](cli/astro-deployment-variable-create.md).
 
 ### Edit existing values
 
@@ -117,7 +117,7 @@ Once your environment variables are added:
 
 ## Add Airflow connections and variables using environment variables
 
-For users who regularly use [Airflow connections](https://airflow.apache.org/docs/apache-airflow/stable/concepts/connections.html) and [Variables](https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html), we recommend storing and fetching them via environment variables.
+For users who regularly use [Airflow connections](https://airflow.apache.org/docs/apache-airflow/stable/concepts/connections.html) and [variables](https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html), we recommend storing and fetching them via environment variables.
 
 As mentioned above, Airflow connections and variables are stored in Airflow's Metadata database. Adding them outside of task definitions and operators requires an additional connection to Airflow's Postgres Database, which is called every time the scheduler parses a DAG (as defined by `process_poll_interval`, which is set to 1 second by default).
 

@@ -11,7 +11,7 @@ description: Astronomer Software release notes.
 
 This document includes all release notes for Astronomer Software version 0.29.
 
-0.29 is the latest stable version of Astronomer Software, while 0.28 remains  the latest LTS long-term support (LTS) version of Astronomer Software. To upgrade to 0.29, read [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, read [Release and Lifecycle Policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI Release Notes](cli-release-notes.md).
+0.29 is the latest stable version of Astronomer Software, while 0.28 remains  the latest LTS long-term support (LTS) version of Astronomer Software. To upgrade to 0.29, read [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, read [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md).
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
@@ -47,15 +47,15 @@ To upgrade a Deployment to Runtime, follow the steps in [Upgrade Airflow](manage
 
 ### Use a custom container image registry to deploy code
 
-You can now configure a custom container image registry in place of Astronomer's default registry. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and approved/ unapproved Python and OS-level dependencies prior to deploying code. To configure this feature, see [Configure a Custom image Registry](custom-image-registry.md).
+You can now configure a custom container image registry in place of Astronomer's default registry. This option is best suited for mature organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and approved/ unapproved Python and OS-level dependencies prior to deploying code. To configure this feature, see [Configure a custom image registry](custom-image-registry.md).
 
 ### Export task logs using logging sidecars
 
-You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster where security is a concern, as well as for organizations running many small tasks using the Kubernetes executor. To configure this feature, see [Export Task Logs](export-task-logs.md).
+You can now configure logging sidecar containers to collect and export task logs to ElasticSearch. This exporting approach is best suited for organizations that use Astronomer Software in a multi-tenant cluster where security is a concern, as well as for organizations running many small tasks using the Kubernetes executor. To configure this feature, see [Export task logs](export-task-logs.md).
 
 ### Simplified configuration for namespace pools
 
-The process for configuring namespace pools has been simplified. As an alternative to manually creating namespaces, you can now delegate the creation of each namespace, including roles and rolebindings, to Astronomer Software. While this feature is suitable for most use cases, you can still manually create namespaces if you want more fine-grained control over the namespace's resources and permissions. For more information, see [Namespace Pools](namespace-pools.md).
+The process for configuring namespace pools has been simplified. As an alternative to manually creating namespaces, you can now delegate the creation of each namespace, including roles and rolebindings, to Astronomer Software. While this feature is suitable for most use cases, you can still manually create namespaces if you want more fine-grained control over the namespace's resources and permissions. For more information, see [Namespace pools](namespace-pools.md).
 
 ### Additional improvements
 
@@ -63,7 +63,7 @@ The process for configuring namespace pools has been simplified. As an alternati
 - Deprecated usage of [kubed](https://appscode.com/products/kubed/) for security and performance improvements
 - Redis containers can now run as non-root users
 - Added minimum security requirements for user passwords when using local auth
-- You can now use Azure DevOps repos in your [Git Sync](deploy-git-sync.md) configurations
+- You can now use Azure DevOps repos in your [Git sync](deploy-git-sync.md) configurations
 - You can now disable all network policies for Airflow components using the Astronomer Helm chart
 - System Admins can now view all Workspaces on their installation by default
 - User auth tokens for the Software UI are now stored in httpOnly cookies

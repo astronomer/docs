@@ -127,4 +127,4 @@ The following table contains the exact lifecycle for each published version of A
 
 > *Given the wide usage of AC 1.10.12, 1.10.14, and 2.0, Astronomer has extended the maintenance period for those versions through February 2022.
 
-If you have any questions or concerns, reach out to [Astronomer Support](https://support.astronomer.io).
+If you have any questions or concerns, reach out to [Astronomer support](https://support.astronomer.io).

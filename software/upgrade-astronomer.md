@@ -7,9 +7,9 @@ description: Upgrade to a new LTS, stable, or patch version of Astronomer Softwa
 
 ## Overview
 
-For Astronomer Software customers, new product features are regularly made available in stable and long-term support (LTS) releases as described in [Release and Lifecycle Policy](release-lifecycle-policy.md). Patch versions of Astronomer Software with additional bug and security fixes are also released on a regular basis.
+For Astronomer Software customers, new product features are regularly made available in stable and long-term support (LTS) releases as described in [Release and lifecycle policy](release-lifecycle-policy.md). Patch versions of Astronomer Software with additional bug and security fixes are also released on a regular basis.
 
-Follow this guide to upgrade to any version of Astronomer Software. For information on new features and changes, refer to [Software Release Notes](release-notes.md).
+Follow this guide to upgrade to any version of Astronomer Software. For information on new features and changes, refer to [Software release notes](release-notes.md).
 
 A few notes before you get started:
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.

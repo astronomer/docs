@@ -50,7 +50,7 @@ To retrieve your Deployment URL, open your Deployment in the Cloud UI and click 
 
 ## Step 2: Make an Airflow API request
 
-You can now execute requests against any endpoint that is listed in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+You can now execute requests against any endpoint that is listed in the [Airflow Rest API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 To make a request based on Airflow documentation, make sure to:
 
 - Replace `https://airflow.apache.org` with your Deployment URL

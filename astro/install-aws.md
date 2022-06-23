@@ -16,7 +16,7 @@ At a high-level, we'll ask that you come prepared with a new AWS account. From t
 
 Astronomer will then create a cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro Cluster, [reach out to us](https://support.astronomer.io).
 
-For a complete list of the AWS resources that our team will provision in your AWS account, see [Resource Usage](resource-reference-aws.md).
+For a complete list of the AWS resources that our team will provision in your AWS account, see [Resource usage](resource-reference-aws.md).
 
 ## Prerequisites
 
@@ -93,7 +93,7 @@ For the AWS account you created as a prerequisite, provide Astronomer with:
 - Your preferred node instance type.
 - Your preferred maximum node count.
 
-If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes in `us-east-1` and a maximum node count of 20 by default. For information on all supported regions and configurations, see [AWS Resource Reference](resource-reference-aws.md).
+If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes in `us-east-1` and a maximum node count of 20 by default. For information on all supported regions and configurations, see [AWS resource reference](resource-reference-aws.md).
 
 From here, our team will provision an Astro cluster according to the specifications you provided.
 
@@ -167,7 +167,7 @@ Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 - `ap-east-1` - Asia Pacific (Hong Kong)
 - `me-south-1` - Middle East (Bahrain)
 
-If you're setting up your first cluster in any of these regions, you need to complete the additional setup as described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
+If you're setting up your first cluster in any of these regions, you need to complete the additional setup as described in [Create a cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 
 :::
 
@@ -206,4 +206,4 @@ Now that you have an Astro cluster up and running, take a look at the docs below
 - [Install CLI](cli/get-started.md)
 - [Configure Deployments](configure-deployment-resources.md)
 - [Deploy code](deploy-code.md)
-- [Add Users](add-user.md)
+- [Add users](add-user.md)

@@ -71,7 +71,7 @@ Astronomer v0.25.6 introduces a platform-level setting that gives Deployment Adm
 
 ### Airgapped Installation
 
-Organizations can now install Astronomer in an airgapped environment with no internet access. To learn more, contact [Astronomer Support](https://support.astronomer.io).
+Organizations can now install Astronomer in an airgapped environment with no internet access. To learn more, contact [Astronomer support](https://support.astronomer.io).
 
 ### Bug Fixes
 

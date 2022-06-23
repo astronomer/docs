@@ -106,7 +106,7 @@ Once you've activated your data plane, provide Astronomer with:
 - Your preferred maximum node count.
 - (_Optional_) Your custom CIDR ranges for connecting to Astronomer's services.
 
-If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP Resource Reference](resource-reference-gcp.md).
+If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with default configurations for Astro on GCP. For more information, see [GCP resource reference](resource-reference-gcp.md).
 
 :::info
 
@@ -115,7 +115,7 @@ If you need to VPC peer with Astronomer, additionally provide the following info
 - VPC Name/ID and region for peering with Astronomer.
 - The IPs of your DNS servers.
 
-You then need to accept a VPC peering request from Astronomer after Astro is installed. To accept the request, follow [Using VPC Network Peering](https://cloud.google.com/vpc/docs/using-vpc-peering) in GCP documentation.
+You then need to accept a VPC peering request from Astronomer after Astro is installed. To accept the request, follow [Using VPC network peering](https://cloud.google.com/vpc/docs/using-vpc-peering) in GCP documentation.
 
 Once VPC peered with Astronomer, configure and validate the following to ensure successful network communications between Astro and your resources:
 
@@ -146,4 +146,4 @@ Now that you have an Astro cluster up and running, take a look at the docs below
 - [Install CLI](cli/get-started.md)
 - [Configure Deployments](configure-deployment-resources.md)
 - [Deploy code](deploy-code.md)
-- [Add Users](add-user.md)
+- [Add users](add-user.md)

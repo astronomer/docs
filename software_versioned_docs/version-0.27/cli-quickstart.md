@@ -279,4 +279,4 @@ After installing and trying out the Astronomer CLI, we recommend reading through
 * [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md)
 * [Deploy to Astronomer via CI/CD](ci-cd.md)
 
-As always, don't hesitate to reach out to [Astronomer Support](https://support.astronomer.io/hc/en-us) or post in our [Astronomer Forum](https://forum.astronomer.io/) for additional questions.
+As always, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io/hc/en-us) or post in our [Astronomer Forum](https://forum.astronomer.io/) for additional questions.

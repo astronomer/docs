@@ -74,7 +74,7 @@ Occasionally, Astronomer might deviate from the defined response policy and back
 
 ### The Quay Common Vulnerabilities and Exposures Report
 
-Astronomer is aware of the Quay Common Vulnerabilities and Exposures (CVE) report and monitors it frequently to determine if the vulnerabilities identified in the report pose a risk to organizations using Astro Runtime images. Astronomer works with vendors to correct vulnerabilities and regularly adds fixes to stable and LTS releases. If there is a high-level vulnerability in the CVE report that is causing concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
+Astronomer is aware of the Quay Common Vulnerabilities and Exposures (CVE) report and monitors it frequently to determine if the vulnerabilities identified in the report pose a risk to organizations using Astro Runtime images. Astronomer works with vendors to correct vulnerabilities and regularly adds fixes to stable and LTS releases. If there is a high-level vulnerability in the CVE report that is causing concern for your organization, contact [Astronomer support](https://support.astronomer.io/).
 
 ## Astro Runtime maintenance policy
 
@@ -123,4 +123,4 @@ The following table contains the exact lifecycle for each published version of A
 | [4.2.x](runtime-release-notes.md#astro-runtime-420)      | March 10, 2022  |  September 2022         |
 | [5.0.x](runtime-release-notes.md#astro-runtime-500)      | April 30, 2022  |  October 2022         |
 
-If you have any questions or concerns, reach out to [Astronomer Support](https://support.astronomer.io).
+If you have any questions or concerns, reach out to [Astronomer support](https://support.astronomer.io).

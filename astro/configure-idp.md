@@ -50,7 +50,7 @@ To integrate Okta as your IdP for Astro, you must have an [Okta account](https:/
 
 #### Step 1: Reach out to Astronomer
 
-Reach out to [Astronomer Support](https://support.astronomer.io) with a request to integrate Okta as an IdP on Astro. From here, an Astronomer Representative will provide you with two things:
+Reach out to [Astronomer support](https://support.astronomer.io) with a request to integrate Okta as an IdP on Astro. From here, an Astronomer Representative will provide you with two things:
 
 - A Single Sign-On (SSO) URL
 - An Audience URI
@@ -100,7 +100,7 @@ From here, Astronomer will finalize your organization's integration with Okta.
 
 #### Step 4: Assign users to your Okta application
 
-On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, read [Okta Documentation](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
+On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, read [Okta documentation](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
 
 When a user assigned to the integration accesses Astro, they will be brought automatically to Okta after entering their email in the Cloud UI.
 
@@ -151,7 +151,7 @@ If your Azure Active Directory is configured to require admin approval on API pe
 
 #### Step 4: Provide Astronomer with your Azure AD app information
 
-Reach out to [Astronomer Support](https://support.astronomer.io) and provide the following information from your Azure AD application:
+Reach out to [Astronomer support](https://support.astronomer.io) and provide the following information from your Azure AD application:
 
 - **Microsoft Azure AD Domain**: Retrieve this from your Azure AD directory's overview page in the Microsoft Azure portal.
 - **Application (client) ID**: Retrieve this from the **Overview** page of your application.

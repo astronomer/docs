@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Disaster recovery'
-title: 'Astronomer Software disaster recovery guide'
+title: 'Astronomer Software disaster recovery'
 id: disaster-recovery
 description: A guide to platform backups and disaster recovery for Astronomer Software.
 ---

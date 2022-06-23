@@ -16,7 +16,7 @@ You can configure how Astronomer collects Deployment task logs and exports them 
 
 ## Export task logs Using a Fluentd DaemonSet
 
-By default, Astronomer Software uses a Fluentd Daemonset to aggregate task logs. The is the workflow for the default implementation:
+By default, Astronomer Software uses a Fluentd DaemonSet to aggregate task logs. The is the workflow for the default implementation:
 
 - Deployments write task logs to stdout.
 - Kubernetes takes the output from stdout and writes it to the Deployment’s node.

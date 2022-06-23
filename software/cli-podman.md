@@ -22,7 +22,7 @@ To complete this setup, you need:
 - Podman 3.1.0+ installed on your local machine.
 - The Astro CLI.
 
-## Linux Setup
+## Linux setup
 
 1. Run the following command to start the Podman API service:
 

@@ -11,7 +11,7 @@ Unless otherwise specified, new clusters on Astro are created with a set of defa
 
 Read the following document for a reference of our default resources as well as supported cluster configurations, including **AWS Region** and **Node Instance Type**.
 
-## Default cluster Values
+## Default cluster values
 
 | Resource                                  | Description                                                                                                                   | Quantity / Default Size |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
@@ -28,13 +28,13 @@ Read the following document for a reference of our default resources as well as 
 | [S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html) | S3 bucket for storage of Airflow task logs. | 1x |
 | Max Node Count | The maximum number of EC2 nodes that your Astro cluster can support at any given time. Once this limit is reached, your cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
 
-## Supported cluster Configurations
+## Supported cluster configurations
 
 Depending on the needs of your team, you may be interested in modifying certain configurations of a new or existing cluster on Astro. This section provides a reference for which configuration options are supported during the install process.
 
 To create a new cluster on Astro with a specified configuration, see [Install on AWS](install-aws.md) or [Create a Cluster](create-cluster.md). For instructions on how to make a change to an existing Cluster, see [Modify a Cluster](modify-cluster.md).
 
-### AWS Region
+### AWS region
 
 Astro supports the following AWS regions:
 
@@ -60,13 +60,13 @@ Astro supports the following AWS regions:
 - `us-west-1` - US West (N. California)
 - `us-west-2` - US West (Oregon)
 
-Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
+Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that is not on this list, reach out to [Astronomer support](https://support.astronomer.io).
 
-### RDS Instance Type
+### RDS instance type
 
 Every Astro cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the data plane and powers the metadata database of each Astro Deployment within a single cluster. During the cluster creation process, you'll be asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
 
-Astro supports a variety of AWS RDS instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io).
+Astro supports a variety of AWS RDS instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer support](https://support.astronomer.io).
 
 #### db.r5
 
@@ -94,7 +94,7 @@ Astro supports a variety of AWS RDS instance types. Instance types comprise of v
 
 Astro supports a variety of AWS EC2 instance types. Instance types comprise of varying combinations of CPU, memory, storage, and networking capacity. While the resources allocated to system and Airflow components are managed by Astronomer, the node instance type you select for your cluster powers the workers of all Deployments within that cluster.
 
-For detailed information on each instance type, refer to [AWS documentation](https://aws.amazon.com/ec2/instance-types/). If you're interested in a node type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io). Not all instance types are supported in all AWS regions.
+For detailed information on each instance type, refer to [AWS documentation](https://aws.amazon.com/ec2/instance-types/). If you're interested in a node type that is not on this list, reach out to [Astronomer support](https://support.astronomer.io). Not all instance types are supported in all AWS regions.
 
 #### c6i
 
@@ -168,7 +168,7 @@ A single cluster on Astro cannot currently be configured with more than one node
 
 :::
 
-## Deployment worker Size Limits
+## Deployment worker size limits
 
 In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a cluster. worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as the worker size is supported by the node instance type selected for the cluster. When you attempt to provision a worker size that isn't supported by the cluster instance type, an error message appears in the Cloud UI.
 
@@ -220,7 +220,7 @@ This table lists the maximum worker size that is supported on Astro for each nod
 | t3.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
 | t3.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
 
-The maximum supported worker size on Astro is currently 400 AU, which means that an Astro cluster may not make full use of the CPU and memory capacity of some node instance types on this list. If your Organization is interested in using an instance type that supports a worker size limit higher than 400 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
+The maximum supported worker size on Astro is currently 400 AU, which means that an Astro cluster may not make full use of the CPU and memory capacity of some node instance types on this list. If your Organization is interested in using an instance type that supports a worker size limit higher than 400 AU, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
 :::info
 

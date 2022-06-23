@@ -13,7 +13,7 @@ The Astro architecture is secure by default, using encryption in transit, encryp
 
 ## Shared responsibility model
 
-Astro operates on a model of shared responsibility, which means that both the Astronomer team and Astronomer customers are responsible for the security of the platform. For more information, see [Shared Responsibility Model](shared-responsibility-model.md).
+Astro operates on a model of shared responsibility, which means that both the Astronomer team and Astronomer customers are responsible for the security of the platform. For more information, see [Shared responsibility model](shared-responsibility-model.md).
 
 ## Architecture
 
@@ -29,7 +29,7 @@ While Astro data plane is designed to withstand and survive in-region Availabili
 
 ## Physical and environment security
 
-Astro leverages all three major public cloud providers (Azure, Google Cloud Platform, Amazon Web Services), thus physical and environmental security is handled entirely by those providers. Each cloud service provider provides an extensive list of compliance and regulatory assurances that they are rigorously tested against, including SOC 1/2-3, PCI-DSS, and ISO27001. For more information, read [Cloud Provider Security Responsibilities](shared-responsibility-model.md#cloud-provider-security-responsibilities).
+Astro leverages all three major public cloud providers (Azure, Google Cloud Platform, Amazon Web Services), thus physical and environmental security is handled entirely by those providers. Each cloud service provider provides an extensive list of compliance and regulatory assurances that they are rigorously tested against, including SOC 1/2-3, PCI-DSS, and ISO27001. For more information, read [Cloud provider security responsibilities](shared-responsibility-model.md#cloud-provider-security-responsibilities).
 
 Astronomer is a global remote company first. We have some small offices in the United States, but they are treated as trustless. Employees need to authenticate to all applications and systems using our IdP (Okta) with MFA even if using office WiFi.
 
@@ -47,4 +47,4 @@ Astro uses both encryption in transit and encryption at rest to protect data acr
 
 ## Secrets management
 
-Astro is designed to secure sensitive information about your external systems. Sensitive information shared with Astronomer is securely stored and transmitted for consumption by your data pipelines. For more information, see [Secrets Management](secrets-management.md).
+Astro is designed to secure sensitive information about your external systems. Sensitive information shared with Astronomer is securely stored and transmitted for consumption by your data pipelines. For more information, see [Secrets management](secrets-management.md).

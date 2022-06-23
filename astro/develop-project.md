@@ -38,7 +38,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md).
+- **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md).
 
 Once the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
 
@@ -273,7 +273,7 @@ docker exec -it <container-name> ls -al
 
 :::info
 
-The Astro CLI does not support overrides to environment variables that are required globally. For the list of environment variables that Astro enforces, see [Global Environment Variables](platform-variables.md). To learn more about environment variables, read [Environment Variables](environment-variables.md).
+The Astro CLI does not support overrides to environment variables that are required globally. For the list of environment variables that Astro enforces, see [Global environment variables](platform-variables.md). To learn more about environment variables, read [Environment variables](environment-variables.md).
 
 :::
 
@@ -292,7 +292,7 @@ If your environment variables contain sensitive information or credentials that 
     AIRFLOW__CORE__DAG_CONCURRENCY=5
     ```
 3. Run `astro dev start --env .env` to rebuild your image.
-4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment Variables](environment-variables.md).
+4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment variables](environment-variables.md).
 
 
 ### Confirm your environment variables were applied
@@ -393,7 +393,7 @@ To install Python packages from a private GitHub repository on Astro, you need:
 - An [Astro project](create-project.md).
 - Custom Python packages that are [installable with pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
-- A [GitHub SSH Private Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+- A [GitHub SSH private key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
 
 :::warning
 
@@ -519,7 +519,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   Your Astro project can now utilize Python packages from your private GitHub repository.
 
-3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy code to Astro](deploy-code.md).
+3. Optional. Test or deploy your DAGs. See [Build and run a project locally](develop-project.md#build-and-run-a-project-locally) or [Deploy code to Astro](deploy-code.md).
 
 </TabItem>
 
@@ -622,7 +622,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
     Your Astro project can now utilize Python packages from your private PyPi index.
 
-3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy code to Astro](deploy-code.md).
+3. Optional. Test or deploy your DAGs. See [Build and run a project locally](develop-project.md#build-and-run-a-project-locally) or [Deploy code to Astro](deploy-code.md).
 
 </TabItem>
 </Tabs>

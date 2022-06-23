@@ -11,7 +11,7 @@ Unless otherwise specified, new clusters on Google Cloud Platform (GCP) are crea
 
 Read the following document for a reference of our default resources as well as supported cluster configurations.
 
-## Default cluster Values
+## Default cluster values
 
 | Resource                | Description                                                                                          | Quantity/Default Size        |
 | ----------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------- |
@@ -27,13 +27,13 @@ Read the following document for a reference of our default resources as well as 
 | Max Node Count | The maximum number of EC2 nodes that your Astro cluster can support at any given time. Once this limit is reached, your cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
 
 
-## Supported cluster Configurations
+## Supported cluster configurations
 
 Depending on the needs of your team, you may be interested in modifying certain configurations of a new or existing cluster on Astro. This section provides a reference for which configuration options are supported during the install process.
 
 To create a new cluster on Astro with a specified configuration, read [Install on GCP](install-gcp.md) or [Create a Cluster](create-cluster.md). For instructions on how to make a change to an existing Cluster, read [Modify a Cluster](modify-cluster.md).
 
-### GCP Region
+### GCP region
 
 Astro supports the following GCP regions:
 
@@ -43,16 +43,16 @@ Astro supports the following GCP regions:
 - `us-east4` - Virginia, North America
 - `europe-west4` - Netherlands, Europe
 
-Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't on this list, contact [Astronomer Support](https://support.astronomer.io).
+Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't on this list, contact [Astronomer support](https://support.astronomer.io).
 
-### Node Instance Type
+### Node instance type
 
 Astro supports different GCP machine types. Machine types comprise of varying combinations of CPU, memory, storage, and networking capacity. All system and Airflow components within a single cluster are powered by the nodes specified during the cluster creation or modification process.
 
 - e2-standard-4
 - e2-standard-8
 
-For detailed information on each instance type, see [GCP documentation](https://cloud.google.com/compute/docs/machine-types). If you're interested in a machine type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io/). Not all machine types are supported in all GCP regions.
+For detailed information on each instance type, see [GCP documentation](https://cloud.google.com/compute/docs/machine-types). If you're interested in a machine type that is not on this list, reach out to [Astronomer support](https://support.astronomer.io/). Not all machine types are supported in all GCP regions.
 
 ## Deployment worker Size Limits
 
@@ -65,7 +65,7 @@ This table lists the approximate maximum worker size that is supported on Astro 
 | e2-standard-4      | 25         | 2.5 CPUs  | 9.4  GiB MEM |
 | e2-standard-8      | 65         | 6.5 CPUs  | 24.4 GiB MEM |
 
-If your Organization is interested in using an instance type that supports a worker size limit higher than 65 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
+If your Organization is interested in using an instance type that supports a worker size limit higher than 65 AU, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
 :::info
 

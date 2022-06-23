@@ -13,7 +13,7 @@ If you’re using an unsupported operator, create an issue in the [OpenLineage G
 
 :::info
 
-This functionality is early access. If you have questions or feedback, contact [Astronomer Support](https://support.astronomer.io/).
+This functionality is early access. If you have questions or feedback, contact [Astronomer support](https://support.astronomer.io/).
 
 :::
 

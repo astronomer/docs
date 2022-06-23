@@ -15,11 +15,11 @@ This document offers guidelines on the version lifecycle of Astronomer Software.
 - Which versions of Astronomer Software are currently available.
 - Release channels and the maintenance schedule for all versions.
 
-For information on the latest Astronomer Software releases, see [release notes](release-notes.md). For information on compatibility between all versioned software, see [Software Version compatibility reference](release-lifecycle-policy.md).
+For information on the latest Astronomer Software releases, see [Release notes](release-notes.md). For information on compatibility between all versioned software, see [Software Version compatibility reference](release-lifecycle-policy.md).
 
 :::info
 
-These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astronomer images, see [Astronomer Certified Versioning and Support](ac-support-policy.md) and [Runtime Release and Lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
+These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astronomer images, see [Astronomer Certified versioning and support](ac-support-policy.md) and [Runtime release and lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
 
 :::
 
@@ -67,7 +67,7 @@ For example, if Astronomer Software v0.26 were a stable version first released i
 - If Astronomer Software v0.27 came out as a new stable release, bug fixes would no longer be backported to Astronomer v0.26 and customers would be encouraged to upgrade.
 - If a major security issue was identified in v0.26, a fix would be backported and released as a patch at any time during its 6 month maintenance period. Even if v0.27 is the latest stable version of Astronomer Software, a security fix would still be backported to v0.26.
 
-If you contact [Astronomer Support](https://support.astronomer.io) about an issue you are experiencing while running an unmaintained version, our team will invite you to upgrade as an initial mitigation step.
+If you contact [Astronomer support](https://support.astronomer.io) about an issue you are experiencing while running an unmaintained version, our team will invite you to upgrade as an initial mitigation step.
 
 ### End of maintenance date
 

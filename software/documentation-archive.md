@@ -13,7 +13,7 @@ This document lists all available versions of Astronomer Software documentation,
 
 While only maintained documentation sets appear under the Astronomer Software documentation menu, Astronomer preserves all versions for historical reference. The support timeline for a given set of documentation is the same as the support timeline for the corresponding version of Astronomer Software.
 
-For more information about Software version support, see [Release and Lifecycle Policy](release-lifecycle-policy.md).
+For more information about Software version support, see [Release and lifecycle policy](release-lifecycle-policy.md).
 
 ## Documentation maintenance policy
 
@@ -23,7 +23,7 @@ Documentation sets for other maintained versions of Astronomer are updated to en
 
 Documentation sets for unmaintained versions of Astronomer Software no longer receive updates are not accessible from the Astronomer Software documentation menu. However, these documentation sets are still accessible from this archive.
 
-If you notice an error or misleading information in any part of Astronomer's documentation, [create a GitHub issue](https://github.com/astronomer/docs/issues) in this repo or [reach out to Astronomer Support](https://support.astronomer.io).
+If you notice an error or misleading information in any part of Astronomer's documentation, [create a GitHub issue](https://github.com/astronomer/docs/issues) in this repo or [reach out to Astronomer support](https://support.astronomer.io).
 
 ## Documentation versions
 

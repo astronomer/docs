@@ -13,7 +13,7 @@ Environment Variables can be used to set any of the following (and much more):
 
 - SMTP to enable email alerts
 - Airflow Parallelism and DAG Concurrency
-- [A Secret Backend](secrets-backend.md) to manage your Airflow connections and Variables
+- [A secrets backend](secrets-backend.md) to manage your Airflow connections and Variables
 - Store Airflow connections and Variables
 - Customize your default DAG view in the Airflow UI (Tree, Graph, Gantt etc.)
 

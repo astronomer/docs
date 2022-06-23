@@ -44,7 +44,7 @@ To create a new Astro cluster on AWS for your Organization, you must first reach
 - Your preferred node instance type.
 - Your preferred max node count.
 
-If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS Resource Reference](resource-reference-aws.md).
+If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
 
 From there, your Astronomer representative will provide you with a unique `External ID` for each new cluster. Make note of this value for the next step.
 
@@ -89,7 +89,7 @@ Some AWS regions that Astronomer supports are [disabled by default on AWS](https
 
 To create a cluster in one of these regions, complete the following additional setup in your AWS account:
 
-1. In the AWS IAM console, update the `astronomer-remote-management` trust relationship to include permissions for enabling and disabling your desired region as described in the [AWS Documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws-enable-disable-regions.html):
+1. In the AWS IAM console, update the `astronomer-remote-management` trust relationship to include permissions for enabling and disabling your desired region as described in the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws-enable-disable-regions.html):
 
     ```YAML
     {
@@ -162,7 +162,7 @@ To create a new Astro cluster on GCP for your Organization, you must first reach
 
 If not specified, Astronomer will create a cluster with `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.
 
-For information on all supported regions and configurations, see [GCP Resource Reference](resource-reference-gcp.md).  
+For information on all supported regions and configurations, see [GCP resource reference](resource-reference-gcp.md).  
 
 #### Step 2: Confirm with Astronomer
 
