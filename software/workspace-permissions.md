@@ -64,15 +64,15 @@ If you do _not_ specify a role in this command, `WORKSPACE_VIEWER` will be set b
 
 #### Using Teams
 
-You can invite a group of users from a configured third party identity provider (IDP) as a Team on your Workspace. A Team is an IDP-defined group of users who all share the same permissions to a given Deployment or Workspace.
+You can invite a group of users from a configured third party identity provider (IdP) as a Team on your Workspace. A Team is an IdP-defined group of users who all share the same permissions to a given Deployment or Workspace.
 
-Note that to use Teams, a System Admin must first complete the setup in [Integrate an auth system](integrate-auth-system.md) and configure user groups as described in [Import IDP Groups](import-idp-groups.md).
+Note that to use Teams, a System Admin must first complete the setup in [Integrate an auth system](integrate-auth-system.md) and configure user groups as described in [Import IdP Groups](import-idp-groups.md).
 
 To add a Team to a Workspace:
 
 1. In the Astronomer UI, go to your Workspace and open the **Teams** tab.
 2. Click **Add Team**.
-3. Under **Team Name**, enter the name of your IDP group.
+3. Under **Team Name**, enter the name of your IdP group.
 4. Select a **Workspace Role** for the Team. If your Workspace has existing Deployments, you can also configure the Team's permissions to those Deployments on this page:
 
     ![Screen for adding a Team to a Workspace](/img/docs/add-team-workspace.png)
@@ -81,7 +81,7 @@ To add a Team to a Workspace:
 
 :::caution
 
-If a user already exists on a Workspace before being invited via a Team, the user context with the most permissive role will be applied to the Workspace. For more information, read [Import IDP Groups](import-idp-groups.md).
+If a user already exists on a Workspace before being invited via a Team, the user context with the most permissive role will be applied to the Workspace. For more information, read [Import IdP Groups](import-idp-groups.md).
 
 :::
 
@@ -127,9 +127,9 @@ If you do _not_ specify a role in this command, `DEPLOYMENT_VIEWER` will be set 
 
 #### Using Teams
 
-You can invite a group of users from a configured third party identity provider (IDP) as a Team on your Deployment. A Team is an IDP-defined group of users who all share the same permissions to a given Deployment or Workspace.
+You can invite a group of users from a configured third party identity provider (IdP) as a Team on your Deployment. A Team is an IdP-defined group of users who all share the same permissions to a given Deployment or Workspace.
 
-Note that to use Teams, a System Admin must first complete the setup in [Integrate an auth system](integrate-auth-system.md) and configure user groups as described in [Import IDP Groups](import-idp-groups.md).
+Note that to use Teams, a System Admin must first complete the setup in [Integrate an auth system](integrate-auth-system.md) and configure user groups as described in [Import IdP Groups](import-idp-groups.md).
 
 To add a team to a Deployment:
 
@@ -141,7 +141,7 @@ To add a team to a Deployment:
 
 :::caution
 
-If a user already exists on a Deployment before being invited via a Team, the user context with the most permissive role will be applied to the Deployment. For more information, read [Import IDP Groups](import-idp-groups.md).
+If a user already exists on a Deployment before being invited via a Team, the user context with the most permissive role will be applied to the Deployment. For more information, read [Import IdP Groups](import-idp-groups.md).
 
 :::
 

@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Set up an identity provider"
-title: "Set up an identity provider (IDP) for Astro"
+title: "Set up an identity provider (IdP) for Astro"
 id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
 ---
@@ -157,7 +157,7 @@ Reach out to [Astronomer support](https://support.astronomer.io) and provide the
 - **Application (client) ID**: Retrieve this from the **Overview** page of your application.
 - **Client secret**: Use the value of your client secret from Step 2.
 
-From here, Astronomer will complete the integration and add Azure as your organization's IDP.
+From here, Astronomer will complete the integration and add Azure as your organization's IdP.
 
 #### Step 5: Assign users to your Azure AD application
 

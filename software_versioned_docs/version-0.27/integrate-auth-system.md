@@ -322,7 +322,7 @@ To use a custom Oauth authorization code flow:
           enabled: true
           clientId: ffhsdf78f734h2fsd
           clientSecret: FSDFSLDFJELLGJLSDFGJL42353425
-          discoveryUrl: "https://<MYIDP>.okta.com/.well-known/openid-configuration"
+          discoveryUrl: "https://<MYIdP>.okta.com/.well-known/openid-configuration"
           authUrlParams:
             audience: "GYHWEYHTHR443fFEW"
     ```
