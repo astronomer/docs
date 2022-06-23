@@ -82,7 +82,7 @@ To upgrade to Airflow 2.3.0,
 2. Depending on what distribution of Airflow you want to use, add one of the following lines to your project's `Dockerfile`:
 
     ```dockerfile
-    FROM quay.io/astronomer/astro-runtime:2.3.0
+    FROM quay.io/astronomer/astro-runtime:5.0.4
     ```
 
     ```dockerfile
