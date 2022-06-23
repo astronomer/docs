@@ -16,6 +16,23 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.1.0 ([Release notes](cli/release-notes.md))
 
+## June 23, 2022
+
+### Support for more GCP regions
+
+You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+
+- `asia-southeast1` (Singapore)
+- `australia-southeast1` (Sydney)
+- `europe-west1` (Belgium)
+- `europe-west2` (England)
+- `europe-west3` (Frankfurt)
+- `southamerica-east1` (Sau Paolo)
+- `us-west2` (Los Angeles)
+- `us-west4` (Nevada)
+
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+
 ## June 16, 2022
 
 ### Submit Support Requests in the Cloud UI
