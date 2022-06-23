@@ -7,7 +7,7 @@ description: View Deployment Airflow logs in the Cloud UI.
 
 Review logs in the Cloud UI or in Airflow to troubleshoot and resolve issues with your data pipelines.
 
-## View Scheduler Logs
+## View Airflow Scheduler Logs
 
 You can access the recorded Scheduler logs for a 24 hour period for a Deployment on the Cloud UI **Scheduler Logs** page. When a Deployment generates more than 500 logs in 24 hours, only the most recent 500 logs are available. Logs are color-coded to simplify log type identification. The scheduler logs can help you understand why specific tasks failed.
 
