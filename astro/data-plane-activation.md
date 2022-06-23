@@ -20,9 +20,14 @@ We’re excited to get you started with Astro! Getting your data plane activated
 When you meet with one of our engineers to activate your data plane, **expect it to take about an hour**. By the end of the session, you should have your **first pipeline deployed in your own Astro environment**!
 
 ### What to Bring and Know
+
 Your data plane will be deployed into a clean, dedicated AWS account or GCP project. With our fully managed service, we’ll take complete responsibility for the operations of this account, as described in our [Shared Responsibility Model](shared-responsibility-model.md).
+
 This model allows us to get you started quickly, providing cloud-grade reliability and seamless connection to all of your data services. If you decide not to proceed with Astro, this account can be deleted in its entirety.
+
 By default, the Astronomer account has no access to your data services. We’ll guide you through how to make these connections securely, whether peering VPCs or making direct connections.
+
+If you want to test an existing Airflow project on Astro, ensure that the project has been upgraded to Airflow 2.
 
 ### Pre-Flight Checklist
 

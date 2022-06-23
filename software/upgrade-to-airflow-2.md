@@ -7,15 +7,9 @@ description: "Prepare for and upgrade to Airflow 2.0+ on Astronomer."
 
 This guide explains how to upgrade an Astronomer Software Deployment from Airflow 1.10.15 to 2.3.
 
-Apache Airflow 2.0 was a momentous open source release published in December of 2020. To build on that foundation, Airflow 2.3 was released in May 2022 with new features like dynamic task mapping and a Grid view in the Airflow UI. Given the significance of this release, Astronomer is providing full support for Airflow 2.3 until October 2023.
+As a follow up to Airflow 2.0, Airflow 2.3 was released in May 2022 with new features like dynamic task mapping and a Grid view in the Airflow UI. Given the significance of this release, Astronomer is providing full support for Airflow 2.3 until October 2023.
 
-Astronomer strongly recommends upgrading any Astronomer Software Deployments currently running Airflow 1.10.15 to Airflow 2.3. At a high level, the recommended upgrade path is as follows:
-
-1. Run the Airflow upgrade check script.
-2. Modify your DAGs, configs, and import statements.
-3. Upgrade to Airflow 2.3.
-
-> **Note:** The recommendations around the upgrade process are largely written in collaboration with the Apache Airflow project and community, though there are a few differences in steps on Astronomer that we've made sure to outline below.
+Astronomer strongly recommends upgrading any Astronomer Software Deployments currently running Airflow 1.10.15 to Airflow 2.3.
 
 ## The benefits of Airflow 2.0+
 
@@ -35,16 +29,12 @@ Airflow 2.3 subsequently introduced several powerful features, the most notable 
 
 This setup requires:
 
-- 0.29.x of the [Astro CLI](cli-quickstart.md).
+- The latest version of the [Astro CLI](configure-cli.md).
 - An Astro project running Airflow 1.10.15. If your Astro project uses Airflow 1.10.14 or earlier, upgrade to 1.10.15 using the [standard upgrade process](manage-airflow-versions.md) before following these steps.
 
 ## Step 1: Run the Airflow upgrade check script
 
-Most Airflow 1.10.15 DAGs will work in Airflow 2.0, though not all.
-
-For a comprehensive list of recommended and required changes specific to your existing project, run the Airflow upgrade check script via the Astronomer CLI. The script reviews your DAG code, deployment-level configuration and environment variables, as well as metadata from the Airflow Database.
-
-### a. Run the upgrade check from the Astro CLI
+Most Airflow 1.10.15 DAGs will work in Airflow 2.0, though not all. The Airflow 2.0 upgrade check script can check for compatibility issues in your DAG code.
 
 To run the Airflow 2.0 upgrade check script, open your Astro project and run the following command:
 
@@ -96,7 +86,7 @@ To upgrade to Airflow 2.3.0,
     ```
 
     ```dockerfile
-    FROM quay.io/astronomer/ap-airflow:2.3.0-buster-onbuild
+    FROM quay.io/astronomer/ap-airflow:2.3.0-onbuild
     ```
 
 3. Modify all backport providers and replace them with fully supported [provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html). For example, if you were using the [Mongo backport provider](https://pypi.org/project/apache-airflow-backport-providers-mongo/), replace `apache-airflow-backport-providers-mongo` with `apache-airflow-providers-mongo` in your `requirements.txt` file. For more information, see [Airflow documentation on provider packages](https://airflow.apache.org/docs/apache-airflow-providers/index.html).
