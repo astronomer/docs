@@ -37,17 +37,17 @@ To create an Airflow Deployment on Astronomer:
 This tab is the best place to modify resources for your Deployment. Specifically, you can:
 
 - Select an Airflow Executor
-- Allocate resources to your Airflow scheduler and Webserver
-- Set scheduler Count (*Airflow 2.0+ only*)
+- Allocate resources to your Airflow Scheduler and Webserver
+- Set Scheduler Count (*Airflow 2.0+ only*)
 - Add Extra Capacity (*Kubernetes only*)
-- Set worker Count (*Celery only*)
-- Adjust your worker Termination Grace Period (*Celery only*)
+- Set Worker Count (*Celery only*)
+- Adjust your Worker Termination Grace Period (*Celery only*)
 
 The rest of this guide provides additional guidance for configuring each of these settings.
 
 ## Select an Executor
 
-The Airflow [Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html) works closely with the Airflow scheduler to decide what resources will complete tasks as they're queued. The difference between Executors comes down to their available resources and how they utilize those resources to distribute work.
+The Airflow [Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html) works closely with the Airflow Scheduler to decide what resources will complete tasks as they're queued. The difference between Executors comes down to their available resources and how they utilize those resources to distribute work.
 
 Astronomer supports 3 Executors:
 
@@ -55,7 +55,7 @@ Astronomer supports 3 Executors:
 - [Celery Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html)
 - [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html)
 
-Though it largely depends on your use case, we recommend the Local executor for development environments and the Celery or Kubernetes Executors for production environments operating at scale.
+Though it largely depends on your use case, we recommend the Local Executor for development environments and the Celery or Kubernetes Executors for production environments operating at scale.
 
 For a detailed breakdown of each Executor, read Astronomer's [Airflow Executors Explained](https://www.astronomer.io/guides/airflow-executors-explained).
 
@@ -72,11 +72,11 @@ Read the following sections to help you determine which core resources to scale 
 
 ### Airflow Webserver
 
-The Airflow webserver is responsible for rendering the [Airflow UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), where users can monitor DAGs, view task logs, and set various non-code configurations.
+The Airflow Webserver is responsible for rendering the [Airflow UI](https://airflow.apache.org/docs/apache-airflow/stable/ui.html), where users can monitor DAGs, view task logs, and set various non-code configurations.
 
 If a function within the Airflow UI is slow or unavailable, we recommend increasing the AU allocated towards the Webserver. The default resource allocation is 5 AU.
 
-> **Note:** Introduced in Airflow 1.10.7, [DAG Serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html?highlight=dag%20serialization) removes the need for the webserver to regularly parse all DAG files, making the component significantly more light-weight and performant. DAG Serialization is enabled by default in Airflow 1.10.12+ and is required in Airflow 2.0.
+> **Note:** Introduced in Airflow 1.10.7, [DAG Serialization](https://airflow.apache.org/docs/apache-airflow/stable/dag-serialization.html?highlight=dag%20serialization) removes the need for the Webserver to regularly parse all DAG files, making the component significantly more light-weight and performant. DAG Serialization is enabled by default in Airflow 1.10.12+ and is required in Airflow 2.0.
 
 ### Airflow Scheduler
 
@@ -84,13 +84,13 @@ The [Airflow Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/sc
 
 If you experience delays in task execution, which you can track via the [Gantt Chart](https://airflow.apache.org/docs/apache-airflow/stable/ui.html#gantt-chart) view of the Airflow UI, we recommend increasing the AU allocated towards the Scheduler. The default resource allocation is 10 AU.
 
-> **Tip:** To set alerts that notify you via email when your Airflow scheduler is underprovisioned, refer to [Airflow Alerts](airflow-alerts.md).
+> **Tip:** To set alerts that notify you via email when your Airflow Scheduler is underprovisioned, refer to [Airflow Alerts](airflow-alerts.md).
 
-#### scheduler Count
+#### Scheduler Count
 
 Airflow 2.0 comes with the ability for users to run multiple Schedulers concurrently to ensure high-availability, zero recovery time, and faster performance. By adjusting the **Scheduler Count** slider in the Software UI, you can provision up to 4 Schedulers on any Deployment running Airflow 2.0+ on Astronomer.
 
-Each individual scheduler will be provisioned with the AU specified in **Scheduler Resources**. For example, if you set **Scheduler Resources** to 10 AU and **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow Schedulers using 10 AU each for a total of 20 AU.
+Each individual Scheduler will be provisioned with the AU specified in **Scheduler Resources**. For example, if you set **Scheduler Resources** to 10 AU and **Scheduler Count** to 2, your Airflow Deployment will run with 2 Airflow Schedulers using 10 AU each for a total of 20 AU.
 
 To increase the speed at which tasks are scheduled and ensure high-availability, we recommend provisioning 2 or more Airflow Schedulers for production environments. For more information on the Airflow 2.0 Scheduler, refer to Astronomer's ["The Airflow 2.0 Scheduler" blog post](https://www.astronomer.io/blog/airflow-2-scheduler).
 
@@ -142,29 +142,29 @@ After you save these changes, push your `config.yaml` file to your installation 
 
 On Astronomer, resources required for the [KubernetesPodOperator](kubepodoperator.md) or the [Kubernetes Executor](kubernetes-executor.md) are set as **Extra Capacity**.
 
-The Kubernetes executor and KubernetesPodOperator each spin up an individual Kubernetes pod for each task that needs to be executed, then spin down the pod once that task is completed.
+The Kubernetes Executor and KubernetesPodOperator each spin up an individual Kubernetes pod for each task that needs to be executed, then spin down the pod once that task is completed.
 
 The amount of AU (CPU and Memory) allocated to **Extra Capacity** maps to [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) on the [Kubernetes Namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) in which your Airflow Deployment lives on Astronomer. More specifically, **Extra Capacity** represents the maximum possible resources that could be provisioned to a pod at any given time.
 
-AU allocated to **Extra Capacity** does not affect scheduler or webserver performance and does not represent actual usage. It will not be charged as a fixed resource.
+AU allocated to **Extra Capacity** does not affect Scheduler or Webserver performance and does not represent actual usage. It will not be charged as a fixed resource.
 
 ## Celery Executor: Configure Workers
 
-To optimize for flexibility and availability, the Celery executor works with a set of independent Celery Workers across which it can delegate tasks. On Astronomer, you're free to configure your Celery Workers to fit your use case.
+To optimize for flexibility and availability, the Celery Executor works with a set of independent Celery Workers across which it can delegate tasks. On Astronomer, you're free to configure your Celery Workers to fit your use case.
 
-### worker Count
+### Worker Count
 
 By adjusting the **Worker Count** slider, users can provision up to 20 Celery Workers on any Airflow Deployment.
 
-Each individual worker will be provisioned with the AU specified in **Worker Resources**. If you set **Worker Resources** to 10 AU and **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery Workers using 10 AU each for a total of 30 AU. **Worker Resources** has a maximum of 100 AU (10 CPU, 37.5 GB Memory).
+Each individual Worker will be provisioned with the AU specified in **Worker Resources**. If you set **Worker Resources** to 10 AU and **Worker Count** to 3, for example, your Airflow Deployment will run with 3 Celery Workers using 10 AU each for a total of 30 AU. **Worker Resources** has a maximum of 100 AU (10 CPU, 37.5 GB Memory).
 
-### worker Termination Grace Period
+### Worker Termination Grace Period
 
 On Astronomer, Celery Workers restart following every code deploy to your Airflow Deployment. This is to make sure that Workers are executing with the most up-to-date code. To minimize disruption during task execution, however, Astronomer supports the ability to set a **Worker Termination Grace Period**.
 
-If a deploy is triggered while a Celery worker is executing a task and **Worker Termination Grace Period** is set, the worker will continue to process that task up to a certain number of minutes before restarting itself. By default, the grace period is ten minutes.
+If a deploy is triggered while a Celery Worker is executing a task and **Worker Termination Grace Period** is set, the Worker will continue to process that task up to a certain number of minutes before restarting itself. By default, the grace period is ten minutes.
 
-> **Tip:** The **Worker Termination Grace Period** is an advantage to the Celery Executor. If your Airflow Deployment runs on the Local Executor, the scheduler will restart immediately upon every code deploy or configuration change and potentially interrupt task execution.
+> **Tip:** The **Worker Termination Grace Period** is an advantage to the Celery Executor. If your Airflow Deployment runs on the Local Executor, the Scheduler will restart immediately upon every code deploy or configuration change and potentially interrupt task execution.
 
 ## Set Environment Variables
 

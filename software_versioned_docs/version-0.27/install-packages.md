@@ -44,7 +44,7 @@ To install a specific version of a Python-level package, include your package ve
 
 Once you rebuild your image with `docker-build`, the image will have access to any packages that you specified. To confirm that a package was installed:
 
-1. Run `docker ps` and retrieve the container ID of your scheduler container.
+1. Run `docker ps` and retrieve the container ID of your Scheduler container.
 2. Run the following command:
 
     ```

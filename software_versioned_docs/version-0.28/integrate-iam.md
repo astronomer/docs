@@ -7,7 +7,7 @@ description: Append IAM roles to an Airflow Deployment on Astronomer Software.
 
 ## Overview
 
-On Astronomer, IAM roles can be appended to the Webserver, scheduler and worker pods within any individual Airflow Deployment on the platform.
+On Astronomer, IAM roles can be appended to the Webserver, Scheduler and Worker pods within any individual Airflow Deployment on the platform.
 
 IAM roles on [AWS](https://aws.amazon.com/iam/faqs/) and other platforms are often used to manage the level of access a specific user (or object, or group of users) has to some resource (or set of resources). The resource in question could be an S3 bucket or Secret Backend, both of which are commonly used in tandem with Airflow and Astronomer and can now be configured to be accessible only to a subset of Kubernetes pods within your wider Astronomer cluster.
 
@@ -221,7 +221,7 @@ In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll 
     astro deployment update <deployment-id> --cloud-role=arn:aws:iam::<your-iam-id>:role/<your-role>
     ```
 
-2. Confirm the role was passed successfully to all Webserver, scheduler and worker pods within your Airflow Deployment by running the following command:
+2. Confirm the role was passed successfully to all Webserver, Scheduler and Worker pods within your Airflow Deployment by running the following command:
 
     ```bash
     kubectl describe po <pod-name> -n <airflow-namespace>
@@ -292,13 +292,13 @@ astronomer:
     astro deployment create <deployment-name> --executor=celery --cloud-role=<gsa-name>@<project-id>.iam.gserviceaccount.com
     ```
 
-2. Note the name of the worker and scheduler service accounts that appear when you run the following command:
+2. Note the name of the Worker and Scheduler service accounts that appear when you run the following command:
 
     ```bash
     kubectl get sa -n <your-airflow-namespace>
     ```
 
-3. Create an IAM policy binding your Google and GKE service accounts by running the following command for both the worker and scheduler GKE service accounts you noted:
+3. Create an IAM policy binding your Google and GKE service accounts by running the following command for both the Worker and Scheduler GKE service accounts you noted:
 
     ```bash
     gcloud iam service-accounts add-iam-policy-binding \

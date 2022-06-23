@@ -25,7 +25,7 @@ The most important function of Workspaces is creating and managing access to one
 
 To create a new Deployment, click the **New Deployment** button in the **Deployments** tab or use the Astronomer CLI as described in [CLI Quickstart](cli-quickstart.md). For more information on configuring Deployment settings and resources, read [Configure a Deployment](configure-deployment.md).
 
-The **Deployments** tab also contains information on all of your existing Deployments, including name, executor type, and Deployment status. A blue dot next to a Deployment's name indicates that the Deployment is still spinning up, while a green dot indicates that the Deployment is fully operational:
+The **Deployments** tab also contains information on all of your existing Deployments, including name, Executor type, and Deployment status. A blue dot next to a Deployment's name indicates that the Deployment is still spinning up, while a green dot indicates that the Deployment is fully operational:
 
 ![Deployment Tab](https://assets2.astronomer.io/main/docs/astronomer-ui/v0.12-deployments.png)
 

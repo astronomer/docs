@@ -90,7 +90,7 @@ Once your project builds successfully, you can access the Airflow UI by going to
 
 :::info
 
-It might take a few minutes for the Airflow UI to be available. As you wait for the webserver container to start up, you might need to refresh your browser.
+It might take a few minutes for the Airflow UI to be available. As you wait for the Webserver container to start up, you might need to refresh your browser.
 
 :::
 

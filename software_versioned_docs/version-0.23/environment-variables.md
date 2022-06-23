@@ -60,7 +60,7 @@ To confirm that the Environment Variables you just set were applied to your Airf
 docker ps
 ```
 
-This will output 3 Docker containers that were provisioned to run Airflow's 3 primary components on your machine: The Airflow Scheduler, webserver and Postgres Metadata Database.
+This will output 3 Docker containers that were provisioned to run Airflow's 3 primary components on your machine: The Airflow Scheduler, Webserver and Postgres Metadata Database.
 
 Now, create a [Bash session](https://docs.docker.com/engine/reference/commandline/exec/#examples) in your scheduler container by running:
 
@@ -192,7 +192,7 @@ For information on how Airflow Connections and Variables are encrypted on Astron
 
 For users who regularly leverage Airflow Connections and Variables, we'd recommend storing and fetching them via Environment Variables.
 
-As mentioned above, Airflow Connections and Variables are stored in Airflow's Metadata Database. Adding them _outside_ of task definitions and operators requires an additional connection to Airflow's Postgres Database, which is called every time the scheduler parses a DAG (as defined by `processor_poll_interval`, which is set to 1 second by default). By adding Connections and Variables as Environment Variables, you can refer to them more easily in your code and lower the amount of open connections, thus preventing a strain on your Database and resources.
+As mentioned above, Airflow Connections and Variables are stored in Airflow's Metadata Database. Adding them _outside_ of task definitions and operators requires an additional connection to Airflow's Postgres Database, which is called every time the Scheduler parses a DAG (as defined by `processor_poll_interval`, which is set to 1 second by default). By adding Connections and Variables as Environment Variables, you can refer to them more easily in your code and lower the amount of open connections, thus preventing a strain on your Database and resources.
 
 Read below for instructions on both.
 

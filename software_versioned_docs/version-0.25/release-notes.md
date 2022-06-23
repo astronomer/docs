@@ -59,7 +59,7 @@ This feature must first be enabled and configured on your platform before it can
 - Fixed an issue where you couldn't set custom image paths for private certificate authorities (CAs)
 - Fixed an issue where setting the `global.storageClass` key in `values.yaml` did not update the storage class for all PVCs on your platform
 - Fixed an issue where Houston workers failed to get the issuer certificate for custom CA certs
-- Fixed Celery worker logs not appearing in the Software UI
+- Fixed Celery Worker logs not appearing in the Software UI
 
 ## v0.25.6
 
@@ -116,7 +116,7 @@ The Houston API `workspaceAddUser` mutation now includes a `bypassInvite` field.
 - Added the ability to use non-RFC address spaces for Alertmanager.
 - Added support for using Workload Identity to configure a GCP registry backend.
 - Changed sidecar naming convention from `nginx` to `auth-proxy`.
-- Added `fsGroup` to the webserver `securityContext` to enable [role assumption](https://docs.aws.amazon.com/eks/latest/userguide/security_iam_service-with-iam.html) for EKS 1.17.
+- Added `fsGroup` to the Webserver `securityContext` to enable [role assumption](https://docs.aws.amazon.com/eks/latest/userguide/security_iam_service-with-iam.html) for EKS 1.17.
 
 ### Bugfixes
 
@@ -124,7 +124,7 @@ The Houston API `workspaceAddUser` mutation now includes a `bypassInvite` field.
 - Fixed broken links to Deployments in alert emails.
 - Fixed an issue where historical logs did not appear in the Software UI.
 - Fixed an issue where System Admins were unable to create Deployments.
-- Fixed a visual bug where some Deployments with only 1 scheduler were shown as having 2 in the Software UI.
+- Fixed a visual bug where some Deployments with only 1 Scheduler were shown as having 2 in the Software UI.
 - Fixed a visual bug where users without Workspace Admin permissions had a non-functional **Invite Users** button in the Software UI.
 
 ## v0.25.2

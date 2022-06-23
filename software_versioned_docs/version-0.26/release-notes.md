@@ -54,7 +54,7 @@ For more information on using timetables, read the [Apache Airflow Documentation
 
 #### Deferrable Operators
 
-Deferrable operators are a new type of Airflow operator that promises improved performance and lower resource costs. While standard operators and sensors take up a worker or scheduler slot even when they are waiting for an external trigger, deferrable operators are designed to suspend themselves and free up that worker or scheduler slot while they wait. This is made possible by a new, lightweight Airflow component called the Triggerer.
+Deferrable operators are a new type of Airflow operator that promises improved performance and lower resource costs. While standard operators and sensors take up a Worker or Scheduler slot even when they are waiting for an external trigger, deferrable operators are designed to suspend themselves and free up that Worker or Scheduler slot while they wait. This is made possible by a new, lightweight Airflow component called the Triggerer.
 
 As part of supporting deferrable operators, you can provision multiple Triggerers on your Astronomer Deployments. By provisioning multiple Triggerers, you can ensure that tasks using Deferrable Operators are run even when one Triggerer goes down. For more information about configuring Triggerers and other resources, see [Configure a Deployment](configure-deployment.md).
 

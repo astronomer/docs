@@ -91,19 +91,19 @@ This dashboard shows the amount of persistent storage available to Prometheus, t
 
     ![PG Bouncer metrics](https://assets2.astronomer.io/main/docs/grafana/PGBouncer.png)
 
-- **Unhealthy Schedulers:**  This metric shows the number of unhealthy Schedulers in a given Deployment. It's available in the **Airflow Health** panel, but scheduler health can also be assessed for each individual Deployment in the **Metrics** tab of the Software UI. A scheduler is considered "Unhealthy" if it has not emitted a heartbeat for over 1 minute.
+- **Unhealthy Schedulers:**  This metric shows the number of unhealthy Schedulers in a given Deployment. It's available in the **Airflow Health** panel, but Scheduler health can also be assessed for each individual Deployment in the **Metrics** tab of the Software UI. A Scheduler is considered "Unhealthy" if it has not emitted a heartbeat for over 1 minute.
 
-    The lack of a scheduler heartbeat is expected during a code push, but erratic restarts or an "Unhealthy" state that persists for a significant amount of time is worth investigating further.
+    The lack of a Scheduler heartbeat is expected during a code push, but erratic restarts or an "Unhealthy" state that persists for a significant amount of time is worth investigating further.
 
-    For example, an organization would want to investigate the green scheduler in the following screenshot:
+    For example, an organization would want to investigate the green Scheduler in the following screenshot:
 
     ![Unhealthy Schedulers](https://assets2.astronomer.io/main/docs/grafana/unhealthy-shcedulers.png)
 
-- **DAG Parsing Time:** This metric is available in the **Airflow Health** panel. It measures how quickly the scheduler is executing your DAGs, and it's an indicator for how well your scheduler is scheduling jobs for execution:
+- **DAG Parsing Time:** This metric is available in the **Airflow Health** panel. It measures how quickly the Scheduler is executing your DAGs, and it's an indicator for how well your Scheduler is scheduling jobs for execution:
 
     ![Parsing Time Metric](https://assets2.astronomer.io/main/docs/grafana/parsing-time.png)
 
-   Anything under 1 second is considered good, but the lower the measured time the better. Note that operator executions are not included in this metric, as those are typically scheduled for execution in worker pods.
+   Anything under 1 second is considered good, but the lower the measured time the better. Note that operator executions are not included in this metric, as those are typically scheduled for execution in Worker pods.
 
 - **Elasticsearch Available Disk Space:** Astronomer utilizes the [ELK stack](https://www.elastic.co/what-is/elk-stack) to power logging, an important part of establishing observability for the platform as a whole. To function successfully, Elasticsearch should always have >20% Available Disk Space. You can monitor this from the “Platform Overview” dashboard to ensure that both task and component logs have been successfully captured and persisted:
 
@@ -173,7 +173,7 @@ This dashboard is most useful for tracking the performance and resource usage of
 
     If you're using the Local or Celery Executors, these metrics should each show around 50% usage at all times.
 
-    If you're using the Kubernetes executor or the KubernetesPodOperator in your DAGs, these metrics should fluctuate based on the number of tasks you're running at any given time. If any of these numbers reaches its maximum, we recommend allocating more computing power by adjusting the **Extra Capacity** slider in the **Settings** tab of your Airflow Deployment.
+    If you're using the Kubernetes Executor or the KubernetesPodOperator in your DAGs, these metrics should fluctuate based on the number of tasks you're running at any given time. If any of these numbers reaches its maximum, we recommend allocating more computing power by adjusting the **Extra Capacity** slider in the **Settings** tab of your Airflow Deployment.
 
 ## Create a Custom Grafana Dashboard
 
@@ -195,7 +195,7 @@ Because Astronomer's key metrics are distributed across several dashboards, you 
 
 8. Click **Save** to finalize your changes.
 
-As a starting point, we recommend creating a dashboard with the following metrics visualized as graphs for any organizations using the Kubernetes executor or KubernetesPodOperator in an Airflow Deployment:
+As a starting point, we recommend creating a dashboard with the following metrics visualized as graphs for any organizations using the Kubernetes Executor or KubernetesPodOperator in an Airflow Deployment:
 
 - Node Disk Space Utilization
 - Node CPU/Memory Utilization

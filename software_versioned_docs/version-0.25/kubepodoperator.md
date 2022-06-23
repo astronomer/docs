@@ -72,9 +72,9 @@ To successfully instantiate the operator, you'll need to make note of a few para
 
 #### Add Resources to your Deployment on Astronomer
 
-The KubernetesPodOperator is entirely powered by the resources allocated to the `Extra Capacity` slider of your deployment's `Configure` page in the [Software UI](manage-workspaces.md) in lieu of needing a Celery worker (or scheduler resources for those running the Local Executor). Raising the slider will increase your namespace's [resource quota](https://kubernetes.io/docs/concepts/policy/resource-quotas/) such that Airflow has permissions to successfully launch pods within your deployment's namespace.
+The KubernetesPodOperator is entirely powered by the resources allocated to the `Extra Capacity` slider of your deployment's `Configure` page in the [Software UI](manage-workspaces.md) in lieu of needing a Celery Worker (or Scheduler resources for those running the Local Executor). Raising the slider will increase your namespace's [resource quota](https://kubernetes.io/docs/concepts/policy/resource-quotas/) such that Airflow has permissions to successfully launch pods within your deployment's namespace.
 
-> **Note:** Your Airflow scheduler and webserver will remain necessary fixed resources that ensure the rest of your tasks can execute and that your deployment stays up and running.
+> **Note:** Your Airflow Scheduler and Webserver will remain necessary fixed resources that ensure the rest of your tasks can execute and that your deployment stays up and running.
 
 In terms of resource allocation, we recommend starting with **10AU** in `Extra Capacity` and scaling up from there as needed. If it's set to 0, you'll get a permissions error:
 
