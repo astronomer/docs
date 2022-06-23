@@ -28,7 +28,7 @@ module.exports = {
       items: [
       'customize-image',
       'manage-airflow-versions',
-      'upgrade-to-airflow-2'
+      'upgrade-to-airflow-2',
       'access-airflow-database',
       'airflow-api',
       {
