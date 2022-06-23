@@ -194,25 +194,25 @@ astro dev kill
 
 This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.
 
-## Troubleshooting Common Issues
+## Troubleshoot common issues
 
-You might experience one of the following common issues when testing your Astronomer project in a local environment. This section contains information about how to approach each of these issues.
+Use the information provided here to resolve common issues with Astronomer projects in local environments.
 
 ### New DAGs aren't visible in the Airflow UI
 
-By default, the Airflow scheduler scans the DAGs directory for new files every 300 seconds (5 minutes). For this reason, it might take a minute or two to see new DAGs appear in the Airflow UI.
+By default, the Airflow scheduler scans the DAGs directory for new files every 300 seconds (5 minutes). For this reason, it might take a few minutes for DAGs to appear in the Airflow UI.
 
-To have the scheduler check for DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. Note that this setting is dependent on how much CPU is available to the scheduler: the more available CPU, the faster the scheduler can parse your DAGs.
+To have the scheduler check for DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. This setting is dependent on the amount of CPU that is allocated to the scheduler. The greater the CPU allocation, the faster the scheduler can parse your DAGs.
 
 ### DAGs are running slowly
 
 If your Astro project contains many DAGs or tasks, then you might experience performance issues in your local Airflow environment.
 
-To improve your environment's performance, you can scale both CPUs and memory in your Docker resources configuration. Note that increasing Docker's resource usage might decrease the overall performance of your machine.
+To improve the performance of your environment, you can adjust CPU and memory resource allocation in your Docker resources configuration. Be aware that increasing Docker resource allocation might decrease the overall performance of your computer.
 
-You can also modify Airflow-level settings to improve your project's performance. For more information, read Astronomer's guide to [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
+You can also modify Airflow-level settings to improve the performance of your projects. For more information, see  [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers) guide from Astronomer.
 
-If your DAGs are still running slowly and you cannot scale Docker or Airflow any further, then we recommend pushing your project to an Astro Deployment that's dedicated to testing.
+If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to an Astro Deployment that's dedicated to testing.
 
 ### Astro project won't load after `astro dev start`
 
