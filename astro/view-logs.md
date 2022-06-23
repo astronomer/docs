@@ -2,7 +2,7 @@
 title: 'View Logs'
 sidebar_label: 'View Logs'
 id: view-logs
-description: View Deployment Airflow logs in the Cloud UI.
+description: View logs for your data pipelines both locally and on Astro.
 ---
 
 Review logs in the Cloud UI or in Airflow to troubleshoot and resolve issues with your data pipelines.
