@@ -44,7 +44,7 @@ There are two ways to install any version of the Astronomer CLI:
 If you have Homebrew installed, run:
 
 ```sh
-brew install astro
+brew install astro@0.27.4
 ```
 
 To install a specific version of the Astro CLI, you'll have to specify `@major.minor.patch`. To install v0.27.0, for example, run:

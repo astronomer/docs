@@ -281,6 +281,6 @@ If you have an existing [CI/CD](ci-cd.md) pipeline using the old `astrocloud` ex
 # After:
     - name: Deploy to Astro
       run: |
-        brew install astro
+        curl -sSL install.astronomer.io | sudo bash -s
         astro deploy ${{ secrets.DEPLOYMENT_ID }}
 ```

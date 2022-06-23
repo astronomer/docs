@@ -24,7 +24,7 @@ The Astro CLI installation process requires [Docker](https://www.docker.com/) (v
 If you have Homebrew installed, run:
 
 ```sh
-brew install astro
+brew install astro@0.28.1
 ```
 
 To install a specific version of the Astro CLI, you'll have to specify `@major.minor.patch`. To install v0.16.1, for example, run:
