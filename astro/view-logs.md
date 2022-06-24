@@ -5,7 +5,7 @@ id: view-logs
 description: View logs for your data pipelines both locally and on Astro.
 ---
 
-Astronomer provides access to both Airflow component and task logs. View logs to troubleshoot your data pipelines and better understand the behavior of your tasks and their execution environment.
+View Airflow task and component logs to troubleshoot your data pipelines and better understand the behavior of your tasks and their execution environment.
 
 ## View Airflow task logs
 
@@ -40,7 +40,7 @@ astro dev logs
 
 Once you run this command, the most recent logs for these components appear in your terminal window.
 
-By default, running `astro dev logs` shows logs for all Airflow components. To see logs only for a specific component, specify any of the following flags in your command:
+By default, running `astro dev logs` shows logs for all Airflow components. To see logs only for a specific component, add any of the following flags to your command:
 
 - `--scheduler`
 - `--webserver`
@@ -50,9 +50,9 @@ To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag 
 
 Logs for the Airflow webserver, worker, and triggerer are not available for Deployments on Astro.
 
-## View Airflow Scheduler Logs
+## View Airflow scheduler logs
 
-You can access the past 24 hours of scheduler logs for any Astro Deployment on the **Scheduler Logs** page of the Cloud UI. Logs are color-coded according to their type. Scheduler logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler Resources](configure-deployment-resources.md#scheduler-resources).
+You can access the past 24 hours of scheduler logs for any Astro Deployment on the **Scheduler Logs** page of the Cloud UI. Logs are color-coded according to their type. Scheduler logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
 
 1. In the Cloud UI, select a Workspace.
 2. Click **Logs** on the left-hand menu.
