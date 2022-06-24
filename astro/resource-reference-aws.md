@@ -176,49 +176,49 @@ This table lists the maximum worker size that is supported on Astro for each nod
 
 | Node Instance Type | Maximum AU | CPU       | Memory       |
 |--------------------|------------|-----------|--------------|
-| m5.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
-| m5.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
-| m5.4xlarge         | 147        | 14.7 CPUs | 55.1 GiB MEM |
-| m5.8xlarge         | 307        | 30.7 CPUs | 115 GiB MEM  |
-| m5.12xlarge        | 467*       | 46.7 CPUs | 175 GiB MEM  |
-| m5.16xlarge        | 627*       | 62.7 CPUs | 235 GiB MEM  |
-| m5.24xlarge        | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| m5.metal           | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| m5d.xlarge         | 27         | 2.7 CPUs  | 10.1 GiB MEM |
-| m5d.2xlarge        | 67         | 6.7 CPUs  | 25.1 GiB MEM |
-| m5d.4xlarge        | 147        | 14.7 CPUs | 55.1 GiB MEM |
-| m5d.8xlarge        | 307        | 30.7 CPUs | 115 GiB MEM  |
-| m5d.12xlarge       | 467*       | 46.7 CPUs | 175 GiB MEM  |
-| m5d.16xlarge       | 627*       | 62.7 CPUs | 235 GiB MEM  |
-| m5d.24xlarge       | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| m5d.metal          | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| m6i.xlarge         | 27         | 2.7 CPUs  | 10.1 GiB MEM |
-| m61.2xlarge        | 67         | 6.7 CPUs  | 25.1 GiB MEM |
-| m6i.4xlarge        | 147        | 14.7 CPUs | 55.1 GiB MEM |
-| m6i.8xlarge        | 307        | 30.7 CPUs | 115 GiB MEM  |
-| m6i.12xlarge       | 467*       | 46.7 CPUs | 175 GiB MEM  |
-| m6i.16xlarge       | 627*       | 62.7 CPUs | 235 GiB MEM  |
-| m6i.24xlarge       | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| m6i.metal          | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| r6i.xlarge         | 27         | 2.7 CPUs  | 10.1 GiB MEM |
-| r61.2xlarge        | 67         | 6.7 CPUs  | 25.1 GiB MEM |
-| r6i.4xlarge        | 147        | 14.7 CPUs | 55.1 GiB MEM |
-| r6i.8xlarge        | 307        | 30.7 CPUs | 115 GiB MEM  |
-| r6i.12xlarge       | 467*       | 46.7 CPUs | 175 GiB MEM  |
-| r6i.16xlarge       | 627*       | 62.7 CPUs | 235 GiB MEM  |
-| r6i.24xlarge       | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| r6i.metal          | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| c6i.xlarge         | 27         | 2.7 CPUs  | 10.1 GiB MEM |
-| c61.2xlarge        | 67         | 6.7 CPUs  | 25.1 GiB MEM |
-| c6i.4xlarge        | 147        | 14.7 CPUs | 55.1 GiB MEM |
-| c6i.8xlarge        | 307        | 30.7 CPUs | 115 GiB MEM  |
-| c6i.12xlarge       | 467*       | 46.7 CPUs | 175 GiB MEM  |
-| c6i.16xlarge       | 627*       | 62.7 CPUs | 235 GiB MEM  |
-| c6i.24xlarge       | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| c6i.metal          | 947*       | 94.7 CPUs | 355 Gib MEM  |
-| c6i.xlarge         | 27         | 2.7 CPUs  | 10.1 GiB MEM |
-| t3.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
-| t3.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
+| m5.xlarge          | 26         | 2.6 CPUs  | 9.7  GiB MEM |
+| m5.2xlarge         | 66         | 6.6 CPUs  | 24.7 GiB MEM |
+| m5.4xlarge         | 146        | 14.6 CPUs | 54.7 GiB MEM |
+| m5.8xlarge         | 306        | 30.6 CPUs | 114.7 GiB MEM|
+| m5.12xlarge        | 466*       | 46.6 CPUs | 174.7 GiB MEM|
+| m5.16xlarge        | 626*       | 62.6 CPUs | 234.7 GiB MEM|
+| m5.24xlarge        | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| m5.metal           | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| m5d.xlarge         | 26         | 2.6 CPUs  | 9.7  GiB MEM |
+| m5d.2xlarge        | 66         | 6.6 CPUs  | 24.7 GiB MEM |
+| m5d.4xlarge        | 146        | 14.6 CPUs | 54.7 GiB MEM |
+| m5d.8xlarge        | 306        | 30.6 CPUs | 114.7 GiB MEM|
+| m5d.12xlarge       | 466*       | 46.6 CPUs | 174.7 GiB MEM|
+| m5d.16xlarge       | 626*       | 62.6 CPUs | 234.7 GiB MEM|
+| m5d.24xlarge       | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| m5d.metal          | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| m6i.xlarge         | 26         | 2.6 CPUs  | 9.7  GiB MEM |
+| m61.2xlarge        | 66         | 6.6 CPUs  | 24.7 GiB MEM |
+| m6i.4xlarge        | 146        | 14.6 CPUs | 54.7 GiB MEM |
+| m6i.8xlarge        | 306        | 30.6 CPUs | 114.7 GiB MEM|
+| m6i.12xlarge       | 466*       | 46.6 CPUs | 174.7 GiB MEM|
+| m6i.16xlarge       | 626*       | 62.6 CPUs | 234.7 GiB MEM|
+| m6i.24xlarge       | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| m6i.metal          | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| r6i.xlarge         | 26         | 2.6 CPUs  | 9.7  GiB MEM |
+| r61.2xlarge        | 66         | 6.6 CPUs  | 24.7 GiB MEM |
+| r6i.4xlarge        | 146        | 14.6 CPUs | 54.7 GiB MEM |
+| r6i.8xlarge        | 306        | 30.6 CPUs | 114.7 GiB MEM|
+| r6i.12xlarge       | 466*       | 46.6 CPUs | 174.7 GiB MEM|
+| r6i.16xlarge       | 626*       | 62.6 CPUs | 234.7 GiB MEM|
+| r6i.24xlarge       | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| r6i.metal          | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| c6i.xlarge         | 26         | 2.6 CPUs  | 9.7  GiB MEM |
+| c61.2xlarge        | 66         | 6.6 CPUs  | 24.7 GiB MEM |
+| c6i.4xlarge        | 146        | 14.6 CPUs | 54.7 GiB MEM |
+| c6i.8xlarge        | 306        | 30.6 CPUs | 114.7 GiB MEM|
+| c6i.12xlarge       | 466*       | 46.6 CPUs | 174.7 GiB MEM|
+| c6i.16xlarge       | 626*       | 62.6 CPUs | 234.7 GiB MEM|
+| c6i.24xlarge       | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| c6i.metal          | 946*       | 94.6 CPUs | 354.7 Gib MEM|
+| c6i.xlarge         | 26         | 2.6 CPUs  | 9.7  GiB MEM |
+| t3.xlarge          | 26         | 2.6 CPUs  | 9.7  GiB MEM |
+| t3.2xlarge         | 66         | 6.6 CPUs  | 24.7 GiB MEM |
 
 The maximum supported worker size on Astro is currently 400 AU, which means that an Astro Cluster may not make full use of the CPU and memory capacity of some node instance types on this list. If your Organization is interested in using an instance type that supports a worker size limit higher than 400 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
