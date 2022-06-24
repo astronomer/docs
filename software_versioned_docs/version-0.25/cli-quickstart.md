@@ -39,13 +39,13 @@ The Astronomer CLI installation process requires [Docker](https://www.docker.com
 If you have Homebrew installed, run:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 To install a specific version of the Astronomer CLI, you'll have to specify `@major.minor.patch`. To install v0.25.0, for example, run:
 
 ```sh
-brew install astronomer/tap/astro@0.25.0
+brew install astro@0.25.0
 ```
 
 ### Install with cURL
@@ -89,7 +89,7 @@ To install the Astronomer CLI on a machine with an [Apple M1 chip](https://www.a
 3. Run the following command to install the Astronomer CLI:
 
     ```sh
-    arch -x86_64 /usr/local/Homebrew/bin/brew install astronomer/tap/astro
+    arch -x86_64 /usr/local/Homebrew/bin/brew install astro
     ```
 
 If you still have issues during installation, ensure that [Rosetta 2](https://support.apple.com/en-us/HT211861) is installed on your machine and try again.

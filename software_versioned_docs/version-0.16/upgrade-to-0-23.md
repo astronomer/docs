@@ -123,7 +123,7 @@ curl -sSL https://install.astronomer.io | sudo bash -s -- v0.23.0
 To do so via Homebrew, run:
 
 ```sh
-brew install astronomer/tap/astro@0.23
+brew install astro@0.23
 ```
 
 All team members within your organization should upgrade the Astronomer CLI individually before taking any further action on the platform or in a local Airflow environment. For a detailed breakdown of CLI changes between versions, refer to [Astronomer CLI releases](https://github.com/astronomer/astro-cli/releases). For detailed install guidelines and more information on the Astronomer CLI, refer to [Astronomer CLI Quickstart](cli-quickstart.md).

@@ -18,7 +18,11 @@ For example, you can:
 
 To configure these settings, follow the steps below.
 
-> **Note:** If you're interested in upgrading Astronomer to a new patch version of the platform, read [Upgrade to a Patch Version](upgrade-astronomer.md).
+:::info
+
+If you're interested in upgrading Astronomer to a new patch version of the platform, read [Upgrade to a Patch Version](upgrade-astronomer.md).
+
+:::
 
 ## Step 1: Open Your config.yaml File
 
@@ -27,6 +31,17 @@ This file was created when you installed Astronomer using one of the following g
 * [AWS EKS Installation Guide](install-aws-standard.md#step-8-configure-your-helm-chart)
 * [GCP GKE Installation Guide](install-gcp-standard.md#step-7-configure-your-helm-chart)
 * [Azure AKS Installation Guide](install-azure-standard.md#step-7-configure-your-helm-chart)
+
+:::tip
+
+To access your `config.yaml` file directly from an existing Software installation, run the following command:
+
+```sh
+helm get values <your-installation-release-name> -n <your-installation-namespace> > config.yaml
+```
+
+If you retrieve your file this way, delete `USER-SUPPLIED VALUES:` from the first line before changing any other configurations.
+:::
 
 ## Step 2: Update Key-Value Pairs
 
