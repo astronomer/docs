@@ -62,9 +62,9 @@ module.exports = {
       type: 'category',
       label: 'Observability',
       items: [
+        'view-logs',
         'deployment-metrics',
         'data-lineage',
-        'view-logs',
         'airflow-alerts',
       ],
     },
