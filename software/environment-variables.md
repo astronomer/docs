@@ -113,7 +113,7 @@ If you're working on an Astro project locally but intend to deploy to Astronomer
 
 > **Note:** Given that this file will be committed upstream, we strongly recommend witholding environment variables containing sensitive credentials from your `Dockerfile` and instead inserting them via your `.env` file locally (while adding the file to your `.gitignore`) or setting them as 'secret' via the Software UI, as described in a dedicated section below.
 
-To add Environment Variables, insert the value and key in your `Dockerfile` beginning with `ENV`, ensuring all-caps for all characters. With your Airflow image commonly referenced as a "FROM" statement at the top, your Dockerfile might look like this:
+To add environment variables, insert the value and key in your `Dockerfile` beginning with `ENV`, ensuring all-caps for all characters. With your Airflow image commonly referenced as a "FROM" statement at the top, your Dockerfile might look like this:
 
 ```dockerfile
 FROM quay.io/astronomer/ap-airflow:1.10.7-buster-onbuild

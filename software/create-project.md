@@ -36,7 +36,7 @@ This generates the following files:
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include # For any other files you'd like to include
 ├── plugins # For any custom or community Airflow plugins
-├── airflow_settings.yaml # For your Airflow connections, Variables and Pools (local only)
+├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
 ├── packages.txt # For OS-level packages
 └── requirements.txt # For any Python packages
 ```

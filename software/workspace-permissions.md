@@ -271,7 +271,7 @@ A Workspace _Viewer_ is limited to read-only mode. _Viewers_:
 
 Deployment _Admins_ are the highest-tiered role. Admins:
 
-- Can perform CRUD (create, read, update, delete) Astronomer operations on the Deployment (e.g. modify resources, add Environment Variables, push code, delete the Deployment)
+- Can perform CRUD (create, read, update, delete) Astronomer operations on the Deployment (e.g. modify resources, add environment variables, push code, delete the Deployment)
 - Can manage users and their permissions in the Deployment
 - Can perform CRUD operations on any service account in the Workspace
 - Can perform CRUD Airflow operations (push code, add Connections, clear tasks, delete DAGs etc.)

@@ -15,7 +15,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 Release date: June 13, 2022
 
-### Deployment API keys Now Work with Deployment Commands
+### Deployment API keys now work with Deployment commands
 
 You can now run the following commands with a Deployment API key:
 
@@ -30,7 +30,7 @@ You can now run the following commands with a Deployment API key:
 
 Previously, you could run only the `astro deploy` command with a Deployment API key. For more information on API keys, see [Manage Deployment API keys](api-keys.md).
 
-### Easier Way to Determine Deployment ID on Deployment Commands
+### Easier way to determine Deployment ID on Deployment commands
 
 The Astro CLI now follows a new process to determine which Deployment to run a command against. Specifically:
 
@@ -61,7 +61,7 @@ Release date: June 6, 2022
 
 Release date: June 2, 2022
 
-### A Shared CLI for All Astronomer Users
+### A shared CLI for all Astronomer users
 
 The Astro CLI is now a single CLI executable built for all Astronomer products. This new generation of the CLI optimizes for a consistent local experience with Astro Runtime as well as the ability to more easily upgrade to Astro from other products hosted on Astronomer.
 
@@ -99,15 +99,15 @@ For updated CI/CD examples, see [CI/CD](ci-cd.md).
 
 You can now use `astro config get` and `astro config set` to retrieve and modify the configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your webserver port, and your project name.
 
-For more information about these commands, see the [CLI Command Reference](cli/astro-config-set.md).
+For more information about these commands, see the [CLI command reference](cli/astro-config-set.md).
 
 ### New Command To Switch Between Astronomer Contexts
 
 You can now use `astro context list` and `astro context switch` to show all the Astronomer contexts that you have access to and switch between them. An Astronomer context is defined as a base domain that you can use to access either Astro or an installation of Astronomer Software. A domain will appear as an available context if you have authenticated to it at least once.
 
-This command is primarily for users who need to work in both Astro and Astronomer Software installations. If you're an Astro user with no ties to Astronomer Software, ignore this command. For more information, see the [CLI Command Reference ](cli/astro-context-switch.md).
+This command is primarily for users who need to work in both Astro and Astronomer Software installations. If you're an Astro user with no ties to Astronomer Software, ignore this command. For more information, see the [CLI command reference ](cli/astro-context-switch.md).
 
-For more information about these commands, see the [CLI Command Reference ](cli/astro-context-switch.md).
+For more information about these commands, see the [CLI command reference ](cli/astro-context-switch.md).
 
 ### Additional improvements
 
@@ -118,11 +118,11 @@ For more information about these commands, see the [CLI Command Reference ](cli/
 
 Release date: April 28, 2022
 
-### New Command to Update Deployment Environment Variables
+### New command to update Deployment environment variables
 
 A new `astro deployment variable update` command allows you to more easily update an existing environment variable by typing a new value directly into your command line or adding the updated variable to a `.env` file.
 
-This command replaces the `—update` flag that was previously released with the `astro deployment variable create` command. For more information, see the [Astro CLI Command Reference](cli/astro-deployment-variable-create.md).
+This command replaces the `—update` flag that was previously released with the `astro deployment variable create` command. For more information, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 
 ### Additional improvements
 
@@ -139,17 +139,17 @@ This command replaces the `—update` flag that was previously released with the
 
 Release date: April 14, 2022
 
-### New Command to Create and Update Environment Variables
+### New command to create and update environment variables
 
 `astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually via the Cloud UI.
 
-For more information about this command and its options, see the [Astro CLI Command Reference](cli/astro-deployment-variable-create.md).
+For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 
-### New Command to List and Save Deployment Environment Variables
+### New command to list and save Deployment environment variables
 
 You can now list existing environment variables for a given Deployment and save them to a local `.env` file with a new `astro deployment variable list` command. This command makes it easy to export existing environment variables for a given Deployment on Astro and test DAGs with them in a local Airflow environment.
 
-For more information about this command and its options, see the [Astro CLI Command Reference](cli/astro-deployment-variable-list.md).
+For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-list.md).
 
 ### Additional improvements
 
@@ -190,7 +190,7 @@ Astro CLI 1.3.2 is a direct patch replacement for 1.3.1, which is no longer avai
 
 :::
 
-### Support for Identity-Based Login Flow
+### Support for identity-based login flow
 
 To better integrate with Astro's identity-based login flow, the CLI now prompts you for your login email after you run `astro login`. Based on your email, the CLI assumes your Astro Organization and automatically brings you to your Organization's login flow via web browser.
 
@@ -208,19 +208,19 @@ To better integrate with Astro's identity-based login flow, the CLI now prompts 
 
 Release date: March 3, 2022
 
-### New Command to Parse DAGs for Errors
+### New command to parse DAGs for errors
 
 `astro dev parse` is a new Astro CLI command that allows you to run a basic test against your Astro project to ensure that essential aspects of your code are properly formatted. This includes the DAG integrity test that is run with `astro dev pytest`, which checks that your DAGs are able to to render in the Airflow UI.
 
 This command was built to replace the need to constantly run `astro dev restart` during troubleshooting to see if your DAGs render in the Airflow UI. Now, you can quickly run `astro dev parse` and see import and syntax errors directly in your terminal without having to restart all Airflow services locally. For more complex testing, we still recommend using `astro dev pytest`, which allows you to run other custom tests in your project.
 
-For more information about `astro dev parse`, see the [CLI Command Reference](cli/astro-dev-parse.md). For more guidance on testing DAGs locally, see [Test DAGs Locally](test-and-troubleshoot-locally.md#test-dags-locally).
+For more information about `astro dev parse`, see the [CLI command reference](cli/astro-dev-parse.md). For more guidance on testing DAGs locally, see [Test DAGs locally](test-and-troubleshoot-locally.md#test-dags-locally).
 
-### `astro deploy` Parses DAGs by Default
+### `astro deploy` parses DAGs by default
 
 To better protect your Deployments from unexpected errors, `astro deploy` now automatically applies tests from `astro dev parse` to your Astro project before completing the deploy process. If any of these tests fail, the CLI will not push your code to Astro.
 
-For more information about `astro deploy`, see [CLI Command Reference](cli/astro-deploy.md).
+For more information about `astro deploy`, see [CLI command reference](cli/astro-deploy.md).
 
 :::danger Breaking Change
 
@@ -230,7 +230,7 @@ To maintain the CLI's original behavior, use `astro deploy --force`. This comman
 
 :::
 
-### New Command to Update Deployment Configurations
+### New command to update Deployment configurations
 
 You can now use `astro deployment update` to update certain configurations for an existing Astro Deployment directly from the Astro CLI. The configurations that you can update are:
 
@@ -240,13 +240,13 @@ You can now use `astro deployment update` to update certain configurations for a
 - Scheduler replicas
 - Worker resources
 
-This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment-resources.md). For more information about this command, see [CLI Command Reference](cli/astro-deployment-update.md).
+This is the same set of configurations that you can modify with the **Edit Configuration** view in the Cloud UI. For more information on modifying a Deployment, see [Configure a Deployment](configure-deployment-resources.md). For more information about this command, see [CLI command reference](cli/astro-deployment-update.md).
 
 ## v1.2.0 (`astrocloud`)
 
 Release date: February 25, 2022
 
-### Deploy to Astro with Deployment API keys for Simpler CI/CD
+### Deploy to Astro with Deployment API keys for simpler CI/CD
 
 You can now use [Deployment API keys](api-keys.md) to run `astro deploy` either from the CLI directly or via a CI/CD script. This update simplifies deploying code to Astro via CI/CD.
 
@@ -259,7 +259,7 @@ When `astro deploy` is run, the CLI will now automatically look for and use the 
 
 Previously, any script that automated code pushes to Astro had to include a series of `cURL` requests to the Cloud API and could not use Deployment API keys to run an Astro CLI command. If your existing CI/CD pipelines still utilize this method, we recommend replacing those commands with an Astro CLI-based workflow. For more information and guiding examples, see [CI/CD](ci-cd.md).
 
-### New Command to Run DAG Unit Tests with pytest
+### New command to run DAG unit tests with pytest
 
 You can now run custom unit tests for all DAGs in your Astro project with `astro dev pytest`, a new Astro CLI command that uses [pytest](https://docs.pytest.org/en/7.0.x/index.html), a common testing framework for Python. As part of this change, new Astro projects created via `astro dev init` now include a `tests` directory, which includes one example pytest built by Astronomer.
 
@@ -276,32 +276,32 @@ These tests don't require a fully functional Airflow environment in order to exe
 
 In addition to running tests locally, you can also run pytest as part of the Astro deploy process. To do so, specify the `--pytest` flag when running `astro deploy`. This ensures that your code push to Astro automatically fails if any DAGs do not pass all pytests specified in the `tests` directory of your Astro project. For more information, see [Test DAGs Locally with pytest](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
 
-### New Command to View Deployment scheduler Logs
+### New command to view Deployment scheduler Logs
 
 If you prefer to troubleshoot DAGs and monitor your Deployments from the command line, you can now run `astro deployment logs`, a new Astro CLI command that allows you to view the same scheduler logs that appear in the **Logs** tab of the Cloud UI.
 
-When you run this command, all scheduler logs emitted by a Deployment over the last 24 hours appear in your terminal. Similarly to the Cloud UI, you can filter logs by log level using command flags. For more information about this command, see the [CLI Command Reference](cli/astro-deployment-logs.md).
+When you run this command, all scheduler logs emitted by a Deployment over the last 24 hours appear in your terminal. Similarly to the Cloud UI, you can filter logs by log level using command flags. For more information about this command, see the [CLI command reference](cli/astro-deployment-logs.md).
 
-### New Commands to Create and Delete Deployments on Astro
+### New commands to create and delete Deployments on Astro
 
 You can now use the Astro CLI to create and delete Deployments on Astro with two new commands:
 
 - `astro deployment create`
 - `astro deployment delete`
 
-These commands are functionally identical to the [Deployment configuration](configure-deployment-resources.md) and deletion process in the Cloud UI. For more information, see the [CLI Command Reference](cli/astro-deployment-create.md).
+These commands are functionally identical to the [Deployment configuration](configure-deployment-resources.md) and deletion process in the Cloud UI. For more information, see the [CLI command reference](cli/astro-deployment-create.md).
 
 ## v1.1.0 (`astrocloud`)
 
 Release date: February 17, 2022
 
-### New `astro dev restart` Command to Test Local Changes
+### New `astro dev restart` command to test local changes
 
 For users making quick and continuous changes to an Astro project locally, the Astro CLI now supports a new `astro dev restart` command. This command makes local testing significantly easier and is equivalent to running `astro dev stop` followed by `astro dev start`.
 
-### Support for the triggerer in Local Airflow Environments
+### Support for the triggerer in local Airflow environments
 
-The Astro CLI now supports the Apache Airflow [Triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](deferrable-operators.md) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
+The Astro CLI now supports the Apache Airflow [triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](deferrable-operators.md) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
 
 The triggerer will only be created in local environments running Astro Runtime 4.0.0+.
 
@@ -327,13 +327,13 @@ astro <command> # E.g. `astro dev start`
 
 We strongly recommend that all users install the Astro CLI and delete the `./astro` executable from local directories as soon as possible. For guidelines, read [Install the Astro CLI](cli/get-started.md). As of February 2022, `./astro` will no longer be maintained by our team. With that said, the release of the Astro CLI does not have any impact on your existing Deployments or DAGs.
 
-### New Authentication Flow
+### New authentication flow
 
 The Astro CLI introduces an easy way to authenticate. Instead of requiring that users manually pass authentication tokens, the new CLI consists of a simple, browser-based login process.
 
 Built with refresh tokens, the Astro CLI also does not require that users re-authenticate every 24 hours, as was the case with `./astro`. As long as you remain authenticated via the Cloud UI, your session via the Astro CLI will remain valid. You can expect to be asked to re-authenticate only once every few months instead of on a daily basis.
 
-### Improved Local Development
+### Improved local development
 
 Astro CLI v1.0.0 includes several improvements to the local development experience:
 
@@ -348,7 +348,7 @@ Astro CLI v1.0.0 includes several improvements to the local development experien
 
 Release date: December 9, 2021
 
-### Improved Example DAGs
+### Improved example DAGs
 
 The Astro CLI is built to enable developers to learn about, test, automate, and make the most of Apache Airflow both locally and on Astro. To that end, we've updated the CLI with two example DAGs that will be present for all users in the `/dags` folder that is automatically generated by `astro dev init`.
 
@@ -360,7 +360,7 @@ The basic DAG showcases a simple ETL data pipeline and the advanced DAG showcase
 
 ### Bug fixes
 
-Fixed a broken documentation link and outdated description in the `airflow_settings.yaml` file, which you can use to programmatically set Airflow connections, Variables, and Pools locally.
+Fixed a broken documentation link and outdated description in the `airflow_settings.yaml` file, which you can use to programmatically set Airflow connections, variables, and pools locally.
 
 ## v1.0.3 (`./astro`)
 

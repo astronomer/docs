@@ -470,7 +470,7 @@ When you run this command, the following skeleton files are generated in your cu
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include # For any other files you'd like to include
 ├── plugins # For any custom or community Airflow plugins
-├── airflow_settings.yaml # For your Airflow connections, Variables and Pools (local only)
+├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
 ├── packages.txt # For OS-level packages
 └── requirements.txt # For any Python packages
 ```
@@ -559,7 +559,7 @@ Stops all 3 running Docker containers on your local Airflow environment. Running
 
 ## astro dev upgrade-check
 
-Runs a script that checks whether all files in your local Astro project are compatible with Airflow 2.0 by reviewing your DAG code, deployment-level configurations, and Environment Variables, as well as metadata from the Airflow database. You must be on Airflow 1.10.14+ and in your Astro project directory to run this command.
+Runs a script that checks whether all files in your local Astro project are compatible with Airflow 2.0 by reviewing your DAG code, deployment-level configurations, and environment variables, as well as metadata from the Airflow database. You must be on Airflow 1.10.14+ and in your Astro project directory to run this command.
 
 ### Usage
 

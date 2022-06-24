@@ -163,4 +163,4 @@ Once you install the CLI and have an Astro project running locally, there are a 
 - To write and test your own DAGs locally and configure your local Airflow environment, see [Develop Project](develop-project.md).
 - To view logs, set up unit tests for your DAGs, or troubleshoot your local Airflow environment, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 - To deploy DAGs to an environment managed by Astronomer, see [Deploy code](deploy-code.md). If you're not a customer but might be interested in Astro, [reach out to us](https://www.astronomer.io/get-started).
-- To learn more about the available commands in the CLI, see the [CLI Command Reference](cli/reference.md) or run `astro help`.
+- To learn more about the available commands in the CLI, see the [CLI command reference](cli/reference.md) or run `astro help`.
