@@ -168,7 +168,7 @@ A single Cluster on Astro cannot currently be configured with more than one node
 
 :::
 
-### Maximum Node Count
+### Maximum node count
 
 Each Astro cluster has a maximum node count, which is the maximum number of worker nodes that can run at any given time on a cluster. This limit does not apply to other nodes such as RDS instances or Astronomer-managed node pools.
 

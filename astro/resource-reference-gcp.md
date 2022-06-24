@@ -62,7 +62,7 @@ Astro supports different GCP machine types. Machine types comprise of varying co
 
 For detailed information on each instance type, see [GCP documentation](https://cloud.google.com/compute/docs/machine-types). If you're interested in a machine type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io/). Not all machine types are supported in all GCP regions.
 
-### Maximum Node Count
+### Maximum node count
 
 Each Astro cluster has a maximum node count, which is the maximum number of worker nodes that can run at any given time on a cluster. This limit does not apply to other nodes such as RDS instances or Astronomer-managed node pools.
 
