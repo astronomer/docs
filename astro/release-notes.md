@@ -18,7 +18,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ## June 23, 2022
 
-### Support for more GCP regions
+### New GCP regions available
 
 You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
 
