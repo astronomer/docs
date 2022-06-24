@@ -237,7 +237,7 @@ This following table lists the maximum worker size that is supported on Astro fo
 | t3.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
 | t3.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
 
-The maximum supported worker size on Astro is currently 400 AU, which means that an Astro cluster might not make full use of the CPU and memory capacity of some node instance types. In the table, these node instance types are marked with an asterisk. If your Organization is interested in using an instance type that supports a worker size limit higher than 400 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
+The maximum value for **Worker Resources** on Astro is 400 AU, which means that an Astro cluster might not make full use of the CPU and memory capacity of some node instance types. In the table, these node instance types are marked with an asterisk. If your Organization is interested in using an instance type that supports a worker size limit higher than 400 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
 :::info
 
