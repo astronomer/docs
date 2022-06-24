@@ -284,7 +284,7 @@ Every Deployment must have at least 1 Deployment _Admin_.
 
 Behind _Admins_, a Deployment _Editor_:
 
-- Can access and make changes to the Deployment on Astronomer (e.g. modify resources, add Environment Variables, push code)
+- Can access and make changes to the Deployment on Astronomer (e.g. modify resources, add environment variables, push code)
 - Cannot delete the Deployment
 - Can perform CRUD operations on any service account in the Deployment
 - Cannot manage other users in the Deployment
