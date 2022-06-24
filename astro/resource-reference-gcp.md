@@ -24,7 +24,7 @@ Read the following document for a reference of our default resources as well as 
 | [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres) | The Cloud SQL instance is the primary database for the Astro Data Plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster | 1 Regional Instance with 4 vCPUs, 16GB Memory |
 | Storage Bucket | GCS Bucket for storage of Airflow task logs | 1 bucket with name `airflow-logs-<clusterid>` |
 | Nodes | Nodes power the Data Plane and Airflow components. Nodes autoscale as deployments are added. | 3x n2-medium-4 for the system nodes; worker nodes default to e2-medium-4 and are provisioned as required, up to Max Node Count |
-| Max Node Count | The maximum number of EC2 nodes that your Astro Cluster can support at any given time. Once this limit is reached, your Cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
+| Max Node Count | The maximum number of worker nodes that your Astro Cluster can support at any given time. Once this limit is reached, your Cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
 
 
 ## Supported Cluster Configurations
@@ -62,11 +62,28 @@ Astro supports different GCP machine types. Machine types comprise of varying co
 
 For detailed information on each instance type, see [GCP documentation](https://cloud.google.com/compute/docs/machine-types). If you're interested in a machine type that is not on this list, reach out to [Astronomer Support](https://support.astronomer.io/). Not all machine types are supported in all GCP regions.
 
-## Deployment Worker Size Limits
+### Maximum Node Count
 
-In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a Cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. For Deployments on GCP, you can select any worker size up to 64 AU (6.4 CPUs, 24 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. When you attempt to provision a worker size that isn't supported by the Cluster instance type, an error message appears in the Cloud UI.
+Each Astro cluster has a maximum node count, which is the maximum number of worker nodes that can run at any given time on a cluster. This limit does not apply to other nodes such as RDS instances or Astronomer-managed node pools.
 
-This table lists the approximate maximum worker size that is supported on Astro for each node instance type. Maximum worker size values may increase or decrease over time as the system requirements of Astro change.
+The default maximum node count for a cluster is 20. This value can be changed for any cluster by Astronomer.
+
+The number of worker nodes in your cluster [autoscales](configure-deployment-resources.md#worker-autoscaling-logic) based on how many tasks are currently queued or running. If a cluster's worker node count scales to the maximum node count, new tasks can't run or be scheduled.
+
+Reaching the maximum node count also results in the following error in a Deployment's [scheduler logs](view-logs.md):
+
+```text
+│   Warning  FailedScheduling  6s (x10 over 11m)  default-scheduler  0/6 nodes are available: 6 Insufficient cpu.                                                                                                                                                                                                    │
+│ I1110 19:41:16.548235       1 static_autoscaler.go:392] Max total nodes in cluster reached       
+```
+
+If you see this error in a Deployment, reach out to [Astronomer Support](https://support.astronomer.io) and request an increase to your cluster's maximum node count.
+
+### Deployment Worker Size Limits
+
+Worker nodes can be further configured at a Deployment level using the **Worker Resources** setting in the Cloud UI. Using this setting, you can determine how much CPU and memory a worker node uses out of its maximum possible usage.
+
+This following table lists the maximum worker size that is supported on Astro for each worker node instance type. These values can increase or decrease over time as the system requirements of Astro change. If you try to set **Worker Resources** to a size that exceeds the maximum for your Cluster's worker node instance type, an error message appears in the Cloud UI.
 
 | Node Instance Type | Maximum AU | CPU       | Memory       |
 |--------------------|------------|-----------|--------------|

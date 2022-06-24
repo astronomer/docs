@@ -26,11 +26,11 @@ Read the following document for a reference of our default resources as well as 
 | [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) | Home for the routes. | 2x |
 | [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) | Virtual network for launching and hosting AWS resources. | 1x /19 |
 | [S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html) | S3 bucket for storage of Airflow task logs. | 1x |
-| Max Node Count | The maximum number of EC2 nodes that your Astro Cluster can support at any given time. Once this limit is reached, your Cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
+| Max Node Count | The maximum number of EC2 worker nodes that your Astro Cluster can support at any given time. Once this limit is reached, your Cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
 
 ## Supported Cluster Configurations
 
-Depending on the needs of your team, you may be interested in modifying certain configurations of a new or existing Cluster on Astro. This section provides a reference for which configuration options are supported during the install process.
+You might need to modify configurations of a new or existing Cluster on Astro. This section provides a reference for Cluster configuration options. Any changes to these configurations must be requested through [Astronomer's support portal](support.astronomer.io) and completed by Astronomer.
 
 To create a new Cluster on Astro with a specified configuration, see [Install on AWS](install-aws.md) or [Create a Cluster](create-cluster.md). For instructions on how to make a change to an existing Cluster, see [Modify a Cluster](modify-cluster.md).
 
@@ -168,11 +168,28 @@ A single Cluster on Astro cannot currently be configured with more than one node
 
 :::
 
-## Deployment Worker Size Limits
+### Maximum Node Count
 
-In addition to setting a node instance type for each Cluster, you can configure a unique worker size for each Deployment within a Cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as the worker size is supported by the node instance type selected for the Cluster. When you attempt to provision a worker size that isn't supported by the Cluster instance type, an error message appears in the Cloud UI.
+Each Astro cluster has a maximum node count, which is the maximum number of worker nodes that can run at any given time on a cluster. This limit does not apply to other nodes such as RDS instances or Astronomer-managed node pools.
 
-This table lists the maximum worker size that is supported on Astro for each node instance type. Maximum worker size values may increase or decrease over time as the system requirements of Astro change.
+The default maximum node count for a cluster is 20. This value can be changed for any cluster by Astronomer.
+
+The number of worker nodes in your cluster [autoscales](configure-deployment-resources.md#worker-autoscaling-logic) based on how many tasks are currently queued or running. If a cluster's worker node count scales to the maximum node count, new tasks can't run or be scheduled.
+
+Reaching the maximum node count results in the following error in a Deployment's [scheduler logs](view-logs.md):
+
+```text
+│   Warning  FailedScheduling  6s (x10 over 11m)  default-scheduler  0/6 nodes are available: 6 Insufficient cpu.                                                                                                                                                                                                    │
+│ I1110 19:41:16.548235       1 static_autoscaler.go:392] Max total nodes in cluster reached       
+```
+
+If you see this error in a Deployment, reach out to [Astronomer Support](https://support.astronomer.io) and request an increase to your cluster's maximum node count.
+
+### Deployment Worker Size Limits
+
+Worker nodes can be further configured at a Deployment level using the **Worker Resources** setting in the Cloud UI. Using this setting, you can determine how much CPU and memory a worker node uses out of its maximum possible usage.
+
+This following table lists the maximum worker size that is supported on Astro for each worker node instance type. These values can increase or decrease over time as the system requirements of Astro change. If you try to set **Worker Resources** to a size that exceeds the maximum for your Cluster's worker node instance type, an error message appears in the Cloud UI.
 
 | Node Instance Type | Maximum AU | CPU       | Memory       |
 |--------------------|------------|-----------|--------------|
@@ -220,7 +237,7 @@ This table lists the maximum worker size that is supported on Astro for each nod
 | t3.xlarge          | 27         | 2.7 CPUs  | 10.1 GiB MEM |
 | t3.2xlarge         | 67         | 6.7 CPUs  | 25.1 GiB MEM |
 
-The maximum supported worker size on Astro is currently 400 AU, which means that an Astro Cluster may not make full use of the CPU and memory capacity of some node instance types on this list. If your Organization is interested in using an instance type that supports a worker size limit higher than 400 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
+The maximum supported worker size on Astro is currently 400 AU, which means that an Astro cluster might not make full use of the CPU and memory capacity of some node instance types. In the table, thes node instance types are marked with an asterisk. If your Organization is interested in using an instance type that supports a worker size limit higher than 400 AU, contact [Astronomer Support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
 :::info
 
@@ -232,7 +249,7 @@ For more information about the Scheduler, see [Configure a Deployment](configure
 
 :::tip
 
-With the exception of `m5d` nodes, all suppported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, Astronomer recommends modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes.
+With the exception of `m5d` nodes, all supported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, Astronomer recommends modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes.
 
 Astronomer plans to support optional ephemeral storage for all node instance types in the first half of 2022.
 
