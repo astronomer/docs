@@ -98,6 +98,6 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 4.2.x                                       |       2.2.4                                                                      | 
 | 5.0.x                                       |       2.3.0                                                                        | 
 
-## System dependencies
+## System distribution
 
 Astro Runtime images are based on Debian 11.3 (bullseye).
