@@ -36,7 +36,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     ```apiVersion: v1
     clusters:
     - cluster:
-        certificate-authority-data: CERT_AUTHORITY_DATA
+        certificate-authority-data: <certificate-authority-data>
         server: https://kubernetes.docker.internal:6443/
     name: docker-desktop
     contexts:
@@ -50,12 +50,12 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     users:
     - name: docker-desktop
     user:
-        client-certificate-data: CERT_CLIENT_DATA
-        client-key-data: CERT_KEY_DATA
+        client-certificate-data: <client-certificate-data>
+        client-key-data: <client-key-data>
     ```
     The cluster `name` should be searchable as `docker-desktop` in your local `$HOME/.kube``config` file. Do not add any additional data to the `config` file.
 
-2. Update the `CERT_AUTHORITY_DATA`, `CERT_CLIENT_DATA`, and `CERT_KEY_DATA` values in the `config` file with the values for your organization. 
+2. Update the `certificate-authority-data`, `client-certificate-data`, and `client-key-data` values in the `config` file with the values for your organization. 
 3. Under cluster, change `server: https://localhost:6445` to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
 4. Optional. Add the `.kube` folder to `.gitignore` if  your project is configureed as a GitHub repository and you want to prevent the file from being tracked by your version control tool. 
 5. Optional. Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.  
