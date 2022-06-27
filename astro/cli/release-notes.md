@@ -11,6 +11,14 @@ This document provides a summary of all changes made to the [Astro CLI](cli/get-
 
 If you have any questions or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io).
 
+## Astro CLI v1.2.0
+
+Release date: June 13, 2022
+
+### Additional improvements 
+
+- This release includes changes exclusively for Astronomer Software.  
+
 ## Astro CLI v1.1.0
 
 Release date: June 13, 2022
@@ -26,7 +34,7 @@ You can now run the following commands with a Deployment API key:
 - `astro deployment delete`
 - `astro deployment variable list`
 - `astro deployment variable create`
-- `astro deployment variable update` 
+- `astro deployment variable update`
 
 Previously, you could run only the `astro deploy` command with a Deployment API key. For more information on API keys, see [Manage Deployment API Keys](api-keys.md).
 
