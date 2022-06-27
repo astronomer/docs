@@ -14,12 +14,9 @@ If your organization is using Software version 0.29 or later, you can deploy Ast
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules that is maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 - Airflow UI improvements. For example, showing the Deployment Docker image tag in the footer of all UI pages.
 - Exclusive features such as new Airflow components and improvements to the DAG development experience.
+- OpenLineage with Airflow.  OpenLineage standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. OpenLineage with Airflow is intended to make it easier for organizations to integrate their lineage tools with Apache Airflow. See [OpenLineage and Airflow](https://docs.astronomer.io/astro/data-lineage-concepts#openlineage-and-airflow).
 
 For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime Release Notes](https://docs.astronomer.io/astro/runtime-release-notes).
-
-OpenLineage with Airflow standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. OpenLineage with Airflow is intended to make it easier for organizations to integrate their lineage tools with Apache Airflow. See [OpenLineage and Airflow](https://docs.astronomer.io/astro/data-lineage-concepts#openlineage-and-airflow).
-
-The `astronomer-providers` package is a collection of Apache Airflow OSS providers and modules. The package is installed on Astro Runtime by default and is maintained by Astronomer. The package includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Deferrable Operators](https://docs.astronomer.io/astro/deferrable-operators). To access the source code for this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ## Runtime Versioning
 
