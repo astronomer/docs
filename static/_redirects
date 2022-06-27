@@ -208,9 +208,10 @@
 /software/upgrade-to-0-25 /software/upgrade-astronomer 301
 /software/0.25/upgrade-to-0-25 /software/0.25/upgrade-astronomer 301
 
-
 # redirect links to renamed files
 /astro/configure-deployment /astro/configure-deployment-resources 301
+/astro/scheduler-logs /astro/view-logs 301
+
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301

@@ -5,7 +5,9 @@ id: astro-deployment-logs
 description: Reference documentation for astro deployment logs.
 ---
 
-Show [Scheduler logs](scheduler-logs.md) over the last 24 hours for a given Deployment on Astro. These Scheduler logs are the same logs that appear in the **Logs** tab of the Cloud UI.
+## Description
+
+Show [Scheduler logs](view-logs.md) over the last 24 hours for a given Deployment on Astro. These Scheduler logs are the same logs that appear in the **Logs** tab of the Cloud UI.
 
 ## Usage
 
