@@ -79,7 +79,7 @@ It isn't necessary to install docker-compose.
         client-certificate-data: CERT_CLIENT_DATA
         client-key-data: CERT_KEY_DATA
     ```
-    The `clusters.cluster.name` should be searchable as `docker-desktop` in your local `$HOME/.kube``config` file.
+    The `clusters.cluster.name` should be searchable as `docker-desktop` in your local `$HOME/.kube/config` file.
 
 2. Update the `CERT_AUTHORITY_DATA`, `CERT_CLIENT_DATA`, and `CERT_KEY_DATA` values in the `config` file with the values for your organization.
 3. Under cluster, change `server: https://localhost:6445` to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
