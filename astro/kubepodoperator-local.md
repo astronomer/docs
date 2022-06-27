@@ -223,6 +223,6 @@ Specifically, your operator must have `cluster_context='docker-desktop` and `con
 2. Optional. Review the logs for any pods that were created by the operator for issues. See [View Kubernetes Logs](#view-kubernetes-logs).
 
 
-## Next Steps ##
+## Next Steps
 
 - [Run the KubernetesPodOperator on Astro](kubepodoperator.md)
