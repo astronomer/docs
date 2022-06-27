@@ -17,7 +17,7 @@ Every Deployment is hosted on a single Astro Cluster with its own dedicated reso
 
 ## Create a Deployment
 
-If you prefer, you can run the `astrocloud deployment create` command in the Astro CLI to create a Deployment. See [CLI Command Reference](cli-reference/astrocloud-deployment-create.md).
+If you prefer, you can run the `astro deployment create` command in the Astro CLI to create a Deployment. See [CLI Command Reference](cli/astro-deployment-create.md).
 
 1. Log in to the [Cloud UI](https://cloud.astronomer.io) and select a Workspace.
 2. Click the **Deployment** button.
