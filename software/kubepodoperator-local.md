@@ -70,9 +70,7 @@ microk8s.config > /include/.kube/config
 
 ## Step 3: Run your Container
 
-The `config_file` points to the `/include/.kube/config` file you just edited.
-
-The following example runs the docker `hello-world` image and reads environment variables to determine where it is run. If you are using Linux, the `cluster_context` is `microk8s`.
+To use the KubernetesPodOperator, you must define the configuration for your pod, including its namespace and runtime image, when you create an instance of the operator. This sample syntax runs the `hello-world` Docker image in a different namespace based on whether you're running the DAG locally or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
 
 Run `astro dev start` to build this config into your image.
 
@@ -109,14 +107,14 @@ dag = DAG('example_kubernetes_pod', schedule_interval='@once', default_args=defa
 
 with dag:
     KubernetesPodOperator(
-        namespace=namespace,
+        namespace=<namespace>,
         image="hello-world",
         labels={"foo": "bar"},
         name="airflow-test-pod",
         task_id="task-one",
-        in_cluster=in_cluster,  # if set to true, will look in the cluster, if false, looks for file
+        in_cluster=<in_cluster>,  # if set to true, will look in the cluster, if false, looks for file
         cluster_context="docker-desktop",  # is ignored when in_cluster is set to True
-        config_file=config_file,
+        config_file=<config_file>,
         is_delete_operator_pod=True,
         get_logs=True,
     )
