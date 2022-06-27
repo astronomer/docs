@@ -45,7 +45,7 @@ $ export ASTRONOMER_KEY_ID="<your-api-key-id>"
 $ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
 
 # Install the latest version of Astro CLI
-$ brew install astronomer/tap/astro
+$ curl -sSL install.astronomer.io | sudo bash -s
 
 # Build your Astro project into a Docker image and push the image to your Deployment
 $ astro deploy
@@ -98,7 +98,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/tap/astro
+            curl -sSL install.astronomer.io | sudo bash -s
             astro deploy
     ```
 
@@ -149,7 +149,7 @@ This setup assumes the following prerequisites:
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/tap/astro
+            curl -sSL install.astronomer.io | sudo bash -s
             astro deploy
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
@@ -163,7 +163,7 @@ This setup assumes the following prerequisites:
           uses: actions/checkout@v2.3.4
         - name: Deploy to Astro
           run: |
-            brew install astronomer/tap/astro
+            curl -sSL install.astronomer.io | sudo bash -s
             astro deploy
     ```
 
@@ -221,7 +221,7 @@ To complete this setup, you need:
               <your-build-arguments>
         - name: Deploy to Astro
           run: |
-            brew install astronomer/tap/astro
+            curl -sSL install.astronomer.io | sudo bash -s
             astro deploy
     ```
 
@@ -262,7 +262,7 @@ To complete this setup, you need:
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
           run: |
-            brew install astronomer/tap/astro
+            curl -sSL install.astronomer.io | sudo bash -s
             astro deploy
     ```
 

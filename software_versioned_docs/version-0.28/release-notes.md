@@ -15,6 +15,17 @@ This is the latest LTS long-term support (LTS) version of Astronomer Software. T
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
+## v0.28.5
+
+Release date: June 23, 2022
+
+### Bug fixes
+
+- Fixed several high level CVEs
+- User auth tokens for the Software UI are now stored in httpOnly cookies
+- Fixed an issue where Grafana dashboards were not accessible
+- Fixed an issue where a user could not log in through Azure AD SSO if the user belonged to a group without a `displayName`
+
 ## v0.28.4
 
 Release date: April 8, 2022

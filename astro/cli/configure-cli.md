@@ -32,13 +32,13 @@ To use the Astro CLI on Mac, you must have:
 To install the latest version of the Astro CLI, run the following command:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
 
 ```sh
-brew install astronomer/tap/astro@<major.minor.patch-version>
+brew install astro@<major.minor.patch-version>
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version.
@@ -117,7 +117,7 @@ If you specify only a major version, this command installs the latest minor or p
 To upgrade the Astro CLI to the latest version, you can run the same command as you did to install the CLI for the first time:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 </TabItem>
@@ -170,7 +170,7 @@ curl -sSL install.astronomer.io | sudo bash -s
 To uninstall the Astro CLI on Mac, run:
 
 ```sh
-brew uninstall astronomer/tap/astro
+brew uninstall astro
 ```
 
 </TabItem>
@@ -281,6 +281,6 @@ If you have an existing [CI/CD](ci-cd.md) pipeline using the old `astrocloud` ex
 # After:
     - name: Deploy to Astro
       run: |
-        brew install astronomer/tap/astro
+        curl -sSL install.astronomer.io | sudo bash -s
         astro deploy ${{ secrets.DEPLOYMENT_ID }}
 ```
