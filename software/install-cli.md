@@ -44,7 +44,7 @@ To use the Astro CLI on Mac, you must have:
 To install the latest version of the Astro CLI, run the following command:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 :::caution
@@ -52,7 +52,7 @@ brew install astronomer/tap/astro
 If you are on Software version 0.29, you should install version 0.29 of the Astro CLI as a bridge release between version 0.28 and version 1.0. To install this release run the following command:  
 
 ```sh
-brew install astronomer/tap/astro@0.29.0
+brew install astro@0.29.0
 ```
 
 :::
@@ -60,7 +60,7 @@ brew install astronomer/tap/astro@0.29.0
 To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
 
 ```sh
-brew install astronomer/tap/astro@<major.minor.patch-version>
+brew install astro@<major.minor.patch-version>
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version.

@@ -22,6 +22,7 @@ Release date: June 3, 2022
 ### Bug Fixes
 
 - Fixed an issue where you couldn't run Houston API queries for Deployments using `releaseName` and `label`
+- Fixed an issue where a user could not log in through Azure AD SSO if the user belonged to a group without a `displayName`
 
 ## v0.29.0
 

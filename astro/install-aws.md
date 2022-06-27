@@ -5,6 +5,10 @@ id: install-aws
 description: Get started on Astro by installing your first Astro Cluster on AWS.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
 ## Overview
 
 We're excited to get you started with Astro on AWS. Below, you'll find instructions for how to complete the Astro install process, including prerequisites and the steps required for our team to provision resources in your network.
@@ -99,81 +103,105 @@ From here, our team will provision an Astro Cluster according to the specificati
 
 ## Step 3: Create a Cross-Account IAM Role for Astro
 
-Once your Astro Cluster has been created, an Astronomer team member will provide you with an [External ID](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html) that will allow Astronomer to connect to your AWS account. Save the External ID as a secret or in an otherwise secure format for use in the AWS CLI.
+After your Astro Cluster is created, Astronomer provides you with an external ID. Save the external ID as a secret or in another secure format. You need to add the external ID to AWS to allow Astronomer to access your AWS resources. For more information, see [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
-Then, click the link below to create an [cross-account admin IAM role](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console) for Astro in your new AWS account:
+Astronomer recommends using the AWS Management Console to add the external ID to your AWS instance.
 
-- [Create cross-account IAM Role](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402)
+<Tabs
+    defaultValue="management console"
+    values={[
+        {label: 'AWS Management Console', value: 'management console'},
+        {label: 'AWS Command Line', value: 'command line'},
+    ]}>
+<TabItem value="management console">
 
-Using this CloudFormation link is the recommended way to create an IAM role for Astro. Alternatively, you can create a cross-account IAM Role by running the following AWS CLI commands:
+1. Create an AWS administrator IAM user and user group. See the AWS topic [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
 
-```bash
-$ aws iam create-role --role-name astronomer-remote-management --assume-role-policy-document "{
-    \"Version\": \"2012-10-17\",
-    \"Statement\": [
-        {
-            \"Effect\": \"Allow\",
-            \"Principal\": {
-                \"AWS\": \"arn:aws:iam::406882777402:root\"
-            },
-            \"Action\": \"sts:AssumeRole\",
-            \"Condition\": {
-                \"StringEquals\": {
-                \"sts:ExternalId\": \"$EXTERNAL_ID\"
+2. Open the [Astronomer cross-account role CloudFormation template](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402).
+
+3. Enter the external ID provided by Astronomer in the **ExternalId** field. 
+
+4. Select the **I acknowledge that AWS CloudFormation might create IAM resources with custom names** checkbox.
+
+5. Click **Create Stack**.
+
+</TabItem>
+
+<TabItem value="command line">
+
+1. Open the AWS CLI and run the following command to create a cross-account IAM Role:
+
+    ```bash
+    $ aws iam create-role --role-name astronomer-remote-management --assume-role-policy-document "{
+        \"Version\": \"2012-10-17\",
+        \"Statement\": [
+            {
+                \"Effect\": \"Allow\",
+                \"Principal\": {
+                    \"AWS\": \"arn:aws:iam::406882777402:root\"
+                },
+                \"Action\": \"sts:AssumeRole\",
+                \"Condition\": {
+                    \"StringEquals\": {
+                    \"sts:ExternalId\": \"$EXTERNAL_ID\"
+                    }
                 }
             }
-        }
-    ]
-}"
+        ]
+    }"
+    ```
 
-$ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AdministratorAccess --role-name astronomer-remote-management
-```
+2. Run the following command to attach a managed policy to the Astronomer remote management role.
 
-The output of the last command is a YAML file containing information about the role:
+    ```bash
+    $ aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AdministratorAccess --role-name astronomer-remote-management
+    ```
+    This command returns a YAML file containing role information:
 
-```yaml
-{
-  "Role":
+    ```yaml
     {
-      "Path": "/",
-      "RoleName": "astronomer-remote-management",
-      "RoleId": "AROAZZTAM6QSYIFGCB37R",
-      "Arn": "arn:aws:iam::673438299173:role/astronomer-remote-management",
-      "CreateDate": "2021-06-30T17:47:39+00:00",
-      "AssumeRolePolicyDocument":
+      "Role":
         {
-          "Version": "2012-10-17",
-          "Statement":
-            [
-              {
-                "Effect": "Allow",
-                "Principal": { "AWS": "arn:aws:iam::406882777402:root" },
-                "Action": "sts:AssumeRole",
-                "Condition": { "StringEquals": { "sts:ExternalId": "" } },
-              },
-            ],
+          "Path": "/",
+          "RoleName": "astronomer-remote-management",
+          "RoleId": "AROAZZTAM6QSYIFGCB37R",
+          "Arn": "arn:aws:iam::673438299173:role/astronomer-remote-management",
+          "CreateDate": "2021-06-30T17:47:39+00:00",
+          "AssumeRolePolicyDocument":
+            {
+              "Version": "2012-10-17",
+              "Statement":
+                [
+                  {
+                    "Effect": "Allow",
+                    "Principal": { "AWS": "arn:aws:iam::406882777402:root" },
+                    "Action": "sts:AssumeRole",
+                    "Condition": { "StringEquals": { "sts:ExternalId": "" } },
+                  },
+                ],
+            },
         },
-    },
-}
-```
+    }
+    ```
+   
+</TabItem>
+</Tabs>
 
-To provision additional Clusters, complete the setup in [Create a Cluster](create-cluster.md) after completing your initial installation.
+To provision additional Clusters after completing your initial installation, see [Create a Cluster](create-cluster.md).
 
 :::caution
 
-Some AWS regions that Astronomer supports are disabled by default on AWS, including:
-
-- `af-south-1` - Africa (Cape Town)
+Some AWS regions that Astronomer supports are disabled by default on AWS, includ
 - `ap-east-1` - Asia Pacific (Hong Kong)
 - `me-south-1` - Middle East (Bahrain)
 
-If you're setting up your first Cluster in any of these regions, you need to complete the additional setup as described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
+If you're setting up your first Cluster in any of these regions, you need to complete the additional setup described in [Create a Cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
 
 :::
 
 ## Step 4: Let Astronomer Complete the Install
 
-Let our team know once you've created the cross-account IAM role for Astro. From there, we will finish creating an Astronomer Cluster in your AWS account that supports Apache Airflow environments.
+Contact Astronomer after you've created the cross-account IAM role for Astro. From there, we will finish creating an Astronomer Cluster in your AWS account that supports Apache Airflow environments.
 
 This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
 
