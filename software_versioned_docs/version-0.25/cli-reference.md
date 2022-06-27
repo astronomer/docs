@@ -30,13 +30,7 @@ The Astronomer CLI installation process requires [Docker](https://www.docker.com
 If you have Homebrew installed, run:
 
 ```sh
-brew install astro
-```
-
-To install a specific version of the Astronomer CLI, you'll have to specify `@major.minor.patch`. To install v0.16.1, for example, run:
-
-```sh
-brew install astro@0.16.1
+brew install astro@0.25
 ```
 
 ### Install with cURL
@@ -44,16 +38,10 @@ brew install astro@0.16.1
 To install the latest version of the Astronomer CLI, run:
 
 ```
-curl -sSL https://install.astronomer.io | sudo bash
+curl -sSL https://install.astronomer.io | sudo bash -- 0.25.2
 ```
 
-To install a specific version of the Astronomer CLI, specify `-s -- major.minor.patch` as a flag at the end of the cURL command. To install v0.16.1, for example, run:
-
-```
-curl -sSL https://install.astronomer.io | sudo bash -s -- v0.16.1
-```
-
-#### Note for MacOS Catalina Users:
+#### Install the CLI on macOS Catalina+:
 
 As of macOS Catalina, Apple [replaced bash with ZSH](https://www.theverge.com/2019/6/4/18651872/apple-macos-catalina-zsh-bash-shell-replacement-features) as the default shell. Our CLI install cURL command currently presents an incompatibility error with ZSH, sudo and the pipe syntax.
 
@@ -65,6 +53,25 @@ If you're running macOS Catalina and beyond, do the following:
 ```
 curl -sSL https://install.astronomer.io | sudo bash -s < /dev/null
 ```
+
+#### Install the CLI on Apple M1 Machines
+
+To install the Astronomer CLI on a machine with an [Apple M1 chip](https://www.apple.com/newsroom/2020/11/apple-unleashes-m1/), you must use Homebrew. Because the Astronomer CLI does not yet have an ARM64 build, installing it via Homebrew on a machine with an Apple M1 chip requires a few additional steps:
+
+1. Run the following command to install the x86_64 version of Homebrew:
+
+    ```sh
+    arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
+
+2. Confirm that the script successfully installed Homebrew on `/usr/local`.
+3. Run the following command to install the Astronomer CLI:
+
+    ```sh
+    arch -x86_64 /usr/local/Homebrew/bin/brew install astro@0.25
+    ```
+
+If you still have issues during installation, ensure that [Rosetta 2](https://support.apple.com/en-us/HT211861) is installed on your machine and try again.
 
 ### Confirm the install
 

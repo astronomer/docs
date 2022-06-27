@@ -11,6 +11,22 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, reach out to us via [Astronomer Support](https://support.astronomer.io).
 
+## Astro CLI v1.2.0
+
+Release date: June 27, 2022
+
+### Additional improvements
+
+- The latest version of the Astro CLI is now compatible with Software version 0.29.
+
+## Astro CLI v1.1.0
+
+Release date: June 13, 2022
+
+### Additional improvements
+
+- This release exclusively contains changes for [Astro users](https://docs.astronomer.io/astro/cli/release-notes).
+
 ## Astro CLI v1.0.0
 
 Release date: June 2, 2022
