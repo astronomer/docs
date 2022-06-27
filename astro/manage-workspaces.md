@@ -31,7 +31,7 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 
 - **Deployments:** Create new Deployments and see key metrics about existing Deployments in the Workspace. For more information, see [Create a Deployment](create-deployment.md).
 - **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment Metrics](deployment-metrics.md#dag-runs).
-- **Logs:** View Scheduler logs for Deployments in the Workspace. For more information, see [Scheduler Logs](scheduler-logs.md).
+- **Logs:** View Scheduler logs for Deployments in the Workspace. For more information, see [View logs](view-logs.md).
 - **Access:** Manage user access to the Workspace.
 - **Workspace Settings:** Update or delete Workspace details.
 

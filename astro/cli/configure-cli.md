@@ -32,13 +32,13 @@ To use the Astro CLI on Mac, you must have:
 To install the latest version of the Astro CLI, run the following command:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
 
 ```sh
-brew install astronomer/tap/astro@<major.minor.patch-version>
+brew install astro@<major.minor.patch-version>
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version.
@@ -90,10 +90,10 @@ Run the following command to install the latest version of the Astro CLI directl
 curl -sSL install.astronomer.io | sudo bash -s
 ```
 
-To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install v1.0.0 of the CLI, you would run:
+To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install v1.1.0 of the CLI, you would run:
 
 ```sh
-curl -sSL install.astronomer.io | sudo bash -s -- v1.0.0
+curl -sSL install.astronomer.io | sudo bash -s -- v1.1.0
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version.
@@ -117,7 +117,7 @@ If you specify only a major version, this command installs the latest minor or p
 To upgrade the Astro CLI to the latest version, you can run the same command as you did to install the CLI for the first time:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 </TabItem>
@@ -170,7 +170,7 @@ curl -sSL install.astronomer.io | sudo bash -s
 To uninstall the Astro CLI on Mac, run:
 
 ```sh
-brew uninstall astronomer/tap/astro
+brew uninstall astro
 ```
 
 </TabItem>
@@ -266,3 +266,21 @@ If you manually updated the `.astrocloud/config.yaml` file of an existing Astro 
 1. In your terminal, open your Astro project.
 2. Copy the contents from `.astrocloud/config.yaml` into `.astro/config.yaml`.
 3. Delete `.astrocloud/config.yaml` from your project.
+
+### Step 5: Update CI/CD Pipelines (_Optional_)
+
+If you have an existing [CI/CD](ci-cd.md) pipeline using the old `astrocloud` executable, update it to use `astro`. For example, in a GitHub Actions CI/CD pipeline you would update the following:
+
+```yaml
+# Before:
+    - name: Deploy to Astro
+      run: |
+        brew install astronomer/cloud/astrocloud
+        astrocloud deploy ${{ secrets.DEPLOYMENT_ID }}
+
+# After:
+    - name: Deploy to Astro
+      run: |
+        curl -sSL install.astronomer.io | sudo bash -s
+        astro deploy ${{ secrets.DEPLOYMENT_ID }}
+```

@@ -11,9 +11,18 @@ description: Astronomer Software release notes.
 
 This document includes all release notes for Astronomer Software version 0.29.
 
-0.29 is the latest stable version of Astronomer Software, while 0.28 remains  the latest LTS long-term support (LTS) version of Astronomer Software. To upgrade to 0.29, read [Upgrade Astronomer](upgrade-astronomer-stable.md). For more information about Software release channels, read [Release and Lifecycle Policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI Release Notes](cli-release-notes.md).
+0.29 is the latest stable version of Astronomer Software, while 0.28 remains  the latest LTS long-term support (LTS) version of Astronomer Software. To upgrade to 0.29, read [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, read [Release and Lifecycle Policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI Release Notes](cli-release-notes.md).
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
+
+## v0.29.1
+
+Release date: June 3, 2022
+
+### Bug Fixes
+
+- Fixed an issue where you couldn't run Houston API queries for Deployments using `releaseName` and `label`
+- Fixed an issue where a user could not log in through Azure AD SSO if the user belonged to a group without a `displayName`
 
 ## v0.29.0
 

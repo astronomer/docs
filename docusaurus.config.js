@@ -36,10 +36,6 @@ module.exports = {
     colorMode: {
       disableSwitch: false,
     },
-    sitemap: {
-      changefreq: 'daily',
-      priority: 0.7,
-    },
     navbar: {
       title: 'Docs',
       logo: {
@@ -211,8 +207,12 @@ module.exports = {
           editLocalizedFiles: true,
           routeBasePath: 'astro',
           path: 'astro',
-          admonitions: {
-          },
+        },
+        sitemap: {
+        id: 'default',
+        changefreq: 'daily',
+        ignorePatterns: ['/software/0.28/**','/software/0.27/**','/software/0.26/**','/software/0.25/**','/software/0.23/**','/software/0.16/**'],
+        filename: 'sitemap.xml',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -233,14 +233,23 @@ module.exports = {
         path: 'software',
         lastVersion: 'current',
         versions: {
-        current: {
-          label: '0.29',
-          path: '',
-          banner: 'none',
-         },
-       },
+          current: {
+            label: '0.29',
+            path: '',
+            banner: 'none',
+          },
+        },
       },
     ],
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+       id: 'software',
+       changefreq: 'daily',
+       ignorePatterns: ['/software/0.28/**','/software/0.27/**','/software/0.26/**','/software/0.25/**','/software/0.23/**','/software/0.16/**'],
+       filename: 'sitemap.xml',
+      },
+    ]
   ],
   scripts: [
     {
@@ -254,5 +263,10 @@ module.exports = {
     {
       src: './scripts/consent-manager-config.js',
     },
+    {
+      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
+      "data-domain": 'docs.astronomer.io',
+      defer: true,
+    }
   ],
 };

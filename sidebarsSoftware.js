@@ -34,6 +34,7 @@ module.exports = {
       type: 'category',
       label: 'Write DAGs',
       items: [
+      'deferrable-operators',
       'kubepodoperator',
       'kubepodoperator-local',
       'kubernetes-executor',
@@ -64,6 +65,7 @@ module.exports = {
         'install-airgapped',
           ],
         },
+        'upgrade-astronomer',
         {
         type: 'category',
         label: 'Platform Setup',
@@ -83,10 +85,8 @@ module.exports = {
         label: 'Platform Management',
         items: [
         'apply-platform-config',
-        'upgrade-astronomer-stable',
         'houston-api',
         'configure-platform-resources',
-        'upgrade-to-0-28',
           ],
         },
         {

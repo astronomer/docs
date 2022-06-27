@@ -51,54 +51,9 @@ By default, the `tests` directory in your Astro project includes a default DAG i
 
 `astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI Command Reference](cli/astro-dev-pytest.md).
 
-## View Airflow Task Logs
+## View Airflow Logs
 
-You can view logs for individual tasks in the Airflow UI. This is useful if you want to troubleshoot a specific task instance that failed or retried.
-
-To access these logs:
-
-1. Access the Airflow UI in your local Airflow environment by going to `http://localhost:8080`.
-2. Open the DAG you want to troubleshoot:
-
-    <div class="text--center">
-    <img src="/img/docs/open-dag.png" alt="Access DAG from Airflow UI" />
-    </div>
-
-3. In the **Tree View**, click on the task run you want to see logs for:
-
-    <div class="text--center">
-    <img src="/img/docs/tree-view.png" alt="Task runs in the tree view" />
-    </div>
-
-4. Click **Instance Details**:
-
-    <div class="text--center">
-    <img src="/img/docs/instance-details.png" alt="Instance details button in the task log menu" />
-    </div>
-
-5. Click **Log**:
-
-    <div class="text--center">
-    <img src="/img/docs/task-log.png" alt="Log button from a task instance" />
-    </div>
-
-## Access Airflow Component Logs
-
-To show logs for your Airflow Scheduler, Webserver, or metadata database locally, run the following command:
-
-```sh
-astro dev logs
-```
-
-Once you run this command, the most recent logs for these components appear in your terminal window.
-
-By default, running `astro dev logs` shows logs for all Airflow components. If you want to see logs for a specific component, add any of the following flags to your command:
-
-- `--scheduler`
-- `--webserver`
-- `--triggerer`
-
-To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli/astro-dev-logs.md)
+You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change. See [View logs](view-logs.md).
 
 ## Run Airflow CLI Commands
 

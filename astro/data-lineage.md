@@ -12,9 +12,10 @@ The **Lineage** tab in the Cloud UI can help you troubleshoot issues with your d
 From the **Lineage** tab on Astro, you can access the following four pages:
 
 - **Explore**: A real-time overview of all **jobs** that emit data lineage across your Organization. A job can be an Airflow task or any other process configured to emit lineage data to Astronomer, such as a Spark job.
+- **Datasets**: A real-time overview of all recent **datasets** that your DAGs have read or written to. 
 - **Issues**: A view of potential issues or statistical inconsistencies related to your jobs or datasets.
 - **Lineage**: A graph view that visualizes data lineage.
-- **Integrations**: A view of your current data lineage integrations. 
+- **Integrations**: A view of your current data lineage integrations.
 
 You can use these pages to diagnose issues that may be difficult to troubleshoot in other environments. For example, if an Airflow task failed because a database schema changed, you can use the **Lineage** page on Astro to determine which job caused the change and which downstream tasks failed as a result.
 
@@ -95,7 +96,7 @@ On the **Lineage** page, the following tabs appear below the lineage graph:
 
 - **Info**: Shows the code for a job or the schema for a dataset. Also shows the difference between job runs when you create a comparison in the **Compare** tab.
 - **Inputs/Outputs**: Shows the inputs and outputs for a job or dataset. This information is equivalent to the upstream and downstream nodes in the graph view.
-- **Quality (Dataset only)**: Shows the data quality checks performed on each element of a dataset. Expand a listed dataset element to view more information about a specific quality check. 
+- **Quality (Dataset only)**: Shows the data quality checks performed on each element of a dataset. Expand a listed dataset element to view more information about a specific quality check.
 - **Duration (Job only)**: Shows the duration of upstream job runs in descending order. To view job run durations relative to the average duration across all job runs, click the blue arrow next to the name of your most recent job run and then click **Maximize** at the bottom of the list.
 - **Compare (Job only)**: Shows other job runs for the currently selected job. Select any two job runs and go to the **Info** tab to view code changes between the two job runs. Use this tab to compare job runs with different statuses or run times to measure performance between code changes.
 
@@ -190,3 +191,18 @@ By default, the **Lineage** page shows the last lineage graph you accessed. To v
 Airflow tasks appear as jobs with the name `<dag_id>.<task_id>`. For example, the job `example_dag_basic.extract` represents the `extract` task running within the `example_dag_basic` DAG.
 
 This view can help you get a better sense of the scope of your lineage integrations. It can also help you confirm that a recent run was picked up by the lineage backend as expected.
+
+## View Recently Accessed Datasets
+
+Use the **Datasets** page to view a table of recent datasets that your DAGs have read or written to. This information can help you quickly identify dataset dependencies and data pipeline access requirements.
+
+![Datasets page](/img/release-notes/datasets-page.png)
+
+Each row in the table includes:
+
+- The name of the dataset.
+- The namespace of the job run that accessed the dataset.
+- The type of job that interacted with the dataset.
+- When the dataset was accessed.
+
+Click on the name of a dataset to show its lineage graph.

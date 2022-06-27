@@ -12,9 +12,65 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Astro Runtime Version**: 5.0.3 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 5.0.4 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.0.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.1.0 ([Release notes](cli/release-notes.md))
+
+## June 23, 2022
+
+### New GCP regions available
+
+You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+
+- `asia-southeast1` (Singapore)
+- `australia-southeast1` (Sydney)
+- `europe-west1` (Belgium)
+- `europe-west2` (England)
+- `europe-west3` (Frankfurt)
+- `southamerica-east1` (São Paulo)
+- `us-west2` (Los Angeles)
+- `us-west4` (Nevada)
+
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+
+## June 16, 2022
+
+### Submit Support Requests in the Cloud UI
+
+Support requests can now be created and submitted in the Cloud UI. You no longer need to open an account on the Astronomer support portal to reach the Astronomer team. To streamline the request process, the **Submit Support Request** form auto-populates your currently selected Workspace and Deployment in the Cloud UI.
+
+![Location of the "Submit Support Request" button in the Cloud UI](/img/release-notes/support-form.png)
+
+### Parallelism Now Autoscales with a Deployment's Worker Count
+
+To better scale concurrent task runs, Astro now dynamically calculates [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is an Airflow configuration that determines the maximum number of tasks that can run concurrently within a single Deployment.
+
+A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-deployment-resources.md#worker-autoscaling-logic) for more information.
+
+Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
+
+### Bug Fixes
+
+- Fixed a rare issue where some user emails would be associated with the wrong username.
+- Fixed an issue where you could not properly sort entries in the **People** tab by name.
+
+## June 9, 2022
+
+### Update Deployment Configurations with the Astro CLI
+
+You can now programmatically update the configurations for your Astro Deployments using Deployment API Keys and the Astro CLI. Updating a Deployment with an API key doesn't require manual user authentication, meaning that you can now add Deployment configuration steps to automated processes such as CI/CD pipelines.
+
+Specifically, you can now run the following commands with Deployment API keys:
+
+- [`astro deployment list`](cli/astro-deployment-list.md)
+- [`astro deployment update`](cli/astro-deployment-update.md)
+- [`astro deployment variable create`](cli/astro-deployment-variable-create.md)
+- [`astro deployment variable list`](cli/astro-deployment-variable-list.md)
+- [`astro deployment variable update`](cli/astro-deployment-variable-update.md)
+
+### Bug Fixes
+
+- Fixed an issue where a Deployment's logs wouldn't load in the Cloud UI if it was the only Deployment in the Workspace
 
 ## June 2, 2022
 
@@ -32,7 +88,7 @@ You can now use the new **Datasets** page in the **Lineage** tab to view a table
 
 ![Datasets page](/img/release-notes/datasets-page.png)
 
-Click on the name of a dataset to show its lineage graph. For more information, see [Data Lineage on Astro](data-lineage.md).
+Click the name of a dataset to show its lineage graph. For more information, see [Data Lineage on Astro](data-lineage.md#view-recently-accessed-datasets).
 
 ### Bug Fixes
 
@@ -374,7 +430,7 @@ To access logs directly for a given Deployment, click the new **Logs** button on
 
 ![Logging direct access button](/img/release-notes/logs-button.png)
 
-For more information on how to view logs, read [Deployment Logs](scheduler-logs.md).
+For more information on how to view logs, read [View logs](view-logs.md).
 
 ### Bug Fixes
 
@@ -562,7 +618,7 @@ All user configurations can be found by clicking your user profile picture in th
 
 :::danger
 
-This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0 of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
+This release introduces a breaking change to code deploys via the Astro CLI. Starting on September 28, you must upgrade to v1.0.0+ of the CLI to deploy code to Astro. [CI/CD processes](ci-cd.md) enabled by Deployment API keys will continue to work and will not be affected. For more information, read the [CLI release notes](cli/release-notes.md).
 
 :::
 
