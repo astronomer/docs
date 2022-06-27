@@ -6,7 +6,7 @@ description: Test the KubernetesPodOperator on your local machine.
 ---
 You use the `KubernetesPodOperator` to create and run Kubernetes pods on a  Kubernetes cluster in a local Kubernetes environment. Using the `KubernetesPodOperator` locally allows you to create, test, and modify your code before you move to production.
 
-## Set up Kubernetes
+## Step 1: Set up Kubernetes
 
 ### Windows and Mac
 
@@ -28,7 +28,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
 2. Run `microk8s.start` to start Kubernetes.
 
-## Update the kubeconfig File
+## Step 2: Update the kubeconfig File
 
 ### Windows and Mac
 
@@ -68,7 +68,7 @@ In a `.kube` folder in your Astro project, create a config file with:
 microk8s.config > /include/.kube/config
 ```
 
-## Run your Container
+## Step 3: Run your Container
 
 The `config_file` points to the `/include/.kube/config` file you just edited.
 
@@ -123,68 +123,17 @@ with dag:
 
 ```
 
-## View Kubernetes Logs
+## Step 4: View Kubernetes Logs
+
+Optional. Review the logs for any pods that were created by the operator for issues.
 
 ### Windows and Mac
 
-Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `docker-for-desktop` and `microk8s` runs pods in the `default` namespace.
+Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `docker-for-desktop` runs pods in the `default` namespace.
 
 ### Linux
 
-Run the same commands as above prefixed with microk8s:
-```
-microk8s.kubectl get pods -n $namespace
-```
-
-## Test the KubernetesPodOperator Locally
-
-Testing DAGs with the [KubernetesPodOperator](kubernetespodoperator.md) locally requires a local Kubernetes environment.
-
-### Step 1: Prepare Your Environment
-
-1. Set up Kubernetes in Docker. See [Set up Kubernetes](#set-up-kubernetes).
-2. Update the kubeconfig File. See [Update the kubeconfig File](#update-the-kubeconfig-file).
-
-### Step 2: Instantiate the KubernetesPodOperator
-
-To instantiate the KubernetesPodOperator in a given DAG, update your DAG file to include the following code:
-
-```python
-from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow import configuration as conf
-# ...
-
-namespace = conf.get('kubernetes', 'NAMESPACE')
-
-# This will detect the default namespace locally and read the
-# environment namespace when deployed to Astronomer.
-if namespace =='default':
-    config_file = '/usr/local/airflow/include/.kube/config'
-    in_cluster=False
-else:
-    in_cluster=True
-    config_file=None
-
-with dag:
-    k = KubernetesPodOperator(
-        namespace=namespace,
-        image="my-image",
-        labels={"foo": "bar"},
-        name="airflow-test-pod",
-        task_id="task-one",
-        in_cluster=in_cluster, # if set to true, will look in the cluster for configuration. if false, looks for file
-        cluster_context='docker-desktop', # is ignored when in_cluster is set to True
-        config_file=config_file,
-        is_delete_operator_pod=True,
-        get_logs=True)
-```
-
-Specifically, your operator must have `cluster_context='docker-desktop` and `config_file=config_file`.
-
-### Step 3: Run and Monitor the KubernetesPodOperator
-
-1. Run `astro dev restart` in the Astro CLI to rebuild your image and run your project in a local Airflow environment.
-2. Optional. Review the logs for any pods that were created by the operator for issues. See [View Kubernetes Logs](#view-kubernetes-logs).
+Run `microk8s.kubectl get pods -n $namespace` or `microk8s.kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `microk8s` runs pods in the `default` namespace.
 
 ## Next Steps ##
 
