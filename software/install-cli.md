@@ -47,14 +47,6 @@ To install the latest version of the Astro CLI, run the following command:
 brew install astro
 ```
 
-To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
-
-```sh
-brew install astro@<major.minor.patch-version>
-```
-
-If you specify only a major version, this command installs the latest minor or patch version available for the major version.
-
 </TabItem>
 
 <TabItem value="windows">
@@ -101,14 +93,6 @@ Run the following command to install the latest version of the Astro CLI directl
 ```sh
 curl -sSL install.astronomer.io | sudo bash -s
 ```
-
-To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install v1.0.0 of the CLI, you would run:
-
-```sh
-curl -sSL install.astronomer.io | sudo bash -s -- v1.0.0
-```
-
-If you specify only a major version, this command installs the latest minor or patch version available for the major version.
 
 </TabItem>
 
