@@ -45,13 +45,13 @@ EKS is built off of Amazon's pre-existing EC2 service, so you can manage your Ku
 As you follow the guide linked above, keep in mind:
 
 * Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, refer to Astronomer's [Version Compatibility Reference](version-compatibility-reference.md).
-* Astronomer recommend running the EKS control plane in a single security group. The worker nodes you spin up should have the same setup as the EKS control plane.
+* Astronomer recommends running the EKS control plane in a single security group. The worker nodes you spin up should have the same setup as the EKS control plane.
 * All security and access settings needed for your worker nodes should be configured in your Cloud Formation template.
 * If you create an EKS cluster from the UI, `kubectl` access will be limited to the user who created the cluster by default.
     * To give more users `kubectl` access, you'll have to do so manually.
     * [This post](https://web.archive.org/web/20190323035848/http://marcinkaszynski.com/2018/07/12/eks-auth.html) goes through how IAM plays with EKS.
 * Expect to see each of your underlying nodes in the EC2 console.
-    * The default Astronomer resource request is ~11 CPUs and ~40GB of memory. Astronomer recommends using either six m5.xlarge or three m5.2xlarge [instances](https://aws.amazon.com/ec2/instance-types/) for your cluster. To modify Astronomer default resource requests, see step 8.
+    * The default Astronomer resource requests are ~11 CPUs and ~40GB of memory. Astronomer recommends using either six m5.xlarge or three m5.2xlarge [instances](https://aws.amazon.com/ec2/instance-types/) for your cluster. To modify Astronomer default resource requests, see step 8.
 
 > **Note:** If you work with multiple Kubernetes environments, `kubectx` is an incredibly useful tool for quickly switching between Kubernetes clusters. Learn more [here](https://github.com/ahmetb/kubectx).
 
@@ -88,7 +88,7 @@ To obtain a TLS certificate, complete one of the following setup options:
 
 * **Option 1:** Obtain a TLS certificate from Let's Encrypt. Astronomer recommends this option for smaller organizations where the DNS administrator and Kubernetes cluster administrator are the same person or on the same team.
 * **Option 2:** Request a TLS certificate from your organization's security team. Astronomer recommends this option for large organizations with their own protocols for generating TLS certificates.
-* **Option 3:** Create a self-signed SSL certificate.
+* **Option 3:** Use the AWS Certificate Manager as the certificate provider.
 
 ### Option 1: Create TLS certificates using Let's Encrypt
 
@@ -113,7 +113,7 @@ This command will generate a report. If the `X509v3 Subject Alternative Name` se
 
 Depending on your organization, you may receive either a globally trusted certificate or a certificate from a private CA. The certificate from your private CA may include a domain certificate, a root certificate, and/or intermediate certificates, all of which need to be in proper certificate order. To verify certificate order, follow the guidelines below.
 
-### Option 3: Create a self-signed SSL certificate
+### Option 3: Use the AWS Certificate Manager as the certificate provider 
 
 1. Open the `openssl` CLI and then run the following command to generate a private/public RSA key pair:
 
