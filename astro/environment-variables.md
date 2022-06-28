@@ -176,7 +176,7 @@ You might want to turn on this setting if you want explicit confirmation that an
 On Astro, environment variables are applied and overridden in the following order:
 
 1. Cloud UI
-2. [.env (local development only)](develop-project.md#set-environment-variables-via-env-local-development-only))
+2. [.env (local development only)](develop-project.md#set-environment-variables-local-development))
 3. Dockerfile
 4. Default Airflow values
 

@@ -277,7 +277,7 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 :::
 
-## Set environment variables (local development)
+## Set environment variables (Local development)
 
 For local development, Astronomer recommends setting environment variables in your Astro project's `.env` file. You can then push your environment variables from the `.env` file to a Deployment using the [Astro CLI](cli/astro-deployment-variable-update.md).
 
