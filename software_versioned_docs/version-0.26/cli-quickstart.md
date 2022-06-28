@@ -36,7 +36,7 @@ The Astronomer CLI installation process requires [Docker](https://www.docker.com
 
 ### Install with Homebrew
 
-If you have Homebrew installed, run:
+To install the latest supported version of the Astronomer CLI, run:
 
 ```sh
 brew install astro@0.25
@@ -44,7 +44,7 @@ brew install astro@0.25
 
 ### Install with cURL
 
-To install the latest version of the Astronomer CLI, run:
+To install the latest supported version of the Astronomer CLI, run:
 
 ```
 curl -sSL https://install.astronomer.io | sudo bash -- v0.25.2

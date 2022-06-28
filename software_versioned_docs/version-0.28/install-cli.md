@@ -41,19 +41,11 @@ To use the Astro CLI on Mac, you must have:
 
 #### Installation
 
-To install the latest version of the Astro CLI, run the following command:
+To install the latest supported version of the Astro CLI for Software 0.28, run the following command:
 
 ```sh
-brew install astro
+brew install astro@1.1
 ```
-
-To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
-
-```sh
-brew install astro@<major.minor.patch-version>
-```
-
-If you specify only a major version, this command installs the latest minor or patch version available for the major version.
 
 </TabItem>
 
@@ -72,7 +64,7 @@ To use the Astro CLI on Windows, you must have:
 
 1. Go to the [**Releases** page of the Astro CLI GitHub repository](https://github.com/astronomer/astro-cli/releases). Based on your desired CLI version and the CPU architecture of your machine, download one of the `.zip` files available on this page.
 
-    For example, to install v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.zip`.
+    For example, to install v1.1.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.1.0-converged_windows_amd64.zip`.
 
 2. If the `.zip` file does not automatically unzip, run the following command to unzip the executable:
 
@@ -96,19 +88,11 @@ To use the Astro CLI on Linux, you must have:
 
 #### Installation
 
-Run the following command to install the latest version of the Astro CLI directly to `PATH`:
+Run the following command to install the latest supported version of the Astro CLI directly to `PATH`:
 
 ```sh
-curl -sSL install.astronomer.io | sudo bash -s
+curl -sSL install.astronomer.io | sudo bash -s -- 1.1.0
 ```
-
-To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install v1.0.0 of the CLI, you would run:
-
-```sh
-curl -sSL install.astronomer.io | sudo bash -s -- v1.0.0
-```
-
-If you specify only a major version, this command installs the latest minor or patch version available for the major version.
 
 </TabItem>
 
