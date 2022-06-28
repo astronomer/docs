@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Create a Cluster'
+sidebar_label: 'Create a cluster'
 title: "Create a new cluster on Astro"
 id: create-cluster
 description: Create a new Astro cluster for your Organization.
@@ -52,7 +52,7 @@ From there, your Astronomer representative will provide you with a unique `Exter
 
 In the AWS IAM console, [edit the `astronomer-remote-management` trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) to include new trust policies and ensure that Astronomer has permission to manage your new cluster.
 
-To do this, add the External ID that corresponds to your new cluster to the existing `sts:ExternalId` grouping. For example, your policy for two Astro clusters might look like the following, with `<External-ID-2>` being the External ID for your new Cluster:
+To do this, add the External ID that corresponds to your new cluster to the existing `sts:ExternalId` grouping. For example, your policy for two Astro clusters might look like the following, with `<External-ID-2>` being the External ID for your new cluster:
 
 ```yaml {14}
 {

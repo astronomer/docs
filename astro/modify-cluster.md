@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Modify a Cluster'
+sidebar_label: 'Modify a cluster'
 title: "Modify a cluster on Astro"
 id: modify-cluster
 description: Request changes to an existing Astro cluster.
@@ -18,7 +18,7 @@ To complete this setup, you need to have:
 - A cluster on Astro.
 - Permission from your team.
 
-If you don't have a cluster on Astro, follow the instructions to [Install Astro on AWS](install-aws.md) or [GCP](install-gcp.md). If you have an existing cluster and are interested in creating additional Clusters, read [Create a cluster](create-cluster.md).
+If you don't have a cluster on Astro, follow the instructions to [Install Astro on AWS](install-aws.md) or [GCP](install-gcp.md). If you have an existing cluster and are interested in creating additional clusters, read [Create a cluster](create-cluster.md).
 
 ## Step 1: Submit a Request to Astronomer
 
