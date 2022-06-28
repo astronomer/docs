@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Enable data lineage'
-title: "Enable data lineage for External Systems"
+title: "Enable data lineage for external systems"
 id: set-up-data-lineage
 description: Configure your external systems to emit lineage data to Astro.
 ---
