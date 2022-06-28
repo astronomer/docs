@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Create a Project'
+sidebar_label: 'Create a project'
 title: 'Create an Astro project'
 id: 'create-project'
 description: Create an Astro project and run it locally with the Astro CLI.
@@ -55,7 +55,7 @@ To create a new Astro project:
     |   └── example-plugin.py
     ├── tests # For any DAG unit test files to be run with pytest
     |   └── test_dag_integrity.py # Test that checks for basic errors in your DAGs
-    ├── airflow_settings.yaml # For your Airflow Connections, Variables and Pools (local only)
+    ├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
     ├── packages.txt # For OS-level packages
     └── requirements.txt # For Python packages
     ```
@@ -64,14 +64,14 @@ To create a new Astro project:
 
 ### Astro Runtime
 
-Your `Dockerfile` includes a reference to Astro Runtime. Packaged into a Debian-based Docker image, Astro Runtime extends the Apache Airflow open source project to provide you with differentiated functionality that centers around reliability, efficiency, and performance. For more information on what's included in Runtime and how it's versioned, see [Runtime Versioning](runtime-version-lifecycle-policy.md).
+Your `Dockerfile` includes a reference to Astro Runtime. Packaged into a Debian-based Docker image, Astro Runtime extends the Apache Airflow open source project to provide you with differentiated functionality that centers around reliability, efficiency, and performance. For more information on what's included in Runtime and how it's versioned, see [Runtime versioning](runtime-version-lifecycle-policy.md).
 
 By default, the Docker image in your Dockerfile is:
 
 <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
 `}</code></pre>
 
-## Step 2: Build Your Project Locally
+## Step 2: Build your project locally
 
 To confirm that you successfully initialized an Astro project, run the following command from your project directory:
 
@@ -84,7 +84,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The Triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md)
+- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md)
 
 As your project builds locally, you should see the following output:
 
@@ -117,10 +117,10 @@ The default credentials are admin:admin
 
 :::info
 
-By default, the Astro CLI uses port `8080` for the Airflow Webserver and port `5432` for the Airflow metadata database. If these ports are already in use on your local machine, you can change the default ports for these components by following these steps:
+By default, the Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database. If these ports are already in use on your local machine, you can change the default ports for these components by following these steps:
 
 1. In your Astro project directory, open `.astro/config.yaml`. This file might be hidden in graphical file browsers. You can show hidden files using `⌘ + Shift + .` on Mac or by selecting **View** > **Hidden items** in Windows file explorer.
-2. Specify alternative ports for your Webserver and/or metadata database in `config.yaml`. For example, to use `8081` for your Webserver port and `5435` for your database port, you would specify the following:
+2. Specify alternative ports for your webserver and/or metadata database in `config.yaml`. For example, to use `8081` for your webserver port and `5435` for your database port, you would specify the following:
 
     ```yaml
     project:
@@ -141,7 +141,7 @@ Once your project builds successfully, you can access the Airflow UI by going to
 
 :::info
 
-It might take a few minutes for the Airflow UI to be available. As you wait for the Webserver container to start up, you may need to refresh your browser.
+It might take a few minutes for the Airflow UI to be available. As you wait for the webserver container to start up, you may need to refresh your browser.
 
 :::
 
@@ -151,9 +151,9 @@ After logging in, you should see the DAGs from your `dags` directory in the Airf
 <img src="/img/docs/sample-dag.png" alt="Example DAG in the Airflow UI" />
 </div>
 
-## Next Steps
+## Next steps
 
 Running your project locally is the best way to test your DAGs before pushing them to Astro. For more information on running a local Airflow environment, read:
 
 - [Develop your Astro Project](develop-project.md)
-- [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md#run-a-project-locally)
+- [Test and troubleshoot locally](test-and-troubleshoot-locally.md#run-a-project-locally)

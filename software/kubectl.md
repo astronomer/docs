@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'kubectl'
-title: 'Use kubectl To Administer Astronomer Software'
+title: 'Use kubectl to administer Astronomer Software'
 id: kubectl
 description: Deploy Astronomer Software Airflow instances with kubectl and Helm.
 ---
@@ -12,7 +12,7 @@ description: Deploy Astronomer Software Airflow instances with kubectl and Helm.
 ### Setup
 Both these tools are needed to deploy Astronomer onto a Kubernetes cluster. We also recommend using [`kubectx`](https://github.com/ahmetb/kubectx) to simplify commands (the rest of this guide will use `kubectx`).
 
-### Base Namespace and Release
+### Base namespace and release
 
 The initial `helm install` command to deploy Astronomer requires a namespace to deploy the base platform pods into.
 
@@ -67,9 +67,9 @@ singed-chimp                     	3       	Thu May  9 12:08:36 2019	DEPLOYED	ast
 ```
 There is a release for Astronomer (`single-chimp`) and postgres (`cautious-seal`) in the `datarouter` namespace.
 
-### Deploying New Airflow Instances
+### Creating new Airflow deployments
 
-If you navigate to the Software UI and create a new Airflow deployment, it will create a new helm release in a new namespace.
+If you navigate to the Software UI and create a new deployment, it will create a new helm release in a new namespace.
 
 ```bash
 root@orbiter helm ls

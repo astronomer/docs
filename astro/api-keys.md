@@ -1,6 +1,6 @@
 ---
-title: 'Manage Deployment API Keys'
-sidebar_label: 'Deployment API Keys'
+title: 'Manage Deployment API keys'
+sidebar_label: 'Deployment API keys'
 id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
@@ -20,21 +20,21 @@ When using Deployment API keys, keep in mind the following:
 - A Deployment API key ID and secret are valid indefinitely and can be used to access Deployments without manual authentication.
 - Deployment API keys are deleted permanently if their corresponding Deployment is deleted.
 
-## Create an API Key
+## Create an API key
 
 To create an API key for a Deployment:
 
 1. In the Cloud UI, open your Deployment.
-2. In the **API Keys** menu, click **Add API Key**:
+2. In the **API keys** menu, click **Add API Key**:
 
     <div class="text--center">
-      <img src="/img/docs/add-api-key.png" alt="Add API Key button" />
+      <img src="/img/docs/add-api-key.png" alt="Add API key button" />
     </div>
 
 3. Give the key a name and description, then click **Create API Key**:
 
     <div class="text--center">
-      <img src="/img/docs/create-api-key.png" alt="Create API Key button" />
+      <img src="/img/docs/create-api-key.png" alt="Create API key button" />
     </div>
 
 From here, you can copy the API key ID and secret for use in API calls and CI/CD pipelines. Make sure to save the key secret securely, as this is the only time you will have access to see it in plain text.
@@ -45,7 +45,7 @@ If you just need to make a single API call, you can use a temporary user authent
 
 :::
 
-## Using Deployment API Keys
+## Using Deployment API keys
 
 Deployment API keys are primarily used to automate actions that otherwise require manual inputs. They allow you to:
 
@@ -67,28 +67,28 @@ export ASTRONOMER_KEY_SECRET=<your-key-id>
 
 After setting the variables, running `astro deployment update` works for the Deployment and you don't need to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
 
-## Delete an API Key
+## Delete an API key
 
-To delete a Deployment API Key:
+To delete a Deployment API key:
 
 1. In the Cloud UI, open your Deployment.
 2. In the menu for the API key you want to delete, click **Edit**:
 
     <div class="text--center">
-      <img src="/img/docs/edit-api-key.png" alt="Edit API Key button" />
+      <img src="/img/docs/edit-api-key.png" alt="Edit API key button" />
     </div>
 
 3. Click **Delete API Key**, then follow the onscreen prompt to finalize the deletion:
 
     <div class="text--center">
-      <img src="/img/docs/delete-api-key.png" alt="Delete API Key button" />
+      <img src="/img/docs/delete-api-key.png" alt="Delete API key button" />
     </div>
 
 
-## Next Steps
+## Next steps
 
 For more information about how to use API keys, see:
 
 - [CI/CD](ci-cd.md)
-- [Deploy Code](deploy-code.md)
+- [Deploy code](deploy-code.md)
 - [Airflow API](airflow-api.md)

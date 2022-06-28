@@ -14,13 +14,13 @@ To install Astronomer on AKS, you'll need access to the following tools and perm
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-* A compatible version of Kubernetes as described in Astronomer's [Version Compatibility Reference](version-compatibility-reference.md)
+* A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
 * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
 * SMTP Service & Credentials (e.g. Mailgun, Sendgrid, etc.)
 * Permission to create and modify resources on AKS
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
 
-## Step 1: Choose a Base Domain
+## Step 1: Choose a base domain
 
 All Astronomer services will be tied to a base domain of your choice, under which you will need the ability to add and edit DNS records.
 
@@ -45,9 +45,9 @@ The steps below will walk you through how to:
 
 You can view Microsoft Azure's Web Portal at https://portal.azure.com/.
 
-> Note: Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, refer to Astronomer's [Version Compatibility Reference](version-compatibility-reference.md).
+> Note: Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, refer to Astronomer's [Version compatibility reference](version-compatibility-reference.md).
 
-### Create an Azure Resource Group
+### Create an Azure resource group
 
 A resource group is a collection of related resources for an Azure solution. Your AKS cluster will reside in the resource group you create. Learn more about resource groups [here](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview#resource-groups).
 
@@ -75,7 +75,7 @@ az group create --location <location> --name <my_resource_group>
 ```
 > **Note:** For a list of available locations, run `$ az account list-locations`.
 
-### Create an AKS Cluster
+### Create an AKS cluster
 
 Once you've created an Azure Resource Group, you can create an AKS cluster using the Azure CLI, Azure PowerShell, or Azure Portal. For instructions, see [Microsoft documentation](https://docs.microsoft.com/en-us/azure/aks/).
 You can create a cluster with any machine type, but Astronomer recommends using larger nodes and not smaller nodes.
@@ -85,7 +85,7 @@ Verify your Kubernetes version is supported by Astronomer Software:
 az aks get-versions --location <your-region> --output table
 ```
 
-The Kubernetes version returned must be supported by Astronomer Software. See [Version Compatibility Reference](version-compatibility-reference.md).
+The Kubernetes version returned must be supported by Astronomer Software. See [Version compatibility reference](version-compatibility-reference.md).
 
 Create and autoscale your Kubernetes cluster:
 ```
@@ -96,7 +96,7 @@ You may need to increase your resource quota in order to provision these nodes.
 
 > **Note:** If you work with multiple Kubernetes environments, `kubectx` is an incredibly useful tool for quickly switching between Kubernetes clusters. Learn more [here](https://github.com/ahmetb/kubectx).
 
-### Authenticate with your AKS Cluster
+### Authenticate with your AKS cluster
 
 Run the following command to set your AKS cluster as current context in your kubeconfig. This will configure `kubectl` to point to your new AKS cluster:
 
@@ -104,7 +104,7 @@ Run the following command to set your AKS cluster as current context in your kub
 az aks get-credentials --resource-group <my_resource_group> --name <my_cluster_name>
 ```
 
-## Step 3: Create a Kubernetes Namespace
+## Step 3: Create a Kubernetes namespace
 
 Create a [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) called `astronomer` to host the core Astronomer platform:
 
@@ -201,7 +201,7 @@ If you received a certificate from a private CA, follow these steps instead:
 
 2. Note the value of `private-root-ca` for when you configure your Helm chart in Step 8. You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
 
-## Step 6: Configure Your SMTP URI
+## Step 6: Configure your SMTP URI
 
 An SMTP service is required for sending and accepting email invites from Astronomer. If you're running Astronomer Software with `publicSignups` disabled (which is the default), you'll need to configure SMTP as a way for your users to receive and accept invites to the platform via email. To integrate your SMTP service with Astronomer, fetch your SMTP service's URI and store it in a Kubernetes secret:
 
@@ -229,7 +229,7 @@ If your SMTP provider is not listed, refer to the provider's documentation for i
 
 > **Note:** If there are `/` or other escape characters in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
 
-## Step 7: Configure the Database
+## Step 7: Configure the database
 
 If you're connecting to an external database, you will need to create a secret named `astronomer-bootstrap` to hold your database connection string:
 
@@ -246,7 +246,7 @@ A few additional configuration notes:
 - If you provision Azure Database for PostgreSQL - Flexible Server, it enforces TLS/SSL and requires that you set `sslmode` to `prefer` in your `config.yaml`.
 - If you provision an external database, `postgresqlEnabled` should be set to `false` in Step 8.
 
-## Step 8: Configure Your Helm Chart
+## Step 8: Configure Your Helm chart
 
 > **Note:** If you want to use a third-party ingress controller for Astronomer, complete the setup steps in [Third-Party Ingress Controllers](third-party-ingress-controllers.md) in addition to this configuration.
 
@@ -487,13 +487,13 @@ alertmanager.astro.mydomain.com
 prometheus.astro.mydomain.com
 ```
 
-## Step 12: Verify You Can Access the Software UI
+## Step 12: Verify you can access the Software UI
 
 Go to `app.BASEDOMAIN` to see the Software UI.
 
 Consider this your new Airflow control plane. From the Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
 
-## Step 13: Verify Your TLS Setup
+## Step 13: Verify your TLS setup
 
 To check if your TLS certificates were accepted, log in to the Software UI. Then, go to `app.BASEDOMAIN/token` and run:
 
@@ -529,9 +529,9 @@ $ astro deploy -f
 ```
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.
 
-If you have Airflow pods in the state "ImagePullBackoff", check the pod description. If you see an x509 error, ensure that you added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. If you missed these during installation, follow the steps in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md) to add them after installation.
+If you have Airflow pods in the state "ImagePullBackoff", check the pod description. If you see an x509 error, ensure that you added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. If you missed these during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation.
 
-## What's Next
+## What's next
 
 To help you make the most of Astronomer Software, check out the following additional resources:
 
@@ -540,7 +540,7 @@ To help you make the most of Astronomer Software, check out the following additi
 * [Configuring Platform Resources](configure-platform-resources.md)
 * [Managing Users on Astronomer Software](manage-platform-users.md)
 
-### Astronomer Support Team
+### Astronomer support team
 
 If you have any feedback or need help during this process and aren't in touch with our team already, a few resources to keep in mind:
 

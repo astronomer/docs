@@ -1,6 +1,6 @@
 ---
-title: 'Use a Third-Party Ingress Controller'
-sidebar_label: 'Third-Party Ingress Controllers'
+title: 'Use a third-party ingress controller'
+sidebar_label: 'Third-Party ingress controllers'
 id: third-party-ingress-controllers
 description: Use a pre-existing ingress controller on Astronomer Software.
 ---
@@ -43,9 +43,9 @@ Additionally, all of the following must be true:
 
 - Your ingresses must present valid SSL certificates.
 
-### Additional Prerequisites for Private Certificate Authorities
+### Additional prerequisites for private certificate authorities
 
-If the certificates of the third-party ingress controller presents are signed by a private Certificate Authority:
+If the certificates of the third-party ingress controller presents are signed by a private certificate authority:
 
 - The third-party ingress controller must be configured to trust your private CA (as per the documentation of your ingress controller).
 - The CA's public certificate must be stored as a Kubernetes secret in the Astronomer namespace.
@@ -55,9 +55,9 @@ If a private certificate authority is used to sign the certificate contained in 
 - Signing the secret used in `global.tlsSecret` with a private CA that's already trusted by the custom ingress controller (typically the same CA used to sign the certificates being used by the ingress controller).
 - Explicitly configuring your custom ingress controller to trust the CA used when generating the certificate contained in `global.tlsSecret`.
 
-## Step 1: Complete Platform Installation Steps
+## Step 1: Complete platform installation steps
 
-If you are installing Astronomer for the first time, complete your Astronomer platform installation up until the "Configure your Helm Chart" step. If this configuration is part of an existing installation, you can skip to Step 2 or complete the following optional setup.
+If you are installing Astronomer for the first time, complete your Astronomer platform installation up until the "Configure your Helm chart" step. If this configuration is part of an existing installation, you can skip to Step 2 or complete the following optional setup.
 
 ### Optional: Share a certificate between Astronomer and your ingress controller
 
@@ -78,7 +78,7 @@ $ kubectl annotate secret/${SECRET_NAME} kubed.appscode.com/sync="platform-relea
 $ kubectl -n ${INGRESS_CONTROLLER_NAMESPACE} get secret ${SECRET_NAME}
 ```
 
-## Step 2: Configure Your Helm Chart
+## Step 2: Configure Your Helm chart
 
 To install your existing ingress controller and disable the default one, add the following to your `config.yaml` file:
 
@@ -104,7 +104,7 @@ global:
 
 If you use a Traefik or Contour ingress controller, you need to configure additional values in your chart. For more information, read the following subsections.
 
-### Required Configuration for traefik
+### Required configuration for traefik
 
 If you're using a traefik ingress controller, add the following configuration to your `config.yaml` file:
 
@@ -122,7 +122,7 @@ global:
 >    $ helm upgrade --install -f config.yaml --version=<your-platform-version> --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
 >    ```
 
-### Required Configuration for Contour
+### Required configuration for Contour
 
 Contour ships with support for websockets disabled by default. To use a Contour ingress controller, explicitly enable WebSocket support for Houston's `/ws` prefix by creating an HTTPProxy object in the Astronomer platform namespace. To do so:
 
@@ -171,7 +171,7 @@ helm upgrade --install -f config.yaml --version=<your-platform-version> --namesp
 
 If this is a new installation, continue through the standard installation steps to install this Helm chart.
 
-## Configuration Notes for OpenShift
+## Configuration notes for OpenShift
 
 OpenShift clusters with multitenant isolation enabled will need to explicitly allow traffic from the ingress controller's namespace to services associated with ingresses in other namespaces.
 
@@ -189,4 +189,4 @@ To allow traffic from multiple namespaces, you must also configure OpenShift's d
 kubectl -n openshift-ingress-operator patch ingresscontroller/default --patch '{"spec":{"routeAdmission":{"namespaceOwnership":"InterNamespaceAllowed"}}}' --type=merge
 ```
 
-For more information about security implications for multi-tenant clusters, see the [Openshift Ingress Operator documentation](https://docs.openshift.com/container-platform/4.9/networking/ingress-operator.html).
+For more information about security implications for multi-tenant clusters, see the [Openshift Ingress operator documentation](https://docs.openshift.com/container-platform/4.9/networking/ingress-operator.html).

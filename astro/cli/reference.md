@@ -1,13 +1,13 @@
 ---
-sidebar_label: 'Command Reference'
-title: 'Astro CLI Command Reference'
+sidebar_label: 'Command reference'
+title: 'Astro CLI command reference'
 id: reference
 description: Learn about every command that you can run with the Astro CLI.
 ---
 
 ## Overview
 
-This document contains information about all commands and settings available in the Astro CLI, including examples and flags. To get started with the Astro CLI, see [Get Started](cli/get-started.md).
+This document contains information about all commands and settings available in the Astro CLI, including examples and flags. To get started with the Astro CLI, see [Get started](cli/get-started.md).
 
 :::info
 

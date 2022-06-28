@@ -250,7 +250,7 @@ Once you've uninstalled the `astrocloud` executable, install the latest version 
 
 For instructions, see [Install the CLI](cli/configure-cli.md#install-the-cli).
 
-### Step 3: Migrate Existing Astro Projects
+### Step 3: Migrate existing Astro projects
 
 In order to run and deploy your existing Astro projects using the `astro` executable, you need to populate these projects with a new `.astro` directory of files. For any existing Astro projects on your machine:
 
@@ -259,7 +259,7 @@ In order to run and deploy your existing Astro projects using the `astro` execut
 
     If the CLI prompts you about whether you want to create a project in a non-empty directory, enter `Yes`. The CLI will only create files that aren't yet in your directory. In this case, the only files that it creates are `./astro/test_dag_integrity_default.py` and `.astro/config.yaml`.
 
-### Step 4: Migrate Project Configurations (_Optional_)
+### Step 4: Migrate project configurations (_Optional_)
 
 If you manually updated the `.astrocloud/config.yaml` file of an existing Astro project:
 
@@ -267,7 +267,7 @@ If you manually updated the `.astrocloud/config.yaml` file of an existing Astro 
 2. Copy the contents from `.astrocloud/config.yaml` into `.astro/config.yaml`.
 3. Delete `.astrocloud/config.yaml` from your project.
 
-### Step 5: Update CI/CD Pipelines (_Optional_)
+### Step 5: Update CI/CD pipelines (_Optional_)
 
 If you have an existing [CI/CD](ci-cd.md) pipeline using the old `astrocloud` executable, update it to use `astro`. For example, in a GitHub Actions CI/CD pipeline you would update the following:
 

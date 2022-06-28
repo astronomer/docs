@@ -1,13 +1,13 @@
 ---
-title: 'Using Registry Back Ends in Astronomer Software'
-sidebar_label: 'Use a Registry Backend'
+title: 'Using registry backends in Astronomer Software'
+sidebar_label: 'Use a registry backend'
 id: registry-backend
-description: Configure a registry back end to work with the Astronomer platform.
+description: Configure a registry backend to work with the Astronomer platform.
 ---
 
 ## Overview
 
-Astronomer Software requires a Docker Registry to store the Docker Images generated every time a user either pushes code or a configuration change to an Airflow Deployment on Astronomer.
+Astronomer Software requires a Docker registry to store the Docker images generated every time a user either pushes code or a configuration change to an Airflow Deployment on Astronomer.
 
 The default storage backend for this Docker Registry is a [Kubernetes Persistent Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). While this may be sufficient for teams just getting started on Astronomer, we strongly recommend backing the registry with an external storage solution for any team running in production.
 
@@ -28,7 +28,7 @@ To read more about the Google Cloud Storage driver, reference [this doc](https:/
 To use Google Cloud Storage (GCS) as a registry backend solution, you'll need:
 
 - An existing GCS Bucket
-- Your Google Cloud Platform Service Account JSON Key
+- Your Google Cloud Platform service account JSON Key
 - Ability to create a Kubernetes Secret in your cluster
 
 ### Update your config.yaml file
@@ -87,7 +87,7 @@ astronomer:
       bucket: my-gcs-bucket
 ```
 
-4. Push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+4. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
 ## AWS S3
 
@@ -104,7 +104,7 @@ To use AWS S3 as a registry backend solution, you'll need:
 - Your AWS Secret Key
 - Ability to create a Kubernetes Secret in your cluster
 
-### Create S3 IAM Policy and User
+### Create S3 IAM policy and user
 
 To grant the registry appropriate push and pull permissions, follow the steps below.
 
@@ -153,9 +153,9 @@ astronomer:
       bucket: my-s3-bucket
 ```
 
-4. Push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+4. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
-### Enable Encryption (_Optional_)
+### Enable encryption (_Optional_)
 
 To enable encryption, follow the steps below.
 
@@ -176,7 +176,7 @@ astronomer:
       keyid: my-kms-key-id
 ```
 
-3. Push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+3. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
 ## Azure Blob Storage
 
@@ -208,4 +208,4 @@ astronomer:
       realm: core.windows.net
 ```
 
-2. Push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+2. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).

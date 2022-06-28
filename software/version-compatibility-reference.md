@@ -1,6 +1,6 @@
 ---
-title: "Version Compatibility Reference for Astronomer Software"
-sidebar_label: "Version Compatibility Reference"
+title: "Version compatibility reference for Astronomer Software"
+sidebar_label: "Version compatibility reference"
 id: version-compatibility-reference
 description: A reference of all adjacent tooling required to run Astronomer Software and corresponding version compatibility.
 ---
@@ -27,11 +27,11 @@ For more detail on changes between Software versions, see [Astronomer Software R
 
 > **Note:** On Astronomer v0.23+, new versions of Apache Airflow on Astronomer Certified and Runtime are automatically made available in the Software UI and CLI within 24 hours of their publication. For more information, refer to [Available Astronomer Certified Versions](ac-support-policy.md#astronomer-certified-lifecycle-schedule).
 
-> **Note:** Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer Support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
+> **Note:** Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
 
-> **Note:** While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow Triggerer is available only in Astronomer v0.26+. To use [Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), which require the Airflow Triggerer, you must upgrade.
+> **Note:** While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow triggerer is available only in Astronomer v0.26+. To use [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), which require the Airflow triggerer, you must upgrade.
 
-### Kubernetes Version Support Policy
+### Kubernetes version support policy
 
 In general, Astronomer Software will support a given version of Kubernetes through its End of Life. This includes Kubernetes upstream and cloud-managed variants like GKE, AKS, and EKS. When a version of Kubernetes reaches End of Life, support will be removed in the next major or minor release of Astronomer Software. For more information on Kubernetes versioning and release policies, refer to [Kubernetes Release History](https://kubernetes.io/releases/) or your cloud provider.
 
@@ -44,7 +44,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 
 ## Astronomer Certified
 
-| Astronomer Certified | Postgres | MySQL     | Python                         | System Distribution  | Airflow Helm Chart |
+| Astronomer Certified | Postgres | MySQL     | Python                         | System Distribution  | Airflow Helm chart |
 | -------------------- | -------- | --------- | ------------------------------ | -------------------- | ------------------ |
 | 1.10.15              | 9.6+     | 5.7, 8.0+ | 3.6, 3.7, 3.8                  | Debian 10 (Buster)   | Any                |
 | 2.0.0                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8                  | Debian 10 (Buster)   | 0.18.6+            |
@@ -65,4 +65,4 @@ For more detail on each version of Astronomer Certified and instructions on how 
 
 > **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. To run Astronomer Certified on Docker with Python versions 3.6 or 3.8, you can create a custom image with a different Python version specified. For more information, read [Change Python Versions](customize-image.md#build-with-a-different-python-version).
 
-> **Note:** MySQL 5.7 is compatible with Airflow and Astronomer Certified 2.0 but it does NOT support the ability to run more than 1 Scheduler and is not recommended. If you'd like to leverage Airflow's new Highly-Available Scheduler, make sure you're running MySQL 8.0+.
+> **Note:** MySQL 5.7 is compatible with Airflow and Astronomer Certified 2.0 but it does NOT support the ability to run more than 1 scheduler and is not recommended. If you'd like to leverage Airflow's new Highly-Available scheduler, make sure you're running MySQL 8.0+.

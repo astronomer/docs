@@ -1,13 +1,13 @@
 ---
-sidebar_label: 'Integrate IAM Roles'
-title: 'Integrate IAM Roles on Astronomer Software'
+sidebar_label: 'Integrate IAM roles'
+title: 'Integrate IAM roles on Astronomer Software'
 id: integrate-iam
 description: Append IAM roles to an Airflow Deployment on Astronomer Software.
 ---
 
 ## Overview
 
-On Astronomer, IAM roles can be appended to the Webserver, Scheduler and Worker pods within any individual Airflow Deployment on the platform.
+On Astronomer, IAM roles can be appended to the webserver, scheduler and worker pods within any individual Airflow Deployment on the platform.
 
 IAM roles on [AWS](https://aws.amazon.com/iam/faqs/) and other platforms are often used to manage the level of access a specific user (or object, or group of users) has to some resource (or set of resources). The resource in question could be an S3 bucket or Secret Backend, both of which are commonly used in tandem with Airflow and Astronomer and can now be configured to be accessible only to a subset of Kubernetes pods within your wider Astronomer cluster.
 
@@ -23,8 +23,8 @@ A few clarifying notes:
 
 * [The Astro CLI](install-cli.md)
 * Admin access on an Astronomer Workspace
-* Direct access to your Kubernetes Cluster (for example, permission to run `$ kubectl describe po`)
-* A compatible version of Kubernetes as described in Astronomer's [Version Compatibility Reference](version-compatibility-reference.md)
+* Direct access to your Kubernetes cluster (for example, permission to run `$ kubectl describe po`)
+* A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
 
 ## AWS
 
@@ -32,7 +32,7 @@ Before you can integrate IAM with an Airflow Deployment on Astronomer, you'll ne
 
 - Create an IAM OIDC Identity Provider
 - Create an IAM Policy
-- Create an IAM Role
+- Create an IAM role
 - Create a Trust Relationship
 
 ### Step 1: Create an IAM OIDC identity provider
@@ -68,7 +68,7 @@ Before you can integrate IAM with an Airflow Deployment on Astronomer, you'll ne
 7. For **Audience**, use `sts.amazonaws.com`.
 8. Verify that the provider information is correct, and then click **Add provider** to create your identity provider.
 
-For additional information, refer to [Enable IAM Roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
+For additional information, refer to [Enable IAM roles for service accounts](https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html).
 
 ### Step 2: Create an IAM policy
 
@@ -183,7 +183,7 @@ To create a trust relationship between your IAM role and OIDC identity provider:
     }
     ```
 
-For additional information, refer to [IAM Role Configuration](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts-technical-overview.html#iam-role-configuration).
+For additional information, refer to [IAM role Configuration](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts-technical-overview.html#iam-role-configuration).
 
 ### Step 5: Integrate your IAM role with Astronomer
 
@@ -205,7 +205,7 @@ In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll 
             serviceAccountAnnotationKey: eks.amazonaws.com/role-arn
     ```
 
-2. Push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+2. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
 ### Step 6: Create or update an Airflow Deployment with an attached IAM role
 
@@ -221,7 +221,7 @@ In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll 
     astro deployment update <deployment-id> --cloud-role=arn:aws:iam::<your-iam-id>:role/<your-role>
     ```
 
-2. Confirm the role was passed successfully to all Webserver, Scheduler and Worker pods within your Airflow Deployment by running the following command:
+2. Confirm the role was passed successfully to all webserver, scheduler and worker pods within your Airflow Deployment by running the following command:
 
     ```bash
     kubectl describe po <pod-name> -n <airflow-namespace>
@@ -274,7 +274,7 @@ gcloud iam service-accounts create <gsa-name>
 
 ### Step 3: Configure Astronomer
 
-Add the following to your `config.yaml` file and push it to your platform as described in [Apply a Config Change](apply-platform-config.md):
+Add the following to your `config.yaml` file and push it to your platform as described in [Apply a config change](apply-platform-config.md):
 
 ```yaml
 astronomer:
@@ -292,13 +292,13 @@ astronomer:
     astro deployment create <deployment-name> --executor=celery --cloud-role=<gsa-name>@<project-id>.iam.gserviceaccount.com
     ```
 
-2. Note the name of the Worker and Scheduler service accounts that appear when you run the following command:
+2. Note the name of the worker and scheduler service accounts that appear when you run the following command:
 
     ```bash
     kubectl get sa -n <your-airflow-namespace>
     ```
 
-3. Create an IAM policy binding your Google and GKE service accounts by running the following command for both the Worker and Scheduler GKE service accounts you noted:
+3. Create an IAM policy binding your Google and GKE service accounts by running the following command for both the worker and scheduler GKE service accounts you noted:
 
     ```bash
     gcloud iam service-accounts add-iam-policy-binding \

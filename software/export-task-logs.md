@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Export Task Logs'
-title: 'Export Task Logs to ElasticSearch'
+sidebar_label: 'Export task logs'
+title: 'Export task logs to ElasticSearch'
 id: export-task-logs
 description: Configure how Astronomer exports task logs to your ElasticSearch instance.
 ---
@@ -14,9 +14,9 @@ You can configure how Astronomer collects Deployment task logs and exports them 
 - Using a Fluentd Daemonset pod on each Kubernetes node in your cluster.
 - Using container sidecars for Deployment components.
 
-## Export Task Logs Using a Fluentd DaemonSet
+## Export task logs Using a Fluentd DaemonSet
 
-By default, Astronomer Software uses a Fluentd Daemonset to aggregate task logs. The is the workflow for the default implementation:
+By default, Astronomer Software uses a Fluentd DaemonSet to aggregate task logs. The is the workflow for the default implementation:
 
 - Deployments write task logs to stdout.
 - Kubernetes takes the output from stdout and writes it to the Deployment’s node.
@@ -24,13 +24,13 @@ By default, Astronomer Software uses a Fluentd Daemonset to aggregate task logs.
 
 This implementation is recommended for organizations that:
 
-- Run longer tasks using CeleryExecutor.
+- Run longer tasks using Celery executor.
 - Run Astronomer Software in a dedicated cluster.
 - Run privileged containers in a cluster with a ClusterRole.
 
-This approach is not suited for organizations that run many small tasks using the KubernetesExecutor. Because task logs exist only for the lifetime of the pod, your pods running small tasks might complete before Fluentd can collect their task logs.
+This approach is not suited for organizations that run many small tasks using the Kubernetes executor. Because task logs exist only for the lifetime of the pod, your pods running small tasks might complete before Fluentd can collect their task logs.
 
-## Export Logs Using Container Sidecars
+## Export logs using container sidecars
 
 You can use a logging sidecar container to collect and export logs. In this implementation:
 
@@ -49,9 +49,9 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 
 :::
 
-### Configure Logging Sidecars
+### Configure logging sidecars
 
-1. Retrieve your `config.yaml` file. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
+1. Retrieve your `config.yaml` file. See [Apply a config change](apply-platform-config.md)
 2. Add the following entry to your `config.yaml` file:
 
     ```yaml
@@ -63,7 +63,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
         # needed to prevent zombie deployment worker pods when using KubernetesExecutor
         terminationEndpoint: http://localhost:8000/quitquitquit
     ```
-3. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config)
+3. Push the configuration change. See [Apply a config change](apply-platform-config.md)
 
 
 :::info

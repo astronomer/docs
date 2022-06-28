@@ -19,13 +19,13 @@ astro deployment create
 
 | Option                      | Description                                                                        | Possible Values                                                          |
 | --------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `-c`, `--cluster-id`        | The Cluster in which you want to create a Deployment                                                                      | The name of any Cluster that you can create Deployments in               |
+| `-c`, `--cluster-id`        | The cluster in which you want to create a Deployment                                                                      | The name of any cluster that you can create Deployments in               |
 | `-d`,`--description`        | The description for the Deployment                                    | Any string. Multiple-word descriptions should be specified in quotations (`"`) |
 | `-n`,`--name`        | The Deployment's name                                                       | Any string. Multiple-word descriptions should be specified in quotations |
 | `-v`,`--runtime-version`    | The Astro Runtime version for the Deployment                                                   | Any supported version of Astro Runtime. Major, minor, and patch versions must be specified.                                                |
 | `-s`,`--scheduler-au`       | The number of AU to allocate towards the Deployment's Scheduler(s). The default is`5`.     | Integer between `0` and `30`                                             |
 | `-a`,`--worker-au`          | The number of AU to allocate towards the Deployment's worker(s). The default is `10`.      | Integer between `0` and `175`                                            |
-| `-r`,`--scheduler-replicas` | The number of Scheduler replicas for the Deployment. The default is `1`. | Integer between `0` and `4`                                              |
+| `-r`,`--scheduler-replicas` | The number of scheduler replicas for the Deployment. The default is `1`. | Integer between `0` and `4`                                              |
 | `--workspace-id` | The Workspace in which to create a Deployment. If not specified, your current Workspace is assumed. | Any valid Workspace ID                                            |
 
 ## Examples
