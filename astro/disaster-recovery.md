@@ -17,13 +17,13 @@ To simplify the responsibility of maintaining two Clusters, Astronomer plans to 
 
 In the case of a full region outage, Astronomer can re-provision your Cluster(s) and all Deployments in an alternate region. The re-provisioning includes:
 
-- Cluster, including all nodes and most Cluster-level configuration.
+- Cluster, including all nodes and most cluster-level configuration.
 - VPC.
-- VPC Peering. Customers will need to re-accept peering request.
+- VPC peering. Customers will need to re-accept peering request.
 - Deployments and data pipelines.
-- Environment Variables.
+- Environment variables.
 - API keys.
-- Alert Emails.
+- Alert emails.
 
 Astronomer will not be able to restore:
 

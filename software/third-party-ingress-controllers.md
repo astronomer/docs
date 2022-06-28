@@ -57,7 +57,7 @@ If a private certificate authority is used to sign the certificate contained in 
 
 ## Step 1: Complete platform installation steps
 
-If you are installing Astronomer for the first time, complete your Astronomer platform installation up until the "Configure your Helm Chart" step. If this configuration is part of an existing installation, you can skip to Step 2 or complete the following optional setup.
+If you are installing Astronomer for the first time, complete your Astronomer platform installation up until the "Configure your Helm chart" step. If this configuration is part of an existing installation, you can skip to Step 2 or complete the following optional setup.
 
 ### Optional: Share a certificate between Astronomer and your ingress controller
 

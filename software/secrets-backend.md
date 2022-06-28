@@ -152,7 +152,7 @@ By default, Airflow uses `"kv_engine_version": 2`, but we've written this secret
 
 For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
 
-### Step 4: Run an Example DAG to Test Vault Locally
+### Step 4: Run an example DAG to test Vault locally
 
 To test Vault, write a simple DAG which calls your test secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 

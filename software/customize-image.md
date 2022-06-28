@@ -15,12 +15,12 @@ The Astro CLI is intended to make it easier to develop with Apache Airflow, whet
 
 More specifically, this doc includes instructions for how to:
 
-- Add Python and OS-level Packages
+- Add Python and OS-level packages
 - Add dependencies
 - Run commands on build
 - Access the Airflow CLI
-- Add environment variables Locally
-- Build from a Private Repository
+- Add environment variables locally
+- Build from a private repository
 
 > **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](install-cli.md).
 

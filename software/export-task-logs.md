@@ -24,11 +24,11 @@ By default, Astronomer Software uses a Fluentd DaemonSet to aggregate task logs.
 
 This implementation is recommended for organizations that:
 
-- Run longer tasks using Celeryexecutor.
+- Run longer tasks using Celery executor.
 - Run Astronomer Software in a dedicated cluster.
 - Run privileged containers in a cluster with a ClusterRole.
 
-This approach is not suited for organizations that run many small tasks using the Kubernetesexecutor. Because task logs exist only for the lifetime of the pod, your pods running small tasks might complete before Fluentd can collect their task logs.
+This approach is not suited for organizations that run many small tasks using the Kubernetes executor. Because task logs exist only for the lifetime of the pod, your pods running small tasks might complete before Fluentd can collect their task logs.
 
 ## Export logs using container sidecars
 

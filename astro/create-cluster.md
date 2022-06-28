@@ -21,7 +21,7 @@ This guide provides instructions for provisioning additional clusters within you
 
 ## Prerequisites
 
-To create an Astro Cluster, you need to have:
+To create an Astro cluster, you need to have:
 
 - An activated data plane.
 - Permissions to configure IAM in the dedicated account for Astro on your cloud.

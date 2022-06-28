@@ -227,7 +227,7 @@ If your SMTP provider is not listed, refer to the provider's documentation for i
 
 ## Step 7: Configure the database
 
-Astronomer by default requires a central Postgres database that will act as the backend for Astronomer's Houston API and will host individual Metadata databases for all Airflow Deployments spun up on the platform.
+Astronomer by default requires a central Postgres database that will act as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
 
 While you're free to configure any database, most GCP users on Astronomer run [Google Cloud SQL](https://cloud.google.com/sql/). For production environments, we _strongly_ recommend a managed Postgres solution.
 

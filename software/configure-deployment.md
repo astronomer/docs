@@ -7,7 +7,7 @@ description: Configure your Airflow Deployment's resources on Astronomer Softwar
 
 ## Overview
 
-An Airflow Deployment on Astronomer is an instance of Apache Airflow that was created using the Software UI or the Astro CLI. Each Airflow Deployment on Astronomer is hosted on a single Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres Metadata database.
+An Airflow Deployment on Astronomer is an instance of Apache Airflow that was created using the Software UI or the Astro CLI. Each Airflow Deployment on Astronomer is hosted on a single Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres metadata database.
 
 This guide walks you through the process of creating and configuring an Airflow Deployment on Astronomer.
 
@@ -36,12 +36,12 @@ To create an Airflow Deployment on Astronomer:
 
 This tab is the best place to modify resources for your Deployment. Specifically, you can:
 
-- Select an Airflow Executor
-- Allocate resources to your Airflow scheduler and Webserver
-- Set scheduler Count (*Airflow 2.0+ only*)
-- Add Extra Capacity (*Kubernetes only*)
-- Set worker Count (*Celery only*)
-- Adjust your worker Termination Grace Period (*Celery only*)
+- Select an Airflow executor
+- Allocate resources to your Airflow scheduler and webserver
+- Set scheduler count (*Airflow 2.0+ only*)
+- Add extra capacity (*Kubernetes only*)
+- Set worker count (*Celery only*)
+- Adjust your worker termination grace period (*Celery only*)
 
 The rest of this guide provides additional guidance for configuring each of these settings.
 
@@ -57,7 +57,7 @@ Astronomer supports 3 executors:
 
 Though it largely depends on your use case, we recommend the Local executor for development environments and the Celery or Kubernetes executors for production environments operating at scale.
 
-For a detailed breakdown of each executor, read Astronomer's [Airflow executors explained](https://www.astronomer.io/guides/airflow-executors-explained).
+For a detailed breakdown of each executor, read Astronomer's [Airflow Executors Explained](https://www.astronomer.io/guides/airflow-executors-explained).
 
 ## Scale core resources
 

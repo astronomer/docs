@@ -25,13 +25,13 @@ When using Deployment API keys, keep in mind the following:
 To create an API key for a Deployment:
 
 1. In the Cloud UI, open your Deployment.
-2. In the **API keys** menu, click **Add API key**:
+2. In the **API keys** menu, click **Add API Key**:
 
     <div class="text--center">
       <img src="/img/docs/add-api-key.png" alt="Add API key button" />
     </div>
 
-3. Give the key a name and description, then click **Create API key**:
+3. Give the key a name and description, then click **Create API Key**:
 
     <div class="text--center">
       <img src="/img/docs/create-api-key.png" alt="Create API key button" />
@@ -78,7 +78,7 @@ To delete a Deployment API key:
       <img src="/img/docs/edit-api-key.png" alt="Edit API key button" />
     </div>
 
-3. Click **Delete API key**, then follow the onscreen prompt to finalize the deletion:
+3. Click **Delete API Key**, then follow the onscreen prompt to finalize the deletion:
 
     <div class="text--center">
       <img src="/img/docs/delete-api-key.png" alt="Delete API key button" />

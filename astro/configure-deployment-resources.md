@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Configure deployment resources'
-title: 'Configure deployment resources'
+sidebar_label: 'Configure Deployment resources'
+title: 'Configure Deployment resources'
 id: configure-deployment-resources
 description: Learn how to create and configure Astro Deployment resources.
 ---
@@ -17,15 +17,15 @@ To modify the resources allocated to the workers in your Deployment, specify a q
 
 To ensure reliability, the minimum worker size supported is 10 AU. Beyond that, the maximum worker size you can set depends on the node instance type that is configured for the cluster in which your Deployment is hosted. If you attempt to provision a worker size that is not supported by your cluster's instance type, you will see an error in the Cloud UI. For example, if the node instance type for a given cluster is set to `m5.xlarge`, the maximum worker size supported for any Deployment within that cluster is 27 AU (2.7 CPUs, 10.1 GiB memory). This limit accounts for overhead that is required for system components.
 
-For a list of supported node instance types and their corresponding worker size limits, see [AWS resource reference](resource-reference-aws.md#deployment-worker-size-limits). To request a different instance type for your Cluster, reach out to [Astronomer support](https://support.astronomer.io).
+For a list of supported node instance types and their corresponding worker size limits, see [AWS resource reference](resource-reference-aws.md#deployment-worker-size-limits). To request a different instance type for your cluster, reach out to [Astronomer support](https://support.astronomer.io).
 
 ### Worker autoscaling logic
 
 While the **Worker Resources** setting affects the amount of computing power allocated to each worker, the number of workers running on your Deployment is based solely on the number of tasks in a queued or running state.
 
-The maximum number of tasks that a single worker can execute at once is 16. This value is known in Airflow as **Worker Concurrency**. worker Concurrency is currently a [system-wide setting on Astro](platform-variables.md) that cannot be changed. As soon as there are more than 16 tasks queued or running at any given time, one or more new workers is spun up to execute the additional tasks. The number of workers running on a Deployment at any given time can be calculated by the following expression, where worker Concurrency is 16:
+The maximum number of tasks that a single worker can execute at once is 16. This value is known in Airflow as **Worker Concurrency**. Worker Concurrency is currently a [system-wide setting on Astro](platform-variables.md) that cannot be changed. As soon as there are more than 16 tasks queued or running at any given time, one or more new workers is spun up to execute the additional tasks. The number of workers running on a Deployment at any given time can be calculated by the following expression, where worker Concurrency is 16:
 
-`[Number of workers]= ([Queued tasks]+[Running tasks])/(Worker Concurrency)`
+`[Number of workers]= ([Queued tasks]+[Running tasks])/(Worker concurrency)`
 
 This calculation is computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, read [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
@@ -33,7 +33,7 @@ This calculation is computed by KEDA every 10 seconds. For more information on h
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met. By adjusting the **Scheduler Count** slider in the Cloud UI, you can configure up to 4 schedulers, each of which will be provisioned with the AU specified in **Scheduler Resources**.
 
-For example, if you set scheduler resources to 10 AU and scheduler Count to 2, your Airflow Deployment will run with 2 Airflow schedulers using 10 AU each.
+For example, if you set scheduler resources to 10 AU and scheduler Count to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each.
 
 If you experience delays in task execution, which you can track via the Gantt Chart view of the Airflow UI, we recommend increasing the AU allocated towards the scheduler. The default resource allocation is 10 AU.
 

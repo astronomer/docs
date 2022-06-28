@@ -44,7 +44,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 
 ## Astronomer Certified
 
-| Astronomer Certified | Postgres | MySQL     | Python                         | System Distribution  | Airflow Helm Chart |
+| Astronomer Certified | Postgres | MySQL     | Python                         | System Distribution  | Airflow Helm chart |
 | -------------------- | -------- | --------- | ------------------------------ | -------------------- | ------------------ |
 | 1.10.15              | 9.6+     | 5.7, 8.0+ | 3.6, 3.7, 3.8                  | Debian 10 (Buster)   | Any                |
 | 2.0.0                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8                  | Debian 10 (Buster)   | 0.18.6+            |

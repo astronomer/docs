@@ -106,7 +106,7 @@ To upgrade to Astronomer Software v0.27.0, for example, set `ASTRO_VERSION=0.27.
 
 :::tip
 
-If you do not specify a patch version above, the script will automatically pull the latest Astronomer Software patch available in the [Astronomer Helm Chart](https://github.com/astronomer/astronomer/releases). If you set `ASTRO_VERSION=0.26` for example, Astronomer v0.26.5 will be installed if it is the latest v0.26 patch available.
+If you do not specify a patch version above, the script will automatically pull the latest Astronomer Software patch available in the [Astronomer Helm chart](https://github.com/astronomer/astronomer/releases). If you set `ASTRO_VERSION=0.26` for example, Astronomer v0.26.5 will be installed if it is the latest v0.26 patch available.
 
 :::
 

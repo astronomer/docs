@@ -28,8 +28,8 @@ Unlike other tools that directly access the [Kubernetes etcd database](https://k
 
 To recover the Astronomer platform in the case of an incident, there are two main components that need to be backed up:
 
-1. The Kubernetes cluster State
-2. The Astronomer Postgres Database
+1. The Kubernetes cluster state
+2. The Astronomer Postgres database
 
 Read below for specific instructions for how to backup both components.
 

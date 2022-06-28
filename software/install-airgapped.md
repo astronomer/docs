@@ -29,7 +29,7 @@ To complete this setup, you need:
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
 - A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
 
-## Step 1: Configure a private docker registry
+## Step 1: Configure a private Docker registry
 
 Astronomer's Docker images are hosted on a public registry which isn't accessible from an airgapped network. Therefore, these images must be hosted on a Docker registry accessible from within your own network. Every major cloud platform provides its own managed Docker registry service that can be used for this step:
 

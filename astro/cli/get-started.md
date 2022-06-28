@@ -90,7 +90,7 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 </Tabs>
 
-## Step 2: Confirm the Install
+## Step 2: Confirm the install
 
 To confirm the CLI was installed properly, run the following CLI command:
 
@@ -103,7 +103,7 @@ If the installation was successful, you should see the following output:
 <pre><code parentName="pre">{`% astro version
 Astro CLI Version: ${siteVariables.cliVersion}`}</code></pre>
 
-## Step 3: Create an Astro Project
+## Step 3: Create an Astro project
 
 To start developing locally, you first need to create an Astro project, which contains all of the files you need to run Apache Airflow locally.
 
@@ -129,7 +129,7 @@ To create a new Astro project:
 
     This Astro CLI command generates all of the necessary files to run Airflow locally in your new directory. This includes dedicated folders for your DAG files, plugins, and dependencies.
 
-## Step 4: Run Airflow Locally
+## Step 4: Run Airflow locally
 
 To confirm that you successfully initialized an Astro project, run the following command from your project directory:
 

@@ -71,7 +71,7 @@ Once you log in, you should see the DAGs you just deployed.
 
 ## What happens during a code deploy
 
-When you deploy code to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, DAGs, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or Variables that were set locally. This Docker image is then pushed to all containers running the Apache Airflow application on Astro.
+When you deploy code to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, DAGs, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running the Apache Airflow application on Astro.
 
 ![Deploy code](/img/docs/deploy-architecture.png)
 

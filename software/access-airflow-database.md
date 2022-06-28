@@ -184,7 +184,7 @@ Password: XXXXXXXX
 Port: 6543
 ```
 
-## Decode the Airflow metadata secret on Astronomer
+## Decode the Airflow metadata Secret on Astronomer
 
 On Astronomer, your deployment's Postgres credentials are also stored as a [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/#overview-of-secrets) (`airflow-metadata`) in your deployment's [Kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). For users with `kubectl` access to the cluster who want to properly populate the `airflow_db` connection in the Airflow UI with the proper credentials, follow our instructions below.
 

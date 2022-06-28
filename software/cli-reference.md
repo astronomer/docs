@@ -551,7 +551,7 @@ Initializes a local Airflow environment on your machine by creating a Docker con
 
 ## astro dev stop
 
-Stops all 3 running Docker containers on your local Airflow environment. Running this command followed by `astro dev start` is required to push certain types of changes to your Astro project. Unlike `astro dev kill`, this command does not prune mounted volumes and will preserve data associated with your local Postgres Metadata database.
+Stops all 3 running Docker containers on your local Airflow environment. Running this command followed by `astro dev start` is required to push certain types of changes to your Astro project. Unlike `astro dev kill`, this command does not prune mounted volumes and will preserve data associated with your local Postgres metadata database.
 
 ### Usage
 

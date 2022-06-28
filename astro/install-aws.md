@@ -14,7 +14,7 @@ At a high-level, we'll ask that you come prepared with a new AWS account. From t
 - Share AWS account information with our team.
 - Create a cross-account IAM role that Astro can assume within your new AWS account.
 
-Astronomer will then create a cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro Cluster, [reach out to us](https://support.astronomer.io).
+Astronomer will then create a cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro cluster, [reach out to us](https://support.astronomer.io).
 
 For a complete list of the AWS resources that our team will provision in your AWS account, see [Resource usage](resource-reference-aws.md).
 

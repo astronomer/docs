@@ -36,7 +36,7 @@ In the dropdown on the top-right, you'll see a button where you can toggle betwe
 
 - Scheduler
 - Webserver
-- workers (*if applicable*)
+- Workers (*if applicable*)
 
 ![Webserver Logs Page](https://assets2.astronomer.io/main/docs/logs/logs-webserver.png)
 

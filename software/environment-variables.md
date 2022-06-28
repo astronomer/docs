@@ -7,25 +7,25 @@ description: Manage environment variables on Astronomer Software.
 
 ## Overview
 
-Environment Variables on Astronomer can be used to set both Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) or custom values, which are then applied to your Airflow Deployment either locally or on Astronomer.
+Environment variables on Astronomer can be used to set both Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) or custom values, which are then applied to your Airflow Deployment either locally or on Astronomer.
 
-Environment Variables can be used to set any of the following (and much more):
+Environment variables can be used to set any of the following (and much more):
 
 - SMTP to enable email alerts
-- Airflow Parallelism and DAG Concurrency
-- [A secrets backend](secrets-backend.md) to manage your Airflow connections and Variables
-- Store Airflow connections and Variables
+- Airflow parallelism and DAG concurrency
+- [A secrets backend](secrets-backend.md) to manage your Airflow connections and variables
+- Store Airflow connections and variables
 - Customize your default DAG view in the Airflow UI (Tree, Graph, Gantt etc.)
 
 This guide will cover the following:
 
 - How to set environment variables on Astronomer
 - How environment variables are stored on Astronomer
-- How to store Airflow connections and Variables as Environment Variables
+- How to store Airflow connections and variables as environment variables
 
 ## Set environment variables on Astronomer
 
-On Astronomer, there are 3 ways to set Environment Variables:
+On Astronomer, there are 3 ways to set environment variables:
 
 - via your `.env` file (_Local Only_)
 - via your `Dockerfile`
@@ -63,7 +63,7 @@ Alternatively, you can run:
 docker ps
 ```
 
-This will output 3 Docker containers that were provisioned to run Airflow's 3 primary components on your machine: The Airflow scheduler, webserver and Postgres Metadata database.
+This will output 3 Docker containers that were provisioned to run Airflow's 3 primary components on your machine: The Airflow scheduler, webserver and Postgres metadata database.
 
 Now, create a [Bash session](https://docs.docker.com/engine/reference/commandline/exec/#examples) in your scheduler container by running:
 
@@ -139,7 +139,7 @@ To set them,
 
 1. Navigate to the Software UI
 2. Go to "Deployment" > "Variables"
-3. Add your Environment Variables
+3. Add your environment variables
 
 ![Astro UI Env Vars Config](https://assets2.astronomer.io/main/docs/astronomer-ui/v0.16-Astro-UI-EnvVars.png)
 
@@ -185,17 +185,17 @@ In other words, if you set `AIRFLOW__CORE__PARALLELISM` with one value via the S
 
 ### How environment variables are stored on Astronomer
 
-All values for environment variables that are added via the Software UI are stored as a [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/), which is encrypted at rest and mounted to your Deployment's Airflow pods (scheduler, webserver, Worker(s)) as soon as they're set or changed.
+All values for environment variables that are added via the Software UI are stored as a [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/), which is encrypted at rest and mounted to your Deployment's Airflow pods (scheduler, webserver, worker(s)) as soon as they're set or changed.
 
-Environment Variables are _not_ stored in Airflow's Metadata Database and are _not_ stored in Astronomer's platform database. Unlike other components, the Astronomer Houston API fetches them from the Kubernetes Secret instead of the platform's database to render them in the Software UI.
+Environment variables are _not_ stored in Airflow's metadata Database and are _not_ stored in Astronomer's platform database. Unlike other components, the Astronomer Houston API fetches them from the Kubernetes Secret instead of the platform's database to render them in the Software UI.
 
-For information on how Airflow connections and Variables are encrypted on Astronomer, refer to [this forum post](https://forum.astronomer.io/t/how-are-connections-variables-and-env-vars-encrypted-on-astronomer/173).
+For information on how Airflow connections and variables are encrypted on Astronomer, refer to [this forum post](https://forum.astronomer.io/t/how-are-connections-variables-and-env-vars-encrypted-on-astronomer/173).
 
 ## Adding Airflow connections and variables as environment variables
 
 For users who regularly leverage Airflow connections and variables, we'd recommend storing and fetching them using environment variables.
 
-As mentioned above, Airflow connections and variables are stored in Airflow's metadata database. Adding them _outside_ of task definitions and operators requires an additional connection to Airflow's Postgres Database, which is called every time the scheduler parses a DAG (as defined by `processor_poll_interval`, which is set to 1 second by default). By adding connections and variables as Environment variables, you can refer to them more easily in your code and lower the amount of open connections, thus preventing a strain on your Database and resources.
+As mentioned above, Airflow connections and variables are stored in Airflow's metadata database. Adding them _outside_ of task definitions and operators requires an additional connection to Airflow's Postgres database, which is called every time the scheduler parses a DAG (as defined by `processor_poll_interval`, which is set to 1 second by default). By adding connections and variables as environment variables, you can refer to them more easily in your code and lower the amount of open connections, thus preventing a strain on your database and resources.
 
 Read below for instructions on both.
 

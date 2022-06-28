@@ -48,7 +48,7 @@ Lastly, this guide assumes that you are installing Airflow 2.0+. The differences
 
 ## Step 1: Set Up Airflow's metadata database
 
-In Airflow, the metadata database is responsible for keeping a record of all tasks across DAGs and their corresponding status (queued, scheduled, running, success, failed, etc). To set up the metadata DB:
+In Airflow, the metadata database is responsible for keeping a record of all tasks across DAGs and their corresponding status (queued, scheduled, running, success, failed, etc). To set up the metadata database:
 
 1. Create a database user named `airflow`:
 
@@ -180,7 +180,7 @@ To use systemd as a process supervisor:
 
 ## Step 7: Configure Airflow for database access
 
-To connect your Airflow environment to the metadata DB you created in Step 1, add the following environment variables to your `sys-config` file depending on your chosen [Executor](https://www.astronomer.io/guides/airflow-executors-explained):
+To connect your Airflow environment to the metadata database you created in Step 1, add the following environment variables to your `sys-config` file depending on your chosen [executor](https://www.astronomer.io/guides/airflow-executors-explained):
 
 - For Local Executor:
 

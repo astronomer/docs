@@ -31,7 +31,7 @@ If you're upgrading an Astronomer Certified environment running on Docker, all y
 
     If you're developing locally, make sure to save your changes before proceeding.
 
-4. If you are using the Astro CLI, run `astro dev stop` followed by `astro dev start` to restart your 3 Airflow components (scheduler, webserver, and Database).
+4. If you are using the Astro CLI, run `astro dev stop` followed by `astro dev start` to restart your 3 Airflow components (scheduler, webserver, and database).
 
     If you aren't using the Astro CLI, you can manually stop all Airflow containers using `docker-compose down --volumes --rmi all`.
 
@@ -41,7 +41,7 @@ If you're upgrading an Astronomer Certified environment running on Docker, all y
 
 Before upgrading, make sure both of the following are true:
 
-* Your Airflow metadata DB is backed up.
+* Your Airflow metadata database is backed up.
 * All DAGs have been paused and no tasks are running.
 
 Then, for each machine running Airflow:
@@ -58,7 +58,7 @@ Then, for each machine running Airflow:
     pip install --extra-index-url=https://pip.astronomer.io/simple/ 'astronomer-certified[postgres]==2.1.0.*' --upgrade
     ```
 
-2. Upgrade your metadata DB using the following command:
+2. Upgrade your metadata database using the following command:
 
     ```sh
     airflow upgradedb

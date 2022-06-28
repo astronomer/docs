@@ -42,7 +42,7 @@ Every supported version of the Astronomer Certified Python wheel is available at
 - [Airflow 2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/buster/Dockerfile)
 - [Airflow 1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/buster/Dockerfile)
 
-### Differences between Astronomer Runtime and Astronomer Certified
+### Differences between Astro Runtime and Astronomer Certified
 
 Starting with Software version 0.29, you can use Astro Runtime images in your Software Deployments. Functionally, Runtime images are similar to Certified images. They both include:
 
@@ -50,7 +50,7 @@ Starting with Software version 0.29, you can use Astro Runtime images in your So
 - Extended support lifecycles.
 - Regularly backported bug and security fixes.
 
-Astronomer Runtime includes additional features which are not available in Astronomer Certified images, including:
+Astro Runtime includes additional features which are not available in Astronomer Certified images, including:
 
 - The `astronomer-providers` package, which includes a set of deferrable operators build and maintained by Astronomer.
 - Airflow UI improvements, such as the showing your Deployment's Docker image tag in the footer of all UI pages.

@@ -113,7 +113,7 @@ To test a new version of Astronomer Certified on your local machine, save all of
 $ astro dev stop
 ```
 
-All 4 running Docker containers for each of the Airflow components (webserver, scheduler, Postgres, Triggerer) stop.
+All 4 running Docker containers for each of the Airflow components (webserver, scheduler, Postgres, triggerer) stop.
 
 Run the following command to apply your changes:
 

@@ -117,7 +117,7 @@ For a full list of node instance types that are supported on Astro, see [AWS Res
 
 ### Feedback in Cloud UI on worker size limits
 
-The Cloud UI now renders an error if you try to modify the **Worker Resources**  to a combination of CPU and memory that is not supported by the node instance type of the cluster that the Deployment is hosted on. This validation ensures that the worker size you request is supported by the infrastructure available in your Astro Cluster, and minimizes silent task failures that might have occurred due to invalid resource requests.
+The Cloud UI now renders an error if you try to modify the **Worker Resources**  to a combination of CPU and memory that is not supported by the node instance type of the cluster that the Deployment is hosted on. This validation ensures that the worker size you request is supported by the infrastructure available in your Astro cluster, and minimizes silent task failures that might have occurred due to invalid resource requests.
 
 If your Astro cluster is configured with the `m5d.8xlarge` node type, for example, the Cloud UI will show an error if you try to set **Worker Resources** to 350 AU. This is because the maximum worker size an `m5d.8xlarge` node can support is 307 AU.
 
@@ -190,7 +190,7 @@ As of this release, **Maximum Node Count** is now a configurable setting for new
 
 Previously, maximum node count was a fixed, global setting that applied to all customers on Astro and could not be configured per cluster. Now, your organization can modify this setting as your workloads evolve and more Deployments are created. Once the limit is reached, your cluster will not be able to auto-scale and worker pods may fail to schedule.
 
-To update this setting for an existing Cluster, reach out to [Astronomer support](https://support.astronomer.io) and provide the name of your cluster and the desired maximum node count.
+To update this setting for an existing cluster, reach out to [Astronomer support](https://support.astronomer.io) and provide the name of your cluster and the desired maximum node count.
 
 ### Additional improvements
 
@@ -265,7 +265,7 @@ In addition to visual changes, we've renamed the following high-level Astro comp
 
 - **Astronomer Cloud CLI** is now **Astro CLI**
 - **Astronomer UI** is now **Cloud UI**
-- **Astronomer Runtime** is now **Astro Runtime**
+- **Astro Runtime** is now **Astro Runtime**
 
 We hope you find this exciting. We're thrilled.
 
@@ -305,7 +305,7 @@ For more information about the **DAGs** page, see [Deployment metrics](deploymen
 ### Additional improvements
 
 - All resource settings in the Deployment view of the Astronomer UI now show exact CPU and Memory usage to the right of every slider, previously shown only in Astronomer Units (AUs). This makes it easy to know exactly how many resources you allocate to each component.
-- A banner now appears in the Astronomer UI if a Deployment is running a version of Astronomer Runtime that is no longer maintained. To make the most of features and bug fixes, we encourage users to upgrade to recent versions as much as possible.
+- A banner now appears in the Astronomer UI if a Deployment is running a version of Astro Runtime that is no longer maintained. To make the most of features and bug fixes, we encourage users to upgrade to recent versions as much as possible.
 - Added more ways to sort pages that utilize card views, such as the **Deployments** page
 - Added user account avatars next to usernames in several places across the Cloud UI
 
@@ -629,7 +629,7 @@ Astro now officially supports Deployment API keys, which you can use to automate
 
 ### Support for the Airflow REST API
 
-You can now programmatically trigger DAGs and update your Airflow Deployments on Astro by making requests to Airflow's [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). Currently this feature works only with temporary tokens, which are available at `cloud.astronomer.io/token`. Support for Deployment API keys is coming soon. For more information on using this feature, read [Airflow API](airflow-api.md).
+You can now programmatically trigger DAGs and update your Deployments on Astro by making requests to Airflow's [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html). Currently this feature works only with temporary tokens, which are available at `cloud.astronomer.io/token`. Support for Deployment API keys is coming soon. For more information on using this feature, read [Airflow API](airflow-api.md).
 
 ### Additional improvements
 

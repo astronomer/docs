@@ -66,7 +66,7 @@ alertmanager:
           title: '{{ .CommonAnnotations.summary }}'
 ```
 
-By default, the Alertmanager Helm Chart includes alert objects for platform, critical platform, and Deployment alerts. To configure a receiver for a non-default alert type, such as Deployment alerts with high severity, add that receiver to the `customRoutes` list with the appropriate `match_re` and receiver configuration values. For example:
+By default, the Alertmanager Helm chart includes alert objects for platform, critical platform, and Deployment alerts. To configure a receiver for a non-default alert type, such as Deployment alerts with high severity, add that receiver to the `customRoutes` list with the appropriate `match_re` and receiver configuration values. For example:
 
 ```yaml
 alertmanager:

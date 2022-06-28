@@ -37,7 +37,7 @@ Functionally, Runtime images are similar to Certified images. They both include:
 - Extended support lifecycles
 - Regularly backported bug and security fixes
 
-Astronomer Runtime includes additional features which are not available in Astronomer Certified images, including:
+Astro Runtime includes additional features which are not available in Astronomer Certified images, including:
 
 - The `astronomer-providers` package, which includes a set of operators that are built and maintained by Astronomer
 - Airflow UI improvements, such as showing your Deployment's Docker image tag in the footer

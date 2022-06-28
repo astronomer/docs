@@ -36,7 +36,7 @@ To send lineage data from an external system to Astro, you must specify your Org
 
     ![Location of the "Integrations" button in the Lineage tab of the Cloud UI](/img/docs/lineage-docs.png)
 
-3. In **Getting Started**, copy the value below **OpenLineage API key**.
+3. In **Getting Started**, copy the value below **OpenLineage API Key**.
 
 For more information about how to configure this API key in an external system, review the Integration Guide for the system.
 

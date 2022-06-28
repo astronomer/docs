@@ -19,11 +19,11 @@ As part of the Astro architecture, certain environment variables have preset val
 | `AIRFLOW_CONN_ASTRO_S3_LOGGING` | Connection URI for writing task logs to Astro's managed S3 bucket | `<Connection URI>`|
 | `AIRFLOW__LOGGING__ENCRYPT_S3_LOGS` | Determines whether to use server-side encryption for S3 logs | `False` |
 | `AIRFLOW__WEBSERVER__BASE_URL` | The base URL of the Airflow UI  | `https://${fullIngressHostname}`|
-|`AIRFLOW__CORE__SQL_ALCHEMY_CONN`| The SqlAlchemy connection string for the metadata DB | `dbConnSecret` |
+|`AIRFLOW__CORE__SQL_ALCHEMY_CONN`| The SqlAlchemy connection string for the metadata database | `dbConnSecret` |
 |`AIRFLOW__WEBSERVER__UPDATE_FAB_PERMS`| Determines whether to update FAB permissions on webserver startup | `True`|
 | `AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX` | Determines whether to enable werkzeug ProxyFix middleware for reverse proxy | `True` |
-| `AIRFLOW_CONN_AIRFLOW_DB` | The connection ID for accessing the Airflow metadata DB  | `dbConnSecret` |
-| `AIRFLOW__CORE__FERNET_KEY` |The secret key for saving connection passwords in the metadata DB | `fernetKeySecret` |
+| `AIRFLOW_CONN_AIRFLOW_DB` | The connection ID for accessing the Airflow metadata database  | `dbConnSecret` |
+| `AIRFLOW__CORE__FERNET_KEY` |The secret key for saving connection passwords in the metadata database | `fernetKeySecret` |
 | `AIRFLOW__CORE__EXECUTOR`  | The executor class that Airflow uses. Astro exclusively supports the Celery executor | `executor` |
 | `AIRFLOW_HOME`  | The home directory for an Astro project | `usr/local/airflow` |
 | `AIRFLOW__KUBERNETES__NAMESPACE`| The Kubernetes namespace where Airflow workers are created | `namespace` |
