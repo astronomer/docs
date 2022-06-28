@@ -20,8 +20,6 @@ The `KubernetesPodOperator` completes work within Kubernetes Pods in a Kubernete
     ]}>
 <TabItem value="windows and mac">
 
-### Windows and Mac
-
 The latest versions of Docker for Windows and Mac let you run a single node Kubernetes cluster locally. If you are using Windows, see [Setting Up Docker for Windows and WSL to Work Flawlessly](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). If you are using Mac, see [Docker Desktop for Mac user manual](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). It isn't nevessary to install docker-compose. 
 
 1. Open Docker and go to **Settings** > **Kubernetes**.
@@ -36,8 +34,6 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
 </TabItem>
 <TabItem value="linux">
-
-### Linux
 
 1. Install Microk8s. See [Microk8s](https://microk8s.io/).
 
@@ -55,8 +51,6 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="windows and mac">
-
-### Windows and Mac
 
 1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubePodOperator uses to connect to your cluster. For example:
     ```apiVersion: v1
@@ -88,8 +82,6 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
 </TabItem>
 <TabItem value="linux">
-
-### Linux
 
 In a `.kube` folder in your Astro project, create a config file with:
 
@@ -163,14 +155,10 @@ Optional. Review the logs for any pods that were created by the operator for iss
     ]}>
 <TabItem value="windows and mac">
 
-### Windows and Mac
-
 Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `docker-for-desktop` runs pods in the `default` namespace.
 
 </TabItem>
 <TabItem value="linux">
-
-### Linux
 
 Run `microk8s.kubectl get pods -n $namespace` or `microk8s.kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `microk8s` runs pods in the `default` namespace.
 
