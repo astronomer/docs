@@ -138,14 +138,14 @@ dag = DAG('example_kubernetes_pod', schedule_interval='@once', default_args=defa
 
 with dag:
     KubernetesPodOperator(
-        namespace=<namespace>,
+        namespace=namespace,
         image="hello-world",
         labels={"foo": "bar"},
         name="airflow-test-pod",
         task_id="task-one",
-        in_cluster=<in_cluster>,  # if set to true, will look in the cluster, if false, looks for file
+        in_cluster=in_cluster,  # if set to true, will look in the cluster, if false, looks for file
         cluster_context="docker-desktop",  # is ignored when in_cluster is set to True
-        config_file=<config_file>,
+        config_file=config_file,
         is_delete_operator_pod=True,
         get_logs=True,
     )
