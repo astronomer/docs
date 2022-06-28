@@ -138,7 +138,7 @@ To obtain a TLS certificate, complete one of the following setups:
 * **Option 1:** Obtain a TLS certificate from Let's Encrypt. We recommend this option for smaller organizations where your DNS administrator and Kubernetes cluster administrator are either the same person or on the same team.
 * **Option 2:** Request a TLS certificate from your organization's security team. We recommend this option for large organizations with their own  protocols for generating TLS certificates.
 
-> **Note:** Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
+> **Note:** Private CAs support on Azure is only available for clusters running containerd 1.5+, which is available on Kubernetes 1.22+.
 
 ### Option 1: Create TLS certificates using Let's Encrypt
 
@@ -281,12 +281,12 @@ global:
   # - private-root-ca
 
   # Enable privateCaCertsAddToHost only when your nodes do not already
-  # include the private CA in their docker trust store.
+  # include the private CA in their containerd trust store.
   # Most enterprises already have this configured,
   # and in that case 'enabled' should be false.
   # privateCaCertsAddToHost:
   #   enabled: true
-  #   hostDirectory: /etc/docker/certs.d
+  #   hostDirectory: /etc/containerd/certs.d
 
   # For development or proof-of-concept, you can use an in-cluster database
   postgresqlEnabled: false # Keep True if deploying a database on your AKS cluster.

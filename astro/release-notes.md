@@ -16,6 +16,44 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.1.0 ([Release notes](cli/release-notes.md))
 
+## June 23, 2022
+
+### New GCP regions available
+
+You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+
+- `asia-southeast1` (Singapore)
+- `australia-southeast1` (Sydney)
+- `europe-west1` (Belgium)
+- `europe-west2` (England)
+- `europe-west3` (Frankfurt)
+- `southamerica-east1` (São Paulo)
+- `us-west2` (Los Angeles)
+- `us-west4` (Nevada)
+
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+
+## June 16, 2022
+
+### Submit Support Requests in the Cloud UI
+
+Support requests can now be created and submitted in the Cloud UI. You no longer need to open an account on the Astronomer support portal to reach the Astronomer team. To streamline the request process, the **Submit Support Request** form auto-populates your currently selected Workspace and Deployment in the Cloud UI.
+
+![Location of the "Submit Support Request" button in the Cloud UI](/img/release-notes/support-form.png)
+
+### Parallelism Now Autoscales with a Deployment's Worker Count
+
+To better scale concurrent task runs, Astro now dynamically calculates [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is an Airflow configuration that determines the maximum number of tasks that can run concurrently within a single Deployment.
+
+A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-deployment-resources.md#worker-autoscaling-logic) for more information.
+
+Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
+
+### Bug Fixes
+
+- Fixed a rare issue where some user emails would be associated with the wrong username.
+- Fixed an issue where you could not properly sort entries in the **People** tab by name.
+
 ## June 9, 2022
 
 ### Update Deployment configurations with the Astro CLI
@@ -392,7 +430,7 @@ To access logs directly for a given Deployment, click the new **Logs** button on
 
 ![Logging direct access button](/img/release-notes/logs-button.png)
 
-For more information on how to view logs, read [Deployment Logs](scheduler-logs.md).
+For more information on how to view logs, read [View logs](view-logs.md).
 
 ### Bug fixes
 

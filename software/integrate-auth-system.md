@@ -318,7 +318,7 @@ To use a custom Oauth authorization code flow:
     For example, a custom configuration of Okta might look like the following.
 
     ```yaml
-    okta:
+        okta:
           enabled: true
           clientId: ffhsdf78f734h2fsd
           clientSecret: FSDFSLDFJELLGJLSDFGJL42353425

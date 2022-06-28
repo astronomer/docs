@@ -62,9 +62,9 @@ module.exports = {
       type: 'category',
       label: 'Observability',
       items: [
+        'view-logs',
         'deployment-metrics',
         'data-lineage',
-        'scheduler-logs',
         'airflow-alerts',
       ],
     },
@@ -116,6 +116,7 @@ module.exports = {
       items: [
         'known-limitations',
         'runtime-version-lifecycle-policy',
+        'astro-support',
         {
           type: 'category',
           label: 'Cloud Configuration Reference',

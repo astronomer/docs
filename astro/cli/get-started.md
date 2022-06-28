@@ -36,7 +36,7 @@ To use the Astro CLI on Mac, you must have:
 To install the latest version of the Astro CLI, run the following command:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 </TabItem>

@@ -580,7 +580,7 @@ Checks for the latest version of the Astronomer CLI, but does not perform the up
 > **Note:** This command only checks whether or not a new version of the Astronomer CLI is available. To actually upgrade the CLI to the latest version, run:
 >
 > ```sh
-> brew install astronomer/tap/astro
+> brew install astro
 > ```
 
 ## astro user create

@@ -30,10 +30,10 @@ As part of the Astro architecture, certain environment variables have preset val
 | `AIRFLOW__CORE__HOSTNAME_CALLABLE` | Path to a callable, which resolves to the hostname | `airflow.utils.net.get_host_ip_address`|
 | `AIRFLOW__SCHEDULER__STATSD_ON` | Determines whether Statsd is on | `True` |
 | `AIRFLOW__SCHEDULER__STATSD_HOST` |The hostname for Statsd | `statsd.Hostname`|
-| `AIRFLOW__SCHEDULER__STATSD_PORT` | The port for Statsd | `strconv.FormatInt(int64(statsd.IngestPort), baseTen)` |
+| `AIRFLOW__SCHEDULER__STATSD_PORT` | The port for Statsd | `<statsd-port>` |
 | `AIRFLOW__METRICS__STATSD_ON` | Determines whether metrics are sent to Statsd | `True` |
 | `AIRFLOW__METRICS__STATSD_HOST` | The hostname for sending metrics to Statsd | `statsd.Hostname`|
-| `AIRFLOW__METRICS__STATSD_PORT` | The port for sending metrics to Statsd | `strconv.FormatInt(int64(statsd.IngestPort), baseTen)` |
+| `AIRFLOW__METRICS__STATSD_PORT` | The port for sending metrics to Statsd | `<statsd-metrics-port>` |
 | `AIRFLOW__WEBSERVER__COOKIE_SECURE` | Sets a `secure` flag on server cookies | `True` |
 | `AIRFLOW__WEBSERVER__INSTANCE_NAME` | Shows the name of your Deployment in the Home view of the Airflow UI | `<Deployment-Name>` |
 | `AIRFLOW__CELERY__WORKER_CONCURRENCY` | Determines how many tasks each Celery worker can run at any given time and is the basis of worker auto-scaling logic | `16` |

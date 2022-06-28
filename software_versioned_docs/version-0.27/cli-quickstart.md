@@ -44,13 +44,13 @@ There are two ways to install any version of the Astronomer CLI:
 If you have Homebrew installed, run:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 To install a specific version of the Astro CLI, you'll have to specify `@major.minor.patch`. To install v0.27.0, for example, run:
 
 ```sh
-brew install astronomer/tap/astro@0.27.0
+brew install astro@0.27.0
 ```
 
 ### Install with cURL
