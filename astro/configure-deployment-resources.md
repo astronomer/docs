@@ -23,29 +23,17 @@ For a list of supported node instance types and their corresponding worker size 
 
 While the **Worker Resources** setting affects the amount of computing power allocated to each worker, the number of workers running on your Deployment is based solely on the number of tasks in a queued or running state.
 
-<<<<<<< HEAD
 The maximum number of tasks that a single worker can execute at once is 16. This value is known in Airflow as **Worker Concurrency**. Worker Concurrency is currently a [system-wide setting on Astro](platform-variables.md) that cannot be changed. As soon as there are more than 16 tasks queued or running at any given time, one or more new workers is spun up to execute the additional tasks. The number of workers running on a Deployment at any given time can be calculated by the following expression, where worker Concurrency is 16:
-=======
-The maximum number of tasks that a single worker can execute at once is 16. This value is known in Airflow as **Worker Concurrency**. Worker Concurrency is currently a [system-wide setting on Astro](platform-variables.md) that cannot be changed. As soon as there are more than 16 tasks queued or running at any given time, one or more new workers is spun up to execute the additional tasks. The number of workers running on a Deployment at any given time can be calculated with the following expression, where Worker Concurrency is 16:
->>>>>>> 10aa5454055bee5cf5c48a3cae23016ef9c559a1
 
 `[Number of workers]= ([Queued tasks]+[Running tasks])/(Worker concurrency)`
 
-<<<<<<< HEAD
 This calculation is computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, read [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
-=======
-The number of workers subsequently determines the Deployment's [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is the maximum number of tasks which can run concurrently within a single Deployment. To ensure that you can always run as many tasks as your workers allow, parallelism is calculated with the following expression:
-
-`[Parallelism]= [Number of Workers] * [Worker Concurrency]`
-
-These calculations are computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, read [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
->>>>>>> 10aa5454055bee5cf5c48a3cae23016ef9c559a1
 
 ## Scheduler resources
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks once dependencies have been met. By adjusting the **Scheduler Count** slider in the Cloud UI, you can configure up to 4 schedulers, each of which will be provisioned with the AU specified in **Scheduler Resources**.
 
-For example, if you set scheduler resources to 10 AU and scheduler Count to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each.
+For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each.
 
 If you experience delays in task execution, which you can track via the Gantt Chart view of the Airflow UI, we recommend increasing the AU allocated towards the scheduler. The default resource allocation is 10 AU.
 
