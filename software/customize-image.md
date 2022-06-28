@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Customize image'
-title: 'Customize Your image on Astronomer Software'
+title: 'Customize your image on Astronomer Software'
 id: customize-image
 description: Customize your Astronomer image, including adding dependencies and running commands on build.
 ---
