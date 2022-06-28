@@ -1,5 +1,5 @@
 ---
-title: Astronomer Release and lifecycle policy
+title: Astronomer release and lifecycle policy
 sidebar_label: Release and lifecycle policy
 id: release-lifecycle-policy
 description: Astronomer's release and lifecycle policy for Astronomer Software.

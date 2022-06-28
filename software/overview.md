@@ -1,5 +1,5 @@
 ---
-title: 'Astronomer Software Documentation'
+title: 'Astronomer Software documentation'
 sidebar_label: 'Overview'
 id: overview
 slug: /

@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Astro CLI'
-title: 'Astro CLI Release Notes'
+title: 'Astro CLI release notes'
 id: cli-release-notes
 description: Release notes for the Astro CLI.
 ---

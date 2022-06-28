@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Overview'
-title: 'Astro Documentation'
+title: 'Astro documentation'
 id: overview
 slug: /
 description: Learn about Astro, the managed service that makes data pipelines easy to write, run, and monitor.

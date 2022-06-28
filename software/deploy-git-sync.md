@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Configure Git-Sync Deploys'
-title: 'Configure Git-Sync Code Deploys'
+sidebar_label: 'Configure git-sync deploys'
+title: 'Configure git-sync code deploys'
 id: deploy-git-sync
 description: Push DAGs to your Airflow Deployment on Astronomer Software using git-sync.
 ---
@@ -15,7 +15,7 @@ This guide provides setup steps for configuring git-sync as a DAG deploy option.
 This is currently an experimental feature because it relies on very frequent syncs with remote Git servers. If you have conservative rate limits on your Git repos, then we do not recommend using this feature until a more stable git-sync architecture has been implemented. For more information, reach out to [Astronomer support](https://support.astronomer.io/).
 :::
 
-## Prerequisites:
+## Prerequisites
 
 To enable the git-sync deploy feature, you need:
 

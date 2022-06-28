@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Airflow API'
-title: 'Make Requests to the Airflow REST API'
+title: 'Make requests to the Airflow REST API'
 id: airflow-api
 description: Call the Apache Airflow REST API on Astronomer Software.
 
