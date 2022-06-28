@@ -255,7 +255,7 @@ The example above assumes the Celery executor and so includes an additional comp
 
 As a next step, you'll have to pull one of multiple Kubernetes Secrets for the Kubernetes namespace in which your Airflow Deployment lives.
 
-To list those secrets, run:
+To list those Secrets, run:
 
 ```
 kubectl get secret

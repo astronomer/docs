@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'CLI Reference Guide'
-title: 'Astro CLI Reference Guide'
+sidebar_label: 'CLI reference guide'
+title: 'Astro CLI reference guide'
 id: cli-reference
 description: A list of every command and setting in the Astro CLI.
 ---
