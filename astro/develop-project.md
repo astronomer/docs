@@ -279,7 +279,7 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 ## Set environment variables (local development)
 
-Astronomer recommends using the [Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui) for setting environment variables on Astro Deployments. For local development, Astronomer recommends setting environment variables in your Astro project's `.env` file. You can then push your environment variables from the `.env` file to a Deployment using the [Astro CLI](cli/astro-deployment-variable-update.md).
+For local development, Astronomer recommends setting environment variables in your Astro project's `.env` file. You can then push your environment variables from the `.env` file to a Deployment using the [Astro CLI](cli/astro-deployment-variable-update.md).
 
 If your environment variables contain sensitive information or credentials that you don't want exposed in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
 
