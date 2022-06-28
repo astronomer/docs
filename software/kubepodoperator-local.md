@@ -107,7 +107,7 @@ dag = DAG('example_kubernetes_pod', schedule_interval='@once', default_args=defa
 
 with dag:
     KubernetesPodOperator(
-        namespace=<namespace>,
+        namespace=namespace,
         image="hello-world",
         labels={"foo": "bar"},
         name="airflow-test-pod",
