@@ -27,6 +27,10 @@ This functionality is early access and under active development. If you have any
 
 :::
 
+## Prerequisites
+
+To view lineage data for Deployments, you must configure Airflow and your external systems to emit lineage data. See [Enable data lineage for external systems](set-up-data-lineage.md).
+
 ## View the lineage graph for a data pipeline
 
 You can use the search field at the top of the Cloud UI to view the lineage graph for one of your data pipelines, search for a DAG, task, or dataset. You can also search for jobs from other tools with lineage integrations, including dbt or Spark.
