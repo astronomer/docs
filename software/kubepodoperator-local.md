@@ -1,12 +1,24 @@
 ---
-title: 'How to Run the KubernetesPodOperator Locally'
+title: 'Test and Troubleshoot the KubernetesPodOperator Locally'
 sidebar_label: 'Local KubernetesPodOperator'
 id: kubepodoperator-local
-description: Test the KubernetesPodOperator on your local machine.
+description: Test and troubleshoot the KubernetesPodOperator locally.
 ---
-You use the `KubernetesPodOperator` to create and run Kubernetes pods on a  Kubernetes cluster in a local Kubernetes environment. Using the `KubernetesPodOperator` locally allows you to create, test, and modify your code before you move to production.
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
+The `KubernetesPodOperator` completes work within Kubernetes Pods in a Kubernetes cluster. Test the `KubernetesPodOperator` locally before running it in a production Kubernetes cluster. 
 
 ## Step 1: Set up Kubernetes
+<Tabs
+    defaultValue="windows and mac"
+    values={[
+        {label: 'Windows and Mac', value: 'windows and mac'},
+        {label: 'Linux', value: 'linux'},
+    ]}>
+<TabItem value="windows and mac">
 
 ### Windows and Mac
 
@@ -22,13 +34,27 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
     Docker restarts and the status indicator changes to green to indicate Kubernetes is running.
 
+</TabItem>
+<TabItem value="linux">
+
 ### Linux
 
 1. Install Microk8s. See [Microk8s](https://microk8s.io/).
 
 2. Run `microk8s.start` to start Kubernetes.
 
-## Step 2: Update the kubeconfig File
+</TabItem>
+</Tabs>
+
+## Step 2: Update the kubeconfig file
+
+<Tabs
+    defaultValue="windows and mac"
+    values={[
+        {label: 'Windows and Mac', value: 'windows and mac'},
+        {label: 'Linux', value: 'linux'},
+    ]}>
+<TabItem value="windows and mac">
 
 ### Windows and Mac
 
@@ -58,7 +84,10 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 2. Update the `<certificate-authority-data>`, `<certificate-authority-data>`, and `<certificate-authority-data>` values in the `config` file with the values for your organization. 
 3. Under cluster, change `server: https://localhost:6445` to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
 4. Optional. Add the `.kube` folder to `.gitignore` if  your project is configureed as a GitHub repository and you want to prevent the file from being tracked by your version control tool. 
-5. Optional. Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.  
+5. Optional. Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.
+
+</TabItem>
+<TabItem value="linux">
 
 ### Linux
 
@@ -67,8 +96,10 @@ In a `.kube` folder in your Astro project, create a config file with:
 ```bash
 microk8s.config > /include/.kube/config
 ```
+</TabItem>
+</Tabs>
 
-## Step 3: Run your Container
+## Step 3: Run your container
 
 To use the KubernetesPodOperator, you must define the configuration for your pod, including its namespace and runtime image, when you create an instance of the operator. This sample syntax runs the `hello-world` Docker image in a different namespace based on whether you're running the DAG locally or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
 
@@ -120,19 +151,32 @@ with dag:
     )
 
 ```
-
-## Step 4: View Kubernetes Logs
+## Step 4: View Kubernetes logs
 
 Optional. Review the logs for any pods that were created by the operator for issues.
+
+<Tabs
+    defaultValue="windows and mac"
+    values={[
+        {label: 'Windows and Mac', value: 'windows and mac'},
+        {label: 'Linux', value: 'linux'},
+    ]}>
+<TabItem value="windows and mac">
 
 ### Windows and Mac
 
 Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `docker-for-desktop` runs pods in the `default` namespace.
 
+</TabItem>
+<TabItem value="linux">
+
 ### Linux
 
 Run `microk8s.kubectl get pods -n $namespace` or `microk8s.kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `microk8s` runs pods in the `default` namespace.
 
-## Next Steps ##
+</TabItem>
+</Tabs>
+
+## Next Steps
 
 - [Run the KubernetesPodOperator on Astronomer Software](kubepodoperator.md)
