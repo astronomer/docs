@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Disaster Recovery'
-title: 'Disaster Recovery'
+sidebar_label: 'Disaster recovery'
+title: 'Disaster recovery'
 id: disaster-recovery
 description: Learn how Astronomer handles disaster recovery scenarios and how to best prepare your environment.
 ---

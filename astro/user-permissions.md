@@ -1,6 +1,6 @@
 ---
 sidebar_label: "User permissions"
-title: "Manage User permissions in Astro"
+title: "Manage user permissions in Astro"
 id: user-permissions
 description: Learn about Astronomer's RBAC system and how to assign roles to users.
 ---

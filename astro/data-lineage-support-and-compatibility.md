@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Data lineage Support and Compatibility'
-title: "Data lineage Support and Compatibility Reference"
+sidebar_label: 'Data lineage support and compatibility'
+title: "Data lineage support and compatibility reference"
 id: data-lineage-support-and-compatibility
 description: A compatibility reference guide for Astro lineage's Airflow support.
 ---
