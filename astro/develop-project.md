@@ -181,7 +181,7 @@ To confirm that your helper functions were successfully installed:
     $ docker exec -it <scheduler-container-id> /bin/bash
     bash-4.4$ ls
     Dockerfile  airflow_settings.yaml  helper_functions  logs  plugins  unittests.cfg
-    dags  include  packages.txt  requirements.txt
+    airflow.cfg dags  include  packages.txt  requirements.txt
     ```
 
 ## Configure `airflow_settings.yaml` (Local Development Only)
@@ -309,7 +309,7 @@ These commands output all environment variables that are running locally. This i
 
 :::info
 
-For local environments, Astro CLI generates an `airflow.cfg` file at runtime based on the environment variables you set in your `.env` file. You can't create or modify `airflow.cfg` in an Astro project.
+For local environments, the Astro CLI generates an `airflow.cfg` file at runtime based on the environment variables you set in your `.env` file. You can't create or modify `airflow.cfg` in an Astro project.
 
 To view your environment variables in the context of the generated Airflow configuration, run:
 
