@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Data lineage'
-title: "Data lineage on Astro"
+sidebar_label: 'Lineage UI'
+title: "View lineage on Astro"
 id: data-lineage
 description: "Track and visualize the movement of your data with data lineage on Astro"
 ---

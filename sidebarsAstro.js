@@ -64,7 +64,14 @@ module.exports = {
       items: [
         'view-logs',
         'deployment-metrics',
-        'data-lineage',
+        {
+          type: 'category',
+          label: 'Data lineage',
+          items: [
+            'set-up-data-lineage',
+            'data-lineage',
+          ],
+        },
         'airflow-alerts',
       ],
     },
@@ -81,7 +88,6 @@ module.exports = {
           ],
         },
         'manage-workspaces',
-        'set-up-data-lineage',
         {
           type: 'category',
           label: 'User access',
