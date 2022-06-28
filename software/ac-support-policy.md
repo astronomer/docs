@@ -1,6 +1,6 @@
 ---
-title: "Astronomer Certified Versioning and Support"
-sidebar_label: "Versioning and Support Policy"
+title: "Astronomer Certified versioning and support"
+sidebar_label: "Versioning and support policy"
 id: ac-support-policy
 description: Versioning and lifecycle policy for Astronomer Certified, our Apache Airflow offering for Astronomer Software.
 ---
@@ -9,7 +9,7 @@ description: Versioning and lifecycle policy for Astronomer Certified, our Apach
 
 Astronomer Certified (AC) is a Debian-based, production-ready distribution of Apache Airflow that mirrors the open source project and undergoes additional levels of rigorous testing conducted by our team. New versions of AC are issued regularly based on Apache Airflow's community release schedule.
 
-This Docker image is hosted on [Astronomer's Docker Registry](https://quay.io/repository/astronomer/ap-airflow?tab=tags) and allows you to run Airflow on Astronomer. All projects require that you specify an AC image in your `Dockerfile`.
+This Docker image is hosted on [Astronomer's Docker registry](https://quay.io/repository/astronomer/ap-airflow?tab=tags) and allows you to run Airflow on Astronomer. All projects require that you specify an AC image in your `Dockerfile`.
 
 This document provides information on the following:
 
@@ -17,7 +17,7 @@ This document provides information on the following:
 - Which versions of AC are currently available
 - The maintenance schedule and end-of-maintenance date for all versions
 
-For guidelines on how to upgrade, read [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md). For information about Astro Runtime's support policy, see [Runtime Release and Lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
+For guidelines on how to upgrade, read [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md). For information about Astro Runtime's support policy, see [Runtime release and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
 
 ## Release Channels
 
@@ -78,7 +78,7 @@ Earlier versions of Astronomer Certified might use different formatting in their
 
 For the smoothest, out-of-the-box Airflow experience, we strongly recommend and default to `buster-onbuild` images in your project's `Dockerfile`. These images incorporate Docker ONBUILD commands to copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component.
 
-For complex use cases that require customizing AC base image, read [Customize your Airflow Image on Astronomer](customize-image.md).
+For complex use cases that require customizing AC base image, read [Customize your Airflow image on Astronomer](customize-image.md).
 
 ## Backport Policy for Bug and Security Fixes
 
@@ -103,7 +103,7 @@ Within the maintenance window of each Astronomer Certified version, the followin
 
 - A Python wheel and set of Docker images corresponding to that version are available for download via [Quay.io](http://quay.io), PyPi and [Downloads](https://www.astronomer.io/downloads).
 - Astronomer will regularly publish hotfixes for bug or security issues identified as high priority.
-- The Astronomer Support team will offer support for paying customers running a supported version of AC via the [Astronomer Support Portal](https://support.astronomer.io).
+- The Astronomer Support team will offer support for paying customers running a supported version of AC via the [Astronomer support portal](https://support.astronomer.io).
 - A user can create a new Airflow Deployment via the Software UI, CLI, or API with any supported version of AC.
 
 When the maintenance window for a version of AC ends, the following is true:
@@ -141,4 +141,4 @@ The following tables contain the exact lifecycle for each published version of A
 | [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)       | May 21, 2021   | November 2022           |
 | [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2023            |
 
-If you have any questions or concerns, reach out to [Astronomer Support](https://support.astronomer.io).
+If you have any questions or concerns, reach out to [Astronomer support](https://support.astronomer.io).

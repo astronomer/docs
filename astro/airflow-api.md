@@ -1,8 +1,8 @@
 ---
-title: 'Make Requests to the Airflow REST API'
+title: 'Make requests to the Airflow REST API'
 sidebar_label: 'Airflow REST API'
 id: airflow-api
-description: Make requests to the Airflow REST API with Astro Deployment API Keys.
+description: Make requests to the Airflow REST API with Astro Deployment API keys.
 ---
 
 ## Overview
@@ -19,7 +19,7 @@ To make an Airflow API request, you need:
 - A Deployment on Astro.
 - [cURL](https://curl.se/).
 
-## Step 1: Retrieve an Access Token and Deployment URL
+## Step 1: Retrieve an access token and Deployment URL
 
 Calling the Airflow REST API for a Deployment requires:
 
@@ -48,9 +48,9 @@ If you have an automated [CI/CD process](ci-cd.md) configured, we recommend incl
 
 To retrieve your Deployment URL, open your Deployment in the Cloud UI and click **Open Airflow**. The Deployment URL is the URL for the Airflow UI homepage up until `/home`. It includes the name of your Organization and a short Deployment ID. For example, a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany` would have a Deployment URL of `https://mycompany.astronomer.run/dhbhijp0`.
 
-## Step 2: Make an Airflow API Request
+## Step 2: Make an Airflow API request
 
-You can now execute requests against any endpoint that is listed in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+You can now execute requests against any endpoint that is listed in the [Airflow Rest API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 To make a request based on Airflow documentation, make sure to:
 
 - Replace `https://airflow.apache.org` with your Deployment URL
@@ -86,7 +86,7 @@ print(response.json())
 # Prints data about all DAGs in your Deployment
 ```
 
-### Trigger a DAG Run
+### Trigger a DAG run
 
 You can trigger a DAG run by executing a `POST` request to Airflow's [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
 
@@ -118,10 +118,10 @@ response = requests.post(
     data='{}'
 )
 print(response.json())
-# Prints metadata of the DAG Run that was just triggered
+# Prints metadata of the DAG run that was just triggered
 ```
 
-### Trigger a DAG Run by Date
+### Trigger a DAG run by date
 
 You can also specify a `logical_date` at the time in which you wish to trigger the DAG run by passing the `logical_date` with the desired timestamp with the request's `data` field. The timestamp string is expressed in UTC and must be specified in the format `"YYYY-MM-DDTHH:MM:SSZ"`, where:
 
@@ -160,7 +160,7 @@ response = requests.post(
     data='{"logical_date": "2021-11-16T11:34:01Z"}'
 )
 print(response.json())
-# Prints metadata of the DAG Run that was just triggered
+# Prints metadata of the DAG run that was just triggered
 ```
 
 ### Pause a DAG

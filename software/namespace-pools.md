@@ -1,17 +1,17 @@
 ---
-title: "Configure a Kubernetes Namespace Pool for Astronomer Software"
-sidebar_label: "Configure Namespace Pools"
+title: "Configure a Kubernetes namespace pool for Astronomer Software"
+sidebar_label: "Configure namespace pools"
 id: namespace-pools
 description: Manually create Kubernetes namespaces for new Deployments.
 ---
 
 ## Overview
 
-Every Deployment within your Astronomer Software installation requires an individual [Kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). You can configure a pool of pre-created namespaces to limit Astronomer Software access to these namespaces. 
+Every Deployment within your Astronomer Software installation requires an individual [Kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). You can configure a pool of pre-created namespaces to limit Astronomer Software access to these namespaces.
 
 When you configure a pool of pre-created namespaces, Astronomer users are required to select a namespace from the pool whenever they create a new Deployment. Once the Deployment is created, its corresponding namespace is no longer available. If a Deployment is deleted, its namespace is returned to the pool and is available.
 
-### Benefits of Pre-Created Namespaces
+### Benefits of pre-created namespaces
 
 A pre-created namespace pool provides the following benefits:
 
@@ -42,7 +42,7 @@ To create a namespace pool you have the following options:
 - [Helm](https://helm.sh/).
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) with access to the cluster hosting Astronomer Software.
 
-## Option 1: Use the Astronomer Helm Chart
+## Option 1: Use the Astronomer Helm chart
 
 1. Set the following configuration in your `config.yaml` file:
 
@@ -61,17 +61,17 @@ global:
           - <your-namespace-2>
 ```
 
-2. Save the changes in your `config.yaml` file and update your Astronomer Software. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+2. Save the changes in your `config.yaml` file and update your Astronomer Software. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
 Based on the namespace names that you specified, Astronomer creates the necessary namespaces and Kubernetes resources. These resources have permissions scoped appropriately for most use-cases.
 
 Once you apply your configuration, you should be able to create new Deployments using a namespace from your pre-created namespace pool. You should also be able to see the namespaces you specified inside your cluster resources.
 
-## Option 2: Manually Create Namespaces, Roles, and Rolebindings
+## Option 2: Manually create namespaces, roles, and rolebindings
 
 Complete this setup if you want to further limit the namespace permissions that Astronomer provides by default.
 
-### Step 1: Configure Namespaces
+### Step 1: Configure namespaces
 
 For every namespace you want to add to a pool, you must create a [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), [role](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#role-and-clusterrole), and [rolebinding](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#rolebinding-and-clusterrolebinding) for Astronomer Software to access the namespace with. The `rolebinding` must be scoped to the `astronomer-commander` service account and the `namespace` you are creating.
 
@@ -214,7 +214,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
 3. In the Kubernetes cluster hosting Astronomer Software, run `kubectl apply -f commander.yaml`.
 4. Optional. Repeat steps 1-3 to add more namespaces to your pool.
 
-### Step 2: Configure a Namespace Pool in Astronomer
+### Step 2: Configure a namespace pool in Astronomer
 
 1. Set the following values in your `config.yaml` file, making sure to specify all of the namespaces you created in the `namespaces.names` object:
 
@@ -234,19 +234,19 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
               - <your-namespace-2>
     ```
 
-2. Save the changes in your `config.yaml` and update Astronomer Software. See [Apply a Config Change](apply-platform-config.md).
+2. Save the changes in your `config.yaml` and update Astronomer Software. See [Apply a config change](apply-platform-config.md).
 
-## Creating Deployments in Pre-Created Namespaces
+## Creating Deployments in pre-created namespaces
 
 After enabling the pre-created namespace pool, the namespaces you registered now appear as options when you create a new Deployment with the Software UI.
 
-![Kubernetes Namespace option in the UI](https://assets2.astronomer.io/main/docs/astronomer-ui/kubernetes-namespace.png)
+![Kubernetes namespace option in the UI](https://assets2.astronomer.io/main/docs/astronomer-ui/kubernetes-namespace.png)
 
 When you create Deployments with the CLI, you are prompted to select one of the available namespaces for your new Deployment.
 
 If no namespaces are available, an error message appears when you create new Deployments in the Software UI and CLI. Delete the Deployment associated with the namespace to return the namespace to the pool.
 
-## Advanced Settings
+## Advanced settings
 
 If your namespace configurations require more granularity, use the following settings in your `config.yaml` file.
 
@@ -294,7 +294,7 @@ astronomer:
 
 ## Troubleshooting
 
-### My Deployment Is in an Unknown State
+### My Deployment is in an unknown state
 
 If a Deployment isn't active, check the Commander pods to confirm the Deployment commands have successfully executed. When using a pre-created namespace pool with scoped roles, it’s possible that the `astronomer-commander` service account doesn't have the permissions necessary to perform a required action. When Commander is successful, the following notification appears:
 
@@ -311,6 +311,6 @@ time="2022-02-17T22:52:40Z" level=error msg="serviceaccounts is forbidden: User 
 
 This error shows that the service accounts couldn't be created in the pre-created namespaces and the roles need to be updated.
 
-### My Namespace is not Returning to the Pool
+### My namespace is not returning to the pool
 
 If you're not using hard deletion, it can take several days for pre-created namespaces to become available after the associated Deployment is deleted. To enable hard deletes, see [Delete a Deployment](configure-deployment.md#delete-a-deployment).

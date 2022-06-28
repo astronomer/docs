@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Add a User'
-title: 'Add a User to Astro'
+sidebar_label: 'Add a user'
+title: 'Add a user to Astro'
 id: add-user
 description: Add a user to a either a Workspace or an Organization on Astro.
 ---
@@ -16,7 +16,7 @@ To add a user to Astro, you must have at least one of the following permissions:
 - To invite a user to your Organization, you need Organization Owner permissions.
 - To invite a user to a specific Workspace, you need Workspace Admin permissions for that Workspace. The user must also already be a part of the Organization that hosts the Workspace.
 
-## Add a User to an Organization
+## Add a user to an Organization
 
 To add a user to an Organization:
 
@@ -31,7 +31,7 @@ To add a user to an Organization:
 
 Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Organization via email and either create an Astro account or log in before they can access the Organization.
 
-## Add a User to a Workspace
+## Add a user to a Workspace
 
 To add an existing user from an Organization to a Workspace:
 
@@ -41,7 +41,7 @@ To add an existing user from an Organization to a Workspace:
     ![Workspace user invite button](/img/docs/add-user.png)
 
 3. Enter the user's email.
-4. Set a Workspace role for the user. For a list of available roles and their permissions, see [Workspace Roles](user-permissions.md#workspace-roles)
+4. Set a Workspace role for the user. For a list of available roles and their permissions, see [Workspace roles](user-permissions.md#workspace-roles)
 5. Click **Add member**.
 
 Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Workspace via email and log in before they can access the Workspace.

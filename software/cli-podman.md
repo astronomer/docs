@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Run the CLI with Podman'
-title: 'Run the Astro CLI in Podman Containers'
+title: 'Run the Astro CLI in Podman containers'
 id: cli-podman
 description: Use Podman instead of Docker to run specific Astro CLI commands.
 ---
@@ -22,7 +22,7 @@ To complete this setup, you need:
 - Podman 3.1.0+ installed on your local machine.
 - The Astro CLI.
 
-## Linux Setup
+## Linux setup
 
 1. Run the following command to start the Podman API service:
 
@@ -48,7 +48,7 @@ To complete this setup, you need:
 
 4. Run `astro dev start` to confirm that Podman is running the containers for your local Airflow environment.
 
-## Mac Setup
+## Mac setup
 
 To set up Podman for an Astro project:
 
@@ -147,7 +147,7 @@ To set up Podman for an Astro project:
 
 You can now run the Astro CLI in Podman containers for this Astro project.
 
-## Switch Between Using Docker and Podman
+## Switch between using Docker and Podman
 
 Once you set up the Astro CLI to use Podman on your local machine, the CLI automatically runs Podman containers whenever you run a command that requires them. To revert to the default behavior and run CLI commands in Docker containers, run the following command:
 

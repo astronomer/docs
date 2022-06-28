@@ -1,8 +1,8 @@
 ---
-title: 'Renew TLS Certificates on Astronomer Software'
-sidebar_label: 'Renew a TLS Certificate'
+title: 'Renew TLS certificates on Astronomer Software'
+sidebar_label: 'Renew a TLS certificate'
 id: renew-tls-cert
-description: Update and auto-renew your organization's TLS Certificate for Astronomer Software.
+description: Update and auto-renew your organization's TLS certificate for Astronomer Software.
 ---
 
 ## Overview
@@ -12,9 +12,9 @@ Once you set up a TLS certificate for Astronomer, you'll need to establish a pro
 * **Automatic renewal**: Let's Encrypt provides a service that automatically renews your TLS certificate every 90 days. We recommend this option for smaller organizations where the DNS administrator and cluster administrator are either the same person or on the same team.
 * **Manual renewal**: Manual renewal works similarly to the initial certificate creation process, except that you replace your existing certificate by creating a new certificate. We recommend this method for large organizations that have their own processes for issuing certificates.
 
-## Automatically Renew TLS Certificates Using Let's Encrypt
+## Automatically renew TLS certificates Using Let's Encrypt
 
-[Let's Encrypt](https://letsencrypt.org/) is a Certificate Authority that provides free, 90-day certificates using the ACME protocol. You can use the Cert Manager project for Kubernetes to automatically renew certificates.
+[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that provides free, 90-day certificates using the ACME protocol. You can use the Cert Manager project for Kubernetes to automatically renew certificates.
 
 1. Install the Kubernetes Cert Manager by following [the official installation guide](https://cert-manager.io/docs/installation/).
 
@@ -119,7 +119,7 @@ Once you set up a TLS certificate for Astronomer, you'll need to establish a pro
 
 6. Note your certificate name for when you create a Kubernetes TLS secret and push it to your Software configuration as described in the Software installation guide ([AWS](install-aws-standard.md#step-5-create-a-kubernetes-tls-secret)/[GCP](install-gcp-standard.md#step-5-create-a-kubernetes-tls-secret)/[AKS](install-azure-standard.md/#step-5-create-a-kubernetes-tls-secret)).
 
-## Manually Renew TLS Certificates
+## Manually renew TLS certificates
 
 Larger organizations with dedicated security teams will likely have their own processes for requesting and renewing TLS certificates. Regardless, there are specific steps you have to complete for Astronomer when renewing TLS certificates:
 

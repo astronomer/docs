@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Logging'
-title: 'Kibana Logging on Astronomer Software'
+title: 'Kibana logging on Astronomer Software'
 id: kibana-logging
 description: Use Kibana to monitor platform-wide Airflow logs from Astronomer Software.
 ---

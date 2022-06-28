@@ -1,6 +1,6 @@
 ---
-title: "Install Astronomer Software in an Airgapped Environment"
-sidebar_label: "Install in an Airgapped Environment"
+title: "Install Astronomer Software in an airgapped environment"
+sidebar_label: "Install in an airgapped environment"
 description: "Infrastructure considerations and Helm configuration to install Astronomer in an airgapped environment"
 id: install-airgapped
 ---
@@ -29,7 +29,7 @@ To complete this setup, you need:
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
 - A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
 
-## Step 1: Configure a Private Docker Registry
+## Step 1: Configure a private Docker registry
 
 Astronomer's Docker images are hosted on a public registry which isn't accessible from an airgapped network. Therefore, these images must be hosted on a Docker registry accessible from within your own network. Every major cloud platform provides its own managed Docker registry service that can be used for this step:
 
@@ -39,7 +39,7 @@ Astronomer's Docker images are hosted on a public registry which isn't accessibl
 
 You can also set up your own registry using a dedicated registry service such as [JFrog Artifactory](https://jfrog.com/artifactory/). Regardless of which service you use, follow the product documentation to configure a private registry according to your organization's security requirements.
 
-## Step 2: Fetch Images from Astronomer's Helm Template
+## Step 2: Fetch images from Astronomer's Helm template
 <!--Version-specific-->
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
@@ -60,7 +60,7 @@ These commands generate a list of images required for your version of Astronomer
 
 > **Note:** If you have already enabled/disabled Astronomer platform components in your `config.yaml`, you can pass `-f/--values config.yaml` to `helm template` to print a list specific to your `config.yaml` configuration.
 
-## Step 3: Add Images to Your config.yaml File
+## Step 3: Add images to your config.yaml file
 
 Regardless of whether you choose to mirror or manually pull/push images to your private registry, the returned images and/or tags must be made accessible within your network.
 
@@ -103,7 +103,7 @@ astronomer:
                   repository: 012345678910.dkr.ecr.us-east-1.amazonaws.com/myrepo/astronomer/ap-pgbouncer-exporter
 ```
 
-## Step 4: Fetch Airflow Helm Charts
+## Step 4: Fetch Airflow Helm charts
 
 There are two Helm charts required for Astronomer:
 
@@ -140,7 +140,7 @@ If you configure both options in your `config.yaml` file, then `astronomer.comma
 
 :::
 
-## Step 5: Fetch Airflow Updates
+## Step 5: Fetch Airflow updates
 
 By default, Astronomer checks for Airflow updates once a day at midnight by querying `https://updates.astronomer.io/astronomer-certified`, which returns a JSON file with version details. However, this URL is not accessible in an airgapped environment. There are several options for making these updates accessible in an airgapped environment:
 
@@ -152,7 +152,7 @@ By default, Astronomer checks for Airflow updates once a day at midnight by quer
 
 This setup assumes that the updates JSON will be manually downloaded and added to your environment. For guidance on how to automate this process, reach out to your Astronomer contact.
 
-### Exposing Airflow updates via an Nginx endpoint
+### Exposing Airflow updates using an Nginx endpoint
 
 The following topic provides an example implementation of hosting the Airflow updates JSON files in your airgapped environment and accessing them via an Nginx endpoint. Depending on your organization's platform and use cases, your own installation might vary from this setup.
 
@@ -282,7 +282,7 @@ astronomer:
       url: http://astronomer-releases.astronomer.svc.cluster.local/astronomer-runtime
 ```
 
-## Step 6: Install Astronomer via Helm
+## Step 6: Install Astronomer using Helm
 
 Before completing this step, double-check that the following statements are true:
 
