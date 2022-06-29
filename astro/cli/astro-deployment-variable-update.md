@@ -14,7 +14,7 @@ For a given Deployment on Astro, use `astro deployment variable update` to updat
 
 If you choose to specify `--key` and `--value` instead of loading a file, you can only update one environment variable at a time.
 
-This command is functionally identical to editing and saving the `value` of an existing environment variable via the Cloud UI. For more information on environment variables, see [Set Environment Variables on Astro](environment-variables.md).
+This command is functionally identical to editing and saving the `value` of an existing environment variable via the Cloud UI. For more information on environment variables, see [Set environment variables on Astro](environment-variables.md).
 
 ## Usage
 

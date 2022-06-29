@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Configure NFS Deploys'
-title: 'Configure NFS Code Deploys'
+sidebar_label: 'Configure NFS deploys'
+title: 'Configure NFS code deploys'
 id: deploy-nfs
 description: Push DAGs to an Airflow Deployment on Astronomer Software using an external NFS volume.
 ---
@@ -13,11 +13,11 @@ Unlike [deploying DAGs via the Astro CLI](deploy-cli.md), deploying DAGs to an N
 
 This guide provides the necessary setup for connecting an NFS volume to Astronomer as a DAG deploy option. Some considerations before completing this setup:
 
-- You can configure NFS volumes only to deploy DAGs. To push dependencies or other requirements to your Airflow Deployment, you'll need to update your `requirements.txt` and `packages.txt` files and deploy using the [Astro CLI](deploy-cli.md) or [CI/CD](ci-cd.md). For more information on pushing code to your Airflow environment, see [Customize Images](customize-image.md).
+- You can configure NFS volumes only to deploy DAGs. To push dependencies or other requirements to your Airflow Deployment, you'll need to update your `requirements.txt` and `packages.txt` files and deploy using the [Astro CLI](deploy-cli.md) or [CI/CD](ci-cd.md). For more information on pushing code to your Airflow environment, see [Customize images](customize-image.md).
 - If you configure an NFS volume for an Airflow Deployment, you can't use the Astro CLI or an Astronomer service account to deploy DAGs . These options are available only for Deployments configured with an image-based deploy mechanism.
 - You can configure NFS volumes only for Airflow Deployments running Airflow 2.0+.
 
-## Enable NFS Volume Storage
+## Enable NFS volume storage
 
 NFS volume deploys must be explicitly enabled on Astronomer by a System Admin. To enable it, update your `config.yaml` file with the following values:
 
@@ -29,9 +29,9 @@ houston:
         nfsMountDagDeployment: true
 ```
 
-Once you have saved the file, push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md). This process needs to be completed only once per Software installation.
+Once you have saved the file, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md). This process needs to be completed only once per Software installation.
 
-## Provision an NFS Volume
+## Provision an NFS volume
 
 While you can use any NFS volume for this step, we recommend using your cloud provider's primary NFS volume solution:
 
@@ -44,7 +44,7 @@ For each NFS volume you provision for DAG deploys, you need to configure:
 * A directory for DAGs.
 * Read access for a user with GID `50000` and UID `50000`. For an example setup of this, read [Configuring Ip-based access control](https://cloud.google.com/filestore/docs/creating-instances#configuring_ip-based_access_control) in Google Cloud's documentation.
 
-## Add an NFS Volume to a Deployment
+## Add an NFS volume to a Deployment
 
 Workspace editors can configure a new or existing Airflow Deployment to use a provisioned NFS volume for DAG deploys. From there, any member of your organization with write permissions to the NFS volume can deploy DAGs to the Deployment. To do so:
 

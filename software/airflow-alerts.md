@@ -1,8 +1,8 @@
 ---
-sidebar_label: 'Airflow Alerts'
-title: 'Configure Airflow Alerts on Astronomer Software'
+sidebar_label: 'Airflow alerts'
+title: 'Configure Airflow alerts on Astronomer Software'
 id: airflow-alerts
-description: Configure Email Alerts on Astronomer Software to monitor the health of your Airflow Deployment and the status of your tasks.
+description: Configure email alerts on Astronomer Software to monitor the health of your Airflow Deployment and the status of your tasks.
 ---
 
 ## Overview
@@ -10,12 +10,12 @@ description: Configure Email Alerts on Astronomer Software to monitor the health
 Whether you're just starting to use Apache Airflow or your team is running it at scale, incorporating an alerting framework is critical to the health of your data. On Astronomer Software, users have access to three types of alerting solutions:
 
 - Airflow task and DAG-level alerts, which notify you via email when an Airflow task or DAG fails, succeeds, or retries.
-- Deployment-level alerts, which notify you when the health of an Airflow Deployment is low or if any of Airflow's underlying components are underperforming, including the Airflow Scheduler.
+- Deployment-level alerts, which notify you when the health of an Airflow Deployment is low or if any of Airflow's underlying components are underperforming, including the Airflow scheduler.
 - Platform-level alerts, which notify you when a component of your Astronomer platform is unhealthy, such as Elasticsearch, Astronomer's Houston API, or your Docker Registry.
 
 This guide focuses on configuring task and DAG-level alerts. For information on configuring platform and Deployment-level alerts, read [Alerting on Astronomer Software](platform-alerts.md).
 
-## Subscribe to Task-Level Alerts
+## Subscribe to task-level alerts
 
 As an Airflow user, you can configure event-based email alerts directly in your DAG code by leveraging Airflow's [email util](https://github.com/apache/airflow/blob/master/airflow/utils/email.py). Depending on your use case, you may choose to be notified if a particular task or DAG fails, succeeds, retries, etc. On Astronomer, setting up task-level alerts requires configuring an SMTP service to handle the delivery of these emails.
 
@@ -26,7 +26,7 @@ If your team isn't already using an SMTP service, we recommend the following:
 
 Step-by-step instructions on how to integrate these two services with Astronomer are provided below, but you can use any SMTP service for this purpose.
 
-> **Note:** By default, email alerts for process failures are sent whenever individual tasks fail. To receive only 1 email per DAG failure, refer to the Limit Alerts to the DAG Level topic below. For more information and best practices on Airflow alerts, read [Error Notifications in Airflow](https://www.astronomer.io/guides/error-notifications-in-airflow/).
+> **Note:** By default, email alerts for process failures are sent whenever individual tasks fail. To receive only 1 email per DAG failure, refer to the "Limit alerts to the DAG level" topic below. For more information and best practices on Airflow alerts, read [Error Notifications in Airflow](https://www.astronomer.io/guides/error-notifications-in-airflow/).
 
 ### Integrate SendGrid with Astronomer
 
@@ -50,7 +50,7 @@ To get started with SendGrid:
 
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.sendgrid.utils.emailer.send_email`
-    
+
     For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
 
 7. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
@@ -89,7 +89,7 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.amazon.aws.utils.emailer.send_email`
-    
+
     For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-aws-ses).
 
 6. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
@@ -110,7 +110,7 @@ This setup requires an AWS account and use of the [AWS Management Console](https
     'email': ['<recipient-address>'],
     ```
 
-## Limit Alerts to the DAG Level
+## Limit alerts to the DAG level
 
 By default, email alerts configured via the `email_on_failure` param ([source](https://github.com/apache/airflow/blob/master/airflow/models/baseoperator.py)) are handled at the task level. If some number of your tasks fail, you'll receive an individual email for each of those failures.
 

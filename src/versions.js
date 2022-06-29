@@ -1,5 +1,5 @@
 export const siteVariables = {
-  cliVersion: '1.1.0',
+  cliVersion: '1.2.0',
   runtimeVersion: '5.0.4',
   // Hacky variable so that we can use env var formatting in CI/CD templates
   deploymentid: '${ASTRONOMER_DEPLOYMENT_ID}',

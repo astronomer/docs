@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Get Started',
+      label: 'Get started',
       items: [
         'create-project',
         'create-deployment',
@@ -85,7 +85,7 @@ module.exports = {
         'set-up-data-lineage',
         {
           type: 'category',
-          label: 'User Access',
+          label: 'User access',
           items: [
             'add-user',
             'user-permissions',
@@ -94,7 +94,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Manage Clusters',
+          label: 'Manage clusters',
           items: [
             'create-cluster',
             'modify-cluster',
@@ -105,7 +105,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Release Notes',
+      label: 'Release notes',
       items: [
         'release-notes',
         'runtime-release-notes',
@@ -120,7 +120,7 @@ module.exports = {
         'astro-support',
         {
           type: 'category',
-          label: 'Cloud Configuration Reference',
+          label: 'Cloud configuration reference',
           items: [
             'resource-reference-aws',
             'resource-reference-gcp',
@@ -130,7 +130,7 @@ module.exports = {
         'data-plane-activation',
         {
           type: 'category',
-          label: 'Data Lineage',
+          label: 'Data lineage',
           items: [
             'data-lineage-support-and-compatibility',
             'data-lineage-concepts',],
@@ -153,12 +153,12 @@ module.exports = {
   cli: [
       {
         type: 'doc',
-        label: 'CLI Overview',
+        label: 'CLI overview',
         id: 'cli/overview'
       },
       {
         type: 'doc',
-        label: 'Get Started',
+        label: 'Get started',
         id: 'cli/get-started'
       },
     {
@@ -168,12 +168,12 @@ module.exports = {
     },
     {
       type: 'doc',
-      label: 'Release Notes',
+      label: 'Release notes',
       id: 'cli/release-notes'
     },
     {
     type: 'category',
-    label: 'Command Reference',
+    label: 'Command reference',
     link: { type: 'doc', id: 'cli/reference' },
     items: [
       'cli/astro-login',

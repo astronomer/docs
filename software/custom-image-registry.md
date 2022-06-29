@@ -1,6 +1,6 @@
 ---
-title: 'Configure a Custom Registry for Deployment Images'
-sidebar_label: 'Configure a Custom Image Registry'
+title: 'Configure a custom registry for Deployment images'
+sidebar_label: 'Configure a custom image registry'
 id: custom-image-registry
 description: Replace Astronomer's built-in container image registry with your own.
 ---
@@ -16,7 +16,7 @@ Using the Astronomer internal registry is often the best option for organization
 
 If your organization cannot use the default Astronomer internal registry, you can configure a custom container image registry. A custom container image registry is recommended for mature organizations who require additional control for security and governance reasons. Your organization can use a custom container registry to scan images for CVEs, malicious code, and unapproved Python and OS-level packages contained in the Docker images that are generated during the code deploy process.
 
-## Implementation Considerations
+## Implementation considerations
 
 Deploying code changes to a custom image registry requires triggering a GraphQL mutation to provide a Deployment release name, image name, and Airflow version to the registry. Because this process is difficult to manually trigger, Astronomer recommends configuring a custom image registry only if your DAG authors can deploy code changes using continuous integration and continuous delivery (CI/CD) pipelines. In this implementation, you use your CI/CD tool to:
 
@@ -83,7 +83,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials.
 
     ```bash
@@ -100,7 +100,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
 <TabItem value="airgapped">
 
-### Air-Gapped
+### Airgapped
 
 1. Create a secret for the container repository credentials in your Astronomer namespace:
 
@@ -155,7 +155,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials. If you're using different registries for each Deployment, you can skip this step.
 
     ```bash
@@ -166,7 +166,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 </TabItem>
 </Tabs>
 
-## Push Code to a Custom Registry
+## Push code to a custom registry
 
 After pushing images for your Astro project to your private registry, you can run a GraphQL query to push these images from your registry to Astronomer Software. At a minimum, your query has to include the following:
 

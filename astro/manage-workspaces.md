@@ -30,8 +30,8 @@ During this initial setup, you can configure a Workspace's name and description.
 To to enter your Workspace, click the Workspace in the **Overview** tab. When you click into a Workspace and see a list of that Workspace's Deployments, you are in the **Workspace view** of the Cloud UI. The Workspace view contains several pages for managing your Workspace which are accessible from a sidebar on the left of the screen:
 
 - **Deployments:** Create new Deployments and see key metrics about existing Deployments in the Workspace. For more information, see [Create a Deployment](create-deployment.md).
-- **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment Metrics](deployment-metrics.md#dag-runs).
-- **Logs:** View Scheduler logs for Deployments in the Workspace. For more information, see [View logs](view-logs.md).
+- **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment metrics](deployment-metrics.md#dag-runs).
+- **Logs:** View scheduler logs for Deployments in the Workspace. For more information, see [View logs](view-logs.md).
 - **Access:** Manage user access to the Workspace.
 - **Workspace Settings:** Update or delete Workspace details.
 
@@ -43,9 +43,9 @@ To add a user to a Workspace:
 
 1. In the Workspace view, go to the **Access** page.
 2. Click **Add member**.
-3. Specify the user's email and role within the Workspace. For more information about Workspace roles and permissions, see [User Permissions](user-permissions.md).
+3. Specify the user's email and role within the Workspace. For more information about Workspace roles and permissions, see [User permissions](user-permissions.md).
 
-Once added, the user will see the Workspace listed on the **Overview** page of the Cloud UI. They will also appear as an active Workspace member in the **Access** tab. For more information about inviting users to Astronomer, see [Add User](add-user.md).
+Once added, the user will see the Workspace listed on the **Overview** page of the Cloud UI. They will also appear as an active Workspace member in the **Access** tab. For more information about inviting users to Astronomer, see [Add a user](add-user.md).
 
 ### Update or Remove a Workspace User
 

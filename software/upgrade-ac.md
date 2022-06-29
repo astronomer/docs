@@ -1,5 +1,5 @@
 ---
-title: 'Upgrade an Astronomer Certified Airflow Environment'
+title: 'Upgrade an Astronomer Certified Airflow environment'
 sidebar_label: 'Upgrade Astronomer Certified'
 id: upgrade-ac
 description: Upgrade your Apache Airflow environment by installing the latest version of Astronomer Certified.
@@ -31,17 +31,17 @@ If you're upgrading an Astronomer Certified environment running on Docker, all y
 
     If you're developing locally, make sure to save your changes before proceeding.
 
-4. If you are using the Astro CLI, run `astro dev stop` followed by `astro dev start` to restart your 3 Airflow components (Scheduler, Webserver, and Database).
+4. If you are using the Astro CLI, run `astro dev stop` followed by `astro dev start` to restart your 3 Airflow components (scheduler, webserver, and database).
 
     If you aren't using the Astro CLI, you can manually stop all Airflow containers using `docker-compose down --volumes --rmi all`.
 
 5. Open the Airflow UI and click **About** > **Version** to confirm that the upgrade was successful. If you're developing locally with the Astro CLI, the Airflow UI is available at `http://localhost:8080/`.
 
-## Upgrade the Astronomer Certified Python Wheel
+## Upgrade the Astronomer Certified Python wheel
 
 Before upgrading, make sure both of the following are true:
 
-* Your Airflow metadata DB is backed up.
+* Your Airflow metadata database is backed up.
 * All DAGs have been paused and no tasks are running.
 
 Then, for each machine running Airflow:
@@ -58,7 +58,7 @@ Then, for each machine running Airflow:
     pip install --extra-index-url=https://pip.astronomer.io/simple/ 'astronomer-certified[postgres]==2.1.0.*' --upgrade
     ```
 
-2. Upgrade your metadata DB using the following command:
+2. Upgrade your metadata database using the following command:
 
     ```sh
     airflow upgradedb
@@ -68,4 +68,4 @@ Then, for each machine running Airflow:
 
 3. In a web browser, access the Airflow UI at http://localhost:8080 and click **About** > **Version**. Once there, you should see the correct Airflow version listed.
 
-    > **Note:** The URL listed above assumes your Webserver is at port 8080 (default). To change that default, read [this forum post](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
+    > **Note:** The URL listed above assumes your webserver is at port 8080 (default). To change that default, read [this forum post](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).

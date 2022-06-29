@@ -23,7 +23,7 @@ For example, you can:
 
 Anything you can do via the Software UI, you can do programmatically via Astronomer's Houston API. Read below for guidelines.
 
-## Getting Started
+## Getting started
 
 Astronomer's Houston API is made available via a [GraphQL Playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/), "a graphical, interative, in-browser GraphQL IDE, created by [Prisma](https://www.prisma.io/) and based on GraphiQL." [GraphQL](https://graphql.org/) itself is an open source query language for APIs that makes for an easy and simple way to manage data.
 
@@ -31,7 +31,7 @@ In short, the Playground is a portal that allows you to write GraphQL queries di
 
 > **Note:** For more information on Playground features applicable to the wider GraphQL community, check out [GraphQL Playground's Github](https://github.com/prisma/GraphQL-playground).
 
-### Navigate to the GraphQL Playground
+### Access the GraphQL playground
 
 The URL at which you can reach Houston's GraphQL playground depends on the platform you're running. For your installation of Astronomer, it will be `https://houston.BASEDOMAIN/v1/`.
 
@@ -53,7 +53,7 @@ To authenticate:
 > **Note:** As you work with our API, you'll be restricted to actions allowed by both your existing role within the platform (e.g. SysAdmin or not) and your permissions within any particular Workspace (e.g. Viewer, Editor, Admin).
 
 
-### Query Types
+### Query types
 
 On Astronomer, you can ask for GraphQL:
 
@@ -63,13 +63,13 @@ On Astronomer, you can ask for GraphQL:
 
 This guide will stay away from Subscriptions.
 
-### Houston API Schema
+### Houston API schema
 
 Once authenticated, you should be able to query all endpoints your user has access to. The [`Schema`](https://GraphQL.org/learn/schema/) tab fixed on the right-hand side of the page is a great reference for queries and mutations we support and how each of them is structured.
 
 ![Schema](https://assets2.astronomer.io/main/docs/ee/graphql_schema.png)
 
-## Sample Queries
+## Sample queries
 
 Read below for commonly used queries. For those not in this doc, reference the "Schema" on the right-hand side as referenced above.
 
@@ -113,7 +113,7 @@ To view results, press the "Play" button in middle of the page and see them rend
 
 ![Query](https://assets2.astronomer.io/main/docs/ee/deployment_query.gif)
 
-### Query a User
+### Query a user
 
 To query for information about a user on the platform (e.g. "When was this user created?" "Does this user exist?" "What roles do they have on any Workspace?"), run a variation of the following:
 
@@ -136,7 +136,7 @@ In the output, you should see:
 - The status of the user (`active`, `pending`)
 - A timestamp that reflects when the user was created
 
-## Sample Mutations
+## Sample mutations
 
 Mutations make a change to your platform's underlying database. For some common examples, read below.
 
@@ -246,11 +246,11 @@ Here, `<user-role>` can be `DEPLOYMENT_ADMIN`, `DEPLOYMENT_EDITOR`, or `DEPLOYME
 
 After you specify these variables, run the mutation.
 
-### Delete a User
+### Delete a user
 
-To delete a User, you'll need:
+To delete a user, you'll need:
 
-1. SysAdmin Permissions
+1. SysAdmin permissions
 2. `userUuid`
 
 With a `userUuid`, run the following:
@@ -267,7 +267,7 @@ mutation removeUser {
 }
 ```
 
-### Verify User Email
+### Verify user email
 
 If a user on the platform has trouble verifying their email address upon signup, you can use the Playground to manually verify it.
 
@@ -288,7 +288,7 @@ mutation verifyEmail {
 
 > **Note:** To run this mutation, ensure that the user in question has already begun creating an account on the platform (i.e. the user has signed up and the platform has generated an "invite token" for that user).
 
-### Bypass User Email Verification
+### Bypass user email verification
 
 If you don't need certain users to verify their email before joining a Workspace, you can configure a bypass when adding them to a Workspace. This can be useful for minimizing friction when programmatically inviting many users to your platform.
 
@@ -318,7 +318,7 @@ mutation workspaceAddUser(
   }
 ```
 
-### Add a SysAdmin (_Software Only_)
+### Add a System Admin (_Software only_)
 
 System Admins can be added either via the Software UI ('System Admin' > 'User' > 'User Details') or via an API call to Houston. To run the mutation in the GraphQL Playground, you'll need:
 
@@ -386,15 +386,15 @@ mutation UpdateDeploymentVariables {
 }
 ```
 
-## Custom Types
+## Custom types
 
 Any object in the `Schema` that maps to a custom GraphQL Type often requires additional subfields to be added to the query or mutation return object.
 
 Below, we describe this concept in the context of a sample mutation.
 
-### Add a User to a Workspace
+### Add a user to a Workspace
 
-For example, take the "Add a User to a Workspace" mutation.
+For example, take the "Add a user to a Workspace" mutation.
 
 As input, you need:
 

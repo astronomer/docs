@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Disaster Recovery'
-title: 'Astronomer Software Disaster Recovery Guide'
+sidebar_label: 'Disaster recovery'
+title: 'Astronomer Software disaster recovery'
 id: disaster-recovery
 description: A guide to platform backups and disaster recovery for Astronomer Software.
 ---
@@ -28,12 +28,12 @@ Unlike other tools that directly access the [Kubernetes etcd database](https://k
 
 To recover the Astronomer platform in the case of an incident, there are two main components that need to be backed up:
 
-1. The Kubernetes Cluster State
-2. The Astronomer Postgres Database
+1. The Kubernetes cluster state
+2. The Astronomer Postgres database
 
 Read below for specific instructions for how to backup both components.
 
-### Kubernetes Cluster Backup
+### Kubernetes cluster backup
 
 With Velero, you can back up or restore all objects in your cluster, or you can filter objects by type, namespace, and/or label. There are two types of backups:
 
@@ -57,7 +57,7 @@ The following instructions assume you have:
 
 If you do not already have both, reference [Velero's documentation](https://velero.io/docs/v1.4/).
 
-#### On-Demand Backup
+#### On-demand backup
 
 If you need to create a backup on demand, run the following via the Velero CLI:
 
@@ -73,7 +73,7 @@ velero backup create --help
 
 Snapshots can be disabled with the option `--snapshot-volumes=false.`
 
-#### Scheduled Backup
+#### Scheduled backup
 
 Production environments should have scheduled backups enabled. The frequency of this backup depends on your needs and constraints.
 
@@ -85,14 +85,14 @@ velero schedule create <SCHEDULE NAME> --schedule "0 1 * * *"
 
 The command above will schedule a daily backup of the entire cluster at 1am UTC. Velero uses standard Unix cron syntax to specify the schedule frequency and occurrence.
 
-### Database Backup
+### Database backup
 
 There are two ways to backup the Astronomer Database:
 
 1. Enable Automatic Backups via your Cloud Provider (Preferred)
 2. Traditional Backup Tools (e.g. [pg_dump](https://www.postgresql.org/docs/12/app-pgdump.html) for Postgresql)
 
-#### Enable Automatic Backups via your Cloud Provider
+#### Enable automatic backups with your cloud provider
 
 The easiest and most reliable way to ensure the database is backed up  is to enable automatic backups via your cloud provider. This will create daily backups of your Astronomer Postgresql database.
 
@@ -104,7 +104,7 @@ Refer to the following links to Cloud Provider documentation for creating Postgr
 
 Similar to Velero, one-off snapshots can also be created that will represent the database at that specific time, rather than at the normal scheduled intervals.
 
-#### Traditional Backup Tool (`pg_dump`):
+#### Traditional backup tool (`pg_dump`):
 
 To run `pg_dump` successfully, someone with “read” access to the Astronomer Database will need to collect the following (stored as a Kubernetes Secret):
 
@@ -131,7 +131,7 @@ The guidelines below will cover both, including specifics for restoring both del
 
 The steps below are valid for the Astronomer Platform on Helm3 (Astronomer v0.14+).
 
-#### Non-Deleted Airflow Deployment
+#### Non-deleted Airflow Deployment
 
 To restore a previous version of a deployment that has NOT been deleted via the Software UI (or CLI/API) and that has been backed up with Velero, follow the steps below.
 
@@ -189,11 +189,11 @@ Once that is complete, the Astronomer Database needs to be updated to mark that 
 
 Following these steps, the restored Airflow Deployment should render in the Software UI with its corresponding Workspace. All associated pods should be running in the cluster.
 
-### Whole Platform
+### Whole platform
 
 In case your team ever needs to migrate to new infrastructure or your existing infrastructure is no longer accessible and you need to restore the Astronomer Platform in its entirety, including all Airflow Deployments within it, follow the steps below.
 
-1. Create a new Kubernetes Cluster _without_ Astronomer installed
+1. Create a new Kubernetes cluster _without_ Astronomer installed
 2. Install Velero into the new cluster, ensuring that it can reach the previous backups in their storage location (e.g. S3 storage or GCS Bucket)
 3. Set the Velero backup storage location to `readonly` to prevent accidentally overwriting any backups by running:
 
