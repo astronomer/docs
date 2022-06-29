@@ -15,7 +15,7 @@ A few notes before you get started:
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
 - Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
 
-:::tip
+:::info
 
 To avoid service disruptions, Astronomer recommends upgrading Astronomer Software to a compatible version before you upgrade Kubernetes. To view Astronomer Software and Kubernetes compatibility information, see [Version compatibility reference for Astronomer Software](version-compatibility-reference.md#astronomer-software).
 
