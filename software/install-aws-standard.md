@@ -115,7 +115,7 @@ Depending on your organization, you may receive either a globally trusted certif
 
 ### Option 3: Use the AWS Certificate Manager as the certificate provider 
 
-1. Open the `openssl` CLI and then run the following command to generate a private/public RSA key pair:
+1. Run the following command to generate a private/public RSA key pair:
 
   ```sh
     $ openssl genrsa -out private.pem 4096  
