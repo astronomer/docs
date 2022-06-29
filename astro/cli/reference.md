@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Command Reference'
-title: 'Astro CLI Command Reference'
+sidebar_label: 'Command reference'
+title: 'Astro CLI command reference'
 id: reference
 description: Learn about every command that you can run with the Astro CLI.
 ---

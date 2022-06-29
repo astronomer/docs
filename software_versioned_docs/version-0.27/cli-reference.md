@@ -31,27 +31,15 @@ The Astronomer CLI installation process requires [Docker](https://www.docker.com
 If you have Homebrew installed, run:
 
 ```sh
-brew install astro
-```
-
-To install a specific version of the Astro CLI, you'll have to specify `@major.minor.patch`. To install v0.16.1, for example, run:
-
-```sh
-brew install astro@0.16.1
+brew install astro@0.27
 ```
 
 ### Install with cURL
 
 To install the latest version of the Astronomer CLI, run:
 
-```
-curl -sSL https://install.astronomer.io | sudo bash
-```
-
-To install a specific version of the Astronomer CLI, specify `-s -- major.minor.patch` as a flag at the end of the cURL command. To install v0.16.1, for example, run:
-
-```
-curl -sSL https://install.astronomer.io | sudo bash -s -- v0.16.1
+```sh
+curl -sSL https://install.astronomer.io | sudo bash -s -- v0.27.4
 ```
 
 #### Note for MacOS Catalina Users:
@@ -78,7 +66,7 @@ astro version
 If the installation was successful, you should see the version of the CLI that you installed in the output:
 
 ```
-Astro CLI Version: 0.15.0
+Astro CLI Version: 0.27.4
 Git Commit: c4fdeda96501ac9b1f3526c97a1c5c9b3f890d71
 ```
 

@@ -28,7 +28,7 @@ astro config get <option>
 | `postgres.host`      | The host for the local Airflow metadata database                                                   |
 | `postgres.port`      | The port for the local Airflow metadata database                                                    |
 | `project.name`       | The name of your Astro project                                                       |
-| `webserver.port`     | The port for the Webserver in your local Airflow environment                           |
+| `webserver.port`     | The port for the webserver in your local Airflow environment                           |
 | `show_warnings`      | Determines whether warning messages appear when starting up a local Airflow environment |
 
 :::info

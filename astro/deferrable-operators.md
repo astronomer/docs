@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Deferrable Operators"
-title: "Deferrable Operators"
+sidebar_label: "Deferrable operators"
+title: "Deferrable operators"
 id: deferrable-operators
 description: Run deferrable operators on Astro for improved performance and cost savings.
 ---
@@ -12,17 +12,17 @@ description: Run deferrable operators on Astro for improved performance and cost
  Deferrable operators provide the following benefits:
 
 - Reduced resource consumption. Depending on your resources and workload, deferrable operators can lower the number of workers needed to run tasks during periods of high concurrency. Less workers can lower your infrastructure cost per Deployment.
-- Resiliency against restarts. When you push code to a Deployment on Astro, the Triggerer process that deferrable operators rely on is gracefully restarted and does not fail.
+- Resiliency against restarts. When you push code to a Deployment on Astro, the triggerer process that deferrable operators rely on is gracefully restarted and does not fail.
 
 In general, Astronomer recommends using deferrable versions of operators or sensors that typically spend a long time waiting for a condition to be met. This includes the `S3Sensor`, the `HTTPSensor`, the `DatabricksSubmitRunOperator`, and more.
 
-### How It Works
+### How it works
 
-Airflow 2.2 introduces two new concepts to support deferrable operators: the Trigger and the Triggerer. The Triggerer is built into all Astro Deployments, which means that you can use deferrable operators in your DAGs with no additional configuration. The Triggerer is also built into the Astro CLI.
+Airflow 2.2 introduces two new concepts to support deferrable operators: the trigger and the triggerer.
 
-A **Trigger** is a small, asynchronous Python function that quickly and continuously evaluates a given condition. Because of its design, thousands of Triggers can be run at once in a single process. In order for an operator to be deferrable, it must have its own Trigger code that determines when and how operator tasks are deferred.
+A **trigger** is a small, asynchronous Python function that quickly and continuously evaluates a given condition. Because of its design, thousands of Triggers can be run at once in a single process. In order for an operator to be deferrable, it must have its own Trigger code that determines when and how operator tasks are deferred.
 
-The **Triggerer** is responsible for running Triggers and signaling tasks to resume when their conditions have been met. Like the Scheduler, it is designed to be highly-available. If a machine running Triggers shuts down unexpectedly, Triggers can be recovered and moved to another machine also running a Triggerer.
+The **triggerer** is responsible for running Triggers and signaling tasks to resume when their conditions have been met. Like the scheduler, it is designed to be highly-available. If a machine running Triggers shuts down unexpectedly, Triggers can be recovered and moved to another machine also running a triggerer.
 
 The process for running a task using a deferrable operator is as follows:
 
@@ -31,7 +31,7 @@ The process for running a task using a deferrable operator is as follows:
 - The Triggerer runs the task's Trigger periodically to check whether the condition has been met.
 - Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a worker, it begins to complete its main function.
 
-For more information on how deferrable operators work and how to use them, read our [Airflow Guide for Deferrable Operators](https://www.astronomer.io/guides/deferrable-operators) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html).
+For more information on how deferrable operators work and how to use them, read our [Airflow Guide for deferrable operators](https://www.astronomer.io/guides/deferrable-operators) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html).
 
 ## Prerequisites
 
@@ -40,9 +40,9 @@ To use deferrable operators both in a local Airflow environment and on Astro, yo
 - An [Astro project](create-project.md) running [Astro Runtime 4.2.0+](runtime-release-notes.md#astro-runtime-420).
 - The [Astro CLI v1.1.0+](https://docs.astronomer.io/astro/cli-release-notes#v110) installed.
 
-All versions of Astro Runtime 4.2.0+ support the Triggerer and have the `astronomer-providers` package installed. For more information, read [Astro Runtime Release Notes](runtime-release-notes.md) or [Upgrade Astro Runtime](upgrade-runtime.md).
+All versions of Astro Runtime 4.2.0+ support the triggerer and have the `astronomer-providers` package installed. For more information, read [Astro Runtime release notes](runtime-release-notes.md) or [Upgrade Astro Runtime](upgrade-runtime.md).
 
-## Using Deferrable Operators
+## Using deferrable operators
 
 To use a deferrable version of an existing operator in your DAG, you only need to replace the import statement for the existing operator.
 
@@ -62,7 +62,7 @@ Some additional notes about using deferrable operators:
 - If you're interested in the deferrable version of an operator that is not generally available, you can write your own and contribute these to the open source project. If you need help with writing a custom deferrable operator, reach out to [Astronomer support](https://support.astronomer.io).
 - There are some use cases where it can be more appropriate to use a traditional sensor instead of a deferrable operator. For example, if your task needs to wait only a few seconds for a condition to be met, we recommend using a Sensor in [`reschedule` mode](https://github.com/apache/airflow/blob/1.10.2/airflow/sensors/base_sensor_operator.py#L46-L56) to avoid unnecessary resource overhead.
 
-## Astronomer Deferrable Operators
+## Astronomer deferrable operators
 
 In addition to the deferrable operators that are published by the Apache Airflow open source project, Astronomer maintains [`astronomer-providers`](https://astronomer-providers.readthedocs.io/en/stable/), an open source collection of deferrable operators bundled as a provider package.
 
