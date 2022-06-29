@@ -81,7 +81,7 @@ If an Astro Runtime release includes changes to an installed version of a provid
 To determine the version of any provider package installed in your current Astro Runtime image, run:
 
 ```
-docker run --rm {image} pip freeze | grep apache-airflow-provider
+docker run --rm {image} pip freeze | grep <provider>
 ```
 
 ## Python versioning
