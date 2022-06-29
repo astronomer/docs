@@ -72,7 +72,7 @@ When Astronomer identifies a significant security vulnerability in Astro Runtime
 
 Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
 
-### Security Scan Results on Quay
+### Security scan results on quay
 
 Astronomer is aware of the **Security Scan Report** results that are provided by [Project Quay](https://www.projectquay.io/) for each Astro Runtime image and are publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
@@ -80,7 +80,7 @@ Astronomer monitors the security scan results regularly to determine if any of t
 
 If there is a critical vulnerability in the Security Scan results that causes concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
 
-## Astro Runtime Maintenance Policy
+## Astro Runtime maintenance policy
 
 The maintenance period for an Astro Runtime version depends on its release channel:
 
