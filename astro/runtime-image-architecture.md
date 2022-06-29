@@ -78,7 +78,7 @@ All Astro Runtime images have the following open source provider packages pre-in
 
 If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](runtime-release-notes.md).
 
-To determine the version of a provider package installed in your current Astro Runtime image, run:
+To determine the version of any provider package installed in your current Astro Runtime image, run:
 
 ```
 docker run --rm {image} pip freeze | grep apache-airflow-provider
