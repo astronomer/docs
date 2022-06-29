@@ -121,7 +121,7 @@ default_args = {
 namespace = conf.get('kubernetes', 'NAMESPACE')
 
 # This will detect the default namespace locally and read the
-# environment namespace when deployed to Astronomer.
+# environment namespace when deployed to Astro.
 if namespace =='default':
     config_file = '/usr/local/airflow/include/.kube/config'
     in_cluster = False
