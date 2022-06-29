@@ -117,10 +117,10 @@ Depending on your organization, you may receive either a globally trusted certif
 
 1. Run the following command to generate a private/public RSA key pair:
 
-  ```sh
+    ```sh
     $ openssl genrsa -out private.pem 4096  
     $ openssl rsa -in private.pem -outform PEM -pubout -out public.pem  
-  ```
+    ```
 2.  Open the `values.yaml` file and add this entry:
 
     ```yaml
@@ -132,7 +132,7 @@ Depending on your organization, you may receive either a globally trusted certif
         service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "\"true\""
         service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <ACM Certificate ARN>
         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: ssl
-  ```
+    ```
 #### Confirm certificate chain order
 
 If your organization is using a private certificate authority, you'll need to confirm that your certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
