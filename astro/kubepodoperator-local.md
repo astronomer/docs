@@ -149,7 +149,7 @@ with dag:
 ```
 ## Step 4: View Kubernetes logs
 
-Optional. Review the logs for any pods that were created by the operator for issues.
+Optional. Review the logs for any Pods that were created by the operator for issues.
 
 <Tabs
     defaultValue="windows and mac"
