@@ -95,7 +95,9 @@ microk8s.config > /include/.kube/config
 
 ## Step 3: Run your container
 
-To use the KubernetesPodOperator, you must define the configuration for your pod, including its namespace and runtime image, when you create an instance of the operator. This sample syntax runs the `hello-world` Docker image in a different namespace based on whether you're running the DAG locally or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
+To use the KubernetesPodOperator, you must define the configuration of each task and the Kubernetes Pod in which it runs, including its namespace and Docker image.
+
+This example DAG runs a `hello-world` Docker image. The namespace is determined dynamically based on whether you're running the DAG in your local environment or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
 
 Run `astro dev start` to build this config into your image.
 
