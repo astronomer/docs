@@ -9,7 +9,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-The `KubernetesPodOperator` completes work within Kubernetes Pods in a Kubernetes cluster. Test the `KubernetesPodOperator` locally before running it in a production Kubernetes cluster. 
+The `KubernetesPodOperator` is an Airflow operator that completes tasks in Kubernetes Pods. The `KubernetesPodOperator` provides an isolated, containerized execution environment for each task and lets you run custom Docker images and Python versions, set task-level resource requests, and more.
+
+On Astro, the Kubernetes infrastructure required to run the `KubernetesPodOperator` is built in. To test the `KubernetesPodOperator` operator locally, you need a local Kubernetes environment. 
 
 ## Step 1: Set up Kubernetes
 <Tabs
