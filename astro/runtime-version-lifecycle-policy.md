@@ -72,7 +72,7 @@ When Astronomer identifies a significant security vulnerability in Astro Runtime
 
 Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
 
-### Security scan results on Quay
+### Security scan results on Quay.io
 
 Astronomer is aware of the **Security Scan Report** results that are provided by [Project Quay](https://www.projectquay.io/) for each Astro Runtime image and are publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
@@ -93,7 +93,7 @@ For each `major.minor` pair, only the latest patch is supported at any given tim
 
 Within the maintenance window of each Astro Runtime version, the following is true:
 
-- A set of Docker images corresponding to that version are available for download on [Quay](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and PyPi.
+- A set of Docker images corresponding to that version are available for download on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and PyPi.
 - Astronomer will regularly publish bug or security fixes identified as high priority.
 - Support for paying customers running a maintained version of Astro Runtime is provided by [Astronomer Support](https://support.astronomer.io).
 - A user can create a new Deployment with the Cloud UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Cloud UI assumes the latest patch.
