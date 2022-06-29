@@ -289,30 +289,30 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    <pre><code parentName="pre">pipeline {
-    agent any
-      stages {
-        stage('Deploy to Astronomer') {
-          when {
-           expression {
-             return env.GIT_BRANCH == "origin/main"
+    <pre><code parentName="pre">`pipeline {
+       agent any
+         stages {
+           stage('Deploy to Astronomer') {
+             when {
+              expression {
+                return env.GIT_BRANCH == "origin/main"
+              }
+             }
+             steps {
+               script {
+                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v1.1.0/astro_1.1.0_linux_amd64.tar.gz'
+                 sh 'tar xzf astro_1.1.0_linux_amd64.tar.gz'
+                 sh "./astro deploy ${DEPLOYMENT_ID} -f"
+               }
+             }
            }
-          }
-          steps {
-            script {
-              sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v1.1.0/astro_1.1.0_linux_amd64.tar.gz'
-              sh 'tar xzf astro_1.1.0_linux_amd64.tar.gz'
-              sh "./astro deploy ${DEPLOYMENT_ID} -f"
-            }
-          }
-        }
-      }
-    post {
-      always {
-        cleanWs()
-      }
-    }
-   }</code></pre>
+         }
+       post {
+         always {
+           cleanWs()
+         }
+       }
+   }`</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
@@ -339,7 +339,7 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    <pre><code parentName="pre">pipeline {
+    <pre><code parentName="pre">`pipeline {
        agent any
          stages {
            stage('Set Environment Variables') {
@@ -377,7 +377,7 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
          }
        }
       }
-   }</code></pre>
+   }`</code></pre>
 
     This Jenkinsfile triggers a code push to your Astro deployments every time a commit or pull request is merged to the `dev` & `main` branch of your repository.
 
