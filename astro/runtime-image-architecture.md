@@ -35,7 +35,7 @@ To install or upgrade Astro Runtime, see [Upgrade Runtime](https://docs.astronom
 
 ## Distribution
 
-Astro Runtime is distributed as a Debian-based Docker image. The Docker image is functionally identical to open source Apache Airflow. However, Astro Runtime includes performance and stability improvements, including critical bug fixes and security patches.
+Astro Runtime is distributed as a Debian-based Docker image.
 
 Runtime Docker images have the following format:
 
