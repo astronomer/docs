@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Overview'
-title: 'Astro Documentation'
+title: 'Astro documentation'
 id: overview
 slug: /
 description: Learn about Astro, the managed service that makes data pipelines easy to write, run, and monitor.
@@ -10,7 +10,7 @@ description: Learn about Astro, the managed service that makes data pipelines ea
 
 Astro is a managed software service that offers a next-generation experience for modern data teams running Apache Airflow, the open source industry standard for data orchestration.
 
-Astro boasts a hybrid deployment model founded on a Control Plane hosted by Astronomer and a Data Plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. It optimizes for security whilst relieving your team of operational overhead.
+Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. It optimizes for security whilst relieving your team of operational overhead.
 
 Beyond architecture, Astro offers a suite of first-class features that make it easy to author, run, and monitor data pipelines.
 
@@ -18,7 +18,7 @@ Beyond architecture, Astro offers a suite of first-class features that make it e
 
 Astro's architecture enables a few key features, available today:
 
-- Worker auto-scaling, powered by Airflow's Celery Executor + KEDA
+- Worker auto-scaling, powered by Airflow's Celery executor + KEDA
 - The ability to run multiple clusters in your organization's network on either AWS or GCP
 - Astro Runtime, a collection of Docker images that provides a differentiated data orchestration experience
 - Timely support for the latest major, minor, and patch versions of the Apache Airflow open source project
@@ -27,20 +27,20 @@ Astro's architecture enables a few key features, available today:
 
 ## Architecture
 
-The following diagram outlines how the Control Plane, Data Plane, and users are connected to enable these features:
+The following diagram outlines how the control plane, data plane, and users are connected to enable these features:
 
 <div class="text--center">
   <img src="/img/docs/architecture-overview.png" alt="High level overview of Astro's architecture" />
 </div>
 
-## Get Started
+## Get started
 
 The Astronomer team will schedule an onboarding session for your initial install. From there, Astronomer recommends reading the following topics:
 
 - [Install the Astro CLI](cli/get-started.md)
-- [Develop Project](develop-project.md)
+- [Develop project](develop-project.md)
 - [Configure your Deployment](configure-deployment-resources.md)
 
-If you have a feature request or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io). We're here to help.
+If you have a feature request or a bug to report, reach out to [Astronomer support](https://support.astronomer.io). We're here to help.
 
 To check on the operational status of Astro, visit our [status page](https://cloud-status.astronomer.io). You can subscribe to updates by clicking on **Subscribe to Updates** on the top-right of the page and entering your email address.

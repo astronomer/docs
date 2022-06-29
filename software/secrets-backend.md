@@ -1,6 +1,6 @@
 ---
-title: 'Configure an External Secrets Backend on Astronomer Software'
-sidebar_label: 'Configure a Secrets Backend'
+title: 'Configure an external secrets backend on Astronomer Software'
+sidebar_label: 'Configure a secrets backend'
 id: secrets-backend
 description: Configure a secrets backend on Astronomer Software to store Airflow variables and connections in a centralized place.
 ---
@@ -95,7 +95,7 @@ To use Vault as a secrets backend, we recommend configuring a Vault AppRole with
 
     Save these values for Step 3.
 
-### Step 2: Write an Airflow Variable or Connection to Vault
+### Step 2: Write an Airflow variable or connection to Vault
 
 To test whether your Vault server is set up properly, create a test Airflow variable or connection to store as a secret.
 
@@ -120,7 +120,7 @@ $ vault kv get secret/variables/<your-variable-key>
 $ vault kv get secret/connections/<your-connection-id>
 ```
 
-### Step 3: Set Up Vault Locally
+### Step 3: Set up Vault locally
 
 In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
 
@@ -152,7 +152,7 @@ By default, Airflow uses `"kv_engine_version": 2`, but we've written this secret
 
 For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
 
-### Step 4: Run an Example DAG to Test Vault Locally
+### Step 4: Run an example DAG to test Vault locally
 
 To test Vault, write a simple DAG which calls your test secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
@@ -218,13 +218,13 @@ To use this feature, you need:
 - Access to AWS SSM Parameter Store.
 - A valid AWS Access Key ID and Secret Access Key.
 
-### Step 1: Write an Airflow Variable or Connection to AWS Parameter Store
+### Step 1: Write an Airflow variable or connection to AWS Parameter Store
 
 To start, add an Airflow variable or connection as a secret to Parameter Store for testing. For instructions, read AWS documentation on how to do so via the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html).
 
 Variables and connections should live at `/airflow/variables` and `/airflow/connections`, respectively. For example, if you're setting a secret variable with the key `my_secret`, it should exist at `/airflow/connections/my_secret`.
 
-### Step 2: Set Up AWS Parameter Store Locally
+### Step 2: Set up AWS Parameter Store locally
 
 To test AWS Parameter Store locally, configure it as a secrets backend in your Astro project.
 
@@ -260,7 +260,7 @@ To further customize the integration between Airflow and AWS SSM Parameter Store
 
 :::
 
-### Step 3: Run an Example DAG to Test AWS Parameter Store Locally
+### Step 3: Run an example DAG to test AWS Parameter Store locally
 
 To test Parameter Store, write a simple DAG which calls your secret and add this DAG to your Astro project's `dags` directory.
 
@@ -329,7 +329,7 @@ To use Google Cloud Secret Manager as your Airflow secrets backend, you need:
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
 - A [JSON service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) for the service account.
 
-### Step 1: Write an Airflow Variable or Connection to Google Cloud Secret Manager
+### Step 1: Write an Airflow variable or connection to Google Cloud Secret Manager
 
 To start, add an Airflow variable or connection as a secret to Google Cloud Secret Manager. You can do so via the Cloud Console or the gcloud CLI.
 
@@ -346,7 +346,7 @@ gcloud secrets create airflow-variables-<my-secret-variable> \
 
 For more information on creating secrets in Google Cloud Secret Manager, read the [Google Cloud documentation](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create).
 
-### Step 2: Set Up Secret Manager Locally
+### Step 2: Set up Secret Manager locally
 
 To test Google Secret Manager locally, configure it as a secrets backend in your Astro project.
 
@@ -371,7 +371,7 @@ If you want to deploy your project to a hosted Git repository before deploying t
 
 :::
 
-### Step 3: Run an Example DAG to Test Secret Manager Locally
+### Step 3: Run an example DAG to test Secret Manager locally
 
 To test Secret Manager, [create a secret](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create) containing either an Airflow variable or connection for testing.
 
@@ -441,7 +441,7 @@ To use Azure Key Vault as a secrets backend, you need:
 
 If you do not already have Key Vault configured, read [Microsoft Azure documentation](https://docs.microsoft.com/en-us/azure/key-vault/general/quick-create-portal).
 
-### Step 1: Register Astronomer as an App on Azure
+### Step 1: Register Astronomer as an app on Azure
 
 Follow the [Microsoft Azure documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to register a new application for Astronomer.
 
@@ -449,14 +449,14 @@ At a minimum, you need to add a [secret](https://docs.microsoft.com/en-us/azure/
 
 Note the value of the application's client ID and secret for Step 3.
 
-### Step 2: Create an Access Policy
+### Step 2: Create an access policy
 
 Follow the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a new access policy for the application that you just registered. The settings you need to configure for your policy are:
 
 - **Configure from template**: Select `Key, Secret, & Certificate Management`.
 - **Select principal**: Select the name of the application that you registered in Step 1.
 
-### Step 3: Set Up Key Vault Locally
+### Step 3: Set up Key Vault locally
 
 In your Astro project, add the following line to your `requirements.txt` file:
 
@@ -486,7 +486,7 @@ If you want to deploy your project to a hosted Git repository before deploying t
 
 :::
 
-### Step 4: Test Key Vault Locally
+### Step 4: Test Key Vault locally
 
 To test your Key Vault setup on Astronomer locally, [create a new secret](https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-portal#add-a-secret-to-key-vault) in Key Vault containing either a variable or a connection.
 
@@ -522,7 +522,7 @@ To test your changes:
 
 Once you confirm that the setup was successful, you can delete this DAG.
 
-### Step 5: Push Changes to Astronomer
+### Step 5: Push changes to Astronomer
 
 Once you've confirmed that your secrets are being imported correctly to your local environment, you're ready to configure the same feature in a Deployment on Astronomer Software.
 

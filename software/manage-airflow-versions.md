@@ -17,7 +17,7 @@ To upgrade your Airflow Deployment to a later version of Airflow:
 - Change the FROM statement in your project's `Dockerfile` to reference an Astronomer Certified (AC) or Astro Runtime image that corresponds to your current Airflow version. See [Customize Your Image](customize-image.md).
 - Deploy to Astronomer.
 
-## Available Astronomer Image Versions
+## Available Astronomer image versions
 
 A cron job automatically pulls new Astronomer image versions from the Astronomer [update service](http://updates.astronomer.io/) and adds them to the Software UI and CLI within 24 hours of their publication. You don't have to upgrade Astronomer to upgrade Airflow.
 
@@ -30,7 +30,7 @@ If you don't want to wait for new Astronomer image versions, you can manually tr
 If you get a message indicating that a job already exists, delete the job and rerun the command.
 
 
-## Step 1. Initialize the Upgrade Process
+## Step 1. Initialize the upgrade process
 
 An upgrade doesn't interrupt or otherwise impact your Airflow Deployment. It only signals to Astronomer your intent to upgrade.
 
@@ -67,9 +67,9 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
 4. Enter the Airflow version you want to upgrade to and press `Enter`.
 
-## Step 2: Deploy a New Astronomer Image
+## Step 2: Deploy a new Astronomer image
 
-### 1. Locate Your Dockerfile in Your Project Directory
+### 1. Locate your Dockerfile in your project directory
 
 Open the `Dockerfile` in your Astronomer directory. When you initialized an Astro project with the Astro CLI, the following files were automatically generated:
 
@@ -84,7 +84,7 @@ Open the `Dockerfile` in your Astronomer directory. When you initialized an Astr
 └── requirements.txt # For any Python packages
 ```
 
-### 2. Choose Your New Astronomer Image
+### 2. Choose your new Astronomer image
 
 <!--- Version-specific -->
 
@@ -105,7 +105,7 @@ After you upgrade your Airflow version, you can't revert to an earlier version.
 
 For Astronomer's full list of Docker images, see [Astronomer Certified on Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags) and [Astro Runtime on Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
-### 3. Test Your Upgrade Locally (_Optional_)
+### 3. Test your upgrade locally (_Optional_)
 
 To test a new version of Astronomer Certified on your local machine, save all of your changes to your `Dockerfile` and run:
 
@@ -113,7 +113,7 @@ To test a new version of Astronomer Certified on your local machine, save all of
 $ astro dev stop
 ```
 
-All 4 running Docker containers for each of the Airflow components (Webserver, Scheduler, Postgres, Triggerer) stop. 
+All 4 running Docker containers for each of the Airflow components (webserver, scheduler, Postgres, triggerer) stop.
 
 Run the following command to apply your changes:
 
@@ -133,21 +133,21 @@ astro deploy
 
 Due to a schema change in the Airflow metadata database, upgrading a Software Deployment to [AC 2.3.0](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md) can take significant time. Depending on the size of your metadata database, upgrades can take 10 minutes to an hour or longer depending on the number of task instances that have been recorded in the Airflow metadata database. During this time, scheduled tasks continue to execute but new tasks are not scheduled.
 
-To minimize the upgrade time for a Deployment, contact [Astronomer Support](https://support.astronomer.io). Minimizing your upgrade time requires removing records from your metadata database.
+To minimize the upgrade time for a Deployment, contact [Astronomer support](https://support.astronomer.io). Minimizing your upgrade time requires removing records from your metadata database.
 
 :::
 
-### 5. Confirm Your Version in the Airflow UI
+### 5. Confirm your version in the Airflow UI
 
 Open the Airflow UI and confirm that you're running the correct Airflow version.
 
-#### Local Development
+#### Local development
 
 1. Open a browser and go to http://localhost:8080/.
 
     Port 8080 is the default. To change this settiong, see [this forum post](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
 
-2. Go to **About** > **Version**. 
+2. Go to **About** > **Version**.
 
 #### On Astronomer
 
@@ -155,7 +155,7 @@ In the Software UI, go to the Airflow Deployment page.
 
 > **Note:** In Airflow versions 2.0 and later, the **Version** page is deprecated. Airflow version information is provided in footer of the Airflow UI.
 
-## Cancel Airflow Upgrade Initialization
+## Cancel Airflow upgrade initialization
 
 You can cancel an Airflow Deployment upgrade at any time if you haven't yet changed the Astronomer image in your `Dockerfile` and deployed it.
 
@@ -177,7 +177,7 @@ Airflow upgrade process has been successfully canceled. Your Deployment was not 
 
 Canceling the Airflow upgrade process does not interrupt or otherwise impact your Airflow Deployment or code that's running.
 
-## Upgrade to a Hotfix Version of Astronomer Certified
+## Upgrade to a hotfix version of Astronomer Certified
 
 To upgrade to the latest hotfix version of Astronomer Certified, replace the image referenced in your `Dockerfile` with a pinned version that specifies a particular hotfix. Astro Runtime does not support hotfix versions.
 

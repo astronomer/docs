@@ -123,11 +123,11 @@ module.exports = {
               to: 'astro/cli/get-started',
             },
             {
-              label: 'Create a Project',
+              label: 'Create a project',
               to: 'astro/create-project',
             },
             {
-              label: 'Deploy Code',
+              label: 'Deploy code',
               to: 'astro/deploy-code',
             },
           ],

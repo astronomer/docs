@@ -33,7 +33,7 @@ Beyond that, the platform does not need to connect to outside domains for routin
 
 ### What are the components of the Astronomer platform, with their respective Docker image versions?
 
-You can find a list of all components used by the platform in the [Astronomer Platform - Docker Images](https://docs.google.com/spreadsheets/d/1jE8EA4YapKEghVvk0-4K_MdwoVe6-O7v4uCI03ke6yg/edit#gid=0) Google Sheet.
+You can find a list of all components used by the platform in the [Astronomer Platform - Docker images](https://docs.google.com/spreadsheets/d/1jE8EA4YapKEghVvk0-4K_MdwoVe6-O7v4uCI03ke6yg/edit#gid=0) Google Sheet.
 
 ### What Docker version is used for deployment?
 

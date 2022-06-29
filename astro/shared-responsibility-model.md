@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Shared Responsibility Model'
-title: "Shared Responsibility Model"
+sidebar_label: 'Shared responsibility model'
+title: "Shared responsibility model"
 id: shared-responsibility-model
 description: Astronomer's policy on shared responsibilities between our team and our customers.
 ---
@@ -11,18 +11,18 @@ Astronomer's highest priority is the security and reliability of your tasks. As 
 
 Astro operates on a model of shared responsibility, which means that both the Astronomer team and Astronomer customers are responsible for the security of the platform. This document specifies areas of security ownership for both Astronomer customers and the Astronomer team.
 
-## Astronomer's Responsibilities
+## Astronomer's responsibilities
 
 Astronomer is responsible for providing a secure and reliable managed service offering, including:
 
-- Managing the Control Plane and core services (Cloud UI, Cloud API, Deployment Access, and Cloud Image Repository).
+- Managing the control plane and core services (Cloud UI, Cloud API, Deployment Access, and Cloud image Repository).
 - Securing authentication and authorization to all interfaces (UI, API, and CLI).
-- Automating provisioning, scaling, and configuration management of Astro resources in the Data Plane.
-- Completing ongoing maintenance (currency, hardening, patching) and uptime monitoring of Astro resources in the Data Plane.
-- Maintaining data encryption (at rest/in flight) of Astro managed components (Control and Data Planes).
+- Automating provisioning, scaling, and configuration management of Astro resources in the data plane.
+- Completing ongoing maintenance (currency, hardening, patching) and uptime monitoring of Astro resources in the data plane.
+- Maintaining data encryption (at rest/in flight) of Astro managed components (control and data planes).
 - Consistently releasing production-ready and supported distributions of [Astro Runtime](upgrade-runtime.md) for net-new and to-be-upgraded Deployments.
 
-## Customer's Responsibilities  
+## Customer's responsibilities  
 
 The customer is responsible for managing certain security aspects of their Astro Organization and Deployments, including:
 
@@ -32,9 +32,9 @@ The customer is responsible for managing certain security aspects of their Astro
 - Developing and maintaining data pipelines with security and quality coding best practices, inclusive of vulnerability management of plugins and dependencies.
 - Regularly [upgrading their Deployment(s)](upgrade-runtime.md) to the latest Astro Runtime version to take advantage of new functionality, as well as bug and security fixes.
 - [Configuring and managing Deployment resource settings](configure-deployment-resources.md) for data pipeline workloads.
-- [Securing the network communications](connect-external-services.md) between their Data Plane and sensitive data resources.
+- [Securing the network communications](connect-external-services.md) between their data plane and sensitive data resources.
 
-## Cloud Provider Security Responsibilities
+## Cloud provider security responsibilities
 
 Physical and environmental security is handled entirely by our cloud service providers. Each of our cloud service providers provides an extensive list of compliance and regulatory assurances that they are rigorously tested against, including SOC 1/2-3, PCI-DSS, and ISO27001.
 
