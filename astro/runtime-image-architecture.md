@@ -23,7 +23,7 @@ For more information about the features that are available in Astro Runtime rele
 
 ## Runtime versioning
 
-Astro Runtime versions are released regularly and use [Semantic Versioning](https://semver.org/). Astronomer ships major, minor, and patch releases of Astro Runtime in the format of `major.minor.patch`.
+Astro Runtime versions are released regularly and use [semantic versioning](https://semver.org/). Astronomer ships major, minor, and patch releases of Astro Runtime in the format of `major.minor.patch`.
 
 - **Major** versions are released for significant feature additions. This includes API or DAG specification changes that are not backwards-compatible.
 - **Minor** versions are released for functional changes. This includes API or DAG specification changes that are backwards-compatible.
