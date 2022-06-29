@@ -7,7 +7,7 @@ description: Reference documentation for astro config get.
 
 ## Description
 
-View the current configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your Webserver port, and your project name.
+View the current configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your webserver port, and your project name.
 
 ## Usage
 
@@ -30,7 +30,7 @@ astro config get <option>
 | `postgres.host`      | The host for the local Airflow metadata database                                                   |
 | `postgres.port`      | The port for the local Airflow metadata database                                                    |
 | `project.name`       | The name of your Astro project                                                       |
-| `webserver.port`     | The port for the Webserver in your local Airflow environment                           |
+| `webserver.port`     | The port for the webserver in your local Airflow environment                           |
 | `show_warnings`      | Determines whether warning messages appear when starting up a local Airflow environment |
 
 :::info

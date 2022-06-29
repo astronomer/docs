@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Get Started',
+      label: 'Get started',
       items: [
       'install-cli',
       'create-project',
@@ -41,6 +41,7 @@ module.exports = {
         ],
       },
       'cli-podman',
+      'upgrade-astro-cli',
     ],
     },
     {
@@ -68,7 +69,7 @@ module.exports = {
         'upgrade-astronomer',
         {
         type: 'category',
-        label: 'Platform Setup',
+        label: 'Platform setup',
         items: [
         'integrate-auth-system',
         'logs-to-s3',
@@ -82,7 +83,7 @@ module.exports = {
         },
         {
         type: 'category',
-        label: 'Platform Management',
+        label: 'Platform management',
         items: [
         'apply-platform-config',
         'houston-api',
@@ -91,7 +92,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Deployment Management',
+          label: 'Deployment management',
           items: [
           'configure-deployment',
           'secrets-backend',
@@ -102,7 +103,7 @@ module.exports = {
         },
         {
         type: 'category',
-        label: 'User Access',
+        label: 'User access',
         items: [
         'manage-workspaces',
         'import-idp-groups',
@@ -147,7 +148,7 @@ module.exports = {
     },
     {
     type: 'category',
-    label: 'Release Notes',
+    label: 'Release notes',
     items: [
       'release-notes',
       'cli-release-notes',

@@ -1,11 +1,11 @@
 ---
-title: 'How to Run the KubernetesPodOperator Locally'
+title: 'How to run the KubernetesPodOperator locally'
 sidebar_label: 'Local KubernetesPodOperator'
 id: kubepodoperator-local
 description: Test the KubernetesPodOperator on your local machine.
 ---
 
-## Setup Kubernetes
+## Set up Kubernetes
 
 ### Windows and Mac
 
@@ -17,7 +17,7 @@ Go into Docker>Settings>Kubernetes to check the `Enable Kubernetes` checkbox and
 
 Install [microk8s](https://microk8s.io/) and run `microk8s.start` to spin up Kubernetes.
 
-## Get your Kube Config
+## Get your Kube config
 
 ### Windows and Mac
 
@@ -31,7 +31,7 @@ In a `.kube` folder in your Astro project, create a config file with:
 microk8s.config > /include/.kube/config
 ```
 
-## Run your Container
+## Run your container
 
 The `config_file` is pointing to the `/include/.kube/config` file you just edited. Run `astro dev start` to build this config into your image.
 
@@ -86,7 +86,7 @@ This example simply runs the docker `hello-world` image and reads environment va
 
 If you are on Linux, the `cluster_context` will be `microk8s`
 
-## View Kubernetes Logs
+## View Kubernetes logs
 
 ### Windows and Mac
 

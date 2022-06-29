@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Test and Troubleshoot Locally'
-title: 'Test and Troubleshoot Locally'
+sidebar_label: 'Test and troubleshoot locally'
+title: 'Test and troubleshoot locally'
 id: test-and-troubleshoot-locally
 description: A guide to running an Astro project locally and diagnosing common problems.
 ---
@@ -9,9 +9,9 @@ description: A guide to running an Astro project locally and diagnosing common p
 
 As you develop data pipelines on Astro, we strongly recommend running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
-## Run a Project Locally
+## Run a project locally
 
-Whenever you want to test your code, the first step is always to start a local Airflow environment. To run your project in a local Airflow environment, follow the steps in [Build and Run a Project](develop-project.md#build-and-run-a-project-locally).
+Whenever you want to test your code, the first step is always to start a local Airflow environment. To run your project in a local Airflow environment, follow the steps in [Build and run a project](develop-project.md#build-and-run-a-project-locally).
 
 ## Test DAGs with the Astro CLI
 
@@ -30,9 +30,9 @@ astro dev parse
 
 This command parses your DAGs to ensure that they don't contain any basic syntax or import errors and that they can successfully render in the Airflow UI.
 
-The command `astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI Command Reference](cli/astro-dev-parse.md).
+The command `astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI command reference](cli/astro-dev-parse.md).
 
-### Run Tests with Pytest
+### Run tests with pytest
 
 To perform unit tests on your Astro project, you can run:
 
@@ -49,13 +49,13 @@ By default, the `tests` directory in your Astro project includes a default DAG i
 - DAGs have no cycles.
 - There are no general import or syntax errors.
 
-`astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI Command Reference](cli/astro-dev-pytest.md).
+`astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
 
-## View Airflow Logs
+## View Airflow logs
 
 You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change. See [View logs](view-logs.md).
 
-## Run Airflow CLI Commands
+## Run Airflow CLI commands
 
 To run [Apache Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) commands locally, run the following:
 
@@ -73,11 +73,11 @@ You can only use `astro dev run` in a local Airflow environment. To automate Air
 
 :::
 
-## Test the KubernetesPodOperator Locally
+## Test the KubernetesPodOperator locally
 
 Testing DAGs with the [KubernetesPodOperator](kubernetespodoperator.md) locally requires a local Kubernetes environment. Follow the steps in this topic to create a local Kubernetes environment and monitor the status and logs of individual Kubernetes pods running your task.
 
-### Step 1: Start Running Kubernetes
+### Step 1: Start running Kubernetes
 
 To run Kubernetes locally:
 
@@ -85,7 +85,7 @@ To run Kubernetes locally:
 2. Check the `Enable Kubernetes` checkbox.
 3. Save your changes and restart Docker.
 
-### Step 2: Get Your Kubernetes Configuration
+### Step 2: Get Your Kubernetes configuration
 
 1. Open the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker.
 2. Open the `config` file in this directory.
@@ -128,7 +128,7 @@ with dag:
 
 Specifically, your operator must have `cluster_context='docker-desktop` and `config_file=config_file`.
 
-### Step 4: Run and Monitor the KubernetesPodOperator
+### Step 4: Run and monitor the KubernetesPodOperator
 
 After updating your DAG, run `astro dev restart` from the Astro CLI to rebuild your image and run your project in a local Airflow environment.
 
@@ -139,7 +139,7 @@ To examine the logs for any pods that were created by the operator, you can use 
 
 By default, Docker for Desktop will run pods in a namespace called `default`.
 
-## Hard Reset Your Local Environment
+## Hard reset your local environment
 
 In most cases, [restarting your local project](develop-project.md#restart-your-local-environment) is sufficient for testing and making changes to your project. However, it is sometimes necessary to kill your Docker containers and metadata database for testing purposes. To do so, run the following command:
 
@@ -147,4 +147,4 @@ In most cases, [restarting your local project](develop-project.md#restart-your-l
 astro dev kill
 ```
 
-This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.
+This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow connections, logs, and task history.

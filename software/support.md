@@ -22,14 +22,14 @@ If you're an Astronomer customer looking for private support, there are 3 ways t
 2. Email [support@astronomer.io](mailto:support@astronomer.io)
 3. Leave a voicemail on +1 (831) 777-2768
 
-## Astronomer's Support Portal
+## Astronomer's support portal
 
-On Astronomer's Support Portal, you can do two things:
+On Astronomer's support portal, you can do two things:
 
-1. Submit a Request (Ticket)
-2. Check your Existing Requests
+1. Submit a request (ticket)
+2. Check your existing requests
 
-### Create an Account
+### Create an account
 
 To submit a request to Astronomer Support, first create an account on our [Support Portal](https://support.astronomer.io).
 
@@ -37,7 +37,7 @@ If you're working with a team, make sure to create an account with your work ema
 
 > **Note:** If your team uses more than one email domain (e.g. @astronomer.io), reach out to us so we can manually add it to your organization.
 
-### Submit a Support Request
+### Submit a support request
 
 When you submit a ticket to Astronomer's Support Portal, keep the following best practices in mind.
 
@@ -49,17 +49,17 @@ In order for our team to serve you most effectively, it's critical that we under
 
     Examples:
 
-    - The Scheduler is not heartbeating, and restarting didn't fix the issue.
+    - The scheduler is not heartbeating, and restarting didn't fix the issue.
     - All Celery workers are offline.
     - Kubernetes pod executors are not starting.
-    - There are extended periods of `503` errors that are not solved by allocating more resources to the Webserver.
+    - There are extended periods of `503` errors that are not solved by allocating more resources to the webserver.
     - There is an Astronomer outage, such as downtime in the Astronomer Docker Registry.
 
 - **P2:** Some major functionality of Astronomer/Astronomer-owned Airflow is severely impaired, but you are still able to run essential DAGs.
 
     Examples:
 
-    - The Airflow Webserver is unavailable.
+    - The Airflow webserver is unavailable.
     - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
     - Task logs are missing in the Airflow UI.
 

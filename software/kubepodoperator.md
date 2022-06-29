@@ -7,26 +7,26 @@ description: Run the KubernetesPodOperator on Astronomer Software.
 
 ## Overview
 
-A widely-used and performant alternative to Airflow's older DockerOperator, the [KubernetesPodOperator](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py) is able to natively launch a Kubernetes Pod to run an individual task - and terminate that pod when the task is completed. Similarly to the Kubernetes Executor, the operator uses the [Kubernetes Python Client](https://github.com/kubernetes-client/python) to generate a Kubernetes API request that dynamically launches those individual pods.
+A widely-used and performant alternative to Airflow's older DockerOperator, the [KubernetesPodOperator](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py) is able to natively launch a Kubernetes Pod to run an individual task - and terminate that pod when the task is completed. Similarly to the Kubernetes executor, the operator uses the [Kubernetes Python Client](https://github.com/kubernetes-client/python) to generate a Kubernetes API request that dynamically launches those individual pods.
 
 The KubernetesPodOperator enables task-level resource configuration and is optimal for those who have custom Python dependencies. Ultimately, it allows Airflow to act a job orchestrator - no matter the language those jobs are written in.
 
 At its core, the KubernetesPodOperator is built to run any Docker image with Airflow regardless of the language it's written in. It's the next generation of the DockerOperator and is optimized to leverage Kubernetes functionality, allowing users to specify resource requests and pass Kubernetes specific parameters into the task.
 
-If you're using the Kubernetes Executor, you can also configure task-level Kubernetes resources using a pod template. For more information, read [Use a Pod Template in a Task](kubernetes-executor.md#use-a-pod-template-in-a-task).
+If you're using the Kubernetes executor, you can also configure task-level Kubernetes resources using a pod template. For more information, read [Use a Pod Template in a Task](kubernetes-executor.md#use-a-pod-template-in-a-task).
 
-## Pre-Requisites
+## Prerequisites
 
 To run the KubernetesPodOperator on Astronomer, make sure you:
 
 - Have a running Airflow Deployment on Astronomer Software
 - Run Astronomer Airflow 1.10+
 
-> **Note:** If you haven't already, we'd encourage you to first test the KubernetesPodOperator in your local environment. Follow our [Running KubernetesPodOperator Locally](kubepodoperator-local.md) for guidelines.
+> **Note:** If you haven't already, we'd encourage you to first test the KubernetesPodOperator in your local environment. See [Running KubernetesPodOperator locally](kubepodoperator-local.md).
 
 ## The KubernetesPodOperator on Astronomer
 
-### Import the Operator
+### Import the operator
 
 First ensure you have the `apache-airflow-providers-cncf-kubernetes` package installed:
 
@@ -40,7 +40,7 @@ You can then import the KubernetesPodOperator:
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 ```
 
-### Specify Parameters
+### Specify parameters
 
 From here, instantiate the operator based on your image and setup:
 
@@ -79,16 +79,16 @@ To successfully instantiate the operator, you'll need to make note of a few para
     - Set the `is_delete_operator_pod` parameter to `True` in your code
     - This will delete completed pods in the namespace as they finish, keeping Airflow below its resource quotas
 
-#### Add Resources to your Deployment on Astronomer
+#### Add resources to your Deployment on Astronomer
 
-The KubernetesPodOperator is entirely powered by the resources allocated to the `Extra Capacity` slider of your deployment's `Configure` page in the [Software UI](manage-workspaces.md) in lieu of needing a Celery Worker (or Scheduler resources for those running the Local Executor). Raising the slider will increase your namespace's [resource quota](https://kubernetes.io/docs/concepts/policy/resource-quotas/) such that Airflow has permissions to successfully launch pods within your deployment's namespace.
+The KubernetesPodOperator is entirely powered by the resources allocated to the `Extra Capacity` slider of your deployment's `Configure` page in the [Software UI](manage-workspaces.md) in lieu of needing a Celery worker (or scheduler resources for those running the Local Executor). Raising the slider will increase your namespace's [resource quota](https://kubernetes.io/docs/concepts/policy/resource-quotas/) such that Airflow has permissions to successfully launch pods within your deployment's namespace.
 
-> **Note:** Your Airflow Scheduler and Webserver will remain necessary fixed resources that ensure the rest of your tasks can execute and that your deployment stays up and running.
+> **Note:** Your Airflow scheduler and webserver will remain necessary fixed resources that ensure the rest of your tasks can execute and that your deployment stays up and running.
 
 In terms of resource allocation, we recommend starting with **10AU** in `Extra Capacity` and scaling up from there as needed. If it's set to 0, you'll get a permissions error:
 
 ```
-ERROR - Exception when attempting to create Namespace Pod.
+ERROR - Exception when attempting to create namespace Pod.
 Reason: Forbidden
 "Failure","message":"pods is forbidden: User \"system:serviceaccount:astronomer-cloud-solar-orbit-4143:solar-orbit-4143-airflow-worker\" cannot create pods in the namespace \"datarouter\"","reason":"Forbidden","details":{"kind":"pods"},"code":403}
 ```
@@ -97,11 +97,11 @@ On Astronomer Software, the largest node a single pod can occupy is dependent on
 
 > **Note:** If you need to increase your [limit range](https://kubernetes.io/docs/concepts/policy/limit-range/) on Astronomer Software, contact your system admin. \\
 
-#### Define Resources per Task
+#### Define resources per task
 
 A notable advantage of leveraging Airflow's KubernetesPodOperator is that you can control compute resources in the task definition.
 
-> **Note:** If you're using the KubernetesExecutor, note that this value is separate from the `executor_config` parameter. In this case, the `executor_config` would only define the Airflow worker that is launching your Kubernetes task.
+> **Note:** If you're using the Kubernetes Executor, note that this value is separate from the `executor_config` parameter. In this case, the `executor_config` would only define the Airflow worker that is launching your Kubernetes task.
 
 ### Example Task Definition:
 
@@ -173,13 +173,13 @@ This object allows you to specify Memory and CPU requests and limits for any giv
 
 Once you've created the object, apply it to the `resources` parameter of the task. When this DAG runs, it will launch a Pod that runs the `hello-world` image, which is pulled from Docker Hub, in your Airflow Deployment's namespace with the resource requests defined above. Once the task finishes, the Pod will be gracefully terminate.
 
-:::info 
+:::info
 
 On Astronomer, the equivalent of 1AU is: `requests={"cpu": "100m", "memory": "384Mi"}, limits={"cpu": "100m", "memory": "384Mi"}`.
 
 :::
 
-## Pulling Images from a Private Registry
+## Pulling images from a private registry
 
 By default, the KubernetesPodOperator will look for images hosted publicly on [Docker Hub](https://hub.docker.com/). If you want to pull images from a private registry, you may do so.
 
@@ -221,8 +221,8 @@ To pull images from a private registry on Astronomer Software:
     )
     ```
 
-## Local Testing
+## Local testing
 
-We recommend testing your DAGs locally before pushing them to a Deployment on Astronomer. For more information, read [How to Run the KubernetesPodOperator Locally](kubepodoperator-local.md/). That guide provides information on how to use [MicroK8s](https://microk8s.io/) or [Docker for Kubernetes](https://matthewpalmer.net/kubernetes-app-developer/articles/how-to-run-local-kubernetes-docker-for-mac.html) to run tasks with the KubernetesPodOperator in a local environment.
+We recommend testing your DAGs locally before pushing them to a Deployment on Astronomer. For more information, read [How to run the KubernetesPodOperator locally](kubepodoperator-local.md). That guide provides information on how to use [MicroK8s](https://microk8s.io/) or [Docker for Kubernetes](https://matthewpalmer.net/kubernetes-app-developer/articles/how-to-run-local-kubernetes-docker-for-mac.html) to run tasks with the KubernetesPodOperator in a local environment.
 
 > **Note:** To pull images from a private registry locally, you'll have to create a secret in your local namespace and similarly call it in your operator following the guidelines above.

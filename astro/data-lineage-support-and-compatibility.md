@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Data Lineage Support and Compatibility'
-title: "Data Lineage Support and Compatibility Reference"
+sidebar_label: 'Data lineage support and compatibility'
+title: "Data lineage support and compatibility reference"
 id: data-lineage-support-and-compatibility
 description: A compatibility reference guide for Astro lineage's Airflow support.
 ---
@@ -11,13 +11,13 @@ All Astro Deployments use the [OpenLineage Airflow library](https://openlineage.
 
 If you’re using an unsupported operator, create an issue in the [OpenLineage GitHub repository](https://github.com/OpenLineage/OpenLineage) or write your own custom extractor.
 
-:::info 
+:::info
 
-This functionality is early access. If you have questions or feedback, contact [Astronomer Support](https://support.astronomer.io/).
+This functionality is early access. If you have questions or feedback, contact [Astronomer support](https://support.astronomer.io/).
 
 :::
 
-## Supported Airflow Operators
+## Supported Airflow operators
 
 The following operators are supported in Astro lineage:
 
@@ -28,11 +28,11 @@ The following operators are supported in Astro lineage:
 
 :::tip
 
-The `GreatExpectationsOperator` additionally emits data quality information to the **Quality** tab in the **Lineage** view of the Cloud UI. For more information, see [Data Lineage on Astro](data-lineage.md).
+The `GreatExpectationsOperator` additionally emits data quality information to the **Quality** tab in the **Lineage** view of the Cloud UI. For more information, see [Data lineage on Astro](data-lineage.md).
 
 :::
 
-## Partially Supported Airflow Operators
+## Partially supported Airflow operators
 
 The following operators are partially supported by the Airflow integration with OpenLineage:
 
@@ -46,11 +46,11 @@ Airflow tasks that are run with partially supported operators:
 - Appear in the graph view of the **Lineage** tab in the Cloud UI as nodes.
 - Do not emit lineage data about input or output datasets.
 
-## Unsupported Operators
+## Unsupported operators
 
 Airflow tasks that run with unsupported operators send information about the task duration, status, and parent DAG to the lineage backend. However, information about the task's input or output datasets isn't sent to the backend. A task running with an unsupported operator appears as a single node in the lineage graph.
 
-## Other Known Limitations
+## Other known limitations
 
 Lineage on Astro is in active development. Keep in mind the following limitations when using lineage functionality:
 
