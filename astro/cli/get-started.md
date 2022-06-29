@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Get Started'
-title: 'Get Started with the Astro CLI'
+sidebar_label: 'Get started'
+title: 'Get started with the Astro CLI'
 id: get-started
 description: Install the Astro CLI, the best way to run Apache Airflow and test data pipelines on your local machine.
 ---
@@ -90,7 +90,7 @@ curl -sSL install.astronomer.io | sudo bash -s
 
 </Tabs>
 
-## Step 2: Confirm the Install
+## Step 2: Confirm the install
 
 To confirm the CLI was installed properly, run the following CLI command:
 
@@ -103,7 +103,7 @@ If the installation was successful, you should see the following output:
 <pre><code parentName="pre">{`% astro version
 Astro CLI Version: ${siteVariables.cliVersion}`}</code></pre>
 
-## Step 3: Create an Astro Project
+## Step 3: Create an Astro project
 
 To start developing locally, you first need to create an Astro project, which contains all of the files you need to run Apache Airflow locally.
 
@@ -129,7 +129,7 @@ To create a new Astro project:
 
     This Astro CLI command generates all of the necessary files to run Airflow locally in your new directory. This includes dedicated folders for your DAG files, plugins, and dependencies.
 
-## Step 4: Run Airflow Locally
+## Step 4: Run Airflow locally
 
 To confirm that you successfully initialized an Astro project, run the following command from your project directory:
 
@@ -142,7 +142,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The Triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md)
+- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md)
 
 ## Step 5: Access the Airflow UI
 
@@ -156,11 +156,11 @@ After logging in, you should see two example DAGs in the Airflow UI that corresp
 
 That's all it takes to run Airflow locally using the Astro CLI! From here, you can add new DAGs to your Astro project and start developing.
 
-## Next Steps
+## Next steps
 
 Once you install the CLI and have an Astro project running locally, there are a few different paths you can take:
 
 - To write and test your own DAGs locally and configure your local Airflow environment, see [Develop Project](develop-project.md).
-- To view logs, set up unit tests for your DAGs, or troubleshoot your local Airflow environment, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md).
-- To deploy DAGs to an environment managed by Astronomer, see [Deploy Code](deploy-code.md). If you're not a customer but might be interested in Astro, [reach out to us](https://www.astronomer.io/get-started).
-- To learn more about the available commands in the CLI, see the [CLI Command Reference](cli/reference.md) or run `astro help`.
+- To view logs, set up unit tests for your DAGs, or troubleshoot your local Airflow environment, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+- To deploy DAGs to an environment managed by Astronomer, see [Deploy code](deploy-code.md). If you're not a customer but might be interested in Astro, [reach out to us](https://www.astronomer.io/get-started).
+- To learn more about the available commands in the CLI, see the [CLI command reference](cli/reference.md) or run `astro help`.

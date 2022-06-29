@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Airflow Alerts'
-title: 'Configure Airflow Alerts on Astro'
+sidebar_label: 'Airflow alerts'
+title: 'Configure Airflow alerts on Astro'
 id: airflow-alerts
 description: Set up email alerts for Airflow task successes and failures.
 ---
@@ -13,11 +13,11 @@ For all teams, incorporating an alerting framework is critical to the health of 
 - SLAs
 - Email alerts
 
-Slack alerts and SLAs do not require additional configuration on Astro. For best practices, see the Astronomer guide on [Airflow Alerts](https://www.astronomer.io/guides/error-notifications-in-airflow).
+Slack alerts and SLAs do not require additional configuration on Astro. For best practices, see the Astronomer guide on [Airflow alerts](https://www.astronomer.io/guides/error-notifications-in-airflow).
 
 This guide focuses on setting up email alerts on Astro with an SMTP service.
 
-## Configure Airflow Email Alerts
+## Configure Airflow email alerts
 
 On Astro, setting up email alerts requires configuring an SMTP service for delivering each alert.
 
@@ -50,7 +50,7 @@ To get started with SendGrid:
 
     - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
     - **Value**: `airflow.providers.sendgrid.utils.emailer.send_email`
-    
+
     For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
 
 7. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
@@ -81,11 +81,11 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
 
 3. Optional. Complete one of the following tasks:
 
-    - To confirm the email account is working and the Amazon SES service can send emails to it, click an email address in the **Identity** column and then click **Send test email**. When the owner of the email address receives the test email, they need to select the validation link in the email. 
+    - To confirm the email account is working and the Amazon SES service can send emails to it, click an email address in the **Identity** column and then click **Send test email**. When the owner of the email address receives the test email, they need to select the validation link in the email.
     - To add a new email address, click **Create Identity**, add the email address, and then click **Create Identity**.
-    
-    For email alerts, Astronomer recommends using one email address as the sender and a second email address as the recipient. All email addresses must be verified. 
-    
+
+    For email alerts, Astronomer recommends using one email address as the sender and a second email address as the recipient. All email addresses must be verified.
+
     For more information about configuring Amazon SES, read [Creating an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#:~:text=of%20those%20Regions.-,Creating%20an%20email%20address%20identity,-Complete%20the%20following) and  [Verifying an email address identity](https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#:~:text=address%20identity.-,Verifying%20an%20email%20address%20identity,-After%20you%E2%80%99ve%20created) in the Amazon documentation.
 
 4. Click **Account dashboard**.
@@ -100,18 +100,18 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
     - Click **Close Window**.
 
 7. Log in to the Cloud UI, click **Deployments**, and then select an existing Deployment.
-   
-8. In the Environment Variables area, click **Edit Variables** and add these variables:
+
+8. In the environment variables area, click **Edit Variables** and add these variables:
     - `ENV AIRFLOW__SMTP__SMTP_HOST`: Enter the value you copied in step 5
     - `ENV AIRFLOW__SMTP__SMTP_STARTTLS`: Enter `True`.
     - `ENV AIRFLOW__SMTP__SMTP_SSL`: Enter `False`.
     - `ENV AIRFLOW__SMTP__SMTP_USER`: Enter the value you copied in step 6.
     - `ENV AIRFLOW__SMTP__SMTP_PASSWORD`: Enter the value you copied in step 6.
     - `ENV AIRFLOW__SMTP__SMTP_PORT`: Enter `587`.
-    - `ENV AIRFLOW__SMTP__SMTP_MAIL_FROM`: Enter your from email. 
+    - `ENV AIRFLOW__SMTP__SMTP_MAIL_FROM`: Enter your from email.
     - `ENV AIRFLOW__EMAIL__EMAIL_BACKEND`: Enter `airflow.utils.email.send_email_smtp`.
 
-    See [Set Environment Variables on Astro](https://docs.astronomer.io/astro/environment-variables).
+    See [Set environment variables on Astro](https://docs.astronomer.io/astro/environment-variables).
 
 9. To begin receiving Airflow alerts by email for task failures within a given DAG, configure the following values in the DAG's `default_args`:
 

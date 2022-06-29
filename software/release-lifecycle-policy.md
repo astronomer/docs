@@ -1,6 +1,6 @@
 ---
-title: Astronomer Release and Lifecycle Policy
-sidebar_label: Release and Lifecycle Policy
+title: Astronomer release and lifecycle policy
+sidebar_label: Release and lifecycle policy
 id: release-lifecycle-policy
 description: Astronomer's release and lifecycle policy for Astronomer Software.
 ---
@@ -15,15 +15,15 @@ This document offers guidelines on the version lifecycle of Astronomer Software.
 - Which versions of Astronomer Software are currently available.
 - Release channels and the maintenance schedule for all versions.
 
-For information on the latest Astronomer Software releases, see [release notes](release-notes.md). For information on compatibility between all versioned software, see [Software Version Compatibility Reference](release-lifecycle-policy.md).
+For information on the latest Astronomer Software releases, see [Release notes](release-notes.md). For information on compatibility between all versioned software, see [Software Version compatibility reference](release-lifecycle-policy.md).
 
 :::info
 
-These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astronomer images, see [Astronomer Certified Versioning and Support](ac-support-policy.md) and [Runtime Release and Lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
+These policies apply only to the Astronomer Software platform. For release and lifecycle policies related to Astronomer images, see [Astronomer Certified versioning and support](ac-support-policy.md) and [Runtime release and lifecycle Policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
 
 :::
 
-## Release Channels
+## Release channels
 
 To meet the unique needs of different operating environments, we offer all Astronomer customers two release channels:
 
@@ -38,7 +38,7 @@ For customers looking for less frequent upgrades and functional changes, we reco
 
 > **Note:** Release channels apply to Astronomer Software and Astronomer image versions. We do not currently support a long-term release channel for the Astro CLI.
 
-## Astronomer Software Versioning
+## Astronomer Software versioning
 
 Astronomer follows [Semantic Versioning](https://semver.org/) for all published software. This means that we use Major, Minor, and Patch releases across our product in the format of `major.minor.patch`.
 
@@ -48,7 +48,7 @@ Astronomer follows [Semantic Versioning](https://semver.org/) for all published 
 
 It is considered safe to upgrade to minor and patch versions within a major version. Upgrade guidance for major and LTS versions is provided with each release.
 
-## Version Maintenance Policy
+## Version maintenance policy
 
 The maintenance period for an Astronomer Software version depends on its release channel:
 
@@ -67,13 +67,13 @@ For example, if Astronomer Software v0.26 were a stable version first released i
 - If Astronomer Software v0.27 came out as a new stable release, bug fixes would no longer be backported to Astronomer v0.26 and customers would be encouraged to upgrade.
 - If a major security issue was identified in v0.26, a fix would be backported and released as a patch at any time during its 6 month maintenance period. Even if v0.27 is the latest stable version of Astronomer Software, a security fix would still be backported to v0.26.
 
-If you contact [Astronomer Support](https://support.astronomer.io) about an issue you are experiencing while running an unmaintained version, our team will invite you to upgrade as an initial mitigation step.
+If you contact [Astronomer support](https://support.astronomer.io) about an issue you are experiencing while running an unmaintained version, our team will invite you to upgrade as an initial mitigation step.
 
-### End of Maintenance Date
+### End of maintenance date
 
 Maintenance is discontinued the last day of the month for a given version. For example, if a version of Astronomer Software were supported between January - June of a given year, that version would be maintained by Astronomer until the last day of June.
 
-## Backport Policy for Bug and Security Fixes
+## Backport policy for bug and security fixes
 
 If a major stability bug is identified by our team, a fix will be backported to all LTS versions and only the latest stable version. For users on a stable version that is not latest, our team will recommend that you upgrade. Major issues in this category may result in significant delays in task scheduling as well as potential data loss.
 
@@ -81,7 +81,7 @@ If a major security issue is identified, a fix will be backported and made avail
 
 In rare instances, the Astronomer team may make an exception and backport a bug or security fix to a release that is beyond the commitment stated above. To submit a request for consideration, please reach out to your customer success manager.
 
-## Software Lifecycle Schedule
+## Software lifecycle schedule
 
 <!--- Version-specific -->
 

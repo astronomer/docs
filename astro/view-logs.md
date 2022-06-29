@@ -1,6 +1,6 @@
 ---
-title: 'View Logs'
-sidebar_label: 'View Logs'
+title: 'View logs'
+sidebar_label: 'View logs'
 id: view-logs
 description: View logs for your data pipelines both locally and on Astro.
 ---

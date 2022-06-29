@@ -1,6 +1,6 @@
 ---
-title: 'Create an Astronomer Software Project'
-sidebar_label: 'Create a Project'
+title: 'Create an Astronomer Software project'
+sidebar_label: 'Create a project'
 id: create-project
 description: Get started on Astronomer Software.
 ---
@@ -13,7 +13,7 @@ This guide will help you get started on Astronomer Software by walking through t
 
 Creating an Astro project requires the [Astro CLI](install-cli.md).
 
-## Step 1: Create a Project Directory
+## Step 1: Create a project directory
 
 Before you create a Software project, create an empty directory and open it:
 
@@ -36,7 +36,7 @@ This generates the following files:
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include # For any other files you'd like to include
 ├── plugins # For any custom or community Airflow plugins
-├── airflow_settings.yaml # For your Airflow Connections, Variables and Pools (local only)
+├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
 ├── packages.txt # For OS-level packages
 └── requirements.txt # For any Python packages
 ```
@@ -45,9 +45,9 @@ A few of these files are essential for deploying your Airflow image for the firs
 
 ### Dockerfile
 
-Your Dockerfile will include reference to an Astronomer Certified Docker Image. [Astronomer Certified](https://www.astronomer.io/downloads/) (AC) is a Debian-based, production-ready distribution of Apache Airflow that mirrors the open source project and undergoes additional levels of rigorous testing conducted by our team.
+Your Dockerfile will include reference to an Astronomer Certified Docker image. [Astronomer Certified](https://www.astronomer.io/downloads/) (AC) is a Debian-based, production-ready distribution of Apache Airflow that mirrors the open source project and undergoes additional levels of rigorous testing conducted by our team.
 
-This Docker image is hosted on [Astronomer's Docker Registry](https://quay.io/repository/astronomer/ap-airflow?tab=tags) and allows you to run Airflow on Astronomer. Additionally, the image you include in your Dockerfile dictates the version of Airflow you'd like to run both when you're developing locally and pushing up to Astro.
+This Docker image is hosted on [Astronomer's Docker registry](https://quay.io/repository/astronomer/ap-airflow?tab=tags) and allows you to run Airflow on Astronomer. Additionally, the image you include in your Dockerfile dictates the version of Airflow you'd like to run both when you're developing locally and pushing up to Astro.
 
 The Docker image you'll find in your Dockerfile by default is:
 
@@ -69,7 +69,7 @@ To help you get started, your initialized project includes an `example-dag` in `
 
 If you'd like to deploy some more functional DAGs, upload your own or check out [example DAGs we've open sourced](https://github.com/airflow-plugins/example-dags).
 
-## Step 2: Build Your Project Locally
+## Step 2: Build your project locally
 
 To confirm that you successfully initialized an Astro project, run the following command from your project directory:
 
@@ -82,7 +82,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The Triggerer is used exclusively for tasks that are run with deferrable operators.
+- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with deferrable operators.
 
 ## Step 3: Access the Airflow UI
 
@@ -90,7 +90,7 @@ Once your project builds successfully, you can access the Airflow UI by going to
 
 :::info
 
-It might take a few minutes for the Airflow UI to be available. As you wait for the Webserver container to start up, you might need to refresh your browser.
+It might take a few minutes for the Airflow UI to be available. As you wait for the webserver container to start up, you might need to refresh your browser.
 
 :::
 
@@ -100,10 +100,10 @@ After logging in, you should see the DAGs from your `dags` directory in the Airf
 <img src="/img/docs/sample-dag.png" alt="Example DAG in the Airflow UI" />
 </div>
 
-## What's Next?
+## What's next?
 
 Once you've successfully created a Software project on your local machine, we recommend reading the following:
 
-* [Customize Image](customize-image.md)
+* [Customize image](customize-image.md)
 * [Configure a Deployment](configure-deployment.md)
-* [Deploy Code](deploy-cli.md)
+* [Deploy code](deploy-cli.md)
