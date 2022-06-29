@@ -35,9 +35,7 @@ To install or upgrade Astro Runtime, see [Upgrade Runtime](https://docs.astronom
 
 ## Distribution
 
-Astro Runtime is distributed as a Debian-based Docker image.
-
-Runtime Docker images have the following format:
+Astro Runtime is distributed as a Debian-based Docker image. Runtime Docker images have the following format:
 
 - `quay.io/astronomer/astro-runtime:<version>`
 - `quay.io/astronomer/astro-runtime:<version>-base`
