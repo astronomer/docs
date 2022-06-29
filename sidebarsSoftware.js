@@ -75,6 +75,7 @@ module.exports = {
         'logs-to-s3',
         'registry-backend',
         'renew-tls-cert',
+        'install-telescope',
         'namespace-pools',
         'export-task-logs',
         'third-party-ingress-controllers',
