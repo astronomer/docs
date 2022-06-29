@@ -159,7 +159,7 @@ Optional. Use the `kubectl` command line tool to review the logs for any pods th
     ]}>
 <TabItem value="windows and mac">
 
-Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `docker-for-desktop` runs pods in the `default` namespace.
+Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the Pod that just ran. By default, `docker-for-desktop` runs Pods in the `default` namespace.
 
 </TabItem>
 <TabItem value="linux">
