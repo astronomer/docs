@@ -89,10 +89,10 @@ For each `major.minor` pair, only the latest patch is supported at any given tim
 
 Within the maintenance window of each Astro Runtime version, the following is true:
 
-- A set of Docker images corresponding to that version are available for download via [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and PyPi.
+- A set of Docker images corresponding to that version are available for download on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and PyPi.
 - Astronomer will regularly publish bug or security fixes identified as high priority.
-- The Astronomer Support team will offer support for paying customers running a supported version of Runtime via the [Astronomer Support Portal](https://support.astronomer.io).
-- A user can create a new Deployment via the Cloud UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Cloud UI assumes the latest patch.
+- The Astronomer Support team will offer support for paying customers running a supported version of Runtime on the [Astronomer Support Portal](https://support.astronomer.io).
+- A user can create a new Deployment using the Cloud UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Cloud UI assumes the latest patch.
 
 When the maintenance window for a given version of Runtime ends, the following is true:
 
@@ -101,7 +101,7 @@ When the maintenance window for a given version of Runtime ends, the following i
 - The Deployment view of the Cloud UI will show a warning that encourages the user to upgrade if the Deployment is running that version.
 - The latest version of the Astro CLI will show a warning if a user pushes a Docker image to Astronomer that corresponds to that version.
 
-To ensure reliability, service will not be interrupted for Deployments running a version of Runtime that is no longer supported. Unsupported versions will also continue to be available for local development and testing via the Astro CLI.
+To ensure reliability, service will not be interrupted for Deployments running a version of Runtime that is no longer supported. Unsupported versions will also continue to be available for local development and testing in the Astro CLI.
 
 ### End of maintenance date
 
@@ -123,4 +123,4 @@ The following table contains the exact lifecycle for each published version of A
 | [4.2.x](runtime-release-notes.md#astro-runtime-420)      | March 10, 2022  |  September 2022         |
 | [5.0.x](runtime-release-notes.md#astro-runtime-500)      | April 30, 2022  |  October 2022         |
 
-If you have any questions or concerns, reach out to [Astronomer support](https://support.astronomer.io).
+If you have any questions or concerns, contact [Astronomer support](https://support.astronomer.io).
