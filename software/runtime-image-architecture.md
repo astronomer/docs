@@ -57,7 +57,7 @@ Soon, Astronomer will provide a new executor with intelligent worker packing, ta
 
 ## Provider packages
 
-To make it easy to get started with Airflow, all Astro Runtime images have the following set of open source provider packages pre-installed:
+All Astro Runtime images have the following open source provider packages pre-installed:
 
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
 - Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
