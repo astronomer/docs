@@ -44,7 +44,6 @@ An Astro Runtime image must be specified in the `Dockerfile` of your Astro proje
 
 For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
-The Dockerfiles for all supported Astro Runtime images are located in the [Astronomer `astro-runtime` GitHub repository](https://github.com/astronomer/astro-runtime).
 
 ## Executors
 
