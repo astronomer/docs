@@ -17,7 +17,7 @@ This document provides information on the following:
 - Which versions of Runtime are currently available
 - The maintenance schedule and end-of-maintenance date for all versions
 
-For guidelines on how to upgrade to a new version of Runtime, read [Upgrade Runtime](upgrade-runtime.md). For a summary of each version's changes, read [Runtime Release Notes](runtime-release-notes.md).
+For guidelines on how to upgrade to a new version of Runtime, see [Upgrade Runtime](upgrade-runtime.md). For a summary of each version's changes, see [Runtime Release Notes](runtime-release-notes.md).
 
 ## Release channels
 
@@ -72,9 +72,13 @@ When Astronomer identifies a significant security vulnerability in Astro Runtime
 
 Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
 
-### The Quay Common Vulnerabilities and Exposures Report
+### Security scan results on Quay.io
 
-Astronomer is aware of the Quay Common Vulnerabilities and Exposures (CVE) report and monitors it frequently to determine if the vulnerabilities identified in the report pose a risk to organizations using Astro Runtime images. Astronomer works with vendors to correct vulnerabilities and regularly adds fixes to stable and LTS releases. If there is a high-level vulnerability in the CVE report that is causing concern for your organization, contact [Astronomer support](https://support.astronomer.io/).
+Astronomer is aware of the **Security Scan Report** results that are provided by [Project Quay](https://www.projectquay.io/) for each Astro Runtime image and are publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+
+Astronomer monitors the security scan results regularly to determine if any of the vulnerabilities pose a risk to organizations using Astro Runtime. Typically, vulnerabilities found in Astro Runtime are in third-party packages that are installed in Astro Runtime but are not maintained by Astronomer. When a vulnerability is determined to have a high exploitability risk, Astronomer works with vendors to correct it and incorporate a fix into stable and LTS releases of Astro Runtime.
+
+If there is a critical vulnerability in the Security Scan results that causes concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
 
 ## Astro Runtime maintenance policy
 
@@ -89,19 +93,19 @@ For each `major.minor` pair, only the latest patch is supported at any given tim
 
 Within the maintenance window of each Astro Runtime version, the following is true:
 
-- A set of Docker images corresponding to that version are available for download via [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and PyPi.
+- A set of Docker images corresponding to that version are available for download on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags) and PyPi.
 - Astronomer will regularly publish bug or security fixes identified as high priority.
-- The Astronomer Support team will offer support for paying customers running a supported version of Runtime via the [Astronomer Support Portal](https://support.astronomer.io).
-- A user can create a new Deployment via the Cloud UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Cloud UI assumes the latest patch.
+- Support for paying customers running a maintained version of Astro Runtime is provided by [Astronomer Support](https://support.astronomer.io).
+- A user can create a new Deployment with the Cloud UI, API, or Astro CLI with any supported `major.minor` version pair of Runtime. For new Deployments, the Cloud UI assumes the latest patch.
 
 When the maintenance window for a given version of Runtime ends, the following is true:
 
-- The Astronomer Support team is not obligated to answer questions regarding a Deployment that is running that version.
+- Astronomer is not obligated to answer questions regarding a Deployment that is running an unsupported version.
 - New Deployments cannot be created on Astro with that version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Cloud UI, API, or Astro CLI.
 - The Deployment view of the Cloud UI will show a warning that encourages the user to upgrade if the Deployment is running that version.
-- The latest version of the Astro CLI will show a warning if a user pushes a Docker image to Astronomer that corresponds to that version.
+- The latest version of the Astro CLI will show a warning if a user pushes an Astro Runtime image to Astronomer that corresponds to that version.
 
-To ensure reliability, service will not be interrupted for Deployments running a version of Runtime that is no longer supported. Unsupported versions will also continue to be available for local development and testing via the Astro CLI.
+Astronomer will not interrupt service for Deployments running Astro Runtime versions that are no longer in maintenance. Unsupported versions of Astro Runtime are available for local development and testing with the Astro CLI.
 
 ### End of maintenance date
 

@@ -11,14 +11,15 @@ This guide describes the steps to install Astronomer Software on Amazon Web Serv
 
 To install Astronomer on EKS, you'll need access to the following tools and permissions:
 
-* The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html)
-* A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
-* The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+* The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
+* A compatible version of Kubernetes as described in the Astronomer [Version Compatibility Reference](version-compatibility-reference.md).
+* The [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/).
 * The [OpenSSL CLI](https://www.openssl.org/docs/man1.0.2/man1/openssl.html)
-* [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
-* An SMTP Service & Credentials (e.g. Mailgun, Sendgrid, etc.)
-* Permission to create and modify resources on AWS
-* Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
+* [Helm (minimum v3.6)](https://helm.sh/docs/intro/install).
+* An SMTP Service & Credentials (for example, Mailgun or Sendgrid).
+* Permission to create and modify resources on AWS.
+* Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
+* An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
 
 ## Step 1: Choose a base domain
 
@@ -43,14 +44,14 @@ EKS is built off of Amazon's pre-existing EC2 service, so you can manage your Ku
 
 As you follow the guide linked above, keep in mind:
 
-* Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, refer to Astronomer's [Version compatibility reference](version-compatibility-reference.md).
-* We generally advise running the EKS control plane in a single security group. The worker nodes you spin up should have the same setup as the EKS control plane.
+* Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, see the Astronomer [Version Compatibility Reference](version-compatibility-reference.md).
+* Astronomer recommends running the EKS control plane in a single security group. The worker nodes you spin up should have the same setup as the EKS control plane.
 * All security and access settings needed for your worker nodes should be configured in your Cloud Formation template.
 * If you create an EKS cluster from the UI, `kubectl` access will be limited to the user who created the cluster by default.
     * To give more users `kubectl` access, you'll have to do so manually.
     * [This post](https://web.archive.org/web/20190323035848/http://marcinkaszynski.com/2018/07/12/eks-auth.html) goes through how IAM plays with EKS.
 * Expect to see each of your underlying nodes in the EC2 console.
-    * Given Astronomer's default resource request of ~11 CPUs and ~40GB of memory, we recommend using either six m5.xlarge or three m5.2xlarge [instances](https://aws.amazon.com/ec2/instance-types/) for your cluster. To modify Astronomer's default resource requests, see step 8.
+    * The default Astronomer resource requests are ~11 CPUs and ~40GB of memory. Astronomer recommends using either six m5.xlarge or three m5.2xlarge [instances](https://aws.amazon.com/ec2/instance-types/) for your cluster. To modify Astronomer default resource requests, see step 8.
 
 > **Note:** If you work with multiple Kubernetes environments, `kubectx` is an incredibly useful tool for quickly switching between Kubernetes clusters. Learn more [here](https://github.com/ahmetb/kubectx).
 
@@ -66,7 +67,7 @@ Once Astronomer is running, each Airflow Deployment that you create will have it
 
 ## Step 4: Configure TLS
 
-We recommend running Astronomer Software on a dedicated domain (`BASEDOMAIN`) or subdomain (`astro.BASEDOMAIN`).
+Astronomer recommends running Astronomer Software on a dedicated domain (`BASEDOMAIN`) or subdomain (`astro.BASEDOMAIN`).
 
 In order for users to access the web applications they need to manage Astronomer, you'll need a TLS certificate that covers the following subdomains:
 
@@ -85,8 +86,9 @@ prometheus.BASEDOMAIN
 
 To obtain a TLS certificate, complete one of the following setup options:
 
-* **Option 1:** Obtain a TLS certificate from Let's Encrypt. We recommend this option for smaller organizations where your DNS administrator and Kubernetes cluster administrator are either the same person or on the same team.
-* **Option 2:** Request a TLS certificate from your organization's security team. We recommend this option for large organizations with their own protocols for generating TLS certificates.
+* **Option 1:** Obtain a TLS certificate from Let's Encrypt. Astronomer recommends this option for smaller organizations where the DNS administrator and Kubernetes cluster administrator are the same person or on the same team.
+* **Option 2:** Request a TLS certificate from your organization's security team. Astronomer recommends this option for large organizations with their own protocols for generating TLS certificates.
+* **Option 3:** Use the AWS Certificate Manager as the certificate provider.
 
 ### Option 1: Create TLS certificates using Let's Encrypt
 
@@ -111,6 +113,26 @@ This command will generate a report. If the `X509v3 Subject Alternative Name` se
 
 Depending on your organization, you may receive either a globally trusted certificate or a certificate from a private CA. The certificate from your private CA may include a domain certificate, a root certificate, and/or intermediate certificates, all of which need to be in proper certificate order. To verify certificate order, follow the guidelines below.
 
+### Option 3: Use the AWS Certificate Manager as the certificate provider 
+
+1. Run the following command to generate a private/public RSA key pair:
+
+    ```sh
+    $ openssl genrsa -out private.pem 4096  
+    $ openssl rsa -in private.pem -outform PEM -pubout -out public.pem  
+    ```
+2.  Open the `values.yaml` file and add this entry:
+
+    ```yaml
+    nginx:
+      loadBalancerIP: ~
+      privateLoadBalancer: true  # this does affect aws-load-balancer-type: external ingressAnnotations:
+        service.beta.kubernetes.io/aws-load-balancer-type: external
+        service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "\"true\""
+        service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <ACM Certificate ARN>
+        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: ssl
+    ```
 #### Confirm certificate chain order
 
 If your organization is using a private certificate authority, you'll need to confirm that your certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
@@ -129,7 +151,7 @@ If the certificate order is correct, proceed to step 5.
 
 ## Step 5: Create a Kubernetes TLS Secret
 
-If you received a globally trusted certificate, such as one generated by Let's Encrypt, simply run the following command and proceed to Step 6:
+If you received a globally trusted certificate, such as one generated by Let's Encrypt, run the following command and then proceed to Step 6:
 
 ```sh
 kubectl create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath> -n astronomer
@@ -181,7 +203,7 @@ If your SMTP provider is not listed, refer to the provider's documentation for i
 
 By default, Astronomer requires a central Postgres database that will act as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
 
-While you're free to configure any database, most AWS users on Astronomer run [Amazon RDS for PostgreSQL](https://aws.amazon.com/rds/postgresql/). For production environments, we _strongly_ recommend a managed Postgres solution.
+While you're free to configure any database, most AWS users on Astronomer run [Amazon RDS for PostgreSQL](https://aws.amazon.com/rds/postgresql/). For production environments, Astronomer recommends a managed Postgres solution.
 
 > **Note:** If you're setting up a development environment, this step is optional. Astronomer can be configured to deploy the PostgreSQL helm chart as the backend database with the following set in your `config.yaml`:
 >
@@ -200,7 +222,7 @@ kubectl create secret generic astronomer-bootstrap \
 
 > **Note:** You must URL encode any special characters in your Postgres password.
 
-> **Note:** We recommend using a [t2 medium](https://aws.amazon.com/rds/instance-types/) as the minimum RDS instance size.
+> **Note:** Astronomer recommends using a [t2 medium](https://aws.amazon.com/rds/instance-types/) as the minimum RDS instance size.
 
 ## Step 8: Configure your Helm chart
 
