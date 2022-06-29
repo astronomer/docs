@@ -149,7 +149,7 @@ with dag:
 ```
 ## Step 4: View Kubernetes logs
 
-Optional. Review the logs for any pods that were created by the operator for issues.
+Optional. Use the `kubectl` command line tool to review the logs for any pods that were created by the operator for issues. If you haven't installed the `kubectl` command line tool, see [Install Tools](https://kubernetes.io/docs/tasks/tools/#kubectl).
 
 <Tabs
     defaultValue="windows and mac"
