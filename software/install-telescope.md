@@ -5,6 +5,10 @@ id: install-telescope
 description: Install the Telescope tool to collect Airflow metrics and usage for Astronomer.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
 Telescope is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at various points in time. Astronomer uses this information to troubleshoot your environments and verify pricing based on task usage.
 
 Telescope doesn't have direct access to your Airflow environments. Instead, you run Telescope commands to observe the current state of an Airflow environment at a given point in time. Based on what it observes, Telescope generates a report which you can share with Astronomer support.  
