@@ -9,7 +9,7 @@ Astro Runtime is a production ready, data orchestration tool based on Apache Air
 
 ## Differences between Astro Runtime and Apache Airflow
 
-If your organization is using Software version 0.29 or later, you can deploy Astro Runtime images. Astro Runtime includes the following features:
+If your organization is using Astro, deploying Astro Runtime is required and central to the value of our product. Astro Runtime includes the following features:
 
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules that is maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 - Airflow UI improvements. For example, showing the Deployment Docker image tag in the footer of all UI pages.
