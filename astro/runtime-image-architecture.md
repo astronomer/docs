@@ -26,6 +26,7 @@ Astro Runtime versions are released regularly and use [semantic versioning](http
 - **Major** versions are released for significant feature additions. This includes new major or minor versions of Apache Airflow as well as API or DAG specification changes that are not backwards-compatible.
 - **Minor** versions are released for functional changes. This includes new patch versions of Apache Airflow as well as API or DAG specification changes that are backwards-compatible.
 - **Patch** versions are released for bug and security fixes that resolve unwanted behavior. This includes new patch versions of `astronomer-providers` and `openlineage-airflow`.
+
 Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments on Astro must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given cluster or Workspace.
 
 For a list of supported Astro Runtime versions and more information on the Astro Runtime maintenance policy, see [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md).
@@ -42,7 +43,6 @@ Astro Runtime is distributed as a Debian-based Docker image. Runtime Docker imag
 An Astro Runtime image must be specified in the `Dockerfile` of your Astro project. Astronomer recommends using non-`base` images, which incorporate ONBUILD commands that copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component. A `base` Astro Runtime image is recommended for complex use cases that require additional customization, such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
 
 For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
-
 
 ## Executors
 
