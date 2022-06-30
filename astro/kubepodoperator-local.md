@@ -1,6 +1,6 @@
 ---
 title: 'Test and Troubleshoot the KubernetesPodOperator Locally'
-sidebar_label: 'Local KubernetesPodOperator'
+sidebar_label: 'KubernetesPodOperator (Local)'
 id: kubepodoperator-local
 description: Test and troubleshoot the KubernetesPodOperator locally.
 ---
@@ -11,7 +11,7 @@ import {siteVariables} from '@site/src/versions';
 
 The `KubernetesPodOperator` is an Airflow operator that completes tasks in Kubernetes Pods. The `KubernetesPodOperator` provides an isolated, containerized execution environment for each task and lets you run custom Docker images and Python versions, set task-level resource requests, and more.
 
-The Kubernetes infrastructure required to run the `KubernetesPodOperator` is built in. To test the `KubernetesPodOperator` operator locally, you need a local Kubernetes environment.
+On Astro, the Kubernetes infrastructure required to run the `KubernetesPodOperator` is built in. To test the `KubernetesPodOperator` operator locally, you need a local Kubernetes environment. 
 
 ## Step 1: Set up Kubernetes
 <Tabs
@@ -54,7 +54,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     ]}>
 <TabItem value="windows and mac">
 
-1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster. For example:
+1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster. For example:
     ```apiVersion: v1
     clusters:
     - cluster:
@@ -79,13 +79,13 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
 2. Update the `<certificate-authority-data>`, `<client-authority-data>`, and `<client-key-data>` values in the `config` file with the values for your organization. 
 3. Under cluster, change `server: https://localhost:6445` to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
-4. Optional. Add the `.kube` folder to `.gitignore` if your project is hosted in a GitHub repository and you want to prevent the file from being tracked by your version control tool. 
+4. Optional. Add the `.kube` folder to `.gitignore` if your Astro project is hosted in a GitHub repository and you want to prevent the file from being tracked by your version control tool.
 5. Optional. Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.
 
 </TabItem>
 <TabItem value="linux">
 
-In a `.kube` folder in your project, create a config file with:
+In a `.kube` folder in your Astro project, create a config file with:
 
 ```bash
 microk8s.config > /include/.kube/config
@@ -97,8 +97,9 @@ microk8s.config > /include/.kube/config
 
 To use the KubernetesPodOperator, you must define the configuration of each task and the Kubernetes Pod in which it runs, including its namespace and Docker image.
 
-This example DAG runs a `hello-world` Docker image. The namespace is determined dynamically based on whether you're running the DAG in your local environment. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
-Run `astro dev start` to build this config into your image.
+This example DAG runs a `hello-world` Docker image. The namespace is determined dynamically based on whether you're running the DAG in your local environment or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
+
+Once you've updated the definition of KubernetesPodOperator tasks in your Astro project, run `astro dev start` with the Astro CLI to test your DAGs in a local Airflow environment.
 
 ```python
 from datetime import datetime, timedelta
@@ -148,7 +149,7 @@ with dag:
 ```
 ## Step 4: View Kubernetes logs
 
-Optional. Use the `kubectl` command line tool to review the logs for any pods that were created by the operator for issues. If you haven't installed the `kubectl` command line tool, see [Install Tools](https://kubernetes.io/docs/tasks/tools/#kubectl).
+Optional. Use the `kubectl` command line tool to review the logs for any Pods that were created by the operator for issues and help with troubleshooting. If you haven't installed the `kubectl` command line tool, see [Install Tools](https://kubernetes.io/docs/tasks/tools/#kubectl).
 
 <Tabs
     defaultValue="windows and mac"
@@ -170,4 +171,4 @@ Run `microk8s.kubectl get pods -n $namespace` or `microk8s.kubectl logs {pod_nam
 
 ## Next Steps
 
-- [Run the KubernetesPodOperator on Astronomer Software](kubepodoperator.md)
+- [Run the KubernetesPodOperator on Astro](kubepodoperator.md)
