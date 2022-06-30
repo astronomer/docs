@@ -99,7 +99,7 @@ To use the KubernetesPodOperator, you must define the configuration of each task
 
 This example DAG runs a `hello-world` Docker image. The namespace is determined dynamically based on whether you're running the DAG in your local environment or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
 
-Run `astro dev start` to build this config into your image.
+Once you've updated the definition of KubernetesPodOperator tasks in your Astro project, run `astro dev start` with the Astro CLI to test your DAGs in a local Airflow environment.
 
 ```python
 from datetime import datetime, timedelta
@@ -149,7 +149,7 @@ with dag:
 ```
 ## Step 4: View Kubernetes logs
 
-Optional. Use the `kubectl` command line tool to review the logs for any pods that were created by the operator for issues. If you haven't installed the `kubectl` command line tool, see [Install Tools](https://kubernetes.io/docs/tasks/tools/#kubectl).
+Optional. Use the `kubectl` command line tool to review the logs for any Pods that were created by the operator for issues and help with troubleshooting. If you haven't installed the `kubectl` command line tool, see [Install Tools](https://kubernetes.io/docs/tasks/tools/#kubectl).
 
 <Tabs
     defaultValue="windows and mac"
