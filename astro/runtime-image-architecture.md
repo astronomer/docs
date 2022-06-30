@@ -13,7 +13,7 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 - Exclusive features to enrich the task execution experience, including smart task concurrency defaults and high availability configurations.
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer deferrable operators](deferrable-operators.md#astronomer-deferrable-operators).
 - The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](data-lineage-concepts.md#openlineage-and-airflow).
-- A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane and Astronomer Software.
+- A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane.
 - A custom security manager that enforces user roles and permissions as defined by Astro and Astronomer Software. See [User permissions](user-permissions.md).
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
 
