@@ -33,6 +33,32 @@ For a list of supported Astro Runtime versions and more information on the Astro
 
 To install or upgrade Astro Runtime, see [Upgrade Runtime](https://docs.astronomer.io/astro/upgrade-runtime).
 
+### Astro Runtime and Apache Airflow parity
+
+This table lists Astro Runtime releases and their associated Apache Airflow versions.
+
+| Astro Runtime                                   | Apache Airflow Version                                                                | 
+| ----------------------------------------------- | ----------------------------------------------------------------------------- |
+| 3.0.x                                       |       2.1.1                                                                       |
+| 4.0.x                                       |       2.2.0                                                                    | 
+| 4.1.x                                       |       2.2.4                                                                    |
+| 4.2.x                                       |       2.2.4                                                                      | 
+| 5.0.x                                       |       2.3.0                                                                        | 
+
+### Provider package versioning
+
+If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](runtime-release-notes.md).
+
+To determine the version of any provider package installed in your current Astro Runtime image, run:
+
+```
+docker run --rm {image} pip freeze | grep <provider>
+```
+
+### Python versioning
+
+Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version, Astronomer recommends that you use the KuberentesPodOperator. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).
+
 ## Distribution
 
 Astro Runtime is distributed as a Debian-based Docker image. Runtime Docker images have the following format:
@@ -71,32 +97,6 @@ All Astro Runtime images have the following open source provider packages pre-in
 - OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
-
-## Astro Runtime and Apache Airflow parity
-
-This table lists Astro Runtime releases and their associated Apache Airflow versions.
-
-| Astro Runtime                                   | Apache Airflow Version                                                                | 
-| ----------------------------------------------- | ----------------------------------------------------------------------------- |
-| 3.0.x                                       |       2.1.1                                                                       |
-| 4.0.x                                       |       2.2.0                                                                    | 
-| 4.1.x                                       |       2.2.4                                                                    |
-| 4.2.x                                       |       2.2.4                                                                      | 
-| 5.0.x                                       |       2.3.0                                                                        | 
-
-### Provider package versioning
-
-If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](runtime-release-notes.md).
-
-To determine the version of any provider package installed in your current Astro Runtime image, run:
-
-```
-docker run --rm {image} pip freeze | grep <provider>
-```
-
-## Python versioning
-
-Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version, Astronomer recommends that you use the KuberentesPodOperator. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).
 
 ## System distribution
 
