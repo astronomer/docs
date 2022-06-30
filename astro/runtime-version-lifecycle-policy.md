@@ -128,3 +128,8 @@ The following table contains the exact lifecycle for each published version of A
 | [5.0.x](runtime-release-notes.md#astro-runtime-500)      | April 30, 2022  |  October 2022         |
 
 If you have any questions or concerns, contact [Astronomer support](https://support.astronomer.io).
+
+## Related documentation
+
+- [Astro Runtime architecture](runtime-image-architecture.md)
+- [Astro Runtime release notes](runtime-release-notes.md)

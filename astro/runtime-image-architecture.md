@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Astro Runtime Architecture'
-title: 'Astro Runtime Architecture'
+title: 'Astro Runtime architecture'
 id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.
 ---
@@ -100,3 +100,8 @@ All Astro Runtime images have the following open source provider packages pre-in
 ## System distribution
 
 Astro Runtime images are based on Debian 11.3 (bullseye).
+
+## Related documentation
+
+- [Astro Runtime versioning and lifecycle policy](runtime-version-lifecycle-policy.md)
+- [Astro Runtime release notes](runtime-release-notes.md)
