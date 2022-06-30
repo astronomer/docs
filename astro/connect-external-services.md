@@ -107,11 +107,9 @@ To allow Astro to access Amazon Web Services (AWS) resources, you need to define
 
 4. Click **Roles** and in the **Role name** column select the role you created in step 1.
 
-5. Copy the value displayed in the **ARN** field.
+5. Click the **Trust relationships** tab.
 
-6. Click the **Trust relationships** tab.
-
-7. Click **Edit trust policy** and replace the `arn` values with the value you copied in step 5:
+6. Click **Edit trust policy** and replace the `arn` values with the value you copied in step 5:
 
 ```text
     {
@@ -140,6 +138,6 @@ To allow Astro to access Amazon Web Services (AWS) resources, you need to define
     ]
 }
 ```
-8. Click **Update policy**.
+7. Click **Update policy**.
 
-9. Connect AWS to Airflow.
+8. Connect AWS to Airflow.
