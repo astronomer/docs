@@ -30,7 +30,6 @@ For more information about managing Google Cloud projects, see [GCP documentatio
 
 For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
 
-<<<<<<< HEAD
 ### VPC Peering Prerequisites (Optional)
 
 If any of your GCP resources are on a private network, you can access them using one of the following options:
@@ -45,8 +44,6 @@ Astro uses 4 different CIDR blocks for creating the infrastructure for your Astr
 - **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
 - **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/19`)
 
-=======
->>>>>>> 10aa5454055bee5cf5c48a3cae23016ef9c559a1
 ## Step 1: Access Astro
 
 To get started with Astro, create an account at https://cloud.astronomer.io/.
