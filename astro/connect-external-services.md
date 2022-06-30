@@ -50,9 +50,9 @@ Once peering is set up, the owner of the target VPC can expect to continue to wo
 
 ### DNS considerations with VPC peering (_AWS only_)
 
-To resolve DNS hostnames from your target VPC, your cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled via AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
+To resolve DNS hostnames from your target VPC, your cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled. See AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
 
-If your target VPC resolves DNS hostnames via **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the data plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+If your target VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the data plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting [Astronomer support](https://support.astronomer.io).
 
@@ -91,3 +91,55 @@ astro-nuclear-scintillation-27@astronomer-pmm.iam.gserviceaccount.com
 :::
 
 For more information about configuring service accounts on GCP, see [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
+
+## Authorize Astro access to Amazon Web Services resources
+
+To allow Astro to access Amazon Web Services (AWS) resources, you need to define the resources that are accessible and then create an Airflow connection.
+
+1. Create an AWS IAM role with a trust policy that allows access to a specific AWS resource. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
+
+2. Get the account ID of the cluster you want to connect to the AWS service:
+
+    - In the Cloud UI, click **Clusters**.
+    - Copy the value in the **ACCOUINT ID column**.
+
+3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
+
+4. Click **Roles** and in the **Role name** column select the role you created in step 1.
+
+5. Copy the value displayed in the **ARN** field.
+
+6. Click the **Trust relationships** tab.
+
+7. Click **Edit trust policy** and replace the `arn` values with the value you copied in step 5:
+
+```text
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::<AWS-account-ID>:role/<role-name>-<cluster-account-ID>",
+                ]
+            },
+            "Action": "sts:AssumeRole"
+        },
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "AIDA53UF57CEGYNXUMYOB",
+                    "AIDA53UF57CEAVG7TJLBY",
+                    "arn:aws:sts::952689883272:assumed-role/AWSReservedSSO_AdministratorAccess_7371cdd25ddaec93/deepak.narain@astronomer.io"
+                ]
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+```
+8. Click **Update policy**.
+
+9. Connect AWS to Airflow.
