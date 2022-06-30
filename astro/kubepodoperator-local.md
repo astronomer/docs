@@ -54,7 +54,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     ]}>
 <TabItem value="windows and mac">
 
-1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubePodOperator uses to connect to your cluster. For example:
+1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster. For example:
     ```apiVersion: v1
     clusters:
     - cluster:
