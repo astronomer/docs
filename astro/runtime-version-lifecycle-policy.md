@@ -7,7 +7,7 @@ description: Learn how Astronomer releases and maintains Astro Runtime, the core
 
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
 
-Policies define the period that specific Astro Runtime versions are supported and the frequency of updates.  
+Policies define the period that specific Astro Runtime versions are supported and the frequency updates are provided.  
 
 ## Astro Runtime maintenance policy
 
