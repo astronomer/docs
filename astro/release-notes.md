@@ -35,7 +35,11 @@ For a list of all GCP regions that Astro supports, see [GCP Resource Reference](
 
 ### Additional improvements
 
-You can now search for Organization members in the **People** tab at the Organization level and in the **Access** page at the Workspace level.
+- You can now search for Organization members in the **People** tab at the Organization level and in the **Access** page at the Workspace level.
+
+### Bug fixes
+
+- Fixed an issue where you could not use the KubernetesPodOperator to spin up a Pod in a Kubernetes cluster outside of your Astro cluster.
 
 ## June 23, 2022
 
