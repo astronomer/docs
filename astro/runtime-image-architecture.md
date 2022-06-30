@@ -45,6 +45,24 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 4.2.x                                       |       2.2.4                                                                      | 
 | 5.0.x                                       |       2.3.0                                                                        | 
 
+## Provider packages
+
+All Astro Runtime images have the following open source provider packages pre-installed:
+
+- Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
+- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
+- Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
+- Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
+- Password [`apache-airflow-password`](https://pypi.org/project/apache-airflow/)
+- Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-cncf.kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
+- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
+- Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
+- StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
+- Virtualenv [`apache-airflow-virtualenv`](https://pypi.org/project/virtualenv/)
+- OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
+- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
+- Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
+
 ### Provider package versioning
 
 If an Astro Runtime release includes changes to an installed version of a provider package that is maintained by Astronomer (`astronomer-providers` or `openlineage-airflow`), the version change is documented in the [Astro Runtime release notes](runtime-release-notes.md).
@@ -78,24 +96,6 @@ In all local environments created with the Astro CLI, Astro Runtime runs the [Lo
 On Astro, Astro Runtime exclusively supports the [Celery executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html).
 
 Soon, Astronomer will provide a new executor with intelligent worker packing, task-level resource requests, improved logging, and Kubernetes-like task isolation.
-
-## Provider packages
-
-All Astro Runtime images have the following open source provider packages pre-installed:
-
-- Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
-- Elasticsearch [`apache-airflow-providers-elasticsearch`](https://pypi.org/project/apache-airflow-providers-elasticsearch/)
-- Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
-- Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
-- Password [`apache-airflow-password`](https://pypi.org/project/apache-airflow/)
-- Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-cncf.kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
-- PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
-- Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
-- StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
-- Virtualenv [`apache-airflow-virtualenv`](https://pypi.org/project/virtualenv/)
-- OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
-- Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
-- Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
 
 ## System distribution
 

@@ -7,7 +7,23 @@ description: Learn how Astronomer releases and maintains Astro Runtime, the core
 
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
 
-Policies define the period that specific Astro Runtime versions are supported and the frequency updates are provided.  
+Policies define the period that specific Astro Runtime versions are supported and the frequency updates are provided.
+
+## Backport policy for bug and security fixes
+
+When Astronomer identifies a significant bug in Astro Runtime, a fix is backported to all Long Term Support (LTS) versions and the latest stable version. To avoid the impact of previously identified bugs, Astronomer recommends that you upgrade Astro Runtime if you are not using the latest stable version.
+
+When Astronomer identifies a significant security vulnerability in Astro Runtime, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
+
+Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
+
+### Security scan results on Quay.io
+
+Astronomer is aware of the **Security Scan Report** results that are provided by [Project Quay](https://www.projectquay.io/) for each Astro Runtime image and are publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+
+Astronomer monitors the security scan results regularly to determine if any of the vulnerabilities pose a risk to organizations using Astro Runtime. Typically, vulnerabilities found in Astro Runtime are in third-party packages that are installed in Astro Runtime but are not maintained by Astronomer. When a vulnerability is determined to have a high exploitability risk, Astronomer works with vendors to correct it and incorporate a fix into stable and LTS releases of Astro Runtime.
+
+If there is a critical vulnerability in the Security Scan results that causes concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
 
 ## Astro Runtime maintenance policy
 
