@@ -9,7 +9,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-The `KubernetesPodOperator` completes work within Kubernetes Pods in a Kubernetes cluster. Test the `KubernetesPodOperator` locally before running it in a production Kubernetes cluster. 
+The `KubernetesPodOperator` is an Airflow operator that completes tasks in Kubernetes Pods. The `KubernetesPodOperator` provides an isolated, containerized execution environment for each task and lets you run custom Docker images and Python versions, set task-level resource requests, and more.
+
+The Kubernetes infrastructure required to run the `KubernetesPodOperator` is built in. To test the `KubernetesPodOperator` operator locally, you need a local Kubernetes environment.
 
 ## Step 1: Set up Kubernetes
 <Tabs
@@ -20,7 +22,7 @@ The `KubernetesPodOperator` completes work within Kubernetes Pods in a Kubernete
     ]}>
 <TabItem value="windows and mac">
 
-The latest versions of Docker for Windows and Mac let you run a single node Kubernetes cluster locally. If you are using Windows, see [Setting Up Docker for Windows and WSL to Work Flawlessly](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). If you are using Mac, see [Docker Desktop for Mac user manual](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). It isn't nevessary to install docker-compose.
+The latest versions of Docker for Windows and Mac let you run a single node Kubernetes cluster locally. If you are using Windows, see [Setting Up Docker for Windows and WSL to Work Flawlessly](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). If you are using Mac, see [Docker Desktop for Mac user manual](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). It isn't nevessary to install Docker Compose.
 
 1. Open Docker and go to **Settings** > **Kubernetes**.
 
@@ -52,7 +54,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     ]}>
 <TabItem value="windows and mac">
 
-1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubePodOperator uses to connect to your cluster. For example:
+1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster. For example:
     ```apiVersion: v1
     clusters:
     - cluster:
@@ -75,15 +77,15 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
     ```
     The cluster `name` should be searchable as `docker-desktop` in your local `$HOME/.kube``config` file. Do not add any additional data to the `config` file.
 
-2. Update the `<certificate-authority-data>`, `<certificate-authority-data>`, and `<certificate-authority-data>` values in the `config` file with the values for your organization. 
+2. Update the `<certificate-authority-data>`, `<client-authority-data>`, and `<client-key-data>` values in the `config` file with the values for your organization. 
 3. Under cluster, change `server: https://localhost:6445` to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
-4. Optional. Add the `.kube` folder to `.gitignore` if  your project is configureed as a GitHub repository and you want to prevent the file from being tracked by your version control tool. 
+4. Optional. Add the `.kube` folder to `.gitignore` if your project is hosted in a GitHub repository and you want to prevent the file from being tracked by your version control tool. 
 5. Optional. Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.
 
 </TabItem>
 <TabItem value="linux">
 
-In a `.kube` folder in your Astro project, create a config file with:
+In a `.kube` folder in your project, create a config file with:
 
 ```bash
 microk8s.config > /include/.kube/config
@@ -93,8 +95,9 @@ microk8s.config > /include/.kube/config
 
 ## Step 3: Run your container
 
-To use the KubernetesPodOperator, you must define the configuration for your pod, including its namespace and runtime image, when you create an instance of the operator. This sample syntax runs the `hello-world` Docker image in a different namespace based on whether you're running the DAG locally or on Astro. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
+To use the KubernetesPodOperator, you must define the configuration of each task and the Kubernetes Pod in which it runs, including its namespace and Docker image.
 
+This example DAG runs a `hello-world` Docker image. The namespace is determined dynamically based on whether you're running the DAG in your local environment. If you are using Linux, the `cluster_context` is `microk8s`. The `config_file` points to the edited `/include/.kube/config` file.
 Run `astro dev start` to build this config into your image.
 
 ```python
@@ -107,7 +110,7 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import Kubernete
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2019, 1, 1),
+    'start_date': datetime(2022, 1, 1),
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
@@ -132,7 +135,7 @@ with dag:
     KubernetesPodOperator(
         namespace=namespace,
         image="hello-world",
-        labels={"foo": "bar"},
+        labels={"<pod-label>": "<label-name>"},
         name="airflow-test-pod",
         task_id="task-one",
         in_cluster=in_cluster,  # if set to true, will look in the cluster, if false, looks for file
@@ -145,7 +148,7 @@ with dag:
 ```
 ## Step 4: View Kubernetes logs
 
-Optional. Review the logs for any pods that were created by the operator for issues.
+Optional. Use the `kubectl` command line tool to review the logs for any pods that were created by the operator for issues. If you haven't installed the `kubectl` command line tool, see [Install Tools](https://kubernetes.io/docs/tasks/tools/#kubectl).
 
 <Tabs
     defaultValue="windows and mac"
@@ -155,7 +158,7 @@ Optional. Review the logs for any pods that were created by the operator for iss
     ]}>
 <TabItem value="windows and mac">
 
-Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the pod that just ran. By default, `docker-for-desktop` runs pods in the `default` namespace.
+Run `kubectl get pods -n $namespace` or `kubectl logs {pod_name} -n $namespace` to examine the logs for the Pod that just ran. By default, `docker-for-desktop` runs Pods in the `default` namespace.
 
 </TabItem>
 <TabItem value="linux">

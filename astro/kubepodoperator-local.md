@@ -22,7 +22,7 @@ On Astro, the Kubernetes infrastructure required to run the `KubernetesPodOperat
     ]}>
 <TabItem value="windows and mac">
 
-The latest versions of Docker for Windows and Mac let you run a single node Kubernetes cluster locally. If you are using Windows, see [Setting Up Docker for Windows and WSL to Work Flawlessly](https://docs.docker.com/desktop/windows/install/). If you are using Mac, see [Docker Desktop for Mac user manual](https://docs.docker.com/desktop/mac/). It isn't necessary to install [Docker Compose](https://docs.docker.com/compose/).
+The latest versions of Docker for Windows and Mac let you run a single node Kubernetes cluster locally. If you are using Windows, see [Setting Up Docker for Windows and WSL to Work Flawlessly](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). If you are using Mac, see [Docker Desktop for Mac user manual](https://nickjanetakis.com/blog/setting-up-docker-for-windows-and-wsl-to-work-flawlessly). It isn't nevessary to install Docker Compose.
 
 1. Open Docker and go to **Settings** > **Kubernetes**.
 
@@ -79,7 +79,7 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 
 2. Update the `<certificate-authority-data>`, `<client-authority-data>`, and `<client-key-data>` values in the `config` file with the values for your organization. 
 3. Under cluster, change `server: https://localhost:6445` to `server: https://kubernetes.docker.internal:6443` to identify the localhost running Kubernetes Pods. If this doesn't work, try `server: https://host.docker.internal:6445`.
-4. Optional. Add the `.kube` folder to `.gitignore` if  your Astro project is hosted in a GitHub repository and you want to prevent the file from being tracked by your version control tool.
+4. Optional. Add the `.kube` folder to `.gitignore` if your Astro project is hosted in a GitHub repository and you want to prevent the file from being tracked by your version control tool.
 5. Optional. Add the `.kube` folder to `.dockerignore` to exclude it from the Docker image.
 
 </TabItem>
@@ -111,7 +111,7 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import Kubernete
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2019, 1, 1),
+    'start_date': datetime(2022, 1, 1),
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
@@ -121,7 +121,7 @@ default_args = {
 namespace = conf.get('kubernetes', 'NAMESPACE')
 
 # This will detect the default namespace locally and read the
-# environment namespace when deployed to Astro.
+# environment namespace when deployed to Astronomer.
 if namespace =='default':
     config_file = '/usr/local/airflow/include/.kube/config'
     in_cluster = False
