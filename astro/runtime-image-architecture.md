@@ -73,9 +73,7 @@ For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/rep
 
 In Airflow, the executor is responsible for determining how and where a task is completed.
 
-In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html).
-
-On Astro, Astro Runtime exclusively supports the [Celery executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html).
+In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html). On Astro, Astro Runtime exclusively supports the [Celery executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html).
 
 Soon, Astronomer will provide a new executor with intelligent worker packing, task-level resource requests, improved logging, and Kubernetes-like task isolation.
 
