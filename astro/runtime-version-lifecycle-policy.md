@@ -1,6 +1,6 @@
 ---
 title: "Astro Runtime versioning and lifecycle policy"
-sidebar_label: "Versioning and lifecycle policy"
+sidebar_label: "Astro Runtime versioning and lifecycle policy"
 id: runtime-version-lifecycle-policy
 description: Learn how Astronomer releases and maintains Astro Runtime, the core component that powers a differentiated Apache Airflow experience on Astro.
 ---
