@@ -16,6 +16,27 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.2.0 ([Release notes](cli/release-notes.md))
 
+## June 30, 2022
+
+### New GCP regions available
+
+You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+
+- `asia-northeast1` (Tokyo)
+- `asia-northeast2` (Osaka)
+- `asia-northeast3` (Seoul)
+- `asia-south1` (Mumbai)
+- `europe-central2` (Warsaw)
+- `europe-west6` (Zurich)
+- `northamerica-northeast1` (Montreal)
+- `us-west3` (Salt Lake City)
+
+For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+
+### Additional improvements
+
+You can now search for Organization members in the **People** tab at the Organization level and in the **Access** page at the Workspace level.
+
 ## June 23, 2022
 
 ### New GCP regions available
