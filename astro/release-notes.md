@@ -18,7 +18,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ## June 30, 2022
 
-### New GCP regions available
+### New Google Cloud Platform regions
 
 You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
 
@@ -31,15 +31,15 @@ You can now [create an Astro cluster on GCP](create-cluster.md) in the following
 - `northamerica-northeast1` (Montreal)
 - `us-west3` (Salt Lake City)
 
-For a list of all GCP regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
+For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [GCP Resource Reference](resource-reference-gcp.md#gcp-region).
 
 ### Additional improvements
 
-- You can now search for Organization members in the **People** tab at the Organization level and in the **Access** page at the Workspace level.
+- You can now search for Organization members by name, email address, and role in the **People** tab of the Organization view in the the Cloud UI. You can also search for members in the **Access** tab of the Workspace view.
 
 ### Bug fixes
 
-- Fixed an issue where you could not use the KubernetesPodOperator to spin up a Pod in a Kubernetes cluster outside of your Astro cluster.
+- Fixed an issue where you could not use the KubernetesPodOperator to execute tasks in a Kubernetes cluster outside of your Astro cluster. See [KubernetesPodOperator](https://docs.astronomer.io/astro/kubernetespodoperator).
 
 ## June 23, 2022
 

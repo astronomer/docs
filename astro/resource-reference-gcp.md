@@ -35,7 +35,7 @@ To create a new cluster on Astro with a specified configuration, read [Install o
 
 ### GCP region
 
-Astro supports the following GCP regions:
+Astro supports the following Google Cloud Platform (GCP) regions:
 
 - `asia-northeast1` - Tokyo, Asia
 - `asia-northeast2` - Osaka, Asia
