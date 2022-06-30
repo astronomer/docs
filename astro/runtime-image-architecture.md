@@ -43,7 +43,6 @@ An Astro Runtime image must be specified in the `Dockerfile` of your Astro proje
 
 For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
 
-
 ## Executors
 
 In Airflow, the executor is responsible for determining how and where a task is completed.
