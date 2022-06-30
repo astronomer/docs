@@ -169,6 +169,6 @@ Run `microk8s.kubectl get pods -n $namespace` or `microk8s.kubectl logs {pod_nam
 </TabItem>
 </Tabs>
 
-## Next Steps
+## Next steps
 
-- [Run the KubernetesPodOperator on Astro](kubepodoperator.md)
+- [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md)
