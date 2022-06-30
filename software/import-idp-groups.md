@@ -62,7 +62,7 @@ To add your IdP group to Astronomer as a Team, Astronomer needs to be able to re
 
 If you haven't already, add group claims to the IdP groups that you're importing to Astronomer through your configured [third party identity provider](integrate-auth-system.md). Refer to your IdP's documentation for information on how to complete this step. For example, for Okta you can refer to [Customize tokens returned from Okta with a Groups claim](https://developer.okta.com/docs/guides/customize-tokens-groups-claim/main).
 
-By default, Astronomer assumes that the name of your group claim is `groups`. If you named your group claim something other than `groups`, you must complete the following setup:
+By default, Astronomer assumes that the name of your group claim is `groups`. If you named your group claim something other than `groups`, complete the following setup:
 
 1. In your `config.yaml` file, set `houston.config.auth.openidConnect.<idp-provider>.claimsMapping` to the custom name.
 2. Save this configuration and push it to your platform as described in [Apply a Platform Config Change](apply-platform-config.md).
