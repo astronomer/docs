@@ -64,7 +64,7 @@ If you haven't already, add group claims to the IdP groups that you're importing
 
 By default, Astronomer assumes that the name of your group claim is `groups`. If you named your group claim something other than `groups`, complete the following setup:
 
-1. In your `config.yaml` file, set `houston.config.auth.openidConnect.<idp-provider>.claimsMapping` to the custom name.
+1. In your `config.yaml` file, set `houston.config.auth.openidConnect.<idp-provider>.claimsMapping` to the custom name of your group claim.
 2. Save this configuration and push it to your platform as described in [Apply a Platform Config Change](apply-platform-config.md).
 
 ## Step 3: Add Teams to Workspaces and Deployments
