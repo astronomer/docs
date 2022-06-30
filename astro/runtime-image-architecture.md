@@ -54,7 +54,6 @@ To determine the version of any provider package installed in your current Astro
 ```
 docker run --rm {image} pip freeze | grep <provider>
 ```
-
 ### Python versioning
 
 Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version, Astronomer recommends that you use the KuberentesPodOperator. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).
