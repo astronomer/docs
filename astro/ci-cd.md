@@ -330,6 +330,8 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
     - `DEV_ASTRONOMER_KEY_SECRET`: Your Development Deployment API key secret
     - `DEV_DEPLOYMENT_ID`: The Deployment ID of your Development Deployment
 
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**.
+
     Be sure to set the values for your API credentials as secret.
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
