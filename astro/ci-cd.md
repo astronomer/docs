@@ -322,11 +322,6 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
 
 1. In Jenkins, add the following environment variables:
 
-   :::info
-
-   To set environment variables in Jenkins, from the Jenkins Dashboard navigate to `Manage Jenkins >> Configure System >> Global Properties >> Environment Variables >> Add`
-
-   :::
 
     - `PROD_ASTRONOMER_KEY_ID`: Your Production Deployment API key ID
     - `PROD_ASTRONOMER_KEY_SECRET`: Your Production Deployment API key secret
