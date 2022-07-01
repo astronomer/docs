@@ -283,7 +283,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
-    - `DEPLOYMENT_ID`: The Deployment ID of your production deployment
+    - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
 
     Be sure to set the values for your API credentials as secret.
 
@@ -322,7 +322,6 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
 
 1. In Jenkins, add the following environment variables:
 
-
     - `PROD_ASTRONOMER_KEY_ID`: Your Production Deployment API key ID
     - `PROD_ASTRONOMER_KEY_SECRET`: Your Production Deployment API key secret
     - `PROD_DEPLOYMENT_ID`: The Deployment ID of your Production Deployment
@@ -346,12 +345,12 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
                           echo "The git branch is ${siteVariables.jenkinsenv}";
                           env.ASTRONOMER_KEY_ID = env.PROD_ASTRONOMER_KEY_ID;
                           env.ASTRONOMER_KEY_SECRET = env.PROD_ASTRONOMER_KEY_SECRET;
-                          env.DEPLOYMENT_ID = env.PROD_DEPLOYMENT_ID;
+                          env.ASTRONOMER_DEPLOYMENT_ID = env.PROD_DEPLOYMENT_ID;
                       } else if (env.GIT_BRANCH == 'dev') {
                           echo "The git branch is ${siteVariables.jenkinsenv}";
                           env.ASTRONOMER_KEY_ID = env.DEV_ASTRONOMER_KEY_ID;
                           env.ASTRONOMER_KEY_SECRET = env.DEV_ASTRONOMER_KEY_SECRET;
-                          env.DEPLOYMENT_ID = env.DEV_DEPLOYMENT_ID;
+                          env.ASTRONOMER_DEPLOYMENT_ID = env.DEV_DEPLOYMENT_ID;
                       } else {
                           echo "This git branch ${siteVariables.jenkinsenv} is not configured in this pipeline."
                       }
