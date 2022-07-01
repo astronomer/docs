@@ -363,7 +363,7 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
                script {
                  sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
                  sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh "./astro deploy ${DEPLOYMENT_ID} -f"
+                 sh "./astro deploy ${siteVariables.deploymentid} -f"
                }
              }
            }
