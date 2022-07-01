@@ -300,8 +300,8 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
              }
              steps {
                script {
-                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v1.1.0/astro_1.1.0_linux_amd64.tar.gz'
-                 sh 'tar xzf astro_1.1.0_linux_amd64.tar.gz'
+                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
                  sh "./astro deploy ${siteVariables.deploymentid} -f"
                }
              }
