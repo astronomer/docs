@@ -83,16 +83,6 @@ module.exports = {
               activeBaseRegex: '(software\/0.28)+',
             },
             {
-              label: '0.27',
-              to: '/software/0.27/overview',
-              activeBaseRegex: '(software\/0.27)+',
-            },
-            {
-              label: '0.26',
-              to: '/software/0.26/overview',
-              activeBaseRegex: '(software\/0.26)+',
-            },
-            {
               label: '0.25',
               to: '/software/0.25/overview',
               activeBaseRegex: '(software\/0.25)+',
