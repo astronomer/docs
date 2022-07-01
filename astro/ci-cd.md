@@ -376,7 +376,7 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
       }
    }`</code></pre>
 
-    This Jenkinsfile triggers a code push to your Astro deployments every time a commit or pull request is merged to the `dev` & `main` branch of your repository.
+    This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
 
 ### CircleCI
 
