@@ -289,7 +289,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    <pre><code parentName="pre">`pipeline {
+    <pre><code parentName="pre">{`pipeline {
        agent any
          stages {
            stage('Deploy to Astronomer') {
@@ -312,7 +312,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
            cleanWs()
          }
        }
-   }`</code></pre>
+   }`}</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
@@ -336,7 +336,7 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    <pre><code parentName="pre">`pipeline {
+    <pre><code parentName="pre">{`pipeline {
        agent any
          stages {
            stage('Set Environment Variables') {
@@ -374,7 +374,7 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
          }
        }
       }
-   }`</code></pre>
+   }`}</code></pre>
 
     This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
 
