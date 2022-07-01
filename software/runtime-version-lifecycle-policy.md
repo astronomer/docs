@@ -46,8 +46,6 @@ Within the maintenance window of each Astro Runtime version, the following is tr
 When the maintenance window for a given version of Runtime ends, the following is true:
 
 - Astronomer is not obligated to answer questions regarding a Deployment that is running an unsupported version.
-- New Deployments cannot be created on Astro with that version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Cloud UI, API, or Astro CLI.
-- The Deployment view of the Cloud UI will show a warning that encourages the user to upgrade if the Deployment is running that version.
 - The latest version of the Astro CLI will show a warning if a user pushes an Astro Runtime image to Astronomer that corresponds to that version.
 
 Astronomer will not interrupt service for Deployments running Astro Runtime versions that are no longer in maintenance. Unsupported versions of Astro Runtime are available for local development and testing with the Astro CLI.
