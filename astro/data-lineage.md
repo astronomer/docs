@@ -23,7 +23,7 @@ For more information on data lineage and related concepts, see [Data lineage con
 
 :::caution
 
-All members of your Organization can view the **Lineage** tab regardless of their Workspace permissions. The **Lineage** tab can contain plain-text SQL and Python code from any system that you configure to emit lineage data to Astro. If this is a security concern for your organization, reach out to [Astronomer support](https://support.astronomer.io/).
+All members of your Organization can view the **Lineage** tab regardless of their Workspace permissions. The **Lineage** tab can contain plain-text SQL and Python code from any system that emits lineage data to Astro. If this is a security concern for your organization, reach out to [Astronomer support](https://support.astronomer.io/).
 
 :::
 
