@@ -100,8 +100,9 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Manage clusters',
+          label: 'Clusters',
           items: [
+            'manage-clusters',
             'create-cluster',
             'modify-cluster',
             'connect-external-services',
