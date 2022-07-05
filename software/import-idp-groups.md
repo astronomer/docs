@@ -5,7 +5,7 @@ id: import-idp-groups
 description: Import your identity provider's organization structure into Astronomer Software.
 ---
 
-You can import existing identity provider (IDP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions for a specific Workspace or Deployment. Importing existing IDP groups as Teams lets you quickly onboard staff to Astronomer and provides better control of multiple user permissions.
+You can import existing identity provider (IdP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions for a specific Workspace or Deployment. Importing existing IdP groups as Teams lets you quickly onboard staff to Astronomer and provides better control of multiple user permissions.
 
 Astronomer Teams function similar to users. You can:
 
