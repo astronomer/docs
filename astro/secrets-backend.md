@@ -27,7 +27,7 @@ Astro integrates with the following secret backend tools:
 - Google Cloud Secret Manager
 - Azure Key Vault
 
-Secrets backend integrations are applied individually to each Astro Deployment.
+Secrets backend integrations are configured individually with each Astro Deployment.
 
 :::info
 
