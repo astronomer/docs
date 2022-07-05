@@ -98,10 +98,7 @@ To allow Astro to access Amazon Web Services (AWS) resources, you need to define
 
 1. Create an AWS IAM role with a trust policy that allows access to a specific AWS resource. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 
-2. Get the account ID of the cluster you want to connect to the AWS service:
-
-    - In the Cloud UI, click **Clusters**.
-    - Copy the value in the **ACCOUINT ID column**.
+2. Contact [Astronomer support](https://support.astronomer.io) and request your cluster ID. 
 
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 
@@ -109,7 +106,7 @@ To allow Astro to access Amazon Web Services (AWS) resources, you need to define
 
 5. Click the **Trust relationships** tab.
 
-6. Click **Edit trust policy** and replace the `arn` values with the value you copied in step 5:
+6. Click **Edit trust policy** and replace the `arn` value with the value you copied in step 5:
 
 ```text
     {
@@ -119,7 +116,7 @@ To allow Astro to access Amazon Web Services (AWS) resources, you need to define
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
-                    "arn:aws:iam::<AWS-account-ID>:role/<role-name>-<cluster-account-ID>",
+                    "arn:aws:iam::<Dataplane-AWS-account-ID>:role/<role-name>-<cluster-ID>",
                 ]
             },
             "Action": "sts:AssumeRole"
@@ -140,4 +137,4 @@ To allow Astro to access Amazon Web Services (AWS) resources, you need to define
 ```
 7. Click **Update policy**.
 
-8. Connect AWS to Airflow.
+8. Connect AWS to Airflow. See [Managing connections to Apache Airflow](https://docs.aws.amazon.com/mwaa/latest/userguide/manage-connections.html).
