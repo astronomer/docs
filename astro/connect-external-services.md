@@ -106,7 +106,7 @@ To allow Astro to access Amazon Web Services (AWS) resources, you need to define
 
 5. Click the **Trust relationships** tab.
 
-6. Click **Edit trust policy** and replace the `arn` value with the value you copied in step 5:
+6. Click **Edit trust policy** and update the `arn` value:
 
 ```text
     {
@@ -116,7 +116,7 @@ To allow Astro to access Amazon Web Services (AWS) resources, you need to define
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
-                    "arn:aws:iam::<Dataplane-AWS-account-ID>:role/<role-name>-<cluster-ID>",
+                    "arn:aws:iam::<dataplane-AWS-account-ID>:role/<role-name>-<cluster-ID>",
                 ]
             },
             "Action": "sts:AssumeRole"
