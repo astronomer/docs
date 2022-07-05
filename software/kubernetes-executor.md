@@ -13,7 +13,7 @@ This enables the executor to scale depending on how many Airflow tasks you're ru
 - Service accounts
 - Airflow image
 
-To configure these resources for each pod, you configure a pod template. For more information on configuring pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
+To configure these resources for each Pod, you configure a Pod template. For more information on configuring Pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
 
 ## Prerequisites
 
