@@ -5,6 +5,8 @@ id: migrate-to-runtime
 description: Run an upgrade progress to migrate your Software Deployment from Astronomer Certified to Astro Runtime.
 ---
 
+import {siteVariables} from '@site/src/versions';
+
 Astro Runtime builds on the reliability of Astronomer Certified with new features and provider packages. Astronomer plans to no longer release new versions of Astronomer Certified starting with a minor release of Airflow to be determined. To avoid disruption in the future, Astronomer recommends migrating Deployments from Certified to Runtime now.
 
 Migrating a Deployment from Astronomer Certified is similar to the standard upgrade process. There are no known disruptions when migrating a Deployment from Astronomer Certified to the equivalent version of Astro Runtime.
