@@ -60,8 +60,28 @@ If your target VPC resolves DNS hostnames using [private hosted zones](https://d
 
 Use AWS Transit Gateway to connect your Astro clusters to your on-premises networks.
 
-1. In the Cloud UI, go to [PATH] and copy your Account ID.
-2. Follow the [AWS documentation](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) to use AWS Resource Access Manager to share a Transit Gateway with the dedicated AWS account for your data plane.
+### Prerequisites
+
+- An Astro cluster
+- A transit gateway in the same region as your Astro cluster
+- Permission to share resources using AWS Resource Access Manager (RAM)
+
+:::info
+
+If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://support.astronomer.io). Astronomer can create a new transit gateway and set up cross-region peering with your existing transit gateway. Note that this setup can incur AWS charges for a new transit gateway hosted in the Astro account, as well as inter-region transfer costs.
+
+:::
+
+### Setup
+
+To implement Transit Gateway for a cluster:
+
+1. In the Cloud UI, open the **Clusters** tab and copy your cluster's **Account ID**.
+2. Follow the [AWS documentation](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) to use AWS RAM to share a transit gateway with your cluster's AWS account. The account ID that you share with is the same as the ID that you copied in Step 1.
+3. Contact [Astronomer support](https://support.astronomer.io) and provide the destination CIDR block of the on-premises network that should be routed through the transit gateway. From here, Astronomer approves the resource sharing request and creates a transit gateway peering attachment request to your on-premises network.
+4. Follow the [AWS documentation](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-accept-reject) to accept the Transit Gateway peering attachment request from your on-premises network.
+5. Follow the [AWS documentation](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route) to create a static route from your CIDR block to the transit gateway.
+6. Contact [Astronomer support](https://support.astronomer.io) to confirm that you have created the static route. From here, Astronomer updates the routing table of the Astro cluster's VPC to send traffic from your CIDR block through the transit gateway.
 
 ## Workload Identity (_GCP only_)
 
