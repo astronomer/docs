@@ -5,9 +5,7 @@ id: resource-reference-gcp
 description: Reference of all supported configurations for new clusters on Astro in Google Cloud Platform (GCP).
 ---
 
-## Overview
-
-Unless otherwise specified, new clusters on Google Cloud Platform (GCP) are created with a set of default resources that our team has deemed appropriate for most use cases.
+Unless otherwise specified, new Clusters on Google Cloud Platform (GCP) are created with a set of default resources that our team has deemed appropriate for most use cases.
 
 Read the following document for a reference of our default resources as well as supported cluster configurations.
 

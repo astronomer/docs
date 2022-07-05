@@ -5,8 +5,6 @@ id: version-compatibility-reference
 description: A reference of all adjacent tooling required to run Astronomer Software and corresponding version compatibility.
 ---
 
-## Overview
-
 Astronomer Software ships with and requires a number of adjacent technologies that support it, including Kubernetes, Helm, and Apache Airflow itself. This guide provides a reference of all required tools and versions for running Astronomer Software. This guide also includes a version compatibility reference table for running [Astronomer Certified](image-architecture.md) outside of the context of the Astronomer platform.
 
 While the tables below reference the minimum compatible versions, we typically recommend running the latest versions of all tooling if and when possible.
@@ -18,8 +16,6 @@ While the tables below reference the minimum compatible versions, we typically r
 | Astronomer Platform | Kubernetes                   |  Postgres | Python                                    | Astro CLI | Astronomer Certified / Runtime | Helm|
 | ------------------- | ---------------------------- |  -------- | ----------------------------------------- | -------------- | -------------------- |---|
 | v0.25               | 1.17, 1.18, 1.19, 1.20, 1.21 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.25.x         | All Certified versions                  |3.6|
-| v0.26               | 1.17, 1.18, 1.19, 1.20, 1.21 |  9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.26.x         | All Certified versions                  |3.6|
-| v0.27               | 1.18, 1.19, 1.20, 1.21       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.27.x         | All Certified versions                  |3.6|
 | v0.28               | 1.19, 1.20, 1.21             |  9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 1.0.x, 1.1.x        | All Certified versions                  |3.6|
 | v0.29               | 1.19, 1.20, 1.21, 1.22        | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 1.2.x         | All Certified and Runtime versions    | 3.6|
 

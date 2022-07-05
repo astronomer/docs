@@ -4,7 +4,6 @@ title: 'Deployment logs on Astronomer Software'
 id: deployment-logs
 description: View and search Airflow webserver, scheduler, and worker logs via the Astronomer Software UI.
 ---
-## Overview
 
 The Software UI allows you to look up and search Airflow logs emitted by your webserver, scheduler and Worker(s) for any deployment you have access to.
 

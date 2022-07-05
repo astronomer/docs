@@ -5,8 +5,6 @@ id: integrate-auth-system
 description: Integrate your internal authentication server with Astronomer Software.
 ---
 
-## Overview
-
 Astronomer Software by default allows users to create an account with and authenticate using one of the 3 methods below:
 
 - Google OAuth

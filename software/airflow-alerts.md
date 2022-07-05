@@ -5,8 +5,6 @@ id: airflow-alerts
 description: Configure email alerts on Astronomer Software to monitor the health of your Airflow Deployment and the status of your tasks.
 ---
 
-## Overview
-
 Whether you're just starting to use Apache Airflow or your team is running it at scale, incorporating an alerting framework is critical to the health of your data. On Astronomer Software, users have access to three types of alerting solutions:
 
 - Airflow task and DAG-level alerts, which notify you via email when an Airflow task or DAG fails, succeeds, or retries.

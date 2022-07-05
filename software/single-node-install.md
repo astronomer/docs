@@ -5,8 +5,6 @@ id: single-node-install
 description: Configure a simple Apache Airflow environment with the Astronomer Certified Python wheel on a virtual machine.
 ---
 
-## Overview
-
 The Astronomer Certified Python wheel is a distribution of Apache Airflow maintained by Astronomer. While functionally identical to Apache Airflow, the Astronomer Certified Python wheel includes additional bug and security fixes, as well as extended support from the Astronomer team.
 
 If you want to run Astronomer's distribution of Airflow without using Docker, you can install the Astronomer Certified Python wheel on either one or many virtual machines.

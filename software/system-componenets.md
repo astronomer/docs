@@ -5,8 +5,6 @@ id: system-components
 description: Learn about the various tools and services that make up Astronomer Software.
 ---
 
-## Overview
-
 Astronomer Software utilizes a variety of tools to run Airflow securely and reliably in your private cloud. This guide contains names and descriptions of all system components required to run Astronomer Software.
 
 ## Platform components

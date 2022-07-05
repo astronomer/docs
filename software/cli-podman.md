@@ -5,8 +5,6 @@ id: cli-podman
 description: Use Podman instead of Docker to run specific Astro CLI commands.
 ---
 
-## Overview
-
 By default, the Astro CLI uses Docker to execute a few specific commands:
 
 - `astro dev [...]`: For running an Airflow environment on your local machine

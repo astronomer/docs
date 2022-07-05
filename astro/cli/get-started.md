@@ -9,8 +9,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 The Astro CLI is an open source command line for modern data orchestration. It is the easiest way to run Apache Airflow on your machine. By the end of this quickstart, you'll have an Airflow environment running locally with just a few commands. From there, you can start building your project with your own DAGs, dependencies, and tests.
 
 ## Step 1: Install the Astro CLI

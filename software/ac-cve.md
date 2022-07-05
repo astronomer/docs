@@ -5,8 +5,6 @@ id: ac-cve
 description: "Common Vulnerabilities and Exposures identified within our Astronomer Certified images."
 ---
 
-## Overview
-
 This page is the source of truth for any Common Vulnerabilities and Exposures (CVEs) identified within any of our supported Astronomer Certified images for Apache Airflow.
 
 Currently, all supported Astronomer Certified images are listed in two places:

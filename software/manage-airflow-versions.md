@@ -7,8 +7,6 @@ description: Adjust and upgrade Airflow versions on Astronomer Software.
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 Regularly upgrading your Software Deployments ensures that your Deployments continue to be supported and that your Airflow instance has the latest features and functionality.
 
 To upgrade your Airflow Deployment to a later version of Airflow:

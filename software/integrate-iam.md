@@ -5,16 +5,16 @@ id: integrate-iam
 description: Append IAM roles to an Airflow Deployment on Astronomer Software.
 ---
 
-## Overview
-
 On Astronomer, IAM roles can be appended to the webserver, scheduler and worker pods within any individual Airflow Deployment on the platform.
 
 IAM roles on [AWS](https://aws.amazon.com/iam/faqs/) and other platforms are often used to manage the level of access a specific user (or object, or group of users) has to some resource (or set of resources). The resource in question could be an S3 bucket or Secret Backend, both of which are commonly used in tandem with Airflow and Astronomer and can now be configured to be accessible only to a subset of Kubernetes pods within your wider Astronomer cluster.
 
-A few clarifying notes:
+## Implementation Considerations
 
-* All pods within your Airflow Deployment will assume the IAM role. There is currently no way to use more than 1 IAM role per deployment.
-* If you’d like your IAM role to apply to more than 1 deployment, you must annotate each deployment.
+Consider the following when you integrate IAM roles:
+
+* All pods within your Airflow Deployment assume the IAM role. There is currently no way to use more than one IAM role per Deployment.
+* If you’d like your IAM role to apply to more than one Deployment, you must annotate each Deployment.
 * You must use the Astro CLI to pass IAM role annotations.
 * Only Workspace Admins can pass IAM role annotations.
 * Once a Deployment is created or updated with an IAM role, the annotation can't be deleted.

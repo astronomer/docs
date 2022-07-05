@@ -5,9 +5,7 @@ id: cli-reference
 description: A list of every command and setting in the Astro CLI.
 ---
 
-## Overview
-
-Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated webserver, scheduler and Postgres database. If you're an Astronomer customer, you can use the Astro CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
+The Astronomer [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astro CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
 
 This document contains information about all commands and settings available in the Astro CLI, including examples and flags. It does not contain detailed guidelines on each command, but each section provides resources for additional information in a **Related documentation** section if it's available.
 

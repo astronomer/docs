@@ -4,13 +4,14 @@ title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
 
-## Overview
+The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
 
-This guide provides steps for configuring and running the KubernetesPodOperator on DAGs deployed to Astro.
+## Benefits of the KubernetesPodOperator
 
-The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of Apache Airflow's most powerful operators. Similar to the Kubernetes executor, this operator talks to the Kubernetes API to dynamically launch a Pod in Kubernetes for each task that needs to run and terminates each Pod once the task is completed. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers. The KubernetesPodOperator enables you to:
+The KubernetesPodOperator enables you to:
 
 - Execute a custom Docker image per task with Python packages and dependencies that would otherwise conflict with the rest of your Deployment's dependencies. This includes Docker images in a private registry or repository.
+- Run tasks Kubernetes cluster outside of the Astro data plane. This allows you to run individual tasks on infrastructure that might not be supported on Astro yet, such as GPU nodes or on other third-party services.
 - Specify CPU and Memory as task-level limits or minimums to optimize for cost and performance.
 - Write task logic in a language other than Python. This gives you flexibility and can enable new use cases across teams.
 - Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.

@@ -5,8 +5,6 @@ id: astro-deployment-update
 description: Reference documentation for astro deployment update.
 ---
 
-## Description
-
 Update the configuration for a Deployment on Astro. This command is functionally identical to modifying a Deployment in the Cloud UI via the **Edit Configuration** button.
 
 ## Usage

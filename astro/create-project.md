@@ -7,8 +7,6 @@ description: Create an Astro project and run it locally with the Astro CLI.
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 To run Airflow pipelines on Astro, you first need to create an Astro project. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. Once you've tested these files locally, the Astro project structure makes it easy to deploy your pipelines to Astro.
 
 This guide provides instructions for creating a new Astro project, as well as information about the default Astro project structure.

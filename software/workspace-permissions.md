@@ -5,8 +5,6 @@ id: workspace-permissions
 description: Manage user roles and permissions on any Astronomer Workspace and all Airflow Deployments within it.
 ---
 
-## Overview
-
 Astronomer supports a permissions and role-based access control (RBAC) framework that allows users to configure varying levels of access both at the Workspace and Airflow Deployment levels.
 
 Workspace and Deployment-level access can each be configured with 3 user roles (_Admin_, _Editor_, _Viewer_), all of which can be set and changed via the Software UI and CLI. Each role maps to a combination of permissions to both Astronomer and Apache Airflow itself.

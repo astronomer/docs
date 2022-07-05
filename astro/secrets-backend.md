@@ -8,18 +8,18 @@ description: Configure a secrets backend on Astro to store Airflow variables and
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Overview
-
 Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
 
-Integrating a secrets backend tool on Astro allows you to:
+## Secrets Backend Tool Integration Benefits
 
-- Store Airflow variables and connections in a centralized location alongside secrets from other tools and systems used by your team, including Kubernetes secrets, SSL certificates, and more.
+Integrating a secrets backend tool with Astro allows you to:
+
+- Store Airflow variables and connections in a centralized location alongside secrets from other tools and systems used by your organization, including Kubernetes secrets, SSL certificates, and more.
 - Comply with internal security postures and policies that protect your organization.
 - Recover in the case of an incident.
 - Automatically pull Airflow variables and connections that are already stored in your secrets backend when you create a new Deployment instead of having to set them manually in the Airflow UI.
 
-To meet these requirements, Astro supports integration with a variety of secret backend tools. This guide provides setup steps for configuring the following tools as secrets backends on Astro:
+Astro integrates with the following secret backend tools:
 
 - Hashicorp Vault
 - AWS Systems Manager Parameter Store
@@ -27,7 +27,7 @@ To meet these requirements, Astro supports integration with a variety of secret 
 - Google Cloud Secret Manager
 - Azure Key Vault
 
-All secrets backend integrations are set per Deployment on Astro.
+Secrets backend integrations are configured individually with each Astro Deployment.
 
 :::info
 

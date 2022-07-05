@@ -8,13 +8,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Overview
+Astronomer Software includes access to a Docker image registry that is managed by Astronomer. Every time a user deploys to Astronomer Software, a Docker image is generated and pushed to this registry. Depending on your deploy method, these Docker images can include OS and Python dependencies, DAG code, and the Airflow service.
 
-Astronomer Software includes access to a Docker image registry that is managed by Astronomer. Every time a user deploys to Astronomer Software, a Docker image is generated and pushed to this registry. Depending on your deployment method, these Docker images can include OS and Python dependencies, DAG code, and the Airflow service.
+Using the Astronomer registry is recommended when you're getting started and your team is comfortable deploying code. However, the Astronomer registry might not meet your organization's security requirements.
 
-Using the Astronomer internal registry is often the best option for organizations getting started with Astronomer and when users are comfortable deploying code. However, using this registry might not be compatible with your organization's security requirements.
-
-If your organization cannot use the default Astronomer internal registry, you can configure a custom container image registry. A custom container image registry is recommended for mature organizations who require additional control for security and governance reasons. Your organization can use a custom container registry to scan images for CVEs, malicious code, and unapproved Python and OS-level packages contained in the Docker images that are generated during the code deploy process.
+If your organization can't support the Astronomer default internal registry, you can configure a custom container image registry. This option is best suited for organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and unapproved Python and OS-level packages contained in Docker images.
 
 ## Implementation considerations
 

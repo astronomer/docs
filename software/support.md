@@ -5,29 +5,27 @@ id: support
 description: Get the most from Astronomer Support.
 ---
 
-Our mission at Astronomer is to help organizations adopt [Apache Airflow](https://airflow.apache.org/).
+The primary objective of Astronomer is helping your organization adopt [Apache Airflow](https://airflow.apache.org/).
 
-Since our inception, we've garnered a group of Airflow aficionados and experts who are dedicated to doing what they can to see that your team succeeds.
+Since our inception, Astronomer has garnered a group of Airflow aficionados and experts who are dedicated to doing what they can to help your organization succeed.
 
-## Overview
+In an effort to democratize all-things Airflow, Astronomer makes these resources available to all Airflow users:
 
-In an effort to democratize all-things Airflow, our team has curated 2 public resources available to all Airflow users:
+- [Astronomer Forum](https://forum.astronomer.io)
+- [Airflow Guides](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
 
-1. [Astronomer Forum](https://forum.astronomer.io)
-2. [Airflow Guides](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
+If you're an existing Astronomer customer and you need support, the following options are available:
 
-If you're an Astronomer customer looking for private support, there are 3 ways to get in touch with Astronomer's Support Team:
-
-1. File a request on [Astronomer's Support Portal](https://support.astronomer.io/hc/en-us)
-2. Email [support@astronomer.io](mailto:support@astronomer.io)
-3. Leave a voicemail on +1 (831) 777-2768
+- Submit a request on the [Astronomer Support Portal](https://support.astronomer.io/hc/en-us)
+- Send an email to [support@astronomer.io](mailto:support@astronomer.io)
+- Call +1 (831) 777-2768 and leave a voicemail
 
 ## Astronomer's support portal
 
 On Astronomer's support portal, you can do two things:
 
-1. Submit a request (ticket)
-2. Check your existing requests
+- Submit a Request (Ticket)
+- Check the status of your existing requests
 
 ### Create an account
 

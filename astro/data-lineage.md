@@ -5,8 +5,6 @@ id: data-lineage
 description: "Track and visualize the movement of your data with data lineage on Astro"
 ---
 
-## Overview
-
 The **Lineage** tab in the Cloud UI can help you troubleshoot issues with your data pipelines and understand the movement of data across your Organization.
 
 From the **Lineage** tab on Astro, you can access the following four pages:

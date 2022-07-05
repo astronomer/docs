@@ -5,8 +5,6 @@ id: upgrade-astro-cli
 description: A list of all breaking changes and upgrade steps related to the major release of Astro CLI v1.0+
 ---
 
-## Overview
-
 Astro CLI v1.0+ delivers several new features to Astronomer Software and establishes a shared CLI framework across all Astronomer products.
 
 Several commands and their flags have been updated as part of this release, resulting in breaking changes for users of Astronomer Software. Use this document to learn about these breaking changes and prepare for your upgrade to Astro CLI v1.0+.

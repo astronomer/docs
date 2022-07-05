@@ -5,9 +5,7 @@ id: environment-variables
 description: Set environment variables on Astro to specify Airflow configurations and custom logic.
 ---
 
-## Overview
-
-You can use environment variables to set Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) and custom values for your Deployments.
+You can use environment variables to set Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) and custom values for your Airflow Deployments.
 
 For instance, you can set environment variables to:
 

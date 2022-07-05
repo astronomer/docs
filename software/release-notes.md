@@ -5,7 +5,6 @@ id: release-notes
 description: Astronomer Software release notes.
 ---
 
-## Overview
 
 <!--- Version-specific -->
 
