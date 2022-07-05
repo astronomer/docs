@@ -41,7 +41,7 @@ To use deferrable operators both in a local Airflow environment and on Astronome
 - The [Astro CLI version 1.0 or later](https://docs.astronomer.io/astro/cli-release-notes#v110) installed.
 - Triggerers enabled. See [Enable triggerers](https://docs.astronomer.io/software/configure-deployment#enable-triggerers).
 
-All versions of Astro Runtime version 4.2.0 and later support the triggerer and have the `astronomer-providers` package installed. See [Astro Runtime release notes](runtime-release-notes.md) or [Upgrade Astro Runtime](upgrade-runtime.md).
+All versions of Astro Runtime version 4.2.0 and later support the triggerer and have the `astronomer-providers` package installed. See [Upgrade Airflow](manage-airflow-versions.md).
 
 ## Astronomer Certified prerequisites
 
