@@ -23,7 +23,7 @@ Astronomer Software integrates with the following secrets backend tools:
 - Google Cloud Secret Manager
 - Azure Key Vault
 
-Secrets backend integrations are applied individually to each Astronomer Software Deployment.
+Secrets backend integrations are configured individually with each Astronomer Software Deployment.
 
 :::info
 
