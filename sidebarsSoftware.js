@@ -144,7 +144,7 @@ module.exports = {
       items: [
       'runtime-image-architecture',
       'migrate-to-runtime',
-      'runtime-versionion-lifecycle-policy',
+      'runtime-version-lifecycle-policy',
       ],
     },
     {
