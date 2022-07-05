@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Data lineage'
-title: "Data lineage on Astro"
+sidebar_label: 'Lineage UI'
+title: "View lineage on Astro"
 id: data-lineage
 description: "Track and visualize the movement of your data with data lineage on Astro"
 ---
@@ -26,6 +26,10 @@ All members of your Organization can view the **Lineage** page. For more informa
 This functionality is early access and under active development. If you have any questions or feedback about this feature, contact [Astronomer support](https://support.astronomer.io/).
 
 :::
+
+## Prerequisites
+
+To view lineage data for Deployments, you must configure Airflow and your external systems to emit lineage data. See [Enable data lineage for external systems](set-up-data-lineage.md).
 
 ## View the lineage graph for a data pipeline
 

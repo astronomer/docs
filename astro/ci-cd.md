@@ -279,41 +279,103 @@ To complete this setup, you need:
 
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
-1. In your Jenkins pipeline configuration, add the following environment variables:
+1. In your Jenkins pipeline configuration, add the following parameters:
 
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
+    - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
 
     Be sure to set the values for your API credentials as secret.
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
     <pre><code parentName="pre">{`pipeline {
-      agent any
-        stages {
-          stage('Deploy to Astronomer') {
-           when {
-            expression {
-              return env.GIT_BRANCH == "origin/main"
-            }
-           }
-           steps {
-             script {
-                   sh 'curl -sSL install.astronomer.io | sudo bash -s'
-                   sh 'astro deploy -f'
+       agent any
+         stages {
+           stage('Deploy to Astronomer') {
+             when {
+              expression {
+                return env.GIT_BRANCH == "origin/main"
+              }
+             }
+             steps {
+               script {
+                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh "./astro deploy ${siteVariables.deploymentid} -f"
+               }
              }
            }
          }
+       post {
+         always {
+           cleanWs()
+         }
        }
-     post {
-       always {
-         cleanWs()
-       }
-      }
-    }
-    `}</code></pre>
+   }`}</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
+
+### Jenkins (Multiple Branches)
+
+To automate code deploys to multiple Deployments using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
+
+1. In Jenkins, add the following environment variables:
+
+    - `PROD_ASTRONOMER_KEY_ID`: Your Production Deployment API key ID
+    - `PROD_ASTRONOMER_KEY_SECRET`: Your Production Deployment API key secret
+    - `PROD_DEPLOYMENT_ID`: The Deployment ID of your Production Deployment
+    - `DEV_ASTRONOMER_KEY_ID`: Your Development Deployment API key ID
+    - `DEV_ASTRONOMER_KEY_SECRET`: Your Development Deployment API key secret
+    - `DEV_DEPLOYMENT_ID`: The Deployment ID of your Development Deployment
+
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**.
+
+    Be sure to set the values for your API credentials as secret.
+
+2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+
+    <pre><code parentName="pre">{`pipeline {
+       agent any
+         stages {
+           stage('Set Environment Variables') {
+              steps {
+                  script {
+                      if (env.GIT_BRANCH == 'main') {
+                          echo "The git branch is ${siteVariables.jenkinsenv}";
+                          env.ASTRONOMER_KEY_ID = env.PROD_ASTRONOMER_KEY_ID;
+                          env.ASTRONOMER_KEY_SECRET = env.PROD_ASTRONOMER_KEY_SECRET;
+                          env.ASTRONOMER_DEPLOYMENT_ID = env.PROD_DEPLOYMENT_ID;
+                      } else if (env.GIT_BRANCH == 'dev') {
+                          echo "The git branch is ${siteVariables.jenkinsenv}";
+                          env.ASTRONOMER_KEY_ID = env.DEV_ASTRONOMER_KEY_ID;
+                          env.ASTRONOMER_KEY_SECRET = env.DEV_ASTRONOMER_KEY_SECRET;
+                          env.ASTRONOMER_DEPLOYMENT_ID = env.DEV_DEPLOYMENT_ID;
+                      } else {
+                          echo "This git branch ${siteVariables.jenkinsenv} is not configured in this pipeline."
+                      }
+                  }
+              }
+           }
+           stage('Deploy to Astronomer') {
+             steps {
+               script {
+                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh "./astro deploy ${siteVariables.deploymentid} -f"
+               }
+             }
+           }
+         }
+       post {
+         always {
+           cleanWs()
+         }
+       }
+      }
+   }`}</code></pre>
+
+    This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
 
 ### CircleCI
 

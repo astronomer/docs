@@ -1,5 +1,5 @@
 ---
-sidebar_label: "GCP resource reference"
+sidebar_label: "GCP Resource reference"
 title: "Resources required for Astro on GCP"
 id: resource-reference-gcp
 description: Reference of all supported configurations for new clusters on Astro in Google Cloud Platform (GCP).
@@ -35,18 +35,26 @@ To create a new cluster on Astro with a specified configuration, read [Install o
 
 ### GCP region
 
-Astro supports the following GCP regions:
+Astro supports the following Google Cloud Platform (GCP) regions:
 
+- `asia-northeast1` - Tokyo, Asia
+- `asia-northeast2` - Osaka, Asia
+- `asia-northeast3` - Seoul, Asia
+- `asia-south1` - Mumbai, Asia
 - `asia-southeast1` - Singapore, Asia
 - `australia-southeast1` - Sydney, Australia
+- `europe-central2` - Warsaw, Europe
 - `europe-west1` - Belgium, Europe
 - `europe-west2` - England, Europe
 - `europe-west3` - Frankfurt, Europe
 - `europe-west4` - Netherlands, Europe
+- `europe-west6` - Zurich, Europe
+- `northamerica-northeast1` - Montreal, North America
 - `southamerica-east1` - Sau Paolo, South America
 - `us-central1` - Iowa, North America
 - `us-west1` - Oregon, North America
 - `us-west2` - Los Angeles, North America
+- `us-west3` - Salt Lake City, North America
 - `us-west4` - Nevada, North America
 - `us-east1` - South Carolina, North America
 - `us-east4` - Virginia, North America

@@ -32,8 +32,8 @@ module.exports = {
           label: 'Write DAGs',
           items: [
             'deferrable-operators',
-            'kubernetespodoperator',
             'kubepodoperator-local',
+            'kubernetespodoperator',
           ],
         },
         'upgrade-runtime',
@@ -65,7 +65,14 @@ module.exports = {
       items: [
         'view-logs',
         'deployment-metrics',
-        'data-lineage',
+        {
+          type: 'category',
+          label: 'Data lineage',
+          items: [
+            'set-up-data-lineage',
+            'data-lineage',
+          ],
+        },
         'airflow-alerts',
       ],
     },
@@ -82,7 +89,6 @@ module.exports = {
           ],
         },
         'manage-workspaces',
-        'set-up-data-lineage',
         {
           type: 'category',
           label: 'User access',
@@ -116,6 +122,7 @@ module.exports = {
       label: 'Reference',
       items: [
         'known-limitations',
+        'runtime-image-architecture',
         'runtime-version-lifecycle-policy',
         'astro-support',
         {
