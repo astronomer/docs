@@ -28,6 +28,7 @@ module.exports = {
       items: [
       'customize-image',
       'manage-airflow-versions',
+      'upgrade-to-airflow-2',
       'access-airflow-database',
       'airflow-api',
       {
@@ -35,8 +36,8 @@ module.exports = {
       label: 'Write DAGs',
       items: [
       'deferrable-operators',
-      'kubepodoperator',
       'kubepodoperator-local',
+      'kubepodoperator',
       'kubernetes-executor',
         ],
       },
@@ -162,6 +163,7 @@ module.exports = {
       'support',
       'cli-reference',
       'version-compatibility-reference',
+      'runtime-image-architecture',
       'release-lifecycle-policy',
       'documentation-archive',
       ],

@@ -7,4 +7,6 @@ export const siteVariables = {
   keysecret: '${ASTRONOMER_KEY_SECRET}',
   // Hacky variable for droneci
   deploymentiddrone: '$ASTRONOMER_DEPLOYMENT_ID',
+  // Hacky variable for Jenkins multibranch
+  jenkinsenv: '${env.GIT_BRANCH}',
 };

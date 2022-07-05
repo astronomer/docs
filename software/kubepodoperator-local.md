@@ -1,6 +1,6 @@
 ---
 title: 'Test and Troubleshoot the KubernetesPodOperator Locally'
-sidebar_label: 'Local KubernetesPodOperator'
+sidebar_label: 'Test the KubernetesPodOperator locally'
 id: kubepodoperator-local
 description: Test and troubleshoot the KubernetesPodOperator locally.
 ---

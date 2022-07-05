@@ -1,6 +1,6 @@
 ---
 title: 'Run the KubernetesPodOperator on Astronomer Software'
-sidebar_label: 'KubernetesPodOperator'
+sidebar_label: 'Run the KubernetesPodOperator on Astronomer Software'
 id: kubepodoperator
 description: Run the KubernetesPodOperator on Astronomer Software.
 ---
