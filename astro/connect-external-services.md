@@ -56,6 +56,13 @@ If your target VPC resolves DNS hostnames via **DNS Hostnames** and **DNS Resolu
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting [Astronomer support](https://support.astronomer.io).
 
+## Set up Transit Gateway (_AWS only_)
+
+Use AWS Transit Gateway to connect your Astro clusters to your on-premises networks.
+
+1. In the Cloud UI, go to [PATH] and copy your Account ID.
+2. Follow the [AWS documentation](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html) to use AWS Resource Access Manager to share a Transit Gateway with the dedicated AWS account for your data plane.
+
 ## Workload Identity (_GCP only_)
 
 [Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) is recommended by Google as the best way for data pipelines running on GCP to access Google Cloud services in a secure and manageable way. All Astro clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Kubernetes service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
