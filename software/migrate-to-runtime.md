@@ -23,7 +23,7 @@ Astro Runtime includes additional features which are not available in Astronomer
 - Airflow UI improvements, such as the showing your Deployment's Docker image tag in the footer of all UI pages.
 - Future Runtime-exclusive features, such as new Airflow components and improvements to the DAG development experience.
 
-See [Runtime Architecture](runtime-architecture.md) for more detailed information about Runtime's distribution and features.
+See [Runtime Architecture](runtime-image-architecture.md) for more detailed information about Runtime's distribution and features.
 
 All versions of Astronomer Certified have an equivalent version of Astro Runtime. To see the equivalent version of Astro Runtime for a Deployment running Astronomer Certified, open the Deployment in the Software UI and go to **Settings**. The equivalent version of Astro Runtime is shown in the **Migrate to Runtime-[Version number]** button.
 
