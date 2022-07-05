@@ -28,7 +28,7 @@ The **triggerer** is responsible for running Triggers and signaling tasks to res
 The process for running a task using a deferrable operator is as follows:
 
 - The task is picked up by a worker, which executes an initial piece of code that initializes the task. During this time, the task is in a "running" state and takes up a worker slot.
-- The task defines a Trigger and defers the function of checking on some condition to the Triggerer. Because all of the deferring work happens in the Triggerer, the task instance can now enter a "deferred" state. This frees the worker slot to take on other tasks.
+- The task defines a trigger and defers the function of checking on some condition to the triggerer. Because all of the deferring work happens in the triggerer, the task instance can now enter a "deferred" state. This frees the worker slot to take on other tasks.
 - The Triggerer runs the task's Trigger periodically to check whether the condition has been met.
 - Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a worker, it begins to complete its main function.
 
