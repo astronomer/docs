@@ -5,8 +5,6 @@ id: apply-platform-config
 description: Apply platform-wide configuration changes to Astronomer via Helm.
 ---
 
-## Overview
-
 When you install Astronomer, a number of platform-level settings will be set by default. If you'd like to change any of those settings based on the needs of your organization, you can do so at any time using Helm.
 
 For example, you can:

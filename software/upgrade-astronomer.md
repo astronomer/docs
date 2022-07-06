@@ -5,8 +5,6 @@ id: upgrade-astronomer
 description: Upgrade to a new LTS, stable, or patch version of Astronomer Software.
 ---
 
-## Overview
-
 For Astronomer Software customers, new product features are regularly made available in stable and long-term support (LTS) releases as described in [Release and lifecycle policy](release-lifecycle-policy.md). Patch versions of Astronomer Software with additional bug and security fixes are also released on a regular basis.
 
 Follow this guide to upgrade to any version of Astronomer Software. For information on new features and changes, refer to [Software release notes](release-notes.md).

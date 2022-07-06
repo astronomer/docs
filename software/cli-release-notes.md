@@ -5,8 +5,6 @@ id: cli-release-notes
 description: Release notes for the Astro CLI.
 ---
 
-## Overview
-
 This document provides a summary of all changes made to the [Astro CLI](install-cli.md) for the v0.29.x series of Astronomer Software. For general product release notes, see [Astronomer Software Release Notes](release-notes.md).
 
 If you have any questions or a bug to report, contact [Astronomer Support](https://support.astronomer.io).

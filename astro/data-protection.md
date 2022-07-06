@@ -5,9 +5,7 @@ id: data-protection
 description: Learn how Astronomer uses encryption to protect clusters and data.
 ---
 
-## Overview
-
-Astro uses both encryption in transit and encryption at rest to protect data across and within the data plane and control plane. Additionally, Deployment namespaces are network isolated with restricted communications. This document contains details about each type of encryption and isolation currently in place on Astro.
+Astro uses both encryption in transit and encryption at rest to protect data across and within the Data Plane and Control Plane. Additionally, Deployment namespaces are network isolated with restricted communications. This document contains details about each type of encryption and isolation currently in place on Astro.
 
 ## Encryption in transit
 

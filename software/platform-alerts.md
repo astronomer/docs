@@ -4,8 +4,6 @@ sidebar_label: 'Software alerts'
 id: platform-alerts
 ---
 
-## Overview
-
 You can use two built-in alerting solutions for monitoring the health of Astronomer:
 
 - Deployment-level alerts, which notify you when the health of an Airflow Deployment is low or if any of Airflow's underlying components are underperforming, including the Airflow scheduler.

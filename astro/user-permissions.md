@@ -5,8 +5,6 @@ id: user-permissions
 description: Learn about Astronomer's RBAC system and how to assign roles to users.
 ---
 
-## Overview
-
 To better protect your data pipelines and cloud infrastructure, Astro offers role-based access control for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Role-based access control is not available for Deployments.
 
 ## Organization roles

@@ -5,13 +5,7 @@ id: install-aws
 description: Get started on Astro by installing your first Astro cluster on AWS.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import {siteVariables} from '@site/src/versions';
-
-## Overview
-
-We're excited to get you started with Astro on AWS. Below, you'll find instructions for how to complete the Astro install process, including prerequisites and the steps required for our team to provision resources in your network.
+This is where you'll find instructions for completing the Astro installation process, including prerequisites and the steps required for our team to provision resources in your network.
 
 At a high-level, we'll ask that you come prepared with a new AWS account. From there, you can expect to:
 - Create an account on Astro.

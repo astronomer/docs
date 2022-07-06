@@ -5,9 +5,7 @@ id: astro-deployment-variable-create
 description: Reference documentation for astro deployment variable create.
 ---
 
-## Description
-
-For a given Deployment on Astro, create environment variables via the Astro CLI by supplying either a key and value pair or a file (e.g. `.env`) with a list of keys and values. This command is functionally identical to creating an environment variable via the Cloud UI. For more information, see [Set environment variables on Astro](environment-variables.md).
+For a given Deployment on Astro, create environment variables via the Astro CLI by supplying either a key and value pair or a file (e.g. `.env`) with a list of keys and values. This command is functionally identical to creating an environment variable via the Cloud UI. For more information, see [Set Environment Variables on Astro](environment-variables.md).
 
 If you choose to specify `--key` and `--value` instead of loading a file, you can only create one environment variable at a time.
 

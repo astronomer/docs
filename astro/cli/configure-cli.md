@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Install the CLI
+This is where you'll find information about installing, upgrading, and uninstalling the Astro CLI.
 
 <Tabs
     defaultValue="mac"
@@ -19,6 +19,10 @@ import {siteVariables} from '@site/src/versions';
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="mac">
+
+## Install the Astro CLI
+
+This is where you'll find information about installing the Astro CLI on a Mac operating system.
 
 #### Prerequisites
 
@@ -46,6 +50,10 @@ If you specify only a major version, this command installs the latest minor or p
 </TabItem>
 
 <TabItem value="windows">
+
+## Install the Astro CLI
+
+This is where you'll find information about installing the Astro CLI on a Windows operating system.
 
 #### Prerequisites
 
@@ -75,6 +83,10 @@ To use the Astro CLI on Windows, you must have:
 </TabItem>
 
 <TabItem value="linux">
+
+## Install the Astro CLI
+
+This is where you'll find information about installing the Astro CLI on Linux.
 
 #### Prerequisites
 

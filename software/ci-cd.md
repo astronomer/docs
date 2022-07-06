@@ -5,9 +5,7 @@ id: ci-cd
 description: Automate the deploy process to your Airflow Deployment on Astronomer Software.
 ---
 
-## Overview
-
-Astronomer's support for Service Accounts allows users to push code and deploy to an Airflow Deployment on Astronomer via a Continuous Integration/Continuous Delivery (CI/CD) tool of your choice.
+Users can push code and deploy to an Airflow Deployment on Astronomer using a Continuous Integration/Continuous Delivery (CI/CD) tool.
 
 There are many benefits to deploying DAGs and other changes to Airflow via a CI/CD workflow. Specifically, you can:
 

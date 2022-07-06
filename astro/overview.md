@@ -6,8 +6,6 @@ slug: /
 description: Learn about Astro, the managed service that makes data pipelines easy to write, run, and monitor.
 ---
 
-## Overview
-
 Astro is a managed software service that offers a next-generation experience for modern data teams running Apache Airflow, the open source industry standard for data orchestration.
 
 Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. It optimizes for security whilst relieving your team of operational overhead.

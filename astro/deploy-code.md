@@ -7,8 +7,6 @@ description: Deploy Airflow DAGs to Astro.
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 This guide explains how to push Astro project code to a Deployment via the Astro CLI. This workflow is the foundation for managing changes to your deployed Astro projects. It also serves as the foundation for any [CI/CD](ci-cd.md) pipeline-based deployment model.
 
 ## Prerequisites

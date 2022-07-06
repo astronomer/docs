@@ -5,8 +5,6 @@ id: release-notes
 description: Release notes for the Astro CLI.
 ---
 
-## Overview
-
 This document provides a summary of all changes made to the [Astro CLI](cli/get-started.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).

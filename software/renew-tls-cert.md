@@ -5,8 +5,6 @@ id: renew-tls-cert
 description: Update and auto-renew your organization's TLS certificate for Astronomer Software.
 ---
 
-## Overview
-
 Once you set up a TLS certificate for Astronomer, you'll need to establish a process for periodically renewing the certificate. This can be done in one of two ways:
 
 * **Automatic renewal**: Let's Encrypt provides a service that automatically renews your TLS certificate every 90 days. We recommend this option for smaller organizations where the DNS administrator and cluster administrator are either the same person or on the same team.
