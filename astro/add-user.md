@@ -23,7 +23,7 @@ As a Workspace Admin or Organization Owner, you can add new team members to Astr
 4. Set an Organization role for the user.
 5. Click **Add member**.
 
-Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Organization via email and either create an Astro account or log in before they can access the Organization.
+    After you add the user, their information appears in the **Access** tab as a new entry in the **Members** table. To access the Organization, the user needs to accept the invitation sent by email and then create an Astro account or log in.
 
 ## Add a user to a Workspace
 
@@ -36,7 +36,7 @@ Once you add the user, their information will appear in the **Access** tab as a 
 4. Set a Workspace role for the user. For a list of available roles and their permissions, see [Workspace roles](user-permissions.md#workspace-roles)
 5. Click **Add member**.
 
-Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Workspace via email and log in before they can access the Workspace.
+Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. To access the Workspace, the user needs to accept the invitation sent by email and log in.
 
 ## Remove users from a Workspace
 
