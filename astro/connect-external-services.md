@@ -119,17 +119,6 @@ To grant an Astro cluster access to AWS service resources, you need to define th
             },
             "Action": "sts:AssumeRole"
         },
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": [
-                    "AIDA53UF57CEGYNXUMYOB",
-                    "AIDA53UF57CEAVG7TJLBY",
-                    "arn:aws:sts::952689883272:assumed-role/AWSReservedSSO_AdministratorAccess_7371cdd25ddaec93/deepak.narain@astronomer.io"
-                ]
-            },
-            "Action": "sts:AssumeRole"
-        }
     ]
 }
 ```
