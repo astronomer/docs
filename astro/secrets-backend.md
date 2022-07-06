@@ -616,7 +616,6 @@ This tells Airflow to look for variable information at the `airflow/variables/*`
 
 :::tip
 By default, this setup prefixes secret names in Key Vault with `airflow-connections` or `airflow-variables`. You can change the names of these prefixes, but `"connections_prefix"` and `"variables_prefix"` must have defined values in your configuration.
-:::
 
 :::warning
 
