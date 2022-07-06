@@ -9,20 +9,22 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
 
 ## Log in to the Astronomer Software UI
 
-In the Astronomer Software UI you can create and manage workspaces, manage users, view your clusters, view lineage data, view task data, and view organization information.
+In the Astronomer Software UI you can create and manage workspaces, manage users, add and remove environment variables, view metrics, and view logs.
 
 1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
 
-2. Go to https://account.astronomer.io/, enter your email address, and then click **Continue**.
+2. Open a browser and go to your organization's Astronomer Software base domain.
 
-3. Select one of the following options to access the Cloud UI:
+3. Select one of the following options to access the Astronomer Software UI:
 
-    - Enter your password and click **Continue**.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**. 
-    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
-    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
-
-    If you're the first person in your organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your organization. You can add other team members to the Workspace without the assistance of Astronomer support.
+    - To authenticate with with your Auth0 account, click **Log in with Auth0**, and then follow the prompts.
+    - To authenticate with your Google account, click **Log in with Google**, choose an account, enter your username and password, and then click **Sign In**.
+    - To authenticate with your Okta account, click **Log in with Okta**, enter your username and password, and then click **Sign In**. 
+    - To authenticate with with your custom Oauth account, click **Log in with Custom Oauth**, and then follow the prompts.
+    - To authenticate with with your Azure AD account, click **Log in with Azure AD**, and then follow the prompts.
+    - To authenticate with your internal Okta account, click **Log in with InternalOkta**, enter your username and password, and then click **Sign In**. 
+    - To authenticate with your GitHub account, click **Log in with GitHub**, and then follow the prompts.
+    - Enter your username and password and click **Log in**.
 
 ## Log in to the Astro CLI
 
@@ -43,7 +45,7 @@ In the Astro CLI you can run a local Airflow environment, apply code changes, vi
 
 ## Access a different base domain
 
-A base domain or URL (Uniform Resource Locator), is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays https://www.astronomer.io no matter what page you access on the Astronomer website. The base domain or URL allows computers to quickly identify and access resources in other locations.
+A base domain or URL (Uniform Resource Locator) is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays https://www.astronomer.io no matter what page you access on the Astronomer website. The base domain or URL allows computers to quickly identify and access resources in other domains.
 
 Every cluster is assigned a base domain. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you're authenticated on one cluster, but you need to perform tasks on another cluster.
 
