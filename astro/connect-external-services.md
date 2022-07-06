@@ -37,7 +37,7 @@ Each cluster on Astro runs in a dedicated VPC. To set up private connectivity be
 To create a VPC peering connection between an Astro cluster's VPC and a target VPC, reach out to [Astronomer support](https://support.astronomer.io) and provide the following information:
 
 - Astro cluster ID and Name
-- AWS Account ID or GCP Project ID of the target VPC
+- Amazon Web Services (AWS) Account ID or GCP Project ID of the target VPC
 - Region of the target VPC (_AWS only_)
 - VPC ID of the target VPC
 - CIDR of the target VPC
@@ -90,11 +90,11 @@ astro-nuclear-scintillation-27@astronomer-pmm.iam.gserviceaccount.com
 
 For more information about configuring service accounts on GCP, see [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
 
-## Authorize Astro access to Amazon Web Services resources
+## Authorize Astro access to AWS resources
 
-To allow Astro to access Amazon Web Services (AWS) resources, you need to define the resources that are accessible and then create an Airflow connection.
+To grant an Astro cluster access to AWS service resources, you need to define the resources that are accessible and then create an Airflow connection.
 
-1. Create an AWS IAM role with a trust policy that allows access to a specific AWS resource. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
+1. Create an AWS IAM role with a trust policy that allows access to AWS resources. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 
 2. Contact [Astronomer support](https://support.astronomer.io) and request your cluster ID. 
 
