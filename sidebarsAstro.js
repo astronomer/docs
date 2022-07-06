@@ -93,7 +93,6 @@ module.exports = {
           type: 'category',
           label: 'User access',
           items: [
-            'log-in-to-astro',
             'add-user',
             'user-permissions',
             'configure-idp',

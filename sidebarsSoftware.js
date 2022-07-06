@@ -106,7 +106,6 @@ module.exports = {
         type: 'category',
         label: 'User access',
         items: [
-        'log-in-to-software'
         'manage-workspaces',
         'import-idp-groups',
         'workspace-permissions',
