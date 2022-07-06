@@ -124,4 +124,4 @@ To grant an Astro cluster access to AWS service resources, you need to define th
 ```
 7. Click **Update policy**.
 
-8. Connect AWS to Airflow. See [Managing connections to Apache Airflow](https://docs.aws.amazon.com/mwaa/latest/userguide/manage-connections.html).
+8. Create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
