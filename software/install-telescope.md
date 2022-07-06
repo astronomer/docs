@@ -99,9 +99,11 @@ After Telescope observes an Airflow environment, it generates a file ending in `
 - Airflow version
 - Provider packages and versions
 - Airflow configurations
-- The names of Airflow variables, connections, and settings (no values)
+- The names of Airflow variables, connections, and settings
 - DAG and task-level configurations
 - Task run usage
+
+Telescope never collects the code of DAGs nor the contents of Airflow configurations such as variables and connections. 
 
 For all report details and functions, see the [Telescope GitHub repository](https://github.com/astronomer/telescope/blob/main/telescope/__main__.py).
 
