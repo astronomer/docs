@@ -5,7 +5,7 @@ id: resource-reference-aws
 description: Reference of all supported configurations for new clusters on Astro in AWS.
 ---
 
-Unless otherwise specified, new Clusters on Astro are created with a set of default AWS resources that our team has deemed appropriate for most use cases.
+Unless otherwise specified, new clusters on Astro are created with a set of default AWS resources that our team has deemed appropriate for most use cases.
 
 Read the following document for a reference of our default resources as well as supported cluster configurations, including **AWS Region** and **Node Instance Type**.
 
@@ -30,7 +30,7 @@ Read the following document for a reference of our default resources as well as 
 
 Depending on the needs of your team, you may be interested in modifying certain configurations of a new or existing cluster on Astro. This section provides a reference for which configuration options are supported during the install process.
 
-To create a new cluster on Astro with a specified configuration, see [Install on AWS](install-aws.md) or [Create a Cluster](create-cluster.md). For instructions on how to make a change to an existing cluster, see [Modify a Cluster](modify-cluster.md).
+To create a new cluster on Astro with a specified configuration, see [Install on AWS](install-aws.md) or [Create a cluster](create-cluster.md). For instructions on how to make a change to an existing cluster, see [Modify a cluster](modify-cluster.md). To view your clusters' current configurations, see [Manage clusters](manage-clusters.md).
 
 ### AWS region
 

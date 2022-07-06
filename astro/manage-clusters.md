@@ -5,7 +5,7 @@ id: manage-clusters
 description: View information about clusters in the Cloud UI.
 ---
 
-Use the Cloud UI to get an overview of your Organization's clusters and retrieve cluster information for Astronomer support.
+Use the Cloud UI to get an overview of your Organization's clusters and retrieve cluster information for use by Astronomer support.
 
 ## View clusters
 
@@ -14,9 +14,7 @@ In the Cloud UI, open the **Clusters** tab. This tab contains information about 
 | Value              | Definition                                                                                     |
 | ------------------ | ---------------------------------------------------------------------------------------------- |
 | Name               | The name of the cluster                                                                        |
-| ID                 | The unique ID of the cluster                                                                   |
 | Provider           | The type of cloud that the cluster is hosted on                                                |
-| Tenant ID          | Azure only. The Azure Active Directory (Azure AD) tenant ID for your cluster                   |
 | Account ID         | The ID of the dedicated Astronomer-managed cloud account for your cluster                      |
 | Region             | The region your cluster is hosted in                                                           |
 | VPC subnet         | The range of IP addresses that can be used to connect to your cluster's VPC                    |
@@ -25,6 +23,8 @@ In the Cloud UI, open the **Clusters** tab. This tab contains information about 
 | Service peering    | GCP only. The range of IP addresses that can be used to peer with your cluster's VPC           |
 | DB instance type   | The type of instance used for the cluster's metadata database                                  |
 | Node instance type | The type of instance used for the cluster's worker nodes                                       |
-| Max node count     | The maximum number of worker nodes supported across all Deployments in the cluster             |
+| Max node count     | The maximum number of worker nodes supported across all Deployments in the cluster. See              |
 | Updated            | The last time a cluster's settings were updated                                                |
 | Created            | When the cluster was created                                                                   |
+
+For more information about each value, see [AWS resource reference](https://docs.astronomer.io/astro/resource-reference-aws) and [GCP resource reference](https://docs.astronomer.io/astro/resource-reference-gcp)
