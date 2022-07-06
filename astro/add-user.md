@@ -54,5 +54,5 @@ Once you add the user, their information will appear in the **Access** tab as a 
 
 ## Remove users from an Organization
 
-To remove users from an Organization, contact [Astronomer support](https://support.astronomer.io).
+To remove users from an Organization, contact [Astronomer support](https://support.astronomer.io). In your ticket, provide the user's email and the name of the Organization that you want to remove them from. Note that if you remove a user from an Organization, they will automatically be removed from all of their Workspaces within the Organization.
 
