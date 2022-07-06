@@ -9,29 +9,29 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Telescope is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at various points in time. Astronomer uses this information to troubleshoot your environments and verify pricing based on task usage.
+Telescope is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at various points in time. Astronomer uses this information to troubleshoot your environments.
 
-Telescope doesn't have direct access to your Airflow environments. Instead, you run Telescope commands to observe the current state of an Airflow environment at a given point in time. Based on what it observes, Telescope generates a report which you can share with Astronomer support.  
+Telescope assumes your current permissions whenever you run a command. If these permissions, Telescope can observe your Airflow environments at a given point in time. Based on what it observes, Telescope generates a report which you can share with Astronomer support.
 
-You must run Telescope on all Software Deployments in your cloud, but you can additionally install it on local projects running with the Astro CLI for troubleshooting purposes.
+Astronomer requests that you observe your Deployments with telescope at least once per month. You can additionally observe local projects running with the Astro CLI for troubleshooting purposes.
 
 ## Prerequisites
 
-To observe a local environment running with Telescope, you need:
+To observe a local environment with Telescope, you need:
 
 - `docker exec` permissions.
 - Access to `docker.sock`.
-- Python 3.6.
+- Python 3.8.
 - An Airflow metadata db using Postgresql, Mysql, or Sqlite.
 
-To observe a Deployment with Telescope, you need:
+To observe Software Deployments on Kubernetes with Telescope, you need:
 
 - kubectl.
 - Permission to list nodes and exec into Pods.
 
 ## Install the Telescope CLI
 
-Install the Telescope CLI on a system that has direct access to your Airflow environments.
+Depending on where you want to run Telescope, install the CLI on a system that has permissions for either Docker or your Software Kubernetes cluster.
 
 <Tabs
     defaultValue="binary"
@@ -41,11 +41,13 @@ Install the Telescope CLI on a system that has direct access to your Airflow env
     ]}>
 <TabItem value="binary">
 
-To install the Telescope binary, run the following commands:
+Go to the [**Releases** page of the Telescope GitHub repository](https://github.com/astronomer/telescope/releases). Based on the operating system and CPU architecture of your machine, download one of the `.zip` files for the latest available version of Telescope and make it an executable.
+
+For example, to install Telescope on a Linux machine with x86_64 CPU architecture, you would run:
 
 ```sh
-$ wget https://github.com/astronomer/telescope/releases/latest/download/telescope-linux-x86_64
-$ chmod +x telescope-linux-x86_64
+wget https://github.com/astronomer/telescope/releases/latest/download/telescope-linux-x86_64
+chmod +x telescope-linux-x86_64
 ```
 
 </TabItem>
@@ -62,21 +64,13 @@ pip install telescope --find-links https://github.com/astronomer/telescope/relea
 
 ## Observe deployed environments
 
-For a given Deployment:
+In your Kubernetes cluster, run the following command:
 
-1. Exec into the Deployment:
+```sh
+telescope --kubernetes
+```
 
-    ```sh
-    kubectl exec deploy/<deployment-release-name>-scheduler
-    ```
-
-2. Run the following command:
-
-    ```sh
-    telescope --kubernetes --organization-name <your-organization>
-    ```
-
-    This command observes your Deployment's scheduler and outputs the results of the observation to a file ending in `data.json`.
+This command observes all scheduler containers in the cluster and outputs the results of the observation to a file ending in `data.json`.
 
 :::info
 
@@ -96,7 +90,7 @@ Open your Astro project and run the following command:
 telescope --docker
 ```
 
-This command observes your Airflow environment's scheduler container and outputs the results of the observation to a file ending in `data.json`.
+This command observes scheduler containers on Docker and outputs the results of the observation to a file ending in `data.json`.
 
 ## Telescope report data
 
@@ -108,6 +102,8 @@ After Telescope observes an Airflow environment, it generates a file ending in `
 - The names of Airflow variables, connections, and settings (no values)
 - DAG and task-level configurations
 - Task run usage
+
+For all report details and functions, see the [Telescope GitHub repository](https://github.com/astronomer/telescope/blob/main/telescope/__main__.py).
 
 ## Send Telescope reports to Astronomer support
 
