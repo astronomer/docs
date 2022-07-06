@@ -5,8 +5,6 @@ id: data-lineage-concepts
 description: Learn about data lineage and how you can use it in Airflow.
 ---
 
-## What is data lineage?
-
 [Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking and observing data flowing through a data pipeline. You can use data lineage to understand data sources, troubleshoot job failures, manage PII, and ensure compliance with data regulations.
 
 ## Lineage on Astronomer

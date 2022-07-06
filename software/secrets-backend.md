@@ -5,25 +5,25 @@ id: secrets-backend
 description: Configure a secrets backend on Astronomer Software to store Airflow variables and connections in a centralized place.
 ---
 
-## Overview
-
 Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
 
-Integrating a secrets backend tool on Astronomer Software allows you to:
+## Secrets Backend Tool Integration Benefits
+
+Integrating a secrets backend tool with Astronomer Software allows you to:
 
 - Store Airflow variables and connections in a centralized location alongside secrets from other tools and systems used by your team, including Kubernetes secrets, SSL certificates, and more.
 - Comply with internal security postures and policies that protect your organization.
 - Recover in the case of an incident.
 - Automatically pull Airflow variables and connections that are already stored in your secrets backend when you create a new Deployment instead of having to set them manually in the Airflow UI.
 
-To meet these requirements, Astronomer Software supports integration with a variety of secret backend tools. This guide provides setup steps for configuring the following tools as secrets backends on Astronomer:
+Astronomer Software integrates with the following secrets backend tools:
 
 - Hashicorp Vault
 - AWS Systems Manager Parameter Store
 - Google Cloud Secret Manager
 - Azure Key Vault
 
-All secrets backend integrations are set per Deployment on Astronomer Software.
+Secrets backend integrations are configured individually with each Astronomer Software Deployment.
 
 :::info
 

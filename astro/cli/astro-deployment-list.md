@@ -5,8 +5,6 @@ id: astro-deployment-list
 description: Reference documentation for astro deployment list.
 ---
 
-## Description
-
 List all Deployments within your current Workspace.
 
 ## Usage

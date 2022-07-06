@@ -5,8 +5,6 @@ id: astro-logout
 description: Reference documentation for astro logout.
 ---
 
-## Description
-
 Unauthenticate from the Astro CLI. Note that this command does not affect your current login session in the Cloud UI.
 
 ## Usage

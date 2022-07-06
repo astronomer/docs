@@ -5,11 +5,7 @@ id: platform-variables
 description: A list of environment variables that are set globally on Astro and cannot be modified.
 ---
 
-## Overview
-
-As part of the Astro architecture, certain environment variables have preset values that cannot be overridden by your organization. This reference page contains information about each global environment variable set by Astronomer.
-
-## Global environment variables
+As part of the Astro architecture, certain environment variables have preset values that cannot be overridden by your organization. The following table provides information about each global environment variable set by Astronomer.
 
 |Environment Variable | Description | Value |
 |---------------------|-------|------------|

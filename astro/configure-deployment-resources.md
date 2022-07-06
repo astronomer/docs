@@ -5,8 +5,6 @@ id: configure-deployment-resources
 description: Learn how to create and configure Astro Deployment resources.
 ---
 
-## Overview
-
 After you create an Astro Deployment, you can modify its resource settings to make sure that your tasks have the CPU and memory required to complete successfully.
 
 ## Worker resources

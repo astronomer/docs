@@ -6,9 +6,7 @@ description: Access Airflow's Postgres metadata database on Astronomer Software.
 
 ---
 
-## Overview
-
-On Astronomer, each Airflow deployment is equipped with a PostgreSQL database that serves as Airflow's underlying metadata database and your Airflow scheduler's source of truth.
+On Astronomer, each Airflow deployment is equipped with a PostgreSQL database that serves as Airflow's underlying metadata database and the scheduler's source of truth.
 
 On Astronomer Software, a Postgres metadata database will be created for each individual Airflow Deployment and hosted within your wider platform database.
 

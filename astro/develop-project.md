@@ -9,8 +9,6 @@ import {siteVariables} from '@site/src/versions';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Overview
-
 This is where you'll find information about:
 
 - Building and running a project

@@ -6,8 +6,6 @@ description: Call the Apache Airflow REST API on Astronomer Software.
 
 ---
 
-## Overview
-
 Apache Airflow is an extensible orchestration tool that offers multiple ways to define and orchestrate data workflows. For users looking to automate actions around those workflows, Airflow exposes a [stable REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in Airflow 2 and an [experimental REST API](https://airflow.apache.org/docs/stable/rest-api-ref.html) for users running Airflow 1.10. You can use both on Astronomer.
 
 To externally trigger DAG runs without needing to access your Airflow Deployment directly, for example, you can make an HTTP request in Python or cURL to the corresponding endpoint in the Airflow REST API that calls for that exact action.

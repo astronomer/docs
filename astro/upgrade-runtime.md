@@ -7,13 +7,12 @@ description: Upgrade your Deployment's version of Astro Runtime.
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
 
-New versions of Astro Runtime are released regularly to support new functionality from both Astro and the Apache Airflow open source project. To take advantage of new features as well as bug and security fixes, we recommend regularly upgrading Astro Runtime as new versions are released.
+New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
-Follow this guide to upgrade Astro Runtime locally or for a Deployment on Astro. You can use these steps to upgrade to any major, minor, or patch version of Astro Runtime.
+## Upgrade Considerations
 
-As you plan to upgrade, keep in mind that:
+Consider the following when you upgrade Astro Runtime:
 
 - All versions of the Astro CLI support all versions of Astro Runtime. There are no dependencies between the two products.
 - Upgrading to certain versions of Runtime might result in extended upgrade times or otherwise disruptive changes to your environment. To learn more, see [Upgrade considerations](upgrade-runtime.md#upgrade-considerations).
@@ -23,15 +22,13 @@ To stay up to date on the latest versions of Astro Runtime, see [Astro Runtime r
 
 ## Prerequisites
 
-To upgrade to a new version of Astro Runtime, you must have:
-
 - An [Astro project](create-project.md).
 - An [Astro Deployment](create-deployment.md).
 - The [Astro CLI](cli/configure-cli.md#install-the-cli).
 
 :::info
 
-If you're only upgrading a local Airflow environment, you do not need an Astro Deployment and can skip steps 3-4 of this guide.
+If you're upgrading a local Airflow environment, you don't need an Astro Deployment and you can skip steps 3-4.
 
 :::
 

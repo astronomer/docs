@@ -5,9 +5,7 @@ id: data-lineage-support-and-compatibility
 description: A compatibility reference guide for Astro lineage's Airflow support.
 ---
 
-## Overview
-
-All Astro Deployments use the [OpenLineage Airflow library](https://openlineage.io/integration/apache-airflow/) (`openlineage-airflow`) to gather lineage data. The OpenLineage Airflow library is installed on Astro Runtime by default. This integration includes built-in support for several Apache Airflow operators. These operators use tools called extractors to emit lineage data and they don't require additional configuration. Tasks that run with supported operators appear as nodes in your data lineage graphs and show connections to any input and output datasets.
+All Astro Deployments use the [OpenLineage Airflow library](https://openlineage.io/integration/apache-airflow/) (`openlineage-airflow`) to gather lineage data. The OpenLineage Airflow library is installed on Astro Runtime by default and includes built-in support for several Apache Airflow operators. These operators use tools called extractors to emit lineage data and they don't require additional configuration. Tasks that run with supported operators appear as nodes in your data lineage graphs and show connections to any input and output datasets.
 
 If you’re using an unsupported operator, create an issue in the [OpenLineage GitHub repository](https://github.com/OpenLineage/OpenLineage) or write your own custom extractor.
 

@@ -5,9 +5,7 @@ id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
 
-## Overview
-
-This guide provides instructions for how to create API keys for Deployments on Astro. You can use API keys to programmatically deploy DAGs to a Deployment on Astro.
+You can use API keys to programmatically deploy DAGs to a Deployment on Astro.
 
 You can use a Deployment API key to:
 
