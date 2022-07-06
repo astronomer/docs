@@ -1,5 +1,5 @@
 ---
-sidebar_label: "AWS Resource reference"
+sidebar_label: "AWS resource reference"
 title: "Resources required for Astro on AWS"
 id: resource-reference-aws
 description: Reference of all supported configurations for new clusters on Astro in AWS.

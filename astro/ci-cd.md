@@ -519,7 +519,7 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
 2. Go to the Editor option in your project's CI/CD section and commit the following:
 
    <pre><code parentName="pre">{`---
-      astro_deploy:
+    astro_deploy:
       stage: deploy
       image: docker:latest
       services:
