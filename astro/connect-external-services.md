@@ -106,7 +106,7 @@ To grant an Astro cluster access to AWS service resources, you need to define th
 
 6. Click **Edit trust policy** and update the `arn` value:
 
-```text
+```text {8}
     {
     "Version": "2012-10-17",
     "Statement": [
