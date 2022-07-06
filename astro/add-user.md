@@ -1,11 +1,11 @@
 ---
-sidebar_label: 'Add a user'
-title: 'Add a user to Astro'
+sidebar_label: 'Add and remove users'
+title: 'Add and remove Astro users'
 id: add-user
-description: Add a user to a either a Workspace or an Organization on Astro.
+description: Add or remove users in the Cloud UI.
 ---
 
-This guide provides steps for adding a user to an Astro Workspace. As a Workspace Admin or Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Organization.
+As a Workspace Admin or Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Organization. Workspace Admins can remove users from a Workspace, but Organization Owners need to contact [Astronomer support](https://support.astronomer.io) to remove users from an Organization.
 
 ## Prerequisites
 
@@ -43,3 +43,24 @@ To add an existing user from an Organization to a Workspace:
 5. Click **Add member**.
 
 Once you add the user, their information will appear in the **Access** tab as a new entry in the **Members** table. The user needs to accept an invite to the Workspace via email and log in before they can access the Workspace.
+
+## Remove users from a Workspace
+
+Workspace Admin permissions are required to remove users from a Workspace.
+
+1. In the Cloud UI, select a Workspace.
+
+2. Click **Access** in the left menu.
+
+   ![Access tab](/img/docs/access-tab.png)
+
+3. Click **Edit** next to the user you want to remove.
+
+4. Click **Remove member**.
+
+5. Click **Yes, continue** to confirm the removal.
+
+## Remove users from an Organization
+
+To remove users from an Organization, contact [Astronomer support](https://support.astronomer.io).
+
