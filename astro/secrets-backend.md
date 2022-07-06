@@ -614,7 +614,6 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
 
 This tells Airflow to look for variable information at the `airflow/variables/*` path in Azure Key Vault and connection information at the `airflow/connections/*` path. In the next step, you'll run an example DAG to test this configuration locally.
 
-:::tip
 By default, this setup prefixes secret names in Key Vault with `airflow-connections` or `airflow-variables`. You can change the names of these prefixes, but `"connections_prefix"` and `"variables_prefix"` must have defined values in your configuration.
 
 :::warning
