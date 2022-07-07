@@ -13,7 +13,7 @@ In the Astronomer Software UI you can create and manage workspaces, manage users
 
 1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
 
-2. Open a browser and go to your organization's Astronomer Software base domain.
+2. Open a browser and go to `<basedomain>.astronomer.io`.
 
 3. Select one of the following options to access the Astronomer Software UI:
 
