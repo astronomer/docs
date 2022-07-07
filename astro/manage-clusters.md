@@ -11,7 +11,7 @@ Use the Cloud UI to get an overview of your Organization's clusters and retrieve
 
 In the Cloud UI, click the **Clusters** tab to view information about the clusters in your Organization. The following table provides descriptions for each cluster value.
 
-| Value              | Definition                                                                                     |
+| Value              | Description                                                                                     |
 | ------------------ | ---------------------------------------------------------------------------------------------- |
 | Name               | The name of the cluster                                                                        |
 | Provider           | The type of cloud that the cluster is hosted on                                                |
