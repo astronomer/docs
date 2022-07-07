@@ -9,8 +9,6 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
 
 ## Log in to the Astronomer Software UI
 
-In the Astronomer Software UI you can create and manage workspaces, manage users, add and remove environment variables, view metrics, and view logs.
-
 1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
 
 2. Open a browser and go to `<basedomain>.astronomer.io`.
@@ -19,7 +17,7 @@ In the Astronomer Software UI you can create and manage workspaces, manage users
 
 ## Log in to the Astro CLI
 
-Use the Astro CLI to [deploy code to Astro](deploy-code.md) and create and manage Deployments.
+Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/deploy-code) and create and manage Deployments.
 
 1. Install and configure the Astro CLI. See [Get started with the Astro CLI](https://docs.astronomer.io/software/install-cli).
 

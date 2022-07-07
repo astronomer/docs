@@ -9,8 +9,6 @@ You can use the Cloud UI and the Astro CLI to view and modify your workspaces, c
 
 ## Log in to the Cloud UI
 
-In the Cloud UI you can create and manage workspaces, manage users, view your clusters, view lineage data, view task data, and view organization information.
-
 1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
 
 2. Go to `https://account.astronomer.io/`, enter your email address, and then click **Continue**.
