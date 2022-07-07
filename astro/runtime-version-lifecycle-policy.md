@@ -1,13 +1,13 @@
 ---
-title: "Astro Runtime lifecycle policy"
-sidebar_label: "Astro Runtime lifecycle policy"
+title: "Astro Runtime maintenance and lifecycle policy"
+sidebar_label: "Astro Runtime maintenance policy"
 id: runtime-version-lifecycle-policy
 description: Learn how Astronomer releases and maintains Astro Runtime, the core component that powers a differentiated Apache Airflow experience on Astro.
 ---
 
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
 
-As part of distribution, Astronomer upholds maintenance and lifecycle policies that define the period that specific Astro Runtime versions are supported and the frequency at which updates are provided.
+Astronomer maintenance and lifecycle policies are part of the distribution and define the period that specific Astro Runtime versions are supported and how frequently updates are provided.
 
 ## Release channels
 
