@@ -75,7 +75,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
     For a list of currently supported Astronomer images, see:
 
     - [Astronomer Certified Lifecycle Schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
-    - [Astro Runtime Lifecycle Schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
+    - [Astro Runtime Lifecycle Schedule](runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule)
 
   :::warning
 
