@@ -5,15 +5,13 @@ id: log-in-to-software
 description: Log in to Astronomer Software to access Astronomer Software features and functionality.
 ---
 
-You can use the Astronomer Software UI and the Astro CLI to view and modify your workspaces, clusters, environment variables, tasks, and users. Your user credentials need to be authenticated before you can use the Astronomer Software UI or the Astro CLI. User authentication prevents unauthorized access to organizational data and ensures you have the correct permissions to perform specific tasks.
+You can use the Astronomer Software UI and the Astro CLI to view and modify your workspaces, clusters, environment variables, tasks, and users. Your user credentials need to be authenticated before you can use the Astronomer Software UI or the Astro CLI.
 
 ## Log in to the Astronomer Software UI
 
-1. Open a browser and go to https://cloud.astronomer.io/ and create an Astronomer account.
+1. Go to `<basedomain>.astronomer.io`.
 
-2. Go to `<basedomain>.astronomer.io`.
-
-3. Select one of the authentication methods used by your organization, or enter your email address and password and click **Log in**.
+2. Select one of the authentication methods used by your organization, or enter your email address and password and click **Log in**.
 
 ## Log in to the Astro CLI
 
@@ -42,7 +40,7 @@ Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/dep
 
 A base domain or URL (Uniform Resource Locator) is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays https://www.astronomer.io no matter what page you access on the Astronomer website.
 
-Every cluster is assigned a base domain. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you're authenticated on one cluster, but you need to perform tasks on another cluster.
+Every cluster is assigned a base domain. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you're authenticated on one cluster, but you need to perform tasks on another installation.
 
 You can authenticate to multiple domains from a single base domain. You run the `astro login x` command to authenticate to a base domain, and then run the `astro context switch x` command to define the default base domain on your computer. 
 

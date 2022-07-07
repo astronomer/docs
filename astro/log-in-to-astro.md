@@ -5,15 +5,13 @@ id: log-in-to-astro
 description: Log in to Astro to access Astro features and functionality.
 ---
 
-You can use the Cloud UI and the Astro CLI to view and modify your workspaces, clusters, environment variables, tasks, and users. Your user credentials need to be authenticated before you can use the Cloud UI or the Astro CLI. User authentication prevents unauthorized access to organizational data and ensures you have the correct permissions to perform specific tasks.
+You can use the Cloud UI and the Astro CLI to view and modify your workspaces, clusters, environment variables, tasks, and users. Your user credentials need to be authenticated before you can use the Cloud UI or the Astro CLI.
 
 ## Log in to the Cloud UI
 
-1. Open a browser and go to https://cloud.astronomer.io/ and create an Astronomer account.
+1. Go to `https://account.astronomer.io/`, enter your email address, and then click **Continue**.
 
-2. Go to `https://account.astronomer.io/`, enter your email address, and then click **Continue**.
-
-3. Enter your password and click **Continue**, or select one of the authentication methods used by your organization.
+2. Enter your password and click **Continue**, or select one of the authentication methods used by your organization.
 
     If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support.
 
