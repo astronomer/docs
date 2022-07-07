@@ -28,9 +28,9 @@ In the Astronomer Software UI you can create and manage workspaces, manage users
 
 ## Log in to the Astro CLI
 
-In the Astro CLI you can run a local Airflow environment, apply code changes, view logs for all Airflow components, create deployments, and modify environment variables.
+Use the Astro CLI to [deploy code to Astro](deploy-code.md) and create and manage Deployments.
 
-1. Install and configure the Astro CLI. See [Get started with the Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+1. Install and configure the Astro CLI. See [Get started with the Astro CLI](https://docs.astronomer.io/software/install-cli).
 
 2. Run the following command:
 
@@ -40,8 +40,6 @@ In the Astro CLI you can run a local Airflow environment, apply code changes, vi
 3. Enter your email address and press **Enter**.
 
 4. Press **Enter** to connect your account to Astronomer.
-
-    If this is your first time logging in, the Astronomer Authorize App dialog appears. Click **Accept** to allow Astronomer to access your profile and email and allow offline access.
 
 ## Access a different base domain
 
