@@ -26,7 +26,7 @@ In the Cloud UI you can create and manage workspaces, manage users, view your cl
 
 ## Log in to the Astro CLI
 
-In the Astro CLI you can run a local Airflow environment, apply code changes, view logs for all Airflow components, create deployments, and modify environment variables.
+Using the Astro CLI you can [deploy code to Astro](deploy-code.md). You can also create and manage Deployments as you would in the Cloud UI.
 
 1. Install and configure the Astro CLI. See [Get started with the Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
