@@ -18,7 +18,7 @@ If you're experiencing an issue or have a question that requires Astronomer expe
 
 ## Best practices for support request submissions
 
-The following are the best practices for submitting support requests in the Cloud UI or the Astronomer support portal:
+The following are the best practices for submitting support requests in the Astronomer support portal:
 
 ### Always indicate priority
 
@@ -31,7 +31,7 @@ Examples:
 - Your tasks are not running and restarting them didn't fix the issue.
 - Astronomer is experiencing an incident or downtime that is affecting your data pipelines in production.
 
-**P2:** High impact. Ability to use Astro is severely impaired but does not affect critical pipelines in production.
+**P2:** High impact. Ability to use Astronomer Software is severely impaired but does not affect critical pipelines in production.
 
 Examples:
 
@@ -48,13 +48,13 @@ Examples:
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
 
-**P4:** Low impact. Astro is fully usable but you have a question for our team.
+**P4:** Low impact. Astronomer Software is fully usable but you have a question for our team.
 
 Examples:
 
 - There are package incompatibilities caused by a specific, complex use case.
-- You have questions about best practices for an action in Airflow or on Astro.
-- You have a feature request related to Astro or Airflow.
+- You have questions about best practices for an action in Airflow or on Astronomer Software.
+- You have a feature request related to Astronomer Software or Airflow.
 
 ### Be as descriptive as possible
 
@@ -70,7 +70,7 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
 ## Submit a support request on the Astronomer support portal
 
-If you're new to Astronomer, you'll need to create an account on the Astronomer support portal to submit a support request. Astronomer recommends that you use the same email address that you use to access Astro for your account. If you're working with a team and want to view support tickets created by other team members, use your work email or the domain you share with other team members for your account (for example, `@astronomer.io`). If your team uses more than one email domain (for example, `@astronomer.io`), contact Astronomer and ask to have the additional domains added to your organization.
+If you're new to Astronomer, you'll need to create an account on the Astronomer support portal to submit a support request. Astronomer recommends that you use the same email address that you use to access Astronomer Software. If you're working with a team and want to view support tickets created by other team members, use your work email or the domain you share with other team members for your account (for example, `@astronomer.io`). If your team uses more than one email domain (for example, `@astronomer.io`), contact Astronomer and ask to have the additional domains added to your organization.
 
 If you're an existing customer, sign in to the [Astronomer support portal](https://support.astronomer.io) and create a new support request.
 
