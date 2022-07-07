@@ -197,7 +197,7 @@ Once you've added this DAG to your project:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**.  If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**.  If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -315,7 +315,7 @@ To test your changes:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -421,7 +421,7 @@ To test your changes:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -536,7 +536,7 @@ To test your changes:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -654,7 +654,7 @@ To test your changes:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
