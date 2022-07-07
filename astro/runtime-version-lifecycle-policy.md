@@ -80,8 +80,8 @@ The following table contains the exact lifecycle for each published version of A
 | Runtime Version                                          | Release Date    | End of Maintenance Date |
 | ---------------------------------------------------------| ----------------| ------------------------|
 | [3.0.x](runtime-release-notes.md#astro-runtime-300)      | August 12, 2021 | February 2022           |
-| [4.0.x](runtime-release-notes.md#astro-runtime-400)      | Oct 12, 2021    |  April 2022             |
-| [4.1.x](runtime-release-notes.md#astro-runtime-410)      | Feb 22, 2022    |  August 2022            |
+| [4.0.x](runtime-release-notes.md#astro-runtime-400)      | October 12, 2021    |  April 2022             |
+| [4.1.x](runtime-release-notes.md#astro-runtime-410)      | February 22, 2022    |  August 2022            |
 | [4.2.x](runtime-release-notes.md#astro-runtime-420)      | March 10, 2022  |  September 2022         |
 | [5.0.x](runtime-release-notes.md#astro-runtime-500)      | April 30, 2022  |  October 2022         |
 
