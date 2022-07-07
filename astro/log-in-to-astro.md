@@ -26,7 +26,7 @@ In the Cloud UI you can create and manage workspaces, manage users, view your cl
 
 ## Log in to the Astro CLI
 
-Using the Astro CLI you can [deploy code to Astro](deploy-code.md). You can also create and manage Deployments as you would in the Cloud UI.
+Use the Astro CLI to [deploy code to Astro](deploy-code.md) and create and manage Deployments.
 
 1. Install and configure the Astro CLI. See [Get started with the Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
