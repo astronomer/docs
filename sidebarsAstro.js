@@ -102,7 +102,7 @@ module.exports = {
           type: 'category',
           label: 'Clusters',
           items: [
-            'manage-clusters',
+            'view-clusters',
             'create-cluster',
             'modify-cluster',
             'connect-external-services',

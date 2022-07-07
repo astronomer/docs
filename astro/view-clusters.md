@@ -1,7 +1,7 @@
 ---
-sidebar_label: "Manage clusters"
-title: "Manage Astro clusters"
-id: manage-clusters
+sidebar_label: "View clusters"
+title: "View Astro clusters"
+id: view-clusters
 description: View information about clusters in the Cloud UI.
 ---
 
@@ -23,7 +23,7 @@ In the Cloud UI, click the **Clusters** tab to view information about the cluste
 | Service peering    | GCP only. The range of IP addresses that can be used to peer with the cluster's VPC           |
 | DB instance type   | The type of instance used for the cluster's metadata database                                  |
 | Node instance type | The type of instance used for the cluster's worker nodes                                       |
-| Max node count     | The maximum number of worker nodes supported across all Deployments in the cluster. See              |
+| Max node count     | The maximum number of worker nodes supported across all Deployments in the cluster.               |
 | Updated            | The last time the cluster's settings were updated                                                |
 | Created            | When the cluster was created                                                                   |
 
