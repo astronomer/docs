@@ -22,7 +22,7 @@ In the Cloud UI you can create and manage workspaces, manage users, view your cl
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    If you're the first person in your organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your organization. You can add other team members to the Workspace without the assistance of Astronomer support.
+    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support.
 
 ## Log in to the Astro CLI
 
