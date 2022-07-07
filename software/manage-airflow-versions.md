@@ -74,7 +74,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
     For a list of currently supported Astronomer images, see:
 
-    - [Astronomer Certified Lifecycle Schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
+    - [Astronomer Certified lifecycle schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
     - [Astro Runtime Lifecycle Schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
 
   :::warning
@@ -83,7 +83,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
   :::
 
-3. Optional. Test your upgrade on your local machine by running:
+3. Optional. Test your upgrade locally by running:
 
     ```sh
     astro dev restart
