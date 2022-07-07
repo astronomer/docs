@@ -34,7 +34,7 @@ For a list of all Google Cloud Platform (GCP) regions that Astro supports, see [
 
 ### Additional improvements
 
-- You can now search for Organization members by name, email address, and role in the **People** tab of the Organization view in the the Cloud UI. You can also search for members in the **Access** tab of the Workspace view.
+- You can now search for Organization members by name, email address, and role in the **People** tab of the Organization view in the Cloud UI. You can also search for members in the **Access** tab of the Workspace view.
 
 ### Bug fixes
 
