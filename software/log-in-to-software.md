@@ -54,14 +54,13 @@ You can authenticate to multiple domains from a single base domain. You run the 
     ```
     astro login
     ```
-2. Run the following command to define the default base domain on your computer:
-
-    ```
-    astro context switch <basedomain>
-    ```
-
 3. Run the following command to view a list of base domains for all Astronomer installations that you can access and to confirm your default base domain:
 
     ```
     astro context list
+    ```
+2. Run the following command to define the default base domain on your computer:
+
+    ```
+    astro context switch <basedomain>
     ```
