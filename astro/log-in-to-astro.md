@@ -38,7 +38,7 @@ A base domain or URL (Uniform Resource Locator) is the static element of a websi
 
 Every cluster is assigned a base domain. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you need to move from Astro to an Astronomer Software installation.
 
-You can authenticate to multiple domains from a single base domain. You run the `astro login x` command to authenticate to a base domain, and then run the `astro context switch x` command to define the default base domain on your computer. 
+You can authenticate to multiple domains from a single base domain. You run `astro login` to authenticate to a base domain, and then run the `astro context switch <basedomain>` command to define the default base domain on your machine. 
 
 1. In the Astro CLI, run the following command to re-authenticate to the target base domain:
 
