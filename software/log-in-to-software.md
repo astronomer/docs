@@ -35,7 +35,7 @@ In the Astro CLI you can run a local Airflow environment, apply code changes, vi
 2. Run the following command:
 
     ```sh
-    astro login
+    astro login <basedomain>
     ```
 3. Enter your email address and press **Enter**.
 
