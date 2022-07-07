@@ -37,9 +37,11 @@ Use the Astro CLI to [deploy code to Astro](deploy-code.md) and create and manag
     ```sh
     astro login <basedomain>
     ```
-3. Enter your email address and press **Enter**.
+3. Enter your username and password or use an OAuth token for authentication:
 
-4. Press **Enter** to connect your account to Astronomer.
+    - Press **Enter**.
+    - Copy the URL, open a browser, paste the URL in the address bar, and then press **Enter**. If you're not taken immediately to the Astronomer Auth Token page, log in to Astronomer Software, paste the URL in the address bar, and press **Enter**.
+    - Copy the OAuth token, paste it in the command prompt after **oAuth Token**, and then press **Enter**.     
 
 ## Access a different base domain
 
@@ -54,12 +56,12 @@ You can authenticate to multiple domains from a single base domain. You run the 
     ```
     astro login
     ```
-3. Run the following command to view a list of base domains for all Astronomer installations that you can access and to confirm your default base domain:
+2. Run the following command to view a list of base domains for all Astronomer installations that you can access and to confirm your default base domain:
 
     ```
     astro context list
     ```
-2. Run the following command to define the default base domain on your computer:
+3. Run the following command to define the default base domain on your computer:
 
     ```
     astro context switch <basedomain>
