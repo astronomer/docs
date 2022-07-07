@@ -30,7 +30,7 @@ Read the following document for a reference of our default resources as well as 
 
 Depending on the needs of your team, you may be interested in modifying certain configurations of a new or existing cluster on Astro. This section provides a reference for which configuration options are supported during the install process.
 
-To create a new cluster on Astro with a specified configuration, see [Install on AWS](install-aws.md) or [Create a cluster](create-cluster.md). For instructions on how to make a change to an existing cluster, see [Modify a cluster](modify-cluster.md). To view your clusters' current configurations, see [Manage clusters](manage-clusters.md).
+To create a new cluster on Astro with a specified configuration, see [Install on AWS](install-aws.md) or [Create a cluster](create-cluster.md). To make changes to an existing cluster, see [Modify a cluster](modify-cluster.md). To view your clusters' current configurations, see [Manage clusters](manage-clusters.md).
 
 ### AWS region
 
