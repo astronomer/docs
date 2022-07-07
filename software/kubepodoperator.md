@@ -12,7 +12,6 @@ The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-provi
 The KubernetesPodOperator enables you to:
 
 - Execute a custom Docker image per task with Python packages and dependencies that would otherwise conflict with the rest of your Deployment's dependencies. This includes Docker images in a private registry or repository.
-- Run tasks Kubernetes cluster outside of the Astro data plane. This allows you to run individual tasks on infrastructure that might not be supported on Astro yet, such as GPU nodes or on other third-party services.
 - Specify CPU and Memory as task-level limits or minimums to optimize for cost and performance.
 - Write task logic in a language other than Python. This gives you flexibility and can enable new use cases across teams.
 - Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.
