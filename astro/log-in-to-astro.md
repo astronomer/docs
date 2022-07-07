@@ -13,7 +13,7 @@ In the Cloud UI you can create and manage workspaces, manage users, view your cl
 
 1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
 
-2. Go to https://account.astronomer.io/, enter your email address, and then click **Continue**.
+2. Go to `https://account.astronomer.io/`, enter your email address, and then click **Continue**.
 
 3. Select one of the following options to access the Cloud UI:
 
