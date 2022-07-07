@@ -40,7 +40,7 @@ Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/dep
 
 A base domain or URL (Uniform Resource Locator) is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays https://www.astronomer.io no matter what page you access on the Astronomer website.
 
-Every cluster is assigned a base domain. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you're authenticated on one cluster, but you need to perform tasks on another installation.
+Every cluster is assigned a base domain. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you're authenticated on one installation, but you need to perform tasks on another installation.
 
 You can authenticate to multiple domains from a single base domain. You run the `astro login x` command to authenticate to a base domain, and then run the `astro context switch x` command to define the default base domain on your computer. 
 
