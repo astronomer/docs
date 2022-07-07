@@ -66,13 +66,13 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
         config:
           deployments:
             enableUpdateDeploymentImageEndpoint: true
-	  registry:
-	    protectedCustomRegistry:
-	      enabled: true
-	      updateRegistry:
-		enabled: true
-		host: <your-airflow-image-repo>
-		secretName: <name-of-secret>
+          registry:
+            protectedCustomRegistry:
+              enabled: true
+              updateRegistry:
+                enabled: true
+                host: <your-airflow-image-repo>
+                secretName: <name-of-secret>
     ```
 
   :::info
@@ -135,17 +135,17 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
                 images:
                   airflow:
                     repository: <airflow-image-repo>
-	  registry:
-	    protectedCustomRegistry:
-	      enabled: true
-	      baseRegistry:
-		enabled: true
-		host: <airflow-image-repo>
-		secretName: <name-of-secret-containing-image-repo-creds>
-	      updateRegistry:
-		enabled: true
-		host: <airflow-image-repo>
-		secretName: <name-of-secret-containing-image-repo-creds>
+          registry:
+            protectedCustomRegistry:
+              enabled: true
+              baseRegistry:
+                enabled: true
+                host: <airflow-image-repo>
+                secretName: <name-of-secret-containing-image-repo-creds>
+              updateRegistry:
+                enabled: true
+                host: <airflow-image-repo>
+                secretName: <name-of-secret-containing-image-repo-creds>
     ```
 
   :::info
@@ -171,14 +171,14 @@ After pushing images for your Astro project to your private registry, you can ru
 
 ```graphql
 mutation updateDeploymentImage {
-	updateDeploymentImage(
-		releaseName: "<deployment-release-name>", # for example "analytics-dev"
-		image: "<host>/<image-name>:<tag>",  # for example docker.io/cmart123/ap-airflow:test4
-		airflowVersion: "<airflow-version-number>" # for example "2.2.5"
-	)
-	{
-		id
-	}
+        updateDeploymentImage(
+                releaseName: "<deployment-release-name>", # for example "analytics-dev"
+                image: "<host>/<image-name>:<tag>",  # for example docker.io/cmart123/ap-airflow:test4
+                airflowVersion: "<airflow-version-number>" # for example "2.2.5"
+        )
+        {
+                id
+        }
 }
 ```
 
