@@ -30,7 +30,13 @@ Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/dep
 
     - Press **Enter**.
     - Copy the URL, open a browser, paste the URL in the address bar, and then press **Enter**. If you're not taken immediately to the Astronomer Auth Token page, log in to Astronomer Software, paste the URL in the address bar, and press **Enter**.
-    - Copy the OAuth token, paste it in the command prompt after **oAuth Token**, and then press **Enter**.     
+    - Copy the OAuth token, paste it in the command prompt after **oAuth Token**, and then press **Enter**.
+
+    :::info
+
+    If you can't enter your password in the command prompt, your organization is using an alternative authentication method. Contact your administrator, or use an OAuth token for authentication.
+
+    :::     
 
 ## Access a different base domain
 
