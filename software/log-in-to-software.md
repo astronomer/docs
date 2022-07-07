@@ -9,9 +9,9 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
 
 ## Log in to the Astronomer Software UI
 
-1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
+1. Open a browser and go to https://cloud.astronomer.io/ and create an Astronomer account.
 
-2. Open a browser and go to `<basedomain>.astronomer.io`.
+2. Go to `<basedomain>.astronomer.io`.
 
 3. Select one of the authentication methods used by your organization, or enter your email address and password and click **Log in**.
 

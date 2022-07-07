@@ -9,7 +9,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your workspaces, c
 
 ## Log in to the Cloud UI
 
-1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
+1. Open a browser and go to https://cloud.astronomer.io/ and create an Astronomer account.
 
 2. Go to `https://account.astronomer.io/`, enter your email address, and then click **Continue**.
 
