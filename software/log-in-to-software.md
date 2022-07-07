@@ -15,16 +15,7 @@ In the Astronomer Software UI you can create and manage workspaces, manage users
 
 2. Open a browser and go to `<basedomain>.astronomer.io`.
 
-3. Select one of the following options to access the Astronomer Software UI:
-
-    - To authenticate with with your Auth0 account, click **Log in with Auth0**, and then follow the prompts.
-    - To authenticate with your Google account, click **Log in with Google**, choose an account, enter your username and password, and then click **Sign In**.
-    - To authenticate with your Okta account, click **Log in with Okta**, enter your username and password, and then click **Sign In**. 
-    - To authenticate with with your custom Oauth account, click **Log in with Custom Oauth**, and then follow the prompts.
-    - To authenticate with with your Azure AD account, click **Log in with Azure AD**, and then follow the prompts.
-    - To authenticate with your internal Okta account, click **Log in with InternalOkta**, enter your username and password, and then click **Sign In**. 
-    - To authenticate with your GitHub account, click **Log in with GitHub**, and then follow the prompts.
-    - Enter your username and password and click **Log in**.
+3. Select one of the authentication methods used by your organization, or enter your email address and password and click **Log in**.
 
 ## Log in to the Astro CLI
 
