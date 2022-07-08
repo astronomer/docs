@@ -26,9 +26,18 @@ The Astronomer Certified Docker image is built from the Python wheel and incorpo
 
 ![Diagram of AC distribution scheme](https://assets2.astronomer.io/main/docs/diagrams/ac-diagram.png)
 
-Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/).
+Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all Astronomer Certified images can be found in the [Astronomer Certified GitHub repository](https://quay.io/repository/astronomer/ap-airflow?tab=tags):
 
-All Docker-based distributions of Astronomer Certified share a Dockerfile that builds with a different Airflow version depending on the image tag that you use. This Dockerfile is available in the [Astronomer Certified GitHub repository](https://github.com/astronomer/ap-airflow/blob/master/main/bullseye/Dockerfile).
+- [Airflow 2.3.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.3/bullseye/Dockerfile)
+- [Airflow 2.3.2](https://github.com/astronomer/ap-airflow/blob/master/2.3.2/bullseye/Dockerfile)
+- [Airflow 2.2.5](https://github.com/astronomer/ap-airflow/blob/master/2.2.5/bullseye/Dockerfile)
+- [Airflow 2.2.4](https://github.com/astronomer/ap-airflow/blob/master/2.2.4/bullseye/Dockerfile)
+- [Airflow 2.2.3](https://github.com/astronomer/ap-airflow/blob/master/2.2.3/bullseye/Dockerfile)
+- [Airflow 2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/bullseye/Dockerfile)
+- [Airflow 2.2.1](https://github.com/astronomer/ap-airflow/blob/master/2.2.1/bullseye/Dockerfile)
+- [Airflow 2.2.0](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/bullseye/Dockerfile)
+- [Airflow 2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/Dockerfile)
+- [Airflow 1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/buster/Dockerfile)
 
 ### Differences between Astro Runtime and Astronomer Certified
 
