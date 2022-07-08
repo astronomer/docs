@@ -26,7 +26,7 @@ The Astronomer Certified Docker image is built from the Python wheel and incorpo
 
 ![Diagram of AC distribution scheme](https://assets2.astronomer.io/main/docs/diagrams/ac-diagram.png)
 
-Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all Astronomer Certified images can be found in the [Astronomer Certified GitHub repository](https://quay.io/repository/astronomer/ap-airflow?tab=tags):
+Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all supported Astronomer Certified images can be found in the [Astronomer Certified GitHub repository](https://quay.io/repository/astronomer/ap-airflow?tab=tags):
 
 - [Airflow 2.3.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.3/bullseye/Dockerfile)
 - [Airflow 2.3.2](https://github.com/astronomer/ap-airflow/blob/master/2.3.2/bullseye/Dockerfile)
