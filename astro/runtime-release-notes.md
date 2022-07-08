@@ -16,7 +16,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Cherry-picked commits from Airflow 2.3.3
 
-Astro Runtime 5.0.5 includes several bug fixes and performance improvements slated for release in Airflow 2.3.3, including:
+Astro Runtime 5.0.5 includes several bug fixes and performance improvements that will be released with Airflow 2.3.3, including:
 
 - Fixed an issue where the Airflow UI could crash a `GET` method on a REST API endpoint fails ([#24152](https://github.com/apache/airflow/pull/24152))
 - Improved the performance of the **Grid** view ([#24083](https://github.com/apache/airflow/pull/24083))
@@ -25,7 +25,7 @@ Astro Runtime 5.0.5 includes several bug fixes and performance improvements slat
 
 ### Additional improvements
 
-- Updated `openlineage-airflow` to v0.10.0. This release includes a built-in `SnowflakeOperatorAsync` extractor for Airflow, an `InMemoryRelationInputDatasetBuilder` for `InMemory` datasets for Spark, and a copyright to all source files.
+- Updated `openlineage-airflow` to v0.10.0. This release includes a built-in `SnowflakeOperatorAsync` extractor for Airflow, an `InMemoryRelationInputDatasetBuilder` for `InMemory` datasets for Spark, and the addition of a copyright statement to all source files.
 
 ## Astro Runtime 5.0.4
 
