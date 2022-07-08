@@ -13,7 +13,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your workspaces, c
 
 2. Enter your password and click **Continue**, or select one of the authentication methods used by your organization.
 
-    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support.
+    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md).
 
 ## Log in to the Astro CLI
 
