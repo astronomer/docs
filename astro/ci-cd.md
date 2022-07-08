@@ -275,6 +275,14 @@ To complete this setup, you need:
 
 ### Jenkins
 
+<Tabs
+    defaultValue="jenkinsstandard"
+    values={[
+        {label: 'Standard', value: 'jenkinsstandard'},
+        {label: 'Multi-branch', value: 'jenkinsmultibranch'},
+    ]}>
+<TabItem value="jenkinsstandard">
+
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
 1. In your Jenkins pipeline configuration, add the following parameters:
@@ -314,9 +322,11 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
-### Jenkins (Multiple Branches)
+</TabItem>
 
-To automate code deploys to multiple Deployments using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
+<TabItem value="jenkinsmultibranch">
+
+To automate code deploys across multiple Deployments using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
 1. In Jenkins, add the following environment variables:
 
@@ -374,6 +384,9 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
    }`}</code></pre>
 
     This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
+
+</TabItem>
+</Tabs>
 
 ### CircleCI
 
@@ -509,6 +522,14 @@ This pipeline configuration requires:
 
 ### GitLab
 
+<Tabs
+    defaultValue="gitlabstandard"
+    values={[
+        {label: 'Standard', value: 'gitlabstandard'},
+        {label: 'Multi-branch', value: 'gitlabmultibranch'},
+    ]}>
+<TabItem value="gitlabstandard">
+
 To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
 
 1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
@@ -537,7 +558,9 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
        - main
    `}</code></pre>
 
-### GitLab (Multiple Branches)
+</TabItem>
+
+<TabItem value="gitlabmultibranch">
 
 To automate code deploys to Astro across multiple environments using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
 
@@ -591,3 +614,6 @@ When you create environment variables that will be used in multiple branches, yo
         only:
           - main
    `}</code></pre>
+
+</TabItem>
+</Tabs>

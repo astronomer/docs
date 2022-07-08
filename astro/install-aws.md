@@ -5,6 +5,9 @@ id: install-aws
 description: Get started on Astro by installing your first Astro cluster on AWS.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This is where you'll find instructions for completing the Astro installation process, including prerequisites and the steps required for our team to provision resources in your network.
 
 At a high-level, we'll ask that you come prepared with a new AWS account. From there, you can expect to:
@@ -102,12 +105,12 @@ After your Astro Cluster is created, Astronomer provides you with an external ID
 Astronomer recommends using the AWS Management Console to add the external ID to your AWS instance.
 
 <Tabs
-    defaultValue="management console"
+    defaultValue="managementconsole"
     values={[
-        {label: 'AWS Management Console', value: 'management console'},
-        {label: 'AWS Command Line', value: 'command line'},
+        {label: 'AWS Management Console', value: 'managementconsole'},
+        {label: 'AWS Command Line', value: 'commandline'},
     ]}>
-<TabItem value="management console">
+<TabItem value="managementconsole">
 
 1. Create an AWS administrator IAM user and user group. See the AWS topic [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
 
@@ -121,7 +124,7 @@ Astronomer recommends using the AWS Management Console to add the external ID to
 
 </TabItem>
 
-<TabItem value="command line">
+<TabItem value="commandline">
 
 1. Open the AWS CLI and run the following command to create a cross-account IAM Role:
 
