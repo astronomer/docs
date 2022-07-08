@@ -21,8 +21,6 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 
 ## Prerequisites
 
-To use the KubernetesPodOperator, you need:
-
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 

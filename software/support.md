@@ -1,103 +1,88 @@
 ---
-title: 'Support for Astronomer Software'
-navTitle: 'Support'
+title: 'Submit a support request'
+navTitle: 'Astronomer Software support'
 id: support
-description: Get the most from Astronomer Support.
+description: Get Astronomer Software support when you need it.
 ---
 
-The primary objective of Astronomer is helping your organization adopt [Apache Airflow](https://airflow.apache.org/).
-
-Since our inception, Astronomer has garnered a group of Airflow aficionados and experts who are dedicated to doing what they can to help your organization succeed.
-
-In an effort to democratize all-things Airflow, Astronomer makes these resources available to all Airflow users:
+In addition to product documentation, the following resources are available to help you resolve issues:
 
 - [Astronomer Forum](https://forum.astronomer.io)
-- [Airflow Guides](https://www.astronomer.io/guides/airflow-and-hashicorp-vault)
+- [Airflow Guides](https://www.astronomer.io/guides/)
 
-If you're an existing Astronomer customer and you need support, the following options are available:
+If you're experiencing an issue or have a question that requires Astronomer expertise, you can use one of the following methods to contact Astronomer support:
 
-- Submit a request on the [Astronomer Support Portal](https://support.astronomer.io/hc/en-us)
+- Submit a support request on the [Astronomer support portal](https://support.astronomer.io/hc/en-us)
 - Send an email to [support@astronomer.io](mailto:support@astronomer.io)
-- Call +1 (831) 777-2768 and leave a voicemail
+- Call +1 (831) 777-2768
 
-## Astronomer's support portal
+## Best practices for support request submissions
 
-On Astronomer's support portal, you can do two things:
+The following are the best practices for submitting support requests in the Astronomer support portal:
 
-- Submit a Request (Ticket)
-- Check the status of your existing requests
+### Always indicate priority
 
-### Create an account
+To help Astronomer support respond effectively to your support request, it's important that you correctly identify the severity of your issue. The following are the categories that Astronomer uses to determine the severity of your support request:
 
-To submit a request to Astronomer Support, first create an account on our [Support Portal](https://support.astronomer.io).
+**P1:** Critical impact, service is unusable in production.
 
-If you're working with a team, make sure to create an account with your work email or a domain that the rest of your team shares. This will allow you to have visibility into support tickets across your team.
+Examples:
 
-> **Note:** If your team uses more than one email domain (e.g. @astronomer.io), reach out to us so we can manually add it to your organization.
+- Your tasks are not running and restarting them didn't fix the issue.
+- Astronomer is experiencing an incident or downtime that is affecting your data pipelines in production.
 
-### Submit a support request
+**P2:** High impact. Ability to use Astronomer Software is severely impaired but does not affect critical pipelines in production.
 
-When you submit a ticket to Astronomer's Support Portal, keep the following best practices in mind.
+Examples:
 
-#### 1. Always indicate priority
+- The Airflow UI is unavailable.
+- You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
+- Task logs are missing in the Airflow UI.
 
-In order for our team to serve you most effectively, it's critical that we understand the impact of all reported issues. Generally speaking, here are the guidelines we operate under:
+**P3:** Medium impact. Service is partially impaired.
 
-- **P1:** Mission critical systems are down, no workaround is immediately available
+Examples:
 
-    Examples:
+- There is a bug in the Software UI.
+- Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
+- There is an Airflow issue that has a code-based solution.
+- You received a log alert on Astronomer.
 
-    - The scheduler is not heartbeating, and restarting didn't fix the issue.
-    - All Celery workers are offline.
-    - Kubernetes pod executors are not starting.
-    - There are extended periods of `503` errors that are not solved by allocating more resources to the webserver.
-    - There is an Astronomer outage, such as downtime in the Astronomer Docker Registry.
+**P4:** Low impact. Astronomer Software is fully usable but you have a question for our team.
 
-- **P2:** Some major functionality of Astronomer/Astronomer-owned Airflow is severely impaired, but you are still able to run essential DAGs.
+Examples:
 
-    Examples:
+- There are package incompatibilities caused by a specific, complex use case.
+- You have questions about best practices for an action in Airflow or on Astronomer Software.
+- You have a feature request related to Astronomer Software or Airflow.
 
-    - The Airflow webserver is unavailable.
-    - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
-    - Task logs are missing in the Airflow UI.
+### Be as descriptive as possible
 
-- **P3:** Partial, non-critical loss of functionality of Astronomer/Astronomer-owned Airflow.
+The more information you can provide about the issue you're experiencing, the quicker Astronomer support can start the troubleshooting and resolution process. When submitting a support request, include the following information:
 
-    Examples:
+- Have you made any recent changes to your Deployment or running DAGs?
+- What solutions have you already tried?
+- Is this a problem in more than one Deployment?
 
-    - There is a bug in the Software UI.
-    - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
-    - There is an Airflow issue that has a code-based solution.
-    - You received a log alert on Astronomer.
+### Include logs or code snippets
 
-- **P4:** Questions, issues with code inside specific DAGs, and issues with Airflow that are not primarily owned by Astronomer.
+If you've already copied task logs or Airflow component logs, send them as a part of your request. The more context you can provide, the better.
 
-    Examples:
+## Submit a support request on the Astronomer support portal
 
-    - You can't find your Workspace.
-    - There are package incompatibilities caused by a specific, complex use case.
-    - You have questions about best practices for an action in Airflow or on Astronomer.
+If you're new to Astronomer, you'll need to create an account on the Astronomer support portal to submit a support request. Astronomer recommends that you use the same email address that you use to access Astronomer Software. If you're working with a team and want to view support tickets created by other team members, use your work email or the domain you share with other team members for your account (for example, `@astronomer.io`). If your team uses more than one email domain (for example, `@astronomer.io`), contact Astronomer and ask to have the additional domains added to your organization.
 
-#### 2. Be as descriptive as possible
+If you're an existing customer, sign in to the [Astronomer support portal](https://support.astronomer.io) and create a new support request.
 
-The more you can tell us about the issue you're facing, the more quickly we can jump in. Consider including the following:
+## Monitor existing support requests
 
-- What project/deployment does this question/issue apply to?
-- What did you already try?
-- Have you made any recent changes to your Airflow deployment, code, or image?
+If you've submitted your support request on the Astronomer support portal, sign in to the [Astronomer support portal](https://support.astronomer.io) to:
 
-#### 3. Attach logs or code snippets if available
+- Review and comment on requests from your team.
+- Monitor the status of all requests in your organization.
 
-If you've already taken note of any task-level Airflow logs or Astronomer platform logs, don't hesitate to send them as a part of your original ticket.
+:::tip
 
-The more context you can give, the better we can help you.
+To add a teammate to an existing support request, cc them when replying on the support ticket email thread.
 
-#### 4. Track existing support requests
-
-Once you've submitted a support request to our team, track our response via our Support Portal.
-
-1. See and comment on requests from your team
-2. Check the status of your requests
-3. Get responses from us via email
-
-> **Note:** To add a teammate to an existing ticket, cc them in a followup message within the email thread automatically generated when the ticket was created.
+:::

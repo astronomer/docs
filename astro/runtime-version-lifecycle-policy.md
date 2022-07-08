@@ -1,29 +1,26 @@
 ---
-title: "Astro Runtime versioning and lifecycle policy"
-sidebar_label: "Astro Runtime versioning and lifecycle policy"
+title: "Astro Runtime maintenance and lifecycle policy"
+sidebar_label: "Astro Runtime maintenance policy"
 id: runtime-version-lifecycle-policy
 description: Learn how Astronomer releases and maintains Astro Runtime, the core component that powers a differentiated Apache Airflow experience on Astro.
 ---
 
 Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
 
-Policies define the period that specific Astro Runtime versions are supported and the frequency updates are provided.
+Astronomer maintenance and lifecycle policies are part of the distribution and define the period that specific Astro Runtime versions are supported and how frequently updates are provided.
 
-## Backport policy for bug and security fixes
+## Release channels
 
-When Astronomer identifies a significant bug in Astro Runtime, a fix is backported to all Long Term Support (LTS) versions and the latest stable version. To avoid the impact of previously identified bugs, Astronomer recommends that you upgrade Astro Runtime if you are not using the latest stable version.
+To meet the unique needs of different operating environments, Astro Runtime versions are associated with the following release channels:
 
-When Astronomer identifies a significant security vulnerability in Astro Runtime, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
+- **Stable:** Includes the latest Astronomer and Apache Airflow features, available on release
+- **Long-term Support (LTS):** Includes additional testing, stability, and maintenance for a core set of features
 
-Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
+Each Astro Runtime version defined as a `major.minor` pair, such as Runtime version `5.1`,  is associated with an Astro Runtime stable release channel. The LTS release channel is a subset of the stable release channel and includes additional stability, reliability, and support. For more information on how Astro Runtime is versioned, see [Runtime versioning](runtime-image-architecture.md#runtime-versioning).
 
-### Security scan results on Quay.io
+For users that want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of Astro Runtime as soon as they are made generally available. This should be regardless of release channel. New versions of Runtime are issued regularly and include timely support for the latest major, minor, and patch versions of Airflow.
 
-Astronomer is aware of the **Security Scan Report** results that are provided by [Project Quay](https://www.projectquay.io/) for each Astro Runtime image and are publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
-
-Astronomer monitors the security scan results regularly to determine if any of the vulnerabilities pose a risk to organizations using Astro Runtime. Typically, vulnerabilities found in Astro Runtime are in third-party packages that are installed in Astro Runtime but are not maintained by Astronomer. When a vulnerability is determined to have a high exploitability risk, Astronomer works with vendors to correct it and incorporate a fix into stable and LTS releases of Astro Runtime.
-
-If there is a critical vulnerability in the Security Scan results that causes concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
+For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel exclusively.
 
 ## Astro Runtime maintenance policy
 
@@ -56,6 +53,22 @@ Astronomer will not interrupt service for Deployments running Astro Runtime vers
 
 Maintenance is discontinued the last day of the month for a given version. For example, if the maintenance window for a version of Astro Runtime is January - June of a given year, that version will be maintained by Astronomer until the last day of June.
 
+## Backport policy for bug and security fixes
+
+When Astronomer identifies a significant bug in Astro Runtime, a fix is backported to all Long Term Support (LTS) versions and the latest stable version. To avoid the impact of previously identified bugs, Astronomer recommends that you upgrade Astro Runtime if you are not using the latest stable version.
+
+When Astronomer identifies a significant security vulnerability in Astro Runtime, a fix is backported and made available as a patch version for all stable and LTS versions in maintenance. A significant security issue is defined as an issue with significant impact and exploitability.
+
+Occasionally, Astronomer might deviate from the defined response policy and backport a bug or security fix to releases other than the latest stable and LTS versions. To request a fix for a specific bug, contact your customer success manager.
+
+### Security scan results on Quay.io
+
+Astronomer is aware of the **Security Scan Report** results that are provided by [Project Quay](https://www.projectquay.io/) for each Astro Runtime image and are publicly available on [Quay.io](https://quay.io/repository/astronomer/astro-runtime?tab=tags).
+
+Astronomer monitors the security scan results regularly to determine if any of the vulnerabilities pose a risk to organizations using Astro Runtime. Typically, vulnerabilities found in Astro Runtime are in third-party packages that are installed in Astro Runtime but are not maintained by Astronomer. When a vulnerability is determined to have a high exploitability risk, Astronomer works with vendors to correct it and incorporate a fix into stable and LTS releases of Astro Runtime.
+
+If there is a critical vulnerability in the Security Scan results that causes concern for your organization, contact [Astronomer Support](https://support.astronomer.io/).
+
 ## Astro Runtime lifecycle schedule
 
 <!--- Version-specific -->
@@ -67,8 +80,8 @@ The following table contains the exact lifecycle for each published version of A
 | Runtime Version                                          | Release Date    | End of Maintenance Date |
 | ---------------------------------------------------------| ----------------| ------------------------|
 | [3.0.x](runtime-release-notes.md#astro-runtime-300)      | August 12, 2021 | February 2022           |
-| [4.0.x](runtime-release-notes.md#astro-runtime-400)      | Oct 12, 2021    |  April 2022             |
-| [4.1.x](runtime-release-notes.md#astro-runtime-410)      | Feb 22, 2022    |  August 2022            |
+| [4.0.x](runtime-release-notes.md#astro-runtime-400)      | October 12, 2021    |  April 2022             |
+| [4.1.x](runtime-release-notes.md#astro-runtime-410)      | February 22, 2022    |  August 2022            |
 | [4.2.x](runtime-release-notes.md#astro-runtime-420)      | March 10, 2022  |  September 2022         |
 | [5.0.x](runtime-release-notes.md#astro-runtime-500)      | April 30, 2022  |  October 2022         |
 

@@ -21,6 +21,7 @@ This guide provides setup steps for integrating both of these identity providers
 - Users will automatically be authenticated to Astro if they're already logged in to your IdP.
 - Users will no longer have to repeatedly login and remember credentials for their account.
 - You will have complete ownership over credential configuration and management on Astro.
+- You can enforce multi-factor authentication (MFA) for users.
 
 :::info
 
