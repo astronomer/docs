@@ -60,7 +60,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
 4. Enter the Airflow version you want to upgrade to and press `Enter`.
 
-## Step 2: Upgrade your Astro project
+## Step 2: Update your Astro project
 
 1. In your Astro project, open your `Dockerfile`.
 2. Update the `FROM` line of your project's `Dockerfile` to reference a new Astronomer image. For example, to upgrade to the latest version of Astro Runtime, you would change the `FROM` line to:
