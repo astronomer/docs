@@ -22,7 +22,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your workspaces, d
 
 ## Log in to the Astro CLI
 
-Use the Astro CLI to [deploy code to Astro](deploy-code.md) and create and manage Deployments.
+Developing locally with the Astro CLI does not require an Astro account. This includes commands like `astro dev start` and `astro dev pytest`. If you want to use functionality specific to Astro, including managing users and [deploying code](deploy-code.md), you must first log in to Astro with the Astro CLI.
 
 1. In the Astro CLI, run the following command:
 
