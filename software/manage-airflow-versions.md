@@ -34,7 +34,7 @@ If you get a message indicating that a job already exists, delete the job and re
 
 Starting the upgrade process doesn't interrupt or otherwise impact your Airflow Deployment. It only signals to Astronomer your intent to upgrade at a later time.
 
-The Software UI and CLI only provide Airflow versions that are later than the version currently running in your `Dockerfile`. For example, Airflow `1.10.7` is not available for an Airflow Deployment running `1.10.10`.
+The Software UI and CLI only provide Airflow versions that are later than the version currently running in your `Dockerfile`. For example, Airflow `2.1.0` is not available for an Airflow Deployment running `2.2.0`.
 
 ### With the Software UI
 
@@ -120,12 +120,12 @@ Using the Astro CLI, run:
 astro deployment airflow upgrade --cancel --deployment-id=<deployment-id>
 ```
 
-For example, if you cancel an upgrade from Airflow 1.10.7 to Airflow 1.10.12 in the CLI, the following message appears:
+For example, if you cancel an upgrade from Airflow 2.1.0 to Airflow 2.2.0 in the CLI, the following message appears:
 
 ```bash
 astro deployment airflow upgrade --cancel --deployment-id=ckguogf6x0685ewxtebr4v04x
 
-Airflow upgrade process has been successfully canceled. Your Deployment was not interrupted and you are still running Airflow 1.10.7.
+Airflow upgrade process has been successfully canceled. Your Deployment was not interrupted and you are still running Airflow 2.1.0.
 ```
 
 Canceling the Airflow upgrade process does not interrupt or otherwise impact your Airflow Deployment or code that's running.
