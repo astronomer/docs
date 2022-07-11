@@ -39,7 +39,7 @@ Developing locally with the Astro CLI does not require an Astro account. This in
 
 A base domain or URL is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays `https://www.astronomer.io` no matter what page you access on the Astronomer website.
 
-Every cluster is assigned a base domain. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you need to move from Astro to an Astronomer Software installation.
+Astronomer product offerings use base domains differently. For all Astro users, the base domain is always `cloud.astronomer.io`. For Astronomer Software, however, every individual cluster is assigned a base domain and requires that you be authenticated to it individually. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you need to move from an Astronomer Software installation to Astro and are using the Astro CLI to perform actions across both accounts.
 
 You can authenticate to multiple domains from a single base domain. You run `astro login` to authenticate to a base domain, and then run the `astro context switch <basedomain>` command to define the default base domain on your computer and virtual machines. 
 
