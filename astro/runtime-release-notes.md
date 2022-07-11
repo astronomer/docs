@@ -14,7 +14,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 - Release date: July 11, 2022
 - Airflow version: 2.3.3
 
-Astro Runtime 5.0.3 includes same-day support for Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow 2.3.3 milestone on GitHub](https://github.com/apache/airflow/milestone/57?closed=1).
+Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow 2.3.3 milestone on GitHub](https://github.com/apache/airflow/milestone/57?closed=1).
 
 ### Additional improvements
 
