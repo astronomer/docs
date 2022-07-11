@@ -16,6 +16,13 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow 2.3.3 milestone on GitHub](https://github.com/apache/airflow/milestone/57?closed=1).
 
+### Backported fixes from Airflow 2.3.4
+
+Astro Runtime 5.0.6 includes several bug fixes that were backported from Airflow 2.3.4, which is not yet generally available. Fixes include:
+
+- Fix zombie task handling with multiple schedulers ([#24906](https://github.com/apache/airflow/pull/24906))
+- TriggerDagRunOperator.operator_extra_links is attr ([#24676](https://github.com/apache/airflow/pull/24676)
+
 ### Additional improvements
 
 - Upgraded `astronomer-providers` to 1.6.0, which includes new deferrable operators and support for OpenLineage extractors. For more information, see the [Astronomer Providers changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id1).
