@@ -13,9 +13,9 @@ Astronomer will no longer release new versions of AC starting with the release o
 
 Migrating a Deployment to Astro Runtime is similar to the standard upgrade process. There are no known disruptions when migrating a Deployment from AC to the equivalent version of Astro Runtime.
 
-## Differences between Astro Runtime and AC
+## Differences between Astro Runtime and Astronomer Certified
 
-Functionally, Runtime images are similar to Certified images. They both include:
+Functionally, Runtime images are similar to AC images. They both include:
 
 - Timely support for new patch, minor, and major versions of Apache Airflow.
 - Support lifecycles that extend beyond those offered by the open source community.
@@ -23,9 +23,9 @@ Functionally, Runtime images are similar to Certified images. They both include:
 
 Astro Runtime includes additional features which are not available in AC images, including:
 
+- Exclusive features for improving task execution, including smart task concurrency defaults and high availability configurations.
 - The `astronomer-providers` package, which is an open source collection of Apache Airflow providers and modules maintained by Astronomer.
 - Airflow UI improvements, such as showing the Deployment Docker image tag in the footer of all UI pages.
-- Future Astro Runtime-exclusive features, such as new Airflow components and improvements to the DAG development experience.
 
 See [Runtime Architecture](runtime-image-architecture.md) for more detailed information about Runtime's distribution and features.
 
@@ -70,7 +70,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
 
     All 4 running Docker containers for each of the Airflow components restart and begin running your new image.
 
-    To confirm that your migration was successful, open the Airflow UI at `localhost:8080` and go to **About** > **Version**. This page should list your new Astro Runtime version.
+    To confirm that your migration was successful, open the Airflow UI at `localhost:8080` and scroll to the bottom of any page. You should see your new Runtime version in the footer.
 
 ## Step 3: Deploy to Astronomer
 
@@ -81,4 +81,4 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
     ```
 
 2. In the Software UI, open your Deployment and click **Open Airflow**.
-3. Go to **About** > **Version**. Confirm that you're running the correct version of Astro Runtime.
+3. Scroll to the bottom of any page. You should see your new Runtime version in the footer.
