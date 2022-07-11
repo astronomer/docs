@@ -158,4 +158,4 @@ Occasionally, the shared Houston and Astronomer Software registry pod certificat
 ```
 Warning Failed 24m (x4 over 26m) kubelet, <node> Failed to pull image "registry.astronomer.base.domain/testing/airflow:deploy-5": rpc error: code = Unknown desc = Error response from daemon: Get https://registry.astronomer.base.domain/v2/: x509: certificate signed by unknown authority
 ```
-To resolve this issue and clear the error message, restart the Houston pods and then the Astronomer Software registry pod.
+To resolve this issue and clear the error message, restart the Houston pods and then the Astronomer Software registry Pod.
