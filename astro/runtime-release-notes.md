@@ -20,8 +20,8 @@ Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI impr
 
 Astro Runtime 5.0.6 includes several bug fixes that were backported from Airflow 2.3.4, which is not yet generally available. Fixes include:
 
-- Fix zombie task handling with multiple schedulers ([#24906](https://github.com/apache/airflow/pull/24906))
-- TriggerDagRunOperator.operator_extra_links is attr ([#24676](https://github.com/apache/airflow/pull/24676)
+- Fixed zombie task handling with multiple schedulers ([#24906](https://github.com/apache/airflow/pull/24906))
+- Fixed an issue where `TriggerDagRunOperator.operator_extra_links` could cause a serialization error ([#24676](https://github.com/apache/airflow/pull/24676)
 
 ### Additional improvements
 
