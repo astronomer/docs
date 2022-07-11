@@ -11,16 +11,21 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](upgrade-runtime.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
 
-## Astro Runtime 5.0.6
+### Astro Runtime 5.0.6
 
 - Release date: July 11, 2022
 - Airflow version: 2.3.3
 
-Astro Runtime 5.0.3 includes same-day support for Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow 2.3.3 milestone on GitHub](https://github.com/apache/airflow/milestone/57?closed=1).
+Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow 2.3.3 milestone on GitHub](https://github.com/apache/airflow/milestone/57?closed=1).
 
 ### Additional improvements
 
 - Upgraded `astronomer-providers` to 1.6.0, which includes new deferrable operators and support for OpenLineage extractors. For more information, see the [Astronomer Providers changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id1).
+
+### Bug fixes
+
+- Fixed zombie task handling with multiple schedulers ([#24906](https://github.com/apache/airflow/pull/24906))
+- Fixed an issue where `TriggerDagRunOperator.operator_extra_links` could cause a serialization error ([#24676](https://github.com/apache/airflow/pull/24676)
 
 ## Astro Runtime 5.0.5
 
