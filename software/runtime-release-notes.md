@@ -11,6 +11,34 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](upgrade-runtime.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
 
+## Astro Runtime 5.0.6
+
+- Release date: July 11, 2022
+- Airflow version: 2.3.3
+
+Astro Runtime 5.0.3 includes same-day support for Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow 2.3.3 milestone on GitHub](https://github.com/apache/airflow/milestone/57?closed=1).
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.6.0, which includes new deferrable operators and support for OpenLineage extractors. For more information, see the [Astronomer Providers changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id1).
+
+## Astro Runtime 5.0.5
+
+- Release date: July 1, 2022
+- Airflow version: 2.3.2
+
+### Backported fixes from Airflow 2.3.3
+
+Astro Runtime 5.0.5 includes several bug fixes and performance improvements that were backported from Airflow 2.3.3, which is not yet generally available. Fixes include:
+
+- Fixed an issue where part of the **Grid** view of the Airflow UI would crash or become unavailable if a `GET` request to the Airflow REST API failed ([#24152](https://github.com/apache/airflow/pull/24152))
+- Improved the performance of the **Grid** view ([#24083](https://github.com/apache/airflow/pull/24083))
+- Fixed an issue where grids for task groups in the **Grid** view always showed data for the latest DAG run instead of the correct DAG run ([#24327](https://github.com/apache/airflow/pull/24327))
+
+### Additional improvements
+
+- Updated `openlineage-airflow` to v0.10.0. This release includes a built-in `SnowflakeOperatorAsync` extractor for Airflow, an `InMemoryRelationInputDatasetBuilder` for `InMemory` datasets for Spark, and the addition of a copyright statement to all source files
+
 ## Astro Runtime 5.0.4
 
 - Release date: June 15, 2022
