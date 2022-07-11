@@ -29,11 +29,12 @@ Astro Runtime 5.0.3 includes same-day support for Airflow 2.3.3, which includes 
 
 ### Backported fixes from Airflow 2.3.3
 
-Astro Runtime 5.0.5 includes several bug fixes and performance improvements that were backported from Airflow 2.3.3, which is not yet generally available. Fixes include:
+Astro Runtime 5.0.5 includes several bug fixes and performance improvements that were backported from Airflow 2.3.3. Fixes include:
 
 - Fixed an issue where part of the **Grid** view of the Airflow UI would crash or become unavailable if a `GET` request to the Airflow REST API failed ([#24152](https://github.com/apache/airflow/pull/24152))
 - Improved the performance of the **Grid** view ([#24083](https://github.com/apache/airflow/pull/24083))
 - Fixed an issue where grids for task groups in the **Grid** view always showed data for the latest DAG run instead of the correct DAG run ([#24327](https://github.com/apache/airflow/pull/24327))
+- Fixed an issue where the scheduler could crash when using the Kubernetes executor after migrating from Airflow 2.2 to 2.3. ([#24117](https://github.com/apache/airflow/pull/24117))
 
 ### Additional improvements
 
