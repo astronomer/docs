@@ -14,15 +14,22 @@ You can use the Cloud UI and the Astro CLI to view and modify your workspaces, d
 
 ## Log in to the Cloud UI
 
-1. Go to `https://account.astronomer.io/`, enter your email address, and then click **Continue**.
+1. Go to `https://cloud.astronomer.io/login`, enter your email address, and then click **Continue**.
 
-2. Enter your password and click **Continue**, or select one of the authentication methods used by your organization.
+2. Select one of the following options to access the Cloud UI:
+
+    - Enter your password and click **Continue**.
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**. 
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
+    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
     If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md).
 
 ## Log in to the Astro CLI
 
 Developing locally with the Astro CLI does not require an Astro account. This includes commands like `astro dev start` and `astro dev pytest`. If you want to use functionality specific to Astro, including managing users and [deploying code](deploy-code.md), you must first log in to Astro with the Astro CLI.
+
+Astronomer uses refresh tokens to make sure that you don’t need to log in to the Astro CLI again after your first successful log in.
 
 1. In the Astro CLI, run the following command:
 

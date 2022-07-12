@@ -16,11 +16,20 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
 
 1. Go to `<basedomain>.astronomer.io`.
 
-2. Select one of the authentication methods used by your organization, or enter your email address and password and click **Log in**.
-
+2. Select one of the following options to access the Astronomer Software UI:
+    
+    - Enter your username and password and click **Log in**.
+    - To authenticate with with your Auth0 account, click **Log in with Auth0**, and then follow the prompts.
+    - To authenticate with your Google account, click **Log in with Google**, choose an account, enter your username and password, and then click **Sign In**.
+    - To authenticate with your Okta account, click **Log in with Okta**, enter your username and password, and then click **Sign In**. 
+    - To authenticate with with your custom Oauth account, click **Log in with Custom Oauth**, and then follow the prompts.
+    - To authenticate with with your Azure AD account, click **Log in with Azure AD**, and then follow the prompts.
+    - To authenticate with your internal Okta account, click **Log in with InternalOkta**, enter your username and password, and then click **Sign In**. 
+    - To authenticate with your GitHub account, click **Log in with GitHub**, and then follow the prompts.
+    
 ## Log in to the Astro CLI
 
-Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/deploy-code) and create and manage Deployments.
+Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/deploy-code) and create and manage Deployments. Astronomer uses refresh tokens to make sure that you don’t need to log in to the Astro CLI again after your first successful log in.
 
 1. In the Astro CLI, run the following command:
 
