@@ -12,7 +12,7 @@ All Airflow logs from your Astronomer logs will flow to Elasticsearch and can be
 To setup logging in Kibana, navigate to `kibana.BASEDOMAIN`
 
 <div class="text--center">
-  <img src="/img/docs/index-pattern.png" alt="Elastic create index pattern screen" />
+  <img src="/img/docs/index-pattern.png" alt="Elastic Create Index Pattern screen" />
 </div>
 
 Navigate to `Management` and create an index pattern for `fluentd.*`
@@ -24,7 +24,9 @@ Set `@timestamp` as the  `Time Filter` on the next screen.
 
 Once the index pattern has been confirmed, the `Discover` tab will show logs as they come in.
 
-![Add fields](https://assets2.astronomer.io/main/docs/ee/add_fields.png)
+<div class="text--center">
+  <img src="/img/docs/add-fields.png" alt="Elastic Add Fields screen" />
+</div>
 
 From this view, you can add filters to see logs as they come in from all Airflow deployments. You can also add fields to filter by:
 
