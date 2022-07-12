@@ -17,11 +17,6 @@ The KubernetesPodOperator enables you to:
 - Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.
 - Set Kubernetes-native configurations in a YAML file, including volumes, secrets, and affinities.
 
-## Known limitations
-
-- Cross-account service accounts are not supported.
-- PersistentVolumes (PVs) are not supported.
-
 ## Prerequisites
 
 - A running Airflow Deployment on Astronomer Software
