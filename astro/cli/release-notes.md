@@ -9,6 +9,14 @@ This document provides a summary of all changes made to the [Astro CLI](cli/get-
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
 
+## Astro CLI v1.3.0
+
+Release date: July 12, 2022
+
+### Additional improvements
+
+- Upgraded the CLU to Go 1.18, which includes improvements to both perfromance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
+
 ## Astro CLI v1.2.0
 
 Release date: June 28, 2022
