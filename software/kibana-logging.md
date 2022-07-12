@@ -31,7 +31,7 @@ After the index pattern is confirmed, the `Discover` tab displays logs as they b
   <img src="/img/docs/add-fields.png" alt="Elastic Add Fields screen" />
 </div>
 
-From this view, you can add filters to see logs as they come in from all Airflow deployments. You can also add fields to filter by:
+From this view, you can add filters to see logs as they come in from all Airflow deployments. You can also add field filters.
 
 ## Dashboards
 
