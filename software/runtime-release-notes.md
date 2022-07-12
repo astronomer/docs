@@ -11,7 +11,7 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](upgrade-runtime.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
 
-### Astro Runtime 5.0.6
+## Astro Runtime 5.0.6
 
 - Release date: July 11, 2022
 - Airflow version: 2.3.3
