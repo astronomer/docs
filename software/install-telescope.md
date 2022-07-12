@@ -17,17 +17,24 @@ Astronomer requests that you observe your Deployments with telescope at least on
 
 ## Prerequisites
 
-To observe a local environment with Telescope, you need:
+To observe a local with Telescope, you need:
 
 - `docker exec` permissions.
 - Access to `docker.sock`.
 - Python 3.8.
-- An Airflow metadata db using Postgresql, Mysql, or Sqlite.
 
 To observe Software Deployments on Kubernetes with Telescope, you need:
 
 - kubectl.
 - Permission to list nodes and exec into Pods.
+- Airflow 1.15+ or an equivalent version of Astro Runtime or Astronomer Certified.
+- An Airflow metadata db using Postgresql, Mysql, or Sqlite.
+
+To observe a standalone Airflow environment with Telescope, you need:
+
+- An Airflow environment running on a machine with SSH enabled.
+- Airflow 1.15+ or an equivalent version of Astro Runtime or Astronomer Certified.
+
 
 ## Install the Telescope CLI
 
@@ -67,10 +74,10 @@ pip install telescope --find-links https://github.com/astronomer/telescope/relea
 In your Kubernetes cluster, run the following command:
 
 ```sh
-telescope --kubernetes
+telescope --kubernetes --organization-name <your-organization-name>
 ```
 
-This command observes all scheduler containers in the cluster and outputs the results of the observation to a file ending in `data.json`.
+This command observes all scheduler containers in the cluster and outputs the results of the observation to a file named `<observation-date>.<your-organization-name>.data.json`.
 
 :::info
 
@@ -82,15 +89,51 @@ By default, Telescope only observes Pods with the label `component=scheduler`. I
 
 :::
 
-## Observe local environments
+## Observe local environments running with the Astro CLI
 
 Open your Astro project and run the following command:
 
 ```sh
-telescope --docker
+telescope --docker --organization-name <your-organization-name>
 ```
 
-This command observes scheduler containers on Docker and outputs the results of the observation to a file ending in `data.json`.
+This command observes scheduler containers on Docker and outputs the results of the observation to a file named `<observation-date>.<your-organization-name>.data.json`.
+
+## Observe standalone Airflow environments
+
+You can use telescope to observe both Apache Airflow environments and standalone Astronomer Certified environments. This setup assumes you have two machines:
+
+- A remote machine running Airflow
+- A local machine that you use to connect to your remote machine
+
+1. On the remote machine running Airflow, create file called `~/.ssh/config` and open it.
+2. Add the following configuration to the file:
+
+    ```yaml
+    Host <your-machine-hostname>
+        User <your-username> # Specify the username for logging into the machine
+        Port <your-connection-port> # Chose any available port on the machine
+    ```
+
+    You can configure additional details, such as an SSH key, as described on [Linuxize](https://linuxize.com/post/using-the-ssh-config-file/).
+
+3. Optional. Repeat steps 1 and 2 for any additional remote machines that you want to obeserve with Telescope.
+3. On your local machine, create a file called `hosts.yaml` and open it.
+4. Add the following configuration to the file:
+
+    ```yaml
+    ssh:
+      - host: <your-machine-hostname>
+      - host: <your-machine-hostname-2> # Optional
+    ```
+
+5. Run the following command to observe Airflow on the remote machine:
+
+    ```sh
+    telescope -f hosts.yaml --organization-name <your-organization-name>
+    ```
+
+This command observes the Airflow scheduler and outputs the results of the observation to a file named `<observation-date>.<your-organization-name>.data.json`.
 
 ## Telescope report data
 
@@ -103,7 +146,7 @@ After Telescope observes an Airflow environment, it generates a file ending in `
 - DAG and task-level configurations
 - Task run usage
 
-Telescope never collects the code of DAGs nor the contents of Airflow configurations such as variables and connections. 
+Telescope never collects the code of DAGs nor the contents of Airflow configurations such as variables and connections.
 
 For all report details and functions, see the [Telescope GitHub repository](https://github.com/astronomer/telescope/blob/main/telescope/__main__.py).
 
