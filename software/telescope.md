@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Telescope is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at various points in time. Astronomer uses this information to troubleshoot your environments.
+[Telescope](https://github.com/astronomer/telescope) is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at various points in time. Astronomer uses this information to troubleshoot your environments.
 
 Telescope assumes your current permissions whenever you run a command. If these permissions, Telescope can observe your Airflow environments at a given point in time. Based on what it observes, Telescope generates a report which you can share with Astronomer support.
 
@@ -145,7 +145,7 @@ After Telescope observes an Airflow environment, it generates a file ending in `
 - DAG and task-level configurations
 - Task run usage
 
-Telescope never collects the code of DAGs nor the contents of Airflow configurations such as variables and connections.
+Telescope never collects the code of DAGs nor the contents of Airflow configurations such as variables and connections. DAG names can be obfuscated using the `--dag-obfuscation` flag in your Telescope command.
 
 For all report details and functions, see the [Telescope GitHub repository](https://github.com/astronomer/telescope/blob/main/telescope/__main__.py).
 
