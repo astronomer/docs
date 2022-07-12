@@ -15,7 +15,7 @@ At a high-level, we'll ask that you come prepared with a new AWS account. From t
 - Share AWS account information with our team.
 - Create a cross-account IAM role that Astro can assume within your new AWS account.
 
-Astronomer will then create a cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro cluster, [reach out to us](https://support.astronomer.io).
+Astronomer will then create a cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro cluster, [contact Astronomer support](https://support.astronomer.io).
 
 For a complete list of the AWS resources that our team will provision in your AWS account, see [Resource usage](resource-reference-aws.md).
 
@@ -24,6 +24,7 @@ For a complete list of the AWS resources that our team will provision in your AW
 Before completing this setup, make sure that you have:
 
 - A dedicated AWS account with minimum EC2 service quotas.
+- An AWS administrator IAM user and a user group. See [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console)
 - A user with the following permissions:
     - `cloudformation:*`
     - `GetRole`
@@ -100,7 +101,7 @@ From here, our team will provision an Astro cluster according to the specificati
 
 ## Step 3: Create a cross-account IAM role for Astro
 
-After your Astro Cluster is created, Astronomer provides you with an external ID. Save the external ID as a secret or in another secure format. You need to add the external ID to AWS to allow Astronomer to access your AWS resources. For more information, see [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
+To create a cross-account IAM role for Astro you need an external ID to allow Astronomer to access your AWS resources. To obtain your external ID, provide your [activation details](data-plane-activation.md#pre-flight-checklist) to [Astronomer support](https://support.astronomer.io). When you receive the external ID, save it as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
 Astronomer recommends using the AWS Management Console to add the external ID to your AWS instance.
 
@@ -112,15 +113,13 @@ Astronomer recommends using the AWS Management Console to add the external ID to
     ]}>
 <TabItem value="managementconsole">
 
-1. Create an AWS administrator IAM user and user group. See the AWS topic [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
+1. Open the [Astronomer cross-account role CloudFormation template](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402).
 
-2. Open the [Astronomer cross-account role CloudFormation template](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402).
+2. Enter the external ID provided by Astronomer in the **ExternalId** field.
 
-3. Enter the external ID provided by Astronomer in the **ExternalId** field.
+3. Select the **I acknowledge that AWS CloudFormation might create IAM resources with custom names** checkbox.
 
-4. Select the **I acknowledge that AWS CloudFormation might create IAM resources with custom names** checkbox.
-
-5. Click **Create Stack**.
+4. Click **Create Stack**.
 
 </TabItem>
 
