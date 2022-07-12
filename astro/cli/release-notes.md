@@ -15,7 +15,7 @@ Release date: July 12, 2022
 
 ### Additional improvements
 
-- Upgraded the CLU to Go 1.18, which includes improvements to both perfromance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
+- Upgraded the I to Go 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
 
 ## Astro CLI v1.2.0
 
