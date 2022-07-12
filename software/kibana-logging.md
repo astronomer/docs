@@ -21,7 +21,7 @@ All Airflow logs from your Astronomer logs will flow to Elasticsearch and can be
 
     Elasticsearch uses [index patterns](https://www.elastic.co/guide/en/kibana/current/index-patterns.html) to organize how you explore data. Setting `fluentd.*` as the index means that Kibana will display all logs from all deployments (Astronomer uses `fluentd` to ship logs from pods to ElasticSearch).
 
-4. Enter `@timestamp` as the  `Time Filter`.
+4. Enter `@timestamp` as the `Time Filter`.
 
 ## Discover
 
