@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Astro Runtime architecture'
+sidebar_label: 'Image architecture'
 title: 'Astro Runtime architecture'
 id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.
@@ -17,7 +17,7 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 - A custom security manager that enforces user roles and permissions as defined by Astro. See [Manage user permissions on Astronomer Software](workspace-permissions.md).
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
 
-For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes). 
+For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
 
 ## Runtime versioning
 
@@ -35,13 +35,13 @@ For a list of supported Astro Runtime versions and more information on the Astro
 
 This table lists Astro Runtime releases and their associated Apache Airflow versions.
 
-| Astro Runtime                                   | Apache Airflow Version                                                                | 
+| Astro Runtime                                   | Apache Airflow Version                                                                |
 | ----------------------------------------------- | ----------------------------------------------------------------------------- |
 | 3.0.x                                       |       2.1.1                                                                       |
-| 4.0.x                                       |       2.2.0                                                                    | 
+| 4.0.x                                       |       2.2.0                                                                    |
 | 4.1.x                                       |       2.2.4                                                                    |
-| 4.2.x                                       |       2.2.4                                                                      | 
-| 5.0.x                                       |       2.3.0                                                                        | 
+| 4.2.x                                       |       2.2.4                                                                      |
+| 5.0.x                                       |       2.3.0                                                                        |
 
 ## Provider packages
 
