@@ -7,7 +7,7 @@ description: Request changes to an existing Astro cluster.
 
 Unless otherwise specified, new Clusters on Astro are created with a set of default configurations. Depending on your use case, you may decide that you want to modify an existing Cluster to run a different configuration.
 
-For example, if you have a new set of DAGs that require significantly more CPU and Memory than your existing workloads, you may be interested in modifying a cluster on AWS to run `m5.8xlarge` nodes instead of `m5.4xlarge` nodes. You might also want to modify a cluster's maximum node count from the default of 20 to better fit your expected workload.
+For example, if you have a new set of DAGs that require significantly more CPU and Memory than your existing workloads, you might be interested in modifying a cluster on AWS to run `m5.8xlarge` nodes instead of `m5.4xlarge` nodes. You might also want to modify a cluster's maximum node count from the default of 20 to better fit your expected workload.
 
 ## Prerequisites
 
@@ -27,3 +27,13 @@ To modify an existing cluster in your Organization, first verify that the change
 Once our team validates that the cluster configuration you requested is supported, we will let you know as soon as we are able to perform the change.
 
 Modifications to an existing cluster may take a few minutes to complete, but you can expect no downtime during the process. Astro is built to ensure a graceful rollover, which means that the Airflow and Cloud UIs will continue to be available and your Airflow tasks will not be affected.
+
+## Supported cluster modifications
+
+Some cluster and Deployment-level modifications can be completed only by Astronomer support. These include:
+
+- [Creating a new cluster](create-cluster.md).
+- Updating a cluster's worker instance type.
+- Updating the maximum node count of an existing cluster.
+- [Creating a VPC connection](connect-external-services.md#vpc-peering) between a cluster and a target VPC.
+- Running images from a private registry with the [KubernetesPodOperator](kubernetespodoperator#run-images-from-a-private-registry).
