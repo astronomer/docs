@@ -9,27 +9,29 @@ All Airflow logs from your Astronomer logs will flow to Elasticsearch and can be
 
 ## Setup
 
-To setup logging in Kibana, navigate to `kibana.BASEDOMAIN`
+1. Open a browser and go to `kibana.BASEDOMAIN`.
 
-<div class="text--center">
-  <img src="/img/docs/index-pattern.png" alt="Elastic Create Index Pattern screen" />
-</div>
+2. Click **Menu** in the upper left, click **Stack Management**, and then click **Index Patterns**.
 
-Navigate to `Management` and create an index pattern for `fluentd.*`
-Elasticsearch uses [index patterns](https://www.elastic.co/guide/en/kibana/current/index-patterns.html) to organize how you explore data. Setting `fluentd.*` as the index means that Kibana will display all logs from all deployments (Astronomer uses `fluentd` to ship logs from pods to ElasticSearch).
+3. In the **Name** field enter `fluentd.*` and then click **Create index pattern**.
 
-Set `@timestamp` as the  `Time Filter` on the next screen.
+    <div class="text--center">
+    <img src="/img/docs/index-pattern.png" alt="Elastic Create Index Pattern screen" />
+    </div>
+
+    Elasticsearch uses [index patterns](https://www.elastic.co/guide/en/kibana/current/index-patterns.html) to organize how you explore data. Setting `fluentd.*` as the index means that Kibana will display all logs from all deployments (Astronomer uses `fluentd` to ship logs from pods to ElasticSearch).
+
+4. Enter `@timestamp` as the  `Time Filter`.
 
 ## Discover
 
-Once the index pattern has been confirmed, the `Discover` tab will show logs as they come in.
+After the index pattern is confirmed, the `Discover` tab displays logs as they become available.
 
 <div class="text--center">
   <img src="/img/docs/add-fields.png" alt="Elastic Add Fields screen" />
 </div>
 
 From this view, you can add filters to see logs as they come in from all Airflow deployments. You can also add fields to filter by:
-
 
 ## Dashboards
 
