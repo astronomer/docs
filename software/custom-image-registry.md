@@ -168,7 +168,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
 ## Push code to a custom registry
 
-You can use the Astro CLI to push build and push images from a Kubernetes cluster to your custom registry. Based on the Helm configurations in your Kubernetes cluster, the Astro CLI automatically detects your custom image registry and pushes your image to it. It then calls the Houston API to update your Deployment to pull the new image from the registry
+You can use the Astro CLI to push build and push images from a Kubernetes cluster to your custom registry. Based on the Helm configurations in your Kubernetes cluster, the Astro CLI automatically detects your custom image registry and pushes your image to it. It then calls the Houston API to update your Deployment to pull the new image from the registry.
 
 Within your Kubernetes cluster, open your Astro project and run:
 
