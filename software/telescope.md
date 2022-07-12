@@ -1,8 +1,7 @@
 ---
-sidebar_label: 'Install Telescope'
-title: 'Install Telescope on Airflow environments'
-id: install-telescope
-description: Install the Telescope tool to collect Airflow metrics and usage for Astronomer.
+title: 'Observe Airflow environments with Telescope'
+id: telescope
+description: Use the Telescope CLI to collect Airflow metrics and usage for Astronomer.
 ---
 
 import Tabs from '@theme/Tabs';
