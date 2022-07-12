@@ -11,8 +11,9 @@ All Airflow logs from your Astronomer logs will flow to Elasticsearch and can be
 
 To setup logging in Kibana, navigate to `kibana.BASEDOMAIN`
 
-![Index Pattern](https://assets2.astronomer.io/main/docs/ee/index_pattern.png)
-
+<div class="text--center">
+  <img src="/img/docs/index-pattern.png" alt="Elastic create index pattern screen" />
+</div>
 
 Navigate to `Management` and create an index pattern for `fluentd.*`
 Elasticsearch uses [index patterns](https://www.elastic.co/guide/en/kibana/current/index-patterns.html) to organize how you explore data. Setting `fluentd.*` as the index means that Kibana will display all logs from all deployments (Astronomer uses `fluentd` to ship logs from pods to ElasticSearch).
