@@ -5,9 +5,11 @@ id: runtime-release-notes
 description: Release notes for Astro Runtime, the differentiated Apache Airflow experience and execution framework.
 ---
 
-Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. Note that some changes to Runtime might be omitted based on their availability in Astro.
+## Overview
 
-To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://support.astronomer.io).
+Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. Note that some changes to Runtime might be omitted based on their availability in Astronomer Software.
+
+For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](upgrade-runtime.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
 
 ## Astro Runtime 5.0.6
 
@@ -34,11 +36,12 @@ Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI impr
 
 ### Backported fixes from Airflow 2.3.3
 
-Astro Runtime 5.0.5 includes several bug fixes and performance improvements that were backported from Airflow 2.3.3, which is not yet generally available. Fixes include:
+Astro Runtime 5.0.5 includes several bug fixes and performance improvements that were backported from Airflow 2.3.3. Fixes include:
 
 - Fixed an issue where part of the **Grid** view of the Airflow UI would crash or become unavailable if a `GET` request to the Airflow REST API failed ([#24152](https://github.com/apache/airflow/pull/24152))
 - Improved the performance of the **Grid** view ([#24083](https://github.com/apache/airflow/pull/24083))
 - Fixed an issue where grids for task groups in the **Grid** view always showed data for the latest DAG run instead of the correct DAG run ([#24327](https://github.com/apache/airflow/pull/24327))
+- Fixed an issue where the scheduler could crash when using the Kubernetes executor after migrating from Airflow 2.2 to 2.3. ([#24117](https://github.com/apache/airflow/pull/24117))
 
 ### Additional improvements
 
@@ -52,7 +55,6 @@ Astro Runtime 5.0.5 includes several bug fixes and performance improvements that
 ### Additional improvements
 
 - Update `astronomer-providers` to v1.5.0. For more information, see the [Astronomer Providers Changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html#id1).
-- Add support for Astro clusters with [Istio](https://istio.io/) enabled.
 
 ## Astro Runtime 5.0.3
 
@@ -237,10 +239,6 @@ These are all [deferrable operators](deferrable-operators.md) built by Astronome
 
 ### Additional improvements
 
-- The Airflow UI now shows the Deployment's Docker image tag in the footer of all pages. For more information, see [Astro Release Notes for March 10, 2022](release-notes.md#march-10-2022).
-
-### Additional improvements
-
 - To support an enhanced logging experience on Astro, the `apache-airflow-providers-elasticsearch` provider package is now installed by default.
 
 ## Astro Runtime 4.0.9
@@ -409,7 +407,7 @@ As part of supporting deferrable operators, the triggerer is now available as a 
 ### Additional improvements
 
 - Upgraded the default Python version to `3.9.6`
-- Added a link to Astro documentation in the Airflow UI
+- Added a link to Astronomer documentation in the Airflow UI
 
 ### Bug fixes
 

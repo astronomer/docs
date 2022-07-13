@@ -29,9 +29,9 @@ To help Astronomer support respond effectively to your support request, it's imp
 Examples:
 
 - Your tasks are not running and restarting them didn't fix the issue.
-- Astronomer is experiencing an incident or downtime that is affecting your data pipelines in production.
+- Astronomer Software is experiencing an incident or downtime that is affecting your production data pipelines.
 
-**P2:** High impact. Ability to use Astronomer Software is severely impaired but does not affect critical pipelines in production.
+**P2:** High impact. Ability to use Astronomer Software is severely impaired but does not affect critical production pipelines.
 
 Examples:
 
@@ -46,7 +46,7 @@ Examples:
 - There is a bug in the Software UI.
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
-- You received a log alert on Astronomer.
+- An error message appeared in the Astronomer Software logs.
 
 **P4:** Low impact. Astronomer Software is fully usable but you have a question for our team.
 
