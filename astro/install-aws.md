@@ -24,7 +24,7 @@ For a complete list of the AWS resources that our team will provision in your AW
 Before completing this setup, make sure that you have:
 
 - A dedicated AWS account with minimum EC2 service quotas.
-- A user with the following permissions:
+- An AWS IAM user with the following permissions:
     - `cloudformation:*`
     - `GetRole`
     - `GetRolePolicy`
