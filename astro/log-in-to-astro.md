@@ -53,6 +53,8 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
 
 ## Access a different base domain
 
+To use both Astro and Astronomer Software at the same time with the Astro CLI, you must authenticate to each product individually by specifying a corresponding base domain.
+
 A base domain or URL is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays `https://www.astronomer.io` no matter what page you access on the Astronomer website.
 
 Astronomer product offerings use unique base domains. For all Astro users, the base domain is `cloud.astronomer.io`. For Astronomer Software, every individual cluster is assigned a base domain and you must authenticate every base domain you access. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you need to move from an Astronomer Software installation to Astro and are using the Astro CLI to perform actions on both accounts.
