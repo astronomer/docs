@@ -10,7 +10,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your workspaces, d
 ## Prerequisites 
 
 - An Astronomer account.
-- The [Astro CLI](cli/get-started.md)
+- The [Astro CLI](cli/get-started.md).
 
 ## Log in to the Cloud UI
 
