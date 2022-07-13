@@ -102,7 +102,7 @@ From here, our team will provision an Astro cluster according to the specificati
 
 ## Step 3: Create a cross-account IAM role for Astro
 
-To create a cross-account IAM role for Astro you need an external ID that links to the resources Astronomer creates in your dedicated AWS account. To obtain your external ID, provide your [activation details](data-plane-activation.md#pre-flight-checklist) to [Astronomer support](https://support.astronomer.io). When you receive the external ID, save it as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
+To create a cross-account IAM role for Astro you need an external ID that links to the resources Astronomer creates in your dedicated AWS account. To obtain your external ID, provide your [activation details](data-plane-activation.md#pre-flight-checklist) to [Astronomer support](https://support.astronomer.io). When you receive the external ID from Astronomer, save it as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
 Astronomer recommends using the AWS Management Console to add the external ID to your AWS instance.
 
