@@ -53,7 +53,7 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
 
 ## Access a different base domain
 
-To use both Astro and Astronomer Software at the same time with the Astro CLI, you must authenticate to each product individually by specifying a corresponding base domain.
+When you need to access Astro and Astronomer Software with the Astro CLI at the same time, you need to authenticate to each product individually by specifying a base domain for each product.
 
 A base domain or URL is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays `https://www.astronomer.io` no matter what page you access on the Astronomer website.
 
