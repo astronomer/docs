@@ -18,8 +18,9 @@ astro dev restart
 ## Options
 
 | Option              | Description                                                                                                        | Possible Values             |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------- |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------|
 | `-e`,`--env` | Path to your environment variable file. Default is `.env` | Valid filepaths |
+| `-i`, `--image-name`| Name of a custom built image to restart airflow with                            | Name of any docker image based on runtime  |
 
 
 ## Examples

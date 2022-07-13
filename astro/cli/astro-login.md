@@ -13,6 +13,13 @@ Authenticate to Astro. After you run this command, the CLI prompts you for your 
 astro login
 ```
 
+## Options
+
+| Option              | Description                                                                                   | Possible Values                                 |
+| ------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `--l`, `--login-link` | Get a login link to copy and paste into a browser to skip automatic browser login           | N/A |
+| `-t`, `--token-login` | Login with a token for browserless Astro login                                          | N/A    |
+
 ## Related Commands
 
 - [`astro logout`](cli/astro-logout.md)
