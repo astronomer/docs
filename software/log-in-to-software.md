@@ -50,23 +50,27 @@ Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/dep
 
 ## Access a different base domain
 
-A base domain or URL (Uniform Resource Locator) is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays `https://www.astronomer.io` no matter what page you access on the Astronomer website.
+When you need to access Astro and Astronomer Software with the Astro CLI at the same time, you need to authenticate to each product individually by specifying a base domain for each Astronomer installation.
 
-Every cluster is assigned a base domain. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you're authenticated on one installation, but you need to perform tasks on another installation.
+A base domain or URL is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays `https://www.astronomer.io` no matter what page you access on the Astronomer website.
 
-You can authenticate to multiple domains from a single base domain. You run the `astro login x` command to authenticate to a base domain, and then run the `astro context switch x` command to define the default base domain on your computer and virtual machines. 
+For Astro users, the base domain is `cloud.astronomer.io`. For Astronomer Software, every cluster has a base domain that you must authenticate to in order to access it. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you need to move from an Astronomer Software installation to Astro and are using the Astro CLI to perform actions on both accounts.
 
-1. In the Astro CLI, run the following command to re-authenticate to the target base domain:
+You can authenticate to multiple domains from a single base domain. You run `astro login` to authenticate to a base domain, and then run the `astro context switch <basedomain>` command to switch to a different Astronomer installation.
 
-    ```
-    astro login
-    ```
-2. Run the following command to view a list of base domains for all Astronomer installations that you can access and to confirm your default base domain:
+1. Run the following command to view a list of base domains for all Astronomer installations that you can access and to confirm your default base domain:
 
     ```
     astro context list
     ```
-3. Run the following command to define the default base domain on your computer:
+
+2. In the Astro CLI, run the following command to re-authenticate to the target base domain:
+
+    ```
+    astro login
+    ```
+
+3. Run the following command to switch to a different base domain:
 
     ```
     astro context switch <basedomain>
