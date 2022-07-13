@@ -5,7 +5,7 @@ id: log-in-to-astro
 description: Log in to Astro to access Astro features and functionality.
 ---
 
-You can use the Cloud UI and the Astro CLI to view and modify your workspaces, deployments, environment variables, tasks, and users. Your user credentials need to be authenticated before you can use the Cloud UI or the Astro CLI.
+You can use the Cloud UI and the Astro CLI to view and modify your workspaces, deployments, environment variables, tasks, and users. To use the Cloud UI and the Astro CLI for development on Astro, your user credentials need to be authenticated.
 
 ## Prerequisites 
 
