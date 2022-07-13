@@ -32,7 +32,7 @@ By default, Astronomer checks for all alerts defined in [the Prometheus configma
 
 Astronomer uses [Prometheus Alertmanager](https://prometheus.io/docs/alerting/configuration/) to manage alerts. This includes silencing, inhibiting, aggregating, and sending out notifications via methods such as email, on-call notification systems, and chat platforms.
 
-You can configure [Alertmanager](https://prometheus.io/docs/alerting/configuration/) to send Astronomer's built-in alerts to email, HipChat, PagerDuty, Pushover, Slack, OpsGenie, and more by defining alert receivers in the [Alertmanager Helm chart](https://github.com/astronomer/astronomer/blob/master/charts/alertmanager/values.yaml) and pushing them to the [Alertmanager ConfigMap](https://github.com/astronomer/astronomer/blob/release-0.23/charts/alertmanager/templates/alertmanager-configmap.yaml).
+You can configure [Alertmanager](https://prometheus.io/docs/alerting/configuration/) to send built-in Astronomer alerts to email, HipChat, PagerDuty, Pushover, Slack, OpsGenie, and more by defining alert receivers in the [Alertmanager Helm chart](https://github.com/astronomer/astronomer/blob/master/charts/alertmanager/values.yaml) and modifying the [Alertmanager `email-config` parameter](https://prometheus.io/docs/alerting/latest/configuration/#email_config).
 
 ### Create alert receivers
 
