@@ -29,7 +29,7 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
     
 ## Log in to the Astro CLI
 
-Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/deploy-code) and create and manage Deployments. Astronomer uses refresh tokens to make sure that you don’t need to log in to the Astro CLI again after your first successful log in.
+Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/deploy-code) and create and manage Deployments. Astronomer uses refresh tokens to make sure that you don’t need to log in to the Astro CLI every time you run a command.
 
 1. In the Astro CLI, run the following command:
 

@@ -42,6 +42,15 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
 
     If this is your first time logging in, the Astronomer Authorize App dialog appears. Click **Accept** to allow Astronomer to access your profile and email and allow offline access.
 
+ 4. Select one of the following options to access the Cloud UI:
+
+    - Enter your password and click **Continue**.
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**. 
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
+    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
+
+    Confirmation messages appear in the Cloud UI and in the Astro CLI indicating that your login was successful and that your machine is now connected. The name of your default Workspace in the Astro CLI also appears. To switch Workspace contexts after you log in, see [`astro workspace switch`](astro/cli/astro-workspace-switch.md).
+
 ## Access a different base domain
 
 A base domain or URL is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays `https://www.astronomer.io` no matter what page you access on the Astronomer website.
