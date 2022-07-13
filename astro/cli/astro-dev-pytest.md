@@ -27,7 +27,7 @@ astro dev pytest
 | ------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
 | `<pytest-filepath>` | The filepath to an alternative pytest file or directory. Must be within the `tests` directory | Any valid filepath within the `tests` directory |
 | `-e`, `--env`       | The filepath to your environment variables. The default is `.env`)                            | Any valid filepath within your Astro project    |
-| `-i`, `--image-name`| Name of a custom built image to run pytest with                            | Name of any docker image based on runtime  |
+| `-i`, `--image-name`      | The name of a custom Runtime image to build your project with                                      | A valid name for a Docker image based on Astro Runtime |
 
 ## Examples
 

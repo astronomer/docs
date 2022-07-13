@@ -19,7 +19,7 @@ You can now use the Astro CLI to build and deploy an image to a [custom image re
 
 ### Additional improvements
 
-- Upgraded the I to Go 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
+- Upgraded the CLI to Go 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
 
 ## Astro CLI v1.2.0
 

@@ -17,8 +17,8 @@ astro login
 
 | Option              | Description                                                                                   | Possible Values                                 |
 | ------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| `--l`, `--login-link` | Get a login link to copy and paste into a browser to skip automatic browser login           | N/A |
-| `-t`, `--token-login` | Login with a token for browserless Astro login                                          | N/A    |
+| `--l`, `--login-link` | Force the user to manually access the Cloud UI instead of opening it from the CLI           | ``|
+| `-t`, `--token-login` | Log in with a token from the Cloud UI                                        | ``    |
 
 ## Related Commands
 

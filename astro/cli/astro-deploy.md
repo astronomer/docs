@@ -9,13 +9,18 @@ description: Reference documentation for astro deploy.
 
 This command bundles all files in your Astro project and pushes them to Astro. Before completing the process, it tests your DAGs in your Astro project for errors. If this test fails, the deploy to Astro will also fail. This is the same test which runs locally with `astro dev parse`.
 
-Teams can configure `parse` to not run automatcally with `deploy` with the config file or environment variables. They can Add `skip_parse: true` to their `.astro/config.yaml` file or add environemnt variable `ASTRONOMER_SKIP_PARSE=true` to their local or CI/CD environment
-
 When you run `astro deploy`, you'll be prompted to select from a list of all Deployments that you have access to across Workspaces. To bypass this prompt, you can also specify a Deployment ID in the command. To retrieve a Deployment ID, go to your Deployment's information page in the Cloud UI and copy the value after the last `/` in the URL. You can also find a Deployment's ID by running `astro deployment list`.
 
 For teams operating at scale, this command can be automated via a [CI/CD pipeline](ci-cd.md) by using [Deployment API keys](api-keys.md) in the request. When `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET` are specified as OS-level environment variables on your local machine or in a CI tool, `astro deploy <deployment-id>` can be run without requiring user authentication.
 
+:::tip
 
+To skip the parsing process before deploys, complete one of the following setups:
+
+- Add `skip_parse: true` to `.astro/config.yaml` in your Astro project.
+- Add `ASTRONOMER_SKIP_PARSE=true` as an environment variable to your local environment or CI/CD pipeline.
+
+:::
 
 ## Usage
 
@@ -25,17 +30,17 @@ astro deploy <options>
 
 ## Options
 
-| Option                    | Description                                                                                                       | Possible Values                          |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| `<deployment-id>`         | Specify the Deployment to deploy to, bypass Deployment selection prompt                                                                             | Any valid Deployment ID           |
-| `-e`,`--env`              | Location of the file containing environment variables for Pytests. By default, this is `.env`.                                 | Any valid filepath to an `.env` file     |
-| `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                                                               | ``                                       |
-| `-p`,`--prompt`            | Force the Deployment selection prompt even if a Deployment ID is specified                           | ``                                       |
-| `--pytest`                | Deploy code to Astro only if the specified Pytests are passed                                                     | ``                                       |
-| `-s`,`--save`              | Save the current Deployment and working directory combination for future deploys                                              | ``                                       |
-| `-t`,`--test`              | The filepath to an alternative pytest file or directory | Valid filepath within your Astro project |
-| `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace                                                                             | Any valid Workspace ID                                |
-| `-i`, `--image-name`| Name of a custom built image to deploy                           | Name of any docker image based on runtime  |
+| Option                    | Description                                                                                    | Possible Values                                        |
+| ------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| `<deployment-id>`         | Specify the Deployment to deploy to, bypass Deployment selection prompt                        | Any valid Deployment ID                                |
+| `-e`,`--env`              | Location of the file containing environment variables for Pytests. By default, this is `.env`. | Any valid filepath to an `.env` file                   |
+| `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                       | ``                                                     |
+| `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified                     | ``                                                     |
+| `--pytest`                | Deploy code to Astro only if the specified Pytests are passed                                  | ``                                                     |
+| `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys               | ``                                                     |
+| `-t`,`--test`             | The filepath to an alternative pytest file or directory                                        | Valid filepath within your Astro project               |
+| `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace              | Any valid Workspace ID                                 |
+| `-i`, `--image-name`      | The name of a custom Runtime image to build your project with                                      | A valid name for a Docker image based on Astro Runtime |
 
 ## Examples
 

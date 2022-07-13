@@ -13,26 +13,33 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 Release date: July 12, 2022
 
-### New `--image-name` Flag for Easier CI/CD
+### New `--image-name` flag for easier CI/CD
 
-User can now deploy an image built with a custom build command using `astro deploy --image-name <custom-image>`. This unlocks many CI/CD use cases for user:
-- Users can now use all `docker build` features during CI/CD. First build your image with `docker build` and name it anything you would like. Second run `astro deploy --image-name <custom-image>` to dpeloy this custom image to your Astro Deployment
-- Users can now separate the build and deploy step in CI/CD. This means the build and deploy steps can occure in a spearate CI/CD pipelines, virtual machines, or lines of code.
-- The `--image-name` flag is also avaiable in the `astro dev start`, `restart`, `parse`, and `pytest` commands.
+You can now deploy your Astro project with a customized Runtime image using `astro deploy --image-name <custom-image>`. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [Installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
 
-### New Token Login for Astro
+Using this flag, you can automate deploys of custom Runtime images from a CI/CD pipeline. You can also separate your build and deploy workflows in different pipelines.
 
-Astro CLI users can now log into Astro with an Auth token with the `--token-login`. Logging in with `astro deploy --token-login` will prompt a user for an auth token that can be retrived from the Astro UI.
+The `--image-name` flag is also available for the following local development commands:
 
-### Automcatically Skip Parsing DAGs during Deploy
+- `astro dev start`
+- `astro dev restart`
+- `astro dev parse`
+- `astro dev pytest`
 
-You can now configure the Astro CLI to automcatically akip parsing DAGs during deploy with the config file or environment variables:
-- Add `skip_parse: true` to your `.astro/config.yaml` file
-- Add environemnt variable `ASTRONOMER_SKIP_PARSE=true` to your local or CI/CD environment
+### New token login method for Astro
+
+Astro CLI users can now log into Astro using an auth token by running `astro login --token-login`. If you run the command with this flag, the CLI prompts you to retrieve a token from the Cloud UI and enter it in the CLI.
+
+### Skip parsing DAGs before deploys
+
+You can configure the Astro CLI to automatically skip parsing DAGs before a deploy by updating one of the following configurations:
+
+- Add `skip_parse: true` to your `.astro/config.yaml` file.
+- Add `ASTRONOMER_SKIP_PARSE=true` as en environment variable to your local environment or CI/CD pipeline.
 
 ### Additional improvements
 
-- Upgraded the I to Go 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
+- Upgraded the CLI to Go 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
 
 ### Bug Fixes
 
