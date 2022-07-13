@@ -13,9 +13,30 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 Release date: July 12, 2022
 
+### New `--image-name` Flag for Easier CI/CD
+
+User can now deploy an image built with a custom build command using `astro deploy --image-name <custom-image>`. This unlocks many CI/CD use cases for user:
+- Users can now use all `docker build` features during CI/CD. First build your image with `docker build` and name it anything you would like. Second run `astro deploy --image-name <custom-image>` to dpeloy this custom image to your Astro Deployment
+- Users can now separate the build and deploy step in CI/CD. This means the build and deploy steps can occure in a spearate CI/CD pipelines, virtual machines, or lines of code.
+- The `--image-name` flag is also avaiable in the `astro dev start`, `restart`, `parse`, and `pytest` commands.
+
+### New Token Login for Astro
+
+Astro CLI users can now log into Astro with an Auth token with the `--token-login`. Logging in with `astro deploy --token-login` will prompt a user for an auth token that can be retrived from the Astro UI.
+
+### Automcatically Skip Parsing DAGs during Deploy
+
+You can now configure the Astro CLI to automcatically akip parsing DAGs during deploy with the config file or environment variables:
+- Add `skip_parse: true` to your `.astro/config.yaml` file
+- Add environemnt variable `ASTRONOMER_SKIP_PARSE=true` to your local or CI/CD environment
+
 ### Additional improvements
 
 - Upgraded the I to Go 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
+
+### Bug Fixes
+
+- Fixed an issue where parsing DAGs during a deploy would kill a local project
 
 ## Astro CLI v1.2.0
 
