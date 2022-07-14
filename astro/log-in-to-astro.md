@@ -49,7 +49,7 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    Confirmation messages appear in the Cloud UI and in the Astro CLI indicating that your login was successful and that your machine is now connected. The name of your default Workspace in the Astro CLI also appears. To switch Workspace contexts after you log in, see [astro workspace switch](https://docs.astronomer.io/astro/cli/astro-workspace-switch).
+    Confirmation messages appear in the Cloud UI and in the Astro CLI indicating that your login was successful and that your computer is now connected. The name of your default Workspace in the Astro CLI also appears. To switch Workspace contexts after you log in, see [astro workspace switch](https://docs.astronomer.io/astro/cli/astro-workspace-switch).
 
 ## Access a different base domain
 
@@ -58,8 +58,6 @@ When you need to access Astro and Astronomer Software with the Astro CLI at the 
 A base domain or URL is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays `https://www.astronomer.io` no matter what page you access on the Astronomer website.
 
 For Astro users, the base domain is `cloud.astronomer.io`. For Astronomer Software, every cluster has a base domain that you must authenticate to in order to access it. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you need to move from an Astronomer Software installation to Astro and are using the Astro CLI to perform actions on both accounts.
-
-You can authenticate to multiple domains from a single base domain. You run `astro login` to authenticate to a base domain, and then run the `astro context switch <basedomain>` command to switch to a different Astronomer installation.
 
 1. Run the following command to view a list of base domains for all Astronomer installations that you can access and to confirm your default base domain:
 
