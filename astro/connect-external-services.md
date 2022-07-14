@@ -92,11 +92,11 @@ For more information about configuring service accounts on GCP, see [GCP documen
 
 ## Authorize Astro access to AWS resources
 
-To grant an Astro cluster access to AWS service resources, you use AWS IAM roles to delegate access to the Astro data plane account from your data service account.
+To grant an Astro cluster access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secret backend.
 
-1. Create an AWS IAM role in AWS data service account with a trust policy that allows access to AWS resources. See [Creating roles and attaching policies (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html).
+1. Create an AWS IAM role in the AWS data service account with a trust policy that allows access to AWS resources. See [Creating roles and attaching policies (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html).
 
-2. In the Cloud UI, click **Clusters** and then copy the value displayed **Cluster ID** column for the Astro cluster you want to delegate access to AWS service resources. 
+2. In the Cloud UI, click **Clusters** and then copy the value displayed in the **Cluster ID** column for the Astro cluster you want to delegate access to AWS service resources. 
 
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 
