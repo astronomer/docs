@@ -96,7 +96,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
 
 1. In the Cloud UI, click **Clusters** and then copy the value displayed in the **Cluster ID** column for the Astro cluster you want to delegate access to AWS service resources.
 
-2. Create an AWS IAM role in the AWS data service account that allows access to AWS resources. See [Creating roles and attaching policies (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions_create-policies.html).
+2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 
