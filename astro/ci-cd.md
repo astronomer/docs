@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'CI/CD'
-title: 'Automate Code Deploys with CI/CD'
+title: 'Automate code deploys with CI/CD'
 id: ci-cd
 description: Create a CI/CD pipeline that triggers a deploy to Astro based on changes to your Airflow DAGs.
 ---
@@ -8,8 +8,6 @@ description: Create a CI/CD pipeline that triggers a deploy to Astro based on ch
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
-
-## Overview
 
 This guide provides setup steps for configuring a CI/CD pipeline to deploy DAGs on Astro.
 
@@ -27,7 +25,7 @@ To set up CI/CD for a given Deployment, you need:
 - A CI/CD management tool, such as [GitHub Actions](https://docs.github.com/en/actions).
 - An [Astro project](create-project.md) that is hosted in a place that your CI/CD tool can access.
 
-## CI/CD Templates
+## CI/CD templates
 
 The following section provides basic templates for configuring individual CI pipelines using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline, but we recommend reconfiguring the templates to work with your own directory structures, workflows, and best practices. More templates are coming soon.
 
@@ -78,7 +76,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
-    name: Astronomer CI - Deploy Code
+    name: Astronomer CI - Deploy code
 
     on:
       push:
@@ -126,7 +124,7 @@ This setup assumes the following prerequisites:
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
-    name: Astronomer CI - Deploy Code (Multiple Branches)
+    name: Astronomer CI - Deploy code (Multiple Branches)
 
     on:
       push:
@@ -277,43 +275,118 @@ To complete this setup, you need:
 
 ### Jenkins
 
+<Tabs
+    defaultValue="jenkinsstandard"
+    values={[
+        {label: 'Standard', value: 'jenkinsstandard'},
+        {label: 'Multi-branch', value: 'jenkinsmultibranch'},
+    ]}>
+<TabItem value="jenkinsstandard">
+
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
-1. In your Jenkins pipeline configuration, add the following environment variables:
+1. In your Jenkins pipeline configuration, add the following parameters:
 
     - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
     - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
+    - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
 
     Be sure to set the values for your API credentials as secret.
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
     <pre><code parentName="pre">{`pipeline {
-      agent any
-        stages {
-          stage('Deploy to Astronomer') {
-           when {
-            expression {
-              return env.GIT_BRANCH == "origin/main"
-            }
-           }
-           steps {
-             script {
-                   sh 'curl -sSL install.astronomer.io | sudo bash -s'
-                   sh 'astro deploy -f'
+       agent any
+         stages {
+           stage('Deploy to Astronomer') {
+             when {
+              expression {
+                return env.GIT_BRANCH == "origin/main"
+              }
+             }
+             steps {
+               script {
+                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh "./astro deploy ${siteVariables.deploymentid} -f"
+               }
              }
            }
          }
+       post {
+         always {
+           cleanWs()
+         }
        }
-     post {
-       always {
-         cleanWs()
-       }
-      }
-    }
-    `}</code></pre>
+   }`}</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
+
+</TabItem>
+
+<TabItem value="jenkinsmultibranch">
+
+To automate code deploys across multiple Deployments using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
+
+1. In Jenkins, add the following environment variables:
+
+    - `PROD_ASTRONOMER_KEY_ID`: Your Production Deployment API key ID
+    - `PROD_ASTRONOMER_KEY_SECRET`: Your Production Deployment API key secret
+    - `PROD_DEPLOYMENT_ID`: The Deployment ID of your Production Deployment
+    - `DEV_ASTRONOMER_KEY_ID`: Your Development Deployment API key ID
+    - `DEV_ASTRONOMER_KEY_SECRET`: Your Development Deployment API key secret
+    - `DEV_DEPLOYMENT_ID`: The Deployment ID of your Development Deployment
+
+    To set environment variables in Jenkins, on the Jenkins Dashboard go to **Manage Jenkins** > **Configure System** > **Global Properties** > **Environment Variables** > **Add**.
+
+    Be sure to set the values for your API credentials as secret.
+
+2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+
+    <pre><code parentName="pre">{`pipeline {
+       agent any
+         stages {
+           stage('Set Environment Variables') {
+              steps {
+                  script {
+                      if (env.GIT_BRANCH == 'main') {
+                          echo "The git branch is ${siteVariables.jenkinsenv}";
+                          env.ASTRONOMER_KEY_ID = env.PROD_ASTRONOMER_KEY_ID;
+                          env.ASTRONOMER_KEY_SECRET = env.PROD_ASTRONOMER_KEY_SECRET;
+                          env.ASTRONOMER_DEPLOYMENT_ID = env.PROD_DEPLOYMENT_ID;
+                      } else if (env.GIT_BRANCH == 'dev') {
+                          echo "The git branch is ${siteVariables.jenkinsenv}";
+                          env.ASTRONOMER_KEY_ID = env.DEV_ASTRONOMER_KEY_ID;
+                          env.ASTRONOMER_KEY_SECRET = env.DEV_ASTRONOMER_KEY_SECRET;
+                          env.ASTRONOMER_DEPLOYMENT_ID = env.DEV_DEPLOYMENT_ID;
+                      } else {
+                          echo "This git branch ${siteVariables.jenkinsenv} is not configured in this pipeline."
+                      }
+                  }
+              }
+           }
+           stage('Deploy to Astronomer') {
+             steps {
+               script {
+                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh "./astro deploy ${siteVariables.deploymentid} -f"
+               }
+             }
+           }
+         }
+       post {
+         always {
+           cleanWs()
+         }
+       }
+      }
+   }`}</code></pre>
+
+    This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
+
+</TabItem>
+</Tabs>
 
 ### CircleCI
 
@@ -449,6 +522,14 @@ This pipeline configuration requires:
 
 ### GitLab
 
+<Tabs
+    defaultValue="gitlabstandard"
+    values={[
+        {label: 'Standard', value: 'gitlabstandard'},
+        {label: 'Multi-branch', value: 'gitlabmultibranch'},
+    ]}>
+<TabItem value="gitlabstandard">
+
 To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
 
 1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
@@ -459,7 +540,7 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
 2. Go to the Editor option in your project's CI/CD section and commit the following:
 
    <pre><code parentName="pre">{`---
-      astro_deploy:
+    astro_deploy:
       stage: deploy
       image: docker:latest
       services:
@@ -477,7 +558,9 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
        - main
    `}</code></pre>
 
-### GitLab (Multiple Branches)
+</TabItem>
+
+<TabItem value="gitlabmultibranch">
 
 To automate code deploys to Astro across multiple environments using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
 
@@ -531,3 +614,6 @@ When you create environment variables that will be used in multiple branches, yo
         only:
           - main
    `}</code></pre>
+
+</TabItem>
+</Tabs>

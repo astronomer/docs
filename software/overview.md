@@ -1,12 +1,10 @@
 ---
-title: 'Astronomer Software Documentation'
+title: 'Astronomer Software documentation'
 sidebar_label: 'Overview'
 id: overview
 slug: /
 description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
 ---
-
-## Overview
 
 Astronomer Software is the best way to run Apache Airflow in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Airflow experience.
 
@@ -26,7 +24,7 @@ The following diagram shows how you can run Airflow in your private cloud using 
 
 ![Astronomer Software Overview](https://assets2.astronomer.io/main/enterpriseArchitecture.svg)
 
-## Installation Guides
+## Installation guides
 
 If you are new to Astronomer Software, use the following guides to install the system on your cloud service:
 
@@ -34,7 +32,7 @@ If you are new to Astronomer Software, use the following guides to install the s
 * [Google Cloud Platform GKE](install-gcp-standard.md)
 * [Microsoft Azure AKS](install-azure-standard.md)
 
-## Customizing Your Installation
+## Customizing your installation
 
 Because the platform uses Helm, it's easy to customize your Software installation. Below are some guides for most common customizations:
 
