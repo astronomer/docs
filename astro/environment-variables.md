@@ -180,4 +180,4 @@ On Astro, environment variables are applied and overridden in the following orde
 3. Dockerfile
 4. Default Airflow values
 
-For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value via the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI will take precedence.
+For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence.

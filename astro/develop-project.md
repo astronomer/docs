@@ -184,7 +184,7 @@ To confirm that your helper functions were successfully installed:
     airflow.cfg dags  include  packages.txt  requirements.txt
     ```
 
-## Configure `airflow_settings.yaml` (Local Development Only)
+## Configure `airflow_settings.yaml` (Local development only)
 
 When you first initialize a new Astro project, a file called `airflow_settings.yaml` is automatically generated. With this file, you can configure and programmatically generate Airflow [Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [Pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [Variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) so that you don't have to manually redefine these values in the Airflow UI every time you restart your project.
 
@@ -284,21 +284,22 @@ For local development, Astronomer recommends setting environment variables in yo
 If your environment variables contain sensitive information or credentials that you don't want exposed in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
 
 1. Open the `.env` file in your Astro project directory.
-2. Add your environment variables to the `.env` file, or open the Astro CLI and run `astro deployment variable list --save` to copy environment variables from an existing Deployment to the file.
+2. Add your environment variables to the `.env` file or run `astro deployment variable list --save` to copy environment variables from an existing Deployment to the file.
 
     Use the following format when you set environment variables in your `.env` file:
 
+    ```text
+    KEY=VALUE
     ```
-    AIRFLOW__CORE__DAG_CONCURRENCY=5
-    ```
+
+    Environment variables should be in all-caps and not include spaces.
+
 3. Run `astro dev start --env .env` to rebuild your image.
 4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment Variables](environment-variables.md).
 
-### Confirm your environment variables were applied
+### Confirm your environment variable changes
 
-By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To confirm environment variables in the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile or `.env` file.
-
-Alternatively, you can confirm that your environment variables were applied in a local environment by running the following commands:
+Confirm that your environment variables were applied in a local environment by running the following commands:
 
 ```
 $ docker exec -it <scheduler-container-name> /bin/bash
@@ -311,7 +312,7 @@ These commands output all environment variables that are running locally. This i
 
 For local environments, the Astro CLI generates an `airflow.cfg` file at runtime based on the environment variables you set in your `.env` file. You can't create or modify `airflow.cfg` in an Astro project.
 
-To view your environment variables in the context of the generated Airflow configuration, run:
+To view your local environment variables in the context of the generated Airflow configuration, run:
 
 ```
 $ docker exec -it <scheduler-container-name> /bin/bash
@@ -319,6 +320,7 @@ $ cat airflow.cfg
 ```
 
 These commands output the contents of the generated `airflow.cfg` file, which lists your environment variables as human-readable configurations with inline comments.
+
 :::
 
 ### Use multiple .env files
