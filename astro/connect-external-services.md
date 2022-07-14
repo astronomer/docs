@@ -100,7 +100,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
 
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
 
-4. Click **Roles** and in the **Role name** column select the role you created in step 1.
+4. Click **Roles** and in the **Role name** column select the role you created in step 2.
 
 5. Click the **Trust relationships** tab.
 
