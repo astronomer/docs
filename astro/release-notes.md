@@ -15,6 +15,21 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.2.0 ([Release notes](cli/release-notes.md))
 
+## July 14, 2022
+
+### Additional improvements
+
+- The Cloud UI **Clusters** page now includes the cluster ID value. 
+- Organization Owners and Organization Billing Admins can now update Organization settings.
+- The Cloud UI **Lineage** page has been improved to make viewing data easier.
+- The last 30 minutes of data can now be selected on the Cloud UI Deployment **Analytics** page.
+
+### Bug fixes
+
+- When you select a Workspace and click **Go back** in a browser, the page now reloads as expected.
+- A **Page not found** error message no longer appears when you select a Deployment in the Cloud UI **Usage** page.
+- The **Deployment Aanlytics** page now displays the correct date.
+
 ## June 30, 2022
 
 ### New Google Cloud Platform regions
