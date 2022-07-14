@@ -59,7 +59,7 @@ A base domain or URL is the static element of a website address. For example, wh
 
 For Astro users, the base domain is `cloud.astronomer.io`. For Astronomer Software, every cluster has a base domain that you must authenticate to in order to access it. If your organization has multiple clusters, you can run Astro CLI commands to quickly move from one base domain to another. This can be useful when you need to move from an Astronomer Software installation to Astro and are using the Astro CLI to perform actions on both accounts.
 
-1. Run the following command to view a list of base domains for all Astronomer installations that you can access and to confirm your default base domain:
+1. Run the following command to view a list of Astronomer base domains that you have access to. The base domain that is highlighted in green is your current context.
 
     ```
     astro context list
