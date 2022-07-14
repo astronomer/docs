@@ -24,7 +24,7 @@ Read the following document for a reference of our default resources as well as 
 | [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres) | The Cloud SQL instance is the primary database for the Astro Data Plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster | 1 Regional Instance with 4 vCPUs, 16GB Memory |
 | Storage Bucket | GCS Bucket for storage of Airflow task logs | 1 bucket with name `airflow-logs-<clusterid>` |
 | Nodes | Nodes power the Data Plane and Airflow components. Nodes autoscale as deployments are added. | 3x n2-medium-4 for the system nodes; worker nodes default to e2-medium-4 and are provisioned as required, up to Max Node Count |
-| Max Node Count | The maximum number of worker nodes that your Astro cluster can support. When this limit is reached, your cluster can't auto-scale and worker pods may fail to schedule. | 20 |
+| Max Node Count | The maximum number of EC2 nodes that your Astro Cluster can support. When this limit is reached, your Astro Cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
 
 
 ## Supported Cluster Configurations
@@ -64,24 +64,15 @@ For detailed information on each instance type, see [GCP documentation](https://
 
 ### Maximum node count
 
-Each Astro cluster has a maximum node count, which is the maximum number of worker nodes that can run at any given time on a cluster. This limit does not apply to other nodes such as RDS instances or Astronomer-managed node pools.
+Each Astro cluster has a limit on how many nodes it can run at once. This maximum includes worker nodes as well as system nodes managed by Astronomer.
 
-The default maximum node count for a cluster is 20. This value can be changed for any cluster by Astronomer.
+The default maximum node count for all nodes across your cluster is 20. A cluster's node count is most affected by the number of worker Pods that are executing Airflow tasks. See [Worker autoscaling logic](configure-deployment-resources.md#worker-autoscaling-logic).
 
-The number of worker nodes in your cluster [autoscales](configure-deployment-resources.md#worker-autoscaling-logic) based on how many tasks are currently queued or running. If a cluster's worker node count scales to the maximum node count, new tasks can't run or be scheduled.
+If the node count for your cluster reaches the maximum node count, new tasks might not run or get scheduled. Astronomer monitors maximum node count and is responsible for contacting your organization if it is reached. To check your cluster's current node count, contact [Astronomer Support](https://support.astronomer.io).
 
-Reaching the maximum node count also results in the following error in a Deployment's [scheduler logs](view-logs.md):
+### Deployment Worker Size Limits
 
-```text
-│   Warning  FailedScheduling  6s (x10 over 11m)  default-scheduler  0/6 nodes are available: 6 Insufficient cpu.                                                                                                                                                                                                    │
-│ I1110 19:41:16.548235       1 static_autoscaler.go:392] Max total nodes in cluster reached       
-```
-
-If you see this error in a Deployment, reach out to [Astronomer Support](https://support.astronomer.io) and request an increase to your cluster's maximum node count.
-
-### Deployment worker size limits
-
-Worker nodes can be further configured at a Deployment level using the **Worker Resources** setting in the Cloud UI. This setting lets you define the maximum allowable CPU and memory for a worker node.
+Worker Pod size can be configured at a Deployment level using the **Worker Resources** setting in the Cloud UI. This setting determines how much CPU and memory is allocated a worker Pod within a node.
 
 The following table lists the maximum worker size that is supported on Astro for each worker node instance type. As the system requirements of Astro change, these values can increase or decrease. If you try to set **Worker Resources** to a size that exceeds the maximum for your cluster's worker node instance type, an error message appears in the Cloud UI.
 

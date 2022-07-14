@@ -16,7 +16,7 @@ Read the following document for a reference of our default resources as well as 
 | Resource                                  | Description                                                                                                                   | Quantity / Default Size |
 | ----------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
 | [EKS Cluster](https://aws.amazon.com/eks) | An EKS cluster is required to run the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks. | 1x                      |
-| [EC2 Instances](https://aws.amazon.com/ec2/instance-types/) | EC2 instances (nodes) power the system and Airflow components (Webserver, Scheduler, Workers). EC2 instances auto-scale for additional Airflow Deployments. | 2x m5.xlarge |
+| [EC2 Instances](https://aws.amazon.com/ec2/instance-types/) | EC2 instances (nodes) power all system and Airflow components on Astro, including workers and schedulers. EC2 instances auto-scale based on the demand for nodes in your cluster. | 2x m5.xlarge |
 | [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/) | The RDS instance is the primary database of the Astro Data Plane. It hosts a metadata database for each Airflow Deployment hosted on the EKS cluster. | 1x db.r5.large |
 | [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) | Elastic IPs are required for connectivity with the Control Plane, and other public services. | 2x |
 | [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes. | 2x /26 (public) and 1x /20 + 1x /21 (private) |
@@ -26,13 +26,13 @@ Read the following document for a reference of our default resources as well as 
 | [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) | Home for the routes. | 2x |
 | [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) | Virtual network for launching and hosting AWS resources. | 1x /19 |
 | [S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html) | S3 bucket for storage of Airflow task logs. | 1x |
-| Max Node Count | The maximum number of EC2 worker nodes that your Astro Cluster can support. When this limit is reached, your Astro Cluster can't auto-scale and worker pods may fail to schedule. | 20 |
+| Max Node Count | The maximum number of EC2 nodes that your Astro Cluster can support. When this limit is reached, your Astro Cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
 
 ## Supported Cluster Configurations
 
-You might need to modify configurations of a new or existing Cluster on Astro. This section provides a reference for Cluster configuration options. Any changes to these configurations must be requested through [Astronomer's support portal](support.astronomer.io) and completed by Astronomer.
+You might need to modify configurations of a new or existing cluster on Astro. This section provides a reference for cluster configuration options.
 
-To create a new Cluster on Astro with a specified configuration, see [Install on AWS](install-aws.md) or [Create a Cluster](create-cluster.md). For instructions on how to make a change to an existing Cluster, see [Modify a Cluster](modify-cluster.md).
+To create a new Cluster on Astro with a specified configuration, see [Create a Cluster](create-cluster.md). To request a change to an existing Cluster, see [Modify a Cluster](modify-cluster.md). Astronomer is currently responsible for completing all cluster configuration changes.
 
 ### AWS Region
 
@@ -170,26 +170,17 @@ A single Cluster on Astro cannot currently be configured with more than one node
 
 ### Maximum node count
 
-Each Astro cluster has a maximum node count, which is the maximum number of worker nodes that can run on a cluster. This limit doesn't apply to other nodes such as RDS instances or Astronomer-managed node pools.
+Each Astro cluster has a limit on how many nodes it can run at once. This maximum includes worker nodes as well as system nodes managed by Astronomer.
 
-The default maximum node count for a cluster is 20. When required, you can change this value by contacting [Astronomer support](https://support.astronomer.io).
+The default maximum node count for all nodes across your cluster is 20. A cluster's node count is most affected by the number of worker Pods that are executing Airflow tasks. See [Worker autoscaling logic](configure-deployment-resources.md#worker-autoscaling-logic).
 
-The number of worker nodes in your cluster [autoscales](configure-deployment-resources.md#worker-autoscaling-logic) based on how many tasks are currently queued or running. If a cluster's worker node count scales to the maximum node count, new tasks can't run or be scheduled.
-
-Reaching the maximum node count results in the following error in a Deployment's [scheduler logs](view-logs.md):
-
-```text
-│   Warning  FailedScheduling  6s (x10 over 11m)  default-scheduler  0/6 nodes are available: 6 Insufficient cpu.                                                                                                                                                                                                    │
-│ I1110 19:41:16.548235       1 static_autoscaler.go:392] Max total nodes in cluster reached       
-```
-
-If you see this error in a Deployment, contact [Astronomer Support](https://support.astronomer.io) and request an increase of your cluster's maximum node count.
+If the node count for your cluster reaches the maximum node count, new tasks might not run or get scheduled. Astronomer monitors maximum node count and is responsible for contacting your organization if it is reached. To check your cluster's current node count, contact [Astronomer Support](https://support.astronomer.io).
 
 ### Deployment Worker Size Limits
 
-Worker nodes can be further configured at a Deployment level using the **Worker Resources** setting in the Cloud UI. Using this setting, you can determine how much CPU and memory a worker node uses out of its maximum possible usage.
+Worker Pod size can be configured at a Deployment level using the **Worker Resources** setting in the Cloud UI. This setting determines how much CPU and memory is allocated a worker Pod within a node.
 
-The following table lists the maximum worker size that is supported on Astro for each worker node instance type. As the system requirements of Astro change, these values can increase or decrease. If you try to set **Worker Resources** to a size that exceeds the maximum for your cluster's worker node instance type, an error message appears in the Cloud UI.
+The following table lists the maximum worker Pod size that is supported on Astro for each worker node instance type. As the system requirements of Astro change, these values can increase or decrease. If you try to set **Worker Resources** to a size that exceeds the maximum for your cluster's worker node instance type, an error message appears in the Cloud UI.
 
 | Node Instance Type | Maximum AU | CPU       | Memory       |
 |--------------------|------------|-----------|--------------|
