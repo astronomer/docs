@@ -16,7 +16,7 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
 
 1. Go to `<basedomain>.astronomer.io`.
 
-2. Select one of the following options to access the Astronomer Software UI:
+2. Log in to the Software UI using one of the authentication methods that has been configured by your organization.
     
     - Enter your username and password and click **Log in**.
     - To authenticate with with your Auth0 account, click **Log in with Auth0**, and then follow the prompts.
