@@ -5,7 +5,7 @@ id: log-in-to-software
 description: Log in to Astronomer Software to access Astronomer Software features and functionality.
 ---
 
-You can use the Astronomer Software UI and the Astro CLI to view and modify your workspaces, clusters, environment variables, tasks, and users. Your user credentials need to be authenticated before you can use the Astronomer Software UI or the Astro CLI.
+You can use the Astronomer Software UI and the Astro CLI to view and modify your workspaces, deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Astronomer Software UI or the Astro CLI for development on Astro.
 
 ## Prerequisites 
 
@@ -26,10 +26,12 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
     - To authenticate with with your Azure AD account, click **Log in with Azure AD**, and then follow the prompts.
     - To authenticate with your internal Okta account, click **Log in with InternalOkta**, enter your username and password, and then click **Sign In**. 
     - To authenticate with your GitHub account, click **Log in with GitHub**, and then follow the prompts.
+
+    To integrate an identity provider (IdP) with Astronomer Software, see [Integrate an auth system on Astronomer Software](integrate-auth-system.md).
     
 ## Log in to the Astro CLI
 
-Use the Astro CLI to [deploy code to Astro](https://docs.astronomer.io/astro/deploy-code) and create and manage Deployments. Astronomer uses refresh tokens to make sure that you don’t need to log in to the Astro CLI every time you run a command.
+Developing locally with the Astro CLI does not require an Astro account. This includes commands such as `astro dev start` and `astro dev pytest`. If you want to use functionality specific to Astronomer Software, including managing users and [deploying DAGs](deploy-cli.md), you must first log in to Astro with the Astro CLI.
 
 1. In the Astro CLI, run the following command:
 

@@ -27,7 +27,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your workspaces, d
 
 ## Log in to the Astro CLI
 
-Developing locally with the Astro CLI does not require an Astro account. This includes commands like `astro dev start` and `astro dev pytest`. If you want to use functionality specific to Astro, including managing users and [deploying code](deploy-code.md), you must first log in to Astro with the Astro CLI.
+Developing locally with the Astro CLI does not require an Astro account. This includes commands such as `astro dev start` and `astro dev pytest`. If you want to use functionality specific to Astro, including managing users and [deploying code](deploy-code.md), you must first log in to Astro with the Astro CLI.
 
 Astronomer uses refresh tokens to make sure that you don’t need to log in to the Astro CLI every time you run a command.
 
