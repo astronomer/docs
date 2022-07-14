@@ -18,6 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get started',
       items: [
+        'log-in-to-astro',
         'create-project',
         'create-deployment',
       ],
@@ -93,7 +94,6 @@ module.exports = {
           type: 'category',
           label: 'User access',
           items: [
-            'log-in-to-astro',
             'add-user',
             'user-permissions',
             'configure-idp',

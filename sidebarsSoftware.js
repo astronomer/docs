@@ -18,6 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get started',
       items: [
+      'log-in-to-software',
       'install-cli',
       'create-project',
       ],
@@ -106,7 +107,6 @@ module.exports = {
         type: 'category',
         label: 'User access',
         items: [
-        'log-in-to-software',
         'manage-workspaces',
         'import-idp-groups',
         'workspace-permissions',
