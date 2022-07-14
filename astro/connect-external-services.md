@@ -37,7 +37,7 @@ Each cluster on Astro runs in a dedicated VPC. To set up private connectivity be
 To create a VPC peering connection between an Astro cluster's VPC and a target VPC, reach out to [Astronomer support](https://support.astronomer.io) and provide the following information:
 
 - Astro cluster ID and Name
-- Amazon Web Services (AWS) Account ID or GCP Project ID of the target VPC
+- Amazon Web Services (AWS) Account ID or Google Cloud Platform (GCP) Project ID of the target VPC
 - Region of the target VPC (_AWS only_)
 - VPC ID of the target VPC
 - CIDR of the target VPC
