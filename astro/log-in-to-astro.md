@@ -5,9 +5,9 @@ id: log-in-to-astro
 description: Log in to Astro to access Astro features and functionality.
 ---
 
-You can use the Cloud UI and the Astro CLI to view and modify your workspaces, deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Cloud UI or the Astro CLI for development on Astro.
+You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, Deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Cloud UI or the Astro CLI for development on Astro.
 
-## Prerequisites 
+## Prerequisites
 
 - An Astronomer account.
 - The [Astro CLI](cli/get-started.md).
@@ -19,7 +19,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your workspaces, d
 2. Select one of the following options to access the Cloud UI:
 
     - Enter your password and click **Continue**.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**. 
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
@@ -45,7 +45,7 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
  4. Select one of the following options to access the Cloud UI:
 
     - Enter your password and click **Continue**.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**. 
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 

@@ -5,9 +5,9 @@ id: log-in-to-software
 description: Log in to Astronomer Software to access Astronomer Software features and functionality.
 ---
 
-You can use the Astronomer Software UI and the Astro CLI to view and modify your workspaces, deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Astronomer Software UI or the Astro CLI for development on Astro.
+You can use the Astronomer Software UI and the Astro CLI to view and modify your Workspaces, Deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Astronomer Software UI or the Astro CLI for development on Astro.
 
-## Prerequisites 
+## Prerequisites
 
 - An Astronomer account.
 - The [Astro CLI](cli/get-started.md).
@@ -16,19 +16,8 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
 
 1. Go to `<basedomain>.astronomer.io`.
 
-2. Select one of the following options to access the Astronomer Software UI:
-    
-    - Enter your username and password and click **Log in**.
-    - To authenticate with with your Auth0 account, click **Log in with Auth0**, and then follow the prompts.
-    - To authenticate with your Google account, click **Log in with Google**, choose an account, enter your username and password, and then click **Sign In**.
-    - To authenticate with your Okta account, click **Log in with Okta**, enter your username and password, and then click **Sign In**. 
-    - To authenticate with with your custom Oauth account, click **Log in with Custom Oauth**, and then follow the prompts.
-    - To authenticate with with your Azure AD account, click **Log in with Azure AD**, and then follow the prompts.
-    - To authenticate with your internal Okta account, click **Log in with InternalOkta**, enter your username and password, and then click **Sign In**. 
-    - To authenticate with your GitHub account, click **Log in with GitHub**, and then follow the prompts.
+2. Log in to the Software UI using one of the authentication methods that has been configured by your organization. To integrate an identity provider (IdP) with Astronomer Software, see [Integrate an auth system on Astronomer Software](integrate-auth-system.md).
 
-    To integrate an identity provider (IdP) with Astronomer Software, see [Integrate an auth system on Astronomer Software](integrate-auth-system.md).
-    
 ## Log in to the Astro CLI
 
 Developing locally with the Astro CLI does not require an Astro account. This includes commands such as `astro dev start` and `astro dev pytest`. If you want to use functionality specific to Astronomer Software, including managing users and [deploying DAGs](deploy-cli.md), you must first log in to Astro with the Astro CLI.
@@ -52,7 +41,7 @@ Developing locally with the Astro CLI does not require an Astro account. This in
 
 ## Access a different base domain
 
-When you need to access multiple installations of Astronomer Software with the Astro CLI at the same time or you need to use Astro and Astronomer Software at the same time, you need to authenticate to each cluster individually by specifying its base domain. 
+When you need to access multiple installations of Astronomer Software with the Astro CLI at the same time or you need to use Astro and Astronomer Software at the same time, you need to authenticate to each cluster individually by specifying its base domain.
 
 A base domain or URL is the static element of a website address. For example, when you visit the Astronomer website, the address bar always displays `https://www.astronomer.io` no matter what page you access on the Astronomer website.
 
