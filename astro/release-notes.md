@@ -28,7 +28,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 - When you select a Workspace and click **Go back** in a browser, the page now reloads as expected.
 - A **Page not found** error message no longer appears when you select a Deployment in the Cloud UI **Usage** page.
-- The **Deployment Aanlytics** page now displays the correct date.
+- The **Deployment Analytics** page now displays the correct date.
 
 ## June 30, 2022
 
