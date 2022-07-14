@@ -90,7 +90,7 @@ astro-nuclear-scintillation-27@astronomer-pmm.iam.gserviceaccount.com
 
 For more information about configuring service accounts on GCP, see [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
 
-## Authorize Astro access to AWS resources
+## Use AWS IAM roles to authorize access to Astro
 
 To grant an Astro cluster access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
 
