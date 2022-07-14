@@ -37,10 +37,9 @@ For example, consider a user who has been a Workspace Editor in `Production Work
 
 To complete this setup, you need:
 
-- A configured third party identity provider as described in [Integrate an auth system](integrate-auth-system.md).
+- A configured third party identity provider. See [Integrate an auth system](integrate-auth-system.md).
 - System Admin permissions for configuring the feature.
 - Workspace or Deployment Admin permissions for managing Teams.
-- An [integrated IdP](integrate-auth-system.md).
 - An OAuth authorization code flow. See [Configure a custom OAuth flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
 - An IdP group.
 
