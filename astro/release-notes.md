@@ -20,9 +20,9 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 ### Additional improvements
 
 - The Cloud UI **Clusters** page now includes the cluster ID value. 
-- Organization Owners and Organization Billing Admins can now update an Organization's name in the **Settings* tab.
-- The **Lineage** page now generates unique URLs for specific actions so that it's easier to navigate between and share selections.
--  You can now filter the Cloud UI's **Analytics** page to show data only from the last 30 minutes.
+- Organization Owners and Organization Billing Admins can now update the Organization name in the Cloud UI **Settings** page.
+- The Cloud UI **Lineage** page now generates unique URLs for specific actions so that it's easier to navigate between and share selections.
+- The Cloud UI **Analytics** page can now show data for the last 30 minutes.
 
 ### Bug fixes
 
