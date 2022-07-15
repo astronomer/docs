@@ -22,7 +22,7 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 ## Known limitations
 
 - Cross-account service accounts are not supported on pods launched in the Astro cluster.
-- PersistentVolumes (PVs) are not supported are not supported on pods launched in the Astro cluster.
+- PersistentVolumes (PVs) are not supported on pods launched in the Astro cluster.
 
 ## Prerequisites
 
