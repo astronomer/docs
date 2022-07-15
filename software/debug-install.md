@@ -54,29 +54,7 @@ If these pods do not come up in a healthy state, it is usually an issue with the
 Make sure that the Kubernetes cluster Astronomer is running on can connect to the database. Run the following comannd to start a `postgresql` pod in your cluster and then connect to it:
 
 ```
-kubectl run psql --rm -it --restart=Never --namespace <astronomer-namespace> --image bitnami/postgresql --command -- psql $(kubectl get secret -n astronomer astronomer-houston-backend --template='{{.data.connection | base64decode }}' | sed 's/?.*//g')
-```
-
-Run the following command to add the `postgresql` package:
-
-```
-/houston # apk add postgresql
-fetch https://dl-cdn.alpinelinux.org/alpine/v3.10/main/x86_64/APKINDEX.tar.gz
-fetch https://dl-cdn.alpinelinux.org/alpine/v3.10/community/x86_64/APKINDEX.tar.gz
-(1/12) Installing ncurses-terminfo-base (6.1_p20190518-r0)
-(2/12) Installing ncurses-terminfo (6.1_p20190518-r0)
-(3/12) Installing ncurses-libs (6.1_p20190518-r0)
-(4/12) Installing libedit (20190324.3.1-r0)
-(5/12) Installing db (5.3.28-r1)
-(6/12) Installing libsasl (2.1.27-r4)
-(7/12) Installing libldap (2.4.48-r0)
-(8/12) Installing libpq (11.6-r0)
-(9/12) Installing postgresql-client (11.6-r0)
-(10/12) Installing tzdata (2019c-r0)
-(11/12) Installing libxml2 (2.9.9-r2)
-(12/12) Installing postgresql (11.6-r0)
-Executing busybox-1.30.1-r2.trigger
-OK: 89 MiB in 35 packages
+kubectl run psql --rm -it --restart=Never --namespace <astronomer-namespace> --image bitnami/postgresql --command -- psql $(kubectl get secret -n <astronomer-namespace> <release-name>-houston-backend --template='{{.data.connection | base64decode }}' | sed 's/?.*//g')
 ```
 
 If the connection times out, there may be a networking issue.
