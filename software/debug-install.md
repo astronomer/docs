@@ -48,7 +48,7 @@ manageable-snail-prometheus-0                              1/1     Running      
 manageable-snail-registry-0                                1/1     Running            0          1h
 ```
 
-If these pods do not come up in a healthy state, it is usually an issue with the database connection. Try checking:
+If these pods do not come up in a healthy state, it is usually an issue with the database connection. See the following topics to confirm your connection.
 
 #### Networking
 Make sure that the Kubernetes cluster Astronomer is running on can connect to the database. Run the following comannd to start a `postgresql` pod in your cluster and then connect to it:
