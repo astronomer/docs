@@ -38,6 +38,7 @@ Examples:
 
 - The Airflow UI is unavailable.
 - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
+- You need to [modify a cluster setting](modify-cluster.md) to successfully run tasks.
 - Task logs are missing in the Airflow UI.
 
 **P3:** Medium impact. Service is partially impaired.
@@ -45,7 +46,7 @@ Examples:
 Examples:
 
 - There is a bug in the Software UI.
-- You need to [modify a cluster setting](modify-cluster.md) to improve how your cluster runs. 
+- You need to [modify a cluster setting](modify-cluster.md) to improve your cluster's performance.
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
