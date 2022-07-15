@@ -53,7 +53,7 @@ If these pods do not come up in a healthy state, it is usually an issue with the
 #### Networking
 Make sure that the Kubernetes cluster Astronomer is running on can connect to the database. Run the following comannd to start a `postgresql` pod in your cluster and then connect to it:
 
-```
+```sh
 kubectl run psql --rm -it --restart=Never --namespace <astronomer-namespace> --image bitnami/postgresql --command -- psql $(kubectl get secret -n <astronomer-namespace> <release-name>-houston-backend --template='{{.data.connection | base64decode }}' | sed 's/?.*//g')
 ```
 
