@@ -37,7 +37,7 @@ Each cluster on Astro runs in a dedicated VPC. To set up private connectivity be
 To create a VPC peering connection between an Astro cluster's VPC and a target VPC, reach out to [Astronomer support](https://support.astronomer.io) and provide the following information:
 
 - Astro cluster ID and Name
-- AWS Account ID or GCP Project ID of the target VPC
+- Amazon Web Services (AWS) Account ID or Google Cloud Platform (GCP) Project ID of the target VPC
 - Region of the target VPC (_AWS only_)
 - VPC ID of the target VPC
 - CIDR of the target VPC
@@ -48,9 +48,9 @@ Once peering is set up, the owner of the target VPC can expect to continue to wo
 
 ### DNS considerations with VPC peering (_AWS only_)
 
-To resolve DNS hostnames from your target VPC, your cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled via AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
+To resolve DNS hostnames from your target VPC, your cluster VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled. See AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).  
 
-If your target VPC resolves DNS hostnames via **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the data plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
+If your target VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the data plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting [Astronomer support](https://support.astronomer.io).
 
@@ -89,3 +89,39 @@ astro-nuclear-scintillation-27@astronomer-pmm.iam.gserviceaccount.com
 :::
 
 For more information about configuring service accounts on GCP, see [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
+
+## Use AWS IAM roles to authorize access to Astro
+
+To grant an Astro cluster access to a service that is running in an AWS account not managed by Astronomer, use AWS IAM roles. IAM roles on AWS are often used to manage the level of access a specific user, object, or group of users has to a resource. This includes an Amazon S3 bucket, Redshift instance, or secrets backend.
+
+1. In the Cloud UI, click **Clusters** and then copy the value displayed in the **Cluster ID** column for the Astro cluster that needs access to AWS service resources.
+
+2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
+
+3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
+
+4. Click **Roles** and in the **Role name** column select the role you created in step 2.
+
+5. Click the **Trust relationships** tab.
+
+6. Click **Edit trust policy** and update the `arn` value:
+
+```text {8}
+    {
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>",
+                ]
+            },
+            "Action": "sts:AssumeRole"
+        },
+    ]
+}
+```
+7. Click **Update policy**.
+
+8. Create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).

@@ -179,7 +179,7 @@ To confirm that your helper functions were successfully installed:
     $ docker exec -it <scheduler-container-id> /bin/bash
     bash-4.4$ ls
     Dockerfile  airflow_settings.yaml  helper_functions  logs  plugins  unittests.cfg
-    airflow.cfg  dags  include  packages.txt  requirements.txt
+    airflow.cfg dags  include  packages.txt  requirements.txt
     ```
 
 ## Configure `airflow_settings.yaml` (Local development only)
@@ -275,60 +275,49 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 :::
 
-## Set environment variables with the env command
+## Set environment variables locally
 
-For Astro projects deployed on Astro, you can use the [Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui) or the [Astro CLI](cli/get-started.md) to set environment variables in the project `.env` file.
+For local development, Astronomer recommends setting environment variables in your Astro project's `.env` file. You can then push your environment variables from the `.env` file to a Deployment using the [Astro CLI](cli/astro-deployment-variable-update.md).
 
 If your environment variables contain sensitive information or credentials that you don't want exposed in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
 
 1. Open the `.env` file in your Astro project directory.
-2. Add your environment variables to the `.env` file, or open the Astro CLI and run `astro deployment variable list --save` to copy environment variables from an existing Deployment to the file.
+2. Add your environment variables to the `.env` file or run `astro deployment variable list --save` to copy environment variables from an existing Deployment to the file.
 
     Use the following format when you set environment variables in your `.env` file:
 
+    ```text
+    KEY=VALUE
     ```
-    AIRFLOW__CORE__DAG_CONCURRENCY=5
-    ```
+
+    Environment variables should be in all-caps and not include spaces.
+
 3. Run `astro dev start --env .env` to rebuild your image.
-4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment variables](environment-variables.md).
+4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment Variables](environment-variables.md).
 
+### Confirm your environment variable changes
 
-### Confirm your environment variables were applied
-
-By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To confirm your environment variables with the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile or `.env` file.
-
-Alternatively, you can run:
+Confirm that your environment variables were applied in a local environment by running the following commands:
 
 ```
-docker ps
+$ docker exec -it <scheduler-container-name> /bin/bash
+$ env
 ```
 
-This outputs the 3 Docker containers that comprise the Airflow environment on your local machine: the Airflow scheduler, webserver, and Postgres metadata database.
+These commands output all environment variables that are running locally. This includes both environment variables set in `.env` and environment variables set on Astro Runtime by default.
 
-Now, create a [Bash session](https://docs.docker.com/engine/reference/commandline/exec/#examples) in your scheduler container by running:
+:::info
 
-```
-docker exec -it <scheduler-container-name> /bin/bash
-```
+For local environments, the Astro CLI generates an `airflow.cfg` file at runtime based on the environment variables you set in your `.env` file. You can't create or modify `airflow.cfg` in an Astro project.
 
-If you run `ls -1` following this command, you'll see a list of running files:
+To view your local environment variables in the context of the generated Airflow configuration, run:
 
 ```
-bash-5.0$ ls -1
-Dockerfile             airflow.cfg            airflow_settings.yaml  dags                   include                logs                   packages.txt           plugins                requirements.txt       unittests.cfg
+$ docker exec -it <scheduler-container-name> /bin/bash
+$ cat airflow.cfg
 ```
 
-Now, run:
-
-```
-env
-```
-
-This should output all environment variables that are running locally, some of which are set by you and some of which are set by Astronomer by default.
-
-:::tip
-
-You can also run `cat airflow.cfg` to output _all_ contents in that file.
+These commands output the contents of the generated `airflow.cfg` file, which lists your environment variables as human-readable configurations with inline comments.
 
 :::
 
@@ -517,7 +506,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   Your Astro project can now utilize Python packages from your private GitHub repository.
 
-3. Optional. Test or deploy your DAGs. See [Build and run a project locally](develop-project.md#build-and-run-a-project-locally) or [Deploy code to Astro](deploy-code.md).
+3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
 </TabItem>
 
@@ -620,7 +609,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
     Your Astro project can now utilize Python packages from your private PyPi index.
 
-3. Optional. Test or deploy your DAGs. See [Build and run a project locally](develop-project.md#build-and-run-a-project-locally) or [Deploy code to Astro](deploy-code.md).
+3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
 </TabItem>
 </Tabs>
