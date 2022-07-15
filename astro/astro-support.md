@@ -10,7 +10,7 @@ In addition to product documentation, the following resources are available to h
 - [Astronomer Forum](https://forum.astronomer.io)
 - [Airflow Guides](https://www.astronomer.io/guides/)
 
-If you're experiencing an issue or have a question that requires Astronomer expertise, you can use one of the following methods to contact Astronomer support:
+If you're experiencing an issue or have a question that requires Astronomer expertise, or if you want to [modify a cluster configuration](modify-cluster.md), you can use one of the following methods to contact Astronomer support:
 
 - Submit a support request in the [Cloud UI](astro-support.md#submit-a-support-request-in-the-cloud-ui)
 - Submit a support request on the [Astronomer support portal](https://support.astronomer.io/hc/en-us)
@@ -45,6 +45,7 @@ Examples:
 Examples:
 
 - There is a bug in the Software UI.
+- You need to [modify a cluster setting](modify-cluster.md) to improve how your cluster runs. 
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
