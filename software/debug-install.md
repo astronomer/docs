@@ -8,9 +8,9 @@ description: Common snags users run into while deploying and running Astronomer 
 
 If the Astronomer platform is not functioning after following the instructions in the installation guide for any specific environment, here are a few things to try:
 
-## Houston, Grafana, and Prisma stuck in CrashLoopBackOff
+## Houston and Grafana stuck in CrashLoopBackOff
 
-When deploying the base Astronomer platform, the only three pods that will connect directly to the database are Houston (API), Grafana, and Prisma. All other database connections will be created from Airflow deployments created on Astronomer.
+When deploying the base Astronomer platform, the Houston (API) and Grafana pods connect directly to the database. All other database connections are created from Airflow deployments created on Astronomer.
 
 ```
 $ kubectl get pods -n astro-demo
@@ -44,21 +44,20 @@ manageable-snail-kubed-5b5d65dd9d-l7nds                    1/1     Running      
 manageable-snail-nginx-799d79ccf9-kfnzn                    1/1     Running            0          1h
 manageable-snail-nginx-default-backend-5cc4755696-vh5zq    1/1     Running            0          1h
 manageable-snail-astro-ui-7b9b9df4f9-pb99f                 1/1     Running            0          1h
-manageable-snail-prisma-6b5d944bdc-szn8f                   0/1     CrashLoopBackOff   20         1h
 manageable-snail-prometheus-0                              1/1     Running            0          1h
 manageable-snail-registry-0                                1/1     Running            0          1h
 ```
 
-If these are the only three pods that are not coming up as healthy, it is usually indicative of an issue with connecting to the database. Try checking:
+If these pods do not come up in a healthy state, it is usually an issue with the database connection. Try checking:
 
 #### Networking
-Make sure that the Kubernetes cluster Astronomer is running on can connect to the database. One way to check this is to jump into an Astronomer pod and try connecting directly to the database:
+Make sure that the Kubernetes cluster Astronomer is running on can connect to the database. Run the following comannd to start a postgresql pod in your cluster and then connect to it:
 
 ```
-kubectl exec -it manageable-snail-houston-6fb7956994-2tngn /bin/sh -n astro-demo
+kubectl run psql --rm -it --restart=Never --namespace <astronomer-namespace> --image bitnami/postgresql --command -- psql $(kubectl get secret -n astronomer astronomer-houston-backend --template='{{.data.connection | base64decode }}' | sed 's/?.*//g')
 ```
 
-Once inside the pod, add the `postgresql` package:
+Run the following command to add the `postgresql` package:
 
 ```
 /houston # apk add postgresql
@@ -80,14 +79,7 @@ Executing busybox-1.30.1-r2.trigger
 OK: 89 MiB in 35 packages
 ```
 
-Now try connecting with `psql`:
-
-```
-/houston # psql -U <username> -h <host> -p <port>
-Password for user <username>:
-
-```
-If the connection times out here, there may be a networking issue.
+If the connection times out, there may be a networking issue.
 
 #### Verify the Secret
 Check to make sure the `astronomer-bootstrap` secret created earlier, which contains the connection string to the database, does not contain any typos:
@@ -111,8 +103,6 @@ manageable-snail-kubed-apiserver-cert                  Opaque                   
 manageable-snail-kubed-notifier                        Opaque                                0      33h
 manageable-snail-kubed-token-dhd94                     kubernetes.io/service-account-token   3      33h
 manageable-snail-nginx-token-xk5pn                     kubernetes.io/service-account-token   3      33h
-manageable-snail-prisma-api-secret                     Opaque                                2      33h
-manageable-snail-prisma-bootstrapper-token-8zhjm       kubernetes.io/service-account-token   3      33h
 manageable-snail-prometheus-token-2v59c                kubernetes.io/service-account-token   3      33h
 manageable-snail-registry-auth                         kubernetes.io/dockerconfigjson        1      33h
 ```
@@ -140,7 +130,7 @@ Now to see the secret in plaintext:
 echo <encoded_value> | base64 --decode
 ```
 
-If there is indeed a typo, delete the secret, recreate it with the right value, and then delete all the pods in the namespace.
+If there is a typo, delete the secret, recreate it with the right value, and then delete all the pods in the namespace.
 
 ```
 $ kubectl delete secret astronomer-bootstrap -n astro-demo
