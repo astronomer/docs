@@ -6,7 +6,7 @@ description: Common snags users run into while deploying and running Astronomer 
 ---
 
 
-If the Astronomer platform is not functioning after following the instructions in the installation guide for any specific environment, here are a few things to try:
+Use the information provided here when the Astronomer platform is not functioning as expected after you install it.
 
 ## Houston and Grafana stuck in CrashLoopBackOff
 
@@ -51,7 +51,7 @@ manageable-snail-registry-0                                1/1     Running      
 If these pods do not come up in a healthy state, it is usually an issue with the database connection. Try checking:
 
 #### Networking
-Make sure that the Kubernetes cluster Astronomer is running on can connect to the database. Run the following comannd to start a postgresql pod in your cluster and then connect to it:
+Make sure that the Kubernetes cluster Astronomer is running on can connect to the database. Run the following comannd to start a `postgresql` pod in your cluster and then connect to it:
 
 ```
 kubectl run psql --rm -it --restart=Never --namespace <astronomer-namespace> --image bitnami/postgresql --command -- psql $(kubectl get secret -n astronomer astronomer-houston-backend --template='{{.data.connection | base64decode }}' | sed 's/?.*//g')
