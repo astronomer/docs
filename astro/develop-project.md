@@ -481,6 +481,7 @@ This example assumes that the name of each of your Python packages is identical 
 #### Step 3: Build a custom Docker image
 
 1. We can first automatically generate a unique image name using the following command:
+
     ```sh
     image_name=astro-$(date +%Y%m%d%H%M%S)
     ```
@@ -578,6 +579,10 @@ Ensure that the name of the package on the private repository does not clash wit
 #### Step 3: Build a custom Docker image
 
 1. We can first automatically generate a unique image name using the following command:
+
+    ```sh
+    image_name=astro-$(date +%Y%m%d%H%M%S)
+    ```
 
 2. Run the following command to create a new Docker image from your `Dockerfile`. Replace the pip repository and associated credential values with your own.
 
