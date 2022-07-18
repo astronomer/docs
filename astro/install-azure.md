@@ -5,66 +5,37 @@ id: install-azure
 description: Get started on Astro by creating your first Astro cluster on Azure.
 ---
 
-This is where you'll find instructions for installing Astro on Azure.
+This is where you'll find instructions for installing Astro on Microsoft Azure.
 
 To complete the installation process, you'll:
 
 - Create an account on Astro.
-- Activate your Astro data plane by enabling Microsoft Cloud APIs and adding service accounts to your project's IAM.
-- Share information about your Microsoft Cloud project with Astronomer.
+- Activate your Astro data plane by registering Azure features and adding the Astronomer Service Principal to your subscription.
+- Share information about your Azure subscription with Astronomer.
 
-When you've completed the installation process, Astronomer will create a cluster within your Microsoft Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
+When you've completed the installation process, Astronomer will create a cluster within your Azure subscription to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
-For more information about managing Microsoft Cloud projects, see [Azure documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+For more information about managing Azure subscriptions with the Azure CLI, see [How to manage Azure subscriptions with the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/manage-azure-subscriptions-azure-cli).
 
 ## Prerequisites
 
-- A [Microsoft Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
-- A user with [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles) in your project.
-- [Microsoft Cloud Shell](https://cloud.google.com/shell).
-- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36. To adjust your project's quota limits up or down, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console).
-- A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24. To adjust your project's quota limits up or down, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console).
+- An Azure Subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported.
+- An Azure Active Directory (Azure AD) user with Application Administrator permissions. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+- An Azure user with Owner permissions. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+- Microsoft Azure Cloud Shell or PowerShell.
+- A minimum quota of 16 standard DDv4 series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
+- A minimum quota of 40 standard DDv5 series vCPUs. TTo adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
 - A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or scheduled maintenance is required.
 
-For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-gcp.md).
-
-### VPC Peering Prerequisites (Optional)
-
-If any of your Azure resources are on a private network, you can access them using one of the following options:
-
-- [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect)
-- A [VPC Peering connection](https://cloud.google.com/vpc/docs/vpc-peering) between Astronomer's VPC and the VPCs for your broader network
-
-Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
-
-- **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/19`)
-- **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
-- **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
-- **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/19`)
+For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure.md).
 
 ## Step 1: Access Astro
 
-To get started with Astro, create an account at https://cloud.astronomer.io/.
-
-When you first authenticate to Astro, you can sign in with a Microsoft account, a GitHub account, or an email and password.
-
-<div class="text--center">
-  <img src="/img/docs/login.png" alt="Astro login screen" />
-</div>
-
-If you're the first person from your team to authenticate, Astronomer adds you as a Workspace Admin to a new Workspace named after your Organization. From there, you'll be able to add other team members to that Workspace without the assistance of Astronomer.
-
-:::tip
-
-After completing your initial installation, we recommend [setting up an identity provider (IdP)](configure-idp.md) so that users can log in to Astro through your IdP.
-
-:::
+See [Log in to Astro](log-in-to-astro.md).
 
 ## Step 2: Activate the data plane
 
-The data plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
-
-To activate the data plane on your Azure project:
+The data plane is a collection of Astro infrastructure components that run in your cloud and are managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
 1. Run the following commands in your Microsoft Cloud Shell:
 
