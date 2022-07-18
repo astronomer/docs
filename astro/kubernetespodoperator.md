@@ -19,6 +19,11 @@ The KubernetesPodOperator enables you to:
 
 On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperator is built into every cluster in the data plane and is managed by Astronomer.
 
+## Known limitations
+
+- Cross-account service accounts are not supported on pods launched in the Astro cluster.
+- PersistentVolumes (PVs) are not supported on pods launched in the Astro cluster.
+
 ## Prerequisites
 
 - An [Astro project](create-project.md).

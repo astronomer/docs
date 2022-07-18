@@ -21,15 +21,15 @@ Read the following document for a reference of our default resources as well as 
 | [Workload Identity Pool](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) | Astro uses the fixed Workload Identity Pool for your project; one is created if it does not exist | The default pool (PROJECT_ID.svc.id.goog) is used |
 | [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres) | The Cloud SQL instance is the primary database for the Astro data plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster | 1 Regional Instance with 4 vCPUs, 16GB Memory |
 | Storage Bucket | GCS Bucket for storage of Airflow task logs | 1 bucket with name `airflow-logs-<clusterid>` |
-| Nodes | Nodes power the data plane and Airflow components. Nodes autoscale as deployments are added. | 3x n2-medium-4 for the system nodes; worker nodes default to e2-medium-4 and are provisioned as required, up to Max Node Count |
-| Max Node Count | The maximum number of EC2 nodes that your Astro cluster can support at any given time. Once this limit is reached, your cluster cannot auto-scale and worker pods may fail to schedule. | 20 |
+| Nodes | Nodes power the Data Plane and Airflow components. Nodes autoscale as Deployments are added. | 3x n2-medium-4 for the system nodes; worker nodes default to e2-medium-4 and are provisioned as required, up to Max Node Count |
+| Maximum Node Count | The maximum number of EC2 nodes that your Astro cluster can support. When this limit is reached, your Astro cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
 
 
 ## Supported cluster configurations
 
 Depending on the needs of your team, you may be interested in modifying certain configurations of a new or existing cluster on Astro. This section provides a reference for which configuration options are supported during the install process.
 
-To create a new cluster on Astro with a specified configuration, read [Install on GCP](install-gcp.md) or [Create a Cluster](create-cluster.md). For instructions on how to make a change to an existing cluster, read [Modify a Cluster](modify-cluster.md).
+To create a new cluster on Astro with a specified configuration, read [Install on GCP](install-gcp.md) or [Create a cluster](create-cluster.md). For instructions on how to make a change to an existing cluster, read [Modify a cluster](modify-cluster.md).
 
 ### GCP region
 
@@ -68,11 +68,19 @@ Astro supports different GCP machine types. Machine types comprise of varying co
 
 For detailed information on each instance type, see [GCP documentation](https://cloud.google.com/compute/docs/machine-types). If you're interested in a machine type that is not on this list, reach out to [Astronomer support](https://support.astronomer.io/). Not all machine types are supported in all GCP regions.
 
-## Deployment worker size limits
+### Maximum node count
 
-In addition to setting a node instance type for each cluster, you can configure a unique worker size for each Deployment within a cluster. worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. For Deployments on GCP, you can select any worker size up to 64 AU (6.4 CPUs, 24 GiB memory) as long as the worker size is supported by the node instance type selected for the cluster. When you attempt to provision a worker size that isn't supported by the cluster instance type, an error message appears in the Cloud UI.
+Each Astro cluster has a limit on how many nodes it can run at once. This maximum includes worker nodes as well as system nodes managed by Astronomer.
 
-This table lists the approximate maximum worker size that is supported on Astro for each node instance type. Maximum worker size values may increase or decrease over time as the system requirements of Astro change.
+The default maximum node count for all nodes across your cluster is 20. A cluster's node count is most affected by the number of worker Pods that are executing Airflow tasks. See [Worker autoscaling logic](configure-deployment-resources.md#worker-autoscaling-logic).
+
+If the node count for your cluster reaches the maximum node count, new tasks might not run or get scheduled. Astronomer monitors maximum node count and is responsible for contacting your organization if it is reached. To check your cluster's current node count, contact [Astronomer Support](https://support.astronomer.io).
+
+### Deployment Worker Size Limits
+
+Worker Pod size can be configured at a Deployment level using the **Worker Resources** setting in the Cloud UI. This setting determines how much CPU and memory is allocated a worker Pod within a node.
+
+The following table lists the maximum worker size that is supported on Astro for each worker node instance type. As the system requirements of Astro change, these values can increase or decrease. If you try to set **Worker Resources** to a size that exceeds the maximum for your cluster's worker node instance type, an error message appears in the Cloud UI.
 
 | Node Instance Type | Maximum AU | CPU       | Memory       |
 |--------------------|------------|-----------|--------------|
