@@ -169,13 +169,13 @@ This setup assumes the following prerequisites:
 
 <TabItem value="custom">
 
-If your Astro project uses a custom Runtime image with additional build-time arguments, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+If your Astro project builds an image with additional build-time arguments, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
 
 #### Prerequisites
 
 To complete this setup, you need:
 
-- An Astro project that builds a custom Runtime image.
+- An Astro project that builds an image with additional build-time arguments.
 
 #### Setup
 
@@ -187,7 +187,7 @@ To complete this setup, you need:
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
-    name: Astronomer CI - Custom base image
+    name: Astronomer CI - Additional build-time args
 
     on:
       push:
@@ -203,13 +203,14 @@ To complete this setup, you need:
         steps:
         - name: Check out the repo
           uses: actions/checkout@v2
+        - name: Create image tag
+          id: image_tage
+          run: echo ::set-output name=image_tage::astro-$(date +%Y%m%d%H%M%S)
         - name: Build Dockerfile.build image
           uses: docker/build-push-action@v2
           with:
-            # This image tag must match the image tag in the FROM line of your `Dockerfile`.
-            tags: custom-<astro-runtime-image>
+            tags: ${{ steps.image_tage.outputs.image_tage }}
             load: true
-            file: Dockerfile.build
             # Define your custom image's build arguments, contexts, and connections here using
             # the available GitHub Action settings:
             # https://github.com/docker/build-push-action#customizing .
@@ -220,7 +221,7 @@ To complete this setup, you need:
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
+            astro deploy --image-name ${{ steps.image_tage.outputs.image_tage }}
     ```
 
     For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
@@ -242,6 +243,9 @@ To complete this setup, you need:
         steps:
         - name: Check out the repo
           uses: actions/checkout@v2
+        - name: Create image tag
+          id: image_tage
+          run: echo ::set-output name=image_tage::astro-$(date +%Y%m%d%H%M%S)
         - name: Create SSH Socket
           uses: webfactory/ssh-agent@v0.5.4
           with:
@@ -252,16 +256,14 @@ To complete this setup, you need:
         - name: Build Dockerfile.build image
           uses: docker/build-push-action@v2
           with:
-            # This image tag must match the image tag in the FROM line of your `Dockerfile`.
-            tags: custom-<astro-runtime-image>
+            tags: ${{ steps.image_tage.outputs.image_tage }}
             load: true
-            file: Dockerfile.build
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
+            astro deploy --image-name ${{ steps.image_tage.outputs.image_tage }}
     ```
 
   :::info
