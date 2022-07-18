@@ -24,7 +24,7 @@ Read the following document for a reference of our default resources as well as 
 | [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) | Home for the routes. | 2x |
 | [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html) | Virtual network for launching and hosting AWS resources. | 1x /19 |
 | [S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html) | S3 bucket for storage of Airflow task logs. | 1x |
-| Max Node Count | The maximum number of EC2 nodes that your Astro cluster can support. When this limit is reached, your cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
+| Maximum Node Count | The maximum number of EC2 nodes that your Astro cluster can support. When this limit is reached, your cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
 
 ## Supported cluster configurations
 
@@ -166,15 +166,9 @@ A single cluster on Astro cannot currently be configured with more than one node
 
 :::
 
-<<<<<<< HEAD
 ### Maximum node count
 
 Each Astro cluster has a limit on how many nodes it can run at once. This maximum includes worker nodes as well as system nodes managed by Astronomer.
-=======
-## Deployment worker size limits
-
-In addition to setting a node instance type for each cluster, you can configure a unique worker size for each Deployment within a cluster. Worker size can be specified at any time in the **Worker Resources** field in the Deployment view of the Cloud UI. You can select any worker size up to 400 AU (40 CPUs, 150 GiB memory) as long as the worker size is supported by the node instance type selected for the cluster. When you attempt to provision a worker size that isn't supported by the cluster instance type, an error message appears in the Cloud UI.
->>>>>>> fb6b41ef26c5e24a2c05660a3c91a9cbbf1b5281
 
 The default maximum node count for all nodes across your cluster is 20. A cluster's node count is most affected by the number of worker Pods that are executing Airflow tasks. See [Worker autoscaling logic](configure-deployment-resources.md#worker-autoscaling-logic).
 
