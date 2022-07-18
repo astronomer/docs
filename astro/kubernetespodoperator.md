@@ -141,4 +141,4 @@ KubernetesPodOperator(
 ## Related documentation
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
-- [KubernetesPodOperator on Astronomer](https://www.astronomer.io/guides/kubepod-operator/)
+- [KubernetesPodOperator Airflow Guide](https://www.astronomer.io/guides/kubepod-operator/)
