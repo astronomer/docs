@@ -5,8 +5,6 @@ id: astro-deploy
 description: Reference documentation for astro deploy.
 ---
 
-## Description
-
 [Deploy code](deploy-code.md) to a Deployment on Astro.
 
 This command bundles all files in your Astro project and pushes them to Astro. Before completing the process, it tests your DAGs in your Astro project for errors. If this test fails, the deploy to Astro will also fail. This is the same test which runs locally with `astro dev parse`.
