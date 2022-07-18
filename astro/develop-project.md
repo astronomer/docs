@@ -527,7 +527,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
 :::
 
-#### Step 2: Create Dockerfile.build
+#### Step 2: Update Dockerfile
 
 1. In your Astro project, replace the contents of `Dockerfile` with the following code. Retain any previous build steps you may have already added so you can add them again later.
 

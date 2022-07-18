@@ -206,7 +206,7 @@ To complete this setup, you need:
         - name: Create image tag
           id: image_tage
           run: echo ::set-output name=image_tage::astro-$(date +%Y%m%d%H%M%S)
-        - name: Build Dockerfile.build image
+        - name: Build image
           uses: docker/build-push-action@v2
           with:
             tags: ${{ steps.image_tage.outputs.image_tage }}
@@ -253,7 +253,7 @@ To complete this setup, you need:
             ssh-private-key: ${{ secrets.GITHUB_SSH_KEY }}
         - name: (Optional) Test SSH Connection - Should print hello message.
           run: (ssh git@github.com) || true
-        - name: Build Dockerfile.build image
+        - name: Build image
           uses: docker/build-push-action@v2
           with:
             tags: ${{ steps.image_tage.outputs.image_tage }}
