@@ -20,10 +20,9 @@ Release date: July 18, 2022
 
 ### Additional improvements
 
-- You can now configure extra sidecar containers and volume mounts for the Houston API and Commander using `astronomer.houston.extraContainers` and `astronomer.commander.extraContainers` in your `config.yaml` file.
-- You can now configure Vector for use with [sidecar logging](export-task-logs.md#export-logs-using-container-sidecars).
+- You can now configure Vector on [logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) to send Airflow task logs to third-party log management systems.
 - Resolved several high and critical CVEs.
-- You can now assign System Viewers and System Editors to [Teams](import-idp-groups.md).
+- You can now assign System Viewer and System Editor permissions to a [Team](import-idp-groups.md).
 
 ### Bug fixes
 
@@ -33,7 +32,6 @@ Release date: July 18, 2022
 - Fixed an issue where you could still access a Deployment using a URL after logging out of the Software UI.
 - Fixed an issue where you could view Deployment information from a Workspace that was deleted with `astro workspace delete`.
 - Fixed an issue where you could not open Celery from the Software UI.
-- Fixed an issue where logging out of the Software UI would occasionally fail.
 - Improved the reliability of upgrading Astronomer Software with 30+ Deployments when `upgradeDeployments=true`.
 
 ## v0.29.1
