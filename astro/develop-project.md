@@ -408,11 +408,11 @@ numpy==1.22.1
 
 This example assumes that the name of each of your Python packages is identical to the name of its corresponding GitHub repository. In other words,`mypackage1` is both the name of the package and the name of the repository.
 
-#### Step 2: Create Dockerfile.build
+#### Step 2: Update Dockerfile
 
-1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
+1. In your Astro project, replace the contents of `Dockerfile` with the following code. Retain any previous build steps you may have already added so you can add them again later.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+1. In `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
    ```text
    FROM quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
@@ -424,7 +424,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::
 
-3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration:
+3. In `Dockerfile` after the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -458,7 +458,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astro Runtime may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
+  This example `Dockerfile` assumes Python 3.9, but some versions of Astro Runtime may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile` with the correct Python version.
 
   To identify the Python version in your Astro Runtime image, run:
 
@@ -476,37 +476,30 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::
 
+4. Add any commands that you had in the original `Dockerfile`. These should be added in stage3 after the line `FROM stage1 AS stage3`.
+
 #### Step 3: Build a custom Docker image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file. Replace `<ssh-key>` with your SSH private key file name and `<astro-runtime-image>` with your Astro Runtime image.
+1. We can first automatically generate a unique image name using the following command:
+    ```sh
+    image_name=astro-$(date +%Y%m%d%H%M%S)
+    ```
+
+2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<ssh-key>` with your SSH private key file name.
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
-
-    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0-base` in your `Dockerfile.build`, this command would be:
-
-    ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-5.0.0-base .
-    ```
-
-2. Update the following entry in the  `Dockerfile`:
-
-   ```
-   FROM custom-astro-runtime:5.0.0
-   ```
-  :::info
-
-    Astro runtime base images are built on AMD64 architecture. You must add the architecture name to the `FROM` statement when your computer and the image architecture are different. For example, this is the format for the Apple M1 architecture:
-
-    ```
-   FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
-   ```
-  :::
-
-  Your Astro project can now utilize Python packages from your private GitHub repository.
 
 3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
+
+4. Deploy the image using the astro-cli <TODO: Link to the astro deploy --image-name doc>.
+
+    ```sh
+    astro deploy --image-name $image_name
+    ```
+
+Your Astro project can now utilize Python packages from your private GitHub repository.
 
 </TabItem>
 
@@ -535,9 +528,9 @@ Ensure that the name of the package on the private repository does not clash wit
 
 #### Step 2: Create Dockerfile.build
 
-1. In your Astro project, create a duplicate of your `Dockerfile` named `Dockerfile.build`.
+1. In your Astro project, replace the contents of `Dockerfile` with the following code. Retain any previous build steps you may have already added so you can add them again later.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+1. In `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
    ```text
    quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
@@ -549,7 +542,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
    :::
 
-3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
+3. In `Dockerfile` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -580,36 +573,27 @@ Ensure that the name of the package on the private repository does not clash wit
     - Add the environment variable `PIP_EXTRA_INDEX_URL` to instruct pip on where to look for non-public packages.
     - Install public and private Python-level packages from your `requirements.txt` file.
 
+4. Add any commands that you had in the original `Dockerfile`. These should be added in stage3 after the line `FROM stage1 AS stage3`.
+
 #### Step 3: Build a custom Docker image
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file. Replace the pip repository and associated credential values with your own.
+1. We can first automatically generate a unique image name using the following command:
+
+2. Run the following command to create a new Docker image from your `Dockerfile`. Replace the pip repository and associated credential values with your own.
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-<airflow-image> .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t $image_name .
     ```
-
-    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0` in your `Dockerfile.build`, this command would be:
-
-    ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-astro-runtime-5.0.0 .
-    ```
-2. Update the following entry in the  `Dockerfile`:
-
-  ```
-   FROM custom-astro-runtime:5.0.0
-   ```
-  :::info
-
-    Astro runtime base images are built on the `linux/amd64` architecture. You must add the architecture name to the `FROM` statement when your computer and the image architecture are different. For example, this is the format for the Apple M1 architecture:
-
-    ```
-   FROM --platform=linux/amd64 custom-astro-runtime:5.0.0
-   ```
-  :::
-
-    Your Astro project can now utilize Python packages from your private PyPi index.
 
 3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
+
+4. Deploy the image using the astro-cli <TODO: Link to the astro deploy --image-name doc>.
+
+    ```sh
+    astro deploy --image-name $image_name
+    ```
+
+Your Astro project can now utilize Python packages from your private PyPi index.
 
 </TabItem>
 </Tabs>
