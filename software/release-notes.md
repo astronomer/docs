@@ -20,6 +20,7 @@ Release date: July 12, 2022
 
 ### Additional improvements
 
+- You can now configure extra sidecar containers and volume mounts for the Houston API and Commander using `astronomer.houston.extraContainers` and `astronomer.commander.extraContainers` in your `config.yaml` file.
 - You can now configure Vector for use with [sidecar logging](export-task-logs.md#export-logs-using-container-sidecars).
 - Resolved several high and critical CVEs.
 - You can now assign System Viewers and System Editors to Teams.
