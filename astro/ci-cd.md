@@ -220,7 +220,7 @@ To complete this setup, you need:
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy --image-name "custom-<astro-runtime-image>"
+            astro deploy
     ```
 
     For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
@@ -261,7 +261,7 @@ To complete this setup, you need:
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy --image-name "custom-<astro-runtime-image>"
+            astro deploy
     ```
 
   :::info
