@@ -23,6 +23,7 @@ Release date: July 18, 2022
 - You can now configure Vector on [logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) to send Airflow task logs to third-party log management systems.
 - Resolved several high and critical CVEs.
 - You can now assign System Viewer and System Editor permissions to a [Team](import-idp-groups.md).
+- You can now assign System Viewer and System Editor permissions to a user from the Software UI.
 
 ### Bug fixes
 
