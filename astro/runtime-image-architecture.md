@@ -40,8 +40,12 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | Astro Runtime | Apache Airflow version |
 | ------------- | ---------------------- |
 | 4.1.x         | 2.2.4                  |
-| 4.2.x         | 2.2.4                  |
-| 5.0.x         | 2.3.0                  |
+| 4.2.x         | 2.2.4-2.2.5            |
+| 5.0.x         | 2.3.0-2.3.3            |
+
+:::info
+Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
+:::
 
 ## Provider packages
 
