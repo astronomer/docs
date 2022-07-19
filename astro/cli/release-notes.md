@@ -15,7 +15,7 @@ Release date: July 12, 2022
 
 ### New `--image-name` flag for easier CI/CD
 
-You can now deploy your Astro project with a customized Runtime image using `astro deploy --image-name <custom-image>`. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [Installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
+You can now deploy your Astro project with a pre-built custom Runtime image in a local Docker registry using `astro deploy --image-name <custom-image>`. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
 
 Using this flag, you can automate deploys of custom Runtime images from a CI/CD pipeline. You can also separate your build and deploy workflows in different pipelines.
 
@@ -25,6 +25,8 @@ The `--image-name` flag is also available for the following local development co
 - `astro dev restart`
 - `astro dev parse`
 - `astro dev pytest`
+
+For more information about this command, see the [CLI command reference](cli/astro-deploy.md).
 
 ### New token login method for Astro
 

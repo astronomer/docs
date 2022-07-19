@@ -40,7 +40,7 @@ astro deploy <options>
 | `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys               | ``                                                     |
 | `-t`,`--test`             | The filepath to an alternative pytest file or directory                                        | Valid filepath within your Astro project               |
 | `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace              | Any valid Workspace ID                                 |
-| `-i`, `--image-name`      | The name of a custom Runtime image to build your project with                                      | A valid name for a Docker image based on Astro Runtime |
+| `-i`, `--image-name`      | The name of a pre-built custom Runtime image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## Examples
 
@@ -51,8 +51,11 @@ $ astro deploy
 # Deploy directly to a specific Deployment
 $ astro deploy ckvvfp9tf509941drl4vela81n
 
-# Running `astro deploy` will now automatically select this Deployment for your Astro project
+# The CLI automatically selects this Deployment for your Astro project
 $ astro deploy ckvvfp9tf509941drl4vela81n --save
+
+# The CLI looks for a Docker image with a matching name in your local Docker registry and builds your project with it
+$ astro deploy --image-name my-custom-runtime-image
 ```
 
 ## Related Commands
