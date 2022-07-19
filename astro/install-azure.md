@@ -125,7 +125,6 @@ The data plane is a collection of Astro infrastructure components that run in yo
     Register-AzResourceProvider -ProviderNamespace Microsoft.compute
     ```
 </TabItem>
-
 </Tabs>
 
 ## Step 3: Provide setup information to Astronomer support
