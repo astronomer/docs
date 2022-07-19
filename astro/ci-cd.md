@@ -169,13 +169,13 @@ This setup assumes the following prerequisites:
 
 <TabItem value="custom">
 
-If your Astro project builds an image with additional build-time arguments, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
 
 #### Prerequisites
 
 To complete this setup, you need:
 
-- An Astro project that builds an image with additional build-time arguments.
+- An Astro project that requires additional build-time arguments to build the Runtime image.
 
 #### Setup
 

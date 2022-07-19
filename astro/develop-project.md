@@ -410,9 +410,9 @@ This example assumes that the name of each of your Python packages is identical 
 
 #### Step 2: Update Dockerfile
 
-1. In your Astro project, replace the contents of `Dockerfile` with the following code. Retain any previous build steps you may have already added so you can add them again later.
+1. Replace the entire contents of `Dockerfile` using the following steps. Retain any previous build steps you may have already added so you can add them again later.
 
-1. In `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
    ```text
    FROM quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
@@ -424,7 +424,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::
 
-3. In `Dockerfile` after the `FROM` line specifying your Runtime image, add the following configuration:
+3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -476,7 +476,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::
 
-3. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
+4. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
 #### Step 3: Build a custom Docker image
 
@@ -494,7 +494,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 3. Optional. Test your DAGs locally. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally).
 
-4. Deploy the image using the Astro CLI: 
+4. Deploy the image using the Astro CLI:
 
     ```sh
     astro deploy --image-name $image_name
@@ -529,9 +529,9 @@ Ensure that the name of the package on the private repository does not clash wit
 
 #### Step 2: Update Dockerfile
 
-1. In your Astro project, replace the contents of `Dockerfile` with the following code. Retain any previous build steps you may have already added so you can add them again later.
+1. Replace the entire contents of `Dockerfile` using the following steps. Retain any previous build steps you may have already added so you can add them again later.
 
-1. In `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
    ```text
    quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
@@ -543,7 +543,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
    :::
 
-3. In `Dockerfile` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
+3. After the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -574,7 +574,7 @@ Ensure that the name of the package on the private repository does not clash wit
     - Add the environment variable `PIP_EXTRA_INDEX_URL` to instruct pip on where to look for non-public packages.
     - Install public and private Python-level packages from your `requirements.txt` file.
 
-4. Add any commands that you had in the original `Dockerfile`. These should be added in stage3 after the line `FROM stage1 AS stage3`.
+4. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
 #### Step 3: Build a custom Docker image
 
@@ -592,7 +592,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
 3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
-4. Deploy the image using the astro-cli <TODO: Link to the astro deploy --image-name doc>.
+4. Deploy the image using the Astro CLI:
 
     ```sh
     astro deploy --image-name $image_name
