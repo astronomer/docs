@@ -83,6 +83,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
     ```sh
     az provider register --namespace Microsoft.Compute
     ```
+
 </TabItem>
 
 <TabItem value="powershell">
@@ -122,6 +123,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
     ```sh
     Register-AzResourceProvider -ProviderNamespace Microsoft.compute 
     ```
+    
 </TabItem>
 </Tabs>
 
