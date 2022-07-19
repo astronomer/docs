@@ -41,12 +41,12 @@ See [Log in to Astro](log-in-to-astro.md).
 The data plane is a collection of Astro infrastructure components that run in your cloud and are managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
 <Tabs
-    defaultValue="azure cloud shell"
+    defaultValue="azure"
     values={[
-        {label: 'Azure Cloud Shell', value: 'azure cloud shell'},
+        {label: 'Azure Cloud Shell', value: 'azure'},
         {label: 'Powershell', value: 'powershell'},
     ]}>
-<TabItem value="azure cloud shell">
+<TabItem value="azure">
 
 1. Run the following command to log in to your Azure account:
 
