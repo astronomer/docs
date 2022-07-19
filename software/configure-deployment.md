@@ -98,44 +98,6 @@ Airflow 2.2 introduces the triggerer, which is a component for running tasks wit
 
 By adjusting the **Triggerer** slider in the Software UI, you can provision up to 2 triggerers on any Deployment running Airflow 2.2+. To take advantage of the Triggerer's high availability, we recommend provisioning 2 triggerers for production Deployments.
 
-Note that this feature must first be enabled by a System Admin before it appears in your Deployments. To enable triggerers, follow the steps in the following section.
-
-#### Enable triggerers
-
-Triggerers are available only in Deployments running Airflow 2.2+. Additionally, the feature must be explicitly enabled on your platform by a user with System Admin permissions. To enable the feature, update your `config.yaml` file with the following values:
-
-```yaml
-astronomer:
-  houston:
-    config:
-      deployments:
-        triggererEnabled: true
-```
-
-If you have overridden  `astronomer.houston.config.deployments.components`, you additionally need to add the following configuration:
-
-```yaml
-astronomer:
-  houston:
-    config:
-      deployments:
-        components:
-          # add this block to the other components you've overridden
-          - name: triggerer
-            au:
-              default: 5
-              limit: 30
-              request: ~
-            extra:
-              - name: replicas
-                default: 0
-                minimum: 0
-                limit: 2
-                minAirflowVersion: "2.2.0"    
-```
-
-After you save these changes, push your `config.yaml` file to your installation as described in [Apply a config change](apply-platform-config.md).
-
 ## Kubernetes executor: Set extra capacity
 
 On Astronomer, resources required for the [KubernetesPodOperator](kubepodoperator.md) or the [Kubernetes Executor](kubernetes-executor.md) are set as **Extra Capacity**.
