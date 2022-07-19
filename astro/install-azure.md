@@ -116,7 +116,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
     ```
 5. Run the following commands to register the `EncryptionAtHost` feature:
 
-    ```sh
+    ```text
     Register-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute while ( (Get-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute).RegistrationState -ne "Registered") {echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes"; sleep 60} echo "Registration Complete"
     ```
 
