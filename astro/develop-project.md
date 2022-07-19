@@ -476,11 +476,11 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::
 
-4. Add any commands that you had in the original `Dockerfile`. These should be added in stage3 after the line `FROM stage1 AS stage3`.
+3. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
 #### Step 3: Build a custom Docker image
 
-1. We can first automatically generate a unique image name using the following command:
+1. Run the following command to automatically generate a unique image name:
 
     ```sh
     image_name=astro-$(date +%Y%m%d%H%M%S)
@@ -492,9 +492,9 @@ This example assumes that the name of each of your Python packages is identical 
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
-3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
+3. Optional. Test your DAGs locally. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally).
 
-4. Deploy the image using the astro-cli <TODO: Link to the astro deploy --image-name doc>.
+4. Deploy the image using the Astro CLI: 
 
     ```sh
     astro deploy --image-name $image_name
@@ -578,7 +578,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
 #### Step 3: Build a custom Docker image
 
-1. We can first automatically generate a unique image name using the following command:
+1. Run the following command to automatically generate a unique image name:
 
     ```sh
     image_name=astro-$(date +%Y%m%d%H%M%S)
