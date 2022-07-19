@@ -23,11 +23,11 @@ astro login
 ## Examples
 
 ```sh
-astro auth login
+astro login
 # The CLI automatically opens the Cloud UI in a web browser
-astro auth login --login-link
+astro login --login-link
 # The CLI provides a link to the Cloud UI that you can manually open in a web browser. You can
-astro auth login --token-login
+astro login --token-login
 # The CLI provides a link to the Cloud UI that you can manually open in a web browser. You then copy a generated token from the UI and enter it in the CLI. For a browserless login, you can open the link and copy the token on a separate machine from the one running the Astro CLI.
 ```
 
