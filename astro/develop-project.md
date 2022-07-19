@@ -410,7 +410,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 #### Step 2: Update Dockerfile
 
-1. Replace the entire contents of `Dockerfile` using the following steps. Retain any previous build steps you may have already added so you can add them again later.
+1. Optional. Copy any build steps you already have in your `Dockerfile` and save them for later.
 
 2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
@@ -529,7 +529,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
 #### Step 2: Update Dockerfile
 
-1. Replace the entire contents of `Dockerfile` using the following steps. Retain any previous build steps you may have already added so you can add them again later.
+1. Optional. Copy any build steps you already have in your `Dockerfile` and save them for later.
 
 2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
