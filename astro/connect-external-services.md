@@ -8,7 +8,7 @@ description: Learn how to connect your Astro data plane to different types of ex
 Before you can run pipelines on Astro with real data, you first need to make your data services accessible to your Data Plane and the Deployments running within it. This guide explains how to securely connect Astro to external data services using the following methods:
 
 - Public Endpoints
-- VPC Peering
+- Virtual Private Cloud (VPC) Peering
 - Workload Identity (_GCP only_)
 
 If you need to connect to a type of data service that requires a connectivity method that is not documented here, reach out to [Astronomer support](https://support.astronomer.io).
@@ -53,6 +53,30 @@ To resolve DNS hostnames from your target VPC, your cluster VPC has **DNS Hostna
 If your target VPC resolves DNS hostnames using **DNS Hostnames** and **DNS Resolution**, you must also enable the **Accepter DNS Resolution** setting. This allows the data plane to resolve the public DNS hostnames of the target VPC to its private IP addresses. To configure this option, see [AWS Documentation](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
 
 If your target VPC resolves DNS hostnames using [private hosted zones](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html), then you must associate your Route53 private hosted zone with the Astronomer VPC using instructions provided in [AWS Documentation](https://aws.amazon.com/premiumsupport/knowledge-center/route53-private-hosted-zone/). You can retrieve the ID of the Astronomer VPC by contacting [Astronomer support](https://support.astronomer.io).
+
+## AWS Transit Gateway
+
+Use AWS Transit Gateways to connect your Astro clusters to your VPCs and on-premises networks.
+
+### Prerequisites
+
+- An Astro cluster
+- A transit gateway in the same region as your Astro cluster
+- Permission to share resources using AWS Resource Access Manager (RAM)
+
+:::info
+
+If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://support.astronomer.io). Astronomer can create a new transit gateway and set up cross-region peering with your existing transit gateway. With this configuration your organization can incur AWS charges for a new transit gateway hosted in the Astro account, as well as inter-region transfer costs.
+:::
+
+### Setup
+
+1. In the Cloud UI, click the **Clusters** tab and copy the **Account ID** for the cluster.
+2. Create a resource share in AWS RAM. See [Creating a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html)  The account ID that you need to share with is the value that you copied in Step 1.
+3. Contact [Astronomer support](https://support.astronomer.io) and provide the destination CIDR block of the VPC or on-premises network that should be routed through the transit gateway. From here, Astronomer approves the resource sharing request and creates a transit gateway peering attachment request to your on-premises network.
+4. Accept the Transit Gateway peering attachment request from your on-premises network. See [Accept or reject a peering attachment request](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-accept-reject).
+5. Create a static route from your CIDR block to the transit gateway. See [Add a route to the transit gateway route table](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route).
+6. Contact [Astronomer support](https://support.astronomer.io) to confirm that you have created the static route. From here, Astronomer updates the routing table of the Astro cluster's VPC to send traffic from your CIDR block through the transit gateway.
 
 ## Workload Identity (_GCP only_)
 

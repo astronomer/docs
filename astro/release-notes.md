@@ -26,9 +26,11 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ### Bug fixes
 
+- When you change **Worker Resources** for a Deployment in the Cloud UI, any errors related to your worker size request are now based on the correct node instance type that your cluster is running.
 - When you select a Workspace and click **Go back** in a browser, the page now reloads as expected.
-- A **Page not found** error message no longer appears when you select a Deployment in the Cloud UI **Usage** page.
+- A **Page not found** error message no longer appears when you select a Deployment in the **Usage** page of the Cloud UI.
 - The **Deployment Analytics** page now displays the correct date.
+- Deprecated versions of Astro Runtime now appear correctly in the Deployment page of the Cloud UI. Previously, versions were appended with `-deprecated`.
 
 ## June 30, 2022
 
