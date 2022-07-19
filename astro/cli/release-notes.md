@@ -42,6 +42,7 @@ You can configure the Astro CLI to automatically skip parsing DAGs before a depl
 ### Additional improvements
 
 - Upgraded the CLI to Go 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
+- The CLI now provisions a triggerer when you create a Deployment using `astro deployment create`.
 
 ### Bug fixes
 
