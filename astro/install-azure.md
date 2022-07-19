@@ -5,6 +5,9 @@ id: install-azure
 description: Get started on Astro by creating your first Astro cluster on Azure.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This is where you'll find instructions for installing Astro on Microsoft Azure.
 
 To complete the installation process, you'll:
@@ -13,7 +16,7 @@ To complete the installation process, you'll:
 - Activate your Astro data plane by registering Azure features and adding the Astronomer Service Principal to your subscription.
 - Share information about your Azure subscription with Astronomer.
 
-When you've completed the installation process, Astronomer will create a cluster within your Azure subscription to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
+When you've completed the installation process, Astronomer support creates a cluster within your Azure subscription to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
 For more information about managing Azure subscriptions with the Azure CLI, see [How to manage Azure subscriptions with the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/manage-azure-subscriptions-azure-cli).
 
@@ -24,8 +27,8 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
 - An Azure user with Owner permissions. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
 - Microsoft Azure Cloud Shell or PowerShell.
 - A minimum quota of 16 standard DDv4 series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
-- A minimum quota of 40 standard DDv5 series vCPUs. TTo adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
-- A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or scheduled maintenance is required.
+- A minimum quota of 40 standard DDv5 series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
+- A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or when scheduled maintenance is planned.
 
 For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure.md).
 
@@ -37,79 +40,120 @@ See [Log in to Astro](log-in-to-astro.md).
 
 The data plane is a collection of Astro infrastructure components that run in your cloud and are managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
-1. Run the following commands in your Microsoft Cloud Shell:
+<Tabs
+    defaultValue="Azure Cloud Shell"
+    values={[
+        {label: 'Azure Cloud Shell', value: 'azure cloud shell'},
+        {label: 'Powershell', value: 'powershell'},
+    ]}>
+<TabItem value="Azure Cloud Shell">
+
+1. Run the following command to log in to your Azure account:
 
     ```sh
-    gcloud services enable storage-component.googleapis.com
-    gcloud services enable storage-api.googleapis.com
-    gcloud services enable compute.googleapis.com
-    gcloud services enable container.googleapis.com
-    gcloud services enable deploymentmanager.googleapis.com
-    gcloud services enable cloudresourcemanager.googleapis.com
-    gcloud services enable cloudkms.googleapis.com
-    gcloud services enable sqladmin.googleapis.com
-    gcloud services enable servicenetworking.googleapis.com
-    gcloud services enable dns.googleapis.com
-    curl \
-    https://storage.googleapis.com/storage/v1/projects/$GOOGLE_CLOUD_PROJECT/serviceAccount \
-    --header "Authorization: Bearer `gcloud auth application-default print-access-token`"   \
-    --header 'Accept: application/json'   --compressed
+    az login
     ```
 
-2. Run the following commands in your Microsoft Cloud Shell:
+2. Run the following command to select your Azure subscription:
 
     ```sh
-    export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
+    az account set -s <subscription-id>
+    ```
+3. Run the following command to create the Astronomer service principal:
+
+    ```sh
+    az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
+    ```
+4. Run the following commands to get details about the Azure subscription and create a new role assignment for the Astronomer service principal:
+
+    ```sh
+    subid=$(az account show --query id --output tsv)
+    ```
+    ```sh
+    az role assignment create --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --role Owner --scope /subscriptions/$subid
+    ```
+5. Run the following commands to register the `EncryptionAtHost` feature:
+
+    ```sh
+    az feature register --namespace "Microsoft.Compute" --name "EncryptionAtHost"
+    while [ $(az feature list --query "[?contains(name, 'Microsoft.Compute/EncryptionAtHost')].{State:properties.state}" -o tsv) != "Registered" ] do
+    echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes" sleep 60 done 
+    echo "Registration Complete"
+    ```
+    ```sh
+    az provider register --namespace Microsoft.Compute
+    ```
+</TabItem>
+<TabItem value="Powershell">
+
+1. Run the following command to log in to your Azure account:
+
+    ```sh
+    Connect-AzAccount
     ```
 
-## Step 3: Provide setup information to Astronomer
+2. Run the following command to select your Azure subscription:
 
-Once you've activated your data plane, provide Astronomer with:
+    ```sh
+    Set-AzContext -SubscriptionId <subscription-id>
+    ```
+3. Run the following command to create the Astronomer service principal:
+
+    ```sh
+    $sp = New-AzADServicePrincipal -AppId a67e6057-7138-4f78-bbaf-fd9db7b8aab0
+    ```
+4. Run the following commands to get details about the Azure subscription and create a new role assignment for the Astronomer service principal:
+
+    ```sh
+    $sp = Get-AzADServicePrincipal -ApplicationId a67e6057-7138-4f78-bbaf-fd9db7b8aab0
+    ```
+    ```sh
+    $subid = (Get-AzContext).Subscription.id
+    ```
+    ```sh
+    $ra = New-AzRoleAssignment -ObjectId $sp.id -RoleDefinitionName Owner -Scope "/subscriptions/$subid"
+    ```
+5. Run the following commands to register the EncryptionAtHost feature:
+
+    ```sh
+    Register-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute 
+    while ( (Get-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute).RegistrationState -ne "Registered") {echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes"; sleep 60} 
+    echo "Registration Complete"
+    ```
+    ```sh
+    Register-AzResourceProvider -ProviderNamespace Microsoft.compute
+    ```
+</TabItem>
+</Tabs>
+
+## Step 3: Provide setup information to Astronomer support
+
+After you've activated your data plane, provide Astronomer support with the following information:
 
 - Your preferred Astro cluster name.
-- The Azure region that you want to host your cluster in.
-- Your preferred node instance type.
-- Your preferred CloudSQL instance type.
-- Your preferred maximum node count.
-- (_Optional_) Your custom CIDR ranges for connecting to Astronomer's services.
+- Your Azure TenantID and SubscriptionID.
+- Optional. Your preferred node instance type. The default is Standard_D4d_v5.
+- Optional. Your preferred Postgres Flexible Server instance type. The default is Standard_D4ds_v4.
+- Optional. Your preferred maximum node count.
+- Optional. Your custom CIDR ranges for Astronomer service connections. The default is 72.20.0.0/19.
 
-If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with default configurations for Astro on Azure. For more information, see [Azure resource reference](resource-reference-gcp.md).
+If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `us-central1` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-gcp.md).
 
-:::info VPC Peering with Astronomer
+## Step 4: Astronomer support creates the cluster
 
-Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
+After you provide Astronomer support with the setup information for your organization, Astronomer support creates your first cluster on Azure.
 
-- VPC Name/ID and region for peering with Astronomer.
-- The IPs of your DNS servers.
-
-You then need to accept a VPC peering request from Astronomer after Astro is installed. To accept the request, follow [Using VPC network peering](https://cloud.google.com/vpc/docs/using-vpc-peering) in the Azure documentation.
-
-Once VPC peered with Astronomer, configure and validate the following to ensure successful network communications between Astro and your resources:
-
-- [Egress routes](https://cloud.google.com/vpc/docs/routes#routing_in) on Astronomer's route table
-- [Network ACLs](https://cloud.google.com/storage/docs/access-control/lists) and/or [Security Group](https://cloud.google.com/identity/docs/how-to/update-group-to-security-group) rules of your resources
-
-:::
-
-## Step 4: Let Astronomer complete the install
-
-Once you've provided Astronomer with the information for your setup, Astronomer finishes creating your first cluster on Azure.
-
-This process can take some time. Wait for confirmation that the installation is successful before proceeding to the next step.
+Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
 
 ## Step 5: Create a Deployment
 
-When Astronomer confirms that your Astro cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option below the **Cluster** menu:
+When Astronomer confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. Log in to [the Cloud UI](log-in-to-astro.md#log-in-to-the-cloud-ui) and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option in the Cloud UI **Cluster** list:
 
 <div class="text--center">
   <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
 </div>
 
 ## Next steps
-
-Now that you have an Astro cluster up and running, take a look at the docs below for information on how to start working in Astro:
 
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/get-started.md)

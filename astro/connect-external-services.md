@@ -9,7 +9,9 @@ Before you can run pipelines on Astro with real data, you first need to make you
 
 - Public Endpoints
 - Virtual Private Cloud (VPC) Peering
+- AWS Transit Gateway
 - Workload Identity (_GCP only_)
+- AWS IAM roles
 
 If you need to connect to a type of data service that requires a connectivity method that is not documented here, reach out to [Astronomer support](https://support.astronomer.io).
 
