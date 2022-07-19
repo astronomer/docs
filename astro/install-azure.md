@@ -115,13 +115,12 @@ The data plane is a collection of Astro infrastructure components that run in yo
     $ra = New-AzRoleAssignment -ObjectId $sp.id -RoleDefinitionName Owner -Scope "/subscriptions/$subid"
     ```
 5. Run the following commands to register the `EncryptionAtHost` feature:
-
-    ```text
+    
+    ```sh
     Register-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute while ( (Get-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute).RegistrationState -ne "Registered") {echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes"; sleep 60} echo "Registration Complete"
     ```
-
     ```sh
-    Register-AzResourceProvider -ProviderNamespace Microsoft.compute
+    Register-AzResourceProvider -ProviderNamespace Microsoft.compute 
     ```
 </TabItem>
 </Tabs>
