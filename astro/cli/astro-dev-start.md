@@ -20,7 +20,7 @@ astro dev start
 | Option              | Description                                                                                                        | Possible Values             |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------|
 | `-e`,`--env` | Path to your environment variable file. Default is `.env` | Valid filepaths |
-| `-i`, `--image-name`      | The name of a pre-built custom Runtime image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## Examples
 

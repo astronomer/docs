@@ -26,7 +26,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
 - Helm.
 - kubectl.
-- Astro CLI version 1.0.3+.
+- Astro CLI version 1.3.0+.
 - A custom container image registry.
 - A process for building and pushing your Astro projects as images to your custom registry.
 

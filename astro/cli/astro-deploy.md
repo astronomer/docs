@@ -33,14 +33,14 @@ astro deploy <options>
 | Option                    | Description                                                                                    | Possible Values                                        |
 | ------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
 | `<deployment-id>`         | Specify the Deployment to deploy to, bypass Deployment selection prompt                        | Any valid Deployment ID                                |
-| `-e`,`--env`              | Location of the file containing environment variables for Pytests. By default, this is `.env`. | Any valid filepath to an `.env` file                   |
+| `-e`,`--env`              | Location of the file containing environment variables for pytests. By default, this is `.env`. | Any valid filepath to an `.env` file                   |
 | `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                       | ``                                                     |
 | `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified                     | ``                                                     |
-| `--pytest`                | Deploy code to Astro only if the specified Pytests are passed                                  | ``                                                     |
+| `--pytest`                | Deploy code to Astro only if the specified pytests are passed                                  | ``                                                     |
 | `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys               | ``                                                     |
 | `-t`,`--test`             | The filepath to an alternative pytest file or directory                                        | Valid filepath within your Astro project               |
 | `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace              | Any valid Workspace ID                                 |
-| `-i`, `--image-name`      | The name of a pre-built custom Runtime image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## Examples
 
