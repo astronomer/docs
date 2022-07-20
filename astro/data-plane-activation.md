@@ -8,7 +8,11 @@ description: Prepare for the activation of your Astro data plane.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Astro is a modern data orchestration platform, powered by Apache Airflow, that enables the entire data team to build, run, and observe data pipelines. The architecture of Astro includes a single-tenant data plane in your cloud and a multi-tenant control plane in Astronomer’s cloud.
+Astro is a modern data orchestration platform, powered by Apache Airflow, that enables your entire data team to build, run, and observe data pipelines. The Astro architecture includes a single-tenant data plane in your cloud and a multi-tenant control plane in the Astronomer cloud. The data plane provides a reliable and seamless connection to all of your data services.
+
+Your data plane is deployed into a clean, dedicated AWS account, GCP project, or Microsoft Azure subscription. Astronomer is responsibile for the operations of this account. See [Shared responsibility model](shared-responsibility-model.md).
+
+By default, the Astronomer account can't access your data services. Astronomer support will work with you to ensure your peering VPC or direct connections are secure.
 
 <div class="text--center">
   <img src="/img/docs/architecture-overview.png" alt="High level overview of Astro's architecture" />
@@ -16,19 +20,9 @@ Astro is a modern data orchestration platform, powered by Apache Airflow, that e
 
 ### What to expect
 
-We’re excited to get you started with Astro! The first step is to **activate your data plane**, which allows you to see our modern data orchestration experience hands-on.
+An assigned Astronomer engineer will work with you to activate your data plane. The activation process typically takes and hour and when it's complete you'll have your first pipeline deployed in your Astro environment. In addition, you'll have hands-on experience with Astronomer data orchestration.
 
-When you meet with one of our engineers to activate your data plane, **expect it to take about an hour**. By the end of the session, you should have your first pipeline deployed in your own Astro environment!
-
-### What to bring and know
-
-Your data plane is deployed into a clean, dedicated AWS account or GCP project. Astronomer takes complete responsibility for the operations of this account as described in our [Shared responsibility model](shared-responsibility-model.md).
-
-This model allows us to get you started quickly, providing cloud-grade reliability and seamless connection to all of your data services. If you decide not to proceed with Astro, this account can be deleted in its entirety.
-
-By default, the Astronomer account has no access to your data services. We’ll guide you through how to make these connections securely, whether through peering VPCs or making direct connections.
-
-### Pre-flight checklist
+### Prerequisites
 
 <Tabs
     defaultValue="aws"
