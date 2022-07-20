@@ -90,7 +90,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 4. Accept the transit gateway peering attachment request from your network. See [Accept or reject a peering attachment request](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-accept-reject).
 5. Create a static route from your CIDR block to the transit gateway. See [Add a route to the transit gateway route table](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route).
 6. Contact [Astronomer support](https://support.astronomer.io) to confirm that you have created the static route. Astronomer support will update the Astro VPC routing table to send traffic from your CIDR block through the transit gateway.
-7. Optional. Complete the steps for each Astro cluster that you want to connect to your transit gateway.
+7. Optional. Repeat the steps for each Astro cluster that you want to connect to your transit gateway.
 
 ## AWS IAM roles
 
@@ -122,7 +122,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
 ```
 7. Click **Update policy**.
 8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
-8. Optional. Complete these steps for each Astro cluster that requires access to external data services on AWS.
+8. Optional. Repeat these steps for each Astro cluster that requires access to external data services on AWS.
 
 ## Workload Identity (_GCP only_)
 
@@ -147,7 +147,7 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
 3. Go to the Google Cloud project in which your external data service is hosted.
 4. Add the Kubernetes service account for your Astro Deployment to the principal of that Google Cloud project. See [Configure applications to use Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
 5. Bind the service account to a role that has access to your external data service.
-6. Optional. Complete these steps for every Astro Deployment that requires access to external data services on GCP.
+6. Optional. Repeat these steps for every Astro Deployment that requires access to external data services on GCP.
 
 :::info
 
