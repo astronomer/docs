@@ -2,7 +2,7 @@
 sidebar_label: 'Data plane activation'
 title: 'Data plane activation'
 id: 'data-plane-activation'
-description: Prepare for the activation of your Astro Data Plane.
+description: Prepare for the activation of your Astro data plane.
 ---
 
 import Tabs from '@theme/Tabs';
