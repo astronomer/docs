@@ -204,12 +204,12 @@ To complete this setup, you need:
         - name: Check out the repo
           uses: actions/checkout@v2
         - name: Create image tag
-          id: image_tage
-          run: echo ::set-output name=image_tage::astro-$(date +%Y%m%d%H%M%S)
+          id: image_tag
+          run: echo ::set-output name=image_tag::astro-$(date +%Y%m%d%H%M%S)
         - name: Build image
           uses: docker/build-push-action@v2
           with:
-            tags: ${{ steps.image_tage.outputs.image_tage }}
+            tags: ${{ steps.image_tag.outputs.image_tag }}
             load: true
             # Define your custom image's build arguments, contexts, and connections here using
             # the available GitHub Action settings:
@@ -221,7 +221,7 @@ To complete this setup, you need:
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy --image-name ${{ steps.image_tage.outputs.image_tage }}
+            astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
     ```
 
     For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
@@ -244,8 +244,8 @@ To complete this setup, you need:
         - name: Check out the repo
           uses: actions/checkout@v2
         - name: Create image tag
-          id: image_tage
-          run: echo ::set-output name=image_tage::astro-$(date +%Y%m%d%H%M%S)
+          id: image_tag
+          run: echo ::set-output name=image_tag::astro-$(date +%Y%m%d%H%M%S)
         - name: Create SSH Socket
           uses: webfactory/ssh-agent@v0.5.4
           with:
@@ -256,14 +256,14 @@ To complete this setup, you need:
         - name: Build image
           uses: docker/build-push-action@v2
           with:
-            tags: ${{ steps.image_tage.outputs.image_tage }}
+            tags: ${{ steps.image_tag.outputs.image_tag }}
             load: true
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy --image-name ${{ steps.image_tage.outputs.image_tage }}
+            astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
     ```
 
   :::info
