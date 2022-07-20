@@ -76,7 +76,7 @@ While it can be more costly, AWS Transit Gateway requires less configuration and
 
 :::info
 
-If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://support.astronomer.io). Astronomer can create a new transit gateway in your AWS account for Astro and set up a cross-region peering connection with your existing transit gateway.
+If your transit gateway is in a different region than your Astro cluster, contact [Astronomer support](https://support.astronomer.io). Astronomer support can create a new transit gateway in your AWS account for Astro and set up a cross-region peering connection with your existing transit gateway.
 
 If Astronomer creates a new transit gateway in your AWS account for Astro, keep in mind that your organization will incur additional AWS charges for the new transit gateway as well as the inter-region transfer costs.
 
@@ -89,7 +89,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 3. Contact [Astronomer support](https://support.astronomer.io) and provide the CIDR block of the target VPC or on-premises network that you want to connect your Astro cluster with. From here, Astronomer approves the resource sharing request and creates a transit gateway peering attachment request to your network.
 4. Accept the transit gateway peering attachment request from your network. See [Accept or reject a peering attachment request](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-accept-reject).
 5. Create a static route from your CIDR block to the transit gateway. See [Add a route to the transit gateway route table](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route).
-6. Contact [Astronomer support](https://support.astronomer.io) to confirm that you have created the static route. From here, Astronomer updates the routing table of the Astro VPC to send traffic from your CIDR block through the transit gateway.
+6. Contact [Astronomer support](https://support.astronomer.io) to confirm that you have created the static route. Astronomer support will update the Astro VPC routing table to send traffic from your CIDR block through the transit gateway.
 
 Complete the steps for each Astro cluster that you want to connect to your transit gateway.
 
@@ -101,7 +101,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
 2. Create an IAM role in the AWS account that contains your AWS service. See [Creating a role to delegate permissions to an AWS service](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-service.html).
 
 3. In the AWS Management Console, go to the Identity and Access Management (IAM) dashboard.
-4. Click **Roles**. In the **Role name** column, select the role you created in step 2.
+4. Click **Roles** and in the **Role name** column, select the role you created in step 2.
 5. Click the **Trust relationships** tab.
 6. Click **Edit trust policy** and update the `arn` value:
 
@@ -132,8 +132,8 @@ Complete these steps for each Astro cluster that requires access to external dat
 
 To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
 
-1. In the Cloud UI, go to your Deployment and copy paste the value under **Namespace**.
-2. Use your Deployment's namespace and the name of your Google Cloud project for Astro to identify the Kubernetes service account for your Deployment.
+1. In the Cloud UI, select a Deployment and then copy the value in the **Namespace** field.
+2. Use the Deployment namespace value and the name of your GCP project to identify the Kubernetes service account for your Deployment.
     
     Kubernetes service accounts for Astro Deployments are formatted as follows:
 
@@ -141,7 +141,7 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
     astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com
     ```
     
-    For a Google Cloud project called `astronomer-prod` and a Deployment namespace defined as `nuclear-science-2730`, for example, the service account for the Deployment would be:
+    For a Google Cloud project named `astronomer-prod` and a Deployment namespace defined as `nuclear-science-2730`, for example, the service account for the Deployment would be:
 
     ```text
     astro-nuclear-science-2730@astronomer-prod.iam.gserviceaccount.com
@@ -156,7 +156,7 @@ Complete these steps for every Astro Deployment that requires access to external
 
 GCP has a 30 character limit for service account names. For Deployment namespaces which are longer than 24 characters, use only the first 24 characters when determining your service account name.
 
-For example, if your GCP project was called `astronomer-prod` and your Deployment namespace was `nuclear-scintillation-2730`, your service account would be:
+For example, if your GCP project is named `astronomer-prod` and your Deployment namespace is `nuclear-scintillation-2730`, the service account name is:
 
 ```text
 astro-nuclear-scintillation-27@astronomer-pmm.iam.gserviceaccount.com
