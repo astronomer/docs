@@ -9,9 +9,9 @@ Before you can run pipelines on Astro with real data, you first need to make you
 
 - Public endpoints
 - Virtual Private Cloud (VPC) peering
-- AWS Transit Gateway
+- Amazon Web Services (AWS) Transit Gateway
 - AWS IAM roles
-- Workload Identity (_GCP only_)
+- Workload Identity (_Google Cloud Platform (GCP) only_)
 
 If you need to connect to a type of data service that requires a connectivity method that is not documented here, reach out to [Astronomer support](https://support.astronomer.io).
 
@@ -41,7 +41,7 @@ Each cluster on Astro runs in a dedicated Virtual Private Network (VPC). To set 
 To create a VPC peering connection between an Astro VPC and a target VPC, reach out to [Astronomer support](https://support.astronomer.io) and provide the following information:
 
 - Astro cluster ID and name
-- AWS Account ID or GCP Project ID of the target VPC
+- AWS Account ID or Google Cloud project ID of the target VPC
 - Region of the target VPC (_AWS only_)
 - VPC ID of the target VPC
 - CIDR of the target VPC
@@ -90,8 +90,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 4. Accept the transit gateway peering attachment request from your network. See [Accept or reject a peering attachment request](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-accept-reject).
 5. Create a static route from your CIDR block to the transit gateway. See [Add a route to the transit gateway route table](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route).
 6. Contact [Astronomer support](https://support.astronomer.io) to confirm that you have created the static route. Astronomer support will update the Astro VPC routing table to send traffic from your CIDR block through the transit gateway.
-
-Complete the steps for each Astro cluster that you want to connect to your transit gateway.
+7. Optional. Complete the steps for each Astro cluster that you want to connect to your transit gateway.
 
 ## AWS IAM roles
 
@@ -123,12 +122,11 @@ To grant an Astro cluster access to a service that is running in an AWS account 
 ```
 7. Click **Update policy**.
 8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
-
-Complete these steps for each Astro cluster that requires access to external data services on AWS.
+8. Optional. Complete these steps for each Astro cluster that requires access to external data services on AWS.
 
 ## Workload Identity (_GCP only_)
 
-[Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) is recommended by Google as the best way for data pipelines running on Google Cloud Platform (GCP) to access Google Cloud services in a secure and manageable way. All Astro clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Kubernetes service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
+[Workload Identity](https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity) is recommended by Google as the best way for data pipelines running on GCP to access Google Cloud services in a secure and manageable way. All Astro clusters on GCP have Workload Identity enabled by default. Each Astro Deployment is associated with a Kubernetes service account that's created by Astronomer and is bound to an identity from your Google Cloud project's fixed workload identity pool.
 
 To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
 
@@ -147,10 +145,9 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
     astro-nuclear-science-2730@astronomer-prod.iam.gserviceaccount.com
     ```
 3. Go to the Google Cloud project in which your external data service is hosted.
-4. Add the Kubernetes service account for your Astro Deployment to the principal of that Google Cloud project. See [GCP documentation](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
+4. Add the Kubernetes service account for your Astro Deployment to the principal of that Google Cloud project. See [Configure applications to use Workload Identity](https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity#authenticating_to).
 5. Bind the service account to a role that has access to your external data service.
-
-Complete these steps for every Astro Deployment that requires access to external data services on GCP.
+6. Optional. Complete these steps for every Astro Deployment that requires access to external data services on GCP.
 
 :::info
 
