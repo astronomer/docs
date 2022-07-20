@@ -28,9 +28,7 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
     - Owner with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
 - Microsoft Azure Cloud Shell or PowerShell.
 - The Azure CLI installed on your computer or Azure Cloud Shell. See [How to install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
-- A minimum quota of 48 "Standard DDv5 Family vCPUs" in the region you will deploy in. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
-- If you intend to use the Dv5 instance type for the worker nodes (instead of the default Ddv5 instance), then you will also need to provide a minimum quota of 48 "Standard Dv5 Family vCPUs"
-- A minimum quota of 40 standard DDv5 series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
+- A minimum quota of 48 Standard Ddv5-series or Dv5-series vCPUs in the deployment region. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
 - A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or when scheduled maintenance is planned.
 
 For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure.md).
