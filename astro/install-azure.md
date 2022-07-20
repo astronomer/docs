@@ -12,9 +12,9 @@ This is where you'll find instructions for installing Astro on Microsoft Azure.
 
 To complete the installation process, you'll:
 
-- Create an account on Astro.
-- Activate your Astro data plane by registering Azure features and adding the Astronomer Service Principal to your subscription.
-- Share information about your Azure subscription with Astronomer.
+- Add the Astronomer Service Principal to your Azure Active Directory (Azure AD) instance.
+- Assign an Owner role to your subscription.
+- Register the Azure features.
 
 When you've completed the installation process, Astronomer support creates a cluster within your Azure subscription to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
@@ -22,10 +22,12 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
 
 ## Prerequisites
 
-- An Azure Subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported.
-- An Azure Active Directory (Azure AD) user with Application Administrator permissions. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
-- An Azure user with Owner permissions. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+- A clean Azure Subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported.
+- An Azure AD user with the following role assignemnets:
+    - Application Administrator. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+    - Owner with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
 - Microsoft Azure Cloud Shell or PowerShell.
+- The Azure CLI installed on your computer or Azure Cloud Shell. See [How to install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
 - A minimum quota of 16 standard DDv4 series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
 - A minimum quota of 40 standard DDv5 series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
 - A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or when scheduled maintenance is planned.
@@ -43,8 +45,8 @@ The data plane is a collection of Astro infrastructure components that run in yo
 <Tabs
     defaultValue="azure"
     values={[
-        {label: 'Azure Cloud Shell', value: 'azure'},
-        {label: 'Powershell', value: 'powershell'},
+        {label: 'Azure CLI', value: 'azure'},
+        {label: 'PowerShell', value: 'powershell'},
     ]}>
 <TabItem value="azure">
 
@@ -59,7 +61,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
     ```sh
     az account set -s <subscription-id>
     ```
-3. Run the following command to create the Astronomer service principal:
+3. Run the following command to add the Astronomer Service Principal to Azure AD:
 
     ```sh
     az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
@@ -76,11 +78,12 @@ The data plane is a collection of Astro infrastructure components that run in yo
 
     ```sh
     az feature register --namespace "Microsoft.Compute" --name "EncryptionAtHost"
-    while [ $(az feature list --query "[?contains(name, 'Microsoft.Compute/EncryptionAtHost')].{State:properties.state}" -o tsv) != "Registered" ] do
-    echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes" sleep 60 done 
+    while [ $(az feature list --query "[?contains(name, 'Microsoft.Compute/EncryptionAtHost')].{State:properties.state}" -o tsv) != "Registered" ]
+    do
+    echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes"
+    sleep 60
+    done
     echo "Registration Complete"
-    ```
-    ```sh
     az provider register --namespace Microsoft.Compute
     ```
 
@@ -118,7 +121,8 @@ The data plane is a collection of Astro infrastructure components that run in yo
 5. Run the following commands to register the `EncryptionAtHost` feature:
     
     ```sh
-    Register-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute while ( (Get-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute).RegistrationState -ne "Registered") {echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes"; sleep 60} echo "Registration Complete"
+    Register-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute
+    while ( (Get-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute).RegistrationState -ne "Registered") {echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes"; sleep 60} echo "Registration Complete"
     ```
     ```sh
     Register-AzResourceProvider -ProviderNamespace Microsoft.compute 
@@ -136,9 +140,9 @@ After you've activated your data plane, provide Astronomer support with the foll
 - Optional. Your preferred node instance type. The default is Standard_D4d_v5.
 - Optional. Your preferred Postgres Flexible Server instance type. The default is Standard_D4ds_v4.
 - Optional. Your preferred maximum node count.
-- Optional. Your custom CIDR ranges for Astronomer service connections. The default is 72.20.0.0/19.
+- Optional. Your custom CIDR ranges for Astronomer service connections. The default is 172.20.0.0/19.
 
-If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `us-central1` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-gcp.md).
+If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `centralus` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-gcp.md).
 
 ## Step 4: Astronomer support creates the cluster
 
