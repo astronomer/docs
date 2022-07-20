@@ -21,7 +21,7 @@ Read the following document for a reference of our default resources as well as 
 | [Workload Identity Pool](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) | Astro uses the fixed Workload Identity Pool for your project. One is created if it does not exist | The default pool (`PROJECT_ID.svc.id.goog`) is used |
 | [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres) | The Cloud SQL instance is the primary database for the Astro data plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster | 1x regional instance with 4 vCPUs, 16GB memory |
 | Google Cloud Storage (GCS) Bucket | GCS bucket to store Airflow task logs | 1 bucket with name `airflow-logs-<clusterid>` |
-| Nodes | Nodes power all system and Airflow components on Astro, including workers and schedulers. | 3x `n2-medium-4` for the system nodes. Worker nodes default to `e2-medium-4` and auto-scale based on workload.  |
+| Nodes | Nodes power all system and Airflow components on Astro, including workers and schedulers. | 3x `n2-medium-4` for the system nodes. Worker nodes default to `e2-medium-4` and auto-scale based on workload, up to the Maximum Node Count.  |
 | Maximum Node Count | The maximum number of nodes that your Astro cluster can support. When this limit is reached, your Astro cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
 
 
