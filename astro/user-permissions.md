@@ -19,7 +19,7 @@ An Organization role grants a user some level of access to an Astro Organization
 | View Organization details and user membership        | ✔️                      | ✔️                             | ✔️                     |
 | View lineage data in the **Lineage** tab             | ✔️                      | ✔️                             | ✔️                     |
 | Update Organization billing information and settings |                         | ✔️                             | ✔️                     |
-| Update Organization user membership                  |                         |                                | ✔️                     |
+| Update roles and permissions of existing Organization users                  |                         |                                | ✔️                     |
 | Invite new user to Organization                      |                         |                                | ✔️                     |
 
 :::info Default Roles in New Organizations
@@ -48,8 +48,8 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Update Deployment configurations        |                      | ✔️                   | ✔️                  |
 | Invite users to Workspace               |                      |                      | ✔️                  |
 | Update user roles and permissions       |                      |                      | ✔️                  |
-| Read Airflow connections and Variables  |                      |                      | ✔️                  |
-| Write Airflow connections and Variables |                      |                      | ✔️                  |
+| View Airflow connections and Variables  |                      |                      | ✔️                  |
+| Update Airflow connections and Variables |                      |                      | ✔️                  |
 
 ### Update Workspace roles
 
