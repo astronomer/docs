@@ -73,7 +73,7 @@ You can only use `astro dev run` in a local Airflow environment. To automate Air
 
 ## Troubleshoot KubernetesPodOperator issues
 
-View the Kubernetes logs to troubleshoot issues with Pods that are created by the operator. See [Test and Troubleshoot the KubernetesPodOperator Locally](kubepodoperator-local.md#step-4-view-kubernetes-logs).
+View local Kubernetes logs to troubleshoot issues with Pods that are created by the operator. See [Test and Troubleshoot the KubernetesPodOperator Locally](kubepodoperator-local.md#step-4-view-kubernetes-logs).
 
 ## Hard reset your local environment
 
