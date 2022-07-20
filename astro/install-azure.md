@@ -22,7 +22,7 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
 
 ## Prerequisites
 
-- A clean Azure subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported. Also, the subsciption must include an Azure management group that doesn't apply Azure policies. See [What are Azure management groups?](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
+- A clean Azure subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported. Also, the subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups?](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
 - An Azure AD user with the following role assignemnets:
     - Application Administrator. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
     - Owner with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
