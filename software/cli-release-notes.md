@@ -9,6 +9,21 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, contact [Astronomer Support](https://support.astronomer.io).
 
+## Astro CLI v1.3.0
+
+Release date: July 19, 2022
+
+### Deploy code to a custom image registry
+
+You can now use the Astro CLI to build and deploy an image to a custom image registry. Based on the Helm configurations in your Kubernetes cluster, the Astro CLI automatically detects your custom image registry and pushes your image to it. It then calls the Houston API to update your Deployment to pull the new image from the registry.
+
+For more information, see [Configure a custom registry for Deployment images](custom-image-registry.md).
+
+### Additional improvements
+
+- Upgraded the CLI to Go version 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
+- The CLI now provisions a triggerer when you create a Deployment using `astro deployment create`.
+
 ## Astro CLI v1.2.0
 
 Release date: June 27, 2022
@@ -30,6 +45,14 @@ To establish a shared framework between products, the syntax of several Software
 You can now use `astro context list` and `astro context switch` to show the Astronomer contexts that you can access and assume. An Astronomer context is a base domain that relates to either Astro or a particular Cluster on Astronomer Software. A domain appears as an available context if you have authenticated to it at least once.
 
 These commands are intended for users who need to work across multiple Astronomer Software clusters or installations. They replace `astro cluster list` and `astro cluster switch`, respectively. For more information, see the [CLI Command Reference](cli-reference.md#astro-context-switch).
+
+## Astro CLI v0.29.1
+
+Release date: July 12, 2022
+
+### Bug fixes
+
+- Fixed an issue where `astro deploy` did not work when using Podman 4.0+
 
 ## Astro CLI v0.29
 

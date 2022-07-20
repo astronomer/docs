@@ -67,75 +67,13 @@ In practice, running `astro dev run` is the equivalent of running `docker exec` 
 
 :::tip
 
-You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Airflow REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `airflow dags trigger` via the Airflow CLI.
+You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Airflow REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `airflow dags trigger` in the Airflow CLI.
 
 :::
 
-## Test the KubernetesPodOperator locally
+## Troubleshoot KubernetesPodOperator issues
 
-Testing DAGs with the [KubernetesPodOperator](kubernetespodoperator.md) locally requires a local Kubernetes environment. Follow the steps in this topic to create a local Kubernetes environment and monitor the status and logs of individual Kubernetes pods running your task.
-
-### Step 1: Start running Kubernetes
-
-To run Kubernetes locally:
-
-1. In Docker Desktop, go to **Settings** > **Kubernetes**.
-2. Check the `Enable Kubernetes` checkbox.
-3. Save your changes and restart Docker.
-
-### Step 2: Get Your Kubernetes configuration
-
-1. Open the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker.
-2. Open the `config` file in this directory.
-3. Under `clusters`, you should see one `cluster` with `server: http://localhost:8080`. Change this to `server: https://kubernetes.docker.internal:6443`. If this doesn't work, try `server: https://host.docker.internal:6445`.
-4. In your Astro project, open your `include` directory and create a new directory called `.kube`. Copy the `config` file that you edited into this directory.
-
-### Step 3: Instantiate the KubernetesPodOperator
-
-To instantiate the KubernetesPodOperator in a given DAG, update your DAG file to include the following code:
-
-```python
-from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow import configuration as conf
-# ...
-
-namespace = conf.get('kubernetes', 'NAMESPACE')
-
-# This will detect the default namespace locally and read the
-# environment namespace when deployed to Astronomer.
-if namespace =='default':
-    config_file = '/usr/local/airflow/include/.kube/config'
-    in_cluster=False
-else:
-    in_cluster=True
-    config_file=None
-
-with dag:
-    k = KubernetesPodOperator(
-        namespace=namespace,
-        image="my-image",
-        labels={"foo": "bar"},
-        name="airflow-test-pod",
-        task_id="task-one",
-        in_cluster=in_cluster, # if set to true, will look in the cluster for configuration. if false, looks for file
-        cluster_context='docker-desktop', # is ignored when in_cluster is set to True
-        config_file=config_file,
-        is_delete_operator_pod=True,
-        get_logs=True)
-```
-
-Specifically, your operator must have `cluster_context='docker-desktop` and `config_file=config_file`.
-
-### Step 4: Run and monitor the KubernetesPodOperator
-
-After updating your DAG, run `astro dev restart` from the Astro CLI to rebuild your image and run your project in a local Airflow environment.
-
-To examine the logs for any pods that were created by the operator, you can use the following [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) commands:
-
-- `kubectl get pods -n $namespace`
-- `kubectl logs {pod_name} -n $namespace`
-
-By default, Docker for Desktop will run pods in a namespace called `default`.
+View local Kubernetes logs to troubleshoot issues with Pods that are created by the operator. See [Test and Troubleshoot the KubernetesPodOperator Locally](kubepodoperator-local.md#step-4-view-kubernetes-logs).
 
 ## Hard reset your local environment
 

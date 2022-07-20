@@ -13,7 +13,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest Astro Runtime Version**: 5.0.6 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.2.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.3.0 ([Release notes](cli/release-notes.md))
 
 ## July 14, 2022
 
@@ -21,7 +21,6 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 - The Cloud UI **Clusters** page now includes the cluster ID value. 
 - Organization Owners and Organization Billing Admins can now update the Organization name in the Cloud UI **Settings** page.
-- The Cloud UI **Lineage** page now generates unique URLs for specific actions so that it's easier to navigate between and share selections.
 - The Cloud UI **Analytics** page can now show data for the last 30 minutes.
 
 ### Bug fixes
