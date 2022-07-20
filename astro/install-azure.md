@@ -22,7 +22,7 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
 
 ## Prerequisites
 
-- A clean Azure Subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported.
+- A clean Azure Subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported. Also, the subsciption must include an Azure management group that doesn't apply Azure policies. See [What are Azure management groups?](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
 - An Azure AD user with the following role assignemnets:
     - Application Administrator. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
     - Owner with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
@@ -38,7 +38,7 @@ For more information about the resources required to run Astro on Azure, see [Az
 
 See [Log in to Astro](log-in-to-astro.md).
 
-## Step 2: Activate the data plane
+## Step 2: Prepare for data plane activation
 
 The data plane is a collection of Astro infrastructure components that run in your cloud and are managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
@@ -133,7 +133,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
 
 ## Step 3: Provide setup information to Astronomer support
 
-After you've activated your data plane, provide Astronomer support with the following information:
+After you've prepared your environment for data plane activation, provide Astronomer support with the following information:
 
 - Your preferred Astro cluster name.
 - Your Azure TenantID and SubscriptionID.
@@ -142,7 +142,7 @@ After you've activated your data plane, provide Astronomer support with the foll
 - Optional. Your preferred maximum node count.
 - Optional. Your custom CIDR ranges for Astronomer service connections. The default is 172.20.0.0/19.
 
-If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `centralus` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-gcp.md).
+If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `centralus` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-azure.md).
 
 ## Step 4: Astronomer support creates the cluster
 
