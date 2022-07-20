@@ -1,10 +1,11 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
-
+const versions = require('./software_versions.json')
 module.exports = {
   title: 'Astronomer Documentation',
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
-  url: 'https://docs.astronomer.io/',
+  url: 'https://docs.astronomer.io',
   baseUrl: '/',
+  trailingSlash: false,
   noIndex: false,
   onBrokenLinks: 'error',
   onBrokenMarkdownLinks: 'error',
@@ -13,7 +14,11 @@ module.exports = {
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
     image: 'img/meta.png',
-    autoCollapseSidebarCategories: true,
+    docs: {
+      sidebar: {
+        autoCollapseCategories: true,
+      },
+    },
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
       indexName: 'published-docs',
@@ -22,8 +27,7 @@ module.exports = {
 
       // Optional: see doc section below
       appId: 'TTRQ0VJY4D',
-      inputSelector: '.DocSearch',
-      // Optional: Algolia search parameters
+      inputSelector: '.DocSearch',      // Optional: Algolia search parameters
       searchParameters: {
       },
 
@@ -42,41 +46,46 @@ module.exports = {
       },
       items: [
         {
-          to: 'astro',
+          type: 'dropdown',
+          to: '/astro/',
           label: 'Astro',
           position: 'left',
+          activeClassName: 'navbar__link--active',
+          items: [
+            {
+              label: 'Cloud',
+              to: '/astro/',
+              activeBaseRegex: 'astro(?!\/cli)',
+            },
+            {
+              label: 'Astro CLI',
+              to: 'astro/cli/overview',
+              activeBaseRegex: 'astro/cli+',
+            },
+          ],
         },
         {
           type: 'dropdown',
           label: 'Software',
-          to: 'software/overview',
+          to: 'software/',
           activeBaseRegex: 'software',
           position: 'left',
           activeClassName: 'navbar__link--active',
           items: [
             {
-              label: '0.28 (Latest)',
-              to: '/software/overview',
+              label: '0.29 (Latest)',
+              to: '/software/',
+              activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
             },
             {
-              label: '0.27',
-              to: '/software/0.27/overview',
-            },
-            {
-              label: '0.26',
-              to: '/software/0.26/overview',
+              label: '0.28',
+              to: '/software/0.28/overview',
+              activeBaseRegex: '(software\/0.28)+',
             },
             {
               label: '0.25',
-              to: '/software/0.25/overview'
-            },
-            {
-              label: '0.23',
-              to: '/software/0.23/overview'
-            },
-            {
-              label: '0.16 (Deprecated)',
-              to: '/software/0.16/overview'
+              to: '/software/0.25/overview',
+              activeBaseRegex: '(software\/0.25)+',
             },
           ],
         },
@@ -92,19 +101,23 @@ module.exports = {
               href: 'https://cloud.astronomer.io/login',
             },
             {
-              label: 'Install Astro',
+              label: 'Install on AWS',
               to: 'astro/install-aws',
             },
             {
-              label: 'Install the CLI',
-              to: 'astro/install-cli',
+              label: 'Install on GCP',
+              to: 'astro/install-gcp',
             },
             {
-              label: 'Create a Project',
+              label: 'Install the CLI',
+              to: 'astro/cli/get-started',
+            },
+            {
+              label: 'Create a project',
               to: 'astro/create-project',
             },
             {
-              label: 'Deploy Code',
+              label: 'Deploy code',
               to: 'astro/deploy-code',
             },
           ],
@@ -114,7 +127,7 @@ module.exports = {
           items: [
             {
               label: 'Overview',
-              to: 'software/overview',
+              to: 'software/',
             },
             {
               label: 'Install on AWS',
@@ -140,6 +153,15 @@ module.exports = {
             {
               label: 'Astronomer Registry',
               to: 'https://registry.astronomer.io/',
+            },
+            {
+              label: 'Privacy Policy',
+              to: 'https://www.astronomer.io/privacy/',
+            },
+            {
+              label: 'Cookie Preferences',
+              to: '#',
+              id: 'cookiePref',
             },
           ],
         },
@@ -175,23 +197,15 @@ module.exports = {
           editLocalizedFiles: true,
           routeBasePath: 'astro',
           path: 'astro',
-          admonitions: {
-          },
         },
-        gtag: {
-          trackingID: 'G-DKTB1B78FV',
-          anonymizeIP: true,
-        },
-        googleAnalytics: {
-          trackingID: 'UA-54102728-4',
-          anonymizeIP: true,
+        sitemap: {
+        id: 'default',
+        changefreq: 'daily',
+        ignorePatterns: ['/software/0.28/**','/software/0.27/**','/software/0.26/**','/software/0.25/**','/software/0.23/**','/software/0.16/**'],
+        filename: 'sitemap.xml',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        },
-        sitemap: {
-          changefreq: 'hourly',
-          priority: 0.5,
         },
       },
     ],
@@ -209,13 +223,40 @@ module.exports = {
         path: 'software',
         lastVersion: 'current',
         versions: {
-        current: {
-          label: '0.28',
-          path: '',
-          banner: 'none',
-         },
-       },
+          current: {
+            label: '0.29',
+            path: '',
+            banner: 'none',
+          },
+        },
       },
     ],
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+       id: 'software',
+       changefreq: 'daily',
+       ignorePatterns: ['/software/0.28/**','/software/0.27/**','/software/0.26/**','/software/0.25/**','/software/0.23/**','/software/0.16/**'],
+       filename: 'sitemap.xml',
+      },
+    ]
+  ],
+  scripts: [
+    {
+      src: './scripts/segment.js',
+      defer: true,
+    },
+    {
+      src: './scripts/consent-manager.js',
+      defer: true,
+    },
+    {
+      src: './scripts/consent-manager-config.js',
+    },
+    {
+      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
+      "data-domain": 'docs.astronomer.io',
+      defer: true,
+    }
   ],
 };

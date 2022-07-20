@@ -39,13 +39,13 @@ The Astronomer CLI installation process requires [Docker](https://www.docker.com
 If you have Homebrew installed, run:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 To install a specific version of the Astronomer CLI, you'll have to specify `@major.minor.patch`. To install v0.23.0, for example, run:
 
 ```sh
-brew install astronomer/tap/astro@0.23.0
+brew install astro@0.23.0
 ```
 
 ### Install with cURL
@@ -89,7 +89,7 @@ To install the Astronomer CLI on a machine with an [Apple M1 chip](https://www.a
 3. Run the following command to install the Astronomer CLI:
 
     ```sh
-    arch -x86_64 /usr/local/Homebrew/bin/brew install astronomer/tap/astro
+    arch -x86_64 /usr/local/Homebrew/bin/brew install astro
     ```
 
 If you still have issues during installation, ensure that [Rosetta 2](https://support.apple.com/en-us/HT211861) is installed on your machine and try again.
@@ -192,7 +192,7 @@ You can now push your project to a local instance of Airflow. To do so:
 
 3. Access the Airflow UI for your local Airflow project. To do so, go to http://localhost:8080/ and log in with `admin` for both your Username and Password.
 
-   You should also be able to access your Postgres Database at: `localhost:5432/postgres`. For guidelines on accessing your Postgres database both locally and on Astronomer, refer to the [Access Airflow Database](access-airflow-database/) guide.
+   You should also be able to access your Postgres Database at: `localhost:5432/postgres`. For guidelines on accessing your Postgres database both locally and on Astronomer, refer to the [Access Airflow Database](access-airflow-database.md) guide.
 
    > **Note**: Running `$ astro dev start` will start your project with the Airflow Webserver exposed at port 8080 and Postgres exposed at port 5432.
    >
@@ -249,7 +249,7 @@ Then, restart the Docker containers by running:
 astro dev start
 ```
 
-> **Note:** As you develop locally, it may be necessary to reset your Docker containers and metadata DB for testing purposes. To do so, run [`astro dev kill`](cli-reference.md#astro-dev-kill) instead of [`astro dev stop`](cli-reference.md#astro-dev-stop) when rebuilding your image. This will delete all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.
+> **Note:** As you develop locally, it may be necessary to reset your Docker containers and metadata DB for testing purposes. To do so, run [`astro dev kill`](cli-reference.md#astro-dev-kill) instead of [`astro dev stop`](cli-reference.md#astro-dev-stop) when rebuilding your image. This deletes all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.
 
 ## Astronomer CLI and Platform Versioning
 

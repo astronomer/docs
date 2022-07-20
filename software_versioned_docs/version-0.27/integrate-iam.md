@@ -23,8 +23,9 @@ A few clarifying notes:
 
 * [The Astronomer CLI](cli-quickstart.md)
 * Admin access on an Astronomer Workspace
-* Direct access to your Kubernetes Cluster (e.g. permission to run `$ kubectl describe po`)
-* A compatible version of Kubernetes as described in Astronomer's [Version Compatibility Reference](version-compatibility-reference.md)
+* Direct access to your Kubernetes Cluster with permission to run `$ kubectl describe po`
+* A compatible version of Kubernetes. See [Version Compatibility Reference](version-compatibility-reference.md)
+* Astronomer Software version 0.27.1 or later
 
 ## AWS
 
@@ -108,7 +109,7 @@ For additional information, refer to [Enable IAM Roles for service accounts](htt
 
 5. Review and create your policy.
 
-### Step 2: Create an IAM role
+### Step 3: Create an IAM role
 
 1. Open the IAM console at https://console.aws.amazon.com/iam/.
 2. In the navigation panel, go to **Roles** > **Create Role**.
@@ -119,7 +120,7 @@ For additional information, refer to [Enable IAM Roles for service accounts](htt
 
 For additional information, refer to [Create service account IAM Policy and Role](https://docs.aws.amazon.com/eks/latest/userguide/create-service-account-iam-policy-and-role.html).
 
-### Step 3: Create a trust relationship
+### Step 4: Create a trust relationship
 
 To create a trust relationship between your IAM role and OIDC identity provider:
 
@@ -186,7 +187,7 @@ To create a trust relationship between your IAM role and OIDC identity provider:
 
 For additional information, refer to [IAM Role Configuration](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts-technical-overview.html#iam-role-configuration).
 
-### Step 4: Integrate your IAM role with Astronomer
+### Step 5: Integrate your IAM role with Astronomer
 
 In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll need to explicitly pass an annotation key to the platform. To do so:
 
@@ -215,7 +216,7 @@ In order to apply your IAM role to any Airflow Deployment on Astronomer, you'll 
 
 2. Push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
 
-### Step 5: Create or update an Airflow Deployment with an attached IAM role
+### Step 6: Create or update an Airflow Deployment with an attached IAM role
 
 1. To create a new Airflow Deployment with your IAM role attached, run the following Astronomer CLI command:
 
@@ -315,7 +316,7 @@ astronomer:
     <gsa-name>@<project-id>.iam.gserviceaccount.com
     ```
 
-### Step 4: Confirm Workload Identity is working
+### Step 5: Confirm Workload Identity is working
 
 1. Create an interactive session by running the following command:
 

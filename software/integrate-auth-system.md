@@ -1,11 +1,9 @@
 ---
-sidebar_label: 'Integrate an Auth System'
-title: 'Integrate an Auth System on Astronomer Software'
+sidebar_label: 'Integrate an auth system'
+title: 'Integrate an auth system on Astronomer Software'
 id: integrate-auth-system
 description: Integrate your internal authentication server with Astronomer Software.
 ---
-
-## Overview
 
 Astronomer Software by default allows users to create an account with and authenticate using one of the 3 methods below:
 
@@ -27,7 +25,7 @@ The following setups assume that you are using Astronomer's default [implicit fl
 
 :::
 
-## Local Auth
+## Local auth
 
 To let users authenticate to Astronomer with a local username and password", follow the steps below."
 
@@ -41,9 +39,9 @@ astronomer:
           enabled: true
 ```
 
-2. Push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+2. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
-## General OIDC Configuration
+## General OIDC configuration
 
 If you'd like to integrate an OIDC provider with Astronomer Software, you can enable that configuration in the `config.yaml` file of your `astronomer` directory.
 
@@ -104,11 +102,11 @@ astronomer:
 
 Your Cognito pool ID can be found in the `General settings` tab of the Cognito portal. Your client ID is found in the `App clients` tab.
 
-Once you've saved your `config.yaml` file with these values, push it to your platform as described in [Apply a Config Change](apply-platform-config.md).
+Once you've saved your `config.yaml` file with these values, push it to your platform as described in [Apply a config change](apply-platform-config.md).
 
 ## Azure AD
 
-### Register the Application via `App Registrations` on Azure
+### Register the Application using `App Registrations` on Azure
 
 To start, register the application. As you do so, make sure to specify the Redirect URI as `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
 
@@ -146,7 +144,7 @@ astronomer:
         github:
           enabled: false
 ```
-Then, push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
 ## Okta
 
@@ -154,7 +152,7 @@ To integrate Okta with Astronomer, you'll need to make configuration changes bot
 
 Follow the steps below.
 
-### Okta Configuration
+### Okta configuration
 
 1. If you haven't already, create an [Okta account](https://www.okta.com/).
 
@@ -184,7 +182,7 @@ astronomer:
             discoveryUrl: "https://<okta-base-domain>/.well-known/openid-configuration"
 ```
 
-Then, push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
 >> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
 
@@ -192,23 +190,23 @@ Then, push the configuration change to your platform as described in [Apply a Pl
 
 ### Auth0 Configuration
 
-#### Create an Auth0 Account
+#### Create an Auth0 account
 
 You'll need an Auth0 account in order to set up connections with the identity management provider of your choice. [Sign up for an Auth0 account](https://auth0.com/signup) if you need to.
 
-#### Create Auth0 Tenant Domain
+#### Create Auth0 tenant domain
 
-When you log into Auht0 you'll be prompted to create a tenant domain. You can use the default or your own unique `tenant-name`. Your full tenant domain will look something like `astronomer.auth0.com`.
+When you log into Auth0 you'll be prompted to create a tenant domain. You can use the default or your own unique `tenant-name`. Your full tenant domain will look something like `astronomer.auth0.com`.
 
 > **Note:** Your full tenant domain may differ if you've created it outside of the United States.
 
-#### Create a Connection between Auth0 and your Identity Management Provider
+#### Create a connection between Auth0 and your identity management provider
 
 Depending on the Identity Management Provider you'd like to use, the steps required to establish a connection will vary.
 
 For instructions, navigate to Auth0's [connection guides](https://auth0.com/docs/identityproviders) and select the identity provider of your choice. Once your connection is established, read below.
 
-#### Configure Auth0 Application Settings
+#### Configure Auth0 application settings
 
 **Enable / disable desired connections:**
 
@@ -248,11 +246,11 @@ astronomer:
             clientId: "<default-app-client-id>"
             discoveryUrl: https://<tenant-name>.auth0.com
 ```
-Then, push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
 > **Note:** You can find your `clientID` value at `https://manage.auth0.com/dashboard/us/<tenant-name>/applications` listed next to 'Default App'.
 
-## Running behind an HTTPS Proxy
+## Running behind an HTTPS proxy
 
 ### Overview
 
@@ -260,7 +258,7 @@ Integrating an external identity provider with Astronomer requires that the plat
 
 If your install is configured _without_ a direct connection to the internet you will need to configure an HTTPS proxy server for Houston.
 
-### Configure an HTTPS Proxy Server for Houston
+### Configure an HTTPS proxy server for Houston
 
 To configure the proxy server used we need to set the `GLOBAL_AGENT_HTTPS_PROXY` Environment Variable for the Houston deployment.
 
@@ -281,9 +279,9 @@ astronomer:
         value: http://my-proxy:3129
 ```
 
-Then, push the configuration change to your platform as described in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md).
+Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
-## Configure a Custom OAuth Flow
+## Configure a custom OAuth flow
 
 Starting with Astronomer v0.27, you can set up a custom OAuth authorization flow as an alternative to Astronomer's default [implicit flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.2). You can customize Astronomer's existing Okta, Google, and GitHub OAuth flows or import an entirely custom OAuth flow.
 
@@ -291,7 +289,7 @@ Starting with Astronomer v0.27, you can set up a custom OAuth authorization flow
 This setup must be completed only during a scheduled maintenance window. There should be no active users on your installation until the setup has been finalized.
 :::
 
-### Step 1: Configure Your Authorization Flow on Astronomer
+### Step 1: Configure your authorization flow on Astronomer
 
 To use a custom Oauth authorization code flow:
 
@@ -318,16 +316,16 @@ To use a custom Oauth authorization code flow:
     For example, a custom configuration of Okta might look like the following.
 
     ```yaml
-    okta:
+        okta:
           enabled: true
           clientId: ffhsdf78f734h2fsd
           clientSecret: FSDFSLDFJELLGJLSDFGJL42353425
-          discoveryUrl: "https://<MYIDP>.okta.com/.well-known/openid-configuration"
+          discoveryUrl: "https://<MYIdP>.okta.com/.well-known/openid-configuration"
           authUrlParams:
             audience: "GYHWEYHTHR443fFEW"
     ```
 
-    3. Push your configuration changes to your platform as described in [Apply a Config Change](apply-platform-config.md).
+    3. Push your configuration changes to your platform as described in [Apply a config change](apply-platform-config.md).
 
 :::info
 
@@ -346,14 +344,14 @@ AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME="Custom OAuth" # Only used for custom
 ```
 :::
 
-### Step 2: Configure your Identity Provider
+### Step 2: Configure your identity provider
 
 To finalize your configuration, configure the following key values in your identity provider's settings:
 
 - **Grant Code:** Set to "Code" or "Auth Code" depending on your identity provider.
 - **Sign-in Redirect URI:** Set to `[https://houston.<BASE_DOMAIN>:8871/v1/oauth/callback/](https://houston.<BASE_DOMAIN>:8871/v1/oauth/callback/)`. Be sure to include the trailing `/`.
 
-### Step 3: Confirm Your Installation
+### Step 3: Confirm your installation
 
 When you complete this setup, you should be able to see the differences in login flow when logging in at `<BASE_DOMAIN>.astronomer.io`.
 
@@ -361,4 +359,4 @@ If you configured a fully custom OAuth flow, you should see a new **Log in with 
 
 ![Custom login button on the Astronomer login screen](/img/docs/custom-oauth.png)
 
-You will also see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME` when authenticating via the Astronomer CLI.
+You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME` when authenticating using the Astro CLI.

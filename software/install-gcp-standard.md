@@ -13,7 +13,7 @@ To install Astronomer on GCP, you'll need access to the following tools and perm
 
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [Google Cloud SDK](https://cloud.google.com/sdk/install)
-* A compatible version of Kubernetes as described in Astronomer's [Version Compatibility Reference](version-compatibility-reference.md)
+* A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
 * An SMTP Service & Credentials (e.g. Mailgun, Sendgrid, etc.)
@@ -21,7 +21,7 @@ To install Astronomer on GCP, you'll need access to the following tools and perm
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
 
 
-## Step 1: Choose a Base Domain
+## Step 1: Choose a base domain
 
 All Astronomer services will be tied to a base domain of your choice, under which you will need the ability to add and edit DNS records.
 
@@ -40,7 +40,7 @@ For the full list of subdomains, see Step 4.
 
 > Note: You can view Google Cloud Platform's Web Console at https://console.cloud.google.com/
 
-### Create a GCP Project
+### Create a GCP project
 
 Login to your Google account with the `gcloud` CLI:
 ```
@@ -73,7 +73,7 @@ gcloud compute zones list
 gcloud config set compute/zone [COMPUTE_ZONE]
 ```
 
-### Create a GKE Cluster
+### Create a GKE cluster
 
 Now that you have a GCP project to work with, the next step is to create a GKE (Google Kubernetes Engine) cluster that the Astronomer platform can be deployed into. Learn more about GKE [here](https://cloud.google.com/kubernetes-engine/).
 
@@ -89,7 +89,7 @@ gcloud container clusters create [CLUSTER_NAME] --zone [COMPUTE_ZONE] --cluster-
 
 A few important notes:
 
-- Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, refer to Astronomer's [Version Compatibility Reference](version-compatibility-reference.md).
+- Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, refer to Astronomer's [Version compatibility reference](version-compatibility-reference.md).
 - We recommend using the [`n1-standard-8` machine type](https://cloud.google.com/compute/docs/machine-types#n1_standard_machine_types) with a minimum of 3 nodes (24 CPUs) as a starting point.
 - The Astronomer platform and all components within it will consume ~11 CPUs and ~40GB of memory as the default overhead, so we generally recommend using larger vs smaller nodes.
 - For more detailed instructions and a full list of optional flags, refer to GKE's ["Creating a Cluster"](https://cloud.google.com/kubernetes-engine/docs/how-to/creating-a-cluster).
@@ -97,11 +97,11 @@ A few important notes:
 If you work with multiple Kubernetes environments, `kubectx` is an incredibly useful tool for quickly switching between Kubernetes clusters. Learn more [here](https://github.com/ahmetb/kubectx).
 
 
-## Step 3: Configure Helm with Your GKE Cluster
+## Step 3: Configure Helm with your GKE cluster
 
 Helm is a package manager for Kubernetes. It allows you to easily deploy complex Kubernetes applications. You'll use helm to install and manage the Astronomer platform. Learn more about helm [here](https://helm.sh/).
 
-### Create a Kubernetes Namespace
+### Create a Kubernetes namespace
 
 Create a [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) called `astronomer` to host the core Astronomer platform:
 
@@ -158,21 +158,21 @@ This command will generate a report. If the `X509v3 Subject Alternative Name` se
 
 Depending on your organization, you may receive either a globally trusted certificate or a certificate from a private CA. The certificate from your private CA may include a domain certificate, a root certificate, and/or intermediate certificates, all of which need to be in proper certificate order. To verify certificate order, follow the guidelines below.
 
-#### Verify certificate order (private CA only)
+#### Confirm certificate chain order
 
-To confirm that your certificate has the proper certificate order, first run the following command using the `openssl` CLI:
+If your organization is using a private certificate authority, you'll need to confirm that your certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
 
 ```sh
 openssl crl2pkcs7 -nocrl -certfile <your-certificate-filepath> | openssl pkcs7 -print_certs -noout
 ```
 
-This command will generate a report of all certificates included. Verify that the order of these certificates is as follows:
+The command generates a report of all certificates. Verify the order of the certificates is as follows:
 
-1. Domain
-2. Intermediate (optional)
-3. Root
+- Domain
+- Intermediate (optional)
+- Root
 
-If the order of all certificates is correct, proceed to the next step.
+If the certificate order is correct, proceed to step 5.
 
 ## Step 5: Create a Kubernetes TLS Secret
 
@@ -197,7 +197,7 @@ If you received a certificate from a private CA, follow these steps instead:
 
 2. Note the value of `private-root-ca` for when you configure your Helm chart in Step 8. You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
 
-## Step 6: Configure Your SMTP URI
+## Step 6: Configure your SMTP URI
 
 An SMTP service is required for sending and accepting email invites from Astronomer. If you're running Astronomer Software with `publicSignups` disabled (which is the default), you'll need to configure SMTP as a way for your users to receive and accept invites to the platform via email. To integrate your SMTP service with Astronomer, fetch your SMTP service's URI and store it in a Kubernetes secret:
 
@@ -225,9 +225,9 @@ If your SMTP provider is not listed, refer to the provider's documentation for i
 
 > **Note:** If there are `/` or other escape characters in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
 
-## Step 7: Configure the Database
+## Step 7: Configure the database
 
-Astronomer by default requires a central Postgres database that will act as the backend for Astronomer's Houston API and will host individual Metadata Databases for all Airflow Deployments spun up on the platform.
+Astronomer by default requires a central Postgres database that will act as the backend for Astronomer's Houston API and will host individual metadata databases for all Airflow Deployments spun up on the platform.
 
 While you're free to configure any database, most GCP users on Astronomer run [Google Cloud SQL](https://cloud.google.com/sql/). For production environments, we _strongly_ recommend a managed Postgres solution.
 
@@ -247,7 +247,7 @@ kubectl create secret generic astronomer-bootstrap \
 
 > **Note:** You must URL encode any special characters in your Postgres password.
 
-## Step 8: Configure Your Helm Chart
+## Step 8: Configure your Helm chart
 
 > **Note:** If you want to use a third-party ingress controller for Astronomer, complete the setup steps in [Third-Party Ingress Controllers](third-party-ingress-controllers.md) in addition to this configuration.
 
@@ -367,14 +367,14 @@ helm repo update
 This will ensure that you pull the latest from our Helm repository. Finally, run:
 
 ```sh
-helm install -f config.yaml --version=0.28 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
+helm install -f config.yaml --version=0.29 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
 ```
 
-This command will install the latest available patch version of Astronomer Software v0.28. To override latest and specify a patch, add it to the `--version=` flag in the format of `0.28.x`. To install Astronomer Software v0.28.0, for example, specify `--version=0.28.0`. For information on all available patch versions, refer to [Software Release Notes](release-notes.md).
+This command will install the latest available patch version of Astronomer Software v0.29. To override latest and specify a patch, add it to the `--version=` flag in the format of `0.29.x`. To install Astronomer Software v0.29.0, for example, specify `--version=0.29.0`. For information on all available patch versions, refer to [Software Release Notes](release-notes.md).
 
 Once you run the commands above, a set of Kubernetes pods will be generated in your namespace. These pods power the individual services required to run our platform, including the Software UI and Houston API.
 
-## Step 10: Verify That All Pods Are Up
+## Step 10: Verify that all Pods are up
 
 To verify all pods are up and running, run:
 
@@ -466,13 +466,13 @@ alertmanager.astro.mydomain.com
 prometheus.astro.mydomain.com
 ```
 
-## Step 12: Verify You Can Access the Software UI
+## Step 12: Verify that you can access the Software UI
 
 Go to `app.BASEDOMAIN` to see the Software UI.
 
 Consider this your new Airflow control plane. From the Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
 
-## Step 13: Verify Your TLS Setup
+## Step 13: Verify your TLS setup
 
 To check if your TLS certificates were accepted, log in to the Software UI. Then, go to `app.BASEDOMAIN/token` and run:
 
@@ -486,7 +486,7 @@ Verify that this output matches with that of the following command, which doesn'
 curl -v -k -X POST https://houston.BASEDOMAIN/v1 -H "Authorization: Bearer <token>"
 ```
 
-Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astronomer CLI:
+Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astro CLI:
 
 ```sh
 astro auth login <your-astronomer-base-domain>
@@ -510,9 +510,9 @@ $ astro deploy -f
 
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.
 
-If you have Airflow pods in the state "ImagePullBackoff", check the pod description. If you see an x509 error, ensure that you added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. If you missed these during installation, follow the steps in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md) to add them after installation.
+If you have Airflow pods in the state "ImagePullBackoff", check the pod description. If you see an x509 error, ensure that you added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. If you missed these during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation.
 
-## What's Next
+## What's next
 
 To help you make the most of Astronomer Software, check out the following additional resources:
 
@@ -521,7 +521,7 @@ To help you make the most of Astronomer Software, check out the following additi
 * [Configuring Platform Resources](configure-platform-resources.md)
 * [Managing Users on Astronomer Software](manage-platform-users.md)
 
-### Astronomer Support Team
+### Astronomer support team
 
 If you have any feedback or need help during this process and aren't in touch with our team already, a few resources to keep in mind:
 

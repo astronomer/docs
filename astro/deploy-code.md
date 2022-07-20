@@ -1,13 +1,11 @@
 ---
-sidebar_label: 'Deploy Code'
-title: 'Deploy Code to Astro'
+sidebar_label: 'Deploy code'
+title: 'Deploy code to Astro'
 id: deploy-code
 description: Deploy Airflow DAGs to Astro.
 ---
 
 import {siteVariables} from '@site/src/versions';
-
-## Overview
 
 This guide explains how to push Astro project code to a Deployment via the Astro CLI. This workflow is the foundation for managing changes to your deployed Astro projects. It also serves as the foundation for any [CI/CD](ci-cd.md) pipeline-based deployment model.
 
@@ -15,8 +13,8 @@ This guide explains how to push Astro project code to a Deployment via the Astro
 
 To deploy DAGs to Astro, you must have:
 
-- The [Astro CLI](install-cli.md) installed in an empty directory.
-- An Astro Workspace with at least one [Deployment](configure-deployment.md).
+- The [Astro CLI](cli/get-started.md) installed in an empty directory.
+- An Astro Workspace with at least one [Deployment](create-deployment.md).
 - An [Astro project](create-project.md).
 - [Docker](https://www.docker.com/products/docker-desktop).
 
@@ -25,7 +23,7 @@ To deploy DAGs to Astro, you must have:
 Once you've tested your DAGs locally, you're ready to push them to Astro. To start, authenticate via the Astro CLI by running:
 
 ```
-astrocloud auth login
+astro login
 ```
 
 After running this command, you will be prompted to open your web browser and log in via the Cloud UI. Once you complete this login, you will be automatically authenticated to the CLI.
@@ -41,41 +39,41 @@ If you have [Deployment API key](api-keys.md) credentials set as OS-level enviro
 To deploy your DAGs, run:
 
 ```
-astrocloud deploy
+astro deploy
 ```
 
 This command returns a list of Deployments available in your Workspace and prompts you to pick one.
 
-After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astrocloud dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro will also fail.
+After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro will also fail.
 
 If your code passes the parse, the CLI builds your Astro project directory into a new Docker image pushes this image to Astro.
 
 :::tip
 
-To force a deploy even if your project has DAG errors, you can run `astrocloud deploy --force`.
+To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 :::
 
 :::tip
 
-To validate your code before deploying it to Astro, you can run `astrocloud deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [Pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy will also fail. This can help you prevent your team from deploying DAGs to Astro that aren't production-grade.
+To validate your code before deploying it to Astro, you can run `astro deploy --pytest`. Adding the `--pytest` flag makes the CLI run all tests in your project's `tests` directory using [Pytest](https://docs.pytest.org/en/7.0.x/contents.html). If any of these tests fail, your code deploy will also fail. This can help you prevent your team from deploying DAGs to Astro that aren't production-grade.
 
-For more information about using Pytest, see [Test and Troubleshoot](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
+For more information about using Pytest, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#test-dags-locally-with-pytest).
 
 :::
 
-## Step 3: Validate Your Changes
+## Step 3: Validate your changes
 
 If it's your first time deploying, expect to wait a few minutes for the Docker image to build. To confirm that your deploy was successful, open your Deployment in the Cloud UI and click **Open Airflow** to access the Airflow UI.
 
 Once you log in, you should see the DAGs you just deployed.
 
-## What Happens During a Code Deploy
+## What happens during a code deploy
 
-When you deploy code to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, DAGs, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow Connections or Variables that were set locally. This Docker image is then pushed to all containers running the Apache Airflow application on Astro.
+When you deploy code to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, DAGs, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running the Apache Airflow application on Astro.
 
-![Deploy Code](/img/docs/deploy-architecture.png)
+![Deploy code](/img/docs/deploy-architecture.png)
 
-With the exception of the Airflow Webserver and some Celery Workers, Kubernetes gracefully terminates all containers during this process. This forces them to restart and begin running your latest code.
+With the exception of the Airflow webserver and some Celery workers, Kubernetes gracefully terminates all containers during this process. This forces them to restart and begin running your latest code.
 
 If you deploy code to a Deployment that is running a previous version of your code, then the following happens:
 
@@ -94,13 +92,13 @@ If you want to force long-running tasks to terminate sooner than 24 hours, speci
 
 :::
 
-## Next Steps
+## Next steps
 
 Now that you're familiar with deploying DAGs to Astro, consider reading:
 
-- [Develop your Project](develop-project.md)
-- [Set Environment Variables](environment-variables.md)
+- [Develop your project](develop-project.md)
+- [Set environment variables](environment-variables.md)
 
-For up-to-date information about product limitations, read [Known Limitations](known-limitations.md).
+For up-to-date information about product limitations, read [Known limitations](known-limitations.md).
 
 If you have any questions, reach out to us. We're here to help.

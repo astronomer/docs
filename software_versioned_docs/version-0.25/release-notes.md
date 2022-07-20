@@ -8,7 +8,7 @@ id: release-notes
 
 Astronomer v0.25 is the latest available Long-Term Support (LTS) version for Astronomer Software. For more information about Software release channels, read [Release and Lifecycle Policies](release-lifecycle-policy.md).
 
-If you're looking to upgrade to Astronomer v0.25, refer to [Upgrade to Astronomer v0.25](upgrade-to-0-25.md). For instructions on how to upgrade to a patch version within the Astronomer v0.25 series, refer to [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer-patch.md).
+If you're looking to upgrade to Astronomer v0.25, refer to [Upgrade to Astronomer v0.25](upgrade-astronomer.md). For instructions on how to upgrade to a patch version within the Astronomer v0.25 series, refer to [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer.md).
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 

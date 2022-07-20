@@ -158,21 +158,21 @@ This command will generate a report. If the `X509v3 Subject Alternative Name` se
 
 Depending on your organization, you may receive either a globally trusted certificate or a certificate from a private CA. The certificate from your private CA may include a domain certificate, a root certificate, and/or intermediate certificates, all of which need to be in proper certificate order. To verify certificate order, follow the guidelines below.
 
-#### Verify certificate order (private CA only)
+#### Confirm certificate chain order
 
-To confirm that your certificate has the proper certificate order, first run the following command using the `openssl` CLI:
+If your organization is using a private certificate authority, you'll need to confirm that your certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
 
 ```sh
 openssl crl2pkcs7 -nocrl -certfile <your-certificate-filepath> | openssl pkcs7 -print_certs -noout
 ```
 
-This command will generate a report of all certificates included. Verify that the order of these certificates is as follows:
+The command generates a report of all certificates. Verify the order of the certificates is as follows:
 
-1. Domain
-2. Intermediate (optional)
-3. Root
+- Domain
+- Intermediate (optional)
+- Root
 
-If the order of all certificates is correct, proceed to the next step.
+If the certificate order is correct, proceed to step 5.
 
 ## Step 5: Create a Kubernetes TLS Secret
 

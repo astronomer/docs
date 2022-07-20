@@ -1,11 +1,10 @@
 ---
-title: 'Astronomer Software Documentation'
+title: 'Astronomer Software documentation'
 sidebar_label: 'Overview'
 id: overview
+slug: /
 description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
 ---
-
-## Overview
 
 Astronomer Software is the best way to run Apache Airflow in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Airflow experience.
 
@@ -17,7 +16,7 @@ Astronomer Software's key features ensure that enterprise organizations can run 
 - Role-based access control (RBAC) for configurable and secure user management
 - Extensive cloud, network, third party provider, and system component configurations via Helm
 - System logging, monitoring, and alerts via Grafana and Kibana
-- Astronomer Certified, a collection of Docker images that provides a differentiated data orchestration experience. Astronomer Certified includes timely support for the latest major, minor, and patch versions of Airflow
+- Astronomer Certified and Astro Runtime, two collections of Docker images that provide a differentiated data orchestration experience. These images include timely support for the latest major, minor, and patch versions of Airflow
 
 ## Architecture
 
@@ -25,7 +24,7 @@ The following diagram shows how you can run Airflow in your private cloud using 
 
 ![Astronomer Software Overview](https://assets2.astronomer.io/main/enterpriseArchitecture.svg)
 
-## Installation Guides
+## Installation guides
 
 If you are new to Astronomer Software, use the following guides to install the system on your cloud service:
 
@@ -33,7 +32,7 @@ If you are new to Astronomer Software, use the following guides to install the s
 * [Google Cloud Platform GKE](install-gcp-standard.md)
 * [Microsoft Azure AKS](install-azure-standard.md)
 
-## Customizing Your Installation
+## Customizing your installation
 
 Because the platform uses Helm, it's easy to customize your Software installation. Below are some guides for most common customizations:
 
@@ -51,7 +50,7 @@ There are many tools at your disposal for administering Astronomer:
 * [Using Kibana](kibana-logging.md)
 * [Using kubectl](kubectl.md)
 * [Pulling Postgres Credentials](access-airflow-database.md)
-* [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer-stable.md/)
+* [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer.md/)
 
 ## License
 

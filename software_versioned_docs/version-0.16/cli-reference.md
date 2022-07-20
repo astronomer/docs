@@ -31,13 +31,13 @@ The Astronomer CLI installation process requires [Docker](https://www.docker.com
 If you have Homebrew installed, run:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 To install a specific version of the Astronomer CLI, you'll have to specify `@major.minor.patch`. To install v0.16.1, for example, run:
 
 ```sh
-brew install astronomer/tap/astro@0.16.1
+brew install astro@0.16.1
 ```
 
 ### Install with cURL
@@ -545,7 +545,7 @@ When you run this command, the following skeleton files are generated in your cu
 
 ## astro dev kill
 
-Forces running containers in your local Airflow environment to stop. Unlike `astro dev stop`, which only pauses running containers, `astro dev kill` will delete all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.
+Forces running containers in your local Airflow environment to stop. Unlike `astro dev stop`, which only pauses running containers, `astro dev kill` deletes all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.
 
 This command is most often used to restart a cluster when testing new DAGs or settings in a non-production environment. After using `astro dev kill`, you can restart your environment with `astro dev start`.
 
@@ -638,7 +638,7 @@ Checks for the latest version of the Astronomer CLI, but does not perform the up
 > **Note:** This command only checks whether or not a new version of the Astronomer CLI is available. To actually upgrade the CLI to the latest version, run:
 >
 > ```sh
-> brew install astronomer/tap/astro
+> brew install astro
 > ```
 
 ## astro user create

@@ -12,7 +12,7 @@ This guide walks through the process of upgrading your Astronomer Software platf
 A few important notes before you start:
 
 - You must be on Astronomer Software v0.16.x in order to upgrade to Astronomer 0.23+. If you are running a version of Astronomer that's lower than v0.16, submit a request to [Astronomer Support](https://support.astronomer.io) and our team will help you define an alternate upgrade path.
-- The guidelines below only apply to users who are upgrading to the Astronomer v0.23 series for the first time. Once you've completed the upgrade to any v0.23 version, you'll be free to upgrade to subsequent v0.23.x patch versions as they are released by our team. For instructions, read [Upgrade to a Patch Version](/upgrade-astronomer-stable.md).
+- The guidelines below only apply to users who are upgrading to the Astronomer v0.23 series for the first time. Once you've completed the upgrade to any v0.23 version, you'll be free to upgrade to subsequent v0.23.x patch versions as they are released by our team. For instructions, read [Upgrade to a Patch Version](upgrade-astronomer-patch.md).
 - If you use Azure AD as your auth system for Astronomer, ensure that your Redirect URI is formatted as `https://houston.BASEDOMAIN/v1/oauth/redirect/`. In v0.16 and prior versions, this URI was formatted as `https://houston.BASEDOMAIN/v1/oauth/redirect`, without an ending `/`. For information on configuring this value, read [Integrate an Auth System](integrate-auth-system.md#azure-ad).
 - If you altered the default permissions for user roles as described in [Customize Permissions](manage-platform-users.md#customize-permissions), you need to set both `deployment.serviceAccounts.get` and `workspace.users.get` to `true` in your `config.yaml` file to make sure that all users of a custom role can continue to access Airflow Deployments via the Software UI. To update these values in your system, follow the steps in [Apply a Config Change](apply-platform-config.md).
 
@@ -75,7 +75,7 @@ kubectl config set-context --current --namespace=default
 Run the following command to begin the upgrade process:
 
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/release-0.23/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/upgrade-0.16-to-0.23.yaml
+kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/v0.23.18/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/upgrade-0.16-to-0.23.yaml
 ```
 
 While your platform is upgrading, monitor your pods to ensure that no errors occur. To do so, first find the names of your pods by running the following command:
@@ -107,7 +107,7 @@ If the upgrade was successful, you should be able to:
 We recommend cleaning up any remaining Kubernetes resources after your upgrade. To do so, run the following command:
 
 ```sh
-kubectl delete -f https://raw.githubusercontent.com/astronomer/astronomer/release-0.23/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/upgrade-0.16-to-0.23.yaml
+kubectl delete -f https://raw.githubusercontent.com/astronomer/astronomer/v0.23.18/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/upgrade-0.16-to-0.23.yaml
 ```
 
 ## Step 9: Upgrade the Astronomer CLI to v0.23
@@ -123,7 +123,7 @@ curl -sSL https://install.astronomer.io | sudo bash -s -- v0.23.0
 To do so via Homebrew, run:
 
 ```sh
-brew install astronomer/tap/astro@0.23
+brew install astro@0.23
 ```
 
 All team members within your organization should upgrade the Astronomer CLI individually before taking any further action on the platform or in a local Airflow environment. For a detailed breakdown of CLI changes between versions, refer to [Astronomer CLI releases](https://github.com/astronomer/astro-cli/releases). For detailed install guidelines and more information on the Astronomer CLI, refer to [Astronomer CLI Quickstart](cli-quickstart.md).
@@ -134,7 +134,7 @@ If you encounter an issue during your upgrade that requires you to recover your 
 
 1. Apply the rollback automation script by running the following command:
 ```sh
-kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/release-0.23/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/rollback-0.16-to-0.23.yaml
+kubectl apply -f https://raw.githubusercontent.com/astronomer/astronomer/v0.23.18/bin/migration-scripts/lts-to-lts/0.16-to-0.23/manifests/rollback-0.16-to-0.23.yaml
 ```
 This restores the platform database and the Helm state of the Astronomer Helm chart.
 
