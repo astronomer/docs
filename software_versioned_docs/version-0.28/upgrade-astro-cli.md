@@ -16,7 +16,7 @@ This information applies only to users who are upgrading the Astro CLI from a pr
 Before installing Astro CLI version 1.0+, complete all of the following steps:
 
 - Make sure you are running Astronomer Software version 0.28+. If you're not sure, ask your system administrator.
-- Review the [Breaking Changes](upgrade-astro-cli.md#breaking-changes) section in this document.
+- Review the [Breaking changes](upgrade-astro-cli.md#breaking-changes) section in this document.
 - Update any CI/CD pipelines or automated processes that use Astro CLI commands to ensure that these commands do not break after you upgrade.
 - Review any custom shortcuts in your local CLI terminal to ensure that your shortcuts do not run any CLI commands that are no longer supported.
 
@@ -28,25 +28,25 @@ After you complete these steps, upgrade to Astro CLI version 1.0+ by following t
 
 For users making continuous changes to an Astro project locally, the Astro CLI now supports a new `astro dev restart` command. With this new command, you no longer need to run `astro dev stop` followed by `astro dev start` when you're testing locally.
 
-For more information, see [CLI Command Reference](cli-reference.md#astro-dev-restart).
+For more information, see [CLI command reference](cli-reference.md#astro-dev-restart).
 
 ### New command to run DAG unit tests with pytest
 
 You can now run custom unit tests for all DAGs in your Astro project with `astro dev pytest`, a new Astro CLI command that uses [pytest](https://docs.pytest.org/en/7.1.x/contents.html#), a common testing framework for Python. As part of this change, new Astro projects created with `astro dev init` now include a `tests` directory, which includes one example unit test built by Astronomer.
 
-In addition to running tests locally, you can also run `astro dev pytest` as part of the deploy process to Astronomer Software. For more information, see [CLI Command Reference](cli-reference.md#astro-dev-pytest).
+In addition to running tests locally, you can also run `astro dev pytest` as part of the deploy process to Astronomer Software. For more information, see [CLI command reference](cli-reference.md#astro-dev-pytest).
 
 ### New command to parse DAGs for errors
 
 The new `astro dev parse` command allows you to run a basic test against your Astro project to ensure that your DAGs are able to to render in the Airflow UI. This includes the DAG integrity test that is run with `astro dev pytest`, which checks that your DAGs are able to to render in the Airflow UI. Now, you can quickly run `astro dev parse` and see import and syntax errors directly in your terminal without having to restart all Airflow services locally.
 
-For more complex testing, Astronomer recommends using `astro dev pytest` to run custom tests in your project. For more information on `astro dev parse`, see the [CLI Command Reference](cli-reference.md#astro-dev-parse).
+For more complex testing, Astronomer recommends using `astro dev pytest` to run custom tests in your project. For more information on `astro dev parse`, see the [CLI command reference](cli-reference.md#astro-dev-parse).
 
 ## Breaking changes
 
 This topic contains all information related to breaking changes included in Astro CLI version 1.0+ relative to version 0.28 and below.
 
-This topic does not include information about new features and changes that are not breaking. For a summary of all changes, see the [CLI Release Notes](cli-release-notes.md).
+This topic does not include information about new features and changes that are not breaking. For a summary of all changes, see the [CLI release notes](cli-release-notes.md).
 
 ### Podman is no longer supported
 
