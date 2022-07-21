@@ -54,7 +54,7 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 ## Remove users from an Organization
 
-Remove a user from an Organization when their role changes, or they leave the Organization. When you remove a user from an Organization, they are automatically removed from all of the Workspaces they had access to within the Organization.
+When you remove a user from an Organization, they are automatically removed from all of the Workspaces they had access to within the Organization.
 
 1. In the Cloud UI, click the **People** tab.
 2. Click **Edit** next to the user you want to remove.
