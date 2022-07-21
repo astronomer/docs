@@ -212,6 +212,7 @@ If you run `astro deploy` without specifying `your-deployment-release-name`, the
 | `--test`         | None       | A valid filepath within your Astro project to an alternative pytest file or directory. |
 | `--workspace-id` | String     | Lists available Deployments in your Workspace and prompts you to pick one.          |
 | `--no-cache`     | None       | Do not use any images from the container engine's cache when building your project. |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ### Related documentation
 
@@ -614,6 +615,7 @@ Parse the DAGs in a locally hosted Astro project to quickly check them for error
 | Flag          | Value Type | Usage                                              |
 | ------------- | ---------- | -------------------------------------------------- |
 | `--env`       | string     | The filepath to your environment variables. (The default is `.env`)  |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## astro dev ps
 
@@ -637,6 +639,7 @@ Run unit tests for your data pipelines with `pytest`, a testing framework for Py
 | ------------- | ---------- | -------------------------------------------------- |
 |`<pytest-filepath>`| String | Any valid filepath within the `tests` directory. |
 | `--env`       | string     | The filepath to your environment variables. (The default is `.env`)  |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## astro dev restart
 
@@ -653,6 +656,7 @@ astro dev restart
 | Flag          | Value Type | Usage                                              |
 | ------------- | ---------- | -------------------------------------------------- |
 | `--env`       | string     | The filepath to your environment variables. The default is `.env`  |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## astro dev run
 

@@ -11,9 +11,25 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, don't hesitate to reach out to [Astronomer support](https://support.astronomer.io).
 
-**Latest Astro Runtime Version**: 5.0.4 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 5.0.6 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.2.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.3.0 ([Release notes](cli/release-notes.md))
+
+## July 14, 2022
+
+### Additional improvements
+
+- The Cloud UI **Clusters** page now includes the cluster ID value. 
+- Organization Owners and Organization Billing Admins can now update the Organization name in the Cloud UI **Settings** page.
+- The Cloud UI **Analytics** page can now show data for the last 30 minutes.
+
+### Bug fixes
+
+- When you change **Worker Resources** for a Deployment in the Cloud UI, any errors related to your worker size request are now based on the correct node instance type that your cluster is running.
+- When you select a Workspace and click **Go back** in a browser, the page now reloads as expected.
+- A **Page not found** error message no longer appears when you select a Deployment in the **Usage** page of the Cloud UI.
+- The **Deployment Analytics** page now displays the correct date.
+- Deprecated versions of Astro Runtime now appear correctly in the Deployment page of the Cloud UI. Previously, versions were appended with `-deprecated`.
 
 ## June 30, 2022
 

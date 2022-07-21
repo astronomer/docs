@@ -1,13 +1,13 @@
 ---
 title: "Astro Runtime maintenance and lifecycle policy"
-sidebar_label: "Astro Runtime maintenance policy"
+sidebar_label: "Maintenance and lifecycle policy"
 id: runtime-version-lifecycle-policy
 description: Learn how Astronomer releases and maintains Astro Runtime, the core component that powers a differentiated Apache Airflow experience on Astro.
 ---
 
-Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a requirement if your organization is using Astro.
+Astro Runtime is a production ready, data orchestration tool based on Apache Airflow that is distributed as a Docker image and is required by all Astronomer products. It is intended to provide organizations with improved functionality, reliability, efficiency, and performance. Deploying Astro Runtime is a recommended alternative to [Astronomer Certified](image-architecture.md).
 
-Astronomer maintenance and lifecycle policies are part of the distribution and define the period that specific Astro Runtime versions are supported and how frequently updates are provided.
+Policies define the period that specific Astro Runtime versions are supported and the frequency updates are provided.
 
 ## Release channels
 
@@ -16,7 +16,7 @@ To meet the unique needs of different operating environments, Astro Runtime vers
 - **Stable:** Includes the latest Astronomer and Apache Airflow features, available on release
 - **Long-term Support (LTS):** Includes additional testing, stability, and maintenance for a core set of features
 
-Each Astro Runtime version defined as a `major.minor` pair, such as Runtime version `5.1`, is associated with an Astro Runtime stable release channel. The LTS release channel is a subset of the stable release channel and includes additional stability, reliability, and support. For more information on how Astro Runtime is versioned, see [Runtime versioning](runtime-image-architecture.md#runtime-versioning).
+Each Astro Runtime version defined as a `major.minor` pair, such as Runtime version 5.1,  is associated with an Astro Runtime stable release channel. The LTS release channel is a subset of the stable release channel and includes additional stability, reliability, and support. For more information on how Astro Runtime is versioned, see [Runtime versioning](runtime-image-architecture.md#runtime-versioning).
 
 For users that want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of Astro Runtime as soon as they are made generally available. This should be regardless of release channel. New versions of Runtime are issued regularly and include timely support for the latest major, minor, and patch versions of Airflow.
 
@@ -43,8 +43,6 @@ Within the maintenance window of each Astro Runtime version, the following is tr
 When the maintenance window for a given version of Runtime ends, the following is true:
 
 - Astronomer is not obligated to answer questions regarding a Deployment that is running an unsupported version.
-- New Deployments cannot be created on Astro with that version of Runtime. Versions that are no longer maintained will not render as an option in the Deployment creation process from the Cloud UI, API, or Astro CLI.
-- The Deployment view of the Cloud UI will show a warning that encourages the user to upgrade if the Deployment is running that version.
 - The latest version of the Astro CLI will show a warning if a user pushes an Astro Runtime image to Astronomer that corresponds to that version.
 
 Astronomer will not interrupt service for Deployments running Astro Runtime versions that are no longer in maintenance. Unsupported versions of Astro Runtime are available for local development and testing with the Astro CLI.

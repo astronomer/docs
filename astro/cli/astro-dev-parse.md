@@ -17,7 +17,8 @@ astro dev parse
 
 | Option              | Description                                                                                   | Possible Values                                 |
 | ------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| `-e`, `--env`       | The filepath to your environment variables. (The default is `.env`)                            | Any valid filepath within your Astro project    |
+| `-e`, `--env`       | The filepath to your environment variables. (The default is `.env`)                            | Any valid filepath within your Astro project   |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## Examples
 

@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Astro Runtime architecture'
-title: 'Astro Runtime architecture'
+sidebar_label: "Astro Runtime architecture"
+title: "Astro Runtime architecture"
 id: runtime-image-architecture
 description: Reference documentation for Astro Runtime, a differentiated distribution of Apache Airflow.
 ---
@@ -33,15 +33,19 @@ For a list of supported Astro Runtime versions and more information on the Astro
 
 ### Astro Runtime and Apache Airflow parity
 
+<!--- Version-specific -->
+
 This table lists Astro Runtime releases and their associated Apache Airflow versions.
 
-| Astro Runtime                                   | Apache Airflow Version                                                                | 
-| ----------------------------------------------- | ----------------------------------------------------------------------------- |
-| 3.0.x                                       |       2.1.1                                                                       |
-| 4.0.x                                       |       2.2.0                                                                    | 
-| 4.1.x                                       |       2.2.4                                                                    |
-| 4.2.x                                       |       2.2.4                                                                      | 
-| 5.0.x                                       |       2.3.0                                                                        | 
+| Astro Runtime | Apache Airflow version |
+| ------------- | ---------------------- |
+| 4.1.x         | 2.2.4                  |
+| 4.2.x         | 2.2.4-2.2.5            |
+| 5.0.x         | 2.3.0-2.3.3            |
+
+:::info
+Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
+:::
 
 ## Provider packages
 
@@ -70,6 +74,7 @@ To determine the version of any provider package installed in your current Astro
 ```
 docker run --rm {image} pip freeze | grep <provider>
 ```
+
 ## Python versioning
 
 Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version, Astronomer recommends that you use the KuberentesPodOperator. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).

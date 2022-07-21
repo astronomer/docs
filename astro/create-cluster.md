@@ -34,17 +34,17 @@ To create an Astro cluster, you need to have:
 
 #### Step 1: Submit a request to Astronomer
 
-To create a new Astro cluster on AWS for your Organization, you must first reach out to your Astronomer representative. For each new cluster that you want to provision, provide our team with the following information:
+To create a new Astro cluster on AWS for your Organization, submit a [support request](astro-support.md). In your support request, provide the following information for every new cluster that you want to provision:
 
-- Your AWS Account ID.
-- Your preferred Astro cluster name.
-- The AWS region that you want to host your cluster in.
-- Your preferred node instance type.
-- Your preferred max node count.
+- Your AWS Account ID
+- Your preferred Astro cluster name
+- The AWS region that you want to host your cluster in
+- Your preferred node instance type
+- Your preferred max node count
 
-If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
+If you don't specify configuration preferences for your new cluster, Astronomer creates a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
 
-From there, your Astronomer representative will provide you with a unique `External ID` for each new cluster. Make note of this value for the next step.
+Once your cluster is created, Astronomer provides you with a unique `External ID` for every new cluster. You'll need these values to complete the next step.
 
 #### Step 2: Edit your AWS trust policy
 

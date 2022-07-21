@@ -60,7 +60,7 @@ This is where you'll find information about installing the Astro CLI on a Window
 To use the Astro CLI on Windows, you must have:
 
 - [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
 - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
 -  Windows 10 or Windows 11.
 
@@ -92,7 +92,7 @@ This is where you'll find information about installing the Astro CLI on Linux.
 
 To use the Astro CLI on Linux, you must have:
 
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
 
 #### Installation
 
