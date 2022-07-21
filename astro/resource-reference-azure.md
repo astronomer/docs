@@ -13,7 +13,7 @@ Unless otherwise specified, new Clusters on Microsoft Azure are created with a s
 | ----------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------- |
 | Resource Group          | All resources used by a cluster are placed in this resource group.                                   | 1x                            |
 | VNet                    | Virtual Network for hosting Azure resources.                                                         | 1x /19                        |
-| Subnets                 | Four subnets are created in the VNet. They are used for the backing database, Pod, node, and private endpoints. | /28 for database /21 for pods /21 for nodes /22 for private endpoints |
+| Subnets                 | Four subnets are created in the VNet. They are used for the backing database, Pod, node, and private endpoints. | <br />/28 for database <br />/21 for pods <br />/21 for nodes <br />/22 for private endpoints |
 | Azure Database for PostgreSQL Flexible Server   | A private database instance and the Astro data plane primary database. It hosts a metadata database for each hosted Airflow Deployment                      | Standard_D4ds_v4                             |
 | Private DNS Zone for Database            | Provides access the private database instance. | 1x |
 | AKS Cluster | An AKS cluster is required to run the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks. | 1x 
