@@ -11,16 +11,18 @@ Unless otherwise specified, new Clusters on Microsoft Azure are created with a s
 
 | Resource                | Description                                                                                          | Quantity/Default Size        |
 | ----------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------- |
-| [VPC](https://cloud.google.com/vpc/docs/vpc)                     | Virtual private network for hosting GCP resources                                                                | 1x /19                            |
-| [Subnet](https://cloud.google.com/vpc/docs/subnets)                  | A single subnet is provisioned in the VPC                                                            | 1, IP Range is `172.20.0.0/19` |
-| [Service Network Peering](https://cloud.google.com/vpc/docs/configure-private-services-access) | The Astro VPC is peered to the Google Service Networking VPC                                         | 1, IP Range is `172.23.0.0/19` |
-| [NAT Router (External)](https://cloud.google.com/nat/docs/overview)   | Required for connectivity with the Astro control plane and other public services                     | 1                            |
-| [GKE Cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/kubernetes-engine-overview)             | A GKE cluster is required to run the Astro data plane. Workload Identity is enabled on this cluster. | 1, IP Ranges are `172.21.0.0/19` for cluster IPs and `172.22.0.0/19` for cluster Services |
-| [Workload Identity Pool](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) | Astro uses the fixed Workload Identity Pool for your project; one is created if it does not exist | The default pool (PROJECT_ID.svc.id.goog) is used |
-| [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres) | The Cloud SQL instance is the primary database for the Astro data plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster | 1 Regional Instance with 4 vCPUs, 16GB Memory |
-| Storage Bucket | GCS Bucket for storage of Airflow task logs | 1 bucket with name `airflow-logs-<clusterid>` |
-| Nodes | Nodes power the Data Plane and Airflow components. Nodes autoscale as Deployments are added. | 3x n2-medium-4 for the system nodes; worker nodes default to e2-medium-4 and are provisioned as required, up to Max Node Count |
-| Maximum Node Count | The maximum number of EC2 nodes that your Astro cluster can support. When this limit is reached, your Astro cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
+| Resource Group          | All resources used by a cluster are placed in this resource group.                                   | 1x                            |
+| VNet                    | Virtual Network for hosting Azure resources.                                                         | 1x /19                        |
+| Subnets                 | Four subnets are created in the VNet. They are used for the backing database, Pod, node, and private endpoints. | /28 for database <br>/21 for pods <br>/21 for nodes <br>/22 for private endpoints |
+| Azure Database for PostgreSQL Flexible Server   | A private database instance and the Astro data plane primary database. It hosts a metadata database for each hosted Airflow Deployment                      | Standard_D4ds_v4                             |
+| Private DNS Zone for Database            | Provides access the private database instance. | 1x |
+| AKS Cluster | An AKS cluster is required to run the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks. | 1x 
+| Virtual Machines (nodes)  | Host all system and Airflow components on Astro, including workers and schedulers. Auto-scale based on the demand for nodes in your cluster. | Standard_D4d_v5 |
+| Storage Account (Standard) | Contains Azure storage Blobs. | 1x |
+| Blob Storage | Store Airflow task logs.  | 1x |
+| Private Endpoint for Blob Storage | Provides access to Blob storage task logs. | 1x |
+| Private DNS Zone for Blob Storage | Provides access to Blob storage task logss. | 1x |
+| Public IP Address | Required for connectivity to the control plane and other services. | 1x |
 
 ## Supported cluster configurations
 
@@ -32,27 +34,11 @@ To create a new cluster on Astro with a specified configuration, see [Install As
 
 Astro supports the following Azure regions:
 
-- `asia-northeast1` - Tokyo, Asia
-- `asia-northeast2` - Osaka, Asia
-- `asia-northeast3` - Seoul, Asia
-- `asia-south1` - Mumbai, Asia
-- `asia-southeast1` - Singapore, Asia
-- `australia-southeast1` - Sydney, Australia
-- `europe-central2` - Warsaw, Europe
-- `europe-west1` - Belgium, Europe
-- `europe-west2` - England, Europe
-- `europe-west3` - Frankfurt, Europe
-- `europe-west4` - Netherlands, Europe
-- `europe-west6` - Zurich, Europe
-- `northamerica-northeast1` - Montreal, North America
-- `southamerica-east1` - Sao Paulo, South America
-- `us-central1` - Iowa, North America
-- `us-west1` - Oregon, North America
-- `us-west2` - Los Angeles, North America
-- `us-west3` - Salt Lake City, North America
-- `us-west4` - Nevada, North America
-- `us-east1` - South Carolina, North America
-- `us-east4` - Virginia, North America
+- Central US
+- East US
+- West US 3
+- Canada Central
+- West Europe
 
 Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't on this list, contact [Astronomer support](https://support.astronomer.io).
 
@@ -60,8 +46,16 @@ Modifying the region of an existing Astro cluster isn't supported. If you're int
 
 Astro supports different machine types and combinations of CPU, memory, storage, and networking capacity. All system and Airflow components within a single cluster are powered by the nodes specified during the cluster creation or modification process.
 
-- Standard DDv4 series vCPUs - 16
-- Standard DDv5 series vCPUs - 40
+#### System nodes
+
+- Standard_D4d_v5
+
+#### Worker nodes
+
+- Standard_D4d_v5 - 4/16/150 (Default)
+- Standard_D8d_v5 - 8/32/300
+- Standard_D8d_v5 - 8/32/300
+- Standard_D8_v5 - 8/32
 
 For detailed information on each instance type, see [Virtual machines in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/). If you're interested in a machine type that isn't on this list, contact [Astronomer support](https://support.astronomer.io/). Not all machine types are supported in all regions.
 
@@ -81,8 +75,10 @@ The following table lists the maximum worker size that is supported on Astro for
 
 | Node Instance Type | Maximum AU | CPU       | Memory       |
 |--------------------|------------|-----------|--------------|
-|Standard DDv4 series vCPUs      | 24         | 2.4 CPUs  | 9    GiB MEM |
-|Standard DDv5 series vCPUs     | 64         | 6.4 CPUs  | 24   GiB MEM |
+|Standard_D4ds_v4 (Default)      | 24         | 4 vCPUs  | 16    GiB MEM |
+|Standard_D2ds_v4     | 64         | 2 vCPUs  | 8   GiB MEM |
+|Standard_E2ds_v4      | 64         | 2 vCPUs  | 16   GiB MEM |
+|Standard_E4ds_v4      | 64         | 4 vCPUs  | 32   GiB MEM |
 
 If your Organization is interested in using an instance type that supports a worker size limit higher than 64 AU, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
