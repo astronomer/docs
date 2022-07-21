@@ -104,7 +104,7 @@ Use the external ID you saved from Step 2 to create a cross-account IAM role for
 
 1. Open the [Astronomer cross-account role CloudFormation template](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402).
 
-2. Enter the external ID provided by Astronomer in the **ExternalId** field.
+2. Enter the external ID that you copied in Step 2 in the **ExternalId** field.
 
 3. Select the **I acknowledge that AWS CloudFormation might create IAM resources with custom names** checkbox.
 
