@@ -54,7 +54,7 @@ The following are required when activating your AWS data plane:
 
 The following are required when activating your Azure data plane:
 - [ ] [Astro CLI](cli/get-started.md) installed for any users who will develop pipelines
-- [ ] An Azure Subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported
+- [ ] A clean Azure subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported. Also, the subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups?](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
 - [ ] An Azure Active Directory (Azure AD) user with Application Administrator permissions. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles)
 - [ ]  An Azure user with Owner permissions. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles)
 - [ ] Desired region for Astro cluster deployment identified, from the list of [supported regions](resource-reference-azure.md#supported-regions)
