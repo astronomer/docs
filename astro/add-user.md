@@ -53,5 +53,10 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 ## Remove users from an Organization
 
-To remove users from an Organization, contact [Astronomer support](https://support.astronomer.io). In your ticket, provide the user's email and the name of the Organization that you want to remove them from. When you remove a user from an Organization, they are automatically removed from all of their Workspaces within the Organization.
+To remove users from an Organization, contact [Astronomer support](https://support.astronomer.io). In your ticket, provide:
+
+- The user's email address.
+- The name of the Organization that you want to remove them from.
+
+When you remove a user from an Organization, they are automatically removed from all of the Workspaces they had access to within the Organization.
 
