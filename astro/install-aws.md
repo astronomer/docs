@@ -186,7 +186,7 @@ If you're setting up your first cluster in any of these regions, you need to com
 
 ## Step 4: Provide setup information to Astronomer
 
-For the AWS account you created as a prerequisite, provide Astronomer with:
+After creating the AWS account, provide Astronomer support with the following information:
 
 - Your AWS Account ID.
 - Your preferred Astro cluster name.
@@ -200,7 +200,7 @@ From here, our team will provision an Astro cluster according to the specificati
 
 ## Step 5: Let Astronomer complete the install
 
-Contact Astronomer after you've created the cross-account IAM role for Astro. From there, Astronomer will finish creating the cluster in your AWS account.
+After you've created the cross-account IAM role for Astro, contact Astronomer support. Astronomer support will finish creating the cluster in your AWS account.
 
 This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
 

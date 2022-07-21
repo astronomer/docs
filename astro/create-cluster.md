@@ -108,7 +108,7 @@ To create a cluster in one of these regions, complete the following additional s
 
 #### Step 2: Confirm with Astronomer
 
-A notification is sent from Astronomer when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster. See [Create a Deployment](create-deployment.md).
+Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 
