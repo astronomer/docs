@@ -58,7 +58,7 @@ Delete a Deployment when it is no longer required by your Organization. When you
 Deleted Deployments can't be restored. If you accidentally delete a Deployment, [submit a support request](astro-support.md).
 
 1. Log in to the [Cloud UI](https://cloud.astronomer.io) and select a Workspace.
-2. Click the **Options** menu of the Deployment you want to delete, and select **Delete a Deployment**.
+2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
     ![Options menu](/img/docs/delete-deployment.png)
 
