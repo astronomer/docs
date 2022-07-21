@@ -23,7 +23,8 @@ If you don't have a cluster on Astro, follow the instructions to [Install Astro 
 Some cluster and Deployment-level modifications can be completed only by Astronomer support. These include:
 
 - [Creating a new cluster](create-cluster.md).
-- Updating a cluster's worker instance type.
+- Deleting a cluster.
+- Updating a cluster's worker instance type. See cloud resource references ([AWS](resource-reference-aws.md#deployment-worker-size-limits), [GCP](resource-reference-gcp.md#deployment-worker-size-limits)).
 - Updating the maximum node count of an existing cluster.
 - [Creating a VPC connection](connect-external-services.md#vpc-peering) between a cluster and a target VPC.
 - Running images from a private registry with the [KubernetesPodOperator](kubernetespodoperator#run-images-from-a-private-registry).
@@ -38,4 +39,4 @@ If the modification you requested is supported, Astronomer will notify you as so
 
 Modifications to an existing cluster might take a few minutes to complete, but you can expect no downtime during the process. Astro is built to ensure a graceful rollover, which means that the Airflow and Cloud UIs will continue to be available and your Airflow tasks will not be affected.
 
-To confirm that the modification was completed, open the **Clusters** tab in the Cloud UI. You should see the updated configuration in the table entry for your cluster. 
+To confirm that the modification was completed, open the **Clusters** tab in the Cloud UI. You should see the updated configuration in the table entry for your cluster.
