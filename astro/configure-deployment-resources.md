@@ -64,7 +64,6 @@ Deleted Deployments can't be restored. If you accidentally delete a Deployment, 
 
 3. Enter `Delete` and click **Yes, Continue**.
 
-
 ## Next steps
 
 - [Set environment variables on Astro](environment-variables.md).
