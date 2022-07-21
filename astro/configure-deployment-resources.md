@@ -51,8 +51,21 @@ If you haven't created a Deployment, see [Create a Deployment](create-deployment
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
+## Delete a Deployment
+
+Delete a Deployment when it is no longer required by your Organization. When you delete a Deployment, all infrastructure resources assigned to the Deployment are deleted. After you delete a Deployment, the Deployment Kubernetes namespace and the Deployment metadata database in your data plane are retained for 30 days. 
+
+Deleted Deployments can't be restored. If you accidentally delete a Deployment, [submit a support request](astro-support.md).
+
+1. Log in to the [Cloud UI](https://cloud.astronomer.io) and select a Workspace.
+2. Click the **Options** menu of the Deployment you want to delete, and select **Delete a Deployment**.
+
+    ![Options menu](/img/docs/delete-deployment.png)
+
+3. Enter `Delete` and click **Yes, Continue**.
+
+
 ## Next steps
 
 - [Set environment variables on Astro](environment-variables.md).
-
 - [Manage Deployment API keys](api-keys.md).
