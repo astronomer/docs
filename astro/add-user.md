@@ -30,7 +30,7 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 1. In the Cloud UI, select a Workspace.
 2. Click **Access** in the left menu.
-3. Click **Add member**:
+3. Click **Add member**.
 
     ![Workspace user invite button](/img/docs/add-user.png)
 
@@ -53,10 +53,9 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 ## Remove users from an Organization
 
-To remove users from an Organization, contact [Astronomer support](https://support.astronomer.io). In your ticket, provide:
+To remove users from an Organization, [submit a support request](astro-support.md). In your support request, provide the following information:
 
 - The user's email address.
-- The name of the Organization that you want to remove them from.
+- The name of the Organization that you want to remove the user from.
 
 When you remove a user from an Organization, they are automatically removed from all of the Workspaces they had access to within the Organization.
-
