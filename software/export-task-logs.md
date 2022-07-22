@@ -49,7 +49,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 
 ### Configure logging sidecars
 
-1. Retrieve your `config.yaml` file. See [Apply a config change](apply-platform-config.md)
+1. Retrieve your `config.yaml` file. See [Apply a config change](apply-platform-config.md).
 2. Add the following entry to your `config.yaml` file:
 
     ```yaml
@@ -61,7 +61,7 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
         # needed to prevent zombie deployment worker pods when using KubernetesExecutor
         terminationEndpoint: http://localhost:8000/quitquitquit
     ```
-3. Push the configuration change. See [Apply a config change](apply-platform-config.md)
+3. Push the configuration change. See [Apply a config change](apply-platform-config.md).
 
 
 :::info
@@ -69,3 +69,120 @@ With this implementation, the Vector sidecars each utilize 100m cpu and 384Mi me
 To revert to the default behavior and export task logs using a Fluentd Daemonset, remove this configuration from your `config.yaml` file.
 
 :::
+
+## Forward Deployment task logs to Elasticsearch
+
+
+### Create an Elastic Deployment and endpoint
+
+1. In your browser, go to https://cloud.elastic.co/ and create a new Deployment. See [Create a deployment](https://www.elastic.co/guide/en/cloud/current/ec-create-deployment.html#ec-create-deployment).
+2. Copy and save your deployment credentials when the **Save the deployment credentials** screen appears.
+3. On the Elastic dashboard, click the **Gear** icon for your Deployment.
+4. Click **Copy endpoint** next to **Elasticsearch**.
+5. Optional. Test the Elasticsearch Deployment endpoint:
+    - Open a new browser window, paste the endpoint you copied in step 4 in the **Address** bar, and then click **Enter**.
+    - Enter the username and password you copied in step 2 and click **Sign in**. The following output appears:
+    ```text
+        name	"instance-0000000000"
+        cluster_name	"<cluster-name>"
+        cluster_uuid	"<cluster-uuid>"
+        version	
+        number	"8.3.2"
+        build_type	"docker"
+        build_hash	"8b0b1f23fbebecc3c88e4464319dea8989f374fd"
+        build_date	"2022-07-06T15:15:15.901688194Z"
+        build_snapshot	false
+        lucene_version	"9.2.0"
+        minimum_wire_compatibility_version	"7.17.0"
+        minimum_index_compatibility_version	"7.0.0"
+        tagline	"You Know, for Search"
+    ```
+6. Run the following command to download the Astronomer Helm chart: 
+
+```bash
+   helm pull astronomer/astronomer
+```
+7. Run the following command to show the Astronomer Helm chart:
+
+```bash
+   helm show chart astronomer/astronomer
+```
+8. Select one of these options to save your Elasticsearch Deployment credentials:
+
+    - Update the `config.yaml` file. See [Update the `config.yaml` file](#update-the-`config.yaml`-file).
+    - Create a secret in the Kubernetes cluster. See [Create a secret in the Kubernetes cluster](#create-a-secret-in-the-kubernetes-cluster).
+
+
+### Update the `config.yaml` file
+
+1. Run the following command to base64 encode your Elasticsearch Deployment credentials:
+
+```bash
+   echo -n "<username>:<password>" | base64
+```
+2. Add the following entry to your `config.yaml` file:
+
+```yaml
+    global:
+      fluentdEnabled: true
+      customLogging:
+        enabled: true
+        scheme: https
+          # host endpoint copied from elasticsearch console with https
+          # and port number removed.
+          host: “<host-URL>”
+          port: "9243"
+          # secret encoded from above step
+          secret: "<secret>"
+```
+3. Add the following entry to your `config.yaml` file to disable internal logging:
+
+```yaml
+    tags:
+      logging: false
+```
+4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
+
+```bash
+   helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+```
+
+### Create a secret in the Kubernetes cluster
+
+1. Run the following command to create a secret for your Elasticsearch Deployment credentials in the Kubernetes cluster:
+
+```bash
+   kubectl create secret generic elasticcreds --from-literal elastic=elastic:samplepassword --namespace=<your-platform-namespace>
+```
+2. Add the following entry to your `config.yaml` file:
+
+```yaml
+    global:
+      fluentdEnabled: true
+      customLogging:
+        enabled: true
+        scheme: https
+          # host endpoint copied from elasticsearch console with https
+          # and port number removed.
+          host: “<host-URL>”
+          port: "9243"
+          # kubernetes secret containing credentials
+          secretName: elasticcreds
+```
+3. Add the following entry to your `config.yaml` file to disable internal logging:
+
+```yaml
+    tags:
+      logging: false
+```
+4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
+
+```bash
+   helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+```
+### View the Deployment task logs in Elastic
+
+1. On the Elastic dashboard in the **Elastichsearch Service** area, click the Deployment name.
+2. Click **Menu** > **Discover**. The **Create index pattern** screen appears.
+3. Enter `fluentd.*` in the **Name** field, enter `@timestamp` in the **Timestamp field**, and then click **Create index pattern**.
+4. Click **Menu** > **Dashboard** to view the Deployment task logs.
