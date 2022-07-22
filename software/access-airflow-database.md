@@ -67,7 +67,7 @@ Your connection should look something like:
 
 ![Local Connections Details Page](https://assets2.astronomer.io/main/docs/query-postgres/query-postgres-connection-details.png)
 
-The port will be set to 5342 by default but if you’ve set a custom port, you’ll need to update that here as well.
+The port will be set to 5432 by default but if you’ve set a custom port, you’ll need to update that here as well.
 
 **3. Connect to `airflow_db` in your DAG**
 

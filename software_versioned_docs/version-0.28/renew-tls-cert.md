@@ -77,7 +77,7 @@ Once you set up a TLS certificate for Astronomer, you'll need to establish a pro
     Then, create the ClusterIssuer by running the following command:
 
     ```sh
-    kubectl apply -f clusterissuer.yaml
+    kubectl apply -f clusterissuer.yaml -n astronomer
     ```
 
 4. Create a "Certificate" resource that declares the type of certificate you'll request from Let's Encrypt. To do so, first create a `certificate.yaml` file, replacing `BASE_DOMAIN` with yours:
