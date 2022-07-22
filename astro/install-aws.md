@@ -90,6 +90,8 @@ After completing your initial installation, we recommend [setting up an identity
 
 In the Cloud UI, open the **Settings** tab and copy the value in **AWS EXTERNAL ID**. This external ID is a unique identifier that Astro uses to connect to your AWS account. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
+You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the field will not appear in the Cloud UI.
+
 ## Step 3: Create a cross-account IAM role for Astro
 
 Use the external ID you saved from Step 2 to create a cross-account IAM role for Astro. Astronomer recommends using the AWS Management Console to create the role.
