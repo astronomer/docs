@@ -11,17 +11,17 @@ Unless otherwise specified, new Clusters on Microsoft Azure are created with a s
 
 | Resource                | Description                                                                                          | Quantity/Default Size        |
 | ----------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------- |
-| Resource Group          | All resources used by a cluster are placed in this resource group.                                   | 1x                            |
-| VNet                    | Virtual Network for hosting Azure resources.                                                         | 1x /19                        |
-| Subnets                 | Four subnets are created in the VNet. They are used for the backing database, Pod, node, and private endpoints. | <br />/28 for database <br />/21 for pods <br />/21 for nodes <br />/22 for private endpoints |
-| Azure Database for PostgreSQL Flexible Server   | A private database instance and the Astro data plane primary database. It hosts a metadata database for each hosted Airflow Deployment                      | Standard_D4ds_v4                             |
-| Private DNS Zone for Database            | Provides access the private database instance. | 1x |
-| AKS Cluster | An AKS cluster is required to run the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks. | 1x 
-| Virtual Machines (nodes)  | Host all system and Airflow components on Astro, including workers and schedulers. Auto-scale based on the demand for nodes in your cluster. | Standard_D4d_v5 |
-| Storage Account (Standard) | Contains Azure storage Blobs. | 1x |
-| Blob Storage | Store Airflow task logs.  | 1x |
-| Private Endpoint for Blob Storage | Provides access to Blob storage task logs. | 1x |
-| Private DNS Zone for Blob Storage | Provides access to Blob storage task logss. | 1x |
+| Resource Group          | A container for cluster resources.                                   | 1x                            |
+| Azure Virtual Network (VNet)                    | A virtual network that hosts Azure resources.                                                         | 1x /19                        |
+| Subnets                 | Created in the VNet and used for the backing database, Pod, node, and private endpoints. | <br />/28 for database <br />/21 for pods <br />/21 for nodes <br />/22 for private endpoints |
+| Azure Database for PostgreSQL Flexible Server   | A private database instance and the Astro data plane primary database. Hosts a metadata database for each hosted Airflow Deployment.                      | Standard_D4ds_v4                             |
+| Private DNS Zone for Database            | Provides access to the private database instance. | 1x |
+| Azure Kubernetes Service (AKS) Cluster | Runs the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks. | 1x 
+| Virtual Machines (nodes)  | Hosts all system and Airflow components on Astro, including workers and schedulers. Auto-scale based on the demand for nodes in your cluster. | Standard_D4d_v5 |
+| Azure Storage Account (Standard) | Stores Azure Blobs. | 1x |
+| Azure Blob Storage | Stores Airflow task logs.  | 1x |
+| Private Endpoint for Blob Storage | Provides access to Azure Blob storage task logs. | 1x |
+| Private DNS Zone for Blob Storage | Provides access to Azure Blob storage task logs. | 1x |
 | Public IP Address | Required for connectivity to the control plane and other services. | 1x |
 
 ## Supported cluster configurations
@@ -69,7 +69,7 @@ If the node count for your cluster reaches the maximum node count, new tasks mig
 
 ### Deployment Worker Size Limits
 
-Worker Pod size can be configured at a Deployment level using the **Worker Resources** setting in the Cloud UI. This setting determines how much CPU and memory is allocated a worker Pod within a node.
+You can use the **Worker Resources** setting in the Cloud UI to allocate worker Pod CPU and memory.
 
 The following table lists the maximum worker size that is supported on Astro for each worker node instance type. As the system requirements of Astro change, these values can increase or decrease. If you try to set **Worker Resources** to a size that exceeds the maximum for your cluster's worker node instance type, an error message appears in the Cloud UI.
 
@@ -80,7 +80,7 @@ The following table lists the maximum worker size that is supported on Astro for
 |Standard_E2ds_v4      | 64         | 2 vCPUs  | 16   GiB MEM |
 |Standard_E4ds_v4      | 64         | 4 vCPUs  | 32   GiB MEM |
 
-If your Organization is interested in using an instance type that supports a worker size limit higher than 64 AU, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
+If your Organization needs an instance type that supports a worker size limit higher than 64 AU, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
 :::info
 

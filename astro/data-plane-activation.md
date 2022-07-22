@@ -53,11 +53,13 @@ The following are required when activating your AWS data plane:
 <TabItem value="azure">
 
 The following are required when activating your Azure data plane:
-- [ ] [Astro CLI](cli/get-started.md) installed for any users who will develop pipelines
+- [ ] [Astro CLI](cli/get-started.md) installed for any users who are developing pipelines.
 - [ ] A clean Azure subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported. Also, the subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups?](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
-- [ ] An Azure Active Directory (Azure AD) user with Application Administrator permissions. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles)
-- [ ]  An Azure user with Owner permissions. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles)
-- [ ] Desired region for Astro cluster deployment identified, from the list of [supported regions](resource-reference-azure.md#supported-regions)
+- [ ] An Azure Active Directory (AD) user with the following role assignments:
+    <br /> - `Application Administrator`. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+    <br /> - `Owner` with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+- The Microsoft Azure CLI or Azure Az PowerShell module.  See [How to install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) and [Install the Azure Az PowerShell module](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps).
+- [ ] Desired region for Astro cluster deployment identified, from the list of [supported regions](resource-reference-azure.md#supported-regions).
 
 </TabItem>
 

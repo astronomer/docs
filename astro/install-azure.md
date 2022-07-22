@@ -8,13 +8,11 @@ description: Get started on Astro by creating your first Astro cluster on Azure.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-This is where you'll find instructions for installing Astro on Microsoft Azure.
-
 To complete the installation process, you'll:
 
 - Add the Astronomer Service Principal to your Azure Active Directory (Azure AD) instance.
 - Assign an Owner role to your subscription.
-- Register the Azure features.
+- Register Microsoft Azure features.
 
 When you've completed the installation process, Astronomer support creates a cluster within your Azure subscription to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
@@ -83,6 +81,8 @@ The data plane is a collection of Astro infrastructure components that run in yo
     sleep 60
     done
     echo "Registration Complete"
+     ```
+    ```sh
     az provider register --namespace Microsoft.Compute
     ```
 
@@ -141,7 +141,7 @@ After you've prepared your environment for data plane activation, provide Astron
 - Optional. Your preferred maximum node count.
 - Optional. Your custom CIDR ranges for Astronomer service connections. The default is 172.20.0.0/19.
 
-If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `centralus` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-azure.md).
+If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `CentralUS` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-azure.md).
 
 ## Step 4: Astronomer support creates the cluster
 
@@ -151,7 +151,7 @@ Wait for confirmation from Astronomer support that the cluster has been created 
 
 ## Step 5: Create a Deployment
 
-When Astronomer confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. Log in to [the Cloud UI](log-in-to-astro.md#log-in-to-the-cloud-ui) and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option in the Cloud UI **Cluster** list:
+When Astronomer confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. Log in to the [Cloud UI](log-in-to-astro.md#log-in-to-the-cloud-ui) and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option in the Cloud UI **Cluster** list:
 
 <div class="text--center">
   <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
