@@ -42,7 +42,7 @@ To create a new Astro cluster on AWS for your Organization, you must first reach
 - Your preferred node instance type.
 - Your preferred max node count.
 
-If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` by default. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
+If you do not specify configuration preferences, Astronomer will create a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
 
 #### Additional setup for AWS regions that are disabled by default
 
@@ -108,7 +108,7 @@ To create a cluster in one of these regions, complete the following additional s
 
 #### Step 2: Confirm with Astronomer
 
-Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster. See [Create a Deployment](create-deployment.md).
+Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 

@@ -194,11 +194,11 @@ After creating the AWS account, provide Astronomer support with the following in
 - Your preferred node instance type.
 - Your preferred maximum node count.
 
-If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes in `us-east-1` and a maximum node count of 20 by default. For information on all supported regions and configurations, see [AWS resource reference](resource-reference-aws.md).
+If you do not specify configuration preferences, Astronomer will create a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
 
 ## Step 5: Wait for Astronomer to complete the install
 
-After you've created the cross-account IAM role for Astro, contact Astronomer support. Astronomer support will finish creating the cluster in your AWS account.
+After you've created the cross-account IAM role for Astro, contact [Astronomer support](https://support.astronomer.io). Astronomer support will finish creating the cluster in your AWS account.
 
 This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
 
