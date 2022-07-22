@@ -68,9 +68,7 @@ To create a cluster in one of these regions, complete the following additional s
           "Action": "sts:AssumeRole",
           "Condition": {
             "StringEquals": {
-              "sts:ExternalId": [
-                "<External-ID>"
-              ]
+              "sts:ExternalId": "<External-ID>"
             }
           }
         }
