@@ -60,7 +60,7 @@ For example, to update a given Deployment using the Astro CLI on a Mac machine, 
 
 ```sh
 export ASTRONOMER_KEY_ID=<your-key-id>
-export ASTRONOMER_KEY_SECRET=<your-key-id>
+export ASTRONOMER_KEY_SECRET=<your-key-secret>
 ```
 
 After setting the variables, running `astro deployment update` works for the Deployment and you don't need to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update production-level Deployments.
