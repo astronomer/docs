@@ -32,7 +32,18 @@ For more information about the resources required to run Astro on Azure, see [Az
 
 ## Step 1: Access Astro
 
-See [Log in to Astro](log-in-to-astro.md).
+1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
+
+2. Go to `https://cloud.astronomer.io/login`, enter your email address, and then click **Continue**.
+
+3. Select one of the following options to access the Cloud UI:
+
+    - Enter your password and click **Continue**.
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
+    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
+
+    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
 ## Step 2: Prepare for data plane activation
 
