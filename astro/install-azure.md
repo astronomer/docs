@@ -77,6 +77,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
     echo "Still waiting for Feature Registration (EncryptionAtHost) to complete, this can take up to 15 minutes"
     sleep 60
     done
+    ```
 
 </TabItem>
 
