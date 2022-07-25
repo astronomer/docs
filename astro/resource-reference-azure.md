@@ -5,7 +5,7 @@ id: resource-reference-azure
 description: Reference information for new Astro on Azure clusters.
 ---
 
-Unless otherwise specified, new Clusters on Microsoft Azure are created with a set of default resources that are considered appropriate for most use cases.
+Unless otherwise specified, new clusters on Microsoft Azure are created with a set of default resources that are considered appropriate for most use cases.
 
 ## Default cluster values
 
