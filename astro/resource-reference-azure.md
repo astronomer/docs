@@ -54,7 +54,7 @@ Astro supports different machine types and combinations of CPU, memory, storage,
 
 - Standard_D4d_v5
 - Standard_D8d_v5
-- Standard_D8d_v5 - 8 vCPU/32GB
+- Standard_D4_v5 
 - Standard_D8_v5
 
 For detailed information on each instance type, see [Virtual machines in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/). If you're interested in a machine type that isn't on this list, contact [Astronomer support](https://support.astronomer.io/). Not all machine types are supported in all regions.
