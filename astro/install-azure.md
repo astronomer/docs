@@ -51,7 +51,6 @@ The data plane is a collection of Astro infrastructure components that run in yo
     ```sh
     az login
     ```
-
 2. Run the following command to select your Azure subscription:
 
     ```sh
