@@ -120,6 +120,8 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
 
 ### Update the `config.yaml` file
 
+After you've created an Elastic Deployment and endpoint, you can update the `config.yaml` file or you can [create a secret in the Kubernetes cluster](#create-a-secret-in-the-kubernetes-cluster) to save your Elasticsearch Deployment credentials.
+
 1. Run the following command to base64 encode your Elasticsearch Deployment credentials:
 
   ```bash
@@ -153,6 +155,8 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
   ```
 
 ### Create a secret in the Kubernetes cluster
+
+After you've created an Elastic Deployment and endpoint, you can create a secret in the Kubernetes cluster or you can [update the `config.yaml` file](#update-the-`config.yaml`-file) to save your Elasticsearch Deployment credentials.
 
 1. Run the following command to create a secret for your Elasticsearch Deployment credentials in the Kubernetes cluster:
 
