@@ -143,7 +143,7 @@ After you've prepared your environment for data plane activation, provide Astron
 - Optional. Your preferred node instance type. The default is Standard_D4d_v5.
 - Optional. Your preferred Postgres Flexible Server instance type. The default is Standard_D4ds_v4.
 - Optional. Your preferred maximum node count.
-- Optional. Your custom CIDR ranges for Astronomer service connections. The default is 172.20.0.0/19.
+- Optional. Your custom CIDR ranges for Astronomer service connections. The default is `172.20.0.0/19`.
 
 If you don't specify a preferred configuration for your organization, Astronomer support creates a cluster in `CentralUS` with the default configurations for Astro on Azure. See [Azure resource reference](resource-reference-azure.md).
 
