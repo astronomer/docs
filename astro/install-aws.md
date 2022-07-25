@@ -33,7 +33,7 @@ Before completing this setup, make sure that you have:
     - `PutRolePolicy`
     - `ListRoles`
     - `UpdateAssumeRolePolicy`
-    
+
    See [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
 - A subscription to the [Astro Status Page](https://cloud-status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
 
@@ -72,7 +72,7 @@ If you want to continue with the second option, you'll additionally need:
 
 To begin the Astro install process, first create an account at https://cloud.astronomer.io/.
 
-When you first authenticate to Astro, you can sign in with a Google account, a GitHub account, or an email and password.
+When you first authenticate to Astro, you can sign in to the Cloud UI with a Google account, a GitHub account, or an email and password.
 
 <div class="text--center">
   <img src="/img/docs/login.png" alt="Astro login screen" />
@@ -86,25 +86,15 @@ After completing your initial installation, we recommend [setting up an identity
 
 :::
 
-## Step 2: Provide setup information to Astronomer
+## Step 2: Retrieve an external ID from the Cloud UI
 
-For the AWS account you created as a prerequisite, provide Astronomer with:
+In the Cloud UI, open the **Settings** tab and copy the value in **AWS EXTERNAL ID**. This external ID is a unique identifier that Astro uses to connect to your AWS account. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
-- Your AWS Account ID.
-- Your preferred Astro cluster name.
-- The AWS region that you want to host your cluster in.
-- Your preferred node instance type.
-- Your preferred maximum node count.
-
-If not specified, Astronomer will create a cluster with two `m5.xlarge` nodes in `us-east-1` and a maximum node count of 20 by default. For information on all supported regions and configurations, see [AWS resource reference](resource-reference-aws.md).
-
-From here, our team will provision an Astro cluster according to the specifications you provided.
+You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the field will not appear in the Cloud UI.
 
 ## Step 3: Create a cross-account IAM role for Astro
 
-To create a cross-account IAM role for Astro you need an external ID that links to the resources Astronomer creates in your dedicated AWS account. To obtain your external ID, provide your [activation details](data-plane-activation.md#pre-flight-checklist) to [Astronomer support](https://support.astronomer.io). When you receive the external ID from Astronomer support, save it as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
-
-Astronomer recommends using the AWS Management Console to add the external ID to your AWS instance.
+Use the external ID you saved from Step 2 to create a cross-account IAM role for Astro. Astronomer recommends using the AWS Management Console to create the role.
 
 <Tabs
     defaultValue="managementconsole"
@@ -116,7 +106,7 @@ Astronomer recommends using the AWS Management Console to add the external ID to
 
 1. Open the [Astronomer cross-account role CloudFormation template](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account.yaml&stackName=AstroCrossAccountIAMRole&param_AstroAccountId=406882777402).
 
-2. Enter the external ID provided by Astronomer in the **ExternalId** field.
+2. Enter the external ID that you copied in Step 2 in the **ExternalId** field.
 
 3. Select the **I acknowledge that AWS CloudFormation might create IAM resources with custom names** checkbox.
 
@@ -196,9 +186,21 @@ If you're setting up your first cluster in any of these regions, you need to com
 
 :::
 
-## Step 4: Let Astronomer complete the install
+## Step 4: Provide setup information to Astronomer
 
-Contact Astronomer after you've created the cross-account IAM role for Astro. From there, Astronomer will finish creating the cluster in your AWS account.
+After creating the AWS account, provide Astronomer support with the following information:
+
+- Your AWS Account ID.
+- Your preferred Astro cluster name.
+- The AWS region that you want to host your cluster in.
+- Your preferred node instance type.
+- Your preferred maximum node count.
+
+If you do not specify configuration preferences, Astronomer will create a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
+
+## Step 5: Wait for Astronomer to complete the install
+
+After you've created the cross-account IAM role for Astro, contact [Astronomer support](https://support.astronomer.io). Astronomer support will finish creating the cluster in your AWS account.
 
 This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
 
@@ -215,7 +217,7 @@ This process can take some time. Wait for confirmation that the installation was
 >- Egress Routes on Astronomer Route Table
 >- [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-tasks) and/or [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#working-with-security-groups) rules of your resources
 
-## Step 5: Create a Deployment
+## Step 6: Create a Deployment
 
 When Astronomer confirms that your Astro cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option below the **Cluster** menu:
 

@@ -42,40 +42,7 @@ To create a new Astro cluster on AWS for your Organization, submit a [support re
 - Your preferred node instance type
 - Your preferred max node count
 
-If you don't specify configuration preferences for your new cluster, Astronomer creates a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
-
-Once your cluster is created, Astronomer provides you with a unique `External ID` for every new cluster. You'll need these values to complete the next step.
-
-#### Step 2: Edit your AWS trust policy
-
-In the AWS IAM console, [edit the `astronomer-remote-management` trust relationship](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html) to include new trust policies and ensure that Astronomer has permission to manage your new cluster.
-
-To do this, add the External ID that corresponds to your new cluster to the existing `sts:ExternalId` grouping. For example, your policy for two Astro clusters might look like the following, with `<External-ID-2>` being the External ID for your new cluster:
-
-```yaml {14}
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::406882777402:root"
-      },
-      "Action": "sts:AssumeRole",
-      "Condition": {
-        "StringEquals": {
-          "sts:ExternalId": [
-            "<External-ID-1>",
-            "<External-ID-2>"
-          ]
-        }
-      }
-    }
-  ]
-}
-```
-
-Once you've modified your trust policy, click **Update Trust Policy** in the AWS Console to apply the new trust relationship.
+If you don't specify configuration preferences, Astronomer creates a cluster with two `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS resource reference](resource-reference-aws.md).
 
 #### Additional setup for AWS regions that are disabled by default
 
@@ -101,10 +68,7 @@ To create a cluster in one of these regions, complete the following additional s
           "Action": "sts:AssumeRole",
           "Condition": {
             "StringEquals": {
-              "sts:ExternalId": [
-                "<External-ID-1>",
-                "<External-ID-2>"
-              ]
+              "sts:ExternalId": "<External-ID>"
             }
           }
         }
@@ -140,9 +104,9 @@ To create a cluster in one of these regions, complete the following additional s
     aws iam set-security-token-service-preferences --global-endpoint-token-version v2Token
     ```
 
-#### Step 3: Confirm with Astronomer
+#### Step 2: Confirm with Astronomer
 
-A notification is sent from Astronomer when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster. See [Create a Deployment](create-deployment.md).
+Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 
