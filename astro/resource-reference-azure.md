@@ -53,7 +53,7 @@ Astro supports different machine types and combinations of CPU, memory, storage,
 #### Worker nodes
 
 - Standard_D4d_v5
-- Standard_D8d_v5 - 8/32/300
+- Standard_D8d_v5
 - Standard_D8d_v5 - 8 vCPU/32GB
 - Standard_D8_v5 - 8 vCPU/32GB
 
