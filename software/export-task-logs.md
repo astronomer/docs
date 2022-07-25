@@ -72,16 +72,19 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 ## Forward Deployment task logs to Elasticsearch
 
+Add your Astronomer Deployment task logs to an existing Elasticsearch instance to centralize log management and analysis. Centralized log management allows you to quickly identify and troubleshoot issues and speeds issue resolution.
 
 ### Create an Elastic Deployment and endpoint
 
 1. In your browser, go to https://cloud.elastic.co/ and create a new Deployment. See [Create a deployment](https://www.elastic.co/guide/en/cloud/current/ec-create-deployment.html#ec-create-deployment).
 2. Copy and save your deployment credentials when the **Save the deployment credentials** screen appears.
 3. On the Elastic dashboard, click the **Gear** icon for your Deployment.
+  ![Elastic Gear icon location](/img/docs/elasticsearch-gear-icon.png)
 4. Click **Copy endpoint** next to **Elasticsearch**.
+  ![Elastic Copy Endpoint location](/img/docs/elasticsearch-copy-endpoint.png)
 5. Optional. Test the Elasticsearch Deployment endpoint:
     - Open a new browser window, paste the endpoint you copied in step 4 in the **Address** bar, and then click **Enter**.
-    - Enter the username and password you copied in step 2 and click **Sign in**. The following output appears:
+    - Enter the username and password you copied in step 2 and click **Sign in**. Output similar to the following appears:
     ```text
         name	"instance-0000000000"
         cluster_name	"<cluster-name>"
@@ -183,6 +186,8 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 ### View the Deployment task logs in Elastic
 
 1. On the Elastic dashboard in the **Elastichsearch Service** area, click the Deployment name.
+  ![ElasticDeployment name location](/img/docs/elasticsearch-deployment-name.png)
 2. Click **Menu** > **Discover**. The **Create index pattern** screen appears.
+  ![Discover menu location](/img/docs/elasticsearch-discover.png)
 3. Enter `fluentd.*` in the **Name** field, enter `@timestamp` in the **Timestamp field**, and then click **Create index pattern**.
 4. Click **Menu** > **Dashboard** to view the Deployment task logs.
