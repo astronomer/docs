@@ -163,12 +163,6 @@ Here, the environment variable would read:
 ENV AIRFLOW_VAR_MY_VAR=2
 ```
 
-## View environment variables in the Airflow UI
-
-By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To view a Deployment's current environment variables from the Airflow UI, you can set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` either in your Dockerfile or the Cloud UI.
-
-You might want to turn on this setting if you want explicit confirmation that an environment variable change was correctly applied to a Deployment, or if you want anyone accessing the Deployment to have more convenient access to environment variable values when working in the Airflow UI.
-
 ## Environment variable priority
 
 On Astro, environment variables are applied and overridden in the following order:
