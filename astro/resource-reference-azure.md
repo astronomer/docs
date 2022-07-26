@@ -75,10 +75,10 @@ The following table lists the maximum worker size that is supported on Astro for
 
 | Node Instance Type | Maximum AU | CPU       | Memory       |
 |--------------------|------------|-----------|--------------|
-|Standard_D4ds_v4 (Default)      | 24         | 4 vCPUs  | 16    GiB MEM |
-|Standard_D2ds_v4     | 64         | 2 vCPUs  | 8   GiB MEM |
-|Standard_E2ds_v4      | 64         | 2 vCPUs  | 16   GiB MEM |
-|Standard_E4ds_v4      | 64         | 4 vCPUs  | 32   GiB MEM |
+|Standard_D4_v5 - 4/16      | 25         | 2.5 CPUs | 9.3    GiB MEM |
+|Standard_D8_v5 - 8/32     | 64         | 6.4 CPUs | 24   GiB MEM |
+|Standard_D4d_v5 - 4/16 (Default)      | 25         | 2.5 CPUs  | 9.3   GiB MEM |
+|Standard_D8d_v5 - 8/32      | 64         | 6.4 CPUs | 24   GiB MEM |
 
 If your Organization needs an instance type that supports a worker size limit higher than 64 AU, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md#worker-resources).
 
