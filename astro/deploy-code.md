@@ -69,7 +69,7 @@ Both represent a unique deploy of your Astro project and the Docker image that i
 
 1. In the Cloud UI, select a Workspace and then select the Deployment you pushed code to.
 2. Click **Open Airflow**.
-3. Scroll to the bottom of the page to view Docker image information in the footer:
+3. Scroll to the bottom of the page to view your **Image tag** in the footer:
 
     ![Docker image information](/img/docs/image-tag-airflow-ui-astro.png)
 
