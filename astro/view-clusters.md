@@ -16,7 +16,7 @@ In the Cloud UI, click the **Clusters** tab to view information about the cluste
 | Value              | Description                                                                                     |
 | ------------------ | ---------------------------------------------------------------------------------------------- |
 | Name               | The name of the cluster                                                                        |
-| Provider           | The type of cloud that the cluster is hosted on                                                |
+| Provider           | The cloud provider that the cluster is hosted on                                                |
 | Account ID         | The ID of the cloud provider account that hosts your cluster. This is either an AWS account ID or a Google Cloud project ID                      |
 | Region             | The cloud provider region where the cluster is hosted                                                          |
 | VPC subnet         | The range of IP addresses that can be used to connect to the cluster's VPC                    |
