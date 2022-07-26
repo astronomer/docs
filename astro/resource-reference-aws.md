@@ -5,7 +5,7 @@ id: resource-reference-aws
 description: Reference of all supported configurations for new clusters on Astro in AWS.
 ---
 
-Unless otherwise specified, new Clusters on Astro are created with a set of default AWS resources that our team has deemed appropriate for most use cases.
+Unless otherwise specified, new clusters on Astro are created with a set of default AWS resources that should be suitable for most use cases.
 
 Read the following document for a reference of our default resources as well as supported cluster configurations, including **AWS Region** and **Node Instance Type**.
 

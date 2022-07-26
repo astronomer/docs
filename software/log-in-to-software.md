@@ -10,7 +10,7 @@ You can use the Astronomer Software UI and the Astro CLI to view and modify your
 ## Prerequisites
 
 - An Astronomer account.
-- The [Astro CLI](cli/get-started.md).
+- The [Astro CLI](install-cli.md).
 
 ## Log in to the Astronomer Software UI
 
