@@ -23,7 +23,6 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 - You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
-### Bug fixes
 
 
 ## July 14, 2022
