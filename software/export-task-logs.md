@@ -107,14 +107,14 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
     ```
 6. Run the following command to download the Astronomer Helm chart: 
 
-    ```bash
+ ```bash
     helm pull astronomer/astronomer
-    ```
+ ```
 7. Run the following command to show the Astronomer Helm chart:
 
-    ```bash
+ ```bash
     helm show chart astronomer/astronomer
-    ``` 
+ ``` 
 
 ### Save your Elasticsearch deployment credentials
 
@@ -130,72 +130,70 @@ After you've created an Elastic deployment and endpoint, you have two options to
 
 1. Run the following command to base64 encode your Elasticsearch Deployment credentials:
 
-    ```bash
+ ```bash
     echo -n "<username>:<password>" | base64
-    ```
+ ```
 2. Add the following entry to your `config.yaml` file:
 
-    ```yaml
-    global:
-          fluentdEnabled: true
-          customLogging:
-            enabled: true
-            scheme: https
-              # host endpoint copied from elasticsearch console with https
-              # and port number removed.
-              host: “<host-URL>”
-              port: "9243"
-              # secret encoded from above step
-              secret: "<secret>"    
-    ```
+ ```yaml
+ global:
+    fluentdEnabled: true
+    customLogging:
+    enabled: true
+    scheme: https
+    # host endpoint copied from elasticsearch console with https
+    # and port number removed.
+    host: “<host-URL>”
+    port: "9243"
+    # secret encoded from above step
+    secret: "<secret>"    
+ ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 
-    ```yaml
-    tags:
-        logging: false     
-    ```
+ ```yaml
+ tags:
+   logging: false     
+ ```
 4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
 
-    ```bash
-    helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
- 
-    ```
+ ```bash
+ helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+ ```
 
 </TabItem>
 <TabItem value="kubernetes cluster">
 
 1. Run the following command to create a secret for your Elasticsearch Deployment credentials in the Kubernetes cluster:
 
-    ```bash
-    kubectl create secret generic elasticcreds --from-literal elastic=elastic:samplepassword --namespace=<your-platform-namespace>
-    ```
+ ```bash
+ kubectl create secret generic elasticcreds --from-literal elastic=elastic:samplepassword --namespace=<your-platform-namespace>
+ ```
 2. Add the following entry to your `config.yaml` file:
 
-    ```yaml
-    global:
-          fluentdEnabled: true
-          customLogging:
-            enabled: true
-            scheme: https
-              # host endpoint copied from elasticsearch console with https
-              # and port number removed.
-              host: “<host-URL>”
-              port: "9243"
-              # kubernetes secret containing credentials
-              secretName: elasticcreds   
-    ```
+ ```yaml
+ global:
+    fluentdEnabled: true
+    customLogging:
+    enabled: true
+    scheme: https
+    # host endpoint copied from elasticsearch console with https
+    # and port number removed.
+    host: “<host-URL>”
+    port: "9243"
+    # kubernetes secret containing credentials
+    secretName: elasticcreds   
+ ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 
-    ```yaml
-    tags:
-          logging: false    
-    ```
+ ```yaml
+ tags:
+      logging: false    
+ ```
 4. Run the following command to upgrade the Astronomer Software release version in the `config.yaml` file:
 
-    ```bash
-    helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
- 
-    ```
+  ```bash
+  helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+ ```
   
 </TabItem>
 </Tabs>
