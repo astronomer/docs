@@ -116,7 +116,7 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
     helm show chart astronomer/astronomer
   ``` 
 
-### Save your Elasticsearch Deployment credentials
+### Save your Elasticsearch deployment credentials
 
 After you've created an Elastic Deployment and endpoint, you have two options to save your Elasticsearch Deployment credentials. You can update the `config.yaml` file, or you can create a secret in the Kubernetes cluster.
 
