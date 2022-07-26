@@ -13,7 +13,7 @@ import {
   ThemeClassNames,
   useDocsPreferredVersion,
   useDocsVersion,
-} from '@docusaurus/theme-common/internal';
+} from '@docusaurus/theme-common';
 import clsx from 'clsx';
 
 function UnreleasedVersionLabel({siteTitle, versionMetadata}) {
