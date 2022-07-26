@@ -51,6 +51,7 @@ For more information on parsing DAGs, see [Parse DAGs](test-and-troubleshoot-loc
 ### Bug fixes
 
 - Fixed an issue where parsing DAGs during a deploy would kill a local project
+- Fixed an issue where the parse test would fail on DAGs using the `SnowflakeOperator`. Users should delete the test file `.astro/test_dag_integrity_default.py` and run `astro dev init` to get the improved file.
 
 ## Astro CLI v1.2.0
 
