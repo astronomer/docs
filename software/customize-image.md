@@ -449,7 +449,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
    :::
 
-3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
+3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
