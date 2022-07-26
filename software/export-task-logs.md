@@ -158,9 +158,11 @@ After you've created an Elastic Deployment and endpoint, you have two options to
 
   ```bash
     helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+ 
   ```
 </TabItem>
 <TabItem value="kubernetes cluster">
+
 
 1. Run the following command to create a secret for your Elasticsearch Deployment credentials in the Kubernetes cluster:
 
@@ -192,6 +194,7 @@ After you've created an Elastic Deployment and endpoint, you have two options to
 
   ```bash
     helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
+ 
   ```
 </TabItem>
 </Tabs>
