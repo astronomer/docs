@@ -5,6 +5,9 @@ id: export-task-logs
 description: Configure how Astronomer exports task logs to your ElasticSearch instance.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Airflow task logs are stored in a logging backend to ensure you can access them after your Pods terminate. By default, Astronomer uses [Fluentd](https://www.fluentd.org/) to collect task logs and export them to an ElasticSearch instance.
 
 You can configure how Astronomer collects Deployment task logs and exports them to ElasticSearch. The following are the supported methods for exporting task logs to ElasticSearch:
@@ -72,7 +75,7 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 ## Forward Deployment task logs to Elasticsearch
 
-Add your Astronomer Deployment task logs to an existing Elasticsearch instance to centralize log management and analysis. Centralized log management allows you to quickly identify and troubleshoot issues and speeds issue resolution.
+Add your Astronomer Deployment task logs to an existing Elasticsearch instance to centralize log management and analysis. Centralized log management allows you to quickly identify and troubleshoot issues and resolve issues quickly.
 
 ### Create an Elastic Deployment and endpoint
 
@@ -117,7 +120,13 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
 
 After you've created an Elastic Deployment and endpoint, you have two options to save your Elasticsearch Deployment credentials. You can update the `config.yaml` file, or you can create a secret in the Kubernetes cluster.
 
-#### Option 1: Update the `config.yaml` file
+<Tabs
+    defaultValue="config.yaml"
+    values={[
+        {label: 'config.yaml', value: 'config.yaml'},
+        {label: 'Kubernetes cluster', value: 'kubernetes cluster'},
+    ]}>
+<TabItem value="config.yaml">
 
 1. Run the following command to base64 encode your Elasticsearch Deployment credentials:
 
@@ -150,8 +159,8 @@ After you've created an Elastic Deployment and endpoint, you have two options to
   ```bash
     helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
   ```
-
-#### Option 2: Create a secret in the Kubernetes cluster
+</TabItem>
+<TabItem value="kubernetes cluster">
 
 1. Run the following command to create a secret for your Elasticsearch Deployment credentials in the Kubernetes cluster:
 
@@ -184,6 +193,9 @@ After you've created an Elastic Deployment and endpoint, you have two options to
   ```bash
     helm upgrade -f config.yaml --version=0.27 --namespace=<your-platform-namespace> <your-platform-release-name> astronomer/astronomer
   ```
+</TabItem>
+</Tabs>
+
 ### View the Deployment task logs in Elastic
 
 1. On the Elastic dashboard in the **Elastichsearch Service** area, click the Deployment name.
