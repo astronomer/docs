@@ -79,7 +79,7 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
 
 ### Create an Elastic Deployment and endpoint
 
-1. In your browser, go to https://cloud.elastic.co/ and create a new Deployment. See [Create a deployment](https://www.elastic.co/guide/en/cloud/current/ec-create-deployment.html#ec-create-deployment).
+1. In your browser, go to `https://cloud.elastic.co/` and create a new Elastic deployment. See [Create a deployment](https://www.elastic.co/guide/en/cloud/current/ec-create-deployment.html#ec-create-deployment).
 2. Copy and save your deployment credentials when the **Save the deployment credentials** screen appears.
 3. On the Elastic dashboard, click the **Gear** icon for your Deployment.
   ![Elastic Gear icon location](/img/docs/elasticsearch-gear-icon.png)
@@ -107,18 +107,18 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
     ```
 6. Run the following command to download the Astronomer Helm chart: 
 
-  ```bash
+    ```bash
     helm pull astronomer/astronomer
-  ```
+    ```
 7. Run the following command to show the Astronomer Helm chart:
 
-  ```bash
+    ```bash
     helm show chart astronomer/astronomer
-  ``` 
+    ``` 
 
-### Save your Elasticsearch Deployment credentials
+### Save your Elasticsearch deployment credentials
 
-After you've created an Elastic Deployment and endpoint, you have two options to save your Elasticsearch Deployment credentials. You can update the `config.yaml` file, or you can create a secret in the Kubernetes cluster.
+After you've created an Elastic deployment and endpoint, you have two options to save your Elastic deployment credentials. You can update your Software `config.yaml` file, or you can create a secret in your Software Kubernetes cluster.
 
 <Tabs
     defaultValue="config.yaml"
@@ -130,9 +130,9 @@ After you've created an Elastic Deployment and endpoint, you have two options to
 
 1. Run the following command to base64 encode your Elasticsearch Deployment credentials:
 
-  ```bash
+    ```bash
     echo -n "<username>:<password>" | base64
-  ```
+    ```
 2. Add the following entry to your `config.yaml` file:
 
     ```yaml
