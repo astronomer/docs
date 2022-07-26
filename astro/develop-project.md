@@ -91,7 +91,7 @@ To rebuild your project after making a change to any of these files, you must [r
 
 ## Explore Airflow providers and modules
 
-As you customize your Astro project and expand your use case for Airflow, we recommend exploring the [Astronomer Registry](https://registry.astronomer.io/), a library of Airflow modules, providers, and DAGs that serve as the building blocks for data pipelines.
+As you customize your Astro project and expand your use case for Airflow, Astronomer recommends reviewing the [Astronomer Registry](https://registry.astronomer.io/), a library of Airflow modules, providers, and DAGs that serve as the building blocks for data pipelines.
 
 The Astronomer Registry includes:
 
@@ -141,9 +141,7 @@ DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your
 
 ### Add DAG helper functions
 
-To build additional helper functions for DAGs into your Astro project, we recommend adding a folder with a set of files that can be used by Airflow DAGs.
-
-To do this:
+To build additional helper functions for DAGs into your Astro project, Astronomer recommend adding a folder with a set of files that can be used by Airflow DAGs.
 
 1. Add your directory of helper functions to your local project:
 
@@ -186,11 +184,11 @@ To confirm that your helper functions were successfully installed:
 
 When you first initialize a new Astro project, a file called `airflow_settings.yaml` is automatically generated. With this file, you can configure and programmatically generate Airflow [Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [Pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [Variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) so that you don't have to manually redefine these values in the Airflow UI every time you restart your project.
 
-As a security measure, `airflow_settings.yaml` works only in local environments. Once you deploy your project to a Deployment on Astro, the values in this file will not be included. To more easily manage Airflow secrets on Astro, we recommend [configuring a secrets backend](secrets-backend.md).
+As a security measure, `airflow_settings.yaml` works only in local environments. Once you deploy your project to a Deployment on Astro, the values in this file are not included. To manage Airflow secrets on Astro, Astronomer recommends [configuring a secrets backend](secrets-backend.md).
 
 :::caution
 
-If you are storing your project in a public directory or version control tool, we recommend adding this file to your `.gitignore` or equivalent secret management service.
+If you are storing your project in a public directory or version control tool, Astronomer recommends adding this file to your `.gitignore` or equivalent secret management service.
 
 :::
 
@@ -323,7 +321,7 @@ These commands output the contents of the generated `airflow.cfg` file, which li
 
 ### Use multiple .env files
 
-The Astro CLI will look for `.env` by default, but if you want to specify multiple files, make `.env` a top-level directory and create sub-files within that folder.
+The Astro CLI looks for `.env` by default, but if you want to specify multiple files, make `.env` a top-level directory and create sub-files within that folder.
 
 A project with multiple `.env` files might look like the following:
 
@@ -543,7 +541,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
    :::
 
-3. After the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
+3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
