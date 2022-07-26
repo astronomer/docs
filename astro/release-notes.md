@@ -15,11 +15,19 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.0 ([Release notes](cli/release-notes.md))
 
+## July 21, 2022
+
+### Additional improvements
+
+- You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
+- You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
+- Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
+
 ## July 14, 2022
 
 ### Additional improvements
 
-- The Cloud UI **Clusters** page now includes the cluster ID value. 
+- The Cloud UI **Clusters** page now includes the cluster ID value.
 - Organization Owners and Organization Billing Admins can now update the Organization name in the Cloud UI **Settings** page.
 - The Cloud UI **Analytics** page can now show data for the last 30 minutes.
 

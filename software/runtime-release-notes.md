@@ -9,7 +9,7 @@ description: Release notes for Astro Runtime, the differentiated Apache Airflow 
 
 Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. Note that some changes to Runtime might be omitted based on their availability in Astronomer Software.
 
-For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](upgrade-runtime.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
+For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](manage-airflow-versions.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
 
 ## Astro Runtime 5.0.6
 
