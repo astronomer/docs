@@ -67,7 +67,7 @@ After the deploy completes, the footer in the Airflow UI for your Deployment sho
 
 1. In the Cloud UI, select a Workspace and then select the Deployment you pushed code to.
 2. Click **Open Airflow**.
-3. Scroll to the bottom of the page to view your **Image tag** in the footer:
+3. Scroll to the bottom of the page and view the **Image tag** information in the footer:
 
     ![Docker image information](/img/docs/image-tag-airflow-ui-astro.png)
 
