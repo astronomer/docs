@@ -19,9 +19,12 @@ The KubernetesPodOperator enables you to:
 
 On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperator is built into every cluster in the data plane and is managed by Astronomer.
 
-## Prerequisites
+## Known limitations
 
-To use the KubernetesPodOperator, you need:
+- Cross-account service accounts are not supported on pods launched in the Astro cluster.
+- PersistentVolumes (PVs) are not supported on pods launched in the Astro cluster.
+
+## Prerequisites
 
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
@@ -140,3 +143,7 @@ KubernetesPodOperator(
     get_logs=True,
 )
 ```
+## Related documentation
+
+- [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
+- [KubernetesPodOperator Airflow Guide](https://www.astronomer.io/guides/kubepod-operator/)

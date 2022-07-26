@@ -9,11 +9,54 @@ This document provides a summary of all changes made to the [Astro CLI](cli/get-
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
 
+## Astro CLI v1.3.0
+
+Release date: July 19, 2022
+
+### Deploy a custom Docker image with new `--image-name` flag
+
+You can now deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`, as long as the image is based on Astro Runtime and is available in a local Docker registry. Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
+
+Using this flag, you can automate deploying custom Runtime images from a CI/CD pipeline. You can also separate your build and deploy workflows in different pipelines.
+
+The `--image-name` flag is also available for the following local development commands:
+
+- `astro dev start`
+- `astro dev restart`
+- `astro dev parse`
+- `astro dev pytest`
+
+For more information about this command, see the [CLI command reference](cli/astro-deploy.md).
+
+### New token login method for Astro
+
+Astro CLI users can now log into Astro on a machine that does not have access to a browser by running `astro login --token-login`. This is an alternative to `astro login`, which automatically opens the Cloud UI in a browser on your machine.
+
+If you run the command with this flag, the CLI provides a link to the Cloud UI that you can manually open in a web browser. You then copy an authentication token from the UI and enter it in the CLI. If you're using a browserless machine with the Astro CLI, this enables you to log in. For a browserless login, you can open the link and copy the token on a separate machine from the one running the Astro CLI.
+
+For more information about this command, see the [CLI command reference](cli/astro-login.md).
+
+### Skip parsing DAGs before deploys
+
+By default, `astro deploy` automatically parses the DAGs in your Astro project for syntax and import errors. To develop more quickly, you can now configure the Astro CLI to automatically skip parsing DAGs before a deploy by updating one of the following configurations:
+
+- Add `skip_parse: true` to your `.astro/config.yaml` file.
+- Add `ASTRONOMER_SKIP_PARSE=true` as en environment variable to your local environment or CI/CD pipeline.
+
+For more information on parsing DAGs, see [Parse DAGs](test-and-troubleshoot-locally.md#parse-dags). For more information about deploying to Astro, see [Deploy code](deploy-code.md).
+### Additional improvements
+
+- Upgraded the CLI to Go version 1.18, which includes improvements to both performance and the development experience. See the [Go Blog](https://go.dev/blog/go1.18).
+
+### Bug fixes
+
+- Fixed an issue where parsing DAGs during a deploy would kill a local project
+
 ## Astro CLI v1.2.0
 
 Release date: June 28, 2022
 
-### Bug Fixes
+### Bug fixes
 
 - Fixed an issue where `astro deploy` would kill a running project
 

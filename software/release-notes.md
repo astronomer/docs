@@ -14,6 +14,27 @@ This document includes all release notes for Astronomer Software version 0.29.
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
+## v0.29.2
+
+Release date: July 18, 2022
+
+### Additional improvements
+
+- You can now configure Vector on [logging sidecars](export-task-logs.md#export-logs-using-container-sidecars) to send Airflow task logs to third-party log management systems.
+- Resolved several high and critical CVEs.
+- You can now assign System Viewer and System Editor permissions to a [Team](import-idp-groups.md).
+- You can now assign System Viewer and System Editor permissions to a user from the Software UI.
+
+### Bug fixes
+
+- If you have `customLogging.enabled=true` and `loggingSidecar.customConfig=false` in your Helm configuration, logs now appear in the Software UI as expected.
+- System Admins can no longer update their own role.
+- The Software UI no longer counts inactive users in its user count figures.
+- Fixed an issue where you could still access a Deployment using a URL after logging out of the Software UI.
+- Fixed an issue where you could view Deployment information from a Workspace that was deleted with `astro workspace delete`.
+- Fixed an issue where you could not open Celery from the Software UI.
+- Improved the reliability of upgrading Astronomer Software with 30+ Deployments when `upgradeDeployments=true`.
+
 ## v0.29.1
 
 Release date: June 3, 2022

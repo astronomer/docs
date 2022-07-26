@@ -169,13 +169,13 @@ This setup assumes the following prerequisites:
 
 <TabItem value="custom">
 
-If your Astro project uses a custom Runtime image with additional build-time arguments, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
 
 #### Prerequisites
 
 To complete this setup, you need:
 
-- An Astro project that builds a custom Runtime image.
+- An Astro project that requires additional build-time arguments to build the Runtime image.
 
 #### Setup
 
@@ -187,7 +187,7 @@ To complete this setup, you need:
 2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
 
     ```yaml
-    name: Astronomer CI - Custom base image
+    name: Astronomer CI - Additional build-time args
 
     on:
       push:
@@ -203,13 +203,14 @@ To complete this setup, you need:
         steps:
         - name: Check out the repo
           uses: actions/checkout@v2
-        - name: Build Dockerfile.build image
+        - name: Create image tag
+          id: image_tag
+          run: echo ::set-output name=image_tag::astro-$(date +%Y%m%d%H%M%S)
+        - name: Build image
           uses: docker/build-push-action@v2
           with:
-            # This image tag must match the image tag in the FROM line of your `Dockerfile`.
-            tags: custom-<astro-runtime-image>
+            tags: ${{ steps.image_tag.outputs.image_tag }}
             load: true
-            file: Dockerfile.build
             # Define your custom image's build arguments, contexts, and connections here using
             # the available GitHub Action settings:
             # https://github.com/docker/build-push-action#customizing .
@@ -220,7 +221,7 @@ To complete this setup, you need:
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
+            astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
     ```
 
     For example, to create a CI/CD pipeline that deploys a project which [installs Python packages from a private GitHub repository](develop-project.md#install-python-packages-from-private-sources), you would use the following configuration:
@@ -242,6 +243,9 @@ To complete this setup, you need:
         steps:
         - name: Check out the repo
           uses: actions/checkout@v2
+        - name: Create image tag
+          id: image_tag
+          run: echo ::set-output name=image_tag::astro-$(date +%Y%m%d%H%M%S)
         - name: Create SSH Socket
           uses: webfactory/ssh-agent@v0.5.4
           with:
@@ -249,19 +253,17 @@ To complete this setup, you need:
             ssh-private-key: ${{ secrets.GITHUB_SSH_KEY }}
         - name: (Optional) Test SSH Connection - Should print hello message.
           run: (ssh git@github.com) || true
-        - name: Build Dockerfile.build image
+        - name: Build image
           uses: docker/build-push-action@v2
           with:
-            # This image tag must match the image tag in the FROM line of your `Dockerfile`.
-            tags: custom-<astro-runtime-image>
+            tags: ${{ steps.image_tag.outputs.image_tag }}
             load: true
-            file: Dockerfile.build
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
+            astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
     ```
 
   :::info
@@ -274,6 +276,14 @@ To complete this setup, you need:
 </Tabs>
 
 ### Jenkins
+
+<Tabs
+    defaultValue="jenkinsstandard"
+    values={[
+        {label: 'Standard', value: 'jenkinsstandard'},
+        {label: 'Multi-branch', value: 'jenkinsmultibranch'},
+    ]}>
+<TabItem value="jenkinsstandard">
 
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
@@ -314,9 +324,11 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
-### Jenkins (Multiple Branches)
+</TabItem>
 
-To automate code deploys to multiple Deployments using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
+<TabItem value="jenkinsmultibranch">
+
+To automate code deploys across multiple Deployments using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
 1. In Jenkins, add the following environment variables:
 
@@ -374,6 +386,9 @@ To automate code deploys to multiple Deployments using [Jenkins](https://www.jen
    }`}</code></pre>
 
     This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
+
+</TabItem>
+</Tabs>
 
 ### CircleCI
 
@@ -509,6 +524,14 @@ This pipeline configuration requires:
 
 ### GitLab
 
+<Tabs
+    defaultValue="gitlabstandard"
+    values={[
+        {label: 'Standard', value: 'gitlabstandard'},
+        {label: 'Multi-branch', value: 'gitlabmultibranch'},
+    ]}>
+<TabItem value="gitlabstandard">
+
 To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
 
 1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
@@ -519,7 +542,7 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
 2. Go to the Editor option in your project's CI/CD section and commit the following:
 
    <pre><code parentName="pre">{`---
-      astro_deploy:
+    astro_deploy:
       stage: deploy
       image: docker:latest
       services:
@@ -537,7 +560,9 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
        - main
    `}</code></pre>
 
-### GitLab (Multiple Branches)
+</TabItem>
+
+<TabItem value="gitlabmultibranch">
 
 To automate code deploys to Astro across multiple environments using [GitLab](https://gitlab.com/), complete the following setup in your GitLab repository that hosts an Astro project:
 
@@ -591,3 +616,6 @@ When you create environment variables that will be used in multiple branches, yo
         only:
           - main
    `}</code></pre>
+
+</TabItem>
+</Tabs>

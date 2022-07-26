@@ -41,6 +41,14 @@ You can now use `astro context list` and `astro context switch` to show the Astr
 
 These commands are intended for users who need to work across multiple Astronomer Software clusters or installations. They replace `astro cluster list` and `astro cluster switch`, respectively. For more information, see the [CLI command reference](cli-reference.md#astro-context-switch).
 
+## Astro CLI v0.28.2
+
+Release date: July 12, 2022
+
+### Bug fixes
+
+- Fixed an issue where `astro deploy` did not work when using Podman 4.0+
+
 ## 0.28.1
 
 Release date: March 14, 2022

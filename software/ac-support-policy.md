@@ -128,7 +128,6 @@ The following tables contain the exact lifecycle for each published version of A
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
 | [1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md) | March 19, 2021 | September 2022          |
 | [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)       | May 21, 2021   | November 2022           |
-| [2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/CHANGELOG.md)       | Oct 12, 2021   | April 2022              |
 | [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2023            |
 
 ### LTS Releases
