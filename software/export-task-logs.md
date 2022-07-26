@@ -79,7 +79,7 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
 
 ### Create an Elastic Deployment and endpoint
 
-1. In your browser, go to https://cloud.elastic.co/ and create a new Deployment. See [Create a deployment](https://www.elastic.co/guide/en/cloud/current/ec-create-deployment.html#ec-create-deployment).
+1. In your browser, go to `https://cloud.elastic.co/` and create a new Elastic deployment. See [Create a deployment](https://www.elastic.co/guide/en/cloud/current/ec-create-deployment.html#ec-create-deployment).
 2. Copy and save your deployment credentials when the **Save the deployment credentials** screen appears.
 3. On the Elastic dashboard, click the **Gear** icon for your Deployment.
   ![Elastic Gear icon location](/img/docs/elasticsearch-gear-icon.png)
