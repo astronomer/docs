@@ -109,7 +109,7 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
 
     ```bash
     helm pull astronomer/astronomer
-  ```
+    ```
 7. Run the following command to show the Astronomer Helm chart:
 
   ```bash
