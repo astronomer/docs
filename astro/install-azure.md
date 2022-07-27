@@ -76,7 +76,6 @@ The data plane is a collection of Astro infrastructure components that run in yo
 
     ```sh
     az role assignment create --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --role Owner --scope /subscriptions/$subid
-    echo "Registration Complete"
     ```
 5. Run the following commands to register the `EncryptionAtHost` feature:
 
