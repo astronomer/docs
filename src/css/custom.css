@@ -413,7 +413,10 @@ table::-webkit-scrollbar-thumb {
 }
 
 .alert--cli {
-  --ifm-alert-background-color-highlight: var(--purple-200);
+  --ifm-alert-background-color-highlight: hsl(
+    var(--purple-200),
+    var(15%),
+    );
   --ifm-alert-background-color: var( --ifm-color-cli-contrast-background );
   --ifm-alert-foreground-color: var( --ifm-color-cli-contrast-foreground );
   --ifm-alert-border-color: var(--ifm-color-cli-dark);
