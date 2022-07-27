@@ -115,9 +115,7 @@ Each Deployment includes four high-level performance charts which you can view f
 - Worker CPU
 - Worker Memory
 
-<div class="text--center">
-  <img src="/img/docs/deployment-metrics.png" alt="Metrics dashboard in the Cloud UI" />
-</div>
+![Metrics dashboard in the Cloud UI](/img/docs/deployment-metrics.png)
 
 The data in these four charts is recorded hourly and is displayed in both UTC and your local browser timezone. Each bar across all graphs covers a complete hour while the entire time window for a single graph is 24 hours. For example, a single bar might represent `16:00` to `17:00` while the entire time window of the graph might represent `Nov 1 16:00` to `Nov 2 16:00`.
 

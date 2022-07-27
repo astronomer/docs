@@ -75,9 +75,7 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
 1. In the Cloud UI, click **Help** > **Submit Support Request**.
 
-    <div class="text--center">
-    <img src="/img/docs/support-request-location.png" alt="Submit Support Request menu location" />
-    </div>
+    ![Submit Support Request menu location](/img/docs/support-request-location.png)
 
 2. Complete the following fields:
 

@@ -25,16 +25,12 @@ To create an API key for a Deployment:
 1. In the Cloud UI, open your Deployment.
 2. In the **API keys** menu, click **Add API Key**:
 
-    <div class="text--center">
-      <img src="/img/docs/add-api-key.png" alt="Add API key button" />
-    </div>
+    ![Add API key button](/img/docs/add-api-key.png)
 
 3. Give the key a name and description, then click **Create API Key**:
 
-    <div class="text--center">
-      <img src="/img/docs/create-api-key.png" alt="Create API key button" />
-    </div>
-
+    ![Create API key button](/img/docs/create-api-key.png)
+    
 From here, you can copy the API key ID and secret for use in API calls and CI/CD pipelines. Make sure to save the key secret securely, as this is the only time you will have access to see it in plain text.
 
 :::tip
@@ -67,25 +63,18 @@ After setting the variables, running `astro deployment update` works for the Dep
 
 ## Delete an API key
 
-To delete a Deployment API key:
-
-1. In the Cloud UI, open your Deployment.
+1. In the Cloud UI, select a Workspace and then select a Deployment.
 2. In the menu for the API key you want to delete, click **Edit**:
 
-    <div class="text--center">
-      <img src="/img/docs/edit-api-key.png" alt="Edit API key button" />
-    </div>
+    ![Edit API key button](/img/docs/edit-api-key.png)
 
-3. Click **Delete API Key**, then follow the onscreen prompt to finalize the deletion:
+3. Click **Delete API Key**, and then follow the onscreen prompt to finalize the deletion:
 
-    <div class="text--center">
-      <img src="/img/docs/delete-api-key.png" alt="Delete API key button" />
-    </div>
+    [Delete API key button](/img/docs/delete-api-key.png)
+    
 
 
-## Next steps
-
-For more information about how to use API keys, see:
+## Related documentation
 
 - [CI/CD](ci-cd.md)
 - [Deploy code](deploy-code.md)
