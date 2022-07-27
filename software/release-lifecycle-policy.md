@@ -13,7 +13,7 @@ This document offers guidelines on the version lifecycle of Astronomer Software.
 - Which versions of Astronomer Software are currently available.
 - Release channels and the maintenance schedule for all versions.
 
-For information on the latest Astronomer Software releases, see [Release notes](release-notes.md). For information on compatibility between all versioned software, see [Software Version compatibility reference](release-lifecycle-policy.md).
+For information on the latest Astronomer Software releases, see [Release notes](release-notes.md). For information on compatibility between all versioned software, see [Software Version compatibility reference](version-compatibility-reference.md).
 
 :::info
 

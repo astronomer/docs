@@ -112,7 +112,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
             "Effect": "Allow",
             "Principal": {
                 "AWS": [
-                    "arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>",
+                    "arn:aws:iam::<dataplane-AWS-account-ID>:role/AirflowS3Logs-<cluster-ID>"
                 ]
             },
             "Action": "sts:AssumeRole"

@@ -5,12 +5,13 @@ id: add-user
 description: Add or remove users in the Cloud UI.
 ---
 
-As a Workspace Admin or Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Organization. Workspace Admins can remove users from a Workspace, but Organization Owners need to contact [Astronomer support](https://support.astronomer.io) to remove users from an Organization.
+As a Workspace Admin or Organization Owner, you can add new team members to Astro and grant them user roles with permissions for specific actions across your Organization. Workspace Admins can remove users from a Workspace, and Organization Owners can remove users from an Organization.
 
 ## Prerequisites
 
 - To add or remove Organization users, you need Organization Owner permissions.
 - To add or remove Workspace users, you need Workspace Admin permissions for that Workspace. The user must also already be a part of the Organization that hosts the Workspace.
+- To remove a user from an Organization, one or more Organization Owners must be assigned to the Organization. If you're the only Organization Owner for your Organization, you'll need to assign another Organization Owner before removing yourself from the Organization. 
 
 For more information on user roles, see [Manage user permissions on Astro](user-permissions.md).
 ## Add a user to an Organization
@@ -49,13 +50,13 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 3. Click **Edit** next to the user you want to remove.
 4. Click **Remove member**.
-5. Click **Yes, continue** to confirm the removal.
+5. Click **Yes, Continue** to confirm the removal.
 
 ## Remove users from an Organization
 
-To remove users from an Organization, [submit a support request](astro-support.md). In your support request, provide the following information:
-
-- The user's email address.
-- The name of the Organization that you want to remove the user from.
-
 When you remove a user from an Organization, they are automatically removed from all of the Workspaces they had access to within the Organization.
+
+1. In the Cloud UI, click the **People** tab.
+2. Click **Edit** next to the user you want to remove.
+3. Click **Remove member**.
+4. Click **Yes, Continue** to confirm the removal.
