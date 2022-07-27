@@ -17,10 +17,18 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ## July 27, 2022
 
+### New Deployment configurations for high availability (HA)
+
+This release introduces two changes that ensure a higher level of reliability for Deployments on Astro:
+
+- [PgBouncer](https://www.pgbouncer.org/), a microservice that increases resilience by pooling database connections, is now considered highly available on Astro. Every Deployment must now have 2 PgBouncer Pods instead of 1, each assigned to a different node pool within the cluster. This change protects against pod-level connection issues previously seen during cluster downscaling events. PgBouncer is fully managed by Astronomer and is not configurable.
+
+- The Airflow scheduler is now configured with an [anti-affinity policy](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to limit the possibility of all schedulers for a single Deployment being impacted by an incident within a single node on an Astro cluster. For users who set **Scheduler Count** in the Cloud UI to 2, this means that those two scheduler Pods cannot be assigned to the same node and instead require a minimum of 2 nodes total. To avoid significant increases in cost, 3 or 4 schedulers can share the same two nodes and will not necessarily result in a higher node count minimum.
+
+For more information on Deployment configurations, see [Configure Deployment resources](configure-deployment-resources.md).
+
 ### Additional improvements
 
-- Implemented a high availability PgBouncer architecture to limit outages when node pools are scaling.
-- Set anti-affinity constraints on scheduler Pods to limit the possibility of multiple schedulers failing on a single Deployment.
 - Added tooltips for [Deployment overview metrics](deployment-metrics.md#deployment-overview) in the Cloud UI.
 
 ## July 21, 2022
