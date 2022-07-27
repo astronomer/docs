@@ -15,11 +15,19 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.0 ([Release notes](cli/release-notes.md))
 
+## July 27, 2022
+
+### Additional improvements
+
+- Implemented a high availability PgBouncer architecture to limit outages when node pools are scaling
+- Set anti-affinity constraints on scheduler Pods to limit the possibility of multiple schedulers failing on a single Deployment
+
 ## July 21, 2022
 
 ### Additional improvements
 
 - You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
+- Organizations now need only a single AWS external ID for all clusters.
 - You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
