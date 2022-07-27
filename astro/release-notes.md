@@ -21,7 +21,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 - Implemented a high availability PgBouncer architecture to limit outages when node pools are scaling.
 - Set anti-affinity constraints on scheduler Pods to limit the possibility of multiple schedulers failing on a single Deployment.
-- Added tooltips for [Deployment overview metrics](https://docs.astronomer.io/astro/deployment-metrics#deployment-overview) in the Cloud UI.
+- Added tooltips for [Deployment overview metrics](deployment-metrics.md#deployment-overview) in the Cloud UI.
 
 ## July 21, 2022
 
