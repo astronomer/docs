@@ -130,5 +130,5 @@ When operating system or Python package dependency errors occur, the error messa
  8. Run the following command to install the libsasl2-dev package and review any error messages that are returned:
 
  ```bash
-    apt-get install g++
+    apt-get install libsasl2-dev
  ```
