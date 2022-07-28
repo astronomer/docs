@@ -14,9 +14,7 @@ Your data plane is deployed into a clean, dedicated AWS account, GCP project, or
 
 By default, the Astronomer account can't access your data services. Astronomer support will work with you to ensure your peering VPC or direct connections are secure.
 
-<div class="text--center">
-  <img src="/img/docs/architecture-overview.png" alt="High level overview of Astro's architecture" />
-</div>
+![High level overview of Astro's architecture](/img/docs/architecture-overview.png)
 
 ### What to expect
 

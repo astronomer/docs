@@ -96,9 +96,7 @@ It might take a few minutes for the Airflow UI to be available. As you wait for 
 
 After logging in, you should see the DAGs from your `dags` directory in the Airflow UI.
 
-<div class="text--center">
-<img src="/img/docs/sample-dag.png" alt="Example DAG in the Airflow UI" />
-</div>
+![Example DAG in the Airflow UI](/img/docs/sample-dag.png)
 
 ## What's Next?
 

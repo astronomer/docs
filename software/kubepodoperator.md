@@ -65,7 +65,7 @@ KubernetesPodOperator(
 For each instantiation of the KubernetesPodOperator, you must specify the following values:
 
 - `namespace = conf.get("kubernetes", "NAMESPACE")`: Every Deployment runs on its own Kubernetes namespace. Information about this namespace can be programmatically imported as long as you set this variable.
-- `image`: This is the Docker image that the operator will use to run its defined task, commands, and arguments. The value you specify is assumed to be an image tag that's publicly available on [Docker Hub](https://hub.docker.com/). To pull an image from a private registry, read [Pull images from a Private Registry](kubernetespodoperator.md#run-images-from-a-private-registry).
+- `image`: This is the Docker image that the operator will use to run its defined task, commands, and arguments. The value you specify is assumed to be an image tag that's publicly available on [Docker Hub](https://hub.docker.com/). To pull an image from a private registry, read [Pull images from a Private Registry](kubernetespodoperator.md#pulling-images-from-a-private-registry).
 - `in_cluster=True`: When this value is set, your task will run within the cluster from which it's instantiated. This ensures that the Kubernetes Pod running your task has the correct permissions within the cluster.
 - `is_delete_operator_pod=True`: This setting ensures that once a KubernetesPodOperator task is complete, the Kubernetes Pod that ran that task is terminated. This ensures that there are no unused pods in your cluster taking up resources.
 

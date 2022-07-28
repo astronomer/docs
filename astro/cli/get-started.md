@@ -148,9 +148,7 @@ Once your project builds successfully, you can access the Airflow UI by going to
 
 After logging in, you should see two example DAGs in the Airflow UI that correspond to two files in the `dags` directory of your Astro project. These example DAGs are maintained by Astronomer and showcase Airflow features and best practices.
 
-<div class="text--center">
-<img src="/img/docs/sample-dag.png" alt="Example DAG in the Airflow UI" />
-</div>
+![Example DAG in the Airflow UI](/img/docs/sample-dag.png)
 
 That's all it takes to run Airflow locally using the Astro CLI! From here, you can add new DAGs to your Astro project and start developing.
 

@@ -23,9 +23,7 @@ All Airflow logs from your Astronomer logs will flow to Elasticsearch and can be
 
 After the index pattern is confirmed, the `Discover` tab displays logs as they become available.
 
-<div class="text--center">
-  <img src="/img/docs/add-fields.png" alt="Elastic Add Fields screen" />
-</div>
+![Elastic Add Fields screen](/img/docs/add-fields.png)
 
 From this view, you can add filters to see logs as they come in from all Airflow deployments. You can also add field filters.
 
