@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Install Astro on Azure'
+sidebar_label: 'Azure'
 title: 'Install Astro on Azure'
 id: install-azure
 description: Get started on Astro by creating your first Astro cluster on Azure.

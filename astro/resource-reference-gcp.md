@@ -1,5 +1,5 @@
 ---
-sidebar_label: "GCP resource reference"
+sidebar_label: "GCP"
 title: "Resources required for Astro on GCP"
 id: resource-reference-gcp
 description: Reference of all supported configurations for new clusters on Astro in Google Cloud Platform (GCP).

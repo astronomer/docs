@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Azure resource reference"
+sidebar_label: "Azure"
 title: "Resources required for Astro on Azure"
 id: resource-reference-azure
 description: Reference information for new Astro on Azure clusters.
