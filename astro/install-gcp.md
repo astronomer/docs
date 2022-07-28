@@ -48,9 +48,7 @@ To get started with Astro, create an account at https://cloud.astronomer.io/.
 
 When you first authenticate to Astro, you can sign in with a Google account, a GitHub account, or an email and password.
 
-<div class="text--center">
-  <img src="/img/docs/login.png" alt="Astro login screen" />
-</div>
+![Astro login screen](/img/docs/login.png)
 
 If you're the first person from your team to authenticate, Astronomer adds you as a Workspace Admin to a new Workspace named after your Organization. From there, you'll be able to add other team members to that Workspace without the assistance of Astronomer.
 
@@ -132,9 +130,7 @@ This process can take some time. Wait for confirmation that the installation is 
 
 When Astronomer confirms that your Astro cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option below the **Cluster** menu:
 
-<div class="text--center">
-  <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
-</div>
+![Cloud UI New Deployment screen](/img/docs/create-new-deployment-select-cluster.png)
 
 ## Next steps
 

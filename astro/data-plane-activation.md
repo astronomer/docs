@@ -10,9 +10,7 @@ import TabItem from '@theme/TabItem';
 
 Astro is a modern data orchestration platform, powered by Apache Airflow, that enables the entire data team to build, run, and observe data pipelines. The architecture of Astro includes a single-tenant data plane in your cloud and a multi-tenant control plane in Astronomer’s cloud.
 
-<div class="text--center">
-  <img src="/img/docs/architecture-overview.png" alt="High level overview of Astro's architecture" />
-</div>
+![High level overview of Astro's architecture](/img/docs/architecture-overview.png)
 
 ### What to expect
 
