@@ -5,9 +5,7 @@ id: create-project
 description: Get started on Astronomer Software.
 ---
 
-## Overview
-
-This guide will help you get started on Astronomer Software by walking through the process of creating a project and running it in a local Airflow environment.
+This is where you'll find information about creating a project and running it in a local Airflow environment.
 
 ## Prerequisites
 
@@ -96,9 +94,7 @@ It might take a few minutes for the Airflow UI to be available. As you wait for 
 
 After logging in, you should see the DAGs from your `dags` directory in the Airflow UI.
 
-<div class="text--center">
-<img src="/img/docs/sample-dag.png" alt="Example DAG in the Airflow UI" />
-</div>
+![Example DAG in the Airflow UI](/img/docs/sample-dag.png)
 
 ## What's next?
 

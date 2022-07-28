@@ -5,9 +5,7 @@ id: cli-reference
 description: A list of every command and setting in the Astro CLI.
 ---
 
-## Overview
-
-Astronomer's [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated webserver, scheduler and Postgres database. If you're an Astronomer customer, you can use the Astro CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
+The Astronomer [open source CLI](https://github.com/astronomer/astro-cli) is the easiest way to run Apache Airflow on your local machine. From the CLI, you can create a local Apache Airflow instance with a dedicated Webserver, Scheduler and Postgres Database. If you're an Astronomer customer, you can use the Astro CLI to create and manage users, Workspaces, Airflow Deployments, service accounts, and more.
 
 This document contains information about all commands and settings available in the Astro CLI, including examples and flags. It does not contain detailed guidelines on each command, but each section provides resources for additional information in a **Related documentation** section if it's available.
 
@@ -214,6 +212,7 @@ If you run `astro deploy` without specifying `your-deployment-release-name`, the
 | `--test`         | None       | A valid filepath within your Astro project to an alternative pytest file or directory. |
 | `--workspace-id` | String     | Lists available Deployments in your Workspace and prompts you to pick one.          |
 | `--no-cache`     | None       | Do not use any images from the container engine's cache when building your project. |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ### Related documentation
 
@@ -616,6 +615,7 @@ Parse the DAGs in a locally hosted Astro project to quickly check them for error
 | Flag          | Value Type | Usage                                              |
 | ------------- | ---------- | -------------------------------------------------- |
 | `--env`       | string     | The filepath to your environment variables. (The default is `.env`)  |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## astro dev ps
 
@@ -639,6 +639,7 @@ Run unit tests for your data pipelines with `pytest`, a testing framework for Py
 | ------------- | ---------- | -------------------------------------------------- |
 |`<pytest-filepath>`| String | Any valid filepath within the `tests` directory. |
 | `--env`       | string     | The filepath to your environment variables. (The default is `.env`)  |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## astro dev restart
 
@@ -655,6 +656,7 @@ astro dev restart
 | Flag          | Value Type | Usage                                              |
 | ------------- | ---------- | -------------------------------------------------- |
 | `--env`       | string     | The filepath to your environment variables. The default is `.env`  |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## astro dev run
 

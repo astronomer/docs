@@ -5,8 +5,6 @@ id: install-gcp
 description: Get started on Astro by creating your first Astro cluster on Google Cloud Platform (GCP).
 ---
 
-## Overview
-
 This is where you'll find instructions for installing Astro on the Google Cloud Platform (GCP).
 
 To complete the installation process, you'll:
@@ -30,7 +28,6 @@ For more information about managing Google Cloud projects, see [GCP documentatio
 
 For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
 
-<<<<<<< HEAD
 ### VPC Peering Prerequisites (Optional)
 
 If any of your GCP resources are on a private network, you can access them using one of the following options:
@@ -45,17 +42,13 @@ Astro uses 4 different CIDR blocks for creating the infrastructure for your Astr
 - **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
 - **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/19`)
 
-=======
->>>>>>> 10aa5454055bee5cf5c48a3cae23016ef9c559a1
 ## Step 1: Access Astro
 
 To get started with Astro, create an account at https://cloud.astronomer.io/.
 
 When you first authenticate to Astro, you can sign in with a Google account, a GitHub account, or an email and password.
 
-<div class="text--center">
-  <img src="/img/docs/login.png" alt="Astro login screen" />
-</div>
+![Astro login screen](/img/docs/login.png)
 
 If you're the first person from your team to authenticate, Astronomer adds you as a Workspace Admin to a new Workspace named after your Organization. From there, you'll be able to add other team members to that Workspace without the assistance of Astronomer.
 
@@ -137,9 +130,7 @@ This process can take some time. Wait for confirmation that the installation is 
 
 When Astronomer confirms that your Astro cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) again and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option below the **Cluster** menu:
 
-<div class="text--center">
-  <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
-</div>
+![Cloud UI New Deployment screen](/img/docs/create-new-deployment-select-cluster.png)
 
 ## Next steps
 

@@ -5,17 +5,17 @@ id: import-idp-groups
 description: Import your identity provider's organization structure into Astronomer Software.
 ---
 
-## Overview
+You can import existing identity provider (IdP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions for a specific Workspace or Deployment. Importing existing IdP groups as Teams lets you quickly onboard staff to Astronomer and provides better control of multiple user permissions.
 
-You can import existing identity provider (IdP) groups into Astronomer Software as Teams, which are groups of Astronomer users that have the same set of permissions to a given Workspace or Deployment. Importing existing IdP groups as Teams enables swift onboarding to Astronomer and better control over multiple user permissions.
-
-Astronomer Teams function similarly to users. Just like with an individual user, you can:
+Astronomer Teams function similar to users. You can:
 
 - Assign Teams to both Workspaces and Deployments.
 - Assign Viewer, Editor, or Admin roles to a Team.
 - View information about users and permissions from the Astronomer UI.
 
-This guide provides setup steps for importing IdP groups as Teams on Astronomer. Before completing this setup, keep in mind the following about Teams:
+## Implementation considerations
+
+Before you implement Teams, consider the following:
 
 - By default, the first user to log in to your Astronomer platform is automatically granted `SYSTEM ADMIN` permissions. If you are configuring Teams for a new Astronomer installation, we recommend first logging in as the user who will be responsible for importing your IdP groups using Astronomer's default login flow.
 - Teams are based solely on the IdP group they were configured from, meaning that you cannot configure Team membership from Astronomer.
@@ -37,10 +37,10 @@ For example, consider a user who has been a Workspace Editor in `Production Work
 
 To complete this setup, you need:
 
-- A configured third party identity provider as described in [Integrate an auth system](integrate-auth-system.md).
-- System Admin permissions for configuring the feature.
+- A configured third party identity provider. See [Integrate an auth system](integrate-auth-system.md).
+- System Admin permissions for configuring the feature. 
 - Workspace or Deployment Admin permissions for managing Teams.
-- An [integrated IdP](integrate-auth-system.md).
+- An OAuth authorization code flow. See [Configure a custom OAuth flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
 - An IdP group.
 
 ## Step 1: Enable Astronomer teams
@@ -62,7 +62,10 @@ To add your IdP group to Astronomer as a Team, Astronomer needs to be able to re
 
 If you haven't already, add group claims to the IdP groups that you're importing to Astronomer through your configured [third party identity provider](integrate-auth-system.md). Refer to your IdP's documentation for information on how to complete this step. For example, for Okta you can refer to [Customize tokens returned from Okta with a Groups claim](https://developer.okta.com/docs/guides/customize-tokens-groups-claim/main).
 
-Once you configure this claim, your IdP group will be automatically imported to Astronomer as a Team. The name that you specify in your group claim will become your Astronomer Team name.
+By default, Astronomer assumes that the name of your group claim is `groups`. If you named your group claim something other than `groups`, complete the following setup:
+
+1. In your `config.yaml` file, set `houston.config.auth.openidConnect.<idp-provider>.claimsMapping` to the custom name of your group claim.
+2. Save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).
 
 ## Step 3: Add Teams to Workspaces and Deployments
 

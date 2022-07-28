@@ -9,8 +9,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 The Astro CLI is an open source command line for modern data orchestration. It is the easiest way to run Apache Airflow on your machine. By the end of this quickstart, you'll have an Airflow environment running locally with just a few commands. From there, you can start building your project with your own DAGs, dependencies, and tests.
 
 ## Step 1: Install the Astro CLI
@@ -48,7 +46,7 @@ brew install astro
 To use the Astro CLI on Windows, you must have:
 
 - [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
 - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
 -  Windows 10 or Windows 11.
 
@@ -76,7 +74,7 @@ To use the Astro CLI on Windows, you must have:
 
 To use the Astro CLI on Linux, you must have:
 
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
 
 #### Installation
 
@@ -150,9 +148,7 @@ Once your project builds successfully, you can access the Airflow UI by going to
 
 After logging in, you should see two example DAGs in the Airflow UI that correspond to two files in the `dags` directory of your Astro project. These example DAGs are maintained by Astronomer and showcase Airflow features and best practices.
 
-<div class="text--center">
-<img src="/img/docs/sample-dag.png" alt="Example DAG in the Airflow UI" />
-</div>
+![Example DAG in the Airflow UI](/img/docs/sample-dag.png)
 
 That's all it takes to run Airflow locally using the Astro CLI! From here, you can add new DAGs to your Astro project and start developing.
 

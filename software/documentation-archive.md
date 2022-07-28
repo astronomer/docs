@@ -7,8 +7,6 @@ description: Links to all current and previous versions of Astronomer Software d
 
 <!--version-specific-->
 
-## Overview
-
 This document lists all available versions of Astronomer Software documentation, organized by their current support status.
 
 While only maintained documentation sets appear under the Astronomer Software documentation menu, Astronomer preserves all versions for historical reference. The support timeline for a given set of documentation is the same as the support timeline for the corresponding version of Astronomer Software.
@@ -37,10 +35,12 @@ This section contains links to documentation sets that correspond to all previou
 
 - [v0.28](https://docs.astronomer.io/software/0.28/overview)
 - [v0.27](https://docs.astronomer.io/software/0.27/overview)
-- [v0.26](https://docs.astronomer.io/software/0.26/overview)
-- [v0.25](https://docs.astronomer.io/software/0.25/overview)
 
 ### Unmaintained versions
 
+- [v0.26](https://docs.astronomer.io/software/0.26/overview)
+- [v0.25](https://docs.astronomer.io/software/0.25/overview)
 - [v0.23](https://docs.astronomer.io/software/0.23/overview)
 - [v0.16](https://docs.astronomer.io/software/0.16/overview)
+- [v0.26](https://docs.astronomer.io/software/0.26/overview)
+- [v0.25](https://docs.astronomer.io/software/0.25/overview)

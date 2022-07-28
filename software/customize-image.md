@@ -9,9 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
-The Astro CLI is intended to make it easier to develop with Apache Airflow, whether you're developing on your local machine or deploying code to Astronomer. The following guidelines describe a few of the methods you can use to customize the Docker image that gets pushed to Airflow every time you rebuild your image locally using `$ astro dev start` or deploy to Astronomer using `$ astro deploy`.
+The Astro CLI is intended to make it easier to develop with Apache Airflow, whether you're developing on your local machine or deploying code to Astronomer. The following guidelines describe a few of the methods you can use to customize the Docker Image that gets pushed to Airflow every time you rebuild your image locally using `$ astro dev start` or deploy to Astronomer using `$ astro deploy`.
 
 More specifically, this doc includes instructions for how to:
 
@@ -345,6 +343,9 @@ This example assumes that the name of each of your Python packages is identical 
     FROM stage1 AS stage3
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+    COPY --from=stage2 /usr/local/bin /home/astro/.local/bin 
+    ENV PATH="/home/astro/.local/bin:$PATH"
+
     COPY . .
     ```
 
@@ -451,7 +452,7 @@ Ensure that the name of the package on the private repository does not clash wit
 
    :::
 
-3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
+3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -473,6 +474,9 @@ Ensure that the name of the package on the private repository does not clash wit
     FROM stage1 AS stage3
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+    COPY --from=stage2 /usr/local/bin /home/astro/.local/bin 
+    ENV PATH="/home/astro/.local/bin:$PATH"
+
     COPY . .
     ```
 

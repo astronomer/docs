@@ -5,8 +5,6 @@ id: configure-deployment
 description: Configure your Airflow Deployment's resources on Astronomer Software.
 ---
 
-## Overview
-
 An Airflow Deployment on Astronomer is an instance of Apache Airflow that was created using the Software UI or the Astro CLI. Each Airflow Deployment on Astronomer is hosted on a single Kubernetes namespace, has a dedicated set of resources, and operates with an isolated Postgres metadata database.
 
 This guide walks you through the process of creating and configuring an Airflow Deployment on Astronomer.
@@ -99,44 +97,6 @@ To increase the speed at which tasks are scheduled and ensure high-availability,
 Airflow 2.2 introduces the triggerer, which is a component for running tasks with [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html). Like the scheduler, the triggerer is highly-available: If a triggerer shuts down unexpectedly, the tasks it was deferring can be recovered and moved to another triggerer.
 
 By adjusting the **Triggerer** slider in the Software UI, you can provision up to 2 triggerers on any Deployment running Airflow 2.2+. To take advantage of the Triggerer's high availability, we recommend provisioning 2 triggerers for production Deployments.
-
-Note that this feature must first be enabled by a System Admin before it appears in your Deployments. To enable triggerers, follow the steps in the following section.
-
-#### Enable triggerers
-
-Triggerers are available only in Deployments running Airflow 2.2+. Additionally, the feature must be explicitly enabled on your platform by a user with System Admin permissions. To enable the feature, update your `config.yaml` file with the following values:
-
-```yaml
-astronomer:
-  houston:
-    config:
-      deployments:
-        triggererEnabled: true
-```
-
-If you have overridden  `astronomer.houston.config.deployments.components`, you additionally need to add the following configuration:
-
-```yaml
-astronomer:
-  houston:
-    config:
-      deployments:
-        components:
-          # add this block to the other components you've overridden
-          - name: triggerer
-            au:
-              default: 5
-              limit: 30
-              request: ~
-            extra:
-              - name: replicas
-                default: 0
-                minimum: 0
-                limit: 2
-                minAirflowVersion: "2.2.0"    
-```
-
-After you save these changes, push your `config.yaml` file to your installation as described in [Apply a config change](apply-platform-config.md).
 
 ## Kubernetes executor: Set extra capacity
 

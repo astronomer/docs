@@ -5,8 +5,6 @@ id: astro-deployment-variable-update
 description: Reference documentation for astro deployment variable update.
 ---
 
-## Description
-
 For a given Deployment on Astro, use `astro deployment variable update` to update the value of an existing environment variable via the Astro CLI. To do so, you can either:
 
 - Manually enter a new `--value` in your command line for a given `--key`, or

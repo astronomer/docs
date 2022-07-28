@@ -5,8 +5,6 @@ id: astro-deployment-variable-list
 description: Reference documentation for astro deployment variable list.
 ---
 
-## Description
-
 For a given Deployment on Astro, list its running environment variables in your terminal. To test these environment variables locally without having to manually copy them, you can also use this command to save them in a local `.env` file.
 
 If an existing `.env` file already exists in your current directory, `--save` will append environment variables to the bottom of that file. It will not override or replace its contents. If `.env` does not exist, `--save` will create the file for you.

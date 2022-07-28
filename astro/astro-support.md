@@ -10,7 +10,7 @@ In addition to product documentation, the following resources are available to h
 - [Astronomer Forum](https://forum.astronomer.io)
 - [Airflow Guides](https://www.astronomer.io/guides/)
 
-If you're experiencing an issue or have a question that requires Astronomer expertise, you can use one of the following methods to contact Astronomer support:
+If you're experiencing an issue or have a question that requires Astronomer expertise, or if you want to [modify a cluster configuration](modify-cluster.md), use one of the following methods to contact Astronomer support:
 
 - Submit a support request in the [Cloud UI](astro-support.md#submit-a-support-request-in-the-cloud-ui)
 - Submit a support request on the [Astronomer support portal](https://support.astronomer.io/hc/en-us)
@@ -38,6 +38,7 @@ Examples:
 
 - The Airflow UI is unavailable.
 - You are unable to deploy code to your Deployment, but existing DAGs and tasks are running as expected.
+- You need to [modify a cluster setting](modify-cluster.md) that is required for running tasks, such as adding a new worker instance type.
 - Task logs are missing in the Airflow UI.
 
 **P3:** Medium impact. Service is partially impaired.
@@ -45,6 +46,7 @@ Examples:
 Examples:
 
 - There is a bug in the Software UI.
+- You need to [modify a cluster setting](modify-cluster.md) that affects your cluster's performance but isn't required to run task, such as changing the size of your cluster's database or adding a new VPC peering connection.
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
@@ -73,9 +75,7 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
 1. In the Cloud UI, click **Help** > **Submit Support Request**.
 
-    <div class="text--center">
-    <img src="/img/docs/support-request-location.png" alt="Submit Support Request menu location" />
-    </div>
+    ![Submit Support Request menu location](/img/docs/support-request-location.png)
 
 2. Complete the following fields:
 

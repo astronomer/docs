@@ -5,25 +5,25 @@ id: secrets-backend
 description: Configure a secrets backend on Astronomer Software to store Airflow variables and connections in a centralized place.
 ---
 
-## Overview
-
 Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
 
-Integrating a secrets backend tool on Astronomer Software allows you to:
+## Secrets Backend Tool Integration Benefits
+
+Integrating a secrets backend tool with Astronomer Software allows you to:
 
 - Store Airflow variables and connections in a centralized location alongside secrets from other tools and systems used by your team, including Kubernetes secrets, SSL certificates, and more.
 - Comply with internal security postures and policies that protect your organization.
 - Recover in the case of an incident.
 - Automatically pull Airflow variables and connections that are already stored in your secrets backend when you create a new Deployment instead of having to set them manually in the Airflow UI.
 
-To meet these requirements, Astronomer Software supports integration with a variety of secret backend tools. This guide provides setup steps for configuring the following tools as secrets backends on Astronomer:
+Astronomer Software integrates with the following secrets backend tools:
 
 - Hashicorp Vault
 - AWS Systems Manager Parameter Store
 - Google Cloud Secret Manager
 - Azure Key Vault
 
-All secrets backend integrations are set per Deployment on Astronomer Software.
+Secrets backend integrations are configured individually with each Astronomer Software Deployment.
 
 :::info
 
@@ -179,7 +179,7 @@ Once you've added this DAG to your project:
 
 1. Run `astro dev stop` followed by `astro dev start` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**.  If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**.  If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -290,7 +290,7 @@ To test your changes:
 
 1. Run `astro dev stop` followed by `astro dev start` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -400,7 +400,7 @@ To test your changes:
 
 1. Run `astro dev stop` followed by `astro dev start` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -467,18 +467,17 @@ apache-airflow-providers-microsoft-azure
 In your `Dockerfile`, add the following environment variables with your own values:
 
 ```dockerfile
-ENV AZURE_CLIENT_ID="<your-client-id>" # Found on App page > 'Application (Client) ID'
-ENV AZURE_TENANT_ID="<your-tenant-id>" # Found on Properties > 'Tenant ID'
+ENV AZURE_CLIENT_ID="<your-client-id>" # Found on App Registration page > 'Application (Client) ID'
+ENV AZURE_TENANT_ID="<your-tenant-id>" # Found on App Registration page > 'Directory (tenant) ID'
 ENV AZURE_CLIENT_SECRET="<your-client-secret>" # Found on App Registration Page > Certificates and Secrets > Client Secrets > 'Value'
 ENV AIRFLOW__SECRETS__BACKEND="airflow.providers.microsoft.azure.secrets.azure_key_vault.AzureKeyVaultBackend"
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}'
 ```
 
-This tells Airflow to look for variable information at the `airflow/variables/*` path in Azure Key Vault and connection information at the `airflow/connections/*` path. In the next step, you'll run an example DAG to test this configuration locally.
+This tells Airflow to look for variable information at the `airflow-variables-*` path in Azure Key Vault and connection information at the `airflow-connections-*` path. In the next step, you'll run an example DAG to test this configuration locally.
 
 :::tip
-By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, replace the values for `"connections_prefix"` and `"connections_prefix"` with `""`.
-:::
+By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `sep`, `"connections_prefix"`, and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
 :::warning
 
@@ -514,7 +513,7 @@ To test your changes:
 
 1. Run `astro dev stop` followed by `astro dev start` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable

@@ -1,16 +1,17 @@
 ---
-sidebar_label: 'KubernetesPodOperator'
+sidebar_label: 'Run the KubernetesPodOperator on Astro'
 title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
 
-## Overview
+The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
 
-This guide provides steps for configuring and running the KubernetesPodOperator on DAGs deployed to Astro.
+## Benefits of the KubernetesPodOperator
 
-The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of Apache Airflow's most powerful operators. Similar to the Kubernetes executor, this operator talks to the Kubernetes API to dynamically launch a Pod in Kubernetes for each task that needs to run and terminates each Pod once the task is completed. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers. The KubernetesPodOperator enables you to:
+The KubernetesPodOperator enables you to:
 
 - Execute a custom Docker image per task with Python packages and dependencies that would otherwise conflict with the rest of your Deployment's dependencies. This includes Docker images in a private registry or repository.
+- Run tasks Kubernetes cluster outside of the Astro data plane. This allows you to run individual tasks on infrastructure that might not be supported on Astro yet, such as GPU nodes or on other third-party services.
 - Specify CPU and Memory as task-level limits or minimums to optimize for cost and performance.
 - Write task logic in a language other than Python. This gives you flexibility and can enable new use cases across teams.
 - Scale task growth horizontally in a way that is cost-effective, dynamic, and minimally dependent on worker resources.
@@ -18,9 +19,12 @@ The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-provi
 
 On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperator is built into every cluster in the data plane and is managed by Astronomer.
 
-## Prerequisites
+## Known limitations
 
-To use the KubernetesPodOperator, you need:
+- Cross-account service accounts are not supported on pods launched in the Astro cluster.
+- PersistentVolumes (PVs) are not supported on pods launched in the Astro cluster.
+
+## Prerequisites
 
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
@@ -112,9 +116,11 @@ To complete this setup, you need:
 To run Docker images from a private registry on Astro, you first need to create a Kubernetes secret that contains credentials to your registry. Astronomer will then inject that secret into your Deployment's namespace, which will give your tasks access to Docker images within your registry. To do this, complete the following setup:
 
 1. Log in to your Docker registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file.
-2. Reach out to [Astronomer support](https://support.astronomer.io) and include the namespace of the Deployment you want to use the KubernetesPodOperator with. A Deployment's namespace can be found in the Deployment view of the Astronomer UI.
+2. In the Cloud UI, select a Workspace and then select the Deployment you want to use the KubernetesPodOperator with.
+3. Copy the value in the **NAMESPACE** field.
+4. Reach out to [Astronomer support](https://support.astronomer.io) and provide the namespace of the Deployment.
 
-From here, Astronomer Support will give you instructions on how to securely send the output of your `/.docker/config.json` file. Do not send this file via email, as it contains sensitive credentials to your registry.
+Astronomer Support will give you instructions on how to securely send the output of your `/.docker/config.json` file. Do not send this file by email, as it contains sensitive credentials to your registry.
 
 ### Step 2: Specify the Kubernetes Secret in your DAG
 
@@ -139,3 +145,7 @@ KubernetesPodOperator(
     get_logs=True,
 )
 ```
+## Related documentation
+
+- [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
+- [KubernetesPodOperator Airflow Guide](https://www.astronomer.io/guides/kubepod-operator/)

@@ -5,8 +5,6 @@ id: logs-to-s3
 description: Configure Astronomer Software to forward logs to Amazon S3.
 ---
 
-## Overview
-
 If you're running Astronomer Software and are interested in making Airflow task logs available in an Amazon S3 bucket, you're more than free to do so on the platform.
 
 For context, Astronomer Software leverages [Fluentd](https://www.fluentd.org/) as a data collector that is responsible for scraping and cleaning Airflow task logs to then send to [Elasticsearch](https://www.elastic.co/elasticsearch/), a search engine used to centralize and index logs from Airflow. The Airflow webserver pulls from Elasticsearch to render those logs directly to the user in the Airflow UI.

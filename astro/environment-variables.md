@@ -5,9 +5,7 @@ id: environment-variables
 description: Set environment variables on Astro to specify Airflow configurations and custom logic.
 ---
 
-## Overview
-
-You can use environment variables to set Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) and custom values for your Deployments.
+You can use environment variables to set Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) and custom values for your Airflow Deployments.
 
 For instance, you can set environment variables to:
 
@@ -165,19 +163,13 @@ Here, the environment variable would read:
 ENV AIRFLOW_VAR_MY_VAR=2
 ```
 
-## View environment variables in the Airflow UI
-
-By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To view a Deployment's current environment variables from the Airflow UI, you can set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` either in your Dockerfile or the Cloud UI.
-
-You might want to turn on this setting if you want explicit confirmation that an environment variable change was correctly applied to a Deployment, or if you want anyone accessing the Deployment to have more convenient access to environment variable values when working in the Airflow UI.
-
 ## Environment variable priority
 
 On Astro, environment variables are applied and overridden in the following order:
 
 1. Cloud UI
-2. [.env (local development only)](develop-project.md#set-environment-variables-via-env-local-development-only))
+2. [.env (local development only)](develop-project.md#set-environment-variables-local-development))
 3. Dockerfile
-4. Default Airflow Values (`airflow.cfg`)
+4. Default Airflow values
 
-For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value via the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI will take precedence.
+For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence.

@@ -18,6 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get started',
       items: [
+        'log-in-to-astro',
         'create-project',
         'create-deployment',
       ],
@@ -32,6 +33,7 @@ module.exports = {
           label: 'Write DAGs',
           items: [
             'deferrable-operators',
+            'kubepodoperator-local',
             'kubernetespodoperator',
           ],
         },
@@ -64,7 +66,14 @@ module.exports = {
       items: [
         'view-logs',
         'deployment-metrics',
-        'data-lineage',
+        {
+          type: 'category',
+          label: 'Data lineage',
+          items: [
+            'set-up-data-lineage',
+            'data-lineage',
+          ],
+        },
         'airflow-alerts',
       ],
     },
@@ -81,7 +90,6 @@ module.exports = {
           ],
         },
         'manage-workspaces',
-        'set-up-data-lineage',
         {
           type: 'category',
           label: 'User access',
@@ -93,8 +101,9 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Manage clusters',
+          label: 'Manage Clusters',
           items: [
+            'view-clusters',
             'create-cluster',
             'modify-cluster',
             'connect-external-services',
@@ -115,6 +124,7 @@ module.exports = {
       label: 'Reference',
       items: [
         'known-limitations',
+        'runtime-image-architecture',
         'runtime-version-lifecycle-policy',
         'astro-support',
         {

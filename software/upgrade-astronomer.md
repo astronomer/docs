@@ -5,8 +5,6 @@ id: upgrade-astronomer
 description: Upgrade to a new LTS, stable, or patch version of Astronomer Software.
 ---
 
-## Overview
-
 For Astronomer Software customers, new product features are regularly made available in stable and long-term support (LTS) releases as described in [Release and lifecycle policy](release-lifecycle-policy.md). Patch versions of Astronomer Software with additional bug and security fixes are also released on a regular basis.
 
 Follow this guide to upgrade to any version of Astronomer Software. For information on new features and changes, refer to [Software release notes](release-notes.md).
@@ -14,6 +12,12 @@ Follow this guide to upgrade to any version of Astronomer Software. For informat
 A few notes before you get started:
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
 - Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
+
+:::info Upgrading Kubernetes
+
+To avoid extended service disruptions, Astronomer recommends upgrading Astronomer Software to a compatible version before you upgrade Kubernetes. To view Astronomer Software and Kubernetes compatibility information, see [Version compatibility reference for Astronomer Software](version-compatibility-reference.md#astronomer-software).
+
+:::
 
 ## Step 1: Review upgrade considerations
 
@@ -137,6 +141,8 @@ Make changes as needed and rerun the upgrade command from Step 7. Do not continu
 ## Upgrade considerations
 
 This topic contains information about upgrading to specific versions of Astronomer Software. This includes notes on breaking changes, database migrations, and other considerations that might depend on your use case.
+
+To avoid extended service disruptions, Astronomer recommends upgrading Astronomer Software to a compatible version before you upgrade Kubernetes. To view Astronomer Software and Kubernetes compatibility information, see [Version compatibility reference for Astronomer Software](version-compatibility-reference.md#astronomer-software).
 
 ### Upgrading to 0.29
 

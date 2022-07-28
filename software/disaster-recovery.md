@@ -5,8 +5,6 @@ id: disaster-recovery
 description: A guide to platform backups and disaster recovery for Astronomer Software.
 ---
 
-## Overview
-
 All applications are vulnerable to service-interrupting events - a network outage, a team member accidentally deleting a namespace, a critical bug introduced by your latest application push or even a natural disaster. All are rare and undesirable events that modern teams running enterprise-grade software need to protect against. At Astronomer, we encourage all customers to have a robust, targeted, and well-tested DR (Disaster Recovery) plan.
 
 The doc below will provide guidelines for how to:

@@ -7,8 +7,6 @@ description: Create an Astro project and run it locally with the Astro CLI.
 
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
 To run Airflow pipelines on Astro, you first need to create an Astro project. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. Once you've tested these files locally, the Astro project structure makes it easy to deploy your pipelines to Astro.
 
 This guide provides instructions for creating a new Astro project, as well as information about the default Astro project structure.
@@ -147,13 +145,9 @@ It might take a few minutes for the Airflow UI to be available. As you wait for 
 
 After logging in, you should see the DAGs from your `dags` directory in the Airflow UI.
 
-<div class="text--center">
-<img src="/img/docs/sample-dag.png" alt="Example DAG in the Airflow UI" />
-</div>
+![Example DAG in the Airflow UI](/img/docs/sample-dag.png)
 
-## Next steps
-
-Running your project locally is the best way to test your DAGs before pushing them to Astro. For more information on running a local Airflow environment, read:
+## Related documentation
 
 - [Develop your Astro Project](develop-project.md)
 - [Test and troubleshoot locally](test-and-troubleshoot-locally.md#run-a-project-locally)

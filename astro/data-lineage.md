@@ -1,11 +1,9 @@
 ---
-sidebar_label: 'Data lineage'
-title: "Data lineage on Astro"
+sidebar_label: 'Lineage UI'
+title: "View lineage on Astro"
 id: data-lineage
 description: "Track and visualize the movement of your data with data lineage on Astro"
 ---
-
-## Overview
 
 The **Lineage** tab in the Cloud UI can help you troubleshoot issues with your data pipelines and understand the movement of data across your Organization.
 
@@ -19,13 +17,23 @@ From the **Lineage** tab on Astro, you can access the following four pages:
 
 You can use these pages to diagnose issues that may be difficult to troubleshoot in other environments. For example, if an Airflow task failed because a database schema changed, you can use the **Lineage** page on Astro to determine which job caused the change and which downstream tasks failed as a result.
 
-All members of your Organization can view the **Lineage** page. For more information on data lineage and related concepts, see [Data lineage concepts](data-lineage-concepts.md).
+For more information on data lineage and related concepts, see [Data lineage concepts](data-lineage-concepts.md).
+
+:::caution
+
+All members of your Astro Organization can view the **Lineage** tab regardless of their Workspace permissions. The **Lineage** tab could contain plain-text SQL and Python code from any system that emits lineage data to Astro. If this is a security concern for your organization, reach out to [Astronomer support](https://support.astronomer.io/).
+
+:::
 
 :::info
 
 This functionality is early access and under active development. If you have any questions or feedback about this feature, contact [Astronomer support](https://support.astronomer.io/).
 
 :::
+
+## Prerequisites
+
+To view lineage data for Deployments, you must configure Airflow and your external systems to emit lineage data. See [Enable data lineage for external systems](set-up-data-lineage.md).
 
 ## View the lineage graph for a data pipeline
 

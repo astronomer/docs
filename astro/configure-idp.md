@@ -9,10 +9,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
-This guide provides setup steps for integrating various third party identity providers (IdP) with Astro.
-
 Identity Providers (IdPs) are services that manage user accounts. As organizations grow, it's common for teams to integrate internal tooling with a third-party IdP. This allows administrators to monitor application access, user permissions, and security policies from a single place. It also makes it easy for individual users to access the tools they need.
 
 Astro supports integrations with the following IdPs:
@@ -25,6 +21,7 @@ This guide provides setup steps for integrating both of these identity providers
 - Users will automatically be authenticated to Astro if they're already logged in to your IdP.
 - Users will no longer have to repeatedly login and remember credentials for their account.
 - You will have complete ownership over credential configuration and management on Astro.
+- You can enforce multi-factor authentication (MFA) for users.
 
 :::info
 

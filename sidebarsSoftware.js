@@ -18,6 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get started',
       items: [
+      'log-in-to-software',
       'install-cli',
       'create-project',
       ],
@@ -28,6 +29,7 @@ module.exports = {
       items: [
       'customize-image',
       'manage-airflow-versions',
+      'upgrade-to-airflow-2',
       'access-airflow-database',
       'airflow-api',
       {
@@ -35,8 +37,8 @@ module.exports = {
       label: 'Write DAGs',
       items: [
       'deferrable-operators',
-      'kubepodoperator',
       'kubepodoperator-local',
+      'kubepodoperator',
       'kubernetes-executor',
         ],
       },
@@ -139,6 +141,15 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Astro Runtime',
+      items: [
+      'runtime-image-architecture',
+      'migrate-to-runtime',
+      'runtime-version-lifecycle-policy',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Troubleshoot',
       items: [
       'kubectl',
@@ -152,6 +163,7 @@ module.exports = {
     items: [
       'release-notes',
       'cli-release-notes',
+      'runtime-release-notes',
     ],
     },
     {

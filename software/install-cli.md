@@ -9,9 +9,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Overview
-
-This guide provides instructions for how to install the Astro CLI.
 
 The Astro CLI is the easiest way to run Apache Airflow on your machine. From the Astro CLI, you can run a local Apache Airflow environment with a dedicated webserver, scheduler and Postgres database. Once you create an Astronomer Software project, you can customize it (for example, add Python or OS-level packages or add plugins) and test it on your local machine.
 
@@ -56,7 +53,7 @@ brew install astro
 To use the Astro CLI on Windows, you must have:
 
 - [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.13.1 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
 - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
 -  Windows 10 or Windows 11.
 
@@ -84,7 +81,7 @@ To use the Astro CLI on Windows, you must have:
 
 To use the Astro CLI on Linux, you must have:
 
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
 
 #### Installation
 

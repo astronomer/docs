@@ -7,8 +7,8 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'error',
-  onBrokenMarkdownLinks: 'error',
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.svg',
   organizationName: 'astronomer', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
@@ -81,16 +81,6 @@ module.exports = {
               label: '0.28',
               to: '/software/0.28/overview',
               activeBaseRegex: '(software\/0.28)+',
-            },
-            {
-              label: '0.27',
-              to: '/software/0.27/overview',
-              activeBaseRegex: '(software\/0.27)+',
-            },
-            {
-              label: '0.26',
-              to: '/software/0.26/overview',
-              activeBaseRegex: '(software\/0.26)+',
             },
             {
               label: '0.25',

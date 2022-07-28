@@ -5,8 +5,6 @@ id: namespace-pools
 description: Manually create Kubernetes namespaces for new Deployments.
 ---
 
-## Overview
-
 Every Deployment within your Astronomer Software installation requires an individual [Kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). You can configure a pool of pre-created namespaces to limit Astronomer Software access to these namespaces.
 
 When you configure a pool of pre-created namespaces, Astronomer users are required to select a namespace from the pool whenever they create a new Deployment. Once the Deployment is created, its corresponding namespace is no longer available. If a Deployment is deleted, its namespace is returned to the pool and is available.

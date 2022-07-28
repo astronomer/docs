@@ -6,9 +6,7 @@ description: Access Airflow's Postgres metadata database on Astronomer Software.
 
 ---
 
-## Overview
-
-On Astronomer, each Airflow deployment is equipped with a PostgreSQL database that serves as Airflow's underlying metadata database and your Airflow scheduler's source of truth.
+On Astronomer, each Airflow deployment is equipped with a PostgreSQL database that serves as Airflow's underlying metadata database and the scheduler's source of truth.
 
 On Astronomer Software, a Postgres metadata database will be created for each individual Airflow Deployment and hosted within your wider platform database.
 
@@ -69,7 +67,7 @@ Your connection should look something like:
 
 ![Local Connections Details Page](https://assets2.astronomer.io/main/docs/query-postgres/query-postgres-connection-details.png)
 
-The port will be set to 5342 by default but if you’ve set a custom port, you’ll need to update that here as well.
+The port will be set to 5432 by default but if you’ve set a custom port, you’ll need to update that here as well.
 
 **3. Connect to `airflow_db` in your DAG**
 
