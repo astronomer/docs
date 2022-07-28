@@ -84,3 +84,51 @@ astro dev kill
 ```
 
 This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow connections, logs, and task history.
+
+## Troubleshoot dependency errors
+
+When operating system or Python package dependency errors occur, the error message that is returned often doesn't contain enough information to help you resolve the error. To retrieve additional error information, you can review individual package dependencies inside your local Docker containers.
+
+1. Run the following command to intialize a new `.astro` project:
+
+ ```sh
+    astro dev init
+ ```
+2. Run the following command to build your Astro project into a Docker image and start a local Docker container for each Airflow component:
+
+ ```sh
+    astro dev start
+ ```
+
+3. Run the following command to retrieve the container IDs:
+
+ ```sh
+    docker ps
+ ```
+4. Run the following command to open a bash terminal in a running container:
+
+ ```sh
+    docker exec -it -u 0 <container_id> /bin/bash
+ ```
+    Replace `container_id` with one of the IDs you retrieved in step 3.
+
+5. Run the following command to download and install the prebuilt OpenJDK packages and review any error messages that are returned:
+
+ ```bash
+    apt-get install openjdk-8-jdk
+ ```
+6. Run the following command to install the GNU Compiler Collection (GCC) compiler and review any error messages that are returned:
+
+ ```bash
+    apt-get install gcc
+ ```
+7. Run the following command to install the G++ compiler and review any error messages that are returned:
+
+ ```bash
+    apt-get install g++
+ ```
+ 8. Run the following command to install the libsasl2-dev package and review any error messages that are returned:
+
+ ```bash
+    apt-get install g++
+ ```
