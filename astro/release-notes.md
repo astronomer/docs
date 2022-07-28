@@ -17,7 +17,7 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 ## July 27, 2022
 
-### New Deployment configurations for high availability (HA)
+### New Deployment optimizations for high availability (HA)
 
 This release introduces two changes that ensure a higher level of reliability for Deployments on Astro:
 
