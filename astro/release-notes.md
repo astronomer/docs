@@ -36,7 +36,7 @@ For more information on Deployment configurations, see [Configure Deployment res
 ### Additional improvements
 
 - You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
-- Organizations now need only a single AWS external ID for all clusters.
+- Organizations now need only a single AWS external ID for all clusters. Previously, each cluster required a unique external ID, which added complexity to the installation and cluster creation process.
 - You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
