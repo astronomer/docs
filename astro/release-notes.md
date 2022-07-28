@@ -15,11 +15,28 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.0 ([Release notes](cli/release-notes.md))
 
+## July 27, 2022
+
+### New Deployment optimizations for high availability (HA)
+
+This release introduces two changes that ensure a higher level of reliability for Deployments on Astro:
+
+- [PgBouncer](https://www.pgbouncer.org/), a microservice that increases resilience by pooling database connections, is now considered highly available on Astro. Every Deployment must now have 2 PgBouncer Pods instead of 1, each assigned to a different node within the cluster. This change protects against pod-level connection issues resulting in [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks), which was previously seen during cluster downscaling events. PgBouncer is fully managed by Astronomer and is not configurable.
+
+- The Airflow scheduler is now configured with an [anti-affinity policy](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to limit the possibility of all schedulers for a single Deployment being impacted by an incident within a single node on an Astro cluster. For users who set **Scheduler Count** in the Cloud UI to 2, this means that those 2 scheduler Pods cannot be assigned to the same node and instead require a minimum of 2 nodes total. To avoid significant increases in cost, 3 or 4 schedulers can share the same 2 nodes and will not necessarily result in a higher node count minimum.
+
+For more information on Deployment configurations, see [Configure Deployment resources](configure-deployment-resources.md).
+
+### Additional improvements
+
+- Added tooltips for [Deployment overview metrics](deployment-metrics.md#deployment-overview) in the Cloud UI.
+
 ## July 21, 2022
 
 ### Additional improvements
 
 - You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
+- Organizations now need only a single AWS external ID for all clusters. Previously, each cluster required a unique external ID, which added complexity to the installation and cluster creation process.
 - You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
