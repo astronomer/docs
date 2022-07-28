@@ -11,6 +11,8 @@ import {siteVariables} from '@site/src/versions';
 
 This is where you'll find information about installing, upgrading, and uninstalling the Astro CLI.
 
+## Install the Astro CLI
+
 <Tabs
     defaultValue="mac"
     values={[
@@ -19,8 +21,6 @@ This is where you'll find information about installing, upgrading, and uninstall
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="mac">
-
-## Install the Astro CLI
 
 This is where you'll find information about installing the Astro CLI on a Mac operating system.
 
@@ -50,8 +50,6 @@ If you specify only a major version, this command installs the latest minor or p
 </TabItem>
 
 <TabItem value="windows">
-
-## Install the Astro CLI
 
 This is where you'll find information about installing the Astro CLI on a Windows operating system.
 
@@ -83,8 +81,6 @@ To use the Astro CLI on Windows, you must have:
 </TabItem>
 
 <TabItem value="linux">
-
-## Install the Astro CLI
 
 This is where you'll find information about installing the Astro CLI on Linux.
 
