@@ -223,4 +223,6 @@ curl -X GET \
   https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-RELEASE-NAME>/api/v1/config \
   -H 'Authorization: <API-KEY>' \
   -H 'Cache-Control: no-cache'
+  -H 'Content-Type: application/json' -d '{}
+  -H 'Content-Type: application/json' -d '{}
 ```
