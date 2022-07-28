@@ -1,22 +1,22 @@
 ---
 title: 'Observe Airflow environments with Telescope'
 id: telescope
-description: Use the Telescope CLI to collect Airflow metrics and usage for Astronomer.
+description: Use the Telescope CLI to collect Airflow metrics and usage data for Astronomer.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-[Telescope](https://github.com/astronomer/telescope) is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at various points in time. Astronomer uses this information to troubleshoot your environments.
+[Telescope](https://github.com/astronomer/telescope) is a CLI developed by Astronomer for generating additional metrics from your Airflow environments. It connects directly to Airflow and generates snapshots of your usage and configurations at different times. This information can help Astronomer support diagnose and resolve issues in  your environments.
 
-Telescope assumes your current permissions whenever you run a command. If these permissions, Telescope can observe your Airflow environments at a given point in time. Based on what it observes, Telescope generates a report which you can share with Astronomer support.
+Telescope assumes your current permissions whenever you run a command. If you have the correct permissions, Telescope can observe your Airflow environments for a specific period and then generate a report that you can share with Astronomer support.
 
-Astronomer requests that you observe your Deployments with telescope at least once per month. You can additionally observe local projects running with the Astro CLI for troubleshooting purposes.
+Astronomer recommends that you observe your Deployments with Telescope at least once a month. When required to assist with troubleshooting, you can observe local projects running with the Astro CLI.
 
 ## Prerequisites
 
-To observe a local with Telescope, you need:
+To observe a local project with Telescope, you need:
 
 - `docker exec` permissions.
 - Access to `docker.sock`.
@@ -37,7 +37,7 @@ To observe a standalone Airflow environment with Telescope, you need:
 
 ## Install the Telescope CLI
 
-Depending on where you want to run Telescope, install the CLI on a system that has permissions for either Docker or your Software Kubernetes cluster.
+Depending on where you want to run Telescope, install the CLI on a machine that has permissions for either Docker or your Software Kubernetes cluster.
 
 <Tabs
     defaultValue="binary"
@@ -80,7 +80,7 @@ This command observes all scheduler containers in the cluster and outputs the re
 
 :::info
 
-By default, Telescope only observes Pods with the label `component=scheduler`. If your Deployments use an alternative label to denote scheduler Pods, use the `--label-selector` selector in your command. For example, if your label for scheduler pods is `role=scheduler`, you would run.  
+By default, Telescope only observes Pods with the label `component=scheduler`. If your Deployments use an alternative label to denote scheduler Pods, use  `--label-selector` in your command. For example, if your label for scheduler pods is `role=scheduler`, you would run.  
 
 ```sh
 --kubernetes --organization-name <your-organization> --label-selector "role=scheduler"
@@ -150,7 +150,7 @@ For all report details and functions, see the [Telescope GitHub repository](http
 
 ## Send Telescope reports to Astronomer support
 
-1. In the [Astronomer support portal](https://support.astronomer.io/), create a ticket called `<Organization-name>: Telescope Results`
+1. In the [Astronomer support portal](https://support.astronomer.io/), create a ticket named `<Organization-name>: Telescope Results`
 2. Attach the `data.json` file that Telescope generated to the ticket.
 
 ## Advanced configuration
