@@ -75,6 +75,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
 4. Run the following commands to get details about the Azure subscription and create a new role assignment for the Astronomer service principal:
 
     ```sh
+    subid=$(az account show --query id --output tsv)
     az role assignment create --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --role Owner --scope /subscriptions/$subid
     ```
 5. Run the following commands to register the `EncryptionAtHost` feature:
