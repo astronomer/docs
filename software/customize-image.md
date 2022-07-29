@@ -243,6 +243,19 @@ astro dev start --env .env
 >
 > For more detail on how to add Environment Variables both locally and on Astronomer, refer to our [Environment Variables doc](environment-variables.md).
 
+## Install Python Packages from Private Sources
+
+Python packages can be installed from public and private locations into your image. To install public packages listed on [PyPI](https://pypi.org/search/), follow the steps in [Add Python and OS-level Packages](add-python-and-os-level-packages). To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
+
+Depending on where your private packages are stored, use one of the following setups to install your packages to an Astro project by customizing your Runtime image.
+
+<Tabs
+    defaultValue="github"
+    values={[
+        {label: 'Private GitHub Repo', value: 'github'},
+        {label: 'Private PyPi Index', value: 'pypi'},
+    ]}>
+<TabItem value="github">
 
 ## Install Python Packages from a Private GitHub Repository
 
@@ -340,14 +353,14 @@ This example assumes that the name of each of your Python packages is identical 
   :::tip
 
   This example `Dockerfile.build` assumes Python 3.9, but some versions of Astronomer Certified may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
-  
+
   To identify the Python version in your AC image, run:
-  
+
      ```
      docker run quay.io/astronomer/ap-airflow:<astronomer-certified-version> python --version
      ```
-  
-  Make sure to replace `<astronomer-certified-version>` with your own. 
+
+  Make sure to replace `<astronomer-certified-version>` with your own.
 
   :::
 
@@ -390,6 +403,110 @@ This example assumes that the name of each of your Python packages is identical 
    ```
 
 Your Software project can now utilize Python packages from your private GitHub repository.
+
+</TabItem>
+
+<TabItem value="pypi">
+
+#### Install Python Packages from a Private PyPI Index
+
+This topic provides instructions for building your Astro project using Python packages from a private PyPI index. In some organizations, python packages are prebuilt and pushed to a hosted private pip server (such as pypiserver or Nexus Repository) or managed service (such as PackageCloud or Gitlab). At a high level, this setup requires specifying your private packages in `requirements.txt`, creating a custom Docker image that changes where pip looks for packages, and building your project with this Docker image.
+
+#### Prerequisites
+
+To build from a private repository, you need:
+
+- A [Software project](create-project.md).
+- A private PyPI index with username and password authentication.
+
+#### Step 1: Add privately hosted packages to requirements.txt
+
+Privately hosted packages should already be built and pushed to the private repository. Depending on the repository used, it should be possible to browse and find the necessary package and version required. The package name and (optional) version can be added to requirements.txt in the same syntax as for publicly listed packages on [PyPI](https://pypi.org). The requirements.txt can contain a mixture of both publicly accessible and private packages.
+
+:::caution
+
+Ensure that the name of the package on the private repository does not clash with any existing python packages. The order that pip will search indices might produce unexpected results.
+
+:::
+
+#### Step 2: Create Dockerfile.build
+
+1. In your Astro project, create a duplicate of your `Dockerfile` named `Dockerfile.build`.
+
+2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+
+   ```text
+   quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
+   ```
+
+   :::caution
+
+   If you use the default distribution of Astronomer Certified, make sure to remove the `-onbuild` part of the image. The Astronomer Certified distribution that does not specify `-onbuild` is built to be customizable and does not include default build logic. For more information, see [Distributions](ac-support-policy.md#distribution)
+
+   :::
+
+3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration. Make sure to replace `<url-to-packages>` with the URL leading to the directory with your Python packages:
+
+    ```docker
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
+    ARG BUILD_NUMBER=-1
+    LABEL io.astronomer.docker=true
+    LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
+    LABEL io.astronomer.docker.airflow.onbuild=true
+    # Install Python and OS-Level Packages
+    COPY packages.txt .
+    RUN apt-get update && cat packages.txt | xargs apt-get install -y
+
+    FROM stage1 AS stage2
+    # Install Python Packages
+    ARG PIP_EXTRA_INDEX_URL
+    ENV PIP_EXTRA_INDEX_URL=${PIP_EXTRA_INDEX_URL}
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -q -r requirements.txt
+
+    FROM stage1 AS stage3
+    # Copy requirements directory
+    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+    COPY . .
+    ```
+
+    In order, these commands:
+
+    - Complete the standard installation of OS-level packages in `packages.txt`.
+    - Add the environment variable `PIP_EXTRA_INDEX_URL` to instruct pip on where to look for non-public packages.
+    - Install public and private Python-level packages from your `requirements.txt` file.
+
+#### Step 3: Build a Custom Docker Image
+
+1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to substitute in the pip repository and associated credentials:
+
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-<airflow-image> .
+    ```
+
+    For example, if you have `quay.io/astronomer/ap-airflow:2.2.5` in your `Dockerfile.build`, this command would be:
+
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t custom-ap-airflow:2.2.5 .
+    ```
+
+
+2. Replace the contents of your Software project's `Dockerfile` with the following:
+
+   ```
+   FROM custom-<certified-image>
+   ```
+
+   For example, if your base Certified image was `quay.io/astronomer/ap-airflow:2.2.5`, this line would be:
+
+   ```
+   FROM custom-ap-airflow:2.2.5
+   ```
+
+   Your Software project can now utilize Python packages from your private PyPi index.
+
+</TabItem>
+</Tabs>
 
 ## Build with a Different Python Version
 

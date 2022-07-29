@@ -130,8 +130,6 @@ For our platform's full collection of Docker Images, reference [Astronomer on Qu
 | Airflow Version                                                                      | Debian-based Image                                        |
 | ------------------------------------------------------------------------------------ | --------------------------------------------------------- |
 | [1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md) | FROM quay.io/astronomer/ap-airflow:1.10.15-buster-onbuild |
-| [2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.0.0-buster-onbuild   |
-| [2.0.2](https://github.com/astronomer/ap-airflow/blob/master/2.0.2/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild   |
 | [2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.0-buster-onbuild   |
 | [2.1.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.1/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.1-buster-onbuild   |
 | [2.1.3](https://github.com/astronomer/ap-airflow/blob/master/2.1.3/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.3-buster-onbuild   |
@@ -145,33 +143,41 @@ For our platform's full collection of Docker Images, reference [Astronomer on Qu
 
 > **Note:** In November of 2020, Astronomer migrated its Docker Registry from [Docker Hub](https://hub.docker.com/r/astronomerinc/ap-airflow) to [Quay.io](https://quay.io/repository/astronomer/ap-airflow?tab=tags) due to a [change](https://www.docker.com/blog/what-you-need-to-know-about-upcoming-docker-hub-rate-limiting/) in Docker Hub's rate limit policy. If you're using a legacy `astronomerinc/ap-airflow` image, replace it with a corresponding `quay.io/astronomer/ap-airflow` image to avoid rate limiting errors from DockerHub when you deploy to Astronomer (e.g. `toomanyrequests: You have reached your pull rate limit`).
 
-## Step 3: Rebuild your Image
+### 3. Test Your Upgrade Locally (_Optional_)
 
-### Local Development
+To test a new version of Astronomer Certified on your local machine, save all changes to your `Dockerfile` and run:
 
-If you're developing locally, make sure to save your changes and issue the following from your command line:
+```sh
+$ astro dev stop
+```
 
-1. `$ astro dev stop`
+This will stop all 3 running Docker containers for each of the necessary Airflow components (Webserver, Scheduler, Postgres). Then, apply your changes locally by running:
 
-   This will stop all 3 running Docker containers for each of the necessary Airflow components (Webserver, Scheduler, Postgres).
+```sh
+$ astro dev start
+```
 
-2. `$ astro dev start`
+### 4. Deploy to Astronomer
 
-   This will start those 3 Docker containers needed to run Airflow.
-
-### On Astronomer
-
-If you don't need to test this locally and just want to push to your Astronomer Software installation, you can run:
+To push your upgrade to a Deployment on Astronomer Software, run:
 
 ```sh
 astro deploy
 ```
 
-## Step 4: Confirm your version in the Airflow UI
+:::caution
+
+Due to a schema change in the Airflow metadata database, upgrading a Software Deployment to [AC 2.3.0](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md) can take significantly longer than usual. Depending on the size of your metadata database, upgrades can take anywhere from 10 minutes to an hour or longer depending on the number of task instances that have been recorded in the Airflow metadata database. During this time, scheduled tasks will continue to execute but new tasks will not be scheduled.
+
+If you need to minimize the upgrade time for a given Deployment, reach out to [Astronomer Support](https://support.astronomer.io). Note that minimizing your upgrade time requires removing records from your metadata database. 
+
+:::
+
+### 5. Confirm your version in the Airflow UI
 
 Once you've issued that command, navigate to your Airflow UI to confirm that you're now running the correct Airflow version.
 
-### Local Development
+#### Local Development
 
 If you're developing locally, you can:
 
@@ -182,7 +188,7 @@ Once there, you should see your correct Airflow version listed.
 
 > **Note:** The URL listed above assumes your Webserver is at Port 8080 (default). To change that default, read [this forum post](https://forum.astronomer.io/t/i-already-have-the-ports-that-the-cli-is-trying-to-use-8080-5432-occupied-can-i-change-the-ports-when-starting-a-project/48).
 
-### On Astronomer
+#### On Astronomer
 
 If you're on Astronomer Software, navigate to your Airflow Deployment page on the Software UI.
 

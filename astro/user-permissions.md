@@ -40,14 +40,19 @@ To update a user's Organization role:
 
 A Workspace role grants a user some level of access to a specific Workspace. The following Workspace roles are available:
 
-| Permission                           | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
-| ------------------------------------ | -------------------- | -------------------- | ------------------- |
-| View Workspace users                 | ✔️                   | ✔️                   | ✔️                  |
-| View all Deployments in the Cloud UI | ✔️                   | ✔️                   | ✔️                  |
-| View DAGs in the Airflow UI          | ✔️                   | ✔️                   | ✔️                  |
-| Push code to Deployments             |                      | ✔️                   | ✔️                  |
-| Update Deployment settings           |                      | ✔️                   | ✔️                  |
-| Update user roles and information    |                      |                      | ✔️                  |
+| Permission                              | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
+|-----------------------------------------| -------------------- | -------------------- | ------------------- |
+| View Workspace users                    | ✔️                   | ✔️                   | ✔️                  |
+| View all Deployments in the Cloud UI    | ✔️                   | ✔️                   | ✔️                  |
+| View DAGs in the Airflow UI             | ✔️                   | ✔️                   | ✔️                  |
+| View Airflow task logs                  | ✔️                   | ✔️                   | ✔️                  |
+| Edit task instance and DAG state        |                      | ✔️                   | ✔️                  |  
+| Push code to Deployments                |                      | ✔️                   | ✔️                  |
+| Update Deployment configurations        |                      | ✔️                   | ✔️                  |
+| Invite users to Workspace               |                      |                      | ✔️                   |
+| Update user roles and permissions       |                      |                      | ✔️                  |
+| Read Airflow Connections and Variables  |                      |                      | ✔️                  |
+| Write Airflow Connections and Variables |                      |                      | ✔️                  |
 
 ### Update Workspace Roles
 

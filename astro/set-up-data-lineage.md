@@ -5,6 +5,9 @@ id: set-up-data-lineage
 description: Configure your external systems to emit lineage data to Astro.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 ## Overview
 
 This guide explains how to configure your data pipelines to emit lineage data to Astro.
@@ -50,6 +53,7 @@ For more information about how to configure this API key in external systems, re
         {label: 'Apache Spark', value: 'spark'},
         {label: 'dbt', value: 'dbt'},
     ]}>
+
 <TabItem value="astronomer">
 
 Lineage is configured automatically for all Deployments on Astro Runtime 4.2.0+. The easiest way to add lineage to an existing Deployment on Runtime <4.2.0 is to [upgrade Runtime](https://docs.astronomer.io/cloud/upgrade-runtime).
