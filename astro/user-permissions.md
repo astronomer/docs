@@ -17,15 +17,15 @@ An Organization role grants a user some level of access to an Astro Organization
 
 | Permission                                                  | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
 | ----------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
-| View Organization details and user membership               | ✔️                      | ✔️                             | ✔️                     |
-| Update Organization billing information and settings        |                         | ✔️                             | ✔️                     |
-| View usage for all Workspaces in the **Usage** tab          |                         | ✔️                             | ✔️                     |
-| View lineage data in the **Lineage** tab                    | ✔️                      | ✔️                            | ✔️                     |
-| Workspace Admin permissions to all Workspaces               |                         |                                | ✔️                     |
-| Create a new Workspace                                      |                         |                                | ✔️                     |
-| Update roles and permissions of existing Organization users |                         |                                | ✔️                     |
-| Invite new user to Organization                             |                         |                                | ✔️                     |
-| Remove a user from an Organization                          |                         |                                | ✔️                     |
+| View Organization details and user membership               | ✔️                       | ✔️                              | ✔️                      |
+| View lineage data in the **Lineage** tab                    | ✔️                       | ✔️                              | ✔️                      |
+| Update Organization billing information and settings        |                         | ✔️                              | ✔️                      |
+| View usage for all Workspaces in the **Usage** tab          |                         | ✔️                              | ✔️                      |
+| Workspace Admin permissions to all Workspaces               |                         |                                | ✔️                      |
+| Create a new Workspace                                      |                         |                                | ✔️                      |
+| Update roles and permissions of existing Organization users |                         |                                | ✔️                      |
+| Invite new user to Organization                             |                         |                                | ✔️                      |
+| Remove a user from an Organization                          |                         |                                | ✔️                      |
 
 :::info Default Roles in New Organizations
 
@@ -44,18 +44,18 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 
 | Permission                               | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
 | ---------------------------------------- | -------------------- | -------------------- | ------------------- |
-| View Workspace users                     | ✔️                   | ✔️                   | ✔️                  |
-| View all Deployments in the Cloud UI     | ✔️                   | ✔️                   | ✔️                  |
-| View DAGs in the Airflow UI              | ✔️                   | ✔️                   | ✔️                  |
-| View Airflow task logs                   | ✔️                   | ✔️                   | ✔️                  |
-| View Airflow connections and Variables   |                      |                      | ✔️                  |
-| Update user roles and permissions        |                      |                      | ✔️                  |
-| Update Airflow connections and Variables |                      |                      | ✔️                  |
-| Update Deployment configurations         |                      | ✔️                   | ✔️                  |
-| Edit task instance and DAG state         |                      | ✔️                   | ✔️                  |
-| Push code to Deployments                 |                      | ✔️                   | ✔️                  |
-| Invite users to a Workspace              |                      |                      | ✔️                  |
-| Create and Delete Deployments                      |            | ✔️                   | ✔️                  |
+| View Workspace users                     | ✔️                    | ✔️                    | ✔️                   |
+| View all Deployments in the Cloud UI     | ✔️                    | ✔️                    | ✔️                   |
+| View DAGs in the Airflow UI              | ✔️                    | ✔️                    | ✔️                   |
+| View Airflow task logs                   | ✔️                    | ✔️                    | ✔️                   |
+| Update Deployment configurations         |                      | ✔️                    | ✔️                   |
+| Edit task instance and DAG state         |                      | ✔️                    | ✔️                   |
+| Push code to Deployments                 |                      | ✔️                    | ✔️                   |
+| Create and Delete Deployments            |                      | ✔️                    | ✔️                   | 
+| View Airflow connections and Variables   |                      |                      | ✔️                   |
+| Update user roles and permissions        |                      |                      | ✔️                   |
+| Update Airflow connections and Variables |                      |                      | ✔️                   |
+| Invite users to a Workspace              |                      |                      | ✔️                   |
 
 ### Update Workspace roles
 
