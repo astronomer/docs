@@ -15,7 +15,7 @@ To modify the resources allocated to the workers in your Deployment, specify a q
 
 To ensure reliability, the minimum worker size supported is 10 AU. Beyond that, the maximum worker size you can set depends on the node instance type that is configured for the cluster in which your Deployment is hosted. If you attempt to provision a worker size that is not supported by your cluster's instance type, you will see an error in the Cloud UI. For example, if the node instance type for a given cluster is set to `m5.xlarge`, the maximum worker size supported for any Deployment within that cluster is 26 AU (2.6 CPUs, 9.7 GiB memory). This limit accounts for overhead that is required for system components.
 
-For a list of supported node instance types and their corresponding worker size limits, see [AWS resource reference](resource-reference-aws.md#deployment-worker-size-limits). To request a different instance type for your cluster, reach out to [Astronomer support](https://support.astronomer.io).
+For a list of supported node instance types and their corresponding worker size limits, see [AWS resource reference](resource-reference-aws.md#deployment-worker-size-limits). To request a different instance type for your cluster, contact [Astronomer support](https://support.astronomer.io).
 
 ### Worker autoscaling logic
 
@@ -51,8 +51,18 @@ If you haven't created a Deployment, see [Create a Deployment](create-deployment
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
+## Delete a Deployment
+
+When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted from your data plane. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://support.astronomer.io).
+
+1. Log in to the [Cloud UI](https://cloud.astronomer.io) and select a Workspace.
+2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
+
+    ![Options menu](/img/docs/delete-deployment.png)
+
+3. Enter `Delete` and click **Yes, Continue**.
+
 ## Next steps
 
 - [Set environment variables on Astro](environment-variables.md).
-
 - [Manage Deployment API keys](api-keys.md).

@@ -37,19 +37,20 @@ The first 3 users that log in to a new Organization automatically become Organiz
 
 A Workspace role grants a user some level of access to a specific Workspace. The following table lists the available Workspace roles:
 
-| Permission                               | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
-| ---------------------------------------- | -------------------- | -------------------- | ------------------- |
-| View Workspace users                     | ✔️                   | ✔️                   | ✔️                  |
-| View all Deployments in the Cloud UI     | ✔️                   | ✔️                   | ✔️                  |
-| View DAGs in the Airflow UI              | ✔️                   | ✔️                   | ✔️                  |
-| View Airflow task logs                   | ✔️                   | ✔️                   | ✔️                  |
-| Edit task instance and DAG state         |                      | ✔️                   | ✔️                  |
-| Push code to Deployments                 |                      | ✔️                   | ✔️                  |
-| Update Deployment configurations         |                      | ✔️                   | ✔️                  |
-| Invite users to Workspace                |                      |                      | ✔️                  |
-| Update user roles and permissions        |                      |                      | ✔️                  |
-| View Airflow connections and Variables   |                      |                      | ✔️                  |
-| Update Airflow connections and Variables |                      |                      | ✔️                  |
+| Permission                              | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
+| --------------------------------------- | -------------------- | -------------------- | ------------------- |
+| View Workspace users                    | ✔️                   | ✔️                   | ✔️                  |
+| View all Deployments in the Cloud UI    | ✔️                   | ✔️                   | ✔️                  |
+| View DAGs in the Airflow UI             | ✔️                   | ✔️                   | ✔️                  |
+| View Airflow task logs                  | ✔️                   | ✔️                   | ✔️                  |
+| View Airflow connections and Variables  |                      |                      | ✔️                  |
+| Update user roles and permissions       |                      |                      | ✔️                  |
+| Update Airflow connections and Variables |                     |                      | ✔️                  |
+| Update Deployment configurations        |                      | ✔️                   | ✔️                  |
+| Edit task instance and DAG state        |                      | ✔️                   | ✔️                  |
+| Push code to Deployments                |                      | ✔️                   | ✔️                  |
+| Invite users to a Workspace             |                      |                       | ✔️                  |
+| Delete a Deployment                     |                      |                       | ✔️                  |
 
 ### Update Workspace roles
 
