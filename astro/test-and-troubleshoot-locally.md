@@ -89,9 +89,7 @@ This command forces your running containers to stop and deletes all data associa
 
 When operating system or Python package dependency errors occur, the error message that is returned often doesn't contain enough information to help you resolve the error. To retrieve additional error information, you can review individual package dependencies inside your local Docker containers.
 
-For example, if your `packages.txt` file contains the following packages, but you receive unclear build errors upon running `astro dev start`, you can instead enter a container and install them manually, one by one, to see if conflicts can be isolated:
-
-For example, if your `packages.txt` file contains the following packages, but you receive unclear build errors upon running `astro dev start`, you can instead enter a container and install them manually, one by one, to see if conflicts can be isolated:
+For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, or libsas12-dev packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
 
 1. Run the following command to intialize a new `.astro` project:
 
