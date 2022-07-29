@@ -98,15 +98,20 @@
   --ifm-color-info-contrast-foreground: var(--blue-900);
   --ifm-color-info-dark: var(--blue-500);
 
-  /* --ifm-color-warning: var(--orange-400);
+  --ifm-color-warning: var(--orange-400);
   --ifm-color-warning-contrast-background: var(--orange-100);
   --ifm-color-warning-contrast-foreground: var(--orange-900);
-  --ifm-color-warning-dark: var(--orange-500); */
+  --ifm-color-warning-dark: var(--orange-500);
 
-  /* --ifm-color-danger: var(--orange-400);
+  --ifm-color-danger: var(--orange-400);
   --ifm-color-danger-contrast-background: var(--orange-100);
   --ifm-color-danger-contrast-foreground: var(--orange-900);
-  --ifm-color-danger-dark: var(--orange-500); */
+  --ifm-color-danger-dark: var(--orange-500);
+
+  --ifm-color-cli: var(--purple-400);
+  --ifm-color-cli-contrast-background: var(--purple-100);
+  --ifm-color-cli-contrast-foreground: var(--purple-900);
+  --ifm-color-cli-dark: var(--purple-500);
 
   --ifm-color-secondary: var(--gray-2);
   --ifm-color-secondary-contrast-background: var(--gray-100);
@@ -405,6 +410,26 @@ table::-webkit-scrollbar-thumb {
     var(--orange-200),
     var(15%)
   );
+}
+
+html[data-theme='light'] .alert--cli {
+  --ifm-alert-background-color-highlight: hsl(
+    var(--purple-200),
+    var(15%),
+    );
+  --ifm-alert-background-color: var( --ifm-color-cli-contrast-background );
+  --ifm-alert-foreground-color: var( --ifm-color-cli-contrast-foreground );
+  --ifm-alert-border-color: var(--ifm-color-cli-dark);
+}
+
+html[data-theme='dark'] .alert--cli {
+  --ifm-alert-background-color-highlight: hsl(
+    var(--ifm-color-cli-dark);
+    var(15%),
+    );
+  --ifm-alert-background-color: var( --ifm-color-cli-contrast-background );
+  --ifm-alert-foreground-color: var( --ifm-color-cli-contrast-foreground );
+  --ifm-alert-border-color: var(--ifm-color-cli-dark);
 }
 
 .dropdown--right {
