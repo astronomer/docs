@@ -110,9 +110,10 @@ To use Vault as a secrets backend, we recommend configuring a Vault AppRole with
 
     Save these values for Step 3.
 
-#### Step 2: Write an Airflow variable or connection to Vault
 
-To test whether your Vault server is set up properly, create a test Airflow variable or connection to store as a secret. You will use this secret to test your backend's functionality in Step 4, so it can be either a real or placeholder value.
+#### Step 2: Create an Airflow Variable or Connection in Vault
+
+To start, create an Airflow variable or connection in Vault that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality in Step 4.
 
 To store an Airflow variable in Vault as a secret, run the following Vault CLI command with your own values:
 
@@ -238,9 +239,12 @@ To use this feature, you need:
 - Access to AWS SSM Parameter Store.
 - A valid AWS Access Key ID and Secret Access Key.
 
-#### Step 1: Write an Airflow variable or connection to AWS Parameter Store
 
-To start, add an Airflow variable or connection as a secret to Parameter Store for testing. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value. For instructions, read AWS documentation on how to do so via the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html).
+#### Step 1: Create an Airflow Variable or Connection in AWS Parameter Store
+
+To start, create an Airflow variable or connection in Parameter Store that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality in Step 3.
+
+For instructions, read AWS documentation on how to do so via the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html).
 
 Variables and connections should live at `/airflow/variables` and `/airflow/connections`, respectively. For example, if you're setting a secret variable with the key `my_secret`, it should exist at `/airflow/connections/my_secret`.
 
@@ -354,14 +358,37 @@ To use AWS Secrets Manager as your Airflow secrets backend, you need:
 - An AWS account with the `SecretsManagerReadWrite` policy.
 - A valid AWS Access Key ID and Secret Access Key.
 
-#### Step 1: Write an Airflow variable or connection to AWS Secrets Manager
 
-To start, add an Airflow variable or connection as a secret to AWS Secrets Manager. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value.
+#### Step 1: Create an Airflow Variable or Connection in AWS Secrets Manager
 
-Secrets must be formatted such that:
+To start, create an Airflow variable or connection in AWS Secrets Manager that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality in Step 3.
+    
+- When setting the secret type, choose `Other type of secret` and select the `Plaintext` option.
+- If creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
+- The secret name is assigned after providing the plaintext value and clicking `Next`.
 
-- Airflow variables are stored in `airflow/variables/<variable-key>`.
-- Airflow connections are stored in `airflow/connections/<connection-id>`.
+Secret names must correspond with the `connections_prefix` and `variables_prefix` set below in step 2. Specifically:
+
+- If you use `"variables_prefix": "airflow/variables"`, you must set Airflow variable names as:
+    ```
+    airflow/variables/<variable-key>
+    ```
+
+- The `<variable-key>` is how you will retrieve that variable's value in a DAG. For example: 
+    ```python
+    my_var = Variable.get("variable-key>")
+    ```
+
+- If you use `"connections_prefix": "airflow/connections"`, you must set Airflow connections as: 
+    ```
+    airflow/connections/<connection-id>
+    ```
+
+- The `<connection-id>` is how you will retrieve that connection's URI in a DAG. For example: 
+    ```python
+    conn = BaseHook.get_connection(conn_id="<connection-id>")
+    ```
+- Be sure to not include a leading `/` at the beginning of your variable or connection name
 
 For more information on adding secrets to Secrets Manager, see [AWS documentation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html).
 
@@ -375,19 +402,19 @@ First, install the [Airflow provider for Amazon](https://airflow.apache.org/docs
 apache-airflow-providers-amazon
 ```
 
-Then, add the following environment variables to your project's Dockerfile:
+Add the following environment variables to your project's `.env` file:
 
 ```dockerfile
-ENV AWS_ACCESS_KEY_ID="<your-aws-access-key-id>"
-ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-access-key>"
-ENV AWS_DEFAULT_REGION="<your-aws-region>"
-ENV AIRFLOW__SECRETS__BACKEND="airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend"
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables"}'
+AWS_ACCESS_KEY_ID="<your-aws-access-key-id>"
+AWS_SECRET_ACCESS_KEY="<your-aws-secret-access-key>"
+AWS_DEFAULT_REGION="<your-aws-region>"
+AIRFLOW__SECRETS__BACKEND="airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend"
+AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables"}'
 ```
 
-:::warning
+:::info
 
-If you want to deploy your project to a hosted Git repository before deploying to Astro, be sure to save `<your-aws-access-key-id>` and `<your-aws-secret-access-key>` securely. We recommend adding it to your project's [`.env` file](develop-project.md#set-environment-variables-via-env-local-development-only) and specifying this file in `.gitignore`. When you deploy to Astro, you should set these values as secrets via the Cloud UI.
+Adding these environment variables to your project's [.env file](develop-project.md#set-environment-variables-via-env-local-development-only) helps keep `<your-aws-access-key-id>` and `<your-aws-secret-access-key>` secure as this file is included in the `.gitignore` file within your Astronomer project. When you deploy to Astro, this file will be ignored and thus not sent to your repository. Step 4 below provides a method for securely sending contents of your `.env` file directly to your Astro Cloud UI.
 
 :::
 
@@ -431,18 +458,16 @@ Once you confirm that the setup was successful, you can delete this DAG.
 
 #### Step 4: Deploy to Astro
 
-Once you've confirmed that the integration with AWS Secrets Manager works locally, you can complete a similar set up with a Deployment on Astro.
+Once you've confirmed that the integration with AWS Secrets Manager works locally, you can now add these environment variables to your Astro Deployment.
 
-1. In the Cloud UI, add the same environment variables found in your `Dockerfile` to your Deployment [environment variables](https://docs.astronomer.io/astro/environment-variables). Specify both `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret** to ensure that your credentials are stored securely.
+Using the [astrocloud deployment variable create](https://docs.astronomer.io/astro/cli/astro-deployment-variable-create) CLI command, deploy the contents of your `.env` file directly to your Cloud UI. For example:
 
-    :::warning
+    ```text
+    astro deployment variable create --deployment-id <your-deployment-id> --load --env .env
+    ```
 
-    Make sure to remove the surrounding single quotation marks (`''`) from `AIRFLOW__SECRETS__BACKEND_KWARGS` and the double quotation marks (`""`) from all other environment variable values defined in your Dockerfile. If you add these values with the quotation marks included in your Dockerfile, your configuration will not work on Astro.
+    - After using this command, navigate to the Cloud UI and mark your `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **Secret**.
 
-    :::
-
-2. In your Astro project, delete the environment variables from your `Dockerfile`.
-3. [Deploy your changes](https://docs.astronomer.io/astro/deploy-code) to Astro.
 
 You now should be able to see your secret information being pulled from AWS Secrets Manager on Astro. From here, you can store any Airflow variables or connections as secrets on AWS Secrets Manager and use them in your project.
 
@@ -464,9 +489,12 @@ To use Google Cloud Secret Manager as your Airflow secrets backend, you need:
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
 - A [JSON service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) for the service account.
 
-#### Step 1: Write an Airflow variable or connection to Google Cloud Secret Manager
 
-To start, add an Airflow variable or connection as a secret to Google Cloud Secret Manager. You can do so via the Cloud Console or the gcloud CLI. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value.
+#### Step 1: Create an Airflow Variable or Connection in Google Cloud Secret Manager
+
+To start, create an Airflow variable or connection in Google Cloud Secret Manager that you want to store as a secret. You can do so via the Cloud Console or the gcloud CLI.
+
+You will use this secret to test your backend's functionality in Step 3, so it can be either a real or test value.
 
 Secrets must be formatted such that:
 - Airflow variables are set as `airflow-variables-<variable-key>`.
