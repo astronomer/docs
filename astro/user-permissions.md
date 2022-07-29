@@ -54,7 +54,7 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Edit task instance and DAG state         |                      | ✔️                   | ✔️                  |
 | Push code to Deployments                 |                      | ✔️                   | ✔️                  |
 | Invite users to a Workspace              |                      |                      | ✔️                  |
-| Delete a Deployment                      |                      |                      | ✔️                  |
+| Delete a Deployment                      |                      | ✔️                   | ✔️                  |
 
 ### Update Workspace roles
 
