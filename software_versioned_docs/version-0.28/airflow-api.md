@@ -224,5 +224,4 @@ curl -X GET \
   -H 'Authorization: <API-KEY>' \
   -H 'Cache-Control: no-cache'
   -H 'Content-Type: application/json' -d '{}
-  -H 'Content-Type: application/json' -d '{}
 ```
