@@ -5,8 +5,6 @@ id: astro-completion
 description: Reference documentation for astro completion.
 ---
 
-## Description
-
 Generate completion scripts for Astro CLI commands. You can modify the generated scripts and add them to the appropriate directory to customize your command line autocompletion behavior.
 
 For example, you could set automation such that typing `astro lo` autocompletes to `astro login` if you press **TAB** on your keyboard and `astro login` or `astro logout` if you press **TAB** again.

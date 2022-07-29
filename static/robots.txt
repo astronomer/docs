@@ -2,6 +2,7 @@ User-agent: *
 Disallow: /src/
 Disallow: /assets/
 Disallow: /software_versioned_docs/
+Disallow: /software/telescope.md
 Disallow: /software_versioned_sidebars/
 Disallow: /README.md
 Disallow: /docusaurus.config.js

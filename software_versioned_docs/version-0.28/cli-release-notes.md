@@ -11,6 +11,14 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, reach out to us via [Astronomer Support](https://support.astronomer.io).
 
+## Astro CLI v1.1.0
+
+Release date: June 13, 2022
+
+### Additional improvements
+
+- This release exclusively contains changes for [Astro users](https://docs.astronomer.io/astro/cli/release-notes).
+
 ## Astro CLI v1.0.0
 
 Release date: June 2, 2022
@@ -31,7 +39,15 @@ To establish a shared framework between products, the syntax of several Software
 
 You can now use `astro context list` and `astro context switch` to show the Astronomer contexts that you can access and assume. An Astronomer context is a base domain that relates to either Astro or a particular Cluster on Astronomer Software. A domain appears as an available context if you have authenticated to it at least once.
 
-These commands are intended for users who need to work across multiple Astronomer Software clusters or installations. They replace `astro cluster list` and `astro cluster switch`, respectively. For more information, see the [CLI Command Reference](cli-reference.md#astro-context-switch).
+These commands are intended for users who need to work across multiple Astronomer Software clusters or installations. They replace `astro cluster list` and `astro cluster switch`, respectively. For more information, see the [CLI command reference](cli-reference.md#astro-context-switch).
+
+## Astro CLI v0.28.2
+
+Release date: July 12, 2022
+
+### Bug fixes
+
+- Fixed an issue where `astro deploy` did not work when using Podman 4.0+
 
 ## 0.28.1
 

@@ -16,8 +16,9 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Get Started',
+      label: 'Get started',
       items: [
+      'log-in-to-software',
       'install-cli',
       'create-project',
       ],
@@ -28,6 +29,7 @@ module.exports = {
       items: [
       'customize-image',
       'manage-airflow-versions',
+      'upgrade-to-airflow-2',
       'access-airflow-database',
       'airflow-api',
       {
@@ -35,12 +37,13 @@ module.exports = {
       label: 'Write DAGs',
       items: [
       'deferrable-operators',
-      'kubepodoperator',
       'kubepodoperator-local',
+      'kubepodoperator',
       'kubernetes-executor',
         ],
       },
       'cli-podman',
+      'upgrade-astro-cli',
     ],
     },
     {
@@ -68,7 +71,7 @@ module.exports = {
         'upgrade-astronomer',
         {
         type: 'category',
-        label: 'Platform Setup',
+        label: 'Platform setup',
         items: [
         'integrate-auth-system',
         'logs-to-s3',
@@ -82,7 +85,7 @@ module.exports = {
         },
         {
         type: 'category',
-        label: 'Platform Management',
+        label: 'Platform management',
         items: [
         'apply-platform-config',
         'houston-api',
@@ -91,7 +94,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Deployment Management',
+          label: 'Deployment management',
           items: [
           'configure-deployment',
           'secrets-backend',
@@ -102,7 +105,7 @@ module.exports = {
         },
         {
         type: 'category',
-        label: 'User Access',
+        label: 'User access',
         items: [
         'manage-workspaces',
         'import-idp-groups',
@@ -138,6 +141,15 @@ module.exports = {
     },
     {
       type: 'category',
+      label: 'Astro Runtime',
+      items: [
+      'runtime-image-architecture',
+      'migrate-to-runtime',
+      'runtime-version-lifecycle-policy',
+      ],
+    },
+    {
+      type: 'category',
       label: 'Troubleshoot',
       items: [
       'kubectl',
@@ -147,10 +159,11 @@ module.exports = {
     },
     {
     type: 'category',
-    label: 'Release Notes',
+    label: 'Release notes',
     items: [
       'release-notes',
       'cli-release-notes',
+      'runtime-release-notes',
     ],
     },
     {

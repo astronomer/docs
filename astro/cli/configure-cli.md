@@ -9,7 +9,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Install the CLI
+This is where you'll find information about installing, upgrading, and uninstalling the Astro CLI.
+
+## Install the Astro CLI
 
 <Tabs
     defaultValue="mac"
@@ -19,6 +21,8 @@ import {siteVariables} from '@site/src/versions';
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="mac">
+
+This is where you'll find information about installing the Astro CLI on a Mac operating system.
 
 #### Prerequisites
 
@@ -32,13 +36,13 @@ To use the Astro CLI on Mac, you must have:
 To install the latest version of the Astro CLI, run the following command:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
 
 ```sh
-brew install astronomer/tap/astro@<major.minor.patch-version>
+brew install astro@<major.minor.patch-version>
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version.
@@ -47,12 +51,14 @@ If you specify only a major version, this command installs the latest minor or p
 
 <TabItem value="windows">
 
+This is where you'll find information about installing the Astro CLI on a Windows operating system.
+
 #### Prerequisites
 
 To use the Astro CLI on Windows, you must have:
 
 - [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
 - [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
 -  Windows 10 or Windows 11.
 
@@ -76,11 +82,13 @@ To use the Astro CLI on Windows, you must have:
 
 <TabItem value="linux">
 
+This is where you'll find information about installing the Astro CLI on Linux.
+
 #### Prerequisites
 
 To use the Astro CLI on Linux, you must have:
 
-- [Docker Engine](https://docs.docker.com/engine/install/) (v0.18.9 or higher).
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or higher).
 
 #### Installation
 
@@ -117,7 +125,7 @@ If you specify only a major version, this command installs the latest minor or p
 To upgrade the Astro CLI to the latest version, you can run the same command as you did to install the CLI for the first time:
 
 ```sh
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 </TabItem>
@@ -170,7 +178,7 @@ curl -sSL install.astronomer.io | sudo bash -s
 To uninstall the Astro CLI on Mac, run:
 
 ```sh
-brew uninstall astronomer/tap/astro
+brew uninstall astro
 ```
 
 </TabItem>
@@ -250,7 +258,7 @@ Once you've uninstalled the `astrocloud` executable, install the latest version 
 
 For instructions, see [Install the CLI](cli/configure-cli.md#install-the-cli).
 
-### Step 3: Migrate Existing Astro Projects
+### Step 3: Migrate existing Astro projects
 
 In order to run and deploy your existing Astro projects using the `astro` executable, you need to populate these projects with a new `.astro` directory of files. For any existing Astro projects on your machine:
 
@@ -259,7 +267,7 @@ In order to run and deploy your existing Astro projects using the `astro` execut
 
     If the CLI prompts you about whether you want to create a project in a non-empty directory, enter `Yes`. The CLI will only create files that aren't yet in your directory. In this case, the only files that it creates are `./astro/test_dag_integrity_default.py` and `.astro/config.yaml`.
 
-### Step 4: Migrate Project Configurations (_Optional_)
+### Step 4: Migrate project configurations (_Optional_)
 
 If you manually updated the `.astrocloud/config.yaml` file of an existing Astro project:
 
@@ -267,7 +275,7 @@ If you manually updated the `.astrocloud/config.yaml` file of an existing Astro 
 2. Copy the contents from `.astrocloud/config.yaml` into `.astro/config.yaml`.
 3. Delete `.astrocloud/config.yaml` from your project.
 
-### Step 5: Update CI/CD Pipelines (_Optional_)
+### Step 5: Update CI/CD pipelines (_Optional_)
 
 If you have an existing [CI/CD](ci-cd.md) pipeline using the old `astrocloud` executable, update it to use `astro`. For example, in a GitHub Actions CI/CD pipeline you would update the following:
 
@@ -281,6 +289,6 @@ If you have an existing [CI/CD](ci-cd.md) pipeline using the old `astrocloud` ex
 # After:
     - name: Deploy to Astro
       run: |
-        brew install astronomer/tap/astro
+        curl -sSL install.astronomer.io | sudo bash -s
         astro deploy ${{ secrets.DEPLOYMENT_ID }}
 ```

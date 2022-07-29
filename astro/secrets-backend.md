@@ -1,6 +1,6 @@
 ---
-title: 'Configure an External Secrets Backend on Astro'
-sidebar_label: 'Configure a Secrets Backend'
+title: 'Configure an external secrets backend on Astro'
+sidebar_label: 'Configure a secrets backend'
 id: secrets-backend
 description: Configure a secrets backend on Astro to store Airflow variables and connections in a centralized place.
 ---
@@ -8,18 +8,18 @@ description: Configure a secrets backend on Astro to store Airflow variables and
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-## Overview
-
 Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
 
-Integrating a secrets backend tool on Astro allows you to:
+## Secrets Backend Tool Integration Benefits
 
-- Store Airflow variables and connections in a centralized location alongside secrets from other tools and systems used by your team, including Kubernetes secrets, SSL certificates, and more.
+Integrating a secrets backend tool with Astro allows you to:
+
+- Store Airflow variables and connections in a centralized location alongside secrets from other tools and systems used by your organization, including Kubernetes secrets, SSL certificates, and more.
 - Comply with internal security postures and policies that protect your organization.
 - Recover in the case of an incident.
 - Automatically pull Airflow variables and connections that are already stored in your secrets backend when you create a new Deployment instead of having to set them manually in the Airflow UI.
 
-To meet these requirements, Astro supports integration with a variety of secret backend tools. This guide provides setup steps for configuring the following tools as secrets backends on Astro:
+Astro integrates with the following secret backend tools:
 
 - Hashicorp Vault
 - AWS Systems Manager Parameter Store
@@ -27,7 +27,7 @@ To meet these requirements, Astro supports integration with a variety of secret 
 - Google Cloud Secret Manager
 - Azure Key Vault
 
-All secrets backend integrations are set per Deployment on Astro.
+Secrets backend integrations are configured individually with each Astro Deployment.
 
 :::info
 
@@ -110,7 +110,7 @@ To use Vault as a secrets backend, we recommend configuring a Vault AppRole with
 
     Save these values for Step 3.
 
-#### Step 2: Write an Airflow Variable or Connection to Vault
+#### Step 2: Write an Airflow variable or connection to Vault
 
 To test whether your Vault server is set up properly, create a test Airflow variable or connection to store as a secret. You will use this secret to test your backend's functionality in Step 4, so it can be either a real or placeholder value.
 
@@ -135,7 +135,7 @@ $ vault kv get secret/variables/<your-variable-key>
 $ vault kv get secret/connections/<your-connection-id>
 ```
 
-#### Step 3: Set Up Vault Locally
+#### Step 3: Set up Vault locally
 
 In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
 
@@ -167,7 +167,7 @@ By default, Airflow uses `"kv_engine_version": 2`, but we've written this secret
 
 For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
 
-#### Step 4: Run an Example DAG to Test Vault Locally
+#### Step 4: Run an example DAG to test Vault locally
 
 To test Vault, write a simple DAG which calls your test secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
@@ -197,7 +197,7 @@ Once you've added this DAG to your project:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**.  If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**.  If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -238,13 +238,13 @@ To use this feature, you need:
 - Access to AWS SSM Parameter Store.
 - A valid AWS Access Key ID and Secret Access Key.
 
-#### Step 1: Write an Airflow Variable or Connection to AWS Parameter Store
+#### Step 1: Write an Airflow variable or connection to AWS Parameter Store
 
 To start, add an Airflow variable or connection as a secret to Parameter Store for testing. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value. For instructions, read AWS documentation on how to do so via the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html).
 
 Variables and connections should live at `/airflow/variables` and `/airflow/connections`, respectively. For example, if you're setting a secret variable with the key `my_secret`, it should exist at `/airflow/connections/my_secret`.
 
-#### Step 2: Set Up AWS Parameter Store Locally
+#### Step 2: Set up AWS Parameter Store locally
 
 To test AWS Parameter Store locally, configure it as a secrets backend in your Astro project.
 
@@ -281,7 +281,7 @@ To further customize the integration between Airflow and AWS SSM Parameter Store
 
 :::
 
-#### Step 3: Run an Example DAG to Test AWS Parameter Store Locally
+#### Step 3: Run an example DAG to test AWS Parameter Store locally
 
 To test Parameter Store, write a simple DAG which calls your secret and add this DAG to your Astro project's `dags` directory.
 
@@ -315,7 +315,7 @@ To test your changes:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -354,7 +354,7 @@ To use AWS Secrets Manager as your Airflow secrets backend, you need:
 - An AWS account with the `SecretsManagerReadWrite` policy.
 - A valid AWS Access Key ID and Secret Access Key.
 
-#### Step 1: Write an Airflow Variable or Connection to AWS Secrets Manager
+#### Step 1: Write an Airflow variable or connection to AWS Secrets Manager
 
 To start, add an Airflow variable or connection as a secret to AWS Secrets Manager. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value.
 
@@ -365,7 +365,7 @@ Secrets must be formatted such that:
 
 For more information on adding secrets to Secrets Manager, see [AWS documentation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html).
 
-#### Step 2: Set Up Secrets Manager Locally
+#### Step 2: Set up Secrets Manager locally
 
 To test AWS Secrets Manager locally, configure it as a secrets backend in your Astro project.
 
@@ -391,7 +391,7 @@ If you want to deploy your project to a hosted Git repository before deploying t
 
 :::
 
-#### Step 3: Run an Example DAG to Test Secrets Manager Locally
+#### Step 3: Run an example DAG to test Secrets Manager locally
 
 Write a test DAG which calls the secret you created in Step 1 and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
@@ -421,7 +421,7 @@ To test your changes:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -464,7 +464,7 @@ To use Google Cloud Secret Manager as your Airflow secrets backend, you need:
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
 - A [JSON service account key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys) for the service account.
 
-#### Step 1: Write an Airflow Variable or Connection to Google Cloud Secret Manager
+#### Step 1: Write an Airflow variable or connection to Google Cloud Secret Manager
 
 To start, add an Airflow variable or connection as a secret to Google Cloud Secret Manager. You can do so via the Cloud Console or the gcloud CLI. You will use this secret to test your backend's functionality in Step 3, so it can be either a real or placeholder value.
 
@@ -481,7 +481,7 @@ gcloud secrets create airflow-variables-<my-secret-variable> \
 
 For more information on creating secrets in Google Cloud Secret Manager, read the [Google Cloud documentation](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets#create).
 
-#### Step 2: Set Up Secret Manager Locally
+#### Step 2: Set up Secret Manager locally
 
 To test Google Secret Manager locally, configure it as a secrets backend in your Astro project.
 
@@ -506,7 +506,7 @@ If you want to deploy your project to a hosted Git repository before deploying t
 
 :::
 
-#### Step 3: Run an Example DAG to Test Secret Manager Locally
+#### Step 3: Run an example DAG to test Secret Manager locally
 
 Write a test DAG which calls the secret you created in Step 1 and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
@@ -536,7 +536,7 @@ To test your changes:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -548,7 +548,7 @@ Once you confirm that the setup was successful, you can delete this DAG.
 
 Once you've confirmed that the integration with Google Cloud Secret Manager works locally, you can complete a similar set up with a Deployment on Astro.
 
-1. In the Cloud UI, add the same environment variables found in your `Dockerfile` to your Deployment [environment variables](https://docs.astronomer.io/astro/environment-variables). Specify both `AIRFLOW__SECRETS__BACKEND` and `AIRFLOW__SECRETS__BACKEND_KWARGS` as **Secret** to ensure that your credentials are stored securely.
+1. In the Cloud UI, add the same environment variables found in your `Dockerfile` to your Deployment [environment variables](https://docs.astronomer.io/astro/environment-variables). Specify `AIRFLOW__SECRETS__BACKEND_KWARGS` as **Secret** to ensure that your credentials are stored securely.
 
   :::warning
 
@@ -579,7 +579,7 @@ To use Azure Key Vault as a secrets backend, you need:
 
 If you do not already have Key Vault configured, read [Microsoft Azure documentation](https://docs.microsoft.com/en-us/azure/key-vault/general/quick-create-portal).
 
-#### Step 1: Register Astro as an App on Azure
+#### Step 1: Register Astro as an app on Azure
 
 Follow the [Microsoft Azure documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to register a new application for Astro.
 
@@ -587,14 +587,14 @@ At a minimum, you need to add a [secret](https://docs.microsoft.com/en-us/azure/
 
 Note the value of the application's client ID and secret for Step 3.
 
-#### Step 2: Create an Access Policy
+#### Step 2: Create an access policy
 
 Follow the [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a new access policy for the application that you just registered. The settings you need to configure for your policy are:
 
 - **Configure from template**: Select `Key, Secret, & Certificate Management`.
 - **Select principal**: Select the name of the application that you registered in Step 1.
 
-#### Step 3: Set Up Key Vault Locally
+#### Step 3: Set up Key Vault locally
 
 In your Astro project, add the following line to your `requirements.txt` file:
 
@@ -605,8 +605,8 @@ apache-airflow-providers-microsoft-azure
 In your `Dockerfile`, add the following environment variables with your own values:
 
 ```dockerfile
-ENV AZURE_CLIENT_ID="<your-client-id>" # Found on App page > 'Application (Client) ID'
-ENV AZURE_TENANT_ID="<your-tenant-id>" # Found on Properties > 'Tenant ID'
+ENV AZURE_CLIENT_ID="<your-client-id>" # Found on App Registration page > 'Application (Client) ID'
+ENV AZURE_TENANT_ID="<your-tenant-id>" # Found on App Registration page > 'Directory (tenant) ID'
 ENV AZURE_CLIENT_SECRET="<your-client-secret>" # Found on App Registration Page > Certificates and Secrets > Client Secrets > 'Value'
 ENV AIRFLOW__SECRETS__BACKEND="airflow.providers.microsoft.azure.secrets.azure_key_vault.AzureKeyVaultBackend"
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}'
@@ -614,9 +614,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
 
 This tells Airflow to look for variable information at the `airflow/variables/*` path in Azure Key Vault and connection information at the `airflow/connections/*` path. In the next step, you'll run an example DAG to test this configuration locally.
 
-:::tip
-By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, replace the values for `"connections_prefix"` and `"connections_prefix"` with `""`.
-:::
+By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `sep`, `"connections_prefix"`, and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
 :::warning
 
@@ -624,7 +622,7 @@ If you want to deploy your project to a hosted Git repository before deploying t
 
 :::
 
-#### Step 4: Test Key Vault Locally
+#### Step 4: Test Key Vault locally
 
 To test your Key Vault setup on Astro locally, [create a new secret](https://docs.microsoft.com/en-us/azure/key-vault/secrets/quick-create-portal#add-a-secret-to-key-vault) in Key Vault containing either a variable or a connection.
 
@@ -656,7 +654,7 @@ To test your changes:
 
 1. Run `astro dev restart` to push your changes to your local Airflow environment.
 2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
-3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should should see the contents of your secret in the task logs:
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
 
     ```text
     {logging_mixin.py:109} INFO - My variable is: my-test-variable
@@ -664,7 +662,7 @@ To test your changes:
 
 Once you confirm that the setup was successful, you can delete this DAG.
 
-#### Step 5: Push Changes to Astro
+#### Step 5: Push changes to Astro
 
 Once you've confirmed that your secrets are being imported correctly to your local environment, you're ready to configure the same feature in a Deployment on Astro.
 
