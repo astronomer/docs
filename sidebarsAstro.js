@@ -16,10 +16,11 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Get Started',
+      label: 'Get started',
       items: [
-        'install-cli',
+        'log-in-to-astro',
         'create-project',
+        'create-deployment',
       ],
     },
     {
@@ -32,6 +33,7 @@ module.exports = {
           label: 'Write DAGs',
           items: [
             'deferrable-operators',
+            'kubepodoperator-local',
             'kubernetespodoperator',
           ],
         },
@@ -52,7 +54,7 @@ module.exports = {
       type: 'category',
       label: 'Manage Deployments',
       items: [
-        'configure-deployment',
+        'configure-deployment-resources',
         'api-keys',
         'environment-variables',
         'secrets-backend',
@@ -62,9 +64,16 @@ module.exports = {
       type: 'category',
       label: 'Observability',
       items: [
+        'view-logs',
         'deployment-metrics',
-        'data-lineage',
-        'scheduler-logs',
+        {
+          type: 'category',
+          label: 'Data lineage',
+          items: [
+            'set-up-data-lineage',
+            'data-lineage',
+          ],
+        },
         'airflow-alerts',
       ],
     },
@@ -81,10 +90,9 @@ module.exports = {
           ],
         },
         'manage-workspaces',
-        'set-up-data-lineage',
         {
           type: 'category',
-          label: 'User Access',
+          label: 'User access',
           items: [
             'add-user',
             'user-permissions',
@@ -95,6 +103,7 @@ module.exports = {
           type: 'category',
           label: 'Manage Clusters',
           items: [
+            'view-clusters',
             'create-cluster',
             'modify-cluster',
             'connect-external-services',
@@ -104,10 +113,9 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Release Notes',
+      label: 'Release notes',
       items: [
         'release-notes',
-        'cli-release-notes',
         'runtime-release-notes',
       ],
     },
@@ -115,42 +123,13 @@ module.exports = {
       type: 'category',
       label: 'Reference',
       items: [
-        {
-          type: 'category',
-          label: 'CLI Command Reference',
-          link: { type: 'doc', id: 'cli-reference' },
-          items: [
-            'cli-reference/astrocloud-auth-login',
-            'cli-reference/astrocloud-auth-logout',
-            'cli-reference/astrocloud-completion',
-            'cli-reference/astrocloud-deploy',
-            'cli-reference/astrocloud-deployment-create',
-            'cli-reference/astrocloud-deployment-delete',
-            'cli-reference/astrocloud-deployment-list',
-            'cli-reference/astrocloud-deployment-logs',
-            'cli-reference/astrocloud-deployment-update',
-            'cli-reference/astrocloud-deployment-variable-create',
-            'cli-reference/astrocloud-deployment-variable-list',
-            'cli-reference/astrocloud-deployment-variable-update',
-            'cli-reference/astrocloud-dev-init',
-            'cli-reference/astrocloud-dev-kill',
-            'cli-reference/astrocloud-dev-logs',
-            'cli-reference/astrocloud-dev-parse',
-            'cli-reference/astrocloud-dev-ps',
-            'cli-reference/astrocloud-dev-pytest',
-            'cli-reference/astrocloud-dev-run',
-            'cli-reference/astrocloud-dev-start',
-            'cli-reference/astrocloud-dev-stop',
-            'cli-reference/astrocloud-dev-restart',
-            'cli-reference/astrocloud-version',
-            'cli-reference/astrocloud-workspace-list',
-            'cli-reference/astrocloud-workspace-switch',],
-        },
         'known-limitations',
+        'runtime-image-architecture',
         'runtime-version-lifecycle-policy',
+        'astro-support',
         {
           type: 'category',
-          label: 'Cloud Configuration Reference',
+          label: 'Cloud configuration reference',
           items: [
             'resource-reference-aws',
             'resource-reference-gcp',
@@ -160,7 +139,7 @@ module.exports = {
         'data-plane-activation',
         {
           type: 'category',
-          label: 'Data Lineage',
+          label: 'Data lineage',
           items: [
             'data-lineage-support-and-compatibility',
             'data-lineage-concepts',],
@@ -174,9 +153,71 @@ module.exports = {
             'resilience',
             'disaster-recovery',
             'data-protection',
+            'gdpr-compliance',
             'secrets-management',],
         },
       ],
     },
+  ],
+  cli: [
+      {
+        type: 'doc',
+        label: 'CLI overview',
+        id: 'cli/overview'
+      },
+      {
+        type: 'doc',
+        label: 'Get started',
+        id: 'cli/get-started'
+      },
+    {
+      type: 'doc',
+      label: 'Configure the CLI',
+      id: 'cli/configure-cli'
+    },
+    {
+      type: 'doc',
+      label: 'Release notes',
+      id: 'cli/release-notes'
+    },
+    {
+    type: 'category',
+    label: 'Command reference',
+    link: { type: 'doc', id: 'cli/reference' },
+    items: [
+      'cli/astro-login',
+      'cli/astro-logout',
+      'cli/astro-completion',
+      'cli/astro-config-get',
+      'cli/astro-config-set',
+      'cli/astro-context-delete',
+      'cli/astro-context-list',
+      'cli/astro-context-switch',
+      'cli/astro-completion',
+      'cli/astro-deploy',
+      'cli/astro-deployment-create',
+      'cli/astro-deployment-delete',
+      'cli/astro-deployment-list',
+      'cli/astro-deployment-logs',
+      'cli/astro-deployment-update',
+      'cli/astro-deployment-variable-create',
+      'cli/astro-deployment-variable-list',
+      'cli/astro-deployment-variable-update',
+      'cli/astro-dev-init',
+      'cli/astro-dev-kill',
+      'cli/astro-dev-logs',
+      'cli/astro-dev-parse',
+      'cli/astro-dev-ps',
+      'cli/astro-dev-pytest',
+      'cli/astro-dev-run',
+      'cli/astro-dev-start',
+      'cli/astro-dev-stop',
+      'cli/astro-dev-restart',
+      'cli/astro-login',
+      'cli/astro-logout',
+      'cli/astro-version',
+      'cli/astro-workspace-list',
+      'cli/astro-workspace-switch',],
+  },
   ],
 };

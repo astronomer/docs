@@ -38,7 +38,7 @@ curl -ssl https://install.astronomer.io | sudo bash
 To install the latest version of the Astronomer CLI via [Homebrew](https://brew.sh/), run:
 
 ```bash
-brew install astronomer/tap/astro
+brew install astro
 ```
 
 For more information on the Astronomer CLI, read [CLI Quickstart](cli-quickstart.md).

@@ -52,6 +52,7 @@
       "label": "Customize Airflow",
       "items": [
         "manage-airflow-versions",
+        "upgrade-to-airflow-2",
         "access-airflow-database",
         "kubepodoperator",
         "kubernetes-executor",
@@ -65,11 +66,11 @@
       "type": "category",
       "label": "Manage Astronomer",
       "items": [
+        "upgrade-astronomer",
         "integrate-auth-system",
         "workspace-permissions",
         "manage-platform-users",
         "houston-api",
-        "upgrade-astronomer-stable",
         "apply-platform-config",
         "registry-backend",
         "configure-platform-resources",

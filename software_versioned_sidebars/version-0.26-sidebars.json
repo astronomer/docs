@@ -106,6 +106,10 @@
         },
         {
           "type": "doc",
+          "id": "version-0.26/upgrade-to-airflow-2"
+        },
+        {
+          "type": "doc",
           "id": "version-0.26/access-airflow-database"
         },
         {
@@ -142,6 +146,10 @@
       "items": [
         {
           "type": "doc",
+          "id": "version-0.26/upgrade-astronomer"
+        },
+        {
+          "type": "doc",
           "id": "version-0.26/integrate-auth-system"
         },
         {
@@ -155,10 +163,6 @@
         {
           "type": "doc",
           "id": "version-0.26/houston-api"
-        },
-        {
-          "type": "doc",
-          "id": "version-0.26/upgrade-astronomer-stable"
         },
         {
           "type": "doc",
