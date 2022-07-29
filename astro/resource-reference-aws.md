@@ -230,7 +230,7 @@ Because the maximum value for **Worker Resources** is 400 AU, a cluster might no
 
 :::info
 
-The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum scheduler size on Astro is 30 AU, which means there are some node instance types for which that maximum size is not supported.
+The size limits defined here currently also apply to **Scheduler Resources**, which determines the CPU and memory allocated to the Airflow Scheduler(s) of each Deployment. The maximum scheduler size on Astro is 24 AU, which means there are some node instance types for which that maximum size is not supported.
 
 For more information about the scheduler, see [Configure a Deployment](configure-deployment-resources.md#scheduler-resources).
 
