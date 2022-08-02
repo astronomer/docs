@@ -135,7 +135,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
     # and port number removed.
     host: “<host-URL>”
     port: "9243"
-    # secret encoded from above step
+    # credentials encoded from above step
     secret: "<encoded credentials>"    
  ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
