@@ -136,7 +136,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
     host: “<host-URL>”
     port: "9243"
     # secret encoded from above step
-    secret: "<secret>"    
+    secret: "<encoded credentials>"    
  ```
 3. Add the following entry to your `config.yaml` file to disable internal logging:
 
