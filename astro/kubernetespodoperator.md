@@ -102,6 +102,12 @@ Applying the code above ensures that when this DAG runs, it will launch a Kubern
 
 By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, complete the setup below.
 
+:::warning
+
+AWS Elastic Container Registry (ECR) is currently not supported on Astro. ECR credentials expire after 12 hours and there is no way for Astro to create a new set of credentials.
+
+:::
+
 ### Prerequisites
 
 To complete this setup, you need:
