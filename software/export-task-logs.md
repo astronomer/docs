@@ -104,17 +104,7 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
         minimum_wire_compatibility_version	"7.17.0"
         minimum_index_compatibility_version	"7.0.0"
         tagline	"You Know, for Search"
-    ```
-6. Run the following command to download the Astronomer Helm chart: 
-
- ```bash
-    helm pull astronomer/astronomer
- ```
-7. Run the following command to show the Astronomer Helm chart:
-
- ```bash
-    helm show chart astronomer/astronomer
- ``` 
+    ``` 
 
 ### Save your Elasticsearch deployment credentials
 
