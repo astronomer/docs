@@ -108,7 +108,7 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
 
 ### Save your Elasticsearch deployment credentials
 
-After you've created an Elastic deployment and endpoint, you have two options to store your Elastic deployment credentials. You can store them directly in your Software helm values, or you can create a secret in your Software Kubernetes cluster.
+After you've created an Elastic deployment and endpoint, you have two options to store your Elastic deployment credentials. You can store the credentials in your Astronomer Software helm values, or as a secret in your Astronomer Software Kubernetes cluster.
 
 <Tabs
     defaultValue="config.yaml"
