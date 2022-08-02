@@ -101,8 +101,8 @@ If your Astro project contains many DAGs or tasks, then you might experience per
 
 To improve the performance of your environment, you can:
 
- - Adjust CPU and memory resource allocation in your Docker resources configuration. Be aware that increasing Docker resource allocation might decrease the overall performance of your computer.
-- Modify Airflow-level environment variables to improve the performance of your local environment, including concurrency and parallelism. For more information, see  [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers) guide from Astronomer.
+ - Adjust CPU and memory resource allocation in your Docker resources configuration. Be aware that increasing Docker resource allocation might decrease the performance of your computer.
+- Modify Airflow-level environment variables to improve the performance of your local environment, including concurrency and parallelism. See  [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
 
 If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
 
