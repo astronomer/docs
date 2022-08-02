@@ -7,8 +7,6 @@ description: Log in to Astro to access Astro features and functionality.
 
 You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, Deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Cloud UI or the Astro CLI for development on Astro.
 
-To integrate an IdP with Astro, see [Set up an identity provider](configure-idp.md).
-
 ## Prerequisites
 
 - An Astronomer account.
@@ -22,7 +20,7 @@ To integrate an IdP with Astro, see [Set up an identity provider](configure-idp.
 2. Select one of the following options to access the Cloud UI:
 
     - Enter your password and click **Continue**. With this log in option, your Organization sends an email invitation to you. Your role is set by the Organization Owner.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.  With this log in option, an invitation is not mandatory. By default, your assigned role is Organization Member after authentication. 
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.  With this log in option, an invitation is not mandatory. By default, your assigned role is Organization Member after authentication. To integrate an IdP with Astro, see [Set up an identity provider](configure-idp.md).
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. With this log in option, your Organization sends an email invitation to you. You won't be able to to acces the Organization without an invitation.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. With this log in option, your Organization sends an email invitation to you. You won't be able to to acces the Organization without an invitation.
 
