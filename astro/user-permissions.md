@@ -11,16 +11,21 @@ To better protect your data pipelines and cloud infrastructure, Astro offers rol
 
 An Organization role grants a user some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace. The following table lists the available Organization roles:
 
+## Organization Roles
+
+An Organization role grants a user some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace. The following Organization roles are available:
+
 | Permission                                                  | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
 | ----------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
-| Create a new Workspace                                      | ✔️                      | ✔️                             | ✔️                       |
-| View Organization details and user membership               | ✔️                      | ✔️                             | ✔️                       |
-| View lineage data in the **Lineage** tab                    | ✔️                      | ✔️                             | ✔️                       |
-| Update Organization billing information and settings        |                         | ✔️                             | ✔️                      |
-| View usage for all Workspaces in the **Usage** tab          |                         | ✔️                             | ✔️                      |
-| Update roles and permissions of existing Organization users |                         |                                | ✔️                     |
-| Invite new user to Organization                             |                         |                                | ✔️                     |
-| Remove a user from an Organization                          |                         |                                | ✔️                     |
+| View Organization details and user membership               | ✔️                       | ✔️                              | ✔️                      |
+| View lineage data in the **Lineage** tab                    | ✔️                       | ✔️                              | ✔️                      |
+| Update Organization billing information and settings        |                         | ✔️                              | ✔️                      |
+| View usage for all Workspaces in the **Usage** tab          |                         | ✔️                              | ✔️                      |
+| Workspace Admin permissions to all Workspaces               |                         |                                | ✔️                      |
+| Create a new Workspace                                      |                         |                                | ✔️                      |
+| Update roles and permissions of existing Organization users |                         |                                | ✔️                      |
+| Invite new user to Organization                             |                         |                                | ✔️                      |
+| Remove a user from an Organization                          |                         |                                | ✔️                      |
 
 :::info Default Roles in New Organizations
 
@@ -37,20 +42,20 @@ The first 3 users that log in to a new Organization automatically become Organiz
 
 A Workspace role grants a user some level of access to a specific Workspace. The following table lists the available Workspace roles:
 
-| Permission                              | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
-| --------------------------------------- | -------------------- | -------------------- | ------------------- |
-| View Workspace users                    | ✔️                   | ✔️                   | ✔️                  |
-| View all Deployments in the Cloud UI    | ✔️                   | ✔️                   | ✔️                  |
-| View DAGs in the Airflow UI             | ✔️                   | ✔️                   | ✔️                  |
-| View Airflow task logs                  | ✔️                   | ✔️                   | ✔️                  |
-| View Airflow connections and Variables  |                      |                      | ✔️                  |
-| Update user roles and permissions       |                      |                      | ✔️                  |
-| Update Airflow connections and Variables |                     |                      | ✔️                  |
-| Update Deployment configurations        |                      | ✔️                   | ✔️                  |
-| Edit task instance and DAG state        |                      | ✔️                   | ✔️                  |
-| Push code to Deployments                |                      | ✔️                   | ✔️                  |
-| Invite users to a Workspace             |                      |                       | ✔️                  |
-| Delete a Deployment                     |                      |                       | ✔️                  |
+| Permission                               | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
+| ---------------------------------------- | -------------------- | -------------------- | ------------------- |
+| View Workspace users                     | ✔️                    | ✔️                    | ✔️                   |
+| View all Deployments in the Cloud UI     | ✔️                    | ✔️                    | ✔️                   |
+| View DAGs in the Airflow UI              | ✔️                    | ✔️                    | ✔️                   |
+| View Airflow task logs                   | ✔️                    | ✔️                    | ✔️                   |
+| Update Deployment configurations         |                      | ✔️                    | ✔️                   |
+| Edit task instance and DAG state         |                      | ✔️                    | ✔️                   |
+| Push code to Deployments                 |                      | ✔️                    | ✔️                   |
+| Create and Delete Deployments            |                      | ✔️                    | ✔️                   | 
+| View Airflow connections and Variables   |                      |                      | ✔️                   |
+| Update user roles and permissions        |                      |                      | ✔️                   |
+| Update Airflow connections and Variables |                      |                      | ✔️                   |
+| Invite users to a Workspace              |                      |                      | ✔️                   |
 
 ### Update Workspace roles
 

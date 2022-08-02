@@ -427,8 +427,8 @@ html[data-theme='dark'] .alert--cli {
     var(--ifm-color-cli-dark);
     var(15%),
     );
-  --ifm-alert-background-color: var( --ifm-color-cli-contrast-background );
-  --ifm-alert-foreground-color: var( --ifm-color-cli-contrast-foreground );
+  --ifm-alert-background-color: var( --purple-800 );
+  --ifm-alert-foreground-color: var( --ifm-color-cli-contrast-background );
   --ifm-alert-border-color: var(--ifm-color-cli-dark);
 }
 

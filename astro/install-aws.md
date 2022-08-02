@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Install Astro on AWS'
+sidebar_label: 'AWS'
 title: 'Install Astro on AWS'
 id: install-aws
 description: Get started on Astro by installing your first Astro cluster on AWS.
