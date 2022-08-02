@@ -7,6 +7,10 @@ description: Log in to Astro to access Astro features and functionality.
 
 You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, Deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Cloud UI or the Astro CLI for development on Astro.
 
+If your Organization is using an Identity Provider (IdP) or a SAML connection for user authentication, you'll receive an email inviting you to the Organization Workspace. Follow the instructions in the email to access the Cloud UI and your Workspace.
+
+To integrate an IdP with Astro, see [Set up an identity provider](configure-idp.md).
+
 ## Prerequisites
 
 - An Astronomer account.
@@ -19,12 +23,10 @@ You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, D
 
 2. Select one of the following options to access the Cloud UI:
 
-    - Enter your password and click **Continue**.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
-    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
-    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
-
-    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
+    - Enter your password and click **Continue**. If your Organization selected this log in option in your email invitation, your Workspace role is set by your administrator. If you haven't received an email invitation, after you log in you'll need to contact the Organization Owner and ask to be invited to the Organization.
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.  If your Organization selected this log in option in your email invitation, your Workspace role is set by your administrator. When you use this option from the Okta or Azure AD dashboard for the first time, you're assigned the Organization Member role.
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. If your Organization selected this log in option in your email invitation, your Workspace role is set by your administrator. If you haven't received an email invitation, after you log in you'll need to contact the Organization Owner and ask to be invited to the Organization.
+    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. If your Organization selected this log in option in your email invitation, your Workspace role is set by your administrator. If you haven't received an email invitation, after you log in you'll need to contact the Organization Owner and ask to be invited to the Organization.
 
 ## Log in to the Astro CLI
 
