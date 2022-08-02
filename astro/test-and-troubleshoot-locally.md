@@ -87,7 +87,7 @@ This command forces your running containers to stop and deletes all data associa
 
 ## Troubleshoot common issues
 
-Use the information provided here to resolve common issues with Astronomer projects in local environments.
+Use the information provided here to resolve common issues with running an Astro project in a local environment.
 
 ### New DAGs aren't visible in the Airflow UI
 
