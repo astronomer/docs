@@ -11,6 +11,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, D
 
 - An Astronomer account.
 - The [Astro CLI](cli/get-started.md).
+- An email address with a domain that matches the domain configured for your Organization. 
 
 ## Log in to the Cloud UI
 
