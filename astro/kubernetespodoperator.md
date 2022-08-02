@@ -104,7 +104,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 
 :::caution
 
-AWS Elastic Container Registry (ECR) is currently not supported on Astro. ECR credentials expire after 12 hours and there is no way for Astro to create a new set of credentials.
+Amazon Elastic Container Registry (ECR) is not supported. ECR credentials expire after 12 hours and they can't be recreated.
 
 :::
 
