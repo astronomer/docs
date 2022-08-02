@@ -15,11 +15,28 @@ If you have any questions or a bug to report, don't hesitate to reach out to [As
 
 **Latest CLI Version**: 1.3.0 ([Release notes](cli/release-notes.md))
 
+## July 27, 2022
+
+### New Deployment optimizations for high availability (HA)
+
+This release introduces two changes that ensure a higher level of reliability for Deployments on Astro:
+
+- [PgBouncer](https://www.pgbouncer.org/), a microservice that increases resilience by pooling database connections, is now considered highly available on Astro. Every Deployment must now have 2 PgBouncer Pods instead of 1, each assigned to a different node within the cluster. This change protects against pod-level connection issues resulting in [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks), which was previously seen during cluster downscaling events. PgBouncer is fully managed by Astronomer and is not configurable.
+
+- The Airflow scheduler is now configured with an [anti-affinity policy](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to limit the possibility of all schedulers for a single Deployment being impacted by an incident within a single node on an Astro cluster. For users who set **Scheduler Count** in the Cloud UI to 2, this means that those 2 scheduler Pods cannot be assigned to the same node and instead require a minimum of 2 nodes total. To avoid significant increases in cost, 3 or 4 schedulers can share the same 2 nodes and will not necessarily result in a higher node count minimum.
+
+For more information on Deployment configurations, see [Configure Deployment resources](configure-deployment-resources.md).
+
+### Additional improvements
+
+- Added tooltips for [Deployment overview metrics](deployment-metrics.md#deployment-overview) in the Cloud UI.
+
 ## July 21, 2022
 
 ### Additional improvements
 
 - You can now access an Organization's AWS external ID from the **Settings** tab of the Cloud UI.
+- Organizations now need only a single AWS external ID for all clusters. Previously, each cluster required a unique external ID, which added complexity to the installation and cluster creation process.
 - You can now remove a user from an Organization from the Cloud UI. See [Remove users from an Organization](add-user.md#remove-users-from-an-organization).
 - Organization Billing Admins can now view task usage for all Workspaces regardless of their Workspace permissions.
 
@@ -560,9 +577,7 @@ For more information, read [Set environment variables via the Cloud UI](environm
 
 In the Cloud UI, your Deployment pages now show high-level metrics for Deployment health and performance over the past 24 hours.
 
-<div class="text--center">
-  <img src="/img/docs/deployment-metrics.png" alt="New metrics in the Cloud UI" />
-</div>
+![New metrics in the Cloud UI](/img/docs/deployment-metrics.png)
 
 For more information on this feature, read [Deployment metrics](deployment-metrics.md).
 
@@ -584,9 +599,7 @@ The Cloud UI has been redesigned so that you can more intuitively manage Organiz
 
 To start, the homepage is now a global view. From here, you can now see all Workspaces that you have access to, as well as information and settings related to your **Organization**: a collection of specific users, teams, and Workspaces. Many features related to Organizations are coming soon, but the UI now better represents how Organizations are structured and what you can do with them in the future:
 
-<div class="text--center">
-  <img src="/img/docs/ui-release-note1.png" alt="New global menu in the UI" />
-</div>
+![New global menu in the UI](/img/docs/ui-release-note1.png)
 
 You can now also select specific Workspaces to work in. When you click in to a Workspace, you'll notice the lefthand menu bar is now entirely dedicated to Workspace actions:
 
@@ -596,15 +609,11 @@ You can now also select specific Workspaces to work in. When you click in to a W
 
 To return to the global menu, you can either click the Astro "A" or click the Workspace name to produce a dropdown menu with your Organization.
 
-<div class="text--center">
-  <img src="/img/docs/ui-release-note2.png" alt="New Workspace menu in the UI" />
-</div>
+![New Workspace menu in the UI](/img/docs/ui-release-note2.png)
 
 All user configurations can be found by clicking your user profile picture in the upper righthand corner of the UI. From the dropdown menu that appears, you can both configure user settings and access other Astronomer resources such as documentation and the Astronomer Registry.
 
-<div class="text--center">
-  <img src="/img/docs/ui-release-note3.png" alt="New profile menu in the UI" />
-</div>
+![New profile menu in the UI](/img/docs/ui-release-note3.png)
 
 ### Additional improvements
 
@@ -643,15 +652,11 @@ All user configurations can be found by clicking your user profile picture in th
 - The name of your Astro Deployment now appears on the main DAGs view of the Airflow UI.
 - You can now see the health status for each Deployment in your Workspace on the table view of the **Deployments** page in the Cloud UI:
 
-   <div class="text--center">
-     <img src="/img/docs/health-status-table.png" alt="Deployment Health statuses visible in the Deployments table view" />
-   </div>
+   ![Deployment Health statuses visible in the Deployments table view](/img/docs/health-status-table.png)
 
 - In the Cloud UI, you can now access the Airflow UI for Deployments via the **Deployments** page's card view:
 
-    <div class="text--center">
-      <img src="/img/docs/open-airflow-card.png" alt="Open Airflow button in the Deployments page card view" />
-    </div>
+    ![Open Airflow button in the Deployments page card view](/img/docs/open-airflow-card.png)
 
 - The Cloud UI now saves your color mode preference.
 
@@ -674,9 +679,7 @@ This release introduces a breaking change to code deploys via the Astro CLI. Sta
 
 - In the Cloud UI, a new element on the Deployment information screen shows the health status of a Deployment. Currently, a Deployment is considered unhealthy if the Airflow webserver is not running and the Airflow UI is not available:
 
-    <div class="text--center">
-      <img src="/img/docs/deployment-health.png" alt="Deployment Health text in the UI" />
-    </div>
+    ![Deployment Health text in the UI](/img/docs/deployment-health.png)
 
 - The documentation home for Astro has been moved to `docs.astronomer.io`, and you no longer need a password to access the page.
 

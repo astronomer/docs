@@ -197,6 +197,16 @@ module.exports = {
           editLocalizedFiles: true,
           routeBasePath: 'astro',
           path: 'astro',
+          admonitions: {
+            tag: ':::',
+            keywords: [
+              'caution',
+              'warning',
+              'info',
+              'tip',
+              'cli',
+            ],
+          },
         },
         sitemap: {
         id: 'default',
