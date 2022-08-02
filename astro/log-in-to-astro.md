@@ -21,7 +21,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, D
 
     - Enter your password and click **Continue**. With this log in option, your Organization sends an email invitation to you. Your role is set by the Organization Owner.
     - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.  With this log in option, an invitation is not mandatory. By default, your assigned role is Organization Member after authentication. To integrate an IdP with Astro, see [Set up an identity provider](configure-idp.md).
-    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. With this log in option, your Organization sends an email invitation to you. You won't be able to to acces the Organization without an invitation.
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. With this log in option, your Organization sends an email invitation to you. You won't be able to to access the Organization without an invitation.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. With this log in option, your Organization sends an email invitation to you. You won't be able to to access the Organization without an invitation.
 
 ## Log in to the Astro CLI
