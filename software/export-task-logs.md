@@ -124,7 +124,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
     defaultValue="config.yaml"
     values={[
         {label: 'config.yaml', value: 'config.yaml'},
-        {label: 'Kubernetes cluster', value: 'kubernetes cluster'},
+        {label: 'Kubernetes secret', value: 'kubernetes secret'},
     ]}>
 <TabItem value="config.yaml">
 
