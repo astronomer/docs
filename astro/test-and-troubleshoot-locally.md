@@ -108,7 +108,7 @@ If your DAGs continue to run slowly and you can't scale Docker or Airflow any fu
 
 ### Astro project won't load after `astro dev start`
 
-If your Astro project fails to run in an Airflow environment more than 5 minutes after running `astro dev start`, it might be because your webserver or scheduler is unhealthy. In this case, you might need to debug your containers. To do so:
+If your Astro project fails to run in an Airflow environment for more than 5 minutes after running `astro dev start`, it might be because your webserver or scheduler is unhealthy. In this case, you might need to debug your containers. To do so:
 
 1. After running `astro dev start`, retrieve a list of running containers by running `astro dev ps`.
 2. If the webserver and scheduler containers exist but are unhealthy, check their logs by running:
