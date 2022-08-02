@@ -88,7 +88,7 @@ Add your Astronomer Deployment task logs to an existing Elasticsearch instance t
     ![Elastic Copy Endpoint location](/img/docs/elasticsearch-copy-endpoint.png)
 
 5. Optional. Test the Elasticsearch Deployment endpoint:
-    - Open a new browser window, paste the endpoint you copied in step 4 in the **Address** bar, and then click **Enter**.
+    - Open a new browser window, paste the endpoint you copied in step 4 in the **Address** bar, and then press **Enter**.
     - Enter the username and password you copied in step 2 and click **Sign in**. Output similar to the following appears:
     ```text
         name	"instance-0000000000"
