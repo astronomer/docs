@@ -83,7 +83,7 @@ In most cases, [restarting your local project](develop-project.md#restart-your-l
 astro dev kill
 ```
 
-This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.
+This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow connections, logs, and task history.
 
 ## Troubleshoot common issues
 
