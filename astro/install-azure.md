@@ -52,7 +52,7 @@ The data plane is a collection of Astro infrastructure components that run in yo
 <Tabs
     defaultValue="azure"
     values={[
-        {label: 'Azure CLI', value: 'azure'},
+        {label: 'Azure CLI on Bash', value: 'azure'},
         {label: 'PowerShell', value: 'powershell'},
     ]}>
 <TabItem value="azure">
