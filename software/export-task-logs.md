@@ -75,7 +75,7 @@ To revert to the default behavior and export task logs using a Fluentd Daemonset
 
 ## Forward Deployment task logs to Elasticsearch
 
-Add your Astronomer Deployment task logs to an existing Elasticsearch instance to centralize log management and analysis. Centralized log management allows you to quickly identify and troubleshoot issues and resolve issues quickly.
+Add your Astronomer Deployment task logs to an existing Elasticsearch instance to centralize log management and analysis. Centralized log management allows you to quickly identify, troubleshoot, and resolve issues quickly.
 
 ### Create an Elastic Deployment and endpoint
 
