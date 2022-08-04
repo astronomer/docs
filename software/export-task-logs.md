@@ -106,7 +106,7 @@ Add Airflow task logs from your Astronomer Deployment to an existing Elasticsear
         tagline	"You Know, for Search"
     ``` 
 
-### Save your Elasticsearch deployment credentials
+### Save your Elastic Cloud deployment credentials
 
 After you've created an Elastic deployment and endpoint, you have two options to store your Elastic deployment credentials. You can store the credentials in your Astronomer Software helm values, or as a secret in your Astronomer Software Kubernetes cluster.
 
