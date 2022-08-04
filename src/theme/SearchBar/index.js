@@ -12,7 +12,7 @@ import {useHistory} from '@docusaurus/router';
 import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
 import Link from '@docusaurus/Link';
 import Head from '@docusaurus/Head';
-import {isRegexpStringMatch, useSearchPage} from '@docusaurus/theme-common';
+import {isRegexpStringMatch, useSearchPage} from '@docusaurus/theme-common/internal';
 import {DocSearchButton, useDocSearchKeyboardEvents} from '@docsearch/react';
 import useAlgoliaContextualFacetFilters from '../hooks/useAlgoliaContextualFacetFilters.js';
 // OUR CUSTOM HOOK ^^^^^^^^^^^^^^^
