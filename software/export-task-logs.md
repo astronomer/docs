@@ -188,7 +188,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
 </TabItem>
 </Tabs>
 
-### View the Deployment task logs in Elastic
+### View Airflow task logs in Elastic
 
 1. On the Elastic dashboard in the **Elastichsearch Service** area, click the Deployment name.
   ![ElasticDeployment name location](/img/docs/elasticsearch-deployment-name.png)
