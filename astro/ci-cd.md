@@ -616,6 +616,33 @@ When you create environment variables that will be used in multiple branches, yo
         only:
           - main
    `}</code></pre>
+   
+
 
 </TabItem>
 </Tabs>
+
+### Bitbucket
+
+To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org/), complete the following setup in a Git-based repository that hosts an Astro project:
+
+1. Set the following environment variables as [Bitbucket pipeline variables](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. Create a new YAML file in `bitbucket-pipelines.yml` at the root of the repository that includes the following configuration:
+
+    <pre><code parentName="pre">{`
+    pipelines:
+      pull-requests: # The branch pattern under pull requests defines the *source* branch.
+        dev:
+          - step:
+              name: Deploy to Production
+              deployment: Production
+              script:
+                - curl -sSL install.astronomer.io | sudo bash -s
+                - astro deploy
+              services:
+                - docker
+    `}</code></pre>
