@@ -99,11 +99,11 @@ Use AWS PrivateLink to create private connections from Astro to your AWS service
 
 Astro clusters are pre-configured with the following AWS PrivateLink endpoint services:
 
-- S3 - Gateway Endpoint
-- EC2 Autoscaling - Interface Endpoint
-- ECR - Interface Endpoints for ECR API and Docker Registry API
-- ELB - Interface Endpoint
-- STS - Interface Endpoint
+- Amazon S3 - Gateway Endpoint
+- Amazon Elastic Compute Cloud (Amazon EC2) Autoscaling - Interface Endpoint
+- Amazon Elastic Container Registry (ECR) - Interface Endpoints for ECR API and Docker Registry API
+- Elastic Load Balancing (ELB)  - Interface Endpoint
+- AWS Security Token Service (AWS STS) - Interface Endpoint
 
 To request additional endpoints, or assistance connecting to other AWS services, contact [Astronomer support](https://support.astronomer.io).
 
