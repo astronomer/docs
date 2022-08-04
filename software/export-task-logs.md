@@ -197,4 +197,4 @@ After you've created an Elastic deployment and endpoint, you have two options to
     ![Discover menu location](/img/docs/elasticsearch-discover.png)
 
 3. Enter `fluentd.*` in the **Name** field, enter `@timestamp` in the **Timestamp field**, and then click **Create index pattern**.
-4. Click **Menu** > **Dashboard** to view the Deployment task logs.
+4. Click **Menu** > **Dashboard** to view the Airflow task logs for your Deployment on Astronomer.
