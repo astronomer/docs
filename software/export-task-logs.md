@@ -118,7 +118,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
     ]}>
 <TabItem value="config.yaml">
 
-1. Run the following command to base64 encode your Elasticsearch Deployment credentials:
+1. Run the following command to base64 encode your Elastic Cloud deployment credentials:
 
  ```bash
     echo -n "<username>:<password>" | base64
