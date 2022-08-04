@@ -291,6 +291,14 @@ small {
   font-size: 24px;
 }
 
+.navbar__items--right button.clean-btn {
+  color: white;
+}
+
+.navbar__items--right:hover button.clean-btn {
+  color: revert;
+}
+
 html
 .navbar__items--right div:first-of-type div:first-of-type div:last-of-type {
   background-color: var(--purple-200);

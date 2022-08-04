@@ -27,12 +27,6 @@ An Organization role grants a user some level of access to an Astro Organization
 | Invite new user to Organization                             |                         |                                | ✔️                      |
 | Remove a user from an Organization                          |                         |                                | ✔️                      |
 
-:::info Default Roles in New Organizations
-
-The first 3 users that log in to a new Organization automatically become Organization Owners. New users added afterward automatically become Organization Members.
-
-:::
-
 ### Update Organization roles
 
 1. In the Cloud UI, go to the **People** tab. This tab is available in the Organization view of the UI.
