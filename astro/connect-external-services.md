@@ -10,6 +10,7 @@ Before you can run pipelines on Astro with real data, you first need to make you
 - Public endpoints
 - Virtual Private Cloud (VPC) peering
 - Amazon Web Services (AWS) Transit Gateway
+- AWS PrivateLink
 - AWS IAM roles
 - Workload Identity (_Google Cloud Platform (GCP) only_)
 
