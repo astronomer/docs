@@ -153,7 +153,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
 </TabItem>
 <TabItem value="kubernetes secret">
 
-1. Run the following command to create a secret for your Elasticsearch Deployment credentials in the Kubernetes cluster:
+1. Run the following command to create a secret for your Elastic Cloud Deployment credentials in the Kubernetes cluster:
 
  ```bash
  kubectl create secret generic elasticcreds --from-literal elastic=<username>:<password> --namespace=<your-platform-namespace>
