@@ -18,6 +18,10 @@ We're committed to testing all Astronomer Software versions for scale, reliabili
 
 Release date: August 8, 2022
 
+### Additional improvements
+
+- Resolved several high and critical CVEs.
+
 ### Bug fixes
 
 - GraphQL extra AU queries now return results for all Deployments on Airflow.
