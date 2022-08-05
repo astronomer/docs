@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 To complete the installation process, you'll:
 
 - Add the Astronomer Service Principal to your Azure Active Directory (Azure AD) instance.
-- Assign an Owner role to the Astronomer Service Principal who manages subscriptions for your organization.
+- Assign the Astronomer Service Principal an Owner role to your subscription.
 - Register Microsoft Azure features.
 
 When you've completed the installation process, Astronomer support creates a cluster within your Azure subscription to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
