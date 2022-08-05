@@ -14,6 +14,14 @@ This document includes all release notes for Astronomer Software version 0.29.
 
 We're committed to testing all Astronomer Software versions for scale, reliability and security on Amazon EKS, Google GKE and Azure AKS. If you have any questions or an issue to report, don't hesitate to [reach out to us](https://support.astronomer.io).
 
+## v0.29.3
+
+Release date: August 8, 2022
+
+### Bug fixes
+
+- GraphQL extra AU queries now return results for all Deployments on Airflow.
+
 ## v0.29.2
 
 Release date: July 18, 2022
