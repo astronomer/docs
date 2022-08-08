@@ -24,7 +24,7 @@ Release date: August 8, 2022
 
 ### Bug fixes
 
-- GraphQL extra AU queries now return results for all Deployments on Airflow.
+- API requests to query the AUs allocated to **Extra Capacity** are now returning results for all Deployments in a Workspace. Previously, queries were only returning partial results.
 
 ## v0.29.2
 
