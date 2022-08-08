@@ -8,7 +8,8 @@ description: Learn how to connect your Astro data plane to different types of ex
 Before you can run pipelines on Astro with real data, you first need to make your data services accessible to your data plane and the Deployments running within it. This guide explains how to securely connect Astro to external data services using the following methods:
 
 - Public endpoints
-- Virtual Private Cloud (VPC)/Virtual Network (VNet) peering 
+- Virtual Private Cloud (VPC)
+- Virtual Network (VNet) peering 
 - Amazon Web Services (AWS) Transit Gateway
 - AWS PrivateLink
 - AWS IAM roles
