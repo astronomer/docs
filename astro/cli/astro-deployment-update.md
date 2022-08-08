@@ -31,7 +31,7 @@ After setting the variables, this command works for a Deployment and you don't n
 | `<deployment-id>` (_Required_) | The Deployment to update                                                               | Any valid Deployment ID                                                        |
 | `-d`,`--description`           | The description for the Deployment                                                     | Any string. Multiple-word descriptions should be specified in quotations (`"`) |
 | `-l`,`--name`                  | The Deployment's name                                                                  | Any string. Multiple-word descriptions should be specified in quotations       |
-| `-s`,`--scheduler-au`          | The number of AU to allocate towards the Deployment's Scheduler(s). The default is`5`. | Integer between `0` and `30`                                                   |
+| `-s`,`--scheduler-au`          | The number of AU to allocate towards the Deployment's Scheduler(s). The default is`5`. | Integer between `0` and `24`                                                   |
 | `-a`,`--worker-au`             | The number of AU to allocate towards the Deployment's worker(s). The default is `10`.  | Integer between `0` and `175`                                                  |
 | `-r`,`--scheduler-replicas`    | The number of scheduler replicas for the Deployment. The default is `1`.               | Integer between `0` and `4`                                                    |
 | `-f`,`--force`          | Force a Deployment update                             | ``                                                                             |
