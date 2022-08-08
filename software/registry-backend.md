@@ -5,11 +5,11 @@ id: registry-backend
 description: Configure a registry backend to work with the Astronomer platform.
 ---
 
-Astronomer Software requires a Docker Registry to store the Docker Images generated every time a user either pushes code or a configuration change to an Airflow Deployment on Astronomer.
+Astronomer Software requires a Docker Registry to store the Docker Images generated every time a user pushes code or makes a configuration change to an Airflow Deployment on Astronomer.
 
-The default storage backend for this Docker Registry is a [Kubernetes Persistent Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). While this may be sufficient for teams just getting started on Astronomer, we strongly recommend backing the registry with an external storage solution for any team running in production.
+The default storage backend for this Docker Registry is a [Kubernetes Persistent Volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). While this may be sufficient for teams just getting started on Astronomer, Astronomer recommends backing the registry with an external storage solution for any team running in production.
 
-This doc will walk through configuring the 3 tools that Astronomer supports:
+The following are the registry backend tools supported by Astronomer:
 
 - [Google Cloud Storage](https://cloud.google.com/storage/)
 - [AWS S3](https://aws.amazon.com/s3/)
@@ -17,21 +17,21 @@ This doc will walk through configuring the 3 tools that Astronomer supports:
 
 ## Google Cloud Storage
 
-If you're running Astronomer Software on GCP GKE, we'd recommend Google Cloud Storage (GCS) as a registry backend solution. Read below for guidelines.
+If you're running Astronomer Software on Google Cloud Platform (GCP) Google Kubernetes Engine (GKE), Astronomer recommends using Google Cloud Storage (GCS) as a registry backend solution.
 
-To read more about the Google Cloud Storage driver, reference [this doc](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/gcs.md).
+To read more about the Google Cloud Storage driver, see [Google Cloud Storage driver](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/gcs.md).
 
 ### Prerequisites
 
-To use Google Cloud Storage (GCS) as a registry backend solution, you'll need:
+To use GCS as a registry backend solution, you'll need:
 
 - An existing GCS Bucket
 - Your Google Cloud Platform service account JSON Key
-- Ability to create a Kubernetes Secret in your cluster
+- Permissions to create a Kubernetes Secret in your cluster
 
 ### Update your config.yaml file
 
-1. Download your Google Cloud Platform service account JSON key from [Google Console](https://console.cloud.google.com/apis/credentials/serviceaccountkey). Make sure the service account you use has both the `Storage Legacy Bucket Owner` and `Storage Object Admin` roles.
+1. Download your GCP service account JSON key from the [Google Console](https://console.cloud.google.com/apis/credentials/serviceaccountkey). Make sure the service account you use has both the `Storage Legacy Bucket Owner` and `Storage Object Admin` roles.
 
 2. Create a [Kubernetes Secret](https://kubernetes.io/docs/concepts/configuration/secret/) using the downloaded key:
 
@@ -89,9 +89,9 @@ astronomer:
 
 ## AWS S3
 
-If you're running Astronomer Software on AWS EKS, we'd recommend AWS S3 as a registry backend solution. Read below for guidelines.
+If you're running Astronomer Software on the Amazon Elastic Kubernetes Service (EKS), Astronomer recommends using AWS S3 as a registry backend solution.
 
-To read more about the AWS S3 storage driver, [go here](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/s3.md).
+To read more about the AWS S3 storage driver, [S3 storage driver](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/s3.md).
 
 ### Prerequisites
 
@@ -103,8 +103,6 @@ To use AWS S3 as a registry backend solution, you'll need:
 - Ability to create a Kubernetes Secret in your cluster
 
 ### Create S3 IAM policy and user
-
-To grant the registry appropriate push and pull permissions, follow the steps below.
 
 1. Use the following definition to create a new AWS IAM policy, making sure to replace `S3_BUCKET_NAME` with your own S3 bucket's name:
 
@@ -136,30 +134,42 @@ To grant the registry appropriate push and pull permissions, follow the steps be
 }
 ```
 
-2. Create a new IAM User and attach the Policy. Your access key and secret key will be generated and displayed after the user is created.
+2. Create a new IAM User and attach the Policy. Your access key and secret key are generated and displayed after you create the user.
 
-3. Add the following to your `config.yaml` file:
+3. Select one of the following options:
 
-```yaml
-astronomer:
-  registry:
-    s3:
-      enabled: true
-      accesskey: my-access-key
-      secretkey: my-secret-key
-      region: us-east-1
-      bucket: my-s3-bucket
-```
+  - To authenticate to AWS with your registry credentials, add this entry to the `config.yaml` file:
 
-4. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+  ```yaml
+    astronomer:
+      registry:
+        s3:
+          enabled: true
+          accesskey: my-access-key
+          secretkey: my-secret-key
+          region: us-east-1
+          regionendpoint: <your-region-endpoint>
+          bucket: <your-bucket-name>
+    ```
+  - To authenticate to AWS without providing your registry credentials, add this entry to the `config.yaml` file:
+
+  ```yaml
+    astronomer:
+      registry:
+        s3:
+          enabled: true
+          region: us-east-1
+          regionendpoint: <your-region-endpoint>
+          bucket: <your-bucket-name>
+    ```
+
+4. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
 ### Enable encryption (_Optional_)
 
-To enable encryption, follow the steps below.
-
 1. Create a key in AWS Key Management Service (KMS). During the key creation process you'll be asked to add "key users". Add the user created above as a "key user".
 
-2. Enable encryption by adding the following values to your `config.yaml` file:
+2. Add the following values to your `config.yaml` file to enable encryption:
 
 ```yaml
 astronomer:
@@ -174,13 +184,13 @@ astronomer:
       keyid: my-kms-key-id
 ```
 
-3. Push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+3. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
 ## Azure Blob Storage
 
-If you're running Astronomer Software on Azure AKS, we'd recommend Azure Blob Storage as a registry backend solution. Read below for guidelines.
+If you're running Astronomer Software on Azure Kubernetes Service (AKS), Astronomer recommends using Azure Blob Storage as a registry backend solution.
 
-To read more about the Azure Blog Storage driver, [go here](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/azure.md).
+To read more about the Azure Blog Storage driver, see [Microsoft Azure storage driver](https://github.com/docker/docker.github.io/blob/master/registry/storage-drivers/azure.md).
 
 
 ### Prerequisites

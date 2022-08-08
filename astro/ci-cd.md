@@ -616,6 +616,67 @@ When you create environment variables that will be used in multiple branches, yo
         only:
           - main
    `}</code></pre>
+   
+
 
 </TabItem>
 </Tabs>
+
+### Bitbucket
+
+To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org/), complete the following setup in a Git-based repository that hosts an Astro project:
+
+1. Set the following environment variables as [Bitbucket pipeline variables](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. Create a new YAML file in `bitbucket-pipelines.yml` at the root of the repository that includes the following configuration:
+
+    <pre><code parentName="pre">{`
+    pipelines:
+      pull-requests: # The branch pattern under pull requests defines the *source* branch.
+        dev:
+          - step:
+              name: Deploy to Production
+              deployment: Production
+              script:
+                - curl -sSL install.astronomer.io | sudo bash -s
+                - astro deploy
+              services:
+                - docker
+    `}</code></pre>
+    
+
+### Azure DevOps
+
+To automate code deploys to a Deployment using [Azure DevOps](https://dev.azure.com/), complete the following setup in a Git-based repository that hosts an Astro project:
+
+1. Set the following environment variables as [DevOps pipeline variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch):
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. Create a new YAML file in `astro-devops-cicd.yaml` at the root of the repository that includes the following configuration:
+
+    <pre><code parentName="pre">{`
+    trigger:
+    - main
+
+    pr: none
+
+    stages:
+    - stage: deploy
+      jobs:
+      - job: deploy_image
+        pool:
+          vmImage: 'Ubuntu-latest'
+        steps:
+        - script: |
+            curl -sSL install.astronomer.io | sudo bash -s
+            astro deploy
+          env:
+            ASTRONOMER_KEY_ID: $(ASTRONOMER_KEY_ID)
+            ASTRONOMER_KEY_SECRET: $(ASTRONOMER_KEY_SECRET)
+    `}</code></pre>
+
