@@ -91,10 +91,6 @@ Use the information provided here to resolve common issues with running an Astro
 
 ### New DAGs aren't visible in the Airflow UI
 
-By default, the Airflow scheduler scans the DAGs directory for new files every 300 seconds (5 minutes). For this reason, it might take a few minutes for DAGs to appear in the Airflow UI.
-
-To have the scheduler check for DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. See [Set environment variables on Astro](environment-variables.md). This setting is dependent on the amount of CPU that is allocated to the scheduler. The greater the CPU allocation, the faster the scheduler can parse your DAGs.
-
 Make sure the `dag_id` isn’t duplicated. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
 
 By default, the Airflow scheduler scans the DAGs directory for new files every 300 seconds (5 minutes). For this reason, it might take a few minutes for DAGs to appear in the Airflow UI. To have the scheduler check for DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. This setting is dependent on the amount of CPU that is allocated to the scheduler. The greater the CPU allocation, the faster the scheduler can parse your DAGs.
