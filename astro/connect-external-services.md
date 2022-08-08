@@ -8,7 +8,8 @@ description: Learn how to connect your Astro data plane to different types of ex
 Before you can run pipelines on Astro with real data, you first need to make your data services accessible to your data plane and the Deployments running within it. This guide explains how to securely connect Astro to external data services using the following methods:
 
 - Public endpoints
-- Virtual Private Cloud (VPC) peering
+- Virtual Private Cloud (VPC)
+- Virtual Network (VNet) peering 
 - Amazon Web Services (AWS) Transit Gateway
 - AWS PrivateLink
 - AWS IAM roles
@@ -35,21 +36,21 @@ On Astro, each cluster has two unique external IP addresses that persist through
 
 To retrieve the IP addresses of an Astro cluster, contact [Astronomer support](https://support.astronomer.io) and request them. Then, allowlist these IP addresses in your data service provider. If you have more than one cluster, you will need to allowlist each cluster individually.
 
-## VPC peering
+## VPC/VNet peering
 
-Each cluster on Astro runs in a dedicated Virtual Private Network (VPC). To set up private connectivity between an Astro VPC and another VPC, you can set up a VPC peering connection. VPC peering ensures private and secure connectivity, reduced network transit costs, and simplified network layouts.
+Each cluster on Astro runs in a dedicated Virtual Private Network (VPC/VNet). To set up private connectivity between an Astro VPC/VNet and another VPC/VNet, you can set up a VPC peering connection. VPC peering ensures private and secure connectivity, reduced network transit costs, and simplified network layouts.
 
 To create a VPC peering connection between an Astro VPC and a target VPC, reach out to [Astronomer support](https://support.astronomer.io) and provide the following information:
 
 - Astro cluster ID and name
-- AWS Account ID or Google Cloud project ID of the target VPC
-- Region of the target VPC (_AWS only_)
-- VPC ID of the target VPC
-- CIDR of the target VPC
+- AWS Account ID or Google Cloud project ID or Azure TenantID and Subscription ID of the target VPC/VNet
+- Region of the target VPC/VNet (_AWS and Azure only_)
+- VPC/VNet ID of the target VPC/VNet
+- CIDR of the target VPC/VNet
 
-From there, Astronomer initiates a peering request. To connect successfully, this peering request must be accepted by the owner of the target VPC in your organization.
+From there, Astronomer initiates a peering request. To connect successfully, this peering request must be accepted by the owner of the target VPC/VNet in your organization.
 
-Once the VPC peering connection is established, the owner of the target VPC will continue to work with our team to update the routing tables of both VPCs to direct traffic to each other.
+Once the VPC/VNet peering connection is established, the owner of the target VPC will continue to work with our team to update the routing tables of both VPCs to direct traffic to each other.
 
 ### DNS considerations for VPC peering (_AWS only_)
 
