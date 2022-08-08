@@ -185,7 +185,7 @@ mutation updateDeploymentImage {
         updateDeploymentImage(
                 releaseName: "<deployment-release-name>", # for example "analytics-dev"
                 image: "<host>/<image-name>:<tag>",  # for example docker.io/cmart123/ap-airflow:test4
-                airflowVersion: "<airflow-version-number>" # for example "2.2.5"
+                runtimeVersion: "<runtime-version-number>" # for example "5.0.6"
         )
         {
                 id
@@ -196,5 +196,5 @@ mutation updateDeploymentImage {
 Alternatively, you can run this same query using curl:
 
 ```bash
-curl 'https://houston.BASEDOMAIN/v1' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://houston.BASEDOMAIN/v1' -H 'Authorization: <your-token>' --data-binary '{"query":"mutation updateDeploymentImage {updateDeploymentImage(releaseName: \"<deployment-release-name>\", image: \"<host>/<image-name>:<tag>\",airflowVersion: \"<airflow-version-number>\"){id}}"}' --compressed
+curl 'https://houston.BASEDOMAIN/v1' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://houston.BASEDOMAIN/v1' -H 'Authorization: <your-token>' --data-binary '{"query":"mutation updateDeploymentImage {updateDeploymentImage(releaseName: \"<deployment-release-name>\", image: \"<host>/<image-name>:<tag>\",runtimeVersion: \"<runtime-version-number>\"){id}}"}' --compressed
 ```
