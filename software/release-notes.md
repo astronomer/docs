@@ -16,7 +16,7 @@ We're committed to testing all Astronomer Software versions for scale, reliabili
 
 ## v0.29.3
 
-Release date: August 8, 2022
+Release date: August 5, 2022
 
 ### Additional improvements
 
