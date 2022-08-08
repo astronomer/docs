@@ -95,6 +95,8 @@ By default, the Airflow scheduler scans the DAGs directory for new files every 3
 
 To have the scheduler check for DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. This setting is dependent on the amount of CPU that is allocated to the scheduler. The greater the CPU allocation, the faster the scheduler can parse your DAGs.
 
+Make sure the `dag_id` isn’t duplicated. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
+
 ### DAGs are running slowly
 
 If your Astro project contains many DAGs or tasks, then you might experience performance issues in your local Airflow environment.
@@ -103,6 +105,7 @@ To improve the performance of your environment, you can:
 
  - Adjust CPU and memory resource allocation in your Docker resources configuration. Be aware that increasing Docker resource allocation might decrease the performance of your computer.
 - Modify Airflow-level environment variables to improve the performance of your local environment, including concurrency and parallelism. See  [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
+- Make sure you aren't using dynamic DAG authoring patterns.
 
 If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
 
@@ -117,11 +120,15 @@ If your Astro project fails to run in an Airflow environment for more than 5 min
     $ astro dev logs --webserver
     $ astro dev logs --scheduler
     ```
+3. Optional. Run the following command to prune volumes and free disk space:
+
+    ```sh
+    docker system prune --volumes
+    ```
 
 These logs should help you understand why your webserver or scheduler is unhealthy. Possible reasons why these containers might be unhealthy include:
 
 - Not enough Docker resources.
 - Broken Postgres database.
-- DAG code errors.
 - Misconfigured Dockerfile or Docker override file.
 - Misconfigured Airflow settings.
