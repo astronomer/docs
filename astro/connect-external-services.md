@@ -176,7 +176,7 @@ GCP has a 30 character limit for service account names. For Deployment namespace
 For example, if your GCP project is named `astronomer-prod` and your Deployment namespace is `nuclear-scintillation-2730`, the service account name is:
 
 ```text
-astro-nuclear-scintillation-27@astronomer-pmm.iam.gserviceaccount.com
+astro-nuclear-scintillation-27@astronomer-prod.iam.gserviceaccount.com
 ```
 
 :::
