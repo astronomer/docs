@@ -108,7 +108,7 @@ To improve the performance of your environment, you can:
 
 Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see [Dynamically Generating DAGs in Airflow](https://www.astronomer.io/guides/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
 
-::: tip
+:::tip
 
 If you don't have enough Docker resources allocated to your local Airflow environment, you might see tasks fail and exit with this error:
 
