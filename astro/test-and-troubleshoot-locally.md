@@ -91,9 +91,9 @@ Use the information provided here to resolve common issues with running an Astro
 
 ### New DAGs aren't visible in the Airflow UI
 
-Make sure the `dag_id` isn’t duplicated. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
+Make sure that no DAGs have duplicate `dag_id`s. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
 
-By default, the Airflow scheduler scans the DAGs directory for new files every 300 seconds (5 minutes). For this reason, it might take a few minutes for DAGs to appear in the Airflow UI. To have the scheduler check for DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. This setting is dependent on the amount of CPU that is allocated to the scheduler. The greater the CPU allocation, the faster the scheduler can parse your DAGs.
+By default, the Airflow scheduler scans the `dags` directory of your Astro project for new files every 300 seconds (5 minutes). For this reason, it might take a few minutes for new DAGs to appear in the Airflow UI. Note that changes to existing DAGs appear immediately. To have the scheduler check for new DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. Decreasing this setting results in the scheduler consuming more resources, so you might need to increase the CPU allocated to the scheduler.
 
 ### DAGs are running slowly
 
@@ -103,13 +103,14 @@ To improve the performance of your environment, you can:
 
  - Adjust CPU and memory resource allocation in your Docker resources configuration. Be aware that increasing Docker resource allocation might decrease the performance of your computer.
 - Modify Airflow-level environment variables to improve the performance of your local environment, including concurrency and parallelism. See  [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
-- Adjust your dynamic DAG authoring patterns. See [Dynamically Generating DAGs in Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
 
-If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
+Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see ["Dynamically Generating DAGs in Airflow"](https://www.astronomer.io/guides/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
 
 ### Astro project won't load after `astro dev start`
 
-If your Astro project fails to run in an Airflow environment for more than 5 minutes after running `astro dev start`, it might be because your webserver or scheduler is unhealthy. In this case, you might need to debug your containers. To do so:
+If you're running the Astro CLI on a Mac computer that's built with the Apple M1 chip, your Astro project might take more than 5 mins to start after running `astro dev start`. This is a current limitation of Astro Runtime and the Astro CLI that's expected to be addressed soon.
+
+If your project won't load, it might also be because your webserver or scheduler is unhealthy. In this case, you might need to debug your containers. To do so:
 
 1. After running `astro dev start`, retrieve a list of running containers by running `astro dev ps`.
 2. If the webserver and scheduler containers exist but are unhealthy, check their logs by running:
