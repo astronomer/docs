@@ -9,7 +9,7 @@ As you develop data pipelines on Astro, we strongly recommend running and testin
 
 ## Run a project locally
 
-Whenever you want to test your code, the first step is always to start a local Airflow environment. To run your project in a local Airflow environment, follow the steps in [Build and run a project](develop-project.md#build-and-run-a-project-locally).
+To test your code, the first step is always to start a local Airflow environment. To run your project in a local Airflow environment, follow the steps in [Build and run a project](develop-project.md#build-and-run-a-project-locally).
 
 ## Test DAGs with the Astro CLI
 
@@ -51,7 +51,9 @@ By default, the `tests` directory in your Astro project includes a default DAG i
 
 ## View Airflow logs
 
-You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change. See [View logs](view-logs.md).
+You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change.
+
+See [View logs](view-logs.md).
 
 ## Run Airflow CLI commands
 
@@ -63,7 +65,7 @@ astro dev run <airflow-cli-command>
 
 For example, the Airflow CLI command for listing connections is `airflow connections list`. To run this command with the Astro CLI, you would run `astro dev run connections list` instead.
 
-In practice, running `astro dev run` is the equivalent of running `docker exec` in local containers and then running an Airflow CLI command within those containers.
+Running `astro dev run` with the Astro CLI is the equivalent of running `docker exec` in local containers and then running an Airflow CLI command within those containers.
 
 :::tip
 
@@ -105,6 +107,18 @@ To improve the performance of your environment, you can:
  - Modify Airflow-level environment variables, including concurrency and parallelism. See [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
 
 Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see [Dynamically Generating DAGs in Airflow](https://www.astronomer.io/guides/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
+
+::: tip
+
+If you don't have enough Docker resources allocated to your local Airflow environment, you might see tasks fail and exit with this error:
+
+   ```
+   Task exited with return code Negsignal.SIGKILL
+   ```
+
+If you see this error, increase the CPU and memory allocated to Docker. If you're using Docker Desktop, you can do this by opening Docker Desktop and going to **Preferences** > **Resources** > **Advanced**. See [Change Docker Desktop preferences on Mac](https://docs.docker.com/desktop/settings/mac/).
+
+:::
 
 ### Astro project won't load after `astro dev start`
 
