@@ -101,10 +101,10 @@ If your Astro project contains many DAGs or tasks, then you might experience per
 
 To improve the performance of your environment, you can:
 
- - Adjust CPU and memory resource allocation in your Docker resources configuration. Be aware that increasing Docker resource allocation might decrease the performance of your computer.
-- Modify Airflow-level environment variables to improve the performance of your local environment, including concurrency and parallelism. See  [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
+ - Adjust CPU and memory resource allocation in your Docker configuration. Be aware that increasing Docker resource allocation might decrease the performance of your computer.
+ - Modify Airflow-level environment variables, including concurrency and parallelism. See [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
 
-Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see ["Dynamically Generating DAGs in Airflow"](https://www.astronomer.io/guides/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
+Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see [Dynamically Generating DAGs in Airflow](https://www.astronomer.io/guides/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
 
 ### Astro project won't load after `astro dev start`
 
@@ -128,6 +128,6 @@ If your project won't load, it might also be because your webserver or scheduler
 These logs should help you understand why your webserver or scheduler is unhealthy. Possible reasons why these containers might be unhealthy include:
 
 - Not enough Docker resources.
-- Broken Postgres database.
+- A failed Airflow or Astro Runtime version upgrade.
 - Misconfigured Dockerfile or Docker override file.
 - Misconfigured Airflow settings.
