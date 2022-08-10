@@ -95,9 +95,10 @@ For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, o
 
 1. Run the following command to intialize a new `.astro` project:
 
- ```sh
+    ```sh
     astro dev init
- ```
+    ```
+
 2. Run the following command to build your Astro project into a Docker image and start a local Docker container for each Airflow component:
 
  ```sh
