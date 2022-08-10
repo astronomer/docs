@@ -101,42 +101,42 @@ For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, o
 
 2. Run the following command to build your Astro project into a Docker image and start a local Docker container for each Airflow component:
 
- ```sh
-    astro dev start
- ```
+    ```sh
+      astro dev start
+    ```
 
 3. Run the following command to retrieve the container IDs:
 
- ```sh
-    docker ps
- ```
+    ```sh
+      docker ps
+    ```
 4. Run the following command to open a bash terminal in a running container:
 
- ```sh
-    docker exec -it -u 0 <container_id> /bin/bash
- ```
+    ```sh
+      docker exec -it -u 0 <container_id> /bin/bash
+    ```
     Replace `container_id` with one of the IDs you retrieved in step 3.
 
 5. Run the following command to download and install the prebuilt OpenJDK packages and review any error messages that are returned:
 
- ```bash
-    apt-get install openjdk-8-jdk
- ```
+    ```bash
+      apt-get install openjdk-8-jdk
+    ```
 6. Run the following command to install the GNU Compiler Collection (GCC) compiler and review any error messages that are returned:
 
- ```bash
-    apt-get install gcc
- ```
+    ```bash
+      apt-get install gcc
+    ```
 7. Run the following command to install the G++ compiler and review any error messages that are returned:
 
- ```bash
-    apt-get install g++
- ```
+    ```bash
+      apt-get install g++
+    ```
  8. Run the following command to install the libsasl2-dev package and review any error messages that are returned:
 
- ```bash
-    apt-get install libsasl2-dev
- ```
+    ```bash
+      apt-get install libsasl2-dev
+    ```
 ## Troubleshoot common issues
 
 Use the information provided here to resolve common issues with running an Astro project in a local environment.
