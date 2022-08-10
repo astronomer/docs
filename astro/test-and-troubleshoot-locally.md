@@ -93,7 +93,7 @@ When dependency errors occur, the error message that is returned often doesn't c
 
 For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, or libsas12-dev packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
 
-1. Open the `requirements.txt` and `packages.txt` files for your project and remove all package references. 
+1. Open the `requirements.txt` and `packages.txt` files for your project and remove the references to the packages that are returning error messages. 
 
 2. Run the following command to build your Astro project into a Docker image and start a local Docker container for each Airflow component:
 
@@ -118,7 +118,6 @@ For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, o
     ```bash
     apt-get install <package-name>
     ```
-
     For example, to install the GNU Compiler Collection (GCC) compiler, you would run:
 
     ```bash
