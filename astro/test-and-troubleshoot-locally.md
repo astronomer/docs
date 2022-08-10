@@ -105,7 +105,7 @@ For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, o
       astro dev start
     ```
 
-3. Run the following command to retrieve the container IDs:
+3. Run the following command to retrieve the container IDs for your Airflow components:
 
     ```sh
       docker ps
