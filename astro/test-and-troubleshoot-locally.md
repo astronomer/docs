@@ -93,50 +93,48 @@ When dependency errors occur, the error message that is returned often doesn't c
 
 For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, or libsas12-dev packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
 
-1. Optional. Run the following command to intialize a new `.astro` project:
-
-    ```sh
-    astro dev init
-    ```
+1. Open the `requirements.txt` and `packages.txt` files for your project and remove all package references. 
 
 2. Run the following command to build your Astro project into a Docker image and start a local Docker container for each Airflow component:
 
     ```sh
-      astro dev start
+    astro dev start
     ```
 
 3. Run the following command to retrieve the container IDs for your Airflow components:
 
     ```sh
-      docker ps
+    docker ps
     ```
 4. Run the following command to open a bash terminal in a running container:
 
     ```sh
-      docker exec -it -u 0 <container_id> /bin/bash
+    docker exec -it -u 0 <container_id> /bin/bash
     ```
     Replace `container_id` with one of the IDs you retrieved in step 3.
 
 5. Run the following command to download and install the prebuilt OpenJDK packages and review any error messages that are returned:
 
     ```bash
-      apt-get install openjdk-8-jdk
+    apt-get install openjdk-8-jdk
     ```
 6. Run the following command to install the GNU Compiler Collection (GCC) compiler and review any error messages that are returned:
 
     ```bash
-      apt-get install gcc
+    apt-get install gcc
     ```
 7. Run the following command to install the G++ compiler and review any error messages that are returned:
 
     ```bash
-      apt-get install g++
+    apt-get install g++
     ```
  8. Run the following command to install the libsasl2-dev package and review any error messages that are returned:
 
     ```bash
-      apt-get install libsasl2-dev
+    apt-get install libsasl2-dev
     ```
+9. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1.
+
 
 ## Troubleshoot common issues
 
