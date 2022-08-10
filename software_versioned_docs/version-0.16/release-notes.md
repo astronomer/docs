@@ -312,7 +312,7 @@ Release Date: June 8, 2020
 
 #### Support for Airflow 1.10.10
 
-As of v0.15, Astronomer users are free to run our [Astronomer Certified (AC) 1.10.10 image](https://www.astronomer.io/downloads/ac/v1-10-10), which is based on the [Airflow 1.10.10](https://airflow.apache.org/blog/airflow-1.10.10/) open source version released in early April.
+As of v0.15, Astronomer users can run the Astronomer Certified (AC) 1.10.10 image, which is based on the [Airflow 1.10.10](https://airflow.apache.org/blog/airflow-1.10.10/) open source version released in early April.
 
 Airflow 1.10.10 notably includes the ability to choose a timezone in the Airflow UI, DAG Serialization functionality for improved Webserver performance, and the [ability to sync Airflow Connections and Variables](https://forum.astronomer.io/t/aws-parameter-store-as-secrets-backend-airflow-1-10-10/606) with a Secret Backend tool (e.g. AWS Secret Manager, Hashicorp Vault, etc.)
 

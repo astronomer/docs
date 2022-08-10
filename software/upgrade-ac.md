@@ -17,7 +17,7 @@ Follow this guide to upgrade your Airflow environment either on a virtual machin
 
 If you're upgrading an Astronomer Certified environment running on Docker, all you need to do is update your Dockerfile to reference a new Astronomer Certified Docker image.
 
-1. Choose a new Astronomer Certified image based on the Airflow version you want to upgrade to. For a list of supported Astronomer Certified images, see [Downloads](https://www.astronomer.io/downloads/) or our [Quay.io repository](https://quay.io/repository/astronomer/ap-airflow?tab=tags).
+1. Choose a new Astronomer Certified image based on the Airflow version you want to upgrade to. For a list of supported Astronomer Certified images, see [Astronomer Certified Lifecycle Schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule) or our [Quay.io repository](https://quay.io/repository/astronomer/ap-airflow?tab=tags).
 
 2. Open the `Dockerfile` in your Astro project directory.
 
