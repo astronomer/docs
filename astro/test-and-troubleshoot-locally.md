@@ -137,6 +137,7 @@ For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, o
     ```bash
       apt-get install libsasl2-dev
     ```
+
 ## Troubleshoot common issues
 
 Use the information provided here to resolve common issues with running an Astro project in a local environment.
