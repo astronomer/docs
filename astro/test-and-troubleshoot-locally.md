@@ -113,27 +113,19 @@ For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, o
     ```
     Replace `container_id` with one of the IDs you retrieved in step 3.
 
-5. Run the following command to download and install the prebuilt OpenJDK packages and review any error messages that are returned:
+5. In the bash terminal for each container, run the following command to install a package and review any error messages that are returned:
 
     ```bash
-    apt-get install openjdk-8-jdk
+    apt-get install <package-name>
     ```
-6. Run the following command to install the GNU Compiler Collection (GCC) compiler and review any error messages that are returned:
+
+    For example, to install the GNU Compiler Collection (GCC) compiler, you would run:
 
     ```bash
     apt-get install gcc
     ```
-7. Run the following command to install the G++ compiler and review any error messages that are returned:
 
-    ```bash
-    apt-get install g++
-    ```
- 8. Run the following command to install the libsasl2-dev package and review any error messages that are returned:
-
-    ```bash
-    apt-get install libsasl2-dev
-    ```
-9. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1.
+6. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1.
 
 
 ## Troubleshoot common issues
