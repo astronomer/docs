@@ -178,13 +178,13 @@ astro deploy
 
 Alternatively, you can run a GraphQL query to update the image in your Deployment after manually pushing the image to the custom registry. This can be useful for automating code deploys using CI/CD.
 
-At a minimum, your query has to include the following:
+At a minimum, your query has to include the following, and your image name and tag MUST match image names and tags in [this file](https://updates.astronomer.io/astronomer-certified)
 
 ```graphql
 mutation updateDeploymentImage {
         updateDeploymentImage(
                 releaseName: "<deployment-release-name>", # for example "analytics-dev"
-                image: "<host>/<image-name>:<tag>",  # for example docker.io/cmart123/ap-airflow:test4
+                image: "<host>/<image-name>:<tag>",  # for example docker.io/my_repo/astro-runtime:5.0.6
                 runtimeVersion: "<runtime-version-number>" # for example "5.0.6"
         )
         {
