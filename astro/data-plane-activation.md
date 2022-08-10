@@ -8,35 +8,30 @@ description: Prepare for the activation of your Astro data plane.
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Astro is a modern data orchestration platform, powered by Apache Airflow, that enables the entire data team to build, run, and observe data pipelines. The architecture of Astro includes a single-tenant data plane in your cloud and a multi-tenant control plane in Astronomer’s cloud.
+Astro is a modern data orchestration platform, powered by Apache Airflow, that enables your entire data team to build, run, and observe data pipelines. The Astro architecture includes a single-tenant data plane in your cloud and a multi-tenant control plane in the Astronomer cloud. The data plane provides a reliable and seamless connection to all of your data services.
+
+Your data plane is deployed into a clean, dedicated AWS account, GCP project, or Microsoft Azure subscription. Astronomer is responsibile for the operations of this account. See [Shared responsibility model](shared-responsibility-model.md).
+
+By default, the Astronomer account can't access your data services. Astronomer support will work with you to ensure your peering VPC or direct connections are secure.
 
 ![High level overview of Astro's architecture](/img/docs/architecture-overview.png)
 
 ### What to expect
 
-We’re excited to get you started with Astro! The first step is to **activate your data plane**, which allows you to see our modern data orchestration experience hands-on.
+An assigned Astronomer engineer will work with you to activate your data plane. The activation process typically takes and hour and when it's complete you'll have your first pipeline deployed in your Astro environment. In addition, you'll have hands-on experience with Astronomer data orchestration.
 
-When you meet with one of our engineers to activate your data plane, **expect it to take about an hour**. By the end of the session, you should have your first pipeline deployed in your own Astro environment!
-
-### What to bring and know
-
-Your data plane is deployed into a clean, dedicated AWS account or GCP project. Astronomer takes complete responsibility for the operations of this account as described in our [Shared responsibility model](shared-responsibility-model.md).
-
-This model allows us to get you started quickly, providing cloud-grade reliability and seamless connection to all of your data services. If you decide not to proceed with Astro, this account can be deleted in its entirety.
-
-By default, the Astronomer account has no access to your data services. We’ll guide you through how to make these connections securely, whether through peering VPCs or making direct connections.
-
-### Pre-flight checklist
+### Prerequisites
 
 <Tabs
     defaultValue="aws"
     values={[
         {label: 'AWS', value: 'aws'},
+        {label: 'Azure', value: 'azure'},
         {label: 'GCP', value: 'gcp'},
     ]}>
 <TabItem value="aws">
 
-When you arrive at your data plane activation appointment, please ensure that you have:
+The following are required when activating your AWS data plane:
 - [ ] [Astro CLI](cli/get-started.md) installed for any users who will develop pipelines
 - [ ] A clean AWS Account
 - [ ] The following permissions to that AWS account:
@@ -52,9 +47,23 @@ When you arrive at your data plane activation appointment, please ensure that yo
 - [ ] _If peering VPCs_, preferred subnet CIDR range identified (no smaller than a /19 range)
 
 </TabItem>
+
+<TabItem value="azure">
+
+The following are required when activating your Azure data plane:
+- [ ] [Astro CLI](cli/get-started.md) installed for any users who are developing pipelines.
+- [ ] A clean Azure subscription. For security reasons, Azure subscriptions with existing tooling running aren't supported. Also, the subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups?](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
+- [ ] An Azure Active Directory (AD) user with the following role assignments:
+    - `Application Administrator`. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+    - `Owner`with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
+- [ ] The Microsoft Azure CLI or Azure Az PowerShell module.  See [How to install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) and [Install the Azure Az PowerShell module](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps).
+- [ ] Desired region for Astro cluster deployment identified, from the list of [supported regions](resource-reference-azure.md#supported-regions).
+
+</TabItem>
+
 <TabItem value="gcp">
 
-When you arrive at your data plane activation appointment, please ensure you have:
+The following are required when activating your GCP data plane:
 - [ ] [Astro CLI](cli/get-started.md) installed for any users who will develop pipelines
 - [ ] A clean GCP project
 - [ ] A user with [Owner access](https://cloud.google.com/iam/docs/understanding-roles#basic-definitions) to your project

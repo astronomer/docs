@@ -19,11 +19,11 @@ astro deployment logs
 
 | Option                   | Description                                     | Possible Values                     |
 | ------------------------ | ----------------------------------------------- | ----------------------------------- |
-| `<deployment-id>` | The Deployment to show logs for                 | Any valid Deployment ID |
+| `<deployment-id>` | The Deployment to show logs for                        | Any valid Deployment ID |
 | `-e`,`--error`           | Show only logs with a log level of `ERROR`      | ``                                  |
 | `-w`,`--warn`            | Show only logs with a log level of `WARNING`    | ``                                  |
 | `-i`,`--info`            | Show only logs with a log level of `INFO`       | ``                                  |
-| `-c`,`--log-count`       | The number of log lines to show. The default is`500` | Any integer                         |
+| `-c`,`--log-count`       | The number of log lines to show. The default is `500` | Any integer less than or equal to 500 |
 | `--workspace-id` | Specify a Workspace to show logs for a Deployment outside of your current Workspace| Any valid Workspace ID                                            |
 
 ## Examples

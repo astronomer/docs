@@ -11,6 +11,7 @@ You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, D
 
 - An Astronomer account.
 - The [Astro CLI](cli/get-started.md).
+- An email address with a domain that matches the domain configured for your Organization. 
 
 ## Log in to the Cloud UI
 
@@ -18,12 +19,10 @@ You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, D
 
 2. Select one of the following options to access the Cloud UI:
 
-    - Enter your password and click **Continue**.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
-    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
-    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
-
-    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
+    - Enter your password and click **Continue**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. Your role is set by the Organization Owner.
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.  With this log in option, an invitation is not mandatory. By default, you are assigned the Organization Member role after authentication. To integrate an IdP with Astro, see [Set up an identity provider](configure-idp.md).
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
+    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
 
 ## Log in to the Astro CLI
 

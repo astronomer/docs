@@ -8,20 +8,20 @@ description: Learn about Astro, the managed service that makes data pipelines ea
 
 Astro is a managed software service that offers a next-generation experience for modern data teams running Apache Airflow, the open source industry standard for data orchestration.
 
-Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. It optimizes for security whilst relieving your team of operational overhead.
+Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. This solution optimizes security and reduces operational overhead.
 
 Beyond architecture, Astro offers a suite of first-class features that make it easy to author, run, and monitor data pipelines.
 
 ## Features
 
-Astro's architecture enables a few key features, available today:
+The key features of the Astro architecture include:
 
-- Worker auto-scaling, powered by Airflow's Celery executor + KEDA
-- The ability to run multiple clusters in your organization's network on either AWS or GCP
-- Astro Runtime, a collection of Docker images that provides a differentiated data orchestration experience
-- Timely support for the latest major, minor, and patch versions of the Apache Airflow open source project
-- Support for role-based access control (RBAC) and single sign-on (SSO) for secure user management and authentication
-- An observability experience that gives you insight into the health and resource consumption of your tasks and pipelines in real time
+- Worker auto-scaling, powered by the Airflow Celery executor + KEDA.
+- The ability to run multiple clusters in your organization's network on AWS, GCP, or Azure.
+- Astro Runtime, a collection of Docker images that provides a differentiated data orchestration experience.
+- Timely support for the latest major, minor, and patch versions of the Apache Airflow open source project.
+- Support for role-based access control (RBAC) and single sign-on (SSO) for secure user management and authentication.
+- An observability experience that gives you insight into the health and resource consumption of your tasks and pipelines in real time.
 
 ## Architecture
 
@@ -31,12 +31,12 @@ The following diagram outlines how the control plane, data plane, and users are 
 
 ## Get started
 
-The Astronomer team will schedule an onboarding session for your initial install. From there, Astronomer recommends reading the following topics:
+Astronomer support will schedule an onboarding session for your initial install. Astronomer recommends that you review the following topics after your installation is complete:
 
 - [Install the Astro CLI](cli/get-started.md)
-- [Develop project](develop-project.md)
+- [Develop your Astro project](develop-project.md)
 - [Configure your Deployment](configure-deployment-resources.md)
 
-If you have a feature request or a bug to report, reach out to [Astronomer support](https://support.astronomer.io). We're here to help.
+If you have a feature request or a bug to report, contact [Astronomer support](https://support.astronomer.io). We're here to help.
 
-To check on the operational status of Astro, visit our [status page](https://cloud-status.astronomer.io). You can subscribe to updates by clicking on **Subscribe to Updates** on the top-right of the page and entering your email address.
+To check the operational status of Astro, visit the [status page](https://cloud-status.astronomer.io). Click **Subscribe to Updates**  and then enter your email address to receive a notification when an incident is created, updated, or resolved.
