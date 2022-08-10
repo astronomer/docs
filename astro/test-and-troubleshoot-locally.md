@@ -93,7 +93,7 @@ When dependency errors occur, the error message that is returned often doesn't c
 
 For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, or libsas12-dev packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
 
-1. Run the following command to intialize a new `.astro` project:
+1. Optional. Run the following command to intialize a new `.astro` project:
 
     ```sh
     astro dev init
