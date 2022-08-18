@@ -237,6 +237,7 @@ To use this feature, you need:
 - The [Astro CLI](cli/get-started.md).
 - An [Astro project](create-project.md).
 - Access to AWS SSM Parameter Store.
+- An [IAM policy](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html) allowing access to parameters
 - A valid AWS Access Key ID and Secret Access Key.
 
 
