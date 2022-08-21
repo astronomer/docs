@@ -32,6 +32,23 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
 
 For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure.md).
 
+### VNet peering prerequisites (Optional)
+
+If any Azure resources are on a private network, you can choose between two options:
+
+1. Create a VNet Peering connection between Astronomer's VNet and the VNets for your broader network. 
+2. [Virtual Network Integration](https://docs.microsoft.com/en-us/azure/api-management/virtual-network-concepts?tabs=stv2)
+
+If you want to continue with the option #1, please open a ticket within our [Astronomer Support](https://support.astronomer.io/) with following details and support will proceed on configuring the VNet peering:
+
+- Azure TenantID of the target VNet
+- Subscription ID of the target VNet
+- Region of the target VNet
+- VNet ID of the target VNet
+- A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. You must ensure it does not overlap with the Azure VNet(s) that you will be peering with later. The default CIDR range is `172.20.0.0/19`.
+- Resource group name (you can reference the [Management of Azure Resource Groups Docs here.](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal). [Azure Portal login](https://portal.azure.com/)
+
+
 ## Step 1: Access Astro
 
 1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
