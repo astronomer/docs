@@ -154,7 +154,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
 To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
 
 1. In the Cloud UI, select a Deployment and then copy the value in the **Namespace** field.
-2. Use the Deployment namespace value and the name of your GCP project to identify the Google service account for your Deployment.
+2. Use the Deployment namespace value and the name of your Google Cloud project to identify the Google service account for your Deployment.
     
     Google service accounts for Astro Deployments are formatted as follows:
 
@@ -182,7 +182,7 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
 
 GCP has a 30-character limit for service account names. For Deployment namespaces which are longer than 24 characters, use only the first 24 characters when determining your service account name.
 
-For example, if your GCP project is named `astronomer-prod` and your Deployment namespace is `nuclear-scintillation-2730`, the service account name is:
+For example, if your Google Cloud project is named `astronomer-prod` and your Deployment namespace is `nuclear-scintillation-2730`, the service account name is:
 
 ```text
 astro-nuclear-scintillation-27@astronomer-prod.iam.gserviceaccount.com
