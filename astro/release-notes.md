@@ -27,10 +27,9 @@ To configure this feature, see [Export Airflow metrics to Datadog](deployment-me
 
 - You can now configure [worker queues](configure-deployment-resources.md#worker-queues) to have a minimum **Worker count** of 0 workers.
 - When you create a new worker queue, the Cloud UI now populates the **Worker type** field with a default worker type.
-- Added automatic validation for worker queue names. 
+- Added automatic validation steps for worker queue names.
 - The number of times that a user can enter the wrong credentials for Astro before being locked out has been reduced from 10 to 6.
-- The timestamp appended to the end of a Deployment's Runtime image tag is now updated when you update the Deployment's environment variables.
-
+- The timestamp appended to the end of a Deployment's Runtime image tag is now updated when you update a Deployment's environment variables.
 
 ## August 24, 2022
 
