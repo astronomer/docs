@@ -167,7 +167,6 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
     ```text
     astro-nuclear-science-2730@astronomer-prod.iam.gserviceaccount.com
     ```
-3. Navigate to the Google Cloud project in which your external data service is hosted.
 4. Grant the Google service account for your Astro Deployment an IAM role that has access to your external data service. With the Google Cloud CLI, run:
 
     ```text
