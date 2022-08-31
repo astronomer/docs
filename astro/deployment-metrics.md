@@ -177,13 +177,13 @@ To access the **DAGs** page, you can either click the DAGs icon in the UI or cli
 
 ![DAGs page](/img/docs/dags-page.png)
 
-## Export Airflow metrics to Datadog
+## Export Airflow Deployment metrics to Datadog
 
-You can export metrics about a Deployment's Airflow environment to Datadog. The Datadog Agent collects metrics that are available in the Astro UI as well as more specific metrics about your environment's performance. See the [Datadog documentation](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) for a complete list of exported metrics.
+You can export metrics about a Deployment's Airflow environment to Datadog. After you configure this integration, the Datadog Agent collects metrics that are available in the Astro UI as well as more specific metrics about your environment's performance. See the [Datadog documentation](https://docs.datadoghq.com/integrations/airflow/?tab=host#data-collected) for a complete list of exported metrics.
 
 :::info
 
-Your Deployment does not export any [service checks](https://docs.datadoghq.com/integrations/airflow/?tab=host#service-checks) to Datadog. Information about the general health of your Airflow environment is available only in the Cloud UI's [Deployment health](#deployment-health) metric.
+Astro does not export any [service checks](https://docs.datadoghq.com/integrations/airflow/?tab=host#service-checks) to Datadog. Information about the general health of your Deployment is available only as part of the Cloud UI's [Deployment health](#deployment-health) metric.
 
 :::
 
