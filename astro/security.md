@@ -37,7 +37,7 @@ Astro is compliant with AICPA SOC 2 controls with respect to the security, avail
 
 Astronomer is also [GDPR-compliant](gdpr-compliance.md) as an organization, and the Astro platform is GDPR-ready. Astronomer offers a Data Processing Agreement (DPA), which satisfies the requirements the GDPR imposes on data controllers with respect to data processors.
 
-For organizations operating with protected health information, Astro offers a path to processing this data in a [HIPAA compliant way](hipaa-compliance.md).
+For organizations operating with protected health information, Astronomer is [HIPAA-compliant](hipaa-compliance.md) as an organization, and the Astro platform is HIPAA-ready.
 
 Additionally, for organizations processing payment card information, Astro is certified as compliant with PCI DSS security standards.
 
