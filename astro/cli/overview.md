@@ -21,7 +21,7 @@ For alternative installation steps, see [Install the Astro CLI](install-cli.md).
 
 ## Get started
 
-Follow the [Get started](get-started-with-apache-airflow.md) tutorial to run Airflow locally and write your first DAG.
+Follow the [Get started](install-cli.md) tutorial to run Airflow locally and write your first DAG.
 
 ## Features
 
