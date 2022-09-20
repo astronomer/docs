@@ -33,18 +33,26 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
 
 For more information about the resources required to run Astro on Azure, see [Azure Resource Reference](resource-reference-azure.md).
 
-### VPC peering prerequisites (Optional)
+### VNet peering prerequisites (Optional)
 
-If any Azure resources are on a private network, you can choose one of the following options:
+If any Azure resources are on a private network, you can choose between two options:
 
-- Use the public internet and allow-lists for communication.
-- Create a VPC Peering connection between the Astronomer VPC and your network VPCs.
+ 1. Create a VNet Peering connection between Astronomer's VNet and the VNets for your broader network. 
+ 2. [Virtual Network Integration](https://docs.microsoft.com/en-us/azure/api-management/virtual-network-concepts?tabs=stv2)
 
-To implement the second option, you'll additionally need:
+ If you want to continue with the option #1, please open a ticket within our [Astronomer Support](https://support.astronomer.io/) with following details and support will proceed on configuring the VNet peering:
 
-- A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. You must ensure it does not overlap with the AWS VPC(s) that you will be peering with later. The default CIDR range is `172.20.0.0/19`.
-- VPC Name / ID for peering with Astronomer.
-- The IP addresses of your DNS servers.
+ - Azure TenantID of the target VNet
+ - Subscription ID of the target VNet
+ - Region of the target VNet
+ - VNet ID of the target VNet
+ - ResourceGroup of the target VNet
+ - A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. You must ensure it does not overlap with the Azure VNet(s) that you will be peering with later. The default CIDR range is `172.20.0.0/19`.
+ - ResourceID - The resource ID is similar to the following example: /subscriptions/<Subscription Id>/resourceGroups/myResourceGroupA/providers/Microsoft.Network/virtualNetworks/myVnetA (you can capture the resource ID within the Azure portal by following step #7 under [this link](https://docs.microsoft.com/en-us/azure/virtual-network/create-peering-different-subscriptions#portal). [Azure Portal login](https://portal.azure.com/)
+ 
+ **Please Note:** As outline within the Azure docs [here](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-peering#permissions), the accounts you use to work with virtual network peering must be assigned to the following roles:
+        -  Network Contributor: For a virtual network deployed through Resource Manager.
+        -  Classic Network Contributor: For a virtual network deployed through the classic deployment model.
 
 ## Step 1: Access Astro
 
