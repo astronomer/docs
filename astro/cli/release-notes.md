@@ -15,7 +15,7 @@ Release date: September 28, 2022
 
 ### Bug fixes 
 
-- Improved error handling and messaging when the CLI doesn't recognize the image in a project's Dockerfile
+- Improved error handling and messaging when the Astro CLI doesn't recognize the image in a project's Dockerfile
 
 ## Astro CLI 1.5.1
 

@@ -15,7 +15,7 @@ Release date: September 28, 2022
 
 ### Bug fixes 
 
-- Fixed an issue where `astro deployment user list` would list incorrect roles for some users
+- Fixed an issue where `astro deployment user list` listed incorrect roles for some users
   
 ## Astro CLI 1.5.0
 
