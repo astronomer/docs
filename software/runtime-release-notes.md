@@ -9,12 +9,31 @@ description: Release notes for Astro Runtime, the differentiated Apache Airflow 
 
 Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. Note that some changes to Runtime might be omitted based on their availability in Astronomer Software.
 
-For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](manage-airflow-versions.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
+For upgrade instructions, see [Upgrade Airflow on Astronomer Software](manage-airflow-versions.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://support.astronomer.io).
+
+## Astro Runtime 6.0.1
+
+- Release date: September 26, 2022
+- Airflow version: 2.4.0
+
+### Bug fixes 
+
+- Fixed an issue where Astro users could not access task logs on Deployments using Runtime 6.0.0
+- Backported a fix to correct an issue where logs were not loading from Celery workers ([#26493](https://github.com/apache/airflow/pull/26493))
+- Fixed [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
 
 ## Astro Runtime 5.0.9
 
 - Release date: September 20, 2022
 - Airflow version: 2.3.4
+
+:::danger Breaking change
+
+The `dbt-core` provider package is currently incompatible with Runtime 5.0.0 and later. The root cause for this issue is not yet known. If `dbt-core` is listed in your Astro project `requirements.txt` file when you attempt to upgrade to Runtime 5.0 or later, the upgrade fails.
+
+To upgrade to Runtime 5.0.0 or later, remove `dbt-core` from your `requirements.txt` file. To continue running dbt Core jobs with Airflow, don't upgrade your current Runtime version or upgrade to Runtime version 4.2.x and wait until a  fix is announced. 
+
+:::
 
 ### Backported fixes from Apache Airflow 2.4
 

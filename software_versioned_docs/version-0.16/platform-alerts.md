@@ -35,7 +35,7 @@ By default, Astronomer checks for all alerts defined in [the Prometheus configma
 
 Astronomer uses [Prometheus Alertmanager](https://prometheus.io/docs/alerting/configuration/) to manage alerts. This includes silencing, inhibiting, aggregating, and sending out notifications via methods such as email, on-call notification systems, and chat platforms.
 
-You can configure [Alertmanager](https://prometheus.io/docs/alerting/configuration/) to send Astronomer's built-in alerts to email, HipChat, PagerDuty, Pushover, Slack, OpsGenie, and more by defining alert receivers in the [Alertmanager Helm chart](https://github.com/astronomer/astronomer/blob/master/charts/alertmanager/values.yaml) and pushing them to the [Alertmanager ConfigMap](#https://github.com/astronomer/astronomer/blob/release-0.23/charts/alertmanager/templates/alertmanager-configmap.yaml).
+You can configure [Alertmanager](https://prometheus.io/docs/alerting/configuration/) to send Astronomer's built-in alerts to email, HipChat, PagerDuty, Pushover, Slack, OpsGenie, and more by defining alert receivers in the [Alertmanager Helm chart](https://github.com/astronomer/astronomer/blob/master/charts/alertmanager/values.yaml) and pushing them to the [Alertmanager ConfigMap](#https://github.com/astronomer/astronomer/blob/master/charts/alertmanager/templates/alertmanager-configmap.yaml).
 
 ### Create alert receivers
 
@@ -85,7 +85,7 @@ For more information on building and configuring receivers, refer to [Prometheus
 
 ### Push alert receivers to Astronomer
 
-To add a new receiver to Astronomer, add your receiver configuration to your `config.yaml` file and push the changes to your installation as described in [Apply a Config Change](apply-platform-config.md). The receivers you add must be specified in the same order and format as they appear in the Alertmanager Helm chart. Once you push the alerts to Astronomer, they are automatically added to the [Alertmanager ConfigMap](#https://github.com/astronomer/astronomer/blob/release-0.23/charts/alertmanager/templates/alertmanager-configmap.yaml).
+To add a new receiver to Astronomer, add your receiver configuration to your `config.yaml` file and push the changes to your installation as described in [Apply a Config Change](apply-platform-config.md). The receivers you add must be specified in the same order and format as they appear in the Alertmanager Helm chart. Once you push the alerts to Astronomer, they are automatically added to the [Alertmanager ConfigMap](#https://github.com/astronomer/astronomer/blob/master/charts/alertmanager/templates/alertmanager-configmap.yaml).
 
 ## Create Custom Alerts
 

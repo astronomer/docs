@@ -22,6 +22,7 @@ This guide provides setup steps for integrating both of these identity providers
 - Users will no longer have to repeatedly login and remember credentials for their account.
 - You will have complete ownership over credential configuration and management on Astro.
 - You can enforce multi-factor authentication (MFA) for users.
+- You can use services such as [Adaptive Authentication](https://www.okta.com/identity-101/adaptive-authentication/) and [Conditional Access](https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/overview) to create advanced access policies that enforce trusted IP ranges or limit access to authorized devices.
 
 :::info
 

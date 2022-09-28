@@ -41,6 +41,10 @@ Every supported version of the Astronomer Certified Python wheel is available at
 - [Airflow 2.1.4](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/buster/Dockerfile)
 - [Airflow 1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/buster/Dockerfile)
 
+## System distribution
+
+Astronomer Certified versions 1.10.15 and 2.1.4 are based on Debian 10.13 (buster). All other Astronomer Certified versions are based on Debian 11.3 (bullseye).
+
 ## Image requirements
 
 Running Airflow with the Astronomer Certified Docker image requires specific versions for key system components.  

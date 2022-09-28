@@ -80,15 +80,23 @@ Once you upgrade to a Deployment on Astro to a new version of Astro Runtime, you
 
     You will also see an **Image tag** for your deploy. This tag is shown only for Deployments on Astro and is not generated for changes in a local environment.
 
-## Version-specific upgrade considerations
+## Version upgrade considerations
 
-This topic contains information about upgrading to specific versions of Astro Runtime. This includes notes on breaking changes, database migrations, and other considerations that might depend on your use case.
+This topic contains information about upgrading to specific versions of Astro Runtime. This includes breaking changes, database migrations, and other considerations.
 
 ### Runtime 5 (Airflow 2.3)
 
-Astro Runtime 5, based on Airflow 2.3, includes changes to the schema of the Airflow metadata database. When you first upgrade to Runtime 5, consider the following:
+### Incompatibility with dbt-core provider package
 
-- Upgrading to Runtime 5 can take 10 to 30 minutes or more depending on the number of task instances that have been recorded in the metadata database throughout the lifetime of your Deployment on Astro.
+The `dbt-core` provider package is currently incompatible with Runtime 5.0.0 and later. The root cause for this issue is not yet known. If `dbt-core` is listed in your Astro project `requirements.txt` file when you attempt to upgrade to Runtime 5.0.0 or later, the upgrade fails.
+
+To continue with the upgrade to Runtime 5.0.0 or later, remove `dbt-core` from your `requirements.txt` file. To continue running dbt Core jobs with Airflow, don't upgrade your current Runtime version or upgrade to Runtime version 4.2.x and wait until a  fix is announced. 
+
+### Changes to the Airflow metadata database 
+
+Astro Runtime 5.0.0, based on Airflow 2.3, includes changes to the schema of the Airflow metadata database. When you first upgrade to Runtime 5.0.0, consider the following:
+
+- Upgrading to Runtime 5.0.0 can take 10 to 30 minutes or more depending on the number of task instances that have been recorded in the metadata database throughout the lifetime of your Deployment on Astro.
 - Once you upgrade successfully to Runtime 5, you might see errors in the Airflow UI that warn you of incompatible data in certain tables of the database. For example:
 
     ```txt

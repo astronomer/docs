@@ -42,14 +42,21 @@ The following topics provide setup steps for integrating each of these external 
 
 5. Verify your integration in SendGrid to confirm that the key was activated. If you get an error indicating that SendGrid can't find the test email, try rerunning the cURL code in your terminal before retrying the verification.
 
-6. In the Deployment view of the Cloud UI, create an environment variable with the following values:
+6. Add the following line to your Astro project `requirements.txt` file to install the [SendGrid Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-sendgrid/stable/index.html):
 
-    - **Key**: `AIRFLOW__EMAIL__EMAIL_BACKEND`
-    - **Value**: `airflow.providers.sendgrid.utils.emailer.send_email`
+    ```text
+    apache-airflow-providers-sendgrid
+    ```
 
-    For more information on this environment variable, see [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
+7. In the Deployment view of the Cloud UI, add the following environment variables:
 
-7. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
+    - `AIRFLOW__EMAIL__EMAIL_BACKEND` = `airflow.providers.sendgrid.utils.emailer.send_email`
+    - `AIRFLOW__EMAIL__EMAIL_CONN_ID` = `smtp_default`
+    - `SENDGRID_MAIL_FROM` = `<validated-sendgrid-sender-email-address>`
+
+    For more information about these environment variables, see [Send email using SendGrid](https://airflow.apache.org/docs/apache-airflow/stable/howto/email-config.html#send-email-using-sendgrid).
+
+8. In the Airflow UI, [create an Airflow connection](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#creating-a-connection-with-the-ui) with the following values:
 
     - **Connection ID**: `smtp_default`
     - **Connection Type:**: `Email`
@@ -58,9 +65,9 @@ The following topics provide setup steps for integrating each of these external 
     - **Password**: `<your-sendgrid-api-key>`
     - **Port**: `587`
 
-8. Click **Save** to finalize your configuration.
+9. Click **Save** to finalize your configuration.
 
-9. To begin receiving Airflow alerts via email for task failures within a given DAG, configure the following values in the DAG's `default_args`:
+10. To receive email alerts for task failures within a given DAG, configure the following values in the DAG's `default_args`:
 
     ```python
     'email_on_failure': True,
