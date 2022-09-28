@@ -20,8 +20,13 @@ You can use the new `astro dev object` commands to better manage Airflow connect
 - `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment without restarting it. 
 - `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing.
 
+### Additional improvements 
+
+- You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects. 
+
 ### Bug fixes 
 
+- Fixed an issue where `astro dev start` did not properly load Airflow object configurations from `airflow_settings.yaml` 
 - Fixed an issue where `astro deployment user list` listed incorrect roles for some users
   
 ## Astro CLI 1.5.0
