@@ -40,10 +40,10 @@ To use these commands, you must be authenticated to your primary Organization th
 ### Additional improvements 
 
 - You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects. 
+- You can now use the `--settings-file` flag with `astro dev start` to load Airflow objects into your environment from the configuration file of your choosing. 
 
 ### Bug fixes 
 
-- Fixed an issue where `astro dev start` did not properly load Airflow object configurations from `airflow_settings.yaml` 
 - Improved error handling and messaging when the Astro CLI doesn't recognize the image in a project's Dockerfile
 
 ## Astro CLI 1.5.1
