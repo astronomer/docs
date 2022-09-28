@@ -13,6 +13,13 @@ If you have any questions or a bug to report, contact [Astronomer Support](https
 
 Release date: September 28, 2022 
 
+### New commands to manage Airflow objects 
+
+You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments. 
+
+- `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment without restarting it. 
+- `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing.
+
 ### Bug fixes 
 
 - Fixed an issue where `astro deployment user list` listed incorrect roles for some users

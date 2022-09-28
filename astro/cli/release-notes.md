@@ -13,35 +13,37 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 Release date: September 28, 2022 
 
-### New Settings File Functionality to Make Managing local Connections and Variables Easier
+### New commands to manage Airflow objects 
 
-The CLI now contains a few new features that improve the functionality of the airflow settings file:
-- `astro dev object import` - will update your local connections, variables, and pools
-- `astro dev object export` - will export connections, variables, and pools from your local airflow database to a settings file of your choosing
-- `astro dev object export —env-export` - will export connections, and variables from your local airflow database to an env file of your choosing
-- `astro dev start` will now update your local connections, variables, and pools to match the objects stored in a local settings file of your choosing
-- Improved settings file field `conn_extra` allows you to add your conn extra object as yaml fields instead of a stringified json object
+You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments. 
 
-These improvements greatly improve the experience of managing Airflow objects locally. Users will no longer have to worry about loosing their Airflow objects when their local Airflow env gets corrupted.
+- `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment without restarting it. 
+- `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing. Specify the `--env-export` flag to export Airflow objects to your `.env` file as Astro environment variables. 
 
-### New Commands to Manage a Deployment’s Worker Queues
+### New commands to configure worker queues on Astro
 
-Users can now mange create, delete, and update the work-queues on a specific deployment with the following new commands:
-- `astro deployment worker-queue create` - Create a new worker queue for your deployment
-- `astro deployment worker-queue update` - Update an existing worker queue
-- `astro deployment worker-queue delete` - Delete an existing worker queue
+You can now mange create, delete, and update worker queues on an Astro Deployment with the following new commands:
 
-:::Note: The ability to create, delete, and update more than one worker queue at a time will be added in a later release
+- `astro deployment worker-queue create` creates a new worker queue in a Deployment. 
+- `astro deployment worker-queue update` updates an existing worker queue. 
+- `astro deployment worker-queue delete` deletes an existing worker queue. 
 
-### New Organization Commands For managing Organizations
+### New commands to manage Organization
 
-- `astro organization list` - Gives the user a list of all the organizations they are apart of
-- `astro organization switch` - Allows a user to login any organization they are apart of
+If you belong to multiple Astro Organizations, you can now use the CLI to switch between your Organizations: 
 
-:::Note: You must be logged into your primary organization first to list or switch into another organization
+- `astro organization list` lists all Organizations you belong to
+- `astro organization switch` allows you to switch between Organizations
+
+To use these commands, you must be authenticated to your primary Organization through the CLI. 
+
+### Additional improvements 
+
+- You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects. 
 
 ### Bug fixes 
 
+- Fixed an issue where `astro dev start` did not properly load Airflow object configurations from `airflow_settings.yaml` 
 - Improved error handling and messaging when the Astro CLI doesn't recognize the image in a project's Dockerfile
 
 ## Astro CLI 1.5.1
