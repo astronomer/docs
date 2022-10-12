@@ -1,6 +1,6 @@
 ---
-title: 'Get started with Apache Airflow'
-sidebar_label: 'Get started with Airflow'
+title: 'Get started with Apache Airflow, Part 1: Write and run your first DAG'
+sidebar_label: 'Part 1: Write and run your first DAG'
 id: get-started-with-airflow
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---

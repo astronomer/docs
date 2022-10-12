@@ -146,7 +146,7 @@ This topic contains information about upgrading to specific versions of Astronom
 
 To avoid extended service disruptions, Astronomer recommends upgrading Astronomer Software to a compatible version before you upgrade Kubernetes. To view Astronomer Software and Kubernetes compatibility information, see [Version compatibility reference for Astronomer Software](version-compatibility-reference.md#astronomer-software).
 
-### Updgrading to 0.30
+### Upgrading to 0.30
 
 #### Running the 0.30 upgrade script with --no-hook
 

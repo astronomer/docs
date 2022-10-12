@@ -11,12 +11,72 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 6.0.2
+
+- Release date: September 30, 2022
+- Airflow version: 2.4.1
+
+### Airflow 2.4.1
+
+Astro Runtime 6.0.2 includes same-day support for Airflow 2.4.1, which includes a collection of bug fixes. Fixes include:
+
+- Fix Deferrable stuck as scheduled during backfill ([#26205](https://github.com/apache/airflow/pull/26205))
+- Don't update backfill run from the scheduler ([#26342](https://github.com/apache/airflow/pull/26342))
+
+For a complete list of commits, see the [Apache Airflow 2.4.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-1-2022-09-30).
+
+### Early access Airflow bug fixes
+
+Astro Runtime 6.0.2 includes the following bug fixes:
+
+- Remove DAG parsing from StandardTaskRunner ([#26750](https://github.com/apache/airflow/pull/26750))
+- Fix airflow tasks run --local when dags_folder differs from that of processor ([#26509](https://github.com/apache/airflow/pull/26509))
+- Add fixture for CLI tests requiring sample dags ([#26536](https://github.com/apache/airflow/pull/26536))
+
+These changes were backported from Apache Airflow 2.4.2, which is not yet generally available.
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.10.0, which includes `SFTPSensorAsync` and `ExternalDeploymentTaskSensorAsync` as new deferrable operators. For a complete list of changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1100-2022-09-30).
+
+## Astro Runtime 6.0.1
+
+- Release date: September 26, 2022
+- Airflow version: 2.4.0
+
+### Bug fixes 
+
+- Fixed an issue where Astro users could not access task logs on Deployments using Runtime 6.0.0
+- Backported a fix to correct an issue where logs were not loading from Celery workers ([#26493](https://github.com/apache/airflow/pull/26493))
+- Fixed [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
+
+## Astro Runtime 6.0.0
+
+- Release date: September 19, 2022
+- Airflow version: 2.4.0
+
+### Airflow 2.4 and data-aware scheduling
+
+Astro Runtime 6.0.0 provides same-day support for [Airflow 2.4.0](https://airflow.apache.org/blog/airflow-2.4.0/), which delivers significant new features for DAG scheduling. The most notable new features in Airflow 2.4.0 are:
+
+- [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/datasets.html), which is a new method for scheduling a DAG based on when an upstream DAG modifies a specific dataset.
+- The [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/2.4.0/howto/operator/python.html#externalpythonoperator), which can execute Python code in a virtual environment with different Python libraries and dependencies than your core Airflow environment.
+- Automatic DAG registration. You no longer need to specify `as dag` when defining a DAG object.
+- Support for [zipping](https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/dynamic-task-mapping.html#combining-upstream-data-aka-zipping) dynamically mapped tasks.
+
+For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-0-2022-09-19).
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of operators from the dbt provider package. see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
+- Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+
 ## Astro Runtime 5.0.9
 
 - Release date: September 20, 2022
 - Airflow version: 2.3.4
 
-### Backported fixes from Apache Airflow 2.4
+### Early access Airflow bug fixes
 
 - Fixed an issue where logs were not loading from Celery workers ([#26337](https://github.com/apache/airflow/pull/26337) and [#26493](https://github.com/apache/airflow/pull/26493))
 - Fixed CVE-2022-40754 ([#26409](https://github.com/apache/airflow/pull/26409))
@@ -29,31 +89,12 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 - Upgraded `astronomer-providers` to 1.8.1, which includes various bug fixes. For a complete list of changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#181-2022-09-01).
 - Upgraded `openlineage-airflow` to 0.13.0, which includes fixes for Spark integrations. See the [Astronomer Providers changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md#0141---2022-09-07).
 
-## Astro Runtime 6.0.0
-
-- Release date: September 19, 2022
-- Airflow version: 2.4.0
-
-### Support for Airflow 2.4 and data-aware scheduling
-
-Astro Runtime 6.0.0 provides support for [Airflow 2.4.0](https://airflow.apache.org/blog/airflow-2.4.0/), which delivers significant new features for DAG scheduling. The most notable new features in Airflow 2.4.0 are:
-
-- [Data-aware scheduling](https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/datasets.html), which is a new method for scheduling a DAG based on when an upstream DAG modifies a specific dataset.
-- The [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/2.4.0/howto/operator/python.html#externalpythonoperator), which can execute Python code in a virtual environment with different Python libraries and dependencies than your core Airflow environment.
-- Automatic DAG registration. You no longer need to specify `as dag` when defining a DAG object.
-- Support for [zipping](https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/dynamic-task-mapping.html#combining-upstream-data-aka-zipping) dynamically mapped tasks.
-
-### Additional improvements
-
-- Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of operators from the dbt provider package. see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
-- Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
-
 ## Astro Runtime 5.0.8
 
 - Release date: August 23, 2022
 - Airflow version: 2.3.4
 
-### Support for Airflow 2.3.4
+### Airflow 2.3.4
 
 Astro Runtime 5.0.8 includes Airflow 2.3.4, which primarily includes bug fixes. For a complete list of commits, see the [Apache Airflow 2.3.4 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-3-4-2022-08-23).
 
@@ -67,7 +108,7 @@ Astro Runtime 5.0.8 includes Airflow 2.3.4, which primarily includes bug fixes. 
 - Release date: August 16, 2022
 - Airflow version: 2.3.3
 
-### Backported fixes from Apache Airflow
+### Early access Airflow bug fixes
 
 Astro Runtime 5.0.7 includes the following bug fixes:
 
@@ -89,7 +130,7 @@ These changes were backported from Apache Airflow 2.3.4, which is not yet genera
 - Release date: July 11, 2022
 - Airflow version: 2.3.3
 
-### Support for Airflow 2.3.3
+### Airflow 2.3.3
 
 Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI improvements. For a complete list of commits, see the [Apache Airflow 2.3.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-3-3-2022-07-05).
 
@@ -107,13 +148,15 @@ Astro Runtime 5.0.6 includes Airflow 2.3.3, which includes bug fixes and UI impr
 - Release date: July 1, 2022
 - Airflow version: 2.3.2
 
-### Backported fixes from Apache Airflow
+### Early access Airflow bug fixes
 
-Astro Runtime 5.0.5 includes several bug fixes and performance improvements that were backported from future Apache Airflow releases. Fixes include:
+Astro Runtime 5.0.5 includes the following bug fixes:
 
 - Fixed an issue where part of the **Grid** view of the Airflow UI would crash or become unavailable if a `GET` request to the Airflow REST API failed ([#24152](https://github.com/apache/airflow/pull/24152))
 - Improved the performance of the **Grid** view ([#24083](https://github.com/apache/airflow/pull/24083))
 - Fixed an issue where grids for task groups in the **Grid** view always showed data for the latest DAG run instead of the correct DAG run ([#24327](https://github.com/apache/airflow/pull/24327))
+
+These changes were backported from Apache Airflow 2.3.3, which is not yet generally available.
 
 ### Additional improvements
 
@@ -134,11 +177,9 @@ Astro Runtime 5.0.5 includes several bug fixes and performance improvements that
 - Release date: June 4, 2022
 - Airflow version: 2.3.2
 
-### Support for Airflow 2.3.2
+### Airflow 2.3.2
 
-Astro Runtime 5.0.3 includes same-day support for Airflow 2.3.2, a release that follows Airflow 2.3.1 with a collection of bug fixes.
-
-Fixes include:
+Astro Runtime 5.0.3 includes support for Airflow 2.3.2, which includes:
 
 - Improvements to the Grid view of the Airflow UI, including faster load times for large DAGs and a fix for an issue where some tasks would not render properly ([#23947](https://github.com/apache/airflow/pull/23947))
 - Enable clicking on DAG owner in autocomplete dropdown ([#23804](https://github.com/apache/airflow/pull/23804))
@@ -157,7 +198,7 @@ For more information, see the [changelog for Apache Airflow 2.3.2](https://githu
 - Release date: May 27, 2022
 - Airflow version: 2.3.1
 
-### Support for Airflow 2.3.1
+### Airflow 2.3.1
 
 Astro Runtime 5.0.2 includes same-day support for Airflow 2.3.1, a release that follows Airflow 2.3.0 with a collection of bug fixes.
 
@@ -167,7 +208,7 @@ Fixes include:
 - Fix secrets rendered in Airflow UI when task is not executed ([#22754](https://github.com/apache/airflow/pull/22754))
 - Performance improvements for faster database migrations to Airflow 2.3
 
-For more information, see the [Apache Airflow changelog](https://github.com/apache/airflow/releases/tag/2.3.1).
+For more information, see the [changelog for Apache Airflow 2.3.1](https://github.com/apache/airflow/releases/tag/2.3.1).
 
 ### Additional improvements
 
@@ -200,6 +241,20 @@ To access the source code of this package, visit the [Astronomer Providers GitHu
 
 - Release date: April 30, 2022
 - Airflow version: 2.3.0
+
+:::danger Breaking change
+
+The `dbt-core` provider package is currently incompatible with Runtime 5.0.0 and later. If dbt-core is listed in the `requirements.txt` file of your Astro project when you attempt to upgrade to Runtime 5.0.0 or later, the upgrade fails.
+
+To upgrade to Runtime 5.0.0 or later, you can do one of the following:
+
+- List `dbt-core==1.3.0b2` in your `requirements.txt` file. This version of the provider is in beta and has not been tested by Astronomer.
+- Install the dbt Cloud provider package by adding `apache-airflow-providers-dbt-cloud` to your Astro project. This will work only if you use dbt Cloud.
+- Use the KubernetesPodOperator or the ExternalPythonOperator to isolate `dbt-core` from the rest of your dependencies.
+
+If any of these options are not suitable for your team, don't upgrade your current Runtime version or upgrade to Runtime version 4.2.x and wait until a fix is announced.
+
+:::
 
 ### Support for Airflow 2.3 & dynamic task mapping
 

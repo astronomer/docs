@@ -3,6 +3,7 @@ sidebar_label: "astro dev stop"
 title: "astro dev stop"
 id: astro-dev-stop
 description: Reference documentation for astro dev stop.
+hide_table_of_contents: true
 ---
 
 Pause all Docker containers running your local Airflow environment. Unlike `astro dev kill`, this command does not prune mounted volumes and delete data associated with your local Postgres database. If you run this command, Airflow connections and task history will be preserved.

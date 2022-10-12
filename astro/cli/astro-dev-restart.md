@@ -3,6 +3,7 @@ sidebar_label: "astro dev restart"
 title: "astro dev restart"
 id: astro-dev-restart
 description: Reference documentation for astro dev restart.
+hide_table_of_contents: true
 ---
 
 Stop your Airflow environment, rebuild your Astro project into a Docker image, and restart your Airflow environment with the new Docker image.
@@ -17,10 +18,10 @@ astro dev restart
 
 ## Options
 
-| Option              | Description                                                                                                        | Possible Values             |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ | ---------------------------|
-| `-e`,`--env` | Path to your environment variable file. Default is `.env` | Valid filepaths |
-| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
+| Option               | Description                                                                                                                                           | Possible Values                                                  |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `-e`,`--env`         | Path to your environment variable file. Default is `.env`                                                                                             | Valid filepaths                                                  |
+| `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 
 
 ## Examples

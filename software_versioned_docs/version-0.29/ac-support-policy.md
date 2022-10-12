@@ -122,13 +122,14 @@ Maintenance is discontinued the last day of the month for a given version. For e
 
 The following tables list the lifecycle for each published version of Astronomer Certified. These timelines are based on the LTS and Stable release channel maintenance policies.
 
-### Stable releases
+### Stable Releases
 
 | AC Version                                                                           | Release Date   | End of Maintenance Date |
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
 | [1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md) | March 19, 2021 | September 2022          |
 | [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)       | May 21, 2021   | November 2022           |
 | [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2023            |
+| [2.4](https://github.com/astronomer/ap-airflow/blob/master/2.4.1/CHANGELOG.md)       | September 29, 2022 | March 2023            |
 
 ### LTS Releases
 

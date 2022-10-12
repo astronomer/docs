@@ -44,7 +44,7 @@ function CardCategory({item}) {
   return (
     <CardLayout
       href={href}
-      icon="🗃️"
+      icon=<img src={useBaseUrl(`img/groupicon.svg`)} alt="icon" />
       title={item.label}
       description={translate(
         {
@@ -59,7 +59,7 @@ function CardCategory({item}) {
   );
 }
 function CardLink({item}) {
-  const icon = isInternalUrl(item.href) ? '📄️' : '🔗';
+  const icon = isInternalUrl(item.href) ? <img src={useBaseUrl(`img/fileicon.svg`)} alt="icon" /> : '🔗';
   const doc = useDocById(item.docId ?? undefined);
   return (
     <CardLayout

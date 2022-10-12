@@ -139,7 +139,7 @@ Make changes as needed and rerun the upgrade command from Step 7. Do not continu
 
 This topic contains information about upgrading to specific versions of Astronomer Software. This includes notes on breaking changes, database migrations, and other considerations that might depend on your use case.
 
-### Updgrading to 0.30
+### Upgrading to 0.30
 
 #### Running the 0.30 upgrade script with --no-hook
 

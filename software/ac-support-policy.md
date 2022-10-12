@@ -23,7 +23,7 @@ This document provides information on the following:
 
 For guidelines on how to upgrade, read [Upgrade Apache Airflow on Astronomer](manage-airflow-versions.md). For information about Astro Runtime's support policy, see [Runtime release and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy).
 
-## Release Channels
+## Release channels
 
 To meet the unique needs of different operating environments, Astronomer Certified (AC) versions are associated with the following release channels:
 
@@ -34,9 +34,9 @@ All releases of AC are considered stable. The LTS release channel is a subset of
 
 For users that want to keep up with the latest Astronomer and Airflow features on an incremental basis, we recommend upgrading to new versions of AC as soon as they are made generally available. This should be regardless of release channel. New versions of AC are issued regularly and depend on the Apache Airflow community release schedule.
 
-For customers looking for less frequent upgrades and functional changes, we recommend following the LTS release channel exclusively.
+If your organization prefers less frequent upgrades and functional changes, Astronomer recommends following the LTS release channel exclusively.
 
-## Versioning Scheme
+## Versioning scheme
 
 Astronomer Certified follows [Semantic Versioning](https://semver.org/). This means that Astronomer ships Major, Minor, and Patch releases of AC in the format of `major.minor.patch-hotfix`.
 
@@ -82,17 +82,17 @@ Earlier versions of Astronomer Certified might use different formatting in their
 
 For the smoothest, out-of-the-box Airflow experience, we strongly recommend and default to `buster-onbuild` images in your project's `Dockerfile`. These images incorporate Docker ONBUILD commands to copy and scaffold your Astro project directory so you can more easily pass those files to the containers running each core Airflow component.
 
-For complex use cases that require customizing AC base image, read [Customize your Airflow image on Astronomer](customize-image.md).
+For complex use cases that require customizing AC base image, see [Customize your Airflow image on Astronomer](customize-image.md).
 
-## Backport Policy for Bug and Security Fixes
+## Backport policy for bug and security fixes
 
-If a major stability bug in Astronomer Certified is identified by Astronomer, a fix will be backported to all LTS versions and only the latest stable version. For users on a stable version that is not latest, our team will recommend that you upgrade. Major issues in this category may result in significant delays in task scheduling as well as potential data loss.
+If a major stability bug in Astronomer Certified is identified by Astronomer, a fix is backported to all LTS versions and only the latest stable version. For users on a stable version that is not latest, Astronomer support will recommend that you upgrade. Major issues in this category may result in significant delays in task scheduling as well as potential data loss.
 
 If a major security issue is identified, a fix will be backported and made available as a new AC hotfix version for _all_ available stable and LTS releases. Major issues in this category are classified by a combination of impact and exploitability.
 
-In rare instances, the Astronomer team may make an exception and backport a bug or security fix to a release that is beyond the commitment stated above. To submit a request for consideration, please reach out to your customer success manager.
+In rare instances, Astronomer support might make an exception and backport a bug or security fix to a release that is beyond the stated commitment. To submit a request for consideration, contact your customer success manager.
 
-## Astronomer Certified Maintenance Policy
+## Astronomer Certified maintenance policy
 
 The maintenance period for an Astronomer Certified version depends on its release channel:
 
@@ -104,7 +104,6 @@ The maintenance period for an Astronomer Certified version depends on its releas
 To fix bugs, Astronomer provides patch releases as new images and recommends that organizations install them regularly to ensure optimum performance. Upgrading only when an issue occurs can delay the resolution of the issue. 
 
 For each `major.minor` pair, only the latest patch and hot-fix combination is supported at any given time. If you report an issue with an Astronomer Certified patch or hot-fix version that is not latest, the Astronomer Support team will always ask that you upgrade as a first step to resolution. For example, if Astronomer Certified 2.2.3 is the latest patch in the 2.2.x series, the Support team would encourage any user who reports an issue with Astronomer Certified 2.2.2 to first upgrade to 2.2.3 before starting to troubleshoot the issue. 
-
 
 Within the maintenance window of each Astronomer Certified version, the following is true:
 
@@ -121,17 +120,32 @@ When the maintenance window for a version of AC ends, the following is true:
 
 To ensure reliability, service is not interrupted when Astronomer Deployments are running unsupported versions of AC. You can use the Astro CLI to access unsupported AC versions for local development and testing.
 
-### End of Maintenance Date
+:::info
 
-Maintenance is discontinued the last day of the month for a given version. For example, if the maintenance window for a version of Astronomer Certified is January - June of a given year, that version will be maintained by Astronomer until the last day of June.
+If you have System Admin permissions and are using Astronomer Software version 0.27 or later, you can create Deployments with deprecated AC versions by setting `houston.config.deployments.enableSystemAdminCanCreateDeprecatedAirflows: true` in your `config.yaml` file. See [Apply a config change](apply-platform-config.md).
 
-## Astronomer Certified Lifecycle Schedule
+:::
+
+### End of maintenance date
+
+Maintenance is discontinued on the last day of the month for a given version. For example, if the maintenance window for a version of Astronomer Certified is January - June of a given year, that version is maintained by Astronomer until the last day of June.
+
+## Astronomer Certified lifecycle schedule
 
 <!--- Version-specific -->
 
-The following tables contain the exact lifecycle for each published version of Astronomer Certified. These timelines are based on the LTS and Stable release channel maintenance policies.
+The following tables list the lifecycles for each published version of Astronomer Certified. These timelines are based on the LTS and Stable release channel maintenance policies.
 
-### Stable Releases
+### Stable releases
+
+| AC Version                                                                           | Release Date   | End of Maintenance Date |
+| ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
+| [1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md) | March 19, 2021 | September 2022          |
+| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)       | May 21, 2021   | November 2022           |
+| [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2023            |
+| [2.4](https://github.com/astronomer/ap-airflow/blob/master/2.4.1/CHANGELOG.md)       | September 29, 2022 | March 2023            |
+
+### LTS releases
 
 | AC Version                                                                           | Release Date   | End of Maintenance Date |
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
@@ -139,12 +153,5 @@ The following tables contain the exact lifecycle for each published version of A
 | [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)       | May 21, 2021   | November 2022           |
 | [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2023            |
 
-### LTS Releases
 
-| AC Version                                                                           | Release Date   | End of Maintenance Date |
-| ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
-| [1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md) | March 19, 2021 | September 2022          |
-| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)       | May 21, 2021   | November 2022           |
-| [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2023            |
-
-If you have any questions or concerns, reach out to [Astronomer support](https://support.astronomer.io).
+If you have any questions or concerns, contact [Astronomer support](https://support.astronomer.io).

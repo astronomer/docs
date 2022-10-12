@@ -3,6 +3,7 @@ sidebar_label: "astro deployment variable list"
 title: "astro deployment variable list"
 id: astro-deployment-variable-list
 description: Reference documentation for astro deployment variable list.
+hide_table_of_contents: true
 ---
 
 For a given Deployment on Astro, list its running environment variables in your terminal. To test these environment variables locally without having to manually copy them, you can also use this command to save them in a local `.env` file.

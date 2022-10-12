@@ -1,8 +1,8 @@
 ---
 sidebar_label: "Azure"
-title: "Resources required for Astro on Azure"
+title: "Astro Clusters on Microsoft Azure"
 id: resource-reference-azure
-description: Reference of all supported configurations for new clusters on Astro in Azure.
+description: Reference of all supported configurations for new Astro clusters on Microsoft Azure.
 sidebar_custom_props: { icon: 'img/azure.png' }
 ---
 
@@ -12,18 +12,21 @@ Unless otherwise specified, new clusters on Microsoft Azure are created with a s
 
 | Resource                                      | Description                                                                                                                                   | Quantity/Default Size                                                                         |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| Resource Group                                | A container for cluster resources.                                                                                                            | 1x                                                                                            |
-| Azure Virtual Network (VNet)                  | A virtual network that hosts Azure resources.                                                                                                 | 1x /19                                                                                        |
-| Subnets                                       | Created in the VNet and used for the backing database, Pod, node, and private endpoints.                                                      | <br />/28 for database <br />/21 for pods <br />/21 for nodes <br />/22 for private endpoints |
-| Azure Database for PostgreSQL Flexible Server | A private database instance and the Astro data plane primary database. Hosts a metadata database for each hosted Airflow Deployment.          | Standard_D4ds_v4                                                                              |
-| Private DNS Zone for Database                 | Provides access to the private database instance.                                                                                             | 1x                                                                                            |
-| Azure Kubernetes Service (AKS) Cluster        | Runs the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks.                                              | 1x                                                                                            |
-| Virtual Machines (nodes)                      | Hosts all system and Airflow components on Astro, including workers and schedulers. Auto-scale based on the demand for nodes in your cluster. | Standard_D4d_v5                                                                               |
+| [Azure Kubernetes Service (AKS) Cluster](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)        | Runs the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks.                                              | 1x  |
+| [Resource Group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal)                                | A container for cluster resources.                                                                                                            | 1x                                                                                            |
+| Worker node pool | A node pool that runs all workers across Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure multiple worker node pools to run tasks on different worker types. This node pool is fully managed by Astronomer. | 1x pool of Standard_D4d_v5 nodes |
+| Airflow node pool | A node pool that runs all core Airflow components, including the scheduler and webserver. This node pool is fully managed by Astronomer. | 1x pool of Standard_D4d_v5 nodes |
+| Astro system node pool | A node pool that runs all other system components required in Astro. The availability zone determines how many nodes are created. This node pool is fully managed by Astronomer.| 1x pool of Standard_D4d_v5 nodes |
+| [Azure Virtual Network (VNet)](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)                  | A virtual network that hosts Azure resources.                                                                                                 | 1x /19                                                                                        |
+| [Subnets](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-subnet)                                     | Created in the VNet and used for the backing database, Pod, node, and private endpoints.                                                      | <br />/28 for database <br />/21 for pods <br />/21 for nodes <br />/22 for private endpoints |
+| [Azure Database for PostgreSQL Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/) | A private database instance and the Astro data plane primary database. Hosts a metadata database for each hosted Airflow Deployment.          | Standard_D4ds_v4                                                                              |
+| Private DNS Zone for Database                 | Provides access to the private database instance.                                                                                             | 1x                                                                                            |                                                                                           |
 | Azure Storage Account (Standard)              | Stores Azure Blobs.                                                                                                                           | 1x                                                                                            |
-| Azure Blob Storage                            | Stores Airflow task logs.                                                                                                                     | 1x                                                                                            |
-| Private Endpoint for Blob Storage             | Provides access to Azure Blob storage task logs.                                                                                              | 1x                                                                                            |
-| Private DNS Zone for Blob Storage             | Provides access to Azure Blob storage task logs.                                                                                              | 1x                                                                                            |
+| [Azure Blob Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)                            | Stores Airflow task logs.                                                                                                                     | 1x                                                                                            |
+| [Private Endpoint for Blob Storage](https://docs.microsoft.com/en-us/azure/storage/common/storage-private-endpoints)             | Provides access to Azure Blob storage task logs.                                                                                              | 1x                                                                                            |
+| [Private DNS Zone for Blob Storage](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-dns)             | Provides access to Azure Blob storage task logs.                                                                                              | 1x                                                                                            |
 | Public IP Address                             | Required for connectivity to the control plane and other services.                                                                            | 1x                                                                                            |
+| Maximum Node Count | The maximum number of worker nodes that your Astro cluster can support. When this limit is reached, your cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
 
 ## Supported cluster configurations
 
@@ -60,10 +63,10 @@ The following table lists all available instance types for worker node pools, as
 
 | Node Instance Type               | CPU      | Memory      |
 | -------------------------------- | -------- | ----------- |
-| Standard_D4_v5 - 4/16            | 2.5 CPUs | 9.3 GiB MEM |
-| Standard_D8_v5 - 8/32            | 6.4 CPUs | 24 GiB MEM  |
-| Standard_D4d_v5 - 4/16 (Default) | 2.5 CPUs | 9.3 GiB MEM |
-| Standard_D8d_v5 - 8/32           | 6.4 CPUs | 24 GiB MEM  |
+| Standard_D4_v5           | 2.5 CPUs | 9.3 GiB MEM |
+| Standard_D8_v5         | 6.4 CPUs | 24 GiB MEM  |
+| Standard_D4d_v5 | 2.5 CPUs | 9.3 GiB MEM |
+| Standard_D8d_v5         | 6.4 CPUs | 24 GiB MEM  |
 
 If your Organization needs an instance type that supports a larger worker size, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md).
 

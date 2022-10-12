@@ -22,16 +22,19 @@ When using Deployment API keys, keep in mind the following:
 
 ## Create an API key
 
-1. In the Cloud UI, open your Deployment.
-2. In the **API keys** menu, click **Add API Key**:
+1. In the Cloud UI, select a Workspace and then select a Deployment.
+
+2. Click the **API Keys** tab.
+
+3. Click **API Key**:
 
     ![Add API key button](/img/docs/add-api-key.png)
 
-3. Give the key a name and description, then click **Create API Key**:
+4. Enter a name and an optional description for the API key and then click **Create API Key**:
 
     ![Create API key button](/img/docs/create-api-key.png)
 
-From here, you can copy the API key ID and secret for use in API calls and CI/CD pipelines. Make sure to save the key secret securely, as this is the only time you will have access to see it in plain text.
+5. Optional. Copy the API key ID and secret for use in API calls and CI/CD pipelines and then click **I've saved the Key Secret**. Make sure you save the key secret securely, as this is the only time you will have access to see it in plain text.
 
 :::tip
 
@@ -63,16 +66,18 @@ After setting the variables, running `astro deployment update` works for the Dep
 
 ## Delete an API key
 
+If you delete an API key, make sure that no existing CI/CD pipelines are using it. Once deleted, an API key and secret cannot be recovered. If you unintentionally delete an API key, create a new one and update any CI/CD workflows that used the deleted API key.
+
 1. In the Cloud UI, select a Workspace and then select a Deployment.
-2. In the menu for the API key you want to delete, click **Edit**:
+
+2. Click the **API Keys** tab.
+
+3. Click **Edit** next to your API key.
 
     ![Edit API key button](/img/docs/edit-api-key.png)
 
-3. Click **Delete API Key**, and then follow the onscreen prompt to finalize the deletion:
+4. Click **Delete API Key**, enter `Delete`, and then click **Yes, Continue**.
 
-    ![Delete API key button](/img/docs/delete-api-key.png)
-
-If you delete an API key, make sure that no existing CI/CD pipelines are using it. Once deleted, an API key and secret cannot be recovered. If you unintentionally delete an API key, create a new one and update any CI/CD workflows that used the deleted API key.
 
 ## Related documentation
 

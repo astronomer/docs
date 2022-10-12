@@ -9,6 +9,50 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.6.0 
+
+Release date: September 28, 2022 
+
+### New commands to manage Airflow objects 
+
+You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments. 
+
+- `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment.
+- `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing. specify the `--env-export` flag to export Airflow connections and variables to your `.env` file as Astro environment variables. 
+
+These commands enable you to:
+
+- Update objects in a locally running Airflow environment without restarting it.
+- Quickly move Airflow objects from a local testing environment to an Astro Deployment. 
+
+### New commands to configure worker queues on Astro
+
+You can now mange create, delete, and update worker queues on an Astro Deployment with the following new commands:
+
+- `astro deployment worker-queue create` creates a new worker queue in a Deployment. 
+- `astro deployment worker-queue update` updates an existing worker queue. 
+- `astro deployment worker-queue delete` deletes an existing worker queue. 
+
+### New commands to manage Organization
+
+If you belong to multiple Astro Organizations, you can now use the CLI to switch between your Organizations: 
+
+- `astro organization list` lists all Organizations you belong to
+- `astro organization switch` allows you to switch between Organizations
+
+To use these commands, you must be authenticated to your primary Organization through the CLI. 
+
+### Additional improvements 
+
+- The Astro CLI for Windows is now distributed as an `.exe` file.
+- You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects. 
+- You can now use the `--settings-file` flag with `astro dev start` to load and update Airflow objects in your environment from the configuration file of your choosing. 
+
+### Bug fixes 
+
+- Fixed an issue where the Astro CLI generated incorrect URLs for the Deployment dashboard
+- Improved error handling and messaging when the Astro CLI doesn't recognize the image in a project's Dockerfile
+
 ## Astro CLI 1.5.1
 
 Release date: September 23, 2022

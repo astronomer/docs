@@ -1,8 +1,8 @@
 ---
 sidebar_label: "GCP"
-title: "Resources required for Astro on GCP"
+title: "Astro Clusters on GCP"
 id: resource-reference-gcp
-description: Reference of all supported configurations for new clusters on Astro in Google Cloud Platform (GCP).
+description: Reference of all supported infrastructure and configurations for new Astro clusters on Google Cloud Platform (GCP).
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
 
@@ -14,18 +14,25 @@ Read the following document for a reference of our default resources as well as 
 
 | Resource                | Description                                                                                          | Quantity/Default Size        |
 | ----------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------- |
-| [VPC](https://cloud.google.com/vpc/docs/vpc)                     | Virtual private network for hosting GCP resources                                                                | 1x /19                            |
-| [Subnet](https://cloud.google.com/vpc/docs/subnets)                  | A single subnet is provisioned in the VPC                                                            | 1, IP Range is `172.20.0.0/19` |
-| [Service Network Peering](https://cloud.google.com/vpc/docs/configure-private-services-access) | The Astro VPC is peered to the Google Service Networking VPC                                         | 1, IP Range is `172.23.0.0/19` |
-| [NAT Router (External)](https://cloud.google.com/nat/docs/overview)   | Required for connectivity with the Astro control plane and other public services                     | 1                            |
 | [GKE Cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/kubernetes-engine-overview)             | A GKE cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks. Workload Identity is enabled on this cluster. | 1x, IP Ranges are `172.21.0.0/19` for cluster IPs and `172.22.0.0/19` for cluster services |
+| [VPC](https://cloud.google.com/vpc/docs/vpc)                     | Virtual private network for hosting GCP resources                                                                | 1x /19                            |
+| [Subnet](https://cloud.google.com/vpc/docs/subnets)                  | A single subnet is provisioned in the VPC.                                                            | 1, IP Range is `172.20.0.0/19` |
+| Worker node pool | Worker node pools run all Airflow workers or node pools that run all Airflow workers. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure multiple worker node pools to run tasks on different instance types.| 1x pool of e2-standard-4 nodes |
+| Astro system node pool | A node pool that runs all proprietary Astronomer components. The availability zone determines how many nodes are created. This node pool is fully managed by Astronomer.| 1x pool of n2-standard-4 nodes |
+| Airflow node pool | A node pool runs all core Airflow components such as the scheduler and webserver. This node pool is fully managed by Astronomer. | 1x pool of n2-standard-4 nodes |
+| [Service Network Peering](https://cloud.google.com/vpc/docs/configure-private-services-access) | The Astro VPC is peered to the Google Service Networking VPC.                                         | 1, IP Range is `172.23.0.0/19` |
+| [NAT Router (External)](https://cloud.google.com/nat/docs/overview)   | Required for connectivity with the Astro control plane and other public services                     | 1.                            |
+| [Workload Identity Pool](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) | Astro uses the fixed Workload Identity Pool for your project. One is created if it does not exist. | The default pool (`PROJECT_ID.svc.id.goog`) is used |
+| [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres) | The Cloud SQL instance is the primary database for the Astro data plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster. | 1x regional instance with 4 vCPUs, 16GB memory |
+| [Google Cloud Storage (GCS) Bucket](https://cloud.google.com/storage/docs/creating-buckets) | GCS bucket to store Airflow task logs. | 1 bucket with name `airflow-logs-<clusterid>` |
+| Maximum Node Count | The maximum number of worker nodes that your Astro cluster can support. When this limit is reached, your Astro cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
 | [Workload Identity Pool](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers) | Astro uses the fixed Workload Identity Pool for your project. One is created if it does not exist | The default pool (`PROJECT_ID.svc.id.goog`) is used |
 | [Cloud SQL for PostgreSQL](https://cloud.google.com/sql/docs/postgres) | The Cloud SQL instance is the primary database for the Astro data plane. It hosts the metadata database for each Airflow Deployment hosted on the GKE cluster | 1x regional instance with 4 vCPUs, 16GB memory |
 | Google Cloud Storage (GCS) Bucket | GCS bucket to store Airflow task logs | 1 bucket with name `airflow-logs-<clusterid>` |
 | Worker node pools | Node pools run all Airflow workers. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure multiple worker node pools to run tasks on different instance types| 1x pool of e2-standard-4 nodes |
 | Astro node pool | A node pool runs all proprietary Astronomer components. This node pool is fully managed by Astronomer| 1x pool of e2-standard-4 nodes |
 | Airflow node pool | A node pool runs all core Airflow components such as the scheduler and webserver. This node pool is fully managed by Astronomer | 1x pool of e2-standard-4 nodes |
-| Maximum Node Count | The maximum number of nodes that your Astro cluster can support. When this limit is reached, your Astro cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
+| Maximum Node Count | The maximum number of worker nodes that your Astro cluster can support. When this limit is reached, your cluster can't auto-scale and worker Pods may fail to schedule. | 20 |
 
 
 ## Supported cluster configurations

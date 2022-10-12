@@ -9,6 +9,14 @@ This document provides a summary of all changes made to the [Astro CLI](install-
 
 If you have any questions or a bug to report, contact [Astronomer Support](https://support.astronomer.io).
 
+## Astro CLI v1.3.1
+
+Release date: July 19, 2022
+
+### Additional imrovements
+
+- Added support for building Runtime images locally on different system architectures, which eliminates the need for the build process to run in an emulation and improves the performance of `astro dev start`
+
 ## Astro CLI v1.3.0
 
 Release date: July 19, 2022

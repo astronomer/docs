@@ -324,7 +324,7 @@ html[data-theme="dark"] a.navbar__link.navbar__link:hover {
 
 
 div.footer__bottom.text--center {
-text-align: center;
+text-align: right;
 }
 
 
@@ -506,6 +506,11 @@ html[data-theme='dark'] .alert--cli {
 }
 
 .footer__items > * + * {
+  margin-top: 0.5rem;
+}
+
+.footer__links {
+  text-align: left;
   margin-top: 0.5rem;
 }
 

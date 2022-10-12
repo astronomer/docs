@@ -26,26 +26,36 @@ If you prefer to work with the Astro CLI, you can create and update environment 
 :::
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
-2. Click **Edit Variables**.
-3. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This will permanently hide the variable's value from all users in your Workspace.
-4. Click **Add**.
-5. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
+
+2. Click the **Variables** tab.
+
+3. Click **Edit Variables**.
+
+4. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This will permanently hide the variable's value from all users in your Workspace.
+
+5. Click **Add**.
+
+6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
 ### Edit existing values
 
 After you set an environment variable key, only the environment variable value can be modified. You can modify environment variables that are set as secret. However, the variable value is never shown. When you modify a secret environment variable, you'll be prompted to enter a new value.
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
-2. Click **Edit Variables**.
-3. Click **Edit value** next to the value you want to edit.
+
+2. Click the **Variables** tab.
+
+3. Click **Edit Variables**.
+
+4. Click **Edit value** next to the value you want to edit.
 
     ![Edit value location](/img/docs/variable-pencil.png)
 
-4. Modify the variable's value, then click **Done editing**.
+5. Modify the variable's value, then click **Done editing**.
 
     ![Done editing location](/img/docs/variable-checkmark.png)
 
-5. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
+6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
 
 ### How environment variables are stored on Astro
 

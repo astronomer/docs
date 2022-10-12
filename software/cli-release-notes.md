@@ -5,10 +5,31 @@ id: cli-release-notes
 description: Release notes for the Astro CLI.
 ---
 
-This document provides a summary of all changes made to the [Astro CLI](install-cli.md) for the v0.29.x series of Astronomer Software. For general product release notes, see [Astronomer Software Release Notes](release-notes.md).
+This document provides a summary of all changes made to the [Astro CLI](install-cli.md) for the v0.30.x series of Astronomer Software. For general product release notes, see [Astronomer Software Release Notes](release-notes.md).
 
 If you have any questions or a bug to report, contact [Astronomer Support](https://support.astronomer.io).
 
+## Astro CLI 1.6.0 
+
+Release date: September 28, 2022 
+
+### New commands to manage Airflow objects 
+
+You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments. 
+
+- `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment without restarting it. 
+- `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing.
+
+### Additional improvements 
+
+- You can now define connections in the `conn_extra` field of `airflow_settings.yaml` as YAML blocks instead of stringified JSON objects. 
+- The Astro CLI for Windows is now distributed as an `.exe` file.
+
+### Bug fixes 
+
+- Fixed an issue where `astro dev start` did not properly load Airflow object configurations from `airflow_settings.yaml` 
+- Fixed an issue where `astro deployment user list` listed incorrect roles for some users
+  
 ## Astro CLI 1.5.0
 
 Release date: September 2, 2022
@@ -75,6 +96,7 @@ Several new commands have been introduced to help you manage Teams on Astronomer
 
 - If Docker isn't already running, the CLI automatically starts it after you run `astro dev start`. Note that this feature only works on Mac OS.
 - The Airflow webserver now automatically opens in your default web browser after you run `astro dev start`.
+<<<<<<< HEAD
 
 ## Astro CLI v1.3.0
 
@@ -111,7 +133,7 @@ To establish a shared framework between products, the syntax of several Software
 
 You can now use `astro context list` and `astro context switch` to show the Astronomer contexts that you can access and assume. An Astronomer context is a base domain that relates to either Astro or a particular Cluster on Astronomer Software. A domain appears as an available context if you have authenticated to it at least once.
 
-These commands are intended for users who need to work across multiple Astronomer Software clusters or installations. They replace `astro cluster list` and `astro cluster switch`, respectively. For more information, see the [CLI Command Reference](cli-reference.md#astro-context-switch).
+These commands are intended for users who need to work across multiple Astronomer Software clusters or installations. They replace `astro cluster list` and `astro cluster switch`, respectively. For more information, see the [CLI Command Reference](https://docs.astronomer.io/astro/cli/astro-context-switch).
 
 ## Astro CLI v0.29.1
 
@@ -157,7 +179,7 @@ The Astro CLI includes a new command for migrating existing Software Deployments
 astro deployment runtime migrate --deployment-id=<deployment-id>
 ```
 
-For more information, see the [CLI Reference Guide](cli-reference.md#astro-deployment-runtime-migrate).
+For more information, see the [CLI Reference Guide](https://docs.astronomer.io/astro/cli/astro-deployment-runtime-migrate).
 
 ### Upgrade a Deployment's Runtime Version
 
@@ -167,8 +189,10 @@ The Astro CLI includes a new command for upgrading existing Software Deployments
 astro deployment runtime upgrade --deployment-id=<deployment-id> --desired-runtime-version=<desired-runtime-version>
 ```
 
-For more information, see the [CLI Reference Guide](cli-reference.md#astro-deployment-runtime-upgrade).
+For more information, see the [CLI Reference Guide](https://docs.astronomer.io/astro/cli/astro-deployment-runtime-upgrade).
 
 ### Additional improvements
 
 - When running `astro dev start`, the containers running Airflow components now include your project directory in their names.
+=======
+>>>>>>> 4a34afab8884b1e281d73bbb1fc7f4aacd488d3a

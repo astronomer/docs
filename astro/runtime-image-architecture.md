@@ -24,8 +24,8 @@ For more information about the features that are available in Astro Runtime rele
 Astro Runtime versions are released regularly and use [semantic versioning](https://semver.org/). Astronomer ships major, minor, and patch releases of Astro Runtime in the format of `major.minor.patch`.
 
 - **Major** versions are released for significant feature additions. This includes new major or minor versions of Apache Airflow as well as API or DAG specification changes that are not backwards-compatible.
-- **Minor** versions are released for functional changes. This includes new patch versions of Apache Airflow as well as API or DAG specification changes that are backwards-compatible.
-- **Patch** versions are released for bug and security fixes that resolve unwanted behavior. This includes new patch versions of `astronomer-providers` and `openlineage-airflow`.
+- **Minor** versions are released for functional changes. This includes API or DAG specification changes that are backwards-compatible.
+- **Patch** versions are released for bug and security fixes that resolve unwanted behavior. This includes new patch versions of Apache Airflow, `astronomer-providers`, and `openlineage-airflow`.
 
 Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments on Astro must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given cluster or Workspace. See [Create a Deployment](create-deployment.md#create-a-deployment).
 
@@ -42,7 +42,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 4.1.x         | 2.2.4                  |
 | 4.2.x         | 2.2.4-2.2.5            |
 | 5.0.x         | 2.3.0-2.3.4            |
-| 6.0.x         | 2.4.0                  |
+| 6.0.x         | 2.4.0-2.4.1            |
 
 :::info
 Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).

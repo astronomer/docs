@@ -303,7 +303,7 @@ astronomer:
     ```bash
     gcloud iam service-accounts add-iam-policy-binding \
     --role roles/iam.workloadIdentityUser \
-    --member "serviceAccount:<project-id>.svc.id.goog[<your-airflow-namespace>/<gke-service-account-name>]" \
+    --member "serviceAccount:<project-id>.svc.id.goog[<your-airflow-namespace>/<airflow-worker-service-account-name>]" \
     <gsa-name>@<project-id>.iam.gserviceaccount.com
     ```
 
@@ -314,7 +314,7 @@ astronomer:
     ```bash
       kubectl run -it \
       --image google/cloud-sdk:slim \
-      --serviceaccount <airflow-worker> \
+      --overrides='{ "spec": { "serviceAccount": "<airflow-worker-service-account-name>" } }' \
       --namespace <your-airflow-namespace> \
       workload-identity-test
     ```

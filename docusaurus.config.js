@@ -57,7 +57,7 @@ module.exports = {
           label: 'Astro',
           position: 'left',
           activeClassName: 'navbar__link--active',
-          activeBaseRegex: 'astro(?!\/cli)',
+          activeBaseRegex: '^(\/astro)(?!(\/cli))',
         },
         {
           to: '/astro/cli/overview',
@@ -146,93 +146,21 @@ module.exports = {
       },
       links: [
         {
-          title: 'Astro',
-          items: [
-            {
-              label: 'Log In',
-              href: 'https://cloud.astronomer.io/login',
-            },
-            {
-              label: 'Install on AWS',
-              to: 'astro/install-aws',
-            },
-            {
-              label: 'Install on GCP',
-              to: 'astro/install-gcp',
-            },
-            {
-              label: 'Install the CLI',
-              to: 'astro/cli/get-started',
-            },
-            {
-              label: 'Create a project',
-              to: 'astro/create-project',
-            },
-            {
-              label: 'Deploy code',
-              to: 'astro/deploy-code',
-            },
-          ],
+          label: 'Legal',
+          href: 'https://www.astronomer.io/legal/',
         },
         {
-          title: 'Astronomer Software',
-          items: [
-            {
-              label: 'Overview',
-              to: 'software/',
-            },
-            {
-              label: 'Install on AWS',
-              to: 'software/install-aws',
-            },
-            {
-              label: 'Release Notes',
-              to: 'software/release-notes',
-            },
-          ],
+          label: 'Privacy',
+          href: 'https://www.astronomer.io/privacy/',
         },
         {
-          title: 'Product Resources',
-          items: [
-            {
-              label: 'Support',
-              href: 'https://support.astronomer.io',
-            },
-            {
-              label: 'Status',
-              href: 'https://cloud-status.astronomer.io',
-            },
-            {
-              label: 'Astronomer Registry',
-              to: 'https://registry.astronomer.io/',
-            },
-            {
-              label: 'Privacy Policy',
-              to: 'https://www.astronomer.io/privacy/',
-            },
-            {
-              label: 'Cookie Preferences',
-              to: '#',
-              id: 'cookiePref',
-            },
-          ],
+          label: 'Security',
+          href: 'https://www.astronomer.io/security/',
         },
         {
-          title: 'More',
-          items: [
-            {
-              label: 'Astronomer Homepage',
-              to: 'https://www.astronomer.io',
-            },
-            {
-              label: 'Airflow Guides',
-              href: 'https:/docs.astronomer.io/learn/',
-            },
-            {
-              label: 'Docs on GitHub',
-              href: 'https://github.com/astronomer/docs',
-            },
-          ],
+          label: 'Cookie Preferences',
+          to: '#',
+          id: 'cookiePref',
         },
       ],
       copyright: '© Astronomer 2022. Various trademarks held by their respective owners.',

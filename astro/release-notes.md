@@ -11,9 +11,58 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 6.0.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 6.0.1 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.5.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.6.0 ([Release notes](cli/release-notes.md))
+
+## October 4, 2022 
+
+### New permissions boundary for managed AWS Accounts
+
+The operational roles that Astronomer assumes on dedicated customer AWS accounts now have new [permissions boundaries](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) that limit the roles to a subset of their permissions. The remote management role is now limited to the following actions across all contexts:
+
+- `autoscaling:*`
+- `cloudformation:*`
+- `cloudwatch:*`
+- `ec2:*`
+- `ecr:*`
+- `eks:*`
+- `elasticloadbalancing:*`
+- `iam:*OpenID*`
+- `kms:DescribeKey`
+- `lambda:*`
+- `logs:*`
+- `route53:AssociateVPCWithHostedZone`
+- `s3:*`
+- `secretsmanager:*`
+- `servicequotas:*`
+- `ssm:*`
+- `tag:*`
+
+These permissions might change in the future to enable new Astro features or to refine permissions for specific contexts. 
+
+### Additional improvements 
+
+- Users with the required permissions can now access a **Configuration** tab in the **Admin** menu of the Airflow UI. This page no longer shows sensitive values in plain-text and can be used to verify all configurations running on your Deployment.
+- In the Cloud UI, the maximum time for Deployment metrics has been extended from 24 hours to 7 days.
+- The [Deployment metrics overview](deployment-metrics.md#deployment-overview) now shows metrics for the `default` worker queue instead of an aggregate of all worker queues. Improved worker queue metrics coming soon.
+
+### Bug fixes 
+
+- Added the global environment variable `AIRFLOW__LOGGING__DAG_PROCESSOR_LOG_TARGET=stdout` so that a scheduler's logs don't overcrowd its local storage
+- Removed misleading maximum CPU and memory lines from Deployment metric graphs
+
+## September 28, 2022 
+
+### Additional improvements 
+
+- All worker queue configurations in the **Worker Queues** tab of the Cloud UI now have tooltips.
+- The **Worker CPU** and **Worker Memory** metrics in the **Analytics** tab of the Cloud UI now show metrics only for the default worker queue instead of an average across queues. Improved worker queue metrics coming soon.
+
+### Bug fixes 
+
+- Values in the Organization **Settings** page no longer overlap with other UI elements. 
+- Organization Owners can now [push code](deploy-code.md) to a Deployment even if they aren't explicit members of the Deployment's Workspace. 
 
 ## September 21, 2022
 
@@ -30,7 +79,6 @@ This new UI moves the **Analytics** and **Logs** from the left sidebar to the ma
 Astronomer has modified the default resource usage of Astro clusters to improve infrastructure cost for Astro customers. In addition to minor improvements to node autoscaling behavior:
 
 - New worker node pools on Amazon Web Services (AWS) clusters can now scale to zero. This means that enabling a new worker type for your cluster does not cost you until it's used in a Deployment.
-- Astro clusters on Google Cloud Platform (GCP) now use `e2-standard-4` instance types for the Airflow and data plane system node pools instead of `n2-standard-4`.
 
 ### New Account Dashboard
 
@@ -432,7 +480,7 @@ For a reference of all node instance types Astro supports and their correspondin
 
 The Cloud UI now includes a dedicated **Analytics** page that contains various Deployment-level metrics. These metrics are collected in real time and can provide insight into how your data pipelines are performing over time:
 
-![Analytics menu location](/img/docs/access-analytics.png)
+![Analytics menu location](/img/release-notes/access-analytics.png)
 
 For more information about accessing the **Analytics** page and the available metrics, see [Deployment Analytics](deployment-metrics.md#deployment-analytics).
 
@@ -840,7 +888,7 @@ All user configurations can be found by clicking your user profile picture in th
 - The name of your Astro Deployment now appears on the main DAGs view of the Airflow UI.
 - You can now see the health status for each Deployment in your Workspace on the table view of the **Deployments** page in the Cloud UI:
 
-   ![Deployment Health statuses visible in the Deployments table view](/img/docs/health-status-table.png)
+   ![Deployment Health statuses visible in the Deployments table view](/img/release-notes/health-status-table.png)
 
 - In the Cloud UI, you can now access the Airflow UI for Deployments via the **Deployments** page's card view:
 

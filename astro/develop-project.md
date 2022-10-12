@@ -228,7 +228,13 @@ variables:
     variable_value: <my-variable-value-2>
 ```
 
-Once you save these values in your `airflow_settings.yaml`, [restart your local environment](develop-project.md#restart-your-local-environment). When you access the Airflow UI locally, you should see these values in the **Connections**, **Pools**, and **Variables** tabs.
+Save the modified `airflow_settings.yaml` file, start your local environment, and run: 
+
+```sh
+astro dev object import
+```
+
+When you access the Airflow UI locally, you should see these values in the **Connections**, **Pools**, and **Variables** tabs.
 
 ## Run commands on build
 

@@ -21,9 +21,12 @@ Every Deployment is hosted on a single Astro cluster with its own dedicated reso
 If you prefer, you can also run the `astro deployment create` command in the Astro CLI to create a Deployment. See [CLI Command Reference](cli/astro-deployment-create.md).
 :::
 
-1. Log in to the [Cloud UI](https://cloud.astronomer.io) and select a Workspace.
-2. Click the **Deployment** button.
+1. In the Cloud UI and select a Workspace.
+
+2. On the **Deployments** page, click **Deployment**.
+
 3. Complete the following fields:
+
     - **Name**: Enter a name for your Deployment.
     - **Astro Runtime**: By default, the latest version of Astro Runtime is selected. The Astro Runtime versions provided in the Cloud UI are limited to patches for the most recent major and minor releases. Deprecated versions of Astro Runtime aren't available.
 
@@ -32,6 +35,7 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
     - **Description**: Optional. Enter a description for your Deployment.
     - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
     - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
+
 4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with:
 
     - A worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
@@ -44,7 +48,5 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
 ## Next steps
 
 - [Configure Deployment resources](configure-deployment-resources.md)
-
 - [Set environment variables on Astro](environment-variables.md)
-
 - [Manage Deployment API keys](api-keys.md)

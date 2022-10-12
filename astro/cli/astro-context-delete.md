@@ -3,6 +3,7 @@ sidebar_label: "astro context delete"
 title: "astro context delete"
 id: astro-context-delete
 description: Reference documentation for astro context delete.
+hide_table_of_contents: true
 ---
 
 Delete the locally stored information for a given Astronomer installation or base domain. After running this command, the domain for the installation that you specify will no longer appear when you run `astro context list`, and you will not be able to switch to the installation via `astro context switch`.

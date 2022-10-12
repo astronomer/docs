@@ -35,6 +35,15 @@ For a complete list of the AWS resources that Astronomer support provisions in y
 
    See [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
 - A subscription to the [Astro Status Page](https://status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
+- The following domains added to your organization's allowlist:
+    - `https://cloud.astronomer.io/`
+    - `https://astro-<your-org>.datakin.com/`
+    - `https://<your-org>.astronomer.run/`
+    - `https://api.astronomer.io/`
+    - `https://images.astronomer.cloud/`
+    - `https://auth.astronomer.io/`
+    - `https://updates.astronomer.io/`
+    - `https://install.astronomer.io/`
 
 Astro requires a clean AWS account with a minimum set of EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. For instructions on creating a new AWS account, follow [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
 

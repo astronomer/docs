@@ -9,12 +9,60 @@ description: Release notes for Astro Runtime, the differentiated Apache Airflow 
 
 Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. Note that some changes to Runtime might be omitted based on their availability in Astronomer Software.
 
-For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](manage-airflow-versions.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
+For upgrade instructions, see [Upgrade Airflow on Astronomer Software](manage-airflow-versions.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://support.astronomer.io).
+
+## Astro Runtime 6.0.2
+
+- Release date: September 30, 2022
+- Airflow version: 2.4.1
+
+### Support for Apache Airflow 2.4.1
+
+Astro Runtime 6.0.2 includes Airflow 2.4.1, which includes only bug fixes. For a complete list of commits, see the [Apache Airflow 2.4.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-1-2022-09-30)).
+
+### Backported bug fixes from Apache Airflow 2.4.2
+
+Astro Runtime 6.0.2 includes the following bug fixes:
+
+- Remove DAG parsing from StandardTaskRunner ([#26750](https://github.com/apache/airflow/pull/26750))
+- Fix airflow tasks run --local when dags_folder differs from that of processor ([#26509](https://github.com/apache/airflow/pull/26509))
+- Add fixture for CLI tests requiring sample dags ([#26536](https://github.com/apache/airflow/pull/26536))
+
+These changes were backported from Apache Airflow 2.4.2, which is not yet generally available.
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.10.0, which includes `SFTPSensorAsync` and `ExternalDeploymentTaskSensorAsync` as new deferrable operators. For a complete list of changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1100-2022-09-30).
+
+## Astro Runtime 6.0.1
+
+- Release date: September 26, 2022
+- Airflow version: 2.4.0
+
+### Bug fixes 
+
+- Fixed an issue where Astro users could not access task logs on Deployments using Runtime 6.0.0
+- Backported a fix to correct an issue where logs were not loading from Celery workers ([#26493](https://github.com/apache/airflow/pull/26493))
+- Fixed [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
 
 ## Astro Runtime 5.0.9
 
 - Release date: September 20, 2022
 - Airflow version: 2.3.4
+
+:::danger Breaking change
+
+The `dbt-core` provider package is currently incompatible with Runtime 5.0.0 and later. If dbt-core is listed in the `requirements.txt` file of your Astro project when you attempt to upgrade to Runtime 5.0.0 or later, the upgrade fails.
+
+To upgrade to Runtime 5.0.0 or later, you can do one of the following:
+
+- List `dbt-core==1.3.0b2` in your `requirements.txt` file. This version of the provider is in beta and has not been tested by Astronomer.
+- Install the dbt Cloud provider package by adding `apache-airflow-providers-dbt-cloud` to your Astro project. This will work only if you use dbt Cloud.
+- Use the KubernetesPodOperator or the ExternalPythonOperator to isolate `dbt-core` from the rest of your dependencies.
+
+If any of these options are not suitable for your team, don't upgrade your current Runtime version or upgrade to Runtime version 4.2.x and wait until a fix is announced.
+
+:::
 
 ### Backported fixes from Apache Airflow 2.4
 
