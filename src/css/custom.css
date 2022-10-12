@@ -704,3 +704,8 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__link:hover
 html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item a.navbar__link--active {
   border-bottom-color: var(--purple-300);
 }
+
+.DocItem__header-description {
+  font-size: 21px;
+  line-height: 1.25;
+}

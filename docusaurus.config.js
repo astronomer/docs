@@ -81,6 +81,20 @@ module.exports = {
         },
       ],
     },
+    astroCallToAction: {
+      title: "What is Astro?",
+      description: "Astro is a cloud solution that helps you focus on your data pipelines and spend less time managing Apache Airflow, with capabilities enabling you to build, run and observe data all in one place.",
+      buttons: [
+        {
+          label: "Try Astro",
+          href: "https://www.astronomer.io/get-started?utm_source=docs-what-astro-banner"
+        },
+        {
+          label: "LEARN ABOUT ASTRONOMER",
+          href: "https://www.astronomer.io/?utm_source=docs-what-astro-banner"
+        }
+      ]
+    },
     softwareNav: {
       items: [
         {
