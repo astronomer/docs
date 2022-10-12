@@ -6,6 +6,9 @@ slug: /
 description: 'Explore tutorials and concepts to learn everything you need to know about Apache Airflow and Astronomer'
 ---
 import DocCard from '@site/src/theme/DocCard';
+import AstroCard from '@site/src/components/AstroCard';
+
+<AstroCard />
 
 ## Not sure where to start?
 

@@ -18,7 +18,7 @@ brew install astro
 ```
 
 For alternative installation steps, see [Install the Astro CLI](install-cli.md).
-
+ 
 ## Get started
 
 Follow the [Get started](install-cli.md) tutorial to run Airflow locally and write your first DAG.
@@ -39,3 +39,7 @@ To stay up to date on the latest features, see [Astro CLI Release Notes](cli/rel
 ## CLI reference
 
 For a full list of available CLI commands, see the [CLI command reference](cli/reference.md).
+
+import AstroCard from '@site/src/components/AstroCard';
+
+<AstroCard />

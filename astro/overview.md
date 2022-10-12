@@ -6,6 +6,10 @@ slug: /
 description: Everything you need to know about Astronomer’s modern data orchestration tool for the cloud, powered by Apache Airflow.
 ---
 
+import AstroCard from '@site/src/components/AstroCard';
+
+<AstroCard />
+
 Astro is a managed software service that offers a next-generation experience for modern data teams running Apache Airflow, the open source industry standard for data orchestration.
 
 Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. This solution optimizes security and reduces operational overhead.
