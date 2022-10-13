@@ -3,7 +3,6 @@
   padding: 1.5rem;
   font-size: 15px;
   line-height: 1.6;
-  color: #1A1C1F !important;
   border-radius: 6px;
   margin: 2rem 0;
 }
@@ -16,6 +15,10 @@
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+}
+
+html[data-theme="dark"] .astroCard {
+  background-color: var(--mint-700);
 }
 
 .button {
@@ -52,8 +55,19 @@
   background: none;
 }
 
+html[data-theme="dark"] .button__outline {
+  border-color: var(--blue-300);
+  color: var(--blue-300);
+}
+
 .button__outline:hover {
   color: var(--blue-600);
   border-color: var(--blue-300);
   background: var(--blue-300);
+}
+
+html[data-theme="dark"] .button__outline:hover {
+  border-color: var(--blue-400);
+  color: var(--blue-800);
+  background: var(--blue-400);
 }
