@@ -11,7 +11,11 @@
 }
 
 .linkCard:hover {
-  background-color: var(--blue-100)
+  background-color: var(--blue-100);
+}
+
+html[data-theme="dark"] .linkCard:hover {
+  background-color: var(--blue-900);
 }
 
 .linkCard__icon {
