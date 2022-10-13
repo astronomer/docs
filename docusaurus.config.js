@@ -87,11 +87,11 @@ module.exports = {
       buttons: {
         primary: {
           label: "Try Astro",
-          href: "https://www.astronomer.io/get-started?utm_source=docs-what-astro-banner"
+          href: "https://www.astronomer.io/get-started?referral=docs-what-astro-banner"
         },
         secondary: {
           label: "Learn about Astronomer",
-          href: "https://www.astronomer.io/?utm_source=docs-what-astro-banner"
+          href: "https://www.astronomer.io/?referral=docs-what-astro-banner"
         }
       }
     },
@@ -124,15 +124,15 @@ module.exports = {
         items: [
           {
             label: 'Get a demo',
-            href: 'https://www.astronomer.io/events/weekly-demo/?utm_source=docs-sidebar',
+            href: 'https://www.astronomer.io/events/weekly-demo/?referral=docs-sidebar',
           },
           {
             label: 'Watch a webinar',
-            href: 'https://www.astronomer.io/events/webinars/?utm_source=docs-sidebar',
+            href: 'https://www.astronomer.io/events/webinars/?referral=docs-sidebar',
           },
           {
             label: 'Astro status',
-            href: 'https://status.astronomer.io/?utm_source=docs-sidebar',
+            href: 'https://status.astronomer.io/?referral=docs-sidebar',
           }
         ]
       }
