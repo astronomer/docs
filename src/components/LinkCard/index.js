@@ -6,10 +6,12 @@ export default function LinkCard({
   label,
   description,
   icon,
-  href
+  href,
+  truncate,
+  topIcon
 }) {
   return (
-    <Link className={styles.linkCard} id="linkCard" href={href}>
+    <Link className={styles.linkCard} id="linkCard" href={href} data-truncate={truncate} data-top-icon={topIcon}>
       {icon && (
         <div className={styles.linkCard__icon}>
           <img src={icon} alt='' />

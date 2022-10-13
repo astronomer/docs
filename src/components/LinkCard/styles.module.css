@@ -7,7 +7,13 @@
 
   display: flex;
   gap: 1.25rem;
+  font-size: 15px;
   overflow: hidden;
+}
+
+[data-top-icon='true'].linkCard {
+  flex-direction: column;
+  align-items: start;
 }
 
 .linkCard:hover {
@@ -31,6 +37,7 @@ html[data-theme="dark"] .linkCard:hover {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  overflow: hidden;
 }
 
 .linkCard__label {
@@ -40,4 +47,10 @@ html[data-theme="dark"] .linkCard:hover {
 
 .linkCard__description {
   margin-bottom: 0;
+}
+
+[data-truncate='true'] .linkCard__description {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

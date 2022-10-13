@@ -725,3 +725,10 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
 .main-wrapper .col--3 {
   display: none !important;
 }
+
+/* Quick fix for homepage width, most likely there is a better way to do this */
+.main-wrapper .col.col--8 {
+  max-width: 1000px;
+  width: 100%;
+  flex: 1 1 100%;
+}
