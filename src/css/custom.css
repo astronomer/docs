@@ -510,34 +510,30 @@ html[data-theme='dark'] .alert--cli {
 }
 
 .footer {
-  /* font-family: var(--font-sans-heading); */
   background-color: var(--purple-900);
-  padding: 4rem 0;
+  padding: 0.5rem 0;
 }
 
-.footer__title {
-  font-size: 1rem;
-  border-bottom: 1px solid var(--purple-500);
-  margin-bottom: .5rem;
-  padding-bottom: .5rem;
-  text-transform: uppercase;
-  color: var(--white);
+.footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
-.footer__items > * + * {
-  margin-top: 0.5rem;
+@media screen and (min-width: 655px) {
+  .footer .container {
+    justify-content: space-between;
+  }
 }
 
-.footer__links {
-  text-align: left;
-  margin-top: 0.5rem;
-}
+/* .footer__links {
+  margin: 0;
+} */
 
-.footer__bottom {
-  margin-top: 4rem;
-  color: var(--white);
-  font-size: 1rem;
-  text-align: left;
+.footer__copyright {
+  font-size: 0.8rem;
 }
 
 .dropdown--right > a {
