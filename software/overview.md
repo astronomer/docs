@@ -5,57 +5,40 @@ id: overview
 slug: /
 description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
 ---
+import LinkCardGrid from '@site/src/components/LinkCardGrid';
+import LinkCard from '@site/src/components/LinkCard';
 
-Astronomer Software is the best way to run Apache Airflow in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Airflow experience.
+<p class="DocItem__header-description">Astronomer Software is the best way to run Apache Airflow in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Airflow experience.</p>
 
 import AstroCard from '@site/src/components/AstroCard';
 
 <AstroCard />
 
-## Features
-
-Astronomer Software's key features ensure that enterprise organizations can run Apache Airflow securely and reliably:
-
-- Push-button Deployments of Apache Airflow
-- Role-based access control (RBAC) for configurable and secure user management
-- Extensive cloud, network, third party provider, and system component configurations via Helm
-- System logging, monitoring, and alerts via Grafana and Kibana
-- Astronomer Certified and Astro Runtime, two collections of Docker images that provide a differentiated data orchestration experience. These images include timely support for the latest major, minor, and patch versions of Airflow
-
-## Architecture
+## Run Airflow in your private cloud using Astronomer Software
 
 The following diagram shows how you can run Airflow in your private cloud using Astronomer Software:
 
 ![Astronomer Software Overview](https://assets2.astronomer.io/main/enterpriseArchitecture.svg)
 
-## Installation guides
+## Get Started
+<LinkCardGrid>
+  <LinkCard truncate label="Installation guides" description="Step-by-step guides to install the system on your cloud service." href="/astro/cli/release-notes" />
+  <LinkCard truncate label="Customizing your installation" description="Explore guides for most common customizations." href="/astro/cli/install-cli" />
+  <LinkCard truncate label="Administration" description="There are many tools for administering Astronomer" href="/astro/cli/reference" />
+</LinkCardGrid>
 
-If you are new to Astronomer Software, use the following guides to install the system on your cloud service:
+## Astronomer Software features
+<LinkCardGrid>
+  <LinkCard label="Push-button Deployments" description="Deploy an instance of Apache Airflow wih the push of a button." />
+  <LinkCard label="Role-based access control" description="(RBAC) for configurable and secure user management." />
+  <LinkCard label="Configurations via Helm" description="Cloud, network, third party provider, and system component configurations via Helm" />
+  <LinkCard label="Grafana & Kibana integrations" description="System logging, monitoring, and alerts via Grafana and Kibana" />
+  <LinkCard label="Docker images" description="Astronomer Certified and Astro Runtime,a differentiated data orchestration experience." />
+</LinkCardGrid>
 
-* [Amazon Web Services EKS](install-aws-standard.md)
-* [Google Cloud Platform GKE](install-gcp-standard.md)
-* [Microsoft Azure AKS](install-azure-standard.md)
-
-## Customizing your installation
-
-Because the platform uses Helm, it's easy to customize your Software installation. Below are some guides for most common customizations:
-
-* [Integrating Auth Systems](integrate-auth-system.md)
-* [Configuring Resources with Helm](manage-platform-users.md)
-* [Configuring a Registry Back End](registry-backend.md)
-* [Built-in Alerts](platform-alerts.md)
-
-## Administration
-
-There are many tools at your disposal for administering Astronomer:
-
-* [The Houston API Playground](houston-api.md)
-* [Metrics](grafana-metrics.md)
-* [Using Kibana](kibana-logging.md)
-* [Using kubectl](kubectl.md)
-* [Pulling Postgres Credentials](access-airflow-database.md)
-* [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer.md/)
-
-## License
-
-Usage of Astronomer requires an [Astronomer Platform Software Edition license](https://github.com/astronomer/astronomer/blob/master/LICENSE).
+## Most popular software docs
+<LinkCardGrid>
+  <LinkCard truncate label="Lorem Ipsum" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud." href="/astro/cli/release-notes" />
+  <LinkCard truncate label="Lorem Ipsum" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud." href="/astro/cli/install-cli" />
+  <LinkCard truncate label="Lorem Ipsum" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud." href="/astro/cli/reference" />
+</LinkCardGrid>
