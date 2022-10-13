@@ -714,3 +714,14 @@ html[data-theme="dark"] .navbar-sidebar__item.menu.primaryMenu .menu__list-item 
   font-size: 21px;
   line-height: 1.25;
 }
+
+
+/* Quick fix to allow main content to fill more space when not using the sidebar column */
+.main-wrapper [class*="docItemCol"] {
+  max-width: 958px !important;
+  margin-left: 0 !important;
+}
+
+.main-wrapper .col--3 {
+  display: none !important;
+}

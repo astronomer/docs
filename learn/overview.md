@@ -5,22 +5,31 @@ id: overview
 slug: /
 description: 'Explore tutorials and concepts to learn everything you need to know about Apache Airflow and Astronomer'
 ---
-import DocCard from '@site/src/theme/DocCard';
+import LinkCardGrid from '@site/src/components/LinkCardGrid';
+import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
 
 <AstroCard />
 
 ## Not sure where to start?
 
-<div style={{display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem"}}>
-  <DocCard item={{type: 'link', label: "Get started with Apache Airflow", description: "Learn how to run Apache Airflow locally with open source tools.", href:"/learn/get-started-with-airflow"}}/>
-  <DocCard item={{type: 'link', label: "Write a DAG with the Astro Python SDK", description: "Learn how to write an ETL pipeline with the Astro Python SDK.", href:"/learn/astro-python-sdk"}}/>
-</div>
+<LinkCardGrid>
+  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" icon="/img/airflow-logo.png" />
+  <LinkCard label="Write a DAG with the Astro Python SDK" description="Learn how to write an ETL pipeline with the Astro Python SDK." href="/learn/astro-python-sdk" icon="/img/astro-monogram.svg" />
+</LinkCardGrid>
 
 ## Featured tutorials
 
-Placeholder
+<LinkCardGrid>
+  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" />
+  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" />
+  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" />
+</LinkCardGrid>
 
 ## Featured Airflow concepts
 
-Placeholder
+<LinkCardGrid>
+  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" />
+  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" />
+  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" />
+</LinkCardGrid>

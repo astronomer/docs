@@ -8,7 +8,7 @@ function useAstroCardConfig() {
   return useThemeConfig().astroCard;
 }
 
-export default function SelectNav() {
+export default function AstroCard() {
   const content = useAstroCardConfig();
   return (
     <div className={styles.astroCard} id="astroCard">
