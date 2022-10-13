@@ -185,6 +185,7 @@ module.exports = {
               'info',
               'tip',
               'cli',
+              'highlight'
             ],
           },
         },

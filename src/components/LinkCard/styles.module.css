@@ -16,11 +16,11 @@
   align-items: start;
 }
 
-.linkCard:hover {
+.linkCard[href]:hover {
   background-color: var(--blue-100);
 }
 
-html[data-theme="dark"] .linkCard:hover {
+html[data-theme="dark"] .linkCard[href]:hover {
   background-color: var(--blue-900);
 }
 
