@@ -14,7 +14,7 @@ export default function SelectNav({ label, items }) {
   };
 
   useEffect(() => {
-    setCurrentVersion(document.querySelector(`option[value*='${path.pathname}']`).text);
+    document.querySelector(`option[value*='${path.pathname}']`) && setCurrentVersion(document.querySelector(`option[value*='${path.pathname}']`).text);
   }, [currentVersion]);
 
   return (
