@@ -653,6 +653,7 @@ a.navbar-sidebar__logolink::before {
 .navbar-sidebar__items {
   display: grid;
   height: auto;
+  background: var(--ifm-navbar-background-color);
 }
 
 .navbar-sidebar__item.menu.primaryMenu {
@@ -696,6 +697,7 @@ a.navbar-sidebar__logolink::before {
   justify-content: center;
   position: absolute;
   bottom: 0;
+  z-index: -1;
 }
 
 html[data-theme="dark"] .navbar-sidebar__item.menu.bottomButtons {
