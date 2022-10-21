@@ -14,8 +14,8 @@ Two options are available to complete the Astro installation process on AWS. You
 For a complete list of the AWS resources that Astronomer support provisions in your AWS account, see [Resource usage](resource-reference-aws.md).
 
 <Tabs
-    defaultValue="managementconsole"
-    groupId= "step-3-create-a-cross-account-iam-role-for-astro"
+    defaultValue="byoc"
+    groupId= "byoc"
     values={[
         {label: 'Bring your own cloud', value: 'byoc'},
         {label: 'Astronomer hosted data plane', value: 'astronomer hosted data plane'},
