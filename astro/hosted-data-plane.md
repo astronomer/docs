@@ -8,7 +8,7 @@ description: Get started with Astro on the Astronomer-hosted cloud.
 This is where you'll find instructions for completing the Astro installation process on the Astronomer-hosted cloud.
 
 Creating Astro clusters on the Astronomer cloud eliminates the need for your organization to manage a dedicated cloud account for Astro. When hosting your environment, Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
-```#
+
 
 ## Prerequisites
 
