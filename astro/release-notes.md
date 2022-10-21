@@ -24,7 +24,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### New Azure regions
 
-You can now [create an Astro cluster on GCP](create-cluster.md) in the following regions:
+You can now [create an Astro cluster on Azure](create-cluster.md) in the following regions:
 
 - `japaneast` 
 - `southafricanorth` 

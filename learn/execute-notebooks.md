@@ -1,120 +1,137 @@
 ---
-title: "Execute notebooks with Airflow"
-description: "Methods for orchestrating commonly used notebooks with Airflow."
-sidebar_label: "Execute notebooks"
+title: "Execute a Jupyter notebook with Airflow"
+description: "Run a parameterized Jupyter notebook using Airflow and the Astro CLI."
+sidebar_label: "Jupyter notebook"
 id: execute-notebooks
 ---
 
-Notebooks are great tools for quickly developing code and presenting data visualizations. They are frequently used in exploratory data analysis, data science, and analytics, and reporting.
+Jupyter notebooks are a popular open source notebook tool for quickly developing code and presenting data visualizations. They are frequently used in exploratory data analysis, data science, analytics, and reporting. This tutorial demonstrates how to run a Jupyter notebook from Airflow using the [Papermill provider package](https://registry.astronomer.io/providers/papermill). The `PapermillOperator` contained in this package executes a notebook as an Airflow task.
 
-Translating code written in a notebook to code running in production can be challenging. Maybe you've developed a machine learning model in a notebook, and now you need to run that model on a schedule and publish the results. Most notebooks do not come with built-in scheduling and orchestration capabilities, and can't easily integrate with other services. Fortunately, Airflow can take care of this for you! Within the vast collection of [Airflow provider packages](https://registry.astronomer.io/), there are hooks and operators you can use to orchestrate almost any type of notebook while taking advantage of Airflow's vast scheduling capabilities.
+After you complete this tutorial, you'll be able to:
 
-In this guide, you'll learn how to orchestrate commonly used notebooks, including Jupyter, Databricks, and SageMaker notebooks, using Airflow and the Astro CLI.
+- Add a Jupyter notebook to your Astro CLI project.
+- Run your Jupyter notebook from an Airflow DAG.
+- Pass parameters to your Jupyter notebook from Airflow.
+- Understand what use cases are ideal for orchestrating Jupyter notebooks with Airflow.
+
+## Time to complete
+
+This tutorial takes approximately 30 minutes to complete.
 
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
+- Creating Jupyter notebooks. See [Try Jupyter](https://docs.jupyter.org/en/latest/start/index.html). 
 
-## Execute Jupyter Notebooks with Papermill
+## Prerequisites
 
-[Jupyter notebooks](https://jupyter.org/) are the most commonly used open source notebooks out there. They are especially popular for exploratory analysis and data science, offering support for over 40 programming languages.
+To complete this tutorial, you need:
 
-Jupyter notebooks can be parameterized and executed from Python using the [Papermill package](https://papermill.readthedocs.io/en/latest/index.html). For Airflow specifically, the [Papermill provider](https://registry.astronomer.io/providers/papermill) supplies a `PapermillOperator` that can be used to execute a notebook as an Airflow task.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Jupyter Notebook](https://jupyter.org/install) package.
 
-Note that the `PapermillOperator` is designed to run a notebook locally. Because of this, you need to supply a kernel engine for your Airflow environment to execute the notebook code. If you use the Astro CLI, you can configure your kernel engine and dependencies within your Astro project.
+## Step 1: Create an Astro project and a Jupyter notebook
 
-Because the Jupyter notebook is running within your Airflow environment, this method is not recommended for notebooks that process large data sets. For notebooks that are computationally intensive, Databricks or notebook instances from cloud providers like AWS or GCP may be more appropriate.
+To run a DAG that executes a Jupyter notebook, you first need to create an Astro project, which contains the set of files necessary to run Airflow locally.
 
-1. Create a Jupyter notebook and save it in a place where Airflow has access to it. For this example, you can add the notebook to the `/include` directory of your Astro project.
-2. Parameterize any cells in your notebook as needed. If you need to pass any information to your notebook at run time, you can do so by tagging the cell in your notebook as described in the [Papermill usage documentation](https://papermill.readthedocs.io/en/latest/usage-parameterize.html).
+1. Create a new directory for your Astro project:
 
-    The following notebook prints a simple statement with the current date. The second cell is paramaterized so that the `execution_date` is dynamic.
-
-    ![Notebook param](/img/guides/parameterized_notebook.png)
-
-3. Install the Papermill provider and any supporting packages required to run the kernel (such as `jupyter` or `ipykernel`). For example, to install the provider and the package for `ipykernel`, add the following lines to the `requirements.txt` file of your Astro project:
-
-    ```python
-    apache-airflow-providers-papermill
-    ipykernel
+    ```sh
+    mkdir <your-astro-project-name>
     ```
 
-4. Create your DAG with the `PapermillOperator` to execute your notebook. The operator requires the following arguments:
+2. Open the directory:
 
-    - `input_nb`: The notebook you want to run.
-    - `output_nb`: The path to your output notebook (i.e. the notebook which shows the results of the notebook execution).
-    - `parameters`: A JSON dictionary of any parameters you are passing to your notebook.
-
-    The example DAG looks like this:
-
-    ```python
-    from datetime import datetime, timedelta
-
-    from airflow import DAG
-    from airflow.providers.papermill.operators.papermill import PapermillOperator
-
-    default_args = {
-        'owner': 'airflow',
-        'depends_on_past': False,
-        'email_on_failure': False,
-        'email_on_retry': False,
-        'retries': 0,
-        'retry_delay': timedelta(minutes=1)
-    }
-
-    with DAG(
-        dag_id='example_papermill_operator',
-        default_args=default_args,
-        schedule_interval='0 0 * * *',
-        start_date=datetime(2021, 1, 1),
-        template_searchpath='/usr/local/airflow/include',
-        catchup=False
-    ) as dag_1:
-
-        notebook_task = PapermillOperator(
-            task_id="run_example_notebook",
-            input_nb="include/example_notebook.ipynb",
-            output_nb="include/out-{{ execution_date }}.ipynb",
-            parameters={"execution_date": "{{ execution_date }}"},
-        )
+    ```sh
+    cd <your-astro-project-name>
     ```
 
-  Note that the built-in `execution_date` Airflow variable is used so that the DAG is idempotent. Parameters for your notebook can come from anywhere, but Astronomer highly recommends using Airflow macros and environment variables to avoid hard-coding values in your DAG file.
+3. Run the following Astro CLI command to initialize an Astro project in the directory:
 
-5. Run your DAG. The DAG executes the `example_notebook.ipynb` and generates an output notebook named with the execution date. Open the notebook to see the results of the run:
+    ```sh
+    astro dev init
+    ```
 
-    ![Output notebook](/img/guides/notebook_output.png)
+Next, create a Jupyter notebook called `example_notebook.ipynb` and save it to the `include/` directory of the Astro project you created.
+
+## Step 2: Parameterize your Jupyter notebook (optional)
+
+Parameterize any cells in your notebook as needed. If you need to pass any information to your notebook at run time, tag the cell in your notebook as described in the [Papermill usage documentation](https://papermill.readthedocs.io/en/latest/usage-parameterize.html).
+
+The following notebook prints a simple statement with the current date. The second cell is parameterized so that the `execution_date` is dynamic.
+
+![Notebook param](/img/guides/parameterized_notebook.png)
+
+## Step 3: Install supporting packages
+
+Install the Papermill provider and supporting packages required to run the notebook kernel.
+
+Add the following to the `requirements.txt` file of your Astro project:
+
+```text
+apache-airflow-providers-papermill
+ipykernel
+```
+
+The `PapermillOperator` is designed to run a notebook locally, so you need to supply a kernel engine for your Airflow environment to execute the notebook code. This tutorial uses the `ipykernel` package to run the kernel, but there are other options available such as the `jupyter` package.
+
+## Step 4: Create your DAG
+
+Create your DAG with the `PapermillOperator` to execute your notebook. Use your favorite code editor or text editor to copy-paste the following code into a `.py` file in your project's `dags/` directory:
+
+```python
+from datetime import datetime, timedelta
+
+from airflow import DAG
+from airflow.providers.papermill.operators.papermill import PapermillOperator
+
+
+with DAG(
+    dag_id='example_papermill_operator',
+    default_args={
+        'retries': 0
+    },
+    schedule_interval='0 0 * * *',
+    start_date=datetime(2022, 10, 1),
+    template_searchpath='/usr/local/airflow/include',
+    catchup=False
+) as dag_1:
+
+    notebook_task = PapermillOperator(
+        task_id="run_example_notebook",
+        input_nb="include/example_notebook.ipynb",
+        output_nb="include/out-{{ execution_date }}.ipynb",
+        parameters={"execution_date": "{{ execution_date }}"},
+    )
+```
+
+The `PapermillOperator` requires the following arguments:
+
+- `input_nb`: The notebook you want to run.
+- `output_nb`: The path to your output notebook (i.e. the notebook which shows the results of the notebook execution).
+- `parameters`: A JSON dictionary of any parameters you are passing to your notebook.
+
+Note that the built-in `execution_date` Airflow variable is used so that the DAG is idempotent. Parameters for your notebook can come from anywhere, but Astronomer recommends using Airflow macros and environment variables to avoid hard-coding values in your DAG file.
+
+## Step 5: Run your DAG to execute your notebook
+
+Trigger your DAG to execute the `example_notebook.ipynb` and generate an output notebook with a name that includes the execution date. Open the output notebook in your `include/` directory to see the results of the run:
+
+![Output notebook](/img/guides/notebook_output.png)
 
 :::info
 
-With versions of `papermill` you might encounter a bug when writing grammar tables as described in [this GitHub issue](https://github.com/psf/black/issues/1143). The error would say something like `Writing failed: [Errno 2] No such file or directory: '/home/astro/.cache/black/21.7b0/tmpzpsclowd'`. If this occurs, a workaround is to manually add that directory to your Airflow environment. If using an Astro project, you can add `RUN mkdir -p /home/astro/.cache/black/21.7b0/` to your project's `Dockerfile`.
+With some versions of `papermill` you might encounter a bug when writing grammar tables as described in [this GitHub issue](https://github.com/psf/black/issues/1143). The error would say something like `Writing failed: [Errno 2] No such file or directory: '/home/astro/.cache/black/21.7b0/tmpzpsclowd'`. If this occurs, a workaround is to manually add that directory to your Airflow environment. If using an Astro project, you can add `RUN mkdir -p /home/astro/.cache/black/21.7b0/` to your project's `Dockerfile`.
 
 :::
 
-## Execute Databricks notebooks
+## Additional considerations
 
-[Databricks](https://databricks.com/) is a popular unified data and analytics platform built around [Apache Spark](https://spark.apache.org/) that provides users with fully managed Apache Spark clusters and interactive notebooks. Databricks notebooks are frequently used when working with large data sets that require Spark's large-scale data processing capabilities.
+Running Jupyter notebooks from Airflow is a great way to accomplish many common data science and data analytics use cases like generating data visualizations, performing exploratory data analysis, and training small machine learning models.
 
-Databricks notebooks can be easily orchestrated with Airflow by using the [Databricks provider](https://registry.astronomer.io/providers/databricks). The `DatabricksRunNowOperator` and `DatabricksSubmitRunOperator` can be used to run an existing notebook in your Databricks workspace and manage your Databricks notebooks and cluster configuration. For more details on how to use these operators, see [Orchestrating Databricks Jobs with Airflow](airflow-databricks.md).
+However, there are several cases where this might not be the best approach:
 
-## Execute AWS SageMaker notebooks
-
-[Amazon SageMaker](https://aws.amazon.com/sagemaker/) is a comprehensive AWS machine learning service. One of the features of SageMaker is elastic and shareable notebooks, which are essentially Jupyter notebooks set up to leverage AWS Elastic Computing. If you want a cloud-based solution that can handle large data processing, AWS SageMaker notebooks are a great alternative to Jupyter notebooks.
-
-SageMaker can be easily integrated with Airflow by using the [AWS provider](https://registry.astronomer.io/providers/amazon/). There are multiple SageMaker operators and sensors available within the provider that cover a wide range of SageMaker features:
-
-- [`SageMakerEndpointOperator`](https://registry.astronomer.io/providers/amazon/modules/sagemakerendpointoperator): Creates a SageMaker endpoint.
-- [`SageMakerEndpointConfigOperator`](https://registry.astronomer.io/providers/amazon/modules/sagemakerendpointconfigoperator): Creates a SageMaker endpoint config.
-- [`SageMakerModelOperator`](https://registry.astronomer.io/providers/amazon/modules/sagemakermodeloperator): Creates a SageMaker model.
-- [`SageMakerProcessingOperator`](https://registry.astronomer.io/providers/amazon/modules/sagemakerprocessingoperator): Initiates a SageMaker processing job.
-- [`SageMakerTrainingOperator`](https://registry.astronomer.io/providers/amazon/modules/sagemakertrainingoperator): Initiates a SageMaker training job.
-- [`SageMakerTransformOperator`](https://registry.astronomer.io/providers/amazon/modules/sagemakertransformoperator): Initiates a SageMaker transform job.
-- [`SageMakerTuningOperator`](https://registry.astronomer.io/providers/amazon/modules/sagemakertuningoperator): Initiates a SageMaker hyperparameter tuning job.
-- [`SageMakerEndpointSensor`](https://registry.astronomer.io/providers/amazon/modules/sagemakerendpointsensor): Waits until the endpoint state is terminated.
-- [`SageMakerTransformSensor`](https://registry.astronomer.io/providers/amazon/modules/sagemakertransformsensor): Waits until the transform state is terminated.
-- [`SageMakerTuningSensor`](https://registry.astronomer.io/providers/amazon/modules/sagemakertuningsensor): Waits until the tuning state is terminated.
-- [`SageMakerTrainingSensor`](https://registry.astronomer.io/providers/amazon/modules/sagemakertrainingsensor): Waits until the training state is terminated.
-
-For examples of how to use these operators in common machine learning use cases, see [Using Airflow with SageMaker](airflow-sagemaker.md).
+- Because the Jupyter notebook runs within your Airflow environment, this method is not recommended for notebooks that process large data sets. For notebooks that are computationally intensive, [Databricks](airflow-databricks.md) or notebook instances from cloud providers like AWS or GCP may be more appropriate.
+- Notebooks are run in their entirety during each DAG run and do not maintain state between runs. This means you will run every cell in your notebook on every DAG run. For this reason, if you have code that takes a long time to run (such as a large ML model), a better approach may be to break up the code into distinct Airflow tasks using other tools.

@@ -52,6 +52,7 @@ When you work with mapped tasks, keep the following in mind:
 - `expand()` only accepts keyword arguments.
 - The maximum amount of mapped task instances is determined by the `max_map_length` parameter in the [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). By default it is set to 1024.
 - You can limit the number of mapped task instances for a particular task that run in parallel across all DAG runs by setting the `max_active_tis_per_dag` parameter in your dynamically mapped task.
+- XComs created by mapped task instances are stored in a list and can be accessed by using the map index of a specific mapped task instance. For example, to access the XComs created by the third mapped task instance (map index of 2) of `my_mapped_task`, use `ti.xcom_pull(task_ids=['my_mapped_task'])[2]`.
 
 For additional examples of how to apply dynamic task mapping functions, see [Dynamic Task Mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html).
 
@@ -341,7 +342,7 @@ The code snippet below shows how to use `.map()` to skip specific mapped tasks b
 def list_strings():
     return ["skip_hello", "hi", "skip_hallo", "hola", "hey"]
 
-# the function used to transform the upstream output before 
+# the function used to transform the upstream output before
 # a downstream task is dynamically mapped over it
 def skip_strings_starting_with_skip(string):
     if len(string) < 4:
@@ -352,16 +353,16 @@ def skip_strings_starting_with_skip(string):
         )
     else:
         return string + "!"
-        
+
 # Transforming the output of the first task with the map function.
-# For non-TaskFlow operators, use 
+# For non-TaskFlow operators, use
 # my_upstream_traditional_operator.output.map(mapping_function)
 transformed_list = list_strings().map(skip_strings_starting_with_skip)
 
 # the task using dynamic task mapping on the transformed list of strings
 @task
 def mapped_printing_task(string):
-    return "Say " + string 
+    return "Say " + string
 
 mapped_printing_task.partial().expand(string=transformed_list)
 ```
