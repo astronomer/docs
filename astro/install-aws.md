@@ -18,7 +18,7 @@ For a complete list of the AWS resources that Astronomer support provisions in y
     groupId= "byoc"
     values={[
         {label: 'Bring your own cloud', value: 'byoc'},
-        {label: 'Astronomer hosted data plane', value: 'astronomer hosted data plane'},
+        {label: 'Astronomer-hosted cloud', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
 
