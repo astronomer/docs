@@ -92,7 +92,6 @@ module.exports = {
             description: 'Install Astro on the Astronomer-hosted cloud or your existing cloud instance.'
           },
           items: [
-            'hosted-dataplane',
             'install-aws',
             'install-azure',
             'install-gcp',
