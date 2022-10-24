@@ -9,7 +9,9 @@ sidebar_custom_props: { icon: 'img/aws.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Two options are available to complete the Astro installation process on AWS. You can install Astro on your existing AWS instance, or you can host your data on the Astronomer cloud. 
+Two options are available to complete the Astro installation process on AWS. You can install Astro on your existing AWS instance, or you can host your data on the Astronomer cloud.
+
+Creating Astro clusters on the Astronomer cloud eliminates the need for your organization to manage a dedicated cloud account for Astro.
 
 For a complete list of the AWS resources that Astronomer support provisions in your AWS account, see [Resource usage](resource-reference-aws.md).
 
@@ -17,8 +19,8 @@ For a complete list of the AWS resources that Astronomer support provisions in y
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Existing cloud', value: 'byoc'},
-        {label: 'Astronomer-hosted cloud', value: 'astronomer hosted data plane'},
+        {label: 'Self-hosted', value: 'byoc'},
+        {label: 'Astronomer-hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
 
@@ -237,7 +239,7 @@ This process can take some time. Wait for confirmation that the installation was
 
 <TabItem value="astronomer hosted data plane">
 
-Creating Astro clusters on the Astronomer cloud eliminates the need for your organization to manage a dedicated cloud account for Astro. When hosting your environment, Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
+When hosting your environment, Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
 
 
 ## Prerequisites
