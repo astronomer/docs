@@ -285,8 +285,6 @@ When Astronomer confirms that your Astro cluster has been created, you are ready
 
 ## Next steps
 
-Now that you have an Astro cluster up and running, take a look at the docs below for information on how to start working in Astro:
-
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/overview.md)
 - [Configure Deployments](configure-deployment-resources.md)
