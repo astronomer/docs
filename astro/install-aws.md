@@ -17,7 +17,7 @@ For a complete list of the AWS resources that Astronomer support provisions in y
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Bring your own cloud', value: 'byoc'},
+        {label: 'Existing cloud', value: 'byoc'},
         {label: 'Astronomer-hosted cloud', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
@@ -86,7 +86,7 @@ If you want to continue with the second option, you'll additionally need:
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
 - The IP addresses of your DNS servers.
 
-## Step 1: Access Astro
+## Access Astro
 
 1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
 
@@ -101,13 +101,13 @@ If you want to continue with the second option, you'll additionally need:
 
     If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
-## Step 2: Retrieve an external ID from the Cloud UI
+## Retrieve an external ID from the Cloud UI
 
 In the Cloud UI, open the **Settings** tab and copy the value in **AWS EXTERNAL ID**. This external ID is a unique identifier that Astro uses to connect to your AWS account. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
 You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the field will not appear in the Cloud UI.
 
-## Step 3: Create a cross-account IAM role for Astro
+## Create a cross-account IAM role for Astro
 
 Use the external ID you saved from Step 2 to create a cross-account IAM role for Astro. Astronomer recommends using the AWS Management Console to create the role.
 
@@ -202,7 +202,7 @@ If you're setting up your first cluster in any of these regions, you need to com
 
 :::
 
-## Step 4: Provide setup information to Astronomer
+## Provide setup information to Astronomer
 
 After creating the AWS account, provide Astronomer support with the following information:
 
@@ -252,13 +252,13 @@ The setup process assumes that you've already provided Astronomer support with t
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative. 
 
-## Step 1: Astronomer support creates the cluster
+## Astronomer support creates the cluster
 
 Astronomer support creates your first cluster on the Astronomer cloud after you've provided your setup information.
 
 Wait for confirmation that the installation is successful before you access Astro and create a Deployment.
 
-## Step 2: Access Astro
+## Access Astro
 
 1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
 
