@@ -37,8 +37,6 @@ module.exports = {
           label: 'Write DAGs',
           items: [
             'astro-python-sdk',
-            'deferrable-operators',
-            'kubepodoperator-local',
             'kubernetespodoperator',
           ],
         },
@@ -173,13 +171,7 @@ module.exports = {
         },
         'platform-variables',
         'data-plane-activation',
-        {
-          type: 'category',
-          label: 'Data lineage',
-          items: [
-            'data-lineage-support-and-compatibility',
-            'data-lineage-concepts',],
-        },
+        'data-lineage-support-and-compatibility',
         {
           type: 'category',
           label: 'Security',

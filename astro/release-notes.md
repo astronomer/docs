@@ -429,7 +429,7 @@ For example, if an Airflow task failed because the schema of a database changed,
 
 To learn more about data lineage and how you can configure it on Astro, see:
 
-- [Data lineage Concepts](data-lineage-concepts.md)
+- [Integrate Airflow and OpenLineage](https://docs.astronomer.io/learn/airflow-openlineage)
 - [Enable data lineage for External Services](set-up-data-lineage.md)
 - [Data lineage on Astro](data-lineage.md)
 - [Data lineage Support and Compatibility](data-lineage-support-and-compatibility.md)

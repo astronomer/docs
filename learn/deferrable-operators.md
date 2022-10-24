@@ -48,7 +48,7 @@ You can use additional deferrable operators built and maintained by Astronomer b
 - `DatabricksSubmitRunOperatorAsync`
 - `HttpSensorAsync`
  
-For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see [Changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html). You can also create your own deferrable operator for your use case.
+For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see [Changelog](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html). You can also create your own deferrable operator for your use case.
 
 There are numerous benefits to using deferrable operators including:
 
