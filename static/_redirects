@@ -3,11 +3,8 @@
 /js/script.outbound-links.js https://plausible.io/js/script.outbound-links.js 200
 /api/event https://plausible.io/api/event 200
 
-# redirect base path to astro
-/ /astro 301!
-
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
-/software/0.29/* /software/:splat
+/software/0.30/* /software/:splat
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
@@ -17,6 +14,21 @@
 
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
+
+# tutorial redirects 
+
+/tutorials/get-started-with-airflow /learn/get-started-with-airflow
+/tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2
+/tutorials/astro-python-sdk /learn/astro-python-sdk
+
+# CLI migration redirects 
+
+/software/cli-reference /astro/cli/reference
+/software/cli-reference* /astro/cli/reference
+
+
+# deprecated docs
+/astro/known-limitations /astro 301
 
 # redirect base domain cloud links to astro path
 /add-user /astro/add-user 301
@@ -102,7 +114,7 @@
 
 # Redirect to converged CLI docs
 /install-cli /astro/install-cli 301
-/astro/install-cli /astro/cli/get-started 301
+/astro/install-cli /astro/cli/install-cli 301
 /astro/cli-reference /astro/cli/reference 301
 /astro/cli-release-notes /astro/cli/release-notes 301
 /software/cli-quickstart /software/install-cli 301
@@ -130,6 +142,7 @@
 /astro/cli-reference/astrocloud-version /astro/cli/astro-version 301
 /astro/cli-reference/astrocloud-workspace-list /astro/cli/astro-workspace-list 301
 /astro/cli-reference/astrocloud-workspace-switch /astro/cli/astro-workspace-switch 301
+/astro/cli/get-started /astro/cli/install-cli 301
 
 # redirect enterprise paths to software
 /enterprise /software 301
@@ -211,7 +224,6 @@
 # redirect links to renamed files
 /astro/configure-deployment /astro/configure-deployment-resources 301
 /astro/scheduler-logs /astro/view-logs 301
-
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301

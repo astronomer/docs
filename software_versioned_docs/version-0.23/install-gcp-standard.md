@@ -372,7 +372,6 @@ newbie-norse-kube-state-549f45544f-mcv7m               1/1     Running     0    
 newbie-norse-nginx-7f6b5dfc9c-dm6tj                    1/1     Running     0          30m
 newbie-norse-nginx-default-backend-5ccdb9554d-5cm5q    1/1     Running     0          30m
 newbie-norse-astro-ui-d5585ccd8-h8zkr                  1/1     Running     0          30m
-newbie-norse-prisma-699bd664bb-vbvlf                   1/1     Running     0          30m
 newbie-norse-prometheus-0                              1/1     Running     0          30m
 newbie-norse-registry-0                                1/1     Running     0          30m
 ```
@@ -405,7 +404,6 @@ astronomer-nginx                              LoadBalancer   10.0.146.24    20.1
 astronomer-nginx-default-backend              ClusterIP      10.0.132.182   <none>          8080/TCP                                     6m48s
 astronomer-postgresql                         ClusterIP      10.0.0.252     <none>          5432/TCP                                     6m48s
 astronomer-postgresql-headless                ClusterIP      None           <none>          5432/TCP                                     6m48s
-astronomer-prisma                             ClusterIP      10.0.30.160    <none>          4466/TCP                                     6m48s
 astronomer-prometheus                         ClusterIP      10.0.128.170   <none>          9090/TCP                                     6m48s
 astronomer-prometheus-blackbox-exporter       ClusterIP      10.0.125.142   <none>          9115/TCP                                     6m48s
 astronomer-prometheus-node-exporter           ClusterIP      10.0.2.116     <none>          9100/TCP                                     6m48s

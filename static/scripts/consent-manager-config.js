@@ -1,5 +1,6 @@
 window.consentManagerConfig = function (exports) {
   let React = exports.React;
+  let inEU = exports.inEU;
 
   let bannerContent = React.createElement(
     "span",
@@ -20,7 +21,7 @@ window.consentManagerConfig = function (exports) {
   return {
     container: "#consentManager",
     writeKey: "D2wC7j10rVFq4PPQOGqGPHpyujDhtbjM",
-    bannerActionsBlock: true,
+    bannerActionsBlock: inEU(),
     bannerContent: bannerContent,
     bannerSubContent: "You can change your preferences.",
     preferencesDialogTitle: "Website Data Collection Preferences",
@@ -29,7 +30,9 @@ window.consentManagerConfig = function (exports) {
     cancelDialogTitle: "Are you sure you want to cancel?",
     cancelDialogContent:
       "Your preferences have not been saved. By continuing to use our website, you՚re agreeing to our Website Data Collection Policy.",
-    closeBehavior: "dismiss",
+    closeBehavior: inEU() ? "dismiss" : "accept",
+    bannerHideCloseButton: inEU(),
     defaultDestinationBehavior: "imply",
+    implyConsentOnInteraction: !inEU()
   };
 };

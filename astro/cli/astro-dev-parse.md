@@ -3,9 +3,8 @@ sidebar_label: "astro dev parse"
 title: "astro dev parse"
 id: astro-dev-parse
 description: Reference documentation for astro dev parse.
+hide_table_of_contents: true
 ---
-
-## Description
 
 Parse the DAGs in a locally hosted Astro project to quickly check them for errors. For more information about testing DAGs locally, read [Run Tests with the Astro CLI](test-and-troubleshoot-locally.md#run-tests-with-the-astro-cli).
 
@@ -17,9 +16,10 @@ astro dev parse
 
 ## Options
 
-| Option              | Description                                                                                   | Possible Values                                 |
-| ------------------- | --------------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| `-e`, `--env`       | The filepath to your environment variables. (The default is `.env`)                            | Any valid filepath within your Astro project    |
+| Option               | Description                                                                                                                                           | Possible Values                                                  |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `-e`, `--env`        | The filepath to your environment variables. (The default is `.env`)                                                                                   | Any valid filepath within your Astro project                     |
+| `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## Examples
 

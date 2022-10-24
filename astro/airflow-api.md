@@ -1,25 +1,28 @@
 ---
-title: 'Make Requests to the Airflow REST API'
+title: 'Make requests to the Airflow REST API'
 sidebar_label: 'Airflow REST API'
 id: airflow-api
-description: Make requests to the Airflow REST API with Astro Deployment API Keys.
 ---
 
-## Overview
+<head>
+  <meta name="description" content="Learn how to make requests to the Airflow REST API and how you can use the Airflow REST API to automate Airflow workflows in your Deployments. Common examples of API requests are provided." />
+  <meta name="og:description" content="Learn how to make requests to the Airflow REST API and how you can use the Airflow REST API to automate Airflow workflows in your Deployments. Common examples of API requests are provided." />
+</head>
 
 This guide explains how to make requests to Airflow's REST API for your Deployments.
 
 You can use Airflow's [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate various Airflow workflows in your Deployments. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [corresponding endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Airflow REST API.
 
-## Prerequisites
 
-To make an Airflow API request, you need:
+To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md#make-requests-to-the-airflow-rest-api).
+
+## Prerequisites
 
 - A [Deployment API key](api-keys.md).
 - A Deployment on Astro.
 - [cURL](https://curl.se/).
 
-## Step 1: Retrieve an Access Token and Deployment URL
+## Step 1: Retrieve an access token and Deployment URL
 
 Calling the Airflow REST API for a Deployment requires:
 
@@ -48,9 +51,9 @@ If you have an automated [CI/CD process](ci-cd.md) configured, we recommend incl
 
 To retrieve your Deployment URL, open your Deployment in the Cloud UI and click **Open Airflow**. The Deployment URL is the URL for the Airflow UI homepage up until `/home`. It includes the name of your Organization and a short Deployment ID. For example, a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany` would have a Deployment URL of `https://mycompany.astronomer.run/dhbhijp0`.
 
-## Step 2: Make an Airflow API Request
+## Step 2: Make an Airflow API request
 
-You can now execute requests against any endpoint that is listed in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+You can now execute requests against any endpoint that is listed in the [Airflow Rest API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 To make a request based on Airflow documentation, make sure to:
 
 - Replace `https://airflow.apache.org` with your Deployment URL
@@ -86,7 +89,7 @@ print(response.json())
 # Prints data about all DAGs in your Deployment
 ```
 
-### Trigger a DAG Run
+### Trigger a DAG run
 
 You can trigger a DAG run by executing a `POST` request to Airflow's [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run).
 
@@ -118,10 +121,10 @@ response = requests.post(
     data='{}'
 )
 print(response.json())
-# Prints metadata of the DAG Run that was just triggered
+# Prints metadata of the DAG run that was just triggered
 ```
 
-### Trigger a DAG Run by Date
+### Trigger a DAG run by date
 
 You can also specify a `logical_date` at the time in which you wish to trigger the DAG run by passing the `logical_date` with the desired timestamp with the request's `data` field. The timestamp string is expressed in UTC and must be specified in the format `"YYYY-MM-DDTHH:MM:SSZ"`, where:
 
@@ -160,7 +163,7 @@ response = requests.post(
     data='{"logical_date": "2021-11-16T11:34:01Z"}'
 )
 print(response.json())
-# Prints metadata of the DAG Run that was just triggered
+# Prints metadata of the DAG run that was just triggered
 ```
 
 ### Pause a DAG

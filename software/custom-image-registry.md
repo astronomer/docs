@@ -1,6 +1,6 @@
 ---
-title: 'Configure a Custom Registry for Deployment Images'
-sidebar_label: 'Configure a Custom Image Registry'
+title: 'Configure a custom registry for Deployment images'
+sidebar_label: 'Configure a custom image registry'
 id: custom-image-registry
 description: Replace Astronomer's built-in container image registry with your own.
 ---
@@ -8,15 +8,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-## Overview
+Astronomer Software includes access to a Docker image registry that is managed by Astronomer. Every time a user deploys to Astronomer Software, a Docker image is generated and pushed to this registry. Depending on your deploy method, these Docker images can include OS and Python dependencies, DAG code, and the Airflow service.
 
-Astronomer Software includes access to a Docker image registry that is managed by Astronomer. Every time a user deploys to Astronomer Software, a Docker image is generated and pushed to this registry. Depending on your deployment method, these Docker images can include OS and Python dependencies, DAG code, and the Airflow service.
+Using the Astronomer registry is recommended when you're getting started and your team is comfortable deploying code. However, the Astronomer registry might not meet your organization's security requirements.
 
-Using the Astronomer internal registry is often the best option for organizations getting started with Astronomer and when users are comfortable deploying code. However, using this registry might not be compatible with your organization's security requirements.
+If your organization can't support the Astronomer default internal registry, you can configure a custom container image registry. This option is best suited for organizations who require additional control for security and governance reasons. Using a custom registry provides your organization with the opportunity to scan images for CVEs, malicious code, and unapproved Python and OS-level packages contained in Docker images.
 
-If your organization cannot use the default Astronomer internal registry, you can configure a custom container image registry. A custom container image registry is recommended for mature organizations who require additional control for security and governance reasons. Your organization can use a custom container registry to scan images for CVEs, malicious code, and unapproved Python and OS-level packages contained in the Docker images that are generated during the code deploy process.
-
-## Implementation Considerations
+## Implementation considerations
 
 Deploying code changes to a custom image registry requires triggering a GraphQL mutation to provide a Deployment release name, image name, and Airflow version to the registry. Because this process is difficult to manually trigger, Astronomer recommends configuring a custom image registry only if your DAG authors can deploy code changes using continuous integration and continuous delivery (CI/CD) pipelines. In this implementation, you use your CI/CD tool to:
 
@@ -28,6 +26,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
 - Helm.
 - kubectl.
+- Astro CLI version 1.3.0+.
 - A custom container image registry.
 - A process for building and pushing your Astro projects as images to your custom registry.
 
@@ -35,6 +34,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
 <Tabs
     defaultValue="standard"
+    groupId= "setup"
     values={[
         {label: 'Standard', value: 'standard'},
         {label: 'Airgapped', value: 'airgapped'},
@@ -44,13 +44,13 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 1. Create a secret for the container repository credentials in your Astronomer namespace:
 
     ```bash
-    kubectl -n <your-namespace> create secret docker-registry <name-of-secret> --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-password> --docker-email=<your-email>
+    kubectl -n <astronomer-platform-namespace> create secret docker-registry <name-of-secret> --docker-server=<your-registry-server> --docker-username=<your-name> --docker-password=<your-password> --docker-email=<your-email>
     ```
 
     To have Astronomer Software sync the registry credentials to all Deployment namespaces, add the following annotation:
 
     ```bash
-    kubectl -n <release-namespace> annotate secret <name-of-secret> "astronomer.io/commander-sync"="platform=astronomer"
+    kubectl -n <astronomer-platform-namespace> annotate secret <name-of-secret> "astronomer.io/commander-sync"="platform=astronomer"
     ```
 
   :::info
@@ -64,17 +64,17 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
     ```yaml
     astronomer:
-    	houston:
-         config:
+      houston:
+        config:
           deployments:
             enableUpdateDeploymentImageEndpoint: true
-        	  registry:
-        	    protectedCustomRegistry:
-        	      enabled: true
-        	      updateRegistry:
-        	        enabled: true
-        	        host: <your-airflow-image-repo>
-        	        secretName: <name-of-secret>
+          registry:
+            protectedCustomRegistry:
+              enabled: true
+              updateRegistry:
+                enabled: true
+                host: <your-airflow-image-repo>
+                secretName: <name-of-secret>
     ```
 
   :::info
@@ -83,11 +83,11 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials.
 
     ```bash
-    kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
+    kubectl create job -n <astronomer-platform-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
     ```
 
     :::info
@@ -100,7 +100,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
 <TabItem value="airgapped">
 
-### Air-Gapped
+### Airgapped
 
 1. Create a secret for the container repository credentials in your Astronomer namespace:
 
@@ -111,7 +111,7 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
     To have Astronomer Software sync the registry credentials to all Deployment namespaces, add the following annotation:
 
     ```bash
-    kubectl -n <release-namespace> annotate secret <name-of-secret> "astronomer.io/commander-sync"="platform=astronomer"
+    kubectl -n <astronomer-platform-namespace> annotate secret <name-of-secret> "astronomer.io/commander-sync"="platform=astronomer"
     ```
 
   :::info
@@ -130,23 +130,24 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
       houston:
         config:
           deployments:
+            enableUpdateDeploymentImageEndpoint: true
             helm:
               airflow:
                 defaultAirflowRepository: <airflow-image-repo>
                 images:
                   airflow:
                     repository: <airflow-image-repo>
-      registry:
-        protectedCustomRegistry:
-          enabled: true
-          baseRegistry:
-            enabled: true
-            host: <airflow-image-repo>
-            secretName: <name-of-secret-containing-image-repo-creds>
-          updateRegistry:
-            enabled: true
-            host: <airflow-image-repo>
-            secretName: <name-of-secret-containing-image-repo-creds>
+          registry:
+            protectedCustomRegistry:
+              enabled: true
+              baseRegistry:
+                enabled: true
+                host: <airflow-image-repo>
+                secretName: <name-of-secret-containing-image-repo-creds>
+              updateRegistry:
+                enabled: true
+                host: <airflow-image-repo>
+                secretName: <name-of-secret-containing-image-repo-creds>
     ```
 
   :::info
@@ -155,36 +156,46 @@ Deploying code changes to a custom image registry requires triggering a GraphQL 
 
   :::
 
-4. Push the configuration change. See [Apply a Config Change](https://docs.astronomer.io/software/apply-platform-config).
+4. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 5. For any existing Deployments, run the following command to sync the registry credentials. If you're using different registries for each Deployment, you can skip this step.
 
     ```bash
-    kubectl create job -n <release-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
+    kubectl create job -n <astronomer-platform-namespace> --from=cronjob/astronomer-config-syncer upgrade-config-synchronization
     ```
 
 
 </TabItem>
 </Tabs>
 
-## Push Code to a Custom Registry
+## Push code to a custom registry
 
-After pushing images for your Astro project to your private registry, you can run a GraphQL query to push these images from your registry to Astronomer Software. At a minimum, your query has to include the following:
+You can use the Astro CLI to push build and push images from a Kubernetes cluster to your custom registry. Based on the Helm configurations in your Kubernetes cluster, the Astro CLI automatically detects your custom image registry and pushes your image to it. It then calls the Houston API to update your Deployment to pull the new image from the registry.
+
+Within your Kubernetes cluster, open your Astro project and run:
+
+```sh
+astro deploy
+```
+
+Alternatively, you can run a GraphQL query to update the image in your Deployment after manually pushing the image to the custom registry. This can be useful for automating code deploys using CI/CD.
+
+At a minimum, your query has to include the following:
 
 ```graphql
 mutation updateDeploymentImage {
-	updateDeploymentImage(
-		releaseName: "<deployment-release-name>", # for example "analytics-dev"
-		image: "<host>/<image-name>:<tag>",  # for example docker.io/cmart123/ap-airflow:test4
-		airflowVersion: "<airflow-version-number>" # for example "2.2.5"
-	)
-	{
-		id
-	}
+        updateDeploymentImage(
+                releaseName: "<deployment-release-name>", # for example "analytics-dev"
+                image: "<host>/<image-name>:<tag>",  # for example docker.io/cmart123/ap-airflow:test4
+                runtimeVersion: "<runtime-version-number>" # for example "5.0.6"
+        )
+        {
+                id
+        }
 }
 ```
 
 Alternatively, you can run this same query using curl:
 
 ```bash
-curl 'https://houston.BASEDOMAIN/v1' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://houston.BASEDOMAIN/v1' -H 'Authorization: <your-token>' --data-binary '{"query":"mutation updateDeploymentImage {updateDeploymentImage(releaseName: \"<deployment-release-name>\", image: \"<host>/<image-name>:<tag>\",airflowVersion: \"<airflow-version-number>\"){id}}"}' --compressed
+curl 'https://houston.BASEDOMAIN/v1' -H 'Accept-Encoding: gzip, deflate, br' -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Connection: keep-alive' -H 'DNT: 1' -H 'Origin: https://houston.BASEDOMAIN/v1' -H 'Authorization: <your-token>' --data-binary '{"query":"mutation updateDeploymentImage {updateDeploymentImage(releaseName: \"<deployment-release-name>\", image: \"<host>/<image-name>:<tag>\",runtimeVersion: \"<runtime-version-number>\"){id}}"}' --compressed
 ```

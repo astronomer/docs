@@ -5,11 +5,11 @@ id: debug-install
 ---
 
 
-If the Astronomer platform is not functioning after following the instructions in the installation guide for any specific environment, here are a few things to try:
+Use the information provided here when the Astronomer platform is not functioning as expected after you install it.
 
-## Houston, Grafana, and Prisma stuck in CrashLoopBackOff
+## Houston and Grafana stuck in CrashLoopBackOff
 
-When deploying the base Astronomer platform, the only three pods that will connect directly to the database are Houston (API), Grafana, and Prisma. All other database connections will be created from Airflow deployments created on Astronomer.
+When deploying the base Astronomer platform, the Houston (API) and Grafana pods connect directly to the database. All other database connections are created from Airflow deployments created on Astronomer.
 
 ```
 $ kubectl get pods -n astro-demo
@@ -43,12 +43,11 @@ manageable-snail-kubed-5b5d65dd9d-l7nds                    1/1     Running      
 manageable-snail-nginx-799d79ccf9-kfnzn                    1/1     Running            0          1h
 manageable-snail-nginx-default-backend-5cc4755696-vh5zq    1/1     Running            0          1h
 manageable-snail-astro-ui-7b9b9df4f9-pb99f                 1/1     Running            0          1h
-manageable-snail-prisma-6b5d944bdc-szn8f                   0/1     CrashLoopBackOff   20         1h
 manageable-snail-prometheus-0                              1/1     Running            0          1h
 manageable-snail-registry-0                                1/1     Running            0          1h
 ```
 
-If these are the only three pods that are not coming up as healthy, it is usually indicative of an issue with connecting to the database. Try checking:
+If these pods do not come up in a healthy state, it is usually an issue with the database connection. See the following topics to confirm your connection.
 
 #### Networking
 Make sure that the Kubernetes cluster Astronomer is running on can connect to the database. One way to check this is to jump into an Astronomer pod and try connecting directly to the database:
@@ -110,8 +109,6 @@ manageable-snail-kubed-apiserver-cert                  Opaque                   
 manageable-snail-kubed-notifier                        Opaque                                0      33h
 manageable-snail-kubed-token-dhd94                     kubernetes.io/service-account-token   3      33h
 manageable-snail-nginx-token-xk5pn                     kubernetes.io/service-account-token   3      33h
-manageable-snail-prisma-api-secret                     Opaque                                2      33h
-manageable-snail-prisma-bootstrapper-token-8zhjm       kubernetes.io/service-account-token   3      33h
 manageable-snail-prometheus-token-2v59c                kubernetes.io/service-account-token   3      33h
 manageable-snail-registry-auth                         kubernetes.io/dockerconfigjson        1      33h
 ```

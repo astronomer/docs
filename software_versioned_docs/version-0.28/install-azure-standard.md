@@ -206,7 +206,7 @@ If you received a certificate from a private CA, follow these steps instead:
 An SMTP service is required for sending and accepting email invites from Astronomer. If you're running Astronomer Software with `publicSignups` disabled (which is the default), you'll need to configure SMTP as a way for your users to receive and accept invites to the platform via email. To integrate your SMTP service with Astronomer, fetch your SMTP service's URI and store it in a Kubernetes secret:
 
 ```sh
-kubectl create secret generic astronomer-smtp --from-literal=connection=smtp://USERNAME:PASSWORD@HOST/?requireTLS=true -n astronomer
+kubectl create secret generic astronomer-smtp --from-literal connection=smtp://USERNAME:PASSWORD@HOST/?requireTLS=true -n astronomer
 ```
 
 In general, an SMTP URI will take the following form:
@@ -431,7 +431,6 @@ astronomer-nginx-746589b744-h6r5n                          1/1     Running      
 astronomer-nginx-746589b744-hscb9                          1/1     Running             0          24m
 astronomer-nginx-default-backend-8cb66c54-4vjmz            1/1     Running             0          24m
 astronomer-nginx-default-backend-8cb66c54-7m86w            1/1     Running             0          24m
-astronomer-prisma-57d5bf6c64-zcmsh                         1/1     Running             0          24m
 astronomer-prometheus-0                                    1/1     Running             0          24m
 astronomer-prometheus-blackbox-exporter-65f6c5f456-865h2   1/1     Running             0          24m
 astronomer-prometheus-blackbox-exporter-65f6c5f456-szr4s   1/1     Running             0          24m
@@ -466,7 +465,6 @@ astronomer-nginx                              LoadBalancer   10.0.146.24    20.1
 astronomer-nginx-default-backend              ClusterIP      10.0.132.182   <none>          8080/TCP                                     6m48s
 astronomer-postgresql                         ClusterIP      10.0.0.252     <none>          5432/TCP                                     6m48s
 astronomer-postgresql-headless                ClusterIP      None           <none>          5432/TCP                                     6m48s
-astronomer-prisma                             ClusterIP      10.0.30.160    <none>          4466/TCP                                     6m48s
 astronomer-prometheus                         ClusterIP      10.0.128.170   <none>          9090/TCP                                     6m48s
 astronomer-prometheus-blackbox-exporter       ClusterIP      10.0.125.142   <none>          9115/TCP                                     6m48s
 astronomer-prometheus-node-exporter           ClusterIP      10.0.2.116     <none>          9100/TCP                                     6m48s

@@ -1,15 +1,19 @@
 ---
-sidebar_label: 'Astronomer Certified Architecture'
-title: 'Astronomer Certified Image Architecture'
+sidebar_label: 'Astronomer Certified architecture'
+title: 'Astronomer Certified image architecture'
 id: image-architecture
 description: Reference documentation for Astronomer Certified, Astronomer Software's Docker image for Apache Airflow.
 ---
 
-## Overview
+:::caution
+
+Astronomer will no longer release new versions of AC starting with the release of Apache Airflow 2.6. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
+
+:::
 
 The Astronomer Certified Docker image for Apache Airflow extends the community-developed Airflow image in a way that makes running Airflow more secure, reliable, and extensible. It is the default image for Airflow Deployments on Astronomer.
 
-This guide provides reference information for the building blocks of Astronomer Certified, as well as information on its release and distribution.
+This guide provides reference information for the building blocks of Astronomer Certified, as well as information on its release and distribution. For reference information on Astro Runtime, see [Runtime image architecture](runtime-image-architecture.md).
 
 ## Distribution
 
@@ -26,39 +30,22 @@ The Astronomer Certified Docker image is built from the Python wheel and incorpo
 - A collection of pre-installed Airflow provider packages.
 - Full compatibility with the Astronomer Platform.
 
-![Diagram of AC distribution scheme](https://assets2.astronomer.io/main/docs/diagrams/ac-diagram.png)
+![Diagram of AC distribution scheme](/img/software/ac-diagram.png)
 
-Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all supported Astronomer Certified images can be found in [Astronomer's `ap-airflow` GitHub repository](https://github.com/astronomer/ap-airflow):
+Every supported version of the Astronomer Certified Python wheel is available at [pip.astronomer.io](https://pip.astronomer.io/simple/astronomer-certified/). The Dockerfiles for all supported Astronomer Certified images can be found in the [Astronomer Certified GitHub repository](https://quay.io/repository/astronomer/ap-airflow?tab=tags):
 
-- [Airflow 2.3.0](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/bullseye/Dockerfile)
+- [Airflow 2.4.1](https://github.com/astronomer/ap-airflow/blob/master/2.4.1/bullseye/Dockerfile)
+- [Airflow 2.3.4](https://github.com/astronomer/ap-airflow/blob/master/2.3.4/bullseye/Dockerfile)
+- [Airflow 2.3.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.3/bullseye/Dockerfile)
+- [Airflow 2.3.2](https://github.com/astronomer/ap-airflow/blob/master/2.3.2/bullseye/Dockerfile)
 - [Airflow 2.2.5](https://github.com/astronomer/ap-airflow/blob/master/2.2.5/bullseye/Dockerfile)
-- [Airflow 2.2.4](https://github.com/astronomer/ap-airflow/blob/master/2.2.4/bullseye/Dockerfile)
-- [Airflow 2.2.3](https://github.com/astronomer/ap-airflow/blob/master/2.2.3/bullseye/Dockerfile)
-- [Airflow 2.2.2](https://github.com/astronomer/ap-airflow/blob/master/2.2.2/bullseye/Dockerfile)
-- [Airflow 2.2.1](https://github.com/astronomer/ap-airflow/blob/master/2.2.1/bullseye/Dockerfile)
-- [Airflow 2.2.0](https://github.com/astronomer/ap-airflow/blob/master/2.2.0/bullseye/Dockerfile)
-- [Airflow 2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/Dockerfile)
-- [Airflow 2.0.2](https://github.com/astronomer/ap-airflow/blob/master/2.0.2/buster/Dockerfile)
-- [Airflow 2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/buster/Dockerfile)
-- [Airflow 1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/buster/Dockerfile)
+- [Airflow 2.1.4](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/buster/Dockerfile)
 
-### Differences Between Astronomer Runtime and Astronomer Certified
+## System distribution
 
-Starting with Software version 0.29, you can use Astro Runtime images in your Software Deployments. Functionally, Runtime images are similar to Certified images. They both include:
+Astronomer Certified versions 1.10.15 and 2.1.4 are based on Debian 10.13 (buster). All other Astronomer Certified versions are based on Debian 11.3 (bullseye).
 
-- Same-day support for Apache Airflow releases.
-- Extended support lifecycles.
-- Regularly backported bug and security fixes.
-
-Astronomer Runtime includes additional features which are not available in Astronomer Certified images, including:
-
-- The `astronomer-providers` package, which includes a set of deferrable operators build and maintained by Astronomer.
-- Airflow UI improvements, such as the showing your Deployment's Docker image tag in the footer of all UI pages.
-- Future Runtime-exclusive features, such as new Airflow components and improvements to the DAG development experience.
-
-For more information on using Runtime in your Deployments, see [Upgrade Runtime](https://docs.astronomer.io/astro/upgrade-runtime).
-
-## Image Requirements
+## Image requirements
 
 Running Airflow with the Astronomer Certified Docker image requires specific versions for key system components.  
 
@@ -76,13 +63,13 @@ These requirements are slightly different for running only the Python wheel. For
 
  For more information on running a Python wheel installation of Astronomer Certified, read [Install on a Virtual Machine](single-node-install.md).
 
-## Environment Variables
+## Environment variables
 
 When an Airflow service is started, it checks a file for runtime environment variables. These are equivalent to values defined in Airflow's `airflow.cfg` file.
 
 If you run the Astronomer Certified Docker image without the Astronomer platform, environment variables are defined in your Dockerfile. They can be overwritten with a runtime command, such as `docker run`.
 
-If you're running the Astronomer Certified Docker image with the Astronomer platform, there are a few ways you can configure environment variables. For more information, read [Environment Variables](environment-variables.md).
+If you're running the Astronomer Certified Docker image with the Astronomer platform, there are a few ways you can configure environment variables. For more information, read [Environment variables](environment-variables.md).
 
 Astronomer Certified supports the same environment variables as Apache Airflow. For a list of all configurable environment variables, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html).
 
@@ -98,28 +85,33 @@ The following table lists the essential environment variables used when running 
 | `PIP_NO_CACHE_DIR`                                | Specifies whether to maintain copies of source files when installing via pip. | True                                              |
 | `PYTHON_MAJOR_MINOR_VERSION`                      | The version of Python to use for Airflow.                                     | 3.9                                               |
 
-## Provider Packages
+## Provider packages
 
 Starting in version 2.0.0, the Astronomer Certified image includes provider packages that are utilized in some background processes, as well as packages which are commonly used by the Airflow community. The following table contains version information for each provider package installed as part of Astronomer Certified:
 
-| Astronomer Certified | [amazon](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html) |[azure](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/index.html) | [celery](https://airflow.apache.org/docs/apache-airflow-providers-celery/stable/index.html) | [cncf.kubernetes](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html) | [elasticsearch](https://airflow.apache.org/docs/apache-airflow-providers-elasticsearch/stable/index.html) | [ftp](https://airflow.apache.org/docs/apache-airflow-providers-ftp/stable/index.html) | [google](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/index.html) |   [http](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/index.html) |[imap](https://airflow.apache.org/docs/apache-airflow-providers-imap/stable/index.html) | [mysql](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-mssql/stable/index.html) | [postgres](https://airflow.apache.org/docs/apache-airflow-providers-postgres/stable/index.html) | [redis](https://airflow.apache.org/docs/apache-airflow-providers-redis/stable/index.html) | [slack](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/index.html) | [sqlite](https://airflow.apache.org/docs/apache-airflow-providers-sqlite/stable/index.html) | [ssh](https://airflow.apache.org/docs/apache-airflow-providers-ssh/stable/index.html) |
-| -------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-|**2.0.0**|1.0.0|1.1.0|1.0.0|1.0.1|1.0.4|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|1.0.0|
-|**2.0.2**|1.3.0|1.3.0|1.0.1|1.2.0|1.0.4|1.0.1|2.2.0|1.1.1|1.0.1|1.1.0|1.0.1|1.0.1|3.0.0|1.0.2|1.3.0|
-|**2.1.0**|1.4.0|2.0.0|1.0.1|1!1.2.1|1.0.4|1.1.0|3.0.0|2.0.0|1.0.1|1.1.0|1.0.2|1.0.1|3.0.0|1.0.2|1.3.0|
-|**2.1.1**|1!2.0.0|1!3.0.0|1!2.0.0|1!2.0.0|1!2.0.1|1!2.0.0|1!4.0.0|1!2.0.0|1!2.0.0|1!2.0.0|1!2.0.0|1!2.0.0|1!4.0.0|1!2.0.0|1!2.0.0|
-|**2.1.3**|1!2.1.0|1!3.1.0|1!2.0.0|1!2.0.2|1!2.0.2|1!2.0.0|1!5.0.0|1!2.0.0|1!2.0.0|1!2.1.0|1!2.0.0|1!2.0.0|1!4.0.0|1!2.0.0|1!2.1.0|
-|**2.1.4**|1!2.2.0|1!3.1.1|1!2.1.0|1!2.0.2|1!2.0.3|1!2.0.1|1!5.1.0|1!2.0.1|1!2.0.1|1!2.1.1|1!2.2.0|1!2.0.1|1!4.0.1|1!2.0.1|1!2.1.1|
-|**2.2.0**|1!2.2.0|1!3.2.0|1!2.1.0|1!2.0.3|1!2.0.3|1!2.0.1|1!6.0.0|1!2.0.1|1!2.0.1|1!2.1.1|1!2.3.0|1!2.0.1|1!4.1.0|1!2.0.1|1!2.2.0|
-|**2.2.1**|1!2.2.0|1!3.2.0|1!2.1.0|1!2.0.3|1!2.0.3|1!2.0.1|1!6.0.0|1!2.0.1|1!2.0.1|1!2.1.1|1!2.3.0|1!2.0.1|1!4.1.0|1!2.0.1|1!2.2.0|
-|**2.2.2**|1!2.3.0|1!3.3.0|1!2.1.0|1!2.1.0|1!2.1.0|1!2.0.1|1!6.1.0|1!2.0.1|1!2.0.1|1!2.1.1|1!2.3.0|1!2.0.1|1!4.1.0|1!2.0.1|1!2.3.0|
-|**2.2.3**|1!2.3.0|1!3.3.0|1!2.1.0|1!2.1.0|1!2.1.0|1!2.0.1|1!6.1.0|1!2.0.1|1!2.0.1|1!2.1.1|1!2.3.0|1!2.0.1|1!4.1.0|1!2.0.1|1!2.3.0|
-|**2.2.4**|1!3.0.0|1!3.6.0|1!2.1.0|1!3.0.2|1!2.2.0|1!2.0.1|1!6.4.0|1!2.0.3|1!2.2.0|1!2.2.0|1!3.0.0|1!2.0.1|1!4.2.0|1!2.1.0|1!2.4.0|
-|**2.2.5**|1!3.2.0|1!3.7.2|1!2.1.0|1!3.0.0|1!3.0.2|1!2.1.2|1!6.7.0|1!2.1.1|1!2.2.3|1!2.2.3|1!4.1.0|1!2.0.4|1!4.2.3|1!2.1.3|1!2.4.3|
-|**2.3.0**|1!3.3.0|1!3.8.0|1!2.1.0|1!4.0.1|1!3.0.3|1!2.1.2|1!6.8.0|1!2.1.2|1!2.2.3|1!2.2.3|1!4.1.0|1!2.0.4|1!4.2.3|1!2.1.3|1!2.4.3|
+- [amazon](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html)
+- [azure](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/index.html)
+- [celery](https://airflow.apache.org/docs/apache-airflow-providers-celery/stable/index.html)
+- [cncf.kubernetes](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/index.html)
+- [elasticsearch](https://airflow.apache.org/docs/apache-airflow-providers-elasticsearch/stable/index.html)
+- [ftp](https://airflow.apache.org/docs/apache-airflow-providers-ftp/stable/index.html)
+- [google](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/index.html)
+- [http](https://airflow.apache.org/docs/apache-airflow-providers-http/stable/index.html)
+- [imap](https://airflow.apache.org/docs/apache-airflow-providers-imap/stable/index.html)
+- [mysql](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-mssql/stable/index.html)
+- [postgres](https://airflow.apache.org/docs/apache-airflow-providers-postgres/stable/index.html)
+- [redis](https://airflow.apache.org/docs/apache-airflow-providers-redis/stable/index.html)
+- [slack](https://airflow.apache.org/docs/apache-airflow-providers-slack/stable/index.html)
+- [sqlite](https://airflow.apache.org/docs/apache-airflow-providers-sqlite/stable/index.html)
+- [ssh](https://airflow.apache.org/docs/apache-airflow-providers-ssh/stable/index.html) |
 
+To determine the version of any provider package installed in your current Astronomer Certified image, run:
 
-## System Dependencies
+```sh
+docker run --rm {image} pip freeze | grep <provider>
+```
+
+## System dependencies
 
 The Astronomer Certified Docker image includes a number of OS-level dependencies for running basic system processes. These dependencies can be installed in the Python Wheel as described in [Install Packages](install-packages.md).
 

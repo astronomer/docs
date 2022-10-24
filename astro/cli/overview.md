@@ -3,31 +3,47 @@ sidebar_label: 'Overview'
 title: 'Astro CLI'
 id: overview
 description: Learn about every command that you can run with the Astro CLI.
+hide_table_of_contents: true
 ---
 
-## Run Airflow Locally
+import LinkCardGrid from '@site/src/components/LinkCardGrid';
+import LinkCard from '@site/src/components/LinkCard';
+import AstroCard from '@site/src/components/AstroCard';
 
-The Astro CLI is the command line interface for data orchestration. It's the easiest way to get started with [Apache Airflow](https://airflow.apache.org/) and can be used with all Astronomer products.
+<p class="DocItem__header-description">The Astro CLI is the command line interface for data orchestration. It's the easiest way to get started with Apache Airflow and can be used with all Astronomer products.</p>
 
+:::highlight
+__Install the CLI__
+
+To install with Homebrew, run:
+
+```sh
+brew install astro
+```
+
+For alternative installation steps, see [Install the Astro CLI](install-cli.md).
+
+:::
+ 
 The Astro CLI is open source and built for data practitioners everywhere. The binary is maintained in the public [Astro CLI GitHub repository](https://github.com/astronomer/astro-cli), where pull requests and GitHub issues are welcome.
+ 
+## Astro CLI Features
 
-## Get Started
+<LinkCardGrid>
+  <LinkCard label="Built-in Astro project directory" description="An Astro project includes all of the files required to run Airflow, including dedicated folders for your DAGs, packages, and unit tests." />
+  <LinkCard label="Advanced commands" description="Using the Astro CLI, you can run a local Airflow environment, apply code changes, and view logs for all Airflow components." />
+  <LinkCard label="Example pytests and DAGs" description="The Astro CLI includes example DAGs which showcase important Airflow best practices and help your team learn quickly." />
+  <LinkCard label="Browser-based authentication" description="Access browser-based authentication for Astro and Astronomer Software." />
+  <LinkCard label="Astro Cloud UI compatible" description="A robust set of commands matches functionality in the Cloud UI, including Deployment creation and user management." />
+  <LinkCard label="CI/CD" description="Configure Deployment API keys to automate CLI commands as part of CI/CD workflows." />
+</LinkCardGrid>
 
-Follow [Get Started](get-started.md) to install the CLI and run your first Astro project locally.
+## Featured CLI docs
 
-## Features
+<LinkCardGrid>
+  <LinkCard truncate label="Release Notes" description="A record of all changes to the Astro CLI." href="/astro/cli/release-notes" />
+  <LinkCard truncate label="Install the Astro CLI" description="Documentation for installing the CLI on all operating systems." href="/astro/cli/install-cli" />
+  <LinkCard truncate label="Astro CLI command reference" description="Reference information about every available CLI command and option." href="/astro/cli/reference" />
+</LinkCardGrid>
 
-Specifically, the Astro CLI includes:
-
-- A built-in Astro project directory that includes all the files required to run Airflow, including dedicated folders for your DAGs, packages, and unit tests.
-- Commands to enhance the local development experience. Using the CLI, you can run a local Airfow environment, apply code changes, and view logs for all Airflow components.
-- A set of example pytests and example DAGs that showcase important Airflow best practices and can help your team learn quickly and identify errors in your DAGs ahead of time.
-- Easy and secure browser-based authentication for Astro and Astronomer Software.
-- A robust set of commands to match functionality in the Cloud UI, including commands to create a Deployment and modify environment variables.
-- Support for Deployment API keys, which you can use to automate commands as part of CI/CD workflows.
-
-To stay up to date on the latest features, see [Astro CLI Release Notes](cli/release-notes.md).
-
-## CLI Reference
-
-For a full list of available CLI commands, see the [CLI Command Reference](cli/reference.md).
+<AstroCard />

@@ -3,11 +3,10 @@ sidebar_label: "astro dev logs"
 title: "astro dev logs"
 id: astro-dev-logs
 description: Reference documentation for astro dev logs.
+hide_table_of_contents: true
 ---
 
-## Description
-
-Show Webserver, Scheduler, and Celery worker logs from your local Airflow environment.
+Show webserver, scheduler, and triggerer logs from your local Airflow environment.
 
 ## Usage
 
@@ -17,23 +16,25 @@ astro dev logs
 
 ## Options
 
-| Option              | Description                                                                                                        | Possible Values             |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| `-f`,`--follow` | Continue streaming most recent log output to your terminal. | ``|
-| `-s`,`--scheduler`            | Show only Scheduler logs                                                                                  | ``                  |
-| `-w`,`--webserver`            | Show only Webserver logs                                                                                  | ``                 |
-| `-t`,`--triggerer`            | Show only Triggerer logs                                                                                  | ``                 |
+| Option             | Description                                                 | Possible Values |
+| ------------------ | ----------------------------------------------------------- | --------------- |
+| `-f`,`--follow`    | Continue streaming most recent log output to your terminal. | None            |
+| `-s`,`--scheduler` | Show only scheduler logs                                    | None            |
+| `-w`,`--webserver` | Show only webserver logs                                    | None            |
+| `-t`,`--triggerer` | Show only triggerer logs                                    | None            |
 
 
 ## Examples
 
 ```sh
 $ astro dev logs
-# Show the most recent logs from both the Airflow Webserver and Scheduler
+# Show the most recent logs from both the Airflow webserver and Scheduler
+
 $ astro dev logs --follow
-# Stream all new Webserver and Scheduler logs to the terminal
+# Stream all new webserver and scheduler logs to the terminal
+
 $ astro dev logs --follow --scheduler
-# Stream only new Scheduler logs to the terminal
+# Stream only new scheduler logs to the terminal
 ```
 
 ## Related Commands

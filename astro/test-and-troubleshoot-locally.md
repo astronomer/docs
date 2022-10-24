@@ -1,17 +1,15 @@
 ---
-sidebar_label: 'Test and Troubleshoot Locally'
-title: 'Test and Troubleshoot Locally'
+sidebar_label: 'Test and troubleshoot locally'
+title: 'Test and troubleshoot locally'
 id: test-and-troubleshoot-locally
 description: A guide to running an Astro project locally and diagnosing common problems.
 ---
 
-## Overview
+As you develop data pipelines on Astro, Astronomer recommends running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
-As you develop data pipelines on Astro, we strongly recommend running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
+## Run a project locally
 
-## Run a Project Locally
-
-Whenever you want to test your code, the first step is always to start a local Airflow environment. To run your project in a local Airflow environment, follow the steps in [Build and Run a Project](develop-project.md#build-and-run-a-project-locally).
+To test your code, the first step is always to start a local Airflow environment. To run your project in a local Airflow environment, see [Build and run a project](develop-project.md#build-and-run-a-project-locally).
 
 ## Test DAGs with the Astro CLI
 
@@ -30,9 +28,9 @@ astro dev parse
 
 This command parses your DAGs to ensure that they don't contain any basic syntax or import errors and that they can successfully render in the Airflow UI.
 
-The command `astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI Command Reference](cli/astro-dev-parse.md).
+The command `astro dev parse` is a more convenient but less customizable version of `astro dev pytest`. If you don't have any specific test files that you want to run on your DAGs, Astronomer recommends using `astro dev parse` as your primary testing tool. For more information about this command, see the [CLI command reference](cli/astro-dev-parse.md).
 
-### Run Tests with Pytest
+### Run tests with pytest
 
 To perform unit tests on your Astro project, you can run:
 
@@ -49,13 +47,15 @@ By default, the `tests` directory in your Astro project includes a default DAG i
 - DAGs have no cycles.
 - There are no general import or syntax errors.
 
-`astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI Command Reference](cli/astro-dev-pytest.md).
+`astro dev pytest` runs this default test alongside any other custom tests that you add to the `tests` directory. For more information about this command, see the [CLI command reference](cli/astro-dev-pytest.md).
 
-## View Airflow Logs
+## View Airflow logs
 
-You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change. See [View logs](view-logs.md).
+You can use the Astro CLI to view logs for Airflow tasks and components from your local Airflow environment. This is useful if you want to troubleshoot a specific task instance, or if your environment suddenly stops working after a code change.
 
-## Run Airflow CLI Commands
+See [View logs](view-logs.md).
+
+## Run Airflow CLI commands
 
 To run [Apache Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html) commands locally, run the following:
 
@@ -63,83 +63,46 @@ To run [Apache Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stabl
 astro dev run <airflow-cli-command>
 ```
 
-For example, the Airflow CLI command for viewing the values of your `airflow.cfg` file is `airflow config list`. To run this command with the Astro CLI, you would run `astro dev run config list` instead.
+For example, the Airflow CLI command for listing connections is `airflow connections list`. To run this command with the Astro CLI, you would run `astro dev run connections list` instead.
 
-In practice, running `astro dev run` is the equivalent of running `docker exec` in local containers and then running an Airflow CLI command within those containers.
+Running `astro dev run` with the Astro CLI is the equivalent of running `docker exec` in local containers and then running an Airflow CLI command within those containers.
 
 :::tip
 
-You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Airflow REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `airflow dags trigger` via the Airflow CLI.
+You can only use `astro dev run` in a local Airflow environment. To automate Airflow actions on Astro, you can use the [Airflow REST API](airflow-api.md). For example, you can make a request to the [`dagRuns` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) to trigger a DAG run programmatically, which is equivalent to running `airflow dags trigger` in the Airflow CLI.
 
 :::
 
-## Test the KubernetesPodOperator Locally
+## Make requests to the Airflow REST API locally
 
-Testing DAGs with the [KubernetesPodOperator](kubernetespodoperator.md) locally requires a local Kubernetes environment. Follow the steps in this topic to create a local Kubernetes environment and monitor the status and logs of individual Kubernetes pods running your task.
+Make requests to the [Airflow REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) in a local Airflow environment with HTTP basic access authentication. This can be useful for testing and troubleshooting API calls before executing them in a Deployment on Astro.
 
-### Step 1: Start Running Kubernetes
+To make local requests with cURL or Python, you only need the username and password for your local user. Both of these values are `admin` by default. They are the same credentials that are listed when you run `astro dev start` with the Astro CLI and required by the Airflow UI in a local environment.
 
-To run Kubernetes locally:
+To make requests to the Airflow REST API in a Deployment on Astro, see [Airflow API](airflow-api.md).
 
-1. In Docker Desktop, go to **Settings** > **Kubernetes**.
-2. Check the `Enable Kubernetes` checkbox.
-3. Save your changes and restart Docker.
+### cURL
 
-### Step 2: Get Your Kubernetes Configuration
-
-1. Open the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker.
-2. Open the `config` file in this directory.
-3. Under `clusters`, you should see one `cluster` with `server: http://localhost:8080`. Change this to `server: https://kubernetes.docker.internal:6443`. If this doesn't work, try `server: https://host.docker.internal:6445`.
-4. In your Astro project, open your `include` directory and create a new directory called `.kube`. Copy the `config` file that you edited into this directory.
-
-### Step 3: Instantiate the KubernetesPodOperator
-
-To instantiate the KubernetesPodOperator in a given DAG, update your DAG file to include the following code:
-
-```python
-from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow import configuration as conf
-# ...
-
-namespace = conf.get('kubernetes', 'NAMESPACE')
-
-# This will detect the default namespace locally and read the
-# environment namespace when deployed to Astronomer.
-if namespace =='default':
-    config_file = '/usr/local/airflow/include/.kube/config'
-    in_cluster=False
-else:
-    in_cluster=True
-    config_file=None
-
-with dag:
-    k = KubernetesPodOperator(
-        namespace=namespace,
-        image="my-image",
-        labels={"foo": "bar"},
-        name="airflow-test-pod",
-        task_id="task-one",
-        in_cluster=in_cluster, # if set to true, will look in the cluster for configuration. if false, looks for file
-        cluster_context='docker-desktop', # is ignored when in_cluster is set to True
-        config_file=config_file,
-        is_delete_operator_pod=True,
-        get_logs=True)
+```sh
+curl -X GET localhost:8080/api/v1/<endpoint> --user "admin:admin"
 ```
 
-Specifically, your operator must have `cluster_context='docker-desktop` and `config_file=config_file`.
+### Python
 
-### Step 4: Run and Monitor the KubernetesPodOperator
+```python
+import requests
 
-After updating your DAG, run `astro dev restart` from the Astro CLI to rebuild your image and run your project in a local Airflow environment.
+response = requests.get(
+   url="localhost:8080/api/v1/<endpoint>",
+   auth=("admin", "admin")
+)
+```
 
-To examine the logs for any pods that were created by the operator, you can use the following [kubectl](https://kubernetes.io/docs/reference/kubectl/kubectl/) commands:
+## Troubleshoot KubernetesPodOperator issues
 
-- `kubectl get pods -n $namespace`
-- `kubectl logs {pod_name} -n $namespace`
+View local Kubernetes logs to troubleshoot issues with Pods that are created by the operator. See [Test and Troubleshoot the KubernetesPodOperator Locally](kubepodoperator-local.md#step-4-view-kubernetes-logs).
 
-By default, Docker for Desktop will run pods in a namespace called `default`.
-
-## Hard Reset Your Local Environment
+## Hard reset your local environment
 
 In most cases, [restarting your local project](develop-project.md#restart-your-local-environment) is sufficient for testing and making changes to your project. However, it is sometimes necessary to kill your Docker containers and metadata database for testing purposes. To do so, run the following command:
 
@@ -147,4 +110,169 @@ In most cases, [restarting your local project](develop-project.md#restart-your-l
 astro dev kill
 ```
 
-This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow Connections, logs, and task history.
+This command forces your running containers to stop and deletes all data associated with your local Postgres metadata database, including Airflow connections, logs, and task history.
+
+## Troubleshoot dependency errors
+
+When dependency errors occur, the error message that is returned often doesn't contain enough information to help you resolve the error. To retrieve additional error information, you can review individual operating system or python package dependencies inside your local Docker containers.
+
+For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, or libsas12-dev packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
+
+1. Open the `requirements.txt` and `packages.txt` files for your project and remove the references to the packages that are returning error messages.
+
+2. Run the following command to build your Astro project into a Docker image and start a local Docker container for each Airflow component:
+
+    ```sh
+    astro dev start
+    ```
+
+3. Run the following command to open a bash terminal in your scheduler container:
+
+    ```sh
+    astro dev bash --scheduler
+    ```
+
+4. In the bash terminal for your container, run the following command to install a package and review any error messages that are returned:
+
+    ```bash
+    apt-get install <package-name>
+    ```
+    For example, to install the GNU Compiler Collection (GCC) compiler, you would run:
+
+    ```bash
+    apt-get install gcc
+    ```
+
+5. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1.
+
+## Override the CLI Docker Compose file
+
+The Astro CLI uses a default set of [Docker Compose](https://docs.docker.com/compose/) configurations to define and run local Airflow components. For advanced testing cases, you might need to override these default configurations. For example:
+
+- Adding extra containers to mimic services that your Airflow environment needs to interact with locally, such as an SFTP server.
+- Change the volumes mounted to any of your local containers.
+
+:::info
+
+The Astro CLI does not support overrides to environment variables that are required globally. For the list of environment variables that Astro enforces, see [Global environment variables](platform-variables.md). To learn more about environment variables, read [Environment variables](environment-variables.md).
+
+:::
+
+1. Reference the Astro CLI's default [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go) (`composeyml.go`) and determine one or more configurations to override.
+2. Add a `docker-compose.override.yml` file to your Astro project.
+3. Specify your new configuration values in `docker-compose.override.yml` file using the same format as in `composeyml.go`.
+
+For example, to add another volume mount for a directory named `custom_dependencies`, add the following to your `docker-compose.override.yml` file:
+
+```yaml
+version: "3.1"
+services:
+  scheduler:
+    volumes:
+      - /home/astronomer_project/custom_dependencies:/usr/local/airflow/custom_dependencies:ro
+```
+
+Make sure to specify `version: "3.1"` and follow the format of the source code file linked above.
+
+To see your override file live in your local Airflow environment, run the following command to see the file in your scheduler container:
+
+```sh
+astro dev bash --scheduler "ls -al"
+```
+
+## Troubleshoot common issues
+
+Use the information provided here to resolve common issues with running an Astro project in a local environment.
+
+### New DAGs aren't visible in the Airflow UI
+
+Make sure that no DAGs have duplicate `dag_id`s. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
+
+By default, the Airflow scheduler scans the `dags` directory of your Astro project for new files every 300 seconds (5 minutes). For this reason, it might take a few minutes for new DAGs to appear in the Airflow UI. Note that changes to existing DAGs appear immediately. To have the scheduler check for new DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. Decreasing this setting results in the scheduler consuming more resources, so you might need to increase the CPU allocated to the scheduler.
+
+### DAGs are running slowly
+
+If your Astro project contains many DAGs or tasks, then you might experience performance issues in your local Airflow environment.
+
+To improve the performance of your environment, you can:
+
+ - Adjust CPU and memory resource allocation in your Docker configuration. Be aware that increasing Docker resource allocation might decrease the performance of your computer.
+ - Modify Airflow-level environment variables, including concurrency and parallelism. See [Scaling out Airflow](https://docs.astronomer.io/learn/airflow-scaling-workers).
+
+Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see [Dynamically Generating DAGs in Airflow](https://docs.astronomer.io/learn/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
+
+:::tip
+
+If you don't have enough Docker resources allocated to your local Airflow environment, you might see tasks fail and exit with this error:
+
+   ```
+   Task exited with return code Negsignal.SIGKILL
+   ```
+
+If you see this error, increase the CPU and memory allocated to Docker. If you're using Docker Desktop, you can do this by opening Docker Desktop and going to **Preferences** > **Resources** > **Advanced**. See [Change Docker Desktop preferences on Mac](https://docs.docker.com/desktop/settings/mac/).
+
+:::
+
+### Astro project won't load after `astro dev start`
+
+If you're running the Astro CLI on a Mac computer that's built with the Apple M1 chip, your Astro project might take more than 5 mins to start after running `astro dev start`. This is a current limitation of Astro Runtime and the Astro CLI.
+
+If your project won't load, it might also be because your webserver or scheduler is unhealthy. In this case, you might need to debug your containers.
+
+1. After running `astro dev start`, retrieve a list of running containers by running `astro dev ps`.
+2. If the webserver and scheduler containers exist but are unhealthy, check their logs by running:
+
+    ```sh
+    $ astro dev logs --webserver
+    $ astro dev logs --scheduler
+    ```
+3. Optional. Run the following command to prune volumes and free disk space:
+
+    ```sh
+    docker system prune --volumes
+    ```
+
+These logs should help you understand why your webserver or scheduler is unhealthy. Possible reasons why these containers might be unhealthy include:
+
+- Not enough Docker resources.
+- A failed Airflow or Astro Runtime version upgrade.
+- Misconfigured Dockerfile or Docker override file.
+- Misconfigured Airflow settings.
+
+### Ports are not available
+
+By default, the Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database in a local Airflow environment. If these ports are already in use on your local computer, an error message similar to the following appears:
+
+```text
+Error: error building, (re)creating or starting project containers: Error response from daemon: Ports are not available: exposing port TCP 0.0.0.0:5432 → 0.0.0.0:0: listen tcp 0.0.0.0:5432: bind: address already in use
+```
+
+To resolve a port availability error, you have the following options:
+
+- Stop all running Docker containers and restart your local environment.
+- Change the default ports for these components.
+
+#### Stop all running Docker containers
+
+1. Run `docker ps` to identify the Docker containers running on your computer.
+2. Copy the values in the `CONTAINER ID` column.
+3. Select one of the following options:
+
+    - Run `docker stop <container_id>` to stop a specific Docker container. Replace `<container_id>` with one of the values you copied in step 2.
+    - Run `docker stop $(docker ps -q)` to stop all running Docker containers.
+
+#### Change the default port assignment
+
+If port 8080 or 5432 are in use on your machine by other services, the Airflow webserver and metadata database won't be able to start. To run these components on different ports, run the following commands in your Astro project:
+
+```sh
+astro config set webserver.port <available-port>
+astro config set postgres.port <available-port>
+```
+
+For example, to use 8081 for your webserver port and 5435 for your database port, you would run the following commands:
+
+```sh
+astro config set webserver.port 8081
+astro config set postgres.port 5435
+```

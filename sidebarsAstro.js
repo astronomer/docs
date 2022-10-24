@@ -10,15 +10,20 @@
 module.exports = {
   cloud: [
     {
-      type: 'doc',
+      type: 'category',
       label: 'Overview',
-      id: 'overview'
+      link: { type: 'doc', id: 'overview' },
+      items: [
+        'features',
+        'astro-architecture',
+      ],
     },
     {
       type: 'category',
-      label: 'Get Started',
+      label: 'Get started',
       items: [
         'create-project',
+        'log-in-to-astro',
         'create-deployment',
       ],
     },
@@ -31,7 +36,9 @@ module.exports = {
           type: 'category',
           label: 'Write DAGs',
           items: [
+            'astro-python-sdk',
             'deferrable-operators',
+            'kubepodoperator-local',
             'kubernetespodoperator',
           ],
         },
@@ -53,6 +60,7 @@ module.exports = {
       label: 'Manage Deployments',
       items: [
         'configure-deployment-resources',
+        'configure-worker-queues',
         'api-keys',
         'environment-variables',
         'secrets-backend',
@@ -64,7 +72,14 @@ module.exports = {
       items: [
         'view-logs',
         'deployment-metrics',
-        'data-lineage',
+        {
+          type: 'category',
+          label: 'Data lineage',
+          items: [
+            'set-up-data-lineage',
+            'data-lineage',
+          ],
+        },
         'airflow-alerts',
       ],
     },
@@ -75,16 +90,21 @@ module.exports = {
         {
           type: 'category',
           label: 'Install Astro',
+          link: {
+            type:'generated-index',
+            title: 'Install Astro',
+            description: 'Install the Astro platform in your cloud.'
+          },
           items: [
             'install-aws',
+            'install-azure',
             'install-gcp',
           ],
         },
         'manage-workspaces',
-        'set-up-data-lineage',
         {
           type: 'category',
-          label: 'User Access',
+          label: 'User access',
           items: [
             'add-user',
             'user-permissions',
@@ -93,18 +113,46 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Manage Clusters',
+          label: 'Manage clusters',
           items: [
+            'view-clusters',
             'create-cluster',
-            'modify-cluster',
-            'connect-external-services',
+            {
+              type: 'category',
+              label: 'Configure cluster resources',
+              link: {
+                type:'generated-index',
+                title: 'Configure cluster resources',
+                description: 'Configure your AWS, Azure, or GCP cluster resources on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for most use cases.'
+              },
+              items: [
+                'modify-cluster',
+                'resource-reference-aws',
+                'resource-reference-azure',
+                'resource-reference-gcp',
+              ],
+            },
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Connect Astro',
+          link: {
+            type:'generated-index',
+            title: 'Connect Astro to external data sources',
+            description: 'Connect Astro to external data sources. A connection to AWS, Azure, or GCP allows Astro to access data stored on your AWS, Azure, or GCP instances and is a necessary step to running pipelines in a production environment.'
+          },
+          items: [
+            'connect-aws',
+            'connect-azure',
+            'connect-gcp',
           ],
         },
       ],
     },
     {
       type: 'category',
-      label: 'Release Notes',
+      label: 'Release notes',
       items: [
         'release-notes',
         'runtime-release-notes',
@@ -114,22 +162,20 @@ module.exports = {
       type: 'category',
       label: 'Reference',
       items: [
-        'known-limitations',
-        'runtime-version-lifecycle-policy',
         'astro-support',
         {
           type: 'category',
-          label: 'Cloud Configuration Reference',
+          label: 'Astro Runtime',
           items: [
-            'resource-reference-aws',
-            'resource-reference-gcp',
+          'runtime-image-architecture',
+          'runtime-version-lifecycle-policy',
           ],
         },
         'platform-variables',
         'data-plane-activation',
         {
           type: 'category',
-          label: 'Data Lineage',
+          label: 'Data lineage',
           items: [
             'data-lineage-support-and-compatibility',
             'data-lineage-concepts',],
@@ -144,6 +190,7 @@ module.exports = {
             'disaster-recovery',
             'data-protection',
             'gdpr-compliance',
+            'hipaa-compliance',
             'secrets-management',],
         },
       ],
@@ -152,13 +199,13 @@ module.exports = {
   cli: [
       {
         type: 'doc',
-        label: 'CLI Overview',
+        label: 'CLI overview',
         id: 'cli/overview'
       },
       {
         type: 'doc',
-        label: 'Get Started',
-        id: 'cli/get-started'
+        label: 'Install the CLI',
+        id: 'cli/install-cli'
       },
     {
       type: 'doc',
@@ -167,12 +214,12 @@ module.exports = {
     },
     {
       type: 'doc',
-      label: 'Release Notes',
+      label: 'Release notes',
       id: 'cli/release-notes'
     },
     {
     type: 'category',
-    label: 'Command Reference',
+    label: 'Command reference',
     link: { type: 'doc', id: 'cli/reference' },
     items: [
       'cli/astro-login',
@@ -183,19 +230,26 @@ module.exports = {
       'cli/astro-context-delete',
       'cli/astro-context-list',
       'cli/astro-context-switch',
-      'cli/astro-completion',
       'cli/astro-deploy',
+      'cli/astro-deployment-airflow-upgrade',
       'cli/astro-deployment-create',
       'cli/astro-deployment-delete',
       'cli/astro-deployment-list',
       'cli/astro-deployment-logs',
+      'cli/astro-deployment-runtime-upgrade',
+      'cli/astro-deployment-service-account',
+      'cli/astro-deployment-team',
       'cli/astro-deployment-update',
+      'cli/astro-deployment-user',
       'cli/astro-deployment-variable-create',
       'cli/astro-deployment-variable-list',
       'cli/astro-deployment-variable-update',
+      'cli/astro-dev-bash',
       'cli/astro-dev-init',
       'cli/astro-dev-kill',
       'cli/astro-dev-logs',
+      'cli/astro-dev-object-export',
+      'cli/astro-dev-object-import',
       'cli/astro-dev-parse',
       'cli/astro-dev-ps',
       'cli/astro-dev-pytest',
@@ -205,9 +259,11 @@ module.exports = {
       'cli/astro-dev-restart',
       'cli/astro-login',
       'cli/astro-logout',
+      'cli/astro-team',
+      'cli/astro-user-create',
+      'cli/astro-user-invite',
       'cli/astro-version',
-      'cli/astro-workspace-list',
-      'cli/astro-workspace-switch',],
+      'cli/astro-workspace',],
   },
   ],
 };

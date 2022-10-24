@@ -20,7 +20,7 @@ Alternatively, you can use [Podman](https://podman.io/) to execute these same co
 To complete this setup, you need:
 
 - Podman 3.1.0+ installed on your local machine.
-- The Astro CLI.
+- A pre-1.0 version of the [Astro CLI](install-cli.md), such as version 0.28.2.
 
 ## Linux Setup
 

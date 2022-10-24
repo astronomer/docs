@@ -15,7 +15,7 @@ This document offers guidelines on the version lifecycle of Astronomer Software.
 - Which versions of Astronomer Software are currently available.
 - Release channels and the maintenance schedule for all versions.
 
-For information on the latest Astronomer Software releases, see [release notes](release-notes.md). For information on compatibility between all versioned software, see [Software Version Compatibility Reference](release-lifecycle-policy.md).
+For information on the latest Astronomer Software releases, see [release notes](release-notes.md). For information on compatibility between all versioned software, see [Software Version Compatibility Reference](version-compatibility-reference.md).
 
 :::info
 
@@ -89,19 +89,19 @@ The following tables contain the exact lifecycle for each published version of A
 
 ### Stable
 
-| Software Version | Release Date     | End of Maintenance Date |
-| ---------------- | ---------------- | ----------------------- |
-| 0.25             | May 11, 2021     | December 2022*         |
-| 0.26             | Nov 23, 2021     | May 2022                |
-| 0.27             | Dec 21, 2021     | June 2022               |
-| 0.28             | Feb 15, 2022     | February 2023           |
-| 0.29             | June 1, 2022     | December 2022           |
+| Software Version | Release Date    | End of Maintenance Date |
+| ---------------- | --------------- | ----------------------- |
+| 0.25             | May 11, 2021    | December 2022*         |
+| 0.28             | Feb 15, 2022    | February 2023           |
+| 0.29             | June 1, 2022    | December 2022           |
+| 0.30             | August 29, 2022 | August 2023 |
 
 ### LTS
 
-| Software Version | Release Date     | End of Maintenance Date |
-| ---------------- | ---------------- | ----------------------- |
-| 0.25             | May 11, 2021     | December 2022*         |
-| 0.28             | Feb 15, 2022     | February 2023           |
+| Software Version | Release Date | End of Maintenance Date |
+| ---------------- | ------------ | ----------------------- |
+| 0.25             | May 11, 2021 | December 2022*         |
+| 0.28             | Feb 15, 2022 | February 2023           |
+| 0.30             | Aug 29, 2022 | August 2023           |
 
 > *Given the wide usage of Astronomer Software v0.25, Astronomer has extended the maintenance period for this version through December 2022.

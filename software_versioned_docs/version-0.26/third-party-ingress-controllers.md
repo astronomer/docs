@@ -149,7 +149,7 @@ Contour ships with support for websockets disabled by default. To use a Contour 
 2. Apply the file to your platform namespace:
 
    ```bash
-   kubectl -n apply <your-platform-namespace> -f proxy.yaml
+   kubectl apply -n <your-platform-namespace> -f proxy.yaml
    ```
 
 > **Note:** Depending on the version of Contour, upgrading from using the default ingress controller to a Contour controller might cause issues. If you are upgrading a platform that used the built-in ingress controller, manually delete the Astronomer Platform Ingress objects in the Astronomer Platform namespace before updating your `config.yaml` file. You can do so using the following commands:

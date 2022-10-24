@@ -14,16 +14,17 @@ Follow this guide to upgrade to any version of Astronomer Software. For informat
 A few notes before you get started:
 - The upgrade process will not affect running Airflow tasks as long as `upgradeDeployments.enabled=false` is set in your upgrade script.
 - Updates will not cause any downtime to Astronomer services, including the Software UI, the Astro CLI, and the Houston API.
+- To avoid potential complications, perform Astronomer Software upgrades in order and include all minor versions in your upgrade sequence. 
 
 ## Step 1: Review Upgrade Considerations
 
-The [Upgrade Considerations](upgrade-astronomer.md#upgrade-considerations) section of this document contains upgrade information for specific Astronomer versions. Review these notes before starting the upgrade process.
+The [Upgrade Considerations](upgrade-astronomer.md#upgrade-considerations) section of this document contains upgrade information for specific Astronomer versions. Review these notes before starting the upgrade process. To avoid potential complications, perform Astronomer Software upgrades in order and include all minor versions in your upgrade sequence.
 
 ## Step 2: Check Permissions
 
 You need Astronomer System Admin permissions to complete version upgrades. To confirm that you're a System Admin, check that you have access to the **System Admin** menu in the Software UI:
 
-![System Admin panel](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
+![System Admin panel](/img/software/admin_panel.png)
 
 You also need permissions to create Kubernetes resources. To confirm that you have the required permissions, run the following commands:
 
@@ -138,13 +139,34 @@ Make changes as needed and rerun the upgrade command from Step 7. Do not continu
 
 This topic contains information about upgrading to specific versions of Astronomer Software. This includes notes on breaking changes, database migrations, and other considerations that might depend on your use case.
 
+### Upgrading to 0.30
+
+#### Running the 0.30 upgrade script with --no-hook
+
+Using the `--no-hook` flag in [Step 7](#step-7-run-astronomers-upgrade-script) results in the upgrade script skipping a necessary database migration job. Because of this, you should not specify this flag when running the upgrade script.
+
+If you do specify the `--no-hook` flag, the upgrade script will return a success message even though it failed, resulting in broken behavior in your upgraded environment.
+
+#### Upgrading to 0.30 when using Azure Database for PostgreSQL
+
+A change in 0.30 enabled the `trgm` extension for PosgreSQL. If you use Azure Database for PostgreSQL as your database backend, you need to enable the `pg_trgm` extension before upgrading to Software 0.30 using either Azure portal or the Azure CLI. See [Azure documentation](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions) for configuration steps.
+If you don't complete this setup before your upgrade, the upgrade will fail.
+
 ### Upgrading to 0.29
 
-#### Minimum Pre-Upgrade Version
+:::caution
 
 If you are currently on Astronomer Software 0.25, 0.26, or 0.27, you must upgrade to version 0.28 before upgrading to 0.29. A direct upgrade to 0.29 from a version lower than 0.28 is not possible.
 
 Follow the standard installation guide to upgrade to Software 0.28, then repeat the process to upgrade to 0.29.
+
+:::
+
+#### Kubernetes duplicate key removal bug in 0.29.3
+
+There is an [unresolved Kubernetes bug](https://github.com/kubernetes/kubernetes/issues/65106) that occurs when upgrading Helm charts that include duplicate keys in an `env` array. If you have a Helm chart with duplicate keys and upgrade to Astronomer Software 0.29.3, all key-value pairs with the duplicate key are removed from your environment.
+
+To preserve duplicate keys in your Helm chart, you can either reapply the values after upgrade or ensure that you use the `--reset-values` flag when running the upgrade script in Step 7.
 
 #### Resync Astronomer's Signing Certificate  
 

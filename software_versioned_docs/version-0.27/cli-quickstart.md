@@ -41,30 +41,18 @@ There are two ways to install any version of the Astronomer CLI:
 
 ### Install with Homebrew
 
-If you have Homebrew installed, run:
+To install the latest supported version of the Astronomer CLI, run:
 
 ```sh
-brew install astro
-```
-
-To install a specific version of the Astro CLI, you'll have to specify `@major.minor.patch`. To install v0.27.0, for example, run:
-
-```sh
-brew install astro@0.27.0
+brew install astro@0.27.4
 ```
 
 ### Install with cURL
 
-To install the latest version of the Astronomer CLI, run:
+To install the latest supported version of the Astronomer CLI, run:
 
-```
-curl -sSL https://install.astronomer.io | sudo bash
-```
-
-To install a specific version of the Astronomer CLI, specify `-s -- major.minor.patch` as a flag at the end of the cURL command. To install v0.27.0, for example, run:
-
-```
-curl -sSL https://install.astronomer.io | sudo bash -s -- v0.27.0
+```sh
+curl -sSL https://install.astronomer.io | sudo bash -s -- v0.27.4
 ```
 
 #### Install the CLI on macOS Catalina+:

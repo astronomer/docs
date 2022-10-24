@@ -3,13 +3,12 @@ sidebar_label: "astro dev start"
 title: "astro dev start"
 id: astro-dev-start
 description: Reference documentation for astro dev start.
+hide_table_of_contents: true
 ---
 
-## Description
+Build your Astro project into a Docker image and spin up a local Docker container for each Airflow component.
 
-Build your Astro project into a Docker image and spin up local a local Docker container for each Airflow component.
-
-This command can be used to rebuild an Astro project and run it locally. For more information, read [Develop and Run a Project Locally](develop-project.md#build-and-run-a-project-locally).
+This command can be used to rebuild an Astro project and run it locally. For more information, read [Build and run a project locally](develop-project.md#build-and-run-a-project-locally).
 
 ## Usage
 
@@ -19,9 +18,11 @@ astro dev start
 
 ## Options
 
-| Option              | Description                                                                                                        | Possible Values             |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------- |
-| `-e`,`--env` | Path to your environment variable file. Default is `.env` | Valid filepaths |
+| Option               | Description                                                                                                                                           | Possible Values                                                  |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `-e`,`--env`         | Path to your environment variable file. Default is `.env`                                                                                             | Valid filepaths                                                  |
+| `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
+| `-n`, `--no-browser` | Starts Airflow without opening a browser for the Airflow UI                                                                                           | None                                                             |
 
 
 ## Examples

@@ -5,11 +5,11 @@ id: create-deployment
 description: Learn how to create an Astro Deployment.
 ---
 
-An Astro Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow, including the Airflow Webserver, Scheduler, and one or more workers.
+An Astro Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow, including the Airflow webserver, scheduler, and one or more workers.
 
 You can create a Deployment from a Workspace on Astro. After you create a Deployment, you can deploy DAGs to it from the Astro CLI or from a continuous delivery (CI/CD) process. All DAGs and tasks on Astro are executed within a Deployment.
 
-Every Deployment is hosted on a single Astro Cluster with its own dedicated resources, which you can customize to meet the unique requirements of your Organization. Every Astro Cluster operates with a primary database that hosts the individual databases for each Deployment.  To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace in the Data Plane. See [Deployment Network Isolation](data-protection.md#deployment-network-isolation).
+Every Deployment is hosted on a single Astro cluster with its own dedicated resources, which you can customize to meet the unique requirements of your Organization. Every Astro cluster operates with a primary database that hosts the individual databases for each Deployment.  To restrict communication between Deployments, resources for each Deployment are isolated within a corresponding Kubernetes namespace in the data plane. See [Deployment network isolation](data-protection.md#deployment-network-isolation).
 
 ## Prerequisites
 
@@ -17,27 +17,36 @@ Every Deployment is hosted on a single Astro Cluster with its own dedicated reso
 
 ## Create a Deployment
 
-If you prefer, you can run the `astrocloud deployment create` command in the Astro CLI to create a Deployment. See [CLI Command Reference](cli-reference/astrocloud-deployment-create.md).
+:::cli
+If you prefer, you can also run the `astro deployment create` command in the Astro CLI to create a Deployment. See [CLI Command Reference](cli/astro-deployment-create.md).
+:::
 
-1. Log in to the [Cloud UI](https://cloud.astronomer.io) and select a Workspace.
-2. Click the **Deployment** button.
+1. In the Cloud UI and select a Workspace.
+
+2. On the **Deployments** page, click **Deployment**.
+
 3. Complete the following fields:
+
     - **Name**: Enter a name for your Deployment.
     - **Astro Runtime**: By default, the latest version of Astro Runtime is selected. The Astro Runtime versions provided in the Cloud UI are limited to patches for the most recent major and minor releases. Deprecated versions of Astro Runtime aren't available.
 
         To upgrade the Astro Runtime version for your Deployment, you’ll need to update your Docker image in your Astro project directory. For more information about upgrading Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md).
 
     - **Description**: Optional. Enter a description for your Deployment.
-    - **Cluster**: Select the Astro Cluster in which you want to create this Deployment.
-4. Optional. Edit the Deployment resource settings. See [Configure Deployment Resources](configure-deployment-resources.md). 
-5. Click **Create Deployment**. 
+    - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
+    - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
 
-    The initial status of all new Deployments is `UNHEALTHY`. This indicates that the Webserver and Scheduler for the Deployment are being created in your Astro Cluster. In a few minutes, the status changes to `HEALTHY`.
+4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with:
 
-## Next Steps
+    - A worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
+    - A single scheduler with 0.5 CPUs and 1.88 GiB of memory.
 
-- [Configure Deployment Resources](configure-deployment-resources.md)
+5. Click **Create Deployment**.
 
-- [Set Environment Variables on Astro](environment-variables.md)
+    The initial status of all new Deployments is `UNHEALTHY`. This indicates that the webserver and scheduler for the Deployment are being created in your Astro cluster. In a few minutes, the status changes to `HEALTHY`.
 
-- [Manage Deployment API Keys](api-keys.md)
+## Next steps
+
+- [Configure Deployment resources](configure-deployment-resources.md)
+- [Set environment variables on Astro](environment-variables.md)
+- [Manage Deployment API keys](api-keys.md)

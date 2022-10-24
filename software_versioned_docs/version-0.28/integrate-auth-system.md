@@ -114,7 +114,7 @@ To start, register the application. As you do so, make sure to specify the Redir
 
 Replace `BASEDOMAIN` with your own. For example, if your basedomain were `astronomer-development.com`, your registration would look like the following:
 
-![application](/img/docs/azure-application.png)
+![application](/img/software/azure-application.png)
 
 ### Enable Access and ID Tokens
 
@@ -125,7 +125,7 @@ From there, head over to 'Authentication' to:
 
 Example:
 
-![authentication.png](/img/docs/azure-authentication.png)
+![authentication.png](/img/software/azure-authentication.png)
 
 ### Enable Azure AD in your config.yaml file
 
@@ -351,7 +351,7 @@ AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME="Custom OAuth" # Only used for custom
 To finalize your configuration, configure the following key values in your identity provider's settings:
 
 - **Grant Code:** Set to "Code" or "Auth Code" depending on your identity provider.
-- **Sign-in Redirect URI:** Set to `[https://houston.<BASE_DOMAIN>:8871/v1/oauth/callback/](https://houston.<BASE_DOMAIN>:8871/v1/oauth/callback/)`. Be sure to include the trailing `/`.
+- **Sign-in Redirect URI:** Set to `https://houston.<BASE_DOMAIN>/v1/oauth/callback/`. Be sure to include the trailing `/`.
 
 ### Step 3: Confirm Your Installation
 
@@ -359,6 +359,6 @@ When you complete this setup, you should be able to see the differences in login
 
 If you configured a fully custom OAuth flow, you should see a new **Log in with Custom Oauth** button on the Astronomer login screen:
 
-![Custom login button on the Astronomer login screen](/img/docs/custom-oauth.png)
+![Custom login button on the Astronomer login screen](/img/software/custom-oauth.png)
 
 You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME` when authenticating using the Astro CLI.

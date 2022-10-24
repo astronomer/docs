@@ -23,7 +23,7 @@ While the tables below reference the minimum compatible versions, we typically r
 | v0.27               | 1.18, 1.19, 1.20, 1.21       | 3.6  | 0.13.5       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.27.x         | All                  |
 | v0.28               | 1.19, 1.20, 1.21       | 3.6  | 0.13.5       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | 0.28.x         | All                  |
 
-For more detail on changes between Software versions, refer to [Astronomer Software Release Notes](release-notes.md).
+For more detail on changes between Software versions, see [Astronomer Software Release Notes](release-notes.md).
 
 > **Note:** On Astronomer v0.23+, new versions of Apache Airflow on Astronomer Certified are automatically made available in the Software UI and CLI within 24 hours of their publication. For more information, refer to [Available Astronomer Certified Versions](ac-support-policy.md#astronomer-certified-lifecycle-schedule).
 

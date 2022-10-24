@@ -52,6 +52,7 @@
       "label": "Customize Airflow",
       "items": [
         "manage-airflow-versions",
+        "upgrade-to-airflow-2",
         "access-airflow-database",
         "kubepodoperator",
         "kubernetes-executor",

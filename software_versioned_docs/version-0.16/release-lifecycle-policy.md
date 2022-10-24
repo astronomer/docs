@@ -17,7 +17,7 @@ This document offers guidelines on the version lifecycle of Astronomer Software.
 
 For information on the latest Astronomer Software releases, see [release notes](release-notes.md). For the release and maintenance policy for Astronomer Certified, see the Certified [Versioning and Maintenance Policy](ac-support-policy.md).
 
-For information on compatibility between all versioned software, see [Software Version Compatibility Reference](release-lifecycle-policy.md).
+For information on compatibility between all versioned software, see [Software Version Compatibility Reference](version-compatibility-reference.md).
 
 ## Release Channels
 
