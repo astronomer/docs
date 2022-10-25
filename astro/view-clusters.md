@@ -16,8 +16,8 @@ In the Cloud UI, click the **Clusters** tab to view information about the cluste
 | Value              | Description                                                                                                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | Name               | The name of the cluster                                                                                                     |
-| Provider           | The cloud provider that the cluster is hosted on                                                                            |
-| Account ID         | The ID of the cloud provider account that hosts your cluster. This is either an AWS account ID or a Google Cloud project ID |
+| Provider           | The cloud provider that hosts the cluster                                                                            |
+| Account ID         | The ID of the cloud provider account that hosts the cluster. This is either an AWS account ID or a Google Cloud project ID |
 | Region             | The cloud provider region where the cluster is hosted                                                                       |
 | VPC subnet         | The range of IP addresses that can be used to connect to the cluster's VPC                                                  |
 | Pod subnet         | GCP only. The range of IP addresses that can be used to connect to the cluster's Pods                                       |
@@ -26,8 +26,8 @@ In the Cloud UI, click the **Clusters** tab to view information about the cluste
 | DB instance type   | The type of instance used for the cluster's primary database                                                                |
 | Node instance type | The instance type used for the cluster's worker nodes                                                                       |
 | Max node count     | The maximum number of worker nodes supported across all Deployments in the cluster                                          |
-| External IPs       | Public IP addresses for connecting the cluster to external services                                                         |
+| External IPs       | The public IP addresses for connecting the cluster to external services                                                         |
 | Updated            | The date and time the cluster's settings were last updated                                                                  |
-| Created            | The date and time at which the cluster was created                                                                          |
+| Created            | The date and time the cluster was created                                                                          |
 
  All users in your Organization have access to this view. For more information about each value, see [Resources required for Astro on AWS](https://docs.astronomer.io/astro/resource-reference-aws), [Resources required for Astro on Azure](https://docs.astronomer.io/astro/resource-reference-azure), or [Resources required for Astro on GCP](https://docs.astronomer.io/astro/resource-reference-gcp)
