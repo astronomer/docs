@@ -51,6 +51,15 @@ The alert email assigned to a Deployment is used to notify recipients of Deploym
     - Click **Delete** next to the email you want to delete.
     - Click **Yes, Continue**.
 
+## Transfer a Deployment to another Workspace 
+
+Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations to another existing Workspace. Only users belonging to the target Workspace can access the Deployment once it is transferred. You can only transfer a Deployment to a Workspace in which you are a Workspace Admin or Editor. 
+
+1. In the Cloud UI, select a Workspace.
+2. Click the **Options** menu of the Deployment you want to transfer, and select **Transfer Deployment**.
+3. Choose the Workspace to which you want to transfer the Deployment. 
+4. Click **Transfer Deployment**.
+
 ## Delete a Deployment
 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted from your data plane. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
