@@ -246,7 +246,6 @@ When hosting your environment, Astronomer adheres to industry best practices and
 
 The setup process assumes that you've already provided Astronomer support with the following information: 
 
-- Your preferred cloud provider. The supported options are: Amazon Web Services (AWS).
 - Your preferred cluster installation region. See the supported region lists for [AWS](resource-reference-aws.md#aws-region).
 - Optional. Your preferred worker instance type for your first cluster. See [AWS cluster configurations](resource-reference-aws.md#worker-node-types).
 - Optional. Your VPC peering requirements for [AWS](install-aws#vpc-peering-prerequisites-optional).
