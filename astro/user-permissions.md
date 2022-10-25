@@ -43,7 +43,7 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Pause or unpause a DAG                          |                      | ✔️                    | ✔️                   |
 | Clear/mark a task instance or DAG run           |                      | ✔️                    | ✔️                   |
 | Push code to Deployments                        |                      | ✔️                    | ✔️                   |
-| Create and Delete Deployments                   |                      | ✔️                    | ✔️                   |
+| Create and delete Deployments                   |                      | ✔️                    | ✔️                   |
 | Transfer Deployments to a Workspace             |                      | ✔️                    | ✔️                   |
 | Create, Update and Delete Environment Variables |                      | ✔️                    | ✔️                   |
 | Create, Update and Delete API Keys              |                      |                      | ✔️                   |
