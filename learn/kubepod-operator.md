@@ -54,7 +54,6 @@ On Astro, the infrastructure needed to run the KubernetesPodOperator with the Ce
 
 Setting up your local environment to use the KubernetesPodOperator can help you avoid time consuming deployments to remote environments.
 
-You can use the [Helm Chart for Apache Airflow](https://airflow.apache.org/docs/helm-chart/stable/index.html) to run open source Airflow within a local Kubernetes cluster. See [Getting Started With the Official Airflow Helm Chart](https://www.youtube.com/watch?v=39k2Sz9jZ2c&ab_channel=Astronomer).
 
 Use the steps below to quickly set up a local environment for the KubernetesPodOperator using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview). Alternatively, you can use the [Helm Chart for Apache Airflow](https://airflow.apache.org/docs/helm-chart/stable/index.html) to run open source Airflow within a local Kubernetes cluster. See [Getting Started With the Official Airflow Helm Chart](https://www.youtube.com/watch?v=39k2Sz9jZ2c&ab_channel=Astronomer).
 
