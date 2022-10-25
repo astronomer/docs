@@ -9,6 +9,8 @@ import {siteVariables} from '@site/src/versions';
 
 Pushing your Astro project, including your DAG code, to a Deployment with the Astro CLI is the foundation for managing changes on Astro. It also serves as the foundation for any [CI/CD](ci-cd.md)-based deploys.
 
+Follow the steps in this document to push your Astro project to a Deployment. To deploy only DAG code changes to Astro, see [DAG-only deploys](#dag-only-deploys).
+
 ## Prerequisites
 
 - The [Astro CLI](cli/overview.md) installed in an empty directory.
@@ -18,9 +20,9 @@ Pushing your Astro project, including your DAG code, to a Deployment with the As
 
 ## Step 1: Authenticate to Astro
 
-Once you've tested your DAGs locally, you're ready to push them to Astro. To start, authenticate to the Astro CLI by running:
+Once you've tested your Astro project locally, you're ready to push it to a Deployment. To start, authenticate to the Astro CLI by running:
 
-```
+```sh
 astro login
 ```
 
@@ -32,11 +34,11 @@ If you have [Deployment API key](api-keys.md) credentials set as OS-level enviro
 
 :::
 
-## Step 2: Push DAGs to an Astro Deployment
+## Step 2: Push your Astro project to an Astro Deployment
 
-To deploy your DAGs, run:
+To deploy your Astro project, run:
 
-```
+```sh
 astro deploy
 ```
 
@@ -44,12 +46,7 @@ This command returns a list of Deployments available in your Workspace and promp
 
 After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails.
 
-If your code passes the parse, the CLI builds your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro.
-
-:::tip
-
-To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
-:::
+If your code passes the parse, the CLI builds your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
 :::tip
 
@@ -69,7 +66,7 @@ After the deploy completes, Docker image information for your Deployment is avai
 
     ![Docker image information](/img/docs/image-tag-airflow-ui-astro.png)
 
-## What happens during a code deploy
+## What happens during a project deploy
 
 When you deploy code to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, DAGs, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running the Apache Airflow application on Astro.
 
@@ -93,6 +90,42 @@ Astronomer sets a grace period of 24 hours for all workers to allow running task
 If you want to force long-running tasks to terminate sooner than 24 hours, specify an [`execution_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#timeouts) in your DAG's task definition.
 
 :::
+
+## DAG-only deploys
+
+Running `astro deploy` without additional flags deploys your entire Astro project, including your DAG code, Dockerfile, and dependencies. There are some scenarios where you need to deploy only your Astro project's `dags` directory:
+
+- You work on an Astro project where one team member is responsible for project configuration changes and another team member is responsible for DAG authoring.
+- You want to deploy DAGs without building a Docker image or using the Astro CLI. For example, you upload DAGs to a shared S3 bucket.
+- You want to deploy DAG changes without downtime to your Deployment. 
+
+In these cases, you can enable DAG-only deploys on a Deployment.
+
+### Enable DAG-only deploys
+
+```sh
+astro deployment update --dag-deploy enable
+```
+
+The CLI prompts you to select a Deployment to enable the feature on. After you enable the feature, anyone with access to the Deployment can deploy DAGs.
+
+:::caution 
+
+Enabling DAG deploys pauses all DAGS in a Deployment. Any active DAG runs will finish, but new DAG runs will not be scheduled until you unpause the DAGs from the Deployment's Airflow UI.
+
+:::
+
+### Trigger a DAG-only deploy
+
+Run the following command to deploy only your current `dags` directory to a Deployment:
+
+```sh
+astro deploy --dags
+```
+
+This command pushes DAGs to a component on Astro that handles loading DAGs into your Airflow environment. DAG only deploys do not disrupt any active task runs, resulting in zero downtime for the Deployment. If you deploy changes to a currently running DAG, any active task runs finish using code from before the Deploy. Any new task runs are scheduled using code from after the deploy. 
+
+DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
 
 ## Related documentation
 
