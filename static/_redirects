@@ -26,6 +26,7 @@
 
 # Docs with redundant Learn guides 
 /astro/deferrable-operators /learn/deferrable-operators 301
+/astro/astro-python-sdk /learn/astro-python-sdk-etl 301
 /astro/data-lineage-concepts /learn/airflow-openlineage 301
 /astro/kubepodoperator-local /learn/kubepod-operator 301
 /software/deferrable-operators /learn/deferrable-operators 301

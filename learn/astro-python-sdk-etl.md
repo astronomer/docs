@@ -145,8 +145,8 @@ classic_etl_dag = classic_etl_dag()
 
 Although you achieved your ETL goal with the DAG, the following limitations made this implementation more complicated:
 
-- Since there is no way to pass results from the [`SnowflakeOperator`](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) query to the next task, you had to write your query in a `_DecoratedPythonOperator` function using the [`SnowflakeHook`](https://registry.astronomer.io/providers/snowflake/modules/snowflakehook) and explicitly do the conversion from SQL to a dataframe yourself.
-- Some of your transformations are better suited to SQL, and others are better suited to Python, but transitioning between the two requires extra boilerplate code to explicitly make the conversions.
+- Since there is no way to pass results from the [`SnowflakeOperator`](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) query to the next task, you had to write a query in a `_DecoratedPythonOperator` function using the [`SnowflakeHook`](https://registry.astronomer.io/providers/snowflake/modules/snowflakehook) and explicitly do the conversion from SQL to a dataframe yourself.
+- Some of the transformations are better suited to SQL, and others are better suited to Python, but transitioning between the two requires extra boilerplate code to explicitly make the conversions.
 - While the TaskFlow API makes it easier to pass data between tasks, it stores the resulting dataframes as XComs by default. This means that you need to worry about the size of your data. You could implement a custom XCom backend, but that would require additional configuration.
 - Loading data back to Snowflake after the transformation is complete requires writing extra code to store an intermediate CSV in Amazon S3.
 
@@ -244,3 +244,12 @@ The key differences with this implementation are:
 - You didn't have to redefine your Airflow connections in any tasks that were downstream of your original definitions (such as `load_file` and `create_reporting_table`). Any downstream task that inherits from a task with a defined connection can use the same connection without additional configuration.
 
 Overall, your DAG with the Astro Python SDK is shorter, simpler to implement, and easier to read. This allows you to implement even more complicated use cases easily while focusing on the movement of your data.
+
+## Related documentation
+
+To learn more about the Astro Python SDK, see:
+
+- [Write a DAG with the Astro Python SDK](https://docs.astronomer.io/learn/astro-python-sdk): A step-by-step tutorial for setting up Airflow and running an ETL pipeline using the Astro Python SDK.
+- [readthedocs.io](https://astro-sdk.readthedocs.io/en/latest/): Complete SDK documentation, including API and operator references.
+- [Astro Python SDK README](https://github.com/astronomer/astro-sdk): Includes an overview of the SDK, a quickstart, and supported database types.
+- [Astro Python SDK Webinar](https://www.astronomer.io/events/recaps/the-astro-python-sdk/): A recorded demonstration of the SDK led by Astronomer.
