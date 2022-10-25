@@ -17,6 +17,10 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## October 25, 2022 
 
+### Transfer a Deployment to another Workspace
+
+You can now transfer a Deployment, including all of its DAGs and configurations, to another Workspace for which you have Admin or Editor access. You might want to transfer a Deployment if the purpose of a Deployment has changed such that it belongs to a new set of users within your Organization, or if you created a Deployment in the wrong Workspace by mistake. See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
+
 ### Additional improvements 
 
 - In the Cloud UI, you can now view a cluster's external IP addresses in the **Clusters** tab.
