@@ -1,4 +1,4 @@
--
+---
 sidebar_label: 'Run SQL models'
 title: 'Run SQL models with the Astro CLI'
 id: sql-cli
@@ -11,101 +11,29 @@ This feature is in alpha and is not yet recommended for production workflows.
 
 :::
 
-The Astro CLI `sql` or `flow` plugin offers a set of tools for those who want to create SQL workflows without having to use Python or and run them locally without having to setup Airflow.
+Use the Astro CLI's SQL commands to run SQL workflows without having to write Python or set up Airflow. The Astro CLI handles all of the required backend configuration for running SQL locally using Airflow's reliability and observability. Using an Airflow connection, you can output the results of your SQL queries to the database of your choice. 
 
-## Concepts
+## Enable Astro SQL commands 
 
-### Project
+To enable Astro SQL commands, run the following command: 
 
-A directory containing necessary files and paths to run the SQL CLI. Its main contents are configurations per environment and SQL workflows.
-
-### Environment
-
-A set of configurations (mostly connections) specific to an environment. It allows users to run pipelines locally, with the flexibility of using databases available in different environments (e.g. dev, QA, staging, production).
-
-### Connection
-
-The details necessary to connect to a SQL database. Usually this includes hosts and passwords. The SQL plugin supports the following databases
-* Postgres
-* SQite
-* BigQuery
-* Snowflake
-* Redshift
-
-Examples of how to configure them are detailed at the [sample configuration](https://github.com/astronomer/astro-sdk/blob/main/sql-cli/include/base/config/dev/configuration.yml).
-
-### Workflow
-
-A folder containing one or more SQL models which define a pipeline. These models may depend on each other or may be independent. Workflows can be seen as an abstraction to Airflow DAGs.
-
-### SQL model
-
-A SQL file declaring a transformation that can be run independently or in conjunction to other SQL models. SQL models can be seen as an abstraction to Airflow tasks.
-
-
-## 1. Installation
-
-The SQL features are available since Astro CLI 1.7. To install it, [follow the instructions](install-cli.md).
-
-Once the SQL CLI is installed, enable the SQL plugin by running:
-
-```
+```sh
 astro config set -g beta.sql_cli true
 ```
 
-## 2. Usage
+## Create a new SQL project 
 
-### 2.1. Basic commands
+A SQL project contains the set of files necessary to run SQL queries from the Astro CLI, including YAML files for configuring your SQL environment and directories for storing SQL workflows. A SQL project can exist as its own top-level directory or within an existing Astro project. 
 
-Check the version of the SQL plugin:
+To create a SQL project, run the following command in either an empty directory or an existing Astro project:
 
-```
-$ astro flow version
-Astro SQL CLI 0.1.
-```
-
-Find out more about it:
-```
-$ astro flow about
-Find out more: https://github.com/astronomer/astro-sdk/sql-cli
+```sh
+astro flow init
 ```
 
-Learn about the existing commands:
-```
-astro flow --help
-```
+The command generates the following files: 
 
-### 2.2. Initialize a SQL project
-
-Learn about the project initialization by running:
-
-```
-astro flow --help
-```
-
-It is also possible to initialise a SQL CLI project inside or outside the existing Astro CLI project.
-
-During initialization, the version 0.1 of the SQL plugin creates sample databases, configurations and workflows.
-
-#### 2.2.1. Initializing a SQL project in a new directory
-
-If the user did not initialise an Astro CLI project, this is the recommended approach for them to initialise the SQL CLI project:
-
-```
-astro flow init new_proj
-```
-
-Or
-
-```
-mkdir new_proj
-cd new_proj
-astro flow init 
-```
-
-This command creates the following directories and files:
-
-```
+```sh
 new_proj/
 ├── config
 │   ├── default
@@ -123,144 +51,102 @@ new_proj/
         └── joint_orders_customers.sql
 ```
 
-####  2.2.2. Existing Astro CLI project
+Each SQL project is composed of three directories:
 
-If a user has an existing Astro CLI project and would like to extend it with the SQL plugin experience, it is possible to accomplish this by running the following command:
+- `config`: This directory contains configurations for different **environments** for running SQL. These configurations are mainly used for storing Airflow connections to external databases. Each SQL environment has one subdirectory containing exactly one file named `configuration.yml`. The default SQL project includes `default` and `dev` environments.
+- `workflows`: This directory contains subdirectories for SQL **workflows**. Each workflow subdirectory contains one or more related SQL files that should be run together. The default SQL project includes a few example workflows that you can run out of the box. 
+- `data`: This directory contains the data for which to run your SQL workflows, formatted as `.db` files. The default SQL project includes example data for films and a simple retail platform.
 
-```
-# Assuming the following commands were previously run:
-# mkdir new_proj
-# cd new_proj
-# astro dev init
+## Develop your SQL project 
 
-astro flow init --airflow-dags-folder dags
-```
+If you have existing `.sql` files and datasets, developing a SQL project that runs with Airflow is as simple as putting files in the right places.
 
-It will create the same directories and files as 2.2.1.
+### Create SQL workflows 
 
-### 2.3. Validate the database connections
+To run SQL as workflows, add your `.sql` files to one of your workflow subdirectories in `workflows`. All SQL files in a workflow run together when you run `astro flow run`. See [Run a SQL workflow](#run-a-sql-workflow).
 
-Find out more about the validate command by running
+If your `.sql` file has a `SELECT` statement, your SQL workflow will create a table in your target database named after the `.sql` file.
 
-```
-astro flow validate --help
-```
+SQL files within a workflow can be dependent on each other using Jinja templating.
 
-It is possible to run validate from within and from outside the project directory.
+### Add data to test
 
-The connections declared in the default environment can be tested without using the flag `--env`.
+Add all data to run your SQL workflows with in the `data` directory.
 
-#### Requirements for this command to work
+### Configure environments and Airflow connections
 
-It assumes the user has already initialised a SQL CLI project.
+An environment is a set of configurations that define the Airflow environment in which your SQL will run. Each environment is defined as a subdirectory in the `config` directory containing a single `configuration.yml` file. 
 
-The SQL CLI project should contain:
+An environment requires an Airflow connection to the external databases where you will load the results of your SQL workflows. You can configure one or multiple connections withing a single `configuration.yml` file. To configure a connection for an environment, add the connection's key value pairs in YAML format to the environment's `configuration.yml` file. 
 
-a) a folder `config` containing a sub-folder with the environment of interest. Each subfolder contains a `configuration.yaml` file that has information about how to access databases.
+See [Managing connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) for a list of connection types and required values for each type. For example, a Snowflake connection in `dev/configuration.yml` might look like the following: 
 
-#### 2.3.1. From outside the project directory
-It is possible to validate all the connections from a particular environment. This is how to validate all the connections from the `dev` environment:
-
-```
-astro flow validate new_proj --env dev
-```
-
-#### 2.3.2. From within the directory
-
-The following command allows users to validate the `default` environment connections from within the SQL CLI project directory.
-
-```
-astro flow validate
+```yaml
+snowflake_default:
+  login: mylogin
+  password: mypassword
+  schema: myschema
+  account: myaccount
+  database: MYDATABASE
+  region: us-east-1
+  warehouse: MYWAREHOUSE
+  role: ADMIN
 ```
 
-### 2.4. Run a SQL workflow
+Note that Airflow connections configured in this directory are not accessible to your Astro project. Similarly, connections configured in your Astro project are not accessible to your SQL project. 
 
-It is possible to run workflows locally independent of Airflow.
+#### Test Airflow connections
 
-As of 0.1, each SQL model is being materialised as a table in the database being referenced, with the same name as the SQL file.
+To test all configured connections within an environment, run the following command from your SQL project directory:
 
-Find out more about the run command by running
-
-```
-astro flow run --help
+```sh
+astro flow validate --environment=<env-directory-name>
 ```
 
-Users can run it from within and from outside the project folder by using the flag `project_dir`. Unless specified, it uses the default environment.
+This command runs Airflow's [connection testing tool](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections) for all connections configured in the `configuration.yml` file of your environment subdirectory. 
 
-#### Requirements for this command to work
+You can also test individual connections within an environment. For example, to test a `snowflake_default` connection in the `dev/configuration.yml`, you would run the following command to test the connection:
 
-It assumes the user has already initialised a SQL CLI project.
-
-The SQL CLI project directory should contain:
-
-a) a folder `config` containing a sub-folder with the environment of interest. Each subfolder contains a `configuration.yaml` file that has information about how to access databases.
-
-b) a folder within `workflows` with the name of the workflow we're attempting to run. It should contain at least one SQL file. 
-
-Unless the user initialised the project with the parameters `--airflow-home` and `--airflow-dags-folder`, it will also assume there is a folder `.airflow` in the root of the project directory. By default, this directory will have a folder per environment containing their `airflow.cfg` and `airflow.db`. As part of the run procedure, SQL workflows are converted into Airflow Python DAGs and stored in the folder `.airflow/dags` (or `--airflow-dags-folder`).
-
-
-#### 2.4.1. From outside the project directory
-
-It is possible to run the `example_templating` workflow using the database credentials declared in the **dev** environment by running:
-
-```
-astro flow run example_templating --env dev --project-dir new_proj
+```sh
+astro flow validate --connection=snowflake_default --environment=dev
 ```
 
-This workflow uses the sample SQlite database `data/imdb.db`. It selects some of the rows of `movies` and creates a new table called `top_animations`, since that is the name of the `.sql` file with the `SELECT` statemnet.
+## Run a SQL workflow
 
-```
-$ sqlite3 data/imdb.db  
-SQLite version 3.38.2 2022-03-26 13:51:10
-Enter ".help" for usage hints.
-sqlite> .tables
-movies          top_animations
-sqlite> select * from top_animations;
-Toy Story 3 (2010)|8.3
-Inside Out (2015)|8.2
-How to Train Your Dragon (2010)|8.1
-Zootopia (2016)|8.1
-How to Train Your Dragon 2 (2014)|7.9
+To run a SQL workflow in your project, run the following command: 
+
+```sh
+astro flow run <workflow-directory> --connection=<your-connection> --environment=<your-environment>
 ```
 
-#### 2.4.2. From within the directory
+This command automatically builds and runs a DAG based solely on the configurations in your project directory. For example, consider the following command using the default SQL project assets:
 
-
-The following command allows users to run the `example_basic_transform` using the **default** database connections:
-
-```
-astro flow run example_basic_transform
+```sh
+astro flow run example_templating --connection=snowflake_default --environment=dev
 ```
 
+After running this command, the CLI:
 
-### 2.5. Export a SQL workflow as an Airflow DAG
+- Creates a DAG based on the provided information. Because the SQL files in `example_templating` are dependent on each other, the CLI creates a DAG with two tasks based on jinja templating. The DAG is available to view in `<your-sql-project/.airflow/dags`.
+- Runs the DAG. If the SQL project exists in an Astro project, the CLI uses the Astro project's `airflow.cfg` and `airflow.db` files to start an Airflow environment. If the SQL project exists on its own, the CLI uses default `airflow.cfg` and `airflow.db` files from the SQL project. Specifically, the DAG:
+    - Connects to Snowflake using the `snowflake_default` connection configured in `dev/configuration.yml`.
+    - Creates a table named `filtered_orders` and runs `filtered_orders.sql` to populate the table with data from `data/retail.db`. A table is named after the `.sql` file which includes the `SELECT` statement that creates the table. 
+    - Creates a table named `joint_orders_customers` and runs `joint_orders_customers.sql` to populate the table using data from `filtered_orders`.
 
+## Export a SQL workflow as a DAG
 
-An alternative to running the workflow using the SQL CLI command line is to export it as a DAG, which Airflow can run like any other DAG.
-
-The DAG export can happen implicitly or explicitly. The implicit generation can be configured during initialisation by using the flag `--airflow-dags-folder`. If this flag is set, all DAGs will be exported to the desired folder when flow run  is used.
-
-The explicit approach consists in using the flow generate command.
-
-Find out more about the run command by running
-
-```
-astro flow generate --help
-```
-
-#### 2.5.1. From outside the project directory
-
-It is possible to export the `example_templating` as a DAG by running:
+Export a SQL workflow as a DAG using the following command: 
 
 ```
-astro flow generate example_templating --env dev --project-dir new_proj
+astro flow generate <your-sql-workflow> --env=<your-env> --airflow-dags-folder=<your-dags-folder>
 ```
 
-6.2. From within the directory
-The following command allows users to run the `example_basic_transform` using the **default** database connections:
+This command automatically builds a DAG that runs your workflow and exports it to `<your-dags-folder>` in your SQL project. If the DAGs directory doesn't already exist, the CLI creates it for you. 
 
-```
-astro flow generate example_basic_transform
+For example, to export a DAG that runs the `example_templating` workflow based on the `dev` environment to a directory named `sql_dags`, you would run: 
+
+```sh
+astro flow generate example_templating --env=dev --airflow-dags-folder=sql_dags
 ```
 
+After you run this command, you can add the DAG to an existing Astro project and run it locally or deploy it to Astro.
