@@ -13,6 +13,20 @@ This feature is in alpha and is not yet recommended for production workflows.
 
 Use the Astro CLI's SQL commands to run SQL workflows without having to write Python or set up Airflow. The Astro CLI handles all of the required backend configuration for running SQL locally using Airflow's reliability and observability. Using an Airflow connection, you can output the results of your SQL queries to the database of your choice. 
 
+## Prerequisites 
+
+To use the Astro CLI's SQL commands, you need
+
+- The Astro CLI
+- Docker
+- An external database service which uses one of the following databases:
+- 
+    - Postgres
+    - SQlite
+    - BigQuery
+    - Snowflake
+    - Redshift
+
 ## Enable Astro SQL commands 
 
 To enable Astro SQL commands, run the following command: 
