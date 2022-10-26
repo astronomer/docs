@@ -59,11 +59,11 @@ Each SQL project is composed of three directories:
 
 ## Develop your SQL project 
 
-If you have existing `.sql` files and datasets, developing a SQL project that runs with Airflow is as simple as putting files in the right places.
+If you have existing `.sql` files and datasets, developing a SQL project that runs with Airflow is as simple as adding files to a few directories.
 
 ### Create SQL workflows 
 
-To run SQL as workflows, add your `.sql` files to one of your workflow subdirectories in `workflows`. All SQL files in a workflow run together when you run `astro flow run`. See [Run a SQL workflow](#run-a-sql-workflow).
+To run SQL as workflows, add your `.sql` files to one of your workflow subdirectories in `workflows`. All SQL files in a given workflow run together when you run `astro flow run`. See [Run a SQL workflow](#run-a-sql-workflow).
 
 If your `.sql` file has a `SELECT` statement, your SQL workflow will create a table in your target database named after the `.sql` file.
 
@@ -71,7 +71,7 @@ SQL files within a workflow can be dependent on each other using Jinja templatin
 
 ### Add data to test
 
-Add all data to run your SQL workflows with in the `data` directory.
+Add all data to run your SQL workflows with in the `data` directory of your project.
 
 ### Configure environments and Airflow connections
 
