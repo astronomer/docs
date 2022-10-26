@@ -17,10 +17,10 @@ Use the Astro CLI's SQL commands to run SQL workflows without having to write Py
 
 To use the Astro CLI's SQL commands, you need
 
-- The Astro CLI
-- Docker
+- The [Astro CLI](overview.md)
+- [Docker Desktop](https://www.docker.com/)
 - An external database service which uses one of the following databases:
-- 
+  
     - Postgres
     - SQlite
     - BigQuery
