@@ -12,6 +12,21 @@ module.exports = {
     "overview",
     {
       type: "category",
+      label: "Quick Start",
+      items: [
+        "quick-start/create-project",
+        "quick-start/create-pipeline",
+        "quick-start/first-cell",
+        "quick-start/connecting-to-a-database",
+        // "quick-start/create-python-cell",
+        // "quick-start/create-sql-cell",
+        // "quick-start/running-modes",
+        // "quick-start/deploying",
+        // "quick-start/next-steps",
+      ],
+    },
+    {
+      type: "category",
       label: "Concepts",
       items: [
         "concepts/project",

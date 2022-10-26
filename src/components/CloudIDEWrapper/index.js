@@ -14,11 +14,6 @@ export default function DocItem(props) {
   return (
     <DocProvider content={props.content}>
       <HtmlClassNameProvider className={docHtmlClassName}>
-        <Admonition type="danger">
-          These docs have been prepared for our Nov 1 public preview launch.
-          They are not yet ready for public consumption, and you may find
-          inconsistencies with the current state.
-        </Admonition>
         <Admonition type="caution">
           The Cloud IDE is currently in public preview and features are subject
           to change. If you have feedback or discover bugs, please reach out to

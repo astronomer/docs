@@ -1,5 +1,5 @@
 ---
-sidebar_label: "Overview"
+sidebar_label: Overview
 title: Astro Cloud IDE
 id: overview
 description: Learn how to build pipelines with the Cloud IDE.
