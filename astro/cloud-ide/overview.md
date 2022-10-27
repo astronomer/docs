@@ -7,7 +7,6 @@ description: Learn how to build pipelines with the Cloud IDE.
 
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
-import AstroCard from '@site/src/components/AstroCard';
 
 <p class="DocItem__header-description">
   A notebook-style interface for writing and testing pipelines with no Airflow knowledge or local setup required.
@@ -41,5 +40,3 @@ import AstroCard from '@site/src/components/AstroCard';
     description="Using our out-of-the-box CI/CD, you can deploy your DAG to Astro in just a few clicks."
   />
 </LinkCardGrid>
-
-<AstroCard />
