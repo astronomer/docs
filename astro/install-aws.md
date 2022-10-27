@@ -249,7 +249,6 @@ When VPC peering with Astronomer is complete, configure and validate the followi
 
 Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
 
-
 ## Prerequisites
 
 The setup process assumes that you've already provided Astronomer support with the following information: 
