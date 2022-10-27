@@ -19,7 +19,7 @@ This guide provides instructions for provisioning additional clusters within you
 
 ## Prerequisites
 
-To create an Astro cluster on your existing AWS, Microsoft Azure, or Google Cloud Platform (GCP) cloud instance, you'll need the following:
+To create an Astro cluster on AWS, Microsoft Azure, or Google Cloud Platform (GCP), you'll need the following:
 
 - An activated data plane.
 - Permissions to configure IAM in the dedicated account for Astro on your cloud.

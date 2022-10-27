@@ -9,11 +9,15 @@ sidebar_custom_props: { icon: 'img/aws.png' }
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Two options are available to complete the Astro installation process on AWS. You can install Astro on your existing AWS instance, or you can host your data on the Astronomer cloud.
+The Astro data plane on Amazon Web Services (AWS) runs on Elastic Kubernetes Service (EKS). You have two options to install Astro on AWS:
 
-Creating Astro clusters on the Astronomer cloud eliminates the need for your organization to manage a dedicated cloud account for Astro.
+- Create an Astro cluster in a dedicated AWS account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
+- Create an Astro cluster in a dedicated AWS account that's hosted and owned by Astronomer. This removes the complexity of adding another AWS account to your network.
 
-For a complete list of the AWS resources that Astronomer support provisions in your AWS account, see [Resource usage](resource-reference-aws.md).
+With the two options, the user experience is identical and Astronomer is responsible for managing Astro. The differences between the two options are security and networking.
+
+
+For a list of the AWS resources and configurations that Astronomer supports, see [AWS resource reference](resource-reference-aws.md). For more information about the shared responsibility model, see [Shared responsibility model](shared-responsibility-model.md).
 
 <Tabs
     defaultValue="byoc"
@@ -24,7 +28,7 @@ For a complete list of the AWS resources that Astronomer support provisions in y
     ]}>
 <TabItem value="byoc">
 
-To install Astro on your existing AWS cloud instance, you'll complete the following tasks:
+To install Astro in a dedicated AWS account owned by your organization, you'll complete the following tasks:
 
 - Create an account on Astro.
 - Share AWS account information with Astronomer support.
@@ -101,7 +105,7 @@ If you want to continue with the second option, you'll additionally need:
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
+    If you're the first person in your Organization to authenticate, you'll be granted Organization owner permissions. You can create a Workspace and add other team members to the Workspace without the assistance of Astronomer support. See [Create a Workspace](manage-workspaces.md#create-a-workspace) and [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
 ## Retrieve an external ID from the Cloud UI
 
@@ -111,7 +115,7 @@ You must be an Organization Owner to view the external ID. If you are not an Org
 
 ## Create a cross-account IAM role for Astro
 
-Use the external ID you saved from Step 2 to create a cross-account IAM role for Astro. Astronomer recommends using the AWS Management Console to create the role.
+Use the external ID to create a cross-account IAM role for Astro. Astronomer recommends using the AWS Management Console to create the role.
 
 <Tabs
     defaultValue="managementconsole"
@@ -214,7 +218,7 @@ After creating the AWS account, provide Astronomer support with the following in
 - Your preferred node instance type.
 - Your preferred maximum node count.
 
-If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws.md).
+If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
 
 ## Astronomer support creates the cluster
 
@@ -239,7 +243,7 @@ This process can take some time. Wait for confirmation that the installation was
 
 <TabItem value="astronomer hosted data plane">
 
-When hosting your environment, Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
+Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
 
 
 ## Prerequisites
@@ -255,7 +259,7 @@ If you haven't provided this information to Astronomer support, contact your Ast
 
 ## Astronomer support creates the cluster
 
-Astronomer support creates your first cluster on the Astronomer cloud after you've provided your setup information.
+Astronomer support creates your first Astro cluster in a dedicated AWS account after you've provided your setup information.
 
 Wait for confirmation that the installation is successful before you access Astro and create a Deployment.
 
