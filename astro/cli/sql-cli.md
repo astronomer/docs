@@ -136,6 +136,11 @@ If your `.sql` file has a `SELECT` statement, your SQL workflow will create a ta
 
 SQL files within a workflow can be dependent on each other using Jinja templating.
 
+:::tip 
+
+If you define a database connection in a `.sql` file with a downstream dependency, the downstream `.sql` file will automatically inherit the database connection information. 
+
+::: 
 
 ## Run a SQL workflow
 
