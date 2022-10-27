@@ -55,7 +55,10 @@ module.exports = {
             {
               type: "category",
               label: "Reference",
-              items: ["cloud-ide/reference/permissions"],
+              items: [
+                "cloud-ide/reference/permissions",
+                "cloud-ide/reference/security",
+              ],
             },
           ],
         },
