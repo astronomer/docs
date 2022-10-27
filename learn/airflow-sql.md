@@ -237,7 +237,7 @@ First, create a DAG that pulls COVID data from an [API endpoint](https://covidtr
 
 ```python
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python_operator import PythonOperator
 from plugins.operators.s3_to_snowflake_operator import S3ToSnowflakeTransferOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
@@ -282,7 +282,7 @@ with DAG('covid_data_s3_to_snowflake',
          catchup=False
          ) as dag:
 
-    t0 = DummyOperator(task_id='start')   
+    t0 = EmptyOperator(task_id='start')   
 
     for endpoint in endpoints:
         generate_files = PythonOperator(
