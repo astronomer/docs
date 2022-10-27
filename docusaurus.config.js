@@ -60,13 +60,6 @@ module.exports = {
           activeBaseRegex: '^(\/astro)(?!(\/cli))',
         },
         {
-          to: '/cloud-ide/overview',
-          label: 'Cloud IDE',
-          position: 'left',
-          activeClassName: 'navbar__link--active',
-          activeBaseRegex: 'cloud-ide',
-        },
-        {
           to: '/astro/cli/overview',
           label: 'Astro CLI',
           position: 'left',
@@ -239,19 +232,6 @@ module.exports = {
         editCurrentVersion: true,
         sidebarPath: require.resolve('./sidebarsLearn.js'),
         path: 'learn',
-      },
-    ],
-    [
-      '@docusaurus/plugin-content-docs',
-      {
-        id: 'cloud-ide',
-        routeBasePath: 'cloud-ide',
-        editUrl: ({ docPath }) =>
-          `https://github.com/astronomer/docs/blob/main/cloud-ide/${docPath}`,
-        editCurrentVersion: true,
-        sidebarPath: require.resolve('./sidebarsCloudIde.js'),
-        path: 'cloud-ide',
-        docItemComponent: '@site/src/components/CloudIDEWrapper/index.js'
       },
     ],
     [
