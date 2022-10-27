@@ -38,7 +38,6 @@ Astronomer support will create a cluster within your AWS account that hosts the 
 
 ## Prerequisites
 
-- A dedicated AWS account with minimum EC2 service quotas.
 - An AWS IAM user with the following permissions:
     - `cloudformation:*`
     - `GetRole`
@@ -50,6 +49,7 @@ Astronomer support will create a cluster within your AWS account that hosts the 
     - `UpdateAssumeRolePolicy`
 
    See [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
+- A dedicated AWS account with minimum EC2 service quotas.
 - A subscription to the [Astro Status Page](https://status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
     - `https://cloud.astronomer.io/`
@@ -109,9 +109,13 @@ If you want to continue with the second option, you'll additionally need:
 
 ## Retrieve an external ID from the Cloud UI
 
-In the Cloud UI, open the **Settings** tab and copy the value in **AWS EXTERNAL ID**. This external ID is a unique identifier that Astro uses to connect to your AWS account. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
-
 You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the field will not appear in the Cloud UI.
+
+1. In the Cloud UI, click the **Settings** tab.
+
+2. Click **Show** in the **AWS External ID** field and then click **Copy**. This external ID is a unique identifier that Astro uses to connect to your AWS account. 
+
+3. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
 ## Create a cross-account IAM role for Astro
 
@@ -220,24 +224,24 @@ After creating the AWS account, provide Astronomer support with the following in
 
 If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
 
+If you need to VPC peer with Astronomer, provide the following information to your Astronomer representative:
+
+- Subnet CIDRs (RFC 1918 IP Space).
+- VPC Name/ID and region for peering with Astronomer. This is accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/).
+- The IPs of your DNS servers.
+
 ## Astronomer support creates the cluster
 
 After you've created the cross-account IAM role for Astro, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support will finish creating the cluster in your AWS account.
 
 This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
 
-> **Note**: If you need to VPC peer with Astronomer, additionally provide the following information to your Astronomer representative:
->
->- Subnet CIDRs (RFC 1918 IP Space).
->- VPC Name/ID and region for peering with Astronomer. This is accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/).
->- The IPs of your DNS servers.
->
-> You then need to accept a VPC peering request from Astronomer after Astro is installed. To accept the request, follow [Creating and accepting a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html) in AWS documentation.
->
-> Once VPC peered with Astronomer, configure and validate the following to ensure successful network communications between Astro and your resources:
->
->- Egress Routes on Astronomer Route Table
->- [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-tasks) and/or [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#working-with-security-groups) rules of your resources
+If you submitted VPC peering request, you'll need to accept the request from Astronomer after Astro is installed. To accept the request, see [Create a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html) in AWS documentation.
+
+When VPC peering with Astronomer is complete, configure and validate the following items to ensure successful network communications between Astro and your resources:
+
+- Egress Routes on Astronomer Route Table
+- [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-tasks) and/or [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#working-with-security-groups) rules of your resources
 
 </TabItem>
 
