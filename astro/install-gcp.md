@@ -50,7 +50,7 @@ For more information about managing Google Cloud projects, see [GCP documentatio
 
 For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
 
-### VPC Peering Prerequisites (Optional)
+### VPC peering prerequisites (optional)
 
 If any of your GCP resources are on a private network, you can access them using one of the following options:
 
@@ -124,27 +124,25 @@ Once you've activated your data plane, provide Astronomer with:
 
 If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with a node pool of `e2-standard-4` nodes. For more information, see [GCP resource reference](resource-reference-gcp.md).
 
-:::info VPC Peering with Astronomer
+### VPC peering with Astronomer
 
 Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
 
 - VPC Name/ID and region for peering with Astronomer.
 - The IPs of your DNS servers.
 
-You then need to accept a VPC peering request from Astronomer after Astro is installed. To accept the request, follow [Using VPC network peering](https://cloud.google.com/vpc/docs/using-vpc-peering) in GCP documentation.
-
-Once VPC peered with Astronomer, configure and validate the following to ensure successful network communications between Astro and your resources:
-
-- [Egress routes](https://cloud.google.com/vpc/docs/routes#routing_in) on Astronomer's route table
-- [Network ACLs](https://cloud.google.com/storage/docs/access-control/lists) and/or [Security Group](https://cloud.google.com/identity/docs/how-to/update-group-to-security-group) rules of your resources
-
-:::
-
 ## Astronomer support creates the cluster
 
 After you provide Astronomer support with the setup information for your organization, Astronomer support creates your first cluster on GCP.
 
 Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
+
+If you submitted a VPC peering request, you'll need to accept the request from Astronomer after Astro is installed. To accept the request, see [Use VPC Network Peering](https://cloud.google.com/vpc/docs/using-vpc-peering).
+
+When VPC peering with Astronomer is complete, configure and validate the following items to ensure successful network communications between Astro and your resources:
+
+- [Egress routes](https://cloud.google.com/vpc/docs/routes#routing_in)
+- [Network ACLs](https://cloud.google.com/storage/docs/access-control/lists) or [Security Group](https://cloud.google.com/identity/docs/how-to/update-group-to-security-group) rules of your resources
 
 </TabItem>
 
@@ -164,7 +162,7 @@ The setup process assumes that you've already provided Astronomer support with t
 
 - Your preferred cluster installation region. See the supported region lists for [GCP](resource-reference-gcp.md#supported-regions).
 - Optional. Your preferred worker instance type for your first cluster. See [GCP cluster configurations](resource-reference-gcp.md#supported-cluster-configurations).
-- Optional. Your VNet peering requirements for [GCP](install-gcp#vpc-peering-with-astronomer).
+- Optional. Your VPC peering requirements for [GCP](install-gcp#vpc-peering-with-astronomer).
 - The email address of your first Astro user.
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative. 

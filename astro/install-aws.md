@@ -224,6 +224,8 @@ After creating the AWS account, provide Astronomer support with the following in
 
 If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
 
+### VPC peering prerequisites (optional)
+
 If you need to VPC peer with Astronomer, provide the following information to your Astronomer representative:
 
 - Subnet CIDRs (RFC 1918 IP Space).
@@ -234,7 +236,7 @@ If you need to VPC peer with Astronomer, provide the following information to yo
 
 After you've created the cross-account IAM role for Astro, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support will finish creating the cluster in your AWS account.
 
-This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
+This process can take some time. Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
 
 If you submitted a VPC peering request, you'll need to accept the request from Astronomer after Astro is installed. To accept the request, see [Create a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html).
 
