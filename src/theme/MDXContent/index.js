@@ -1,20 +1,28 @@
-import React, { useEffect } from 'react';
-import MDXContent from '@theme-original/MDXContent';
+import React from "react";
+import { MDXProvider } from "@mdx-js/react";
+import MDXComponents from "@theme/MDXComponents";
+import Admonition from "@theme/Admonition";
+export default function MDXContent({ children }) {
+  const isCloudIdePage =
+    window.location.pathname.startsWith("/astro/cloud-ide");
 
-export default function MDXContentWrapper(props) {
-  useEffect(() => {
-    // Check if this is a release-notes page
-    let isReleaseNotesPage = document.querySelector('html[class*="release-notes"]') !== null;
+  // if we're on the public preview cloud ide page, no need to also show the banner
+  if (window.location.pathname === "/astro/cloud-ide/public-preview") {
+    return <MDXProvider components={MDXComponents}>{children}</MDXProvider>;
+  }
 
-    // if it is, then add the "release-header" class to each h2 element
-    if (isReleaseNotesPage) {
-      let h2s = document.querySelectorAll('h2');
-      h2s.forEach((h2) => h2.classList.add('release-header'));
-    }
-  }, []);
+  // otherwise, conditionally show the banner if we're on a cloud ide page
   return (
-    <>
-      <MDXContent {...props} />
-    </>
+    <MDXProvider components={MDXComponents}>
+      {isCloudIdePage && (
+        <Admonition type="caution">
+          The Cloud IDE is currently in public preview and features are subject
+          to change. Click <a href="/astro/cloud-ide/public-preview">here</a>{" "}
+          for more info.
+        </Admonition>
+      )}
+
+      {children}
+    </MDXProvider>
   );
 }
