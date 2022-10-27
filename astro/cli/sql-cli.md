@@ -145,7 +145,7 @@ To run a SQL workflow in your project, run the following command:
 astro flow run <workflow-directory> --environment=<your-environment>
 ```
 
-This command automatically builds and runs your project based on the configurations in your project directory. For example, consider the following command using the default SQL project assets:
+This command automatically builds and runs your project as an Airflow DAG based on the configurations in your project directory. For example, consider the following command using the default SQL project assets:
 
 ```sh
 astro flow run example_templating --environment=dev
