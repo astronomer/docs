@@ -4,7 +4,7 @@ title: Connecting to a database
 id: connecting-to-a-database
 ---
 
-Now that you've created a Python cell, let's connect to a database and run some SQL against it using the SQL cell.
+Now that you've created a Python cell, let's connect to a database and run some queries against it using the SQL cell type.
 
 ## Setting up your connection
 

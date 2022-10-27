@@ -9,7 +9,7 @@ import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 
 <p class="DocItem__header-description">
-  A notebook-style interface for writing and testing pipelines with no Airflow knowledge or local setup required.
+  A cloud-based, notebook-inspired IDE for writing and testing data pipelines. No Airflow knowledge or local setup required.
 </p>
 
 ## Cloud IDE Features
@@ -24,19 +24,19 @@ import LinkCard from '@site/src/components/LinkCard';
     description="Pass data directly from one task to another via our familiar, notebook-style interface. No configuration required."
   />
   <LinkCard
-    label="Standardize on Airflow primitives"
-    description="Produce a best-practice Airflow DAG file that leverages the latest-and-greatest APIs from the Airflow & Astronomer communities."
+    label="Move between SQL and Python"
+    description="Use SQL tables as dataframes by just referencing your upstream query name, and vice versa."
   />
   <LinkCard
     label="Auto-generate your DAG"
-    description="Your dependency graph is auto-generated based on data references in your SQL and Python code."
+    description="Your dependency graph and DAG file are auto-generated based on data references in your SQL and Python code."
   />
   <LinkCard
-    label="Commit your changes to Git"
+    label="Source control your changes"
     description="Check your pipeline into a Git repository with our built-in, easy-to-use Git integration."
   />
   <LinkCard
     label="Deploy with the click of a button"
-    description="Using our out-of-the-box CI/CD, you can deploy your DAG to Astro in just a few clicks."
+    description="Using our out-of-the-box CI/CD, you can deploy your DAG to a production runtime on Astro in just a few clicks."
   />
 </LinkCardGrid>
