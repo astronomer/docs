@@ -20,7 +20,12 @@
 
 .cardTitle {
   font-size: 1.2rem;
+  display: flex;
 }
+
+/* .cardTitle img {
+  vertical-align: middle;
+} */
 
 .cardDescription {
   font-size: 0.8rem;
