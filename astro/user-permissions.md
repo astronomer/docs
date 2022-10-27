@@ -44,12 +44,12 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Clear/mark a task instance or DAG run           |                      | ✔️                    | ✔️                   |
 | Push code to Deployments                        |                      | ✔️                    | ✔️                   |
 | Create and delete Deployments                   |                      | ✔️                    | ✔️                   |
-| Transfer Deployments to a Workspace             |                      | ✔️                    | ✔️                   |
-| Create, Update and Delete Environment Variables |                      | ✔️                    | ✔️                   |
-| Create, Update and Delete API Keys              |                      |                      | ✔️                   |
-| View Airflow connections and Variables          |                      |                      | ✔️                   |
+| Transfer Deployments                            |                      |                      | ✔️                   |
+| Create, update, and delete environment variables |                      | ✔️                    | ✔️                   |
+| Create, update and delete API keys              |                      |                      | ✔️                   |
+| View Airflow connections and variables          |                      |                      | ✔️                   |
 | Update user roles and permissions               |                      |                      | ✔️                   |
-| Update Airflow connections and Variables        |                      |                      | ✔️                   |
+| Update Airflow connections and variables        |                      |                      | ✔️                   |
 | Invite users to a Workspace                     |                      |                      | ✔️                   |
 
 ### Update Workspace roles

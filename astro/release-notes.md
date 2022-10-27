@@ -17,9 +17,9 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## October 25, 2022 
 
-### Simplified Deployment transfers
+### New Deployment transfer functionality
 
-You can now transfer a Deployment, including all of its DAGs and configurations, to another Workspace on which you have Admin or Editor access. You might want to transfer a Deployment when Deployment ownership moves to a new set of users, or when you create a Deployment in the wrong Workspace. See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
+You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace. See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
 
 ### Additional improvements 
 
