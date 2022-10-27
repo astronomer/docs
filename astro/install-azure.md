@@ -74,9 +74,9 @@ From here, Astronomer support will set up the VNet connection to Astro.
 
 ## Access Astro
 
-1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
+1. Optional. If you haven't created an Astronomer account, go to https://cloud.astronomer.io/ and create an account.
 
-2. Go to `https://cloud.astronomer.io`, enter your email address, and then click **Continue**.
+2. Go to https://cloud.astronomer.io, enter your email address, and then click **Continue**.
 
 3. Select one of the following options to access the Cloud UI:
 
@@ -200,6 +200,12 @@ Wait for confirmation from Astronomer support that the cluster has been created 
 </TabItem>
 
 <TabItem value="astronomer hosted data plane">
+
+:::info
+
+This feature is currently Private Preview. Contact [Astronomer support](https://cloud.astronomer.io/support) to enable it.
+
+:::
 
 Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
 

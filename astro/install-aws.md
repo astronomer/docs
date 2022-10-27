@@ -94,9 +94,9 @@ If you want to continue with the second option, you'll additionally need:
 
 ## Access Astro
 
-1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
+1. Optional. If you haven't created an Astronomer account, go to https://cloud.astronomer.io/ and create an account.
 
-2. Go to `https://cloud.astronomer.io`, enter your email address, and then click **Continue**.
+2. Go to https://cloud.astronomer.io, enter your email address, and then click **Continue**.
 
 3. Select one of the following options to access the Cloud UI:
 
