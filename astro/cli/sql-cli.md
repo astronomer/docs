@@ -157,6 +157,8 @@ After running this command, the CLI:
 - Creates a table named `filtered_orders` and runs `filtered_orders.sql` to populate the table with data from `data/retail.db`.
 - Creates a table named `joint_orders_customers` and runs `joint_orders_customers.sql` to populate the table using data from `filtered_orders`.
 
+To view the implementation of this workflow in more detail, you can view the generated code using the setup steps in the following topic. 
+
 ## Export a SQL workflow as a DAG
 
 Export a SQL workflow as an Airflow DAG using the following command: 
