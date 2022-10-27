@@ -247,7 +247,7 @@ When VPC peering with Astronomer is complete, configure and validate the followi
 
 <TabItem value="astronomer hosted data plane">
 
-Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
+When providing hosting services, Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
 
 ## Prerequisites
 
