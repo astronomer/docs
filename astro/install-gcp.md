@@ -6,6 +6,9 @@ description: Get started on Astro by creating your first Astro cluster on Google
 sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 This is where you'll find instructions for installing Astro on the Google Cloud Platform (GCP).
 
 To complete the installation process, you'll:
