@@ -18,6 +18,12 @@ Once you select a connection type, you'll be prompted for the connection details
 
 ![Configure Connection](/img/cloud-ide/configure-connection.png)
 
+:::info
+
+SQL cell query results are stored as temporary tables in the database you're querying. The schema field in your connection object determines where these end up - we recommend setting this field to `TMP_ASTRO` for easy cleanup.
+
+:::
+
 ## Test your connection
 
 Once you've filled out the connection details, you can optionally test your connection details before creating it. To do so, click the **Test Connection** button. If the connection is successful, you'll see a message letting you know. If the connection fails, you'll see an error message. Note that not all connection types can be tested. If your connection type doesn't support testing, you'll see a message letting you know.
