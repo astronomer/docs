@@ -222,9 +222,9 @@ Wait for confirmation that the installation is successful before you access Astr
 
 ## Access Astro
 
-1. Go to https://cloud.astronomer.io/ and create an Astronomer account.
+1. Optional. If you haven't created an Astronomer account, go to https://cloud.astronomer.io/ and create an account.
 
-2. Go to `https://cloud.astronomer.io`, enter your email address, and then click **Continue**.
+2. Go to https://cloud.astronomer.io, enter your email address, and then click **Continue**.
 
 3. Select one of the following options to access the Cloud UI:
 
@@ -241,7 +241,7 @@ Wait for confirmation that the installation is successful before you access Astr
 
 ## Create a Deployment
 
-When Astronomer confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. Log in to the [Cloud UI](log-in-to-astro.md#log-in-to-the-cloud-ui) and [create a new Deployment](create-deployment.md). If the installation is successful, your new Astro cluster is listed as an option in the Cloud UI **Cluster** list:
+When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). When you create your Deployment, the Astro cluster created by Astronomer support appears as an option in the **Cluster** list as shown in the following image.
 
 <div class="text--center">
   <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
