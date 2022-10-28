@@ -56,7 +56,7 @@ Sometimes, it's helpful to limit notifications to specific tasks. The `BaseOpera
 ```python
 from datetime import datetime
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.empty import EmptyOperator
 
 default_args = {
 	'owner': 'airflow',
@@ -71,11 +71,11 @@ with DAG('sample_dag',
 	schedule_interval='@daily',
 	catchup=False) as dag:
 
-	wont_email = DummyOperator(
+	wont_email = EmptyOperator(
 		task_id='wont_email'
 	)
 	
-	will_email = DummyOperator(
+	will_email = EmptyOperator(
 		task_id='will_email',
 		email_on_failure=True
 	)
@@ -121,7 +121,7 @@ You can define your own notifications to customize how Airflow alerts you about 
 ```python
 from datetime import datetime
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.empty import EmptyOperator
 
 def custom_failure_function(context):
 	"Define custom failure notification behavior"
@@ -147,11 +147,11 @@ with DAG('sample_dag',
 		schedule_interval='@daily',
 		catchup=False) as dag:
 
-	failure_task = DummyOperator(
+	failure_task = EmptyOperator(
 		task_id='failure_task'
 	)
 	
-	success_task = DummyOperator(
+	success_task = EmptyOperator(
 		task_id='success_task',
 		on_success_callback=custom_success_function
 	)
@@ -292,7 +292,7 @@ You can set an SLA for all tasks in your DAG by defining `'sla'` as a default ar
 
 ```python
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 import time
@@ -320,11 +320,11 @@ with DAG('sla-dag',
          catchup=False 
          ) as dag:
 
-    t0 = DummyOperator(
+    t0 = EmptyOperator(
         task_id='start'
     )
 
-    t1 = DummyOperator(
+    t1 = EmptyOperator(
         task_id='end'
     )
 
@@ -344,7 +344,7 @@ SLAs have some unique behaviors that you should consider before you implement th
 
 ```python
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 import time
@@ -371,12 +371,12 @@ with DAG('sla-dag',
          catchup=False 
          ) as dag:
 
-    t0 = DummyOperator(
+    t0 = EmptyOperator(
         task_id='start',
         sla=timedelta(seconds=50)
     )
 
-    t1 = DummyOperator(
+    t1 = EmptyOperator(
         task_id='end',
         sla=timedelta(seconds=500)
     )

@@ -1,6 +1,6 @@
 ---
 title: "DAG scheduling and timetables in Airflow"
-sidebar_label: "DAG scheduling and timetables"
+sidebar_label: "Schedule DAGs"
 id: scheduling-in-airflow
 ---
 

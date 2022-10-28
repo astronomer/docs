@@ -1,6 +1,6 @@
 ---
-title: "Import custom hooks and operators"
-sidebar_label: "Import custom hooks and operators"
+title: "Custom hooks and operators"
+sidebar_label: "Custom hooks and operators"
 description: "How to correctly import custom hooks and operators."
 id: airflow-importing-custom-hooks-operators
 ---

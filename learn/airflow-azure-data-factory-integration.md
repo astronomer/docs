@@ -96,11 +96,7 @@ Now that our ADF pipelines are runnable, we create a DAG that executes those pip
 from datetime import datetime, timedelta
 
 from airflow.models import DAG, BaseOperator
-
-try:
-    from airflow.operators.empty import EmptyOperator
-except ModuleNotFoundError:
-    from airflow.operators.dummy import DummyOperator as EmptyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.providers.microsoft.azure.operators.data_factory import AzureDataFactoryRunPipelineOperator
 from airflow.providers.microsoft.azure.sensors.data_factory import AzureDataFactoryPipelineRunStatusSensor
 from airflow.utils.edgemodifier import Label

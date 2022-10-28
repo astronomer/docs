@@ -105,7 +105,7 @@ from datetime import datetime, timedelta
 
 def print_task_type(**kwargs):
     """
-    Dummy function to call before and after dependent DAG.
+    Example function to call before and after dependent DAG.
     """
     print(f"The {kwargs['task_type']} task has completed.")
 
@@ -289,7 +289,7 @@ json_body = json.dumps(request_body)
 
 def print_task_type(**kwargs):
     """
-    Dummy function to call before and after downstream DAG.
+    Example function to call before and after downstream DAG.
     """
     print(f"The {kwargs['task_type']} task has completed.")
     print(request_body)

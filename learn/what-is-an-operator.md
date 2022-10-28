@@ -55,7 +55,7 @@ The code for this example is available in the [Astronomer Registry](https://regi
 
 The following operators are used in this example:
 
-- [EmptyOperator](https://registry.astronomer.io/providers/apache-airflow/modules/dummyoperator): Organizes the flow of tasks in the DAG. Included with Airflow.
+- [EmptyOperator](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/empty/index.html): Organizes the flow of tasks in the DAG. Included with Airflow.
 - [PythonDecoratedOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonoperator): Executes a Python function. It is functionally the same as the PythonOperator, but it is instantiated using the `@task` [decorator](airflow-decorators.md). Included with Airflow.
 - [LocalFilesystemToS3Operator](https://registry.astronomer.io/providers/amazon/modules/localfilesystemtos3operator): Uploads a file from a local file system to Amazon S3. Included with the [AWS provider package](https://registry.astronomer.io/providers/amazon).
 - [S3ToRedshiftOperator](https://registry.astronomer.io/providers/amazon/modules/s3toredshiftoperator): Transfers data from Amazon S3 to Redshift. Included with the [AWS provider package](https://registry.astronomer.io/providers/amazon).

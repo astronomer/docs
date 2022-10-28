@@ -56,7 +56,7 @@ In the DAG below, you'll review a simple implementation of the dbt Cloud provide
 from pendulum import datetime
 
 from airflow.decorators import dag
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import ShortCircuitOperator
 from airflow.providers.dbt.cloud.hooks.dbt import DbtCloudHook, DbtCloudJobRunStatus
 from airflow.providers.dbt.cloud.operators.dbt import DbtCloudRunJobOperator
@@ -83,7 +83,7 @@ def _check_job_not_running(job_id):
     doc_md=__doc__,
 )
 def check_before_running_dbt_cloud_job():
-    begin, end = [DummyOperator(task_id=id) for id in ["begin", "end"]]
+    begin, end = [EmptyOperator(task_id=id) for id in ["begin", "end"]]
 
     check_job = ShortCircuitOperator(
         task_id="check_job_is_not_running",
@@ -438,13 +438,13 @@ When used as shown in the sample code below, the utility provides a shortcut to 
 ```python
 with dag:
 
-    start_dummy = DummyOperator(task_id='start')
+    start_empty = EmptyOperator(task_id='start')
     
     dbt_seed = BashOperator(
         task_id='dbt_seed',
         bash_command=f'dbt {DBT_GLOBAL_CLI_FLAGS} seed --profiles-dir {DBT_PROJECT_DIR} --project-dir {DBT_PROJECT_DIR}'
     )
-    end_dummy = DummyOperator(task_id='end')
+    end_empty = EmptyOperator(task_id='end')
 
     dag_parser = DbtDagParser(dag=dag,
                               dbt_global_cli_flags=DBT_GLOBAL_CLI_FLAGS,
@@ -455,7 +455,7 @@ with dag:
     dbt_run_group = dag_parser.get_dbt_run_group()
     dbt_test_group = dag_parser.get_dbt_test_group()
 
-    start_dummy >> dbt_seed >> dbt_run_group >> dbt_test_group >> end_dummy
+    start_empty >> dbt_seed >> dbt_run_group >> dbt_test_group >> end_empty
 ```
 
 Using the jaffleshop demo dbt project, the parser creates the following DAG including two task groups for the `dbt_run` and `dbt_test` tasks:

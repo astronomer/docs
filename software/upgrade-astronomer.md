@@ -224,7 +224,9 @@ kubectl -n <astronomer-platform-release-namespace> annotate secret <astronomer-p
 
 If you upgraded to Astronomer Software 0.29 without annotating this secret, run the following command to complete the synchronization:
 
+```bash
 kubectl create job -n <astronomer-platform-release-namespace> --from=cronjob/<astronomer-platform-release-name>-config-syncer upgrade-config-synchronization
+```
 
 ### Upgrade to Astronomer Software 0.28
 

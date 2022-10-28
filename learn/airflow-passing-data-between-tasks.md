@@ -1,6 +1,6 @@
 ---
-title: "Passing data between Airflow tasks"
-sidebar_label: "Passing data between tasks"
+title: "Pass data between tasks"
+sidebar_label: "Pass data between tasks"
 id: airflow-passing-data-between-tasks
 ---
 

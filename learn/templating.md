@@ -115,7 +115,7 @@ with DAG(..., template_searchpath="/tmp") as dag:
 
 The output of templates can be checked in both the Airflow UI and Airflow CLI. One advantage of the Airflow CLI is that you don't need to run any tasks before seeing the result.
 
-The Airflow CLI command `airflow tasks render` renders all templateable attributes of a given task. Given a `dag_id`, `task_id`, and dummy `execution_date`, the command output is similar to the following example:
+The Airflow CLI command `airflow tasks render` renders all templateable attributes of a given task. Given a `dag_id`, `task_id`, and random `execution_date`, the command output is similar to the following example:
 
 ```bash
 $ airflow tasks render example_dag run_this 2021-01-01
