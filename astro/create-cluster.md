@@ -216,6 +216,8 @@ If you don't specify configuration preferences, Astronomer support creates a clu
 
 Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
 
+</TabItem>
+
 <TabItem value="astronomer hosted data plane">
 
 ### Submit a request to Astronomer support
