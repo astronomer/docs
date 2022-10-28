@@ -28,7 +28,7 @@ To create an Astro cluster on AWS, Microsoft Azure, or Google Cloud Platform (GC
     defaultValue="hosted cloud"
     groupId= "prerequisites"
     values={[
-        {label: 'Hosted cloud', value: 'hosted cloud'},
+        {label: 'Astronomer-hosted', value: 'hosted cloud'},
         {label: 'AWS', value: 'aws'},
         {label: 'Azure', value: 'azure'},
         {label: 'GCP', value: 'gcp'},
