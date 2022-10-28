@@ -113,14 +113,17 @@ The resulting values can be compared to an expected value using any of the follo
 
 You can add a tolerance to the comparisons in the form of a fraction (0.1 = 10% tolerance).
 
-With version 1.3+ of the Common SQL provider, it is possible to define a subset of the table to run checks on. To do so, provide a statement that could follow the SQL `WHERE`-keyword to the `partition_clause` parameter. A `partition_clause` defined at the operator level will apply to all checks contained in the operator. A `partition_clause` defined within a single check only affects the check it has been defined in. 
+With version 1.3+ of the Common SQL provider, it is possible to define a subset of the table to run checks on. To do so, provide a SQL `WHERE`-clause (without the `WHERE` keyword) to the `partition_clause` parameter. A `partition_clause` defined at the operator level will apply to all checks contained in the operator. A `partition_clause` defined within a single check only affects the check it has been defined in. 
 
 The code snippet below shows a SQLColumnCheckOperator defined with a `partition_clause` at the operator level, as well as a `partition_clause` in one of the two column checks defined in the `column_mapping`. 
 
-In this example, the operator-level partition clause is `CUSTOMER_NAME IS NOT NULL`, which means all checks defined in the `column_mapping` will only run on rows of `MY_TABLE` where there is no `NULL` value in the `CUSTOMER_NAME` column.
+In the following example, two checks are performed:
 
-- `MY_NUM_COL_1` is checked to have a minimum value greater than 10 for the subset of all rows where the operator-level partition clause is true, i.e. all rows where the `CUSTOMER_NAME` column is not `NULL`. 
-- `MY_NUM_COL_2` is checked to have a maximum value less than 300 for the subset of all rows where the operator-level partition clause is true and the check-level partition clause (`CUSTOMER_STATUS = 'active'`) is also true. This means this check will only run on rows of the table where the customer name is available and the customer is listed as active.
+- the `MY_NUM_COL_1` column is checked to have a minimum value greater than 10.
+- `MY_NUM_COL_2` is checked to have a maximum value less than 300 for rows that fulfill the check-level `partition_clause` which includes rows where `CUSTOMER_STATUS = 'active'`.
+- both of the above checks only run on rows fullfilling the operator-level partition clause `CUSTOMER_NAME IS NOT NULL`.
+
+If both, an operator-level `partition_clause` and a check-level `partition_clause` is defined for a check, the check will only run on rows fulfilling both clauses.
 
 ```python
 column_checks = SQLColumnCheckOperator(
