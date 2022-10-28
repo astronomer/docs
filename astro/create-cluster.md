@@ -116,10 +116,9 @@ To create a cluster in one of these regions, complete the following additional s
 
 To create a new Astro cluster on the Astronomer-hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
-- Your preferred cloud provider. The supported options are: Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).
-- Your preferred cluster installation region. See the supported region lists for [AWS](resource-reference-aws.md#aws-region), [Azure](resource-reference-azure.md#supported-regions), and [GCP](resource-reference-gcp.md#gcp-region).
-- Optional. Your preferred worker instance type for your first cluster. See [AWS cluster configurations](resource-reference-aws.md#worker-node-types), [Azure cluster configurations](resource-reference-azure#worker-node-pools), and [GCP cluster configurations](resource-reference-gcp.md#worker-node-pools).
-- Optional. Your VPC peering requirements for [AWS](install-aws#vpc-peering-prerequisites-optional) and [GCP](install-gcp#vpc-peering-prerequisites-optional), or your VNet peering requirements for [Azure](install-azure#vnet-peering-prerequisites-optional).
+- Your preferred cluster installation region. See [Supported regions](resource-reference-aws.md#aws-region).
+- Optional. Your preferred worker instance type for your first cluster. See [Worker node types](resource-reference-aws.md#worker-node-types).
+- Optional. Your VPC peering requirements. See [VPC peering prerequisites](install-aws#vpc-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
@@ -160,10 +159,9 @@ For information on all supported regions and configurations, see [Resources requ
 
 To create a new Astro cluster on the Astronomer-hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
-- Your preferred cloud provider. The supported options are: Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).
-- Your preferred cluster installation region. See the supported region lists for [AWS](resource-reference-aws.md#aws-region), [Azure](resource-reference-azure.md#supported-regions), and [GCP](resource-reference-gcp.md#gcp-region).
-- Optional. Your preferred worker instance type for your first cluster. See [AWS cluster configurations](resource-reference-aws.md#worker-node-types), [Azure cluster configurations](resource-reference-azure#worker-node-pools), and [GCP cluster configurations](resource-reference-gcp.md#worker-node-pools).
-- Optional. Your VPC peering requirements for [AWS](install-aws#vpc-peering-prerequisites-optional) and [GCP](install-gcp#vpc-peering-prerequisites-optional), or your VNet peering requirements for [Azure](install-azure#vnet-peering-prerequisites-optional).
+- Your preferred cluster installation region. See [Supported regions](resource-reference-azure.md#supported-regions).
+- Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-azure#worker-node-pools).
+- Optional. Your VNet peering requirements. See [VNet peering prerequisites](install-azure#vnet-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
@@ -172,7 +170,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
 
 </Tabs>
 
-## Google Cloud Platform
+## GCP
 
 <Tabs
     defaultValue="byoc"
@@ -185,7 +183,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
 
 ### Submit a request to Astronomer support
 
-To create a new Astro cluster on GCP for your Organization, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+To create a new Astro cluster on Google Cloud Platform (GCP) for your Organization, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
 - Your preferred Astro cluster name.
 - The GCP region that you want to host your cluster in.
@@ -204,10 +202,9 @@ If you don't specify configuration preferences, Astronomer support creates a clu
 
 To create a new Astro cluster on the Astronomer-hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
-- Your preferred cloud provider. The supported options are: Amazon Web Services (AWS), Microsoft Azure, and Google Cloud Platform (GCP).
-- Your preferred cluster installation region. See the supported region lists for [AWS](resource-reference-aws.md#aws-region), [Azure](resource-reference-azure.md#supported-regions), and [GCP](resource-reference-gcp.md#gcp-region).
-- Optional. Your preferred worker instance type for your first cluster. See [AWS cluster configurations](resource-reference-aws.md#worker-node-types), [Azure cluster configurations](resource-reference-azure#worker-node-pools), and [GCP cluster configurations](resource-reference-gcp.md#worker-node-pools).
-- Optional. Your VPC peering requirements for [AWS](install-aws#vpc-peering-prerequisites-optional) and [GCP](install-gcp#vpc-peering-prerequisites-optional), or your VNet peering requirements for [Azure](install-azure#vnet-peering-prerequisites-optional).
+- Your preferred cluster installation region. See [Supported regions](resource-reference-gcp.md#supported-regions).
+- Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-gcp.md#worker-node-pools).
+- Optional. Your VPC peering requirements. See [VPC peering prerequisites](install-gcp#vpc-peering-prerequisites-optional).
 - The email address of your first Astro user.
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
