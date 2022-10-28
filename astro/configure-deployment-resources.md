@@ -2,8 +2,12 @@
 sidebar_label: 'Configure Deployment resources'
 title: 'Configure Deployment resources'
 id: configure-deployment-resources
-description: Learn how to create and configure Astro Deployment resources.
 ---
+
+<head>
+  <meta name="description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
+  <meta name="og:description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
+</head>
 
 After you create an Astro Deployment, you can modify its resource settings to make sure that your tasks have the CPU and memory required to complete successfully.
 

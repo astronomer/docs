@@ -65,7 +65,7 @@ To start using pre-created namespaces:
 
 Once you enable pre-created namespaces, the namespaces you specified appear as an option when configuring a new Deployment via the Software UI.  
 
-![Kubernetes Namespace option in the UI](https://assets2.astronomer.io/main/docs/astronomer-ui/kubernetes-namespace.png)
+![Kubernetes Namespace option in the UI](/img/software/kubernetes-namespace.png)
 
 Alternatively, when you run `astro deployment create` command via the Astronomer CLI, you will be prompted to select one of the available namespaces for your new Deployment.
 

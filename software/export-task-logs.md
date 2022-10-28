@@ -82,10 +82,10 @@ Add Airflow task logs from your Astronomer Deployment to an existing Elasticsear
 1. In your browser, go to `https://cloud.elastic.co/` and create a new Elastic Cloud deployment. See [Create a deployment](https://www.elastic.co/guide/en/cloud/current/ec-create-deployment.html#ec-create-deployment).
 2. Copy and save your Elastic Cloud deployment credentials when the **Save the deployment credentials** screen appears.
 3. On the Elastic dashboard, click the **Gear** icon for your Deployment.
-  ![Elastic Gear icon location](/img/docs/elasticsearch-gear-icon.png)
+  ![Elastic Gear icon location](/img/software/elasticsearch-gear-icon.png)
 4. Click **Copy endpoint** next to **Elasticsearch**.
 
-    ![Elastic Copy Endpoint location](/img/docs/elasticsearch-copy-endpoint.png)
+    ![Elastic Copy Endpoint location](/img/software/elasticsearch-copy-endpoint.png)
 
 5. Optional. Test the Elastic Cloud deployment endpoint:
     - Open a new browser window, paste the endpoint you copied in step 4 in the **Address** bar, and then press **Enter**.
@@ -192,10 +192,10 @@ After you've created an Elastic deployment and endpoint, you have two options to
 ### View Airflow task logs in Elastic
 
 1. On the Elastic dashboard in the **Elastichsearch Service** area, click the Deployment name.
-  ![ElasticDeployment name location](/img/docs/elasticsearch-deployment-name.png)
+  ![ElasticDeployment name location](/img/software/elasticsearch-deployment-name.png)
 2. Click **Menu** > **Discover**. The **Create index pattern** screen appears.
 
-    ![Discover menu location](/img/docs/elasticsearch-discover.png)
+    ![Discover menu location](/img/software/elasticsearch-discover.png)
 
 3. Enter `fluentd.*` in the **Name** field, enter `@timestamp` in the **Timestamp field**, and then click **Create index pattern**.
 4. Click **Menu** > **Dashboard** to view all of the Airflow task logs for your Deployment on Astronomer.

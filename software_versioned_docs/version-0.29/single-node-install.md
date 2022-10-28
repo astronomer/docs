@@ -336,4 +336,4 @@ To confirm that you successfully installed Apache Airflow, open `http://localhos
 
 Log in with your `admin` user. From there, you should see Airflow's primary 'DAGs' view:
 
-![Empty Airflow UI](https://assets2.astronomer.io/main/docs/airflow-ui/ac-install.png)
+![Empty Airflow UI](/img/software/ac-install.png)

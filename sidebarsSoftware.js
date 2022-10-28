@@ -99,6 +99,8 @@ module.exports = {
         type: 'category',
         label: 'Platform observability',
         items: [
+          'grafana-metrics',
+          'kibana-logging',
           'platform-alerts',
           'logs-to-s3',
           'export-task-logs',
@@ -132,8 +134,6 @@ module.exports = {
       type: 'category',
       label: 'Observability',
       items: [
-      'grafana-metrics',
-      'kibana-logging',
       'deployment-logs',
       'airflow-alerts',
       ],
@@ -190,6 +190,7 @@ module.exports = {
       'support',
       'version-compatibility-reference',
       'release-lifecycle-policy',
+      'faq',
       'documentation-archive',
       ],
     },

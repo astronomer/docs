@@ -58,7 +58,7 @@ To get started with SendGrid:
 
    Your Environment Variables should look something like this:
 
-   ![Astronomer Deployment Email Settings](https://assets2.astronomer.io/main/docs/emails/astro_env_variables.png)
+   ![Astronomer Deployment Email Settings](/img/software/astro_env_variables.png)
 
    To prevent unauthorized users in your Workspace from seeing sensitive information, we recommend selecting the **Secret?** checkbox for your email and password profile variables.
 
@@ -94,7 +94,7 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 
    Your Environment Variables should look something like this:
 
-   ![Astronomer Deployment Email Settings](https://assets2.astronomer.io/main/docs/emails/astro_env_variables.png)
+   ![Astronomer Deployment Email Settings](/img/software/astro_env_variables.png)
 
    To prevent unauthorized users in your Workspace from seeing sensitive information, we recommend selecting the **Secret?** checkbox for your email and password profile variables.
 

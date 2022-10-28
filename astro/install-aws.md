@@ -2,9 +2,13 @@
 sidebar_label: 'AWS'
 title: 'Install Astro on AWS'
 id: install-aws
-description: Get started on Astro by installing your first Astro cluster on AWS.
 sidebar_custom_props: { icon: 'img/aws.png' }
 ---
+
+<head>
+  <meta name="description" content="If you have an existing Amazon Web Services (AWS) instance, use these instructions to complete an Astro installation. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources." />
+  <meta name="og:description" content="If you have an existing Amazon Web Services (AWS) instance, use these instructions to complete an Astro installation. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources." />
+</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

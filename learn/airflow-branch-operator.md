@@ -1,14 +1,18 @@
 ---
 title: "Branching in Airflow"
 sidebar_label: "Branches"
-description: "Use Apache Airflow's BranchPythonOperator and ShortCircuitOperator to execute conditional branches in your workflow"
 id: airflow-branch-operator
-tags: ["DAGs", "Operators", "Basics", "Tasks"]
 ---
+
+<head>
+  <meta name="description" content="Learn about Airflow’s multiple options for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator." />
+  <meta name="og:description" content="Learn about the options available in Airflow for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator." />
+</head>
+
 
 When designing your data pipelines, you may encounter use cases that require more complex task flows than "Task A > Task B > Task C." For example, you may have a use case where you need to decide between multiple tasks to execute based on the results of an upstream task. Or you may have a case where part of your pipeline should only run under certain external conditions. Fortunately, Airflow has multiple options for building conditional logic and/or branching into your DAGs.
 
-In this guide, we'll cover examples using the `BranchPythonOperator` and `ShortCircuitOperator`, other available branching operators, and additional resources for implementing conditional logic in your Airflow DAGs.
+In this guide, you'll learn how you can use the `BranchPythonOperator` and `ShortCircuitOperator`, other available branching operators, and additional resources to implement conditional logic in your Airflow DAGs.
 
 ## Assumed knowledge
 
@@ -47,7 +51,7 @@ import random
 from datetime import datetime
 
 from airflow import DAG
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import BranchPythonOperator
 from airflow.utils.edgemodifier import Label
 from airflow.utils.trigger_rule import TriggerRule
@@ -59,7 +63,7 @@ with DAG(
     schedule_interval="@daily",
     tags=['example', 'example2'],
 ) as dag:
-    run_this_first = DummyOperator(
+    run_this_first = EmptyOperator(
         task_id='run_this_first',
     )
 
@@ -71,22 +75,22 @@ with DAG(
     )
     run_this_first >> branching
 
-    join = DummyOperator(
+    join = EmptyOperator(
         task_id='join',
         trigger_rule=TriggerRule.NONE_FAILED_MIN_ONE_SUCCESS,
     )
 
     for option in options:
-        t = DummyOperator(
+        t = EmptyOperator(
             task_id=option,
         )
 
-        dummy_follow = DummyOperator(
+        empty_follow = EmptyOperator(
             task_id='follow_' + option,
         )
 
         # Label is optional here, but it can help identify more complex branches
-        branching >> Label(option) >> t >> dummy_follow >> join
+        branching >> Label(option) >> t >> empty_follow >> join
 ```
 
 In this DAG, we have a simple `lambda` function that randomly chooses between four branches. In the following DAG run screenshot, where `branch_b` was randomly chosen, we see that the two tasks in `branch_b` were successfully run while the others were skipped.
@@ -95,7 +99,7 @@ In this DAG, we have a simple `lambda` function that randomly chooses between fo
 
 If you have downstream tasks that need to run regardless of which branch is taken, like the `join` task in our example above, you need to update the trigger rule appropriately. The default trigger rule in Airflow is `ALL_SUCCESS`, which means that if upstream tasks are skipped, then the downstream task will not run. In this case, we chose `NONE_FAILED_MIN_ONE_SUCCESS` to indicate that the task should run as long as one upstream task succeeded and no tasks failed.
 
-Finally, note that with the `BranchPythonOperator`, your Python callable *must* return at least one task ID for whichever branch is chosen (i.e. it can't return nothing). If one of the paths in your branching should do nothing, you can use a `DummyOperator` in that branch.
+Finally, note that with the `BranchPythonOperator`, your Python callable *must* return at least one task ID for whichever branch is chosen (i.e. it can't return nothing). If one of the paths in your branching should do nothing, you can use a `EmptyOperator` in that branch.
 
 ## ShortCircuitOperator
 
@@ -111,7 +115,7 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.models.baseoperator import chain
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import ShortCircuitOperator
 
 with DAG(
@@ -130,8 +134,8 @@ with DAG(
         python_callable=lambda: False,
     )
 
-    ds_true = [DummyOperator(task_id='true_' + str(i)) for i in [1, 2]]
-    ds_false = [DummyOperator(task_id='false_' + str(i)) for i in [1, 2]]
+    ds_true = [EmptyOperator(task_id='true_' + str(i)) for i in [1, 2]]
+    ds_false = [EmptyOperator(task_id='false_' + str(i)) for i in [1, 2]]
 
     chain(cond_true, *ds_true)
     chain(cond_false, *ds_false)

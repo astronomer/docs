@@ -1,10 +1,13 @@
 ---
 title: "Scaling Airflow to optimize performance"
 sidebar_label: "Scaling Airflow"
-description: "How to scale your Airflow environment."
 id: airflow-scaling-workers
-tags: [Workers, Concurrency, Parallelism, DAGs]
 ---
+
+<head>
+  <meta name="description" content="See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings." />
+  <meta name="og:description" content="See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings." />
+</head>
 
 One of the biggest strengths of Apache Airflow is its ability to scale to meet the changing demands of your organization. To make the most of Airflow, there are a few key settings that you should consider modifying as you scale up your data pipelines.
 

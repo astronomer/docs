@@ -222,7 +222,7 @@ def example_s3_to_snowflake_etl():
     transformed_data = transform_data(
         df=extracted_data, output_table=Table(name="homes_data_long")
     )
-    create_reporting_table = create_reporting_table(conn_id=SNOWFLAKE_CONN_ID)
+    create_results_table = create_reporting_table(conn_id=SNOWFLAKE_CONN_ID)
     # Append transformed data to reporting table
     # Dependency is inferred by passing the previous `transformed_data` task to `source_table` param
     record_results = append(

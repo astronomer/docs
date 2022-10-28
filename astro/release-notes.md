@@ -2,8 +2,12 @@
 sidebar_label: 'Astro'
 title: 'Astro release notes'
 id: release-notes
-description: A real-time reference of the latest features and bug fixes in Astro.
 ---
+
+<head>
+  <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
+  <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
+</head>
 
 <!--- Version-specific -->
 
@@ -15,6 +19,21 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.6.0 ([Release notes](cli/release-notes.md))
 
+## October 18, 2022 
+
+### Additional improvements 
+
+- In the Cloud UI, **Access** has been moved from the left menu to a tab on the **Workspace Settings** page.
+- In the Cloud UI, **Workspace Settings** in the left menu is now available to all Workspace members.
+
+### New Azure regions
+
+You can now [create an Astro cluster on Azure](create-cluster.md) in the following regions:
+
+- `japaneast` 
+- `southafricanorth` 
+- `southcentralus` 
+  
 ## October 11, 2022 
 
 ### Additional improvements 

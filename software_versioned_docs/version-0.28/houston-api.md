@@ -48,7 +48,7 @@ To authenticate:
 3. Expand the `HTTP Headers` section on the bottom left of the page.
 4. Paste the API token you acquired from Step 1 in the following format: `{"authorization": "<api-token>"}`
 
-![Headers](https://assets2.astronomer.io/main/docs/ee/headers.png)
+![Headers](/img/software/headers.png)
 
 > **Note:** As you work with our API, you'll be restricted to actions allowed by both your existing role within the platform (e.g. SysAdmin or not) and your permissions within any particular Workspace (e.g. Viewer, Editor, Admin).
 
@@ -67,7 +67,7 @@ This guide will stay away from Subscriptions.
 
 Once authenticated, you should be able to query all endpoints your user has access to. The [`Schema`](https://GraphQL.org/learn/schema/) tab fixed on the right-hand side of the page is a great reference for queries and mutations we support and how each of them is structured.
 
-![Schema](https://assets2.astronomer.io/main/docs/ee/graphql_schema.png)
+![Schema](/img/software/graphql_schema.png)
 
 ## Sample Queries
 
@@ -111,7 +111,7 @@ query workspaceDeployments {
 
 To view results, press the "Play" button in middle of the page and see them render on the right side of the page.
 
-![Query](https://assets2.astronomer.io/main/docs/ee/deployment_query.gif)
+![Query](/img/software/deployment_query.gif)
 
 ### Query a User
 
@@ -431,4 +431,4 @@ Unlike the `label` and `createdAt` fields, notice that the `users` type field re
 
 To know which fields you can or must specify, reference the "Schema" on the righthand side of the page. As is the case here, custom types are often composed of other custom types.
 
-![Custom Type](https://assets2.astronomer.io/main/docs/ee/deployments_custom_typeschema.png)
+![Custom Type](/img/software/deployments_custom_typeschema.png)

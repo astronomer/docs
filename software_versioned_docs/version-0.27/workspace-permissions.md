@@ -35,7 +35,7 @@ To invite a user to a Workspace via the Software UI, navigate to **Workspace** >
 
 When a Workspace _Admin_ invites a user to a Workspace in which one or more Airflow Deployments exist, they'll have the opportunity to set that user's deployment-level roles as well, though it is not required.
 
-![Invite Workspace User](https://assets2.astronomer.io/main/docs/astronomer-ui/invite-user-workspace.gif)
+![Invite Workspace User](/img/software/invite-user-workspace.gif)
 
 If a Workspace Admin invites a user to a Workspace that does _not_ have any Airflow Deployments within it, the **Deployment Roles** modal above will not appear.
 
@@ -78,7 +78,7 @@ From there:
 2. Select a deployment role from the drop-down menu to the right of the selected user
 3. Click the `+` symbol
 
-![Invite Deployment User](https://assets2.astronomer.io/main/docs/astronomer-ui/invite-user-deployment.gif)
+![Invite Deployment User](/img/software/invite-user-deployment.gif)
 
 #### via Astronomer CLI
 
@@ -110,7 +110,7 @@ If you do _not_ specify a role in this command, `DEPLOYMENT_VIEWER` will be set 
 
 To view roles within a Workspace via the Software UI, navigate to **Workspace** > **Users**. All Workspace users have access to this view and can see the roles of other users.
 
-![View Workspace Users](https://assets2.astronomer.io/main/docs/astronomer-ui/view-workspace-users.png)
+![View Workspace Users](/img/software/view-workspace-users.png)
 
 To list Workspace users via the Astronomer CLI, run:
 
@@ -124,7 +124,7 @@ This command will output the email addresses of all users in the Workspace along
 
 If you're a Workspace _Admin_, you can edit both Workspace and deployment-level permissions by navigating to **Workspace** > **Users** and clicking into an individual user.
 
-![Configure Access](https://assets2.astronomer.io/main/docs/astronomer-ui/configure_access-0.22.png)
+![Configure Access](/img/software/configure_access-0.22.png)
 
 To edit a user's role via the Astro CLI, run:
 
@@ -138,7 +138,7 @@ Only Workspace _Admins_ can modify the role of another user in the Workspace.
 
 Workspace _Admins_ can remove users from a Workspace by navigating to: **Workspace** > **Users** > **Individual User** > **Remove User**.
 
-![Remove Workspace User](https://assets2.astronomer.io/main/docs/astronomer-ui/remove-workspace-user.gif)
+![Remove Workspace User](/img/software/remove-workspace-user.gif)
 
 To remove a user from a Workspace via the Astronomer CLI, make sure you're first operating in that Workspace. Then, run:
 
@@ -154,7 +154,7 @@ Only Workspace _Admins_ can remove other Workspace users.
 
 To list all users within a Deployment and their corresponding roles, navigate to **Workspace** > **Deployment** > **Access**. All Deployment users have access to this view and can see the roles of other users.
 
-![Deployment Users](https://assets2.astronomer.io/main/docs/astronomer-ui/deployment_users_0.22.png)
+![Deployment Users](/img/software/deployment_users_0.22.png)
 
 To list Deployment users via the Astronomer CLI, run:
 
@@ -166,7 +166,7 @@ astro deployment user list <deployment-id>
 
 Deployment _Admins_ can edit permissions using the dropdown menu in the **Access** tab in the Software UI.
 
-![Configure Deployment Access](https://assets2.astronomer.io/main/docs/astronomer-ui/configure-deployment-user-access.png)
+![Configure Deployment Access](/img/software/configure-deployment-user-access.png)
 
 To edit a user's role via the Astro CLI, run:
 
@@ -254,7 +254,7 @@ Behind _Admins_, a Deployment _Editor_:
     - Variables
     - XComs
 
-![No Admin Tab](https://assets2.astronomer.io/main/docs/astronomer-ui/editor_view.png)
+![No Admin Tab](/img/software/editor_view.png)
 
 #### Deployment Viewer
 
@@ -266,7 +266,7 @@ Deployment _Viewers_ are limited to read-only mode. They can only:
 
 Deployment Viewers cannot deploy to, modify, or delete anything within an Airflow Deployment. Additionally, they cannot create or use Service Accounts to do so. Attempts to modify a Deployment in any way will result in a `403` and an `Access is Denied` message.
 
-![Access Denied](https://assets2.astronomer.io/main/docs/astronomer-ui/access_denied.png)
+![Access Denied](/img/software/access_denied.png)
 
 ## What's Next
 

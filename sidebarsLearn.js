@@ -3,10 +3,10 @@ module.exports = {
     'overview',
     {
       type: 'category',
-      label: 'Concepts',
+      label: 'Airflow concepts',
       link: {
         type:'generated-index',
-        title: 'Concepts',
+        title: 'Airflow concepts',
         description: 'Learn about the fundamentals of Apache Airflow.'
       },
       items: [
@@ -22,22 +22,23 @@ module.exports = {
             'intro-to-airflow',
             'dags',
             'what-is-an-operator',
+            'airflow-ui',
+            'scheduling-in-airflow',
             'what-is-a-sensor',
             'connections',
             'what-is-a-hook',
-            'airflow-decorators',
             'bashoperator',
             'airflow-sql',
-            'airflow-ui',
-            'scheduling-in-airflow',
+            'managing-dependencies',
+            'managing-airflow-code',
           ],
         },
         {
           type: 'category',
-          label: 'Pipelines',
+          label: 'DAGs',
           link: {
             type: 'generated-index',
-            title: 'Pipelines',
+            title: 'DAGs',
             description: 'Learn about how to construct and manage data pipelines to be reliable and performant.',
           },
           items: [
@@ -45,15 +46,15 @@ module.exports = {
             'airflow-passing-data-between-tasks',
             'airflow-branch-operator',
             'airflow-importing-custom-hooks-operators',
+            'astro-python-sdk-etl',
             'debugging-dags',
-            'subdags',
             'task-groups',
-            'execute-notebooks',
             'rerunning-dags',
-            'managing-dependencies',
-            'managing-airflow-code',
             'templating',
             'cross-dag-dependencies',
+            'error-notifications-in-airflow',
+            'subdags',
+            'airflow-decorators',
           ],
         },
         {
@@ -66,7 +67,6 @@ module.exports = {
           },
           items: [
             'airflow-components',
-            'deferrable-operators',
             'airflow-database',
             'using-airflow-plugins',
             'airflow-scaling-workers',
@@ -76,7 +76,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: 'Management',
+          label: 'Advanced',
           link: {
             type: 'generated-index',
             title: 'Management',
@@ -92,6 +92,7 @@ module.exports = {
             'dynamically-generating-dags',
             'dynamic-tasks',
             'airflow-datasets',
+            'deferrable-operators',
           ],
         },
       ],
@@ -107,7 +108,7 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'Get started with Apache Airflow',
+          label: 'Get started with Airflow',
           link: {
                 type: 'doc',
                 id: 'get-started-with-airflow',
@@ -118,29 +119,30 @@ module.exports = {
           ],
         },
         'astro-python-sdk',
-        {
-          type: 'category',
-          label: 'Integrations',
-          link: {
-            type: 'generated-index',
-            title: 'Integrations',
-            description: 'Integrate Airflow with commonly used data engineering tools.',
-          },
-          items: [
-            'airflow-azure-data-factory-integration',
-            'airflow-azure-data-explorer',
-            'airflow-openlineage',
-            'airflow-dbt',
-            'airflow-databricks',
-            'airflow-sagemaker',
-            'airflow-snowflake',
-            'airflow-redshift',
-            'airflow-great-expectations',
-            'airflow-talend-integration',
-            'soda-data-quality',
-         ],
-        },
       ],
+    },
+    {
+      type: 'category',
+      label: 'Integrations',
+      link: {
+        type: 'generated-index',
+        title: 'Integrations',
+        description: 'Integrate Airflow with commonly used data engineering tools.',
+      },
+      items: [
+        'airflow-azure-data-factory-integration',
+        'airflow-azure-data-explorer',
+        'airflow-openlineage',
+        'airflow-dbt',
+        'airflow-databricks',
+        'airflow-sagemaker',
+        'airflow-snowflake',
+        'airflow-redshift',
+        'airflow-great-expectations',
+        'airflow-talend-integration',
+        'execute-notebooks',
+        'soda-data-quality',
+     ],
     },
   ],
 };

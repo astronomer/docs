@@ -107,7 +107,7 @@ If you'd like to deploy some more functional DAGs, upload your own or check out 
 
 Since Astronomer is running entirely on your infrastructure, the Software UI will be located at a base domain specific to your organization. Head to `app.BASEDOMAIN` in your web browser and log in. You're in the right place if you see the following login screen:
 
-![Log In](https://assets2.astronomer.io/main/docs/enterprise_quickstart/log_into_astro.png)
+![Log In](/img/software/log_into_astro.png)
 
 > **Note:** If you are not the first person to log in, you will need an email invite to the platform.
 
@@ -115,7 +115,7 @@ Since Astronomer is running entirely on your infrastructure, the Software UI wil
 
 If you're the first person to log in to the Software UI, click **New Workspace** to create a Workspace.
 
-![Create a Workspace on Astronomer](https://assets2.astronomer.io/main/docs/getting-started/create-workspace.png)
+![Create a Workspace on Astronomer](/img/software/create-workspace.png)
 
 You can think of Workspaces the same way you'd think of teams - a space that specific user groups have access to with varying levels of permissions. From within a Workspace you can create one or more Airflow Deployments, each of which hosts a collection of DAGs.
 
@@ -144,7 +144,7 @@ In the Software UI, use the **New Deployment** menu to configure the following:
 
 Once you've finished, click **Create Deployment**. After it spins up, your new Deployment should look something like this:
 
-![Create an Airflow Deployment on Astronomer](https://assets2.astronomer.io/main/docs/getting-started/create-deployment.png)
+![Create an Airflow Deployment on Astronomer](/img/software/create-deployment.png)
 
 For a production environment, you'll likely need to set resources and configure your Airflow Deployment to fit the needs of your organization. For more information on configuring Deployments, read [Configure an Airflow Deployment on Astronomer](configure-deployment.md).
 
@@ -191,7 +191,7 @@ Once you've turned on the `example-dag` in the Airflow UI, go to the **Metrics**
 
 The **Metrics** tab only shows metrics for a given Deployment. If you are the first user to authenticate to Astronomer, you'll additionally have access to administrative views of Grafana and Kibana via the dropdown menu in the Software UI:
 
-![Admin](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
+![Admin](/img/software/admin_panel.png)
 
 These views show logs and metrics across all Deployments running on your Astronomer platform. To learn more about using Grafana, read [Metrics in Astronomer Software](grafana-metrics.md). To learn more about using Kibana, read [Logging in Astronomer Software](kibana-logging.md).
 

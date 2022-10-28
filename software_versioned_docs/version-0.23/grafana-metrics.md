@@ -18,15 +18,15 @@ By default, users with [System Admin permissions](manage-platform-users.md#syste
 
 1. As a System Admin, open Grafana from the Software UI:
 
-    ![Create Grafana Dashboard](https://assets2.astronomer.io/main/docs/grafana/ui-access.png)
+    ![Create Grafana Dashboard](/img/software/ui-access.png)
 
 2. Log in to Grafana. If you're on the Welcome page, you can log in via the **Sign In** button at the bottom of the sidebar menu. The default login credentials are `admin:admin`.
 
-    ![Login button](https://assets2.astronomer.io/main/docs/grafana/grafana-signin.png)
+    ![Login button](/img/software/grafana-signin.png)
 
 3. Click the search button to access all published dashboards.
 
-    ![Grafana search button](https://assets2.astronomer.io/main/docs/grafana/search-button.png)
+    ![Grafana search button](/img/software/search-button.png)
 
 > **Note:** As a System Admin, you can see metrics in Grafana for all Airflow Deployments on your cluster. You do not have to be a member of a Workspace to access Grafana metrics for Deployments within that Workspace.
 
@@ -38,15 +38,15 @@ To filter Grafana metrics by Deployment:
 
 1. In the Software UI, click on a Workspace to see a list of all Deployments in that Workspace.
 
-    ![Open Workspace in the Software UI](https://assets2.astronomer.io/main/docs/grafana/click-workspace.png)
+    ![Open Workspace in the Software UI](/img/software/click-workspace.png)
 
 2. The release name for a Deployment is listed under the Deployment's proper name. Make note of the release names for each Deployment you want to monitor.  
 
-    ![Release name location](https://assets2.astronomer.io/main/docs/grafana/release-name.png)
+    ![Release name location](/img/software/release-name.png)
 
 3. In Grafana, open a dashboard. Click the menu under the Deployment's name to see a list of all release names in your cluster. Depending on which dashboard you're using, the name of this menu is either **Deployment**, **Release Name**, or **Namespace**.
 
-    ![Release name menu in Grafana](https://assets2.astronomer.io/main/docs/grafana/select-release-name.png)
+    ![Release name menu in Grafana](/img/software/select-release-name.png)
 
 4. Select one or multiple release names for the Deployments you want to monitor.
 
@@ -56,7 +56,7 @@ Read the rest of this guide to learn about Astronomer's built-in Grafana dashboa
 
 This dashboard shows the amount of persistent storage available to Prometheus, the platform's Docker registry, and Elasticsearch across your entire platform. Use this dashboard to track system-wide behaviors and issues.
 
-![Astronomer Platform](https://assets2.astronomer.io/main/docs/ee/platform_overview.png)
+![Astronomer Platform](/img/software/platform_overview.png)
 
 ### Key metrics
 
@@ -64,23 +64,23 @@ This dashboard shows the amount of persistent storage available to Prometheus, t
 
     For instance, if you click **Edit** in the dropdown menu for the metric, you're able to update the **Metrics** query to show data for a specific time, status, or Deployment.
 
-    ![1-day Airflow Task Volume Metric](https://assets2.astronomer.io/main/docs/grafana/task-volume.png)
+    ![1-day Airflow Task Volume Metric](/img/software/task-volume.png)
 
     In the following example, the query has been rewritten in the format `sum(increase(airflow_ti_successes[<time>]))`, which changes the time interval that appears in the metric. We recommend monitoring across longer intervals to clearly identify trends in task failures and successes:
 
-    ![Task Volume Metric with Modified Time Interval](https://assets2.astronomer.io/main/docs/grafana/time-interval.png)
+    ![Task Volume Metric with Modified Time Interval](/img/software/time-interval.png)
 
     In addition, the eye icon on the metric can be deselected so that only task failures are shown:
 
-    ![Failures-Only Task Volume Metric](https://assets2.astronomer.io/main/docs/grafana/failures-only.png)
+    ![Failures-Only Task Volume Metric](/img/software/failures-only.png)
 
     You could also write this query as `sum by (deployment) (increase(airflow_ti_failures[<time-interval>]))` to view task volume across an entire Deployment, which is useful for monitoring potential system-wide problems:
 
-    ![Metric Across Multiple Deployments](https://assets2.astronomer.io/main/docs/grafana/multiple-deployments.png)
+    ![Metric Across Multiple Deployments](/img/software/multiple-deployments.png)
 
 - **Database Connections:** This metric can be found in the **Database** panel. It measures how often your database is reached out to by the Airflow Scheduler, Webserver, and Workers. The chart shows the sum total of connections coming from sqlpooling in all Airflow Deployments in your environment:
 
-    ![Database Connections Metric](https://assets2.astronomer.io/main/docs/grafana/db-connections.png)
+    ![Database Connections Metric](/img/software/db-connections.png)
 
     This metric is particularly relevant to organizations with more than 20 Airflow Deployments. For optimal database performance, you should keep this number below `max_connections - 300`.
 
@@ -88,7 +88,7 @@ This dashboard shows the amount of persistent storage available to Prometheus, t
 
     Extended periods of waiting can degrade performance and should be investigated for potential problems. For example, the Deployments associated with the red and pink spikes in the following graph might be experiencing issues with successfully executing tasks:
 
-    ![PG Bouncer metrics](https://assets2.astronomer.io/main/docs/grafana/PGBouncer.png)
+    ![PG Bouncer metrics](/img/software/PGBouncer.png)
 
 - **Unhealthy Schedulers:**  This metric shows the number of unhealthy Schedulers in a given Deployment. It's available in the **Airflow Health** panel, but Scheduler health can also be assessed for each individual Deployment in the **Metrics** tab of the Software UI. A Scheduler is considered "Unhealthy" if it has not emitted a heartbeat for over 1 minute.
 
@@ -96,17 +96,17 @@ This dashboard shows the amount of persistent storage available to Prometheus, t
 
     For example, an organization would want to investigate the green Scheduler in the following screenshot:
 
-    ![Unhealthy Schedulers](https://assets2.astronomer.io/main/docs/grafana/unhealthy-shcedulers.png)
+    ![Unhealthy Schedulers](/img/software/unhealthy-shcedulers.png)
 
 - **DAG Parsing Time:** This metric is available in the **Airflow Health** panel. It measures how quickly the Scheduler is executing your DAGs, and it's an indicator for how well your Scheduler is scheduling jobs for execution:
 
-    ![Parsing Time Metric](https://assets2.astronomer.io/main/docs/grafana/parsing-time.png)
+    ![Parsing Time Metric](/img/software/parsing-time.png)
 
    Anything under 1 second is considered good, but the lower the measured time the better. Note that operator executions are not included in this metric, as those are typically scheduled for execution in Worker pods.
 
 - **Elasticsearch Available Disk Space:** Astronomer utilizes the [ELK stack](https://www.elastic.co/what-is/elk-stack) to power logging, an important part of establishing observability for the platform as a whole. To function successfully, Elasticsearch should always have >20% Available Disk Space. You can monitor this from the “Platform Overview” dashboard to ensure that both task and component logs have been successfully captured and persisted:
 
-   ![Available Disk Space](https://assets2.astronomer.io/main/docs/grafana/available-disk-space.png)
+   ![Available Disk Space](/img/software/available-disk-space.png)
 
    If this ever dips below 20%, we recommend increasing the replica count in the [Elasticsearch Helm chart](https://github.com/astronomer/astronomer/blob/master/charts/elasticsearch/values.yaml). The Helm changes will look something like the following:
 
@@ -120,7 +120,7 @@ This dashboard shows the amount of persistent storage available to Prometheus, t
 
 This dashboard includes a high-level view of resource usage and system stress levels. Use this dashboard to monitor all Airflow Deployments running within your Kubernetes cluster in a single view.
 
-![Astronomer State](https://assets2.astronomer.io/main/docs/ee/airflow_state.png)
+![Astronomer State](/img/software/airflow_state.png)
 
 ### Key metrics
 
@@ -130,7 +130,7 @@ This dashboard includes a high-level view of resource usage and system stress le
 
 This dashboard shows several detailed metrics for each Kubernetes pod in your cluster. If you filter by namespace for a particular Airflow Deployment, you can view a dedicated set of metrics for any pod within that namespace.
 
-![Kubernetes Pod Dashboard](https://assets2.astronomer.io/main/docs/grafana/kube-pod.png)
+![Kubernetes Pod Dashboard](/img/software/kube-pod.png)
 
 ### Key metrics
 
@@ -140,7 +140,7 @@ This dashboard shows several detailed metrics for each Kubernetes pod in your cl
 
 This dashboard shows a set of resource and health-based metrics for individual Deployments. It is most similar to the one displayed in the **Metrics** tab of the Software UI.
 
-![Astronomer Deployments](https://assets2.astronomer.io/main/docs/ee/airflow_deployment_overview.png)
+![Astronomer Deployments](/img/software/airflow_deployment_overview.png)
 
 ### Key metrics
 
@@ -152,7 +152,7 @@ If any pod within an Airflow Deployment's namespace is not in a `Running` state,
 
 This dashboard tracks the performance of Fluentd, which writes logs to Elasticsearch. You can use the metrics in this dashboard to track the overall status of logs being emitted from the service.
 
-![Fluentd Dashboard](https://assets2.astronomer.io/main/docs/grafana/Fluentd.png)
+![Fluentd Dashboard](/img/software/Fluentd.png)
 
 ### Key metrics
 
@@ -162,7 +162,7 @@ This dashboard tracks the performance of Fluentd, which writes logs to Elasticse
 
 In addition to dashboards in Grafana, each of your Deployments has a built-in metrics dashboard in the Software UI. Any user with access to a given Deployment can access this dashboard. To get there, open a Deployment and go to the **Metrics** tab:
 
-![Astronomer Metrics Dashboard](https://assets2.astronomer.io/main/docs/grafana/astro-metrics.png)
+![Astronomer Metrics Dashboard](/img/software/astro-metrics.png)
 
 This dashboard is most useful for tracking the performance and resource usage of an individual Airflow Deployment, whereas Grafana is most useful for tracking performance at the platform level and across multiple Airflow Deployments.
 
