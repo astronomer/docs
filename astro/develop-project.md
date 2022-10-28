@@ -483,7 +483,7 @@ Your Astro project can now utilize Python packages from your private GitHub repo
 
 Installing Python packages on Astro from a private PyPI index is required for organizations that deploy a [private PyPI server (`private-pypi`)](https://pypi.org/project/private-pypi/) as a secure layer between pip and a Python package storage backend, such as GitHub, AWS, or a local file system or managed service.
 
-At a high level, this setup requires specifying your privately hosted Python packages in `requirements.txt`, creating a custom Docker image that changes where pip looks for packages, and building your Astro project with this Docker image.
+To complete this setup, you'll specify your privately hosted Python packages in `requirements.txt`, create a custom Docker image that changes where pip looks for packages, and then build your Astro project with this Docker image.
 
 #### Prerequisites
 
@@ -492,11 +492,11 @@ At a high level, this setup requires specifying your privately hosted Python pac
 
 #### Step 1: Add Python packages to your Astro project
 
-To install a Python package from a private PyPI index, add the package name and version to the `requirements.txt` file of your Astro project. If you do not include a version, the latest version will be installed. This is the same syntax as you would use when adding public packages from [PyPI](https://pypi.org). Your `requirements.txt` file can contain a mix of both publicly accessible and private packages.
+To install a Python package from a private PyPI index, add the package name and version to the `requirements.txt` file of your Astro project. If you don't specify a version, the latest version is installed. Use the same syntax that you used when you added public packages from [PyPI](https://pypi.org). Your `requirements.txt` file can contain both publicly accessible and private packages.
 
 :::caution
 
-Make sure that the name of any privately hosted Python package does not conflict with the name of other Python packages in your Astro project. The order in which pip searches indices might produce unexpected results.
+Make sure that the name of any privately hosted Python package doesn't conflict with the name of other Python packages in your Astro project. The order in which pip searches indices might produce unexpected results.
 
 :::
 
@@ -560,7 +560,7 @@ Make sure that the name of any privately hosted Python package does not conflict
     image_name=astro-$(date +%Y%m%d%H%M%S)
     ```
 
-2. Run the following command to create a new Docker image from your `Dockerfile`. Replace the pip repository and corresponding username and password with your own.
+2. Run the following command to create a new Docker image from your `Dockerfile`. Replace the pip repository domain name and corresponding username and password with your own.
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t $image_name .
