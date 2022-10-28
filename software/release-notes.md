@@ -9,6 +9,36 @@ description: Astronomer Software release notes.
 
 0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md).
 
+## 0.30.3
+
+Release date: October 26, 2022
+
+### Additional improvements
+
+- You can now configure custom Alertmanager receivers with their own rules and topics using `customReceiver` in the Alertmanager Helm chart.
+- You can now limit which Runtime versions are available for new Deployments using `astronomer.minAstroRuntimeVersion` and `astronomer.airflowMinimumAstroRuntimeVersion` in your `config.yaml` file.
+- You can now configure a `livenessProbe` and `readinessProbe` specific to Prometheus in the Prometheus Helm chart.
+- You can now pass extra environment variables to [logging sidecars](export-task-logs.md#configure-logging-sidecars) using `global.loggingSidecar.extraEnv` in your `config.yaml` file.  
+- You can now define resource requests for [logging sidecars](export-task-logs.md#configure-logging-sidecars) using `global.loggingSidecar.resources` in your `config.yaml` file. 
+- You can now configure whether introspection APIs are available in GraphQL using `astronomer.apollo.introspection` in your `config.yaml` file.
+
+### Bug fixes
+
+- Fixed an issue where upgrading Astronomer Software with a custom `houston.deployments.components` value in Helm could make the Software UI unavailable.
+- Fixed an issue where the Software UI didn't show the correct value for **Extra Capacity**.
+- Fixed an issue where upgrading a Deployment from Airflow 1.10.15 to 2.3 prevented you from configuring Deployment resources in the Software UI.
+- Added protections for using Arm-based Runtime images in Software Deployments.
+- Fixed an issue where some Deployments failed when pulling secrets from a private Docker registry.
+- Fixed an issue where some email alerts for unhealthy Deployments would not send if `namespaceFreeFormEntry: true` was set in `config.yaml`.
+- Fixed an issue where you could not view Deployment-level service accounts in the Software UI.
+- Fixed an issue where token refreshing could break when the token didn't have a properly formatted date.
+- Suppressed some extraneous ElasticSearch logs that made parsing logs for relevant information difficult.
+- Fixed the following vulnerabilities:
+    - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
+    - [CVE-2022-41816](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41816)
+    - [CVE-2022-2900](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2900)
+    - [CVE-2022-3224](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3224)
+
 ## 0.30.2
 
 Release date: September 22, 2022

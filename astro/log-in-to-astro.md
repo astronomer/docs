@@ -2,8 +2,12 @@
 sidebar_label: 'Log in to Astro'
 title: "Log in to Astro"
 id: log-in-to-astro
-description: Log in to Astro to access Astro features and functionality.
 ---
+
+<head>
+  <meta name="description" content="Learn how you can use the Cloud user interface (UI) and the Astro command-line interface (CLI) to log in to Astro." />
+  <meta name="og:description" content="Learn how you can use the Cloud user interface (UI) and the Astro command-line interface (CLI) to log in to Astro." />
+</head>
 
 You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, Deployments, environment variables, tasks, and users. You need to authenticate your user credentials when you're using the Cloud UI or the Astro CLI for development on Astro.
 

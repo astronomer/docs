@@ -2,9 +2,13 @@
 sidebar_label: "AWS"
 title: "AWS cluster configurations"
 id: resource-reference-aws
-description: Reference of all supported configurations for new clusters on Astro in AWS.
 sidebar_custom_props: { icon: "img/aws.png" }
 ---
+
+<head>
+  <meta name="description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
+  <meta name="og:description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
+</head>
 
 Unless otherwise specified, new clusters on Astro are created with a set of default AWS resources that should be suitable for most use cases.
 
