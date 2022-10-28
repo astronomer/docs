@@ -41,6 +41,8 @@ For a full list of functions, see the [Astro Python SDK README in GitHub](https:
 
 ## Installation
 
+Using the Astro Python SDK requires configuring a few things in your Airflow project.
+
 1. Install the Astro Python SDK package in your Airflow environment. If you're using the Astro CLI, add the following to the `requirements.txt` file of your Astro project:
 
     ```
@@ -146,10 +148,10 @@ example_s3_to_snowflake_etl_dag = example_s3_to_snowflake_etl()
 
 This Astro SDK implementation is different from a standard TaskFlow implementation in the following ways:
 
-- The `load_file` and `append` functions take care of loading your raw data from Amazon S3 and appending data to your reporting table. You didn't have to write any extra code to get the data into Snowflake. Here, you had a `load_file` task for each file instead of one task for all files in Amazon S3, which supports atomicity.
-- Using the `transform` function, you executed SQL to combine your data from multiple tables. The results are automatically stored in a Snowflake table. You didn't have to use the `SnowflakeHook` in Airflow or write any of the code to execute the query.
-- You seamlessly transitioned to a transformation in Python with the `dataframe` function without needing to explicitly convert the results of your previous task to a Pandas DataFrame. You then wrote the output of your transformation to your aggregated reporting table in Snowflake using the `target_table parameter`, so you didn't have to worry about storing the data in XCom.
-- You didn't have to redefine your Airflow connections in any tasks that were downstream of your original definitions, including `load_file` and `create_reporting_table`. Any downstream task that inherits from a task with a defined connection can use the same connection without additional configuration.
+- The `load_file` and `append` functions take care of loading your raw data from Amazon S3 and appending data to your reporting table. You don't have to write any extra code to get the data into Snowflake. A `load_file` task exists for each file instead of one task for all files in Amazon S3, which supports atomicity.
+- Using the `transform` function, you can execute SQL to combine your data from multiple tables. The results are automatically stored in a Snowflake table. You don't have to use the `SnowflakeHook` in Airflow or write any of the code to execute the query.
+- You can run a transformation in Python with the `dataframe` function, meaning that you don't need to explicitly convert the results of your previous task to a Pandas DataFrame. You can then write output of your transformation to your aggregated reporting table in Snowflake using the `target_table parameter`, so you don't have to worry about storing the data in XCom.
+- You don't have to redefine your Airflow connections in any tasks that are downstream of your original definitions, including `load_file` and `create_reporting_table`. Any downstream task that inherits from a task with a defined connection can use the same connection without additional configuration.
 - You can run common SQL queries using Python alone. The SDK includes Python functions for some of the most common actions in SQL.
 
 Overall, your DAG with the Astro Python SDK is shorter, simpler to implement, and easier to read. This allows you to implement even more complicated use cases easily while focusing on the movement of your data.
@@ -254,7 +256,7 @@ Although you achieved your ETL goal with the DAG, the following limitations made
 - While the TaskFlow API makes it easier to pass data between tasks, it stores the resulting dataframes as XComs by default. This means that you need to worry about the size of your data. You could implement a custom XCom backend, but that would require additional configuration.
 - Loading data back to Snowflake after the transformation is complete requires writing extra code to store an intermediate CSV in Amazon S3.
 
-## Lern more
+## Learn more
 
 To learn more about the Astro Python SDK, see:
 
