@@ -3,6 +3,7 @@ sidebar_label: Overview
 title: Astro Cloud IDE
 id: overview
 description: Learn how to build pipelines with the Cloud IDE.
+slug: /cloud-ide
 ---
 
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
