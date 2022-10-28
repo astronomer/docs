@@ -108,10 +108,6 @@ To create a cluster in one of these regions, complete the following additional s
     aws iam set-security-token-service-preferences --global-endpoint-token-version v2Token
     ```
 
-### Astronomer support confirmation
-
-Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
-
 </TabItem>
 
 <TabItem value="astronomer hosted data plane">
@@ -127,10 +123,6 @@ To create a new Astro cluster on the Astronomer-hosted cloud, submit a request t
 - The email address of your first Astro user.
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
-
-### Astronomer support confirmation
-
-Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 
@@ -160,10 +152,6 @@ If you don't specify configuration preferences, Astronomer support creates a clu
 
 For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure.md).  
 
-### Astronomer support confirmation
-
-Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
-
 </TabItem>
 
 <TabItem value="astronomer hosted data plane">
@@ -179,10 +167,6 @@ To create a new Astro cluster on the Astronomer-hosted cloud, submit a request t
 - The email address of your first Astro user.
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
-
-### Astronomer support confirmation
-
-Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
 
 </TabItem>
 
@@ -210,11 +194,7 @@ To create a new Astro cluster on GCP for your Organization, submit a request to 
 - Your preferred maximum node count.
 - Your preferred VPC CIDR.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/19, `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp.md).  
-
-### Astronomer support confirmation
-
-Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/19, `e2-medium-4 nodes`, one Medium General Purpose CloudSQL instance (4vCPU, 16GB), and a maximum node count of 20 in `us-central1`.  For information on all supported regions and configurations, see [Resources required for Astro on GCP](resource-reference-gcp.md). 
 
 </TabItem>
 
@@ -232,10 +212,10 @@ To create a new Astro cluster on the Astronomer-hosted cloud, submit a request t
 
 If you don't specify your configuration preferences, Astronomer support creates a cluster with a default configuration.
 
-### Astronomer support confirmation
-
-Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
-
 </TabItem>
 
 </Tabs>
+
+## Astronomer support confirmation
+
+Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
