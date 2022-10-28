@@ -52,7 +52,7 @@ module.exports = {
                 "cloud-ide/quick-start/02-create-pipeline",
                 "cloud-ide/quick-start/03-first-cell",
                 "cloud-ide/quick-start/04-databases",
-                "cloud-ide/quick-start/05-using-outputs",
+                "cloud-ide/quick-start/05-using-output",
                 "cloud-ide/quick-start/06-running-and-scheduling",
                 "cloud-ide/quick-start/07-deploying",
               ],
