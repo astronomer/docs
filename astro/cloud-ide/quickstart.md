@@ -12,7 +12,21 @@ The Cloud IDE is currently in _Public Preview_. This means that it is available 
 
 :::
 
-This quickstart walks you through creating and deploying your first project through the Astro Cloud IDE.
+This quickstart walks you through creating and running your first project through the Astro Cloud IDE.
+
+## Prerequisites 
+
+To complete this quickstart, you need:
+
+- Access to [Astro](overview.md).
+- Optional. A database hosted in one of the following services:
+    - GCP BigQuery
+    - Postgres (hosted)
+    - Snowflake
+    - AWS S3
+    - Redshift 
+
+If you don't provide a database, you can still complete the tutorial. However, you will not be able to test any SQL in your pipeline.
 
 ## Step 1: Log in and create a project
 
