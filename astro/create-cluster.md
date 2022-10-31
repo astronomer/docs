@@ -3,12 +3,14 @@ sidebar_label: 'Create a cluster'
 title: "Create a new cluster on Astro"
 id: create-cluster
 description: Create a new Astro cluster for your Organization.
+toc_min_heading_level: 1
+toc_max_heading_level: 2
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The Astro install typically starts with one Cluster for each Organization. However, your organization can choose to configure multiple Astro Clusters. This could enable a few benefits, including:
+The Astro install typically starts with one cluster for each Organization. However, your organization can choose to configure multiple Astro clusters. This could enable a few benefits, including:
 
 - Clusters in different regions
 - Different clusters for development and production environments

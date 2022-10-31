@@ -4,6 +4,8 @@ title: 'Install Astro on GCP'
 id: install-gcp
 description: Get started on Astro by creating your first Astro cluster on Google Cloud Platform (GCP).
 sidebar_custom_props: { icon: 'img/gcp.png' }
+toc_min_heading_level: 1
+toc_max_heading_level: 2
 ---
 
 import Tabs from '@theme/Tabs';
@@ -21,6 +23,8 @@ When you've completed the installation process, Astronomer will create a cluster
 
 For more information about managing Google Cloud projects, see [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
 
+## Set up
+
 <Tabs
     defaultValue="byoc"
     groupId= "byoc"
@@ -30,7 +34,7 @@ For more information about managing Google Cloud projects, see [GCP documentatio
     ]}>
 <TabItem value="byoc">
 
-## Prerequisites
+### Prerequisites
 
 - A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
 - A user with [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles) in your project.
@@ -50,7 +54,7 @@ For more information about managing Google Cloud projects, see [GCP documentatio
 
 For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
 
-### VPC peering prerequisites (optional)
+#### VPC peering prerequisites (optional)
 
 If any of your GCP resources are on a private network, you can access them using one of the following options:
 
@@ -64,7 +68,7 @@ Astro uses 4 different CIDR blocks for creating the infrastructure for your Astr
 - **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
 - **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/19`)
 
-## Access Astro
+### Access Astro
 
 1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
@@ -77,7 +81,7 @@ Astro uses 4 different CIDR blocks for creating the infrastructure for your Astr
 
     If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
-## Activate the data plane
+### Activate the data plane
 
 The data plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
@@ -108,7 +112,7 @@ The data plane is a collection of infrastructure components for Astro that run i
     gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
     ```
 
-## Provide setup information to Astronomer
+### Provide setup information to Astronomer
 
 Once you've activated your data plane, provide Astronomer with:
 
@@ -122,14 +126,14 @@ Once you've activated your data plane, provide Astronomer with:
 
 If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with a node pool of `e2-standard-4` nodes. For more information, see [GCP resource reference](resource-reference-gcp.md).
 
-### VPC peering with Astronomer
+#### VPC peering with Astronomer
 
 Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
 
 - VPC Name/ID and region for peering with Astronomer.
 - The IPs of your DNS servers.
 
-## Astronomer support creates the cluster
+### Astronomer support creates the cluster
 
 After you provide Astronomer support with the setup information for your organization, Astronomer support creates your first cluster on GCP.
 
@@ -154,7 +158,7 @@ This feature is currently Private Preview. Contact [Astronomer support](https://
 
 When providing hosting services, Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
 
-## Prerequisites
+### Prerequisites
 
 The setup process assumes that you've already provided Astronomer support with the following information: 
 
@@ -165,13 +169,13 @@ The setup process assumes that you've already provided Astronomer support with t
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative. 
 
-## Astronomer support creates the cluster
+### Astronomer support creates the cluster
 
 Astronomer support creates your first Astro cluster in a dedicated GCP account after you've provided your setup information.
 
 Wait for confirmation that the installation is successful before you access Astro and create a Deployment.
 
-## Access Astro
+### Access Astro
 
 1. Optional. If you haven't created an Astronomer account, go to https://cloud.astronomer.io/ and create an account.
 
