@@ -226,7 +226,7 @@ The setup process assumes that you've already provided Astronomer support with t
 
 If you haven't provided this information to Astronomer support, contact your Astronomer representative. 
 
-## Astronomer support creates the cluster
+### Astronomer support creates the cluster
 
 Astronomer support creates your first Astro cluster in a dedicated Azure account after you've provided your setup information.
 
