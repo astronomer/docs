@@ -50,7 +50,7 @@ To create a new Astro cluster on AWS for your Organization, submit a request to 
 
 If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/19,`m5.xlarge` nodes, and a maximum node count of 20 in `us-east-1`. For information about supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws.md).
 
-### Additional setup for AWS regions that are disabled by default
+### Additional set up for AWS regions that are disabled by default
 
 Some AWS regions that Astronomer supports are [disabled by default on AWS](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable). These regions are:
 
@@ -58,7 +58,7 @@ Some AWS regions that Astronomer supports are [disabled by default on AWS](https
 - `ap-east-1` - Asia Pacific (Hong Kong)
 - `me-south-1` - Middle East (Bahrain)
 
-To create a cluster in one of these regions, complete the following additional setup in your AWS account:
+To create a cluster in one of these regions, complete the following additional set up in your AWS account:
 
 1. In the AWS IAM console, update the `astronomer-remote-management` trust relationship to include permissions for enabling and disabling your desired region as described in the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_examples_aws-enable-disable-regions.html):
 
