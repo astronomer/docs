@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Security & Data Governance"
-title: Security & Data Governance
+sidebar_label: "Security & data governance"
+title: Astro Cloud IDE security & data governance
 id: security
 ---
 
@@ -8,7 +8,7 @@ id: security
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your deployments or pipelines running in production. If you have any feedback, please submit it [here](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in Public Preview. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your Deployments or pipelines running in production. If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
 :::
 
@@ -16,7 +16,7 @@ The Cloud IDE is currently in _Public Preview_. This means that it is available 
 
 The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. This means that all of the infrastructure is managed by Astronomer, and you don't have to worry about managing the underlying infrastructure. Infrastructure is tightly scoped to organizations, so your code and data will never be exposed to other organizations.
 
-## Data Governance
+## Data governance
 
 The Cloud IDE stores Python cell outputs in an encrypted S3 bucket. SQL cell outputs are stored in the corresponding connection database under the schema you configure.
 

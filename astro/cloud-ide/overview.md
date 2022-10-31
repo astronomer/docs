@@ -6,14 +6,6 @@ description: Learn how to build pipelines with the Cloud IDE.
 slug: /cloud-ide
 ---
 
-:::caution
-
-<!-- id to make it easier to remove: cloud-ide-preview-banner -->
-
-The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your deployments or pipelines running in production. If you have any feedback, please submit it [here](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
-
-:::
-
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 
@@ -21,7 +13,19 @@ import LinkCard from '@site/src/components/LinkCard';
   A cloud-based, notebook-inspired IDE for writing and testing data pipelines. No Airflow knowledge or local setup required.
 </p>
 
-The Astro Cloud IDE is a notebook-inspired development environment for writing and testing data pipelines with Astro. It's the product of hundreds of conversations with data engineers, data scientists, and analytics engineers, and we’re super excited to get it in your hands. The Cloud IDE materially lowers the barrier to entry for new Airflow users and improves the lives of experienced users.
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your Deployments or pipelines running in production. If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
+The Astro Cloud IDE is a notebook-inspired development environment for writing and testing data pipelines with Astro. The Cloud IDE materially lowers the barrier to entry for new Airflow users and improves the development experience of experienced users.
+
+One of the biggest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. You can configure all of these through the Astro Cloud IDE's user interface (UI) so that you only need to write the Python or SQL that executes your work.
+
+In the following screenshot, you can see how you can use the Cloud IDE to write a DAG by only writing SQL. The Astro CLoud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured through the UI.
 
 ![Product Screenshot](/img/cloud-ide/pipeline-editor.png)
 
@@ -36,11 +40,11 @@ The Astro Cloud IDE is a notebook-inspired development environment for writing a
   />
   <LinkCard
     label="Handle data seamlessly"
-    description="Pass data directly from one task to another via our familiar, notebook-style interface. No configuration required."
+    description="Pass data directly from one task to another using a notebook-style interface. No configuration required."
   />
   <LinkCard
     label="Move between SQL and Python"
-    description="Use SQL tables as dataframes by just referencing your upstream query name, and vice versa."
+    description="Use SQL tables as dataframes by referencing your upstream query name, and vice versa."
   />
   <LinkCard
     label="Auto-generate your DAG"
@@ -48,10 +52,19 @@ The Astro Cloud IDE is a notebook-inspired development environment for writing a
   />
   <LinkCard
     label="Source control your changes"
-    description="Check your pipeline into a Git repository with our built-in, easy-to-use Git integration."
+    description="Push your pipeline to a Git repository with a built-in Git integration."
   />
   <LinkCard
-    label="Deploy with the click of a button"
-    description="Using our out-of-the-box CI/CD, you can deploy your DAG to a production runtime on Astro in just a few clicks."
+    label="Deploy directly to Astro"
+    description="Using our out-of-the-box CI/CD, deploy your code to a production Deployment on Astro in a few clicks."
   />
+</LinkCardGrid>
+
+## Documentation
+
+
+<LinkCardGrid>
+  <LinkCard truncate label="Quickstart" description="Create data pipelines from scratch using the Astro Cloud IDE." href="/astro/cloud-ide/quickstart" />
+  <LinkCard truncate label="Deploy a project" description="Push your changes from the Astro Cloud IDE directly to GitHub or a Deployment" href="/astro/cloud-ide/deploy-project" />
+  <LinkCard truncate label="Security" description="Learn how the Astro Cloud IDE keeps your code and production Deployments secure." href="/astro/cloud-ide/reference/security" />
 </LinkCardGrid>

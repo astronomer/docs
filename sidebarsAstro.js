@@ -41,21 +41,10 @@ module.exports = {
         {
           type: "category",
           label: "Cloud IDE",
+          link: { type: "doc", id: "cloud-ide/overview" },
           items: [
-            "cloud-ide/overview",
-            {
-              type: "category",
-              label: "Quick Start",
-              items: [
-                "cloud-ide/quick-start/create-project",
-                "cloud-ide/quick-start/create-pipeline",
-                "cloud-ide/quick-start/first-cell",
-                "cloud-ide/quick-start/connecting-to-a-database",
-                "cloud-ide/quick-start/using-cell-outputs",
-                "cloud-ide/quick-start/running-scheduling",
-                "cloud-ide/quick-start/deploying",
-              ],
-            },
+            "cloud-ide/quickstart",
+            "cloud-ide/deploy-project",
             {
               type: "category",
               label: "Reference",
