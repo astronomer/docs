@@ -76,7 +76,6 @@ Specify your Client ID in the **Login** field, Client Secret in the **Password**
 
 Choose a Docker image that you want to run. The `AzureContainerInstancesOperator` will run any Docker image in a container with your specifications. If you don't have an image, you can use a pre-built one such as Docker's `hello-world:latest` image. You can search for other available images in [Docker's container image repository](https://hub.docker.com/search?q=).
 
-
 ## Step 5: Create your DAG
 
 In your Astro project `dags/` folder, create a new file called `aci-pipeline.py`. Paste the following code into the file:
