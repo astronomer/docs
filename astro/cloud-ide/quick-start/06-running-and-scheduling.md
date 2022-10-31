@@ -4,6 +4,14 @@ title: Running and scheduling your pipeline
 id: running-scheduling
 ---
 
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your deployments or pipelines running in production. If you have any feedback, please submit it [here](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
 Now that you've completed your pipeline, you can run it from beginning to end to ensure it works properly. To do so, click on the **Run** button in the top right corner of the screen. Cells will be executed in order by dependencies. The graph view on the sidebar will show which cells have been executed and which are still pending.
 
 ![Run Pipeline](/img/cloud-ide/run-pipeline.png)

@@ -4,6 +4,14 @@ title: Deploying your pipeline
 id: deploying
 ---
 
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your deployments or pipelines running in production. If you have any feedback, please submit it [here](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
 Once you've created your pipeline and configured the schedule, you're ready to deploy it! Deploying a pipeline means that it will be scheduled to run at the specified interval. Currently, to deploy a pipeline from the Cloud IDE, you must first check the pipeline into a Git repository and then deploy it using CI/CD.
 
 ### Prerequisites

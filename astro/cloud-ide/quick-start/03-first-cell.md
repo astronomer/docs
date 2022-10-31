@@ -4,6 +4,14 @@ title: Your first cell
 id: first-cell
 ---
 
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your deployments or pipelines running in production. If you have any feedback, please submit it [here](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
 You're now ready to write your first cell. In this section, you'll write a simple _hello world_ cell. To begin, click on the **Create Cell** button in the top left corner of the screen. You'll be presented with a list of cell types to choose from.
 
 ![Create Cell](/img/cloud-ide/create-cell.png)

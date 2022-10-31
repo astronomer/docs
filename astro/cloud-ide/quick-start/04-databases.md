@@ -4,6 +4,14 @@ title: Connecting to a database
 id: connecting-to-a-database
 ---
 
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your deployments or pipelines running in production. If you have any feedback, please submit it [here](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
 Now that you've created a Python cell, let's connect to a database and run some queries against it using the SQL cell type.
 
 ## Setting up your connection

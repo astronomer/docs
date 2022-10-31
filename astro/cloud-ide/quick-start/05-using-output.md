@@ -4,6 +4,14 @@ title: Using cell outputs
 id: using-cell-outputs
 ---
 
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your deployments or pipelines running in production. If you have any feedback, please submit it [here](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
 The Cloud IDE makes it very easy to share data between cells. SQL cells return their output if the `Create Table` checkbox is selected in the bottom right corner of the cell. Python cells must explicitly return their output. To do so, simply add a `return` statement in the cell. See below for some examples.
 
 ### Python Return Examples

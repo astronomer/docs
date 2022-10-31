@@ -43,7 +43,6 @@ module.exports = {
           label: "Cloud IDE",
           items: [
             "cloud-ide/overview",
-            "cloud-ide/public-preview",
             {
               type: "category",
               label: "Quick Start",

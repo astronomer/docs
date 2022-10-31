@@ -4,6 +4,14 @@ title: Permissions
 id: permissions
 ---
 
+:::caution
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your deployments or pipelines running in production. If you have any feedback, please submit it [here](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
 The Cloud IDE inherits permissions from the workspace. Workspaces have three roles that are assignable via the [Workspace Access page](/astro/manage-workspaces.md#manage-workspace-users):
 
 - Workspace Viewers
