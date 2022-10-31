@@ -2,8 +2,12 @@
 sidebar_label: 'Configure the CLI'
 title: 'Configure the Astro CLI'
 id: configure-cli
-description: Make changes to your project and local Apache Airflow environment with the Astro CLI.
 ---
+
+<head>
+  <meta name="description" content="Learn how to modify project-level settings by updating the .astro/config.yaml file. Modifying project-level settings can help you debug and troubleshoot the behavior of Airflow components in your local environment." />
+  <meta name="og:description" content="Learn how to modify project-level settings by updating the .astro/config.yaml file. Modifying project-level settings can help you debug and troubleshoot the behavior of Airflow components in your local environment." />
+</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

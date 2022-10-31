@@ -10,9 +10,13 @@
 module.exports = {
   cloud: [
     {
-      type: 'doc',
+      type: 'category',
       label: 'Overview',
-      id: 'overview'
+      link: { type: 'doc', id: 'overview' },
+      items: [
+        'features',
+        'astro-architecture',
+      ],
     },
     {
       type: 'category',
@@ -113,7 +117,21 @@ module.exports = {
           items: [
             'view-clusters',
             'create-cluster',
-            'modify-cluster',
+            {
+              type: 'category',
+              label: 'Configure cluster resources',
+              link: {
+                type:'generated-index',
+                title: 'Configure cluster resources',
+                description: 'Configure your AWS, Azure, or GCP cluster resources on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for most use cases.'
+              },
+              items: [
+                'modify-cluster',
+                'resource-reference-aws',
+                'resource-reference-azure',
+                'resource-reference-gcp',
+              ],
+            },
           ],
         },
         {
@@ -151,21 +169,6 @@ module.exports = {
           items: [
           'runtime-image-architecture',
           'runtime-version-lifecycle-policy',
-          ],
-        },
-        {
-          type: 'category',
-          label: 'Cloud configuration reference',
-          link: {
-            type:'generated-index',
-            title: 'Cloud configuration reference',
-            description: 'Learn about the default and supported Astro cloud configurations.'
-
-          },
-          items: [
-            'resource-reference-aws',
-            'resource-reference-azure',
-            'resource-reference-gcp',
           ],
         },
         'platform-variables',
@@ -228,11 +231,16 @@ module.exports = {
       'cli/astro-context-list',
       'cli/astro-context-switch',
       'cli/astro-deploy',
+      'cli/astro-deployment-airflow-upgrade',
       'cli/astro-deployment-create',
       'cli/astro-deployment-delete',
       'cli/astro-deployment-list',
       'cli/astro-deployment-logs',
+      'cli/astro-deployment-runtime-upgrade',
+      'cli/astro-deployment-service-account',
+      'cli/astro-deployment-team',
       'cli/astro-deployment-update',
+      'cli/astro-deployment-user',
       'cli/astro-deployment-variable-create',
       'cli/astro-deployment-variable-list',
       'cli/astro-deployment-variable-update',
@@ -240,6 +248,8 @@ module.exports = {
       'cli/astro-dev-init',
       'cli/astro-dev-kill',
       'cli/astro-dev-logs',
+      'cli/astro-dev-object-export',
+      'cli/astro-dev-object-import',
       'cli/astro-dev-parse',
       'cli/astro-dev-ps',
       'cli/astro-dev-pytest',
@@ -249,10 +259,11 @@ module.exports = {
       'cli/astro-dev-restart',
       'cli/astro-login',
       'cli/astro-logout',
+      'cli/astro-team',
+      'cli/astro-user-create',
       'cli/astro-user-invite',
       'cli/astro-version',
-      'cli/astro-workspace-list',
-      'cli/astro-workspace-switch',],
+      'cli/astro-workspace',],
   },
   ],
 };

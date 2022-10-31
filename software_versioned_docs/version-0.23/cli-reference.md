@@ -216,9 +216,9 @@ To identify your Deployment's release name, go to **Settings** > **Basics** > **
 
 If you run `astro deploy` without specifying `your-deployment-release-name`, the Astronomer CLI will list all Airflow Deployments in your Workspace to choose from.
 
-### Flags
+### Options
 
-| Flag             | Value Type | Usage                                                                      |
+| Option             | Value Type | Usage                                                                      |
 | ---------------- | ---------- | -------------------------------------------------------------------------- |
 | `--force`        | None       | Forces deploy even if there are uncommitted changes.                       |
 | `--prompt`       | None       | Forces prompt for choosing a target Deployment.                            |
@@ -253,9 +253,9 @@ Run `astro deployment airflow upgrade --deployment-id` to initialize the Airflow
 
 If you do not specify `--desired-airflow-version`, this command will output a list of available versions of Airflow you can choose from and prompt you to pick one. The Astronomer CLI will only make available versions of Airflow that are higher than the version you're currently running in your `Dockerfile`.
 
-### Flags
+### Options
 
-| Flag                        | Value Type | Usage                                                                                                                      |
+| Option                        | Value Type | Usage                                                                                                                      |
 | --------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `--deployment-id`           | String     | The ID of the Deployment for which you want to upgrade Airflow. To find your Deployment ID, run `astro deployment list`. |
 | `--desired-airflow-version` | String     | The Airflow version you're upgrading to (e.g. `1.10.14`).                                                                  |
@@ -273,9 +273,9 @@ Creates a new Airflow Deployment in your current Astronomer Workspace.
 
 Run `astro deployment create <new-deployment-name> [flags]` to create a new Deployment in your Astronomer Workspace. This is equivalent to using the **New Deployment** button in the Software UI.
 
-### Flags
+### Options
 
-| Flag                | Value Type | Usage                                                                                                                                |
+| Option                | Value Type | Usage                                                                                                                                |
 | ------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `--airflow-version` | String     | The Airflow version for the new Deployment.                                                                                          |
 | `--cloud-role`      | String     | Append an AWS or GCP IAM role to your Airflow Deployment's Webserver, Scheduler, and Worker Pods.                                    |
@@ -306,9 +306,9 @@ Generates a list of Airflow Deployments in your current Astronomer Workspace.
 
 `astro deployment list [flags]`
 
-### Flags
+### Options
 
-| Flag    | Value Type | Usage                                                                                          |
+| Option    | Value Type | Usage                                                                                          |
 | ------- | ---------- | ---------------------------------------------------------------------------------------------- |
 | `--all` | None       | Generates a list of running Airflow Deployments across all Workspaces that you have access to. |
 
@@ -324,9 +324,9 @@ You can run any of the following commands depending on which logs you want to st
 - `astro deployment logs webserver [flags]`
 - `astro deployment logs workers [flags]`
 
-### Flags
+### Options
 
-| Flag       | Value Type                                    | Usage                                                               |
+| Option       | Value Type                                    | Usage                                                               |
 | ---------- | --------------------------------------------- | ------------------------------------------------------------------- |
 | `--follow` | None                                          | Subscribes to watch more logs.                                      |
 | `--search` | String                                        | Searches for the specified string within the logs you're following. |
@@ -344,9 +344,9 @@ Creates a Deployment-level service account on Astronomer, which you can use to c
 
 `astro deployment service-account create --deployment-id=<your-deployment-id> --label=<your-service-account-label> [flags]`
 
-### Flags
+### Options
 
-| Flag                         | Value Type | Usage                                                                                                                             |
+| Option                         | Value Type | Usage                                                                                                                             |
 | ---------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `--category`                 | String     | The category for the new service account as displayed in the Software UI. This is optional, and the default value is `Not set`. |
 | `--deployment-id` (Required) | String     | The Deployment you're creating a service account for.                                                                             |
@@ -367,9 +367,9 @@ Deletes a service account for a given Deployment.
 
 `astro deployment service-account delete <your-service-account-id> [flags]`
 
-### Flags
+### Options
 
-| Flag              | Value Type | Usage                                                                                                                                                                                           |
+| Option              | Value Type | Usage                                                                                                                                                                                           |
 | ----------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--deployment-id`(Required) | String     | The Airflow Deployment in which the service account is configured. Use this flag as an alternative to specifying `<your-service-account-id>`. To get this value, run `astro deployment list`. |
 
@@ -385,9 +385,9 @@ Shows the name, ID, and API key for each service account on a given Deployment.
 
 Run `astro deployment service-account get <service-account-id> --deployment-id=<your-deployment-id>` to get information on a single deployment-level service account. To see a list of all service accounts on a Deployment, run `astro deployment service-account get --deployment-id=<your-deployment-id>`.
 
-### Flags
+### Options
 
-| Flag              | Value Type | Usage                                                                                                                              |
+| Option              | Value Type | Usage                                                                                                                              |
 | ----------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | `--deployment-id` (Required) | String     | `--deployment-id` (Required) | String     | The Deployment ID of the Deployment in which your service account is configured. |
 
@@ -405,9 +405,9 @@ Run `astro deployment update <your-deployment-id> [flags]` to update a Deploymen
 
 > **Note:** Only the `--cloud-role` flag is specified with a `--`. Additional flags should be written without a leading `--`.
 
-### Flags
+### Options
 
-| Flag           | Value Type | Usage                                                                                   |
+| Option           | Value Type | Usage                                                                                   |
 | -------------- | ---------- | --------------------------------------------------------------------------------------- |
 | `--cloud-role` | String     | The ARN for the IAM role.                                                               |
 | `--dag-deployment-type` | String     | The DAG deploy method for the Deployment. Can be either `image` or `volume`. The default value is `image`.                                                               |
@@ -434,9 +434,9 @@ Gives an existing user in a Workspace access to an Airflow Deployment within tha
 
 `astro deployment user add <user-email-address> --deployment-id=<user-deployment-id> --role<user-role>`
 
-### Flags
+### Options
 
-| Flag                         | Value Type | Usage                                                                                                                                            |
+| Option                         | Value Type | Usage                                                                                                                                            |
 | ---------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `--deployment-id` (Required) | String     | The ID of the Deployment that the user will be added to. To find this value, run `astro deployment list`.                                      |
 | `--role` (Required)          | String     | The role assigned to the user. Can be `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`. The default value is `DEPLOYMENT_VIEWER`. |
@@ -453,9 +453,9 @@ Removes access to an Airflow Deployment for an existing Workspace user. To grant
 
 `astro deployment user delete --deployment-id=<deployment-id> <user-email-address>`
 
-### Flags
+### Options
 
-| Flag                         | Value Type | Usage                                              |
+| Option                         | Value Type | Usage                                              |
 | ---------------------------- | ---------- | -------------------------------------------------- |
 | `--deployment-id` (Required) | String     | The Deployment that the user will be removed from. |
 
@@ -471,9 +471,9 @@ Outputs a list of all Workspace users who have access to a given Deployment. Use
 
 `astro deployment user list --deployment-id=<deployment-id> [flags]`
 
-### Flags
+### Options
 
-| Flag                         | Value Type | Usage                                        |
+| Option                         | Value Type | Usage                                        |
 | ---------------------------- | ---------- | -------------------------------------------- |
 | `--deployment-id` (Required) | String     | The Deployment that you're searching in.     |
 | `--email`                    | String     | The email for the user you're searching for. |
@@ -492,9 +492,9 @@ Updates a user's role in a given Deployment.
 
 `astro deployment user update --deployment-id=<deployment-id> [flags]`
 
-### Flags
+### Options
 
-| Flag                         | Value Type | Usage                                                                                                                                                                                              |
+| Option                         | Value Type | Usage                                                                                                                                                                                              |
 | ---------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--deployment-id` (Required) | String     | The Deployment that you're searching in.                                                                                                                                                           |
 | `--role`                     | String     | The role you're updating the user to. Possible values are `DEPLOYMENT_VIEWER`, `DEPLOYMENT_EDITOR`, or `DEPLOYMENT_ADMIN`. If `--role` is not specified, `DEPLOYMENT_VIEWER` is the default value. |  |
@@ -535,9 +535,9 @@ When you run this command, the following skeleton files are generated in your cu
 └── requirements.txt # For any Python packages
 ```
 
-### Flags
+### Options
 
-| Flag                | Value Type | Usage                                                                                              |
+| Option                | Value Type | Usage                                                                                              |
 | ------------------- | ---------- | -------------------------------------------------------------------------------------------------- |
 | `--airflow-version` | String     | The version of Airflow you want to use. The default value is the latest Airflow version available. |
 | `--name`            | String     | The name for the Airflow project.                                                                  |
@@ -560,9 +560,9 @@ Shows logs for the Scheduler or Webserver in your local Airflow environment.
 
 Run `astro dev logs [flags]` to start tracking logs for your Scheduler or Webserver in your CLI terminal window.
 
-### Flags
+### Options
 
-| Flag          | Value Type | Usage                                              |
+| Option          | Value Type | Usage                                              |
 | ------------- | ---------- | -------------------------------------------------- |
 | `--follow`    | None       | Continues to show the latest outputs from the log. |
 | `--scheduler` | None       | Outputs only Scheduler logs.                       |
@@ -600,9 +600,9 @@ Initializes a local Airflow environment on your machine by creating a Docker con
 
 `astro dev start [flags]`
 
-### Flags
+### Options
 
-| Flag    | Value Type | Usage                                                                            |
+| Option    | Value Type | Usage                                                                            |
 | ------- | ---------- | -------------------------------------------------------------------------------- |
 | `--env` | String     | Specifies the filepath containing environment variables for the Airflow cluster. |
 
@@ -648,9 +648,9 @@ Creates a new user on Astronomer. An invitation email will be sent to the email 
 
 `astro user create [flags]`
 
-### flags
+### Options
 
-| Flag         | Value Type | Usage                                                                                                                                     |
+| Option         | Value Type | Usage                                                                                                                                     |
 | ------------ | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
 | `--email`    | String     | Specifies the email address for the new user. If not specified, you'll be prompted to enter an address during runtime.                    |
 | `--password` | String     | Specifies a password for the new user to access Astronomer with. If not specified, you'll be prompted to enter a password during runtime. |
@@ -686,9 +686,9 @@ Creates a new Workspace.
 
 `astro workspace create <new-workspace-name> [flags]`
 
-### Flags
+### Options
 
-| Flag     | Value Type | Usage                                  |
+| Option     | Value Type | Usage                                  |
 | -------- | ---------- | -------------------------------------- |
 | `--desc` | String     | The description for the new Workspace. |
 
@@ -728,9 +728,9 @@ Creates a service account for a given Workspace.
 
 `astro workspace service-account create --workspace-id=<your-workspace> --label=<your-label> [flags]`
 
-### Flags
+### Options
 
-| Flag                        | Value Type | Usage                                                                                                        |
+| Option                        | Value Type | Usage                                                                                                        |
 | --------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------ |
 | `--workspace-id` (Required) | String     | The Workspace you're creating a service account for.                                                         |
 | `--label` (Required)        | String     | A label for the service account.                                                                             |
@@ -752,9 +752,9 @@ Deletes a service account for a given Workspace.
 
 `astro workspace service-account delete <your-service-account-id> [flags]`
 
-### Flags
+### Options
 
-| Flag             | Value Type | Usage                                                                                                                                                                                                                                     |
+| Option             | Value Type | Usage                                                                                                                                                                                                                                     |
 | ---------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--workspace-id` | String     | The Workspace in which you want to delete a service account. If this flag is used instead of specifying `<your-service-account-id>`, you'll be prompted to select a service account from a list of all service accounts on the Workspace. |
 
@@ -771,9 +771,9 @@ Shows the name, ID, and API key for each service account on a given Workspace.
 
 Run `astro deployment service-account get <service-account-id> --workspace-id=<your-workspace-id>` to get information on a single service account within a Workspace. To see a list of all service accounts on a Workspace, run `astro deployment service-account get --workspace-id=<your-workspace-id>`.
 
-### Flags
+### Options
 
-| Flag             | Value Type | Usage                                                                                                                             |
+| Option             | Value Type | Usage                                                                                                                             |
 | ---------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------- |
 | `--workspace-id` | String     | The Workspace you're getting the service account from. Use this flag as an alternative to specifying `<your-service-account-id>`. |
 
@@ -802,9 +802,9 @@ At least one flag must be specified.
 
 > **Note:** Unlike other commands, do not specify flags for this command with a leading `--`.
 
-### Flags
+### Options
 
-| Flag        | Value Type | Usage                            |
+| Option        | Value Type | Usage                            |
 | ----------- | ---------- | -------------------------------- |
 | id          | String     | The ID for the Workspace.        |
 | description | String     | A description for the Workspace. |
@@ -822,9 +822,9 @@ Creates a new user in your current Workspace. If the user has already authentica
 
 `astro workspace user add [flags] <user-email-address>`
 
-### Flags
+### Options
 
-| Flag                        | Value Type | Usage                                                                                                                                                                     |
+| Option                        | Value Type | Usage                                                                                                                                                                     |
 | --------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--workspace-id`            | String     | The Workspace that the user will be added to. Specify this flag if you want to create a user in a Workspace other than your current Workspace.                                                                                                                             |
 | `--role`                    | String     | The role assigned to the user. Can be `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. If `--role` is not specified, the default role is `WORKSPACE_VIEWER`. |
@@ -855,9 +855,9 @@ Outputs a list of all users with access to your current Workspace.
 
 `astro workspace user list [flags]`
 
-### Flags
+### Options
 
-| Flag             | Value Type | Usage                                                                                                                                       |
+| Option             | Value Type | Usage                                                                                                                                       |
 | ---------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--workspace-id` | String     | The Workspace that you're searching in. Specify this flag if you want to search for users in a Workspace other than your current Workspace. |
 | `--email`        | String     | The email for the user you're searching for.                                                                                                |
@@ -877,9 +877,9 @@ Updates a user's role in your current Workspace.
 
 `astro workspace user update <user-id> [flags]`
 
-### Flags
+### Options
 
-| Flag | Value Type | Usage |
+| Option | Value Type | Usage |
 | --------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `--role` | String | The role you're updating the user to. Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. If `--role` is not specified, the user is updated to `WORKSPACE_VIEWER` by default. |
 

@@ -2,8 +2,12 @@
 sidebar_label: 'Astro'
 title: 'Astro release notes'
 id: release-notes
-description: A real-time reference of the latest features and bug fixes in Astro.
 ---
+
+<head>
+  <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
+  <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
+</head>
 
 <!--- Version-specific -->
 
@@ -14,6 +18,31 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 **Latest Astro Runtime Version**: 6.0.1 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.6.0 ([Release notes](cli/release-notes.md))
+
+## October 18, 2022 
+
+### Additional improvements 
+
+- In the Cloud UI, **Access** has been moved from the left menu to a tab on the **Workspace Settings** page.
+- In the Cloud UI, **Workspace Settings** in the left menu is now available to all Workspace members.
+
+### New Azure regions
+
+You can now [create an Astro cluster on Azure](create-cluster.md) in the following regions:
+
+- `japaneast` 
+- `southafricanorth` 
+- `southcentralus` 
+  
+## October 11, 2022 
+
+### Additional improvements 
+
+- New worker node pools on Azure and Google Cloud Platform (GCP) clusters can now scale to zero. When you set your minimum worker count to 0, you don't incur costs for enabling a new worker type for your cluster until it's used in a Deployment.
+
+### Bug fixes 
+
+- Fixed an issue where worker queues with a minimum worker count of zero would appear with a minimum worker count of one in the Cloud UI.
 
 ## October 4, 2022 
 
@@ -74,12 +103,6 @@ All of a Deployment's configurations, including analytics, API keys, environment
 
 This new UI moves the **Analytics** and **Logs** from the left sidebar to the main Deployment page so that you no longer have to filter those views separately by Deployment. The left sidebar now exclusively contains Workspace-level menus.
 
-### Data plane cost tuning
-
-Astronomer has modified the default resource usage of Astro clusters to improve infrastructure cost for Astro customers. In addition to minor improvements to node autoscaling behavior:
-
-- New worker node pools on Amazon Web Services (AWS) clusters can now scale to zero. This means that enabling a new worker type for your cluster does not cost you until it's used in a Deployment.
-
 ### New Account Dashboard
 
 You can now access your Account Dashboard to manage your user account settings and find links to helpful resources. Access this page by going to `account.astronomer.io` in your browser or by clicking **Profile** > **Manage your Astro Account** in the Cloud UI. You must be authenticated to Astro.
@@ -89,6 +112,7 @@ You can now access your Account Dashboard to manage your user account settings a
 ### Additional improvements
 
 - You can now use the `m6id` worker node type series for Deployments on AWS clusters. This worker type is general purpose and includes significant storage as well as up to 15% better performance compared to `m5d` nodes. For more information, see [Worker instance types](resource-reference-aws.md#worker-node-types).
+- New worker node pools on Amazon Web Services (AWS) clusters can now scale to zero. This means that enabling a new worker type for your cluster does not cost you until it's used in a Deployment.
 
 ### Bug fixes
 
@@ -502,7 +526,7 @@ A few additional notes about this upgrade:
 - Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
 - When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
-For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://www.astronomer.io/guides/airflow-openlineage).
+For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://docs.astronomer.io/learn/airflow-openlineage).
 
 ### New AWS regions available
 

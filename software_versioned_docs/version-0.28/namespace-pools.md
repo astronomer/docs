@@ -190,7 +190,7 @@ You should now be able to create new Deployments using a namespace from your pre
 
 After enabling the pre-created namespace pool, the namespaces you registered earlier will appear as an option when creating a new Deployment via the Software UI.
 
-![Kubernetes Namespace option in the UI](https://assets2.astronomer.io/main/docs/astronomer-ui/kubernetes-namespace.png)
+![Kubernetes Namespace option in the UI](/img/software/kubernetes-namespace.png)
 
 When you create Deployments via the CLI, you will be prompted to select one of the available namespaces for your new Deployment.
 

@@ -2,8 +2,12 @@
 sidebar_label: 'Upgrade Runtime'
 title: 'Upgrade Astro Runtime'
 id: upgrade-runtime
-description: Upgrade your Deployment's version of Astro Runtime.
 ---
+
+<head>
+  <meta name="description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
+  <meta name="og:description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
+</head>
 
 import {siteVariables} from '@site/src/versions';
 
@@ -85,18 +89,6 @@ Once you upgrade to a Deployment on Astro to a new version of Astro Runtime, you
 This topic contains information about upgrading to specific versions of Astro Runtime. This includes breaking changes, database migrations, and other considerations.
 
 ### Runtime 5 (Airflow 2.3)
-
-#### Incompatibility with dbt-core provider package
-
-The `dbt-core` provider package is currently incompatible with Runtime 5.0.0 and later. If dbt-core is listed in the `requirements.txt` file of your Astro project when you attempt to upgrade to Runtime 5.0.0 or later, the upgrade fails.
-
-To upgrade to Runtime 5.0.0 or later, you can do one of the following:
-
-- List `dbt-core==1.3.0b2` in your `requirements.txt` file. This version of the provider is in beta and has not been tested by Astronomer.
-- Install the dbt Cloud provider package by adding `apache-airflow-providers-dbt-cloud` to your Astro project. This will work only if you use dbt Cloud.
-- Use the KubernetesPodOperator or the ExternalPythonOperator to isolate `dbt-core` from the rest of your dependencies.
-
-If any of these options are not suitable for your team, don't upgrade your current Runtime version or upgrade to Runtime version 4.2.x and wait until a fix is announced.
 
 #### Changes to the Airflow metadata database 
 

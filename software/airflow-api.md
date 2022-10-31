@@ -30,14 +30,14 @@ To create a service account using the Software UI:
 
 1. Log in to the Software UI.
 2. Go to **Deployment** > **Service Accounts**.
-   ![New Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-new-service-account.png)
+   ![New Service Account](/img/software/ci-cd-new-service-account.png)
 3. Give your service account a **Name**, **User Role**, and **Category** (_Optional_).
    > **Note:** In order for a service account to have permission to push code to your Airflow Deployment, it must have either the Editor or Admin role. For more information on Workspace roles, refer to [Roles and Permissions](workspace-permissions.md).
 
-   ![Name Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-name-service-account.png)
+   ![Name Service Account](/img/software/ci-cd-name-service-account.png)
 4. Save the API key that was generated. Depending on your use case, you may want to store this key in an Environment Variable or secret management tool of choice.
 
-   ![Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-api-key.png)
+   ![Service Account](/img/software/ci-cd-api-key.png)
 
 ### Create a service account with the Astro CLI
 
@@ -188,12 +188,6 @@ As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-air
 - Is based on the [Swagger/OpenAPI Spec](https://swagger.io/specification/).
 - Implements CRUD (Create, Read, Update, Delete) operations on *all* Airflow resources.
 - Includes authorization capabilities.
-
-:::tip
-
-To get started with Airflow 2 locally, read [Get started with Apache Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.15. For questions, reach out to [Astronomer support](https://support.astronomer.io).
-
-:::
 
 ### Make a request
 

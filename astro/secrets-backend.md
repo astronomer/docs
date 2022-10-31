@@ -2,8 +2,12 @@
 title: 'Configure an external secrets backend on Astro'
 sidebar_label: 'Configure a secrets backend'
 id: secrets-backend
-description: Configure a secrets backend on Astro to store Airflow variables and connections in a centralized place.
 ---
+
+<head>
+  <meta name="description" content="Learn how you can configure a secrets backend on Astro to store Airflow variables and connections in a secure, centralized location that complies with your organization's security requirements." />
+  <meta name="og:description" content="LLearn how you can configure a secrets backend on Astro to store Airflow variables and connections in a secure, centralized location that complies with your organization's security requirements." />
+</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -53,11 +57,11 @@ Setting Airflow connections via secrets requires knowledge of how to generate Ai
     defaultValue="secretsmanager"
     groupId= "setup"
     values={[
-        {label: 'Hashicorp Vault', value: 'hashicorp'},
-        {label: 'AWS Parameter Store', value: 'paramstore'},
         {label: 'AWS Secrets Manager', value: 'secretsmanager'},
+        {label: 'Hashicorp Vault', value: 'hashicorp'},
         {label: 'Google Cloud Secret Manager', value: 'gcp'},
         {label: 'Azure Key Vault', value: 'azure'},
+        {label: 'AWS Parameter Store', value: 'paramstore'},
     ]}>
     
 <TabItem value="secretsmanager">
@@ -68,8 +72,8 @@ This topic provides setup steps for configuring [AWS Secrets Manager](https://aw
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-project.md) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](develop-projec.mdt#add-python-and-os-level-packages).
-- An IAM role with the `SecretsManagerReadWrite` policy that your Astro cluster can assume. See [AWS IAM roles](connect-aws.md#AWS-IAM-roles).
+- An [Astro project](create-project.md) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
+- An IAM role with the `SecretsManagerReadWrite` policy that your Astro cluster can assume. See [AWS IAM roles](https://docs.astronomer.io/astro/connect-aws?tab=AWS%20IAM%20roles#authorization-options).
 
 #### Step 1: Add Airflow secrets to Secrets Manager
 
@@ -167,7 +171,7 @@ This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.i
 If you do not already have a Vault server deployed but would like to test this feature, Astronomer recommends that you either:
 
 - Sign up for a Vault trial on [Hashicorp Cloud Platform (HCP)](https://cloud.hashicorp.com/products/vault) or
-- Deploy a local Vault server using the instructions in the [Airflow Guide](https://www.astronomer.io/guides/airflow-and-hashicorp-vault).
+- Deploy a local Vault server. See [Starting the server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) in Hashicorp documentation. 
 
 #### Step 1: Create a Policy and AppRole in Vault
 
@@ -311,7 +315,7 @@ In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter St
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-project.md) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](develop-projec.mdt#add-python-and-os-level-packages).
+- An [Astro project](create-project.md) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
 - An IAM role with access to the [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html) that your Astro cluster can assume. See [AWS IAM roles](connect-aws.md#AWS-IAM-roles).
 
 #### Step 1: Create Airflow secrets directories in Parameter Store

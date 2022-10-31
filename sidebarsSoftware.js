@@ -42,17 +42,10 @@ module.exports = {
       'kubernetes-executor',
         ],
       },
+      'deploy-cli',
       'cli-podman',
       'upgrade-astro-cli',
     ],
-    },
-    {
-      type: 'category',
-      label: 'Deploy',
-      items: [
-      'deploy-cli',
-      'ci-cd',
-      ],
     },
     {
       type: 'category',
@@ -61,6 +54,11 @@ module.exports = {
         {
         type: 'category',
         label: 'Install',
+        link: {
+          type:'generated-index',
+          title: 'Install Astronomer Software',
+          description: 'Install the Astro platform in your cloud.'
+        },
         items: [
         'install-aws',
         'install-azure',
@@ -69,43 +67,59 @@ module.exports = {
           ],
         },
         'upgrade-astronomer',
-        {
-        type: 'category',
-        label: 'Platform setup',
-        items: [
-        'integrate-auth-system',
-        'logs-to-s3',
-        'registry-backend',
-        'renew-tls-cert',
-        'namespace-pools',
-        'export-task-logs',
-        'third-party-ingress-controllers',
-        'custom-image-registry',
-          ],
-        },
-        {
-        type: 'category',
-        label: 'Platform management',
-        items: [
         'apply-platform-config',
-        'houston-api',
-        'configure-platform-resources',
-          ],
-        },
         {
-          type: 'category',
-          label: 'Deployment management',
-          items: [
-          'configure-deployment',
-          'secrets-backend',
-          'environment-variables',
-          'deploy-git-sync',
-          'deploy-nfs',
+        type: 'category',
+        label: 'Manage platform resources',
+        items: [
+          'registry-backend',
+          'namespace-pools',
+          'configure-platform-resources',
           ],
         },
         {
         type: 'category',
-        label: 'User access',
+        label: 'Manage Deployments',
+        items: [
+          'configure-deployment',
+          'environment-variables',
+          ],
+        },
+        {
+        type: 'category',
+        label: 'CI/CD and automation',
+        items: [
+        'ci-cd',
+        'houston-api',
+        'deploy-git-sync',
+        'deploy-nfs',
+          ],
+        },
+        {
+        type: 'category',
+        label: 'Platform observability',
+        items: [
+          'grafana-metrics',
+          'kibana-logging',
+          'platform-alerts',
+          'logs-to-s3',
+          'export-task-logs',
+          ],
+        },
+        {
+        type: 'category',
+        label: 'Security and compliance',
+        items: [
+          'secrets-backend',
+          'integrate-auth-system',
+          'custom-image-registry',
+          'third-party-ingress-controllers',
+          'renew-tls-cert',
+          ],
+        },
+        {
+        type: 'category',
+        label: 'User access and management',
         items: [
         'manage-workspaces',
         'import-idp-groups',
@@ -121,10 +135,7 @@ module.exports = {
       label: 'Observability',
       items: [
       'deployment-logs',
-      'grafana-metrics',
-      'kibana-logging',
       'airflow-alerts',
-      'platform-alerts',
       ],
     },
     {
@@ -170,11 +181,16 @@ module.exports = {
       type: 'category',
       label: 'Reference',
       items: [
+      {
+          type: 'link',
+          label: 'Astro CLI command reference',
+          href: 'https://docs.astronomer.io/astro/cli/reference',
+      },
       'system-components',
       'support',
-      'cli-reference',
       'version-compatibility-reference',
       'release-lifecycle-policy',
+      'faq',
       'documentation-archive',
       ],
     },

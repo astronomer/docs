@@ -1,6 +1,6 @@
 ---
 title: 'Forward Astronomer Software logs to Amazon S3'
-sidebar_label: 'Forward logs to S3'
+sidebar_label: 'Forward task logs to S3'
 id: logs-to-s3
 description: Configure Astronomer Software to forward logs to Amazon S3.
 ---

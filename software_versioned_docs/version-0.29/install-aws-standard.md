@@ -443,7 +443,7 @@ prometheus.astro.mydomain.com
 ```
 
 Example wildcard CNAME record:
-![aws-elb](https://assets2.astronomer.io/main/docs/ee/route53.png)
+![aws-elb](/img/software/route53.png)
 
 ## Step 12: Verify you can access the Software UI
 

@@ -8,7 +8,7 @@ assignees: ''
 
 **Request type:**
 
-- [ ] **New document:**: Add the `docs-content` label to this issue.
+- [ ] **New document:** Add the `docs-content` label to this issue.
 - [ ] **Addition to an existing document**: Add the `enhancement` label to this issue.
 
 **What is the purpose of the document/enhancement? Select all that apply:**

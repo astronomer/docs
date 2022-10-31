@@ -28,7 +28,7 @@ The [Upgrade considerations](upgrade-astronomer.md#upgrade-considerations) secti
 
 You need Astronomer System Admin permissions to complete version upgrades. To confirm that you're a System Admin, check that you have access to the **System Admin** menu in the Software UI:
 
-![System Admin panel](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
+![System Admin panel](/img/software/admin_panel.png)
 
 You also need permissions to create Kubernetes resources. To confirm that you have the required permissions, run the following commands:
 
@@ -158,19 +158,37 @@ If there is a problem creating a new Airflow Deployment, check the commander log
 
 Make changes as needed and rerun the upgrade command from Step 7. Do not continue to Step 8 until you have successfully created a new Airflow Deployment.
 
+## Step 9: Upgrade the Astro CLI
+
+Each Software version is compatible only with specific versions of the Astro CLI. Ensure that all users in your organization are using the latest compatible version of the Astro CLI for your Software version. See [Version compatibility reference](version-compatibility-reference.md).
+
+For standard upgrade steps, see [Upgrade the CLI](install-cli.md#upgrade-the-cli). To upgrade from a pre-1.0 version of the CLI to version 1.0+, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
+
 ## Upgrade considerations
 
 This topic contains information about upgrading to specific versions of Astronomer Software. This includes notes on breaking changes, database migrations, and other considerations that might depend on your use case.
 
 To avoid extended service disruptions, Astronomer recommends upgrading Astronomer Software to a compatible version before you upgrade Kubernetes. To view Astronomer Software and Kubernetes compatibility information, see [Version compatibility reference for Astronomer Software](version-compatibility-reference.md#astronomer-software).
 
-### Upgrading to 0.30
+### Upgrading to Kubernetes 1.22
 
-#### Running the 0.30 upgrade script with --no-hook
+If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at the same time, complete your upgrades in the following order:
 
-Using the `--no-hook` flag in [Step 7](#step-7-run-astronomers-upgrade-script) results in the upgrade script skipping a necessary database migration job. Because of this, you should not specify this flag when running the upgrade script.
+1. Follow the standard Software upgrade procedure as described in this document.
+2. For each Deployment, run the following command to upgrade the Deployment to use the latest version of the Airflow Helm chart:
 
-If you do specify the `--no-hook` flag, the upgrade script will return a success message even though it failed, resulting in broken behavior in your upgraded environment.
+    ```sh
+    kubectl exec -it `kubectl get pods -l component=houston --no-headers -n <deployment-namespace>` -n <deployment-namespace> -- yarn run upgrade-deployments
+    ```
+3. Upgrade Kubernetes to version 1.22.
+
+### Upgrade to Astronomer Software 0.30
+
+#### Running the 0.30 upgrade script with --no-hooks
+
+Using the `--no-hooks` flag in [Step 7](#step-7-run-astronomers-upgrade-script) results in the upgrade script skipping a necessary database migration job. Because of this, you should not specify this flag when running the upgrade script.
+
+If you do specify the `--no-hooks` flag, the upgrade script will return a success message even though it failed, resulting in broken behavior in your upgraded environment.
 
 #### Upgrading to 0.30 when using Azure Database for PostgreSQL
 
@@ -178,7 +196,7 @@ A change in 0.30 enabled the `trgm` extension for PosgreSQL. If you use Azure Da
 
 If you don't complete this setup before your upgrade, the upgrade will fail.
 
-### Upgrading to 0.29
+### Upgrade to Astronomer Software 0.29
 
 :::caution
 
@@ -204,13 +222,13 @@ When upgrading to 0.29 from any earlier minor version, run the following command
 kubectl -n <astronomer-platform-release-namespace> annotate secret <astronomer-platform-release-name>-houston-jwt-signing-certificate "astronomer.io/commander-sync"="platform=astronomer"
 ```
 
-If you upgraded to Astronomer Software 0.29 without annotating this secret, you can still complete the sync by running the following command after the upgrade:
+If you upgraded to Astronomer Software 0.29 without annotating this secret, run the following command to complete the synchronization:
 
 ```bash
 kubectl create job -n <astronomer-platform-release-namespace> --from=cronjob/<astronomer-platform-release-name>-config-syncer upgrade-config-synchronization
 ```
 
-### Upgrading to Astronomer Software 0.28
+### Upgrade to Astronomer Software 0.28
 
 #### Version compatibility
 

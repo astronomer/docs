@@ -238,7 +238,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
 
 After enabling the pre-created namespace pool, the namespaces you registered now appear as options when you create a new Deployment with the Software UI.
 
-![Kubernetes namespace option in the UI](https://assets2.astronomer.io/main/docs/astronomer-ui/kubernetes-namespace.png)
+![Kubernetes namespace option in the UI](/img/software/kubernetes-namespace.png)
 
 When you create Deployments with the CLI, you are prompted to select one of the available namespaces for your new Deployment.
 

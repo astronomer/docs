@@ -139,7 +139,7 @@ To set them,
 2. Go to "Deployment" > "Variables"
 3. Add your environment variables
 
-![Astro UI Env Vars Config](https://assets2.astronomer.io/main/docs/astronomer-ui/v0.16-Astro-UI-EnvVars.png)
+![Astro UI Env Vars Config](/img/software/v0.16-Astro-UI-EnvVars.png)
 
 > **Note:** Input for all configurations officially supported by Airflow are pre-templated, but you're free to specify your own values.
 

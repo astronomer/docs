@@ -133,7 +133,7 @@ Once you've added this DAG to your project:
 3. Click on `test-task` > `View Logs`
 4. Confirm your `smtp_default` connection information is being printed in the task logs.
 
-![Airflow Logs for Vault](https://assets2.astronomer.io/main/docs/secrets-backends/logs.png)
+![Airflow Logs for Vault](/img/software/logs.png)
 
 This works because we set the `connections_path` in our `AIRFLOW__SECRETS__BACKEND_KWARGS` to be `connections`. You are welcome to change this path name if you'd prefer to access Variables from a different Vault directory.
 

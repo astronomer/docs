@@ -18,7 +18,7 @@ This guide walks through the best practices for creating and managing Workspaces
 * Users
 * Service Accounts
 
-![Workspace configuration tab location](https://assets2.astronomer.io/main/docs/astronomer-ui/v0.23-workspace.png)
+![Workspace configuration tab location](/img/software/v0.23-workspace.png)
 
 ## Deployments
 
@@ -28,7 +28,7 @@ To create a new Deployment, click the **New Deployment** button in the **Deploym
 
 The **Deployments** tab also contains information on all of your existing Deployments, including name, Executor type, and Deployment status. A blue dot next to a Deployment's name indicates that the Deployment is still spinning up, while a green dot indicates that the Deployment is fully operational:
 
-![Deployment Tab](https://assets2.astronomer.io/main/docs/astronomer-ui/v0.12-deployments.png)
+![Deployment Tab](/img/software/v0.12-deployments.png)
 
 Deployments cannot be used or shared across Workspaces. While you’re free to push local DAGs and code anywhere you wish at any time, there is currently no way to move an existing Airflow Deployment from one Workspace to another once created.
 

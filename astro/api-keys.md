@@ -10,7 +10,7 @@ You can use API keys to programmatically deploy DAGs to a Deployment on Astro.
 You can use a Deployment API key to:
 
 - Deploy code to Astro in a [CI/CD pipeline](ci-cd.md).
-- Programmatically update [Deployment configurations](configure-deployment-resources.md) and [environment variables](environment-variables.md).
+- Programmatically update [environment variables](environment-variables.md).
 - Fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
 
 When using Deployment API keys, keep in mind the following:

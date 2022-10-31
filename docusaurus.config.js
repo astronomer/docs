@@ -40,74 +40,102 @@ module.exports = {
       title: 'Docs',
       logo: {
         alt: 'Astronomer',
-        src: 'img/LogoPrimaryDarkMode.svg',
-        href: 'https://docs.astronomer.io/astro',
+        src: 'img/AstroMonogram.svg',
+        href: 'https://docs.astronomer.io',
         target: '_self',
       },
       items: [
         {
-          to: '/astro/',
-          label: 'Docs',
+          to: '/',
+          label: 'Home',
           position: 'left',
           activeClassName: 'navbar__link--active',
-          className: 'docs__title'
+          activeBaseRegex: '^[\/]+$',
         },
         {
-          type: 'dropdown',
           to: '/astro/',
           label: 'Astro',
           position: 'left',
           activeClassName: 'navbar__link--active',
-          items: [
-            {
-              label: 'Cloud',
-              to: '/astro/',
-              activeBaseRegex: 'astro(?!\/cli)',
-            },
-            {
-              label: 'Astro CLI',
-              to: 'astro/cli/overview',
-              activeBaseRegex: 'astro/cli+',
-            },
-          ],
+          activeBaseRegex: '^(\/astro)(?!(\/cli))',
         },
         {
-          type: 'dropdown',
+          to: '/astro/cli/overview',
+          label: 'Astro CLI',
+          position: 'left',
+          activeClassName: 'navbar__link--active',
+          activeBaseRegex: 'astro/cli+',
+        },
+        {
           label: 'Software',
           to: 'software/',
           activeBaseRegex: 'software',
-          position: 'right',
+          position: 'left',
           activeClassName: 'navbar__link--active',
-          items: [
-            {
-              label: '0.30 (Latest)',
-              to: '/software/',
-              activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
-            },
-            {
-              label: '0.29',
-              to: '/software/0.29/overview',
-              activeBaseRegex: '(software\/0.29)+',
-            },
-            {
-              label: '0.28',
-              to: '/software/0.28/overview',
-              activeBaseRegex: '(software\/0.28)+',
-            },
-            {
-              label: '0.25',
-              to: '/software/0.25/overview',
-              activeBaseRegex: '(software\/0.25)+',
-            },
-          ],
         },
         {
-          to: '/tutorials/',
-          label: 'Tutorials',
+          to: '/learn/',
+          label: 'Learn',
           position: 'left',
           activeClassName: 'navbar__link--active',
         },
       ],
+    },
+    astroCard: {
+      title: "What is Astro?",
+      description: "Astro is a cloud solution that helps you focus on your data pipelines and spend less time managing Apache Airflow, with capabilities enabling you to build, run and observe data all in one place.",
+      buttons: {
+        primary: {
+          label: "Try Astro",
+          href: "https://www.astronomer.io/get-started?referral=docs-what-astro-banner"
+        },
+        secondary: {
+          label: "Learn about Astronomer",
+          href: "https://www.astronomer.io/?referral=docs-what-astro-banner"
+        }
+      }
+    },
+    softwareNav: {
+      items: [
+        {
+          label: '0.30 (Latest)',
+          to: '/software/',
+          activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.29',
+          to: '/software/0.29/overview',
+          activeBaseRegex: '(software\/0.29)+',
+        },
+        {
+          label: '0.28',
+          to: '/software/0.28/overview',
+          activeBaseRegex: '(software\/0.28)+',
+        },
+        {
+          label: '0.25',
+          to: '/software/0.25/overview',
+          activeBaseRegex: '(software\/0.25)+',
+        },
+      ],
+    },
+    sidebarNav: {
+      bottomNav: {
+        items: [
+          {
+            label: 'Get a demo',
+            href: 'https://www.astronomer.io/events/weekly-demo/?referral=docs-sidebar',
+          },
+          {
+            label: 'Watch a webinar',
+            href: 'https://www.astronomer.io/events/webinars/?referral=docs-sidebar',
+          },
+          {
+            label: 'Astro status',
+            href: 'https://status.astronomer.io/?referral=docs-sidebar',
+          }
+        ]
+      }
     },
     footer: {
       logo: {
@@ -118,93 +146,21 @@ module.exports = {
       },
       links: [
         {
-          title: 'Astro',
-          items: [
-            {
-              label: 'Log In',
-              href: 'https://cloud.astronomer.io/',
-            },
-            {
-              label: 'Install on AWS',
-              to: 'astro/install-aws',
-            },
-            {
-              label: 'Install on GCP',
-              to: 'astro/install-gcp',
-            },
-            {
-              label: 'Install the CLI',
-              to: 'astro/cli/get-started',
-            },
-            {
-              label: 'Create a project',
-              to: 'astro/create-project',
-            },
-            {
-              label: 'Deploy code',
-              to: 'astro/deploy-code',
-            },
-          ],
+          label: 'Legal',
+          href: 'https://www.astronomer.io/legal/',
         },
         {
-          title: 'Astronomer Software',
-          items: [
-            {
-              label: 'Overview',
-              to: 'software/',
-            },
-            {
-              label: 'Install on AWS',
-              to: 'software/install-aws',
-            },
-            {
-              label: 'Release Notes',
-              to: 'software/release-notes',
-            },
-          ],
+          label: 'Privacy',
+          href: 'https://www.astronomer.io/privacy/',
         },
         {
-          title: 'Product Resources',
-          items: [
-            {
-              label: 'Support',
-              href: 'https://support.astronomer.io',
-            },
-            {
-              label: 'Astro Status',
-              href: 'https://status.astronomer.io',
-            },
-            {
-              label: 'Astronomer Registry',
-              to: 'https://registry.astronomer.io/',
-            },
-            {
-              label: 'Privacy Policy',
-              to: 'https://www.astronomer.io/privacy/',
-            },
-            {
-              label: 'Cookie Preferences',
-              to: '#',
-              id: 'cookiePref',
-            },
-          ],
+          label: 'Security',
+          href: 'https://www.astronomer.io/security/',
         },
         {
-          title: 'More',
-          items: [
-            {
-              label: 'Astronomer Homepage',
-              to: 'https://www.astronomer.io',
-            },
-            {
-              label: 'Airflow Guides',
-              href: 'https://www.astronomer.io/guides/',
-            },
-            {
-              label: 'Docs on GitHub',
-              href: 'https://github.com/astronomer/docs',
-            },
-          ],
+          label: 'Cookie Preferences',
+          to: '#',
+          id: 'cookiePref',
         },
       ],
       copyright: '© Astronomer 2022. Various trademarks held by their respective owners.',
@@ -229,6 +185,7 @@ module.exports = {
               'info',
               'tip',
               'cli',
+              'highlight'
             ],
           },
         },
@@ -268,24 +225,24 @@ module.exports = {
     [
       '@docusaurus/plugin-content-docs',
       {
-        id: 'tutorials',
-        routeBasePath: 'tutorials',
+        id: 'learn',
+        routeBasePath: 'learn',
         editUrl: ({ docPath }) =>
-          `https://github.com/astronomer/docs/blob/main/tutorials/${docPath}`,
+          `https://github.com/astronomer/docs/blob/main/learn/${docPath}`,
         editCurrentVersion: true,
-        sidebarPath: require.resolve('./sidebarsTutorials.js'),
-        path: 'tutorials',
+        sidebarPath: require.resolve('./sidebarsLearn.js'),
+        path: 'learn',
       },
     ],
     [
       '@docusaurus/plugin-sitemap',
       {
-        id: 'software',
+        id: 'learn',
         changefreq: 'daily',
         ignorePatterns: ['/software/0.29/**', '/software/0.28/**', '/software/0.27/**', '/software/0.26/**', '/software/0.25/**', '/software/0.23/**', '/software/0.16/**'],
         filename: 'sitemap.xml',
       },
-    ]
+    ],
   ],
   scripts: [
     {

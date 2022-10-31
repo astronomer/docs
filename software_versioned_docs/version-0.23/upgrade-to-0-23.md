@@ -38,7 +38,7 @@ astronomerinc/ap-airflow:1.10.5-9-buster
 
 Minor version upgrades can be initiated only by a user with System Admin permissions on Astronomer. To confirm you're an Astronomer SysAdmin, confirm that you have access to **System Admin** features in the in the Software UI:
 
-![Admin](https://assets2.astronomer.io/main/docs/enterprise_quickstart/admin_panel.png)
+![Admin](/img/software/admin_panel.png)
 
 You also need permission to create Kubernetes resources. To confirm you have those permissions, run the following commands:
 

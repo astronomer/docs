@@ -126,7 +126,7 @@ Authorization is the process of verifying a user or service's permissions before
 
 <Tabs
     defaultValue="AWS IAM roles"
-    groupId="authentication-options"
+    groupId="authorization-options"
     values={[
         {label: 'AWS IAM roles', value: 'AWS IAM roles'},
         {label: 'AWS access keys', value: 'AWS access keys'},

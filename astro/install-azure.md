@@ -2,9 +2,13 @@
 sidebar_label: 'Azure'
 title: 'Install Astro on Azure'
 id: install-azure
-description: Get started on Astro by creating your first Astro cluster on Azure.
 sidebar_custom_props: { icon: 'img/azure.png' }
 ---
+
+<head>
+  <meta name="description" content="Instructions for completing an Astro installation on an existing Microsoft Azure instance. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources." />
+  <meta name="og:description" content="Instructions for completing an Astro installation on an existing Microsoft Azure instance. This is where you’ll find the prerequisites and the process you’ll need to follow to allow Astronomer support to provision your network resources." />
+</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

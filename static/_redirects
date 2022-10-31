@@ -3,9 +3,6 @@
 /js/script.outbound-links.js https://plausible.io/js/script.outbound-links.js 200
 /api/event https://plausible.io/api/event 200
 
-# redirect base path to astro
-/ /astro 301!
-
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
 /software/0.30/* /software/:splat
 
@@ -17,6 +14,18 @@
 
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
+
+# tutorial redirects 
+
+/tutorials/get-started-with-airflow /learn/get-started-with-airflow
+/tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2
+/tutorials/astro-python-sdk /learn/astro-python-sdk
+
+# CLI migration redirects 
+
+/software/cli-reference /astro/cli/reference
+/software/cli-reference* /astro/cli/reference
+
 
 # deprecated docs
 /astro/known-limitations /astro 301

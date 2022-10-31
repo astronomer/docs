@@ -40,7 +40,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 - [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html)
 - [Azure AKS](https://docs.microsoft.com/en-us/azure/aks/upgrade-cluster)
 - [Google GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades)
-- [RedHat OpenShift](https://docs.openshift.com/container-platform/4.6/updating/updating-cluster-between-minor.html)
+- [RedHat OpenShift](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.11/html/updating_clusters/index)
 
 ## Astronomer Certified
 

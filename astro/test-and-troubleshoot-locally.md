@@ -2,8 +2,12 @@
 sidebar_label: 'Test and troubleshoot locally'
 title: 'Test and troubleshoot locally'
 id: test-and-troubleshoot-locally
-description: A guide to running an Astro project locally and diagnosing common problems.
 ---
+
+<head>
+  <meta name="description" content="Learn how to test and troubleshoot DAGs in a local Apache Airflow environment with the Astro command-line interface (CLI)." />
+  <meta name="og:description" content="Learn how to test and troubleshoot DAGs in a local Apache Airflow environment with the Astro command-line interface (CLI)." />
+</head>
 
 As you develop data pipelines on Astro, Astronomer recommends running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
@@ -197,9 +201,9 @@ If your Astro project contains many DAGs or tasks, then you might experience per
 To improve the performance of your environment, you can:
 
  - Adjust CPU and memory resource allocation in your Docker configuration. Be aware that increasing Docker resource allocation might decrease the performance of your computer.
- - Modify Airflow-level environment variables, including concurrency and parallelism. See [Scaling out Airflow](https://www.astronomer.io/guides/airflow-scaling-workers).
+ - Modify Airflow-level environment variables, including concurrency and parallelism. See [Scaling out Airflow](https://docs.astronomer.io/learn/airflow-scaling-workers).
 
-Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see [Dynamically Generating DAGs in Airflow](https://www.astronomer.io/guides/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
+Generating DAGs dynamically can also decrease the performance of your local Airflow environment, though it's a common authoring pattern for advanced use cases. For more information, see [Dynamically Generating DAGs in Airflow](https://docs.astronomer.io/learn/dynamically-generating-dags/). If your DAGs continue to run slowly and you can't scale Docker or Airflow any further, Astronomer recommends pushing your project to a Deployment on Astro that's dedicated to testing.
 
 :::tip
 

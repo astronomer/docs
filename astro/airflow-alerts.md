@@ -11,7 +11,7 @@ For all teams, incorporating an alerting framework is critical to the health of 
 - SLAs
 - Email alerts
 
-Slack alerts and SLAs do not require additional configuration on Astro. For best practices, see the Astronomer guide on [Airflow alerts](https://www.astronomer.io/guides/error-notifications-in-airflow).
+Slack alerts and SLAs do not require additional configuration on Astro. For best practices, see the Astronomer guide on [Airflow alerts](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 This guide focuses on setting up email alerts on Astro with an SMTP service.
 

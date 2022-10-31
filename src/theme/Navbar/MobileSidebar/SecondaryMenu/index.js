@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavbarSecondaryMenu, useThemeConfig} from '@docusaurus/theme-common/internal';
+import { useNavbarSecondaryMenu, useThemeConfig } from '@docusaurus/theme-common/internal';
 import Translate from '@docusaurus/Translate';
 
 function SecondaryMenuBackButton(props) {
@@ -20,10 +20,6 @@ export default function NavbarMobileSidebarSecondaryMenu() {
   const secondaryMenu = useNavbarSecondaryMenu();
   return (
     <>
-      {/* edge-case: prevent returning to the primaryMenu when it's empty */}
-      {!isPrimaryMenuEmpty && (
-        <SecondaryMenuBackButton onClick={() => secondaryMenu.hide()} />
-      )}
       {secondaryMenu.content}
     </>
   );

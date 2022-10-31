@@ -66,7 +66,7 @@ Release date: August 18, 2022
 
 ### New command to run commands in local Airflow containers
 
-You can now run bash commands in any locally running Airflow container using `astro dev bash`. For more information, see the [CLI command reference](cli/astro-dev-bash.md).
+You can now run bash commands in any locally running Airflow container using `astro dev bash`. 
 
 ### New commands to manage Teams
 

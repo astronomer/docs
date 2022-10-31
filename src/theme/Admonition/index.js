@@ -1,6 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import {ThemeClassNames} from '@docusaurus/theme-common';
+import { ThemeClassNames } from '@docusaurus/theme-common';
 import Translate from '@docusaurus/Translate';
 import styles from './styles.module.css';
 function NoteIcon() {
@@ -16,13 +16,13 @@ function NoteIcon() {
 function CliIcon() {
   return (
     <svg width="1200pt" height="1200pt" version="1.1" viewBox="0 0 1200 1200" xmlns="http://www.w3.org/2000/svg">
-     <g fill-rule="evenodd">
-      <path d="m1106.2 1106.2v-112.5h-1012.5v112.5z"/>
-      <path d="m168.75 168.75h862.5v750h-862.5zm93.75 93.75v562.5h675v-562.5z"/>
-      <path d="m337.5 337.5h75v75h-75z"/>
-      <path d="m412.5 412.5h75v75h-75z"/>
-      <path d="m337.5 487.5h75v75h-75z"/>
-     </g>
+      <g fill-rule="evenodd">
+        <path d="m1106.2 1106.2v-112.5h-1012.5v112.5z" />
+        <path d="m168.75 168.75h862.5v750h-862.5zm93.75 93.75v562.5h675v-562.5z" />
+        <path d="m337.5 337.5h75v75h-75z" />
+        <path d="m412.5 412.5h75v75h-75z" />
+        <path d="m337.5 487.5h75v75h-75z" />
+      </g>
     </svg>
   );
 }
@@ -65,6 +65,9 @@ function CautionIcon() {
       />
     </svg>
   );
+}
+function HighlightIcon() {
+  return null;
 }
 // eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
 const AdmonitionConfigs = {
@@ -134,6 +137,11 @@ const AdmonitionConfigs = {
       </Translate>
     ),
   },
+  highlight: {
+    infimaClassName: 'highlight',
+    iconComponent: HighlightIcon,
+    label: '',
+  },
 };
 // Legacy aliases, undocumented but kept for retro-compatibility
 const aliases = {
@@ -169,7 +177,7 @@ function extractMDXAdmonitionTitle(children) {
   };
 }
 function processAdmonitionProps(props) {
-  const {mdxAdmonitionTitle, rest} = extractMDXAdmonitionTitle(props.children);
+  const { mdxAdmonitionTitle, rest } = extractMDXAdmonitionTitle(props.children);
   return {
     ...props,
     title: props.title ?? mdxAdmonitionTitle,
@@ -177,10 +185,10 @@ function processAdmonitionProps(props) {
   };
 }
 export default function Admonition(props) {
-  const {children, type, title, icon: iconProp} = processAdmonitionProps(props);
+  const { children, type, title, icon: iconProp } = processAdmonitionProps(props);
   const typeConfig = getAdmonitionConfig(type);
   const titleLabel = title ?? typeConfig.label;
-  const {iconComponent: IconComponent} = typeConfig;
+  const { iconComponent: IconComponent } = typeConfig;
   const icon = iconProp ?? <IconComponent />;
   return (
     <div

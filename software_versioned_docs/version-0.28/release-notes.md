@@ -21,6 +21,16 @@ This document includes all release notes for Astronomer Software v0.28.
 
 All Astronomer Software versions are tested for scale, reliability and security on Amazon EKS, Google GKE, and Azure AKS. If you have questions or an issue to report, contact [Astronomer support](https://support.astronomer.io).
 
+## v0.28.7
+
+Release date: October 14, 2022
+
+### Bug fixes 
+
+- Fixed the following vulnerabilities:
+    - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
+    - [CVE-2022-3224](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3224)
+
 ## v0.28.6
 
 Release date: September 21, 2022

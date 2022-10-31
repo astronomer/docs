@@ -51,7 +51,7 @@ Workspace editors can configure a new or existing Airflow Deployment to use a pr
 2. Go to the **DAG Deployment** section of the Deployment's Settings page.
 3. For your **Mechanism**, select **NFS Volume Mount**:
 
-    ![Custom Release Name Field](https://assets2.astronomer.io/main/docs/astronomer-ui/nfs.png)
+    ![Custom Release Name Field](/img/software/nfs.png)
 
 4. In the **NFS Location** field that appears, enter the location of your volume-based DAG directory as `<IP>:/<path>` (for example: `192.168.0.1:/path/to/your/dags`).
 5. Save your changes.

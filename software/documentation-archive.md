@@ -43,5 +43,3 @@ This section contains links to documentation sets that correspond to all previou
 - [v0.25](https://docs.astronomer.io/software/0.25/overview)
 - [v0.23](https://docs.astronomer.io/software/0.23/overview)
 - [v0.16](https://docs.astronomer.io/software/0.16/overview)
-- [v0.26](https://docs.astronomer.io/software/0.26/overview)
-- [v0.25](https://docs.astronomer.io/software/0.25/overview)

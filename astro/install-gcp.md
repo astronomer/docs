@@ -103,6 +103,7 @@ The data plane is a collection of infrastructure components for Astro that run i
 
 Once you've activated your data plane, provide Astronomer with:
 
+- Your GCP project ID.
 - Your preferred Astro cluster name.
 - The GCP region that you want to host your cluster in.
 - Your preferred node instance type.
