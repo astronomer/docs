@@ -13,6 +13,12 @@ import LinkCard from '@site/src/components/LinkCard';
   A cloud-based, notebook-inspired IDE for writing and testing data pipelines. No Airflow knowledge or local setup required.
 </p>
 
+The Astro Cloud IDE is a notebook-inspired development environment for writing and testing data pipelines with Astro. It's the product of hundreds of conversations with data engineers, data scientists, and analytics engineers, and we’re super excited to get it in your hands. The Cloud IDE materially lowers the barrier to entry for new Airflow users and improves the lives of experienced users.
+
+![Product Screenshot](/img/cloud-ide/python-hello-world.png)
+
+<!-- insert demo video -->
+
 ## Cloud IDE Features
 
 <LinkCardGrid>
