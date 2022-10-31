@@ -4,8 +4,6 @@ title: Using cell outputs
 id: using-cell-outputs
 ---
 
-import Image from '@site/src/components/Image';
-
 The Cloud IDE makes it very easy to share data between cells. SQL cells return their output if the `Create Table` checkbox is selected in the bottom right corner of the cell. Python cells must explicitly return their output. To do so, simply add a `return` statement in the cell. See below for some examples.
 
 ### Python Return Examples
