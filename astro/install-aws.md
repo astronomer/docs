@@ -3,7 +3,7 @@ sidebar_label: 'AWS'
 title: 'Install Astro on AWS'
 id: install-aws
 sidebar_custom_props: { icon: 'img/aws.png' }
-toc_min_heading_level: 1
+toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 

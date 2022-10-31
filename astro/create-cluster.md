@@ -3,7 +3,7 @@ sidebar_label: 'Create a cluster'
 title: "Create a new cluster on Astro"
 id: create-cluster
 description: Create a new Astro cluster for your Organization.
-toc_min_heading_level: 1
+toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
