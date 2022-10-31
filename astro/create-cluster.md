@@ -155,6 +155,12 @@ For information on all supported regions and configurations, see [Resources requ
 
 <TabItem value="astronomer hosted data plane">
 
+:::info
+
+This feature is currently Private Preview. Contact [Astronomer support](https://cloud.astronomer.io/support) to enable it.
+
+:::
+
 ### Submit a request to Astronomer support
 
 To create a new Astro cluster on the Astronomer-hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
@@ -197,6 +203,12 @@ If you don't specify configuration preferences, Astronomer support creates a clu
 </TabItem>
 
 <TabItem value="astronomer hosted data plane">
+
+:::info
+
+This feature is currently Private Preview. Contact [Astronomer support](https://cloud.astronomer.io/support) to enable it.
+
+:::
 
 ### Submit a request to Astronomer support
 
