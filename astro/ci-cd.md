@@ -9,11 +9,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-This guide provides setup steps for configuring a CI/CD pipeline to deploy DAGs on Astro.
+Continuous Integration and Continuous Delivery (CI/CD) is an industry term that refers to programmatic workflows that automate key parts of the software development lifecycle, including code changes, builds, and testing. CI/CD enables teams to develop faster, more securely, and more reliably.
 
-There are many benefits to deploying DAGs and other changes to Airflow via a CI/CD workflow. Specifically, you can:
+On Astro, you can use Deployment API keys to automate deploying code changes to a Deployment. Astronomer recommends setting up a CI/CD workflow for all production environments.
 
-- Deploy new and updated DAGs in a way that streamlines the development process amongst team members.
+This guide has CI/CD templates that can be used with popular CI/CD management tools, including GitHub Actions and Circle CI.
+
+## Benefits
+
+There are many benefits to configuring a CI/CD workflow that automates pushing code changes to Astro. Specifically, you can:
+
+- Deploy new and updated DAGs in a way that streamlines the development process among team members.
 - Decrease the maintenance cost of integrating changes, allowing your team to quickly respond in case of an error or failure.
 - Enforce continuous, automating testing, which increases code quality and protects your DAGs in production.
 
@@ -25,9 +31,9 @@ There are many benefits to deploying DAGs and other changes to Airflow via a CI/
 
 ## CI/CD templates
 
-The following section provides basic templates for configuring individual CI pipelines using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline, but Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices. More templates are coming soon.
+This section provides basic templates for configuring individual CI pipelines using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline, but Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices. More templates are coming soon.
 
-At a high level, these CI/CD pipelines will:
+At a high level, the CI/CD templates:
 
 - Access Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
 - Install the latest version of the Astro CLI.

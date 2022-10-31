@@ -8,9 +8,11 @@ description: Configure a secrets backend on Astro to store Airflow variables and
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
+Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements.
 
-## Secrets backend tool integration benefits
+While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
+
+## Benefits
 
 Integrating a secrets backend tool with Astro allows you to:
 
@@ -194,7 +196,6 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
     ```
 
     Save these values for Step 3.
-
 
 #### Step 2: Create an Airflow variable or connection in Vault
 

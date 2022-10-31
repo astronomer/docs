@@ -1,17 +1,36 @@
 ---
-sidebar_label: 'Configure Deployment resources'
-title: 'Configure Deployment resources'
+sidebar_label: 'Configure a Deployment'
+title: 'Configure a Deployment'
 id: configure-deployment-resources
-description: Learn how to create and configure Astro Deployment resources.
+description: Learn how to configure Astro Deployment resources.
 ---
 
-After you create an Astro Deployment, you can modify its resource settings to make sure that your tasks have the CPU and memory required to complete successfully.
+After you create an Astro Deployment, you can modify its settings to fit the needs your organization.
 
-## Worker queues 
+On Astro, you can:
 
-Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a required `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks. See [Configure worker queues](configure-worker-queues.md).
+- Set resources for the Airflow scheduler and workers.
+- Update a Deployment name and description.
+- Add or delete a Deployment alert email.
+- Transfer a Deployment from one Workspace in your Organization to another.
+- Delete a Deployment.
 
-## Scheduler resources
+## Set Deployment resources
+
+To ensure that your tasks have the CPU and memory required to complete successfully, you can set resources for:
+
+- The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
+- Workers, which are responsible for executing tasks that have been scheduled and queued by the scheduler.
+
+Worker and scheduler resources must be set per Deployment and are managed separately from Cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
+
+### Worker queues 
+
+Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a required `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks.
+
+See [Configure worker queues](configure-worker-queues.md).
+
+### Scheduler resources
 
 The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. By adjusting the **Scheduler Count** slider in the **Configuration** tab of the Cloud UI, you can configure up to 4 schedulers, each of which will be provisioned with the Astronomer Units (AU) specified in **Resources**. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. 1 AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning 5 AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory. You can view the CPU and memory allocations for schedulers on the Deployment **Details** page in the Cloud UI.
 
@@ -19,7 +38,7 @@ For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 
 
 If you experience delays in task execution, which you can track with the Gantt Chart view of the Airflow UI, Astronomer recommends increasing the AU allocated towards the scheduler. The default resource allocation is 10 AU.
 
-### Edit scheduler settings 
+#### Edit scheduler settings 
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
 2. Click the **Details** tab.
@@ -39,7 +58,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 ## Add or delete a Deployment alert email
 
-The alert email assigned to a Deployment is used to notify recipients of Deployment issues.
+Alert emails assigned to a Deployment are used by Astronomer support to notify recipients in the case of an issue with the Deployment. This can include a problem with your scheduler or workers. Automated email alerts are coming soon.
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
 2. Click the **Details** tab.
@@ -50,6 +69,8 @@ The alert email assigned to a Deployment is used to notify recipients of Deploym
     - Click **Edit Emails** in the **Alert Emails** area.
     - Click **Delete** next to the email you want to delete.
     - Click **Yes, Continue**.
+
+In addition to alert emails for your Deployments, Astronomer recommends subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe, you get alerted to system-wide incidents by email in real time.
 
 ## Delete a Deployment
 
