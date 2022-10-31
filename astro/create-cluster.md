@@ -129,7 +129,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
 
 </Tabs>
 
-## Microsoft Azure
+## Azure
 
 <Tabs
     defaultValue="byoc"
