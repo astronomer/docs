@@ -114,15 +114,15 @@ with DAG('azure_container_instances',
 
 Update the `resource_group` parameter to the name of the resource group you created in Step 1. You may wish to update some of the other parameters in your operator, particularly the `image` and `registry_conn_id` if you chose a different Docker image. The following parameters are defined in this example:
 
-- **ci\_conn\_id:** The connection ID for the Airflow connection you created in Step 3.
-- **registry\_conn\_id:** The connection ID to connect to a registry. In this tutorial we use DockerHub, which is public and does not require credentials, so we pass in `None`.
-- **resource\_group:** The Azure resource group you created in Step 1.
-- **name:** The name you want to give your ACI. Note that this must be unique within the resource group.
-- **image:** The Docker image you chose in Step 4. In this case we use a simple Hello World example from Docker.
-- **region:** The Azure region we want our ACI deployed to
-- **CPU:** The number of CPUs to allocate to your container. In this example we use the default minimum. For more information on allocating CPUs and memory, refer to the [Azure documentation](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-faq).
-- **memory\_in\_gb**: The amount of memory to allocate to the container. In example we use the default minimum.
-- **fail\_if\_exists:** Whether you want the operator to raise an exception if the container group already exists (default value is `True`). If it's set to False and the container group name already exists within the given resource group, the operator will attempt to update the container group based on the other parameters before running and terminating upon completion.
+- **`ci_conn_id`:** The connection ID for the Airflow connection you created in Step 3.
+- **`registry_conn_id`:** The connection ID to connect to a registry. In this tutorial we use DockerHub, which is public and does not require credentials, so we pass in `None`.
+- **`resource_group`:** The Azure resource group you created in Step 1.
+- **`name`:** The name you want to give your ACI. Note that this must be unique within the resource group.
+- **`image`:** The Docker image you chose in Step 4. In this case we use a simple Hello World example from Docker.
+- **`region`:** The Azure region we want our ACI deployed to
+- **`CPU`:** The number of CPUs to allocate to your container. In this example we use the default minimum. For more information on allocating CPUs and memory, refer to the [Azure documentation](https://docs.microsoft.com/en-us/azure/container-instances/container-instances-faq).
+- **`memory_in_gb`**: The amount of memory to allocate to the container. In example we use the default minimum.
+- **`fail_if_exists`:** Whether you want the operator to raise an exception if the container group already exists (default value is `True`). If it's set to False and the container group name already exists within the given resource group, the operator will attempt to update the container group based on the other parameters before running and terminating upon completion.
 
 You can also provide the operator with other parameters such as environment variables, volumes, and a command as needed to run the container. For more information on the `AzureContainerInstancesOperator`, check out the [Astronomer Registry](https://registry.astronomer.io/providers/microsoft-azure/modules/azurecontainerinstancesoperator).
 
