@@ -18,7 +18,7 @@ This quickstart walks you through creating and running your first project throug
 
 To complete this quickstart, you need:
 
-- Access to [Astro](overview.md).
+- Workspace Editor permissions to an [Astro Workspace](manage-workspaces.md).
 - Optional. A database hosted in one of the following services:
     - GCP BigQuery
     - Postgres (hosted)

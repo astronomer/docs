@@ -33,7 +33,7 @@ After you configure a GitHub repository, you can start committing changes from t
 1. Click **Configure**.
 2. Click **New Branch**, then choose from either an existing branch or create a new branch.
 3. In the **COMMIT MESSAGE** field, enter a commit message. This will be the commit message for committing your changes from the Astro Cloud IDE to GitHub.
-4. Click **Commit**
+4. Click **Commit**.
 
 ## Step 2: Link your GitHub repository to Astro
 
