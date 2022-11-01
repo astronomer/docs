@@ -113,17 +113,19 @@ The resulting values can be compared to an expected value using any of the follo
 
 You can add a tolerance to the comparisons in the form of a fraction (0.1 = 10% tolerance).
 
-With version 1.3+ of the Common SQL provider, it is possible to define a subset of the table to run checks on. To do so, provide a SQL `WHERE`-clause (without the `WHERE` keyword) to the `partition_clause` parameter. A `partition_clause` defined at the operator level will apply to all checks contained in the operator. A `partition_clause` defined within a single check only affects the check it has been defined in. 
+## Example: Run checks on a subset of tables using `partition_clause`
+
+You can run checks on a subset of your table using either a check-level or task-level `partition_clause` parameter. This parameter takes a SQL `WHERE`-clause (without the `WHERE` keyword) and uses it to filter your table before running a given check or group of checks in a task.
 
 The code snippet below shows a SQLColumnCheckOperator defined with a `partition_clause` at the operator level, as well as a `partition_clause` in one of the two column checks defined in the `column_mapping`. 
 
-In the following example, two checks are performed:
+In the following example, the operator checks whether:
 
-- the `MY_NUM_COL_1` column is checked to have a minimum value greater than 10.
-- `MY_NUM_COL_2` is checked to have a maximum value less than 300 for rows that fulfill the check-level `partition_clause` which includes rows where `CUSTOMER_STATUS = 'active'`.
-- both of the above checks only run on rows fullfilling the operator-level partition clause `CUSTOMER_NAME IS NOT NULL`.
+- `MY_NUM_COL_1` column has a minimum value greater than 10.
+- `MY_NUM_COL_2` has a maximum value less than 300. Only rows that fulfill the check-level `partition_clause` are checked (rows where `CUSTOMER_STATUS = 'active'`).
 
-If both, an operator-level `partition_clause` and a check-level `partition_clause` is defined for a check, the check will only run on rows fulfilling both clauses.
+Both of the above checks only run on rows that fulfill the operator-level partition clause `CUSTOMER_NAME IS NOT NULL`. If both an operator-level `partition_clause` and a check-level `partition_clause` are defined for a check, the check will only run on rows fulfilling both clauses.
+
 
 ```python
 column_checks = SQLColumnCheckOperator(
@@ -147,7 +149,7 @@ column_checks = SQLColumnCheckOperator(
     )
 ```
 
-If the boolean value resulting from the check is `True` it passes, otherwise the check will fail. [Airflow generates logs](logging.md) that show the set of returned records for every check that passes and the full query and result for checks that failed.
+If the boolean value resulting from the check is `True` the check will pass, otherwise it will fail. [Airflow generates logs](logging.md) that show the set of returned records for every check that passes and the full query and result for checks that failed.
 
 The following example shows the output of 2 successful checks that ran on the `MY_NUM_COL` column of a table in Snowflake using the `SQLColumnCheckOperator`. The checks concerned the minimum value and the maximum value in the column.
 
@@ -179,7 +181,7 @@ The following tests have failed:
     Check Values: {'geq_to': 0, 'result': -12, 'success': False}
 ```
 
-Starting with version 1.3 of the Common SQL provider, the SQLColumnCheckOperator will convert a returned `result` of `None` to 0 by default and still run the check.
+The SQLColumnCheckOperator converts a returned `result` of `None` to 0 by default and still runs the check.
 
 For example, if a column check for the `MY_COL` column is set to accept a minimum value of -10 or more but runs on an empty table, the check would still pass because the `None` result is treated as 0. You can toggle this behavior by setting `accept_none=False`, which will cause all checks returning `None` to fail.
 
@@ -195,11 +197,10 @@ The `SQLTableCheckOperator` is useful for:
 - Row count checks.
 - Checking if a date is between certain bounds (for example, using `MY_DATE_COL BETWEEN '2019-01-01' AND '2019-12-31'` to make sure only dates in the year 2019 exist).
 - Comparisons between multiple columns, both aggregated and not aggregated.
-- Running the above checks on a subset of the table using the `partition_clause` parameter (added in version 1.3 of the Common SQL provider).
 
 In the example below, three checks are defined: `my_row_count_check`, `my_column_sum_comparison_check` and  `my_column_addition_check`. The first check runs a SQL statement asserting that the table contains at least 1000 rows, the second check compares the sum of two columns, and the third check confirms that for each row `MY_COL_1 + MY_COL_2 = MY_COL_3` is true.
 
-Similarly to the SQLColumnCheckOperator, in version 1.3+ you can pass a SQL `WHERE` clause to the operator-level `partition_clause` parameter or as a check-level `partition_clause`. All checks of the `table_checks` task below only run on rows in `MY_TABLE` where the date in the `START_DATE` column is 2022-01-01 or later. The `my_column_sum_comparison_check` additionally only runs on rows where the value in `MY_COL_4` is greater than 100.
+Similarly to the SQLColumnCheckOperator, you can pass a SQL `WHERE` clause to the operator-level `partition_clause` parameter or as a check-level `partition_clause`. All checks of the `table_checks` task below run only on rows in `MY_TABLE` where the date in the `START_DATE` column is 2022-01-01 or later. The `my_column_sum_comparison_check` additionally only runs on rows where the value in `MY_COL_4` is greater than 100.
 
 ```python
 table_checks = SQLTableCheckOperator(
