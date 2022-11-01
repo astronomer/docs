@@ -63,7 +63,7 @@ After configuring your Github actions, your commits from the Astro Cloud IDE to 
 
 ## Step 3: Commit to Astro
 
-Once you've configured a repository, the **Configure** button in the Astro Cloud IDE changes to **Commit**. This tab allows you to commit your changes to your repository. You can also view the status of your repository and any changes that were committed from the Astro Cloud IDE.
+After you've configured a GitHub repository, the **Configure** button in the Cloud IDE updates to **Commit**. You can now commit your changes to your repository. You can also view the status of your repository and any changes that were committed from the Cloud IDE.
 
 1. Open your project in the Astro Cloud IDE.
 2. Click **Commit**.
