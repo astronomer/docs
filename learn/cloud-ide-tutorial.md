@@ -11,7 +11,13 @@ This tutorial is for people who are Astro customers and want to create their fir
 
 After you complete this tutorial, you'll be able to:
 
-
+- Create a Cloud IDE project with a pipeline.
+- Configure connections and requirements in the Cloud IDE.
+- Run a query on a table in a database from the Cloud IDE.
+- Transform a table in a database from the Cloud IDE.
+- Train a simple ML model in the Cloud IDE.
+- Export a DAG from the Cloud IDE to GitHub.
+- Configure GitHub Secrets to deploy your DAG to Astro.
 
 ## Time to complete
 
