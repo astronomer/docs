@@ -12,7 +12,7 @@ The Cloud IDE is currently in _Public Preview_. This means that it is available 
 
 :::
 
-Once you've created a pipeline in the Cloud IDE, you can deploy it to Astro as part of your Cloud IDE project and run tasks according to the schedule you configured. To deploy a pipeline from the Cloud IDE, you must first push the pipeline to a GitHub repository and use Astro Cloud IDE's built-in CI/CD scripting to deploy to Astro.
+After you've created a pipeline in the Cloud IDE, you can deploy it to Astro as part of your Cloud IDE project and run tasks using an existing schedule. To deploy a pipeline from the Cloud IDE, you first push the pipeline to a GitHub repository and then you deploy it to Astro using the CI/CD script included with the Cloud IDE.
 
 ## Prerequisites
 
