@@ -27,7 +27,7 @@ The Astro Cloud IDE is a notebook-inspired development environment for writing a
 
 One of the biggest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. You can configure all of these with the Cloud IDE user interface (UI) so that you only need to write the Python or SQL code that executes your work.
 
-In the following screenshot, you can see how you can use the Cloud IDE to write a DAG by only writing SQL. The Astro CLoud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured through the UI.
+In the following image, you can see how you can use the Cloud IDE to write a DAG by only writing SQL. The Cloud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured with the UI.
 
 ![Product Screenshot](/img/cloud-ide/pipeline-editor.png)
 
