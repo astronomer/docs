@@ -45,7 +45,7 @@ On your first commit, the Astro Cloud IDE will automatically push a Github Actio
 - Deploy your Cloud IDE project to your development Deployment when you commit to a `dev` branch.
 - Deploy your Cloud IDE project to your production Deployment when you commit to a `main` branch.
 
-Astronomer recommends creating a feature branch for every new pipeline and creating a pull request (PR) with new changes that merge into the `dev` branch. Merging that PR triggers a push to your development Deployment, where you can confirm that your data pipeline is functional. Once you confirm your changes, submit a pull request from your `dev` branch into `main`. This deploys your tested changes to your production Deployment.
+Astronomer recommends creating a feature branch for every new pipeline and creating a pull request (PR) with new changes that merge into the `dev` branch. Merging the PR triggers a push to your development Deployment, where you can confirm that your data pipeline is functional. When you confirm your changes, submit a pull request from your `dev` branch into `main`. This deploys your tested changes to your production Deployment.
 
 You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring Deployments in GitHub. However, there is currently no way to disable the GitHub Action that the Astro Cloud IDE pushes to your repository. If you don't complete the following steps, the GitHub Action fails and you can't deploy your changes to Astro, but the rest of your commit processes are successful.
 
