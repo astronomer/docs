@@ -8,17 +8,17 @@ id: quickstart
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Creating projects in the Cloud IDE does not impact running tasks on existing Deployments. If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. Creating projects in the Cloud IDE does not affect running tasks on existing Deployments. If you have feedback on the Cloud IDE you'd like to share, you can submit it on the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
 :::
 
-This quickstart walks you through creating and running your first project through the Astro Cloud IDE.
+Use this quickstart to create and run your first project with the Cloud IDE.
 
 ## Prerequisites 
 
 To complete this quickstart, you need:
 
-- Workspace Editor permissions to an [Astro Workspace](manage-workspaces.md).
+- Workspace Editor permissions in an [Astro Workspace](manage-workspaces.md).
 - Optional. A database hosted in one of the following services:
     - GCP BigQuery
     - Postgres (hosted)
@@ -26,29 +26,31 @@ To complete this quickstart, you need:
     - AWS S3
     - Redshift 
 
-If you don't provide a database, you can still complete the tutorial. However, you will not be able to test any SQL in your pipeline.
+If you don't provide a database, you can still complete the quickstart. However, you won't be able to test SQL code in your pipeline.
 
 ## Step 1: Log in and create a project
 
-The Cloud IDE is accessible through the Cloud UI and is available to all Astro customers.
+The Cloud IDE is available to all Astro customers and can be accessed in the Cloud UI.
 
 1. Log in to the Cloud UI and select a Workspace. 
-2. Click **Cloud IDE** in the left sidebar. If you are the first person in your Workspace to use the Astro Cloud IDE, the **My Projects** page will be empty.
+2. Click **Cloud IDE** in the left menu. If you are the first person in your Workspace to use the Astro Cloud IDE, the **My Projects** page is empty.
 
 ![Cloud IDE](/img/cloud-ide/project-list.png)
 
-3. Click **+ Project**. Give your new project a name and a description, then click **Create**.
+3. Click **Project**, enter a name and a description for the project, and then click **Create**.
 
-After you create your project, the Astro Cloud IDE opens your project home page. This page contains all menus for configuring your your project:
+After you create your project, the Cloud IDE opens your project home page with the following tabs:
 
 - The **Pipelines** tab stores all of the Python and SQL code that your project executes.
 - The **Connections** tab stores Airflow connections for connecting your project to external services.
-- The **Variables** tab stores Airflow variables for use in your pipeline code.
+- The **Variables** tab stores Airflow variables used in your pipeline code.
 - The **Requirements** tab stores the required Python and OS-level dependencies for running your pipelines.
 
 ## Step 2: Create a pipeline
 
-In the **Pipelines** tab, click **+ Pipeline**. Give your pipeline a name and a description, then click **Create**.
+1. Click the **Pipelines** tab and then click **Pipeline**. 
+
+2. Enter a name and a description for the pipeline and then click **Create**.
 
 When you first run your project, your pipeline is built into a single DAG with the name you provide. Because of this, pipeline names must be unique within their project. They must also be a Python identifier, so they can't contain spaces or special characters. 
 
@@ -56,9 +58,10 @@ After clicking **Create**, the IDE opens the pipeline editor. This is where you'
 
 ## Step 3: Create a Python cell 
 
-Just like tasks are the building blocks of DAGs, cells are the building blocks of pipelines. Cells can be created with either Python or SQL code. For this tutorial, write a Python cell named `hello_world`.
+Cells are the building blocks for pipelines. Cells can be created with either Python or SQL code. For this quickstart, you'll write a Python cell named `hello_world`.
 
-1. Click **Create Cell**, then click **Python**. A new cell named `cell_1` appears on the page.
+1. In the **Pipeline** list, click the name of the pipeline you created in step 2.
+2.  Click **Add Cell** and select **Python**. A new cell named `cell_1` appears.
 2. Click the cell's name and rename the cell `hello_world`.
 3. Click the editing window where it says `# Write your code here…`, then replace that line with the following code:
    
@@ -78,13 +81,13 @@ In the `hello_world` cell, click **Run** to execute a single run of your cell.
 
 When you run a cell, the Cloud IDE creates a temporary DAG that executes only an individual cell. Astro runs this DAG in your cloud and sends information about the cell run directly to the Cloud IDE.
 
-The **Logs** tab contains all logs generated by the cell run, including Airflow logs and Python errors. The **Results** tab contains the contents of your Python console. If you click **Results** you should see the result of your successful cell run. 
+The **Logs** tab contains all logs generated by the cell run, including Airflow logs and Python errors. The **Results** tab contains the contents of your Python console. Click **Results** to view the result of your successful cell run. 
 
 ## Step 5: Create a database connection
 
 To create a SQL cell and execute SQL, create a database to run your SQL queries against. 
 
-1. Click **Environment**, then click **Connections**. 
+1. Click the **Connections** tab and then click **Connection**. 
 
     ![Configure Connection](/img/cloud-ide/new-connection.png)
 
@@ -97,17 +100,19 @@ To create a SQL cell and execute SQL, create a database to run your SQL queries 
 
   :::
 
-4. Optional. Click **Test Connection**. The Astro Cloud IDE runs a quick connection test and displays a message based on whether the test was a success. Regardless of whether the test succeeds, you can still create the connection.
+4. Optional. Click **Test Connection**. The Astro Cloud IDE runs a quick connection test and returns a status message. You can still create the connection if the test is unsuccessful.
 5. Click **Create Connection**. You new connection appears in the **Connections** tab both in the pipeline editor and on your project homepage. You can use this connection with any future pipelines you create in this project. 
 
 ## Step 6: Create a SQL cell
 
 You can now write and run SQL cells with your database connection.
 
-1. Click **Create Cell**, then click **SQL**. A new cell appears on the page.
-2. Click the cell's name and rename the cell `hello_sql`.
-3. In the dropdown menu next to the cell's name, select your database connection.
-4. Click the editing window where it says `-- Write your SQL query here`, then replace that line with the following code:
+1. In the **Pipeline** list, click the name of the pipeline you created in step 2.
+
+2.  Click **Add Cell** and select **SQL**. A new cell named `cell_1` appears.
+2. Click the cell name and rename it `hello_sql`.
+3. In the **Select Connection** list, select the connection you created in step 5.
+4. Replace `-- Write your SQL query here` with the following code:
 
     ```sql
     SELECT 1 AS hello_world;
@@ -115,7 +120,7 @@ You can now write and run SQL cells with your database connection.
 
   :::tip
 
-  You can also quick add a SQL cell with a given connection by clicking on the **+** button from the **Connections** tab in the **Environment** menu.
+  You can also add a SQL cell to a connection by clicking the **+** button from the **Connections** tab in the **Environment** menu.
 
   :::
 
@@ -123,14 +128,14 @@ You can now write and run SQL cells with your database connection.
 
 ## Step 7: Create dependencies between cells
 
-You now have a Python cell and a SQL cell, but there's currently no logic to determine which task runs first in your DAG. You can create dependencies for these cells directly in the Astro Cloud IDE. Start by making `hello_sql` dependent on `hello_world` completing.
+You now have a Python cell and a SQL cell, but there's no logic to determine which task runs first in your DAG. You can create dependencies for these cells directly in the Astro Cloud IDE. 
 
-1. In the `hello_sql` cell, click the **Dependencies** icon.
+1. In the `hello_sql` cell, click **Dependencies** and then select `hello_world`.
 2. Click `hello_world`. 
    
     ![Configure a dependency](/img/cloud-ide/create-dependency.png)   
 
-3. To confirm that the dependency was established, click **Pipeline**. The **Pipeline** menu visualizes the dependencies between your cells.
+3. To confirm that the dependency was established, click **Pipeline**. The **Pipeline** view shows the dependencies between your cells.
 
     ![Dependency graph in the Pipelines menu](/img/cloud-ide/configured-dependency.png)   
 
@@ -151,11 +156,11 @@ To create a potential dependency to a Python cell, the upstream Python cell must
 
     You can pass any value from a `return` statement into a downstream Python cell by calling the name of the upstream Python cell.
 
-3. Open **Pipeline** menu to see that your dependency graph has updated:
+3. Click **Pipeline** to confirm that your dependency graph was updated:
 
     ![New dependency graph](/img/cloud-ide/data-dependency.png) 
 
-You can generate dependencies between any two types of cells. See the following topics for more information about generating different types of dependencies. 
+You can generate dependencies between any two types of cells. 
 
 ### Use the results of a SQL cell in a SQL cell
 

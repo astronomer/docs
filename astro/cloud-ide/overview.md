@@ -58,7 +58,7 @@ In the following image, you can see how you can use the Cloud IDE to write a DAG
   />
   <LinkCard
     label="Deploy directly to Astro"
-    description="Using our out-of-the-box CI/CD, deploy your code to a production Deployment on Astro in a few clicks."
+    description="Use the included CI/CD script to deploy your code to a production Deployment on Astro."
   />
 </LinkCardGrid>
 
@@ -66,7 +66,7 @@ In the following image, you can see how you can use the Cloud IDE to write a DAG
 
 
 <LinkCardGrid>
-  <LinkCard truncate label="Quickstart" description="Create data pipelines from scratch using the Astro Cloud IDE." href="/astro/cloud-ide/quickstart" />
+  <LinkCard truncate label="Quickstart" description="Create data pipelines with the Cloud IDE." href="/astro/cloud-ide/quickstart" />
   <LinkCard truncate label="Deploy a project" description="Push your changes from the Astro Cloud IDE directly to GitHub or a Deployment" href="/astro/cloud-ide/deploy-project" />
   <LinkCard truncate label="Security" description="Learn how the Astro Cloud IDE keeps your code and production Deployments secure." href="/astro/cloud-ide/reference/security" />
 </LinkCardGrid>
