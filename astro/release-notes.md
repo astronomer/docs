@@ -17,10 +17,6 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## October 25, 2022 
 
-### New Deployment transfer functionality
-
-You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace. See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
-
 ### Additional improvements 
 
 - In the Cloud UI, you can now view a cluster's external IP addresses in the **Clusters** tab.
