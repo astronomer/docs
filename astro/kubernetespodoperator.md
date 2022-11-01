@@ -136,7 +136,7 @@ Astronomer provisions `m5d` workers with NVMe SSD volumes. These volumes can be 
     )
     ```
     
-    Your task can now utilize the configured volume as storage for simple operations. However, Astronomer recommends setting Airflow connection to an external storage service such as Amazon S3 for larger operations requiring storage. See [Passing data between Airflow tasks](https://www.docs.astronomer.io/learn/airflow-passing-data-between-tasks/).
+    Your task can now write data to the configured volume. Astronomer recommends using this volume only with small amounts of data. For larger operations requiring storage, Astronomer recommends setting an Airflow connection to an external storage service such as Amazon S3 . See [Passing data between Airflow tasks](https://www.docs.astronomer.io/learn/airflow-passing-data-between-tasks/).
  
 ## Run images from a private registry
 
