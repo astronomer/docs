@@ -19,6 +19,52 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.6.0 ([Release notes](cli/release-notes.md))
 
+## November 1, 2022 
+
+### Introducing the Astro Cloud IDE, a new Airflow development experience
+
+Astronomer is excited to introduce the Astro Cloud IDE, which is a notebook-inspired development environment for writing, running, and deploying data pipelines. Now you can develop an entire Airflow project, including DAGs, dependencies, and connections entirely within the Cloud UI.
+
+![Example page in the Astro Cloud IDE](/img/release-notes/ide-overview.png)
+
+The Astro Cloud IDE was built with a few principles in mind:
+
+- Configuring Airflow shouldn't be a barrier to running Airflow
+- Passing data between tasks should be seamless regardless of what language a task is written in
+- Data pipelines should be quickly deployable and testable using CI/CD
+
+Above all else, the Cloud IDE was developed to materially lower the barrier to entry for new Airflow users and improves the development experience of experienced users.
+
+To create your first project in the Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
+
+:::info
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Creating projects in the Cloud IDE does not impact running tasks on existing Deployments. 
+
+If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
+### Write to temporary storage on AWS clusters
+
+AWS clusters that use `m5d` and `m6id` worker types can now run tasks which require writing data to local storage. These worker types now have NVMe SSD volume mounts that can be used for simple operations, such as a disk-based merge sort or checkpointing to prevent crashes. To use these worker types on your cluster, see [Modify a cluster](modify-cluster.md) and [Configure worker queues](configure-worker-queues.md).
+
+### New Deployment transfer functionality
+
+You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace. See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
+
+### Additional improvements 
+
+- In the Cloud UI, cluster selection menus are now alphabetized.
+
+### Bug fixes 
+
+- Fixed an issue in the Cloud UI where you could select a worker type before selecting a cluster when creating a Deployment.
+- Fixed an issue where Deployments on Runtime 5.0.10 and earlier showed a nonfunctional **Configuration** tab in the Airflow UI.
+- Fixed [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-32149).
+
 ## October 18, 2022 
 
 ### Additional improvements 
