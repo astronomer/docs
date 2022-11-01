@@ -108,7 +108,8 @@ Navigate back to your Cloud IDE on Astro.
 
 ```sql 
 SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
-WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
+WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, 
+WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
 ```
 
 4. Select your Snowflake connection as shown in the screenshot below.
@@ -210,13 +211,13 @@ You will notice again how the Cloud IDE will automatically create a dependency b
 
 The Python code:
 
-- imports necessary functions and classes from the scikit-learn package.
-- calculates the baseline accuracy, which is the accuracy you would get if you always guessed the most common outcome (in our data `smart_dog`).
-- separates out predictors (height and weight information) and the target (the intelligence category).
-- splits the data into a training and testing set.
-- standardizes the predicting features.
-- trains a [RandomForestClassifier model](https://scikit-learn.org/stable/modules/ensemble.html#forest) on the training data.
-- scores the trained model on the testing data.
+- Imports necessary functions and classes from the scikit-learn package.
+- Calculates the baseline accuracy, which is the accuracy you would get if you always guessed the most common outcome (in our data `smart_dog`).
+- Separates out predictors (height and weight information) and the target (the intelligence category).
+- Splits the data into a training and testing set.
+- Standardizes the predicting features.
+- Trains a [RandomForestClassifier model](https://scikit-learn.org/stable/modules/ensemble.html#forest) on the training data.
+- Scores the trained model on the testing data.
 
 4. Run the cell.
 
