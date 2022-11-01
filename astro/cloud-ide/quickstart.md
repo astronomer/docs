@@ -197,21 +197,23 @@ where col_a > 10
 
 ## Step 8: Run your pipeline 
 
-Now that you've completed your pipeline, you can run it from beginning to end. To do so, click **Run** in the top right corner of your pipeline editing window. Cells are executed in order based on their dependencies. During the run, the **Pipeline** page shows which cells have been executed and which are still pending.
+Now that you've completed your pipeline,  click **Run** in the top right corner of your pipeline editing window to run it from beginning to end. Cells are executed in order based on their dependencies. During the run, the **Pipeline** page shows which cells have been executed and which are still pending.
 
 ![Run Pipeline](/img/cloud-ide/run-pipeline.png)
 
-## Step 9 Schedule your pipeline
+## Step 9: Schedule your pipeline
 
-Once you've verified that your pipeline works properly, you can schedule it to run on a regular basis. 
+After you've verified that your pipeline is working, you can schedule it to run regularly. 
 
-To set your pipeline's schedule, click **Schedule**. 
+1. To set your pipeline's schedule, click **Schedule**. 
 
 ![Schedule Pipeline](/img/cloud-ide/schedule-menu.png)
 
-The Cloud IDE currently supports scheduling with cron. You can either manually type in a cron string or click **EDIT** to open the cron builder, which is a simple UI for setting a cron schedule. After you make your selections and close out the cron builder, the Astro Cloud IDE loads a newly generated cron schedule.
+2. Manually enter a cron string, or click **EDIT** to open the cron builder, which is a simple UI for setting a cron schedule. 
 
-When you finish configuring your schedule, click **Update Settings** to save your changes. 
+3. Make your selections and close the cron builder, the Astro Cloud IDE loads a newly generated cron schedule.
+
+4. Click **Update Settings** to save your changes. 
 
 Configuring your pipeline's schedule will not automatically run it on a scheduled basis. You must deploy your pipeline for it to run. See [Deploy a project](cloud-ide/deploy-project.md) for setup steps.
 

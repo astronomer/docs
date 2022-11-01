@@ -8,19 +8,19 @@ id: security
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in Public Preview. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Using the Cloud IDE has no impact to your Deployments or pipelines running in production. If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. Creating projects in the Cloud IDE does not affect running tasks on existing Deployments. If you have feedback on the Cloud IDE you'd like to share, you can submit it on the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
 :::
 
 ## Security
 
-The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. This means that all of the infrastructure is managed by Astronomer, and you don't have to worry about managing the underlying infrastructure. Infrastructure is tightly scoped to organizations, so your code and data will never be exposed to other organizations.
+The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. All infrastructure is managed by Astronomer. Infrastructure is tightly scoped to organizations, so your code and data is never exposed to other organizations.
 
 ## Data governance
 
 The Cloud IDE stores Python cell outputs in an encrypted S3 bucket. SQL cell outputs are stored in the corresponding connection database under the schema you configure.
 
-If you would like to provide your own S3 bucket for storing Python cell outputs, please reach out to the Astronomer team.
+If you would like to provide your own S3 bucket for storing Python cell outputs, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Execution
 
