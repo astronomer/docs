@@ -59,10 +59,10 @@ The alert email assigned to a Deployment is used to notify recipients of Deploym
 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted from your data plane. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-1. In the Cloud UI, select a Workspace.
+1. In the Cloud UI, select a Workspace and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
-    ![Options menu](/img/docs/delete-deployment.png)
+    ![Delete Deployment in options menu](/img/docs/delete-deployment.png)
 
 3. Enter `Delete` and click **Yes, Continue**.
 

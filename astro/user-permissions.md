@@ -13,15 +13,15 @@ An Organization role grants a user some level of access to an Astro Organization
 
 | Permission                                                  | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
 | ----------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
-| View Organization details and user membership               | ✔️                      | ✔️                             | ✔️                     |
-| View lineage data in the **Lineage** tab                    | ✔️                      | ✔️                             | ✔️                     |
-| Create a new Workspace                                      | ✔️                      | ✔️                             | ✔️                     |
-| Update Organization billing information and settings        |                         | ✔️                             | ✔️                     |
-| View usage for all Workspaces in the **Usage** tab          |                         | ✔️                             | ✔️                     |
-| Workspace Admin permissions to all Workspaces               |                         |                                | ✔️                     |
-| Update roles and permissions of existing Organization users |                         |                                | ✔️                     |
-| Invite a new user to an Organization                        |                         |                                | ✔️                     |
-| Remove a user from an Organization                          |                         |                                | ✔️                     |
+| View Organization details and user membership               | ✔️                       | ✔️                              | ✔️                      |
+| View lineage data in the **Lineage** tab                    | ✔️                       | ✔️                              | ✔️                      |
+| Create a new Workspace                                      | ✔️                       | ✔️                              | ✔️                      |
+| Update Organization billing information and settings        |                         | ✔️                              | ✔️                      |
+| View usage for all Workspaces in the **Usage** tab          |                         | ✔️                              | ✔️                      |
+| Workspace Admin permissions to all Workspaces               |                         |                                | ✔️                      |
+| Update roles and permissions of existing Organization users |                         |                                | ✔️                      |
+| Invite a new user to an Organization                        |                         |                                | ✔️                      |
+| Remove a user from an Organization                          |                         |                                | ✔️                      |
 
 ### Update Organization roles
 
@@ -34,22 +34,23 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 
 | Permission                                      | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
 | ----------------------------------------------- | -------------------- | -------------------- | ------------------- |
-| View Workspace users                            | ✔️                   | ✔️                   | ✔️                  |
-| View all Deployments in the Cloud UI            | ✔️                   | ✔️                   | ✔️                  |
-| View DAGs in the Airflow UI                     | ✔️                   | ✔️                   | ✔️                  |
-| View Airflow task logs                          | ✔️                   | ✔️                   | ✔️                  |
-| Update Deployment configurations                |                      | ✔️                   | ✔️                  |
-| Manually trigger DAG and task runs              |                      | ✔️                   | ✔️                  |
-| Pause or unpause a DAG                          |                      | ✔️                   | ✔️                  |
-| Clear/mark a task instance or DAG run           |                      | ✔️                   | ✔️                  |
-| Push code to Deployments                        |                      | ✔️                   | ✔️                  |
-| Create and Delete Deployments                   |                      | ✔️                   | ✔️                  |
-| Create, Update and Delete Environment Variables |                      | ✔️                   | ✔️                  |
-| Create, Update and Delete API Keys              |                      |                      | ✔️                  |
-| View Airflow connections and Variables          |                      |                      | ✔️                  |
-| Update user roles and permissions               |                      |                      | ✔️                  |
-| Update Airflow connections and Variables        |                      |                      | ✔️                  |
-| Invite users to a Workspace                     |                      |                      | ✔️                  |
+| View Workspace users                            | ✔️                    | ✔️                    | ✔️                   |
+| View all Deployments in the Cloud UI            | ✔️                    | ✔️                    | ✔️                   |
+| View DAGs in the Airflow UI                     | ✔️                    | ✔️                    | ✔️                   |
+| View Airflow task logs                          | ✔️                    | ✔️                    | ✔️                   |
+| Update Deployment configurations                |                      | ✔️                    | ✔️                   |
+| Manually trigger DAG and task runs              |                      | ✔️                    | ✔️                   |
+| Pause or unpause a DAG                          |                      | ✔️                    | ✔️                   |
+| Clear/mark a task instance or DAG run           |                      | ✔️                    | ✔️                   |
+| Push code to Deployments                        |                      | ✔️                    | ✔️                   |
+| Create and delete Deployments                   |                      | ✔️                    | ✔️                   |
+| Transfer Deployments                            |                      |                      | ✔️                   |
+| Create, update, and delete environment variables |                      | ✔️                    | ✔️                   |
+| Create, update and delete API keys              |                      |                      | ✔️                   |
+| View Airflow connections and variables          |                      |                      | ✔️                   |
+| Update user roles and permissions               |                      |                      | ✔️                   |
+| Update Airflow connections and variables        |                      |                      | ✔️                   |
+| Invite users to a Workspace                     |                      |                      | ✔️                   |
 
 ### Update Workspace roles
 

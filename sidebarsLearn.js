@@ -132,6 +132,7 @@ module.exports = {
       items: [
         'airflow-azure-data-factory-integration',
         'airflow-azure-data-explorer',
+        'airflow-azure-container-instances',
         'airflow-openlineage',
         'airflow-dbt',
         'airflow-databricks',
