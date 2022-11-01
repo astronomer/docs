@@ -22,7 +22,7 @@ module.exports = {
         'get-started-with-airflow-part-2',
       ],
     },
-    'astro-python-sdk',
     'cloud-ide-tutorial',
+    'astro-python-sdk',
   ],
 };
