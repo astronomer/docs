@@ -23,7 +23,7 @@ If you have any feedback, please submit it to the [Astro Cloud IDE product porta
 
 :::
 
-The Astro Cloud IDE is a notebook-inspired development environment for writing and testing data pipelines with Astro. The Cloud IDE materially lowers the barrier to entry for new Airflow users and improves the development experience of experienced users.
+The Astro Cloud IDE is a notebook-inspired development environment for writing and testing data pipelines with Astro. The Cloud IDE makes it easier for new Airflow users to get started and provides experienced users with a robust development environment.
 
 One of the biggest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. You can configure all of these through the Astro Cloud IDE's user interface (UI) so that you only need to write the Python or SQL that executes your work.
 
