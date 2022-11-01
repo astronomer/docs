@@ -23,7 +23,7 @@ After you've created a pipeline in the Cloud IDE, you can deploy it to Astro as 
 
 To deploy your pipeline and Cloud IDE project to Astro, you first need to link your Cloud IDE project to a GitHub repository. Astronomer recommends one GitHub repository for every Cloud IDE project.
 
-1. Open your project in the Astro Cloud IDE. 
+1. In the Cloud UI, select a Workspace and then click **Cloud IDE** in the left menu. 
 2. Click **Configure**.
 3. Enter your GitHub repository information.
 4. Click **Update**. 
