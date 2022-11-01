@@ -50,7 +50,7 @@ Astronomer recommends creating a feature branch for every new pipeline and creat
 You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring Deployments in GitHub. However, there is currently no way to disable the GitHub Action that the Astro Cloud IDE pushes to your repository. If you don't complete the following steps, the GitHub Action fails and you can't deploy your changes to Astro, but the rest of your commit processes are successful.
 
 1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. The Deployment ID can be found in the URL when you select a Deployment in the Cloud UI. For example, if your Deployment URL is `https://cloud.astronomer.io/cku7t3fvx59046554xr4g0siv7r/deployments/cl9redx5196158bqytlww0mqz2/analytics`, the Deployment ID is `cl9redx5196158bqytlww0mqz2`.
-2. Create a Deployment API key in each Deployment. See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
+2. Create a Deployment API key for your production and development Deployments. See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
 3. Create the following GitHub secrets in your GitHub repository:
    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-api-key-id>`
    - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-api-key-secret>`
