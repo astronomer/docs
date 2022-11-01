@@ -31,7 +31,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Basic SQL. See the [W3 Schools SQL tutorial](https://www.w3schools.com/sql/)
 
-
 ## Step 1: Create your Cloud IDE project
 
 In your Astro Cloud workspace click on the **Cloud IDE** tab in the navigation bar on the left. Create a new Cloud IDE project with the **+ Project** button in the right upper corner of the screen.
@@ -116,7 +115,7 @@ WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, WEIG
 
 4. Select your Snowflake connection as shown in the screenshot below.
 
-![Load csv Snowflake](/img/guides/cloud_ide_select_connection.png)
+![Select Snowflake Connection](/img/guides/cloud_ide_select_connection.png)
 
 5. Run the cell by either clicking on the play button next to the connection field or by hitting Command + Enter.
 
@@ -161,7 +160,7 @@ You will notice that pasting this SQL statement will automatically create a depe
 
 In the output table you can see that this SQL statement created a new transformed temporary table with an binary `INTELLIGENCE_CATEGORY` column we can use as a target for our classification model. All dogs who at most needed 25 repetitions to learn a new command are put in the `very_smart_dog` category. All other dogs in the `smart_dog` category (because of course, all dogs are smart).
 
-The predictors in our model will be the height and weight columns.
+The predictors in our model will be the height and weight-related columns.
 
 ## Step 8: Train a model on your data
 
@@ -224,11 +223,11 @@ The output of the cell will show you both the baseline and the model accuracy. W
 
 ![Model output](/img/guides/cloud_ide_model_output.png)
 
-The feature importances give you an idea which of the predictor columns were most important in the model overall to predict the intelligence category. The `weight_low_lbs`, the lower end of the weights of the dogs examined for a breed, gave the most information to the model in our small dataset.
+The feature importances give you an idea which of the predictor columns were most important in the model to predict the intelligence category. The `weight_low_lbs`, the lower end of the weights of the dogs examined for a breed, gave the most information to the model for our small dataset.
 
 :::info
 
-To learn more about the random forests check out this [MLU explain article](https://mlu-explain.github.io/random-forest/).
+To learn more about random forests check out this [MLU explain article](https://mlu-explain.github.io/random-forest/).
 
 :::
 
