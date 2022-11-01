@@ -220,7 +220,7 @@ The output of the cell will show you both the baseline and the model accuracy. W
 
 The feature importances give you an idea which of the predictor columns were most important in the model overall to predict the intelligence category. The `weight_low_lbs`, the lower end of the weights of the dogs examined for a breed, gave the most information to the model in our small dataset.
 
-::: info
+:::info
 
 To learn more about the random forests check out this [MLU explain article](https://mlu-explain.github.io/random-forest/).
 
@@ -228,20 +228,61 @@ To learn more about the random forests check out this [MLU explain article](http
 
 ## Step 9: Connect your GitHub to the Cloud IDE
 
+1. Click on the GitHub **Configure** button in the topright corner of your screen to connect your Cloud IDE Project to your GitHub account.
 
+![Connect to GitHub](/img/guides/cloud_ide_github_conn.png)
 
+2. Enter your personal access token and the name of an existing GitHub repository that contains an Astro project. 
 
-## Step 10: Export your DAG to GitHub
+3. Click update to save your connection details.
 
+:::info
 
-## Step 11: Deploy your DAG to the Astro Cloud
+If you do not have a GitHub account, you can create one for free on the [GitHub website](https://github.com/signup). To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
-## Step 7: Query your Table
-Query values from the second table and return a pandas df
-Step 8: Train a Random Forest Classifier
-python cell (copy paste code) to train a random forest classifier on the first 80% of the data, then use it to predict classes in the last 20%
-Step 10: Set up a connection to your github repo
-Step 11: Export your DAG to github
-Contain info that you can add to an existing project, but build wont be able to read the repo
-Step 12: Deploy your DAG to Astro
-maybe show the path of pulling from the repo and then using the Astro CLI to deploy, mentioning CI/CD auto deploy options linking to the Astro Module on it and later once we have it linking to the GithubActions tutorial
+:::
+
+## Step 10: Commit your DAG to GitHub
+
+Export your DAG by commiting it to your connected GitHub repository. 
+
+Click the branch you want to commit to and provide a commit message. Note that you cannot commit to a branch called `main`. 
+
+![Connect to GitHub](/img/guides/cloud_ide_commit_to_github.png)
+
+Your DAG will be added to the `/dags` folder in your GitHub repository.
+
+![Dags folder on GitHub](/img/guides/cloud_ide_dags_github.png)
+
+:::info
+
+If you made changes to several DAGs you can select which changes to commit by checking the boxes to the left of the difference view.
+
+:::
+
+:::caution
+
+If a DAG with the same file as a file name already exists (i.e. if you already had a file named `dog_smarts_pipeline` in the `/dags` folder of this repository) the Cloud IDE will overwrite the existing file. For this reason it is best practise to use a seperate branch for commits from your Cloud IDE environment than for commits from other sources to the same repository.
+
+:::
+
+## Step 11: Deploy your DAG to Astro 
+
+Additionally, the Cloud IDE will create a GitHub workflow to deploy to Astro in `.github/workflows/astro_deploy.yaml`.
+
+1. Configure [GitHub Actions](https://docs.astronomer.io/astro/ci-cd?tab=multibranch#github-actions) by setting the following as [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+    - DEV_ASTRONOMER_KEY_ID = <your-dev-key-id>
+    - DEV_ASTRONOMER_KEY_SECRET = <your-dev-key-secret> 
+    - DEV_ASTRONOMER_DEPLOYMENT_ID = <your-deployment-id>
+
+2. Send a second commit from the Cloud IDE to trigger the configured GitHub workflow to deploy your DAG to Astro
+
+If GitHub Actions is already configured for your chosen repository the new DAG will be deployed automatically with the first commit.
+
+:::info
+
+Learn more on how to set up CI/CD with GitHub Actions in the [Astro Module: CI/CD](https://academy.astronomer.io/astro-module-cicd).
+
+:::
+
+PLACEHOLDER - image of the DAG shown on Astro (once I get a cluster)
