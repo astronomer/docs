@@ -10,7 +10,7 @@ import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 
 <p class="DocItem__header-description">
-  A cloud-based, notebook-inspired IDE for writing and testing data pipelines. No Airflow knowledge or local setup required.
+  A cloud-based, notebook-inspired IDE for writing and testing data pipelines. No Airflow knowledge or local setup is required.
 </p>
 
 :::caution
