@@ -39,9 +39,9 @@ The Cloud IDE is accessible through the Cloud UI and is available to all Astro c
 
 3. Click **+ Project**. Give your new project a name and a description, then click **Create**.
 
-After you create your project, the Cloud UI will open its home page. This page contains all menus for configuring various parts of your project:
+After you create your project, the Astro Cloud IDE opens your project home page. This page contains all menus for configuring your your project:
 
-- The **Pipelines** tab stores all of the Python and SQL code that your project executes, organized by their dependencies.
+- The **Pipelines** tab stores all of the Python and SQL code that your project executes.
 - The **Connections** tab stores Airflow connections for connecting your project to external services.
 - The **Variables** tab stores Airflow variables for use in your pipeline code.
 - The **Requirements** tab stores the required Python and OS-level dependencies for running your pipelines.
@@ -50,7 +50,7 @@ After you create your project, the Cloud UI will open its home page. This page c
 
 In the **Pipelines** tab, click **+ Pipeline**. Give your pipeline a name and a description, then click **Create**.
 
-When you first run your project, your pipeline will be built into a single DAG with the name you provided. Because of this, pipeline names must be unique within their project. They must also be a Python identifier, so they can't contain spaces or special characters. 
+When you first run your project, your pipeline is built into a single DAG with the name you provide. Because of this, pipeline names must be unique within their project. They must also be a Python identifier, so they can't contain spaces or special characters. 
 
 After clicking **Create**, the IDE opens the pipeline editor. This is where you'll write your pipeline code.
 
