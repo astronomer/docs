@@ -274,9 +274,10 @@ If a DAG with the same file as a file name already exists (i.e. if you already h
 Additionally, the Cloud IDE will create a GitHub workflow to deploy to Astro in `.github/workflows/astro_deploy.yaml`.
 
 1. Configure [GitHub Actions](https://docs.astronomer.io/astro/ci-cd?tab=multibranch#github-actions) by setting the following as [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
-    - DEV_ASTRONOMER_KEY_ID = <your-dev-key-id>
-    - DEV_ASTRONOMER_KEY_SECRET = <your-dev-key-secret> 
-    - DEV_ASTRONOMER_DEPLOYMENT_ID = <your-deployment-id>
+
+- DEV_ASTRONOMER_KEY_ID = `<your-dev-key-id>`
+- DEV_ASTRONOMER_KEY_SECRET = `<your-dev-key-secret>`
+- DEV_ASTRONOMER_DEPLOYMENT_ID = `<your-deployment-id>`
 
 2. Send a second commit from the Cloud IDE to trigger the configured GitHub workflow to deploy your DAG to Astro
 
