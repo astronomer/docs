@@ -200,7 +200,10 @@ model.fit(X_train_s, y_train)
 # score the trained model on the testing data
 score = model.score(X_test_s, y_test)
 
-return f"baseline accuracy: {baseline_accuracy}", f"model accuracy: {score}"
+# get feature importances
+feature_importances = list(zip(X_train.columns, model.feature_importances_))
+
+return f"baseline accuracy: {baseline_accuracy}", f"model accuracy: {score}", feature_importances 
 ```
 
 You will notice again how the Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `tranform_table` cell directly (without Jinja syntax) on line 6. 
