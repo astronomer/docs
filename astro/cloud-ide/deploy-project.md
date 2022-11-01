@@ -59,7 +59,7 @@ You can commit changes from the Astro Cloud IDE to your GitHub repository withou
    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-api-key-secret>`
    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
 
-After configuring your Github actions, your commits from the Astro Cloud IDE to your `main` or `dev` branches will be automatically deployed to Astro.
+After configuring your Github actions, commits from the Cloud IDE to your `main` or `dev` branches are automatically deployed to Astro.
 
 ## Step 3: Commit to Astro
 
