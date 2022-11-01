@@ -23,6 +23,6 @@ module.exports = {
       ],
     },
     'astro-python-sdk',
-    'cloud-ide-tutorial'
+    'cloud-ide-tutorial',
   ],
 };
