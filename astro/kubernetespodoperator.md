@@ -35,7 +35,7 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
-## Set Up the KubernetesPodOperator
+## Set up the KubernetesPodOperator
 
 To use the KubernetesPodOperator in a DAG, add the following import statements and instantiation to your DAG file:
 
@@ -65,7 +65,7 @@ For each instantiation of the KubernetesPodOperator, you must specify the follow
 
 This is the minimum configuration required to run tasks with the KubernetesPodOperator on Astro. To further customize the way your tasks are run, see the topics below.
 
-## Configure Task-Level Pod Resources
+## Configure task-level Pod resources
 
 Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, meaning that the operator could theoretically use any CPU and memory that's available in your cluster to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) per task.
 
@@ -98,7 +98,47 @@ KubernetesPodOperator(
 
 Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod will terminate gracefully.
 
-## Run images from a Private Registry
+### Mount a temporary directory (_AWS only_)
+
+Astronomer provisions `m5d` workers with NVMe SSD volumes. These volumes can be used by tasks for storage which persists as long as the task is running. To run a task run the KubernetesPodOperator that utilizes temporary storage:
+
+1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
+2. Mount and [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator like in the following example:
+
+    ```python{5-14,26-27}
+    from airflow.configuration import conf
+    from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+    from kubernetes.client import models as k8s
+
+    volume = k8s.V1Volume(
+        name="cache-volume",
+        emptyDir={},
+    )
+
+    volume_mounts = [
+        k8s.V1VolumeMount(
+            mount_path="/cache", name="cache-volume"
+        )
+    ]
+
+    example_volume_test = KubernetesPodOperator(
+    namespace=namespace,
+    image="<your-docker-image>",
+    cmds=["<commands-for-image>"],
+    arguments=["<arguments-for-image>"],
+    labels={"<pod-label>": "<label-name>"},
+    name="<pod-name>",
+    resources=compute_resources,
+    task_id="<task-name>",
+    get_logs=True,
+    volume_mounts=volume_mounts,
+    volumes=[volume],
+    )
+    ```
+    
+    Your task can now utilize the configured volume as storage for simple operations. However, Astronomer recommends setting Airflow connection to an external storage service such as Amazon S3 for larger operations requiring storage. See [Passing data between Airflow tasks](https://www.docs.astronomer.io/learn/airflow-passing-data-between-tasks/).
+ 
+## Run images from a private registry
 
 By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, you'll need to create a Kubernetes Secret and then specify the Kubernetes Secret in your DAG. If your Docker image is hosted in an Amazon Elastic Container Registry (ECR) repository, see [Docker images hosted in private Amazon ECR repositories](#docker-images-hosted-in-private-amazon-ecr-repositories)
 
