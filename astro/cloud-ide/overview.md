@@ -16,17 +16,26 @@ import LinkCard from '@site/src/components/LinkCard';
 :::caution
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
+<<<<<<< HEAD
 The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. 
+=======
+
+The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. Creating projects in the Cloud IDE does not affect running tasks on existing Deployments.
+>>>>>>> 2abdd1dbad02e572e784c29f7de197da961a8766
 
 If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
 :::
 
-The Astro Cloud IDE is a notebook-inspired development environment for writing and testing data pipelines with Astro. The Cloud IDE makes it easier for new Airflow users to get started and provides experienced users with a robust development environment.
+The Astro Cloud IDE is a notebook-inspired development environment for writing and testing data pipelines with Astro. The Cloud IDE lowers the barrier to entry for new Apache Airflow users and improves the development experience for experienced users.
 
 One of the biggest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. You can configure all of these with the Cloud UI so that you only need to write the Python or SQL code that executes your work.
 
+<<<<<<< HEAD
 In the following image, you can see how you can use the Astro Cloud IDE to write a DAG by only writing SQL. The Astro Cloud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured with the UI.
+=======
+You can use the Cloud IDE to write a DAG by only writing SQL. The Astro CLoud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured through the Cloud UI.
+>>>>>>> 2abdd1dbad02e572e784c29f7de197da961a8766
 
 ![Product Screenshot](/img/cloud-ide/pipeline-editor.png)
 
@@ -57,7 +66,7 @@ In the following image, you can see how you can use the Astro Cloud IDE to write
   />
   <LinkCard
     label="Deploy directly to Astro"
-    description="Using our out-of-the-box CI/CD, deploy your code to a production Deployment on Astro in a few clicks."
+    description="Use the included CI/CD script to deploy your code to a production Deployment on Astro."
   />
 </LinkCardGrid>
 
@@ -65,7 +74,7 @@ In the following image, you can see how you can use the Astro Cloud IDE to write
 
 
 <LinkCardGrid>
-  <LinkCard truncate label="Quickstart" description="Create data pipelines from scratch using the Astro Cloud IDE." href="/astro/cloud-ide/quickstart" />
+  <LinkCard truncate label="Quickstart" description="Create data pipelines with the Cloud IDE." href="/astro/cloud-ide/quickstart" />
   <LinkCard truncate label="Deploy a project" description="Push your changes from the Astro Cloud IDE directly to GitHub or a Deployment" href="/astro/cloud-ide/deploy-project" />
   <LinkCard truncate label="Security" description="Learn how the Astro Cloud IDE keeps your code and production Deployments secure." href="/astro/cloud-ide/security" />
 </LinkCardGrid>

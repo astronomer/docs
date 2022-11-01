@@ -14,13 +14,13 @@ If you have any feedback, please submit it to the [Astro Cloud IDE product porta
 
 ## Security
 
-The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. This means that all of the infrastructure is managed by Astronomer, and you don't have to worry about managing the underlying infrastructure. Infrastructure is tightly scoped to organizations, so your code and data will never be exposed to other organizations.
+The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. All infrastructure is managed by Astronomer. Infrastructure is tightly scoped to organizations, so your code and data is never exposed to other organizations.
 
 ## Data governance
 
 The Cloud IDE stores Python cell outputs in an encrypted S3 bucket. SQL cell outputs are stored in the corresponding connection database under the schema you configure.
 
-If you would like to provide your own S3 bucket for storing Python cell outputs, please reach out to the Astronomer team.
+If you would like to provide your own S3 bucket for storing Python cell outputs, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Execution
 

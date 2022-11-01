@@ -12,19 +12,25 @@ The Cloud IDE is currently in _Public Preview_ and it is available to all Astro 
 If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 :::
 
-After you've created a pipeline in the Cloud IDE, you can deploy it to Astro as part of your Cloud IDE project and run tasks using an existing schedule. To deploy a pipeline from the Cloud IDE, you first push the pipeline to a GitHub repository and then you deploy it to Astro using the CI/CD script included with the Cloud IDE.
+After you create a pipeline in the Cloud IDE, you can deploy it to Astro and run tasks on a schedule. If you're an existing Astro user, you can do one of the following:
+
+- Download the pipeline's Python file from the Cloud IDE and copy it to an existing Astro project and Deployment.
+- Connect the Cloud IDE to a GitHub repository that hosts the source code for existing Deployments on Astro.
+- Create a new Deployment that's dedicated to Cloud IDE development and separate from other data pipelines.
+
+This guide assumes that you create a dedicated Deployment and use the automated CI/CD process that's included with the Cloud IDE.
 
 ## Prerequisites
 
-- A Project. For instructions on how to create a Project, see the [Quickstart](/astro/cloud-ide/quickstart.md).
-- At least one Deployment on Astro. For instructions on how to create a Deployment, see the [Create a Deployment](/astro/create-deployment.md) guide.
+- A Cloud IDE Project. See the [Quickstart](/astro/cloud-ide/quickstart.md).
+- A Deployment on Astro. See [Create a Deployment](/astro/create-deployment.md).
 - A GitHub account with a personal access token. See [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ## Step 1: Link your Cloud IDE project to GitHub
 
 To deploy your pipeline and Cloud IDE project to Astro, you first need to link your Cloud IDE project to a GitHub repository. Astronomer recommends one GitHub repository for every Cloud IDE project.
 
-1. In the Cloud UI, select a Workspace and then click **Cloud IDE** in the left menu.
+1. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
 2. Select the Project you'd like to deploy.
 3. Click **Configure**.
 4. Enter your GitHub Personal Access Token and click **Update**.
