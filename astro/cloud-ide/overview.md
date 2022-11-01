@@ -17,7 +17,6 @@ import LinkCard from '@site/src/components/LinkCard';
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-<<<<<<< HEAD
 The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change.
 
 If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
