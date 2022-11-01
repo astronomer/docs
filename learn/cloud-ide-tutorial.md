@@ -93,25 +93,148 @@ CREATE FILE FORMAT my_csv_format
 
 ![Load csv Snowflake](/img/guides/cloud_ide_load_csv.png)
 
-## Query your table from the Cloud IDE
+## Step 6: Query your table
 
 Navigate back to your Cloud IDE on Astro.
 
 1. Create your first SQL cell by clicking on **Add Cell** in the topleft corner and selecting **SQL**. 
 
-2. Paste the following SQL code into your cell:
+2. Rename your cell from `cell_1` to `query_table`. This will also change the name of your task in the pipeline view on the right side of the screen.
+
+3. Paste the following SQL code into your cell to select all records that do not contain any NULL values in any column:
 
 ```sql 
-SELECT * FROM <your database>.<your schema>.DOG_INTELLIGENCE LIMIT 10 
+SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
+WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
 ```
 
-3. Select your Snowflake connection as shown in the screenshot below.
+4. Select your Snowflake connection as shown in the screenshot below.
 
-![Load csv Snowflake](/img/guides/cloud_ide_first_cell.png)
+![Load csv Snowflake](/img/guides/cloud_ide_select_connection.png)
+
+5. Run the cell by either clicking on the play button next to the connection field or by hitting Command + Enter.
+
+Running the cell will create a temporary table in your database containing the output from your query.
+With the **Table Expression** box activated you should now see the output containing of 136 rows below the cell.
+
+![Table output](/img/guides/cloud_ide_query_table.png)
+
+Our dataset contains information about the height, weight and how fast dogs of different breeds learned commands in 7 columns:
+
+- breed: the breed of the dogs in the experiement.
+- height_low_inches: height of the smallest dog of one specific breed.
+- height_high_inches: height of the largest dog of one specific breed.
+- weight_low_lbs: weight of the lightest dog of one specific breed.
+- weight_high_lbs: weight of the heaviest dog of one specific breed.
+- reps_lower: lowest repetitions necessary for a dog of a specific breed to learn a new command.
+- reps_higher: highest repetitions necessary for a dog of a specific breed to learn a new command.
+
+## Step 7: Transform your table
+
+1. Create a second SQL cell.
+
+2. Rename the cell from `cell_1` to `transform_table`.
+
+3. Select the same connection as in your `query_table` cell. 
+
+4. Copy the following SQL statement into the cell:
+
+```sql 
+SELECT HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, WEIGHT_HIGH_LBS,
+    CASE WHEN reps_upper <= 25 THEN 'very_smart_dog'
+    ELSE 'smart_dog'
+    END AS INTELLIGENCE_CATEGORY
+FROM {{query_table}}
+```
+
+You will notice that pasting this SQL statement will automatically create a dependency between `query_table` and `transform_table` in the pipeline view on the right side of the screen (see the screenshot below). This happens because the SQL statement in `transform_table` references the temporary table created by the `query_table` task using Jinja syntax `{{query_table}}`.
+
+![Table output](/img/guides/cloud_ide_cell_dependency.png)
+
+5. Run the cell.
+
+In the output table you can see that this SQL statement created a new transformed temporary table with an binary `INTELLIGENCE_CATEGORY` column we can use as a target for our classification model. All dogs who at most needed 25 repetitions to learn a new command are put in the `very_smart_dog` category. All other dogs in the `smart_dog` category (because of course, all dogs are smart).
+
+The predictors in our model will be the height and weight columns.
+
+## Step 8: Train a model on your data
+
+1. Create a new Python cell by clicking on **Add Cell** in the topleft corner and selecting **Python**. 
+
+2. Rename the cell from `cell_1` to `model_task`.
+
+3. Copy the following Python code into your cell:
+
+```python
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.ensemble import RandomForestClassifier
+
+# use the table returned from the transform_table cell
+df = transform_table
+
+# calculate baseline accuracy
+baseline_accuracy = df.iloc[:,-1].value_counts(normalize=True)[0]
+
+# selecting predictors (X) and the target (y)
+X = df.iloc[:,:-1]
+y = df.iloc[:,-1]
+
+# split the data into training data (80%) and testing data (20%)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.20, random_state=23
+)
+
+# standardize features
+scaler = StandardScaler()
+X_train_s = scaler.fit_transform(X_train)
+X_test_s = scaler.transform(X_test)
+
+# train a RandomForestClassifier on the training data
+model = RandomForestClassifier(max_depth=3, random_state=19)
+model.fit(X_train_s, y_train)
+
+# score the trained model on the testing data
+score = model.score(X_test_s, y_test)
+
+return f"baseline accuracy: {baseline_accuracy}", f"model accuracy: {score}"
+```
+
+You will notice again how the Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `tranform_table` cell directly (without Jinja syntax) on line 6. 
+
+The Python code:
+
+- imports necessary functions and classes from the scikit-learn package.
+- calculates the baseline accuracy, which is the accuracy you would get if you always guessed the most common outcome (in our data `smart_dog`).
+- separates out predictors (height and weight information) and the target (the intelligence category).
+- splits the data into a training and testing set.
+- standardizes the predicting features.
+- trains a [RandomForestClassifier model](https://scikit-learn.org/stable/modules/ensemble.html#forest) on the training data.
+- scores the trained model on the testing data.
 
 4. Run the cell.
 
-With the **Table Expression** box activated by default you should now see the first 10 lines of the dataset below the cell.
+The output of the cell will show you both the baseline and the model accuracy. With the model accuracy being higher than baseline we can conclude that height and weight of dogs have a correlation (but not necessarily causation!) with how many repetitions they need to learn a new command. 
+
+![Model output](/img/guides/cloud_ide_model_output.png)
+
+The feature importances give you an idea which of the predictor columns were most important in the model overall to predict the intelligence category. The `weight_low_lbs`, the lower end of the weights of the dogs examined for a breed, gave the most information to the model in our small dataset.
+
+::: info
+
+To learn more about the random forests check out this [MLU explain article](https://mlu-explain.github.io/random-forest/).
+
+:::
+
+## Step 9: Connect your GitHub to the Cloud IDE
+
+
+
+
+## Step 10: Export your DAG to GitHub
+
+
+## Step 11: Deploy your DAG to the Astro Cloud
 
 ## Step 7: Query your Table
 Query values from the second table and return a pandas df
