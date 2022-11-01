@@ -7,9 +7,9 @@ id: quickstart
 :::caution
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
+The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. 
 
-The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Creating projects in the Cloud IDE does not impact running tasks on existing Deployments. If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
-
+If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 :::
 
 This quickstart walks you through creating and running your first project through the Astro Cloud IDE.

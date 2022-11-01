@@ -43,16 +43,10 @@ module.exports = {
           label: "Cloud IDE",
           link: { type: "doc", id: "cloud-ide/overview" },
           items: [
+            "cloud-ide/overview",
             "cloud-ide/quickstart",
             "cloud-ide/deploy-project",
-            {
-              type: "category",
-              label: "Reference",
-              items: [
-                "cloud-ide/reference/permissions",
-                "cloud-ide/reference/security",
-              ],
-            },
+            "cloud-ide/security",
           ],
         },
         "upgrade-runtime",
