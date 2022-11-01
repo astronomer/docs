@@ -16,12 +16,9 @@ import LinkCard from '@site/src/components/LinkCard';
 :::caution
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
-<<<<<<< HEAD
-The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. 
-=======
 
-The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. Creating projects in the Cloud IDE does not affect running tasks on existing Deployments.
->>>>>>> 2abdd1dbad02e572e784c29f7de197da961a8766
+<<<<<<< HEAD
+The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change.
 
 If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
@@ -31,11 +28,7 @@ The Astro Cloud IDE is a notebook-inspired development environment for writing a
 
 One of the biggest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. You can configure all of these with the Cloud UI so that you only need to write the Python or SQL code that executes your work.
 
-<<<<<<< HEAD
 In the following image, you can see how you can use the Astro Cloud IDE to write a DAG by only writing SQL. The Astro Cloud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured with the UI.
-=======
-You can use the Cloud IDE to write a DAG by only writing SQL. The Astro CLoud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured through the Cloud UI.
->>>>>>> 2abdd1dbad02e572e784c29f7de197da961a8766
 
 ![Product Screenshot](/img/cloud-ide/pipeline-editor.png)
 
@@ -54,7 +47,7 @@ You can use the Cloud IDE to write a DAG by only writing SQL. The Astro CLoud ID
   />
   <LinkCard
     label="Move between SQL and Python"
-    description="Use SQL tables as dataframes by referencing your upstream query name, and vice versa."
+    description="Use SQL tables as dataframes by referencing your upstream query name, and query your dataframes directly from SQL."
   />
   <LinkCard
     label="Auto-generate your DAG"
@@ -71,7 +64,6 @@ You can use the Cloud IDE to write a DAG by only writing SQL. The Astro CLoud ID
 </LinkCardGrid>
 
 ## Documentation
-
 
 <LinkCardGrid>
   <LinkCard truncate label="Quickstart" description="Create data pipelines with the Cloud IDE." href="/astro/cloud-ide/quickstart" />

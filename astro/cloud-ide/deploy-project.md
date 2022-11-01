@@ -7,9 +7,11 @@ id: deploy-project
 :::caution
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
-The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. 
+
+The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change.
 
 If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
 :::
 
 After you create a pipeline in the Cloud IDE, you can deploy it to Astro and run tasks on a schedule. If you're an existing Astro user, you can do one of the following:
@@ -56,7 +58,7 @@ Astronomer recommends creating a feature branch for every new pipeline and creat
 You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring Deployments in GitHub. However, there is currently no way to disable the GitHub Action that the Astro Cloud IDE pushes to your repository. If you don't complete the following steps, the GitHub Action fails and you can't deploy your changes to Astro, but the rest of your commit processes are successful.
 
 1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. The Deployment ID can be found in the URL when you select a Deployment in the Cloud UI. For example, if your Deployment URL is `https://cloud.astronomer.io/cku7t3fvx59046554xr4g0siv7r/deployments/cl9redx5196158bqytlww0mqz2/analytics`, the Deployment ID is `cl9redx5196158bqytlww0mqz2`.
-2. Create a Deployment API key for your production and development Deployments. See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
+2. Create a Deployment API key for your Deployment(s). See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
 3. Create the following GitHub secrets in your GitHub repository:
    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-api-key-id>`
    - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-api-key-secret>`
@@ -64,6 +66,12 @@ You can commit changes from the Astro Cloud IDE to your GitHub repository withou
    - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-api-key-id>`
    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-api-key-secret>`
    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
+
+:::info
+
+The CI/CD script is configured to push to the `PROD` deployment on commits to the `main` branch, and to the `DEV` deployment on commits to the `dev` branch. If you only have one deployment, you can only configure the `PROD` deployment.
+
+:::
 
 After configuring your Github actions, commits from the Cloud IDE to your `main` or `dev` branches are automatically deployed to Astro.
 
