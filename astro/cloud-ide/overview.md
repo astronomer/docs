@@ -25,7 +25,7 @@ If you have any feedback, please submit it to the [Astro Cloud IDE product porta
 
 The Astro Cloud IDE is a notebook-inspired development environment for writing and testing data pipelines with Astro. The Cloud IDE makes it easier for new Airflow users to get started and provides experienced users with a robust development environment.
 
-One of the biggest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. You can configure all of these through the Astro Cloud IDE's user interface (UI) so that you only need to write the Python or SQL that executes your work.
+One of the biggest barriers to using Airflow is writing boilerplate code for basic actions such as creating dependencies, passing data between tasks, and connecting to external services. You can configure all of these with the Cloud IDE user interface (UI) so that you only need to write the Python or SQL code that executes your work.
 
 In the following screenshot, you can see how you can use the Cloud IDE to write a DAG by only writing SQL. The Astro CLoud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured through the UI.
 
