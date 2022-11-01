@@ -35,9 +35,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 In your Astro Cloud workspace click on the **Cloud IDE** tab in the navigation bar on the left. Create a new Cloud IDE project with the **+ Project** button in the right upper corner of the screen.
 
-![Create a project](/PLACEHOLDER)
-
-PLACEHOLDER (feature not turned on yet)
+PLACEHOLDER image of creating a project (feature not turned on yet)
 
 ## Step 2: Create a new pipeline
 
