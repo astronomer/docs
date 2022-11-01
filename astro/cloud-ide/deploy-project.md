@@ -16,17 +16,20 @@ After you've created a pipeline in the Cloud IDE, you can deploy it to Astro as 
 
 ## Prerequisites
 
-- Two Deployments on Astro, one for a production environment and one for development environment. See [Create a Deployment](/astro/create-deployment.md).
+- A Project. For instructions on how to create a Project, see the [Quickstart](/astro/cloud-ide/quickstart.md).
+- At least one Deployment on Astro. For instructions on how to create a Deployment, see the [Create a Deployment](/astro/create-deployment.md) guide.
 - A GitHub account with a personal access token. See [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ## Step 1: Link your Cloud IDE project to GitHub
 
 To deploy your pipeline and Cloud IDE project to Astro, you first need to link your Cloud IDE project to a GitHub repository. Astronomer recommends one GitHub repository for every Cloud IDE project.
 
-1. In the Cloud UI, select a Workspace and then click **Cloud IDE** in the left menu. 
-2. Click **Configure**.
-3. Enter your GitHub repository information.
-4. Click **Update**. 
+1. In the Cloud UI, select a Workspace and then click **Cloud IDE** in the left menu.
+2. Select the Project you'd like to deploy.
+3. Click **Configure**.
+4. Enter your GitHub Personal Access Token and click **Update**.
+5. Enter your GitHub repository information.
+6. Click **Update**.
 
 After you configure a GitHub repository, you can start committing changes from the Astro Cloud IDE to the repository.
 
@@ -48,13 +51,13 @@ You can commit changes from the Astro Cloud IDE to your GitHub repository withou
 
 1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment.
 2. Create a Deployment API key in each Deployment. See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
-3. Create the following GitHub secrets in your GitHub repository: 
-    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-api-key-id>`
-    - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-api-key-secret>`
-    - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
-    - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-api-key-id>`
-    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-api-key-secret>`
-    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
+3. Create the following GitHub secrets in your GitHub repository:
+   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-api-key-id>`
+   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-api-key-secret>`
+   - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
+   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-api-key-id>`
+   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-api-key-secret>`
+   - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
 
 After configuring your Github actions, your commits from the Astro Cloud IDE to your `main` or `dev` branches will be automatically deployed to Astro.
 
@@ -62,21 +65,20 @@ After configuring your Github actions, your commits from the Astro Cloud IDE to 
 
 Once you've configured a repository, the **Configure** button in the Astro Cloud IDE changes to **Commit**. This tab allows you to commit your changes to your repository. You can also view the status of your repository and any changes that were committed from the Astro Cloud IDE.
 
-1. Open your project in the Astro Cloud IDE. 
+1. Open your project in the Astro Cloud IDE.
 2. Click **Commit**.
 3. In **BRANCH**, select a branch to commit to.
 4. In **COMMIT MESSAGE**, enter a commit message. This will be the commit message for committing your changes from the Astro Cloud IDE to GitHub.
 5. Click **Commit**
 
-    ![Commit Changes](/img/cloud-ide/commit.png)
+   ![Commit Changes](/img/cloud-ide/commit.png)
 
-    Your changes are automatically pushed to GitHub, then pushed to your configured Deployments. 
-    
+   Your changes are automatically pushed to GitHub, then pushed to your configured Deployments.
+
 6. Open your Deployments in the Cloud UI and click **Open Airflow** to confirm that your changes were successfully deployed.
-   
+
 :::tip
 
 You can select or deselect files to commit by clicking on the checkbox next to the file name. Commits are made at the project level, so by default, all files in your project will be committed. You cannot currently commit a single pipeline without committing the rest of your project.
 
 :::
-
