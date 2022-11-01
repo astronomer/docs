@@ -19,6 +19,16 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.6.0 ([Release notes](cli/release-notes.md))
 
+## October 25, 2022 
+
+### Additional improvements 
+
+- In the Cloud UI, you can now view a cluster's external IP addresses in the **Clusters** tab.
+
+### Bug fixes 
+
+- Fixed an issue where some Deployments were running tasks after being deleted. 
+
 ## October 18, 2022 
 
 ### Additional improvements 

@@ -92,9 +92,9 @@ module.exports = {
           type: "category",
           label: "Install Astro",
           link: {
-            type: "generated-index",
-            title: "Install Astro",
-            description: "Install the Astro platform in your cloud.",
+            type:'generated-index',
+            title: 'Install Astro',
+            description: 'Install Astro on the Astronomer-hosted cloud or your existing cloud instance.'
           },
           items: ["install-aws", "install-azure", "install-gcp"],
         },
@@ -159,8 +159,7 @@ module.exports = {
             "runtime-version-lifecycle-policy",
           ],
         },
-        "platform-variables",
-        "data-plane-activation",
+        'platform-variables',
         {
           type: "category",
           label: "Data lineage",

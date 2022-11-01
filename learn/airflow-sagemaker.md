@@ -64,9 +64,10 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
 
     ```text
     apache-airflow-providers-amazon>=5.1.0
+    astronomer-providers[amazon]>=1.11.0
     ```
 
-    This installs the AWS provider package that contains all of the relevant SageMaker modules. If you use an older version of the AWS provider, some of the DAG configuration in later steps may need to be modified.
+    This installs the AWS provider package which contains relevant S3 and SageMaker modules. It also installs the `astronomer-providers` package, which contains [deferrable](deferrable-operators.md) versions of some SageMaker modules that can help you save costs for long-running jobs. If you use an older version of the AWS provider, some of the DAG configuration in later steps may need to be modified. Deferrable SageMaker operators are not available in older versions of the `astronomer-providers` package.
 
 3. Add the following environment variables to the `.env` file of your project:
 
@@ -128,10 +129,11 @@ In your Astro project `dags/` folder, create a new file called `sagemaker-pipeli
 ```python
 from airflow import DAG
 from airflow.decorators import task
-from airflow.providers.amazon.aws.operators.sagemaker import (
-    SageMakerModelOperator,
-    SageMakerTrainingOperator,
-    SageMakerTransformOperator,
+from airflow.providers.amazon.aws.operators.sagemaker import SageMakerModelOperator
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+from astronomer.providers.amazon.aws.operators.sagemaker import (
+    SageMakerTrainingOperatorAsync, 
+    SageMakerTransformOperatorAsync
 )
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 
@@ -144,9 +146,9 @@ import numpy as np
 """
 This DAG shows an example implementation of machine learning model orchestration using Airflow
 and AWS SageMaker. Using the AWS provider's SageMaker operators, Airflow orchestrates getting data
-from an API endpoint and pre-processing it (task-decorated function), training the model (SageMakerTrainingOperator),
+from an API endpoint and pre-processing it (task-decorated function), training the model (SageMakerTrainingOperatorAsync),
 creating the model with the training results (SageMakerModelOperator), and testing the model using
-a batch transform job (SageMakerTransformOperator).
+a batch transform job (SageMakerTransformOperatorAsync).
 
 The example use case shown here is using a built-in SageMaker K-nearest neighbors algorithm to make
 predictions on the Iris dataset. To use the DAG, add Airflow variables for `s3_bucket` (S3 Bucket used with SageMaker 
@@ -203,7 +205,7 @@ with DAG('sagemaker_pipeline',
 
     data_prep = data_prep(data_url, "{{ var.value.get('s3_bucket') }}", input_s3_key)
 
-    train_model = SageMakerTrainingOperator(
+    train_model = SageMakerTrainingOperatorAsync(
         task_id='train_model',
         config={
             "AlgorithmSpecification": {
@@ -258,7 +260,7 @@ with DAG('sagemaker_pipeline',
         }
     )
 
-    test_model = SageMakerTransformOperator(
+    test_model = SageMakerTransformOperatorAsync(
         task_id='test_model',
         config={
             "TransformJobName": "test-knn-{0}".format(date),
@@ -310,7 +312,7 @@ This example DAG acquires and pre-processes data, trains a model, creates a mode
 
 1. Using a `PythonOperator`, grab the data from the API, complete some pre-processing so the data is compliant with KNN requirements, split into train and test sets, and save them to S3 using the `S3Hook`.
 
-2. Train the KNN algorithm on the data using the `SageMakerTrainingOperator`. The configuration for this operator requires:
+2. Train the KNN algorithm on the data using the `SageMakerTrainingOperatorAsync`. We use a deferrable version of this operator to save resources on potentially long-running training jobs. The configuration for this operator requires:
 
     - Information about the algorithm being used.
     - Any required hyper parameters.
@@ -330,7 +332,7 @@ This example DAG acquires and pre-processes data, trains a model, creates a mode
 
     For more information on creating a model, check out the API documentation [here](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html).
 
-4. Evaluate the model on the test data created in task 1 using the `SageMakerTransformOperator`. This step runs a batch transform to get inferences on the test data from the model created in task 3. The configuration for this operator requires:
+4. Evaluate the model on the test data created in task 1 using the `SageMakerTransformOperatorAsync`. This step runs a batch transform to get inferences on the test data from the model created in task 3. The DAG uses a deferrable version of `SageMakerTransformOperator` to save resources on potentially long-running transform jobs. The configuration for this operator requires:
 
     - Information about the input data source.
     - The output results path.
