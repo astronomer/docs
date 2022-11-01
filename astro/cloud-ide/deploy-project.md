@@ -33,7 +33,7 @@ To deploy your pipeline and Cloud IDE project to Astro, you first need to link y
 
 After you configure a GitHub repository, you can start committing changes from the Astro Cloud IDE to the repository.
 
-1. Click **Configure**.
+1. Click **Commit**.
 2. Click **New Branch**, then choose from either an existing branch or create a new branch.
 3. In the **COMMIT MESSAGE** field, enter a commit message. This will be the commit message for committing your changes from the Astro Cloud IDE to GitHub.
 4. Click **Commit**.
@@ -49,7 +49,7 @@ Astronomer recommends creating a feature branch for every new pipeline and creat
 
 You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring Deployments in GitHub. However, there is currently no way to disable the GitHub Action that the Astro Cloud IDE pushes to your repository. If you don't complete the following steps, the GitHub Action fails and you can't deploy your changes to Astro, but the rest of your commit processes are successful.
 
-1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment.
+1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. The Deployment ID can be found in the URL when you select a Deployment in the Cloud UI. For example, if your Deployment URL is `https://cloud.astronomer.io/cku7t3fvx59046554xr4g0siv7r/deployments/cl9redx5196158bqytlww0mqz2/analytics`, the Deployment ID is `cl9redx5196158bqytlww0mqz2`.
 2. Create a Deployment API key in each Deployment. See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
 3. Create the following GitHub secrets in your GitHub repository:
    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-api-key-id>`
