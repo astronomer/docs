@@ -136,7 +136,7 @@ To prioritize `task_x` over `task_y` while keeping both at a lower priority than
 
 ```python
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
 import time
@@ -157,7 +157,7 @@ with DAG('pool_unimportant_dag',
          }
          ) as dag:
 
-    task_w = DummyOperator(
+    task_w = EmptyOperator(
         task_id='start'
     )
 
@@ -174,7 +174,7 @@ with DAG('pool_unimportant_dag',
         pool='api_pool'
     )
 
-    task_z = DummyOperator(
+    task_z = EmptyOperator(
         task_id='end'
     )
 

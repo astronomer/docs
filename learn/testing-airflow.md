@@ -1,9 +1,14 @@
 ---
 title: "Test Airflow DAGs"
 sidebar_label: "Test DAGs"
-description: "How to test your Airflow DAGs."
 id: testing-airflow
 ---
+
+<head>
+  <meta name="description" content="Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing." />
+  <meta name="og:description" content="Learn about testing Airflow DAGs and gain insight into various types of tests — validation testing, unit testing, and data and pipeline integrity testing." />
+</head>
+
 
 Effectively testing DAGs requires an understanding of their structure and their relationship to other code and data in your environment. In this guide, you'll learn about DAG validation testing, unit testing, and data and pipeline integrity testing.
 

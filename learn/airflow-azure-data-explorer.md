@@ -72,7 +72,7 @@ Now that you have your Azure resources configured, you can move on to setting up
 
 Add a connection that Airflow will use to connect to ADX. In the Airflow UI, go to **Admin** -> **Connections**.
 
-Create a new connection named `asx` and choose the `Azure Data Explorer` connection type. Enter the following information: 
+Create a new connection named `adx` and choose the `Azure Data Explorer` connection type. Enter the following information: 
 
 - **Host:** Your cluster URL
 - **Login:** Your client ID
