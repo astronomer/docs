@@ -71,7 +71,7 @@ To create a SQL project, run the following command in either an empty directory 
 astro flow init
 ```
 
-Because this command uses Docker, it might take a few moments to complete. It generates the following files: 
+Because this command uses Docker, it might take a few moments to complete. In particular, the first time you run it from a specific version of the Astro CLI, it may take around five minutes. Subsequent runs from the same Astro CLI version should take only a few seconds. (We are actively addressing this issue!) It generates the following files: 
 
 ```sh
 new_proj/
