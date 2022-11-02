@@ -121,7 +121,7 @@ snowflake_default:
   role: ADMIN
 ```
 
-Your Astro project currently can't access the connections configured in this directory. Similarly, your SQL project can't access connections configured in your Astro project. We plan to unify these two sets of connections in upcoming releases.
+Your Astro project currently can't access the connections configured in this directory. Similarly, your SQL project can't access connections configured in your Astro project. Features for unifying these two sets of connections will be available in upcoming releases.
 
 #### Test database connections
 
