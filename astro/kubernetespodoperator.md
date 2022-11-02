@@ -100,7 +100,7 @@ Applying the code above ensures that when this DAG runs, it will launch a Kubern
 
 ### Mount a temporary directory (_AWS only_)
 
-Astronomer provisions `m5d` workers with NVMe SSD volumes. These volumes can be used by tasks for storage which persists as long as the task is running. To run a task run the KubernetesPodOperator that utilizes temporary storage:
+Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that contain 20GB of storage. These volumes can be used by tasks for storage which persists as long as the task is running. To run a task run the KubernetesPodOperator that utilizes temporary storage:
 
 1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
 2. Mount and [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator like in the following example:
@@ -136,7 +136,7 @@ Astronomer provisions `m5d` workers with NVMe SSD volumes. These volumes can be 
     )
     ```
     
-    Your task can now write data to the configured volume. Astronomer recommends using this volume only with small amounts of data. For larger operations requiring storage, Astronomer recommends setting an Airflow connection to an external storage service such as Amazon S3 . See [Passing data between Airflow tasks](https://www.docs.astronomer.io/learn/airflow-passing-data-between-tasks/).
+    Your task can now write data to the configured volume. Astronomer recommends that your tasks use no more storage than 20GB divided by your configured maximum tasks per worker. See [Worker autoscaling logic](configure-worker-queues.md#worker-autoscaling-logic). For larger operations requiring storage, Astronomer recommends setting an Airflow connection to an external storage service such as Amazon S3. See [Passing data between Airflow tasks](https://www.docs.astronomer.io/learn/airflow-passing-data-between-tasks/).
  
 ## Run images from a private registry
 
