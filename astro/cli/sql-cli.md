@@ -103,7 +103,7 @@ If you have existing `.sql` files and datasets, you can develop a running SQL wo
 
 ### Configure environments and connections
 
-An environment requires a connection to the external databases where you will extract and load the results of your SQL workflows. You can configure one or multiple connections withing a single `configuration.yml` file.
+An environment requires a connection to the external databases in which you will run your SQL workflows. You can configure one or multiple connections withing a single `configuration.yml` file.
 
 [`dev/configuration.yml`](https://github.com/astronomer/astro-sdk/blob/main/sql-cli/include/base/config/dev/configuration.yml) contains templates for for each supported connection type. Use these templates to configure all required key-value pairs for your connection. 
 
@@ -121,7 +121,7 @@ snowflake_default:
   role: ADMIN
 ```
 
-Your Astro project can't access the connections configured in this directory. Similarly, your SQL project can't access connections configured in your Astro project.
+Your Astro project currently can't access the connections configured in this directory. Similarly, your SQL project can't access connections configured in your Astro project. We plan to unify these two sets of connections in upcoming releases.
 
 #### Test database connections
 
