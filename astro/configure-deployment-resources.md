@@ -2,7 +2,6 @@
 sidebar_label: 'Configure a Deployment'
 title: 'Configure a Deployment'
 id: configure-deployment-resources
-description: Learn how to configure Astro Deployment resources.
 ---
 
 <head>
