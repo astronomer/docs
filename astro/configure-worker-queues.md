@@ -71,7 +71,7 @@ The number of workers subsequently determines the Deployment's [parallelism](htt
 
 These calculations are computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, read [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
-### Request a worker type
+## Request a worker type
 
 Your organization can enable up to 10 different worker types for each cluster. After a worker type is enabled on an Astro cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
 
