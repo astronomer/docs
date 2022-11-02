@@ -25,18 +25,13 @@ To get the most out of this guide, you should have an understanding of Airflow d
 
 The Astro Python SDK makes implementing ELT use cases easier by allowing you to seamlessly transition between Python and SQL for each step in your process. Details like creating dataframes, storing intermediate results, passing context and data between tasks, and creating task dependencies are all managed automatically.
 
-More specifically, the Astro Python SDK has the following functions that are helpful when implementing an ETL framework:
+More specifically, the Astro Python SDK includes several functions that are helpful when implementing an ETL framework:
 
 - `load_file`: Loads a given file into a SQL table. The file should be in CSV, JSON, or parquet files stored in Amazon S3 or GCS.
 - `transform`: Applies a SQL select statement to a source table and saves the result to a destination table. This function allows you to transform your data with a SQL query. It uses a `SELECT` statement that you define to automatically store your results in a new table. By default, the `output_table` is given a unique name each time the DAG runs, but you can overwrite this behavior by defining a specific `output_table` in your function. You can then pass the results of the `transform` downstream to the next task as if it were a native Python object.
-- `drop_table`: Drops a SQL table.
-- `run_raw_sql`: Runs any SQL statement without handling its output.
 - `dataframe`: Exports a specific SQL table into an in-memory pandas DataFrame. Similar to `transform` for SQL, the `dataframe` function allows you to implement a transformation of your data using Python. You can easily store the results of the `dataframe` function in your database by specifying an `output_table`, which is useful if you want to switch back to SQL in the next step or load your final results to your database.
 - `append`: Inserts rows from the source SQL table into the destination SQL table, if there are no conflicts. This function allows you to take resulting data from another function and append it to an existing table in your database. It is particularly useful in ETL scenarios and when dealing with reporting data.
-- `merge`: Inserts rows from the source SQL table into the destination SQL table, if there are no conflicts.
-- `export_file`: Exports SQL table rows into a destination file.
-- `cleanup`: Cleans up temporary tables created in your pipeline.
-
+  
 For a full list of functions, see the [Astro Python SDK README in GitHub](https://github.com/astronomer/astro-sdk).
 
 ## Installation
