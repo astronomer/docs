@@ -5,7 +5,7 @@ id: configure-deployment-resources
 description: Learn how to configure Astro Deployment resources.
 ---
 
-After you create an Astro Deployment, you can modify its settings to fit the needs your organization.
+After you create an Astro Deployment, you can modify its settings to meet the unique requirements of your organization.
 
 On Astro, you can:
 
@@ -22,11 +22,11 @@ To ensure that your tasks have the CPU and memory required to complete successfu
 - The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
 - Workers, which are responsible for executing tasks that have been scheduled and queued by the scheduler.
 
-Worker and scheduler resources must be set per Deployment and are managed separately from Cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
+Worker and scheduler resources must be set for each Deployment and are managed separately from Cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
 
 ### Worker queues 
 
-Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a required `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks.
+Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks.
 
 See [Configure worker queues](configure-worker-queues.md).
 
@@ -70,7 +70,7 @@ Alert emails assigned to a Deployment are used by Astronomer support to notify r
     - Click **Delete** next to the email you want to delete.
     - Click **Yes, Continue**.
 
-In addition to alert emails for your Deployments, Astronomer recommends subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe, you get alerted to system-wide incidents by email in real time.
+In addition to alert emails for your Deployments, Astronomer recommends subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe, you'll receive email notifications about system-wide incidents in real time.
 
 ## Delete a Deployment
 

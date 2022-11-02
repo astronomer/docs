@@ -13,13 +13,13 @@ Continuous Integration and Continuous Delivery (CI/CD) is an industry term that 
 
 On Astro, you can use Deployment API keys to automate deploying code changes to a Deployment. Astronomer recommends setting up a CI/CD workflow for all production environments.
 
-This guide has CI/CD templates that can be used with popular CI/CD management tools, including GitHub Actions and Circle CI.
+You can use the Astronomer CI/CD templates with popular CI/CD management tools, including GitHub Actions and Circle CI.
 
 ## Benefits
 
 There are many benefits to configuring a CI/CD workflow that automates pushing code changes to Astro. Specifically, you can:
 
-- Deploy new and updated DAGs in a way that streamlines the development process among team members.
+- Deploy new and updated DAGs in a way that streamlines your development process.
 - Decrease the maintenance cost of integrating changes, allowing your team to quickly respond in case of an error or failure.
 - Enforce continuous, automating testing, which increases code quality and protects your DAGs in production.
 
@@ -31,9 +31,9 @@ There are many benefits to configuring a CI/CD workflow that automates pushing c
 
 ## CI/CD templates
 
-This section provides basic templates for configuring individual CI pipelines using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline, but Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices. More templates are coming soon.
+Templates allow you to quickly configure individual CI pipelines using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices.
 
-At a high level, the CI/CD templates:
+The CI/CD templates let you:
 
 - Access Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
 - Install the latest version of the Astro CLI.

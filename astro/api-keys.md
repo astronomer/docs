@@ -5,28 +5,28 @@ id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
 
-An API key is a unique key ID and secret pair that can be used in place of manual user authentication for certain actions on Astro. You can use API keys to automate common actions on Astro that otherwise require manual inputs.
+An API key is a unique key ID and secret pair that you can use as an alternative to manual user authentication for some Astro actions. You can also use API keys to automate common actions on Astro that require manual inputs.
 
-With Deployment API keys, you can:
+You can use Deployment API keys to complete the following actions:
 
 - Automate deploying code to Astro [in CI/CD](ci-cd.md) with tools such as GitHub Actions or Circle CI.
 - Automate updating [environment variables](environment-variables.md).
 - Fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
 
-## Using API keys
+## Use API keys
 
-When using a Deployment API key, keep in mind:
+When using a Deployment API key, keep the following in mind:
 
-- A Deployment API key ID and secret are valid indefinitely.
+- A Deployment API key ID and secret are permanently valid.
 - Deployment API keys are deleted permanently if their corresponding Deployment is deleted.
-- A Deployment API key is not tied to the user that creates it. If the user that creates the API key is removed from the Workspace or their permissions change, the API key does not lose access to the Deployment and CI/CD workflows that use it are not affected.
+- A Deployment API key is not bound to the user who creates it. When a user who created the API key is removed from the Workspace, or their permissions change, the Deployment and CI/CD workflows that use the API key are not affected.
 - Any user or service with access to an API key and secret can access the corresponding Deployment. The only way to delete this access is to [delete the API key](api-keys.md#delete-an-api-key) or [delete the Deployment](configure-deployment-resources.md#delete-a-deployment).
 
 :::info
 
-You cannot currently use API keys to automate creating and updating Deployments, creating and updating Workspaces, or inviting and removing users.
+You can't use API keys to automate the creation and updating of Deployments or Workspaces, or inviting and removing users.
 
-A new API key framework is coming soon to Astro to unlock advanced automation workflows. If you're interested in this feature or have questions, contact [Astronomer support](https://cloud.astronomer.io/support).
+A new API key framework to unlock advanced automation workflows will soon be available in Astro. If you're interested in learning more about this feature or have questions, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 :::
 
@@ -52,9 +52,9 @@ If you just need to make a single API call, you can use a temporary user authent
 
 :::
 
-## Use an API key with Astro CLI
+## Use an API key with the Astro CLI
 
-To use a Deployment API key with the Astro CLI, you must make your API key ID and secret accessible to the CLI by setting the following OS-level environment variables:
+To use a Deployment API key with the Astro CLI, you must make your API key ID and secret accessible to the Astro CLI by setting the following OS-level environment variables:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
@@ -70,7 +70,7 @@ After you set the variables, you can run `astro deployment update` for the Deplo
 
 ## Use an API key for CI/CD
 
-If you deploy DAGs regularly to a production environment, Astronomer recommends using Deployment API keys to automate pushing code with a tool like GitHub Actions or Circle CI.
+If you deploy DAGs regularly to a production environment, Astronomer recommends using Deployment API keys to automate pushing code with a tool such as GitHub Actions or Circle CI.
 
 For more information and examples, see [Automate code deploys with CI/CD](ci-cd.md).
 

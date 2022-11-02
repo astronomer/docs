@@ -12,11 +12,11 @@ Astro is a managed service for data orchestration that is built for the cloud an
 
 Astro can be activated on Amazon Web Services (AWS), Google Cloud Platform (GCP), or Microsoft Azure. Astronomer runs Astro on managed Kubernetes services for each cloud provider, including AWS Elastic Kubernetes Service (EKS), Google Kubernetes Engine (GKE), and Azure Kubernetes Service (AKS).
 
-The control plane and data plane are managed by Astronomer and require no operational oversight by your team. Astro's architecture ensures that tasks are executed securely within your network and corporate boundaries, while enabling Astronomer to deliver the full promises of a managed service.
+The control plane and data plane are managed by Astronomer and require no operational oversight by your organization. The Astro architecture ensures that tasks are executed securely within your corporate network.
 
 ![Astro architecture overview](/img/docs/architecture-overview.png)
 
-For more information on Astro's architecture, contact [Astronomer support](https://cloud.astronomer.io/support).
+For more information about Astro architecture, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Related documentation
 

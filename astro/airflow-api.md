@@ -9,7 +9,7 @@ id: airflow-api
   <meta name="og:description" content="Learn how to make requests to the Airflow REST API and how you can use the Airflow REST API to automate Airflow workflows in your Deployments. Common examples of API requests are provided." />
 </head>
 
-You can use Airflow's [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate various Airflow workflows in your Deployments on Astro. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Airflow REST API.
+You can use the Airflow [REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) to automate Airflow workflows in your Deployments on Astro. For example, you can externally trigger a DAG run without accessing your Deployment directly by making an HTTP request in Python or cURL to the [dagRuns endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/post_dag_run) in the Airflow REST API.
 
 To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md#make-requests-to-the-airflow-rest-api).
 
@@ -26,7 +26,7 @@ Calling the Airflow REST API for a Deployment requires:
 - An Astro access token.
 - A Deployment URL.
 
-### Retrieve access token
+### Retrieve an access token
 
 To retrieve an Astro access token, run the following API request with your Deployment API key ID and secret:
 
@@ -44,21 +44,21 @@ curl --location --request POST "https://auth.astronomer.io/oauth/token" \
 
 Note that this token is only valid for 24 hours. If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
 
-If you have a [CI/CD process](ci-cd.md) configured, we recommend automating this API request to generate a fresh access tokent to avoid having to generate the token manually.
+If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generating an access token manually, Astronomer recommends that you automate the API request to generate a new access token.
 
 :::
 
-### Retrieve Deployment URL
+### Retrieve the Deployment URL
 
-1. Open your Deployment in the Cloud UI.
+1. In the Cloud UI, select a Workspace and then a Deployment.
 2. Click **Open Airflow**.
-3. When the Airflow UI opens to the homepage, copy the URL in your browser up until `/home`.
+3. When the Airflow UI opens in your browser, copy the URL up to `/home`.
 
 The Deployment URL includes the name of your Organization and a short Deployment ID. For example, a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany` would have a Deployment URL of `https://mycompany.astronomer.run/dhbhijp0`.
 
 ## Step 2: Make an Airflow API request
 
-You can now execute requests against any endpoint that is listed in the [Airflow REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
+You can execute requests against any endpoint that is listed in the [Airflow REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
 
 To make a request based on Airflow documentation, make sure to:
 
@@ -67,7 +67,7 @@ To make a request based on Airflow documentation, make sure to:
 
 ## Example API Requests
 
-The following topic contains common examples of Airflow REST API requests that you can run against a Deployment on Astro.
+The following are common examples of Airflow REST API requests that you can run against a Deployment on Astro.
 
 ### List DAGs
 
@@ -176,7 +176,7 @@ print(response.json())
 
 You can pause a DAG by executing a `PATCH` command against the [`dag` endpoint](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#operation/patch_dag).
 
-Make sure to replace `<your-dag-id>` with your own value.
+Replace `<your-dag-id>` with your own value.
 
 #### cURL
 

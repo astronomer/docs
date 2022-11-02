@@ -36,7 +36,7 @@ You can assign Task A to a worker queue that is configured to use the [`c6i.4xla
 
 ## Worker queue settings
 
-Each worker queue on Astro can be configured with the following settings:
+You can configure each worker queue on Astro with the following settings:
 
 - **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks`.
 - **Worker Type:** The size and type of workers in the worker queue, defined as a node instance type that is supported by the cloud provider of your cluster. For example, a worker type might be `m5.2xlarge` or `c6i.4xlarge` for a Deployment running on an AWS cluster. A worker’s total available CPU, memory, storage, and GPU is defined by its worker type. Actual worker size is equivalent to the total capacity of the worker type minus Astro’s system overhead.
@@ -73,7 +73,7 @@ These calculations are computed by KEDA every 10 seconds. For more information o
 
 ### Request a worker type
 
-Your organization can enable up to 10 different worker types per cluster. Once a worker type is enabled for an Astro cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
+Your organization can enable up to 10 different worker types for each cluster. After a worker type is enabled on an Astro cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
 
 1. Review the list of supported worker types for your cloud provider. See [AWS](resource-reference-aws.md#worker-node-types), [Azure](resource-reference-azure.md#worker-node-size-resource-reference), or [GCP](resource-reference-gcp.md#worker-node-size-resource-reference).
 2. Contact [Astronomer support](https://cloud.astronomer.io/support) with the name of the worker type(s) you want to enable for your cluster. For example, `m6i.2xlarge`.
@@ -90,7 +90,7 @@ If you prefer, you can also run the `astro deployment worker-queue create` comma
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
 
-2. Click the **Worker Queues** tab and then click **+ Worker Queue**.
+2. Click the **Worker Queues** tab and then click **Worker Queue**.
 
 3. Configure the worker queue’s settings. You can't change the name of a worker queue after you create it.
 
@@ -108,7 +108,7 @@ To assign an Airflow task to a worker queue:
 
 3. Copy the name of the worker queue name you want to assign a task to.
 
-4. In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might get stuck in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the exact name of the queue in the Cloud UI.
+4. In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
 
 	For example, all instances of this task will run in the `short-running-tasks` queue:
 
@@ -126,13 +126,13 @@ To assign an Airflow task to a worker queue:
 
 :::cli
 
-If you prefer, you can also run the `astro deployment worker-queue update` command in the Astro CLI to update a worker queue. See the [CLI Command Reference](cli/astro-deployment-worker-queue-update.md).
+If you prefer, you can run the `astro deployment worker-queue update` command in the Astro CLI to update a worker queue. See the [CLI Command Reference](cli/astro-deployment-worker-queue-update.md).
 
 :::
 
-You can update worker queue configurations at any time. This does not include worker queue name, which cannot be changed.
+You can update worker queue configurations at any time. The worker queue name can't be changed.
 
-If you need to change the worker type of an existing worker queue, Astronomer recommends doing so only at times which are not critical to production pipelines. Astronomer also recommends waiting up to 5 minutes after changing worker type before pushing new code to your Deployment.
+If you need to change the worker type of an existing worker queue, Astronomer recommends making the change at a time when it will not affect production pipelines. After you've changed a worker type, Astronomer recommends waiting a minimum of five minutes before pushing new code to your Deployment.
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
 
