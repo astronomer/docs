@@ -1,6 +1,6 @@
 ---
 sidebar_label: Deploy a project
-title: Deploy a project from the Cloud IDE
+title: Deploy a project from the Cloud IDE to Astro
 id: deploy-project
 description: Learn how to use the Astro Cloud IDE's built-in GitHub support to manage your data pipelines and deploy them to Astro.
 ---
@@ -15,13 +15,26 @@ If you have any feedback, please submit it to the [Astro Cloud IDE product porta
 
 :::
 
-After you create a pipeline in the Cloud IDE, you can deploy it to Astro and run tasks on a schedule. If you're an existing Astro user, you can do one of the following:
+After you create a project in the Cloud IDE, you can deploy it to Astro and run tasks on a schedule using one of the following options:
 
-- Download the pipeline's Python file from the Cloud IDE and copy it to an existing Astro project and Deployment.
-- Connect the Cloud IDE to a GitHub repository that hosts the source code for existing Deployments on Astro.
-- Create a new Deployment that's dedicated to Cloud IDE development and separate from other data pipelines.
+- Download your pipelines' Python files from the Cloud IDE, copy them to an existing Astro project, and deploy your project to Astro.
+- Use the Astro Cloud IDE's built-in GitHub integration to commit your project to a GitHub repository and deploy it to Astro using a GitHub action.
 
-This guide assumes that you create a dedicated Deployment and use the automated CI/CD process that's included with the Cloud IDE.
+## Export your pipelines to a local Astro project
+
+Astro Cloud IDE projects use the same structure as Astro projects created with the Astro CLI. You can download your pipeline code from the Astro Cloud IDE, copy it to an existing Astro project, and deploy that project to Astro using the [Astro CLI](cli/overview.md).
+
+1. Create an Astro project. See [Create a project](create-project.md).
+2. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
+3. Select the project you'd like to deploy.
+4. Select a pipeline that you want to export.
+5. Click **Code**, then click **Download**.
+
+    ![Code screen and download button](/img/cloud-ide/download-code.png)
+
+6. Add the downloaded Python file to the `dags` folder of your Astro project. 
+7. Manually configure the connections, dependencies, and variables from your Astro Cloud IDE project in your local Astro project. Automatic exporting for these resources coming soon. 
+8. Optional. Deploy your Astro project. See [Deploy code](deploy-code.md).
 
 ## Commit your project to GitHub
 
@@ -48,7 +61,7 @@ After you configure a GitHub repository, the **Configure** button in the Cloud I
 3. In the **COMMIT MESSAGE** field, enter a commit message. This will be the commit message for committing your changes from the Astro Cloud IDE to GitHub.
 4. Click **Commit**.
 
-## Deploy a project to Astro
+## Deploy a project from GitHub to Astro
 
 On the first GitHub commit of your project, the Astro Cloud IDE automatically pushes a Github action to your repository that includes steps for deploying to Astro. You can then configure your GitHub repository to push your Astro Cloud IDE project to a Deployment when you commit to specific branches. 
 
