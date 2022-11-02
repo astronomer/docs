@@ -580,3 +580,23 @@ Your Astro project can now utilize Python packages from your private PyPi index.
 
 </TabItem>
 </Tabs>
+
+## Add a CA certificate to an Astro Runtime image
+
+To allow Astro to authenticate with external services, it is sometimes necessary to add a custom, internal certificate authority (CA) certificate to the Astro Runtime image.
+
+1. In your Astro project `Dockerfile`, add the following entry below the existing `FROM` statement which specifies your Astro Runtime image version:
+
+    ```docker
+    
+    COPY gaw.crt /usr/local/share/ca-certificates/gaw/
+    RUN update-ca-certificates
+    USER astro
+    ```
+2. Optional. Add additional `COPY` statements for each CA certificate your organization is using for external access.
+
+3. Save your changes and run the following command to rebuild your project:
+
+    ```sh
+    astro dev restart
+    ```
