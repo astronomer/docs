@@ -31,29 +31,70 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Basic SQL. See the [W3 Schools SQL tutorial](https://www.w3schools.com/sql/)
 
+:::info
+
+You can find detailled information on the features described in this tutorial in the [documentation of the Cloud IDE](https://docs.astronomer.io/astro/cloud-ide).
+
+:::
+
+## Prerequisites
+
+To complete this tutorial, you need:
+
+- An Astro account. If you are not an Astronomer customer yet and want to learn more about Astro you can [join the weekly demo](https://www.astronomer.io/events/weekly-demo/) or [contact us directly](https://www.astronomer.io/get-started/?referral=docs-nav-button).
+- An account in one of the following database services: GCP BigQuery, Postgres, Snowflake or AWS Redshift. Additionally you will need your login credentials to create the connection to your database.
+- A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) as well as a Personal Access Token for your GitHub account.
+
+:::info
+
+If you do not have a GitHub account, you can create one for free on the [GitHub website](https://github.com/signup). To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+
+:::
+
 ## Step 1: Create your Cloud IDE project
 
-In your Astro Cloud workspace click on the **Cloud IDE** tab in the navigation bar on the left. Create a new Cloud IDE project with the **+ Project** button in the right upper corner of the screen.
+In your Astro Cloud workspace click on the **Cloud IDE** tab in the navigation bar on the left. 
 
-PLACEHOLDER image of creating a project (feature not turned on yet)
+1. Create a new Cloud IDE project with the **+ Project** button in the right upper corner of the screen.
+2. Give your Cloud IDE project a catchy name and a description.
+
+![Create new project](/img/guides/cloud_ide_create_project.png)
+
+3. Click on **Create**.
 
 ## Step 2: Create a new pipeline
 
-Click on **+ Pipeline** to create a new pipeline. Give it a name and description and click **Create**.
+Click on **+ Pipeline** to create a new pipeline. 
 
-![Create new pipeline](/img/guides/cloud_ide_new_project.png)
+![Create new pipeline](/img/guides/cloud_ide_new_pipeline.png)
+
+Give your pipeline a name and description and click **Create**. The pipeline editor for the new pipeline will open automatically.
+
+:::info
+
+The name you give your pipeline will be the name of the DAG which the Cloud IDE will create from your input. Hence names of pipelines within a project must be unique and can't contain special characters.
+
+:::
 
 ## Step 3: Configure a connection
 
-Navigate to the **Connections** tab in your Cloud IDE project. Here you can define connections to external tools which can be used by all pipelines in your project. Click on **+ Connection** to add a new connection. We will use Snowflake in this tutorial but you can also use Postgres, Bigquery or Redshift. 
+You can add a connection to your database from within the pipeline editor. 
+
+1. Click on the fourth icon ("Environment") of the panel on the right side of your screen to be able to add connections, variables and requirements to your Cloud IDE project. 
+
+![Configure a connection](/img/guides/cloud_ide_environment_button.png)
+
+2. Click on **+ Connection** to add a new connection. We will use Snowflake in this tutorial but you can also use Postgres, Bigquery or Redshift. 
 
 In the UI provide your connection credentials as shown in the screenshots below.
 
-![Configure a connection](/img/guides/cloud_ide_new_connection.png)
+![Configure a connection](/img/guides/cloud_ide_add_connection.png)
 
-![Configure a connection 2](/img/guides/cloud_ide_new_connection_2.png)
+![Configure a connection 2](/img/guides/cloud_ide_add_connection_2.png)
 
-After entering your credentials click the **Test Connection button** to make sure Astro is able to connect to your database. If your credentials are correct, a green banner will appear above saying "Connection successfully tested". Save the connection by clicking **Create Connection**.
+3. Use the **Test Connection button** to make sure Astro is able to connect to your database. If your credentials are correct, a green banner will appear above saying "Connection successfully tested". 
+
+4. Save the connection by clicking **Create Connection**.
 
 ## Step 4: Add required Python packages
 
@@ -104,7 +145,7 @@ Navigate back to your Cloud IDE on Astro.
 
 2. Rename your cell from `cell_1` to `query_table`. This will also change the name of your task in the pipeline view on the right side of the screen.
 
-3. Paste the following SQL code into your cell to select all records that do not contain any NULL values in any column:
+3. Paste the following SQL code into your cell to select all records that do not contain any NULL values in any column. Make sure to add your database and schema name to in the code.
 
 ```sql 
 SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
@@ -125,7 +166,7 @@ With the **Table Expression** box activated you should now see the output contai
 
 Our dataset contains information about the height, weight and how fast dogs of different breeds learned commands in 7 columns:
 
-- breed: the breed of the dogs in the experiement.
+- breed: the breed of the dogs in the experiment.
 - height_low_inches: height of the smallest dog of one specific breed.
 - height_high_inches: height of the largest dog of one specific breed.
 - weight_low_lbs: weight of the lightest dog of one specific breed.
@@ -134,6 +175,8 @@ Our dataset contains information about the height, weight and how fast dogs of d
 - reps_higher: highest repetitions necessary for a dog of a specific breed to learn a new command.
 
 ## Step 7: Transform your table
+
+Transform the data in your table to convert the dog intelligence data from repetitions needed to learn commands to a binary intelligence category. This new category will serve as a target for our ML classification model.
 
 1. Create a second SQL cell.
 
@@ -162,6 +205,8 @@ In the output table you can see that this SQL statement created a new transforme
 The predictors in our model will be the height and weight-related columns.
 
 ## Step 8: Train a model on your data
+
+Train a random forest model to predict the dog intelligence category of a breed based on height and weight information.
 
 1. Create a new Python cell by clicking on **Add Cell** in the topleft corner and selecting **Python**. 
 
@@ -233,7 +278,23 @@ To learn more about random forests check out this [MLU explain article](https://
 
 :::
 
-## Step 9: Connect your GitHub to the Cloud IDE
+## Step 9: Schedule your pipeline
+
+Click on the calendar symbol ("Schedule") in the right sidebar to see possibilities to schedule your DAG. 
+
+1. Set the "START DATE" to the 31st of October 2022.
+
+![Schedule DAG](/img/guides/cloud_ide_schedule_dag.png)
+
+2. Edit the "CRON STRING" to schedule your DAG to run every weekday at 2:30am and 6:30pm.
+
+![CRON menu](/img/guides/cloud_ide_cron_menu.png)
+
+3. Select your timezone and click **Update Settings** to save your schedule.
+
+## Step 10: Connect your GitHub to the Cloud IDE
+
+Now that you have trained the model, you can connect GitHub to Cloud IDE to commit your pipeline as a DAG to any Airflow project.
 
 1. Click on the GitHub **Configure** button in the topright corner of your screen to connect your Cloud IDE Project to your GitHub account.
 
@@ -243,13 +304,7 @@ To learn more about random forests check out this [MLU explain article](https://
 
 3. Click update to save your connection details.
 
-:::info
-
-If you do not have a GitHub account, you can create one for free on the [GitHub website](https://github.com/signup). To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-
-:::
-
-## Step 10: Commit your DAG to GitHub
+## Step 11: Commit your DAG to GitHub
 
 Export your DAG by commiting it to your connected GitHub repository. 
 
@@ -273,7 +328,7 @@ If a DAG with the same file as a file name already exists (i.e. if you already h
 
 :::
 
-## Step 11: Deploy your DAG to Astro 
+## Step 12: Deploy your DAG to Astro 
 
 Additionally, the Cloud IDE will create a GitHub workflow to deploy to Astro in `.github/workflows/astro_deploy.yaml`.
 
