@@ -5,7 +5,7 @@ id: role-permission-reference
 description: A list of all default permissions for each role on Astronomer Software. 
 ---
 
-This section contains the default permissions for each user role on Astronomer. To modify these default permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).
+This is where you'll find information about Astronomer Software default user role permissions. To modify these default permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).
 
 ## System roles
 
@@ -28,7 +28,7 @@ The System Viewer has the following permissions by default:
 
 ### System Editor
 
-The System Editor has all of the same default permissions as the System Viewer, plus:
+The System Editor has the same default permissions as the System Viewer, plus:
 
 - `system.deployment.variables.update`: Modify [environment variables](environment-variables.md) for any Deployment
 - `system.iam.update`: Modify [IAM](integrate-iam.md) roles for any Deployment
@@ -38,7 +38,7 @@ The System Editor has all of the same default permissions as the System Viewer, 
 
 ### System Admin
 
-The System Admin has all of the same default permissions as the System Viewer and System Editor for a given cluster, plus:
+The System Admin has the same default permissions as the System Viewer and System Editor for a given cluster, plus:
 
 - `system.deployments.create`: Create a Deployment on any Workspace
 - `system.deployments.update`: Modify any Deployment
@@ -60,7 +60,7 @@ The System Admin has all of the same default permissions as the System Viewer an
 
 ## Workspace roles
 
-System roles apply to a single Workspace within a single Astronomer Software installation.
+Workspace roles apply to a single Workspace within a single Astronomer Software installation.
 
 ### Workspace Viewer
 
@@ -73,7 +73,7 @@ The Workspace Viewer has the following default permissions for a given Workspace
 
 ### Workspace Editor
 
-For a given Workspace, the Workspace Editor has all of the same default permissions as the Workspace Viewer, plus:
+For a given Workspace, the Workspace Editor has the same default permissions as the Workspace Viewer, plus:
 
 - `workspace.config.update`: Modify the Workspace, including Workspace Name, Description, and user access
 - `workspace.deployments.create`: Create a Deployment in the Workspace
@@ -83,7 +83,7 @@ For a given Workspace, the Workspace Editor has all of the same default permissi
 
 ### Workspace Admin
 
-For a given Workspace, the Workspace Editor has all of the same default permissions as the Workspace Viewer and Workspace Editor, plus:
+For a given Workspace, the Workspace Editor has the same default permissions as the Workspace Viewer and Workspace Editor, plus:
 
 - `workspace.invites.get`: View pending user invites for the Workspace
 - `workspace.config.delete`: Delete the Workspace
@@ -93,7 +93,7 @@ In addition, Workspace Admins have Deployment Editor permissions for all Deploym
 
 ## Workspace roles
 
-System roles apply to a single Deployment within a single Astronomer Software installation.
+Workspace roles apply to a single Deployment within a single Astronomer Software installation.
 
 ### Deployment Viewer
 
@@ -108,11 +108,11 @@ For a given Deployment, a Deployment Viewer has the following permissions:
 - `deployment.variables.get`: View the Deployment's [environment variables](environment-variables.md)
 - `deployment.users.get`: View the list of users with access to the Deployment
 
-Note that a Deployment Viewer cannot cannot push code to a Deployment or modify Deployment configurations. These actions can be completed only by a Deployment Editor or a Deployment Admin.
+A Deployment Viewer can't push code to a Deployment or modify Deployment configurations. These actions can be completed only by a Deployment Editor or a Deployment Admin.
 
 ### Deployment Editor
 
-For a given Deployment, the Deployment Editor has all of the same default permissions as the Deployment Viewer, plus:
+For a given Deployment, the Deployment Editor has the same default permissions as the Deployment Viewer, plus:
 
 - `deployment.airflow.user`: Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for all Deployments, including modifying task runs and DAG runs
 - `deployment.config.update`: Modify the Deployment's settings
@@ -122,11 +122,11 @@ For a given Deployment, the Deployment Editor has all of the same default permis
 - `deployment.serviceAccounts.delete`: Delete a Deployment-level service account
 - `deployment.variables.update`: Update the Deployment's [environment variables](environment-variables.md)
 
-Note that a Deployment Editor cannot make changes to certain configurations in the Airflow UI, such as connections and variables. These actions can be completed only by a Deployment Admin.
+A Deployment Editor cannot make changes to certain configurations in the Airflow UI, such as connections and variables. These actions can only be completed by a Deployment Admin.
 
 ### Deployment Admin
 
-For a given Deployment, the Deployment Admin has all of the same default permissions as the Deployment Viewer and the Deployment Editor, plus:
+For a given Deployment, the Deployment Admin has the same default permissions as the Deployment Viewer and the Deployment Editor, plus:
 
 - `deployment.airflow.admin`: Airflow [admin permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#admin), including permission to configure:
 

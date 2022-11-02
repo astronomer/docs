@@ -9,7 +9,7 @@ This is where you'll find information about role management and guidelines aroun
 
 ## Add users to Astronomer
 
-When Astronomer Software is first deployed, the first user to log in is granted System Admin permissions by default. From there, a user can created on Astronomer Software through one of the following methods:
+When Astronomer Software is first deployed, the first user to log in is granted System Admin permissions by default. From there, a user can be created on Astronomer Software through one of the following methods:
 
 - Invitation to a Workspace by a Workspace Admin
 - Invitation to Astronomer by a System Admin
@@ -67,7 +67,7 @@ System Admins can customize permissions across teams. On Astronomer, users can b
 - Workspace Level (Viewer, Editor, Admin)
 - System Level (Viewer, Editor, Admin)
 
-Workspace roles apply to all Deployments within a single Workspace, while system roles apply to all Workspaces across a single cluster. For a detailed breakdown of the 3 Workspace-level roles on Astronomer (Viewer, Editor and Admin), read [Manage user permissions on an Astronomer Workspace](workspace-permissions.md).
+Workspace roles apply to all Deployments within a single Workspace, while system roles apply to all Workspaces across a single cluster. For a detailed breakdown of the three Workspace-level roles on Astronomer Software (Viewer, Editor and Admin), see [Manage user permissions on an Astronomer Workspace](workspace-permissions.md).
 
 ## Customize user role permissions
 
@@ -85,10 +85,10 @@ To customize permissions, follow the steps below.
 
 <!--- Version-specific -->
 
-Before customizing role permissions, view [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.29/default.yaml) and answer the following questions:
+Before customizing role permissions, review [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.29/default.yaml) and then answer the following questions:
 
-- What role do you want to configure? (e.g. `DEPLOYMENT_EDITOR`)
-- What permission(s) would you like to add to or remove from that role? (e.g. `deployment.images.push`)
+- What role do you want to configure? For example, `DEPLOYMENT_EDITOR`.
+- What permission(s) do you want to add to or remove from the role? For example, `deployment.images.push`.
 
 For example, you might want to block a `DEPLOYMENT_EDITOR` (and therefore `WORKSPACE_EDITOR`) from deploying code to all Airflow Deployments within a Workspace and instead limit that action to users assigned the `DEPLOYMENT_ADMIN` role. 
 
@@ -143,7 +143,7 @@ Then, push the configuration change to your platform as described in [Apply a co
 
 ## System roles
 
-The System Admin role on Astronomer Software brings a range of cluster-wide permissions that supersedes Workspace-level access and allows a user to monitor and take action across Workspaces, Deployments and Users within a single cluster.
+The System Admin role on Astronomer Software brings a range of cluster-wide permissions that supersedes Workspace-level access and allows a user to monitor and take action across Workspaces, Deployments, and Users within a single cluster.
 
 On Astronomer, System Admins specifically can:
 

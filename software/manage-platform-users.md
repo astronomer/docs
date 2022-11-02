@@ -5,9 +5,9 @@ id: manage-platform-users
 description: Add and customize user permissions on Astronomer Software.
 ---
 
-Astronomer Software allows you to fine-tune permissions for each type user role, as well as how new users are allowed to join your platform. 
+Astronomer Software allows you to adjust permissions for each user role and define how new users join your organization. 
 
-Use this guide to learn about customizing user signups and user roles, as well as how to utilize Astronomer Software's System-level permissions. For a list of each role's default permissions, see [User roles and permissions](role-permission-reference.md).
+Use this guide to learn about customizing user signups and user roles, as well as how to use Astronomer Software system-level permissions. For a list of the default permissions for each role, see [User roles and permissions](role-permission-reference.md).
 
 ## Add users to Astronomer
 
@@ -62,7 +62,7 @@ Then, push the configuration change to your platform as described in [Apply a co
 
 ## System permissions on Software
 
-The System Admin role on Astronomer Software brings a range of cluster-wide permissions that supersedes Workspace-level access and allows a user to monitor and take action across Workspaces, Deployments and users within a single cluster.
+The Astronomer Software System Admin role provides cluster-wide permissions that supersede Workspace-level access and allows a user to monitor and take action across Workspaces, Deployments, and users within a single cluster.
 
 On Astronomer, System Admins specifically can:
 
@@ -82,7 +82,6 @@ No user is assigned the System Editor or Viewer Roles by default, but they can b
 
 You can customize all three Astronomer Software permission sets to meet your specific requirements. For more information about the default configurations attached to the System Admin, Editor and Viewer Roles, see the [Houston API source code](https://github.com/astronomer/docs/tree/main/software_configs/0.30/default.yaml).
 
-For guidelines on assigning users any System-level role, read below.
 
 ### Assign users System Admin roles
 
@@ -105,12 +104,12 @@ To verify a user was successfully granted the SysAdmin role, ensure they can do 
 
 ## User roles on Astronomer
 
-Administrators can customize permissions across teams. On Astronomer, users can be assigned roles at 2 levels:
+Administrators can customize permissions across teams. On Astronomer Software, users can be assigned roles at two levels:
 
-1. Workspace Level (Viewer, Editor, Admin)
-2. System Level (Viewer, Editor, Admin)
+- Workspace Level (Viewer, Editor, Admin)
+- System Level (Viewer, Editor, Admin)
 
-Workspace roles apply to all Airflow Deployments within a single Workspace, whereas System Roles apply to *all* Workspaces across a single cluster. For a detailed breakdown of the 3 Workspace-level roles on Astronomer (Viewer, Editor and Admin), read [Manage user permissions on an Astronomer Workspace](workspace-permissions.md).
+Workspace roles apply to all Airflow Deployments within a single Workspace. System Roles apply to *all* Workspaces across a single cluster. For more information about the three Workspace-level roles on Astronomer Software (Viewer, Editor and Admin), see [Manage user permissions on an Astronomer Workspace](workspace-permissions.md).
 
 ## Customize role permissions
 
@@ -120,11 +119,11 @@ Permissions are defined on Astronomer as `scope.entity.action`, where:
 - `entity`: The object or role being operated on
 - `action`: The verb describing the operation being performed on the `entity`
 
-For example, the `deployment.serviceAccounts.create` permission translates to the ability for a user to create a Deployment-level service account in any Deployment to which the belong. To view all available platform permissions and default role configurations, see [Reference: System permissions](manage-platform-users.md#reference-system-permissions).
+For example, the `deployment.serviceAccounts.create` permission translates to the ability for a user to create a Deployment-level service account in any Deployment to which they belong. To view the available platform permissions and default role configurations, see [Reference: System permissions](manage-platform-users.md#reference-system-permissions).
 
-A permission for a given `scope` only applies to the parts of the scope where a user has been invited. For example, a user with a role including the `workspace.serviceAccounts.get` permission can view service accounts only in Workspaces they belong to.
+A permission for a given `scope` only applies to the parts of the scope where a user has been invited. For example, a user with a role including the `workspace.serviceAccounts.get` permission can view service accounts only in the Workspaces they belong to.
 
-To customize permissions, follow the steps below. For a complete list of Astronomer's roles and their default permissions, see [User roles and permissions](role-permission-reference.md).
+For a complete list of Astronomer Software roles and default permissions, see [User roles and permissions](role-permission-reference.md).
 
 ### Role permission inheritance
 
@@ -142,14 +141,14 @@ There are several chains of inheritance in the Software RBAC system. In the foll
 
 Review the default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.30/default.yaml) and determine the following:
 
-- What role do you want to configure? For example, `DEPLOYMENT_EDITOR`.
-- What permission(s) would you like to add to or remove from that role? For example, `deployment.images.push`.
+- What role you want to configure. For example, `DEPLOYMENT_EDITOR`.
+- What permission(s) you want to add or remove from the role, For example, `deployment.images.push`.
 
 For example, you might want to block a `DEPLOYMENT_EDITOR` (and therefore `WORKSPACE_EDITOR`) from deploying code to all Airflow Deployments within a Workspace and instead limit that action to users assigned the `DEPLOYMENT_ADMIN` role.
 
 ### Step 2: Modify your config.yaml file
 
-Apply the role and permission change to your platform's `config.yaml` file. Following the `deployment.images.push` example above, that would mean specifying this:
+Apply the role and permission changes to your organization's `config.yaml` file. For example:
 
 ```yaml
 astronomer:
@@ -175,20 +174,20 @@ astronomer:
             deployment.images.push: true
 ```
 
-Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
 ### Example customization: Limit Workspace creation
 
-Unless otherwise configured, a user who creates a Workspace on Astronomer is automatically granted the `WORKSPACE_ADMIN` role and is thus able to create an unlimited number of Airflow Deployments within that Workspace. For teams looking to more strictly control resources, Astronomer Software supports limiting the Workspace creation function through the `USER` role.
+Unless otherwise configured, a user who creates a Workspace on Astronomer Software is automatically granted the `WORKSPACE_ADMIN` role and can create an unlimited number of Airflow Deployments within that Workspace. For teams looking to more strictly control resources, Astronomer Software supports limiting the Workspace creation function through the `USER` role.
 
-Astronomer ships with a `USER` role that is synthetically bound to _all_ users within a single cluster. By default, this role includes the `system.workspace.create` permission.
+Astronomer Software includes a `USER` role that is synthetically bound to _all_ users within a single cluster. By default, this role includes the `system.workspace.create` permission.
 
 If you're a System Admin who wants to limit Workspace creation, you can:
 
 - Set the `system.workspace.create` permission for the `USER` role to `false`
 - Attach the `system.workspace.create` permission to a separate role of your choice
 
-You might want limit this permission to the `SYSTEM_ADMIN` role on the platform, because System Admins can be responsible for managing cluster-level resources and costs. To reassign this permission to System Admins, your `config.yaml` would look like the following: 
+You might want limit this permission to the `SYSTEM_ADMIN` role on the platform, because System Admins can be responsible for managing cluster-level resources and costs. To reassign this permission to System Admins, your `config.yaml` would appear similar to the following example: 
 
 ```yaml
 astronomer:
