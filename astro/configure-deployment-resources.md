@@ -24,7 +24,7 @@ To ensure that your tasks have the CPU and memory required to complete successfu
 - The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
 - Workers, which are responsible for executing tasks that have been scheduled and queued by the scheduler.
 
-Worker and scheduler resources must be set for each Deployment and are managed separately from Cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
+Worker and scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
 
 ### Worker queues 
 
