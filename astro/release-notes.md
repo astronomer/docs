@@ -29,11 +29,11 @@ Astronomer is excited to introduce the Astro Cloud IDE, which is a notebook-insp
 
 The Astro Cloud IDE was created with the following objectives:
 
-- Configuring Airflow shouldn't be a barrier to running Airflow
+- Configuring Airflow shouldn't be a barrier to running Airflow.
 - Passing data between tasks should be seamless regardless of what language is used to write the task.
 - Data pipelines should be quick to deploy and easy to test with CI/CD.
 
-Primarily, the Astro Cloud IDE was developed to make it easier for new Airflow users to get started and to provide experienced users with a robust development environment.
+Most importantly, the Astro Cloud IDE was developed to make it easier for new Airflow users to get started and to provide experienced users with a robust development environment.
 
 To create your first project in the Astro Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
 
@@ -42,7 +42,6 @@ To create your first project in the Astro Cloud IDE, see the [Cloud IDE quicksta
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
 The Astro Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. If you have feedback on the Cloud IDE you'd like to share, you can submit it on the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
-
 
 :::
 
