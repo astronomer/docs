@@ -165,6 +165,12 @@ The following table lists all available instance types for worker node pools, as
 | t3.xlarge        | 3 CPUs  | 13 GiB MEM   |
 | t3.2xlarge       | 7 CPUs  | 29 GiB MEM   |
 
+:::caution
+
+Because `t` series instance types can have their CPU throttled, we do not recommend using `t` series instance types for production workloads unless the instances are configured to leverage [unlimited mode](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode.html), which can incur additional costs.
+
+:::
+
 :::info
 
 With the exception of `m5d` nodes, all supported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, Astronomer recommends modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes.
