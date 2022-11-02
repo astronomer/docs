@@ -121,8 +121,9 @@ The following table maps some common `operationName` attributes to their corresp
 | A Workspace is deleted.  | `deleteWorkspace` | `id` |
 | A user is added to a Workspace, or a user role is updated. | `assignUserWorkspaceRole` | `email`, `role`, `workspaceId` |
 | A user is removed from a workspace. | `deleteUserWorkspaceRole` | `userId`, `workspaceId` |
-| A new Deployment is created. | `createDeployment` | `label`, `organizationId` |
+| A new Deployment is created. | `createDeployment` | `label`, `workspaceId` |
 | A Deployment is updated. | `updateDeployment` | `deploymentSpec` |
+| A Deployment variable is updated. | `updateDeploymentVariables` | `isSecret`, `key` |
 | An API key is created for a Deployment. | `createDeploymentApiKey` | `deploymentId`, `role` |
 | The code for a Deployment is updated. | `ImageCreate` | `deploymentId` |
 
