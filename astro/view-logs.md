@@ -125,6 +125,7 @@ The following table maps some common `operationName` attributes to their corresp
 | A Deployment is updated. | `updateDeployment` | `deploymentSpec` |
 | A Deployment variable is updated. | `updateDeploymentVariables` | `isSecret`, `key` |
 | An API key is created for a Deployment. | `createDeploymentApiKey` | `deploymentId`, `role` |
+| An API key is deleted for a Deployment. | `deleteDeploymentApiKey` | `id` |
 | The code for a Deployment is updated. | `ImageCreate` | `deploymentId` |
 
 Use your analytics or audit tool to view additional attribute mapping information. 
