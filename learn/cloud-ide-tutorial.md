@@ -7,7 +7,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 
 Developing your pipelines has never been easier than using the Cloud IDE on Astro.
 
-This tutorial is for people who are Astro customers and want to create their first simple ML pipeline in the Cloud IDE.
+This tutorial is Astro customers who want to create their first simple ML pipeline in the Cloud IDE.
 
 After you complete this tutorial, you'll be able to:
 
@@ -53,9 +53,9 @@ In the UI provide your connection credentials as shown in the screenshots below.
 
 ![Configure a connection 2](/img/guides/cloud_ide_new_connection_2.png)
 
-After entering your credentials click the **Test Connection button** to make sure Astro is able to connect to Snowflake. If your credentials are correct, a green banner will appear above saying "Connection successfully tested". Save the connection by clicking **Create Connection**.
+After entering your credentials click the **Test Connection button** to make sure Astro is able to connect to your database. If your credentials are correct, a green banner will appear above saying "Connection successfully tested". Save the connection by clicking **Create Connection**.
 
-## Step 4: Add required python packages
+## Step 4: Add required Python packages
 
 Navigate to the **Requirements** tab in your Cloud IDE project. Under this tab you can add any Python packages that you are planning to use in Cloud IDE Python cells within this Cloud IDE project. To create our simple ML model we will need the `scikit-learn` package. Add this package by clicking on **+ Requirement** and typing `scikit-learn` into the "package name" field. Select the latest version and click **Add**.
 
@@ -63,7 +63,7 @@ Navigate to the **Requirements** tab in your Cloud IDE project. Under this tab y
 
 ## Step 5: Import a dataset into your database
 
-In this tutorial we will use the try to predict the intelligence of a dog breed based on their upper and lower height and weight limits. Download [this dataset](PLACEHOLDER LINK) and import it into your database. 
+In this tutorial we will try to predict the intelligence of a dog breed based on their upper and lower height and weight limits. Download [this dataset](PLACEHOLDER LINK) and import it into your database. 
 
 If you are using Snowflake follow these steps:
 
@@ -92,7 +92,7 @@ CREATE FILE FORMAT my_csv_format
     EMPTY_FIELD_AS_NULL = true;
 ```
 
-3. Use the ["Loading Using the Web Interface" wizard](https://docs.snowflake.com/en/user-guide/data-load-web-ui.html) by navigating to the `dog_intelligence` table in the **Datasets** tab of the Snowflake UI and clicking on **Load Table**. Select the `dog_intelligence.csv` file you downloaded as the "Source File" and `my_csv_format` as the "File Format".
+3. Use the ["Loading Using the Web Interface" wizard](https://docs.snowflake.com/en/user-guide/data-load-web-ui.html) by navigating to the `dog_intelligence` table in the **Databases** tab of the Snowflake UI and clicking on **Load Table**. Select the `dog_intelligence.csv` file you downloaded as the "Source File" and `my_csv_format` as the "File Format".
 
 ![Load csv Snowflake](/img/guides/cloud_ide_load_csv.png)
 
@@ -157,7 +157,7 @@ You will notice that pasting this SQL statement will automatically create a depe
 
 5. Run the cell.
 
-In the output table you can see that this SQL statement created a new transformed temporary table with an binary `INTELLIGENCE_CATEGORY` column we can use as a target for our classification model. All dogs who at most needed 25 repetitions to learn a new command are put in the `very_smart_dog` category. All other dogs in the `smart_dog` category (because of course, all dogs are smart).
+In the output table you can see that this SQL statement created a new transformed temporary table with a binary `INTELLIGENCE_CATEGORY` column which will be used as a target for your classification model. All dogs who needed 25 or fewer repetitions to learn a new command are put in the `very_smart_dog` category. All other dogs are put in the `smart_dog` category (because of course, all dogs are smart).
 
 The predictors in our model will be the height and weight-related columns.
 
