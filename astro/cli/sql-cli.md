@@ -11,7 +11,7 @@ This feature is in alpha and is not yet recommended for production workflows.
 
 :::
 
-Use Astro CLI SQL commands to run SQL workflows without writing Python code or setting up Airflow. The Astro CLI takes care of all of the backend configuration required for running SQL locally. A connection configured in YAML lets you output the results of your SQL queries to a specific database. 
+Use Astro CLI SQL commands to run SQL workflows without writing Python code or setting up Airflow. The Astro CLI takes care of all of the backend configuration required for running SQL locally. Configure your connections in YAML to run your SQL in a specific data warehouse.
 
 ## Prerequisites 
 
