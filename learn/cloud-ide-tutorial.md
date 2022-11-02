@@ -96,15 +96,21 @@ In the UI provide your connection credentials as shown in the screenshots below.
 
 4. Save the connection by clicking **Create Connection**.
 
+:::info
+
+You can also add connections, variables and requirements to your Cloud IDE project from the project overview.
+
+:::
+
 ## Step 4: Add required Python packages
 
-Navigate to the **Requirements** tab in your Cloud IDE project. Under this tab you can add any Python packages that you are planning to use in Cloud IDE Python cells within this Cloud IDE project. To create our simple ML model we will need the `scikit-learn` package. Add this package by clicking on **+ Requirement** and typing `scikit-learn` into the "package name" field. Select the latest version and click **Add**.
+Navigate to the **Requirements** tab in the pipeline editor "Environment" section. Under this tab you can add any Python packages that you are planning to use in Cloud IDE Python cells within this Cloud IDE project. To create our simple ML model we will need the `scikit-learn` package. Add this package by clicking on **+ Requirement** and typing `scikit-learn` into the "package name" field. Select the latest version and click **Add**.
 
-![Add scikit-learn](/img/guides/cloud_ide_add_sklearn.png)
+![Add scikit-learn](/img/guides/cloud_ide_add_requirement.png)
 
 ## Step 5: Import a dataset into your database
 
-In this tutorial we will try to predict the intelligence of a dog breed based on their upper and lower height and weight limits. Download [this dataset](PLACEHOLDER LINK) and import it into your database. 
+In this tutorial we will try to predict the intelligence of a dog breed based on their upper and lower height and weight limits. Download the [ dog_intelligence.csv ] PLACEHOLDER LINK dataset which is a slightly changed version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size) and import it into your database. 
 
 If you are using Snowflake follow these steps:
 
@@ -143,9 +149,13 @@ Navigate back to your Cloud IDE on Astro.
 
 1. Create your first SQL cell by clicking on **Add Cell** in the topleft corner and selecting **SQL**. 
 
-2. Rename your cell from `cell_1` to `query_table`. This will also change the name of your task in the pipeline view on the right side of the screen.
+2. Rename your cell from `cell_1` to `query_table`.
 
-3. Paste the following SQL code into your cell to select all records that do not contain any NULL values in any column. Make sure to add your database and schema name to in the code.
+3. In the right sidebar click on the top "Pipeline" icon to view your cell in the pipeline view.
+
+![Pipeline View](/img/guides/cloud_ide_pipeline_view.png)
+
+4. Paste the following SQL code into your cell to select all records that do not contain any NULL values in any column. Make sure to add your database and schema name to in the code.
 
 ```sql 
 SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
@@ -153,30 +163,22 @@ WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS,
 WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
 ```
 
-4. Select your Snowflake connection as shown in the screenshot below.
+5. Select your Snowflake connection as shown in the screenshot below.
 
 ![Select Snowflake Connection](/img/guides/cloud_ide_select_connection.png)
 
-5. Run the cell by either clicking on the play button next to the connection field or by hitting Command + Enter.
+6. Run the cell by either clicking on the play button next to the connection field or by hitting Command + Enter.
 
 Running the cell will create a temporary table in your database containing the output from your query.
 With the **Table Expression** box activated you should now see the output containing of 136 rows below the cell.
 
 ![Table output](/img/guides/cloud_ide_query_table.png)
 
-Our dataset contains information about the height, weight and how fast dogs of different breeds learned commands in 7 columns:
-
-- breed: the breed of the dogs in the experiment.
-- height_low_inches: height of the smallest dog of one specific breed.
-- height_high_inches: height of the largest dog of one specific breed.
-- weight_low_lbs: weight of the lightest dog of one specific breed.
-- weight_high_lbs: weight of the heaviest dog of one specific breed.
-- reps_lower: lowest repetitions necessary for a dog of a specific breed to learn a new command.
-- reps_higher: highest repetitions necessary for a dog of a specific breed to learn a new command.
+Our dataset contains information about the height, weight and how fast dogs of different breeds learned commands in 7 columns. `reps_lower` and `reps_higher` contain the lower and upper bounds of how many repetitions of a new command a dog of a breed needed to learn it. We will use this value to sort our dogs in two categories which will be the target of our classification model. The predictors will be the four columns containing height and weight information.
 
 ## Step 7: Transform your table
 
-Transform the data in your table to convert the dog intelligence data from repetitions needed to learn commands to a binary intelligence category. This new category will serve as a target for our ML classification model.
+Transform the data in your table to convert the dog intelligence data from repetitions needed to learn commands to a binary intelligence category.
 
 1. Create a second SQL cell.
 
@@ -201,8 +203,6 @@ You will notice that pasting this SQL statement will automatically create a depe
 5. Run the cell.
 
 In the output table you can see that this SQL statement created a new transformed temporary table with a binary `INTELLIGENCE_CATEGORY` column which will be used as a target for your classification model. All dogs who needed 25 or fewer repetitions to learn a new command are put in the `very_smart_dog` category. All other dogs are put in the `smart_dog` category (because of course, all dogs are smart).
-
-The predictors in our model will be the height and weight-related columns.
 
 ## Step 8: Train a model on your data
 
@@ -294,7 +294,7 @@ Click on the calendar symbol ("Schedule") in the right sidebar to see possibilit
 
 ## Step 10: Connect your GitHub to the Cloud IDE
 
-Now that you have trained the model, you can connect GitHub to Cloud IDE to commit your pipeline as a DAG to any Airflow project.
+Now that you have trained the model, you can connect GitHub to the Cloud IDE to commit your pipeline as a DAG to any Airflow project.
 
 1. Click on the GitHub **Configure** button in the topright corner of your screen to connect your Cloud IDE Project to your GitHub account.
 
@@ -324,13 +324,13 @@ If you made changes to several DAGs you can select which changes to commit by ch
 
 :::caution
 
-If a DAG with the same file as a file name already exists (i.e. if you already had a file named `dog_smarts_pipeline` in the `/dags` folder of this repository) the Cloud IDE will overwrite the existing file. For this reason it is best practise to use a seperate branch for commits from your Cloud IDE environment than for commits from other sources to the same repository.
+If file with the same name as your Cloud IDE pipeline already exists (i.e. if you already had a file named `dog_smarts_pipeline` in the `/dags` folder of this repository) the Cloud IDE will overwrite the existing file. For this reason it is best practise to use a seperate branch for commits from your Cloud IDE environment than for commits from other sources to the same repository.
 
 :::
 
 ## Step 12: Deploy your DAG to Astro 
 
-Additionally, the Cloud IDE will create a GitHub workflow to deploy to Astro in `.github/workflows/astro_deploy.yaml`.
+When you commit a Cloud IDE pipeline to a GitHub repository, the Cloud IDE will create a GitHub workflow of the name `astro_deploy.yaml` in case it does not exist yet.
 
 1. Configure [GitHub Actions](https://docs.astronomer.io/astro/ci-cd?tab=multibranch#github-actions) by setting the following as [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
