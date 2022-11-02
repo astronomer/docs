@@ -117,7 +117,8 @@ The following table maps some common `operationName` attributes to their corresp
 | A user is deleted from an organization.  | `deleteUserInvite` | `inviteId` |
 | A user is assigned a new role.  | `assignUserOrganizationRole` | `role`, `userId` |
 | A user is removed from an organization.  | `deleteOrganizationUser` | `organizationId`, `userId` |
-| A Workspace is created.  | `createWorkspace` | `label` `organizationId` |
+| A Workspace is created.  | `createWorkspace` | `label`, `organizationId` |
+| A Workspace is updated.  | `updateWorkspace` | `label`, `id` |
 | A Workspace is deleted.  | `deleteWorkspace` | `id` |
 | A user is added to a Workspace, or a user role is updated. | `assignUserWorkspaceRole` | `email`, `role`, `workspaceId` |
 | A user is removed from a workspace. | `deleteUserWorkspaceRole` | `userId`, `workspaceId` |
