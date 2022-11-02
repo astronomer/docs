@@ -588,7 +588,6 @@ To allow Astro to authenticate with external services, it is sometimes necessary
 1. In your Astro project `Dockerfile`, add the following entry below the existing `FROM` statement which specifies your Astro Runtime image version:
 
     ```docker
-    
     COPY gaw.crt /usr/local/share/ca-certificates/gaw/
     RUN update-ca-certificates
     USER astro
