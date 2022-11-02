@@ -57,11 +57,11 @@ The alert email assigned to a Deployment is used to notify recipients of Deploym
 
 ## Transfer a Deployment to another Workspace 
 
-You can transfer a Deployment from one Workspace to another as long as the Workspaces are in the same Organization and Astro cluster. You might do this if your organization wants to change which group of users has access to the Deployment.
+To transfer a Deployment from one Workspace to another, the Workspaces must be in the same Organization and Astro cluster. Transferring a Workspace can be helpful when your organization needs to change user access to a Deployment.
 
-Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not be affected or interrupted and tasks will continue to be scheduled.
+Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not affected or interrupted and tasks will continue to be scheduled.
 
-Only users belonging to the target Workspace can access the Deployment once it is transferred. To transfer a Deployment, you must be a Workspace Admin in the original Workspace and a Workspace Admin or Editor in the target Workspace.
+Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin in the original Workspace and a Workspace Admin or Editor in the target Workspace.
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to transfer, and select **Transfer Deployment**. 

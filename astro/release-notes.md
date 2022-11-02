@@ -27,23 +27,22 @@ Astronomer is excited to introduce the Astro Cloud IDE, which is a notebook-insp
 
 ![Example page in the Astro Cloud IDE](/img/release-notes/ide-overview.png)
 
-The Astro Cloud IDE was built with a few principles in mind:
+The Astro Cloud IDE was created with the following objectives:
 
 - Configuring Airflow shouldn't be a barrier to running Airflow
-- Passing data between tasks should be seamless regardless of what language a task is written in
-- Data pipelines should be quickly deployable and testable using CI/CD
+- Passing data between tasks should be seamless regardless of what language is used to write the task.
+- Data pipelines should be quick to deploy and easy to test with CI/CD.
 
-Above all else, the Cloud IDE was developed to materially lower the barrier to entry for new Airflow users and improves the development experience of experienced users.
+Primarily, the Astro Cloud IDE was developed to make it easier for new Airflow users to get started and to provide experienced users with a robust development environment.
 
-To create your first project in the Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
+To create your first project in the Astro Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
 
 :::info
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in _Public Preview_. This means that it is available to all Astro customers, but is still undergoing heavy development and features are subject to change. Creating projects in the Cloud IDE does not impact running tasks on existing Deployments. 
+The Astro Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change. If you have feedback on the Cloud IDE you'd like to share, you can submit it on the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
-If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
 :::
 
