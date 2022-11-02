@@ -114,6 +114,7 @@ The following table maps some common `operationName` attributes to their corresp
 | Event | `operationName` attribute                                          | `requestInput` attributes                   |
 | ------- | ---------------------------------------------------- | --------------------------------- |
 | A new user is invited to an organization.   | `createUserInvite` | `inviteeEmail`, `role` |
+| A user has accepted their invite to an organization. | `updateUserInvite` |
 | A user is deleted from an organization.  | `deleteUserInvite` | `inviteId` |
 | A user is assigned a new role.  | `assignUserOrganizationRole` | `role`, `userId` |
 | A user is removed from an organization.  | `deleteOrganizationUser` | `organizationId`, `userId` |
