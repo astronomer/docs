@@ -16,6 +16,8 @@ If you have any feedback, please submit it to the [Astro Cloud IDE product porta
 
 The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. All infrastructure is managed by Astronomer. Infrastructure is tightly scoped to organizations, so your code and data is never exposed to other organizations.
 
+Astronomer's role-based access control (RBAC) system ensures that only users with the correct permissions can perform certain actions in the Astro Cloud IDE. See [User permissions](user-permissions.md)
+
 ## Data governance
 
 The Cloud IDE stores Python cell outputs in an encrypted S3 bucket. SQL cell outputs are stored in the corresponding connection database under the schema you configure.
