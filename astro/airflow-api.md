@@ -50,11 +50,11 @@ If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generatin
 
 ### Retrieve the Deployment URL
 
+The Deployment URL includes the name of your Organization and a short Deployment ID. For example, a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany` would have a Deployment URL of `https://mycompany.astronomer.run/dhbhijp0`.
+
 1. In the Cloud UI, select a Workspace and then a Deployment.
 2. Click **Open Airflow**.
 3. When the Airflow UI opens in your browser, copy the URL up to `/home`.
-
-The Deployment URL includes the name of your Organization and a short Deployment ID. For example, a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany` would have a Deployment URL of `https://mycompany.astronomer.run/dhbhijp0`.
 
 ## Step 2: Make an Airflow API request
 
