@@ -49,7 +49,7 @@ If you have any feedback, please submit it to the [Astro Cloud IDE product porta
 
 ### Write to temporary storage on AWS clusters
 
-AWS clusters that use `m5d` and `m6id` worker types can now run tasks which require writing data to local storage. These worker types now have NVMe SSD volume mounts that can be used for simple operations, such as a disk-based merge sort or checkpointing to prevent crashes. To use these worker types on your cluster, see [Modify a cluster](modify-cluster.md) and [Configure worker queues](configure-worker-queues.md).
+AWS clusters that use `m5d` and `m6id` worker types can now run tasks which require writing data to local storage. These worker types now have NVMe SSD volume mounts with 20 GB of storage. You can use this storage for simple operations such as a disk-based merge sort or checkpointing to prevent crashes. To use these worker types on your cluster, see [Modify a cluster](modify-cluster.md) and [Configure worker queues](configure-worker-queues.md).
 
 ### New Deployment transfer functionality
 
@@ -64,6 +64,16 @@ You can now transfer a Deployment from one Workspace to another in your Organiza
 - Fixed an issue in the Cloud UI where you could select a worker type before selecting a cluster when creating a Deployment.
 - Fixed an issue where Deployments on Runtime 5.0.10 and earlier showed a nonfunctional **Configuration** tab in the Airflow UI.
 - Fixed [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-32149).
+
+## October 25, 2022 
+
+### Additional improvements 
+
+- In the Cloud UI, you can now view a cluster's external IP addresses in the **Clusters** tab.
+
+### Bug fixes 
+
+- Fixed an issue where some Deployments were running tasks after being deleted. 
 
 ## October 18, 2022 
 

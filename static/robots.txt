@@ -7,5 +7,6 @@ Disallow: /software/
 Disallow: /software_versioned_sidebars/
 Disallow: /README.md
 Disallow: /docusaurus.config.js
+Disallow: /astro/cli/sql-cli.md
 
 Sitemap: https://docs.astronomer.io/sitemap.xml
