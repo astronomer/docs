@@ -14,6 +14,14 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.6.1
+
+Release date: November 3, 2022 
+
+### Bug fixes 
+
+- Fixed an issue where authenticating to Astronomer Software with `interactive=true` in your CLI configuration would result in a 502 error.
+
 ## Astro CLI 1.6.0 
 
 Release date: September 28, 2022 
