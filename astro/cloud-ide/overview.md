@@ -66,6 +66,6 @@ In the following image, you can see how you can use the Astro Cloud IDE to write
 
 <LinkCardGrid>
   <LinkCard truncate label="Quickstart" description="Create data pipelines with the Cloud IDE." href="/astro/cloud-ide/quickstart" />
-  <LinkCard truncate label="Deploy a project" description="Push your changes from the Astro Cloud IDE directly to GitHub or a Deployment" href="/astro/cloud-ide/deploy-project" />
+  <LinkCard truncate label="Deploy a project" description="Push your changes from the Astro Cloud IDE directly to GitHub or a Deployment." href="/astro/cloud-ide/deploy-project" />
   <LinkCard truncate label="Security" description="Learn how the Astro Cloud IDE keeps your code and production Deployments secure." href="/astro/cloud-ide/security" />
 </LinkCardGrid>
