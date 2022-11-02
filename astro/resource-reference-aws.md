@@ -167,7 +167,7 @@ The following table lists all available instance types for worker node pools, as
 
 :::caution
 
-Because `t` series instance types can have their CPU throttled, we do not recommend using `t` series instance types for production workloads unless the instances are configured to leverage [unlimited mode](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode.html), which can incur additional costs.
+Astronomer doesn’t recommend using `t` series instance types in standard mode for production workloads, because CPU utilization for `t` instance types in standard mode can be throttled.
 
 :::
 
