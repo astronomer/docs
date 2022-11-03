@@ -101,7 +101,7 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 
 ### Backported Airflow bug fixes
 
-Astro Runtime 5.10.11 includes the following bug fixes from later Apache Airflow releases:
+Astro Runtime 5.10.11 includes the following bug fix from later Apache Airflow releases:
 
 - Fix warning when using xcomarg dependencies ([#26801](https://github.com/apache/airflow/pull/26801))
 
