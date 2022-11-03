@@ -174,9 +174,9 @@ Note that when adding traditional operators, dependencies are still defined usin
 
 The [Astro Python SDK](https://github.com/astronomer/astro-sdk) provides decorators and modules that allow data engineers to think in terms of data transformations rather than Airflow concepts when writing DAGs. The goal is to allow DAG writers to focus on defining *execution* logic without having to worry about orchestration logic.
 
-The library contains SQL and dataframe decorators that greatly simplify your DAG code and allow you to directly define tasks without boilerplate operator code. It also allows you to transition seamlessly between SQL and Python for transformations without having to explicitly pass data between tasks or convert the results of queries to dataframes and vice versa. For a full description of functionality, check out the [repo Readme](https://github.com/astronomer/astro-sdk).
+The library contains SQL and dataframe decorators that greatly simplify your DAG code and allow you to directly define tasks without boilerplate operator code. It also allows you to transition seamlessly between SQL and Python for transformations without having to explicitly pass data between tasks or convert the results of queries to dataframes and vice versa. For a full description of functionality, check out the [Astro Python SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/).
 
-To use the Astro Python SDK, you need to install the `astro-sdk-python` package in your Airflow environment and enable pickling (`AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`). 
+To use the Astro Python SDK, you need to install the `astro-sdk-python` package in your Airflow environment and enable pickling (`AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True`). For more instructions, check out the [Use the Astro Python SDK tutorial](https://docs.astronomer.io/learn/astro-python-sdk).
 
 To show the Astro Python SDK in action, we'll use a simple ETL example. We have homes data in two different CSVs that we need to aggregate, clean, transform, and append to a reporting table. Some of these tasks are better suited to SQL, and some to Python, but we can easily combine both using `astro-sdk-python` functions. The DAG looks like this:
 
@@ -311,11 +311,14 @@ By defining your task dependencies when calling the functions (for example, `cle
 
 There are a limited number of decorators available to use with Airflow, although more will be added in the future. This list provides a reference of what is currently available so you don't have to dig through source code:
 
-- Astro Python SDK [SQL and dataframe decorators](https://github.com/astronomer/astro-sdk)
+- [Astro Python SDK decorators](https://github.com/astronomer/astro-sdk)
 - DAG decorator (`@dag()`)
 - Task decorator (`@task()`), which creates a Python task
 - Python Virtual Env decorator (`@task.virtualenv()`), which runs your Python task in a virtual environment
 - Docker decorator (`@task.docker()`), which creates a `DockerOperator` task
-- TaskGroup decorator (`@task_group()`)
+- TaskGroup decorator (`@task_group()`), which creates a TaskGroup
+- Short circuit decorator (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False
+- Branch decorator (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition
+- Kubernetes pod decorator (`@task.kubernetes()`), which runs a KubernetesPodOperator task
 
 As of Airflow 2.2, you can also [create your own custom task decorator](https://airflow.apache.org/docs/apache-airflow/stable/howto/create-custom-decorator.html).
