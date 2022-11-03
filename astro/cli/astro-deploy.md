@@ -51,7 +51,7 @@ astro deploy <options>
 
 | Option                    | Description                                                                                                                                           | Possible Values                                                  |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `<deployment-id>`         | Specify the Deployment to deploy to, bypass Deployment selection prompt                                                                               | Any valid Deployment ID                                          |
+| `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt                                                                               | Any valid Deployment ID                                          |
 | `--dags`                  | Deploy only your `dags` directory. See [DAG-only deploys](deploy-code.md#dag-only-deploys)                                                         | None                                                             |
 | `-e`,`--env`              | Location of the file containing environment variables for pytests. By default, this is `.env`.                                                        | Any valid filepath to an `.env` file                             |
 | `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                                                                              | None                                                             |
@@ -96,7 +96,7 @@ When you run `astro deploy`, you'll be prompted to select from a list of all Dep
 
 | Option                    | Description                                                                        | Possible Values         |
 | ------------------------- | ---------------------------------------------------------------------------------- | ----------------------- |
-| `<deployment-id>`         | Specify the Deployment to deploy to and bypass the Deployment selection prompt     | Any valid Deployment ID |
+| `<deployment-id>`         |  Specifies the Deployment to deploy to and bypasses the Deployment selection prompt     | Any valid Deployment ID |
 | `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes           | None                    |
 | `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified         | None                    |
 | `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys   | None                    |
