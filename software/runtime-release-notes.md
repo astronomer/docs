@@ -76,7 +76,7 @@ Astro Runtime 5.10.11 includes the following bug fix from later Apache Airflow r
 
 ### Bug fixes
 
-- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set the Astro data plane. This enables Astronomer Software users to set the value for custom remote logging storage solutions. 
+- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set the Astro data plane. This enables Astronomer Software users to set a value for custom remote logging storage solutions. 
 
 ## Astro Runtime 5.0.10
 
