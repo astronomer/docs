@@ -305,7 +305,7 @@ Pipelines in the Cloud IDE offer you the possibility of running ad-hoc analysis 
 
 2. Click **Download** in order to download the DAG file if you want to manually add it to a project.
 
-## Step 10: Connect your GitHub to the Cloud IDE
+## Step 11: Connect your GitHub to the Cloud IDE
 
 Now that you have trained the model, you can connect GitHub to the Cloud IDE to commit your pipeline as a DAG to any Airflow project.
 
@@ -317,7 +317,7 @@ Now that you have trained the model, you can connect GitHub to the Cloud IDE to 
 
 3. Click update to save your connection details.
 
-## Step 11: Commit your DAG to GitHub
+## Step 12: Commit your DAG to GitHub
 
 Export your DAG by commiting it to your connected GitHub repository. 
 
@@ -341,7 +341,7 @@ If file with the same name as your Cloud IDE pipeline already exists (i.e. if yo
 
 :::
 
-## Step 12: Deploy your DAG to Astro 
+## Step 13: Deploy your DAG to Astro 
 
 When you commit a Cloud IDE pipeline to a GitHub repository, the Cloud IDE will create a GitHub workflow of the name `astro_deploy.yaml` in case it does not exist yet.
 
@@ -367,7 +367,7 @@ To be able to deploy your DAG the Runtime Image used in the Airflow project of y
 
 :::
 
-## Step 13: Run your DAG on Astro
+## Step 14: Run your DAG on Astro
 
 1. Back on Astro, click on the Astronomer logo to exit the pipeline editor.
 
