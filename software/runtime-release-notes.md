@@ -63,6 +63,36 @@ These changes were backported from Apache Airflow 2.4.2, which is not yet genera
 - Backported a fix to correct an issue where logs were not loading from Celery workers ([#26493](https://github.com/apache/airflow/pull/26493))
 - Fixed [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
 
+## Astro Runtime 5.10.11
+
+- Release date: November 2, 2022
+- Airflow version: 2.3.4 
+
+### Backported Airflow bug fixes
+
+Astro Runtime 5.10.11 includes the following bug fixes from later Apache Airflow releases:
+
+- Fix warning when using xcomarg dependencies ([#26801](https://github.com/apache/airflow/pull/26801))
+
+### Bug fixes
+
+- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set the Astro data plane. This enables Astronomer Software users to set the value for custom remote logging storage solutions. 
+
+## Astro Runtime 5.0.10
+
+- Release date: October 17, 2022
+- Airflow version: 2.3.4
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.10.0, which includes two new deferrable versions of operators, `SFTPSensorAsync` and `ExternalDeploymentTaskSensorAsync`. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.10.0/CHANGELOG.rst).
+- Upgraded `openlineage-airflow` to version `0.15.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+
+### Bug fixes
+
+- Revert “Cache the custom secrets backend so the same instance gets re-used” ([#25556](https://github.com/apache/airflow/pull/25556))
+- Fixed faulty Kubernetes executor config serialization logic
+
 ## Astro Runtime 5.0.9
 
 - Release date: September 20, 2022
