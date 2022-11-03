@@ -37,7 +37,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 To complete this tutorial, you need:
 
 - An Astro account. If you are not an Astronomer customer yet and want to learn more about Astro you can [join the weekly demo](https://www.astronomer.io/events/weekly-demo/) or [contact us directly](https://www.astronomer.io/get-started/?referral=docs-nav-button).
-- An account in one of the following database services: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database.
+- An account in one of the following database services, which are currently supported in the Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database.
 - A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) as well as a Personal Access Token for your GitHub account. If you do not have a GitHub account, you can create one for free on the [GitHub website](https://github.com/signup). To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ## Step 1: Create your Cloud IDE project
@@ -99,10 +99,17 @@ Navigate to the **Requirements** tab in the pipeline editor "Environment" sectio
 
 ## Step 5: Import a dataset into your database
 
-Now that you have your Cloud IDE project set up, you can move on to creating an ML pipeline. For this tutorial you will try to predict the intelligence of a dog breed based on their upper and lower height and weight limits. Download the [ dog_intelligence.csv ] PLACEHOLDER LINK dataset which is a slightly changed version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size) and import it into your database. 
+Now that you have your Cloud IDE project set up, you can move on to creating an ML pipeline. For this tutorial you will try to predict the intelligence of a dog breed based on their upper and lower height and weight limits. 
 
+:::info
 
-1. Run the following SQL statement in a Snowflake worksheet to create the target table:
+The dataset we use in this tutorial is a slightly changed version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size). 
+
+:::
+
+1. Download the [ dog_intelligence.csv ] PLACEHOLDER LINK dataset.
+
+2. Run the following SQL statement in a Snowflake worksheet to create the target table:
 
 ```sql 
 CREATE TABLE dog_intelligence (
@@ -116,7 +123,7 @@ CREATE TABLE dog_intelligence (
 );
 ```
 
-2. Run this SQL statement to create the file format `my_csv_format`:
+3. Run this SQL statement to create the file format `my_csv_format`:
 
 ```sql
 CREATE FILE FORMAT my_csv_format
@@ -127,9 +134,15 @@ CREATE FILE FORMAT my_csv_format
     EMPTY_FIELD_AS_NULL = true;
 ```
 
-3. Use the ["Loading Using the Web Interface" wizard](https://docs.snowflake.com/en/user-guide/data-load-web-ui.html) by navigating to the `dog_intelligence` table in the **Databases** tab of the Snowflake UI and clicking on **Load Table**. Select the `dog_intelligence.csv` file you downloaded as the "Source File" and `my_csv_format` as the "File Format".
+4. Use the ["Loading Using the Web Interface" wizard](https://docs.snowflake.com/en/user-guide/data-load-web-ui.html) by navigating to the `dog_intelligence` table in the **Databases** tab of the Snowflake UI and clicking on **Load Table**. Select the `dog_intelligence.csv` file you downloaded as the "Source File" and `my_csv_format` as the "File Format".
 
 ![Load csv Snowflake](/img/guides/cloud_ide_load_csv.png)
+
+:::info
+
+The steps above are specific to using Snowflake. If you are using a different database please refer to their documentation to upload the data from the CSV file provided into a table.
+
+:::
 
 ## Step 6: Query your table
 
