@@ -369,3 +369,16 @@ To be able to deploy your DAG the Runtime Image used in the Airflow project of y
 5. Back in the DAGs view run your DAG by clicking the play button.
 
 ![Run DAG on Astro](/img/guides/cloud_ide_dag_ran_in_UI.png)
+
+## Conclusion
+
+You now know how to use the Cloud IDE to write a simple ML pipeline! More specifically, you can now:
+
+- Create a new Cloud IDE project and pipeline. 
+- Use a SQL cells to query and transform tables in a database.
+- Pass information between SQL and Python cells
+- Run a simple RandomForestClassifier on a dataset.
+- Commit your pipeline to GitHub.
+- Use GitHub Actions to deploy your new DAG to Astro.
+
+As a next step, read the [Cloud IDE documentation](https://docs.astronomer.io/astro/cloud-ide) to learn more about this next generation DAG writing environment.
