@@ -1,10 +1,13 @@
 ---
 title: "Scaling Airflow to optimize performance"
 sidebar_label: "Scaling Airflow"
-description: "How to scale your Airflow environment."
 id: airflow-scaling-workers
-tags: [Workers, Concurrency, Parallelism, DAGs]
 ---
+
+<head>
+  <meta name="description" content="See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings." />
+  <meta name="og:description" content="See which parameters to modify when scaling up data pipelines to make the most of Airflow. Learn about the environment, DAG, and task-level settings." />
+</head>
 
 One of the biggest strengths of Apache Airflow is its ability to scale to meet the changing demands of your organization. To make the most of Airflow, there are a few key settings that you should consider modifying as you scale up your data pipelines.
 
@@ -71,7 +74,7 @@ Scheduler settings control how the scheduler parses DAG files and creates DAG ru
 
 - `scheduler_heartbeat_sec`: Defines how often the scheduler should run (in seconds) to trigger new tasks. The default value is 5 seconds. 
 
-- `max_dagruns_to_create_per_loop`: The maximum number of DAGs to create DAG runs for per scheduler loop. Decrease the value to free resources for scheduling tasks. The default value is 10 seconds. 
+- `max_dagruns_to_create_per_loop`: The maximum number of DAGs to create DAG runs for per scheduler loop. Decrease the value to free resources for scheduling tasks. The default value is 10. 
 
 - `max_tis_per_query`: Changes the batch size of queries to the metastore in the main scheduling loop. A higher value allows more `tis` to be processed per query, but your query may become too complex and cause performance issues. The default value is 512 queries. 
 

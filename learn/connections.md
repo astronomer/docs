@@ -1,9 +1,13 @@
 ---
 title: "Manage connections in Apache Airflow"
 sidebar_label: "Connections"
-description: "An overview of how connections work in the Airflow UI."
 id: connections
 ---
+
+<head>
+  <meta name="description" content="Learn how to set up, manage, and maintain different types of connections in Apache Airflow. Use example connection configurations as the basis for your own connections." />
+  <meta name="og:description" content="Learn how to set up, manage, and maintain different types of connections in Apache Airflow. Use example connection configurations as the basis for your own connections." />
+</head>
 
 Connections in Airflow are sets of configurations used to connect with other tools in the data ecosystem. Because most hooks and operators rely on connections to send and retrieve data from external systems, understanding how to create and configure them is essential for running Airflow in a production environment.
 
