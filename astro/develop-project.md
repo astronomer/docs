@@ -595,8 +595,4 @@ If you need your Astro deployment to communicate securely with a remote service 
     ```
 2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
 
-3. Save your changes and run the following command to rebuild your project:
-
-    ```sh
-    astro dev restart
-    ```
+3. Save your changes and test them locally, or deploy them to a test Deployment.
