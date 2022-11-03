@@ -28,20 +28,7 @@ module.exports = {
       label: "Develop",
       items: [
         "develop-project",
-        {
-          type: "category",
-          label: "Write DAGs",
-          items: [
-<<<<<<< HEAD
-            'kubernetespodoperator',
-=======
-            "astro-python-sdk",
-            "deferrable-operators",
-            "kubepodoperator-local",
-            "kubernetespodoperator",
->>>>>>> e2386da603e5f441d2330a5972ed1fe8c2851617
-          ],
-        },
+        "kubernetespodoperator",
         {
           type: "category",
           label: "Cloud IDE",
