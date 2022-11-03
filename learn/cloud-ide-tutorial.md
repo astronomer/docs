@@ -7,7 +7,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 
 Developing your pipelines has never been easier than using the Cloud IDE on Astro.
 
-This tutorial is Astro customers who want to create their first simple ML pipeline in the Cloud IDE.
+This tutorial is Astro customers who want to create their first simple ML pipeline in the Cloud IDE. To explore Cloud IDE functionality, you will create a pipeline that runs a random forest model to predict dog breed intelligence and then schedule that pipeline on an Airflow deployment on Astro.
 
 After you complete this tutorial, you'll be able to:
 
@@ -53,7 +53,7 @@ If you do not have a GitHub account, you can create one for free on the [GitHub 
 
 ## Step 1: Create your Cloud IDE project
 
-In your Astro Cloud workspace click on the **Cloud IDE** tab in the navigation bar on the left. 
+Log in to your Astro Cloud workspace and click on the **Cloud IDE** tab in the navigation bar on the left. 
 
 1. Create a new Cloud IDE project with the **+ Project** button in the right upper corner of the screen.
 2. Give your Cloud IDE project a catchy name and a description.
@@ -72,7 +72,7 @@ Give your pipeline a name and description and click **Create**. The pipeline edi
 
 :::info
 
-The name you give your pipeline will be the name of the DAG which the Cloud IDE will create from your input. Hence names of pipelines within a project must be unique and can't contain special characters.
+The name you give your pipeline will be the name of the DAG which the Cloud IDE will create from your input. Names of pipelines within a project must be unique and can't contain special characters.
 
 :::
 
@@ -84,7 +84,7 @@ You can add a connection to your database from within the pipeline editor.
 
 ![Configure a connection](/img/guides/cloud_ide_environment_button.png)
 
-2. Click on **+ Connection** to add a new connection. We will use Snowflake in this tutorial but you can also use Postgres, Bigquery or Redshift. 
+2. Click on **+ Connection** to add a new connection. We use Snowflake in this tutorial, but you can also use Postgres, Bigquery, or Redshift. 
 
 In the UI provide your connection credentials as shown in the screenshots below.
 
@@ -104,15 +104,14 @@ You can also add connections, variables and requirements to your Cloud IDE proje
 
 ## Step 4: Add required Python packages
 
-Navigate to the **Requirements** tab in the pipeline editor "Environment" section. Under this tab you can add any Python packages that you are planning to use in Cloud IDE Python cells within this Cloud IDE project. To create our simple ML model we will need the `scikit-learn` package. Add this package by clicking on **+ Requirement** and typing `scikit-learn` into the "package name" field. Select the latest version and click **Add**.
+Navigate to the **Requirements** tab in the pipeline editor "Environment" section. Under this tab you can add any Python packages that you are planning to use in Cloud IDE Python cells within this Cloud IDE project. To create the simple ML model shown in this tutorial, you will need the `scikit-learn` package. Click on **+ Requirement** and type `scikit-learn` into the "package name" field. Select the latest version at the top of the list and click **Add**.
 
 ![Add scikit-learn](/img/guides/cloud_ide_add_requirement.png)
 
 ## Step 5: Import a dataset into your database
 
-In this tutorial we will try to predict the intelligence of a dog breed based on their upper and lower height and weight limits. Download the [ dog_intelligence.csv ] PLACEHOLDER LINK dataset which is a slightly changed version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size) and import it into your database. 
+Now that you have your Cloud IDE project set up, you can move on to creating an ML pipeline. For this tutorial you will try to predict the intelligence of a dog breed based on their upper and lower height and weight limits. Download the [ dog_intelligence.csv ] PLACEHOLDER LINK dataset which is a slightly changed version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size) and import it into your database. 
 
-If you are using Snowflake follow these steps:
 
 1. Run the following SQL statement in a Snowflake worksheet to create the target table:
 
@@ -155,7 +154,7 @@ Navigate back to your Cloud IDE on Astro.
 
 ![Pipeline View](/img/guides/cloud_ide_pipeline_view.png)
 
-4. Paste the following SQL code into your cell to select all records that do not contain any NULL values in any column. Make sure to add your database and schema name to in the code.
+4. Paste the following SQL code into your cell. This query will select all records that do not contain any NULL values in any column. Make sure to update the query with your database and schema name.
 
 ```sql 
 SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
@@ -170,15 +169,15 @@ WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
 6. Run the cell by either clicking on the play button next to the connection field or by hitting Command + Enter.
 
 Running the cell will create a temporary table in your database containing the output from your query.
-With the **Table Expression** box activated you should now see the output containing of 136 rows below the cell.
+With the **Table Expression** box activated you should now see the output containing 136 rows below the cell.
 
 ![Table output](/img/guides/cloud_ide_query_table.png)
 
-Our dataset contains information about the height, weight and how fast dogs of different breeds learned commands in 7 columns. `reps_lower` and `reps_higher` contain the lower and upper bounds of how many repetitions of a new command a dog of a breed needed to learn it. We will use this value to sort our dogs in two categories which will be the target of our classification model. The predictors will be the four columns containing height and weight information.
+The dataset has 7 columns containing information about the height, weight, breed, and learning speed of different dogs. The `reps_lower` and `reps_higher` columns contain the lower and upper bounds of how many repetitions of a new command each breed of dog needed to learn it. This value is used to sort the dogs into two categories which will be the target of your classification model. The predictors will be the four columns containing height and weight information.
 
 ## Step 7: Transform your table
 
-Transform the data in your table to convert the dog intelligence data from repetitions needed to learn commands to a binary intelligence category.
+Before you can train the model, you first need to transform the data in your table to convert the command repetitions to a binary intelligence category.
 
 1. Create a second SQL cell.
 
@@ -202,7 +201,7 @@ You will notice that pasting this SQL statement will automatically create a depe
 
 5. Run the cell.
 
-In the output table you can see that this SQL statement created a new transformed temporary table with a binary `INTELLIGENCE_CATEGORY` column which will be used as a target for your classification model. All dogs who needed 25 or fewer repetitions to learn a new command are put in the `very_smart_dog` category. All other dogs are put in the `smart_dog` category (because of course, all dogs are smart).
+The output table should contain a new binary `INTELLIGENCE_CATEGORY` column which will be used as a target for your classification model. All dogs who needed 25 or fewer repetitions to learn a new command are put in the `very_smart_dog` category. All other dogs are put in the `smart_dog` category (because of course, all dogs are smart).
 
 ## Step 8: Train a model on your data
 
@@ -254,7 +253,7 @@ return f"baseline accuracy: {baseline_accuracy}", f"model accuracy: {score}", fe
 
 You will notice again how the Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `tranform_table` cell directly (without Jinja syntax) on line 6. 
 
-The Python code:
+The Python code completes the following steps:
 
 - Imports necessary functions and classes from the scikit-learn package.
 - Calculates the baseline accuracy, which is the accuracy you would get if you always guessed the most common outcome (in our data `smart_dog`).
