@@ -15,7 +15,7 @@ Release date: November 3, 2022
 
 ### Bug fixes 
 
-- Fixed an issue where authenticating to Astronomer Software with `interactive=true` in your CLI configuration would result in a 502 error.
+- Fixed an issue where authenticating to Astronomer Software with `interactive=true` in your CLI configuration resulted in a 502 error.
 
 ## Astro CLI 1.6.0 
 
