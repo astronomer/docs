@@ -151,7 +151,6 @@ module.exports = {
           ],
         },
         'platform-variables',
-        'data-plane-activation',
         'data-lineage-support-and-compatibility',
         {
           type: "category",
