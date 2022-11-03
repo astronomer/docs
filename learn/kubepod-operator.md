@@ -156,6 +156,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.configuration import conf
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
@@ -165,6 +166,7 @@ default_args = {
     'retries': 1,
     'retry_delay': timedelta(minutes=5),
 }
+
 namespace = conf.get('kubernetes', 'NAMESPACE')
 # This will detect the default namespace locally and read the
 # environment namespace when deployed to Astronomer.
@@ -174,8 +176,12 @@ if namespace =='default':
 else:
     in_cluster = True
     config_file = None
-dag = DAG('example_kubernetes_pod', schedule_interval='@once', default_args=default_args)
-with dag:
+
+with DAG(
+    dag_id='example_kubernetes_pod', 
+    schedule_interval='@once', 
+    default_args=default_args
+) as dag:
     KubernetesPodOperator(
         namespace=namespace,
         image="hello-world",
