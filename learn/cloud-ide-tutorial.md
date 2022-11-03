@@ -338,7 +338,9 @@ When you commit a Cloud IDE pipeline to a GitHub repository, the Cloud IDE will 
 - DEV_ASTRONOMER_KEY_SECRET = `<your-dev-key-secret>`
 - DEV_ASTRONOMER_DEPLOYMENT_ID = `<your-deployment-id>`
 
-2. Send a second commit from the Cloud IDE to trigger the configured GitHub workflow to deploy your DAG to Astro
+![GitHub Secrets](/img/guides/cloud_ide_github_secrets.png)
+
+2. Add the `scikit-learn` to `requirements.txt` and commit the change. This second commit will trigger GitHub Actions again, using the GitHub secrets you configured.
 
 If GitHub Actions is already configured for your chosen repository the new DAG will be deployed automatically with the first commit.
 
@@ -346,6 +348,24 @@ If GitHub Actions is already configured for your chosen repository the new DAG w
 
 Learn more on how to set up CI/CD with GitHub Actions in the [Astro Module: CI/CD](https://academy.astronomer.io/astro-module-cicd).
 
+:::caution
+
+To be able to deploy your DAG the Runtime Image used in the Airflow project of your GitHub repo needs to be compatible with the Runtime Image used in your Astro cloud deployment. You might need to change the version number in the Dockerfile of the Airflow project in your GitHub repository.
+
 :::
 
-PLACEHOLDER - image of the DAG shown on Astro (once I get a cluster)
+## Step 13: Run your DAG on Astro
+
+1. Back on Astro, click on the Astronomer logo to exit the pipeline editor.
+
+2. Open the Airflow UI of your deployment (**Deployments** -> Your deployment -> **Open Airflow**).
+
+3. Make sure that your Airflow deployment has a connection with the same Connection ID and credentials configured as your Cloud IDE project.
+
+4. Since temporary tables are not JSON serializeable you will need to set XCom pickling to True. To do so click on **Admin** -> **Variables** in your Airflow UI and add a new variable with the **+** button. Provide the key `AIRFLOW__CORE__ENABLE_XCOM_PICKLING` and the value `True`. Click **Save**.
+
+![Add Variable in Airflow UI](/img/guides/cloud_ide_add_variable.png)
+
+5. Back in the DAGs view run your DAG by clicking the play button.
+
+![Run DAG on Astro](/img/guides/cloud_ide_dag_ran_in_UI.png)
