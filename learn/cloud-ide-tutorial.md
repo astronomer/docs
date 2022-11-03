@@ -1,5 +1,5 @@
 ---
-title: 'Write a simple ML pipeline using the Cloud IDE'
+title: 'Write and schedule a simple ML pipeline using the Cloud IDE'
 sidebar_label: 'Cloud IDE - Simple ML pipeline'
 id: cloud-ide-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
@@ -29,27 +29,16 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
-- Basic SQL. See the [W3 Schools SQL tutorial](https://www.w3schools.com/sql/)
-
-:::info
-
-You can find detailled information on the features described in this tutorial in the [documentation of the Cloud IDE](https://docs.astronomer.io/astro/cloud-ide).
-
-:::
+- Basic SQL. See the [W3 Schools SQL tutorial](https://www.w3schools.com/sql/).
+- The Cloud IDE. See [Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide).
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
 - An Astro account. If you are not an Astronomer customer yet and want to learn more about Astro you can [join the weekly demo](https://www.astronomer.io/events/weekly-demo/) or [contact us directly](https://www.astronomer.io/get-started/?referral=docs-nav-button).
-- An account in one of the following database services: GCP BigQuery, Postgres, Snowflake or AWS Redshift. Additionally you will need your login credentials to create the connection to your database.
-- A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) as well as a Personal Access Token for your GitHub account.
-
-:::info
-
-If you do not have a GitHub account, you can create one for free on the [GitHub website](https://github.com/signup). To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
-
-:::
+- An account in one of the following database services: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database.
+- A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) as well as a Personal Access Token for your GitHub account. If you do not have a GitHub account, you can create one for free on the [GitHub website](https://github.com/signup). To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ## Step 1: Create your Cloud IDE project
 
@@ -86,11 +75,11 @@ You can add a connection to your database from within the pipeline editor.
 
 2. Click on **+ Connection** to add a new connection. We use Snowflake in this tutorial, but you can also use Postgres, Bigquery, or Redshift. 
 
-In the UI provide your connection credentials as shown in the screenshots below.
+    In the UI provide your connection credentials as shown in the screenshots below.
 
-![Configure a connection](/img/guides/cloud_ide_add_connection.png)
+    ![Configure a connection](/img/guides/cloud_ide_add_connection.png)
 
-![Configure a connection 2](/img/guides/cloud_ide_add_connection_2.png)
+    ![Configure a connection 2](/img/guides/cloud_ide_add_connection_2.png)
 
 3. Use the **Test Connection button** to make sure Astro is able to connect to your database. If your credentials are correct, a green banner will appear above saying "Connection successfully tested". 
 
@@ -277,19 +266,31 @@ To learn more about random forests check out this [MLU explain article](https://
 
 :::
 
-## Step 9: Schedule your pipeline
+## Step 9: Pick a schedule for your pipeline
 
-Click on the calendar symbol ("Schedule") in the right sidebar to see possibilities to schedule your DAG. 
+Setting a schedule for your pipeline will determine how this pipeline will be scheduled once it is deployed to Astro as a DAG. Within the Cloud IDE a pipeline will only run if you start a run manually.
 
-1. Set the "START DATE" to the 31st of October 2022.
+1. Click on the calendar symbol ("Schedule") in the right sidebar to see possibilities to schedule your DAG. 
+
+2. Set the "START DATE" to yesterday's date.
 
 ![Schedule DAG](/img/guides/cloud_ide_schedule_dag.png)
 
-2. Edit the "CRON STRING" to schedule your DAG to run every weekday at 2:30am and 6:30pm.
+3. Edit the "CRON STRING" to schedule your DAG to run every weekday at 2:30am and 6:30pm.
 
 ![CRON menu](/img/guides/cloud_ide_cron_menu.png)
 
-3. Select your timezone and click **Update Settings** to save your schedule.
+4. Click **Update Settings** to save your schedule.
+
+## Step 10: View your DAG code
+
+Pipelines in the Cloud IDE offer you the possibility of running ad-hoc analysis and easy DAG development. Once you finish a pipeline and want to run it in a local Airflow instance or on Astro you will need to export your pipeline as DAG code.
+
+1. Click on the "Code" tab on the right sidebar. You can see your pipeline which was automatically converted to DAG code using the [Astro SDK](https://docs.astronomer.io/learn/astro-python-sdk-etl).
+
+![View Code](/img/guides/cloud_ide_code_view.png)
+
+2. Click **Download** in order to download the DAG file if you want to manually add it to a project.
 
 ## Step 10: Connect your GitHub to the Cloud IDE
 
