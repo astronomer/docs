@@ -43,7 +43,14 @@ The System Admin has the same default permissions as the System Viewer and Syste
 - `system.deployments.create`: Create a Deployment on any Workspace
 - `system.deployments.update`: Modify any Deployment
 - `system.deployments.delete`: Delete any Deployment
-- `system.deployments.logs`: View logging and metrics for any Deployment
+- `system.deployments.images.push`: Deploy code to any Deployment
+- `system.deployments.logs`: View logs for any Deployment
+- `system.deployments.metrics`: View metrics for any Deployment
+- `system.invites.get`: View pending user invites in all Workspaces
+- `system.serviceAccounts.create`: Create a service account at any level
+- `system.serviceAccounts.delete`: Delete any service account
+- `system.serviceAccounts.update`: Modify any service account
+- `system.teams.remove`: Delete any Team
 - `system.user.invite`: Invite a user
 - `system.user.delete`: Delete any user
 - `system.user.verifyEmail`: Bypass email verification for any user
@@ -70,6 +77,8 @@ The Workspace Viewer has the following default permissions for a given Workspace
 - `system.deployments.get`: View all settings and configuration pages of any Deployment
 - `workspace.serviceAccounts.get`: View any Deployment or Workspace-level [service account](ci-cd.md#step-1-create-a-service-account)
 - `workspace.users.get`: View information for all users with access to the Workspace
+- `workspace.teams.get`: View Teams belonging to the Workspace
+- `workspace.taskUsage.get`: View task usage in the Workspace
 
 ### Workspace Editor
 
@@ -88,6 +97,8 @@ For a given Workspace, the Workspace Editor has the same default permissions as 
 - `workspace.invites.get`: View pending user invites for the Workspace
 - `workspace.config.delete`: Delete the Workspace
 - `workspace.iam.update`: Update [IAM](integrate-iam.md) for the Workspace
+- `workspace.teams.getAll`: View all users in Teams belonging to the Workspace
+- `workspace.users.getAll`: View all users in the Workspace
 
 In addition, Workspace Admins have Deployment Editor permissions for all Deployments within the Workspace.
 
@@ -107,6 +118,8 @@ For a given Deployment, a Deployment Viewer has the following permissions:
 - `deployment.serviceAccounts.get`: View any [service account](ci-cd.md#step-1-create-a-service-account) for the Deployment
 - `deployment.variables.get`: View the Deployment's [environment variables](environment-variables.md)
 - `deployment.users.get`: View the list of users with access to the Deployment
+- `deployment.teams.get`: View all Teams belonging to the Deployment
+- `deployment.taskUsage.get`: View task usage information for the Deployment
 
 A Deployment Viewer can't push code to a Deployment or modify Deployment configurations. These actions can be completed only by a Deployment Editor or a Deployment Admin.
 
@@ -117,6 +130,7 @@ For a given Deployment, the Deployment Editor has the same default permissions a
 - `deployment.airflow.user`: Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for all Deployments, including modifying task runs and DAG runs
 - `deployment.config.update`: Modify the Deployment's settings
 - `deployment.images.push`: Push code to the Deployment using the Astro CLI
+- `deployment.images.pull`: Pull image from the Deployment using the Astro CLI
 - `deployment.serviceAccounts.create`: Create a Deployment-level service account
 - `deployment.serviceAccounts.update`: Modify a Deployment-level service account
 - `deployment.serviceAccounts.delete`: Delete a Deployment-level service account
@@ -139,3 +153,5 @@ For a given Deployment, the Deployment Admin has the same default permissions as
 
 - `deployment.config.delete`: Delete the Deployment
 - `deployment.userRoles.update`: Update Deployment-level permissions for users within the Deployment
+- `deployment.teamRoles.update`: Update Deployment-level permissions for Teams within the Deployment
+

@@ -85,7 +85,7 @@ You can customize all three Astronomer Software permission sets to meet your spe
 
 ### Assign users System Admin roles
 
-System Admins can be added to Astronomer Software using the **System Admin** tab of the Software UI.
+Use the **System Admin** tab in the Software UI to add System Admins.
 
 Keep in mind that:
 
@@ -104,12 +104,13 @@ To verify a user was successfully granted the SysAdmin role, ensure they can do 
 
 ## User roles on Astronomer
 
-Administrators can customize permissions across teams. On Astronomer Software, users can be assigned roles at two levels:
+Administrators can customize permissions across teams. On Astronomer Software, users can be assigned roles at three levels:
 
+- Deployment Level (Viewer, Editor, Admin)
 - Workspace Level (Viewer, Editor, Admin)
 - System Level (Viewer, Editor, Admin)
 
-Workspace roles apply to all Airflow Deployments within a single Workspace. System Roles apply to *all* Workspaces across a single cluster. For more information about the three Workspace-level roles on Astronomer Software (Viewer, Editor and Admin), see [Manage user permissions on an Astronomer Workspace](workspace-permissions.md).
+Deployment roles apply to a Deployment within a single Workspace. Workspace roles apply to all Airflow Deployments within a single Workspace. System Roles apply to *all* Workspaces across a single cluster. For more information about the three Workspace-level roles on Astronomer Software (Viewer, Editor and Admin), see [Manage user permissions on an Astronomer Workspace](workspace-permissions.md).
 
 ## Customize role permissions
 
