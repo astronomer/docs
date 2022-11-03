@@ -5,6 +5,11 @@ description: "How to write your first DAG in Apache Airflow"
 id: dags
 ---
 
+<head>
+  <meta name="description" content="Learn how to write DAGs and get tips on how to define an Airflow DAG in Python. Learn all about DAG parameters and their settings." />
+  <meta name="og:description" content="Learn how to write DAGs and get tips on how to define an Airflow DAG in Python. Learn all about DAG parameters and their settings." />
+</head>
+
 In Airflow, data pipelines are defined in Python code as directed acyclic graphs, also known as DAGs. Within a graph, each node represents a task which completes a unit of work, and each edge represents a dependency between tasks.
 
 In this tutorial, you'll learn DAG basics and about DAG parameters and how to define a DAG in Python.

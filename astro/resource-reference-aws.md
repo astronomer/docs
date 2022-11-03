@@ -2,9 +2,13 @@
 sidebar_label: "AWS"
 title: "AWS cluster configurations"
 id: resource-reference-aws
-description: Reference of all supported configurations for new clusters on Astro in AWS.
 sidebar_custom_props: { icon: "img/aws.png" }
 ---
+
+<head>
+  <meta name="description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
+  <meta name="og:description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
+</head>
 
 Unless otherwise specified, new clusters on Astro are created with a set of default AWS resources that should be suitable for most use cases.
 
@@ -160,6 +164,12 @@ The following table lists all available instance types for worker node pools, as
 | t2.xlarge        | 3 CPUs  | 13 GiB MEM   |
 | t3.xlarge        | 3 CPUs  | 13 GiB MEM   |
 | t3.2xlarge       | 7 CPUs  | 29 GiB MEM   |
+
+:::caution
+
+Astronomer doesn’t recommend using `t` series instance types in standard mode for production workloads, because CPU utilization for `t` instance types in standard mode can be throttled.
+
+:::
 
 :::info
 

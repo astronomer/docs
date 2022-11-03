@@ -2,9 +2,13 @@
 sidebar_label: 'Overview'
 title: 'Astro CLI'
 id: overview
-description: Learn about every command that you can run with the Astro CLI.
 hide_table_of_contents: true
 ---
+
+<head>
+  <meta name="description" content="Learn more about the Astro command-line interface (CLI) and the commands that you can run. The Astro CLI lets you get started with Apache Airflow quickly." />
+  <meta name="og:description" content="Learn more about the Astro command-line interface (CLI) and the commands that you can run. The Astro CLI lets you get started with Apache Airflow quickly." />
+</head>
 
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';

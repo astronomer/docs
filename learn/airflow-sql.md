@@ -1,9 +1,14 @@
 ---
 title: "Using Airflow to Execute SQL"
-description: "Execute queries, parameterize queries, and embed SQL-driven ETL in Apache Airflow DAGs."
 id: airflow-sql
 sidebar_label: "Run SQL"
 ---
+
+<head>
+  <meta name="description" content="Learn the best practices for executing SQL from your DAG. Get to know Airflow’s SQL-related operators and see how to use Airflow for common SQL use cases." />
+  <meta name="og:description" content="Learn the best practices for executing SQL from your DAG. Get to know Airflow’s SQL-related operators and see how to use Airflow for common SQL use cases." />
+</head>
+
 
 Executing SQL queries is one of the most common use cases for data pipelines. Whether you're extracting and loading data, calling a stored procedure, or executing a complex query for a report, Airflow has you covered. Using Airflow, you can orchestrate all of your SQL tasks elegantly with just a few lines of boilerplate code.
 
@@ -237,7 +242,7 @@ First, create a DAG that pulls COVID data from an [API endpoint](https://covidtr
 
 ```python
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python_operator import PythonOperator
 from plugins.operators.s3_to_snowflake_operator import S3ToSnowflakeTransferOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
@@ -282,7 +287,7 @@ with DAG('covid_data_s3_to_snowflake',
          catchup=False
          ) as dag:
 
-    t0 = DummyOperator(task_id='start')   
+    t0 = EmptyOperator(task_id='start')   
 
     for endpoint in endpoints:
         generate_files = PythonOperator(

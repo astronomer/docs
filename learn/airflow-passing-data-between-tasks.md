@@ -1,10 +1,13 @@
 ---
-title: "Passing data between Airflow tasks"
-sidebar_label: "Passing data between tasks"
-description: "Learn about methods available for sharing metadata and information between tasks in your Apache Airflow DAGs, including XCom."
+title: "Pass data between tasks"
+sidebar_label: "Pass data between tasks"
 id: airflow-passing-data-between-tasks
-tags: [DAGs, XCom, Tasks, Dependencies]
 ---
+
+<head>
+  <meta name="description" content="Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom." />
+  <meta name="og:description" content="Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom." />
+</head>
 
 Sharing data between tasks is a very common use case in Airflow. If you've been writing DAGs, you probably know that breaking them up into smaller tasks is a best practice for debugging and recovering quickly from failures. What do you do when one of your downstream tasks requires metadata about an upstream task, or processes the results of the task immediately before it?
 

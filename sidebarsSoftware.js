@@ -188,6 +188,7 @@ module.exports = {
       'support',
       'version-compatibility-reference',
       'release-lifecycle-policy',
+      'faq',
       'documentation-archive',
       ],
     },

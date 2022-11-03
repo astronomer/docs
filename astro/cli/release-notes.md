@@ -2,12 +2,25 @@
 sidebar_label: 'Release notes'
 title: 'Astro CLI release notes'
 id: release-notes
-description: Release notes for the Astro CLI.
 ---
+
+<head>
+  <meta name="description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
+  <meta name="og:description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
+</head>
+
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
 
-If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+## Astro CLI 1.6.1
+
+Release date: November 3, 2022 
+
+### Bug fixes 
+
+- Fixed an issue where authenticating to Astronomer Software with `interactive=true` in your CLI configuration resulted in a 502 error.
 
 ## Astro CLI 1.6.0 
 

@@ -2,8 +2,12 @@
 sidebar_label: 'Develop a project'
 title: 'Develop your Astro project'
 id: develop-project
-description: Learn how to add Airflow dependencies and customize an Astro project to fit your use case.
 ---
+
+<head>
+  <meta name="description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
+  <meta name="og:description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
+</head>
 
 import {siteVariables} from '@site/src/versions';
 import Tabs from '@theme/Tabs';

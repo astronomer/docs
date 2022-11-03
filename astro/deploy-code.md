@@ -98,4 +98,3 @@ If you want to force long-running tasks to terminate sooner than 24 hours, speci
 
 - [Develop your project](develop-project.md)
 - [Set environment variables](environment-variables.md)
-- [Known limitations](known-limitations.md)

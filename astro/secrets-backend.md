@@ -2,15 +2,21 @@
 title: 'Configure an external secrets backend on Astro'
 sidebar_label: 'Configure a secrets backend'
 id: secrets-backend
-description: Configure a secrets backend on Astro to store Airflow variables and connections in a centralized place.
 ---
+
+<head>
+  <meta name="description" content="Learn how you can configure a secrets backend on Astro to store Airflow variables and connections in a secure, centralized location that complies with your organization's security requirements." />
+  <meta name="og:description" content="LLearn how you can configure a secrets backend on Astro to store Airflow variables and connections in a secure, centralized location that complies with your organization's security requirements." />
+</head>
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements. While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
+Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements.
 
-## Secrets backend tool integration benefits
+While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
+
+## Benefits
 
 Integrating a secrets backend tool with Astro allows you to:
 
@@ -195,7 +201,6 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
 
     Save these values for Step 3.
 
-
 #### Step 2: Create an Airflow variable or connection in Vault
 
 To start, create an Airflow variable or connection in Vault that you want to store as a secret. It can be either a real or test value. You will use this secret to test your backend's functionality in Step 4.
@@ -311,7 +316,7 @@ In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter St
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-project.md) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](develop-projec.mdt#add-python-and-os-level-packages).
+- An [Astro project](create-project.md) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
 - An IAM role with access to the [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html) that your Astro cluster can assume. See [AWS IAM roles](connect-aws.md#AWS-IAM-roles).
 
 #### Step 1: Create Airflow secrets directories in Parameter Store
