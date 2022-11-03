@@ -361,6 +361,8 @@ If GitHub Actions is already configured for your chosen repository the new DAG w
 
 Learn more on how to set up CI/CD with GitHub Actions in the [Astro Module: CI/CD](https://academy.astronomer.io/astro-module-cicd).
 
+:::
+
 :::caution
 
 To be able to deploy your DAG the Runtime Image used in the Airflow project of your GitHub repo needs to be compatible with the Runtime Image used in your Astro cloud deployment. You might need to change the version number in the Dockerfile of the Airflow project in your GitHub repository.
