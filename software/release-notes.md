@@ -9,6 +9,22 @@ description: Astronomer Software release notes.
 
 0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md).
 
+## 0.30.4 
+
+Release date: November 3, 2022 
+
+### Bug fixes 
+
+- Fixed the following vulnerabilities: 
+  
+    - [CVE-2022-42915](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42915)
+    - [CVE-2022-32190](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32190)
+    - [CVE-2022-14809](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-14809)
+    - [CVE-2022-14271](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-14271)
+    - [CVE-2022-1996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1996)
+  
+- Fixed an issue where `astronomer.houston.updateRuntimeCheck.url: true` was ignored when searching for new Astronomer Certified and Astro Runtime images. 
+
 ## 0.30.3
 
 Release date: October 26, 2022
