@@ -427,7 +427,7 @@ With that said, this implementation still has some limitations. For a more in-de
 
 ## Bonus 2: DbtDagParser utility
 
-The sample code we provided in the previous section demonstrates how to loop through the `manifest.json` file of your DAG to parse out individual models and map them to Airflow tasks. To simplify the DAG code when using this pattern, you can use a convenient utility method that takes care of the parsing. The `DbtDagParser` utility, developed and explained by Sam Bail, works as follows:
+The sample code provided in the previous section demonstrates how to loop through the `manifest.json` file of your DAG to parse out individual models and map them to Airflow tasks. To simplify the DAG code when using this pattern, you can use a convenient utility method that takes care of the parsing. The `DbtDagParser` utility, developed and explained by Sam Bail, works as follows:
 
 - The parser takes the dbt project path containing the `dbt_project.yml` file, as well as the path to the `profiles.yml` file, as inputs. Note that this setup assumes that you have a single repo that contains both your dbt project and Airflow code.
 - By providing a "dbt_tag" parameter, you can select a subset of models to run. This means you can specify multiple DAGs for different subsets of the dbt models, for example to run them on different schedules, as described in [Part 2](https://www.astronomer.io/blog/airflow-dbt-2) of our blog series.
