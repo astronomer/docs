@@ -792,22 +792,23 @@ To automate code deploys to a Deployment using [Azure DevOps](https://dev.azure.
             ASTRONOMER_KEY_SECRET: $(ASTRONOMER_KEY_SECRET)
     `}</code></pre>
 
-## DAG Deploy CI/CD Templates
+## Use CI/CD for DAG-only deploys
 
-The DAG Deploy templates allow to quickly utilize the DAG Deploy feature to improve your CI/CD worflow. These templates will do a DAG only deploy if files in the dags folder change and do an image deploy if any other file changes. 
+A DAG-only deploy workflow utilizes the `--dags` CLI flag to improve the performance of your CI/CD workflows. These CI/CD pipelines deploy your DAGs only when modify files in your `dags` folder, and they deploy your entire Astro project as an image when any other files or directories are modified. 
 
-This CI/CD Template has a few benifits when only DAG code is changed:
-- A new image is not deployed so running Airflow containers will not go down
-- DAG only Deploys are much faster than image deploys. You will see changes to your DAGs take affect much faster
-- You can separate the tasks of changing the Airflow Image and the Airflow DAGs
+This workflow has a number of benefits: 
+
+- Your Deployment's infrastructure will not experience down time for updates to DAG code.
+- DAG only deploys are faster than image deploys. Your code changes will appear in Airflow faster than for project configuration changes
+- You can have different sets of users deploy project changes and DAG changes.
 
 The DAG Deploy CI/CD template workflow:
 
-- Access Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
-- Install the latest version of the Astro CLI.
-- Determine if only files in you `dags` folder changed using the git diff between your current push and main
-- If only DAG files located in the `dags` folder changed run `astro deploy --dags`. This pushes your `dags` folder to your Deployment
-- If any file not in the `dags` folder changed run `astro deploy`. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image and DAGs to your Deployment
+- Accesses Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
+- Installs the latest version of the Astro CLI.
+- Determines which files were updated by the commit:
+    - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment
+    - If any file not in the `dags` folder has changed, run `astro deploy`. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image and DAGs to your Deployment.
 
 This workflow is equivalent to the following bash script:
 
@@ -856,7 +857,9 @@ The following templates use [Astro CLI v1.7+](cli/release-notes.md) to deploy vi
 
 :::
 
-### GitHub Actions DAG Deploy
+### Examples: GitHub Actions DAG-only deploys
+
+The following templates are examples of how to implement DAG-only deploys in GitHub Actions. These templates can be modified to run on other CI/CD tools.
 
 <Tabs
     defaultValue="standard"
@@ -1065,12 +1068,10 @@ To complete this setup, you need:
 
     ```yaml
     name: Astronomer CI - Additional build-time args
-
     on:
       push:
         branches:
           - main
-
     jobs:
       build:
         runs-on: ubuntu-latest
@@ -1100,7 +1101,6 @@ To complete this setup, you need:
                     REGULAR_DEPLOY=TRUE
                 fi
             done
-
             echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
             echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
           id: deployment-type
@@ -1134,8 +1134,6 @@ To complete this setup, you need:
             curl -sSL install.astronomer.io | sudo bash -s
             astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
     ```
-
-    See an example that deploys a project which [installs Python packages from a private GitHub repository](develop-project.md#install-python-packages-from-private-sources) in the Regular CI/CD Template above this section.
 
   :::info
 
