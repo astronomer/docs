@@ -107,11 +107,11 @@ In these cases, you can enable DAG-only deploys on a Deployment.
 astro deployment update --dag-deploy enable
 ```
 
-The CLI prompts you to select a Deployment to enable the feature on. After you enable the feature, anyone with access to the Deployment can deploy DAGs.
+When the prompt appears in the Astro CLI, select a Deployment  where you want to enable the feature. After you enable the feature, anyone with access to the Deployment can deploy DAGs.
 
 :::caution 
 
-Enabling DAG deploys pauses all DAGS in a Deployment. Any active DAG runs will finish, but new DAG runs will not be scheduled until you unpause the DAGs from the Deployment's Airflow UI.
+When you enable DAG-only deploys, all DAGS in a Deployment are paused. Any active DAG runs will finish, but new DAG runs will not be scheduled until you unpause the DAGs in the Airflow UI.
 
 :::
 
@@ -123,9 +123,9 @@ Run the following command to deploy only your current `dags` directory to a Depl
 astro deploy --dags
 ```
 
-This command pushes DAGs to a component on Astro that handles loading DAGs into your Airflow environment. DAG only deploys do not disrupt any active task runs, resulting in zero downtime for the Deployment. If you deploy changes to a currently running DAG, any active task runs finish using code from before the Deploy. Any new task runs are scheduled using code from after the deploy. 
+This command pushes DAGs to a component on Astro that loads DAGs into your Airflow environment. DAG only deploys do not disrupt any active task runs, resulting in zero downtime for the Deployment. If you deploy changes to a currently running DAG, any active task runs finish using code from before the Deploy. Any new task runs are scheduled using code from after the deploy. 
 
-DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed based on the same source code.
+DAG runs could fail due to downstream tasks running code from a different source than their upstream tasks. DAG runs that fail this way need to be fully restarted from the Airflow UI so that all tasks are executed with the same source code.
 
 ## Related documentation
 
