@@ -14,9 +14,37 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-## Astro CLI 1.6.1
+## Astro CLI 1.7.0
 
 Release date: November 3, 2022 
+
+## Deploy only DAGs to a Deployment with `astro deploy —dags`
+
+User can now deploy just DAGs to their deployments with `astro deploy —dags`. Deploying DAGs is much faster than deploying an image and does not cause any down time for your Deployments. Read the documentation for this feature to learn how to enable it for your Deployments. 
+
+Additionally check out the new DAG Deploy CI/CD to enhance your CI/CD pipelines to take advantage of this new feature/
+
+## Programmatically Query Deployment information with `astro deployment inspect`
+
+User can now return a JSON or YAML object of their Deployments that contain information about their Deployments current state and configuration. Check out the `astro deployment inspect` to see a full list of information fields that can be returned for your Deployments.
+
+Users can also use the `—key` flag to return specific information about their deployment. For example `astro deployment inspect <deployment-id> -k information.status` will return `HEALTHY` for a healthy deployment.
+
+## Additional improvements
+
+- The commands `dev parse/pytest` have been refactored to have a clearer output. The docker container information no long shows and you will only see the output generate by pytest. These commands should also run faster now.
+- The `orginization switch` command now has a `—login-link` flag. This gives users a link to use to login if browser login does not work on their machine
+- The `orginization switch` command can now take either your organization name or ID as an argument
+- The `astro dev start` command will now timeout if the webserver does not become healthy. Users can use the `—wait` flag to give a custom time out amount.
+
+## Bug fixes
+
+- Fixed an issue where `astro deploy` with `colima` was failing due to a `registry login` issue
+- Fixed an issue were the `deployment list`  command was failing to display the Deployment’s Workspace ID
+
+## Astro CLI 1.6.1
+
+Release date: November 8, 2022 
 
 ### Bug fixes 
 

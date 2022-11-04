@@ -18,11 +18,14 @@ astro dev start
 
 ## Options
 
-| Option               | Description                                                                                                                                           | Possible Values                                                  |
+| Option          | Description                   | Possible Values                                                  |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `-e`,`--env`         | Path to your environment variable file. Default is `.env`                                                                                             | Valid filepaths                                                  |
 | `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
-| `-n`, `--no-browser` | Starts Airflow without opening a browser for the Airflow UI                                                                                           | None                                                             |
+| `-n`, `--no-browser` | Starts Airflow without opening a browser for the Airflow UI      | None                                                             |
+| `--no-cache`         | Do not use cache when building container image                   | None                                                             |
+| `-s`, `--settings-file` | Settings file to import airflow objects from (default "airflow_settings.yaml") | airflow settings file                           |
+| `--wait`                | Duration to wait for webserver to get healthy. The default is 5 minutes on M1 architecture and 1 minute for everything else. Use --wait 2m to wait for 2 minutes. (default 1m0s) | time in seconds |
 
 
 ## Examples
