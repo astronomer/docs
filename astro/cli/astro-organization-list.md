@@ -6,7 +6,7 @@ description: Reference documentation for astro organization list.
 hide_table_of_contents: true
 ---
 
-View a list of Organizations that you have access to. An Organization will appear on this list if you have been given access to it be a System Admin.
+View a list of Organizations that you have access to. An Organization will appear on this list if you have been given access to it by a System Admin.
 
 ## Usage
 
