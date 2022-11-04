@@ -16,26 +16,24 @@ If you have any questions or a bug to report, contact [Astronomer support](https
 
 ## Astro CLI 1.7.0
 
-Release date: November 3, 2022 
+Release date: November 7, 2022 
 
-## Deploy only DAGs to a Deployment with `astro deploy —dags`
+## Deploy only DAGs with `astro deploy -—dags`
 
-User can now deploy just DAGs to their deployments with `astro deploy —dags`. Deploying DAGs is much faster than deploying an image and does not cause any down time for your Deployments. Read the documentation for this feature to learn how to enable it for your Deployments. 
+Use `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. Deploying DAGs is significantly faster than deploying a Docker image and does not cause any down time for your Deployments. Additionally, the `--dags` flag can help you create separate CI/CD processes for DAG deployment and Astro project configuration. See [DAG-only deploys](deploy-code.md#dag-only-deploys) for more potential use cases and implementation details. 
 
-Additionally check out the new DAG Deploy CI/CD to enhance your CI/CD pipelines to take advantage of this new feature/
+## New command to programmatically query Deployment information
 
-## Programmatically Query Deployment information with `astro deployment inspect`
+You can now run `astro deployment inspect` to return Deployment's current state and configuration as a JSON or YAML object.
 
-User can now return a JSON or YAML object of their Deployments that contain information about their Deployments current state and configuration. Check out the `astro deployment inspect` to see a full list of information fields that can be returned for your Deployments.
-
-Users can also use the `—key` flag to return specific information about their deployment. For example `astro deployment inspect <deployment-id> -k information.status` will return `HEALTHY` for a healthy deployment.
+For more information, see the [CLI command reference](cli/astro-deployment-inspect.md).
 
 ## Additional improvements
 
-- The commands `dev parse/pytest` have been refactored to have a clearer output. The docker container information no long shows and you will only see the output generate by pytest. These commands should also run faster now.
-- The `orginization switch` command now has a `—login-link` flag. This gives users a link to use to login if browser login does not work on their machine
-- The `orginization switch` command can now take either your organization name or ID as an argument
-- The `astro dev start` command will now timeout if the webserver does not become healthy. Users can use the `—wait` flag to give a custom time out amount.
+- The outputs for `astro dev parse/pytest` no longer include Docker container logs for improved legibility.
+- The `astro organization switch` command now includes a `-—login-link` flag for logging in if browser login isn't available on your machine.
+- You can now provide either an Organization name or ID when running `astro organization switch` 
+- `astro dev start` now times out if the webserver does not become healthy in an expected amount of time. Use the `-—wait` flag to specify an amount of time to wait.
 
 ## Bug fixes
 

@@ -25,7 +25,7 @@ astro dev start
 | `-n`, `--no-browser` | Starts Airflow without opening a browser for the Airflow UI      | None                                                             |
 | `--no-cache`         | Do not use cache when building container image                   | None                                                             |
 | `-s`, `--settings-file` | Settings file to import airflow objects from (default "airflow_settings.yaml") | airflow settings file                           |
-| `--wait`                | Duration to wait for webserver to get healthy. The default is 5 minutes on M1 architecture and 1 minute for everything else. Use --wait 2m to wait for 2 minutes. (default 1m0s) | time in seconds |
+| `--wait`                | Duration to wait for webserver to get healthy before timing out. The default is 1 minute except for M1 architecture-based machines, which is 5 minutes. | Time in seconds, or minutes defined as `<integer>m` |
 
 
 ## Examples
