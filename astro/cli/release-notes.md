@@ -38,7 +38,7 @@ For more information, see the [CLI command reference](cli/astro-deployment-inspe
 ## Bug fixes
 
 - Fixed an issue where `astro deploy` with `colima` was failing due to a `registry login` issue
-- Fixed an issue were the `deployment list`  command was failing to display the Deployment’s Workspace ID
+- Fixed an issue were the `deployment list` command didn't display the Workspace ID for a Deployment
 
 ## Astro CLI 1.6.1
 
