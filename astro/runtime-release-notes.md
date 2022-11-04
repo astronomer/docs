@@ -91,23 +91,23 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 
 ### Additional improvements
 
-- Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
+- Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of the operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
 - Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 
-## Astro Runtime 5.10.11
+## Astro Runtime 5.0.11
 
 - Release date: November 2, 2022
 - Airflow version: 2.3.4 
 
 ### Backported Airflow bug fixes
 
-Astro Runtime 5.10.11 includes the following bug fix from later Apache Airflow releases:
+Astro Runtime 5.0.11 includes the following bug fix from later Apache Airflow releases:
 
 - Fix warning when using xcomarg dependencies ([#26801](https://github.com/apache/airflow/pull/26801))
 
 ### Bug fixes
 
-- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set the Astro data plane. This enables Astronomer Software users to set a value for custom remote logging storage solutions. 
+- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set in the Astro data plane. This enables Astronomer Software users to set a value for custom remote logging storage solutions. 
 
 ## Astro Runtime 5.0.10
 

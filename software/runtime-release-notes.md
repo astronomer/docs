@@ -63,7 +63,7 @@ These changes were backported from Apache Airflow 2.4.2, which is not yet genera
 - Backported a fix to correct an issue where logs were not loading from Celery workers ([#26493](https://github.com/apache/airflow/pull/26493))
 - Fixed [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
 
-## Astro Runtime 5.10.11
+## Astro Runtime 5.0.11
 
 - Release date: November 2, 2022
 - Airflow version: 2.3.4 
@@ -76,7 +76,7 @@ Astro Runtime 5.10.11 includes the following bug fix from later Apache Airflow r
 
 ### Bug fixes
 
-- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set the Astro data plane. This enables Astronomer Software users to set a value for custom remote logging storage solutions. 
+- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set in the Astro data plane. This enables Astronomer Software users to set a value for custom remote logging storage solutions. 
 
 ## Astro Runtime 5.0.10
 
@@ -85,13 +85,13 @@ Astro Runtime 5.10.11 includes the following bug fix from later Apache Airflow r
 
 ### Additional improvements
 
-- Upgraded `astronomer-providers` to 1.10.0, which includes two new deferrable versions of operators, `SFTPSensorAsync` and `ExternalDeploymentTaskSensorAsync`. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.10.0/CHANGELOG.rst).
-- Upgraded `openlineage-airflow` to version `0.15.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+- Upgraded `astronomer-providers` to 1.10.0, which includes two new deferrable versions of the `SFTPSensorAsync` and `ExternalDeploymentTaskSensorAsync` operators. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.10.0/CHANGELOG.rst).
+- Upgraded `openlineage-airflow` to 0.15.1. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 
 ### Bug fixes
 
 - Revert “Cache the custom secrets backend so the same instance gets re-used” ([#25556](https://github.com/apache/airflow/pull/25556))
-- Fixed faulty Kubernetes executor config serialization logic
+- Fixed faulty Kubernetes executor config serialization logic.
 
 ## Astro Runtime 5.0.9
 
