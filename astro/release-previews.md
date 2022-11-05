@@ -13,28 +13,28 @@ To view support promises for GA releases of Runtime, see [Astro Runtime maintena
 
 Astro features can be shared as Private Preview or Public Preview. The table below offers a snapshot on how the release previews differ:
 
-| Release Preview Type | Customer access | Availability                                    | Support                                                                                                                                                                                                                                                          |
+| Release Preview Type | Customer Access | Availability                                    | Support Commitment                                                                                                                                                                                                                                                         |
 | -------------------- | --------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Private Preview      | Invite only.    | No SLA or SLO.                                  | Product and R&D will be in active communication with customers who are in a Private Preview of a feature to receive feedback, bug reports, questions, and more. Customer Reliability Engineering (CRE) does not provide support for features in Private Preview. |
+| Private Preview      | Invite only    | No SLA or SLO                                  | Product and Research and Development actively communicate with customers who are using a Private Preview feature to receive feedback, bug reports, and more. Customer Reliability Engineering (CRE) doesn't support Private Preview features. |
 | Public Preview       | Everyone        | No SLA. Internal SLOs supported by R&D and CRE. | CRE treats all issues within the feature as P3 or P4, depending on the nature of the issue. CRE continues to support remediation for all other issues at defined priority levels, including if a platform issue is caused by a feature in Public Preview.        |
 
 ## Private Preview
 
-Private Preview offers a select group of customers early access to a feature— to test, offer feedback, and preview a feature before it becomes more widely available.
+Private Preview provides a limited group of customers with early access to a feature. Customers can test and provide feature feedback before it becomes more widely available.
 
 ### Customer access 
 
-An invite to a Private Preview will come from your Customer Success Manager or a member of the Astronomer Product team.
+Your organization is invited to participate in a Private Preview by your Customer Success Manager or a member of the Astronomer Product team.
 
 ### Availability 
 
-No SLA is set for a feature in Private Preview. Other availability metrics may be set, such as an internal SLO.
+SLAs are not available for Private Preview features. Other agreements such as an internal SLO might be provided at the discretion of Astronomer.
 
 ### Support
 
-Product and R&D will be in active communication with customers who are in Private Preview of a feature to hear feedback and provide support, including observations on the experience, triaging bugs, and answering questions.
+Product and Research and Development actively communicate with customers who are using a feature in Private Preview to solicit feedback and provide support. This includes observations on their experience, triaging bugs, and answering questions.
 
-Astronomer's Customer Reliability Engineering (CRE) team does not provide support for features in Private Preview.
+The CRE team doesn't support Private Preview features.
 
 ## Public Preview
 
@@ -42,17 +42,17 @@ Public Preview offers all customers access to a feature before it is released fo
 
 ### Customer access 
 
-All Astro customer orgs have access to the feature. Note: some features may have access gated by Role-Based Access Control.
+All Astro customers can access Public Preview features. Some feature access might be restricted by role-based access control (RBAC).
 
 ### Availability 
 
-A feature in Public Preview does not have the same SLA commitment as a GA feature. Internal service level objectives (SLO’s) will be set to monitor and support the feature’s availability.
+Public Preview features don't have the same SLA commitment as GA features. Astronomer sets Internal SLOs to monitor and support Public Preview features.
 
 ### Support
 
-CRE will treat all issues within a Public Preview feature as P3 or P4, depending on the nature of the issue:
+CRE assigns a P3 or P4 severity level to all Public Preview issues. The following are the definitions for each severity level:
 
-- P3: Loss of use of the feature (not affecting service in general). Feature not working as expected.
-- P4: Inquiry about the feature. Information requested on capabilities, navigation, installation, or configuration. Bug affecting a small number of users.
+- P3: Loss of use of a feature, or a feature not working as expected. Service is not affected..
+- P4: Feature inquiries, or bugs limited to a small number users. Inquiries can include questions about feature capabilities, navigation, installation, or configuration.
 
 CRE continues to support issue remediation for all other issues at defined priority levels, including if a platform issue is caused by a feature in Public Preview.
