@@ -19,9 +19,8 @@ On Astro, you can use Deployment API keys to automate deploying code changes to 
 
 You can use the Astronomer CI/CD templates with popular CI/CD management tools, including GitHub Actions and Circle CI.
 
-Astronomer currently has two types CI/CD Templates. A Regular one step Deploy templates and a DAG Deploy templates that utilize the [DAG Deploy](deploy-code.md#DAG-only-deploys) feature. If your deployment has DAG Deploy enabled the DAG Deploy templates are recommended, but both templates will work with any Astro Deployment.
+Astronomer currently has two types CI/CD Templates. A Regular one step Deploy templates and a DAG Deploy templates that utilize the [DAG Deploy](deploy-code.md#DAG-only-deploys) feature. If your deployment has DAG Deploy enabled the DAG Deploy templates are recommended, but both templates will work.
 
-The DAG Deploy templates will do a DAG only deploy if files in the dags folder change and do an image deploy if any other file changes. This has the benifit of not 
 
 ## Benefits
 
@@ -794,11 +793,11 @@ To automate code deploys to a Deployment using [Azure DevOps](https://dev.azure.
 
 ## Use CI/CD for DAG-only deploys
 
-A DAG-only deploy workflow utilizes the `--dags` CLI flag to improve the performance of your CI/CD workflows. These CI/CD pipelines deploy your DAGs only when modify files in your `dags` folder, and they deploy your entire Astro project as an image when any other files or directories are modified. 
+A DAG-only deploy workflow utilizes the `--dags` CLI flag to improve the performance of your CI/CD workflows. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy your entire Astro project as an image when any other files or directories are modified. 
 
 This workflow has a number of benefits: 
 
-- Your Deployment's infrastructure will not experience down time for updates to DAG code.
+- Your Deployment's infrastructure will not experience downtime for updates to DAG code.
 - DAG only deploys are faster than image deploys. Your code changes will appear in Airflow faster than for project configuration changes
 - You can have different sets of users deploy project changes and DAG changes.
 
@@ -936,13 +935,13 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
           astro deploy
     ```
-This Github Actions script checks the diff between your current commit and main when push a commit to main. Make sure to customize the script for for your specific use case. 
+This Github Actions script checks the diff between your current commit and main when a commit is pushed to main. Make sure to customize the script for for your specific use case. 
 
 </TabItem>
 
 <TabItem value="multibranch">
 
-The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline makes can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
+The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
 
 ![Diagram showing how a multibranch CI/CD pipeline works](/img/docs/multibranch.png)
 
