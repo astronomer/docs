@@ -53,7 +53,7 @@ After you create your registry:
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
 
-1. Make note of all the values in your `config.yaml` file that you updated from their default values. 
+1. Make note of all of the values in your `config.yaml` file that you updated from their default values. 
 2. Run the following command to template the Astronomer Helm chart and fetch its rendered image tags. Use the `--set` flag to specify the updated values you made note of:
 
     ```bash

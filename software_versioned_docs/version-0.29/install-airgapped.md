@@ -42,21 +42,28 @@ You can also set up your own registry using a dedicated registry service such as
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
 
-1. Run the following command to template the Astronomer Helm chart and fetch its rendered image tags:
+1. Make note of all of the values in your `config.yaml` file that you updated from their default values. 
+2. Run the following command to template the Astronomer Helm chart and fetch its rendered image tags. Use the `--set` flag to specify the updated values you made note of:
 
-```bash
-$ helm template astronomer/astronomer | grep "image: " | sed -e 's/"//g' -e 's/image:[ ]//' -e 's/^ *//g' | sort | uniq                          
-```
+    ```bash
+    helm template --<template version> astronomer/astronomer --set <your-config-key-1>=<your-config-value-1> --set <your-config-key-2>=<your-config-value-2> --set <your-config-key-x>=<your-config-value-x>| grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq                           
+    ```
+    
+    For example, if you set `global.loggingSidecar.enabled=True` in your Helm chart and customized no other values, you run: 
+    
+    ```sh
+    helm template --<template version> astronomer/astronomer --set global.loggingSidecar.enabled=True | grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq  
+    ```
 
-2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
+3. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
-    $ helm template astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true     --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e     's/image:[ ]//' -e 's/^ *//g' | sort | uniq
+    helm template astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true     --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e     's/image:[ ]//' -e 's/^ *//g' | sort | uniq
     ```
 
 These commands generate a list of images required for your version of Astronomer. Add these images to a private image registry hosted within your organization's network. In Step 3, you will specify this private registry in your Astronomer configuration.
 
-> **Note:** If you have already enabled/disabled Astronomer platform components in your `config.yaml`, you can pass `-f/--values config.yaml` to `helm template` to print a list specific to your `config.yaml` configuration.
+> **Note:** If you have already enabled or disabled Astronomer platform components in your `config.yaml`, you can pass `-f/--values config.yaml` to `helm template` to print a list specific to your `config.yaml` configuration.
 
 ## Step 3: Add images to your config.yaml file
 
