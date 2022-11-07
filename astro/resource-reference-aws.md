@@ -167,7 +167,7 @@ The following table lists all available instance types for worker node pools, as
 
 :::info
 
-With the exception of `m5d` and `m6id` nodes, all supported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, Astronomer recommends modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes. To utilize the ephemeral storage on these node types, have your task write to `/ephemeral` or, if using KubernetesPodOperator, [mount an emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) in your operator [container spec.](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
+With the exception of `m5d` and `m6id` nodes, all supported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, Astronomer recommends modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes. To utilize the ephemeral storage on these node types, have your task write data to `/ephemeral`. If your task uses the KubernetesPodOperator, [mount an emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) in your operator [container spec](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod) instead.
 
 The ability to provision ephemeral storage for all node instance types is coming soon.
 
