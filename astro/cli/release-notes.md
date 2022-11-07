@@ -33,7 +33,7 @@ For more information, see the [CLI command reference](cli/astro-deployment-inspe
 - The outputs for `astro dev parse/pytest` no longer include Docker container logs for improved legibility.
 - The `astro organization switch` command now includes a `-—login-link` flag for logging in if browser login isn't available on your machine.
 - You can now provide either an Organization name or ID when running `astro organization switch` 
-- `astro dev start` now times out if the webserver does not become healthy in an expected amount of time. Use the `-—wait` flag to specify an amount of time to wait.
+- `astro dev start` now times out if the webserver does not become healthy within a set period. Use the `-—wait` flag to specify a wait time.
 
 ## Bug fixes
 

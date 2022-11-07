@@ -6,7 +6,7 @@ description: Reference documentation for astro deployment inspect.
 hide_table_of_contents: true
 ---
 
-Inspect an Astro Deployment. This command returns a YAML or JSON representation of a Deployment's current configuration and state. Return a specific values for the Deployment using the `--key` flag. 
+Inspect an Astro Deployment. This command returns a YAML or JSON representation of a Deployment's current configuration and state. When the `--key` flag is used, returns specific values for the Deployment. 
 
 ## Usage
 
@@ -82,9 +82,9 @@ deployment:
 | Option                    | Description                                                                                                             | Possible Values          |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------ |
 | `-n`, `--deployment-name` | Name of the deployment to inspect.                                                                                      | An Valid Deployment Name |
-| `--workspace-id`          | Specify a Workspace to list Deployments outside of your current Workspace                                               | Any valid Workspace ID   |
+| `--workspace-id`          | Specify a Workspace to list Deployments outside of your current Workspace.                                               | Any valid Workspace ID   |
 | `-k`, `--key`             | A specific key for the deployment. For example `--key configuration.cluster_id` to get a deployment's cluster id.       | Any valid Workspace ID   |
-| `-o`, `--output`          | Output format can be one of: yaml or json. By default the inspected deployment will be in YAML format. (default "yaml") | `yaml` or `json`             |
+| `-o`, `--output`          | Output format can be one of: YAML or JSON. By default the inspected deployment is in YAML format. (default "yaml") | `yaml` or `json`.             |
 
 ## Examples
 

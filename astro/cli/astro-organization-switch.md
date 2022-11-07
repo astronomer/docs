@@ -16,13 +16,13 @@ astro organization switch <your-organization-name-or-id>
 
 You can switch to a different Organization only if you have already authenticated to your primary Organization using `astro login`. If you have not authenticated, run `astro login <base-domain>` first.
 
-Switching to a different organization will trigger a new browser login. If browser login does not work on your machine, use the `--login-link` flag with `organization switch`.
+Switching to a different organization triggers a new browser login. If browser login does not work on your machine, use the `--login-link` flag with `organization switch`.
 
 ## Options
 
 | Option               | Description                                                                                                        | Possible Values |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `-l`, `--login-link` | Force the user to manually access the Cloud UI to log in instead of opening the browser automatically from the CLI | None            |
+| `-l`, `--login-link` | Forces a user to manually access the Cloud UI to log in instead of opening the browser automatically from the Astro CLI. | None            |
 
 ## Related Commands
 
