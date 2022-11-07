@@ -108,13 +108,13 @@ This script accomplishes the following:
 
 2. Add an HTTP connection called `random_user_api_conn` to `http://randomuser.me/api/` in the Airflow UI. This API will return data about a randomly generated user persona. Feel free to use a different API, the content returned will not be relevant for this tutorial. 
 
-![HTTP connection](/img/docs/extra_links_tutorial_add_http_connection.png)
+![HTTP connection](/img/guides/extra_links_tutorial_add_http_connection.png)
 
 2. Run the `plugins_test_dag`.
 
 3. In the Grid View click on the green square showing the successful run of the `call_api_simple` task. Select the **Details** tab and scroll down to see the extra link button.
 
-![HTTP docs button](/img/docs/extra_links_tutorial_HTTPDocsLink_button.png)
+![HTTP docs button](/img/guides/extra_links_tutorial_HTTPDocsLink_button.png)
 
 4. Click on the button to visit the HTTP docs on Mozilla.
 
@@ -208,11 +208,11 @@ This task will post the same GET request to the API you defined with the connect
 
 2. Select the latest run of the `call_api_cat` task in the Grid view and click on the **XCom** tab to view XComs returned by this task.
 
-![XCom tab](/img/docs/extra_links_tutorial_xcom_tab.png)
+![XCom tab](/img/guides/extra_links_tutorial_xcom_tab.png)
 
 3. Verify that the XCom for this task instance contain an entry for `status_code`. In the screenshot below the HTTP status code returned was 200.
 
-![HTTP status code returned](/img/docs/extra_links_tutorial_http_code.png)
+![HTTP status code returned](/img/guides/extra_links_tutorial_http_code.png)
 
 ## Step 8: Add a dynamic extra link to the CatHttpOperator
 
@@ -268,11 +268,11 @@ Your second extra link has now been added to the CatHttpOperator.
 
 3. Click the Http Cat button to find the response your last API call got illustrated with a fitting cat.
 
-![Cat Button](/img/docs/extra_links_tutorial_cat_button.png)
+![Cat Button](/img/guides/extra_links_tutorial_cat_button.png)
 
 4. (Optional) See all your plugins listed under **Admin** -> **Plugins**.
 
-![Plugin with two extra links shown in the UI](/img/docs/extra_links_tutorial_plugins_list_UI.png)
+![Plugin with two extra links shown in the UI](/img/guides/extra_links_tutorial_plugins_list_UI.png)
 
 ## Conclusion
 
