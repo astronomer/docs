@@ -71,15 +71,9 @@ Before Airflow 2.0 custom operators and hooks were added as plugins. This patter
 
 ### Appbuilder menu items
 
-### Global operator extra links
-
 ### Operator extra links
 
-Operator extra links are additional buttons with links that can be added to specific operators. The screenshot below shows an operator extra link called "HTTP cat" having been added to the custom CatHttpOperator. See also this [step-by-step tutorial](operator-extra-link-tutorial.md) on how to add operator extra links.
-
-![Cat Button](/img/guides/extra_links_tutorial_cat_button.png)
-
-Operator extra links are Python classes derived from the `BaseOperatorLink` class. The example below shows how to create a new operator extra link `MyLink` and add it to the `operator_extra_links` list of `MyAirflowPlugin`. 
+Operator extra links are additional buttons with links that can be added to specific operators. They can be defined as Python classes derived from the `BaseOperatorLink` class. The example below shows how to create a new operator extra link `MyLink` that is applied to `MyOperator1` and `MyOperator2`. The operator extra link is registered with the `MyAirflowPlugin` by adding it its `operator_extra_links` list. 
 
 ```python
 from airflow.models.baseoperator import BaseOperatorLink
@@ -105,8 +99,36 @@ class MyAirflowPlugin(AirflowPlugin):
     operator_extra_links = [
         MyLink(),
     ]
-
 ```
+The screenshot below shows an operator extra link called "HTTP cat" having been added to the custom CatHttpOperator in this [step-by-step tutorial](operator-extra-link-tutorial.md) on how to add operator extra links.
+
+![Cat Button](/img/guides/extra_links_tutorial_cat_button.png)
+
+### Global operator extra links
+
+Global operator extra links are additional buttons with links that will be added to every operator. This example adds a button named **Airflow docs** to all operators that links out to the Airflow documentation.
+
+```python
+class GlobalLink(BaseOperatorLink):
+    # name the link button
+    name = "Airflow docs"
+
+    # function determining the link
+    def get_link(self, operator, *, ti_key=None):
+        return "https://airflow.apache.org/"
+
+# add the operator extra link to a plugin
+class MyAirflowPlugin(AirflowPlugin):
+    name = "my_plugin_name"
+    global_operator_extra_links = [
+        GlobalLink(),
+    ]
+```
+
+You can access the button on task instences in both the Graph and Grid view.
+
+![Airflow Docs Button](/img/guides/global_operator_extra_link.png)
+
 
 ### Timetables
 
