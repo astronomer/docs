@@ -5,9 +5,9 @@ description: "How to use Airflow plugins."
 id: using-airflow-plugins
 ---
 
-Plugins are external features that you can add to customize your Airflow intsallation
+Plugins are external features that you can add to customize your Airflow installation. 
 
-Plugins are Airflow components that you can add to your project to customize your Airflow installation. You can import custom plugins to Airflow by adding them to the `plugins` directory of your project. 
+You can import custom plugins to Airflow by adding them to the `plugins` directory of your project. 
 
 In this guide you'll learn about plugin capabilities and review some examples that show how they are used and the benefits they provide.
 
@@ -17,6 +17,35 @@ To get the most out of this guide, you should have an understanding of:
 
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow core components. See [Airflow's components](airflow-components.md).
+
+## Plugin interface
+
+
+
+## Plugin components
+
+
+### Hooks
+
+### Macros
+
+### Flask Blueprints
+
+### Appbuilder views
+
+### Appbuilder menu items
+
+### Global operator extra links
+
+### Operator extra links
+
+### Timetables
+
+### Listeners
+
+### .on_load() method
+
+
 
 ### Macros
 

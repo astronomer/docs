@@ -1,6 +1,6 @@
 ---
 title: 'Use a plugin to add extra links to operators'
-sidebar_label: 'Add extra links'
+sidebar_label: 'Add an operator extra link via plugin'
 id: operator-extra-link-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
@@ -85,7 +85,7 @@ class HTTPDocsLink(BaseOperatorLink):
 
     # provide the link
     def get_link(self, operator, *, ti_key=None):
-        return f"https://developer.mozilla.org/en-US/docs/Web/HTTP"
+        return "https://developer.mozilla.org/en-US/docs/Web/HTTP"
 
 # define the plugin class
 class AirflowExtraLinkPlugin(AirflowPlugin):
@@ -112,13 +112,13 @@ This script accomplishes the following:
 
 2. Run the `plugins_test_dag`.
 
-3. In the Grid View click on the green square showing the successful run of the `call_api_simple` task. Select the **Details** tab and scroll down to see the extra link button.
+3. In the Grid View click on the green square showing the successful run of the `call_api_simple` task. Select the **Details** tab and scroll down to see the extra link button called **HTTP docs**.
 
 ![HTTP docs button](/img/guides/extra_links_tutorial_HTTPDocsLink_button.png)
 
 4. Click on the button to visit the HTTP docs on Mozilla.
 
-## Step 5: Modify the SimpleHttpOperator
+## Step 5: Create a custom CatHttpOperator
 
 Linking to relevant docs from an operator is useful, but often you want to add a dynamic link that uses information returned by the operator to decide where to link to. The second half of this tutorial will cover how to modify an operator to push the value you need to [XComs](airflow-passing-data-between-tasks.md) and retrieve that value in your Airflow plugin.
 
@@ -170,7 +170,7 @@ class CatHttpOperator(SimpleHttpOperator):
         return response.text
 ```
 
-The code above defines a custom slightly modified version of the `SimpleHttpOperator`, called the `CatHttpOperator`. The change consists of adding one line before the `return` statement of the `.execute()` method which is `context["ti"].xcom_push(key="status_code", value=response.status_code)`. This line pushes the `status_code` attribute of the `response` object to XComs using and associates it with the key `status_code`. The rest of the `.execute()` method is identical to the parent operator (compare the source code of the [SimpleHttpOperator](https://github.com/apache/airflow/blob/main/airflow/providers/http/operators/http.py)).
+The code above defines a custom slightly modified version of the `SimpleHttpOperator`, called the `CatHttpOperator`. The change consists of adding one line before the `return` statement of the `.execute()` method which is `context["ti"].xcom_push(key="status_code", value=response.status_code)`. This line pushes the `status_code` attribute of the `response` object to XComs and associates it with the key `status_code`. The rest of the `.execute()` method is identical to the parent operator (compare the source code of the [SimpleHttpOperator](https://github.com/apache/airflow/blob/main/airflow/providers/http/operators/http.py)).
 
 3. Add an empty Python file with the name `__init__.py` to your `/include` folder to allow module imports from the folder.
 
