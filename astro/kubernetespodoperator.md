@@ -100,7 +100,7 @@ Applying the code above ensures that when this DAG runs, it will launch a Kubern
 
 ### Mount a temporary directory (_AWS only_)
 
-Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be used by tasks for ephemeral storage. See the [`m6id`](https://aws.amazon.com/ec2/instance-types/m6i/) and[`m5d`](https://aws.amazon.com/ec2/instance-types/m5/) information pages for the amount of available storage in each node type.
+Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
 
 To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
 
