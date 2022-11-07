@@ -11,7 +11,7 @@ id: connections
 
 Connections in Airflow are sets of configurations used to connect with other tools in the data ecosystem. Because most hooks and operators rely on connections to send and retrieve data from external systems, understanding how to create and configure them is essential for running Airflow in a production environment.
 
-In this tutorial you'll:
+In this concept guide you'll:
 
 - Learn about Airflow connections.
 - Learn how to define connections using the Airflow UI.
