@@ -13,9 +13,9 @@ All communication between control and data planes is encrypted in transit using 
 
 All customer data flows within the control plane transit through a mTLS mesh, enforcing TLS 1.2 and secure strong ciphers. Encrypted secret environment variables transit from the Cloud API to a managed secrets backend using TLS 1.2 and strong ciphers. data planes pull base64 encoded secret environment variables, along with other Airflow configurations over an encrypted TLS connection. As part of the application of configuration manifests in the data plane, all secret and sensitive information is stored in an encrypted etcd cluster at rest.
 
-All internal service communication within the data plane is transmitted using TLS 1.2 and secure ciphers. Astronomer plans to enforce an mTLS mesh to all Deployment namespaces in 2022.
+All internal service communication within the data plane is transmitted using TLS 1.2 and secure ciphers.
 
-Each cluster in your data plane has its own certificates which were generated when the cluster was created and signed by the Let’s Encrypt certificate authority (CA). In 2022, Astronomer will enhance the security posture of clusters in the data plane by removing public IPs and the need to sign certificates with a public CA.
+Each cluster in your data plane has its own certificates which were generated when the cluster was created and signed by the Let’s Encrypt certificate authority (CA). The certificates are auto-renewed within a 90 day window. In 2022, Astronomer will enhance the security posture of clusters in the data plane by removing public IPs and the need to sign certificates with a public CA.
 
 ## Encryption at rest
 
