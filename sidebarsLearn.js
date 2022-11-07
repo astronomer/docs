@@ -119,6 +119,7 @@ module.exports = {
           ],
         },
         'astro-python-sdk',
+        'operator-extra-link-tutorial',
       ],
     },
     {

@@ -5,6 +5,8 @@ description: "How to use Airflow plugins."
 id: using-airflow-plugins
 ---
 
+Plugins are external features that you can add to customize your Airflow intsallation
+
 Plugins are Airflow components that you can add to your project to customize your Airflow installation. You can import custom plugins to Airflow by adding them to the `plugins` directory of your project. 
 
 In this guide you'll learn about plugin capabilities and review some examples that show how they are used and the benefits they provide.
@@ -47,3 +49,13 @@ The Airflow UI is customizable to meet a variety of needs. With menu items, you 
     - Organization-specific Domino install
     - CI/CD system
     - AI Management systems
+
+
+
+(Intro): What is a plugin, contents of the guide
+Assumed knowledge: Templating, Airflow UI, Flask if you want to build something for the UI
+Types of plugins: Macros, Blueprints, Views, Menu Links - and what those are on a high level (Have a note here about hooks and operators not being plugins anymore and link to respective guides)
+When to use plugins: list of general use cases, hopefully at least one for every type of plugin
+How to use plugins: general process of adding a plugin (put into plugin folder, add to plugins manager, remember to restart, other steps I might not be aware of yet)
+Example: How to add a macro
+Example: How to add a change to the UI
