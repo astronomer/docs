@@ -15,19 +15,22 @@ To get the most out of this guide, you should have an understanding of:
 
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow core components. See [Airflow's components](airflow-components.md).
-- Jinja templating in Airflow. See [Using Airflow templates](templating.md).
 
-## Plugin interface
+## When to use plugins
+
+list of general use cases
 
 
+## How to create a plugin
 
+To add a new plugin to your Airflow instance you need to create a class which inherits from the `AirflowPlugin` class. The code snippet below when copy pasted into a Python file in `/plugins` defines a plugin with the name `empty` without any components. 
 
 ```python
 from airflow.plugins_manager import AirflowPlugin
 
 class MyAirflowPlugin(AirflowPlugin):
-    # name your plugin
-    name = "my_plugin_name"
+    # name your plugin, this is mandatory
+    name = "empty"
 
     ## Add plugin components
     # ...
@@ -37,27 +40,30 @@ class MyAirflowPlugin(AirflowPlugin):
     # Add an optional callback to perform actions when airflow starts and
     # the plugin is loaded.
     # NOTE: Ensure your plugin has *args, and **kwargs in the method definition
-    #   to protect against extra parameters injected into the on_load(...)
+    #   to protect against extra parameters injected into the on_load()
     #   function in future changes
     def on_load(*args, **kwargs):
-        # ... perform Plugin boot actions
+        # perform Plugin boot actions
         pass
 ```
 
+The list of currently active plugins can be viewed in the Airflow UI under **Admin** -> **Plugins**. The code above creates the following entry:
+
+![Empty plugin](/img/guides/empty_plugin.png)
+
+:::info
+
+Airflow needs to be restarted for changes in plugins to be registered. Learn more in the [official Airflow documentation on plugins](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html#when-are-plugins-re-loaded).
+
+:::
 
 ## Plugin components
-
-
 
 :::info
 
 Before Airflow 2.0 custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](https://docs.astronomer.io/learn/airflow-importing-custom-hooks-operators) can now be simply by importing a script located in `/include`.
 
 :::
-
-### Hooks
-
-### Macros
 
 ### Flask Blueprints
 
@@ -73,9 +79,13 @@ Operator extra links are additional buttons with links that can be added to spec
 
 ![Cat Button](/img/guides/extra_links_tutorial_cat_button.png)
 
-The 
+Operator extra links are Python classes derived from the `BaseOperatorLink` class. The example below shows how to create a new operator extra link `MyLink` and add it to the `operator_extra_links` list of `MyAirflowPlugin`. 
 
 ```python
+from airflow.models.baseoperator import BaseOperatorLink
+from include.custom_operators import MyOperator1, MyOperator2
+from airflow.plugins_manager import AirflowPlugin
+
 # create the operator extra link
 class MyLink(BaseOperatorLink):
     
@@ -102,23 +112,11 @@ class MyAirflowPlugin(AirflowPlugin):
 
 ### Listeners
 
-### .on_load() method
+### Other components
+
+Hooks, Executors, Macros (now using `user_defined_macros` see [Using Airflow templates](templating.md))
 
 
-
-### Macros
-
-[Macros](https://airflow.apache.org/docs/apache-airflow/stable/templates-ref.html#macros) are used to pass dynamic information into task instances at runtime with templating. You can use pre-built macros in Airflow or import custom macros through the `plugins` directory. 
-
-A current limitation of Airflow is that every global variable or top-level method in a DAG file is interpreted every cycle during the DAG processing loop on the scheduler. While the loop execution time can vary from seconds to minutes, the majority of code should only be interpreted in a task at execution time.
-
-Macros are a tool in Airflow that extend Airflow [templating](https://airflow.apache.org/tutorial.html#templating-with-jinja) capabilities to offload runtime tasks to the executor instead of the scheduler loop. The following are some example macros:
-
-- Timestamp formatting of last or next execution for incremental ETL.
-- Decryption of a key used for authentication to an external system.
-- Accessing custom user-defined params
-
-A template always returns a string.
 
 ### Blueprints and views
 
@@ -138,12 +136,3 @@ The Airflow UI is customizable to meet a variety of needs. With menu items, you 
     - CI/CD system
     - AI Management systems
 
-
-
-(Intro): What is a plugin, contents of the guide
-Assumed knowledge: Templating, Airflow UI, Flask if you want to build something for the UI
-Types of plugins: Macros, Blueprints, Views, Menu Links - and what those are on a high level (Have a note here about hooks and operators not being plugins anymore and link to respective guides)
-When to use plugins: list of general use cases, hopefully at least one for every type of plugin
-How to use plugins: general process of adding a plugin (put into plugin folder, add to plugins manager, remember to restart, other steps I might not be aware of yet)
-Example: How to add a macro
-Example: How to add a change to the UI
