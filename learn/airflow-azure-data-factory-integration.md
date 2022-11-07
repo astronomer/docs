@@ -1,5 +1,5 @@
 ---
-title: "Run an Azure Data Factory pipelines with Airflow"
+title: "Run Azure Data Factory pipelines with Airflow"
 sidebar_label: "Azure Data Factory"
 description: "Learn how to orchestrate remote jobs in Azure Data Factory with your Apache Airflow DAGs."
 id: airflow-azure-data-factory-integration
