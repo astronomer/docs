@@ -46,6 +46,15 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
     These role assignments are required for cluster creation, and can be removed after the cluster is created.
 - Microsoft Azure CLI or Azure Az PowerShell module.  See [How to install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) and [Install the Azure Az PowerShell module](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps).
 - A minimum quota of 48 Standard Ddv5-series vCPUs in the deployment region. You can use Dv5-series vCPUs, but you'll need 96 total vCPUs composed of 48 Ddv5-series vCPUs and 48 Dv5-series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
+- Validation that these VM types are available in all Availability Zones in the desired region.  The following az cli command checks that Standard_D4_v5 VMs (the default VM type for Astro)  are available in centralus 
+  ```  
+  az vm list-skus --location centralus --size Standard_D --all --output table | grep -e 'Restrictions\|Standard_D4_v5'
+  ```  
+  If the VM types are not available, the output shows Restrictions.  In this case, open a support case with Microsoft Support to have these enabled.
+  ```
+  ResourceType     Locations    Name                    Zones    Restrictions
+  virtualMachines  centralus    Standard_D4_v5          1,2,3    NotAvailableForSubscription, type: Zone, locations: centralus, zones: 1
+  ```
 - A subscription to the [Astro status page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or when scheduled maintenance is planned.
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
     - `https://cloud.astronomer.io/`
