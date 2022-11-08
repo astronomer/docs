@@ -20,19 +20,21 @@ Release date: November 8, 2022
 
 ## Deploy only DAGs with `astro deploy -—dags`
 
-Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an alternative to rebuilding your Astro project's Docker image every time you change your code.
+Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an alternative to the current image-only deployment method, which rebuilds all files in your Astro project into a Docker image every time you deploy your code to Astro.
 
-DAG-only deploys:
+DAG-based deploys:
 
-- Are significantly faster than running `astro deploy`, as it avoids the process of building a Docker image and re-installing your dependencies.
-- Do not cause your workers to terminate and restart every time you need to make a change to a DAG, which leads to performance and cost benefits.
-- Enable teams to create separate CI/CD process for deploying DAGs and deploying other changes to your Astro project.
+- Are significantly faster than running `astro deploy` when you only make changes to the `dags` directory.
+- Do not cause your workers and schedulers to terminate and restart every time you make a change to a DAG, which can lead to both reliability and cost benefits.
+- Enable your team to create separate CI/CD processes for deploying DAGs and deploying other changes to your Astro project.
 
-When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required. See [DAG-only deploys](deploy-code.md#dag-only-deploys) for more potential use cases and implementation details. 
+When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
 
-## New command to programmatically query Deployment information
+To use this feature, you must enable it for each Deployment. See [DAG-based deploys](deploy-code.md#dag-based-deploys) for more information.
 
-You can now run `astro deployment inspect` to return Deployment's current state and configuration as a JSON or YAML object. Use this command to quickly understand the state of your Deployment and as an alternative to viewing it in the Cloud UI.
+## New `astro deployment inspect` command
+
+You can now run `astro deployment inspect` to return a Deployment's current state and configuration as a JSON or YAML object. Use this command to quickly understand the state of your Deployment and as an alternative to viewing it in the Cloud UI.
 
 For more information, see the [CLI command reference](cli/astro-deployment-inspect.md).
 
@@ -45,7 +47,7 @@ For more information, see the [CLI command reference](cli/astro-deployment-inspe
 
 ## Bug fixes
 
-- Fixed an issue where `astro deploy` with `colima` was failing due to a `registry login` issue
+- Fixed an issue where `astro deploy` with `colima` was failing due to an issue with registry authentication
 - Fixed an issue where `astro deployment list` didn't display the Workspace ID for a Deployment
   
 ## Astro CLI 1.6.1
