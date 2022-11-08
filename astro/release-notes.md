@@ -1,3 +1,5 @@
+
+
 ---
 sidebar_label: 'Astro'
 title: 'Astro release notes'
@@ -19,7 +21,19 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## November 8, 2022
 
-### New data lineage interface
+### New DAG deployment method
+
+Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an alternative to rebuilding your Astro project's Docker image every time you change your code.
+
+DAG-only deploys:
+
+- Are significantly faster than running `astro deploy` to rebuild your project.
+- Don't cause your workers to terminate and restart every time you need to make a change to a DAG, which leads to performance and cost benefits.
+- Enable teams to create separate CI/CD processes for deploying DAGs and deploying other changes to your Astro project. See [Two-step templates](ci-cd.md#two-step-templates) for examples. 
+
+For more information, see [DAG-only deploys](deploy-code.md#dag-only-deploys).
+
+### Improved data lineage interface
 
 The **Lineage** tab in the Cloud UI has been updated with more features and now matches the look and feel of Astro.
 
