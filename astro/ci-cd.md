@@ -35,7 +35,7 @@ There are many benefits to configuring a CI/CD workflow that automates pushing c
 
 Templates allow you to quickly configure individual CI pipelines using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices.
 
-Astro supports two deployment methods: project deploys and DAG-only deploys. This document contains two kinds of templates that utilize these deployment methods in different ways: One-step templates and multi-step templates.
+Astro supports two deployment methods: project deploys and DAG-only deploys. This document contains two kinds of templates that utilize these deployment methods in different ways: One-step templates and two-step templates.
 
 ### One-step templates
 
@@ -67,9 +67,9 @@ The following templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy vi
 
 :::
 
-### Multi-step templates
+### Two-step templates
 
-A multi-step workflow utilizes the `--dags` CLI flag to improve the performance of your CI/CD workflows. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy your entire Astro project as an image when any other files or directories are modified. 
+Two-step templates utilize the `--dags` CLI flag to improve the performance of your CI/CD workflows. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy your entire Astro project as an image when any other files or directories are modified. 
 
 This workflow has a number of benefits: 
 
@@ -77,7 +77,7 @@ This workflow has a number of benefits:
 - DAG only deploys are faster than image deploys. Your code changes will appear in Airflow faster than for project configuration changes
 - You can have different sets of users deploy project changes and DAG changes.
 
-Specifically, a multi-step CI/CD template:
+Specifically, a two-step CI/CD template:
 
 - Accesses Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
 - Installs the latest version of the Astro CLI.
@@ -353,7 +353,7 @@ To complete this setup, you need:
 </TabItem>
 </Tabs>
 
-### GitHub Actions (Multi-step)
+### GitHub Actions (Two-step)
 
 The following templates are examples of how to implement DAG-only deploys in GitHub Actions. These templates can be modified to run on other CI/CD tools.
 
