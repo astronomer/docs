@@ -81,7 +81,7 @@ deployment:
 
 | Option                    | Description                                                                                                             | Possible Values          |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `-n`, `--deployment-name` | Name of the Deployment to inspect. Use as an alternative to <deployment-id>.                                                                                     | Any valid Deployment name |
+| `-n`, `--deployment-name` | Name of the Deployment to inspect. Use as an alternative to `<deployment-id>`.                                                                                     | Any valid Deployment name |
 | `<deployment-id>`   | The ID of the Deployment to delete                                                | Any valid Deployment ID   |
 | `--workspace-id`          | Specify a Workspace to run this command for a Deployment that is outside of your current Workspace.                                               | Any valid Workspace ID   |
 | `-k`, `--key`             | Return only a specific configuration key for a Deployment. For example `--key configuration.cluster_id` to get a Deployment's cluster ID.       | Any valid Deployment configuration key   |
