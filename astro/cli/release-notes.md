@@ -16,33 +16,41 @@ If you have any questions or a bug to report, contact [Astronomer support](https
 
 ## Astro CLI 1.7.0
 
-Release date: November 7, 2022 
+Release date: November 8, 2022 
 
 ## Deploy only DAGs with `astro deploy -—dags`
 
-Use `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. Deploying DAGs is significantly faster than deploying a Docker image and does not cause any down time for your Deployments. Additionally, the `--dags` flag can help you create separate CI/CD processes for DAG deployment and Astro project configuration. See [DAG-only deploys](deploy-code.md#dag-only-deploys) for more potential use cases and implementation details. 
+Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an alternative to rebuilding your Astro project's Docker image every time you change your code.
+
+DAG-only deploys:
+
+- Are significantly faster than running `astro deploy`, as it avoids the process of building a Docker image and re-installing your dependencies.
+- Do not cause your workers to terminate and restart every time you need to make a change to a DAG, which leads to performance and cost benefits.
+- Enable teams to create separate CI/CD process for deploying DAGs and deploying other changes to your Astro project.
+
+When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required. See [DAG-only deploys](deploy-code.md#dag-only-deploys) for more potential use cases and implementation details. 
 
 ## New command to programmatically query Deployment information
 
-You can now run `astro deployment inspect` to return Deployment's current state and configuration as a JSON or YAML object.
+You can now run `astro deployment inspect` to return Deployment's current state and configuration as a JSON or YAML object. Use this command to quickly understand the state of your Deployment and as an alternative to viewing it in the Cloud UI.
 
 For more information, see the [CLI command reference](cli/astro-deployment-inspect.md).
 
 ## Additional improvements
 
-- The outputs for `astro dev parse/pytest` no longer include Docker container logs for improved legibility.
-- The `astro organization switch` command now includes a `-—login-link` flag for logging in if browser login isn't available on your machine.
-- You can now provide either an Organization name or ID when running `astro organization switch` 
-- `astro dev start` now times out if the webserver does not become healthy within a set period. Use the `-—wait` flag to specify a wait time.
+- The outputs for `astro dev parse` and `astro dev pytest` commands have improved legibility by no longer including Docker container logs.
+- The `astro organization switch` command now includes a `-—login-link` flag that you can use to manually log in if you don't have access to a web browser.
+- You can now provide either an Organization name or ID when running `astro organization switch`.
+- `astro dev start` now times out if the Airflow webserver does not become healthy within a set period of time. Use the `-—wait` flag to specify a wait time in seconds or minutes.
 
 ## Bug fixes
 
 - Fixed an issue where `astro deploy` with `colima` was failing due to a `registry login` issue
-- Fixed an issue were the `deployment list` command didn't display the Workspace ID for a Deployment
-
+- Fixed an issue where `astro deployment list` didn't display the Workspace ID for a Deployment
+  
 ## Astro CLI 1.6.1
 
-Release date: November 8, 2022 
+Release date: November 3, 2022 
 
 ### Bug fixes 
 

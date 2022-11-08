@@ -6,7 +6,7 @@ description: Reference documentation for astro deployment inspect.
 hide_table_of_contents: true
 ---
 
-Inspect an Astro Deployment. This command returns a YAML or JSON representation of a Deployment's current configuration and state. When the `--key` flag is used, returns specific values for the Deployment. 
+Inspect an Astro Deployment. This command returns a YAML or JSON representation of a Deployment's current configuration and state as shown in the Cloud UI. When the `--key` flag is used, it returns only the values specified with the flag.
 
 ## Usage
 
@@ -20,7 +20,7 @@ When using the `--key` flag, specify the complete path of the key you want to re
 deployment inspect <deployment-id> --key configuration.status
 ```
 
-See [Example output](example-output.md) for all possible values to return. 
+See [Example output](#example-output) for all possible values to return. 
 
 ## Example output
 
@@ -81,15 +81,16 @@ deployment:
 
 | Option                    | Description                                                                                                             | Possible Values          |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------ |
-| `-n`, `--deployment-name` | Name of the deployment to inspect.                                                                                      | An Valid Deployment Name |
-| `--workspace-id`          | Specify a Workspace to list Deployments outside of your current Workspace.                                               | Any valid Workspace ID   |
-| `-k`, `--key`             | A specific key for the deployment. For example `--key configuration.cluster_id` to get a deployment's cluster id.       | Any valid Workspace ID   |
-| `-o`, `--output`          | Output format can be one of: YAML or JSON. By default the inspected deployment is in YAML format. (default "yaml") | `yaml` or `json`.             |
+| `-n`, `--deployment-name` | Name of the Deployment to inspect. Use as an alternative to <deployment-id>.                                                                                     | Any valid Deployment name |
+| `<deployment-id>`   | The ID of the Deployment to delete                                                | Any valid Deployment ID   |
+| `--workspace-id`          | Specify a Workspace to run this command for a Deployment that is outside of your current Workspace.                                               | Any valid Workspace ID   |
+| `-k`, `--key`             | Return only a specific configuration key for a Deployment. For example `--key configuration.cluster_id` to get a Deployment's cluster ID.       | Any valid Deployment configuration key   |
+| `-o`, `--output`          | Output format can be one of: YAML or JSON. By default, inspecting a Deployment returns  a file in YAML format. | `yaml` or `json`.             |
 
 ## Examples
 
 ```sh
-# Shows a list of Deployments to inspect
+# Shows a list of Deployments to inspect and prompts you to choose one
 $ astro deployment inspect
 
 # Shows a specific Deployment's configuration

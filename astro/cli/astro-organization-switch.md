@@ -6,7 +6,7 @@ description: Reference documentation for astro organization switch.
 hide_table_of_contents: true
 ---
 
-Switch to a different Organization. 
+Switch to a different Organization that you have access to in Astro.
 
 ## Usage
 
@@ -29,6 +29,3 @@ Switching to a different organization triggers a new browser login. If browser l
 - [astro organization list](cli/astro-organization-list.md)
 - [astro context list](cli/astro-context-list.md)
 - [astro context switch](cli/astro-context-switch.md)
-
-
-

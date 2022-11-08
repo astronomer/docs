@@ -24,8 +24,8 @@ astro dev start
 | `-i`, `--image-name` | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 | `-n`, `--no-browser` | Starts Airflow without opening a browser for the Airflow UI      | None                                                             |
 | `--no-cache`         | Do not use cache when building container image                   | None                                                             |
-| `-s`, `--settings-file` | Settings file to import Airflow objects from (default "airflow_settings.yaml") | Airflow settings file                           |
-| `--wait`                | Duration to wait for webserver to get healthy before timing out. The default is 1 minute except for M1 architecture-based machines, which is 5 minutes. | Time in seconds, or minutes defined as `<integer>m` |
+| `-s`, `--settings-file` | Settings file from which to import Airflow objects. Default is `airflow_settings.yaml`. | Any valid path to an Airflow settings file                           |
+| `--wait`                | Amount of time to wait for the webserver to get healthy before timing out. TThe default is 1 minute for most machines, and 5 minutes for Apple M1 machines. | Time in seconds defined in `<integer>s` or minutes defined as `<integer>m` |
 
 
 ## Examples
