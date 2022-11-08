@@ -9,13 +9,11 @@ id: release-notes
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
 </head>
 
-<!--- Version-specific -->
-
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 6.0.1 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 6.0.3 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
 
@@ -50,7 +48,9 @@ If you have any feedback, please submit it to the [Astro Cloud IDE product porta
 
 ### Write to temporary storage on AWS clusters
 
-AWS clusters that use `m5d` and `m6id` worker types can now run tasks which require writing data to local storage. These worker types now have NVMe SSD volume mounts with 20 GB of storage. You can use this storage for simple operations such as a disk-based merge sort or checkpointing to prevent crashes. To use these worker types on your cluster, see [Modify a cluster](modify-cluster.md) and [Configure worker queues](configure-worker-queues.md).
+AWS clusters that use `m5d` and `m6id` worker types can now run tasks which require writing data to ephemeral storage. These worker types now have NVMe SSD volume mounts that can be utilized by tasks. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each worker type.
+
+You can use this storage for simple operations such as a disk-based merge sort or checkpointing to prevent crashes. To use these worker types on your cluster, see [Modify a cluster](modify-cluster.md) and [Configure worker queues](configure-worker-queues.md). 
 
 ### Additional improvements 
 
@@ -486,7 +486,7 @@ For example, if an Airflow task failed because the schema of a database changed,
 
 To learn more about data lineage and how you can configure it on Astro, see:
 
-- [Data lineage Concepts](data-lineage-concepts.md)
+- [Integrate Airflow and OpenLineage](https://docs.astronomer.io/learn/airflow-openlineage)
 - [Enable data lineage for External Services](set-up-data-lineage.md)
 - [Data lineage on Astro](data-lineage.md)
 - [Data lineage Support and Compatibility](data-lineage-support-and-compatibility.md)

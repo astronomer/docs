@@ -15,7 +15,7 @@ Sometimes, manually writing DAGs isn't practical. Maybe you have hundreds or tho
 
 Because everything in Airflow is code, you can dynamically generate DAGs using Python alone. As long as a `DAG` object in `globals()` is created by Python code that is stored in the `dags_folder`, Airflow will load it. In this guide, you'll learn how to dynamically generate DAGs. You'll learn when DAG generation is the preferred option and what pitfalls to avoid.
 
-All code used in this tutorial is located in the [Astronomer Registry](https://github.com/astronomer/dynamic-dags-tutorial).
+All code used in this guide is located in the [Astronomer Registry](https://github.com/astronomer/dynamic-dags-tutorial).
 
 ## Assumed knowledge
 

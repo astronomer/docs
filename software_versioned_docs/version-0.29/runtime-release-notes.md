@@ -11,6 +11,47 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software](manage-airflow-versions.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, reach out to [Astronomer support](https://support.astronomer.io).
 
+## Astro Runtime 6.0.3
+
+- Release date: October 24, 2022
+- Airflow version: 2.4.2
+
+### Airflow 2.4.2
+
+Astro Runtime 6.0.3 includes same-day support for Airflow 2.4.2. The following are some of the changes included in Airflow 2.4.2:
+
+- Handle mapped tasks in task duration chart ([#26722](https://github.com/apache/airflow/pull/26722))
+- Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059)
+
+For a complete list of commits, see the [Apache Airflow 2.4.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-2-2022-10-23).
+
+### Additional improvements  
+
+- Upgraded `openlineage-airflow` to 0.15.1, which includes a dedicated Airflow development environment. You can now create and test changes to custom OpenLineage extractors in an Airflow environment without needing to rebuild your Docker images. For more information, see the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+
+## Astro Runtime 6.0.2
+
+- Release date: September 30, 2022
+- Airflow version: 2.4.1
+
+### Support for Apache Airflow 2.4.1
+
+Astro Runtime 6.0.2 includes Airflow 2.4.1, which is limited to bug fixes. For a complete list of commits, see the [Apache Airflow 2.4.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-1-2022-09-30).
+
+### Backported bug fixes from Apache Airflow 2.4.2
+
+Astro Runtime 6.0.2 includes the following bug fixes:
+
+- Remove DAG parsing from StandardTaskRunner ([#26750](https://github.com/apache/airflow/pull/26750))
+- Fix airflow tasks run --local when dags_folder differs from that of processor ([#26509](https://github.com/apache/airflow/pull/26509))
+- Add fixture for CLI tests requiring sample dags ([#26536](https://github.com/apache/airflow/pull/26536))
+
+These changes were backported from Apache Airflow 2.4.2, which is not yet generally available.
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.10.0, which includes `SFTPSensorAsync` and `ExternalDeploymentTaskSensorAsync` as new deferrable operators. For a complete list of changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1100-2022-09-30).
+
 ## Astro Runtime 6.0.1
 
 - Release date: September 26, 2022
@@ -22,6 +63,36 @@ For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software
 - Backported a fix to correct an issue where logs were not loading from Celery workers ([#26493](https://github.com/apache/airflow/pull/26493))
 - Fixed [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
 
+## Astro Runtime 5.0.11
+
+- Release date: November 2, 2022
+- Airflow version: 2.3.4 
+
+### Backported Airflow bug fixes
+
+Astro Runtime 5.0.11 includes the following bug fix from later Apache Airflow releases:
+
+- Fix warning when using xcomarg dependencies ([#26801](https://github.com/apache/airflow/pull/26801))
+
+### Bug fixes
+
+- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set in the Astro data plane. This enables Astronomer Software users to set a value for custom remote logging storage solutions. 
+
+## Astro Runtime 5.0.10
+
+- Release date: October 17, 2022
+- Airflow version: 2.3.4
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.10.0, which includes two new deferrable versions of the operators `SFTPSensorAsync` and `ExternalDeploymentTaskSensorAsync`. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.10.0/CHANGELOG.rst).
+- Upgraded `openlineage-airflow` to version 0.15.1. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+
+### Bug fixes
+
+- Revert “Cache the custom secrets backend so the same instance gets re-used” ([#25556](https://github.com/apache/airflow/pull/25556))
+- Fixed faulty Kubernetes executor config serialization logic.
+
 ## Astro Runtime 5.0.9
 
 - Release date: September 20, 2022
@@ -32,12 +103,12 @@ For instructions on how to upgrade, read [Upgrade Airflow on Astronomer Software
 - Fixed an issue where logs were not loading from Celery workers ([#26337](https://github.com/apache/airflow/pull/26337) and [#26493](https://github.com/apache/airflow/pull/26493))
 - Fixed CVE-2022-40754 ([#26409](https://github.com/apache/airflow/pull/26409))
 - Fixed the Airflow UI not auto-refreshing when scheduled tasks are running. This bug was introduced in Airflow 2.3.4 ([#25950](https://github.com/apache/airflow/pull/25950))
-- Fixed an issue where the scheduler could become unresponsive when queueing dynamically mapped tasks ([#25788](https://github.com/apache/airflow/pull/25788))
+- Fixed an issue where the scheduler could crash when queueing dynamically mapped tasks ([#25788](https://github.com/apache/airflow/pull/25788))
 
 ### Additional improvements
 
 - Set `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT=600` by default. This means that tasks that are in `queued` state for more than 600 seconds (10 minutes) will fail. This environment variable can be overridden on Astro but will help prevent tasks from getting stuck in a queued state.
-- Upgraded `astronomer-providers` to 1.8.1, which includes various bug fixes. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#181-2022-09-01).
+- Upgraded `astronomer-providers` to 1.8.1, which includes various bug fixes. For a complete list of changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#181-2022-09-01).
 - Upgraded `openlineage-airflow` to 0.13.0, which includes fixes for Spark integrations. See the [Astronomer Providers changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md#0141---2022-09-07).
 
 ## Astro Runtime 6.0.0
@@ -66,7 +137,7 @@ Astro Runtime 5.0.8 includes Airflow 2.3.4, which primarily includes bug fixes. 
 ### Additional improvements
 
 - Upgraded `astronomer-providers` to version `1.8.0`, which includes minor bug fixes and performance enhancements. For more information, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.8.0/CHANGELOG.rst).
-- Upgraded `openlineage-airflow` to version `0.13.0`, which includes support for Azure Cosmos DB. For more information, see the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+- Upgraded `openlineage-airflow` to version `0.13.0`, which includes support for Azure Cosmos DB. For a list of all changes, see the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 
 ## Astro Runtime 5.0.7
 

@@ -28,16 +28,7 @@ module.exports = {
       label: "Develop",
       items: [
         "develop-project",
-        {
-          type: "category",
-          label: "Write DAGs",
-          items: [
-            "astro-python-sdk",
-            "deferrable-operators",
-            "kubepodoperator-local",
-            "kubernetespodoperator",
-          ],
-        },
+        "kubernetespodoperator",
         {
           type: "category",
           label: "Cloud IDE",
@@ -144,7 +135,15 @@ module.exports = {
     {
       type: "category",
       label: "Release notes",
-      items: ["release-notes", "runtime-release-notes"],
+      items: [
+        "release-notes", 
+        "runtime-release-notes",
+        {
+          type: 'link',
+          label: 'Astro CLI',
+          href: 'https://docs.astronomer.io/astro/cli/release-notes',
+        },
+      ],
     },
     {
       type: "category",
@@ -160,14 +159,7 @@ module.exports = {
           ],
         },
         'platform-variables',
-        {
-          type: "category",
-          label: "Data lineage",
-          items: [
-            "data-lineage-support-and-compatibility",
-            "data-lineage-concepts",
-          ],
-        },
+        'data-lineage-support-and-compatibility',
         {
           type: "category",
           label: "Security",
@@ -195,6 +187,16 @@ module.exports = {
       type: "doc",
       label: "Install the CLI",
       id: "cli/install-cli",
+    },
+    {
+      type: "doc",
+      label: "Configure the CLI",
+      id: "cli/configure-cli",
+    },
+    {
+      type: "doc",
+      label: "Release notes",
+      id: "cli/release-notes",
     },
     {
     type: 'category',

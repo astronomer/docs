@@ -79,7 +79,7 @@ apache-airflow-providers-slack
 
 ### Run the example DAG
 
-The following example DAG uses [Airflow Decorators](https://registry.astronomer.io/guides/airflow-decorators) to define tasks and [XCom](https://registry.astronomer.io/guides/airflow-passing-data-between-tasks) to pass information between Amazon S3 and Slack. The name of the Amazon S3 bucket and the names of the files that the first task reads are stored as environment variables for security purposes.
+The following example DAG uses [Airflow Decorators](https://docs.astronomer.io/learn/airflow-decorators) to define tasks and [XCom](https://docs.astronomer.io/learn/airflow-passing-data-between-tasks) to pass information between Amazon S3 and Slack. The name of the Amazon S3 bucket and the names of the files that the first task reads are stored as environment variables for security purposes.
 
 The following example DAG completes the following steps:
 

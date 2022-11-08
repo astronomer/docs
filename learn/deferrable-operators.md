@@ -37,6 +37,30 @@ With deferrable operators, worker slots are released when a task is polling for 
 
 Deferrable operators should be used whenever you have tasks that occupy a worker slot while polling for a condition in an external system. For example, using deferrable operators for sensor tasks can provide efficiency gains and reduce operational costs. If your organization uses [smart sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html#smart-sensors), you should consider using deferrable operators instead. Compared to smart sensors, which were deprecated in Airflow 2.2.4, deferrable operators offer greater functionality and are better supported by Airflow.
 
+To use a deferrable version of an existing operator in your DAG, you only need to replace the import statement for the existing operator. For example, Airflow's `TimeSensorAsync` is a replacement of the non-deferrable `TimeSensor` ([source](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)). To use `TimeSensorAsync`, remove your existing `import` and replace it with the following:
+
+```python
+# Remove this import:
+# from airflow.operators.sensors import TimeSensor
+# Replace with:
+from airflow.sensors.time_sensor import TimeSensorAsync as TimeSensor
+```
+
+There are numerous benefits to using deferrable operators including:
+
+- Reduced resource consumption: Depending on the available resources and the workload of your triggers, you can run hundreds to thousands of deferred tasks in a single triggerer process. This can lead to a reduction in the number of workers needed to run tasks during periods of high concurrency. With less workers needed, you are able to scale down the underlying infrastructure of your Airflow environment.
+- Resiliency against restarts: Triggers are stateless by design. This means your deferred tasks are not set to a failure state if a triggerer needs to be restarted due to a deployment or infrastructure issue. When a triggerer is back up and running in your environment, your deferred tasks will resume.
+- Gateway to event-based DAGs: The presence of `asyncio` in core Airflow is a potential foundation for event-triggered DAGs.
+
+Some additional notes about using deferrable operators:
+
+- If you want to replace non-deferrable operators in an existing project with deferrable operators, Astronomer recommends importing the deferrable operator class as its non-deferrable class name. If you don't include this part of the import statement, you need to replace all instances of non-deferrable operators in your DAGs. In the above example, that would require replacing all instances of `TimeSensor` with `TimeSensorAsync`.
+- Currently, not all operators have a deferrable version. There are a few open source deferrable operators, plus additional operators designed and maintained by Astronomer.
+- If you're interested in the deferrable version of an operator that is not generally available, you can write your own and contribute it back to the open source project. 
+- There are some use cases where it can be more appropriate to use a traditional sensor instead of a deferrable operator. For example, if your task needs to wait only a few seconds for a condition to be met, Astronomer recommends using a Sensor in [`reschedule` mode](https://github.com/apache/airflow/blob/1.10.2/airflow/sensors/base_sensor_operator.py#L46-L56) to avoid unnecessary resource overhead.
+
+## Available deferrable operators
+
 The following deferrable operators are installed by default in Airflow:
 
 - [TimeSensorAsync](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)
@@ -48,13 +72,7 @@ You can use additional deferrable operators built and maintained by Astronomer b
 - `DatabricksSubmitRunOperatorAsync`
 - `HttpSensorAsync`
  
-For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see [Changelog](https://astronomer-providers.readthedocs.io/en/stable/changelog.html). You can also create your own deferrable operator for your use case.
-
-There are numerous benefits to using deferrable operators including:
-
-- Reduced resource consumption: Depending on the available resources and the workload of your triggers, you can run hundreds to thousands of deferred tasks in a single triggerer process. This can lead to a reduction in the number of workers needed to run tasks during periods of high concurrency. With less workers needed, you are able to scale down the underlying infrastructure of your Airflow environment.
-- Resiliency against restarts: Triggers are stateless by design. This means your deferred tasks are not set to a failure state if a triggerer needs to be restarted due to a deployment or infrastructure issue. When a triggerer is back up and running in your environment, your deferred tasks will resume.
-- Gateway to event-based DAGs: The presence of `asyncio` in core Airflow is a potential foundation for event-triggered DAGs.
+For a full list of deferrable operators and sensors available in the `astronomer-providers` package, see [Changelog](https://astronomer-providers.readthedocs.io/en/stable/providers/operators_and_sensors_list.html). You can also create your own deferrable operator for your use case.
 
 ## Example workflow
 

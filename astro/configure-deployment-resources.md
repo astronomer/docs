@@ -14,7 +14,6 @@ After you create an Astro Deployment, you can modify its settings to meet the un
 - Allocate resources for the Airflow scheduler and workers.
 - Update a Deployment name and description.
 - Add or delete a Deployment alert email.
-- Transfer a Deployment from one Workspace in your Organization to another.
 - Delete a Deployment.
 
 ## Set Deployment resources

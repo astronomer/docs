@@ -262,7 +262,7 @@ For the team at Updater, splitting the dbt models into tasks was only the first 
 
 Running our dbt models on a single DAG has some limitations. Specifically, this implementation cannot handle running different groups of dbt models on different schedules.
 
-To add this functionality, you can take a group of models defined by some selector, such as `dbt run --models tag:hourly`, and deploy that set of models as their own Airflow DAG with its own defined schedule. WYou can then use your `manifest.json` file to set dependencies between these groups of models and build out a robust CI process. To do this, you can:
+To add this functionality, you can take a group of models defined by some selector, such as `dbt run --models tag:hourly`, and deploy that set of models as their own Airflow DAG with its own defined schedule. You can then use your `manifest.json` file to set dependencies between these groups of models and build out a robust CI process. To do this, you can:
 
 1. Use the `selectors.yml` file ([introduced in dbt 0.18](https://docs.getdbt.com/reference/node-selection/yaml-selectors/)) to define a set of model selectors for each Airflow DAG schedule you want to create. You can then use dbt's [tagging feature](https://docs.getdbt.com/reference/resource-configs/tags) to tag every model with a desired schedule interval.
 
@@ -427,7 +427,7 @@ With that said, this implementation still has some limitations. For a more in-de
 
 ## Bonus 2: DbtDagParser utility
 
-The sample code you provided in the previous section demonstrates how to loop through the `manifest.json` file of your DAG to parse out individual models and map them to Airflow tasks. To simplify the DAG code when using this pattern, you can use a convenient utility method that takes care of the parsing. The `DbtDagParser` utility, developed and explained by Sam Bail, works as follows:
+The sample code provided in the previous section demonstrates how to loop through the `manifest.json` file of your DAG to parse out individual models and map them to Airflow tasks. To simplify the DAG code when using this pattern, you can use a convenient utility method that takes care of the parsing. The `DbtDagParser` utility, developed and explained by Sam Bail, works as follows:
 
 - The parser takes the dbt project path containing the `dbt_project.yml` file, as well as the path to the `profiles.yml` file, as inputs. Note that this setup assumes that you have a single repo that contains both your dbt project and Airflow code.
 - By providing a "dbt_tag" parameter, you can select a subset of models to run. This means you can specify multiple DAGs for different subsets of the dbt models, for example to run them on different schedules, as described in [Part 2](https://www.astronomer.io/blog/airflow-dbt-2) of our blog series.

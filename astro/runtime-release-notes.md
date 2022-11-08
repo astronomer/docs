@@ -2,6 +2,7 @@
 sidebar_label: 'Astro Runtime'
 title: 'Astro Runtime release notes'
 id: runtime-release-notes
+toc_min_heading_level: 2
 ---
 
 <head>
@@ -90,8 +91,23 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 
 ### Additional improvements
 
-- Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
+- Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of the operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
 - Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+
+## Astro Runtime 5.0.11
+
+- Release date: November 2, 2022
+- Airflow version: 2.3.4 
+
+### Backported Airflow bug fixes
+
+Astro Runtime 5.0.11 includes the following bug fix from later Apache Airflow releases:
+
+- Fix warning when using xcomarg dependencies ([#26801](https://github.com/apache/airflow/pull/26801))
+
+### Bug fixes
+
+- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set in the Astro data plane. This enables Astronomer Software users to set a value for custom remote logging storage solutions. 
 
 ## Astro Runtime 5.0.10
 
@@ -259,7 +275,7 @@ For more information, see the [changelog for Apache Airflow 2.3.1](https://githu
 
 ### Astronomer Providers 1.2.0
 
-Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/)). This release includes 5 new [deferrable operators](deferrable-operators.md):
+Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/)). This release includes 5 new [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators):
 
     - `DataprocSubmitJobOperatorAsync`
     - `EmrContainerSensorAsync`
@@ -366,7 +382,7 @@ Astro Runtime 4.2.1 upgrades the `astronomer-providers` package to v1.1.0 ([CHAN
     - `GCSUploadSessionCompleteSensorAsync`
     - `BigQueryTableExistenceSensorAsync`
 
-For more information about deferrable operators and how to use them, see [deferrable operators](deferrable-operators.md). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
+For more information about deferrable operators and how to use them, see [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ### Additional improvements
 
@@ -381,7 +397,7 @@ For more information about deferrable operators and how to use them, see [deferr
 
 The `astronomer-providers` package is now installed on Astro Runtime by default. This package is an open source collection of Apache Airflow providers and modules that is maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 
-For more information, see [deferrable operators](deferrable-operators.md). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
+For more information, see [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ### Additional improvements
 
@@ -419,7 +435,7 @@ Astro Runtime now also includes the following operators:
 - `SnowflakeOperatorAsync`
 - `FileSensorAsync`
 
-These are all [deferrable operators](deferrable-operators.md) built by Astronomer and available exclusively on Astro Runtime. They are pre-installed into the Astro Runtime Docker image and ready to use.
+These are all [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators) built by Astronomer and available exclusively on Astro Runtime. They are pre-installed into the Astro Runtime Docker image and ready to use.
 
 ### Additional improvements
 
@@ -557,7 +573,7 @@ For more information on using timetables, read the [Apache Airflow Documentation
 
 Existing Airflow operators have to be re-written according to the deferrable operator framework. In addition to supporting those available in the open source project, Astronomer has built an exclusive collection of deferrable operators in Runtime 4.0.0. This collection includes the `DatabricksSubmitRunOperator`, the `DatabricksRunNowOperator`, and the `ExternalTaskSensor`. These are designed to be drop-in replacements for corresponding operators currently in use.
 
-As part of supporting deferrable operators, the triggerer is now available as a fully managed component on Astro. This means that you can start using deferrable operators in your DAGs as soon as you're ready. For more general information on deferrable operators, as well as how to use Astronomer's exclusive deferrable operators, read [deferrable operators](deferrable-operators.md).
+As part of supporting deferrable operators, the triggerer is now available as a fully managed component on Astro. This means that you can start using deferrable operators in your DAGs as soon as you're ready. For more general information on deferrable operators, as well as how to use Astronomer's exclusive deferrable operators, read [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
 ## Astro Runtime 3.0.4
 
