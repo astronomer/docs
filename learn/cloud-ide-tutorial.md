@@ -316,15 +316,9 @@ Now that you have trained the model, you can connect GitHub to the Astro Cloud I
 
 Export your DAG by commiting it to your connected GitHub repository. 
 
-Click the branch you want to commit to and provide a commit message. Note that you cannot commit to a branch called `main`. 
+1. Click the branch you want to commit to and provide a commit message. Note that you cannot commit to a branch called `main`. 
 
-![Connect to GitHub](/img/guides/cloud_ide_commit_to_github.png)
-
-Your DAG will be added to the `/dags` folder in your GitHub repository.
-
-![Dags folder on GitHub](/img/guides/cloud_ide_dags_github.png)
-
-If you made changes to several DAGs, you can select which changes to commit by checking the boxes to the left of the difference view.
+    ![Connect to GitHub](/img/guides/cloud_ide_commit_to_github.png)
 
 :::caution
 
@@ -332,9 +326,17 @@ If a file with the same name as your Astro Cloud IDE pipeline already exists in 
 
 :::
 
+2. Scroll through the list of changes and make sure that only changes are checked that you want to commit. The Astro Cloud IDE will offer to commit versions of Astro project configuration files, as well as a GitHub workflow. Note that all pipeline changes in a given Astro Cloud IDE project will be listed to be selected for the commit, not only the changes to the pipeline you are currently editing.
+
+Your DAG will be added to the `/dags` folder in your GitHub repository.
+
+![Dags folder on GitHub](/img/guides/cloud_ide_dags_github.png)
+
+3. Create a pull request in GitHub from your dedicated Astro Cloud IDE branch to your development branch and merge the changes you want to add to your Astro Cloud environment.
+
 ## Step 13: Deploy your DAG to Astro 
 
-When you first commit a Astro Cloud IDE pipeline to a GitHub repository, the Astro Cloud IDE will create a GitHub workflow named `astro_deploy.yaml`. This action can be modified to fit your CI/CD workflow, or used out of the box after you configure a few environment variables. 
+When you first commit an Astro Cloud IDE pipeline to a GitHub repository, the Astro Cloud IDE will create a GitHub workflow named `astro_deploy.yaml`. This action can be modified to fit your CI/CD workflow, or used out of the box after you configure a few environment variables. 
 
 1. Set the following [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) in your repository:
 
@@ -344,19 +346,17 @@ When you first commit a Astro Cloud IDE pipeline to a GitHub repository, the Ast
 
     ![GitHub Secrets](/img/guides/cloud_ide_github_secrets.png)
 
-2. Add the `scikit-learn` to `requirements.txt` and commit the change. This second commit will trigger GitHub Actions again, using the GitHub secrets you configured.
+:::info
 
-If GitHub Actions is already configured for your chosen repository the new DAG will be deployed automatically with the first commit.
-
-
-Learn more on how to set up CI/CD with GitHub Actions in the [Astro Module: CI/CD](https://academy.astronomer.io/astro-module-cicd).
-
-
-:::caution
-
-To be able to deploy your DAG the Runtime Image used in the Airflow project of your GitHub repo needs to be compatible with the Runtime Image used in your Astro cloud deployment. You might need to change the version number in the Dockerfile of the Airflow project in your GitHub repository.
+Depending on the version of the Astro CLI you are using you might need to adjust the GitHub workflow using the [configuration detailed in the Astro documentation](https://docs.astronomer.io/astro/ci-cd?tab=multibranch#github-actions).
 
 :::
+
+2. Add the `scikit-learn` package to `requirements.txt` and commit the change. This second commit will trigger GitHub Actions again, using the GitHub secrets you configured. If your `requirements.txt` file already contains the `scikit-learn` package, make a different commit.
+
+If GitHub Actions is already configured for your chosen branch and repository the new DAG will be deployed automatically with the first commit.
+
+Learn more on how to set up CI/CD with GitHub Actions in the [Astro Module: CI/CD](https://academy.astronomer.io/astro-module-cicd).
 
 ## Step 14: Run your DAG on Astro
 
