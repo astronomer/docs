@@ -15,6 +15,12 @@ From the **Lineage** tab on Astro, you can access the following four pages:
 - **Lineage**: A graph view that visualizes data lineage.
 - **Integrations**: A view of your current data lineage integrations.
 
+:::info
+
+Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/concepts/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage datasets are extracted and generated using lineage metadata. The Cloud UI currently does not show information about Airflow datasets.
+
+:::
+
 You can use these pages to diagnose issues that may be difficult to troubleshoot in other environments. For example, if an Airflow task failed because a database schema changed, you can use the **Lineage** page of the Cloud UI to determine which run caused the change and which downstream tasks failed as a result.
 
 For more information on data lineage and related concepts, see [Data lineage concepts](data-lineage-concepts.md).
