@@ -20,10 +20,10 @@ On Astro, you can use Deployment API keys to automate deploying code changes to 
 There are many benefits to configuring a CI/CD workflow on Astro. Specifically, you can:
 
 - Avoid having to manually run `astro deploy` with the Astro CLI every time you make a change to your Astro project.
-- Enforce that all changes to existing DAGs or other files in your Astro project are reviewed and approved by your team before they get pushed to Astro.
+- Ensure that all changes to your Astro project are reviewed and approved by your team before they get pushed to Astro.
 - Automate promoting code across development and production environments on Astro when pull requests to certain branches are merged.
 - Enforce automated testing, which increases code quality and allows your team to respond quickly in case of an error or failure.
-- Configure more granular user permissionss by directly managing access to your Astro project source code.
+- Configure more granular user permissions by managing access and changes to your Astro project source code in your version control tool.
 
 Use the Astronomer CI/CD templates to automate deploying code to Astro with popular CI/CD management tools, including GitHub Actions and Circle CI.
 
@@ -35,18 +35,18 @@ Use the Astronomer CI/CD templates to automate deploying code to Astro with popu
 
 ## CI/CD templates
 
-Templates allow you to easily configure automtated workflows using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices.
+Templates allow you to easily configure automated workflows using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices.
 
 Astro supports two deployment methods:
 
-- Image-only deploys whereby all files in your Astro project are built into a single Docker image and pushed to Astro in a single step.
-- DAG-based deploys that utilize the [DAG-only deploy](deploy-code.md#DAG-only-deploys) feature and separate DAGs in your Astro project from the Docker image that's built with all other files.
+- Image-only deploys where all files in your Astro project are built into a Docker image and pushed to Astro in a single step.
+- [DAG-based deploys](deploy-code.md#DAG-only-deploys) that deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
 
 This document contains two kinds of templates that utilize these deployment methods in different ways.
 
 ### Image-only deploys
 
-The image-only deployment method builds a Docker image and pushes it to Astro whenever your update any file in your Astro project. This type of template is simple to set up and works well for development workflows that include complex Docker customization or logic.
+The image-only deployment method builds a Docker image and pushes it to Astro whenever you update any file in your Astro project. This type of template is simple to set up and works well for development workflows that include complex Docker customization or logic.
 
 CI/CD templates for image-only deploys:
 
@@ -76,15 +76,15 @@ All image-only templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy v
 
 ### DAG-based deploys
 
-The DAG-based deployment method uses the `--dags` flag in the Astro CLI to enable faster performance for changes to your DAG files. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as an image when other files or directories are modified. In this deployment method, DAGs are deployed separately and are never built in or included in your Docker image.
+The DAG-based deployment method uses the `--dags` flag in the Astro CLI to enable a faster way to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. When you use this deployment method, DAGs are deployed separately and are never built into or included in your Docker image.
 
 This workflow has a number of benefits: 
 
-- DAG-based deploys are significantly faster than image-only deploys when you deploy only changes to your DAG files. Your updated code will appear in Airflow faster than for project configuration changes.
-- When you push only changes to your DAGs, your Deployment's workers and scheduler(s) will not restart.
+- DAG-based deploys are significantly faster than image-only deploys when you deploy only changes to your DAG files. Your updated code will appear in Airflow faster.
+- When you push only changes to your DAGs, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart.
 - You can have different sets of users deploy project changes versus DAG changes.
 
-CI/CD templates for this deployment method do the following:
+CI/CD templates that use the DAG-based deployment method do the following:
 
 - Access Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
 - Install the latest version of the Astro CLI.
@@ -102,7 +102,7 @@ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
 
-# Determine if only dags have changes 
+# Determine if only DAG files have changes 
 OUTPUT=$(git diff main... --name-only)
 DAGS_DEPLOY=FALSE
 REGULAR_DEPLOY=FALSE
@@ -133,7 +133,7 @@ fi
 
 :::info
 
-All CI/CD templates for `DAG-based deploys use [Astro CLI v1.7+](cli/release-notes.md) to deploy via CI/CD. To upgrade, see [Install the Astro CLI](cli/install-cli.md).
+All CI/CD pipelines that use the DAG-based deployment method require [Astro CLI v1.7+](cli/release-notes.md) to deploy. All CI/CD templates in this document automatically install the latest version of the Astro CLI. If your CI/CD pipeline does not automatically install the latest version of the Astro CLI, make sure to specify version 1.7 or above.
 
 :::
 
@@ -402,7 +402,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
           with:
             # Checkout as many commits as needed for the diff
             fetch-depth: 2
-        # Determine if only dags have changes 
+        # Determine if only DAGs have changes 
         - name: Get Deployment Type
           run: |
             OUTPUT=$(git diff --name-only HEAD^ HEAD)
@@ -423,13 +423,13 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
             echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
           id: deployment-type
-        # If only DAGs changed do a DAG Deploy
+        # If only DAGs changed, do a DAG-only deploy
         - name: DAG Deploy to Astro
           if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
           run: |
             curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
             astro deploy --dags
-        # If any other files changed do a regular Deploy
+        # If any other files changed, deploy the entire Astro project
         - name: Image and DAG Deploy to Astro
           if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
           run: |
@@ -437,13 +437,13 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             astro deploy
     ```
 
-This Github Actions script checks the diff between your current commit and main when a commit is pushed to main. Make sure to customize the script for for your specific use case. 
+This Github Actions script checks the diff between your current commit and your `main` branch when a commit is pushed to `main`. Make sure to customize the script for for your specific use case. 
 
 </TabItem>
 
 <TabItem value="multibranch">
 
-The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
+The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline deploys your code to Astro as demonstrated in the following diagram:
 
 ![Diagram showing how a multibranch CI/CD pipeline works](/img/docs/multibranch.png)
 
@@ -476,7 +476,7 @@ This setup assumes the following prerequisites:
       deployment-type:
         runs-on: ubuntu-latest
           steps:
-          # Determine if only dags have changes 
+          # Determine if only DAGs have changes 
         - name: Get Deployment Type
           run: |
             OUTPUT=$(git diff --name-only HEAD^ HEAD)

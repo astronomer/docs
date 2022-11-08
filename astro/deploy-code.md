@@ -9,7 +9,12 @@ import {siteVariables} from '@site/src/versions';
 
 Pushing your Astro project, including your DAG code, to a Deployment with the Astro CLI is the foundation for managing changes on Astro. It also serves as the foundation for any [CI/CD](ci-cd.md)-based deploys.
 
-Follow the steps in this document to push your Astro project to a Deployment. To deploy only DAG code changes to Astro, see [DAG-only deploys](#dag-only-deploys).
+Astro supports two deployment methods:
+
+- Image-only deploys where all files in your Astro project are built into a single Docker image and pushed to Astro in a single step.
+- [DAG-based deploys](deploy-code.md#DAG-only-deploys) that deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
+
+Follow the steps in this document to push your Astro project to a Deployment.
 
 ## Prerequisites
 
@@ -93,7 +98,7 @@ If you want to force long-running tasks to terminate sooner than 24 hours, speci
 
 ## DAG-only deploys
 
-Running `astro deploy` without additional flags deploys your entire Astro project, including your DAG code, Dockerfile, and dependencies. There are some scenarios where you need to deploy only your Astro project's `dags` directory:
+Running `astro deploy` without additional flags deploys your entire Astro project, including your DAG code, Dockerfile, and dependencies. There are some scenarios where you need to deploy only the `dags` directory of your Astro project:
 
 - You work on an Astro project where one team member is responsible for project configuration changes and another team member is responsible for DAG authoring.
 - You want to deploy DAGs without building a Docker image or using the Astro CLI. For example, you upload DAGs to a shared S3 bucket.
