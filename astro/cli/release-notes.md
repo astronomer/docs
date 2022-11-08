@@ -20,7 +20,7 @@ Release date: November 8, 2022
 
 ## Deploy only DAGs with `astro deploy -—dags`
 
-Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an alternative to the current image-only deployment method, which rebuilds all files in your Astro project into a Docker image every time you deploy your code to Astro.
+Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an alternative to the image-only deployment method, which rebuilds all files in your Astro project into a Docker image every time you deploy your code to Astro.
 
 DAG-based deploys:
 
@@ -30,11 +30,11 @@ DAG-based deploys:
 
 When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
 
-To use this feature, you must enable it for each Deployment. See [DAG-based deploys](deploy-code.md#dag-based-deploys) for more information.
+To use this feature, you must enable it for each Deployment. See [DAG-based deploys](deploy-code.md#dag-based-deploys) for more information on use cases and implementation. For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
 
 ## New `astro deployment inspect` command
 
-You can now run `astro deployment inspect` to return a Deployment's current state and configuration as a JSON or YAML object. Use this command to quickly understand the state of your Deployment and as an alternative to viewing it in the Cloud UI.
+You can now run `astro deployment inspect` to return a Deployment's current state and configuration as a JSON or YAML object. This includes worker queue settings, Astro Runtime version, and more. Use this command to quickly understand the state of your Deployment as code and as an alternative to viewing it in the Cloud UI.
 
 For more information, see the [CLI command reference](cli/astro-deployment-inspect.md).
 
