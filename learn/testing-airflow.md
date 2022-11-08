@@ -38,23 +38,22 @@ python your-dag-file.py
 To test for import errors, run a command similar to the following example:
 
 ```python
-import pytest
 from airflow.models import DagBag
 
 def test_no_import_errors():
-  dag_bag = DagBag()
-  assert len(dag_bag.import_errors) == 0, "No Import Failures"
+    dag_bag = DagBag()
+    assert len(dag_bag.import_errors) == 0, "No Import Failures"
 ```
 
 You can also use DAG validation tests to test for properties that you want to be consistent across all DAGs. For example, if all of your DAGs must include two retries for each task, run a command similar to the following example to enforce this requirement:
 
 ```python
 def test_retries_present():
-  dag_bag = DagBag()
-  for dag in dag_bag.dags:
-      retries = dag_bag.dags[dag].default_args.get('retries', [])
-      error_msg = 'Retries not set to 2 for DAG {id}'.format(id=dag)
-      assert retries == 2, error_msg
+    dag_bag = DagBag()
+    for dag in dag_bag.dags:
+        retries = dag_bag.dags[dag].default_args.get('retries', [])
+        error_msg = 'Retries not set to 2 for DAG {id}'.format(id=dag)
+        assert retries == 2, error_msg
 ```
 
 To see an example of running these tests as part of a CI/CD workflow, see the [airflow-testing-guide](https://github.com/astronomer/airflow-testing-guide)repository.
@@ -65,7 +64,7 @@ To see an example of running these tests as part of a CI/CD workflow, see the [a
 
 ```python
 def test_function_returns_5():
-	assert my_function(input) == 5
+    assert my_function(input) == 5
 ```
 
 In the context of Airflow, you can write unit tests for any part of your DAG, but they are most frequently applied to hooks and operators. All Airflow hooks, operators, and provider packages must pass unit testing before code can be merged into the project. For an example of unit testing, see [AWS `S3Hook`](https://registry.astronomer.io/providers/amazon/modules/s3hook) and the associated [unit tests](https://github.com/apache/airflow/blob/main/tests/providers/amazon/aws/hooks/test_s3.py). 
@@ -83,10 +82,10 @@ class EvenNumberCheckOperator(BaseOperator):
         super(EvenNumberCheckOperator, self).__init__(*args, **kwargs)
 
     def execute(self, context):
-				if self.operator_param % 2:
-						return True
+		if self.operator_param % 2:
+		    return True
         else:
-						return False
+			return False
 ```
 
 You then write a `test_evencheckoperator.py` file with unit tests similar to the following example:
