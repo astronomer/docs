@@ -19,11 +19,6 @@ On Astro, you can use Deployment API keys to automate deploying code changes to 
 
 You can use the Astronomer CI/CD templates with popular CI/CD management tools, including GitHub Actions and Circle CI.
 
-Astronomer currently has two types CI/CD Templates. A Regular one step Deploy templates and a DAG Deploy templates that utilize the [DAG Deploy](deploy-code.md#DAG-only-deploys) feature. If your deployment has DAG Deploy enabled the DAG Deploy templates are recommended, but both templates will work.
-
-
-## Benefits
-
 There are many benefits to configuring a CI/CD workflow that automates pushing code changes to Astro. Specifically, you can:
 
 - Deploy new and updated DAGs in a way that streamlines your development process.
@@ -40,7 +35,13 @@ There are many benefits to configuring a CI/CD workflow that automates pushing c
 
 Templates allow you to quickly configure individual CI pipelines using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices.
 
-The CI/CD templates let you:
+Astro supports two deployment methods: project deploys and DAG-only deploys. This document contains two kinds of templates that utilize these deployment methods in different ways: One-step templates and multi-step templates.
+
+### One-step templates
+
+One-step templates deploy your project as a Docker image whenever your update your project. This type of template is simple to set up and works well for development workflows.
+
+With a one-step CI/CD template, your CI/CD tool will:
 
 - Access Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
 - Install the latest version of the Astro CLI.
@@ -66,7 +67,72 @@ The following templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy vi
 
 :::
 
-### GitHub Actions
+### Multi-step templates
+
+A multi-step workflow utilizes the `--dags` CLI flag to improve the performance of your CI/CD workflows. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy your entire Astro project as an image when any other files or directories are modified. 
+
+This workflow has a number of benefits: 
+
+- Your Deployment's infrastructure will not experience downtime for updates to DAG code.
+- DAG only deploys are faster than image deploys. Your code changes will appear in Airflow faster than for project configuration changes
+- You can have different sets of users deploy project changes and DAG changes.
+
+Specifically, a multi-step CI/CD template:
+
+- Accesses Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
+- Installs the latest version of the Astro CLI.
+- Determines which files were updated by the commit:
+    - If only DAG files in the `dags` folder have changed, run `astro deploy --dags`. This pushes your `dags` folder to your Deployment
+    - If any file not in the `dags` folder has changed, run `astro deploy`. This creates a Docker image for your Astro project, authenticates to Astro using your Deployment API key, and pushes the image and DAGs to your Deployment.
+
+This workflow is equivalent to the following bash script:
+
+```sh
+# Set Deployment API key credentials as environment variables
+export ASTRONOMER_KEY_ID="<your-api-key-id>"
+export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
+
+# Install the latest version of Astro CLI
+curl -sSL install.astronomer.io | sudo bash -s
+
+# Determine if only dags have changes 
+OUTPUT=$(git diff main... --name-only)
+DAGS_DEPLOY=FALSE
+REGULAR_DEPLOY=FALSE
+local IFS=$'\n'
+local lines=($OUTPUT)
+local i
+for (( i=0; i<${#lines[@]}; i++ )) ; do
+    if [[ "${lines[$i]}" == *"dags/"* ]]
+    then
+        DAGS_DEPLOY=TRUE
+    else
+        REGULAR_DEPLOY=TRUE
+    fi
+done
+
+# If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
+if [ $DAGS_DEPLOY == TRUE && $REGULAR_DEPLOY == FALSE ]
+then
+    astro deploy --dags
+fi
+
+# If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
+if [ $REGULAR_DEPLOY == TRUE ]
+then
+    astro deploy
+fi
+```
+
+Make sure to update the `git diff` command to reflect your use case. For example you may want to compare your a feature branch to your main branch.
+
+:::info
+
+The following templates use [Astro CLI v1.7+](cli/release-notes.md) to deploy via CI/CD. To upgrade, see [Install the Astro CLI](cli/install-cli.md).
+
+:::
+
+### GitHub Actions (One-step)
 
 <Tabs
     defaultValue="standard"
@@ -273,6 +339,291 @@ To complete this setup, you need:
             ssh: |
               github=${{ env.SSH_AUTH_SOCK }
         - name: Deploy to Astro
+          run: |
+            curl -sSL install.astronomer.io | sudo bash -s
+            astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
+    ```
+
+  :::info
+
+  If you need guidance configuring a CI/CD pipeline for a more complex use case involving custom Runtime images, reach out to [Astronomer support](https://support.astronomer.io/).
+
+  :::
+
+</TabItem>
+</Tabs>
+
+### GitHub Actions (Multi-step)
+
+The following templates are examples of how to implement DAG-only deploys in GitHub Actions. These templates can be modified to run on other CI/CD tools.
+
+<Tabs
+    defaultValue="standard"
+    groupId= "github-actions"
+    values={[
+        {label: 'Standard', value: 'standard'},
+        {label: 'Multi-branch', value: 'multibranch'},
+        {label: 'Custom Image', value: 'custom'},
+    ]}>
+<TabItem value="standard">
+
+To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
+
+1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+
+   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
+
+    ```yaml
+    name: Astronomer CI - Deploy code
+    on:
+      push:
+        branches:
+          - main
+
+    env:
+      ## Sets Deployment API key credentials as environment variables
+      ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
+      ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+        - name: checkout repo
+          uses: actions/checkout@v2.3.4
+          with:
+            # Checkout as many commits as needed for the diff
+            fetch-depth: 2
+        # Determine if only dags have changes 
+        - name: Get Deployment Type
+          run: |
+            OUTPUT=$(git diff --name-only HEAD^ HEAD)
+            DAGS_DEPLOY=FALSE
+            REGULAR_DEPLOY=FALSE
+            local IFS=$'\n'
+            local lines=($OUTPUT)
+            local i
+            for (( i=0; i<${#lines[@]}; i++ )) ; do
+                if [[ "${lines[$i]}" == *"dags/"* ]]
+                then
+                    DAGS_DEPLOY=TRUE
+                else
+                    REGULAR_DEPLOY=TRUE
+                fi
+            done
+
+            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
+            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
+          id: deployment-type
+        # If only DAGs changed do a DAG Deploy
+        - name: DAG Deploy to Astro
+          if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+          run: |
+            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+            astro deploy --dags
+        # If any other files changed do a regular Deploy
+        - name: Image and DAG Deploy to Astro
+          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+          run: |
+            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+            astro deploy
+    ```
+This Github Actions script checks the diff between your current commit and main when a commit is pushed to main. Make sure to customize the script for for your specific use case. 
+
+</TabItem>
+
+<TabItem value="multibranch">
+
+The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
+
+![Diagram showing how a multibranch CI/CD pipeline works](/img/docs/multibranch.png)
+
+This setup assumes the following prerequisites:
+
+- You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
+- You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
+- You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
+
+1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+
+   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
+   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
+   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
+   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
+
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
+
+    ```yaml
+    name: Astronomer CI - Deploy code (Multiple Branches)
+    on:
+      push:
+        branches: [dev]
+      pull_request:
+        types:
+          - closed
+        branches: [main]
+
+    jobs:
+      deployment-type:
+        runs-on: ubuntu-latest
+          steps:
+          # Determine if only dags have changes 
+        - name: Get Deployment Type
+          run: |
+            OUTPUT=$(git diff --name-only HEAD^ HEAD)
+            DAGS_DEPLOY=FALSE
+            REGULAR_DEPLOY=FALSE
+            local IFS=$'\n'
+            local lines=($OUTPUT)
+            local i
+            for (( i=0; i<${#lines[@]}; i++ )) ; do
+                if [[ "${lines[$i]}" == *"dags/"* ]]
+                then
+                    DAGS_DEPLOY=TRUE
+                else
+                    REGULAR_DEPLOY=TRUE
+                fi
+            done
+
+            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
+            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
+          id: deployment-type
+      dev-push:
+        if: github.ref == 'refs/heads/dev'
+        env:
+          ## Sets DEV Deployment API key credentials as environment variables
+          ASTRONOMER_KEY_ID: ${{ secrets.DEV_ASTRONOMER_KEY_ID }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.DEV_ASTRONOMER_KEY_SECRET }}
+        runs-on: ubuntu-latest
+        needs: deployment-type
+        steps:
+          - name: checkout repo
+            uses: actions/checkout@v2.3.4
+          # If only DAGs changed do a DAG Deploy
+          - name: DAG Deploy to Astro
+            if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+            run: |
+              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+              astro deploy --dags
+          # If any other files changed do a regular Deploy
+          - name: Image and DAG Deploy to Astro
+            if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+            run: |
+              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+              astro deploy
+      prod-push:
+        if: github.event.action == 'closed' && github.event.pull_request.merged == true
+        env:
+          ## Sets PROD Deployment API key credentials as environment variables
+          ASTRONOMER_KEY_ID: ${{ secrets.PROD_ASTRONOMER_KEY_ID }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.PROD_ASTRONOMER_KEY_SECRET }}
+        runs-on: ubuntu-latest
+        needs: job1
+        steps:
+          - name: checkout repo
+            uses: actions/checkout@v2.3.4
+          # If only DAGs changed do a DAG Deploy
+          - name: DAG Deploy to Astro
+            if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+            run: |
+              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+              astro deploy --dags
+          # If any other files changed do a regular Deploy
+          - name: Image and DAG Deploy to Astro
+            if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+            run: |
+              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+              astro deploy
+    ```
+
+</TabItem>
+
+<TabItem value="custom">
+
+If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
+
+#### Prerequisites
+
+To complete this setup, you need:
+
+- An Astro project that requires additional build-time arguments to build the Runtime image.
+
+#### Setup
+
+1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
+
+  - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+  - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
+
+    ```yaml
+    name: Astronomer CI - Additional build-time args
+    on:
+      push:
+        branches:
+          - main
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        env:
+          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
+          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+        steps:
+        - name: Check out the repo
+          uses: actions/checkout@v2
+          with:
+            # Checkout as many commits as needed for the diff
+            fetch-depth: 2
+        # Determine if only dags have changes 
+        - name: Get Deployment Type
+          run: |
+            OUTPUT=$(git diff --name-only HEAD^ HEAD)
+            DAGS_DEPLOY=FALSE
+            REGULAR_DEPLOY=FALSE
+            local IFS=$'\n'
+            local lines=($OUTPUT)
+            local i
+            for (( i=0; i<${#lines[@]}; i++ )) ; do
+                if [[ "${lines[$i]}" == *"dags/"* ]]
+                then
+                    DAGS_DEPLOY=TRUE
+                else
+                    REGULAR_DEPLOY=TRUE
+                fi
+            done
+            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
+            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
+          id: deployment-type
+        # If only DAGs changed do a DAG Deplo
+        - name: DAG Deploy to Astro
+          if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+          run: |
+            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+            astro deploy --dags
+        # If any other files changed do a regular custom image Deploy
+        - name: Create image tag
+          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+          id: image_tag
+          run: echo ::set-output name=image_tag::astro-$(date +%Y%m%d%H%M%S)
+        - name: Build image
+          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+          uses: docker/build-push-action@v2
+          with:
+            tags: ${{ steps.image_tag.outputs.image_tag }}
+            load: true
+            # Define your custom image's build arguments, contexts, and connections here using
+            # the available GitHub Action settings:
+            # https://github.com/docker/build-push-action#customizing .
+            # This example uses `build-args` , but your use case might require configuring
+            # different values.
+            build-args: |
+              <your-build-arguments>
+        - name: Deploy to Astro
+          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
             astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
@@ -856,287 +1207,3 @@ The following templates use [Astro CLI v1.7+](cli/release-notes.md) to deploy vi
 
 :::
 
-### Examples: GitHub Actions DAG-only deploys
-
-The following templates are examples of how to implement DAG-only deploys in GitHub Actions. These templates can be modified to run on other CI/CD tools.
-
-<Tabs
-    defaultValue="standard"
-    groupId= "github-actions"
-    values={[
-        {label: 'Standard', value: 'standard'},
-        {label: 'Multi-branch', value: 'multibranch'},
-        {label: 'Custom Image', value: 'custom'},
-    ]}>
-<TabItem value="standard">
-
-To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
-
-1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
-
-   - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-   - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-
-2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
-
-    ```yaml
-    name: Astronomer CI - Deploy code
-    on:
-      push:
-        branches:
-          - main
-
-    env:
-      ## Sets Deployment API key credentials as environment variables
-      ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
-      ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
-
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        steps:
-        - name: checkout repo
-          uses: actions/checkout@v2.3.4
-          with:
-            # Checkout as many commits as needed for the diff
-            fetch-depth: 2
-        # Determine if only dags have changes 
-        - name: Get Deployment Type
-          run: |
-            OUTPUT=$(git diff --name-only HEAD^ HEAD)
-            DAGS_DEPLOY=FALSE
-            REGULAR_DEPLOY=FALSE
-            local IFS=$'\n'
-            local lines=($OUTPUT)
-            local i
-            for (( i=0; i<${#lines[@]}; i++ )) ; do
-                if [[ "${lines[$i]}" == *"dags/"* ]]
-                then
-                    DAGS_DEPLOY=TRUE
-                else
-                    REGULAR_DEPLOY=TRUE
-                fi
-            done
-
-            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
-            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
-          id: deployment-type
-        # If only DAGs changed do a DAG Deploy
-        - name: DAG Deploy to Astro
-          if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
-          run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
-            astro deploy --dags
-        # If any other files changed do a regular Deploy
-        - name: Image and DAG Deploy to Astro
-          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
-          run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
-            astro deploy
-    ```
-This Github Actions script checks the diff between your current commit and main when a commit is pushed to main. Make sure to customize the script for for your specific use case. 
-
-</TabItem>
-
-<TabItem value="multibranch">
-
-The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
-
-![Diagram showing how a multibranch CI/CD pipeline works](/img/docs/multibranch.png)
-
-This setup assumes the following prerequisites:
-
-- You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
-- You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
-- You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
-
-1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
-
-   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
-   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-key-secret>`
-   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-key-id>`
-   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-key-secret>`
-
-2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
-
-    ```yaml
-    name: Astronomer CI - Deploy code (Multiple Branches)
-    on:
-      push:
-        branches: [dev]
-      pull_request:
-        types:
-          - closed
-        branches: [main]
-
-    jobs:
-      deployment-type:
-        runs-on: ubuntu-latest
-          steps:
-          # Determine if only dags have changes 
-        - name: Get Deployment Type
-          run: |
-            OUTPUT=$(git diff --name-only HEAD^ HEAD)
-            DAGS_DEPLOY=FALSE
-            REGULAR_DEPLOY=FALSE
-            local IFS=$'\n'
-            local lines=($OUTPUT)
-            local i
-            for (( i=0; i<${#lines[@]}; i++ )) ; do
-                if [[ "${lines[$i]}" == *"dags/"* ]]
-                then
-                    DAGS_DEPLOY=TRUE
-                else
-                    REGULAR_DEPLOY=TRUE
-                fi
-            done
-
-            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
-            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
-          id: deployment-type
-      dev-push:
-        if: github.ref == 'refs/heads/dev'
-        env:
-          ## Sets DEV Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.DEV_ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.DEV_ASTRONOMER_KEY_SECRET }}
-        runs-on: ubuntu-latest
-        needs: deployment-type
-        steps:
-          - name: checkout repo
-            uses: actions/checkout@v2.3.4
-          # If only DAGs changed do a DAG Deploy
-          - name: DAG Deploy to Astro
-            if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
-            run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
-              astro deploy --dags
-          # If any other files changed do a regular Deploy
-          - name: Image and DAG Deploy to Astro
-            if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
-            run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
-              astro deploy
-      prod-push:
-        if: github.event.action == 'closed' && github.event.pull_request.merged == true
-        env:
-          ## Sets PROD Deployment API key credentials as environment variables
-          ASTRONOMER_KEY_ID: ${{ secrets.PROD_ASTRONOMER_KEY_ID }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.PROD_ASTRONOMER_KEY_SECRET }}
-        runs-on: ubuntu-latest
-        needs: job1
-        steps:
-          - name: checkout repo
-            uses: actions/checkout@v2.3.4
-          # If only DAGs changed do a DAG Deploy
-          - name: DAG Deploy to Astro
-            if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
-            run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
-              astro deploy --dags
-          # If any other files changed do a regular Deploy
-          - name: Image and DAG Deploy to Astro
-            if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
-            run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
-              astro deploy
-    ```
-
-</TabItem>
-
-<TabItem value="custom">
-
-If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
-
-#### Prerequisites
-
-To complete this setup, you need:
-
-- An Astro project that requires additional build-time arguments to build the Runtime image.
-
-#### Setup
-
-1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
-
-  - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-  - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-
-2. In your project repository, create a new YAML file in `.github/workflows` that includes the following configuration:
-
-    ```yaml
-    name: Astronomer CI - Additional build-time args
-    on:
-      push:
-        branches:
-          - main
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        env:
-          ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
-          ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
-        steps:
-        - name: Check out the repo
-          uses: actions/checkout@v2
-          with:
-            # Checkout as many commits as needed for the diff
-            fetch-depth: 2
-        # Determine if only dags have changes 
-        - name: Get Deployment Type
-          run: |
-            OUTPUT=$(git diff --name-only HEAD^ HEAD)
-            DAGS_DEPLOY=FALSE
-            REGULAR_DEPLOY=FALSE
-            local IFS=$'\n'
-            local lines=($OUTPUT)
-            local i
-            for (( i=0; i<${#lines[@]}; i++ )) ; do
-                if [[ "${lines[$i]}" == *"dags/"* ]]
-                then
-                    DAGS_DEPLOY=TRUE
-                else
-                    REGULAR_DEPLOY=TRUE
-                fi
-            done
-            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
-            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
-          id: deployment-type
-        # If only DAGs changed do a DAG Deplo
-        - name: DAG Deploy to Astro
-          if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
-          run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
-            astro deploy --dags
-        # If any other files changed do a regular custom image Deploy
-        - name: Create image tag
-          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
-          id: image_tag
-          run: echo ::set-output name=image_tag::astro-$(date +%Y%m%d%H%M%S)
-        - name: Build image
-          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
-          uses: docker/build-push-action@v2
-          with:
-            tags: ${{ steps.image_tag.outputs.image_tag }}
-            load: true
-            # Define your custom image's build arguments, contexts, and connections here using
-            # the available GitHub Action settings:
-            # https://github.com/docker/build-push-action#customizing .
-            # This example uses `build-args` , but your use case might require configuring
-            # different values.
-            build-args: |
-              <your-build-arguments>
-        - name: Deploy to Astro
-          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
-          run: |
-            curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
-    ```
-
-  :::info
-
-  If you need guidance configuring a CI/CD pipeline for a more complex use case involving custom Runtime images, reach out to [Astronomer support](https://support.astronomer.io/).
-
-  :::
-
-</TabItem>
-</Tabs>
