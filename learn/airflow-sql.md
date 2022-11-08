@@ -12,7 +12,7 @@ sidebar_label: "Run SQL"
 
 Executing SQL queries is one of the most common use cases for data pipelines. Whether you're extracting and loading data, calling a stored procedure, or executing a complex query for a report, Airflow has you covered. Using Airflow, you can orchestrate all of your SQL tasks elegantly with just a few lines of boilerplate code.
 
-In this concept guide you'll learn about the best practices for executing SQL from your DAG, review the  most commonly used Airflow SQL-related operators, and then use sample code to implement a few common SQL use cases.
+In this guide you'll learn about the best practices for executing SQL from your DAG, review the  most commonly used Airflow SQL-related operators, and then use sample code to implement a few common SQL use cases.
 
 :::info
 
