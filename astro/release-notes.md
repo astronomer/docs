@@ -17,6 +17,13 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.6.1 ([Release notes](cli/release-notes.md))
 
+## November 8, 2022
+
+### Additional improvements 
+
+- The Cloud UI now shows the user or API key that created a Deployment, as well as the user or API key that most recently updated a Deployment with configuration or project changes. View this information in your list of Deployments or in the header of a Deployment's information page. 
+- The Kubernetes API of your data plane is no longer exposed to the public internet. 
+
 ## November 1, 2022 
 
 ### Introducing the Astro Cloud IDE, a new Airflow development experience
