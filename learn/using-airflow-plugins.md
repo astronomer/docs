@@ -71,6 +71,12 @@ Before Airflow 2.0 custom operators and hooks were added as plugins. This patter
 
 ### Appbuilder menu items
 
+You can customize the Airflow menu at the top of the screen to contain custom tabs with links to external websites. 
+
+```python
+
+```
+
 ### Operator extra links
 
 Operator extra links are additional buttons with links that can be added to specific operators. They can be defined as Python classes derived from the `BaseOperatorLink` class. The example below shows how to create a new operator extra link `MyLink` that is applied to `MyOperator1` and `MyOperator2`. The operator extra link is registered with the `MyAirflowPlugin` by adding it its `operator_extra_links` list. 
