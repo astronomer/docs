@@ -52,7 +52,7 @@ The images and tags which are required for your Software installation depend on 
     For example, if you set `global.loggingSidecar.enabled=True` in your Helm chart and customized no other values, you run: 
     
     ```sh
-    helm template --<template version> astronomer/astronomer --set global.loggingSidecar.enabled=True | grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq  
+    helm template --version <your-astronomer-version> astronomer/astronomer --set global.loggingSidecar.enabled=True | grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq  
     ```
 
 3. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:

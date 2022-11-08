@@ -57,7 +57,7 @@ The images and tags which are required for your Software installation depend on 
 2. Run the following command to template the Astronomer Helm chart and fetch its rendered image tags. Use the `--set` flag to specify the updated values you made note of:
 
     ```bash
-    helm template --<template version> astronomer/astronomer --set <your-config-key-1>=<your-config-value-1> --set <your-config-key-2>=<your-config-value-2> --set <your-config-key-x>=<your-config-value-x>| grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq                           
+    helm template --version <your-astronomer-version> astronomer/astronomer --set <your-config-key-1>=<your-config-value-1> --set <your-config-key-2>=<your-config-value-2> --set <your-config-key-x>=<your-config-value-x>| grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq                           
     ```
     
     For example, if you set `global.loggingSidecar.enabled=True` in your Helm chart and customized no other values, you run: 
