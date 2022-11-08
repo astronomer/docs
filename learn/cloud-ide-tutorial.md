@@ -249,7 +249,11 @@ Train a random forest model to predict the dog intelligence category of a breed 
     # get feature importances
     feature_importances = list(zip(X_train.columns, model.feature_importances_))
 
-    return f"baseline accuracy: {baseline_accuracy}", f"model accuracy: {score}", feature_importances 
+    return f"""
+    baseline accuracy: {baseline_accuracy},\n
+    model accuracy: {score},\n
+    feature importances: {feature_importances}
+    """ 
     ```
 
 You will notice again how the Astro Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `tranform_table` cell directly (without Jinja syntax) on line 6. 
@@ -316,7 +320,7 @@ Now that you have trained the model, you can connect GitHub to the Astro Cloud I
 
 Export your DAG by commiting it to your connected GitHub repository. 
 
-1. Click the branch you want to commit to and provide a commit message. Note that you cannot commit to a branch called `main`. 
+1. Click the branch you want to commit to (in the screenshot below the `cloud-ide-branch`) and provide a commit message. Note that you cannot commit to a branch called `main`. 
 
     ![Connect to GitHub](/img/guides/cloud_ide_commit_to_github.png)
 
@@ -366,7 +370,7 @@ Learn more on how to set up CI/CD with GitHub Actions in the [Astro Module: CI/C
 
 3. In the Airflow UI, configure a connection with the same values as your connection in the Astro Cloud IDE. See [Manage connections in Apache Airflow](connections.md).
 
-4. Since temporary tables are not JSON serializable, you need to enable XCom pickling which is on by default in the Astro Cloud IDE. Go to **Admin** -> **Variables** and add a new variable with a key of `AIRFLOW__CORE__ENABLE_XCOM_PICKLING` and a value of `True`. Click **Save**.
+4. Since temporary tables are not JSON serializable, you need to enable XCom pickling which is on by default in the Astro Cloud IDE. Go to the Astro Cloud UI and click on your deployment. Select **Variables** and click on **Edit Variables** to add a new variable with a key of `AIRFLOW__CORE__ENABLE_XCOM_PICKLING` and a value of `True`. Click **Save Variables**.
 
     ![Add Variable in Airflow UI](/img/guides/cloud_ide_add_variable.png)
 
