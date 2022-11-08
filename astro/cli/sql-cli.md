@@ -33,10 +33,10 @@ If you use Debian or Ubuntu as your operating system, Astronomer recommends to [
 
 ## Enable Astro SQL commands 
 
-To enable Astro SQL commands, install the latest version of the Astro CLI. Run:
+To enable Astro SQL commands with the latest version of the Astro CLI, run:
 
 ```sh
-brew install astro
+astro config set -g beta.sql_cli true
 ```
 
 ## Create a new SQL project 
