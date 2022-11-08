@@ -1,6 +1,6 @@
 ---
 title: 'Write and schedule a simple ML pipeline using the Astro Cloud IDE'
-sidebar_label: 'Cloud IDE - Simple ML pipeline'
+sidebar_label: 'Astro Cloud IDE - Simple ML pipeline'
 id: cloud-ide-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
@@ -9,16 +9,16 @@ Developing data pipelines has never been easier than when using the Astro Cloud 
 
 The Astro Cloud IDE automatically generates DAGs based on configurations you set in its visual interface. Using the Astro Cloud IDE, you can create a complete data pipeline of Python and SQL tasks without setting dependencies or connections in code. 
 
-This tutorial is for Astro customers who want to create their first simple ML pipeline in the Cloud IDE. To explore Cloud IDE functionality, you will create a pipeline that runs a random forest model to predict dog breed intelligence, then schedule and deploy the pipeline on Airflow.
+This tutorial is for Astro customers who want to create their first simple ML pipeline in the Astro Cloud IDE. To explore Astro Cloud IDE functionality, you will create a pipeline that runs a random forest model to predict dog breed intelligence, then schedule and deploy the pipeline on Airflow.
 
 After you complete this tutorial, you'll be able to:
 
-- Create a Cloud IDE project with a pipeline.
-- Configure connections and requirements in the Cloud IDE.
-- Run a query on a table in a database from the Cloud IDE.
-- Transform a table in a database from the Cloud IDE.
-- Train a simple ML model in the Cloud IDE.
-- Export a DAG from the Cloud IDE to GitHub.
+- Create an Astro Cloud IDE project with a pipeline.
+- Configure connections and requirements in the Astro Cloud IDE.
+- Run a query on a table in a database from the Astro Cloud IDE.
+- Transform a table in a database from the Astro Cloud IDE.
+- Train a simple ML model in the Astro Cloud IDE.
+- Export a DAG from the Astro Cloud IDE to GitHub.
 - Configure GitHub Secrets to deploy your DAG to Astro.
 
 ## Time to complete
@@ -32,21 +32,20 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Basic Python. See the [Python Documentation](https://docs.python.org/3/tutorial/index.html).
 - Basic SQL. See the [W3 Schools SQL tutorial](https://www.w3schools.com/sql/).
-- The Cloud IDE. See [Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide).
+- The Astro Cloud IDE. See [Astro Cloud IDE](https://docs.astronomer.io/astro/cloud-ide).
 
 ## Prerequisites
 
 - An Astro account. If you are not an Astronomer customer yet and want to learn more about Astro, you can [join the weekly demo](https://www.astronomer.io/events/weekly-demo/) or [contact us directly](https://www.astronomer.io/get-started/?referral=docs-nav-button).
 - A Workspace in which you are either a Workspace Editor or a Workspace Admin.
-- An account in one of the following database services, which are currently supported in the Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database.
+- An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database.
 - A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) 
 - A Personal Access Token for your GitHub account. To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
-## Step 1: Create your Cloud IDE project
+## Step 1: Create your Astro Cloud IDE project
 
-
-1. Log in to Astro, select a Workspace, and click **Cloud IDE** in the left menu
-2. Click **+ Project** and give your Cloud IDE project a name and a description.
+1. Log in to Astro, select a Workspace, and click **Cloud IDE** in the left menu.
+2. Click **+ Project** and give your Astro Cloud IDE project a name and a description.
 
     ![Create new project](/img/guides/cloud_ide_create_project.png)
 
@@ -60,13 +59,13 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 2. Give your pipeline a name and description and click **Create**. The pipeline editor for the new pipeline will open automatically.
 
-The name you give your pipeline will be the name of the DAG which the Cloud IDE will create from your input. Names of pipelines must be unique within a project and can't contain special characters.
+The name you give your pipeline will be the name of the DAG which the Astro Cloud IDE will create from your input. Names of pipelines must be unique within a project and can't contain special characters.
 
 ## Step 3: Configure a connection
 
 To run your ML model on data, you need to connect to your database. Thankfully, the Astro Cloud IDE handles connection configuration for you!
 
-1. Click **Environment** to add connections, variables, and dependencies to your Cloud IDE project. 
+1. Click **Environment** to add connections, variables, and dependencies to your Astro Cloud IDE project. 
 
     ![Configure a connection](/img/guides/cloud_ide_environment_button.png)
 
@@ -87,8 +86,8 @@ To run your ML model on data, you need to connect to your database. Thankfully, 
 
 In the same section where you configured your database connection, open the **Requirements** tab. Here you can add any Python packages that you need for your project. To create the simple ML model, you need to add the `scikit-learn` package. 
 
-1. Click **+ Requirement**
-2. In the "Package name" field, type `scikit-learn`. The Cloud IDE produces a list of packages to chose from.
+1. Click **+ Requirements**
+2. In the "Package name" field, type `scikit-learn`. The Astro Cloud IDE produces a list of packages to chose from.
 3. Select the latest version at the top of the list and click **Add**.
 
 ![Add scikit-learn](/img/guides/cloud_ide_add_requirement.png)
@@ -107,39 +106,45 @@ The dataset we use in this tutorial is a slightly modified version of [this data
 
 2. Run the following SQL statement in a Snowflake worksheet to create the target table:
 
-```sql 
-CREATE TABLE dog_intelligence (
-    BREED varchar(50),
-    HEIGHT_LOW_INCHES INT,
-    HEIGHT_HIGHT_INCHES INT,
-    WEIGHT_LOW_LBS INT,
-    WEIGHT_HIGH_LBS INT,
-    REPS_LOWER INT,
-    REPS_UPPER INT
-);
-```
+    ```sql 
+    CREATE TABLE dog_intelligence (
+        BREED varchar(50),
+        HEIGHT_LOW_INCHES INT,
+        HEIGHT_HIGHT_INCHES INT,
+        WEIGHT_LOW_LBS INT,
+        WEIGHT_HIGH_LBS INT,
+        REPS_LOWER INT,
+        REPS_UPPER INT
+    );
+    ```
 
 3. Run this SQL statement to create the file format `my_csv_format`:
 
-```sql
-CREATE FILE FORMAT my_csv_format
-    TYPE = csv
-    FIELD_DELIMITER = ','
-    SKIP_HEADER = 1
-    NULL_IF = ('NULL', 'null')
-    EMPTY_FIELD_AS_NULL = true;
-```
+    ```sql
+    CREATE FILE FORMAT my_csv_format
+        TYPE = csv
+        FIELD_DELIMITER = ','
+        SKIP_HEADER = 1
+        NULL_IF = ('NULL', 'null')
+        EMPTY_FIELD_AS_NULL = true;
+    ```
 
 4. In the Snowflake UI, go to the `dog_intelligence` table in **Databases** and click on **Load Table**.
 5. Use the ["Loading Using the Web Interface" wizard](https://docs.snowflake.com/en/user-guide/data-load-web-ui.html). Select the `dog_intelligence.csv` file you downloaded as the **Source File** and `my_csv_format` as the **File Format**.
 
 ![Load csv Snowflake](/img/guides/cloud_ide_load_csv.png)
 
+6. Verify that the data has been loaded into your Snowflake database by running the following query in a worksheet:
+
+    ```sql
+    SELECT * FROM <your database>.<your_schema>.dog_intelligence
+    ```
+
 The steps above are specific to using Snowflake. If you are using a different database, please refer to their documentation and upload the data from the provided CSV file into a table.
 
 ## Step 6: Query your table
 
-Navigate back to your Cloud IDE on Astro.
+Navigate back to your Astro Cloud IDE on Astro.
 
 1. Create your first SQL cell by clicking **Add Cell** and selecting **SQL**. A cell is equivalent to an Airflow task. However, you don't have to know how to write an Airflow task to write a cell!
 
@@ -151,20 +156,21 @@ Navigate back to your Cloud IDE on Astro.
 
 4. Paste the following SQL code into your cell. This query selects all records that do not contain any `NULL` values in any column. Make sure to update the query with your database and schema name.
 
-```sql 
-SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
-WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, 
-WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
-```
+    ```sql 
+    SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
+    WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, 
+    WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
+    ```
 
 5. Add your Snowflake connection to the cell as shown in the following screenshot:
 
     ![Select Snowflake Connection](/img/guides/cloud_ide_select_connection.png)
 
-6. Run the cell by clicking the play button next to the connection.
+6. Make sure that the **Table Expression** checkbox is checked to create a temporary in your database and view the output below your SQL cell upon running it.
 
-Running the cell creates a temporary table in your database containing the output from your query.
-Below the cell, click **RESULTS** and tick the **Table Expression** checkbox to see the output containing 136 rows.
+7. Run the cell by clicking the play button next to the connection.
+
+8. Below the cell, click **RESULTS** to see the output containing 136 rows.
 
 ![Table output](/img/guides/cloud_ide_query_table.png)
 
@@ -182,15 +188,15 @@ Before you can train the model, you first need to transform the data in your tab
 
 4. Copy the following SQL statement into the cell:
 
-```sql 
-SELECT HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, WEIGHT_HIGH_LBS,
-    CASE WHEN reps_upper <= 25 THEN 'very_smart_dog'
-    ELSE 'smart_dog'
-    END AS INTELLIGENCE_CATEGORY
-FROM {{query_table}}
-```
+    ```sql 
+    SELECT HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, WEIGHT_HIGH_LBS,
+        CASE WHEN reps_upper <= 25 THEN 'very_smart_dog'
+        ELSE 'smart_dog'
+        END AS INTELLIGENCE_CATEGORY
+    FROM {{query_table}}
+    ```
 
-Notice that after you create this cell, the Cloud IDE automatically creates a dependency between `query_table` and `transform_table` in the pipeline view. This happens because the SQL statement in `transform_table` references the temporary table created by the `query_table` task using the Jinja syntax `{{query_table}}`.
+Notice that after you create this cell, the Astro Cloud IDE automatically creates a dependency between `query_table` and `transform_table` in the pipeline view. This happens because the SQL statement in `transform_table` references the temporary table created by the `query_table` task using the Jinja syntax `{{query_table}}`.
 
 ![Table output](/img/guides/cloud_ide_cell_dependency.png)
 
@@ -208,45 +214,45 @@ Train a random forest model to predict the dog intelligence category of a breed 
 
 3. Copy the following Python code into your cell:
 
-```python
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.ensemble import RandomForestClassifier
+    ```python
+    from sklearn.model_selection import train_test_split
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.ensemble import RandomForestClassifier
 
-# use the table returned from the transform_table cell
-df = transform_table
+    # use the table returned from the transform_table cell
+    df = transform_table
 
-# calculate baseline accuracy
-baseline_accuracy = df.iloc[:,-1].value_counts(normalize=True)[0]
+    # calculate baseline accuracy
+    baseline_accuracy = df.iloc[:,-1].value_counts(normalize=True)[0]
 
-# selecting predictors (X) and the target (y)
-X = df.iloc[:,:-1]
-y = df.iloc[:,-1]
+    # selecting predictors (X) and the target (y)
+    X = df.iloc[:,:-1]
+    y = df.iloc[:,-1]
 
-# split the data into training data (80%) and testing data (20%)
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.20, random_state=23
-)
+    # split the data into training data (80%) and testing data (20%)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.20, random_state=23
+    )
 
-# standardize features
-scaler = StandardScaler()
-X_train_s = scaler.fit_transform(X_train)
-X_test_s = scaler.transform(X_test)
+    # standardize features
+    scaler = StandardScaler()
+    X_train_s = scaler.fit_transform(X_train)
+    X_test_s = scaler.transform(X_test)
 
-# train a RandomForestClassifier on the training data
-model = RandomForestClassifier(max_depth=3, random_state=19)
-model.fit(X_train_s, y_train)
+    # train a RandomForestClassifier on the training data
+    model = RandomForestClassifier(max_depth=3, random_state=19)
+    model.fit(X_train_s, y_train)
 
-# score the trained model on the testing data
-score = model.score(X_test_s, y_test)
+    # score the trained model on the testing data
+    score = model.score(X_test_s, y_test)
 
-# get feature importances
-feature_importances = list(zip(X_train.columns, model.feature_importances_))
+    # get feature importances
+    feature_importances = list(zip(X_train.columns, model.feature_importances_))
 
-return f"baseline accuracy: {baseline_accuracy}", f"model accuracy: {score}", feature_importances 
-```
+    return f"baseline accuracy: {baseline_accuracy}", f"model accuracy: {score}", feature_importances 
+    ```
 
-You will notice again how the Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `tranform_table` cell directly (without Jinja syntax) on line 6. 
+You will notice again how the Astro Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `tranform_table` cell directly (without Jinja syntax) on line 6. 
 
 The Python code completes the following steps:
 
@@ -270,7 +276,7 @@ To learn more about random forests check out this [MLU explain article](https://
 
 ## Step 9: Pick a schedule for your pipeline
 
-Setting a schedule for your pipeline will determine how this pipeline will be scheduled once it is deployed to Astro as a DAG. Within the Cloud IDE a pipeline will only run if you start a run manually.
+Setting a schedule for your pipeline will determine how this pipeline will be scheduled once it is deployed to Astro as a DAG. Within the Astro Cloud IDE a pipeline will only run if you start a run manually.
 
 1. Click **Schedule** to see your DAG's current schedule. 
 
@@ -294,11 +300,11 @@ Through this tutorial, the Astro Cloud IDE was building a DAG based on the confi
 
 2. Click **Download** to download the DAG file.
 
-## Step 11: Connect your GitHub to the Cloud IDE
+## Step 11: Connect your GitHub to the Astro Cloud IDE
 
-Now that you have trained the model, you can connect GitHub to the Cloud IDE to commit your pipeline as a DAG to any Airflow project.
+Now that you have trained the model, you can connect GitHub to the Astro Cloud IDE to commit your pipeline as a DAG to any Airflow project.
 
-1. Click **Configure** to connect your Cloud IDE Project to your GitHub account.
+1. Click **Configure** to connect your Astro Cloud IDE Project to your GitHub account.
 
     ![Connect to GitHub](/img/guides/cloud_ide_github_conn.png)
 
@@ -322,13 +328,13 @@ If you made changes to several DAGs, you can select which changes to commit by c
 
 :::caution
 
-If a file with the same name as your Cloud IDE pipeline already exists in your GitHub repository, the Cloud IDE will overwrite the existing file. For this reason, Astronomer recommends using a separate branch for commits from your Cloud IDE environment than for commits from other sources to the same repository.
+If a file with the same name as your Astro Cloud IDE pipeline already exists in your GitHub repository, the Astro Cloud IDE will overwrite the existing file. For this reason, Astronomer recommends using a separate branch for commits from your Astro Cloud IDE environment than for commits from other sources to the same repository.
 
 :::
 
 ## Step 13: Deploy your DAG to Astro 
 
-When you first commit a Cloud IDE pipeline to a GitHub repository, the Cloud IDE will create a GitHub workflow named `astro_deploy.yaml`. This action can be modified to fit your CI/CD workflow, or used out of the box after you configure a few environment variables. 
+When you first commit a Astro Cloud IDE pipeline to a GitHub repository, the Astro Cloud IDE will create a GitHub workflow named `astro_deploy.yaml`. This action can be modified to fit your CI/CD workflow, or used out of the box after you configure a few environment variables. 
 
 1. Set the following [GitHub secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets#creating-encrypted-secrets-for-a-repository) in your repository:
 
@@ -370,13 +376,13 @@ To be able to deploy your DAG the Runtime Image used in the Airflow project of y
 
 ## Conclusion
 
-You now know how to use the Cloud IDE to write a simple ML pipeline! More specifically, you can now:
+You now know how to use the Astro Cloud IDE to write a simple ML pipeline! More specifically, you can now:
 
-- Create a new Cloud IDE project and pipeline. 
+- Create a new Astro Cloud IDE project and pipeline. 
 - Use a SQL cell to query and transform tables in a database.
 - Pass information between SQL and Python cells.
 - Run a simple `RandomForestClassifier` on a dataset.
 - Commit your pipeline to GitHub.
 - Use GitHub Actions to deploy your new DAG to Astro.
 
-See the [Cloud IDE documentation](https://docs.astronomer.io/astro/cloud-ide) to learn more about this next-generation DAG writing environment.
+See the [Astro Cloud IDE documentation](https://docs.astronomer.io/astro/cloud-ide) to learn more about this next-generation DAG writing environment.
