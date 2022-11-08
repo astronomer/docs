@@ -350,11 +350,7 @@ When you first commit an Astro Cloud IDE pipeline to a GitHub repository, the As
 
     ![GitHub Secrets](/img/guides/cloud_ide_github_secrets.png)
 
-:::info
-
-Depending on the version of the Astro CLI you are using you might need to adjust the GitHub workflow using the [configuration detailed in the Astro documentation](https://docs.astronomer.io/astro/ci-cd?tab=multibranch#github-actions).
-
-:::
+    Depending on the version of the Astro CLI you are using you might need to adjust the GitHub workflow using the [configuration detailed in the Astro documentation](https://docs.astronomer.io/astro/ci-cd?tab=multibranch#github-actions).
 
 2. Add the `scikit-learn` package to `requirements.txt` and commit the change. This second commit will trigger GitHub Actions again, using the GitHub secrets you configured. If your `requirements.txt` file already contains the `scikit-learn` package, make a different commit.
 
