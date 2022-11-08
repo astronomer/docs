@@ -19,6 +19,22 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## November 8, 2022
 
+### New data lineage interface
+
+The **Lineage** tab in the Cloud UI has been updated with more features and now matches the look and feel of Astro.
+
+![Updated lineage page](/img/release-notes/lineage-integrated.png)
+
+Specifically, the tab includes the following improvements:
+
+- The process for comparing runs uses a simpler interface and provides more information about the runs you're comparing. See [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
+- Names for UI elements have been updated to more clearly represent Airflow resources. For example, **jobs** was renamed to **runs**, and the **Explore** tab was renamed to **Runs**.
+- Lineage graphs include new colors and animations to show the flow of data as it moves between runs and datasets. 
+
+### New Deployment transfer functionality
+
+You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace. See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
+
 ### Additional improvements 
 
 - The Cloud UI now shows the user or API key that created a Deployment, as well as the user or API key that most recently updated a Deployment with configuration or project changes. View this information in your list of Deployments or in the header of a Deployment's information page. 
