@@ -1,5 +1,3 @@
-
-
 ---
 sidebar_label: 'Astro'
 title: 'Astro release notes'
