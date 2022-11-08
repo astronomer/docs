@@ -11,7 +11,7 @@ As part of this update, support was introduced for configuring [custom XCom back
 
 This guide discusses the benefits of using an XCom backend, shows an example of implementing an XCom backend with Airflow S3, and describes how to set this up if you're running Airflow on Astro.
 
-All code used in this tutorial is located in the [Astronomer Registry](https://github.com/astronomer/custom-xcom-backend-tutorial).
+All code used in this guide is located in the [Astronomer Registry](https://github.com/astronomer/custom-xcom-backend-tutorial).
 
 ## Assumed knowledge
 

@@ -17,7 +17,7 @@ Airflow exposes a number of parameters that are closely related to DAG and task-
 - DAG-level settings.
 - Task-level settings.
 
-In this tutorial, you'll learn about the key parameters that you can use to modify Airflow performance. you'll also learn how your choice of executor can impact scaling and how best to respond to common scaling issues.
+In this guide, you'll learn about the key parameters that you can use to modify Airflow performance. you'll also learn how your choice of executor can impact scaling and how best to respond to common scaling issues.
 
 This guide references the parameters available in Airflow version 2.0 and later. If you're using an earlier version of Airflow, some of the parameter names might be different.
 

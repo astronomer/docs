@@ -12,7 +12,7 @@ id: dags
 
 In Airflow, data pipelines are defined in Python code as directed acyclic graphs, also known as DAGs. Within a graph, each node represents a task which completes a unit of work, and each edge represents a dependency between tasks.
 
-In this tutorial, you'll learn DAG basics and about DAG parameters and how to define a DAG in Python.
+In this guide, you'll learn DAG basics and about DAG parameters and how to define a DAG in Python.
 
 ## Assumed knowledge
 
