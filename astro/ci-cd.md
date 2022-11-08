@@ -359,7 +359,7 @@ The following templates are examples of how to implement DAG-only deploys in Git
 
 <Tabs
     defaultValue="standard"
-    groupId= "github-actions"
+    groupId= "github-actions-two-step"
     values={[
         {label: 'Standard', value: 'standard'},
         {label: 'Multi-branch', value: 'multibranch'},
@@ -431,6 +431,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
             astro deploy
     ```
+
 This Github Actions script checks the diff between your current commit and main when a commit is pushed to main. Make sure to customize the script for for your specific use case. 
 
 </TabItem>
