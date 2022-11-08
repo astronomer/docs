@@ -53,20 +53,14 @@ After you create your registry:
 
 The images and tags which are required for your Software installation depend on the version of Astronomer you're installing. To gather a list of exact images and tags required for your Astronomer version:
 
-1. Make note of all of the values in your `config.yaml` file that you updated from their default values. 
-2. Run the following command to template the Astronomer Helm chart and fetch its rendered image tags. Use the `--set` flag to specify the updated values you made note of:
+1. Run the following command to template the Astronomer Helm chart and fetch all of its rendered image tags. 
 
     ```bash
-    helm template --version <your-astronomer-version> astronomer/astronomer --set <your-config-key-1>=<your-config-value-1> --set <your-config-key-2>=<your-config-value-2> --set <your-config-key-x>=<your-config-value-x>| grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq                           
+    helm template --version <your-astronomer-version> astronomer/astronomer --set global.loggingSidecar.enabled=True --set global.postgresqlEnabled=True --set global.authSidecar.enabled=True --set global.baseDomain=<your-basedomain> | grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq                           
     ```
     
-    For example, if you set `global.loggingSidecar.enabled=True` in your Helm chart and customized no other values, you run: 
-    
-    ```sh
-    helm template --<template version> astronomer/astronomer --set global.loggingSidecar.enabled=True | grep "image: " | sed -e \'s/"//g\' -e \'s/image:[ ]//\' -e \'s/^ *//g\' | sort | uniq  
-    ```
-
-3. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
+    This command sets all possible Helm values that could impact which images are required for your installation. By fetching all images now, you save time by eliminating the risk of missing an image. 
+2. Run the following command to template the Airflow Helm chart and fetch its rendered image tags:
 
     ```shell
     helm template astronomer/airflow --set airflow.postgresql.enabled=false --set airflow.pgbouncer.enabled=true     --set airflow.statsd.enabled=true --set airflow.executor=CeleryExecutor | grep "image: " | sed -e 's/"//g' -e     's/image:[ ]//' -e 's/^ *//g' | sort | uniq
