@@ -55,10 +55,10 @@ Then, see [Install the Astro CLI](cli/install-cli.md) for steps to install the l
 
 ## Enable Astro SQL commands 
 
-To enable Astro SQL commands, run the following command: 
+To enable Astro SQL commands, install the latest version of the Astro CLI. Run:
 
 ```sh
-astro config set -g beta.sql_cli true
+brew install astro
 ```
 
 ## Create a new SQL project 
