@@ -65,7 +65,7 @@ Configure a new Astro project to run Airflow locally.
 
 Create a configuration file to connect to your database backend. The following example uses the template from the Soda documentation to create the configuration file for Snowflake.
 
-```YAML
+```yaml
 # the first line names the datasource "MY_DATASOURCE"
 data_source MY_DATASOURCE:
   type: snowflake
@@ -93,7 +93,7 @@ Save the YAML instructions in a file named `configuration.yml` and place the fil
 
 Define your data quality checks using the [many preset checks available for SodaCL](https://docs.soda.io/soda-cl/soda-cl-overview.html). For more details on creating checks, see [How it works](#how-it-works) If you cannot find a preset check that works for your use case, you can create a custom one using SQL as shown in the following example.
 
-```YAML
+```yaml
 checks for example_table:
   # check that MY_EMAIL_COL contains only email addresses according to the
   # format name@domain.extension
@@ -193,7 +193,7 @@ Soda Core uses the Soda Checks Language (SodaCL) to run data quality checks defi
 
 As shown in the following example, you can use Soda Core to run checks on different properties of your dataset against a numerically defined threshold:
 
-```YAML
+```yaml
 checks for MY_TABLE_1:
   # MY_NUM_COL_1 has a minimum of above or equal 0
   - min(MY_NUM_COL_1) >= 0
@@ -208,7 +208,7 @@ checks for MY_TABLE_2:
 
 You can add optional configurations, such as custom names for checks and error levels:
 
-```YAML
+```yaml
 checks for MY_TABLE_1:
   # fail the check when MY_TABLE_1 has less than 10 or more than a million rows
   # warn if there are less than 100 (but 10 or more) rows
@@ -227,7 +227,7 @@ You can use the following methods to check the validity of data:
 - Regex
 - SQL query
 
-```YAML
+```yaml
 checks for MY_TABLE_1:
   # MY_CATEGORICAL_COL has no other values than val1, val2 and val3
   - invalid_count(MY_CATEGORICAL_COL) = 0:
@@ -257,7 +257,7 @@ Three more unique features of Soda Core are:
 - [Schema checks](https://docs.soda.io/soda-cl/schema.html): Run checks on the existence of columns and validate data types.
 - [Reference checks](https://docs.soda.io/soda-cl/reference.html): Ensure parity in between columns in different datasets in the same data source.
 
-```YAML
+```yaml
 checks for MY_TABLE_1:
   # MY_DATE's youngest row is younger 10 days
   - freshness(MY_DATE) < 10d
