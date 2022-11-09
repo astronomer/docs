@@ -22,8 +22,8 @@ Switching to a different organization triggers a new browser login. If browser l
 
 | Option               | Description                                                                                                        | Possible Values |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------ | --------------- |
-| `-l`, `--login-link` | Forces a user to manually access the Cloud UI to log in instead of opening the browser automatically from the Astro CLI | None            |
-| `<organization-id>` | The ID of the Organization to switch to | Any valid Organization ID            |
+| `-l`, `--login-link` | Forces a user to manually access the Cloud UI to log in instead of opening the browser automatically from the Astro CLI. | None            |
+| `<organization-id>` | The ID of the Organization to switch to. | Any valid Organization ID            |
 | `<organization-name>` | The name of the Organization to switch into. Use as an alternative to `<organization-id>`. | Any valid Organization name            |
 
 ## Related Commands
