@@ -91,7 +91,7 @@ Save the YAML instructions in a file named `configuration.yml` and place the fil
 
 ## Step 3: Create the checks file
 
-Define your data quality checks using the [many preset checks available for SodaCL](https://docs.soda.io/soda-cl/soda-cl-overview.html). For more details on creating checks, see [How it works](#how-it-works) If you cannot find a preset check that works for your use case, you can create a custom one using SQL as shown in the following example.
+Define your data quality checks using the [many preset checks available for SodaCL](https://docs.soda.io/soda-cl/soda-cl-overview.html). For more details on creating checks, see [How it works](#how-it-works). If you cannot find a preset check that works for your use case, you can create a custom one using SQL as shown in the following example.
 
 ```yaml
 checks for example_table:
@@ -154,7 +154,7 @@ In this DAG, Soda Core checks are executed by using the BashOperator to run the 
 
 Go to the Airflow UI, unpause your `soda_example_dag` DAG, and trigger it to run the Soda Core data quality checks. Go to the task log to see a list of all checks that ran and their results.
 
-This is an example of what your logs might look like when all 3 checks pass:
+This is an example of what your logs might look like when 3 out of 3 checks pass:
 
 ```text
 [2022-08-04, 13:07:22 UTC] {subprocess.py:92} INFO - Scan summary:
