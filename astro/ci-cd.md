@@ -35,7 +35,7 @@ Use the Astronomer CI/CD templates to automate deploying code to Astro with popu
 
 ## CI/CD templates
 
-Templates allow you to easily configure automated workflows using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, workflows, and best practices.
+Templates allow you to easily configure automated workflows using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and best practices.
 
 Astro supports two deployment methods:
 
@@ -44,11 +44,11 @@ Astro supports two deployment methods:
 
 This document contains two kinds of templates that utilize these deployment methods in different ways.
 
-### Image-only deploys
+### Image-only workflows
 
-The image-only deployment method builds a Docker image and pushes it to Astro whenever you update any file in your Astro project. This type of template is simple to set up and works well for development workflows that include complex Docker customization or logic.
+The image-only workflow builds a Docker image and pushes it to Astro whenever you update any file in your Astro project. This type of template is simple to set up and works well for development workflows that include complex Docker customization or logic.
 
-CI/CD templates for image-only deploys:
+CI/CD templates for image-only workflows:
 
 - Access Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
 - Install the latest version of the Astro CLI.
@@ -74,17 +74,11 @@ All image-only templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy v
 
 :::
 
-### DAG-based deploys
+### DAG-based workflows
 
-The DAG-based deployment method uses the `--dags` flag in the Astro CLI to enable a faster way to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. When you use this deployment method, DAGs are deployed separately and are never built into or included in your Docker image.
+The DAG-based workflow uses the `--dags` flag in the Astro CLI to enable a faster way to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [DAG-only deploys](deploy-code.md#dag-only-deploys).
 
-This workflow has a number of benefits: 
-
-- DAG-based deploys are significantly faster than image-only deploys when you deploy only changes to your DAG files. Your updated code will appear in Airflow faster.
-- When you push only changes to your DAGs, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart.
-- You can have different sets of users deploy project changes versus DAG changes.
-
-CI/CD templates that use the DAG-based deployment method do the following:
+CI/CD templates that use the DAG-based workflow do the following:
 
 - Access Deployment API key credentials. These credentials must be set as OS-level environment variables named `ASTRONOMER_KEY_ID` and `ASTRONOMER_KEY_SECRET`.
 - Install the latest version of the Astro CLI.
@@ -102,7 +96,7 @@ export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
 
-# Determine if only DAG files have changes 
+# Determine if only DAG files have changes
 OUTPUT=$(git diff main... --name-only)
 DAGS_DEPLOY=FALSE
 REGULAR_DEPLOY=FALSE
