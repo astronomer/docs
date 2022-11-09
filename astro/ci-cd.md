@@ -41,7 +41,7 @@ Astro supports two types of CI/CD templates:
 
 - Image-only workflows where all files in your Astro project are built into a Docker image and pushed to Astro in a single step.
 - DAG-based workflows that use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) to deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
-e
+
 This document contains templates that utilize these deployment methods in different ways.
 
 ### Image-only workflows
