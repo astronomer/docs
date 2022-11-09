@@ -7,12 +7,12 @@ description: Deploy Airflow DAGs to Astro.
 
 import {siteVariables} from '@site/src/versions';
 
-Using the Astro CLI to push your Astro project, including your DAG code, to a Deployment is the foundation for managing changes on Astro. Astro supports two types of changes:
+Using the Astro CLI to push your Astro project, including your DAG code, to a Deployment is the foundation for managing changes on Astro. Astro supports two types of deployment options:
 
-- Changes to your DAGs. This includes all Python files in the `dags` directory of your Astro project.
-- Changes to the base Docker image for your Astro project. This includes your `Dockerfile`, Astro Runtime image version, and all Python and OS-level packages.
+- `astro deploy`: This command pushes every file in your Astro project to all Airflow components in your Deployment. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages.
+- `astro deploy --dags`. This command pushes only the code that exists in the `/dags` directory of your Astro project to a running Deployment on Astro. When you only need to push changes to your DAGs, running this command is a faster development experience than running `astro deploy` since it does not require installing your dependencies.
 
-By default, deploys to Astro will push both your DAGs and the rest of the files in your Astro project in a single step. This method is referred to in documentation as image-only deploys. To enable the ability to push only DAGs to Astro for a faster and more reliable development experience, you must enable the [DAG-only deploys](deploy-code.md#DAG-only-deploys) feature.
+To run `astro deploy --dags`, you must first enable the [DAG-only deploys](deploy-code.md#DAG-only-deploys) feature for each Deployment.
 
 Follow the steps in this document to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [CI/CD](ci-cd.md).
 
@@ -51,7 +51,7 @@ This command returns a list of Deployments available in your Workspace and promp
 
 After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails.
 
-If your code passes the parse, the Astro CLI builds your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
+If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
 :::tip
 
@@ -71,9 +71,9 @@ After the deploy completes, Docker image information for your Deployment is avai
 
     ![Docker image information](/img/docs/image-tag-airflow-ui-astro.png)
 
-### What happens during an image-only deploy
+### What happens during a code deploy
 
-When you deploy code to Astro and the DAG-only deploy feature is not enabled, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, DAGs, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running Apache Airflow on Astro.
+When you deploy code to Astro, your Astro project is built into a Docker image. This includes system-level dependencies, Python-level dependencies, and your `Dockerfile`. It does not include any of the metadata associated with your local Airflow environment, including task history and Airflow connections or variables that were set locally. This Docker image is then pushed to all containers running Apache Airflow on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately.
 
 ![Deploy code](/img/docs/deploy-architecture.png)
 
@@ -104,19 +104,17 @@ This feature is in Public Preview and available to all Astro customers. It is st
 
 :::
 
-There are some scenarios where you might want to deploy only the `dags` directory of your Astro project. To do this, enable the DAG-only deploy feature for each Deployment. You must do this only once.
+To enable the ability to push only DAGs to Astro for a faster development experience, you must enable the [DAG-only deploys](deploy-code.md#DAG-only-deploys) feature once for each Deployment. When it is enabled, you must still run `astro deploy` when you make a change to any file in your Astro project that is not in the `dags` directory.
 
 Enabling DAG-only deploys on Astro has a few benefits:
 
-- DAG-based deploys are significantly faster than image-only deploys when you deploy only changes to your DAGs. Your updated code will appear in the Airflow UI much faster.
-- When you push only changes to your DAGs, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart. This results in improved reliability, a more efficient use of running workers, and no downtime for your Deployment.
+- DAG-only deploys are significantly faster than running `astro deploy` when you have only made changes to your DAGs.
+- When you run `astro deploy --dags`, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart. This results in a more efficient use of running workers and no downtime for your Deployment.
 - You can have different sets of users deploy project changes versus DAG changes. See [DAG-based workflows](ci-cd.md#dag-based-workflows) for how you can set this up in your CI/CD pipelines.
 
 ### Enable DAG-only deploys
 
-To push DAG-only changes to Astro, you must enable the feature for each Deployment. Enabling DAG-only deploys requires Astro CLI version 1.7 or above. See [Install the Astro CLI](cli/install-cli.md).
-
-When the DAG-only deploy feature is enabled, DAGs are deployed separately and are never built into or included in the base Docker image for your Astro project. You must still run `astro deploy` when you make a change to any file in your Astro project that is not in the `dags` directory. All files in your Astro project that are not in the `dags` directory are built into a Docker image and pushed to Astro.
+Enabling DAG-only deploys requires Astro CLI version 1.7 or above. See [Install the Astro CLI](cli/install-cli.md).
 
 1. Run:
 
