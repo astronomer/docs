@@ -138,7 +138,7 @@ To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
     )
     ```
     
-    Your task can now write data to the configured volume. Astronomer recommends that your tasks use no more storage than 20GB divided by your configured maximum tasks per worker. See [Worker autoscaling logic](configure-worker-queues.md#worker-autoscaling-logic). For larger operations requiring storage, Astronomer recommends setting an Airflow connection to an external storage service such as Amazon S3. See [Passing data between Airflow tasks](https://www.docs.astronomer.io/learn/airflow-passing-data-between-tasks/).
+    Your task can now write data to the configured volume.
  
 ## Run images from a private registry
 
