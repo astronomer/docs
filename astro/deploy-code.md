@@ -10,7 +10,7 @@ import {siteVariables} from '@site/src/versions';
 Using the Astro CLI to push your Astro project, including your DAG code, to a Deployment is the foundation for managing changes on Astro. Astro supports two types of deployment options:
 
 - `astro deploy`: This command pushes every file in your Astro project to all Airflow components in your Deployment. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages.
-- `astro deploy --dags`. This command pushes only the code that exists in the `/dags` directory of your Astro project to a running Deployment on Astro. When you only need to push changes to your DAGs, running this command is a faster development experience than running `astro deploy` since it does not require installing your dependencies.
+- `astro deploy --dags`: This command pushes only the code that exists in the `/dags` directory of your Astro project to a running Deployment on Astro. When you only need to push changes to your DAGs, running this command is a faster development experience than running `astro deploy` since it does not require installing your dependencies.
 
 To run `astro deploy --dags`, you must first enable the [DAG-only deploys](deploy-code.md#DAG-only-deploys) feature for each Deployment.
 
@@ -104,7 +104,7 @@ This feature is in Public Preview and it is available to all Astro customers. It
 
 :::
 
-To enable the ability to push only DAGs to Astro for a faster development experience, you must enable the [DAG-only deploys](deploy-code.md#DAG-only-deploys) feature once for each Deployment. When it is enabled, you must still run `astro deploy` when you make a change to any file in your Astro project that is not in the `dags` directory.
+To enable the ability to push only DAGs to Astro for a faster development experience, you must enable the [DAG-only deploys](deploy-code.md#DAG-only-deploys) feature for each Deployment. You only need to enable the feature once. When it is enabled, you must still run `astro deploy` when you make a change to any file in your Astro project that is not in the `dags` directory.
 
 Enabling DAG-only deploys on Astro has a few benefits:
 
