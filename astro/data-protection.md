@@ -15,7 +15,7 @@ All customer data flows within the control plane transit through a mTLS mesh, en
 
 All internal service communication within the data plane is transmitted using TLS 1.2 and secure ciphers.
 
-Each cluster in your data plane has its own certificates which were generated when the cluster was created and signed by the Let’s Encrypt certificate authority (CA). The certificates are auto-renewed within a 90 day window. In 2022, Astronomer will enhance the security posture of clusters in the data plane by removing public IPs and the need to sign certificates with a public CA.
+Every cluster in your data plane has its own certificates which were generated when the cluster was created and signed by the Let’s Encrypt certificate authority (CA). The certificates are automatically renewed every 90 days. To enhance the security of data plane clusters, Astronomer will soon remove public IPs and the requirement to sign certificates with a public CA.
 
 ## Encryption at rest
 
