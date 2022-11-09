@@ -106,7 +106,7 @@ Enabling DAG-only deploys on Astro has a few benefits:
 
 - DAG-based deploys are significantly faster than image-only deploys when you deploy only changes to your DAGs. Your updated code will appear in the Airflow UI much faster.
 - When you push only changes to your DAGs, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart. This results in improved reliability, a more efficient use of running workers, and no downtime for your Deployment.
-- You can have different sets of users deploy project changes versus DAG changes.
+- You can have different sets of users deploy project changes versus DAG changes. See [DAG-based workflows](ci-cd.md#dag-based-workflows) for how you can set this up in your CI/CD pipelines.
 
 ### Enable DAG-only deploys
 
