@@ -32,9 +32,8 @@ You can now transfer a Deployment from one Workspace to another in your Organiza
 See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
 
 ### Additional improvements 
-
-- The Cloud UI now shows the user or API key that created a Deployment, as well as the user or API key that most recently updated a Deployment with configuration or project changes. View this information in your list of Deployments or in the header of a Deployment's information page. 
-- The Kubernetes API of your data plane is no longer exposed to the public internet. 
+ 
+- The Kubernetes API of your AWS data plane is no longer exposed to the public internet. The allowlist is locked down to Control Plane IPs. New clusters will be created with this configuration, while all existing clusters will be updated by end of next week.
 
 ## November 1, 2022 
 
