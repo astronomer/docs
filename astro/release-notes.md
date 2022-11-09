@@ -48,10 +48,13 @@ If you have any feedback, please submit it to the [Astro Cloud IDE product porta
 
 ### Write to temporary storage on AWS clusters
 
-AWS clusters that use `m5d` and `m6id` worker types can now run tasks which require writing data to ephemeral storage. These worker types now have NVMe SSD volume mounts that can be utilized by tasks. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each worker type.
+AWS clusters that use `m5d` and `m6id` worker types can now use the full capacity of the NVMe SSD volumes available in these instances. Prior to this release, Astro used the utilization of the root volume to make scheduling decisions; with this change  the entire storage capacity is examined. 
+
+Tasks using KubernetesPodOperator can create  mounts to any path, but other tasks must write to `/ephemeral` to use this storage.  
+
+**Note that non-KPO tasks that used local storage on these instances will need to be adjusted to write to `/ephemeral` instead.**
 
 You can use this storage for simple operations such as a disk-based merge sort or checkpointing to prevent crashes. To use these worker types on your cluster, see [Modify a cluster](modify-cluster.md) and [Configure worker queues](configure-worker-queues.md). 
-
 ### Additional improvements 
 
 - In the Cloud UI, cluster selection menus are now alphabetized.
