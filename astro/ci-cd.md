@@ -76,6 +76,12 @@ All image-only templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy v
 
 ### DAG-based workflows
 
+:::caution
+
+The features used in this workflow are in Public Preview. They are still in development and features and functionality are subject to change.
+
+:::
+
 The DAG-based workflow uses the `--dags` flag in the Astro CLI to enable a faster way to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [DAG-only deploys](deploy-code.md#dag-only-deploys).
 
 CI/CD templates that use the DAG-based workflow do the following:

@@ -100,6 +100,12 @@ If you want to force long-running tasks to terminate sooner than 24 hours, speci
 
 ## DAG-only deploys
 
+:::caution
+
+This feature is in Public Preview. It is still in development and features and functionality are subject to change.
+
+:::
+
 There are some scenarios where you might want to deploy only the `dags` directory of your Astro project. To do this, you can enable the DAG-only deploy feature per Deployment.
 
 Enabling DAG-only deploys on Astro has a few benefits:
