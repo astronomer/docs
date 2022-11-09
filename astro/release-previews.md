@@ -7,16 +7,16 @@ description: Learn about Astronomer release previews.
 
 Astronomer shares release previews to give customers a chance to evaluate and provide feedback on features before they are generally available (GA). Release previews have a different degree of feature maturity. This document defines those release preview stages, and the levels of availability, support, and customer access granted at each stage.
 
-To view support promises for GA releases of Runtime, see [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md). To submit feedback or a support request for a Public or Private Preview feature, see [Submit a support request](astro-support.md).
+To view the support commitment for GA releases of Astro Runtime, see [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md). To submit feedback or a support request for a Public or Private Preview feature, see [Submit a support request](astro-support.md).
 
 ## Astro release previews
 
-Astro features can be shared as Private Preview or Public Preview. The table below offers a snapshot on how the release previews differ:
+Astro features can be shared as Private Preview or Public Preview. The following table describes the differences between the different release preview types.
 
 | Release Preview Type | Customer Access | Availability                                    | Support Commitment                                                                                                                                                                                                                                                         |
 | -------------------- | --------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Private Preview      | Invite only    | No SLA or SLO                                  | Product and Research and Development actively communicate with customers who are using a Private Preview feature to receive feedback, bug reports, and more. Customer Reliability Engineering (CRE) doesn't support Private Preview features. |
-| Public Preview       | Everyone        | No SLA. Internal SLOs supported by R&D and CRE. | CRE treats all issues within the feature as P3 or P4, depending on the nature of the issue. CRE continues to support remediation for all other issues at defined priority levels, including if a platform issue is caused by a feature in Public Preview.        |
+| Public Preview       | Everyone        | No SLA. Internal SLOs supported by R&D and CRE | CRE treats all issues related to the feature at a P3 or P4 priority level. See [Submit a support request](https://docs.astronomer.io/astro/astro-support#best-practices-for-support-request-submissions). CRE continues to support remediation for all other issues at defined priority levels, including if a platform issue is caused by a feature in Public Preview.       |
 
 ## Private Preview
 
@@ -38,7 +38,7 @@ The CRE team doesn't support Private Preview features.
 
 ## Public Preview
 
-Public Preview offers all customers access to a feature before it is released for GA. The key difference between Public Preview and General Availability is in availability and support for the feature. 
+All customers can access Public Preview features before they become GA. The primary difference between Public Preview and GA is the availability of the feature and the support provided by Astronomer. 
 
 ### Customer access 
 
@@ -55,4 +55,4 @@ CRE assigns a P3 or P4 severity level to all Public Preview issues. The followin
 - P3: Loss of use of a feature, or a feature not working as expected. Service is not affected..
 - P4: Feature inquiries, or bugs limited to a small number users. Inquiries can include questions about feature capabilities, navigation, installation, or configuration.
 
-CRE continues to support issue remediation for all other issues at defined priority levels, including if a platform issue is caused by a feature in Public Preview.
+If a feature in Public Preview causes an issue with the data plane, CRE treats that issue with the priority of a generally available feature. 
