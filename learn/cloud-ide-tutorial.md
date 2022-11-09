@@ -294,7 +294,7 @@ Setting a schedule for your pipeline will determine how this pipeline will be sc
 
 4. Click **Update Settings** to save your schedule.
 
-## Step 10: View your DAG code
+## Step 10: View your DAG code (Optional)
 
 Through this tutorial, the Astro Cloud IDE was building a DAG based on the configurations you set in the Cloud UI. Export your pipeline as DAG code to see the results of your work.
 
