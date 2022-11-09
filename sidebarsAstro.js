@@ -135,7 +135,15 @@ module.exports = {
     {
       type: "category",
       label: "Release notes",
-      items: ["release-notes", "runtime-release-notes"],
+      items: [
+        "release-notes", 
+        "runtime-release-notes",
+        {
+          type: 'link',
+          label: 'Astro CLI',
+          href: 'https://docs.astronomer.io/astro/cli/release-notes',
+        },
+      ],
     },
     {
       type: "category",
@@ -179,6 +187,16 @@ module.exports = {
       type: "doc",
       label: "Install the CLI",
       id: "cli/install-cli",
+    },
+    {
+      type: "doc",
+      label: "Configure the CLI",
+      id: "cli/configure-cli",
+    },
+    {
+      type: "doc",
+      label: "Release notes",
+      id: "cli/release-notes",
     },
     {
     type: 'category',

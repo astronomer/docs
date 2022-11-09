@@ -76,16 +76,16 @@ This command uses Docker, and it can take up to five minutes to complete if this
 ```sh
 new_proj/
 ├── config
-│   ├── default
-│   │   └── configuration.yml
-│   └── dev
-│       └── configuration.yml
+│   ├── default
+│   │   └── configuration.yml
+│   └── dev
+│       └── configuration.yml
 ├── data
-│   ├── imdb.db
-│   └── retail.db
+│   ├── imdb.db
+│   └── retail.db
 └── workflows
     ├── example_basic_transform
-    │   └── top_animations.sql
+    │   └── top_animations.sql
     └── example_templating
         ├── filtered_orders.sql
         └── joint_orders_customers.sql
