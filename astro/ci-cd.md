@@ -37,12 +37,12 @@ Use the Astronomer CI/CD templates to automate deploying code to Astro with popu
 
 Templates allow you to easily configure automated workflows using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and best practices.
 
-Astro supports two deployment methods:
+Astro supports two types of CI/CD templates:
 
-- Image-only deploys where all files in your Astro project are built into a Docker image and pushed to Astro in a single step.
-- [DAG-based deploys](deploy-code.md#DAG-only-deploys) that deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
-
-This document contains two kinds of templates that utilize these deployment methods in different ways.
+- Image-only workflows where all files in your Astro project are built into a Docker image and pushed to Astro in a single step.
+- DAG-based workflows that use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) to deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
+e
+This document contains templates that utilize these deployment methods in different ways.
 
 ### Image-only workflows
 
@@ -82,7 +82,7 @@ The features used in this workflow are in Public Preview. They are still in deve
 
 :::
 
-The DAG-based workflow uses the `--dags` flag in the Astro CLI to enable a faster way to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [DAG-only deploys](deploy-code.md#dag-only-deploys).
+The DAG-based workflow uses the `--dags` flag in the Astro CLI to enable a faster way to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 CI/CD templates that use the DAG-based workflow do the following:
 
