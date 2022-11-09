@@ -31,17 +31,6 @@ DAG-only deploys:
 
 For more information, see [DAG-only deploys](deploy-code.md#dag-only-deploys).
 
-### Improved data lineage interface
-
-The **Lineage** tab has new features and is better integrated into the Cloud UI.
-
-![Updated lineage page](/img/release-notes/lineage-integrated.png)
-
-Specifically, the tab includes the following improvements:
-
-- The process for comparing runs uses a simpler interface and provides more information about the runs you're comparing. See [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
-- Names for UI elements have been updated to more clearly represent Airflow resources. For example, **jobs** is now **runs**, and the **Explore** tab is now **Runs**.
-- Lineage graphs include new colors and animations to show the flow of data as it moves between runs and datasets. 
 
 ### New Deployment transfer functionality
 
