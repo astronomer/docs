@@ -47,6 +47,7 @@ After setting the variables, this command works for a Deployment and you don't n
 
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| `--dag-deploy` |Enable or disable DAG-only deploys for the Deployment.                                                                                                                         | Either `enable` or `disable`. Contact [Astronomer support](https://cloud.astronomer.io/support) before using `disable` to disable the feature.                                                             |
 | `<deployment-id>` (_Required_) | The ID of the Deployment to update                                                               | Any valid Deployment ID                                                        |
 | `--deployment-name` | The name of the Deployment to update. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
 | `-d`,`--description`           | The description for the Deployment                                                     | Any string. Multiple-word descriptions should be specified in quotations (`"`) |
