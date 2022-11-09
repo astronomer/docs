@@ -100,7 +100,7 @@ If you want to force long-running tasks to terminate sooner than 24 hours, speci
 
 :::caution
 
-This feature is in Public Preview and available to all Astro customers. It is still in development and features and functionality are subject to change.
+This feature is in Public Preview and it is available to all Astro customers. It is still in development, and features and functionality are subject to change.
 
 :::
 
@@ -114,9 +114,8 @@ Enabling DAG-only deploys on Astro has a few benefits:
 
 ### Enable DAG-only deploys
 
-Enabling DAG-only deploys requires Astro CLI version 1.7 or above. See [Install the Astro CLI](cli/install-cli.md).
 
-1. Run:
+1. Run the following command:
 
     ```sh
     astro deployment update --dag-deploy enable
