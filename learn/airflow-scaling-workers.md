@@ -70,7 +70,7 @@ Scheduler settings control how the scheduler parses DAG files and creates DAG ru
 
 - `parsing_processes` (formerly `max_threads`): How many processes the scheduler can run in parallel to parse DAGs. Astronomer recommends setting a value that is twice your available vCPUs. Increasing this value can help serialize a large number of DAGs more efficiently. If you are running multiple schedulers, this value applies to each of them. The default value is 2. 
 
-- `file_parsing_sort_mode`: Determines how the scheduler lists and sorts DAG files to determine the parsing order. Set to one of: `modified_time`, `random_seeded_by_host` and `alphabetical`. The default value is `modified_time`. 
+- `file_parsing_sort_mode`: Determines how the scheduler lists and sorts DAG files to determine the parsing order. Set to one of: `modified_time`, `random_seeded_by_host` and `alphabetical`. The default value is `modified_time`. 
 
 - `scheduler_heartbeat_sec`: Defines how often the scheduler should run (in seconds) to trigger new tasks. The default value is 5 seconds. 
 
