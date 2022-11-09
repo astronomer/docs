@@ -137,8 +137,6 @@ To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
     volumes=[volume],
     )
     ```
-    
-    Your task can now write data to the configured volume.
  
 ## Run images from a private registry
 
