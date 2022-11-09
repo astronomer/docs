@@ -29,8 +29,7 @@ DAG-only deploys:
 - Improve performance and reduce costs by removing the requirement to terminate and restart your workers every time you a change a DAG.
 - Allow the creation of separate CI/CD processes for DAG deploys and changes to Astro projects. See [CI/CD templates](ci-cd.md#ci-cd-templates) for examples. 
 
-For more information, see [DAG-only deploys](deploy-code.md#dag-only-deploys).
-
+For more information, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 ### New Deployment transfer functionality
 
