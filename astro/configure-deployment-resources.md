@@ -80,7 +80,7 @@ To transfer a Deployment from one Workspace to another, the Workspaces must be i
 Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin or Editor in both the original Workspace and the target Workspace.
 
 1. In the Cloud UI, select a Workspace and then select a Deployment.
-2. Click the **Options** menu of the Deployment you want to transfer, and select **Transfer Deployment**. 
+2. Click the **Options** menu and select **Transfer Deployment**. 
 
     ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
 
