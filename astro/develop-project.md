@@ -560,7 +560,7 @@ Make sure that the name of any privately hosted Python package doesn't conflict 
     image_name=astro-$(date +%Y%m%d%H%M%S)
     ```
 
-2. Run the following command to create a new Docker image from your `Dockerfile`. Replace the pip repository domain name and corresponding username and password with your own.
+2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<private-pypi-repo-domain-name>`, `<repo-username>` and `<repo-password>` with your own values.
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t $image_name .
