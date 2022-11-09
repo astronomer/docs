@@ -19,7 +19,7 @@ On Astro, you can use Deployment API keys to automate deploying code changes to 
 
 There are many benefits to configuring a CI/CD workflow on Astro. Specifically, you can:
 
-- Avoid having to manually run `astro deploy` with the Astro CLI every time you make a change to your Astro project.
+- Avoid manually running `astro deploy` every time you make a change to your Astro project.
 - Ensure that all changes to your Astro project are reviewed and approved by your team before they get pushed to Astro.
 - Automate promoting code across development and production environments on Astro when pull requests to certain branches are merged.
 - Enforce automated testing, which increases code quality and allows your team to respond quickly in case of an error or failure.
@@ -133,7 +133,7 @@ fi
 
 :::info
 
-All CI/CD pipelines that use the DAG-based deployment method require [Astro CLI v1.7+](cli/release-notes.md) to deploy. All CI/CD templates in this document automatically install the latest version of the Astro CLI. If your CI/CD pipeline does not automatically install the latest version of the Astro CLI, make sure to specify version 1.7 or above.
+All CI/CD pipelines that use the DAG-based deployment method require [Astro CLI v1.7 or later](cli/release-notes.md) to deploy. All CI/CD templates in this document automatically install the latest version of the Astro CLI. If your CI/CD pipeline does not automatically install the latest version of the Astro CLI, make sure to specify version 1.7 or later.
 
 :::
 
@@ -364,7 +364,7 @@ The following templates are examples of how to implement DAG-only deploys in Git
 
 <Tabs
     defaultValue="standard"
-    groupId= "github-actions"
+    groupId= "github-actions-dag-based-deploy"
     values={[
         {label: 'Standard', value: 'standard'},
         {label: 'Multi-branch', value: 'multibranch'},
@@ -437,7 +437,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             astro deploy
     ```
 
-This Github Actions script checks the diff between your current commit and your `main` branch when a commit is pushed to `main`. Make sure to customize the script for for your specific use case. 
+This Github Actions script checks the diff between your current commit and your `main` branch when a commit is pushed to `main`. Make sure to customize the script for your specific use case. 
 
 </TabItem>
 
@@ -553,7 +553,6 @@ If your Astro project requires additional build-time arguments to build an image
 
 #### Prerequisites
 
-To complete this setup, you need:
 
 - An Astro project that requires additional build-time arguments to build the Runtime image.
 
