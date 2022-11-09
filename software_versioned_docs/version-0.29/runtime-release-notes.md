@@ -63,6 +63,20 @@ These changes were backported from Apache Airflow 2.4.2, which is not yet genera
 - Backported a fix to correct an issue where logs were not loading from Celery workers ([#26493](https://github.com/apache/airflow/pull/26493))
 - Fixed [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
 
+## Astro Runtime 5.0.12
+
+- Release date: November 9, 2022
+- Airflow version: 2.3.4
+
+### Backported Airflow bug fixes
+
+Astro Runtime 5.0.12 includes the following bug fixes from Apache Airflow 2.4.2:
+
+- Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059))
+- Avoid 500 on dag redirect ([#27064](https://github.com/apache/airflow/pull/27064))
+- Don’t overwrite connection extra with invalid json ([#27142](https://github.com/apache/airflow/pull/27142))
+- Simplify origin string cleaning ([#27143](https://github.com/apache/airflow/pull/27143))
+
 ## Astro Runtime 5.0.11
 
 - Release date: November 2, 2022
@@ -287,6 +301,52 @@ Astro Runtime 5.0.0 provides support for [Airflow 2.3.0](https://airflow.apache.
 - The ability to [reuse a decorated task function](https://airflow.apache.org/docs/apache-airflow/2.3.0/tutorial_taskflow_api.html#reusing-a-decorated-task) between DAGs.
 
 For more information on Airflow 2.3, see ["Apache Airflow 2.3 — Everything You Need to Know"](https://www.astronomer.io/blog/apache-airflow-2-3-everything-you-need-to-know) by Astronomer.
+
+# Astro Runtime 4.2.8
+
+- Release date: November 9, 2022
+- Airflow version: 2.2.5
+
+### Backported Airflow bug fixes
+
+Astro Runtime 4.2.8 includes the following bug fixes from Apache Airflow 2.4.2:
+
+- Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059))
+- Don’t overwrite connection extra with invalid json ([#27142](https://github.com/apache/airflow/pull/27142))
+- Simplify origin string cleaning ([#27143](https://github.com/apache/airflow/pull/27143))
+
+## Astro Runtime 4.2.7
+
+- Release date: October 11, 2022
+- Airflow version: 2.2.5
+
+### Backported Airflow bug fixes
+
+Astro Runtime 4.2.7 includes the following bug fixes from later Apache Airflow releases:
+
+- Make sure finalizers are not skipped during exception handling ([#22475](https://github.com/apache/airflow/pull/22475))
+- Fix `email_on_failure` with `render_template_as_native_obj` ([#22770](https://github.com/apache/airflow/pull/22770))
+- Do not log the hook connection details even at DEBUG level ([#22627](https://github.com/apache/airflow/pull/22627))
+
+### Bug fixes 
+
+- Fixed the following CVEs:
+
+    - [CVE-2022-40023](https://avd.aquasec.com/nvd/2022/cve-2022-40023/)
+    - [CVE-2022-2309](https://avd.aquasec.com/nvd/2022/cve-2022-2309/)
+    - [CVE-2022-40674](https://avd.aquasec.com/nvd/2022/cve-2022-40674/)
+    - [CVE-2022-1586](https://avd.aquasec.com/nvd/2022/cve-2022-1586/)
+    - [CVE-2022-1587](https://avd.aquasec.com/nvd/2022/cve-2022-1587/)
+    - [CVE-2022-3999](https://avd.aquasec.com/nvd/2022/cve-2022-3999/)
+    - [CVE-2022-37434](https://avd.aquasec.com/nvd/2022/cve-2022-37434/)
+    - [CVE-2022-5197](https://avd.aquasec.com/nvd/2022/cve-2022-5197/)
+    - [CVE-2022-2509](https://avd.aquasec.com/nvd/2022/cve-2022-2509/)
+    - [CVE-2022-46828](https://avd.aquasec.com/nvd/2022/cve-2022-46828/)
+    - [CVE-2022-1664](https://avd.aquasec.com/nvd/2022/cve-2022-1664/)
+    - [CVE-2022-29155](https://avd.aquasec.com/nvd/2022/cve-2022-29155/)
+    - [CVE-2022-2068](https://avd.aquasec.com/nvd/2022/cve-2022-2068/)
+    - [CVE-2022-1292](https://avd.aquasec.com/nvd/2022/cve-2022-1292/)
+    - [CVE-2022-1552](https://avd.aquasec.com/nvd/2022/cve-2022-1552/)
 
 ## Astro Runtime 4.2.6
 
