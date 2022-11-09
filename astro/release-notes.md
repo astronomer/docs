@@ -26,21 +26,21 @@ Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags`
 DAG-only deploys:
 
 - Are significantly faster than running `astro deploy` to rebuild your project.
-- Don't cause your workers to terminate and restart every time you need to make a change to a DAG, which leads to performance and cost benefits.
-- Enable teams to create separate CI/CD processes for deploying DAGs and deploying other changes to your Astro project. See [Two-step templates](ci-cd.md#two-step-templates) for examples. 
+- Improve performance and reduce costs by removing the requirement to terminate and restart your workers every time you a change a DAG.
+- Allow the creation of separate CI/CD processes for DAG deploys and changes to Astro projects. See [CI/CD templates](ci-cd.md#ci-cd-templates) for examples. 
 
 For more information, see [DAG-only deploys](deploy-code.md#dag-only-deploys).
 
 ### Improved data lineage interface
 
-The **Lineage** tab in the Cloud UI has been updated with more features and now matches the look and feel of Astro.
+The **Lineage** tab has new features and is better integrated into the Cloud UI.
 
 ![Updated lineage page](/img/release-notes/lineage-integrated.png)
 
 Specifically, the tab includes the following improvements:
 
 - The process for comparing runs uses a simpler interface and provides more information about the runs you're comparing. See [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
-- Names for UI elements have been updated to more clearly represent Airflow resources. For example, **jobs** was renamed to **runs**, and the **Explore** tab was renamed to **Runs**.
+- Names for UI elements have been updated to more clearly represent Airflow resources. For example, **jobs** is now **runs**, and the **Explore** tab is now **Runs**.
 - Lineage graphs include new colors and animations to show the flow of data as it moves between runs and datasets. 
 
 ### New Deployment transfer functionality
