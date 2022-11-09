@@ -16,21 +16,21 @@ If you have any questions or a bug to report, contact [Astronomer support](https
 
 ## Astro CLI 1.7.0
 
-Release date: November 8, 2022 
+Release date: November 9, 2022 
 
 ## Deploy only DAGs with `astro deploy -—dags`
 
-Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an alternative to the image-only deployment method, which rebuilds all files in your Astro project into a Docker image every time you deploy your code to Astro.
+Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy`, which pushes all files in your Astro project every time you deploy your code to Astro.
 
-DAG-based deploys:
+Deploying only DAGs:
 
-- Are significantly faster than running `astro deploy` when you only make changes to the `dags` directory.
-- Do not cause your workers and schedulers to terminate and restart every time you make a change to a DAG, which can lead to both reliability and cost benefits.
-- Enable your team to create separate CI/CD processes for deploying DAGs and deploying other changes to your Astro project.
+- Is significantly faster than running `astro deploy` when you only make changes to the `dags` directory.
+- Does not cause your workers and schedulers to terminate and restart every time you make a change to a DAG and does not result in downtime for your Deployment.
+- Enables your team to create separate CI/CD processes for deploying DAGs and deploying other changes to your Astro project.
 
 When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
 
-To use this feature, you must enable it for each Deployment. See [DAG-only deploys](deploy-code.md#dag-only-deploys). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+To use this feature, you must enable it for each Deployment. See [Deploy only DAGs](deploy-code.md#deploy-only-dags). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
 
 ## New `astro deployment inspect` command
 
