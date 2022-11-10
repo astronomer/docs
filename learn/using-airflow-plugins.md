@@ -5,9 +5,9 @@ description: "How to use Airflow plugins."
 id: using-airflow-plugins
 ---
 
-Plugins are external features that you can add to customize your Airflow installation. Astro CLI users can import custom plugins by adding them to the `/plugins` folder of their Airflow project. 
+Plugins are external features that can be added to customize your Airflow installation. They are automatically imported upon starting your Airflow instance if they have been added to `plugins` folder of an Airflow project. 
 
-In this concept guide you'll learn how to add a plugin to your Airflow instance as well as what components can be part of a plugin.
+In this guide you'll learn how to add a plugin to your Airflow instance as well as what components can be part of a plugin.
 
 ## Assumed knowledge
 
@@ -15,15 +15,19 @@ To get the most out of this guide, you should have an understanding of:
 
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
 - Airflow core components. See [Airflow's components](airflow-components.md).
+- The basics of Flask. See the [Flask documentation](https://flask.palletsprojects.com/en/2.2.x/).
 
 ## When to use plugins
 
-list of general use cases
+Plugins offer a flexible way to customize your Airflow experience by building on top of existing Airflow components. For example you can:
 
+- Add views to your Airflow UI that display contents of the Airflow metadata database in a custom way.
+- Build an application that monitors Airflow's functioning itself and sends out custom alerts, for example in case of a certain number of DAGs failing in a specified time frame.
+- Add dynamic links to task instances to files and logs in external data tools the task has been performed on.
 
 ## How to create a plugin
 
-To add a new plugin to your Airflow instance you need to create a class which inherits from the `AirflowPlugin` class. The code snippet below when copy pasted into a Python file in `/plugins` defines a plugin with the name `empty` without any components. 
+To add a new plugin to your Airflow instance you need to create a Python file in the `plugins` folder of your Airflow project. Within that file a class which inherits from the `AirflowPlugin` class has to be created to define the plugin. The code snippet below defines a plugin with the name `empty` without any components. 
 
 ```python
 from airflow.plugins_manager import AirflowPlugin
@@ -59,23 +63,74 @@ Airflow needs to be restarted for changes in plugins to be registered. Learn mor
 
 ## Plugin components
 
+Functionality is added to a plugin by adding components to the class which defines the plugin. There are 10 types of plugin components, in this guide we want to highlight the following:
+
+- appbuilder_menu_items
+- flask_blueprints
+- appbuilder_views
+- operator_extra_links
+- global_operator_extra_links
+- macros
+
+Other types of plugin components include:
+
+- `timetables`, which offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG scheduling and timetables in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
+- `executors`, which offers the possibility to add a custom [executor](https://docs.astronomer.io/learn/airflow-executors-explained) to your Airflow instance.
+- `listeners`, which are an experimental feature to add notifications for events happening in Airflow. Learn more in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/listeners.html).
+
 :::info
 
-Before Airflow 2.0 custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](https://docs.astronomer.io/learn/airflow-importing-custom-hooks-operators) can now be simply by importing a script located in `/include`.
+Before Airflow 2.0 custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](https://docs.astronomer.io/learn/airflow-importing-custom-hooks-operators) can now be simply by importing a script located in `include`.
 
 :::
 
+### Appbuilder menu items
+
+You can customize the Airflow menu at the top of the screen to contain custom tabs with links to external websites. Both adding top-level menu items as well as sub-items are supported. 
+
+```python
+from airflow.plugins_manager import AirflowPlugin
+
+# creating a new top-level menu item
+appbuilder_mitem_toplevel = {
+    "name": "Apache",
+    "href": "https://www.apache.org/",
+}
+
+# creating a new sub-item in the Docs menu item 
+appbuilder_mitem_subitem = {
+    "name": "Astro SDK Docs",
+    "href": "https://astro-sdk-python.readthedocs.io/en/stable/index.html",
+    "category": "Docs",
+}
+
+# defining the plugin class
+class MyMenuItemsPlugin(AirflowPlugin):
+    name = "Menu items plugin"
+
+    # adding the menu items to the plugin
+    appbuilder_menu_items = [
+        appbuilder_mitem_toplevel,
+        appbuilder_mitem_subitem
+    ]
+```
+
+The code above creates a plugin that adds two menu items.
+
+- `appbuilder_mitem_toplevel` is a top-level menu button named **Apache** that links to the [Apache homepage](https://www.apache.org/).
+- `appbuilder_mitem_subitem` is a sub-item which is added to the **Docs** menu. It has the name `Astro SDK Docs` and links out to [the documentation for the Astro SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html).
+
+Both additional menu items are added to the `app_builder_menu_items` component of a plugin called `Menu items plugin` which is defined in the `MyMenuItemsPlugin` class. The screenshot below shows the additional menu items in the Airflow UI.
+
+![Plugins Menu items](/img/guides/plugins_menu_items.png)
+
 ### Flask Blueprints
+
+WIP
 
 ### Appbuilder views
 
-### Appbuilder menu items
-
-You can customize the Airflow menu at the top of the screen to contain custom tabs with links to external websites. 
-
-```python
-
-```
+WIP
 
 ### Operator extra links
 
@@ -135,32 +190,31 @@ You can access the button on task instences in both the Graph and Grid view.
 
 ![Airflow Docs Button](/img/guides/global_operator_extra_link.png)
 
+### Macros
 
-### Timetables
+In Airflow you can define custom macros which can be accessed using Jinja templating. Macros can be added at the dag level by defining them in the DAG parameter `user_defined_macros` as shown in [Using Airflow templates](templating.md)). If you want to make macros available to your whole Airflow instance you can register them as a plugin. 
 
-### Listeners
+```python
+from airflow.plugins_manager import AirflowPlugin
+from random import randint
 
-### Other components
+def random_number_macro():
+    return randint(0,1000)
 
-Hooks, Executors, Macros (now using `user_defined_macros` see [Using Airflow templates](templating.md))
+class MyAirflowPlugin(AirflowPlugin):
+    name = "my_macro_plugin"
+    macros = [
+        random_number_macro,
+    ]
+```
 
+The code above creates a macro that returns a random number between 0 and 1000. It can be referenced using Jinja templating in any templateable parameter of any operator. The code snippet below shows how the macro can be used within the `bash_command` parameter of the BashOperator to print out a random number.
 
+```python
+use_plugin_macro = BashOperator(
+        task_id="use_plugin_macro",
+        bash_command="echo {{ macros.my_macro_plugin.random_number_macro() }}"
+    )
+```
 
-### Blueprints and views
-
-The Airflow [blueprints](http://flask.pocoo.org/docs/0.12/blueprints/) and [views](http://flask.pocoo.org/docs/0.12/views/) components are extensions of blueprints and views in the Flask web app framework. Developers have extended the Airflow API to include triggering a DAG run remotely, adding new connections, or modifying [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html). You can extend this to build an entire web app which sits alongside the Airflow webserver. For example, you can use a plugin that allows analysts to use a web UI to input SQL that runs on a scheduled interval.
-
-### Menu items
-
-Developers can add custom [menu items](https://github.com/mik-laj/airflow/blob/10e2a88bdc9668931cebe46deb178ab2315d6e52/airflow/plugins_manager.py#L136 ) to the Airflow navigation menu to allow users to quickly access Airflow pages that are relevant to them. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html#example) for an example of how to create a custom menu item. 
-
-The Airflow UI is customizable to meet a variety of needs. With menu items, you can provide quick access to Airflow resources for any users in your environment. For example, you can modify the Airflow UI to include a structure similar to the following:
-
-- Developer
-    - Plugins repository
-    - CI/CD system
-- Analyst
-    - Organization-specific Domino install
-    - CI/CD system
-    - AI Management systems
 

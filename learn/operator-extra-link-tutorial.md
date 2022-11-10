@@ -48,7 +48,7 @@ Create a new Astro project:
 
 First you will add a static operator extra link to the SimpleHttpOperator which will add a button with a link to the [Mozilla HTTP documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP) to every task instance created by this operator.
 
-1. Create a new Python file named `plugin_test_dag.py` in the `/dags` folder of your Airflow project.
+1. Create a new Python file named `plugin_test_dag.py` in the `dags` folder of your Airflow project.
 
 2. Copy paste the following DAG code into your file:
 
@@ -77,7 +77,7 @@ This DAG has one SimpleHttpOperator task that posts a GET request to an API prov
 
 Create an [Airflow plugin](using-airflow-plugins.md) to add an extra link to the operator.
 
-1. Create a new Python file named `my_extra_link_plugin.py` in the `/plugins` folder of your Airflow project. 
+1. Create a new Python file named `my_extra_link_plugin.py` in the `plugins` folder of your Airflow project. 
 
 2. Copy paste the following code into your file.
 
@@ -115,7 +115,7 @@ This script accomplishes the following:
 
 ## Step 4: Add an HTTP connection
 
-1. In your terminal, run `astro dev start` in your Astro project directory to start up Airflow. If your Airflow instance is already running use `astro dev restart` to restart it in order to load any changes made in the `/plugins` folder.
+1. In your terminal, run `astro dev start` in your Astro project directory to start up Airflow. If your Airflow instance is already running use `astro dev restart` to restart it in order to load any changes made in the `plugins` folder.
 
 2. Add an HTTP connection called `random_user_api_conn` to `http://randomuser.me/api/` in the Airflow UI. This API will return data about a randomly generated user persona. Feel free to use a different API, the content returned will not be relevant for this tutorial.
 
@@ -135,7 +135,7 @@ This script accomplishes the following:
 
 Linking to relevant docs from an operator is useful, but often you want to add a dynamic link that uses information returned by the operator to decide where to link to. The second half of this tutorial will cover how to modify an operator to push the value you need to [XComs](airflow-passing-data-between-tasks.md) and retrieve that value in your Airflow plugin.
 
-1. Create a new file called `cat_http.py` in the `/include` folder of your Airflow project.
+1. Create a new file called `cat_http.py` in the `include` folder of your Airflow project.
 
 2. Copy the following code into the file.
 
@@ -185,13 +185,13 @@ Linking to relevant docs from an operator is useful, but often you want to add a
 
     The code above defines a custom version of the `SimpleHttpOperator`, called the `CatHttpOperator`. The change consists of adding one line before the `return` statement of the `.execute()` method which is `context["ti"].xcom_push(key="status_code", value=response.status_code)`. This line pushes the `status_code` attribute of the `response` object to XComs and associates it with the key `status_code`. The rest of the `.execute()` method is identical to the parent operator (compare the source code of the [SimpleHttpOperator](https://github.com/apache/airflow/blob/main/airflow/providers/http/operators/http.py)).
 
-3. Add an empty Python file with the name `__init__.py` to your `/include` folder to allow module imports from the folder.
+3. Add an empty Python file with the name `__init__.py` to your `include` folder to allow module imports from the folder.
 
 This is all that is necessary to modify an existing operator.
 
 :::info
 
-Before Airflow 2.0, custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](airflow-importing-custom-hooks-operators.md) can now be simply by importing a script located in `/include`.
+Before Airflow 2.0, custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](airflow-importing-custom-hooks-operators.md) can now be simply by importing a script located in `include`.
 
 :::
 
@@ -231,14 +231,14 @@ This task will post the same GET request to the API you defined with the connect
 
 Next, you will define a second extra link.
 
-1. Open `my_extra_link_plugin.py` in your `/plugins` folder.
+1. Open `my_extra_link_plugin.py` in your `plugins` folder.
 
 2. Add the following import statements at the start of the file:
 
-```python
-from include.cat_http import CatHttpOperator
-from airflow.models import XCom
-```
+    ```python
+    from include.cat_http import CatHttpOperator
+    from airflow.models import XCom
+    ```
 
 3. Copy paste the following code which creates a class called `CatLink` derived from `BaseOperatorLink` and paste it below the definition of the `HTTPDocsLink` class and above the definition of the `AirflowExtraLinkPlugin` class.
 
