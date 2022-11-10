@@ -65,12 +65,10 @@ Airflow needs to be restarted for changes in plugins to be registered. Learn mor
 
 Functionality is added to a plugin by adding components to the class which defines the plugin. There are 10 types of plugin components, in this guide we want to highlight the following:
 
-- appbuilder_menu_items
-- flask_blueprints
-- appbuilder_views
-- operator_extra_links
-- global_operator_extra_links
-- macros
+- `appbuilder_menu_items` allow you to add additional sections and links to the Airflow menu.
+- `flask_blueprints` and `appbuilder_views` offer the possibility to build a Flask project on top of Airflow.
+- `operator_extra_links` and `global_operator_extra_links` are ways to add links to Airflow task instances.
+- `macros` expand upon existing Jinja templates using custom functions.
 
 Other types of plugin components include:
 
@@ -124,13 +122,80 @@ Both additional menu items are added to the `app_builder_menu_items` component o
 
 ![Plugins Menu items](/img/guides/plugins_menu_items.png)
 
-### Flask Blueprints
+### Flask Blueprints and Appbuilder views
 
-WIP
+To add more elaborate customization to the Airflow UI plugins offer the possibility to add Flask blueprints and views as plugin components. A Flask blueprint functions as an organizational tool to group related views and supporting code while Flask views render webpages from html templates. 
 
-### Appbuilder views
+:::info
 
-WIP
+To learn more check out the [Blueprints and Views tutorial](https://flask.palletsprojects.com/en/2.2.x/tutorial/views/) in the official Flask documentation.
+
+:::
+
+You can add a view to render a simple templated html file on top of the Airflow UI by following these steps:
+
+1. Create a folder within the `plugins` directory called `templates`.
+2. Within that folder create a html file called `test.html` and copy the collowing code into it:
+
+    ```html
+    <!DOCTYPE html>
+    <p>Airflow is {{ content }}!</p>
+    ```
+
+3. In the `plugins` directory, add a Python file called `my_first_view_plugin.py`. Copy the code below.
+
+    ```python
+    from airflow.plugins_manager import AirflowPlugin
+    from flask import Blueprint
+    from flask_appbuilder import expose, BaseView as AppBuilderBaseView
+
+    # define a Flask blueprint
+    my_blueprint = Blueprint(
+        "test_plugin",
+        __name__,
+        # register airflow/plugins/templates as a Jinja template folder
+        template_folder="templates"
+    )
+
+    # create a flask appbuilder BaseView
+    class MyBaseView(AppBuilderBaseView):
+        default_view = "test"
+
+        @expose("/")
+        def test(self):
+            # render the html file from the templates directory with content
+            return self.render_template("test.html", content="awesome")
+
+    # instantiate MyBaseView
+    my_view = MyBaseView()
+
+    # define the path to my_view in the Airflow UI
+    my_view_package = {
+        # define the menu sub-item name
+        "name": "Test View",
+        # define the top-level menu item
+        "category": "My Extra View",
+        "view": my_view,
+    }
+
+    # define the plugin class
+    class MyViewPlugin(AirflowPlugin):
+        # name the plugin
+        name = "My appbuilder view"
+        # add the blueprint and appbuilder_views components
+        flask_blueprints=[my_blueprint]
+        appbuilder_views = [my_view_package]
+    ```
+
+4. Start your Airflow instance using `astro dev start` or `astro dev restart` if you were already running Airflow.
+
+This plugin will add a top-level menu item called **My Extra View** which contains the sub-item **Test View**.
+
+![Test View Menu](/img/guides/plugins_test_view_menu.png)
+
+By clicking on **Test View** you can access the Flask View that was defined as `my_view`. It shows the html template (`test.html`) rendered with the provided content.
+
+![Test View](/img/guides/plugins_test_view.png)
 
 ### Operator extra links
 
@@ -155,7 +220,7 @@ class MyLink(BaseOperatorLink):
         return "http://my_link.com/"
 
 # add the operator extra link to a plugin
-class MyAirflowPlugin(AirflowPlugin):
+class MyOperatorExtraLink(AirflowPlugin):
     name = "my_plugin_name"
     operator_extra_links = [
         MyLink(),
@@ -179,7 +244,7 @@ class GlobalLink(BaseOperatorLink):
         return "https://airflow.apache.org/"
 
 # add the operator extra link to a plugin
-class MyAirflowPlugin(AirflowPlugin):
+class MyGlobalLink(AirflowPlugin):
     name = "my_plugin_name"
     global_operator_extra_links = [
         GlobalLink(),
@@ -201,7 +266,7 @@ from random import randint
 def random_number_macro():
     return randint(0,1000)
 
-class MyAirflowPlugin(AirflowPlugin):
+class MyAirflowMacro(AirflowPlugin):
     name = "my_macro_plugin"
     macros = [
         random_number_macro,
