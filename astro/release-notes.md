@@ -33,7 +33,7 @@ See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deplo
 
 ### Additional improvements 
  
-- The Kubernetes API of your AWS data plane is no longer exposed to the public internet. The allowlist is locked down to Control Plane IPs. New clusters will be created with this configuration, while all existing clusters will be updated by end of next week.
+- The Kubernetes API of AWS data planes are no longer exposed to the public internet. The allowlist is limited to control plane IPs. New clusters will be created with this configuration, while all existing clusters will be updated by end of next week.
 
 ## November 1, 2022 
 
