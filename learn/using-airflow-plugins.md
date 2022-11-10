@@ -1,5 +1,5 @@
 ---
-title: "Import plugins to Airflow"
+title: "Airflow plugins"
 sidebar_label: "Plugins"
 description: "How to use Airflow plugins."
 id: using-airflow-plugins
