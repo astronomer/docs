@@ -40,7 +40,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md).
+- **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
 Once the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
 
@@ -580,3 +580,19 @@ Your Astro project can now utilize Python packages from your private PyPi index.
 
 </TabItem>
 </Tabs>
+
+## Add a CA certificate to an Astro Runtime image
+
+If you need your Astro deployment to communicate securely with a remote service using a certificate signed by an untrusted or internal certificate authority (CA), you need to add the CA certificate to the trust store inside the image.
+
+1. In your Astro project `Dockerfile`, add the following entry below the existing `FROM` statement which specifies your Astro Runtime image version:
+
+    ```docker
+    USER root
+    COPY <internal-ca.crt>/usr/local/share/ca-certificates/<your-company-name>/
+    RUN update-ca-certificates
+    USER astro
+    ```
+2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
+
+3. Save your changes and test them locally, or deploy them to a test Deployment.

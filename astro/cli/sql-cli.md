@@ -15,7 +15,7 @@ Use Astro CLI SQL commands to run SQL workflows without writing Python code or s
 
 ## Prerequisites 
 
-- The alpha version  of the [Astro CLI](overview.md) version 1.7 or later.
+- [Astro CLI](install-cli.md) version 1.7 or later.
 - [Docker Desktop](https://www.docker.com/).
 - One of the following databases, hosted either locally or on an external service:
   
@@ -31,31 +31,9 @@ If you use Debian or Ubuntu as your operating system, Astronomer recommends to [
 
 :::
 
-### Install the alpha version of Astro CLI version 1.7
-
-Run the following command to install the alpha version of Astro CLI version 1.7:
-
-```sh
-sudo bash < <(curl -sSL https://install.astronomer.io) -s v1.7.0
-```
-
-:::warning 
-
-The alpha version of Astro CLI version 1.7 should not be used for any development or production workflows on Astro or Astronomer Software. This version of the CLI includes updates to commands that require changes in Astronomer products that have not yet been shipped. 
-
-To roll back to a supported version of the CLI, run the following command to uninstall the alpha:
-
-```sh
-sudo rm /usr/local/bin/astro
-```
-
-Then, see [Install the Astro CLI](cli/install-cli.md) for steps to install the latest stable version.
-
-:::
-
 ## Enable Astro SQL commands 
 
-To enable Astro SQL commands, run the following command: 
+To enable Astro SQL commands with the latest version of the Astro CLI, run:
 
 ```sh
 astro config set -g beta.sql_cli true
@@ -71,21 +49,21 @@ To create a SQL project, run the following command in either an empty directory 
 astro flow init
 ```
 
-Because this command uses Docker, it might take a few moments to complete. It generates the following files: 
+This command uses Docker, and it can take up to five minutes to complete if this is the first time you're running the command and you're using a specific version of the Astro CLI. Subsequent runs with the same Astro CLI version typically complete in seconds. When the command finishes running, it generates the following files: 
 
 ```sh
 new_proj/
 ├── config
-│   ├── default
-│   │   └── configuration.yml
-│   └── dev
-│       └── configuration.yml
+│   ├── default
+│   │   └── configuration.yml
+│   └── dev
+│       └── configuration.yml
 ├── data
-│   ├── imdb.db
-│   └── retail.db
+│   ├── imdb.db
+│   └── retail.db
 └── workflows
     ├── example_basic_transform
-    │   └── top_animations.sql
+    │   └── top_animations.sql
     └── example_templating
         ├── filtered_orders.sql
         └── joint_orders_customers.sql

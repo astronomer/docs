@@ -11,7 +11,7 @@ id: connections
 
 Connections in Airflow are sets of configurations used to connect with other tools in the data ecosystem. Because most hooks and operators rely on connections to send and retrieve data from external systems, understanding how to create and configure them is essential for running Airflow in a production environment.
 
-In this tutorial you'll:
+In this guide you'll:
 
 - Learn about Airflow connections.
 - Learn how to define connections using the Airflow UI.
@@ -20,7 +20,7 @@ In this tutorial you'll:
 
 ## Assumed knowledge
 
-To get the most out of this tutorial, you should have an understanding of:
+To get the most out of this guide, you should have an understanding of:
 
 - Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md/).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
@@ -39,7 +39,7 @@ Airflow connections can be created by using one of the following methods:
 - The [`airflow.cfg` file](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html)
 - The [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html)
 
-This tutorial focuses on adding connections using the Airflow UI and environment variables. For more in-depth information on configuring connections using other methods, see the [REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection), [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) and [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
+This guide focuses on adding connections using the Airflow UI and environment variables. For more in-depth information on configuring connections using other methods, see the [REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html#tag/Connection), [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) and [Secrets Backend](https://airflow.apache.org/docs/apache-airflow/stable/security/secrets/secrets-backend/index.html).
 
 Each connection has a unique `conn_id` which can be provided to operators and [hooks](what-is-a-hook.md) that require a connection.
 

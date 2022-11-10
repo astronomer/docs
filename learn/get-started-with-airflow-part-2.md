@@ -66,7 +66,7 @@ To run data pipelines on Astro, you first need to create an Astro project, which
     astro dev start
     ```
 
-    Once your local environment is ready, the CLI automatically opens a new tab or window in your default web browser to the Airflow UI at `https://localhost:8080`.
+    Once your local environment is ready, the CLI automatically opens a new tab or window in your default web browser to the Airflow UI at `https://localhost:8080`.
 
 5. Log in to the Airflow UI with `admin` for both your username and password.
 

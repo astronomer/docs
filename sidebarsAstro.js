@@ -28,16 +28,7 @@ module.exports = {
       label: "Develop",
       items: [
         "develop-project",
-        {
-          type: "category",
-          label: "Write DAGs",
-          items: [
-            "astro-python-sdk",
-            "deferrable-operators",
-            "kubepodoperator-local",
-            "kubernetespodoperator",
-          ],
-        },
+        "kubernetespodoperator",
         {
           type: "category",
           label: "Cloud IDE",
@@ -144,7 +135,15 @@ module.exports = {
     {
       type: "category",
       label: "Release notes",
-      items: ["release-notes", "runtime-release-notes"],
+      items: [
+        "release-notes", 
+        "runtime-release-notes",
+        {
+          type: 'link',
+          label: 'Astro CLI',
+          href: 'https://docs.astronomer.io/astro/cli/release-notes',
+        },
+      ],
     },
     {
       type: "category",
@@ -161,14 +160,7 @@ module.exports = {
         },
         'platform-variables',
         "feature-previews",
-        {
-          type: "category",
-          label: "Data lineage",
-          items: [
-            "data-lineage-support-and-compatibility",
-            "data-lineage-concepts",
-          ],
-        },
+        'data-lineage-support-and-compatibility',
         {
           type: "category",
           label: "Security",
@@ -198,6 +190,16 @@ module.exports = {
       id: "cli/install-cli",
     },
     {
+      type: "doc",
+      label: "Configure the CLI",
+      id: "cli/configure-cli",
+    },
+    {
+      type: "doc",
+      label: "Release notes",
+      id: "cli/release-notes",
+    },
+    {
     type: 'category',
     label: 'Command reference',
     link: { type: 'doc', id: 'cli/reference' },
@@ -214,6 +216,7 @@ module.exports = {
       'cli/astro-deployment-airflow-upgrade',
       'cli/astro-deployment-create',
       'cli/astro-deployment-delete',
+      'cli/astro-deployment-inspect',
       'cli/astro-deployment-list',
       'cli/astro-deployment-logs',
       'cli/astro-deployment-runtime-upgrade',
@@ -239,6 +242,8 @@ module.exports = {
       'cli/astro-dev-restart',
       'cli/astro-login',
       'cli/astro-logout',
+      'cli/astro-organization-list',
+      'cli/astro-organization-switch',
       'cli/astro-team',
       'cli/astro-user-create',
       'cli/astro-user-invite',

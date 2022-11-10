@@ -1,6 +1,6 @@
 ---
-title: "Orchestrate Soda Core with Airflow"
-description: "Orchestrate Soda Core data quality checks with your Airflow DAGs."
+title: "Run Soda Core checks with Airflow"
+description: "Learn how to orchestrate Soda Core data quality checks with your Airflow DAGs."
 id: soda-data-quality
 sidebar_label: "Soda Core"
 ---
@@ -13,7 +13,11 @@ Soda Core lets you:
 - Provide a SQL query within the YAML file and check against a returned value if no preset checks fit your use case.
 - Integrate data quality checks with commonly used data engineering tools such as Airflow, Apache Spark, PostgreSQL, Snowflake [and more](https://www.soda.io/integrations).
 
-In this guide, you'll learn about the key features of Soda Core and how to use it with Airflow. For an overview of data quality and the tools you can use to run data quality checks in Airflow, see [Data quality and Airflow](data-quality.md).
+In this tutorial, you'll learn about the key features of Soda Core and how to use Airflow to run data quality checks on a database. 
+
+## Time to complete
+
+This tutorial takes approximately 30 minutes to complete.
 
 ## Assumed knowledge
 
@@ -25,113 +29,43 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - Relational Databases. See [IBM's "Relational Databases Explained"](https://www.ibm.com/cloud/learn/relational-databases).
 - Familiarity with writing YAML configurations. See [yaml.org](https://yaml.org/).
 
-## Features of Soda Core
+## Prerequisites
 
-Soda Core uses the Soda Checks Language (SodaCL) to run data quality checks defined in a YAML file.  Integrating Soda Core into your Airflow data pipelines lets you use the results of data quality checks to influence downstream tasks. For an overview of SodaCL, see the [SodaCL documentation](https://docs.soda.io/soda-cl/soda-cl-overview.html).
+To complete this tutorial, you need:
 
-As shown in the following example, you can use Soda Core to run checks on different properties of your dataset against a numerically defined threshold:
+- The Soda Core package for your database backend. The [Soda documentation](https://docs.soda.io/soda-core/configuration.html) provides a list of supported databases and how to configure them. This tutorial uses Snowflake.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
-```YAML
-checks for MY_TABLE_1:
-  # MY_NUM_COL_1 has a minimum of above or equal 0
-  - min(MY_NUM_COL_1) >= 0
-  # MY_TEXT_COL has less than 10% missing values
-  - missing_percent(MY_TEXT_COL) < 10
-checks for MY_TABLE_2:
-  # MY_NUM_COL_2 has an average between 100 and 1000
-  - avg(MY_NUM_COL_2) is between 100 and 1000
-  # MY_ID_COL has no duplicates
-  - duplicate_count(MY_ID_COL) = 0
-```
+## Step 1: Configure your Astro project
 
-You can add optional configurations, such as custom names for checks and error levels:
+Configure a new Astro project to run Airflow locally.
 
-```YAML
-checks for MY_TABLE_1:
-  # fail the check when MY_TABLE_1 has less than 10 or more than a million rows
-  # warn if there are less than 100 (but 10 or more) rows
-  - row_count:
-      warn: when < 100
-      fail:
-        when < 10
-        when > 1000000
-      name: Wrong number of rows!
-```
+1. Create a new Astro project:
 
-You can use the following methods to check the validity of data:
+    ```sh
+    $ mkdir astro-soda-tutorial && cd astro-soda-tutorial
+    $ astro dev init
+    ```
 
-- List of valid values
-- Predefined valid format
-- Regex
-- SQL query
+2. Add the following line to the `requirements.txt` file of your Astro project:
 
-```YAML
-checks for MY_TABLE_1:
-  # MY_CATEGORICAL_COL has no other values than val1, val2 and val3
-  - invalid_count(MY_CATEGORICAL_COL) = 0:
-      valid values: [val1, val2, val3]
-  # MY_NUMERIC_COL has no other values than 0, 1 and 2.
-  # Single quotes are necessary for valid values checks involving numeric
-  # characters.
-  - invalid_count(MY_NUMERIC_COL) = 0:
-      valid values: ['0', '1', '2']
-  # less than 10 missing valid IP addresses
-  - missing_count(IP_ADDRESS_COL) < 10:
-      valid format: ip address
-  # WEBSITE_COL has less than 5% entries that don't contain "astronomer.io"
-  - invalid_percent(WEBSITE_COL) < 5:
-      valid regex: astronomer\.io
-  # The average of 3 columns for values of category_1 is between 10 and 100
-  - my_average_total_for_category_1 between 10 and 100:
-      my_average_total_for_category_1 query: |
-        SELECT AVG(MY_COL_1 + MY_COL_2 + MY_COL_3)
-        FROM MY_TABLE_1
-        WHERE MY_CATEGORY = 'category_1'
-```
+    ```text
+    soda-core-snowflake
+    ```
 
-Three more unique features of Soda Core are:
+    This installs the relevant Soda Core Python package. If you are using a different database backend, replace `snowflake` with your backend. See the [Prerequisites](#prerequisites) section for more details.
 
-- [Freshness checks](https://docs.soda.io/soda-cl/freshness.html): Set limits to the age of the youngest row in the table.
-- [Schema checks](https://docs.soda.io/soda-cl/schema.html): Run checks on the existence of columns and validate data types.
-- [Reference checks](https://docs.soda.io/soda-cl/reference.html): Ensure parity in between columns in different datasets in the same data source.
+3. Run the following command to start your project in a local environment:
 
-```YAML
-checks for MY_TABLE_1:
-  # MY_DATE's youngest row is younger 10 days
-  - freshness(MY_DATE) < 10d
-  # The schema has to have the MY_KEY column
-  - schema:
-      fail:
-        when required column missing: [MY_KEY]
-  # all names listed in MY_TABLE_1's MY_NAMES column have to also exist
-  # in the MY_CUSTOMER_NAMES column in MY_TABLE_2
-  - values in (MY_NAMES) must exist in MY_TABLE_2 (MY_CUSTOMER_NAMES)
-```
+    ```sh
+    astro dev start
+    ```
 
-## Requirements
+## Step 2: Create the configuration file
 
-To use Soda Core, you need to install the Soda Core package for your database backend. The [Soda documentation](https://docs.soda.io/soda-core/configuration.html) provides a list of supported databases and how to configure them.
+Create a configuration file to connect to your database backend. The following example uses the template from the Soda documentation to create the configuration file for Snowflake.
 
-To use Soda Core in Airflow, you need to install the Soda Core provider package in your Airflow environment. Additionally, two YAML files need to be made available to the Airflow environment: `configuration.yml`, which contains the connection information for the database backend, and `checks.yml`, which contains the data quality checks.
-
-If you use the Astro CLI, you can add `soda-core-<database>` to `requirements.txt` and your YAML files to `/include` in your Astro project.
-
-## Example: Run Soda Core checks from Airflow
-
-is example shows how you can run data quality checks on a Snowflake database using Soda Core from within Airflow.
-
-The setup includes the following steps:
-
-- Create a configuration file that connects to the Snowflake database: `configuration.yml`.
-- Create a checks file containing the data quality checks: `checks.yml`.
-- Install the `soda-core-snowflake` package in your Airflow environment.
-- Run the checks from a DAG by running the `soda scan` command using the BashOperator.
-
-### Step 1: Create the configuration file
-
-You need to create a configuration file to connect to Snowflake. The following example uses the template from the Soda documentation to create the configuration file.
-
-```YAML
+```yaml
 # the first line names the datasource "MY_DATASOURCE"
 data_source MY_DATASOURCE:
   type: snowflake
@@ -153,13 +87,13 @@ data_source MY_DATASOURCE:
   schema: MY_SCHEMA
 ```
 
-Save the YAML instructions in a file named `configuration.yml` and make it available to your Airflow environment. If you use the Astro CLI, you can do this by placing the file into the `/include` directory of your Astro project.
+Save the YAML instructions in a file named `configuration.yml` and place the file into the `/include` directory of your Astro project.
 
-### Step 2: Create the checks file
+## Step 3: Create the checks file
 
-You can define your data quality checks using the [many preset checks available for SodaCL](https://docs.soda.io/soda-cl/soda-cl-overview.html). If you cannot find a preset check that works for your use case, you can create a custom one using SQL as shown in the following example.
+Define your data quality checks using the [many preset checks available for SodaCL](https://docs.soda.io/soda-cl/soda-cl-overview.html). For more details on creating checks, see [How it works](#how-it-works). If you cannot find a preset check that works for your use case, you can create a custom one using SQL as shown in the following example.
 
-```YAML
+```yaml
 checks for example_table:
   # check that MY_EMAIL_COL contains only email addresses according to the
   # format name@domain.extension
@@ -186,19 +120,11 @@ checks for example_table:
       valid values: [val1, val2, val3, val4]
 ```
 
-Save the YAML instructions in a file named `checks.yml` and make it available to your Airflow environment. If you use the Astro CLI, you can place this file in your `/include` directory.
+Save the YAML instructions in a file named `checks.yml` and place the file in the `/include` directory of your Astro project.
 
-### Step 3: Install the Soda Core package
+## Step 4: Create your DAG
 
-The `soda-core-snowflake` package needs to be installed in your Airflow environment. If you use the Astro CLI, you can do this by adding the following line to the `requirements.txt` file:
-
-```text
-soda-core-snowflake
-```
-
-### Step 4: Run soda scan using the BashOperator
-
-In a DAG, Soda Core checks are executed by using the BashOperator to run the `soda scan` command. The following example DAG shows how to reference the configuration and check YAML files.
+In your Astro project `dags/` folder, create a new file called `soda-pipeline.py`. Paste the following code into the file:
 
 ```python
 from airflow import DAG
@@ -222,11 +148,13 @@ with DAG(
     )
 ```
 
-Because Soda Core runs through the BashOperator, you can run your checks in any part of your DAG and trigger tasks with your results like you would with other Airflow operators.
+In this DAG, Soda Core checks are executed by using the BashOperator to run the `soda scan` command referencing the configuration and check YAML files.
 
-The logs from the Soda Core checks can be found in the Airflow task logs. The logs list all checks that ran and their results.
+## Step 5: Run your DAG and review check results
 
-This is an example of what your logs might look like when all 3 checks pass:
+Go to the Airflow UI, unpause your `soda_example_dag` DAG, and trigger it to run the Soda Core data quality checks. Go to the task log to see a list of all checks that ran and their results.
+
+This is an example of what your logs might look like when 3 out of 3 checks pass:
 
 ```text
 [2022-08-04, 13:07:22 UTC] {subprocess.py:92} INFO - Scan summary:
@@ -257,4 +185,87 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.9/site-packages/airflow/operators/bash.py", line 194, in execute
     raise AirflowException(
 airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+```
+
+## How it works
+
+Soda Core uses the Soda Checks Language (SodaCL) to run data quality checks defined in a YAML file.  Integrating Soda Core into your Airflow data pipelines lets you use the results of data quality checks to influence downstream tasks. For an overview of SodaCL, see the [SodaCL documentation](https://docs.soda.io/soda-cl/soda-cl-overview.html).
+
+As shown in the following example, you can use Soda Core to run checks on different properties of your dataset against a numerically defined threshold:
+
+```yaml
+checks for MY_TABLE_1:
+  # MY_NUM_COL_1 has a minimum of above or equal 0
+  - min(MY_NUM_COL_1) >= 0
+  # MY_TEXT_COL has less than 10% missing values
+  - missing_percent(MY_TEXT_COL) < 10
+checks for MY_TABLE_2:
+  # MY_NUM_COL_2 has an average between 100 and 1000
+  - avg(MY_NUM_COL_2) is between 100 and 1000
+  # MY_ID_COL has no duplicates
+  - duplicate_count(MY_ID_COL) = 0
+```
+
+You can add optional configurations, such as custom names for checks and error levels:
+
+```yaml
+checks for MY_TABLE_1:
+  # fail the check when MY_TABLE_1 has less than 10 or more than a million rows
+  # warn if there are less than 100 (but 10 or more) rows
+  - row_count:
+      warn: when < 100
+      fail:
+        when < 10
+        when > 1000000
+      name: Wrong number of rows!
+```
+
+You can use the following methods to check the validity of data:
+
+- List of valid values
+- Predefined valid format
+- Regex
+- SQL query
+
+```yaml
+checks for MY_TABLE_1:
+  # MY_CATEGORICAL_COL has no other values than val1, val2 and val3
+  - invalid_count(MY_CATEGORICAL_COL) = 0:
+      valid values: [val1, val2, val3]
+  # MY_NUMERIC_COL has no other values than 0, 1 and 2.
+  # Single quotes are necessary for valid values checks involving numeric
+  # characters.
+  - invalid_count(MY_NUMERIC_COL) = 0:
+      valid values: ['0', '1', '2']
+  # less than 10 missing valid IP addresses
+  - missing_count(IP_ADDRESS_COL) < 10:
+      valid format: ip address
+  # WEBSITE_COL has less than 5% entries that don't contain "astronomer.io"
+  - invalid_percent(WEBSITE_COL) < 5:
+      valid regex: astronomer\.io
+  # The average of 3 columns for values of category_1 is between 10 and 100
+  - my_average_total_for_category_1 between 10 and 100:
+      my_average_total_for_category_1 query: |
+        SELECT AVG(MY_COL_1 + MY_COL_2 + MY_COL_3)
+        FROM MY_TABLE_1
+        WHERE MY_CATEGORY = 'category_1'
+```
+
+Three more unique features of Soda Core are:
+
+- [Freshness checks](https://docs.soda.io/soda-cl/freshness.html): Set limits to the age of the youngest row in the table.
+- [Schema checks](https://docs.soda.io/soda-cl/schema.html): Run checks on the existence of columns and validate data types.
+- [Reference checks](https://docs.soda.io/soda-cl/reference.html): Ensure parity in between columns in different datasets in the same data source.
+
+```yaml
+checks for MY_TABLE_1:
+  # MY_DATE's youngest row is younger 10 days
+  - freshness(MY_DATE) < 10d
+  # The schema has to have the MY_KEY column
+  - schema:
+      fail:
+        when required column missing: [MY_KEY]
+  # all names listed in MY_TABLE_1's MY_NAMES column have to also exist
+  # in the MY_CUSTOMER_NAMES column in MY_TABLE_2
+  - values in (MY_NAMES) must exist in MY_TABLE_2 (MY_CUSTOMER_NAMES)
 ```

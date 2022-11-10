@@ -36,8 +36,6 @@ module.exports = {
       type: 'category',
       label: 'Write DAGs',
       items: [
-      'deferrable-operators',
-      'kubepodoperator-local',
       'kubepodoperator',
       'kubernetes-executor',
         ],

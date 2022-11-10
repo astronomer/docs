@@ -11,7 +11,7 @@ id: airflow-passing-data-between-tasks
 
 Sharing data between tasks is a very common use case in Airflow. If you've been writing DAGs, you probably know that breaking them up into smaller tasks is a best practice for debugging and recovering quickly from failures. What do you do when one of your downstream tasks requires metadata about an upstream task, or processes the results of the task immediately before it?
 
-There are a few methods you can use to implement data sharing between your Airflow tasks. In this tutorial, you'll walk through the two most commonly used methods, learn when to use them, and use some example DAGs to understand how they can be implemented.
+There are a few methods you can use to implement data sharing between your Airflow tasks. In this guide, you'll walk through the two most commonly used methods, learn when to use them, and use some example DAGs to understand how they can be implemented.
 
 :::info
 

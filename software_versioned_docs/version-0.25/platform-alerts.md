@@ -112,22 +112,11 @@ To push custom alerts to Astronomer, add them to the `AdditionalAlerts` section 
 
 Once you've pushed the alert to Astronomer, make sure that you've configured receiver to subscribe to the alert. For more information, read [Subscribe to Alerts](platform-alerts.md#subscribe-to-alerts).
 
-## Reference: Common Alerts
+## Reference: Deployment alerts
 
-The following sections contain information on some of the most common alerts that you might receive from Astronomer.
+The following table lists some of the most common Deployment alerts that you might receive from Astronomer.
 
-For a complete list of built-in Airflow and platform alerts, refer to the [Prometheus configmap](https://github.com/astronomer/astronomer/blob/master/charts/prometheus/templates/prometheus-alerts-configmap.yaml).
-
-### Platform alerts
-
-| Alert | Description |
-| ------------- | ------------- |
-| `PrometheusDiskUsage` | Prometheus high disk usage, has less than 10% disk space available. |
-| `RegistryDiskUsage` | Docker Registry high disk usage, has less than 10% disk space available. |
-| `ElasticsearchDiskUsage` | Elasticsearch high disk usage, has less than 10% disk space available. |
-| `IngressCertificateExpiration` | TLS Certificate expiring soon, expiring in less than a week. |
-
-### Deployment alerts
+For a complete list of built-in Airflow alerts, see the [Prometheus configmap](https://github.com/astronomer/astronomer/blob/master/charts/prometheus/templates/prometheus-alerts-configmap.yaml).
 
 | Alert                                     | Description                                                                                                                        | Follow-Up                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
