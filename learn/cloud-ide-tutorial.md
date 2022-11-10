@@ -81,7 +81,6 @@ To run your ML model on data, you need to connect to your database. Thankfully, 
 
 4. Click **Create Connection** to save your changes.
 
-
 ## Step 4: Add required Python packages
 
 In the same section where you configured your database connection, open the **Requirements** tab. Here you can add any Python packages that you need for your project. To create the simple ML model, you need to add the `scikit-learn` package. 
@@ -102,7 +101,7 @@ The dataset we use in this tutorial is a slightly modified version of [this data
 
 :::
 
-1. Download the [ dog_intelligence.csv ] PLACEHOLDER LINK dataset.
+1. Download the [dog_intelligence.csv](https://github.com/astronomer/learn-tutorials-data/blob/main/dog_intelligence.csv) dataset.
 
 2. Run the following SQL statement in a Snowflake worksheet to create the target table:
 
