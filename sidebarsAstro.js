@@ -160,7 +160,7 @@ module.exports = {
           ],
         },
         'platform-variables',
-        "release-previews",
+        "feature-previews",
         {
           type: "category",
           label: "Data lineage",
