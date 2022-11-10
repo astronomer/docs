@@ -171,7 +171,11 @@ module.exports = {
     label: 'Release notes',
     items: [
       'release-notes',
-      'cli-release-notes',
+      {
+        type: 'link',
+        label: 'Astro CLI',
+        href: 'https://docs.astronomer.io/astro/cli/release-notes',
+     },
       'runtime-release-notes',
     ],
     },

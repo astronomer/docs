@@ -20,7 +20,7 @@ While the tables below reference the minimum compatible versions, we typically r
 | v0.25               | 1.19, 1.20, 1.21 | 0.25.x       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions*             | 3.6  |
 | v0.28               | 1.21, 1.22, 1.23, 1.24            | 1.0.x - 1.1.x | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
 | v0.29               | 1.21, 1.22, 1.23, 1.24 | 1.3.x        | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
-| v0.30               | 1.21, 1.22, 1.23, 1.24 | 1.4.x - 1.6.x       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| v0.30               | 1.21, 1.22, 1.23, 1.24 | 1.4.x - 1.7.x       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 
 For more detail about the changes in each Astronomer Software release, see the [Astronomer Software Release Notes](release-notes.md).
 

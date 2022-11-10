@@ -13,12 +13,12 @@ While the tables below reference the minimum compatible versions, we typically r
 
 <!--- Version-specific -->
 
-| Astronomer Platform | Kubernetes                   | Astro CLI    | Postgres | Python                                    | Astronomer Certified / Astro Runtime     | Helm |
-| ------------------- | ---------------------------- | ------------ | -------- | ----------------------------------------- | ---------------------------------- | ---- |
-| v0.25               | 1.19, 1.20, 1.21 | 0.25.x       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions*             | 3.6  |
-| v0.28               |  1.21, 1.22, 1.23, 1.24            | 1.0.x - 1.1.x | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
-| v0.29               | 1.21, 1.22, 1.23, 1.24 | 1.3.x        | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
-| v0.30               | 1.21, 1.22, 1.23, 1.24 | 1.4.x - 1.6.x       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| Astronomer Platform | Kubernetes             | Astro CLI     | Postgres | Python                                    | Astronomer Certified / Astro Runtime         | Helm |
+| ------------------- | ---------------------- | ------------- | -------- | ----------------------------------------- | -------------------------------------------- | ---- |
+| v0.25               | 1.19, 1.20, 1.21       | 0.25.x        | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions*            | 3.6  |
+| v0.28               | 1.21, 1.22, 1.23, 1.24 | 1.0.x - 1.1.x | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
+| v0.29               | 1.21, 1.22, 1.23, 1.24 | 1.3.x         | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| v0.30               | 1.21, 1.22, 1.23, 1.24 | 1.4.x - 1.7.x | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 
 For more detail about the changes in each Astronomer Software release, see the [Astronomer Software Release Notes](release-notes.md).
 
@@ -46,18 +46,18 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 
 Astronomer Certified images have the following version dependencies:
 
-| Astronomer Certified | Postgres | MySQL     | Python                         | System Distribution  | Airflow Helm chart |
-| -------------------- | -------- | --------- | ------------------------------ | -------------------- | ------------------ |
-| 2.1.0                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8                  | Debian 10 (Buster)   | 0.18.6+            |
-| 2.1.1                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
-| 2.1.3                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
-| 2.1.4                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
-| 2.3.0                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.3.1                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.3.2                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.3.3                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.3.4                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.4.1                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| Astronomer Certified | Postgres | MySQL | Python                         | System Distribution  | Airflow Helm chart |
+| -------------------- | -------- | ----- | ------------------------------ | -------------------- | ------------------ |
+| 2.1.0                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8                  | Debian 10 (Buster)   | 0.18.6+            |
+| 2.1.1                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
+| 2.1.3                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
+| 2.1.4                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
+| 2.3.0                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.1                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.2                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.3                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.4                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.4.1                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
 
 For more detail on each version of Astronomer Certified and upgrade instructions, see [Upgrade Apache Airflow](manage-airflow-versions.md).
 

@@ -23,6 +23,7 @@
 
 # CLI migration redirects 
 /software/cli-reference /astro/cli/reference 301
+/software/cli-release-notes /astro/cli/release-notes 301
 /software/cli-reference* /astro/cli/reference 301
 
 # Docs with redundant Learn guides 
