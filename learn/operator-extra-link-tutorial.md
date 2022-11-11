@@ -7,7 +7,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 
 Airflow offers the possibility to customize its UI with plugins. One small but impactful addition is adding extra links in the **Details** view of either existing or custom operators. These operator extra links can point to static websites, for example to access documentation relevant to the operator, or dynamic links created from information during the task instance run. 
 
-![BashOperator with extra link](extra_links_tutorial_bashoperator)
+![BashOperator with extra link](extra_links_tutorial_bashoperator.png)
 
 This tutorial shows how to add both static and dynamic extra links using an Airflow plugin.
 
