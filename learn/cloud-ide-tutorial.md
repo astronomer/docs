@@ -1,6 +1,6 @@
 ---
 title: 'Write and schedule a simple ML pipeline using the Astro Cloud IDE'
-sidebar_label: 'Astro Cloud IDE - Simple ML pipeline'
+sidebar_label: 'Astro Cloud IDE - Write an ML pipeline'
 id: cloud-ide-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
@@ -86,10 +86,10 @@ To run your ML model on data, you need to connect to your database. Thankfully, 
 In the same section where you configured your database connection, open the **Requirements** tab. Here you can add any Python packages that you need for your project. To create the simple ML model, you need to add the `scikit-learn` package. 
 
 1. Click **+ Requirements**
-2. In the "Package name" field, type `scikit-learn`. The Astro Cloud IDE produces a list of packages to chose from.
+2. In the "Package name" field, type `scikit-learn`. The Astro Cloud IDE produces a list of packages to choose from.
 3. Select the latest version at the top of the list and click **Add**.
 
-![Add scikit-learn](/img/guides/cloud_ide_add_requirement.png)
+    ![Add scikit-learn](/img/guides/cloud_ide_add_requirement.png)
 
 ## Step 5: Import a dataset into your database
 
@@ -97,7 +97,7 @@ Now that you've set up the environment for your pipelines, you can create pipeli
 
 :::info
 
-The dataset we use in this tutorial is a slightly modified version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size). 
+The dataset used in this tutorial is a slightly modified version of [this dataset on Kaggle](https://www.kaggle.com/datasets/jasleensondhi/dog-intelligence-comparison-based-on-size). 
 
 :::
 
@@ -131,7 +131,7 @@ The dataset we use in this tutorial is a slightly modified version of [this data
 4. In the Snowflake UI, go to the `dog_intelligence` table in **Databases** and click on **Load Table**.
 5. Use the ["Loading Using the Web Interface" wizard](https://docs.snowflake.com/en/user-guide/data-load-web-ui.html). Select the `dog_intelligence.csv` file you downloaded as the **Source File** and `my_csv_format` as the **File Format**.
 
-![Load csv Snowflake](/img/guides/cloud_ide_load_csv.png)
+    ![Load csv Snowflake](/img/guides/cloud_ide_load_csv.png)
 
 6. Verify that the data has been loaded into your Snowflake database by running the following query in a worksheet:
 
@@ -171,7 +171,7 @@ Navigate back to your Astro Cloud IDE on Astro.
 
 8. Below the cell, click **RESULTS** to see the output containing 136 rows.
 
-![Table output](/img/guides/cloud_ide_query_table.png)
+    ![Table output](/img/guides/cloud_ide_query_table.png)
 
 The dataset has 7 columns containing information about the height, weight, breed, and learning speed of different dogs. The `reps_lower` and `reps_higher` columns contain the lower and upper bounds of how many repetitions of a new command each breed of dog needed to learn it. This value is used to sort the dogs into two categories which will be the target of your classification model. The predictors will be the four columns containing height and weight information.
 
@@ -195,9 +195,9 @@ Before you can train the model, you first need to transform the data in your tab
     FROM {{query_table}}
     ```
 
-Notice that after you create this cell, the Astro Cloud IDE automatically creates a dependency between `query_table` and `transform_table` in the pipeline view. This happens because the SQL statement in `transform_table` references the temporary table created by the `query_table` task using the Jinja syntax `{{query_table}}`.
+    Notice that after you create this cell, the Astro Cloud IDE automatically creates a dependency between `query_table` and `transform_table` in the pipeline view. This happens because the SQL statement in `transform_table` references the temporary table created by the `query_table` task using the Jinja syntax `{{query_table}}`.
 
-![Table output](/img/guides/cloud_ide_cell_dependency.png)
+    ![Table output](/img/guides/cloud_ide_cell_dependency.png)
 
 5. Run the cell.
 
@@ -255,17 +255,17 @@ Train a random forest model to predict the dog intelligence category of a breed 
     """ 
     ```
 
-You will notice again how the Astro Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `tranform_table` cell directly (without Jinja syntax) on line 6. 
+    You will notice again how the Astro Cloud IDE will automatically create a dependency between the `transform_table` task and the `model_task` task. The Python code above references the `transform_table` object returned from the `transform_table` cell directly (without Jinja syntax) on line 6. 
 
-The Python code completes the following steps:
+    The Python code completes the following steps:
 
-- Import necessary functions and classes from the `scikit-learn` package.
-- Calculate the baseline accuracy, which is the accuracy you would get if you always guessed the most common outcome (in our data `smart_dog`).
-- Separate out predictors (height and weight information) and the target (the intelligence category).
-- Split the data into a training and testing set.
-- Standardize the predicting features.
-- Train a [RandomForestClassifier model](https://scikit-learn.org/stable/modules/ensemble.html#forest) on the training data.
-- Score the trained model on the testing data.
+    - Import necessary functions and classes from the `scikit-learn` package.
+    - Calculate the baseline accuracy, which is the accuracy you would get if you always guessed the most common outcome (in our data `smart_dog`).
+    - Separate out predictors (height and weight information) and the target (the intelligence category).
+    - Split the data into a training and testing set.
+    - Standardize the predicting features.
+    - Train a [RandomForestClassifier model](https://scikit-learn.org/stable/modules/ensemble.html#forest) on the training data.
+    - Score the trained model on the testing data.
 
 4. Run the cell.
 
@@ -317,23 +317,23 @@ Now that you have trained the model, you can connect GitHub to the Astro Cloud I
 
 ## Step 12: Commit your DAG to GitHub
 
-Export your DAG by commiting it to your connected GitHub repository. 
+Export your pipeline by committing it to your connected GitHub repository. 
 
 1. Click the branch you want to commit to (in the screenshot below the `cloud-ide-branch`) and provide a commit message. Note that you cannot commit to a branch called `main`. 
 
     ![Connect to GitHub](/img/guides/cloud_ide_commit_to_github.png)
 
-:::caution
+  :::caution
 
-If a file with the same name as your Astro Cloud IDE pipeline already exists in your GitHub repository, the Astro Cloud IDE will overwrite the existing file. For this reason, Astronomer recommends using a separate branch for commits from your Astro Cloud IDE environment than for commits from other sources to the same repository.
+  If a file with the same name as your Astro Cloud IDE pipeline already exists in your GitHub repository, the Astro Cloud IDE will overwrite the existing file. For this reason, Astronomer recommends using a separate branch for commits from your Astro Cloud IDE environment than for commits from other sources to the same repository.
 
-:::
+  :::
 
 2. Scroll through the list of changes and make sure that only changes are checked that you want to commit. The Astro Cloud IDE will offer to commit versions of Astro project configuration files, as well as a GitHub workflow. Note that all pipeline changes in a given Astro Cloud IDE project will be listed to be selected for the commit, not only the changes to the pipeline you are currently editing.
 
-Your DAG will be added to the `/dags` folder in your GitHub repository.
+    Your DAG will be added to the `/dags` folder in your GitHub repository.
 
-![Dags folder on GitHub](/img/guides/cloud_ide_dags_github.png)
+    ![Dags folder on GitHub](/img/guides/cloud_ide_dags_github.png)
 
 3. Create a pull request in GitHub from your dedicated Astro Cloud IDE branch to your development branch and merge the changes you want to add to your Astro Cloud environment.
 
