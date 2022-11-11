@@ -143,7 +143,7 @@ All CI/CD pipelines that use the DAG-based deployment method require [Astro CLI 
     defaultValue="standard"
     groupId= "github-actions"
     values={[
-        {label: 'Standard', value: 'standard'},
+        {label: 'Single branch', value: 'standard'},
         {label: 'Multi-branch', value: 'multibranch'},
         {label: 'Custom Image', value: 'custom'},
     ]}>
@@ -366,7 +366,7 @@ The following templates are examples of how to implement DAG-only deploys in Git
     defaultValue="standard"
     groupId= "github-actions-dag-based-deploy"
     values={[
-        {label: 'Standard', value: 'standard'},
+        {label: 'Single branch', value: 'standard'},
         {label: 'Multi-branch', value: 'multibranch'},
         {label: 'Custom Image', value: 'custom'},
     ]}>
@@ -649,7 +649,7 @@ If your Astro project requires additional build-time arguments to build an image
     defaultValue="jenkinsstandard"
     groupId= "jenkins"
     values={[
-        {label: 'Standard', value: 'jenkinsstandard'},
+        {label: 'Single branch', value: 'jenkinsstandard'},
         {label: 'Multi-branch', value: 'jenkinsmultibranch'},
     ]}>
 <TabItem value="jenkinsstandard">
@@ -765,7 +765,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
     defaultValue="awscodebuildstandard"
     groupId= "aws-codebuild"
     values={[
-        {label: 'Standard', value: 'awscodebuildstandard'},
+        {label: 'Single branch', value: 'awscodebuildstandard'},
         {label: 'Multi-branch', value: 'awscodebuildmultibranch'},
     ]}>
 <TabItem value="awscodebuildstandard">
@@ -994,7 +994,7 @@ This pipeline configuration requires:
     defaultValue="gitlabstandard"
     groupId= "gitlab"
     values={[
-        {label: 'Standard', value: 'gitlabstandard'},
+        {label: 'Single branch', value: 'gitlabstandard'},
         {label: 'Multi-branch', value: 'gitlabmultibranch'},
     ]}>
 <TabItem value="gitlabstandard">
