@@ -3,6 +3,8 @@ sidebar_label: 'Enable data lineage'
 title: "Enable data lineage for external systems"
 id: set-up-data-lineage
 description: Configure your external systems to emit lineage data to Astro.
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 ---
 
 To generate lineage graphs for your data pipelines, you first need to configure your data pipelines to emit lineage data. Because lineage data can be generated in all stages of your pipeline, you can configure pipeline components outside of Astro, such as dbt or Databricks, to emit lineage data whenever they're running a job. Coupled with lineage data emitted from your DAGs, Astro generates a lineage graph that can provide context to your data before, during, and after it reaches your Deployment.
