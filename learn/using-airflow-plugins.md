@@ -72,9 +72,9 @@ Functionality is added to a plugin by adding components to the class which defin
 
 Other types of plugin components not covered in this guide include:
 
-- `timetables`, which offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG scheduling and timetables in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
-- `executors`, which offers the possibility to add a custom [executor](https://docs.astronomer.io/learn/airflow-executors-explained) to your Airflow instance.
-- `listeners`, which are an experimental feature to add notifications for events happening in Airflow. Learn more in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/listeners.html).
+- `timetables` offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG scheduling and timetables in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
+- `executors` add the possibility to use a custom [executor](https://docs.astronomer.io/learn/airflow-executors-explained) in your Airflow instance.
+- `listeners` are an experimental feature to add notifications for events happening in Airflow. Learn more in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/listeners.html).
 
 :::info
 
@@ -132,10 +132,10 @@ To learn more check out the [Blueprints and Views tutorial](https://flask.pallet
 
 :::
 
-You can add a view to render a simple templated html file on top of the Airflow UI by following these steps:
+You can add a view to render a simple templated HTML file on top of the Airflow UI by following these steps:
 
 1. Create a folder within the `plugins` directory called `templates`.
-2. Within that folder create a html file called `test.html` and copy the collowing code into it:
+2. Within that folder create a HTML file called `test.html` and copy the collowing code into it:
 
     ```html
     <!DOCTYPE html>
@@ -163,7 +163,7 @@ You can add a view to render a simple templated html file on top of the Airflow 
 
         @expose("/")
         def test(self):
-            # render the html file from the templates directory with content
+            # render the HTML file from the templates directory with content
             return self.render_template("test.html", content="awesome")
 
     # instantiate MyBaseView
@@ -193,7 +193,7 @@ This plugin will add a top-level menu item called **My Extra View** which contai
 
 ![Test View Menu](/img/guides/plugins_test_view_menu.png)
 
-By clicking on **Test View** you can access the Flask View that was defined as `my_view`. It shows the html template (`test.html`) rendered with the provided content.
+By clicking on **Test View** you can access the Flask View that was defined as `my_view`. It shows the HTML template (`test.html`) rendered with the provided content.
 
 ![Test View](/img/guides/plugins_test_view.png)
 
@@ -258,6 +258,12 @@ You can access the button on task instances in both the **Graph** and **Grid** v
 ### Macros
 
 In Airflow you can define custom macros which can be accessed using Jinja templating. Macros can be added at the DAG level by defining them in the DAG parameter `user_defined_macros` as shown in [Using Airflow templates](templating.md). If you want to make macros available to your whole Airflow instance you can register them as a plugin. 
+
+Common use cases for custom macros include:
+
+- Injecting dynamic datetime objects into DAG code in formats not available in pre-defined macros. For example, converting the `{{ ts }}` predefined macro, which provides the logical date of the DAG as a timestamp from `YYYY-MM-DDThh:mm:ss+00:00` to ``hh:mm`. 
+- Injecting dynamic arguments into DAG code based on Python logic. For example to use a different argument on weekdays than on the weekend.
+- Injecting dynamic arguments into DAG code based on XCom values. For example, using a different target blob storage depending on how many files will be ingested, a count determined and pushed to XCom by an upstream task.
 
 ```python
 from airflow.plugins_manager import AirflowPlugin

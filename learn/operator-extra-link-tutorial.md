@@ -7,14 +7,21 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 
 Airflow offers the possibility to customize its UI with plugins. One small but impactful addition is adding extra links in the **Details** view of either existing or custom operators. These operator extra links can point to static websites, for example to access documentation relevant to the operator, or dynamic links created from information during the task instance run. 
 
+![BashOperator with extra link](extra_links_tutorial_bashoperator)
+
 This tutorial shows how to add both static and dynamic extra links using an Airflow plugin.
 
 After you complete this tutorial, you'll be able to:
 
-- Add a static operator extra link to any operator.
+- Add a static operator extra link to any operator using an Airflow plugin.
 - Modify an existing operator to push an additional value to XCom.
-- Add a dynamic operator extra link to any operator.
-- Add operator extra links to an Airflow plugin.
+- Add a dynamic operator extra link to any operator using an Airflow plugin.
+
+:::tip
+
+Extra links can be also be added to operators when creating an [Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers/index.html). In general, adding an operator extra link via plugin as described in this tutorial is easier for use in a limited number of Airflow instances. However, if you are planning to use the extra link in a large number of deployments, consider adding them to an Airflow provider instead.
+
+:::
 
 ## Time to complete
 
@@ -206,9 +213,9 @@ Before Airflow 2.0, custom operators and hooks were added as plugins. This patte
 
     ```python
     call_api_cat = CatHttpOperator(
-            task_id="call_api_cat",
-            http_conn_id="random_user_api_conn",
-            method="GET"
+        task_id="call_api_cat",
+        http_conn_id="random_user_api_conn",
+        method="GET"
     )
     ```
 
