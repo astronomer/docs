@@ -7,7 +7,7 @@ id: using-airflow-plugins
 
 Plugins are external features that can be added to customize your Airflow installation. They are automatically imported upon starting your Airflow instance if they have been added to `plugins` folder of an Airflow project. 
 
-In this guide you'll learn how to add a plugin to your Airflow instance as well as what components can be part of a plugin.
+In this guide, you'll learn how to add a plugin to your Airflow instance and what Airflow components can be part of a plugin.
 
 ## Assumed knowledge
 
@@ -19,15 +19,15 @@ To get the most out of this guide, you should have an understanding of:
 
 ## When to use plugins
 
-Plugins offer a flexible way to customize your Airflow experience by building on top of existing Airflow components. For example you can:
+Plugins offer a flexible way to customize your Airflow experience by building on top of existing Airflow components. For example, you can:
 
 - Add views to your Airflow UI that display contents of the Airflow metadata database in a custom way.
-- Build an application that monitors Airflow's functioning itself and sends out custom alerts, for example in case of a certain number of DAGs failing in a specified time frame.
-- Add dynamic links to task instances to files and logs in external data tools the task has been performed on.
+- Build an application that monitors Airflow's functioning and sends out custom alerts, for example in case of a certain number of DAGs failing in a specified time frame.
+- Add a button to the task instance **Details** view that dynamically links to files or logs in external data tools relevant to the task.
 
 ## How to create a plugin
 
-To add a new plugin to your Airflow instance you need to create a Python file in the `plugins` folder of your Airflow project. Within that file a class which inherits from the `AirflowPlugin` class has to be created to define the plugin. The code snippet below defines a plugin with the name `empty` without any components. 
+To add a new plugin to your Airflow instance, you need to create a Python file in the `plugins` folder of your Airflow project. Within that file, create a class which inherits from the `AirflowPlugin` to define the plugin. The code snippet below defines a plugin with the name `empty` without any components. 
 
 ```python
 from airflow.plugins_manager import AirflowPlugin
@@ -63,14 +63,14 @@ Airflow needs to be restarted for changes in plugins to be registered. Learn mor
 
 ## Plugin components
 
-Functionality is added to a plugin by adding components to the class which defines the plugin. There are 10 types of plugin components, in this guide we want to highlight the following:
+Functionality is added to a plugin by adding components to the class which defines the plugin. There are 10 types of plugin components that can be added to Airflow. In this guide we will show the more commonly used components, including:
 
 - `appbuilder_menu_items` allow you to add additional sections and links to the Airflow menu.
 - `flask_blueprints` and `appbuilder_views` offer the possibility to build a Flask project on top of Airflow.
 - `operator_extra_links` and `global_operator_extra_links` are ways to add links to Airflow task instances.
 - `macros` expand upon existing Jinja templates using custom functions.
 
-Other types of plugin components include:
+Other types of plugin components not covered in this guide include:
 
 - `timetables`, which offer the option to register custom timetables that define schedules which cannot be expressed in CRON. See the [DAG scheduling and timetables in Airflow guide](https://docs.astronomer.io/learn/scheduling-in-airflow#timetables) for more information and a code example.
 - `executors`, which offers the possibility to add a custom [executor](https://docs.astronomer.io/learn/airflow-executors-explained) to your Airflow instance.
@@ -78,13 +78,13 @@ Other types of plugin components include:
 
 :::info
 
-Before Airflow 2.0 custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](https://docs.astronomer.io/learn/airflow-importing-custom-hooks-operators) can now be simply by importing a script located in `include`.
+Before Airflow 2.0 custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](https://docs.astronomer.io/learn/airflow-importing-custom-hooks-operators) can now be used simply by importing a script located in `include`.
 
 :::
 
 ### Appbuilder menu items
 
-You can customize the Airflow menu at the top of the screen to contain custom tabs with links to external websites. Both adding top-level menu items as well as sub-items are supported. 
+You can update the menu at the top of the Airflow UI to contain custom tabs with links to external websites. Adding top-level menu items and adding sub-items are both supported. 
 
 ```python
 from airflow.plugins_manager import AirflowPlugin
@@ -251,13 +251,13 @@ class MyGlobalLink(AirflowPlugin):
     ]
 ```
 
-You can access the button on task instences in both the Graph and Grid view.
+You can access the button on task instances in both the **Graph** and **Grid** views.
 
 ![Airflow Docs Button](/img/guides/global_operator_extra_link.png)
 
 ### Macros
 
-In Airflow you can define custom macros which can be accessed using Jinja templating. Macros can be added at the dag level by defining them in the DAG parameter `user_defined_macros` as shown in [Using Airflow templates](templating.md)). If you want to make macros available to your whole Airflow instance you can register them as a plugin. 
+In Airflow you can define custom macros which can be accessed using Jinja templating. Macros can be added at the DAG level by defining them in the DAG parameter `user_defined_macros` as shown in [Using Airflow templates](templating.md). If you want to make macros available to your whole Airflow instance you can register them as a plugin. 
 
 ```python
 from airflow.plugins_manager import AirflowPlugin

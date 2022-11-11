@@ -5,9 +5,9 @@ id: operator-extra-link-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
 
-Airflow offers the possibility to customize its UI with plugins. One small but impactful addition that is easy to make are extra links in the Details view of both existing and custom operators. These operator extra links can both point to static websites, for example to access documentation relevant to the operator or contain dynamic links created from information during the task instance run. 
+Airflow offers the possibility to customize its UI with plugins. One small but impactful addition is adding extra links in the **Details** view of either existing or custom operators. These operator extra links can point to static websites, for example to access documentation relevant to the operator, or dynamic links created from information during the task instance run. 
 
-This tutorial shows how to add both static and dynamic extra links using an Airflow plugin. Alternatively, extra links can be added to operators when creating an [Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers/index.html). In general adding an operator extra link via plugin is easier for use in a limited number of Airflow instances while it is recommended to consider adding them to an Airflow provider if you are planning to use them in a larger number of deployments and in combination with other changes to core Airflow. You can add operator extra links to both, existing operators and custom ones.
+This tutorial shows how to add both static and dynamic extra links using an Airflow plugin.
 
 After you complete this tutorial, you'll be able to:
 
@@ -37,7 +37,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 Set up Airflow by creating a new Astro project:
 
-Create a new Astro project:
 
     ```sh
     $ mkdir astro-extra-link-tutorial && cd astro-extra-link-tutorial
@@ -46,7 +45,7 @@ Create a new Astro project:
 
 ## Step 2: Create a DAG using the SimpleHttpOperator
 
-First you will add a static operator extra link to the SimpleHttpOperator which will add a button with a link to the [Mozilla HTTP documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP) to every task instance created by this operator.
+First you will add a static operator extra link to the SimpleHttpOperator, which will link to the [Mozilla HTTP documentation](https://developer.mozilla.org/en-US/docs/Web/HTTP) on every task instance created by this operator.
 
 1. Create a new Python file named `plugin_test_dag.py` in the `dags` folder of your Airflow project.
 
@@ -108,14 +107,14 @@ Create an [Airflow plugin](using-airflow-plugins.md) to add an extra link to the
 
 This script accomplishes the following:
 
-- Importing the `AirflowPlugin` class which serves as a base class for custom plugins as well as the `BaseOperatorLink` from which classes defining custom extra links inherit.
-- Defining a custom extra link class called `HTTPDocsLink` which inherits from `BaseOperatorLink` and adds an external link button in the Airflow UI to all operators provided to its `operators` attribute. In the example we provide the `SimpleHttpOperator`.
-- Providing a static link to the HTTP documentation on Mozilla to the `.get_link()` method of the `HTTPDocsLink`. This method adds any link returned to the link button in Airflow UI.
-- Creating the `AirflowExtraLinkPlugin` class which inherits from `AirflowPlugin`. This class will plug objects of [different plugin types](using-airflow-plugins.md) into Airflow. The plugin is given the name `extra_link_plugin` and its `operator_extra_links` attribute contains all extra links objects that have been defined in this plugin script. For now it contains only `HTTPDocsLink()`.
+- Import the `AirflowPlugin` class which serves as a base class for custom plugins as well as the `BaseOperatorLink` from which classes defining custom extra links inherit.
+- Define a custom extra link class called `HTTPDocsLink` which inherits from `BaseOperatorLink` and adds an external link button in the Airflow UI to all operators provided to its `operators` attribute. In the example, we provide the `SimpleHttpOperator`.
+- Provide a static link to the HTTP documentation on Mozilla to the `.get_link()` method of the `HTTPDocsLink`. This method adds any link returned to the link button in Airflow UI.
+- Create the `AirflowExtraLinkPlugin` class which inherits from `AirflowPlugin`. This class will plug objects of [different plugin types](using-airflow-plugins.md) into Airflow. The plugin is given the name `extra_link_plugin` and its `operator_extra_links` attribute contains all extra links objects that have been defined in this plugin script. For now it contains only `HTTPDocsLink()`.
 
 ## Step 4: Add an HTTP connection
 
-1. In your terminal, run `astro dev start` in your Astro project directory to start up Airflow. If your Airflow instance is already running use `astro dev restart` to restart it in order to load any changes made in the `plugins` folder.
+1. In your terminal, run `astro dev start` in your Astro project directory to start up Airflow. If your Airflow instance is already running, use `astro dev restart` to restart it in order to load any changes made in the `plugins` folder.
 
 2. Add an HTTP connection called `random_user_api_conn` to `http://randomuser.me/api/` in the Airflow UI. This API will return data about a randomly generated user persona. Feel free to use a different API, the content returned will not be relevant for this tutorial.
 
@@ -183,7 +182,7 @@ Linking to relevant docs from an operator is useful, but often you want to add a
             return response.text
     ```
 
-    The code above defines a custom version of the `SimpleHttpOperator`, called the `CatHttpOperator`. The change consists of adding one line before the `return` statement of the `.execute()` method which is `context["ti"].xcom_push(key="status_code", value=response.status_code)`. This line pushes the `status_code` attribute of the `response` object to XComs and associates it with the key `status_code`. The rest of the `.execute()` method is identical to the parent operator (compare the source code of the [SimpleHttpOperator](https://github.com/apache/airflow/blob/main/airflow/providers/http/operators/http.py)).
+The code above defines a custom version of the `SimpleHttpOperator`, called the `CatHttpOperator`. The change consists of adding one line before the `return` statement of the `.execute()` method which is `context["ti"].xcom_push(key="status_code", value=response.status_code)`. This line pushes the `status_code` attribute of the `response` object to XComs and associates it with the key `status_code`. The rest of the `.execute()` method is identical to the parent operator (compare the source code of the [SimpleHttpOperator](https://github.com/apache/airflow/blob/main/airflow/providers/http/operators/http.py)).
 
 3. Add an empty Python file with the name `__init__.py` to your `include` folder to allow module imports from the folder.
 
@@ -191,7 +190,7 @@ This is all that is necessary to modify an existing operator.
 
 :::info
 
-Before Airflow 2.0, custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](airflow-importing-custom-hooks-operators.md) can now be simply by importing a script located in `include`.
+Before Airflow 2.0, custom operators and hooks were added as plugins. This pattern has been deprecated and [custom operators and hooks](airflow-importing-custom-hooks-operators.md) can now be used simply by importing a script located in `include`.
 
 :::
 
