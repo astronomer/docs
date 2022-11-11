@@ -50,7 +50,7 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
   ```  
   az vm list-skus --location centralus --size Standard_D --all --output table | grep -e 'Restrictions\|Standard_D4_v5'
   ```  
-  If the VM types are not available, the output shows Restrictions.  In this case, open a support case with Microsoft Support to have these enabled.
+  If the VM types are unavailable, the output returns `Restrictions`. Contact Microsoft Support and ask to have the VMs enabled.
   ```
   ResourceType     Locations    Name                    Zones    Restrictions
   virtualMachines  centralus    Standard_D4_v5          1,2,3    NotAvailableForSubscription, type: Zone, locations: centralus, zones: 1
