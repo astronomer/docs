@@ -14,6 +14,7 @@ After you create an Astro Deployment, you can modify its settings to meet the un
 - Allocate resources for the Airflow scheduler and workers.
 - Update a Deployment name and description.
 - Add or delete a Deployment alert email.
+- Transfer a Deployment to another Workspace in your Organization.
 - Delete a Deployment.
 
 ## Set Deployment resources
@@ -72,6 +73,20 @@ Alert emails assigned to a Deployment are used by Astronomer support to notify r
     - Click **Yes, Continue**.
 
 In addition to alert emails for your Deployments, Astronomer recommends subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe, you'll receive email notifications about system-wide incidents in real time.
+
+## Transfer a Deployment to another Workspace 
+
+To transfer a Deployment from one Workspace to another, the Workspaces must be in the same Organization and Astro cluster. Transferring a Workspace can be helpful when your organization needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not interrupted and tasks will continue to be scheduled.
+
+Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin or Editor in both the original Workspace and the target Workspace.
+
+1. In the Cloud UI, select a Workspace and then select a Deployment.
+2. Click the **Options** menu and select **Transfer Deployment**. 
+
+    ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
+
+3. Select the target Workspace where you want to transfer the Deployment. 
+4. Click **Transfer Deployment**.
 
 ## Delete a Deployment
 

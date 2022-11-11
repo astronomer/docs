@@ -35,7 +35,7 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
-## Set Up the KubernetesPodOperator
+## Set up the KubernetesPodOperator
 
 To use the KubernetesPodOperator in a DAG, add the following import statements and instantiation to your DAG file:
 
@@ -98,7 +98,47 @@ KubernetesPodOperator(
 
 Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod will terminate gracefully.
 
-## Run images from a Private Registry
+### Mount a temporary directory (_AWS only_)
+
+Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
+
+To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
+
+1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
+2. Mount and [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
+
+    ```python{5-14,26-27}
+    from airflow.configuration import conf
+    from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+    from kubernetes.client import models as k8s
+
+    volume = k8s.V1Volume(
+        name="cache-volume",
+        emptyDir={},
+    )
+
+    volume_mounts = [
+        k8s.V1VolumeMount(
+            mount_path="/cache", name="cache-volume"
+        )
+    ]
+
+    example_volume_test = KubernetesPodOperator(
+    namespace=namespace,
+    image="<your-docker-image>",
+    cmds=["<commands-for-image>"],
+    arguments=["<arguments-for-image>"],
+    labels={"<pod-label>": "<label-name>"},
+    name="<pod-name>",
+    resources=compute_resources,
+    task_id="<task-name>",
+    get_logs=True,
+    volume_mounts=volume_mounts,
+    volumes=[volume],
+    )
+    ```
+ 
+## Run images from a private registry
 
 By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, you'll need to create a Kubernetes Secret and then specify the Kubernetes Secret in your DAG. If your Docker image is hosted in an Amazon Elastic Container Registry (ECR) repository, see [Docker images hosted in private Amazon ECR repositories](#docker-images-hosted-in-private-amazon-ecr-repositories)
 

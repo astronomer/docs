@@ -94,10 +94,24 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 - Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of the operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
 - Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 
+## Astro Runtime 5.0.12
+
+- Release date: November 9, 2022
+- Airflow version: 2.3.4
+
+### Backported Airflow bug fixes
+
+Astro Runtime 5.0.12 includes the following bug fixes from Apache Airflow 2.4.2:
+
+- Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059))
+- Avoid 500 on dag redirect ([#27064](https://github.com/apache/airflow/pull/27064))
+- Don’t overwrite connection extra with invalid json ([#27142](https://github.com/apache/airflow/pull/27142))
+- Simplify origin string cleaning ([#27143](https://github.com/apache/airflow/pull/27143))
+
 ## Astro Runtime 5.0.11
 
 - Release date: November 2, 2022
-- Airflow version: 2.3.4 
+- Airflow version: 2.3.4
 
 ### Backported Airflow bug fixes
 
@@ -306,6 +320,19 @@ Astro Runtime 5.0.0 provides support for [Airflow 2.3.0](https://airflow.apache.
 
 For more information on Airflow 2.3, see ["Apache Airflow 2.3 — Everything You Need to Know"](https://www.astronomer.io/blog/apache-airflow-2-3-everything-you-need-to-know) by Astronomer.
 
+## Astro Runtime 4.2.8
+
+- Release date: November 9, 2022
+- Airflow version: 2.2.5
+
+### Backported Airflow bug fixes
+
+Astro Runtime 4.2.8 includes the following bug fixes from Apache Airflow 2.4.2:
+
+- Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059))
+- Don’t overwrite connection extra with invalid json ([#27142](https://github.com/apache/airflow/pull/27142))
+- Simplify origin string cleaning ([#27143](https://github.com/apache/airflow/pull/27143))
+
 ## Astro Runtime 4.2.7
 
 - Release date: October 11, 2022
@@ -319,7 +346,7 @@ Astro Runtime 4.2.7 includes the following bug fixes from later Apache Airflow r
 - Fix `email_on_failure` with `render_template_as_native_obj` ([#22770](https://github.com/apache/airflow/pull/22770))
 - Do not log the hook connection details even at DEBUG level ([#22627](https://github.com/apache/airflow/pull/22627))
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed the following vulnerabilities:
 

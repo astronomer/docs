@@ -9,9 +9,7 @@ description: Learn how to use the Astro Cloud IDE's built-in GitHub support to m
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change.
-
-If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it on the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
 :::
 
@@ -88,12 +86,12 @@ These actions are not dependent on each other, meaning that you can modify the f
 2. Create a Deployment API key for your Deployments. See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
 3. Configure the following GitHub secrets in your GitHub repository:
    
-   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-api-key-id>`
-   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-api-key-secret>`
-   - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
-   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-api-key-id>`
-   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-api-key-secret>`
-   - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
+   - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-api-key-id>`
+   - `PROD_ASTRONOMER_KEY_SECRET` = `<your-prod-api-key-secret>`
+   - `PROD_ASTRONOMER_DEPLOYMENT_ID` = `<your-prod-astro-deployment-id>`
+   - `DEV_ASTRONOMER_KEY_ID` = `<your-dev-api-key-id>`
+   - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-api-key-secret>`
+   - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
 
 After configuring your Github actions, commits from the Cloud IDE to your `main` or `dev` branches are automatically deployed to Astro.
 

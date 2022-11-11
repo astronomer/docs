@@ -197,7 +197,7 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
         runs-on: ubuntu-latest
         steps:
         - name: Check out the repo
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         - name: Log in to registry
           uses: docker/login-action@v1
           with:
@@ -214,7 +214,7 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
         runs-on: ubuntu-latest
         steps:
         - name: Check out the repo
-          uses: actions/checkout@v2
+          uses: actions/checkout@v3
         - name: Log in to registry
           uses: docker/login-action@v1
           with:
@@ -437,7 +437,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check out the repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     - name: Log in to registry
       uses: docker/login-action@v1
       with:

@@ -15,7 +15,37 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest Astro Runtime Version**: 6.0.3 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.6.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
+
+## November 8, 2022
+
+### Deploy only DAGs with `astro deploy -—dags`
+
+Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and gives you more flexibility in how you configure CI/CD processes.
+
+For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+
+### Improved data lineage interface
+
+The **Lineage** tab has new features and is better integrated into the Cloud UI.
+
+![Updated lineage page](/img/release-notes/lineage-integrated.png)
+
+Specifically, the tab includes the following improvements:
+
+- The process for comparing runs uses a simpler interface and provides more information about the runs you're comparing. See [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
+- Names for UI elements have been updated to more clearly represent Airflow resources. For example, **jobs** is now **runs**, and the **Explore** tab is now **Runs**.
+- Lineage graphs include new colors and animations to show the flow of data as it moves between runs and datasets. 
+
+### Transfer a Deployment
+
+You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace.
+
+See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
+
+### Additional improvements 
+ 
+- The Kubernetes API is no longer exposed to the public internet on AWS data planes. The allowlist is limited to control plane IPs. New clusters will be created with this configuration, while all existing clusters will be updated by end of next week.
 
 ## November 1, 2022 
 
@@ -39,28 +69,17 @@ To create your first project in the Astro Cloud IDE, see the [Cloud IDE quicksta
 
 <!-- id to make it easier to remove: cloud-ide-preview-banner -->
 
-The Cloud IDE is currently in _Public Preview_ and it is available to all Astro customers. It is still in development and features and functionality are subject to change.
-
-If you have any feedback, please submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
-
+The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
 
 :::
 
-### Write to temporary storage on AWS clusters
-
-AWS clusters that use `m5d` and `m6id` worker types can now use the full capacity of the NVMe SSD volumes available in these instances. Prior to this release, Astro used the utilization of the root volume to make scheduling decisions; with this change  the entire storage capacity is examined. 
-
-Tasks using KubernetesPodOperator can create  mounts to any path, but other tasks must write to `/ephemeral` to use this storage.  
-
-**Note that non-KPO tasks that used local storage on these instances will need to be adjusted to write to `/ephemeral` instead.**
-
-You can use this storage for simple operations such as a disk-based merge sort or checkpointing to prevent crashes. To use these worker types on your cluster, see [Modify a cluster](modify-cluster.md) and [Configure worker queues](configure-worker-queues.md). 
 ### Additional improvements 
 
 - In the Cloud UI, cluster selection menus are now alphabetized.
 
 ### Bug fixes 
 
+- Fixed an issue where the KubernetesPodOperator was not aware of available ephemeral storage in `m5d` and `m6id` worker nodes. This issue resulted in Pods being evicted to free up storage even when there was enough available storage for tasks.
 - Fixed an issue in the Cloud UI where you could select a worker type before selecting a cluster when creating a Deployment.
 - Fixed an issue where Deployments on Runtime 5.0.10 and earlier showed a nonfunctional **Configuration** tab in the Airflow UI.
 - Fixed [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-32149).

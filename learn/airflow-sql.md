@@ -16,7 +16,7 @@ In this guide you'll learn about the best practices for executing SQL from your 
 
 :::info
 
-All code used in this guide is located in the [Astronomer GitHub](https://github.com/astronomer/airflow-sql).
+All code used in this guide is located in the [Astronomer GitHub](https://github.com/astronomer/airflow-sql-tutorial).
 
 :::
 
