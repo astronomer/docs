@@ -151,7 +151,7 @@ Now that you have your Snowflake resources configured, you can move on to settin
 
 ## Step 4: Create your DAG
 
-In your Astro project `dags/` folder, create a new file called `external-python-pipeline.py`. Paste the following code into the file:
+In your Astro project `dags` folder, create a new file called `external-python-pipeline.py`. Paste the following code into the file:
 
 ```python
 from __future__ import annotations
@@ -175,7 +175,13 @@ PYTHON = sys.executable
 
 BASE_DIR = tempfile.gettempdir()
 
-with DAG('py_virtual_env', schedule_interval=None, start_date=pendulum.datetime(2022, 10, 10, tz="UTC"), catchup=False, tags=['pythonvirtualenv']) as dag:
+with DAG(
+    'py_virtual_env',
+    schedule_interval=None,
+    start_date=pendulum.datetime(2022, 10, 10, tz="UTC"),
+    catchup=False,
+    tags=['pythonvirtualenv']
+) as dag:
     
     @task(task_id="print_the_context")
     def print_context(ds=None, **kwargs):
@@ -184,7 +190,10 @@ with DAG('py_virtual_env', schedule_interval=None, start_date=pendulum.datetime(
         print(ds)
         return 'Whatever you return gets printed in the logs'
 
-    @task.external_python(task_id="external_python", python='/home/astro/.pyenv/versions/snowpark_env/bin/python')
+    @task.external_python(
+        task_id="external_python",
+        python='/home/astro/.pyenv/versions/snowpark_env/bin/python'
+    )
     def callable_external_python():
         from time import sleep
         import pkg_resources
@@ -193,6 +202,7 @@ with DAG('py_virtual_env', schedule_interval=None, start_date=pendulum.datetime(
         import boto3
         import json
         
+        # Retrieving connection information from the external secrets manager
         ssm = boto3.client('ssm', region_name='us-east-1')
         parameter = ssm.get_parameter(Name='/airflow/connections/snowflake', WithDecryption=True)
         conn = json.loads(parameter['Parameter']['Value'])
@@ -203,6 +213,7 @@ with DAG('py_virtual_env', schedule_interval=None, start_date=pendulum.datetime(
                 for i in installed_packages])
         print(installed_packages_list)
 
+        # Defining parameters for Airflow's Snowpark connection
         connection_parameters = {
             "account": conn['extra']['account'],
             "user": conn['login'],
@@ -213,10 +224,13 @@ with DAG('py_virtual_env', schedule_interval=None, start_date=pendulum.datetime(
             "schema": conn['schema'],
             "region": conn['extra']['region']
         }
+        # Creating a connection session between Snowpark and Airflow
         session = Session.builder.configs(connection_parameters).create()
+        # Running a SQL query in Snowpark
         df = session.sql('select avg(reps_upper), avg(reps_lower) from dog_intelligence;')
         print(df)
         print(df.collect())
+        # Closing the connection session
         session.close()
 
     task_print = print_context()
