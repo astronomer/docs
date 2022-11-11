@@ -5,9 +5,6 @@ id: set-up-data-lineage
 description: Configure your external systems to emit lineage data to Astro.
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 To generate lineage graphs for your data pipelines, you first need to configure your data pipelines to emit lineage data. Because lineage data can be generated in all stages of your pipeline, you can configure pipeline components outside of Astro, such as dbt or Databricks, to emit lineage data whenever they're running a job. Coupled with lineage data emitted from your DAGs, Astro generates a lineage graph that can provide context to your data before, during, and after it reaches your Deployment.
 
 Configuring a system to send lineage data requires:
@@ -180,9 +177,6 @@ In your Spark application, set the following properties to configure your lineag
 ### Verify
 
 To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Runs** page. Your recent Spark job run appears in the table of most recent runs.
-
-</TabItem>
-</Tabs>
 
 ## Make source code visible for Airflow operators
 
