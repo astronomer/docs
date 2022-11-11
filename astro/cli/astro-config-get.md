@@ -3,6 +3,7 @@ sidebar_label: "astro config get"
 title: "astro config get"
 id: astro-config-get
 description: Reference documentation for astro config get.
+hide_table_of_contents: true
 ---
 
 View the current configuration of your Astro project as defined in the `.astro/config.yaml` file. The configuration in this file contains details about how your project runs in a local Airflow environment, including your Postgres username and password, your Webserver port, and your project name.

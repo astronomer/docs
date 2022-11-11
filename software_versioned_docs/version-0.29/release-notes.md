@@ -28,6 +28,25 @@ To preserve duplicate keys in your Helm chart, you can either reapply the values
 
 :::
 
+## v0.29.5
+
+Release date: October 11, 2022
+
+### Additional improvements
+
+- Improved the startup time for the platform NATS server.
+- You can now configure a `livenessProbe` and `readinessProbe` specific to Prometheus in the Prometheus Helm chart.
+- You can now configure a specific `securityContext` for Fluentd Pods and containers in the Fluentd Helm chart.
+
+### Bug fixes 
+
+- Fixed an issue where upgrading Astronomer Software with a custom `houston.deployments.components` value in Helm could break the Software UI.
+- Fixed an issue where upgrading a Deployment from Airflow 1.10.15 to 2.3 can prevent you from configuring the Deployment's resources in the Software UI.
+- Fixed the following CVEs:
+
+    - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
+    - [CVE-2022-3224](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3224)
+
 ## v0.29.4
 
 Release date: September 13, 2022

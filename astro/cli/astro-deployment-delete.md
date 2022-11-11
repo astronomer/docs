@@ -3,7 +3,25 @@ sidebar_label: "astro deployment delete"
 title: "astro deployment delete"
 id: astro-deployment-delete
 description: Reference documentation for astro deployment delete.
+hide_table_of_contents: true
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+:::info  
+
+The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts. 
+
+:::
+
+<Tabs
+    defaultValue="astro"
+    values={[
+        {label: 'Astro', value: 'astro'},
+        {label: 'Software', value: 'software'},
+    ]}>
+<TabItem value="astro">
 
 Delete a Deployment on Astro. This command is functionally identical to deleting a Deployment via the Cloud UI.
 
@@ -23,12 +41,12 @@ astro deployment delete
 
 ## Options
 
-| Option            | Description                                                         | Possible Values         |
-| ----------------- | ------------------------------------------------------------------- | ----------------------- |
-| `<deployment-id>` | The ID of the Deployment to delete         | Any valid Deployment ID |
-| `-f`,`--force`    | Do not include a confirmation prompt before deleting the Deployment | ``                      |
-| `--workspace-id` | Specify a Workspace to delete a Deployment outside of your current Workspace | Any valid Workspace ID                                            |
-| `--deployment-name` | The name of the Deployment to delete. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
+| Option              | Description                                                                       | Possible Values           |
+| ------------------- | --------------------------------------------------------------------------------- | ------------------------- |
+| `<deployment-id>`   | The ID of the Deployment to delete                                                | Any valid Deployment ID   |
+| `-f`,`--force`      | Do not include a confirmation prompt before deleting the Deployment               | None                      |
+| `--workspace-id`    | Specify a Workspace to delete a Deployment outside of your current Workspace      | Any valid Workspace ID    |
+| `--deployment-name` | The name of the Deployment to delete. Use as an alternative to `<deployment-id>`. | Any valid Deployment name |
 
 ## Examples
 
@@ -41,7 +59,30 @@ $ astro deployment delete --deployment-name="My deployment"
 # Delete a Deployment by specifying its name.
 ```
 
-## Related Commands
+</TabItem>
+
+<TabItem value="software">
+
+Delete a Deployment on Astronomer Software. This command is functionally identical to deleting a Deployment with the Software UI.
+
+## Usage
+
+```sh
+astro deployment delete
+```
+
+## Options
+
+| Option                         | Description                                                                                                                                                                   | Possible Values         |
+| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `<deployment-id>` (_Required_) | The ID of the Deployment to delete                                                                                                                                            | Any valid Deployment ID |
+| `-h`,`--hard`                  | Deletes all infrastructure and records for this Deployment. See [Hard delete a Deployment](https://docs.astronomer.io/software/configure-deployment#hard-delete-a-deployment) | None                    |
+
+</TabItem>
+</Tabs>
+
+
+## Related commands
 
 - [`astro deployment create`](cli/astro-deployment-create.md)
 - [`astro deployment list`](cli/astro-deployment-list.md)

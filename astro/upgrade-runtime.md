@@ -2,15 +2,19 @@
 sidebar_label: 'Upgrade Runtime'
 title: 'Upgrade Astro Runtime'
 id: upgrade-runtime
-description: Upgrade your Deployment's version of Astro Runtime.
 ---
+
+<head>
+  <meta name="description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
+  <meta name="og:description" content="Learn how to upgrade the Astro Runtime version on your Deployments. To take advantage of new features and bug and security fixes, upgrade Astro Runtime when a new version becomes available." />
+</head>
 
 import {siteVariables} from '@site/src/versions';
 
 
 New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
-## Upgrade Considerations
+## Upgrade considerations
 
 Consider the following when you upgrade Astro Runtime:
 
@@ -72,7 +76,7 @@ Once you upgrade to a Deployment on Astro to a new version of Astro Runtime, you
 
 ## Step 4: Confirm your upgrade on Astro
 
-1. In the Cloud UI, go to **Your Workspaces** > **Deployments** and select your Deployment.
+1. In the Cloud UI, select a Workspace and then select a Deployment.
 2. Click **Open Airflow**.
 3. In the Airflow UI, scroll to the bottom of any page. You should see your new Runtime version in the footer:
 
@@ -86,13 +90,7 @@ This topic contains information about upgrading to specific versions of Astro Ru
 
 ### Runtime 5 (Airflow 2.3)
 
-### Incompatibility with dbt-core provider package
-
-The `dbt-core` provider package is currently incompatible with Runtime 5.0.0 and later. The root cause for this issue is not yet known. If `dbt-core` is listed in your Astro project `requirements.txt` file when you attempt to upgrade to Runtime 5.0.0 or later, the upgrade fails.
-
-To continue with the upgrade to Runtime 5.0.0 or later, remove `dbt-core` from your `requirements.txt` file. To continue running dbt Core jobs with Airflow, don't upgrade your current Runtime version or upgrade to Runtime version 4.2.x and wait until a fix is announced. 
-
-### Changes to the Airflow metadata database 
+#### Changes to the Airflow metadata database 
 
 Astro Runtime 5.0.0, based on Airflow 2.3, includes changes to the schema of the Airflow metadata database. When you first upgrade to Runtime 5.0.0, consider the following:
 

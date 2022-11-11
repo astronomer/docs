@@ -20,6 +20,22 @@ For more Astronomer Software release notes, see:
 
 All Astronomer Software versions are tested for scale, reliability and security on Amazon EKS, Google GKE, and Azure AKS. If you have questions or an issue to report, contact [Astronomer support](https://support.astronomer.io).
 
+## 0.25.15
+
+Release date: October 18, 2022
+
+### Bug fixes 
+
+- Fixed the following vulnerabilities:
+    - [CVE-2022-40674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674)
+    - [CVE-2022-44906](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-44906)
+    - [CVE-2022-32213](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32213)
+    - [CVE-2022-32214](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32214)
+    - [CVE-2022-32215](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32215)
+    - [CVE-2022-31129](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-31129)
+    - [CVE-2022-25878](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-25878)
+    - [CVE-2022-24785](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-24785)
+
 ## 0.25.14
 
 Release date: September 21, 2022

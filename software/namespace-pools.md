@@ -75,138 +75,138 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
 
 1. In a new manifest file, add the following configuration. Replace `<your-namespace-name>` with the namespace you want to add to the pool.
 
-   ```yaml
-   apiVersion: v1
-   kind: Namespace
-   metadata:
-     name: <your-namespace-name>
-   ---
-   apiVersion: rbac.authorization.k8s.io/v1
+    ```yaml
+    apiVersion: v1
+    kind: Namespace
+    metadata:
+      name: <your-namespace-name>
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: Role
+    metadata:
+      name: deployment-commander-role
+      namespace: <your-namespace-name>
+    rules:
+    - apiGroups: ["*"]
+      resources: ["*"]
+      verbs: ["list", "watch"]
+    - apiGroups: [""]
+      resources: ["configmaps"]
+      verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+    - apiGroups: ["keda.k8s.io"]
+      resources: ["scaledobjects"]
+      verbs: ["get", "create", "delete"]
+    - apiGroups: [""]
+      resources: ["secrets"]
+      verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watc
+    - apiGroups: [""]
+      resources: ["namespaces"]
+      verbs: ["get", "list", "patch", "update", "watch"]
+    - apiGroups: [""]
+      resources: ["serviceaccounts"]
+      verbs: ["create", "delete", "get", "patch"]
+    - apiGroups: ["rbac.authorization.k8s.io"]
+      resources: ["roles"]
+      verbs: ["*"]
+    - apiGroups: [""]
+      resources: ["persistentvolumeclaims"]
+      verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patc
+    - apiGroups: [""]
+      resources: ["pods"]
+      verbs: ["get", "list", "watch"]
+    - apiGroups: [""]
+      resources: ["endpoints"]
+      verbs: ["create", "delete", "get", "list", "update", "watch"]
+    - apiGroups: [""]
+      resources: ["limitranges"]
+      verbs: ["create", "delete", "get", "list", "watch", "patch"]
+    - apiGroups: [""]
+      resources: ["nodes"]
+      verbs: ["get", "list", "watch"]
+    - apiGroups: [""]
+      resources: ["nodes/proxy"]
+      verbs: ["get"]
+    - apiGroups: [""]
+      resources: ["persistentvolumes"]
+      verbs: ["create", "delete", "get", "list", "watch", "patch"]
+    - apiGroups: [""]
+      resources: ["replicationcontrollers"]
+      verbs: ["list", "watch"]
+    - apiGroups: [""]
+      resources: ["resourcequotas"]
+      verbs: ["create", "delete", "get", "list", "patch", "watch"]
+    - apiGroups: [""]
+      resources: ["services"]
+      verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+    - apiGroups: ["apps"]
+      resources: ["statefulsets"]
+      verbs: ["create", "delete", "get", "list", "patch", "watch"]
+    - apiGroups: ["apps"]
+      resources: ["deployments"]
+      verbs: ["create", "delete", "get", "patch","update"]
+    - apiGroups: ["autoscaling"]
+      resources: ["horizontalpodautoscalers"]
+      verbs: ["list", "watch"]
+    - apiGroups: ["batch"]
+      resources: ["jobs"]
+      verbs: ["list", "watch", "create", "delete"]
+    - apiGroups: ["batch"]
+      resources: ["cronjobs"]
+      verbs: ["create", "delete", "get", "list", "patch", "watch"]
+    - apiGroups: ["extensions"]
+      resources: ["daemonsets", "replicasets"]
+      verbs: ["list", "watch"]
+    - apiGroups: ["extensions"]
+      resources: ["deployments"]
+      verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+    - apiGroups: [""]
+      resources: ["events"]
+      verbs: ["create", "delete", "patch"]
+    - apiGroups: ["extensions"]
+      resources: ["ingresses"]
+      verbs: ["create", "delete", "get", "patch"]
+    - apiGroups: ["extensions"]
+      resources: ["ingresses/status"]
+      verbs: ["update"]
+    - apiGroups: ["networking.k8s.io"]
+      resources: ["ingresses"]
+      verbs: ["get", "create", "delete", "patch"]
+    - apiGroups: ["networking.k8s.io"]
+      resources: ["ingresses/status"]
+      verbs: ["update"]
+    - apiGroups: ["networking.k8s.io"]
+      resources: ["networkpolicies"]
+      verbs: ["create", "delete", "get", "patch"]
+    - apiGroups: ["rbac.authorization.k8s.io"]
+      resources: ["rolebindings"]
+      verbs: ["create", "delete", "get", "patch"]
+    - apiGroups: ["authentication.k8s.io"]
+      resources: ["tokenreviews"]
+      verbs: ["create", "delete"]
+    - apiGroups: ["authorization.k8s.io"]
+      resources: ["subjectaccessreviews"]
+      verbs: ["create", "delete"]
+    - apiGroups: ["kubed.appscode.com"]
+      resources: ["searchresults"]
+      verbs: ["get"]
+    - apiGroups: ["policy"]
+      resources: ["poddisruptionbudgets"]
+      verbs: ["create", "delete", "get"]
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      name: deployment-commander-rolebinding
+      namespace: <your-namespace-name> # Should be namespace you are granting access to
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
       kind: Role
-      metadata:
-        name: deployment-commander-role
-        namespace: <your-namespace-name>
-      rules:
-      - apiGroups: ["*"]
-        resources: ["*"]
-        verbs: ["list", "watch"]
-      - apiGroups: [""]
-        resources: ["configmaps"]
-        verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-      - apiGroups: ["keda.k8s.io"]
-        resources: ["scaledobjects"]
-        verbs: ["get", "create", "delete"]
-      - apiGroups: [""]
-        resources: ["secrets"]
-        verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
-      - apiGroups: [""]
-        resources: ["namespaces"]
-        verbs: ["get", "list", "patch", "update", "watch"]
-      - apiGroups: [""]
-        resources: ["serviceaccounts"]
-        verbs: ["create", "delete", "get", "patch"]
-      - apiGroups: ["rbac.authorization.k8s.io"]
-        resources: ["roles"]
-        verbs: ["*"]
-      - apiGroups: [""]
-        resources: ["persistentvolumeclaims"]
-        verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patch"]
-      - apiGroups: [""]
-        resources: ["pods"]
-        verbs: ["get", "list", "watch"]
-      - apiGroups: [""]
-        resources: ["endpoints"]
-        verbs: ["create", "delete", "get", "list", "update", "watch"]
-      - apiGroups: [""]
-        resources: ["limitranges"]
-        verbs: ["create", "delete", "get", "list", "watch", "patch"]
-      - apiGroups: [""]
-        resources: ["nodes"]
-        verbs: ["get", "list", "watch"]
-      - apiGroups: [""]
-        resources: ["nodes/proxy"]
-        verbs: ["get"]
-      - apiGroups: [""]
-        resources: ["persistentvolumes"]
-        verbs: ["create", "delete", "get", "list", "watch", "patch"]
-      - apiGroups: [""]
-        resources: ["replicationcontrollers"]
-        verbs: ["list", "watch"]
-      - apiGroups: [""]
-        resources: ["resourcequotas"]
-        verbs: ["create", "delete", "get", "list", "patch", "watch"]
-      - apiGroups: [""]
-        resources: ["services"]
-        verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-      - apiGroups: ["apps"]
-        resources: ["statefulsets"]
-        verbs: ["create", "delete", "get", "list", "patch", "watch"]
-      - apiGroups: ["apps"]
-        resources: ["deployments"]
-        verbs: ["create", "delete", "get", "patch","update"]
-      - apiGroups: ["autoscaling"]
-        resources: ["horizontalpodautoscalers"]
-        verbs: ["list", "watch"]
-      - apiGroups: ["batch"]
-        resources: ["jobs"]
-        verbs: ["list", "watch", "create", "delete"]
-      - apiGroups: ["batch"]
-        resources: ["cronjobs"]
-        verbs: ["create", "delete", "get", "list", "patch", "watch"]
-      - apiGroups: ["extensions"]
-        resources: ["daemonsets", "replicasets"]
-        verbs: ["list", "watch"]
-      - apiGroups: ["extensions"]
-        resources: ["deployments"]
-        verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-      - apiGroups: [""]
-        resources: ["events"]
-        verbs: ["create", "delete", "patch"]
-      - apiGroups: ["extensions"]
-        resources: ["ingresses"]
-        verbs: ["create", "delete", "get", "patch"]
-      - apiGroups: ["extensions"]
-        resources: ["ingresses/status"]
-        verbs: ["update"]
-      - apiGroups: ["networking.k8s.io"]
-        resources: ["ingresses"]
-        verbs: ["get", "create", "delete", "patch"]
-      - apiGroups: ["networking.k8s.io"]
-        resources: ["ingresses/status"]
-        verbs: ["update"]
-      - apiGroups: ["networking.k8s.io"]
-        resources: ["networkpolicies"]
-        verbs: ["create", "delete", "get", "patch"]
-      - apiGroups: ["rbac.authorization.k8s.io"]
-        resources: ["rolebindings"]
-        verbs: ["create", "delete", "get", "patch"]
-      - apiGroups: ["authentication.k8s.io"]
-        resources: ["tokenreviews"]
-        verbs: ["create", "delete"]
-      - apiGroups: ["authorization.k8s.io"]
-        resources: ["subjectaccessreviews"]
-        verbs: ["create", "delete"]
-      - apiGroups: ["kubed.appscode.com"]
-        resources: ["searchresults"]
-        verbs: ["get"]
-      - apiGroups: ["policy"]
-        resources: ["poddisruptionbudgets"]
-        verbs: ["create", "delete", "get"]
-      ---
-      apiVersion: rbac.authorization.k8s.io/v1
-      kind: RoleBinding
-      metadata:
-        name: deployment-commander-rolebinding
-        namespace: <your-namespace-name> # Should be namespace you are granting access to
-      roleRef:
-        apiGroup: rbac.authorization.k8s.io
-        kind: Role
-        name: deployment-commander-role # Should match name of Role
-      subjects:
-      - namespace: astronomer # Should match namespace where SA lives
-        kind: ServiceAccount
-        name: astronomer-commander # Should match service account name, above
-   ```
+      name: deployment-commander-role # Should match name of Role
+    subjects:
+    - namespace: astronomer # Should match namespace where SA lives
+      kind: ServiceAccount
+      name: astronomer-commander # Should match service account name, above
+    ```
 
 2. Save this file and name it `commander.yaml`.
 3. In the Kubernetes cluster hosting Astronomer Software, run `kubectl apply -f commander.yaml`.
@@ -238,7 +238,7 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
 
 After enabling the pre-created namespace pool, the namespaces you registered now appear as options when you create a new Deployment with the Software UI.
 
-![Kubernetes namespace option in the UI](https://assets2.astronomer.io/main/docs/astronomer-ui/kubernetes-namespace.png)
+![Kubernetes namespace option in the UI](/img/software/kubernetes-namespace.png)
 
 When you create Deployments with the CLI, you are prompted to select one of the available namespaces for your new Deployment.
 

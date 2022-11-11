@@ -3,6 +3,7 @@ sidebar_label: 'GCP'
 title: 'Install Astronomer Software on GCP GKE'
 id: install-gcp
 description: Install Astronomer Software on Google Cloud Platform (GCP).
+sidebar_custom_props: { icon: 'img/gcp.png' }
 ---
 
 This guide describes the steps to install Astronomer on Google Cloud Platform (GCP), which allows you to deploy and scale any number of [Apache Airflow](https://airflow.apache.org/) deployments within an [GCP Google Kubernetes Engine (GKE)](https://cloud.google.com/kubernetes-engine/) cluster.
@@ -255,7 +256,7 @@ As a next step, create a file named `config.yaml` in an empty directory.
 
 For context, this `config.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `config.yaml` file is the best place to do so.
 
-In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/docker/certs.d`, `ssl.enabled`, and `smtpUrl` with your own values. For more example configuration files, go [here](https://github.com/astronomer/astronomer/tree/master/configs).
+In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/docker/certs.d`, `ssl.enabled`, and `astronomer.houston.secret` with your own values. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
 
 
 ```yaml
@@ -327,15 +328,9 @@ astronomer:
           google:
             enabled: true # Lets users authenticate with Google
     secret:
-    - envName: "EMAIL__SMTP_URL"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
+    - envName: "<smtp_uri_secret>"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
       secretName: "astronomer-smtp"
       secretKey: "connection"
-```
-
- SMTP is required and will allow users to send and accept email invites to Astronomer. The SMTP URI will take the following form:
-
-```yml
-smtpUrl: smtps://USERNAME:PW@HOST/?pool=true
 ```
 
 These are the minimum values you need to configure for installing Astronomer. For information on additional configuration, read [What's Next](install-gcp-standard.md#whats-next).
@@ -372,7 +367,32 @@ helm install -f config.yaml --version=0.30 --namespace=astronomer <your-platform
 
 This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.30.x`.  For example, to install Astronomer Software v0.30.0, you specify `--version=0.30.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
 
+When you're defining `<your-platform-release-name>`, Astronomer recommends limiting the name to 12 characters to avoid operational issues.
+
 After you run the previous commands, a set of Kubernetes pods are generated in your namespace. These pods power the individual services required to run the Astronomer platform, including the Software UI and Houston API.
+
+### Alternative ArgoCD installation
+
+You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`. 
+
+Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
+
+1. Under the `global` section of your `config.yaml` file, add `enableArgoCDAnnotation: true`.
+   
+2. Create a new ArgoCD app. When creating the app, configure the following:
+
+    - **Path**: The filepath of your `config.yaml` file
+    - **Namespace**: The namespace you want to use for Astronomer
+    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer 
+    - **Repository URL**: `https://helm.astronomer.io`
+
+3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
+   
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
+   
+5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
+   
+6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
 
 ## Step 10: Verify that all Pods are up
 

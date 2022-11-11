@@ -3,6 +3,7 @@ sidebar_label: 'AWS'
 title: 'Install Astronomer Software on AWS EKS'
 id: install-aws
 description: Install Astronomer Software on Amazon Web Services (AWS).
+sidebar_custom_props: { icon: 'img/aws.png' }
 ---
 
 This guide describes the steps to install Astronomer Software on Amazon Web Services (AWS), which allows you to deploy and scale [Apache Airflow](https://airflow.apache.org/) within an AWS [Elastic Kubernetes Service](https://aws.amazon.com/eks/) (EKS) cluster.
@@ -232,7 +233,7 @@ As a next step, create a file named `config.yaml` in an empty directory.
 
 For context, this `config.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `config.yaml` file is the best place to do so.
 
-In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/docker/certs.d`, `ssl.enabled`, and `smtpUrl` with your own values. For more example configuration files, go [here](https://github.com/astronomer/astronomer/tree/master/configs).
+Copy and paste the following example into the `config.yaml` file. Replace `baseDomain`, `private-root-ca`, `/etc/docker/certs.d`, `astronomer.houston.secret`, and `ssl.enabled` with your own values. Additional example configurations are available in the [Astronomer GitHub configs repository](https://github.com/astronomer/astronomer/tree/master/configs).
 
 ```yaml
 #################################
@@ -281,10 +282,6 @@ nginx:
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations: {service.beta.kubernetes.io/aws-load-balancer-type: nlb} # Change to 'elb' if your node group is private and doesn't utilize a NAT gateway
 
-#################################
-### SMTP configuration
-#################################
-
 astronomer:
   houston:
     config:
@@ -305,7 +302,7 @@ astronomer:
           google:
             enabled: true # Lets users authenticate with Google
     secret:
-    - envName: "EMAIL__SMTP_URL"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
+    - envName: "<smtp-uri-secret>"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
       secretName: "astronomer-smtp"
       secretKey: "connection"
 ```
@@ -344,7 +341,32 @@ helm install -f config.yaml --version=0.30 --namespace=astronomer <your-platform
 
 This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.30.x`.  For example, to install Astronomer Software v0.30.0, you specify `--version=0.30.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
 
+When you're defining `<your-platform-release-name>`, Astronomer recommends limiting the name to 12 characters to avoid operational issues.
+
 After you run the previous commands, a set of Kubernetes pods are generated in your namespace. These pods power the individual services required to run the Astronomer platform, including the Software UI and Houston API.
+
+### Alternative ArgoCD installation
+
+You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`. 
+
+Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
+
+1. Under the `global` section of your `config.yaml` file, add `enableArgoCDAnnotation: true`.
+   
+2. Create a new ArgoCD app. When creating the app, configure the following:
+
+    - **Path**: The filepath of your `config.yaml` file
+    - **Namespace**: The namespace you want to use for Astronomer
+    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer 
+    - **Repository URL**: `https://helm.astronomer.io`
+
+3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
+   
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
+   
+5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
+   
+6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
 
 ## Step 10: Verify Pods are up
 
@@ -443,7 +465,7 @@ prometheus.astro.mydomain.com
 ```
 
 Example wildcard CNAME record:
-![aws-elb](https://assets2.astronomer.io/main/docs/ee/route53.png)
+![aws-elb](/img/software/route53.png)
 
 ## Step 12: Verify you can access the Software UI
 

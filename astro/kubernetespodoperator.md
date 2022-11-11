@@ -4,9 +4,14 @@ title: "Run the KubernetesPodOperator on Astro"
 id: kubernetespodoperator
 ---
 
+<head>
+  <meta name="description" content="Learn how to run the KubernetesPodOperator on Astro. This operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
+  <meta name="og:description" content="Learn how to run the KubernetesPodOperator on Astro. This operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
+</head>
+
 The [KubernetesPodOperator](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html) is one of the most powerful Apache Airflow operators. Similar to the Kubernetes executor, this operator dynamically launches a Pod in Kubernetes for each task and terminates each Pod once the task is complete. This results in an isolated, containerized execution environment for each task that is separate from tasks otherwise being executed by Celery workers.
 
-## Benefits of the KubernetesPodOperator
+## Benefits
 
 You can use the KubernetesPodOperator to:
 
@@ -30,7 +35,7 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
-## Set Up the KubernetesPodOperator
+## Set up the KubernetesPodOperator
 
 To use the KubernetesPodOperator in a DAG, add the following import statements and instantiation to your DAG file:
 
@@ -48,8 +53,6 @@ KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    is_delete_operator_pod=True,
-    in_cluster=True,
     task_id="<task-name>",
     get_logs=True,
 )
@@ -59,14 +62,12 @@ For each instantiation of the KubernetesPodOperator, you must specify the follow
 
 - `namespace = conf.get("kubernetes", "NAMESPACE")`: Every Deployment runs on its own Kubernetes namespace within a cluster. Information about this namespace can be programmatically imported as long as you set this variable.
 - `image`: This is the Docker image that the operator will use to run its defined task, commands, and arguments. The value you specify is assumed to be an image tag that's publicly available on [Docker Hub](https://hub.docker.com/). To pull an image from a private registry, see [Pull images from a Private Registry](kubernetespodoperator.md#run-images-from-a-private-registry).
-- `in_cluster=True`: When this value is set, your task will run within the cluster from which it's instantiated on Astro. This ensures that the Kubernetes Pod running your task has the correct permissions within the cluster. To run a KubernetesPodOperator task in a Kubernetes cluster outside of the Astro data plane, set `in_cluster=False`.
-- `is_delete_operator_pod=True`: This setting ensures that once a KubernetesPodOperator task is complete, the Kubernetes Pod that ran that task is terminated. This ensures that there are no unused Pods in your cluster taking up resources.
 
 This is the minimum configuration required to run tasks with the KubernetesPodOperator on Astro. To further customize the way your tasks are run, see the topics below.
 
-## Configure Task-Level Pod Resources
+## Configure task-level Pod resources
 
-Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, meaning that the operator could theoretically use any CPU and memory that's available in your cluster to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) per task.
+Astro automatically allocates resources to Pods created by the KubernetesPodOperator. Resources used by the KubernetesPodOperator are not technically limited, meaning that the operator could theoretically use any CPU and memory that's available in your cluster to complete a task. Because of this, Astronomer recommends specifying [compute resource requests and limits](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for each task.
 
 To do so, define a `kubernetes.client.models.V1ResourceRequirements` object and provide that to the `resources` argument of the KubernetesPodOperator. For example:
 
@@ -89,8 +90,6 @@ KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    is_delete_operator_pod=True,
-    in_cluster=True,
     resources=compute_resources,
     task_id="<task-name>",
     get_logs=True,
@@ -99,7 +98,47 @@ KubernetesPodOperator(
 
 Applying the code above ensures that when this DAG runs, it will launch a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod will terminate gracefully.
 
-## Run images from a Private Registry
+### Mount a temporary directory (_AWS only_)
+
+Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be used by tasks for ephemeral storage. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
+
+To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
+
+1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
+2. Mount and [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
+
+    ```python{5-14,26-27}
+    from airflow.configuration import conf
+    from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+    from kubernetes.client import models as k8s
+
+    volume = k8s.V1Volume(
+        name="cache-volume",
+        emptyDir={},
+    )
+
+    volume_mounts = [
+        k8s.V1VolumeMount(
+            mount_path="/cache", name="cache-volume"
+        )
+    ]
+
+    example_volume_test = KubernetesPodOperator(
+    namespace=namespace,
+    image="<your-docker-image>",
+    cmds=["<commands-for-image>"],
+    arguments=["<arguments-for-image>"],
+    labels={"<pod-label>": "<label-name>"},
+    name="<pod-name>",
+    resources=compute_resources,
+    task_id="<task-name>",
+    get_logs=True,
+    volume_mounts=volume_mounts,
+    volumes=[volume],
+    )
+    ```
+ 
+## Run images from a private registry
 
 By default, the KubernetesPodOperator expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, you'll need to create a Kubernetes Secret and then specify the Kubernetes Secret in your DAG. If your Docker image is hosted in an Amazon Elastic Container Registry (ECR) repository, see [Docker images hosted in private Amazon ECR repositories](#docker-images-hosted-in-private-amazon-ecr-repositories)
 
@@ -138,8 +177,6 @@ KubernetesPodOperator(
     arguments=["<arguments-for-image>"],
     labels={"<pod-label>": "<label-name>"},
     name="<pod-name>",
-    is_delete_operator_pod=True,
-    in_cluster=True,
     task_id="<task-name>",
     get_logs=True,
 )
@@ -183,4 +220,4 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 ## Related documentation
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
-- [KubernetesPodOperator Airflow Guide](https://www.astronomer.io/guides/kubepod-operator/)
+- [KubernetesPodOperator Airflow Guide](https://docs.astronomer.io/learn/kubepod-operator/)

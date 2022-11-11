@@ -48,7 +48,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, contact 
 - VPC ID of the target VPC
 - Classless Inter-Domain Routing (CIDR) block of the target VPC
 
-After receiving your request, Astronomer support initiates a peering request that must be accepted by the owner of the target VPC in your organization. After the VPC peering connection is established, the owner of the target VPC works with Astronomer support to update the routing tables of both VPCs to allow multidirectional traffic.
+After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
 
 #### DNS considerations for VPC peering
 
@@ -126,7 +126,7 @@ Authorization is the process of verifying a user or service's permissions before
 
 <Tabs
     defaultValue="AWS IAM roles"
-    groupId="authentication-options"
+    groupId="authorization-options"
     values={[
         {label: 'AWS IAM roles', value: 'AWS IAM roles'},
         {label: 'AWS access keys', value: 'AWS access keys'},

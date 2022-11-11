@@ -1,6 +1,6 @@
 ---
 sidebar_label: "GCP"
-title: "Astro Clusters on GCP"
+title: "GCP cluster configurations"
 id: resource-reference-gcp
 description: Reference of all supported infrastructure and configurations for new Astro clusters on Google Cloud Platform (GCP).
 sidebar_custom_props: { icon: 'img/gcp.png' }
@@ -41,7 +41,7 @@ Depending on the needs of your team, you may be interested in modifying certain 
 
 To create a new cluster on Astro with a specified configuration, read [Install on GCP](install-gcp.md) or [Create a cluster](create-cluster.md). For instructions on how to make a change to an existing cluster, see [Modify a cluster](modify-cluster.md).
 
-### GCP region
+### Supported regions
 
 Astro supports the following Google Cloud Platform (GCP) regions:
 

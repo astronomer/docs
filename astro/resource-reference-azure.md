@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Azure"
-title: "Astro Clusters on Microsoft Azure"
+title: "Microsoft Azure cluster configurations"
 id: resource-reference-azure
 description: Reference of all supported configurations for new Astro clusters on Microsoft Azure.
 sidebar_custom_props: { icon: 'img/azure.png' }
@@ -42,6 +42,9 @@ Astro supports the following Azure regions:
 - Canada Central
 - Central US
 - East US
+- Japan East
+- South Africa North
+- South Central US
 - West Europe
 - West US 3
 
@@ -63,10 +66,10 @@ The following table lists all available instance types for worker node pools, as
 
 | Node Instance Type               | CPU      | Memory      |
 | -------------------------------- | -------- | ----------- |
-| Standard_D4_v5 - 4/16            | 2.5 CPUs | 9.3 GiB MEM |
-| Standard_D8_v5 - 8/32            | 6.4 CPUs | 24 GiB MEM  |
-| Standard_D4d_v5 - 4/16 (Default) | 2.5 CPUs | 9.3 GiB MEM |
-| Standard_D8d_v5 - 8/32           | 6.4 CPUs | 24 GiB MEM  |
+| Standard_D4_v5           | 2.5 CPUs | 9.3 GiB MEM |
+| Standard_D8_v5         | 6.4 CPUs | 24 GiB MEM  |
+| Standard_D4d_v5 | 2.5 CPUs | 9.3 GiB MEM |
+| Standard_D8d_v5         | 6.4 CPUs | 24 GiB MEM  |
 
 If your Organization needs an instance type that supports a larger worker size, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md).
 
@@ -74,6 +77,6 @@ If your Organization needs an instance type that supports a larger worker size, 
 
 Each Astro cluster has a limit on how many nodes it can run at a time. This limit includes the worker nodes and system nodes managed by Astronomer.
 
-The default maximum node count for all nodes across your cluster is 20. A cluster's node count is most affected by the number of worker Pods that are executing Airflow tasks. See [Worker autoscaling logic](configure-deployment-resources.md#worker-autoscaling-logic).
+The default maximum node count for all nodes across your cluster is 20. A cluster's node count is most affected by the number of worker Pods that are executing Airflow tasks. See [Worker autoscaling logic](configure-worker-queues.md#worker-autoscaling-logic).
 
 If the node count for your cluster reaches the maximum node count, new tasks might not run or get scheduled. Astronomer support monitors the maximum node count and will contact your organization if it is reached. To check your cluster's current node count, contact [Astronomer Support](https://cloud.astronomer.io/support).

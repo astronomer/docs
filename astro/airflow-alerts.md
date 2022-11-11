@@ -5,19 +5,19 @@ id: airflow-alerts
 description: Set up email alerts for Airflow task successes and failures.
 ---
 
-For all teams, incorporating an alerting framework is critical to the health of your data pipelines. In addition to the observability functionality provided on Astro, Airflow's alerting framework includes support for:
+Incorporating an alerting framework is critical to the health of your data pipelines. In addition to the observability functionality provided on Astro, Apache Airflow supports:
 
 - Slack notifications
 - SLAs
 - Email alerts
 
-Slack alerts and SLAs do not require additional configuration on Astro. For best practices, see the Astronomer guide on [Airflow alerts](https://www.astronomer.io/guides/error-notifications-in-airflow).
+Slack alerts and SLAs do not require additional configuration on Astro. For best practices, see the Astronomer guide on [Airflow alerts](https://docs.astronomer.io/learn/error-notifications-in-airflow).
 
 This guide focuses on setting up email alerts on Astro with an SMTP service.
 
 ## Configure Airflow email alerts
 
-On Astro, setting up email alerts requires configuring an SMTP service for delivering each alert.
+On Astro, setting up email alerts requires configuring an SMTP service for delivering each alert. You can use a single SMTP service for your Organization, but email alerts have to be configured for each Deployment.
 
 If your organization isn't using an SMTP service currently, Astronomer recommends one of the following:
 
@@ -28,7 +28,7 @@ The following topics provide setup steps for integrating each of these external 
 
 ### Integrate with SendGrid
 
-[SendGrid](https://sendgrid.com/) is an email delivery service that's easy to set up for Airflow alerts. A free SendGrid account grants users 40,000 free emails within the first 30 days of an account opening and 100 emails per day after that. This should be more than enough emails for most alerting use cases.
+[SendGrid](https://sendgrid.com/) is an email delivery service that you can use to configure Airflow alerts. A free SendGrid account grants users 40,000 free emails within the first 30 days of an account opening and 100 emails per day after that. This should be enough emails for most alerting use cases.
 
 1. [Create a SendGrid account](https://signup.sendgrid.com). Be prepared to disclose some standard information about yourself and your organization.
 
@@ -42,7 +42,7 @@ The following topics provide setup steps for integrating each of these external 
 
 5. Verify your integration in SendGrid to confirm that the key was activated. If you get an error indicating that SendGrid can't find the test email, try rerunning the cURL code in your terminal before retrying the verification.
 
-6. Add the following line to your Astro project `requirements.txt` file to install the [SendGrid Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-sendgrid/stable/index.html):
+6. Add the following line to the `requirements.txt` file of your Astro project to install the [SendGrid Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-sendgrid/stable/index.html):
 
     ```text
     apache-airflow-providers-sendgrid
@@ -74,6 +74,8 @@ The following topics provide setup steps for integrating each of these external 
     'email': ['<recipient-address>'],
     ```
 
+Repeat steps 7-10 for each Deployment in which you want to configure Airflow alerts.
+
 ### Integrate with Amazon SES
 
 Use your existing Amazon SES instance to send Airflow alerts by email.
@@ -102,7 +104,7 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
     - Click **Download Credentials** or copy them and store them in a safe place.
     - Click **Close Window**.
 
-7. Log in to the Cloud UI, click **Deployments**, and then select an existing Deployment.
+7. In the Cloud UI, select a Workspace and then select a Deployment.
 
 8. In the environment variables area, click **Edit Variables** and add these variables:
     - `ENV AIRFLOW__SMTP__SMTP_HOST`: Enter the value you copied in step 5
@@ -122,3 +124,5 @@ Use your existing Amazon SES instance to send Airflow alerts by email.
     'email_on_failure': True,
     'email': ['<recipient-address>'],
     ```
+
+Repeat steps 7-10 for each Deployment in which you want to configure Airflow alerts.

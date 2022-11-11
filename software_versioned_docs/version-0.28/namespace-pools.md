@@ -56,169 +56,130 @@ For every namespace you want to add to a pool, you must create a [namespace](htt
       name: <your-namespace-name>
     ---
     apiVersion: rbac.authorization.k8s.io/v1
-       kind: Role
-       metadata:
-         name: deployment-commander-role
-         namespace: <your-namespace-name>
-       rules:
-       - apiGroups: ["*"]
-         resources: ["*"]
-         verbs: ["list", "watch"]
-       - apiGroups: [""]
-         resources: ["configmaps"]
-         verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-       - apiGroups: ["keda.k8s.io"]
-         resources: ["scaledobjects"]
-         verbs: ["get", "create", "delete"]
-       - apiGroups: [""]
-         resources: ["secrets"]
-         verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watch"]
-       - apiGroups: [""]
-         resources: ["namespaces"]
-         verbs: ["get", "list", "patch", "update", "watch"]
-       - apiGroups: [""]
-         resources: ["serviceaccounts"]
-         verbs: ["create", "delete", "get", "patch"]
-       - apiGroups: ["rbac.authorization.k8s.io"]
-         resources: ["roles"]
-         verbs: ["*"]
-       - apiGroups: [""]
-         resources: ["persistentvolumeclaims"]
-         verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patch"]
-       - apiGroups: [""]
-         resources: ["pods"]
-         verbs: ["get", "list", "watch"]
-       - apiGroups: [""]
-         resources: ["endpoints"]
-         verbs: ["create", "delete", "get", "list", "update", "watch"]
-       - apiGroups: [""]
-         resources: ["limitranges"]
-         verbs: ["create", "delete", "get", "list", "watch", "patch"]
-       - apiGroups: [""]
-         resources: ["nodes"]
-         verbs: ["get", "list", "watch"]
-       - apiGroups: [""]
-         resources: ["nodes/proxy"]
-         verbs: ["get"]
-       - apiGroups: [""]
-         resources: ["persistentvolumes"]
-         verbs: ["create", "delete", "get", "list", "watch", "patch"]
-       - apiGroups: [""]
-         resources: ["replicationcontrollers"]
-         verbs: ["list", "watch"]
-       - apiGroups: [""]
-         resources: ["resourcequotas"]
-         verbs: ["create", "delete", "get", "list", "patch", "watch"]
-       - apiGroups: [""]
-         resources: ["services"]
-         verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-       - apiGroups: ["apps"]
-         resources: ["statefulsets"]
-         verbs: ["create", "delete", "get", "list", "patch", "watch"]
-       - apiGroups: ["apps"]
-         resources: ["deployments"]
-         verbs: ["create", "delete", "get", "patch","update"]
-       - apiGroups: ["autoscaling"]
-         resources: ["horizontalpodautoscalers"]
-         verbs: ["list", "watch"]
-       - apiGroups: ["batch"]
-         resources: ["jobs"]
-         verbs: ["list", "watch", "create", "delete"]
-       - apiGroups: ["batch"]
-         resources: ["cronjobs"]
-         verbs: ["create", "delete", "get", "list", "patch", "watch"]
-       - apiGroups: ["extensions"]
-         resources: ["daemonsets", "replicasets"]
-         verbs: ["list", "watch"]
-       - apiGroups: ["extensions"]
-         resources: ["deployments"]
-         verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
-       - apiGroups: [""]
-         resources: ["events"]
-         verbs: ["create", "delete", "patch"]
-       - apiGroups: ["extensions"]
-         resources: ["ingresses"]
-         verbs: ["create", "delete", "get", "patch"]
-       - apiGroups: ["extensions"]
-         resources: ["ingresses/status"]
-         verbs: ["update"]
-       - apiGroups: ["networking.k8s.io"]
-         resources: ["ingresses"]
-         verbs: ["get", "create", "delete", "patch"]
-       - apiGroups: ["networking.k8s.io"]
-         resources: ["ingresses/status"]
-         verbs: ["update"]
-       - apiGroups: ["networking.k8s.io"]
-         resources: ["networkpolicies"]
-         verbs: ["create", "delete", "get", "patch"]
-       - apiGroups: ["rbac.authorization.k8s.io"]
-         resources: ["rolebindings"]
-         verbs: ["create", "delete", "get", "patch"]
-       - apiGroups: ["authentication.k8s.io"]
-         resources: ["tokenreviews"]
-         verbs: ["create", "delete"]
-       - apiGroups: ["authorization.k8s.io"]
-         resources: ["subjectaccessreviews"]
-         verbs: ["create", "delete"]
-       - apiGroups: ["kubed.appscode.com"]
-         resources: ["searchresults"]
-         verbs: ["get"]
-       - apiGroups: ["policy"]
-         resources: ["poddisruptionbudgets"]
-         verbs: ["create", "delete", "get"]
-       ---
-       apiVersion: rbac.authorization.k8s.io/v1
-       kind: RoleBinding
-       metadata:
-         name: deployment-commander-rolebinding
-         namespace: <your-namespace-name> # Should be namespace you are granting access to
-       roleRef:
-         apiGroup: rbac.authorization.k8s.io
-         kind: Role
-         name: deployment-commander-role # Should match name of Role
-       subjects:
-       - namespace: astronomer # Should match namespace where SA lives
-         kind: ServiceAccount
-         name: astronomer-commander # Should match service account name, above
-       ```
-
-2. Save this file and name it `commander.yaml`.
-3. In the Kubernetes cluster hosting Astronomer Software, run `kubectl apply -f commander.yaml`.
-4. Repeat steps 1-3 for every namespace you want to add to your pool.
-
-## Step 2: Configure a Namespace Pool in Astronomer
-
-To enable pre-created namespaces on Astronomer Software:
-
-1. Set the following values in your `config.yaml` file, making sure to specify all of the namespaces you configured in the `preCreatedNamespaces` object:
-
-    ```yaml
-    global:
-      # Make fluentd gather logs from all available namespaces
-      manualNamespaceNamesEnabled: true
-      clusterRoles: false
-
-    astronomer:
-      houston:
-        config:
-          deployments:
-
-            # Enable manual namespace names
-            manualNamespaceNames: true
-            # Pre-created namespace names
-            preCreatedNamespaces:
-              - name: <namespace-name-1>
-              - name: <namespace-name-2>
-              - name: <namespace-name-x>
-
-            # Allows users to immediately reuse a pre-created namespace by hard deleting the associated Deployment
-            # If set to false, you'll need to wait until a cron job runs before the Deployment record is deleted and the namespace is added back to the pool
-            hardDeleteDeployment: true
-
-      commander:
-        env:
-          - name: "COMMANDER_MANUAL_NAMESPACE_NAMES"
-            value: true
+    kind: Role
+    metadata:
+      name: deployment-commander-role
+      namespace: <your-namespace-name>
+    rules:
+    - apiGroups: ["*"]
+      resources: ["*"]
+      verbs: ["list", "watch"]
+    - apiGroups: [""]
+      resources: ["configmaps"]
+      verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+    - apiGroups: ["keda.k8s.io"]
+      resources: ["scaledobjects"]
+      verbs: ["get", "create", "delete"]
+    - apiGroups: [""]
+      resources: ["secrets"]
+      verbs: ["create", "delete", "deletecollection", "get", "list", "patch", "update", "watc
+    - apiGroups: [""]
+      resources: ["namespaces"]
+      verbs: ["get", "list", "patch", "update", "watch"]
+    - apiGroups: [""]
+      resources: ["serviceaccounts"]
+      verbs: ["create", "delete", "get", "patch"]
+    - apiGroups: ["rbac.authorization.k8s.io"]
+      resources: ["roles"]
+      verbs: ["*"]
+    - apiGroups: [""]
+      resources: ["persistentvolumeclaims"]
+      verbs: ["create", "delete", "deletecollection", "get", "list", "update", "watch", "patc
+    - apiGroups: [""]
+      resources: ["pods"]
+      verbs: ["get", "list", "watch"]
+    - apiGroups: [""]
+      resources: ["endpoints"]
+      verbs: ["create", "delete", "get", "list", "update", "watch"]
+    - apiGroups: [""]
+      resources: ["limitranges"]
+      verbs: ["create", "delete", "get", "list", "watch", "patch"]
+    - apiGroups: [""]
+      resources: ["nodes"]
+      verbs: ["get", "list", "watch"]
+    - apiGroups: [""]
+      resources: ["nodes/proxy"]
+      verbs: ["get"]
+    - apiGroups: [""]
+      resources: ["persistentvolumes"]
+      verbs: ["create", "delete", "get", "list", "watch", "patch"]
+    - apiGroups: [""]
+      resources: ["replicationcontrollers"]
+      verbs: ["list", "watch"]
+    - apiGroups: [""]
+      resources: ["resourcequotas"]
+      verbs: ["create", "delete", "get", "list", "patch", "watch"]
+    - apiGroups: [""]
+      resources: ["services"]
+      verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+    - apiGroups: ["apps"]
+      resources: ["statefulsets"]
+      verbs: ["create", "delete", "get", "list", "patch", "watch"]
+    - apiGroups: ["apps"]
+      resources: ["deployments"]
+      verbs: ["create", "delete", "get", "patch","update"]
+    - apiGroups: ["autoscaling"]
+      resources: ["horizontalpodautoscalers"]
+      verbs: ["list", "watch"]
+    - apiGroups: ["batch"]
+      resources: ["jobs"]
+      verbs: ["list", "watch", "create", "delete"]
+    - apiGroups: ["batch"]
+      resources: ["cronjobs"]
+      verbs: ["create", "delete", "get", "list", "patch", "watch"]
+    - apiGroups: ["extensions"]
+      resources: ["daemonsets", "replicasets"]
+      verbs: ["list", "watch"]
+    - apiGroups: ["extensions"]
+      resources: ["deployments"]
+      verbs: ["create", "delete", "get", "list", "patch", "update", "watch"]
+    - apiGroups: [""]
+      resources: ["events"]
+      verbs: ["create", "delete", "patch"]
+    - apiGroups: ["extensions"]
+      resources: ["ingresses"]
+      verbs: ["create", "delete", "get", "patch"]
+    - apiGroups: ["extensions"]
+      resources: ["ingresses/status"]
+      verbs: ["update"]
+    - apiGroups: ["networking.k8s.io"]
+      resources: ["ingresses"]
+      verbs: ["get", "create", "delete", "patch"]
+    - apiGroups: ["networking.k8s.io"]
+      resources: ["ingresses/status"]
+      verbs: ["update"]
+    - apiGroups: ["networking.k8s.io"]
+      resources: ["networkpolicies"]
+      verbs: ["create", "delete", "get", "patch"]
+    - apiGroups: ["rbac.authorization.k8s.io"]
+      resources: ["rolebindings"]
+      verbs: ["create", "delete", "get", "patch"]
+    - apiGroups: ["authentication.k8s.io"]
+      resources: ["tokenreviews"]
+      verbs: ["create", "delete"]
+    - apiGroups: ["authorization.k8s.io"]
+      resources: ["subjectaccessreviews"]
+      verbs: ["create", "delete"]
+    - apiGroups: ["kubed.appscode.com"]
+      resources: ["searchresults"]
+      verbs: ["get"]
+    - apiGroups: ["policy"]
+      resources: ["poddisruptionbudgets"]
+      verbs: ["create", "delete", "get"]
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      name: deployment-commander-rolebinding
+      namespace: <your-namespace-name> # Should be namespace you are granting access to
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: Role
+      name: deployment-commander-role # Should match name of Role
+    subjects:
+    - namespace: astronomer # Should match namespace where SA lives
+      kind: ServiceAccount
+      name: astronomer-commander # Should match service account name, above
     ```
 
 2. Save the changes in your `config.yaml` and update Astronomer Software as described in [Apply a Config Change](apply-platform-config.md).
@@ -229,7 +190,7 @@ You should now be able to create new Deployments using a namespace from your pre
 
 After enabling the pre-created namespace pool, the namespaces you registered earlier will appear as an option when creating a new Deployment via the Software UI.
 
-![Kubernetes Namespace option in the UI](https://assets2.astronomer.io/main/docs/astronomer-ui/kubernetes-namespace.png)
+![Kubernetes Namespace option in the UI](/img/software/kubernetes-namespace.png)
 
 When you create Deployments via the CLI, you will be prompted to select one of the available namespaces for your new Deployment.
 

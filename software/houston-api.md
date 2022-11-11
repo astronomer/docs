@@ -18,37 +18,40 @@ For example, you can:
 - Add a user to a Workspace
 - Make a user a System Administrator
 
-Anything you can do via the Software UI, you can do programmatically via Astronomer's Houston API. Read below for guidelines.
+Anything you can do with the Software UI, you can do programmatically with the Astronomer Houston API.
+
+:::info
+
+If you're using the Astronomer Houston API and you're migrating from Astronomer Certified (AC) to Astro Runtime, you'll need to replace `airflowVersion` arguments with `runtimeVersion` arguments in your scripts. For more information about migrating a Deployment from Astronomer Certified to Astro Runtime, see [Migrate a Deployment from Astronomer Certified to Astro Runtime](migrate-to-runtime.md).
+
+:::
 
 ## Getting started
 
-Astronomer's Houston API is made available via a [GraphQL Playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/), "a graphical, interative, in-browser GraphQL IDE, created by [Prisma](https://www.prisma.io/) and based on GraphiQL." [GraphQL](https://graphql.org/) itself is an open source query language for APIs that makes for an easy and simple way to manage data.
+The Astronomer Houston API is available in a [GraphQL Playground](https://www.apollogplatformraphql.com/docs/apollo-server/testing/graphql-playground/), "a graphical, interactive, in-browser GraphQL IDE, created by [Prisma](https://www.prisma.io/) and based on GraphiQL." [GraphQL](https://graphql.org/) itself is an open source query language for APIs that makes for an easy and simple way to manage data.
 
 In short, the Playground is a portal that allows you to write GraphQL queries directly against the API within your browser.
 
-> **Note:** For more information on Playground features applicable to the wider GraphQL community, check out [GraphQL Playground's Github](https://github.com/prisma/GraphQL-playground).
+For more information about the Playground features applicable to the wider GraphQL community, see [GraphQL Playground's Github](https://github.com/prisma/GraphQL-playground).
 
 ### Access the GraphQL playground
 
 The URL at which you can reach Houston's GraphQL playground depends on the platform you're running. For your installation of Astronomer, it will be `https://houston.BASEDOMAIN/v1/`.
 
-E.g. If you're a Software customer and your basedomain were `Astronomer`, you would navigate to https://houston.astronomer/v1/.
+For example, if you're a Software customer and your basedomain is `Astronomer`, you would navigate to https://houston.astronomer/v1/.
 
 ### Authenticate
 
-To query our API, you must first authenticate as an Astronomer user.
-
-To authenticate:
+To query the Astronomer Houston API, you must first authenticate as an Astronomer user.
 
 1. Go to https://app.BASEDOMAIN/token and copy the API token. Alternatively, note the **API Key** of a [service account](ci-cd.md#step-1-create-a-service-account).
 2. Open Astronomer's Houston API GraphQL Playground at `https://houston.BASEDOMAIN/v1`.
 3. Expand the `HTTP Headers` section on the bottom left of the page.
 4. Paste the API token you acquired from Step 1 in the following format: `{"authorization": "<api-token>"}`
 
-![Headers](https://assets2.astronomer.io/main/docs/ee/headers.png)
+![Headers](/img/software/headers.png)
 
 > **Note:** As you work with our API, you'll be restricted to actions allowed by both your existing role within the platform (e.g. SysAdmin or not) and your permissions within any particular Workspace (e.g. Viewer, Editor, Admin).
-
 
 ### Query types
 
@@ -64,7 +67,7 @@ This guide will stay away from Subscriptions.
 
 Once authenticated, you should be able to query all endpoints your user has access to. The [`Schema`](https://GraphQL.org/learn/schema/) tab fixed on the right-hand side of the page is a great reference for queries and mutations we support and how each of them is structured.
 
-![Schema](https://assets2.astronomer.io/main/docs/ee/graphql_schema.png)
+![Schema](/img/software/graphql_schema.png)
 
 ## Sample queries
 
@@ -108,7 +111,7 @@ query workspaceDeployments {
 
 To view results, press the "Play" button in middle of the page and see them render on the right side of the page.
 
-![Query](https://assets2.astronomer.io/main/docs/ee/deployment_query.gif)
+![Query](/img/software/deployment_query.gif)
 
 ### Query a user
 
@@ -428,4 +431,4 @@ Unlike the `label` and `createdAt` fields, notice that the `users` type field re
 
 To know which fields you can or must specify, reference the "Schema" on the righthand side of the page. As is the case here, custom types are often composed of other custom types.
 
-![Custom Type](https://assets2.astronomer.io/main/docs/ee/deployments_custom_typeschema.png)
+![Custom Type](/img/software/deployments_custom_typeschema.png)

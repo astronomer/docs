@@ -46,7 +46,7 @@ You can access the past 24 hours of scheduler logs for any Deployment on its **L
 
 1. In the Cloud UI, select a Workspace and then a Deployment.
 
-2. Click **Logs**.
+2. Click the **Logs** tab.
 
 3. Optional. Select one or more options in the **Log Level** menu and click **Apply**. These are the available options:
 
@@ -66,8 +66,8 @@ Typically, this indicates that the Deployment you selected does not currently ha
 
 Astro supports forwarding Airflow task logs to [Datadog](https://www.datadoghq.com/). You only need to enable Datadog once for each Astro cluster. After you enable Datadog, task logs from all Deployments in the cluster are exported.
 
-Astro also supports exporting Airflow metrics to Datadog. See [Export Airflow metrics to Datadog](deployment-metrics.md#export-airflow-metrics-to-datadog).
-
 1. Create a new Datadog API key or copy an existing API key. See [API and Application Keys](https://docs.datadoghq.com/account_management/api-app-keys/).
 2. Identify the Astro cluster from which you want to forward task logs.
 3. Submit a request to [Astronomer support](https://cloud.astronomer.io/support) with your Datadog API key, the name of your Astro cluster, and the [Datadog Site](https://docs.datadoghq.com/getting_started/site/) where you want the logs forwarded.
+
+Astro also supports exporting Airflow metrics to Datadog. See [Export Airflow metrics to Datadog](deployment-metrics.md#export-airflow-metrics-to-datadog).

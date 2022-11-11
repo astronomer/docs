@@ -46,7 +46,7 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC, contact [
 - VPC ID of the target VPC
 - Classless Inter-Domain Routing (CIDR) block of the target VPC
 
-After receiving your request, Astronomer support initiates a peering request that must be accepted by the owner of the target VPC in your organization. After the VPC peering connection is established, the owner of the target VPC works with Astronomer support to update the routing tables of both VPCs to allow multidirectional traffic.
+After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
 
 </TabItem>
 
@@ -75,7 +75,7 @@ To allow data pipelines running on GCP to access Google Cloud services in a secu
 
 To grant a Deployment on Astro access to external data services on GCP, such as BigQuery:
 
-1. In the Cloud UI, select a Deployment and then copy the value in the **Namespace** field.
+1. In the Cloud UI, select a Workspace, select a Deployment, and then copy the value in the **Namespace** field.
 
 2. Use the Deployment namespace value and the name of your Google Cloud project to identify the Google service account for your Deployment.
 

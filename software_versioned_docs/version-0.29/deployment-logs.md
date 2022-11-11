@@ -37,7 +37,7 @@ In the dropdown on the top-right, you'll see a button where you can toggle betwe
 - Webserver
 - Workers (*if applicable*)
 
-![Webserver Logs Page](https://assets2.astronomer.io/main/docs/logs/logs-webserver.png)
+![Webserver Logs Page](/img/software/logs-webserver.png)
 
 ### Filter by time/date
 
@@ -54,4 +54,4 @@ To adjust this filter, toggle the top right menu.
 
 On Astronomer, you can search for logs with a text string on the top right.
 
-![Search Logs](https://assets2.astronomer.io/main/docs/logs/logs-search.png)
+![Search Logs](/img/software/logs-search.png)

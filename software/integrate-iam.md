@@ -314,7 +314,7 @@ astronomer:
     ```bash
       kubectl run -it \
       --image google/cloud-sdk:slim \
-      --serviceaccount <airflow-worker> \
+      --overrides='{ "spec": { "serviceAccount": "<airflow-worker-service-account-name>" } }' \
       --namespace <your-airflow-namespace> \
       workload-identity-test
     ```

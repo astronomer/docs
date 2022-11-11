@@ -1,69 +1,107 @@
-/*
-Hide color mode toggle in small viewports
- */
-@media (max-width: 996px) {
-  .colorModeToggle {
-    display: none;
-  }
-}
-
 .colorModeToggle {
   margin-right: 1rem;
 }
 
 .button {
-  --white: #fff;
-  --black: #000;
-  --mint-1: #effbf9;
-  --mint-2: #cff2ec;
-  --mint-3: #9ee5d9;
-  --mint-4: #6fd7c6;
-  --mint-5: #4fceba;
-  --mint-6: #30b09c;
-  --mint-7: #26907f;
-  --mint-8: #1b6054;
-  --mint-9: #134038;
-  --gray-1: #f2f4f7;
-  --gray-2: #e9ebf0;
-  --gray-3: #dadce0;
-  --gray-4: #c4c7cd;
-  --gray-5: #9ba0a8;
-  --gray-6: #858993;
-  --gray-7: #65686f;
-  --gray-8: #414246;
-  --gray-9: #1a1c1f;
-
   display: inline-block;
   position: relative;
   text-decoration: none;
-  padding: 3px 30px 2px 30px !important;
-  font-size: 0.95rem;
+  padding: 9px 1rem 9px 1rem !important;
+  font-size: 12px;
   font-weight: 600;
-  background-color: var(--mint-3);
-  color: var(--gray-8);
-  box-shadow: 0 1px 1px 0 rgba(65, 66, 70, 0.3);
+  background-color: var(--mint-300);
+  color: var(--gray-800);
   border-radius: 50rem;
   transition: all 0.3s ease;
   cursor: pointer;
-  min-width: 120px;
-  background: linear-gradient(var(--mint-3), var(--mint-3)) padding-box,
-    linear-gradient(to bottom, var(--mint-2), var(--mint-4)) border-box;
+  min-width: 86px;
+  background: var(--mint-300);
   border: 1px solid transparent;
 }
 
 .button:hover {
-  color: var(--gray-8);
+  color: var(--gray-800);
   text-decoration: none;
-  background: linear-gradient(var(--mint-5), var(--mint-5)) padding-box,
-    linear-gradient(to bottom, var(--mint-5), var(--mint-5)) border-box;
+  background: var(--mint-500);
 }
 
 .button:visited {
-  color: var(--gray-8);
+  color: var(--gray-800);
+}
+
+.button__outline,
+.button__outline:visited {
+  color: var(--purple-300);
+  border-color: var(--purple-300);
+  background: none;
+  margin-right: 0.75rem;
+}
+
+.button__outline:hover {
+  color: var(--purple-600);
+  border-color: var(--purple-300);
+  background: var(--purple-300);
+}
+
+a.navbar__logolink {
+  font-weight: 600;
+  color: var(--purple-400);
+  font-size: 15px;
+  position: relative;
+}
+
+a.navbar__logolink::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: -14px;
+  height: 32px;
+  width: 2px;
+  background-color: var(--purple-600);
+}
+
+.navbar,
+.navbar-sidebar__brand {
+  background-color: #554288;
+}
+
+.navbar {
+  height: 128px;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  padding: 0;
+}
+
+.navbar__wrapper {
+  padding-inline: 1rem;
+  display: flex;
+}
+
+.navbar__bottom {
+  background-color: var(--gray-100);
+}
+
+html[data-theme="dark"] .navbar__bottom {
+  background-color: var(--purple-900);
+}
+
+@media screen and (min-width: 1000px) {
+  .navbar__top .colorModeToggle,
+  .navbar__bottom .button {
+    display: none;
+  } 
 }
 
 @media screen and (max-width: 999px) {
-  .button {
+  .navbar__bottom .colorModeToggle,
+  .navbar__top .button {
     display: none;
+  }
+
+  .navbar__top .colorModeToggle {
+    margin-right: 2.5rem;
+  }
+  .navbar__top .colorModeToggle button {
+    color: white;
   }
 }

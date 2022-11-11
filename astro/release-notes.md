@@ -2,18 +2,159 @@
 sidebar_label: 'Astro'
 title: 'Astro release notes'
 id: release-notes
-description: A real-time reference of the latest features and bug fixes in Astro.
 ---
 
-<!--- Version-specific -->
+<head>
+  <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
+  <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
+</head>
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 6.0.1 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 6.0.3 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.6.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
+
+## November 8, 2022
+
+### Deploy only DAGs with `astro deploy -—dags`
+
+Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and gives you more flexibility in how you configure CI/CD processes.
+
+For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+
+### Improved data lineage interface
+
+The **Lineage** tab has new features and is better integrated into the Cloud UI.
+
+![Updated lineage page](/img/release-notes/lineage-integrated.png)
+
+Specifically, the tab includes the following improvements:
+
+- The process for comparing runs uses a simpler interface and provides more information about the runs you're comparing. See [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
+- Names for UI elements have been updated to more clearly represent Airflow resources. For example, **jobs** is now **runs**, and the **Explore** tab is now **Runs**.
+- Lineage graphs include new colors and animations to show the flow of data as it moves between runs and datasets. 
+
+### Transfer a Deployment
+
+You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace.
+
+See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
+
+### Additional improvements 
+ 
+- The Kubernetes API is no longer exposed to the public internet on AWS data planes. The allowlist is limited to control plane IPs. New clusters will be created with this configuration, while all existing clusters will be updated by end of next week.
+
+## November 1, 2022 
+
+### Introducing the Astro Cloud IDE, a new Airflow development experience
+
+Astronomer is excited to introduce the Astro Cloud IDE, which is a notebook-inspired development environment for writing, running, and deploying data pipelines. Now you can develop an entire Airflow project, including DAGs, dependencies, and connections entirely within the Cloud UI.
+
+![Example page in the Astro Cloud IDE](/img/release-notes/ide-overview.png)
+
+The Astro Cloud IDE was created with the following objectives:
+
+- Configuring Airflow shouldn't be a barrier to running Airflow.
+- Passing data between tasks should be seamless regardless of what language is used to write the task.
+- Data pipelines should be quick to deploy and easy to test with CI/CD.
+
+Most importantly, the Astro Cloud IDE was developed to make it easier for new Airflow users to get started and to provide experienced users with a robust development environment.
+
+To create your first project in the Astro Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
+
+:::info
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
+### Additional improvements 
+
+- In the Cloud UI, cluster selection menus are now alphabetized.
+
+### Bug fixes 
+
+- Fixed an issue where the KubernetesPodOperator was not aware of available ephemeral storage in `m5d` and `m6id` worker nodes. This issue resulted in Pods being evicted to free up storage even when there was enough available storage for tasks.
+- Fixed an issue in the Cloud UI where you could select a worker type before selecting a cluster when creating a Deployment.
+- Fixed an issue where Deployments on Runtime 5.0.10 and earlier showed a nonfunctional **Configuration** tab in the Airflow UI.
+- Fixed [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-32149).
+
+## October 25, 2022 
+
+### Additional improvements 
+
+- In the Cloud UI, you can now view a cluster's external IP addresses in the **Clusters** tab.
+
+### Bug fixes 
+
+- Fixed an issue where some Deployments were running tasks after being deleted. 
+
+## October 18, 2022 
+
+### Additional improvements 
+
+- In the Cloud UI, **Access** has been moved from the left menu to a tab on the **Workspace Settings** page.
+- In the Cloud UI, **Workspace Settings** in the left menu is now available to all Workspace members.
+
+### New Azure regions
+
+You can now [create an Astro cluster on Azure](create-cluster.md) in the following regions:
+
+- `japaneast` 
+- `southafricanorth` 
+- `southcentralus` 
+  
+## October 11, 2022 
+
+### Additional improvements 
+
+- New worker node pools on Azure and Google Cloud Platform (GCP) clusters can now scale to zero. When you set your minimum worker count to 0, you don't incur costs for enabling a new worker type for your cluster until it's used in a Deployment.
+
+### Bug fixes 
+
+- Fixed an issue where worker queues with a minimum worker count of zero would appear with a minimum worker count of one in the Cloud UI.
+
+## October 4, 2022 
+
+### New permissions boundary for managed AWS Accounts
+
+The operational roles that Astronomer assumes on dedicated customer AWS accounts now have new [permissions boundaries](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html) that limit the roles to a subset of their permissions. The remote management role is now limited to the following actions across all contexts:
+
+- `autoscaling:*`
+- `cloudformation:*`
+- `cloudwatch:*`
+- `ec2:*`
+- `ecr:*`
+- `eks:*`
+- `elasticloadbalancing:*`
+- `iam:*OpenID*`
+- `kms:DescribeKey`
+- `lambda:*`
+- `logs:*`
+- `route53:AssociateVPCWithHostedZone`
+- `s3:*`
+- `secretsmanager:*`
+- `servicequotas:*`
+- `ssm:*`
+- `tag:*`
+
+These permissions might change in the future to enable new Astro features or to refine permissions for specific contexts. 
+
+### Additional improvements 
+
+- Users with the required permissions can now access a **Configuration** tab in the **Admin** menu of the Airflow UI. This page no longer shows sensitive values in plain-text and can be used to verify all configurations running on your Deployment.
+- In the Cloud UI, the maximum time for Deployment metrics has been extended from 24 hours to 7 days.
+- The [Deployment metrics overview](deployment-metrics.md#deployment-overview) now shows metrics for the `default` worker queue instead of an aggregate of all worker queues. Improved worker queue metrics coming soon.
+
+### Bug fixes 
+
+- Added the global environment variable `AIRFLOW__LOGGING__DAG_PROCESSOR_LOG_TARGET=stdout` so that a scheduler's logs don't overcrowd its local storage
+- Removed misleading maximum CPU and memory lines from Deployment metric graphs
 
 ## September 28, 2022 
 
@@ -35,13 +176,7 @@ All of a Deployment's configurations, including analytics, API keys, environment
 
 ![New organization of Deployment-level pages in the Cloud UI](/img/release-notes/deployment-tabs.png)
 
-This new UI moves the **Analytics** and **Logs** from the left sidebar to the main Deployment page so that you longer have to filter those views separately by Deployment. The left sidebar now exclusively contains Workspace-level menus.
-
-### Data plane cost tuning
-
-Astronomer has modified the default resource usage of Astro clusters to improve infrastructure cost for Astro customers. In addition to minor improvements to node autoscaling behavior:
-
-- New worker node pools on Amazon Web Services (AWS) clusters can now scale to zero. This means that enabling a new worker type for your cluster does not cost you until it's used in a Deployment.
+This new UI moves the **Analytics** and **Logs** from the left sidebar to the main Deployment page so that you no longer have to filter those views separately by Deployment. The left sidebar now exclusively contains Workspace-level menus.
 
 ### New Account Dashboard
 
@@ -52,6 +187,7 @@ You can now access your Account Dashboard to manage your user account settings a
 ### Additional improvements
 
 - You can now use the `m6id` worker node type series for Deployments on AWS clusters. This worker type is general purpose and includes significant storage as well as up to 15% better performance compared to `m5d` nodes. For more information, see [Worker instance types](resource-reference-aws.md#worker-node-types).
+- New worker node pools on Amazon Web Services (AWS) clusters can now scale to zero. This means that enabling a new worker type for your cluster does not cost you until it's used in a Deployment.
 
 ### Bug fixes
 
@@ -372,7 +508,7 @@ For example, if an Airflow task failed because the schema of a database changed,
 
 To learn more about data lineage and how you can configure it on Astro, see:
 
-- [Data lineage Concepts](data-lineage-concepts.md)
+- [Integrate Airflow and OpenLineage](https://docs.astronomer.io/learn/airflow-openlineage)
 - [Enable data lineage for External Services](set-up-data-lineage.md)
 - [Data lineage on Astro](data-lineage.md)
 - [Data lineage Support and Compatibility](data-lineage-support-and-compatibility.md)
@@ -465,7 +601,7 @@ A few additional notes about this upgrade:
 - Because Astronomer is upgrading each customer individually over time, the exact date that you will start seeing these logs will vary.
 - When you push code to a Deployment on Runtime 4.2.0+ and trigger this update, all other Deployments on Runtime 4.2.0+ in the same Workspace will also restart in order to receive the lineage backend update. If you plan to push code to any Deployment affected by this change, then we recommend doing so at a time where you can tolerate some Airflow components restarting. For more information about expected behavior, see [What Happens During a Code Deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
-For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://www.astronomer.io/guides/airflow-openlineage).
+For more information about what to expect when lineage tools go live, read Astronomer's [OpenLineage and Airflow guide](https://docs.astronomer.io/learn/airflow-openlineage).
 
 ### New AWS regions available
 
@@ -669,7 +805,7 @@ The **Scheduler Logs** tab in the Cloud UI has been updated to make logs easier 
 
 ### Removal of worker termination grace period
 
-The **Worker Termination Grace Period** setting is no longer available in the Cloud UI or API. Previously, users could set this to anywhere between 1 minute and 24 hours per Deployment. This was to prevent running tasks from being interrupted by a code push. Today, however, existing Celery workers don't have to terminate in order for new workers to spin up and start executing tasks. Instead, existing workers will continue to execute running tasks while a new set of workers gets spun up concurrently to start executing most recent code.
+The **Worker Termination Grace Period** setting is no longer available in the Cloud UI or API. Previously, users could set this to anywhere between 1 minute and 24 hours per Deployment. This was to prevent running tasks from being interrupted by a code push. Today, however, existing Celery workers don't have to terminate in order for new workers to spin up and start executing tasks. Instead, existing workers will continue to execute running tasks while a new set of workers gets spun up concurrently to start executing the most recent code.
 
 To simplify Deployment configuration and reflect current functionality:
 
@@ -800,7 +936,7 @@ To start, the homepage is now a global view. From here, you can now see all Work
 
 ![New global menu in the UI](/img/docs/ui-release-note1.png)
 
-You can now also select specific Workspaces to work in. When you click in to a Workspace, you'll notice the lefthand menu bar is now entirely dedicated to Workspace actions:
+You can now also select specific Workspaces to work in. When you click in to a Workspace, you'll notice the left menu bar is now entirely dedicated to Workspace actions:
 
 - The Rocket icon brings you to the **Deployments** menu.
 - The People icon brings you to the **Workspace Access** menu.
@@ -810,7 +946,7 @@ To return to the global menu, you can either click the Astro "A" or click the Wo
 
 ![New Workspace menu in the UI](/img/docs/ui-release-note2.png)
 
-All user configurations can be found by clicking your user profile picture in the upper righthand corner of the UI. From the dropdown menu that appears, you can both configure user settings and access other Astronomer resources such as documentation and the Astronomer Registry.
+All user configurations can be found by clicking your user profile picture in the upper right corner of the UI. From the dropdown menu that appears, you can both configure user settings and access other Astronomer resources such as documentation and the Astronomer Registry.
 
 ![New profile menu in the UI](/img/docs/ui-release-note3.png)
 
@@ -890,7 +1026,7 @@ This release introduces a breaking change to code deploys via the Astro CLI. Sta
 
 ### Support for Deployment API keys
 
-Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see [Deployment API keys](api-keys.md). For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](ci-cd.md). Support making requests to Airflow's REST API using API keys is coming soon.
+Astro now officially supports Deployment API keys, which you can use to automate code pushes to Astro and integrate your environment with a CI/CD tool such as GitHub Actions. For more information on creating and managing Deployment API keys, see [Deployment API keys](api-keys.md). For more information on using Deployment API keys to programmatically deploy code, see [CI/CD](ci-cd.md). Support for making requests to Airflow's REST API using API keys is coming soon.
 
 ## September 3, 2021
 

@@ -8,7 +8,7 @@ description: Get Astro support when you need it.
 In addition to product documentation, the following resources are available to help you resolve issues:
 
 - [Astronomer Forum](https://forum.astronomer.io)
-- [Airflow Guides](https://www.astronomer.io/guides/)
+- [Airflow Guides](https:/docs.astronomer.io/learn/)
 
 If you're experiencing an issue or have a question that requires Astronomer expertise, or if you want to [modify a cluster configuration](modify-cluster.md), use one of the following methods to contact Astronomer support:
 
@@ -50,6 +50,7 @@ Examples:
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
+- You have lost use of a Public Preview feature that does not affect general services. 
 
 **P4:** Low impact. Astro is fully usable but you have a question for our team.
 
@@ -57,6 +58,7 @@ Examples:
 
 - There are package incompatibilities caused by a specific, complex use case.
 - You have questions about best practices for an action in Airflow or on Astro.
+- You have an inquiry or a small bug report for a Public Preview feature.
 - You have a feature request related to Astro or Airflow.
 
 ### Be as descriptive as possible

@@ -5,6 +5,10 @@ id: overview
 description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
 ---
 
+import AstroCard from '@site/src/components/AstroCard';
+
+<AstroCard />
+
 ## Overview
 
 Astronomer Software is the best way to run Apache Airflow in your private cloud. Using Astronomer's tooling, you can have fine-tuned control over every aspect of your Airflow experience.

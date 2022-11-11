@@ -2,14 +2,37 @@
 sidebar_label: 'Astro Runtime'
 title: 'Astro Runtime release notes'
 id: runtime-release-notes
-description: Release notes for Astro Runtime, the differentiated Apache Airflow experience and execution framework.
+toc_min_heading_level: 2
 ---
+
+<head>
+  <meta name="description" content="This is where you’ll find information about the latest Astro Runtime features and functionality. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework." />
+  <meta name="og:description" content="This is where you’ll find information about the latest Astro Runtime features and functionality. Astro Runtime is a Docker image built by Astronomer that provides a differentiated Apache Airflow experience and execution framework." />
+</head>
 
 <!--version-specific-->
 
 Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. Note that some changes to Runtime might be omitted based on their availability in Astro.
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+## Astro Runtime 6.0.3
+
+- Release date: October 24, 2022
+- Airflow version: 2.4.2
+
+### Airflow 2.4.2
+
+Astro Runtime 6.0.3 includes same-day support for Airflow 2.4.2. Some changes in Airflow 2.4.2 include:
+
+- Handle mapped tasks in task duration chart ([#26722](https://github.com/apache/airflow/pull/26722))
+- Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059)
+
+For a complete list of commits, see the [Apache Airflow 2.4.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-2-2022-10-23.
+
+### Additional improvements  
+
+- Upgraded `openlineage-airflow` to 0.15.1, which includes a dedicated Airflow development environment. You can now create and test changes to custom OpenLineage extractors in an Airflow environment without needing to rebuild your Docker images. For more information, see the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 
 ## Astro Runtime 6.0.2
 
@@ -68,8 +91,52 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 
 ### Additional improvements
 
-- Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of operators from the dbt provider package. see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
+- Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of the operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
 - Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+
+## Astro Runtime 5.0.12
+
+- Release date: November 9, 2022
+- Airflow version: 2.3.4
+
+### Backported Airflow bug fixes
+
+Astro Runtime 5.0.12 includes the following bug fixes from Apache Airflow 2.4.2:
+
+- Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059))
+- Avoid 500 on dag redirect ([#27064](https://github.com/apache/airflow/pull/27064))
+- Don’t overwrite connection extra with invalid json ([#27142](https://github.com/apache/airflow/pull/27142))
+- Simplify origin string cleaning ([#27143](https://github.com/apache/airflow/pull/27143))
+
+## Astro Runtime 5.0.11
+
+- Release date: November 2, 2022
+- Airflow version: 2.3.4
+
+### Backported Airflow bug fixes
+
+Astro Runtime 5.0.11 includes the following bug fix from later Apache Airflow releases:
+
+- Fix warning when using xcomarg dependencies ([#26801](https://github.com/apache/airflow/pull/26801))
+
+### Bug fixes
+
+- Removed the default value for `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER`, as this value is now set in the Astro data plane. This enables Astronomer Software users to set a value for custom remote logging storage solutions. 
+
+## Astro Runtime 5.0.10
+
+- Release date: October 17, 2022
+- Airflow version: 2.3.4
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.10.0, which includes two new deferrable versions of operators, `SFTPSensorAsync` and `ExternalDeploymentTaskSensorAsync`. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.10.0/CHANGELOG.rst).
+- Upgraded `openlineage-airflow` to version `0.15.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+
+### Bug fixes
+
+- Revert “Cache the custom secrets backend so the same instance gets re-used” ([#25556](https://github.com/apache/airflow/pull/25556))
+- Fixed faulty Kubernetes executor config serialization logic
 
 ## Astro Runtime 5.0.9
 
@@ -222,7 +289,7 @@ For more information, see the [changelog for Apache Airflow 2.3.1](https://githu
 
 ### Astronomer Providers 1.2.0
 
-Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/)). This release includes 5 new [deferrable operators](deferrable-operators.md):
+Astro Runtime 5.0.1 includes v1.2.0 of the `astronomer-providers` package ([CHANGELOG](https://astronomer-providers.readthedocs.io/en/stable/)). This release includes 5 new [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators):
 
     - `DataprocSubmitJobOperatorAsync`
     - `EmrContainerSensorAsync`
@@ -242,14 +309,6 @@ To access the source code of this package, visit the [Astronomer Providers GitHu
 - Release date: April 30, 2022
 - Airflow version: 2.3.0
 
-:::danger Breaking change
-
-The `dbt-core` provider package is currently incompatible with Runtime 5.0.0 and later. The root cause for this issue is not yet known. If `dbt-core` is listed in your Astro project `requirements.txt` file when you attempt to upgrade to Runtime 5.0 or later, the upgrade fails.
-
-To upgrade to Runtime 5.0.0 or later, remove `dbt-core` from your `requirements.txt` file. To continue running dbt Core jobs with Airflow, don't upgrade your current Runtime version or upgrade to Runtime version 4.2.x and wait until a fix is announced. 
-
-:::
-
 ### Support for Airflow 2.3 & dynamic task mapping
 
 Astro Runtime 5.0.0 provides support for [Airflow 2.3.0](https://airflow.apache.org/blog/airflow-2.3.0/), which is a significant open source release. The most notable new features in Airflow 2.3.0 are:
@@ -260,6 +319,52 @@ Astro Runtime 5.0.0 provides support for [Airflow 2.3.0](https://airflow.apache.
 - The ability to [reuse a decorated task function](https://airflow.apache.org/docs/apache-airflow/2.3.0/tutorial_taskflow_api.html#reusing-a-decorated-task) between DAGs.
 
 For more information on Airflow 2.3, see ["Apache Airflow 2.3 — Everything You Need to Know"](https://www.astronomer.io/blog/apache-airflow-2-3-everything-you-need-to-know) by Astronomer.
+
+## Astro Runtime 4.2.8
+
+- Release date: November 9, 2022
+- Airflow version: 2.2.5
+
+### Backported Airflow bug fixes
+
+Astro Runtime 4.2.8 includes the following bug fixes from Apache Airflow 2.4.2:
+
+- Make tracebacks opt-in ([#27059](https://github.com/apache/airflow/pull/27059))
+- Don’t overwrite connection extra with invalid json ([#27142](https://github.com/apache/airflow/pull/27142))
+- Simplify origin string cleaning ([#27143](https://github.com/apache/airflow/pull/27143))
+
+## Astro Runtime 4.2.7
+
+- Release date: October 11, 2022
+- Airflow version: 2.2.5
+
+### Backported Airflow bug fixes
+
+Astro Runtime 4.2.7 includes the following bug fixes from later Apache Airflow releases:
+
+- Make sure finalizers are not skipped during exception handling ([#22475](https://github.com/apache/airflow/pull/22475))
+- Fix `email_on_failure` with `render_template_as_native_obj` ([#22770](https://github.com/apache/airflow/pull/22770))
+- Do not log the hook connection details even at DEBUG level ([#22627](https://github.com/apache/airflow/pull/22627))
+
+### Bug fixes
+
+- Fixed the following vulnerabilities:
+
+    - [CVE-2022-40023](https://avd.aquasec.com/nvd/2022/cve-2022-40023/)
+    - [CVE-2022-2309](https://avd.aquasec.com/nvd/2022/cve-2022-2309/)
+    - [CVE-2022-40674](https://avd.aquasec.com/nvd/2022/cve-2022-40674/)
+    - [CVE-2022-1586](https://avd.aquasec.com/nvd/2022/cve-2022-1586/)
+    - [CVE-2022-1587](https://avd.aquasec.com/nvd/2022/cve-2022-1587/)
+    - [CVE-2022-3999](https://avd.aquasec.com/nvd/2022/cve-2022-3999/)
+    - [CVE-2022-37434](https://avd.aquasec.com/nvd/2022/cve-2022-37434/)
+    - [CVE-2022-5197](https://avd.aquasec.com/nvd/2022/cve-2022-5197/)
+    - [CVE-2022-2509](https://avd.aquasec.com/nvd/2022/cve-2022-2509/)
+    - [CVE-2022-46828](https://avd.aquasec.com/nvd/2022/cve-2022-46828/)
+    - [CVE-2022-1664](https://avd.aquasec.com/nvd/2022/cve-2022-1664/)
+    - [CVE-2022-29155](https://avd.aquasec.com/nvd/2022/cve-2022-29155/)
+    - [CVE-2022-2068](https://avd.aquasec.com/nvd/2022/cve-2022-2068/)
+    - [CVE-2022-1292](https://avd.aquasec.com/nvd/2022/cve-2022-1292/)
+    - [CVE-2022-1552](https://avd.aquasec.com/nvd/2022/cve-2022-1552/)
 
 ## Astro Runtime 4.2.6
 
@@ -304,7 +409,7 @@ Astro Runtime 4.2.1 upgrades the `astronomer-providers` package to v1.1.0 ([CHAN
     - `GCSUploadSessionCompleteSensorAsync`
     - `BigQueryTableExistenceSensorAsync`
 
-For more information about deferrable operators and how to use them, see [deferrable operators](deferrable-operators.md). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
+For more information about deferrable operators and how to use them, see [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ### Additional improvements
 
@@ -319,7 +424,7 @@ For more information about deferrable operators and how to use them, see [deferr
 
 The `astronomer-providers` package is now installed on Astro Runtime by default. This package is an open source collection of Apache Airflow providers and modules that is maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`.
 
-For more information, see [deferrable operators](deferrable-operators.md). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
+For more information, see [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators). To access the source code of this package, see the [Astronomer Providers GitHub repository](https://github.com/astronomer/astronomer-providers).
 
 ### Additional improvements
 
@@ -357,7 +462,7 @@ Astro Runtime now also includes the following operators:
 - `SnowflakeOperatorAsync`
 - `FileSensorAsync`
 
-These are all [deferrable operators](deferrable-operators.md) built by Astronomer and available exclusively on Astro Runtime. They are pre-installed into the Astro Runtime Docker image and ready to use.
+These are all [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators) built by Astronomer and available exclusively on Astro Runtime. They are pre-installed into the Astro Runtime Docker image and ready to use.
 
 ### Additional improvements
 
@@ -495,7 +600,7 @@ For more information on using timetables, read the [Apache Airflow Documentation
 
 Existing Airflow operators have to be re-written according to the deferrable operator framework. In addition to supporting those available in the open source project, Astronomer has built an exclusive collection of deferrable operators in Runtime 4.0.0. This collection includes the `DatabricksSubmitRunOperator`, the `DatabricksRunNowOperator`, and the `ExternalTaskSensor`. These are designed to be drop-in replacements for corresponding operators currently in use.
 
-As part of supporting deferrable operators, the triggerer is now available as a fully managed component on Astro. This means that you can start using deferrable operators in your DAGs as soon as you're ready. For more general information on deferrable operators, as well as how to use Astronomer's exclusive deferrable operators, read [deferrable operators](deferrable-operators.md).
+As part of supporting deferrable operators, the triggerer is now available as a fully managed component on Astro. This means that you can start using deferrable operators in your DAGs as soon as you're ready. For more general information on deferrable operators, as well as how to use Astronomer's exclusive deferrable operators, read [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
 ## Astro Runtime 3.0.4
 

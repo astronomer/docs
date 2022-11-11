@@ -2,12 +2,61 @@
 sidebar_label: 'Release notes'
 title: 'Astro CLI release notes'
 id: release-notes
-description: Release notes for the Astro CLI.
 ---
+
+<head>
+  <meta name="description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
+  <meta name="og:description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
+</head>
+
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
 
-If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+## Astro CLI 1.7.0
+
+Release date: November 9, 2022 
+
+## Deploy only DAGs with `astro deploy -—dags`
+
+Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy`, which pushes all files in your Astro project every time you deploy your code to Astro.
+
+Deploying only DAGs:
+
+- Is significantly faster than running `astro deploy` when you only make changes to the `dags` directory.
+- Does not cause your workers and schedulers to terminate and restart every time you make a change to a DAG and does not result in downtime for your Deployment.
+- Enables your team to create separate CI/CD processes for deploying DAGs and deploying other changes to your Astro project.
+
+When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
+
+To use this feature, you must enable it for each Deployment. See [Deploy only DAGs](deploy-code.md#deploy-only-dags). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+
+## New `astro deployment inspect` command
+
+You can now run `astro deployment inspect` to return a Deployment's current state and configuration as a JSON or YAML object. This includes worker queue settings, Astro Runtime version, and more. Use this command to quickly understand the state of your Deployment as code and as an alternative to viewing it in the Cloud UI.
+
+For more information, see the [CLI command reference](cli/astro-deployment-inspect.md).
+
+## Additional improvements
+
+- The outputs for `astro dev parse` and `astro dev pytest` commands have improved legibility by no longer including Docker container logs.
+- The `astro organization switch` command now includes a `-—login-link` flag that you can use to manually log in if you don't have access to a web browser.
+- You can now provide either an Organization name or ID when running `astro organization switch`.
+- `astro dev start` now times out if the Airflow webserver does not become healthy within a set period of time. Use the `-—wait` flag to specify a wait time in seconds or minutes.
+
+## Bug fixes
+
+- Fixed an issue where `astro deploy` with `colima` was failing due to an issue with registry authentication
+- Fixed an issue where `astro deployment list` didn't display the Workspace ID for a Deployment
+  
+## Astro CLI 1.6.1
+
+Release date: November 3, 2022 
+
+### Bug fixes 
+
+- Fixed an issue where authenticating to Astronomer Software with `interactive=true` in your CLI configuration resulted in a 502 error.
 
 ## Astro CLI 1.6.0 
 
@@ -17,8 +66,13 @@ Release date: September 28, 2022
 
 You can use the new `astro dev object` commands to better manage Airflow connections, variables, and pools between your local testing environment and Astro Deployments. 
 
-- `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment without restarting it. 
+- `astro dev object import` imports connections, variables, and pools from your Astro project `airflow_settings.yaml` into your locally running Airflow environment.
 - `astro dev object export` exports connections, variables, and pools from your local airflow database to a file of your choosing. specify the `--env-export` flag to export Airflow connections and variables to your `.env` file as Astro environment variables. 
+
+These commands enable you to:
+
+- Update objects in a locally running Airflow environment without restarting it.
+- Quickly move Airflow objects from a local testing environment to an Astro Deployment. 
 
 ### New commands to configure worker queues on Astro
 
@@ -45,6 +99,7 @@ To use these commands, you must be authenticated to your primary Organization th
 
 ### Bug fixes 
 
+- Fixed an issue where the Astro CLI generated incorrect URLs for the Deployment dashboard
 - Improved error handling and messaging when the Astro CLI doesn't recognize the image in a project's Dockerfile
 
 ## Astro CLI 1.5.1
@@ -439,7 +494,7 @@ For users making quick and continuous changes to an Astro project locally, the A
 
 ### Support for the triggerer in local Airflow environments
 
-The Astro CLI now supports the Apache Airflow [triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](deferrable-operators.md) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
+The Astro CLI now supports the Apache Airflow [triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
 
 The triggerer will only be created in local environments running Astro Runtime 4.0.0+.
 

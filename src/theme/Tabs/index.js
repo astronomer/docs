@@ -15,7 +15,7 @@ function updateTabLink(val,topic) {
   const url = window.location.href;
   const parts = url.split("#");
   if (topic == undefined) {
-    history.replaceState({}, "", `?lang=${val}`);
+    history.replaceState({}, "", `?tab=${val}`);
   }
   else {
   history.replaceState({}, "", `?tab=${val}#${topic}`);

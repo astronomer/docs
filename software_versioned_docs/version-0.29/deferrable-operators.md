@@ -31,7 +31,7 @@ Tasks that are defined with a deferrable operator run according to the following
 - The triggerer runs the task's Trigger periodically to check whether the condition has been met.
 - Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a worker, it begins to complete its main function.
 
-For more information on how deferrable operators work and how to use them, see the [Airflow Guide for Deferrable operators](https://www.astronomer.io/guides/deferrable-operators) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html).
+For more information on how deferrable operators work and how to use them, see the [Airflow Guide for Deferrable operators](deferrable-operators.md) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html).
 
 ## Astro Runtime prerequisites
 
