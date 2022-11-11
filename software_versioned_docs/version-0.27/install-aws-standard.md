@@ -154,7 +154,7 @@ If you received a certificate from a private CA, follow these steps instead:
 An SMTP service is required for sending and accepting email invites from Astronomer. If you're running Astronomer Software with `publicSignups` disabled (which is the default), you'll need to configure SMTP as a way for your users to receive and accept invites to the platform via email. To integrate your SMTP service with Astronomer, fetch your SMTP service's URI and store it in a Kubernetes secret:
 
 ```sh
-kubectl create secret generic astronomer-smtp --from-literal=connection=smtp://USERNAME:PASSWORD@HOST/?requireTLS=true -n astronomer
+kubectl create secret generic astronomer-smtp --from-literal connection=smtp://USERNAME:PASSWORD@HOST/?requireTLS=true -n astronomer
 ```
 
 In general, an SMTP URI will take the following form:
@@ -370,7 +370,6 @@ astronomer-nginx-746589b744-h6r5n                          1/1     Running      
 astronomer-nginx-746589b744-hscb9                          1/1     Running             0          24m
 astronomer-nginx-default-backend-8cb66c54-4vjmz            1/1     Running             0          24m
 astronomer-nginx-default-backend-8cb66c54-7m86w            1/1     Running             0          24m
-astronomer-prisma-57d5bf6c64-zcmsh                         1/1     Running             0          24m
 astronomer-prometheus-0                                    1/1     Running             0          24m
 astronomer-prometheus-blackbox-exporter-65f6c5f456-865h2   1/1     Running             0          24m
 astronomer-prometheus-blackbox-exporter-65f6c5f456-szr4s   1/1     Running             0          24m
@@ -403,7 +402,6 @@ astronomer-kubed                     ClusterIP      172.20.4.200     <none>     
 astronomer-nginx                     LoadBalancer   172.20.54.142    ELB_ADDRESS.us-east-1.elb.amazonaws.com                                   80:31925/TCP,443:32461/TCP,10254:32424/TCP   24d
 astronomer-nginx-default-backend     ClusterIP      172.20.186.254   <none>                                                                    8080/TCP                                     24d
 astronomer-astro-ui                  ClusterIP      172.20.186.166   <none>                                                                    8080/TCP                                     24d
-astronomer-prisma                    ClusterIP      172.20.144.188   <none>                                                                    4466/TCP                                     24d
 astronomer-prometheus                ClusterIP      172.20.72.196    <none>                                                                    9090/TCP                                     24d
 astronomer-registry                  ClusterIP      172.20.100.102   <none>                                                                    5000/TCP                                     24d
 ```
@@ -423,7 +421,7 @@ prometheus.astro.mydomain.com
 ```
 
 Example wildcard CNAME record:
-![aws-elb](https://assets2.astronomer.io/main/docs/ee/route53.png)
+![aws-elb](/img/software/route53.png)
 
 ## Step 12: Verify You Can Access the Software UI
 

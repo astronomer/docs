@@ -1,0 +1,34 @@
+@media (min-width: 997px) {
+  .menu {
+    flex-grow: 1;
+    padding: 0.5rem;
+  }
+  @supports (scrollbar-gutter: stable) {
+    .menu {
+      padding: 0.5rem 0 0.5rem 0.5rem;
+      scrollbar-gutter: stable;
+    }
+  }
+
+  .menuWithAnnouncementBar {
+    margin-bottom: var(--docusaurus-announcement-bar-height);
+  }
+}
+
+
+.menu__listBottom {
+  font-family: "Strawford", "Open Sans", sans-serif;
+  left: 1rem;
+  position: relative;
+  bottom: 2rem;
+  padding: 0;
+}
+
+.menu__listBottom > li + li {
+  margin-top: 0.6rem;
+}
+
+.menu__listBottom a {
+  color: #9478D2;
+  font-weight: 600;
+}

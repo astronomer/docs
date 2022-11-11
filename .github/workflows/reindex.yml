@@ -1,4 +1,5 @@
 name: Reindex Algolia
+concurrency: algolia
 on:
   push:
     branches:

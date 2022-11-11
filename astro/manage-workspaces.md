@@ -5,11 +5,7 @@ id: manage-workspaces
 description: Create, delete, and update Workspaces on Astro.
 ---
 
-## Overview
-
-This guide provides steps for creating and managing Workspaces on Astro.
-
-Workspaces are collections of Deployments that can all be accessed by a specific group of users. You can use Workspaces to group Deployments that all share a trait. For example, you can create one Workspace that stores all of your production pipelines and another Workspace that stores all of your development pipelines.
+Workspaces are collections of Deployments that can be accessed by a specific group of users. You can use Workspaces to group Deployments that share a business use case or environment trait. For example, you might create one Workspace that stores all of your production pipelines and another Workspace that stores all of your development pipelines.
 
 ## Create a Workspace
 
@@ -29,39 +25,49 @@ During this initial setup, you can configure a Workspace's name and description.
 
 To to enter your Workspace, click the Workspace in the **Overview** tab. When you click into a Workspace and see a list of that Workspace's Deployments, you are in the **Workspace view** of the Cloud UI. The Workspace view contains several pages for managing your Workspace which are accessible from a sidebar on the left of the screen:
 
-- **Deployments:** Create new Deployments and see key metrics about existing Deployments in the Workspace. For more information, see [Configure a Deployment](configure-deployment.md).
-- **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment Metrics](deployment-metrics.md#dag-runs).
-- **Logs:** View Scheduler logs for Deployments in the Workspace. For more information, see [Scheduler Logs](scheduler-logs.md).
-- **Access:** Manage user access to the Workspace.
-- **Workspace Settings:** Update or delete Workspace details.
+- **Deployments:** Create new Deployments and see key metrics about existing Deployments in the Workspace. For more information, see [Create a Deployment](create-deployment.md).
+- **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment metrics](deployment-metrics.md#dag-runs).
+- **Workspace Settings:** Update Workspace details, including Workspace user permissions, the Workspace name, and the Workspace description.
 
 ## Manage Workspace Users
 
 As a Workspace Admin, you can add or remove users from your Workspace at any time. Before adding a user, make sure that the user is an existing member of your Organization. If the user is not, [invite them to Astro](add-user.md#add-a-user-to-an-organization) before following the steps below.
 
-To add a user to a Workspace:
-
 1. In the Workspace view, go to the **Access** page.
 2. Click **Add member**.
-3. Specify the user's email and role within the Workspace. For more information about Workspace roles and permissions, see [User Permissions](user-permissions.md).
+3. Specify the user's email and role within the Workspace. For more information about Workspace roles and permissions, see [User permissions](user-permissions.md).
 
-Once added, the user will see the Workspace listed on the **Overview** page of the Cloud UI. They will also appear as an active Workspace member in the **Access** tab. For more information about inviting users to Astronomer, see [Add User](add-user.md).
+After adding the user, the user will see the Workspace listed on the **Overview** page of the Cloud UI. They will also appear as an active Workspace member in the **Access** tab. For more information about inviting users to Astronomer, see [Add a user](add-user.md).
 
 ### Update or Remove a Workspace User
 
-To update a Workspace user's access to the Workspace:
+1. In the Cloud UI, select a Workspace.
+   
+2. Click **Workspace Settings**.
 
-1. In the Workspace view, go to the **Access** page.
-2. Click the **Edit** button next to the user's entry in the **Member** table:
+3. Click **Edit** next to the user name:
 
     ![Edit Workspace user button](/img/docs/edit-workspace-user.png)
 
-From here, you can either update a user's Workspace role or remove the user from the Workspace.
+4. Edit the user's name or role and then click **Update Member**.
+   
+## Update Workspace details
 
-## Update a Workspace
-
-To update a Workspace's name or description, go to the **Workspace Settings** page in the Workspace view. To save any changes to your Workspace, click **Update Workspace**.
+1. In the Cloud UI, select a Workspace.
+   
+2. Click **Workspace Settings** and then click the **Details** tab.
+   
+3. Click **Edit Details**, update the Workspace name or description, and then click **Update**.
 
 ### Delete a Workspace
 
-To delete a Workspace, click the **Delete Workspace** button in the **Workspace Settings** page. Note that you can delete a Workspace only if there are no active Deployments in the Workspace.
+1. In the Cloud UI, select a Workspace.
+   
+2. Click **Workspace Settings**.
+   
+3. Click the option menu at the top of the page and select **Delete Workspace**. This option isn't available when there are active Deployments in the Workspace.
+
+    ![Delete Workspace button](/img/docs/delete-workspace.png)
+
+4. In the confirmation dialog, enter `delete` and then click **Yes, Continue**.
+

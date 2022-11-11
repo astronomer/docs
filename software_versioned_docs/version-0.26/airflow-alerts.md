@@ -26,7 +26,7 @@ If your team isn't already using an SMTP service, we recommend the following:
 
 Step-by-step instructions on how to integrate these two services with Astronomer are provided below, but you can use any SMTP service for this purpose.
 
-> **Note:** By default, email alerts for process failures are sent whenever individual tasks fail. To receive only 1 email per DAG failure, refer to the Limit Alerts to the DAG Level topic below. For more information and best practices on Airflow alerts, read [Error Notifications in Airflow](https://www.astronomer.io/guides/error-notifications-in-airflow/).
+> **Note:** By default, email alerts for process failures are sent whenever individual tasks fail. To receive only 1 email per DAG failure, refer to the Limit Alerts to the DAG Level topic below. For more information and best practices on Airflow alerts, read [Error Notifications in Airflow](https://docs.astronomer.io/learn/error-notifications-in-airflow/).
 
 ### Integrate SendGrid with Astronomer
 
@@ -58,7 +58,7 @@ To get started with SendGrid:
 
    Your Environment Variables should look something like this:
 
-   ![Astronomer Deployment Email Settings](https://assets2.astronomer.io/main/docs/emails/astro_env_variables.png)
+   ![Astronomer Deployment Email Settings](/img/software/astro_env_variables.png)
 
    To prevent unauthorized users in your Workspace from seeing sensitive information, we recommend selecting the **Secret?** checkbox for your email and password profile variables.
 
@@ -94,7 +94,7 @@ This setup requires an AWS account and use of the [AWS Management Console](https
 
    Your Environment Variables should look something like this:
 
-   ![Astronomer Deployment Email Settings](https://assets2.astronomer.io/main/docs/emails/astro_env_variables.png)
+   ![Astronomer Deployment Email Settings](/img/software/astro_env_variables.png)
 
    To prevent unauthorized users in your Workspace from seeing sensitive information, we recommend selecting the **Secret?** checkbox for your email and password profile variables.
 

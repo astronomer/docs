@@ -1,5 +1,5 @@
 /** @type {import('@docusaurus/types').DocusaurusConfig} */
-
+const versions = require('./software_versions.json')
 module.exports = {
   title: 'Astronomer Documentation',
   tagline: 'Learn how to use Astro, the next-generation data orchestration platform.',
@@ -7,14 +7,18 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'error',
-  onBrokenMarkdownLinks: 'error',
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.svg',
   organizationName: 'astronomer', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
   themeConfig: {
     image: 'img/meta.png',
-    autoCollapseSidebarCategories: true,
+    docs: {
+      sidebar: {
+        autoCollapseCategories: true,
+      },
+    },
     algolia: {
       apiKey: '99354995bfad26ed950bdb701bc56b6b',
       indexName: 'published-docs',
@@ -23,8 +27,7 @@ module.exports = {
 
       // Optional: see doc section below
       appId: 'TTRQ0VJY4D',
-      inputSelector: '.DocSearch',
-      // Optional: Algolia search parameters
+      inputSelector: '.DocSearch',      // Optional: Algolia search parameters
       searchParameters: {
       },
 
@@ -37,136 +40,130 @@ module.exports = {
       title: 'Docs',
       logo: {
         alt: 'Astronomer',
-        src: 'img/LogoPrimaryDarkMode.svg',
-        href: 'https://docs.astronomer.io/astro',
+        src: 'img/AstroMonogram.svg',
+        href: 'https://docs.astronomer.io',
         target: '_self',
       },
       items: [
         {
-          to: 'astro',
-          label: 'Astro',
+          to: '/',
+          label: 'Home',
           position: 'left',
+          activeClassName: 'navbar__link--active',
+          activeBaseRegex: '^[\/]+$',
         },
         {
-          type: 'dropdown',
+          to: '/astro/',
+          label: 'Astro',
+          position: 'left',
+          activeClassName: 'navbar__link--active',
+          activeBaseRegex: '^(\/astro)(?!(\/cli))',
+        },
+        {
+          to: '/astro/cli/overview',
+          label: 'Astro CLI',
+          position: 'left',
+          activeClassName: 'navbar__link--active',
+          activeBaseRegex: 'astro/cli+',
+        },
+        {
           label: 'Software',
           to: 'software/',
           activeBaseRegex: 'software',
           position: 'left',
           activeClassName: 'navbar__link--active',
-          items: [
-            {
-              label: '0.28 (Latest)',
-              to: '/software/',
-            },
-            {
-              label: '0.27',
-              to: '/software/0.27/overview',
-            },
-            {
-              label: '0.26',
-              to: '/software/0.26/overview',
-            },
-            {
-              label: '0.25',
-              to: '/software/0.25/overview'
-            },
-            {
-              label: '0.23',
-              to: '/software/0.23/overview'
-            },
-            {
-              label: '0.16 (Deprecated)',
-              to: '/software/0.16/overview'
-            },
-          ],
+        },
+        {
+          to: '/learn/',
+          label: 'Learn',
+          position: 'left',
+          activeClassName: 'navbar__link--active',
         },
       ],
     },
-    footer: {
-      links: [
+    astroCard: {
+      title: "What is Astro?",
+      description: "Astro is a cloud solution that helps you focus on your data pipelines and spend less time managing Apache Airflow, with capabilities enabling you to build, run, and observe data all in one place.",
+      buttons: {
+        primary: {
+          label: "Try Astro",
+          href: "https://www.astronomer.io/get-started?referral=docs-what-astro-banner"
+        },
+        secondary: {
+          label: "Learn about Astronomer",
+          href: "https://www.astronomer.io/?referral=docs-what-astro-banner"
+        }
+      }
+    },
+    softwareNav: {
+      items: [
         {
-          title: 'Astro',
-          items: [
-            {
-              label: 'Log In',
-              href: 'https://cloud.astronomer.io/login',
-            },
-            {
-              label: 'Install on AWS',
-              to: 'astro/install-aws',
-            },
-            {
-              label: 'Install on GCP',
-              to: 'astro/install-gcp',
-            },
-            {
-              label: 'Install the CLI',
-              to: 'astro/install-cli',
-            },
-            {
-              label: 'Create a Project',
-              to: 'astro/create-project',
-            },
-            {
-              label: 'Deploy Code',
-              to: 'astro/deploy-code',
-            },
-          ],
+          label: '0.30 (Latest)',
+          to: '/software/',
+          activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
         {
-          title: 'Astronomer Software',
-          items: [
-            {
-              label: 'Overview',
-              to: 'software/',
-            },
-            {
-              label: 'Install on AWS',
-              to: 'software/install-aws',
-            },
-            {
-              label: 'Release Notes',
-              to: 'software/release-notes',
-            },
-          ],
+          label: '0.29',
+          to: '/software/0.29/overview',
+          activeBaseRegex: '(software\/0.29)+',
         },
         {
-          title: 'Product Resources',
-          items: [
-            {
-              label: 'Support',
-              href: 'https://support.astronomer.io',
-            },
-            {
-              label: 'Status',
-              href: 'https://cloud-status.astronomer.io',
-            },
-            {
-              label: 'Astronomer Registry',
-              to: 'https://registry.astronomer.io/',
-            },
-          ],
+          label: '0.28',
+          to: '/software/0.28/overview',
+          activeBaseRegex: '(software\/0.28)+',
         },
         {
-          title: 'More',
-          items: [
-            {
-              label: 'Astronomer Homepage',
-              to: 'https://www.astronomer.io',
-            },
-            {
-              label: 'Airflow Guides',
-              href: 'https://www.astronomer.io/guides/',
-            },
-            {
-              label: 'Docs on GitHub',
-              href: 'https://github.com/astronomer/docs',
-            },
-          ],
+          label: '0.25',
+          to: '/software/0.25/overview',
+          activeBaseRegex: '(software\/0.25)+',
         },
       ],
-      copyright: '© Astronomer',
+    },
+    sidebarNav: {
+      bottomNav: {
+        items: [
+          {
+            label: 'Get a demo',
+            href: 'https://www.astronomer.io/events/weekly-demo/?referral=docs-sidebar',
+          },
+          {
+            label: 'Watch a webinar',
+            href: 'https://www.astronomer.io/events/webinars/?referral=docs-sidebar',
+          },
+          {
+            label: 'Astro status',
+            href: 'https://status.astronomer.io/?referral=docs-sidebar',
+          }
+        ]
+      }
+    },
+    footer: {
+      logo: {
+        alt: "Astronomer logo",
+        src: "img/monogram-light.png",
+        href: "https://www.astronomer.io/",
+        width: 48,
+      },
+      links: [
+        {
+          label: 'Legal',
+          href: 'https://www.astronomer.io/legal/',
+        },
+        {
+          label: 'Privacy',
+          href: 'https://www.astronomer.io/privacy/',
+        },
+        {
+          label: 'Security',
+          href: 'https://www.astronomer.io/security/',
+        },
+        {
+          label: 'Cookie Preferences',
+          to: '#',
+          id: 'cookiePref',
+        },
+      ],
+      copyright: '© Astronomer 2022. Various trademarks held by their respective owners.',
     },
   },
   presets: [
@@ -181,22 +178,25 @@ module.exports = {
           routeBasePath: 'astro',
           path: 'astro',
           admonitions: {
+            tag: ':::',
+            keywords: [
+              'caution',
+              'warning',
+              'info',
+              'tip',
+              'cli',
+              'highlight'
+            ],
           },
         },
-        gtag: {
-          trackingID: 'G-DKTB1B78FV',
-          anonymizeIP: true,
-        },
-        googleAnalytics: {
-          trackingID: 'UA-54102728-4',
-          anonymizeIP: true,
+        sitemap: {
+          id: 'default',
+          changefreq: 'daily',
+          ignorePatterns: ['/software/0.29/**', '/software/0.28/**', '/software/0.27/**', '/software/0.26/**', '/software/0.25/**', '/software/0.23/**', '/software/0.16/**'],
+          filename: 'sitemap.xml',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
-        },
-        sitemap: {
-          changefreq: 'hourly',
-          priority: 0.5,
         },
       },
     ],
@@ -214,13 +214,57 @@ module.exports = {
         path: 'software',
         lastVersion: 'current',
         versions: {
-        current: {
-          label: '0.28',
-          path: '',
-          banner: 'none',
-         },
-       },
+          current: {
+            label: '0.30',
+            path: '',
+            banner: 'none',
+          },
+        },
       },
     ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'learn',
+        routeBasePath: 'learn',
+        editUrl: ({ docPath }) =>
+          `https://github.com/astronomer/docs/blob/main/learn/${docPath}`,
+        editCurrentVersion: true,
+        sidebarPath: require.resolve('./sidebarsLearn.js'),
+        path: 'learn',
+      },
+    ],
+    [
+      '@docusaurus/plugin-sitemap',
+      {
+        id: 'learn',
+        changefreq: 'daily',
+        ignorePatterns: ['/software/0.29/**', '/software/0.28/**', '/software/0.27/**', '/software/0.26/**', '/software/0.25/**', '/software/0.23/**', '/software/0.16/**'],
+        filename: 'sitemap.xml',
+      },
+    ],
+  ],
+  scripts: [
+    {
+      src: './scripts/segment.js',
+      defer: true,
+    },
+    {
+      src: './scripts/consent-manager.js',
+      defer: true,
+    },
+    {
+      src: './scripts/consent-manager-config.js',
+    },
+    {
+      src: "/scripts/set-tab.js",
+      async: true,
+      defer: true,
+    },
+    {
+      src: 'https://docs.astronomer.io/js/script.outbound-links.js',
+      "data-domain": 'docs.astronomer.io',
+      defer: true,
+    }
   ],
 };

@@ -1,36 +1,38 @@
 ---
-sidebar_label: 'Develop a Project'
-title: 'Develop Your Astro project'
+sidebar_label: 'Develop a project'
+title: 'Develop your Astro project'
 id: develop-project
-description: Learn how to add Airflow dependencies and customize an Astro project to fit your use case.
 ---
 
+<head>
+  <meta name="description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
+  <meta name="og:description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
+</head>
+
 import {siteVariables} from '@site/src/versions';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-## Overview
+This is where you'll find information about:
 
-This document explains the various ways you can modify and build your Astro project to fit your team's use case. Specifically, this guide provides instructions on how to:
-
-- Build and run a project
-- Deploy changes to a project
-- Add dependencies to your project
-- Run on-build commands
-- Add connections, pools, and environment variables locally
+- Building and running a project
+- Deploying changes to a project
+- Adding dependencies to a project
+- Running on-build commands
+- Adding connections, pools, and environment variables locally
 
 ## Prerequisites
 
-To develop an Astro project and test it locally, you need:
-
 - An existing [Astro project](create-project.md).
-- [The Astro CLI](install-cli.md)
+- [The Astro CLI](cli/overview.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
-## Build and Run a Project Locally
+## Build and run a project locally
 
 To run your Astro project locally, run the following command:
 
 ```sh
-astrocloud dev start
+astro dev start
 ```
 
 This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
@@ -38,39 +40,39 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The Triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md).
+- **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
 Once the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
 
 :::info
 
-The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astrocloud dev start` command, for example, is functionally equivalent to `docker compose start`.
+The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astro dev start` command, for example, is functionally equivalent to `docker compose start`.
 
 :::
 
 :::tip
 
-If you see `Error: cannot start, project already running` when you run this command, it means your local Airflow environment is already running your project. If there are changes you'd like to apply to your project, see [restart your local environment](develop-project.md#make-changes-to-your-project).
+If you see `Error: cannot start, project already running` when you run this command, it means your local Airflow environment is already running your project. If there are changes you'd like to apply to your project, see [Restart your local environment](develop-project.md#make-changes-to-your-project).
 
 :::
 
-### Restart Your Local Environment
+### Restart your local environment
 
 To restart your local Airflow environment, run the following command:
 
 ```sh
-astrocloud dev restart
+astro dev restart
 ```
 
-These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astrocloud dev stop` to stop your Docker containers without restarting or rebuilding your project.
+These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astro dev stop` to stop your Docker containers without restarting or rebuilding your project.
 
-## Make Changes to Your Project
+## Make changes to your project
 
 All Astro projects require you to specify a Debian-based Astro Runtime image in a `Dockerfile`. When you run your project locally or on Astro, all of your DAG code, packages, and configurations are built into a Docker image based on Astro Runtime.
 
 Depending on the change you're making to your Astro project, you might have to rebuild your image to run your changes locally.
 
-### DAG Code Changes
+### DAG code changes
 
 All changes made to files in the following directories will be live in your local Airflow environment as soon as you save them to your code editor:
 
@@ -80,7 +82,7 @@ All changes made to files in the following directories will be live in your loca
 
 Once you save your changes, refresh the Airflow UI in your browser to see them render.
 
-### Environment Changes
+### Environment changes
 
 All changes made to the following files require rebuilding your image:
 
@@ -91,9 +93,9 @@ All changes made to the following files require rebuilding your image:
 
 To rebuild your project after making a change to any of these files, you must [restart your local environment](develop-project.md#restart-your-local-environment).
 
-## Explore Airflow Providers and Modules
+## Explore Airflow providers and modules
 
-As you customize your Astro project and expand your use case for Airflow, we recommend exploring the [Astronomer Registry](https://registry.astronomer.io/), a library of Airflow modules, providers, and DAGs that serve as the building blocks for data pipelines.
+As you customize your Astro project and expand your use case for Airflow, Astronomer recommends reviewing the [Astronomer Registry](https://registry.astronomer.io/), a library of Airflow modules, providers, and DAGs that serve as the building blocks for data pipelines.
 
 The Astronomer Registry includes:
 
@@ -103,7 +105,7 @@ The Astronomer Registry includes:
 
 As you browse the Astronomer Registry, follow this document for instructions on how to install providers as Python packages and make other changes to your Astro project.
 
-## Add Python and OS-level Packages
+## Add Python and OS-level packages
 
 To build Python and OS-level packages into your Astro project, add them to your `requirements.txt` and `packages.txt` files. Add Python packages to your `requirements.txt` and OS-level packages to your `packages.txt` file.
 
@@ -125,27 +127,21 @@ Once you've saved these packages in your project files, [restart your local envi
 
 ### Confirm your package was installed
 
-If you added `pymongo` to your `requirements.txt` file, for example, you can confirm that it was properly installed by running a `docker exec` command into your Scheduler:
+If you added `pymongo` to your `requirements.txt` file, for example, you can confirm that it was properly installed by running:
 
-1. Run `docker ps` to identify the docker containers running on your machine
-2. Copy the container ID of the Scheduler container
-3. Run the following:
-
+```sh
+astro dev bash --scheduler "pip freeze | grep pymongo"
 ```
-docker exec -it <scheduler-container-id> pip freeze | grep pymongo
 
-pymongo==3.7.2
-```
+This command outputs the version number of the package you specify after `grep`.
 
 ## Add DAGs
 
 DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your project, simply add its `.py` file to this folder.
 
-### Add DAG Helper Functions
+### Add DAG helper functions
 
-To build additional helper functions for DAGs into your Astro project, we recommend adding a folder with a set of files that can be used by Airflow DAGs.
-
-To do this:
+To build additional helper functions for DAGs into your Astro project, Astronomer recommend adding a folder with a set of files that can be used by Airflow DAGs.
 
 1. Add your directory of helper functions to your local project:
 
@@ -169,34 +165,40 @@ To do this:
 
     In this example, the directory is named `helper_functions`. You can give it any name.
 
-2. [Restart Your Local Environment](develop-project.md#restart-your-local-environment).
+2. [Restart your local environment](develop-project.md#restart-your-local-environment).
 
-To confirm that your helper functions were successfully installed:
+3. To confirm that your helper functions were successfully installed, run the following command:
 
-1. Run `docker ps` to identify the 3 running docker containers on your machine
-2. Copy the container ID of your Scheduler container
-3. Run the following command to see your new directory in the container:
+   ```sh
 
-    ```bash
-    $ docker exec -it <scheduler-container-id> /bin/bash
+    astro dev bash --scheduler "/bin/bash"
+
+   ```
+
+    The command should output a list of files in the scheduler container including your helper functions:
+
+   ```bash
+
+    $ astro dev bash --scheduler "/bin/bash"
     bash-4.4$ ls
     Dockerfile  airflow_settings.yaml  helper_functions  logs  plugins  unittests.cfg
-    airflow.cfg  dags  include  packages.txt  requirements.txt
-    ```
+    airflow.cfg dags  include  packages.txt  requirements.txt
 
-## Configure `airflow_settings.yaml` (Local Development Only)
+   ```
+
+## Configure `airflow_settings.yaml` (Local development only)
 
 When you first initialize a new Astro project, a file called `airflow_settings.yaml` is automatically generated. With this file, you can configure and programmatically generate Airflow [Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [Pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [Variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) so that you don't have to manually redefine these values in the Airflow UI every time you restart your project.
 
-As a security measure, `airflow_settings.yaml` works only in local environments. Once you deploy your project to a Deployment on Astro, the values in this file will not be included. To more easily manage Airflow secrets on Astro, we recommend [configuring a secrets backend](secrets-backend.md).
+As a security measure, `airflow_settings.yaml` works only in local environments. Once you deploy your project to a Deployment on Astro, the values in this file are not included. To manage Airflow secrets on Astro, Astronomer recommends [configuring a secrets backend](secrets-backend.md).
 
 :::caution
 
-If you are storing your project in a public directory or version control tool, we recommend adding this file to your `.gitignore` or equivalent secret management service.
+If you are storing your project in a public directory or version control tool, Astronomer recommends adding this file to your `.gitignore` or equivalent secret management service.
 
 :::
 
-### Add Airflow Connections, Pools, and Variables
+### Add Airflow connections, pools, and variables
 
 By default, the `airflow_settings.yaml` file includes the following template:
 
@@ -230,9 +232,15 @@ variables:
     variable_value: <my-variable-value-2>
 ```
 
-Once you save these values in your `airflow_settings.yaml`, [restart your local environment](develop-project.md#restart-your-local-environment). When you access the Airflow UI locally, you should see these values in the **Connections**, **Pools**, and **Variables** tabs.
+Save the modified `airflow_settings.yaml` file, start your local environment, and run: 
 
-## Run Commands on Build
+```sh
+astro dev object import
+```
+
+When you access the Airflow UI locally, you should see these values in the **Connections**, **Pools**, and **Variables** tabs.
+
+## Run commands on build
 
 To run additional commands as your Astro project is built into a Docker image, add them to your `Dockerfile` as `RUN` commands. These commands run as the last step in the image build process.
 
@@ -244,103 +252,53 @@ RUN ls
 
 This is supported both on Astro and in the context of local development.
 
-## Override the CLI's Docker Compose File (Local Development Only)
+## Set environment variables locally
 
-The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), which is a tool for defining and running multi-container Docker applications. You can override the CLI's Docker Compose configurations by adding a `docker-compose.override.yml` file to your Astro project. Any values in this file override the CLI's default settings whenever you run `astrocloud dev start`.
+For local development, Astronomer recommends setting environment variables in your Astro project's `.env` file. You can then push your environment variables from the `.env` file to a Deployment using the [Astro CLI](cli/astro-deployment-variable-update.md).
 
-To see what values you can override, reference the CLI's [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go). The linked file is for the original Astro CLI, but the values here are identical to those used in the Astro CLI. Common use cases for Docker Compose overrides include:
+If your environment variables contain sensitive information or credentials that you don't want exposed in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
 
-- Adding extra containers to mimic services that your Airflow environment needs to interact with locally, such as an SFTP server.
-- Change the volumes mounted to any of your local containers.
+1. Open the `.env` file in your Astro project directory.
+2. Add your environment variables to the `.env` file or run `astro deployment variable list --save` to copy environment variables from an existing Deployment to the file.
 
-For example, to add another volume mount for a directory named `custom_dependencies`, add the following to your `docker-compose.override.yml` file:
+    Use the following format when you set environment variables in your `.env` file:
 
-```yaml
-version: "3.1"
-services:
-  scheduler:
-    volumes:
-      - /home/astronomer_project/custom_dependencies:/usr/local/airflow/custom_dependencies:ro
-```
+    ```text
+    KEY=VALUE
+    ```
 
-Make sure to specify `version: "3.1"` and follow the format of the source code file linked above.
+    Environment variables should be in all-caps and not include spaces.
 
-To see your override file live in your local Airflow environment, run the following command for any container running Airflow:
+3. Run `astro dev start --env .env` to rebuild your image.
+4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment Variables](environment-variables.md).
+
+### Confirm your environment variable changes
+
+Confirm that your environment variables were applied in a local environment by running the following commands:
 
 ```sh
-docker exec -it <container-name> ls -al
+astro dev bash --scheduler "/bin/bash && env"
 ```
+
+These commands output all environment variables that are running locally. This includes both environment variables set in `.env` and environment variables set on Astro Runtime by default.
 
 :::info
 
-The Astro CLI does not support overrides to environment variables that are required globally. For the list of environment variables that Astro enforces, see [Global Environment Variables](platform-variables.md). To learn more about environment variables, read [Environment Variables](environment-variables.md).
+For local environments, the Astro CLI generates an `airflow.cfg` file at runtime based on the environment variables you set in your `.env` file. You can't create or modify `airflow.cfg` in an Astro project.
 
-:::
-
-## Set Environment Variables via .env (Local Development Only)
-
-For Astro projects deployed on Astro, we generally recommend [setting environment variables via the Cloud UI](environment-variables.md#set-environment-variables-via-the-astro-ui). For local development, you can use the [Astro CLI](install-cli.md) to set environment variables in your project's `.env` file.
-
-To add Environment Variables locally:
-
-1. Open the `.env` file in your Astro project directory.
-2. Add your environment variables to the `.env` file.
-3. Rebuild your image by running `astrocloud dev start --env .env`.
-
-When setting environment variables in your `.env` file, use the following format:
+To view your local environment variables in the context of the generated Airflow configuration, run:
 
 ```
-AIRFLOW__CORE__DAG_CONCURRENCY=5
+astro dev bash --scheduler "/bin/bash && cat airflow.cfg"
 ```
 
-:::tip
-
-If your environment variables contain sensitive information or credentials that you don't want to expose in plain-text, you may want to add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
-
-:::
-
-### Confirm your environment variables were applied
-
-By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To confirm your environment variables via the Airflow UI, set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` in either your Dockerfile or `.env` file.
-
-Alternatively, you can run:
-
-```
-docker ps
-```
-
-This will output the 3 Docker containers that comprise the Airflow environment on your local machine: the Airflow Scheduler, Webserver, and Postgres metadata database.
-
-Now, create a [Bash session](https://docs.docker.com/engine/reference/commandline/exec/#examples) in your scheduler container by running:
-
-```
-docker exec -it <scheduler-container-name> /bin/bash
-```
-
-If you run `ls -1` following this command, you'll see a list of running files:
-
-```
-bash-5.0$ ls -1
-Dockerfile             airflow.cfg            airflow_settings.yaml  dags                   include                logs                   packages.txt           plugins                requirements.txt       unittests.cfg
-```
-
-Now, run:
-
-```
-env
-```
-
-This should output all Environment Variables that are running locally, some of which are set by you and some of which are set by Astronomer by default.
-
-:::tip
-
-You can also run `cat airflow.cfg` to output _all_ contents in that file.
+These commands output the contents of the generated `airflow.cfg` file, which lists your environment variables as human-readable configurations with inline comments.
 
 :::
 
 ### Use multiple .env files
 
-The Astro CLI will look for `.env` by default, but if you want to specify multiple files, make `.env` a top-level directory and create sub-files within that folder.
+The Astro CLI looks for `.env` by default, but if you want to specify multiple files, make `.env` a top-level directory and create sub-files within that folder.
 
 A project with multiple `.env` files might look like the following:
 
@@ -357,27 +315,46 @@ my_project
     └── prod.env
 ```
 
-## Install Python Packages from a Private GitHub Repository
+## Install Python packages from private sources
 
-This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.  At a high level, this setup entails specifying your private packages in `requirements.txt`, creating a custom Docker image that mounts a GitHub SSH key for your private GitHub repositories, and building your project with this Docker image.
+Python packages can be installed from both public and private locations into your image. To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
-Although this setup is based on GitHub, the general steps can be completed with any hosted Git repository.
+Depending on where your private packages are stored, use one of the following setups to install these packages to an Astro project by customizing your Runtime image.
 
 :::info
 
-The following setup has been validated only with a single SSH key. Due to the nature of `ssh-agent`, you might need to modify this setup when using more than one SSH key per Docker image.
+Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see [GitHub Actions CI/CD templates](ci-cd.md#github-actions).
 
 :::
 
-### Prerequisites
+<Tabs
+    defaultValue="github"
+    groupId= "install-python-packages-from-private-sources"
+    values={[
+        {label: 'Private GitHub Repo', value: 'github'},
+        {label: 'Private PyPi Index', value: 'pypi'},
+    ]}>
+<TabItem value="github">
 
-To install Python packages from a private GitHub repository on Astro, you need:
+#### Install Python packages from private GitHub repositories
 
-- The [Astro CLI](install-cli.md).
+This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.
+
+Although this setup is based on GitHub, the high level steps can be completed with any hosted Git repository.
+
+:::info
+
+The following setup has been validated only with a single SSH key. You might need to modify this setup when using more than one SSH key per Docker image.
+
+:::
+
+#### Prerequisites
+
+- The [Astro CLI](cli/overview.md).
 - An [Astro project](create-project.md).
-- Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
+- Custom Python packages that are [installable with pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.
-- A [GitHub SSH Private Key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+- A [GitHub SSH private key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
 
 :::warning
 
@@ -387,7 +364,7 @@ If your organization enforces SAML single sign-on (SSO), you must first authoriz
 
 This setup assumes that each custom Python package is hosted within its own private GitHub repository. Installing multiple custom packages from a single private GitHub repository is not supported.
 
-### Step 1: Specify the Private Repository in Your Project
+#### Step 1: Specify the private repository in your project
 
 To add a Python package from a private repository to your Astro project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as:
 
@@ -405,11 +382,11 @@ numpy==1.22.1
 
 This example assumes that the name of each of your Python packages is identical to the name of its corresponding GitHub repository. In other words,`mypackage1` is both the name of the package and the name of the repository.
 
-### Step 2: Create Dockerfile.build
+#### Step 2: Update Dockerfile
 
-1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
+1. Optional. Copy any build steps you already have in your `Dockerfile` and save them for later.
 
-2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
    ```text
    FROM quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
@@ -417,11 +394,11 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::info
 
-  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image as demonstrated in the example above. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
+  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image as demonstrated in the example above. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-image-architecture.md#distribution).
 
   :::
 
-3. In `Dockerfile.build` after the `FROM` line specifying your Runtime image, add the following configuration:
+3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
     LABEL maintainer="Astronomer <humans@astronomer.io>"
@@ -444,6 +421,9 @@ This example assumes that the name of each of your Python packages is identical 
     FROM stage1 AS stage3
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+    COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
+    ENV PATH="/home/astro/.local/bin:$PATH"
+
     COPY . .
     ```
 
@@ -455,15 +435,15 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::tip
 
-  This example `Dockerfile.build` assumes Python 3.9, but some versions of Astro Runtime may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile.build` with the correct Python version.
-  
+  This example `Dockerfile` assumes Python 3.9, but some versions of Astro Runtime may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile` with the correct Python version.
+
   To identify the Python version in your Astro Runtime image, run:
-  
+
      ```
      docker run quay.io/astronomer/astro-runtime:<runtime-version>-base python --version
      ```
-  
-  Make sure to replace `<runtime-version>` with your own. 
+
+  Make sure to replace `<runtime-version>` with your own.
 
   :::
 
@@ -473,30 +453,146 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::
 
-### Step 3: Build a Custom Docker Image
+4. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
-1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<astro-runtime-image>` with your Astro Runtime image:
+#### Step 3: Build a custom Docker image
 
-    ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t custom-<astro-runtime-image> .
-    ```
-
-    For example, if you have `quay.io/astronomer/astro-runtime:5.0.0-base` in your `Dockerfile.build`, this command would be:
+1. Run the following command to automatically generate a unique image name:
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile.build --progress=plain --ssh=github="$HOME/.ssh/<authorized-key>" -t custom-astro-runtime-5.0.0-base .
+    image_name=astro-$(date +%Y%m%d%H%M%S)
     ```
 
-2. Replace the contents of your Astro project's `Dockerfile` with the following:
+2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<ssh-key>` with your SSH private key file name.
 
-   ```
-   FROM custom-<runtime-image>
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
+    ```
+
+3. Optional. Test your DAGs locally. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally).
+
+4. Deploy the image using the Astro CLI:
+
+    ```sh
+    astro deploy --image-name $image_name
+    ```
+
+Your Astro project can now utilize Python packages from your private GitHub repository.
+
+</TabItem>
+
+<TabItem value="pypi">
+
+#### Install Python packages from a private PyPI index
+
+In some organizations, python packages are prebuilt and pushed to a hosted private pip server (such as pypiserver or Nexus Repository) or managed service (such as PackageCloud or Gitlab).
+
+#### Prerequisites
+
+- An [Astro project](create-project.md).
+- A private PyPI index with username and password authentication.
+
+#### Step 1: Add privately hosted packages to requirements.txt
+
+Add the name and, optionally, the version of your packages to `requirements.txt`. This is the same syntax as you would use when adding public packages from [PyPI](https://pypi.org). `requirements.txt` can contain a mixture of both publicly accessible and private packages.
+
+:::caution
+
+Ensure that the name of the package on the private repository does not clash with any existing python packages on [PyPI](https://pypi.org). If pip parses multiple repositories with the same name, it can produce unexpected results.
+
+:::
+
+#### Step 2: Update Dockerfile
+
+1. Optional. Copy any build steps you already have in your `Dockerfile` and save them for later.
+
+2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+
+   ```text
+   quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
    ```
 
-   For example, if your base Runtime image was `quay.io/astronomer/astro-runtime:5.0.0-base`, this line would be:
+   :::info
 
-   ```
-   FROM custom-astro-runtime:5.0.0-base
-   ```
+   If you use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-version-lifecycle-policy.md#distribution).
 
-Your Astro project can now utilize Python packages from your private GitHub repository. To test your DAGs, you can either [run your project locally](develop-project.md#build-and-run-a-project-locally) or [deploy to Astro](deploy-code.md).
+   :::
+
+3. After the `FROM` line specifying your Runtime image, add the following configuration:
+
+    ```docker
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
+    ARG BUILD_NUMBER=-1
+    LABEL io.astronomer.docker=true
+    LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
+    LABEL io.astronomer.docker.airflow.onbuild=true
+    # Install Python and OS-Level Packages
+    COPY packages.txt .
+    RUN apt-get update && cat packages.txt | xargs apt-get install -y
+
+    FROM stage1 AS stage2
+    # Install Python Packages
+    ARG PIP_EXTRA_INDEX_URL
+    ENV PIP_EXTRA_INDEX_URL=${PIP_EXTRA_INDEX_URL}
+    COPY requirements.txt .
+    RUN pip install --no-cache-dir -q -r requirements.txt
+
+    FROM stage1 AS stage3
+    # Copy requirements directory
+    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+    COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
+    ENV PATH="/home/astro/.local/bin:$PATH"
+
+    COPY . .
+    ```
+
+    In order, these commands:
+
+    - Complete the standard installation of OS-level packages in `packages.txt`.
+    - Add the environment variable `PIP_EXTRA_INDEX_URL` to instruct pip on where to look for non-public packages.
+    - Install public and private Python-level packages from your `requirements.txt` file.
+
+4. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
+
+#### Step 3: Build a custom Docker image
+
+1. Run the following command to automatically generate a unique image name:
+
+    ```sh
+    image_name=astro-$(date +%Y%m%d%H%M%S)
+    ```
+
+2. Run the following command to create a new Docker image from your `Dockerfile`. Replace the pip repository and associated credential values with your own.
+
+    ```sh
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t $image_name .
+    ```
+
+3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
+
+4. Deploy the image using the Astro CLI:
+
+    ```sh
+    astro deploy --image-name $image_name
+    ```
+
+Your Astro project can now utilize Python packages from your private PyPi index.
+
+</TabItem>
+</Tabs>
+
+## Add a CA certificate to an Astro Runtime image
+
+If you need your Astro deployment to communicate securely with a remote service using a certificate signed by an untrusted or internal certificate authority (CA), you need to add the CA certificate to the trust store inside the image.
+
+1. In your Astro project `Dockerfile`, add the following entry below the existing `FROM` statement which specifies your Astro Runtime image version:
+
+    ```docker
+    USER root
+    COPY <internal-ca.crt>/usr/local/share/ca-certificates/<your-company-name>/
+    RUN update-ca-certificates
+    USER astro
+    ```
+2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
+
+3. Save your changes and test them locally, or deploy them to a test Deployment.

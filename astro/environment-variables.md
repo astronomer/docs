@@ -1,135 +1,135 @@
 ---
-sidebar_label: 'Environment Variables'
-title: 'Set Environment Variables on Astro'
+sidebar_label: 'Environment variables'
+title: 'Set environment variables on Astro'
 id: environment-variables
-description: Set environment variables on Astro to specify Airflow configurations and custom logic.
 ---
 
-## Overview
+<head>
+  <meta name="description" content="Learn how you can set environment variables on Astro to specify Airflow configurations and custom logic that better meet the requirements of your organization." />
+  <meta name="og:description" content="Learn how you can set environment variables on Astro to specify Airflow configurations and custom logic that better meet the requirements of your organization." />
+</head>
 
-You can use environment variables to set Airflow configurations ([reference here](https://airflow.apache.org/docs/stable/configurations-ref.html)) and custom values for your Airflow Deployments.
+import {siteVariables} from '@site/src/versions';
 
-For instance, you can set environment variables to:
+An environment variable on Astro is a key-value configuration that is applied to a specific Deployment. You can use environment variables to set Airflow configurations and custom values for Deployments on Astro. For example, you can use environment variables to:
 
-- Set up an SMTP service.
-- Limit Airflow parallelism and DAG concurrency.
-- Store Airflow Connections and Variables.
-- Customize your default DAG view in the Airflow UI (Tree, Graph, Gantt, etc.)
+- Identify a production Deployment versus a development Deployment that allows you to apply conditional logic in your DAG code.
+- Store [Airflow connections and variables](environment-variables.md#add-airflow-connections-and-variables-using-environment-variables).
+- Set up an SMTP service to receive [Airflow alerts](airflow-alerts.md) by email.
+- Integrate with Datadog or other third-party tooling to [export Deployment metrics](deployment-metrics.md#export-airflow-metrics-to-datadog).
+- Set [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html?), such as default timezone and maximum active runs per DAG.
 
-This guide covers:
+Some environment variables on Astro are set globally and cannot be overridden for individual Deployments. For more information on these environment variables, see [Global environment variables](platform-variables.md).
 
-- How to set environment variables on Astro.
-- How environment variables are stored on Astro.
-- How to store Airflow Connections and Variables as environment variables.
+## Set environment variables in the Cloud UI
 
-> **Note:** Some environment variables on Astro are set globally and cannot be overridden for individual Deployments. For more information on these environment variables, read [Global Environment Variables](platform-variables.md).
+:::cli
 
-## Set Environment Variables via the Cloud UI
-
-Environment variables can be set directly in the Cloud UI. To do so:
-
-1. In the Cloud UI, open a Deployment.
-2. In the Deployment's **Configuration** menu, click **Edit Variables**.
-
-    ![Edit Variables button highlighted in the Deployment configuration page](/img/docs/edit-variables.png)
-
-3. Specify an environment variable key and value in the table. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This will permanently hide the variable's value from all users in your Workspace.
-
-    When you're finished configuring the environment variable, click **Add**.
-
-    ![Add Variables button highlighted in the Environment Variables configuration table](/img/docs/add-variable.png)
-
-4. Click **Update Variables** to save your changes. This action restarts your Airflow Scheduler, Webserver, and Workers. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
-
-:::caution
-
-Environment variables marked as secret are stored securely by Astronomer and will never be shown in the Cloud UI, but it's possible for a user in your organization to proactively create or configure a DAG that exposes those values in Airflow task logs. Airflow task logs are visible to all Workspace members in the Airflow UI and accessible in your Astro Cluster's Amazon S3 bucket.
-
-To avoid exposing secret values in task logs, instruct your team to not log environment variables in DAG code. At this time, there is no way for Astronomer to prohibit this.
+If you prefer to work with the Astro CLI, you can create and update environment variables using the `astro deployment variable create` and `astro deployment variable update` commands. See [CLI command reference](cli/astro-deployment-variable-create.md).
 
 :::
+
+1. In the Cloud UI, select a Workspace and then select a Deployment.
+
+2. Click the **Variables** tab.
+
+3. Click **Edit Variables**.
+
+4. Enter an environment variable key and value. For sensitive credentials that should be treated with an additional layer of security, select the **Secret** checkbox. This will permanently hide the variable's value from all users in your Workspace.
+
+5. Click **Add**.
+
+6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
 ### Edit existing values
 
-If you want to make changes to an existing environment variable, you can modify the variable's value at any time. To do so:
+After you set an environment variable key, only the environment variable value can be modified. You can modify environment variables that are set as secret. However, the variable value is never shown. When you modify a secret environment variable, you'll be prompted to enter a new value.
 
-1. In the Cloud UI, open a Deployment.
-2. In the Deployment's **Configuration** menu, click **Edit Variables**.
-3. Click the pencil icon next to the value you want to edit.
+1. In the Cloud UI, select a Workspace and then select a Deployment.
 
-    ![Pencil icon next to an existing value in the Environment Variables configuration table](/img/docs/variable-pencil.png)
+2. Click the **Variables** tab.
 
-4. Modify the variable's value, then click the green checkmark.
+3. Click **Edit Variables**.
 
-    ![Green checkmark icon next to an updated value in the Environment Variables configuration table](/img/docs/variable-checkmark.png)
+4. Click **Edit value** next to the value you want to edit.
 
-5. Click **Update Variables** to save your changes. This action restarts your Airflow Scheduler, Webserver, and Workers. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
+    ![Edit value location](/img/docs/variable-pencil.png)
 
-Once an environment variable key has been set, it cannot be changed. Only an environment variable's value can be modified.
+5. Modify the variable's value, then click **Done editing**.
 
-:::caution
+    ![Done editing location](/img/docs/variable-checkmark.png)
 
-Environment Variables that are set as secret can be modified, but the variable's secret value will never be shown to the user once it's been saved. To modify a secret environment variable, you'll be prompted to enter a new value.
-
-:::
+6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for updated variables to be applied to your Deployment.
 
 ### How environment variables are stored on Astro
 
-Non-secret environment variables set via the Cloud UI are stored in a database that is managed by Astronomer and hosted in the Astro Control Plane.
+Non-secret environment variables set in the Cloud UI are stored in a database that is managed by Astronomer and hosted in the Astro control plane. When you configure a secret environment variable in the Cloud UI, the following methodology is used:
 
-Secret environment variables are stored using a different mechanism. When you configure a secret environment variable via the Cloud UI, the following happens:
-
-1. Astro generates a manifest that defines a Kubernetes secret containing your variable's key and value.
-2. Astro applies this manifest to your Deployment's namespace in the Data Plane.
-3. After the manifest is applied, the key and value of your environment variable are stored in an [etcd cluster](https://etcd.io/) at rest within the Astronomer Control Plane.
+- Astro generates a manifest that defines a Kubernetes secret containing your variable's key and value.
+- Astro applies this manifest to your Deployment's namespace in the data plane.
+- After the manifest is applied, the key and value of your environment variable are stored in an [etcd cluster](https://etcd.io/) at rest within the Astro control plane.
 
 This process occurs every time you update the environment variable's key or value.
 
-## Set Environment Variables via Dockerfile
-
-If you want to store environment variables using an external version control tool, we recommend setting them in your `Dockerfile`. This file is automatically created when you first initialize an Astro project via `astrocloud dev init`.
-
 :::caution
 
-Given that this file will be committed to your version control tool and to Astronomer, we strongly recommend either storing sensitive environment variables via the Cloud UI or using a third party secrets backend.
+Environment variables marked as secret are stored securely by Astronomer and are not shown in the Cloud UI. However, it's possible for a user in your organization to create or configure a DAG that exposes secret values in Airflow task logs. Airflow task logs are visible to all Workspace members in the Airflow UI and accessible in your Astro cluster's storage.
+
+To avoid exposing secret values in task logs, instruct users to not log environment variables in DAG code.
 
 :::
 
-To add environment variables, declare an ENV statement with the environment variable key and value. Your Dockerfile might look like this:
+## Set environment variables in your Dockerfile
 
-```dockerfile
-FROM quay.io/astronomer/astro-runtime:2.1.1
+If you want to store environment variables using an external version control tool, Astronomer recommends setting them in your `Dockerfile`. This file is automatically created when you first initialize an Astro project using `astro dev init`.
+
+Environment variables added to a `Dockerfile` are mounted at build time and can be referenced in any other build process that follows `astro deploy` or `astro dev start`. Environment variables applied in the Cloud UI only become available once the Docker build process is completed.
+
+:::caution
+
+Environment variables set in your `Dockerfile` are stored in plain text. For this reason, Astronomer recommends storing sensitive environment variables using the Cloud UI or a third party secrets backend. For more information, see [Configure a secrets backend](secrets-backend.md).
+
+:::
+
+To add environment variables, declare an ENV command with the environment variable key and value. For example, the following `Dockerfile` sets two environment variables:
+
+<pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
 ENV AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG=1
-ENV AIRFLOW__CORE__DAG_CONCURRENCY=5
-ENV AIRFLOW__CORE__PARALLELISM=25
-```
+ENV AIRFLOW_VAR_MY_VAR=25`}</code></pre>
 
-Once your environment variables are added:
+After you add your environment variables, use one of the following options to deploy your changes:
 
-1. Run `astrocloud dev restart` to rebuild your image and apply your changes locally OR
-2. Run `astrocloud deploy` to apply your changes to your running Airflow Deployment on Astronomer
+- Run `astro dev restart` to rebuild your image and apply your changes locally.
+- Run `astro deploy` to apply your changes to your Deployment on Astro.
 
-> **Note:** Environment variables injected via the `Dockerfile` are mounted at build time and can be referenced in any other processes run during the Docker build process that immediately follows `astrocloud deploy` or `astrocloud dev start`.
->
-> Environment variables applied via the Cloud UI only become available once the Docker build process has been completed.
+## Environment variable priority
 
-## Add Airflow Connections and Variables via Environment Variables
+On Astro, environment variables are applied and overridden in the following order:
 
-For users who regularly use [Airflow Connections](https://airflow.apache.org/docs/apache-airflow/stable/concepts/connections.html) and [Variables](https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html), we recommend storing and fetching them via environment variables.
+- Cloud UI
+- [.env (local development only)](develop-project.md#set-environment-variables-local-development)
+- Dockerfile
+- Default Airflow values
 
-As mentioned above, Airflow Connections and Variables are stored in Airflow's Metadata Database. Adding them outside of task definitions and operators requires an additional connection to Airflow's Postgres Database, which is called every time the Scheduler parses a DAG (as defined by `process_poll_interval`, which is set to 1 second by default).
+For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence.
 
-By adding Connections and Variables as environment variables, you can refer to them more easily in your code and lower the amount of open connections, thus preventing a strain on your Database and resources.
+## Add Airflow connections and variables using environment variables
 
-### Airflow Connections
+If you regularly use [Airflow connections](https://airflow.apache.org/docs/apache-airflow/stable/concepts/connections.html) and [variables](https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html), Astronomer recommends storing and fetching them with environment variables instead of adding them to the Airflow UI.
 
-The environment variable naming convention for Airflow Connections is:
+As mentioned above, Airflow connections and variables are stored in Airflow's metadata database. Adding them outside of task definitions and operators requires an additional connection to Airflow's metadata database, which is called every time the scheduler parses a DAG. This parsing process is defined by the `process_poll_interval` environment variable, which is set to 1 second by default.
+
+By adding connections and variables as environment variables, you can refer to them more easily in your code and lower the amount of open connections, thus preventing a strain on your Database and resources.
+
+### Airflow connections
+
+The environment variable naming convention for Airflow connections is:
 
 ```
 ENV AIRFLOW_CONN_<CONN_ID>=<connection-uri>
 ```
 
-For example, consider the following Airflow Connection:
+For example, consider the following Airflow connection:
 
 - Connection ID: `MY_PROD_DB`
 - Connection URI: `my-conn-type://login:password@host:5432/schema`
@@ -140,13 +140,17 @@ Here, the full environment variable would read:
 ENV AIRFLOW_CONN_MY_PROD_DB=my-conn-type://login:password@host:5432/schema
 ```
 
-You can set this environment variable via an `.env` file locally, via your Dockerfile, or via the Cloud UI as explained above. For more information on how to generate your Connection URI, refer to the [Apache Airflow documentation](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri).
+For more information on how to generate a Connection URI, see the [Apache Airflow documentation](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri).
 
-> **Note:** Airflow Connections set via environment variables do not appear in the Airflow UI and cannot be modified there.
+:::info
 
-### Airflow Variables
+Airflow connections set with environment variables do not appear in the Airflow UI and cannot be modified there.
 
-The environment variable naming convention for Airflow Variables is:
+:::
+
+### Airflow variables
+
+The environment variable naming convention for Airflow variables is:
 
 ```
 ENV AIRFLOW_VAR_<VAR_NAME>=Value
@@ -163,19 +167,13 @@ Here, the environment variable would read:
 ENV AIRFLOW_VAR_MY_VAR=2
 ```
 
-## View Environment Variables in the Airflow UI
+## Query environment variables in a DAG
 
-By default, Airflow environment variables are hidden in the Airflow UI for both local environments and Astro Deployments. To view a Deployment's current environment variables from the Airflow UI, you can set `AIRFLOW__WEBSERVER__EXPOSE_CONFIG=True` either in your Dockerfile or the Cloud UI.
+When you set an Airflow variable as an environment variable on Astro, there are two ways you can call that variable in your DAGs:
 
-You might want to turn on this setting if you want explicit confirmation that an environment variable change was correctly applied to a Deployment, or if you want anyone accessing the Deployment to have more convenient access to environment variable values when working in the Airflow UI.
+- `Variable.get('<environment-variable-key>')`
+- `os.getenv('<environment-variable-key>', '<default_value>')`
 
-## Environment Variable Priority
+If your variable or environment variable contains a secret value, Astronomer recommends using `Variable.get` to ensure that secret values are not present as plain text in your DAG code. However, with this method, requests to the Airflow metadata database can occur every time your DAGs are parsed. Typically, requests occur every 1 to 5 seconds and a significant number of requests could negatively affect database performance. For more information about retrieving Airflow variables using this method, see [Variables](https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html).
 
-On Astro, environment variables are applied and overridden in the following order:
-
-1. Cloud UI
-2. [.env (local development only)](develop-project.md#set-environment-variables-via-env-local-development-only))
-3. Dockerfile
-4. Default Airflow Values (`airflow.cfg`)
-
-For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value via the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI will take precedence.
+For non-secret values, Astronomer recommends using `os.getenv('<environment-variable-key>', '<default_value>')` to reduce the number of Airflow metadata database requests.  Replace `environment-variable-key` with the key for your environment variable on Astro and `default_value` with the default value for the key. Typically, `default_value` is the value you defined for the environment variable in the Cloud UI. When your DAG queries an environment variable that doesn't exist, `default_value` is used.

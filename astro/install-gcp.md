@@ -1,88 +1,104 @@
 ---
-sidebar_label: 'Install Astro on GCP'
+sidebar_label: 'GCP'
 title: 'Install Astro on GCP'
 id: install-gcp
-description: Get started on Astro by creating your first Astro Cluster on Google Cloud Platform (GCP).
+description: Get started on Astro by creating your first Astro cluster on Google Cloud Platform (GCP).
+sidebar_custom_props: { icon: 'img/gcp.png' }
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 ---
 
-## Overview
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-This guide provides steps for getting started with Astro on Google Cloud Platform (GCP). Below, you'll find instructions for how to complete the Astro install process, including prerequisites and the steps required for our team to provision resources in your network.
+This is where you'll find instructions for installing Astro on the Google Cloud Platform (GCP).
 
-At a high-level, we'll ask that you come prepared with a new Google Cloud project. From there, you can expect to:
+To complete the installation process, you'll:
 
 - Create an account on Astro.
-- Activate your Astro Data Plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
-- Share information about your Google Cloud project with our team.
+- Activate your Astro data plane by enabling Google Cloud APIs and adding service accounts to your project's IAM.
+- Share information about your Google Cloud project with Astronomer.
 
-Astronomer will then create a Cluster within your Google Cloud project that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
+When you've completed the installation process, Astronomer will create a cluster within your Google Cloud project to host the resources and Apache Airflow components necessary to deploy DAGs and execute tasks.
 
-For more information on managing Google Cloud projects, see [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
+For more information about managing Google Cloud projects, see [GCP documentation](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
 
-## Prerequisites
+## Set up
 
-To install Astro on GCP, you need:
+<Tabs
+    defaultValue="byoc"
+    groupId= "byoc"
+    values={[
+        {label: 'Self-hosted', value: 'byoc'},
+        {label: 'Astronomer-hosted', value: 'astronomer hosted data plane'},
+    ]}>
+<TabItem value="byoc">
 
-- A clean [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
+### Prerequisites
+
+- A [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) with billing enabled. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it.
 - A user with [Owner permissions](https://cloud.google.com/iam/docs/understanding-roles) in your project.
 - [Google Cloud Shell](https://cloud.google.com/shell).
-- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36.
-- A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24.
-- A subscription to the [Astro Status Page](https://status.astronomer.io). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
+- A minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 36. To adjust your project's quota limits up or down, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console).
+- A minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24. To adjust your project's quota limits up or down, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console).
+- A subscription to the [Astro Status Page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or scheduled maintenance is required.
+- The following domains added to your organization's allowlist for any user and CI/CD environments:
+    - `https://cloud.astronomer.io/`
+    - `https://astro-<your-org>.datakin.com/`
+    - `https://<your-org>.astronomer.run/`
+    - `https://api.astronomer.io/`
+    - `https://images.astronomer.cloud/`
+    - `https://auth.astronomer.io/`
+    - `https://updates.astronomer.io/`
+    - `https://install.astronomer.io/`
 
 For more information about the resources required to run Astro on GCP, see [GCP Resource Reference](resource-reference-gcp.md).
 
-### VPC Peering Prerequisites (Optional)
+#### VPC peering prerequisites (optional)
 
 If any of your GCP resources are on a private network, you can access them using one of the following options:
 
 - [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect)
 - A [VPC Peering connection](https://cloud.google.com/vpc/docs/vpc-peering) between Astronomer's VPC and the VPCs for your broader network
 
-Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer Cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
+Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
 
 - **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/19`)
 - **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
 - **Service Address CIDR**: Used by GKE services (Default: `172.22.0.0/19`)
-- **Service VPC Peering**: Used by Private Service Connections (Default: `172.21.0.0/19`)
+- **Service VPC Peering**: Used by Private Service Connections (Default: `172.23.0.0/19`)
 
-## Step 1: Access Astro
+### Access Astro
 
-To get started with Astro, create an account at https://cloud.astronomer.io/.
+1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
-When you first authenticate to Astro, you can sign in with a Google account, a GitHub account, or an email and password.
+2. Select one of the following options to access the Cloud UI:
 
-<div class="text--center">
-  <img src="/img/docs/login.png" alt="Astro login screen" />
-</div>
+    - Enter your password and click **Continue**.
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
+    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
-If you're the first person from your team to authenticate, the Astronomer team will add you as a Workspace Admin to a new Workspace named after your Organization. From there, you'll be able to add other team members to that Workspace without Astronomer's assistance.
+    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
-:::tip
+### Activate the data plane
 
-After completing your initial installation, we recommend [setting up an identity provider (IdP)](configure-idp.md) so that users can log in to Astro through your IdP.
-
-:::
-
-## Step 2: Activate the Data Plane
-
-The Data Plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
-
-To activate the Data Plane on your GCP project:
+The data plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
 1. Run the following commands in your Google Cloud Shell:
 
     ```sh
-    $ gcloud services enable storage-component.googleapis.com
-    $ gcloud services enable storage-api.googleapis.com
-    $ gcloud services enable compute.googleapis.com
-    $ gcloud services enable container.googleapis.com
-    $ gcloud services enable deploymentmanager.googleapis.com
-    $ gcloud services enable cloudresourcemanager.googleapis.com
-    $ gcloud services enable cloudkms.googleapis.com
-    $ gcloud services enable sqladmin.googleapis.com
-    $ gcloud services enable servicenetworking.googleapis.com
-    $ curl \
+    gcloud services enable storage-component.googleapis.com
+    gcloud services enable storage-api.googleapis.com
+    gcloud services enable compute.googleapis.com
+    gcloud services enable container.googleapis.com
+    gcloud services enable deploymentmanager.googleapis.com
+    gcloud services enable cloudresourcemanager.googleapis.com
+    gcloud services enable cloudkms.googleapis.com
+    gcloud services enable sqladmin.googleapis.com
+    gcloud services enable servicenetworking.googleapis.com
+    gcloud services enable dns.googleapis.com
+    curl \
     https://storage.googleapis.com/storage/v1/projects/$GOOGLE_CLOUD_PROJECT/serviceAccount \
     --header "Authorization: Bearer `gcloud auth application-default print-access-token`"   \
     --header 'Accept: application/json'   --compressed
@@ -91,60 +107,103 @@ To activate the Data Plane on your GCP project:
 2. Run the following commands in your Google Cloud Shell:
 
     ```sh
-    $ export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
-    $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
-    $ gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
+    export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
+    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
     ```
 
-## Step 3: Provide Setup Information to Astronomer
+### Provide setup information to Astronomer
 
-Once you've activated your Data Plane, provide Astronomer with:
+Once you've activated your data plane, provide Astronomer with:
 
-- Your preferred Astro Cluster name.
-- The GCP region that you want to host your Cluster in.
+- Your GCP project ID.
+- Your preferred Astro cluster name.
+- The GCP region that you want to host your cluster in.
 - Your preferred node instance type.
 - Your preferred CloudSQL instance type.
 - Your preferred maximum node count.
 - (_Optional_) Your custom CIDR ranges for connecting to Astronomer's services.
 
-If you don't provide information that is specific to your organization, a Cluster with the default configurations is created in `us-central1`. For more infomation about the default configurations, see [GCP Resource Reference](resource-reference-gcp.md).  
+If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with a node pool of `e2-standard-4` nodes. For more information, see [GCP resource reference](resource-reference-gcp.md).
 
-:::info
+#### VPC peering with Astronomer
 
-If you need to VPC peer with Astronomer, additionally provide the following information to Astronomer:
+Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
 
 - VPC Name/ID and region for peering with Astronomer.
 - The IPs of your DNS servers.
 
-You then need to accept a VPC peering request from Astronomer after Astro is installed. To accept the request, follow [Using VPC Network Peering](https://cloud.google.com/vpc/docs/using-vpc-peering) in GCP documentation.
+### Astronomer support creates the cluster
 
-Once VPC peered with Astronomer, configure and validate the following to ensure successful network communications between Astro and your resources:
+After you provide Astronomer support with the setup information for your organization, Astronomer support creates your first cluster on GCP.
 
-- [Egress routes](https://cloud.google.com/vpc/docs/routes#routing_in) on Astronomer's route table
-- [Network ACLs](https://cloud.google.com/storage/docs/access-control/lists) and/or [Security Group](https://cloud.google.com/identity/docs/how-to/update-group-to-security-group) rules of your resources
+Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
+
+If you submitted a VPC peering request, you'll need to accept the request from Astronomer after Astro is installed. To accept the request, see [Use VPC Network Peering](https://cloud.google.com/vpc/docs/using-vpc-peering).
+
+When VPC peering with Astronomer is complete, configure and validate the following items to ensure successful network communications between Astro and your resources:
+
+- [Egress routes](https://cloud.google.com/vpc/docs/routes#routing_in)
+- [Network ACLs](https://cloud.google.com/storage/docs/access-control/lists) or [Security Group](https://cloud.google.com/identity/docs/how-to/update-group-to-security-group) rules of your resources
+
+</TabItem>
+
+<TabItem value="astronomer hosted data plane">
+
+:::info
+
+This feature is currently Private Preview. Contact [Astronomer support](https://cloud.astronomer.io/support) to enable it.
 
 :::
 
-## Step 4: Let Astronomer Complete the Install
+When providing hosting services, Astronomer adheres to industry best practices and standards including the Health Insurance Portability and Accountability Act (HIPAA), Service Organization Control 2 (SOC2), and  General Data Protection Regulation (GDPR). 
 
-Once you've provided Astronomer with the information for your setup, the Astronomer team will finish creating your first Cluster on GCP.
+### Prerequisites
 
-This process can take some time. Wait for confirmation that the installation was successful before proceeding to the next step.
+The setup process assumes that you've already provided Astronomer support with the following information: 
 
-## Step 5: Create a Deployment
+- Your preferred cluster installation region. See the supported region lists for [GCP](resource-reference-gcp.md#supported-regions).
+- Optional. Your preferred worker instance type for your first cluster. See [GCP cluster configurations](resource-reference-gcp.md#supported-cluster-configurations).
+- Optional. Your VPC peering requirements for [GCP](install-gcp#vpc-peering-with-astronomer).
+- The email address of your first Astro user.
 
-Once Astronomer confirms that your Astro Cluster has been created, you are ready to create a Deployment and start deploying DAGs. Log in to [the Cloud UI](https://cloud.astronomer.io) and [create a new Deployment](configure-deployment.md). If the installation was successful, your new Astro Cluster will be listed as an option under the **Cluster** menu:
+If you haven't provided this information to Astronomer support, contact your Astronomer representative. 
 
-<div class="text--center">
-  <img src="/img/docs/create-new-deployment-select-cluster.png" alt="Cloud UI New Deployment screen" />
-</div>
+### Astronomer support creates the cluster
 
-## Next Steps
+Astronomer support creates your first Astro cluster in a dedicated GCP account after you've provided your setup information.
 
-Now that you have an Astro Cluster up and running, take a look at the docs below for information on how to start working in Astro:
+Wait for confirmation that the installation is successful before you access Astro and create a Deployment.
 
-- [Set Up an Identity Provider](configure-idp.md)
-- [Install CLI](install-cli.md)
-- [Configure Deployments](configure-deployment.md)
-- [Deploy Code](deploy-code.md)
-- [Add Users](add-user.md)
+### Access Astro
+
+1. Optional. If you haven't created an Astronomer account, go to https://cloud.astronomer.io/ and create an account.
+
+2. Go to https://cloud.astronomer.io/, enter your email address, and then click **Continue**.
+
+3. Select one of the following options to access the Cloud UI:
+
+    - Enter your password and click **Continue**.
+    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
+    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
+
+    If you're the first person in an Organization to authenticate, you're added as a Workspace Admin to a new Workspace named after your Organization. You can add other team members to the Workspace without the assistance of Astronomer support. See [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
+
+</TabItem>
+
+</Tabs>
+
+## Create a Deployment
+
+When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). When you create your Deployment, the Astro cluster created by Astronomer support appears as an option in the **Cluster** list as shown in the following image.
+
+![Cloud UI New Deployment screen](/img/docs/create-new-deployment-select-cluster.png)
+
+## Next steps
+
+- [Set up an identity provider](configure-idp.md)
+- [Install the Astro CLI](cli/overview.md)
+- [Configure Deployments](configure-deployment-resources.md)
+- [Deploy code](deploy-code.md)
+- [Add users](add-user.md)

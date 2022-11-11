@@ -3,28 +3,28 @@ sidebar_label: 'Azure'
 title: 'Install Astronomer Software on Azure AKS'
 id: install-azure
 description: Install Astronomer Software on Azure Kubernetes Service (AKS).
+sidebar_custom_props: { icon: 'img/azure.png' }
 ---
 
 Install Astronomer Software on Azure to deploy and scale [Apache Airflow](https://airflow.apache.org/) on a [Microsoft Azure Kubernetes Service](https://azure.microsoft.com/en-us/services/kubernetes-service/) (AKS) cluster.
 
 ## Prerequisites
 
-To install Astronomer on AKS, you'll need access to the following tools and permissions:
-
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-* A compatible version of Kubernetes as described in Astronomer's [Version Compatibility Reference](version-compatibility-reference.md)
+* A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
 * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
 * SMTP Service & Credentials (e.g. Mailgun, Sendgrid, etc.)
 * Permission to create and modify resources on AKS
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
+* If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
 
-## Step 1: Choose a Base Domain
+## Step 1: Choose a base domain
 
 All Astronomer services will be tied to a base domain of your choice, under which you will need the ability to add and edit DNS records.
 
-Once created, your Astronomer base domain will be linked to a variety of sub-services that your users will access via the internet to manage, monitor and run Airflow on the platform.
+Once created, your Astronomer base domain will be linked to a variety of sub-services that your users will access in a browser to manage, monitor and run Airflow on the platform.
 
 For the base domain `astro.mydomain.com`, for example, here are some corresponding URLs that your users would be able to reach:
 
@@ -45,9 +45,9 @@ The steps below will walk you through how to:
 
 You can view Microsoft Azure's Web Portal at https://portal.azure.com/.
 
-> Note: Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, refer to Astronomer's [Version Compatibility Reference](version-compatibility-reference.md).
+> Note: Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, refer to Astronomer's [Version compatibility reference](version-compatibility-reference.md).
 
-### Create an Azure Resource Group
+### Create an Azure resource group
 
 A resource group is a collection of related resources for an Azure solution. Your AKS cluster will reside in the resource group you create. Learn more about resource groups [here](https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-overview#resource-groups).
 
@@ -75,7 +75,7 @@ az group create --location <location> --name <my_resource_group>
 ```
 > **Note:** For a list of available locations, run `$ az account list-locations`.
 
-### Create an AKS Cluster
+### Create an AKS cluster
 
 Once you've created an Azure Resource Group, you can create an AKS cluster using the Azure CLI, Azure PowerShell, or Azure Portal. For instructions, see [Microsoft documentation](https://docs.microsoft.com/en-us/azure/aks/).
 You can create a cluster with any machine type, but Astronomer recommends using larger nodes and not smaller nodes.
@@ -85,7 +85,7 @@ Verify your Kubernetes version is supported by Astronomer Software:
 az aks get-versions --location <your-region> --output table
 ```
 
-The Kubernetes version returned must be supported by Astronomer Software. See [Version Compatibility Reference](version-compatibility-reference.md).
+The Kubernetes version returned must be supported by Astronomer Software. See [Version compatibility reference](version-compatibility-reference.md).
 
 Create and autoscale your Kubernetes cluster:
 ```
@@ -96,7 +96,7 @@ You may need to increase your resource quota in order to provision these nodes.
 
 > **Note:** If you work with multiple Kubernetes environments, `kubectx` is an incredibly useful tool for quickly switching between Kubernetes clusters. Learn more [here](https://github.com/ahmetb/kubectx).
 
-### Authenticate with your AKS Cluster
+### Authenticate with your AKS cluster
 
 Run the following command to set your AKS cluster as current context in your kubeconfig. This will configure `kubectl` to point to your new AKS cluster:
 
@@ -104,7 +104,7 @@ Run the following command to set your AKS cluster as current context in your kub
 az aks get-credentials --resource-group <my_resource_group> --name <my_cluster_name>
 ```
 
-## Step 3: Create a Kubernetes Namespace
+## Step 3: Create a Kubernetes namespace
 
 Create a [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) called `astronomer` to host the core Astronomer platform:
 
@@ -116,7 +116,7 @@ Once Astronomer is running, each Airflow Deployment that you create will have it
 
 ## Step 4: Configure TLS
 
-We recommend running Astronomer Software on a dedicated domain (`BASEDOMAIN`) or subdomain (`astro.BASEDOMAIN`).
+Astronomer recommends running Astronomer Software on a dedicated domain (`BASEDOMAIN`) or subdomain (`astro.BASEDOMAIN`).
 
 In order for users to access the web applications they need to manage Astronomer, you'll need a TLS certificate that covers the following subdomains:
 
@@ -135,10 +135,10 @@ prometheus.BASEDOMAIN
 
 To obtain a TLS certificate, complete one of the following setups:
 
-* **Option 1:** Obtain a TLS certificate from Let's Encrypt. We recommend this option for smaller organizations where your DNS administrator and Kubernetes cluster administrator are either the same person or on the same team.
-* **Option 2:** Request a TLS certificate from your organization's security team. We recommend this option for large organizations with their own  protocols for generating TLS certificates.
+* **Option 1:** Obtain a TLS certificate from Let's Encrypt. Astronomer recommends this option for smaller organizations where your DNS administrator and Kubernetes cluster administrator are either the same person or on the same team.
+* **Option 2:** Request a TLS certificate from your organization's security team. Astronomer recommends this option for large organizations with their own  protocols for generating TLS certificates.
 
-> **Note:** Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
+> **Note:** Private CAs support on Azure is only available for clusters running containerd 1.5+, which is available on Kubernetes 1.22+.
 
 ### Option 1: Create TLS certificates using Let's Encrypt
 
@@ -201,12 +201,12 @@ If you received a certificate from a private CA, follow these steps instead:
 
 2. Note the value of `private-root-ca` for when you configure your Helm chart in Step 8. You'll need to additionally specify the `privateCaCerts` key-value pair with this value for that step.
 
-## Step 6: Configure Your SMTP URI
+## Step 6: Configure your SMTP URI
 
-An SMTP service is required for sending and accepting email invites from Astronomer. If you're running Astronomer Software with `publicSignups` disabled (which is the default), you'll need to configure SMTP as a way for your users to receive and accept invites to the platform via email. To integrate your SMTP service with Astronomer, fetch your SMTP service's URI and store it in a Kubernetes secret:
+An SMTP service is required for sending and accepting email invites from Astronomer. If you're running Astronomer Software with `publicSignups` disabled (which is the default), you'll need to configure SMTP as a way for your users to receive and accept invites to the platform through an email invitation. To integrate your SMTP service with Astronomer, fetch your SMTP service's URI and store it in a Kubernetes secret:
 
 ```sh
-kubectl create secret generic astronomer-smtp --from-literal=connection=smtp://USERNAME:PASSWORD@HOST/?requireTLS=true -n astronomer
+kubectl create secret generic astronomer-smtp --from-literal connection="smtp://USERNAME:PASSWORD@HOST/?requireTLS=true" -n astronomer
 ```
 
 In general, an SMTP URI will take the following form:
@@ -229,7 +229,7 @@ If your SMTP provider is not listed, refer to the provider's documentation for i
 
 > **Note:** If there are `/` or other escape characters in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
 
-## Step 7: Configure the Database
+## Step 7: Configure the database
 
 If you're connecting to an external database, you will need to create a secret named `astronomer-bootstrap` to hold your database connection string:
 
@@ -242,11 +242,11 @@ kubectl create secret generic astronomer-bootstrap \
 > **Note:** You must URL encode any special characters in your Postgres password.
 
 A few additional configuration notes:
-- If you want to use Azure Database for PostgreSQL with Astronomer, you must use the [Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/) service.
-- If you provision Azure Database for PostgreSQL - Flexible Server, it enforces TLS/SSL and requires that you set `sslmode` to `prefer` in your `config.yaml`.
 - If you provision an external database, `postgresqlEnabled` should be set to `false` in Step 8.
+- If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+- If you provision Azure Database for PostgreSQL - Flexible Server, it enforces TLS/SSL and requires that you set `sslmode` to `prefer` in your `config.yaml`.
 
-## Step 8: Configure Your Helm Chart
+## Step 8: Configure Your Helm chart
 
 > **Note:** If you want to use a third-party ingress controller for Astronomer, complete the setup steps in [Third-Party Ingress Controllers](third-party-ingress-controllers.md) in addition to this configuration.
 
@@ -254,8 +254,7 @@ As a next step, create a file named `config.yaml` in an empty directory.
 
 For context, this `config.yaml` file will assume a set of default values for our platform that specify everything from user role definitions to the Airflow images you want to support. As you grow with Astronomer and want to customize the platform to better suit your team and use case, your `config.yaml` file is the best place to do so.
 
-In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/docker/certs.d`, and `smtpUrl` with your own values. For more example configuration files, go [here](https://github.com/astronomer/astronomer/tree/master/configs).
-
+In the newly created file, copy the example below and replace `baseDomain`, `private-root-ca`, `/etc/docker/certs.d`, and `astronomer.houston.secret` with your own values. For more example configuration files, see the [Astronomer GitHub](https://github.com/astronomer/astronomer/tree/master/configs).
 
 ```yaml
 #################################
@@ -281,12 +280,12 @@ global:
   # - private-root-ca
 
   # Enable privateCaCertsAddToHost only when your nodes do not already
-  # include the private CA in their docker trust store.
+  # include the private CA in their containerd trust store.
   # Most enterprises already have this configured,
   # and in that case 'enabled' should be false.
   # privateCaCertsAddToHost:
   #   enabled: true
-  #   hostDirectory: /etc/docker/certs.d
+  #   hostDirectory: /etc/containerd/certs.d
 
   # For development or proof-of-concept, you can use an in-cluster database
   postgresqlEnabled: false # Keep True if deploying a database on your AKS cluster.
@@ -313,10 +312,6 @@ nginx:
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations: {}
 
-#################################
-### SMTP configuration
-#################################
-
 astronomer:
   houston:
     config:
@@ -336,15 +331,9 @@ astronomer:
           google:
             enabled: true # Lets users authenticate with Google
     secret:
-    - envName: "EMAIL__SMTP_URL"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
+    - envName: "<smtp_uri_secret>"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
       secretName: "astronomer-smtp"
       secretKey: "connection"
-```
-
-SMTP is required and will allow users to send and accept email invites to Astronomer. The SMTP URI will take the following form:
-
-```yml
-smtpUrl: smtps://USERNAME:PW@HOST/?pool=true
 ```
 
 >> **Note:** If there are `/` or other escape characters in your username or password, you may need to [URL encode](https://www.urlencoder.org/) those characters.
@@ -375,15 +364,39 @@ Then, run:
 helm repo update
 ```
 
-This will ensure that you pull the latest from our Helm repository. Finally, run:
+This ensures that you pull the latest image from the Astronomer Helm repository. Now, run:
 
 ```sh
-helm install -f config.yaml --version=0.28 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
+helm install -f config.yaml --version=0.30 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
 ```
 
-This command will install the latest available patch version of Astronomer Software v0.28. To override latest and specify a patch, add it to the `--version=` flag in the format of `0.28.x`. To install Astronomer Software v0.28.0, for example, specify `--version=0.28.0`. For information on all available patch versions, refer to [Software Release Notes](release-notes.md).
+This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.30.x`.  For example, to install Astronomer Software v0.30.0, you specify `--version=0.30.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
 
-Once you run the commands above, a set of Kubernetes pods will be generated in your namespace. These pods power the individual services required to run our platform, including the Software UI and Houston API.
+After you run the previous commands, a set of Kubernetes pods are generated in your namespace. These pods power the individual services required to run the Astronomer platform, including the Software UI and Houston API.
+
+### Alternative ArgoCD installation
+
+You can install Astronomer with [ArgoCD](https://argo-cd.readthedocs.io/en/stable/), which is an open source continuous delivery tool for Kubernetes, as an alternative to using `helm install`. 
+
+Because ArgoCD doesn't support sync wave dependencies for [app of apps](https://argo-cd.readthedocs.io/en/stable/operator-manual/cluster-bootstrapping/#app-of-apps-pattern) structures, installing Astronomer requires some additional steps compared to the standard ArgoCD workflow:
+
+1. Under the `global` section of your `config.yaml` file, add `enableArgoCDAnnotation: true`.
+   
+2. Create a new ArgoCD app. When creating the app, configure the following:
+
+    - **Path**: The filepath of your `config.yaml` file
+    - **Namespace**: The namespace you want to use for Astronomer
+    - **Cluster**: The Kubernetes cluster in which you're installing Astronomer 
+    - **Repository URL**: `https://helm.astronomer.io`
+
+3. Sync the ArgoCD app with every component of the Astronomer platform selected. See [Sync (Deploy) the Application](https://argo-cd.readthedocs.io/en/stable/getting_started/#7-sync-deploy-the-application).
+   
+4. Stop the sync when you see that `astronomer-houston-db-migrations` has completed in the Argo UI. 
+   
+5. Sync the application a second time, but this time clear `astronomer-alertmanager` in the Argo UI while keeping all other components selected. Wait for this sync to finish completely.
+   
+6. Sync the ArgoCD app a third time with all Astronomer platform components selected.
+
 
 ## Step 10: Verify all pods are up
 
@@ -431,7 +444,6 @@ astronomer-nginx-746589b744-h6r5n                          1/1     Running      
 astronomer-nginx-746589b744-hscb9                          1/1     Running             0          24m
 astronomer-nginx-default-backend-8cb66c54-4vjmz            1/1     Running             0          24m
 astronomer-nginx-default-backend-8cb66c54-7m86w            1/1     Running             0          24m
-astronomer-prisma-57d5bf6c64-zcmsh                         1/1     Running             0          24m
 astronomer-prometheus-0                                    1/1     Running             0          24m
 astronomer-prometheus-blackbox-exporter-65f6c5f456-865h2   1/1     Running             0          24m
 astronomer-prometheus-blackbox-exporter-65f6c5f456-szr4s   1/1     Running             0          24m
@@ -466,7 +478,6 @@ astronomer-nginx                              LoadBalancer   10.0.146.24    20.1
 astronomer-nginx-default-backend              ClusterIP      10.0.132.182   <none>          8080/TCP                                     6m48s
 astronomer-postgresql                         ClusterIP      10.0.0.252     <none>          5432/TCP                                     6m48s
 astronomer-postgresql-headless                ClusterIP      None           <none>          5432/TCP                                     6m48s
-astronomer-prisma                             ClusterIP      10.0.30.160    <none>          4466/TCP                                     6m48s
 astronomer-prometheus                         ClusterIP      10.0.128.170   <none>          9090/TCP                                     6m48s
 astronomer-prometheus-blackbox-exporter       ClusterIP      10.0.125.142   <none>          9115/TCP                                     6m48s
 astronomer-prometheus-node-exporter           ClusterIP      10.0.2.116     <none>          9100/TCP                                     6m48s
@@ -487,13 +498,13 @@ alertmanager.astro.mydomain.com
 prometheus.astro.mydomain.com
 ```
 
-## Step 12: Verify You Can Access the Software UI
+## Step 12: Verify you can access the Software UI
 
 Go to `app.BASEDOMAIN` to see the Software UI.
 
 Consider this your new Airflow control plane. From the Software UI, you'll be able to both invite and manage users as well as create and monitor Airflow Deployments on the platform.
 
-## Step 13: Verify Your TLS Setup
+## Step 13: Verify your TLS setup
 
 To check if your TLS certificates were accepted, log in to the Software UI. Then, go to `app.BASEDOMAIN/token` and run:
 
@@ -507,7 +518,7 @@ Verify that this output matches with that of the following command, which doesn'
 curl -v -k -X POST https://houston.BASEDOMAIN/v1 -H "Authorization: Bearer <token>"
 ```
 
-Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astronomer CLI:
+Next, to make sure the registry is accepted by Astronomer's local docker client, try authenticating to Astronomer with the Astro CLI:
 
 ```sh
 astro auth login <your-astronomer-base-domain>
@@ -524,27 +535,27 @@ Finally, try running `$ astro deploy` on a test deployment. Create a deployment 
 ```sh
 $ mkdir demo
 $ cd demo
-$ astro dev init
+$ astro dev init --use-astronomer-certified
 $ astro deploy -f
 ```
 Check the Airflow namespace. If pods are changing at all, then the Houston API trusts the registry.
 
-If you have Airflow pods in the state "ImagePullBackoff", check the pod description. If you see an x509 error, ensure that you added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. If you missed these during installation, follow the steps in [Apply a Platform Configuration Change on Astronomer](apply-platform-config.md) to add them after installation.
+If you have Airflow pods in the state "ImagePullBackoff", check the pod description. If you see an x509 error, ensure that you added the `privateCaCertsAddToHost` key-value pairs to your Helm chart. If you missed these during installation, follow the steps in [Apply a config change](apply-platform-config.md) to add them after installation.
 
-## What's Next
+## What's next
 
-To help you make the most of Astronomer Software, check out the following additional resources:
+To help you make the most of Astronomer Software, Astronomer recommends reviewing the following topics:
 
 * [Renew TLS Certificates on Astronomer Software](renew-tls-cert.md)
 * [Integrating an Auth System](integrate-auth-system.md)
 * [Configuring Platform Resources](configure-platform-resources.md)
 * [Managing Users on Astronomer Software](manage-platform-users.md)
 
-### Astronomer Support Team
+### Astronomer support team
 
-If you have any feedback or need help during this process and aren't in touch with our team already, a few resources to keep in mind:
+If you have feedback or need help during the installation process, here are some recommended resources:
 
 * [Community Forum](https://forum.astronomer.io): General Airflow + Astronomer FAQs
 * [Astronomer Support Portal](https://support.astronomer.io/hc/en-us/): Platform or Airflow issues
 
-For detailed guidelines on reaching out to Astronomer Support, reference our guide [here](support.md).
+For guidelines on contacting Astronomer Support, see [Submit a support request](support.md).

@@ -33,7 +33,7 @@ Beyond that, the platform does not need to connect to outside domains for routin
 
 ### What are the components of the Astronomer platform, with their respective Docker image versions?
 
-You can find a list of all components used by the platform in the [Astronomer Platform - Docker Images](https://docs.google.com/spreadsheets/d/1jE8EA4YapKEghVvk0-4K_MdwoVe6-O7v4uCI03ke6yg/edit#gid=0) Google Sheet.
+You can find a list of all components used by the platform in the [Astronomer Platform - Docker images](https://docs.google.com/spreadsheets/d/1jE8EA4YapKEghVvk0-4K_MdwoVe6-O7v4uCI03ke6yg/edit#gid=0) Google Sheet.
 
 ### What Docker version is used for deployment?
 
@@ -159,8 +159,7 @@ All platform components and Airflow deployment logs are retained within the plat
 
 ### How do we manage application and system logs?
 
-Astronomer's Software offering has a robust logging structure sitting atop Airflow. See https://www.astronomer.io/docs/ee-logging/
-
+Astronomer's Software offering has a robust logging structure sitting atop Airflow. See [Kibana logging on Astronomer Software](kibana-logging.md).
 
 ## Updating
 
@@ -172,4 +171,4 @@ Minor bugfix/CVE patches are applied to individual releases for 18 months.
 
 ### How does patching work for this setup?
 
-Kubernetes and node upgrades are generally managed by the customer. Platform version upgrades are performed with Helm, assisted by Astronomer support team if required. See [Upgrade to a Stable or Patch Version](upgrade-astronomer-stable.md).
+Kubernetes and node upgrades are generally managed by the customer. Platform version upgrades are performed with Helm, assisted by Astronomer support team if required. See [Upgrade to a Stable or Patch Version](upgrade-astronomer.md).

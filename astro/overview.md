@@ -3,44 +3,37 @@ sidebar_label: 'Overview'
 title: 'Astro Documentation'
 id: overview
 slug: /
-description: Learn about Astro, the managed service that makes data pipelines easy to write, run, and monitor.
+description: Everything you need to know about Astronomer’s modern data orchestration tool for the cloud, powered by Apache Airflow.
+hide_table_of_contents: true
 ---
 
-## Overview
+import LinkCardGrid from '@site/src/components/LinkCardGrid';
+import LinkCard from '@site/src/components/LinkCard';
+import AstroCard from '@site/src/components/AstroCard';
 
-Astro is a managed software service that offers a next-generation experience for modern data teams running Apache Airflow, the open source industry standard for data orchestration.
+<p class="DocItem__header-description">Everything you need to know about Astronomer’s modern data orchestration tool for the cloud, powered by Apache Airflow.</p>
 
-Astro boasts a hybrid deployment model founded on a Control Plane hosted by Astronomer and a Data Plane that is hosted in your cloud environment. Both are fully managed by Astronomer. This model offers the self-service convenience of a fully managed service while respecting the need to keep data private, secure, and within corporate boundaries. It optimizes for security whilst relieving your team of operational overhead.
+<AstroCard />
 
-Beyond architecture, Astro offers a suite of first-class features that make it easy to author, run, and monitor data pipelines.
+## Run on the cloud
 
-## Features
+<LinkCardGrid>
+  <LinkCard topIcon label="Create a Deployment" description="A Deployment is an instance of Apache Airflow hosted on Astro." href="/astro/create-deployment" icon="/img/deployment.svg" />
+  <LinkCard topIcon label="Deploy code" description="Get your DAGs up and running on Astro." href="/astro/deploy-code" icon="/img/code.svg" />
+  <LinkCard topIcon label="Automate with CI/CD" description="Push code to Astro using templates for popular CI/CD tools." href="/astro/ci-cd" icon="/img/automation.svg" />
+</LinkCardGrid>
 
-Astro's architecture enables a few key features, available today:
+## Not sure where to start?
 
-- Worker auto-scaling, powered by Airflow's Celery Executor + KEDA
-- The ability to run multiple clusters in your organization's network on either AWS or GCP
-- Astro Runtime, a collection of Docker images that provides a differentiated data orchestration experience
-- Timely support for the latest major, minor, and patch versions of the Apache Airflow open source project
-- Support for role-based access control (RBAC) and single sign-on (SSO) for secure user management and authentication
-- An observability experience that gives you insight into the health and resource consumption of your tasks and pipelines in real time
+<LinkCardGrid>
+  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" icon="/img/airflow-logo.png" />
+  <LinkCard label="Write a DAG with the Astro Python SDK" description="Learn how to write an ETL pipeline with the Astro Python SDK." href="/learn/astro-python-sdk" icon="/img/astro-monogram.svg" />
+</LinkCardGrid>
 
-## Architecture
+## Featured Astro docs
 
-The following diagram outlines how the Control Plane, Data Plane, and users are connected to enable these features:
-
-<div class="text--center">
-  <img src="/img/docs/architecture-overview.png" alt="High level overview of Astro's architecture" />
-</div>
-
-## Get Started
-
-The Astronomer team will schedule an onboarding session for your initial install. From there, we recommend reading through the following docs:
-
-- [Install the Astro CLI](install-cli.md)
-- [Develop Project](develop-project.md)
-- [Configure your Deployment](configure-deployment.md)
-
-If you have a feature request or a bug to report, reach out to [Astronomer Support](https://support.astronomer.io). We're here to help.
-
-To check on the operational status of Astro, visit our [status page](https://cloud-status.astronomer.io). You can subscribe to updates by clicking on **Subscribe to Updates** on the top-right of the page and entering your email address.
+<LinkCardGrid>
+  <LinkCard truncate label="Create a project" description="Create all of the necessary files to run Airflow locally or on Astro." href="/astro/create-project" />
+  <LinkCard truncate label="Configure Deployment resources" description="Fine-tune your Airflow environments to run faster and cost less." href="/astro/ci-cd" />
+  <LinkCard truncate label="Add and remove Astro users" description="Manage your team's roles and permissions on Astro." href="/astro/add-user" />
+</LinkCardGrid>

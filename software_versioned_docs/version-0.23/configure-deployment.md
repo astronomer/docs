@@ -31,7 +31,7 @@ To create an Airflow Deployment on Astronomer:
 
 3. Click **Create Deployment** and give the Deployment a few moments to spin up. Within a few seconds, you'll have access to the **Settings** page of your new Deployment:
 
-   ![New Deployment Celery Dashboard](https://assets2.astronomer.io/main/docs/deploying-code/v0.23-new_deployment-dashboard.png)
+   ![New Deployment Celery Dashboard](/img/software/v0.23-new_deployment-dashboard.png)
 
 This tab is the best place to modify resources for your Deployment. Specifically, you can:
 
@@ -149,7 +149,7 @@ Then, push the updated `config.yaml` file to your installation as described in [
 
 After applying this change, the **Release Name** field in the Software UI becomes configurable:
 
-![Custom Release Name Field](https://assets2.astronomer.io/main/docs/astronomer-ui/custom-release-name.png)
+![Custom Release Name Field](/img/software/custom-release-name.png)
 
 ## Delete a Deployment
 

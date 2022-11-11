@@ -1,8 +1,10 @@
-# redirect base path to astro
-/ /astro 301!
+# Proxying Pluasible Analytics Script through Netlify to help avoid adblockers
+# https://plausible.io/docs/proxy/guides/netlify
+/js/script.outbound-links.js https://plausible.io/js/script.outbound-links.js 200
+/api/event https://plausible.io/api/event 200
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
-/software/0.28/* /software/:splat
+/software/0.30/* /software/:splat
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
@@ -12,6 +14,28 @@
 
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
+/astro/connect-external-services https://docs.astronomer.io/astro/category/connect-astro 301
+
+# tutorial redirects 
+/tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
+/tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2 301
+/tutorials/astro-python-sdk /learn/astro-python-sdk 301
+
+# CLI migration redirects 
+/software/cli-reference /astro/cli/reference 301
+/software/cli-reference* /astro/cli/reference 301
+
+# Docs with redundant Learn guides 
+/astro/deferrable-operators /learn/deferrable-operators 301
+/astro/astro-python-sdk /learn/astro-python-sdk-etl 301
+/astro/data-lineage-concepts /learn/airflow-openlineage 301
+/astro/kubepodoperator-local /learn/kubepod-operator 301
+/software/deferrable-operators /learn/deferrable-operators 301
+/software/data-lineage-concepts /learn/airflow-openlineage 301
+/software/kubepodoperator-local /learn/kubepod-operator 301
+
+# deprecated docs
+/astro/known-limitations /astro 301
 
 # redirect base domain cloud links to astro path
 /add-user /astro/add-user 301
@@ -30,7 +54,7 @@
 /disaster-recovery /astro/disaster-recovery 301
 /environment-variables /astro/environment-variables 301
 /install-aws /astro/install-aws 301
-/install-cli /astro/install-cli 301
+
 /known-limitations /astro/known-limitations 301
 /modify-cluster /astro/modify-cluster 301
 /platform-variables /astro/platform-variables 301
@@ -95,6 +119,38 @@
 /cloud/cli-reference/astrocloud-workspace-list /astro/cli-reference/astrocloud-workspace-list 301
 /cloud/cli-reference/astrocloud-workspace-switch /astro/cli-reference/astrocloud-workspace-switch 301
 
+# Redirect to converged CLI docs
+/install-cli /astro/install-cli 301
+/astro/install-cli /astro/cli/install-cli 301
+/astro/cli-reference /astro/cli/reference 301
+/astro/cli-release-notes /astro/cli/release-notes 301
+/software/cli-quickstart /software/install-cli 301
+/software/cli-install-windows-10 /software/install-cli 301
+/astro/cli-reference/astrocloud-auth-login /astro/cli/astro-login 301
+/astro/cli-reference/astrocloud-auth-logout /astro/cli/astro-logout 301
+/astro/cli-reference/astrocloud-completion /astro/cli/astro-completion 301
+/astro/cli-reference/astrocloud-deploy /astro/cli/astro-deploy 301
+/astro/cli-reference/astrocloud-deployment-list /astro/cli/astro-deployment-list 301
+/astro/cli-reference/astrocloud-deployment-logs /astro/cli/astro-deployment-logs 301
+/astro/cli-reference/astrocloud-deployment-update /astro/cli/astro-deployment-update 301
+/astro/cli-reference/astrocloud-deployment-variable-create /astro/cli/astro-deployment-variable-create 301
+/astro/cli-reference/astrocloud-deployment-variable-list /astro/cli/astro-deployment-variable-list 301
+/astro/cli-reference/astrocloud-deployment-variable-update /astro/cli/astro-deployment-variable-update 301
+/astro/cli-reference/astrocloud-dev-init /astro/cli/astro-dev-init 301
+/astro/cli-reference/astrocloud-dev-kill /astro/cli/astro-dev-kill 301
+/astro/cli-reference/astrocloud-dev-logs /astro/cli/astro-dev-logs 301
+/astro/cli-reference/astrocloud-dev-parse /astro/cli/astro-dev-parse 301
+/astro/cli-reference/astrocloud-dev-ps /astro/cli/astro-dev-ps 301
+/astro/cli-reference/astrocloud-dev-pytest /astro/cli/astro-dev-pytest 301
+/astro/cli-reference/astrocloud-dev-run /astro/cli/astro-dev-run 301
+/astro/cli-reference/astrocloud-dev-start /astro/cli/astro-dev-start 301
+/astro/cli-reference/astrocloud-dev-stop /astro/cli/astro-dev-stop 301
+/astro/cli-reference/astrocloud-dev-restart /astro/cli/astro-dev-restart 301
+/astro/cli-reference/astrocloud-version /astro/cli/astro-version 301
+/astro/cli-reference/astrocloud-workspace-list /astro/cli/astro-workspace-list 301
+/astro/cli-reference/astrocloud-workspace-switch /astro/cli/astro-workspace-switch 301
+/astro/cli/get-started /astro/cli/install-cli 301
+
 # redirect enterprise paths to software
 /enterprise /software 301
 /enterprise/ac-cve /software/ac-cve 301
@@ -106,7 +162,7 @@
 /enterprise/ci-cd /software/ci-cd 301
 /enterprise/cli-install-windows-10 /software/cli-install-windows-10 301
 /enterprise/cli-podman /software/cli-podman 301
-/enterprise/cli-quickstart /software/cli-quickstart 301
+/enterprise/cli-quickstart /software/install-cli 301
 /enterprise/cli-reference /software/cli-reference 301
 /enterprise/configure-deployment /software/configure-deployment 301
 /enterprise/configure-platform-resources /software/configure-platform-resources 301
@@ -142,7 +198,7 @@
 /enterprise/overview /software 301
 /enterprise/platform-alerts /software/platform-alerts 301
 /enterprise/pre-create-namespaces /software/namespace-pools 301
-/enterprise/quickstart /software/cli-quickstart 301
+/enterprise/quickstart /software/install-cli 301
 /enterprise/registry-backend /software/registry-backend 301
 /enterprise/release-lifecycle-policy /software/release-lifecycle-policy 301
 /enterprise/release-notes /software/release-notes 301
@@ -156,6 +212,25 @@
 /enterprise/upgrade-astronomer-stable /software/upgrade-astronomer-stable 301
 /enterprise/version-compatibility-reference /software/version-compatibility-reference 301
 /enterprise/workspace-permissions /software/workspace-permissions 301
+
+# redirect Software upgrade docs
+
+/software/upgrade-astronomer-stable /software/upgrade-astronomer 301
+/software/0.28/upgrade-astronomer-stable /software/0.28/upgrade-astronomer 301
+/software/0.27/upgrade-astronomer-stable /software/0.27/upgrade-astronomer 301
+/software/0.26/upgrade-astronomer-stable /software/0.26/upgrade-astronomer 301
+/software/0.25/upgrade-astronomer-patch /software/0.25/upgrade-astronomer 301
+/software/upgrade-to-0-28 /software/upgrade-astronomer 301
+/software/0.28/upgrade-to-0-28 /software/0.28/upgrade-astronomer 301
+/software/0.27/upgrade-to-0-28 /software/0.27/upgrade-astronomer 301
+/software/0.26/upgrade-to-0-28 /software/0.26/upgrade-astronomer 301
+/software/0.25/upgrade-to-0-28 /software/0.25/upgrade-astronomer 301
+/software/upgrade-to-0-25 /software/upgrade-astronomer 301
+/software/0.25/upgrade-to-0-25 /software/0.25/upgrade-astronomer 301
+
+# redirect links to renamed files
+/astro/configure-deployment /astro/configure-deployment-resources 301
+/astro/scheduler-logs /astro/view-logs 301
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301

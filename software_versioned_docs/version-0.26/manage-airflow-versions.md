@@ -46,7 +46,7 @@ To initialize the Airflow upgrade process via the Software UI, navigate to **Dep
 1. Select your desired version of Airflow
 2. Click **Upgrade**
 
-![Airflow Upgrade via Software UI](https://assets2.astronomer.io/main/docs/manage-airflow-versions/airflow-upgrade-astro-ui.gif)
+![Airflow Upgrade via Software UI](/img/software/airflow-upgrade-astro-ui.gif)
 
 This action will NOT interrupt or otherwise impact your Airflow Deployment or trigger a code change - it is simply a signal to our platform that you _intend_ to upgrade such that we can guide your experience through the rest of the process.
 
@@ -130,8 +130,6 @@ For our platform's full collection of Docker Images, reference [Astronomer on Qu
 | Airflow Version                                                                      | Debian-based Image                                        |
 | ------------------------------------------------------------------------------------ | --------------------------------------------------------- |
 | [1.10.15](https://github.com/astronomer/ap-airflow/blob/master/1.10.15/CHANGELOG.md) | FROM quay.io/astronomer/ap-airflow:1.10.15-buster-onbuild |
-| [2.0.0](https://github.com/astronomer/ap-airflow/blob/master/2.0.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.0.0-buster-onbuild   |
-| [2.0.2](https://github.com/astronomer/ap-airflow/blob/master/2.0.2/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.0.2-buster-onbuild   |
 | [2.1.0](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.0-buster-onbuild   |
 | [2.1.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.1/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.1-buster-onbuild   |
 | [2.1.3](https://github.com/astronomer/ap-airflow/blob/master/2.1.3/CHANGELOG.md)     | FROM quay.io/astronomer/ap-airflow:2.1.3-buster-onbuild   |
@@ -194,7 +192,7 @@ If you begin the upgrade process for your Airflow Deployment and would like to c
 
 Via the Software UI, select **Cancel** next to **Airflow Version**.
 
-![Cancel Airflow Upgrade via Software UI](https://assets2.astronomer.io/main/docs/manage-airflow-versions/airflow-upgrade-astro-ui-cancel.gif)
+![Cancel Airflow Upgrade via Software UI](/img/software/airflow-upgrade-astro-ui-cancel.gif)
 
 Via the Astronomer CLI, run:
 
