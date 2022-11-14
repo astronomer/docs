@@ -31,12 +31,6 @@ All members of your Astro Organization can view the **Lineage** tab regardless o
 
 :::
 
-:::info
-
-This functionality is early access and under active development. If you have any questions or feedback about this feature, contact [Astronomer support](https://support.astronomer.io/).
-
-:::
-
 ## Prerequisites
 
 To view lineage data for Deployments, you must configure Airflow and your external systems to emit lineage data. See [Enable data lineage for external systems](set-up-data-lineage.md).
