@@ -105,7 +105,21 @@ For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/rep
 
 ## System distribution
 
-Astro Runtime images are based on Debian 11.3 (bullseye).
+The following table lists the Debian versions and architectures supported by each Astro Runtime version.
+
+| Astro Runtime | Debian                 | Architecture    |
+| ------------- | ---------------------- | -------------   |
+| 4.1.x         | 11.3 (bullseye)        | AMD64           |
+| 4.2.x         | 11.3 (bullseye)        | AMD64           |
+| 5.0.x         | 11.3 (bullseye)        | AMD64           |
+| 6.0.x         | 11.3 (bullseye)        | AMD64           |
+| 6.0.4         | 11.3 (bullseye)        | AMD64 and ARM64 |
+
+:::info
+
+When you're developing locally with Docker, ARM64 images are pushed by default with Apple M1 systems and AMD64 images are pushed by default with all other systems. You can push AMD64 images to Astro no matter the type of system you're using for development.
+
+:::
 
 ## Related documentation
 

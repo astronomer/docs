@@ -17,6 +17,12 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
 
+## November 15, 2022
+
+### AMD64 and ARM64 architecture support
+
+AMD64 and ARM64 processor architectures are now supported. This dual support significantly improves the local development experience when using the Astro CLI on Apple M1 systems.
+
 ## November 8, 2022
 
 ### Deploy only DAGs with `astro deploy -—dags`

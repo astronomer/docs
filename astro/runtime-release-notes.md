@@ -16,6 +16,15 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 6.0.4
+ 
+ - Release date: November 15, 2022
+- Airflow version: 2.4.2
+
+### Additional improvements  
+
+- Astro Runtime images now support AMD64 and ARM64 processor architectures. This dual support significantly improves the local development experience when using the Astro CLI on Apple M1 systems.
+
 ## Astro Runtime 6.0.3
 
 - Release date: October 24, 2022
