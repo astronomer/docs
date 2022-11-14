@@ -103,12 +103,12 @@ module.exports = {
             "create-cluster",
             {
               type: "category",
-              label: "Configure cluster resources",
+              label: "Manage cluster resource settings",
               link: {
                 type: "generated-index",
-                title: "Configure cluster resources",
+                title: "Manage cluster resource settings",
                 description:
-                  "Configure your AWS, Azure, or GCP cluster resources on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for most use cases.",
+                  "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for most use cases.",
               },
               items: [
                 "modify-cluster",
