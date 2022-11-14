@@ -7,7 +7,7 @@ id: external-python-operator
 
 It is very common in data science and data engineering use cases to need to run a task with different requirements from your Airflow environment. Your task may need a different Python version than Airflow, or require packages that conflict with core Airflow or your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
 
-In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator) to run a task that leverages the [Snowpark API](https://www.snowflake.com/snowpark/) for data transformations. Snowpark allows you to run queries and transformations on your data using different programming languages, making it a flexible addition to traditional Snowflake operators. Snowpark requires Python 3.8, while Airflow will be using Python 3.9. The ExternalPythonOperator will run a task in an existing Python virtual environment, allowing you to choose a different Python version for particular tasks. 
+In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator) to run a task that leverages the [Snowpark API](https://www.snowflake.com/snowpark/) for data transformations. Snowpark allows you to run queries and transformations on your data using different programming languages, making it a flexible addition to traditional Snowflake operators. Snowpark requires Python 3.8, while [Astro runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator will run a task in an existing Python virtual environment, allowing you to choose a different Python version for particular tasks. 
 
 :::note
 
@@ -151,6 +151,12 @@ Now that you have your Snowflake resources configured, you can move on to settin
     astro dev start
     ```
 
+    :::note
+
+    The build of this project's Dockerfile can take up to 20 minutes due to the `pyenv` installation. If you are an Astronomer customer and will be deploying this project to Astro, you can use a `dag-only` deploy after the initial deployment to avoid rebuilding the Dockerfile when making changes to DAGs in the project.
+
+    :::
+
 ## Step 4: Create your DAG
 
 In your Astro project `dags` folder, create a new file called `external-python-pipeline.py`. Paste the following code into the file:
@@ -209,7 +215,7 @@ with DAG(
         parameter = ssm.get_parameter(Name='/airflow/connections/snowflake', WithDecryption=True)
         conn = json.loads(parameter['Parameter']['Value'])
         
-        ## Checking for the correct venv packages	
+        ## Checking for the correct venv packages - this is useful for debugging	
         installed_packages = pkg_resources.working_set
         installed_packages_list = sorted(["%s==%s" % (i.key, i.version)
                 for i in installed_packages])
@@ -230,7 +236,6 @@ with DAG(
         session = Session.builder.configs(connection_parameters).create()
         # Running a SQL query in Snowpark
         df = session.sql('select avg(reps_upper), avg(reps_lower) from dog_intelligence;')
-        print(df)
         print(df.collect())
         # Closing the connection session
         session.close()
@@ -241,7 +246,7 @@ with DAG(
     task_print >> task_external_python
 ```
 
-This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in Step 3. 
+This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in Step 3. The ExternalPythonOperator task also prints a list of packages installed in the virtual environment; this is optional, but can be helpful for debugging if something goes wrong.
 
 This example pulls Snowflake connection information from AWS Parameter Store. If you are using a different secrets manager, you will need to update the following lines:
 
