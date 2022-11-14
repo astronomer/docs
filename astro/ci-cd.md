@@ -37,12 +37,16 @@ Use the Astronomer CI/CD templates to automate deploying code to Astro with popu
 
 Templates allow you to easily configure automated workflows using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and best practices.
 
-Astro supports two types of CI/CD templates:
+Astro supports the following CI/CD workflows:
 
-- Image-only workflows where all files in your Astro project are built into a Docker image and pushed to Astro in a single step.
-- DAG-based workflows that use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) to deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
+- Image-only workflows: All files in your Astro project are built into a Docker image and pushed to Astro in a single step.
+- DAG-based workflows: Use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) to deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
 
-This document contains templates that utilize these deployment methods in different ways.
+The following templates are available to implement your CI/CD workflows: 
+
+- Single branch: Deploys a single branch from your version control tool to Astro. This is the default template for all CI/CD tools. 
+- Multi branch:  Deploys multiple branches to separate Deployments on Astro.
+- Custom image:  Deploys an Astro project with a customized Runtime image and additional build arguments.
 
 ### Image-only workflows
 
@@ -144,7 +148,7 @@ All CI/CD pipelines that use the DAG-based deployment method require [Astro CLI 
     groupId= "github-actions"
     values={[
         {label: 'Single branch', value: 'standard'},
-        {label: 'Multi branch', value: 'multibranch'},
+        {label: 'Multiple branch', value: 'multibranch'},
         {label: 'Custom Image', value: 'custom'},
     ]}>
 <TabItem value="standard">
@@ -187,7 +191,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
 <TabItem value="multibranch">
 
-The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline makes can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
+The following setup can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline would deploy your code to Astro as demonstrated in the following diagram:
 
 ![Diagram showing how a multibranch CI/CD pipeline works](/img/docs/multibranch.png)
 
@@ -367,7 +371,7 @@ The following templates are examples of how to implement DAG-only deploys in Git
     groupId= "github-actions-dag-based-deploy"
     values={[
         {label: 'Single branch', value: 'standard'},
-        {label: 'Multi-branch', value: 'multibranch'},
+        {label: 'multiple branch', value: 'multiple branch'},
         {label: 'Custom Image', value: 'custom'},
     ]}>
 <TabItem value="standard">
@@ -441,11 +445,11 @@ This Github Actions script checks the diff between your current commit and your 
 
 </TabItem>
 
-<TabItem value="multibranch">
+<TabItem value="multiple branch">
 
-The following setup can be used to create a multi-branch CI/CD pipeline using GitHub Actions. A multi-branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline deploys your code to Astro as demonstrated in the following diagram:
+The following setup can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline deploys your code to Astro as demonstrated in the following diagram:
 
-![Diagram showing how a multibranch CI/CD pipeline works](/img/docs/multibranch.png)
+![Diagram showing how a multiple branch CI/CD pipeline works](/img/docs/multibranch.png)
 
 This setup assumes the following prerequisites:
 
@@ -650,7 +654,7 @@ If your Astro project requires additional build-time arguments to build an image
     groupId= "jenkins"
     values={[
         {label: 'Single branch', value: 'jenkinsstandard'},
-        {label: 'Multi-branch', value: 'jenkinsmultibranch'},
+        {label: 'Multiple branch', value: 'jenkinsmultibranch'},
     ]}>
 <TabItem value="jenkinsstandard">
 
@@ -766,7 +770,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
     groupId= "aws-codebuild"
     values={[
         {label: 'Single branch', value: 'awscodebuildstandard'},
-        {label: 'Multi-branch', value: 'awscodebuildmultibranch'},
+        {label: 'Multiple branch', value: 'awscodebuildmultibranch'},
     ]}>
 <TabItem value="awscodebuildstandard">
 
@@ -995,7 +999,7 @@ This pipeline configuration requires:
     groupId= "gitlab"
     values={[
         {label: 'Single branch', value: 'gitlabstandard'},
-        {label: 'Multi-branch', value: 'gitlabmultibranch'},
+        {label: 'Multiple branch', value: 'gitlabmultibranch'},
     ]}>
 <TabItem value="gitlabstandard">
 
