@@ -20,7 +20,7 @@ To send lineage data from an external system to Astro, you must specify your Org
 
 1. In the Cloud UI, open the **Settings** tab.
 2. Copy the value in **Lineage API Key**.
-3. Configure the API key in an external system. see the [Integration guide](#integration-guides) for your system.
+3. Configure the API key in an external system. see one of the following integration guides for your system.
 
 ## Integrate with Databricks
 
@@ -110,7 +110,7 @@ This guide outlines how to set up lineage collection for a running Great Expecta
 
 ### Prerequisites
 
-- A [Great Expectations suite](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started).
+- A [Great Expectations suite](https://docs.greatexpectations.io/docs/terms/expectation_suite).
 - Your Astro base domain.
 - Your Organization's OpenLineage API key.
 
@@ -180,6 +180,24 @@ In your Spark application, set the following properties to configure your lineag
 
 To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Runs** page. Your recent Spark job run appears in the table of most recent runs.
 
+## Integrate with Snowflake 
+
+This guide outlines how to set up lineage collection for Snowflake.
+
+## Setup
+
+Like other [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators), the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) has full data lineage support and capabilities by default. As long as you connect to Snowflake through an Airflow connection, any task using the SnowflakeOperator emits lineage data about the Snowflake tables it queries.
+
+### Verify 
+
+After you run a DAG with the SnowflakeOperator, open the **Lineage** tab in the Cloud UI and go to the **Graph** page. The task using the SnowflakeOperator should appear as a run connected to a dataset. 
+
+Click the dataset to view:
+
+- The time that Snowflake was accessed.
+- Tables that were accessed by upstream/ downstream tasks.
+- The name and description for each column in the dataset.
+- Data quality checks for the accessed tables. Data quality checks require integrating Great Expectations with OpenLineage and Airflow. See [Integrate with Great Expectations](#integrate-with-great-expectations) and [Orchestrate Great Expectations with Airflow](https://docs.astronomer.io/learn/airflow-great-expectations#docusaurus_skipToContent_fallback).
 ## Make source code visible for Airflow operators
 
 Because Workspace permissions are not yet applied to the **Lineage** tab, viewing source code for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) is off by default. If you want users across Workspaces to be able to view source code for Airflow tasks in a given Deployment, create an [environment variable](environment-variables.md) in the Deployment with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`. Astronomer recommends enabling this feature only for Deployments with non-sensitive code and workflows.
