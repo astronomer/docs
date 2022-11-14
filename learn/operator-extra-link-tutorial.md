@@ -329,6 +329,7 @@ To add the dynamic operator extra link directly in your custom operator code, fo
     ```
 
 </TabItem>
+</Tabs>
 
 ## Step 10: See your new extra link in action
 
