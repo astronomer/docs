@@ -9,13 +9,14 @@ Airflow offers the possibility to customize its UI with plugins. One small but i
 
 ![BashOperator with extra link](/img/guides/extra_links_tutorial_bashoperator.png)
 
-This tutorial shows how to add both static and dynamic extra links using an Airflow plugin.
+This tutorial shows how to add both static and dynamic extra links using an Airflow plugin, as well as how to add an extra link directly in a custom operator.
 
 After you complete this tutorial, you'll be able to:
 
 - Add a static operator extra link to any operator using an Airflow plugin.
 - Modify an existing operator to push an additional value to XCom.
 - Add a dynamic operator extra link to any operator using an Airflow plugin.
+- Add an operator extra link to a custom operator without using an Airflow plugin.
 
 :::tip
 
@@ -33,7 +34,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - Navigating an Airflow Project. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow Plugins. See [Import plugins to Airflow](using-airflow-plugins.md).
-- Airflow Connections. See [Manage connections in Apache Airflow](connections.md)
+- Airflow Connections. See [Manage connections in Apache Airflow](connections.md).
 - Intermediate knowledge of Python. See [the official Python documentation](https://docs.python.org/3/).
 
 ## Prerequisites
@@ -56,16 +57,16 @@ First you will add a static operator extra link to the SimpleHttpOperator, which
 
 1. Create a new Python file named `plugin_test_dag.py` in the `dags` folder of your Airflow project.
 
-2. Copy paste the following DAG code into your file:
+2. Copy and paste the following DAG code into your file:
 
     ```python
     from airflow import DAG
     from airflow.providers.http.operators.http import SimpleHttpOperator
-    from datetime import datetime
+    from pendulum import datetime
 
     with DAG(
         dag_id="plugin_test_dag",
-        start_date=datetime(2022,11,1),
+        start_date=datetime(2022, 11, 1),
         schedule=None,
         catchup=False
     ):
@@ -114,10 +115,10 @@ Create an [Airflow plugin](using-airflow-plugins.md) to add an extra link to the
 
 This script accomplishes the following:
 
-- Import the `AirflowPlugin` class which serves as a base class for custom plugins as well as the `BaseOperatorLink` from which classes defining custom extra links inherit.
-- Define a custom extra link class called `HTTPDocsLink` which inherits from `BaseOperatorLink` and adds an external link button in the Airflow UI to all operators provided to its `operators` attribute. In the example, we provide the `SimpleHttpOperator`.
-- Provide a static link to the HTTP documentation on Mozilla to the `.get_link()` method of the `HTTPDocsLink`. This method adds any link returned to the link button in Airflow UI.
-- Create the `AirflowExtraLinkPlugin` class which inherits from `AirflowPlugin`. This class will plug objects of [different plugin types](using-airflow-plugins.md) into Airflow. The plugin is given the name `extra_link_plugin` and its `operator_extra_links` attribute contains all extra links objects that have been defined in this plugin script. For now it contains only `HTTPDocsLink()`.
+- Imports the `AirflowPlugin` class which serves as a base class for custom plugins as well as the `BaseOperatorLink` from which classes defining custom extra links inherit.
+- Defines a custom extra link class called `HTTPDocsLink` which inherits from `BaseOperatorLink` and adds an external link button in the Airflow UI to all operators provided to its `operators` attribute. In the example, we provide the `SimpleHttpOperator`.
+- Provides a static link to the HTTP documentation on Mozilla to the `.get_link()` method of the `HTTPDocsLink`. This method adds any link returned to the link button in the Airflow UI.
+- Creates the `AirflowExtraLinkPlugin` class which inherits from `AirflowPlugin`. This class will plug objects of [different plugin types](using-airflow-plugins.md) into Airflow. The plugin is given the name `extra_link_plugin` and its `operator_extra_links` attribute contains all extra links objects that have been defined in this plugin script. For now it contains only `HTTPDocsLink()`.
 
 ## Step 4: Add an HTTP connection
 
@@ -235,7 +236,18 @@ This task will post the same GET request to the API you defined with the connect
 
 ## Step 9: Add a dynamic extra link to your custom operator
 
-Next, you will define a second extra link.
+Next, you will create a dynamic extra link.
+
+<Tabs
+    defaultValue="plugin"
+    groupId= "add-extra-link-to-operator"
+    values={[
+        {label: 'Using a plugin', value: 'plugin'},
+        {label: 'In the operator code', value: 'direct'},
+    ]}>
+<TabItem value="plugin">
+
+To add the dynamic operator extra link via a plugin, follow these steps:
 
 1. Open `my_extra_link_plugin.py` in your `plugins` folder.
 
@@ -277,6 +289,47 @@ Next, you will define a second extra link.
 
 5. Save the file and restart your Airflow instance with `astro dev restart`.
 
+</TabItem>
+
+<TabItem value="direct">
+
+To add the dynamic operator extra link directly in your custom operator code, follow these steps:
+
+1. Open `cat_http.py` in your `include` folder. 
+
+2. Add the following two lines to your import statements:
+
+    ```python
+    from airflow.models import XCom
+    from airflow.models.baseoperator import BaseOperatorLink
+    ```
+
+3. Below the import statements and above the definition of the `CatHttpOperator` class add the code below:
+
+    ```python
+    class CatLink(BaseOperatorLink):
+
+        # name the link button in the UI
+        @property
+        def name(self):
+            return "HTTP cat"
+
+        # provide the link
+        def get_link(self, operator, *, ti_key=None):
+            status_code = XCom.get_value(key="status_code", ti_key=ti_key) or ""
+            return f"https://http.cat/{status_code}"
+    ```
+
+    The code in the `.get_link()` method retrieves the `status_code` you pushed to XCom and appends it to the [HTTP cat Api link](https://http.cat/).
+
+4. Add the operator extra link in your custom operator. To do so simply add the following line in the class definiton of the `CatHttpOperator` above the `.__init__()` method:
+
+    ```python
+    operator_extra_links=[CatLink()]
+    ```
+
+</TabItem>
+
 ## Step 10: See your new extra link in action
 
 Your second extra link has now been added to the CatHttpOperator.
@@ -285,7 +338,7 @@ Your second extra link has now been added to the CatHttpOperator.
 
 2. Navigate to the Graph View and click on the `call_api_cat` task. 
 
-3. Click the Http Cat button to find the response your last API call got illustrated with a fitting cat.
+3. Click the Http Cat button to find the response of your last API call is illustrated with a fitting cat.
 
     ![Cat Button](/img/guides/extra_links_tutorial_cat_button.png)
 
