@@ -43,9 +43,18 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
     - `Application Administrator`. See [Understand roles in Azure Active Directory](https://docs.microsoft.com/en-us/azure/active-directory/roles/concept-understand-roles).
     - `Owner` with permission to create and manage subscription resources of all types. See [Azure built-in roles](https://docs.microsoft.com/en-us/azure/role-based-access-control/built-in-roles).
 
-    These role assignments are required for cluster creation, and can be removed after the cluster is created.
+  An Azure AD user is required for data plane activation. You can remove the user or modify their role assignments after the cluster is created.
 - Microsoft Azure CLI or Azure Az PowerShell module.  See [How to install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) and [Install the Azure Az PowerShell module](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps).
 - A minimum quota of 48 Standard Ddv5-series vCPUs in the deployment region. You can use Dv5-series vCPUs, but you'll need 96 total vCPUs composed of 48 Ddv5-series vCPUs and 48 Dv5-series vCPUs. To adjust your quota limits up or down, see [Increase VM-family vCPU quotas](https://docs.microsoft.com/en-us/azure/azure-portal/supportability/per-vm-quota-requests).
+- Confirmation that the VM types are available in all Availability Zones in the selected region. For example, you run the following Azure Az PowerShell command to confirm that the Standard_D4_v5 VMs (the default for Astro) are available in the Central US region: 
+  ```  
+  az vm list-skus --location centralus --size Standard_D --all --output table | grep -e 'Restrictions\|Standard_D4_v5'
+  ```  
+  If the VM types are unavailable, the output returns `Restrictions`. Contact Microsoft Support and ask to have the VMs enabled.
+  ```
+  ResourceType     Locations    Name                    Zones    Restrictions
+  virtualMachines  centralus    Standard_D4_v5          1,2,3    NotAvailableForSubscription, type: Zone, locations: centralus, zones: 1
+  ```
 - A subscription to the [Astro status page](https://status.astronomer.io). This ensures that you're alerted when an incident occurs or when scheduled maintenance is planned.
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
     - `https://cloud.astronomer.io/`

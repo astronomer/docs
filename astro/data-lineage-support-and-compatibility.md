@@ -9,12 +9,6 @@ All Astro Deployments use the [OpenLineage Airflow library](https://openlineage.
 
 If you’re using an unsupported operator, create an issue in the [OpenLineage GitHub repository](https://github.com/OpenLineage/OpenLineage) or write your own custom extractor.
 
-:::info
-
-This functionality is early access. If you have questions or feedback, contact [Astronomer support](https://support.astronomer.io/).
-
-:::
-
 ## Supported Airflow operators
 
 The following operators are supported in Astro lineage:

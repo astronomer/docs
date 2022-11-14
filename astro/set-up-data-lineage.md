@@ -21,24 +21,14 @@ Configuring a system to send lineage data requires:
 - Installing an OpenLineage backend to emit lineage data from the system.
 - Specifying your Organization's OpenLineage API endpoint to send lineage data to the Astro control plane.
 
-:::tip
-
-You can access this documentation directly from the **Lineage** tab in the Cloud UI. The embedded documentation additionally loads your Organization's configuration values, such as your OpenLineage API key and your Astro base domain, directly into configuration steps.
-
-:::
-
 ### Retrieve your OpenLineage API key
 
 To send lineage data from an external system to Astro, you must specify your Organization's OpenLineage API key in the external system's configuration.
 
-1. In the Cloud UI, click the **Lineage** tab.
-2. In the left menu, click **Integrations**:
-
-    ![Location of the "Integrations" button in the Lineage tab of the Cloud UI](/img/docs/lineage-docs.png)
-
-3. In **Getting Started**, copy the value below **OpenLineage API Key**.
-
-For more information about how to configure this API key in an external system, review the Integration Guide for the system.
+1. In the Cloud UI, open the **Settings** tab.
+2. Copy the value in **Lineage API Key**.
+   
+For more information about how to configure this API key in an external system, see the [Integration guide](#integration-guides) for your system.
 
 ## Integration guides
 
@@ -124,7 +114,7 @@ After you save this configuration, lineage is enabled for all Spark jobs running
 
 #### Verify Setup
 
-To test that lineage was configured correctly on your Databricks cluster, run a test Spark job on Databricks. After your job runs, open the **Lineage** tab in the Cloud UI and go to the **Explore** page. If your configuration is successful, you'll see your Spark job appear in the **Most Recent Runs** table. Click a job run to see it within a lineage graph.
+To test that lineage was configured correctly on your Databricks cluster, run a test Spark job on Databricks. After your job runs, open the **Lineage** tab in the Cloud UI and go to the **Rims** page. If your configuration is successful, you'll see your Spark job appear in the table of most recent runs. Click a job run to see it within a lineage graph.
 
 </TabItem>
 
@@ -170,7 +160,7 @@ This guide outlines how to set up lineage collection for a dbt project.
 
 #### Verify Setup
 
-To confirm that your setup is successful, run a dbt model in your project. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Explore** page. If the setup is successful, the run that you triggered appears in the **Most Recent Runs** table.
+To confirm that your setup is successful, run a dbt model in your project. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Runs** page. If the setup is successful, the run that you triggered appears in the table of most recent runs.
 
 </TabItem>
 
@@ -250,7 +240,7 @@ In your Spark application, set the following properties to configure your lineag
 
 #### Verify
 
-To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Explore** page. Your recent Spark job run appears in the **Most Recent Runs** table.
+To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Runs** page. Your recent Spark job run appears in the table of most recent runs.
 
 </TabItem>
 </Tabs>

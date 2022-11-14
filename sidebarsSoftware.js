@@ -188,6 +188,7 @@ module.exports = {
           label: 'Astro CLI command reference',
           href: 'https://docs.astronomer.io/astro/cli/reference',
       },
+      'role-permission-reference',
       'system-components',
       'support',
       'version-compatibility-reference',
