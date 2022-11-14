@@ -399,6 +399,8 @@ To add documentation in reStructuredText format to your task follow these steps:
 
 </TabItem>
 
+</Tabs>
+
 ## Conclusion
 
 Congratulations! You now know how to add fancy documentation to both your DAGs and your Airflow tasks.
