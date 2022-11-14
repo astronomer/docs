@@ -1,6 +1,6 @@
 ---
 title: 'Add documentation to your DAGs and tasks in the Airflow UI'
-sidebar_label: 'DAGs Docs - Add docs in the UI'
+sidebar_label: 'DAG Docs - Add docs in the UI'
 id: custom-airflow-ui-docs-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
