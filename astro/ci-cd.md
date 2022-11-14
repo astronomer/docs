@@ -40,12 +40,12 @@ Templates allow you to easily configure automated workflows using popular CI/CD 
 Astro supports the following CI/CD workflows:
 
 - Image-only workflows: All files in your Astro project are built into a Docker image and pushed to Astro in a single step.
-- DAG-based workflows: Use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) to deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
+- DAG-based workflows: The [DAG-only deploy feature](deploy-code.md#deploy-dags-only) is used to deploy DAGs in your Astro project separate from the Docker image that is built for all other project files.
 
 The following templates are available to implement your CI/CD workflows: 
 
 - Single branch: Deploys a single branch from your version control tool to Astro. This is the default template for all CI/CD tools. 
-- Multi branch:  Deploys multiple branches to separate Deployments on Astro.
+- Multiple branch:  Deploys multiple branches to separate Deployments on Astro.
 - Custom image:  Deploys an Astro project with a customized Runtime image and additional build arguments.
 
 ### Image-only workflows
@@ -371,7 +371,7 @@ The following templates are examples of how to implement DAG-only deploys in Git
     groupId= "github-actions-dag-based-deploy"
     values={[
         {label: 'Single branch', value: 'standard'},
-        {label: 'multiple branch', value: 'multiple branch'},
+        {label: 'Multiple branch', value: 'multiple branch'},
         {label: 'Custom Image', value: 'custom'},
     ]}>
 <TabItem value="standard">
