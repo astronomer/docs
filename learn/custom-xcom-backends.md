@@ -44,7 +44,13 @@ For more information on these concepts, see [Passing Data Between Airflow Tasks]
 
 Using [Great Expectations](https://greatexpectations.io/) with Airflow is an ideal use case for implementing a custom XCom backend. Great Expectations is an open source Python-based data validation framework. The [Great Expectations Airflow provider](https://registry.astronomer.io/providers/great-expectations) allows seamless integration with Airflow.
 
-The `GreatExpectationsOperator` can be used in Airflow DAGs to perform data quality checks before moving to downstream tasks. The operator returns various results from the tests that were run on your data. Because these results are not returned in a JSON serializable format, the only way to use them with the default XCom backend is to enable XCom pickling. Given the security implications of pickling, this is not ideal for a production environment. You can resolve this shortcoming by implementing a custom XCom backend to programmatically process the results and save them to an external file system.
+The `GreatExpectationsOperator` can be used in Airflow DAGs to perform data quality checks before moving to downstream tasks. The operator returns various results from the tests that were run on your data, by default as a `CheckpointResult` object, which is not a JSON serializable format. The only way to use this format with the default XCom backend is to enable XCom pickling. Given the security implications of pickling, this is not ideal for a production environment. You can resolve this shortcoming by implementing a custom XCom backend to programmatically process the results and save them to an external file system.
+
+:::info
+
+The results from the `GreatExpectationsOperator` can be returned in a JSON-serializable format by setting the `return_json_dict` parameter to true.
+
+:::
 
 For more information about using Great Expectations with Airflow, see [Integrating Airflow and Great Expectations](airflow-great-expectations.md).
 
