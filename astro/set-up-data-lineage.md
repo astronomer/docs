@@ -62,7 +62,7 @@ To test that lineage was configured correctly on your Databricks cluster, run a 
 
 ## Integrate with dbt
 
-This guide outlines how to set up lineage collection for a dbt project.
+Use the information provided here to set up lineage collection for a dbt project.
 
 ### Prerequisites
 
@@ -106,7 +106,7 @@ To confirm that your setup is successful, run a dbt model in your project. After
 
 ## Integrate with Great Expectations
 
-This guide outlines how to set up lineage collection for a running Great Expectations suite.
+Use the information provided here to set up lineage collection for a running Great Expectations suite.
 
 ### Prerequisites
 
@@ -153,7 +153,7 @@ If your code hasn't produced any data quality assertion issues, use the search b
 
 ## Integrate with Spark
 
-This guide outlines how to set up lineage collection for Spark.
+Use the information provided here to set up lineage collection for Spark.
 
 ### Prerequisites
 
@@ -182,7 +182,7 @@ To confirm that your setup is successful, run a Spark job after you save your co
 
 ## Integrate with Snowflake 
 
-This guide outlines how to set up lineage collection for Snowflake.
+Use the information provided here to set up lineage collection for Snowflake.
 
 ## Setup
 
@@ -190,14 +190,13 @@ Like other [supported Airflow operators](data-lineage-support-and-compatibility.
 
 ### Verify 
 
-After you run a DAG with the SnowflakeOperator, open the **Lineage** tab in the Cloud UI and go to the **Graph** page. The task using the SnowflakeOperator should appear as a run connected to a dataset. 
-
-Click the dataset to view:
+After you run a DAG with the SnowflakeOperator, open the **Lineage** tab in the Cloud UI and go to the **Graph** page. The task using the SnowflakeOperator should appear as a run connected to a dataset. Click the dataset to view:
 
 - The time that Snowflake was accessed.
-- Tables that were accessed by upstream/ downstream tasks.
+- Tables that were accessed by upstream or downstream tasks.
 - The name and description for each column in the dataset.
 - Data quality checks for the accessed tables. Data quality checks require integrating Great Expectations with OpenLineage and Airflow. See [Integrate with Great Expectations](#integrate-with-great-expectations) and [Orchestrate Great Expectations with Airflow](https://docs.astronomer.io/learn/airflow-great-expectations#docusaurus_skipToContent_fallback).
+
 ## Make source code visible for Airflow operators
 
 Because Workspace permissions are not yet applied to the **Lineage** tab, viewing source code for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) is off by default. If you want users across Workspaces to be able to view source code for Airflow tasks in a given Deployment, create an [environment variable](environment-variables.md) in the Deployment with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`. Astronomer recommends enabling this feature only for Deployments with non-sensitive code and workflows.
