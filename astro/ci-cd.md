@@ -144,7 +144,7 @@ All CI/CD pipelines that use the DAG-based deployment method require [Astro CLI 
     groupId= "github-actions"
     values={[
         {label: 'Single branch', value: 'standard'},
-        {label: 'Multi-branch', value: 'multibranch'},
+        {label: 'Multi branch', value: 'multibranch'},
         {label: 'Custom Image', value: 'custom'},
     ]}>
 <TabItem value="standard">
