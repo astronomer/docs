@@ -153,6 +153,7 @@ Linking to relevant docs from an operator is useful, but often you want to add a
     from airflow.providers.http.operators.http import SimpleHttpOperator
     from airflow.providers.http.hooks.http import HttpHook
     from airflow.utils.operator_helpers import determine_kwargs
+    from airflow.exceptions import AirflowException
 
     class CatHttpOperator(SimpleHttpOperator):
 
