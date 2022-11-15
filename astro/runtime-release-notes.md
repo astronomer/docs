@@ -21,11 +21,11 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 - Release date: November 14, 2022
 - Airflow version: 2.4.3
 
-### Support for ARM64 and Apple M1 processors in local development 
+### ARM64-based images for faster local development with Apple M1
 
-:::warning Astro CLI version dependency 
+:::caution
 
-To deploy a project using Astro Runtime 6.0.4 to Astro, you must use Astro CLI version 1.5.0 or later or else the deploy will fail. See [Install the CLI](install-cli.md).
+To deploy a project using Astro Runtime 6.0.4 from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the CLI](install-cli.md).
 
 :::
 
