@@ -16,6 +16,38 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 6.0.4
+
+- Release date: November 14, 2022
+- Airflow version: 2.4.3
+
+### Support for ARM64 and Apple M1 processors in local development 
+
+:::warning Astro CLI version dependency 
+
+To deploy a project using Astro Runtime 6.0.4 to Astro, you must use Astro CLI version 1.5.0 or later or else the deploy will fail. See [Install the CLI](install-cli.md).
+
+:::
+
+Astro Runtime images now support both AMD64 and ARM64 processor architectures for local development. Because the Astro Runtime image tag is multi-arch, it automatically uses the correct distribution for the architecture on which you're running the image. 
+
+Users testing Airflow locally on ARM64-based processors, such as the Apple M1, should see a significant performance improvement when starting Airflow using `astro dev start`. 
+
+### Airflow 2.4.3 
+
+Astro Runtime 6.0.4 includes same-day support for Airflow 2.4.3, which includes a collection of bug fixes. Fixes include:
+
+- Make `RotatingFilehandler` used in `DagProcessor` non-caching ([27223](https://github.com/apache/airflow/pull/27223))
+- Fix double logging with some task logging handler ([27591](https://github.com/apache/airflow/pull/27591))
+
+For a complete list of commits, see the [Apache Airflow 2.4.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-3-2022-11-14).
+
+### Additional improvements 
+
+- Upgraded `openlineage-airflow` to 0.16.1. This release includes the `DefaultExtractor`, which allows you to extract the default available OpenLineage data for external operators without needing to write a custom extractor. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.16.1) for more information. 
+- Upgraded `astronomer-providers` to 1.11.1, which includes bug fixes. For a complete list of changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1111-2022-10-28).
+
+
 ## Astro Runtime 6.0.3
 
 - Release date: October 24, 2022
