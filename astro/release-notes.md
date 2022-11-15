@@ -41,7 +41,7 @@ Specifically, the tab includes the following improvements:
 
 You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace.
 
-See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
+See [Transfer a Deployment to another Workspace](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
 
 ### Additional improvements 
  
