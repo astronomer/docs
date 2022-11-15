@@ -101,17 +101,17 @@ module.exports = {
           items: [
             "view-clusters",
             "create-cluster",
+            "modify-cluster",
             {
               type: "category",
-              label: "Manage cluster resource settings",
+              label: "Cluster settings reference",
               link: {
                 type: "generated-index",
-                title: "Manage cluster resource settings",
+                title: "Cluster settings reference",
                 description:
-                  "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for most use cases.",
+                  "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for standard use cases.",
               },
               items: [
-                "modify-cluster",
                 "resource-reference-aws",
                 "resource-reference-azure",
                 "resource-reference-gcp",
