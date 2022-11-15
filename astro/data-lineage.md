@@ -97,7 +97,7 @@ When you select a dataset from the lineage graph, the **Quality** tab appears in
 
 If you're using a [Great Expectations](https://docs.greatexpectations.io/docs/) integration or the `SQLTableCheckOperator` or `SQLColumnCheckOpertor` operators, this page contains charts that show successful and failed data quality checks.
 
-Both Great Expectations and dbt show the number of rows in your dataset over time and the amount of megabytes consumed by your dataset over time. However, dbt test does not currently display quality check results.
+Great Expectations and dbt show the number of rows in your dataset and the megabytes consumed by your dataset over time. The dbt test command doesn't currently display quality check results.
 
 ![Quality tab example](/img/docs/lineage-quality-tab.png)
 
