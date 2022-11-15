@@ -112,14 +112,10 @@ The following table lists the Debian versions and architectures supported by eac
 | 4.1.x         | 11.3 (bullseye)        | AMD64           |
 | 4.2.x         | 11.3 (bullseye)        | AMD64           |
 | 5.0.x         | 11.3 (bullseye)        | AMD64           |
-| 6.0.x         | 11.3 (bullseye)        | AMD64           |
-| 6.0.4         | 11.3 (bullseye)        | AMD64 and ARM64 |
+| 6.0.0 - 6.0.3         | 11.3 (bullseye)        | AMD64           |
+| 6.0.4 - 6.0.x         | 11.3 (bullseye)        | AMD64 and ARM64 |
 
-:::info
-
-Astro Runtime 6.0.4 and later support AMD64 and ARM64 processor architectures for local development. The image tag is multi-arch and the correct distribution for the processor architecture on which you're running the image is used by default.
-
-:::
+Astro Runtime 6.0.4 and later support AMD64 and ARM64 processor architectures for local development. The image tag is multi-arch and the correct distribution for the processor architecture on which you're running the image is used automatically.
 
 ## Related documentation
 
