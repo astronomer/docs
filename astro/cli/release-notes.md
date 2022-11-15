@@ -30,7 +30,7 @@ Deploying only DAGs:
 
 When you make changes to other files in your Astro project that aren't in the `dags` directory, the `astro deploy` command is still required.
 
-To use this feature, you must enable it for each Deployment. See [Deploy only DAGs](deploy-code.md#deploy-only-dags). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
 
 ## New `astro deployment inspect` command
 
