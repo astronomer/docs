@@ -158,6 +158,21 @@ module.exports = {
             "runtime-version-lifecycle-policy",
           ],
         },
+        {
+          type: "category",
+          label: "Cluster settings",
+          link: {
+            type: "generated-index",
+            title: "Cluster settings reference",
+            description:
+              "Manage your existing AWS, Azure, or GCP cluster resource settings on Astro. Unless otherwise specified, new clusters on Astro are created with a set of default resources that should be suitable for standard use cases.",
+          },
+          items: [
+            "resource-reference-aws",
+            "resource-reference-azure",
+            "resource-reference-gcp",
+          ],
+        },
         'platform-variables',
         "feature-previews",
         'data-lineage-support-and-compatibility',
