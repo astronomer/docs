@@ -115,6 +115,8 @@ The following table lists the Debian versions and architectures supported by eac
 | 6.0.x         | 11.3 (bullseye)        | AMD64           |
 | 6.0.4         | 11.3 (bullseye)        | AMD64 and ARM64 |
 
+Astro Runtime 6.0.4 and later support AMD64 and ARM64 processor architectures for local development. The image tag is multi-arch and the correct distribution for the processor architecture on which you're running the image is used by default.
+
 :::info
 
 When you're developing locally with Docker, ARM64 images are pushed by default with Apple M1 systems and AMD64 images are pushed by default with all other systems. You can push AMD64 images to Astro no matter the type of system you're using for development.
