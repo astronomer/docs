@@ -202,3 +202,4 @@ astronomer:
           permissions:
             system.workspace.create: false
 ```
+## Register users with IdP Group Sync
