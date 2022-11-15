@@ -194,29 +194,13 @@ with DAG(
 
     ![DAG Docs](/img/guides/DAG_docs.png)
 
-## Step 4: Add docs to your DAG using a markdown file
+## Step 4: Add docs to your DAG using doc strings
 
-If your DAG docs are lengthy it is preferrable to save them in a separate markdown file to not clutter your DAG file. This also offers the possibility to use the same documentation in several DAGs.
+Many users use doc strings to document their DAG code. Airflow is able to pick up those strings and turn them into DAG Docs.
 
-1. Create a new folder called `DAG_docs` in your `dags` folder.
+1. Remove the `doc_md` parameter from your DAG code.
 
-2. Create a markdown file `my_DAG_doc.md` in this folder.
-
-3. Copy and paste the following markdown content into the new file:
-
-    ```markdown
-    ### The Activity DAG
-
-    This DAG will help me decide what to do today. It uses the [BoredAPI](https://www.boredapi.com/) to do so.
-
-    My favorite suggestions so far were:
-
-    - Make bread from scratch
-    - Make a couch fort
-    - Take your cat on a walk
-    ```
-
-4. In your `docs_example_dag.py` file change the `doc_md` parameter of your DAG to `/DAG_docs/my_DAG_doc.md` as shown in the code below.
+2. Copy and paste the doc string as shown in the code snippets below:
 
 <Tabs
     defaultValue="TaskFlowAPI"
@@ -233,9 +217,20 @@ If your DAG docs are lengthy it is preferrable to save them in a separate markdo
     start_date=datetime(2022,11,1),
     schedule="@daily",
     catchup=False,
-    doc_md="/docs/my_DAG_docs_template.md"
 )
 def docs_example_dag():
+
+    """
+    ### The Activity DAG
+
+    This DAG will help me decide what to do today. It uses the [BoredAPI](https://www.boredapi.com/) to do so.
+
+    My favorite suggestions so far were:
+
+    - Make bread from scratch
+    - Make a couch fort
+    - Take your cat on a walk
+    """
 ```
 
 </TabItem>
@@ -248,17 +243,33 @@ with DAG(
     start_date=datetime(2022,11,1),
     schedule="@daily",
     catchup=False,
-    doc_md="/DAG_docs/my_DAG_doc.md"
 ):
+    """
+    ### The Activity DAG
+
+    This DAG will help me decide what to do today. It uses the [BoredAPI](https://www.boredapi.com/) to do so.
+
+    My favorite suggestions so far were:
+
+    - Make bread from scratch
+    - Make a couch fort
+    - Take your cat on a walk
+    """
 ```
 
 </TabItem>
 
 </Tabs>
 
-5. In the **Graph** view of your DAG click on **DAG docs** to view your documentation.
+3. In the **Graph** view of your DAG click on **DAG docs** to view your documentation.
 
     ![DAG Docs 2](/img/guides/DAG_docs_2.png)
+
+:::info
+
+When using the `with DAG():` syntax it is possible to pass the filepath to a markdown file to the `doc_md` parameter. This can be useful if you want to add the same documentation to several of your DAGs.
+
+:::
 
 ## Step 5: Add docs to a task
 
