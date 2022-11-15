@@ -95,7 +95,7 @@ On the **Lineage** page, the following tabs appear below the lineage graph:
 
 When you select a dataset from the lineage graph, the **Quality** tab appears in the information pane. By default, this tab shows a list of columns that correspond to your dataset.
 
-If you have either a [Great Expectations](https://docs.greatexpectations.io/docs/) integration or use the `SQLTableCheckOperator` or `SQLColumnCheckOpertor`, this tab also contains charts that show success and failures of data quality checks.
+If you're using a [Great Expectations](https://docs.greatexpectations.io/docs/) integration or the `SQLTableCheckOperator` or `SQLColumnCheckOpertor` operators, this page contains charts that show successful and failed data quality checks.
 
 Both Great Expectations and dbt show the number of rows in your dataset over time and the amount of megabytes consumed by your dataset over time. However, dbt test does not currently display quality check results.
 
