@@ -304,18 +304,6 @@ To add documentation to your task in Markdown format, follow these steps:
     tell_me_what_to_do()
     ```
 
-3. Go to the Airflow UI and run your DAG.
-
-4. In the **Grid** view, click on the green square for your task instance.
-
-5. Click on **Task Instance Details**.
-
-    ![Task Instance Details](/img/guides/task_instance_details.png)
-
-6. See the markdown docs rendered under `Attribute: doc_md`.
-
-    ![Markdown Task Docs](/img/guides/task_docs_markdown.png)
-
 </TabItem>
 
 <TabItem value="monospace">
@@ -342,18 +330,6 @@ To add documentation in Monospace format to your task follow these steps:
 
     tell_me_what_to_do()
     ```
-
-3. Go to the Airflow UI and run your DAG.
-
-4. In the **Grid** view click on the green square.
-
-5. Click on **Task Instance Details**.
-
-    ![Task Instance Details](/img/guides/task_instance_details.png)
-
-6. See the Monospace docs as rich content under `Attribute: doc`.
-
-    ![Monospace Task Docs](/img/guides/task_docs_mono.png)
 
 </TabItem>
 
@@ -388,18 +364,6 @@ To add documentation in JSON format to your task follow these steps:
     tell_me_what_to_do()
     ```
 
-3. Go to the Airflow UI and run your DAG.
-
-4. In the **Grid** view click on the green square.
-
-5. Click on **Task Instance Details**.
-
-    ![Task Instance Details](/img/guides/task_instance_details.png)
-
-6. See the JSON docs as rich content under `Attribute: doc_json`.
-
-    ![JSON Task Docs](/img/guides/task_docs_json.png)
-
 </TabItem>
 
 <TabItem value="yaml">
@@ -429,18 +393,6 @@ To add documentation in YAML format to your task follow these steps:
 
     tell_me_what_to_do()
     ```
-
-3. Go to the Airflow UI and run your DAG.
-
-4. In the **Grid** view click on the green square.
-
-5. Click on **Task Instance Details**.
-
-    ![Task Instance Details](/img/guides/task_instance_details.png)
-
-6. See the YAML docs as rich content under `Attribute: doc_yaml`.
-
-    ![YAML Task Docs](/img/guides/task_docs_yaml.png)
 
 </TabItem>
 
@@ -476,15 +428,57 @@ To add documentation in reStructuredText format to your task follow these steps:
     tell_me_what_to_do()
     ```
 
+</TabItem>
+
+</Tabs>
+
 3. Go to the Airflow UI and run your DAG.
 
-4. In the **Grid** view click on the green square.
+4. In the **Grid** view, click on the green square for your task instance.
 
 5. Click on **Task Instance Details**.
 
     ![Task Instance Details](/img/guides/task_instance_details.png)
 
-6. See the reStructuredText docs as rich content under `Attribute: doc_yaml`.
+6. See the Docs under their respective attribute:
+
+<Tabs
+    defaultValue="markdown"
+    groupId= "DAG-docs"
+    values={[
+        {label: 'Markdown', value: 'markdown'},
+        {label: 'Monospace', value: 'monospace'},
+        {label: 'JSON', value: 'json'},
+        {label: 'YAML', value: 'yaml'},
+        {label: 'reStructuredText', value: 'rst'},
+    ]}>
+
+
+<TabItem value="markdown">
+
+    ![Markdown Task Docs](/img/guides/task_docs_markdown.png)
+
+</TabItem>
+
+<TabItem value="monospace">
+
+    ![Monospace Task Docs](/img/guides/task_docs_mono.png)
+
+</TabItem>
+
+<TabItem value="json">
+
+    ![JSON Task Docs](/img/guides/task_docs_json.png)
+
+</TabItem>
+
+<TabItem value="yaml">
+
+    ![YAML Task Docs](/img/guides/task_docs_yaml.png)
+
+</TabItem>
+
+<TabItem value="rst">
 
     ![rst Task Docs](/img/guides/task_docs_rst.png)
 
