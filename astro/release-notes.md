@@ -13,7 +13,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 6.0.3 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 6.0.4 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
 
@@ -41,7 +41,7 @@ Specifically, the tab includes the following improvements:
 
 You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace.
 
-See [Transfer a Deployment to another Workspace](deploy-code.md#transfer-a-deployment-to-another-workspace).
+See [Transfer a Deployment to another Workspace](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
 
 ### Additional improvements 
  
