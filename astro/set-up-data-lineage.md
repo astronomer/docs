@@ -184,7 +184,7 @@ To confirm that your setup is successful, run a Spark job after you save your co
 
 Use the information provided here to set up lineage collection for Snowflake.
 
-## Setup
+### Setup
 
 Like other [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators), the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) has full data lineage support and capabilities by default. As long as you connect to Snowflake through an Airflow connection, any task using the SnowflakeOperator emits lineage data about the Snowflake tables it queries.
 
