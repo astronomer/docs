@@ -166,13 +166,19 @@ To confirm that your setup is successful, run a dbt model in your project. After
 
 <TabItem value="greatexpectations">
 
-This guide outlines how to set up lineage collection for a running Great Expectations suite.
+This guide outlines how to set up lineage collection for a Great Expectations project.
 
 #### Prerequisites
 
-- A [Great Expectations suite](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started).
+- A [Great Expectations project](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started).
 - Your Astro base domain.
 - Your Organization's OpenLineage API key.
+
+:::info
+
+If you are using the `GreatExpectationsOperator` version `>=0.2.0`, the only prerequisite you need is the Great Expectationsn project. By default, if no Checkpoint or Checkpoint Config is supplied, the operator will look for an OpenLineage project and send lineage information automatically. If you are using custom Checkpoints with Great Expectations, you must still follow the steps below.
+
+:::
 
 #### Setup
 
