@@ -304,6 +304,14 @@ To add documentation to your task in Markdown format, follow these steps:
     tell_me_what_to_do()
     ```
 
+    ```python
+    tell_me_what_to_do = PythonOperator(
+        task_id="tell_me_what_to_do",
+        python_callable=query_api,
+        doc_md=doc_md_task
+    )
+    ```
+
 </TabItem>
 
 <TabItem value="monospace">
@@ -329,6 +337,14 @@ To add documentation in Monospace format to your task follow these steps:
         return response.json()["activity"]
 
     tell_me_what_to_do()
+    ```
+
+    ```python
+    tell_me_what_to_do = PythonOperator(
+        task_id="tell_me_what_to_do",
+        python_callable=query_api,
+        doc=doc_task
+    )
     ```
 
 </TabItem>
@@ -364,6 +380,14 @@ To add documentation in JSON format to your task follow these steps:
     tell_me_what_to_do()
     ```
 
+    ```python
+    tell_me_what_to_do = PythonOperator(
+        task_id="tell_me_what_to_do",
+        python_callable=query_api,
+        doc_json=doc_json_task
+    )
+    ```
+
 </TabItem>
 
 <TabItem value="yaml">
@@ -392,6 +416,14 @@ To add documentation in YAML format to your task follow these steps:
         return response.json()["activity"]
 
     tell_me_what_to_do()
+    ```
+
+    ```python
+    tell_me_what_to_do = PythonOperator(
+        task_id="tell_me_what_to_do",
+        python_callable=query_api,
+        doc_yaml=doc_yaml_task
+    )
     ```
 
 </TabItem>
@@ -426,6 +458,14 @@ To add documentation in reStructuredText format to your task follow these steps:
         return response.json()["activity"]
 
     tell_me_what_to_do()
+    ```
+
+    ```python
+    tell_me_what_to_do = PythonOperator(
+        task_id="tell_me_what_to_do",
+        python_callable=query_api,
+        doc_rst=doc_rst_task
+    )
     ```
 
 </TabItem>
