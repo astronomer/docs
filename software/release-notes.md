@@ -9,14 +9,6 @@ description: Astronomer Software release notes.
 
 0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md).
 
-## 0.30.5 
-
-Release date: November 15, 2022 
-
-### Additional improvements
-
-AMD64 and ARM64 processor architectures are now supported. This dual support significantly improves the local development experience when using the Astro CLI on Apple M1 systems.
-
 ## 0.30.4 
 
 Release date: November 3, 2022 

@@ -101,4 +101,6 @@ For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/rep
 
 ## System distribution
 
-Astro Runtime images are based on Debian 11.3 (bullseye).
+Astro Runtime images are based on Debian 11.3 (bullseye). 
+
+Astro Runtime 6.0.4 and later supports AMD64 and ARM64 processor architectures for local development. The image tag is multi-arch and the correct distribution for the processor architecture on which you're running the image is used by default.

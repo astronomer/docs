@@ -18,13 +18,13 @@ Follow the steps in this document to manually push your Astro project to a Deplo
 
 :::warning
 
-If you're using an Apple M1 system for development, you must install Astro CLI 1.5.0 or later or your deploys will fail.
+If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for development, you must install Astro CLI 1.5.0 or later or your deploys will fail.
 
 :::
 
 ## Prerequisites
 
-- The [Astro CLI](cli/overview.md) installed in an empty directory. If you're using an Apple M1 system for development, you must install Astro CLI 1.5.0 or later.
+- The [Astro CLI](cli/overview.md) installed in an empty directory. If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for development, you must install Astro CLI 1.5.0 or later.
 - An Astro Workspace with at least one [Deployment](create-deployment.md).
 - An [Astro project](create-project.md).
 - [Docker](https://www.docker.com/products/docker-desktop).
