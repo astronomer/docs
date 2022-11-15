@@ -496,31 +496,31 @@ To add documentation in reStructuredText format to your task follow these steps:
 
 <TabItem value="markdown">
 
-    ![Markdown Task Docs](/img/guides/task_docs_markdown.png)
+![Markdown Task Docs](/img/guides/task_docs_markdown.png)
 
 </TabItem>
 
 <TabItem value="monospace">
 
-    ![Monospace Task Docs](/img/guides/task_docs_mono.png)
+![Monospace Task Docs](/img/guides/task_docs_mono.png)
 
 </TabItem>
 
 <TabItem value="json">
 
-    ![JSON Task Docs](/img/guides/task_docs_json.png)
+![JSON Task Docs](/img/guides/task_docs_json.png)
 
 </TabItem>
 
 <TabItem value="yaml">
 
-    ![YAML Task Docs](/img/guides/task_docs_yaml.png)
+![YAML Task Docs](/img/guides/task_docs_yaml.png)
 
 </TabItem>
 
 <TabItem value="rst">
 
-    ![rst Task Docs](/img/guides/task_docs_rst.png)
+![rst Task Docs](/img/guides/task_docs_rst.png)
 
 </TabItem>
 
