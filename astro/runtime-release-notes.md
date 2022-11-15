@@ -40,12 +40,12 @@ Astro Runtime 6.0.4 includes same-day support for Airflow 2.4.3, which includes 
 - Make `RotatingFilehandler` used in `DagProcessor` non-caching ([27223](https://github.com/apache/airflow/pull/27223))
 - Fix double logging with some task logging handler ([27591](https://github.com/apache/airflow/pull/27591))
 
-For a complete list of commits, see the [Apache Airflow 2.4.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-3-2022-11-14).
+For a complete list of the changes, see the [Apache Airflow 2.4.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-4-3-2022-11-14).
 
 ### Additional improvements 
 
 - Upgraded `openlineage-airflow` to 0.16.1. This release includes the `DefaultExtractor`, which allows you to extract the default available OpenLineage data for external operators without needing to write a custom extractor. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.16.1) for more information. 
-- Upgraded `astronomer-providers` to 1.11.1, which includes bug fixes. For a complete list of changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1111-2022-10-28).
+- Upgraded `astronomer-providers` to 1.11.1, which includes bug fixes. For a complete list of the changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1111-2022-10-28).
 
 
 ## Astro Runtime 6.0.3
