@@ -448,7 +448,7 @@ To add documentation in reStructuredText format to your task follow these steps:
     ```python
     doc_rst_task = """
     ===========
-    This is feature is pretty neat
+    This feature is pretty neat
     ===========
 
     * there are many ways to add docs
