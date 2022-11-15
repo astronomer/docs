@@ -11,6 +11,8 @@ Use this guide to learn about customizing user signups and user roles, as well a
 
 ## Add users to Astronomer
 
+<!--- This likely where edits will be required --->
+
 When Astronomer Software is first deployed, the first user to log in is granted "System Admin" permissions by default. From there, a user is created on Astronomer Software by any of the following:
 
 - Invitation to a Workspace by a Workspace Admin
