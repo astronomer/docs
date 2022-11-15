@@ -1,6 +1,6 @@
 ---
 title: 'Add documentation to your DAGs and tasks in the Airflow UI'
-sidebar_label: 'DAG Docs - Add docs in the UI'
+sidebar_label: 'Add docs to DAGs'
 id: custom-airflow-ui-docs-tutorial
 description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
@@ -8,7 +8,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Adding custom doc strings to your Airflow DAGs and tasks that will be shown in the Airflow UI is a lesser known but powerful Airflow feature.
+Adding custom doc strings that will be shown in the Airflow UI to your DAGs and tasks is a lesser known but powerful Airflow feature.
 
 After you complete this tutorial, you'll be able to:
 
@@ -30,7 +30,7 @@ This tutorial takes approximately 15 minutes to complete.
 
 ## Step 1: Create an Astro project
 
-To run Airflow locally, you first need to create an Astro project, which contains the set of files necessary.
+To run Airflow locally, you first need to create an Astro project.
 
 1. Create a new directory for your Astro project:
 
@@ -52,9 +52,9 @@ To run Airflow locally, you first need to create an Astro project, which contain
 
 ## Step 2: Create a new DAG
 
-1. In your `dags` folder add a file called `docs_example_dag.py`. 
+1. In your `dags` folder, add a file called `docs_example_dag.py`. 
 
-2. Copy and paste the DAG code provided below, you can use either the TaskFlowAPI version or the version using traditional operators.
+2. Copy and paste the DAG code provided below. Choose one of either the TaskFlowAPI or traditional operators DAGs.
 
 <Tabs
     defaultValue="TaskFlowAPI"
@@ -118,11 +118,11 @@ with DAG(
 
 </Tabs>
 
-This DAG has only one task called `tell_me_what_to_do` which queries and [API](https://www.boredapi.com/api/activity) that provides a random activity for the day and prints it into the logs. 
+This DAG has one task called `tell_me_what_to_do`, which queries an [API](https://www.boredapi.com/api/activity) that provides a random activity for the day and prints it to the logs. 
 
-## Step 3: Add documentation to an Airflow DAG
+## Step 3: Add docs to your DAG
 
-Airflow will let you add documentation to your DAGs in Markdown format and render that documentation in both the **Grid**, **Graph** and **Calendar** view.
+In Airflow you can add custom documentation to your DAGs in Markdown format that will render in the **Grid**, **Graph** and **Calendar** views.
 
 1. In your `docs_example_dag.py` file, add the following doc string above the definition of your DAG:
 
@@ -144,7 +144,7 @@ Airflow will let you add documentation to your DAGs in Markdown format and rende
     """
     ```
 
-    This doc string is written in Markdown format. It includes a title, a link to an external website, a bulleted list, as well as an image, which has been formatted using HTML. You can learn more about [Markdown Guide](https://www.markdownguide.org/).
+    This doc string is written in Markdown format. It includes a title, a link to an external website, a bulleted list, as well as an image, which has been formatted using HTML. To learn more about Markdown, check out this [Markdown Guide](https://www.markdownguide.org/).
 
 2. Add the documentation to your DAG by passing `doc_md_DAG` to the `doc_md` parameter of your DAG class as shown in the code snippet below:
 
@@ -158,7 +158,7 @@ Airflow will let you add documentation to your DAGs in Markdown format and rende
     ):
     ```
 
-3. In the **Grid** view click on the **DAG Docs** banner to view the rendered documentation.
+3. Go to the **Grid** view and click on the **DAG Docs** banner to view the rendered documentation.
 
     ![DAG Docs](/img/guides/DAG_docs.png)
 
@@ -169,9 +169,9 @@ Airflow will let you add documentation to your DAGs in Markdown format and rende
     - Copy and paste the contents of the markdown string into the new file. Delete the wrapping triple quotes.
     - Set the `doc_md` parameter of your DAG to `documenation/my_dag_docs.md`
 
-## Step 4: Add documentation to an Airflow task
+## Step 4: Add docs to a task
 
-Airflow supports adding documentation to Airflow tasks in Markdown, Monospace, JSON, YAML and reStructured text. Note that only Markdown will be rendered, other formats will be displayed as rich content.
+You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructured text. Note that only Markdown will be rendered, other formats will be displayed as rich content.
 
 <Tabs
     defaultValue="markdown"
@@ -187,9 +187,9 @@ Airflow supports adding documentation to Airflow tasks in Markdown, Monospace, J
 
 <TabItem value="markdown">
 
-To add documentation in Markdown format to your task follow these steps:
+To add documentation to your task in Markdown format, follow these steps:
 
-1. Add the code below above the definition of your task:
+1. Add the following code above the definition of your task:
 
     ```python
     doc_md_task = """
@@ -215,7 +215,7 @@ To add documentation in Markdown format to your task follow these steps:
 
 3. Go to the Airflow UI and run your DAG.
 
-4. In the **Grid** view click on the green square.
+4. In the **Grid** view, click on the green square for your task instance.
 
 5. Click on **Task Instance Details**.
 
