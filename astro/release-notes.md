@@ -17,6 +17,18 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
 
+## November 15, 2022
+
+### Additional improvements 
+
+- In the Cloud UI, the **People** tab now shows the IDs of users belonging to your Organization.
+- In the Cloud UI, you can now export a table of all users in your Organization using **Export** in the **People** tab.
+
+### Bug fixes
+
+- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer tasks losing their worker node and running indefinitely.
+- The **Updated at** field for a transferred Deployment now displays the correct time.
+  
 ## November 8, 2022
 
 ### Deploy only DAGs with `astro deploy -—dags`
