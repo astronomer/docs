@@ -260,7 +260,7 @@ with DAG(
 
     ![DAG Docs 2](/img/guides/DAG_docs_2.png)
 
-## Step 4: Add docs to a task
+## Step 5: Add docs to a task
 
 You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructured text. Note that only Markdown will be rendered, other formats will be displayed as rich content.
 
