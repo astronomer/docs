@@ -10,6 +10,8 @@ import TabItem from '@theme/TabItem';
 
 Adding custom doc strings that will be shown in the Airflow UI to your DAGs and tasks is a lesser known but powerful Airflow feature.
 
+![DAG Docs Intro Example](/img/guides/DAG_docs_intro_example.png)
+
 After you complete this tutorial, you'll be able to:
 
 - Add custom doc strings to an Airflow DAG.
@@ -68,16 +70,16 @@ To run Airflow locally, you first need to create an Astro project.
 
 ```python
 from airflow import DAG
-from airflow.decorators import task
+from airflow.decorators import task, dag
 from pendulum import datetime
 import requests
 
-with DAG(
-    dag_id="docs_example_dag",
+@dag(
     start_date=datetime(2022,11,1),
     schedule="@daily",
-    catchup=False,
-):
+    catchup=False
+)
+def docs_example_dag():
 
     @task()
     def tell_me_what_to_do():
@@ -85,6 +87,8 @@ with DAG(
         return response.json()["activity"]
 
     tell_me_what_to_do()
+
+docs_example_dag()
 ```
 
 </TabItem>
@@ -148,26 +152,113 @@ In Airflow you can add custom documentation to your DAGs in Markdown format that
 
 2. Add the documentation to your DAG by passing `doc_md_DAG` to the `doc_md` parameter of your DAG class as shown in the code snippet below:
 
-    ```python
-    with DAG(
-        dag_id="docs_example_dag",
-        start_date=datetime(2022,11,1),
-        schedule="@daily",
-        catchup=False,
-        doc_md=doc_md_DAG
-    ):
-    ```
+<Tabs
+    defaultValue="TaskFlowAPI"
+    groupId= "code-variations"
+    values={[
+        {label: 'DAG decorator', value: 'TaskFlowAPI'},
+        {label: 'Traditional DAG context', value: 'traditional'},
+    ]}>
+
+<TabItem value="TaskFlowAPI">
+
+```python
+@dag(
+    start_date=datetime(2022,11,1),
+    schedule="@daily",
+    catchup=False,
+    doc_md=doc_md_DAG
+)
+def docs_example_dag():
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+with DAG(
+    dag_id="docs_example_dag",
+    start_date=datetime(2022,11,1),
+    schedule="@daily",
+    catchup=False,
+    doc_md=doc_md_DAG
+):
+```
+
+</TabItem>
+
+</Tabs>
 
 3. Go to the **Grid** view and click on the **DAG Docs** banner to view the rendered documentation.
 
     ![DAG Docs](/img/guides/DAG_docs.png)
 
-4. (Optional) It is possible to save the documentation in a markdown file and directly provide the filepath to the `doc_md` parameter of the DAG class. 
+## Step 4: Add docs to your DAG using a markdown file
 
-    - Create a `documentation` directory within your `dags` folder.
-    - Create a markdown file called `my_dag_docs.md` in this folder.
-    - Copy and paste the contents of the markdown string into the new file. Delete the wrapping triple quotes.
-    - Set the `doc_md` parameter of your DAG to `documenation/my_dag_docs.md`
+If your DAG docs are lengthy it is preferrable to save them in a separate markdown file to not clutter your DAG file. This also offers the possibility to use the same documentation in several DAGs.
+
+1. Create a new folder called `DAG_docs` in your `dags` folder.
+
+2. Create a markdown file `my_DAG_doc.md` in this folder.
+
+3. Copy and paste the following markdown content into the new file:
+
+    ```markdown
+    ### The Activity DAG
+
+    This DAG will help me decide what to do today. It uses the [BoredAPI](https://www.boredapi.com/) to do so.
+
+    My favorite suggestions so far were:
+
+    - Make bread from scratch
+    - Make a couch fort
+    - Take your cat on a walk
+    ```
+
+4. In your `docs_example_dag.py` file change the `doc_md` parameter of your DAG to `/DAG_docs/my_DAG_doc.md` as shown in the code below.
+
+<Tabs
+    defaultValue="TaskFlowAPI"
+    groupId= "code-variations"
+    values={[
+        {label: 'DAG decorator', value: 'TaskFlowAPI'},
+        {label: 'Traditional DAG context', value: 'traditional'},
+    ]}>
+
+<TabItem value="TaskFlowAPI">
+
+```python
+@dag(
+    start_date=datetime(2022,11,1),
+    schedule="@daily",
+    catchup=False,
+    doc_md="/docs/my_DAG_docs_template.md"
+)
+def docs_example_dag():
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+with DAG(
+    dag_id="docs_example_dag",
+    start_date=datetime(2022,11,1),
+    schedule="@daily",
+    catchup=False,
+    doc_md="/DAG_docs/my_DAG_doc.md"
+):
+```
+
+</TabItem>
+
+</Tabs>
+
+5. In the **Graph** view of your DAG click on **DAG docs** to view your documentation.
+
+    ![DAG Docs 2](/img/guides/DAG_docs_2.png)
 
 ## Step 4: Add docs to a task
 
