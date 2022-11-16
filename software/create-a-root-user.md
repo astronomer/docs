@@ -13,8 +13,8 @@ To create a root user, add the following lines to your `config.yaml` file:
 
 ```yaml
 global:
-	rootAdmin:
-	    username: <your-root-user-email-address>
+   rootAdmin:
+          username: <your-root-user-email-address>
 ```
 
 After saving your changes, apply the configuration change. See [Apply a config change](apply-platform-config.md).
