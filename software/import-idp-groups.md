@@ -76,6 +76,10 @@ After configuring and importing user groups, Workspace Admins and Deployment Adm
 
 ## Disable individual user management 
 
+:::info
+
+This configuration requires setting up a root user. See [Create a root user].
+
 To make it so that users can only join Astronomer Software and be assigned roles through Teams, set the following in your `config.yaml` file:
 
 ```yaml
@@ -88,4 +92,4 @@ astronomer:
 
 Save this configuration and push it to your platform as described in [Apply a Platform Config Change](apply-platform-config.md).
 
-After you apply the configuration, no individual users can be invited or reassigned their roles in Astronomer Software. All new users must be imported through a Team in order to access your installation. 
+After you apply the configuration, individual users can't be invited or assigned Workspace or Deployment-level roles in Astronomer Software. These users must be imported through a Team by a System Admin to access your installation. Individual users can be assigned system-level roles only by your root user.
