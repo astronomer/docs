@@ -22,6 +22,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 ### Additional improvements 
 
 - In the Cloud UI, the **People** page now shows the IDs of users belonging to your Organization.
+- In the Cloud UI, the **Deployments** page now shows the user or API key that most recently updated each Deployment and when they updated it.
 
 ### Bug fixes
 
