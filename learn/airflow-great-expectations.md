@@ -11,7 +11,7 @@ You can now find the [Great Expectations Provider](https://registry.astronomer.i
 
 :::
 
-[Great Expectations](https://greatexpectations.io) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in Python, then run validation using those “expectations” against datasets with [Checkpoints](https://docs.greatexpectations.io/docs/reference/checkpoints_and_actions). Astronomer, with help from Superconductive, maintains an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) that gives users a convenient method for running validation directly from their DAGs.
+[Great Expectations](https://greatexpectations.io) is an open source Python-based data validation framework. You can test your data by expressing what you “expect” from it as simple declarative statements in Python, then run validations using those “expectations” against datasets with [Checkpoints](https://docs.greatexpectations.io/docs/reference/checkpoints_and_actions). Astronomer, with help from Superconductive, maintains an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) that gives users a convenient method for running validations directly from their DAGs.
 
 This guide will walk you through how to use the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/great-expectations/modules/greatexpectationsoperator) in an Airflow DAG and the Astronomer environment.
 
@@ -121,15 +121,28 @@ Our [demo repository](https://github.com/astronomer/airflow-data-quality-demo/) 
 
 ### Operator parameters
 
-The operator has several optional parameters, but it always requires either a `data_context_root_dir` or a `data_context_config`. Depending on how you have your project configured, other parameters may also be necessary. The less configured your project, the more parameters you'll pass. For example, if your project's data context specifies data sources, all you need to pass in is the data context and the expectation suite. If your data context does not specify a datasource, and you do not pass in a checkpoint, then the operator will build a checkpoint for you based on the datasource you pass in and run the given expectation suite. The data source can be a dataframe, shown in the example code already, or a connection by using the `conn_id` parameter, which will use Airflow's connections backend. If a dataframe is passed, the `data_asset_name` parameter can be any name that will help you identify the dataframe. If a `conn_id` is supplied, the `data_asset_name` must be the name of the table the expectations suite runs on.
+The operator has several optional parameters, but it always requires either a `data_context_root_dir` or a `data_context_config`. Depending on how you have your project configured, other parameters may also be necessary. The less configured your project, the more parameters you'll pass. 
+
+For example:
+
+- If your project's data context specifies data sources, all you need to pass in is the data context and the expectation suite. 
+- If your data context does not specify a data source, and you do not pass in a checkpoint, then the operator will build a checkpoint for you based on the data source you pass in and run the given expectation suite. 
+
+The datasource can be a dataframe, as shown in the example code, or an Airflow connection using the `conn_id` parameter. Depending on how you define your data source the `data_asset_name` parameter has to be adjusted: 
+
+- If a dataframe is passed, the `data_asset_name` parameter can be any name that will help you identify the dataframe. 
+- If a `conn_id` is supplied, the `data_asset_name` must be the name of the table the expectations suite runs on.
 
 The `data_context_root_dir` should point to the `great_expectations` project directory generated when you created the project with the CLI. If using an in-memory `data_context_config`, a `DataContextConfig` must be defined, as in [this example](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_data_context_config.py).
 
-While not a required parameter, if your project already contains Checkpoints, they too can be passed to the operator in two ways. A `checkpoint_name` may be passed with the `checkpoint_name` paramter and references a checkpoint in the project `CheckpointStore` defined in the `DataContext` (which is often in the `great_expectations/checkpoints/` path), so that `checkpoint_name = "taxi.pass.chk"` would reference the file `great_expectations/checkpoints/taxi/pass/chk.yml`. A `checkpoint_config` may be passed to the operator in place of a name, and can be defined like [this example](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_checkpoint_config.py).
+While not a required parameter, if your project already contains Checkpoints, they too can be passed to the operator in two ways: 
+
+- A `checkpoint_name` may be passed with the `checkpoint_name` paramter and references a checkpoint in the project `CheckpointStore` defined in the `DataContext` (which is often in the `great_expectations/checkpoints/` path), so that `checkpoint_name = "taxi.pass.chk"` would reference the file `great_expectations/checkpoints/taxi/pass/chk.yml`. 
+- A `checkpoint_config` may be passed to the operator in place of a name, and can be defined like [this example](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_checkpoint_config.py).
 
 Additionally, `checkpoint_kwargs` may be passed to the operator to specify additional, overwriting configurations.
 
-By default, a Great Expectations task runs validation and raises an `AirflowException` if any of the tests fail. To override this behavior and continue running the pipeline even if tests fail, set the `fail_task_on_validation_failure` flag to `False`.
+By default, a Great Expectations task runs validations and raises an `AirflowException` if any of the tests fail. To override this behavior and continue running the pipeline even if tests fail, set the `fail_task_on_validation_failure` flag to `False`.
 
 By default in Astronomer or any environment with OpenLineage configured, the `GreatExpectationsOperator` will automatically add the OpenLineage action to its default action list when a checkpoint is not specified to the operator. To turn off this feature, set the `use_open_lineage` parameter to `False`.
 

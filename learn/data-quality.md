@@ -319,7 +319,7 @@ with DAG(
 
 ### Example: Great Expectations
 
-The following example runs the same data quality checks as the SQL Check operators example against the same database. After setting up the Great Expectations instance with all at least the data context, the checks can be defined in a JSON file to form an Expectation Suite.
+The following example runs the same data quality checks as the SQL Check operators example against the same database. After setting up the Great Expectations instance with at least the data context, the checks can be defined in a JSON file to form an Expectation Suite.
 
 :::info 
 For each of the checks in this example, an Expectation already exists. This is not always the case, and for more complicated checks you may need to define a [custom Expectation](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview).

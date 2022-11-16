@@ -174,13 +174,10 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 - Your Astro base domain.
 - Your Organization's OpenLineage API key.
 
-:::info
-
-If you are using the `GreatExpectationsOperator` version `>=0.2.0`, the only prerequisite you need is the Great Expectationsn project. By default, if no Checkpoint or Checkpoint Config is supplied, the operator will look for an OpenLineage project and send lineage information automatically. If you are using custom Checkpoints with Great Expectations, you must still follow the steps below.
-
-:::
 
 #### Setup
+
+If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't use a custom Checkpoint or Checkpoint Config, the operator detects your Astro OpenLineage configuration and sends lineage information automatically. If you use custom Checkpoints, complete the following steps:
 
 1. Update your `great_expectations.yml` file to add `OpenLineageValidationAction` to your `action_list_operator` configuration:
 
