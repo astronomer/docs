@@ -19,7 +19,9 @@ global:
 
 After saving your changes, apply the configuration change. See [Apply a config change](apply-platform-config.md).
 
-By default, Astronomer generates a password for your root user email address. This password and email address are stored as Kubernetes secrets on your Astronomer installation. After you apply the configuration change, Helm provides a command for how to retrieve these the values of these secrets. 
+By default, Astronomer generates a password for your root user email address. This password and email address are stored as Kubernetes secrets on your Astronomer installation. 
+
+After you apply the configuration change, Helm provides a command for how to retrieve these the values of these secrets. Retrieve the password and use the new **Root Admin Login** button on the Software login page to access Astronomer Software as the root user. 
 
 ## Customize the root user's password
 
