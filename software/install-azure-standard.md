@@ -248,7 +248,17 @@ A few additional configuration notes:
 
 ## Step 8: Configure Your Helm chart
 
-> **Note:** If you want to use a third-party ingress controller for Astronomer, complete the setup steps in [Third-Party Ingress Controllers](third-party-ingress-controllers.md) in addition to this configuration.
+:::info 
+
+To use a third-party ingress controller for Astronomer, complete the setup steps in [Third-Party Ingress Controllers](third-party-ingress-controllers.md) in addition to this configuration.
+
+:::
+
+:::info 
+
+By default, the first user to log in to your installation is given System Admin permissions. To create a dedicated root user that's responsible for adding the first members of your organization to Astronomer, complete the setup steps in [Create a root user](create-a-root-user.md) in addition to this configuration.
+
+:::
 
 As a next step, create a file named `config.yaml` in an empty directory.
 
