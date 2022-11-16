@@ -246,6 +246,12 @@ global:
   # Name of secret containing TLS certificate
   tlsSecret: astronomer-tls
 
+  # By default, the first user to log in to your installation is given System Admin permissions. 
+  # Configure this value to instead have a single root user that is responsible for inviting the first members of your 
+  # team to Astronomer Software.
+# rootAdmin:
+    # username:
+
   # Enable privateCaCerts only if your enterprise security team
   # generated a certificate from a private certificate authority.
   # Create a generic secret for each cert, and add it to the list below.
