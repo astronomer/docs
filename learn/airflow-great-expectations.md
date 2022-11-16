@@ -48,7 +48,7 @@ If you want to use your own Great Expectations project along with this guide, en
 - Initialized a Great Expectations project
 - Created at least one Expectation Suite, `my_suite`
 
-If you set up a project manually, you will see a `great_expectations` directory which contains several sub-directories, as well as the `great_expectations.yml` data context file. If you cloned the demo repository, the `great_expectations` directory can be found under `include/`.
+If you set up a project manually, you will see a `great_expectations` directory which contains several sub-directories, as well as the `great_expectations.yml` Data Context file. If you cloned the demo repository, the `great_expectations` directory can be found under `include/`.
 
 :::info
 
