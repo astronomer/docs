@@ -21,8 +21,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Additional improvements 
 
-- In the Cloud UI, the **People** tab now shows the IDs of users belonging to your Organization.
-- In the Cloud UI, you can now export a table of all users in your Organization using **Export** in the **People** tab.
+- In the Cloud UI, the **People** page now shows the IDs of users belonging to your Organization.
 
 ### Bug fixes
 
