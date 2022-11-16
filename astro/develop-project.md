@@ -93,6 +93,10 @@ All changes made to the following files require rebuilding your image:
 
 To rebuild your project after making a change to any of these files, you must [restart your local environment](develop-project.md#restart-your-local-environment).
 
+### Deploy custom Docker images
+
+To deploy custom Docker images, see [Deploy custom Docker images](deploy-code.md#deploy-custom-dockeriimages)
+
 ## Explore Airflow providers and modules
 
 As you customize your Astro project and expand your use case for Airflow, Astronomer recommends reviewing the [Astronomer Registry](https://registry.astronomer.io/), a library of Airflow modules, providers, and DAGs that serve as the building blocks for data pipelines.

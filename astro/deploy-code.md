@@ -141,6 +141,33 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
+## Deploy custom Docker images
+
+With Astro CLI 1.3.0 and later, you can deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`. To use this command, the image must be based on Astro Runtime and be available in a local Docker registry. 
+
+Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
+
+You can also use the `--image-name` flag to automate the deployment of custom Runtime images from a CI/CD pipeline. You can also separate your build and deploy workflows into different pipelines.
+
+The `--image-name` flag is also available with the following local development commands:
+
+- `astro dev start`
+- `astro dev restart`
+- `astro dev parse`
+- `astro dev pytest`
+
+For more information about this command, see the [CLI command reference](cli/astro-deploy.md).
+
+:::info
+
+If you're using an Apple M1 computer for local development, you'll need to identify the platform in the command. For example:
+
+```sh
+astro deploy --image-name <custom-image> --platform=linux/amd64
+```
+
+:::
+
 ## Related documentation
 
 - [Automate code deploys with CI/CD](ci-cd.md)
