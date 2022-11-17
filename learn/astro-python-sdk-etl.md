@@ -19,7 +19,7 @@ These functions make your DAGs easier to write and read with less code. In this 
 
 To get the most out of this guide, you should have an understanding of Airflow decorators. See [Introduction to Airflow Decorators guide](airflow-decorators.md).
 
-::
+:::
 
 ## Python SDK functions
 
