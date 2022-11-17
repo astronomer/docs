@@ -23,8 +23,8 @@ Astronomer support will create a cluster within your AWS account to host the res
 
 ## Prerequisites
 
-- A dedicated AWS account with minimum EC2 service quotas.
-- A subscription to the [Astro Status Page](https://status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
+- A dedicated AWS account with the minimum EC2 service quotas.
+- A subscription to the [Astro Status Page](https://status.astronomer.io/). This ensures that you'll be notified when there are incidents or when maintenance is scheduled.
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
    
     - `https://cloud.astronomer.io/`
@@ -36,29 +36,29 @@ Astronomer support will create a cluster within your AWS account to host the res
     - `https://updates.astronomer.io/`
     - `https://install.astronomer.io/`
 
-Astro requires a clean AWS account with a minimum set of EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. For instructions on creating a new AWS account, follow [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
+Astro requires a clean AWS account with the minimum EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. For instructions on creating a new AWS account, see [How do I create and activate a new AWS account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
 
-The required [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html) are:
+The following table lists the required [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html).
 
 | QuotaCode  | QuotaName                                                        | Minimum Value  |
 | -----------| ---------------------------------------------------------------- | ---------------|
 | L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40             |
 | L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40             |
 
-These are required to mitigate near term capacity risks and ensure a smooth onboarding experience on Astro. If you need to modify or increase a specific quota, see [Request a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html).
+These quotas are required to mitigate near term capacity risks and simplify the Astro onboarding experience. If you need to modify or increase a specific quota, see [Request a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html).
 
 :::tip
 
-If you have one or more existing AWS accounts, you can use [AWS Organizations](https://aws.amazon.com/organizations/) to manage billing, users, and more in a central place. For more information on how to add your Astro AWS account to your AWS Organization, read [Amazon's documentation](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html).
+If you have one or more existing AWS accounts, you can use [AWS Organizations](https://aws.amazon.com/organizations/) to manage billing, users, and more in a central place. For more information on how to add your Astro AWS account to your AWS Organization, see [Inviting an AWS account to join your organization](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html).
 
 :::
 
 ### VPC peering prerequisites (Optional)
 
-If any AWS resources are on a private network, you can choose between two options:
+The following options are available when your AWS resources are on a private network:
 
 - Allow traffic through the public internet and use allow-lists for communication.
-- Create a VPC Peering connection between the Astronomer VPC and the VPCs for your broader network.
+- Create a VPC Peering connection between the Astronomer VPC and the VPCs for your network.
 
 If you want to continue with the second option, you'll additionally need:
 
@@ -177,7 +177,7 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 
 <TabItem value="commandline">
 
-1. Create a command line-level environment variable named `EXTERNAL_ID` that contains the External ID you copied in the previous step.
+1. Create a command line-level environment variable named `EXTERNAL_ID` that contains the External ID you copied in step 2.
 2. Open the AWS CLI and run the following command to create a cross-account IAM Role:
 
     ```bash
@@ -200,7 +200,7 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
     }"
     ```
 
-    2. Run the following command to attach a managed policy to the Astronomer remote management role.
+    3. Run the following command to attach a managed policy to the Astronomer remote management role.
     
     ```sh
     #!/bin/sh
@@ -269,7 +269,7 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 </Tabs>
 
 
-## Step 4: Provide setup information to Astronomer
+## Step 5: Provide setup information to Astronomer
 
 After creating the AWS account, provide Astronomer support with the following information:
 
@@ -301,9 +301,9 @@ If you need to VPC peer with Astronomer, provide the following information to yo
 - VPC Name/ID and region for peering with Astronomer. This is accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/).
 - The IPs of your DNS servers.
 
-## Step 4: Astronomer support creates the cluster
+## Step 5: Astronomer support creates the cluster
 
-After you've created the cross-account IAM role for Astro, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support will finish creating the cluster in your AWS account.
+After you've created the cross-account IAM role for Astro, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support creates the cluster in your AWS account.
 
 This process can take some time. Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
 
@@ -325,7 +325,7 @@ When Astronomer support confirms that your Astro cluster has been created, you c
 ![Cloud UI New Deployment screen](/img/docs/create-new-deployment-select-cluster.png)
 
 
-### Additional documentation
+### Read the documentation
 
 The following documents include setup steps for key Astro features and tools: 
 
