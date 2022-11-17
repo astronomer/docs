@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 :::caution
 
-This feature is in [Private Preview](feature-previews.md) and is an alternative to the standard AWS installation process. For the standard installation steps, see [Install Astro on AWS](install-aws.md)
+This feature is in [Private Preview](feature-previews.md) and is an alternative to the standard AWS installation process. For the standard installation, see [Install Astro on AWS](install-aws.md)
 
 :::
 
@@ -19,63 +19,65 @@ To install Astro in a dedicated AWS account owned by your organization, you'll c
 - Share AWS account information with Astronomer support.
 - Create a cross-account IAM role that Astro can assume within your new AWS account.
 
-Astronomer support will create a cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
+Astronomer support will create a cluster within your AWS account to host the resources and Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Step 1: Create an IAM role for Astronomer
 
-Astro requires an IAM role that delegates specific permissions for your data plane account to the Astro control plane. These permissions are required to manage the data plane and the data plane account itself.
+Astro requires an IAM role that delegates specific permissions for your data plane account to the Astro control plane. These permissions are required to manage the data plane and the data plane account.
 
-See the following tables to learn more about each required permission and its purpose. To preview this role in its entirety, see its [CloudFormation template](https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account-prerelease.yaml).
+To preview this role in its entirety, see its [CloudFormation template](https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account-prerelease.yaml).
 
 ### Permissions used to manage data plane resources
 
-As the Astro service changes, Astronomer may change the role policy attached to this cross account role. Astronomer will only make such changes after pre-announcing them via email. Please make sure you are subscribed to the [Status Page](https://status.astronomer.io/) to receive these alerts. 
+As the Astro service changes, Astronomer support might change the role policy attached to the cross-account role. Astronomer support informs all organizations by email before implementing any changes. To make sure you receive these notifications, subscribe to the [Status Page](https://status.astronomer.io/). 
 
-To perform this function, Astro requires the following permissions to manage the cross account role.
+The following table lists the permissions required by Astro to manage the cross-account role.
 
-| Permissions                                            | Reason                                                                                                                        |
+| Permissions                                           | Purpose                                                                                                                        |
 | ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | `cloudformation:*`                                     | Setup, teardown, and update the data plane.                                                                                   |
 | `eks:*`                                                | Manage EKS clusters.                                                                                                          |
-| `ec2:*`                                                | Manage compute and network infrastructure.                                                                                    |
-| `rds:*`                                                | Manage the backing RDS database.                                                                                              |
-| `s3:*`                                                 | Manage S3 buckets used by Astro clusters (for example, the bucket used for logging).                                          |
-| `sts:* `                                               | Manage tokens required for accessing AWS services.                                                                            |
-| `autoscaling:*`                                        | Manage autoscaling policies for Astro infrastructure.                                                                         |
-| `cloudwatch:* , logs:* `                               | Monitor health of AWS resources.                                                                                              |
-| `kms:*`                                                | Manage keys used by Astro.                                                                                                    |
-| `secretsmanager:*`                                     | Store secrets used internally by Astro cluster.                                                                               |
-| `lambda:*`                                             | Scripts used to automate internal cluster operations (for example, to issue OIDC tokens to EKS clusters).                     |
-| `route53:*`                                            | Resolve DNS names of services used by your data pipelines but running in other AWS accounts.                                  |
-| `servicequotas:*`                                      | Monitor Service Quotas to ensure enough resource availability.                                                                |
+| `ec2:*`                                                | Manage the compute and network infrastructure.                                                                                    |
+| `rds:*`                                                | Manage the Amazon Relational Database Service (RDS).                                                                                              |
+| `s3:*`                                                 | Manage S3 buckets used by Astro clusters. For example, the bucket used for logging.                                          |
+| `sts:* `                                               | Manage the tokens required for accessing AWS services.                                                                            |
+| `autoscaling:*`                                        | Manage the autoscaling policies for Astro infrastructure.                                                                         |
+| `cloudwatch:* , logs:* `                               | Monitor the health of AWS resources.                                                                                              |
+| `kms:*`                                                | Manage the keys used by Astro.                                                                                                    |
+| `secretsmanager:*`                                     | Store the secrets used internally by the Astro cluster.                                                                               |
+| `lambda:*`                                             | Scripts used to automate internal cluster operations. For example, to issue OIDC tokens to EKS clusters.                     |
+| `route53:*`                                            | Resolve the DNS names of the services used by your data pipelines but running in other AWS accounts.                                  |
+| `servicequotas:*`                                      | Monitor Service Quotas to ensure resource availability.                                                                |
 | `ce:*`                                                 | Monitor costs.                                                                                                                |
 | `iam:Get* , iam:List* , iam:Tag*  , iam:Untag*`        | Enumerate and tag IAM objects, such as roles and policies.                                                                    |
 | `iam:OpenIDConnectProvider* `                          | Enable IAM Roles for Service Access.                                                                                          |
-| `iam:CreateRole iam:DeleteRole`                        | Create Operational Roles for Astro cluster. Note that this policy denies deletion of roles tagged with `customeraudit=TRUE` . |
-| iam:AttachRolePolicy , iam:PutRolePolicy , iam:Detach* | Create Operational Boundary and Permissions Policy for operational roles used by Astro clusters.                              |
-| iam:*InstanceProfile                                   | Manage instance profiles for cluster nodes.                                                                                   |
-| iam:CreateServiceLinkedRole  iam:PassRole              | Manage internal roles used by AWS services.                                                                                   |
+| `iam:CreateRole iam:DeleteRole`                        | Create Operational Roles for the Astro cluster. This policy denies deletion of roles tagged with `customeraudit=TRUE`. |
+| iam:AttachRolePolicy , iam:PutRolePolicy , iam:Detach* | Create the Operational Boundary and Permissions Policy for operational roles used by Astro clusters.                              |
+| iam:*InstanceProfile                                   | Manage the instance profiles for cluster nodes.                                                                                   |
+| iam:CreateServiceLinkedRole  iam:PassRole              | Manage the internal roles used by AWS services.                                                                                   |
 
 ### Permissions used to manage the cross-account role
 
-As Astro changes, Astronomer may change the role policy attached to this cross account role. Astronomer will make changes to the role policy only after pre-announcing them through email. Subscribe to the [Status Page](https://status.astronomer.io/) to ensure that you receive these alerts. 
+As the Astro service changes, Astronomer support might change the role policy attached to the cross-account role. Astronomer support informs all organizations by email before implementing any changes. To make sure you receive these notifications, subscribe to the [Status Page](https://status.astronomer.io/). 
 
-To perform this function, Astro requires the following permissions to manage the cross account role.
+The following table lists the permissions required by Astro to manage the cross-account role.
 
-| Permissions                                                                               | Reason                                                |
+| Permissions                                                                               | Purpose                                                |
 | ----------------------------------------------------------------------------------------- | ----------------------------------------------------- |
 | `iam:CreatePolicy , iam:CreatePolicyVersion , iam:DeletePolicy , iam:DeletePolicyVersion` | Manage the policy attached to the cross-account role. |
 
 #### Monitor the cross-account role for changes (optional)
 
-To monitor changes to the cross-account role policy, Astronomer recommends setting up a CloudTrail in the data plane account and monitoring it for the following events: 
+Astronomer recommends setting up a CloudTrail in the data plane account to monitor changes to the cross-account role policy. The following table lists the events that you should monitor. 
 
 | Event Names                              | Resource                                                         |
 | ---------------------------------------- | ---------------------------------------------------------------- |
 | `AttachRolePolicy , DetachRolePolicy`    | `roleName = astronomer-remote-management`                        |
 | `SetPolicyVersion , CreatePolicyVersion` | `policyArn = "arn:aws:iam::*:policy/AstronomerCrossAccountRole"` |
 
-To use CloudWatch to monitor this trail, follow the instructions in [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html) to apply the following filter to your CloudWatch metric:
+To use a CloudWatch CloudTrail to changes to the cross-account role policy, see [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html).
+
+Run the following command to apply a filter to your CloudWatch CloudTrail:
 
 ```text
 { ($.eventName = AttachRolePolicy || $.eventName = DetachRolePolicy || $.eventName = SetPolicyVersion || $.eventName = CreatePolicyVersion) && ($.requestParameters.policyArn = "*AstronomerCrossAccountRole"  || $.requestParameters.roleName = astronomer-remote-management) }
@@ -96,7 +98,7 @@ To use CloudWatch to monitor this trail, follow the instructions in [Creating Cl
 
 ## Step 3:Retrieve an external ID from the Cloud UI
 
-You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the field will not appear in the Cloud UI.
+You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the **AWS External ID** field will not appear in the Cloud UI.
 
 1. In the Cloud UI, click the **Settings** tab.
 
