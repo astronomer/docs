@@ -95,7 +95,7 @@ To rebuild your project after making a change to any of these files, you must [r
 
 ### Deploy custom Docker images
 
-To deploy custom Docker images, see [Deploy custom Docker images](deploy-code.md#deploy-custom-dockeriimages)
+To deploy custom Docker images, see [Deploy custom Docker images](deploy-code.md#deploy-custom-dockeriimages).
 
 ## Explore Airflow providers and modules
 
