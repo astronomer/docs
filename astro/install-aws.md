@@ -47,6 +47,7 @@ Astronomer support will create a cluster within your AWS account that hosts the 
 ### Prerequisites
 
 - An AWS IAM user with the following permissions:
+
     - `cloudformation:*`
     - `GetRole`
     - `GetRolePolicy`
@@ -57,9 +58,11 @@ Astronomer support will create a cluster within your AWS account that hosts the 
     - `UpdateAssumeRolePolicy`
 
    See [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
+
 - A dedicated AWS account with minimum EC2 service quotas.
 - A subscription to the [Astro Status Page](https://status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
+  
     - `https://cloud.astronomer.io/`
     - `https://astro-<your-org>.datakin.com/`
     - `https://<your-org>.astronomer.run/`
@@ -230,9 +233,9 @@ If you're setting up your first cluster in any of these regions, you need to com
 
 :::
 
-#### VPC peering prerequisites (optional)
+#### Provide VPC peering information (Optional)
 
-If you need to VPC peer with Astronomer, provide the following information to your Astronomer representative:
+If you need to VPC peer with Astronomer, provide the following additional information to Astronomer support:
 
 - Subnet CIDRs (RFC 1918 IP Space).
 - VPC Name/ID and region for peering with Astronomer. This is accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/).
@@ -275,7 +278,7 @@ If any AWS resources are on a private network, you can choose between two option
 - Allow traffic through the public internet and use allow-lists for communication.
 - Create a VPC Peering connection between the Astronomer VPC and the VPCs for your broader network.
 
-If you want to continue with the second option, you'll additionally need:
+If you want to continue with the second option, you'll additionally need to provide Astronomer support with:
 
 - A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. You must ensure it does not overlap with the AWS VPC(s) that you will be peering with later. The default CIDR range is `172.20.0.0/19`.
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
@@ -307,6 +310,7 @@ Wait for confirmation that the installation is successful before you access Astr
 </Tabs>
 
 ## Next steps
+
 Congratulations on installing Astro on AWS! Astronomer recommends completing some of the following actions to make the most of your new installation.
 
 ### Create a Deployment
@@ -318,6 +322,7 @@ When Astronomer support confirms that your Astro cluster has been created, you c
 ### Additional documentation
 
 The following documents include setup steps for key Astro features and tools: 
+
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/overview.md)
 - [Configure Deployments](configure-deployment-resources.md)
