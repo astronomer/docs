@@ -118,21 +118,6 @@ for file in $files; do
   fi
 done
 
-OUTPUT=$(git diff main... --name-only)
-DAGS_DEPLOY=FALSE
-REGULAR_DEPLOY=FALSE
-local IFS=$'\n'
-local lines=($OUTPUT)
-local i
-for (( i=0; i<${#lines[@]}; i++ )) ; do
-    if [[ "${lines[$i]}" == *"dags/"* ]]
-    then
-        DAGS_DEPLOY=TRUE
-    else
-        REGULAR_DEPLOY=TRUE
-    fi
-done
-
 # If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
 if [ $dags_only == 1 ]
 then
