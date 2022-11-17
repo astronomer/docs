@@ -5,6 +5,9 @@ id: integrate-auth-system
 description: Integrate your internal authentication server with Astronomer Software.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Astronomer Software by default allows users to create an account with and authenticate using one of the 3 methods below:
 
 - Google OAuth
@@ -362,3 +365,30 @@ If you configured a fully custom OAuth flow, you should see a new **Log in with 
 ![Custom login button on the Astronomer login screen](/img/software/custom-oauth.png)
 
 You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME` when authenticating using the Astro CLI.
+
+## Manage Astronomer Software users with SCIM
+
+Astronomer Software supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astronomer Software allows you to automatically provision and deprovision users based on templates for access and permissions. It also provides better observability though your identity provider for when new users are created across your organization. 
+
+<Tabs
+    groupId="scim"
+    defaultValue="okta"
+    values={[
+        {label: 'Azure AD', value: 'azuread'},
+        {label: 'Okta', value: 'okta'},
+    ]}>
+<TabItem value="okta">
+
+This setup assumes that you have already created a web app for Astronomer Software in Okta. See [Okta](#okta).
+
+1. From your Astronomer integration's settings page, go to **Provisioning**. 
+2. Configure the following values for your SCIM integration.
+
+    - **SCIM connector base URL**: `https://astro-software-host/v1/scim/okta`
+    - **Authentication mode**: Basic Auth
+        - Username: `<your-provisioning-account-username>`
+        - Password: `<your-provisioning-account-password>`
+
+3. Go to **Configure API Integration** and select the **Enable API Integration** checkbox.
+4. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
+5. On the Assignments tab, ensure that the right users and groups in your org are assigned to the app integration. For instructions on how to assign the app integration to individual users and groups, see the Assign app integrations (opens new window) topic in the Okta product documentation.
