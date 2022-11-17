@@ -17,7 +17,7 @@ Airflow exposes a number of parameters that are closely related to DAG and task-
 - DAG-level settings.
 - Task-level settings.
 
-In this tutorial, you'll learn about the key parameters that you can use to modify Airflow performance. you'll also learn how your choice of executor can impact scaling and how best to respond to common scaling issues.
+In this guide, you'll learn about the key parameters that you can use to modify Airflow performance. you'll also learn how your choice of executor can impact scaling and how best to respond to common scaling issues.
 
 This guide references the parameters available in Airflow version 2.0 and later. If you're using an earlier version of Airflow, some of the parameter names might be different.
 
@@ -70,11 +70,11 @@ Scheduler settings control how the scheduler parses DAG files and creates DAG ru
 
 - `parsing_processes` (formerly `max_threads`): How many processes the scheduler can run in parallel to parse DAGs. Astronomer recommends setting a value that is twice your available vCPUs. Increasing this value can help serialize a large number of DAGs more efficiently. If you are running multiple schedulers, this value applies to each of them. The default value is 2. 
 
-- `file_parsing_sort_mode`: Determines how the scheduler lists and sorts DAG files to determine the parsing order. Set to one of: `modified_time`, `random_seeded_by_host` and `alphabetical`. The default value is `modified_time`. 
+- `file_parsing_sort_mode`: Determines how the scheduler lists and sorts DAG files to determine the parsing order. Set to one of: `modified_time`, `random_seeded_by_host` and `alphabetical`. The default value is `modified_time`. 
 
 - `scheduler_heartbeat_sec`: Defines how often the scheduler should run (in seconds) to trigger new tasks. The default value is 5 seconds. 
 
-- `max_dagruns_to_create_per_loop`: The maximum number of DAGs to create DAG runs for per scheduler loop. Decrease the value to free resources for scheduling tasks. The default value is 10 seconds. 
+- `max_dagruns_to_create_per_loop`: The maximum number of DAGs to create DAG runs for per scheduler loop. Decrease the value to free resources for scheduling tasks. The default value is 10. 
 
 - `max_tis_per_query`: Changes the batch size of queries to the metastore in the main scheduling loop. A higher value allows more `tis` to be processed per query, but your query may become too complex and cause performance issues. The default value is 512 queries. 
 

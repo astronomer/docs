@@ -5,7 +5,7 @@ id: data-lineage-concepts
 description: Learn about data lineage and how you can use it in Airflow.
 ---
 
-[Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking and observing data flowing through a data pipeline. You can use data lineage to understand data sources, troubleshoot job failures, manage PII, and ensure compliance with data regulations.
+[Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking and observing data flowing through a data pipeline. You can use data lineage to understand data sources, troubleshoot run failures, manage  personally identifiable information (PII), and ensure compliance with data regulations.
 
 ## Lineage on Astronomer
 
@@ -19,20 +19,20 @@ The following terms are used frequently when discussing data lineage and OpenLin
 
 - **Integration:** A means of gathering lineage data from a source system such as a scheduler or data platform. For example, the OpenLineage Airflow integration allows lineage data to be collected from Airflow DAGs. A full list of OpenLineage integrations can be found [here](https://openlineage.io/integration).
 - **Extractor:** In the `openlineage-airflow` package, an extractor is a module that gathers lineage metadata from a specific hook or operator. For example, extractors exist for the `PostgresOperator` and `SnowflakeOperator`, meaning that if `openlineage-airflow` is installed and configured for your Airflow environment, then lineage data is generated automatically from those operators when your DAG runs. An extractor must exist for a specific operator to get lineage data from it.
-- **Job:** A process that consumes or produces datasets. In the context of Airflow, an OpenLineage job corresponds to a task in your DAG as long as your task is an instance of an operator with an extractor. Jobs can also represent work completed in other applications that emit lineage data, such as a Spark job or a dbt model. Jobs appear as nodes on your lineage graphs in the [lineage UI](data-lineage.md).
-- **Dataset:** Any collection of data that your jobs interact with. For example, a dataset can correspond to a table in your database or a set of data that you run a Great Expectations check on. A dataset is typically registered as part of your lineage data when a job writing to the dataset is completed. For example, when data is inserted into a table.
-- **Run:** An instance of a job where lineage data is generated. In the context of the Airflow integration, an OpenLineage run is generated with each DAG run.
-- **Facet:** A piece of lineage metadata about a job, dataset, or run. Also known as a “job facet”.
+- **Run:** A process that consumes or produces datasets. In the context of Airflow, an OpenLineage run corresponds to a task in your DAG as long as your task is an instance of an operator with an extractor. Runs can also represent work completed in other applications that emit lineage data, such as a Spark job or a dbt model. Runs appear as nodes on your lineage graphs in the [lineage UI](data-lineage.md).
+- **Dataset:** Any collection of data that your runs interact with. For example, a dataset can correspond to a table in your database or a set of data that you run a Great Expectations check on. A dataset is typically registered as part of your lineage data when a run writing to the dataset is completed. For example, when data is inserted into a table.
+- **Run:** An instance of a run where lineage data is generated. In the context of the Airflow integration, an OpenLineage run is generated with each DAG run.
+- **Facet:** A piece of lineage metadata about a run, dataset, or run. Also known as a “job facet”.
 
 ## OpenLineage and Airflow
 
 Using OpenLineage with Airflow gives you insight into your complex data ecosystems and can lead to better data governance. Airflow is a natural place to integrate data lineage because it touches and moves data across many parts of an Organization.
 
-The following are the primary capabilities that OpenLineage with Airflow provides:
+The following are the insights that OpenLineage with Airflow provides:
 
-- Quickly locate the cause of task failures by identifying issues in upstream datasets. For example, you might see that a task failed because an upstream job outside of Airflow failed to populate a particular dataset.
-- Easily see the affected area of any job failures or changes to data by visualizing the relationship between jobs and datasets.
-- Identify where key data is used in jobs across an Organization.
+- Quickly locate the cause of task failures by identifying issues in upstream datasets. For example, you might see that a task failed because an upstream run outside of Airflow failed to populate a particular dataset.
+- Easily see the affected area of any run failures or changes to data by visualizing the relationship between runs and datasets.
+- Identify where key data is used in runs across an Organization.
 
 Integrating OpenLineage with Airflow provides the following benefits:
 

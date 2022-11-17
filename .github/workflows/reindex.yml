@@ -14,7 +14,7 @@ jobs:
         ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           path: docs
       - name: Create CONFIG env var from algolia-config.json

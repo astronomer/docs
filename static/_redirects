@@ -14,18 +14,26 @@
 
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
+/astro/connect-external-services https://docs.astronomer.io/astro/category/connect-astro 301
 
 # tutorial redirects 
-
-/tutorials/get-started-with-airflow /learn/get-started-with-airflow
-/tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2
-/tutorials/astro-python-sdk /learn/astro-python-sdk
+/tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
+/tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2 301
+/tutorials/astro-python-sdk /learn/astro-python-sdk 301
 
 # CLI migration redirects 
+/software/cli-reference /astro/cli/reference 301
+/software/cli-release-notes /astro/cli/release-notes 301
+/software/cli-reference* /astro/cli/reference 301
 
-/software/cli-reference /astro/cli/reference
-/software/cli-reference* /astro/cli/reference
-
+# Docs with redundant Learn guides 
+/astro/deferrable-operators /learn/deferrable-operators 301
+/astro/astro-python-sdk /learn/astro-python-sdk-etl 301
+/astro/data-lineage-concepts /learn/airflow-openlineage 301
+/astro/kubepodoperator-local /learn/kubepod-operator 301
+/software/deferrable-operators /learn/deferrable-operators 301
+/software/data-lineage-concepts /learn/airflow-openlineage 301
+/software/kubepodoperator-local /learn/kubepod-operator 301
 
 # deprecated docs
 /astro/known-limitations /astro 301
@@ -224,6 +232,8 @@
 # redirect links to renamed files
 /astro/configure-deployment /astro/configure-deployment-resources 301
 /astro/scheduler-logs /astro/view-logs 301
+/software/manage-platform-users#reference-system-permissions /software/role-permission-reference 301
+
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301

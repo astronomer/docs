@@ -9,12 +9,6 @@ All Astro Deployments use the [OpenLineage Airflow library](https://openlineage.
 
 If you’re using an unsupported operator, create an issue in the [OpenLineage GitHub repository](https://github.com/OpenLineage/OpenLineage) or write your own custom extractor.
 
-:::info
-
-This functionality is early access. If you have questions or feedback, contact [Astronomer support](https://support.astronomer.io/).
-
-:::
-
 ## Supported Airflow operators
 
 The following operators are supported in Astro lineage:
@@ -37,7 +31,7 @@ The following operators are supported in Astro lineage:
 
 :::tip
 
-The `GreatExpectationsOperator` additionally emits data quality information to the **Quality** tab in the **Lineage** view of the Cloud UI. For more information, see [Data lineage on Astro](data-lineage.md).
+The `SQLColumnCheckOperator`, `BigQueryColumnCheckOperator`, `SQLTableCheckOperator`, `BigQueryTableCheckOperator`, and `GreatExpectationsOperator` emit data quality information to the **Quality** tab in the **Lineage** view of the Cloud UI. For more information, see [Data lineage on Astro](data-lineage.md). The `GreatExpectationsOperator` automatically emits lineage data in versions 0.2.0 and later if you configure an OpenLineage environment in its [action list](https://docs.greatexpectations.io/docs/terms/action/). The `GreatExpectationsOperator` does not have an extractor.
 
 :::
 
