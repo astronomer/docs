@@ -323,7 +323,7 @@ tell_me_what_to_do = PythonOperator(
 
 6. See the docs under their respective attribute:
 
-![All Task Docs](/img/guides/task_docs_all.png)
+    ![All Task Docs](/img/guides/task_docs_all.png)
 
 ## Conclusion
 
