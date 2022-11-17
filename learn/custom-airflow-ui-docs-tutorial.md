@@ -1,8 +1,8 @@
 ---
-title: 'Add documentation to your DAGs and tasks in the Airflow UI'
-sidebar_label: 'Add docs to DAGs'
+title: 'Create DAG documentation in Apache Airflow'
+sidebar_label: 'Write DAG documentation'
 id: custom-airflow-ui-docs-tutorial
-description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
+description: 'Use Apache Airflow's built-in documentation features to generate documentation for your DAGs in the Airflow UI.'
 ---
 
 import Tabs from '@theme/Tabs';
@@ -56,13 +56,13 @@ To run Airflow locally, you first need to create an Astro project.
 
 1. In your `dags` folder, create a file named `docs_example_dag.py`. 
 
-2. Copy and paste one of the following DAGs based on which coding style you're most confortable with.
+2. Copy and paste one of the following DAGs based on which coding style you're most comfortable with.
 
 <Tabs
     defaultValue="TaskFlowAPI"
     groupId= "code-variations"
     values={[
-        {label: 'TaskFlowAPI', value: 'TaskFlowAPI'},
+        {label: 'TaskFlow API', value: 'TaskFlowAPI'},
         {label: 'Traditional Operator', value: 'traditional'},
     ]}>
 
@@ -156,8 +156,8 @@ You can add Markdown-based documentation to your DAGs that will render in the **
     defaultValue="TaskFlowAPI"
     groupId= "code-variations"
     values={[
-        {label: 'DAG decorator', value: 'TaskFlowAPI'},
-        {label: 'Traditional DAG context', value: 'traditional'},
+        {label: 'TaskFlow API', value: 'TaskFlowAPI'},
+        {label: 'Traditional operators', value: 'traditional'},
     ]}>
 
 <TabItem value="TaskFlowAPI">
@@ -207,7 +207,7 @@ You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON,
 
 To add documentation to your task, follow these steps:
 
-1. Add the following code with a string in Markdown format above the definition of your task:
+1. Add the following code with a string in Markdown format:
 
     ```python
     doc_md_task = """
@@ -218,15 +218,15 @@ To add documentation to your task, follow these steps:
     """
     ```
 
-2. Add this code with a string written in Monospace format above the definition of your task:
+2. Add the following code with a string written in monospace format:
 
     ```python
-    doc_task = """
+    doc_monospace_task = """
     If you don't like the suggested activity you can always just go to the park instead.
     """
     ```
 
-3. Add the following code with a string in JSON format above the definition of your task:
+3. Add the following code with a string in JSON format:
 
     ```python
     doc_json_task = """
@@ -240,7 +240,7 @@ To add documentation to your task, follow these steps:
     """
     ```
 
-4. Add this code with a string written in YAML format above the definition of your task:
+4. Add the following code with a string written in YAML format:
 
     ```python
     doc_yaml_task = """
@@ -251,7 +251,7 @@ To add documentation to your task, follow these steps:
     """
     ```
 
-5. Add the code below above the definition of your task:
+5. Add the following code containing restructured text:
 
     ```python
     doc_rst_task = """
@@ -266,14 +266,14 @@ To add documentation to your task, follow these steps:
     """
     ```
 
-6. Provide the docs to their respective parameters in your task definition as shown in the code snippet below. Pick the coding style you're most confortable with.
+6. Create a task definition as shown in the following snippet. The task definition includes parameters for specifying each of the documentation strings you created. Pick the coding style you're most comfortable with.
 
 <Tabs
     defaultValue="TaskFlowAPI"
     groupId= "code-variations"
     values={[
         {label: 'TaskFlowAPI', value: 'TaskFlowAPI'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional operators', value: 'traditional'},
     ]}>
 
 <TabItem value="TaskFlowAPI">
@@ -281,7 +281,7 @@ To add documentation to your task, follow these steps:
 ```python
 @task(
     doc_md=doc_md_task,
-    doc=doc_task,
+    doc=doc_monospace_task,
     doc_json=doc_json_task,
     doc_yaml=doc_yaml_task,
     doc_rst=doc_rst_task
@@ -302,7 +302,7 @@ tell_me_what_to_do = PythonOperator(
     task_id="tell_me_what_to_do",
     python_callable=query_api,
     doc_md=doc_md_task,
-    doc=doc_task,
+    doc=doc_monospace_task,
     doc_json=doc_json_task,
     doc_yaml=doc_yaml_task,
     doc_rst=doc_rst_task
