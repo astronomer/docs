@@ -272,8 +272,8 @@ To add documentation to your task, follow these steps:
     defaultValue="TaskFlowAPI"
     groupId= "code-variations"
     values={[
-        {label: 'DAG decorator', value: 'TaskFlowAPI'},
-        {label: 'Traditional DAG context', value: 'traditional'},
+        {label: 'TaskFlowAPI', value: 'TaskFlowAPI'},
+        {label: 'Traditional Operator', value: 'traditional'},
     ]}>
 
 <TabItem value="TaskFlowAPI">
