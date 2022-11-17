@@ -8,7 +8,7 @@ description: 'Use tutorials and guides to make the most out of Airflow and Astro
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Adding custom doc strings that will be shown in the Airflow UI to your DAGs and tasks is a lesser known but powerful Airflow feature.
+One of the more powerful and lesser-known features of Airflow is that you can create Markdown-based DAG documentation that appears in the Airflow UI
 
 ![DAG Docs Intro Example](/img/guides/DAG_docs_intro_example.png)
 
@@ -54,9 +54,9 @@ To run Airflow locally, you first need to create an Astro project.
 
 ## Step 2: Create a new DAG
 
-1. In your `dags` folder, add a file called `docs_example_dag.py`. 
+1. In your `dags` folder, create a file named `docs_example_dag.py`. 
 
-2. Copy and paste the DAG code provided below. Choose one of either the TaskFlowAPI or traditional operators DAGs.
+2. Copy and paste the one of the following DAGs based on which coding style you're most confortable with.
 
 <Tabs
     defaultValue="TaskFlowAPI"
@@ -126,7 +126,7 @@ This DAG has one task called `tell_me_what_to_do`, which queries an [API](https:
 
 ## Step 3: Add docs to your DAG
 
-In Airflow you can add custom documentation to your DAGs in Markdown format that will render in the **Grid**, **Graph** and **Calendar** views.
+You can add Markdown-based documentation to your DAGs that will render in the **Grid**, **Graph** and **Calendar** pages of the Airflow UI.
 
 1. In your `docs_example_dag.py` file, add the following doc string above the definition of your DAG:
 
@@ -148,7 +148,7 @@ In Airflow you can add custom documentation to your DAGs in Markdown format that
     """
     ```
 
-    This doc string is written in Markdown format. It includes a title, a link to an external website, a bulleted list, as well as an image, which has been formatted using HTML. To learn more about Markdown, check out this [Markdown Guide](https://www.markdownguide.org/).
+    This doc string is written in Markdown. It includes a title, a link to an external website, a bulleted list, as well as an image which has been formatted using HTML. To learn more about Markdown, see [The Markdown Guide](https://www.markdownguide.org/).
 
 2. Add the documentation to your DAG by passing `doc_md_DAG` to the `doc_md` parameter of your DAG class as shown in the code snippet below:
 
@@ -265,15 +265,15 @@ with DAG(
 
     ![DAG Docs 2](/img/guides/DAG_docs_2.png)
 
-:::info
+:::tip
 
-When using the `with DAG():` syntax it is possible to pass the filepath to a markdown file to the `doc_md` parameter. This can be useful if you want to add the same documentation to several of your DAGs.
+Using `with DAG():` lets you pass the filepath of a markdown file to the `doc_md` parameter. This can be useful if you want to add the same documentation to several of your DAGs.
 
 :::
 
 ## Step 5: Add docs to a task
 
-You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructured text. Note that only Markdown will be rendered, other formats will be displayed as rich content.
+You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructured text. Note that only Markdown will be rendered and other formats will be displayed as rich content.
 
 <Tabs
     defaultValue="markdown"
