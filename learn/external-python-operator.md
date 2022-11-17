@@ -17,7 +17,7 @@ The general steps presented here could be applied to any other use case for runn
 
 ## Time to complete
 
-This tutorial takes approximately 30 minutes to complete.
+This tutorial takes approximately one hour to complete.
 
 ## Assumed knowledge
 
@@ -36,7 +36,7 @@ To complete this tutorial, you need:
 
 ## Step 1: Set up your data stores
 
-For this example, you will need data in a Snowflake table to query using Snowpark. If you do not already have a suitable table, run the following queries in Snowflake:
+For this example, you will need data in a Snowflake table to query using Snowpark. To create a table, run the following queries in Snowflake:
 
 1. Create a table.
 
@@ -66,10 +66,22 @@ For this example, you will need data in a Snowflake table to query using Snowpar
 
 ## Step 2: Create a connection to Snowflake in your secrets manager (optional)
 
-You will need to pass Snowflake connection information to your virtual environment in order for your DAG to connect to Snowflake. If you are using an external secrets manager, add a new secret called `/airflow/connections/snowflake` with a connection string like the following:
+You will need to pass Snowflake connection information to your virtual environment in order for your DAG to connect to Snowflake. If you are using an external secrets manager, add a new secret called `/airflow/connections/snowflake` with the connection information in json format like the following:
 
 ```text
-snowflake://USERNAME:PASSWORD@ACCOUNT.REGION.snowflakecomputing.com/?account=ACCOUNT&warehouse=WAREHOUSE&database=DATABASE&region=REGION
+{
+    "conn_type": "snowflake",
+    "login": "your-login",
+    "password": "your-password",
+    "schema": "your-schema",
+    "extra": {
+        "account": "your-account",
+        "database": "your-database",
+        "region": "your-region",
+        "warehouse": "your-warehouse",
+        "role": "your-role"
+    }
+}
 ```
 
 If you are not using an external secrets manager, you can skip this step.
@@ -94,7 +106,24 @@ Now that you have your Snowflake resources configured, you can move on to settin
 
     The packages in this file will be installed in your virtual environment. The `snowflake-snowpark-python` package is required to run Snowpark queries. The `boto3` package is used to interact with AWS Parameter Store to retrieve credentials. If you are using a different secrets manager or are managing secrets locally, you can update or remove this line.
 
-3. Update the `Dockerfile` of your Astro project to install `pyenv` and its requirements:
+3. If you setup a Snowflake connection with a secrets manager as described in [Step 2](#step-2-create-a-connection-to-snowflake-in-your-secrets-manager-optional), add a new file to your project called `secrets-manager.env` and add environment variables that can be used to connect to your secrets manager. For example, if you use AWS parameter store, you might add the following:
+
+    ```text
+    AWS_ACCESS_KEY_ID=<your-access-key-id>
+    AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
+    ```
+
+    Add the `secrets-manager.env` file to your project's ``.gitignore` file so sensitive credentials aren't tracked in git.
+
+    If you are not using an external secrets manager, you can skip this step.
+
+    :::note
+
+    There are many ways to connect your virtual environment to your secrets manager beyond what is presented here, including passing a profile with a shared credential file or having your environment assume a role that has access to your secrets manager. The access key and secret method described here is the most straight forward when working with a local project, but may not be recommended for production in some organizations.
+
+    ::: 
+
+4. Update the `Dockerfile` of your Astro project to install `pyenv` and its requirements:
 
     ```docker
     FROM quay.io/astronomer/astro-runtime:6.0.3
@@ -116,12 +145,13 @@ Now that you have your Snowflake resources configured, you can move on to settin
         pyenv virtualenv 3.8.14 snowpark_env && \
         pyenv activate snowpark_env && \
         pip install --no-cache-dir --upgrade pip && \
-        pip install --no-cache-dir -r snowpark_requirements.txt
+        pip install --no-cache-dir -r snowpark_requirements.txt && \
+        source secrets-manager.env
     ```
 
     These commands install `pyenv` in your Airflow environment and create a Python 3.8 virtual environment called `snowpark_env` with the required packages to run Snowpark that will be used by the ExternalPythonOperator. The `pyenv` environment will be created when you start your Airflow project, and can be used by any number of ExternalPythonOperator tasks. If you use a different virtual environment package (e.g. `venv` or `conda`) you may need to update this step.
 
-4. Add the following to your `packages.txt` file:
+5. Add the following to your `packages.txt` file:
 
     ```text
     git
@@ -145,7 +175,7 @@ Now that you have your Snowflake resources configured, you can move on to settin
 
     This installs all the needed packages to run `pyenv` in your Airflow environment.
 
-5. Run the following command to start your project in a local environment:
+6. Run the following command to start your project in a local environment:
 
     ```sh
     astro dev start
@@ -153,7 +183,7 @@ Now that you have your Snowflake resources configured, you can move on to settin
 
     :::note
 
-    The build of this project's Dockerfile can take up to 20 minutes due to the `pyenv` installation. If you are an Astronomer customer and will be deploying this project to Astro, you can use a `dag-only` deploy after the initial deployment to avoid rebuilding the Dockerfile when making changes to DAGs in the project.
+    The build of this project's Dockerfile can take up to 20 minutes due to the `pyenv` and Python 3.8 installation. If you are an Astronomer customer and will be deploying this project to Astro, you can use a `dag-only` deploy after the initial deployment to avoid rebuilding the Dockerfile when making changes to DAGs in the project.
 
     :::
 
@@ -210,16 +240,16 @@ with DAG(
         import boto3
         import json
         
-        # Retrieving connection information from the external secrets manager
-        ssm = boto3.client('ssm', region_name='us-east-1')
-        parameter = ssm.get_parameter(Name='/airflow/connections/snowflake', WithDecryption=True)
-        conn = json.loads(parameter['Parameter']['Value'])
-        
         ## Checking for the correct venv packages - this is useful for debugging	
         installed_packages = pkg_resources.working_set
         installed_packages_list = sorted(["%s==%s" % (i.key, i.version)
                 for i in installed_packages])
         print(installed_packages_list)
+
+        # Retrieving connection information from the external secrets manager
+        ssm = boto3.client('ssm', region_name='us-east-1')
+        parameter = ssm.get_parameter(Name='/airflow/connections/snowflake', WithDecryption=True)
+        conn = json.loads(parameter['Parameter']['Value'])
 
         # Defining parameters for Airflow's Snowpark connection
         connection_parameters = {
@@ -246,7 +276,7 @@ with DAG(
     task_print >> task_external_python
 ```
 
-This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in Step 3. The ExternalPythonOperator task also prints a list of packages installed in the virtual environment; this is optional, but can be helpful for debugging if something goes wrong.
+This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in [Step 3](#step-3-configure-your-astro-project). The ExternalPythonOperator task also prints a list of packages installed in the virtual environment; this is optional, but can be helpful for debugging if something goes wrong.
 
 This example pulls Snowflake connection information from AWS Parameter Store. If you are using a different secrets manager, you will need to update the following lines:
 
@@ -261,17 +291,19 @@ conn = json.loads(parameter['Parameter']['Value'])
 
 To run the DAG without an external secrets manager, simply provide your connection information directly in the `connection_parameters` dictionary (note that this is not best practice as sensitive information will be stored in your DAG file).
 
-Finally, if you chose to use an existing Snowflake table rather than create the one described in Step 1, you may need to update the SQL provided in this line:
-
-```python
-df = session.sql('select avg(reps_upper), avg(reps_lower) from dog_intelligence;')
-```
-
 ## Step 5: Run your DAG to execute your Snowpark query in a virtual environment
 
-Go to the Airflow UI, unpause your `py_virtual_env` DAG, and trigger it to run your Snowpark query in an isolated Python virtual environment. Go to the task logs and you should see the results of your query printed:
+Go to the Airflow UI, unpause your `py_virtual_env` DAG, and trigger it to run your Snowpark query in an isolated Python virtual environment. Go to the task logs and you should see the list of installed packages and the results of your query printed:
 
-LOGS SCREENSHOT HERE
+```text
+[2022-11-17, 18:55:56 UTC] {process_utils.py:179} INFO - Executing cmd: /home/astro/.pyenv/versions/snowpark_env/bin/python /tmp/tmd_3cp_1al/script.py /tmp/tmd_3cp_1al/script.in /tmp/tmd_3cp_1al/script.out /tmp/tmd_3cp_1al/string_args.txt
+[2022-11-17, 18:55:56 UTC] {process_utils.py:183} INFO - Output:
+[2022-11-17, 18:56:02 UTC] {process_utils.py:187} INFO - ['asn1crypto==1.5.1', 'boto3==1.26.10', 'botocore==1.29.10', 'certifi==2022.9.24', 'cffi==1.15.1', 'charset-normalizer==2.1.1', 'cloudpickle==2.0.0', 'cryptography==38.0.3', 'filelock==3.8.0', 'idna==3.4', 'jmespath==1.0.1', 'numpy==1.23.4', 'oscrypto==1.3.0', 'pandas==1.5.1', 'pip==22.3.1', 'pyarrow==8.0.0', 'pycparser==2.21', 'pycryptodomex==3.15.0', 'pyjwt==2.6.0', 'pyopenssl==22.1.0', 'python-dateutil==2.8.2', 'pytz==2022.6', 'requests==2.28.1', 's3transfer==0.6.0', 'setuptools==56.0.0', 'six==1.16.0', 'snowflake-connector-python==2.8.1', 'snowflake-snowpark-python==1.0.0', 'typing-extensions==4.4.0', 'urllib3==1.26.12', 'wheel==0.38.4']
+[2022-11-17, 18:56:02 UTC] {process_utils.py:187} INFO - <snowflake.snowpark.dataframe.DataFrame object at 0x7f69710e1d60>
+[2022-11-17, 18:56:02 UTC] {process_utils.py:187} INFO - [Row(AVG(REPS_UPPER)=Decimal('41.507353'), AVG(REPS_LOWER)=Decimal('25.588235'))]
+[2022-11-17, 18:56:02 UTC] {python.py:177} INFO - Done. Returned value was: None
+[2022-11-17, 18:56:02 UTC] {taskinstance.py:1401} INFO - Marking task as SUCCESS. dag_id=py_virtual_env, task_id=external_python, execution_date=20221117T185554, start_date=20221117T185555, end_date=20221117T185602
+```
 
 ## Other methods for running tasks in isolated environments
 
