@@ -178,29 +178,7 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 <TabItem value="commandline">
 
 1. Create a command line-level environment variable named `EXTERNAL_ID` that contains the External ID you copied in step 2.
-2. Open the AWS CLI and run the following command to create a cross-account IAM Role:
-
-    ```bash
-    $ aws iam create-role --role-name astronomer-remote-management --assume-role-policy-document "{
-        \"Version\": \"2012-10-17\",
-        \"Statement\": [
-            {
-                \"Effect\": \"Allow\",
-                \"Principal\": {
-                    \"AWS\": \"arn:aws:iam::406882777402:root\"
-                },
-                \"Action\": \"sts:AssumeRole\",
-                \"Condition\": {
-                    \"StringEquals\": {
-                    \"sts:ExternalId\": \"$EXTERNAL_ID\"
-                    }
-                }
-            }
-        ]
-    }"
-    ```
-
-3. Run the following command to attach a managed policy to the Astronomer remote management role.
+2. Run the following command to attach a managed policy to the Astronomer remote management role.
     
     ```sh
     #!/bin/sh
