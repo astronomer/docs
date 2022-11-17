@@ -21,6 +21,51 @@ To install Astro in a dedicated AWS account owned by your organization, you'll c
 
 Astronomer support will create a cluster within your AWS account that hosts the resources and Apache Airflow components necessary to deploy DAGs and execute tasks. If you'd like to support more than 1 Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Prerequisites
+
+- A dedicated AWS account with minimum EC2 service quotas.
+- A subscription to the [Astro Status Page](https://status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
+- The following domains added to your organization's allowlist for any user and CI/CD environments:
+   
+    - `https://cloud.astronomer.io/`
+    - `https://astro-<your-org>.datakin.com/`
+    - `https://<your-org>.astronomer.run/`
+    - `https://api.astronomer.io/`
+    - `https://images.astronomer.cloud/`
+    - `https://auth.astronomer.io/`
+    - `https://updates.astronomer.io/`
+    - `https://install.astronomer.io/`
+
+Astro requires a clean AWS account with a minimum set of EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. For instructions on creating a new AWS account, follow [AWS documentation](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
+
+The required [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html) are:
+
+| QuotaCode  | QuotaName                                                        | Minimum Value  |
+| -----------| ---------------------------------------------------------------- | ---------------|
+| L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40             |
+| L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40             |
+
+These are required to mitigate near term capacity risks and ensure a smooth onboarding experience on Astro. If you need to modify or increase a specific quota, see [Request a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html).
+
+:::tip
+
+If you have one or more existing AWS accounts, you can use [AWS Organizations](https://aws.amazon.com/organizations/) to manage billing, users, and more in a central place. For more information on how to add your Astro AWS account to your AWS Organization, read [Amazon's documentation](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html).
+
+:::
+
+### VPC peering prerequisites (Optional)
+
+If any AWS resources are on a private network, you can choose between two options:
+
+- Allow traffic through the public internet and use allow-lists for communication.
+- Create a VPC Peering connection between the Astronomer VPC and the VPCs for your broader network.
+
+If you want to continue with the second option, you'll additionally need:
+
+- A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. You must ensure it does not overlap with the AWS VPC(s) that you will be peering with later. The default CIDR range is `172.20.0.0/19`.
+- VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
+- The IP addresses of your DNS servers.
+
 ## Step 1: Create an IAM role for Astronomer
 
 Astro requires an IAM role that delegates specific permissions for your data plane account to the Astro control plane. These permissions are required to manage the data plane and the data plane account itself.
