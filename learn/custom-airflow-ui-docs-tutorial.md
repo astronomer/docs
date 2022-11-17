@@ -2,7 +2,7 @@
 title: 'Create DAG documentation in Apache Airflow'
 sidebar_label: 'Write DAG documentation'
 id: custom-airflow-ui-docs-tutorial
-description: 'Use Apache Airflow's built-in documentation features to generate documentation for your DAGs in the Airflow UI.'
+description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
 ---
 
 import Tabs from '@theme/Tabs';
@@ -63,7 +63,7 @@ To run Airflow locally, you first need to create an Astro project.
     groupId= "code-variations"
     values={[
         {label: 'TaskFlow API', value: 'TaskFlowAPI'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional operators', value: 'traditional'},
     ]}>
 
 <TabItem value="TaskFlowAPI">
