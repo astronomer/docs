@@ -1,6 +1,6 @@
 ---
 title: "Run Snowpark queries with the ExternalPythonOperator"
-sidebar_label: "ExternalPythonOperator"
+sidebar_label: "Use the ExternalPythonOperator"
 description: "Learn how to run a Snowpark query in a virtual Python environment using the ExternalPythonOperator in Airflow."
 id: external-python-operator
 ---
