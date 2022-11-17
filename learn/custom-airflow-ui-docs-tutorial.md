@@ -278,36 +278,36 @@ To add documentation to your task, follow these steps:
 
 <TabItem value="TaskFlowAPI">
 
-    ```python
-    @task(
-        doc_md=doc_md_task,
-        doc=doc_task,
-        doc_json=doc_json_task,
-        doc_yaml=doc_yaml_task,
-        doc_rst=doc_rst_task
-    )
-    def tell_me_what_to_do():
-        response = requests.get("https://www.boredapi.com/api/activity")
-        return response.json()["activity"]
+```python
+@task(
+    doc_md=doc_md_task,
+    doc=doc_task,
+    doc_json=doc_json_task,
+    doc_yaml=doc_yaml_task,
+    doc_rst=doc_rst_task
+)
+def tell_me_what_to_do():
+    response = requests.get("https://www.boredapi.com/api/activity")
+    return response.json()["activity"]
 
-    tell_me_what_to_do()
-    ```
+tell_me_what_to_do()
+```
 
 </TabItem>
 
 <TabItem value="traditional">
 
-    ```python
-    tell_me_what_to_do = PythonOperator(
-        task_id="tell_me_what_to_do",
-        python_callable=query_api,
-        doc_md=doc_md_task,
-        doc=doc_task,
-        doc_json=doc_json_task,
-        doc_yaml=doc_yaml_task,
-        doc_rst=doc_rst_task
-    )
-    ```
+```python
+tell_me_what_to_do = PythonOperator(
+    task_id="tell_me_what_to_do",
+    python_callable=query_api,
+    doc_md=doc_md_task,
+    doc=doc_task,
+    doc_json=doc_json_task,
+    doc_yaml=doc_yaml_task,
+    doc_rst=doc_rst_task
+)
+```
 
 </TabItem>
 
