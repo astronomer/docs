@@ -120,11 +120,9 @@ Astronomer recommends setting up a CloudTrail in the data plane account to monit
 | `AttachRolePolicy , DetachRolePolicy`    | `roleName = astronomer-remote-management`                        |
 | `SetPolicyVersion , CreatePolicyVersion` | `policyArn = "arn:aws:iam::*:policy/AstronomerCrossAccountRole"` |
 
-To use a CloudWatch CloudTrail to changes to the cross-account role policy, see [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html).
+To use a CloudWatch CloudTrail to changes to the cross-account role policy, see [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html).  When you create the metric filter, on the Define pattern page, in Create filter pattern, enter the following for Filter pattern:
 
-Run the following command to apply a filter to your CloudWatch CloudTrail:
-
-```text
+```
 { ($.eventName = AttachRolePolicy || $.eventName = DetachRolePolicy || $.eventName = SetPolicyVersion || $.eventName = CreatePolicyVersion) && ($.requestParameters.policyArn = "*AstronomerCrossAccountRole"  || $.requestParameters.roleName = astronomer-remote-management) }
 ```
 
