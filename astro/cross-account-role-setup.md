@@ -96,7 +96,7 @@ The following table lists the permissions required by Astro to manage the cross-
 | `ce:*`                                                 | Monitor costs.                                                                                                                |
 | `iam:Get* , iam:List* , iam:Tag*  , iam:Untag*`        | Enumerate and tag IAM objects, such as roles and policies.                                                                    |
 | `iam:OpenIDConnectProvider* `                          | Enable IAM Roles for Service Access.                                                                                          |
-| `iam:CreateRole iam:DeleteRole`                        | Create Operational Roles for the Astro cluster. This policy denies deletion of roles tagged with `customeraudit=TRUE`. |
+| `iam:CreateRole iam:DeleteRole`                        | Create Operational Roles for the Astro cluster. This policy denies deletion of roles tagged with `customeraudit=True`. |
 | iam:AttachRolePolicy , iam:PutRolePolicy , iam:Detach* | Create the Operational Boundary and Permissions Policy for operational roles used by Astro clusters.                              |
 | iam:*InstanceProfile                                   | Manage the instance profiles for cluster nodes.                                                                                   |
 | iam:CreateServiceLinkedRole  iam:PassRole              | Manage the internal roles used by AWS services.                                                                                   |
@@ -178,7 +178,7 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 <TabItem value="commandline">
 
 1. Create a command line-level environment variable named `EXTERNAL_ID` that contains the External ID you copied in step 2.
-2. Run the following command to attach a managed policy to the Astronomer remote management role.
+2. Run the following command to create the Astronomer remote management role.
     
     ```sh
     #!/bin/sh
