@@ -93,7 +93,7 @@ There are multiple open source tools that can be used to check data quality from
 Other tools that can be used for data quality checks include:
 
 - **[Soda](soda-data-quality.md)**: An open source data validation framework that uses YAML to define checks which can be run in Airflow using the `BashOperator`. Soda also offers the ability to write any custom checks using SQL.
-- **[dbt test](https://docs.getdbt.com/docs/building-a-dbt-project/tests)**: A testing framework for models using the `dbt test` CLI command, which you can run in Airflow with the `BashOperator` or `PythonOperator`. dbt can emit data to OpenLineage when using `dbt-ol`, but data quality information from the `dbt test` command is not currently collected.
+- **[dbt test](https://docs.getdbt.com/docs/building-a-dbt-project/tests)**: A testing framework for models using the `dbt test` CLI command, which you can run in Airflow with the `BashOperator` or `PythonOperator`. dbt can emit data to OpenLineage when using `dbt-ol`, but data quality metric information from the `dbt test` command is not currently collected, only the results of the test. See the [`--store-failures`](https://docs.getdbt.com/reference/resource-configs/store_failures) flag to collect more information from tests.
 
 ### Choosing a tool
 
