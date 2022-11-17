@@ -56,7 +56,7 @@ To run Airflow locally, you first need to create an Astro project.
 
 1. In your `dags` folder, create a file named `docs_example_dag.py`. 
 
-2. Copy and paste the one of the following DAGs based on which coding style you're most confortable with.
+2. Copy and paste one of the following DAGs based on which coding style you're most confortable with.
 
 <Tabs
     defaultValue="TaskFlowAPI"
@@ -194,104 +194,20 @@ with DAG(
 
     ![DAG Docs](/img/guides/DAG_docs.png)
 
-## Step 4: Add docs to your DAG using doc strings
-
-Many users use doc strings to document their DAG code. Airflow is able to pick up those strings and turn them into DAG Docs.
-
-1. Remove the `doc_md` parameter from your DAG code.
-
-2. Copy and paste the doc string as shown in the code snippets below:
-
-<Tabs
-    defaultValue="TaskFlowAPI"
-    groupId= "code-variations"
-    values={[
-        {label: 'DAG decorator', value: 'TaskFlowAPI'},
-        {label: 'Traditional DAG context', value: 'traditional'},
-    ]}>
-
-<TabItem value="TaskFlowAPI">
-
-```python
-@dag(
-    start_date=datetime(2022,11,1),
-    schedule="@daily",
-    catchup=False,
-)
-def docs_example_dag():
-
-    """
-    ### The Activity DAG
-
-    This DAG will help me decide what to do today. It uses the [BoredAPI](https://www.boredapi.com/) to do so.
-
-    My favorite suggestions so far were:
-
-    - Make bread from scratch
-    - Make a couch fort
-    - Take your cat on a walk
-    """
-```
-
-</TabItem>
-
-<TabItem value="traditional">
-
-```python
-with DAG(
-    dag_id="docs_example_dag",
-    start_date=datetime(2022,11,1),
-    schedule="@daily",
-    catchup=False,
-):
-    """
-    ### The Activity DAG
-
-    This DAG will help me decide what to do today. It uses the [BoredAPI](https://www.boredapi.com/) to do so.
-
-    My favorite suggestions so far were:
-
-    - Make bread from scratch
-    - Make a couch fort
-    - Take your cat on a walk
-    """
-```
-
-</TabItem>
-
-</Tabs>
-
-3. In the **Graph** view of your DAG click on **DAG docs** to view your documentation.
-
-    ![DAG Docs 2](/img/guides/DAG_docs_2.png)
-
 :::tip
 
-Using `with DAG():` lets you pass the filepath of a markdown file to the `doc_md` parameter. This can be useful if you want to add the same documentation to several of your DAGs.
+Airflow will automatically pick up a doc string written directly beneath the definition of the DAG context and add it as **DAG Docs**.
+Additionally, using `with DAG():` lets you pass the filepath of a markdown file to the `doc_md` parameter. This can be useful if you want to add the same documentation to several of your DAGs.
 
 :::
 
-## Step 5: Add docs to a task
+## Step 4: Add docs to a task
 
-You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructured text. Note that only Markdown will be rendered and other formats will be displayed as rich content.
+You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructured text. Note that only Markdown will be rendered and other formats will be displayed as rich content. 
 
-<Tabs
-    defaultValue="markdown"
-    groupId= "DAG-docs"
-    values={[
-        {label: 'Markdown', value: 'markdown'},
-        {label: 'Monospace', value: 'monospace'},
-        {label: 'JSON', value: 'json'},
-        {label: 'YAML', value: 'yaml'},
-        {label: 'reStructuredText', value: 'rst'},
-    ]}>
+To add documentation to your task, follow these steps:
 
-
-<TabItem value="markdown">
-
-To add documentation to your task in Markdown format, follow these steps:
-
-1. Add the following code above the definition of your task:
+1. Add the following code with a string in Markdown format above the definition of your task:
 
     ```python
     doc_md_task = """
@@ -302,34 +218,7 @@ To add documentation to your task in Markdown format, follow these steps:
     """
     ```
 
-2. Provide `doc_md_task` to the `doc_md` parameter of your task definition. If you are using traditional operators simply add it below the `python_callable` parameter.
-
-    ```python
-    @task(
-        doc_md=doc_md_task
-    )
-    def tell_me_what_to_do():
-        response = requests.get("https://www.boredapi.com/api/activity")
-        return response.json()["activity"]
-
-    tell_me_what_to_do()
-    ```
-
-    ```python
-    tell_me_what_to_do = PythonOperator(
-        task_id="tell_me_what_to_do",
-        python_callable=query_api,
-        doc_md=doc_md_task
-    )
-    ```
-
-</TabItem>
-
-<TabItem value="monospace">
-
-To add documentation in Monospace format to your task follow these steps:
-
-1. Add the code below above the definition of your task:
+2. Add this code with a string written in Monospace format above the definition of your task:
 
     ```python
     doc_task = """
@@ -337,34 +226,7 @@ To add documentation in Monospace format to your task follow these steps:
     """
     ```
 
-2. Provide `doc_task` to the `doc` parameter of your task definition. If you are using traditional operators simply add it below the `python_callable` parameter.
-
-    ```python
-    @task(
-        doc=doc_task
-    )
-    def tell_me_what_to_do():
-        response = requests.get("https://www.boredapi.com/api/activity")
-        return response.json()["activity"]
-
-    tell_me_what_to_do()
-    ```
-
-    ```python
-    tell_me_what_to_do = PythonOperator(
-        task_id="tell_me_what_to_do",
-        python_callable=query_api,
-        doc=doc_task
-    )
-    ```
-
-</TabItem>
-
-<TabItem value="json">
-
-To add documentation in JSON format to your task follow these steps:
-
-1. Add the code below above the definition of your task:
+3. Add the following code with a string in JSON format above the definition of your task:
 
     ```python
     doc_json_task = """
@@ -378,34 +240,7 @@ To add documentation in JSON format to your task follow these steps:
     """
     ```
 
-2. Provide `doc_json_task` to the `doc_json` parameter of your task definition. If you are using traditional operators simply add it below the `python_callable` parameter.
-
-    ```python
-    @task(
-        doc_json=doc_json_task
-    )
-    def tell_me_what_to_do():
-        response = requests.get("https://www.boredapi.com/api/activity")
-        return response.json()["activity"]
-
-    tell_me_what_to_do()
-    ```
-
-    ```python
-    tell_me_what_to_do = PythonOperator(
-        task_id="tell_me_what_to_do",
-        python_callable=query_api,
-        doc_json=doc_json_task
-    )
-    ```
-
-</TabItem>
-
-<TabItem value="yaml">
-
-To add documentation in YAML format to your task follow these steps:
-
-1. Add the code below above the definition of your task:
+4. Add this code with a string written in YAML format above the definition of your task:
 
     ```python
     doc_yaml_task = """
@@ -416,34 +251,7 @@ To add documentation in YAML format to your task follow these steps:
     """
     ```
 
-2. Provide `doc_yaml_task` to the `doc_yaml` parameter of your task definition. If you are using traditional operators simply add it below the `python_callable` parameter.
-
-    ```python
-    @task(
-        doc_yaml=doc_yaml_task
-    )
-    def tell_me_what_to_do():
-        response = requests.get("https://www.boredapi.com/api/activity")
-        return response.json()["activity"]
-
-    tell_me_what_to_do()
-    ```
-
-    ```python
-    tell_me_what_to_do = PythonOperator(
-        task_id="tell_me_what_to_do",
-        python_callable=query_api,
-        doc_yaml=doc_yaml_task
-    )
-    ```
-
-</TabItem>
-
-<TabItem value="rst">
-
-To add documentation in reStructuredText format to your task follow these steps:
-
-1. Add the code below above the definition of your task:
+5. Add the code below above the definition of your task:
 
     ```python
     doc_rst_task = """
@@ -458,10 +266,24 @@ To add documentation in reStructuredText format to your task follow these steps:
     """
     ```
 
-2. Provide `doc_rst_task` to the `doc_rst` parameter of your task definition. If you are using traditional operators simply add it below the `python_callable` parameter.
+6. Provide the docs to their respective parameters in your task definition as shown in the code snippet below. Pick the coding style you're most confortable with.
+
+<Tabs
+    defaultValue="TaskFlowAPI"
+    groupId= "code-variations"
+    values={[
+        {label: 'DAG decorator', value: 'TaskFlowAPI'},
+        {label: 'Traditional DAG context', value: 'traditional'},
+    ]}>
+
+<TabItem value="TaskFlowAPI">
 
     ```python
     @task(
+        doc_md=doc_md_task,
+        doc=doc_task,
+        doc_json=doc_json_task,
+        doc_yaml=doc_yaml_task,
         doc_rst=doc_rst_task
     )
     def tell_me_what_to_do():
@@ -471,10 +293,18 @@ To add documentation in reStructuredText format to your task follow these steps:
     tell_me_what_to_do()
     ```
 
+</TabItem>
+
+<TabItem value="traditional">
+
     ```python
     tell_me_what_to_do = PythonOperator(
         task_id="tell_me_what_to_do",
         python_callable=query_api,
+        doc_md=doc_md_task,
+        doc=doc_task,
+        doc_json=doc_json_task,
+        doc_yaml=doc_yaml_task,
         doc_rst=doc_rst_task
     )
     ```
@@ -491,51 +321,9 @@ To add documentation in reStructuredText format to your task follow these steps:
 
     ![Task Instance Details](/img/guides/task_instance_details.png)
 
-6. See the Docs under their respective attribute:
+6. See the docs under their respective attribute:
 
-<Tabs
-    defaultValue="markdown"
-    groupId= "DAG-docs"
-    values={[
-        {label: 'Markdown', value: 'markdown'},
-        {label: 'Monospace', value: 'monospace'},
-        {label: 'JSON', value: 'json'},
-        {label: 'YAML', value: 'yaml'},
-        {label: 'reStructuredText', value: 'rst'},
-    ]}>
-
-
-<TabItem value="markdown">
-
-![Markdown Task Docs](/img/guides/task_docs_markdown.png)
-
-</TabItem>
-
-<TabItem value="monospace">
-
-![Monospace Task Docs](/img/guides/task_docs_mono.png)
-
-</TabItem>
-
-<TabItem value="json">
-
-![JSON Task Docs](/img/guides/task_docs_json.png)
-
-</TabItem>
-
-<TabItem value="yaml">
-
-![YAML Task Docs](/img/guides/task_docs_yaml.png)
-
-</TabItem>
-
-<TabItem value="rst">
-
-![rst Task Docs](/img/guides/task_docs_rst.png)
-
-</TabItem>
-
-</Tabs>
+![All Task Docs](/img/guides/task_docs_all.png)
 
 ## Conclusion
 
