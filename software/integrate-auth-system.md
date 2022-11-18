@@ -391,4 +391,7 @@ This setup assumes that you have already created a web app for Astronomer Softwa
 
 3. Go to **Configure API Integration** and select the **Enable API Integration** checkbox.
 4. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
-5. On the Assignments tab, ensure that the right users and groups in your org are assigned to the app integration. For instructions on how to assign the app integration to individual users and groups, see the Assign app integrations (opens new window) topic in the Okta product documentation.
+5. On the Assignments tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
+
+
+<TabItem value="azuread">
