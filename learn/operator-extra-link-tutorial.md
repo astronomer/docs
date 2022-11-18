@@ -2,7 +2,7 @@
 title: 'Use a plugin to add extra links to operators'
 sidebar_label: 'Add an operator extra link'
 id: operator-extra-link-tutorial
-description: 'Use tutorials and guides to make the most out of Airflow and Astronomer.'
+description: 'Learn how to add operator extra links using a plugin.'
 ---
 
 import Tabs from '@theme/Tabs';
