@@ -384,7 +384,7 @@ This setup assumes that you have already created a web app for Astronomer Softwa
 1. From your Astronomer integration's settings page, go to **Provisioning**. 
 2. Configure the following values for your SCIM integration.
 
-    - **SCIM connector base URL**: `https://astro-software-host/v1/scim/okta`
+    - **SCIM connector base URL**: `https://BASEDOMAIN.astronomer.io/v1/scim/okta`
     - **Authentication mode**: Basic Auth
         - Username: `<your-provisioning-account-username>`
         - Password: `<your-provisioning-account-password>`
@@ -392,6 +392,32 @@ This setup assumes that you have already created a web app for Astronomer Softwa
 3. Go to **Configure API Integration** and select the **Enable API Integration** checkbox.
 4. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
 5. On the Assignments tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
+6. Add the following lines to your `config.yaml` file:
 
+    ```yaml
+    astronomer:
+      houston:
+        config:
+          okta:
+            scimAuthCode: <your-provisioning-account-username>:<your-provisioning-account-password>
+    ```
+
+</TabItem>
 
 <TabItem value="azuread">
+
+This setup assumes you have already registered Astronomer as an application on Azure AD. See [Azure AD](#azure-ad)
+
+1. Go to **Manage** > **Provisioning**.
+2. In the **Provisioning Mode** menu, select **Automatic**.
+3. In the **Tenant URL**, enter the URL for Astronomer's SCIM endpoint. This should be: `https://BASEDOMAIN.astronomer.io/v1/scim/okta`.
+4. Optional. If you use an OAuth token issuer other than Azure AD, copy the required OAuth bearer token into the **Secret Token** field. If this field is left blank, Azure AD includes an OAuth bearer token issued from Azure AD with each request.
+5. Click **Test connection** to confirm your connection to the SCIM endpoint.
+6. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
+7. Go to **Manage** > **Provisioning** > **Settings**.
+8. In the **Scope** setting, select **Sync only assigned users and groups**.
+9. Turning the **Provisioning status** toggle to **On**.
+10. Click **Save**.
+
+</TabItem>
+</Tabs>
