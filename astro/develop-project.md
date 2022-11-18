@@ -93,13 +93,18 @@ All changes made to the following files require rebuilding your image:
 
 To rebuild your project after making a change to any of these files, you must [restart your local environment](develop-project.md#restart-your-local-environment).
 
-### Deploy only DAGs
+## Add utility files for DAGs
 
-With Astro CLI 1.7 and later, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and allows you more flexibility when configuring your CI/CD processes.
+Use the `include` folder to store any additional utilities your DAGs need, such as helper functions, templated SQL scripts, and custom operators.
 
-When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with the DAG and is instead included with the image by default. If you are deploying only DAGs, Astronomer recommends that you create a new folder in the `dags` directory of your local project to store Python functions or other files that are required by the DAG.
 
-To use `astro deploy -—dags`, you need to enable it. See [Enable DAG-only deploys](deploy-code.md#enable-dag-only-deploys).
+:::tip
+
+When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead build into the Docker image with your other project files.
+
+If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can quickly access your utility files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+
+:::
 
 ## Explore Airflow providers and modules
 
