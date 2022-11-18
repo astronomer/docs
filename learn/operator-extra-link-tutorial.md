@@ -19,7 +19,7 @@ After you complete this tutorial, you'll be able to:
 - Add a static operator extra link to any operator using an Airflow plugin.
 - Modify an existing operator to push an additional value to XCom.
 - Add a dynamic operator extra link to any operator using an Airflow plugin.
-- Add an operator extra link to a custom operator without using an Airflow plugin.
+- Add an operator extra link to a custom operator defined in an Airflow provider.
 
 :::tip
 
@@ -247,7 +247,7 @@ Next, you will create a dynamic extra link.
     groupId= "add-extra-link-to-operator"
     values={[
         {label: 'Using a plugin', value: 'plugin'},
-        {label: 'In the operator code', value: 'direct'},
+        {label: 'Using a provider', value: 'provider'},
     ]}>
 <TabItem value="plugin">
 
@@ -295,11 +295,11 @@ To add the dynamic operator extra link via a plugin, follow these steps:
 
 </TabItem>
 
-<TabItem value="direct">
+<TabItem value="provider">
 
-To add the dynamic operator extra link directly in your custom operator code, follow these steps:
+To add the dynamic operator extra link directly to an operator in a provider package, follow these steps:
 
-1. Open `cat_http.py` in your `include` folder. 
+1. Add `cat_http.py` to your provider package. 
 
 2. Add the following two lines to your import statements:
 
@@ -331,6 +331,14 @@ To add the dynamic operator extra link directly in your custom operator code, fo
     ```python
     operator_extra_links=[CatLink()]
     ```
+
+5. Make sure all provider package files exist in the interpreter's `site-packages` folder.
+
+:::info
+
+You can learn more about how to create your own Airflow provider package in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider).
+
+:::
 
 </TabItem>
 </Tabs>
