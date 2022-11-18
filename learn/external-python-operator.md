@@ -55,7 +55,7 @@ For this example, you will need data in a Snowflake table to query using Snowpar
 2. Populate the table.
 
     ```sql
-    INSERT INTO dog_intelligence2
+    INSERT INTO dog_intelligence
         VALUES
         ('Akita', 26, 28, 80, 120, 1, 4),
         ('Great Dane', 32, 32, 120, 160, 1, 4),
@@ -221,7 +221,7 @@ with DAG(
     tags=['pythonvirtualenv']
 ) as dag:
     
-    @task(task_id="print_the_context")
+    @task(task_id='print_the_context')
     def print_context(ds=None, **kwargs):
         """Print the Airflow context and ds variable from the context."""
         pprint(kwargs)
@@ -229,7 +229,7 @@ with DAG(
         return 'Whatever you return gets printed in the logs'
 
     @task.external_python(
-        task_id="external_python",
+        task_id='external_python',
         python='/home/astro/.pyenv/versions/snowpark_env/bin/python'
     )
     def callable_external_python():
@@ -242,7 +242,7 @@ with DAG(
         
         ## Checking for the correct venv packages - this is useful for debugging	
         installed_packages = pkg_resources.working_set
-        installed_packages_list = sorted(["%s==%s" % (i.key, i.version)
+        installed_packages_list = sorted(['%s==%s' % (i.key, i.version)
                 for i in installed_packages])
         print(installed_packages_list)
 
