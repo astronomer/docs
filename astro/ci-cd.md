@@ -1019,8 +1019,8 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
       services:
        - docker:dind
       variables:
-         ASTRONOMER_KEY_ID: $ASTRONOMER_KEY_ID
-         ASTRONOMER_KEY_SECRET: $ASTRONOMER_KEY_SECRET
+         ASTRONOMER_KEY_ID: ${ASTRONOMER_KEY_ID}
+         ASTRONOMER_KEY_SECRET: ${ASTRONOMER_KEY_SECRET}
       before_script:
        - apk add --update curl && rm -rf /var/cache/apk/*
        - apk add bash
@@ -1059,8 +1059,8 @@ When you create environment variables that will be used in multiple branches, yo
         services:
           - docker:dind
         variables:
-            ASTRONOMER_KEY_ID: $DEV_ASTRONOMER_KEY_ID
-            ASTRONOMER_KEY_SECRET: $DEV_ASTRONOMER_KEY_SECRET
+            ASTRONOMER_KEY_ID: ${DEV_ASTRONOMER_KEY_ID}
+            ASTRONOMER_KEY_SECRET: ${DEV_ASTRONOMER_KEY_SECRET}
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
@@ -1076,8 +1076,8 @@ When you create environment variables that will be used in multiple branches, yo
         services:
           - docker:dind
         variables:
-            ASTRONOMER_KEY_ID: $PROD_ASTRONOMER_KEY_ID
-            ASTRONOMER_KEY_SECRET: $PROD_ASTRONOMER_KEY_SECRET
+            ASTRONOMER_KEY_ID: ${PROD_ASTRONOMER_KEY_ID}
+            ASTRONOMER_KEY_SECRET: ${PROD_ASTRONOMER_KEY_SECRET}
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
