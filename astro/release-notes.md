@@ -26,7 +26,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Bug fixes
 
-- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer tasks losing their worker node and running indefinitely.
+- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks) and less volatility across workers. AZ rebalancing is enabled for other system components on Astro.
 - The **Updated at** field for a transferred Deployment now displays the correct time.
   
 ## November 8, 2022
