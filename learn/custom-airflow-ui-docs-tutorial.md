@@ -2,7 +2,7 @@
 title: 'Create DAG documentation in Apache Airflow'
 sidebar_label: 'Write DAG documentation'
 id: custom-airflow-ui-docs-tutorial
-description: 'Use Airflow's built-in documentation features to generate documentation for your DAGs UI.'
+description: "Use Apache Airflow's built-in documentation features to generate documentation for your DAGs in the Airflow UI."
 ---
 
 import Tabs from '@theme/Tabs';
