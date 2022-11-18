@@ -95,7 +95,7 @@ To rebuild your project after making a change to any of these files, you must [r
 
 ## Add DAG utility files
 
-Use the `include` folder to store any additional utilities your DAGs need, such as helper functions, templated SQL scripts, and custom operators.
+Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators.
 
 
 :::tip
