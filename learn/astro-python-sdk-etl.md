@@ -41,7 +41,7 @@ Using the Astro Python SDK requires configuring a few things in your Airflow pro
 1. Install the Astro Python SDK package in your Airflow environment. If you're using the Astro CLI, add the following to the `requirements.txt` file of your Astro project:
 
     ```
-    astro-python-sdk
+    astro-sdk-python
     ```
     
 2. Add the following environment variables. If you're using the Astro CLI locally, add these to the `.env` file of your Astro project:
@@ -53,7 +53,7 @@ Using the Astro Python SDK requires configuring a few things in your Airflow pro
 
     The `AIRFLOW__ASTRO_SDK__SQL_SCHEMA` variable should be the schema you want to store all intermediary tables in. To deploy a pipeline written with the Astro Python SDK to Astro, add these environment variables to your Deployment. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
 
-For a guided experience to get started, see the [Astro Python SDK tutorial](https://github.com/astronomer/astro-sdk/blob/main/docs/getting-started/GETTING_STARTED.md).
+For a guided experience to get started, see the [Astro Python SDK tutorial](astro-python-sdk.md).
 
 ## Example
 
