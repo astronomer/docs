@@ -57,7 +57,7 @@ The list of currently active plugins can be viewed in the Airflow UI under **Adm
 
 :::info
 
-Airflow needs to be restarted for changes in plugins to be registered. Learn more in the [official Airflow documentation on plugins](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html#when-are-plugins-re-loaded).
+Depending on which processes use your plugin you will need to restart the Airflow webserver, the Airflow scheduler or both components for changes changes in plugins to be registered. Learn more in the [official Airflow documentation on plugins](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html#when-are-plugins-re-loaded).
 
 :::
 
