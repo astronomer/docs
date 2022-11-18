@@ -93,7 +93,7 @@ All changes made to the following files require rebuilding your image:
 
 To rebuild your project after making a change to any of these files, you must [restart your local environment](develop-project.md#restart-your-local-environment).
 
-## Add utility files for DAGs
+## Add DAG utility files
 
 Use the `include` folder to store any additional utilities your DAGs need, such as helper functions, templated SQL scripts, and custom operators.
 
