@@ -1025,7 +1025,7 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
        - apk add --update curl && rm -rf /var/cache/apk/*
        - apk add bash
       script:
-       - curl -sSL install.astronomer.io | bash -s
+       - (curl -sSL install.astronomer.io | bash -s)
        - astro deploy -f
       only:
        - main
@@ -1065,7 +1065,7 @@ When you create environment variables that will be used in multiple branches, yo
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
         script:
-          - curl -sSL install.astronomer.io | bash -s
+          - (curl -sSL install.astronomer.io | bash -s)
           - astro deploy -f
         only:
           - dev
@@ -1082,7 +1082,7 @@ When you create environment variables that will be used in multiple branches, yo
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
         script:
-          - curl -sSL install.astronomer.io | bash -s
+          - (curl -sSL install.astronomer.io | bash -s)
           - astro deploy -f
         only:
           - main
