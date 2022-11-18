@@ -103,7 +103,7 @@ If you want to continue with the second option, you'll additionally need:
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
 - The IP addresses of your DNS servers.
 
-### Step 1: Access Astro
+### Access Astro
 
 1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
@@ -116,7 +116,7 @@ If you want to continue with the second option, you'll additionally need:
 
     If you're the first person in your Organization to authenticate, you'll be granted Organization owner permissions. You can create a Workspace and add other team members to the Workspace without the assistance of Astronomer support. See [Create a Workspace](manage-workspaces.md#create-a-workspace) and [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
-### Step 2: Retrieve an external ID from the Cloud UI
+### Retrieve an external ID from the Cloud UI
 
 You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the field will not appear in the Cloud UI.
 
@@ -126,7 +126,7 @@ You must be an Organization Owner to view the external ID. If you are not an Org
 
 3. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
-### Step 3: Create a cross-account IAM role for Astro
+### Create a cross-account IAM role for Astro
 
 Use the external ID to create a cross-account IAM role for Astro. Astronomer recommends using the AWS Management Console to create the role.
 
@@ -209,7 +209,7 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 </TabItem>
 </Tabs>
 
-### Step 4: Provide setup information to Astronomer
+### Provide setup information to Astronomer
 
 After creating the AWS account, provide Astronomer support with the following information:
 
@@ -241,7 +241,7 @@ If you need to VPC peer with Astronomer, provide the following additional inform
 - VPC Name/ID and region for peering with Astronomer. This is accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/).
 - The IPs of your DNS servers.
 
-### Step 5: Astronomer support creates the cluster
+### Astronomer support creates the cluster
 
 After you've created the cross-account IAM role for Astro, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support will finish creating the cluster in your AWS account.
 
@@ -284,13 +284,13 @@ If you want to continue with the second option, you'll additionally need to prov
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
 - The IP addresses of your DNS servers.
 
-### Step 1: Astronomer support creates the cluster
+### Astronomer support creates the cluster
 
 Astronomer support creates your first Astro cluster in a dedicated AWS account after you've provided your setup information.
 
 Wait for confirmation that the installation is successful before you access Astro and create a Deployment.
 
-### Step 2: Access Astro
+### Access Astro
 
 1. Optional. If you haven't created an Astronomer account, go to https://cloud.astronomer.io/ and create an account.
 
@@ -309,9 +309,7 @@ Wait for confirmation that the installation is successful before you access Astr
 
 </Tabs>
 
-## Next steps
 
-Congratulations on installing Astro on AWS! Astronomer recommends completing some of the following actions to make the most of your new installation.
 
 ### Create a Deployment
 
@@ -319,9 +317,8 @@ When Astronomer support confirms that your Astro cluster has been created, you c
 
 ![Cloud UI New Deployment screen](/img/docs/create-new-deployment-select-cluster.png)
 
-### Additional documentation
+## Related documentation
 
-The following documents include setup steps for key Astro features and tools: 
 
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/overview.md)
