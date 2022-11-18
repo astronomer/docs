@@ -144,7 +144,7 @@ You can add Markdown-based documentation to your DAGs that will render in the **
 
     Here are some happy plants:
 
-    <img src="https://www.publicdomainpictures.net/pictures/80000/velka/succulent-roses-echeveria.jpg" alt="drawing" width="300"/>
+    <img src="https://www.publicdomainpictures.net/pictures/80000/velka/succulent-roses-echeveria.jpg" alt="plants" width="300"/>
     """
     ```
 
