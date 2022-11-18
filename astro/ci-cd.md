@@ -994,6 +994,13 @@ This pipeline configuration requires:
 
 ### GitLab
 
+
+:::caution
+
+You may need certain tags or modifications based on your Gitlab Runner, if you are using hosted runners. Speak with your Gitlab Administrator if this is the case before starting, and review the [Gitlab Documentation](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html) for building specifically in your use case
+
+:::
+
 <Tabs
     defaultValue="gitlabstandard"
     groupId= "gitlab"
