@@ -97,7 +97,7 @@ Now that you have your Snowflake resources configured, you can move on to settin
     $ astro dev init
     ```
 
-2. Add a new file to your project called `snowpark_requirements.txt` and add the following text:
+2. Add a new file to the root folder of your project called `snowpark_requirements.txt` and add the following text:
 
     ```text
     snowflake-snowpark-python[pandas]
@@ -106,24 +106,7 @@ Now that you have your Snowflake resources configured, you can move on to settin
 
     The packages in this file will be installed in your virtual environment. The `snowflake-snowpark-python` package is required to run Snowpark queries. The `boto3` package is used to interact with AWS Parameter Store to retrieve credentials. If you are using a different secrets manager or are managing secrets locally, you can update or remove this line.
 
-3. If you setup a Snowflake connection with a secrets manager as described in [Step 2](#step-2-create-a-connection-to-snowflake-in-your-secrets-manager-optional), add a new file to your project called `secrets-manager.env` and add environment variables that can be used to connect to your secrets manager. For example, if you use AWS parameter store, you might add the following:
-
-    ```text
-    AWS_ACCESS_KEY_ID=<your-access-key-id>
-    AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
-    ```
-
-    Add the `secrets-manager.env` file to your project's ``.gitignore` file so sensitive credentials aren't tracked in git.
-
-    If you are not using an external secrets manager, you can skip this step.
-
-    :::note
-
-    There are many ways to connect your virtual environment to your secrets manager beyond what is presented here, including passing a profile with a shared credential file or having your environment assume a role that has access to your secrets manager. The access key and secret method described here is the most straight forward when working with a local project, but may not be recommended for production in some organizations.
-
-    ::: 
-
-4. Update the `Dockerfile` of your Astro project to install `pyenv` and its requirements:
+3. Update the `Dockerfile` of your Astro project to install `pyenv` and its requirements:
 
     ```docker
     FROM quay.io/astronomer/astro-runtime:6.0.3
@@ -145,11 +128,32 @@ Now that you have your Snowflake resources configured, you can move on to settin
         pyenv virtualenv 3.8.14 snowpark_env && \
         pyenv activate snowpark_env && \
         pip install --no-cache-dir --upgrade pip && \
-        pip install --no-cache-dir -r snowpark_requirements.txt && \
-        source secrets-manager.env
+        pip install --no-cache-dir -r snowpark_requirements.txt
     ```
 
     These commands install `pyenv` in your Airflow environment and create a Python 3.8 virtual environment called `snowpark_env` with the required packages to run Snowpark that will be used by the ExternalPythonOperator. The `pyenv` environment will be created when you start your Airflow project, and can be used by any number of ExternalPythonOperator tasks. If you use a different virtual environment package (e.g. `venv` or `conda`) you may need to update this step.
+
+4. (Optional) If you setup a Snowflake connection with a secrets manager as described in [Step 2](#step-2-create-a-connection-to-snowflake-in-your-secrets-manager-optional), add a new file to the root folder of your project called `secrets-manager.env` and add environment variables that can be used to connect to your secrets manager. For example, if you use AWS parameter store, you might add the following:
+
+    ```text
+    AWS_ACCESS_KEY_ID=<your-access-key-id>
+    AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
+    ```
+
+    Add the `secrets-manager.env` file to your project's ``.gitignore` file so sensitive credentials aren't tracked in git, and update the last two lines of your Dockerfile to the following:
+
+    ```docker
+    pip install --no-cache-dir -r snowpark_requirements.txt && \
+    source secrets-manager.env
+    ```
+
+    If you are not using an external secrets manager, you can skip this step.
+
+    :::note
+
+    There are many ways to connect your virtual environment to your secrets manager beyond what is presented here, including passing a profile with a shared credential file or having your environment assume a role that has access to your secrets manager. The access key and secret method described here is the most straight forward when working with a local project, but may not be recommended for production in some organizations.
+
+    ::: 
 
 5. Add the following to your `packages.txt` file:
 
