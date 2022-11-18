@@ -311,7 +311,7 @@ Wait for confirmation that the installation is successful before you access Astr
 
 
 
-### Create a Deployment
+### Confirm the install
 
 When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). When you create your Deployment, the Astro cluster created by Astronomer support appears as an option in the **Cluster** list as shown in the following image.
 
