@@ -118,16 +118,25 @@ Enabling DAG-only deploys on Astro has a few benefits:
 - When you run `astro deploy --dags`, the workers and schedulers in your Deployment will pick up your changes gracefully and will not restart. This results in a more efficient use of running workers and no downtime for your Deployment.
 - You can have different sets of users deploy project changes versus DAG changes. See [DAG-based workflows](ci-cd.md#dag-based-workflows) for how you can set this up in your CI/CD pipelines.
 
-### Enable DAG-only deploys
+### Enable DAG-only deploys on a Deployment
 
+Before you complete this setup, ensure that you have access to the Deployment's Astro project and can trigger deploys from your current computer.
 
-1. Run the following command:
+1. Run the following command to enable the feature:
 
     ```sh
     astro deployment update --dag-deploy enable
     ```
 
-2. When the prompt appears in the Astro CLI, select a Deployment where you want to enable the feature. Running tasks will not be interrupted and new tasks will continue to be scheduled.
+2. When the prompt appears in the Astro CLI, select the Deployment where you want to enable the feature. Running tasks will not be interrupted, but new tasks will not be scheduled until you trigger your first DAG-only deploy.
+3. Open your Deployment's Astro project.
+4. Run the following command finalize the setup and trigger a DAG-only deploy to your Deployment:  
+
+    ```sh
+    astro deploy --dags
+    ```
+
+    If you don't trigger a deploy after enabling the feature, your Deployment cannot schedule new tasks.
 
 To disable the DAG-only deploy feature, contact [Astronomer support](https://cloud.astronomer.io/support).
 

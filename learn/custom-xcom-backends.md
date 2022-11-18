@@ -44,7 +44,13 @@ For more information on these concepts, see [Passing Data Between Airflow Tasks]
 
 Using [Great Expectations](https://greatexpectations.io/) with Airflow is an ideal use case for implementing a custom XCom backend. Great Expectations is an open source Python-based data validation framework. The [Great Expectations Airflow provider](https://registry.astronomer.io/providers/great-expectations) allows seamless integration with Airflow.
 
-The `GreatExpectationsOperator` can be used in Airflow DAGs to perform data quality checks before moving to downstream tasks. The operator returns various results from the tests that were run on your data. Because these results are not returned in a JSON serializable format, the only way to use them with the default XCom backend is to enable XCom pickling. Given the security implications of pickling, this is not ideal for a production environment. You can resolve this shortcoming by implementing a custom XCom backend to programmatically process the results and save them to an external file system.
+The `GreatExpectationsOperator` can be used in Airflow DAGs to perform data quality checks before moving to downstream tasks. The operator returns various results from the tests that were run on your data, by default as a `CheckpointResult` object, which is not a JSON serializable format. The only way to use this format with the default XCom backend is to enable XCom pickling. Given the security implications of pickling, this is not ideal for a production environment. You can resolve this shortcoming by implementing a custom XCom backend to programmatically process the results and save them to an external file system.
+
+:::info
+
+The results from the `GreatExpectationsOperator` can be returned in a JSON-serializable format by setting the `return_json_dict` parameter to true.
+
+:::
 
 For more information about using Great Expectations with Airflow, see [Integrating Airflow and Great Expectations](airflow-great-expectations.md).
 
@@ -220,78 +226,78 @@ class S3XComBackend(BaseXCom):
         return result
 ```
 
-To test this, you'll use a variation of the example DAG in the [Great Expectations provider page](https://registry.astronomer.io/providers/great-expectations) on the Astronomer Registry. For this DAG to work, you'll also need Great Expectations checkpoints, validation suits, and data to test. These items are located in the [example repo](https://github.com/astronomer/custom-xcom-backend-tutorial).
+To test this, you'll use a variation of the example DAG in the [Great Expectations provider page](https://registry.astronomer.io/providers/great-expectations) on the Astronomer Registry. For this DAG to work, you'll also need a Great Expectations project, made up of at least a data context, a validation suite, and data to test. These items are located in the [example repo](https://github.com/astronomer/custom-xcom-backend-tutorial).
 
 Your example DAG looks similar to this:
 
 ```python
-from airflow import DAG
-from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
-
-import logging
 import os
-from datetime import datetime, timedelta
+import pandas as pd
+from pendulum import datetime
+
+from airflow import DAG
+from great_expectations_provider.operators.great_expectations import (
+    GreatExpectationsOperator,
+)
 
 # This runs an expectation suite against a sample data asset. You may need to change these paths if you do not have your `data`
 # directory living in a top-level `include` directory. Ensure the checkpoint yml files have the correct path to the data file.
 base_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-data_file = os.path.join(base_path, 'include',
-                         'data/yellow_tripdata_sample_2019-01.csv')
-ge_root_dir = os.path.join(base_path, 'include', 'great_expectations')
+data_file = os.path.join(
+    base_path, "include", "data/yellow_tripdata_sample_2019-01.csv"
+)
+data_file_fail = os.path.join(
+    base_path, "include", "data/yellow_tripdata_sample_2019-02.csv"
+)
+ge_root_dir = os.path.join(base_path, "include", "great_expectations")
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1)
-}
 
 with DAG(
-    dag_id='example_great_expectations_dag',
+    dag_id="example_great_expectations_dag",
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval='@daily',
-    default_args=default_args,
-    catchup=False 
-    ) as dag:
+    schedule="@daily",
+    catchup=False,
+):
 
-    ge_batch_kwargs_pass = GreatExpectationsOperator(
-        task_id='ge_batch_kwargs_pass',
-        expectation_suite_name='taxi.demo',
-        batch_kwargs={
-            'path': data_file,
-            'datasource': 'data__dir'
-        },
+    # Runs a passing suite on a dataframe
+    ge_dataframe_pass = GreatExpectationsOperator(
+        task_id="ge_dataframe_pass",
+        expectation_suite_name="taxi.demo",
         data_context_root_dir=ge_root_dir,
+        execution_engine="PandasExecutionEngine",
+        data_asset_name="taxi_df_pass",
+        dataframe_to_validate=pd.read_csv(
+            filepath_or_buffer=data_file,
+            header=0,
+        ),
     )
 
-    # This runs an expectation suite against a data asset that passes the tests
-    ge_batch_kwargs_list_pass = GreatExpectationsOperator(
-        task_id='ge_batch_kwargs_list_pass',
-        assets_to_validate=[
-            {
-                'batch_kwargs': {
-                    'path': data_file,
-                    'datasource': 'data__dir'
-                },
-                'expectation_suite_name': 'taxi.demo'
-            }
-        ],
+    # Runs a failing suite on a dataframe
+    ge_dataframe_fail = GreatExpectationsOperator(
+        task_id="ge_dataframe_fail",
+        expectation_suite_name="taxi.demo",
         data_context_root_dir=ge_root_dir,
+        execution_engine="PandasExecutionEngine",
+        data_asset_name="taxi_df_fail",
+        dataframe_to_validate=pd.read_csv(
+            filepath_or_buffer=data_file_fail,
+            header=0,
+            parse_dates=True,
+            infer_datetime_format=True,
+        ),
+        fail_task_on_validation_failure=False,
     )
 
     # This runs a checkpoint that will pass. Make sure the checkpoint yml file has the correct path to the data file.
     ge_checkpoint_pass = GreatExpectationsOperator(
-        task_id='ge_checkpoint_pass',
-        run_name='ge_airflow_run',
-        checkpoint_name='taxi.pass.chk',
+        task_id="ge_checkpoint_pass",
+        run_name="ge_checkpoint_pass",
+        checkpoint_name="taxi.pass.chk",
         data_context_root_dir=ge_root_dir,
     )
 
-    
-    ge_batch_kwargs_list_pass >> ge_batch_kwargs_pass >> ge_checkpoint_pass
+    ge_dataframe_pass >> ge_dataframe_fail >> ge_checkpoint_pass
 ```
 
-When you run this DAG, you will see three XCom files in your Amazon S3 bucket, one for each operator. With this implementation, you donn't need to enable XCom pickling, you can version and access your XCom data easily, and you are not filling up the Airflow metadata database, making this a much more sustainable way of using this popular operator.
+When you run this DAG, you will see three XCom files in your Amazon S3 bucket, one for each operator. With this implementation, you don't need to enable XCom pickling, you can version and access your XCom data easily, and you are not filling up the Airflow metadata database, making this a much more sustainable way of using this popular operator.

@@ -109,7 +109,7 @@ The dataset used in this tutorial is a slightly modified version of [this datase
     CREATE TABLE dog_intelligence (
         BREED varchar(50),
         HEIGHT_LOW_INCHES INT,
-        HEIGHT_HIGHT_INCHES INT,
+        HEIGHT_HIGH_INCHES INT,
         WEIGHT_LOW_LBS INT,
         WEIGHT_HIGH_LBS INT,
         REPS_LOWER INT,
@@ -157,7 +157,7 @@ Navigate back to your Astro Cloud IDE on Astro.
 
     ```sql 
     SELECT * FROM <your database>.<your_schema>.DOG_INTELLIGENCE 
-    WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, 
+    WHERE CONCAT(BREED, HEIGHT_LOW_INCHES, HEIGHT_HIGH_INCHES, WEIGHT_LOW_LBS, 
     WEIGHT_HIGH_LBS, REPS_UPPER, REPS_LOWER) IS NOT NULL
     ```
 
@@ -188,7 +188,7 @@ Before you can train the model, you first need to transform the data in your tab
 4. Copy the following SQL statement into the cell:
 
     ```sql 
-    SELECT HEIGHT_LOW_INCHES, HEIGHT_HIGHT_INCHES, WEIGHT_LOW_LBS, WEIGHT_HIGH_LBS,
+    SELECT HEIGHT_LOW_INCHES, HEIGHT_HIGH_INCHES, WEIGHT_LOW_LBS, WEIGHT_HIGH_LBS,
         CASE WHEN reps_upper <= 25 THEN 'very_smart_dog'
         ELSE 'smart_dog'
         END AS INTELLIGENCE_CATEGORY
