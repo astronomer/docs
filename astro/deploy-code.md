@@ -128,7 +128,7 @@ Before you complete this setup, ensure that you have access to the Deployment's 
     astro deployment update --dag-deploy enable
     ```
 
-2. When the prompt appears in the Astro CLI, select the Deployment where you want to enable the feature. Running tasks will not be interrupted and new tasks will continue to be scheduled.
+2. When the prompt appears in the Astro CLI, select the Deployment where you want to enable the feature. Running tasks will not be interrupted, but new tasks will not be scheduled until you trigger your first DAG-only deploy.
 3. Open your Deployment's Astro project.
 4. Run the following command finalize the setup and trigger a DAG-only deploy to your Deployment:  
 
