@@ -29,6 +29,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 - Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks) and less volatility across workers. AZ rebalancing is enabled for other system components on Astro.
 - The **Updated at** field for a transferred Deployment now displays the correct time.
 - `astro deploy --dags` now handles deferrable tasks correctly.
+
 ## November 8, 2022
 
 ### Deploy only DAGs with `astro deploy -—dags`
