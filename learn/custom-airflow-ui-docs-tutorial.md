@@ -203,7 +203,7 @@ Additionally, using `with DAG():` lets you pass the filepath of a markdown file 
 
 ## Step 4: Add docs to a task
 
-You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructured text. Note that only Markdown will be rendered and other formats will be displayed as rich content. 
+You can also add docs to specific Airflow tasks using Markdown, Monospace, JSON, YAML or reStructuredText. Note that only Markdown will be rendered and other formats will be displayed as rich content. 
 
 To add documentation to your task, follow these steps:
 
@@ -251,7 +251,7 @@ To add documentation to your task, follow these steps:
     """
     ```
 
-5. Add the following code containing restructured text:
+5. Add the following code containing reStructuredText:
 
     ```python
     doc_rst_task = """
