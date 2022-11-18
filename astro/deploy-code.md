@@ -143,13 +143,13 @@ astro deploy --dags
 
 ## Deploy custom Docker images
 
-With Astro CLI 1.3.0 and later, you can deploy your Astro project with a custom Docker image by running `astro deploy --image-name <custom-image>`. To use this command, the image must be based on Astro Runtime and be available in a local Docker registry. 
+You can run `astro deploy` to build your Astro project as a Docker image and deploy it, or you can run `astro deploy --image-name <custom-image>` to deploy a pre-built Astro Runtime image. To use this command, the image you deploy must be based on Astro Runtime and be available in a local Docker registry. 
 
 Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
 
-You can also use the `--image-name` flag to automate the deployment of custom Runtime images from a CI/CD pipeline. You can also separate your build and deploy workflows into different pipelines.
+You can also use the `--image-name` flag to separate your build and deploy steps in a CI/CD pipeline. This allows you more control over how your images are tested and deployed. 
 
-The `--image-name` flag is also available with the following local development commands:
+You can use the `--image-name` flag with the following local development commands to test your image before deploying:
 
 - `astro dev start`
 - `astro dev restart`
@@ -160,7 +160,7 @@ For more information about this command, see the [CLI command reference](cli/ast
 
 :::info
 
-If you're using an Apple M1 computer for local development, you'll need to identify the platform in the command. For example:
+If you're using an Apple M1 computer to deploy an Astro project with a custom image name, you must add `--platform=linux/amd64` to your command. For example:
 
 ```sh
 astro deploy --image-name <custom-image> --platform=linux/amd64
