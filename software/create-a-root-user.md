@@ -21,12 +21,15 @@ After saving your changes, apply the configuration change. See [Apply a config c
 
 By default, Astronomer generates a password for your root user email address. This password and email address are stored as Kubernetes secrets on your Astronomer installation. 
 
-After you apply the configuration change, Helm provides a command for how to retrieve these the values of these secrets. Retrieve the password and use the new **Root Admin Login** button on the Software login page to access Astronomer Software as the root user. 
+After you apply the configuration change, Helm provides a command for how to retrieve these the values of these secrets. To log in to Astronomer Software as the root user, retrieve the password and use the new **Root Admin Login** button on the Software login page.
 
 ## Customize the root user's password
 
-### Rotate the root user's password
+To configure a custom password for the root user, run the following command: 
 
+```sh
+kubectl patch secret -n <your-platform-namespace> astronomer-root-admin-credentials --type=json -p='[{ "op" : "replace" , "path" : "/data/password" , "value" : "'$(echo -n "<your-new-password>" | base64)'"}]' && kubectl create job --from=cronjob/<your-release-name>-update-root-admin-password-cronjob manual3 -n <your-platform-namespace>
+```
 
 ## Limit System-level user creation
 
