@@ -35,7 +35,13 @@ To complete this tutorial, you need:
 
 ## Step 1: Create a role to access SageMaker
 
-For this tutorial, you will need to access SageMaker from your Airflow environment. There are multiple ways to do this, but for this tutorial you will create an AWS role that can access SageMaker and create temporary credentials for that role.
+For this tutorial, you will need to access SageMaker from your Airflow environment.  There are multiple ways to do this, but for this tutorial you will create an AWS role that can access SageMaker and create temporary credentials for that role.
+
+:::info
+
+If you are uncertain which method you use to connect to AWS, contact your AWS Administrator. These steps may not fit your desired authentication mechanism
+
+:::
 
 1. From the AWS web console, go to **IAM** service page and create a new execution role for SageMaker. See [Create execution roles](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html#sagemaker-roles-create-execution-role) in the AWS documentation.
 
@@ -78,6 +84,8 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
 
     These variables ensure that all SageMaker operators will work in your Airflow environment. Some require XCom pickling to be turned on in order to work because they return objects that are not JSON serializable. 
 
+    Your `.env` file only applies to your local Airflow. To set variables in your Astronomer Airflow instances, [follow this guide](https://docs.astronomer.io/astro/environment-variables).
+
 4. Run the following command to start your project in a local environment:
 
     ```sh
@@ -111,6 +119,12 @@ In the **Extra** field, provide your AWS session token generated in Step 1 using
     "aws_session_token": "<your-session-token>"
 }
 ```
+
+:::warning
+
+Your credentials should only last up to a day - you will need to edit the details in the connection with new credentials, if you want to run this again another day
+
+:::
 
 Your connection should look like this:
 
