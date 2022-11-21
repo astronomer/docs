@@ -94,17 +94,12 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
 
 ## Step 4: Add Airflow Variables
 
-Add two Airflow variables that will be used by your DAG. In the Airflow UI, go to **Admin** -> **Variables**.
+Add an Airflow variable that will be used by your DAG. In the Airflow UI, go to **Admin** -> **Variables**.
 
 1. Add a variable with the ARN of the role you created in Step 1.
 
     - **Key**: `role`
     - **Val**: `<your-role-arn>`
-
-2. Add a variable with the name of the S3 bucket you created in Step 2.
-
-    - **Key**: `s3_bucket`
-    - **Val**: `<your-s3-bucket-name>`
 
 ## Step 5: Add an Airflow connection to SageMaker
 
@@ -165,19 +160,20 @@ creating the model with the training results (SageMakerModelOperator), and testi
 a batch transform job (SageMakerTransformOperatorAsync).
 
 The example use case shown here is using a built-in SageMaker K-nearest neighbors algorithm to make
-predictions on the Iris dataset. To use the DAG, add Airflow variables for `s3_bucket` (S3 Bucket used with SageMaker 
-instance) and `role` (Role ARN to execute SageMaker jobs) then fill in the information directly below with the target
-AWS S3 locations, and model and training job names.
+predictions on the Iris dataset. To use the DAG, add Airflow variables for `role` (Role ARN to execute SageMaker jobs) 
+then fill in the information directly below with the target AWS S3 locations, and model and training job names.
 """
 
 # Define variables used in configs
 data_url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"  # URL for Iris data API
 date = "{{ ts_nodash }}"  # Date for transform job name
 
+bucket = "my_bucket"
 input_s3_key = 'iris/processed-input-data'  # Train and test data S3 path
 output_s3_key = 'iris/results'  # S3 path for output data
-model_name = "Iris-KNN-{}".format(date)  # Name of model to create
-training_job_name = 'train-iris-{}'.format(date)  # Name of training job
+model_name = f"Iris-KNN-{date}"  # Name of model to create
+training_job_name = f'train-iris-{date}'  # Name of training job
+region = "us-east-2"
 
 with DAG('sagemaker_pipeline',
          start_date=datetime(2021, 7, 31),
@@ -186,12 +182,11 @@ with DAG('sagemaker_pipeline',
          default_args={
              'retries': 0,
              'retry_delay': timedelta(minutes=1),
-             'aws_conn_id': 'aws-sagemaker'
          },
          catchup=False,
          ) as dag:
     @task
-    def data_prep(data_url, s3_bucket, input_s3_key):
+    def data_prep(data_url, s3_bucket, input_s3_key, aws_conn_id):
         """
         Grabs the Iris dataset from API, splits into train/test splits, and saves CSV's to S3 using S3 Hook
         """
@@ -212,15 +207,16 @@ with DAG('sagemaker_pipeline',
         # Save files to S3
         iris_train.to_csv('iris_train.csv', index=False, header=False)
         iris_test.to_csv('iris_test.csv', index=False, header=False)
-        s3_hook = S3Hook(aws_conn_id='aws-sagemaker')
-        s3_hook.load_file('iris_train.csv', '{0}/train.csv'.format(input_s3_key), bucket_name=s3_bucket, replace=True)
-        s3_hook.load_file('iris_test.csv', '{0}/test.csv'.format(input_s3_key), bucket_name=s3_bucket, replace=True)
+        s3_hook = S3Hook(aws_conn_id=aws_conn_id)
+        s3_hook.load_file('iris_train.csv', f'{input_s3_key}/train.csv', bucket_name=s3_bucket, replace=True)
+        s3_hook.load_file('iris_test.csv', f'{input_s3_key}/test.csv', bucket_name=s3_bucket, replace=True)
 
 
-    data_prep = data_prep(data_url, "{{ var.value.get('s3_bucket') }}", input_s3_key)
+    data_prep = data_prep(data_url, bucket, input_s3_key, aws_conn_id="aws-sagemaker")
 
     train_model = SageMakerTrainingOperatorAsync(
         task_id='train_model',
+        aws_conn_id='aws-sagemaker',
         config={
             "AlgorithmSpecification": {
                 "TrainingImage": "404615174143.dkr.ecr.us-east-2.amazonaws.com/knn",
@@ -237,7 +233,7 @@ with DAG('sagemaker_pipeline',
                  "DataSource": {
                      "S3DataSource": {
                          "S3DataType": "S3Prefix",
-                         "S3Uri": "s3://{0}/{1}/train.csv".format("{{ var.value.get('s3_bucket') }}", input_s3_key)
+                         "S3Uri": f"s3://{bucket}/{input_s3_key}/train.csv"
                      }
                  },
                  "ContentType": "text/csv",
@@ -245,13 +241,14 @@ with DAG('sagemaker_pipeline',
                  }
             ],
             "OutputDataConfig": {
-                "S3OutputPath": "s3://{0}/{1}".format("{{ var.value.get('s3_bucket') }}", output_s3_key)
+                "S3OutputPath": f"s3://{bucket}/{output_s3_key}"
             },
             "ResourceConfig": {
                 "InstanceCount": 1,
                 "InstanceType": "ml.m5.large",
                 "VolumeSizeInGB": 1
             },
+            # We are using a Jinja Template to fetch the Role name dynamically at runtime via looking up the Airflow Variable
             "RoleArn": "{{ var.value.get('role') }}",
             "StoppingCondition": {
                 "MaxRuntimeInSeconds": 6000
@@ -263,7 +260,9 @@ with DAG('sagemaker_pipeline',
 
     create_model = SageMakerModelOperator(
         task_id='create_model',
+        aws_conn_id='aws-sagemaker',
         config={
+            # We are using a Jinja Template to fetch the Role name dynamically at runtime via looking up the Airflow Variable
             "ExecutionRoleArn": "{{ var.value.get('role') }}",
             "ModelName": model_name,
             "PrimaryContainer": {
@@ -276,20 +275,21 @@ with DAG('sagemaker_pipeline',
 
     test_model = SageMakerTransformOperatorAsync(
         task_id='test_model',
+        aws_conn_id='aws-sagemaker',
         config={
-            "TransformJobName": "test-knn-{0}".format(date),
+            "TransformJobName": f"test-knn-{date}",
             "TransformInput": {
                 "DataSource": {
                     "S3DataSource": {
                         "S3DataType": "S3Prefix",
-                        "S3Uri": "s3://{0}/{1}/test.csv".format("{{ var.value.get('s3_bucket') }}", input_s3_key)
+                        "S3Uri": f"s3://{bucket}/{input_s3_key}/test.csv"
                     }
                 },
                 "SplitType": "Line",
                 "ContentType": "text/csv",
             },
             "TransformOutput": {
-                "S3OutputPath": "s3://{0}/{1}".format("{{ var.value.get('s3_bucket') }}", output_s3_key)
+                "S3OutputPath": f"s3://{bucket}/{output_s3_key}"
             },
             "TransformResources": {
                 "InstanceCount": 1,
