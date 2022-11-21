@@ -184,7 +184,7 @@ To set up OneLogin as your IdP, submit a request to [Astronomer support](https:/
 
 Save these values for Step 2.
 
-#### Step 2: Create the OneLOgin Astronomer application
+#### Step 2: Create the OneLogin Astronomer application
 
 1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Add App**.  
 
