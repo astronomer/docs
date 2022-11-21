@@ -93,9 +93,18 @@ All changes made to the following files require rebuilding your image:
 
 To rebuild your project after making a change to any of these files, you must [restart your local environment](develop-project.md#restart-your-local-environment).
 
-### Deploy custom Docker images
+## Add DAG utility files
 
-To deploy custom Docker images, see [Deploy custom Docker images](deploy-code.md#deploy-custom-dockeriimages).
+Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators.
+
+
+:::tip
+
+When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
+
+If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+
+:::
 
 ## Explore Airflow providers and modules
 

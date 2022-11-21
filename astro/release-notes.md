@@ -17,6 +17,19 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
 
+## November 15, 2022
+
+### Additional improvements 
+
+- In the Cloud UI, the **People** page now shows the IDs of users belonging to your Organization.
+- In the Cloud UI, the **Deployments** page now shows the user or API key that most recently updated each Deployment and when they updated it.
+
+### Bug fixes
+
+- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks) and less volatility across workers. AZ rebalancing is enabled for other system components on Astro.
+- The **Updated at** field for a transferred Deployment now displays the correct time.
+- `astro deploy --dags` now handles deferrable tasks correctly.
+
 ## November 8, 2022
 
 ### Deploy only DAGs with `astro deploy -—dags`
