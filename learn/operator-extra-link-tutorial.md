@@ -48,11 +48,10 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 Set up Airflow by creating a new Astro project:
 
-
-    ```text
-    $ mkdir astro-extra-link-tutorial && cd astro-extra-link-tutorial
-    $ astro dev init
-    ```
+```sh
+$ mkdir astro-extra-link-tutorial && cd astro-extra-link-tutorial
+$ astro dev init
+```
 
 ## Step 2: Create a DAG using the SimpleHttpOperator
 
