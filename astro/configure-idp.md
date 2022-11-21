@@ -184,7 +184,7 @@ To set up OneLogin as your IdP, submit a request to [Astronomer support](https:/
 
 Save these values for Step 2.
 
-#### Step 2: Create a OneLOgin application
+#### Step 2: Create the OneLOgin Astronomer application
 
 1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Add App**.  
 
@@ -194,7 +194,7 @@ Save these values for Step 2.
 
 4. Click **Configuration** in the left menu and complete the following fields:
 
-    - **Audience (EntityID)**: `<your-audience-uri--lvgzh0q4v>`
+    - **Audience (EntityID)**: `<your-audience-uri-lvgzh0q4v>`
     - **ACS (Consumer) URL Validator**: `<your-sso-url>`
     - **ACS (Consumer) URL**: `<your-sso-url>`
 
@@ -223,7 +223,7 @@ Send the X.509 certificate and SAML 2.0 endpoint (HTTP) information you copied i
 
 Astronomer support will finalize your organization's integration with OneLogin.
 
-#### Step 4: Assign users to your OneLogin application
+#### Step 4: Assign users to your OneLogin Astronomer application
 
 1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Astronomer**.
 
