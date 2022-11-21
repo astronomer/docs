@@ -997,7 +997,7 @@ This pipeline configuration requires:
 
 :::info
 
-You may need certain tags or modifications based on your Gitlab Runner, if you are using hosted runners. Speak with your Gitlab Administrator if this is the case before starting, and review the [Gitlab Documentation](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html) for building specifically in your use case
+If you use hosted runners, you might need certain tags or modifications based on your Gitlab runner. Speak with your Gitlab administrator and review the [Gitlab Documentation](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html) to customize this template for your use case.
 
 :::
 
