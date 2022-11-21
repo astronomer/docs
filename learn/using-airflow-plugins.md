@@ -57,7 +57,7 @@ The list of currently active plugins can be viewed in the Airflow UI under **Adm
 
 :::info
 
-Depending on which processes use your plugin you will need to restart the Airflow webserver, the Airflow scheduler or both components for changes changes in plugins to be registered. Learn more in the [official Airflow documentation on plugins](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html#when-are-plugins-re-loaded).
+In order for changes to your plugin to be registered, you will need to restart any Airflow components (e.g. the webserver or scheduler) that use the plugin. Learn more in the [official Airflow documentation on plugins](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html#when-are-plugins-re-loaded).
 
 :::
 
@@ -124,7 +124,7 @@ Both additional menu items are added to the `app_builder_menu_items` component o
 
 ### Flask Blueprints and Appbuilder views
 
-To add more elaborate customization to the Airflow UI plugins offer the possibility to add Flask blueprints and views as plugin components. A Flask blueprint functions as an organizational tool to group related views and supporting code while Flask views render webpages from html templates. 
+Flask blueprints and views are plugin components that allow you to add more elaborate customization to the Airflow UI. A Flask blueprint functions as an organizational tool to group related views and supporting code while Flask views render webpages from html templates. 
 
 :::info
 
@@ -226,7 +226,7 @@ class MyOperatorExtraLink(AirflowPlugin):
         MyLink(),
     ]
 ```
-The screenshot below shows an operator extra link called "HTTP cat" having been added to the custom CatHttpOperator in this [step-by-step tutorial](operator-extra-link-tutorial.md) on how to add operator extra links.
+The screenshot below shows an operator extra link called "HTTP cat" that was added to the custom CatHttpOperator. For more instructions, see this [step-by-step tutorial](operator-extra-link-tutorial.md) on how to add operator extra links.
 
 ![Cat Button](/img/guides/extra_links_tutorial_cat_button.png)
 
@@ -261,8 +261,8 @@ In Airflow you can define custom macros which can be accessed using Jinja templa
 
 Common use cases for custom macros include:
 
-- Injecting dynamic datetime objects into DAG code in formats not available in pre-defined macros. For example, converting the `{{ ts }}` predefined macro, which provides the logical date of the DAG as a timestamp from `YYYY-MM-DDThh:mm:ss+00:00` to ``hh:mm`. 
-- Injecting dynamic arguments into DAG code based on Python logic. For example to use a different argument on weekdays than on the weekend.
+- Injecting dynamic datetime objects into DAG code in formats not available in pre-defined macros. For example, converting the `{{ ts }}` predefined macro, which provides the logical date of the DAG as a timestamp from `YYYY-MM-DDThh:mm:ss+00:00` to `hh:mm`. 
+- Injecting dynamic arguments into DAG code based on Python logic. For example, passing a different argument to a function on weekdays versus the weekend.
 - Injecting dynamic arguments into DAG code based on XCom values. For example, using a different target blob storage depending on how many files will be ingested, a count determined and pushed to XCom by an upstream task.
 
 ```python

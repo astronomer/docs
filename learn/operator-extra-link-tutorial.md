@@ -49,7 +49,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 Set up Airflow by creating a new Astro project:
 
 
-    ```sh
+    ```text
     $ mkdir astro-extra-link-tutorial && cd astro-extra-link-tutorial
     $ astro dev init
     ```
@@ -351,7 +351,7 @@ Your second extra link has now been added to the CatHttpOperator.
 
 2. Navigate to the Graph View and click on the `call_api_cat` task. 
 
-3. Click the Http Cat button to find the response of your last API call is illustrated with a fitting cat.
+3. Click the HTTP Cat button to find the response of your last API call illustrated with a fitting cat.
 
     ![Cat Button](/img/guides/extra_links_tutorial_cat_button.png)
 
