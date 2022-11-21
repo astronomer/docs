@@ -1,8 +1,8 @@
 ---
-sidebar_label: 'Enable data lineage'
-title: "Enable data lineage for external systems"
+sidebar_label: 'Integrate OpenLineage'
+title: "Integrate OpenLineage with external systems"
 id: set-up-data-lineage
-description: Configure your external systems to emit lineage data to Astro.
+description: Configure your external systems to emit OpenLineage data to Astro.
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
@@ -22,7 +22,7 @@ To send lineage data from an external system to Astro, you must specify your Org
 2. Copy the value in **Lineage API Key**.
 3. Configure the API key in an external system. see one of the following integration guides for your system.
 
-## Integrate with Databricks
+## OpenLineage and Databricks
 
 Use the information provided here to set up lineage collection for Spark running on a Databricks cluster.
 
@@ -60,7 +60,7 @@ After you save this configuration, lineage is enabled for all Spark jobs running
 
 To test that lineage was configured correctly on your Databricks cluster, run a test Spark job on Databricks. After your job runs, open the **Lineage** tab in the Cloud UI and go to the **Rims** page. If your configuration is successful, you'll see your Spark job appear in the table of most recent runs. Click a job run to see it within a lineage graph.
 
-## Integrate with dbt
+## OpenLineage and dbt
 
 Use the information provided here to set up lineage collection for a dbt project.
 
@@ -104,7 +104,7 @@ Use the information provided here to set up lineage collection for a dbt project
 
 To confirm that your setup is successful, run a dbt model in your project. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Runs** page. If the setup is successful, the run that you triggered appears in the table of most recent runs.
 
-## Integrate with Great Expectations
+## OpenLineage and Great Expectations
 
 Use the information provided here to set up lineage collection for a running Great Expectations suite.
 
@@ -115,7 +115,6 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 - A [Great Expectations project](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started).
 - Your Astro base domain.
 - Your Organization's OpenLineage API key.
-
 
 #### Setup
 
@@ -156,7 +155,7 @@ To confirm that your setup is successful, open the **Lineage** tab in the Cloud 
 
 If your code hasn't produced any data quality assertion issues, use the search bar to search for a dataset and view its node on the lineage graph for a recent job run. Click the **Quality** tab to view metrics and assertion pass or fail counts.
 
-## Integrate with Spark
+## OpenLineage and Spark
 
 Use the information provided here to set up lineage collection for Spark.
 
@@ -185,7 +184,7 @@ In your Spark application, set the following properties to configure your lineag
 
 To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, open the **Lineage** tab in the Cloud UI and go to the **Runs** page. Your recent Spark job run appears in the table of most recent runs.
 
-## Integrate with Snowflake 
+## OpenLineage and Snowflake 
 
 Use the information provided here to set up lineage collection for Snowflake.
 
