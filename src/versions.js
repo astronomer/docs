@@ -6,6 +6,10 @@ export const siteVariables = {
   deploymentid: '${ASTRONOMER_DEPLOYMENT_ID}',
   keyid: '${ASTRONOMER_KEY_ID}',
   keysecret: '${ASTRONOMER_KEY_SECRET}',
+  devkeyid: '${DEV_ASTRONOMER_KEY_ID}',
+  devkeysecret: '${DEV_ASTRONOMER_KEY_SECRET}',
+  prodkeyid: '${PROD_ASTRONOMER_KEY_ID}',
+  prodkeysecret: '${PROD_ASTRONOMER_KEY_SECRET}',
   // Hacky variable for droneci
   deploymentiddrone: '$ASTRONOMER_DEPLOYMENT_ID',
 };
