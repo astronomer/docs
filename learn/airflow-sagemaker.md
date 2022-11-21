@@ -145,6 +145,7 @@ from astronomer.providers.amazon.aws.operators.sagemaker import (
     SageMakerTransformOperatorAsync
 )
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+from sagemaker import image_uris
 
 from datetime import datetime, timedelta
 import requests
@@ -219,7 +220,7 @@ with DAG('sagemaker_pipeline',
         aws_conn_id='aws-sagemaker',
         config={
             "AlgorithmSpecification": {
-                "TrainingImage": "404615174143.dkr.ecr.us-east-2.amazonaws.com/knn",
+                "TrainingImage": image_uris.retrieve(framework='knn',region=region),
                 "TrainingInputMode": "File"
             },
             "HyperParameters": {
@@ -267,7 +268,8 @@ with DAG('sagemaker_pipeline',
             "ModelName": model_name,
             "PrimaryContainer": {
                 "Mode": "SingleModel",
-                "Image": "404615174143.dkr.ecr.us-east-2.amazonaws.com/knn",
+                "Image": image_uris.retrieve(framework='knn',region=region),
+                # We are using a Jinja Template to pull the XCom output of the 'train_model' task to use as input for this task 
                 "ModelDataUrl": "{{ ti.xcom_pull(task_ids='train_model')['Training']['ModelArtifacts']['S3ModelArtifacts'] }}"
             },
         }
