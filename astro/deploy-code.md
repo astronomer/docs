@@ -141,13 +141,17 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
-## Deploy custom Docker images
+## Deploy a prebuilt Docker image
 
-You can run `astro deploy` to build your Astro project as a Docker image and deploy it, or you can run `astro deploy --image-name <custom-image>` to deploy a pre-built Astro Runtime image. To use this command, the image you deploy must be based on Astro Runtime and be available in a local Docker registry. 
+By default, running `astro deploy` with the Astro CLI builds your Astro project into a Docker image and deploys it to Astro. To skip the build step and deploy a prebuilt Docker image, run `astro deploy --image-name <image-name>` or specify the command in a CI/CD pipeline.
 
-Customizing your Runtime image lets you securely mount additional files and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
+You can deploy a prebuilt Docker image to:
 
-You can also use the `--image-name` flag to separate your build and deploy steps in a CI/CD pipeline. This allows you more control over how your images are tested and deployed. 
+- Build a Docker image once and promote the Docker image across Deployments instead of rebuilding it each time.
+- Reduce the time it takes to deploy. If your Astro project has a number of packages that take a long time to install, it can be more efficient to build it separately.
+- Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
+
+To use this command, the image you deploy must be based on Astro Runtime and be available in a local Docker registry. 
 
 You can use the `--image-name` flag with the following local development commands to test your image before deploying:
 
