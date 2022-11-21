@@ -159,23 +159,12 @@ from astronomer.providers.amazon.aws.operators.sagemaker import (
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from sagemaker import image_uris
 
-from datetime import datetime, timedelta
+from datetime import datetime
 import requests
 import io
 import pandas as pd
 import numpy as np
-
-"""
-This DAG shows an example implementation of machine learning model orchestration using Airflow
-and AWS SageMaker. Using the AWS provider's SageMaker operators, Airflow orchestrates getting data
-from an API endpoint and pre-processing it (task-decorated function), training the model (SageMakerTrainingOperatorAsync),
-creating the model with the training results (SageMakerModelOperator), and testing the model using
-a batch transform job (SageMakerTransformOperatorAsync).
-
-The example use case shown here is using a built-in SageMaker K-nearest neighbors algorithm to make
-predictions on the Iris dataset. To use the DAG, add Airflow variables for `role` (Role ARN to execute SageMaker jobs) 
-then fill in the information directly below with the target AWS S3 locations, and model and training job names.
-"""
+import os
 
 # Define variables used in configs
 data_url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"  # URL for Iris data API
@@ -221,7 +210,10 @@ with DAG('sagemaker_pipeline',
         s3_hook = S3Hook(aws_conn_id=aws_conn_id)
         s3_hook.load_file('iris_train.csv', f'{input_s3_key}/train.csv', bucket_name=s3_bucket, replace=True)
         s3_hook.load_file('iris_test.csv', f'{input_s3_key}/test.csv', bucket_name=s3_bucket, replace=True)
-
+        
+        # cleanup
+        os.remove('iris_train.csv')
+        os.remove('iris_test.csv')
 
     data_prep = data_prep(data_url, bucket, input_s3_key, aws_conn_id="aws-sagemaker")
 
