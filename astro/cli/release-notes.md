@@ -14,6 +14,31 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.8.0
+
+Release date: November 22, 2022
+
+## New Command `astro run` to Run DAGs
+
+
+User can now compile and run a DAG with only the command line. `astro run` will run your DAGs within a Docker container built from your local `Dockerfile` containing your DAGs, DAG utility files, python requirements, and env vars from your `.env` file. This command will simplify the process of testing and debugging DAGs locally for many users.
+
+The command will automatically load Connections and Variables located in the [Airflow Settings file](develop-project.md#configure-airflow_settingsyaml-local-development-only). For more information read [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+
+## New Command `organization audit-logs export`
+
+Organization admins can now export their orgs audit logs with `astro organization audit-logs export —organization-name <name>`. This command will create a gzip file of audit logs that users can unzip and parse.
+
+## Additional improvements
+
+- If you run `astro deploy` with an empty `dag` folder the pushing of DAGs will be skipped and only your projects image will be updated. This enables you to manage your deployments DAGs and image in separate repos.
+- There are some minor improvements to the `deployment inspect` command. Specifically a `dag-deploy-enabled` field was added and the fields are now ordered by importance rather than alphabetical order.
+
+### Bug fixes 
+
+- Fixed an issue where the changes specified in the `docker-compose.override.yaml` file stopped applying to users projects.
+- Fixed an issue where `astro login` didn’t recognize some valid domains.
+
 ## Astro CLI 1.7.0
 
 Release date: November 9, 2022 
