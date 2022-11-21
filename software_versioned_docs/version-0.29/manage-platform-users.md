@@ -1,13 +1,13 @@
 ---
-title: 'Manage users on Astronomer Software'
-sidebar_label: 'Platform user management'
+title: 'Manage users and roles on Astronomer Software'
+sidebar_label: 'Manage users and roles'
 id: manage-platform-users
 description: Add and customize user permissions on Astronomer Software.
 ---
 
-In addition to Workspace-level [role-based access control (RBAC) functionality](workspace-permissions.md) core to our platform, Astronomer Software allows teams to customize *how* they want users to create accounts on Astronomer and what they're able to do on the platform - both on Astronomer and Airflow.
+Astronomer Software allows you to adjust permissions for each user role and define how new users join your organization. 
 
-Read below for a high-level overview of user management and guidelines around public signups, role customization and adding System Admins. For a list of each role's specific permissions, read [Reference: System Permissions](manage-platform-users.md#reference-system-permissions).
+Use this guide to learn about customizing user signups and user roles, as well as how to use Astronomer Software system-level permissions. For a list of the default permissions for each role, see [User roles and permissions](#role-permission-reference).
 
 ## Add users to Astronomer
 
@@ -60,16 +60,58 @@ astronomer:
 
 Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
-### User roles on Astronomer
+## System permissions on Software
 
-Once on the platform, administrators can customize permissions across teams. On Astronomer, users can be assigned roles at 2 levels:
+The Astronomer Software System Admin role provides cluster-wide permissions that supersede Workspace-level access and allows a user to monitor and take action across Workspaces, Deployments, and users within a single cluster.
 
-1. Workspace Level (Viewer, Editor, Admin)
-2. System Level (Viewer, Editor, Admin)
+On Astronomer, System Admins specifically can:
 
-Workspace roles apply to all Airflow Deployments within a single Workspace, whereas System Roles apply to *all* Workspaces across a single cluster. For a detailed breakdown of the 3 Workspace-level roles on Astronomer (Viewer, Editor and Admin), read [Manage user permissions on an Astronomer Workspace](workspace-permissions.md).
+- List and search all users.
+- List and search all Deployments.
+- Access the Airflow UI for all Deployments.
+- Delete a user.
+- Delete a Deployment.
+- Access Grafana and Kibana for cluster-level monitoring.
+- Add other System Admins.
 
-## Customize permissions
+By default, the first user to log into an Astronomer Software installation is granted the System Admin permission set.
+
+In addition to the commonly used System Admin role, the Astronomer platform also supports both a System Editor and System Viewer permission set.
+
+No user is assigned the System Editor or Viewer Roles by default, but they can be added by System Admins via our API. Once assigned, System Viewers, for example, can access both Grafana and Kibana but don't have permission to delete a Workspace they're not a part of.
+
+You can customize all three Astronomer Software permission sets to meet your specific requirements. For more information about the default configurations attached to the System Admin, Editor and Viewer Roles, see the [Houston API source code](https://github.com/astronomer/docs/tree/main/software_configs/0.30/default.yaml).
+
+
+### Assign users System Admin roles
+
+System Admins can be added to Astronomer Software using the **System Admin** tab of the Software UI.
+
+Keep in mind that:
+
+- Only existing System Admins can grant the System Admin role to another user
+- The user must have a verified email address and already exist in the system
+
+> **Note:** If you'd like to assign a user a different System-Level Role (either `SYSTEM_VIEWER` or `SYSTEM_EDITOR`), you'll have to do so via an API call from your platform's GraphQL playground. For guidelines, refer to our ["Houston API" doc](houston-api.md).
+
+#### Verify System Admin access
+
+To verify a user was successfully granted the SysAdmin role, ensure they can do the following:
+
+- Navigate to `grafana.BASEDOMAIN`
+- Navigate to `kibana.BASEDOMAIN`
+- Access the 'System Admin' tab from the top left menu of the Software UI
+
+## User roles on Astronomer
+
+Administrators can customize permissions across teams. On Astronomer Software, users can be assigned roles at two levels:
+
+- Workspace Level (Viewer, Editor, Admin)
+- System Level (Viewer, Editor, Admin)
+
+Workspace roles apply to all Airflow Deployments within a single Workspace. System Roles apply to *all* Workspaces across a single cluster. For more information about the three Workspace-level roles on Astronomer Software (Viewer, Editor and Admin), see [Manage user permissions on an Astronomer Workspace](workspace-permissions.md).
+
+## Customize role permissions
 
 Permissions are defined on Astronomer as `scope.entity.action`, where:
 
@@ -77,39 +119,36 @@ Permissions are defined on Astronomer as `scope.entity.action`, where:
 - `entity`: The object or role being operated on
 - `action`: The verb describing the operation being performed on the `entity`
 
-For example, the `deployment.serviceAccounts.create` permission translates to the ability for a user to create a Deployment-level Service account. To view all available platform permissions and default role configurations, see [Reference: System permissions](manage-platform-users.md#reference-system-permissions).
+For example, the `deployment.serviceAccounts.create` permission translates to the ability for a user to create a Deployment-level service account in any Deployment to which they belong. To view the available platform permissions and default role configurations, see [Reference: System permissions](manage-platform-users.md#reference-system-permissions).
 
-To customize permissions, follow the steps below.
+A permission for a given `scope` only applies to the parts of the scope where a user has been invited. For example, a user with a role including the `workspace.serviceAccounts.get` permission can view service accounts only in the Workspaces they belong to.
 
-### Identify a permission change
+For a complete list of Astronomer Software roles and default permissions, see [User roles and permissions](role-permission-reference.md).
+
+### Role permission inheritance
+
+In addition to their own permissions, roles inherit permissions from other roles. 
+
+There are several chains of inheritance in the Software RBAC system. In the following list, `>` represents "inherits from":
+
+- System Admin > System Editor > System Viewer > User
+- Deployment Admin > Deployment Editor > Deployment Viewer > User 
+- Workspace Admin > Workspace Editor > Workspace Viewer > User
+
+### Step 1: Identify a permission change
 
 <!--- Version-specific -->
 
-First, take a look at our default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.29/default.yaml) and identify two things:
+Review the default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.30/default.yaml) and determine the following:
 
-1. What role do you want to configure? (e.g. `DEPLOYMENT_EDITOR`)
-2. What permission(s) would you like to add to or remove from that role? (e.g. `deployment.images.push`)
+- What role you want to configure. For example, `DEPLOYMENT_EDITOR`.
+- What permission(s) you want to add or remove from the role, For example, `deployment.images.push`.
 
 For example, you might want to block a `DEPLOYMENT_EDITOR` (and therefore `WORKSPACE_EDITOR`) from deploying code to all Airflow Deployments within a Workspace and instead limit that action to users assigned the `DEPLOYMENT_ADMIN` role.
 
-### Limit Workspace creation
+### Step 2: Modify your config.yaml file
 
-Unless otherwise configured, a user who creates a Workspace on Astronomer is automatically granted the `WORKSPACE_ADMIN` role and is thus able to create an unlimited number of Airflow Deployments within that Workspace. For teams looking to more strictly control resources, our platform supports limiting the Workspace creation function via a `USER` role.
-
-Astronomer ships with a `USER` role that is synthetically bound to _all_ users within a single cluster. By default, this role includes the `system.workspace.create` permission.
-
-If you're an administrator on Astronomer who wants to limit Workspace Creation, you can:
-
-- Remove the `system.workspace.create` permission from the `USER` role
-- Attach it to a separate role of your choice
-
-If you'd like to reserve the ability to create a Workspace _only_ to System Admins who otherwise manage cluster-level resources and costs, you might limit that permission to the `SYSTEM_ADMIN` role on the platform.
-
-To configure and apply this change, follow the steps below.
-
-### Modify your config.yaml file
-
-Now, apply the role and permission change to your platform's `config.yaml` file. Following the `deployment.images.push` example above, that would mean specifying this:
+Apply the role and permission changes to your organization's `config.yaml` file. For example:
 
 ```yaml
 astronomer:
@@ -135,59 +174,41 @@ astronomer:
             deployment.images.push: true
 ```
 
-Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
+
+### Example customization: Limit Workspace creation
+
+Unless otherwise configured, a user who creates a Workspace on Astronomer Software is automatically granted the `WORKSPACE_ADMIN` role and can create an unlimited number of Airflow Deployments within that Workspace. For teams looking to more strictly control resources, Astronomer Software supports limiting the Workspace creation function through the `USER` role.
+
+Astronomer Software includes a `USER` role that is synthetically bound to _all_ users within a single cluster. By default, this role includes the `system.workspace.create` permission.
+
+If you're a System Admin who wants to limit Workspace creation, you can:
+
+- Set the `system.workspace.create` permission for the `USER` role to `false`
+- Attach the `system.workspace.create` permission to a separate role of your choice
+
+You might want limit this permission to the `SYSTEM_ADMIN` role on the platform, because System Admins can be responsible for managing cluster-level resources and costs. To reassign this permission to System Admins, your `config.yaml` would appear similar to the following example: 
+
+```yaml
+astronomer:
+  houston:
+    config:
+      roles:
+        SYSTEM_ADMIN:
+          permissions:
+            system.workspace.create: true
+        USER:
+          permissions:
+            system.workspace.create: false
+```
+
+## Role permission reference
+
+This is where you'll find information about Astronomer Software default user role permissions. To modify these default permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).
 
 ## System roles
 
-### Overview
-
-The System Admin role on Astronomer Software brings a range of cluster-wide permissions that supercedes Workspace-level access and allows a user to monitor and take action across Workspaces, Deployments and Users within a single cluster.
-
-On Astronomer, System Admins specifically can:
-
-- List and search *all* users
-- List and search *all* deployments
-- Access the Airflow UI for *all* deployments
-- Delete a user
-- Delete an Airflow Deployment
-- Access Grafana and Kibana for cluster-level monitoring
-- Add other System Admins
-
-By default, the first user to log into an Astronomer Software installation is granted the System Admin permission set.
-
-### System Editor, Viewer
-
-<!--- Version-specific -->
-
-In addition to the commonly used System Admin role, the Astronomer platform also supports both a System Editor and System Viewer permission set.
-
-No user is assigned the System Editor or Viewer Roles by default, but they can be added by System Admins via our API. Once assigned, System Viewers, for example, can access both Grafana and Kibana but don't have permission to delete a Workspace they're not a part of.
-
-All three permission sets are entirely customizable on Astronomer Software. For a full breakdown of the default configurations attached to the System Admin, Editor and Viewer Roles, refer to the [Houston API source code](https://github.com/astronomer/docs/tree/main/software_configs/0.29/default.yaml).
-
-For guidelines on assigning users any System Level role, read below.
-
-#### Assign users system-level roles
-
-System Admins can be added to Astronomer Software via the 'System Admin' tab of the Software UI.
-
-Keep in mind that:
-- Only existing System Admins can grant the SysAdmin role to another user
-- The user must have a verified email address and already exist in the system
-
-> **Note:** If you'd like to assign a user a different System-Level Role (either `SYSTEM_VIEWER` or `SYSTEM_EDITOR`), you'll have to do so via an API call from your platform's GraphQL playground. For guidelines, refer to our ["Houston API" doc](houston-api.md).
-
-#### Verify SysAdmin access
-
-To verify a user was successfully granted the SysAdmin role, ensure they can do the following:
-
-- Navigate to `grafana.BASEDOMAIN`
-- Navigate to `kibana.BASEDOMAIN`
-- Access the 'System Admin' tab from the top left menu of the Software UI
-
-## Reference: System permissions
-
-This section contains the specific default permissions for each System user role on Astronomer. System roles apply to all Workspaces, users, and Deployments within a single Astronomer Software installation.
+System roles apply to all Workspaces, users, and Deployments within a single Astronomer Software installation.
 
 ### System Viewer
 
@@ -206,7 +227,7 @@ The System Viewer has the following permissions by default:
 
 ### System Editor
 
-The System Editor has all of the same default permissions as the System Viewer, plus:
+The System Editor has the same default permissions as the System Viewer, plus:
 
 - `system.deployment.variables.update`: Modify [environment variables](environment-variables.md) for any Deployment
 - `system.iam.update`: Modify [IAM](integrate-iam.md) roles for any Deployment
@@ -216,7 +237,7 @@ The System Editor has all of the same default permissions as the System Viewer, 
 
 ### System Admin
 
-The System Admin has all of the same default permissions as the System Viewer and System Editor for a given cluster, plus:
+The System Admin has the same default permissions as the System Viewer and System Editor for a given cluster, plus:
 
 - `system.deployments.create`: Create a Deployment on any Workspace
 - `system.deployments.update`: Modify any Deployment
@@ -236,6 +257,10 @@ The System Admin has all of the same default permissions as the System Viewer an
     - Variables
     - XComs
 
+## Workspace roles
+
+Workspace roles apply to a single Workspace within a single Astronomer Software installation.
+
 ### Workspace Viewer
 
 The Workspace Viewer has the following default permissions for a given Workspace:
@@ -247,7 +272,7 @@ The Workspace Viewer has the following default permissions for a given Workspace
 
 ### Workspace Editor
 
-For a given Workspace, the Workspace Editor has all of the same default permissions as the Workspace Viewer, plus:
+For a given Workspace, the Workspace Editor has the same default permissions as the Workspace Viewer, plus:
 
 - `workspace.config.update`: Modify the Workspace, including Workspace Name, Description, and user access
 - `workspace.deployments.create`: Create a Deployment in the Workspace
@@ -257,13 +282,17 @@ For a given Workspace, the Workspace Editor has all of the same default permissi
 
 ### Workspace Admin
 
-For a given Workspace, the Workspace Editor has all of the same default permissions as the Workspace Viewer and Workspace Editor, plus:
+For a given Workspace, the Workspace Editor has the same default permissions as the Workspace Viewer and Workspace Editor, plus:
 
 - `workspace.invites.get`: View pending user invites for the Workspace
 - `workspace.config.delete`: Delete the Workspace
 - `workspace.iam.update`: Update [IAM](integrate-iam.md) for the Workspace
 
 In addition, Workspace Admins have Deployment Editor permissions for all Deployments within the Workspace.
+
+## Workspace roles
+
+Workspace roles apply to a single Deployment within a single Astronomer Software installation.
 
 ### Deployment Viewer
 
@@ -278,11 +307,11 @@ For a given Deployment, a Deployment Viewer has the following permissions:
 - `deployment.variables.get`: View the Deployment's [environment variables](environment-variables.md)
 - `deployment.users.get`: View the list of users with access to the Deployment
 
-Note that a Deployment Viewer cannot cannot push code to a Deployment or modify Deployment configurations. These actions can be completed only by a Deployment Editor or a Deployment Admin.
+A Deployment Viewer can't push code to a Deployment or modify Deployment configurations. These actions can be completed only by a Deployment Editor or a Deployment Admin.
 
 ### Deployment Editor
 
-For a given Deployment, the Deployment Editor has all of the same default permissions as the Deployment Viewer, plus:
+For a given Deployment, the Deployment Editor has the same default permissions as the Deployment Viewer, plus:
 
 - `deployment.airflow.user`: Airflow [user permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#user) for all Deployments, including modifying task runs and DAG runs
 - `deployment.config.update`: Modify the Deployment's settings
@@ -292,11 +321,11 @@ For a given Deployment, the Deployment Editor has all of the same default permis
 - `deployment.serviceAccounts.delete`: Delete a Deployment-level service account
 - `deployment.variables.update`: Update the Deployment's [environment variables](environment-variables.md)
 
-Note that a Deployment Editor cannot make changes to certain configurations in the Airflow UI, such as connections and variables. These actions can be completed only by a Deployment Admin.
+A Deployment Editor cannot make changes to certain configurations in the Airflow UI, such as connections and variables. These actions can only be completed by a Deployment Admin.
 
 ### Deployment Admin
 
-For a given Deployment, the Deployment Admin has all of the same default permissions as the Deployment Viewer and the Deployment Editor, plus:
+For a given Deployment, the Deployment Admin has the same default permissions as the Deployment Viewer and the Deployment Editor, plus:
 
 - `deployment.airflow.admin`: Airflow [admin permissions](https://airflow.apache.org/docs/apache-airflow/stable/security/access-control.html#admin), including permission to configure:
 

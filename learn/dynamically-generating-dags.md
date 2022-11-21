@@ -1,9 +1,13 @@
 ---
 title: "Dynamically generating DAGs in Airflow"
 sidebar_label: "Dynamically generate DAGs"
-description: "Use a base DAG template to create multiple DAGs."
 id: dynamically-generating-dags
 ---
+
+<head>
+  <meta name="description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
+  <meta name="og:description" content="Get to know the best ways to dynamically generate DAGs in Apache Airflow. Use examples to generate DAGs using single- and multiple-file methods." />
+</head>
 
 In Airflow, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#dags) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file. 
 
@@ -11,7 +15,7 @@ Sometimes, manually writing DAGs isn't practical. Maybe you have hundreds or tho
 
 Because everything in Airflow is code, you can dynamically generate DAGs using Python alone. As long as a `DAG` object in `globals()` is created by Python code that is stored in the `dags_folder`, Airflow will load it. In this guide, you'll learn how to dynamically generate DAGs. You'll learn when DAG generation is the preferred option and what pitfalls to avoid.
 
-All code used in this tutorial is located in the [Astronomer Registry](https://github.com/astronomer/dynamic-dags-tutorial).
+All code used in this guide is located in the [Astronomer Registry](https://github.com/astronomer/dynamic-dags-tutorial).
 
 ## Assumed knowledge
 

@@ -5,20 +5,30 @@ id: api-keys
 description: Create Deployment API keys to make requests to Airflow's REST API and set up a CI/CD pipeline.
 ---
 
-You can use API keys to programmatically deploy DAGs to a Deployment on Astro.
+An API key is a unique key ID and secret pair that you can use as an alternative to manual user authentication for some Astro actions. You can also use API keys to automate common actions on Astro that require manual inputs.
 
-You can use a Deployment API key to:
+You can use Deployment API keys to complete the following actions:
 
-- Deploy code to Astro in a [CI/CD pipeline](ci-cd.md).
-- Programmatically update [environment variables](environment-variables.md).
+- Automate deploying code to Astro [in CI/CD](ci-cd.md) with tools such as GitHub Actions or Circle CI.
+- Automate updating [environment variables](environment-variables.md).
 - Fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
 
-When using Deployment API keys, keep in mind the following:
+## Use API keys
 
-- A Deployment API key ID and secret are valid indefinitely and can be used to access Deployments without manual authentication.
+When using a Deployment API key, keep the following in mind:
+
+- A Deployment API key ID and secret are permanently valid.
 - Deployment API keys are deleted permanently if their corresponding Deployment is deleted.
-- A Deployment API key is not tied to the user that creates it. If the user that creates the API key is removed from the Workspace or their permissions change, the API key does not lose access to the Deployment and is not affected.
+- A Deployment API key is not bound to the user who creates it. When a user who created the API key is removed from the Workspace, or their permissions change, the Deployment and CI/CD workflows that use the API key are not affected.
 - Any user or service with access to an API key and secret can access the corresponding Deployment. The only way to delete this access is to [delete the API key](api-keys.md#delete-an-api-key) or [delete the Deployment](configure-deployment-resources.md#delete-a-deployment).
+
+:::info
+
+You can't use API keys to automate the creation and updating of Deployments or Workspaces, or inviting and removing users.
+
+A new API key framework to unlock advanced automation workflows will soon be available in Astro. If you're interested in learning more about this feature or have questions, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+:::
 
 ## Create an API key
 
@@ -42,15 +52,9 @@ If you just need to make a single API call, you can use a temporary user authent
 
 :::
 
-## Using Deployment API keys
+## Use an API key with the Astro CLI
 
-Deployment API keys are primarily used to automate actions that otherwise require manual inputs. They allow you to:
-
-- Deploy code to Astro [using CI/CD](ci-cd.md) with tools such as GitHub Actions or Jenkins.
-- Deploy code and configuration changes to Astro [using the Astro CLI](deploy-code.md) without user authentication.
-- Automate requests to the [Airflow REST API](airflow-api.md).
-
-To use API keys with the Astro CLI, you must make your Deployment API key ID and secret accessible to the CLI by setting the following OS-level environment variables:
+To use a Deployment API key with the Astro CLI, you must make your API key ID and secret accessible to the Astro CLI by setting the following OS-level environment variables:
 
 - `ASTRONOMER_KEY_ID`
 - `ASTRONOMER_KEY_SECRET`
@@ -62,7 +66,13 @@ export ASTRONOMER_KEY_ID=<your-key-id>
 export ASTRONOMER_KEY_SECRET=<your-key-secret>
 ```
 
-After setting the variables, running `astro deployment update` works for the Deployment and you don't need to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update a Deployment.
+After you set the variables, you can run `astro deployment update` for the Deployment and you don't have to manually authenticate to Astronomer. Astronomer recommends storing `ASTRONOMER_KEY_SECRET` as a secret before using it to programmatically update a Deployment.
+
+## Use an API key for CI/CD
+
+If you deploy DAGs regularly to a production environment, Astronomer recommends using Deployment API keys to automate pushing code with a tool such as GitHub Actions or Circle CI.
+
+For more information and examples, see [Automate code deploys with CI/CD](ci-cd.md).
 
 ## Delete an API key
 
@@ -77,7 +87,6 @@ If you delete an API key, make sure that no existing CI/CD pipelines are using i
     ![Edit API key button](/img/docs/edit-api-key.png)
 
 4. Click **Delete API Key**, enter `Delete`, and then click **Yes, Continue**.
-
 
 ## Related documentation
 

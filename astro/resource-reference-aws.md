@@ -2,9 +2,13 @@
 sidebar_label: "AWS"
 title: "AWS cluster configurations"
 id: resource-reference-aws
-description: Reference of all supported configurations for new clusters on Astro in AWS.
 sidebar_custom_props: { icon: "img/aws.png" }
 ---
+
+<head>
+  <meta name="description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
+  <meta name="og:description" content="Learn about the default resources and supported cluster configurations for Amazon Web Services (AWS) Astro installations." />
+</head>
 
 Unless otherwise specified, new clusters on Astro are created with a set of default AWS resources that should be suitable for most use cases.
 
@@ -134,7 +138,7 @@ The following table lists all available instance types for worker node pools, as
 | m6i.24xlarge     | 95 CPUs | 381 GiB MEM  |
 | m6i.metal        | 95 CPUs | 381 GiB MEM  |
 | m6id.xlarge      | 3 CPUs  | 13 GiB MEM   |
-| m61d.2xlarge     | 7 CPUs  | 29 GiB MEM   |
+| m6id.2xlarge     | 7 CPUs  | 29 GiB MEM   |
 | m6id.4xlarge     | 15 CPU  | 61 GiB MEM   |
 | m6id.8xlarge     | 31 CPU  | 125 GiB MEM  |
 | m6id.12xlarge    | 47 CPU  | 189 GiB MEM  |
@@ -161,9 +165,15 @@ The following table lists all available instance types for worker node pools, as
 | t3.xlarge        | 3 CPUs  | 13 GiB MEM   |
 | t3.2xlarge       | 7 CPUs  | 29 GiB MEM   |
 
+:::caution
+
+Astronomer doesn’t recommend using `t` series instance types in standard mode for production workloads, because CPU utilization for `t` instance types in standard mode can be throttled.
+
+:::
+
 :::info
 
-With the exception of `m5d` nodes, all supported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, Astronomer recommends modifying your cluster to run `m5d` nodes, which Astronomer provisions with NVMe SSD volumes.
+With the exception of `m5d` and `m6id` nodes, all supported node types have a maximum of 20GB of storage per node for system use only. If you need locally attached storage for task execution, Astronomer recommends modifying your cluster to run `m5d` or `m6id` nodes, which Astronomer provisions with NVMe SSD volumes. To utilize the ephemeral storage on these node types, have your task write data to `/ephemeral`. If your task uses the KubernetesPodOperator, [mount an emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) in your operator [container spec](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod) instead. See [Amazon EC2 M6i Instances](https://aws.amazon.com/ec2/instance-types/m6i/) and [Amazon EC2 M5 Instances](https://aws.amazon.com/ec2/instance-types/m5/) for the amount of available storage in each node type.
 
 The ability to provision ephemeral storage for all node instance types is coming soon.
 

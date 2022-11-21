@@ -1,9 +1,14 @@
 ---
 title: "Use Airflow templates"
 sidebar_label: "Jinja templates"
-description: "How to leverage the power of Jinja templating when writing your DAGs."
 id: templating
 ---
+
+<head>
+  <meta name="description" content="Learn about Jinja templating in Apache Airflow and see examples of how to pass dynamic information into task instances at runtime. " />
+  <meta name="og:description" content="Learn about Jinja templating in Apache Airflow and see examples of how to pass dynamic information into task instances at runtime. " />
+</head>
+
 
 Templating allows you to pass dynamic information into task instances at runtime. For example, you can run the following command to print the day of the week every time you run a task:
 
@@ -110,7 +115,7 @@ with DAG(..., template_searchpath="/tmp") as dag:
 
 The output of templates can be checked in both the Airflow UI and Airflow CLI. One advantage of the Airflow CLI is that you don't need to run any tasks before seeing the result.
 
-The Airflow CLI command `airflow tasks render` renders all templateable attributes of a given task. Given a `dag_id`, `task_id`, and dummy `execution_date`, the command output is similar to the following example:
+The Airflow CLI command `airflow tasks render` renders all templateable attributes of a given task. Given a `dag_id`, `task_id`, and random `execution_date`, the command output is similar to the following example:
 
 ```bash
 $ airflow tasks render example_dag run_this 2021-01-01

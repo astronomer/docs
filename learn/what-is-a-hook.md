@@ -1,9 +1,14 @@
 ---
 title: "Airflow hooks"
 sidebar_label: "Hooks"
-description: "An introduction to hooks in Apache Airflow."
 id: what-is-a-hook
 ---
+
+<head>
+  <meta name="description" content="Learn about hooks and how they should be used in Apache Airflow. See an example of implementing two different hooks in a DAG." />
+  <meta name="og:description" content="Learn about hooks and how they should be used in Apache Airflow. See an example of implementing two different hooks in a DAG." />
+</head>
+
 
 A hook is an abstraction of a specific API that allows Airflow to interact with an external system. Hooks are built into many operators, but they can also be used directly in DAG code.
 
@@ -74,7 +79,7 @@ apache-airflow-providers-slack
 
 ### Run the example DAG
 
-The following example DAG uses [Airflow Decorators](https://registry.astronomer.io/guides/airflow-decorators) to define tasks and [XCom](https://registry.astronomer.io/guides/airflow-passing-data-between-tasks) to pass information between Amazon S3 and Slack. The name of the Amazon S3 bucket and the names of the files that the first task reads are stored as environment variables for security purposes.
+The following example DAG uses [Airflow Decorators](https://docs.astronomer.io/learn/airflow-decorators) to define tasks and [XCom](https://docs.astronomer.io/learn/airflow-passing-data-between-tasks) to pass information between Amazon S3 and Slack. The name of the Amazon S3 bucket and the names of the files that the first task reads are stored as environment variables for security purposes.
 
 The following example DAG completes the following steps:
 

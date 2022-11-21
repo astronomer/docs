@@ -2,8 +2,13 @@
 sidebar_label: 'Create a Deployment'
 title: 'Create a Deployment'
 id: create-deployment
-description: Learn how to create an Astro Deployment.
 ---
+
+<head>
+  <meta name="description" content="Learn how to create an Astro Deployment. After you’ve created a Deployment, you can deploy DAGs to it from the Astro command-line interface (CLI), or from a continuous integration and continuous delivery (CI/CD) pipeline." />
+  <meta name="og:description" content="Learn how to create an Astro Deployment. After you’ve created a Deployment, you can deploy DAGs to it from the Astro command-line interface (CLI), or from a continuous integration and continuous delivery (CI/CD) pipeline." />
+</head>
+
 
 An Astro Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow, including the Airflow webserver, scheduler, and one or more workers.
 
@@ -21,7 +26,7 @@ Every Deployment is hosted on a single Astro cluster with its own dedicated reso
 If you prefer, you can also run the `astro deployment create` command in the Astro CLI to create a Deployment. See [CLI Command Reference](cli/astro-deployment-create.md).
 :::
 
-1. In the Cloud UI and select a Workspace.
+1. In the Cloud UI select a Workspace.
 
 2. On the **Deployments** page, click **Deployment**.
 

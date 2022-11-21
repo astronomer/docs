@@ -2,18 +2,110 @@
 sidebar_label: 'Astro'
 title: 'Astro release notes'
 id: release-notes
-description: A real-time reference of the latest features and bug fixes in Astro.
 ---
 
-<!--- Version-specific -->
+<head>
+  <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
+  <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
+</head>
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 6.0.1 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 6.0.4 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.6.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
+
+## November 15, 2022
+
+### Additional improvements 
+
+- In the Cloud UI, the **People** page now shows the IDs of users belonging to your Organization.
+- In the Cloud UI, the **Deployments** page now shows the user or API key that most recently updated each Deployment and when they updated it.
+
+### Bug fixes
+
+- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks) and less volatility across workers. AZ rebalancing is enabled for other system components on Astro.
+- The **Updated at** field for a transferred Deployment now displays the correct time.
+- `astro deploy --dags` now handles deferrable tasks correctly.
+
+## November 8, 2022
+
+### Deploy only DAGs with `astro deploy -—dags`
+
+Using Astro CLI 1.7, you can run `astro deploy -—dags` to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy` that makes for a faster development experience and gives you more flexibility in how you configure CI/CD processes.
+
+For more information, see [Astro CLI 1.7](astro/cli/release-notes#deploy-only-dags-with-astro-deploy--dags) or [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
+
+### Improved data lineage interface
+
+The **Lineage** tab has new features and is better integrated into the Cloud UI.
+
+![Updated lineage page](/img/release-notes/lineage-integrated.png)
+
+Specifically, the tab includes the following improvements:
+
+- The process for comparing runs uses a simpler interface and provides more information about the runs you're comparing. See [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
+- Names for UI elements have been updated to more clearly represent Airflow resources. For example, **jobs** is now **runs**, and the **Explore** tab is now **Runs**.
+- Lineage graphs include new colors and animations to show the flow of data as it moves between runs and datasets. 
+
+### Transfer a Deployment
+
+You can now transfer a Deployment from one Workspace to another in your Organization. This feature is helpful if you need to change the group of users that have access to a Deployment, or if you create a Deployment in the wrong Workspace.
+
+See [Transfer a Deployment to another Workspace](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
+
+### Additional improvements 
+ 
+- The Kubernetes API is no longer exposed to the public internet on AWS data planes. The allowlist is limited to control plane IPs. New clusters will be created with this configuration, while all existing clusters will be updated by end of next week.
+
+## November 1, 2022 
+
+### Introducing the Astro Cloud IDE, a new Airflow development experience
+
+Astronomer is excited to introduce the Astro Cloud IDE, which is a notebook-inspired development environment for writing, running, and deploying data pipelines. Now you can develop an entire Airflow project, including DAGs, dependencies, and connections entirely within the Cloud UI.
+
+![Example page in the Astro Cloud IDE](/img/release-notes/ide-overview.png)
+
+The Astro Cloud IDE was created with the following objectives:
+
+- Configuring Airflow shouldn't be a barrier to running Airflow.
+- Passing data between tasks should be seamless regardless of what language is used to write the task.
+- Data pipelines should be quick to deploy and easy to test with CI/CD.
+
+Most importantly, the Astro Cloud IDE was developed to make it easier for new Airflow users to get started and to provide experienced users with a robust development environment.
+
+To create your first project in the Astro Cloud IDE, see the [Cloud IDE quickstart](cloud-ide/quickstart.md). To deploy your project to Astro, see [Deploy your Cloud IDE project to Astro](cloud-ide/deploy-project.md).
+
+:::info
+
+<!-- id to make it easier to remove: cloud-ide-preview-banner -->
+
+The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have any feedback, submit it to the [Astro Cloud IDE product portal](https://portal.productboard.com/75k8qmuqjacnrrnef446fggj).
+
+:::
+
+### Additional improvements 
+
+- In the Cloud UI, cluster selection menus are now alphabetized.
+
+### Bug fixes 
+
+- Fixed an issue where the KubernetesPodOperator was not aware of available ephemeral storage in `m5d` and `m6id` worker nodes. This issue resulted in Pods being evicted to free up storage even when there was enough available storage for tasks.
+- Fixed an issue in the Cloud UI where you could select a worker type before selecting a cluster when creating a Deployment.
+- Fixed an issue where Deployments on Runtime 5.0.10 and earlier showed a nonfunctional **Configuration** tab in the Airflow UI.
+- Fixed [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-32149).
+
+## October 25, 2022 
+
+### Additional improvements 
+
+- In the Cloud UI, you can now view a cluster's external IP addresses in the **Clusters** tab.
+
+### Bug fixes 
+
+- Fixed an issue where some Deployments were running tasks after being deleted. 
 
 ## October 18, 2022 
 
@@ -429,7 +521,7 @@ For example, if an Airflow task failed because the schema of a database changed,
 
 To learn more about data lineage and how you can configure it on Astro, see:
 
-- [Data lineage Concepts](data-lineage-concepts.md)
+- [Integrate Airflow and OpenLineage](https://docs.astronomer.io/learn/airflow-openlineage)
 - [Enable data lineage for External Services](set-up-data-lineage.md)
 - [Data lineage on Astro](data-lineage.md)
 - [Data lineage Support and Compatibility](data-lineage-support-and-compatibility.md)

@@ -1,9 +1,13 @@
 ---
 title: "DAG writing best practices in Apache Airflow"
 sidebar_label: "DAG writing best practices"
-description: "How to create effective, clean, and functional DAGs."
 id: dag-best-practices
 ---
+
+<head>
+  <meta name="description" content="Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration." />
+  <meta name="og:description" content="Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration." />
+</head>
 
 Because Airflow is 100% code, knowing the basics of Python is all it takes to get started writing DAGs. However, writing DAGs that are efficient, secure, and scalable requires some Airflow-specific finesse. In this guide, you'll learn how you can develop DAGs that make the most of what Airflow has to offer.
 
@@ -121,6 +125,7 @@ The following example DAG demonstrates what you shouldn't do. A SQL query is pro
 
 ```python
 from airflow import DAG
+from airflow.operators.empty import EmptyOperator
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from datetime import datetime, timedelta
 
@@ -143,7 +148,7 @@ with DAG('bad_practices_dag_2',
          catchup=False
          ) as dag:
 
-    t0 = DummyOperator(task_id='start')  
+    t0 = EmptyOperator(task_id='start')  
 
     #Bad example with SQL query directly in the DAG file
     query_1 = PostgresOperator(

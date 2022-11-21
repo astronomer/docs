@@ -36,8 +36,6 @@ module.exports = {
       type: 'category',
       label: 'Write DAGs',
       items: [
-      'deferrable-operators',
-      'kubepodoperator-local',
       'kubepodoperator',
       'kubernetes-executor',
         ],
@@ -173,7 +171,11 @@ module.exports = {
     label: 'Release notes',
     items: [
       'release-notes',
-      'cli-release-notes',
+      {
+        type: 'link',
+        label: 'Astro CLI',
+        href: 'https://docs.astronomer.io/astro/cli/release-notes',
+     },
       'runtime-release-notes',
     ],
     },
@@ -186,6 +188,7 @@ module.exports = {
           label: 'Astro CLI command reference',
           href: 'https://docs.astronomer.io/astro/cli/reference',
       },
+      'role-permission-reference',
       'system-components',
       'support',
       'version-compatibility-reference',

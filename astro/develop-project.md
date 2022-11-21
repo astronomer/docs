@@ -2,8 +2,12 @@
 sidebar_label: 'Develop a project'
 title: 'Develop your Astro project'
 id: develop-project
-description: Learn how to add Airflow dependencies and customize an Astro project to fit your use case.
 ---
+
+<head>
+  <meta name="description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
+  <meta name="og:description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
+</head>
 
 import {siteVariables} from '@site/src/versions';
 import Tabs from '@theme/Tabs';
@@ -36,7 +40,7 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Postgres:** Airflow's metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](deferrable-operators.md).
+- **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
 Once the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
 
@@ -88,6 +92,19 @@ All changes made to the following files require rebuilding your image:
 - `airflow_settings.yaml`
 
 To rebuild your project after making a change to any of these files, you must [restart your local environment](develop-project.md#restart-your-local-environment).
+
+## Add DAG utility files
+
+Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators.
+
+
+:::tip
+
+When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
+
+If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+
+:::
 
 ## Explore Airflow providers and modules
 
@@ -402,7 +419,7 @@ This example assumes that the name of each of your Python packages is identical 
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
     LABEL io.astronomer.docker.airflow.onbuild=true
-    # Install Python and OS-Level Packages
+    # Install OS-Level packages
     COPY packages.txt .
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
 
@@ -410,7 +427,7 @@ This example assumes that the name of each of your Python packages is identical 
     USER root
     RUN apt-get -y install git python3 openssh-client \
       && mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
-    # Install Python Packages
+    # Install Python packages
     COPY requirements.txt .
     RUN --mount=type=ssh,id=github pip install --no-cache-dir -q -r requirements.txt
 
@@ -481,20 +498,22 @@ Your Astro project can now utilize Python packages from your private GitHub repo
 
 #### Install Python packages from a private PyPI index
 
-In some organizations, python packages are prebuilt and pushed to a hosted private pip server (such as pypiserver or Nexus Repository) or managed service (such as PackageCloud or Gitlab).
+Installing Python packages on Astro from a private PyPI index is required for organizations that deploy a [private PyPI server (`private-pypi`)](https://pypi.org/project/private-pypi/) as a secure layer between pip and a Python package storage backend, such as GitHub, AWS, or a local file system or managed service.
+
+To complete this setup, you'll specify your privately hosted Python packages in `requirements.txt`, create a custom Docker image that changes where pip looks for packages, and then build your Astro project with this Docker image.
 
 #### Prerequisites
 
 - An [Astro project](create-project.md).
-- A private PyPI index with username and password authentication.
+- A private PyPI index with a corresponding username and password.
 
-#### Step 1: Add privately hosted packages to requirements.txt
+#### Step 1: Add Python packages to your Astro project
 
-Add the name and, optionally, the version of your packages to `requirements.txt`. This is the same syntax as you would use when adding public packages from [PyPI](https://pypi.org). `requirements.txt` can contain a mixture of both publicly accessible and private packages.
+To install a Python package from a private PyPI index, add the package name and version to the `requirements.txt` file of your Astro project. If you don't specify a version, the latest version is installed. Use the same syntax that you used when you added public packages from [PyPI](https://pypi.org). Your `requirements.txt` file can contain both publicly accessible and private packages.
 
 :::caution
 
-Ensure that the name of the package on the private repository does not clash with any existing python packages on [PyPI](https://pypi.org). If pip parses multiple repositories with the same name, it can produce unexpected results.
+Make sure that the name of any privately hosted Python package doesn't conflict with the name of other Python packages in your Astro project. The order in which pip searches indices might produce unexpected results.
 
 :::
 
@@ -522,12 +541,12 @@ Ensure that the name of the package on the private repository does not clash wit
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
     LABEL io.astronomer.docker.airflow.onbuild=true
-    # Install Python and OS-Level Packages
+    # Install OS-Level packages
     COPY packages.txt .
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
 
     FROM stage1 AS stage2
-    # Install Python Packages
+    # Install Python packages
     ARG PIP_EXTRA_INDEX_URL
     ENV PIP_EXTRA_INDEX_URL=${PIP_EXTRA_INDEX_URL}
     COPY requirements.txt .
@@ -544,8 +563,8 @@ Ensure that the name of the package on the private repository does not clash wit
 
     In order, these commands:
 
-    - Complete the standard installation of OS-level packages in `packages.txt`.
-    - Add the environment variable `PIP_EXTRA_INDEX_URL` to instruct pip on where to look for non-public packages.
+    - Install any OS-level packages specified in `packages.txt`.
+    - Add `PIP_EXTRA_INDEX_URL` as an environment variable that contains authentication information for your private PyPI index.
     - Install public and private Python-level packages from your `requirements.txt` file.
 
 4. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
@@ -558,7 +577,7 @@ Ensure that the name of the package on the private repository does not clash wit
     image_name=astro-$(date +%Y%m%d%H%M%S)
     ```
 
-2. Run the following command to create a new Docker image from your `Dockerfile`. Replace the pip repository and associated credential values with your own.
+2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<private-pypi-repo-domain-name>`, `<repo-username>` and `<repo-password>` with your own values.
 
     ```sh
     DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --build-arg PIP_EXTRA_INDEX_URL=https://${<repo-username>}:${<repo-password>}@<private-pypi-repo-domain-name> -t $image_name .
@@ -576,3 +595,19 @@ Your Astro project can now utilize Python packages from your private PyPi index.
 
 </TabItem>
 </Tabs>
+
+## Add a CA certificate to an Astro Runtime image
+
+If you need your Astro deployment to communicate securely with a remote service using a certificate signed by an untrusted or internal certificate authority (CA), you need to add the CA certificate to the trust store inside the image.
+
+1. In your Astro project `Dockerfile`, add the following entry below the existing `FROM` statement which specifies your Astro Runtime image version:
+
+    ```docker
+    USER root
+    COPY <internal-ca.crt>/usr/local/share/ca-certificates/<your-company-name>/
+    RUN update-ca-certificates
+    USER astro
+    ```
+2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
+
+3. Save your changes and test them locally, or deploy them to a test Deployment.

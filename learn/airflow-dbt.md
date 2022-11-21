@@ -1,10 +1,13 @@
 ---
 title: "Orchestrate dbt with Airflow"
 sidebar_label: "dbt"
-description: "Orchestrate dbt models with your Airflow DAGs."
 id: airflow-dbt
-keywords: [DAGs, Integrations]
 ---
+
+<head>
+  <meta name="description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud with Airflow. Learn use cases for orchestrating dbt Core using the BashOperator." />
+  <meta name="og:description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud with Airflow. Learn use cases for orchestrating dbt Core using the BashOperator." />
+</head>
 
 [dbt](https://getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation. As ephemeral compute becomes more readily available in data warehouses thanks to tools like [Snowflake](https://snowflake.com/), dbt has become a key component of the modern data engineering workflow. Now, data engineers can use dbt to write, organize, and run in-warehouse transformations of raw data.
 
@@ -53,7 +56,7 @@ In the DAG below, you'll review a simple implementation of the dbt Cloud provide
 from pendulum import datetime
 
 from airflow.decorators import dag
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import ShortCircuitOperator
 from airflow.providers.dbt.cloud.hooks.dbt import DbtCloudHook, DbtCloudJobRunStatus
 from airflow.providers.dbt.cloud.operators.dbt import DbtCloudRunJobOperator
@@ -80,7 +83,7 @@ def _check_job_not_running(job_id):
     doc_md=__doc__,
 )
 def check_before_running_dbt_cloud_job():
-    begin, end = [DummyOperator(task_id=id) for id in ["begin", "end"]]
+    begin, end = [EmptyOperator(task_id=id) for id in ["begin", "end"]]
 
     check_job = ShortCircuitOperator(
         task_id="check_job_is_not_running",
@@ -259,7 +262,7 @@ For the team at Updater, splitting the dbt models into tasks was only the first 
 
 Running our dbt models on a single DAG has some limitations. Specifically, this implementation cannot handle running different groups of dbt models on different schedules.
 
-To add this functionality, you can take a group of models defined by some selector, such as `dbt run --models tag:hourly`, and deploy that set of models as their own Airflow DAG with its own defined schedule. WYou can then use your `manifest.json` file to set dependencies between these groups of models and build out a robust CI process. To do this, you can:
+To add this functionality, you can take a group of models defined by some selector, such as `dbt run --models tag:hourly`, and deploy that set of models as their own Airflow DAG with its own defined schedule. You can then use your `manifest.json` file to set dependencies between these groups of models and build out a robust CI process. To do this, you can:
 
 1. Use the `selectors.yml` file ([introduced in dbt 0.18](https://docs.getdbt.com/reference/node-selection/yaml-selectors/)) to define a set of model selectors for each Airflow DAG schedule you want to create. You can then use dbt's [tagging feature](https://docs.getdbt.com/reference/resource-configs/tags) to tag every model with a desired schedule interval.
 
@@ -424,7 +427,7 @@ With that said, this implementation still has some limitations. For a more in-de
 
 ## Bonus 2: DbtDagParser utility
 
-The sample code you provided in the previous section demonstrates how to loop through the `manifest.json` file of your DAG to parse out individual models and map them to Airflow tasks. To simplify the DAG code when using this pattern, you can use a convenient utility method that takes care of the parsing. The `DbtDagParser` utility, developed and explained by Sam Bail, works as follows:
+The sample code provided in the previous section demonstrates how to loop through the `manifest.json` file of your DAG to parse out individual models and map them to Airflow tasks. To simplify the DAG code when using this pattern, you can use a convenient utility method that takes care of the parsing. The `DbtDagParser` utility, developed and explained by Sam Bail, works as follows:
 
 - The parser takes the dbt project path containing the `dbt_project.yml` file, as well as the path to the `profiles.yml` file, as inputs. Note that this setup assumes that you have a single repo that contains both your dbt project and Airflow code.
 - By providing a "dbt_tag" parameter, you can select a subset of models to run. This means you can specify multiple DAGs for different subsets of the dbt models, for example to run them on different schedules, as described in [Part 2](https://www.astronomer.io/blog/airflow-dbt-2) of our blog series.
@@ -435,13 +438,13 @@ When used as shown in the sample code below, the utility provides a shortcut to 
 ```python
 with dag:
 
-    start_dummy = DummyOperator(task_id='start')
+    start_empty = EmptyOperator(task_id='start')
     
     dbt_seed = BashOperator(
         task_id='dbt_seed',
         bash_command=f'dbt {DBT_GLOBAL_CLI_FLAGS} seed --profiles-dir {DBT_PROJECT_DIR} --project-dir {DBT_PROJECT_DIR}'
     )
-    end_dummy = DummyOperator(task_id='end')
+    end_empty = EmptyOperator(task_id='end')
 
     dag_parser = DbtDagParser(dag=dag,
                               dbt_global_cli_flags=DBT_GLOBAL_CLI_FLAGS,
@@ -452,7 +455,7 @@ with dag:
     dbt_run_group = dag_parser.get_dbt_run_group()
     dbt_test_group = dag_parser.get_dbt_test_group()
 
-    start_dummy >> dbt_seed >> dbt_run_group >> dbt_test_group >> end_dummy
+    start_empty >> dbt_seed >> dbt_run_group >> dbt_test_group >> end_empty
 ```
 
 Using the jaffleshop demo dbt project, the parser creates the following DAG including two task groups for the `dbt_run` and `dbt_test` tasks:

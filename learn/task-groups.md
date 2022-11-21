@@ -1,9 +1,13 @@
 ---
 title: "Airflow task groups"
 sidebar_label: "Task groups"
-description: "Use task groups to build modular Airflow workflows."
 id: task-groups
 ---
+
+<head>
+  <meta name="description" content="Follow Astronomer’s step-by-step guide to use task groups for organizing tasks within the graph view of the Airflow user interface." />
+  <meta name="og:description" content="Follow Astronomer’s step-by-step guide to to use task groups for organizing tasks within the graph view of the Airflow user interface." />
+</head>
 
 Use [task groups](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#taskgroups) to organize tasks in the Airflow UI DAG graph view.
 
@@ -28,17 +32,17 @@ For your first example, you'll instantiate a Task Group using a `with` statement
 You can use dependency operators (`<<` and `>>`) in task groups in the same way that you can with individual tasks. Dependencies applied to a Task Group are applied across its tasks. In the following code, you'll add additional dependencies to `t0` and `t3` to the Task Group, which automatically applies the same dependencies across `t1` and `t2`:  
 
 ```python
-t0 = DummyOperator(task_id='start')
+t0 = EmptyOperator(task_id='start')
 
 # Start Task Group definition
 with TaskGroup(group_id='group1') as tg1:
-    t1 = DummyOperator(task_id='task1')
-    t2 = DummyOperator(task_id='task2')
+    t1 = EmptyOperator(task_id='task1')
+    t2 = EmptyOperator(task_id='task2')
 
     t1 >> t2
 # End Task Group definition
     
-t3 = DummyOperator(task_id='end')
+t3 = EmptyOperator(task_id='end')
 
 # Set Task Group's (tg1) dependencies
 t0 >> tg1 >> t3
@@ -142,8 +146,8 @@ In the following code, iteration is used to create multiple task groups. While t
 ```python
 for g_id in range(1,3):
     with TaskGroup(group_id=f'group{g_id}') as tg1:
-        t1 = DummyOperator(task_id='task1')
-        t2 = DummyOperator(task_id='task2')
+        t1 = EmptyOperator(task_id='task1')
+        t2 = EmptyOperator(task_id='task2')
 
         t1 >> t2
 ```
@@ -163,13 +167,13 @@ groups = []
 for g_id in range(1,4):
     tg_id = f'group{g_id}'
     with TaskGroup(group_id=tg_id) as tg1:
-        t1 = DummyOperator(task_id='task1')
-        t2 = DummyOperator(task_id='task2')
+        t1 = EmptyOperator(task_id='task1')
+        t2 = EmptyOperator(task_id='task2')
 
         t1 >> t2
 
         if tg_id == 'group1':
-            t3 = DummyOperator(task_id='task3')
+            t3 = EmptyOperator(task_id='task3')
             t1 >> t3
                 
         groups.append(tg1)
@@ -195,14 +199,14 @@ In the following code, your top-level task groups represent your new and updated
 groups = []
 for g_id in range(1,3):
     with TaskGroup(group_id=f'group{g_id}') as tg1:
-        t1 = DummyOperator(task_id='task1')
-        t2 = DummyOperator(task_id='task2')
+        t1 = EmptyOperator(task_id='task1')
+        t2 = EmptyOperator(task_id='task2')
 
         sub_groups = []
         for s_id in range(1,3):
             with TaskGroup(group_id=f'sub_group{s_id}') as tg2:
-                st1 = DummyOperator(task_id='task1')
-                st2 = DummyOperator(task_id='task2')
+                st1 = EmptyOperator(task_id='task1')
+                st2 = EmptyOperator(task_id='task2')
 
                 st1 >> st2
                 sub_groups.append(tg2)

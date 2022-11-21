@@ -22,14 +22,15 @@ module.exports = {
             'intro-to-airflow',
             'dags',
             'what-is-an-operator',
+            'airflow-ui',
+            'scheduling-in-airflow',
             'what-is-a-sensor',
             'connections',
             'what-is-a-hook',
-            'airflow-decorators',
             'bashoperator',
             'airflow-sql',
-            'airflow-ui',
-            'scheduling-in-airflow',
+            'managing-dependencies',
+            'managing-airflow-code',
           ],
         },
         {
@@ -47,14 +48,13 @@ module.exports = {
             'airflow-importing-custom-hooks-operators',
             'astro-python-sdk-etl',
             'debugging-dags',
-            'subdags',
             'task-groups',
             'rerunning-dags',
-            'managing-dependencies',
-            'managing-airflow-code',
             'templating',
             'cross-dag-dependencies',
             'error-notifications-in-airflow',
+            'subdags',
+            'airflow-decorators',
           ],
         },
         {
@@ -67,7 +67,6 @@ module.exports = {
           },
           items: [
             'airflow-components',
-            'deferrable-operators',
             'airflow-database',
             'airflow-scaling-workers',
             'airflow-executors-explained',
@@ -93,6 +92,7 @@ module.exports = {
             'dynamic-tasks',
             'airflow-datasets',
             'using-airflow-plugins',
+            'deferrable-operators',
           ],
         },
       ],
@@ -108,7 +108,7 @@ module.exports = {
       items: [
         {
           type: 'category',
-          label: 'Get started with Apache Airflow',
+          label: 'Get started with Airflow',
           link: {
                 type: 'doc',
                 id: 'get-started-with-airflow',
@@ -119,6 +119,8 @@ module.exports = {
           ],
         },
         'astro-python-sdk',
+        'cloud-ide-tutorial',
+        'custom-airflow-ui-docs-tutorial'
         'operator-extra-link-tutorial',
       ],
     },
@@ -133,6 +135,7 @@ module.exports = {
       items: [
         'airflow-azure-data-factory-integration',
         'airflow-azure-data-explorer',
+        'airflow-azure-container-instances',
         'airflow-openlineage',
         'airflow-dbt',
         'airflow-databricks',

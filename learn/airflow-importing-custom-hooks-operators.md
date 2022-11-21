@@ -1,6 +1,6 @@
 ---
-title: "Import custom hooks and operators"
-sidebar_label: "Import custom hooks and operators"
+title: "Custom hooks and operators"
+sidebar_label: "Custom hooks and operators"
 description: "How to correctly import custom hooks and operators."
 id: airflow-importing-custom-hooks-operators
 ---
@@ -58,17 +58,17 @@ By default, Airflow adds the `dags/` and `plugins/` directories in a project to 
 ```bash
 .
 ├── dags/                    
-│   ├── example-dag.py
+│   ├── example-dag.py
 ├── Dockerfile                  
 ├── include/                 
-│   └── sql/
-│       └── transforms.sql
+│   └── sql/
+│       └── transforms.sql
 ├── packages.txt     
 ├── plugins/             
-│   └── operators/
-│       └── my_operator.py
-│   └── sensors/
-│       └── my_sensor.py
+│   └── operators/
+│       └── my_operator.py
+│   └── sensors/
+│       └── my_sensor.py
 └── requirements.txt    
 ```
 

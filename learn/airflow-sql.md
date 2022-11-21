@@ -1,17 +1,22 @@
 ---
 title: "Using Airflow to Execute SQL"
-description: "Execute queries, parameterize queries, and embed SQL-driven ETL in Apache Airflow DAGs."
 id: airflow-sql
 sidebar_label: "Run SQL"
 ---
 
+<head>
+  <meta name="description" content="Learn the best practices for executing SQL from your DAG. Get to know Airflow’s SQL-related operators and see how to use Airflow for common SQL use cases." />
+  <meta name="og:description" content="Learn the best practices for executing SQL from your DAG. Get to know Airflow’s SQL-related operators and see how to use Airflow for common SQL use cases." />
+</head>
+
+
 Executing SQL queries is one of the most common use cases for data pipelines. Whether you're extracting and loading data, calling a stored procedure, or executing a complex query for a report, Airflow has you covered. Using Airflow, you can orchestrate all of your SQL tasks elegantly with just a few lines of boilerplate code.
 
-In this tutorial you'll learn about the best practices for executing SQL from your DAG, review the  most commonly used Airflow SQL-related operators, and then use sample code to implement a few common SQL use cases.
+In this guide you'll learn about the best practices for executing SQL from your DAG, review the  most commonly used Airflow SQL-related operators, and then use sample code to implement a few common SQL use cases.
 
 :::info
 
-All code used in this tutorial is located in the [Astronomer GitHub](https://github.com/astronomer/airflow-sql).
+All code used in this guide is located in the [Astronomer GitHub](https://github.com/astronomer/airflow-sql-tutorial).
 
 :::
 
@@ -56,7 +61,7 @@ Remember that Airflow is primarily an orchestrator, not a transformation framewo
 
 ## SQL operators
 
-To make working with SQL easier, Airflow includes many built in operators. This tutorial discusses some of the most commonly used operators and shouldn't be considered a definitive resource. For more information about the available Airflow operators, see [airflow.operators](https://airflow.apache.org/docs/stable/_api/airflow/operators/index.html#).
+To make working with SQL easier, Airflow includes many built in operators. This guide discusses some of the most commonly used operators and shouldn't be considered a definitive resource. For more information about the available Airflow operators, see [airflow.operators](https://airflow.apache.org/docs/stable/_api/airflow/operators/index.html#).
 
 :::info
 
@@ -87,7 +92,7 @@ Transfer operators move data from a source to a destination. For SQL-related tas
 
 ## Examples
 
-Now that you've learned about the most commonly used Airflow SQL operators, you'll use the operators in some SQL use cases. For this tutorial you'll use [Snowflake](https://www.snowflake.com/), but the concepts shown can be adapted for other databases. Some of the environment setup for each example makes use of the [Astro CLI](https://docs.astronomer.io/astro/cli/overview) and Astro project structure, but you can also adapt this setup for use with Apache Airflow.
+Now that you've learned about the most commonly used Airflow SQL operators, you'll use the operators in some SQL use cases. For this guide you'll use [Snowflake](https://www.snowflake.com/), but the concepts shown can be adapted for other databases. Some of the environment setup for each example makes use of the [Astro CLI](https://docs.astronomer.io/astro/cli/overview) and Astro project structure, but you can also adapt this setup for use with Apache Airflow.
 
 ### Example 1: Execute a query
 
@@ -237,7 +242,7 @@ First, create a DAG that pulls COVID data from an [API endpoint](https://covidtr
 
 ```python
 from airflow import DAG
-from airflow.operators.dummy_operator import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python_operator import PythonOperator
 from plugins.operators.s3_to_snowflake_operator import S3ToSnowflakeTransferOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
@@ -282,7 +287,7 @@ with DAG('covid_data_s3_to_snowflake',
          catchup=False
          ) as dag:
 
-    t0 = DummyOperator(task_id='start')   
+    t0 = EmptyOperator(task_id='start')   
 
     for endpoint in endpoints:
         generate_files = PythonOperator(
