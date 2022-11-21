@@ -173,10 +173,10 @@ For more information about this command, see the [CLI command reference](cli/ast
 
 :::info
 
-If you're using an Apple M1 computer to deploy an Astro project with a custom image name, you must add `--platform=linux/amd64` to your command. For example:
+The Astro data plane is compatible only with AMD64-based Docker images and does not accept ARM64-based images. If you're using an Apple M1 computer to create a prebuilt Docker image, you must specify `--platform=linux/amd64`. For example:
 
 ```sh
-astro deploy --image-name <custom-image> --platform=linux/amd64
+docker build --platform=linux/amd64
 ```
 
 :::
