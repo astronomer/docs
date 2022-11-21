@@ -38,6 +38,7 @@ Astro only supports Service Provider (SP)-initiated SSO. Users are required to l
     values={[
         {label: 'Okta', value: 'Okta'},
         {label: 'Azure AD', value: 'Azure AD'},
+        {label: 'Ping Identity', value: 'Ping Identity'},
     ]}>
 <TabItem value="Okta">
 
@@ -163,6 +164,80 @@ From here, Astronomer will complete the integration and add Azure as your organi
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
 
 When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
+
+</TabItem>
+
+<TabItem value="Ping Identity">
+
+This section provides setup steps for setting up Ping Identity as your IdP on Astro. After completing this setup, your organization's users can use Ping Identity to log in to Astro.
+
+#### Prerequisites
+
+To integrate Ping Identity as your IdP for Astro, you must have a [Ping Identity account](https://www.pingidentity.com/) with administrative access.
+
+#### Step 1: Contact Astronomer support
+
+To set up Ping Identity as your IdP, submit a request to [Astronomer support](https://cloud.astronomer.io/support). After receiving your request, Astronomer support will provide you with the following:
+
+- A Single Sign-On (SSO) URL
+- An Audience URI
+
+Save these values for Step 2.
+
+#### Step 2: Configure Ping Identity
+
+1. In the PingIdentity Administrator Console, click **Connections** in the left pane, and then click the **+** icon next to **Applications**.
+
+2. In the **Application Name** field, enter `Astronomer`. Optionally, add a description and an icon.
+
+3. Click **SAML Application**, and then click **Configure**.
+
+4. Click **Manually Enter** and then complete the following fields:
+
+    - **ACS URLs**: `<your-sso-url>`
+    - **Entity ID**: `<your-audience-uri-lvgzh0q4v>`
+
+5. Click **Save**.
+
+6. Click **Edit** on the **Overview** page, and then enter `https://auth.astronomer.io/login/callback?connection` in the **Home page URL** field. 
+
+7. Click **Save**.
+
+8. Click the **Configuration** tab, and then click **Edit**.
+
+9. Select **Sign Assertion & Response** and confirm `RSA_SHA256` is selected in the **Signing Algorithm** list.
+
+10. Click **Save**.
+
+11. On the **Configuration** page, click **Download Signing Certificate** and select `X509 PEM (.crt)`.
+
+12. Copy and save the URL in the **Single Signon Service** field.
+
+13. Click the **Attribute Mappings** tab, click **Edit**, and add the following attributes, using the same capitalization shown in both columns:
+
+    | Astronomer        | PingOne           |
+    | ------------      | ----------------| 
+    | saml_subject      | User ID         |
+    | email             | Email Address   |
+    | firstname         | Given Name      |
+    | lastName          | Family Name     |
+    | name              | Formatted       |
+
+14. Click **Save**.
+
+15. Click the toggle in the top right to enable the application.
+
+#### Step 3: Provide Astronomer support with your integration information
+
+Send the X.509 certificate and the single sign on service URL you copied in step 2 to [Astronomer support](https://cloud.astronomer.io/support).
+
+From here, Astronomer support will finalize your organization's integration with Okta.
+
+#### Step 4: Assign users to your Ping Identity application
+
+Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
+
+When a user assigned to the application accesses Astro, they are automatically signed in to Ping Identity after entering their email in the Cloud UI.
 
 </TabItem>
 
