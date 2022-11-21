@@ -133,7 +133,7 @@ As mentioned in Step 1, there are multiple ways of connecting Airflow to AWS res
 
 ## Step 6: Create your DAG
 
-In your Astro project `dags/` folder, create a new file called `sagemaker-pipeline.py`. Paste the following code into the file:
+In your Astro project `dags/` folder, create a new file called `sagemaker_pipeline.py`. Paste the following code into the file:
 
 ```python
 from airflow import DAG
