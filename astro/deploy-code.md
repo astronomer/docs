@@ -179,6 +179,12 @@ The Astro data plane is compatible only with AMD64-based Docker images and does 
 docker build --platform=linux/amd64
 ```
 
+If you build the Docker image correctly and run `astro deploy` from an Apple M1 computer, you might see a warning in your terminal. You can ignore the warning.
+
+    ```
+    WARNING: The requested image's platform (linux/amd64) does not match the detected host platform 
+    (linux/arm64/v8) and no specific platform was requested
+    ```
 :::
 
 ## Related documentation
