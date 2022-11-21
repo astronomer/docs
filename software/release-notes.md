@@ -7,7 +7,15 @@ description: Astronomer Software release notes.
 
 <!--- Version-specific -->
 
-0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md).
+0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). 
+
+For more Astronomer Software release notes, see:
+
+- [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes)
+- [Astro Runtime release notes](runtime-release-notes.md)
+- [Astronomer Software 0.29 release notes](https://docs.astronomer.io/software/0.29/release-notes)
+- [Astronomer Software 0.28 release notes](https://docs.astronomer.io/software/0.28/release-notes)
+- [Astronomer Software 0.25 release notes](https://docs.astronomer.io/software/0.25/release-notes)
 
 ## 0.30.4 
 

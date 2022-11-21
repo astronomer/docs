@@ -76,8 +76,8 @@ Click or hover over a node to view the following information about the dataset o
 
 - **Namespace**: The namespace of the Deployment containing the run.
 - **Name**: The DAG ID and task ID of the run, formatted as `<dag-id>.<task-id>`.
-- **Run information (run only)**: Metadata and status information about the run.
-- **Great Expectations (dataset only)**: The status of a dataset's Great Expectations data quality checks.
+- **Run information (Run only)**: Metadata and status information about the run.
+- **Quality Checks (Dataset only)**: The status of a dataset's data quality checks.
 
 Click a node to populate the information pane with detailed information about the run or dataset. For more information about using this view, see [View metrics for a specific run or dataset](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
 
@@ -95,11 +95,9 @@ On the **Lineage** page, the following tabs appear below the lineage graph:
 
 When you select a dataset from the lineage graph, the **Quality** tab appears in the information pane. By default, this tab shows a list of columns that correspond to your dataset.
 
-If you have a [Great Expectations](https://docs.greatexpectations.io/docs/) integration, this tab also contains charts that show:
+If you're using a [Great Expectations](https://docs.greatexpectations.io/docs/) integration or the `SQLTableCheckOperator` or `SQLColumnCheckOpertor` operators, this page contains charts that show successful and failed data quality checks.
 
-- The number of rows in your dataset over time.
-- The amount of megabytes consumed by your dataset over time.
-- Successes and failures of data quality checks.
+Great Expectations and dbt show the number of rows in your dataset and the megabytes consumed by your dataset over time. The dbt test command doesn't currently display quality check results.
 
 ![Quality tab example](/img/docs/lineage-quality-tab.png)
 

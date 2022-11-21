@@ -126,7 +126,7 @@ Once you've activated your data plane, provide Astronomer with:
 
 If you don't specify your organization's preferred configurations, Astronomer creates a cluster in `us-central1` with a node pool of `e2-standard-4` nodes. For more information, see [GCP resource reference](resource-reference-gcp.md).
 
-#### VPC peering with Astronomer
+#### Provide VPC peering information (Optional)
 
 Astro supports [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect), which allows private consumption of services across VPC networks that belong to different projects or organizations. If you have created custom services that are not published using Private Services Connect, then you might want to peer with Astronomer. To set up peering, provide the following information to Astronomer:
 
@@ -194,7 +194,7 @@ Wait for confirmation that the installation is successful before you access Astr
 
 </Tabs>
 
-## Create a Deployment
+## Confirm the install
 
 When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). When you create your Deployment, the Astro cluster created by Astronomer support appears as an option in the **Cluster** list as shown in the following image.
 
