@@ -11,9 +11,23 @@ id: test-and-troubleshoot-locally
 
 As you develop data pipelines on Astro, Astronomer recommends running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
-## Run a project locally
+## Setup your Local Testing Environment
 
-To test your code, the first step is always to start a local Airflow environment. To run your project in a local Airflow environment, see [Build and run a project](develop-project.md#build-and-run-a-project-locally).
+To test your code, the first step is to setup your local testing environment by [creating an Astro project](create-project.md).
+
+## Run and Debug DAGs with Astro Run
+
+You can compile an run a DAG with only the command line using the `astro run` command. This command will run your DAGs within a Docker container bulit from your local `Dockerfile` containing your DAGs, DAG utility files, python requirments, and env vars from your `.env` file. This is helpful for users who do not wish to use the Airflow Webserver while developing a DAG.
+
+To quickly run a DAG located within your local `/dags` directory run:
+
+```sh
+astro run <dag-id>
+```
+
+This command will run all the tasks in your DAG sequentally. Any errors produced by your code while parsing or running your DAG will show up in the command line. You can provide variables and connections to your DAGs using the [Airflow Settings file](develop-project.md#configure-airflow_settingsyaml-local-development-only). The command will use `airflow_settings.yaml` by default but you can specify any yaml file you'd like with the `--airflow-settings` flag.
+
+If you'd like to utilize variables and connections stored in your local postgres instance run `astro run` while a local instance of Airflow is running. To run your project in a local Airflow environment, see [Build and run a project](develop-project.md#build-and-run-a-project-locally).
 
 ## Test DAGs with the Astro CLI
 

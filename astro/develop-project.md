@@ -44,6 +44,8 @@ This command builds your project and spins up 4 Docker containers on your machin
 
 Once the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
 
+You do not need to use the Airflow UI to run and debug your DAGs. You can use the `astro run` command to run and debug the DAGs within your Ariflow project with just the command line. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run) for more information.
+
 :::info
 
 The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astro dev start` command, for example, is functionally equivalent to `docker compose start`.
