@@ -1026,8 +1026,8 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
       services:
        - docker:dind
       variables:
-         ASTRONOMER_KEY_ID: ${ASTRONOMER_KEY_ID}
-         ASTRONOMER_KEY_SECRET: ${ASTRONOMER_KEY_SECRET}
+         ASTRONOMER_KEY_ID: ${siteVariables.keyid}
+         ASTRONOMER_KEY_SECRET: ${siteVariables.keyid}
       before_script:
        - apk add --update curl && rm -rf /var/cache/apk/*
        - apk add bash
