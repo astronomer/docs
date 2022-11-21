@@ -502,13 +502,13 @@ This setup assumes the following prerequisites:
             uses: actions/checkout@v3
           # If only DAGs changed do a DAG Deploy
           - name: DAG Deploy to Astro
-            if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+            if: needs.deployment-type.outputs.DAGS_ONLY == 1
             run: |
               curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
               astro deploy --dags
           # If any other files changed do a regular Deploy
           - name: Image and DAG Deploy to Astro
-            if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+            if: needs.deployment-type.outputs.DAGS_ONLY == 0
             run: |
               curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
               astro deploy
