@@ -184,13 +184,13 @@ To set up OneLogin as your IdP, submit a request to [Astronomer support](https:/
 
 Save these values for Step 2.
 
-#### Step 2: Create a OneLOgin SAML Custom Connector
+#### Step 2: Create a OneLOgin application
 
 1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Add App**.  
 
-2. In the **Display Name** field of the **Add SAML Custom Connector (Advanced)** page, enter **Astronomer**.
+2. In the **Search** field, enter **SAML Custom** and then select **SAML Custom Connector (Advanced)**.
 
-3. Click **Save**.
+3. In the **Display Name** field, enter **Astronomer** and then click **Save**.
 
 4. Click **Configuration** in the left menu and complete the following fields:
 
