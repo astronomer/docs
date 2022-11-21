@@ -110,7 +110,7 @@ This feature in [Public Preview](feature-previews.md).
 
 :::
 
-To enable the ability to push only DAGs to Astro for a faster development experience, you must enable the feature for each Deployment. You only need to enable the feature once. When it is enabled, you must still run `astro deploy` when you make a change to any file in your Astro project that is not in the `dags` directory.
+To push only DAGs to Astro for a faster development experience, you must enable the feature for each Deployment. You only need to enable the feature once. When it is enabled, you must still run `astro deploy` when you make a change to any file in your Astro project that is not in the `dags` directory.
 
 Enabling DAG-only deploys on Astro has a few benefits:
 
