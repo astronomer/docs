@@ -194,7 +194,7 @@ Linking to relevant docs from an operator is useful, but often you want to add a
             return response.text
     ```
 
-The code above defines a custom version of the `SimpleHttpOperator`, called the `CatHttpOperator`. The change consists of adding one line before the `return` statement of the `.execute()` method which is `context["ti"].xcom_push(key="status_code", value=response.status_code)`. This line pushes the `status_code` attribute of the `response` object to XComs and associates it with the key `status_code`. The rest of the `.execute()` method is identical to the parent operator (compare the source code of the [SimpleHttpOperator](https://github.com/apache/airflow/blob/main/airflow/providers/http/operators/http.py)).
+    The code above defines a custom version of the `SimpleHttpOperator`, called the `CatHttpOperator`. The change consists of adding one line before the `return` statement of the `.execute()` method which is `context["ti"].xcom_push(key="status_code", value=response.status_code)`. This line pushes the `status_code` attribute of the `response` object to XComs and associates it with the key `status_code`. The rest of the `.execute()` method is identical to the parent operator (compare the source code of the [SimpleHttpOperator](https://github.com/apache/airflow/blob/main/airflow/providers/http/operators/http.py)).
 
 3. Add an empty Python file with the name `__init__.py` to your `include` folder to allow module imports from the folder.
 
@@ -297,7 +297,7 @@ To add the dynamic operator extra link via a plugin, follow these steps:
 
 <TabItem value="provider">
 
-To add the dynamic operator extra link directly to an operator in a provider package, follow these steps:
+When creating a custom provider (learn more in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider)) you can add the dynamic operator extra link directly in the operator code by following these steps:
 
 1. Add `cat_http.py` to your provider package. 
 
@@ -333,12 +333,6 @@ To add the dynamic operator extra link directly to an operator in a provider pac
     ```
 
 5. Make sure all provider package files exist in the interpreter's `site-packages` folder.
-
-:::info
-
-You can learn more about how to create your own Airflow provider package in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider).
-
-:::
 
 </TabItem>
 </Tabs>
