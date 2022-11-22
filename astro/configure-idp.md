@@ -216,7 +216,9 @@ Save these values for Step 2.
 
 8. Click **SSO** in the left menu, click **View Details** below the **X.509 Certificate** field and then click **Download**. 
 
-9. Copy and save the value displayed in the **SAML 2.0 Endpoint (HTTP)** field.
+9. Select **SHA-256** in the **SAML Signature Algorithm** list.
+
+10. Copy and save the value displayed in the **SAML 2.0 Endpoint (HTTP)** field.
 
 #### Step 3: Provide Astronomer support with your integration information
 
