@@ -13,8 +13,9 @@ Identity Providers (IdPs) are services that manage user accounts. As organizatio
 
 Astro supports integrations with the following IdPs:
 
-- [Okta](https://www.okta.com/)
 - [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
+- [Okta](https://www.okta.com/)
+- [OneLogin](https://www.onelogin.com/)
 
 This guide provides setup steps for integrating both of these identity providers on Astro. Once you complete the integration for your organization:
 
@@ -184,13 +185,13 @@ To set up OneLogin as your IdP, submit a request to [Astronomer support](https:/
 
 Save these values for Step 2.
 
-#### Step 2: Create the OneLogin Astronomer application
+#### Step 2: Create the OneLogin Astro application
 
 1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Add App**.  
 
-2. In the **Search** field, enter **SAML Custom** and then select **SAML Custom Connector (Advanced)**.
+2. In the **Search** field, enter **SAML Custom**, and then select **SAML Custom Connector (Advanced)**.
 
-3. In the **Display Name** field, enter **Astronomer** and then click **Save**.
+3. In the **Display Name** field, enter **Astro** and then click **Save**.
 
 4. Click **Configuration** in the left menu and complete the following fields:
 
@@ -223,9 +224,9 @@ Send the X.509 certificate and SAML 2.0 endpoint (HTTP) information you copied i
 
 Astronomer support will finalize your organization's integration with OneLogin.
 
-#### Step 4: Assign users to your OneLogin Astronomer application
+#### Step 4: Assign users to your OneLogin Astro application
 
-1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Astronomer**.
+1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Astro**.
 
 2. Click **Users** in the left menu.
 
