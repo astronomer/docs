@@ -152,39 +152,34 @@ astro deploy --dags
 
 ## Deploy a prebuilt Docker image
 
-By default, running `astro deploy` with the Astro CLI builds your Astro project into a Docker image and deploys it to Astro. To skip the build step and deploy a prebuilt Docker image, run `astro deploy --image-name <image-name>` or specify the command in a CI/CD pipeline.
+By default, running `astro deploy` with the Astro CLI builds your Astro project into a Docker image and deploys it to Astro. In some cases, you might want to skip the build step and deploy a prebuilt Docker image instead.
 
-You can deploy a prebuilt Docker image to:
+Deploying a prebuilt Docker image allows you to:
 
-- Build a Docker image once and promote the Docker image across Deployments instead of rebuilding it each time.
+- Test a single Docker image across Deployments instead of rebuilding it each time.
 - Reduce the time it takes to deploy. If your Astro project has a number of packages that take a long time to install, it can be more efficient to build it separately.
 - Specify additional mounts and arguments in your project, which is required for setups such as [installing Python packages from private sources](develop-project.md#install-python-packages-from-private-sources).
 
-To use this command, the image you deploy must be based on Astro Runtime and be available in a local Docker registry. 
+To deploy your Astro project as a prebuilt Docker image:
 
-You can use the `--image-name` flag with the following local development commands to test your image before deploying:
-
-- `astro dev start`
-- `astro dev restart`
-- `astro dev parse`
-- `astro dev pytest`
+1. Run `docker build` from an Astro project directory or specify the command in a CI/CD pipeline. This Docker image must be based on Astro Runtime and be available in a local Docker registry. If you run this command on an Apple M1 computer or on a computer with an ARM64 processor, you must specify `--platform=linux/amd64` or else the deploy will fail. The Astro data plane requires an AMD64-based image and does not support ARM64 architecture.
+2. Optional. Test your Docker image in a local Airflow environment by adding the `--image-name <image-name>` flag to any of the following commands:
+    - `astro dev start`
+    - `astro dev restart`
+    - `astro dev parse`
+    - `astro dev pytest`
+3. Run `astro deploy --image-name <image-name>` or specify the command in a CI/CD pipeline.
 
 For more information about this command, see the [CLI command reference](cli/astro-deploy.md).
 
 :::info
 
-The Astro data plane is compatible only with AMD64-based Docker images and does not accept ARM64-based images. If you're using an Apple M1 computer to create a prebuilt Docker image, you must specify `--platform=linux/amd64`. For example:
+If you build an AMD64-based image and run `astro deploy` from an Apple M1 computer, you might see a warning in your terminal. You can ignore the warning.
 
-```sh
-docker build --platform=linux/amd64
 ```
-
-If you build the Docker image correctly and run `astro deploy` from an Apple M1 computer, you might see a warning in your terminal. You can ignore the warning.
-
-    ```
-    WARNING: The requested image's platform (linux/amd64) does not match the detected host platform 
-    (linux/arm64/v8) and no specific platform was requested
-    ```
+WARNING: The requested image's platform (linux/amd64) does not match the detected host platform 
+(linux/arm64/v8) and no specific platform was requested
+```
 :::
 
 ## Related documentation
