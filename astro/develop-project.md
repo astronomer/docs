@@ -1,162 +1,43 @@
 ---
-sidebar_label: 'Develop a project'
-title: 'Develop your Astro project'
+sidebar_label: ‘Develop a project’
+title: ‘Develop your Astro project’
 id: develop-project
 ---
 
 <head>
-  <meta name="description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
-  <meta name="og:description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
+  <meta name=“description” content=“Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization.” />
+  <meta name=“og:description” content=“Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization.” />
 </head>
 
-import {siteVariables} from '@site/src/versions';
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import {siteVariables} from ‘@site/src/versions’;
+import Tabs from ‘@theme/Tabs’;
+import TabItem from ‘@theme/TabItem’;
 
-This is where you'll find information about:
+An Astro project contains all of the files necessary to test and run DAGs in a local Airflow environment and on Astro. This guide contains information about how to organize and add files to your Astro project. It includes how to:
 
-- Building and running a project
-- Deploying changes to a project
-- Adding dependencies to a project
-- Running on-build commands
-- Adding connections, pools, and environment variables locally
+- Add DAGs
+- Apply changes
+- Add Python and OS-level packages
+- Add connections, pools, and environment variables locally
+- Run on-build commands
+
+For information about testing DAGs once you’ve built your Astro project, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 
 ## Prerequisites
 
-- An existing [Astro project](create-project.md).
+- An [Astro project](create-project.md).
 - [The Astro CLI](cli/overview.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
-## Build and run a project locally
-
-To run your Astro project locally, run the following command:
-
-```sh
-astro dev start
-```
-
-This command builds your project and spins up 4 Docker containers on your machine, each for a different Airflow component:
-
-- **Postgres:** Airflow's metadata database
-- **Webserver:** The Airflow component responsible for rendering the Airflow UI
-- **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
-- **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
-
-Once the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
-
-You don't need to use the Airflow UI to run and debug your DAGs. You can use the `astro run` command to run and debug your DAGs from the command line. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
-
-:::info
-
-The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astro dev start` command, for example, is functionally equivalent to `docker compose start`.
-
-:::
-
-:::tip
-
-If you see `Error: cannot start, project already running` when you run this command, it means your local Airflow environment is already running your project. If there are changes you'd like to apply to your project, see [Restart your local environment](develop-project.md#make-changes-to-your-project).
-
-:::
-
-### Restart your local environment
-
-To restart your local Airflow environment, run the following command:
-
-```sh
-astro dev restart
-```
-
-These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astro dev stop` to stop your Docker containers without restarting or rebuilding your project.
-
-## Make changes to your project
-
-All Astro projects require you to specify a Debian-based Astro Runtime image in a `Dockerfile`. When you run your project locally or on Astro, all of your DAG code, packages, and configurations are built into a Docker image based on Astro Runtime.
-
-Depending on the change you're making to your Astro project, you might have to rebuild your image to run your changes locally.
-
-### DAG code changes
-
-All changes made to files in the following directories will be live in your local Airflow environment as soon as you save them to your code editor:
-
-- `dags`
-- `plugins`
-- `include`
-
-Once you save your changes, refresh the Airflow UI in your browser to see them render.
-
-### Environment changes
-
-All changes made to the following files require rebuilding your image:
-
-- `packages.txt`
-- `Dockerfile`
-- `requirements.txt`
-- `airflow_settings.yaml`
-
-To rebuild your project after making a change to any of these files, you must [restart your local environment](develop-project.md#restart-your-local-environment).
-
-## Add DAG utility files
-
-Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators.
-
-
-:::tip
-
-When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
-
-If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
-
-:::
-
-## Explore Airflow providers and modules
-
-As you customize your Astro project and expand your use case for Airflow, Astronomer recommends reviewing the [Astronomer Registry](https://registry.astronomer.io/), a library of Airflow modules, providers, and DAGs that serve as the building blocks for data pipelines.
-
-The Astronomer Registry includes:
-
-- Example DAGs for many data sources and destinations. For example, you can build out a data quality use case with Snowflake and Great Expectations based on the [Great Expectations Snowflake Example DAG](https://registry.astronomer.io/dags/great-expectations-snowflake).
-- Documentation for Airflow providers, such as [Databricks](https://registry.astronomer.io/providers/databricks), [Snowflake](https://registry.astronomer.io/providers/snowflake), and [Postgres](https://registry.astronomer.io/providers/postgres). This documentation is comprehensive and based on Airflow source code.
-- Documentation for Airflow modules, such as the [PythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonoperator), [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator), and [S3ToRedshiftOperator](https://registry.astronomer.io/providers/amazon/modules/s3toredshiftoperator). These modules include guidance on how to set Airflow connections and their parameters.
-
-As you browse the Astronomer Registry, follow this document for instructions on how to install providers as Python packages and make other changes to your Astro project.
-
-## Add Python and OS-level packages
-
-To build Python and OS-level packages into your Astro project, add them to your `requirements.txt` and `packages.txt` files. Add Python packages to your `requirements.txt` and OS-level packages to your `packages.txt` file.
-
-To pin a version of a package, use the following syntax:
-
-```text
-<package-name>==<version>
-```
-
-To exclusively use Pymongo 3.7.2, for example, add the following line to your `requirements.txt` file:
-
-```text
-pymongo==3.7.2
-```
-
-If you don't pin a package to a version, the latest version of the package that's publicly available is installed by default.
-
-Once you've saved these packages in your project files, [restart your local environment](develop-project.md#restart-your-local-environment).
-
-### Confirm your package was installed
-
-If you added `pymongo` to your `requirements.txt` file, for example, you can confirm that it was properly installed by running:
-
-```sh
-astro dev bash --scheduler "pip freeze | grep pymongo"
-```
-
-This command outputs the version number of the package you specify after `grep`.
-
 ## Add DAGs
 
-DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your project, simply add its `.py` file to this folder.
+In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic Graph (DAGs). A DAG is a collection of tasks and dependencies between tasks that are defined as code. See [Introduction to Airflow DAGs](learn/dags.md).
+
+DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your project, add its `.py` file to this folder. The name of the file is what appears in the Airflow UI as the `dag_id`, or the name of the DAG. You cannot have more than one DAG with the same `dag_id`.
 
 ### Add DAG helper functions
 
-To build additional helper functions for DAGs into your Astro project, Astronomer recommend adding a folder with a set of files that can be used by Airflow DAGs.
+To build additional helper functions for DAGs into your Astro project, Astronomer recommends adding a folder with a set of files that can be used by Airflow DAGs.
 
 1. Add your directory of helper functions to your local project:
 
@@ -186,7 +67,7 @@ To build additional helper functions for DAGs into your Astro project, Astronome
 
    ```sh
 
-    astro dev bash --scheduler "/bin/bash"
+    astro dev bash --scheduler “/bin/bash”
 
    ```
 
@@ -194,28 +75,30 @@ To build additional helper functions for DAGs into your Astro project, Astronome
 
    ```bash
 
-    $ astro dev bash --scheduler "/bin/bash"
+    $ astro dev bash --scheduler “/bin/bash”
     bash-4.4$ ls
     Dockerfile  airflow_settings.yaml  helper_functions  logs  plugins  unittests.cfg
     airflow.cfg dags  include  packages.txt  requirements.txt
 
    ```
 
-## Configure `airflow_settings.yaml` (Local development only)
+## Add Airflow connections, pools, variables
 
-When you first initialize a new Astro project, a file called `airflow_settings.yaml` is automatically generated. With this file, you can configure and programmatically generate Airflow [Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [Pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [Variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) so that you don't have to manually redefine these values in the Airflow UI every time you restart your project.
+Airflow connections are necessary to connect to external tools, such as a database or other third-party service. See [Manage connections in Apache Airflow](learn/connections.md#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
-As a security measure, `airflow_settings.yaml` works only in local environments. Once you deploy your project to a Deployment on Astro, the values in this file are not included. To manage Airflow secrets on Astro, Astronomer recommends [configuring a secrets backend](secrets-backend.md).
+To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you can do any of the following:
 
-:::caution
+- Go to the **Admin** menu of the Airflow UI in a local Airflow environment. Click **Connections**, **Variables**, or **Pools** and add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
+- Use the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To protect sensitive credentials or passwords, Astronomer recommends adding this file to `.gitignore`.
+- Use a secret backend, such as AWS Secrets Manager, and access the secret backend locally. See [Configure an external secrets backend on Astro](secrets-backend.md).
 
-If you are storing your project in a public directory or version control tool, Astronomer recommends adding this file to your `.gitignore` or equivalent secret management service.
+When you add Airflow connections, pools, and variables to the Airflow UI of a local environment or to your `airflow_settings.yaml` file, your values can only be used locally. When you deploy your project to a Deployment on Astro, the values in this file are not included.
 
-:::
+Astronomer recommends using the `airflow_settings.yaml` file so that you don’t have to manually redefine these values in the Airflow UI every time you restart your project. For security conscious organizations, Astronomer recommends [configuring a secrets backend](secrets-backend.md).
 
-### Add Airflow connections, pools, and variables
+### Configure `airflow_settings.yaml` (Local development only)
 
-By default, the `airflow_settings.yaml` file includes the following template:
+The `airflow_settings.yaml` file includes a template with default values for all possible configurations. To add a connection, variable, or pool, replace the default value with your own.
 
 ```yaml
 airflow:
@@ -237,7 +120,7 @@ airflow:
       variable_value: my_value
 ```
 
-This template includes default values for all possible configurations. Make sure to replace these default values with your own and specify those that are required to avoid errors at build time. To add another Connection, Pool, or Variable, append it to this file within its corresponding section. To create another Variable, for example, add it under the existing `variables` section of the same file:
+To add another connection, pool, or variable, append it to this file within its corresponding section. To create another variable, for example, add it under the existing `variables` section of the same file:
 
 ```yaml
 variables:
@@ -255,23 +138,49 @@ astro dev object import
 
 When you access the Airflow UI locally, you should see these values in the **Connections**, **Pools**, and **Variables** tabs.
 
-## Run commands on build
+## Add Python and OS-level packages
 
-To run additional commands as your Astro project is built into a Docker image, add them to your `Dockerfile` as `RUN` commands. These commands run as the last step in the image build process.
+Most DAGs need a Python or OS-level package to run. If you’re using Airflow for data science, for example, you might need to install popular data science libraries such as [pandas](https://pandas.pydata.org/), [NumPy (`numpy`)](https://numpy.org/), or [TensorFlow (`tensorflow`)](https://www.tensorflow.org/). Adding a Python package to your Astro project is equivalent to running `pip install`.
 
-For example, if you want to run `ls` when your image builds, your `Dockerfile` would look like this:
+1. Add the package name to your Astro project. If it’s a Python package, add it to `requirements.txt`. If it’s an OS-level package, add it to `packages.txt`. The latest version of the package that’s publicly available is installed by default. To pin a version of a package, use the following syntax:
+    ```text
+    <package-name>==<version>
+    ```
+2. [Restart your local environment](develop-project.md#restart-your-local-environment).
 
-<pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
-RUN ls
-`}</code></pre>
+To install NumPy version 1.23.0, for example, add the following to your `requirements.txt` file:
 
-This is supported both on Astro and in the context of local development.
+```text
+numpy==1.23.0
+```
+
+### Confirm your package was installed
+
+To confirm that your package was installed, run:
+
+```sh
+astro dev bash --scheduler “pip freeze | grep <package-name>”
+```
+
+This command outputs the version number of the installed package.
+
+## Add DAG utility files
+
+Use the `include` folder to store additional utilities required by your DAGs. For example, templated SQL scripts and custom operators.
+
+:::tip
+
+When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
+
+If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+
+:::
 
 ## Set environment variables locally
 
-For local development, Astronomer recommends setting environment variables in your Astro project's `.env` file. You can then push your environment variables from the `.env` file to a Deployment using the [Astro CLI](cli/astro-deployment-variable-update.md).
+For local development, Astronomer recommends setting environment variables in your Astro project’s `.env` file. You can then push your environment variables from the `.env` file to a Deployment using the [Astro CLI](cli/astro-deployment-variable-update.md).
 
-If your environment variables contain sensitive information or credentials that you don't want exposed in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
+If your environment variables contain sensitive information or credentials that you don’t want exposed in plain-text, you can add your `.env` file to `.gitignore` when you deploy these changes to your version control tool.
 
 1. Open the `.env` file in your Astro project directory.
 2. Add your environment variables to the `.env` file or run `astro deployment variable list --save` to copy environment variables from an existing Deployment to the file.
@@ -284,27 +193,29 @@ If your environment variables contain sensitive information or credentials that 
 
     Environment variables should be in all-caps and not include spaces.
 
-3. Run `astro dev start --env .env` to rebuild your image.
-4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment. To manage environment variables in the Cloud UI, see [Environment Variables](environment-variables.md).
+3. [Restart your local environment](develop-project.md#restart-your-local-environment).
+4. Optional. Run `astro deployment variable create/update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment.
+
+To manage environment variables in the Cloud UI, see [Environment Variables](environment-variables.md).
 
 ### Confirm your environment variable changes
 
-Confirm that your environment variables were applied in a local environment by running the following commands:
+Confirm that your environment variables were applied in a local environment by running:
 
 ```sh
-astro dev bash --scheduler "/bin/bash && env"
+astro dev bash --scheduler “/bin/bash && env”
 ```
 
 These commands output all environment variables that are running locally. This includes both environment variables set in `.env` and environment variables set on Astro Runtime by default.
 
 :::info
 
-For local environments, the Astro CLI generates an `airflow.cfg` file at runtime based on the environment variables you set in your `.env` file. You can't create or modify `airflow.cfg` in an Astro project.
+For local environments, the Astro CLI generates an `airflow.cfg` file at runtime based on the environment variables you set in your `.env` file. You can’t create or modify `airflow.cfg` in an Astro project.
 
 To view your local environment variables in the context of the generated Airflow configuration, run:
 
 ```
-astro dev bash --scheduler "/bin/bash && cat airflow.cfg"
+astro dev bash --scheduler “/bin/bash && cat airflow.cfg”
 ```
 
 These commands output the contents of the generated `airflow.cfg` file, which lists your environment variables as human-readable configurations with inline comments.
@@ -330,6 +241,57 @@ my_project
     └── prod.env
 ```
 
+## Apply changes to your project
+
+The Astro CLI makes it easy to quickly apply and test changes to your Astro project. Depending on the file that you change, you might have to restart your local Aiflow environmentt to apply the change.
+
+### DAG code changes
+
+Changes made to the following directories in your Astro project don’t require rebuilding your project:
+
+- `dags`
+- `plugins`
+- `include`
+
+To apply a change to these files:
+
+1. Save the latest version of the file to your local version control tool, such as VSCode.
+2. Refresh the Airflow UI in your browser.
+
+### Environment changes
+
+All changes made to the following files require rebuilding your Astro project into a Docker image and restarting your Airflow environment.
+
+- `packages.txt`
+- `Dockerfile`
+- `requirements.txt`
+- `airflow_settings.yaml`
+
+1. Save the change to your local version control tool, such as VSCode.
+2. [Restart your local environment](develop-project.md#restart-your-local-environment).
+
+### Restart your local environment
+
+To restart your local Airflow environment, run:
+
+```sh
+astro dev restart
+```
+
+These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astro dev stop` to stop your Docker containers without restarting or rebuilding your project.
+
+## Run commands on build
+
+To run additional commands as your Astro project is built into a Docker image, add them to your `Dockerfile` as `RUN` commands. These commands run as the last step in the image build process.
+
+For example, if you want to run `ls` when your image builds, your `Dockerfile` would look like this:
+
+<pre><code parentName=“pre”>{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
+RUN ls
+`}</code></pre>
+
+This is supported both on Astro and in the context of local development.
+
 ## Install Python packages from private sources
 
 Python packages can be installed from both public and private locations into your image. To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
@@ -343,13 +305,13 @@ Deploying a custom Runtime image with a CI/CD pipeline requires additional confi
 :::
 
 <Tabs
-    defaultValue="github"
-    groupId= "install-python-packages-from-private-sources"
+    defaultValue=“github”
+    groupId= “install-python-packages-from-private-sources”
     values={[
-        {label: 'Private GitHub Repo', value: 'github'},
-        {label: 'Private PyPi Index', value: 'pypi'},
+        {label: ‘Private GitHub Repo’, value: ‘github’},
+        {label: ‘Private PyPi Index’, value: ‘pypi’},
     ]}>
-<TabItem value="github">
+<TabItem value=“github”>
 
 #### Install Python packages from private GitHub repositories
 
@@ -381,7 +343,7 @@ This setup assumes that each custom Python package is hosted within its own priv
 
 #### Step 1: Specify the private repository in your project
 
-To add a Python package from a private repository to your Astro project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as:
+To add a Python package from a private repository to your Astro project, specify the repository’s SSH URL in your project’s `requirements.txt` file. This URL should be formatted as:
 
 ```
 git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git
@@ -416,7 +378,7 @@ This example assumes that the name of each of your Python packages is identical 
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer="Astronomer <humans@astronomer.io>"
+    LABEL maintainer=“Astronomer <humans@astronomer.io>”
     ARG BUILD_NUMBER=-1
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
@@ -437,7 +399,7 @@ This example assumes that the name of each of your Python packages is identical 
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH="/home/astro/.local/bin:$PATH"
+    ENV PATH=“/home/astro/.local/bin:$PATH”
 
     COPY . .
     ```
@@ -481,7 +443,7 @@ This example assumes that the name of each of your Python packages is identical 
 2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<ssh-key>` with your SSH private key file name.
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github=“$HOME/.ssh/<ssh-key>” -t $image_name .
     ```
 
 3. Optional. Test your DAGs locally. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally).
@@ -496,13 +458,13 @@ Your Astro project can now utilize Python packages from your private GitHub repo
 
 </TabItem>
 
-<TabItem value="pypi">
+<TabItem value=“pypi”>
 
 #### Install Python packages from a private PyPI index
 
 Installing Python packages on Astro from a private PyPI index is required for organizations that deploy a [private PyPI server (`private-pypi`)](https://pypi.org/project/private-pypi/) as a secure layer between pip and a Python package storage backend, such as GitHub, AWS, or a local file system or managed service.
 
-To complete this setup, you'll specify your privately hosted Python packages in `requirements.txt`, create a custom Docker image that changes where pip looks for packages, and then build your Astro project with this Docker image.
+To complete this setup, you’ll specify your privately hosted Python packages in `requirements.txt`, create a custom Docker image that changes where pip looks for packages, and then build your Astro project with this Docker image.
 
 #### Prerequisites
 
@@ -511,11 +473,11 @@ To complete this setup, you'll specify your privately hosted Python packages in 
 
 #### Step 1: Add Python packages to your Astro project
 
-To install a Python package from a private PyPI index, add the package name and version to the `requirements.txt` file of your Astro project. If you don't specify a version, the latest version is installed. Use the same syntax that you used when you added public packages from [PyPI](https://pypi.org). Your `requirements.txt` file can contain both publicly accessible and private packages.
+To install a Python package from a private PyPI index, add the package name and version to the `requirements.txt` file of your Astro project. If you don’t specify a version, the latest version is installed. Use the same syntax that you used when you added public packages from [PyPI](https://pypi.org). Your `requirements.txt` file can contain both publicly accessible and private packages.
 
 :::caution
 
-Make sure that the name of any privately hosted Python package doesn't conflict with the name of other Python packages in your Astro project. The order in which pip searches indices might produce unexpected results.
+Make sure that the name of any privately hosted Python package doesn’t conflict with the name of other Python packages in your Astro project. The order in which pip searches indices might produce unexpected results.
 
 :::
 
@@ -538,7 +500,7 @@ Make sure that the name of any privately hosted Python package doesn't conflict 
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer="Astronomer <humans@astronomer.io>"
+    LABEL maintainer=“Astronomer <humans@astronomer.io>”
     ARG BUILD_NUMBER=-1
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
@@ -558,7 +520,7 @@ Make sure that the name of any privately hosted Python package doesn't conflict 
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH="/home/astro/.local/bin:$PATH"
+    ENV PATH=“/home/astro/.local/bin:$PATH”
 
     COPY . .
     ```
@@ -587,7 +549,7 @@ Make sure that the name of any privately hosted Python package doesn't conflict 
 
 3. Optional. Test or deploy your DAGs. See [Build and Run a Project Locally](develop-project.md#build-and-run-a-project-locally) or [Deploy Code to Astro](deploy-code.md).
 
-4. Deploy the image using the Astro CLI:
+4. Optional. Deploy the image to a Deployment on Astro using the Astro CLI:
 
     ```sh
     astro deploy --image-name $image_name
