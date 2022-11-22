@@ -56,11 +56,17 @@ DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your
 2. Save your changes to your code editor. If you're using a Mac, use **Command-S**.
 3. Refresh your Airflow browser.
 
+:::tip
+
+You don't need a local Airflow environment to test an individual DAG. Use the `astro run <dag-id>` command to run a DAG and see task logs from the command line and without the Airflow webserver or scheduler. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+
+:::
+
 ### Add DAG helper functions
 
-Some DAGs may need helper functions to run. For example, custom functions used in operators or callbacks that you can write once and reference across DAGs within a single Astro project.
+You might choose to create helper functions that make it easy for your team to write DAGs and custom code. For example, a custom function that's used in an operator or callback that you can write once and reference in multiple DAGs.
 
-Because this is repeatable code that that is across DAGs, Astronomer recommends creating a dedicated folder called `helper_functions` that is separate from the `dags` directory.
+Because helper functions are repeatable code that is used across DAGs, Astronomer recommends creating a dedicated folder called `helper_functions` that is separate from the `dags` directory.
 
 1. Add your directory of helper functions to your local project. You can give it any name:
 
