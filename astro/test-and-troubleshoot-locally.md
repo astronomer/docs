@@ -11,13 +11,17 @@ id: test-and-troubleshoot-locally
 
 As you develop data pipelines on Astro, Astronomer recommends running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
-## Set up your local testing environment
+## Prerequisites
 
-To test your code, the first step is to setup your local testing environment by [creating an Astro project](create-project.md).
+- An [Astro project](create-project.md).
+- The [Astro CLI](cli/overview.md)
+- [Docker](https://www.docker.com/products/docker-desktop/)
 
-## Run and debug DAGs with `astro run`
+For information on adding files to your Astro project and making changes, see [Develop a project](develop-project.md).
 
-Use the `astro run` command to compile and run a DAG from the command line . When you run this command, your DAGs run within a Docker container built from your local `Dockerfile` that contains your DAGs, DAG utility files, python requirements, and environment variables from the `.env` file. This command lets you develop DAGs without using the Airflow Webserver.
+## Test a DAG with `astro run`
+
+Use the `astro run` command to compile and run a DAG from the command line. When you run this command, your DAGs run within a Docker container built from your local `Dockerfile` that contains your DAGs, DAG utility files, python requirements, and environment variables from the `.env` file. This command lets you develop DAGs without using the Airflow Webserver.
 
 To run a DAG located within your local `/dags` directory run:
 
