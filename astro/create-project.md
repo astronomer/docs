@@ -88,7 +88,7 @@ When you create an Astro project, the Astro CLI uses port `8080` for the Airflow
 
 :::tip
 
-Use the `astro run` command to run and debug a DAG from the command line. You don't need to use the local webserver or create infrastructure to run DAG code locally. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Airflow environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
 
 :::
 

@@ -8,7 +8,7 @@ hide_table_of_contents: true
 
 Run a single DAG in a local Airflow environment and see task success or failure in your terminal. This command compiles any DAG file in your Astro project into a Docker container that is built from your local `Dockerfile`. It runs with the utility files, python packages, and environment variables from the `.env` file. 
 
-This command works with and without your local Airflow project running. The scheduler and webserver are not required. For more information, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+This command works with or without your local Airflow environment running. The scheduler and webserver are not required. For more information, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
 
 ## Usage
 
@@ -35,6 +35,4 @@ $ astro run example_dag_basic --env dev.env
 - [`astro dev start`](cli/astro-dev-start.md)
 - [`astro dev restart`](cli/astro-dev-restart.md)
 - [`astro dev stop`](cli/astro-dev-stop.md)
-- [`astro dev kill`](cli/astro-dev-kill.md)
-- [`astro dev init`](cli/astro-dev-init.md)
 - [`astro deploy`](cli/deploy.md)

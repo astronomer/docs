@@ -29,9 +29,9 @@ To run a DAG located within your local `/dags` directory run:
 astro run <dag-id>
 ```
 
-All the tasks in your DAG run sequentially. Any errors produced by your code while parsing or running your DAG appear in the command line. To provide variables and connections to your DAGs, use the [Airflow Settings file](develop-project.md#configure-airflow_settingsyaml-local-development-only). By default, the `astro run` command uses `airflow_settings.yaml`, but you can use the `--airflow-settings` flag to specify a different yaml file.
+All the tasks in your DAG run sequentially. Any errors produced by your code while parsing or running your DAG appear in the command line.
 
-To use variables and connections stored in your local postgres instance, run `astro run` while a local instance of Airflow is running. To run your project in a local Airflow environment, see [Build and run a project](develop-project.md#build-and-run-a-project-locally).
+To provide variables and connections to your DAGs with the command, use the [`airflow_settings.yaml` file](develop-project.md#configure-airflow_settingsyaml-local-development-only) or use the `--airflow_settings` flag to specify a different yaml file. To use variables and connections that are already set in the Airflow UI of a local Airflow environment, run `astro run` while your local Airflow environment is running. See [Build and run a project](develop-project.md#build-and-run-a-project-locally).
 
 ## Test DAGs with the Astro CLI
 
