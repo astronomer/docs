@@ -13,8 +13,9 @@ Identity Providers (IdPs) are services that manage user accounts. As organizatio
 
 Astro supports integrations with the following IdPs:
 
-- [Okta](https://www.okta.com/)
 - [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
+- [Okta](https://www.okta.com/)
+- [Ping Identity](https://www.pingidentity.com/en.html)
 
 This guide provides setup steps for integrating both of these identity providers on Astro. Once you complete the integration for your organization:
 
@@ -188,7 +189,7 @@ Save these values for Step 2.
 
 1. In the PingIdentity Administrator Console, click **Connections** in the left pane, and then click the **+** icon next to **Applications**.
 
-2. In the **Application Name** field, enter `Astronomer`. Optionally, add a description and an icon.
+2. In the **Application Name** field, enter `Astro`. Optionally, add a description and an icon.
 
 3. Click **SAML Application**, and then click **Configure**.
 
@@ -199,7 +200,7 @@ Save these values for Step 2.
 
 5. Click **Save**.
 
-6. Click **Edit** on the **Overview** page, and then enter `https://auth.astronomer.io/login/callback?connection` in the **Home page URL** field. 
+6. Click **Edit** on the **Overview** page, and then enter `<your-sso-url>` in the **Signon URL** field. 
 
 7. Click **Save**.
 
@@ -213,13 +214,13 @@ Save these values for Step 2.
 
 12. Copy and save the URL in the **Single Signon Service** field.
 
-13. Click the **Attribute Mappings** tab, click **Edit**, and add the following attributes, using the same capitalization shown in both columns:
+13. Click the **Attribute Mappings** tab, click **Edit**, and add the following attributes, using the capitalization shown in both columns:
 
     | Astronomer        | PingOne           |
     | ------------      | ----------------| 
     | saml_subject      | User ID         |
     | email             | Email Address   |
-    | firstname         | Given Name      |
+    | firstName         | Given Name      |
     | lastName          | Family Name     |
     | name              | Formatted       |
 
