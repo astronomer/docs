@@ -18,21 +18,21 @@ If you have any questions or a bug to report, contact [Astronomer support](https
 
 Release date: November 22, 2022
 
-## New Command `astro run` to Run DAGs
+## Run DAGs with `astro run`
 
 
-User can now compile and run a DAG with only the command line. `astro run` will run your DAGs within a Docker container built from your local `Dockerfile` containing your DAGs, DAG utility files, python requirements, and env vars from your `.env` file. This command will simplify the process of testing and debugging DAGs locally for many users.
+You can now use the `astro run` command to compile and run a DAG. When you run the command, your DAGs run within a Docker container built from your local `Dockerfile` that contains your DAGs, DAG utility files, python requirements, and environment variables from the `.env` file. This command simplifies the testing and debugging of DAGs locally.
 
-The command will automatically load Connections and Variables located in the [Airflow Settings file](develop-project.md#configure-airflow_settingsyaml-local-development-only). For more information read [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+The command automatically loads the connections and environment variables located in the [Airflow Settings file](develop-project.md#configure-airflow_settingsyaml-local-development-only). For more information, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
 
 ## New Command `organization audit-logs export`
 
-Organization admins can now export their orgs audit logs with `astro organization audit-logs export —organization-name <name>`. This command will create a gzip file of audit logs that users can unzip and parse.
+Organization admins can now export audit logs with the `astro organization audit-logs export —organization-name <name>` command. When you run the command, a GZIP file containing the audit logs is created.
 
 ## Additional improvements
 
-- If you run `astro deploy` with an empty `dag` folder the pushing of DAGs will be skipped and only your projects image will be updated. This enables you to manage your deployments DAGs and image in separate repos.
-- There are some minor improvements to the `deployment inspect` command. Specifically a `dag-deploy-enabled` field was added and the fields are now ordered by importance rather than alphabetical order.
+- When you run `astro deploy` with an empty `dags` folder, the project image is updated, but the DAGs are not pushed. This behavior change lets you manage your deployment DAGs and project images in separate repositories.
+- The `deployment inspect` command now includes a `dag-deploy-enabled` field and the fields are now ordered by importance instead of alphabetical order.
 
 ### Bug fixes 
 
