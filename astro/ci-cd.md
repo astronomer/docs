@@ -431,13 +431,13 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         - name: DAG Deploy to Astro
           if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
           run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.8.0
+            curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy --dags
         # If any other files changed, deploy the entire Astro project
         - name: Image and DAG Deploy to Astro
           if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
           run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.8.0
+            curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy
     ```
 
@@ -516,13 +516,13 @@ This setup assumes the following prerequisites:
           - name: DAG Deploy to Astro
             if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
             run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.8.0
+              curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy --dags
           # If any other files changed do a regular Deploy
           - name: Image and DAG Deploy to Astro
             if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
             run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.8.0
+              curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
@@ -539,13 +539,13 @@ This setup assumes the following prerequisites:
           - name: DAG Deploy to Astro
             if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
             run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.8.0
+              curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy --dags
           # If any other files changed do a regular Deploy
           - name: Image and DAG Deploy to Astro
             if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
             run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.8.0
+              curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy
     ```
 
@@ -611,7 +611,7 @@ If your Astro project requires additional build-time arguments to build an image
         - name: DAG Deploy to Astro
           if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
           run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.8.0
+            curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy --dags
         # If any other files changed do a regular custom image Deploy
         - name: Create image tag
