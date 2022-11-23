@@ -32,15 +32,15 @@ Astronomer uses the following project structure:
 ```bash
 .
 ├── dags                        # Folder where all your DAGs go
-│   ├── example-dag.py
-│   ├── redshift_transforms.py
+│   ├── example-dag.py
+│   ├── redshift_transforms.py
 ├── Dockerfile                  # For Astronomer's Docker image and runtime overrides
 ├── include                     # For any scripts that your DAGs might need to access
-│   └── sql
-│       └── transforms.sql
+│   └── sql
+│       └── transforms.sql
 ├── packages.txt                # For OS-level packages
 ├── plugins                     # For any custom or community Airflow plugins
-│   └── example-plugin.py
+│   └── example-plugin.py
 └── requirements.txt            # For any Python packages
 ```
 

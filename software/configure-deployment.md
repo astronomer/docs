@@ -20,28 +20,26 @@ To create an Airflow Deployment, you'll need:
 
 To create an Airflow Deployment on Astronomer:
 
-1. Log in to your Astronomer platform at `app.BASEDOMAIN`, open your Workspace, and click **New Deployment**.
-2. Use the **New Deployment** menu to configure the following:
+1. Log in to your Astronomer platform at `app.BASEDOMAIN`, select a Workspace, and then click **New Deployment**.
+2. Complete the following fields:
 
-    - **Name**
-    - **Description** (Optional)
-    - **Airflow Version**: We recommend using the latest version.
-    - **Executor**: We recommend starting with Local.
+    - **Name**: Enter a descriptive name for the Deployment.
+    - **Description**: (Optional)
+    - **Airflow Version**: Astronomer recommends using the latest version.
+    - **Executor**: Astronomer recommends starting with Local.
 
-3. Click **Create Deployment** and give the Deployment a few moments to spin up. Within a few seconds, you'll have access to the **Settings** page of your new Deployment:
+3. Click **Create Deployment** and give the Deployment a few moments to be created. After the Deployment is created, you'll be able to access the **Settings** page of your new Deployment:
 
    ![New Deployment Celery Dashboard](/img/software/v0.23-new_deployment-dashboard.png)
 
-This tab is the best place to modify resources for your Deployment. Specifically, you can:
+    On this tab you can modify resources for your Deployment. Specifically, you can:
 
-- Select an Airflow executor
-- Allocate resources to your Airflow scheduler and webserver
-- Set scheduler count (*Airflow 2.0+ only*)
-- Add extra capacity (*Kubernetes only*)
-- Set worker count (*Celery only*)
-- Adjust your worker termination grace period (*Celery only*)
-
-The rest of this guide provides additional guidance for configuring each of these settings.
+    - Select an Airflow executor
+    - Allocate resources to your Airflow scheduler and webserver
+    - Set scheduler count (*Airflow 2.0+ only*)
+    - Add extra capacity (*Kubernetes only*)
+    - Set worker count (*Celery only*)
+    - Adjust your worker termination grace period (*Celery only*)
 
 ## Select an executor
 

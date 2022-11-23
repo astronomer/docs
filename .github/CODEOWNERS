@@ -1,4 +1,7 @@
-astro/ @jwitz @paolaperaza @kwcanuck
-software/ @jwitz @paolaperaza @kwcanuck
-learn/ @jwitz @paolaperaza @kwcanuck @TJaniF @kentdanas
 *.md @jwitz @paolaperaza @kwcanuck
+
+/astro/ @jwitz @paolaperaza @kwcanuck
+
+/software/ @jwitz @paolaperaza @kwcanuck
+
+/learn/ @TJaniF @kentdanas @jwitz @paolaperaza @kwcanuck 
