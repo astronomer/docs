@@ -102,6 +102,7 @@ This workflow is equivalent to the following bash script:
 # Set Deployment API key credentials as environment variables
 export ASTRONOMER_KEY_ID="<your-api-key-id>"
 export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
+export DAG_FOLDER="<path to dag folder ie. dags/>"
 
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
@@ -111,7 +112,7 @@ files=$(git diff main... --name-only)
 dags_only=1
 
 for file in $files; do
-  if [[ $file != "dags/"* ]]; then
+  if [[ $file != "$DAG_FOLDER"* ]]; then
     echo "$file is not a dag, triggering a full image build"
     dags_only=0
     break
@@ -392,6 +393,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
       ## Sets Deployment API key credentials as environment variables
       ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
       ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+      DAG_FOLDER: <path to dag folder ie. dags/>
 
     jobs:
       build:
@@ -409,7 +411,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
             dags_only=1
 
             for file in $files; do
-              if [[ $file != "dags/"* ]]; then
+              if [[ $file != "$DAG_FOLDER"* ]]; then
                 echo "$file is not a dag, triggering a full image build"
                 dags_only=0
                 break
@@ -470,6 +472,8 @@ This setup assumes the following prerequisites:
     jobs:
       deployment-type:
         runs-on: ubuntu-latest
+        env:
+          DAG_FOLDER: <path to dag folder ie. dags/>
         outputs:
           DAGS_ONLY: ${{ steps.deployment-type.outputs.DAGS_ONLY }}
         steps:
@@ -485,7 +489,7 @@ This setup assumes the following prerequisites:
             dags_only=1
 
             for file in $files; do
-              if [[ $file != "dags/"* ]]; then
+              if [[ $file != "$DAG_FOLDER"* ]]; then
                 echo "$file is not a dag, triggering a full image build"
                 dags_only=0
                 break
@@ -573,6 +577,7 @@ If your Astro project requires additional build-time arguments to build an image
         env:
           ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
           ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+          DAG_FOLDER: <path to dag folder ie. dags/>
         steps:
         - name: Check out the repo
           uses: actions/checkout@v3
@@ -586,7 +591,7 @@ If your Astro project requires additional build-time arguments to build an image
             dags_only=1
 
             for file in $files; do
-              if [[ $file != "dags/"* ]]; then
+              if [[ $file != "$DAG_FOLDER"* ]]; then
                 echo "$file is not a dag, triggering a full image build"
                 dags_only=0
                 break
