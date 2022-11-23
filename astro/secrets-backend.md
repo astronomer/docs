@@ -120,7 +120,7 @@ For more information on adding secrets to Secrets Manager, see [AWS documentatio
 
     ```dockerfile
     ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
-    ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": $SECRETS_BACKEND_ARN, "region_name": $SECRETS_BACKEND_REGION}
+    ENV AIRFLOW__SECRETS__BACKEND_KWARGS="{\"connections_prefix\": \"/airflow/connections\", \"variables_prefix\": \"/airflow/variables\",  \"role_arn\": $SECRETS_BACKEND_ARN, \"region_name\": $SECRETS_BACKEND_REGION}"
     ```
 
 2. Add the following lines to your `.env` file:
@@ -239,7 +239,7 @@ Then, add the following environment variables to your `Dockerfile`:
 ```dockerfile
 # Make sure to replace `<your-approle-id>` and `<your-approle-secret>` with your own values.
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
 ```
 
 This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. In the next step, you'll test this configuration in a local Airflow environment.
@@ -332,7 +332,7 @@ For instructions, see the [AWS Systems Manager Console](https://docs.aws.amazon.
 
     ```dockerfile
     ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.systems_manager.SystemsManagerParameterStoreBackend
-    ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "/airflow/connections", "variables_prefix": "/airflow/variables",  "role_arn": $PARAMETER_STORE_ARN, "region_name": $PARAMETER_STORE_REGION}
+    ENV AIRFLOW__SECRETS__BACKEND_KWARGS="{\"connections_prefix\": \"/airflow/connections\", \"variables_prefix\": \"/airflow/variables\",  \"role_arn\": $PARAMETER_STORE_ARN, \"region_name\": $PARAMETER_STORE_REGION}"
     ```
 
 2. Add the following lines to your `.env` file:
@@ -409,7 +409,7 @@ Then, add the following environment variables to your project's Dockerfile:
 
 ```dockerfile
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": <your-key-file>}
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": "<your-key-file>"}'
 ```
 
 Make sure to paste your entire JSON service account key in place of `<your-key-file>`. In the next step, you'll test that this configuration is valid locally.
