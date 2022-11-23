@@ -16,22 +16,24 @@ If you have any questions or a bug to report, contact [Astronomer support](https
 
 ## Astro CLI 1.8.0
 
-Release date: November 22, 2022
+Release date: November 23, 2022
 
 ## New `astro run` command
 
-You can now use the `astro run` command to compile and run a DAG without starting a complete Airflow environment. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test DAGs.
+You can now use the `astro run` command to run and debug a DAG from the command line without starting a local Airflow environment. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations. You can see task success or failure, as well as task logs, directly in your terminal.
 
-For more information, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+This command is an alternative to running `astro dev restart` every time you make a change to your DAG. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test data pipelines.
+
+To learn more, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
 
 ## Additional improvements
 
-- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project images in separate repositories when using DAG-only Deployments.
-- The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered by importance instead of alphabetical order.
+- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
+- The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered in logical groupings instead of by alphabetical order.
 
 ### Bug fixes 
 
-- Fixed an issue where the changes specified in the `docker-compose.override.yaml` file stopped applying to users projects.
+- Fixed an issue where configurations specified in the `docker-compose.override.yaml` file of an Astro project were not properly applied. 
 - Fixed an issue where `astro login` didn’t recognize some valid domains.
 
 ## Astro CLI 1.7.0
