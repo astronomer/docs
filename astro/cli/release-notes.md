@@ -18,17 +18,16 @@ If you have any questions or a bug to report, contact [Astronomer support](https
 
 Release date: November 22, 2022
 
-## Run DAGs with `astro run`
+## New `astro run` command
 
+You can now use the `astro run` command to compile and run a DAG without starting a complete Airflow environment. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test DAGs.
 
-You can now use the `astro run` command to compile and run a DAG. When you run the command, your DAGs run within a Docker container built from your local `Dockerfile` that contains your DAGs, DAG utility files, python requirements, and environment variables from the `.env` file. This command simplifies the testing and debugging of DAGs locally.
-
-The command automatically loads the connections and environment variables located in the [Airflow Settings file](develop-project.md#configure-airflow_settingsyaml-local-development-only). For more information, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+For more information, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
 
 ## Additional improvements
 
-- When you run `astro deploy` with an empty `dags` folder, the project image is updated, but the DAGs are not pushed. This behavior change lets you manage your deployment DAGs and project images in separate repositories.
-- The `deployment inspect` command now includes a `dag-deploy-enabled` field and the fields are now ordered by importance instead of alphabetical order.
+- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project images in separate repositories when using DAG-only Deployments.
+- The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered by importance instead of alphabetical order.
 
 ### Bug fixes 
 
