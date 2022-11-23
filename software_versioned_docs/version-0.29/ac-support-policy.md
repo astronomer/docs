@@ -126,8 +126,8 @@ The following tables list the lifecycle for each published version of Astronomer
 
 | AC Version                                                                           | Release Date   | End of Maintenance Date |
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
-| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)¹       | May 21, 2021   | November 2022           |
-| [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2022            |
+| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)      | May 21, 2021   | November 2022           |
+| [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)¹       | April 30, 2022 | October 2022            |
 | [2.4](https://github.com/astronomer/ap-airflow/blob/master/2.4.1/CHANGELOG.md)       | September 29, 2022 | March 2023            |
 
 > ¹ In November 2023, Astronomer Certified 2.3 was reclassified as a stable release only. Astronomer recommends upgrading or migrating to Astro Runtime 5.0.x to receive long term support for Apache Airflow 2.3.
@@ -136,6 +136,6 @@ The following tables list the lifecycle for each published version of Astronomer
 
 | AC Version                                                                           | Release Date   | End of Maintenance Date |
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
-| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)¹       | May 21, 2021   | November 2022           |
+| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)      | May 21, 2021   | November 2022           |
 
 If you have any questions or concerns, reach out to [Astronomer support](https://support.astronomer.io).
