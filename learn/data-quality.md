@@ -93,7 +93,7 @@ There are multiple open source tools that can be used to check data quality from
 Other tools that can be used for data quality checks include:
 
 - **[Soda](soda-data-quality.md)**: An open source data validation framework that uses YAML to define checks which can be run in Airflow using the `BashOperator`. Soda also offers the ability to write any custom checks using SQL.
-- **[dbt test](https://docs.getdbt.com/docs/building-a-dbt-project/tests)**: A testing framework for models using the `dbt test` CLI command, which you can run in Airflow with the `BashOperator` or `PythonOperator`.
+- **[dbt test](https://docs.getdbt.com/docs/building-a-dbt-project/tests)**: A testing framework for models using the `dbt test` CLI command, which you can run in Airflow with the `BashOperator` or `PythonOperator`. dbt can emit data to OpenLineage when using `dbt-ol`, but data quality metric information from the `dbt test` command is not currently collected, only the results of the test. See the [`--store-failures`](https://docs.getdbt.com/reference/resource-configs/store_failures) flag to collect more information from tests.
 
 ### Choosing a tool
 
@@ -112,7 +112,7 @@ Astronomer recommends using a data validation framework such as Great Expectatio
 - Most or all of your checks can be implemented by the predefined checks in the solution of your choice.
 - You want to abstract your data quality checks from the DAG code.
 
-Currently only SQL Check operators and the `GreatExpectationsOperator` offer data lineage extraction.
+Currently only SQL Check operators and the `GreatExpectationsOperator` offer data lineage extraction through Openlineage.
 
 ### SQL Check operators
 
@@ -139,7 +139,6 @@ The logs from SQL Check operators can be found in the regular Airflow task logs.
 
 ### Great Expectations
 
-
 Great Expectations is an open source data validation framework that allows the user to define data quality checks as a JSON file. The checks, also known as Expectation Suites, can be run in a DAG using the [`GreatExpectationsOperator`](https://registry.astronomer.io/providers/great-expectations/modules/greatexpectationsoperator). All currently available expectations can be viewed on the [Great Expectations website](https://greatexpectations.io/expectations).
 
 To use Great Expectations, you will need to install the open source Great Expectations package and set up a Great Expectations project with at least one instance of each of the following components:
@@ -149,9 +148,11 @@ To use Great Expectations, you will need to install the open source Great Expect
 - Expectation Suite
 - Checkpoint
 
+Note that the `GreatExpectationsOperator` only requires a data context and expectation suite if more detailed information about a data source, such as a `conn_id` or `dataframe_to_validate` are also supplied.
+
 The Great Expectations documentation offers a [step-by-step tutorial](https://docs.greatexpectations.io/docs/tutorials/getting_started/tutorial_overview) for this setup. Additionally, to use Great Expectations with Airflow, you have to install the [Great Expectations provider package](https://registry.astronomer.io/providers/great-expectations).
 
-When using Great Expectations, Airflow task logs show only whether the Expectation Suite passed or failed. To get a [detailed report](https://docs.greatexpectations.io/docs/terms/data_docs/) on the checks that were run and their results, you can view the HTML files located in the `great_expecations/uncommitted/data_docs/local_site/validations` directory in any browser.
+When using Great Expectations, Airflow task logs show the results of the suite at the test-level in a JSON format. To get a [detailed report](https://docs.greatexpectations.io/docs/terms/data_docs/) on the checks that were run and their results, you can view the HTML files located in the `great_expecations/uncommitted/data_docs/local_site/validations` directory in any browser. These data docs can be generated to other backends as well as the local file.
 
 You can find more information on how to use Great Expectations with Airflow in the [Integrating Airflow and Great Expectations](airflow-great-expectations.md) guide.
 
@@ -165,7 +166,7 @@ For more information on data lineage and setting up OpenLineage with Airflow, se
 
 :::
 
-Both SQL Check operators and the `GreatExpectationsOperator` have OpenLineage extractors. If you are working with open source tools, you can view the resulting lineage from the extractors using Marquez.
+Both the `SQLColumnCheckOperator` and the `SQLTableCheckOperator` have OpenLineage extractors that emit lineage data. While the other SQL Check operators will show up on the lineage graph, they do not emit test data to the OpenLineage backend. The `GreatExpectationsOperator` will automatically trigger the OpenLineage action if an OpenLineage environment is recognized. If you are working with open source tools, you can view the resulting lineage from the extractors using Marquez.
 
 The output from the `SQLColumnCheckOperator` contains each individual check and whether or not it succeeded:
 
@@ -205,9 +206,10 @@ from airflow import DAG
 from datetime import datetime
 
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.sql import SQLCheckOperator
 from airflow.providers.common.sql.operators.sql import (
-  SQLColumnCheckOperator, SQLTableCheckOperator
+  SQLColumnCheckOperator,
+  SQLTableCheckOperator,
+  SQLCheckOperator
 )  
 
 with DAG(
@@ -298,24 +300,29 @@ with DAG(
                     END AS testresult
                 FROM not_in_list
             """,
-        params={"db_to_query": example_database,
-                "schema": example_schema,
-                "table": example_table,
-                "col": "MY_COL_3",
-                "options_tuple": "('val1', 'val2', 'val3', 'val4')"
-                }
+        params={
+            "db_to_query": example_database,
+            "schema": example_schema,
+            "table": example_table,
+            "col": "MY_COL_3",
+            "options_tuple": "('val1', 'val2', 'val3', 'val4')"
+        }
     )
 
-    start >> [column_checks, table_checks_aggregated,
-              table_checks_not_aggregated, check_val_in_list] >> end
+    start >> [
+        column_checks,
+        table_checks_aggregated,
+        table_checks_not_aggregated,
+        check_val_in_list
+    ] >> end
 ```
 
 ### Example: Great Expectations
 
-The following example runs the same data quality checks as the SQL Check operators example against the same database. After setting up the Great Expectations instance with all four components, the checks can be defined in a JSON file to form an Expectation Suite.
+The following example runs the same data quality checks as the SQL Check operators example against the same database. After setting up the Great Expectations instance with at least the data context, the checks can be defined in a JSON file to form an Expectation Suite.
 
 :::info 
-For each of the checks in this example, an Expectation Suite already exists. This is not always the case, and for more complicated checks you may need to define a [custom Expectation Suite](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview).
+For each of the checks in this example, an Expectation already exists. This is not always the case, and for more complicated checks you may need to define a [custom Expectation](https://docs.greatexpectations.io/docs/guides/expectations/creating_custom_expectations/overview).
 :::
 
 
@@ -427,11 +434,11 @@ For each of the checks in this example, an Expectation Suite already exists. Thi
 }
 ```
 
-The corresponding DAG code shows how all checks are run within one task using the `GreatExpectationsOperator`. Only the root directory of the data context and the checkpoint name have to be provided. To use XComs with the `GreatExpectationsOperator` you must enable XCOM pickling as described in the [Great Expectations](airflow-great-expectations.md) guide.
+The corresponding DAG code shows how all the Expectations are run within one task using the `GreatExpectationsOperator`. Only the root directory of the data context and the data asset have to be provided. To use XComs with the `GreatExpectationsOperator` you must enable XCom pickling as described in the [Great Expectations](airflow-great-expectations.md) guide.
 
 ```python
 from airflow import DAG
-from datetime import datetime
+from pendulum import datetime
 
 from great_expectations_provider.operators.great_expectations import (
   GreatExpectationsOperator
@@ -448,7 +455,8 @@ with DAG(
     ge_test = GreatExpectationsOperator(
         task_id="ge_test",
         data_context_root_dir="/usr/local/airflow/include/great_expectations",
-        checkpoint_name="my_checkpoint",
+        conn_id="my_db_conn",
+        data_asset_name="my_table",
         do_xcom_push=False
     )
 ```

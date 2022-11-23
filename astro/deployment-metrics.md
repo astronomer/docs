@@ -42,7 +42,7 @@ These metrics contain information about your Deployment's DAG runs and task runs
 
 These metrics contain information about the Kubernetes Pods running your workers and schedulers. Different worker and scheduler Pods will appear on these charts as differently colored lines. 
 
-Hover over the graph to view a graph legend. If a given worker queue spins a worker down and back up again within a given interval, the newly spun up worker appears as a new color on the graph. 
+Hover over the graph to view a graph legend. If a given worker queue spins a worker down and back up again within a given interval, the newly spun up worker appears as a new color on the graph. 
 
 ![Worker analytics in the Cloud UI](/img/docs/analytics-workers.png)
 

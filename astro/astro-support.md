@@ -50,6 +50,7 @@ Examples:
 - Astro CLI usage is impaired (for example, there are incompatibility errors between installed packages).
 - There is an Airflow issue that has a code-based solution.
 - You received a log alert on Astronomer.
+- You have lost use of a Public Preview feature that does not affect general services. 
 
 **P4:** Low impact. Astro is fully usable but you have a question for our team.
 
@@ -57,6 +58,7 @@ Examples:
 
 - There are package incompatibilities caused by a specific, complex use case.
 - You have questions about best practices for an action in Airflow or on Astro.
+- You have an inquiry or a small bug report for a Public Preview feature.
 - You have a feature request related to Astro or Airflow.
 
 ### Be as descriptive as possible

@@ -87,7 +87,7 @@ The following table contains the exact lifecycle for each published version of A
 | Runtime Version                                     | Apache Airflow version | Release Date       | End of Maintenance Date |
 | --------------------------------------------------- | ---------------------- | ------------------ | ----------------------- |
 | [4.2.x](runtime-release-notes.md#astro-runtime-420) | 2.2.4-2.2.5            | March 10, 2022     | September 2023          |
-| [6.0.x](runtime-release-notes.md#astro-runtime-600) | 2.4.0-2.4.1            | September 19, 2022 | March 2024              |
+| [6.0.x](runtime-release-notes.md#astro-runtime-600) | 2.4.0-2.4.2            | September 19, 2022 | March 2024              |
 
 :::info
 Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).

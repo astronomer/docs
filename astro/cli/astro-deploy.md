@@ -49,18 +49,19 @@ astro deploy <options>
 
 ## Options
 
-| Option                    | Description                                                                                    | Possible Values                                        |
-| ------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `<deployment-id>`         | Specify the Deployment to deploy to, bypass Deployment selection prompt                        | Any valid Deployment ID                                |
-| `-e`,`--env`              | Location of the file containing environment variables for pytests. By default, this is `.env`. | Any valid filepath to an `.env` file                   |
-| `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                       | None                                                     |
-| `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified                     | None                                                    |
-| `--pytest`                | Deploy code to Astro only if the specified pytests are passed                                  | None                                                     |
-| `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys               | None                                                     |
-| `-t`,`--test`             | The filepath to an alternative pytest file or directory                                        | Valid filepath within your Astro project               |
-| `--no-cache`     | Do not use any images from the container engine's cache when building your project. | None |
-| `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace              | Any valid Workspace ID                                 |
-| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine                                      | A valid name for a pre-built Docker image based on Astro Runtime |
+| Option                    | Description                                                                                                                                           | Possible Values                                                  |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `<deployment-id>`         | Specifies the Deployment to deploy to and bypasses the Deployment selection prompt                                                                               | Any valid Deployment ID                                          |
+| `--dags`                  | Deploy only your `dags` directory. See [DAG-only deploys](deploy-code.md#dag-only-deploys)                                                         | None                                                             |
+| `-e`,`--env`              | Location of the file containing environment variables for pytests. By default, this is `.env`.                                                        | Any valid filepath to an `.env` file                             |
+| `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                                                                              | None                                                             |
+| `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified                                                                            | None                                                             |
+| `--pytest`                | Deploy code to Astro only if the specified pytests are passed                                                                                         | None                                                             |
+| `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys                                                                      | None                                                             |
+| `-t`,`--test`             | The filepath to an alternative pytest file or directory                                                                                               | Valid filepath within your Astro project                         |
+| `--no-cache`              | Do not use any images from the container engine's cache when building your project.                                                                   | None                                                             |
+| `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace                                                                     | Any valid Workspace ID                                           |
+| `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 
 ## Examples
 
@@ -76,6 +77,9 @@ $ astro deploy ckvvfp9tf509941drl4vela81n --save
 
 # The CLI looks for a Docker image with a matching name in your local Docker registry and builds your project with it
 $ astro deploy --image-name my-custom-runtime-image
+
+# Deploy only DAGs to a specific Deployment
+$ astro deploy ckvvfp9tf509941drl4vela81n --dags
 ```
 
 </TabItem>
@@ -90,14 +94,14 @@ When you run `astro deploy`, you'll be prompted to select from a list of all Dep
 
 ## Options
 
-| Option                    | Description                                                                                    | Possible Values                                        |
-| ------------------------- | ---------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
-| `<deployment-id>`         | Specify the Deployment to deploy to and bypass the Deployment selection prompt                        | Any valid Deployment ID                                |
-| `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes                       | None                                                     |
-| `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified                     | None                                                     |
-| `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys               | None                                                     |
-| `--no-cache`     | Do not use any images from the container engine's cache when building your project | None |
-| `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace              | Any valid Workspace ID                                 |
+| Option                    | Description                                                                        | Possible Values         |
+| ------------------------- | ---------------------------------------------------------------------------------- | ----------------------- |
+| `<deployment-id>`         |  Specifies the Deployment to deploy to and bypasses the Deployment selection prompt     | Any valid Deployment ID |
+| `-f`,`--force`            | Force deploy even if your project contains errors or uncommitted changes           | None                    |
+| `-p`,`--prompt`           | Force the Deployment selection prompt even if a Deployment ID is specified         | None                    |
+| `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys   | None                    |
+| `--no-cache`              | Do not use any images from the container engine's cache when building your project | None                    |
+| `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace  | Any valid Workspace ID  |
 
 ## Examples
 

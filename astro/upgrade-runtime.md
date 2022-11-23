@@ -14,7 +14,7 @@ import {siteVariables} from '@site/src/versions';
 
 New versions of Astro Runtime are released regularly to support new Astro and Apache Airflow functionality. To take advantage of new features and bug and security fixes, Astronomer recommends upgrading Astro Runtime as new versions are available.
 
-## Upgrade Considerations
+## Upgrade considerations
 
 Consider the following when you upgrade Astro Runtime:
 

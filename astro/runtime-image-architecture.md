@@ -11,7 +11,7 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 
 - Timely support for new patch, minor, and major versions of Apache Airflow. This includes bug fixes that have not been released by the open source project but are backported to Astro Runtime and available to users earlier.
 - Exclusive features to enrich the task execution experience, including smart task concurrency defaults and high availability configurations.
-- The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer deferrable operators](deferrable-operators.md#astronomer-deferrable-operators).
+- The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html)
 - The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](https://docs.astronomer.io/learn/airflow-openlineage/).
 - A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane.
 - A custom security manager that enforces user roles and permissions as defined by Astro. See [User permissions](user-permissions.md).
@@ -105,7 +105,17 @@ For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/rep
 
 ## System distribution
 
-Astro Runtime images are based on Debian 11.3 (bullseye).
+The following table lists the operating systems and architectures supported by each Astro Runtime version. If you're using a Mac computer with an M1 chip, Astronomer recommends using Astro Runtime 6.0.4 or later.
+
+| Astro Runtime | Operating System (OS)                 | Architecture    |
+| ------------- | ---------------------- | -------------   |
+| 4.1.x         | Debian 11.3 (bullseye)        | AMD64           |
+| 4.2.x         | Debian 11.3 (bullseye)        | AMD64           |
+| 5.0.x         | Debian 11.3 (bullseye)        | AMD64           |
+| 6.0.0 - 6.0.3         | Debian 11.3 (bullseye)        | AMD64           |
+| 6.0.4 - 6.0.x         | Debian 11.3 (bullseye)        | AMD64 and ARM64 |
+
+Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
 
 ## Related documentation
 
