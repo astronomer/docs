@@ -25,10 +25,6 @@ You can now use the `astro run` command to compile and run a DAG. When you run t
 
 The command automatically loads the connections and environment variables located in the [Airflow Settings file](develop-project.md#configure-airflow_settingsyaml-local-development-only). For more information, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
 
-## New Command `organization audit-logs export`
-
-Organization admins can now export audit logs with the `astro organization audit-logs export —organization-name <name>` command. When you run the command, a GZIP file containing the audit logs is created.
-
 ## Additional improvements
 
 - When you run `astro deploy` with an empty `dags` folder, the project image is updated, but the DAGs are not pushed. This behavior change lets you manage your deployment DAGs and project images in separate repositories.
