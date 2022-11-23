@@ -1,7 +1,7 @@
 ---
-title: "Run a MongoDB query with Airflow"
+title: "Load data to MongoDB with Airflow"
 sidebar_label: "MongoDB"
-description: "Learn how to orchestrate MongoDB queries with your Apache Airflow DAGs."
+description: "Learn how to load data into MongoDB with your Apache Airflow DAGs."
 id: "airflow-mongodb"
 ---
 
