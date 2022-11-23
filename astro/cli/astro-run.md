@@ -6,9 +6,9 @@ description: Reference documentation for astro run.
 hide_table_of_contents: true
 ---
 
-Run a single DAG in a local Airflow environment and see task success or failure in your terminal. This command compiles any DAG file in your Astro project into a Docker container that is built from your local `Dockerfile`. It runs with the utility files, python packages, and environment variables from the `.env` file. 
+Run a single DAG in a local Airflow environment and see task success or failure in your terminal. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
 
-This command works with or without your local Airflow environment running. The scheduler and webserver are not required. For more information, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+For more information, see [Run a DAG with Astro Run](test-and-troubleshoot-locally.md#run-a-dag-with-astro-run).
 
 ## Usage
 
@@ -18,15 +18,16 @@ astro run <dag-id>
 
 ## Options
 
-| Option          | Description                   | Possible Values                                                  |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `-e`,`--env`         | Path to your environment variable file. The default is `.env`.                                                                                             | Any valid filepath                                                  |
-| `--no-cache`         | Build your Astro project into a Docker image without using cache.                  | None                                                             |
-| `-s`, `--settings-file` | The settings file from which Airflow objects are imported. The default is `airflow_settings.yaml`. | Any valid path to an Airflow settings file                           |
+| Option                  | Description                                                                                                                                 | Possible Values                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `-e`,`--env`            | Path to an alternative environment variable file. The default is `.env` in your current Astro project.                                      | Any valid filepath.                         |
+| `--no-cache`            | Build your Astro project into a Docker image without using cache.                                                                           | None.                                       |
+| `-s`, `--settings-file` | An alternative settings file from which Airflow objects are imported. The default is `airflow_settings.yaml` in your current Astro project. | Any valid filepath. |
 
 ## Examples
 
 ```sh
+# Run a DAG with an alternative set of environment variables
 $ astro run example_dag_basic --env dev.env
 ```
 

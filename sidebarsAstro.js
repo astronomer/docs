@@ -244,6 +244,7 @@ module.exports = {
       'cli/astro-logout',
       'cli/astro-organization-list',
       'cli/astro-organization-switch',
+      'cli/astro-run',
       'cli/astro-team',
       'cli/astro-user-create',
       'cli/astro-user-invite',
