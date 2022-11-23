@@ -20,7 +20,7 @@ Release date: November 23, 2022
 
 ### Bug fixes
 
-- Fixed an issue where you could not use `astro deploy` without a `.env` being present in the Astro project
+- Fixed an issue where you could not use `astro deploy` if you did not have an `.env` file in your Astro project.
 
 ## Astro CLI 1.8.0
 
