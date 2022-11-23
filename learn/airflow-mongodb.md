@@ -11,7 +11,7 @@ id: "airflow-mongodb"
 - Automating database administration operations.
 - Batch data pipelines.
 
-In this tutorial, you'll learn how to use Airflow to load data from an API into MongoDB and analyze that data using MongoDB Charts.
+In this tutorial, you'll learn how to use Airflow to load data from an API into MongoDB.
 
 :::note
 
@@ -27,29 +27,27 @@ This tutorial takes approximately 30 minutes to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- The basics of MongoDB. See [].
+- The basics of MongoDB. See [Getting started](https://www.mongodb.com/docs/manual/tutorial/getting-started/).
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Airflow connections. See [Managing your Connections in Apache Airflow](connections.md).
+- Airflow connections. See [Managing your connections in Apache Airflow](connections.md).
 
 ## Prerequisites
 
 To complete this tutorial, you need:
 
-- A MongoDB cluster. If you don't already have a cluster, we recommend using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register), a hosted MongoDB cluster with integrated data services that offers a free trial.
+- A MongoDB cluster. We recommend using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register), a hosted MongoDB cluster with integrated data services that offers a free trial.
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
-## Step 1: Create a MongoDB Atlas cluster and database
+## Step 1: Configure your MongoDB Atlas cluster and database
 
-If you are new to MongoDB, register for a [MongoDB Atlas account](https://www.mongodb.com/cloud/atlas/register) and follow the quickstart instructions to create a free cluster. In the cluster setup, create a database user with a password and add your IP address to the IP access list so that your local Airflow project will be able to access MongoDB. 
+First you will need to configure your MongoDB Atlas cluster so Airflow can connect to it.
 
-Once your cluster is running, go to **Collections** and create a new database.
+1. In your MongoDB Atlas account under **Security**, go to **Database Access** and create a database user with a password. Make sure the user has privileges to write data to the database.
 
-![Mongo database](/img/tutorials/mongo_create_database.png)
+    ![Mongo user](/img/tutorials/mongo_create_user.png)
 
-For more instructions, see [Get started with Atlas](https://www.mongodb.com/docs/atlas/getting-started/).
-
-If you already have a MongoDB cluster you can skip this step.
+2. Go to **Security** -> **Network Access** and add your IP address to the IP access list. 
 
 ## Step 2: Configure your Astro project
 
@@ -83,7 +81,6 @@ Add two connections that Airflow will use to connect to MongoDB and the API prov
 1. Create a new connection named `mongo_default` and choose the `MongoDB` connection type. Enter the following information: 
 
     - **Host:** Your MongoDB Atlas host name
-    - **Schema:** Your MongoDB database name
     - **Login:** Your database user ID
     - **Password:** Your database user password
     - **Extra:** {"srv": true}
@@ -91,6 +88,8 @@ Add two connections that Airflow will use to connect to MongoDB and the API prov
     Your connection should look something like this:
 
     ![Mongo connection](/img/tutorials/mongo_airflow_connection.png)
+
+    If you don't know your MongoDB Atlas host name, go to your database in the Atlas UI and click on **Connect**. Any of the connection options in this section will give you a connection URI that will include your host name.
     
     For more on connecting to your MongoDB cluster, see [Connect to a database deployment](https://www.mongodb.com/docs/atlas/connect-to-database-deployment/).
 
@@ -116,7 +115,7 @@ from datetime import datetime,timedelta
 def uploadtomongo(ti, **context):
     hook = MongoHook(mongo_conn_id='mongo_default')
     client = hook.get_conn()
-    db = client.MyDB
+    db = client.MyDB # Replace "MyDB" if you want to load data to a different database
     currency_collection=db.currency_collection
     print(f"Connected to MongoDB - {client.server_info()}")
     d=json.loads(context["result"])
@@ -149,7 +148,7 @@ with DAG(
     t1 >> t2
 ```
 
-This DAG uses the SimpleHttpOperator to get currency data from an API, and a PythonOperator to run a Python function that uses the MongoHook to load the data into MongoDB.
+This DAG uses the SimpleHttpOperator to get currency data from an API, and a PythonOperator to run a Python function that uses the MongoHook to load the data into MongoDB. The data will be loaded as a new collection in a database called `MyDB`.
 
 ## Step 5: Run the DAG and review the data
 
@@ -160,3 +159,5 @@ In the MongoDB Atlas UI, go to your cluster and click **Collections** to view th
 ![Mongo Results](/img/tutorials/mongo_loaded_data.png)
 
 ## Conclusion
+
+Congratulations! You now know how to use Airflow to load data to your MongoDB cluster. A great next step is to analyze that data using MongoDB Charts in Mongo Atlas. For more on this, see Mongo's complementary [tutorial](https://www.mongodb.com/developer/products/mongodb/mongodb-apache-airflow/).
