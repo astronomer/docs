@@ -14,6 +14,14 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.8.1
+
+Release date: November 23, 2022
+
+### Bug fixes
+
+- Fixed an issue where you could not use `astro deploy` without a `.env` being present in the Astro project
+
 ## Astro CLI 1.8.0
 
 Release date: November 23, 2022
@@ -31,7 +39,7 @@ To learn more, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-loc
 - When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
 - The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered in logical groupings instead of by alphabetical order.
 
-### Bug fixes 
+### Bug fixes
 
 - Fixed an issue where configurations specified in the `docker-compose.override.yaml` file of an Astro project were not properly applied. 
 - Fixed an issue where `astro login` didn’t recognize some valid domains.
