@@ -50,12 +50,6 @@ The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compo
 
 :::
 
-:::tip
-
-If you see `Error: cannot start, project already running` when you run this command, it means your local Airflow environment is already running your project. If there are changes you'd like to apply to your project, see [Restart your local environment](develop-project.md#make-changes-to-your-project).
-
-:::
-
 ### Restart your local environment
 
 To restart your local Airflow environment, run the following command:
