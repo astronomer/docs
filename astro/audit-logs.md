@@ -99,3 +99,20 @@ The following table lists the fields that are unique to Astronomer container reg
  2. Select the number days of audit data to export in the **Audit Logs** area and then click **Export**.
 
     The extracted audit log data is saved as a JSON file in your `downloads` directory with the default filename `<astro-organization-name>-logs-<number-of-days>-days-<date>.json`.
+
+
+You can also export logs using the Astro CLI.
+
+1. Run the following command to enable the feature:
+
+    ```sh
+    astro config set -g beta.audit_logs true
+    ```
+
+2. Run the following command to export audit logs as a GZIP file to your current directory:
+
+    ```sh
+    astro organization audit-logs --organization-name=<your-organization-name>
+    ```
+
+    
