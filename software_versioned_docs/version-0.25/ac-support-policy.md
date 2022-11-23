@@ -118,20 +118,21 @@ Maintenance is discontinued the last day of the month for a given version. For e
 
 The following tables contain the exact lifecycle for each published version of Astronomer Certified. These timelines are based on the LTS and Stable release channel maintenance policies.
 
-### Stable Releases
+### Stable releases
 
 | AC Version                                                                           | Release Date   | End of Maintenance Date |
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
 | [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)¹       | May 21, 2021   | November 2022           |
-| [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2023            |
+| [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2022            |
 | [2.4](https://github.com/astronomer/ap-airflow/blob/master/2.4.1/CHANGELOG.md)       | September 29, 2022 | March 2023            |
 
-> ¹ In November 2022, Astronomer Certified 2.1 was reclassified as a stable release only. Astronomer recommends upgrading or migrating to Astro Runtime 5.0.x to receive long term support for Apache Airflow 2.1.
+> ¹ In November 2023, Astronomer Certified 2.3 was reclassified as a stable release only.
 
-### LTS Releases
+### LTS releases
 
 | AC Version                                                                           | Release Date   | End of Maintenance Date |
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
-| [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)       | April 30, 2022 | October 2023            |
+| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)¹       | May 21, 2021   | November 2022           |
 
-If you have any questions or concerns, reach out to [Astronomer Support](https://support.astronomer.io).
+
+If you have any questions or concerns, contact [Astronomer support](https://support.astronomer.io).
