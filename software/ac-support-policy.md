@@ -144,7 +144,7 @@ The following tables list the lifecycles for each published version of Astronome
 | [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)¹       | April 30, 2022 | October 2022            |
 | [2.4](https://github.com/astronomer/ap-airflow/blob/master/2.4.1/CHANGELOG.md)       | September 29, 2022 | March 2023            |
 
-> ¹ In November 2023, Astronomer Certified 2.3 was reclassified as a stable release only. Astronomer recommends upgrading or [migrating to Astro Runtime 5.0](migrate-to-runtime.md) to receive long term support for Apache Airflow 2.3.
+> ¹ In November 2022, Astronomer Certified 2.3 was reclassified as a stable release only. Astronomer recommends upgrading or migrating to Astro Runtime 5.0.x to receive long term support for Apache Airflow 2.3.
 
 ### LTS releases
 

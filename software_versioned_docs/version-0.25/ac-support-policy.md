@@ -126,7 +126,7 @@ The following tables contain the exact lifecycle for each published version of A
 | [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)¹       | April 30, 2022 | October 2022            |
 | [2.4](https://github.com/astronomer/ap-airflow/blob/master/2.4.1/CHANGELOG.md)       | September 29, 2022 | March 2023            |
 
-> ¹ In November 2023, Astronomer Certified 2.3 was reclassified as a stable release only.
+> ¹ In November 2022, Astronomer Certified 2.3 was reclassified as a stable release only.
 
 ### LTS releases
 
