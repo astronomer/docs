@@ -24,6 +24,7 @@ The connection option that you choose is determined by the requirements of your 
         {label: 'VPC peering', value: 'VPC peering'},
         {label: 'Transit Gateways', value: 'Transit Gateways'},
         {label: 'AWS PrivateLink', value: 'AWS PrivateLink'},
+        {label: 'Amazon Route 53', value: 'Amazon Route 53'},
     ]}>
 <TabItem value="Public endpoints">
 
@@ -118,6 +119,40 @@ You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpo
 
 </TabItem>
 
+<TabItem value="Amazon Route 53">
+
+Use Amazon Route 53 to connect internet applications running on AWS or on-premises to Astro.
+
+#### Prerequisites
+
+- An Amazon Route 53 Internet Resolver rule
+- Permission to share resources using the AWS Resource Access Manager (RAM)
+
+#### Step 1: Share the Amazon Route 53 Internet Resolver rule
+
+To use Amazon Route 53 to connect internet applications running on AWS or on-premises to Astro, you need to share your Internet Resolver rule with Astronomer support.
+
+1. In the Route 53 Dashboard,  click **Rules** below **Resolver** in the navigation menu.
+
+2. Select the Internet Resolver rule and then click **Details**.
+
+3. Click **Share**, enter `Astro` in the **Name** field, and then enter the remaining resource share details.
+
+4. Click **Create resource share**.
+
+#### Step 2: Contact Astronomer support
+
+To use Amazon Route 53 to connect internet applications running on AWS or on-premises to Astro, submit a request to [Astronomer support](https://cloud.astronomer.io/support) with the following information:
+
+- The Amazon Route 53 Internet Resolver rule ID. To locate the Internet Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Internet Resolver **ID** column.
+
+- The Astro AWS External ID for your organization. In the Cloud UI, click **Settings** and then copy the value in the **AWS External ID** field.
+
+#### Step 3: Confirm connectivity
+
+When Astronomer support confirms that the Amazon Route 53 connection is complete, confirm Astro can communicate with the connected applications.
+
+</TabItem>
 </Tabs>
 
 ## Authorization options
