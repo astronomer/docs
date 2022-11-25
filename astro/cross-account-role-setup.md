@@ -68,20 +68,20 @@ If you want to continue with the second option, you'll additionally need:
 
 ## Step 1: Create an IAM role for Astronomer
 
-When a data plane is activated on AWS, a cross-account IAM role and supporting policies are created. These define the set of actions the control plane is permitted to perform in the management of the data plane.
+When a data plane is activated on AWS, a cross-account IAM role and supporting policies are created to define the actions the control plane is permitted to perform when managing the data plane.
 
-Astronomer follows the principles of least privilege access and policies are defined to support the functionality of the entire Astro product. You can preview this role by examining [the CloudFormation template](https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account-prerelease.yaml) that will be used to create this role.
+Astronomer adheres to the least privilege access principle when defining policies that support Astro functionality. To preview the roles that support these policies, see the [CloudFormation template](https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account-prerelease.yaml).
 
 #### Notification of changes to the cross-account role 
-From time-to-time, it may be necessary to make changes to these policies to ensure continued operation and evolution of the Astro platform. 
+Occasionally, Astronomer makes changes to its policies to ensure the continued operation and development of Astro. 
 
-Astronomer will notify users with an Organization Owner role at least 14 days prior to any changes to a policy governing the cross-account IAM role that result in an *expansion* of access. The notification will be sent via email, reflect the change(s) to the policy, and include a brief explanation for the change. 
+Users with an Organization Owner role will receive an email notification from Astronomer 14 days before any changes are made to the policies governing the cross-account IAM role that expand user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
 
-Astronomer may *reduce* the access available to the cross-account role as part of standard change management approaches without any notifications.
+Astronomer can reduce the access available to the cross-account role without notification.
 
 #### Monitor the cross-account role for changes (optional)
 
-You can monitor changes to policies within the cross-account role using CloudTrail. Astronomer’s access is limited to prevent modification or deletion of any logs in CloudTrail. The following table lists the events that you should monitor. 
+You can use CloudTrail to monitor changes to policies within the cross-account role.  Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor. 
 
 | Event Names                              | Resource                                                         |
 | ---------------------------------------- | ---------------------------------------------------------------- |
