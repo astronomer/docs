@@ -9,9 +9,9 @@ Data quality is key to the success of an organization's data systems. With in-DA
 
 Executing SQL queries is one of the most common use cases for data pipelines, and it's a simple and effective way to implement data quality checks. Using Airflow, you can quickly put together a pipeline specifically for checking data quality, or you can add quality checks to existing ETL/ELT pipelines with just a few lines of boilerplate code.
 
-In this tutorial, you'll learn about three SQL Check operators and how to use them to build a robust data quality suite for your DAGs.
+In this guide, you'll learn about three SQL Check operators and how to use them to build a robust data quality suite for your DAGs.
 
-All code used in this tutorial is located in the [Astronomer Registry](https://github.com/astronomer/airflow-data-quality-demo/).
+All code used in this guide is located in the [Astronomer Registry](https://github.com/astronomer/airflow-data-quality-demo/).
 
 ## Assumed knowledge
 
@@ -43,7 +43,7 @@ Astronomer recommends using the `SQLColumnCheckOperator` and `SQLTableCheckOpera
 The `SQLColumnCheckOperator` and the `SQLTableCheckOperator` are available in the [common SQL provider package](https://pypi.org/project/apache-airflow-providers-common-sql/) which can be installed with:
 
 ```bash
-pip install apache-airflow-providers-common-sql
+pip install apache-airflow-providers-common-sql==<version>
 ```
 
 The `SQLCheckOperator`, `SQLIntervalCheckOperator`, `SQLValueCheckOperator` and `SQLThresholdCheckOperator` are built into core Airflow and do not require a separate package installation.
