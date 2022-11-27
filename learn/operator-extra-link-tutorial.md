@@ -239,18 +239,7 @@ This task will post the same GET request to the API you defined with the connect
 
 ## Step 9: Add a dynamic extra link to your custom operator
 
-Next, you will create a dynamic extra link.
-
-<Tabs
-    defaultValue="plugin"
-    groupId= "add-extra-link-to-operator"
-    values={[
-        {label: 'Using a plugin', value: 'plugin'},
-        {label: 'Using a provider', value: 'provider'},
-    ]}>
-<TabItem value="plugin">
-
-To add the dynamic operator extra link via a plugin, follow these steps:
+Next, you will create a dynamic extra link using an Airflow plugin by following these steps:
 
 1. Open `my_extra_link_plugin.py` in your `plugins` folder.
 
@@ -292,49 +281,11 @@ To add the dynamic operator extra link via a plugin, follow these steps:
 
 5. Save the file and restart your Airflow instance with `astro dev restart`.
 
-</TabItem>
+:::tip
 
-<TabItem value="provider">
+If you want to add an operator extra link to a custom operator as part of a provider package, make sure you install it with the rest of the package using a setup.py file or wheels. You can learn more in the official Airflow documentation under [How to create your own provider](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider). 
 
-When creating a custom provider (learn more in the [official Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider)) you can add the dynamic operator extra link directly in the operator code by following these steps:
-
-1. Add `cat_http.py` to your provider package. 
-
-2. Add the following two lines to your import statements:
-
-    ```python
-    from airflow.models import XCom
-    from airflow.models.baseoperator import BaseOperatorLink
-    ```
-
-3. Below the import statements and above the definition of the `CatHttpOperator` class add the code below:
-
-    ```python
-    class CatLink(BaseOperatorLink):
-
-        # name the link button in the UI
-        @property
-        def name(self):
-            return "HTTP cat"
-
-        # provide the link
-        def get_link(self, operator, *, ti_key=None):
-            status_code = XCom.get_value(key="status_code", ti_key=ti_key) or ""
-            return f"https://http.cat/{status_code}"
-    ```
-
-    The code in the `.get_link()` method retrieves the `status_code` you pushed to XCom and appends it to the [HTTP cat Api link](https://http.cat/).
-
-4. Add the operator extra link in your custom operator. To do so simply add the following line in the class definiton of the `CatHttpOperator` above the `.__init__()` method:
-
-    ```python
-    operator_extra_links=[CatLink()]
-    ```
-
-5. Make sure all provider package files exist in the interpreter's `site-packages` folder.
-
-</TabItem>
-</Tabs>
+:::
 
 ## Step 10: See your new extra link in action
 
