@@ -283,7 +283,7 @@ Next, you will create a dynamic extra link using an Airflow plugin by following 
 
 :::tip
 
-If you want to add an operator extra link to a custom operator as part of a provider package, make sure you install it with the rest of the package using a setup.py file or wheels. You can learn more in the official Airflow documentation under [How to create your own provider](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider). 
+If you want to add an operator extra link to a custom operator as part of a provider package, make sure you install it with the rest of the package using a setup.py file or `wheels`. You can learn more in the official Airflow documentation under [How to create your own provider](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider). 
 
 :::
 
