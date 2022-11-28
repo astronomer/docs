@@ -39,7 +39,7 @@ For this tutorial, you will need to access SageMaker from your Airflow environme
 
 :::info
 
-If you are uncertain which method you use to connect to AWS, contact your AWS Administrator. These steps may not fit your desired authentication mechanism
+If you are uncertain which method you use to connect to AWS, contact your AWS Administrator. These steps may not fit your desired authentication mechanism.
 
 :::
 
