@@ -1,19 +1,15 @@
 ---
-title: "Run Snowpark queries with the ExternalPythonOperator"
+title: "Run Snowpark queries with the ExternalPythonOperator in Apache Airflow"
 sidebar_label: "Use the ExternalPythonOperator"
 description: "Learn how to run a Snowpark query in a virtual Python environment using the ExternalPythonOperator in Airflow."
 id: external-python-operator
 ---
 
-It is very common in data science and data engineering use cases to need to run a task with different requirements from your Airflow environment. Your task may need a different Python version than Airflow, or require packages that conflict with core Airflow or your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
+It is very common to run a task with different dependencies than your Airflow environment. Your task might need a different Python version than core Airflow, or it has packages that conflict with your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
 
-In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator) to run a task that leverages the [Snowpark API](https://www.snowflake.com/snowpark/) for data transformations. Snowpark allows you to run queries and transformations on your data using different programming languages, making it a flexible addition to traditional Snowflake operators. Snowpark requires Python 3.8, while [Astro runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator will run a task in an existing Python virtual environment, allowing you to choose a different Python version for particular tasks. 
+In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator) to run a task that leverages the [Snowpark API](https://www.snowflake.com/snowpark/) for data transformations. Snowpark allows you to run queries and transformations on your data using different programming languages, making it a flexible addition to traditional Snowflake operators. 
 
-:::note
-
-The general steps presented here could be applied to any other use case for running a task in a reusable Python virtual environment.
-
-:::
+Snowpark requires Python 3.8, while [Astro runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator will run your Snowpark query in a Python 3.8 virtual environment, allowing you to use a different python version than Airflow. You can use these same general steps for any use case for running a task in a reusable Python virtual environment.
 
 ## Time to complete
 
@@ -21,24 +17,22 @@ This tutorial takes approximately one hour to complete.
 
 ## Assumed knowledge
 
-To get the most out of this tutorial, make sure you have an understanding of:
+To get the most out of this tutorial, you should be familiar with:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Python virtual environments. See [Python Virtual Environments: A Primer](https://realpython.com/python-virtual-environments-a-primer/).
 
 ## Prerequisites
 
-To complete this tutorial, you need:
-
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A Snowflake Enterprise account. If you don't already have an account, Snowflake has a [free Snowflake trial](https://signup.snowflake.com/) for 30 days.
-- An external secrets manager of your choice (optional). For this tutorial we use [AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html).   
+- An external secrets manager of your choice (optional). This tutorial uses [AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html).   
 
 ## Step 1: Set up your data stores
 
 For this example, you will need data in a Snowflake table to query using Snowpark. To create a table, run the following queries in Snowflake:
 
-1. Create a table.
+1. Create a table:
 
     ```sql
     CREATE TABLE dog_intelligence (
@@ -52,7 +46,7 @@ For this example, you will need data in a Snowflake table to query using Snowpar
     );
     ```
 
-2. Populate the table.
+2. Populate the table:
 
     ```sql
     INSERT INTO dog_intelligence
@@ -66,7 +60,7 @@ For this example, you will need data in a Snowflake table to query using Snowpar
 
 ## Step 2: Create a connection to Snowflake in your secrets manager (optional)
 
-You will need to pass Snowflake connection information to your virtual environment in order for your DAG to connect to Snowflake. If you are using an external secrets manager, add a new secret called `/airflow/connections/snowflake` with the connection information in json format like the following:
+Your Python virtual environment needs access to Snowflake through a connection. If you are using an external secrets manager, add a new secret called `/airflow/connections/snowflake` with the connection information with the following JSON:
 
 ```text
 {
@@ -75,11 +69,11 @@ You will need to pass Snowflake connection information to your virtual environme
     "password": "your-password",
     "schema": "your-schema",
     "extra": {
-        "account": "your-account",
-        "database": "your-database",
-        "region": "your-region",
-        "warehouse": "your-warehouse",
-        "role": "your-role"
+        "account": "<your-account>",
+        "database": "<your-database>",
+        "region": "<your-region>",
+        "warehouse": "<your-warehouse>",
+        "role": "<your-role>"
     }
 }
 ```
@@ -88,7 +82,7 @@ If you are not using an external secrets manager, you can skip this step.
 
 ## Step 3: Configure your Astro project
 
-Now that you have your Snowflake resources configured, you can move on to setting up Airflow.
+Now that you have your Snowflake resources configured, you can set up Airflow.
 
 1. Create a new Astro project:
 
@@ -131,16 +125,16 @@ Now that you have your Snowflake resources configured, you can move on to settin
         pip install --no-cache-dir -r snowpark_requirements.txt
     ```
 
-    These commands install `pyenv` in your Airflow environment and create a Python 3.8 virtual environment called `snowpark_env` with the required packages to run Snowpark that will be used by the ExternalPythonOperator. The `pyenv` environment will be created when you start your Airflow project, and can be used by any number of ExternalPythonOperator tasks. If you use a different virtual environment package (e.g. `venv` or `conda`) you may need to update this step.
+    These commands install `pyenv` in your Airflow environment and create a Python 3.8 virtual environment called `snowpark_env` with the required packages to run Snowpark. The `pyenv` environment is initialized when you start your Airflow project and can be used by any ExternalPythonOperator tasks. If you use a different virtual environment package (such as `venv` or `conda`), you might need to update this configuration.
 
-4. (Optional) If you setup a Snowflake connection with a secrets manager as described in [Step 2](#step-2-create-a-connection-to-snowflake-in-your-secrets-manager-optional), add a new file to the root folder of your project called `secrets-manager.env` and add environment variables that can be used to connect to your secrets manager. For example, if you use AWS parameter store, you might add the following:
+4. (Optional) If you set up a Snowflake connection with a secrets manager as described in [Step 2](#step-2-create-a-connection-to-snowflake-in-your-secrets-manager-optional), add a new file to the root folder of your project called `secrets-manager.env` and add environment variables that can be used to connect to your secrets manager. For example, if you use AWS parameter store, you might add the following:
 
     ```text
     AWS_ACCESS_KEY_ID=<your-access-key-id>
     AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
     ```
 
-    Add the `secrets-manager.env` file to your project's ``.gitignore` file so sensitive credentials aren't tracked in git, and update the last two lines of your Dockerfile to the following:
+    Add the `secrets-manager.env` file to your project's `.gitignore` file so sensitive credentials aren't tracked in git, and update the last two lines of your Dockerfile to the following:
 
     ```docker
     pip install --no-cache-dir -r snowpark_requirements.txt && \
@@ -149,11 +143,11 @@ Now that you have your Snowflake resources configured, you can move on to settin
 
     If you are not using an external secrets manager, you can skip this step.
 
-    :::note
+  :::note
 
-    There are many ways to connect your virtual environment to your secrets manager beyond what is presented here, including passing a profile with a shared credential file or having your environment assume a role that has access to your secrets manager. The access key and secret method described here is the most straight forward when working with a local project, but may not be recommended for production in some organizations.
+  There are many ways to connect your virtual environment to your secrets manager, including passing a profile with a shared credential file or having your environment assume a role that has access to your secrets manager. The access key and secret method described here is the most straight forward when working with a local project, but might not work for production in some organizations.
 
-    ::: 
+  ::: 
 
 5. Add the following to your `packages.txt` file:
 
@@ -185,11 +179,11 @@ Now that you have your Snowflake resources configured, you can move on to settin
     astro dev start
     ```
 
-    :::note
+  :::note
 
-    The build of this project's Dockerfile can take up to 20 minutes due to the `pyenv` and Python 3.8 installation. If you are an Astronomer customer and will be deploying this project to Astro, you can use a `dag-only` deploy after the initial deployment to avoid rebuilding the Dockerfile when making changes to DAGs in the project.
+  The build of this project's Dockerfile can take up to 20 minutes due to the `pyenv` and Python 3.8 installation. If you are an Astronomer customer and will be deploying this project to Astro, you can use a `dag-only` deploy after the initial deployment to avoid rebuilding the Dockerfile when making changes to DAGs in the project.
 
-    :::
+  :::
 
 ## Step 4: Create your DAG
 
@@ -280,7 +274,7 @@ with DAG(
     task_print >> task_external_python
 ```
 
-This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in [Step 3](#step-3-configure-your-astro-project). The ExternalPythonOperator task also prints a list of packages installed in the virtual environment; this is optional, but can be helpful for debugging if something goes wrong.
+This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in [Step 3](#step-3-configure-your-astro-project). The ExternalPythonOperator task also prints a list of packages installed in the virtual environment, which can be helpful for debugging.
 
 This example pulls Snowflake connection information from AWS Parameter Store. If you are using a different secrets manager, you will need to update the following lines:
 
@@ -297,7 +291,7 @@ To run the DAG without an external secrets manager, simply provide your connecti
 
 ## Step 5: Run your DAG to execute your Snowpark query in a virtual environment
 
-Go to the Airflow UI, unpause your `py_virtual_env` DAG, and trigger it to run your Snowpark query in an isolated Python virtual environment. Go to the task logs and you should see the list of installed packages and the results of your query printed:
+Go to the Airflow UI, unpause your `py_virtual_env` DAG and trigger it to run your Snowpark query in an isolated Python virtual environment. Open your tasks logs to see the list of installed packages and the results of your query printed:
 
 ```text
 [2022-11-17, 18:55:56 UTC] {process_utils.py:179} INFO - Executing cmd: /home/astro/.pyenv/versions/snowpark_env/bin/python /tmp/tmd_3cp_1al/script.py /tmp/tmd_3cp_1al/script.in /tmp/tmd_3cp_1al/script.out /tmp/tmd_3cp_1al/string_args.txt
@@ -311,7 +305,7 @@ Go to the Airflow UI, unpause your `py_virtual_env` DAG, and trigger it to run y
 
 ## Other methods for running tasks in isolated environments
 
-Airflow has several other options for running tasks in isolated environments. Which you should choose  depends on your use case and your Airflow infrastructure.
+Airflow has several other options for running tasks in isolated environments:
 
 - [The KubernetesPodOperator](https://docs.astronomer.io/learn/kubepod-operator). This operator is ideal for users who are running Airflow on Kubernetes and want more control over the resources and infrastructure used to run the task in addition to package management. Downsides include more complex setup and higher task latency.
 - [The PythonVirtualenvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator). This operator works similarly to the ExternalPythonOperator, but it creates and destroys a new virtual environment for each task. This operator is ideal if you don't want to persist your virtual environment. Downsides include higher task latency since the environment must be created each time the task is run.
