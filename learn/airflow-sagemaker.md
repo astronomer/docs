@@ -84,7 +84,6 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
 
     These variables ensure that all SageMaker operators will work in your Airflow environment. Some require XCom pickling to be turned on in order to work because they return objects that are not JSON serializable. 
 
-    Your `.env` file only applies to your local Airflow. To set variables in your Astronomer Airflow instances, [follow this guide](https://docs.astronomer.io/astro/environment-variables).
 
 4. Run the following command to start your project in a local environment:
 
