@@ -24,11 +24,11 @@ While the tables below reference the minimum compatible versions, we typically r
 
 :::info
 
-¹ Some Kubernetes versions are compatible only up until a specific patch version of Astronomer Software.
+¹ Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
 
-- Support for Kubernetes 1.17 ends with 0.25.12.
-- Support for Kubernetes 1.18 ends with 0.25.13.
-- Support for Kubernetes 1.19 and 1.20 ends with 0.25.15, 0.28.7, 0.29.5, and 0.30.4.
+- Support for Kubernetes 1.17 ends with Astronomer Software 0.25.12.
+- Support for Kubernetes 1.18 ends with Astronomer Software 0.25.13.
+- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.25.15, 0.28.7, 0.29.5, and 0.30.4.
 
 :::
 
@@ -41,13 +41,13 @@ All currently supported Astronomer-distributed images are compatible with all ve
 
 :::info
 
-Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
+Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private Certificate Authorities (CAs) starting with Kubernetes 1.19. If your organization is using a private CA, contact [Astronomer support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on Azure Kubernetes Service (AKS).
 
 :::
 
 :::info
 
-While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow triggerer is available only in Astronomer v0.26+. To use [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), which require the Airflow triggerer, you must upgrade.
+While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow triggerer is available only in Astronomer v0.26 and later. To use [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), that require the Airflow triggerer, you must upgrade.
 
 :::
 
