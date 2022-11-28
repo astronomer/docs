@@ -480,7 +480,8 @@ This setup assumes the following prerequisites:
         - name: checkout repo
           uses: actions/checkout@v3
           with:
-          fetch-depth: 2
+            # Checkout as many commits as needed for the diff
+            fetch-depth: 2
           # Determine if only DAGs have changes 
         - name: Get Deployment Type
           id: deployment-type
