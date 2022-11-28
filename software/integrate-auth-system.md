@@ -428,7 +428,7 @@ This setup assumes you have already registered Astronomer as an application on A
 
 2. In the **Provisioning Mode** menu, select **Automatic**.
 
-3. In the **Tenant URL**, enter the URL for Astronomer's SCIM endpoint. This should be: `https://BASEDOMAIN.astronomer.io/v1/scim/okta`.
+3. In **Tenant URL**, enter the URL for Astronomer's SCIM endpoint. This should be: `https://BASEDOMAIN.astronomer.io/v1/scim/okta`.
 
 4. Optional. If you use an OAuth token issuer other than Azure AD, copy the required OAuth bearer token into the **Secret Token** field. If this field is left blank, Azure AD includes an OAuth bearer token issued from Azure AD with each request.
 
@@ -439,8 +439,8 @@ This setup assumes you have already registered Astronomer as an application on A
 7. Go to **Manage** > **Provisioning** > **Settings**.
 
 8. In the **Scope** setting, select **Sync only assigned users and groups**.
-
-9.  Turning the **Provisioning status** toggle to **On**.
+   
+9. Turn the **Provisioning status** toggle to **On**.
 
 10. Click **Save**.
 
