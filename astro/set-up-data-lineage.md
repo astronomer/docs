@@ -7,73 +7,43 @@ toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
-[Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking and observing data from its origin to wherever it is consumed downstream as it flows through a data pipeline. This includes connections between datasets and tables in a database as well as rich metadata about the tasks that create and transform data. You can use data lineage to trace the history of a dataset, troubleshoot run failures, manage personally identifiable information (PII), and ensure compliance with data regulations.
+[Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking data from its origin to wherever it is consumed downstream as it flows through a data pipeline. This includes connections between datasets and tables in a database as well as rich metadata about the tasks that create and transform data. You can observe data lineage to trace the history of a dataset, troubleshoot run failures, manage personally identifiable information (PII), and ensure compliance with data regulations.
 
-All Astro Deployments use the [OpenLineage Airflow library](https://openlineage.io/integration/apache-airflow/)(`openlineage-airflow`) to gather lineage data. The OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default.
+All Astro Deployments use the [OpenLineage Airflow library](https://openlineage.io/integration/apache-airflow/) (`openlineage-airflow`) to gather lineage data. The OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default.
 
 There are two ways to emit lineage data:
 
-- Run a task on Astro with a supported Airflow operator. These operators use tools called extractors to automatically emit lineage data and don’t require additional configuration.
-- Integrate OpenLineage with an external service, such as dbt or Databricks, to emit data lineage outside of an Airflow DAG or task. This might require additional configuration.
+- Run a task on Astro with a supported Airflow operator. These operators use extractors to automatically emit lineage data and don’t require additional configuration. See [Supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators).
+- Integrate OpenLineage with an external service, such as dbt or Apache Spark, to emit data lineage outside of an Airflow DAG or task. This might require additional configuration.
 
 The data lineage graph in the Cloud UI shows lineage data that is emitted with both methods, including tasks or jobs that are not run on Astro. This graph can provide context to your data before, during, and after it reaches your Deployment. See [View data lineage](data-lineage.md).
 
-## Reference for lineage from Airflow operators
+## Integrate Astro and OpenLineage with external systems
 
-An [Airflow operator](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) is an instantiation of an Airflow task and contains the logic that defines how the task processes data. Each task in an Airflow DAG is defined with an operator.
+To store lineage data that is emitted from any system, a lineage backend is required. If you're an Astro customer, use Astro as a lineage backend instead of configuring a custom solution with a tool such as [Marquez](https://marquezproject.github.io/marquez/). To emit lineage data from Airflow tasks that run on Astro, Astro is automatically set as the lineage backend and no additional configuration is required.
 
-Depending on the collection of operators that you use to run tasks on Astro, lineage data might or might not be emitted.
+To emit lineage data from an Airflow task that runs outside of Astro or from an external system that does not interact with Airflow:
 
-### Supported Airflow operators
+- Retrieve an OpenLineage API key from Astro. There is only one API key for each Organization.
+- Specify your OpenLineage API key in the external system.
+- Set Astro as your OpenLineage backend.
 
-The following operators are supported in Astro lineage and do not require additional configuration. Tasks that run with supported operators appear as nodes in your data lineage graphs and show connections to any input and output datasets.
+### Retrieve an OpenLineage API key
 
-- `PostgresOperator`
-- `BigQueryOperator`
-- `SnowflakeOperator`
-- `GreatExpectationsOperator`
-- `MySqlOperator`
-- `RedshiftDataOperator`
-- `RedshiftSQLOperator`
-- `SQLCheckOperator`
-- `SQLValueCheckOperator`
-- `SQLThresholdCheckOperator`
-- `SQLIntervalCheckOperator`
-- `SQLColumnCheckOperator`
-- `BigQueryColumnCheckOperator`
-- `SQLTableCheckOperator`
-- `BigQueryTableCheckOperator`
-
-### Partially supported Airflow operators
-
-The following operators are partially supported by the Airflow integration with OpenLineage:
-
-- `PythonOperator`
-- `BashOperator`
-
-The following Airflow tasks run with partially supported operators:
-
-- Emit source code to the lineage backend.
-- Emit task run data to the lineage backend.
-- Appear as nodes in the graph view of the Cloud UI **Lineage** page.
-- Do not emit lineage data about input or output datasets.
-
-### Unsupported operators
-
-Airflow tasks that run with unsupported operators:
-
-- Emit information about the task duration, status, and parent DAG.
-- Do not emit information about the task's input or output datasets.
-
-A task running with an unsupported operator appears as a single node in the graph view of the Cloud UI **Lineage** page.
+1. In the Cloud UI, click **Settings**.
+2. Copy the value in the **Lineage API Key** field.
+3. Specify your Organization's OpenLineage API key in the external system's configuration.
 
 ## OpenLineage and Snowflake
 
-The `SnowflakeOperator` in Airflow is officially supported by OpenLineage and does not require additional configuration. Lineage data for any task that you run with this operator in Airflow or on Astro is available in the Cloud UI **Lineage** page.
+Lineage data emitted from [Snowflake](https://www.snowflake.com/en/) is similar to what is collected from other SQL databases, including Amazon Redshift and Google BigQuery. However, Snowflake is unique in that it emits [query tags](https://docs.snowflake.com/en/user-guide/object-tagging.html#what-is-a-tag) that provides additional task execution detail that other databases don't provide.
 
-Lineage data that is collected by [Snowflake](https://www.snowflake.com/en/) is similar to what is collected from other SQL databases, including Amazon Redshift, BigQuery, and MySQL. However, Snowflake also emits query tags. A [query tag in Snowflake](https://docs.snowflake.com/en/user-guide/object-tagging.html#what-is-a-tag) is a schema-level object that can be assigned to another Snowflake object. To see the data OpenLineage collects from databases, see [Capability Matrix](https://openlineage.io/docs/integrations/about/#capability-matrix). 
+When you run a task in Airflow that interacts with Snowflake, the query tag allows each task to be directly matched with the Snowflake query or queries that are run by that task. If the task fails, for example, you can look up the Snowflake query that was executed by that task and reduce the time required to troubleshoot the task failure.
 
-When you run a task with the `SnowflakeOperator` in Airflow, the query tag allows each task to be directly matched with the Snowflake query or queries that are run by that task. This additional information provides additional task execution detail that other databases don't provide. If a `SnowflakeOperator` task fails on Astro, for example, you can look up the Snowflake query that was executed by that task and reduce the time required to troubleshoot the task failure.
+To emit lineage data from Snowflake:
+
+1. Add a Snowflake connection to Airflow. See [Snowflake connection](https://airflow.apache.org/docs/apache-airflow-providers-snowflake/stable/connections/snowflake.html).
+2. Run an Airflow DAG or task with the [`SnowflakeOperator`](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) or `SnowflakeOperatorAsync`. This operator is officially supported by OpenLineage and does not require additional configuration.
 
 ### Lineage data collected for Snowflake
 
@@ -115,20 +85,6 @@ After you run a DAG with the SnowflakeOperator, open the **Lineage** page in the
 
 Because Workspace permissions are not yet applied to the **Lineage** page, viewing source code for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) is off by default. If you want users across Workspaces to be able to view source code for Airflow tasks in a given Deployment, create an [environment variable](environment-variables.md) in the Deployment with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`. Astronomer recommends enabling this feature only for Deployments with non-sensitive code and workflows.
 
-## Integrate OpenLineage with external systems
-
-You can configure external systems to emit lineage data that appears in the Cloud UI without running Airflow tasks on Astro. Configuring a system to send lineage data requires:
-
-- Installing an OpenLineage backend to emit lineage data from the system.
-- Specifying your Organization's OpenLineage API endpoint to send lineage data to the Astro control plane.
-
-### Retrieve an OpenLineage API key
-
-To send lineage data from an external system to Astro, you must specify your Organization's OpenLineage API key in the external system's configuration.
-
-1. In the Cloud UI, click **Settings**.
-2. Copy the value in the **Lineage API Key** field.
-3. Configure the API key in an your external system. 
 
 ## OpenLineage and Snowflake 
 
