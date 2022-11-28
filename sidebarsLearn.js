@@ -120,6 +120,7 @@ module.exports = {
         },
         'astro-python-sdk',
         'cloud-ide-tutorial',
+        'custom-airflow-ui-docs-tutorial',
         'external-python-operator'
       ],
     },

@@ -41,7 +41,7 @@ Using the Astro Python SDK requires configuring a few things in your Airflow pro
 1. Install the Astro Python SDK package in your Airflow environment. If you're using the Astro CLI, add the following to the `requirements.txt` file of your Astro project:
 
     ```
-    astro-python-sdk
+    astro-sdk-python
     ```
     
 2. Add the following environment variables. If you're using the Astro CLI locally, add these to the `.env` file of your Astro project:
@@ -53,7 +53,7 @@ Using the Astro Python SDK requires configuring a few things in your Airflow pro
 
     The `AIRFLOW__ASTRO_SDK__SQL_SCHEMA` variable should be the schema you want to store all intermediary tables in. To deploy a pipeline written with the Astro Python SDK to Astro, add these environment variables to your Deployment. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
 
-For a guided experience to get started, see the [Astro Python SDK tutorial](https://github.com/astronomer/astro-sdk/blob/main/docs/getting-started/GETTING_STARTED.md).
+For a guided experience to get started, see the [Astro Python SDK tutorial](astro-python-sdk.md).
 
 ## Example
 
@@ -108,12 +108,12 @@ def create_reporting_table():
 @dag(start_date=datetime(2021, 12, 1), schedule_interval="@daily", catchup=False)
 def example_s3_to_snowflake_etl():
     # Initial load of homes data csv's from S3 into Snowflake
-    homes_data1 = load_file(
+    homes_data1 = aql.load_file(
         task_id="load_homes1",
         input_file=File(path="s3://airflow-kenten/homes1.csv", conn_id=AWS_CONN_ID),
         output_table=Table(name="HOMES1", conn_id=SNOWFLAKE_CONN_ID)
     )
-    homes_data2 = load_file(
+    homes_data2 = aql.load_file(
         task_id="load_homes2",
         input_file=File(path="s3://airflow-kenten/homes2.csv", conn_id=AWS_CONN_ID),
         output_table=Table(name="HOMES2", conn_id=SNOWFLAKE_CONN_ID)
