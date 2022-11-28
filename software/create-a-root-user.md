@@ -25,6 +25,8 @@ After you apply the configuration change, Helm provides a command for how to ret
 
 ## Customize the root user's password
 
+You might want to use a custom root user password to ensure that someone who has recently left your organization no longer has access to the root user. 
+
 To configure a custom password for the root user, run the following command: 
 
 ```sh
