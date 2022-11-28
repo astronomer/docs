@@ -5,7 +5,7 @@ description: "Learn how to load data into MongoDB with your Apache Airflow DAGs.
 id: "airflow-mongodb"
 ---
 
-[MongoDB](https://www.mongodb.com/) is a noSQL document database designed for workloads of any scale. By leveraging the [Mongo provider](https://registry.astronomer.io/providers/mongo), you can easily orchestrate many MongoDB use cases with Airflow such as:
+[MongoDB](https://www.mongodb.com/) is an open-source general purpose database built by developers, for developers. MongoDB's popularity is driven by its use of flexible document schemas and horizontal scalability. By leveraging the [Mongo provider](https://registry.astronomer.io/providers/mongo), you can easily orchestrate many use cases with Airflow such as:
 
 - Machine learning pipelines.
 - Automating database administration operations.
@@ -145,7 +145,7 @@ with DAG(
     t1 >> t2
 ```
 
-This DAG gets currency data from an API using the SimpleHttpOperator loads the data into MongoDB using the MongoHook and the PythonOperator. The data will be loaded as a new collection in a database called `MyDB`.
+This DAG gets currency data from an API using the SimpleHttpOperator and loads the data into MongoDB using the MongoHook and the PythonOperator. The data will be loaded as a new collection in a database called `MyDB`.
 
 ## Step 5: Run the DAG and review the data
 
