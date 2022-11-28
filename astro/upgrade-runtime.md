@@ -30,7 +30,7 @@ This is where you'll find the upgrade considerations for specific Astro Runtime 
 
 #### Runtime 6 (Airflow 2.4)
 
-Smart Sensors were deprecated in Airflow 2.2.4, and were removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to move to deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
+Smart Sensors were deprecated in Airflow 2.2.4 and removed in Airflow 2.4.0. If your organization is still using Smart Sensors, you'll need to start using deferrable operators. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
 #### Runtime 5 (Airflow 2.3)
 
