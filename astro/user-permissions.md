@@ -66,6 +66,6 @@ There are three Deployment roles: Deployment Admin, Deployment Editor, and Deplo
 
 :::caution
 
-If a user has Workspace admin role, irrespective of the Deployment role, they can perofrm admin level actions on the Airflow deployment.
+When a user is a Workspace admin, they assume Deployment Admin permissions on the Airflow deployment.
 
 :::
