@@ -78,9 +78,11 @@ After configuring and importing user groups, Workspace Admins and Deployment Adm
 
 :::info
 
-This configuration requires setting up a root user. See [Create a root user].
+This configuration requires setting up a root user. See [Create a root user](create-a-root-user.md).
 
-To make it so that users can only join Astronomer Software and be assigned roles through Teams, set the following in your `config.yaml` file:
+:::
+
+To make it so that users can join Astronomer Software and be assigned roles only through Teams, add the following to your `config.yaml` file:
 
 ```yaml
 astronomer: 
