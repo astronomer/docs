@@ -116,7 +116,7 @@ In the **Extra** field, provide your AWS session token generated in Step 1 using
 
 :::warning
 
-Your credentials should only last up to a day - you will need to edit the details in the connection with new credentials, if you want to run this again another day
+Your AWS credentials will only last one day using this authentication method. If you return to this step after your credentials have expired, you will need to edit the details in the connection with updated credentials.
 
 :::
 
