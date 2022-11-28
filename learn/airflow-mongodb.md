@@ -1,5 +1,5 @@
 ---
-title: "Load data to MongoDB with Airflow"
+title: "Load data to MongoDB with Apache Airflow"
 sidebar_label: "MongoDB"
 description: "Learn how to load data into MongoDB with your Apache Airflow DAGs."
 id: "airflow-mongodb"
@@ -34,10 +34,8 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Prerequisites
 
-To complete this tutorial, you need:
-
-- A MongoDB cluster. We recommend using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register), a hosted MongoDB cluster with integrated data services that offers a free trial.
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- A MongoDB cluster. Astronomer recommends using [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register), a hosted MongoDB cluster with integrated data services that offers a free trial. See [Getting started with MongoDB Atlas](https://www.mongodb.com/docs/atlas/getting-started/).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 
 ## Step 1: Configure your MongoDB Atlas cluster and database
 
@@ -76,9 +74,11 @@ Use the Astro CLI to create and run an Airflow project locally.
 
 ## Step 3: Configure your Airflow connections
 
-Add two connections that Airflow will use to connect to MongoDB and the API providing the data. In the Airflow UI, go to **Admin** -> **Connections**.
+The connections you configure will connect to MongoDB and the API providing sample data. 
 
-1. Create a new connection named `mongo_default` and choose the `MongoDB` connection type. Enter the following information: 
+1. In the Airflow UI, go to **Admin** -> **Connections**.
+
+2. Create a new connection named `mongo_default` and choose the `MongoDB` connection type. Enter the following information: 
 
     - **Host:** Your MongoDB Atlas host name
     - **Login:** Your database user ID
@@ -89,11 +89,9 @@ Add two connections that Airflow will use to connect to MongoDB and the API prov
 
     ![Mongo connection](/img/tutorials/mongo_airflow_connection.png)
 
-    If you don't know your MongoDB Atlas host name, go to your database in the Atlas UI and click on **Connect**. Any of the connection options in this section will give you a connection URI that will include your host name.
-    
-    For more on connecting to your MongoDB cluster, see [Connect to a database deployment](https://www.mongodb.com/docs/atlas/connect-to-database-deployment/).
+    If you don't know your MongoDB Atlas host name, go to your database in the Atlas UI and click on **Connect**. Any of the connection options in this section will give you a connection URI that will include your host name. For more on connecting to your MongoDB cluster, see [Connect to a database deployment](https://www.mongodb.com/docs/atlas/connect-to-database-deployment/).
 
-2. Create a second connection named `http_default` and choose the `HTTP` connection type. Enter the following information:
+3. Create a second connection named `http_default` and choose the `HTTP` connection type. Enter the following information:
 
     - **Host:** api.frankfurter.app
 
@@ -101,16 +99,15 @@ Add two connections that Airflow will use to connect to MongoDB and the API prov
 
 ## Step 4: Create your DAG
 
-In your Astro project `dags/` folder, create a new file called `mongo-pipeline.py`. Paste the following code into the file:
+In your Astro project `dags` folder, create a new file called `mongo-pipeline.py`. Paste the following code into the file:
 
 ```python
-import os
 import json
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from airflow.providers.http.operators.http import SimpleHttpOperator
 from airflow.providers.mongo.hooks.mongo import MongoHook
-from datetime import datetime,timedelta
+from pendulum import datetime
 
 def uploadtomongo(ti, **context):
     hook = MongoHook(mongo_conn_id='mongo_default')
@@ -123,8 +120,8 @@ def uploadtomongo(ti, **context):
 
 with DAG(
     dag_id="load_data_to_mongodb",
-    schedule_interval=None,
-    start_date=datetime(2022,10,28),
+    schedule=None,
+    start_date=datetime(2022, 10, 28),
     catchup=False,
     default_args={
         "retries": 0,
@@ -137,18 +134,18 @@ with DAG(
         endpoint='2022-01-01..2022-06-30',
         headers={"Content-Type": "application/json"},
         do_xcom_push=True
-        )
+    )
 
     t2 = PythonOperator(
         task_id='upload-mongodb',
         python_callable=uploadtomongo,
         op_kwargs={"result": t1.output},
-        )
+    )
 
     t1 >> t2
 ```
 
-This DAG uses the SimpleHttpOperator to get currency data from an API, and a PythonOperator to run a Python function that uses the MongoHook to load the data into MongoDB. The data will be loaded as a new collection in a database called `MyDB`.
+This DAG gets currency data from an API using the SimpleHttpOperator loads the data into MongoDB using the MongoHook and the PythonOperator. The data will be loaded as a new collection in a database called `MyDB`.
 
 ## Step 5: Run the DAG and review the data
 
