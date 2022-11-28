@@ -60,7 +60,7 @@ Workspace Admins can set user roles on the **Access** tab in the Cloud UI. See [
 :::info
 
 When a user changes Workspace roles, it can take up to 10 minutes for the corresponding Airflow permissions to be updated.
-2. There are three roles with respect to deployments - Deployment Admin, Deployment Editor and Deployment Viewer. This gives flexibilty to manage deployment level permissions along with Workspace level permissions. For example: One can have a view access at workspace level, yet have admin level access at airflow deployment level.
+There are three Deployment roles: Deployment Admin, Deployment Editor, and Deployment Viewer. These different roles let you manage Deployment and Workspace permissions individually. For example, a user can have Workspace view access and Deployment Admin permissions on a Deployment.
 
 :::
 
