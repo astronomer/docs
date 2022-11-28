@@ -45,7 +45,7 @@ First you will need to configure your MongoDB Atlas cluster so Airflow can conne
 
     ![Mongo user](/img/tutorials/mongo_create_user.png)
 
-2. Go to **Security** -> **Network Access** and add your IP address to the IP access list. 
+2. Go to **Security** -> **Network Access** and add your public IP address to the IP access list. You can find your public IP address on Mac and Linux by running `curl ifconfig.co/`, or on Windows by running `ipconfig /all`.
 
 ## Step 2: Configure your Astro project
 
