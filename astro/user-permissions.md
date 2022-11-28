@@ -59,6 +59,13 @@ Workspace Admins can set user roles on the **Access** tab in the Cloud UI. See [
 
 :::info
 
-If a user changes Workspace roles, it can take a maximum of 10 minutes for corresponding Airflow permission changes to take effect.
+1. If a user changes Workspace roles, it can take a maximum of 10 minutes for corresponding Airflow permission changes to take effect.
+2. There are three roles with respect to deployments - Deployment Admin, Deployment Editor and Deployment Viewer. This gives flexibilty to manage deployment level permissions along with Workspace level permissions. For example: One can have a view access at workspace level, yet have admin level access at airflow deployment level.
+
+:::
+
+:::caution
+
+If a user has Workspace admin role, irrespective of the Deployment role, they can perofrm admin level actions on the Airflow deployment.
 
 :::
