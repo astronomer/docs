@@ -212,17 +212,17 @@ PYTHON = sys.executable
 BASE_DIR = tempfile.gettempdir()
 
 with DAG(
-    'py_virtual_env',
-    schedule_interval=None,
+    dag_id='py_virtual_env',
+    schedule=None,
     start_date=pendulum.datetime(2022, 10, 10, tz="UTC"),
     catchup=False,
     tags=['pythonvirtualenv']
-) as dag:
+):
     
     @task(task_id='print_the_context')
     def print_context(ds=None, **kwargs):
         """Print the Airflow context and ds variable from the context."""
-        pprint(kwargs)
+        print(kwargs)
         print(ds)
         return 'Whatever you return gets printed in the logs'
 
