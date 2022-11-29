@@ -14,11 +14,41 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.8.1
+
+Release date: November 23, 2022
+
+### Bug fixes
+
+- Fixed an issue where you could not use `astro deploy` if you did not have an `.env` file in your Astro project.
+
+## Astro CLI 1.8.0
+
+Release date: November 23, 2022
+
+### New `astro run` command
+
+You can now use the `astro run` command to run and debug a DAG from the command line without starting a local Airflow environment. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations. You can see task success or failure, as well as task logs, directly in your terminal.
+
+This command is an alternative to running `astro dev restart` every time you make a change to your DAG. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test data pipelines.
+
+To learn more, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+
+### Additional improvements
+
+- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
+- The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered in logical groupings instead of by alphabetical order.
+
+### Bug fixes
+
+- Fixed an issue where configurations specified in the `docker-compose.override.yaml` file of an Astro project were not properly applied. 
+- Fixed an issue where `astro login` didn’t recognize some valid domains.
+
 ## Astro CLI 1.7.0
 
 Release date: November 9, 2022 
 
-## Deploy only DAGs with `astro deploy -—dags`
+### Deploy only DAGs with `astro deploy -—dags`
 
 Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy`, which pushes all files in your Astro project every time you deploy your code to Astro.
 
@@ -32,20 +62,20 @@ When you make changes to other files in your Astro project that aren't in the `d
 
 To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
 
-## New `astro deployment inspect` command
+### New `astro deployment inspect` command
 
 You can now run `astro deployment inspect` to return a Deployment's current state and configuration as a JSON or YAML object. This includes worker queue settings, Astro Runtime version, and more. Use this command to quickly understand the state of your Deployment as code and as an alternative to viewing it in the Cloud UI.
 
 For more information, see the [CLI command reference](cli/astro-deployment-inspect.md).
 
-## Additional improvements
+### Additional improvements
 
 - The outputs for `astro dev parse` and `astro dev pytest` commands have improved legibility by no longer including Docker container logs.
 - The `astro organization switch` command now includes a `-—login-link` flag that you can use to manually log in if you don't have access to a web browser.
 - You can now provide either an Organization name or ID when running `astro organization switch`.
 - `astro dev start` now times out if the Airflow webserver does not become healthy within a set period of time. Use the `-—wait` flag to specify a wait time in seconds or minutes.
 
-## Bug fixes
+### Bug fixes
 
 - Fixed an issue where `astro deploy` with `colima` was failing due to an issue with registry authentication
 - Fixed an issue where `astro deployment list` didn't display the Workspace ID for a Deployment

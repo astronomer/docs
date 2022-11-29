@@ -19,7 +19,6 @@ module.exports = {
       label: 'Get started',
       items: [
       'log-in-to-software',
-      'install-cli',
       'create-project',
       ],
     },

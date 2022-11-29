@@ -86,6 +86,12 @@ If your project builds successfully, the Airflow UI automatically opens in your 
 
 When you create an Astro project, the Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#ports-are-not-available).
 
+:::tip
+
+Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Airflow environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+
+:::
+
 ## Step 3: Access the Airflow UI
 
 Once your project is running, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password.

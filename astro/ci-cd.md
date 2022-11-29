@@ -424,13 +424,13 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         - name: DAG Deploy to Astro
           if: steps.deployment-type.outputs.DAGS_ONLY == 1
           run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+            curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy --dags
         # If any other files changed, deploy the entire Astro project
         - name: Image and DAG Deploy to Astro
           if: steps.deployment-type.outputs.DAGS_ONLY == 0
           run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+            curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy
     ```
 
@@ -513,13 +513,13 @@ This setup assumes the following prerequisites:
           - name: DAG Deploy to Astro
             if: needs.deployment-type.outputs.DAGS_ONLY == 1
             run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+              curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy --dags
           # If any other files changed do a regular Deploy
           - name: Image and DAG Deploy to Astro
             if: needs.deployment-type.outputs.DAGS_ONLY == 0
             run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+              curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
@@ -536,13 +536,13 @@ This setup assumes the following prerequisites:
           - name: DAG Deploy to Astro
             if: needs.deployment-type.outputs.DAGS_ONLY == 1
             run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+              curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy --dags
           # If any other files changed do a regular Deploy
           - name: Image and DAG Deploy to Astro
             if: needs.deployment-type.outputs.DAGS_ONLY == 0
             run: |
-              curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+              curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy
     ```
 
@@ -605,7 +605,7 @@ If your Astro project requires additional build-time arguments to build an image
         - name: DAG Deploy to Astro
           if: steps.deployment-type.outputs.DAGS_ONLY == 1
           run: |
-            curl -sSL https://install.astronomer.io | sudo bash -s -- v1.7.0
+            curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy --dags
         # If any other files changed do a regular custom image Deploy
         - name: Create image tag
@@ -988,6 +988,13 @@ This pipeline configuration requires:
 
 ### GitLab
 
+
+:::info
+
+If you use hosted runners, you might need certain tags or modifications based on your Gitlab runner. Speak with your Gitlab administrator and review the [Gitlab Documentation](https://docs.gitlab.com/ee/ci/docker/using_docker_build.html) to customize this template for your use case.
+
+:::
+
 <Tabs
     defaultValue="gitlabstandard"
     groupId= "gitlab"
@@ -1013,13 +1020,13 @@ To automate code deploys to a Deployment using [GitLab](https://gitlab.com/), co
       services:
        - docker:dind
       variables:
-         ASTRONOMER_KEY_ID: $ASTRONOMER_KEY_ID
-         ASTRONOMER_KEY_SECRET: $ASTRONOMER_KEY_SECRET
+         ASTRONOMER_KEY_ID: ${siteVariables.keyid}
+         ASTRONOMER_KEY_SECRET: ${siteVariables.keyid}
       before_script:
        - apk add --update curl && rm -rf /var/cache/apk/*
        - apk add bash
       script:
-       - curl -sSL install.astronomer.io | bash -s
+       - (curl -sSL install.astronomer.io | bash -s)
        - astro deploy -f
       only:
        - main
@@ -1053,13 +1060,13 @@ When you create environment variables that will be used in multiple branches, yo
         services:
           - docker:dind
         variables:
-            ASTRONOMER_KEY_ID: $DEV_ASTRONOMER_KEY_ID
-            ASTRONOMER_KEY_SECRET: $DEV_ASTRONOMER_KEY_SECRET
+            ASTRONOMER_KEY_ID: ${siteVariables.devkeyid}
+            ASTRONOMER_KEY_SECRET: ${siteVariables.devkeysecret}
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
         script:
-          - curl -sSL install.astronomer.io | bash -s
+          - (curl -sSL install.astronomer.io | bash -s)
           - astro deploy -f
         only:
           - dev
@@ -1070,13 +1077,13 @@ When you create environment variables that will be used in multiple branches, yo
         services:
           - docker:dind
         variables:
-            ASTRONOMER_KEY_ID: $PROD_ASTRONOMER_KEY_ID
-            ASTRONOMER_KEY_SECRET: $PROD_ASTRONOMER_KEY_SECRET
+            ASTRONOMER_KEY_ID: ${siteVariables.prodkeyid}
+            ASTRONOMER_KEY_SECRET: ${siteVariables.prodkeysecret}
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
         script:
-          - curl -sSL install.astronomer.io | bash -s
+          - (curl -sSL install.astronomer.io | bash -s)
           - astro deploy -f
         only:
           - main
