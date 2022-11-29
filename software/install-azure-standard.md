@@ -250,13 +250,13 @@ A few additional configuration notes:
 
 :::info 
 
-To use a third-party ingress controller for Astronomer, complete the setup steps in [Third-Party Ingress Controllers](third-party-ingress-controllers.md) in addition to this configuration.
+To use a third-party ingress controller for Astronomer, see [Third-Party Ingress Controllers](third-party-ingress-controllers.md).
 
 :::
 
 :::info 
 
-By default, the first user to log in to your installation is given System Admin permissions. To create a dedicated root user that's responsible for adding the first members of your organization to Astronomer, complete the setup steps in [Create a root user](create-a-root-user.md) in addition to this configuration.
+By default, the first user to log in to your installation is assigned the System Admin role. To create a dedicated root user who is responsible for adding organization users to Astronomer, see [Create a root user](create-a-root-user.md).
 
 :::
 

@@ -259,7 +259,7 @@ The System Admin has the same default permissions as the System Viewer and Syste
 
 ### Root user
 
-A root user has all available permissions on Astronomer Software. There can only be one root user per Software installation. See [Create a root user](create-a-root-user.md).
+A root user is assigned all available Astronomer Software permissions. There can only be one root user for each Software installation. See [Create a root user](create-a-root-user.md).
 
 ## Workspace roles
 
