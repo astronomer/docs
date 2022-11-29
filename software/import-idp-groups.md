@@ -82,7 +82,7 @@ This configuration requires setting up a root user. See [Create a root user](cre
 
 :::
 
-To make it so that users can join Astronomer Software and be assigned roles only through Teams, add the following to your `config.yaml` file:
+To provide user access to Astronomer Software and limit role assignment to Teams, add the following entry to your `config.yaml` file:
 
 ```yaml
 astronomer: 
@@ -92,6 +92,6 @@ astronomer:
          enabled: true
 ```
 
-Save this configuration and push it to your platform as described in [Apply a Platform Config Change](apply-platform-config.md).
+Save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).
 
-After you apply the configuration, individual users can't be invited or assigned Workspace or Deployment-level roles in Astronomer Software. These users must be imported through a Team by a System Admin to access your installation. Individual users can be assigned system-level roles only by your root user.
+After you apply the configuration, individual users can't be invited or assigned Workspace or Deployment-level roles in Astronomer Software. These users must be imported through a Team by a System Admin with access to your installation. Individual users can be assigned system-level roles only by your root user.
