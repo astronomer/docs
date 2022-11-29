@@ -102,34 +102,31 @@ This workflow is equivalent to the following bash script:
 # Set Deployment API key credentials as environment variables
 export ASTRONOMER_KEY_ID="<your-api-key-id>"
 export ASTRONOMER_KEY_SECRET="<your-api-key-secret>"
+export DAG_FOLDER="<path to dag folder ie. dags/>"
 
 # Install the latest version of Astro CLI
 curl -sSL install.astronomer.io | sudo bash -s
 
 # Determine if only DAG files have changes
-OUTPUT=$(git diff main... --name-only)
-DAGS_DEPLOY=FALSE
-REGULAR_DEPLOY=FALSE
-local IFS=$'\n'
-local lines=($OUTPUT)
-local i
-for (( i=0; i<${#lines[@]}; i++ )) ; do
-    if [[ "${lines[$i]}" == *"dags/"* ]]
-    then
-        DAGS_DEPLOY=TRUE
-    else
-        REGULAR_DEPLOY=TRUE
-    fi
+files=$(git diff main... --name-only)
+dags_only=1
+
+for file in $files; do
+  if [[ $file != "$DAG_FOLDER"* ]]; then
+    echo "$file is not a dag, triggering a full image build"
+    dags_only=0
+    break
+  fi
 done
 
 # If only DAGs changed deploy only the DAGs in your 'dags' folder to your Deployment
-if [ $DAGS_DEPLOY == TRUE && $REGULAR_DEPLOY == FALSE ]
+if [ $dags_only == 1 ]
 then
     astro deploy --dags
 fi
 
 # If any other files changed build your Astro project into a Docker image, push the image to your Deployment, and then push and DAG changes
-if [ $REGULAR_DEPLOY == TRUE ]
+if [ $dags_only == 0 ]
 then
     astro deploy
 fi
@@ -396,6 +393,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
       ## Sets Deployment API key credentials as environment variables
       ASTRONOMER_KEY_ID: ${{ secrets.ASTRONOMER_KEY_ID }}
       ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRONOMER_KEY_SECRET }}
+      DAG_FOLDER: <path to dag folder ie. dags/>
 
     jobs:
       build:
@@ -409,33 +407,28 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         # Determine if only DAGs have changes 
         - name: Get Deployment Type
           run: |
-            OUTPUT=$(git diff --name-only HEAD^ HEAD)
-            DAGS_DEPLOY=FALSE
-            REGULAR_DEPLOY=FALSE
-            local IFS=$'\n'
-            local lines=($OUTPUT)
-            local i
-            for (( i=0; i<${#lines[@]}; i++ )) ; do
-                if [[ "${lines[$i]}" == *"dags/"* ]]
-                then
-                    DAGS_DEPLOY=TRUE
-                else
-                    REGULAR_DEPLOY=TRUE
-                fi
+            files=$(git diff main... --name-only)
+            dags_only=1
+
+            for file in $files; do
+              if [[ $file != "$DAG_FOLDER"* ]]; then
+                echo "$file is not a dag, triggering a full image build"
+                dags_only=0
+                break
+              fi
             done
 
-            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
-            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
+            echo "DAGS_ONLY=$dags_only" >> $GITHUB_OUTPUT
           id: deployment-type
         # If only DAGs changed, do a DAG-only deploy
         - name: DAG Deploy to Astro
-          if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+          if: steps.deployment-type.outputs.DAGS_ONLY == 1
           run: |
             curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy --dags
         # If any other files changed, deploy the entire Astro project
         - name: Image and DAG Deploy to Astro
-          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+          if: steps.deployment-type.outputs.DAGS_ONLY == 0
           run: |
             curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy
@@ -479,28 +472,32 @@ This setup assumes the following prerequisites:
     jobs:
       deployment-type:
         runs-on: ubuntu-latest
-          steps:
+        env:
+          DAG_FOLDER: <path to dag folder ie. dags/>
+        outputs:
+          DAGS_ONLY: ${{ steps.deployment-type.outputs.DAGS_ONLY }}
+        steps:
+        - name: checkout repo
+          uses: actions/checkout@v3
+          with:
+            # Checkout as many commits as needed for the diff
+            fetch-depth: 2
           # Determine if only DAGs have changes 
         - name: Get Deployment Type
+          id: deployment-type
           run: |
-            OUTPUT=$(git diff --name-only HEAD^ HEAD)
-            DAGS_DEPLOY=FALSE
-            REGULAR_DEPLOY=FALSE
-            local IFS=$'\n'
-            local lines=($OUTPUT)
-            local i
-            for (( i=0; i<${#lines[@]}; i++ )) ; do
-                if [[ "${lines[$i]}" == *"dags/"* ]]
-                then
-                    DAGS_DEPLOY=TRUE
-                else
-                    REGULAR_DEPLOY=TRUE
-                fi
+            files=$(git diff --name-only HEAD^..HEAD)
+            dags_only=1
+
+            for file in $files; do
+              if [[ $file != "$DAG_FOLDER"* ]]; then
+                echo "$file is not a dag, triggering a full image build"
+                dags_only=0
+                break
+              fi
             done
 
-            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
-            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
-          id: deployment-type
+            echo "DAGS_ONLY=$dags_only" >> $GITHUB_OUTPUT
       dev-push:
         if: github.ref == 'refs/heads/dev'
         env:
@@ -514,13 +511,13 @@ This setup assumes the following prerequisites:
             uses: actions/checkout@v3
           # If only DAGs changed do a DAG Deploy
           - name: DAG Deploy to Astro
-            if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+            if: needs.deployment-type.outputs.DAGS_ONLY == 1
             run: |
               curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy --dags
           # If any other files changed do a regular Deploy
           - name: Image and DAG Deploy to Astro
-            if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+            if: needs.deployment-type.outputs.DAGS_ONLY == 0
             run: |
               curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy
@@ -531,19 +528,19 @@ This setup assumes the following prerequisites:
           ASTRONOMER_KEY_ID: ${{ secrets.PROD_ASTRONOMER_KEY_ID }}
           ASTRONOMER_KEY_SECRET: ${{ secrets.PROD_ASTRONOMER_KEY_SECRET }}
         runs-on: ubuntu-latest
-        needs: job1
+        needs: deployment-type
         steps:
           - name: checkout repo
             uses: actions/checkout@v3
           # If only DAGs changed do a DAG Deploy
           - name: DAG Deploy to Astro
-            if: needs.deployment-type.outputs.DAGS_DEPLOY == 'true' && needs.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+            if: needs.deployment-type.outputs.DAGS_ONLY == 1
             run: |
               curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy --dags
           # If any other files changed do a regular Deploy
           - name: Image and DAG Deploy to Astro
-            if: needs.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+            if: needs.deployment-type.outputs.DAGS_ONLY == 0
             run: |
               curl -sSL https://install.astronomer.io | sudo bash -s
               astro deploy
@@ -581,6 +578,7 @@ If your Astro project requires additional build-time arguments to build an image
         env:
           ASTRONOMER_KEY_ID: ${{ secrets.ASTRO_ACCESS_KEY_ID_DEV }}
           ASTRONOMER_KEY_SECRET: ${{ secrets.ASTRO_SECRET_ACCESS_KEY_DEV }}
+          DAG_FOLDER: <path to dag folder ie. dags/>
         steps:
         - name: Check out the repo
           uses: actions/checkout@v3
@@ -590,36 +588,32 @@ If your Astro project requires additional build-time arguments to build an image
         # Determine if only dags have changes 
         - name: Get Deployment Type
           run: |
-            OUTPUT=$(git diff --name-only HEAD^ HEAD)
-            DAGS_DEPLOY=FALSE
-            REGULAR_DEPLOY=FALSE
-            local IFS=$'\n'
-            local lines=($OUTPUT)
-            local i
-            for (( i=0; i<${#lines[@]}; i++ )) ; do
-                if [[ "${lines[$i]}" == *"dags/"* ]]
-                then
-                    DAGS_DEPLOY=TRUE
-                else
-                    REGULAR_DEPLOY=TRUE
-                fi
+            files=$(git diff --name-only HEAD^..HEAD)
+            dags_only=1
+
+            for file in $files; do
+              if [[ $file != "$DAG_FOLDER"* ]]; then
+                echo "$file is not a dag, triggering a full image build"
+                dags_only=0
+                break
+              fi
             done
-            echo "DAGS_DEPLOY=$DAGS_DEPLOY" >> $GITHUB_OUTPUT
-            echo "REGULAR_DEPLOY=$REGULAR_DEPLOY" >> $GITHUB_OUTPUT
+
+            echo "DAGS_ONLY=$dags_only" >> $GITHUB_OUTPUT
           id: deployment-type
         # If only DAGs changed do a DAG Deplo
         - name: DAG Deploy to Astro
-          if: steps.deployment-type.outputs.DAGS_DEPLOY == 'true' && steps.deployment-type.outputs.REGULAR_DEPLOY == 'false'
+          if: steps.deployment-type.outputs.DAGS_ONLY == 1
           run: |
             curl -sSL https://install.astronomer.io | sudo bash -s
             astro deploy --dags
         # If any other files changed do a regular custom image Deploy
         - name: Create image tag
-          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+          if: steps.deployment-type.outputs.DAGS_ONLY == 0
           id: image_tag
           run: echo ::set-output name=image_tag::astro-$(date +%Y%m%d%H%M%S)
         - name: Build image
-          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+          if: steps.deployment-type.outputs.DAGS_ONLY == 0
           uses: docker/build-push-action@v2
           with:
             tags: ${{ steps.image_tag.outputs.image_tag }}
@@ -632,7 +626,7 @@ If your Astro project requires additional build-time arguments to build an image
             build-args: |
               <your-build-arguments>
         - name: Deploy to Astro
-          if: steps.deployment-type.outputs.REGULAR_DEPLOY == 'true'
+          if: steps.deployment-type.outputs.DAGS_ONLY == 0
           run: |
             curl -sSL install.astronomer.io | sudo bash -s
             astro deploy --image-name ${{ steps.image_tag.outputs.image_tag }}
