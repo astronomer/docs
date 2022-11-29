@@ -187,7 +187,7 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 
 Occasionally, Astronomer makes changes to its policies to ensure the continued operation and development of Astro. 
 
-Users with an Organization Owner role will receive an email notification from Astronomer 14 days before any changes are made to the policies governing the cross-account IAM role that expand user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
+Users with an Organization Owner role will receive an email notification from Astronomer 14 days before any changes are made to the policies governing the cross-account IAM role that expands user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
 
 Astronomer can reduce the access available to the cross-account role without notification.
 
