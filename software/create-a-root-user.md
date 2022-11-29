@@ -35,7 +35,7 @@ kubectl patch secret -n <your-platform-namespace> astronomer-root-admin-credenti
 
 ## Limit System-level user creation
 
-A common use case for having a root user is to limit System-level user creation to only a single, tightly-controlled user. To configure your system this way, add the following lines to your `config.yaml` file:
+A common use case for having a root user is to limit system-level user creation to a single user. To configure your system this way, add the following lines to your `config.yaml` file:
 
 ```yaml
 astronomer:
