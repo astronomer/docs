@@ -134,7 +134,7 @@ By adding connections and variables as environment variables, you can refer to t
 
 ### Airflow connections
 
-The environment variable naming convention for Airflow connections is:
+Use the Airflow [connection URI format](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#uri-format) to store connections as environment variables. The environment variable naming convention for Airflow connections is:
 
 - Key: `AIRFLOW_CONN_<CONN_ID>` 
 - Value: `<connection-uri>`
@@ -145,8 +145,6 @@ For example, consider the following Airflow connection:
 - Connection URI: `my-conn-type://login:password@host:5432/schema`
 
 To store this connection as an environment variable, you create an environment variable with the key `AIRFLOW_CONN_MY_PROD_DB` and the value `my-conn-type://login:password@host:5432/schema`,
-
-For more information on how to generate a connection URI, see the [Apache Airflow documentation](https://airflow.apache.org/docs/stable/howto/connection/index.html#generating-connection-uri).
 
 :::info
 
