@@ -109,7 +109,7 @@ If you are deploying only DAGs, Astronomer recommends moving the `include` folde
             └── helper_functions
                 └── helper.py
             └── templated_SQL_scripts
-    │       └── custom operators
+    │       └── custom_operators
     ├── Dockerfile
     ├── tests
     │   └── test_dag_integrity.py
