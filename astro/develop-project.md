@@ -99,7 +99,7 @@ Use the `include` folder to store additional utilities required by your DAGs. Fo
 
 When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
 
-If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files.  Here is how the recommended folder structure might appear:
+If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files.  Here is how the recommended directory structure might appear:
 
 ```bash
     .
