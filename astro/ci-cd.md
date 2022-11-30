@@ -866,7 +866,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
 2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
 
     ```
-    # Use the latest 2.1 version of CircleCI pipeline process engine.
+    # Use the latest CircleCI pipeline process engine version.
     # See: https://circleci.com/docs/2.0/configuration-reference
     version: 2.1
 
