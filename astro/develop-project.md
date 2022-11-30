@@ -95,16 +95,28 @@ To rebuild your project after making a change to any of these files, you must [r
 
 ## Add DAG utility files
 
-Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators.
-
-
-:::tip
+Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators. Storing additional utilities in the `include` folder lets you deploy code without an image restart and  
 
 When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
 
-If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files.  Here is how the recommended folder structure might appear:
 
-:::
+```bash
+    .
+    ├── airflow_settings.yaml
+    ├── dags
+    │   └── include
+    ├── Dockerfile
+    ├── helper_functions
+    │   └── helper.py
+    ├── tests
+    │   └── test_dag_integrity.py
+    ├── packages.txt
+    ├── plugins
+    │   └── example-plugin.py
+    └── requirements.txt
+```
+The Triggerer does not restart when you deploy only DAGs. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 ## Explore Airflow providers and modules
 
