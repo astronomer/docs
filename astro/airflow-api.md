@@ -15,9 +15,7 @@ To test Airflow API calls in a local Airflow environment running with the Astro 
 
 :::info
 
-Updates to the Airflow REST API are released in new Airflow versions and don’t have a separate release cycle or versioning scheme. To take advantage of specific Airflow REST API functionality, you might need to upgrade Astro Runtime. See [Upgrade Runtime](upgrade-runtime.md) and the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
-
-Airflow REST API updates aren't removed from their associated Airflow version after they are released.
+Updates to the Airflow REST API are released in new Airflow versions and new releases don’t have a separate release cycle or versioning scheme. To take advantage of specific Airflow REST API functionality, you might need to upgrade Astro Runtime. See [Upgrade Runtime](upgrade-runtime.md) and the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
 
 :::
 
