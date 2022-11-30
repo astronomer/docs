@@ -121,7 +121,7 @@ You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpo
 
 <TabItem value="Amazon Route 53">
 
-Use Amazon Route 53 to connect internet applications running on AWS or on-premises to Astro.
+Use Amazon Route 53 to provide access for Astro to Private hosted zone.
 
 #### Prerequisites
 
@@ -130,19 +130,19 @@ Use Amazon Route 53 to connect internet applications running on AWS or on-premis
 
 #### Step 1: Share the Amazon Route 53 Internet Resolver rule
 
-To use Amazon Route 53 to connect internet applications running on AWS or on-premises to Astro, you need to share your Internet Resolver rule with Astronomer support.
+To use Amazon Route 53 to provide access for Astro to Private hosted zone, you need to share your Internet Resolver rule with your Astro AWS account.
 
 1. In the Route 53 Dashboard,  click **Rules** below **Resolver** in the navigation menu.
 
 2. Select the Internet Resolver rule and then click **Details**.
 
-3. Click **Share**, enter `Astro` in the **Name** field, and then enter the remaining resource share details.
+3. Click **Share**, enter `Astro` in the **Name** field, and then enter the remaining resource share details (e.g. Asto AWS account number).
 
 4. Click **Create resource share**.
 
-#### Step 2: Contact Astronomer support
+#### Step 2: Contact Astronomer support for rule verification
 
-To use Amazon Route 53 to connect internet applications running on AWS or on-premises to Astro, submit a request to [Astronomer support](https://cloud.astronomer.io/support) with the following information:
+To verify Amazon Route 53 Shared Resolver rule work, submit a request to [Astronomer support](https://cloud.astronomer.io/support) with the following information:
 
 - The Amazon Route 53 Internet Resolver rule ID. To locate the Internet Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Internet Resolver **ID** column.
 
@@ -150,7 +150,7 @@ To use Amazon Route 53 to connect internet applications running on AWS or on-pre
 
 #### Step 3: Confirm connectivity
 
-When Astronomer support confirms that the Amazon Route 53 connection is complete, confirm Astro can communicate with the connected applications.
+When Astronomer support confirms that the Amazon Route 53 Shared rule was associated with Astro VPC, confirm Astro can resolve hostnames from Private hosted zone.
 
 </TabItem>
 </Tabs>
