@@ -2,31 +2,29 @@
 sidebar_label: 'Integrate OpenLineage'
 title: "Integrate OpenLineage with external systems"
 id: set-up-data-lineage
-description: Configure your external systems to emit OpenLineage data to Astro.
+description: Configure your external systems to emit OpenLineage data to Astro with Apache Airflow.
 toc_min_heading_level: 2
 toc_max_heading_level: 2
 ---
 
 [Data lineage](https://en.wikipedia.org/wiki/Data_lineage) is the concept of tracking data from its origin to wherever it is consumed downstream as it flows through a data pipeline. This includes connections between datasets and tables in a database as well as rich metadata about the tasks that create and transform data. You can observe data lineage to trace the history of a dataset, troubleshoot run failures, manage personally identifiable information (PII), and ensure compliance with data regulations.
 
-All Astro Deployments use the [OpenLineage Airflow library](https://openlineage.io/integration/apache-airflow/) (`openlineage-airflow`) to gather lineage data. The OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default.
+To store lineage data that is emitted from any system, a lineage backend is required. Astro Deployments use [OpenLineage](https://openlineage.io/integration/apache-airflow/) (`openlineage-airflow`) as a backend for gathering lineage data. The OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default.
 
-There are two ways to emit lineage data:
+There are two ways to emit lineage data to Astro:
 
-- Run a task on Astro with a supported Airflow operator. These operators use extractors to automatically emit lineage data and don’t require additional configuration. See [Supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators).
-- Integrate OpenLineage with an external service, such as dbt or Apache Spark, to emit data lineage outside of an Airflow DAG or task. This might require additional configuration.
+- Run a task on Astro with a supported Airflow operator, such as the SnowflakeOperator. These operators include extractors that automatically emit lineage data and don’t require additional configuration. See [Supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators).
+- Integrate OpenLineage with an external service, such as dbt or Apache Spark, to emit data lineage outside of an Airflow DAG or task using an OpenLineage API key.
 
-The data lineage graph in the Cloud UI shows lineage data that is emitted with both methods, including tasks or jobs that are not run on Astro. This graph can provide context to your data before, during, and after it reaches your Deployment. See [View data lineage](data-lineage.md).
+The data lineage graph in the Cloud UI shows lineage data that is emitted with both methods, including jobs that are not run on the Astro data plane. This graph can provide context to your data before, during, and after it reaches your Deployment. See [View data lineage](data-lineage.md).
 
-## Integrate Astro and OpenLineage with external systems
+## Integrate Astro's lineage backend with external systems
 
-To store lineage data that is emitted from any system, a lineage backend is required. If you're an Astro customer, use Astro as a lineage backend instead of configuring a custom solution with a tool such as [Marquez](https://marquezproject.github.io/marquez/). To emit lineage data from Airflow tasks that run on Astro, Astro is automatically set as the lineage backend and no additional configuration is required.
 
 To emit lineage data from an Airflow task that runs outside of Astro or from an external system that does not interact with Airflow:
 
-- Retrieve an OpenLineage API key from Astro. There is only one API key for each Organization.
-- Specify your OpenLineage API key in the external system.
-- Set Astro as your OpenLineage backend.
+- Retrieve your Organization OpenLineage API key from the Cloud UI. See [Retrieve an OpenLineage API key](#retrieve-an-openlineage-api-key).
+- Specify your OpenLineage API key in the external system. See the following integration guides for specific instructions.
 
 ### Retrieve an OpenLineage API key
 
