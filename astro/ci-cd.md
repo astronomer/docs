@@ -9,6 +9,10 @@ id: ci-cd
   <meta name="og:description" content="Learn how to create a continuous integration and continuous delivery (CI/CD) pipeline that triggers a deployment to Astro when your Airflow DAGs are modified." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
 Continuous Integration and Continuous Delivery (CI/CD) is an industry term that refers to programmatic workflows that automate key parts of the software development lifecycle, including code changes, builds, and testing. CI/CD enables teams to develop faster, more securely, and more reliably.
 
 On Astro, you can use Deployment API keys to automate deploying code changes to a Deployment. Astronomer recommends hosting your Astro project source code in a version control tool and setting up a CI/CD workflow for all production environments.
@@ -660,8 +664,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    ```
-    pipeline {
+    <pre><code parentName="pre">{`pipeline {
        agent any
          stages {
            stage('Deploy to Astronomer') {
@@ -672,9 +675,9 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
              }
              steps {
                script {
-                 sh 'curl -LJO install.astronomer.io'
-                 sh 'sudo bash -s'
-                 sh "astro deploy ${ASTRONOMER_DEPLOYMENT_ID} -f"
+                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh "./astro deploy ${siteVariables.deploymentid} -f"
                }
              }
            }
@@ -684,8 +687,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
            cleanWs()
          }
        }
-   }
-   ```
+    }`}</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
@@ -710,8 +712,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
 
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
-    ```
-    pipeline {
+    <pre><code parentName="pre">{`pipeline {
        agent any
          stages {
            stage('Set Environment Variables') {
@@ -736,9 +737,9 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
            stage('Deploy to Astronomer') {
              steps {
                script {
-                 sh 'curl -LJO install.astronomer.io'
-                 sh 'sudo bash -s'
-                 sh "astro deploy ${ASTRONOMER_DEPLOYMENT_ID} -f"
+                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
+                 sh "./astro deploy ${siteVariables.deploymentid} -f"
                }
              }
            }
@@ -749,8 +750,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
          }
        }
       }
-    }
-    ```
+    }`}</code></pre>
 
     This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
 
