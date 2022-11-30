@@ -95,7 +95,7 @@ To rebuild your project after making a change to any of these files, you must [r
 
 ## Add DAG utility files
 
-Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators. Storing additional utilities in the `include` folder lets you deploy code without an image restart and  
+Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators. Storing additional utilities in the `include` folder lets you deploy code without an image restart. 
 
 When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
 
