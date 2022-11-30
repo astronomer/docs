@@ -67,7 +67,7 @@ Non-secret environment variables set in the Cloud UI are stored in a database th
 
 - Astro generates a manifest that defines a Kubernetes secret containing your variable's key and value.
 - Astro applies this manifest to your Deployment's namespace in the data plane.
-- After the manifest is applied, the key and value of your environment variable are stored in an [etcd cluster](https://etcd.io/) at rest within the Astro control plane.
+- After the manifest is applied, the key and value of your environment variable are stored in a managed [etcd cluster](https://etcd.io/) at rest within the Astro data plane.
 
 This process occurs every time you update the environment variable's key or value.
 

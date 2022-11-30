@@ -66,35 +66,7 @@ If you want to continue with the second option, you'll additionally need:
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
 - The IP addresses of your DNS servers.
 
-## Step 1: Create an IAM role for Astronomer
-
-When a data plane is activated on AWS, a cross-account IAM role and supporting policies are created to define the actions the control plane is permitted to perform when managing the data plane.
-
-Astronomer adheres to the least privilege access principle when defining policies that support Astro functionality. To preview the roles that support these policies, see the [CloudFormation template](https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account-prerelease.yaml).
-
-#### Notification of changes to the cross-account role 
-Occasionally, Astronomer makes changes to its policies to ensure the continued operation and development of Astro. 
-
-Users with an Organization Owner role will receive an email notification from Astronomer 14 days before any changes are made to the policies governing the cross-account IAM role that expand user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
-
-Astronomer can reduce the access available to the cross-account role without notification.
-
-#### Monitor the cross-account role for changes (optional)
-
-You can use CloudTrail to monitor changes to policies within the cross-account role.  Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor. 
-
-| Event Names                              | Resource                                                         |
-| ---------------------------------------- | ---------------------------------------------------------------- |
-| `AttachRolePolicy , DetachRolePolicy`    | `roleName = astronomer-remote-management`                        |
-| `SetPolicyVersion , CreatePolicyVersion` | `policyArn = "arn:aws:iam::*:policy/AstronomerCrossAccountRole"` |
-
-To monitor changes to the cross-account role policy, create an Amazon CloudWatch alarm. See [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html).  When you create the metric filter in the CloudWatch console, on the **Define pattern** page, in **Create filter pattern**, enter the following for **Filter pattern**:
-
-```
-{ ($.eventName = AttachRolePolicy || $.eventName = DetachRolePolicy || $.eventName = SetPolicyVersion || $.eventName = CreatePolicyVersion) && ($.requestParameters.policyArn = "*AstronomerCrossAccountRole"  || $.requestParameters.roleName = astronomer-remote-management) }
-```
-
-## Step 2: Access Astro
+## Step 1: Access Astro
 
 1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
@@ -107,7 +79,7 @@ To monitor changes to the cross-account role policy, create an Amazon CloudWatch
 
     If you're the first person in your Organization to authenticate, you'll be granted Organization owner permissions. You can create a Workspace and add other team members to the Workspace without the assistance of Astronomer support. See [Create a Workspace](manage-workspaces.md#create-a-workspace) and [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
-## Step 3: Retrieve an external ID from the Cloud UI
+## Step 2: Retrieve an external ID from the Cloud UI
 
 You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the **AWS External ID** field will not appear in the Cloud UI.
 
@@ -117,8 +89,7 @@ You must be an Organization Owner to view the external ID. If you are not an Org
 
 3. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
-
-## Step 4: Create a cross-account role
+## Step 3: Create a cross-account role
 
 Use the external ID to create a cross-account IAM role for Astro. Astronomer recommends using the AWS Management Console to create the role.
 
@@ -212,8 +183,30 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 </TabItem>
 </Tabs>
 
+#### Notification of changes to the cross-account role 
 
-## Step 5: Provide setup information to Astronomer
+Occasionally, Astronomer makes changes to its policies to ensure the continued operation and development of Astro. 
+
+Users with an Organization Owner role will receive an email notification from Astronomer 14 days before any changes are made to the policies governing the cross-account IAM role that expands user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
+
+Astronomer can reduce the access available to the cross-account role without notification.
+
+#### Monitor the cross-account role for changes (optional)
+
+You can use CloudTrail to monitor changes to policies within the cross-account role.  Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor. 
+
+| Event Names                              | Resource                                                         |
+| ---------------------------------------- | ---------------------------------------------------------------- |
+| `AttachRolePolicy , DetachRolePolicy`    | `roleName = astronomer-remote-management`                        |
+| `SetPolicyVersion , CreatePolicyVersion` | `policyArn = "arn:aws:iam::*:policy/AstronomerCrossAccountRole"` |
+
+To monitor changes to the cross-account role policy, create an Amazon CloudWatch alarm. See [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html).  When you create the metric filter in the CloudWatch console, on the **Define pattern** page, in **Create filter pattern**, enter the following for **Filter pattern**:
+
+```text
+{ ($.eventName = AttachRolePolicy || $.eventName = DetachRolePolicy || $.eventName = SetPolicyVersion || $.eventName = CreatePolicyVersion) && ($.requestParameters.policyArn = "*AstronomerCrossAccountRole"  || $.requestParameters.roleName = astronomer-remote-management) }
+```
+
+## Step 4: Provide setup information to Astronomer
 
 After creating the AWS account, provide Astronomer support with the following information:
 
@@ -258,20 +251,13 @@ When VPC peering with Astronomer is complete, configure and validate the followi
 - Egress Routes on Astronomer Route Table
 - [Network ACLs](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html#nacl-tasks) and/or [Security Group](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#working-with-security-groups) rules of your resources
 
+## Step 6: Create a Deployment and confirm the install
+
+When Astronomer support confirms that your Astro cluster has been created, Astronomer recommends that you create a Deployment and deploy DAGs. See [Create a Deployment](create-deployment.md). 
+
+To confirm a successful installation, in the Cloud UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
+
 ## Next steps
-
-Congratulations on installing Astro on AWS! Astronomer recommends completing some of the following actions to make the most of your new installation.
-
-### Create a Deployment
-
-When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). When you create your Deployment, the Astro cluster created by Astronomer support appears as an option in the **Cluster** list as shown in the following image.
-
-![Cloud UI New Deployment screen](/img/docs/create-new-deployment-select-cluster.png)
-
-
-### Read the documentation
-
-The following documents include setup steps for key Astro features and tools: 
 
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/overview.md)
