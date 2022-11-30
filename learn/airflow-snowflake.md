@@ -205,7 +205,7 @@ Because `SnowflakeOperator` and `SnowflakeOperatorAsync` have an extractor, you 
 - What downstream data does a task failure impact?
 - Where did a change in data format originate?
 
-This image shows an overview of the interaction between OpenLineage,Airflow and Snowflake:
+This image shows an overview of the interaction between OpenLineage, Airflow, and Snowflake:
 
 ![Snowflake Openlineage](/img/guides/snowflake_openlineage_architecture.png)
 

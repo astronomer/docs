@@ -11,13 +11,31 @@ id: test-and-troubleshoot-locally
 
 As you develop data pipelines on Astro, Astronomer recommends running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
-## Run a project locally
+## Prerequisites
 
-To test your code, the first step is always to start a local Airflow environment. To run your project in a local Airflow environment, see [Build and run a project](develop-project.md#build-and-run-a-project-locally).
+- An [Astro project](create-project.md).
+- The [Astro CLI](cli/overview.md)
+- [Docker](https://www.docker.com/products/docker-desktop/)
+
+For information on adding files to your Astro project and making changes, see [Develop a project](develop-project.md).
+
+## Run a DAG with `astro run`
+
+Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can see task logs and task success or failure directly in your terminal and without needing to go to the Airflow UI. You can only run one DAG at a time.
+
+This command is an alternative to running `astro dev restart` every time you make a change to your DAG and want to run it again. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test data pipelines.
+
+To run a DAG located within your local `/dags` directory run:
+
+```sh
+astro run <dag-id>
+```
+
+All the tasks in your DAG run sequentially. Any errors produced by your code while parsing or running your DAG appear in the command line. For more information about this command, see the [CLI command reference](cli/astro-run.md).
 
 ## Test DAGs with the Astro CLI
 
-To enhance the testing experience for data pipelines, Astro enables users to run DAG unit tests with two different Astro CLI commands:
+To enhance the development experience for data pipelines, Astro enables users to run DAG unit tests with two different Astro CLI commands:
 
 - `astro dev parse`
 - `astro dev pytest`
@@ -120,7 +138,7 @@ This command forces your running containers to stop and deletes all data associa
 
 When dependency errors occur, the error message that is returned often doesn't contain enough information to help you resolve the error. To retrieve additional error information, you can review individual operating system or python package dependencies inside your local Docker containers.
 
-For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, or libsas12-dev packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
+For example, if your `packages.txt` file contains the `openjdk-8-jdk`, `gcc`, `g++`, or `libsas12-dev` packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
 
 1. Open the `requirements.txt` and `packages.txt` files for your project and remove the references to the packages that are returning error messages.
 
@@ -147,7 +165,7 @@ For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, o
     apt-get install gcc
     ```
 
-5. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1.
+5. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1 one by one until you find the package that is the source of the error.
 
 ## Override the CLI Docker Compose file
 

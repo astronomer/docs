@@ -102,9 +102,9 @@ For a given Workspace, the Workspace Editor has the same default permissions as 
 
 In addition, Workspace Admins have Deployment Editor permissions for all Deployments within the Workspace.
 
-## Workspace roles
+## Deployment roles
 
-Workspace roles apply to a single Deployment within a single Astronomer Software installation.
+Deployment roles apply to a single Deployment within a single Astronomer Software installation.
 
 ### Deployment Viewer
 
