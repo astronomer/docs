@@ -106,9 +106,11 @@ If you are deploying only DAGs, Astronomer recommends moving the `include` folde
     ├── airflow_settings.yaml
     ├── dags
     │   └── include
+            └── helper_functions
+                └── helper.py
+            └── templated_SQL_scripts
+    │       └── custom operators
     ├── Dockerfile
-    ├── helper_functions
-    │   └── helper.py
     ├── tests
     │   └── test_dag_integrity.py
     ├── packages.txt
