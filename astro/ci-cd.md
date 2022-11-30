@@ -687,7 +687,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
            cleanWs()
          }
        }
-  }`}</code></pre>
+   }`}</code></pre>
 
     This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
@@ -750,7 +750,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
          }
        }
       }
-  }`}</code></pre>
+   }`}</code></pre>
 
     This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
 
