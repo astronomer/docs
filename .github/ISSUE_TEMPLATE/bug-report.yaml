@@ -1,0 +1,44 @@
+name: Report an issue in documentation
+description: Any request related to existing documentation that has an issue
+assignees:
+  - jwitz
+  - kwcanuck
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filling out an issue. If this is a quick fix, feel free to skip this process and make the fix yourself. See [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
+  - type: dropdown
+    id: issuetype
+    attributes:
+      label: What kind of issue is it? 
+      multiple: true
+      options:
+        - Inaccurate or Incorrect Content
+        - Missing information
+        - Typo
+    validations:
+      required: true
+  - type: textarea
+    id: doc
+    attributes:
+      label: Which docs are affected?
+      description: Include information about the current problem and how the docs team can fix it.
+      placeholder: For example, 'https://docs.astronomer.io/astro/develop-project', 'All CLI docs', 'Release notes'
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the issue
+      description: Include information about the current problem and how the docs team can fix it.
+      placeholder:  Be as descriptive as possible. If there is existing documentation or related issues, link to them here. If you're not sot sure how best to proceed with your request, contact the docs team.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Include anything else the docs team should know about the issue
+
+  
