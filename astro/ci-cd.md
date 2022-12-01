@@ -719,17 +719,17 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
               steps {
                   script {
                       if (env.GIT_BRANCH == 'main') {
-                          echo "The git branch is ${env.GIT_BRANCH}";
+                          echo "The git branch is ${siteVariables.jenkinsenv}";
                           env.ASTRONOMER_KEY_ID = env.PROD_ASTRONOMER_KEY_ID;
                           env.ASTRONOMER_KEY_SECRET = env.PROD_ASTRONOMER_KEY_SECRET;
                           env.ASTRONOMER_DEPLOYMENT_ID = env.PROD_DEPLOYMENT_ID;
                       } else if (env.GIT_BRANCH == 'dev') {
-                          echo "The git branch is ${env.GIT_BRANCH}";
+                          echo "The git branch is ${siteVariables.jenkinsenv}";
                           env.ASTRONOMER_KEY_ID = env.DEV_ASTRONOMER_KEY_ID;
                           env.ASTRONOMER_KEY_SECRET = env.DEV_ASTRONOMER_KEY_SECRET;
                           env.ASTRONOMER_DEPLOYMENT_ID = env.DEV_DEPLOYMENT_ID;
                       } else {
-                          echo "This git branch ${env.GIT_BRANCH} is not configured in this pipeline."
+                          echo "This git branch ${siteVariables.jenkinsenv} is not configured in this pipeline."
                       }
                   }
               }
