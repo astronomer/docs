@@ -3,6 +3,7 @@ description: Describe an upcoming change to Astro or Astronomer Software that ne
 assignees:
   - jwitz
   - kwcanuck
+labels: ["new-feature"]
 body:
   - type: dropdown
     id: impact
