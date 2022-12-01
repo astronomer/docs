@@ -136,7 +136,7 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 2. Select the Internet Resolver rule and then click **Details**.
 
-3. Click **Share**, enter `Astro` in the **Name** field, and then enter the remaining resource share details including the Asto AWS account number.
+3. Click **Share**, enter `Astro` in the **Name** field, and then enter the remaining resource share details including the Astro AWS account ID. To get the Astro AWS account ID, go to the Cloud UI, click **Settings**, and then copy the value in the **ID** column for the Astro AWS account you want to share the Internet Resolver rule with.
 
 4. Click **Create resource share**.
 
