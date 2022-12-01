@@ -62,5 +62,3 @@ Workspace Admins can set user roles on the **Access** tab in the Cloud UI. See [
 If a user changes Workspace roles, it can take a maximum of 10 minutes for corresponding Airflow permission changes to take effect.
 
 :::
-
-
