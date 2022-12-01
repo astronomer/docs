@@ -84,7 +84,7 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
     ```text
     astro-<deployment-namespace>@<gcp-project-name>.iam.gserviceaccount.com
     ```
-To locate your <gcp-project-name>, in the Cloud UI click Clusters. The <gcp-project-name> is located in the Account ID column.
+    To locate your Google Cloud project name, in the Cloud UI click **Clusters**. The Google Cloud project name is located in the **Account ID** column.
 
 
     For example, for a Google Cloud project named `astronomer-prod` and a Deployment namespace defined as `nuclear-science-2730`, the service account for the Deployment would be:
