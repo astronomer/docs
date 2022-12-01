@@ -15,7 +15,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest Astro Runtime Version**: 6.0.4 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.8.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.8.3 ([Release notes](cli/release-notes.md))
 
 ## November 15, 2022
 
