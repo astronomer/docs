@@ -69,7 +69,7 @@ module.exports = {
         "deployment-metrics",
         {
           type: "category",
-          label: "OpenLineage",
+          label: "Data lineage",
           items: ["set-up-data-lineage", "data-lineage"],
         },
         "airflow-alerts",
