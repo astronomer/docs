@@ -18,7 +18,7 @@ This guide provides information on which lineage data is automatically extracted
 
 ## Data lineage on Astro
 
-To view data lineage from across your ecosystem, lineage data first needs to be extracted from external systems and stored in a lineage backend. Astro uses the [OpenLineage Airflow library](https://openlineage.io/integration/apache-airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default.
+To view lineage data, it first needs to be extracted from an external application and then stored in a lineage backend. Astro uses the [OpenLineage Airflow library](https://openlineage.io/integration/apache-airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default.
 
 There are two ways to emit lineage data to Astro:
 
@@ -42,7 +42,7 @@ To emit lineage data from an Airflow task that runs outside of Astro or from an 
 
 ## Snowflake and OpenLineage with Airflow
 
-Lineage data emitted from [Snowflake](https://www.snowflake.com/en/) is similar to what is collected from other SQL databases, including Amazon Redshift and Google BigQuery. However, Snowflake is unique in that it emits [query tags](https://docs.snowflake.com/en/user-guide/object-tagging.html#what-is-a-tag) that provide additional task execution detail that other databases don't provide.
+Lineage data emitted from [Snowflake](https://www.snowflake.com/en/) is similar to what is collected from other SQL databases, including Amazon Redshift and Google BigQuery. However, Snowflake is unique in that it emits [query tags](https://docs.snowflake.com/en/user-guide/object-tagging.html#what-is-a-tag) that provide additional task execution details.
 
 When you run a task in Airflow that interacts with Snowflake, the query tag allows each task to be directly matched with the Snowflake query or queries that are run by that task. If the task fails, for example, you can look up the Snowflake query that was executed by that task and reduce the time required to troubleshoot the task failure.
 
@@ -62,11 +62,11 @@ When you run an Airflow task with the `SnowflakeOperator`, the following data is
 - Output datasets
 - Quality metrics based on dataset and column-level checks, including successes and failures per run
 
-To view this data, select a SnowflakeOperator task in the **Lineage** tab of the Cloud UI and click on the dataset. See [View data lineage](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
+To view this data in the Cloud UI, click **Lineage**, select a SnowflakeOperator task, and then click the dataset. See [View data lineage](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
 
 :::tip
 
-The ability to view source SQL code for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) in the **Lineage** tab of the Cloud UI is off by default for all Workspace users. To enable source code, set the following [environment variable](environment-variables.md) for each Airfow Deployment:
+The SQL source code view for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) in the Cloud UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](environment-variables.md) for each Astro Deployment:
 
 - Key: `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE`
 - Value: `False`
