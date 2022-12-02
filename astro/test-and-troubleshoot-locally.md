@@ -11,11 +11,13 @@ id: test-and-troubleshoot-locally
 
 As you develop data pipelines on Astro, Astronomer recommends running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
-For information about creating an Astro project, see [Create an Astro project](create-project.md). For information about adding DAGs to your Astro porject and applying changes, see [Develop a project](develop-project.md).
+For information about creating an Astro project, see [Create an Astro project](create-project.md). For information about adding DAGs to your Astro project and applying changes, see [Develop a project](develop-project.md).
 
-## Run and debug DAGs with `astro run`
+## Run a DAG with `astro run`
 
-Use the `astro run` command to compile and run a DAG from the command line . When you run this command, your DAGs run within a Docker container built from your local `Dockerfile` that contains your DAGs, DAG utility files, python requirements, and environment variables from the `.env` file. This command lets you develop DAGs without using the Airflow Webserver.
+Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can see task logs and task success or failure directly in your terminal and without needing to go to the Airflow UI. You can only run one DAG at a time. 
+
+This command is an alternative to running `astro dev restart` every time you make a change to your DAG and want to run it again. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test data pipelines.
 
 To run a DAG located within your local `/dags` directory run:
 
@@ -23,13 +25,11 @@ To run a DAG located within your local `/dags` directory run:
 astro run <dag-id>
 ```
 
-All the tasks in your DAG run sequentially. Any errors produced by your code while parsing or running your DAG appear in the command line. To provide variables and connections to your DAGs, use the [Airflow Settings file](develop-project.md#configure-airflow_settingsyaml-local-development-only). By default, the `astro run` command uses `airflow_settings.yaml`, but you can use the `--airflow-settings` flag to specify a different yaml file.
-
-To use variables and connections stored in your local postgres instance, run `astro run` while a local instance of Airflow is running. To run your project in a local Airflow environment, see [Build and run a project](develop-project.md#build-and-run-a-project-locally).
+All the tasks in your DAG run sequentially. Any errors produced by your code while parsing or running your DAG appear in the command line. For more information about this command, see the [CLI command reference](cli/astro-run.md).
 
 ## Test DAGs with the Astro CLI
 
-To enhance the testing experience for data pipelines, Astro enables users to run DAG unit tests with two different Astro CLI commands:
+To enhance the development experience for data pipelines, Astro enables users to run DAG unit tests with two different Astro CLI commands:
 
 - `astro dev parse`
 - `astro dev pytest`
@@ -132,7 +132,7 @@ This command forces your running containers to stop and deletes all data associa
 
 When dependency errors occur, the error message that is returned often doesn't contain enough information to help you resolve the error. To retrieve additional error information, you can review individual operating system or python package dependencies inside your local Docker containers.
 
-For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, or libsas12-dev packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
+For example, if your `packages.txt` file contains the `openjdk-8-jdk`, `gcc`, `g++`, or `libsas12-dev` packages and you receive build errors after running `astro dev start`, you can enter the container and install the packages manually to review additional information about the errors.
 
 1. Open the `requirements.txt` and `packages.txt` files for your project and remove the references to the packages that are returning error messages.
 
@@ -159,7 +159,7 @@ For example, if your `packages.txt` file contains the openjdk-8-jdk, gcc, g++, o
     apt-get install gcc
     ```
 
-5. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1.
+5. Open the `requirements.txt` and `packages.txt` files for your project and add the package references you removed in step 1 one by one until you find the package that is the source of the error.
 
 ## Override the CLI Docker Compose file
 
@@ -202,9 +202,11 @@ Use the information provided here to resolve common issues with running an Astro
 
 ### New DAGs aren't visible in the Airflow UI
 
-Make sure that no DAGs have duplicate `dag_id`s. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
+Make sure that no DAGs have duplicate `dag_ids`. When two DAGs use the same `dag_id`, the newest DAG won't appear in the Airflow UI and you won't receive an error message.
 
-By default, the Airflow scheduler scans the `dags` directory of your Astro project for new files every 300 seconds (5 minutes). For this reason, it might take a few minutes for new DAGs to appear in the Airflow UI. Note that changes to existing DAGs appear immediately. To have the scheduler check for new DAGs more frequently, you can set the `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` environment variable to less than 300 seconds. Decreasing this setting results in the scheduler consuming more resources, so you might need to increase the CPU allocated to the scheduler.
+By default, the Airflow scheduler scans the `dags` directory of your Astro project for new files every 300 seconds (5 minutes). For this reason, it might take a few minutes for new DAGs to appear in the Airflow UI. Changes to existing DAGs appear immediately. 
+
+To have the scheduler check for new DAGs more frequently, you can set the [`AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) environment variable to less than 300 seconds. If you have less than 200 DAGs in a Deployment, it's safe to set `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` to `30` (30 seconds). See [Environment variables](environment-variables.md).
 
 ### DAGs are running slowly
 

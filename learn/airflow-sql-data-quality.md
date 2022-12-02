@@ -43,7 +43,7 @@ Astronomer recommends using the `SQLColumnCheckOperator` and `SQLTableCheckOpera
 The `SQLColumnCheckOperator` and the `SQLTableCheckOperator` are available in the [common SQL provider package](https://pypi.org/project/apache-airflow-providers-common-sql/) which can be installed with:
 
 ```bash
-pip install apache-airflow-providers-common-sql
+pip install apache-airflow-providers-common-sql==<version>
 ```
 
 The `SQLCheckOperator`, `SQLIntervalCheckOperator`, `SQLValueCheckOperator` and `SQLThresholdCheckOperator` are built into core Airflow and do not require a separate package installation.
@@ -56,7 +56,7 @@ Currently the operators cannot support BigQuery `job_id`s.
 
 The target table can be specified as a string using the `table` parameter for the `SQLColumnCheckOperator` and `SQLTableCheckOperator`. When using the `SQLCheckOperator`, you can override the database defined in your Airflow connection by passing a different value to the `database` argument. The target table for the `SQLCheckOperator` has to be specified in the SQL statement.
 
-## Example SQLColumnCheckOperator
+## Example: SQLColumnCheckOperator
 
 The `SQLColumnCheckOperator` has a `column_mapping` parameter which stores a dictionary of checks. Using this dictionary, it can run many checks within one task and still provide observability in the Airflow logs over which checks passed and which failed.
 
@@ -76,8 +76,8 @@ In the example below, 5 checks are performed on 3 different columns using the `S
 ```python
 check_columns = SQLColumnCheckOperator(
         task_id="check_columns",
-        conn_id=example_conn,
-        table=example_table,
+        conn_id="MY_DB_CONNECTION",
+        table="MY_TABLE",
         column_mapping={
             "MY_DATE_COL": {
                 "unique_check": {"equal_to": 0}
@@ -112,7 +112,7 @@ The resulting values can be compared to an expected value using any of the follo
 
 You can add a tolerance to the comparisons in the form of a fraction (0.1 = 10% tolerance).
 
-If the resulting boolean value is `True` the check passes, otherwise it fails. [Airflow generates logs](logging.md) that show the set of returned records for every check that passes and the full query and result for checks that failed.
+If the boolean value resulting from the check is `True` the check will pass, otherwise it will fail. [Airflow generates logs](logging.md) that show the set of returned records for every check that passes and the full record for checks that failed.
 
 The following example shows the output of 2 successful checks that ran on the `MY_NUM_COL` column of a table in Snowflake using the `SQLColumnCheckOperator`. The checks concerned the minimum value and the maximum value in the column.
 
@@ -125,26 +125,62 @@ The logged line `INFO - Record: (5, 101)` lists the results of the query: the mi
 [2022-10-25, 06:12:56 UTC] {connection.py:564} INFO - closed
 [2022-10-25, 06:12:56 UTC] {connection.py:567} INFO - No async queries seem to be running, deleting session
 [2022-10-25, 06:12:56 UTC] {sql.py:253} INFO - Record: (5, 101)
+[2022-10-25, 06:12:56 UTC] {sql.py:271} INFO - All tests have passed
 ```
 
-All checks that fail are listed at the end of the task log with their full SQL query and specific check that failed. In the following sample entry, the `TASK_DURATION` column failed the check. Instead of a minimum that is greater than or equal to 0, it had a minimum of -12.
+All checks that fail are listed at the end of the task log with their full record of check values. In the following sample entry, the `TASK_DURATION` column failed the check. Instead of a minimum that is greater than or equal to 0, it had a minimum of -12.
 
 ```text
-[2022-07-18, 17:05:19 UTC] {taskinstance.py:1889} ERROR - Task failed with exception
-Traceback (most recent call last):
-  File "/usr/local/python3.9/site-packages/airflow/providers/common/sql/operators/sql.py", line 126, in execute
-    raise AirflowException(
-airflow.exceptions.AirflowException: Test failed
-Query:
-SELECT MIN(TASK_DURATION) AS TASK_DURATION_min,MAX(TASK_DURATION) AS TASK_DURATION_max,SUM(CASE WHEN TASK_DURATION IS NULL THEN 1 ELSE 0 END) AS TASK_DURATION_null_check FROM DB.SCHEMA.TABLE;
 Results:
 (-12, 1000, 0)
 The following tests have failed:
+    Column: TASK_DURATION
     Check: min,
     Check Values: {'geq_to': 0, 'result': -12, 'success': False}
 ```
 
-## Example SQLTableCheckOperator
+The SQLColumnCheckOperator converts a returned `result` of `None` to 0 by default and still runs the check.
+
+For example, if a column check for the `MY_COL` column is set to accept a minimum value of -10 or more but runs on an empty table, the check would still pass because the `None` result is treated as 0. You can toggle this behavior by setting `accept_none=False`, which will cause all checks returning `None` to fail.
+
+In previous versions of the provider, running a column check on an empty table always resulted in a failed check.
+
+## Example: Run checks on a subset of a table using `partition_clause`
+
+You can run checks on a subset of your table using either a check-level or task-level `partition_clause` parameter. This parameter takes a SQL `WHERE`-clause (without the `WHERE` keyword) and uses it to filter your table before running a given check or group of checks in a task.
+
+The code snippet below shows a SQLColumnCheckOperator defined with a `partition_clause` at the operator level, as well as a `partition_clause` in one of the two column checks defined in the `column_mapping`. 
+
+In the following example, the operator checks whether:
+
+- `MY_NUM_COL_1` has a minimum value greater than 10.
+- `MY_NUM_COL_2` has a maximum value less than 300. Only rows that fulfill the check-level `partition_clause` are checked (rows where `CUSTOMER_STATUS = 'active'`).
+
+Both of the above checks only run on rows that fulfill the operator-level partition clause `CUSTOMER_NAME IS NOT NULL`. If both an operator-level `partition_clause` and a check-level `partition_clause` are defined for a check, the check will only run on rows fulfilling both clauses.
+
+```python
+column_checks = SQLColumnCheckOperator(
+        task_id="column_checks",
+        conn_id="MY_DB_CONNECTION",
+        table="MY_TABLE",
+        partition_clause="CUSTOMER_NAME IS NOT NULL",
+        column_mapping={
+            "MY_NUM_COL_1": {
+                "min": {
+                    "greater_than": 10
+                }
+            },
+            "MY_NUM_COL_2": {
+                "max": {
+                    "less_than": 300,
+                    "partition_clause": "CUSTOMER_STATUS = 'active'"
+                }
+            }
+        }
+    )
+```
+
+## Example: SQLTableCheckOperator
 
 The `SQLTableCheckOperator` provides a way to check the validity of user defined SQL statements which can involve one or more columns of a table. There is no limit to the amount of columns these statements can involve or to their complexity. The statements are provided to the operator as a dictionary with the `checks` parameter.
 
@@ -157,17 +193,21 @@ The `SQLTableCheckOperator` is useful for:
 
 In the example below, three checks are defined: `my_row_count_check`, `my_column_sum_comparison_check` and  `my_column_addition_check`. The first check runs a SQL statement asserting that the table contains at least 1000 rows, the second check compares the sum of two columns, and the third check confirms that for each row `MY_COL_1 + MY_COL_2 = MY_COL_3` is true.
 
+Similarly to the SQLColumnCheckOperator, you can pass a SQL `WHERE`-clause (without the `WHERE` keyword) to the operator-level `partition_clause` parameter or as a check-level `partition_clause`. All checks of the `table_checks` task below run only on rows in `MY_TABLE` where the date in the `START_DATE` column is 2022-01-01 or later. The `my_column_sum_comparison_check` additionally only runs on rows where the value in `MY_COL_4` is greater than 100.
+
 ```python
 table_checks = SQLTableCheckOperator(
     task_id="table_checks",
-    conn_id=example_conn,
-    table=example_table,
+    conn_id="MY_DB_CONNECTION",
+    table="MY_TABLE",
+    partition_clause="START_DATE >= '2022-01-01'"
     checks={
         "my_row_count_check": {
             "check_statement": "COUNT(*) >= 1000"
             },
         "my_column_sum_comparison_check": {
-            "check_statement": "SUM(MY_COL_1) < SUM(MY_COL_2)"
+            "check_statement": "SUM(MY_COL_1) < SUM(MY_COL_2)",
+            "partition_clause": "MY_COL_4 > 100"
             },
         "my_column_addition_check": {
             "check_statement": "MY_COL_1 + MY_COL_2 = MY_COL_3"
@@ -178,7 +218,7 @@ table_checks = SQLTableCheckOperator(
 
 The operator performs a `CASE WHEN` statement on each of the checks, assigning `1` to the checks that pass and `0` to the checks that fail. Afterwards, the operator looks for the minimum of these results and marks the task as failed if the minimum is `0`. The `SQLTableCheckOperator` produces observable logs similar to those produced for `SQLColumnCheckOperator`.
 
-## Example SQLCheckOperator
+## Example: SQLCheckOperator
 
 The `SQLCheckOperator` returns a single row from a provided SQL query and checks to see if any of the returned values in that row are `False`. If any values are `False`, the task fails. This operator allows a great deal of flexibility in checking:
 

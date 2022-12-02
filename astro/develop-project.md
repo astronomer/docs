@@ -64,7 +64,7 @@ In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic
 
 DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your project:
 
-1. Add the `.py` file to the `dags` folder. The name of the file determines its `dag_id` and appears in the Airflow UI as the name of the DAG. You cannot have more than one DAG with the same `dag_id`.
+1. Add the `.py` file to the `dags` folder.
 2. Save your changes to your code editor. If you're using a Mac, use **Command-S**.
 3. Refresh your Airflow browser.
 
@@ -76,50 +76,34 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 ### Add DAG helper functions
 
-You might choose to create helper functions that make it easy for your team to write DAGs and custom code. For example, a custom function that's used in an operator or callback that you can write once and reference in multiple DAGs.
+Use the `include` folder to store additional utilities required by your DAGs. For example, templated SQL scripts or a custom helper function that's used in an operator and that you can reference in multiple DAGs.
 
-Because helper functions are repeatable code that is used across DAGs, Astronomer recommends creating a dedicated folder called `helper_functions` that is separate from the `dags` directory.
+Astronomer recommends storing the `include` folder inside the `dags` directory of your Astro project. If you're using [DAG-only deploys](deploy-code.md#deploy-dags-only), this:
 
-1. Add your directory of helper functions to your local project. You can give it any name:
+- Allows you to deploy DAG code without an image restart by running `astro deploy --dags`.
+- Makes sure that your DAGs can access your utility files when you deploy them.
 
-    ```bash
+Here is how the recommended directory structure might appear:
+
+```bash
     .
     ├── airflow_settings.yaml
     ├── dags
-    │   └── example-dag-basic.py
-    │   └── example-dag-advanced.py
+    │   └── include
+            └── helper_functions
+                └── helper.py
+            └── templated_SQL_scripts
+    │       └── custom_operators
     ├── Dockerfile
-    ├── helper_functions
-    │   └── helper.py
-    ├── include
     ├── tests
     │   └── test_dag_integrity.py
     ├── packages.txt
     ├── plugins
     │   └── example-plugin.py
     └── requirements.txt
-    ```
-    
-2. [Restart your local environment](develop-project.md#restart-your-local-environment).
+```
 
-3. To confirm that your helper functions were successfully installed, run the following command:
-
-   ```sh
-
-    astro dev bash --scheduler “/bin/bash”
-
-   ```
-
-    Run the following command to list the files and helper functions in the scheduler container:
-
-   ```bash
-
-    $ astro dev bash --scheduler “/bin/bash”
-    bash-4.4$ ls
-    Dockerfile  airflow_settings.yaml  helper_functions  logs  plugins  unittests.cfg
-    airflow.cfg dags  include  packages.txt  requirements.txt
-
-   ```
+If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
 
 ## Add Airflow connections, pools, variables
 

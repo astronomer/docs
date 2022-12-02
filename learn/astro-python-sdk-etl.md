@@ -108,12 +108,12 @@ def create_reporting_table():
 @dag(start_date=datetime(2021, 12, 1), schedule_interval="@daily", catchup=False)
 def example_s3_to_snowflake_etl():
     # Initial load of homes data csv's from S3 into Snowflake
-    homes_data1 = load_file(
+    homes_data1 = aql.load_file(
         task_id="load_homes1",
         input_file=File(path="s3://airflow-kenten/homes1.csv", conn_id=AWS_CONN_ID),
         output_table=Table(name="HOMES1", conn_id=SNOWFLAKE_CONN_ID)
     )
-    homes_data2 = load_file(
+    homes_data2 = aql.load_file(
         task_id="load_homes2",
         input_file=File(path="s3://airflow-kenten/homes2.csv", conn_id=AWS_CONN_ID),
         output_table=Table(name="HOMES2", conn_id=SNOWFLAKE_CONN_ID)
