@@ -16,7 +16,7 @@ body:
         - Technical overview 
     validations:
       required: true
-   - type: textarea
+  - type: textarea
     id: description
     attributes:
       label: Describe the documentation you're requesting
