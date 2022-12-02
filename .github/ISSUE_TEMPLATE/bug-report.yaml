@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for filling out an issue. If this is a quick fix, feel free to skip this process and make the fix yourself. See [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
+        To submit a quick fix yourself, see [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
   - type: dropdown
     id: issuetype
     attributes:
@@ -23,7 +23,7 @@ body:
     id: doc
     attributes:
       label: Where does the issue occur?
-      description: Include information about the current problem and how the docs team can fix it.
+      description: Share a link to the document(s) where the issue exists
       placeholder: For example, 'https://docs.astronomer.io/astro/develop-project', 'All CLI docs', 'Release notes'
     validations:
       required: true
