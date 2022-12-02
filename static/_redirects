@@ -25,6 +25,7 @@
 /software/cli-reference /astro/cli/reference 301
 /software/cli-release-notes /astro/cli/release-notes 301
 /software/cli-reference* /astro/cli/reference 301
+/software/install-cli /astro/cli/install-cli 301
 
 # Docs with redundant Learn guides 
 /astro/deferrable-operators /learn/deferrable-operators 301

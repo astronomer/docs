@@ -1,6 +1,6 @@
 ---
-sidebar_label: "AWS"
-title: "AWS cluster configurations"
+sidebar_label: "AWS cluster settings"
+title: "AWS cluster settings"
 id: resource-reference-aws
 sidebar_custom_props: { icon: "img/aws.png" }
 ---

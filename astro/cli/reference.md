@@ -27,6 +27,7 @@ We expect that you'll use these commands most often when managing your Astro pro
 - [`astro dev stop`](cli/astro-dev-stop.md)
 - [`astro dev restart`](cli/astro-dev-restart.md)
 - [`astro deploy`](cli/astro-deploy.md)
+- [`astro run`](cli/astro-run.md)
 
 Each of these commands has a dedicated documentation page with additional notes and examples.
 
