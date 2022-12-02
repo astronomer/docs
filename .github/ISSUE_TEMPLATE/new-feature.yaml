@@ -1,9 +1,5 @@
 name: Request documentation for an upcoming product change
-<<<<<<< HEAD
-description: Request new documentation, best practices, or considerations about an existing Astro or Astronomer Software feature.
-=======
-description: An upcoming change to Astro or Astronomer Software that needs documentation
->>>>>>> 03e17684aa6921ed2b38293bde00ce37e0c80e3c
+description: Request new or updated documentation for an existing Astro or Astronomer Software feature.
 assignees:
   - jwitz
   - kwcanuck
@@ -12,22 +8,16 @@ body:
   - type: markdown
     attributes:
       value: |
-        Want document a feature that you own? Skip this template and use the [new feature documentation template](https://github.com/astronomer/docs/blob/main/new-feature-template.md) to get started.
+        If you need to document a new feature, use the [new feature documentation template](https://github.com/astronomer/docs/blob/main/new-feature-template.md).
   - type: dropdown
     id: impact
     attributes:
       label: What kind of change is it? 
       multiple: false
       options:
-<<<<<<< HEAD
-        - Major new feature
-        - Minor new feature
+        - New feature
         - Change to an existing feature
-=======
-        - Setup steps for an existing feature or supported configuration
-        - Best practices or recommendations
-        - Technical overview 
->>>>>>> 03e17684aa6921ed2b38293bde00ce37e0c80e3c
+        - Automatic change to the data plane
     validations:
       required: true
    - type: textarea
@@ -44,11 +34,7 @@ body:
   - type: textarea
     id: reviewers
     attributes:
-<<<<<<< HEAD
-      label: When is the change expected to ship?
-=======
       label: When is the documentation required?
->>>>>>> 03e17684aa6921ed2b38293bde00ce37e0c80e3c
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: textarea
     id: deadline
@@ -57,7 +43,7 @@ body:
   - type: textarea
     id: notes
     attributes:
-      label: Additional information
-      description:  Add additional information here that can help the docs team understand the requirements.
+      label: Additional notes
+      description: Add additional information here that can help the docs team understand the requirements.
 
   
