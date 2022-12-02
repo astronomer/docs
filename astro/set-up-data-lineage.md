@@ -66,12 +66,7 @@ To view this data in the Cloud UI, click **Lineage**, select a SnowflakeOperator
 
 :::tip
 
-The SQL source code view for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) in the Cloud UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](environment-variables.md) for each Astro Deployment:
-
-- Key: `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE`
-- Value: `False`
-
-Astronomer recommends enabling this feature only for Deployments with non-sensitive code.
+Airflow tasks run with the `SnowflakeOperator` emit SQL source code that you can view in the Cloud UI. See [View SQL source code](#view-SQL-source-code).
 
 :::
 
@@ -237,6 +232,11 @@ In your Spark application, set the following properties to configure your lineag
 
 To confirm that your setup is successful, run a Spark job after you save your configuration. After you run this model, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. Your recent Spark job run appears in the table of most recent runs.
 
-## Make source code visible for Airflow operators
+## View SQL source code
 
-Because Workspace permissions are not yet applied, viewing source code for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) is off by default in the Cloud UI **Lineage** page. If you want users across Workspaces to be able to view source code for Airflow tasks in a given Deployment, create an [environment variable](environment-variables.md) in the Deployment with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`. Astronomer recommends enabling this feature only for Deployments with non-sensitive code and workflows.
+The SQL source code view for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) in the Cloud UI  **Lineage** page is off by default for all Workspace users. To enable the source code view, set the following [environment variable](environment-variables.md) for each Astro Deployment:
+
+- Key: `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE`
+- Value: `False`
+
+Astronomer recommends enabling this feature only for Deployments with non-sensitive code. For more information about Workspace permissions, see [Workspace roles](user-permissions.md#workspace-roles).
