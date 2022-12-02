@@ -1,5 +1,5 @@
 name: Request documentation for an upcoming product change
-description: Request new documentation, best practices, or considerations about an existing Astro or Astronomer Software feature.
+description: Request new or updated documentation for an existing Astro or Astronomer Software feature.
 assignees:
   - jwitz
   - kwcanuck
