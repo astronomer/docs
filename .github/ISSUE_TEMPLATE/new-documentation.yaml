@@ -31,7 +31,7 @@ body:
     attributes:
       label: When is the documentation required?
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
-  - type: textarea
+  - type: input
     id: deadline
     attributes:
       label: Who should review the change?
