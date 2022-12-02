@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Integrate lineage'
-title: "Integrate lineage with external systems"
+title: "Integrate data lineage from external systems to Astro"
 id: set-up-data-lineage
 description: Configure your external systems to emit OpenLineage data to Astro with Apache Airflow.
 toc_min_heading_level: 2
@@ -14,7 +14,7 @@ toc_max_heading_level: 2
 - Manage personally identifiable information (PII).
 - Ensure compliance with data regulations.
 
-This guide provides information on which lineage data is automatically extracted on Astro and how to integrate external systems, including Databricks and dbt, that require additional configuration. To learn about how to view data lineage on Astro, see [View data lineage](data-lineage.md).
+This guide provides information about how lineage data is automatically extracted from Apache Airflow tasks on Astro and how to integrate external systems, including Databricks and dbt, that require additional configuration. To learn about how to view data lineage on Astro, see [View data lineage](data-lineage.md).
 
 ## Data lineage on Astro
 
