@@ -56,8 +56,8 @@ To emit lineage data from Snowflake:
 When you run an Airflow task with the `SnowflakeOperator`, the following data is collected:
 
 - Task duration
-- SQL queries. Only CREATE statements are currently supported.
-- Query duration. This is different from the Airflow task duration.
+- SQL queries. Only CREATE statements are currently supported
+- Query duration. This is different from the Airflow task duration
 - Input datasets
 - Output datasets
 - Quality metrics based on dataset and column-level checks, including successes and failures per run
