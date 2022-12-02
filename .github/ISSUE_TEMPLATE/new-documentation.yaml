@@ -1,30 +1,25 @@
 name: Request documentation for an upcoming product change
-description: Request new documentation, best practices, or considerations about an existing Astro or Astronomer Software feature.
+description: Describe an upcoming change to Astro or Astronomer Software that needs documentation
 assignees:
   - jwitz
   - kwcanuck
-labels: ["kind/enhancement"]
+labels: ["new-feature"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Want document a feature that you own? Skip this template and use the [new feature documentation template](https://github.com/astronomer/docs/blob/main/new-feature-template.md) to get started.
   - type: dropdown
     id: impact
     attributes:
-      label: What kind of change is it? 
-      multiple: false
+      label: What kind of change are you requesting? 
+      multiple: true
       options:
-        - Major new feature
-        - Minor new feature
-        - Change to an existing feature
+        - Setup steps for an existing feature or supported configuration
+        - Best practices or recommendations
+        - Technical explanation 
     validations:
       required: true
    - type: textarea
     id: description
     attributes:
-      label: Describe the new change
-      description: Why is the new feature or functionality significant? What benefit does it provide? Why should customers care about this feature or functionality?
+      label: Describe the documentation you're requesting
     validations:
       required: true
   - type: textarea
@@ -34,7 +29,7 @@ body:
   - type: textarea
     id: reviewers
     attributes:
-      label: When is the change expected to ship?
+      label: When do you need the documentation by?
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: textarea
     id: deadline
