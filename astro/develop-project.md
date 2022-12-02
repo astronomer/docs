@@ -21,7 +21,7 @@ An Astro project contains all of the files necessary to test and run DAGs in a l
 - Apply changes
 - Run on-build commands
 
-For guidelines on testing DAGs once you’ve built your Astro project, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+For guidelines on testing that you've added to your Astro project, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 
 :::tip
 
@@ -60,17 +60,17 @@ Once the project builds, you can access the Airflow UI by going to `http://local
 
 ## Add DAGs
 
-In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic Graph (DAGs). A DAG is a collection of tasks and dependencies between tasks that are defined as code. See [Introduction to Airflow DAGs](learn/dags.md).
+In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic Graphs (DAGs). A DAG is a collection of tasks and dependencies between tasks that are defined as code. See [Introduction to Airflow DAGs](learn/dags.md).
 
 DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your project:
 
-1. Add the `.py` file to this folder. The name of the file is what appears in the Airflow UI as the `dag_id`, or the name of the DAG. You cannot have more than one DAG with the same `dag_id`.
+1. Add the `.py` file to the `dags` folder. The name of the file determines its `dag_id` and appears in the Airflow UI as the name of the DAG. You cannot have more than one DAG with the same `dag_id`.
 2. Save your changes to your code editor. If you're using a Mac, use **Command-S**.
 3. Refresh your Airflow browser.
 
 :::tip
 
-You don't need a local Airflow environment to test an individual DAG. Use the `astro run <dag-id>` command to run a DAG and see task logs from the command line and without the Airflow webserver or scheduler. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Airflow environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
 
 :::
 
@@ -110,7 +110,7 @@ Because helper functions are repeatable code that is used across DAGs, Astronome
 
    ```
 
-    The command should output a list of files in the scheduler container including your helper functions:
+    Run the following command to list the files and helper functions in the scheduler container:
 
    ```bash
 
@@ -123,11 +123,11 @@ Because helper functions are repeatable code that is used across DAGs, Astronome
 
 ## Add Airflow connections, pools, variables
 
-Airflow connections are necessary to connect to external tools, such as a database or other third-party service. See [Manage connections in Apache Airflow](learn/connections.md#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+Airflow connections connect external applications such as databases and third-party services to Apache Airflow. See [Manage connections in Apache Airflow](learn/connections.md#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
-To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you can do any of the following:
+To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you have the following options:
 
-- Go to the **Admin** menu of the Airflow UI in a local Airflow environment. Click **Connections**, **Variables**, or **Pools** and add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
+- Use the Airflow UI. In **Admin**, click **Connections**, **Variables** or **Pools**, and then add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
 - Use the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To prevent you from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
 - Use a secret backend, such as AWS Secrets Manager, and access the secret backend locally. See [Configure an external secrets backend on Astro](secrets-backend.md).
 
@@ -135,7 +135,7 @@ When you add Airflow objects to the Airflow UI of a local environment or to your
 
 Astronomer recommends using the `airflow_settings.yaml` file so that you don’t have to manually redefine Airflow objects in the Airflow UI every time you restart your project. For security conscious organizations, Astronomer recommends [configuring a secrets backend](secrets-backend.md) or testing all DAGs on Astro instead of in a local Airflow environment.
 
-### Configure `airflow_settings.yaml` (Local development only)
+### Configure `airflow_settings.yaml` (local development only)
 
 The `airflow_settings.yaml` file includes a template with default values for all possible configurations. To add or change a connection, variable, or pool:
 
@@ -314,20 +314,20 @@ Changes made to the following directories in your Astro project don’t require 
 - `plugins`
 - `include`
 
-To apply a change to these files:
+#### Apply changes
 
 1. Save the latest version of the file to your local version control tool, such as VSCode.
 2. Refresh the Airflow UI in your browser.
 
 ### Environment changes
 
-All changes made to the following files require rebuilding your Astro project into a Docker image and restarting your Airflow environment.
+All changes made to the following files require rebuilding your Astro project into a Docker image and restarting your Airflow environment:
 
 - `packages.txt`
 - `Dockerfile`
 - `requirements.txt`
 - `airflow_settings.yaml`
-
+#### Apply changes
 1. Save the change to your local version control tool, such as VSCode.
 2. [Restart your local environment](develop-project.md#restart-your-local-environment).
 
@@ -339,7 +339,7 @@ To restart your local Airflow environment, run:
 astro dev restart
 ```
 
-These commands rebuild your image and restart the Docker containers running on your local machine with that new image. Alternatively, you can run just `astro dev stop` to stop your Docker containers without restarting or rebuilding your project.
+This command rebuilds your image and restarts the Docker containers running on your local machine with the new image. Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting or rebuilding your project.
 
 ## Install Python packages from private sources
 
