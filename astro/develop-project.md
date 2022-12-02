@@ -95,11 +95,12 @@ To rebuild your project after making a change to any of these files, you must [r
 
 ## Add DAG utility files
 
-Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators. Storing additional utilities in the `include` folder lets you deploy code without an image restart. 
+Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators.
 
-When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
+Astronomer recommends storing the `include` folder inside the `dags` directory of your Astro project. If you're using [DAG-only deploys](deploy-code.md#deploy-dags-only), this allows you to deploy DAG code without an image restart by running `astro deploy --dags` and it makes sure that your DAGs can access your utility files when you deploy them.
 
-If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files.  Here is how the recommended directory structure might appear:
+Here is how the recommended directory structure might appear:
+
 
 ```bash
     .
@@ -118,7 +119,7 @@ If you are deploying only DAGs, Astronomer recommends moving the `include` folde
     │   └── example-plugin.py
     └── requirements.txt
 ```
-The Triggerer does not restart when you deploy only DAGs. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 ## Explore Airflow providers and modules
 
