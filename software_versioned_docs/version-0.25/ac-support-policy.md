@@ -122,17 +122,18 @@ The following tables contain the exact lifecycle for each published version of A
 
 | AC Version                                                                           | Release Date   | End of Maintenance Date |
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
-| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)      | May 21, 2021   | November 2022           |
+| [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)       | May 21, 2021   | November 2022           |
 | [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)¹       | April 30, 2022 | March 2023            |
 | [2.4](https://github.com/astronomer/ap-airflow/blob/master/2.4.1/CHANGELOG.md)       | September 29, 2022 | March 2023            |
-
-> ¹ In November 2022, Astronomer Certified 2.3 was reclassified as a stable release with six months of additional support for a total of 13 months. Previously, AC 2.3 was listed as an LTS release. Astronomer recommends upgrading or migrating to Astro Runtime 5.0.x to receive long term support for Apache Airflow 2.3 through October 2023. See [Migrate to Astro Runtime](migrate-to-runtime.md).
 
 ### LTS releases
 
 | AC Version                                                                           | Release Date   | End of Maintenance Date |
 | ------------------------------------------------------------------------------------ | -------------- | ----------------------- |
 | [2.1](https://github.com/astronomer/ap-airflow/blob/master/2.1.4/CHANGELOG.md)       | May 21, 2021   | November 2022           |
+| [2.3](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md)¹       | April 30, 2022 | March 2023            |
+
+> ¹ In November 2022, Astronomer Certified 2.3 was reclassified as an LTS release with only 12 months of support. Astronomer recommends upgrading or migrating to Astro Runtime 5.0.x to receive long term support for Apache Airflow 2.3 through October 2023. See [Migrate to Astro Runtime](migrate-to-runtime.md).
 
 
 If you have any questions or concerns, contact [Astronomer support](https://support.astronomer.io).
