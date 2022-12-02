@@ -115,7 +115,7 @@ For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud
 
 ## Call environment variables in a DAG
 
-You can call environment variables storing your Airflow variables and connections from DAG code in the following ways: 
+You can use the following methods to call environment variables in your DAG code:
 
 - `Variable.get('<environment-variable-key>')`
 - `os.getenv('<environment-variable-key>', '<default_value>')`
@@ -128,13 +128,13 @@ For non-secret values, Astronomer recommends using `os.getenv('<environment-vari
 
 If you regularly use [Airflow connections](https://airflow.apache.org/docs/apache-airflow/stable/concepts/connections.html) and [variables](https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html), Astronomer recommends storing and fetching them with environment variables instead of adding them to the Airflow UI.
 
-Airflow connections and variables are stored in Airflow's metadata database. Calling them outside of task definitions and operators requires an additional connection to Airflow's metadata database which is used every time the scheduler parses a DAG.
+Airflow connections and variables are stored in the Airflow metadata database. Calling them outside of task definitions and operators requires an additional connection to the Airflow metadata database which is used every time the scheduler parses a DAG.
 
-By adding connections and variables as environment variables, you can refer to them more easily in your code and lower the amount of open connections, which improves the performance of your database and resources.
+By adding connections and variables as environment variables, you can lower the amount of open connections and improve the performance of your database and resources.
 
 ### Airflow connections
 
-Use the Airflow [connection URI format](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#uri-format) to store connections as environment variables. The environment variable naming convention for Airflow connections is:
+Use the Airflow [connection URI format](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#uri-format) to store connections as environment variables. The naming convention for Airflow environment variable connections is:
 
 - Key: `AIRFLOW_CONN_<CONN_ID>` 
 - Value: `<connection-uri>`
@@ -148,7 +148,7 @@ To store this connection as an environment variable, you create an environment v
 
 :::info
 
-Airflow connections set with environment variables do not appear in the Airflow UI. They can only be seen and updated from the Cloud UI or your Dockerfile. 
+Airflow connections set with environment variables do not appear in the Airflow UI. They can only be seen and updated in the Cloud UI or your Dockerfile. 
 
 :::
 
