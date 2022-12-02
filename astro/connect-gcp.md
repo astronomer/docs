@@ -87,7 +87,6 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
     
     To locate your Google Cloud account ID, in the Cloud UI click **Clusters**. The Google Cloud account ID is located in the **Account ID** column.
 
-
     For example, for a Google Cloud project named `astronomer-prod` and a Deployment namespace defined as `nuclear-science-2730`, the service account for the Deployment would be:
 
     ```text
