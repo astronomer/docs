@@ -7,14 +7,14 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for filling out an issue. If this is a quick fix, feel free to skip this process and make the fix yourself. See [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
+        To submit a quick fix yourself, see [Submit a docs PR](https://www.notion.so/astronomerio/Submit-a-Docs-PR-a3ca9018fdbc4206b120a6d530a8401b).
   - type: dropdown
     id: issuetype
     attributes:
-      label: What kind of issue is it? 
+      label: What's the issue? 
       multiple: true
       options:
-        - Inaccurate or Incorrect Content
+        - Inaccurate or incorrect content
         - Missing information
         - Typo
     validations:
@@ -22,8 +22,8 @@ body:
   - type: textarea
     id: doc
     attributes:
-      label: Which docs are affected?
-      description: Include information about the current problem and how the docs team can fix it.
+      label: Where does the issue occur?
+      description: Share a link to the document(s) where the issue exists
       placeholder: For example, 'https://docs.astronomer.io/astro/develop-project', 'All CLI docs', 'Release notes'
     validations:
       required: true
@@ -31,7 +31,7 @@ body:
     id: description
     attributes:
       label: Describe the issue
-      description: Include information about the current problem and how the docs team can fix it.
+      description: Describe the issue and how it should be fixed.
       placeholder:  Be as descriptive as possible. If there is existing documentation or related issues, link to them here. If you're not sot sure how best to proceed with your request, contact the docs team.
     validations:
       required: true
@@ -39,6 +39,6 @@ body:
     id: notes
     attributes:
       label: Additional notes
-      description: Include anything else the docs team should know about the issue
+      description: Add additional information here that can help the docs team resolve the issue.
 
   

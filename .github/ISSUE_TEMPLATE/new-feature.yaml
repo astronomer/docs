@@ -1,5 +1,9 @@
 name: Request documentation for an upcoming product change
+<<<<<<< HEAD
 description: Request new documentation, best practices, or considerations about an existing Astro or Astronomer Software feature.
+=======
+description: An upcoming change to Astro or Astronomer Software that needs documentation
+>>>>>>> 03e17684aa6921ed2b38293bde00ce37e0c80e3c
 assignees:
   - jwitz
   - kwcanuck
@@ -15,9 +19,15 @@ body:
       label: What kind of change is it? 
       multiple: false
       options:
+<<<<<<< HEAD
         - Major new feature
         - Minor new feature
         - Change to an existing feature
+=======
+        - Setup steps for an existing feature or supported configuration
+        - Best practices or recommendations
+        - Technical overview 
+>>>>>>> 03e17684aa6921ed2b38293bde00ce37e0c80e3c
     validations:
       required: true
    - type: textarea
@@ -30,11 +40,15 @@ body:
   - type: textarea
     id: relateddocs
     attributes:
-      label: Please provide any existing or related documentation here.
+      label: Provide links to existing or related source documentation here.
   - type: textarea
     id: reviewers
     attributes:
+<<<<<<< HEAD
       label: When is the change expected to ship?
+=======
+      label: When is the documentation required?
+>>>>>>> 03e17684aa6921ed2b38293bde00ce37e0c80e3c
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: textarea
     id: deadline
@@ -43,7 +57,7 @@ body:
   - type: textarea
     id: notes
     attributes:
-      label: Additional notes
-      description: Include anything else the docs team should know about the change
+      label: Additional information
+      description:  Add additional information here that can help the docs team understand the requirements.
 
   
