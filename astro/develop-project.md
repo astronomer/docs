@@ -97,14 +97,29 @@ To rebuild your project after making a change to any of these files, you must [r
 
 Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators.
 
+Astronomer recommends storing the `include` folder inside the `dags` directory of your Astro project. If you're using [DAG-only deploys](deploy-code.md#deploy-dags-only), this allows you to deploy DAG code without an image restart by running `astro deploy --dags` and it makes sure that your DAGs can access your utility files when you deploy them.
 
-:::tip
+Here is how the recommended directory structure might appear:
 
-When you use the `astro deploy -—dags` command, the `include` folder in the Astro project directory is not deployed with your DAGs and is instead built into the Docker image with your other project files.
 
-If you are deploying only DAGs, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
-
-:::
+```bash
+    .
+    ├── airflow_settings.yaml
+    ├── dags
+    │   └── include
+            └── helper_functions
+                └── helper.py
+            └── templated_SQL_scripts
+    │       └── custom_operators
+    ├── Dockerfile
+    ├── tests
+    │   └── test_dag_integrity.py
+    ├── packages.txt
+    ├── plugins
+    │   └── example-plugin.py
+    └── requirements.txt
+```
+If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
 
 ## Explore Airflow providers and modules
 
