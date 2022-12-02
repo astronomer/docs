@@ -84,6 +84,7 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
     ```text
     astro-<deployment-namespace>@<gcp-account-id>.iam.gserviceaccount.com
     ```
+    
     To locate your Google Cloud account ID, in the Cloud UI click **Clusters**. The Google Cloud account ID is located in the **Account ID** column.
 
 
