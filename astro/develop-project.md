@@ -13,7 +13,7 @@ import {siteVariables} from ‘@site/src/versions’;
 import Tabs from ‘@theme/Tabs’;
 import TabItem from ‘@theme/TabItem’;
 
-An Astro project contains all of the files necessary to test and run DAGs in a local Airflow environment and on Astro. This guide contains information about how to add or modify files in your Astro project and apply changes. It includes how to:
+An Astro project contains all of the files necessary to test and run DAGs in a local Airflow environment and on Astro. This guide provides information about how to add and organize Astro project files, including:
 
 - Add DAGs
 - Add Python and OS-level packages
@@ -21,7 +21,7 @@ An Astro project contains all of the files necessary to test and run DAGs in a l
 - Apply changes
 - Run on-build commands
 
-For guidelines on testing that you've added to your Astro project, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+For information about testing DAGs after you’ve added them to your Astro project, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 
 :::tip
 
@@ -128,16 +128,16 @@ Airflow connections connect external applications such as databases and third-pa
 To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you have the following options:
 
 - Use the Airflow UI. In **Admin**, click **Connections**, **Variables** or **Pools**, and then add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
-- Use the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To prevent you from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
+- Modify the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To prevent you from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
 - Use a secret backend, such as AWS Secrets Manager, and access the secret backend locally. See [Configure an external secrets backend on Astro](secrets-backend.md).
 
 When you add Airflow objects to the Airflow UI of a local environment or to your `airflow_settings.yaml` file, your values can only be used locally. When you deploy your project to a Deployment on Astro, the values in this file are not included.
 
-Astronomer recommends using the `airflow_settings.yaml` file so that you don’t have to manually redefine Airflow objects in the Airflow UI every time you restart your project. For security conscious organizations, Astronomer recommends [configuring a secrets backend](secrets-backend.md) or testing all DAGs on Astro instead of in a local Airflow environment.
+Astronomer recommends using the `airflow_settings.yaml` file so that you don’t have to manually redefine these values in the Airflow UI every time you restart your project. To ensure the security of your data, Astronomer recommends [configuring a secrets backend](secrets-backend.md).
 
 ### Configure `airflow_settings.yaml` (local development only)
 
-The `airflow_settings.yaml` file includes a template with default values for all possible configurations. To add or change a connection, variable, or pool:
+The `airflow_settings.yaml` file includes a template with the default values for all possible configurations. To add a connection, variable, or pool, replace the default value with your own.
 
 1. Open the `airflow_settings.yaml` file and replace the default value with your own.
 
@@ -169,7 +169,7 @@ The `airflow_settings.yaml` file includes a template with default values for all
     ```
     
 4. In the Airflow UI, click either the **Connections**, **Pools**, or **Variables** tab to see your new or modified objects.
-5. Optional. To add another connection, pool, or variable, append it to this file within its corresponding section. To create another variable, for example, add it under the existing `variables` section of the same file:
+5. Optional. To add another connection, pool, or variable, you append it to this file within its corresponding section. To create another variable, add it under the existing `variables` section of the same file. For example:
 
   ```yaml
   variables:
@@ -191,7 +191,7 @@ Airflow providers are Python packages that contain all relevant Airflow modules 
       ```text
       <package-name>==<version>
       ```
-    To install NumPy version 1.23.0, for example, add the following to your `requirements.txt` file:
+For example, to install NumPy version 1.23.0, add the following to your `requirements.txt` file:
 
       ```text
       numpy==1.23.0
@@ -202,7 +202,6 @@ Airflow providers are Python packages that contain all relevant Airflow modules 
     ```sh
     astro dev bash --scheduler “pip freeze | grep <package-name>”
     ```
-    This command outputs the version number of the installed package.
 
 ## Add DAG utility files
 
@@ -234,7 +233,7 @@ If your environment variables contain sensitive information or credentials that 
     Environment variables should be in all-caps and not include spaces.
 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment).
-4. Confirm that your environment variables were applied in a local environment by running:
+4. Run the following command to confirm that your environment variables were applied locally:
     ```sh
     astro dev bash --scheduler “/bin/bash && env”
     ```
@@ -304,7 +303,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
 
 ## Apply changes to your project
 
-The Astro CLI makes it easy to quickly apply and test changes to your Astro project. Depending on the file that you change, you might have to restart your local Aiflow environment to apply the change.
+The Astro CLI lets you quickly apply and test changes to your Astro project. Some file changes require a restart of your local Airflow environment.
 
 ### DAG code changes
 
@@ -328,6 +327,7 @@ All changes made to the following files require rebuilding your Astro project in
 - `requirements.txt`
 - `airflow_settings.yaml`
 #### Apply changes
+
 1. Save the change to your local version control tool, such as VSCode.
 2. [Restart your local environment](develop-project.md#restart-your-local-environment).
 
