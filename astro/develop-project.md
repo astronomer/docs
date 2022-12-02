@@ -119,7 +119,7 @@ Here is how the recommended directory structure might appear:
     │   └── example-plugin.py
     └── requirements.txt
 ```
-If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
 
 ## Explore Airflow providers and modules
 
