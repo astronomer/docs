@@ -1,5 +1,5 @@
 name: Request documentation for an upcoming product change
-description: Describe an upcoming change to Astro or Astronomer Software that needs documentation
+description: An upcoming change to Astro or Astronomer Software that needs documentation
 assignees:
   - jwitz
   - kwcanuck
