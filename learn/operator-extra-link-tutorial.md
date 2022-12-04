@@ -8,24 +8,17 @@ description: 'Learn how to add operator extra links using the AirflowExtraLinkPl
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow includes plugins for customizing the Airflow UI. One small but impactful customization is adding extra links in the **Details** view for operators the UI. These extra links can point to static websites, such as documentation for the operator, or dynamic links created from information during the task instance run. 
+Airflow includes plugins for customizing the Airflow UI. One small but impactful customization is adding extra links in the **Details** view for operators in the UI. These extra links can point to static websites, such as documentation for the operator, or dynamic links created from information during the task instance run. 
 
 ![BashOperator with extra link](/img/guides/extra_links_tutorial_bashoperator.png)
 
-This tutorial shows how to add both static and dynamic extra links using the AirflowExtraLinkPlugin, as well as how to add an extra link directly in a custom operator.
+This tutorial shows how to add both static and dynamic extra links using the AirflowExtraLinkPlugin to existing and custom operators.
 
 After you complete this tutorial, you'll be able to:
 
 - Add a static operator extra link to any operator using an Airflow plugin.
 - Modify an existing operator to push an additional value to XCom.
 - Add a dynamic operator extra link to any operator using an Airflow plugin.
-- Add an operator extra link to a custom operator defined in an Airflow provider.
-
-:::tip
-
-Extra links can be also be added to operators when creating an [Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers/index.html). In general, adding an operator extra link via plugin as described in this tutorial is easier for use in a limited number of Airflow instances. However, if you are planning to use the extra link in a large number of deployments, consider adding them to an Airflow provider instead.
-
-:::
 
 ## Time to complete
 
@@ -117,16 +110,17 @@ Create an [Airflow plugin](using-airflow-plugins.md) to add an extra link to the
 
 This script accomplishes the following:
 
-- Imports the `AirflowPlugin` class which serves as a base class for custom plugins as well as the `BaseOperatorLink` from which classes defining custom extra links inherit.
-- Defines a custom extra link class called `HTTPDocsLink` which inherits from `BaseOperatorLink` and adds an external link button in the Airflow UI to all operators provided to its `operators` attribute. In the example, we provide the `SimpleHttpOperator`.
-- Provides a static link to the HTTP documentation on Mozilla to the `.get_link()` method of the `HTTPDocsLink`. This method adds any link returned to the link button in the Airflow UI.
-- Creates the `AirflowExtraLinkPlugin` class which inherits from `AirflowPlugin`. This class will plug objects of [different plugin types](using-airflow-plugins.md) into Airflow. The plugin is given the name `extra_link_plugin` and its `operator_extra_links` attribute contains all extra links objects that have been defined in this plugin script. For now it contains only `HTTPDocsLink()`.
+- Defines an operator extra link called `HTTPDocsLink` which will create an extra link button with the name `HTTP docs`. Customize this string to change the name on the button displayed in the UI.
+- Adds the `SimpleHttpOperator` to the list of operators this extra link will be applied to. You can add as many operators as you'd like, inlcuding custom operators.
+- Defines the `get_link()` method which determines the website the operator extra link will link to. You can change this function to any Python function that returns a valid link. See [Step 9](#step-9-add-a-dynamic-extra-link-to-your-custom-operator) for instructions on how to make this link dynamically change between task instances.
+- Creates an instance of the `AirflowPlugin` class which will be automatically picked up by Airflow to install the plugin named `extra_link_plugin` in your Airflow instance.
+- Adds the `HTTPDocsLink` plugin to the `extra_link_plugin`. You can add several operator extra links to the same Airflow plugin.
 
 ## Step 4: Add an HTTP connection
 
 1. Run `astro dev start` in your Astro project directory to start up Airflow. If your Airflow instance is already running, use `astro dev restart` to restart it in order to load any changes made in the `plugins` folder.
 
-2. Add an HTTP connection called `random_user_api_conn` to `http://randomuser.me/api/` in the Airflow UI. This API will return data about a randomly generated user persona. Feel free to use a different API, the content returned will not be relevant for this tutorial.
+2. Add an HTTP connection called `random_user_api_conn` to `http://randomuser.me/api/` in the Airflow UI. This API will return data about a randomly generated user persona. Feel free to use a different API, the content returned will not be relevant for this tutorial. Learn more about connections in the [Manage connections in Apache Airflow](connections.md) guide.
 
     ![HTTP connection](/img/guides/extra_links_tutorial_add_http_connection.png)
 
@@ -277,12 +271,6 @@ Next, you will create a dynamic extra link using an Airflow plugin by following 
 
 5. Save the file and restart your Airflow instance with `astro dev restart`.
 
-:::tip
-
-If you want to add an operator extra link to a custom operator as part of a provider package, make sure you install it with the rest of the package using a setup.py file or `wheels`. You can learn more in the official Airflow documentation under [How to create your own provider](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider). 
-
-:::
-
 ## Step 10: See your new extra link in action
 
 Your second extra link has now been added to the CatHttpOperator.
@@ -301,4 +289,12 @@ Your second extra link has now been added to the CatHttpOperator.
 
 ## Conclusion
 
-Congratulations! You added two operator extra links as an Airflow plugin. On the way you also learned how to modify an existing operator to pass an additional value to XCom.  
+Congratulations! You added two operator extra links as an Airflow plugin. On the way you also learned how to modify an existing operator to pass an additional value to XCom.
+
+:::tip
+
+Extra links can be also be added to operators when creating an [Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers/#how-to-create-your-own-provider). If you want to add an operator extra link to a custom operator as part of a provider package, make sure you install it with the rest of the package using a setup.py file or `wheels`.
+
+In general, adding an operator extra link via plugin as described in this tutorial is easier for use in a limited number of Airflow instances. However, if you are planning to use the extra link in a large number of deployments, consider adding them to an Airflow provider instead. 
+
+:::
