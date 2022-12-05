@@ -410,7 +410,7 @@ By default, this setup requires that you prefix any secret names in Key Vault wi
   
 :::tip
 
-To test Key Vault locally, set your environment variables in your Dockerfile and start a local Airflow environment. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
+To test Key Vault locally, set your environment variables in your Dockerfile and start a local Airflow environment, making sure to wrap the entire value of `AIRFLOW__SECRETS__BACKEND_KWARGS` in single quotations. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
   
 :::
 
