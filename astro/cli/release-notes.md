@@ -14,6 +14,20 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.8.3
+
+Release date: November 28, 2022
+
+### Additional improvements
+
+- Improved error handling for `astro login`.
+- Added minor performance improvements to `astro run`
+
+### Bug fixes
+
+- Fixed an issue where `astro run` could not locate `airflow_settings.yaml` when running a local Airflow environment. 
+- Fixed an issue were the Airflow settings file created by `astro dev object export` was not compatible with `astro run`.
+
 ## Astro CLI 1.8.1
 
 Release date: November 23, 2022

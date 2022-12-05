@@ -122,7 +122,7 @@ response = requests.get(
 
 ## Troubleshoot KubernetesPodOperator issues
 
-View local Kubernetes logs to troubleshoot issues with Pods that are created by the operator. See [Test and Troubleshoot the KubernetesPodOperator Locally](kubepodoperator-local.md#step-4-view-kubernetes-logs).
+View local Kubernetes logs to troubleshoot issues with Pods that are created by the operator. See [Test and Troubleshoot the KubernetesPodOperator Locally](https://docs.astronomer.io/learn/kubepod-operator#run-the-kubernetespodoperator-locally).
 
 ## Hard reset your local environment
 
