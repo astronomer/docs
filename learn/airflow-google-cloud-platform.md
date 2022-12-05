@@ -1,6 +1,6 @@
 # Authenticate with User Credentials for local development (Google Cloud)
 
-It is possible to use local User credentials instead of Service Account Keys to autenticate to Google Cloud.
+It is possible to use local User credentials instead of Service Account Keys to authenticate to Google Cloud.
 
 Using these credentials, it is also possible to configure a custom Secret Backend like Google Secret Manager for local development.
 
@@ -16,7 +16,7 @@ Steps:
     gcloud auth application-default login
     ```
 
-    Running the command in your terminal will provide a like and open a webpage to authenticate to your Google Cloud Account.
+    Running the command in your terminal will provide a link and open a webpage to authenticate to your Google Cloud Account.
     Once login is complete, it will store user credentials in your local Google Cloud SDK folder. 
     This credentials file is named Application Default Credentials (ADC).
     The file is used in place of the Service Account Key file.
@@ -32,7 +32,7 @@ Steps:
 2. Mount your Google Cloud application_default_credentials file as a volume and attach it to Airflow:
 
     This step is done by overriding the CLI Docker Compose file.
-    Make sure that the source path matches the file location mentionned in step 1 above.
+    Make sure that the source path matches the file location mentioned in step 1 above.
 
     For Linux, MacOS:
     ```yaml
