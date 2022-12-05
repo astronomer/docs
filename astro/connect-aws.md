@@ -125,16 +125,16 @@ Use Amazon Route 53 to allow Astro to access a private hosted zone.
 
 #### Prerequisites
 
-- An Amazon Route 53 Internet Resolver rule
+- An Amazon Route 53 Resolver rule
 - Permission to share resources using the AWS Resource Access Manager (RAM)
 
-#### Step 1: Share the Amazon Route 53 Internet Resolver rule
+#### Step 1: Share the Amazon Route 53 Resolver rule
 
-To allow Astro to access a private hosted zone, you need to share your Amazon Route 53 Internet Resolver rule with your Astro AWS account.
+To allow Astro to access a private hosted zone, you need to share your Amazon Route 53 Resolver rule with your Astro AWS account.
 
 1. In the Route 53 Dashboard,  click **Rules** below **Resolver** in the navigation menu.
 
-2. Select the Internet Resolver rule and then click **Details**.
+2. Select a Resolver rule and then click **Details**.
 
 3. Click **Share**, enter `Astro` in the **Name** field, and then enter the remaining resource share details including the Astro AWS account ID. To get the Astro AWS account ID, go to the Cloud UI, click **Settings**, and then copy the value in the **ID** column for the Astro AWS account you want to share the Internet Resolver rule with.
 
@@ -142,15 +142,15 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 #### Step 2: Contact Astronomer support for rule verification
 
-To verify that the Amazon Route 53 Internet Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support) with the following information:
+To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support) with the following information:
 
-- The Amazon Route 53 Internet Resolver rule ID. To locate the Internet Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Internet Resolver **ID** column.
+- The Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
 - The Astro AWS External ID for your organization. In the Cloud UI, click **Settings** and then copy the value in the **AWS External ID** field.
 
 #### Step 3: Confirm connectivity
 
-When Astronomer support confirms that the Amazon Route 53 Internet Resolver rule was successfully associated with the Astro VPC, confirm Astro can resolve hostnames from the private hosted zone.
+When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, confirm Astro can resolve hostnames from the private hosted zone.
 
 </TabItem>
 </Tabs>
