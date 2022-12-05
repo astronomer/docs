@@ -82,7 +82,7 @@ docker run --rm {image} pip freeze | grep <provider>
 
 ## Python versioning
 
-Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version, Astronomer recommends that you use the KubernetesPodOperator. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).
+Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version and you're running Airflow 2.4 or later, Astronomer recommends that you use the `ExternalPythonOperator`. See [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator). You can continue to use the `KubernetesPodOperator`, but the `ExternalPythonOperator` simplifies the Kubernetes authorization process.
 
 ## Executors
 
