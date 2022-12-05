@@ -125,30 +125,35 @@ If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [
 
 ### Setup
 
-1. Add the following line to the `requirements.txt` file of your Astro project:
+1. On your local computer, run the following command to install the latest version of the [`openlineage-dbt`](https://pypi.org/project/openlineage-dbt) library:
+
+   ```sh
+   $ pip install openlineage-dbt
+   ```
+
+2. Add the following line to the `requirements.txt` file of your Astro project:
 
    ```text
     openlineage-dbt
     ```
 
-2. Run the following command to generate the [`catalog.json`](https://docs.getdbt.com/reference/artifacts/catalog-json) file for your dbt project:
+3. Run the following command to generate the [`catalog.json`](https://docs.getdbt.com/reference/artifacts/catalog-json) file for your dbt project:
 
    ```bash
    $ dbt docs generate
    ```
 
-3. In your dbt project, run the [OpenLineage](https://openlineage.io/integration/dbt/) wrapper script using the `dbt run` [command](https://docs.getdbt.com/reference/commands/run):
+4. In your dbt project, run the [OpenLineage](https://openlineage.io/integration/dbt/) wrapper script using the `dbt run` [command](https://docs.getdbt.com/reference/commands/run):
 
    ```bash
    $ dbt-ol run
    ```
 
-4. Optional. Run the following command to test your set up:
+5. Optional. Run the following command to test your set up:
 
-```bash
+   ```bash
    $ dbt-ol test
    ```
-
 
 ### Verify setup
 
