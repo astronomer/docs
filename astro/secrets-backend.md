@@ -220,7 +220,7 @@ This tells Airflow to look for variable and connection information at the `secre
 
 :::tip
 
-To test Vault locally, set your environment variables in your Dockerfile and start a local Airflow environment. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
+To test Vault locally, set your environment variables in your Dockerfile and start a local Airflow environment, making sure to wrap the entire value of `AIRFLOW__SECRETS__BACKEND_KWARGS` in single quotations. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
   
 :::
 
@@ -331,7 +331,7 @@ Make sure to paste your entire JSON service account key in place of `<your-key-f
   
 :::tip
 
-To test Secret Manager locally, set your environment variables in your Dockerfile and start a local Airflow environment. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
+To test Secret Manager locally, set your environment variables in your Dockerfile and start a local Airflow environment, making sure to wrap the entire value of `AIRFLOW__SECRETS__BACKEND_KWARGS` in single quotations. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
   
 :::
 
