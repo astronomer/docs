@@ -11,6 +11,21 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For upgrade instructions, see [Upgrade Airflow on Astronomer Software](manage-airflow-versions.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://support.astronomer.io).
 
+## Astro Runtime 7.0.0 
+
+- Release date: December 2, 2022 
+- Airflow version: 2.5.0
+
+### Airflow 2.5.0
+
+Astro Runtime 7.0.0 includes same-day support for Airflow 2.5.0, which includes a collection of new features, bug fixes, automatic changes, and deprecations. Key changes include:
+
+- Allow depth-first execution ([#27827](https://github.com/apache/airflow/pull/27827))
+- Add logic for XComArg to pull specific map indexes ([#27771](https://github.com/apache/airflow/pull/27771))
+- Metric for raw task return codes ([#27155](https://github.com/apache/airflow/pull/27155))
+
+For a complete list of commits, see the [Apache Airflow 2.5.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-0-2022-12-02).
+
 ## Astro Runtime 6.0.4
 
 - Release date: November 14, 2022
