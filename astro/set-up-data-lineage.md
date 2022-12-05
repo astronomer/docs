@@ -143,6 +143,13 @@ If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [
    $ dbt-ol run
    ```
 
+4. Optional. Run the following command to test your set up:
+
+```bash
+   $ dbt-ol test
+   ```
+
+
 ### Verify setup
 
 To confirm that your setup is successful, run a dbt model in your project. After you run this model, click **Lineage** in the Cloud UI and and then click **Runs** in the left menu. If the setup is successful, the run that you triggered appears in the table of most recent runs.
