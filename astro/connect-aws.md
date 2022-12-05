@@ -136,9 +136,15 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 2. Select a Resolver rule and then click **Details**.
 
-3. Click **Share**, enter `Astro` in the **Name** field, and then enter the remaining resource share details including the Astro AWS account ID. To get the Astro AWS account ID, go to the Cloud UI, click **Settings**, and then copy the value in the **ID** column for the Astro AWS account you want to share the Internet Resolver rule with.
+3. Click **Share** and enter `Astro` in the **Name** field.
 
-4. Click **Create resource share**.
+4. In the **Resources - optional** section, select **Resolver Rules**  in the **Select resource type** list and then select a rule.
+
+5. On the **Associate permissions** page, accept the default settings and then click **Next**.
+
+6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field. To get the Astro AWS account ID, go to the Cloud UI, click **Settings**, and then copy the value in the **ID** column for the Astro AWS account you want to share the Internet Resolver rule with.
+
+7. Click **Create resource share**.
 
 #### Step 2: Contact Astronomer support for rule verification
 
@@ -146,11 +152,15 @@ To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a 
 
 - The Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
-- The Astro AWS External ID for your organization. In the Cloud UI, click **Settings** and then copy the value in the **AWS External ID** field.
-
 #### Step 3: Confirm connectivity
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, confirm Astro can resolve hostnames from the private hosted zone.
+
+1. Open Airflow and select **Admin** > **Connections**.
+
+2. Select the Amazon Route 53 connection and click **Edit record**.
+
+3. Click **Test**.
 
 </TabItem>
 </Tabs>
