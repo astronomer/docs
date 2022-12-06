@@ -166,7 +166,7 @@ When Astronomer support confirms that the Amazon Route 53 Resolver rule was succ
 
 5. Optional. Add a description for the connection in the **Description** field.
 
-5. Click **Test**.
+6. Click **Test**.
 
 </TabItem>
 </Tabs>
