@@ -126,6 +126,7 @@ The `airflow_settings.yaml` file includes a template with the default values for
 1. Open the `airflow_settings.yaml` file and replace the default value with your own.
 
     ```yaml
+
     airflow:
       connections: ## conn_id and conn_type are required
         - conn_id: my_new_connection
@@ -143,6 +144,7 @@ The `airflow_settings.yaml` file includes a template with the default values for
       variables: ## variable_name and variable_value are required
         - variable_name: my_variable
           variable_value: my_value
+    
     ```
 
 2. Save the modified `airflow_settings.yaml` file in your code editor. If you use a Mac computer, for example, use **Command-S**.
@@ -156,11 +158,13 @@ The `airflow_settings.yaml` file includes a template with the default values for
 5. Optional. To add another connection, pool, or variable, you append it to this file within its corresponding section. To create another variable, add it under the existing `variables` section of the same file. For example:
 
   ```yaml
+  
   variables:
     - variable_name: <my-variable-1>
       variable_value: <my-variable-value>
     - variable_name: <my-variable-2>
       variable_value: <my-variable-value-2>
+  
   ```
 
 ## Add Python, OS-level packages, and Airflow providers
