@@ -128,7 +128,7 @@ Use Amazon Route 53 to allow Astro to access a private hosted zone.
 - An Amazon Route 53 Resolver rule
 - Permission to share resources using the AWS Resource Access Manager (RAM)
 
-#### Step 1: Share the Amazon Route 53 Resolver rule
+#### Share the Amazon Route 53 Resolver rule
 
 To allow Astro to access a private hosted zone, you need to share your Amazon Route 53 Resolver rule with your Astro AWS account.
 
@@ -146,13 +146,13 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 7. Click **Create resource share**.
 
-#### Step 2: Contact Astronomer support for rule verification
+#### Contact Astronomer support for rule verification
 
 To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support) with the following information:
 
 - The Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
-#### Step 3: Confirm connectivity
+#### Confirm connectivity
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, confirm Astro can resolve hostnames from the private hosted zone.
 
