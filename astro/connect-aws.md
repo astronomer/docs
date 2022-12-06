@@ -160,7 +160,7 @@ When Astronomer support confirms that the Amazon Route 53 Resolver rule was succ
 
 2. Click **Add a new record**.
 
-3. Enter a name for the connection in the **Connection Id** field. The naming convention is `AIRFLOW_CONN_{CONN_ID}`, all uppercase with single underscores surrounding `CONN`. For example, `AIRFLOW_CONN_MY_AWS_DB`.
+3. Enter a name for the connection in the **Connection Id** field, such as `aws_default`.
 
 4. Select **Amazon Web Services** in the **Connection Type** list.
 
