@@ -121,11 +121,11 @@ You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpo
 
 <TabItem value="Amazon Route 53">
 
-Use Amazon Route 53 to allow Astro to access a VPC through a [private hosted zone](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zones-private.html).
+Use Amazon Route 53 to allow Astro to access a VPC through a .
 
 #### Prerequisites
 
-- An Amazon Route 53 Resolver rule
+- An Amazon Route 53 Resolver rule. See [Managing forwarding rules](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-rules-managing.html).
 - Permission to share resources using the AWS Resource Access Manager (RAM)
 
 #### Share the Amazon Route 53 Resolver rule
