@@ -12,13 +12,13 @@ id: develop-project
 import Tabs from '@theme/Tabs';
 import {siteVariables} from '@site/src/versions';
 
-An Astro project contains all of the files necessary to test and run DAGs in a local Airflow environment and on Astro. This guide provides information about how to add and organize Astro project files, including:
+An Astro project contains all of the files necessary to test and run DAGs in a local Airflow environment and on Astro. This guide provides information about adding and organizing Astro project files, including:
 
-- Add DAGs
-- Add Python and OS-level packages
-- Set environment variables
-- Apply changes
-- Run on-build commands
+- Adding DAGs
+- Adding Python and OS-level packages
+- Setting environment variables
+- Applying changes
+- Running on-build commands
 
 For information about testing DAGs after you’ve added them to your Astro project, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 
@@ -28,16 +28,16 @@ As you add to your Astro project, Astronomer recommends reviewing the [Astronome
 
 The Astronomer Registry includes:
 
-- Example DAGs for many data sources and destinations. For example, you can build out a data quality use case with Snowflake and Great Expectations based on the [Great Expectations Snowflake Example DAG](https://registry.astronomer.io/dags/great-expectations-snowflake).
+- Example DAGs for many data sources and destinations. For example, you can create a data quality use case with Snowflake and Great Expectations using the [Great Expectations Snowflake Example DAG](https://registry.astronomer.io/dags/great-expectations-snowflake).
 - Documentation for Airflow providers, such as [Databricks](https://registry.astronomer.io/providers/databricks), [Snowflake](https://registry.astronomer.io/providers/snowflake), and [Postgres](https://registry.astronomer.io/providers/postgres). This documentation is comprehensive and based on Airflow source code.
-- Documentation for Airflow modules, such as the [PythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonoperator), [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator), and [S3ToRedshiftOperator](https://registry.astronomer.io/providers/amazon/modules/s3toredshiftoperator). These modules include guidance on how to set Airflow connections and their parameters.
+- Documentation for Airflow modules, such as the [PythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonoperator), [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator), and [S3ToRedshiftOperator](https://registry.astronomer.io/providers/amazon/modules/s3toredshiftoperator). These modules provide guidance on setting Airflow connections and their parameters.
 
 :::
 
 
 ## Prerequisites
 
-- An [Astro project](create-project.md).
+- An [Astro project](create-project.md)
 - [The Astro CLI](cli/overview.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
@@ -49,14 +49,14 @@ Making changes to your Astro project and testing them locally requires an Airflo
 astro dev start
 ```
 
-This command builds your Astro project into a Docker image and creates 4 Docker containers on your computer, each for a different Airflow component:
+The command builds your Astro project into a Docker image and creates the following Docker containers:
 
-- **Postgres:** Airflow's metadata database
+- **Postgres:** The Airflow metadata database
 - **Webserver:** The Airflow component responsible for rendering the Airflow UI
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
 - **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
-Once the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
+After the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
 
 ## Add DAGs
 
@@ -65,7 +65,7 @@ In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic
 DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your project:
 
 1. Add the `.py` file to the `dags` folder.
-2. Save your changes to your code editor. If you're using a Mac, use **Command-S**.
+2. Save your changes. If you're using a Mac, use **Command-S**.
 3. Refresh your Airflow browser.
 
 :::tip
@@ -78,10 +78,7 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 Use the `include` folder to store additional utilities required by your DAGs. For example, templated SQL scripts or a custom helper function that's used in an operator and that you can reference in multiple DAGs.
 
-Astronomer recommends storing the `include` folder inside the `dags` directory of your Astro project. If you're using [DAG-only deploys](deploy-code.md#deploy-dags-only), this:
-
-- Allows you to deploy DAG code without an image restart by running `astro deploy --dags`.
-- Makes sure that your DAGs can access your utility files when you deploy them.
+Astronomer recommends storing the `include` folder inside the `dags` directory of your Astro project. If you're using [DAG-only deploys](deploy-code.md#deploy-dags-only), this allows you to deploy DAG code without an image restart by running `astro deploy --dags` and makes sure that your DAGs can access your utility files when you deploy them.
 
 Here is how the recommended directory structure might appear:
 
@@ -153,7 +150,7 @@ The `airflow_settings.yaml` file includes a template with the default values for
     astro dev object import
     ```
 
-4. In the Airflow UI, click either the **Connections**, **Pools**, or **Variables** tab to see your new or modified objects.
+4. In the Airflow UI, click **Connections**, **Pools**, or **Variables** to see your new or modified objects.
 5. Optional. To add another connection, pool, or variable, you append it to this file within its corresponding section. To create another variable, add it under the existing `variables` section of the same file. For example:
 
   ```yaml
@@ -330,7 +327,7 @@ This command rebuilds your image and restarts the Docker containers running on y
 
 ## Install Python packages from private sources
 
-Python packages can be installed from both public and private locations into your image. To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
+Python packages can be installed into your image from public and private locations. To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
 Depending on where your private packages are stored, use one of the following setups to install these packages to an Astro project by customizing your Runtime image.
 
@@ -354,7 +351,7 @@ Deploying a custom Runtime image with a CI/CD pipeline requires additional confi
 
 This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.
 
-Although this setup is based on GitHub, the high level steps can be completed with any hosted Git repository.
+Although GitHub is used in this example, you should be able to complete the process with any hosted Git repository.
 
 :::info
 
@@ -364,15 +361,15 @@ The following setup has been validated only with a single SSH key. You might nee
 
 #### Prerequisites
 
-- The [Astro CLI](cli/overview.md).
+- The [Astro CLI](cli/overview.md)
 - An [Astro project](create-project.md).
-- Custom Python packages that are [installable with pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
-- A private GitHub repository for each of your custom Python packages.
-- A [GitHub SSH private key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories.
+- Custom Python packages that are [installable with pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
+- A private GitHub repository for each of your custom Python packages
+- A [GitHub SSH private key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories
 
 :::warning
 
-If your organization enforces SAML single sign-on (SSO), you must first authorize your key to be used with that authentication method. For instructions, see [GitHub documentation](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on).
+If your organization enforces SAML single sign-on (SSO), you must first authorize your key to be used with that authentication method. See [Authorizing an SSH key for use with SAML single sign-on](https://docs.github.com/en/enterprise-cloud@latest/authentication/authenticating-with-saml-single-sign-on/authorizing-an-ssh-key-for-use-with-saml-single-sign-on).
 
 :::
 
@@ -380,13 +377,13 @@ This setup assumes that each custom Python package is hosted within its own priv
 
 #### Step 1: Specify the private repository in your project
 
-To add a Python package from a private repository to your Astro project, specify the repository’s SSH URL in your project’s `requirements.txt` file. This URL should be formatted as:
+To add a Python package from a private repository to your Astro project, specify the repository’s SSH URL in your project’s `requirements.txt` file. The URL should use the following format:
 
 ```
 git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git
 ```
 
-For example, to install `mypackage1` & `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to your `requirements.txt` file:
+For example, to install `mypackage1` and `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to your `requirements.txt` file:
 
 ```
 git+ssh://git@github.com/myorganization/mypackage1.git
@@ -398,7 +395,7 @@ This example assumes that the name of each of your Python packages is identical 
 
 #### Step 2: Update Dockerfile
 
-1. Optional. Copy any build steps you already have in your `Dockerfile` and save them for later.
+1. Optional. Copy and save any existing build steps in your `Dockerfile`.
 
 2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
@@ -408,7 +405,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::info
 
-  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image as demonstrated in the example above. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-image-architecture.md#distribution).
+  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-image-architecture.md#distribution).
 
   :::
 
@@ -463,7 +460,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::info
 
-  If your repository is hosted somewhere other than GitHub, replace the domain in the `ssh-keyscan` command with the domain where the package is hosted.
+  If your repository is not hosted on GitHub, replace the domain in the `ssh-keyscan` command with the domain where the package is hosted.
 
   :::
 
@@ -505,8 +502,8 @@ To complete this setup, you’ll specify your privately hosted Python packages i
 
 #### Prerequisites
 
-- An [Astro project](create-project.md).
-- A private PyPI index with a corresponding username and password.
+- An [Astro project](create-project.md)
+- A private PyPI index with a corresponding username and password
 
 #### Step 1: Add Python packages to your Astro project
 
@@ -520,7 +517,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 
 #### Step 2: Update Dockerfile
 
-1. Optional. Copy any build steps you already have in your `Dockerfile` and save them for later.
+1. Optional. Copy and save any existing build steps in your `Dockerfile`.
 
 2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
 
