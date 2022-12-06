@@ -118,66 +118,66 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 2. Run the following command to create the Astronomer remote management role.
     
     ```sh
-#!/bin/sh
+    #!/bin/sh
 
-set -eo pipefail
+    set -eo pipefail
 
-if [ -z "$EXTERNAL_ID" ]
-then
-  echo 'Missing required variable EXTERNAL_ID' >&2
-  exit 1
-fi
+    if [ -z "$EXTERNAL_ID" ]
+    then
+      echo 'Missing required variable EXTERNAL_ID' >&2
+      exit 1
+    fi
 
-POLICY_NAME='AstronomerCrossAccountRole'
-POLICY_DESCRIPTION='Permissions boundary for Astronomer cross-account management role'
-POLICY_URL='https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account-prerelease.json'
-POLICY_FILE='/tmp/policy.json'
+    POLICY_NAME='AstronomerCrossAccountRole'
+    POLICY_DESCRIPTION='Permissions boundary for Astronomer cross-account management role'
+    POLICY_URL='https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account-prerelease.json'
+    POLICY_FILE='/tmp/policy.json'
 
-if [ ! -f "$POLICY_FILE" ]
-then
-  echo "Download $POLICY_NAME policy document"
+    if [ ! -f "$POLICY_FILE" ]
+    then
+      echo "Download $POLICY_NAME policy document"
 
-  ACCOUNT_ID="$(aws sts get-caller-identity --query 'Account' --output text)"
-  curl "$POLICY_URL" | sed "s/{{.AWSAccount}}/$ACCOUNT_ID/" > "$POLICY_FILE"
-fi
+      ACCOUNT_ID="$(aws sts get-caller-identity --query 'Account' --output text)"
+      curl "$POLICY_URL" | sed "s/{{.AWSAccount}}/$ACCOUNT_ID/" > "$POLICY_FILE"
+    fi
 
-echo "Create $POLICY_NAME policy"
-# Retrieve the new policy's ARN, but also print the output of aws iam create-policy to stdout
-{ POLICY_ARN=$( \
-  aws iam create-policy --policy-name "$POLICY_NAME" --policy-document "$(cat "$POLICY_FILE")" --description "$POLICY_DESCRIPTION" \
-  | tee /dev/fd/3 \
-  | sed -rn 's/"Arn"://p' \
-  | tr -d '[:space:]",'); } 3>&1
+    echo "Create $POLICY_NAME policy"
+    # Retrieve the new policy's ARN, but also print the output of aws iam create-policy to stdout
+    { POLICY_ARN=$( \
+      aws iam create-policy --policy-name "$POLICY_NAME" --policy-document "$(cat "$POLICY_FILE")" --description "$POLICY_DESCRIPTION" \
+      | tee /dev/fd/3 \
+      | sed -rn 's/"Arn"://p' \
+      | tr -d '[:space:]",'); } 3>&1
 
-ROLE_NAME='astronomer-remote-management'
-ASSUME_ROLE_POLICY=$(cat << EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
+    ROLE_NAME='astronomer-remote-management'
+    ASSUME_ROLE_POLICY=$(cat << EOF
     {
-      "Effect": "Allow",
-      "Principal": {
-        "AWS": "arn:aws:iam::406882777402:root"
-      },
-      "Action": "sts:AssumeRole",
-      "Condition": {
-        "StringEquals": {
-        "sts:ExternalId": "$EXTERNAL_ID"
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "AWS": "arn:aws:iam::406882777402:root"
+          },
+          "Action": "sts:AssumeRole",
+          "Condition": {
+            "StringEquals": {
+            "sts:ExternalId": "$EXTERNAL_ID"
+            }
+          }
         }
-      }
+      ]
     }
-  ]
-}
-EOF
-)
+    EOF
+    )
 
-echo "Create $ROLE_NAME role"
-aws iam create-role --role-name "$ROLE_NAME" --assume-role-policy-document "$ASSUME_ROLE_POLICY"
+    echo "Create $ROLE_NAME role"
+    aws iam create-role --role-name "$ROLE_NAME" --assume-role-policy-document "$ASSUME_ROLE_POLICY"
 
-echo "Attach $POLICY_NAME to $ROLE_NAME"
-aws iam attach-role-policy --policy-arn "$POLICY_ARN" --role-name "$ROLE_NAME"
+    echo "Attach $POLICY_NAME to $ROLE_NAME"
+    aws iam attach-role-policy --policy-arn "$POLICY_ARN" --role-name "$ROLE_NAME"
 
-echo 'Setup complete'
+    echo 'Setup complete'
     ```
 
 </TabItem>
