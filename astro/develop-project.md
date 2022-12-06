@@ -1,17 +1,17 @@
 ---
-sidebar_label: ‘Develop a project’
-title: ‘Develop your Astro project’
+sidebar_label: 'Develop a project'
+title: 'Develop your Astro project'
 id: develop-project
 ---
 
 <head>
-  <meta name=“description” content=“Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization.” />
-  <meta name=“og:description” content=“Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization.” />
+  <meta name="description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
+  <meta name="og:description" content="Learn how to add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." />
 </head>
 
 import {siteVariables} from ‘@site/src/versions’;
-import Tabs from ‘@theme/Tabs’;
-import TabItem from ‘@theme/TabItem’;
+import Tabs from '@theme/Tabs';
+import {siteVariables} from '@site/src/versions';
 
 An Astro project contains all of the files necessary to test and run DAGs in a local Airflow environment and on Astro. This guide provides information about how to add and organize Astro project files, including:
 
@@ -151,7 +151,7 @@ The `airflow_settings.yaml` file includes a template with the default values for
     ```sh
     astro dev object import
     ```
-    
+
 4. In the Airflow UI, click either the **Connections**, **Pools**, or **Variables** tab to see your new or modified objects.
 5. Optional. To add another connection, pool, or variable, you append it to this file within its corresponding section. To create another variable, add it under the existing `variables` section of the same file. For example:
 
@@ -162,7 +162,7 @@ The `airflow_settings.yaml` file includes a template with the default values for
     - variable_name: <my-variable-2>
       variable_value: <my-variable-value-2>
   ```
-  
+
 ## Add Python, OS-level packages, and Airflow providers
 
 Most DAGs need a Python package or OS-level package to run. If you’re using Airflow for a data science project, for example, you might need to install popular data science libraries such as [pandas](https://pandas.pydata.org/) or [NumPy (`numpy`)](https://numpy.org/). Adding a Python package to your Astro project is equivalent to running `pip install`.
