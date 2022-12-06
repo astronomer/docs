@@ -185,7 +185,7 @@ Airflow providers are Python packages that contain all relevant Airflow modules 
 3. Confirm that your package was installed:
 
     ```sh
-    astro dev bash --scheduler “pip freeze | grep <package-name>”
+    astro dev bash --scheduler "pip freeze | grep <package-name>"
     ```
 
 ## Add DAG utility files
@@ -220,7 +220,7 @@ If your environment variables contain sensitive information or credentials that 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment).
 4. Run the following command to confirm that your environment variables were applied locally:
     ```sh
-    astro dev bash --scheduler “/bin/bash && env”
+    astro dev bash --scheduler "/bin/bash && env"
     ```
    These commands output all environment variables that are running locally. This includes environment variables set on Astro Runtime by default.
 5. Optional. Run `astro deployment variable create --load` or `astro deployment variable update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment.
@@ -231,8 +231,8 @@ For local environments, the Astro CLI generates an `airflow.cfg` file at runtime
 
 To view your local environment variables in the context of the generated Airflow configuration, run:
 
-```
-astro dev bash --scheduler “/bin/bash && cat airflow.cfg”
+````sh
+astro dev bash --scheduler "/bin/bash && cat airflow.cfg"
 ```
 
 These commands output the contents of the generated `airflow.cfg` file, which lists your environment variables as human-readable configurations with inline comments.
@@ -413,7 +413,7 @@ This example assumes that the name of each of your Python packages is identical 
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer=“Astronomer <humans@astronomer.io>”
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
     ARG BUILD_NUMBER=-1
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
