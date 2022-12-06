@@ -38,7 +38,7 @@ The Astronomer Registry includes:
 ## Prerequisites
 
 - An [Astro project](create-project.md)
-- [The Astro CLI](cli/overview.md)
+- The [Astro CLI](cli/overview.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 
 ## Build and run a project locally
@@ -172,10 +172,11 @@ Airflow providers are Python packages that contain all relevant Airflow modules 
 1. Add the package name to your Astro project. If it’s a Python package, add it to `requirements.txt`. If it’s an OS-level package, add it to `packages.txt`. The latest version of the package that’s publicly available is installed by default.
 
     To pin a version of a package, use the following syntax:
+
       ```text
       <package-name>==<version>
       ```
-For example, to install NumPy version 1.23.0, add the following to your `requirements.txt` file:
+    For example, to install NumPy version 1.23.0, add the following to your `requirements.txt` file:
 
       ```text
       numpy==1.23.0
