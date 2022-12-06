@@ -38,24 +38,30 @@ Steps:
     ```yaml
     version: "3.1"
     services:
-    scheduler:
-        volumes:
-        - /home/<username>/.config/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
-    webserver:
-        volumes:
-        - /home/<username>/.config/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
+        scheduler:
+            volumes:
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
+        webserver:
+            volumes:
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
+        triggerer:
+            volumes:
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
     ```
 
     For Windows:
     ```yaml
     version: "3.1"
     services:
-    scheduler:
-        volumes:
-        - /c/Users/OlivierDaneau/AppData/Roaming/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
-    webserver:
-        volumes:
-        - /c/Users/OlivierDaneau/AppData/Roaming/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
+        scheduler:
+            volumes:
+            - /c/Users/OlivierDaneau/AppData/Roaming/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
+        webserver:
+            volumes:
+            - /c/Users/OlivierDaneau/AppData/Roaming/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
+        triggerer:
+            volumes:
+            - /c/Users/OlivierDaneau/AppData/Roaming/gcloud/application_default_credentials.json:/home/astro/.config/gcloud/application_default_credentials.json:ro
     ```
 
     For more information:
