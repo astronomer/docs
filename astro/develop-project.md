@@ -266,7 +266,7 @@ To run additional commands as your Astro project is built into a Docker image, a
 
 For example, if you want to run `ls` when your image builds, your `Dockerfile` would look like this:
 
-<pre><code parentName=“pre”>{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
+<pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
 RUN ls
 `}</code></pre>
 
