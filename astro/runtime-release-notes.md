@@ -27,6 +27,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 Astro Runtime 7.0.0 includes same-day support for Airflow 2.5.0, which includes a collection of new features, bug fixes, automatic changes, and deprecations. Key changes include:
 
+- User comments can be added to task instances and DAG runs ([#26457](https://github.com/apache/airflow/pull/26457))
 - Allow depth-first execution ([#27827](https://github.com/apache/airflow/pull/27827))
 - Add logic for XComArg to pull specific map indexes ([#27771](https://github.com/apache/airflow/pull/27771))
 - Metric for raw task return codes ([#27155](https://github.com/apache/airflow/pull/27155))
