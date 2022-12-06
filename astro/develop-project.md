@@ -61,7 +61,7 @@ Once the project builds, you can access the Airflow UI by going to `http://local
 
 ## Add DAGs
 
-In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic Graphs (DAGs). A DAG is a collection of tasks and dependencies between tasks that are defined as code. See [Introduction to Airflow DAGs](learn/dags.md).
+In Apache Airflow, data pipelines are defined in Python code as Directed Acyclic Graphs (DAGs). A DAG is a collection of tasks and dependencies between tasks that are defined as code. See [Introduction to Airflow DAGs](https://docs.astronomer.io/learn/dags).
 
 DAGs are stored in the `dags` folder of your Astro project. To add a DAG to your project:
 
@@ -107,7 +107,7 @@ If you do not use DAG-only deploys or you decide to keep the `include` directory
 
 ## Add Airflow connections, pools, variables
 
-Airflow connections connect external applications such as databases and third-party services to Apache Airflow. See [Manage connections in Apache Airflow](learn/connections.md#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+Airflow connections connect external applications such as databases and third-party services to Apache Airflow. See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
 To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you have the following options:
 
@@ -267,7 +267,7 @@ To run additional commands as your Astro project is built into a Docker image, a
 
 For example, if you want to run `ls` when your image builds, your `Dockerfile` would look like this:
 
-<pre><code parentName=“pre”>{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
+<pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
 RUN ls
 `}</code></pre>
 
@@ -341,14 +341,15 @@ Deploying a custom Runtime image with a CI/CD pipeline requires additional confi
 
 :::
 
+
 <Tabs
-    defaultValue=“github”
-    groupId= “install-python-packages-from-private-sources”
+    defaultValue="github"
+    groupId= "install-python-packages-from-private-sources"
     values={[
-        {label: ‘Private GitHub Repo’, value: ‘github’},
-        {label: ‘Private PyPi Index’, value: ‘pypi’},
+        {label: 'Private GitHub Repo', value: 'github'},
+        {label: 'Private PyPi Index', value: 'pypi'},
     ]}>
-<TabItem value=“github”>
+<TabItem value="github">
 
 #### Install Python packages from private GitHub repositories
 
@@ -495,7 +496,7 @@ Your Astro project can now utilize Python packages from your private GitHub repo
 
 </TabItem>
 
-<TabItem value=“pypi”>
+<TabItem value="pypi">
 
 #### Install Python packages from a private PyPI index
 
