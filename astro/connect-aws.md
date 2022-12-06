@@ -152,15 +152,21 @@ To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a 
 
 - The Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
-#### Confirm connectivity
+#### Create the connection and confirm connectivity
 
-When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, confirm Astro can resolve hostnames from the private hosted zone.
+When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, create the Airflow connection confirm Astro can resolve hostnames from the private hosted zone.
 
 1. Open Airflow and select **Admin** > **Connections**.
 
-2. Select the Amazon Route 53 connection and click **Edit record**.
+2. Click **Add a new record**.
 
-3. Click **Test**.
+3. Enter the connection ID of the Resolver rule you shared in the **Connection Id** field.
+
+4. Select **Amazon Web Services** in the **Connection Type** list.
+
+5. Optional. Add a description for the connection in the **Description** field.
+
+5. Click **Test**.
 
 </TabItem>
 </Tabs>
