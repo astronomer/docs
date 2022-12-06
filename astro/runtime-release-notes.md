@@ -33,7 +33,7 @@ Astro Runtime 7.0.0 includes same-day support for Airflow 2.5.0, which includes 
 - New **Parsed at** metric in the DAG view of the Airflow UI [#27573](https://github.com/apache/airflow/pull/27573)
 - Filter datasets in Airflow UI based on recent update events [#26942](https://github.com/apache/airflow/pull/26942)
 
-For a complete list of commits, see the [Apache Airflow 2.5.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-0-2022-12-02).
+To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/blog/whats-new-in-apache-airflow-2-5/) and the [Apache Airflow 2.5.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-0-2022-12-02).
 
 ### Additional improvements 
 
