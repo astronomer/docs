@@ -35,6 +35,7 @@ The Astronomer Registry includes:
 
 :::
 
+
 ## Prerequisites
 
 - An [Astro project](create-project.md).
@@ -86,7 +87,6 @@ Astronomer recommends storing the `include` folder inside the `dags` directory o
 Here is how the recommended directory structure might appear:
 
 ```bash
-    .
     ├── airflow_settings.yaml
     ├── dags
     │   └── include
