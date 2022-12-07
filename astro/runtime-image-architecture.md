@@ -48,6 +48,16 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
 :::
 
+## Default environment variables
+
+The following table list the default Runtime environment variables. You can change the default settings of these environment variables to meet the unique requirements of your organization. For information about the global environment variables set by Astronomer, see [Global environment variables](platform-variables.md).
+
+| Environment Variable                       | Description                                                                                                          | Value                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The time in seconds that queued Celery tasks are assumed to have stalled before they are automatically rescheduled. The default is zero.                                                                 | `integer`                |
+| `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of tasks that can run at the same time in a single Airflow environment. The default is 32.                                                              | `string`            |
+
+
 ## Provider packages
 
 All Astro Runtime images have the following open source provider packages pre-installed:

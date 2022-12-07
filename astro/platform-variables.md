@@ -45,12 +45,11 @@ If you need to set one of these variables for a particular use case, contact [As
 | `AIRFLOW__WEBSERVER__COOKIE_SECURE`        | Sets a `secure` flag on server cookies                                                                               | `True`                                  |
 | `AIRFLOW__WEBSERVER__INSTANCE_NAME`        | Shows the name of your Deployment in the Home view of the Airflow UI                                                 | `<Deployment-Name>`                     |
 | `AIRFLOW__CELERY__WORKER_CONCURRENCY`      | Determines how many tasks each Celery worker can run at any given time and is the basis of worker auto-scaling logic | `<Max-Tasks-Per-Worker>`                |
-| `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The time in seconds that queued Celery tasks are assumed to have stalled before they are automatically rescheduled. The default is zero.                                                                 | `integer`                |
 | `AIRFLOW__WEBSERVER__NAVBAR_COLOR`         | The color of the main navigation bar in the Airflow UI                                                               | `#4a4466`                               |
 | `AIRFLOW__WEBSERVER__EXPOSE_CONFIG`        | Exposes the **Configuration** tab of the Airflow UI and hides sensitive values                                       |  `NON-SENSITIVE-ONLY`                   |
 | `AWS_SECRET_ACCESS_KEY`                    | The key secret for accessing Astro's managed S3 bucket¹                                                              | `<s3-aws-access-key-secret>`            |
-| `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of tasks that can run at the same time in a single Airflow environment. The default is 32.                                                              | `string`            |
-
+| `OPENLINEAGE_URL`                    |  The URL for your Astro base domain.                                                            |       `https://<your-astro-base-domain>`      |
+ `OPENLINEAGE_API_KEY`                    |  Your OpenLineage API key                                                            |       `<your-lineage-api-key>`      |
 
 :::info 
 
@@ -59,12 +58,3 @@ If you need to set one of these variables for a particular use case, contact [As
 There are no restrictions with setting these values for Deployments running on GCP and Azure.
 
 :::
-
-## OpenLineage environment variables
-
-The following OpenLineage environment variables cannot be overwritten:
-
-- `OPENLINEAGE_UR`
-- `OPENLINEAGE_API_KEY`
-
-To avoid unexpected results, Astronomer recommends that you don't overwrite the `OPENLINEAGE_NAMESPACE` environment variable.
