@@ -110,9 +110,8 @@ To test that lineage was configured correctly on your Databricks cluster, run a 
 
 ## OpenLineage and dbt Core with Airflow
 
-dbt is an open-source library for analytics engineering that helps you create interdependent SQL models for in-warehouse data transformation. As ephemeral compute becomes more readily available in data warehouses thanks to applications such as Snowflake, dbt has become a key component of the modern data engineering workflow. You can now use dbt to write, organize, and run in-warehouse transformations of raw data.
 
-To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
+Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
 
 If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/support). 
 
