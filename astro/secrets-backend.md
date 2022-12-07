@@ -114,15 +114,28 @@ Secret names must correspond with the `connections_prefix` and `variables_prefix
 
 For more information on adding secrets to Secrets Manager, see [AWS documentation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html).
 
+#### Set up Secrets Manager locally
+
+Add the following environment variables to your Astro project's `.env` file:
+
+```text 
+AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
+AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}
+```
+
+You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
+
 #### Deploy environment variables to Astro
 
-Run the following commands to export your secrets backend configurations as environment variables to Astro.
+1. Run the following commands to export your secrets backend configurations as environment variables to Astro.
 
-```sh
-$ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
+    ```sh
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
   
-$ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"} --secret
-```
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"} --secret
+    ```
+
+2. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
  
 To further customize the Airflow and AWS SSM Parameter Store integration, see the [full list of available kwargs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/_api/airflow/providers/amazon/aws/secrets/systems_manager/index.html).
 
@@ -169,6 +182,7 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
     ```
 
 2. [Create a Vault AppRole](https://www.vaultproject.io/docs/auth/approle) and attach the policy you just created to it.
+   
 3. Retrieve the `role-id` and `secret-id` for your AppRole by running the following commands:
 
     ```sh
@@ -216,13 +230,7 @@ AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}
 ```
 
-This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server.
-
-:::tip
-
-To test Vault locally, set your environment variables in your Dockerfile and start a local Airflow environment, making sure to wrap the entire value of `AIRFLOW__SECRETS__BACKEND_KWARGS` in single quotations. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
-  
-:::
+This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
 
 For more information on the Airflow provider for Hashicorp Vault and how to further customize your integration, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/_api/airflow/providers/hashicorp/hooks/vault/index.html).
 
@@ -263,19 +271,32 @@ In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter St
 
 Create directories for Airflow variables and connections in Parameter Store that you want to store as secrets.
 
-Variables and connections should should be stored in `/airflow/variables` and `/airflow/connections`, respectively. For example, if you're setting a secret variable with the key `my_secret`, it should be stored in the `/airflow/connections/` directory. If you modify the directory paths, make sure you change the values for `variables_prefix` and `connections_prefix` in Step 2.
+Variables and connections should be stored in `/airflow/variables` and `/airflow/connections`, respectively. For example, if you're setting a secret variable with the key `my_secret`, it should be stored in the `/airflow/connections/` directory. If you modify the directory paths, make sure you change the values for `variables_prefix` and `connections_prefix` in Step 2.
 
 For instructions, see the [AWS Systems Manager Console](https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-create-console.html), the [AWS CLI](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-cli.html), or the [Tools for Windows PowerShell](https://docs.aws.amazon.com/systems-manager/latest/userguide/param-create-ps.html) documentation.
   
+#### Set up Parameter Store locally
+
+Add the following environment variables to your Astro project's `.env` file:
+
+```text 
+AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SystemsManagerParameterStoreBackend
+AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}
+```
+
+You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
+
 #### Deploy environment variables to Astro 
   
-Run the following commands to export your secrets backend configurations as environment variables to Astro.
+1. Run the following commands to export your secrets backend configurations as environment variables to Astro.
 
-```sh
-$ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SystemsManagerParameterStoreBackend
+    ```sh
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SystemsManagerParameterStoreBackend
 
-$ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"} --secret
-```
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"} --secret
+    ```
+
+2. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
 </TabItem>
 
@@ -327,13 +348,7 @@ AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": "<your-key-file>"}
 ```
 
-Make sure to paste your entire JSON service account key in place of `<your-key-file>`.
-  
-:::tip
-
-To test Secret Manager locally, set your environment variables in your Dockerfile and start a local Airflow environment, making sure to wrap the entire value of `AIRFLOW__SECRETS__BACKEND_KWARGS` in single quotations. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
-  
-:::
+Make sure to paste your entire JSON service account key in place of `<your-key-file>`. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
 
 #### Deploy to Astro
 
@@ -404,16 +419,9 @@ AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.azure_key_va
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}
 ```
 
-This tells Airflow to look for variable information at the `airflow/variables/*` path in Azure Key Vault and connection information at the `airflow/connections/*` path. In the next step, you'll run an example DAG to test this configuration locally.
+This tells Airflow to look for variable information at the `airflow/variables/*` path in Azure Key Vault and connection information at the `airflow/connections/*` path. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
 
 By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `sep`, `"connections_prefix"`, and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`.
-  
-:::tip
-
-To test Key Vault locally, set your environment variables in your Dockerfile and start a local Airflow environment, making sure to wrap the entire value of `AIRFLOW__SECRETS__BACKEND_KWARGS` in single quotations. When you're ready to deploy to Astro, remove the environment variables from the Dockerfile. See [Set environment variables in your Dockerfile](environment-variables.md#set-environment-variables-in-your-dockerfile).
-  
-:::
-
 
 #### Deploy to Astro
 

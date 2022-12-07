@@ -130,7 +130,7 @@ The following table lists all available instance types for worker node pools, as
 | m5d.24xlarge     | 95 CPUs | 381 GiB MEM  |
 | m5d.metal        | 95 CPUs | 381 GiB MEM  |
 | m6i.xlarge       | 3 CPUs  | 13 GiB MEM   |
-| m61.2xlarge      | 7 CPUs  | 29 GiB MEM   |
+| m6i.2xlarge      | 7 CPUs  | 29 GiB MEM   |
 | m6i.4xlarge      | 15 CPUs | 61 GiB MEM   |
 | m6i.8xlarge      | 31 CPUs | 125 GiB MEM  |
 | m6i.12xlarge     | 47 CPUs | 189 GiB MEM  |
