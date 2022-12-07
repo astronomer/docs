@@ -200,7 +200,7 @@ You can use CloudTrail to monitor changes to Astro policies.  Access to CloudTra
 | Event Names                              | Resource                                                         |
 | ---------------------------------------- | ---------------------------------------------------------------- |
 | `AttachRolePolicy , DetachRolePolicy`    | `roleName = astronomer-remote-management`                        |
-| `SetPolicyVersion , CreatePolicyVersion` | `policyArn = "arn:aws:iam::*:policy/AstronomerCrossAccountRole"` |
+| `SetPolicyVersion` | `policyArn = "arn:aws:iam::*:policy/AstronomerCrossAccountRole"` |
 
 To monitor changes to the cross-account role policy and permissions boundaries, create an Amazon CloudWatch alarm. See [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html).  When you create the metric filter in the CloudWatch console, on the **Define pattern** page, in **Create filter pattern**, enter the following for **Filter pattern**:
 
