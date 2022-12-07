@@ -108,7 +108,7 @@ export DAG_FOLDER="<path to dag folder ie. dags/>"
 curl -sSL install.astronomer.io | sudo bash -s
 
 # Determine if only DAG files have changes
-files=$(git diff main... --name-only)
+files=$(git diff --name-only HEAD^..HEAD)
 dags_only=1
 
 for file in $files; do
@@ -407,7 +407,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         # Determine if only DAGs have changes 
         - name: Get Deployment Type
           run: |
-            files=$(git diff main... --name-only)
+            files=$(git diff --name-only HEAD^..HEAD)
             dags_only=1
 
             for file in $files; do
