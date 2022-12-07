@@ -17,7 +17,7 @@ To install Astro in a dedicated AWS account owned by your organization, you'll c
 
 - Create an account on Astro.
 - Share AWS account information with Astronomer support.
-- Create IAM policies used by Astro - a cross-account IAM role that Astro can assume and a Permissions Boundary attached to the operational roles created by Astro 
+- Create the IAM policies used by Astro. This includes a cross-account IAM role that Astro can assume and permissions boundaries for the Astro operational roles. For more information about permissions boundaries, see [Permissions boundaries for IAM entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html).
 
 Astronomer support will create a cluster within your AWS account to host the resources and Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
@@ -102,13 +102,15 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
     ]}>
 <TabItem value="managementconsole">
 
-1. Open the [Astronomer cross-account role CloudFormation template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/astronomer-remote-management-stack.yaml&stackName=AstroCrossAccountRole).
+1. Log in to your AWS CloudFormation instance.
 
-2. Enter the external ID that you copied in Step 2 in the **ExternalId** field.
+2. Open the [Astronomer cross-account role CloudFormation template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/astronomer-remote-management-stack.yaml&stackName=AstroCrossAccountRole).
 
-3. Select the **I acknowledge that AWS CloudFormation might create IAM resources with custom names** checkbox.
+3. Enter the external ID that you copied in Step 2 in the **ExternalId** field.
 
-4. Click **Create Stack**.
+4. Select the **I acknowledge that AWS CloudFormation might create IAM resources with custom names** checkbox.
+
+5. Click **Create Stack**.
 
 </TabItem>
 
@@ -187,20 +189,20 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 
 Occasionally, Astronomer makes changes to its policies to ensure the continued operation and development of Astro. 
 
-Users with an Organization Owner role will receive an email notification from Astronomer 14 days before any changes are made to the policies that expands user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
+Users with an Organization Owner role will receive an email notification from Astronomer 14 days before any changes are made to the policies that expand user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
 
 Astronomer can reduce the access available to the policies without notification.
 
 #### Monitor the policies for changes (optional)
 
-You can use CloudTrail to monitor changes to the policies created fo Astro.  Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor. 
+You can use CloudTrail to monitor changes to Astro policies.  Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor. 
 
 | Event Names                              | Resource                                                         |
 | ---------------------------------------- | ---------------------------------------------------------------- |
 | `AttachRolePolicy , DetachRolePolicy`    | `roleName = astronomer-remote-management`                        |
 | `SetPolicyVersion , CreatePolicyVersion` | `policyArn = "arn:aws:iam::*:policy/AstronomerCrossAccountRole"` |
 
-To monitor changes to the cross-account role policy and the operational  boundary, create an Amazon CloudWatch alarm. See [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html).  When you create the metric filter in the CloudWatch console, on the **Define pattern** page, in **Create filter pattern**, enter the following for **Filter pattern**:
+To monitor changes to the cross-account role policy and permissions boundaries, create an Amazon CloudWatch alarm. See [Creating CloudWatch alarms for CloudTrail events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudwatch-alarms-for-cloudtrail.html).  When you create the metric filter in the CloudWatch console, on the **Define pattern** page, in **Create filter pattern**, enter the following for **Filter pattern**:
 
 ```text
 { ($.eventName = AttachRolePolicy || $.eventName = DetachRolePolicy || $.eventName = SetPolicyVersion) && ($.requestParameters.policyArn = "*OperationalBoundary*" || $.requestParameters.policyArn = "*AstronomerCrossAccountRole"  || $.requestParameters.roleName = astronomer-remote-management) }
