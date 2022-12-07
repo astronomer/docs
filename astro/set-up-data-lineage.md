@@ -160,16 +160,41 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 
 #### Prerequisites
 
-- A [Great Expectations Data Context](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started) in the `include` directory of your Astro project.
+- A [Great Expectations Data Context](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started)
 - If using a custom Checkpoint or Checkpoint config, your Astro base domain and OpenLineage API key.
 
 #### Setup
 
-If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't use a custom Checkpoint or Checkpoint Config, the operator detects your Astro OpenLineage configuration from the `include` folder automatically as long as you set `data_context_root_dir=os.path.join(base_path, "include", "great_expectations"),` as a task-level parameter. 
+1. Make your Data Context accessible to your DAGs. For most use cases, Astronomer recommends adding the Data Context to your Astro project `include` folder, then adding the following lines to a given DAG: 
 
-If you use custom Checkpoints, complete the following additional steps:
+    ```python
+    # Required imports for Great Expectations
+    import os
+    from pathlib import Path
+    from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
+    from great_expectations.core.batch import BatchRequest
+    from great_expectations.data_context.types.base import (
+      DataContextConfig,
+      CheckpointConfig
+   )
+   # Set base path for Data Context 
+   base_path = Path(__file__).parents[2]
 
-1. Update your `great_expectations.yml` file to add `OpenLineageValidationAction` to your `action_list_operator` configuration:
+   ...
+
+   # Example task using GreatExpectationsOperator 
+   ge_task = GreatExpectationsOperator(
+    task_id="ge_task",
+    # Set directory fot the Data Context
+    ge_root_dir=os.path.join(base_path, "include", "great_expectations"),
+   )
+   ```
+
+   The GreatExpectationsOperator will access `include/great_expectations/great_expectations.yml` and use the configuration to run your Expectations.
+
+   If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't use a custom Checkpoint or Checkpoint Config, you can skip steps 2 and 3.
+   
+2. Update your `great_expectations.yml` file to add `OpenLineageValidationAction` to your `action_list_operator` configuration:
 
     ```yml
     validation_operators:
@@ -180,13 +205,13 @@ If you use custom Checkpoints, complete the following additional steps:
             action:
               class_name: OpenLineageValidationAction
               module_name: openlineage.common.provider.great_expectations
-              openlineage_host: https://<your-base-domain>.datakin.com
+              openlineage_host: https://astro-<your-base-domain>.datakin.com
               openlineage_apiKey: <your-lineage-api-key>
               openlineage_namespace: <NAMESPACE_NAME> # Replace with your job namespace; Astronomer recommends using a meaningful namespace such as `dev` or `prod`.
               job_name: validate_my_dataset
     ```
 
-2. Lineage support for GreatExpectations requires the use of the `ActionListValidationOperator`. In each of your checkpoint's YAML files in `checkpoints/`, set the `validation_operator_name` configuration to `action_list_operator` like in the following snippet:
+3. In each of your Checkpoint's YAML files in `checkpoints/`, set the `validation_operator_name` configuration to `action_list_operator` like in the following snippet:
 
     ```yaml
     name: check_users
@@ -198,7 +223,7 @@ If you use custom Checkpoints, complete the following additional steps:
       - batch_kwargs:
     ```
 
-3. Deploy your changes to Astro. See [Deploy code](deploy-code.md).
+4. Deploy your changes to Astro. See [Deploy code](deploy-code.md).
 
 ### Verify
 
