@@ -121,7 +121,7 @@ You'll incur additional AWS infrastructure costs for every AWS PrivateLink endpo
 
 <TabItem value="Amazon Route 53">
 
-Use Amazon Route 53 to allow Astro to access a VPC through a .
+Use Route53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises.
 
 #### Prerequisites
 
