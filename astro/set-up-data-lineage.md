@@ -165,7 +165,7 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 
 #### Setup
 
-1. Make your Data Context accessible to your DAGs. For most use cases, Astronomer recommends adding the Data Context to your Astro project `include` folder, then adding the following lines to a given DAG: 
+1. Make your Data Context accessible to your DAGs. For most use cases, Astronomer recommends adding the Data Context to your Astro project `include` folder. The GreatExpectationsOperator will access `include/great_expectations/great_expectations.yml` and use the configuration to run your Expectations. Then, add the following lines to your DAGs: 
 
     ```python
     # Required imports for Great Expectations
@@ -185,7 +185,7 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
    # Example task using GreatExpectationsOperator 
    ge_task = GreatExpectationsOperator(
     task_id="ge_task",
-    # Set directory fot the Data Context
+    # Set directory for the Data Context
     ge_root_dir=os.path.join(base_path, "include", "great_expectations"),
    )
    ```
