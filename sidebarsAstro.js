@@ -32,7 +32,6 @@ module.exports = {
         {
           type: "category",
           label: "Cloud IDE",
-          link: { type: "doc", id: "cloud-ide/overview" },
           items: [
             "cloud-ide/overview",
             "cloud-ide/quickstart",

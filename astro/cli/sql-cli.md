@@ -111,7 +111,7 @@ Your Astro project currently can't access the connections configured in this dir
 To test all configured databases within an environment, run the following command from your SQL project directory:
 
 ```sh
-astro flow validate --environment=<env-directory-name>
+astro flow validate --env=<env-directory-name>
 ```
 
 This command runs a connection test for all databases configured in the `configuration.yml` file of your environment subdirectory. 
@@ -119,7 +119,7 @@ This command runs a connection test for all databases configured in the `configu
 You can also test individual databases within an environment. For example, to test a `snowflake_default` connection in the `dev/configuration.yml`, you run the following command to test the connection:
 
 ```sh
-astro flow validate --connection=snowflake_default --environment=dev
+astro flow validate --connection=snowflake_default --env=dev
 ```
 
 ### Create SQL workflows 
@@ -154,13 +154,13 @@ If you define a database connection in a `.sql` file with a downstream dependenc
 To run a SQL workflow in your project, run the following command: 
 
 ```sh
-astro flow run <workflow-directory> --environment=<your-environment>
+astro flow run <workflow-directory> --env=<your-environment>
 ```
 
 This command automatically builds and runs your project as an Airflow DAG based on the configurations in your project directory. For example, consider the following command using the default SQL project assets:
 
 ```sh
-astro flow run example_templating --environment=dev
+astro flow run example_templating --env=dev
 ```
 
 After running this command, the CLI:

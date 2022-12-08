@@ -108,9 +108,12 @@ After you save this configuration, lineage is enabled for all Spark jobs running
 
 To test that lineage was configured correctly on your Databricks cluster, run a test Spark job on Databricks. After your job runs, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. If your configuration is successful, your Spark job appears in the table of most recent runs. Click a job run to see it within a lineage graph.
 
-## OpenLineage and dbt with Airflow
+## OpenLineage and dbt Core with Airflow
 
-Use the information provided here to set up lineage collection for a dbt project.
+
+Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
+
+If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/support). 
 
 ### Prerequisites
 
@@ -121,20 +124,17 @@ Use the information provided here to set up lineage collection for a dbt project
 
 ### Setup
 
-1. On your local machine, run the following command to install the [`openlineage-dbt`](https://pypi.org/project/openlineage-dbt) library:
+1. On your local computer, run the following command to install the latest version of the [`openlineage-dbt`](https://pypi.org/project/openlineage-dbt) library:
 
    ```sh
    $ pip install openlineage-dbt
    ```
 
-2. Configure the following environment variables in your shell:
+2. Add the following line to the `requirements.txt` file of your Astro project:
 
-   ```bash
-   OPENLINEAGE_URL=https://<your-astro-base-domain>
-   OPENLINEAGE_API_KEY=<your-lineage-api-key>
-   OPENLINEAGE_NAMESPACE=<NAMESPACE_NAME> # Replace with the name of your dbt project.
-                                          # Astronomer recommends using a meaningful namespace such as `dbt-dev` or `dbt-prod`.
-   ```
+   ```text
+    openlineage-dbt
+    ```
 
 3. Run the following command to generate the [`catalog.json`](https://docs.getdbt.com/reference/artifacts/catalog-json) file for your dbt project:
 
@@ -148,7 +148,13 @@ Use the information provided here to set up lineage collection for a dbt project
    $ dbt-ol run
    ```
 
-### Verify Setup
+5. Optional. Run the following command to test your set up:
+
+   ```bash
+   $ dbt-ol test
+   ```
+
+### Verify setup
 
 To confirm that your setup is successful, run a dbt model in your project. After you run this model, click **Lineage** in the Cloud UI and and then click **Runs** in the left menu. If the setup is successful, the run that you triggered appears in the table of most recent runs.
 

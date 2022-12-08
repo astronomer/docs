@@ -11,17 +11,11 @@ id: test-and-troubleshoot-locally
 
 As you develop data pipelines on Astro, Astronomer recommends running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
-## Prerequisites
-
-- An [Astro project](create-project.md).
-- The [Astro CLI](cli/overview.md)
-- [Docker](https://www.docker.com/products/docker-desktop/)
-
-For information on adding files to your Astro project and making changes, see [Develop a project](develop-project.md).
+For information about creating an Astro project, see [Create an Astro project](create-project.md). For information about adding DAGs to your Astro project and applying changes, see [Develop a project](develop-project.md).
 
 ## Run a DAG with `astro run`
 
-Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can see task logs and task success or failure directly in your terminal and without needing to go to the Airflow UI. You can only run one DAG at a time.
+Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can see task logs and task success or failure directly in your terminal and without needing to go to the Airflow UI. You can only run one DAG at a time. 
 
 This command is an alternative to running `astro dev restart` every time you make a change to your DAG and want to run it again. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test data pipelines.
 
