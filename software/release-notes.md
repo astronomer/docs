@@ -76,4 +76,4 @@ If your current usage is expected and higher than the default resource limits, u
 - Fixed an issue where you could not access Astronomer Software's Docker registry if you had access to more than 100 Deployments. 
 - Fixed an issue where the Software UI did not correctly show the correct dates for when service accounts were last used. 
 - Fixed an issue where NATS would send spurious alert emails for Deployments.
-- Fixed an issue where the configuration in `astronomer.houston.updateRuntimeCheck.url` was ignored if not all supported Deployment image versions are present in the destination URL. 
+- Fixed an issue where the configuration in `astronomer.houston.updateRuntimeCheck.url` was ignored if not all supported Deployment image versions were present in the destination URL. 
