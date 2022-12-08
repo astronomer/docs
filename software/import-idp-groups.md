@@ -86,10 +86,10 @@ To use Teams as the only user management system on Astronomer Software, add the 
 
 ```yaml
 astronomer: 
-    houston:
-     config:
-       userManagement:
-         enabled: false
+  houston:
+    config:
+      userManagement:
+        enabled: false
 ```
 
 Save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).
