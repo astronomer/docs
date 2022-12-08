@@ -61,7 +61,7 @@ If your current usage is expected and higher than the default resource limits, u
 - You can now configure a Deployment to have 0 triggerer components.
 - You can now set `astronomer.houston.config.useAutoCompleteForSensativeFields=false` to disable autocomplete on sensitive fields in the Software UI.
 - You can now set `astronomer.houston.config.shouldLogUsername=true` to include user email addresses in audit logs for logins through the Houston API.
-- Git sync-based Deployments now have a dedicated git-sync relay pod, service, and network policy.
+- [Git sync-based Deployments](deploy-git-sync.md) now have a dedicated git-sync relay pod, service, and network policy.
   
 ### Bug fixes
 
