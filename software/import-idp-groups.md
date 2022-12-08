@@ -82,7 +82,7 @@ This configuration requires setting up a root user. See [Create a root user](cre
 
 :::
 
-To provide user access to Astronomer Software and limit role assignment to Teams, add the following entry to your `config.yaml` file:
+To use Teams as the only user management system on Astronomer Software, add the following entry to your `config.yaml` file:
 
 ```yaml
 astronomer: 
