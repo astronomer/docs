@@ -138,7 +138,7 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 3. Click **Share** and enter `Astro` in the **Name** field.
 
-4. In the **Resources - optional** section, select **Resolver Rules**  in the **Select resource type** list and then select a rule.
+4. In the **Resources - optional** section, select **Resolver Rules**  in the **Select resource type** list and then select one or more rules.
 
 5. On the **Associate permissions** page, accept the default settings and then click **Next**.
 
