@@ -27,13 +27,7 @@ Astronomer Software now supports managing users through System for Cross-domain 
 
 Using the new root user feature, you can now configure Astronomer Software so that users are managed exclusively through Teams. This helps you better integrate with your identity provider (IdP) by ensuring that all users on your platform are authenticated and managed through the IdP. See [Disable individual user management](import-idp-groups.md#disable-individual-user-management).
 
-### View and export task usage metrics
 
-You can now view and export task usage metrics from the Software UI.
-
-Task usage metrics provide an overview of your Airflow task runs and can help you quickly identify Deployments where more tasks are running or failing than expected. 
-
-To configure the feature, see [Set up task usage metrics](task-usage-metrics.md).
 
 ### New default resource limits and requests 
 
