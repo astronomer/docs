@@ -182,6 +182,25 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
     ```
 3. Upgrade Kubernetes to version 1.22.
 
+### Upgrade to Astronomer Software 0.31
+
+#### New default resource limits and requests 
+
+Astronomer Software 0.31 includes new default resource limits and requests on the following resources: 
+
+- Alertmanager
+- Elasticsearch
+- NATS
+- PostrgeSQL
+- STAN
+- Nginx
+- Grafana
+- Blackbox exporter
+
+You might experience OOMKill errors or unexpected behavior after upgrading if you use resources beyond the new default limits. To minimize disruption, view resource usage for these components in [Grafana](grafana-metrics.md) prior to upgrade and compare this usage to the default resource limits in the [Astronomer Helm chart](https://github.com/astronomer/astronomer/blob/v0.31.0/charts/astronomer/values.yaml).
+
+If your current usage is expected and higher than the default resource limits, update the limits in your `config.yaml` file prior to upgrading to Astronomer Software 0.31.
+
 ### Upgrade to Astronomer Software 0.30
 
 #### Running the 0.30 upgrade script with --no-hooks
