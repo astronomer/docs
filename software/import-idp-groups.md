@@ -89,9 +89,9 @@ astronomer:
     houston:
      config:
        userManagement:
-         enabled: true
+         enabled: false
 ```
 
 Save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).
 
-After you apply the configuration, individual users can't be invited or assigned Workspace or Deployment-level roles in Astronomer Software. These users must be imported through a Team by a System Admin with access to your installation. Individual users can be assigned system-level roles only by your root user.
+After you apply the configuration, individual users can't be invited or assigned Workspace or Deployment-level roles in Astronomer Software. Users must be invited through a Team by a System Admin, and only Teams can be assigned roles for Workspaces and Deployments. Individual users can be assigned system-level roles only by your root user.
