@@ -11,7 +11,7 @@ description: Astronomer Software release notes.
 
 ## 0.31.0
 
-Release date: November 29, 2022
+Release date: December 7, 2022
 
 ### New root user role
 
