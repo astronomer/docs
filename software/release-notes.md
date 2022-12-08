@@ -29,7 +29,7 @@ Using the new root user feature, you can now configure Astronomer Software so th
 
 ### View and export task usage metrics
 
-Astronomer Software now supports a task-based pricing model. As part of the model, you can now view and export task usage metrics from the Software UI.
+You can now view and export task usage metrics from the Software UI.
 
 Task usage metrics provide an overview of your Airflow task runs and can help you quickly identify Deployments where more tasks are running or failing than expected. 
 
@@ -55,7 +55,7 @@ If your current usage is expected and higher than the default resource limits, u
 ### Additional improvements 
 
 - You can now set a custom security context for `es-client` by setting `elasticsearch.client.securityContext.capabilities.add={}` in the ElasticSearch Helm chart.
-- Deployment users are now paginated in the Software UI.
+- The **Deployment users** page is now paginated in the Software UI.
 - You can now set `astronomer.registry.logLevel` to filter which types of logs appear in your Docker registry.
 - The default Git-sync interval is now 1 instead of 0.
 - You can now configure a Deployment to have 0 triggerer components.
@@ -74,6 +74,6 @@ If your current usage is expected and higher than the default resource limits, u
     - [CVE-2022-40674](https://nvd.nist.gov/vuln/detail/CVE-2022-40674)
   
 - Fixed an issue where you could not access Astronomer Software's Docker registry if you had access to more than 100 Deployments. 
-- Fixed an issue where the Software UI did not correctly show the correct dates for when service accounts were last used. 
-- Fixed an issue where NATS would send spurious alert emails for Deployments.
+- Fixed an issue where the Software UI did not show the correct last used dates for service accounts. 
+- Fixed an issue where NATS would send false Deployment alert emails.
 - Fixed an issue where the configuration in `astronomer.houston.updateRuntimeCheck.url` was ignored if not all supported Deployment image versions were present in the destination URL. 
