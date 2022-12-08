@@ -15,12 +15,24 @@ While the tables below reference the minimum compatible versions, we typically r
 
 <!--- Version-specific -->
 
-| Astronomer Platform | Kubernetes                   | Astro CLI    | Postgres | Python                                    | Astronomer Certified / Astro Runtime     | Helm |
-| ------------------- | ---------------------------- | ------------ | -------- | ----------------------------------------- | ---------------------------------- | ---- |
-| v0.25               | 1.19, 1.20, 1.21 | 0.25.x       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions*             | 3.6  |
-| v0.28               | 1.21, 1.22, 1.23, 1.24            | 1.0.x - 1.1.x | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
-| v0.29               | 1.21, 1.22, 1.23, 1.24 | 1.3.x        | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
-| v0.30               | 1.21, 1.22, 1.23, 1.24 | 1.4.x - 1.7.x       | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| Astronomer Platform | Kubernetes                           | Postgres | Python                                    | Astronomer Certified / Astro Runtime         | Helm |
+| ------------------- | ------------------------------------ | -------- | ----------------------------------------- | -------------------------------------------- | ---- |
+| v0.25               | 1.17¹, 1.18¹, 1.19¹, 1.20¹, 1.21     | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions*            | 3.6  |
+| v0.28               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
+| v0.29               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+
+Astronomer recommends using the latest available version of the Astro CLI for all Software versions in most cases. To upgrade from an earlier version of the CLI to the latest, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
+
+:::info
+
+¹ Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
+
+- Support for Kubernetes 1.17 ends with Astronomer Software 0.25.12.
+- Support for Kubernetes 1.18 ends with Astronomer Software 0.25.13.
+- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.25.15, 0.28.7, 0.29.5, and 0.30.4.
+
+:::
 
 For more detail about the changes in each Astronomer Software release, see the [Astronomer Software Release Notes](release-notes.md).
 
@@ -29,11 +41,17 @@ All currently supported Astronomer-distributed images are compatible with all ve
 - [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md)
 - [Astronomer Certified versioning and support](ac-support-policy.md)
 
-> **Note:** On Astronomer v0.23+, new versions of Apache Airflow on Astronomer Certified are automatically made available in the Software UI and CLI within 24 hours of their publication. For more information, refer to [Available Astronomer Certified Versions](ac-support-policy.md#astronomer-certified-lifecycle-schedule).
+:::info
 
-> **Note:** Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer Support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
+Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private Certificate Authorities (CAs) starting with Kubernetes 1.19. If your organization is using a private CA, contact [Astronomer support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on Azure Kubernetes Service (AKS).
 
-> **Note:** While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow Triggerer is available only in Astronomer v0.26+. To use [Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), which require the Airflow Triggerer, you must upgrade.
+:::
+
+:::info
+
+While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow triggerer is available only in Astronomer v0.26 and later. To use [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), that require the Airflow triggerer, you must upgrade.
+
+:::
 
 ### Kubernetes Version Support Policy
 
@@ -48,22 +66,22 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 
 ## Astronomer Certified
 
-Astronomer Certified images have the following version dependencies:
+The following table lists the version dependencies for Astronomer Certified images:
 
-| Astronomer Certified | Postgres | MySQL     | Python                         | System Distribution  | Airflow Helm chart |
-| -------------------- | -------- | --------- | ------------------------------ | -------------------- | ------------------ |
-| 2.1.0                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8                  | Debian 10 (Buster)   | 0.18.6+            |
-| 2.1.1                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
-| 2.1.3                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
-| 2.1.4                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
-| 2.3.0                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.3.1                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.3.2                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.3.3                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.3.4                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
-| 2.4.1                | 9.6+     | 8.0+      | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| Astronomer Certified | Postgres | MySQL | Python                         | System Distribution  | Airflow Helm chart |
+| -------------------- | -------- | ----- | ------------------------------ | -------------------- | ------------------ |
+| 2.1.0                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8                  | Debian 10 (Buster)   | 0.18.6+            |
+| 2.1.1                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
+| 2.1.3                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
+| 2.1.4                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9             | Debian 10 (Buster)   | 0.18.6+            |
+| 2.3.0                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.1                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.2                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.3                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.3.4                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
+| 2.4.1                | 9.6+     | 8.0+  | 3.6, 3.7, 3.8, 3.9 (_Default_) | Debian 11 (Bullseye) | 0.18.6+            |
 
-For more detail on each version of Astronomer Certified and instructions on how to upgrade, refer to [Upgrade Apache Airflow](manage-airflow-versions.md).
+For more detail on each version of Astronomer Certified and upgrade instructions, see [Upgrade Apache Airflow](manage-airflow-versions.md).
 
 > **Note:** While the Astronomer Certified Python Wheel supports Python versions 3.6, 3.7, and 3.8, Astronomer Certified Docker images have been tested and built only with Python 3.7. To run Astronomer Certified on Docker with Python versions 3.6 or 3.8, you can create a custom image with a different Python version specified. For more information, read [Change Python Versions](customize-image.md#build-with-a-different-python-version).
 

@@ -13,6 +13,12 @@ You can use the Airflow [REST API](https://airflow.apache.org/docs/apache-airflo
 
 To test Airflow API calls in a local Airflow environment running with the Astro CLI, see [Test and Troubleshoot Locally](test-and-troubleshoot-locally.md#make-requests-to-the-airflow-rest-api).
 
+:::info
+
+Updates to the Airflow REST API are released in new Airflow versions and new releases don’t have a separate release cycle or versioning scheme. To take advantage of specific Airflow REST API functionality, you might need to upgrade Astro Runtime. See [Upgrade Runtime](upgrade-runtime.md) and the [Airflow release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
+
+:::
+
 ## Prerequisites
 
 - A Deployment on Astro.

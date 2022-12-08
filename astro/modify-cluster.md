@@ -1,21 +1,19 @@
 ---
-sidebar_label: 'Supported modifications'
-title: "Supported cluster modifications"
+sidebar_label: 'Modify a cluster'
+title: "Modify a cluster"
 id: modify-cluster
 description: Learn what changes are supported on existing Astro clusters.
 ---
 
-New clusters on Astro are created with a default configuration that is suitable for the majority of use cases. However, your organization might need modifications to an existing cluster to meet specific business requirements. For example, if you have a new set of DAGs that require significantly more CPU and memory than your existing workloads, you might need to modify a cluster on AWS to run `m5.8xlarge` nodes instead of `m5.4xlarge` nodes. You might also want to modify a cluster's maximum node count from the default of 20 to better fit your expected workload.
+New clusters on Astro are created with a default configuration that is suitable for standard use cases. However, your organization might need modifications to an existing cluster to meet specific business requirements. 
 
 The following are some of the cluster and Deployment-level modifications that require Astronomer support and can't be completed in the Cloud UI or with the Astro CLI:
 
 - [Create a new cluster](create-cluster.md).
 - Delete a cluster.
-- Create a new node pool. This enables a new worker type for all Deployments in the cluster. See [AWS worker node pools](resource-reference-aws.md#worker-node-pools), [Azure worker node pools](resource-reference-azure.md#deployment-worker-node-pools), and [GCP worker node pools](resource-reference-gcp.md#deployment-worker-node-pools).
+- Create a new node pool. This enables a new worker type for all Deployments in the cluster. See [Cluster settings reference](https://docs.astronomer.io/astro/category/cluster-settings-reference).
 - Update an existing worker node pool, including its node instance type or maximum node count.
 - Create a VPC connection or a transit gateway connection between a cluster and a target VPC. See [Connect Astro to external data sources](https://docs.astronomer.io/astro/category/connect-astro).
-
-## Prerequisites
 
 To modify a cluster, you'll need the following:
 
@@ -26,7 +24,7 @@ If you don't have a cluster on Astro, see [Install Astro](install-astro.md). If 
 
 ## Request and confirm a cluster change
 
-Before you request a change to a cluster, make sure it's supported. To view the default and supported cluster configuration values, see [AWS cluster configurations](resource-reference-aws.md), [Microsoft Azure cluster configurations](resource-reference-azure.md), or [GCP cluster configurations](resource-reference-gcp.md). After you've confirmed the change you want to make is supported, contact [Astronomer support](https://cloud.astronomer.io/support).
+Before you request a change to a cluster, make sure it's supported. To view the default and supported cluster configuration values for your cloud provider, see [Cluster settings reference](https://docs.astronomer.io/astro/category/cluster-settings-reference). After you've confirmed the change you want to make is supported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 When Astronomer support receives your change request, it will be reviewed and you'll be notified before it's implemented. Most modifications to an existing cluster take only a few minutes to complete and don't require downtime. In these cases, the Airflow UI and Cloud UI continue to be available and your Airflow tasks are not interrupted.
 

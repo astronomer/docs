@@ -44,15 +44,15 @@ This command builds your project and spins up 4 Docker containers on your machin
 
 Once the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
 
-:::info
+:::tip
 
-The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astro dev start` command, for example, is functionally equivalent to `docker compose start`.
+Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Airflow environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
 
 :::
 
-:::tip
+:::info
 
-If you see `Error: cannot start, project already running` when you run this command, it means your local Airflow environment is already running your project. If there are changes you'd like to apply to your project, see [Restart your local environment](develop-project.md#make-changes-to-your-project).
+The Astro CLI is a wrapper around [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. If you're familiar with Docker Compose, you'll recognize that the `astro dev start` command, for example, is functionally equivalent to `docker compose start`.
 
 :::
 
@@ -92,6 +92,34 @@ All changes made to the following files require rebuilding your image:
 - `airflow_settings.yaml`
 
 To rebuild your project after making a change to any of these files, you must [restart your local environment](develop-project.md#restart-your-local-environment).
+
+## Add DAG utility files
+
+Use the `include` folder to store additional utilities required by your DAGs. For example, helper functions, templated SQL scripts, and custom operators.
+
+Astronomer recommends storing the `include` folder inside the `dags` directory of your Astro project. If you're using [DAG-only deploys](deploy-code.md#deploy-dags-only), this allows you to deploy DAG code without an image restart by running `astro deploy --dags` and it makes sure that your DAGs can access your utility files when you deploy them.
+
+Here is how the recommended directory structure might appear:
+
+
+```bash
+    .
+    ├── airflow_settings.yaml
+    ├── dags
+    │   └── include
+            └── helper_functions
+                └── helper.py
+            └── templated_SQL_scripts
+    │       └── custom_operators
+    ├── Dockerfile
+    ├── tests
+    │   └── test_dag_integrity.py
+    ├── packages.txt
+    ├── plugins
+    │   └── example-plugin.py
+    └── requirements.txt
+```
+If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
 
 ## Explore Airflow providers and modules
 

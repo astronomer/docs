@@ -27,8 +27,6 @@ Astronomer Software now supports managing users through System for Cross-domain 
 
 Using the new root user feature, you can now configure Astronomer Software so that users are managed exclusively through Teams. This helps you better integrate with your identity provider (IdP) by ensuring that all users on your platform are authenticated and managed through the IdP. See [Disable individual user management](import-idp-groups.md#disable-individual-user-management).
 
-
-
 ### New default resource limits and requests 
 
 Astronomer Software 0.31 includes new default resource limits and requests on the following resources: 

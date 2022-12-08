@@ -119,7 +119,9 @@ module.exports = {
           ],
         },
         'astro-python-sdk',
-        'cloud-ide-tutorial'
+        'cloud-ide-tutorial',
+        'custom-airflow-ui-docs-tutorial',
+        'external-python-operator'
       ],
     },
     {
@@ -142,6 +144,7 @@ module.exports = {
         'airflow-redshift',
         'airflow-great-expectations',
         'airflow-talend-integration',
+        'airflow-mongodb',
         'execute-notebooks',
         'soda-data-quality',
      ],

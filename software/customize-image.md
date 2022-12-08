@@ -274,7 +274,7 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 To install Python packages from a private GitHub repository on Astronomer Software, you need:
 
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A [Software project](create-project.md).
 - Custom Python packages that are [installable via pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/).
 - A private GitHub repository for each of your custom Python packages.

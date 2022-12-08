@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Azure"
-title: "Microsoft Azure cluster configurations"
+sidebar_label: "Azure cluster settings"
+title: "Microsoft Azure cluster settings"
 id: resource-reference-azure
 description: Reference of all supported configurations for new Astro clusters on Microsoft Azure.
 sidebar_custom_props: { icon: 'img/azure.png' }

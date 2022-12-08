@@ -22,7 +22,6 @@ The Astro data plane on Amazon Web Services (AWS) runs on Elastic Kubernetes Ser
 
 With the two options, the user experience is identical and Astronomer is responsible for managing Astro. The differences between the two options are security and networking.
 
-
 For a list of the AWS resources and configurations that Astronomer supports, see [AWS resource reference](resource-reference-aws.md). For more information about the shared responsibility model, see [Shared responsibility model](shared-responsibility-model.md).
 
 ## Set up
@@ -47,6 +46,7 @@ Astronomer support will create a cluster within your AWS account that hosts the 
 ### Prerequisites
 
 - An AWS IAM user with the following permissions:
+
     - `cloudformation:*`
     - `GetRole`
     - `GetRolePolicy`
@@ -57,9 +57,11 @@ Astronomer support will create a cluster within your AWS account that hosts the 
     - `UpdateAssumeRolePolicy`
 
    See [Creating an administrator IAM user and user group (console)](https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started_create-admin-group.html#getting-started_create-admin-group-console).
+
 - A dedicated AWS account with minimum EC2 service quotas.
 - A subscription to the [Astro Status Page](https://status.astronomer.io/). This will ensure that you're alerted in the case of an incident or scheduled maintenance.
 - The following domains added to your organization's allowlist for any user and CI/CD environments:
+  
     - `https://cloud.astronomer.io/`
     - `https://astro-<your-org>.datakin.com/`
     - `https://<your-org>.astronomer.run/`
@@ -206,18 +208,6 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 </TabItem>
 </Tabs>
 
-To provision additional Clusters after completing your initial installation, see [Create a cluster](create-cluster.md).
-
-:::caution
-
-Some AWS regions that Astronomer supports are disabled by default on AWS, including:
-- `ap-east-1` - Asia Pacific (Hong Kong)
-- `me-south-1` - Middle East (Bahrain)
-
-If you're setting up your first cluster in any of these regions, you need to complete the additional setup described in [Create a cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
-
-:::
-
 ### Provide setup information to Astronomer
 
 After creating the AWS account, provide Astronomer support with the following information:
@@ -230,9 +220,21 @@ After creating the AWS account, provide Astronomer support with the following in
 
 If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
 
-#### VPC peering prerequisites (optional)
+To provision additional Clusters after completing your initial installation, see [Create a cluster](create-cluster.md).
 
-If you need to VPC peer with Astronomer, provide the following information to your Astronomer representative:
+:::caution
+
+Some AWS regions that Astronomer supports are disabled by default on AWS, including:
+- `ap-east-1` - Asia Pacific (Hong Kong)
+- `me-south-1` - Middle East (Bahrain)
+
+If you're setting up your first cluster in any of these regions, you need to complete the additional setup described in [Create a cluster](create-cluster.md#additional-setup-for-aws-regions-that-are-disabled-by-default).
+
+:::
+
+#### Provide VPC peering information (Optional)
+
+If you need to VPC peer with Astronomer, provide the following additional information to Astronomer support:
 
 - Subnet CIDRs (RFC 1918 IP Space).
 - VPC Name/ID and region for peering with Astronomer. This is accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/).
@@ -275,7 +277,7 @@ If any AWS resources are on a private network, you can choose between two option
 - Allow traffic through the public internet and use allow-lists for communication.
 - Create a VPC Peering connection between the Astronomer VPC and the VPCs for your broader network.
 
-If you want to continue with the second option, you'll additionally need:
+If you want to continue with the second option, you'll additionally need to provide Astronomer support with:
 
 - A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. You must ensure it does not overlap with the AWS VPC(s) that you will be peering with later. The default CIDR range is `172.20.0.0/19`.
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
@@ -306,11 +308,11 @@ Wait for confirmation that the installation is successful before you access Astr
 
 </Tabs>
 
-## Create a Deployment
+### Create a Deployment and confirm the install
 
-When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). When you create your Deployment, the Astro cluster created by Astronomer support appears as an option in the **Cluster** list as shown in the following image.
+When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). 
 
-![Cloud UI New Deployment screen](/img/docs/create-new-deployment-select-cluster.png)
+To confirm a successful installation, in the Cloud UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
 
 ## Next steps
 
