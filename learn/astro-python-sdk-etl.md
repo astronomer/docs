@@ -256,6 +256,6 @@ Although you achieved your ETL goal with the DAG, the following limitations made
 To learn more about the Astro Python SDK, see:
 
 - [Write a DAG with the Astro Python SDK](https://docs.astronomer.io/learn/astro-python-sdk): A step-by-step tutorial for setting up Airflow and running an ETL pipeline using the Astro Python SDK.
-- [readthedocs.io](https://astro-sdk.readthedocs.io/en/latest/): Complete SDK documentation, including API and operator references.
+- [readthedocs.io](https://astro-sdk-python.readthedocs.io/en/stable/): Complete SDK documentation, including API and operator references.
 - [Astro Python SDK README](https://github.com/astronomer/astro-sdk): Includes an overview of the SDK, a quickstart, and supported database types.
 - [Astro Python SDK Webinar](https://www.astronomer.io/events/recaps/the-astro-python-sdk/): A recorded demonstration of the SDK led by the Astronomer team.
