@@ -190,40 +190,31 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
    )
    ```
 
-   The GreatExpectationsOperator will access `include/great_expectations/great_expectations.yml` and use the configuration to run your Expectations.
-
    If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't use a custom Checkpoint or Checkpoint Config, you can skip steps 2 and 3.
    
-2. Update your `great_expectations.yml` file to add `OpenLineageValidationAction` to your `action_list_operator` configuration:
-
-    ```yml
-    validation_operators:
-      action_list_operator:
-        class_name: ActionListValidationOperator
-        action_list:
-          - name: openlineage
-            action:
-              class_name: OpenLineageValidationAction
-              module_name: openlineage.common.provider.great_expectations
-              openlineage_host: https://astro-<your-base-domain>.datakin.com
-              openlineage_apiKey: <your-lineage-api-key>
-              openlineage_namespace: <NAMESPACE_NAME> # Replace with your job namespace; Astronomer recommends using a meaningful namespace such as `dev` or `prod`.
-              job_name: validate_my_dataset
-    ```
-
-3. In each of your Checkpoint's YAML files in `checkpoints/`, set the `validation_operator_name` configuration to `action_list_operator` like in the following snippet:
-
-    ```yaml
-    name: check_users
-    config_version:
+2. In each of your Checkpoint files, add `OpenLineageValidationAction` to your `action_list` like in the following example:
+    
+    ```yaml{10-17}
+    name: my.simple.chk
+    config_version: 1.0
+    template_name:
     module_name: great_expectations.checkpoint
-    class_name: LegacyCheckpoint
-    validation_operator_name: action_list_operator
-    batches:
-      - batch_kwargs:
-    ```
+    class_name: Checkpoint
+    run_name_template:
+    expectation_suite_name:
+    batch_request: {}
+    action_list:
+      - name: open_lineage
+        action:
+          class_name: OpenLineageValidationAction,
+          module_name: openlineage.common.provider.great_expectations,
+          openlineage_host: https://astro-<your-astro-base-domain>.datakin.com,
+          openlineage_apiKey: <your-openlineage-api-key>,
+          openlineage_namespace: <namespace-name> # Replace with your job namespace; Astronomer recommends using a meaningful namespace such as `dev` or `prod`,
+          job_name: validate_task_name,
+   ```
 
-4. Deploy your changes to Astro. See [Deploy code](deploy-code.md).
+3. Deploy your changes to Astro. See [Deploy code](deploy-code.md).
 
 ### Verify
 
