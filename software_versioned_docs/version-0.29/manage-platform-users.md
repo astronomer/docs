@@ -257,6 +257,10 @@ The System Admin has the same default permissions as the System Viewer and Syste
     - Variables
     - XComs
 
+### Root user
+
+A root user is assigned all available Astronomer Software permissions. There can only be one root user for each Software installation. See [Create a root user](create-a-root-user.md).
+
 ## Workspace roles
 
 Workspace roles apply to a single Workspace within a single Astronomer Software installation.

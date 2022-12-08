@@ -250,7 +250,17 @@ kubectl create secret generic astronomer-bootstrap \
 
 ## Step 8: Configure your Helm chart
 
-> **Note:** If you want to use a third-party ingress controller for Astronomer, complete the setup steps in [Third-Party Ingress Controllers](third-party-ingress-controllers.md) in addition to this configuration.
+:::info 
+
+To use a third-party ingress controller for Astronomer, see [Third-Party Ingress Controllers](third-party-ingress-controllers.md).
+
+:::
+
+:::info 
+
+By default, the first user to log in to your installation is assigned the System Admin role. To create a dedicated root user who is responsible for adding organization users to Astronomer, see [Create a root user](create-a-root-user.md).
+
+:::
 
 As a next step, create a file named `config.yaml` in an empty directory.
 
