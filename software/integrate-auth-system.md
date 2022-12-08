@@ -5,6 +5,9 @@ id: integrate-auth-system
 description: Integrate your internal authentication server with Astronomer Software.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Astronomer Software by default allows users to create an account with and authenticate using one of the 3 methods below:
 
 - Google OAuth
@@ -362,3 +365,84 @@ If you configured a fully custom OAuth flow, you should see a new **Log in with 
 ![Custom login button on the Astronomer login screen](/img/software/custom-oauth.png)
 
 You can see the name you configured in `AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME` when authenticating using the Astro CLI.
+
+## Manage users with SCIM
+
+Astronomer Software supports integration with the open standard System for Cross-Domain Identity Management (SCIM). Using the SCIM protocol with Astronomer Software allows you to automatically provision and deprovision users and Teams based on templates for access and permissions. It also provides better observability though your identity provider for when new users are created across your organization. 
+
+<Tabs
+    groupId="scim"
+    defaultValue="okta"
+    values={[
+        {label: 'Azure AD', value: 'azuread'},
+        {label: 'Okta', value: 'okta'},
+    ]}>
+<TabItem value="okta">
+
+This setup assumes that you have already created a web app for Astronomer Software in Okta. See [Okta](#okta).
+
+1. In your Astronomer integration's settings page on Okta, open the **General** tab.
+
+2. Click **Edit**.
+
+3. In the **Provisioning** section, select **SCIM**.
+
+4. Click **Save**.
+
+5. In your Astronomer integration's settings page, open the **Provisioning** tab.
+
+6. Configure the following values for your SCIM integration.
+
+    - **SCIM connector base URL**: `https://BASEDOMAIN.astronomer.io/v1/scim/okta`
+    - **Authentication mode**: Basic Auth
+        - Username: `<your-provisioning-account-username>`
+        - Password: `<your-provisioning-account-password>`
+
+7. Go to **Configure API Integration** and select the **Enable API Integration** checkbox.
+
+8. Go to **Push Groups** page and create a rule for Group Push. See [Group Push](https://help.okta.com/en-us/Content/Topics/users-groups-profiles/usgp-about-group-push.htm).
+
+9. On the Assignments tab, ensure that the right users and groups in your org are assigned to the app integration. See [Use the Assign Users to App action](https://help.okta.com/en-us/Content/Topics/Apps/apps-assign-applications.htm?cshid=ext_Apps_Apps_Page-assign).
+
+10. Add the following lines to your `config.yaml` file:
+
+    ```yaml
+    astronomer:
+      houston:
+        config:
+          okta:
+            scimAuthCode: <your-provisioning-account-username>:<your-provisioning-account-password>
+    ```
+
+11. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+
+See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Content/Topics/Apps/Apps_App_Integration_Wizard_SCIM.htm?cshid=ext_Apps_App_Integration_Wizard-scim) for more information about configuring SCIM within Okta.
+
+</TabItem>
+
+<TabItem value="azuread">
+
+This setup assumes you have already registered Astronomer as an application on Azure AD. See [Azure AD](#azure-ad).
+
+1. Go to **Manage** > **Provisioning**.
+
+2. In the **Provisioning Mode** menu, select **Automatic**.
+
+3. In **Tenant URL**, enter the URL for Astronomer's SCIM endpoint. This should be: `https://BASEDOMAIN.astronomer.io/v1/scim/okta`.
+
+4. Optional. If you use an OAuth token issuer other than Azure AD, copy the required OAuth bearer token into the **Secret Token** field. If this field is left blank, Azure AD includes an OAuth bearer token issued from Azure AD with each request.
+
+5. Click **Test connection** to confirm your connection to the SCIM endpoint.
+
+6. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
+
+7. Go to **Manage** > **Provisioning** > **Settings**.
+
+8. In the **Scope** setting, select **Sync only assigned users and groups**.
+   
+9. Turn the **Provisioning status** toggle to **On**.
+
+10. Click **Save**.
+
+</TabItem>
+</Tabs>
