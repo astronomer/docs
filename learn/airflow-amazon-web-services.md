@@ -1,6 +1,7 @@
 ---
-title: "Authenticate to AWS through Apache Airflow"
-sidebar_label: "AWS"
+title: "Add AWS user credentials to a local Apache Airflow environment"
+sidebar_label: "Authenticate to AWS locally"
+
 description: "Learn how to connect to a hosted environment on AWS from Apache Airflow. Use AWS credentials to access secrets backends and more from a locally running Airflow environment."
 id: airflow-amazon-web-services
 ---
@@ -23,7 +24,7 @@ Using these credentials allows you to access information from your AWS cloud, li
 
 ## Prerequisites
 
-- An account on AWS.
+- A user account on AWS with access to AWS cloud resources.
 - The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
 - Optional. Access to a secrets backend hosted on AWS, such as AWS Secrets Manager or AWS Parameter Store
