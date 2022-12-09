@@ -178,7 +178,7 @@ Astronomer recommends using an external secrets backend to store your AWS access
 
 </Tabs>
 
-## Resolving resources
+## Resolving services
 
 Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service.
 
