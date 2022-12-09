@@ -72,8 +72,8 @@ new_proj/
 Each SQL project is composed of three directories:
 
 - `config`: This folder contains configurations for different environments for running SQL. These configurations store connections to external databases. Each SQL environment has one subfolder containing its own `configuration.yml`. The default SQL project includes `default` and `dev` environments.
-- `workflows`: This folder contains independent SQL workflows. A workflow is a subfolder that contains one or more related SQL files that should be run together. The default SQL project includes a few example workflows you can run out of the box.
-- `data`: This folder can contain datasets to run your SQL workflows. The default SQL project includes sample SQLite databases (`.db` files) for a film ranking and a simple retail platform.
+- `workflows`: This folder contains independent SQL workflows. A workflow is a subfolder containing one or more related SQL files that should be run together. The default SQL project includes a few example workflows that you can run to test functionality.
+- `data`: This folder can contain datasets to run your SQL workflows. The default SQL project includes sample film ranking and retail SQLite databases (`.db` files).
 
 ## Develop your SQL project 
 
@@ -81,7 +81,7 @@ If you have existing `.sql` files and datasets, you can develop a running SQL wo
 
 ### Configure environments and connections
 
-An environment requires a connection to the databases in which you will run your SQL workflows. You can configure multiple connections to both data sources and data destinations within a single `configuration.yml` file. 
+An environment requires a connection to the databases in which you run your SQL workflows. You can configure multiple connections to data sources and data destinations within a single `configuration.yml` file. 
 
 [`dev/configuration.yml`](https://github.com/astronomer/astro-sdk/blob/main/sql-cli/include/base/config/dev/configuration.yml) contains templates for for each supported connection type. Use these templates to configure all required key-value pairs for your connection. 
 
@@ -104,7 +104,7 @@ connections:
       database: Database
 ```
 
-A standard Astro project currently can't access the connections configured in this directory. Similarly, a SQL project can't access connections configured in an Astro project. Features for unifying these two project structures will be available in upcoming releases.
+An Astro project can't access the connections configured in this directory. Similarly, a SQL project can't access connections configured in an Astro project. Features for unifying these two project structures will be available in upcoming releases.
 
 #### Test database connections
 
@@ -126,7 +126,7 @@ astro flow validate --connection=snowflake_conn --env=dev
 
 To run SQL as a workflow, add your `.sql` files to a workflow subfolder in `workflows`. All SQL files in a given workflow run together when you run `astro flow run`. See [Run a SQL workflow](#run-a-sql-workflow).
 
-Each `.sql` file must have a database connection defined as `conn_id` in the front matter of the file. This front matter tells the Astro CLI where to load the results of the query. In the following example, a SQL query runs against the `imdb.db` database in the `data` folder. The Astro CLI sends the results of the query to a Snowflake database defined in `snowflake_conn`.
+Each `.sql` file must have a database connection defined as `conn_id` in the front matter of the file. This front matter tells the Astro CLI where to load the query results. In the following example, a SQL query runs against the `imdb.db` database in the `data` folder. The Astro CLI sends the results of the query to a Snowflake database defined in `snowflake_conn`.
 
 ```sql
 ---
@@ -173,8 +173,10 @@ Configure a local data source to test your SQL queries using only a standard SQL
 
 To run a query against data hosted outside of your project, you create a `YAML` file describing how to load the data, then add the file to the workflow where you want to use the data.
 
-1. Create connections for your data source and data destination. See [Configure environments and connections](#configure-environments-and-connections). Copy the `conn_id` of both connections for the next step.
-2. In the workflow where you want to use the data, create a new `yaml` file that tells the CLI about your data source and your data destination. You can use the following example file to load data from Amazon S3 to Amazon Redshift.
+1. Create connections for your data source and data destination. See [Configure environments and connections](#configure-environments-and-connections). 
+
+2. Copy the `conn_id` for both connections.
+3. In the workflow where you want to use the data, create a new `yaml` file that tells the CLI about your data source and your data destination. You can use the following example file to load data from Amazon S3 to Amazon Redshift.
 
     ```yaml
     load_file:
@@ -192,7 +194,7 @@ To run a query against data hosted outside of your project, you create a `YAML` 
         IAM_ROLE: "arn:aws:iam::<account_id>:role/redshift-s3-readonly"
     ```
 
-3. Specify your data source in your queries using one of the following options: 
+4. Specify the data source for your queries using one of the following options: 
 
     - Reference the name of your `yaml` file in your queries using Jinja templating. For example, if the example YAML file in the previous step was named `load_s3.yaml`, your SQL query might look like the following: 
 
