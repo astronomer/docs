@@ -8,18 +8,18 @@ id: airflow-amazon-web-services
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-For simple testing use cases, running Airflow with test data and public APIs is enough. Once you start expanding your Airflow use with your organization, you might need to develop and test DAGs locally with data from your organization's cloud. For example, you might need to test your DAGs using environment variables stored in a secrets backend like AWS Secrets Manager.
+For initial testing and DAG development, running Airflow with local test data and publicly accessible APIs is often enough. Once you start expanding your Airflow use within your organization, you might need to develop and test DAGs locally with data from your organization's cloud. For example, you might need to test your DAGs using environment variables stored in a secrets backend like AWS Secrets Manager.
 
 You could create access keys for each user developing locally, but service account keys are difficult to track and manage especially on larger teams. Instead, Astronomer recommends exporting credentials for your own AWS account and securely adding these credentials to Airflow. This way, you know which permissions Airflow has without needing to configure a separate access key. 
 
-By the end of this integration tutorial, you'll know: 
+After you complete this tutorial, you'll be able to: 
 
-- How to pull your user credentials from AWS using the AWS CLI
-- Mount your user credentials as a volume at runtime
-- Authenticate to AWS through Airflow environment variables that pull from your mounted volume
-- Test your credentials by pulling a secret from a secrets backend
+- Pull your user credentials from AWS using the AWS CLI.
+- Mount your user credentials as a volume when starting Airflow locally.
+- Authenticate to AWS through Airflow environment variables that are pulled from your mounted volume.
+- Test your credentials by pulling a secret from an AWS secrets backend.
 
-Using these credentials, it is also possible to configure a custom Secret Backend like AWS Secrets Manager for local development.
+Using these credentials allows you to access information from your AWS cloud, like secret environment variables from AWS Secrets Manager.
 
 ## Prerequisites
 
@@ -28,7 +28,7 @@ Using these credentials, it is also possible to configure a custom Secret Backen
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
 - Optional. Access to a secrets backend hosted on AWS, such as AWS Secrets Manager or AWS Parameter Store
 
-## Load user credentials locally
+Step 1:  Retrieve AWS user credentials locally
 
 Run the following command to obtain your user credentials locally:
     
@@ -45,10 +45,12 @@ The AWS CLI then stores your credentials in two separate files:
 
 The location of these files depends on your operating system:
 
-- Linux and Mac: `/home/<username>/.aws`
+- Linux: `/home/<username>/.aws`
+- Mac: `/Users/<username>/.aws`
 - Windows: `%UserProfile%/.aws`
 
-## Configure your Airflow project
+## Step 2: Configure your Airflow project
+
 
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount them as a volume in Docker.
 
@@ -104,8 +106,14 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
 </TabItem>
 </Tabs>
 
+:::info
 
-3. In your project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the previous step.
+Depending on your Docker configurations you might have to add the path to the `.aws` folder to the folders accessible to Docker for mounts. You can do so by opening the Docker Desktop UI and navigating to **Resources** -> **File Sharing**. Add your `.aws` folder with its full file path here. 
+
+:::
+
+3. In your project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the `docker-compose.override.yml`.
+
 
     ```
     AWS_CONFIG_FILE=<volume-path>/config
