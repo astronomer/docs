@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+
+<channel>
+  <title>Astro Release Notes</title>
+  <link>https://docs.astronomer.io/astro/release-notes</link>
+  <description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.</description>
+  <item>
+    <title>December 6, 2022</title>
+    <link>https://docs.astronomer.io/astro/release-notes#december-6-2022</link>
+    <description>
+      <h2>Additional Improvements</h2>
+      <ul>
+        <li>In the Cloud UI, the People page now shows the IDs of users belonging to your Organization.</li>
+        <li>In the Cloud UI, the Deployments page now shows the user or API key that most recently updated each Deployment and when they updated it.</li>
+      </ul>
+    </description>
+  </item>
+</channel>
+</rss>
