@@ -426,7 +426,7 @@ This setup assumes you have already registered Astronomer Software as an applica
 
 1. If user provisioning isn't available on your existing Astronomer Software application, create a new application using the **Azure Databricks SCIM Provisioning Connector**. See [Configure SCIM provisioning using Microsoft Azure Active Directory](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application).
    
-2. In the menu for your configured application, go to **Manage** > **Provisioning**.
+2. In your Astronomer Software application on Azure AD, go to **Manage** > **Provisioning**.
 
 3. In the **Provisioning Mode** menu, select **Automatic**.
 
