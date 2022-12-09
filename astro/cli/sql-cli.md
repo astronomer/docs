@@ -154,7 +154,7 @@ If you define a database connection in a `.sql` file with a downstream dependenc
 Configure a local data source to test your SQL queries using only a standard SQLite connection. 
 
 1. Add the data source to your `data` directory. 
-2. Decide the environment in which you want to use the data. In your `config` directory, open the `configuration.yaml` for the environment. 
+2. In your `config` directory, open the `configuration.yaml` for the environment where you want to use the data.
 3. Configure a SQLite connection to your data source. For example:
 
     ```yaml
