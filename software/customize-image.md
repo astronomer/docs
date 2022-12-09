@@ -20,7 +20,7 @@ More specifically, this doc includes instructions for how to:
 - Add environment variables locally
 - Build from a private repository
 
-> **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](install-cli.md).
+> **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](https://docs.astronomer.io/astro/cli/install-cli).
 
 ## Add python and OS-level packages
 

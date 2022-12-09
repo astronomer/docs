@@ -19,6 +19,7 @@ While the tables below reference the minimum compatible versions, we typically r
 | v0.28               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
 | v0.29               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 | v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| v0.31               | 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 
 
 Astronomer recommends using the latest available version of the Astro CLI for all Software versions in most cases. To upgrade from an earlier version of the CLI to the latest, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).

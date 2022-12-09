@@ -70,7 +70,7 @@ Airflow tasks run with the `SnowflakeOperator` emit SQL source code that you can
 
 :::
 
-### OpenLineage and Databricks with Airflow
+## OpenLineage and Databricks with Airflow
 
 Use the information provided here to set up lineage collection for Spark running on a Databricks cluster.
 
@@ -228,9 +228,9 @@ In your Spark application, set the following properties to configure your lineag
    SparkSession.builder \
      .config('spark.jars.packages', 'io.openlineage:openlineage-spark:0.2.+')
      .config('spark.extraListeners', 'io.openlineage.spark.agent.OpenLineageSparkListener')
-     .config('spark.openlineage.host', 'https://<your-astro-base-domain>')
-     .config('spark.openlineage.apiKey', '<your-lineage-api-key>')
-     .config('spark.openlineage.namespace', '<NAMESPACE_NAME>') # Replace with the name of your Spark cluster.
+     .config('spark.openlineage.host', 'https://astro-<your-astro-base-domain>.datakin.com')
+     .config('spark.openlineage.apiKey', '<your-openlineage-api-key>')
+     .config('spark.openlineage.namespace', '<namespace-name>') # Replace with the name of your Spark cluster.
      .getOrCreate()                                             # Astronomer recommends using a meaningful namespace such as `spark-dev` or `spark-prod`.
    ```
 

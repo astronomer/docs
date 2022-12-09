@@ -69,7 +69,7 @@ In this section, you'll learn how to use [Hashicorp Vault](https://www.vaultproj
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md) on Astronomer.
-- [The Astro CLI](install-cli.md).
+- [The Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A [Hashicorp Vault server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started).
 - An Astro project initialized with `astro dev init`.
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
