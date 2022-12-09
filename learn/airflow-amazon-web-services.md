@@ -141,7 +141,8 @@ Depending on your Docker configurations, you might have to make your `.aws` fold
 
 When you run Airflow locally, all AWS connections without defined credentials automatically fall back to your user credentials when connecting to AWS.
 
-## (Optional) Test your credentials with a secrets backend
+## Step 3: Test your credentials with a secrets backend (Optional)
+
 
 Now that Airflow has access to your user credentials, you can use them to connect to AWS services. Use the following example setup to test your credentials by pulling a variable from AWS Secrets Manager. 
 
@@ -185,12 +186,17 @@ Now that Airflow has access to your user credentials, you can use them to connec
         conn = BaseHook.get_connection(conn_id="aws_standard")
         print(conn.get_uri())
     
-    with DAG('example_secrets_dag', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+    with DAG(
+        dag_id='example_secrets_dag',
+        start_date=datetime(2022, 1, 1),
+        schedule=None
+    ):
     
-      test_task = PythonOperator(
-          task_id='test-task',
-          python_callable=print_var,
-    )
+        test_task = PythonOperator(
+            task_id='test-task',
+            python_callable=print_var
+        )
+
     ```
 
 7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
