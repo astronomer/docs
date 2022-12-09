@@ -1,7 +1,6 @@
 ---
 title: "Add AWS user credentials to a local Apache Airflow environment"
 sidebar_label: "Authenticate to AWS locally"
-
 description: "Learn how to connect to a hosted environment on AWS from Apache Airflow. Use AWS credentials to access secrets backends and more from a locally running Airflow environment."
 id: airflow-amazon-web-services
 ---
@@ -66,86 +65,111 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
 
 
 <Tabs
-    defaultValue="linuxmac"
+    defaultValue="mac"
     groupId= "configure-your-airflow-project"
     values={[
-        {label: 'Linux/ Mac', value: 'linuxmac'},
+        {label: 'Mac', value: 'mac'},
+        {label: 'Linux', value: 'linux'},
         {label: 'Windows', value: 'windows'},
     ]}>
-<TabItem value="linuxmac">
+<TabItem value="mac">
 
-    ```yaml
-    version: "3.1"
-    services:
-        scheduler:
-            volumes:
-            - /home/<username>/.aws:/home/astro/.aws:ro
-        webserver:
-            volumes:
-            - /home/<username>/.aws:/home/astro/.aws:ro
-        triggerer:
-            volumes:
-            - /home/<username>/.aws:/home/astro/.aws:ro
-    ```
+```yaml
+version: "3.1"
+services:
+    scheduler:
+        volumes:
+        - /Users/<username>/.aws:/home/astro/.aws:ro
+    webserver:
+        volumes:
+        - /Users/<username>/.aws:/home/astro/.aws:ro
+    triggerer:
+        volumes:
+        - /Users/<username>/.aws:/home/astro/.aws:ro
+```
+
+</TabItem>
+<TabItem value="linux">
+
+```yaml
+version: "3.1"
+services:
+    scheduler:
+        volumes:
+        - /home/<username>/.aws:/home/astro/.aws:ro
+    webserver:
+        volumes:
+        - /home/<username>/.aws:/home/astro/.aws:ro
+    triggerer:
+        volumes:
+        - /home/<username>/.aws:/home/astro/.aws:ro
+```
+
 </TabItem>
 <TabItem value="windows">
 
-    ```yaml
-    version: "3.1"
-    services:
-        scheduler:
-            volumes:
-            - /c/Users/<username>/.aws:/home/astro/.aws:ro
-        webserver:
-            volumes:
-            - /c/Users/<username>/.aws:/home/astro/.aws:ro
-        triggerer:
-            volumes:
-            - /c/Users/<username>/.aws:/home/astro/.aws:ro
-    ```
+```yaml
+version: "3.1"
+services:
+    scheduler:
+        volumes:
+        - /c/Users/<username>/.aws:/home/astro/.aws:ro
+    webserver:
+        volumes:
+        - /c/Users/<username>/.aws:/home/astro/.aws:ro
+    triggerer:
+        volumes:
+        - /c/Users/<username>/.aws:/home/astro/.aws:ro
+```
 
 </TabItem>
 </Tabs>
 
 :::info
 
-Depending on your Docker configurations you might have to add the path to the `.aws` folder to the folders accessible to Docker for mounts. You can do so by opening the Docker Desktop UI and navigating to **Resources** -> **File Sharing**. Add your `.aws` folder with its full file path here. 
+Depending on your Docker configurations, you might have to make your `.aws` folder accessible to Docker. To do this, open **Preferences** in Docker Desktop and go to **Resources** -> **File Sharing**. Add the full path of your `.aws` folder to the list of shared folders.
 
 :::
 
 3. In your project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the `docker-compose.override.yml`.
 
 
-    ```
-    AWS_CONFIG_FILE=<volume-path>/config
-    AWS_SHARED_CREDENTIALS_FILE=<volume-path>/credentials
+    ```text
+    AWS_CONFIG_FILE=/usr/local/airflow/.aws/config
+    AWS_SHARED_CREDENTIALS_FILE=/usr/local/airflow/.aws/credentials
     ```
 
-The next time you run Airflow, your DAGs will have the same permissions as the user account that you configured in the volume.
+When you run Airflow locally, all AWS connections without defined credentials automatically fall back to your user credentials when connecting to AWS.
 
 ## (Optional) Test your credentials with a secrets backend
 
-Now that Airflow has access to your custom credentials, you can use them to connect to AWS services. Use the following example setup to test your credentials by pulling a variable from AWS Secrets Manager. 
+Now that Airflow has access to your user credentials, you can use them to connect to AWS services. Use the following example setup to test your credentials by pulling a variable from AWS Secrets Manager. 
 
-1. Create the following directories for Airflow variables and connections in AWS Secrets Manager:
+1. Create a secret for an Airflow variable or connection in AWS Secrets Manager. All Airflow variables and connection keys must be prefixed with the following strings respectively:
 
     - `airflow/variables`
     - `airflow/connections`
 
-2. Add a secret to one of these directories. This can be a real or test value. When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
+    When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
 
-
-    Make sure to configure the AIRFLOW__SECRETS__BACKEND_KWARGS environment variables as follows:
-    - Remove any mention of `role_arn`.
-
-3. Add the following environment variables to your Astro project `.env` file:
+2. Add the following environment variables to your Astro project `.env` file:
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
-    AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables", "region_name": "us-west-2"}
+    AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables", "region_name": "<your-aws-region>"}
     ```
 
-4. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve a value from `airflow/variables` and print it to the terminal:
+4. Run the following command to start Airflow locally:
+
+    ```sh
+    astro dev start
+    ```
+
+5. Access the Airflow UI at `localhost:8080` and create an Airflow AWS connection named `aws_standard` with no credentials. See [Connections](connections.md).
+
+   When you use this connection in your DAG, it will fall back to using your configured user credentials. 
+
+6. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve a value from `airflow/variables` and print it to the terminal:
 
     ```python
     from airflow import DAG
@@ -158,7 +182,7 @@ Now that Airflow has access to your custom credentials, you can use them to conn
         my_var = Variable.get("<your-variable-key>")
         print(f'My variable is: {my_var}')
     
-        conn = BaseHook.get_connection(conn_id="<your-connection-key>")
+        conn = BaseHook.get_connection(conn_id="aws_standard")
         print(conn.get_uri())
     
     with DAG('example_secrets_dag', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
@@ -169,10 +193,5 @@ Now that Airflow has access to your custom credentials, you can use them to conn
     )
     ```
 
-5. Run the following command to start Airflow locally:
-
-    ```sh
-    astro dev start
-    ```
-
-6. Access the Airflow UI at `localhost:8080`, unpause your DAG, and click **Play** to trigger a DAG run. 
+7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
+8. View logs for your DAG run. If the connection was successful, the value of your secret appears in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
