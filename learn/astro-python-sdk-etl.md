@@ -50,7 +50,7 @@ Using the Astro Python SDK requires configuring a few things in your Airflow pro
     export AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True
     ```
 
-    We recommend using `AIRFLOW__CORE__XCOM_BACKEND` for production environment along with `AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID` and `AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL`. This enables XCOM data to be saved to a S3 or GCS location. For example:
+ To allow XCOM data to be saved to a S3 or GCS location, Astronomer recommends using `AIRFLOW__CORE__XCOM_BACKEND`, `AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID`, and `AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL` in production environments. For example:
 
     ```text
     export AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
