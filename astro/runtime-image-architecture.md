@@ -48,6 +48,15 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
 :::
 
+## Default environment variables
+
+The following table lists the default Runtime environment variables. You can change the default settings of these environment variables to meet the unique requirements of your organization. For information about the global environment variables set on the Astro data plane, see [Global environment variables](platform-variables.md). To edit default environment variable values, see [Set environment variables on Astro](environment-variables.md).
+
+| Environment Variable                       | Description                                                                                                          | Value                                   |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The time in seconds that queued Celery tasks are assumed to have stalled before they are automatically rescheduled.  | `0`   |
+| `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of tasks that can run at the same time in a single Airflow environment.                                                               | `32`           |
+
 ## Provider packages
 
 All Astro Runtime images have the following open source provider packages pre-installed:
@@ -82,7 +91,9 @@ docker run --rm {image} pip freeze | grep <provider>
 
 ## Python versioning
 
-Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version, Astronomer recommends that you use the KubernetesPodOperator. See [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md).
+Astro Runtime supports Python 3.9. This is the only version of Python that Astro Runtime supports. If your data pipelines require an unsupported Python version and you're running Astro Runtime 6.0 (based on Airflow 2.4) or later, Astronomer recommends that you use the `ExternalPythonOperator`. See [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator).
+
+If you're currently using the `KubernetesPodOperator` or the `PythonVirtualenvOperator` in your DAGs, you can continue to use them to create virtual or isolated environments that can run tasks with different versions of Python.
 
 ## Executors
 

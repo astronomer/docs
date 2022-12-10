@@ -1,11 +1,7 @@
 export const siteVariables = {
   // version-specific
-  cliVersion: '1.7.0',
-  runtimeVersion: '6.0.4',
-  // Hacky variable so that we can use env var formatting in CI/CD templates
+  cliVersion: '1.8.3',
+  runtimeVersion: '7.0.0',
+  jenkinsenv: '${env.GIT_BRANCH}',
   deploymentid: '${ASTRONOMER_DEPLOYMENT_ID}',
-  keyid: '${ASTRONOMER_KEY_ID}',
-  keysecret: '${ASTRONOMER_KEY_SECRET}',
-  // Hacky variable for droneci
-  deploymentiddrone: '$ASTRONOMER_DEPLOYMENT_ID',
 };

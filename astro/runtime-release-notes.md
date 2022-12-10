@@ -18,6 +18,29 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 7.0.0 
+
+- Release date: December 2, 2022 
+- Airflow version: 2.5.0
+
+### Airflow 2.5.0
+
+Astro Runtime 7.0.0 includes same-day support for Airflow 2.5.0, which includes a collection of new features, bug fixes, automatic changes, and deprecations. Features include:
+
+- Add comments to task instances and DAG runs in the Airflow UI ([#26457](https://github.com/apache/airflow/pull/26457))
+- Clear all task instances in a task group with one click in the Airflow UI ([#26658](https://github.com/apache/airflow/pull/26658)), [#28003](https://github.com/apache/airflow/pull/28003))
+- Trigger a task when at least one upstream tasks is successful with new `one_done` trigger rule [#26146](https://github.com/apache/airflow/pull/26146)
+- New **Parsed at** metric in the DAG view of the Airflow UI [#27573](https://github.com/apache/airflow/pull/27573)
+- Filter datasets in Airflow UI based on recent update events [#26942](https://github.com/apache/airflow/pull/26942)
+
+To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/blog/whats-new-in-apache-airflow-2-5/) and the [Apache Airflow 2.5.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-0-2022-12-02).
+
+### Additional improvements 
+
+- In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
+- Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
+- Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
+
 ## Astro Runtime 6.0.4
 
 - Release date: November 14, 2022

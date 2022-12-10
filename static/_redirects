@@ -4,7 +4,7 @@
 /api/event https://plausible.io/api/event 200
 
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
-/software/0.30/* /software/:splat
+/software/0.31/* /software/:splat
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
@@ -25,6 +25,7 @@
 /software/cli-reference /astro/cli/reference 301
 /software/cli-release-notes /astro/cli/release-notes 301
 /software/cli-reference* /astro/cli/reference 301
+/software/install-cli /astro/cli/install-cli 301
 
 # Docs with redundant Learn guides 
 /astro/deferrable-operators /learn/deferrable-operators 301

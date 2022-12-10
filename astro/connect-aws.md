@@ -158,8 +158,9 @@ To grant an Astro cluster access to a service that is running in an AWS account 
         ]
     }
     ```
-
-    Your Astro cluster's data plane account includes the `AirflowLogsS3-<clusterid>` role. When you configure an Airflow connection for a Deployment, specify this role in an [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) to allow your Deployment access your service.
+    To locate your `<dataplane-AWS-account-ID>` and `<cluster-ID>`, in the Cloud UI click **Clusters**. The `<dataplane-AWS-account-ID>` is located in the **Account ID** column and the cluster ID is located in the **ID** column. 
+    
+    The Astro cluster data plane account includes the `AirflowLogsS3-<clusterid>` role. When you configure an Airflow connection for a Deployment, specify this role when you create the [AWS Airflow Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
 
 7. Click **Update policy**.
 8. In the Airflow UI or as an environment variable on Astro, create an Airflow connection to AWS for each Deployment that requires the resources you connected. See [Managing connections to Apache Airflow](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
@@ -176,3 +177,42 @@ Astronomer recommends using an external secrets backend to store your AWS access
 </TabItem>
 
 </Tabs>
+
+## Resolving services
+
+Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service.
+
+### Amazon Route 53
+
+Use Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises.
+
+#### Prerequisites
+
+- An Amazon Route 53 Resolver rule. See [Managing forwarding rules](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-rules-managing.html).
+- Permission to share resources using the AWS Resource Access Manager (RAM)
+
+#### Share the Amazon Route 53 Resolver rule
+
+To allow Astro to access a private hosted zone, you need to share your Amazon Route 53 Resolver rule with your Astro AWS account.
+
+1. In the Route 53 Dashboard, click **Rules** below **Resolver** in the navigation menu.
+
+2. Select a Resolver rule and then click **Details**.
+
+3. Click **Share** and enter `Astro` in the **Name** field.
+
+4. In the **Resources - optional** section, select **Resolver Rules**  in the **Select resource type** list and then select one or more rules.
+
+5. On the **Associate permissions** page, accept the default settings and then click **Next**.
+
+6. On the **Grant access to principals** page, select **Allow sharing only within your organization**, and then enter your Astro AWS account ID for your organization in the **Enter an AWS account ID** field. To get the Astro AWS account ID, go to the Cloud UI, click **Settings**, and then copy the value in the **ID** column for the Astro AWS account you want to share the Resolver rule with.
+
+7. Click **Create resource share**.
+
+#### Contact Astronomer support for rule verification
+
+To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
+
+#### Create a connection to confirm connectivity (optional)
+
+When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).

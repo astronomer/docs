@@ -13,9 +13,15 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 6.0.4 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.0.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.8.3 ([Release notes](cli/release-notes.md))
+
+## December 6, 2022
+
+### Additional improvements 
+
+- The maximum possible **Worker Count** for worker queues has been increased from 30 to 100.
 
 ## November 15, 2022
 

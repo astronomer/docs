@@ -52,7 +52,7 @@ Release date: September 21, 2022
 
 ## 0.25.13
 
-Release date: February 23, 2021
+Release date: February 23, 2022
 
 ### Additional improvements
 

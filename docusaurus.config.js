@@ -98,8 +98,13 @@ module.exports = {
     softwareNav: {
       items: [
         {
-          label: '0.30 (Latest)',
+          label: '0.31 (Latest)',
           to: '/software/',
+          activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.30',
+          to: '/software/0.30/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
         {
@@ -192,7 +197,6 @@ module.exports = {
         sitemap: {
           id: 'default',
           changefreq: 'daily',
-          ignorePatterns: ['/software/0.29/**', '/software/0.28/**', '/software/0.27/**', '/software/0.26/**', '/software/0.25/**', '/software/0.23/**', '/software/0.16/**'],
           filename: 'sitemap.xml',
         },
         theme: {
@@ -215,7 +219,7 @@ module.exports = {
         lastVersion: 'current',
         versions: {
           current: {
-            label: '0.30',
+            label: '0.31',
             path: '',
             banner: 'none',
           },
@@ -239,7 +243,6 @@ module.exports = {
       {
         id: 'learn',
         changefreq: 'daily',
-        ignorePatterns: ['/software/0.29/**', '/software/0.28/**', '/software/0.27/**', '/software/0.26/**', '/software/0.25/**', '/software/0.23/**', '/software/0.16/**'],
         filename: 'sitemap.xml',
       },
     ],
