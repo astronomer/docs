@@ -365,7 +365,7 @@ When DAGs are scheduled depending on datasets, both the DAG containing the produ
 
 In Airflow 2.4 an additional **Datasets** tab was added, which shows all dependencies between datasets and DAGs.
 
-![DAG Dependencies View Datasets](/img/guides/2_4_Datasets.png)
+![DAG Dependencies View Datasets](/img/guides/2_5_Datasets.png)
 
 ## Cross-deployment dependencies
 
