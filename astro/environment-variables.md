@@ -146,7 +146,7 @@ For example, consider the following Airflow connection:
 
 To store this connection as an environment variable, you create an environment variable with the key `AIRFLOW_CONN_MY_PROD_DB` and the value `my-conn-type://login:password@host:5432/schema`.
 
-In Astro Runtime version 5.0 and later, you can also store connections using JSON format. See [JSON format example](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#json-format-example). When using JSON format in environment variables, the JSON object must be defined on a single unbroken line. 
+In Astro Runtime version 5.0 and later, you can also use JSON format to store connections. See [JSON format example](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#json-format-example). When using the JSON format in environment variables, the JSON object must be defined in a single, unbroken line. 
 
 :::info
 
