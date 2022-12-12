@@ -72,7 +72,7 @@ new_proj/
 Each SQL project is composed of three directories:
 
 - `config`: This folder contains configurations for different environments for running SQL. These configurations store connections to external databases. Each SQL environment has one subfolder containing its own `configuration.yml`. The default SQL project includes `default` and `dev` environments.
-- `workflows`: This folder contains independent SQL workflows. A workflow is a subfolder containing one or more related SQL files that should be run together. The default SQL project includes a few example workflows that you can run to test functionality.
+- `workflows`: This folder contains independent SQL workflows. A workflow is a subfolder containing related SQL queries and data management tasks that run together. The default SQL project includes a few example workflows that you can run to test functionality.
 - `data`: This folder can contain datasets to run your SQL workflows. The default SQL project includes sample film ranking and retail SQLite databases (`.db` files).
 
 ## Develop your SQL project 
@@ -83,7 +83,7 @@ If you have existing `.sql` files and datasets, you can develop a running SQL wo
 
 An environment requires a connection to the databases in which you run your SQL workflows. You can configure multiple connections to data sources and data destinations within a single `configuration.yml` file. 
 
-[`dev/configuration.yml`](https://github.com/astronomer/astro-sdk/blob/main/sql-cli/include/base/config/dev/configuration.yml) contains templates for for each supported connection type. Use these templates to configure all required key-value pairs for your connection. 
+[`default/configuration.yml`](https://github.com/astronomer/astro-sdk/blob/main/sql-cli/include/base/config/default/configuration.yml) contains templates for for each supported connection type. Use these templates to configure all required key-value pairs for your connection. 
 
 For example, a Snowflake connection in `dev/configuration.yml` might look like the following: 
 
@@ -174,29 +174,28 @@ Configure a local data source to test your SQL queries using only a standard SQL
 To run a query against data hosted outside of your project, you create a `YAML` file describing how to load the data, then add the file to the workflow where you want to use the data.
 
 1. Create connections for your data source and data destination. See [Configure environments and connections](#configure-environments-and-connections). 
-
 2. Copy the `conn_id` for both connections.
 3. In the workflow where you want to use the data, create a new `yaml` file that tells the CLI about your data source and your data destination. You can use the following example file to load data from Amazon S3 to Amazon Redshift.
 
     ```yaml
     load_file:
       input_file:
-        path: "s3://tmp9/homes_main.csv"
+        path: "s3://<your-data-filepath>.csv"
         conn_id: "aws_conn"
       output_table:
         conn_id: "redshift_conn"
         metadata:
-          schema: "astro"
-          database: "dev"
+          schema: "<your-schema>"
+          database: "<your-database>"
       native_support_kwargs:
         IGNOREHEADER: 1
-        REGION: "us-west-2"
+        REGION: "<your-region>"
         IAM_ROLE: "arn:aws:iam::<account_id>:role/redshift-s3-readonly"
     ```
 
-4. Specify the data source for your queries using one of the following options: 
+4. In your SQL files, specify the table to query using one of the following options: 
 
-    - Reference the name of your `yaml` file in your queries using Jinja templating. For example, if the example YAML file in the previous step was named `load_s3.yaml`, your SQL query might look like the following: 
+    - Reference the name of your `yaml` file in your SQL files using Jinja templating. The SQL CLI assumes which table to use based on the information provided in your YAML file. For example, if the example YAML file in the previous step was named `load_s3.yaml`, your SQL query might look like the following: 
 
     ```sql
     ---
@@ -207,7 +206,7 @@ To run a query against data hosted outside of your project, you create a `YAML` 
     LIMIT 5;
     ```
 
-    - Reference `input_file` in your queries. For example: 
+    - Reference the table name directly in your queries. For example: 
 
 
     ```sql
@@ -215,7 +214,7 @@ To run a query against data hosted outside of your project, you create a `YAML` 
     conn_id: redshift_conn
     ---
     SELECT *
-    FROM input_file
+    FROM <your-input-table>
     LIMIT 5;
     ```
     
