@@ -13,7 +13,7 @@ This document contains information about all commands and settings available in 
 
 All reference documentation is based on the latest available version of the Astro CLI. To see the differences across various CLI versions, see the [Astro CLI Release Notes](cli/release-notes.md).
 
-The Astronomer product you're using determines the behavior and format of commands. Astronomer identifies commands that are specific to Astro or Astronomer Software, or when specific behavior is product dependent.
+The Astronomer product you're using determines the behavior and format of commands. The documentation identifies commands that are specific to Astro or Astronomer Software, or when specific behavior is product dependent.
 
 ## Core Commands
 
