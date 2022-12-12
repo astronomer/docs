@@ -161,7 +161,7 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 #### Prerequisites
 
 - A [Great Expectations Data Context](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started)
-- If using a custom Checkpoint or Checkpoint config, your Astro base domain and OpenLineage API key.
+- If using a Checkpoint or Checkpoint config, your Astro base domain and OpenLineage API key.
 
 #### Setup
 
@@ -172,25 +172,21 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
     import os
     from pathlib import Path
     from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
-    from great_expectations.core.batch import BatchRequest
-    from great_expectations.data_context.types.base import (
-      DataContextConfig,
-      CheckpointConfig
-   )
-   # Set base path for Data Context 
-   base_path = Path(__file__).parents[2]
+    # Set base path for Data Context 
+    base_path = Path(__file__).parents[2]
 
-   ...
+    ...
 
-   # Example task using GreatExpectationsOperator 
-   ge_task = GreatExpectationsOperator(
-    task_id="ge_task",
-    # Set directory for the Data Context
-    ge_root_dir=os.path.join(base_path, "include", "great_expectations"),
-   )
-   ```
+    # Example task using GreatExpectationsOperator 
+    ge_task = GreatExpectationsOperator(
+      task_id="ge_task",
+      # Set directory for the Data Context
+      ge_root_dir=os.path.join(base_path, "include", "great_expectations"),
+      ...
+    )
+    ```
 
-   If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't use a custom Checkpoint or Checkpoint Config, you can skip steps 2 and 3.
+   If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't provide a Checkpoint file or Checkpoint Config, you can skip steps 2 and 3.
    
 2. In each of your Checkpoint files, add `OpenLineageValidationAction` to your `action_list` like in the following example:
     
