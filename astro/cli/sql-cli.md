@@ -175,7 +175,7 @@ To run a query against data hosted outside of your project, you create a `YAML` 
 
 1. Create connections for your data source and data destination. See [Configure environments and connections](#configure-environments-and-connections). 
 2. Copy the `conn_id` for both connections.
-3. In the workflow where you want to use the data, create a new `yaml` file that tells the CLI about your data source and your data destination. You can use the following example file to load data from Amazon S3 to Amazon Redshift.
+3. In the workflow where you want to use the data, create a new `yaml` file that tells the CLI to load the contents of a specific database. For example, the following file gives the CLI instructions to load data from Amazon S3 and store the results of your SQL query in Amazon Redshift.
 
     ```yaml
     load_file:
