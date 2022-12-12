@@ -126,7 +126,7 @@ astro flow validate --connection=snowflake_conn --env=dev
 
 To run SQL as a workflow, add your `.sql` files to a workflow subfolder in `workflows`. All SQL files in a given workflow run together when you run `astro flow run`. See [Run a SQL workflow](#run-a-sql-workflow).
 
-Each `.sql` file must have a database connection defined as `conn_id` in the front matter of the file. This front matter tells the Astro CLI where to load the query results. In the following example, a SQL query runs against the `imdb.db` database in the `data` folder. The Astro CLI sends the results of the query to a Snowflake database defined in `snowflake_conn`.
+Each `.sql` file must have a database connection defined as `conn_id` in the front matter header of the file. This front matter tells the Astro CLI where to load the query results. In the following example, a SQL query runs against the `imdb.db` database in the `data` folder. The Astro CLI sends the results of the query to a Snowflake database defined in `snowflake_conn`.
 
 ```sql
 ---
