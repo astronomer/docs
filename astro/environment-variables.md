@@ -166,4 +166,4 @@ For example, consider the following Airflow variable:
 - Variable name: `My_Var`
 - Value: `2`
 
-To store this Airflow variable as an environment variable, you create an environment variable with the key `AIRFLOW_VAR_MY_VAR` and the value `2`,
+To store this Airflow variable as an environment variable, you create an environment variable with the key `AIRFLOW_VAR_MY_VAR` and the value `2`.
