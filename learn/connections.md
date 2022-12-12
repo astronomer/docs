@@ -108,7 +108,14 @@ AIRFLOW_CONN_MYCONNID='{
     }
 }'
 ```
+
 Connections that are defined using environment variables do not appear in the list of available connections in the Airflow UI.
+
+:::info 
+
+To store a connection in JSON as an Astro environment variable, remove all line breaks in your JSON object so that the value is a single unbroken line. See [Add Airflow connections and variables using environment variables](https://docs.astronomer.io/astro/environment-variables#add-airflow-connections-and-variables-using-environment-variables)
+
+:::
 
 ## Masking sensitive information
 
