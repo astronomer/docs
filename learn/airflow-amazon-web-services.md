@@ -77,13 +77,13 @@ version: "3.1"
 services:
     scheduler:
         volumes:
-        - /Users/<username>/.aws:/home/astro/.aws:ro
+        - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
     webserver:
         volumes:
-        - /Users/<username>/.aws:/home/astro/.aws:ro
+        - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
     triggerer:
         volumes:
-        - /Users/<username>/.aws:/home/astro/.aws:ro
+        - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
 ```
 
 </TabItem>
@@ -94,13 +94,13 @@ version: "3.1"
 services:
     scheduler:
         volumes:
-        - /home/<username>/.aws:/home/astro/.aws:ro
+        - /home/<username>/.aws:/usr/local/airflow/.aws:ro
     webserver:
         volumes:
-        - /home/<username>/.aws:/home/astro/.aws:ro
+        - /home/<username>/.aws:/usr/local/airflow/.aws:ro
     triggerer:
         volumes:
-        - /home/<username>/.aws:/home/astro/.aws:ro
+        - /home/<username>/.aws:/usr/local/airflow/.aws:ro
 ```
 
 </TabItem>
@@ -111,13 +111,13 @@ version: "3.1"
 services:
     scheduler:
         volumes:
-        - /c/Users/<username>/.aws:/home/astro/.aws:ro
+        - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
     webserver:
         volumes:
-        - /c/Users/<username>/.aws:/home/astro/.aws:ro
+        - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
     triggerer:
         volumes:
-        - /c/Users/<username>/.aws:/home/astro/.aws:ro
+        - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
 ```
 
 </TabItem>
@@ -129,8 +129,7 @@ Depending on your Docker configurations, you might have to make your `.aws` fold
 
 :::
 
-3. In your project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the `docker-compose.override.yml`.
-
+3. In your Astro project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the `docker-compose.override.yml`.
 
     ```text
     AWS_CONFIG_FILE=/usr/local/airflow/.aws/config
@@ -140,7 +139,6 @@ Depending on your Docker configurations, you might have to make your `.aws` fold
 When you run Airflow locally, all AWS connections without defined credentials automatically fall back to your user credentials when connecting to AWS.
 
 ## Step 3: Test your credentials with a secrets backend (Optional)
-
 
 Now that Airflow has access to your user credentials, you can use them to connect to AWS services. Use the following example setup to test your credentials by pulling a variable from AWS Secrets Manager. 
 
