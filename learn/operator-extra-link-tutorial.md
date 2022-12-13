@@ -111,7 +111,7 @@ Create an [Airflow plugin](using-airflow-plugins.md) to add an extra link to the
 This script accomplishes the following:
 
 - Defines an operator extra link called `HTTPDocsLink` which will create an extra link button with the name `HTTP docs`. Customize this string to change the name on the button displayed in the UI.
-- Adds the `SimpleHttpOperator` to the list of operators this extra link will be applied to. You can add as many operators as you'd like, inlcuding custom operators.
+- Adds the `SimpleHttpOperator` to the list of operators this extra link will be applied to. You can add as many operators as you'd like, including custom operators.
 - Defines the `get_link()` method which determines the website the operator extra link will link to. You can change this function to any Python function that returns a valid link. See [Step 9](#step-9-add-a-dynamic-extra-link-to-your-custom-operator) for instructions on how to make this link dynamically change between task instances.
 - Creates an instance of the `AirflowPlugin` class which will be automatically picked up by Airflow to install the plugin named `extra_link_plugin` in your Airflow instance.
 - Adds the `HTTPDocsLink` plugin to the `extra_link_plugin`. You can add several operator extra links to the same Airflow plugin.
@@ -136,7 +136,7 @@ This script accomplishes the following:
 
 ## Step 6: Create a custom operator
 
-Another core feature of extra links is that you can dynamically generate them based information returned by an operator at run time. The second half of this tutorial will cover how to modify an operator to push the value you need to [XComs](airflow-passing-data-between-tasks.md) and retrieve that value for use in an extra link.
+Another core feature of extra links is that you can dynamically generate them based on information returned by an operator at run time. The second half of this tutorial will cover how to modify an operator to push the value you need to [XComs](airflow-passing-data-between-tasks.md) and retrieve that value for use in an extra link.
 
 1. Create a new file called `cat_http.py` in the `include` folder of your Airflow project.
 
