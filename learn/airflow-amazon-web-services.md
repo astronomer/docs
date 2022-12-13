@@ -30,7 +30,6 @@ Using these credentials allows you to access information from your AWS cloud, li
 
 ## Step 1:  Retrieve AWS user credentials locally
 
-
 Run the following command to obtain your user credentials locally:
     
 ```
