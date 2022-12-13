@@ -23,7 +23,8 @@ Using these credentials allows you to access information from your AWS cloud, li
 
 ## Prerequisites
 
-- A user account on AWS with access to AWS cloud resources.
+- A user account on AWS with access to AWS cloud resources
+
 - The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
 - Optional. Access to a secrets backend hosted on AWS, such as AWS Secrets Manager or AWS Parameter Store
@@ -67,7 +68,6 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
 <Tabs
     defaultValue="mac"
     groupId= "step-2-configure-your-astro-project"
-
     values={[
         {label: 'Mac', value: 'mac'},
         {label: 'Linux', value: 'linux'},
