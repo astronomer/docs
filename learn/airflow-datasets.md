@@ -99,7 +99,7 @@ On the **DAGs** view, you can see that your `dataset_downstream_1_2` DAG is sche
 
 ![DAGs View](/img/guides/dags_view_dataset_schedule.png)
 
-The new **Datasets** tab shows a list of all datasets in your Airflow environment and a graph showing how your DAGs and datasets are connected. You can filter the lists of Datasets by recent updates.
+The **Datasets** tab shows a list of all datasets in your Airflow environment and a graph showing how your DAGs and datasets are connected. You can filter the lists of Datasets by recent updates.
 
 ![Datasets View](/img/guides/datasets_view_overview.png)
 

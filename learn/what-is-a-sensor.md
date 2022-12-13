@@ -102,7 +102,7 @@ This DAG waits for data to be available in a Postgres database before running va
 
 ## Sensor decorator
 
-As of Airflow 2.5 there is the possibility to use `@task.sensor` decorator from the TaskFlowAPI to turn any Python function that returns a PokeReturnValue into an instance of the BaseSensorOperator. The following DAG shows an implementation of the sensor decorator:
+Starting in Airflow 2.5, you can use the `@task.sensor` decorator from the TaskFlow API to use any Python function that returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The following DAG shows how to use the sensor decorator:
 
 ```python
 from airflow import DAG
@@ -154,8 +154,9 @@ with DAG(
     print_shibe_picture_url(check_shibe_availability())
 ```
 
-In the DAG the `@task.sensor` decorator turns the `check_shibe_availability()` function into a sensor which will check if the provided API returns the status code 200. If yes the sensor task is marked as successful, if any other status code is returned, the sensor will poke again after the `poke_interval` has passed.
-The optional `xcom_value` parameter of the `PokeReturnValue` defines what data will be pushed to [XCom](airflow-passing-data-between-tasks.md) once the condition provided to the `is_done` parameter is True. In the example above, the information returned by the API is pushed to XCom to be accessed by the downstream task `print_shibe_picture_url`.
+Here, `@task.sensor` decorates the `check_shibe_availability()` function, which checks if a given API returns a 200 status code. If the API returns a 200 status code, the sensor task is marked as successful. If any other status code is returned, the sensor pokes again after the `poke_interval` has passed.
+
+The optional `xcom_value` parameter in `PokeReturnValue` defines what data will be pushed to [XCom](airflow-passing-data-between-tasks.md) once the `is_done=true`. You can use this data in any downstream tasks.
 
 ## Sensor best practices
 
