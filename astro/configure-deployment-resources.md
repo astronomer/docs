@@ -26,6 +26,12 @@ To ensure that your tasks have the CPU and memory required to complete successfu
 
 Worker and scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
 
+:::note
+
+You can manage a Deployemnent's resources with a Deployment file. Read [Deployments as Code](manage-deploymens-as-code.md) for more information.
+
+:::
+
 ### Worker queues 
 
 Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks.
@@ -105,3 +111,4 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 - [Set environment variables on Astro](environment-variables.md).
 - [Manage Deployment API keys](api-keys.md).
+- [Manage Deployments as Code](manage-deployments-as-code.md)

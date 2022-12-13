@@ -36,6 +36,8 @@ astro deployment create
 | Option                      | Description                                                                                                                                 | Possible Values                                                                             |
 | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 | `-c`, `--cluster-id`        | The cluster in which you want to create a Deployment                                                                                        | The name of any cluster that you can create Deployments in                                  |
+| `--dag-deploy`        | Enables DAG-only deploys for the deployment (default "disable")                                                                                                          | "enable" or "disable"             |
+| `--deployment-file`        | Location of file containing the deployment to create. File can be in either JSON or YAML format.                                                                                                        | any YAML or JSON Deployment file             |
 | `-d`,`--description`        | The description for the Deployment                                                                                                          | Any string. Multiple-word descriptions should be specified in quotations (`"`)              |
 | `-n`,`--name`               | The name of the Deployment                                                                                                                  | Any string. Multiple-word descriptions should be specified in quotations                    |
 | `-v`,`--runtime-version`    | The Astro Runtime version for the Deployment                                                                                                | Any supported version of Astro Runtime. Major, minor, and patch versions must be specified. |
@@ -48,15 +50,22 @@ astro deployment create
 ## Examples
 
 ```sh
-$ astro deployment create
 # CLI prompts you for a Deployment name and cluster
+$ astro deployment create
 
-$ astro deployment create -d="My Deployment Description" --name="My Deployment Name" --cluster-id="ckwqkz36200140ror6axh8p19"
 # Create a Deployment with all required information specified. The CLI will not prompt you for more information
+$ astro deployment create -d="My Deployment Description" --name="My Deployment Name" --cluster-id="ckwqkz36200140ror6axh8p19"
 
-$ astro deployment create -a=50
 # Specify 50 AU for the Deployment's workers. The Astro CLI prompts you for required information
+$ astro deployment create -a=50
+
+# Specify the new Deployment's configuration with a yaml file
+$ astro deployment create --deployment-file deployment.yaml
 ```
+
+:::note
+For more inforamtion on creating a Deployment using a Deployment file read [Create a Deployment with a Deployment File](manage-deployments-as-code.md#create-a-deployment-with-a-deployment-file)
+:::
 
 </TabItem>
 
