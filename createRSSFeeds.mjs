@@ -23,10 +23,10 @@ function nextUntil(elem, selector, filter) {
       elem = elem.nextElementSibling;
       continue;
     }
-    siblings.push(elem);
+    siblings.push(elem.outerHTML);
     elem = elem.nextElementSibling;
   }
-  return siblings;
+  return siblings.join('').toString();
 };
 
 // this function takes a markdown file imported above, renders to markdown,
@@ -36,7 +36,7 @@ function getPosts(content) {
   const contentRender = JSDOM.fragment(md.render(content));
 
   // get all of the h2s which are also our post titles
-  const H2s = [...contentRender.querySelectorAll("h2")];
+  const H2s = [...contentRender.querySelectorAll("h2")].slice(1);
 
   // empty array to stick our posts in
   let posts = [];
@@ -62,7 +62,7 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
         item: [
           { title: post.title },
           {
-            link: `${pageURL}/${post.slug}`
+            link: `${pageURL}#${post.slug.replace(/\./g, '')}`
           },
           {
             description: {
