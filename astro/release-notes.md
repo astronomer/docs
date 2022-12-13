@@ -17,11 +17,46 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.8.3 ([Release notes](cli/release-notes.md))
 
-## December 6, 2022
+## December 13, 2022 
+
+### Improvements to the Cloud IDE
+
+The [Cloud IDE](cloud-ide/overview.md) includes several new features which improve DAG authoring and testing:
+
+- Committing to GitHub and configuring a GitHub repository now happen in two separate menus dedicated to each function.
+- The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Using the CI/CD pipeline to deploy DAG changes to Astro is now significantly faster. 
+- The GitHub configuration menu now includes **Clone Repo** settings. You can use these settings to make files in your configured GitHub repo accessible when you run DAGs in the Cloud IDE, such as helper functions in an `include` folder. 
+- You can now explicitly mark upstream dependencies for a cell from the cell's configuration menu.
+
+### Support for n2 GCP instances
+
+You can now configure worker queues with the following `n2` node types on GCP:
+
+- `n2-standard-4`
+- `n2-standard-8`
+- `n2-standard-16`
+- `n2-highmem-4`
+- `n2-highmem-8`
+- `n2-highmem-16`
+- `n2-highcpu-4`
+- `n2-highcpu-8`
+- `n2-highcpu-16`
 
 ### Additional improvements 
 
-- The maximum possible **Worker Count** for worker queues has been increased from 30 to 100.
+- In the **Clusters** tab of the Cloud UI, you can now click a cluster entry to see details about the cluster configuration, including which **Worker Types** are enabled for the cluster.
+- You can now see your Deployment's **ID** in the **Deployments** menu and on the Deployment information screen in the Cloud UI. A Deployment ID is required for deploying code using CI/CD.
+- You can now access your Organization's **OpenLineage URL** from the **Settings** page of the CLoud UI.
+- Workspaces are now sorted alphabetically in the Cloud UI.
+- [Potential release note for custom Kubernetes tags on clusters]
+- You can now trigger DAG-only deploys from multiple different sources, such as a local directory or a GitHub repo, to a single Deployment.
+
+### Bug fixes 
+
+- Fixed an issue where DAG-only deploys did not work if you included helper functions in your `dags` directory.
+- Fixed an issue where you had to trigger a DAG-only deploy.
+- Fixed an issue where task runs triggered in the Cloud IDE did not have access to project environment variables.
+- Fixed an issue where Deployment metrics for memory usage were not always accurate.  
 
 ## November 15, 2022
 
