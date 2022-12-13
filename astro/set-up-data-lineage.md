@@ -34,7 +34,7 @@ To emit lineage data from an Airflow task that runs outside of Astro or from an 
 - Retrieve your Organization OpenLineage API key from the Cloud UI. See [Retrieve an OpenLineage API key](#retrieve-an-openlineage-api-key).
 - Specify your OpenLineage API key in the external system. See the following integration guides for specific instructions.
 
-When integrating an external data lineage system with Astro, you are often required to define the `openlineage-namespace` variable. The `openlineage-namespace` variable defines the deployment namespace for your jobs. When you define this variable, it must be correct to ensure the lineage data displayed in the Cloud UI is accurate and relevant.
+When you integrate an external data lineage system with Astro or you are working in a local Astro development environment, you need to define the `OPENLINEAGE_NAMESPACE`, `OPENLINEAGE_URL`, and `OPENLINEAGE_API_KEY` environment variables to make sure the correct OpenLineage data is sent to Astro. To locate the `OPENLINEAGE_NAMESPACE` variable in the Cloud UI, select a Workspace and then copy the value that includes a four-digit number next to the Deployment name. The format for the `OPENLINEAGE_URL` variable is `https://astro-<your-astro-base-domain>.datakin.com`. To locate the `OPENLINEAGE_API_KEY` variable, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the value in the **Lineage API Key** field.
 
 ### Retrieve an OpenLineage API key
 
