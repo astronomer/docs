@@ -20,11 +20,11 @@ Release date: December 12, 2022
 
 ### Additional improvements
 
-- Added `__pycache__/` to `gitignore` created by `astro dev init`
+- The default Astro project `.gitignore` file now includes `__pycache__/`.
 
 ### Bug fixes
 
-- Fixed an issue where a SQL Alchemy deprecation warning was showing up in the local container logs
+- Fixed an issue where a SQL Alchemy deprecation warning was appearing in logs for locally running Airflow components.
 
 ## Astro CLI 1.8.3
 
