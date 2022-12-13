@@ -1,98 +1,204 @@
-# Authenticate with User Credentials for local development (Azure)
+---
+title: "Add Azure user credentials to a local Apache Airflow environment"
+sidebar_label: "Authenticate to Azure locally"
+description: "Learn how to connect to a hosted environment on Azure from Apache Airflow with user credentials. Use Azure credentials to access secrets backends and more from a locally running Airflow environment."
+id: airflow-amazon-web-services
+---
 
-It is possible to use local User credentials instead of Service Account Keys to authenticate to Azure.
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-Using these credentials, it is also possible to configure a custom Secret Backend like Azure Key Vault for local development.
+For initial testing and DAG development, running Airflow with local test data and publicly accessible APIs is often enough. Once you start expanding your Airflow use within your organization, you might need to develop and test DAGs locally with data from your organization's cloud. For example, you might need to test your DAGs using environment variables stored in a secrets backend like Azure Key Value.
 
-Pre-requisites:
-- Install the Azure CLI locally (Mac & Linux): https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
-- (Windows) Install Windows Subsystem Linux: https://learn.microsoft.com/en-us/windows/wsl/install
+You could create access keys for each user developing locally, but service account keys are difficult to track and manage especially on larger teams. Instead, Astronomer recommends exporting credentials for your own Azure account and securely adding these credentials to Airflow. This way, you know which permissions Airflow has without needing to configure a separate access key. 
 
-**IMPORTANT NOTES**
-- There is an open issue with DefaultAzureCredential forcing the installation Azure CLI inside Astro Runtime. [You can read more about it here](https://github.com/Azure/azure-sdk-for-net/issues/19167#issuecomment-1127081646)
-- Starting from Azure CLI v2.30.0, credentials generated from a Windows installed Azure CLI are now saved in an encrypted file; the credentials cannot be accessed from the Astronomer Runtime Docker containers. Workarounds are described below. [See here for more details.](https://learn.microsoft.com/en-us/cli/azure/msal-based-azure-cli)
+After you complete this tutorial, you'll be able to: 
 
+- Pull your user credentials from Azure using the Azure CLI.
+- Mount your user credentials as a volume when starting Airflow locally using the Astro CLI.
+- Authenticate to Azure through Airflow environment variables that are pulled from your mounted volume.
+- Test your credentials by pulling a secret from a secrets backend.
 
-Steps:
-1. Acquire user credentials with Azure CLI
+## Prerequisites
+
+- A user account on Azure with access to Azure cloud resources.
+- The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
+- Optional. Access to a secrets backend hosted on, such as Azure Key Vault
+- If you're using Windows, [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/install)
+
+:::caution Known issues 
+
+- There is an open issue with `DefaultAzureCredential` forcing the installation of Azure CLI inside Astro Runtime. See [Azure on GitHub](https://github.com/Azure/azure-sdk-for-net/issues/19167#issuecomment-1127081646).
+
+:::
+
+## Step 1:  Retrieve Azure user credentials locally
     
-    The following command is used to obtain user access credentials via a web flow. 
+Run the following command to obtain your user credentials locally:
+      
+```sh
+az login
+```
+
+The CLI provides you with a link to a webpage where you authenticate to your Azure account. Once you complete the login, the CLI stores your user credentials in your local Azure configuration folder.
+
+The developer account credentials are used in place of the credentials associated with the Registrated Application (Service Principal) in Azure AD.
     
+The default location of the Azure configuration folder depends on your operating system:
+
+- Linux: `$HOME/.azure/`
+- Mac: `/Users/<username>/.aws`
+- Windows: `%USERPROFILE%/.azure/`
+
+## Step 2: Configure your Astro project
+
+The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount them as a volume in Docker.
+
+1. Run the following commands to create an Astro project:
+
+    ```sh
+    $ mkdir aws-airflow && cd aws-airflow
+    $ astro dev init
     ```
-    az login
-    ```
 
-    Running the command in your terminal will provide a link and open a webpage to authenticate to your Azure Account.
-    Once login is complete, it will store user credentials in your local Azure config folder.
-    The developer account credentials are used in place of the credentials associated with the Registrated Application (Service Principal) in Azure AD.
+2. Add a file named `docker-compose.override.yml` to your project with the following configuration: 
+
+
+<Tabs
+    defaultValue="mac"
+    groupId= "step-2-configure-your-airflow-project"
+    values={[
+        {label: 'Mac', value: 'mac'},
+        {label: 'Windows and Linux', value: 'windowslinux'},
+        {label: 'Windows', value: 'windows'},
+    ]}>
+<TabItem value="mac">
+
+```yaml
+version: "3.1"
+services:
+    scheduler:
+        volumes:
+        - /Users/<username>/.azure:/home/astro/.azure
+    webserver:
+        volumes:
+        - /Users/<username>/.azure:/home/astro/.azure
+    triggerer:
+        volumes:
+        - /Users/<username>/.azure:/home/astro/.azure
+```
+
+</TabItem>
+<TabItem value="windowslinux">
+
+```yaml
+version: "3.1"
+services:
+    scheduler:
+        volumes:
+        - /home/<username>/.azure:/home/astro/.azure
+    webserver:
+        volumes:
+        - /home/<username>/.azure:/home/astro/.azure
+    triggerer:
+        volumes:
+        - /home/<username>/.azure:/home/astro/.azure
+```
+
+:::info 
+
+In Azure CLI versions 2.30.0 and later on Windows systems, credentials generated by the CLI are saved in an encrypted file and cannot be accessed from Astro Runtime Docker containers. See [MSAL-based Azure CLI](https://learn.microsoft.com/en-us/cli/azure/msal-based-azure-cli).
     
-    The location of the Azure configuration folder depends on your operating system:
-    - Linux, macOS: `$HOME/.azure/`
-    - Windows: `%USERPROFILE%/.azure/`
+To work around this limitation on a Windows computer, use Windows Subsystem Linux (WSL) when completing this setup.
+  
+If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.azure` file path in your volume points to the configuration file for the Azure CLI installed in WSL.
 
-    It is possible to define the AZURE_CONFIG_DIR environment variable to use a different folder.
+:::
 
-    For more information:
-    [CLI configuration files](https://learn.microsoft.com/en-us/cli/azure/azure-cli-configuration#cli-configuration-file)
-    [Azure Login](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli)
+</TabItem>
+</Tabs>    
 
-2. Mount your Azure configuration folder as a volume and attach it to Airflow:
-
-    This step is done by overriding the CLI Docker Compose file.
-    Make sure that the source path matches the file location mentioned in step 1 above.
-
-    For Linux, MacOS:
-    ```yaml
-    version: "3.1"
-    services:
-      scheduler:
-        volumes:
-          - /home/<username>/.azure:/home/astro/.azure
-      webserver:
-        volumes:
-          - /home/<username>/.azure:/home/astro/.azure
-      triggerer:
-        volumes:
-          - /home/<username>/.azure:/home/astro/.azure    
-    ```
-    For more information:
-    [Override the CLI Docker Compose file](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#override-the-cli-docker-compose-file)
-
-    For Windows:
-
-    As mentioned in the important notes above, Windows-based Azure CLI credentials cannot be used with Astronomer Runtime.
-    
-    You can use Azure CLI with Windows Subsystem Linux (WSL) by following the steps for Linux above.
-    If you have installed Azure CLI both in Windows and in WSL, make sure that the `~/.azure` folder does not point to the Windows folder. Redefine the `AZURE_CONFIG_DIR` environment variable if needed.
-
-3. Install Azure CLI inside Astronomer Runtime by updating the Dockerfile as follows:
+1. Add the following lines after the `FROM` line in your `Dockerfile` to install the Azure CLI inside your Astro Runtime image:
 
     ```dockerfile
-    FROM quay.io/astronomer/astro-runtime:6.0.4
+    # FROM ...
     USER root
     RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
     USER ASTRO
     ```
 
-4. Configure the AZURE_CONFIG_DIR environment variable:
-
-    Make sure that the path matches the file location mentioned in the Yaml override file above.
+2. Add the following environment variable to your `.env` file. Replace `<your-file-location>` with the file location you configured in `docker-compose.override.yml`
+   
     ```
-    AZURE_CONFIG_DIR=/home/astro/.azure
+    AZURE_CONFIG_DIR=<your-file-location>
     ```
 
-5. Optional - Configure your Custom Secret Backend
-    For custom Airflow Secret Backend Only
+When you run Airflow locally, all Azure connections without defined credentials now automatically fall back to your user credentials when connecting to Azure.
 
-    Follow the steps to configure an external secrets backend described here: https://docs.astronomer.io/astro/secrets-backend?tab=azure#setup
+## Step 3: Test your credentials with a secrets backend (Optional)
 
-    Make sure to configure the AIRFLOW__SECRETS__BACKEND_KWARGS environment variables as follows:
-    - Do not define `AZURE_CLIENT_ID`, `AZURE_TENANT_ID` or `AZURE_CLIENT_SECRET`.
+Now that Airflow has access to your user credentials, you can use them to connect to Azure services. Use the following example setup to test your credentials by pulling a variable from Azure Key Vault. 
 
-    Example:
-    
+1. Create a secret for an Airflow variable or connection in Azure Key Vault. All Airflow variables and connection keys must be prefixed with the following strings respectively:
+
+    - `airflow-variables`
+    - `airflow-connections`
+
+    When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
+
+2. In your Astro project, add the following line to Astro project `requirements.txt` file:
+
+    ```text
+    apache-airflow-providers-microsoft-azure
     ```
-    AZURE_CONFIG_DIR=/home/astro/.azure
+
+3. Add the following environment variables to your Astro projecct `.env` file: 
+  
+    ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.azure_key_vault.AzureKeyVaultBackend
     AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}
     ```
+
+    By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `"connections_prefix"` and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`.
+
+4. Run the following command to start Airflow locally:
+
+    ```sh
+    astro dev start
+    ```
+
+5. Access the Airflow UI at `localhost:8080` and create an Airflow Azure connection named `azure_standard` with no credentials. See [Connections](connections.md).
+
+   When you use this connection in your DAG, it will fall back to using your configured user credentials. 
+
+6. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve a value from `airflow/variables` and print it to the terminal:
+
+    ```python
+    from airflow import DAG
+    from airflow.hooks.base import BaseHook
+    from airflow.models import Variable
+    from airflow.operators.python import PythonOperator
+    from datetime import datetime
+    
+    def print_var():
+        my_var = Variable.get("<your-variable-key>")
+        print(f'My variable is: {my_var}')
+    
+        conn = BaseHook.get_connection(conn_id="azure_standard")
+        print(conn.get_uri())
+    
+    with DAG(
+        dag_id='example_secrets_dag',
+        start_date=datetime(2022, 1, 1),
+        schedule=None
+    ):
+    
+        test_task = PythonOperator(
+            task_id='test-task',
+            python_callable=print_var
+        )
+    ```
+
+7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
+8. View logs for your DAG run. If the connection was successful, the value of your secret appears in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
