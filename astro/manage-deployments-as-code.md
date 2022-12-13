@@ -49,7 +49,7 @@ deployment:
         - me@myorganization.com
         - me2@myorganization.com
 # not needed or used when creating/updating a deployment
-		metadata:
+	metadata:
         deployment_id: clbh5ybjz110732503e94m13z7
         workspace_id: cl0v1p6lc728255byzyfs7lw21
         cluster_id: cl8woz99j003j0t37fpux1nbd
