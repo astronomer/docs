@@ -15,7 +15,7 @@ You could create access keys for each user developing locally, but service accou
 After you complete this tutorial, you'll be able to: 
 
 - Pull your user credentials from AWS using the AWS CLI.
-- Mount your user credentials as a volume when starting Airflow locally.
+- Mount your user credentials as a volume when starting Airflow locally using the Astro CLI.
 - Authenticate to AWS through Airflow environment variables that are pulled from your mounted volume.
 - Test your credentials by pulling a secret from an AWS secrets backend.
 
@@ -51,7 +51,6 @@ The location of these files depends on your operating system:
 
 ## Step 2: Configure your Astro project
 
-
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount them as a volume in Docker.
 
 1. Run the following commands to create an Astro project:
@@ -62,7 +61,6 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
     ```
 
 2. Add a file named `docker-compose.override.yml` to your project with the following configuration: 
-
 
 <Tabs
     defaultValue="mac"
