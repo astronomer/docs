@@ -80,13 +80,13 @@ version: "3.1"
 services:
     scheduler:
         volumes:
-        - /Users/<username>/.azure:/home/astro/.azure
+        - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
     webserver:
         volumes:
-        - /Users/<username>/.azure:/home/astro/.azure
+        - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
     triggerer:
         volumes:
-        - /Users/<username>/.azure:/home/astro/.azure
+        - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
 ```
 
 </TabItem>
@@ -97,13 +97,13 @@ version: "3.1"
 services:
     scheduler:
         volumes:
-        - /home/<username>/.azure:/home/astro/.azure
+        - /home/<username>/.azure:/usr/local/airflow/.azure:ro
     webserver:
         volumes:
-        - /home/<username>/.azure:/home/astro/.azure
+        - /home/<username>/.azure:/usr/local/airflow/.azure:ro
     triggerer:
         volumes:
-        - /home/<username>/.azure:/home/astro/.azure
+        - /home/<username>/.azure:/usr/local/airflow/.azure:ro
 ```
 
 :::info 
@@ -128,10 +128,10 @@ If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.a
     USER ASTRO
     ```
 
-2. Add the following environment variable to your `.env` file. Replace `<your-file-location>` with the file location you configured in `docker-compose.override.yml`
+2. Add the following environment variable to your `.env` file. Make sure the file path is the same volume location you configured in `docker-compose.override.yml`
    
-    ```
-    AZURE_CONFIG_DIR=<your-file-location>
+    ```text
+    AZURE_CONFIG_DIR=/usr/local/airflow/.azure:ro
     ```
 
 When you run Airflow locally, all Azure connections without defined credentials now automatically fall back to your user credentials when connecting to Azure.
@@ -144,8 +144,6 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
     - `airflow-variables`
     - `airflow-connections`
-
-    When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
 
 2. In your Astro project, add the following line to Astro project `requirements.txt` file:
 
