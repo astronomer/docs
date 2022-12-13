@@ -92,7 +92,7 @@ For a given Workspace, the Workspace Editor has the same default permissions as 
 
 ### Workspace Admin
 
-For a given Workspace, the Workspace Editor has the same default permissions as the Workspace Viewer and Workspace Editor, plus:
+For a given Workspace, the Workspace Admin has the same default permissions as the Workspace Viewer and Workspace Editor, plus:
 
 - `workspace.invites.get`: View pending user invites for the Workspace
 - `workspace.config.delete`: Delete the Workspace
@@ -100,11 +100,11 @@ For a given Workspace, the Workspace Editor has the same default permissions as 
 - `workspace.teams.getAll`: View all users in Teams belonging to the Workspace
 - `workspace.users.getAll`: View all users in the Workspace
 
-In addition, Workspace Admins have Deployment Editor permissions for all Deployments within the Workspace.
+In addition, Workspace Admins have Deployment Admin permissions for all Deployments within the Workspace.
 
-## Workspace roles
+## Deployment roles
 
-Workspace roles apply to a single Deployment within a single Astronomer Software installation.
+Deployment roles apply to a single Deployment within a single Astronomer Software installation.
 
 ### Deployment Viewer
 
@@ -155,3 +155,6 @@ For a given Deployment, the Deployment Admin has the same default permissions as
 - `deployment.userRoles.update`: Update Deployment-level permissions for users within the Deployment
 - `deployment.teamRoles.update`: Update Deployment-level permissions for Teams within the Deployment
 
+### Root user
+
+A root user is assigned all available Astronomer Software permissions. There can only be one root user for each Software installation. See [Manage the root user](manage-root-user.md).

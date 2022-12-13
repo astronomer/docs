@@ -9,7 +9,7 @@ Astro CLI version 1.0+ delivers several new features to Astronomer Software and 
 
 Several commands and their flags have been updated as part of this release, resulting in breaking changes for users of Astronomer Software. Use this document to learn about these breaking changes and prepare for your upgrade to Astro CLI version 1.0+.
 
-This information applies only to users who are upgrading the Astro CLI from a pre-1.0 to a post-1.0 version. To install the latest version of the CLI for the first time, see [Install the CLI](install-cli.md).
+This information applies only to users who are upgrading the Astro CLI from a pre-1.0 to a post-1.0 version. To install the latest version of the CLI for the first time, see [Install the CLI](https://docs.astronomer.io/astro/cli/install-cli).
 
 ## Upgrade checklist
 
@@ -20,7 +20,7 @@ Before installing Astro CLI version 1.0+, complete all of the following steps:
 - Update any CI/CD pipelines or automated processes that use Astro CLI commands to ensure that these commands do not break after you upgrade.
 - Review any custom shortcuts in your local CLI terminal to ensure that your shortcuts do not run any CLI commands that are no longer supported.
 
-After you complete these steps, upgrade to Astro CLI version 1.0+ by following the instructions in [Install the CLI](install-cli.md).
+After you complete these steps, upgrade to Astro CLI version 1.0+ by following the instructions in [Install the CLI](https://docs.astronomer.io/astro/cli/install-cli).
 
 ## Features
 
@@ -46,7 +46,7 @@ For more complex testing, Astronomer recommends using `astro dev pytest` to run 
 
 This topic contains all information related to breaking changes included in Astro CLI version 1.0+ relative to version 0.28 and below.
 
-This topic does not include information about new features and changes that are not breaking. For a summary of all changes, see the [CLI release notes](cli-release-notes.md).
+This topic does not include information about new features and changes that are not breaking. For a summary of all changes, see the [CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
 ### Podman is not supported in version 1.0+
 
