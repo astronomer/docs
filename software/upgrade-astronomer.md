@@ -162,7 +162,7 @@ Make changes as needed and rerun the upgrade command from Step 7. Do not continu
 
 Each Software version is compatible only with specific versions of the Astro CLI. Ensure that all users in your organization are using the latest compatible version of the Astro CLI for your Software version. See [Version compatibility reference](version-compatibility-reference.md).
 
-For standard upgrade steps, see [Upgrade the CLI](install-cli.md#upgrade-the-cli). To upgrade from a pre-1.0 version of the CLI to version 1.0+, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
+For standard upgrade steps, see [Upgrade the CLI](https://docs.astronomer.io/astro/cli/install-cli#upgrade-the-cli). To upgrade from a pre-1.0 version of the CLI to version 1.0+, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
 
 ## Upgrade considerations
 
@@ -181,6 +181,25 @@ If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at 
     kubectl exec -it `kubectl get pods -l component=houston --no-headers -n <deployment-namespace>` -n <deployment-namespace> -- yarn run upgrade-deployments
     ```
 3. Upgrade Kubernetes to version 1.22.
+
+### Upgrade to Astronomer Software 0.31
+
+#### New default resource limits and requests 
+
+Astronomer Software 0.31 includes new default resource limits and requests on the following resources: 
+
+- Alertmanager
+- Elasticsearch
+- NATS
+- PostrgeSQL
+- STAN
+- Nginx
+- Grafana
+- Blackbox exporter
+
+You might experience OOMKill errors or unexpected behavior after upgrading if you use resources beyond the new default limits. To minimize disruption, view resource usage for these components in [Grafana](grafana-metrics.md) prior to upgrade and compare this usage to the default resource limits in the [Astronomer Helm chart](https://github.com/astronomer/astronomer/blob/v0.31.0/charts/astronomer/values.yaml).
+
+If your current usage is expected and higher than the default resource limits, update the limits in your `config.yaml` file prior to upgrading to Astronomer Software 0.31.
 
 ### Upgrade to Astronomer Software 0.30
 

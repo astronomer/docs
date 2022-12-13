@@ -9,6 +9,8 @@ Astronomer Software allows you to adjust permissions for each user role and defi
 
 Use this guide to learn about customizing user signups and user roles, as well as how to use Astronomer Software system-level permissions. For a list of the default permissions for each role, see [User roles and permissions](role-permission-reference.md).
 
+To learn more about managing users through your identity provider (IdP), see [Import IdP groups](import-idp-groups.md).
+
 ## Add users to Astronomer
 
 When Astronomer Software is first deployed, the first user to log in is granted "System Admin" permissions by default. From there, a user is created on Astronomer Software by any of the following:
@@ -18,7 +20,7 @@ When Astronomer Software is first deployed, the first user to log in is granted 
 - Signing up via the Software UI without an invitation (requires "Public Signups")
 - Imported to Astronomer through an [IdP group](import-idp-groups.md)
 
-On Astronomer, administrators have the option to either open the platform to public signups or limit account creation to users invited by others.
+As a System Admin, you can open the platform to public signups, limit account creation to users invited by others, or make it so that users can only join the platform as part of an [IdP-based Team](import-idp-groups.md).
 
 > **Note:** New users appear under a System Admin's **Users** tab only after the new user has successfully logged in for the first time.
 
@@ -26,7 +28,7 @@ On Astronomer, administrators have the option to either open the platform to pub
 
 ### Enable public signups
 
-As noted above, public signups allow any user with access to the platform URL (the Software UI) to create an account. If public signups are disabled, users that try to access Astronomer without an invitation from another user will be met with an error.
+Public signups allow any user with access to your base domain to create an account. If public signups are disabled, users that try to access Astronomer without an invitation from another user will be met with an error.
 
 In cases where SMTP credentials are difficult to acquire, enabling this flag might facilitate initial setup, as disabling public signups requires that a user accept an email invitation. Public signups are a configuration available in Astronomer's Houston API and can be enabled in the `config.yaml` file of your Helm chart.
 
@@ -80,8 +82,7 @@ In addition to the commonly used System Admin role, the Astronomer platform also
 
 No user is assigned the System Editor or Viewer Roles by default, but they can be added by System Admins via our API. Once assigned, System Viewers, for example, can access both Grafana and Kibana but don't have permission to delete a Workspace they're not a part of.
 
-You can customize all three Astronomer Software permission sets to meet your specific requirements. For more information about the default configurations attached to the System Admin, Editor and Viewer Roles, see the [Houston API source code](https://github.com/astronomer/docs/tree/main/software_configs/0.30/default.yaml).
-
+You can customize all three Astronomer Software permission sets to meet your specific requirements. For more information about the default configurations attached to the System Admin, Editor and Viewer Roles, see the [Houston API source code](https://github.com/astronomer/docs/tree/main/software_configs/0.31/default.yaml).
 
 ### Assign users System Admin roles
 
@@ -104,7 +105,7 @@ To verify a user was successfully granted the SysAdmin role, ensure they can do 
 
 ## User roles on Astronomer
 
-Administrators can customize permissions across teams. On Astronomer Software, users can be assigned roles at three levels:
+Administrators can customize permissions across your installation. On Astronomer Software, users can be assigned roles at three levels:
 
 - Deployment Level (Viewer, Editor, Admin)
 - Workspace Level (Viewer, Editor, Admin)
@@ -140,7 +141,7 @@ There are several chains of inheritance in the Software RBAC system. In the foll
 
 <!--- Version-specific -->
 
-Review the default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.30/default.yaml) and determine the following:
+Review the default roles and permissions in the [default Houston API configuration](https://github.com/astronomer/docs/tree/main/software_configs/0.31/default.yaml) and determine the following:
 
 - What role you want to configure. For example, `DEPLOYMENT_EDITOR`.
 - What permission(s) you want to add or remove from the role, For example, `deployment.images.push`.
@@ -179,7 +180,7 @@ Push the configuration change to your platform. See [Apply a config change](appl
 
 ### Example customization: Limit Workspace creation
 
-Unless otherwise configured, a user who creates a Workspace on Astronomer Software is automatically granted the `WORKSPACE_ADMIN` role and can create an unlimited number of Airflow Deployments within that Workspace. For teams looking to more strictly control resources, Astronomer Software supports limiting the Workspace creation function through the `USER` role.
+Unless otherwise configured, a user who creates a Workspace on Astronomer Software is automatically granted the `WORKSPACE_ADMIN` role and can create an unlimited number of Airflow Deployments within that Workspace. For organizations looking to more strictly control resources, Astronomer Software supports limiting the Workspace creation function through the `USER` role.
 
 Astronomer Software includes a `USER` role that is synthetically bound to _all_ users within a single cluster. By default, this role includes the `system.workspace.create` permission.
 

@@ -11,7 +11,13 @@ id: what-is-a-sensor
 
 [Apache Airflow sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) are a special kind of operator that are designed to wait for something to happen. When sensors run, they check to see if a certain condition is met before they are marked successful and let their downstream tasks execute. When used properly, they can be a great tool for making your DAGs more event driven.
 
-In this guide, you'll learn how sensors are used in Airflow, best practices for implementing sensors in production, and how to use deferrable versions of sensors. For more information about implementing sensors, see the video [Create Powerful Data Pipelines by Mastering Sensors](https://www.astronomer.io/events/webinars/creating-data-pipelines-using-master-sensors/).
+In this guide, you'll learn how sensors are used in Airflow, best practices for implementing sensors in production, and how to use deferrable versions of sensors.
+
+:::info
+
+Sensors are one of several options to schedule your DAGs in an event-based manner. Learn more about sensors and how they compare to other Airflow features in [Video: Implementing Event-Based DAGs with Airflow](https://airflowsummit.org/sessions/2022/implementing-event-based-dags-with-airflow/). 
+
+:::
 
 ## Assumed knowledge
 

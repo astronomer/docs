@@ -112,7 +112,7 @@ To provide a basic demonstration of an ETL pipeline, this DAG creates an example
 
 After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG start to populate with data.
 
-    ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
+![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
 
 These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
 

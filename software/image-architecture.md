@@ -7,7 +7,7 @@ description: Reference documentation for Astronomer Certified, Astronomer Softwa
 
 :::caution
 
-Astronomer will no longer release new versions of AC starting with the release of Apache Airflow 2.6. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
+Astronomer will no longer release new versions of AC starting with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
 
 :::
 

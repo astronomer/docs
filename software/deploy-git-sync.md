@@ -5,13 +5,9 @@ id: deploy-git-sync
 description: Push DAGs to your Airflow Deployment on Astronomer Software using git-sync.
 ---
 
-Starting with Astronomer v0.27, you can deploy DAGs to an Astronomer Deployment using [git-sync](https://github.com/kubernetes/git-sync). After setting up this feature, you can deploy DAGs from a Git repository without any additional CI/CD. DAGs deployed via git-sync automatically appear in the Airflow UI without requiring additional action or causing downtime.
+Starting with Astronomer v0.27, you can deploy DAGs to an Astronomer Deployment using [git-sync](https://github.com/kubernetes/git-sync). After setting up this feature, you can deploy DAGs from a Git repository without any additional CI/CD. DAGs deployed with git-sync automatically appear in the Airflow UI without requiring additional action or causing downtime.
 
 This guide provides setup steps for configuring git-sync as a DAG deploy option.
-
-:::warning
-This is currently an experimental feature because it relies on very frequent syncs with remote Git servers. If you have conservative rate limits on your Git repos, then we do not recommend using this feature until a more stable git-sync architecture has been implemented. For more information, reach out to [Astronomer support](https://support.astronomer.io/).
-:::
 
 ## Prerequisites
 
@@ -41,7 +37,7 @@ astronomer:
 
 The Git repo you want to sync should contain a directory of DAGs that you want to deploy to Astronomer. You can include additional files in the repo, such as your other Astro project files, but note that this might affect performance when deploying new changes to DAGs.
 
-If you want to deploy DAGs via a private Git repo, you additionally need to configure SSH so that your Astronomer Deployment can access the contents of the repo. This process varies slightly between Git repository management tools. For an example of this configuration, read GitLab's [SSH Key](https://docs.gitlab.com/ee/ssh/) documentation.
+If you want to deploy DAGs with a private Git repo, you additionally need to configure SSH so that your Astronomer Deployment can access the contents of the repo. This process varies slightly between Git repository management tools. For an example of this configuration, read GitLab's [SSH Key](https://docs.gitlab.com/ee/ssh/) documentation.
 
 ## Configure your Astronomer Deployment
 
@@ -54,13 +50,13 @@ Workspace editors can configure a new or existing Airflow Deployment to use a gi
 
     - **Repository URL**: The URL for the Git repository that hosts your Astro project
     - **Branch Name**: The name of the Git branch that you want to sync with your Deployment
-    - **Sync Interval**: The time interval between checks for updates in your Git repository, in seconds. A sync is only performed when an update is detected. We recommend a 1 second interval
+    - **Sync Interval**: The time interval between checks for updates in your Git repository, in seconds. A sync is only performed when an update is detected. Astronomer recommends a minimum  interval of 60 seconds.
     - **DAGs Directory:** The directory in your Git repository that hosts your DAGs. Specify the directory's path as relative to the repository's root directory. To use your root directory as your DAGs directory, specify this value as `./`. Other changes outside the DAGs directory in your Git repository must be deployed using `astro deploy`
     - **Rev**: The commit reference of the branch that you want to sync with your Deployment
     - **Ssh Key**: The SSH private key for your Git repository
     - **Known Hosts**: The public key for your Git provider, which can be retrieved using `ssh-keyscan -t rsa <provider-domain>`. For an example of how to retrieve GitHub's public key, refer to [Apache Airflow documentation](https://airflow.apache.org/docs/helm-chart/stable/production-guide.html#production-guide-knownhosts).
-    - **Ephemeral Storage Overwrite Gigabytes**: The storage limit for your Git repository. If your Git repo is larger than 2GB, we recommend setting this slider to your repo size + 1 Gi
-    - **Sync Timeout**: The maximum amount of seconds allowed for a sync. We recommend increasing this value if your repo is larger than 1GB
+    - **Ephemeral Storage Overwrite Gigabytes**: The storage limit for your Git repository. If your Git repo is larger than 2GB, Astronomer recommends setting this slider to your repo size + 1 Gi
+    - **Sync Timeout**: The maximum amount of seconds allowed for a sync. Astronomer recommends increasing this value if your repo is larger than 1GB
 
 5. Save your changes.
 

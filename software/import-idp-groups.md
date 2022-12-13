@@ -73,3 +73,19 @@ By default, Astronomer assumes that the name of your group claim is `groups`. If
 After configuring your IdP group, at least one user belonging to the group has to log in to Software before the group appears as a Team in the Software UI. To quickly import many groups at once, add a user to all groups and then log in to Astronomer Software UI with the user's credentials.
 
 After configuring and importing user groups, Workspace Admins and Deployment Admins can configure those groups as Teams using the Astronomer Software UI. To learn more about adding and setting permissions for Teams in the Astronomer Software UI, see [User Permissions](workspace-permissions.md#via-teams).
+
+## Disable individual user management 
+
+To use Teams as the only user management system on Astronomer Software, add the following entry to your `config.yaml` file:
+
+```yaml
+astronomer: 
+  houston:
+    config:
+      userManagement:
+        enabled: false
+```
+
+Save this configuration and push it to your platform. See [Apply a Platform Config Change](apply-platform-config.md).
+
+After you apply the configuration, individual users can't be invited or assigned Workspace or Deployment-level roles in Astronomer Software. Users must be invited through a Team by a System Admin, and only Teams can be assigned roles for Workspaces and Deployments. You can still create individual service accounts with Workspace and Deployment permissions. 
