@@ -28,7 +28,8 @@ Using these credentials allows you to access information from your AWS cloud, li
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
 - Optional. Access to a secrets backend hosted on AWS, such as AWS Secrets Manager or AWS Parameter Store
 
-Step 1:  Retrieve AWS user credentials locally
+## Step 1:  Retrieve AWS user credentials locally
+
 
 Run the following command to obtain your user credentials locally:
     
