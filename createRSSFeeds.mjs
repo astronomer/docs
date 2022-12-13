@@ -1,15 +1,60 @@
 import fs from "fs-extra";
 import xml from "xml";
+import { JSDOM } from 'jsdom';
+import MarkdownIt from 'markdown-it'
+const md = new MarkdownIt();
 
-const posts = [
-  {
-    title: "December 6, 2022",
-    slug: "#December 6, 2022".toLowerCase().replace(/ /g, '-').replace(',', ''),
-    content: "<h3 class=\"anchor anchorWithStickyNavbar_LWe7\" id=\"additional-improvements\">Additional improvements<a class=\"hash-link\" href=\"#additional-improvements\" title=\"Direct link to heading\">​</a></h3><ul class=\"\"><li>The maximum possible <strong>Worker Count</strong> for worker queues has been increased from 30 to 100.</li></ul>"
+
+// Get all the markdown files for release notes
+let astro = await fs.readFile('./astro/release-notes.md', 'utf8');
+let astroRuntime = await fs.readFile('./astro/runtime-release-notes.md', 'utf8');
+let astroCLI = await fs.readFile('./astro/cli/release-notes.md', 'utf8');
+let software = await fs.readFile('./software/release-notes.md', 'utf8');
+let softwareRuntime = await fs.readFile('./software/runtime-release-notes.md', 'utf8');
+
+
+// function to get all elements between two elements
+function nextUntil(elem, selector, filter) {
+  let siblings = [];
+  elem = elem.nextElementSibling;
+  while (elem) {
+    if (elem.matches(selector)) break;
+    if (filter && !elem.matches(filter)) {
+      elem = elem.nextElementSibling;
+      continue;
+    }
+    siblings.push(elem);
+    elem = elem.nextElementSibling;
   }
-];
+  return siblings;
+};
 
-async function createRssFeed(websiteURL, feedTitle, feedDescription, feedPageURL, posts) {
+// this function takes a markdown file imported above, renders to markdown,
+// then parses that markdown for the "posts" for our release notes
+function getPosts(content) {
+  // take md file and use JSDOM to get an HTML fragment we can work with
+  const contentRender = JSDOM.fragment(md.render(content));
+
+  // get all of the h2s which are also our post titles
+  const H2s = [...contentRender.querySelectorAll("h2")];
+
+  // empty array to stick our posts in
+  let posts = [];
+
+  // for each h2 create post with title, slug,
+  // and get all the content between this h2 until the next h2
+  H2s.map((h2) => {
+    const post = {
+      "title": h2.textContent,
+      "slug": h2.textContent.toLowerCase().replace(/ /g, '-').replace(',', ''),
+      "content": `${nextUntil(h2, 'h2')}`
+    };
+    posts.push(post);
+  })
+  return posts;
+}
+
+async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
   function buildFeed(posts, pageURL) {
     const feedItems = [];
     posts.map((post) => {
@@ -31,10 +76,13 @@ async function createRssFeed(websiteURL, feedTitle, feedDescription, feedPageURL
     return feedItems;
   }
 
+  const posts = getPosts(content);
+
+  const websiteURL = "https://docs.astronomer.io/";
   const feedSlug = feedTitle.replace(/ /g, "-",).toLowerCase();
   const feedRSSLink = websiteURL + feedSlug + '.rss';
 
-  console.log("Creating XML files for RSS feeds 📡");
+  console.log(`📡 Creating XML file for ${feedTitle} RSS feed`);
 
   const feedObject = {
     rss: [
@@ -71,14 +119,15 @@ async function createRssFeed(websiteURL, feedTitle, feedDescription, feedPageURL
 
   const feed = '<?xml version="1.0" encoding="UTF-8"?>' + xml(feedObject);
 
-  await fs.writeFile("./static/feed.rss", feed, "utf8");
+  await fs.writeFile(`./static/${feedTitle.toLowerCase().replace(/ /g, '-').replace(',', '')}.rss`, feed, "utf8");
 };
 
-let astroReleaseNotes = '';
-fs.readFile('./astro/release-notes.md', 'utf8', (err, data) => {
-  astroReleaseNotes = data;
-});
+createRssFeed("Astro Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.", "https://docs.astronomer.io/astro/release-notes", astro);
 
-console.log(astroReleaseNotes)
+createRssFeed("Astro Runtime Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Runtime.", "https://docs.astronomer.io/astro/runtime-release-notes", astroRuntime);
 
-createRssFeed("https://docs.astronomer.io/", "Astro Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.", "https://docs.astronomer.io/astro/release-notes", posts)
+createRssFeed("Astro CLI Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro CLI.", "https://docs.astronomer.io/astro/cli/release-notes", astroCLI);
+
+createRssFeed("Astro Software Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Software.", "https://docs.astronomer.io/software/release-notes", software);
+
+createRssFeed("Astro Software Runtime Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro Software.", "https://docs.astronomer.io/software/runtime-release-notes", softwareRuntime);
