@@ -139,7 +139,7 @@ There are a few things to consider when using the task group decorator:
 
 ## Generate task groups dynamically at runtime
 
-In Airflow 2.5 the possibility to use [dynamic task mapping](dynamic-tasks.md) syntax with the `@task_group` decorator was added. An implementation is shown in the DAG below.
+As of Airflow 2.5, you can use [dynamic task mapping](dynamic-tasks.md) syntax with the `@task_group` decorator to dynamically map over task groups. An implementation is shown in the DAG below.
 
 ```python
 from airflow import DAG
@@ -191,81 +191,9 @@ with DAG(
     tg1_object >> pull_xcom()
 ```
 
-This DAG dynamically maps over the task group `group1` with different inputs for the `my_num` parameter. 6 mapped task group instances are created, one for each input. Within each mapped task group instance two tasks will run using that instances' value for `my_num` as an input. The `pull_xcom()` task downstream of the dynamically mapped task group shows how to access a specific [XCom](airflow-passing-data-between-tasks.md) value from a list of mapped task group instances (`map_indexes`). 
+This DAG dynamically maps over the task group `group1` with different inputs for the `my_num` parameter. 6 mapped task group instances are created, one for each input. Within each mapped task group instance two tasks will run using that instances' value for `my_num` as an input. The `pull_xcom()` task downstream of the dynamically mapped task group shows how to access a specific [XCom](airflow-passing-data-between-tasks.md) value from a list of mapped task group instances (`map_indexes`).
 
-It is also possible to dynamically map a task group over several input parameters. Analogous to dynamically mapped tasks there are 3 methods to map over multiple parameters. 
-
-- **Cross-product**: Mapping over two or more keyword arguments results in a mapped task group instance for each possible combination of inputs. This type of mapping uses the `expand()` function. 
-- **Zip**: Mapping over a set of positional arguments created with Python's built-in `zip()` function or with the `.zip()` method of an XComArg results in one mapped task for every set of positional arguments. Each set of positional arguments is passed to the same keyword argument of the operator. This type of mapping uses the `expand()` function.
-- **Sets of keyword arguments**: Mapping over two or more sets of one or more keyword arguments results in a mapped task group instance for every defined set. These keyword arguments must be valid parameters of the TaskGroup class ([source code](https://github.com/apache/airflow/blob/main/airflow/utils/task_group.py)). This type of mapping uses the `expand_kwargs()` function and is less relevant for task group mapping than for dynamic task mapping. You cannot use `expand_kwargs()` to map over arguments passed to the task group function.
-
-Learn more in the [section on mapping over multiple parameters](dynamic-tasks.md#mapping-over-multiple-parameters) of the Create dynamic Airflow tasks guide.
-
-The code examples below shows how to dynamically map over a task group with multiple input parameters. The task group `group2` will be mapped 6 times, once for each possible combination to the inputs to `num_1` and `num_2`, a cross-product.
-
-```python
-@task_group(
-    group_id="group2",
-)
-def tg2(num_1, num_2):
-
-    @task
-    def multiply(num_1, num_2):
-        return num_1 * num_2
-    
-    multiply(num_1, num_2)
-
-# creating 2x3=6 mapped task instances of the task group group2 (2.5 feature)
-tg2_object = tg2.expand(num_1=[1, 2], num_2=[3, 4, 5])
-```
-
-Like tasks, task groups can also be mapped over zipped inputs. The code below shows the task group `group3` being mapped over zipped XComArgs. The `numbers` parameter of the task group receives a ZipXComArg object containing a list of three 2-tuples: `[(1, 3), (2, 4), (3, 5)]`. One mapped task group instance is created for each tuple.
-
-```python
-@task
-def num_list_1():
-    return [1, 2, 3]
-
-@task
-def num_list_2():
-    return [3, 4, 5]
-
-@task_group(
-    group_id="group3",
-)
-def tg3(numbers):
-
-    @task
-    def multiply(numbers):
-        return numbers[0] * numbers[1]
-    
-    multiply(numbers)
-
-# creating 3 mapped task instances of the task group group3 (2.5 feature)
-tg3_object = tg3.expand(
-    numbers=num_list_1().zip(num_list_2())
-)
-```
-
-## Generate task groups within a loop
-
-Task groups can be generated in loops to make use of patterns within your code. This is useful when the number of task groups you want to generate is static, for example if you need one task group running the same tasks on data retrieved from different APIs in an ETL DAG and the list of APIs is static.
-In the Airflow UI task groups generated within a loop are indistinguisheable from task groups that were defined outside of a loop. 
-
-In the following code, iteration is used to create multiple task groups. While the tasks and dependencies remain the same across task groups, you can change which parameters are passed in to each task group based on the `group_id`:
-
-```python
-for g_id in range(1,3):
-    with TaskGroup(group_id=f'group{g_id}') as tg1:
-        t1 = EmptyOperator(task_id='task1')
-        t2 = EmptyOperator(task_id='task2')
-
-        t1 >> t2
-```
-
-The following image shows the expanded view of the task groups in the Airflow UI:
-
-![Looped task group](/img/guides/looped_task_groups.png)
+For more information on dynamic task mapping, including how to map over multiple parameters, see [Dynamic Tasks](dynamic-tasks.md).
 
 ## Order task groups
 

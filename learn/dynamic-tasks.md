@@ -7,7 +7,7 @@ id: dynamic-tasks
 
 With the release of [Airflow 2.3](https://airflow.apache.org/blog/airflow-2.3.0/), you can write DAGs that dynamically generate parallel tasks at runtime. This feature, known as dynamic task mapping, is a paradigm shift for DAG design in Airflow.
 
-Prior to Airflow 2.3, tasks could only be generated dynamically at the time that the DAG was parsed, meaning you had to change your DAG code if you needed to adjust tasks based on some external factor. With dynamic task mapping, you can easily write DAGs that create tasks based on your current runtime environment. In Airflow 2.5 the possibility to [dynamically map over task groups](task-groups.md#generate-task-groups-dynamically-at-runtime) was added.
+Prior to Airflow 2.3, tasks could only be generated dynamically at the time that the DAG was parsed, meaning you had to change your DAG code if you needed to adjust tasks based on some external factor. With dynamic task mapping, you can easily write DAGs that create tasks based on your current runtime environment.
 
 In this guide, you'll learn about dynamic task mapping and complete an example implementation for a common use case.
 
@@ -243,7 +243,6 @@ The task `t1` will have three mapped task instances printing their results into 
 
 In Airflow 2.4 and later you can provide sets of positional arguments to the same keyword argument. For example, the `op_args` argument of the PythonOperator. You can use the built-in [`zip()`](https://docs.python.org/3/library/functions.html#zip) Python function if your inputs are in the form of iterables such as tuples, dictionaries, or lists. If your inputs come from XCom objects, you can use the `.zip()` method of the `XComArg` object.
 
-
 #### Provide positional arguments with the built-in Python `zip()`
 
 The `zip()` function takes in an arbitrary number of iterables and uses their elements to create a zip-object containing tuples. There will be as many tuples as there are elements in the shortest iterable. Each tuple contains one element from every iterable provided. For example:
@@ -319,6 +318,33 @@ The add_nums task will have three mapped instances with the following results:
 - Map index 0: `111` (1+10+100)
 - Map index 1: `1202` (2+1000+200)
 - Map index 2: `2300` (1000+1000+300)
+
+## Mapping over task groups
+
+As of Airflow 2.5, you can dynamically map over a task group that uses the `@task_group` decorator. The syntax for dynamically mapping over a task group is the same as dynamically mapping over a single task.
+
+```python
+    # creating a task group using the decorator with the dynamic input my_num
+    @task_group(
+        group_id="group1"
+    )
+    def tg1(my_num):
+
+        @task
+        def print_num(num):
+            return num
+        
+        @task
+        def add_42(num):
+            return num + 42
+        
+        print_num(my_num) >> add_42(my_num)
+
+    # creating 6 mapped task group instances of the task group group1
+    tg1_object = tg1.expand(my_num=[19, 23, 42, 8, 7, 108])
+```
+
+You can also dynamically map over multiple task group input parameters in the same manner as you would in regular tasks using a cross-product, `zip` function, or sets of keyword arguments. For more on this, see the [Mapping over multiple parameters](#mapping-over-multiple-parameters) section.
 
 ## Transform outputs with .map
 
