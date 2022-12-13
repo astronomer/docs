@@ -9,6 +9,12 @@ id: release-notes
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
 </head>
 
+<p>
+    <a href="/astro-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
+
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).

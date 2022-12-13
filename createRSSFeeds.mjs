@@ -82,7 +82,7 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
   const feedSlug = feedTitle.replace(/ /g, "-",).toLowerCase();
   const feedRSSLink = websiteURL + feedSlug + '.rss';
 
-  console.log(`📡 Creating XML file for ${feedTitle} RSS feed`);
+  console.log(`📡 Creating ${feedTitle} RSS feed`);
 
   const feedObject = {
     rss: [
@@ -119,7 +119,7 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
 
   const feed = '<?xml version="1.0" encoding="UTF-8"?>' + xml(feedObject);
 
-  await fs.writeFile(`./static/${feedTitle.toLowerCase().replace(/ /g, '-').replace(',', '')}.rss`, feed, "utf8");
+  await fs.writeFile(`./static/${feedTitle.toLowerCase().replace(/ /g, '-').replace(',', '')}.xml`, feed, "utf8");
 };
 
 createRssFeed("Astro Release Notes", "Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.", "https://docs.astronomer.io/astro/release-notes", astro);
