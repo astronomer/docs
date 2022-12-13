@@ -80,7 +80,7 @@ Now that you have a staging table in Snowflake and some example data ready to lo
     export AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True
     ```
 
-    To allow XCOM data to be saved to a S3 or GCS location, Astronomer recommends using `AIRFLOW__CORE__XCOM_BACKEND`, `AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID`, and `AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL` in production environments. For example:
+    Setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING` to `True` is not recommended in production environments (See [here](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#enable-xcom-pickling)) and should be avoided. Instead, Astronomer recommends using `AIRFLOW__CORE__XCOM_BACKEND`, `AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID`, and `AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL` to allow XCOM data to be saved to a S3 or GCS location. For example:
 
     ```text
     export AIRFLOW__CORE__XCOM_BACKEND=astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend
