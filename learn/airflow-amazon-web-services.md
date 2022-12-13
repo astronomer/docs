@@ -49,7 +49,7 @@ The location of these files depends on your operating system:
 - Mac: `/Users/<username>/.aws`
 - Windows: `%UserProfile%/.aws`
 
-## Step 2: Configure your Airflow project
+## Step 2: Configure your Astro project
 
 
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount them as a volume in Docker.
@@ -66,7 +66,8 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
 
 <Tabs
     defaultValue="mac"
-    groupId= "configure-your-airflow-project"
+    groupId= "step-2-configure-your-astro-project"
+
     values={[
         {label: 'Mac', value: 'mac'},
         {label: 'Linux', value: 'linux'},
