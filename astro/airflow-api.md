@@ -29,7 +29,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 
 Calling the Airflow REST API for a Deployment requires:
 
-- A Deployment API key. See [Deployment API keys](api-keys.md).
+- An Astro access token.
 - A Deployment URL.
 
 ### Retrieve an access token
