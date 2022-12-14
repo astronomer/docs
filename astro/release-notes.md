@@ -48,7 +48,6 @@ You can now configure worker queues with the following `n2` node types on GCP:
 - You can now see your Deployment's **ID** in the **Deployments** menu and on the Deployment information screen in the Cloud UI. A Deployment ID is required for deploying code using CI/CD.
 - You can now access your Organization's **OpenLineage URL** from the **Settings** page of the CLoud UI.
 - Workspaces are now sorted alphabetically in the Cloud UI.
-- [Potential release note for custom Kubernetes tags on clusters]
 - You can now trigger DAG-only deploys from multiple different sources, such as a local directory or a GitHub repo, to a single Deployment.
 
 ### Bug fixes 
