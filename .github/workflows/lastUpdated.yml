@@ -26,3 +26,4 @@ jobs:
         SOURCE_DIR: 'metrics' 
     - name: Removing unnecessary files
       run: rm -r ./github/metrics
+      shell: bash
