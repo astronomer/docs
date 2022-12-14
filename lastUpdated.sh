@@ -26,7 +26,8 @@ function main {
         FILTER='tee'
     fi
 
-    ack_file_info $format | clean_input | sort_cleaned_input $reverse | clean_output | commit
+    ack_file_info $format | clean_input | sort_cleaned_input $reverse | clean_output 
+    commit
 }
 
 # Use ack's -f flag to just list files. We could use pretty much anything here,
@@ -59,6 +60,7 @@ function sort_cleaned_input {
 # Trim commit timestamps from output
 function clean_output {
     cut -f 2- >> .github/metrics/log.csv
+    sleep 1m
 }
 
 function commit {
