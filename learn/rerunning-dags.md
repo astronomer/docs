@@ -58,6 +58,16 @@ To clear a full DAG run, go to the Tree View in the Airflow UI and then click **
 
 ![Clear DAG Status](/img/guides/clear_dag_ui.png)
 
+### Add notes to cleared tasks and DAGs
+
+As of Airflow 2.5, you can manually add notes to task instances and DAG runs from the Grid View in the Airflow UI. 
+
+![Add task note](/img/guides/2_5_task_notes.png)
+
+Task instances and DAG runs with notes are indicated with a grey corner in the Grid View. 
+
+This feature is useful for tracking and maintaining visibility of manual changes made to task instances such as rerunning or changing the task status. We recommend utilizing this feature any time task or DAG statuses are altered.
+
 ### Clear all tasks
 
 1. In the Airflow UI, go to **Browse** > **Task Instances**. 
