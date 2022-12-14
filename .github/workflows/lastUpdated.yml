@@ -1,6 +1,5 @@
 name: Docs Freshness
-on:
-  workflow_dispatch:
+on: [workflow_dispatch]
 
 jobs:
   exportmetrics:
