@@ -208,7 +208,7 @@ By default, the Airflow scheduler scans the `dags` directory of your Astro proje
 
 To have the scheduler check for new DAGs more frequently, you can set the [`AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) environment variable to less than 300 seconds. If you have less than 200 DAGs in a Deployment, it's safe to set `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` to `30` (30 seconds). See [Environment variables](environment-variables.md).
 
-In Airflow 2.5 and later, a **Parsed at** value was added to the DAG **Code** page to show when a DAG was last parsed. Knowing this value can help you determine when a DAG was last checked for syntax or import errors that might prevent it from successfully rendering in the Airflow UI. To view the **Parsed at** value in the Airflow UI, click **DAGs**, select a DAG, and then click **Code**. The **Parsed at** value appears at the top of the DAG code window.
+In Airflow 2.5 and later, a **Parsed at** value was added to the Airflow UI DAG **Code** page to show when a DAG was last parsed. Knowing this value can help you determine when a DAG was last checked for syntax or import errors that might prevent it from successfully rendering in the Airflow UI. To view the **Parsed at** value in the Airflow UI, click **DAGs**, select a DAG, and then click **Code**. The **Parsed at** value appears at the top of the DAG code window.
 
 ### DAGs are running slowly
 
