@@ -26,16 +26,14 @@ function main {
         FILTER='tee'
     fi
 
-    ack_file_info $format | clean_input | sort_cleaned_input $reverse | clean_output
+    ack_file_info $format | clean_input | sort_cleaned_input $reverse | clean_output | commit
 }
 
 # Use ack's -f flag to just list files. We could use pretty much anything here,
 # but I'm tempted to allow passing args to ack later
 function ack_file_info {
     local format="$1"
-    echo "Entered file creation"
-    echo commit, age, hash, filename > .github/metrics/log.csv
-    echo "A file should exist"
+    echo commit, age, hash, filename > .github/metrics/log.csv 
     ack -g '^(astro|software/)' -t markdown |\
     $FILTER |\
     xargs -I § git log -1 --pretty="format:%ct,${format},%h,§;" §
@@ -61,6 +59,14 @@ function sort_cleaned_input {
 # Trim commit timestamps from output
 function clean_output {
     cut -f 2- >> .github/metrics/log.csv
+}
+
+function commit {
+    git add .
+    git config --global user.name "jwitz"
+    git config --global user.email "jwitz@astronomer.io"
+    git commit -a -m "Load metrics"
+    git push
 }
 
 main "$@"
