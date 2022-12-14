@@ -7,6 +7,8 @@ jobs:
     steps:
     - uses: actions/checkout@master
       name: Checkout repo
+    - name: Install ack
+      run: sudo apt-get install ack
     - name: Run build script
       run: chmod +x lastUpdated.sh
       shell: bash
