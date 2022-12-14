@@ -25,5 +25,4 @@ jobs:
         AWS_REGION: 'eu-west-2' 
         SOURCE_DIR: 'metrics' 
     - name: Removing unnecessary files
-        run: |
-          rm -r ./github/metrics
+      run: rm -r ./github/metrics
