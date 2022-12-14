@@ -33,9 +33,9 @@ function main {
 # but I'm tempted to allow passing args to ack later
 function ack_file_info {
     local format="$1"
-
+    echo "Entered file creation"
     echo commit, age, hash, filename > .github/metrics/log.csv
-
+    echo "A file should exist"
     ack -g '^(astro|software/)' -t markdown |\
     $FILTER |\
     xargs -I § git log -1 --pretty="format:%ct,${format},%h,§;" §
