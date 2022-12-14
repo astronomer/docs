@@ -344,7 +344,7 @@ As of Airflow 2.5, you can dynamically map over a task group that uses the `@tas
     tg1_object = tg1.expand(my_num=[19, 23, 42, 8, 7, 108])
 ```
 
-You can also dynamically map over multiple task group input parameters in the same manner as you would in regular tasks using a cross-product, `zip` function, or sets of keyword arguments. For more on this, see the [Mapping over multiple parameters](#mapping-over-multiple-parameters) section.
+You can also dynamically map over multiple task group input parameters as you would for regular tasks using a cross-product, `zip` function, or sets of keyword arguments. For more on this, see [Mapping over multiple parameters](#mapping-over-multiple-parameters).
 
 ## Transform outputs with .map
 

@@ -139,7 +139,7 @@ There are a few things to consider when using the task group decorator:
 
 ## Generate task groups dynamically at runtime
 
-As of Airflow 2.5, you can use [dynamic task mapping](dynamic-tasks.md) syntax with the `@task_group` decorator to dynamically map over task groups. An implementation is shown in the DAG below.
+As of Airflow 2.5, you can use [dynamic task mapping](dynamic-tasks.md) with the `@task_group` decorator to dynamically map over task groups. The following DAG shows how you can dynamically maps over a task group with different inputs for a given parameter.
 
 ```python
 from airflow import DAG
