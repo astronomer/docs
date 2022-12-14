@@ -37,6 +37,7 @@ function ack_file_info {
     ack -g '^(astro|software/)' -t markdown |\
     $FILTER |\
     xargs -I § git log -1 --pretty="format:%ct,${format},%h,§;" §
+    sleep 2m
 }
 
 # I'm not sure what goes one above, but on Mac OSX, the output of xargs loses
