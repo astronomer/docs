@@ -1,0 +1,6 @@
+.premiumBadge {
+    padding: 1.5rem 1rem;
+    display: flex;
+    gap: 1.25rem;
+    overflow: hidden;
+  }
