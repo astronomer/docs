@@ -64,7 +64,7 @@ $ astro deployment create --deployment-file deployment.yaml
 ```
 
 :::note
-For more inforamtion on creating a Deployment using a Deployment file read [Create a Deployment with a Deployment File](manage-deployments-as-code.md#create-a-deployment-with-a-deployment-file)
+For more information about creating Deployments with a Deployment file, see [Create a Deployment with a Deployment File](manage-deployments-as-code.md#create-a-deployment-with-a-deployment-file).
 :::
 
 </TabItem>

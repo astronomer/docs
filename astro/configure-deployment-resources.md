@@ -28,7 +28,7 @@ Worker and scheduler resources must be set for each Deployment and are managed s
 
 :::note
 
-You can manage a Deployemnent's resources with a Deployment file. Read [Deployments as Code](manage-deploymens-as-code.md) for more information.
+To manage Deployment resources with a Deployment file, see [Deployments as Code](manage-deploymens-as-code.md).
 
 :::
 

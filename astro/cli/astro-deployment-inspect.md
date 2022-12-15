@@ -106,7 +106,7 @@ $ astro deployment inspect <deployment-id> > deployment.yaml
 ```
 
 :::note
-For more inforamtion on Deploymen files read [Manage Deployments as Code](manage-deployments-as-code.md)
+For more information about Deployment files, see [Manage Deployments as Code](manage-deployments-as-code.md).
 :::
 
 ## Related Commands
