@@ -6,7 +6,7 @@ export default function LinkCard() {
   return (
     <Link className={styles.premiumBadge} id="premiumBadge">
         <div className={styles.premiumBadge}>
-          <img src="/img/PremiumLarge.png" href="https://www.astronomer.io/pricing/" alt='This feature is an Astro Premium-tier service.' />
+        <a target="_blank" href="https://www.astronomer.io/pricing/"> <img src={useBaseUrl(`img/PremiumLarge.png`)} alt='This feature is an Astro Premium-tier service.' /> </a>
         </div>
     </Link>
   )
