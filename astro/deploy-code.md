@@ -150,6 +150,20 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
+### Disable DAG-only deploys on a Deployment
+
+1. Run the following command to disable DAG-only deploys:
+
+    ```sh
+    astro deployment update --dag-deploy disable
+    ```
+
+2. Run the following command to push your changes to Astro:
+
+    ```sh
+    astro deploy
+    ```
+
 ## Deploy a prebuilt Docker image
 
 By default, running `astro deploy` with the Astro CLI builds your Astro project into a Docker image and deploys it to Astro. In some cases, you might want to skip the build step and deploy a prebuilt Docker image instead.
