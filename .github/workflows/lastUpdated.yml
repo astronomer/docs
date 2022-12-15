@@ -1,5 +1,7 @@
 name: Docs Freshness
-on: [workflow_dispatch]
+on:
+  schedule:
+    - cron: '5 0 * * sun'
 
 jobs:
   exportmetrics:
@@ -7,10 +9,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
       name: Checkout repo
-      with:
-        path: docs
+    - name: Install ack
+      run: sudo apt-get install ack
     - name: Run build script
-      run: chmod +x docs/lastUpdated.sh
+      run: chmod +x lastUpdated.sh
       shell: bash
     - uses: jakejarvis/s3-sync-action@master
       name: Sync to S3
@@ -21,7 +23,7 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'eu-west-2' 
-        SOURCE_DIR: 'metrics' 
+        SOURCE_DIR: '.github/metrics' 
     - name: Removing unnecessary files
-      run: rm -r docs/.github/metrics
+      run: rm -r .github/metrics/log.csv
       shell: bash
