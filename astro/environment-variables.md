@@ -43,7 +43,7 @@ If you prefer to work with the Astro CLI, you can create and update environment 
 
 :::note
 
-You can create, update, and delete multiple environment variables at once using [Deployments as Code](manage-deploymens-as-code.md).
+You can create, update, and delete multiple worker queues at once. See [Deployments as Code](manage-deploymens-as-code.md).
 
 :::
 

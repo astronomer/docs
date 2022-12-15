@@ -97,7 +97,7 @@ If you prefer, you can also run the `astro deployment worker-queue create` comma
 4. Click **Create Queue**.
 
 :::note
-You can create, update, and delete multiple worker queues at once using [Deployments as Code](manage-deploymens-as-code.md).
+You can create, update, and delete multiple worker queues at once. See [Deployments as Code](manage-deploymens-as-code.md).
 :::
 
 ## Assign tasks to a worker queue
