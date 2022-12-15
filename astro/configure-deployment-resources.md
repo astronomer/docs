@@ -26,9 +26,9 @@ To ensure that your tasks have the CPU and memory required to complete successfu
 
 Worker and scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
 
-:::note
+:::cli
 
-To manage Deployment resources with a Deployment file, see [Deployments as Code](manage-deploymens-as-code.md).
+If you prefer, you can set Deployment resources using the Astro CLI and a local Deployment configuration file. See [Deployments as Code](manage-deployments-as-code.md).
 
 :::
 

@@ -9,13 +9,13 @@ id: manage-deployments-as-code
   <meta name="og:description" content="Manage an Astro Deployment with JSON or YAML Deployment file. This Deployment file can be used to store, create, or update a Deployment's configuration." />
 </head>
 
-Once you determine the configuration of your Astro Deployment this configuration can be stored, created or updated using a JSON or YAML Deployment file. Managing your Deployments with Deployment files has a few different use cases:
+After you configure your Astro Deployment, it can  be stored,  stored, created or updated  using a JSON or YAML Deployment file. Using Deployment files to manage your Deployments provides the following benefits:
 
-- Simplifies the management of Deployments with a large number of worker queues or environment variables.
-- Allows Deployments to be managed as files in a Github repository.
-- Allows the quick transfer of existing configuration settings to new Deployments. 
-- Allows environment variables and worker queues to be shared between Deployments.
-- You’d like to create Deployment Templates that can be used to create Deployments for different use cases. For example a Machine Learning Deployment Template can come with configurations, worker queues, and Variables needed for an ML Deployment at your company
+- Quickly update Deployments with a large number of worker queues or environment variables.
+- Manage Deployments as files from a Github repository.
+- Transfer existing configuration settings to new Deployments. 
+- Share environment variables and worker queues between Deployments.
+- Create Deployment templates for specific use cases. For example, the worker queues and environment variables in an existing machine learning Deployment template can be repurposed in a machine learning Deployment.
 
 # Deployment File Spec
 
@@ -49,7 +49,7 @@ deployment:
         - me@myorganization.com
         - me2@myorganization.com
 # not needed or used when creating or updating a deployment
-	metadata:
+        metadata:
         deployment_id: clbh5ybjz110732503e94m13z7
         workspace_id: cl0v1p6lc728255byzyfs7lw21
         cluster_id: cl8woz99j003j0t37fpux1nbd
@@ -62,21 +62,27 @@ deployment:
         webserver_url: astronomer.astronomer.run/d94m13z7?orgId=org_dlgevirUCwI9vX10
 ```
 
-The following is an example of a Deployment file that is created when you run `astro deployment inspect`. You can use the `environment_variables`, `configuration`, `worker_queues`, and `alert_emails` sections to create and update a Deployment. The `metadata` section provides information about a Deployment and is not required when you create or delete a Deployment.
+You can use the `environment_variables`, `configuration`, `worker_queues`, and `alert_emails` sections to create and update a Deployment. The `metadata` section provides information about a Deployment and is not required when you create or delete a Deployment.
 
 ### Configuration settings
 
-Edit the `configuration` section when you need to add or update Deployment settings. 
+The `configuration` section contains all settings that you can configure from the Deployment **Details** page in the Cloud UI. See:
+
+- [Update a Deployment name and description](configure-deployment-resources.md#update-a-deployment-name-and-description)
+- [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
+
 
 ### Environment variable settings
 
-You can modify the `environment_variables` section to add or update the environment variables displayed in the Cloud UI. The Deployment file lists all of the environment variables in a Deployment. If an environment variable is marked as secret, the value is not shown, but the `is_secret` value is `true`. You can use the `environment_variables.value` field to add or update secret environment variables. Astronomer recommends that you avoid committing Deployment files containing secret values to GitHub repositories.
+The `environment_variables` section contains configurations Deployment environment variables. See [Environment variables](environment-variables.md).
+
+You can set `environment_variables.is_secret: true` on any new or existing environment variables to set them as secret, but you won't be able to retrieve the secret value from the Deployment once you push your configuration. Astronomer recommends that you avoid committing Deployment files containing secret values to GitHub repositories.
 
 ### Worker queue settings
 
 The `worker_queues` section defines the worker queues for a Deployment. All Deployment files must include a worker queue named `default` to allow worker queue settings to be added or updated, If you don't enter specific values for a worker queue, default values are applied.
 
-## Create a Deployment file
+## Create a Deployment file from an existing Deployment
 
 Run the following command to create a Deployment file from an existing Deployment:
 
@@ -84,11 +90,11 @@ Run the following command to create a Deployment file from an existing Deploymen
 astro deployment inspect -d [deployment_id] > deployment.yaml
 ```
 
-After the Deployment file is created, you can use it to update the settings of original Deployment, or you can use it to create a new Deployment
+After the Deployment file is created, you can use it to update the settings of original Deployment, or you can use it to create a new Deployment.
 
 ## Create a Deployment with a Deployment file
 
-Run the following command to create a new Deployment with a Deployment file:
+Run the following command to create a new Deployment on Astro based on a Deployment file:
 
 ```bash
 astro deployment create --name <new-deployment-name> --deployment-file deployment.yaml
@@ -96,7 +102,7 @@ astro deployment create --name <new-deployment-name> --deployment-file deploymen
 
 The name provided with the `—name` flag will override name field in the Deployment file. If you’d like you could also delete the `metadata` section and change the `name`, `cluster_name`, or any section you’d like before running `astro deployment create`. A few notes on creating a Deployment with a Deployment file:
 
-- The `name` and `cluster_name` fields are the only fields required to create a Deployment. The rest of the fields are autopopulated.
+- The `name` and `cluster_name` fields are the only fields required to create a Deployment. The CLI will create the Deployment using default values for each unspecified configuration. These default values are the same default values for when you create a Deployment from the Cloud UI.
 - When creating worker queues, only the `name` field is required. The rest of the fields are autopopulated.
 - When creating environment variables, each variable must include a `key` and a `value`.
 
@@ -111,10 +117,10 @@ astro deployment update -d <deployment-id> --deployment-file deployment.yaml
 You now can see your updated Deployment in the Astro UI. You can update any of the fields in the `environment_variables`, `configuration`, `worker_queues`, or `alert_emails` sections of the Deployment File. A few notes on updating a Deployment with a Deployment file:
 
 - You can’t change the Cluster the Deployment runs on. However, you can use the Deployment file to create a new Deployment with a different Cluster.
-- Environment variables are updated to match the `environment_variables` section in the Deployment file. Environment variables that are in the Deployment but not in the Deployment file are deleted. If an environment variable is a secret, remove the value from the Deployment file to ensure it doesn’t change during an update.
-- Worker queues are updated to match the `worker_queues` section in the Deployment file. Worker queues that are in the Deployment but not in the Deployment file are deleted. Omitted values in the `worker_queues` section keep their existing values and are not updated.
+- The Deployment's environment variables are updated to match the exact variables configured in `environment_variables`. Any variables that exist in the Deployment but are not in the Deployment file are deleted. If an environment variable is a secret, remove the value from the Deployment file to ensure it doesn’t change during an update.
+- Worker queues are updated to match the `worker_queues` section in the Deployment file. Any existing worker queues that are in the Deployment but not in the Deployment file are deleted.
 
-## Next steps:
+## See also
 
 - [Manage Deployment API keys](api-keys.md)
 - [Deploy Code](deploy-code.md)
