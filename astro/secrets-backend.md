@@ -192,7 +192,7 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
         token_max_ttl=24h
     ```
 
-3. Add the policy you created to your AppRole.     
+3. Add the policy you created to your AppRole. See [Associate Policies to Auth Methods](https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-policies#associate-policies-to-auth-methods).     
 4. Retrieve the `role-id` and `secret-id` for your AppRole by running the following commands:
 
     ```sh
