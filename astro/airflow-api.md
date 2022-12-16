@@ -4,8 +4,6 @@ sidebar_label: 'Airflow REST API'
 id: airflow-api
 ---
 
-import PremiumBadge from '@site/src/components/PremiumBadge';
-
 <head>
   <meta name="description" content="Learn how to make requests to the Airflow REST API and how you can use the Airflow REST API to automate Airflow workflows in your Deployments. Common examples of API requests are provided." />
   <meta name="og:description" content="Learn how to make requests to the Airflow REST API and how you can use the Airflow REST API to automate Airflow workflows in your Deployments. Common examples of API requests are provided." />
