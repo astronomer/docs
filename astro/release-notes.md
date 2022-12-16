@@ -23,14 +23,16 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 The [Cloud IDE](cloud-ide/overview.md) includes several new features which improve DAG authoring and testing:
 
-- Committing to GitHub and configuring a GitHub repository now happen in two separate menus dedicated to each function.
-- The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Using the CI/CD pipeline to deploy DAG changes to Astro is now significantly faster. 
-- The GitHub configuration menu now includes **Clone Repo** settings. You can use these settings to make files in your configured GitHub repo accessible when you run DAGs in the Cloud IDE, such as helper functions in an `include` folder. 
-- You can now explicitly mark upstream dependencies for a cell from the cell's configuration menu.
+- Committing to GitHub and configuring a GitHub repository are now in two separate menus dedicated to each function.
+- The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Using the CI/CD pipeline to deploy DAG changes to Astro is now significantly faster.
+- The GitHub configuration menu now includes **Clone Repo** settings. You can use these settings to make files in your configured GitHub repository accessible when you run DAGs in the Cloud IDE, such as helper functions in an `include` folder.
+- You can now explicitly mark upstream dependencies for a task cell from the cell's configuration menu.
 
-### Support for n2 GCP instances
+For more information about configuring GitHub and deploying code with the Cloud IDE, see [Deploy a project from the Cloud IDE to Astro](deploy-project.md).
 
-You can now configure worker queues with the following `n2` node types on GCP:
+### Support for n2 worker types on GCP
+
+You can now configure worker queues with the following `n2` worker types on Google Cloud Platform (GCP) clusters:
 
 - `n2-standard-4`
 - `n2-standard-8`
@@ -42,17 +44,19 @@ You can now configure worker queues with the following `n2` node types on GCP:
 - `n2-highcpu-8`
 - `n2-highcpu-16`
 
+For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp.md#worker-node-size-resource-reference).
+
 ### Additional improvements 
 
 - In the **Clusters** tab of the Cloud UI, you can now click a cluster entry to see details about the cluster configuration, including which **Worker Types** are enabled for the cluster.
-- You can now see your Deployment's **ID** in the **Deployments** menu and on the Deployment information screen in the Cloud UI. A Deployment ID is required for deploying code using CI/CD.
-- You can now access your Organization's **OpenLineage URL** from the **Settings** page of the CLoud UI.
+- You can now see the **Deployment ID** for each Deployment in the **Deployments** menu and on the Deployment information screen in the Cloud UI. A Deployment ID is required for deploying code using CI/CD.
+- You can now access your Organization's **OpenLineage URL** from the **Settings** page of the Cloud UI.
 - Workspaces are now sorted alphabetically in the Cloud UI.
-- You can now trigger DAG-only deploys from multiple different sources, such as a local directory or a GitHub repo, to a single Deployment.
+- When you run `astro deploy` with an empty `dags` folder, Astro CLI version 1.8.0 or later excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
 
 ### Bug fixes 
 
-- Fixed an issue where DAG-only deploys did not work if you included helper functions in your `dags` directory.
+- Fixed an issue where Astro temporarily stored DAGs for DAG-only deploys in a new directory called `/usr/local/airflow/dags/current`, which resulted in import errors in user code.
 - Fixed an issue where you had to trigger a DAG-only deploy.
 - Fixed an issue where task runs triggered in the Cloud IDE did not have access to project environment variables.
 - Fixed an issue where Deployment metrics for memory usage were not always accurate.  
