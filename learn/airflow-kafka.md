@@ -271,11 +271,12 @@ The `airflow-kafka-provider` contains three hooks:
 - `KafkaConsumerHook`
 - `KafkaProducerHook`
 
-It uses three operators and one trigger:
+It uses four operators and one trigger:
 
 - `ProduceToTopicOperator`
 - `ConsumeFromTopicOperator`
 - `AwaitKafkaMessageOperator`
+- `EventTriggersFunctionOperator`
 - `AwaitMessageTrigger`
 
 The following section provides more detailed information on the parameters of each operator. For more information on the other modules in this provider see the [`airflow-provider-kafka`](https://github.com/astronomer/airflow-provider-kafka) source code.
@@ -309,7 +310,7 @@ The ConsumeFromTopicOperator can be used to create a Kafka consumer to read batc
 
 ### AwaitKafkaMessageOperator
 
-The AwaitKafkaMessageOperator is a [deferrable operator]((https://docs.astronomer.io/learn/deferrable-operators)) that can be used to wait for a specific message to be published to one of more Kafka topics. You can define the following parameters:
+The AwaitKafkaMessageOperator is a [deferrable operator](https://docs.astronomer.io/learn/deferrable-operators) that can be used to wait for a specific message to be published to one of more Kafka topics. You can define the following parameters:
 
 - `topics`: A list of topics or regex patterns to read from.
 - `apply_function`: A Python function that is applied to all messages that are read. If the function returns any data the task will be ended and marked as successful. The returned data will be pushed to XCom unless the BaseOperator argument `do_xcom_push` is set to `False`.
@@ -319,6 +320,19 @@ The AwaitKafkaMessageOperator is a [deferrable operator]((https://docs.astronome
 - `poll_timeout`: The amount of time in seconds that the task should wait for a message in its active state.
 - `poll_interval`: The amonut of time in seconds that the task should wait in the deferred state.
 - `xcom_push_key`: The key under which to save the returned data to XCom.
+
+### EventTriggersFunctionOperator
+
+The EventTriggerFunctionOperator is a [deferrable operator](https://docs.astronomer.io/learn/deferrable-operators) that will wait for a specific message to be published to one or more Kafka topics, similar to the AwaitKafkaMessageOperator. After consuming a message that fulfills the criteria defined in the `apply_function` the EventTriggerFunctionOperator will not complete its task like the AwaitKafkaMessageOperator, instead it will defer itself again and continue listening until the task is stopped externally for example by a timeout value of the DAG itself. Without an external termination, this task will keep deferring itself indefinitely as long as the DAG is running. View [an example DAG using this operator](https://github.com/astronomer/airflow-provider-kafka/blob/main/example_dags/listener_dag_function.py) in the provider repository.
+
+- `topics`: A list of topics or regex patterns to read from.
+- `apply_function`: A Python function that is applied to all messages that are read. If the function returns any data the `event_triggered_function` will run.
+- `event_triggered_function`: A Python function that will be triggered every time the operator consumes a message that cause the `apply_function` to return any data. The value returned by the apply_function is passed to the function provided to `event_triggered_function` as the first positional parameter.
+- `apply_function_args`: Positional arguments for the `apply_function`.
+- `apply_function_kwargs`: Keyword arguments for the `apply_function`.
+- `kafka_config`: The configuration for the Kafka client, including the connection information. For a full list of parameters please refer to the [librdkafka GitHub repository](https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md).
+- `poll_timeout`: The amount of time in seconds that the task should wait for a message in its active state.
+- `poll_interval`: The amonut of time in seconds that the task should wait in the deferred state.
 
 ## Best practices
 
