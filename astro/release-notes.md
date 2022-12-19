@@ -57,7 +57,6 @@ For more information about these worker types, see [N2 machine series](https://c
 ### Bug fixes 
 
 - Fixed an issue where Astro temporarily stored DAGs for DAG-only deploys in a new directory named `/usr/local/airflow/dags/current`, which caused import errors in the user code.
-- Fixed an issue where you had to trigger a DAG-only deploy.
 - Fixed an issue where task runs triggered in the Cloud IDE did not have access to project environment variables.
 - Fixed an issue where Deployment metrics for memory usage were not always accurate.  
 
