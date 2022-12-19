@@ -169,7 +169,7 @@ If you do not already have a Vault server deployed but would like to test this f
 
 To use Vault as a secrets backend, Astronomer recommends configuring a Vault AppRole with a policy that grants only the minimum necessary permissions for Astro. To do this:
 
-1. Run the following command to [create a Vault policy](https://www.vaultproject.io/docs/concepts/policies) that Astro can use to access Vault:
+1. Run the following command to [create a Vault policy](https://www.vaultproject.io/docs/concepts/policies) that Astro can use to access a Vault server:
 
     ```hcl
     vault auth enable approle
@@ -193,7 +193,7 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
     ```
 
 3. Add the policy you created to your AppRole. See [Associate Policies to Auth Methods](https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-policies#associate-policies-to-auth-methods).     
-4. Retrieve the `role-id` and `secret-id` for your AppRole by running the following commands:
+4. Run the following commands to retrieve the `role-id` and `secret-id` for your AppRole:
 
     ```sh
     vault read auth/approle/role/<your-approle>/role-id
