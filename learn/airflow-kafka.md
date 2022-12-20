@@ -242,7 +242,7 @@ A deferrable operator is a sensor that will go into a deferred state in between 
         task_id=f"awaiting_message_in_{my_topic}",
         topics=[my_topic],
         # the apply function needs to be passed with its location for the triggerer
-        apply_function="provider_example_code.await_function", 
+        apply_function="kafka_example_dag_1.await_function", 
         kafka_config={
             **connection_config
             "group.id": "awaiting_message",
