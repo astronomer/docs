@@ -282,7 +282,7 @@ The following section provides more detailed information on the parameters of ea
 
 ### ProduceToTopicOperator
 
-The ProduceToTopicOperator can be used create a Kafka producer to produce messages to a Kafka topic. You can define the following parameters:
+The ProduceToTopicOperator can be used to create a Kafka producer to produce messages to a Kafka topic. You can define the following parameters:
 
 - `topic`: The Kafka topic you want to produce to.
 - `producer_function`: A Python function that returns a generator that will create key/value pairs to be produced to Kafka as messages.
@@ -295,7 +295,7 @@ The ProduceToTopicOperator can be used create a Kafka producer to produce messag
 
 ### ConsumeFromTopicOperator
 
-The ConsumeFromTopicOperator can be used to create a Kafka consumer to read batches of messages and processes them. You can define the following parameters:
+The ConsumeFromTopicOperator can be used to create a Kafka consumer to read batches of messages and process them. You can define the following parameters:
 
 - `topics`: A list of topics or regex patterns for the consumer to subscribe to i.e. read from.
 - `apply_function`: A Python function that is applied to all messages that are read.
@@ -309,7 +309,7 @@ The ConsumeFromTopicOperator can be used to create a Kafka consumer to read batc
 
 ### AwaitKafkaMessageOperator
 
-The AwaitKafkaMessageOperator is a [deferrable operator]((https://docs.astronomer.io/learn/deferrable-operators)) that can be used to wait for a specific message to be published to one of more Kafka topics. You can define the following parameters:
+The AwaitKafkaMessageOperator is a [deferrable operator]((https://docs.astronomer.io/learn/deferrable-operators)) that can be used to wait for a specific message to be published to one or more Kafka topics. You can define the following parameters:
 
 - `topics`: A list of topics or regex patterns to read from.
 - `apply_function`: A Python function that is applied to all messages that are read. If the function returns any data the task will be ended and marked as successful. The returned data will be pushed to XCom unless the BaseOperator argument `do_xcom_push` is set to `False`.
@@ -317,7 +317,7 @@ The AwaitKafkaMessageOperator is a [deferrable operator]((https://docs.astronome
 - `apply_function_kwargs`: Keyword arguments for the `apply_function`.
 - `kafka_config`: The configuration for the Kafka client, including the connection information. For a full list of parameters please refer to the [librdkafka GitHub repository](https://github.com/edenhill/librdkafka/blob/master/CONFIGURATION.md).
 - `poll_timeout`: The amount of time in seconds that the task should wait for a message in its active state.
-- `poll_interval`: The amonut of time in seconds that the task should wait in the deferred state.
+- `poll_interval`: The amount of time in seconds that the task should wait in the deferred state.
 - `xcom_push_key`: The key under which to save the returned data to XCom.
 
 ## Best practices
