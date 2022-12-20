@@ -1,7 +1,7 @@
 ---
 title: 'Set up a custom XComs backend'
 sidebar_label: 'Custom XComs backend'
-id: cloud-ide-tutorial
+id: xcoms-backend-tutorial
 description: 'Use this tutorial to learn how to set up a custom XComs backend in AWS, GCP and Azure.'
 ---
 

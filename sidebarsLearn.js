@@ -123,6 +123,7 @@ module.exports = {
         'custom-airflow-ui-docs-tutorial',
         'external-python-operator',
         'operator-extra-link-tutorial',
+        'xcoms-backend-tutorial'
       ],
     },
     {
