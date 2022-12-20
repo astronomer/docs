@@ -325,6 +325,8 @@ The AwaitKafkaMessageOperator is a [deferrable operator](https://docs.astronomer
 
 The EventTriggerFunctionOperator is a [deferrable operator](https://docs.astronomer.io/learn/deferrable-operators) that waits for a specific message to be published to one or more Kafka topics, similar to the AwaitKafkaMessageOperator. Unlike the AwaitKafkaMessageOperator, after consuming a message that fulfills the criteria defined in the `apply_function` parameter, the EventTriggerFunctionOperator will continue listening until the task is stopped by an external criteria such as a timeout of the DAG itself. Without external termination, this task will stay in a deferred state indefinitely as long as the DAG is running. You can view [an example DAG using this operator](https://github.com/astronomer/airflow-provider-kafka/blob/main/example_dags/listener_dag_function.py) in the provider repository.
 
+You can define the following parameters for this operator:
+
 - `topics`: A list of topics or regex patterns to read from.
 - `apply_function`: A Python function that is applied to all messages that are read. If the function returns any data, the `event_triggered_function` will run.
 - `event_triggered_function`: A Python function that will be triggered every time the operator consumes a message that causes the `apply_function` to return any data. The value returned by the `apply_function` is passed to the function provided to `event_triggered_function` as the first positional parameter.
