@@ -41,7 +41,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | ------------- | ---------------------- |
 | 4             | 2.2.4-2.2.5            |
 | 5             | 2.3.0-2.3.4            |
-| 6             | 2.4.0-2.4.1            |
+| 6             | 2.4.0-2.4.3            |
 | 7             | 2.5.0                  |
 
 :::info
