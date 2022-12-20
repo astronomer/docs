@@ -49,12 +49,11 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Set up your XComs backend 
 
-
 To use an S3 bucket as your custom XCom backend follow these steps:
 
-1. Log into your AWS account and [create a new S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html). In the creation settings, make sure to enable Bucket Versioning and that public access is blocked.
+1. Log into your AWS account and [create a new S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html) called `s3-xcom-backend-example`. In the creation settings, make sure to enable Bucket Versioning and that public access is blocked.
 
-2. [Create a new IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for Airflow to access your bucket. You can use the JSON configuration below (replace `<YOUR BUCKET NAME>` with the name of your S3 bucket) or use AWS' graphical user interface to replicate what you see in the screenhot.
+2. [Create a new IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for Airflow to access your bucket. You can use the JSON configuration below or use AWS' graphical user interface to replicate what you see in the screenhot.
 
     ```json
     {
@@ -72,8 +71,8 @@ To use an S3 bucket as your custom XCom backend follow these steps:
                     "s3:DeleteObject"
                 ],
                 "Resource": [
-                    "arn:aws:s3:::<YOUR BUCKET NAME>/*",
-                    "arn:aws:s3:::<YOUR BUCKET NAME>"
+                    "arn:aws:s3:::s3-xcom-backend-example/*",
+                    "arn:aws:s3:::s3-xcom-backend-example"
                 ]
             }
         ]
@@ -87,30 +86,6 @@ To use an S3 bucket as your custom XCom backend follow these steps:
 4. [Create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) called `airflow-xcoms` with the AWS credential type `Access key - Programmatic access`. Attach the `AirflowXComBackendAWSS3` policy to this user as shown in the screenshot below. Make sure to save the Access key ID and the Secret access key.
 
     [AWS IAM user for the XCom backend](/img/guides/xcom_backend_aws_user.png)
-
-
-</TabItem>
-
-<TabItem value="gcp">
-
-
-
-</TabItem>
-
-<TabItem value="azure">
-
-
-
-</TabItem>
-
-<TabItem value="local">
-
-
-
-</TabItem>
-
-
-</Tabs>
 
 ## Step 2: Create an Astro project
 
@@ -127,18 +102,7 @@ To use an S3 bucket as your custom XCom backend follow these steps:
     $ astro dev start
     ```
 
-## Step 3: Create a connection
-
-<Tabs
-    defaultValue="aws"
-    groupId= "github-actions-image-only-deploys"
-    values={[
-        {label: 'AWS S3', value: 'aws'},
-        {label: 'GCP Cloud Storage', value: 'gcp'},
-        {label: 'Azure Blob Storage', value: 'azure'},
-        {label: 'Local', value: 'local'}
-    ]}>
-<TabItem value="aws">
+## Step 3: Create an AWS connection
 
 To give Airflow access to your S3 bucket you need to define an [Airflow connection](connections.md). 
 
@@ -153,29 +117,6 @@ To give Airflow access to your S3 bucket you need to define an [Airflow connecti
 It is also possible to define a [connection using environment variables](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables). If Airflow is running in the same AWS environment as your custom XCom backend it is best practice to [assume a role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) rather than provide credentials.
 
 :::
-
-</TabItem>
-
-<TabItem value="gcp">
-
-
-
-</TabItem>
-
-<TabItem value="azure">
-
-
-
-</TabItem>
-
-<TabItem value="local">
-
-
-
-</TabItem>
-
-
-</Tabs>
 
 ## Step 4: Define a custom XCom class using JSON serialization
 
@@ -216,10 +157,10 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             hook.load_file(
                 filename=filename,
                 key=s3_key,
-                bucket_name=S3XComBackend.BUCKET_NAME,
+                bucket_name=S3XComBackendJSON.BUCKET_NAME,
                 replace=True
             )
-            reference_string = S3XComBackend.PREFIX + s3_key
+            reference_string = S3XComBackendJSON.PREFIX + s3_key
 
             return BaseXCom.serialize_value(value=reference_string)
 
@@ -228,11 +169,11 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             reference_string = BaseXCom.deserialize_value(result=result)
             
             hook    = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-            key     = reference_string.replace(S3XComBackend.PREFIX, "")
+            key     = reference_string.replace(S3XComBackendJSON.PREFIX, "")
 
             filename = hook.download_file(
                 key=key,
-                bucket_name=S3XComBackend.BUCKET_NAME,
+                bucket_name=S3XComBackendJSON.BUCKET_NAME,
                 local_path="/tmp"
             )
 
@@ -261,7 +202,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
 3. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
 
-    ```sh
+    ```text
     AIRFLOW__CORE__XCOM_BACKEND=include.s3_xcom_backend_json.S3XComBackendJSON
     ```
 
@@ -269,14 +210,170 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
 ## Step 5: Run a simple DAG using XComs
 
+To test your custom XCom backend you will run a simple DAG which pushes a random number to your custom XCom backend and then retrieves it again.
 
+1. Create a new file in your `dags` folder named `simple_xcom_dag.py`.
+
+2. Copy and paste the code below into the file.
+
+    ```python
+        from airflow.decorators import dag, task
+        from pendulum import datetime
+        import random
+
+        @dag(
+            start_date=datetime(2022, 12, 20),
+            schedule="@daily",
+            catchup=False
+        )
+        def simple_xcom_dag():
+
+            @task
+            def pick_a_random_number():
+                return random.randint(1, 10)
+
+            @task
+            def print_a_number(num):
+                print(num) 
+
+            print_a_number(pick_a_random_number())
+
+        simple_xcom_dag()
+    ```
+
+3. Run the DAG.
+
+4. View the logs of both tasks, they include information about the custom XComs backend. The `print_a_number` task includes the full path to the file stored in the S3 bucket.
+
+    [Logs mentioning custom XCom backend](/img/guides/xcom_backend_task_logs_simple.png)
+
+5. View the XCom in your S3 bucket.
+
+    [XComs in the S3 bucket](/img/guides/xcom_backend_S3_json.png)
 
 
 ## Step 6: Create a custom serialization method to handle Pandas dataframes
 
+A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle object that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
 
+1. Create a second file in your `include` folder called `s3_xcom_backend_pandas.py`.
+
+2. Copy and paste the following code into the file.
+
+    ```python
+    from airflow.models.xcom import BaseXCom
+    from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+
+    import pandas as pd
+    import json
+    import uuid
+
+    class S3XComBackendPandas(BaseXCom):
+        PREFIX = "xcom_s3://"
+        BUCKET_NAME = "s3-xcom-backend-example"
+
+        @staticmethod
+        def serialize_value(
+            value,
+            key=None,
+            task_id=None,
+            dag_id=None,
+            run_id=None,
+            map_index= None,
+            **kwargs
+        ):
+
+            hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+            
+            # added serialization method if the value passed is a Pandas dataframe
+            # the contents are written to a local temporary csv file
+            if isinstance(value, pd.DataFrame):
+                filename    = "data_" + str(uuid.uuid4()) + ".csv"
+                s3_key      = f"{run_id}/{task_id}/{filename}"
+
+                value.to_csv(filename)
+
+            # if the value passed is not a Pandas dataframe, attempt to use
+            # JSON serialization
+            else:
+                filename    = "data_" + str(uuid.uuid4()) + ".json"
+                s3_key      = f"{run_id}/{task_id}/{filename}"
+
+                with open(filename, 'a+') as f:
+                    json.dump(value, f)
+
+            hook.load_file(
+                filename=filename,
+                key=s3_key,
+                bucket_name=S3XComBackendPandas.BUCKET_NAME,
+                replace=True
+            )
+
+            reference_string = S3XComBackendPandas.PREFIX + s3_key
+
+            return BaseXCom.serialize_value(value=reference_string)
+
+        @staticmethod
+        def deserialize_value(result):
+            result = BaseXCom.deserialize_value(result)
+
+            hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+            key = result.replace(S3XComBackendPandas.PREFIX, "")
+
+            filename = hook.download_file(
+                key=key,
+                bucket_name=S3XComBackendPandas.BUCKET_NAME,
+                local_path="/tmp"
+            )
+
+            # added deserialization option to convert a CSV back to a dataframe
+            if key.split(".")[-1] == "csv":
+                output = pd.read_csv(filename)
+            # if the key does not end in 'csv' use JSON deserialization
+            else:
+                with open(filename, 'r') as f:
+                    output = json.load(f)
+
+            return output
+
+    ```
+
+    The code above creates a second custom XCom backend called `S3XComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the S3 bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
+
+3. In the `.env` file of your Astro project, change the XCom backend variable to use the newly created `S3XComBackendPandas`.
+
+    ```text
+    AIRFLOW__CORE__XCOM_BACKEND=include.s3_xcom_backend_pandas.S3XComBackendPandas
+    ```
+
+4. Restart your Airflow instance using `astro dev restart`.
+
+
+</TabItem>
+
+<TabItem value="gcp">
+
+## Step TEST
+
+</TabItem>
+
+<TabItem value="azure">
+
+
+
+</TabItem>
+
+<TabItem value="local">
+
+
+
+</TabItem>
+
+
+</Tabs>
 
 ## Step 7: Run a DAG passing Pandas dataframes via XComs
+
 
 
 ```python
@@ -343,3 +440,6 @@ Common reasons to use a custom XComs backend are:
 - Running a production environment that where custom retention, deletion and backup policies for XComs are desired. With a custom XComs backend you do not need to worry about periodically cleaning up the metadata database.
 - The need for custom serialization and deserialization methods. By default Airflow uses JSON serialization which puts limits on the type of data that you can pass via XComs (pickling is available by setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` but has [known security implications](https://docs.python.org/3/library/pickle.html)).
 - Having a custom setup where access to XComs is needed without accessing the metadata database. 
+
+
+## Conclustion
