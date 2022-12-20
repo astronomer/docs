@@ -29,16 +29,9 @@ The data lineage graph in the Cloud UI shows lineage data that is emitted with b
 
 ## Extract lineage data from external systems to Astro
 
-To emit lineage data from an Airflow task that runs outside of Astro or from an external system that does not interact with Airflow:
+When you integrate an external data lineage system with Astro or you are working with Astro locally and are not using a supported Airflow operator, you need to provide a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to the correct place in Astro. 
 
-- Retrieve your Organization OpenLineage API key from the Cloud UI. See [Retrieve an OpenLineage API key](#retrieve-an-openlineage-api-key).
-- Specify your OpenLineage API key in the external system. See the following integration guides for specific instructions.
-
-### Retrieve an OpenLineage API key
-
-1. In the Cloud UI, click **Settings**.
-2. Copy the value in the **Lineage API Key** field.
-3. Specify your Organization's OpenLineage API key in the external system's configuration.
+To locate the your Deployment namespace in the Cloud UI, select a Workspace and then copy the value with the format `<text>-<text>-<four-digit-number>` next to the Deployment name. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
 
 ## Snowflake and OpenLineage with Airflow
 

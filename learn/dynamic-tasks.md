@@ -52,9 +52,9 @@ When you work with mapped tasks, keep the following in mind:
 - `expand()` only accepts keyword arguments.
 - The maximum amount of mapped task instances is determined by the `max_map_length` parameter in the [Airflow configuration](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html). By default it is set to 1024.
 - You can limit the number of mapped task instances for a particular task that run in parallel across all DAG runs by setting the `max_active_tis_per_dag` parameter in your dynamically mapped task.
-- XComs created by mapped task instances are stored in a list and can be accessed by using the map index of a specific mapped task instance. For example, to access the XComs created by the third mapped task instance (map index of 2) of `my_mapped_task`, use `ti.xcom_pull(task_ids=['my_mapped_task'])[2]`.
+- XComs created by mapped task instances are stored in a list and can be accessed by using the map index of a specific mapped task instance. For example, to access the XComs created by the third mapped task instance (map index of 2) of `my_mapped_task`, use `ti.xcom_pull(task_ids=['my_mapped_task'])[2]`. In Airflow version 2.5 the `map_indexes` parameter was added to the `.xcom_pull()` function allowing to specify a list of map indexes of interest (`ti.xcom_pull(task_ids=['my_mapped_task'], map_indexes=[2])`).
 
-For additional examples of how to apply dynamic task mapping functions, see [Dynamic Task Mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html).
+For additional examples of how to apply dynamic task mapping functions, see [Dynamic Task Mapping](https://airflow.apache.org/docs/apache-airflow/2.3.0/concepts/dynamic-task-mapping.html) in the official Airflow documentation.
 
 The Airflow UI provides observability for mapped tasks in the **Graph View** and the **Grid View**.
 
@@ -243,7 +243,6 @@ The task `t1` will have three mapped task instances printing their results into 
 
 In Airflow 2.4 and later you can provide sets of positional arguments to the same keyword argument. For example, the `op_args` argument of the PythonOperator. You can use the built-in [`zip()`](https://docs.python.org/3/library/functions.html#zip) Python function if your inputs are in the form of iterables such as tuples, dictionaries, or lists. If your inputs come from XCom objects, you can use the `.zip()` method of the `XComArg` object.
 
-
 #### Provide positional arguments with the built-in Python `zip()`
 
 The `zip()` function takes in an arbitrary number of iterables and uses their elements to create a zip-object containing tuples. There will be as many tuples as there are elements in the shortest iterable. Each tuple contains one element from every iterable provided. For example:
@@ -319,6 +318,33 @@ The add_nums task will have three mapped instances with the following results:
 - Map index 0: `111` (1+10+100)
 - Map index 1: `1202` (2+1000+200)
 - Map index 2: `2300` (1000+1000+300)
+
+## Mapping over task groups
+
+As of Airflow 2.5, you can dynamically map over a task group that uses the `@task_group` decorator. The syntax for dynamically mapping over a task group is the same as dynamically mapping over a single task.
+
+```python
+    # creating a task group using the decorator with the dynamic input my_num
+    @task_group(
+        group_id="group1"
+    )
+    def tg1(my_num):
+
+        @task
+        def print_num(num):
+            return num
+        
+        @task
+        def add_42(num):
+            return num + 42
+        
+        print_num(my_num) >> add_42(my_num)
+
+    # creating 6 mapped task group instances of the task group group1
+    tg1_object = tg1.expand(my_num=[19, 23, 42, 8, 7, 108])
+```
+
+You can also dynamically map over multiple task group input parameters as you would for regular tasks using a cross-product, `zip` function, or sets of keyword arguments. For more on this, see [Mapping over multiple parameters](#mapping-over-multiple-parameters).
 
 ## Transform outputs with .map
 

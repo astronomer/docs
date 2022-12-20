@@ -46,12 +46,12 @@ Different types of sensors have different implementation details.
 
 Many Airflow provider packages contain sensors that wait for various criteria in different source systems. The following are some of the most commonly used sensors:
 
+- [`@task.sensor` decorator](https://airflow.apache.org/docs/apache-airflow/stable/tutorial/taskflow.html#using-the-taskflow-api-with-sensor-operators): Allows you to turn any Python function that returns a [PokeReturnValue](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/base/index.html#airflow.sensors.base.PokeReturnValue) into an instance of the [BaseSensorOperator](https://registry.astronomer.io/providers/apache-airflow/modules/basesensoroperator) class. This way of creating a sensor is useful when checking for complex logic or if you are connecting to a tool via an API that has no specific sensor available.
 - [`S3KeySensor`](https://registry.astronomer.io/providers/amazon/modules/s3keysensor): Waits for a key (file) to appear in an Amazon S3 bucket. This sensor is useful if you want your DAG to process files from Amazon S3 as they arrive.
 - [`DateTimeSensor`](https://registry.astronomer.io/providers/apache-airflow/modules/datetimesensor): Waits for a specified date and time. This sensor is useful if you want different tasks within the same DAG to run at different times.
 - [`ExternalTaskSensor`](https://registry.astronomer.io/providers/apache-airflow/modules/externaltasksensor): Waits for an Airflow task to be completed. This sensor is useful if you want to implement [cross-DAG dependencies](cross-dag-dependencies.md) in the same Airflow environment.
 - [`HttpSensor`](https://registry.astronomer.io/providers/http/modules/httpsensor): Waits for an API to be available. This sensor is useful if you want to ensure your API requests are successful.
 - [`SqlSensor`](https://registry.astronomer.io/providers/apache-airflow/modules/sqlsensor): Waits for data to be present in a SQL table. This sensor is useful if you want your DAG to process data as it arrives in your database.
-- [`PythonSensor`](https://registry.astronomer.io/providers/apache-airflow/modules/pythonsensor): Waits for a Python call to return `True`. This sensor is useful if you want to implement complex conditions in your DAG.
 
 To review the available Airflow sensors, go to the [Astronomer Registry](https://registry.astronomer.io/modules?types=sensors).
 
@@ -105,6 +105,64 @@ dag = partner()
 ```
 
 This DAG waits for data to be available in a Postgres database before running validation and storing tasks. The `SqlSensor` runs a SQL query and is marked successful when that query returns data. Specifically, when the result is not in the set (0, '0', '', None). The `SqlSensor` task in the example DAG (`waiting_for_partner`) runs the `CHECK_PARTNER.sql` script every 20 seconds (the `poke_interval`) until the data is returned. The `mode` is set to `reschedule`, meaning between each 20 second interval the task will not take a worker slot. The `timeout` is set to 5 minutes, and the task fails if the data doesn't arrive within that time. When the `SqlSensor` criteria is met, the DAG moves to the downstream tasks. You can find the full code for this example in the [webinar-sensors repo](https://github.com/marclamberti/webinar-sensors).
+
+## Sensor decorator
+
+Starting in Airflow 2.5, you can use the `@task.sensor` decorator from the TaskFlow API to use any Python function that returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The following DAG shows how to use the sensor decorator:
+
+```python
+from airflow import DAG
+from airflow.decorators import task
+from pendulum import datetime
+import requests
+
+# importing the PokeReturnValue
+from airflow.sensors.base import PokeReturnValue
+
+with DAG(
+    dag_id="sensor_decorator",
+    start_date=datetime(2022, 12, 1),
+    schedule="@daily",
+    catchup=False
+):
+
+    # supply inputs to the BaseSensorOperator parameters in the decorator
+    @task.sensor(
+        poke_interval=30,
+        timeout=3600,
+        mode="poke"
+    )
+    def check_shibe_availability() -> PokeReturnValue:
+
+        r = requests.get("http://shibe.online/api/shibes?count=1&urls=true")
+        print(r.status_code)
+
+        # set the condition to True if the API response was 200
+        if r.status_code == 200:
+            condition_met=True
+            operator_return_value=r.json()
+        else:
+            condition_met=False
+            operator_return_value=None
+            print(f"Shibe URL returned the status code {r.status_code}")
+
+        # the function has to return a PokeReturnValue
+        # if is_done = True the sensor will exit successfully, if is_done=False, the sensor will either poke or be rescheduled
+        return PokeReturnValue(is_done=condition_met, xcom_value=operator_return_value)
+
+
+    # print the URL to the picture
+    @task
+    def print_shibe_picture_url(url):
+        print(url)
+
+
+    print_shibe_picture_url(check_shibe_availability())
+```
+
+Here, `@task.sensor` decorates the `check_shibe_availability()` function, which checks if a given API returns a 200 status code. If the API returns a 200 status code, the sensor task is marked as successful. If any other status code is returned, the sensor pokes again after the `poke_interval` has passed.
+
+The optional `xcom_value` parameter in `PokeReturnValue` defines what data will be pushed to [XCom](airflow-passing-data-between-tasks.md) once the `is_done=true`. You can use this data in any downstream tasks.
 
 ## Sensor best practices
 

@@ -9,10 +9,28 @@ id: release-notes
   <meta name="og:description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
 </head>
 
+<p>
+    <a href="/astro-cli-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
 
 If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+## Astro CLI 1.8.4
+
+Release date: December 12, 2022
+
+### Additional improvements
+
+- The `__pycache__/` directory is now included in the `.gitignore` file of an Astro project by default. `__pycache__/` includes compiled versions of DAG and Python files that are automatically generated and should not be committed to Git.
+- Clarified the message that appears when you run `astro deployment update --dag-deploy enable` and DAG-only deploys were already enabled for the Deployment.
+
+### Bug fixes
+
+- Fixed an issue related to the [SQLAlchemy connection](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#sql-alchemy-conn) ([`sql_alchemy_conn`]) in local Airflow environments. Now, users running Airflow 2.3 or above do not see deprecation warnings for SQLAlchemy in logs for locally running Airflow components.
 
 ## Astro CLI 1.8.3
 

@@ -218,8 +218,6 @@ module.exports = {
     label: 'Command reference',
     link: { type: 'doc', id: 'cli/reference' },
     items: [
-      'cli/astro-login',
-      'cli/astro-logout',
       'cli/astro-completion',
       'cli/astro-config-get',
       'cli/astro-config-set',

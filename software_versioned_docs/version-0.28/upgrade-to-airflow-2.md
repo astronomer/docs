@@ -17,7 +17,6 @@ Airflow 2 was built to be fast, reliable, and infinitely scalable. Among the hun
 
 - [Refactored Airflow Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html#running-more-than-one-scheduler) for enhanced performance and high-availability.
 - [Full REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) that enables more opportunities for automation.
-- [Smart Sensors](https://airflow.apache.org/docs/apache-airflow/stable/smart-sensor.html) that execute as single, long-running tasks.
 - [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#taskflow-api) for a simpler way to pass information between tasks.
 - [Independent Providers](https://github.com/apache/airflow/tree/master/airflow/providers) for improved usability and a more agile release cadence.
 - Simplified KubernetesExecutor for ultimate flexibility in configuration.

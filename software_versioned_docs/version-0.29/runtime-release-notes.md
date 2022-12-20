@@ -40,7 +40,7 @@ For a complete list of commits, see the [Apache Airflow 2.5.0 release notes](htt
 
 :::caution
 
-To deploy a project using Astro Runtime 6.0.4 from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the CLI](install-cli.md).
+To deploy a project using Astro Runtime 6.0.4 or later from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the CLI](install-cli.md).
 
 :::
 

@@ -33,10 +33,10 @@ This section contains links to documentation sets that correspond to all previou
 
 ### Maintained versions
 
-- [v0.30](https://docs.astronomer.io/software/0.29/overview)
+- [v0.30](https://docs.astronomer.io/software/0.30/)
 - [v0.29](https://docs.astronomer.io/software/0.29/overview)
 - [v0.28](https://docs.astronomer.io/software/0.28/overview)
-- [v0.25](https://docs.astronomer.io/software/0.25/overview)
+- [v0.25](https://docs.astronomer.io/software/0.25/overview) 
 
 ### Unmaintained versions
 

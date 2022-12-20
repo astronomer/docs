@@ -320,5 +320,6 @@ There are a limited number of decorators available to use with Airflow, although
 - Short circuit decorator (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False
 - Branch decorator (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition
 - Kubernetes pod decorator (`@task.kubernetes()`), which runs a KubernetesPodOperator task
+- [Sensor decorator](what-is-a-sensor.md#sensor-decorator) (`@task.sensor()`), which turns a Python funtion into a sensor. This sensor was introduced in Airflow 2.5.
 
 As of Airflow 2.2, you can also [create your own custom task decorator](https://airflow.apache.org/docs/apache-airflow/stable/howto/create-custom-decorator.html).
