@@ -213,7 +213,7 @@ Another core feature of extra links is that you can dynamically generate them ba
     )
     ```
 
-This task will post the same GET request to the API you defined with the connection ID `randomuser_api` as the first task, but this time using the `CatHttpOperator`.
+This task will post the same GET request to the API you defined with the connection ID `random_user_api_conn` as the first task, but this time using the `CatHttpOperator`.
 
 ## Step 8: Run your DAG and view modified XComs
 

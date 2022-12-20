@@ -23,9 +23,9 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 The [Cloud IDE](cloud-ide/overview.md) includes several new features which improve DAG authoring and testing:
 
-- GitHub commits and configuring a GitHub repository are now separated in the Cloud UI.
-- The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Using the CI/CD pipeline speeds the deploy of DAG changes to Astro.
-- The **Configure GitHub** menu in the Cloud UI now includes a **Clone Repo** toggle. Enabling this option makes files such as helper functions in the `include` folder of your repository accessible when you run DAGs in the Cloud IDE.
+- There is a new **Commit** button in the Cloud UI that is separate from the **Configuring GitHub** menu.
+- The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Deploying DAG changes to Astro using the CI/CD pipeline is now significantly faster.
+- The **Configure GitHub** menu in the Cloud UI now includes a **Clone Repo** settings menu. Enabling this option makes other files in your GitHub repository, such as helper functions in the `include` folder of your project, accessible when you run DAGs in the Cloud IDE.
 - You can now explicitly mark upstream dependencies for a task cell from the cell's configuration menu.
 
 For more information about configuring GitHub and deploying code with the Cloud IDE, see [Deploy a project from the Cloud IDE to Astro](deploy-project.md).
@@ -49,14 +49,14 @@ For more information about these worker types, see [N2 machine series](https://c
 ### Additional improvements 
 
 - In the **Clusters** tab of the Cloud UI, you can now click a cluster entry to see details about the cluster configuration, including which **Worker Types** are enabled for the cluster.
-- The Deployment details page in the Cloud UI now includes an **ID** pane. The Deployment ID is required when you deploy code using the CI/CD process.
-- An **OpenLineage URL** field is now available on the Cloud UI **Settings** page.
+- The Deployment details page in the Cloud UI now includes an **ID** pane. A Deployment ID is required when you deploy code using a CI/CD process.
+- The **OpenLineage URL** for your Organization is now available on the **Settings** page in the Cloud UI. An OpenLineage URL is required to [integrate data lineage from some external systems](set-up-data-lineage.md).
 - Workspaces are now sorted alphabetically in the Cloud UI.
-- In Astro CLI version 1.8.0 or later, when you run `astro deploy` with an empty `dags` folder, the `dags` folder  is excluded when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
+- In Astro CLI version 1.8.0 or later, running `astro deploy` with an empty or missing `dags` folder does not erase or override existing DAGs. Instead, the directory is excluded from the build and push process to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
 
 ### Bug fixes 
 
-- Fixed an issue where Astro temporarily stored DAGs for DAG-only deploys in a new directory named `/usr/local/airflow/dags/current`, which caused import errors in the user code.
+- Fixed an issue where Astro temporarily stored DAGs for DAG-only deploys in a new directory named `/usr/local/airflow/dags/current`, which could cause import errors in user code.
 - Fixed an issue where task runs triggered in the Cloud IDE did not have access to project environment variables.
 - Fixed an issue where Deployment metrics for memory usage were not always accurate.  
 
