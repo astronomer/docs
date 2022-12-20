@@ -47,34 +47,35 @@ The Cloud IDE includes a robust GitHub integration for managing different versio
 
 1. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
 2. Select the project you'd like to deploy.
-3. In the **GitHub Repo** menu, click **Configure**.
+3. In the **GitHub Repo** pane, click **Configure**.
 4. Configure the following values: 
 
-    - **PERSONAL ACCESS TOKEN**: Your personal access token.
-    - **REPOSITORY**: Your GitHub repository, formatted as `<owner>/<repository>`
-    - **DEFAULT BRANCH**: The branch you want to commit your project to by default.
-    - **CLONE REPO**: Turn on **Clone GitHub repo during cell execution** if you want the Cloud IDE to have access to your GitHub repo files when executing an individual cell. Turn on this feature if you have cells that depend on helper files, such as helper functions in `include`.
+    - **Personal Access Token**: Enter your personal access token. If you don't have an access token, follow the instructions to generate one.
+    - **Repository**: Enter the name of your GitHub repository. The format is `<owner>/<repository>`.
+    - **Default Branch**: Select the branch you want to commit your project to.
+    - **Clone GitHub repo during cell execution**: Click the toggle to allow the Cloud IDE to access your GitHub repository files when executing an individual cell. Turn on this feature if you have cells that depend on helper files, such as helper functions in `include`.
+    - **Disable auto sync in favor of manual sync**: When you click this toggle, a button appears in the pane that you can use to manually sync your GitHub repository to your Cloud IDE environment.
 
 6. Click **Configure**.
 
-After you configure a GitHub repository, the **Configure** button in the Cloud IDE updates to **Commit**. You can now commit your changes to your repository.
+After you configure a GitHub repository, you can use the **Commit** button in the Cloud IDE to commit your changes to your repository. 
 
 1. Click **Commit**.
-2. Select a **BRANCH TYPE** and **BRANCH NAME** for your commit.
-3. In the **COMMIT MESSAGE** field, enter a commit message. This will be the commit message for committing your changes from the Astro Cloud IDE to GitHub.
+2. Select a branch type in the **Branch Type** list and then enter a name for the branch in the **Branch Name** field.
+3. In the **Commit Message** field, enter a commit message. This is the commit message for changes committed  from the Astro Cloud IDE to GitHub.
 4. Click **Commit**.
 
 ## Deploy a project from GitHub to Astro
 
 :::info
 
-To deploy your project to Astro using the default using the default GitHub action provided by the Cloud IDE, you must enable DAG-only deploys on your Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+To deploy your project to Astro with the default GitHub action provided by the Cloud IDE, you must enable DAG-only deploys on your Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 :::
 
 On the first GitHub commit of your project, the Astro Cloud IDE automatically pushes a Github action to your repository that includes steps for deploying to Astro. You can then configure your GitHub repository to push your Astro Cloud IDE project to a Deployment when you commit to specific branches. 
 
-You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring Deployments in GitHub. However, there is currently no way to disable the GitHub action that the Astro Cloud IDE pushes to your repository. If you don't complete the following steps, the GitHub action fails and you can't deploy your changes to Astro, but the rest of your commit processes are successful.
+You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring Deployments in GitHub. However, you can't disable the GitHub action that the Astro Cloud IDE pushes to your repository. If you don't complete the following steps, the GitHub action fails, you can't deploy your changes to Astro, but the rest of your commit processes are successful.
 
 The following steps describe how to set up GitHub to run the default GitHub action, which assumes one `main` and one `dev` branch. You can modify these steps and the GitHub action to deploy to any number of differently named Deployments. 
 
