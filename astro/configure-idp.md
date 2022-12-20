@@ -306,6 +306,7 @@ From here, Astronomer support will finalize your organization's integration with
 Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
 
 When a user assigned to the application accesses Astro, they are automatically signed in to Ping Identity after entering their email in the Cloud UI.
+
 </TabItem>
 
 </Tabs>
