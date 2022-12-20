@@ -42,7 +42,8 @@ To install the latest version of the Astro CLI, run the following command:
 ```sh
 brew install astro
 ```
-If the latest version of the Astro CLI is not installed when you run this command:
+
+If Homebrew doesn't install the latest version of the CLI when you run this command:
 
 1. Run the following command to update all package definitions (formulae) and Homebrew:
 
