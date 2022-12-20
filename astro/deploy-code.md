@@ -79,7 +79,7 @@ After the deploy completes, Docker image information for your Deployment is avai
     
 :::info
 
-A new feature in Astro that will add improved visibility into the health of your Deployment and the status of your deploy is coming soon. If you're interested in early access to this feature, contact your Astronomer representative.
+Improved visibility into the health of your Deployment and the status of deploys is coming soon. If you're interested in early access to this feature, contact your Astronomer representative.
 
 :::
 
