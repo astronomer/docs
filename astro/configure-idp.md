@@ -196,7 +196,7 @@ Save these values for Step 2.
 4. Click **Manually Enter** and then complete the following fields:
 
     - **ACS URLs**: `<your-sso-url>`
-    - **Entity ID**: `<your-audience-uri-lvgzh0q4v>`
+    - **Entity ID**: `<your-audience-uri>`
 
 5. Click **Save**.
 
