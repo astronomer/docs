@@ -195,7 +195,7 @@ Save these values for Step 2.
 
 4. Click **Configuration** in the left menu and complete the following fields:
 
-    - **Audience (EntityID)**: `<your-audience-uri-lvgzh0q4v>`
+    - **Audience (EntityID)**: `<your-audience-uri>`
     - **ACS (Consumer) URL Validator**: `<your-sso-url>`
     - **ACS (Consumer) URL**: `<your-sso-url>`
 
