@@ -232,6 +232,7 @@ Astronomer support will finalize your organization's integration with OneLogin.
 3. Make sure that all users who are using Astro are assigned to the Astronomer application.
 
     When a user assigned to the application accesses Astro, they are automatically signed in to OneLogin after entering their email in the Cloud UI.
+</TabItem>
 
 <TabItem value="Ping Identity">
 
