@@ -36,9 +36,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 
-
-## Step 1: Set up your XComs backend 
-
 <Tabs
     defaultValue="aws"
     groupId= "github-actions-image-only-deploys"
@@ -49,6 +46,9 @@ To get the most out of this tutorial, make sure you have an understanding of:
         {label: 'Local', value: 'local'}
     ]}>
 <TabItem value="aws">
+
+## Step 1: Set up your XComs backend 
+
 
 To use an S3 bucket as your custom XCom backend follow these steps:
 
