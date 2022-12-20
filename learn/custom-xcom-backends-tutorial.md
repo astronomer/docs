@@ -10,9 +10,14 @@ import TabItem from '@theme/TabItem';
 
 Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks, which is stored in the XCom backend. By default Airflow uses the [metadata database](airflow-database.md) as an XComs backend, which works well for local development purposes but can become limiting in a production environment. If your storage needs for XComs exceed the size of the Airflow metadatabase or you want to add custom functionality like retention policies, store data that is not JSON serializeable etc you can configure a custom XComs backend. To learn more about when and when not to use a custom XComs backend see the [Best practices](#best-practices) section and the end of this tutorial. 
 
+This tutorial uses the TaskFlow API to pass information between tasks. Learn more in our [Airflow decorators](airflow-decorators.md) guide and in the [TaskFlow API in Airflow 2.0 webinar](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0/).
+
 After you complete this tutorial, you'll be able to:
 
-- 
+- Create a custom XCom backend using an S3 bucket.
+- Use JSON serialization and deserialization in a custom XCom backend.
+- Add a custom logic to the serialization and deserialization methods to store Pandas dataframes as CSV.
+- Know best practices of using custom XCom backends.
 
 :::caution
 
@@ -133,6 +138,9 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
     import uuid
 
     class S3XComBackendJSON(BaseXCom):
+        # the prefix is optional and used to make it easier to recognize
+        # which reference strings in the Airflow metadata database
+        # refer to an XCom that has been stored in an S3 bucket
         PREFIX = "xcom_s3://"
         BUCKET_NAME = "s3-xcom-backend-example"
 
@@ -147,36 +155,54 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             **kwargs
         ):
             
+            # the connection to AWS is created by using the S3 hook with 
+            # the conn id configured in Step 3
             hook        = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+            # make sure the file_id is unique, either by using combinations of
+            # the task_id, run_id and map_index parameters or by using a uuid
             filename    = "data_" + str(uuid.uuid4()) + ".json"
+            # define the full S3 key where the file should be stored
             s3_key      = f"{run_id}/{task_id}/{filename}"
 
+            # write the value to a local temporary JSON file
             with open(filename, 'a+') as f:
                 json.dump(value, f)
 
+            # load the local JSON file into the S3 bucket
             hook.load_file(
                 filename=filename,
                 key=s3_key,
                 bucket_name=S3XComBackendJSON.BUCKET_NAME,
                 replace=True
             )
+
+            # define the string that will be saved to the Airflow metadata 
+            # database to refer to this XCom
             reference_string = S3XComBackendJSON.PREFIX + s3_key
 
+            # use JSON serialization to write the reference string to the
+            # Airflow metadata database (like a regular XCom)
             return BaseXCom.serialize_value(value=reference_string)
 
         @staticmethod
         def deserialize_value(result):
+            # retrieve the relevant reference string from the metadata database
             reference_string = BaseXCom.deserialize_value(result=result)
             
+            # create the S3 connection using the S3Hook and recreate the S3 key
             hook    = S3Hook(aws_conn_id="s3_xcom_backend_conn")
             key     = reference_string.replace(S3XComBackendJSON.PREFIX, "")
 
+            # download the JSON file found at the location described by the 
+            # reference string to a temporary local folder
             filename = hook.download_file(
                 key=key,
                 bucket_name=S3XComBackendJSON.BUCKET_NAME,
                 local_path="/tmp"
             )
 
+            # load the content of the local JSON file and return it to be used by
+            # the operator
             with open(filename, 'r') as f:
                 output = json.load(f)
 
@@ -230,10 +256,10 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
             @task
             def pick_a_random_number():
-                return random.randint(1, 10)
+                return random.randint(1, 10) # push to XCom
 
             @task
-            def print_a_number(num):
+            def print_a_number(num): # retrieve from XCom
                 print(num) 
 
             print_a_number(pick_a_random_number())
@@ -374,63 +400,71 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
 
 ## Step 7: Run a DAG passing Pandas dataframes via XComs
 
+Test the new custom XCom backend by running a DAG that pushes a Pandas dataframe to and pulls a Pandas dataframe from XComs.
 
+1. Create a new file called `fetch_pokemon_data_dag.py` in the `dags` folder of your Astro project.
 
-```python
-from airflow.decorators import dag, task
-from pendulum import datetime 
-import pandas as pd
-import requests
+2. Copy and paste the DAG below. Make sure to enter your favorite Pokemon.
 
-MY_FAVORITE_POKEMON = "pikachu"
-MY_OTHER_FAVORITE_POKEMON = "vulpix"
+    ```python
+    from airflow.decorators import dag, task
+    from pendulum import datetime 
+    import pandas as pd
+    import requests
 
-@dag(
-    start_date=datetime(2022, 12, 20),
-    schedule="@daily",
-    catchup=False
-)
-def fetch_pokemon_data_dag():
+    MY_FAVORITE_POKEMON = "pikachu"
+    MY_OTHER_FAVORITE_POKEMON = "vulpix"
 
-    @task 
-    def extract_data():
-        """Extracts data from the pokemon API. Returns a JSON serializeable dict."""
+    @dag(
+        start_date=datetime(2022, 12, 20),
+        schedule="@daily",
+        catchup=False
+    )
+    def fetch_pokemon_data_dag():
 
-        r1 = requests.get(f"https://pokeapi.co/api/v2/pokemon/{MY_FAVORITE_POKEMON}")
-        r2 = requests.get(f"https://pokeapi.co/api/v2/pokemon/{MY_OTHER_FAVORITE_POKEMON}")
+        @task 
+        def extract_data():
+            """Extracts data from the pokemon API. Returns a JSON serializeable dict."""
 
-        return {
-            "pokemon": [f"{MY_FAVORITE_POKEMON}", f"{MY_OTHER_FAVORITE_POKEMON}"],
-            "base_experience": [r1.json()["base_experience"], r2.json()["base_experience"]],
-            "height" : [r1.json()["height"], r2.json()["height"]]
-        }
+            r1 = requests.get(f"https://pokeapi.co/api/v2/pokemon/{MY_FAVORITE_POKEMON}")
+            r2 = requests.get(f"https://pokeapi.co/api/v2/pokemon/{MY_OTHER_FAVORITE_POKEMON}")
 
-    @task
-    def calculate_xp_per_height(pokemon_data_dict):
-        """Calculates base XP per height and returns a pandas dataframe."""
+            return {
+                "pokemon": [f"{MY_FAVORITE_POKEMON}", f"{MY_OTHER_FAVORITE_POKEMON}"],
+                "base_experience": [r1.json()["base_experience"], r2.json()["base_experience"]],
+                "height" : [r1.json()["height"], r2.json()["height"]]
+            }
 
-        df = pd.DataFrame(pokemon_data_dict)
+        @task
+        def calculate_xp_per_height(pokemon_data_dict):
+            """Calculates base XP per height and returns a pandas dataframe."""
 
-        df["xp_per_height"] = df["base_experience"] / df["height"]
+            df = pd.DataFrame(pokemon_data_dict)
 
-        return df
+            df["xp_per_height"] = df["base_experience"] / df["height"]
 
-    @task 
-    def print_xp_per_height(pokemon_data_df):
-        """Retrieves information from a pandas dataframe in the custom XComs 
-        backend. Prints out pokemon information."""
+            return df
 
-        for i in pokemon_data_df.index:
-            pokemon = pokemon_data_df.loc[i, 'pokemon']
-            xph = pokemon_data_df.loc[i, 'xp_per_height']
-            print(f"{pokemon} has a base xp to height ratio of {xph}")
+        @task 
+        def print_xp_per_height(pokemon_data_df):
+            """Retrieves information from a pandas dataframe in the custom XComs 
+            backend. Prints out pokemon information."""
 
-    print_xp_per_height(calculate_xp_per_height(extract_data()))
+            for i in pokemon_data_df.index:
+                pokemon = pokemon_data_df.loc[i, 'pokemon']
+                xph = pokemon_data_df.loc[i, 'xp_per_height']
+                print(f"{pokemon} has a base xp to height ratio of {xph}")
 
-fetch_pokemon_data_dag()
-```
+        print_xp_per_height(calculate_xp_per_height(extract_data()))
 
+    fetch_pokemon_data_dag()
+    ```
 
+    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a Pandas dataframe to XComs which is only possible when using a custom XCom backend with a serialization option for this type of object. The last task `print_xp_per_height` retrives the csv and recreates the Pandas dataframe before printing out the Pokemon and their base experience to height ratio.
+
+3. View the information about your favorite pokemon in the task log of the `print_xp_per_height` task.
+
+    [Pokemon Information in logs](/img/guides/xcom_backend_task_logs_pokemon.png)
 
 ## Best practices
 
@@ -441,5 +475,6 @@ Common reasons to use a custom XComs backend are:
 - The need for custom serialization and deserialization methods. By default Airflow uses JSON serialization which puts limits on the type of data that you can pass via XComs (pickling is available by setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` but has [known security implications](https://docs.python.org/3/library/pickle.html)).
 - Having a custom setup where access to XComs is needed without accessing the metadata database. 
 
-
 ## Conclustion
+
+Congratulation! You learned how to set up a custom XCom backend and how to define your own serialization and deserialization methods. 
