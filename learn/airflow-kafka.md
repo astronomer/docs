@@ -310,7 +310,7 @@ The ConsumeFromTopicOperator can be used to create a Kafka consumer to read batc
 
 ### AwaitKafkaMessageOperator
 
-The AwaitKafkaMessageOperator is a [deferrable operator](https://docs.astronomer.io/learn/deferrable-operators) that can be used to wait for a specific message to be published to one of more Kafka topics. You can define the following parameters:
+The AwaitKafkaMessageOperator is a [deferrable operator](https://docs.astronomer.io/learn/deferrable-operators) that can be used to wait for a specific message to be published to one or more Kafka topics. You can define the following parameters:
 
 - `topics`: A list of topics or regex patterns to read from.
 - `apply_function`: A Python function that is applied to all messages that are read. If the function returns any data the task will be ended and marked as successful. The returned data will be pushed to XCom unless the BaseOperator argument `do_xcom_push` is set to `False`.
