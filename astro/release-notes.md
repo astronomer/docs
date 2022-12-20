@@ -21,6 +21,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Additional improvements 
 
+- You can now configure OneLogin and Ping Identity as identity providers on Astro. See [Configure your identity provider](configure-idp.md#configure-your-identity-provider).
 - Workspace Members can now view **Workspace settings** in the Cloud UI.
 
 ### Bug fixes 
