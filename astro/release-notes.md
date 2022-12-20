@@ -17,6 +17,17 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.8.4 ([Release notes](cli/release-notes.md))
 
+## December 20, 2022 
+
+### Additional improvements 
+
+- Workspace Members can now view **Workspace settings** in the Cloud UI.
+
+### Bug fixes 
+
+- Fixed an issue where the lineage UI did not show dataset metrics when a dataset had no column-level metrics.
+- Fixed an issue where some instances of a dataset's name were inconsistent in the lineage UI.
+
 ## December 13, 2022 
 
 ### Improvements to the Cloud IDE
