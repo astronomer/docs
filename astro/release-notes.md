@@ -23,7 +23,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 - You can now configure OneLogin and Ping Identity as identity providers on Astro. See [Configure your identity provider](configure-idp.md#configure-your-identity-provider).
 - Workspace Members can now view **Workspace settings** in the Cloud UI.
-- When node groups are collapsed in the lineage graph in the Cloud UI, they now show only the total number of connected **Jobs** and **Datasets** instead of showing each job and dataset. This makes the lineage graph easier to navigate.
+- Node groups that are collapsed in the lineage graph in the Cloud UI now show only the total number of connected **Jobs** and **Datasets**, instead of listing each job and dataset. This makes the lineage graph easier to navigate.
 
     ![Collapsed node in lineage graph of Cloud UI](/img/release-notes/collapsed-lineage-node.png)
 
