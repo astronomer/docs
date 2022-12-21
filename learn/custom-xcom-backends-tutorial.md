@@ -8,7 +8,7 @@ description: 'Use this tutorial to learn how to set up a custom XComs backend in
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks, which is stored in the XCom backend. By default Airflow uses the [metadata database](airflow-database.md) as an XComs backend, which works well for local development purposes but can become limiting in a production environment. If your storage needs for XComs exceed the size of the Airflow metadata database or you want to add custom functionality like retention policies, store data that is not JSON serializeable etc you can configure a custom XComs backend. To learn more about when and when not to use a custom XComs backend see the [Best practices](#best-practices) section and the end of this tutorial. 
+Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks, which is stored in the XCom backend. By default Airflow uses the [metadata database](airflow-database.md) as an XComs backend, which works well for local development purposes but can become limiting in a production environment. There are many use cases for custom XCom backend solutions, you can learn more about them in the [Best practices](#best-practices) section and the end of this tutorial. 
 
 This tutorial uses the TaskFlow API to pass information between tasks. Learn more in our [Airflow decorators](airflow-decorators.md) guide and in the [TaskFlow API in Airflow 2.0 webinar](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0/).
 
@@ -94,8 +94,39 @@ To use an S3 bucket as your custom XCom backend follow these steps:
 
 </TabItem>
 
-<TabItem value="gcp"></TabItem>
-<TabItem value="azure"></TabItem>
+<TabItem value="gcp">
+
+To use a bucket in Google Cloud storage as your custom XCom backend follow these steps:
+
+1. Log into your Google Cloud account and [create a new project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) called `custom-xcom-backend-example`.
+
+2. [Create a new bucket](https://cloud.google.com/storage/docs/creating-buckets) called `gcs-xcom-backend-example`. Consider enabling object versioning.
+
+2. [Create a custom IAM role](https://cloud.google.com/iam/docs/creating-custom-roles) called `AirflowXComBackendGCS` for Airflow to access your bucket. With 6 permissions assigned:
+
+    - storage.buckets.list
+    - storage.objects.create
+    - storage.objects.delete
+    - storage.objects.get
+    - storage.objects.list
+    - storage.objects.update
+
+    ![GCS IAM role](/img/guides/xcom_backend_gcs_role.png)
+
+3. [Create a new service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) called `airflow-xcoms` and grant it access to your project via the `AirflowXComBackendGCS` role.
+
+    ![GCS IAM role](/img/guides/xcom_backend_gcs_service_account.png)
+
+4. [Create a new key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your `airflow-xcoms` service account and make sure to download the credentials in JSON format.
+
+</TabItem>
+<TabItem value="azure">
+
+To use a Azure blob storage as your custom XCom backend follow these steps:
+
+1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create).
+
+</TabItem>
 <TabItem value="local"></TabItem>
 
 </Tabs>
@@ -130,7 +161,7 @@ To use an S3 bucket as your custom XCom backend follow these steps:
 
 To give Airflow access to your S3 bucket you need to define an [Airflow connection](connections.md). 
 
-1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Amazon Web Service`. Provide the AWS Access Key ID and AWS Secret Access Key from the IAM user you created in [Step 1](#step-1-set-up-your-xcoms-backend). The screenshot below shows the connection using the Connection ID `s3_xcoms_backend_conn`.
+1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Amazon Web Service`. Provide the AWS Access Key ID and AWS Secret Access Key from the IAM user you created in [Step 1](#step-1-set-up-your-xcoms-backend). The screenshot below shows the connection using the Connection ID `s3_xcom_backend_conn`.
 
     ![Airflow Connection to S3](/img/guides/xcom_backend_aws_connection.png)
 
@@ -144,7 +175,23 @@ It is also possible to define a [connection using environment variables](https:/
 
 </TabItem>
 
-<TabItem value="gcp"></TabItem>
+<TabItem value="gcp">
+
+To give Airflow access to your GCS bucket you need to define an [Airflow connection](connections.md). 
+
+1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Google Cloud`. Provide the name of your project (`custom-xcom-backend-example`). Open the JSON file with the credentials you downloaded in [Step 1](#step-1-set-up-your-xcoms-backend) and copy paste it in full into the field `Keyfile JSON`. The screenshot below shows the connection using the Connection ID `gcs_xcoms_backend_conn`.
+
+    ![Airflow Connection to GCS bucket](/img/guides/xcom_backend_gcs_connection.png)
+
+2. Save your connection.
+
+:::tip
+
+It is also possible to define a [connection using environment variables](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables).
+
+:::
+
+</TabItem>
 <TabItem value="azure"></TabItem>
 <TabItem value="local"></TabItem>
 
@@ -274,7 +321,117 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
 </TabItem>
 
-<TabItem value="gcp"></TabItem>
+<TabItem value="gcp">
+
+For Airflow to be able to use your custom XCom backend it is necessary to define an XCom backend class which inherits from the `BaseXCom` class.
+
+1. In your Astro project create a new file in the `include` directory called `gcs_xcom_backend_json.py`.
+
+2. Copy paste the following code into the file:
+
+    ```python
+    from airflow.models.xcom import BaseXCom
+    from airflow.providers.google.cloud.hooks.gcs import GCSHook
+    import json
+    import uuid
+
+    class GCSXComBackendJSON(BaseXCom):
+        # the prefix is optional and used to make it easier to recognize
+        # which reference strings in the Airflow metadata database
+        # refer to an XCom that has been stored in a GCS bucket
+        PREFIX = "xcom_gcs://"
+        BUCKET_NAME = "gcs-xcom-backend-example"
+
+        @staticmethod
+        def serialize_value(
+            value,
+            key=None,
+            task_id=None,
+            dag_id=None,
+            run_id=None,
+            map_index= None,
+            **kwargs
+        ):
+            
+            # the connection to GCS is created by using the GCShook with 
+            # the conn id configured in Step 3
+            hook        = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+            # make sure the file_id is unique, either by using combinations of
+            # the task_id, run_id and map_index parameters or by using a uuid
+            filename    = "data_" + str(uuid.uuid4()) + ".json"
+            # define the full GCS key where the file should be stored
+            gs_key      = f"{run_id}/{task_id}/{filename}"
+
+            # write the value to a local temporary JSON file
+            with open(filename, 'a+') as f:
+                json.dump(value, f)
+
+            # load the local JSON file into the GCS bucket
+            hook.upload(
+                filename=filename,
+                object_name=gs_key,
+                bucket_name=GCSXComBackendJSON.BUCKET_NAME,
+            )
+
+            # define the string that will be saved to the Airflow metadata 
+            # database to refer to this XCom
+            reference_string = GCSXComBackendJSON.PREFIX + gs_key
+
+            # use JSON serialization to write the reference string to the
+            # Airflow metadata database (like a regular XCom)
+            return BaseXCom.serialize_value(value=reference_string)
+
+        @staticmethod
+        def deserialize_value(result):
+            # retrieve the relevant reference string from the metadata database
+            reference_string = BaseXCom.deserialize_value(result=result)
+            
+            # create the GCS connection using the GCSHook and recreate the key
+            hook    = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+            gs_key     = reference_string.replace(GCSXComBackendJSON.PREFIX, "")
+
+            # download the JSON file found at the location described by the 
+            # reference string to a temporary local folder
+            filename = hook.download(
+                object_name=gs_key,
+                bucket_name=GCSXComBackendJSON.BUCKET_NAME,
+                filename="my_xcom.json"
+            )
+
+            # load the content of the local JSON file and return it to be used by
+            # the operator
+            with open(filename, 'r') as f:
+                output = json.load(f)
+
+            return output
+    ```
+
+    The code above defines a class called `GCSXComBackendJSON`. The class has two methods: `.serialize_value()` defines how the `value` that is pushed to XComs from an Airflow task is handled, while `.deserialize_value()` contains the logic to retrieve information from the XComs backend.
+
+    The `.serialize_value()` method accomplishes the following:
+
+    - Instantiates an [`GCSHook`](https://registry.astronomer.io/providers/google/modules/gcshook) using the `gcs_xcom_backend_conn` connection that was defined in [Step 3](#step-3-create-a-connection).
+    - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
+    - Uses the `run_id` and `task_id` from the Airflow context to define the `gs_key` under which the file will be saved in the GCS bucket.
+    - Writes the `value` that is being pushed to XComs to a JSON file.
+    - Uploads the JSON file to the bucket.
+    - Creates a `reference_string` using the `gs_key` that is written to the Airflow metadata database as a regular XCom.
+
+    The `.deserialize_value()` method:
+
+    - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XComs.
+    - Downloads the JSON file at the `gs_key` contained in the `reference_string`.
+    - Retrieves the information from the JSON file.
+
+3. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
+
+    ```text
+    AIRFLOW__CORE__XCOM_BACKEND=include.gcs_xcom_backend_json.GCSXComBackendJSON
+    ```
+
+4. Restart your Airflow instance using `astro dev restart`.
+
+</TabItem>
 <TabItem value="azure"></TabItem>
 <TabItem value="local"></TabItem>
 
@@ -315,6 +472,10 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 3. Run the DAG.
 
+4. View the logs of both tasks, they include information about the custom XComs backend. The `print_a_number` task includes the full path to the file stored in the custom backend.
+
+    ![Logs mentioning custom XCom backend](/img/guides/xcom_backend_task_logs_simple.png)
+
 <Tabs
     defaultValue="aws"
     groupId= "github-actions-image-only-deploys"
@@ -326,17 +487,19 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
     ]}>
 <TabItem value="aws">
 
-4. View the logs of both tasks, they include information about the custom XComs backend. The `print_a_number` task includes the full path to the file stored in the S3 bucket.
-
-    ![Logs mentioning custom XCom backend](/img/guides/xcom_backend_task_logs_simple.png)
-
 5. View the XCom in your S3 bucket.
 
     ![XComs in the S3 bucket](/img/guides/xcom_backend_S3_json.png)
 
 </TabItem>
 
-<TabItem value="gcp"></TabItem>
+<TabItem value="gcp">
+
+5. View the XCom in your GCS bucket.
+
+   ![XComs in the GCS bucket](/img/guides/xcom_backend_gcs_json.png)
+
+</TabItem>
 <TabItem value="azure"></TabItem>
 <TabItem value="local"></TabItem>
 
@@ -436,7 +599,6 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
                     output = json.load(f)
 
             return output
-
     ```
 
     The code above creates a second custom XCom backend called `S3XComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the S3 bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
@@ -451,7 +613,101 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
 
 </TabItem>
 
-<TabItem value="gcp"></TabItem>
+<TabItem value="gcp">
+
+A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle object that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
+
+1. Create a second file in your `include` folder called `gcs_xcom_backend_pandas.py`.
+
+2. Copy and paste the following code into the file.
+
+    ```python
+    from airflow.models.xcom import BaseXCom
+    from airflow.providers.google.cloud.hooks.gcs import GCSHook
+
+    import pandas as pd
+    import json
+    import uuid
+
+    class GCSXComBackendPandas(BaseXCom):
+        PREFIX = "xcom_gcs://"
+        BUCKET_NAME = "gcs-xcom-backend-example"
+
+        @staticmethod
+        def serialize_value(
+            value,
+            key=None,
+            task_id=None,
+            dag_id=None,
+            run_id=None,
+            map_index= None,
+            **kwargs
+        ):
+
+            hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+            
+            # added serialization method if the value passed is a Pandas dataframe
+            # the contents are written to a local temporary csv file
+            if isinstance(value, pd.DataFrame):
+                filename    = "data_" + str(uuid.uuid4()) + ".csv"
+                gs_key      = f"{run_id}/{task_id}/{filename}"
+
+                value.to_csv(filename)
+
+            # if the value passed is not a Pandas dataframe, attempt to use
+            # JSON serialization
+            else:
+                filename    = "data_" + str(uuid.uuid4()) + ".json"
+                gs_key      = f"{run_id}/{task_id}/{filename}"
+
+                with open(filename, 'a+') as f:
+                    json.dump(value, f)
+
+            hook.upload(
+                filename=filename,
+                object_name=gs_key,
+                bucket_name=GCSXComBackendPandas.BUCKET_NAME,
+            )
+
+            reference_string = GCSXComBackendPandas.PREFIX + gs_key
+
+            return BaseXCom.serialize_value(value=reference_string)
+
+        @staticmethod
+        def deserialize_value(result):
+            result = BaseXCom.deserialize_value(result)
+
+            hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+            gs_key = result.replace(GCSXComBackendPandas.PREFIX, "")
+
+            filename = hook.download(
+                object_name=gs_key,
+                bucket_name=GCSXComBackendPandas.BUCKET_NAME,
+                filename="my_xcom"
+            )
+
+            # added deserialization option to convert a CSV back to a dataframe
+            if gs_key.split(".")[-1] == "csv":
+                output = pd.read_csv(filename)
+            # if the key does not end in 'csv' use JSON deserialization
+            else:
+                with open(filename, 'r') as f:
+                    output = json.load(f)
+
+            return output
+    ```
+
+    The code above creates a second custom XCom backend called `GCSXComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the GCS bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
+
+3. In the `.env` file of your Astro project, change the XCom backend variable to use the newly created `GCSXComBackendPandas`.
+
+    ```text
+    AIRFLOW__CORE__XCOM_BACKEND=include.gcs_xcom_backend_pandas.GCSXComBackendPandas
+    ```
+
+4. Restart your Airflow instance using `astro dev restart`.
+
+</TabItem>
 <TabItem value="azure"></TabItem>
 <TabItem value="local"></TabItem>
 
