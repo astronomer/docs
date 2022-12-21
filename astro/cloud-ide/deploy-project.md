@@ -73,7 +73,7 @@ You can commit changes from the Astro Cloud IDE to your GitHub repository withou
 
 :::caution
 
-The GitHub action first runs, it automatically enables DAG-only deploys on your Deployment, which is a Public Preview feature that changes how DAGs and configuration changes are pushed to the Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+When the GitHub action first runs, it automatically enables DAG-only deploys on your Deployment. DAG-only deploys are a Public Preview feature that change how DAGs and configuration changes are pushed to the Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 :::
 
