@@ -435,8 +435,10 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 4. Restart your Airflow instance using `astro dev restart`.
 
 </TabItem>
-<TabItem value="azure"></TabItem>
-<TabItem value="local"></TabItem>
+<TabItem value="azure">
+</TabItem>
+<TabItem value="local">
+</TabItem>
 
 </Tabs>
 
@@ -503,8 +505,10 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
    ![XComs in the GCS bucket](/img/guides/xcom_backend_gcs_json.png)
 
 </TabItem>
-<TabItem value="azure"></TabItem>
-<TabItem value="local"></TabItem>
+<TabItem value="azure">
+</TabItem>
+<TabItem value="local">
+</TabItem>
 
 </Tabs>
 
@@ -711,8 +715,10 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
 4. Restart your Airflow instance using `astro dev restart`.
 
 </TabItem>
-<TabItem value="azure"></TabItem>
-<TabItem value="local"></TabItem>
+<TabItem value="azure">
+</TabItem>
+<TabItem value="local">
+</TabItem>
 
 </Tabs>
 
