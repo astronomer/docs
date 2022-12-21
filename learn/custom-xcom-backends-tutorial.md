@@ -102,22 +102,22 @@ To use a bucket in Google Cloud storage as your custom XCom backend follow these
 
 2. [Create a new bucket](https://cloud.google.com/storage/docs/creating-buckets) called `gcs-xcom-backend-example`. Consider enabling object versioning.
 
-2. [Create a custom IAM role](https://cloud.google.com/iam/docs/creating-custom-roles) called `AirflowXComBackendGCS` for Airflow to access your bucket. With 6 permissions assigned:
+3. [Create a custom IAM role](https://cloud.google.com/iam/docs/creating-custom-roles) called `AirflowXComBackendGCS` for Airflow to access your bucket. With 6 permissions assigned:
 
-    - storage.buckets.list
-    - storage.objects.create
-    - storage.objects.delete
-    - storage.objects.get
-    - storage.objects.list
-    - storage.objects.update
+- storage.buckets.list
+- storage.objects.create
+- storage.objects.delete
+- storage.objects.get
+- storage.objects.list
+- storage.objects.update
 
     ![GCS IAM role](/img/guides/xcom_backend_gcs_role.png)
 
-3. [Create a new service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) called `airflow-xcoms` and grant it access to your project via the `AirflowXComBackendGCS` role.
+4. [Create a new service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) called `airflow-xcoms` and grant it access to your project via the `AirflowXComBackendGCS` role.
 
     ![GCS IAM role](/img/guides/xcom_backend_gcs_service_account.png)
 
-4. [Create a new key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your `airflow-xcoms` service account and make sure to download the credentials in JSON format.
+5. [Create a new key](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) for your `airflow-xcoms` service account and make sure to download the credentials in JSON format.
 
 </TabItem>
 <TabItem value="azure">
