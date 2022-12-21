@@ -41,6 +41,8 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 
+## Step 1: Set up your XComs backend 
+
 <Tabs
     defaultValue="aws"
     groupId= "github-actions-image-only-deploys"
@@ -51,8 +53,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
         {label: 'Local', value: 'local'}
     ]}>
 <TabItem value="aws">
-
-## Step 1: Set up your XComs backend 
 
 To use an S3 bucket as your custom XCom backend follow these steps:
 
@@ -84,13 +84,21 @@ To use an S3 bucket as your custom XCom backend follow these steps:
     }
     ```
 
-    [AWS IAM policy for the XCom backend](/img/guides/xcom_backend_aws_policy.png)
+    ![AWS IAM policy for the XCom backend](/img/guides/xcom_backend_aws_policy.png)
 
 3. Save your policy under the name `AirflowXComBackendAWSS3`. 
 
 4. [Create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) called `airflow-xcoms` with the AWS credential type `Access key - Programmatic access`. Attach the `AirflowXComBackendAWSS3` policy to this user as shown in the screenshot below. Make sure to save the Access key ID and the Secret access key.
 
-    [AWS IAM user for the XCom backend](/img/guides/xcom_backend_aws_user.png)
+    ![AWS IAM user for the XCom backend](/img/guides/xcom_backend_aws_user.png)
+
+</TabItem>
+
+<TabItem value="gcp"></TabItem>
+<TabItem value="azure"></TabItem>
+<TabItem value="local"></TabItem>
+
+</Tabs>
 
 ## Step 2: Create an Astro project
 
@@ -107,13 +115,24 @@ To use an S3 bucket as your custom XCom backend follow these steps:
     $ astro dev start
     ```
 
-## Step 3: Create an AWS connection
+## Step 3: Create a connection
+
+<Tabs
+    defaultValue="aws"
+    groupId= "github-actions-image-only-deploys"
+    values={[
+        {label: 'AWS S3', value: 'aws'},
+        {label: 'GCP Cloud Storage', value: 'gcp'},
+        {label: 'Azure Blob Storage', value: 'azure'},
+        {label: 'Local', value: 'local'}
+    ]}>
+<TabItem value="aws">
 
 To give Airflow access to your S3 bucket you need to define an [Airflow connection](connections.md). 
 
 1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Amazon Web Service`. Provide the AWS Access Key ID and AWS Secret Access Key from the IAM user you created in [Step 1](#step-1-set-up-your-xcoms-backend). The screenshot below shows the connection using the Connection ID `s3_xcoms_backend_conn`.
 
-    [Airflow Connection to S3](/img/guides/xcom_backend_aws_connection.png)
+    ![Airflow Connection to S3](/img/guides/xcom_backend_aws_connection.png)
 
 2. Save your connection.
 
@@ -123,7 +142,26 @@ It is also possible to define a [connection using environment variables](https:/
 
 :::
 
+</TabItem>
+
+<TabItem value="gcp"></TabItem>
+<TabItem value="azure"></TabItem>
+<TabItem value="local"></TabItem>
+
+</Tabs>
+
 ## Step 4: Define a custom XCom class using JSON serialization
+
+<Tabs
+    defaultValue="aws"
+    groupId= "github-actions-image-only-deploys"
+    values={[
+        {label: 'AWS S3', value: 'aws'},
+        {label: 'GCP Cloud Storage', value: 'gcp'},
+        {label: 'Azure Blob Storage', value: 'azure'},
+        {label: 'Local', value: 'local'}
+    ]}>
+<TabItem value="aws">
 
 For Airflow to be able to use your custom XCom backend it is necessary to define an XCom backend class which inherits from the `BaseXCom` class.
 
@@ -234,6 +272,14 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
 4. Restart your Airflow instance using `astro dev restart`.
 
+</TabItem>
+
+<TabItem value="gcp"></TabItem>
+<TabItem value="azure"></TabItem>
+<TabItem value="local"></TabItem>
+
+</Tabs>
+
 ## Step 5: Run a simple DAG using XComs
 
 To test your custom XCom backend you will run a simple DAG which pushes a random number to your custom XCom backend and then retrieves it again.
@@ -269,16 +315,45 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 3. Run the DAG.
 
+<Tabs
+    defaultValue="aws"
+    groupId= "github-actions-image-only-deploys"
+    values={[
+        {label: 'AWS S3', value: 'aws'},
+        {label: 'GCP Cloud Storage', value: 'gcp'},
+        {label: 'Azure Blob Storage', value: 'azure'},
+        {label: 'Local', value: 'local'}
+    ]}>
+<TabItem value="aws">
+
 4. View the logs of both tasks, they include information about the custom XComs backend. The `print_a_number` task includes the full path to the file stored in the S3 bucket.
 
-    [Logs mentioning custom XCom backend](/img/guides/xcom_backend_task_logs_simple.png)
+    ![Logs mentioning custom XCom backend](/img/guides/xcom_backend_task_logs_simple.png)
 
 5. View the XCom in your S3 bucket.
 
-    [XComs in the S3 bucket](/img/guides/xcom_backend_S3_json.png)
+    ![XComs in the S3 bucket](/img/guides/xcom_backend_S3_json.png)
 
+</TabItem>
+
+<TabItem value="gcp"></TabItem>
+<TabItem value="azure"></TabItem>
+<TabItem value="local"></TabItem>
+
+</Tabs>
 
 ## Step 6: Create a custom serialization method to handle Pandas dataframes
+
+<Tabs
+    defaultValue="aws"
+    groupId= "github-actions-image-only-deploys"
+    values={[
+        {label: 'AWS S3', value: 'aws'},
+        {label: 'GCP Cloud Storage', value: 'gcp'},
+        {label: 'Azure Blob Storage', value: 'azure'},
+        {label: 'Local', value: 'local'}
+    ]}>
+<TabItem value="aws">
 
 A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle object that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
 
@@ -374,27 +449,11 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
 
 4. Restart your Airflow instance using `astro dev restart`.
 
-
 </TabItem>
 
-<TabItem value="gcp">
-
-## Step TEST
-
-</TabItem>
-
-<TabItem value="azure">
-
-
-
-</TabItem>
-
-<TabItem value="local">
-
-
-
-</TabItem>
-
+<TabItem value="gcp"></TabItem>
+<TabItem value="azure"></TabItem>
+<TabItem value="local"></TabItem>
 
 </Tabs>
 
@@ -464,7 +523,7 @@ Test the new custom XCom backend by running a DAG that pushes a Pandas dataframe
 
 3. View the information about your favorite pokemon in the task log of the `print_xp_per_height` task.
 
-    [Pokemon Information in logs](/img/guides/xcom_backend_task_logs_pokemon.png)
+    ![Pokemon Information in logs](/img/guides/xcom_backend_task_logs_pokemon.png)
 
 ## Best practices
 
