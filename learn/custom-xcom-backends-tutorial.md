@@ -8,7 +8,7 @@ description: 'Use this tutorial to learn how to set up a custom XComs backend in
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks, which is stored in the XCom backend. By default Airflow uses the [metadata database](airflow-database.md) as an XComs backend, which works well for local development purposes but can become limiting in a production environment. If your storage needs for XComs exceed the size of the Airflow metadatabase or you want to add custom functionality like retention policies, store data that is not JSON serializeable etc you can configure a custom XComs backend. To learn more about when and when not to use a custom XComs backend see the [Best practices](#best-practices) section and the end of this tutorial. 
+Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks, which is stored in the XCom backend. By default Airflow uses the [metadata database](airflow-database.md) as an XComs backend, which works well for local development purposes but can become limiting in a production environment. If your storage needs for XComs exceed the size of the Airflow metadata database or you want to add custom functionality like retention policies, store data that is not JSON serializeable etc you can configure a custom XComs backend. To learn more about when and when not to use a custom XComs backend see the [Best practices](#best-practices) section and the end of this tutorial. 
 
 This tutorial uses the TaskFlow API to pass information between tasks. Learn more in our [Airflow decorators](airflow-decorators.md) guide and in the [TaskFlow API in Airflow 2.0 webinar](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0/).
 
@@ -58,7 +58,7 @@ To use an S3 bucket as your custom XCom backend follow these steps:
 
 1. Log into your AWS account and [create a new S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html) called `s3-xcom-backend-example`. In the creation settings, make sure to enable Bucket Versioning and that public access is blocked.
 
-2. [Create a new IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for Airflow to access your bucket. You can use the JSON configuration below or use AWS' graphical user interface to replicate what you see in the screenhot.
+2. [Create a new IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for Airflow to access your bucket. You can use the JSON configuration below or use AWS' graphical user interface to replicate what you see in the screenshot.
 
     ```json
     {
@@ -251,7 +251,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
     The `.serialize_value()` method accomplishes the following:
 
-    - Instatiates an [`S3Hook`](https://registry.astronomer.io/providers/amazon/modules/s3hook) using the `s3_xcom_backend_conn` connection that was defined in [Step 3](#step-3-create-a-connection).
+    - Instantiates an [`S3Hook`](https://registry.astronomer.io/providers/amazon/modules/s3hook) using the `s3_xcom_backend_conn` connection that was defined in [Step 3](#step-3-create-a-connection).
     - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
     - Uses the `run_id` and `task_id` from the Airflow context to define the `s3_key` under which the file will be saved in the S3 bucket.
     - Writes the `value` that is being pushed to XComs to a JSON file.
@@ -519,7 +519,7 @@ Test the new custom XCom backend by running a DAG that pushes a Pandas dataframe
     fetch_pokemon_data_dag()
     ```
 
-    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a Pandas dataframe to XComs which is only possible when using a custom XCom backend with a serialization option for this type of object. The last task `print_xp_per_height` retrives the csv and recreates the Pandas dataframe before printing out the Pokemon and their base experience to height ratio.
+    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a Pandas dataframe to XComs which is only possible when using a custom XCom backend with a serialization option for this type of object. The last task `print_xp_per_height` retrieves the csv and recreates the Pandas dataframe before printing out the Pokemon and their base experience to height ratio.
 
 3. View the information about your favorite pokemon in the task log of the `print_xp_per_height` task.
 
@@ -534,6 +534,6 @@ Common reasons to use a custom XComs backend are:
 - The need for custom serialization and deserialization methods. By default Airflow uses JSON serialization which puts limits on the type of data that you can pass via XComs (pickling is available by setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` but has [known security implications](https://docs.python.org/3/library/pickle.html)).
 - Having a custom setup where access to XComs is needed without accessing the metadata database. 
 
-## Conclustion
+## Conclusion
 
 Congratulation! You learned how to set up a custom XCom backend and how to define your own serialization and deserialization methods. 
