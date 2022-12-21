@@ -127,7 +127,8 @@ To use a Azure blob storage as your custom XCom backend follow these steps:
 1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create).
 
 </TabItem>
-<TabItem value="local"></TabItem>
+<TabItem value="local">
+</TabItem>
 
 </Tabs>
 
@@ -192,8 +193,10 @@ It is also possible to define a [connection using environment variables](https:/
 :::
 
 </TabItem>
-<TabItem value="azure"></TabItem>
-<TabItem value="local"></TabItem>
+<TabItem value="azure">
+</TabItem>
+<TabItem value="local">
+</TabItem>
 
 </Tabs>
 
