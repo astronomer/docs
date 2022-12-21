@@ -67,15 +67,15 @@ After you configure a GitHub repository, you can use the **Commit** button in th
 
 ## Deploy a project from GitHub to Astro
 
-:::info
-
-To deploy your project to Astro with the default GitHub action provided by the Cloud IDE, you must enable DAG-only deploys on your Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
-
-:::
-
 On the first GitHub commit of your project, the Astro Cloud IDE automatically pushes a Github action to your repository that includes steps for deploying to Astro. You can then configure your GitHub repository to push your Astro Cloud IDE project to a Deployment when you commit to specific branches. 
 
 You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring Deployments in GitHub. However, you can't disable the GitHub action that the Astro Cloud IDE pushes to your repository. If you don't complete the following steps, the GitHub action fails, you can't deploy your changes to Astro, but the rest of your commit processes are successful.
+
+:::caution
+
+The GitHub action first runs, it automatically enables DAG-only deploys on your Deployment, which is a Public Preview feature that changes how DAGs and configuration changes are pushed to the Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+
+:::
 
 The following steps describe how to set up GitHub to run the default GitHub action, which assumes one `main` and one `dev` branch. You can modify these steps and the GitHub action to deploy to any number of differently named Deployments. 
 
