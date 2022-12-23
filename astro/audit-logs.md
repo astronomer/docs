@@ -19,7 +19,7 @@ The following categories of event data are available in the audit log:
 - Airflow UI access: The data generated when users access the Airflow UI.
 - Astronomer container registry access: The data generated when users access the Astronomer container registry with the Astro CLI.
 
-The audit log file is provided as a JSON file. Every entry in the audit log file corresponds to an event, and event attributes provide additional information about the specific event. 
+The audit log file is provided as a newline limited JSON (NDJSON)file. Every entry in the audit log file corresponds to an event, and event attributes provide additional information about the specific event. 
 
 #### Common fields
 
@@ -37,7 +37,11 @@ The following table lists the common fields shared by all three categories of ev
 
 #### API event fields
 
-The following table lists the fields that are unique to API events.
+Audit Log events may be generated from either the v1 API or the v2 API.   Each API generates different fields for the same actions and your audit log may include a collection of events from either API.  
+
+This following is a list of all API events; your audit log may contain a mix of both v1 and v2 API events.
+##### v1 API event fields
+The following table lists the fields that are unique to v1 API events.
 
 | Field  | Description                                          |
 | ------- | ---------------------------------------------------- |
@@ -67,6 +71,27 @@ The following table maps some common `operationName` attributes to their corresp
 | An API key is created for a Deployment. | `createDeploymentApiKey` | `deploymentId`, `role` |
 | An API key is deleted for a Deployment. | `deleteDeploymentApiKey` | `id` |
 | The code for a Deployment is updated. | `ImageCreate` | `deploymentId` |
+
+##### v2 API event fields 
+
+The following table lists the fields that are unique to v1 API events.
+
+| Field  | Description                                          |
+| ------- | ---------------------------------------------------- |
+| `path` | The path to the REST API that is invoked. |
+| `requestBody` | The parameters passed as input to the API call. |
+| `response status` | The HTTP response status code. |
+
+The following table maps some common `path` attributes to their corresponding `requestBody` attributes. 
+
+| Event | `path` attribute                                          | `requestBody` attributes                   |
+| ------- | ---------------------------------------------------- | --------------------------------- |
+| A new user is invited to an organization.   | `/v1alpha1/organizations/{orgShortNameId}/invites` | `inviteeEmail`, `role` |
+| A user is deleted from an organization.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}` | |
+| A user is assigned a new role.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}/role` | `role`|
+| A user is removed from a workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/users/{userId}` | |
+
+
 
 Use your analytics or audit tool to view additional attribute mapping information. 
 
