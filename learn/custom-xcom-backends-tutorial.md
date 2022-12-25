@@ -104,12 +104,12 @@ To use a bucket in Google Cloud storage as your custom XCom backend follow these
 
 3. [Create a custom IAM role](https://cloud.google.com/iam/docs/creating-custom-roles) called `AirflowXComBackendGCS` for Airflow to access your bucket. With 6 permissions assigned:
 
-- storage.buckets.list
-- storage.objects.create
-- storage.objects.delete
-- storage.objects.get
-- storage.objects.list
-- storage.objects.update
+    - storage.buckets.list
+    - storage.objects.create
+    - storage.objects.delete
+    - storage.objects.get
+    - storage.objects.list
+    - storage.objects.update
 
     ![GCS IAM role](/img/guides/xcom_backend_gcs_role.png)
 
@@ -122,9 +122,17 @@ To use a bucket in Google Cloud storage as your custom XCom backend follow these
 </TabItem>
 <TabItem value="azure">
 
-To use a Azure blob storage as your custom XCom backend follow these steps:
+To use an Azure blob storage as your custom XCom backend follow these steps:
 
-1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create).
+1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create). We recommend to disable public access.
+
+2. Within the storage account. [Create a new container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-porta) called `custom-xcom-backend`. 
+
+3. [Create a shared access token](https://learn.microsoft.com/en-us/azure/cognitive-services/Translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers) for the `custom-xcom-backend` container. In the dropdown menu for permissions make sure to enable: Read, Add, Create, Write, Delete and List. Select the duration during which the token will be valid and `HTTPS only` for allowed protocols. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI this is the IP address of your computer.
+
+    ![Shared access token](/img/guides/xcom_backend_shared_access_token.png)
+
+4. Click on `Generate SAS token and URL` and copy the Blob SAS URL. This URL contains a secret and you will need it again in [Step 3](#step-3-create-a-connection) of this tutorial.
 
 </TabItem>
 <TabItem value="local">
@@ -166,7 +174,7 @@ To give Airflow access to your S3 bucket you need to define an [Airflow connecti
 
     ![Airflow Connection to S3](/img/guides/xcom_backend_aws_connection.png)
 
-2. Save your connection.
+2. Test and save your connection.
 
 :::tip
 
@@ -184,7 +192,7 @@ To give Airflow access to your GCS bucket you need to define an [Airflow connect
 
     ![Airflow Connection to GCS bucket](/img/guides/xcom_backend_gcs_connection.png)
 
-2. Save your connection.
+2. Test and save your connection.
 
 :::tip
 
@@ -194,6 +202,21 @@ It is also possible to define a [connection using environment variables](https:/
 
 </TabItem>
 <TabItem value="azure">
+
+To give Airflow access to your Azure container you need to define an [Airflow connection](connections.md).
+
+1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Azure Blob Storage`. Provide the full Blob SAS URL to the `SAS Token` field. The screenshot below shows the connection using the Connection ID `azure_xcoms_backend_conn`.
+
+    ![Airflow Connection to Azure container](/img/guides/xcom_backend_azure_connection.png)
+
+2. Test and save your connection.
+
+:::tip
+
+It is also possible to define a [connection using environment variables](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables).
+
+:::
+
 </TabItem>
 <TabItem value="local">
 </TabItem>
@@ -436,6 +459,117 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
 </TabItem>
 <TabItem value="azure">
+
+For Airflow to be able to use your custom XCom backend it is necessary to define an XCom backend class which inherits from the `BaseXCom` class.
+
+1. In your Astro project create a new file in the `include` directory called `azure_xcom_backend_json.py`.
+
+2. Copy paste the following code into the file:
+
+    ```python
+    from airflow.models.xcom import BaseXCom
+    from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
+    import json
+    import uuid
+
+    class WasbXComBackendJSON(BaseXCom):
+        # the prefix is optional and used to make it easier to recognize
+        # which reference strings in the Airflow metadata database
+        # refer to an XCom that has been stored in a blob
+        PREFIX = "xcom_wasb://"
+        CONTAINER_NAME = "custom-xcom-backend"
+
+        @staticmethod
+        def serialize_value(
+            value,
+            key=None,
+            task_id=None,
+            dag_id=None,
+            run_id=None,
+            map_index= None,
+            **kwargs
+        ):
+            
+            # the connection to Wasb is created by using the WasbHook with 
+            # the conn id configured in Step 3
+            hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
+            # make sure the file_id is unique, either by using combinations of
+            # the task_id, run_id and map_index parameters or by using a uuid
+            filename = "data_" + str(uuid.uuid4()) + ".json"
+            # define the full blob key where the file should be stored
+            blob_key = f"{run_id}/{task_id}/{filename}"
+
+            # write the value to a local temporary JSON file
+            with open(filename, 'a+') as f:
+                json.dump(value, f)
+
+            # load the local JSON file into the blob
+            hook.load_file(
+                file_path=filename,
+                container_name=WasbXComBackendJSON.CONTAINER_NAME,
+                blob_name=blob_key
+            )
+
+            # define the string that will be saved to the Airflow metadata 
+            # database to refer to this XCom
+            reference_string = WasbXComBackendJSON.PREFIX + blob_key
+
+            # use JSON serialization to write the reference string to the
+            # Airflow metadata database (like a regular XCom)
+            return BaseXCom.serialize_value(value=reference_string)
+
+        @staticmethod
+        def deserialize_value(result):
+            # retrieve the relevant reference string from the metadata database
+            reference_string = BaseXCom.deserialize_value(result=result)
+            
+            # create the Wasb connection using the WasbHook and recreate the key
+            hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
+            blob_key = reference_string.replace(WasbXComBackendJSON.PREFIX, "")
+
+            # download the JSON file found at the location described by the 
+            # reference string to my_xcom.json
+            hook.get_file(
+                blob_name=blob_key,
+                container_name=WasbXComBackendJSON.CONTAINER_NAME,
+                file_path="my_xcom.json",
+                offset=0,
+                length=100000
+            )
+
+            # load the contents of my_xcom.json to return 
+            with open("my_xcom.json", 'r') as f:
+                output = json.load(f)
+
+            return output
+    ```
+
+    The code above defines a class called `WasbXComBackendJSON`. The class has two methods: `.serialize_value()` defines how the `value` that is pushed to XComs from an Airflow task is handled, while `.deserialize_value()` contains the logic to retrieve information from the XComs backend.
+
+    The `.serialize_value()` method accomplishes the following:
+
+    - Instantiates an [`WasbHook`](https://registry.astronomer.io/providers/microsoft-azure/modules/wasbhook) using the `azure_xcom_backend_conn` connection that was defined in [Step 3](#step-3-create-a-connection).
+    - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
+    - Uses the `run_id` and `task_id` from the Airflow context to define the `blob_key` under which the file will be saved in the blob.
+    - Writes the `value` that is being pushed to XComs to a JSON file.
+    - Uploads the JSON file to the blob.
+    - Creates a `reference_string` using the `blob_key` that is written to the Airflow metadata database as a regular XCom.
+
+    The `.deserialize_value()` method:
+
+    - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XComs.
+    - Downloads the JSON file at the `blob_key` contained in the `reference_string`.
+    - Retrieves the information from the JSON file.
+
+3. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
+
+    ```text
+    AIRFLOW__CORE__XCOM_BACKEND=include.azure_xcom_backend_json.WasbXComBackendJSON
+    ```
+
+4. Restart your Airflow instance using `astro dev restart`.
+
+
 </TabItem>
 <TabItem value="local">
 </TabItem>
@@ -506,6 +640,11 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 </TabItem>
 <TabItem value="azure">
+
+5. View the XCom in your blob.
+
+   ![XComs in the blob](/img/guides/xcom_backend_azure_blob.png)
+
 </TabItem>
 <TabItem value="local">
 </TabItem>
@@ -716,6 +855,102 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
 
 </TabItem>
 <TabItem value="azure">
+
+A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle object that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
+
+1. Create a second file in your `include` folder called `azure_xcom_backend_pandas.py`.
+
+2. Copy and paste the following code into the file.
+
+    ```python
+    from airflow.models.xcom import BaseXCom
+    from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
+
+    import pandas as pd
+    import json
+    import uuid
+
+    class WasbXComBackendPandas(BaseXCom):
+        PREFIX = "xcom_wasb://"
+        CONTAINER_NAME = "custom-xcom-backend"
+
+        @staticmethod
+        def serialize_value(
+            value,
+            key=None,
+            task_id=None,
+            dag_id=None,
+            run_id=None,
+            map_index= None,
+            **kwargs
+        ):
+
+            hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
+            
+            # added serialization method if the value passed is a Pandas dataframe
+            # the contents are written to a local temporary csv file
+            if isinstance(value, pd.DataFrame):
+                filename    = "data_" + str(uuid.uuid4()) + ".csv"
+                blob_key      = f"{run_id}/{task_id}/{filename}"
+
+                value.to_csv(filename)
+
+            # if the value passed is not a Pandas dataframe, attempt to use
+            # JSON serialization
+            else:
+                filename    = "data_" + str(uuid.uuid4()) + ".json"
+                blob_key      = f"{run_id}/{task_id}/{filename}"
+
+                with open(filename, 'a+') as f:
+                    json.dump(value, f)
+
+            hook.load_file(
+                file_path=filename,
+                container_name=WasbXComBackendPandas.CONTAINER_NAME,
+                blob_name=blob_key
+            )
+
+            reference_string = WasbXComBackendPandas.PREFIX + blob_key
+
+            return BaseXCom.serialize_value(value=reference_string)
+
+        @staticmethod
+        def deserialize_value(result):
+            result = BaseXCom.deserialize_value(result)
+
+            hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
+            blob_key = result.replace(WasbXComBackendPandas.PREFIX, "")
+
+            hook.get_file(
+                blob_name=blob_key,
+                container_name=WasbXComBackendPandas.CONTAINER_NAME,
+                file_path="my_xcom_file",
+                offset=0,
+                length=100000
+            )
+
+            # added deserialization option to convert a CSV back to a dataframe
+            if blob_key.split(".")[-1] == "csv":
+                output = pd.read_csv("my_xcom_file")
+            # if the key does not end in 'csv' use JSON deserialization
+            else:
+                with open("my_xcom_file", 'r') as f:
+                    output = json.load(f)
+
+            return output
+    ```
+
+    The code above creates a second custom XCom backend called `WasbXComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the GCS bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
+
+3. In the `.env` file of your Astro project, change the XCom backend variable to use the newly created `WasbXComBackendPandas`.
+
+    ```text
+    AIRFLOW__CORE__XCOM_BACKEND=include.azure_xcom_backend_pandas.WasbXComBackendPandas
+    ```
+
+4. Restart your Airflow instance using `astro dev restart`.
+
+
 </TabItem>
 <TabItem value="local">
 </TabItem>
@@ -803,7 +1038,7 @@ Common reasons to use a custom XComs backend are:
 
 In this tutorial we've show how to add custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further expand the functionality for your custom XComs backend you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
 
-A common use case is to want to remove stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so the `.clear()` method needs to be overridden to include the removal of the reference XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend with the serialization method from the tutorial.
+A common use case is to want to remove stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend with the serialization method from the tutorial.
 
 ```python
 from airflow.utils.helpers import exactly_one
