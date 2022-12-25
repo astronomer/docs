@@ -799,6 +799,79 @@ Common reasons to use a custom XComs backend are:
 - The need for custom serialization and deserialization methods. By default Airflow uses JSON serialization which puts limits on the type of data that you can pass via XComs (pickling is available by setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` but has [known security implications](https://docs.python.org/3/library/pickle.html)).
 - Having a custom setup where access to XComs is needed without accessing the metadata database. 
 
+## Overriding additional XComs methods
+
+In this tutorial we've show how to add custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further expand the functionality for your custom XComs backend you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
+
+A common use case is to want to remove stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so the `.clear()` method needs to be overridden to include the removal of the reference XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend with the serialization method from the tutorial.
+
+```python
+from airflow.utils.helpers import exactly_one
+from airflow.utils.session import NEW_SESSION, provide_session
+import warnings
+from airflow.exceptions import RemovedInAirflow3Warning
+
+@classmethod
+@provide_session
+def clear(
+    cls,
+    execution_date = None,
+    dag_id = None,
+    task_id =  None,
+    session = NEW_SESSION,
+    *,
+    run_id = None,
+    map_index = None,
+) -> None:
+
+    from airflow.models import DagRun
+
+    if dag_id is None:
+        raise TypeError("clear() missing required argument: dag_id")
+    if task_id is None:
+        raise TypeError("clear() missing required argument: task_id")
+
+    if not exactly_one(execution_date is not None, run_id is not None):
+        raise ValueError(
+            f"Exactly one of run_id or execution_date must be passed. "
+            f"Passed execution_date={execution_date}, run_id={run_id}"
+        )
+
+    if execution_date is not None:
+        message = "Passing 'execution_date' to 'XCom.clear()' is deprecated. Use 'run_id' instead."
+        warnings.warn(message, RemovedInAirflow3Warning, stacklevel=3)
+        run_id = (
+            session.query(DagRun.run_id)
+            .filter(DagRun.dag_id == dag_id, DagRun.execution_date == execution_date)
+            .scalar()
+        )
+
+    # get the reference string from the Airflow metadata database
+    reference_string = session.query(cls.value).filter_by(dag_id=dag_id, task_id=task_id, run_id=run_id).scalar()
+
+    if reference_string is not None:
+
+        # decode the XComs binary to UTF-8
+        reference_string = reference_string.decode('utf-8')
+        
+        hook    = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        key     = reference_string.replace(S3XComBackendJSON.PREFIX, '')
+
+        # use the reference string to delete the object from the S3 bucket
+        hook.delete_objects(
+            bucket=S3XComBackendJSON.BUCKET_NAME,
+            keys=json.loads(key)
+        )
+
+    # retrieve the XCom record from the metadata database containing the reference string
+    query = session.query(cls).filter_by(dag_id=dag_id, task_id=task_id, run_id=run_id)
+    if map_index is not None:
+        query = query.filter_by(map_index=map_index)
+
+    # delete the XComs containing the reference string from metadata database
+    query.delete()
+```
+
 ## Conclusion
 
 Congratulation! You learned how to set up a custom XCom backend and how to define your own serialization and deserialization methods. 
