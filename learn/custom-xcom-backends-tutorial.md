@@ -50,7 +50,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
         {label: 'Azure Blob Storage', value: 'azure'},
-        {label: 'Local', value: 'local'}
+        {label: 'MinIO (local)', value: 'local'}
     ]}>
 <TabItem value="aws">
 
@@ -136,6 +136,16 @@ To use an Azure blob storage as your custom XCom backend follow these steps:
 
 </TabItem>
 <TabItem value="local">
+
+There are several local object storage solutions available to configure as a custom XCom backend. In this tutorial we are going to use MinIO running in Docker. 
+
+1. [Start a MinIO container](https://min.io/docs/minio/container/index.html). 
+
+2. Go to `http://127.0.0.1:9090/`, log in and create a new bucket called `custom-xcom-backend`.
+
+3. Create a new Access Key and store it in a secure location.
+
+
 </TabItem>
 
 </Tabs>
@@ -219,6 +229,23 @@ It is also possible to define a [connection using environment variables](https:/
 
 </TabItem>
 <TabItem value="local">
+
+To give Airflow access to your MinIO bucket you will need to use the credentials created in [Step 1](#step-1-set-up-your-xcoms-backend). 
+
+1. In your Astro project's `.env` file set the following environment variables. You may need to adjust your `MINIO_IP` if you have chosen a custom API port.
+
+    ```text
+    MINIO_ACCESS_KEY=<your access key>
+    MINIO_SECRET_KEY=<your secret key>
+    MINIO_IP=host.docker.internal:9000
+    ```
+
+2. In order to be able to use the `minio` Python package in Airflow, add it to the `requirements.txt` file of your Astro project.
+
+    ```text
+    minio
+    ```
+
 </TabItem>
 
 </Tabs>
@@ -572,6 +599,121 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
 </TabItem>
 <TabItem value="local">
+
+For Airflow to be able to use your custom XCom backend it is necessary to define an XCom backend class which inherits from the `BaseXCom` class.
+
+1. In your Astro project create a new file in the `include` directory called `minio_xcom_backend_json.py`.
+
+2. Copy paste the following code into the file:
+
+    ```python
+    from airflow.models.xcom import BaseXCom
+    import json
+    import uuid
+    from minio import Minio
+    import os
+    import io
+
+    class MinIOXComBackendJSON(BaseXCom):
+        # the prefix is optional and used to make it easier to recognize
+        # which reference strings in the Airflow metadata database
+        # refer to an XCom that has been stored in a MinIO bucket
+        PREFIX = "xcom_minio://"
+        BUCKET_NAME = "custom-xcom-backend"
+
+        @staticmethod
+        def serialize_value(
+            value,
+            key=None,
+            task_id=None,
+            dag_id=None,
+            run_id=None,
+            map_index= None,
+            **kwargs
+        ):
+            
+            # create the MinIO client with the credentials stored as env variables
+            client = Minio(
+                os.environ["MINIO_IP"],
+                os.environ["MINIO_ACCESS_KEY"],
+                os.environ["MINIO_SECRET_KEY"],
+                secure=False
+            )
+
+            # make sure the file_id is unique, either by using combinations of
+            # the task_id, run_id and map_index parameters or by using a uuid
+            filename    = "data_" + str(uuid.uuid4()) + ".json"
+            # define the full key where the file should be stored
+            minio_key      = f"{run_id}/{task_id}/{filename}"
+
+            # write the value to MinIO
+            client.put_object(
+                MinIOXComBackendJSON.BUCKET_NAME,
+                minio_key,
+                io.BytesIO(bytes(json.dumps(value), 'utf-8')),
+                -1, # -1 = unknown file size
+                part_size=10*1024*1024,
+            )
+
+            # define the string that will be saved to the Airflow metadata 
+            # database to refer to this XCom
+            reference_string = MinIOXComBackendJSON.PREFIX + minio_key
+
+            # use JSON serialization to write the reference string to the
+            # Airflow metadata database (like a regular XCom)
+            return BaseXCom.serialize_value(value=reference_string)
+
+        @staticmethod
+        def deserialize_value(result):
+            # retrieve the relevant reference string from the metadata database
+            reference_string = BaseXCom.deserialize_value(result=result)
+
+            # retrieve the key from the reference string 
+            minio_key = reference_string.replace(MinIOXComBackendJSON.PREFIX, "")
+
+            # create the MinIO client with the credentials stored as env variables
+            client = Minio(
+                os.environ["MINIO_IP"],
+                os.environ["MINIO_ACCESS_KEY"],
+                os.environ["MINIO_SECRET_KEY"],
+                secure=False
+            )
+
+            # get the object from the MinIO bucket
+            response = client.get_object(
+                MinIOXComBackendJSON.BUCKET_NAME,
+                minio_key
+            )
+
+            # return the contents of the retrieved object
+            return json.loads(response.read())
+    ```
+
+    The code above defines a class called `MinIOXComBackendJSON`. The class has two methods: `.serialize_value()` defines how the `value` that is pushed to XComs from an Airflow task is handled, while `.deserialize_value()` contains the logic to retrieve information from the XComs backend.
+
+    The `.serialize_value()` method accomplishes the following:
+
+    - Creates a MinIO client using the credentials you saved in the `.env` file in [Step 3](#step-3-create-a-connection).
+    - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
+    - Uses the `run_id` and `task_id` from the Airflow context to define the `minio_key` under which the file will be saved in the bucket.
+    - Writes the `value` that is being pushed to XComs to a JSON file.
+    - Uploads the JSON file to the bucket.
+    - Creates a `reference_string` using the `minio_key` that is written to the Airflow metadata database as a regular XCom.
+
+    The `.deserialize_value()` method:
+
+    - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XComs.
+    - Downloads the JSON file at the `minio_key` contained in the `reference_string`.
+    - Reads the information from the JSON file.
+
+3. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
+
+    ```text
+    AIRFLOW__CORE__XCOM_BACKEND=include.minio_xcom_backend_json.MinIOXComBackendJSON
+    ```
+
+4. Restart your Airflow instance using `astro dev restart`.
+
 </TabItem>
 
 </Tabs>
@@ -636,17 +778,22 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 5. View the XCom in your GCS bucket.
 
-   ![XComs in the GCS bucket](/img/guides/xcom_backend_gcs_json.png)
+    ![XComs in the GCS bucket](/img/guides/xcom_backend_gcs_json.png)
 
 </TabItem>
 <TabItem value="azure">
 
 5. View the XCom in your blob.
 
-   ![XComs in the blob](/img/guides/xcom_backend_azure_blob.png)
+    ![XComs in the blob](/img/guides/xcom_backend_azure_blob.png)
 
 </TabItem>
 <TabItem value="local">
+
+5. View the XCom in your bucket.
+
+    ![XComs in the MinIO bucket](/img/guides/xcom_backend_minio_file.png)
+
 </TabItem>
 
 </Tabs>
@@ -953,6 +1100,123 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
 
 </TabItem>
 <TabItem value="local">
+
+A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle object that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
+
+1. Create a second file in your `include` folder called `minion_xcom_backend_pandas.py`.
+
+2. Copy and paste the following code into the file.
+
+    ```python
+    from airflow.models.xcom import BaseXCom
+    import pandas as pd
+    import json
+    import uuid
+    from minio import Minio
+    import os
+    import io
+
+    class MinIOXComBackendPandas(BaseXCom):
+        # the prefix is optional and used to make it easier to recognize
+        # which reference strings in the Airflow metadata database
+        # refer to an XCom that has been stored in a MinIO bucket
+        PREFIX = "xcom_minio://"
+        BUCKET_NAME = "custom-xcom-backend"
+
+        @staticmethod
+        def serialize_value(
+            value,
+            key=None,
+            task_id=None,
+            dag_id=None,
+            run_id=None,
+            map_index= None,
+            **kwargs
+        ):
+            
+            # create the MinIO client with the credentials stored as env variables
+            client = Minio(
+                os.environ["MINIO_IP"],
+                os.environ["MINIO_ACCESS_KEY"],
+                os.environ["MINIO_SECRET_KEY"],
+                secure=False
+            )
+
+            # added serialization method if the value passed is a Pandas dataframe
+            # the contents are written to a local temporary csv file
+            if isinstance(value, pd.DataFrame):
+                filename = "data_" + str(uuid.uuid4()) + ".csv"
+                minio_key = f"{run_id}/{task_id}/{filename}"
+
+                value.to_csv(filename)
+
+                with open(filename, 'r') as f:
+                    string_file = f.read()
+                    bytes_to_write = io.BytesIO(bytes(string_file, 'utf-8'))
+
+                os.remove(filename)
+            # if the value passed is not a Pandas dataframe, attempt to use
+            # JSON serialization
+            else:
+                filename = "data_" + str(uuid.uuid4()) + ".json"
+                minio_key = f"{run_id}/{task_id}/{filename}"
+
+                bytes_to_write = io.BytesIO(bytes(json.dumps(value), 'utf-8'))
+
+            client.put_object(
+                MinIOXComBackendPandas.BUCKET_NAME,
+                minio_key,
+                bytes_to_write,
+                -1, # -1 = unknown filesize
+                part_size=10*1024*1024,
+            )
+
+            reference_string = MinIOXComBackendPandas.PREFIX + minio_key
+
+            return BaseXCom.serialize_value(value=reference_string)
+
+        @staticmethod
+        def deserialize_value(result):
+            reference_string = BaseXCom.deserialize_value(result=result)
+            key = reference_string.replace(MinIOXComBackendPandas.PREFIX, "")
+
+            client = Minio(
+                os.environ["MINIO_IP"],
+                os.environ["MINIO_ACCESS_KEY"],
+                os.environ["MINIO_SECRET_KEY"],
+                secure=False
+            )
+
+            response = client.get_object(
+                MinIOXComBackendPandas.BUCKET_NAME,
+                key
+            )
+
+            # added deserialization option to convert a CSV back to a dataframe
+            if key.split(".")[-1] == "csv":
+
+                with open("csv_xcom.csv", "w") as f:
+                    f.write(response.read().decode("utf-8"))
+                output = pd.read_csv("csv_xcom.csv")
+                os.remove("csv_xcom.csv")
+
+            # if the key does not end in 'csv' use JSON deserialization
+            else:
+                output = json.loads(response.read())
+
+            return output
+    ```
+
+    The code above creates a second custom XCom backend called `MinIOXComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the S3 bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
+
+3. In the `.env` file of your Astro project, change the XCom backend variable to use the newly created `MinIOXComBackendPandas`.
+
+    ```text
+    AIRFLOW__CORE__XCOM_BACKEND=include.minio_xcom_backend_pandas.MinIOXComBackendPandas
+    ```
+
+4. Restart your Airflow instance using `astro dev restart`.
+
 </TabItem>
 
 </Tabs>
