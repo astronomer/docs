@@ -110,7 +110,7 @@ from airflow.providers.mongo.hooks.mongo import MongoHook
 from pendulum import datetime
 
 def uploadtomongo(ti, **context):
-    hook = MongoHook(mongo_conn_id='mongo_default')
+    hook = MongoHook(conn_id='mongo_default')
     client = hook.get_conn()
     db = client.MyDB # Replace "MyDB" if you want to load data to a different database
     currency_collection=db.currency_collection
