@@ -1,6 +1,6 @@
 ---
-title: 'Set up a custom XComs backend'
-sidebar_label: 'Custom XComs backend'
+title: 'Set up a custom XComs backend using cloud-based or local object storage'
+sidebar_label: 'Set up a custom XComs backend'
 id: xcoms-backend-tutorial
 description: 'Use this tutorial to learn how to set up a custom XComs backend in AWS, GCP and Azure.'
 ---
@@ -40,6 +40,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
+- You can follow this tutorial using an AWS, GCP or Azure account. If you want to work locally follow the steps under the `MinIO` tabs.
 
 ## Step 1: Set up your XComs backend 
 
@@ -174,7 +175,7 @@ There are several local object storage solutions available to configure as a cus
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
         {label: 'Azure Blob Storage', value: 'azure'},
-        {label: 'Local', value: 'local'}
+        {label: 'MinIO (local)', value: 'local'}
     ]}>
 <TabItem value="aws">
 
@@ -259,7 +260,7 @@ To give Airflow access to your MinIO bucket you will need to use the credentials
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
         {label: 'Azure Blob Storage', value: 'azure'},
-        {label: 'Local', value: 'local'}
+        {label: 'MinIO (local)', value: 'local'}
     ]}>
 <TabItem value="aws">
 
@@ -274,6 +275,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
     from airflow.providers.amazon.aws.hooks.s3 import S3Hook
     import json
     import uuid
+    import os
 
     class S3XComBackendJSON(BaseXCom):
         # the prefix is optional and used to make it easier to recognize
@@ -295,12 +297,12 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             
             # the connection to AWS is created by using the S3 hook with 
             # the conn id configured in Step 3
-            hook        = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+            hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
             # make sure the file_id is unique, either by using combinations of
             # the task_id, run_id and map_index parameters or by using a uuid
-            filename    = "data_" + str(uuid.uuid4()) + ".json"
+            filename = "data_" + str(uuid.uuid4()) + ".json"
             # define the full S3 key where the file should be stored
-            s3_key      = f"{run_id}/{task_id}/{filename}"
+            s3_key = f"{run_id}/{task_id}/{filename}"
 
             # write the value to a local temporary JSON file
             with open(filename, 'a+') as f:
@@ -313,6 +315,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
                 bucket_name=S3XComBackendJSON.BUCKET_NAME,
                 replace=True
             )
+
+            os.remove(filename)
 
             # define the string that will be saved to the Airflow metadata 
             # database to refer to this XCom
@@ -328,8 +332,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             reference_string = BaseXCom.deserialize_value(result=result)
             
             # create the S3 connection using the S3Hook and recreate the S3 key
-            hook    = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-            key     = reference_string.replace(S3XComBackendJSON.PREFIX, "")
+            hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+            key = reference_string.replace(S3XComBackendJSON.PREFIX, "")
 
             # download the JSON file found at the location described by the 
             # reference string to a temporary local folder
@@ -343,6 +347,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             # the operator
             with open(filename, 'r') as f:
                 output = json.load(f)
+
+            os.remove(filename)
 
             return output
     ```
@@ -387,6 +393,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
     from airflow.providers.google.cloud.hooks.gcs import GCSHook
     import json
     import uuid
+    import os
 
     class GCSXComBackendJSON(BaseXCom):
         # the prefix is optional and used to make it easier to recognize
@@ -408,12 +415,12 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             
             # the connection to GCS is created by using the GCShook with 
             # the conn id configured in Step 3
-            hook        = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+            hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
             # make sure the file_id is unique, either by using combinations of
             # the task_id, run_id and map_index parameters or by using a uuid
-            filename    = "data_" + str(uuid.uuid4()) + ".json"
+            filename = "data_" + str(uuid.uuid4()) + ".json"
             # define the full GCS key where the file should be stored
-            gs_key      = f"{run_id}/{task_id}/{filename}"
+            gs_key = f"{run_id}/{task_id}/{filename}"
 
             # write the value to a local temporary JSON file
             with open(filename, 'a+') as f:
@@ -425,6 +432,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
                 object_name=gs_key,
                 bucket_name=GCSXComBackendJSON.BUCKET_NAME,
             )
+
+            os.remove(filename)
 
             # define the string that will be saved to the Airflow metadata 
             # database to refer to this XCom
@@ -440,8 +449,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             reference_string = BaseXCom.deserialize_value(result=result)
             
             # create the GCS connection using the GCSHook and recreate the key
-            hook    = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
-            gs_key     = reference_string.replace(GCSXComBackendJSON.PREFIX, "")
+            hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+            gs_key = reference_string.replace(GCSXComBackendJSON.PREFIX, "")
 
             # download the JSON file found at the location described by the 
             # reference string to a temporary local folder
@@ -455,6 +464,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             # the operator
             with open(filename, 'r') as f:
                 output = json.load(f)
+
+            os.remove(filename)
 
             return output
     ```
@@ -498,6 +509,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
     from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
     import json
     import uuid
+    import os
 
     class WasbXComBackendJSON(BaseXCom):
         # the prefix is optional and used to make it easier to recognize
@@ -537,6 +549,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
                 blob_name=blob_key
             )
 
+            os.remove(filename)
+
             # define the string that will be saved to the Airflow metadata 
             # database to refer to this XCom
             reference_string = WasbXComBackendJSON.PREFIX + blob_key
@@ -567,6 +581,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             # load the contents of my_xcom.json to return 
             with open("my_xcom.json", 'r') as f:
                 output = json.load(f)
+
+            os.remove("my_xcom.json")
 
             return output
     ```
@@ -642,9 +658,9 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
             # make sure the file_id is unique, either by using combinations of
             # the task_id, run_id and map_index parameters or by using a uuid
-            filename    = "data_" + str(uuid.uuid4()) + ".json"
+            filename = "data_" + str(uuid.uuid4()) + ".json"
             # define the full key where the file should be stored
-            minio_key      = f"{run_id}/{task_id}/{filename}"
+            minio_key = f"{run_id}/{task_id}/{filename}"
 
             # write the value to MinIO
             client.put_object(
@@ -764,7 +780,7 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
         {label: 'Azure Blob Storage', value: 'azure'},
-        {label: 'Local', value: 'local'}
+        {label: 'MinIO (local)', value: 'local'}
     ]}>
 <TabItem value="aws">
 
@@ -807,7 +823,7 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
         {label: 'Azure Blob Storage', value: 'azure'},
-        {label: 'Local', value: 'local'}
+        {label: 'MinIO (local)', value: 'local'}
     ]}>
 <TabItem value="aws">
 
@@ -820,10 +836,10 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
     ```python
     from airflow.models.xcom import BaseXCom
     from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-
     import pandas as pd
     import json
     import uuid
+    import os
 
     class S3XComBackendPandas(BaseXCom):
         PREFIX = "xcom_s3://"
@@ -845,16 +861,16 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             # added serialization method if the value passed is a Pandas dataframe
             # the contents are written to a local temporary csv file
             if isinstance(value, pd.DataFrame):
-                filename    = "data_" + str(uuid.uuid4()) + ".csv"
-                s3_key      = f"{run_id}/{task_id}/{filename}"
+                filename = "data_" + str(uuid.uuid4()) + ".csv"
+                s3_key = f"{run_id}/{task_id}/{filename}"
 
                 value.to_csv(filename)
 
             # if the value passed is not a Pandas dataframe, attempt to use
             # JSON serialization
             else:
-                filename    = "data_" + str(uuid.uuid4()) + ".json"
-                s3_key      = f"{run_id}/{task_id}/{filename}"
+                filename = "data_" + str(uuid.uuid4()) + ".json"
+                s3_key = f"{run_id}/{task_id}/{filename}"
 
                 with open(filename, 'a+') as f:
                     json.dump(value, f)
@@ -865,6 +881,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
                 bucket_name=S3XComBackendPandas.BUCKET_NAME,
                 replace=True
             )
+
+            os.remove(filename)
 
             reference_string = S3XComBackendPandas.PREFIX + s3_key
 
@@ -890,6 +908,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             else:
                 with open(filename, 'r') as f:
                     output = json.load(f)
+
+            os.remove(filename)
 
             return output
     ```
@@ -917,10 +937,10 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
     ```python
     from airflow.models.xcom import BaseXCom
     from airflow.providers.google.cloud.hooks.gcs import GCSHook
-
     import pandas as pd
     import json
     import uuid
+    import os
 
     class GCSXComBackendPandas(BaseXCom):
         PREFIX = "xcom_gcs://"
@@ -962,6 +982,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
                 bucket_name=GCSXComBackendPandas.BUCKET_NAME,
             )
 
+            os.remove(filename)
+
             reference_string = GCSXComBackendPandas.PREFIX + gs_key
 
             return BaseXCom.serialize_value(value=reference_string)
@@ -986,6 +1008,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             else:
                 with open(filename, 'r') as f:
                     output = json.load(f)
+
+            os.remove(filename)
 
             return output
     ```
@@ -1012,10 +1036,10 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
     ```python
     from airflow.models.xcom import BaseXCom
     from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
-
     import pandas as pd
     import json
     import uuid
+    import os
 
     class WasbXComBackendPandas(BaseXCom):
         PREFIX = "xcom_wasb://"
@@ -1037,16 +1061,16 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             # added serialization method if the value passed is a Pandas dataframe
             # the contents are written to a local temporary csv file
             if isinstance(value, pd.DataFrame):
-                filename    = "data_" + str(uuid.uuid4()) + ".csv"
-                blob_key      = f"{run_id}/{task_id}/{filename}"
+                filename = "data_" + str(uuid.uuid4()) + ".csv"
+                blob_key = f"{run_id}/{task_id}/{filename}"
 
                 value.to_csv(filename)
 
             # if the value passed is not a Pandas dataframe, attempt to use
             # JSON serialization
             else:
-                filename    = "data_" + str(uuid.uuid4()) + ".json"
-                blob_key      = f"{run_id}/{task_id}/{filename}"
+                filename = "data_" + str(uuid.uuid4()) + ".json"
+                blob_key = f"{run_id}/{task_id}/{filename}"
 
                 with open(filename, 'a+') as f:
                     json.dump(value, f)
@@ -1056,6 +1080,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
                 container_name=WasbXComBackendPandas.CONTAINER_NAME,
                 blob_name=blob_key
             )
+
+            os.remove(filename)
 
             reference_string = WasbXComBackendPandas.PREFIX + blob_key
 
@@ -1083,6 +1109,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             else:
                 with open("my_xcom_file", 'r') as f:
                     output = json.load(f)
+
+            os.remove("my_xcom_file")
 
             return output
     ```
@@ -1298,7 +1326,7 @@ Common reasons to use a custom XComs backend are:
 - The need for custom serialization and deserialization methods. By default Airflow uses JSON serialization which puts limits on the type of data that you can pass via XComs (pickling is available by setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` but has [known security implications](https://docs.python.org/3/library/pickle.html)).
 - Having a custom setup where access to XComs is needed without accessing the metadata database. 
 
-## Overriding additional XComs methods
+## Overriding additional BaseXCom methods
 
 In this tutorial we've show how to add custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further expand the functionality for your custom XComs backend you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
 
@@ -1353,8 +1381,8 @@ def clear(
         # decode the XComs binary to UTF-8
         reference_string = reference_string.decode('utf-8')
         
-        hook    = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-        key     = reference_string.replace(S3XComBackendJSON.PREFIX, '')
+        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        key = reference_string.replace(S3XComBackendJSON.PREFIX, '')
 
         # use the reference string to delete the object from the S3 bucket
         hook.delete_objects(
@@ -1373,4 +1401,4 @@ def clear(
 
 ## Conclusion
 
-Congratulation! You learned how to set up a custom XCom backend and how to define your own serialization and deserialization methods. 
+Congratulations! You learned how to set up a custom XCom backend and how to define your own serialization and deserialization methods. 
