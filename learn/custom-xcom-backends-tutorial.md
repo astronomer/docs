@@ -153,9 +153,7 @@ There are several local object storage solutions available to configure as a cus
 
 3. Create a new Access Key and store it in a secure location.
 
-
 </TabItem>
-
 </Tabs>
 
 ## Step 2: Create an Astro project
@@ -196,7 +194,7 @@ To give Airflow access to your S3 bucket you need to define an [Airflow connecti
 
 :::tip
 
-It is also possible to define a [connection using environment variables](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables). If Airflow is running in the same AWS environment as your custom XCom backend it is best practice to [assume a role](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) rather than provide credentials.
+It is also possible to define a [connection using environment variables](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables).
 
 :::
 
@@ -257,6 +255,7 @@ To give Airflow access to your MinIO bucket you will need to use the credentials
 </TabItem>
 
 </Tabs>
+
 
 ## Step 4: Define a custom XCom class using JSON serialization
 
@@ -383,7 +382,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
     AIRFLOW__CORE__XCOM_BACKEND=include.s3_xcom_backend_json.S3XComBackendJSON
     ```
 
-4. Restart your Airflow instance using `astro dev restart`.
+4. Restart your Airflow instance using `astro dev restart`. 
 
 </TabItem>
 
@@ -740,6 +739,18 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 </TabItem>
 
 </Tabs>
+
+:::info
+
+For Astronomer customers the process to use the same custom XComs backend for your deployment on Astro is easy. After deploying your code, simply set the same `AIRFLOW__CORE__XCOM_BACKEND` [environment variable on Astro](https://docs.astronomer.io/astro/environment-variables).
+
+:::
+
+:::tip
+
+Whenever you are making changes to your custom XCom backend configuration you will need to restart Airflow for these changes to take effect.
+
+:::
 
 ## Step 5: Run a simple DAG using XComs
 
