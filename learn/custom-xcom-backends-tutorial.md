@@ -2,22 +2,23 @@
 title: 'Set up a custom XComs backend using cloud-based or local object storage'
 sidebar_label: 'Set up a custom XComs backend'
 id: xcoms-backend-tutorial
-description: 'Use this tutorial to learn how to set up a custom XComs backend in AWS, GCP and Azure.'
+description: 'Use this tutorial to learn how to set up a custom XComs backend in AWS, GCP, Azure and MinIO.'
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks, which is stored in the XCom backend. By default Airflow uses the [metadata database](airflow-database.md) as an XComs backend, which works well for local development purposes but can become limiting in a production environment. There are many use cases for custom XCom backend solutions, you can learn more about them in the [Best practices](#best-practices) section and the end of this tutorial. 
+Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks, which are stored in the XCom backend. By default Airflow uses the [metadata database](airflow-database.md) as an XComs backend, which works well for local development purposes but can become limiting in a production environment. There are many use cases for custom XCom backend solutions, you can learn more about them in the [Best practices](#best-practices) section and the end of this tutorial. 
 
-This tutorial uses the TaskFlow API to pass information between tasks. Learn more in our [Airflow decorators](airflow-decorators.md) guide and in the [TaskFlow API in Airflow 2.0 webinar](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0/).
+You can use cloud-based object storage such as [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/) as a custom XCom backend or write your XComs to a local object storage like a local [MinIO](https://min.io/) instance. This tutorial offers example code for each of these object storage solutions.
 
 After you complete this tutorial, you'll be able to:
 
-- Create a custom XCom backend using an S3 bucket.
+- Create a custom XCom backend using a cloud-based or local object storage.
 - Use JSON serialization and deserialization in a custom XCom backend.
-- Add a custom logic to the serialization and deserialization methods to store Pandas dataframes as CSV.
+- Add a custom logic to the serialization and deserialization methods to store Pandas dataframes as CSV in your custom XCom backend.
 - Know best practices of using custom XCom backends.
+- Know about the possibility to customize other BaseXCom methods for extended functionality.
 
 :::caution
 
@@ -25,9 +26,15 @@ While a custom XComs backend allows you to store virtually unlimited amounts of 
 
 :::
 
+:::info
+
+In this tutorial the TaskFlow API is used to pass information between tasks. Learn more in our [Airflow decorators](airflow-decorators.md) guide and in the [TaskFlow API in Airflow 2.0 webinar](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0/).
+
+:::
+
 ## Time to complete
 
-This tutorial takes approximately 1 hour to complete.
+This tutorial takes approximately 1.5 hours to complete.
 
 ## Assumed knowledge
 
