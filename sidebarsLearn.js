@@ -83,7 +83,6 @@ module.exports = {
           },
           items: [
             'testing-airflow',
-            'custom-xcom-backends',
             'logging',
             'kubepod-operator',
             'data-quality',
