@@ -629,21 +629,21 @@ class CustomXComBackendJSON(BaseXCom):
 </TabItem>
 </Tabs>
 
-The code above defines a class called `CustomXComBackendJSON`. The class has two methods: `.serialize_value()` defines how to handle the `value` that is pushed to XCom from an Airflow task, and `.deserialize_value()` defines the logic to retrieve information from the XCom backend.
+    The code above defines a class called `CustomXComBackendJSON`. The class has two methods: `.serialize_value()` defines how to handle the `value` that is pushed to XCom from an Airflow task, and `.deserialize_value()` defines the logic to retrieve information from the XCom backend.
 
-The `.serialize_value()` method accomplishes the following:
+    The `.serialize_value()` method accomplishes the following:
 
-- Creates the connection to the external tool, either by using the Hook from the tools' provider package ([S3Hook](https://registry.astronomer.io/providers/amazon/modules/s3hook), [GCSHook](https://registry.astronomer.io/providers/google/modules/gcshook), [WasbHook](https://registry.astronomer.io/providers/microsoft-azure/modules/wasbhook)) or by providing credentials directly (MinIO).
-- Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
-- Uses the `run_id` and `task_id` from the Airflow context to define the key under which the file will be saved in the object storage.
-- Writes the `value` that is being pushed to XCom to the object storage using JSON serialization.
-- Creates a unique `reference_string` that is written to the Airflow metadata database as a regular XCom.
+    - Creates the connection to the external tool, either by using the Hook from the tools' provider package ([S3Hook](https://registry.astronomer.io/providers/amazon/modules/s3hook), [GCSHook](https://registry.astronomer.io/providers/google/modules/gcshook), [WasbHook](https://registry.astronomer.io/providers/microsoft-azure/modules/wasbhook)) or by providing credentials directly (MinIO).
+    - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
+    - Uses the `run_id` and `task_id` from the Airflow context to define the key under which the file will be saved in the object storage.
+    - Writes the `value` that is being pushed to XCom to the object storage using JSON serialization.
+    - Creates a unique `reference_string` that is written to the Airflow metadata database as a regular XCom.
 
-The `.deserialize_value()` method:
+    The `.deserialize_value()` method:
 
-- Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XCom.
-- Downloads the JSON file at the key contained in the `reference_string`.
-- Retrieves the information from the JSON file.
+    - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XCom.
+    - Downloads the JSON file at the key contained in the `reference_string`.
+    - Retrieves the information from the JSON file.
 
 4. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
 
