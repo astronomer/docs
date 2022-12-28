@@ -139,7 +139,7 @@ Follow these steps to use a bucket in Google Cloud Storage as your custom XCom b
 
     ![GCS IAM role](/img/guides/xcom_backend_gcs_role.png)
 
-4. [Create a new service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) called `airflow-` and grant it access to your project via the `AirflowXComBackendGCS` role.
+4. [Create a new service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) called `airflow-xcom` and grant it access to your project via the `AirflowXComBackendGCS` role.
 
     ![GCS IAM role](/img/guides/xcom_backend_gcs_service_account.png)
 
@@ -700,9 +700,12 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 3. Run the DAG.
 
-4. View the logs of both task. The logs will include information about the custom XCom backend. The `print_a_number` task includes the full path to the file stored in the custom backend.
+4. View the logs of both tasks. The logs will include information about the custom XCom backend. The `print_a_number` task includes the full path to the file stored in the custom backend.
 
     ![Logs mentioning custom XCom backend](/img/guides/xcom_backend_task_logs_simple.png)
+
+
+5. View the XCom in your local object storage.
 
 <Tabs
     defaultValue="aws"
@@ -715,34 +718,25 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
     ]}>
 <TabItem value="aws">
 
-5. View the XCom in your S3 bucket.
-
-    ![XCom in the S3 bucket](/img/guides/xcom_backend_S3_json.png)
+![XCom in the S3 bucket](/img/guides/xcom_backend_S3_json.png)
 
 </TabItem>
 
 <TabItem value="gcp">
 
-5. View the XCom in your GCS bucket.
-
-    ![XCom in the GCS bucket](/img/guides/xcom_backend_gcs_json.png)
+![XCom in the GCS bucket](/img/guides/xcom_backend_gcs_json.png)
 
 </TabItem>
 <TabItem value="azure">
 
-5. View the XCom in your Azure Blob Storage container.
-
-    ![XCom in the blob](/img/guides/xcom_backend_azure_blob.png)
+![XCom in the blob](/img/guides/xcom_backend_azure_blob.png)
 
 </TabItem>
 <TabItem value="local">
 
-5. View the XCom in your MinIO bucket.
-
-    ![XCom in the MinIO bucket](/img/guides/xcom_backend_minio_file.png)
+![XCom in the MinIO bucket](/img/guides/xcom_backend_minio_file.png)
 
 </TabItem>
-
 </Tabs>
 
 ## Step 6: Create a custom serialization method to handle Pandas dataframes
