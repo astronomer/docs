@@ -267,6 +267,12 @@ MINIO_IP=host.docker.internal:9000
 
 ## Step 4: Define a custom XCom class using JSON serialization
 
+For Airflow to use your custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
+
+1. In your Astro project, create a new file in the `include` directory called `xcom_backend_json.py`.
+
+2. Copy paste the following code into the file:
+
 <Tabs
     defaultValue="aws"
     groupId= "github-actions-image-only-deploys"
@@ -278,12 +284,6 @@ MINIO_IP=host.docker.internal:9000
     ]}>
 <TabItem value="aws">
 
-For Airflow to use your custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
-
-1. In your Astro project, create a new file in the `include` directory called `xcom_backend_json.py`.
-
-2. Copy paste the following code into the file:
-
     ```python
     from airflow.models.xcom import BaseXCom
     from airflow.providers.amazon.aws.hooks.s3 import S3Hook
@@ -291,7 +291,7 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
     import uuid
     import os
 
-    class S3XComBackendJSON(BaseXCom):
+    class CustomXComBackendJSON(BaseXCom):
         # the prefix is optional and used to make it easier to recognize
         # which reference strings in the Airflow metadata database
         # refer to an XCom that has been stored in an S3 bucket
@@ -326,7 +326,7 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
             hook.load_file(
                 filename=filename,
                 key=s3_key,
-                bucket_name=S3XComBackendJSON.BUCKET_NAME,
+                bucket_name=CustomXComBackendJSON.BUCKET_NAME,
                 replace=True
             )
 
@@ -335,7 +335,7 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
 
             # define the string that will be saved to the Airflow metadata 
             # database to refer to this XCom
-            reference_string = S3XComBackendJSON.PREFIX + s3_key
+            reference_string = CustomXComBackendJSON.PREFIX + s3_key
 
             # use JSON serialization to write the reference string to the
             # Airflow metadata database (like a regular XCom)
@@ -348,13 +348,13 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
             
             # create the S3 connection using the S3Hook and recreate the S3 key
             hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-            key = reference_string.replace(S3XComBackendJSON.PREFIX, "")
+            key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
 
             # download the JSON file found at the location described by the 
             # reference string to a temporary local folder
             filename = hook.download_file(
                 key=key,
-                bucket_name=S3XComBackendJSON.BUCKET_NAME,
+                bucket_name=CustomXComBackendJSON.BUCKET_NAME,
                 local_path="/tmp"
             )
 
@@ -368,41 +368,8 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
 
             return output
     ```
-
-    The code above defines a class called `S3XComBackendJSON`. The class has two methods: `.serialize_value()` defines how to handle the `value` that is pushed to XCom from an Airflow task, and `.deserialize_value()` defines the logic to retrieve information from the XCom backend.
-
-    The `.serialize_value()` method accomplishes the following:
-
-    - Instantiates an [`S3Hook`](https://registry.astronomer.io/providers/amazon/modules/s3hook) using the `s3_xcom_backend_conn` connection that was defined in [Step 3](#step-3-create-a-connection).
-    - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
-    - Uses the `run_id` and `task_id` from the Airflow context to define the `s3_key` under which the file will be saved in the S3 bucket.
-    - Writes the `value` that is being pushed to XCom to a JSON file.
-    - Uploads the JSON file to S3.
-    - Creates a `reference_string` using the `s3_key` that is written to the Airflow metadata database as a regular XCom.
-
-    The `.deserialize_value()` method:
-
-    - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XCom.
-    - Downloads the JSON file at the `key` contained in the `reference_string`.
-    - Retrieves the information from the JSON file.
-
-3. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
-
-    ```text
-    AIRFLOW__CORE__XCOM_BACKEND=include.xcom_backend_json.S3XComBackendJSON
-    ```
-
-4. Restart your Airflow instance using `astro dev restart`. 
-
 </TabItem>
-
 <TabItem value="gcp">
-
-For Airflow to be able to use your custom XCom backend it is necessary to define an XCom backend class which inherits from the `BaseXCom` class.
-
-1. In your Astro project create a new file in the `include` directory called `gcs_xcom_backend_json.py`.
-
-2. Copy paste the following code into the file:
 
     ```python
     from airflow.models.xcom import BaseXCom
@@ -411,7 +378,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
     import uuid
     import os
 
-    class GCSXComBackendJSON(BaseXCom):
+    class CustomXComBackendJSON(BaseXCom):
         # the prefix is optional and used to make it easier to recognize
         # which reference strings in the Airflow metadata database
         # refer to an XCom that has been stored in a GCS bucket
@@ -446,7 +413,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             hook.upload(
                 filename=filename,
                 object_name=gs_key,
-                bucket_name=GCSXComBackendJSON.BUCKET_NAME,
+                bucket_name=CustomXComBackendJSON.BUCKET_NAME,
             )
 
             # remove the local temporary JSON file
@@ -454,7 +421,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
             # define the string that will be saved to the Airflow metadata 
             # database to refer to this XCom
-            reference_string = GCSXComBackendJSON.PREFIX + gs_key
+            reference_string = CustomXComBackendJSON.PREFIX + gs_key
 
             # use JSON serialization to write the reference string to the
             # Airflow metadata database (like a regular XCom)
@@ -467,13 +434,13 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             
             # create the GCS connection using the GCSHook and recreate the key
             hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
-            gs_key = reference_string.replace(GCSXComBackendJSON.PREFIX, "")
+            gs_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
 
             # download the JSON file found at the location described by the 
             # reference string to a temporary local folder
             filename = hook.download(
                 object_name=gs_key,
-                bucket_name=GCSXComBackendJSON.BUCKET_NAME,
+                bucket_name=CustomXComBackendJSON.BUCKET_NAME,
                 filename="my_xcom.json"
             )
 
@@ -487,40 +454,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
             return output
     ```
-
-    The code above defines a class called `GCSXComBackendJSON`. The class has two methods: `.serialize_value()` defines how the `value` that is pushed to XCom from an Airflow task is handled, while `.deserialize_value()` contains the logic to retrieve information from the XCom backend.
-
-    The `.serialize_value()` method accomplishes the following:
-
-    - Instantiates an [`GCSHook`](https://registry.astronomer.io/providers/google/modules/gcshook) using the `gcs_xcom_backend_conn` connection that was defined in [Step 3](#step-3-create-a-connection).
-    - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
-    - Uses the `run_id` and `task_id` from the Airflow context to define the `gs_key` under which the file will be saved in the GCS bucket.
-    - Writes the `value` that is being pushed to XCom to a JSON file.
-    - Uploads the JSON file to the bucket.
-    - Creates a `reference_string` using the `gs_key` that is written to the Airflow metadata database as a regular XCom.
-
-    The `.deserialize_value()` method:
-
-    - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XCom.
-    - Downloads the JSON file at the `gs_key` contained in the `reference_string`.
-    - Retrieves the information from the JSON file.
-
-3. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
-
-    ```text
-    AIRFLOW__CORE__XCOM_BACKEND=include.gcs_xcom_backend_json.GCSXComBackendJSON
-    ```
-
-4. Restart your Airflow instance using `astro dev restart`.
-
 </TabItem>
 <TabItem value="azure">
-
-For Airflow to be able to use your custom XCom backend it is necessary to define an XCom backend class which inherits from the `BaseXCom` class.
-
-1. In your Astro project create a new file in the `include` directory called `azure_xcom_backend_json.py`.
-
-2. Copy paste the following code into the file:
 
     ```python
     from airflow.models.xcom import BaseXCom
@@ -529,7 +464,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
     import uuid
     import os
 
-    class WasbXComBackendJSON(BaseXCom):
+    class CustomXComBackendJSON(BaseXCom):
         # the prefix is optional and used to make it easier to recognize
         # which reference strings in the Airflow metadata database
         # refer to an XCom that has been stored in Azure Blob Storage
@@ -563,7 +498,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             # load the local JSON file into Azure Blob Storage
             hook.load_file(
                 file_path=filename,
-                container_name=WasbXComBackendJSON.CONTAINER_NAME,
+                container_name=CustomXComBackendJSON.CONTAINER_NAME,
                 blob_name=blob_key
             )
 
@@ -572,7 +507,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
             # define the string that will be saved to the Airflow metadata 
             # database to refer to this XCom
-            reference_string = WasbXComBackendJSON.PREFIX + blob_key
+            reference_string = CustomXComBackendJSON.PREFIX + blob_key
 
             # use JSON serialization to write the reference string to the
             # Airflow metadata database (like a regular XCom)
@@ -585,13 +520,13 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             
             # create the Wasb connection using the WasbHook and recreate the key
             hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
-            blob_key = reference_string.replace(WasbXComBackendJSON.PREFIX, "")
+            blob_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
 
             # download the JSON file found at the location described by the 
             # reference string to my_xcom.json
             hook.get_file(
                 blob_name=blob_key,
-                container_name=WasbXComBackendJSON.CONTAINER_NAME,
+                container_name=CustomXComBackendJSON.CONTAINER_NAME,
                 file_path="my_xcom.json",
                 offset=0,
                 length=100000
@@ -606,41 +541,8 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
             return output
     ```
-
-    The code above defines a class called `WasbXComBackendJSON`. The class has two methods: `.serialize_value()` defines how the `value` that is pushed to XCom from an Airflow task is handled, while `.deserialize_value()` contains the logic to retrieve information from the XCom backend.
-
-    The `.serialize_value()` method accomplishes the following:
-
-    - Instantiates an [`WasbHook`](https://registry.astronomer.io/providers/microsoft-azure/modules/wasbhook) using the `azure_xcom_backend_conn` connection that was defined in [Step 3](#step-3-create-a-connection).
-    - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
-    - Uses the `run_id` and `task_id` from the Airflow context to define the `blob_key` under which the file will be saved in the Azure Blob Storage container.
-    - Writes the `value` that is being pushed to XCom to a JSON file.
-    - Uploads the JSON file to Azure Blob Storage.
-    - Creates a `reference_string` using the `blob_key` that is written to the Airflow metadata database as a regular XCom.
-
-    The `.deserialize_value()` method:
-
-    - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XCom.
-    - Downloads the JSON file at the `blob_key` contained in the `reference_string`.
-    - Retrieves the information from the JSON file.
-
-3. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
-
-    ```text
-    AIRFLOW__CORE__XCOM_BACKEND=include.azure_xcom_backend_json.WasbXComBackendJSON
-    ```
-
-4. Restart your Airflow instance using `astro dev restart`.
-
-
 </TabItem>
 <TabItem value="local">
-
-For Airflow to be able to use your custom XCom backend it is necessary to define an XCom backend class which inherits from the `BaseXCom` class.
-
-1. In your Astro project create a new file in the `include` directory called `minio_xcom_backend_json.py`.
-
-2. Copy paste the following code into the file:
 
     ```python
     from airflow.models.xcom import BaseXCom
@@ -650,7 +552,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
     import os
     import io
 
-    class MinIOXComBackendJSON(BaseXCom):
+    class CustomXComBackendJSON(BaseXCom):
         # the prefix is optional and used to make it easier to recognize
         # which reference strings in the Airflow metadata database
         # refer to an XCom that has been stored in a MinIO bucket
@@ -684,7 +586,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
             # write the value to MinIO
             client.put_object(
-                MinIOXComBackendJSON.BUCKET_NAME,
+                CustomXComBackendJSON.BUCKET_NAME,
                 minio_key,
                 io.BytesIO(bytes(json.dumps(value), 'utf-8')),
                 -1, # -1 = unknown file size
@@ -693,7 +595,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
             # define the string that will be saved to the Airflow metadata 
             # database to refer to this XCom
-            reference_string = MinIOXComBackendJSON.PREFIX + minio_key
+            reference_string = CustomXComBackendJSON.PREFIX + minio_key
 
             # use JSON serialization to write the reference string to the
             # Airflow metadata database (like a regular XCom)
@@ -705,7 +607,7 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
             reference_string = BaseXCom.deserialize_value(result=result)
 
             # retrieve the key from the reference string 
-            minio_key = reference_string.replace(MinIOXComBackendJSON.PREFIX, "")
+            minio_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
 
             # create the MinIO client with the credentials stored as env variables
             client = Minio(
@@ -717,42 +619,41 @@ For Airflow to be able to use your custom XCom backend it is necessary to define
 
             # get the object from the MinIO bucket
             response = client.get_object(
-                MinIOXComBackendJSON.BUCKET_NAME,
+                CustomXComBackendJSON.BUCKET_NAME,
                 minio_key
             )
 
             # return the contents of the retrieved object
             return json.loads(response.read())
     ```
+</TabItem>
+</Tabs>
 
-    The code above defines a class called `MinIOXComBackendJSON`. The class has two methods: `.serialize_value()` defines how the `value` that is pushed to XCo from an Airflow task is handled, while `.deserialize_value()` contains the logic to retrieve information from the XCom backend.
+3. Review the copied code:
+
+    The code above defines a class called `CustomXComBackendJSON`. The class has two methods: `.serialize_value()` defines how to handle the `value` that is pushed to XCom from an Airflow task, and `.deserialize_value()` defines the logic to retrieve information from the XCom backend.
 
     The `.serialize_value()` method accomplishes the following:
 
-    - Creates a MinIO client using the credentials you saved in the `.env` file in [Step 3](#step-3-create-a-connection).
+    - Creates the connection to the external tool, either by using the Hook from the tools' provider package ([S3Hook](https://registry.astronomer.io/providers/amazon/modules/s3hook), [GCSHook](https://registry.astronomer.io/providers/google/modules/gcshook), [WasbHook](https://registry.astronomer.io/providers/microsoft-azure/modules/wasbhook)) or by providing credentials directly (MinIO).
     - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
-    - Uses the `run_id` and `task_id` from the Airflow context to define the `minio_key` under which the file will be saved in the bucket.
-    - Converts the `value` that is being pushed to XCom to a BytesIO object.
-    - Uploads the BytesIO object to the MinIO bucket.
-    - Creates a `reference_string` using the `minio_key` that is written to the Airflow metadata database as a regular XCom.
+    - Uses the `run_id` and `task_id` from the Airflow context to define the key under which the file will be saved in the object storage.
+    - Writes the `value` that is being pushed to XCom to the object storage using JSON serialization.
+    - Creates a unique `reference_string` that is written to the Airflow metadata database as a regular XCom.
 
     The `.deserialize_value()` method:
 
     - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XCom.
-    - Downloads the BytesIO object at the `minio_key` contained in the `reference_string`.
-    - Reads the information from the BytesIO object.
+    - Downloads the JSON file at the key contained in the `reference_string`.
+    - Retrieves the information from the JSON file.
 
-3. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
+4. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
 
     ```text
-    AIRFLOW__CORE__XCOM_BACKEND=include.minio_xcom_backend_json.MinIOXComBackendJSON
+    AIRFLOW__CORE__XCOM_BACKEND=include.xcom_backend_json.CustomXComBackendJSON
     ```
 
-4. Restart your Airflow instance using `astro dev restart`.
-
-</TabItem>
-
-</Tabs>
+5. Restart your Airflow instance using `astro dev restart`. 
 
 :::info
 
@@ -848,6 +749,12 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 ## Step 6: Create a custom serialization method to handle Pandas dataframes
 
+A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle objects that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
+
+1. Create a second file in your `include` folder called `xcom_backend_pandas.py`.
+
+2. Copy and paste the following code into the file.
+
 <Tabs
     defaultValue="aws"
     groupId= "github-actions-image-only-deploys"
@@ -859,12 +766,6 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
     ]}>
 <TabItem value="aws">
 
-A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle objects that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
-
-1. Create a second file in your `include` folder called `s3_xcom_backend_pandas.py`.
-
-2. Copy and paste the following code into the file.
-
     ```python
     from airflow.models.xcom import BaseXCom
     from airflow.providers.amazon.aws.hooks.s3 import S3Hook
@@ -873,7 +774,7 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
     import uuid
     import os
 
-    class S3XComBackendPandas(BaseXCom):
+    class CustomXComBackendPandas(BaseXCom):
         PREFIX = "xcom_s3://"
         BUCKET_NAME = "s3-xcom-backend-example"
 
@@ -910,14 +811,14 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             hook.load_file(
                 filename=filename,
                 key=s3_key,
-                bucket_name=S3XComBackendPandas.BUCKET_NAME,
+                bucket_name=CustomXComBackendPandas.BUCKET_NAME,
                 replace=True
             )
 
             # remove the local temporary file
             os.remove(filename)
 
-            reference_string = S3XComBackendPandas.PREFIX + s3_key
+            reference_string = CustomXComBackendPandas.PREFIX + s3_key
 
             return BaseXCom.serialize_value(value=reference_string)
 
@@ -926,11 +827,11 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             result = BaseXCom.deserialize_value(result)
 
             hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-            key = result.replace(S3XComBackendPandas.PREFIX, "")
+            key = result.replace(CustomXComBackendPandas.PREFIX, "")
 
             filename = hook.download_file(
                 key=key,
-                bucket_name=S3XComBackendPandas.BUCKET_NAME,
+                bucket_name=CustomXComBackendPandas.BUCKET_NAME,
                 local_path="/tmp"
             )
 
@@ -947,26 +848,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
 
             return output
     ```
-
-    The code above creates a custom XCom backend called `S3XComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the S3 bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
-
-3. In the `.env` file of your Astro project, change the XCom backend variable to use the newly created `S3XComBackendPandas`.
-
-    ```text
-    AIRFLOW__CORE__XCOM_BACKEND=include.s3_xcom_backend_pandas.S3XComBackendPandas
-    ```
-
-4. Restart your Airflow instance using `astro dev restart`.
-
 </TabItem>
-
 <TabItem value="gcp">
-
-A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle objects that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
-
-1. Create a second file in your `include` folder called `gcs_xcom_backend_pandas.py`.
-
-2. Copy and paste the following code into the file.
 
     ```python
     from airflow.models.xcom import BaseXCom
@@ -976,7 +859,7 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
     import uuid
     import os
 
-    class GCSXComBackendPandas(BaseXCom):
+    class CustomXComBackendPandas(BaseXCom):
         PREFIX = "xcom_gcs://"
         BUCKET_NAME = "gcs-xcom-backend-example"
 
@@ -1013,13 +896,13 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             hook.upload(
                 filename=filename,
                 object_name=gs_key,
-                bucket_name=GCSXComBackendPandas.BUCKET_NAME,
+                bucket_name=CustomXComBackendPandas.BUCKET_NAME,
             )
 
             # remove the local temporary file
             os.remove(filename)
 
-            reference_string = GCSXComBackendPandas.PREFIX + gs_key
+            reference_string = CustomXComBackendPandas.PREFIX + gs_key
 
             return BaseXCom.serialize_value(value=reference_string)
 
@@ -1028,11 +911,11 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             result = BaseXCom.deserialize_value(result)
 
             hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
-            gs_key = result.replace(GCSXComBackendPandas.PREFIX, "")
+            gs_key = result.replace(CustomXComBackendPandas.PREFIX, "")
 
             filename = hook.download(
                 object_name=gs_key,
-                bucket_name=GCSXComBackendPandas.BUCKET_NAME,
+                bucket_name=CustomXComBackendPandas.BUCKET_NAME,
                 filename="my_xcom.csv"
             )
 
@@ -1050,24 +933,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             return output
     ```
 
-    The code above creates a custom XCom backend called `GCSXComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the GCS bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
-
-3. In the `.env` file of your Astro project, change the XCom backend variable to use the newly created `GCSXComBackendPandas`.
-
-    ```text
-    AIRFLOW__CORE__XCOM_BACKEND=include.gcs_xcom_backend_pandas.GCSXComBackendPandas
-    ```
-
-4. Restart your Airflow instance using `astro dev restart`.
-
 </TabItem>
 <TabItem value="azure">
-
-A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle objects that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
-
-1. Create a second file in your `include` folder called `azure_xcom_backend_pandas.py`.
-
-2. Copy and paste the following code into the file.
 
     ```python
     from airflow.models.xcom import BaseXCom
@@ -1077,7 +944,7 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
     import uuid
     import os
 
-    class WasbXComBackendPandas(BaseXCom):
+    class CustomXComBackendPandas(BaseXCom):
         PREFIX = "xcom_wasb://"
         CONTAINER_NAME = "custom-xcom-backend"
 
@@ -1113,14 +980,14 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
 
             hook.load_file(
                 file_path=filename,
-                container_name=WasbXComBackendPandas.CONTAINER_NAME,
+                container_name=CustomXComBackendPandas.CONTAINER_NAME,
                 blob_name=blob_key
             )
 
             # remove the local temporary file
             os.remove(filename)
 
-            reference_string = WasbXComBackendPandas.PREFIX + blob_key
+            reference_string = CustomXComBackendPandas.PREFIX + blob_key
 
             return BaseXCom.serialize_value(value=reference_string)
 
@@ -1129,11 +996,11 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             result = BaseXCom.deserialize_value(result)
 
             hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
-            blob_key = result.replace(WasbXComBackendPandas.PREFIX, "")
+            blob_key = result.replace(CustomXComBackendPandas.PREFIX, "")
 
             hook.get_file(
                 blob_name=blob_key,
-                container_name=WasbXComBackendPandas.CONTAINER_NAME,
+                container_name=CustomXComBackendPandas.CONTAINER_NAME,
                 file_path="my_xcom_file",
                 offset=0,
                 length=100000
@@ -1153,25 +1020,8 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             return output
     ```
 
-    The code above creates a custom XCom backend called `WasbXComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the GCS bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
-
-3. In the `.env` file of your Astro project, change the XCom backend variable to use the newly created `WasbXComBackendPandas`.
-
-    ```text
-    AIRFLOW__CORE__XCOM_BACKEND=include.azure_xcom_backend_pandas.WasbXComBackendPandas
-    ```
-
-4. Restart your Airflow instance using `astro dev restart`.
-
-
 </TabItem>
 <TabItem value="local">
-
-A powerful feature of custom XCom backends is the possibility to adjust serialization and deserialization methods to be able to handle objects that cannot be JSON-serialized. In this step you will create a custom XCom backend that can save the contents of a [Pandas](https://pandas.pydata.org/) dataframe as a CSV file.
-
-1. Create a second file in your `include` folder called `minion_xcom_backend_pandas.py`.
-
-2. Copy and paste the following code into the file.
 
     ```python
     from airflow.models.xcom import BaseXCom
@@ -1182,7 +1032,7 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
     import os
     import io
 
-    class MinIOXComBackendPandas(BaseXCom):
+    class CustomXComBackendPandas(BaseXCom):
         # the prefix is optional and used to make it easier to recognize
         # which reference strings in the Airflow metadata database
         # refer to an XCom that has been stored in a MinIO bucket
@@ -1232,21 +1082,21 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
                 bytes_to_write = io.BytesIO(bytes(json.dumps(value), 'utf-8'))
 
             client.put_object(
-                MinIOXComBackendPandas.BUCKET_NAME,
+                CustomXComBackendPandas.BUCKET_NAME,
                 minio_key,
                 bytes_to_write,
                 -1, # -1 = unknown filesize
                 part_size=10*1024*1024,
             )
 
-            reference_string = MinIOXComBackendPandas.PREFIX + minio_key
+            reference_string = CustomXComBackendPandas.PREFIX + minio_key
 
             return BaseXCom.serialize_value(value=reference_string)
 
         @staticmethod
         def deserialize_value(result):
             reference_string = BaseXCom.deserialize_value(result=result)
-            key = reference_string.replace(MinIOXComBackendPandas.PREFIX, "")
+            key = reference_string.replace(CustomXComBackendPandas.PREFIX, "")
 
             client = Minio(
                 os.environ["MINIO_IP"],
@@ -1256,7 +1106,7 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             )
 
             response = client.get_object(
-                MinIOXComBackendPandas.BUCKET_NAME,
+                CustomXComBackendPandas.BUCKET_NAME,
                 key
             )
 
@@ -1277,19 +1127,24 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
             return output
     ```
 
-    The code above creates a custom XCom backend called `MinIOXComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the S3 bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
+</TabItem>
+</Tabs>
 
-3. In the `.env` file of your Astro project, change the XCom backend variable to use the newly created `MinIOXComBackendPandas`.
+The code above creates a custom XCom backend called `CustomXComBackendPandas` with added logic to convert a Pandas dataframe to a CSV file, which gets written to the S3 bucket and converted back to a Pandas dataframe upon retrieval. If the value passed is not a Pandas dataframe, the `.serialize()` and `.deserialize` methods will use JSON serialization like the custom XCom backend in [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization).
+
+3. In the `.env` file of your Astro project, replace the XCom backend variable to use the newly created `CustomXComBackendPandas`.
 
     ```text
-    AIRFLOW__CORE__XCOM_BACKEND=include.minio_xcom_backend_pandas.MinIOXComBackendPandas
+    AIRFLOW__CORE__XCOM_BACKEND=include.xcom_backend_pandas.CustomXComBackendPandas
     ```
 
 4. Restart your Airflow instance using `astro dev restart`.
 
-</TabItem>
+:::tip
 
-</Tabs>
+You can add custom logic inside your `.serialize()` and `.deserialize()` methods to send XCom to several custom XCom backend solutions, for example based on their object type.
+
+:::
 
 ## Step 7: Run a DAG passing Pandas dataframes via XCom
 
