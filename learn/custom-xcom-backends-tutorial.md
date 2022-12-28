@@ -267,12 +267,6 @@ MINIO_IP=host.docker.internal:9000
 
 ## Step 4: Define a custom XCom class using JSON serialization
 
-For Airflow to use your custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
-
-1. In your Astro project, create a new file in the `include` directory called `xcom_backend_json.py`.
-
-2. Copy paste the following code into the file:
-
 <Tabs
     defaultValue="aws"
     groupId= "github-actions-image-only-deploys"
@@ -283,6 +277,12 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
         {label: 'MinIO (local)', value: 'local'}
     ]}>
 <TabItem value="aws">
+
+For Airflow to use your custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
+
+1. In your Astro project, create a new file in the `include` directory called `xcom_backend_json.py`.
+
+2. Copy paste the following code into the file:
 
     ```python
     from airflow.models.xcom import BaseXCom
@@ -369,8 +369,6 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
             return output
     ```
 
-</TabItem>
-
     The code above defines a class called `S3XComBackendJSON`. The class has two methods: `.serialize_value()` defines how to handle the `value` that is pushed to XCom from an Airflow task, and `.deserialize_value()` defines the logic to retrieve information from the XCom backend.
 
     The `.serialize_value()` method accomplishes the following:
@@ -396,6 +394,7 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
 
 4. Restart your Airflow instance using `astro dev restart`. 
 
+</TabItem>
 
 <TabItem value="gcp">
 
