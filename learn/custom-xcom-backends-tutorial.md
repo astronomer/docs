@@ -284,368 +284,366 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
     ]}>
 <TabItem value="aws">
 
-    ```python
-    from airflow.models.xcom import BaseXCom
-    from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-    import json
-    import uuid
-    import os
+```python
+from airflow.models.xcom import BaseXCom
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+import json
+import uuid
+import os
 
-    class CustomXComBackendJSON(BaseXCom):
-        # the prefix is optional and used to make it easier to recognize
-        # which reference strings in the Airflow metadata database
-        # refer to an XCom that has been stored in an S3 bucket
-        PREFIX = "xcom_s3://"
-        BUCKET_NAME = "s3-xcom-backend-example"
+class CustomXComBackendJSON(BaseXCom):
+    # the prefix is optional and used to make it easier to recognize
+    # which reference strings in the Airflow metadata database
+    # refer to an XCom that has been stored in an S3 bucket
+    PREFIX = "xcom_s3://"
+    BUCKET_NAME = "s3-xcom-backend-example"
 
-        @staticmethod
-        def serialize_value(
-            value,
-            key=None,
-            task_id=None,
-            dag_id=None,
-            run_id=None,
-            map_index= None,
-            **kwargs
-        ):
-            
-            # the connection to AWS is created by using the S3 hook with 
-            # the conn id configured in Step 3
-            hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-            # make sure the file_id is unique, either by using combinations of
-            # the task_id, run_id and map_index parameters or by using a uuid
-            filename = "data_" + str(uuid.uuid4()) + ".json"
-            # define the full S3 key where the file should be stored
-            s3_key = f"{run_id}/{task_id}/{filename}"
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
+        
+        # the connection to AWS is created by using the S3 hook with 
+        # the conn id configured in Step 3
+        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        # make sure the file_id is unique, either by using combinations of
+        # the task_id, run_id and map_index parameters or by using a uuid
+        filename = "data_" + str(uuid.uuid4()) + ".json"
+        # define the full S3 key where the file should be stored
+        s3_key = f"{run_id}/{task_id}/{filename}"
 
-            # write the value to a local temporary JSON file
-            with open(filename, 'a+') as f:
-                json.dump(value, f)
+        # write the value to a local temporary JSON file
+        with open(filename, 'a+') as f:
+            json.dump(value, f)
 
-            # load the local JSON file into the S3 bucket
-            hook.load_file(
-                filename=filename,
-                key=s3_key,
-                bucket_name=CustomXComBackendJSON.BUCKET_NAME,
-                replace=True
-            )
+        # load the local JSON file into the S3 bucket
+        hook.load_file(
+            filename=filename,
+            key=s3_key,
+            bucket_name=CustomXComBackendJSON.BUCKET_NAME,
+            replace=True
+        )
 
-            # remove the local temporary JSON file
-            os.remove(filename)
+        # remove the local temporary JSON file
+        os.remove(filename)
 
-            # define the string that will be saved to the Airflow metadata 
-            # database to refer to this XCom
-            reference_string = CustomXComBackendJSON.PREFIX + s3_key
+        # define the string that will be saved to the Airflow metadata 
+        # database to refer to this XCom
+        reference_string = CustomXComBackendJSON.PREFIX + s3_key
 
-            # use JSON serialization to write the reference string to the
-            # Airflow metadata database (like a regular XCom)
-            return BaseXCom.serialize_value(value=reference_string)
+        # use JSON serialization to write the reference string to the
+        # Airflow metadata database (like a regular XCom)
+        return BaseXCom.serialize_value(value=reference_string)
 
-        @staticmethod
-        def deserialize_value(result):
-            # retrieve the relevant reference string from the metadata database
-            reference_string = BaseXCom.deserialize_value(result=result)
-            
-            # create the S3 connection using the S3Hook and recreate the S3 key
-            hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-            key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
+    @staticmethod
+    def deserialize_value(result):
+        # retrieve the relevant reference string from the metadata database
+        reference_string = BaseXCom.deserialize_value(result=result)
+        
+        # create the S3 connection using the S3Hook and recreate the S3 key
+        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
 
-            # download the JSON file found at the location described by the 
-            # reference string to a temporary local folder
-            filename = hook.download_file(
-                key=key,
-                bucket_name=CustomXComBackendJSON.BUCKET_NAME,
-                local_path="/tmp"
-            )
+        # download the JSON file found at the location described by the 
+        # reference string to a temporary local folder
+        filename = hook.download_file(
+            key=key,
+            bucket_name=CustomXComBackendJSON.BUCKET_NAME,
+            local_path="/tmp"
+        )
 
-            # load the content of the local JSON file and return it to be used by
-            # the operator
-            with open(filename, 'r') as f:
-                output = json.load(f)
+        # load the content of the local JSON file and return it to be used by
+        # the operator
+        with open(filename, 'r') as f:
+            output = json.load(f)
 
-            # remove the local temporary JSON file
-            os.remove(filename)
+        # remove the local temporary JSON file
+        os.remove(filename)
 
-            return output
-    ```
+        return output
+```
 </TabItem>
 <TabItem value="gcp">
 
-    ```python
-    from airflow.models.xcom import BaseXCom
-    from airflow.providers.google.cloud.hooks.gcs import GCSHook
-    import json
-    import uuid
-    import os
+```python
+from airflow.models.xcom import BaseXCom
+from airflow.providers.google.cloud.hooks.gcs import GCSHook
+import json
+import uuid
+import os
 
-    class CustomXComBackendJSON(BaseXCom):
-        # the prefix is optional and used to make it easier to recognize
-        # which reference strings in the Airflow metadata database
-        # refer to an XCom that has been stored in a GCS bucket
-        PREFIX = "xcom_gcs://"
-        BUCKET_NAME = "gcs-xcom-backend-example"
+class CustomXComBackendJSON(BaseXCom):
+    # the prefix is optional and used to make it easier to recognize
+    # which reference strings in the Airflow metadata database
+    # refer to an XCom that has been stored in a GCS bucket
+    PREFIX = "xcom_gcs://"
+    BUCKET_NAME = "gcs-xcom-backend-example"
 
-        @staticmethod
-        def serialize_value(
-            value,
-            key=None,
-            task_id=None,
-            dag_id=None,
-            run_id=None,
-            map_index= None,
-            **kwargs
-        ):
-            
-            # the connection to GCS is created by using the GCShook with 
-            # the conn id configured in Step 3
-            hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
-            # make sure the file_id is unique, either by using combinations of
-            # the task_id, run_id and map_index parameters or by using a uuid
-            filename = "data_" + str(uuid.uuid4()) + ".json"
-            # define the full GCS key where the file should be stored
-            gs_key = f"{run_id}/{task_id}/{filename}"
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
+        
+        # the connection to GCS is created by using the GCShook with 
+        # the conn id configured in Step 3
+        hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+        # make sure the file_id is unique, either by using combinations of
+        # the task_id, run_id and map_index parameters or by using a uuid
+        filename = "data_" + str(uuid.uuid4()) + ".json"
+        # define the full GCS key where the file should be stored
+        gs_key = f"{run_id}/{task_id}/{filename}"
 
-            # write the value to a local temporary JSON file
-            with open(filename, 'a+') as f:
-                json.dump(value, f)
+        # write the value to a local temporary JSON file
+        with open(filename, 'a+') as f:
+            json.dump(value, f)
 
-            # load the local JSON file into the GCS bucket
-            hook.upload(
-                filename=filename,
-                object_name=gs_key,
-                bucket_name=CustomXComBackendJSON.BUCKET_NAME,
-            )
+        # load the local JSON file into the GCS bucket
+        hook.upload(
+            filename=filename,
+            object_name=gs_key,
+            bucket_name=CustomXComBackendJSON.BUCKET_NAME,
+        )
 
-            # remove the local temporary JSON file
-            os.remove(filename)
+        # remove the local temporary JSON file
+        os.remove(filename)
 
-            # define the string that will be saved to the Airflow metadata 
-            # database to refer to this XCom
-            reference_string = CustomXComBackendJSON.PREFIX + gs_key
+        # define the string that will be saved to the Airflow metadata 
+        # database to refer to this XCom
+        reference_string = CustomXComBackendJSON.PREFIX + gs_key
 
-            # use JSON serialization to write the reference string to the
-            # Airflow metadata database (like a regular XCom)
-            return BaseXCom.serialize_value(value=reference_string)
+        # use JSON serialization to write the reference string to the
+        # Airflow metadata database (like a regular XCom)
+        return BaseXCom.serialize_value(value=reference_string)
 
-        @staticmethod
-        def deserialize_value(result):
-            # retrieve the relevant reference string from the metadata database
-            reference_string = BaseXCom.deserialize_value(result=result)
-            
-            # create the GCS connection using the GCSHook and recreate the key
-            hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
-            gs_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
+    @staticmethod
+    def deserialize_value(result):
+        # retrieve the relevant reference string from the metadata database
+        reference_string = BaseXCom.deserialize_value(result=result)
+        
+        # create the GCS connection using the GCSHook and recreate the key
+        hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+        gs_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
 
-            # download the JSON file found at the location described by the 
-            # reference string to a temporary local folder
-            filename = hook.download(
-                object_name=gs_key,
-                bucket_name=CustomXComBackendJSON.BUCKET_NAME,
-                filename="my_xcom.json"
-            )
+        # download the JSON file found at the location described by the 
+        # reference string to a temporary local folder
+        filename = hook.download(
+            object_name=gs_key,
+            bucket_name=CustomXComBackendJSON.BUCKET_NAME,
+            filename="my_xcom.json"
+        )
 
-            # load the content of the local JSON file and return it to be used by
-            # the operator
-            with open(filename, 'r') as f:
-                output = json.load(f)
+        # load the content of the local JSON file and return it to be used by
+        # the operator
+        with open(filename, 'r') as f:
+            output = json.load(f)
 
-            # remove the local temporary JSON file
-            os.remove(filename)
+        # remove the local temporary JSON file
+        os.remove(filename)
 
-            return output
-    ```
+        return output
+```
 </TabItem>
 <TabItem value="azure">
 
-    ```python
-    from airflow.models.xcom import BaseXCom
-    from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
-    import json
-    import uuid
-    import os
+```python
+from airflow.models.xcom import BaseXCom
+from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
+import json
+import uuid
+import os
 
-    class CustomXComBackendJSON(BaseXCom):
-        # the prefix is optional and used to make it easier to recognize
-        # which reference strings in the Airflow metadata database
-        # refer to an XCom that has been stored in Azure Blob Storage
-        PREFIX = "xcom_wasb://"
-        CONTAINER_NAME = "custom-xcom-backend"
+class CustomXComBackendJSON(BaseXCom):
+    # the prefix is optional and used to make it easier to recognize
+    # which reference strings in the Airflow metadata database
+    # refer to an XCom that has been stored in Azure Blob Storage
+    PREFIX = "xcom_wasb://"
+    CONTAINER_NAME = "custom-xcom-backend"
 
-        @staticmethod
-        def serialize_value(
-            value,
-            key=None,
-            task_id=None,
-            dag_id=None,
-            run_id=None,
-            map_index= None,
-            **kwargs
-        ):
-            
-            # the connection to Wasb is created by using the WasbHook with 
-            # the conn id configured in Step 3
-            hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
-            # make sure the file_id is unique, either by using combinations of
-            # the task_id, run_id and map_index parameters or by using a uuid
-            filename = "data_" + str(uuid.uuid4()) + ".json"
-            # define the full blob key where the file should be stored
-            blob_key = f"{run_id}/{task_id}/{filename}"
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
+        
+        # the connection to Wasb is created by using the WasbHook with 
+        # the conn id configured in Step 3
+        hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
+        # make sure the file_id is unique, either by using combinations of
+        # the task_id, run_id and map_index parameters or by using a uuid
+        filename = "data_" + str(uuid.uuid4()) + ".json"
+        # define the full blob key where the file should be stored
+        blob_key = f"{run_id}/{task_id}/{filename}"
 
-            # write the value to a local temporary JSON file
-            with open(filename, 'a+') as f:
-                json.dump(value, f)
+        # write the value to a local temporary JSON file
+        with open(filename, 'a+') as f:
+            json.dump(value, f)
 
-            # load the local JSON file into Azure Blob Storage
-            hook.load_file(
-                file_path=filename,
-                container_name=CustomXComBackendJSON.CONTAINER_NAME,
-                blob_name=blob_key
-            )
+        # load the local JSON file into Azure Blob Storage
+        hook.load_file(
+            file_path=filename,
+            container_name=CustomXComBackendJSON.CONTAINER_NAME,
+            blob_name=blob_key
+        )
 
-            # remove the local temporary JSON file
-            os.remove(filename)
+        # remove the local temporary JSON file
+        os.remove(filename)
 
-            # define the string that will be saved to the Airflow metadata 
-            # database to refer to this XCom
-            reference_string = CustomXComBackendJSON.PREFIX + blob_key
+        # define the string that will be saved to the Airflow metadata 
+        # database to refer to this XCom
+        reference_string = CustomXComBackendJSON.PREFIX + blob_key
 
-            # use JSON serialization to write the reference string to the
-            # Airflow metadata database (like a regular XCom)
-            return BaseXCom.serialize_value(value=reference_string)
+        # use JSON serialization to write the reference string to the
+        # Airflow metadata database (like a regular XCom)
+        return BaseXCom.serialize_value(value=reference_string)
 
-        @staticmethod
-        def deserialize_value(result):
-            # retrieve the relevant reference string from the metadata database
-            reference_string = BaseXCom.deserialize_value(result=result)
-            
-            # create the Wasb connection using the WasbHook and recreate the key
-            hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
-            blob_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
+    @staticmethod
+    def deserialize_value(result):
+        # retrieve the relevant reference string from the metadata database
+        reference_string = BaseXCom.deserialize_value(result=result)
+        
+        # create the Wasb connection using the WasbHook and recreate the key
+        hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
+        blob_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
 
-            # download the JSON file found at the location described by the 
-            # reference string to my_xcom.json
-            hook.get_file(
-                blob_name=blob_key,
-                container_name=CustomXComBackendJSON.CONTAINER_NAME,
-                file_path="my_xcom.json",
-                offset=0,
-                length=100000
-            )
+        # download the JSON file found at the location described by the 
+        # reference string to my_xcom.json
+        hook.get_file(
+            blob_name=blob_key,
+            container_name=CustomXComBackendJSON.CONTAINER_NAME,
+            file_path="my_xcom.json",
+            offset=0,
+            length=100000
+        )
 
-            # load the contents of my_xcom.json to return 
-            with open("my_xcom.json", 'r') as f:
-                output = json.load(f)
+        # load the contents of my_xcom.json to return 
+        with open("my_xcom.json", 'r') as f:
+            output = json.load(f)
 
-            # remove the local temporary JSON file
-            os.remove("my_xcom.json")
+        # remove the local temporary JSON file
+        os.remove("my_xcom.json")
 
-            return output
-    ```
+        return output
+```
 </TabItem>
 <TabItem value="local">
 
-    ```python
-    from airflow.models.xcom import BaseXCom
-    import json
-    import uuid
-    from minio import Minio
-    import os
-    import io
+```python
+from airflow.models.xcom import BaseXCom
+import json
+import uuid
+from minio import Minio
+import os
+import io
 
-    class CustomXComBackendJSON(BaseXCom):
-        # the prefix is optional and used to make it easier to recognize
-        # which reference strings in the Airflow metadata database
-        # refer to an XCom that has been stored in a MinIO bucket
-        PREFIX = "xcom_minio://"
-        BUCKET_NAME = "custom-xcom-backend"
+class CustomXComBackendJSON(BaseXCom):
+    # the prefix is optional and used to make it easier to recognize
+    # which reference strings in the Airflow metadata database
+    # refer to an XCom that has been stored in a MinIO bucket
+    PREFIX = "xcom_minio://"
+    BUCKET_NAME = "custom-xcom-backend"
 
-        @staticmethod
-        def serialize_value(
-            value,
-            key=None,
-            task_id=None,
-            dag_id=None,
-            run_id=None,
-            map_index= None,
-            **kwargs
-        ):
-            
-            # create the MinIO client with the credentials stored as env variables
-            client = Minio(
-                os.environ["MINIO_IP"],
-                os.environ["MINIO_ACCESS_KEY"],
-                os.environ["MINIO_SECRET_KEY"],
-                secure=False
-            )
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
+        
+        # create the MinIO client with the credentials stored as env variables
+        client = Minio(
+            os.environ["MINIO_IP"],
+            os.environ["MINIO_ACCESS_KEY"],
+            os.environ["MINIO_SECRET_KEY"],
+            secure=False
+        )
 
-            # make sure the file_id is unique, either by using combinations of
-            # the task_id, run_id and map_index parameters or by using a uuid
-            filename = "data_" + str(uuid.uuid4()) + ".json"
-            # define the full key where the file should be stored
-            minio_key = f"{run_id}/{task_id}/{filename}"
+        # make sure the file_id is unique, either by using combinations of
+        # the task_id, run_id and map_index parameters or by using a uuid
+        filename = "data_" + str(uuid.uuid4()) + ".json"
+        # define the full key where the file should be stored
+        minio_key = f"{run_id}/{task_id}/{filename}"
 
-            # write the value to MinIO
-            client.put_object(
-                CustomXComBackendJSON.BUCKET_NAME,
-                minio_key,
-                io.BytesIO(bytes(json.dumps(value), 'utf-8')),
-                -1, # -1 = unknown file size
-                part_size=10*1024*1024,
-            )
+        # write the value to MinIO
+        client.put_object(
+            CustomXComBackendJSON.BUCKET_NAME,
+            minio_key,
+            io.BytesIO(bytes(json.dumps(value), 'utf-8')),
+            -1, # -1 = unknown file size
+            part_size=10*1024*1024,
+        )
 
-            # define the string that will be saved to the Airflow metadata 
-            # database to refer to this XCom
-            reference_string = CustomXComBackendJSON.PREFIX + minio_key
+        # define the string that will be saved to the Airflow metadata 
+        # database to refer to this XCom
+        reference_string = CustomXComBackendJSON.PREFIX + minio_key
 
-            # use JSON serialization to write the reference string to the
-            # Airflow metadata database (like a regular XCom)
-            return BaseXCom.serialize_value(value=reference_string)
+        # use JSON serialization to write the reference string to the
+        # Airflow metadata database (like a regular XCom)
+        return BaseXCom.serialize_value(value=reference_string)
 
-        @staticmethod
-        def deserialize_value(result):
-            # retrieve the relevant reference string from the metadata database
-            reference_string = BaseXCom.deserialize_value(result=result)
+    @staticmethod
+    def deserialize_value(result):
+        # retrieve the relevant reference string from the metadata database
+        reference_string = BaseXCom.deserialize_value(result=result)
 
-            # retrieve the key from the reference string 
-            minio_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
+        # retrieve the key from the reference string 
+        minio_key = reference_string.replace(CustomXComBackendJSON.PREFIX, "")
 
-            # create the MinIO client with the credentials stored as env variables
-            client = Minio(
-                os.environ["MINIO_IP"],
-                os.environ["MINIO_ACCESS_KEY"],
-                os.environ["MINIO_SECRET_KEY"],
-                secure=False
-            )
+        # create the MinIO client with the credentials stored as env variables
+        client = Minio(
+            os.environ["MINIO_IP"],
+            os.environ["MINIO_ACCESS_KEY"],
+            os.environ["MINIO_SECRET_KEY"],
+            secure=False
+        )
 
-            # get the object from the MinIO bucket
-            response = client.get_object(
-                CustomXComBackendJSON.BUCKET_NAME,
-                minio_key
-            )
+        # get the object from the MinIO bucket
+        response = client.get_object(
+            CustomXComBackendJSON.BUCKET_NAME,
+            minio_key
+        )
 
-            # return the contents of the retrieved object
-            return json.loads(response.read())
-    ```
+        # return the contents of the retrieved object
+        return json.loads(response.read())
+```
 </TabItem>
 </Tabs>
 
-3. Review the copied code:
+The code above defines a class called `CustomXComBackendJSON`. The class has two methods: `.serialize_value()` defines how to handle the `value` that is pushed to XCom from an Airflow task, and `.deserialize_value()` defines the logic to retrieve information from the XCom backend.
 
-    The code above defines a class called `CustomXComBackendJSON`. The class has two methods: `.serialize_value()` defines how to handle the `value` that is pushed to XCom from an Airflow task, and `.deserialize_value()` defines the logic to retrieve information from the XCom backend.
+The `.serialize_value()` method accomplishes the following:
 
-    The `.serialize_value()` method accomplishes the following:
+- Creates the connection to the external tool, either by using the Hook from the tools' provider package ([S3Hook](https://registry.astronomer.io/providers/amazon/modules/s3hook), [GCSHook](https://registry.astronomer.io/providers/google/modules/gcshook), [WasbHook](https://registry.astronomer.io/providers/microsoft-azure/modules/wasbhook)) or by providing credentials directly (MinIO).
+- Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
+- Uses the `run_id` and `task_id` from the Airflow context to define the key under which the file will be saved in the object storage.
+- Writes the `value` that is being pushed to XCom to the object storage using JSON serialization.
+- Creates a unique `reference_string` that is written to the Airflow metadata database as a regular XCom.
 
-    - Creates the connection to the external tool, either by using the Hook from the tools' provider package ([S3Hook](https://registry.astronomer.io/providers/amazon/modules/s3hook), [GCSHook](https://registry.astronomer.io/providers/google/modules/gcshook), [WasbHook](https://registry.astronomer.io/providers/microsoft-azure/modules/wasbhook)) or by providing credentials directly (MinIO).
-    - Creates a unique `filename` using the [`uuid` package](https://docs.python.org/3/library/uuid.html).
-    - Uses the `run_id` and `task_id` from the Airflow context to define the key under which the file will be saved in the object storage.
-    - Writes the `value` that is being pushed to XCom to the object storage using JSON serialization.
-    - Creates a unique `reference_string` that is written to the Airflow metadata database as a regular XCom.
+The `.deserialize_value()` method:
 
-    The `.deserialize_value()` method:
-
-    - Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XCom.
-    - Downloads the JSON file at the key contained in the `reference_string`.
-    - Retrieves the information from the JSON file.
+- Retrieves the `reference_string` for a given entry (`result`) from the Airflow metadata database using regular XCom.
+- Downloads the JSON file at the key contained in the `reference_string`.
+- Retrieves the information from the JSON file.
 
 4. Open the `.env` file of your Astro Project and add the following line to set your XCom backend to the custom class:
 
@@ -766,366 +764,366 @@ A powerful feature of custom XCom backends is the possibility to adjust serializ
     ]}>
 <TabItem value="aws">
 
-    ```python
-    from airflow.models.xcom import BaseXCom
-    from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-    import pandas as pd
-    import json
-    import uuid
-    import os
+```python
+from airflow.models.xcom import BaseXCom
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+import pandas as pd
+import json
+import uuid
+import os
 
-    class CustomXComBackendPandas(BaseXCom):
-        PREFIX = "xcom_s3://"
-        BUCKET_NAME = "s3-xcom-backend-example"
+class CustomXComBackendPandas(BaseXCom):
+    PREFIX = "xcom_s3://"
+    BUCKET_NAME = "s3-xcom-backend-example"
 
-        @staticmethod
-        def serialize_value(
-            value,
-            key=None,
-            task_id=None,
-            dag_id=None,
-            run_id=None,
-            map_index= None,
-            **kwargs
-        ):
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
 
-            hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-            
-            # added serialization method if the value passed is a Pandas dataframe
-            # the contents are written to a local temporary csv file
-            if isinstance(value, pd.DataFrame):
-                filename = "data_" + str(uuid.uuid4()) + ".csv"
-                s3_key = f"{run_id}/{task_id}/{filename}"
+        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        
+        # added serialization method if the value passed is a Pandas dataframe
+        # the contents are written to a local temporary csv file
+        if isinstance(value, pd.DataFrame):
+            filename = "data_" + str(uuid.uuid4()) + ".csv"
+            s3_key = f"{run_id}/{task_id}/{filename}"
 
-                value.to_csv(filename)
+            value.to_csv(filename)
 
-            # if the value passed is not a Pandas dataframe, attempt to use
-            # JSON serialization
-            else:
-                filename = "data_" + str(uuid.uuid4()) + ".json"
-                s3_key = f"{run_id}/{task_id}/{filename}"
+        # if the value passed is not a Pandas dataframe, attempt to use
+        # JSON serialization
+        else:
+            filename = "data_" + str(uuid.uuid4()) + ".json"
+            s3_key = f"{run_id}/{task_id}/{filename}"
 
-                with open(filename, 'a+') as f:
-                    json.dump(value, f)
+            with open(filename, 'a+') as f:
+                json.dump(value, f)
 
-            hook.load_file(
-                filename=filename,
-                key=s3_key,
-                bucket_name=CustomXComBackendPandas.BUCKET_NAME,
-                replace=True
-            )
+        hook.load_file(
+            filename=filename,
+            key=s3_key,
+            bucket_name=CustomXComBackendPandas.BUCKET_NAME,
+            replace=True
+        )
 
-            # remove the local temporary file
-            os.remove(filename)
+        # remove the local temporary file
+        os.remove(filename)
 
-            reference_string = CustomXComBackendPandas.PREFIX + s3_key
+        reference_string = CustomXComBackendPandas.PREFIX + s3_key
 
-            return BaseXCom.serialize_value(value=reference_string)
+        return BaseXCom.serialize_value(value=reference_string)
 
-        @staticmethod
-        def deserialize_value(result):
-            result = BaseXCom.deserialize_value(result)
+    @staticmethod
+    def deserialize_value(result):
+        result = BaseXCom.deserialize_value(result)
 
-            hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-            key = result.replace(CustomXComBackendPandas.PREFIX, "")
+        hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
+        key = result.replace(CustomXComBackendPandas.PREFIX, "")
 
-            filename = hook.download_file(
-                key=key,
-                bucket_name=CustomXComBackendPandas.BUCKET_NAME,
-                local_path="/tmp"
-            )
+        filename = hook.download_file(
+            key=key,
+            bucket_name=CustomXComBackendPandas.BUCKET_NAME,
+            local_path="/tmp"
+        )
 
-            # added deserialization option to convert a CSV back to a dataframe
-            if key.split(".")[-1] == "csv":
-                output = pd.read_csv(filename)
-            # if the key does not end in 'csv' use JSON deserialization
-            else:
-                with open(filename, 'r') as f:
-                    output = json.load(f)
+        # added deserialization option to convert a CSV back to a dataframe
+        if key.split(".")[-1] == "csv":
+            output = pd.read_csv(filename)
+        # if the key does not end in 'csv' use JSON deserialization
+        else:
+            with open(filename, 'r') as f:
+                output = json.load(f)
 
-            # remove the local temporary file
-            os.remove(filename)
+        # remove the local temporary file
+        os.remove(filename)
 
-            return output
-    ```
+        return output
+```
 </TabItem>
 <TabItem value="gcp">
 
-    ```python
-    from airflow.models.xcom import BaseXCom
-    from airflow.providers.google.cloud.hooks.gcs import GCSHook
-    import pandas as pd
-    import json
-    import uuid
-    import os
+```python
+from airflow.models.xcom import BaseXCom
+from airflow.providers.google.cloud.hooks.gcs import GCSHook
+import pandas as pd
+import json
+import uuid
+import os
 
-    class CustomXComBackendPandas(BaseXCom):
-        PREFIX = "xcom_gcs://"
-        BUCKET_NAME = "gcs-xcom-backend-example"
+class CustomXComBackendPandas(BaseXCom):
+    PREFIX = "xcom_gcs://"
+    BUCKET_NAME = "gcs-xcom-backend-example"
 
-        @staticmethod
-        def serialize_value(
-            value,
-            key=None,
-            task_id=None,
-            dag_id=None,
-            run_id=None,
-            map_index= None,
-            **kwargs
-        ):
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
 
-            hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
-            
-            # added serialization method if the value passed is a Pandas dataframe
-            # the contents are written to a local temporary csv file
-            if isinstance(value, pd.DataFrame):
-                filename = "data_" + str(uuid.uuid4()) + ".csv"
-                gs_key = f"{run_id}/{task_id}/{filename}"
+        hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+        
+        # added serialization method if the value passed is a Pandas dataframe
+        # the contents are written to a local temporary csv file
+        if isinstance(value, pd.DataFrame):
+            filename = "data_" + str(uuid.uuid4()) + ".csv"
+            gs_key = f"{run_id}/{task_id}/{filename}"
 
-                value.to_csv(filename)
+            value.to_csv(filename)
 
-            # if the value passed is not a Pandas dataframe, attempt to use
-            # JSON serialization
-            else:
-                filename = "data_" + str(uuid.uuid4()) + ".json"
-                gs_key = f"{run_id}/{task_id}/{filename}"
+        # if the value passed is not a Pandas dataframe, attempt to use
+        # JSON serialization
+        else:
+            filename = "data_" + str(uuid.uuid4()) + ".json"
+            gs_key = f"{run_id}/{task_id}/{filename}"
 
-                with open(filename, 'a+') as f:
-                    json.dump(value, f)
+            with open(filename, 'a+') as f:
+                json.dump(value, f)
 
-            hook.upload(
-                filename=filename,
-                object_name=gs_key,
-                bucket_name=CustomXComBackendPandas.BUCKET_NAME,
-            )
+        hook.upload(
+            filename=filename,
+            object_name=gs_key,
+            bucket_name=CustomXComBackendPandas.BUCKET_NAME,
+        )
 
-            # remove the local temporary file
-            os.remove(filename)
+        # remove the local temporary file
+        os.remove(filename)
 
-            reference_string = CustomXComBackendPandas.PREFIX + gs_key
+        reference_string = CustomXComBackendPandas.PREFIX + gs_key
 
-            return BaseXCom.serialize_value(value=reference_string)
+        return BaseXCom.serialize_value(value=reference_string)
 
-        @staticmethod
-        def deserialize_value(result):
-            result = BaseXCom.deserialize_value(result)
+    @staticmethod
+    def deserialize_value(result):
+        result = BaseXCom.deserialize_value(result)
 
-            hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
-            gs_key = result.replace(CustomXComBackendPandas.PREFIX, "")
+        hook = GCSHook(gcp_conn_id="gcs_xcom_backend_conn")
+        gs_key = result.replace(CustomXComBackendPandas.PREFIX, "")
 
-            filename = hook.download(
-                object_name=gs_key,
-                bucket_name=CustomXComBackendPandas.BUCKET_NAME,
-                filename="my_xcom.csv"
-            )
+        filename = hook.download(
+            object_name=gs_key,
+            bucket_name=CustomXComBackendPandas.BUCKET_NAME,
+            filename="my_xcom.csv"
+        )
 
-            # added deserialization option to convert a CSV back to a dataframe
-            if gs_key.split(".")[-1] == "csv":
-                output = pd.read_csv(filename)
-            # if the key does not end in 'csv' use JSON deserialization
-            else:
-                with open(filename, 'r') as f:
-                    output = json.load(f)
+        # added deserialization option to convert a CSV back to a dataframe
+        if gs_key.split(".")[-1] == "csv":
+            output = pd.read_csv(filename)
+        # if the key does not end in 'csv' use JSON deserialization
+        else:
+            with open(filename, 'r') as f:
+                output = json.load(f)
 
-            # remove the local temporary file
-            os.remove(filename)
+        # remove the local temporary file
+        os.remove(filename)
 
-            return output
-    ```
+        return output
+```
 
 </TabItem>
 <TabItem value="azure">
 
-    ```python
-    from airflow.models.xcom import BaseXCom
-    from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
-    import pandas as pd
-    import json
-    import uuid
-    import os
+```python
+from airflow.models.xcom import BaseXCom
+from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
+import pandas as pd
+import json
+import uuid
+import os
 
-    class CustomXComBackendPandas(BaseXCom):
-        PREFIX = "xcom_wasb://"
-        CONTAINER_NAME = "custom-xcom-backend"
+class CustomXComBackendPandas(BaseXCom):
+    PREFIX = "xcom_wasb://"
+    CONTAINER_NAME = "custom-xcom-backend"
 
-        @staticmethod
-        def serialize_value(
-            value,
-            key=None,
-            task_id=None,
-            dag_id=None,
-            run_id=None,
-            map_index= None,
-            **kwargs
-        ):
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
 
-            hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
-            
-            # added serialization method if the value passed is a Pandas dataframe
-            # the contents are written to a local temporary csv file
-            if isinstance(value, pd.DataFrame):
-                filename = "data_" + str(uuid.uuid4()) + ".csv"
-                blob_key = f"{run_id}/{task_id}/{filename}"
+        hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
+        
+        # added serialization method if the value passed is a Pandas dataframe
+        # the contents are written to a local temporary csv file
+        if isinstance(value, pd.DataFrame):
+            filename = "data_" + str(uuid.uuid4()) + ".csv"
+            blob_key = f"{run_id}/{task_id}/{filename}"
 
-                value.to_csv(filename)
+            value.to_csv(filename)
 
-            # if the value passed is not a Pandas dataframe, attempt to use
-            # JSON serialization
-            else:
-                filename = "data_" + str(uuid.uuid4()) + ".json"
-                blob_key = f"{run_id}/{task_id}/{filename}"
+        # if the value passed is not a Pandas dataframe, attempt to use
+        # JSON serialization
+        else:
+            filename = "data_" + str(uuid.uuid4()) + ".json"
+            blob_key = f"{run_id}/{task_id}/{filename}"
 
-                with open(filename, 'a+') as f:
-                    json.dump(value, f)
+            with open(filename, 'a+') as f:
+                json.dump(value, f)
 
-            hook.load_file(
-                file_path=filename,
-                container_name=CustomXComBackendPandas.CONTAINER_NAME,
-                blob_name=blob_key
-            )
+        hook.load_file(
+            file_path=filename,
+            container_name=CustomXComBackendPandas.CONTAINER_NAME,
+            blob_name=blob_key
+        )
 
-            # remove the local temporary file
-            os.remove(filename)
+        # remove the local temporary file
+        os.remove(filename)
 
-            reference_string = CustomXComBackendPandas.PREFIX + blob_key
+        reference_string = CustomXComBackendPandas.PREFIX + blob_key
 
-            return BaseXCom.serialize_value(value=reference_string)
+        return BaseXCom.serialize_value(value=reference_string)
 
-        @staticmethod
-        def deserialize_value(result):
-            result = BaseXCom.deserialize_value(result)
+    @staticmethod
+    def deserialize_value(result):
+        result = BaseXCom.deserialize_value(result)
 
-            hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
-            blob_key = result.replace(CustomXComBackendPandas.PREFIX, "")
+        hook = WasbHook(wasb_conn_id="azure_xcom_backend_conn")
+        blob_key = result.replace(CustomXComBackendPandas.PREFIX, "")
 
-            hook.get_file(
-                blob_name=blob_key,
-                container_name=CustomXComBackendPandas.CONTAINER_NAME,
-                file_path="my_xcom_file",
-                offset=0,
-                length=100000
-            )
+        hook.get_file(
+            blob_name=blob_key,
+            container_name=CustomXComBackendPandas.CONTAINER_NAME,
+            file_path="my_xcom_file",
+            offset=0,
+            length=100000
+        )
 
-            # added deserialization option to convert a CSV back to a dataframe
-            if blob_key.split(".")[-1] == "csv":
-                output = pd.read_csv("my_xcom_file")
-            # if the key does not end in 'csv' use JSON deserialization
-            else:
-                with open("my_xcom_file", 'r') as f:
-                    output = json.load(f)
+        # added deserialization option to convert a CSV back to a dataframe
+        if blob_key.split(".")[-1] == "csv":
+            output = pd.read_csv("my_xcom_file")
+        # if the key does not end in 'csv' use JSON deserialization
+        else:
+            with open("my_xcom_file", 'r') as f:
+                output = json.load(f)
 
-            # remove the local temporary file
-            os.remove("my_xcom_file")
+        # remove the local temporary file
+        os.remove("my_xcom_file")
 
-            return output
-    ```
+        return output
+```
 
 </TabItem>
 <TabItem value="local">
 
-    ```python
-    from airflow.models.xcom import BaseXCom
-    import pandas as pd
-    import json
-    import uuid
-    from minio import Minio
-    import os
-    import io
+```python
+from airflow.models.xcom import BaseXCom
+import pandas as pd
+import json
+import uuid
+from minio import Minio
+import os
+import io
 
-    class CustomXComBackendPandas(BaseXCom):
-        # the prefix is optional and used to make it easier to recognize
-        # which reference strings in the Airflow metadata database
-        # refer to an XCom that has been stored in a MinIO bucket
-        PREFIX = "xcom_minio://"
-        BUCKET_NAME = "custom-xcom-backend"
+class CustomXComBackendPandas(BaseXCom):
+    # the prefix is optional and used to make it easier to recognize
+    # which reference strings in the Airflow metadata database
+    # refer to an XCom that has been stored in a MinIO bucket
+    PREFIX = "xcom_minio://"
+    BUCKET_NAME = "custom-xcom-backend"
 
-        @staticmethod
-        def serialize_value(
-            value,
-            key=None,
-            task_id=None,
-            dag_id=None,
-            run_id=None,
-            map_index= None,
-            **kwargs
-        ):
-            
-            # create the MinIO client with the credentials stored as env variables
-            client = Minio(
-                os.environ["MINIO_IP"],
-                os.environ["MINIO_ACCESS_KEY"],
-                os.environ["MINIO_SECRET_KEY"],
-                secure=False
-            )
+    @staticmethod
+    def serialize_value(
+        value,
+        key=None,
+        task_id=None,
+        dag_id=None,
+        run_id=None,
+        map_index= None,
+        **kwargs
+    ):
+        
+        # create the MinIO client with the credentials stored as env variables
+        client = Minio(
+            os.environ["MINIO_IP"],
+            os.environ["MINIO_ACCESS_KEY"],
+            os.environ["MINIO_SECRET_KEY"],
+            secure=False
+        )
 
-            # added serialization method if the value passed is a Pandas dataframe
-            # the contents are written to a local temporary csv file
-            if isinstance(value, pd.DataFrame):
-                filename = "data_" + str(uuid.uuid4()) + ".csv"
-                minio_key = f"{run_id}/{task_id}/{filename}"
+        # added serialization method if the value passed is a Pandas dataframe
+        # the contents are written to a local temporary csv file
+        if isinstance(value, pd.DataFrame):
+            filename = "data_" + str(uuid.uuid4()) + ".csv"
+            minio_key = f"{run_id}/{task_id}/{filename}"
 
-                value.to_csv(filename)
+            value.to_csv(filename)
 
-                with open(filename, 'r') as f:
-                    string_file = f.read()
-                    bytes_to_write = io.BytesIO(bytes(string_file, 'utf-8'))
+            with open(filename, 'r') as f:
+                string_file = f.read()
+                bytes_to_write = io.BytesIO(bytes(string_file, 'utf-8'))
 
-                # remove the local temporary file
-                os.remove(filename)
+            # remove the local temporary file
+            os.remove(filename)
 
-            # if the value passed is not a Pandas dataframe, attempt to use
-            # JSON serialization
-            else:
-                filename = "data_" + str(uuid.uuid4()) + ".json"
-                minio_key = f"{run_id}/{task_id}/{filename}"
+        # if the value passed is not a Pandas dataframe, attempt to use
+        # JSON serialization
+        else:
+            filename = "data_" + str(uuid.uuid4()) + ".json"
+            minio_key = f"{run_id}/{task_id}/{filename}"
 
-                bytes_to_write = io.BytesIO(bytes(json.dumps(value), 'utf-8'))
+            bytes_to_write = io.BytesIO(bytes(json.dumps(value), 'utf-8'))
 
-            client.put_object(
-                CustomXComBackendPandas.BUCKET_NAME,
-                minio_key,
-                bytes_to_write,
-                -1, # -1 = unknown filesize
-                part_size=10*1024*1024,
-            )
+        client.put_object(
+            CustomXComBackendPandas.BUCKET_NAME,
+            minio_key,
+            bytes_to_write,
+            -1, # -1 = unknown filesize
+            part_size=10*1024*1024,
+        )
 
-            reference_string = CustomXComBackendPandas.PREFIX + minio_key
+        reference_string = CustomXComBackendPandas.PREFIX + minio_key
 
-            return BaseXCom.serialize_value(value=reference_string)
+        return BaseXCom.serialize_value(value=reference_string)
 
-        @staticmethod
-        def deserialize_value(result):
-            reference_string = BaseXCom.deserialize_value(result=result)
-            key = reference_string.replace(CustomXComBackendPandas.PREFIX, "")
+    @staticmethod
+    def deserialize_value(result):
+        reference_string = BaseXCom.deserialize_value(result=result)
+        key = reference_string.replace(CustomXComBackendPandas.PREFIX, "")
 
-            client = Minio(
-                os.environ["MINIO_IP"],
-                os.environ["MINIO_ACCESS_KEY"],
-                os.environ["MINIO_SECRET_KEY"],
-                secure=False
-            )
+        client = Minio(
+            os.environ["MINIO_IP"],
+            os.environ["MINIO_ACCESS_KEY"],
+            os.environ["MINIO_SECRET_KEY"],
+            secure=False
+        )
 
-            response = client.get_object(
-                CustomXComBackendPandas.BUCKET_NAME,
-                key
-            )
+        response = client.get_object(
+            CustomXComBackendPandas.BUCKET_NAME,
+            key
+        )
 
-            # added deserialization option to convert a CSV back to a dataframe
-            if key.split(".")[-1] == "csv":
+        # added deserialization option to convert a CSV back to a dataframe
+        if key.split(".")[-1] == "csv":
 
-                with open("csv_xcom.csv", "w") as f:
-                    f.write(response.read().decode("utf-8"))
-                output = pd.read_csv("csv_xcom.csv")
+            with open("csv_xcom.csv", "w") as f:
+                f.write(response.read().decode("utf-8"))
+            output = pd.read_csv("csv_xcom.csv")
 
-                # remove the local temporary file
-                os.remove("csv_xcom.csv")
+            # remove the local temporary file
+            os.remove("csv_xcom.csv")
 
-            # if the key does not end in 'csv' use JSON deserialization
-            else:
-                output = json.loads(response.read())
+        # if the key does not end in 'csv' use JSON deserialization
+        else:
+            output = json.loads(response.read())
 
-            return output
-    ```
+        return output
+```
 
 </TabItem>
 </Tabs>
