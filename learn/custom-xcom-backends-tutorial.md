@@ -1,30 +1,30 @@
 ---
-title: 'Set up a custom XComs backend using cloud-based or local object storage'
+title: 'Set up a custom XCom backend using cloud-based or local object storage'
 sidebar_label: 'Set up a custom XComs backend'
-id: xcoms-backend-tutorial
-description: 'Use this tutorial to learn how to set up a custom XComs backend in AWS, GCP, Azure and MinIO.'
+id: xcom-backend-tutorial
+description: 'Use this tutorial to learn how to set up a custom XCom backend in AWS, GCP, Azure or MinIO.'
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks. By default Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development purposes but can become limiting in a production environment. 
+Airflow offers the possibility to use [XComs](airflow-passing-data-between-tasks.md) to pass information between your tasks. By default Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development purposes but can become limiting. For production environments, Airflow supports configuring a custom XCom backend. 
 
-In cases where more storage capacity or the option for custom XComs retention policies is needed, you can use cloud-based object storage such as [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/) as a custom XComs backend or write your XComs to a local object storage like a local [MinIO](https://min.io/) instance. This tutorial offers example code for each of these object storage solutions.
+This allows you to push and pull XComs to and from an external system such as [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/) or [MinIO](https://min.io/) instance. This tutorial offers example code for each of these object storage solutions.
 
-There are many additional use cases for custom XComs backend solutions, you can learn more about them in the [Best practices](#best-practices) section at the end of this tutorial. 
+There are many use cases for custom XCom backend solutions, some of which are listed in the [Best practices](#best-practices) section at the end of this tutorial. 
 
 After you complete this tutorial, you'll be able to:
 
-- Create a custom XComs backend using a cloud-based or local object storage.
+- Create a custom XCom backend using cloud-based or local object storage.
 - Use JSON serialization and deserialization in a custom XComs backend.
-- Add a custom logic to the serialization and deserialization methods to store Pandas dataframes as CSV in your custom XComs backend.
+- Add custom logic to the serialization and deserialization methods to store Pandas dataframes as CSVs in your custom XCom backend.
 - Explain best practices of using custom XComs backends.
 - Explain the possibility of customizing other BaseXCom methods for extended functionality.
 
 :::caution
 
-While a custom XComs backend allows you to store virtually unlimited amounts of data as XComs, keep in mind that Airflow was not designed be a data processing framework and you might run into performance issues if you try to pass large amounts of data via XComs. Astronomer recommends to use an external processing framework such as [Apache Spark](https://spark.apache.org/) to handle heavy data processing and orchestrate the process with Airflow using the [Apache Spark provider](https://registry.astronomer.io/providers/spark).
+While a custom XCom backend allows you to store virtually unlimited amounts of data as XComs, your Airflow infrastructure will still need to be configured to support passing large amounts of data between your tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/get-started/).
 
 :::
 
@@ -49,7 +49,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
-- You can follow this tutorial using an AWS, GCP or Azure account. If you want to work locally follow the steps under the `MinIO` tabs.
+- A local or cloud-based object storage account. This tutorial has instructions for AWS, GCP, Azure, and MinIO.
 
 ## Step 1: Set up your XComs backend 
 
@@ -134,11 +134,11 @@ To use a bucket in Google Cloud Storage as your custom XComs backend follow thes
 
 To use Azure Blob Storage as your custom XComs backend follow these steps:
 
-1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create). We recommend to disable public access.
+1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create). We recommend disabling public access.
 
 2. Within the storage account. [Create a new container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-porta) called `custom-xcom-backend`. 
 
-3. [Create a shared access token](https://learn.microsoft.com/en-us/azure/cognitive-services/Translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers) for the `custom-xcom-backend` container. In the dropdown menu for permissions make sure to enable: Read, Add, Create, Write, Delete and List. Select the duration during which the token will be valid and `HTTPS only` for allowed protocols. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI this is the IP address of your computer.
+3. [Create a shared access token](https://learn.microsoft.com/en-us/azure/cognitive-services/Translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers) for the `custom-xcom-backend` container. In the dropdown menu for permissions make sure to enable: Read, Add, Create, Write, Delete and List. Select the duration the token will be valid and `HTTPS only` for allowed protocols. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI, this is the IP address of your computer.
 
     ![Shared access token](/img/guides/xcom_backend_shared_access_token.png)
 
@@ -268,9 +268,9 @@ To give Airflow access to your MinIO bucket you will need to use the credentials
     ]}>
 <TabItem value="aws">
 
-For Airflow to be able to use your custom XComs backend it is necessary to define an XCom backend class which inherits from the `BaseXCom` class.
+For Airflow to use your custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
 
-1. In your Astro project create a new file in the `include` directory called `s3_xcom_backend_json.py`.
+1. In your Astro project, create a new file in the `include` directory called `s3_xcom_backend_json.py`.
 
 2. Copy paste the following code into the file:
 
@@ -359,7 +359,7 @@ For Airflow to be able to use your custom XComs backend it is necessary to defin
             return output
     ```
 
-    The code above defines a class called `S3XComBackendJSON`. The class has two methods: `.serialize_value()` defines how the `value` that is pushed to XComs from an Airflow task is handled, while `.deserialize_value()` contains the logic to retrieve information from the XComs backend.
+    The code above defines a class called `S3XComBackendJSON`. The class has two methods: `.serialize_value()` defines how to handle the `value` that is pushed to XCom from an Airflow task, and `.deserialize_value()` defines the logic to retrieve information from the XCom backend.
 
     The `.serialize_value()` method accomplishes the following:
 
@@ -746,7 +746,7 @@ For Airflow to be able to use your custom XComs backend it is necessary to defin
 
 :::info
 
-For Astronomer customers the process to use the same custom XComs backend for your deployment on Astro is easy. After deploying your code, simply set the same `AIRFLOW__CORE__XCOM_BACKEND` [environment variable on Astro](https://docs.astronomer.io/astro/environment-variables).
+If you are an Astronomer customer, using this custom XCom backend for your deployment on Astro is easy. After deploying your code, simply set the `AIRFLOW__CORE__XCOM_BACKEND` [environment variable on Astro](https://docs.astronomer.io/astro/environment-variables).
 
 :::
 
@@ -1283,7 +1283,7 @@ A powerful feature of custom XComs backends is the possibility to adjust seriali
 
 ## Step 7: Run a DAG passing Pandas dataframes via XComs
 
-Test the new custom XComs backend by running a DAG that pushes a Pandas dataframe to and pulls a Pandas dataframe from XComs.
+Test the new custom XCom backend by running a DAG that passes a Pandas between tasks.
 
 1. Create a new file called `fetch_pokemon_data_dag.py` in the `dags` folder of your Astro project.
 
@@ -1343,7 +1343,7 @@ Test the new custom XComs backend by running a DAG that pushes a Pandas datafram
     fetch_pokemon_data_dag()
     ```
 
-    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a Pandas dataframe to XComs which is only possible when using a custom XComs backend with a serialization option for this type of object. The last task `print_xp_per_height` retrieves the csv and recreates the Pandas dataframe before printing out the Pokemon and their base experience to height ratio.
+    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a Pandas dataframe to XCom, which is only possible when using a custom XCom backend with a serialization option for this type of object. The last task `print_xp_per_height` retrieves the CSV and recreates the Pandas dataframe before printing out the Pokemon and their base experience to height ratio.
 
 3. View the information about your favorite pokemon in the task log of the `print_xp_per_height` task.
 
@@ -1354,15 +1354,15 @@ Test the new custom XComs backend by running a DAG that pushes a Pandas datafram
 Common reasons to use a custom XComs backend are:
 
 - Needing more storage space for XComs than the metadata database can offer.
-- Running a production environment where custom retention, deletion and backup policies for XComs are desired. With a custom XComs backend you do not need to worry about periodically cleaning up the metadata database.
-- The need for custom serialization and deserialization methods. By default Airflow uses JSON serialization which puts limits on the type of data that you can pass via XComs (pickling is available by setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` but has [known security implications](https://docs.python.org/3/library/pickle.html)).
+- Running a production environment where custom retention, deletion and backup policies for XComs are desired. With a custom XCom backend you do not need to worry about periodically cleaning up the metadata database.
+- The need for custom serialization and deserialization methods. By default Airflow uses JSON serialization, which puts limits on the type of data that you can pass via XComs (pickling is available by setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` but has [known security implications](https://docs.python.org/3/library/pickle.html)). A custom XCom backend allows you to implement your own serialization and deserialization methods.
 - Having a custom setup where access to XComs is needed without accessing the metadata database. 
 
 ## Overriding additional BaseXCom methods
 
-In this tutorial we've show how to add custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further expand the functionality for your custom XComs backend you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
+In this tutorial we've shown how to add custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further expand the functionality for your custom XCom backend, you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
 
-A common use case is to want to remove stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XComs backend. To do so the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XComs backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend with the S3XComBackendJSON XComs backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
+A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend with the S3XComBackendJSON XComs backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
 
 ```python
 from airflow.utils.session import NEW_SESSION, provide_session
@@ -1451,4 +1451,4 @@ def clear(
 
 ## Conclusion
 
-Congratulations! You learned how to set up a custom XComs backend and how to define your own serialization and deserialization methods. 
+Congratulations! You learned how to set up a custom XCom backend and how to define your own serialization and deserialization methods. 
