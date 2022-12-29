@@ -181,24 +181,26 @@ Email notifications are a native Airflow feature. The `email_on_failure` and `em
 
 ```python
 from datetime import datetime, timedelta
+
 from airflow import DAG
 
 default_args = {
-	'owner': 'airflow',
-	'start_date': datetime(2018, 1, 30),
-	'email': ['noreply@astronomer.io'],
-	'email_on_failure': True,
-	'email_on_retry': True,
-	'retry_delay' = timedelta(seconds=300)
-	'retries': 1
+    "owner": "airflow",
+    "start_date": datetime(2018, 1, 30),
+    "email": ["noreply@astronomer.io"],
+    "email_on_failure": True,
+    "email_on_retry": True,
+    "retry_delay": timedelta(seconds=300),
+    "retries": 1,
 }
 
-with DAG('sample_dag',
-	default_args=default_args,
-	schedule_interval='@daily',
-	catchup=False) as dag:
-
-...
+with DAG(
+    "sample_dag",
+    default_args=default_args,
+    schedule_interval="@daily",
+    catchup=False,
+) as dag:
+    ...
 ```
 
 To allow Airflow to send emails, you complete the SMTP section of your `airflow.cfg` similar to this example:
