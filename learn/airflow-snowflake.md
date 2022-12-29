@@ -445,34 +445,35 @@ The [Snowflake provider package](https://registry.astronomer.io/providers/snowfl
 
 The [Common SQL provider package](https://registry.astronomer.io/providers/common-sql) contains [SQL check operators](airflow-sql-data-quality.md) that you can use to perform data quality checks against Snowflake data, namely the:
 
-- [`SQLColumnCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator): Performs a data quality check against columns of a given table.
-- [`SQLTableCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator): Performs a data quality check against a given table.
+- [SQLColumnCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator): Performs a data quality check against columns of a given table.
+- [SQLTableCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator): Performs a data quality check against a given table.
 
 The [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package contains deferrable modules built and maintained by Astronomer, including the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync) and the [SnowflakeHookAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakehookasync).
 
-### Enhanced Observability with OpenLineage
+### Snowflake and enhanced observability with OpenLineage
 
-The [OpenLineage project](https://openlineage.io/) integration with Airflow lets you obtain and view lineage data from your  Airflow tasks. As long as an extractor exists for the operator being used, lineage data is generated automatically from each task instance. For an overview of how OpenLineage works with Airflow, see [OpenLineage and Airflow](airflow-openlineage.md).
+The [OpenLineage project](https://openlineage.io/) integration with Airflow lets you obtain and view lineage data from your Airflow tasks. As long as an extractor exists for the operator being used, lineage data is generated automatically from each task instance. For an overview of how OpenLineage works with Airflow, see [OpenLineage and Airflow](airflow-openlineage.md).
 
-Because `SnowflakeOperator` and `SnowflakeOperatorAsync` have an extractor, you can use lineage metadata to answer the following questions across DAGs:
+The SnowflakeOperator, SnowflakeOperatorAsync, SQLColumnCheckOperator and SQLTableCheckOperator all have an extractor, which allows you to use lineage metadata to answer the following questions across DAGs:
 
 - How does data stored in Snowflake flow through my DAGs? Are there any upstream dependencies?
 - What downstream data does a task failure impact?
 - Where did a change in data format originate?
+- Where were data quality checks performed and what was their result?
 
 This image shows an overview of the interaction between OpenLineage, Airflow, and Snowflake:
 
-![Snowflake Openlineage](/img/guides/snowflake_openlineage_architecture.png)
+![Snowflake OpenLineage](/img/guides/snowflake_openlineage_architecture.png)
 
-To view lineage data from your DAGs, you need to have OpenLineage installed in your Airflow environment and a lineage front end running. If you're using [Astro users](https://docs.astronomer.io/astro/data-lineage), lineage is enabled automatically. If you're using open source tools, you can run Marquez locally and connect it to your Airflow environment. See [OpenLineage and Airflow](airflow-openlineage.md).
+To view lineage data from your DAGs, you need to have OpenLineage installed in your Airflow environment and a lineage front end running. If you're using [Astro](https://docs.astronomer.io/astro/data-lineage), lineage is enabled automatically. If you're using open source tools, you can run Marquez locally and connect it to your Airflow environment. See [OpenLineage and Airflow](airflow-openlineage.md).
 
-To show an example of lineage resulting from Snowflake orchestration, you'll look at the write, audit, publish DAG from the previous example. The following image shows the Datakin UI integrated with Astro, but Marquez will show similar information.
+To show an example of lineage resulting from Snowflake orchestration, you'll look at the write, audit, publish DAG from the previous example. The following image shows the Lineage UI integrated with Astro.
 
-![Lineage Graph](/img/guides/lineage_graph.png)
+![Lineage Graph](/img/guides/lineage_complex_snowflake_example.png)
 
 Looking at the lineage graph, you can see the flow of data from the creation of the table, to the insertion of data, to the data quality checks. If a failure occurs during the data quality checks or elsewhere, the lineage graph identifies the affected datasets. If your work on this dataset expanded into other DAGs in Airflow, you would see those connections here as well.
 
-### DAG Authoring with the Astro Python SDK
+### Snowflake and the Astro Python SDK
 
 The Astro Python SDK is an open source DAG authoring tool maintained by Astronomer that simplifies the data transformation process between different environments, so you can focus solely on writing execution logic without worrying about Airflow orchestration logic. Details such as creating dataframes, storing intermediate results, passing context and data between tasks, and creating Airflow task dependencies are all managed automatically.
 
@@ -561,7 +562,7 @@ with DAG(
 
 Using Astro SDK `aql` functions, you are able to seamlessly transition between SQL transformations (`filter_orders` and `join_orders_customers`) to Python dataframe transformations (`transform_dataframe`). All intermediary data created by each task is automatically stored in Snowflake and made available to downstream tasks.
 
-For more detailed instructions on running this example DAG, see [Astro SDK Getting Started](https://github.com/astronomer/astro-sdk/blob/main/docs/getting-started/GETTING_STARTED.md).
+For more detailed instructions on running this example DAG, see the [Write a DAG with the Astro Python SDK](astro-python-sdk.md) tutorial.
 
 ### Best practices and considerations
 
@@ -571,7 +572,6 @@ The following are some best practices and considerations to keep in mind when or
 - Set your default Snowflake query specifications such as Warehouse, Role, Schema, and so on in the Airflow connection. Then overwrite those parameters for specific tasks as necessary in your operator definitions. This is cleaner and easier to read than adding `USE Warehouse XYZ;` statements within your queries.
 - Pay attention to which Snowflake compute resources your tasks are using, as overtaxing your assigned resources can cause slowdowns in your Airflow tasks. It is generally recommended to have different warehouses devoted to your different Airflow environments to ensure DAG development and testing does not interfere with DAGs running in production.
 - Make use of [Snowflake stages](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html) when loading data from an external system using Airflow. Transfer operators such as the `S3ToSnowflake` operator require a Snowflake stage be set up. Stages generally make it much easier to repeatedly load data in a specific format.
-
 
 ## Conclusion
 
