@@ -148,7 +148,7 @@ default_args = {
 with DAG(
     "sample_dag",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule="@daily",
     catchup=False,
 ) as dag:
     failure_task = EmptyOperator(task_id="failure_task")
@@ -197,7 +197,7 @@ default_args = {
 with DAG(
     "sample_dag",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule="@daily",
     catchup=False,
 ) as dag:
     ...
@@ -323,7 +323,7 @@ with DAG(
     "sla-dag",
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval=timedelta(minutes=2),
+    schedule=timedelta(minutes=2),
     default_args=default_args,
     catchup=False,
 ) as dag:
@@ -369,7 +369,7 @@ with DAG(
     "sla-dag",
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval=timedelta(minutes=2),
+    schedule=timedelta(minutes=2),
     default_args=default_args,
     catchup=False,
 ) as dag:
