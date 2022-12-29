@@ -191,22 +191,22 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 4. Click **Edit policy JSON**.
 5. Copy and paste the following policy into the **Edit JSON** pane:
 
-    ```JSON   
+    ```json
     {
-    "Version": "2008-10-17",
-    "Statement": [
-        {
-        "Sid": "AllowImagePullAstro",
-        "Effect": "Allow",
-        "Principal": {
-            "AWS": "arn:aws:iam::<AstroAccountID>:root"
-        },
-        "Action": [
-            "ecr:GetDownloadUrlForLayer",
-            "ecr:BatchGetImage"
+        "Version": "2008-10-17",
+        "Statement": [
+            {
+                "Sid": "AllowImagePullAstro",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "arn:aws:iam::<AstroAccountID>:root"
+                },
+                "Action": [
+                    "ecr:GetDownloadUrlForLayer",
+                    "ecr:BatchGetImage"
+                ]
+            }
         ]
-        }
-    ]
     }
     ```
 6. Replace `<AstroAccountID>` with your Astro AWS account ID. 
