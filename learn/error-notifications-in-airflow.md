@@ -291,11 +291,12 @@ Exceeding an SLA does not stop a task from running. If you want tasks to stop ru
 You can set an SLA for all tasks in your DAG by defining `'sla'` as a default argument, as shown in the following example DAG:
 
 ```python
+import time
+from datetime import datetime, timedelta
+
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime, timedelta
-import time
+from airflow.operators.python import PythonOperator
 
 def my_custom_function(ts,**kwargs):
     print("task is sleeping")
@@ -343,11 +344,12 @@ SLAs have some unique behaviors that you should consider before you implement th
 - SLAs can be set at the task level if a different SLA is required for each task. In the previous example, all task SLAs are still relative to the DAG execution date. For example, in the DAG below, `t1` has an SLA of 500 seconds. If the upstream tasks (`t0` and `sla_task`) combined take 450 seconds to complete, and `t1` takes 60 seconds to complete, then `t1` will miss its SLA even though the task did not take more than 500 seconds to execute.
 
 ```python
+import time
+from datetime import datetime, timedelta
+
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime, timedelta
-import time
+from airflow.operators.python import PythonOperator
 
 def my_custom_function(ts,**kwargs):
     print("task is sleeping")
