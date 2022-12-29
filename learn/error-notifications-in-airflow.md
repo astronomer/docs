@@ -295,47 +295,42 @@ Exceeding an SLA does not stop a task from running. If you want tasks to stop ru
 You can set an SLA for all tasks in your DAG by defining `'sla'` as a default argument, as shown in the following example DAG:
 
 ```python
+import time
+from datetime import datetime, timedelta
+
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime, timedelta
-import time
+from airflow.operators.python import PythonOperator
 
-def my_custom_function(ts,**kwargs):
+
+def my_custom_function(ts, **kwargs):
     print("task is sleeping")
     time.sleep(40)
 
+
 # Default settings applied to all tasks
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': True,
-    'email': 'noreply@astronomer.io',
-    'email_on_retry': False,
-    'sla': timedelta(seconds=30)
+    "owner": "airflow",
+    "depends_on_past": False,
+    "email_on_failure": True,
+    "email": "noreply@astronomer.io",
+    "email_on_retry": False,
+    "sla": timedelta(seconds=30),
 }
 
 # Using a DAG context manager, you don't have to specify the dag property of each task
-with DAG('sla-dag',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=1,
-         schedule_interval=timedelta(minutes=2),
-         default_args=default_args,
-         catchup=False 
-         ) as dag:
+with DAG(
+    "sla-dag",
+    start_date=datetime(2021, 1, 1),
+    max_active_runs=1,
+    schedule_interval=timedelta(minutes=2),
+    default_args=default_args,
+    catchup=False,
+) as dag:
 
-    t0 = EmptyOperator(
-        task_id='start'
-    )
-
-    t1 = EmptyOperator(
-        task_id='end'
-    )
-
-    sla_task = PythonOperator(
-        task_id='sla_task',
-        python_callable=my_custom_function
-    )
+    t0 = EmptyOperator(task_id="start")
+    t1 = EmptyOperator(task_id="end")
+    sla_task = PythonOperator(task_id="sla_task", python_callable=my_custom_function)
 
     t0 >> sla_task >> t1
 ```
