@@ -11,6 +11,18 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 For upgrade instructions, see [Upgrade Airflow on Astronomer Software](manage-airflow-versions.md). For general product release notes, go to [Software release notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://support.astronomer.io).
 
+## Astro Runtime 7.1.0
+
+- Release date: December 21, 2022
+- Airflow version: 2.5.0
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.13.0, which includes a collection of minor enhancements and bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1130-2022-12-16). 
+- Upgraded `openlineage-airflow` to 0.18.0, which includes new support for Airflow operators like the `SQLExecuteQueryOperator`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.18.0) for more information. 
+- Upgraded `apache-airflow-providers-microsoft-azure` to 5.0.1, which includes a bug fix to revert `offset` and `length` to be optional arguments.
+- Upgraded `certifi` to 2022.12.7.
+
 ## Astro Runtime 7.0.0 
 
 - Release date: December 2, 2022 
