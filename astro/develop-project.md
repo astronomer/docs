@@ -543,7 +543,9 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install OS-Level packages
     COPY packages.txt .
+    USER root
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
+    USER astro
 
     FROM stage1 AS stage2
     # Install Python packages
