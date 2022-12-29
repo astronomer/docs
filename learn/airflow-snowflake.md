@@ -5,7 +5,6 @@ id: airflow-snowflake
 sidebar_label: Snowflake
 ---
 
-
 [Snowflake](https://www.snowflake.com/) is one of the most commonly used data warehouses. Orchestrating Snowflake queries as part of a data pipeline is one of the most common Airflow use cases. Using Airflow with Snowflake is straightforward, and there are multiple open source packages, tools, and integrations that can help you realize the full potential of your existing Snowflake instance.
 
 This guide covers the following topics:
@@ -15,7 +14,415 @@ This guide covers the following topics:
 - Using the Astro SDK for the next generation of DAG authoring for Snowflake query tasks.
 - General best practices and considerations when interacting with Snowflake from Airflow.
 
-## Using Snowflake providers
+## Time to complete
+
+This tutorial takes approximately 30 minutes to complete.
+
+## Assumed knowledge
+
+To get the most out of this tutorial, make sure you have an understanding of:
+
+- Snowflake basics. See [Introduction to Snowflake](https://docs.snowflake.com/en/user-guide-intro.html).
+- Airflow operators. See [Airflow operators](what-is-an-operator.md).
+- SQL basics. See the [W3 SQL tutorial](https://www.w3schools.com/sql/).
+
+## Prerequisites
+
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
+- A Snowflake account. A [30-day free trial](https://signup.snowflake.com/) is available.
+
+## Step 1: Configure your Astro project
+
+1. Create a new Astro project:
+
+    ```sh
+    $ mkdir astro-snowflake-tutorial && cd astro-snowflake-tutorial
+    $ astro dev init
+    ```
+
+2. Ensure that you are using version 7.0.0 or newer of the Astro Runtime (Airflow 2.5+) and that version 4.0.2+ of the [Snowflake provider package](https://registry.astronomer.io/providers/snowflake) and version 1.3.1+ of the [Common SQL provider package](https://registry.astronomer.io/providers/common-sql) are installed. If you are creating a new Astro project with the Astro CLI, these packages come pre-installed in their latest version and no further action is necessary.
+
+3. Start your Airflow project by running:
+
+    ```sh
+    $ astro dev start
+    ```
+
+## Step 2: Configure your Snowflake connection
+
+1. Navigate to **Admin** -> **Connections** in the Airflow UI and click on the **+** sign. 
+
+2. Give your new connection the connection ID `snowflake_default` and fill out the fields for [`Schema`](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html), `Login`, `Password`, `Account`, [`Database`](https://docs.snowflake.com/en/sql-reference/sql/create-database.html) and `Region` with your credentials as shown in the screenshot below. The user you provide needs to have sufficient permissions to create and write to new tables in the Snowflake schema you are providing.
+
+    ![Snowflake connection](/img/guides/snowflake_tutorial_connection.png)
+
+## Step 3: Add your SQL statements
+
+The DAG you will create in Step 4 contains references to multiple SQL statements. While it is possible to add SQL statements directly within the DAG code a modular approach with SQL statements being saved in a dedicated folder in the `include` directory is best practice.
+
+1. Create a new folder in your include directory called `sql` with an empty `__init__.py` file. 
+
+    ```sh
+    $ mkdir include/sql && touch include/sql/__init__.py
+
+2. Create a new file in `include/sql` called `tutorial_sql_statements.py` and add copy the following code which contains 7 SQL statements:
+
+    ```python
+    create_forestfire_table = """
+        CREATE OR REPLACE TRANSIENT TABLE {{ params.table_name }}
+            (
+                id INT,
+                y INT,
+                month VARCHAR(25),
+                day VARCHAR(25),
+                ffmc FLOAT,
+                dmc FLOAT,
+                dc FLOAT,
+                isi FLOAT,
+                temp FLOAT,
+                rh FLOAT,
+                wind FLOAT,
+                rain FLOAT,
+                area FLOAT
+            );
+    """
+
+    create_cost_table = """
+        CREATE OR REPLACE TRANSIENT TABLE {{ params.table_name }}
+            (
+                id INT,
+                land_damage_cost INT,
+                property_damage_cost INT,
+                lost_profits_cost INT
+            );
+    """
+
+    create_forestfire_cost_table = """
+        CREATE OR REPLACE TRANSIENT TABLE {{ params.table_name }}
+            (
+                id INT,
+                land_damage_cost INT,
+                property_damage_cost INT,
+                lost_profits_cost INT,
+                total_cost INT,
+                y INT,
+                month VARCHAR(25),
+                day VARCHAR(25),
+                area FLOAT
+            );
+    """
+
+    load_forestfire_data = """
+        INSERT INTO {{ params.table_name }} VALUES
+            (1,2,'aug','fri',91,166.9,752.6,7.1,25.9,41,3.6,0,100),
+            (2,2,'feb','mon',84,9.3,34,2.1,13.9,40,5.4,0,57.8),
+            (3,4,'mar','sat',69,2.4,15.5,0.7,17.4,24,5.4,0,92.9),
+            (4,4,'mar','mon',87.2,23.9,64.7,4.1,11.8,35,1.8,0,1300),
+            (5,5,'mar','sat',91.7,35.8,80.8,7.8,15.1,27,5.4,0,4857),
+            (6,5,'sep','wed',92.9,133.3,699.6,9.2,26.4,21,4.5,0,9800),
+            (7,5,'mar','fri',86.2,26.2,94.3,5.1,8.2,51,6.7,0,14),
+            (8,6,'mar','fri',91.7,33.3,77.5,9,8.3,97,4,0.2,74.5),
+            (9,9,'feb','thu',84.2,6.8,26.6,7.7,6.7,79,3.1,0,8880.7);
+    """
+
+    load_cost_data = """
+        INSERT INTO {{ params.table_name }} VALUES
+            (1,150000,32000,10000),
+            (2,200000,50000,50000),
+            (3,90000,120000,300000),
+            (4,230000,14000,7000),
+            (5,98000,27000,48000),
+            (6,72000,800000,0),
+            (7,50000,2500000,0),
+            (8,8000000,33000000,0),
+            (9,6325000,450000,76000);
+    """
+
+    load_forestfire_cost_data = """
+        INSERT INTO forestfire_costs (id, land_damage_cost, property_damage_cost, lost_profits_cost, total_cost, y, month, day, area)
+            SELECT
+                c.id,
+                c.land_damage_cost,
+                c.property_damage_cost,
+                c.lost_profits_cost,
+                c.land_damage_cost + c.property_damage_cost + c.lost_profits_cost,
+                ff.y,
+                ff.month,
+                ff.day,
+                ff.area
+            FROM costs c
+            LEFT JOIN forestfires ff
+                ON c.id = ff.id
+    """
+
+    transform_forestfire_cost_table = """
+        SELECT
+            id,
+            month,
+            day,
+            total_cost,
+            area,
+            total_cost / area as cost_per_area
+        FROM {{ params.table_name }}
+    """
+    ```
+
+3. The Snowflake operator also allows you to pass in a `.sql` file directly. Create a file called `delete_table.sql` in the `include/sql` directory. Copy and paste the following SQL code:
+
+    ```sql
+    DROP TABLE IF EXISTS {{ params.table_name }};
+    ```
+
+:::tip
+
+Whether you want to store your SQL code in individual SQL files or as strings in a Python module is a matter of personal preference. 
+
+:::
+
+## Step 4: Add a complex Snowflake DAG
+
+1. Create a new file in your `dags` directory called `complex_snowflake_example.py`.
+
+2. Copy and paste the code below into the new DAG file:
+
+    ```python
+    from airflow import DAG
+    from airflow.models.baseoperator import chain
+    from airflow.operators.empty import EmptyOperator
+    from airflow.providers.common.sql.operators.sql import SQLColumnCheckOperator, SQLTableCheckOperator
+    from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
+    from pendulum import datetime
+    from airflow.utils.task_group import TaskGroup
+    import include.sql.tutorial_sql_statements as sql_stmts 
+
+    SNOWFLAKE_FORESTFIRE_TABLE = "forestfires"
+    SNOWFLAKE_COST_TABLE = "costs"
+    SNOWFLAKE_FORESTFIRE_COST_TABLE = "forestfire_costs"
+
+    SNOWFLAKE_CONN_ID = "snowflake_default"
+
+    ROW_COUNT_CHECK = "COUNT(*) = 9"
+
+    with DAG(
+        "complex_snowflake_example",
+        description="""
+            Example DAG showcasing loading, transforming, 
+            and data quality checking with multiple datasets in Snowflake.
+        """,
+        doc_md=__doc__,
+        start_date=datetime(2022, 12, 1),
+        schedule_interval=None,
+        # defining the directory where SQL templates are stored
+        template_searchpath="/usr/local/airflow/include/sql/",
+        catchup=False
+    ) as dag:
+        """
+        #### Snowflake table creation
+        Create the tables to store sample data.
+        """
+        create_forestfire_table = SnowflakeOperator(
+            task_id="create_forestfire_table",
+            sql=sql_stmts.create_forestfire_table,
+            params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
+        )
+
+        create_cost_table = SnowflakeOperator(
+            task_id="create_cost_table",
+            sql=sql_stmts.create_cost_table,
+            params={"table_name": SNOWFLAKE_COST_TABLE}
+        )
+
+        create_forestfire_cost_table = SnowflakeOperator(
+            task_id="create_forestfire_cost_table",
+            sql=sql_stmts.create_forestfire_cost_table,
+            params={"table_name": SNOWFLAKE_FORESTFIRE_COST_TABLE}
+        )
+
+        """
+        #### Insert data
+        Insert data into the Snowflake tables using existing SQL queries
+        stored in the include/sql/snowflake_examples/ directory.
+        """
+        load_forestfire_data = SnowflakeOperator(
+            task_id="load_forestfire_data",
+            sql=sql_stmts.load_forestfire_data,
+            params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
+        )
+
+        load_cost_data = SnowflakeOperator(
+            task_id="load_cost_data",
+            sql=sql_stmts.load_cost_data,
+            params={"table_name": SNOWFLAKE_COST_TABLE}
+        )
+
+        load_forestfire_cost_data  = SnowflakeOperator(
+            task_id="load_forestfire_cost_data",
+            sql=sql_stmts.load_forestfire_cost_data,
+            params={"table_name": SNOWFLAKE_FORESTFIRE_COST_TABLE}
+        )
+
+        """
+        #### Transform
+        Transform the forestfire_costs table to perform
+        sample logic.
+        """
+        transform_forestfire_cost_table = SnowflakeOperator(
+            task_id="transform_forestfire_cost_table",
+            sql=sql_stmts.transform_forestfire_cost_table,
+            params={"table_name": SNOWFLAKE_FORESTFIRE_COST_TABLE}
+        )
+
+        """
+        #### Quality checks
+        Perform data quality checks on the various tables.
+        """
+        with TaskGroup(
+            group_id="quality_check_group_forestfire",
+            default_args={
+                "conn_id": SNOWFLAKE_CONN_ID,
+            }
+        ) as quality_check_group_forestfire:
+            """
+            #### Column-level data quality check
+            Run data quality checks on columns of the forestfire table
+            """
+            forestfire_column_checks = SQLColumnCheckOperator(
+                task_id="forestfire_column_checks",
+                table=SNOWFLAKE_FORESTFIRE_TABLE,
+                column_mapping={
+                    "ID": {"null_check": {"equal_to": 0}},
+                    "RH": {"max": {"leq_to": 100}}
+                }
+            )
+
+            """
+            #### Table-level data quality check
+            Run data quality checks on the forestfire table
+            """
+            forestfire_table_checks = SQLTableCheckOperator(
+                task_id="forestfire_table_checks",
+                table=SNOWFLAKE_FORESTFIRE_TABLE,
+                checks={"row_count_check": {"check_statement": ROW_COUNT_CHECK}}
+            )
+
+        with TaskGroup(
+            group_id="quality_check_group_cost",
+            default_args={
+                "conn_id": SNOWFLAKE_CONN_ID,
+            }
+        ) as quality_check_group_cost:
+            """
+            #### Column-level data quality check
+            Run data quality checks on columns of the forestfire table
+            """
+            cost_column_checks = SQLColumnCheckOperator(
+                task_id="cost_column_checks",
+                table=SNOWFLAKE_COST_TABLE,
+                column_mapping={
+                    "ID": {"null_check": {"equal_to": 0}},
+                    "LAND_DAMAGE_COST": {"min": {"geq_to": 0}},
+                    "PROPERTY_DAMAGE_COST": {"min": {"geq_to": 0}},
+                    "LOST_PROFITS_COST": {"min": {"geq_to": 0}},
+                }
+            )
+
+            """
+            #### Table-level data quality check
+            Run data quality checks on the forestfire table
+            """
+            cost_table_checks = SQLTableCheckOperator(
+                task_id="cost_table_checks",
+                table=SNOWFLAKE_COST_TABLE,
+                checks={"row_count_check": {"check_statement": ROW_COUNT_CHECK}}
+            )
+
+        with TaskGroup(
+            group_id="quality_check_group_forestfire_costs",
+            default_args={
+                "conn_id": SNOWFLAKE_CONN_ID,
+            }
+        ) as quality_check_group_forestfire_costs:
+            """
+            #### Column-level data quality check
+            Run data quality checks on columns of the forestfire table
+            """
+            forestfire_costs_column_checks = SQLColumnCheckOperator(
+                task_id="forestfire_costs_column_checks",
+                table=SNOWFLAKE_FORESTFIRE_COST_TABLE,
+                column_mapping={"AREA": {"min": {"geq_to": 0}}}
+            )
+
+            """
+            #### Table-level data quality check
+            Run data quality checks on the forestfire table
+            """
+            forestfire_costs_table_checks = SQLTableCheckOperator(
+                task_id="forestfire_costs_table_checks",
+                table=SNOWFLAKE_FORESTFIRE_COST_TABLE,
+                checks={
+                    "row_count_check": {"check_statement": ROW_COUNT_CHECK},
+                    "total_cost_check": {"check_statement": "land_damage_cost + \
+                        property_damage_cost + lost_profits_cost = total_cost"}
+                }
+            )
+
+        """
+        #### Delete tables
+        Clean up the tables created for the example.
+        """
+        delete_forestfire_table = SnowflakeOperator(
+            task_id="delete_forestfire_table",
+            sql="delete_table.sql",
+            params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
+        )
+
+        delete_cost_table = SnowflakeOperator(
+            task_id="delete_costs_table",
+            sql="delete_table.sql",
+            params={"table_name": SNOWFLAKE_COST_TABLE}
+        )
+
+        delete_forestfire_cost_table = SnowflakeOperator(
+            task_id="delete_forestfire_cost_table",
+            sql="delete_table.sql",
+            params={"table_name": SNOWFLAKE_FORESTFIRE_COST_TABLE}
+        )
+
+        begin = EmptyOperator(task_id="begin")
+        create_done = EmptyOperator(task_id="create_done")
+        load_done = EmptyOperator(task_id="load_done")
+        end = EmptyOperator(task_id="end")
+
+        chain(
+            begin,
+            [create_forestfire_table, create_cost_table, create_forestfire_cost_table],
+            create_done,
+            [load_forestfire_data, load_cost_data],
+            load_done,
+            [quality_check_group_forestfire, quality_check_group_cost],
+            load_forestfire_cost_data,
+            quality_check_group_forestfire_costs,
+            transform_forestfire_cost_table,
+            [delete_forestfire_table, delete_cost_table, delete_forestfire_cost_table],
+            end
+        )
+    ```
+
+    This complex DAG has a write, audit publish pattern showcasing loading data into Snowflake and running [data quality](data-quality.md) checks on the data that has been written. 
+
+    ![Complex Snowflake DAG](/img/guides/snowflake_complex_dag.png)
+
+    The DAG accomplishes the following steps:
+
+    - Creating three tables simultaneously using the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator). 
+    - Loading data into two of the tables that were created using the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync) a deferrable version of the SnowflakeOperator. In order to be able to use deferrable operators you need to have a triggerer component running in your Airflow environment, which is configured automatically if you are using the Astro CLI. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
+    - Running data quality checks on the data to ensure that no erroneous data is moved to production. These checks are structured with [task groups](task-groups.md) that include column checks using the `SQLColumnCheckOperator` and table checks using the `SQLTableCheckOperator`.
+    - Copy data into the production table using the SnowflakeOperatorAsync.
+    - Deleting the tables to clean up the example.
+
+3. Run the DAG.
+
+## Snowflake operators and providers
 
 The following are some of the open source packages that you can use to orchestrate Snowflake in Airflow:
 
@@ -47,153 +454,6 @@ The following are the available modules for orchestrating data quality checks in
 
 Although the `apache-airflow-providers-snowflake` package contains operators that you can use to run data quality checks in Snowflake, Astronomer recommends that you use `apache-airflow-providers-common-sql` instead for its additional flexibility and community support. For more information about using the SQL check operators, see [Airflow Data Quality Checks with SQL Operators](airflow-sql-data-quality.md).
 
-
-### Example Implementation
-
-:::info 
-
-Example code using various Snowflake operators can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/complex-snowflake-transform).
-
-:::
-
-The following example DAG runs a write, audit, and publish pattern to showcase loading and quality checking Snowflake data. The DAG completes the following steps:
-
-- Simultaneously create tables in Snowflake for the production data and the raw data that needs to be audited using the `SnowflakeOperator`. These tasks are not implemented with the deferrable version of the `SnowflakeOperator` because `CREATE TABLE` statements typically run very quickly.
-- Load data into the audit table using the `SnowflakeOperatorAsync`. This task is deferred to save on computational resources, because loading data can take some time if the dataset is large. To use the deferrable operator, you must have a [triggerer running](deferrable-operators.md#running-deferrable-tasks-in-your-airflow-environment) in your Airflow environment.
-- Run data quality checks on the audit table to ensure that no erroneous data is moved to production. This task group includes column checks using the `SQLColumnCheckOperator` and table checks using the `SQLTableCheckOperator`.
-- If the data quality checks are passed, copy data from the audit table into the production table using the `SnowflakeOperatorAsync`.
-- Delete the audit table because it only contains temporary data.
-
-All of these tasks rely on parameterized SQL scripts that are stored in the `include/sql/` directory and can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/complex-snowflake-transform).
-
-
-```python
-import json
-from pendulum import datetime
-
-from pathlib import Path
-
-from airflow import DAG
-from airflow.models.baseoperator import chain
-from airflow.operators.empty import EmptyOperator
-from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
-from astronomer.providers.snowflake.operators.sensors.snowflake import SnowflakeOperatorAsync
-from airflow.providers.common.sql.operators import SQLColumnCheckOperator, SQLTableCheckOperator
-from airflow.utils.task_group import TaskGroup
-
-from include.libs.schema_reg.base_schema_transforms import snowflake_load_column_string
-
-
-SNOWFLAKE_FORESTFIRE_TABLE = "forestfires"
-SNOWFLAKE_AUDIT_TABLE = f"{SNOWFLAKE_FORESTFIRE_TABLE}_AUDIT"
-SNOWFLAKE_CONN_ID = "snowflake_default"
-
-base_path = Path(__file__).parents[2]
-table_schema_path = (
-    f"{base_path}/include/sql/snowflake_examples/table_schemas/"
-)
-
-with DAG(
-    "snowflake_write_audit_publish",
-    description="Example DAG showcasing loading and data quality checking with Snowflake.",
-    start_date=datetime(2021, 1, 1),
-    schedule_interval=None,
-    template_searchpath="/usr/local/airflow/include/sql/snowflake_examples/",
-    catchup=False,
-    default_args={"conn_id": SNOWFLAKE_CONN_ID, "snowflake_conn_id": SNOWFLAKE_CONN_ID}
-) as dag:
-
-    create_forestfire_audit_table = SnowflakeOperator(
-        task_id="create_forestfire_audit_table",
-        sql="create_forestfire_table.sql",
-        params={"table_name": SNOWFLAKE_AUDIT_TABLE},
-    )
-
-    create_forestfire_production_table = SnowflakeOperator(
-        task_id="create_forestfire_production_table",
-        sql="create_forestfire_table.sql",
-        params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
-    )
-
-    load_data = SnowflakeOperatorAsync(
-        task_id="insert_query",
-        sql="load_snowflake_forestfire_data.sql",
-        params={"table_name": SNOWFLAKE_AUDIT_TABLE}
-    )
-
-    with TaskGroup(group_id="quality_checks") as quality_check_group:
-
-        column_checks = SQLColumnCheckOperator(
-            task_id="column_checks",
-            table=SNOWFLAKE_AUDIT_TABLE,
-            column_mapping={"id": {"null_check": {"equal_to": 0}}}
-        )
-
-        table_checks = SQLTableCheckOperator(
-            task_id="table_checks",
-            table=SNOWFLAKE_AUDIT_TABLE,
-            checks={"row_count_check": {"check_statement": "COUNT(*) = 9"}}
-        )
-
-    with open(
-        f"{table_schema_path}/forestfire_schema.json",
-        "r",
-    ) as f:
-        table_schema = json.load(f).get("forestfire")
-        table_props = table_schema.get("properties")
-        table_dimensions = table_schema.get("dimensions")
-        table_metrics = table_schema.get("metrics")
-
-        col_string = snowflake_load_column_string(table_props)
-
-        copy_snowflake_audit_to_production_table = SnowflakeOperator(
-            task_id="copy_snowflake_audit_to_production_table",
-            sql="copy_forestfire_snowflake_audit.sql",
-            params={
-                "table_name": SNOWFLAKE_FORESTFIRE_TABLE,
-                "audit_table_name": f"{SNOWFLAKE_FORESTFIRE_TABLE}_AUDIT",
-                "table_schema": table_props,
-                "col_string": col_string,
-            },
-            trigger_rule="all_success"
-        )
-
-    delete_audit_table = SnowflakeOperator(
-        task_id="delete_audit_table",
-        sql="delete_forestfire_table.sql",
-        params={"table_name": f"{SNOWFLAKE_FORESTFIRE_TABLE}_AUDIT"},
-        trigger_rule="all_success"
-    )
-
-    begin = EmptyOperator(task_id="begin")
-    end = EmptyOperator(task_id="end")
-
-    chain(
-        begin,
-        [create_forestfire_production_table, create_forestfire_audit_table],
-        load_data,
-        quality_check_group,
-        copy_snowflake_audit_to_production_table,
-        delete_audit_table,
-        end
-    )
-```
-
-![Snowflake DAG Graph](/img/guides/snowflake_dag_graph.png)
-
-To run this DAG, you need an Airflow connection to your Snowflake instance. This DAG uses a connection named `snowflake_default`. Your connection should have a type of `Snowflake` include the following information:
-
-```yaml
-Host: <your-snowflake-host> # For example, `account.region.snowflakecomputing.com`
-Schema: <your-schema>
-Login: <your-login>
-Password: <your-password>
-Account: <your-snowflake-account>
-Database: <your-database>
-Region: <your-account-region>
-Role: <your-role>
-Warehouse: <your-warehouse>
-```
 
 ## Enhanced Observability with OpenLineage
 
