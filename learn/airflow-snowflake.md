@@ -7,9 +7,16 @@ sidebar_label: Snowflake
 
 [Snowflake](https://www.snowflake.com/) is one of the most commonly used data warehouses. Orchestrating Snowflake queries as part of a data pipeline is one of the most common Airflow use cases. Using Airflow with Snowflake is straightforward, and there are multiple open source packages, tools, and integrations that can help you realize the full potential of your existing Snowflake instance.
 
-This guide covers the following topics:
+This tutorial covers an example of orchestrating a complex pattern in Snowflake with Airflow, including:
 
-- Using Snowflake providers and the available modules, and how to implement deferrable versions of common operators.
+- Creating tables.
+- Loading data into Snowflake.
+- Running any transformation on data in Snowflake using Airflow operators. 
+- Running data quality checks on data in Snowflake. 
+
+Additionally the [How it works](#how-it-works) sections offers further information on:
+
+- Available operators and hooks to orchestrate actions in Snowflake.
 - Leveraging the OpenLineage Airflow integration to get data lineage and enhanced observability from your Snowflake jobs.
 - Using the Astro SDK for the next generation of DAG authoring for Snowflake query tasks.
 - General best practices and considerations when interacting with Snowflake from Airflow.
