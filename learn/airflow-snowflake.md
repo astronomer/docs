@@ -49,14 +49,17 @@ Use the Astro CLI to create and run an Airflow project locally.
     $ astro dev init
     ```
 
-2. Ensure that your Astro project is using the following versions:
-- Version 7.0.0 or newer of Astro Runtime (found in your Dockerfile) 
-- Version 4.0.2+ of the [Snowflake provider package](https://registry.astronomer.io/providers/snowflake)
-- Version 1.13.0+ of the [Astronomer providers package](https://registry.astronomer.io/providers/astronomer-providers)
-- Version 1.3.1+ of the [Common SQL provider package](https://registry.astronomer.io/providers/common-sql). 
-If you created a *new* Astro project with the Astro CLI, these packages come pre-installed in their latest version and no action is necessary.
+2. Ensure that your Astro project is using at least Version 7.0.0 or newer of Astro Runtime (found in your Dockerfile).
 
-3. Start your Airflow project by running:
+3. In your `requirements.txt` file add the three provider packages as shown below to ensure version compatibility. If you created a *new* Astro project with the Astro CLI, these packages come pre-installed in their latest version and no action is necessary.
+
+    ```text
+    apache-airflow-providers-common-sql>==1.3.1
+    apache-airflow-providers-snowflake>==4.0.2
+    astronomer-providers[all]>==1.13.0
+    ```
+
+4. Start your Airflow project by running:
 
     ```sh
     $ astro dev start
@@ -67,13 +70,15 @@ If you created a *new* Astro project with the Astro CLI, these packages come pre
 1. In the Airflow UI, go to **Admin** -> **Connections** and click on the **+** sign. 
 
 2. Create a new connection named `snowflake_default` and choose the `snowflake` connection type. Enter the following information:
-- [Schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html)
-- Login
-- Password
-- Account
-- [Database](https://docs.snowflake.com/en/sql-reference/sql/create-database.html)
-- Region 
-Your connection should look something like the screenshot below. The user you provide needs to have sufficient permissions to create and write to new tables in the Snowflake schema you provide.
+
+    - [Schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html)
+    - Login
+    - Password
+    - Account
+    - [Database](https://docs.snowflake.com/en/sql-reference/sql/create-database.html)
+    - Region 
+
+    Your connection should look something like the screenshot below. The user you provide needs to have sufficient permissions to create and write to new tables in the Snowflake schema you provide.
 
     ![Snowflake connection](/img/guides/snowflake_tutorial_connection.png)
 
@@ -81,13 +86,7 @@ Your connection should look something like the screenshot below. The user you pr
 
 The DAG you will create in Step 4 runs multiple SQL statements against your Snowflake data warehouse.
 
-1. Create a new folder in your `include` directory called `sql` with an empty `__init__.py` file. 
-
-    ```sh
-    $ mkdir include/sql && touch include/sql/__init__.py
-    ```
-
-2. Create a new file in `include/sql` called `tutorial_sql_statements.py` and copy the following code:
+1. Create a new file in `include/sql` called `tutorial_sql_statements.py` and copy the following code:
 
     ```python
     create_forestfire_table = """
@@ -192,15 +191,15 @@ The DAG you will create in Step 4 runs multiple SQL statements against your Snow
     """
     ```
 
-This file contains 7 SQL statements that will be run by different operators in your DAG.
+    This file contains 7 SQL statements that will be run by different operators in your DAG.
 
-3. The Snowflake operator also allows you to pass in a `.sql` file directly. Create a file in your `include/sql` directory called `delete_table.sql` and copy the following SQL code:
+2. The Snowflake operator also allows you to pass in a `.sql` file directly. Create a file in your `include/sql` directory called `delete_table.sql` and copy the following SQL code:
 
     ```sql
     DROP TABLE IF EXISTS {{ params.table_name }};
     ```
 
-This file highlights how you can parameterize your SQL queries to pass information in at runtime.
+    This file highlights how you can parameterize your SQL queries to pass information in at runtime.
 
 :::tip
 
@@ -222,9 +221,6 @@ When running SQL statements from Airflow operators, you can store the SQL code i
         SQLColumnCheckOperator, SQLTableCheckOperator
     )
     from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
-    from astronomer.providers.snowflake.operators.snowflake import (
-        SnowflakeOperatorAsync
-    )
     from pendulum import datetime
     from airflow.utils.task_group import TaskGroup
     import include.sql.tutorial_sql_statements as sql_stmts 
@@ -277,19 +273,19 @@ When running SQL statements from Airflow operators, you can store the SQL code i
         Insert data into the Snowflake tables using existing SQL queries
         stored in the include/sql/snowflake_examples/ directory.
         """
-        load_forestfire_data = SnowflakeOperatorAsync(
+        load_forestfire_data = SnowflakeOperator(
             task_id="load_forestfire_data",
             sql=sql_stmts.load_forestfire_data,
             params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
         )
 
-        load_cost_data = SnowflakeOperatorAsync(
+        load_cost_data = SnowflakeOperator(
             task_id="load_cost_data",
             sql=sql_stmts.load_cost_data,
             params={"table_name": SNOWFLAKE_COST_TABLE}
         )
 
-        load_forestfire_cost_data  = SnowflakeOperatorAsync(
+        load_forestfire_cost_data  = SnowflakeOperator(
             task_id="load_forestfire_cost_data",
             sql=sql_stmts.load_forestfire_cost_data,
             params={"table_name": SNOWFLAKE_FORESTFIRE_COST_TABLE}
@@ -449,12 +445,52 @@ When running SQL statements from Airflow operators, you can store the SQL code i
     The DAG completes the following steps:
 
     - Creates three tables simultaneously using the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator). 
-    - Loads data into two of the tables that were created using the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync) a deferrable version of the SnowflakeOperator. In order to be able to use deferrable operators you need to have a triggerer component running in your Airflow environment, which is configured automatically if you are using the Astro CLI. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
+    - Loads data into two of the tables that were created.
     - Runs data quality checks on the data to ensure that no erroneous data is moved to production. These checks are structured with [task groups](task-groups.md) that include column checks using the [SQLColumnCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator) and table checks using the [SQLTableCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator).
-    - Copies data into the production table using the SnowflakeOperatorAsync.
+    - Copies data into the production table.
     - Deletes the tables to clean up the example.
 
-3. Run the DAG.
+## Step 5: Run the DAG
+
+1. In the Airflow UI, click the play button to manually run your DAG.
+
+2. Navigate to the `Grid` view of the `complex_snowflake_example` DAG and click on the `quality_check_group_forestfire_costs` task group to expand it and see the two tasks which ran data quality checks on the `forestfire_costs` table. Click on the `forestfire_costs_column_checks` task to view the successful checks in the logs.
+
+    ![Forestfire quality checks logs](/img/guides/snowflake_forestfire_quality_checks_logs.png)
+
+## Step 6: Use deferrable operators
+
+The `complex_snowflake_example` DAG runs several queries against the same Snowflake database in parallel. While some queries like the ones creating tables run quickly, larger transformation or loading queries might take some time to run. This is a great use case for the deferrable version of the SnowflakeOperator, the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync). Deferrable operators use the triggerer component in your Airflow environment, which is configured automatically if you are using the Astro CLI, in order to release their worker slot while they wait to be able to execute a task. This allows you to use your Airflow resources much more efficiently in production. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
+
+Using deferrable operators from the Astronomer providers package is easy, you simply have to switch out the operator class. All parameters stay the same.
+
+1. Add the following import statement to your DAG importing the SnowflakeOperatorAsync:
+
+    ```python
+    from astronomer.providers.snowflake.operators.snowflake import (
+            SnowflakeOperatorAsync
+        )
+    ```
+
+2. Switch out the operator used in the `load_forestfire_data` and `load_cost_data` task by replacing `SnowflakeOperator` with `SnowflakeOperatorAsync`:
+
+    ```python
+    load_forestfire_data = SnowflakeOperatorAsync( # changed operator name
+            task_id="load_forestfire_data",
+            sql=sql_stmts.load_forestfire_data,
+            params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
+        )
+
+    load_cost_data = SnowflakeOperatorAsync( # changed operator name
+            task_id="load_cost_data",
+            sql=sql_stmts.load_cost_data,
+            params={"table_name": SNOWFLAKE_COST_TABLE}
+        )
+    ```
+
+3. Run your DAG and observe how the two load tasks go into a deferred state (purple border) before being executed.
+
+     ![Load tasks deferred state](/img/guides/snowflake_example_deferred_state.png)
 
 ## How it works
 
