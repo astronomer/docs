@@ -58,7 +58,7 @@ The following terms are used frequently when discussing data lineage and OpenLin
 
 ## Why OpenLineage with Airflow?
 
-In the previous section above, you learned *what* lineage is, but a question remains *why* you would want to have data lineage in conjunction with Airflow. Using OpenLineage with Airflow allows you to have more insight into complex data ecosystems and can lead to better data governance. Airflow is a natural place to integrate data lineage, because it is often used as a one-stop-shop orchestrator that touches data across many parts of an organization.
+In the section above, you learned *what* lineage is, but a question remains *why* you would want to have data lineage in conjunction with Airflow. Using OpenLineage with Airflow allows you to have more insight into complex data ecosystems and can lead to better data governance. Airflow is a natural place to integrate data lineage, because it is often used as a one-stop-shop orchestrator that touches data across many parts of an organization.
 
 More specifically, OpenLineage with Airflow provides the following capabilities:
 
