@@ -84,16 +84,6 @@ If you are working with open source tools, you can run OpenLineage with Airflow 
 
 OpenLineage is rapidly evolving, and new functionality and integrations are being added all the time. At the time of writing, the following are limitations when using OpenLineage with Airflow:
 
-- The OpenLineage integration with Airflow 2 is currently experimental.
 - You must be running Airflow 2.3.0+ with OpenLineage 0.8.1+ to get lineage data for *failed* task runs.
-- Only the following operators have bundled extractors (needed to collect lineage data out of the box):
-
-    - `PostgresOperator`
-    - `SnowflakeOperator`
-    - `BigQueryOperator`
-    - `MySqlOperator`
-    - `GreatExpectationsOperator`
-    - `PythonOperator`
-    
-    To get lineage data from other operators, you can create your own custom extractor.
+- Only some operators have bundled extractors (needed to collect lineage data out of the box). To get lineage data from other operators, you can create your own custom extractor.
 - To get lineage data from an external system connected to Airflow, such as [Apache Spark](https://openlineage.io/integration/apache-spark/), you'll need to configure an [OpenLineage integration](https://openlineage.io/integration) with that system in addition to Airflow.

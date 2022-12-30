@@ -144,6 +144,7 @@ module.exports = {
         'airflow-dbt',
         'airflow-great-expectations',
         'execute-notebooks',
+        'marquez.md',
         'airflow-mongodb',
         'airflow-snowflake',
         'soda-data-quality',
