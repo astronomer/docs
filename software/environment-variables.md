@@ -114,7 +114,7 @@ If you're working on an Astro project locally but intend to deploy to Astronomer
 To add environment variables, insert the value and key in your `Dockerfile` beginning with `ENV`, ensuring all-caps for all characters. With your Airflow image commonly referenced as a "FROM" statement at the top, your Dockerfile might look like this:
 
 ```dockerfile
-FROM quay.io/astronomer/ap-airflow:1.10.7-buster-onbuild
+FROM quay.io/astronomer/astro-runtime:7.1.0
 ENV AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG=1
 ENV AIRFLOW__CORE__DAG_CONCURRENCY=5
 ENV AIRFLOW__CORE__PARALLELISM=25
