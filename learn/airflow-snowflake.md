@@ -14,9 +14,9 @@ This tutorial covers an example of orchestrating a complex pattern in Snowflake 
 - Running any transformation on data in Snowflake using Airflow operators. 
 - Running data quality checks on data in Snowflake. 
 
-Additionally the [How it works](#how-it-works) sections offers further information on:
+Additionally, the [How it works](#how-it-works) sections offers further information on:
 
-- Available operators and hooks to orchestrate actions in Snowflake.
+- Available operators and hooks for orchestrating actions in Snowflake.
 - Leveraging the OpenLineage Airflow integration to get data lineage and enhanced observability from your Snowflake jobs.
 - Using the Astro SDK for the next generation of DAG authoring for Snowflake query tasks.
 - General best practices and considerations when interacting with Snowflake from Airflow.
@@ -40,6 +40,8 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Configure your Astro project
 
+Use the Astro CLI to create and run an Airflow project locally.
+
 1. Create a new Astro project:
 
     ```sh
@@ -47,7 +49,12 @@ To get the most out of this tutorial, make sure you have an understanding of:
     $ astro dev init
     ```
 
-2. Ensure that you are using version 7.0.0 or newer of the Astro Runtime (Airflow 2.5+) and that version 4.0.2+ of the [Snowflake provider package](https://registry.astronomer.io/providers/snowflake), version 1.13.0+ of the [Astronomer providers package](https://registry.astronomer.io/providers/astronomer-providers) and version 1.3.1+ of the [Common SQL provider package](https://registry.astronomer.io/providers/common-sql) are installed. If you are creating a new Astro project with the Astro CLI, these packages come pre-installed in their latest version and no further action is necessary.
+2. Ensure that your Astro project is using the following versions:
+- Version 7.0.0 or newer of Astro Runtime (found in your Dockerfile) 
+- Version 4.0.2+ of the [Snowflake provider package](https://registry.astronomer.io/providers/snowflake)
+- Version 1.13.0+ of the [Astronomer providers package](https://registry.astronomer.io/providers/astronomer-providers)
+- Version 1.3.1+ of the [Common SQL provider package](https://registry.astronomer.io/providers/common-sql). 
+If you created a *new* Astro project with the Astro CLI, these packages come pre-installed in their latest version and no action is necessary.
 
 3. Start your Airflow project by running:
 
@@ -57,23 +64,30 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 2: Configure your Snowflake connection
 
-1. Navigate to **Admin** -> **Connections** in the Airflow UI and click on the **+** sign. 
+1. In the Airflow UI, go to **Admin** -> **Connections** and click on the **+** sign. 
 
-2. Give your new connection the connection ID `snowflake_default` and fill out the fields for [`Schema`](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html), `Login`, `Password`, `Account`, [`Database`](https://docs.snowflake.com/en/sql-reference/sql/create-database.html) and `Region` with your credentials as shown in the screenshot below. The user you provide needs to have sufficient permissions to create and write to new tables in the Snowflake schema you are providing.
+2. Create a new connection named `snowflake_default` and choose the `snowflake` connection type. Enter the following information:
+- [Schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html)
+- Login
+- Password
+- Account
+- [Database](https://docs.snowflake.com/en/sql-reference/sql/create-database.html)
+- Region 
+Your connection should look something like the screenshot below. The user you provide needs to have sufficient permissions to create and write to new tables in the Snowflake schema you provide.
 
     ![Snowflake connection](/img/guides/snowflake_tutorial_connection.png)
 
 ## Step 3: Add your SQL statements
 
-The DAG you will create in Step 4 contains references to multiple SQL statements. While it is possible to add SQL statements directly within the DAG code a modular approach with SQL statements being saved in a dedicated folder in the `include` directory is best practice.
+The DAG you will create in Step 4 runs multiple SQL statements against your Snowflake data warehouse.
 
-1. Create a new folder in your include directory called `sql` with an empty `__init__.py` file. 
+1. Create a new folder in your `include` directory called `sql` with an empty `__init__.py` file. 
 
     ```sh
     $ mkdir include/sql && touch include/sql/__init__.py
     ```
 
-2. Create a new file in `include/sql` called `tutorial_sql_statements.py` and add copy the following code which contains 7 SQL statements:
+2. Create a new file in `include/sql` called `tutorial_sql_statements.py` and copy the following code:
 
     ```python
     create_forestfire_table = """
@@ -178,15 +192,19 @@ The DAG you will create in Step 4 contains references to multiple SQL statements
     """
     ```
 
-3. The Snowflake operator also allows you to pass in a `.sql` file directly. Create a file called `delete_table.sql` in the `include/sql` directory. Copy and paste the following SQL code:
+This file contains 7 SQL statements that will be run by different operators in your DAG.
+
+3. The Snowflake operator also allows you to pass in a `.sql` file directly. Create a file in your `include/sql` directory called `delete_table.sql` and copy the following SQL code:
 
     ```sql
     DROP TABLE IF EXISTS {{ params.table_name }};
     ```
 
+This file highlights how you can parameterize your SQL queries to pass information in at runtime.
+
 :::tip
 
-Whether to store your SQL code in individual SQL files or as strings in a Python module is a matter of personal preference. Astronomer recommends to store lengthy SQL statements in a dedicated file.
+When running SQL statements from Airflow operators, you can store the SQL code in individual SQL files, in a combined SQL file, or as strings in a Python module. Astronomer recommends storing lengthy SQL statements in a dedicated file to keep your DAG files clean and readable.
 
 :::
 
@@ -424,17 +442,17 @@ Whether to store your SQL code in individual SQL files or as strings in a Python
         )
     ```
 
-    This complex DAG has a write, audit publish pattern showcasing loading data into Snowflake and running [data quality](data-quality.md) checks on the data that has been written. 
+    This complex DAG implements a write, audit, publish pattern showcasing loading data into Snowflake and running [data quality](data-quality.md) checks on the data that has been written. 
 
     ![Complex Snowflake DAG](/img/guides/snowflake_complex_dag.png)
 
-    The DAG accomplishes the following steps:
+    The DAG completes the following steps:
 
-    - Creating three tables simultaneously using the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator). 
-    - Loading data into two of the tables that were created using the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync) a deferrable version of the SnowflakeOperator. In order to be able to use deferrable operators you need to have a triggerer component running in your Airflow environment, which is configured automatically if you are using the Astro CLI. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
-    - Running data quality checks on the data to ensure that no erroneous data is moved to production. These checks are structured with [task groups](task-groups.md) that include column checks using the [SQLColumnCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator) and table checks using the [SQLTableCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator).
-    - Copying data into the production table using the SnowflakeOperatorAsync.
-    - Deleting the tables to clean up the example.
+    - Creates three tables simultaneously using the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator). 
+    - Loads data into two of the tables that were created using the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync) a deferrable version of the SnowflakeOperator. In order to be able to use deferrable operators you need to have a triggerer component running in your Airflow environment, which is configured automatically if you are using the Astro CLI. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
+    - Runs data quality checks on the data to ensure that no erroneous data is moved to production. These checks are structured with [task groups](task-groups.md) that include column checks using the [SQLColumnCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator) and table checks using the [SQLTableCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator).
+    - Copies data into the production table using the SnowflakeOperatorAsync.
+    - Deletes the tables to clean up the example.
 
 3. Run the DAG.
 
@@ -585,4 +603,4 @@ The following are some best practices and considerations to keep in mind when or
 
 ## Conclusion
 
-Congratulations! You've ran a complex DAG performing a common orchestration pattern on data in your Snowflake instance.
+Congratulations! You've run a complex DAG performing a common orchestration pattern on data in your Snowflake data warehouse.
