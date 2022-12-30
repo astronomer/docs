@@ -249,7 +249,7 @@ You can trace the data through the DAGs you created in Step 5 by viewing their l
 
 4. Click on one of the jobs from your DAGs to see the full lineage graph.
 
-    ![Marquez Graph](/img/guides/marquez_lineage_graph.png)
+    ![Marquez Graph](/img/guides/marquez_graph.png)
 
     The lineage graph shows:
 
