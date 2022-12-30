@@ -26,7 +26,7 @@ To get the most out of this guide, make sure you have an understanding of:
 Data lineage is a way of tracing the complex set of relationships that exist among datasets within an ecosystem.  The concept of data lineage encompasses:
 
 - Lineage metadata - describes your datasets (a table in Snowflake, for example) and jobs (tasks in your DAG, for example).
-- A Lineage backend - stores and processes lineage metadata.
+- A lineage backend - stores and processes lineage metadata.
 - A lineage frontend - allows you to view and interact with your lineage metadata, including a graph that visualizes your jobs and datasets and shows how they are connected.
 
 If you want to read more on the concept of data lineage and why it’s important, see this [Astronomer blog post](https://www.astronomer.io/blog/what-is-data-lineage).
