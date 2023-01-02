@@ -192,3 +192,11 @@ astro flow generate example_templating --env=dev
 ```
 
 After you run this command, you can add the DAG to an existing Astro project and run it locally or deploy it to Astro.
+
+### Export to an Astro CLI project
+
+After initialising both, the astro cli project as well as the astro sql project, do the following steps to export your SQL workflow as a DAG to an Astro CLI project.
+
+1. Edit the astro sql projects `global.yml` and change `dags_folder` to point to the astro cli `dags` folder and `data_dir` to point to the astro cli `include` folder.
+2. For existing astro sql projects, copy the contents of the astro sql projects `data` directory into the astro cli `include` folder. For new projects you can pass a `--data-dir` option on project init to set and copy the contents automatically.
+3. Run `astro flow run example_basic_transform --project-dir <your-project-dir>` to run a basic example which accesses the `data_dir` and also exports the generated dags to the configured `dags_folder`.
