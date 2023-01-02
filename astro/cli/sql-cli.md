@@ -199,4 +199,6 @@ After initialising both, the astro cli project as well as the astro sql project,
 
 1. Edit the astro sql projects `global.yml` and change `dags_folder` to point to the astro cli `dags` folder and `data_dir` to point to the astro cli `include` folder.
 2. For existing astro sql projects, copy the contents of the astro sql projects `data` directory into the astro cli `include` folder. For new projects you can pass a `--data-dir` option on project init to set and copy the contents automatically.
-3. Run `astro flow run example_basic_transform --project-dir <your-project-dir>` to run a basic example which accesses the `data_dir` and also exports the generated dags to the configured `dags_folder`.
+3. Run `astro flow run example_basic_transform --project-dir <your-project-dir>` to run a basic example which accesses the `data_dir` and also exports the generated DAG to the configured `dags_folder`.
+
+Note that if you also want to run the generated DAG in Airflow, you need to create the connections manually, e.g. via the Airflow UI. In this example you need to add `sqlite_conn`, with connection type `sqlite` and the `host` needs to be `include/imdb.db`.
