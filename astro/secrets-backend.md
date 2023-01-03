@@ -351,7 +351,7 @@ ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_mana
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": $SECRET_VAR_SERVICE_ACCOUNT}'
 ```
 
-You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
+3. Optional. Run `Variable.get("<your-variable-key>")` to run a DAG locally and confirm that your variables are accessible.
 
 #### Deploy to Astro with Secret Manager 
 
