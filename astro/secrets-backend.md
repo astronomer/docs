@@ -344,7 +344,7 @@ SECRET_VAR_SERVICE_ACCOUNT='{
   ...
 }'
 ```
-2. Add the following lines to your `Dockerfile` to the set the Secrets Backend. These will set the environment variables to let Airflow read secrets from Google Secret Manager:
+2. Add the following lines to your `Dockerfile` to set the environment variables that allow Airflow to read secrets from the Secret Manager:
 
 ```text
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
