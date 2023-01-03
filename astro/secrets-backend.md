@@ -383,7 +383,7 @@ To ensure the security of secrets, the `.env` variable is only available in your
 
 #### Deploy to Astro
 
-Run the following command to deploy to Astro Cloud:
+Run the following command to deploy to Astro:
   
     ```sh
     astro deploy --deployment-id <your-deployment-id> 
