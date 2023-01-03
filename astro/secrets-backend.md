@@ -359,7 +359,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
 
 1. Set up Workload Identity for your Airflow Deployment. See [Connect Astro to GCP data sources](https://docs.astronomer.io/astro/connect-gcp?tab=Workload%20Identity#authentication-options).
 
-2. In your `Dockerfile` change the Backend KWARGS to add the `project-id` of the project where the Secret Manager resides as below:
+2. In your `Dockerfile`, update the Backend KWARGS environment variable to include the `project-id` of the project where the Secret Manager resides:
 
 ```text
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
