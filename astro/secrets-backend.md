@@ -366,7 +366,6 @@ ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_mana
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project-id": "<your-secret-managet-project-id>"}'
 ```
 
-#### OR
 
 #### Deploy to Astro using a service account JSON key file
 
