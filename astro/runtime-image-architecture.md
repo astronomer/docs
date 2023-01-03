@@ -44,9 +44,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 6             | 2.4                    |
 | 7             | 2.5                    |
 
-:::info
 For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
-:::
 
 ## Default environment variables
 
