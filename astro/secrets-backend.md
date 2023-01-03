@@ -378,7 +378,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
     $ astro deployment variable create --deployment-id <your-deployment-id> SECRET_VAR_SERVICE_ACCOUNT='{your-json}' --secret
     ```
 
-*The `.env` is only available to your local and by default not available to your Astro Cloud UI to keep secrets safe. (See [Set Environment Variables Locally](https://docs.astronomer.io/astro/develop-project#set-environment-variables-locally))*
+To ensure the security of secrets, the `.env` variable is only available in your local environment and not in the Cloud UI . See [Set Environment Variables Locally](https://docs.astronomer.io/astro/develop-project#set-environment-variables-locally).
 
 
 #### Finally Deploy to Astro Cloud
