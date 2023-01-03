@@ -435,7 +435,7 @@ This example assumes that the name of each of your Python packages is identical 
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
     ```
