@@ -49,7 +49,7 @@ To emit lineage data from Snowflake:
 When you run an Airflow task with the `SnowflakeOperator`, the following data is collected:
 
 - Task duration
-- SQL queries. Only some statements are currently supported, see [OpenLineage integration tests](https://github.com/OpenLineage/OpenLineage/tree/main/integration/sql/impl/tests) for queries with coverage
+- SQL queries. For a list of supported queries, see the [OpenLineage `tests` repository](https://github.com/OpenLineage/OpenLineage/tree/main/integration/sql/impl/tests).
 - Query duration. This is different from the Airflow task duration
 - Input datasets
 - Output datasets
