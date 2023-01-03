@@ -133,7 +133,6 @@ module.exports = {
         description: 'Integrate Airflow with commonly used data engineering tools.',
       },
       items: [
-        'airflow-amazon-web-services',
         'airflow-azure-data-factory-integration',
         'airflow-azure-data-explorer',
         'airflow-azure-container-instances',
