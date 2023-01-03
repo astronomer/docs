@@ -357,7 +357,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
 
 #### Option #1 Using Workload Identity *without* Service Account JSON Key File (Recommended)
 
-1. Setup Workload Identity for your Airflow Deployment as described [here](https://docs.astronomer.io/astro/connect-gcp?tab=Workload%20Identity#authentication-options).
+1. Set up Workload Identity for your Airflow Deployment. See [Connect Astro to GCP data sources](https://docs.astronomer.io/astro/connect-gcp?tab=Workload%20Identity#authentication-options).
 
 2. In your `Dockerfile` change the Backend KWARGS to add the `project-id` of the project where the Secret Manager resides as below:
 
