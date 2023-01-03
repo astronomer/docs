@@ -19,7 +19,7 @@ Release date: December 23, 2022
 
 ### Bug fixes 
 
-- Fixed an issue where logging sidecars would occasionally fail to terminate
+- Fixed an issue where logging sidecars would occasionally fail to terminate.
 - Fixed the following vulnerabilities:
     - [CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848)
     - [CVE-2021-44716](https://nvd.nist.gov/vuln/detail/CVE-2021-44716)
