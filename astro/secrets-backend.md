@@ -353,7 +353,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
 
 3. Optional. Run `Variable.get("<your-variable-key>")` to run a DAG locally and confirm that your variables are accessible.
 
-#### Deploy to Astro with Secret Manager 
+#### Deploy to Astro without a service account JSON key file (Recommended)
 
 #### Option #1 Using Workload Identity *without* Service Account JSON Key File (Recommended)
 
