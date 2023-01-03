@@ -333,7 +333,7 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
 
 #### Set up GCP Secret Manager locally
 
-1. Add the variable `SECRET_VAR_SERVICE_ACCOUNT` in `.env` file in your Astro project. This should be the copy of the entire contents of your Service Account JSON Key file generated from GCP for the service account that will be used to access Secrets Manager. 
+1. Add the `SECRET_VAR_SERVICE_ACCOUNT` variable to your Astro project `.env` file. This should include the entire contents of the service account JSON key for the service account that will be used to access Secret Manager. 
 
 ```text
 SECRET_VAR_SERVICE_ACCOUNT='{
