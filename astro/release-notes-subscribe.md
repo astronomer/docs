@@ -17,7 +17,7 @@ _Note: Safari does not natively support viewing or configuring RSS feeds on Desk
 
 To add a feed to a public channel, the Slack Primary Owner role might be required. To learn more about adding RSS feeds to Slack, see [Add RSS feeds to Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack).
 
-Run each of the following commands to subscribe to different Astro release notes:
+Run the following commands to subscribe to different Astro release notes:
 
 - Astro product release notes: `/feed subscribe https://docs.astronomer.io/astro-release-notes.xml`
 - Astro Runtime release notes: `/feed subscribe https://docs.astronomer.io/astro-runtime-release-notes.xml`
