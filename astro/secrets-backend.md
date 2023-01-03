@@ -355,7 +355,6 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
 
 #### Deploy to Astro without a service account JSON key file (Recommended)
 
-#### Option #1 Using Workload Identity *without* Service Account JSON Key File (Recommended)
 
 1. Set up Workload Identity for your Airflow Deployment. See [Connect Astro to GCP data sources](https://docs.astronomer.io/astro/connect-gcp?tab=Workload%20Identity#authentication-options).
 
