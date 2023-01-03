@@ -128,13 +128,13 @@ services:
 </TabItem>
 </Tabs>
 
-:::info
+  :::info
 
-Depending on your Docker configurations, you might have to make your `.aws` folder accessible to Docker. To do this, open **Preferences** in Docker Desktop and go to **Resources** -> **File Sharing**. Add the full path of your `.aws` folder to the list of shared folders.
+  Depending on your Docker configurations, you might have to make your `.aws` folder accessible to Docker. To do this, open **Preferences** in Docker Desktop and go to **Resources** -> **File Sharing**. Add the full path of your `.aws` folder to the list of shared folders.
 
-:::
+  :::
 
-1. In your Astro project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the `docker-compose.override.yml`.
+3. In your Astro project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the `docker-compose.override.yml`.
 
     ```text
     AWS_CONFIG_FILE=/usr/local/airflow/.aws/config
@@ -182,8 +182,6 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
 
 2. Add a file named `docker-compose.override.yml` to your project with the following configuration: 
    
-3. Mount your Google Cloud application_default_credentials file as a volume and attach it to Airflow:
-
 <Tabs
     defaultValue="mac"
     groupId= "configure-your-astro-project"
@@ -245,7 +243,7 @@ services:
 </TabItem>
 </Tabs>
 
-1. In your Astro project's `.env` file, add the following environment variable. Ensure that this volume path is the same as the one your configured in `docker-compose.override.yml`.
+3. In your Astro project's `.env` file, add the following environment variable. Ensure that this volume path is the same as the one your configured in `docker-compose.override.yml`.
     
     ```text
     GOOGLE_APPLICATION_CREDENTIALS=/usr/local/airflow/gcloud/application_default_credentials.json
@@ -326,6 +324,7 @@ services:
 ```
 
 </TabItem>
+<TabItem value="azure">
 
 ```yaml
 version: "3.1"
@@ -409,7 +408,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     astro dev start
     ```
 
-5. Access the Airflow UI at `localhost:8080` and create an Airflow AWS connection named `aws_standard` with no credentials. See [Connections](connections.md).
+5. Access the Airflow UI at `localhost:8080` and create an Airflow AWS connection named `aws_standard` with no credentials. See [Connections](https://docs.astronomer.io/learn/connections).
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
@@ -463,7 +462,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     astro dev start
     ```
 
-4. Access the Airflow UI at `localhost:8080` and create an Airflow GCP connection named `gcp_standard` with no credentials. See [Connections](connections.md).
+4. Access the Airflow UI at `localhost:8080` and create an Airflow GCP connection named `gcp_standard` with no credentials. See [Connections](https://docs.astronomer.io/learn/connections).
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
@@ -528,7 +527,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     astro dev start
     ```
 
-5. Access the Airflow UI at `localhost:8080` and create an Airflow Azure connection named `azure_standard` with no credentials. See [Connections](connections.md).
+5. Access the Airflow UI at `localhost:8080` and create an Airflow Azure connection named `azure_standard` with no credentials. See [Connections](https://docs.astronomer.io/learn/connections).
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
