@@ -35,7 +35,7 @@ The maintenance period for an Astro Runtime version depends on its release chann
 | Stable          | 6 months or 3 months after the next major Runtime release (whichever is longer) |
 | LTS             | 18 months                                                                       |
 
-For each major Runtime version, only the latest `minor.patch` version is supported at any given time. If you report an issue with an Astro Runtime version that is not latest, the Astronomer Support team will always ask that you upgrade as a first step to resolution. For example, we encourage any user who reports an issue with Astro Runtime 4.0.2 to first upgrade to the latest 4.x.y version as soon as it's generally available.
+For each major Runtime version, only the latest `minor.patch` version is supported at any given time. If you report an issue with an Astro Runtime version that is not latest, the Astronomer Support team will always ask that you upgrade as a first step to resolution. For example, any user who reports an issue with Astro Runtime 4.0.2 will be asked to upgrade to the latest 4.x.y version as soon as it's generally available.
 
 Within the maintenance window of each Astro Runtime version, the following is true:
 
@@ -97,7 +97,7 @@ The following table contains the exact lifecycle for each published version of A
 | [6](runtime-release-notes.md#astro-runtime-600) | 2.4                    | September 19, 2022 | March 2024              |
 
 :::info
-For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
+For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 :::
 
 If you have any questions or concerns, contact [Astronomer support](https://cloud.astronomer.io/support).

@@ -23,8 +23,8 @@ For more information about the features that are available in Astro Runtime rele
 
 Astro Runtime versions are released regularly and use [semantic versioning](https://semver.org/). Astronomer ships major, minor, and patch releases of Astro Runtime in the format of `major.minor.patch`.
 
-- **Major** versions are released for significant feature additions. This includes new major or minor versions of Apache Airflow, as well as API or DAG specification changes that are not backwards-compatible.
-- **Minor** versions are released for functional changes. This includes API or DAG specification changes that are backwards-compatible, which might include new minor versions of `astronomer-providers` and `openlineage-airflow`.
+- **Major** versions are released for significant feature additions. This includes new major or minor versions of Apache Airflow, as well as API or DAG specification changes that are not backward compatible.
+- **Minor** versions are released for functional changes. This includes API or DAG specification changes that are backward compatible, which might include new minor versions of `astronomer-providers` and `openlineage-airflow`.
 - **Patch** versions are released for bug and security fixes that resolve unwanted behavior. This includes new patch versions of Apache Airflow, `astronomer-providers`, and `openlineage-airflow`.
 
 Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments on Astro must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given cluster or Workspace. See [Create a Deployment](create-deployment.md#create-a-deployment).
@@ -44,7 +44,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 6             | 2.4                    |
 | 7             | 2.5                    |
 
-For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
+For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
 ## Default environment variables
 
