@@ -371,7 +371,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
 
 1. Set up the Secret Manager locally. See [Set up GCP Secret Manager locally](#set-up-gcp-secret-manager-locally)
 
-2. Add the variable `SECRET_VAR_SERVICE_ACCOUNT` with the contents of the Service Account JSON to the Airflow Deployment on Astro either directly via the Astro Cloud UI ***or*** via Astro CLI
+2. Use the Cloud UI or the Astro CLI to add the `SECRET_VAR_SERVICE_ACCOUNT` environment variable with the contents of the service account JSON key file to the Airflow Deployment. 
  
     ```sh
   
