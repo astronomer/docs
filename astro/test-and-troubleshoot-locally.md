@@ -174,7 +174,7 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 :::
 
-1. Reference the Astro CLI's default [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go) (`composeyml.go`) and determine one or more configurations to override.
+1. Reference the Astro CLI's default [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.yml) (`composeyml.yml`) and determine one or more configurations to override.
 2. Add a `docker-compose.override.yml` file to your Astro project.
 3. Specify your new configuration values in `docker-compose.override.yml` file using the same format as in `composeyml.go`.
 
