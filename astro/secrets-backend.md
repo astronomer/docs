@@ -340,7 +340,7 @@ SECRET_VAR_SERVICE_ACCOUNT='{
   "type": "service_account",
   "project_id": "<your-project-id>",
   "private_key_id": "<your_private_key_id>",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nmygarbledkey\n-----END PRIVATE KEY-----\n",
+  "private_key": "<your_complete_service_account_JSON_key\n",
   ...
 }'
 ```
