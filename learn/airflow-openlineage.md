@@ -74,7 +74,7 @@ These capabilities translate into real world benefits by:
 
 ## Lineage on Astro
 
-For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage integration is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your Organization. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io/openlineage). 
+For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage integration is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your organization. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io/openlineage). 
 
 ## Getting started
 
@@ -85,5 +85,5 @@ If you are working with open source tools, you can run OpenLineage with Airflow 
 OpenLineage is rapidly evolving, and new functionality and integrations are being added all the time. At the time of writing, the following are limitations when using OpenLineage with Airflow:
 
 - You must be running Airflow 2.3.0+ with OpenLineage 0.8.1+ to get lineage data for *failed* task runs.
-- Only some operators have bundled extractors (needed to collect lineage data out of the box). To get lineage data from other operators, you can create your own custom extractor.
+- Only some operators have bundled extractors (needed to collect lineage data out of the box). To get lineage data from other operators, you can create your own [custom extractor](https://openlineage.io/blog/extractors/).
 - To get lineage data from an external system connected to Airflow, such as [Apache Spark](https://openlineage.io/integration/apache-spark/), you'll need to configure an [OpenLineage integration](https://openlineage.io/integration) with that system in addition to Airflow.

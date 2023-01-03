@@ -10,7 +10,7 @@ tags: [Lineage]
 
 Viewing and interacting with lineage data requires running a lineage front end. [Marquez](https://github.com/MarquezProject/marquez) is the most common open source choice for this purpose, and integrates easily with Airflow.
 
-In this tutorial, you'll run OpenLineage with Airflow locally using Marquez as a lineage front end. You'll then generate and interpret lineage data using two DAGs that processes data in Postgres.
+In this tutorial, you'll run OpenLineage with Airflow locally using Marquez as a lineage front end. You'll then generate and interpret lineage data using two DAGs that process data in Postgres.
 
 ## Time to complete
 
@@ -152,28 +152,34 @@ For this tutorial you will create two DAGs to generate and interpret lineage dat
     from airflow.providers.postgres.operators.postgres import PostgresOperator
 
     create_table_query= '''
-    CREATE TABLE IF NOT EXISTS animal_adoptions_combined (date DATE, type VARCHAR, name VARCHAR, age INTEGER);
+        CREATE TABLE IF NOT EXISTS animal_adoptions_combined (
+            date DATE,
+            type VARCHAR,
+            name VARCHAR,
+            age INTEGER
+            );
     '''
 
     combine_data_query= '''
-    INSERT INTO animal_adoptions_combined (date, type, name, age) 
-    SELECT * 
-    FROM adoption_center_1
-    UNION 
-    SELECT *
-    FROM adoption_center_2;
+        INSERT INTO animal_adoptions_combined (date, type, name, age) 
+            SELECT * 
+            FROM adoption_center_1
+            UNION 
+            SELECT *
+            FROM adoption_center_2;
     '''
 
-    with DAG('lineage-combine-postgres',
-            start_date=datetime(2020, 6, 1),
-            max_active_runs=1,
-            schedule='@daily',
-            default_args = {
-                'retries': 1,
-                'retry_delay': timedelta(minutes=1)
-            },
-            catchup=False
-            ):
+    with DAG(
+        'lineage-combine-postgres',
+        start_date=datetime(2022, 12, 1),
+        max_active_runs=1,
+        schedule='@daily',
+        default_args = {
+            'retries': 1,
+            'retry_delay': timedelta(minutes=1)
+        },
+        catchup=False
+    ):
 
         create_table = PostgresOperator(
             task_id='create_table',
@@ -199,27 +205,34 @@ For this tutorial you will create two DAGs to generate and interpret lineage dat
     from airflow.providers.postgres.operators.postgres import PostgresOperator
 
     aggregate_reporting_query = '''
-    INSERT INTO adoption_reporting_long (date, type, number)
-    SELECT c.date, c.type, COUNT(c.type)
-    FROM animal_adoptions_combined c
-    GROUP BY date, type;
+        INSERT INTO adoption_reporting_long (date, type, number)
+        SELECT c.date, c.type, COUNT(c.type)
+        FROM animal_adoptions_combined c
+        GROUP BY date, type;
     '''
 
-    with DAG('lineage-reporting-postgres',
-            start_date=datetime(2020, 6, 1),
-            max_active_runs=1,
-            schedule='@daily',
-            default_args={
-                'retries': 1,
-                'retry_delay': timedelta(minutes=1)
-            },
-            catchup=False
-            ):
+    with DAG(
+        'lineage-reporting-postgres',
+        start_date=datetime(2020, 6, 1),
+        max_active_runs=1,
+        schedule='@daily',
+        default_args={
+            'retries': 1,
+            'retry_delay': timedelta(minutes=1)
+        },
+        catchup=False
+    ):
 
         create_table = PostgresOperator(
             task_id='create_reporting_table',
             postgres_conn_id='postgres_default',
-            sql='CREATE TABLE IF NOT EXISTS adoption_reporting_long (date DATE, type VARCHAR, number INTEGER);',
+            sql='''
+                CREATE TABLE IF NOT EXISTS adoption_reporting_long (
+                    date DATE,
+                    type VARCHAR,
+                    number INTEGER
+                    );
+            ''',
         ) 
 
         insert_data = PostgresOperator(
