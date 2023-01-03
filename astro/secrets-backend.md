@@ -368,7 +368,7 @@ ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connection
 
 #### OR
 
-#### Option #2 Using Service Account JSON Key File
+#### Deploy to Astro using a service account JSON key file
 
 1. Set up the Secret Manager locally. See [Set up GCP Secret Manager locally](#set-up-gcp-secret-manager-locally)
 
