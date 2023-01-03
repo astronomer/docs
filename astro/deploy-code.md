@@ -76,6 +76,12 @@ After the deploy completes, Docker image information for your Deployment is avai
 3. Scroll to the bottom of the page and view the **Image tag** information in the footer:
 
     ![Docker image information](/img/docs/image-tag-airflow-ui-astro.png)
+    
+:::info
+
+Improved visibility into the health of your Deployment and the status of deploys is coming soon. If you're interested in early access to this feature, contact your Astronomer representative.
+
+:::
 
 ### What happens during a code deploy
 

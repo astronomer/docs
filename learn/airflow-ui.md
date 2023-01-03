@@ -105,11 +105,11 @@ The following are the additional DAG views that are available, but not discussed
 
 The **Dataset** tab was introduced in Airflow 2.4 in support of the new [dataset driven scheduling](airflow-datasets.md) feature. The **Dataset** tab links to a page showing all datasets that have been produced in the Airflow environment, as well as all dependencies between datasets and DAGs in a graph.
 
-![Datasets](/img/guides/2_4_Datasets.png)
+![Datasets](/img/guides/2_5_Datasets.png)
 
 Click a dataset to open the history of all updates to the dataset that were recorded in the Airflow environment.
 
-![Dataset History](/img/guides/2_4_DatasetsDetails.png)
+![Dataset History](/img/guides/2_5_DatasetsDetails.png)
 
 ## Security tab
 

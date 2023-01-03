@@ -134,7 +134,7 @@ By adding connections and variables as environment variables, you can lower the 
 
 ### Airflow connections
 
-Use the Airflow [connection URI format](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#uri-format) to store connections as environment variables. The naming convention for Airflow environment variable connections is:
+In Astro Runtime version 4.2 and earlier, use the Airflow [connection URI format](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#uri-format) to store connections as environment variables. The naming convention for Airflow environment variable connections is:
 
 - Key: `AIRFLOW_CONN_<CONN_ID>` 
 - Value: `<connection-uri>`
@@ -144,7 +144,9 @@ For example, consider the following Airflow connection:
 - Connection ID: `MY_PROD_DB`
 - Connection URI: `my-conn-type://login:password@host:5432/schema`
 
-To store this connection as an environment variable, you create an environment variable with the key `AIRFLOW_CONN_MY_PROD_DB` and the value `my-conn-type://login:password@host:5432/schema`,
+To store this connection as an environment variable, you create an environment variable with the key `AIRFLOW_CONN_MY_PROD_DB` and the value `my-conn-type://login:password@host:5432/schema`.
+
+In Astro Runtime version 5.0 and later, you can also use JSON format to store connections. See [JSON format example](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#json-format-example). When using the JSON format in environment variables, the JSON object must be defined in a single, unbroken line. 
 
 :::info
 
@@ -164,4 +166,4 @@ For example, consider the following Airflow variable:
 - Variable name: `My_Var`
 - Value: `2`
 
-To store this Airflow variable as an environment variable, you create an environment variable with the key `AIRFLOW_VAR_MY_VAR` and the value `2`,
+To store this Airflow variable as an environment variable, you create an environment variable with the key `AIRFLOW_VAR_MY_VAR` and the value `2`.

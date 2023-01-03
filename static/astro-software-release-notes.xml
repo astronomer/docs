@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.30.4</title><link>https://docs.astronomer.io/software/release-notes#0304</link><description><![CDATA[<p>Release date: November 3, 2022</p><h3>Bug fixes</h3><ul>
+<li>
+<p>Fixed the following vulnerabilities:</p>
+<ul>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42915">CVE-2022-42915</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32190">CVE-2022-32190</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-14809">CVE-2022-14809</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-14271">CVE-2022-14271</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1996">CVE-2022-1996</a></li>
+</ul>
+</li>
+<li>
+<p>Fixed an issue where <code>astronomer.houston.updateRuntimeCheck.url: true</code> was ignored when searching for new Astronomer Certified and Astro Runtime images.</p>
+</li>
+</ul>]]></description></item><item><title>0.30.3</title><link>https://docs.astronomer.io/software/release-notes#0303</link><description><![CDATA[<p>Release date: October 26, 2022</p><h3>Additional improvements</h3><ul>
+<li>You can now configure custom Alertmanager receivers with their own rules and topics using <code>customReceiver</code> in the Alertmanager Helm chart.</li>
+<li>You can now limit which Runtime versions are available for new Deployments using <code>astronomer.minAstroRuntimeVersion</code> and <code>astronomer.airflowMinimumAstroRuntimeVersion</code> in your <code>config.yaml</code> file.</li>
+<li>You can now configure a <code>livenessProbe</code> and <code>readinessProbe</code> specific to Prometheus in the Prometheus Helm chart.</li>
+<li>You can now pass extra environment variables to <a href="export-task-logs.md#configure-logging-sidecars">logging sidecars</a> using <code>global.loggingSidecar.extraEnv</code> in your <code>config.yaml</code> file.</li>
+<li>You can now define resource requests for <a href="export-task-logs.md#configure-logging-sidecars">logging sidecars</a> using <code>global.loggingSidecar.resources</code> in your <code>config.yaml</code> file.</li>
+<li>You can now configure whether introspection APIs are available in GraphQL using <code>astronomer.apollo.introspection</code> in your <code>config.yaml</code> file.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where upgrading Astronomer Software with a custom <code>houston.deployments.components</code> value in Helm could make the Software UI unavailable.</li>
+<li>Fixed an issue where the Software UI didn't show the correct value for <strong>Extra Capacity</strong>.</li>
+<li>Fixed an issue where upgrading a Deployment from Airflow 1.10.15 to 2.3 prevented you from configuring Deployment resources in the Software UI.</li>
+<li>Added protections for using Arm-based Runtime images in Software Deployments.</li>
+<li>Fixed an issue where some Deployments failed when pulling secrets from a private Docker registry.</li>
+<li>Fixed an issue where some email alerts for unhealthy Deployments would not send if <code>namespaceFreeFormEntry: true</code> was set in <code>config.yaml</code>.</li>
+<li>Fixed an issue where you could not view Deployment-level service accounts in the Software UI.</li>
+<li>Fixed an issue where token refreshing could break when the token didn't have a properly formatted date.</li>
+<li>Suppressed some extraneous ElasticSearch logs that made parsing logs for relevant information difficult.</li>
+<li>Fixed the following vulnerabilities:
+<ul>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-40674">CVE-2022-40674</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41816">CVE-2022-41816</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2900">CVE-2022-2900</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3224">CVE-2022-3224</a></li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>0.30.2</title><link>https://docs.astronomer.io/software/release-notes#0302</link><description><![CDATA[<p>Release date: September 22, 2022</p><h3>Additional improvements</h3><ul>
+<li>You can now use the <a href="https://github.com/astronomer/astronomer/blob/master/charts/fluentd/values.yaml">Fluentd Helm chart</a> to set a <code>securityContext</code> for Fluentd Pods and containers.</li>
+<li>Improved the startup time for the platform NATS server.</li>
+<li>You can now configure external containers in the <code>astronomer.houston.config</code> section of the Astronomer Helm chart.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed several CVEs as a result of updating images for system components.</li>
+</ul>]]></description></item><item><title>0.30.1</title><link>https://docs.astronomer.io/software/release-notes#0301</link><description><![CDATA[<p>Release date: September 12, 2022</p><h3>Bug fixes</h3><ul>
+<li>Fixed the following vulnerabilities:
+<ul>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-1996">CVE-2022-1996</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21698">CVE-2022-21698</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35949">CVE-2022-35949</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-35948">CVE-2022-35948</a></li>
+<li><a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37434">CVE-2022-37434</a></li>
+</ul>
+</li>
+</ul>]]></description></item><item><title>0.30.0</title><link>https://docs.astronomer.io/software/release-notes#0300</link><description><![CDATA[<p>Release date: August 29, 2022</p><p>:::danger Breaking Change for Azure Database for PostgreSQL</p><p>A change in 0.30 enabled the <code>trgm</code> extension for PostgreSQL. If you use Azure Database for PostgreSQL as your database backend, you need to enable the <code>pg_trgm</code> extension before upgrading to Software 0.30 using either Azure portal or the Azure CLI. See <a href="https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions">Azure documentation</a> for configuration steps.</p><p>If you don't complete this setup before your upgrade, the upgrade will fail.</p><p>:::</p><h3>Improved token refreshing for IdP integrations</h3><p>The Software UI now refreshes your JSON web token (JWT) based on the validity of your authentication token from your IdP. This means that as long as you stay logged in to your IdP, you no longer have to refresh the Software UI to continue accessing the Software UI, Astro CLI, and Houston API.</p><p>Additionally, if you change a user's access to Astronomer from your IdP, their permissions will be automatically updated in Astronomer after their current IdP token expires. If you remove a user completely from Astronomer, they are automatically logged out of the Software UI and CLI after their current IdP token expires.</p><p>As part of this change, you can now configure <code>jwt.authDuration</code> in your <a href="https://github.com/astronomer/docs/blob/main/software_configs/0.30/default.yaml">Houston Helm configuration</a>. If a user is logged on longer than <code>authDuration</code>, they will be immediately logged out regardless of the status of their JWT or authentication token.</p><h3>Additional improvements</h3><ul>
+<li>Workspace users are now paginated in the Software UI.</li>
+<li>You can now configure credentials for a private image registry by specifying a secret you create instead of a username and password. The secret is attached to any Pods that need to access the registry.</li>
+<li>You can now specify <code>authUrlParams</code> for your identity provider (IdP) in <code>config.yaml</code>.</li>
+<li>System Editors can no longer manage Teams or users in a Workspace. These permissions are now available only at the System Admin level.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where <code>updateRuntimeCheck.enabled:false</code> did not properly stop an Astronomer Software installation from checking for Runtime updates.</li>
+<li>Fixed an issue where applying an IAM role to a Deployment would reset the Deployment's <strong>Extra Capacity</strong> setting back to the default of 0 AU.</li>
+<li>Fixed an issue where System Admins could receive an error when trying to view a Team imported from a different IdP than their current one.</li>
+<li>When a System Admin makes a change to a Team, that change now appears in the UI without needing to refresh the page.</li>
+<li>Configurations for disabling a specific executor type in <code>config.yaml</code> are now reflected in the Software UI.</li>
+<li>Fixed an issue where Workspace-level service accounts could view Deployment information from Deployments outside of their Workspace.</li>
+<li>Fixed an issue where updating the role of a user in a Team using the Astro CLI would not throw an error as expected.</li>
+<li>Fixed an issue where JSON web tokens persisted after a user logged out if <code>idpGroupsRefreshEnabled</code> was set to <code>false</code>.</li>
+<li>Users authenticating with Google Direct are no longer automatically logged out of Astronomer Software after 1 hour.</li>
+</ul>]]></description></item></channel></rss>

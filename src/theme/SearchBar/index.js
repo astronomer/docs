@@ -20,7 +20,7 @@ import Translate, { translate } from '@docusaurus/Translate';
 import styles from './styles.module.css';
 let DocSearchModal = null;
 function Hit({ hit, children }) {
-  return <Link to={hit.url}>{children}</Link>;
+  return <Link to={hit.url.replace('#docusaurus_skipToContent_fallback', '')}>{children}</Link>;
 }
 function ResultsFooter({ state, onClose }) {
   const { generateSearchPageLink } = useSearchPage();

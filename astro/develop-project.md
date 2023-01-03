@@ -231,7 +231,7 @@ For local environments, the Astro CLI generates an `airflow.cfg` file at runtime
 
 To view your local environment variables in the context of the generated Airflow configuration, run:
 
-````sh
+```sh
 astro dev bash --scheduler "/bin/bash && cat airflow.cfg"
 ```
 
@@ -311,6 +311,7 @@ All changes made to the following files require rebuilding your Astro project in
 - `Dockerfile`
 - `requirements.txt`
 - `airflow_settings.yaml`
+
 #### Apply changes
 
 1. Save the change to your local version control tool, such as VSCode.
@@ -434,7 +435,7 @@ This example assumes that the name of each of your Python packages is identical 
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
     ```
@@ -542,7 +543,9 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install OS-Level packages
     COPY packages.txt .
+    USER root
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
+    USER astro
 
     FROM stage1 AS stage2
     # Install Python packages

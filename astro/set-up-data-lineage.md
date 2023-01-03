@@ -29,16 +29,9 @@ The data lineage graph in the Cloud UI shows lineage data that is emitted with b
 
 ## Extract lineage data from external systems to Astro
 
-To emit lineage data from an Airflow task that runs outside of Astro or from an external system that does not interact with Airflow:
+When you integrate an external data lineage system with Astro or you are working with Astro locally and are not using a supported Airflow operator, you need to provide a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to the correct place in Astro. 
 
-- Retrieve your Organization OpenLineage API key from the Cloud UI. See [Retrieve an OpenLineage API key](#retrieve-an-openlineage-api-key).
-- Specify your OpenLineage API key in the external system. See the following integration guides for specific instructions.
-
-### Retrieve an OpenLineage API key
-
-1. In the Cloud UI, click **Settings**.
-2. Copy the value in the **Lineage API Key** field.
-3. Specify your Organization's OpenLineage API key in the external system's configuration.
+To locate the your Deployment namespace in the Cloud UI, select a Workspace and then copy the value with the format `<text>-<text>-<four-digit-number>` next to the Deployment name. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
 
 ## Snowflake and OpenLineage with Airflow
 
@@ -86,7 +79,7 @@ Use the information provided here to set up lineage collection for Spark running
 4. In Databricks, run this command to create a [cluster-scoped init script](https://docs.databricks.com/clusters/init-scripts.html#example-cluster-scoped-init-script) and install the `openlineage-spark` library at cluster initialization:
 
     ```sh
-        dbfs:/databricks/openlineage/open-lineage-init-script.sh
+    dbfs:/databricks/openlineage/open-lineage-init-script.sh
     ```
 
 5. In the cluster configuration page for your Databricks cluster, specify the following [Spark configuration](https://docs.databricks.com/clusters/configure.html#spark-configuration):
@@ -110,7 +103,6 @@ To test that lineage was configured correctly on your Databricks cluster, run a 
 
 ## OpenLineage and dbt Core with Airflow
 
-
 Use the information provided here to set up lineage collection for dbt Core tasks. To learn how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest, see [Orchestrate dbt with Airflow](https://docs.astronomer.io/learn/airflow-dbt).
 
 If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [Astronomer support](https://cloud.astronomer.io/support). 
@@ -119,36 +111,28 @@ If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [
 
 - A [dbt project](https://docs.getdbt.com/docs/building-a-dbt-project/projects).
 - The [dbt CLI](https://docs.getdbt.com/dbt-cli/cli-overview) v0.20+.
-- Your Astro base domain.
-- Your Organization's OpenLineage API key.
 
 ### Setup
 
-1. On your local computer, run the following command to install the latest version of the [`openlineage-dbt`](https://pypi.org/project/openlineage-dbt) library:
-
-   ```sh
-   $ pip install openlineage-dbt
-   ```
-
-2. Add the following line to the `requirements.txt` file of your Astro project:
+1. Add the following line to the `requirements.txt` file of your Astro project:
 
    ```text
     openlineage-dbt
     ```
 
-3. Run the following command to generate the [`catalog.json`](https://docs.getdbt.com/reference/artifacts/catalog-json) file for your dbt project:
+2. Run the following command to generate the [`catalog.json`](https://docs.getdbt.com/reference/artifacts/catalog-json) file for your dbt project:
 
    ```bash
    $ dbt docs generate
    ```
 
-4. In your dbt project, run the [OpenLineage](https://openlineage.io/integration/dbt/) wrapper script using the `dbt run` [command](https://docs.getdbt.com/reference/commands/run):
+3. In your dbt project, run the [OpenLineage](https://openlineage.io/integration/dbt/) wrapper script using the `dbt run` [command](https://docs.getdbt.com/reference/commands/run):
 
    ```bash
    $ dbt-ol run
    ```
 
-5. Optional. Run the following command to test your set up:
+4. Optional. Run the following command to test your set up:
 
    ```bash
    $ dbt-ol test
@@ -156,7 +140,7 @@ If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [
 
 ### Verify setup
 
-To confirm that your setup is successful, run a dbt model in your project. After you run this model, click **Lineage** in the Cloud UI and and then click **Runs** in the left menu. If the setup is successful, the run that you triggered appears in the table of most recent runs.
+To confirm that your setup is successful, run a dbt model in your project. After you run this model, click **Lineage** in the Cloud UI and then click **Runs** in the left menu. If the setup is successful, the run that you triggered appears in the table of most recent runs.
 
 ## OpenLineage and Great Expectations with Airflow
 
@@ -166,42 +150,57 @@ This guide outlines how to set up lineage collection for a Great Expectations pr
 
 #### Prerequisites
 
-- A [Great Expectations project](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started).
-- Your Astro base domain.
-- Your Organization's OpenLineage API key.
+- A [Great Expectations Data Context](https://legacy.docs.greatexpectations.io/en/latest/guides/tutorials/getting_started.html#tutorials-getting-started)
+- If using a Checkpoint or Checkpoint config, your Astro base domain and OpenLineage API key.
 
 #### Setup
 
-If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't use a custom Checkpoint or Checkpoint Config, the operator detects your Astro OpenLineage configuration and sends lineage information automatically. If you use custom Checkpoints, complete the following steps:
+1. Make your Data Context accessible to your DAGs. For most use cases, Astronomer recommends adding the Data Context to your Astro project `include` folder. The GreatExpectationsOperator will access `include/great_expectations/great_expectations.yml` and use the configuration to run your Expectations. Then, add the following lines to your DAGs: 
 
-1. Update your `great_expectations.yml` file to add `OpenLineageValidationAction` to your `action_list_operator` configuration:
+    ```python
+    # Required imports for Great Expectations
+    import os
+    from pathlib import Path
+    from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
+    # Set base path for Data Context 
+    base_path = Path(__file__).parents[2]
 
-    ```yml
-    validation_operators:
-      action_list_operator:
-        class_name: ActionListValidationOperator
-        action_list:
-          - name: openlineage
-            action:
-              class_name: OpenLineageValidationAction
-              module_name: openlineage.common.provider.great_expectations
-              openlineage_host: https://<your-astro-base-domain>
-              openlineage_apiKey: <your-lineage-api-key>
-              openlineage_namespace: <NAMESPACE_NAME> # Replace with your job namespace; Astronomer recommends using a meaningful namespace such as `dev` or `prod`.
-              job_name: validate_my_dataset
+    ...
+
+    # Example task using GreatExpectationsOperator 
+    ge_task = GreatExpectationsOperator(
+      task_id="ge_task",
+      # Set directory for the Data Context
+      ge_root_dir=os.path.join(base_path, "include", "great_expectations"),
+      ...
+    )
     ```
 
-2. Lineage support for GreatExpectations requires the use of the `ActionListValidationOperator`. In each of your checkpoint's xml files in `checkpoints/`, set the `validation_operator_name` configuration to `action_list_operator`:
-
-    ```xml
-    name: check_users
-    config_version:
+   If you use the `GreatExpectationsOperator` version 0.2.0 or later and don't provide a Checkpoint file or Checkpoint Config, you can skip steps 2 and 3.
+   
+2. In each of your Checkpoint files, add `OpenLineageValidationAction` to your `action_list` like in the following example:
+    
+    ```yaml{10-17}
+    name: my.simple.chk
+    config_version: 1.0
+    template_name:
     module_name: great_expectations.checkpoint
-    class_name: LegacyCheckpoint
-    validation_operator_name: action_list_operator
-    batches:
-      - batch_kwargs:
-    ```
+    class_name: Checkpoint
+    run_name_template:
+    expectation_suite_name:
+    batch_request: {}
+    action_list:
+      - name: open_lineage
+        action:
+          class_name: OpenLineageValidationAction,
+          module_name: openlineage.common.provider.great_expectations,
+          openlineage_host: https://astro-<your-astro-base-domain>.datakin.com,
+          openlineage_apiKey: <your-openlineage-api-key>,
+          openlineage_namespace: <namespace-name> # Replace with your job namespace; Astronomer recommends using a meaningful namespace such as `dev` or `prod`,
+          job_name: validate_task_name,
+   ```
+
+3. Deploy your changes to Astro. See [Deploy code](deploy-code.md).
 
 ### Verify
 

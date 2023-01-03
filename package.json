@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "script:buildRSS": "yarn node createRSSFeeds.mjs",
     "docusaurus": "docusaurus",
-    "start": "docusaurus start",
-    "build": "docusaurus build",
+    "start": "yarn script:buildRSS && docusaurus start",
+    "build": "yarn script:buildRSS && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -27,11 +28,14 @@
     "clsx": "^1.1.1",
     "docusaurus2-dotenv": "^1.4.0",
     "file-loader": "^6.2.0",
+    "jsdom": "^20.0.3",
+    "markdown-it": "^13.0.1",
     "n": "^8.2.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "stable": "^0.1.8",
-    "url-loader": "^4.1.1"
+    "url-loader": "^4.1.1",
+    "xml": "^1.0.1"
   },
   "browserslist": {
     "production": [

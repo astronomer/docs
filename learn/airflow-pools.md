@@ -91,11 +91,12 @@ In this scenario, five tasks across two different DAGs hit the API and may run c
 In the `pool_priority_dag` below, all three of the tasks hit the API endpoint and should all be assigned to the pool, so you define the `pool` argument in the DAG `default_args` to apply to all tasks. You also want all three of these tasks to have the same priority weight and for them to be prioritized over tasks in the second DAG, so you assign a `priority_weight` of three as a default argument. This value is arbitrary. To prioritize these tasks, you can assign any integer that is higher than the priority weights defined in the second DAG.
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from datetime import datetime, timedelta
-import time
+
 import requests
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+
 
 def api_function(**kwargs):
     url = 'https://covidtracking.com/api/v1/states/'
@@ -135,12 +136,13 @@ In the `pool_unimportant_dag` DAG, there are two tasks that hit the API endpoint
 To prioritize `task_x` over `task_y` while keeping both at a lower priority than the tasks in the first DAG, you assign `task_x` a priority weight of 2 and leave `task_y` with the default priority weight of 1. 
 
 ```python
+from datetime import datetime, timedelta
+
+import requests
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime, timedelta
-import time
-import requests
+from airflow.operators.python import PythonOperator
+
 
 def api_function(**kwargs):
     url = 'https://covidtracking.com/api/v1/states/'
