@@ -140,13 +140,12 @@ There are many ways you can integrate data checks into your DAG. One method is u
 ```python
 from datetime import datetime, timedelta
 
-from airflow.operators.email_operator import EmailOperator
-from airflow.operators.python_operator import PythonOperator
-from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
-
 from airflow import DAG
+from airflow.operators.email import EmailOperator
+from airflow.operators.python import PythonOperator
 from airflow.providers.microsoft.azure.hooks.azure_data_factory import AzureDataFactoryHook
 from airflow.providers.microsoft.azure.hooks.wasb import WasbHook
+from great_expectations_provider.operators.great_expectations import GreatExpectationsOperator
 
 # Get yesterday's date, in the correct format
 yesterday_date = "{{ yesterday_ds_nodash }}"

@@ -120,41 +120,43 @@ You can define your own notifications to customize how Airflow alerts you about 
 
 ```python
 from datetime import datetime
+
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 
+
 def custom_failure_function(context):
-	"Define custom failure notification behavior"
-	dag_run = context.get('dag_run')
-	task_instances = dag_run.get_task_instances()
-	print("These task instances failed:", task_instances)
+    "Define custom failure notification behavior"
+    dag_run = context.get("dag_run")
+    task_instances = dag_run.get_task_instances()
+    print("These task instances failed:", task_instances)
+
 
 def custom_success_function(context):
-	"Define custom success notification behavior"
-	dag_run = context.get('dag_run')
+    "Define custom success notification behavior"
+    dag_run = context.get("dag_run")
     task_instances = dag_run.get_task_instances()
     print("These task instances succeeded:", task_instances)
 
 default_args = {
-	'owner': 'airflow',
-	'start_date': datetime(2018, 1, 30),
-	'on_failure_callback': custom_failure_function
-	'retries': 1
+    "owner": "airflow",
+    "start_date": datetime(2018, 1, 30),
+    "on_failure_callback": custom_failure_function,
+    "retries": 1,
 }
 
-with DAG('sample_dag',
-		default_args=default_args,
-		schedule_interval='@daily',
-		catchup=False) as dag:
+with DAG(
+    "sample_dag",
+    default_args=default_args,
+    schedule="@daily",
+    catchup=False,
+) as dag:
+    failure_task = EmptyOperator(task_id="failure_task")
 
-	failure_task = EmptyOperator(
-		task_id='failure_task'
-	)
-	
-	success_task = EmptyOperator(
-		task_id='success_task',
-		on_success_callback=custom_success_function
-	)
+    success_task = EmptyOperator(
+        task_id="success_task",
+        on_success_callback=custom_success_function,
+    )
 ```
 
 Custom notification functions can also be used to send email notifications. For example, if you want to send emails for successful task runs, you can define an email function in your `on_success_callback`. For example:
@@ -179,24 +181,26 @@ Email notifications are a native Airflow feature. The `email_on_failure` and `em
 
 ```python
 from datetime import datetime, timedelta
+
 from airflow import DAG
 
 default_args = {
-	'owner': 'airflow',
-	'start_date': datetime(2018, 1, 30),
-	'email': ['noreply@astronomer.io'],
-	'email_on_failure': True,
-	'email_on_retry': True,
-	'retry_delay' = timedelta(seconds=300)
-	'retries': 1
+    "owner": "airflow",
+    "start_date": datetime(2018, 1, 30),
+    "email": ["noreply@astronomer.io"],
+    "email_on_failure": True,
+    "email_on_retry": True,
+    "retry_delay": timedelta(seconds=300),
+    "retries": 1,
 }
 
-with DAG('sample_dag',
-	default_args=default_args,
-	schedule_interval='@daily',
-	catchup=False) as dag:
-
-...
+with DAG(
+    "sample_dag",
+    default_args=default_args,
+    schedule="@daily",
+    catchup=False,
+) as dag:
+    ...
 ```
 
 To allow Airflow to send emails, you complete the SMTP section of your `airflow.cfg` similar to this example:
@@ -291,47 +295,42 @@ Exceeding an SLA does not stop a task from running. If you want tasks to stop ru
 You can set an SLA for all tasks in your DAG by defining `'sla'` as a default argument, as shown in the following example DAG:
 
 ```python
+import time
+from datetime import datetime, timedelta
+
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime, timedelta
-import time
+from airflow.operators.python import PythonOperator
 
-def my_custom_function(ts,**kwargs):
+
+def my_custom_function(ts, **kwargs):
     print("task is sleeping")
     time.sleep(40)
 
+
 # Default settings applied to all tasks
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': True,
-    'email': 'noreply@astronomer.io',
-    'email_on_retry': False,
-    'sla': timedelta(seconds=30)
+    "owner": "airflow",
+    "depends_on_past": False,
+    "email_on_failure": True,
+    "email": "noreply@astronomer.io",
+    "email_on_retry": False,
+    "sla": timedelta(seconds=30),
 }
 
 # Using a DAG context manager, you don't have to specify the dag property of each task
-with DAG('sla-dag',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=1,
-         schedule_interval=timedelta(minutes=2),
-         default_args=default_args,
-         catchup=False 
-         ) as dag:
+with DAG(
+    "sla-dag",
+    start_date=datetime(2021, 1, 1),
+    max_active_runs=1,
+    schedule=timedelta(minutes=2),
+    default_args=default_args,
+    catchup=False,
+) as dag:
 
-    t0 = EmptyOperator(
-        task_id='start'
-    )
-
-    t1 = EmptyOperator(
-        task_id='end'
-    )
-
-    sla_task = PythonOperator(
-        task_id='sla_task',
-        python_callable=my_custom_function
-    )
+    t0 = EmptyOperator(task_id="start")
+    t1 = EmptyOperator(task_id="end")
+    sla_task = PythonOperator(task_id="sla_task", python_callable=my_custom_function)
 
     t0 >> sla_task >> t1
 ```
@@ -343,48 +342,44 @@ SLAs have some unique behaviors that you should consider before you implement th
 - SLAs can be set at the task level if a different SLA is required for each task. In the previous example, all task SLAs are still relative to the DAG execution date. For example, in the DAG below, `t1` has an SLA of 500 seconds. If the upstream tasks (`t0` and `sla_task`) combined take 450 seconds to complete, and `t1` takes 60 seconds to complete, then `t1` will miss its SLA even though the task did not take more than 500 seconds to execute.
 
 ```python
+import time
+from datetime import datetime, timedelta
+
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime, timedelta
-import time
+from airflow.operators.python import PythonOperator
 
-def my_custom_function(ts,**kwargs):
+
+def my_custom_function(ts, **kwargs):
     print("task is sleeping")
     time.sleep(40)
 
+
 # Default settings applied to all tasks
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': True,
-    'email': 'noreply@astronomer.io',
-    'email_on_retry': False
+    "owner": "airflow",
+    "depends_on_past": False,
+    "email_on_failure": True,
+    "email": "noreply@astronomer.io",
+    "email_on_retry": False,
 }
 
 # Using a DAG context manager, you don't have to specify the dag property of each task
-with DAG('sla-dag',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=1,
-         schedule_interval=timedelta(minutes=2),
-         default_args=default_args,
-         catchup=False 
-         ) as dag:
+with DAG(
+    "sla-dag",
+    start_date=datetime(2021, 1, 1),
+    max_active_runs=1,
+    schedule=timedelta(minutes=2),
+    default_args=default_args,
+    catchup=False,
+) as dag:
 
-    t0 = EmptyOperator(
-        task_id='start',
-        sla=timedelta(seconds=50)
-    )
-
-    t1 = EmptyOperator(
-        task_id='end',
-        sla=timedelta(seconds=500)
-    )
-
+    t0 = EmptyOperator(task_id="start", sla=timedelta(seconds=50))
+    t1 = EmptyOperator(task_id="end", sla=timedelta(seconds=500))
     sla_task = PythonOperator(
-        task_id='sla_task',
+        task_id="sla_task",
         python_callable=my_custom_function,
-        sla=timedelta(seconds=5)
+        sla=timedelta(seconds=5),
     )
 
     t0 >> sla_task >> t1

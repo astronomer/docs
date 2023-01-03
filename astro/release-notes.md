@@ -9,13 +9,34 @@ id: release-notes
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
 </head>
 
+<p>
+    <a href="/astro-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
+
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 7.0.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.1.0 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.8.4 ([Release notes](cli/release-notes.md))
+
+## December 20, 2022 
+
+### Additional improvements 
+
+- You can now configure OneLogin and Ping Identity as identity providers on Astro. See [Configure your identity provider](configure-idp.md#configure-your-identity-provider).
+- Workspace Members can now view **Workspace settings** in the Cloud UI.
+- Node groups that are collapsed in the lineage graph in the Cloud UI now show only the total number of connected **Jobs** and **Datasets**, instead of listing each job and dataset. This makes the lineage graph easier to navigate.
+
+    ![Collapsed node in lineage graph of Cloud UI](/img/release-notes/collapsed-lineage-node.png)
+
+### Bug fixes 
+
+- Fixed an issue where the lineage UI did not show dataset metrics when a dataset had no column-level metrics.
+- Fixed an issue where some instances of a dataset's name were inconsistent in the lineage UI.
 
 ## December 13, 2022 
 
@@ -23,14 +44,16 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 The [Cloud IDE](cloud-ide/overview.md) includes several new features which improve DAG authoring and testing:
 
-- Committing to GitHub and configuring a GitHub repository now happen in two separate menus dedicated to each function.
-- The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Using the CI/CD pipeline to deploy DAG changes to Astro is now significantly faster. 
-- The GitHub configuration menu now includes **Clone Repo** settings. You can use these settings to make files in your configured GitHub repo accessible when you run DAGs in the Cloud IDE, such as helper functions in an `include` folder. 
-- You can now explicitly mark upstream dependencies for a cell from the cell's configuration menu.
+- There is a new **Commit** button in the Cloud UI that is separate from the **Configuring GitHub** menu.
+- The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Deploying DAG changes to Astro using the CI/CD pipeline is now significantly faster.
+- The **Configure GitHub** menu in the Cloud UI now includes a **Clone Repo** settings menu. Enabling this option makes other files in your GitHub repository, such as helper functions in the `include` folder of your project, accessible when you run DAGs in the Cloud IDE.
+- You can now explicitly mark upstream dependencies for a task cell from the cell's configuration menu.
 
-### Support for n2 GCP instances
+For more information about configuring GitHub and deploying code with the Cloud IDE, see [Deploy a project from the Cloud IDE to Astro](deploy-project.md).
 
-You can now configure worker queues with the following `n2` node types on GCP:
+### Support for n2 worker types on GCP
+
+You can now configure worker queues with the following `n2` worker types on Google Cloud Platform (GCP) clusters:
 
 - `n2-standard-4`
 - `n2-standard-8`
@@ -42,17 +65,19 @@ You can now configure worker queues with the following `n2` node types on GCP:
 - `n2-highcpu-8`
 - `n2-highcpu-16`
 
+For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp.md#worker-node-size-resource-reference).
+
 ### Additional improvements 
 
 - In the **Clusters** tab of the Cloud UI, you can now click a cluster entry to see details about the cluster configuration, including which **Worker Types** are enabled for the cluster.
-- You can now see your Deployment's **ID** in the **Deployments** menu and on the Deployment information screen in the Cloud UI. A Deployment ID is required for deploying code using CI/CD.
-- You can now access your Organization's **OpenLineage URL** from the **Settings** page of the CLoud UI.
+- The Deployment details page in the Cloud UI now includes an **ID** pane. A Deployment ID is required when you deploy code using a CI/CD process.
+- The **OpenLineage URL** for your Organization is now available on the **Settings** page in the Cloud UI. An OpenLineage URL is required to [integrate data lineage from some external systems](set-up-data-lineage.md).
 - Workspaces are now sorted alphabetically in the Cloud UI.
-- You can now trigger DAG-only deploys from multiple different sources, such as a local directory or a GitHub repo, to a single Deployment.
+- In Astro CLI version 1.8.0 or later, running `astro deploy` with an empty or missing `dags` folder does not erase or override existing DAGs. Instead, the directory is excluded from the build and push process to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
 
 ### Bug fixes 
 
-- Fixed an issue where DAG-only deploys did not work if you included helper functions in your `dags` directory.
+- Fixed an issue where Astro temporarily stored DAGs for DAG-only deploys in a new directory named `/usr/local/airflow/dags/current`, which could cause import errors in user code.
 - Fixed an issue where task runs triggered in the Cloud IDE did not have access to project environment variables.
 - Fixed an issue where Deployment metrics for memory usage were not always accurate.  
 

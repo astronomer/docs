@@ -148,6 +148,7 @@ module.exports = {
         'airflow-snowflake',
         'soda-data-quality',
         'airflow-talend-integration',
+        'airflow-kafka',
      ],
     },
   ],

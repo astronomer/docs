@@ -9,6 +9,11 @@ id: release-notes
   <meta name="og:description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
 </head>
 
+<p>
+    <a href="/astro-cli-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
 

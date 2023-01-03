@@ -272,10 +272,12 @@ To test Parameter Store, write a simple DAG which calls your secret and add this
 For example, you can use the following DAG to print the value of an Airflow variable to your task logs:
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
+
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
+
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
@@ -376,10 +378,12 @@ To test Secret Manager, [create a secret](https://cloud.google.com/secret-manage
 Once you create a test secret, write a simple DAG which calls the secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
+
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
+
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
@@ -483,10 +487,12 @@ To test your Key Vault setup on Astronomer locally, [create a new secret](https:
 Once you create a test secret, write a simple DAG which calls the secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
+
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
+
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")

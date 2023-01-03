@@ -236,19 +236,20 @@ WHERE date = {{ params.date }}
 
 The next example loads data from an external source into a  database table. You'll pull data from an API and save it to a flat file on Amazon S3, which you can then load into Snowflake.
 
-This example uses the [S3toSnowflakeTransferOperator](https://registry.astronomer.io/providers/snowflake/modules/s3tosnowflakeoperator) to limit the code that you have to write.
+This example uses the [S3toSnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/s3tosnowflakeoperator) to limit the code that you have to write.
 
 First, create a DAG that pulls COVID data from an [API endpoint](https://covidtracking.com/data/api) for California, Colorado, Washington, and Oregon, saves the data to comma-separated values (CSVs) on S3, and loads each of those CSVs to Snowflake using the transfer operator. Here's the DAG code:
 
 ```python
+from datetime import datetime, timedelta
+
+import requests
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python_operator import PythonOperator
-from plugins.operators.s3_to_snowflake_operator import S3ToSnowflakeTransferOperator
+from airflow.operators.python import PythonOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-from datetime import datetime, timedelta
-import os
-import requests
+from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeOperator
+
 S3_CONN_ID = 'astro-s3-workshop'
 BUCKET = 'astro-workshop-bucket'
 name = 'covid_data'  # swap your name here
@@ -296,7 +297,7 @@ with DAG('covid_data_s3_to_snowflake',
             op_kwargs={'endpoint': endpoint, 'date': date}
         )
 
-        snowflake = S3ToSnowflakeTransferOperator(
+        snowflake = S3ToSnowflakeOperator(
             task_id='upload_{0}_snowflake'.format(endpoint),
             s3_keys=['{0}_{1}.csv'.format(endpoint, date)],
             stage='covid_stage',
@@ -336,13 +337,14 @@ While Astronomer recommends using SQL-related operators and keeping any data tra
 The following DAG pivots a table of data in Snowflake into a wide format for a report using Python:
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
-from airflow.contrib.hooks.snowflake_hook import SnowflakeHook
-from plugins.operators.s3_to_snowflake_operator import S3ToSnowflakeTransferOperator
-from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from datetime import datetime, timedelta
+
 import pandas as pd
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+from airflow.providers.snowflake.hooks.snowflake import SnowflakeHook
+from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeOperator
 
 filename = 'pivoted_data'
 S3_CONN_ID = 'astro-s3-workshop'
@@ -391,7 +393,7 @@ with DAG('pandas_processing',
             python_callable=pivot_data
         )
 
-        opr_load_data = S3ToSnowflakeTransferOperator(
+        opr_load_data = S3ToSnowflakeOperator(
             task_id='load_data',
             s3_keys=['{0}.csv'.format(filename)],
             stage='covid_stage',
