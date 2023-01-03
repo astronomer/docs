@@ -47,7 +47,7 @@ module.exports = {
     {
       type: "category",
       label: "Deploy",
-      items: ["deploy-code", "ci-cd"],
+      items: ["deploy-code", "ci-cd", "how-to-ci-cd"],
     },
     {
       type: "category",
