@@ -1,28 +1,27 @@
 ---
-sidebar_label: 'Subscribe to Astro Release Notes'
-title: 'Subscribe to Astro Release Notes'
+sidebar_label: 'Subscribe to Astro release notes'
+title: 'Subscribe to Astro release notes'
 id: release-notes-subscribe
-description: You can subscribe to the RSS feeds directly, or configure updates to be sent directly to your email or Slack.
+description: Subscribe to Astronomer Release Notes RSS feeds, or have updates sent to your email or Slack account.
 ---
 
-**We are excited to announce that you can now subscribe to Astronomer Release Notes!**
-Astronomer has created RSS feeds for Astro Release Notes, Astro CLI Release Notes, and Astro Runtime Release Notes. You can subscribe to the RSS feeds directly, or configure updates to be sent directly to your email or Slack.
+You can subscribe to RSS feeds for Astro release notes, Astro CLI release notes, and Astro Runtime release notes. You can receive RSS feeds directly, or updates can be sent to your email or Slack account.
 
-## Get Updates to your Email Inbox
+## Subscribe to RSS email updates
 
-With an RSS feed reader extension, such as Chrome’s free extension [Feeder](https://chrome.google.com/webstore/detail/rss-feed-reader/pnjaodmkngahhkoihejjehlcdlnohgmp?hl=en), you can subscribe to get updates from a feed sent directly to your email inbox.
+To have RSS feed updates sent to your email, use a browser RSS feed reader extension such as the [Chrome RSS Feed Reader](https://chrome.google.com/webstore/detail/rss-feed-reader/pnjaodmkngahhkoihejjehlcdlnohgmp?hl=en).
 
 _Note: Safari does not natively support viewing or configuring RSS feeds on Desktop or Mobile._
 
-## Get Updates on Slack
+## Subscribe to Slack updates
 
-Add the **Astro Release Notes** feed to a Slack Channel with the command  
-/feed subscribe [https://docs.astronomer.io/astro-release-notes.xml](https://docs.astronomer.io/astro-release-notes.xml)
+To add a feed to a public channel, the Slack Primary Owner role might be required. To learn more about adding RSS feeds to Slack, see [Add RSS feeds to Slack](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack).
 
-Add the **Astro Runtime Release Notes** feed to a Slack Channel with the command  
-/feed subscribe [https://docs.astronomer.io/astro-runtime-release-notes.xml](https://docs.astronomer.io/astro-runtime-release-notes.xml)
+Run each of the following commands to subscribe to different Astro release notes:
 
-Add the **Astro CLI Release Notes** feed to a Slack Channel with the command  
-/feed subscribe [https://docs.astronomer.io/astro-cli-release-notes.xml](https://docs.astronomer.io/astro-cli-release-notes.xml)
+- Astro product release notes: `/feed subscribe https://docs.astronomer.io/astro-release-notes.xml`
 
-_Note: you may need Team Owner access on Slack to configure a public channel. You can read more about the Slack RSS feed integration [here](https://slack.com/help/articles/218688467-Add-RSS-feeds-to-Slack)._
+- Astro Runtime release notes: `/feed subscribe https://docs.astronomer.io/astro-runtime-release-notes.xml`
+
+- Astro CLI release notes:  `/feed subscribe https://docs.astronomer.io/astro-cli-release-notes.xml`
+
