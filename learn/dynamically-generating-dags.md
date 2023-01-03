@@ -331,15 +331,16 @@ for filename in os.listdir(config_filepath):
 To generate your DAG files, you can either run this script on demand or as part of your CI/CD workflow. After running the script, your final directory will appear similar to the example below, where the `include/` directory contains the files from the previous example, and the `dags/` directory contains the two dynamically generated DAGs:
 
 ```bash
-dags/
-├── dag_file_1.py
-├── dag_file_2.py
-include/
-├── dag-template.py
-├── generate-dag-files.py
-└── dag-config
-    ├── dag1-config.json
-    └── dag2-config.json
+.
+├── dags
+│   ├── dag_file_1.py
+│   └── dag_file_2.py
+└── include
+    ├── dag-template.py
+    ├── generate-dag-files.py
+    └── dag-config
+        ├── dag1-config.json
+        └── dag2-config.json
 ```
 
 This is a straightforward example that works only if all of the DAGs follow the same pattern. However, it could be expanded upon to have dynamic inputs for tasks, dependencies, different operators, and so on.

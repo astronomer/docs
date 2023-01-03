@@ -83,20 +83,20 @@ Astronomer recommends storing the `include` folder inside the `dags` directory o
 Here is how the recommended directory structure might appear:
 
 ```bash
-    ├── airflow_settings.yaml
-    ├── dags
-    │   └── include
-            └── helper_functions
-                └── helper.py
-            └── templated_SQL_scripts
-    │       └── custom_operators
-    ├── Dockerfile
-    ├── tests
-    │   └── test_dag_integrity.py
-    ├── packages.txt
-    ├── plugins
-    │   └── example-plugin.py
-    └── requirements.txt
+├── airflow_settings.yaml
+├── dags
+│   └── include
+│       ├── helper_functions
+│       │   └── helper.py
+│       ├── templated_SQL_scripts
+│       └── custom_operators
+├── Dockerfile
+├── tests
+│   └── test_dag_integrity.py
+├── packages.txt
+├── plugins
+│   └── example-plugin.py
+└── requirements.txt
 ```
 
 If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
@@ -247,14 +247,14 @@ A project with multiple `.env` files might look like the following:
 
 ```
 my_project
-  ├── Dockerfile
-  └──  dags
-    └── my_dag
-  ├── plugins
-    └── my_plugin
-  ├── airflow_settings.yaml
-  ├── .env
-    └── dev.env
+├── Dockerfile
+├── dags
+│   └── my_dag
+├── plugins
+│   └── my_plugin
+├── airflow_settings.yaml
+└── .env
+    ├── dev.env
     └── prod.env
 ```
 

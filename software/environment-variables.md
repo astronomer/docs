@@ -94,14 +94,14 @@ In other words,your project might look like the following:
 
 ```
 my_project
-  ├── Dockerfile
-  └──  dags
-    └── my_dag
-  ├── plugins
-    └── my_plugin
-  ├── airflow_settings.yaml
-  ├── .env
-    └── dev.env
+├── Dockerfile
+├── dags
+│   └── my_dag
+├── plugins
+│   └── my_plugin
+├── airflow_settings.yaml
+└── .env
+    ├── dev.env
     └── prod.env
 ```
 

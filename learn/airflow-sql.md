@@ -43,11 +43,11 @@ If you use the Astro CLI, you can store scripts like SQL queries in the `include
 
 ```bash
 ├─ dags/  
-|    ├─ example-dag.py  
+|    └─ example-dag.py  
 ├─ plugins/  
 ├─ include/  
 |    ├─ query1.sql  
-|    ├─ query2.sql    
+|    └─ query2.sql    
 ├─ Dockerfile  
 ├─ packages.txt  
 └─ requirements.txt

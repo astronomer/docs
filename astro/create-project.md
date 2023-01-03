@@ -43,14 +43,14 @@ To run Airflow pipelines on Astro, you first need to create an Astro project. An
     ```
     .
     ├── dags # Where your DAGs go
-    │   └── example-dag-basic.py # Example DAG that showcases a simple ETL data pipeline
-    |   └── example-dag-advanced.py # Example DAG that showcases more advanced Airflow features, such as the TaskFlow API
+    │   ├── example-dag-basic.py # Example DAG that showcases a simple ETL data pipeline
+    │   └── example-dag-advanced.py # Example DAG that showcases more advanced Airflow features, such as the TaskFlow API
     ├── Dockerfile # For the Astro Runtime Docker image, environment variables, and overrides
     ├── include # For any other files you'd like to include
     ├── plugins # For any custom or community Airflow plugins
-    |   └── example-plugin.py
+    │   └── example-plugin.py
     ├── tests # For any DAG unit test files to be run with pytest
-    |   └── test_dag_integrity.py # Test that checks for basic errors in your DAGs
+    │   └── test_dag_integrity.py # Test that checks for basic errors in your DAGs
     ├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
     ├── packages.txt # For OS-level packages
     └── requirements.txt # For Python packages
