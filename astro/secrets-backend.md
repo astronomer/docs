@@ -338,7 +338,7 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
 ```text
 SECRET_VAR_SERVICE_ACCOUNT='{
   "type": "service_account",
-  "project_id": "my-project",
+  "project_id": "<your-project-id>",
   "private_key_id": "asdfa2789234jsdhfkahyf23gg1671",
   "private_key": "-----BEGIN PRIVATE KEY-----\nmygarbledkey\n-----END PRIVATE KEY-----\n",
   ...
