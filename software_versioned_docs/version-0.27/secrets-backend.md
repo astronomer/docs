@@ -130,7 +130,7 @@ apache-airflow-providers-hashicorp
 
 Then, add the following environment variables to your `Dockerfile`:
 
-```dockerfile
+```docker
 # Make sure to replace `<your-approle-id>` and `<your-approle-secret>` with your own values.
 ENV AIRFLOW__SECRETS__BACKEND="airflow.contrib.secrets.hashicorp_vault.VaultBackend"
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "https://vault.vault.svc.cluster.local:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}'
@@ -236,7 +236,7 @@ apache-airflow-providers-amazon
 
 Then, add the following environment variables to your project's `Dockerfile`:
 
-```dockerfile
+```docker
 # Make sure to replace `<your-aws-key>` and `<your-aws-secret-key>` with your own values.
 ENV AWS_ACCESS_KEY_ID="<your-aws-key>"
 ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-key>"
@@ -358,7 +358,7 @@ apache-airflow-providers-google
 
 Then, add the following environment variables to your project's Dockerfile:
 
-```dockerfile
+```docker
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": <your-key-file>}'
 ```
@@ -466,7 +466,7 @@ apache-airflow-providers-microsoft-azure
 
 In your `Dockerfile`, add the following environment variables with your own values:
 
-```dockerfile
+```docker
 ENV AZURE_CLIENT_ID="<your-client-id>" # Found on App Registration page > 'Application (Client) ID'
 ENV AZURE_TENANT_ID="<your-tenant-id>" # Found on App Registration page > 'Directory (tenant) ID'
 ENV AZURE_CLIENT_SECRET="<your-client-secret>" # Found on App Registration Page > Certificates and Secrets > Client Secrets > 'Value'

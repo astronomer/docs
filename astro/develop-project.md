@@ -282,6 +282,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
     RUN update-ca-certificates
     USER astro
     ```
+    
 2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment) or deploy to Astro. See [Deploy code](deploy-code.md).

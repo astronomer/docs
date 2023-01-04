@@ -130,7 +130,7 @@ chmod +x my_bash_script.sh
 
 If you use the Astro CLI, you can run this command before running `astro dev start`, or you can add the command to your project's Dockerfile with the following `RUN` command:
 
-```Dockerfile
+```docker
 RUN chmod +x /usr/local/airflow/include/my_bash_script.sh
 ```
 
