@@ -72,6 +72,7 @@ new_proj/
 Each SQL project is composed of three directories:
 
 - `config`: This folder contains configurations for different environments for running SQL. These configurations store connections to external databases. Each SQL environment has one subfolder containing its own `configuration.yml`. The default SQL project includes `default` and `dev` environments.
+    - `config/global.yml`: This file contains configurations that apply to all of your SQL environments.
 - `workflows`: This folder contains independent SQL workflows. A workflow is a subfolder containing related SQL queries and data management tasks that run together. The default SQL project includes a few example workflows that you can run to test functionality.
 - `data`: This folder can contain datasets to run your SQL workflows. The default SQL project includes sample film ranking and retail SQLite databases (`.db` files).
 
