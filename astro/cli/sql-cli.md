@@ -197,7 +197,7 @@ After you run this command, you can add the DAG to an existing Astro project and
 
 Export SQL a workflow to an Astro project to test the workflow as a DAG and view execution information in the Airflow UI. 
 
-1. In the `config/global.yml` file of your SQL project, set `dags_folder` to the location of your Astro project `dags` folder. Set `data_dir` to the location of your Astro project `include` folder.
+1. In the `config/global.yml` file of your SQL project, set `dags_folder` to the absolute file path of your Astro project `dags` folder. Set `data_dir` to the absolute file path of your Astro project `include` folder.
 2. To export a DAG from an existing SQL project, copy the contents your SQL project `data` folder into your Astro project `include` folder. To export a DAG from a new SQL CLI project, run `astro flow init --data-dir` to copy the contents of the default `data` folder into your Astro project.
 3. Run the following command to execute your SQL workflow and export the DAG to your Astro CLI `dags` folder:
 
