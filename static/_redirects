@@ -7,10 +7,10 @@
 /software/0.31/* /software/:splat
 
 # redirect relative links for deprecated Software docs to archive page. Version-specific
-/software/0.16/* https://github.com/astronomer/docs/tree/refactor-archive/archived_software_docs/version-0.16/splat
-/software/0.23/* https://github.com/astronomer/docs/tree/refactor-archive/archived_software_docs/version-0.23/splat
-/software/0.26/* https://github.com/astronomer/docs/tree/refactor-archive/archived_software_docs/version-0.26/splat
-/software/0.27/* https://github.com/astronomer/docs/tree/refactor-archive/archived_software_docs/version-0.27/splat
+/software/0.16/* https://github.com/astronomer/docs/tree/refactor-archive/archived_software_docs/version-0.16/:splat
+/software/0.23/* https://github.com/astronomer/docs/tree/refactor-archive/archived_software_docs/version-0.23/:splat
+/software/0.26/* https://github.com/astronomer/docs/tree/refactor-archive/archived_software_docs/version-0.26/:splat
+/software/0.27/* https://github.com/astronomer/docs/tree/refactor-archive/archived_software_docs/version-0.27/:splat
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
