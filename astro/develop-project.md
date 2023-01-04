@@ -282,6 +282,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
     RUN update-ca-certificates
     USER astro
     ```
+    
 2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment) or deploy to Astro. See [Deploy code](deploy-code.md).
@@ -435,7 +436,7 @@ This example assumes that the name of each of your Python packages is identical 
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
     ```
@@ -543,7 +544,9 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install OS-Level packages
     COPY packages.txt .
+    USER root
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
+    USER astro
 
     FROM stage1 AS stage2
     # Install Python packages

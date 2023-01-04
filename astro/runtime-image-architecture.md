@@ -23,8 +23,8 @@ For more information about the features that are available in Astro Runtime rele
 
 Astro Runtime versions are released regularly and use [semantic versioning](https://semver.org/). Astronomer ships major, minor, and patch releases of Astro Runtime in the format of `major.minor.patch`.
 
-- **Major** versions are released for significant feature additions. This includes new major or minor versions of Apache Airflow as well as API or DAG specification changes that are not backwards-compatible.
-- **Minor** versions are released for functional changes. This includes API or DAG specification changes that are backwards-compatible.
+- **Major** versions are released for significant feature additions. This includes new major or minor versions of Apache Airflow, as well as API or DAG specification changes that are not backward compatible.
+- **Minor** versions are released for functional changes. This includes API or DAG specification changes that are backward compatible, which might include new minor versions of `astronomer-providers` and `openlineage-airflow`.
 - **Patch** versions are released for bug and security fixes that resolve unwanted behavior. This includes new patch versions of Apache Airflow, `astronomer-providers`, and `openlineage-airflow`.
 
 Every version of Astro Runtime correlates to an Apache Airflow version. All Deployments on Astro must run only one version of Astro Runtime, but you can run different versions of Astro Runtime on different Deployments within a given cluster or Workspace. See [Create a Deployment](create-deployment.md#create-a-deployment).
@@ -39,15 +39,12 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 
 | Astro Runtime | Apache Airflow version |
 | ------------- | ---------------------- |
-| 4.1.x         | 2.2.4                  |
-| 4.2.x         | 2.2.4-2.2.5            |
-| 5.0.x         | 2.3.0-2.3.4            |
-| 6.0.x         | 2.4.0-2.4.1            |
-| 7.0.x         | 2.5.0            |
+| 4             | 2.2                    |
+| 5             | 2.3                    |
+| 6             | 2.4                    |
+| 7             | 2.5                    |
 
-:::info
-Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
-:::
+For version compatibility information, see the [Runtime release notes](runtime-release-notes.md).
 
 ## Default environment variables
 
@@ -120,13 +117,11 @@ For a list of all Astro Runtime Docker images, see [Quay.io](https://quay.io/rep
 The following table lists the operating systems and architectures supported by each Astro Runtime version. If you're using a Mac computer with an M1 chip, Astronomer recommends using Astro Runtime 6.0.4 or later.
 
 | Astro Runtime | Operating System (OS)                 | Architecture    |
-| ------------- | ---------------------- | -------------   |
-| 4.1.x         | Debian 11.3 (bullseye)        | AMD64           |
-| 4.2.x         | Debian 11.3 (bullseye)        | AMD64           |
-| 5.0.x         | Debian 11.3 (bullseye)        | AMD64           |
-| 6.0.0 - 6.0.3         | Debian 11.3 (bullseye)        | AMD64           |
-| 6.0.4 - 6.0.x         | Debian 11.3 (bullseye)        | AMD64 and ARM64 |
-| 7.0.x         | Debian 11.3 (bullseye)        | AMD64 and ARM64 |
+| ------------- | ------------------------------------- | -------------   |
+| 4             | Debian 11.3 (bullseye)                | AMD64           |
+| 5             | Debian 11.3 (bullseye)                | AMD64           |
+| 6             | Debian 11.3 (bullseye)                | AMD64 and ARM64 |
+| 7             | Debian 11.3 (bullseye)                | AMD64 and ARM64 |
 
 Astro Runtime 6.0.4 and later images are multi-arch and support AMD64 and ARM64 processor architectures for local development. Docker automatically uses the correct processor architecture based on the computer you are using.
 

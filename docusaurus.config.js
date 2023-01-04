@@ -33,6 +33,9 @@ module.exports = {
 
       //... other Algolia params
     },
+    prism: {
+      additionalLanguages: ['docker'],
+    },
     colorMode: {
       disableSwitch: false,
     },
@@ -274,5 +277,8 @@ module.exports = {
       "data-domain": 'docs.astronomer.io',
       defer: true,
     }
+  ],
+  clientModules: [
+    require.resolve('./segment-page.mjs'),
   ],
 };

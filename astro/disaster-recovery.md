@@ -33,4 +33,4 @@ Astronomer will not be able to restore:
 
 Organization settings, Workspace settings, and user management configured in Astro's control plane will be unaffected by a region failure in the data plane.
 
-Astronomer plans to introduce self-serve and automation enhancements as part of our 2022 roadmap. Please submit feedback to [Astronomer support](https://support.astronomer.io/) if you are interested in joining the conversation.
+Astronomer plans to introduce self-serve and automation enhancements as part of its product roadmap. Please submit feedback to [Astronomer support](https://support.astronomer.io/) if you are interested in joining the conversation.

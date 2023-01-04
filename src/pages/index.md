@@ -14,7 +14,7 @@ import AstroCard from '@site/src/components/AstroCard';
 
 # Astronomer Docs
 
-<p class="DocItem__header-description">Learn everything you need to know about Astro and Apache Airflow™</p>
+<p className="DocItem__header-description">Learn everything you need to know about Astro and Apache Airflow™</p>
 
 ---
 

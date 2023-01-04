@@ -77,12 +77,12 @@ You can see that these limits aren't very big. And even if you think your data m
 In this section, you'll review a DAG that uses XCom to pass data between tasks. The DAG uses XComs to analyze the increase in total number of Covid tests for the current day for a particular state. To implement this use case, the first task makes a request to the [Covid Tracking API](https://covidtracking.com/data/api) and pulls the `totalTestResultsIncrease` parameter from the results. The second task takes the results from the first task and performs an analysis. This is a valid use case for XCom, because the data being passed between the tasks is a single integer.
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+import json
 from datetime import datetime, timedelta
 
 import requests
-import json
+from airflow import DAG
+from airflow.operators.python import PythonOperator
 
 url = 'https://covidtracking.com/api/v1/states/'
 state = 'wa'
@@ -207,14 +207,14 @@ While this is a great way to pass data that is too large to be managed with XCom
 Building on the previous COVID example, you are now interested in getting all of the daily COVID data for a state and processing it. This case would not be ideal for XCom, but since the data returned is a small dataframe, it can be processed with Airflow.
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
-from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from datetime import datetime, timedelta
-
 from io import StringIO
+
 import pandas as pd
 import requests
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 
 s3_conn_id = 's3-conn'
 bucket = 'astro-workshop-bucket'

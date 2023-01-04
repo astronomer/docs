@@ -136,6 +136,7 @@ module.exports = {
       items: [
         'airflow-redshift',
         'airflow-sagemaker',
+        'airflow-kafka',
         'airflow-azure-container-instances',
         'airflow-azure-data-explorer',
         'airflow-azure-data-factory-integration',
@@ -148,7 +149,6 @@ module.exports = {
         'airflow-snowflake',
         'soda-data-quality',
         'airflow-talend-integration',
-        'airflow-kafka',
      ],
     },
   ],
