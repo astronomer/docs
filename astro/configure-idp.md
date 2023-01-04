@@ -182,4 +182,4 @@ When a user assigned to the application accesses Astro, they will be brought aut
 
 By default, users have access to all possible authentication methods when logging into Astro. You can remove specific authentication options so that users can use only the methods that your team wants to support, such as your third party identity provider.
 
-To restrict which authentication options are available on Astro, contact [Astronomer support](https://cloud.astronomer.io/support).
+To restrict which authentication options are available on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).
