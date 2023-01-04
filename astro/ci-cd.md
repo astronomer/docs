@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'CI/CD'
+sidebar_label: 'CI/CD Templates'
 title: 'Automate code deploys with CI/CD'
 id: ci-cd
 ---
