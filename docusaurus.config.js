@@ -34,7 +34,7 @@ module.exports = {
       //... other Algolia params
     },
     prism: {
-      additionalLanguages: ['docker', 'dockerfile'],
+      additionalLanguages: ['docker'],
     },
     colorMode: {
       disableSwitch: false,
