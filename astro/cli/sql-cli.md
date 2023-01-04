@@ -202,7 +202,7 @@ Export SQL a workflow to an Astro project to test the workflow as a DAG and view
 3. Run the following command to execute your SQL workflow and export the DAG to your Astro CLI `dags` folder:
 
     ```sh
-    astro flow run <your-workflow> --project-dir <your-project-dir>`
+    astro flow run <your-workflow> --project-dir <absolute-filepath-to-astro-project-directory>`
     ```
 
 You can now run the SQL workflow as a DAG from your Astro project. See [Build and run a project locally](https://docs.astronomer.io/astro/develop-project#build-and-run-a-project-locally).
