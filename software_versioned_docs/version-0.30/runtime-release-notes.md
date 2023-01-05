@@ -99,7 +99,7 @@ These changes were backported from Apache Airflow 2.4.2, which is not yet genera
 
 ## Astro Runtime 5.1.0
 
-- Release date: January 4, 2022
+- Release date: January 4, 2023
 - Airflow version: 2.3.4
 
 ### Additional improvements
