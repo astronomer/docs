@@ -54,12 +54,12 @@ After receiving your request, Astronomer support initiates a peering request and
 
 Private Service Connect allows Astro to access GCP data that belongs to different groups, teams, projects, and organizations. To learn more about Private Service Connect, see [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect).
 
-All Astro data planes on GCP are configured with a private services connection that accepts all Google APIs. All connections to Google services use the `googleapis.com` domain to ensure the privacy and security of communications within the Google network. A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
+The Astro data plane hosted on GCP is configured with a private services connection that accepts all Google APIs. All connections to Google services use the `googleapis.com` domain to ensure the privacy and security of communications within the Google network. A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
 
 ```sh
 gcloud services list --available --filter="name:googleapis.com"
 ```
-You can use the default GCP DNS name in your DAGS to simplify the implementation of GCP private services connections. Astronomer has implemented a default GCP DNS zone and resource record that routes the default GCP DNS name through the private services connection.
+You can use the default GCP DNS name in your DAGs to simplify the implementation of GCP private services connections. Astronomer has implemented a default GCP DNS zone and resource record that routes the default GCP DNS name through the private services connection.
 
 </TabItem>
 
