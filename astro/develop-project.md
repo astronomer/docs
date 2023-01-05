@@ -480,7 +480,7 @@ This example assumes that the name of each of your Python packages is identical 
 2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<ssh-key>` with your SSH private key file name.
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github=“$HOME/.ssh/<ssh-key>” -t $image_name .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
 3. Optional. Test your DAGs locally. See [Restart your local environment](develop-project.md#restart-your-local-environment).
@@ -537,7 +537,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer=“Astronomer <humans@astronomer.io>”
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
     ARG BUILD_NUMBER=-1
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
@@ -559,7 +559,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
     ```
