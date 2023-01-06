@@ -119,7 +119,7 @@ Confirm the `configuration.name` field is correct for the Deployment, and then r
 astro deployment update -d <deployment-id> --deployment-file deployment.yaml
 ```
 
-The updated Deployment appears in the Cloud UI. You can update any of the fields in the `environment_variables`, `configuration`, `worker_queues`, or `alert_emails` sections of the Deployment file. 
+The updated Deployment appears in the Cloud UI.
 
 When updating a Deployment with a Deployment file, keep the following in mind:
 
