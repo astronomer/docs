@@ -27,7 +27,7 @@ Astronomer Software's key features ensure that enterprise organizations can run 
 
 The following diagram shows how you can run Airflow in your private cloud using Astronomer Software:
 
-![Astronomer Software Overview](https://assets2.astronomer.io/main/enterpriseArchitecture.svg)
+![Astronomer Software Overview](/img/software/enterpriseArchitecture.svg)
 
 ## Installation Guides
 

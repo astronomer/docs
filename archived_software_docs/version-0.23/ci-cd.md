@@ -29,7 +29,7 @@ Using CI/CD, you can automatically deploy DAGs to your Airflow Deployment on Ast
 
 That would look something like this:
 
-![CI/CD Workflow Diagram](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-flow.png)
+![CI/CD Workflow Diagram](/img/software/ci-cd-flow.png)
 
 ### CI/CD on Astronomer
 
@@ -108,7 +108,7 @@ If you prefer to provision a Service Account through the Software UI, start by l
 
 From the Software UI, navigate to: `Deployment` > `Service Accounts`
 
-![New Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-new-service-account.png)
+![New Service Account](/img/software/ci-cd-new-service-account.png)
 
 #### Configure your Service Account
 
@@ -120,7 +120,7 @@ Upon creating a Service Account, make sure to:
 
 > **Note:** In order for a Service Account to have permission to push code to your Airflow Deployment, it must have either the "Editor" or "Admin" role. For more information on Workspace roles, refer to our ["Roles and Permissions"](workspace-permissions.md) doc.
 
-![Name Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-name-service-account.png)
+![Name Service Account](/img/software/ci-cd-name-service-account.png)
 
 #### Copy the API Key
 
@@ -128,7 +128,7 @@ Once you've created your new Service Account, grab the API Key that was immediat
 
 > **Note:** This API key will only be visible during the session.
 
-![Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-api-key.png)
+![Service Account](/img/software/ci-cd-api-key.png)
 
 ## Step 2: Authenticate and Push to Docker
 
