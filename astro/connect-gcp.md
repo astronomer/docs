@@ -43,7 +43,7 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC, contact [
 
 - Astro cluster ID and name
 - Google Cloud project ID of the target VPC
-- VPC ID of the target VPC
+- VPC NAME of the target VPC
 - Classless Inter-Domain Routing (CIDR) block of the target VPC
 
 After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
