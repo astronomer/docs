@@ -187,7 +187,7 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
    - **Key:** `DATADOG_API_KEY`
    - **Value:** `<Your-Datadog-API-key>`.
    Select the **Secret?** checkbox. This ensures that your Datadog API key is saved securely and is not available to Workspace users in plain text.
-4. Default Datadog site specified in Astro is **datadoghq.com**. Only if you use different one, extra variable has to be created:
+4. Optional. Add the following environment variable if your organization doesn't use the default Datadog site datadoghq.com:
    - **Key:** `DATADOG_SITE`
    - **Value:** `<Your-Datadog-Site>`
 5. Click **Save variable**.
