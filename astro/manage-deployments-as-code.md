@@ -9,7 +9,7 @@ id: manage-deployments-as-code
   <meta name="og:description" content="Manage an Astro Deployment with JSON or YAML Deployment file. This Deployment file can be used to store, create, or update a Deployment's configuration." />
 </head>
 
-After you configure your Astro Deployment, it can  be stored,  stored, created or updated  using a JSON or YAML Deployment file. Using Deployment files to manage your Deployments provides the following benefits:
+After you configure your Astro Deployment, it can  be stored, created or updated  using a JSON or YAML Deployment file. Using Deployment files to manage your Deployments provides the following benefits:
 
 - Quickly update Deployments with a large number of worker queues or environment variables.
 - Manage Deployments as files from a Github repository.
@@ -17,7 +17,7 @@ After you configure your Astro Deployment, it can  be stored,  stored, created o
 - Share environment variables and worker queues between Deployments.
 - Create Deployment templates for specific use cases. For example, the worker queues and environment variables in an existing machine learning Deployment template can be repurposed in a machine learning Deployment.
 
-# Deployment File Spec
+## Deployment file contents
 
 A Deployment file includes the following specifications:
 
@@ -100,7 +100,7 @@ Run the following command to create a new Deployment on Astro based on a Deploym
 astro deployment create --name <new-deployment-name> --deployment-file deployment.yaml
 ```
 
-The name provided with the `—name` flag will override name field in the Deployment file. If you’d like you could also delete the `metadata` section and change the `name`, `cluster_name`, or any section you’d like before running `astro deployment create`. A few notes on creating a Deployment with a Deployment file:
+Keep the following in mind when creating a Deployment with a Deployment file:
 
 - The `name` and `cluster_name` fields are the only fields required to create a Deployment. The CLI will create the Deployment using default values for each unspecified configuration. These default values are the same default values for when you create a Deployment from the Cloud UI.
 - When creating worker queues, only the `name` field is required. The rest of the fields are autopopulated.
@@ -114,7 +114,9 @@ Confirm the `configuration.name` field is correct for the Deployment, and then r
 astro deployment update -d <deployment-id> --deployment-file deployment.yaml
 ```
 
-You now can see your updated Deployment in the Astro UI. You can update any of the fields in the `environment_variables`, `configuration`, `worker_queues`, or `alert_emails` sections of the Deployment File. A few notes on updating a Deployment with a Deployment file:
+The updated Deployment appears in the Cloud UI. You can update any of the fields in the `environment_variables`, `configuration`, `worker_queues`, or `alert_emails` sections of the Deployment file. 
+
+When updating a Deployment with a Deployment file, keep the following in mind:
 
 - You can’t change the Cluster the Deployment runs on. However, you can use the Deployment file to create a new Deployment with a different Cluster.
 - The Deployment's environment variables are updated to match the exact variables configured in `environment_variables`. Any variables that exist in the Deployment but are not in the Deployment file are deleted. If an environment variable is a secret, remove the value from the Deployment file to ensure it doesn’t change during an update.
