@@ -51,7 +51,7 @@ t0 >> tg1 >> t3
 
 In the Airflow UI, blue highlighting is used to identify tasks and task groups. When you click and expand `group1`, blue circles identify the task group dependencies. The task immediately to the right of the first blue circle (`t1`) gets the group's upstream dependencies and the task immediately to the left (`t2`) of the last blue circle gets the group's downstream dependencies. The task group dependencies are shown in the following animation: 
 
-![UI task group](https://assets2.astronomer.io/main/guides/task-groups/task_groups_ui.gif)
+![UI task group](/img/guides/task_group.png)
 
 When your task is within a task group, your callable `task_id` is the `task_id` prefixed with the `group_id`. For example, `group_id.task_id`. This ensures the task_id is unique across the DAG. It is important that you use this format when calling specific tasks with XCOM passing or branching operator decisions.
 
