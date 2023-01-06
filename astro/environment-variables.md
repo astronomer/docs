@@ -41,12 +41,6 @@ If you prefer to work with the Astro CLI, you can create and update environment 
 
 6. Click **Save Variables** to save your changes. Your Airflow scheduler, webserver, and workers restart. After saving, it can take up to two minutes for new variables to be applied to your Deployment.
 
-:::note
-
-You can create, update, and delete multiple worker queues at once. See [Deployments as Code](manage-deploymens-as-code.md).
-
-:::
-
 ### Edit existing values
 
 After you set an environment variable key, only the environment variable value can be modified. You can modify environment variables that are set as secret. However, the variable value is never shown. When you modify a secret environment variable, you'll be prompted to enter a new value.

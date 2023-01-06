@@ -72,8 +72,6 @@ $ astro deployment update cl03oiq7d80402nwn7fsl3dmv -d="My Deployment Descriptio
 $ astro deployment update --deployment-file deployment.yaml
 ```
 
-
-
 </TabItem>
 
 <TabItem value="software">
