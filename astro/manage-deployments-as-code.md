@@ -71,7 +71,6 @@ The `configuration` section contains all settings that you can configure from th
 - [Update a Deployment name and description](configure-deployment-resources.md#update-a-deployment-name-and-description)
 - [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
 
-
 ### Environment variable settings
 
 The `environment_variables` section contains configurations Deployment environment variables. See [Environment variables](environment-variables.md).
@@ -80,14 +79,14 @@ You can set `environment_variables.is_secret: true` on any new or existing envir
 
 ### Worker queue settings
 
-The `worker_queues` section defines the worker queues for a Deployment. All Deployment files must include a worker queue named `default` to allow worker queue settings to be added or updated, If you don't enter specific values for a worker queue, default values are applied.
+The `worker_queues` section defines the worker queues for a Deployment. All Deployment files must include configuration for a `default` worker queue. If you don't enter specific values for a worker queue, default values are applied.
 
 ## Create a Deployment file from an existing Deployment
 
 Run the following command to create a Deployment file from an existing Deployment:
 
 ```bash
-astro deployment inspect -d [deployment_id] > deployment.yaml
+astro deployment inspect -d <deployment-id> > deployment.yaml
 ```
 
 After the Deployment file is created, you can use it to update the settings of original Deployment, or you can use it to create a new Deployment.
@@ -103,10 +102,16 @@ astro deployment create --name <new-deployment-name> --deployment-file deploymen
 Keep the following in mind when creating a Deployment with a Deployment file:
 
 - The `name` and `cluster_name` fields are the only fields required to create a Deployment. The CLI will create the Deployment using default values for each unspecified configuration. These default values are the same default values for when you create a Deployment from the Cloud UI.
-- When creating worker queues, only the `name` field is required. The rest of the fields are autopopulated.
+- When creating worker queues, only the `name` field is required. Any unspecified fields are populated with smart defaults based on your cluster's available worker types. 
 - When creating environment variables, each variable must include a `key` and a `value`.
 
 ## Update a Deployment with a Deployment file
+
+:::danger 
+
+You must push individual Deployment changes alongside all existing Deployment configurations whenever you update a Deployment with a Deployment file. If a configuration exists on Astro but doesn't exist in your Deployment file, such as a worker queue, that configuration is deleted when you push your Deployment file. 
+
+:::
 
 Confirm the `configuration.name` field is correct for the Deployment, and then run the following command:
 
@@ -118,7 +123,7 @@ The updated Deployment appears in the Cloud UI. You can update any of the fields
 
 When updating a Deployment with a Deployment file, keep the following in mind:
 
-- You can’t change the Cluster the Deployment runs on. However, you can use the Deployment file to create a new Deployment with a different Cluster.
+- You can’t change the cluster the Deployment runs on. However, you can use the Deployment file to create a new Deployment with a different cluster.
 - The Deployment's environment variables are updated to match the exact variables configured in `environment_variables`. Any variables that exist in the Deployment but are not in the Deployment file are deleted. If an environment variable is a secret, remove the value from the Deployment file to ensure it doesn’t change during an update.
 - Worker queues are updated to match the `worker_queues` section in the Deployment file. Any existing worker queues that are in the Deployment but not in the Deployment file are deleted.
 
