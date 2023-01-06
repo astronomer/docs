@@ -58,6 +58,7 @@ module.exports = {
         "api-keys",
         "environment-variables",
         "secrets-backend",
+        "manage-deployments-as-code",
       ],
     },
     {
