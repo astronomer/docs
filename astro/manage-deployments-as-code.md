@@ -9,7 +9,7 @@ id: manage-deployments-as-code
   <meta name="og:description" content="Manage an Astro Deployment with JSON or YAML Deployment file. This Deployment file can be used to store, create, or update a Deployment's configuration." />
 </head>
 
-After you configure your Astro Deployment, it can  be stored, created or updated  using a JSON or YAML Deployment file. Using Deployment files to manage your Deployments provides the following benefits:
+After you configure your Astro Deployment, it can be stored, created or updated using a JSON or YAML Deployment file. Using Deployment files to manage your Deployments provides the following benefits:
 
 - Quickly update Deployments with a large number of worker queues or environment variables.
 - Manage Deployments as files from a Github repository.
