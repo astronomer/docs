@@ -383,7 +383,13 @@ If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.a
     AZURE_CONFIG_DIR=/usr/local/airflow/.azure:ro
     ```
 
-When you run Airflow locally, all Azure connections without defined credentials now automatically fall back to your user credentials when connecting to Azure.
+When you run Airflow locally, all Azure connections without defined credentials automatically fall back to your user credentials when connecting to Azure. Airflow applies and overrides user credentials for Azure connections in the following order:
+
+- Mounted user credentials in `/~/.azure`.
+- Configurations in `azure_client_id`, `azure_tenant_id`, and `azure_client_secret`.
+- An explicit username & password provided in the connection.
+
+For example, if you completed the configuration in this document and then created a new AWS connection with its own username and password, Airflow would use those credentials instead of the credentials in `~/.aws/config`.
 
 </TabItem>
 </Tabs>
