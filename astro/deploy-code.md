@@ -196,7 +196,7 @@ When you add an `.airflowignore` file to a DAGs directory, the files listed in t
 
 1. In your Astro project, create a new file named `.airflowignore` in a DAGs directory.
 
-2. List the files you want ignored when pushing code to Astro.
+2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. For example, `mydag.py` or `data-team-dags`. The ignored files must be in the same `dags` directory of your Astro project.
 
 3. Add the DAG name file path to the file.
 
