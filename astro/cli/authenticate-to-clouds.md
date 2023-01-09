@@ -144,7 +144,13 @@ Depending on your Docker configurations, you might have to make your `.aws` fold
     AWS_SHARED_CREDENTIALS_FILE=/usr/local/airflow/.aws/credentials
     ```
 
-When you run Airflow locally, all AWS connections without defined credentials automatically fall back to your user credentials when connecting to AWS.
+When you run Airflow locally, all AWS connections without defined credentials automatically fall back to your user credentials when connecting to AWS. Airflow applies and overrides user credentials for AWS connections in the following order:
+
+- Mounted user credentials in the `~/.aws/config` file
+- Configurations in `aws_access_key_id', 'aws_secret_access_key', and 'aws_session_token' 
+- An explicit username & password provided in the connection.
+
+For example, if you completed the configuration in this document and then created a new AWS connection with its own username and password, Airflow would use those credentials instead of the credentials in `~/.aws/config`.
 
 </TabItem>
 <TabItem value="gcp">
