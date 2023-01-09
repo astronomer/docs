@@ -188,7 +188,7 @@ WARNING: The requested image's platform (linux/amd64) does not match the detecte
 ```
 :::
 
-## Ignore files when deploying code
+## Ignore files with `.airflowignore`
 
 When you create an `.airflowignore` file, the files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler when you run `astro dev start` or when you deploy your project to Astro. DAGs listed in this file aren't deployed and don't appear in the Airflow UI. The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#airflowignore).
 
