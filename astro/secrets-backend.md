@@ -18,7 +18,7 @@ While secret values of Airflow variables and connections are encrypted in the Ai
 
 :::tip
 
-This document describes how to set up a secrets backend on the Astro data plane for production use. To quickly test a secrets backend locally with the Astro CLI, see [Authenticate to cloud services](cli/authenticate-to-clouds.md).
+This document describes how to set up a secrets backend on the Astro data plane for production use. To quickly test a secrets backend locally using your own cloud credentials and the Astro CLI, see [Authenticate to cloud services](cli/authenticate-to-clouds.md).
 
 :::
 
