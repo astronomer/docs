@@ -194,7 +194,7 @@ You can add an `.airflowignore` file to any DAGs directory to identify the files
 
 When you add an `.airflowignore` file to a DAGs directory, the files listed in the file are ignored when developing locally and when you deploy your project to Astro. The same image is built and deployed. To deploy a DAG subset or exclude the `.airflowignore` file from a Deployment, Astronomer recommends using [GitHub version control](https://docs.github.com/en/get-started/using-git/about-git). For more information about `.airflowignore` and Airflow, see [`.airflowignore`](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#airflowignore).
 
-1. In your Astro project, create a new file named `.airflowignore` in a DAGs directory.
+1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
 
 2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. For example, `mydag.py` or `data-team-dags`. The ignored files must be in the same `dags` directory of your Astro project.
 
