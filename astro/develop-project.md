@@ -76,7 +76,7 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 ### Ignore files with `.airflowignore`
 
-When you create an `.airflowignore` file, the files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler. DAGs listed in this file aren't deployed and don't appear in the Airflow UI. The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#airflowignore). To learn more about the code deploy process, see [What happens during a code deploy](deploy-code#what-happens-during-a-code-deploy)
+When you create an `.airflowignore` file, the files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler. DAGs listed in this file aren't deployed and don't appear in the Airflow UI. The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#airflowignore). To learn more about the code deploy process, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
 1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
 
