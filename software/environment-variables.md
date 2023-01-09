@@ -90,7 +90,7 @@ This should output all environment variables that are running locally, some of w
 
 The CLI will look for `.env` by default, but if you want to specify multiple files, make `.env` a top-level directory and create sub-files within that folder.
 
-In other words,your project might look like the following:
+In other words, your project might look like the following:
 
 ```
 my_project

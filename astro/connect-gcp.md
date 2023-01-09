@@ -43,7 +43,7 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC, contact [
 
 - Astro cluster ID and name
 - Google Cloud project ID of the target VPC
-- VPC ID of the target VPC
+- VPC NAME of the target VPC
 - Classless Inter-Domain Routing (CIDR) block of the target VPC
 
 After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
@@ -124,7 +124,7 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
 
 When you create a connection from Astro to GCP, you can specify the service account key in JSON format, or you can create a secret to hold the service account key. For more information about creating and managing GCP service account keys, see [Create and manage service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) and [Creating and accessing secrets](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets).
 
-Astronomer recommends using Google Cloud Secret Manager to store your GCP service account keys and other secrets. See [Google Cloud Secret Manager](secrets-backend.md#setup).
+Astronomer recommends using Google Cloud Secret Manager to store your GCP service account keys and other secrets. See [Google Cloud Secret Manager](secrets-backend?tab=gcp#setup).
 
 </TabItem>
 

@@ -59,7 +59,6 @@ astro deploy <options>
 | `--pytest`                | Deploy code to Astro only if the specified pytests are passed                                                                                         | None                                                             |
 | `-s`,`--save`             | Save the current Deployment and working directory combination for future deploys                                                                      | None                                                             |
 | `-t`,`--test`             | The filepath to an alternative pytest file or directory                                                                                               | Valid filepath within your Astro project                         |
-| `--no-cache`              | Do not use any images from the container engine's cache when building your project.                                                                   | None                                                             |
 | `--workspace-id <string>` | In the prompt to select a Deployment, only show Deployments within this Workspace                                                                     | Any valid Workspace ID                                           |
 | `-i`, `--image-name`      | The name of a pre-built custom Docker image to use with your project. The image must be available from a Docker registry hosted on your local machine | A valid name for a pre-built Docker image based on Astro Runtime |
 
