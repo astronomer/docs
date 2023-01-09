@@ -28,10 +28,11 @@ Using these credentials allows you to access information from your cloud, like s
 
 #### Prerequisites
 
-- A user account on AWS with access to AWS cloud resources
-- The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
-- Optional. Access to a secrets backend hosted on AWS, such as AWS Secrets Manager or AWS Parameter Store
+- A user account on AWS with access to AWS cloud resources.
+- The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- Optional. Access to a secrets backend hosted on AWS, such as AWS Secrets Manager or AWS Parameter Store.
+
 
 #### Retrieve AWS user credentials locally
 
@@ -56,7 +57,8 @@ The location of these files depends on your operating system:
 
 #### Configure your Astro project
 
-The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount them as a volume in Docker.
+The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount the `.aws` folder as a volume in Docker.
+
 
 1. Run the following commands to create an Astro project:
 
@@ -149,10 +151,11 @@ When you run Airflow locally, all AWS connections without defined credentials au
 
 #### Prerequisites 
 
-- A user account on GCP with access to GCP cloud resources
-- The [Google Cloud SDK](https://cloud.google.com/sdk/docs/install-sdk)
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
-- Optional. Access to a secrets backend hosted on GCP, such as GCP Secret Manager
+- A user account on GCP with access to GCP cloud resources.
+- The [Google Cloud SDK](https://cloud.google.com/sdk/docs/install-sdk).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- Optional. Access to a secrets backend hosted on GCP, such as GCP Secret Manager.
+
   
 #### Retrieve GCP user credentials locally
 
@@ -172,7 +175,8 @@ The location of this file depends on your operating system:
 
 #### Configure your Astro project
 
-The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount them as a volume in Docker.
+The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential file, you'll mount it as a volume in Docker.
+
 
 1. Run the following commands to create an Astro project:
 
@@ -258,10 +262,11 @@ When you run Airflow locally, all GCP connections without defined credentials no
 #### Prerequisites
 
 - A user account on Azure with access to Azure cloud resources.
-- The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
-- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview)
-- Optional. Access to a secrets backend hosted on, such as Azure Key Vault
-- If you're using Windows, [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/install)
+- The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- Optional. Access to a secrets backend hosted on, such as Azure Key Vault.
+- If you're using Windows, [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/install).
+
 
 :::caution Known issues 
 
@@ -284,12 +289,14 @@ The developer account credentials are used in place of the credentials associate
 The default location of the Azure configuration folder depends on your operating system:
 
 - Linux: `$HOME/.azure/`
-- Mac: `/Users/<username>/.aws`
+- Mac: `/Users/<username>/.azure`
+
 - Windows: `%USERPROFILE%/.azure/`
 
 #### Configure your Astro project
 
-The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount them as a volume in Docker.
+The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount the .azure folder as a volume in Docker.
+
 
 1. Run the following commands to create an Astro project:
 
