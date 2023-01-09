@@ -405,12 +405,16 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
 1. Create a secret for an Airflow variable or connection in AWS Secrets Manager. All Airflow variables and connection keys must be prefixed with the following strings respectively:
 
-    - `airflow/variables`
-    - `airflow/connections`
+    - `airflow/variables/<my_variable_name>`
+    - `airflow/connections/<my_connection_id>`
+    
+    For example when adding the secret variable `my_secret_var` you will need to give the secret the name `airflow/variables/my_secret_var`.
+
 
     When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
 
-2. Add the following environment variables to your Astro project `.env` file:
+2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/secrets-backends/aws-secrets-manager.html).
+
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
@@ -427,48 +431,56 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
-6. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve a value from `airflow/variables` and print it to the terminal:
+6. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id> from the secrets backend and print it to the terminal:
+
 
     ```python
     from airflow import DAG
     from airflow.hooks.base import BaseHook
     from airflow.models import Variable
-    from airflow.operators.python import PythonOperator
+    from airflow.decorators import task
     from datetime import datetime
-    
-    def print_var():
-        my_var = Variable.get("<your-variable-key>")
-        print(f'My variable is: {my_var}')
-    
-        conn = BaseHook.get_connection(conn_id="aws_standard")
-        print(conn.get_uri())
-    
-    with DAG('example_secrets_dag', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
-    
-      test_task = PythonOperator(
-          task_id='test-task',
-          python_callable=print_var,
-    )
+
+    with DAG(
+        'example_secrets_dag',
+        start_date=datetime(2022, 1, 1),
+        schedule=None
+    ):
+
+        @task
+        def print_var():
+            my_var = Variable.get("<my_variable_name>")
+            print(f"My secret variable is: {my_var}") # secrets will be masked in the logs!
+
+            conn = BaseHook.get_connection(conn_id="<my_connection_id>")
+            print(f"My secret connection is: {conn.get_uri()}") # secrets will be masked in the logs!
+            
+        print_var()
     ```
 
 7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
-8. View logs for your DAG run. If the connection was successful, the value of your secret appears in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
+8. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
+
 
 </TabItem>
 <TabItem value="gcp">
 
 1. Create a secret for an Airflow variable or connection in GCP Secret Manager. You can do this using the Google Cloud Console or the gcloud CLI. All Airflow variables and connection keys must be prefixed with the following strings respectively:
 
-    - `airflow-variables-`
-    - `airflow-connections-`
+    - `airflow-variables-<my_variable_name>`
+    - `airflow-connections-<my_connection_name>`
+    
+     For example when adding the secret variable `my_secret_var` you will need to give the secret the name `airflow-variables-my_secret_var`.
 
-    When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
 
-2. Add the following environment variables to your Astro project `.env` file:
+
+2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/secrets-backends/google-cloud-secret-manager-backend.html)):
+
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
-    AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables"}
+    AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<my-project-id>"}
+
     ```
 
 3. Run the following command to start Airflow locally:
@@ -481,36 +493,36 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
-5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve a value from `airflow/variables` and print it to the terminal:
+5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id> from the secrets backend and print it to the terminal:
+
 
     ```python
     from airflow import DAG
     from airflow.hooks.base import BaseHook
     from airflow.models import Variable
-    from airflow.operators.python import PythonOperator
+    from airflow.decorators import task
     from datetime import datetime
-    
-    def print_var():
-        my_var = Variable.get("<your-variable-key>")
-        print(f'My variable is: {my_var}')
-    
-        conn = BaseHook.get_connection(conn_id="gcp_standard")
-        print(conn.get_uri())
-    
+
     with DAG(
-        dag_id='example_secrets_dag',
+        'example_secrets_dag',
         start_date=datetime(2022, 1, 1),
         schedule=None
     ):
-    
-        test_task = PythonOperator(
-            task_id='test-task',
-            python_callable=print_var
-        )
+
+        @task
+        def print_var():
+            my_var = Variable.get("<my_variable_name>")
+            print(f"My secret variable is: {my_var}")
+
+            conn = BaseHook.get_connection(conn_id="<my_connection_name>")
+            print(f"My secret connection is: {conn.get_uri()}")
+
+        print_var()
     ```
 
 6. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
-7. View logs for your DAG run. If the connection was successful, the value of your secret appears in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
+7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging). 
+
 
 </TabItem>
 
@@ -518,8 +530,13 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
 1. Create a secret for an Airflow variable or connection in Azure Key Vault. All Airflow variables and connection keys must be prefixed with the following strings respectively:
 
-    - `airflow-variables`
-    - `airflow-connections`
+    - `airflow-variables-<my_variable_name>`
+    - `airflow-connections-<my_connection_name>`
+    
+    For example, when you add the secret variable `mysecretvar`, you must to give name the secret `airflow-variables-mysecretvar`.
+    
+    You will need to store your connection in [URI format](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables). 
+
 
 2. In your Astro project, add the following line to Astro project `requirements.txt` file:
 
@@ -530,11 +547,13 @@ Now that Airflow has access to your user credentials, you can use them to connec
 3. Add the following environment variables to your Astro projecct `.env` file: 
   
     ```text
-    AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.azure_key_vault.AzureKeyVaultBackend
+    AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend
+
     AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}
     ```
 
-    By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `"connections_prefix"` and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`.
+    By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `"connections_prefix"` and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`. The `vault_url` can be found on the overview page of your Key vault under `Vault URI`.
+
 
 4. Run the following command to start Airflow locally:
 
@@ -552,30 +571,31 @@ Now that Airflow has access to your user credentials, you can use them to connec
     from airflow import DAG
     from airflow.hooks.base import BaseHook
     from airflow.models import Variable
-    from airflow.operators.python import PythonOperator
+    from airflow.decorators import task
     from datetime import datetime
-    
-    def print_var():
-        my_var = Variable.get("<your-variable-key>")
-        print(f'My variable is: {my_var}')
-    
-        conn = BaseHook.get_connection(conn_id="azure_standard")
-        print(conn.get_uri())
-    
+
     with DAG(
-        dag_id='example_secrets_dag',
+        'example_secrets_dag',
         start_date=datetime(2022, 1, 1),
         schedule=None
     ):
-    
-        test_task = PythonOperator(
-            task_id='test-task',
-            python_callable=print_var
-        )
+
+        @task
+        def print_var():
+            my_var = Variable.get("mysecretvar")
+            print(f"My secret variable is: {my_var}")
+
+            conn = BaseHook.get_connection(conn_id="mysecretconnection")
+            print(f"My secret connection is: {conn.get_uri()}")
+
+        print_var()
     ```
 
 7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
-8. View logs for your DAG run. If the connection was successful, the value of your secret appears in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
+8. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
+
 
 </TabItem>
 </Tabs>
+
+![Secrets in logs](/img/docs/secret_logs.png)
