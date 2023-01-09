@@ -188,24 +188,6 @@ WARNING: The requested image's platform (linux/amd64) does not match the detecte
 ```
 :::
 
-## Ignore files with `.airflowignore`
-
-When you create an `.airflowignore` file, the files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler. DAGs listed in this file aren't deployed and don't appear in the Airflow UI. The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#airflowignore).
-
-1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
-
-2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. You should list the path for each file or directory relative to the `dags` directory. For example: 
-
-    ```text
-    mydag.py
-    data-team-dags
-    some-dags/ignore-this-dag.py
-    ``` 
-    
-
-3. Save your changes. 
-
-
 ## Related documentation
 
 - [Automate code deploys with CI/CD](ci-cd.md)
