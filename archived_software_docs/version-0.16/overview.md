@@ -1,9 +1,10 @@
 ---
-title: 'Astronomer Software Overview'
+title: 'Astronomer Software Documentation'
 sidebar_label: 'Overview'
 id: overview
 description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
 ---
+
 
 ## Overview
 
@@ -23,7 +24,7 @@ Astronomer Software's key features ensure that enterprise organizations can run 
 
 The following diagram shows how you can run Airflow in your private cloud using Astronomer Software:
 
-![Astronomer Software Overview](https://assets2.astronomer.io/main/enterpriseArchitecture.svg)
+![Astronomer Software Overview](/img/software/enterpriseArchitecture.svg)
 
 ## Installation Guides
 
@@ -51,7 +52,7 @@ There are many tools at your disposal for administering Astronomer:
 * [Using Kibana](kibana-logging.md)
 * [Using kubectl](kubectl.md)
 * [Pulling Postgres Credentials](access-airflow-database.md)
-* [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer-patch.md)
+* [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer-stable.md/)
 
 ## License
 

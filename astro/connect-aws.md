@@ -88,9 +88,9 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 #### Setup
 
-1. In the Cloud UI, click the **Clusters** tab and copy the **Account ID** for your Astro cluster. This is an AWS account ID.
+1. In the Cloud UI, click the **Clusters** tab and copy both the **ID** and the **Account ID** for your Astro cluster. **ID** is your cluster ID, while **Account ID** is your AWS account ID.
 2. Create a resource share in AWS RAM with the account ID from step 1. See [Creating a resource share in AWS RAM](https://docs.aws.amazon.com/ram/latest/userguide/working-with-sharing-create.html).
-3. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the CIDR block of the target VPC or on-premises network that you want to connect your Astro cluster with. From here, Astronomer approves the resource sharing request and creates a transit gateway peering attachment request to your network.
+3. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the cluster ID that you copied in Step 1, as well as the CIDR block of the target VPC or on-premises network that you want to connect your Astro cluster with. From here, Astronomer support approves the resource sharing request and creates a transit gateway peering attachment request to your network.
 4. Accept the transit gateway peering attachment request from your network. See [Accept or reject a peering attachment request](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-accept-reject).
 5. Create a static route from your CIDR block to the transit gateway and a static route from the transit gateway to the Astro VPC. See [Add a route to the transit gateway route table](https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html#tgw-peering-add-route).
 6. Contact [Astronomer support](https://cloud.astronomer.io/support) to confirm that you have created the static route. Astronomer support will update the Astro VPC routing table to send traffic from your CIDR block through the transit gateway.

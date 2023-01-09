@@ -43,7 +43,7 @@ To create a VPC peering connection between an Astro VPC and a GCP VPC, contact [
 
 - Astro cluster ID and name
 - Google Cloud project ID of the target VPC
-- VPC ID of the target VPC
+- VPC NAME of the target VPC
 - Classless Inter-Domain Routing (CIDR) block of the target VPC
 
 After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
@@ -52,7 +52,14 @@ After receiving your request, Astronomer support initiates a peering request and
 
 <TabItem value="Private Service Connect">
 
-Private Service Connect allows Astro to access GCP data that belongs to different groups, teams, projects, and organizations.
+Private Service Connect allows Astro to access GCP data that belongs to different groups, teams, projects, and organizations. To learn more about Private Service Connect, see [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect).
+
+The Astro data plane hosted on GCP is configured with a private services connection that accepts all Google APIs. All connections to Google services use the `googleapis.com` domain to ensure the privacy and security of communications within the Google network. A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
+
+```sh
+gcloud services list --available --filter="name:googleapis.com"
+```
+You can use the default GCP DNS name in your DAGs to simplify the implementation of GCP private services connections. Astronomer has implemented a default GCP DNS zone and resource record that routes the default GCP DNS name through the private services connection.
 
 </TabItem>
 
@@ -117,7 +124,7 @@ To grant a Deployment on Astro access to external data services on GCP, such as 
 
 When you create a connection from Astro to GCP, you can specify the service account key in JSON format, or you can create a secret to hold the service account key. For more information about creating and managing GCP service account keys, see [Create and manage service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys) and [Creating and accessing secrets](https://cloud.google.com/secret-manager/docs/creating-and-accessing-secrets).
 
-Astronomer recommends using Google Cloud Secret Manager to store your GCP service account keys and other secrets. See [Google Cloud Secret Manager](secrets-backend.md#setup).
+Astronomer recommends using Google Cloud Secret Manager to store your GCP service account keys and other secrets. See [Google Cloud Secret Manager](secrets-backend?tab=gcp#setup).
 
 </TabItem>
 

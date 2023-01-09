@@ -47,13 +47,12 @@ Most DAGs follow this general flow within a Python script:
 The following example DAG loads data from Amazon S3 to Snowflake, runs a Snowflake query, and then sends an email.
 
 ```python
-from airflow import DAG
+from datetime import datetime, timedelta
 
-from airflow.operators.email_operator import EmailOperator
+from airflow import DAG
+from airflow.operators.email import EmailOperator
 from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
 from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeOperator
-
-from datetime import datetime, timedelta
 
 # Instantiate DAG
 with DAG(

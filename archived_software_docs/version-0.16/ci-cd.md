@@ -2,6 +2,7 @@
 sidebar_label: 'CI/CD'
 title: 'Configure CI/CD on Astronomer Software'
 id: ci-cd
+description: Automate the deploy process to your Airflow Deployment on Astronomer Software.
 ---
 
 ## Overview
@@ -29,7 +30,7 @@ Using CI/CD, you can automatically deploy DAGs to your Airflow Deployment on Ast
 
 That would look something like this:
 
-![CI/CD Workflow Diagram](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-flow.png)
+![CI/CD Workflow Diagram](/img/software/ci-cd-flow.png)
 
 ### CI/CD on Astronomer
 
@@ -108,7 +109,7 @@ If you prefer to provision a Service Account through the Software UI, start by l
 
 From the Software UI, navigate to: `Deployment` > `Service Accounts`
 
-![New Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-new-service-account.png)
+![New Service Account](/img/software/ci-cd-new-service-account.png)
 
 #### Configure your Service Account
 
@@ -120,7 +121,7 @@ Upon creating a Service Account, make sure to:
 
 > **Note:** In order for a Service Account to have permission to push code to your Airflow Deployment, it must have either the "Editor" or "Admin" role. For more information on Workspace roles, refer to our ["Roles and Permissions"](workspace-permissions.md) doc.
 
-![Name Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-name-service-account.png)
+![Name Service Account](/img/software/ci-cd-name-service-account.png)
 
 #### Copy the API Key
 
@@ -128,7 +129,7 @@ Once you've created your new Service Account, grab the API Key that was immediat
 
 > **Note:** This API key will only be visible during the session.
 
-![Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-api-key.png)
+![Service Account](/img/software/ci-cd-api-key.png)
 
 ## Step 2: Authenticate and Push to Docker
 
@@ -182,8 +183,8 @@ At its core, your CI/CD pipeline will first authenticate to Astronomer's private
 The following setup is an example implementation of CI/CD using GitHub Actions. These steps cover both the implementation and the workflow necessary to create a fully functional CI/CD pipeline.
 
 1. Create a GitHub repository for an Astronomer project. Ensure your repo has a development branch and a main branch. In this example, the branches are named `dev` and `main`.
-2. Create two [Deployment-level service accounts](ci-cd.md#step-1-create-a-service-account): One for your Dev Deployment and one for your Production Deployment. 
-3. Follow instructions in [GitHub documentation](https://docs.github.com/en/actions/reference/encrypted-secrets) to add your service accounts as secrets to your repository. In the example below, these secrets are named `SERVICE_ACCOUNT_KEY` and `SERVICE_ACCOUNT_KEY_DEV`.
+2. [Create a Service Account](ci-cd.md#step-1-create-a-service-account) for your Astronomer Workspace.
+3. Follow instructions in [GitHub documentation](https://docs.github.com/en/actions/reference/encrypted-secrets) to add your Astronomer Service Account as a secret to your repository. In the example below, that secret is named `SERVICE_ACCOUNT_KEY`.
 4. Go to the Actions tab of your GitHub repo and create a new action with a `main.yml` file. To achieve the recommended workflow described in [Overview](ci-cd.md#overview), use the following action:
 
     ```yaml
@@ -202,7 +203,7 @@ The following setup is an example implementation of CI/CD using GitHub Actions. 
           with:
             registry: registry.${BASE_DOMAIN}
             username: _
-            password: ${{ secrets.SERVICE_ACCOUNT_KEY_DEV }}
+            password: ${{ secrets.SERVICE_ACCOUNT_KEY }}
         - name: Build and push images
           uses: docker/build-push-action@v2
           if: github.ref == 'refs/heads/dev'
@@ -371,7 +372,7 @@ pipelines:
           deployment: production
           script:
             - echo ${SERVICE_ACCOUNT_KEY}
-            - docker build -t registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BITBUCKET_BUILD_NUMBER}
+            - docker build -t registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BITBUCKET_BUILD_NUMBER} .
             - docker login registry.$BASE_DOMAIN -u _ -p $SERVICE_ACCOUNT_KEY
             - docker push registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BITBUCKET_BUILD_NUMBER}
           services:
@@ -454,56 +455,40 @@ jobs:
 
 ## Azure DevOps
 
-In this example configuration, you can automatically deploy your Astronomer project from a GitHub repository using an [Azure Devops](https://azure.microsoft.com/en-us/services/devops/) pipeline connected to the GitHub repository.
-
-:::tip
-
-To see an example GitHub project that utilizes this configuration, visit [Astronomer's GitHub](https://github.com/astronomer/cs-tutorial-azuredevops)
-
-:::
+This example uses [Azure Key Vault](https://azure.microsoft.com/en-us/services/key-vault/) to store secrets as variable groups that are then made available to the CI/CD pipeline running on [Azure Devops](https://azure.microsoft.com/en-us/services/devops/).
 
 To set up this workflow, make sure you have:
 
-- A GitHub repository hosting your Astronomer project.
-- An Azure DevOps account with permissions to create new pipelines.
+- An Azure Key Vault.
+- Two Azure Variable Groups, one called `Variable-Group` and another called `Key-Vault-Group`.
+- At least 1 Linux agent installed on your host machine.
 
-1. Create a new file called `astro-devops-cicd.yaml` in your Astronomer project repository with the following configuration:
+For more information on configuring these components, read Azure's documentation:
 
-    ```yaml
-    # Control which branches have CI triggers:
-    trigger:
-    - main
+* [Key Vault Quickstart](https://docs.microsoft.com/en-us/azure/key-vault/general/quick-create-portal)
+* [Use a Variable Group](https://docs.microsoft.com/en-us/azure/devops/pipelines/library/variable-groups?view=azure-devops&tabs=classic#use-a-variable-group)
+* [Self-hosted Linux agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/v2-linux?view=azure-devops)
 
-    # To trigger the build/deploy only after a PR has been merged:
-    pr: none
+```yaml
+trigger:
+- main
 
-    # Optionally use Variable Groups & Azure Key Vault:
-    #variables:
-    #- group: Variable-Group
-    #- group: Key-Vault-Group
+variables:
+- group: Variable-Group
+- group: Key-Vault-Group
 
-    stages:
-    - stage: build
-      jobs:
-      - job: run_build
-        pool:
-          vmImage: 'Ubuntu-latest'
-        steps:
-        - script: |
-            echo "Building container.."
-            docker build -t registry.$(BASE-DOMAIN)/$(RELEASE-NAME)/airflow:$(Build.SourceVersion) .
-            docker login registry.$(BASE-DOMAIN) -u _ -p $(SVC-ACCT-KEY)
-            docker push registry.$(BASE-DOMAIN)/$(RELEASE-NAME)/airflow:$(Build.SourceVersion)
-    ```
+stages:
+- stage: build
+  jobs:
+  - job: run_build
+    pool:
+      vmImage: 'Ubuntu-latest'
+    steps:
+    - script: |
+    echo "Building container.."
+    docker build -t registry.$BASE_DOMAIN/extraterrestrial-aperature-9667/airflow:${Build.SourceVersion} .
+    docker login registry.$BASE_DOMAIN -u _ -p $DEPLOYMENT_SERVICE_ACCOUNT_KEY
+    docker push registry.$BASE_DOMAIN/extraterrestrial-aperature-9667/airflow:$(Build.SourceVersion)
+```
 
-2. Follow the steps in [Azure documentation](https://docs.microsoft.com/en-us/azure/devops-project/azure-devops-project-github#configure-access-to-your-github-repo-and-select-a-framework) to link your GitHub Repo and Action to an Azure pipeline. When prompted for the source code for your pipeline, specify that you have an existing Azure Pipelines YAML file and provide the setup tool with the file path to your `astro-devops-cicd.yaml` file.
-3. Finish and save your Azure pipeline setup.
-4. In Azure, [add environment variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch) for the following values:
-
-    - `BASE-DOMAIN`: Your base domain for Astronomer
-    - `RELEASE-NAME`: The release name for your Deployment
-    - `SVC-ACCT-KEY`: The service account you created on Astronomer for CI/CD
-
-    We recommend marking `SVC-ACCT-KEY` as secret.
-
-Once you complete this setup, any merges on the main branch of your GitHub repo will trigger the pipeline and deploy your changes to Astronomer.
+Replace the image tag details based on your registry and Airflow Deployment release name.
