@@ -88,7 +88,6 @@ When you create an `.airflowignore` file, the files or directories listed in `.a
     some-dags/ignore-this-dag.py
     ``` 
     
-
 3. Save your changes. 
 
 
