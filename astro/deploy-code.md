@@ -203,9 +203,7 @@ When you create an `.airflowignore` file, the files or directories listed in `.a
     ``` 
     
 
-3. Add the DAG name file path to the file.
-
-4. Save your changes. 
+3. Save your changes. 
 
 
 ## Related documentation
