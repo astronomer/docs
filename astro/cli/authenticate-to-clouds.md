@@ -345,13 +345,14 @@ version: "3.1"
 services:
     scheduler:
         volumes:
-        - /home/<username>/.azure:/usr/local/airflow/.azure:ro
+        - /home/<username>/.azure:/usr/local/airflow/.azure
     webserver:
         volumes:
-        - /home/<username>/.azure:/usr/local/airflow/.azure:ro
+        - /home/<username>/.azure:/usr/local/airflow/.azure
     triggerer:
         volumes:
-        - /home/<username>/.azure:/usr/local/airflow/.azure:ro
+        - /home/<username>/.azure:/usr/local/airflow/.azure
+
 ```
 
 :::info 
