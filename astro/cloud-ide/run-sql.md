@@ -18,7 +18,7 @@ To use Warehouse SQL cells, you also need write permissions to the data warehous
 1. In the pipeline editor, click **Add Cell** and select one of the following:
 
     - **SQL**: Runs a SQL query against a provided database connection and persists the results of the query in an XCom for use by other cells.
-    - **Warehouse SQL**: Runs a SQL query against a provided database connections and stores the results in your data warehouse.
+    - **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
 
     Regardless of which cell type you choose, you can use the results of your queries in downstream SQL and Python cells.
 
@@ -70,4 +70,4 @@ select * from {{my_table}} -- my_table is another SQL cell
 
 To view your SQL cell within the context of an Airflow DAG, click **Code** to open your pipeline code. The Airflow DAG includes your SQL query as well as all of the code required to run it on Airflow.
 
-SQL cells use the Astro SDK to execute your queries. A standard SQL cells executes your query using `aql.run_raw_sql` and stores the results in XComs. A warehouse SQL cell runs your SQL query using `aql.transform` and the loads the results in your data warehouse. See [Astro SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/raw_sql.html).
+SQL cells use the Astro SDK to execute your queries. A standard SQL cell executes your query using `aql.run_raw_sql` and stores the results in XComs. A warehouse SQL cell runs your SQL query using `aql.transform` and loads the results in your data warehouse. See [Astro SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/raw_sql.html).

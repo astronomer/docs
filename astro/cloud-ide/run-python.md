@@ -23,7 +23,7 @@ When you run a cell, the Cloud IDE sends a request to an isolated worker in the 
 
 ## Create explicit dependencies for a Python cell
 
-In a Python cell, click **Dependencies** and select a cell name make the cell an explicit upstream dependency of your Python cell. When you run your entire pipeline, the Python cell cannot begin running until the selected upstream cell finishes running.
+In a Python cell, click **Dependencies** and select a cell to make it an explicit upstream dependency of your Python cell. When you run your entire pipeline, the Python cell cannot begin running until the selected upstream cell finishes running.
 
 To make a Python cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your Python cell. 
 
@@ -54,7 +54,7 @@ The **Pipeline** view in the Cloud IDE shows the newly created dependency betwee
 
 ### Pass a value from a SQL cell to a Python cell 
 
-Use the results of SQL cell in a Python cell by calling the name of the SQL cell. The SQL cell must contain a `SELECT` statement. 
+Use the results of a SQL cell in your Python cell by calling the name of the SQL cell. The SQL cell must contain a `SELECT` statement. 
 
 The table created by the `SELECT` statement is automatically converted to pandas DataFrame and passed to the Python cell.
 
