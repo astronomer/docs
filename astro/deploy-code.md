@@ -190,9 +190,7 @@ WARNING: The requested image's platform (linux/amd64) does not match the detecte
 
 ## Ignore files when deploying code
 
-You can add an `.airflowignore` file to any DAGs directory to identify the files that should be ignored when you push code to Astro. This can be helpful when you have a single GitHub repository containing DAG files for multiple projects and Deployments.
-
-When you add an `.airflowignore` file to a DAGs directory, the files listed in the file are ignored when developing locally and when you deploy your project to Astro. The same image is built and deployed. To deploy a DAG subset or exclude the `.airflowignore` file from a Deployment, Astronomer recommends using [GitHub version control](https://docs.github.com/en/get-started/using-git/about-git). For more information about `.airflowignore` and Airflow, see [`.airflowignore`](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#airflowignore).
+When you create an `.airflowignore` file, the files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler when you run `astro dev start` or when you deploy your project to Astro. DAGs listed in this file aren't deployed and don't appear in the Airflow UI. The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#airflowignore).
 
 1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
 
