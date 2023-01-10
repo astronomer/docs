@@ -377,6 +377,12 @@ If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.a
     USER ASTRO
     ```
 
+:::info
+
+If you're using an M1 Mac, you must use the`linux/amd64` Runtime image distriubtion. Replace the first line in your Astro project Dockerfile with `FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:<version>`. 
+
+:::
+
 4. Add the following environment variable to your `.env` file. Make sure the file path is the same volume location you configured in `docker-compose.override.yml`
    
     ```text
