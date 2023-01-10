@@ -156,9 +156,12 @@ Run the following command to deploy only your `dags` directory to a Deployment:
 astro deploy --dags
 ```
 
-### Disable DAG-only deploys on a Deployment
+### Turn off DAG-only deploys on a Deployment
 
-1. Run the following command to disable DAG-only deploys:
+You can turn off DAG-only deploys any time the functionality is no longer required. When you turn off DAG-only deploys, new DAGs are not pushed to your Deployments and all existing DAGs are removed from your Deployments. Astronomer recommends running an image deploy immediately after you turn off DAG-only deploy functionality to make sure all of your DAG files are available to your Deployments. You can contact [Astronomer support](https://cloud.astronomer.io/support) to determine if turning off DAG-only deploy functionality is the right choice for your organization. 
+
+You need Workspace Admin permissions to turn off DAG-only deploys. 
+1. Run the following command to turn off DAG-only deploys:
 
     ```sh
     astro deployment update --dag-deploy disable
