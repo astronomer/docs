@@ -29,6 +29,7 @@ This generates the following files:
 
 ```py
 .
+├── .env # Local environment variables
 ├── dags # Where your DAGs go
 │   └── example-dag.py # An example DAG that comes with the initialized project
 ├── Dockerfile # For the Astronomer Runtime Docker image and runtime overrides

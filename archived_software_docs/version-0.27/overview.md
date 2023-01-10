@@ -5,6 +5,9 @@ id: overview
 description: 'Documentation for how to run Airflow at enterprise scale with Astronomer Software.'
 ---
 
+import AstroCard from '@site/src/components/AstroCard';
+
+<AstroCard />
 
 ## Overview
 
@@ -24,7 +27,7 @@ Astronomer Software's key features ensure that enterprise organizations can run 
 
 The following diagram shows how you can run Airflow in your private cloud using Astronomer Software:
 
-![Astronomer Software Overview](https://assets2.astronomer.io/main/enterpriseArchitecture.svg)
+![Astronomer Software Overview](/img/software/enterpriseArchitecture.svg)
 
 ## Installation Guides
 
@@ -36,7 +39,7 @@ If you are new to Astronomer Software, use the following guides to install the s
 
 ## Customizing Your Installation
 
-Because the platform uses Helm, it's easy to customize your Software installation. Below are some guides for most common customizations:
+Because the platform uses Helm, it's easy to customize your Astronomer installation. Below are some guides for most common customizations:
 
 * [Integrating Auth Systems](integrate-auth-system.md)
 * [Configuring Resources with Helm](manage-platform-users.md)
@@ -52,7 +55,7 @@ There are many tools at your disposal for administering Astronomer:
 * [Using Kibana](kibana-logging.md)
 * [Using kubectl](kubectl.md)
 * [Pulling Postgres Credentials](access-airflow-database.md)
-* [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer-stable.md/)
+* [Upgrade to a Patch Version of Astronomer Software](upgrade-astronomer.md/)
 
 ## License
 

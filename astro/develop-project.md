@@ -83,20 +83,20 @@ Astronomer recommends storing the `include` folder inside the `dags` directory o
 Here is how the recommended directory structure might appear:
 
 ```bash
-    ├── airflow_settings.yaml
-    ├── dags
-    │   └── include
-            └── helper_functions
-                └── helper.py
-            └── templated_SQL_scripts
-    │       └── custom_operators
-    ├── Dockerfile
-    ├── tests
-    │   └── test_dag_integrity.py
-    ├── packages.txt
-    ├── plugins
-    │   └── example-plugin.py
-    └── requirements.txt
+├── airflow_settings.yaml
+├── dags
+│   └── include
+│       ├── helper_functions
+│       │   └── helper.py
+│       ├── templated_SQL_scripts
+│       └── custom_operators
+├── Dockerfile
+├── tests
+│   └── test_dag_integrity.py
+├── packages.txt
+├── plugins
+│   └── example-plugin.py
+└── requirements.txt
 ```
 
 If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
@@ -247,14 +247,14 @@ A project with multiple `.env` files might look like the following:
 
 ```
 my_project
-  ├── Dockerfile
-  └──  dags
-    └── my_dag
-  ├── plugins
-    └── my_plugin
-  ├── airflow_settings.yaml
-  ├── .env
-    └── dev.env
+├── Dockerfile
+├── dags
+│   └── my_dag
+├── plugins
+│   └── my_plugin
+├── airflow_settings.yaml
+└── .env
+    ├── dev.env
     └── prod.env
 ```
 
@@ -282,6 +282,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
     RUN update-ca-certificates
     USER astro
     ```
+    
 2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment) or deploy to Astro. See [Deploy code](deploy-code.md).
@@ -435,7 +436,7 @@ This example assumes that the name of each of your Python packages is identical 
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH='/home/astro/.local/bin:$PATH'
 
     COPY . .
     ```
@@ -479,7 +480,7 @@ This example assumes that the name of each of your Python packages is identical 
 2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<ssh-key>` with your SSH private key file name.
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github=“$HOME/.ssh/<ssh-key>” -t $image_name .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
 3. Optional. Test your DAGs locally. See [Restart your local environment](develop-project.md#restart-your-local-environment).
@@ -536,14 +537,16 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer=“Astronomer <humans@astronomer.io>”
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
     ARG BUILD_NUMBER=-1
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install OS-Level packages
     COPY packages.txt .
+    USER root
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
+    USER astro
 
     FROM stage1 AS stage2
     # Install Python packages
@@ -556,7 +559,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
     ```

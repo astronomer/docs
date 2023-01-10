@@ -28,14 +28,14 @@ To create a Service Account via the Software UI:
 
 1. Log in to the Software UI.
 2. Go to **Deployment** > **Service Accounts**.
-   ![New Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-new-service-account.png)
+   ![New Service Account](/img/software/ci-cd-new-service-account.png)
 3. Give your Service Account a **Name**, **User Role**, and **Category** (_Optional_).
    > **Note:** In order for a Service Account to have permission to push code to your Airflow Deployment, it must have either the Editor or Admin role. For more information on Workspace roles, refer to [Roles and Permissions](workspace-permissions.md).
 
-   ![Name Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-name-service-account.png)
+   ![Name Service Account](/img/software/ci-cd-name-service-account.png)
 4. Save the API Key that was generated. Depending on your use case, you may want to store this key in an Environment Variable or secret management tool of choice.
 
-   ![Service Account](https://assets2.astronomer.io/main/docs/ci-cd/ci-cd-api-key.png)
+   ![Service Account](/img/software/ci-cd-api-key.png)
 
 ### Create a Service Account via the Astronomer CLI
 
@@ -153,40 +153,3 @@ To run this, replace the following placeholder values:
 - `<your-base-domain>`: Your Astronomer Software base domain
 - `<API-Key>`: API Key from your Service Account
 - `<deployment-release-name>`: Your Airflow Deployment Release Name
-
-## Airflow 2.0 Stable REST API
-
-### What's new
-
-As of its momentous [2.0 release](https://www.astronomer.io/blog/introducing-airflow-2-0), the Apache Airflow project now supports an official and more robust Stable REST API. Among other things, Airflow's new REST API:
-
-* Makes for easy access by third-parties.
-* Is based on the [Swagger/OpenAPI Spec](https://swagger.io/specification/).
-* Implements CRUD (Create, Update, Delete) operations on *all* Airflow resources.
-* Includes authorization capabilities.
-
-> **Note:** To get started with Airflow 2.0 locally, read [Get Started with Apache Airflow 2.0](https://www.astronomer.io/guides/get-started-airflow-2). To upgrade an Airflow Deployment on Astronomer to 2.0, make sure you've first upgraded to both Astronomer Software v0.23 and Airflow 1.10.14. For questions, reach out to [Astronomer Support](https://support.astronomer.io).
-
-### Make a Request
-
-To convert a call from Airflow's experimental API, simply update the URL to use the endpoint specified in Airflow's [Stable REST API reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html).
-
-For example, take Airflow's "Get Current Configuration" endpoint:
-
-```
-GET /api/v1/config
-```
-
-Here, your cURL request would look like the following:
-
-```
-curl -X GET \
-https://<AIRFLOW-DOMAIN>/airflow/api/v1/config \
--H 'Authorization: <API-Key>' \
--H 'Cache-Control: no-cache'
-```
-
-To run this, update the following placeholder values:
-
-- `<AIRFLOW-DOMAIN>`: Use `https://<your-base-domain>/<deployment-release-name>`
-- `<API-Key>`: API Key from your Service Account

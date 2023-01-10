@@ -39,7 +39,7 @@ For this tutorial, you will need to access SageMaker from your Airflow environme
 
 1. From the AWS web console, go to **IAM** service page and create a new execution role for SageMaker. See [Create execution roles](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html#sagemaker-roles-create-execution-role) in the AWS documentation.
 
-2. Add your AWS user as a trusted entity to the role you just created. See [Editing the trust relationship for an existing role](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html). Note that this step might not be necessary depending on how IAM roles are managed for your organization's AWS account.
+2. Add your AWS user and `sagemaker.amazonaws.com` as a trusted entity to the role you just created. See [Editing the trust relationship for an existing role](https://docs.aws.amazon.com/directoryservice/latest/admin-guide/edit_trust.html). Note that this step might not be necessary depending on how IAM roles are managed for your organization's AWS account.
 
 3. Using the ARN of the role you just created, generate temporary security credentials for your role. There are multiple methods for generating the credentials. For detailed instructions, see [Using temporary credentials with AWS resources](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html). You will need the access key ID, secret access key, and session token in Step 5.
 
@@ -294,7 +294,7 @@ The graph view of the DAG should look similar to this:
 
 This DAG uses a decorated PythonOperator and several SageMaker operators to get data from an API endpoint, train a model, create a model in SageMaker, and test the model.  See [How it works](#how-it-works) for more information about each task in the DAG and how the different SageMaker operators work.
 
-## Step 6: Run your DAG to train the model
+## Step 7: Run your DAG to train the model
 
 Go to the Airflow UI, unpause your `sagemaker_pipeline` DAG, and trigger it to train, create and test the model in SageMaker. Note that the `train_model` and `test_model` tasks may take up to 10 minutes each to complete. 
 

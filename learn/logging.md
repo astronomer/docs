@@ -214,7 +214,7 @@ Logs are sent to remote storage only once a task has been completed or failed. T
 
 4. Add the following commands to the Dockerfile. Include the double underscores around `LOGGING`:
 
-    ```dockerfile
+    ```docker
     # allow remote logging and provide a connection ID (see step 2)
     ENV AIRFLOW__LOGGING__REMOTE_LOGGING=True
     ENV AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID=${AMAZONS3_CON_ID}
@@ -240,7 +240,7 @@ The following example adds a second remote logging Amazon S3 bucket to receive l
 
 Complete Steps 1 and 2 in [Remote Logging Example: Sending Task Logs to Amazon S3](#remote-logging-example-sending-task-logs-to-amazon-s3) to configure your Airflow environment for Amazon S3 remote logging and then add the following commands to your Dockerfile:
 
-```dockerfile
+```docker
 #### Remote logging to S3
 
 # Define the base log folder

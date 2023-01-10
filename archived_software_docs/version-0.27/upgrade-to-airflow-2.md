@@ -28,7 +28,7 @@ Airflow 2.3 subsequently introduced several powerful features, the most notable 
 
 This setup requires:
 
-- The [Astro CLI](cli-quickstart).
+- The [Astro CLI](cli-quickstart.md).
 - An Astro project running Airflow 1.10.15. If your Astro project uses Airflow 1.10.14 or earlier, upgrade to 1.10.15 using the [standard upgrade process](manage-airflow-versions.md) before following these steps.
 
 ## Step 1: Run the Airflow upgrade check script
@@ -84,11 +84,11 @@ To upgrade to Airflow 2.3.0,
 1. Initialize the Airflow upgrade process via the Astronomer UI or CLI.
 2. Depending on what distribution of Airflow you want to use, add one of the following lines to your project's `Dockerfile`:
 
-    ```dockerfile
+    ```docker
     FROM quay.io/astronomer/astro-runtime:5.0.4
     ```
 
-    ```dockerfile
+    ```docker
     FROM quay.io/astronomer/ap-airflow:2.3.0-onbuild
     ```
 
