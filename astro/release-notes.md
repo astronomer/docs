@@ -30,7 +30,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 The following cell types have been added to the Astro Cloud IDE:
 
 - **SQL**: Runs a SQL query against a defined database connection and persists the results of the query in an XCom file for use by other cells.
-- **Warehouse SQL**: Runs a SQL query against a defined database connection and stores the results in your data warehouse.
+- **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
 - **Markdown**: Adds documentation to your generated DAG code.
 
 For more information, see [Run SQL](cloud-ide/run-sql.md) and [Document your pipeline](cloud-ide/document-pipeline.md).
