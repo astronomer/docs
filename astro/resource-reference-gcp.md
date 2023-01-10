@@ -31,7 +31,7 @@ Read the following document for a reference of our default resources as well as 
 
 You might need to modify configurations of a new or existing cluster on Astro. This section provides a reference for cluster configuration options.
 
-To create a new cluster on Astro with a specified configuration, see [Create a cluster](create-cluster.md). To request a change to an existing Cluster, see [Modify a cluster](modify-cluster.md). Astronomer is currently responsible for completing all cluster configuration changes.
+To create a new cluster on Astro with a specified configuration, see [Create a cluster](create-cluster.md). To request a change to an existing cluster, see [Modify a cluster](modify-cluster.md). Astronomer is currently responsible for completing all cluster configuration changes.
 
 ### Cluster regions
 
@@ -79,7 +79,7 @@ A node pool is a group of nodes within a cluster that all have the same configur
 
 If your cluster has multiple worker node pools with different worker node instance types, users in your organization can configure tasks to run on those worker types using [worker queues](configure-deployment-resources.md#worker-queues). To enable a new worker type for your cluster, contact [Astronomer support](https://cloud.astronomer.io/support) with a request to create a new node pool or modify an existing node pool.
 
-Astronomer monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and provide recommendations for updating your node pools to optimize your infrastructure spend or increase the efficiency of your tasks.
+Astronomer monitors your usage and the number of nodes deployed in your cluster. When your Airflow use increases, Astronomer support might contact you and provide recommendations for updating your node pools to optimize your infrastructure costs or increase the efficiency of your tasks.
 
 ### Worker node resource reference
 
