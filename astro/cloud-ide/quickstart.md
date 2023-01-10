@@ -68,7 +68,7 @@ Cells are the building blocks for pipelines. They can complete a unit of work, s
 1. In the **Pipeline** list, click the name of the pipeline you created in step 2.
 2. Click **Add Cell** and select **Python**. A new cell named `python_1` appears.
 3. Click the cell's name and rename the cell `hello_world`.
-4. Add the following line to the cell body:
+4. Add the following code to the cell:
 
    ```python
    return "Hello, world!"
@@ -102,7 +102,7 @@ To create a SQL cell and execute SQL, first create a database to run your SQL qu
 
   :::info
 
-  SQL cell query results are stored in XComs and are not accessible outside of your data pipeline. To save the results of a SQL query, run it in a SQL warehouse cell. See [Run SQL](cloud-ide/run-sql.md)
+  SQL cell query results are stored in XComs and are not accessible outside of your data pipeline. To save the results of a SQL query, run it in a SQL warehouse cell. See [Run SQL](cloud-ide/run-sql.md).
   
   :::
 
@@ -165,7 +165,7 @@ To create a potential dependency to a Python cell, the upstream Python cell must
 
    ![New dependency graph](/img/cloud-ide/data-dependency.png)
 
-You can generate dependencies between any two types of cells. See the following documentation to learn more about each possible data dependency:
+You can generate data dependencies between any two cell types. To learn more about data dependencies, see the following documentation:
 
 - [Pass a value from a Python cell to another Python cell](cloud-ide/run-python.md#pass-a-value-from-a-python-cell-to-another-python-cell)
 - [Pass a value from a SQL cell to a Python cell](cloud-ide/run-python.md#pass-a-value-from-a-SQL-cell-to-a-python-cell)

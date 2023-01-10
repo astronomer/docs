@@ -12,7 +12,13 @@ Use Markdown cells to document your pipeline and make it easier for team members
 
 ## Create pipeline documentation
 
-1. In the pipeline editor, click **Add Cell**, then select **Markdown**.
+1. In the Cloud UI, select a Workspace and then select Cloud IDE.
+
+2. Select a project.
+
+3. On the **Pipelines** page click a pipeline name to open the pipeline editor.
+
+4. Click **Add Cell** > **Markdown**.
 2. In the body of the cell, write your documentation in Markdown format. 
 
 5. Optional. Click **Code** to view your documentation within the context of an Airflow DAG.

@@ -1,6 +1,6 @@
 ---
-sidebar_label: Run SQL in the Astro Cloud IDE
-title: Run SQL
+sidebar_label: Run SQL
+title: Run SQL in the Astro Cloud IDE
 id: run-sql
 description: Learn how to run SQL queries by creating and configuring SQL cells in the Astro Cloud IDE.
 ---
@@ -10,8 +10,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 ## Prerequisites 
 
 - A database connection. See [Step 5: Create a database connection](cloud-ide/quickstart.md#step-5-create-a-database-connection.md).
-
-To use Warehouse SQL cells, you also need write permissions to the data warehouse in your database connection. 
+- For Warehouse SQL cells, you need write permissions to the data warehouse in your database connection. 
 
 ## Create a SQL cell
 
