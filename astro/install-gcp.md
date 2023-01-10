@@ -29,8 +29,8 @@ For more information about managing Google Cloud projects, see [GCP documentatio
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Self-hosted', value: 'byoc'},
-        {label: 'Astronomer-hosted', value: 'astronomer hosted data plane'},
+        {label: 'Bring your own cloud', value: 'byoc'},
+        {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
 
