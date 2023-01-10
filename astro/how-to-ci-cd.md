@@ -54,13 +54,13 @@ With this method, you can configure a CI/CD pipeline that deploys code to Astro 
 - Create a new, short-lived branch in your Git repository with the change and open a Pull Request (PR) against the `main` branch for review.
 - When the PR is approved and merged to `main`, the change is automatically deployed to your Deployment on Astro.
 
-``mermaid
+```mermaid
 flowchart LR;
 classDef subgraph_padding fill:none,stroke:none
 classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
 id1[Local Astro project]-->|Push code change|id2[Git repository]
 id2-->|Deploy through CI/CD| id3[Astro Deployment]
-``
+```
 
 Running all of your data pipelines in a single environment means that you don't have to pay for the infrastructure of multiple Deployments, but it limits your ability to test changes on Astro or on development datasets before they are deployed. Astronomer does not recommend this method for production use cases.
 
@@ -82,7 +82,7 @@ With this method, each Deployment might also correspond to a data warehouse envi
 
 Using multi-repository CI/CD strategy, you can manage the DAGs in one repository and project settings in another. Use this strategy to ensure that DAG authors and data operators have access only to their own files. 
 
-``mermaid
+```mermaid
 flowchart LR;
 classDef subgraph_padding fill:none,stroke:none
 classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
@@ -92,7 +92,7 @@ subgraph 1[CI/CD pipeline]
     id5-->|Full project deploy|id3
     id2-->|DAG-only deploy| id3[Astro Deployment]
     end
-``
+```
 
 One drawback to this strategy is that you must keep any local copies of the Astro project in sync with both repositories in order to test Deployment code locally. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment that your users have more access to for testing purposes. 
 
@@ -102,7 +102,7 @@ This strategy requires enabling [DAG-only deploys](deploy-code.md#enable-dag-onl
 
 Similarly to the multiple repository strategy, this strategy separates the management of DAGs and project configuration. DAGs are stored in an [S3 bucket](https://aws.amazon.com/s3/), while Astro project configuration files are stored in a Git repository. 
 
-``mermaid
+```mermaid
 flowchart LR;
 classDef subgraph_padding fill:none,stroke:none
 classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
@@ -110,7 +110,7 @@ id1[Admin's local Astro project]-->|Push project changes|id5[Git repository]
 id4[DAG author's local Astro project]-->|Push DAG changes|id2[S3 bucket]
 id2-->|"DAG-only deploy </br>(Lambda function)" | id3[Astro Deployment]
 id5-->|"Full project deploy </br> (CI/CD)"|id3
-``
+```
 
 If you migrated to Astro from MWAA, this strategy is useful for maintaining a similar workflow for users. You can set up a Lambda function to push DAGs to your Astronomer Deployment whenever DAG files are updated in your specific S3 bucket.
 
