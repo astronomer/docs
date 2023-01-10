@@ -9,6 +9,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 ## Prerequisites 
 
+- An IDE project and pipeline. See [Step 2: Create a pipeline](cloud-ide.md/quickstart#step-2-create-a-pipeline).
 - A database connection. See [Step 5: Create a database connection](cloud-ide/quickstart.md#step-5-create-a-database-connection.md).
 - For Warehouse SQL cells, you need write permissions to the data warehouse in your database connection. 
 
@@ -23,8 +24,6 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
     -   **SQL**: Runs a SQL query against a provided database connection and persists the results of the query in an XCom for use by other cells.
 
     - **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
-
-
 
     Regardless of which cell type you choose, you can use the results of your queries in downstream SQL and Python cells.
 

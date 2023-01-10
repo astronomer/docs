@@ -7,6 +7,10 @@ description: Learn how to run Python code by creating and configuring Python cel
 
 A Python cell contains a Python function that you can run in isolation or as a dependency in your pipeline. Create Python cells to execute Python as part of your data pipeline. 
 
+## Prerequisites 
+
+- An IDE project and pipeline. See [Step 2: Create a pipeline](cloud-ide.md/quickstart#step-2-create-a-pipeline).
+
 ## Create a Python cell
 
 1. In the Cloud UI, select a Workspace and then select Cloud IDE.
@@ -16,7 +20,9 @@ A Python cell contains a Python function that you can run in isolation or as a d
 3. On the **Pipelines** page, click a pipeline name to open the pipeline editor.
 
 4. Click **Add Cell** > **Python**.
+
 5. Click the cell name and enter a name for the cell.
+
 6. Add your Python code to the cell body.
 
 ## Run a Python cell
