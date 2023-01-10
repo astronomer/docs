@@ -260,7 +260,13 @@ services:
     GOOGLE_APPLICATION_CREDENTIALS=/usr/local/airflow/gcloud/application_default_credentials.json
     ```
 
-When you run Airflow locally, all GCP connections without defined credentials now automatically fall back to your user credentials when connecting to GCP.
+When you run Airflow locally, all GCP connections without defined credentials automatically fall back to your user credentials when connecting to GCP. Airflow applies and overrides user credentials for GCP connections in the following order:
+
+- Mounted user credentials in the `/~/gcloud/` folder
+- Configurations in `gcp_keyfile_dict`
+- An explicit username & password provided in the connection
+
+For example, if you completed the configuration in this document and then created a new AWS connection with its own username and password, Airflow would use those credentials instead of the credentials in `~/.aws/config`.
 
 </TabItem>
 <TabItem value="azure">
