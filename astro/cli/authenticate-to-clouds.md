@@ -380,7 +380,8 @@ If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.a
 4. Add the following environment variable to your `.env` file. Make sure the file path is the same volume location you configured in `docker-compose.override.yml`
    
     ```text
-    AZURE_CONFIG_DIR=/usr/local/airflow/.azure:ro
+    AZURE_CONFIG_DIR=/usr/local/airflow/.azure
+
     ```
 
 When you run Airflow locally, all Azure connections without defined credentials automatically fall back to your user credentials when connecting to Azure. Airflow applies and overrides user credentials for Azure connections in the following order:
