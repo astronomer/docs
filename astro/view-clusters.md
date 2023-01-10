@@ -11,7 +11,7 @@ For instructions on how to make a change to an existing cluster, see [Modify a C
 
 ## View clusters
 
-In the Cloud UI, click the **Clusters** tab to view the clusters available in your Organization. Clicking on one of these clusters allows you to view information about the cluster in the Worker Types and Details tabs. The following table provides descriptions for each cluster value.
+In the Cloud UI, click the **Clusters** tab to view your organization's clusters. Click a cluster to view information about the cluster. The following table provides descriptions of each cluster value.
 
 | Value              | Description                                                                                                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
