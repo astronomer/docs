@@ -554,7 +554,8 @@ Now that Airflow has access to your user credentials, you can use them to connec
     - `airflow-variables-<my_variable_name>`
     - `airflow-connections-<my_connection_name>`
     
-    For example, when you add the secret variable `mysecretvar`, you must to give name the secret `airflow-variables-mysecretvar`.
+    For example, to use a secret named `mysecretvar` in your DAG, you must name the secret `airflow-variables-mysecretvar`.
+
     
     You will need to store your connection in [URI format](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables). 
 
@@ -565,7 +566,8 @@ Now that Airflow has access to your user credentials, you can use them to connec
     apache-airflow-providers-microsoft-azure
     ```
 
-3. Add the following environment variables to your Astro projecct `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/secrets-backends/azure-key-vault.html): 
+3. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/secrets-backends/azure-key-vault.html): 
+
 
   
     ```text
