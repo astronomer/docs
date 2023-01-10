@@ -81,6 +81,8 @@ The following table lists all available instance types for worker node pools, as
 | Standard_D8_v5     | 6.4 CPUs | 24 GiB MEM  |
 | Standard_D4d_v5    | 2.5 CPUs | 9.3 GiB MEM |
 | Standard_D8d_v5    | 6.4 CPUs | 24 GiB MEM  |
+| Standard_B4ms      | 2.5 CPUs | 9.3 GiB MEM |
+| Standard_B8ms      | 6.4 CPUs | 24 GiB MEM  |
 
 If your Organization needs an instance type that supports a larger worker size, contact [Astronomer support](https://support.astronomer.io). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md).
 
