@@ -90,6 +90,8 @@ When you create an `.airflowignore` file, the files or directories listed in `.a
     
 3. Save your changes. 
 
+    After adding an `.airflowignore` file, you don't need to restart Airflow to implement the changes. 
+
 
 ### Add DAG helper functions
 

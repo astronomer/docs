@@ -12,7 +12,7 @@ Using the Astro CLI to push your Astro project, including your DAG code, to a De
 - `astro deploy`: This command pushes every file in your Astro project to all Airflow components in your Deployment. This includes your `Dockerfile`, DAGs, plugins, and all Python and OS-level packages.
 - `astro deploy --dags`: This command pushes only the code that exists in the `/dags` directory of your Astro project to a running Deployment on Astro. When you only need to push changes to your DAGs, running this command is a faster development experience than running `astro deploy` since it does not require installing your dependencies.
 
-To run `astro deploy --dags`, you must first enable the [DAG-only deploys](deploy-code.md#ignore-files-with-airflowignore) feature for each Deployment.
+To run `astro deploy --dags`, you must first enable the [DAG-only deploys](deploy-code.md#enable-dag-only-deploys-on-a-deployment) feature for each Deployment.
 
 Follow the steps in this document to manually push your Astro project to a Deployment. For production environments, Astronomer recommends automating all code deploys with CI/CD. See [CI/CD](ci-cd.md).
 
