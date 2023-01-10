@@ -6,6 +6,9 @@ description: Learn how to add documentation to your pipeline and individual cell
 ---
 
 Use Markdown cells to document your pipeline and make it easier for team members to collaborate on the same code. Your Markdown cell appears as a top-level comment in the generated DAG for your data pipeline. It does not appear in the Airflow UI and is not related to the features described in [Create DAG documentation in Apache Airflow](https://docs.astronomer.io/learn/custom-airflow-ui-docs-tutorial).
+## Prerequisites 
+
+- An IDE project and pipeline. See [Step 2: Create a pipeline](cloud-ide.md/quickstart#step-2-create-a-pipeline).
 
 ## Create pipeline documentation
 
