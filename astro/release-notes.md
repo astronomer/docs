@@ -23,6 +23,23 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.8.4 ([Release notes](cli/release-notes.md))
 
+## January 10, 2022 
+
+### New ways to build data pipelines in the Cloud IDE
+
+The Astro Cloud IDE now includes updated cell types for building your data pipelines. The new and updated cell types are:
+
+- **SQL**: Runs a SQL query against a provided database connection and persists the results of the query in an XCom for use by other cells.
+- **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
+- **Markdown**: Adds documentation to your generated DAG code.
+
+For more information, see [Run SQL](cloud-ide/run-sql.md) and [Document your pipeline](cloud-ide/document-pipeline.md).
+
+### Bug fixes 
+
+- Sorting the **Organization Role** column in the **People** tab of the Cloud UI now works as expected.
+- Fixed an issue where lineage groups would occasionally not collapse as expected in the **Lineage Graph** view. 
+
 ## December 20, 2022 
 
 ### Additional improvements 
