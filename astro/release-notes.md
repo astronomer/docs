@@ -23,14 +23,14 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.8.4 ([Release notes](cli/release-notes.md))
 
-## January 10, 2022 
+## January 10, 2023 
 
-### New ways to build data pipelines in the Cloud IDE
+### New Astro Cloud IDE cell types
 
-The Astro Cloud IDE now includes updated cell types for building your data pipelines. The new and updated cell types are:
+The following cell types have been added to the Astro Cloud IDE:
 
-- **SQL**: Runs a SQL query against a provided database connection and persists the results of the query in an XCom for use by other cells.
-- **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
+- **SQL**: Runs a SQL query against a defined database connection and persists the results of the query in an XCom file for use by other cells.
+- **Warehouse SQL**: Runs a SQL query against a defined database connection and stores the results in your data warehouse.
 - **Markdown**: Adds documentation to your generated DAG code.
 
 For more information, see [Run SQL](cloud-ide/run-sql.md) and [Document your pipeline](cloud-ide/document-pipeline.md).
