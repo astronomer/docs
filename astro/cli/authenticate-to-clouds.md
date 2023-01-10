@@ -171,7 +171,7 @@ Run the following command to obtain your user credentials locally:
 gcloud auth application-default login
 ```
 
-The SDK provides a link to a webpage where you can log in to your Google Cloud account. After you complete your login, the SDK stores your user credentials in a file name named `application_default_credentials.json`.
+The SDK provides a link to a webpage where you can log in to your Google Cloud account. After you complete your login, the SDK stores your user credentials in a file named `application_default_credentials.json`.
 
 The location of this file depends on your operating system:
 
@@ -254,7 +254,8 @@ services:
 </TabItem>
 </Tabs>
 
-3. In your Astro project's `.env` file, add the following environment variable. Ensure that this volume path is the same as the one your configured in `docker-compose.override.yml`.
+3. In your Astro project's `.env` file, add the following environment variable. Ensure that this volume path is the same as the one you configured in `docker-compose.override.yml`.
+
     
     ```text
     GOOGLE_APPLICATION_CREDENTIALS=/usr/local/airflow/gcloud/application_default_credentials.json
@@ -385,7 +386,8 @@ If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.a
 
 :::info
 
-If you're using an M1 Mac, you must use the`linux/amd64` Runtime image distriubtion. Replace the first line in your Astro project Dockerfile with `FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:<version>`. 
+If you're using an M1 Mac, you must use the`linux/amd64` Runtime image distribution. Replace the first line in your Astro project Dockerfile with `FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:<version>`. 
+
 
 :::
 
@@ -563,7 +565,8 @@ Now that Airflow has access to your user credentials, you can use them to connec
     apache-airflow-providers-microsoft-azure
     ```
 
-3. Add the following environment variables to your Astro projecct `.env` file: 
+3. Add the following environment variables to your Astro projecct `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/secrets-backends/azure-key-vault.html): 
+
   
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend
