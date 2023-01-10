@@ -19,6 +19,7 @@ Use Markdown cells to document your pipeline and make it easier for team members
 3. On the **Pipelines** page click a pipeline name to open the pipeline editor.
 
 4. Click **Add Cell** > **Markdown**.
-2. In the body of the cell, write your documentation in Markdown format. 
 
-5. Optional. Click **Code** to view your documentation within the context of an Airflow DAG.
+5. In the body of the cell, write your documentation in Markdown format. 
+
+6. Optional. Click **Code** to view your documentation within the context of an Airflow DAG.
