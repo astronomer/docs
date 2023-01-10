@@ -15,7 +15,6 @@ While the tables below reference the minimum compatible versions, we typically r
 
 | Astronomer Platform | Kubernetes                           | Postgres | Python                                    | Astronomer Certified / Astro Runtime         | Helm |
 | ------------------- | ------------------------------------ | -------- | ----------------------------------------- | -------------------------------------------- | ---- |
-| v0.25               | 1.17¹, 1.18¹, 1.19¹, 1.20¹, 1.21     | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions*            | 3.6  |
 | v0.28               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
 | v0.29               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 | v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
@@ -28,9 +27,7 @@ Astronomer recommends using the latest available version of the Astro CLI for al
 
 ¹ Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
 
-- Support for Kubernetes 1.17 ends with Astronomer Software 0.25.12.
-- Support for Kubernetes 1.18 ends with Astronomer Software 0.25.13.
-- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.25.15, 0.28.7, 0.29.5, and 0.30.4.
+- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.28.7, 0.29.5, and 0.30.4.
 
 :::
 
@@ -44,12 +41,6 @@ All currently supported Astronomer-distributed images are compatible with all ve
 :::info
 
 Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private Certificate Authorities (CAs) starting with Kubernetes 1.19. If your organization is using a private CA, contact [Astronomer support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on Azure Kubernetes Service (AKS).
-
-:::
-
-:::info
-
-While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow triggerer is available only in Astronomer v0.26 and later. To use [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), that require the Airflow triggerer, you must upgrade.
 
 :::
 
