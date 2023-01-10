@@ -12,14 +12,14 @@ Read the following document for a reference of our default resources as well as 
 
 ## Default cluster values
 
-| Resource                                                                                                                 | Description                                                                                                                                                                                                                                                                               | Quantity/ Default Size                                                                         | Configurable? |
+| Resource                                                                                                                 | Description                                                                                                                                                                                                                                                                               | Quantity/ Default Size                                                                        | Configurable? |
 | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | [Azure Kubernetes Service (AKS) Cluster](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)                    | Runs the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                          | 1x                                                                                            | ✔️             |
 | [Resource Group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal) | A container for cluster resources.                                                                                                                                                                                                                                                        | 1x                                                                                            |               |
 | Worker node pool                                                                                                         | A node pool that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of Standard_D4d_v5 nodes                                                              | ✔️             |
 | Airflow node pool                                                                                                        | A node pool that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of Standard_D4d_v5 nodes                                                              |               |
 | Astro system node pool                                                                                                   | A node pool that runs all other system components required in Astro. The availability zone determines how many nodes are created. This node pool is fully managed by Astronomer.                                                                                                          | 1x pool of Standard_D4d_v5 nodes                                                              |               |
-| [Azure Database for PostgreSQL Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/)      | The flexible server is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster.                                                                                                                                                      | Standard_D4ds_v4                                                                              |               |
+| [Azure Database for PostgreSQL Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/)      | The flexible server is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster.                                                                                                                                                     | Standard_D4ds_v4                                                                              |               |
 | [Azure Virtual Network (VNet)](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)         | A virtual network that hosts Azure resources.                                                                                                                                                                                                                                             | 1x /19                                                                                        |               |
 | [Subnets](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-manage-subnet)                          | Created in the VNet and used for the backing database, Pod, node, and private endpoints.                                                                                                                                                                                                  | <br />/28 for database <br />/21 for pods <br />/21 for nodes <br />/22 for private endpoints |               |
 | Private DNS Zone for Database                                                                                            | Provides access to the private database instance.                                                                                                                                                                                                                                         | 1x                                                                                            |               |
@@ -38,22 +38,24 @@ To create a new cluster on Astro with a specified configuration, see [Install As
 
 ### Cluster regions
 
-You can host Astro clusters in the following Azure regions:
+Depending on how you installed Astro, you can host Astro clusters in the following Azure regions:
 
-- Australia East
-- Canada Central
-- Central India
-- Central US
-- East Asia
-- East US
-- Japan East
-- Korea Central
-- North Europe
-- South Africa North
-- South Central US
-- UK South
-- West Europe
-- West US 3
+| Code               | Name               | Astro - Bring Your Own Cloud | Astro - Hosted |
+| ------------------ | ------------------ | ---------------------------- | -------------- |
+| `australiaeast`    | Australia East     | ✔️                            |                |
+| `canadacentral`    | Canada Central     | ✔️                            | ✔️              |
+| `centralindia`     | Central India      | ✔️                            |                |
+| `centralus`        | Central US         | ✔️                            |                |
+| `eastasia`         | East Asia          | ✔️                            |                |
+| `eastus`           | East US            | ✔️                            |                |
+| `japaneast`        | Japan East         | ✔️                            |                |
+| `koreacentral`     | Korea Central      | ✔️                            |                |
+| `northeurope`      | North Europe       | ✔️                            | ✔️              |
+| `southafricanorth` | South Africa North | ✔️                            |                |
+| `southcentralus`   | South Central US   | ✔️                            |                |
+| `uksouth`          | UK South           | ✔️                            |                |
+| `westeurope`       | West Europe        | ✔️                            | ✔️              |
+| `westus3`          | West US 3          | ✔️                            |                |
 
 Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
 
