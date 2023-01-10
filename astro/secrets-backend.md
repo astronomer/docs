@@ -333,62 +333,43 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
 
 #### Set up GCP Secret Manager locally
 
-1. Add the `SECRET_VAR_SERVICE_ACCOUNT` variable to your Astro project `.env` file. This should include the entire contents of the service account JSON key for the service account that will be used to access Secret Manager. 
+1. Copy the complete JSON service account key for the service account that will be used to access Secret Manager. 
+2. Add the following environment variables to your Astro project's `.env` file, replacing `<your-service-account-key>` with the key you copied in step 1:
 
-```text
-SECRET_VAR_SERVICE_ACCOUNT='{
-  "type": "service_account",
-  "project_id": "<your-project-id>",
-  "private_key_id": "<your_private_key_id>",
-  "private_key": "<your_complete_service_account_JSON_key\n",
-  ...
-}'
-```
-2. Add the following lines to your `Dockerfile` to set the environment variables that allow Airflow to read secrets from the Secret Manager:
-
-```text
-ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": $SECRET_VAR_SERVICE_ACCOUNT}'
-```
+    ```text
+    AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
+    AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": <your-service-account-key>}'
+    ```
 
 3. Optional. Run `Variable.get("<your-variable-key>")` to run a DAG locally and confirm that your variables are accessible.
 
-#### Deploy to Astro without a service account JSON key file (Recommended)
+#### Configure Secret Manager on Astro using Workload Identity (Recommended)
 
+1. Set up Workload Identity for your Airflow Deployment. See [Connect Astro to GCP data sources](connect-gcp.md?tab=Workload%20Identity#authentication-options).
 
-1. Set up Workload Identity for your Airflow Deployment. See [Connect Astro to GCP data sources](https://docs.astronomer.io/astro/connect-gcp?tab=Workload%20Identity#authentication-options).
+2. Run the following commands to set the secrets backend for your Astro Deployment:
 
-2. In your `Dockerfile`, update the Backend KWARGS environment variable to include the `project_id` of the project where the Secret Manager resides:
+    ```text
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
 
-```text
-ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
-ENV AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-managet-project-id>"}'
-```
-
-
-#### Deploy to Astro using a service account JSON key file
-
-1. Set up the Secret Manager locally. See [Set up GCP Secret Manager locally](#set-up-gcp-secret-manager-locally)
-
-2. Use the Cloud UI or the Astro CLI to add the `SECRET_VAR_SERVICE_ACCOUNT` environment variable with the contents of the service account JSON key file to the Airflow Deployment. 
- 
-    ```sh
-  
-    $ astro deployment variable create --deployment-id <your-deployment-id> SECRET_VAR_SERVICE_ACCOUNT='{your-json}' --secret
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>"}'
     ```
+
+3. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
 To ensure the security of secrets, the `.env` variable is only available in your local environment and not in the Cloud UI . See [Set Environment Variables Locally](https://docs.astronomer.io/astro/develop-project#set-environment-variables-locally).
 
+#### Configure Secret Manager on Astro using a service account JSON key file
 
-#### Deploy to Astro
+1. Set up the Secret Manager locally. See [Set up GCP Secret Manager locally](#set-up-gcp-secret-manager-locally)
 
-Run the following command to deploy to Astro:
-  
+2. Run the following command to set the `SECRET_VAR_SERVICE_ACCOUNT` environment variable on your Astro Deployment: 
+ 
     ```sh
-    astro deploy --deployment-id <your-deployment-id> 
+    astro deployment variable create --deployment-id <your-deployment-id> SECRET_VAR_SERVICE_ACCOUNT='<your-service-account-key>' --secret
     ```
 
-You now should be able to see your secret information being pulled from Secret Manager on Astro. From here, you can store any Airflow variables or connections as secrets on Secret Manager and use them in your project.
+3. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
 </TabItem>
 
