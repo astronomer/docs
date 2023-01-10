@@ -53,7 +53,7 @@ The following table lists the default Runtime environment variables. You can cha
 | Environment Variable                       | Description                                                                                                          | Value                                   |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
 | `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The time in seconds that tasks in the `queued` state running with the Celery executor are assumed to have stalled before they are automatically rescheduled.  | `600`   |
-| `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of tasks that can run concurrently, across worker queues, within a single Deployment. On Astro, this value is calculated dynamically based on worker configuration but can be overridden.                                                              | `<Number-of-Running-Workers-for-all-Worker-Queues>` * `<Max-Tasks-Per-Worker>`           |
+| `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of task instances that can run concurrently for each scheduler in Airflow, regardless of the worker count.                                                              | `<Number-of-Running-Workers-for-all-Worker-Queues>` * `<Max-Tasks-Per-Worker>`           |
 
 ## Provider packages
 
