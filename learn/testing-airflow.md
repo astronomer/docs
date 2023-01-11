@@ -56,7 +56,7 @@ def test_retries_present():
         assert retries == 2, error_msg
 ```
 
-To see an example of running these tests as part of a CI/CD workflow, see the [airflow-testing-guide](https://github.com/astronomer/airflow-testing-guide)repository.
+To see an example of running these tests as part of a CI/CD workflow, see the [airflow-testing-guide](https://github.com/astronomer/airflow-testing-guide) repository.
 
 ## Unit testing
 

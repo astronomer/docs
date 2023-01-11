@@ -36,11 +36,11 @@ This section contains links to documentation sets that correspond to all previou
 - [v0.30](https://docs.astronomer.io/software/0.30/)
 - [v0.29](https://docs.astronomer.io/software/0.29/overview)
 - [v0.28](https://docs.astronomer.io/software/0.28/overview)
-- [v0.25](https://docs.astronomer.io/software/0.25/overview) 
 
 ### Unmaintained versions
 
 - [v0.27](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.27)
 - [v0.26](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.26)
+- [v0.25](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.25) 
 - [v0.23](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.23)
 - [v0.16](https://github.com/astronomer/docs/blob/main/archived_software_docs/version-0.16)
