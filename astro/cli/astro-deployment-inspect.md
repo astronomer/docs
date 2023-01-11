@@ -101,7 +101,7 @@ $ astro deployment inspect <deployment-id>
 # Shows a specific Deployment's health status
 $ astro deployment inspect <deployment-id> --key information.status
 
-# store a Deployment's configuration in a deployment file
+# Store a Deployment's configuration in a deployment file
 $ astro deployment inspect <deployment-id> > deployment.yaml
 ```
 
