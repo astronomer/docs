@@ -29,11 +29,16 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 The following cell types have been added to the Astro Cloud IDE:
 
-- **SQL**: Runs a SQL query against a defined database connection and persists the results of the query in an XCom file for use by other cells.
-- **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
-- **Markdown**: Adds documentation to your generated DAG code.
+- **SQL**: Runs a SQL query against a defined database connection and persists the results of the query in an XCom file for use by other cells. Use this cell type to run smaller queries and store the results in Airflow for quick access in other cells.
+- **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse. Use this cell type for data operations that require more storage and reliability.
+- **Markdown**: Adds documentation to your generated DAG code. Use this cell to make it easier for team members to collaborate on the same pipeline.
 
 For more information, see [Run SQL](cloud-ide/run-sql.md) and [Document your pipeline](cloud-ide/document-pipeline.md).
+
+### Additional improvements
+
+- The default value for `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` has been reduced from 5 minutes to 30 seconds for all Deployments regardless of Runtime version. 
+- In the Cloud UI, a banner now appears if there is an incident reported on the [Astro status page](https://status.astronomer.io/).
 
 ### Bug fixes 
 

@@ -48,12 +48,13 @@ For version compatibility information, see the [Runtime release notes](runtime-r
 
 ## Default environment variables
 
-The following table lists the default Runtime environment variables. You can change the default settings of these environment variables to meet the unique requirements of your organization. For information about the global environment variables set on the Astro data plane, see [Global environment variables](platform-variables.md). To edit default environment variable values, see [Set environment variables on Astro](environment-variables.md).
+The following table lists the default Runtime environment variables. You can override the values of these environment variables to meet the unique requirements of your organization. For information about the global environment variables set on the Astro data plane, see [Global environment variables](platform-variables.md). To edit default environment variable values, see [Set environment variables on Astro](environment-variables.md).
 
 | Environment Variable                       | Description                                                                                                          | Value                                   |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
 | `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The time in seconds that queued Celery tasks are assumed to have stalled before they are automatically rescheduled.  | `0`   |
 | `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of tasks that can run at the same time in a single Airflow environment.                                                               | `32`           |
+| `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` | The time in seconds that Airflow waits before re-scanning the `dags` directory for new files. Note that this environment variable is set for all Deployments regardless of Runtime version. |  `30` |
 
 ## Provider packages
 
