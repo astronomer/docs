@@ -9,9 +9,9 @@ Continuous Integration and Continuous Delivery (CI/CD) pipelines are programmati
 There are many strategies for organizing your source code and building CI/CD pipelines, and each has its own benefits and limitations. Use this document to:
 
 - Learn the benefits of CI/CD.
-- Determine what kind of Deployment and CI/CD workflow you want your organization to use.
+- Determine what kind of Deployment and CI/CD strategy you want your data team to use.
 
-When you're ready to implement your CI/CD workflow, see [CI/CD templates](ci-cd.md) for setup steps and examples.
+When you're ready to implement your CI/CD strategy, see [CI/CD templates](ci-cd.md) for setup steps and examples.
 
 ## Benefits of CI/CD on Astro
 
@@ -27,9 +27,9 @@ There are many benefits to configuring a CI/CD workflow on Astro. Specifically, 
 
 ## Choose a deploy strategy
 
-You can set up CI/CD pipelines to manage multiple Deployments and repositories based on your team structure. Before you create your pipeline, you need to determine how many repositories and branches of your project you want to deploy deploy to Astro.
+You can set up CI/CD pipelines to manage multiple Deployments and repositories based on your team structure. Before you create your pipeline, you need to determine how many repositories and branches of your project you want to deploy to Astro.
 
-When developing a strategy, keep the size of your data team in mind while answering the following questions:
+When deciding on a strategy, keep the size of your data team in mind while answering the following questions:
 
 - How many branches of a project do you want to host on Astro? 
 - Do you need to deploy a single production branch to a Deployment, or do you also need to deploy a development branch?
