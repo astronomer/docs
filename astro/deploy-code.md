@@ -158,16 +158,17 @@ astro deploy --dags
 
 ### Turn off DAG-only deploys on a Deployment
 
-You can turn off DAG-only deploys any time the functionality is no longer required. When you turn off DAG-only deploys, new DAGs are not pushed to your Deployments and all existing DAGs are removed from your Deployments. Astronomer recommends running an image deploy immediately after you turn off DAG-only deploy functionality to make sure all of your DAG files are available to your Deployments. You can contact [Astronomer support](https://cloud.astronomer.io/support) to determine if turning off DAG-only deploy functionality is the right choice for your organization. 
+If you have Workspace Admin permissions. you can turn off DAG-only deploys for a Deployment at any time if your organization doesn't benefit from faster deploys or prefers a deployment method that is exclusively based on building and deploying your Astro project as a Docker image. When you turn off DAG-only deploys, the way Airflow and Astro read your DAGs changes, and all existing DAGs are removed from your Deployments and they might not appear in the Airflow UI.
 
-You need Workspace Admin permissions to turn off DAG-only deploys. 
+To make sure you can continue to access to your data, Astronomer recommends deploying to Astro immediately after you turn off DAG-only deploy functionality. To determine if turning off DAG-only deploy functionality is the right choice for your organization, contact [Astronomer support](https://cloud.astronomer.io/support). 
+
 1. Run the following command to turn off DAG-only deploys:
 
     ```sh
     astro deployment update --dag-deploy disable
     ```
 
-2. Run the following command to push your changes to Astro:
+2. Run the following command to deploy all of the files in your Astro project as a Docker image:
 
     ```sh
     astro deploy
