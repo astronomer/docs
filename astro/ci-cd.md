@@ -13,7 +13,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Use the Astronomer CI/CD templates to automate deploying code to Astro with popular CI/CD management tools, including GitHub Actions and Circle CI. To decide which template is right for you, see [Set up CI/CD](set-up-ci-cd.md).
+Use the Astronomer CI/CD templates to automate code deployment to Astro with popular CI/CD management tools, including GitHub Actions and Circle CI. To decide which template is right for you, see [Set up CI/CD](set-up-ci-cd.md).
 
 ## Prerequisites
 
@@ -24,9 +24,9 @@ Use the Astronomer CI/CD templates to automate deploying code to Astro with popu
 
 ## Template types
 
-Templates allow you to easily configure automated workflows using popular CI/CD tools. Each template can be implemented as-is to produce a simple CI/CD pipeline. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and best practices.
+Templates allow you to configure automated workflows using popular CI/CD tools. Each template can be implemented without changes to produce a CI/CD pipeline. However, Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and processes.
 
-There are two workflow types, image-only workflows and DAG-based workflows, which are described in detail below. The following templates are available for each workflow type: 
+There are two workflow types, image-only workflows and DAG-based workflows. The following templates are available for each workflow type: 
 
 - Single branch: Deploys a single branch from your version control tool to Astro. This is the default template for all CI/CD tools. 
 - Multiple branch: Deploys multiple branches to separate Deployments on Astro.
@@ -34,7 +34,7 @@ There are two workflow types, image-only workflows and DAG-based workflows, whic
 
 ### Image-only workflows  
 
-The image-only workflow builds a Docker image and pushes it to Astro whenever you update any file in your Astro project. This type of template is simple to set up and works well for development workflows that include complex Docker customization or logic.
+The image-only workflow builds a Docker image and pushes it to Astro whenever you update any file in your Astro project. This type of template works well for development workflows that include complex Docker customization or logic.
 
 CI/CD templates that use image-only workflows do the following:
 
@@ -56,7 +56,7 @@ $ astro deploy
 
 ### DAG-based workflows
 
-The DAG-based workflow uses the `--dags` flag in the Astro CLI to enable a faster way to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+The DAG-based workflow uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 CI/CD templates that use the DAG-based workflow do the following:
 
@@ -99,7 +99,7 @@ fi
 
 ## Deploy with GitHub Actions
 
-The following templates use Astronomer's [Deploy Action](https://github.com/astronomer/deploy-action) to deploy code to Astronomer. The Deploy Action is the easiest way to create CI/CD pipelines for Astro. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
+The following templates use the Astronomer-maintained [Deploy Action](https://github.com/astronomer/deploy-action) to deploy code to Astronomer. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
 
 ### GitHub Actions (Image-only deploys)
 

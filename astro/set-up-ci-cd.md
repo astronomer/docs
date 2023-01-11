@@ -4,14 +4,14 @@ title: 'Deploy code to Astro with CI/CD'
 id: set-up-ci-cd
 ---
 
-Continuous Integration and Continuous Delivery (CI/CD) pipelines are programmatic workflows that automate key parts of the software development lifecycle, including code changes, builds, and testing. CI/CD enables teams to develop faster, more securely, and more reliably.
+Continuous Integration and Continuous Delivery (CI/CD) pipelines are programmatic workflows that automate key parts of the software development lifecycle, including code changes, builds, and testing. CI/CD helps your organization develop faster, more securely, and more reliably.
 
 There are many strategies for organizing your source code and building CI/CD pipelines, and each has its own benefits and limitations. Use this document to:
 
 - Learn the benefits of CI/CD.
-- Determine what kind of Deployment and CI/CD system you want your team to use.
+- Determine what kind of Deployment and CI/CD workflow you want your organization to use.
 
-Then, see [CI/CD templates](ci-cd.md) for setup steps and examples.
+When you're ready to implement your CI/CD workflow, see [CI/CD templates](ci-cd.md) for setup steps and examples.
 
 ## Benefits of CI/CD on Astro
 
@@ -22,7 +22,7 @@ There are many benefits to configuring a CI/CD workflow on Astro. Specifically, 
 - Avoid manually running `astro deploy` every time you make a change to your Astro project.
 - Ensure that all changes to your Astro project are reviewed and approved by your team before they get pushed to Astro.
 - Automate promoting code across development and production environments on Astro when pull requests to certain branches are merged.
-- Enforce automated testing, which increases code quality and allows your team to respond quickly in case of an error or failure.
+- Enforce automated testing, which increases code quality and allows your team to respond quickly in case of an error or a failure.
 - Configure more granular user permissions by managing access and changes to your Astro project source code in your version control tool.
 
 ## Choose a deploy strategy
@@ -31,31 +31,32 @@ You can set up CI/CD pipelines to manage multiple Deployments and repositories b
 
 When developing a strategy, keep the size of your data team in mind while answering the following questions:
 
-- How many branches of a project do you want to host on Astro? Do you need to deploy a single production branch to a Deployment, or do you also need to deploy a development branch?
+- How many branches of a project do you want to host on Astro? 
+- Do you need to deploy a single production branch to a Deployment, or do you also need to deploy a development branch?
 - How many repositories do you want to host your project? Will different parts of your team work on different parts of your project?
 
 Read the following topics to learn which combination of branches and repositories is right for your team. Advanced data teams might follow a custom CI/CD strategy that is not described here and is optimized for a particular use case or team structure. If you're not sure which CI/CD strategy is right for you, contact your customer success representative.
 
 ### Single branch vs. multiple branch repositories
 
-When you create a CI/CD pipeline, your first decision point whether to deploy one or multiple project branches to Astro through CI/CD.
+When you create a CI/CD pipeline, you first must determine if you want to deploy one or multiple project branches to Astro through CI/CD.
 
 #### Single branch
 
-The easiest and most cost-effective way to get started with CI/CD on Astro is to maintain a single Git repository that corresponds to a single Astro project and Deployment.
+The most cost-effective way to get started with CI/CD on Astro is to maintain a single Git repository that corresponds to a single Astro project and Deployment.
 
 This method assumes that you have:
 
-- 1 Astro project.
-- 1 Astro Workspace for your project.
-- 1 Astro Deployment.
-- 1 primary and permanent branch in your Git repository. Astronomer recommends `main`.
+- One Astro project.
+- One Astro Workspace for your project.
+- One Astro Deployment.
+- One primary and permanent branch in your Git repository. Astronomer recommends `main`.
 
 With this method, you can configure a CI/CD pipeline that deploys code to Astro every time a change is made to an Astro project file in your Git repository. To deploy a change to your project:
 
 - Test all DAG and Astro project changes locally with the Astro CLI. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
-- Create a new, short-lived branch in your Git repository with the change and open a Pull Request (PR) against the `main` branch for review.
-- When the PR is approved and merged to `main`, the change is automatically deployed to your Deployment on Astro.
+- Create a new, temporary branch in your Git repository with the change and open a pull request against the `main` branch for review.
+- When the pull request is approved and merged to the main branch, the change is automatically deployed to your Deployment on Astro.
 
 ```mermaid
 flowchart LR;
@@ -72,14 +73,14 @@ Running all of your data pipelines in a single environment means that you don't 
 
 #### Multiple branches
 
-For small to medium-sized data teams running data pipelines in production, Astronomer recommends developing a CI/CD pipeline for multiple branches. With this method, you maintain 1 Git repository that has permanent branches for different versions of your Astro project. You also have multiple Astro Deployments for each of your branches. If you work at a larger organization, you can adapt this method by creating a Workspace for each team or business use case.
+For small to medium-sized data teams running data pipelines in production, Astronomer recommends developing a CI/CD pipeline for multiple branches. With this method, you maintain one Git repository that has permanent branches for different versions of your Astro project. You also have multiple Astro Deployments for each of your branches. If you work at a larger organization, you can adapt this method by creating a Workspace for each team or business use case.
 
 The multiple environment method assumes that you have:
 
-- 1 Astro project.
-- 1 Astro Workspace for your project.
-- At least 2 primary branches in your Git repository that each represent an environment. Astronomer recommends `main` and `dev`.
-- At least 2 Astro Deployments that each host different branches of your project.
+- One Astro project.
+- One Astro Workspace for your project.
+- At least two primary branches in your Git repository that each represent an environment. Astronomer recommends naming the branches `main` and `dev`.
+- At least two Astro Deployments that each host different branches of your project.
 
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
@@ -113,7 +114,7 @@ The most basic strategy is to have a single Git repository that hosts your entir
 
 #### Multiple repositories to a single Deployment
 
-Using multi-repository CI/CD strategy, you can manage your DAGs in one repository and Astro project settings in another. Use this strategy to ensure that DAG authors and data operators have access only to their own files. 
+Using a multi-repository CI/CD strategy, you can manage your DAGs in one repository and Astro project settings in another. Use this strategy to ensure that DAG authors and data operators have access only to their own files. 
 
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
@@ -126,13 +127,13 @@ id5-->|Full project deploy|id3
 id2-->|DAG-only deploy| id3[Astro Deployment]
 ```
 
-One drawback to this strategy is that you must keep any local copies of the Astro project in sync with both repositories in order to test Deployment code locally. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes. 
+One limitation of this strategy is that you must keep any local copies of the Astro project synchronized with both repositories in order to test Deployment code locally. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes. 
 
 This strategy requires enabling [DAG-only deploys](deploy-code.md#enable-dag-only-deploys-on-a-deployment) on the target Deployment and setting up your CI/CD pipeline on both Git repositories.
 
 #### S3 bucket and Git repository to a single Deployment
 
-Similarly to the multiple repository strategy, this strategy separates the management of DAGs and project configuration. DAGs are stored in an [S3 bucket](https://aws.amazon.com/s3/), while Astro project configuration files are stored in a Git repository. 
+Similar to the multiple repository strategy, this strategy separates the management of DAGs and project configuration. DAGs are stored in an [S3 bucket](https://aws.amazon.com/s3/), while Astro project configuration files are stored in a Git repository. 
 
 ```mermaid
 flowchart LR;
@@ -144,18 +145,18 @@ id2-->|"DAG-only deploy </br>(Lambda function)" | id3[Astro Deployment]
 id5-->|"Full project deploy </br> (CI/CD)"|id3
 ```
 
-If you migrated to Astro from MWAA, this strategy is useful for maintaining a similar workflow for DAG authors. You can set up a Lambda function to push DAGs to your Astronomer Deployment whenever DAG files are updated in your specific S3 bucket.
+If you migrated to Astro from Amazon Managed Workflows for Apache Airflow (MWAA), this strategy is useful for maintaining a similar workflow for DAG authors. You can set up a Lambda function to push DAGs to your Astronomer Deployment whenever DAG files are updated in your specific S3 bucket.
 
 ## Create a CI/CD pipeline
 
-The general process for creating an Astro CI/CD template is to:
+The process for creating an Astro CI/CD template includes the following steps:
 
-- Decide on a CI/CD strategy based on this document and your team's needs.
+- Selecting a CI/CD strategy after reviewing this document and the requirements of your team.
 - Set up your repositories and permissions based on your CI/CD strategy.
-- Add one of Astronomer's [CI/CD templates](ci-cd.md) to your repositories, or use the Astronomer-maintained [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action).
-- Modify the template or GitHub action as needed for your use case. 
+- Adding an Astronomer [CI/CD template](ci-cd.md) to your repositories, or using the Astronomer maintained [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action).
+- Modifying the Astronomer template or GitHub action to meet the requirements of your organization. 
 
-If you use GitHub, Astronomer strongly recommends using the Astronomer-maintained [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action).(https://github.com/astronomer/deploy-action).
+If you use GitHub, Astronomer recommends using the Astronomer maintained [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action).(https://github.com/astronomer/deploy-action).
 
 ## Test and validate DAGs in your CI/CD pipeline
 
