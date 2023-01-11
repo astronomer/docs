@@ -338,7 +338,7 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
-    AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": <your-service-account-key>}'
+    AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": "<your-service-account-key>"}
     ```
 
 3. Optional. Run `Variable.get("<your-variable-key>")` to run a DAG locally and confirm that your variables are accessible.
@@ -352,7 +352,7 @@ For more information on creating secrets in Google Cloud Secret Manager, read th
     ```text
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
 
-    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>"}'
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<your-secret-manager-project-id>"}
     ```
 
 3. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
@@ -366,7 +366,7 @@ To ensure the security of secrets, the `.env` variable is only available in your
 2. Run the following command to set the `SECRET_VAR_SERVICE_ACCOUNT` environment variable on your Astro Deployment: 
  
     ```sh
-    astro deployment variable create --deployment-id <your-deployment-id> SECRET_VAR_SERVICE_ACCOUNT='<your-service-account-key>' --secret
+    astro deployment variable create --deployment-id <your-deployment-id> SECRET_VAR_SERVICE_ACCOUNT="<your-service-account-key>" --secret
     ```
 
 3. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials in `AIRFLOW__SECRETS__BACKEND_KWARGS`.
