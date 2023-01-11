@@ -19,6 +19,28 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.9.0
+
+Release date: January 10, 2022
+
+### New `--template` Flag for `deployment inspect` Command
+
+Create template files based on already existing deployments with the `--template` flag. This template deployment file will have an empty name field ,  empty description field, and will not contain the deployments metadata. These template files can be used to create new deployments with the same configuration as the original.
+
+### Create and Update Deployments with Deployment Files
+
+Users can now use the `--deployment-file` flag with the `deployment create` and `update`. These new features along with the inspect command allow users to manage their Deployments as Code. Read more about Deployments as code in our documentation.
+
+### New `—dag-file` Flag for `astro run` Command
+
+By default The ‘astro run’ command parses all the DAGs in your dag folder, even if you only want to run 1 DAG. Now you can use the `--dag-file` flag to specify a DAG file. With this flag the command will only parse and run the DAG and file you specify.
+
+### Additional improvments
+
+- You will no longer need to enter credentials in locally running airflow environments. The credentials will filled in for you.
+- The configurations page in the Admin menu is not available to you to view in the local Webserver UI.
+- The Astro CLI will now tell you when a new version of the Astro CLI is available. Run 'astro config set -g upgrade_message false' to turn this feature off.
+
 ## Astro CLI 1.8.4
 
 Release date: December 12, 2022

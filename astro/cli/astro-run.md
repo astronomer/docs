@@ -20,6 +20,7 @@ astro run <dag-id>
 
 | Option                  | Description                                                                                                                                 | Possible Values                            |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| `-d`, `--dag-file` | DAG file where your DAG is located(optional). Use this flag to parse only the DAG file that has the DAG you want to run. You may get parsing errors related to other DAGs if you don't specify a DAG file. | Any valid python file in your DAG folder. |
 | `-e`,`--env`            | Path to an alternative environment variable file. The default is `.env` in your current Astro project.                                      | Any valid filepath.                         |
 | `--no-cache`            | Build your Astro project into a Docker image without using cache.                                                                           | None.                                       |
 | `-s`, `--settings-file` | An alternative settings file from which Airflow objects are imported. The default is `airflow_settings.yaml` in your current Astro project. | Any valid filepath. |
