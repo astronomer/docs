@@ -27,12 +27,14 @@ There are many benefits to configuring a CI/CD workflow on Astro. Specifically, 
 
 ## Choose a deploy strategy
 
-You can set up CI/CD pipelines to manage multiple Deployments and repositories based on your team structure. When developing a strategy, you'll need to answer the following questions:
+You can set up CI/CD pipelines to manage multiple Deployments and repositories based on your team structure. Before you create your pipeline, you need to determine how many repositories and branches of your project you want to deploy deploy to Astro.
+
+When developing a strategy, keep the size of your data team in mind while answering the following questions:
 
 - How many branches of a project do you want to host on Astro? Do you need to deploy a single production branch to a Deployment, or do you also need to deploy a development branch?
 - How many repositories do you want to host your project? Will different parts of your team work on different parts of your project?
 
-Read the following topics to learn which strategy is right for you. Advanced data teams might follow a custom CI/CD strategy that is not described here and is optimized for a particular use case or team structure. If you're not sure which CI/CD strategy is right for you, contact your customer success representative.
+Read the following topics to learn which combination of branches and repositories is right for your team. Advanced data teams might follow a custom CI/CD strategy that is not described here and is optimized for a particular use case or team structure. If you're not sure which CI/CD strategy is right for you, contact your customer success representative.
 
 ### Single branch vs. multiple branch repositories
 
