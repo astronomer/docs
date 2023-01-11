@@ -52,14 +52,15 @@ After receiving your request, Astronomer support initiates a peering request and
 
 <TabItem value="Private Service Connect">
 
-Private Service Connect allows Astro to access GCP data that belongs to different groups, teams, projects, and organizations. To learn more about Private Service Connect, see [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect).
+Use Private Service Connect (PSC) to create private connections from Astro to GCP services without connecting over the public internet. See [Private Service Connect](https://cloud.google.com/vpc/docs/private-service-connect) to learn more.
 
-The Astro data plane hosted on GCP is configured with a private services connection that accepts all Google APIs. All connections to Google services use the `googleapis.com` domain to ensure the privacy and security of communications within the Google network. A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
+The Astro data plane is by default configured with a PSC endpoint with a target of [All Google APIs](https://cloud.google.com/vpc/docs/configure-private-service-connect-apis#supported-apis). To provide a secure-by-default configuration, a DNS zone is created with a resource record that will route all requests made to `*.googleapis.com` through this PSC endpoint. This ensures that requests made to these services are made over PSC without any additional user configuration. As an example, requests to `storage.googleapis.com` will be routed through this PSC endpoint.
+
+A list of Google services and their associated service names are provided in the [Google APIs Explorer Directory](https://developers.google.com/apis-explorer). Alternatively, you can run the following command in the Google Cloud CLI to return a list of Google services and their associated service names:
 
 ```sh
 gcloud services list --available --filter="name:googleapis.com"
 ```
-You can use the default GCP DNS name in your DAGs to simplify the implementation of GCP private services connections. Astronomer has implemented a default GCP DNS zone and resource record that routes the default GCP DNS name through the private services connection.
 
 </TabItem>
 
