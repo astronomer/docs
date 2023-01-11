@@ -32,7 +32,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 1. Clone the Marquez repository:
 
     ```sh
-    git clone https://github.com/MarquezProject/marquez
+    git clone https://github.com/MarquezProject/marquez && cd marquez
     ```
 
 2. Start Marquez by running the following command:
