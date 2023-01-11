@@ -52,8 +52,8 @@ The following table lists the default Runtime environment variables. You can cha
 
 | Environment Variable                       | Description                                                                                                          | Value                                   |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The time in seconds that tasks in the `queued` state running with the Celery executor are assumed to have stalled before they are automatically rescheduled.  | `600`   |
-| `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of task instances that can run concurrently for each scheduler in Airflow, regardless of the worker count.                                                              | `<Number-of-Running-Workers-for-all-Worker-Queues>` * `<Max-Tasks-Per-Worker>`           |
+| `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The maximum time in seconds that tasks running with the Celery executor can remain in a `queued` state before they are automatically rescheduled.  | `600`   |
+| `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of task instances that can run concurrently for each scheduler in your Deployment.                                                           | `[number-of-running-workers-for-all-worker-queues] * [max-tasks-per-worker]`           |
 
 ## Provider packages
 
