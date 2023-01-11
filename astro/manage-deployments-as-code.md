@@ -134,6 +134,7 @@ The updated Deployment appears in the Cloud UI.
 When updating a Deployment with a Deployment file, keep the following in mind:
 
 - You can’t change the cluster the Deployment runs on. However, you can use the Deployment file to create a new Deployment with a different cluster.
+- You can't change the runtime version of the Deployment using this command. You can only change the runtime version by updatign your Docker file with the Deploy command.
 - The Deployment's environment variables are updated to match the exact variables configured in `environment_variables`. Any variables that exist in the Deployment but are not in the Deployment file are deleted. If an environment variable is a secret, remove the value from the Deployment file to ensure it doesn’t change during an update.
 - Worker queues are updated to match the `worker_queues` section in the Deployment file. Any existing worker queues that are in the Deployment but not in the Deployment file are deleted.
 
