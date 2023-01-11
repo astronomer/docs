@@ -7,11 +7,11 @@ sidebar_label: Snowflake
 
 [Snowflake](https://www.snowflake.com/) is one of the most commonly used data warehouses. Orchestrating Snowflake queries as part of a data pipeline is one of the most common Airflow use cases. Using Airflow with Snowflake is straightforward, and there are multiple open source packages, tools, and integrations that can help you realize the full potential of your existing Snowflake instance.
 
-This tutorial covers an example of orchestrating a complex pattern in Snowflake with Airflow, including:
+This tutorial covers an example of orchestrating complex Snowflake operations with Airflow, including:
 
 - Creating tables.
 - Loading data into Snowflake.
-- Running any transformation on data in Snowflake using Airflow operators. 
+- Running transformations on data in Snowflake using Airflow operators. 
 - Running data quality checks on data in Snowflake. 
 
 Additionally, the [How it works](#how-it-works) sections offers further information on:
@@ -40,7 +40,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 ## Step 1: Configure your Astro project
 
-Use the Astro CLI to create and run an Airflow project locally.
+Use the Astro CLI to create and run an Airflow project on your local machine.
 
 1. Create a new Astro project:
 
@@ -49,25 +49,16 @@ Use the Astro CLI to create and run an Airflow project locally.
     $ astro dev init
     ```
 
-2. Ensure that your Astro project is using at least Version 7.0.0 or newer of Astro Runtime (found in your Dockerfile).
 
-3. In your `requirements.txt` file add the three provider packages as shown below to ensure version compatibility. If you created a *new* Astro project with the Astro CLI, these packages come pre-installed in their latest version and no action is necessary.
-
-    ```text
-    apache-airflow-providers-common-sql>==1.3.1
-    apache-airflow-providers-snowflake>==4.0.2
-    astronomer-providers[all]>==1.13.0
-    ```
-
-4. Start your Airflow project by running:
+2. Run the following command to start your Airflow project:
 
     ```sh
     $ astro dev start
     ```
 
-## Step 2: Configure your Snowflake connection
+## Step 2: Configure a Snowflake connection
 
-1. In the Airflow UI, go to **Admin** -> **Connections** and click on the **+** sign. 
+1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
 
 2. Create a new connection named `snowflake_default` and choose the `snowflake` connection type. Enter the following information:
 
@@ -191,9 +182,9 @@ The DAG you will create in Step 4 runs multiple SQL statements against your Snow
     """
     ```
 
-    This file contains 7 SQL statements that will be run by different operators in your DAG.
+    This file contains 7 SQL statements, each of which you can run individually from your DAG.
 
-2. The Snowflake operator also allows you to pass in a `.sql` file directly. Create a file in your `include/sql` directory called `delete_table.sql` and copy the following SQL code:
+2. The Snowflake operator also accepts a direct `.sql` file for execution. Create a file in your `include/sql` folder called `delete_table.sql` and add the following SQL code to it:
 
     ```sql
     DROP TABLE IF EXISTS {{ params.table_name }};
@@ -207,11 +198,11 @@ When running SQL statements from Airflow operators, you can store the SQL code i
 
 :::
 
-## Step 4: Add a complex Snowflake DAG
+## Step 4: Write a Snowflake DAG
 
 1. Create a new file in your `dags` directory called `complex_snowflake_example.py`.
 
-2. Copy and paste the code below into the new DAG file:
+2. Copy and paste the code below into the file:
 
     ```python
     from airflow import DAG
@@ -450,21 +441,21 @@ When running SQL statements from Airflow operators, you can store the SQL code i
     - Copies data into the production table.
     - Deletes the tables to clean up the example.
 
-## Step 5: Run the DAG
+## Step 5: Run the DAG and review data quality results
 
 1. In the Airflow UI, click the play button to manually run your DAG.
 
-2. Navigate to the `Grid` view of the `complex_snowflake_example` DAG and click on the `quality_check_group_forestfire_costs` task group to expand it and see the two tasks which ran data quality checks on the `forestfire_costs` table. Click on the `forestfire_costs_column_checks` task to view the successful checks in the logs.
+2. Navigate to the `Grid` view of the `complex_snowflake_example` DAG and click on the `quality_check_group_forestfire_costs` task group to expand it. You should see two tasks which ran data quality checks on the `forestfire_costs` table. Click on the `forestfire_costs_column_checks` task to view the successful checks in the task's logs.
 
     ![Forestfire quality checks logs](/img/guides/snowflake_forestfire_quality_checks_logs.png)
 
 ## Step 6: Use deferrable operators
 
-The `complex_snowflake_example` DAG runs several queries against the same Snowflake database in parallel. While some queries like the ones creating tables run quickly, larger transformation or loading queries might take some time to run. This is a great use case for the deferrable version of the SnowflakeOperator, the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync). Deferrable operators use the triggerer component in your Airflow environment, which is configured automatically if you are using the Astro CLI, in order to release their worker slot while they wait to be able to execute a task. This allows you to use your Airflow resources much more efficiently in production. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
+The `complex_snowflake_example` DAG runs several queries against the same Snowflake database in parallel. While some queries, like the ones creating tables, run quickly, larger transformation or loading queries might take longer to complete. These queries are a great use case for the deferrable version of the SnowflakeOperator, the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync). Deferrable operators use the triggerer component in your Airflow environment, which is configured automatically with the Astro CLI, to release their worker slot while they wait to for the task to be completed. This allows you to use your Airflow resources much more efficiently in production. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
 
 Using deferrable operators from the Astronomer providers package is easy, you simply have to switch out the operator class. All parameters stay the same.
 
-1. Add the following import statement to your DAG importing the SnowflakeOperatorAsync:
+1. Add the following statement to your DAG to import the SnowflakeOperatorAsync:
 
     ```python
     from astronomer.providers.snowflake.operators.snowflake import (
@@ -472,7 +463,7 @@ Using deferrable operators from the Astronomer providers package is easy, you si
         )
     ```
 
-2. Switch out the operator used in the `load_forestfire_data` and `load_cost_data` task by replacing `SnowflakeOperator` with `SnowflakeOperatorAsync`:
+2. Switch out the operators used in the `load_forestfire_data` and `load_cost_data` tasks by replacing `SnowflakeOperator` with `SnowflakeOperatorAsync`:
 
     ```python
     load_forestfire_data = SnowflakeOperatorAsync( # changed operator name
@@ -488,7 +479,7 @@ Using deferrable operators from the Astronomer providers package is easy, you si
         )
     ```
 
-3. Run your DAG and observe how the two load tasks go into a deferred state (purple border) before being executed.
+3. Run your DAG and observe how the two load tasks go into a deferred state (purple border) before being completed.
 
      ![Load tasks deferred state](/img/guides/snowflake_example_deferred_state.png)
 
