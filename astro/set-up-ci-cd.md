@@ -25,7 +25,7 @@ There are many benefits to configuring a CI/CD workflow on Astro. Specifically, 
 - Enforce automated testing, which increases code quality and allows your team to respond quickly in case of an error or failure.
 - Configure more granular user permissions by managing access and changes to your Astro project source code in your version control tool.
 
-## Choose a Deployment strategy
+## Choose a deploy strategy
 
 You can set up CI/CD pipelines to manage multiple Deployments and repositories based on your team structure. When developing a strategy, you'll need to answer the following questions:
 
@@ -109,7 +109,7 @@ When you make this decision, keep in mind how many branches of your project to h
 
 The most basic strategy is to have a single Git repository that hosts your entire Astro project. If you have multiple team members working on the project, they all commit to the same repository regardless of what changes they're making. This strategy is recommended if your project configurations are not sensitive and your DAG authors are comfortable making code changes within the context of a larger project, or if you have a single team member responsible for an entire Astro project. 
 
-#### Multiple Git repositories to a single Deployment
+#### Multiple repositories to a single Deployment
 
 Using multi-repository CI/CD strategy, you can manage your DAGs in one repository and Astro project settings in another. Use this strategy to ensure that DAG authors and data operators have access only to their own files. 
 
@@ -154,3 +154,7 @@ The general process for creating an Astro CI/CD template is to:
 - Modify the template or GitHub action as needed for your use case. 
 
 If you use GitHub, Astronomer strongly recommends using the Astronomer-maintained [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action).(https://github.com/astronomer/deploy-action).
+
+## Test and validate DAGs in your CI/CD pipeline
+
+Astronomer recommends that you pytest all Python code in your DAGs. The Astro CLI includes [pytests](test-and-troubleshoot-locally.md#test-dags-with-the-astro-cli) to validate that your DAGs do not have import or syntax errors. You can implement this parse test with the [Astro CLI](cli/astro-dev-parse.md) or the [Deploy Action](https://github.com/astronomer/deploy-action). The default test may not work on all DAGs, especially if they access the Airflow meta database at runtime. In this case, you can write your own parse test using example pytests provided in the default Astro project.
