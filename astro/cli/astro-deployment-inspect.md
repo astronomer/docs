@@ -8,6 +8,10 @@ hide_table_of_contents: true
 
 Inspect an Astro Deployment. This command returns a YAML or JSON representation of a Deployment's current configuration and state as shown in the Cloud UI. When the `--key` flag is used, it returns only the values specified with the flag.
 
+:::note
+For more information about Deployment files, see [Manage Deployments as Code](manage-deployments-as-code.md).
+:::
+
 ## Usage
 
 ```sh
@@ -50,16 +54,14 @@ deployment:
         cluster_name: Prod Cluster
         workspace_name: Data Engineering
     worker_queues:
-        - name: heavy-compute
-          is_default: false
-          max_worker_count: 10
-          min_worker_count: 0
-          worker_concurrency: 16
-          worker_type: m5.xlarge
         - name: default
-          is_default: true
           max_worker_count: 10
           min_worker_count: 1
+          worker_concurrency: 16
+          worker_type: m5.xlarge
+        - name: heavy-compute
+          max_worker_count: 10
+          min_worker_count: 0
           worker_concurrency: 16
           worker_type: m5.xlarge
     alert_emails:
@@ -88,6 +90,7 @@ deployment:
 | `--workspace-id`          | Specify a Workspace to run this command for a Deployment that is outside of your current Workspace.                                               | Any valid Workspace ID   |
 | `-k`, `--key`             | Return only a specific configuration key for a Deployment. For example `--key configuration.cluster_id` to get a Deployment's cluster ID.       | Any valid Deployment configuration key   |
 | `-o`, `--output`          | Output format can be one of: YAML or JSON. By default, inspecting a Deployment returns  a file in YAML format. | `yaml` or `json`             |
+| `-t`, `--template`          | Create a template from the deployment being inspected. | N/A            |
 
 ## Examples
 
@@ -104,10 +107,6 @@ $ astro deployment inspect <deployment-id> --key information.status
 # Store a Deployment's configuration in a deployment file
 $ astro deployment inspect <deployment-id> > deployment.yaml
 ```
-
-:::note
-For more information about Deployment files, see [Manage Deployments as Code](manage-deployments-as-code.md).
-:::
 
 ## Related Commands
 

@@ -26,6 +26,7 @@ deployment:
     environment_variables:
         - key: EXAMPLE
           value: test
+          is_secret: false
         - key: EXAMPLE2
           value:
           is_secret: true
@@ -40,7 +41,6 @@ deployment:
         workspace_name: Test Workspace
     worker_queues:
         - name: default
-          is_default: true
           max_worker_count: 10
           min_worker_count: 1
           worker_concurrency: 16
@@ -75,7 +75,7 @@ The `configuration` section contains all settings that you can configure from th
 
 The `environment_variables` section contains configurations Deployment environment variables. See [Environment variables](environment-variables.md).
 
-You can set `environment_variables.is_secret: true` on any new or existing environment variables to set them as secret, but you won't be able to retrieve the secret value from the Deployment once you push your configuration. Astronomer recommends that you avoid committing Deployment files containing secret values to GitHub repositories.
+You can set `environment_variables.is_secret: true` on any new or existing environment variables to set them as secret, but you won't be able to retrieve the secret value from the Deployment once you push your configuration. Astronomer recommends that you avoid committing Deployment files containing secret values to GitHub repositories. If you are commiting these files to continually update deployments, update secret values manually and leave them blank in the file.
 
 ### Worker queue settings
 
@@ -86,23 +86,33 @@ The `worker_queues` section defines the worker queues for a Deployment. All Depl
 Run the following command to create a Deployment file from an existing Deployment:
 
 ```bash
-astro deployment inspect -d <deployment-id> > deployment.yaml
+astro deployment inspect -n <deployment-name> > deployment.yaml
 ```
 
-After the Deployment file is created, you can use it to update the settings of original Deployment, or you can use it to create a new Deployment.
+After the Deployment file is created, you can use it to update the settings of the original Deployment.
+
+## Create a Deployment Template file from an existing Deployment
+
+Use the `--template` flag when inspecting a deployment to create template file. This template file will not include the metadata, name, or descriptiion from the original deployment.
+
+```bash
+astro deployment inspect -n <original-deployment-name> --template > new-deployment.yaml
+```
+
+Now you can use this deployment template file to create a new Deployment with the same configuration as the original.
 
 ## Create a Deployment with a Deployment file
 
-Run the following command to create a new Deployment on Astro based on a Deployment file:
+First update the `configuration.name` field to relect the name of the new Deployment. Then run the following command to create a new Deployment on Astro based on a Deployment file:
 
 ```bash
-astro deployment create --name <new-deployment-name> --deployment-file deployment.yaml
+astro deployment create --deployment-file new-deployment.yaml
 ```
 
 Keep the following in mind when creating a Deployment with a Deployment file:
 
 - The `name` and `cluster_name` fields are the only fields required to create a Deployment. The CLI will create the Deployment using default values for each unspecified configuration. These default values are the same default values for when you create a Deployment from the Cloud UI.
-- When creating worker queues, only the `name` field is required. Any unspecified fields are populated with smart defaults based on your cluster's available worker types. 
+- When creating worker queues, the `name` and `worker_type` fields are required. Any unspecified fields are populated with smart defaults based on your cluster's available worker types. 
 - When creating environment variables, each variable must include a `key` and a `value`.
 
 ## Update a Deployment with a Deployment file
