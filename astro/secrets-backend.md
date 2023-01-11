@@ -361,7 +361,7 @@ To ensure the security of secrets, the `.env` variable is only available in your
 
 #### Configure Secret Manager on Astro using a service account JSON key file
 
-1. Set up the Secret Manager locally. See [Set up GCP Secret Manager locally](#set-up-gcp-secret-manager-locally)
+1. Set up the Secret Manager locally. See [Set up GCP Secret Manager locally](#set-up-gcp-secret-manager-locally).
 
 2. Run the following command to set the `SECRET_VAR_SERVICE_ACCOUNT` environment variable on your Astro Deployment: 
  
