@@ -91,8 +91,26 @@ The following table lists all available instance types for worker node pools, as
 
 | Node Instance Type | CPU    | Memory       |
 | ------------------ | ------ | ------------ |
-| e2-standard-4      | 2 CPUs | 7.5  GiB MEM |
-| e2-standard-8      | 6 CPUs | 22.5 GiB MEM |
+| e2-standard-4      | 3 CPUs | 13 GiB MEM   |
+| e2-standard-8      | 7 CPUs | 29 GiB MEM   |
+| e2-standard-16     | 15 CPUs| 61 GiB MEM   |
+| e2-highmem-4       | 3 CPUs | 29 GiB MEM   |
+| e2-highmem-8       | 7 CPUs | 61 GiB MEM   |
+| e2-highmem-16      | 15 CPUs| 125 GiB MEM  |
+| e2-highcpu-4       | 3 CPUs | 1 GiB MEM    |
+| e2-highcpu-8       | 7 CPUs | 5 GiB MEM    |
+| e2-highcpu-16      | 15 CPUs| 13 GiB MEM   |
+| n2-standard-4      | 3 CPUs | 13 GiB MEM   |
+| n2-standard-8      | 7 CPUs | 29 GiB MEM   |
+| n2-standard-16     | 15 CPUs| 61 GiB MEM   |
+| n2-highmem-4       | 3 CPUs | 29 GiB MEM   |
+| n2-highmem-8       | 7 CPUs | 61 GiB MEM   |
+| n2-highmem-16      | 15 CPUs| 125 GiB MEM  |
+| n2-highcpu-4       | 3 CPUs | 1 GiB MEM    |
+| n2-highcpu-8       | 7 CPUs | 5 GiB MEM    |
+| n2-highcpu-16      | 15 CPUs| 13 GiB MEM   |
+| c2-standard-4      | 3 CPUs | 13 GiB MEM   |
+| c2-standard-8      | 7 CPUs | 29 GiB MEM   |
 
 If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md).
 
