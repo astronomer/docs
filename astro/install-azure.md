@@ -31,7 +31,7 @@ For more information about managing Azure subscriptions with the Azure CLI, see 
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Bring your own cloud', value: 'byoc'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">

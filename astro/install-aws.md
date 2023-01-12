@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 The Astro data plane on Amazon Web Services (AWS) runs on Elastic Kubernetes Service (EKS). You have two options to install Astro on AWS:
 
-- Bring your own cloud -  Create an Astro cluster in a dedicated AWS account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
+- Bring Your Own Cloud -  Create an Astro cluster in a dedicated AWS account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
 - Hosted - Create an Astro cluster in a dedicated AWS account that's hosted and owned by Astronomer. This removes the complexity of adding another AWS account to your network.
 
 With the two options, the user experience is identical and Astronomer is responsible for managing Astro. The differences between the two options are security and networking.
@@ -30,7 +30,7 @@ For a list of the AWS resources and configurations that Astronomer supports, see
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Bring your own cloud', value: 'byoc'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
