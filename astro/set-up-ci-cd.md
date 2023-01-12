@@ -102,7 +102,7 @@ end
 
 This method provides your team with an additional environment on Astro to test before pushing changes to production. Each Deployment can contain separate versions of your code, as well as separate environmental configurations. If you use Snowflake, for example, your development Deployment on Astro can use a virtual data warehouse for development (`DWH Dev`), and your production Deployment can use a different virtual data warehouse for production (`DWH Prod`).
 
-### Single repository vs. multiple repositories
+### Single repository versus multiple repositories
 
 Astro supports deploying DAG code changes separately from project configuration changes. If multiple team members work on a single Astro project, decide whether you need multiple Git repositories to separate their work and permissions.
 
@@ -152,7 +152,7 @@ If you migrated to Astro from Amazon Managed Workflows for Apache Airflow (MWAA)
 The process for creating an Astro CI/CD template includes the following steps:
 
 - Selecting a CI/CD strategy after reviewing this document and the requirements of your team.
-- Set up your repositories and permissions based on your CI/CD strategy.
+- Setting up your repositories and permissions based on your CI/CD strategy.
 - Adding an Astronomer [CI/CD template](ci-cd.md) to your repositories, or using the Astronomer maintained [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action).
 - Modifying the Astronomer template or GitHub action to meet the requirements of your organization. 
 
