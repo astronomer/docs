@@ -33,7 +33,6 @@ The following cell types have been added to the Astro Cloud IDE:
 - **Warehouse SQL**: Runs a SQL query against an existing database connection and stores the results in your data warehouse. Use this cell type for data operations that require more storage and a higher level of reliability.
 - **Markdown**: Adds documentation as in-line comments to your generated DAG code. Use this cell to make it easier for team members to collaborate on the same pipeline.
 
-
 ### Additional improvements
 
 - To reduce the time it takes for Airflow to parse new DAG files, the default value for `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` has been reduced from 5 minutes to 30 seconds for all Deployments regardless of Runtime version. For most users, this means that you will see new DAGs appear in the Airflow UI faster.
