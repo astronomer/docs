@@ -15,6 +15,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 ## Create a SQL cell
 1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
+
 2. Select a project.
 
 3. On the **Pipelines** page click a pipeline name to open the pipeline editor.
@@ -28,8 +29,11 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
     Regardless of which cell type you choose, you can use the results of your queries in downstream SQL and Python cells.
 
 5. Click the cell name and enter a name for the cell.
+
 6. Add your SQL query to the cell body.
+
 7. In the **Select Connection** list, select the connection for the database you want to query against.
+
 8. If you're using Warehouse SQL cells, configure the **Output Table** for storing the results of your query. This table must be accessible from your configured connection.
 
 ## Run a SQL cell
