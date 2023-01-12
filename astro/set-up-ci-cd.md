@@ -63,10 +63,11 @@ flowchart LR;
 classDef subgraph_padding fill:none,stroke:none
 classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
 id1[Local Astro project]-->|Push code change|id2[Feature branch]
-subgraph Git repository
+subgraph Git ["Git repository"]
 id2-->|Pull request| id3[Main branch]
 end
 id3-->|Deploy through CI/CD| id4[Astro Deployment]
+style Git fill:#bfeaff,stroke:#333,stroke-width:2px
 ```
 
 Running all of your data pipelines in a single environment means that you don't have to pay for the infrastructure of multiple Deployments, but it limits your ability to test changes on Astro or on development datasets before they are deployed. Astronomer does not recommend this method for production use cases.
@@ -88,16 +89,18 @@ flowchart LR;
 classDef subgraph_padding fill:none,stroke:none
 classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
 id1[Local Astro project]-->|Push code change|id2[Feature branch]
-subgraph Git repository
+subgraph Git ["Git repository"]
 id2-->|Pull request| id3[Dev branch]
 id3 --> id5[Main branch]
 end
 id3-->|Deploy through CI/CD| id4[Dev Deployment]
 id5-->|Deploy through CI/CD| id6[Main Deployment]
-subgraph Astro
+subgraph Astro [Astro]
 id4
 id6
 end
+style Astro fill:#bfeaff,stroke:#333,stroke-width:2px
+style Git fill:#bfeaff,stroke:#333,stroke-width:2px
 ```
 
 This method provides your team with an additional environment on Astro to test before pushing changes to production. Each Deployment can contain separate versions of your code, as well as separate environmental configurations. If you use Snowflake, for example, your development Deployment on Astro can use a virtual data warehouse for development (`DWH Dev`), and your production Deployment can use a different virtual data warehouse for production (`DWH Prod`).
@@ -119,7 +122,6 @@ Using a multi-repository CI/CD strategy, you can manage your DAGs in one reposit
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
 flowchart LR;
-classDef subgraph_padding fill:none,stroke:none
 classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
 id1[Admin's local Astro project]-->|Push project changes|id5[Git repository]
 id4[DAG author's local Astro project]-->|Push DAG changes|id2[Git repository]
