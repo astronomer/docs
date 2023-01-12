@@ -48,6 +48,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | `centralus`        | Central US         | ✔️                            |                |
 | `eastasia`         | East Asia          | ✔️                            |                |
 | `eastus`           | East US            | ✔️                            |                |
+| `eastus2`           | East US 2          | ✔️                        |   ✔️ (Private Preview)         |
 | `japaneast`        | Japan East         | ✔️                            |                |
 | `koreacentral`     | Korea Central      | ✔️                            |                |
 | `northeurope`      | North Europe       | ✔️                            | ✔️              |
