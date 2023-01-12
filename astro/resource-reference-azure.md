@@ -12,7 +12,7 @@ Read the following document for a reference of our default resources as well as 
 
 ## Default cluster values
 
-| Resource                                                                                                                 | Description                                                                                                                                                                                                                                                                               | Quantity/ Default Size                                                                        | Configurable? |
+| Resource                                                                                                                 | Description                                                                                                                                                                                                                                                                               | Quantity/ Default Size                                                                        | Configurable  |
 | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
 | [Azure Kubernetes Service (AKS) Cluster](https://docs.microsoft.com/en-us/azure/aks/intro-kubernetes)                    | Runs the Astro Data Plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                          | 1x                                                                                            | ✔️             |
 | [Resource Group](https://docs.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal) | A container for cluster resources.                                                                                                                                                                                                                                                        | 1x                                                                                            |               |
@@ -53,11 +53,13 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | `northeurope`      | North Europe       | ✔️                            | ✔️              |
 | `southafricanorth` | South Africa North | ✔️                            |                |
 | `southcentralus`   | South Central US   | ✔️                            |                |
+| `southeastasia`   | South East Asia   | ✔️                            |    ✔️ (Private Preview)            |
 | `uksouth`          | UK South           | ✔️                            |                |
 | `westeurope`       | West Europe        | ✔️                            | ✔️              |
+| `westus2`          | West US 2         | ✔️                            |   ✔️ (Private preview)             |
 | `westus3`          | West US 3          | ✔️                            |                |
 
-Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
+Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ### Worker node pools
 

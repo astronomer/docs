@@ -12,7 +12,7 @@ Read the following document for a reference of our default resources as well as 
 
 ## Default cluster values
 
-| Resource                                                                                             | Description                                                                                                                                                                                                                                                                               | Quantity/ Default Size                                                                     | Configurable? |
+| Resource                                                                                             | Description                                                                                                                                                                                                                                                                               | Quantity/ Default Size                                                                     | Configurable  |
 | ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ------------- |
 | [GKE Cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/kubernetes-engine-overview)   | A GKE cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks. Workload Identity is enabled on this cluster.                                                                                                                | 1x, IP Ranges are `172.21.0.0/19` for cluster IPs and `172.22.0.0/19` for cluster services |               |
 | Worker node pool                                                                                     | A node pool that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of e2-standard-4 nodes                                                             | ✔️             |
@@ -50,7 +50,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | `australia-southeast1`    | Sydney, Australia             | ✔️                            |                |
 | `australia-southeast2`    | Melbourne, Australia          | ✔️                            |                |
 | `europe-central2`         | Warsaw, Europe                | ✔️                            |                |
-| `europe-north1`           | Finalnd, Europe               | ✔️                            |                |
+| `europe-north1`           | Finland, Europe               | ✔️                            |                |
 | `europe-southwest1`       | Madrid, Europe                | ✔️                            |                |
 | `europe-west1`            | Belgium, Europe               | ✔️                            | ✔️              |
 | `europe-west2`            | England, Europe               | ✔️                            | ✔️              |
@@ -73,7 +73,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | `us-west3`                | Salt Lake City, North America | ✔️                            |                |
 | `us-west4`                | Nevada, North America         | ✔️                            |                |
 
-Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
+Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ### Worker node pools
 
