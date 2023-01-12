@@ -17,7 +17,7 @@ Read the following document for a reference of our default resources as well as 
 
 ## Default cluster values
 
-| Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                        | Configurable? |
+| Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                        | Configurable |
 | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------- |
 | [EKS Cluster](https://aws.amazon.com/eks)                                                           | An EKS cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                                                            | 1x                                            |               |
 | Worker node pool                                                                                    | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | ✔️             |
@@ -68,7 +68,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | `us-west-1`      | US West (N. California)   | ✔️                            |                |
 | `us-west-2`      | US West (Oregon)          | ✔️                            | ✔️              |
 
-Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that is not on this list, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ### RDS instance type
 
