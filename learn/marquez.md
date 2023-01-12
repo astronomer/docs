@@ -26,6 +26,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- [PostgreSQL](https://www.postgresql.org/download/).
 
 ## Step 1: Run Marquez locally
 
@@ -240,7 +241,7 @@ For this tutorial you will create two DAGs to generate and interpret lineage dat
         create_table >> insert_data
     ```
 
-The first DAG creates and populates a table (`animal_adoptions_combined`) with data aggregated from the two source tables (`adoption_center_1` and `adoption_center_2`) you created in [Step 3](#step-3-configure-your-database). The second DAG creates and populates a reporting table (`adoption_reporting_long`) using data from the aggregated table (`animal_adoptions_combined`) created in your first DAG.
+The first DAG creates and populates a table (`animal_adoptions_combined`) with data aggregated from the two source tables (`adoption_center_1` and `adoption_center_2`) you created in [Step 3](#step-3-configure-your-database). The second DAG creates and populates a reporting table (`adoption_reporting_long`) using data from the aggregated table (`animal_adoptions_combined`) created in your first DAG. Both of these DAGs use the `PostgresOperator` which has a pre-built [OpenLineage extractor](https://github.com/OpenLineage/OpenLineage/blob/main/integration/airflow/openlineage/airflow/extractors/postgres_extractor.py), so lineage is generated automatically.
 
 You might want to make adjustments to these DAGs if you are working with different source tables, or if your Postgres connection id is not `postgres_default`.
 
