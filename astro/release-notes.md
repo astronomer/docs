@@ -33,7 +33,6 @@ The following cell types have been added to the Astro Cloud IDE:
 - **Warehouse SQL**: Runs a SQL query against an existing database connection and stores the results in your data warehouse. Use this cell type for data operations that require more storage and a higher level of reliability.
 - **Markdown**: Adds documentation as in-line comments to your generated DAG code. Use this cell to make it easier for team members to collaborate on the same pipeline.
 
-For more information, see [Run SQL](cloud-ide/run-sql.md) and [Document your pipeline](cloud-ide/document-pipeline.md).
 
 ### Additional improvements
 
