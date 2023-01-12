@@ -58,7 +58,7 @@ The following terms are used frequently when discussing data lineage and OpenLin
 
 ## Why OpenLineage with Airflow?
 
-In the section above, you learned *what* lineage is, but a question remains *why* you would want to have data lineage in conjunction with Airflow. Using OpenLineage with Airflow allows you to have more insight into complex data ecosystems and can lead to better data governance. Airflow is a natural place to integrate data lineage, because it is often used as a one-stop-shop orchestrator that touches data across many parts of an organization.
+In the previous section, you learned *what* lineage is, but a question remains *why* you would want to have data lineage in conjunction with Airflow. Using OpenLineage with Airflow allows you to have more insight into complex data ecosystems and can lead to better data governance. Airflow is a natural place to integrate data lineage, because it is often used as a one-stop-shop orchestrator that touches data across many parts of an organization.
 
 More specifically, OpenLineage with Airflow provides the following capabilities:
 
@@ -74,11 +74,11 @@ These capabilities translate into real world benefits by:
 
 ## Lineage on Astro
 
-For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage integration is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your organization. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io/openlineage). 
+For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage integration is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your organization. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io). 
 
 ## Getting started
 
-If you are working with open source tools, you can run OpenLineage with Airflow locally using Marquez as the lineage front end. See our [Integrate OpenLineage and Airflow locally with Marquez](marquez.md) tutorial to get started.
+If you are working with open source tools, you can run OpenLineage with Airflow locally using Marquez as the lineage front end. See [Integrate OpenLineage and Airflow locally with Marquez](marquez.md) tutorial to get started.
 
 ## Limitations
 

@@ -1,6 +1,6 @@
 ---
-title: "Integrate OpenLineage and Airflow locally with Marquez"
-sidebar_label: "Run OpenLineage locally with Marquez"
+title: "Integrate OpenLineage and Airflow with Marquez"
+sidebar_label: "Marquez"
 description: "Use OpenLineage and Marquez to get lineage data locally from your Airflow DAGs."
 id: marquez
 tags: [Lineage]
@@ -35,7 +35,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     git clone https://github.com/MarquezProject/marquez && cd marquez
     ```
 
-2. Start Marquez by running the following command:
+2. Run the following command in the `marquez` directory to start Marquez:
 
     ```sh
     ./docker/up.sh
@@ -54,7 +54,7 @@ Use the Astro CLI to create and run an Airflow project locally that will integra
     $ astro dev init
     ```
 
-2. Add the following environment variables below to your `.env` file:
+2. Add the following environment variables below to your Astro project `.env` file:
     
     ```bash
     OPENLINEAGE_URL=http://host.docker.internal:5000
@@ -62,21 +62,17 @@ Use the Astro CLI to create and run an Airflow project locally that will integra
     AIRFLOW__LINEAGE__BACKEND=openlineage.lineage_backend.OpenLineageBackend
     ```
 
-    These will allow Airflow to connect with the OpenLineage API and send your lineage data to Marquez.
+    These variables allow Airflow to connect with the OpenLineage API and send your lineage data to Marquez.
     
     By default, Marquez uses port 5000 when you run it using Docker. If you are using a different OpenLineage front end instead of Marquez, or you are running Marquez remotely, you can modify the `OPENLINEAGE_URL` as needed.
     
-3. Modify your `config.yaml` in the `.astro/` directory to choose a different port for Postgres:
+3. Marquez also uses Postgres, so you will need to have Airflow use a different port than the default 5432 which is already allocated to Airflow. Run the following command to use a port 5435 for Postgres:
     
-    ```yaml
-    project:
-      name: astro-marquez-tutorial
-    postgres:
-      port: 5435
+    ```sh
+    astro config set postgres.port 5435
     ```
 
-    Marquez also uses Postgres, so you will need to have Airflow use a different port than the default 5432, which is already allocated.
-    
+
 4. Run the following command to start your local project:
 
     ```sh
@@ -93,7 +89,7 @@ To show the lineage data that can result from Airflow DAG runs, you'll use two s
 
     ```bash
     psql -h localhost -p 5435 -U postgres
-    <enter password `postgres` when prompted>
+    # enter password `postgres` when prompted
     create database lineagetutorial;
     \c lineagetutorial;
     ```
@@ -132,10 +128,10 @@ The connection you configure will connect to the Postgres database you created i
 
 2. Create a new connection named `postgres_default` and choose the `postgres` connection type. Enter the following information:
 
-    - **Host:** host.docker.internal
-    - **Login:** postgres
-    - **Password:** postgres
-    - **Port:** 5435
+    - **Host:** `host.docker.internal`
+    - **Login:** `postgres`
+    - **Password:** `postgres`
+    - **Port:** `5435`
 
     If you are working with a database other than local Postgres, you may need to provide different information to the connection.
 
@@ -266,8 +262,8 @@ You can trace the data through the DAGs you created in Step 5 by viewing their l
 
     The lineage graph shows:
 
-    - Two origin datasets that are used to populate the combined data table;
-    - The four jobs (tasks) from your DAGs that create new tables and result in new combined datasets: `combine` and `reporting`;
+    - Two origin datasets that are used to populate the combined data table.
+    - The four jobs (tasks) from your DAGs that create new tables and result in new combined datasets: `combine` and `reporting`.
     - Two new datasets that are created by those jobs.
 
 The lineage graph shows you how these two DAGs are connected and how data flows through the entire pipeline, giving you insight you wouldn't have if you were to view these DAGs in the Airflow UI alone.
