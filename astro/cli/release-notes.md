@@ -21,25 +21,27 @@ If you have any questions or a bug to report, contact [Astronomer support](https
 
 ## Astro CLI 1.9.0
 
-Release date: January 10, 2022
+Release date: January 12, 2023
 
-### New `--template` Flag for `deployment inspect` Command
+### Programmatically manage Deployments with the Astro CLI
 
-Create template files based on already existing deployments with the `--template` flag. This template deployment file will have an empty name field ,  empty description field, and will not contain the deployments metadata. These template files can be used to create new deployments with the same configuration as the original.
+Astro CLI version 1.9 includes two new commands that make it possible to programmatically manage Deployments: `astro deployment inspect --template` and `astro deployment create/update --deployment-file`.
 
-### Create and Update Deployments with Deployment Files
+`astro deployment inspect --template` creates a template file based on the selected Deployment. A template file is YAML configuration file that includes all information about a Deployment except for its name, description field, and metadata. Template files allow you to programmatically create new Deployments outside of the Cloud UI.
 
-Users can now use the `--deployment-file` flag with the `deployment create` and `update`. These new features along with the inspect command allow users to manage their Deployments as Code. Read more about Deployments as code in our documentation.
+After you specify a new name and description in the template file, you can apply the configuration to a new or existing Deployment with `astro deployment create/update --deployment-file`. 
 
-### New `—dag-file` Flag for `astro run` Command
+For more information about programmatically creating and updating Deployments, see [Manage Deployments as code](manage-deployments-as-code.md).
 
-By default The ‘astro run’ command parses all the DAGs in your dag folder, even if you only want to run 1 DAG. Now you can use the `--dag-file` flag to specify a DAG file. With this flag the command will only parse and run the DAG and file you specify.
+### New `--dag-file` flag for `astro run`
+
+By default, `astro run` parses all the DAGs in your `dags` directory even if you are only running one DAG. You can now use the `--dag-file` flag to limit the CLI to parsing and running only the specified DAG file. 
 
 ### Additional improvments
 
-- You will no longer need to enter credentials in locally running airflow environments. The credentials will filled in for you.
-- The configurations page in the Admin menu is not available to you to view in the local Webserver UI.
-- The Astro CLI will now tell you when a new version of the Astro CLI is available. Run 'astro config set -g upgrade_message false' to turn this feature off.
+- When you run Airflow locally, you no longer need to enter credentials to log in to the Airflow UI.
+- The Airflow UI now includes **Configurations** in the **Admin** menu. Use this page to see all current configurations for your Airflow environment. 
+- The Astro CLI now reminds you when a new version of the CLI is available. To turn this feature off, run 'astro config set -g upgrade_message false'.
 
 ## Astro CLI 1.8.4
 
