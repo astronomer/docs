@@ -15,8 +15,8 @@ Release date: January 11, 2023
 
 ### Additional improvements 
 
-- You can now set `timeoutSeconds` for both `livenessProbe` and `livenessProbe` in the Prometheus Helm chart.
-- You can now roll  back from Software version 0.30 to 0.28.
+- You can now set `timeoutSeconds` for both `readinessProbe` and `livenessProbe` in the Prometheus Helm chart.
+- You can now roll back from Software version 0.30 to 0.28.
 
 ### Bug fixes 
 
@@ -42,10 +42,10 @@ Release date: January 11, 2023
 
 - Fixed an issue where PgBouncer didn't work if you pulled its image from a private registry.
 - Fixed an issue where the Software UI would occasionally show an incorrect **Extra AU** number for Deployments. 
-- Fixed an issue where you could not access Astronomer Software's Docker registry if you had access to more than 100 Deployments. 
-- Fixed an issue where Deployments with many DAGs would not be able to successfully upgrade due to a short timeout.
-- Fixed an issue where you couldn't log in through Azure AD if you belonged to more than 100 Teams.
-- Service accounts with System Admin permissions can now create Deployments for deprecated Airflow versions as expected. 
+- Fixed an issue where users who had access to more than 100 Deployments could not access the Astronomer Software Docker registry.
+- Fixed an issue where Deployments with multiple DAGs could not be successfully upgraded due to a short timeout.
+- Fixed an issue where users couldn't log in through Azure Active Directory (AD) if they belonged to more than 100 teams.
+- Fixed an issue where service accounts with System Admin permissions could not create Deployments for deprecated Airflow versions. 
 - Fixed an issue where you could not set `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER` in a Deployment if you were using an Astronomer Certified image.
 - Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts resulted in an error.
 - Fixed an issue where logging sidecars would occasionally fail to terminate.
