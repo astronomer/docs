@@ -62,7 +62,9 @@ deployment:
         webserver_url: astronomer.astronomer.run/d94m13z7?orgId=org_dlgevirUCwI9vX10
 ```
 
-You can use the `environment_variables`, `configuration`, `worker_queues`, and `alert_emails` sections to create and update a Deployment. The `metadata` section provides information about a Deployment and is not required when you create or delete a Deployment.
+You can use the `environment_variables`, `configuration`, `worker_queues`, and `alert_emails` sections to create or update a Deployment. 
+
+The `metadata` section is automatically populated when you run `astro deployment inspect` to check the status of an existing Deployment. Do not configure this section when creating or updating a Deployment with a Deployment file. 
 
 ### Configuration settings
 
@@ -79,7 +81,7 @@ You can set `environment_variables.is_secret: true` on any new or existing envir
 
 ### Worker queue settings
 
-The `worker_queues` section defines the worker queues for a Deployment. All Deployment files must include configuration for a `default` worker queue. If you don't enter specific values for a worker queue, default values are applied.
+The `worker_queues` section defines the worker queues for a Deployment. All Deployment files must include configuration for a `default` worker queue. If you don't enter specific values for a worker queue, smart default values based on your available worker types are applied.
 
 ## Create a Deployment file for an existing Deployment
 
@@ -101,15 +103,14 @@ To create a template file, run the following command. Replace `<deployment-templ
 astro deployment inspect -n <original-deployment-name> --template > <deployment-template>.yaml
 ```
 
-
 ## Create a Deployment from a template file
 
 1. In your Deployment template file, provide a name for the new Deployment.
 2. Run the following command to create a new Deployment based on the Deployment file:
 
-```bash
-astro deployment create --deployment-file <deployment-template>.yaml
-```
+    ```bash
+    astro deployment create --deployment-file <deployment-template>.yaml
+    ```
 
 Keep the following in mind when creating a Deployment with a Deployment file:
 
@@ -134,7 +135,7 @@ astro deployment update -d <deployment-id> --deployment-file deployment.yaml
 
 The updated Deployment appears in the Cloud UI.
 
-When updating a Deployment with a Deployment file, keep the following in mind:
+Keep the following in mind when when updating a Deployment with a Deployment file:
 
 - You can’t change the cluster the Deployment runs on. However, you can use the Deployment file to create a new Deployment with a different cluster.
 - You can't change the runtime version of the Deployment using this command. You can only change the runtime version by updatign your Docker file with the Deploy command.
