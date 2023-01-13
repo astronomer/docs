@@ -24,62 +24,7 @@ When using the `--key` flag, specify the complete path of the key you want to re
 astro deployment inspect <deployment-name> --key configuration.cluster_id
 ```
 
-See [Example output](#example-output) for all possible values to return. 
-
-## Example output
-
-The following output is an example of what you receive when you run `astro deployment inspect <deployment-id>` with no other flags specified. It includes all possible values that you can return using the `--key` flag.
-
-```yaml
-deployment:
-    astronomer_variables:
-        - is_secret: false
-          key: AWS_DEFAULT_REGION
-          updated_at: "2022-09-26T13:58:54.427Z"
-          value: us-east-1
-        - is_secret: true
-          key: AWS_ACCESS_KEY_ID
-          updated_at: "2022-09-26T13:57:36.564Z"
-          value: ""
-        - is_secret: true
-          key: AWS_SECRET_ACCESS_KEY
-          updated_at: "2022-09-26T13:57:36.564Z"
-          value: ""
-    configuration:
-        name: Prod
-        description: ""
-        runtime_version: 6.0.2
-        scheduler_au: 20
-        scheduler_count: 2
-        cluster_name: Prod Cluster
-        workspace_name: Data Engineering
-    worker_queues:
-        - name: default
-          max_worker_count: 10
-          min_worker_count: 1
-          worker_concurrency: 16
-          worker_type: m5.xlarge
-        - name: heavy-compute
-          max_worker_count: 10
-          min_worker_count: 0
-          worker_concurrency: 16
-          worker_type: m5.xlarge
-    alert_emails:
-        - me@myorganization.com
-        - me2@myorganization.com
-# not needed or used when creating/updating a deployment
-    metadata:
-        deployment_id: cl6l2mhvq280081b01cg9g9nzw
-        workspace_id: cl0v1p6lc728255byzyfs7lw21
-        cluster_id: cl66604ph00tx0s2tb3v313qu
-        release_name: primitive-twinkling-4105
-        airflow_version: 2.4.1
-        status: HEALTHY
-        created_at: 2022-08-08T18:12:18.566Z
-        updated_at: 2022-11-03T15:26:57.316Z
-        deployment_url: cloud.astronomer.io/<deployment url>
-        webserver_url: <org>.astronomer.run/<deployment url>
-```
+See [Template file contents](manage-deployments-as-code#template-file-contents) for all possible values to return. 
 
 ## Options
 
