@@ -55,7 +55,7 @@ By default, log file names have the following format:
 
 These filename formats can be reconfigured using `log_filename_template` in `airflow.cfg`.
 
-You can view the full default logging configuration under `DEFAULT_LOGGING_CONFIG` in the [Airflow source code](https://github.com/apache/airflow/blob/c0e9daa3632dc0ede695827d1ebdbd091401e94d/airflow/config_templates/airflow_local_settings.py).
+You can view the full default logging configuration under `DEFAULT_LOGGING_CONFIG` in the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/config_templates/airflow_local_settings.py).
 
 The Airflow UI shows logs using a `read()` method on task handlers which is not part of stdlib. `read()` checks for available logs and displays them in a predefined order:
 
