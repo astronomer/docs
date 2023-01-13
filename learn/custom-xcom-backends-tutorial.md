@@ -630,6 +630,8 @@ class CustomXComBackendJSON(BaseXCom):
 
     If you use Astro, set the this environment variable in your Deployment instead. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
 
+    If you use Astro, set the this environment variable in your Deployment instead. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
+
 5. Restart your Airflow instance using `astro dev restart`. 
 
 
