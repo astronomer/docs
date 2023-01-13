@@ -16,7 +16,7 @@ Common reasons to use a custom XCom backend include:
 
 - Needing more storage space for XCom than the metadata database can offer.
 - Running a production environment where you require custom retention, deletion, and backup policies for XComs. With a custom XCom backend, you don't need to worry about periodically cleaning up the metadata database.
-- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization, which puts limits on the type of data that you can pass through XComs. Pickling is also available, but it has [known security implications](https://docs.python.org/3/library/pickle.html)). A custom XCom backend allows you to implement your own serialization and deserialization methods.
+- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization, which puts limits on the type of data that you can pass through XComs. Pickling is also available, but it has [known security implications](https://docs.python.org/3/library/pickle.html). A custom XCom backend allows you to implement your own serialization and deserialization methods.
 - Accessing XCom without accessing the metadata database.  
 
 After you complete this tutorial, you'll be able to:
@@ -79,6 +79,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
         {label: 'MinIO (local)', value: 'local'}
     ]}>
 <TabItem value="aws">
+
 1. Log into your AWS account and [create a new S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html) called `s3-xcom-backend-example`. Ensure that public access to the bucket is blocked.
 
 2. [Create a new IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for Airflow to access your bucket. You can use the JSON configuration below or use the AWS GUI to replicate what you see in the screenshot.
