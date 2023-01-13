@@ -144,8 +144,6 @@ To get the most out of this tutorial, make sure you have an understanding of:
 </TabItem>
 <TabItem value="azure">
 
-Follow these steps to use Azure Blob Storage as your custom XCom backend:
-
 1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create). Astronomer recommends preventing public access to the storage account.
 
 2. In the storage account, [create a new container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-porta) called `custom-xcom-backend`. 
@@ -161,11 +159,11 @@ Follow these steps to use Azure Blob Storage as your custom XCom backend:
     - Delete
     - List
     
-    Select the duration the token will be valid and set **Allowed Protocols** to `HTTPS only`. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI, use the IP address of your computer.
+    Set the duration the token will be valid and set **Allowed Protocols** to `HTTPS only`. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI, use the IP address of your computer.
 
     ![Shared access token](/img/guides/xcom_backend_shared_access_token.png)
 
-4. Click on `Generate SAS token and URL` and copy the Blob SAS URL. This URL contains a secret and you will need it again in [Step 3](#step-3-create-a-connection) of this tutorial.
+4. Click on `Generate SAS token and URL` and copy the `Blob SAS URL`. This URL contains a secret and you will need it again in [Step 3](#step-3-create-a-connection) of this tutorial.
 
 </TabItem>
 <TabItem value="local">
@@ -629,9 +627,7 @@ class CustomXComBackendJSON(BaseXCom):
     AIRFLOW__CORE__XCOM_BACKEND=include.xcom_backend_json.CustomXComBackendJSON
     ```
 
-    If you use Astro, set the this environment variable in your Deployment instead. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
-
-    If you use Astro, set the this environment variable in your Deployment instead. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
+    If you use Astro, set this environment variable in your Deployment instead. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
 
 5. Restart your Airflow instance using `astro dev restart`. 
 
@@ -645,28 +641,28 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 2. Copy and paste the code below into the file.
 
     ```python
-        from airflow.decorators import dag, task
-        from pendulum import datetime
-        import random
+    from airflow.decorators import dag, task
+    from pendulum import datetime
+    import random
 
-        @dag(
-            start_date=datetime(2022, 12, 20),
-            schedule="@daily",
-            catchup=False
-        )
-        def simple_xcom_dag():
+    @dag(
+        start_date=datetime(2022, 12, 20),
+        schedule="@daily",
+        catchup=False
+    )
+    def simple_xcom_dag():
 
-            @task
-            def pick_a_random_number():
-                return random.randint(1, 10) # push to XCom
+        @task
+        def pick_a_random_number():
+            return random.randint(1, 10) # push to XCom
 
-            @task
-            def print_a_number(num): # retrieve from XCom
-                print(num) 
+        @task
+        def print_a_number(num): # retrieve from XCom
+            print(num) 
 
-            print_a_number(pick_a_random_number())
+        print_a_number(pick_a_random_number())
 
-        simple_xcom_dag()
+    simple_xcom_dag()
     ```
 
 3. Run the DAG.
@@ -996,9 +992,6 @@ import os
 import io
 
 class CustomXComBackendPandas(BaseXCom):
-    # the prefix is optional and used to make it easier to recognize
-    # which reference strings in the Airflow metadata database
-    # refer to an XCom that has been stored in a MinIO bucket
     PREFIX = "xcom_minio://"
     BUCKET_NAME = "custom-xcom-backend"
 
@@ -1013,7 +1006,6 @@ class CustomXComBackendPandas(BaseXCom):
         **kwargs
     ):
         
-        # create the MinIO client with the credentials stored as env variables
         client = Minio(
             os.environ["MINIO_IP"],
             os.environ["MINIO_ACCESS_KEY"],
@@ -1115,7 +1107,7 @@ Test the new custom XCom backend by running a DAG that passes a Pandas dataframe
 
 1. Create a new file called `fetch_pokemon_data_dag.py` in the `dags` folder of your Astro project.
 
-2. Copy and paste the DAG below. Make sure to enter your favorite Pokemon.
+2. Copy and paste the DAG below. Make sure to enter your favorite Pokémon.
 
     ```python
     from airflow.decorators import dag, task
@@ -1135,7 +1127,7 @@ Test the new custom XCom backend by running a DAG that passes a Pandas dataframe
 
         @task 
         def extract_data():
-            """Extracts data from the pokemon API. Returns a JSON serializeable dict."""
+            """Extracts data from the Pokémon API. Returns a JSON serializeable dict."""
 
             r1 = requests.get(f"https://pokeapi.co/api/v2/pokemon/{MY_FAVORITE_POKEMON}")
             r2 = requests.get(f"https://pokeapi.co/api/v2/pokemon/{MY_OTHER_FAVORITE_POKEMON}")
@@ -1159,7 +1151,7 @@ Test the new custom XCom backend by running a DAG that passes a Pandas dataframe
         @task 
         def print_xp_per_height(pokemon_data_df):
             """Retrieves information from a pandas dataframe in the custom XCom
-            backend. Prints out pokemon information."""
+            backend. Prints out Pokémon information."""
 
             for i in pokemon_data_df.index:
                 pokemon = pokemon_data_df.loc[i, 'pokemon']
@@ -1171,17 +1163,17 @@ Test the new custom XCom backend by running a DAG that passes a Pandas dataframe
     fetch_pokemon_data_dag()
     ```
 
-    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a Pandas dataframe to XCom, which is only possible when using a custom XCom backend with a serialization method for this type of object. The last task, `print_xp_per_height`, retrieves the CSV and recreates the Pandas dataframe before printing out the Pokemon and their base experience to height ratio.
+    The `extract_data` task will push a dictionary to XCom, which will be saved to your blob storage as a JSON file and retrieved by the `calculate_xp_per_height` task. This second task pushes a Pandas dataframe to XCom, which is only possible when using a custom XCom backend with a serialization method for this type of object. The last task, `print_xp_per_height`, retrieves the CSV and recreates the Pandas dataframe before printing out the Pokémon and their base experience to height ratio.
 
-3. View the information about your favorite pokemon in the task log of the `print_xp_per_height` task.
+3. View the information about your favorite Pokémon in the task log of the `print_xp_per_height` task.
 
-    ![Pokemon Information in logs](/img/guides/xcom_backend_task_logs_pokemon.png)
+    ![Pokémon Information in logs](/img/guides/xcom_backend_task_logs_pokemon.png)
 
 ## Overriding additional BaseXCom methods
 
-In this tutorial, you added custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further customize the functionality for your custom XCom backend, you can override methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
+In this tutorial, you added custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further customize the functionality for your custom XCom backend, you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
 
-A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend with the S3XComBackendJSON XCom backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
+A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend, using the AWS version of the CustomXComBackendJSON XCom backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
 
 ```python
 from airflow.utils.session import NEW_SESSION, provide_session
@@ -1247,11 +1239,11 @@ def clear(
         reference_string = reference_string.decode('utf-8')
         
         hook = S3Hook(aws_conn_id="s3_xcom_backend_conn")
-        key = reference_string.replace(S3XComBackendJSON.PREFIX, '')
+        key = reference_string.replace(CustomXComBackendJSON.PREFIX, '')
 
         # use the reference string to delete the object from the S3 bucket
         hook.delete_objects(
-            bucket=S3XComBackendJSON.BUCKET_NAME,
+            bucket=CustomXComBackendJSON.BUCKET_NAME,
             keys=json.loads(key)
         )
 
