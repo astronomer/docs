@@ -109,7 +109,7 @@ This method provides your team with an additional environment on Astro to test b
 
 Astro supports deploying DAG code changes separately from project configuration changes. If multiple team members work on a single Astro project, decide whether you need multiple Git repositories to separate their work and permissions.
 
-When you make this decision, keep in mind how many branches of your project to host on Astro. Your CI/CD pipeline can manage deploying multiple branches across multiple repositories. See [Single branch vs. multiple branch repositories](singl-branch-vs-multiple-branch-repositories).
+When you make this decision, keep in mind how many branches of your project to host on Astro. Your CI/CD pipeline can manage deploying multiple branches across multiple repositories. See [Single branch vs. multiple branch repositories](#single-branch-versus-multiple-branch-repositories).
 
 #### Single repository to a single Deployment
 
