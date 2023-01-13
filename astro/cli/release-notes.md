@@ -25,20 +25,28 @@ Release date: January 12, 2023
 
 ### Programmatically manage Deployments with the Astro CLI
 
-Astro CLI version 1.9 includes two new commands that make it possible to programmatically manage Deployments: `astro deployment inspect --template` and `astro deployment create/update --deployment-file`.
+Astro CLI version 1.9 includes two new commands that make it possible to programmatically create and update Deployments:
+
+- `astro deployment inspect --template`: Create a template file in YAML for an existing Deployment. This template file includes all information about the Deployment in its current state, including worker queue configurations, environment variables, and Astro Runtime version.
+- `astro deployment create --deployment-file`: Create a new Deployment with the configurations specified in a template file.
+- `astro deployment update --deployment-file`: Programmatically update an existing Deployment based on the values in a template file.
+
+Template files are a way for your team to define Astro Deployments as code. If your team regularly creates and deletes Deployments for testing, for example, you can use template files to do that more quickly without manually copying configurations in the Cloud UI.
 
 
 For more information about programmatically creating and updating Deployments, see [Manage Deployments as code](manage-deployments-as-code.md).
 
 ### New `--dag-file` flag for `astro run`
 
-By default, `astro run` parses all the DAGs in your `dags` directory even if you are only running one DAG. You can now use the `--dag-file` flag to limit the CLI to parsing and running only the specified DAG file. 
+By default, `astro run` parses all of the DAGs in your `dags` directory even if you are only running one DAG.
+
+With Astro CLI 1.9, you can now use the `--dag-file` flag such that the CLI parses and runs only the specified DAG file. This makes  the command quicker and allows you to avoid seeing errors from other DAGs if you don't need to see them.
 
 ### Additional improvments
 
 - When you run Airflow locally, you no longer need to enter credentials to log in to the Airflow UI.
-- The Airflow UI now includes **Configurations** in the **Admin** menu. Use this page to see all current configurations for your Airflow environment. 
-- The Astro CLI now reminds you when a new version of the CLI is available. To turn this feature off, run 'astro config set -g upgrade_message false'.
+- Local Airflow environments running with the Astro CLI now include access to the **Configurations** page in the **Admin** menu of the Airflow UI. Use this page to see your environment's current configuration.
+- The Astro CLI now reminds you when a new version of the CLI is available. To turn this feature off, run `astro config set -g upgrade_message false`.
 
 ## Astro CLI 1.8.4
 
