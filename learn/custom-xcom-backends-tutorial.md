@@ -220,7 +220,7 @@ To give Airflow access to your GCS bucket you need to define an [Airflow connect
 
 To give Airflow access to your Azure Blob Storage container you need to define an [Airflow connection](connections.md).
 
-1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Azure Blob Storage`. Provide the full Blob SAS URL to the `SAS Token` field. The screenshot below shows the connection using the Connection ID `azure_xcom_backend_conn`.
+1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Azure Blob Storage`. Provide the full Blob SAS URL to the `SAS Token` field. The following screenshot below shows how you would configure a connection with the ID `azure_xcom_backend_conn`.
 
     ![Airflow Connection to Azure Blob Storage container](/img/guides/xcom_backend_azure_connection.png)
 
