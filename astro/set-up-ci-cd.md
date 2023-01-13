@@ -60,14 +60,14 @@ With this method, you can configure a CI/CD pipeline that deploys code to Astro 
 
 ```mermaid
 flowchart LR;
-classDef subgraph_padding fill:none,stroke:none
-classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
-id1[Local Astro project]-->|Push code change|id2[Feature branch]
-subgraph Git ["Git repository"]
-id2-->|Pull request| id3[Main branch]
-end
-id3-->|Deploy through CI/CD| id4[Astro Deployment]
-style Git fill:#bfeaff,stroke:#333,stroke-width:2px
+    classDef subgraph_padding fill:none,stroke:none
+    classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
+    id1[Local Astro project]-->|Push code change|id2[Feature branch]
+    subgraph Git ["Git repository"]
+    id2-->|Pull request| id3[Main branch]
+    end
+    id3-->|Deploy through CI/CD| id4[Astro Deployment]
+    style Git fill:#bfeaff,stroke:#333,stroke-width:2px
 ```
 
 Running all of your data pipelines in a single environment means that you don't have to pay for the infrastructure of multiple Deployments, but it limits your ability to test changes on Astro or on development datasets before they are deployed. Astronomer does not recommend this method for production use cases.
@@ -86,21 +86,21 @@ The multiple environment method assumes that you have:
 ```mermaid
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
 flowchart LR;
-classDef subgraph_padding fill:none,stroke:none
-classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
-id1[Local Astro project]-->|Push code change|id2[Feature branch]
-subgraph Git ["Git repository"]
-id2-->|Pull request| id3[Dev branch]
-id3 --> id5[Main branch]
-end
-id3-->|Deploy through CI/CD| id4[Dev Deployment]
-id5-->|Deploy through CI/CD| id6[Main Deployment]
-subgraph Astro [Astro]
-id4
-id6
-end
-style Astro fill:#bfeaff,stroke:#333,stroke-width:2px
-style Git fill:#bfeaff,stroke:#333,stroke-width:2px
+    classDef subgraph_padding fill:none,stroke:none
+    classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
+    id1[Local Astro project]-->|Push code change|id2[Feature branch]
+    subgraph Git ["Git repository"]
+    id2-->|Pull request| id3[Dev branch]
+    id3 --> id5[Main branch]
+    end
+    id3-->|Deploy through CI/CD| id4[Dev Deployment]
+    id5-->|Deploy through CI/CD| id6[Main Deployment]
+    subgraph Astro [Astro]
+    id4
+    id6
+    end
+    style Astro fill:#bfeaff,stroke:#333,stroke-width:2px
+    style Git fill:#bfeaff,stroke:#333,stroke-width:2px
 ```
 
 This method provides your team with an additional environment on Astro to test before pushing changes to production. Each Deployment can contain separate versions of your code, as well as separate environmental configurations. If you use Snowflake, for example, your development Deployment on Astro can use a virtual data warehouse for development (`DWH Dev`), and your production Deployment can use a different virtual data warehouse for production (`DWH Prod`).
@@ -123,10 +123,10 @@ Using a multi-repository CI/CD strategy, you can manage your DAGs in one reposit
 %%{ init: { 'flowchart': { 'curve': 'linear' } } }%%
 flowchart LR;
 classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
-id1[Admin's local Astro project]-->|Push project changes|id5[Git repository]
-id4[DAG author's local Astro project]-->|Push DAG changes|id2[Git repository]
-id5-->|Full project deploy|id3
-id2-->|DAG-only deploy| id3[Astro Deployment]
+    id1[Admin's local Astro project]-->|Push project changes|id5[Git repository]
+    id4[DAG author's local Astro project]-->|Push DAG changes|id2[Git repository]
+    id5-->|Full project deploy|id3
+    id2-->|DAG-only deploy| id3[Astro Deployment]
 ```
 
 One limitation of this strategy is that you must keep any local copies of the Astro project synchronized with both repositories in order to test Deployment code locally. Your team members might have inconsistencies in their local environments if they can't access code changes from other team members. Astronomer recommends setting up a `dev` Deployment where DAG authors can see and modify project configurations for testing purposes. 
@@ -139,12 +139,12 @@ Similar to the multiple repository strategy, this strategy separates the managem
 
 ```mermaid
 flowchart LR;
-classDef subgraph_padding fill:none,stroke:none
-classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
-id1[Admin's local Astro project]-->|Push project changes|id5[Git repository]
-id4[DAG author's local Astro project]-->|Push DAG changes|id2[S3 bucket]
-id2-->|"DAG-only deploy </br>(Lambda function)" | id3[Astro Deployment]
-id5-->|"Full project deploy </br> (CI/CD)"|id3
+    classDef subgraph_padding fill:none,stroke:none
+    classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
+    id1[Admin's local Astro project]-->|Push project changes|id5[Git repository]
+    id4[DAG author's local Astro project]-->|Push DAG changes|id2[S3 bucket]
+    id2-->|"DAG-only deploy </br>(Lambda function)" | id3[Astro Deployment]
+    id5-->|"Full project deploy </br> (CI/CD)"|id3
 ```
 
 If you migrated to Astro from Amazon Managed Workflows for Apache Airflow (MWAA), this strategy is useful for maintaining a similar workflow for DAG authors. You can set up a Lambda function to push DAGs to your Astronomer Deployment whenever DAG files are updated in your specific S3 bucket.
