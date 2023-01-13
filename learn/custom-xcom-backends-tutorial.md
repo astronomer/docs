@@ -71,7 +71,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 <Tabs
     defaultValue="aws"
-    groupId= "step-2-set-up-your-object-storage-account"
+    groupId= "object-storage-provider"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
@@ -186,7 +186,7 @@ There are several local object storage solutions available to configure as a cus
 
 <Tabs
     defaultValue="aws"
-    groupId= "step-3-create-a-connection"
+    groupId= "object-storage-provider"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
@@ -252,7 +252,7 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
 
 <Tabs
     defaultValue="aws"
-    groupId= "step-4-define-a-custom-xcom-class-using-json-serialization"
+    groupId= "object-storage-provider"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
@@ -679,7 +679,7 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 <Tabs
     defaultValue="aws"
-    groupId= "step-5-create-and-run-your-dag-to-generate-xcoms"
+    groupId= "object-storage-provider"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
@@ -719,7 +719,7 @@ A powerful feature of custom XCom backends is the possibility to create custom s
 
 <Tabs
     defaultValue="aws"
-    groupId= "github-actions-image-only-deploys"
+    groupId= "object-storage-provider"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
