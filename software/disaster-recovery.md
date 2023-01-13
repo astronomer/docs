@@ -29,7 +29,7 @@ To recover the Astronomer platform in the case of an incident, back up the follo
 - The Kubernetes cluster state and Astronomer Postgres database.
 - ElasticSearch, Prometheus, and Alertmanager persistent volume claims (PVCs).
 
-You should never back up Redis PVCs. Restoring redis can result in Airflow and Celery having conflicting information about task states.
+You should never back up Redis PVCs. Restoring Redis can result in conflicting Airflow and Celery task state information.
 
 Read below for specific instructions for how to backup these components.
 
