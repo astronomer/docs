@@ -15,13 +15,11 @@ id: release-notes
     </a>
 </p>
 
-This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
-
-If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
+This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Astro CLI 1.9.0
 
-Release date: January 12, 2023
+Release date: January 13, 2023
 
 ### Manage Astro Deployments as code
 
@@ -29,22 +27,20 @@ Astro CLI version 1.9 includes three new commands that make it possible to progr
 
 - `astro deployment inspect --template`: Create a template file in YAML for an existing Deployment. This template file includes all information about the Deployment in its current state, including worker queue configurations, environment variables, and Astro Runtime version.
 - `astro deployment create --deployment-file`: Create a new Deployment with the configurations specified in a template file.
-- `astro deployment update --deployment-file`: Programmatically update an existing Deployment based on the values in a template file.
+- `astro deployment update --deployment-file`: Update an existing Deployment based on the values in a Deployment file.
 
-You can use template and Deployment files to define Astro Deployments as code. For example, if your team regularly creates and deletes Deployments for testing, you can use template files to avoid manually copying configurations in the Cloud UI.
-
-
+You can use template and Deployment files to define Astro Deployments as code. For example, if your team regularly creates and deletes Deployments for testing, you can use template files to avoid manually copying configurations in the Cloud UI. For more information, see [Astro CLI command reference](cli/astro-deployment-create.md).
 
 ### New `--dag-file` flag for `astro run`
 
-By default, `astro run` parses all of the DAGs in your `dags` directory even if you are only running one DAG.
+By default, the `astro run` command parses all of the DAGs in your `dags` directory even if you are only running one DAG.
 
-In Astro CLI 1.9, you can use the `--dag-file` flag to run a specific DAG file without parsing all other DAGs in your directory. Specifying an individual DAG file makes it easier to troubleshoot errors for that DAG and results in faster execution of the command.
+In Astro CLI 1.9, you can instead use the `--dag-file` flag to run a specific DAG file without parsing all other DAGs in your directory. Specifying an individual DAG file makes it easier to troubleshoot errors for that DAG and results in faster execution of the command.
 
 ### Additional improvments
 
 - When you run Airflow locally, you no longer need to enter credentials to log in to the Airflow UI.
-- Local Airflow environments running with the Astro CLI now include access to the Airflow UI **Configurations** page (**Admin** > **Configurations**). This page shows the configuration for your environment, including environment variables and Astro Runtime defaults.
+- When you run Airflow locally, you can now access to the Airflow UI **Configurations** page (**Admin** > **Configurations**). This page shows the current configuration for your environment, including environment variables and Astro Runtime defaults.
 - The Astro CLI now reminds you when a new version of the Astro CLI is available. To turn this feature off, run `astro config set -g upgrade_message false`.
 
 ## Astro CLI 1.8.4
