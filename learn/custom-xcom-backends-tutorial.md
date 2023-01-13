@@ -8,16 +8,16 @@ description: 'Use this tutorial to learn how to set up a custom XCom backend in 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Airflow offers the possibility to use [XCom](airflow-passing-data-between-tasks.md) to pass information between your tasks. By default Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development purposes but can become limiting. For production environments, Airflow supports configuring a custom XCom backend. 
+Airflow [XComs](airflow-passing-data-between-tasks.md) allow you to pass data between tasks. By default, Airflow uses the [metadata database](airflow-database.md) to store XComs, which works well for local development but has limited performance. For production environments, you can configure a custom XCom backend.
 
-This allows you to push and pull XComs to and from an external system such as [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage) or [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/) or a [MinIO](https://min.io/) instance.
+This allows you to push and pull XComs to and from an external system such as [AWS S3](https://aws.amazon.com/s3/), [GCP Cloud Storage](https://cloud.google.com/storage), [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs/), or a [MinIO](https://min.io/) instance.
 
 Common reasons to use a custom XCom backend include:
 
 - Needing more storage space for XCom than the metadata database can offer.
-- Running a production environment where custom retention, deletion and backup policies for XCom are desired. With a custom XCom backend you do not need to worry about periodically cleaning up the metadata database.
-- The need for custom serialization and deserialization methods. By default Airflow uses JSON serialization, which puts limits on the type of data that you can pass via XCom (pickling is available by setting `AIRFLOW__CORE__ENABLE_XCOM_PICKLING=True` but has [known security implications](https://docs.python.org/3/library/pickle.html)). A custom XCom backend allows you to implement your own serialization and deserialization methods.
-- Having a custom setup where access to XCom is needed without accessing the metadata database.  
+- Running a production environment where you require custom retention, deletion, and backup policies for XComs. With a custom XCom backend, you don't need to worry about periodically cleaning up the metadata database.
+- Utilizing custom serialization and deserialization methods. By default, Airflow uses JSON serialization, which puts limits on the type of data that you can pass through XComs. Pickling is also available, but it has [known security implications](https://docs.python.org/3/library/pickle.html)). A custom XCom backend allows you to implement your own serialization and deserialization methods.
+- Accessing XCom without accessing the metadata database.  
 
 After you complete this tutorial, you'll be able to:
 
@@ -29,7 +29,7 @@ After you complete this tutorial, you'll be able to:
 
 :::caution
 
-While a custom XCom backend allows you to store virtually unlimited amounts of data as XCom, your Airflow infrastructure will still need to be configured to support passing large amounts of data between your tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/get-started/).
+While a custom XCom backend allows you to store virtually unlimited amounts of data as XCom, you will also need to scale other Airflow components to pass large amounts of data between tasks. For help running Airflow at scale, [reach out to Astronomer](https://www.astronomer.io/get-started/).
 
 :::
 
@@ -59,7 +59,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
     $ astro dev init
     ```
 
-2. Ensure that the provider of your cloud-based object storage account is installed in your Airflow instance. If you are using the Astro CLI the [Amazon](https://registry.astronomer.io/providers/amazon), [Google](https://registry.astronomer.io/providers/google) and [Azure](https://registry.astronomer.io/providers/microsoft-azure) provider packages come pre-installed in your Astro runtime image. If you are working with a local MinIO instance, add the [`minio` Python package](https://min.io/docs/minio/linux/developers/python/minio-py.html) to your `requirements.txt` file.
+2. Ensure that the provider of your cloud-based object storage account is installed in your Airflow instance. If you are using the Astro CLI, the [Amazon](https://registry.astronomer.io/providers/amazon), [Google](https://registry.astronomer.io/providers/google), and [Azure](https://registry.astronomer.io/providers/microsoft-azure) provider packages come pre-installed in your Astro runtime image. If you are working with a local MinIO instance, add the [`minio` Python package](https://min.io/docs/minio/linux/developers/python/minio-py.html) to your `requirements.txt` file.
 
 2. Start your Airflow project by running:
 
@@ -71,7 +71,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 
 <Tabs
     defaultValue="aws"
-    groupId= "github-actions-image-only-deploys"
+    groupId= "step-2-set-up-your-object-storage-account"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
@@ -79,10 +79,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
         {label: 'MinIO (local)', value: 'local'}
     ]}>
 <TabItem value="aws">
-
-Follow these steps to use an S3 bucket as your custom XCom backend:
-
-1. Log into your AWS account and [create a new S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html) called `s3-xcom-backend-example`. In the creation settings make sure that public access is blocked.
+1. Log into your AWS account and [create a new S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html) called `s3-xcom-backend-example`. Ensure that public access to the bucket is blocked.
 
 2. [Create a new IAM policy](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) for Airflow to access your bucket. You can use the JSON configuration below or use the AWS GUI to replicate what you see in the screenshot.
 
@@ -122,8 +119,6 @@ Follow these steps to use an S3 bucket as your custom XCom backend:
 
 <TabItem value="gcp">
 
-Follow these steps to use a bucket in Google Cloud Storage as your custom XCom backend:
-
 1. Log into your Google Cloud account and [create a new project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) called `custom-xcom-backend-example`.
 
 2. [Create a new bucket](https://cloud.google.com/storage/docs/creating-buckets) called `gcs-xcom-backend-example`.
@@ -139,7 +134,7 @@ Follow these steps to use a bucket in Google Cloud Storage as your custom XCom b
 
     ![GCS IAM role](/img/guides/xcom_backend_gcs_role.png)
 
-4. [Create a new service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) called `airflow-xcom` and grant it access to your project via the `AirflowXComBackendGCS` role.
+4. [Create a new service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) called `airflow-xcom` and grant it access to your project by granting it the `AirflowXComBackendGCS` role.
 
     ![GCS IAM role](/img/guides/xcom_backend_gcs_service_account.png)
 
@@ -150,13 +145,13 @@ Follow these steps to use a bucket in Google Cloud Storage as your custom XCom b
 
 Follow these steps to use Azure Blob Storage as your custom XCom backend:
 
-1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create). We recommend disabling public access.
+1. Log into your Azure account and if you do not have one, [create a storage account](https://learn.microsoft.com/en-us/azure/storage/common/storage-account-create). Astronomer recommends preventing public access to the storage account.
 
-2. Within the storage account, [create a new container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-porta) called `custom-xcom-backend`. 
+2. In the storage account, [create a new container](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-porta) called `custom-xcom-backend`. 
 
 3. [Create a shared access token](https://learn.microsoft.com/en-us/azure/cognitive-services/Translator/document-translation/how-to-guides/create-sas-tokens?tabs=Containers) for the `custom-xcom-backend` container. 
 
-    In the permissions dropdown menu enable the following permissions:
+    In the **Permissions** dropdown menu, enable the following permissions:
 
     - Read
     - Add
@@ -165,7 +160,7 @@ Follow these steps to use Azure Blob Storage as your custom XCom backend:
     - Delete
     - List
     
-    Select the duration the token will be valid and `HTTPS only` for allowed protocols. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI, this is the IP address of your computer.
+    Select the duration the token will be valid and set **Allowed Protocols** to `HTTPS only`. Provide the IP address of your Airflow instance. If you are running Airflow locally with the Astro CLI, use the IP address of your computer.
 
     ![Shared access token](/img/guides/xcom_backend_shared_access_token.png)
 
@@ -174,7 +169,7 @@ Follow these steps to use Azure Blob Storage as your custom XCom backend:
 </TabItem>
 <TabItem value="local">
 
-There are several local object storage solutions available to configure as a custom XCom backend. In this tutorial we use MinIO running in Docker. 
+There are several local object storage solutions available to configure as a custom XCom backend. This tutorial uses [MinIO](https://min.io/docs/minio/kubernetes/upstream/) running in Docker. 
 
 1. [Start a MinIO container](https://min.io/docs/minio/container/index.html). 
 
@@ -191,7 +186,7 @@ There are several local object storage solutions available to configure as a cus
 
 <Tabs
     defaultValue="aws"
-    groupId= "github-actions-image-only-deploys"
+    groupId= "step-3-create-a-connection"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
@@ -202,17 +197,11 @@ There are several local object storage solutions available to configure as a cus
 
 To give Airflow access to your S3 bucket you need to define an [Airflow connection](connections.md). 
 
-1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Amazon Web Service`. Provide the AWS Access Key ID and AWS Secret Access Key from the IAM user you created in [Step 2](#step-2-set-up-your-object-storage-account). The screenshot below shows the connection using the Connection ID `s3_xcom_backend_conn`.
+1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Amazon Web Service`. Provide the AWS Access Key ID and AWS Secret Access Key from the IAM user you created in [Step 2](?tab=aws#step-2-set-up-your-object-storage-account). The following screenshot shows how you would configure a connection with the ID `s3_xcom_backend_conn`.
 
     ![Airflow Connection to S3](/img/guides/xcom_backend_aws_connection.png)
 
 2. Test and save your connection.
-
-:::tip
-
-It is also possible to define a [connection using environment variables](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables).
-
-:::
 
 </TabItem>
 
@@ -220,17 +209,11 @@ It is also possible to define a [connection using environment variables](https:/
 
 To give Airflow access to your GCS bucket you need to define an [Airflow connection](connections.md). 
 
-1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Google Cloud`. Provide the name of your project (`custom-xcom-backend-example`). Open the JSON file with the credentials you downloaded in [Step 2](#step-2-set-up-your-object-storage-account) and copy paste it in full into the field `Keyfile JSON`. The screenshot below shows the connection using the Connection ID `gcs_xcom_backend_conn`.
+1. In the Airflow UI go to **Admin** -> **Connections** and create a new a connection (**+**) with the Connection Type `Google Cloud`. Provide the name of your project (`custom-xcom-backend-example`). Open the JSON file with the credentials you downloaded in [Step 2](?tab=gcp#step-2-set-up-your-object-storage-account) and copy paste it in full into the field `Keyfile JSON`. The following screenshot shows how you would configure a connection with the ID `gcs_xcom_backend_conn`.
 
     ![Airflow Connection to GCS bucket](/img/guides/xcom_backend_gcs_connection.png)
 
 2. Test and save your connection.
-
-:::tip
-
-It is also possible to define a [connection using environment variables](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables).
-
-:::
 
 </TabItem>
 <TabItem value="azure">
@@ -243,18 +226,12 @@ To give Airflow access to your Azure Blob Storage container you need to define a
 
 2. Test and save your connection.
 
-:::tip
-
-It is also possible to define a [connection using environment variables](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables).
-
-:::
-
 </TabItem>
 <TabItem value="local">
 
-To give Airflow access to your MinIO bucket you will need to use the credentials created in [Step 2](#step-2-set-up-your-object-storage-account). 
+To give Airflow access to your MinIO bucket you will need to use the credentials created in [Step 2](?tab=local#step-2-set-up-your-object-storage-account). 
 
-In your Astro project's `.env` file set the following environment variables. You may need to adjust your `MINIO_IP` if you have chosen a custom API port.
+In your Astro project's `.env` file set the following environment variables. You may need to adjust your `MINIO_IP` if you have a custom API port.
 
 ```text
 MINIO_ACCESS_KEY=<your access key>
@@ -275,7 +252,7 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
 
 <Tabs
     defaultValue="aws"
-    groupId= "github-actions-image-only-deploys"
+    groupId= "step-4-define-a-custom-xcom-class-using-json-serialization"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
@@ -651,19 +628,10 @@ class CustomXComBackendJSON(BaseXCom):
     AIRFLOW__CORE__XCOM_BACKEND=include.xcom_backend_json.CustomXComBackendJSON
     ```
 
+    If you use Astro, set the this environment variable in your Deployment instead. See [Environment variables](https://docs.astronomer.io/astro/environment-variables).
+
 5. Restart your Airflow instance using `astro dev restart`. 
 
-:::info
-
-If you are an Astronomer customer, using this custom XCom backend for your deployment on Astro is easy. After deploying your code, simply set the `AIRFLOW__CORE__XCOM_BACKEND` [environment variable on Astro](https://docs.astronomer.io/astro/environment-variables).
-
-:::
-
-:::tip
-
-You will need to restart Airflow after making changes to your custom XCom backend configuration for the changes to take effect.
-
-:::
 
 ## Step 5: Create and run your DAG to generate XComs
 
@@ -709,7 +677,7 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 <Tabs
     defaultValue="aws"
-    groupId= "github-actions-image-only-deploys"
+    groupId= "step-5-create-and-run-your-dag-to-generate-xcoms"
     values={[
         {label: 'AWS S3', value: 'aws'},
         {label: 'GCP Cloud Storage', value: 'gcp'},
@@ -1208,7 +1176,7 @@ Test the new custom XCom backend by running a DAG that passes a Pandas dataframe
 
 ## Overriding additional BaseXCom methods
 
-In this tutorial we've shown how to add custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further expand the functionality for your custom XCom backend, you can override additional methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
+In this tutorial, you added custom logic to the `.serialize_value()` and  `.deserialize_value()` methods. If you want to further customize the functionality for your custom XCom backend, you can override methods of the [XCom module](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/xcom/index.html) ([source code](https://github.com/apache/airflow/blob/main/airflow/models/xcom.py)). 
 
 A common use case for this is removing stored XComs upon clearing and rerunning a task in both the Airflow metadata database and the custom XCom backend. To do so, the `.clear()` method needs to be overridden to include the removal of the referenced XCom in the custom XCom backend. The code below shows an example of a `.clear()` method that includes the deletion of an XCom stored in a custom S3 backend with the S3XComBackendJSON XCom backend from [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) of the tutorial.
 
