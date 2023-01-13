@@ -27,9 +27,6 @@ Release date: January 12, 2023
 
 Astro CLI version 1.9 includes two new commands that make it possible to programmatically manage Deployments: `astro deployment inspect --template` and `astro deployment create/update --deployment-file`.
 
-`astro deployment inspect --template` creates a template file based on the selected Deployment. A template file is YAML configuration file that includes all information about a Deployment except for its name, description field, and metadata. Template files allow you to programmatically create new Deployments outside of the Cloud UI.
-
-After you specify a new name and description in the template file, you can apply the configuration to a new or existing Deployment with `astro deployment create/update --deployment-file`. 
 
 For more information about programmatically creating and updating Deployments, see [Manage Deployments as code](manage-deployments-as-code.md).
 
