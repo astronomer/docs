@@ -14,6 +14,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 - For Warehouse SQL cells, you need write permissions to the data warehouse in your database connection. 
 
 ## Create a SQL cell
+
 1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
