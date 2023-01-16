@@ -19,7 +19,7 @@ The following categories of event data are available in the audit log:
 - Airflow UI access: The data generated when users access the Airflow UI.
 - Astronomer container registry access: The data generated when users access the Astronomer container registry with the Astro CLI.
 
-The audit log file is provided as a newline limited JSON (NDJSON)file. Every entry in the audit log file corresponds to an event, and event attributes provide additional information about the specific event. 
+The audit log file is provided as a newline delimited JSON (NDJSON) file. Every entry in the audit log file corresponds to an event, and event attributes provide additional information about each event. 
 
 #### Common fields
 
@@ -36,9 +36,8 @@ The following table lists the common fields shared by all three categories of ev
 
 #### API event fields
 
-Audit Log events may be generated from either the v1 API or the v2 API.   Each API generates different fields for the same actions and your audit log may include a collection of events from either API.  
+Audit log events can be generated from the v1 API or the v2 API. Each API generates different fields for the same actions, and your audit log might include events from both APIs.  
 
-This following is a list of all API events; your audit log may contain a mix of both v1 and v2 API events.
 ##### v1 API event fields
 The following table lists the fields that are unique to v1 API events.
 
@@ -74,11 +73,11 @@ The following table maps some common `operationName` attributes to their corresp
 
 ##### v2 API event fields 
 
-The following table lists the fields that are unique to v1 API events.
+The following table lists the fields that are unique to v2 API events.
 
 | Field  | Description                                          |
 | ------- | ---------------------------------------------------- |
-| `path` | The path to the REST API that is invoked. |
+| `path` | The path to the invoked REST API. |
 | `method` | The HTTP request type sent to REST API. |
 | `requestBody` | The parameters passed as input to the API call. |
 | `response status` | The HTTP response status code. |
