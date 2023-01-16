@@ -13,7 +13,7 @@ If you have any questions or a bug to report, contact [Astronomer Support](https
 
 Release date: July 19, 2022
 
-### Additional imrovements
+### Additional improvements
 
 - Added support for building Runtime images locally on different system architectures, which eliminates the need for the build process to run in an emulation and improves the performance of `astro dev start`
 

@@ -55,7 +55,7 @@ By default, log file names have the following format:
 
 These filename formats can be reconfigured using `log_filename_template` in `airflow.cfg`.
 
-You can view the full default logging configuration under `DEFAULT_LOGGING_CONFIG` in the [Airflow source code](https://github.com/apache/airflow/blob/c0e9daa3632dc0ede695827d1ebdbd091401e94d/airflow/config_templates/airflow_local_settings.py).
+You can view the full default logging configuration under `DEFAULT_LOGGING_CONFIG` in the [Airflow source code](https://github.com/apache/airflow/blob/main/airflow/config_templates/airflow_local_settings.py).
 
 The Airflow UI shows logs using a `read()` method on task handlers which is not part of stdlib. `read()` checks for available logs and displays them in a predefined order:
 
@@ -214,7 +214,7 @@ Logs are sent to remote storage only once a task has been completed or failed. T
 
 4. Add the following commands to the Dockerfile. Include the double underscores around `LOGGING`:
 
-    ```dockerfile
+    ```docker
     # allow remote logging and provide a connection ID (see step 2)
     ENV AIRFLOW__LOGGING__REMOTE_LOGGING=True
     ENV AIRFLOW__LOGGING__REMOTE_LOG_CONN_ID=${AMAZONS3_CON_ID}
@@ -240,7 +240,7 @@ The following example adds a second remote logging Amazon S3 bucket to receive l
 
 Complete Steps 1 and 2 in [Remote Logging Example: Sending Task Logs to Amazon S3](#remote-logging-example-sending-task-logs-to-amazon-s3) to configure your Airflow environment for Amazon S3 remote logging and then add the following commands to your Dockerfile:
 
-```dockerfile
+```docker
 #### Remote logging to S3
 
 # Define the base log folder

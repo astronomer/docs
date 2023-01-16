@@ -278,7 +278,7 @@ Having a consistent file structure for Airflow projects keeps things organized a
 
 ```bash
 ├── dags/ # Where your DAGs go
-│   ├── example-dag.py # An example dag that comes with the initialized project
+│   └── example-dag.py # An example dag that comes with the initialized project
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include/ # For any other files you'd like to include
 ├── plugins/ # For any custom or community Airflow plugins

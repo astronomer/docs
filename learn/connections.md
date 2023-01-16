@@ -81,7 +81,7 @@ The environment variable used for the connection must be formatted as `AIRFLOW_C
 
 [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) is a format designed to contain all necessary connection information in one string, starting with the connection type, followed by login, password, and host. In many cases a specific port, schema, and additional parameters must be added.
 
-```Dockerfile
+```docker
 
 # the general format of a URI connection that is defined in your Dockerfile
 ENV AIRFLOW_CONN_MYCONNID='my-conn-type://login:password@host:port/schema?param1=val1&param2=val2'
