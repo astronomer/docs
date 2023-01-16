@@ -36,7 +36,7 @@ The following table lists the common fields shared by all three categories of ev
 
 #### API event fields
 
-Audit log events can be generated from the v1 API or the v2 API. Each API generates different fields for the same actions, and your audit log might include events from both APIs.  
+Audit log events can be generated from the v1 API or the v2 API. Each API generates different fields for the same actions, and your audit log might include events from both APIs. Audit log events for the v1 API are expected to decline as Astronomer transitions to the v2 API. 
 
 ##### v1 API event fields
 The following table lists the fields that are unique to v1 API events.
