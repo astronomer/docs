@@ -74,6 +74,29 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 :::
 
+### Ignore files with `.airflowignore`
+
+You can create an `.airflowignore` file in the `dags` directory of your Astro project to identify the files to ignore when you deploy to Astro or develop locally. This can be helpful if your team has a single Git repository that contains DAGs for multiple projects.
+
+The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. Files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler and the DAGs listed in the file don't appear in the Airflow UI.
+
+For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#airflowignore). To learn more about the code deploy process, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+
+1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
+
+2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. You should list the path for each file or directory relative to the `dags` directory. For example: 
+
+    ```text
+    mydag.py
+    data-team-dags
+    some-dags/ignore-this-dag.py
+    ``` 
+    
+3. Save your changes locally or deploy to Astro.
+
+    Your local Airflow environment is automatically updated as soon as you save your changes to `.airflowignore`. To apply your change in Astro, you need to deploy. See [Deploy code](deploy-code.md).
+
+
 ### Add DAG helper functions
 
 Use the `include` folder to store additional utilities required by your DAGs. For example, templated SQL scripts or a custom helper function that's used in an operator and that you can reference in multiple DAGs.
@@ -83,20 +106,20 @@ Astronomer recommends storing the `include` folder inside the `dags` directory o
 Here is how the recommended directory structure might appear:
 
 ```bash
-    ├── airflow_settings.yaml
-    ├── dags
-    │   └── include
-            └── helper_functions
-                └── helper.py
-            └── templated_SQL_scripts
-    │       └── custom_operators
-    ├── Dockerfile
-    ├── tests
-    │   └── test_dag_integrity.py
-    ├── packages.txt
-    ├── plugins
-    │   └── example-plugin.py
-    └── requirements.txt
+├── airflow_settings.yaml
+├── dags
+│   └── include
+│       ├── helper_functions
+│       │   └── helper.py
+│       ├── templated_SQL_scripts
+│       └── custom_operators
+├── Dockerfile
+├── tests
+│   └── test_dag_integrity.py
+├── packages.txt
+├── plugins
+│   └── example-plugin.py
+└── requirements.txt
 ```
 
 If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
@@ -247,14 +270,14 @@ A project with multiple `.env` files might look like the following:
 
 ```
 my_project
-  ├── Dockerfile
-  └──  dags
-    └── my_dag
-  ├── plugins
-    └── my_plugin
-  ├── airflow_settings.yaml
-  ├── .env
-    └── dev.env
+├── Dockerfile
+├── dags
+│   └── my_dag
+├── plugins
+│   └── my_plugin
+├── airflow_settings.yaml
+└── .env
+    ├── dev.env
     └── prod.env
 ```
 
@@ -282,6 +305,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
     RUN update-ca-certificates
     USER astro
     ```
+    
 2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment) or deploy to Astro. See [Deploy code](deploy-code.md).
@@ -435,7 +459,7 @@ This example assumes that the name of each of your Python packages is identical 
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH='/home/astro/.local/bin:$PATH'
 
     COPY . .
     ```
@@ -479,7 +503,7 @@ This example assumes that the name of each of your Python packages is identical 
 2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<ssh-key>` with your SSH private key file name.
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github=“$HOME/.ssh/<ssh-key>” -t $image_name .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
 3. Optional. Test your DAGs locally. See [Restart your local environment](develop-project.md#restart-your-local-environment).
@@ -536,14 +560,16 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer=“Astronomer <humans@astronomer.io>”
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
     ARG BUILD_NUMBER=-1
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install OS-Level packages
     COPY packages.txt .
+    USER root
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
+    USER astro
 
     FROM stage1 AS stage2
     # Install Python packages
@@ -556,7 +582,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
     ```

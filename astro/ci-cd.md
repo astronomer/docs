@@ -601,7 +601,7 @@ If your Astro project requires additional build-time arguments to build an image
 
             echo "DAGS_ONLY=$dags_only" >> $GITHUB_OUTPUT
           id: deployment-type
-        # If only DAGs changed do a DAG Deplo
+        # If only DAGs changed do a DAG Deploy
         - name: DAG Deploy to Astro
           if: steps.deployment-type.outputs.DAGS_ONLY == 1
           run: |

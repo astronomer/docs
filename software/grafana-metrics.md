@@ -199,10 +199,10 @@ As a starting point, we recommend creating a dashboard with the following metric
 - Node CPU/Memory Utilization
 - Disk IO Utilization
 - CPU Utilisation
-- Memory Utilisation
+- Memory Utilization
 - CPU Saturation (Load1 per CPU)
 - Memory Saturation (Major Page Fails)
-- Net Utilisation (Bytes Receive/ Transmit)
+- Net Utilization (Bytes Receive/ Transmit)
 - Net Saturation (Drops Receive/Transmit)
 
 These metrics can help you monitor resource usage and subsequent costs of your Kubernetes pods. The recommended steady-state values for these metrics all will be specific to your Kubernetes environment and dependent on available resources/configurations. However, if metrics disappear from this view, it is typically an indication of the node going away and worker pods being relocated to another Kubernetes node.

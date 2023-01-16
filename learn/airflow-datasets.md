@@ -81,7 +81,7 @@ with DAG(
     )
 ```
 
-Any number of datasets can be provided to the `schedule` parameter as a list. The DAG is triggered after all tasks that update those datasets have completed.
+Any number of datasets can be provided to the `schedule` parameter as a list. The DAG is triggered after all of the datasets have received at least one update due to a producing task completing successfully. 
 
 When you work with datasets, keep the following considerations in mind:
 

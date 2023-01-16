@@ -30,7 +30,7 @@ The following setups assume that you are using Astronomer's default [implicit fl
 
 ## Local auth
 
-To let users authenticate to Astronomer with a local username and password", follow the steps below."
+To let users authenticate to Astronomer with a local username and password, follow the steps below.
 
 1. Enable Local Auth in your `config.yaml` file:
 ```yaml

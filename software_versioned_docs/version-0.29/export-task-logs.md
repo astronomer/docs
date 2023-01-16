@@ -133,7 +133,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
     scheme: https
     # host endpoint copied from elasticsearch console with https
     # and port number removed.
-    host: “<host-URL>”
+    host: "<host-URL>"
     port: "9243"
     # encoded credentials from above step 1
     secret: "<encoded credentials>"    
@@ -168,7 +168,7 @@ After you've created an Elastic deployment and endpoint, you have two options to
     scheme: https
     # host endpoint copied from elasticsearch console with https
     # and port number removed.
-    host: “<host-URL>”
+    host: "<host-URL>"
     port: "9243"
     # kubernetes secret containing credentials
     secretName: elasticcreds   

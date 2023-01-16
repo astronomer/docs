@@ -358,7 +358,7 @@ astro workspace user update --email <user-email-address>
 
 | Option    | Description                           | Possible Values                                                                                                       |
 | --------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `--email` | The user's email.                     | Any valud email address                                                                                               |
+| `--email` | The user's email.                     | Any valid email address                                                                                               |
 | `--role`  | The role you're updating the user to. | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. Default value is `WORKSPACE_VIEWER` |
 
 #### Related documentation

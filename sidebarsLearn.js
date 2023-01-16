@@ -83,7 +83,6 @@ module.exports = {
           },
           items: [
             'testing-airflow',
-            'custom-xcom-backends',
             'logging',
             'kubepod-operator',
             'data-quality',
@@ -123,6 +122,7 @@ module.exports = {
         'custom-airflow-ui-docs-tutorial',
         'external-python-operator',
         'operator-extra-link-tutorial',
+        'xcom-backend-tutorial'
       ],
     },
     {
@@ -136,6 +136,7 @@ module.exports = {
       items: [
         'airflow-redshift',
         'airflow-sagemaker',
+        'airflow-kafka',
         'airflow-azure-container-instances',
         'airflow-azure-data-explorer',
         'airflow-azure-data-factory-integration',
@@ -148,7 +149,6 @@ module.exports = {
         'airflow-snowflake',
         'soda-data-quality',
         'airflow-talend-integration',
-        'airflow-kafka',
      ],
     },
   ],
