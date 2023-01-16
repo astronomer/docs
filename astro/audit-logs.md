@@ -33,7 +33,6 @@ The following table lists the common fields shared by all three categories of ev
 | `timestamp` | The date and time the event occurred. |
 | `sourceIp` | The IP address of the originating request. |
 | `userAgent` | The application used to make the request. |
-| `correlationId` | A unique identifier for the request. |
 
 #### API event fields
 
@@ -49,6 +48,7 @@ The following table lists the fields that are unique to v1 API events.
 | `graphqlClientName` | The type of client making the request. The values are `cloud-ui` or `cli`. |
 | `requestInput` | The input for the API request. |
 | `requestBody` | Raw graphQL for the event. |
+| `correlationId` | A unique identifier for the request. |
 
 The following table maps some common `operationName` attributes to their corresponding `requestInput` attributes. 
 
@@ -79,18 +79,22 @@ The following table lists the fields that are unique to v1 API events.
 | Field  | Description                                          |
 | ------- | ---------------------------------------------------- |
 | `path` | The path to the REST API that is invoked. |
+| `method` | The HTTP request type sent to REST API. |
 | `requestBody` | The parameters passed as input to the API call. |
 | `response status` | The HTTP response status code. |
+| `requestId` | A unique identifier for the request. |
 
 The following table maps some common `path` attributes to their corresponding `requestBody` attributes. 
 
 | Event | `path` attribute                                          | `requestBody` attributes                   |
 | ------- | ---------------------------------------------------- | --------------------------------- |
 | A new user is invited to an organization.   | `/v1alpha1/organizations/{orgShortNameId}/invites` | `inviteeEmail`, `role` |
+| A invite to the organization is updated.   | `/v1alpha1/organizations/{orgShortNameId}/invites/{inviteId}` | |
 | A user is deleted from an organization.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}` | |
-| A user is assigned a new role.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}/role` | `role`|
+| A user is assigned a new organization role.  | `/v1alpha1/organizations/{orgShortNameId}/users/{userId}/role` | `role` |
+| A user is assigned a new workspace role.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/users/{userId}/role` | `role`|
 | A user is removed from a workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/users/{userId}` | |
-
+| A deployment is transferred to another workspace.  | `/v1alpha1/organizations/{orgShortNameId}/workspaces/{workspaceId}/deployments/{deploymentId}` | `workspaceIdTarget` |
 
 
 Use your analytics or audit tool to view additional attribute mapping information. 
