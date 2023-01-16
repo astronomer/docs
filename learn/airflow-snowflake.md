@@ -487,7 +487,7 @@ Using deferrable operators from the [Astronomer providers package](https://regis
 
      ![Load tasks deferred state](/img/guides/snowflake_example_deferred_state.png)
 
-## How it works
+## More on the Airflow Snowflake integration
 
 This section provides additional information on orchestrating actions in Snowflake with Airflow.
 
