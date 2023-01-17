@@ -47,9 +47,6 @@ astro config set webserver.port 8081
 | `cloud.api.token`    | The type of API token to use when calling the Airflow API in a local Airflow environment           | Any available API token             |
 | `context`            | The context for your Astro project          | Any available [context](cli/astro-context-list.md)             |
 | `contexts`           | The contexts for your Astro project          | Any available [context](cli/astro-context-list.md)             |
-| `local.astrohub`     | The location of your local Astro project          | `http://localhost:8871/v1`             |
-| `local.core`         | The location of your local Airflow scheduler          | `http://localhost:8888/v1alpha1`             |
-| `local.public_astrohub`  | The location of your local, public Astro project          | `http://localhost:8871/graphql`             |
 | `local.registry`     | The location of your local Docker container running Airflow             | Any available port             |
 | `local.houston`      | The location of your local Houston API instance             | Any string             |
 | `local.platform`      | The location of your local platform             | Any string             |
@@ -67,4 +64,4 @@ astro config set webserver.port 8081
 | `skip_parse`  | Determines whether parsing is ignored when executing a Houston API call         | `true`, `false`             |
 | `interactive`  | Determines whether parsing is interactive         | `true`, `false`             |
 | `page_size`  | Determines the page size of the Astro CLI         | Any string             |
-| `upgrade_message`  | Determines whether a message indicating the availability of an Astro CLI upgrade displays in the Astro CLI         | `true`, `false`             |
+| `upgrade_message`  | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI         | `true`, `false`             |
