@@ -178,7 +178,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
@@ -283,7 +283,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
@@ -389,7 +389,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
 
@@ -498,7 +498,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',

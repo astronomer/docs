@@ -90,7 +90,7 @@ with DAG(
     "connect_dag",
     start_date=datetime(2019, 1, 1),
     max_active_runs=1,
-    schedule_interval=None,
+    schedule=None,
     # catchup=False # enable if you don't want historical dag runs to run
 ) as dag:
 
