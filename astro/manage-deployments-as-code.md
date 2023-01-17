@@ -19,7 +19,7 @@ After you configure your Astro Deployment, it can be stored, created or updated 
 
 ## Create a template file from a Deployment
 
-Create a Deployment template file to programmatically create new Deployments based on configurations from an existing Deployment. A template file is YAML configuration file that includes all information about a Deployment except for its name, description field, and metadata.
+Create a Deployment template file to programmatically create new Deployments based on configurations from an existing Deployment. A template file is a YAML configuration file that includes all information about a Deployment except for its name, description field, and metadata.
 
 To create a template file, run the following command. Replace `<deployment-template>` with your preferred name for the new template file.
 
