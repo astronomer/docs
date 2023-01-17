@@ -168,7 +168,7 @@ training_job_name = 'train-iris-{}'.format(date)  # Name of training job
 with DAG('sagemaker_pipeline',
          start_date=datetime(2021, 7, 31),
          max_active_runs=1,
-         schedule_interval=None,
+         schedule=None,
          default_args={
              'retries': 0,
              'retry_delay': timedelta(minutes=1),

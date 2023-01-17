@@ -117,7 +117,7 @@ default_args = {
 with DAG('call_snowflake_sprocs',
          start_date=datetime(2020, 6, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          template_searchpath='/usr/local/airflow/include',
          catchup=False
@@ -180,7 +180,7 @@ default_args = {
 with DAG('parameterized_query',
          start_date=datetime(2020, 6, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          template_searchpath='/usr/local/airflow/include',
          catchup=False
@@ -283,7 +283,7 @@ date = '{{ yesterday_ds_nodash }}'
 with DAG('covid_data_s3_to_snowflake',
          start_date=datetime(2020, 6, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False
          ) as dag:
@@ -383,7 +383,7 @@ default_args = {
 with DAG('pandas_processing',
          start_date=datetime(2020, 6, 1),
          max_active_runs=1,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False
          ) as dag:
@@ -421,7 +421,7 @@ dag_factory_query:
     start_date: 2020-12-02
     retries: 1
     retry_delay_sec: 300
-  schedule_interval: '0 3 * * *'
+  schedule: '0 3 * * *'
   concurrency: 1
   max_active_runs: 1
   dagrun_timeout_sec: 60

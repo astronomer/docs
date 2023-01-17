@@ -123,7 +123,7 @@ with DAG(
     'trigger-dagrun-dag',
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval='@daily',
+    schedule='@daily',
     default_args=default_args,
     catchup=False
 ) as dag:
@@ -307,7 +307,7 @@ with DAG(
     'api-dag',
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval='@daily',
+    schedule='@daily',
     catchup=False
 ) as dag:
 

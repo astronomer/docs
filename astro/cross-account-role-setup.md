@@ -245,7 +245,7 @@ If you need to VPC peer with Astronomer, provide the following information to yo
 
 After you've created the cross-account IAM role for Astro, contact your Astronomer representative. Astronomer creates the cluster in your AWS account.
 
-This process can take some time. Wait for confirmation from Astronomer  that the cluster has been created before creating a Deployment.
+This process can take some time. Wait for confirmation from Astronomer that the cluster has been created before creating a Deployment.
 
 If you submitted a VPC peering request, you'll need to accept the request from Astronomer after Astro is installed. To accept the request, see [Create a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html).
 

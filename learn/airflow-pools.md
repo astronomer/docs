@@ -53,7 +53,7 @@ For example, in the DAG snippet below `task_a` and `task_b` are both assigned to
 ```python
 with DAG('pool_dag',
          start_date=datetime(2021, 8, 1),
-         schedule_interval=timedelta(minutes=30),
+         schedule=timedelta(minutes=30),
          catchup=False,
          default_args=default_args
          ) as dag:
@@ -105,7 +105,7 @@ def api_function(**kwargs):
 
 with DAG('pool_priority_dag',
          start_date=datetime(2021, 8, 1),
-         schedule_interval=timedelta(minutes=30),
+         schedule=timedelta(minutes=30),
          catchup=False,
          default_args={
              'pool': 'api_pool',
@@ -151,7 +151,7 @@ def api_function(**kwargs):
 
 with DAG('pool_unimportant_dag',
          start_date=datetime(2021, 8, 1),
-         schedule_interval=timedelta(minutes=30),
+         schedule=timedelta(minutes=30),
          catchup=False,
          default_args={
              'retries': 1,

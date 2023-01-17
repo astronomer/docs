@@ -179,7 +179,7 @@ else:
 
 with DAG(
     dag_id='example_kubernetes_pod', 
-    schedule_interval='@once', 
+    schedule='@once', 
     default_args=default_args
 ) as dag:
     KubernetesPodOperator(
@@ -336,7 +336,7 @@ name = 'your_name'
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_different_language_example_dag'
 ) as dag:
 
@@ -432,7 +432,7 @@ namespace = conf.get("kubernetes", "NAMESPACE")
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_XComs_example_dag'
 ) as dag:
 
@@ -694,7 +694,7 @@ class EKSCreateNodegroupWithNodesOperator(EKSCreateNodegroupOperator):
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_remote_EKS_cluster_example_dag'
 ) as dag:
 

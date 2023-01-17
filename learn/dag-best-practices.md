@@ -102,7 +102,7 @@ result = hook.get_records("SELECT * FROM grocery_list;")
 with DAG('bad_practices_dag_1',
          start_date=datetime(2021, 1, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False
          ) as dag:
@@ -143,7 +143,7 @@ default_args = {
 with DAG('bad_practices_dag_2',
          start_date=datetime(2021, 1, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False
          ) as dag:
@@ -203,7 +203,7 @@ default_args = {
 with DAG('good_practices_dag_1',
          start_date=datetime(2021, 1, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False,
          template_searchpath='/usr/local/airflow/include' #include path to look for external files

@@ -117,7 +117,7 @@ default_args = {
 with DAG('xcom_dag',
          start_date=datetime(2021, 1, 1),
          max_active_runs=2,
-         schedule_interval=timedelta(minutes=30),
+         schedule=timedelta(minutes=30),
          default_args=default_args,
          catchup=False
          ) as dag:
@@ -168,7 +168,7 @@ default_args = {
     'start_date': datetime(2021, 1, 1)
 }
 
-@dag('xcom_taskflow_dag', schedule_interval='@daily', default_args=default_args, catchup=False)
+@dag('xcom_taskflow_dag', schedule='@daily', default_args=default_args, catchup=False)
 def taskflow():
 
     @task
@@ -263,7 +263,7 @@ default_args = {
 with DAG('intermediary_data_storage_dag',
          start_date=datetime(2021, 1, 1),
          max_active_runs=1,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False
          ) as dag:

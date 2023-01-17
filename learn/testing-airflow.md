@@ -187,7 +187,7 @@ with DAG(
     "adf_great_expectations",
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval="@daily",
+    schedule="@daily",
     default_args=default_args,
     catchup=False,
 ) as dag:
