@@ -14,7 +14,7 @@ This tutorial covers an example of orchestrating complex Snowflake operations wi
 - Running transformations on data in Snowflake using Airflow operators. 
 - Running data quality checks on data in Snowflake. 
 
-Additionally, [How it works](#how-it-works) offers further information on:
+Additionally, [More on the Airflow Snowflake integration](#more-on-the-airflow-snowflake-integration) offers further information on:
 
 - Available operators and hooks for orchestrating actions in Snowflake.
 - Leveraging the OpenLineage Airflow integration to get data lineage and enhanced observability from your Snowflake jobs.
