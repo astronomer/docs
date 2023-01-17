@@ -116,7 +116,7 @@ default_args = {
 
 with DAG('databricks_dag',
     start_date=datetime(2021, 1, 1),
-    schedule_interval='@daily',
+    schedule='@daily',
     catchup=False,
     default_args=default_args
     ) as dag:

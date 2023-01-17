@@ -45,7 +45,7 @@ default_args = {
 
 with DAG('sample_dag',
 	default_args=default_args,
-	schedule_interval='@daily',
+	schedule='@daily',
 	catchup=False) as dag:
 
 ...
@@ -68,7 +68,7 @@ default_args = {
 
 with DAG('sample_dag',
 	default_args=default_args,
-	schedule_interval='@daily',
+	schedule='@daily',
 	catchup=False) as dag:
 
 	wont_email = EmptyOperator(
@@ -104,7 +104,7 @@ default_args = {
 
 with DAG('sample_dag',
 	default_args=default_args,
-	schedule_interval='@daily',
+	schedule='@daily',
 	catchup=False) as dag:
 
 ...

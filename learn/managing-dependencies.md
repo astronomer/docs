@@ -199,7 +199,7 @@ default_args = {
     'start_date': datetime(2021, 1, 1)
 }
 
-@dag('xcom_taskflow_dag', schedule_interval='@daily', default_args=default_args, catchup=False)
+@dag('xcom_taskflow_dag', schedule='@daily', default_args=default_args, catchup=False)
 def taskflow():
 
     @task
@@ -307,7 +307,7 @@ def return_branch(**kwargs):
 with DAG(dag_id='branch',
          start_date=datetime(2021, 1, 1),
          max_active_runs=1,
-         schedule_interval=None,
+         schedule=None,
          catchup=False
          ) as dag:
 

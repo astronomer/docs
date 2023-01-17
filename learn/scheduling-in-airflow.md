@@ -45,7 +45,7 @@ The following parameters ensure your DAGs run at the correct time:
 - **`start_date`**: The first date your DAG will be executed. This parameter is required for your DAG to be scheduled by Airflow.
 - **`end_date`**: The last date your DAG will be executed. This parameter is optional.
 
-In Airflow 2.3 and earlier, the `schedule_interval` is used instead of the `schedule` parameter and it only accepts cron expressions or timedelta objects. Additionally, timetables have to be passed using the `timetable` parameter, which was deprecated in Airflow 2.4 and later. In versions of Airflow 2.2 and earlier, specifying `schedule_interval` is the only way to define a DAG schedule.
+In Airflow 2.3 and earlier, the `schedule` is used instead of the `schedule` parameter and it only accepts cron expressions or timedelta objects. Additionally, timetables have to be passed using the `timetable` parameter, which was deprecated in Airflow 2.4 and later. In versions of Airflow 2.2 and earlier, specifying `schedule` is the only way to define a DAG schedule.
 
 ### Example
 

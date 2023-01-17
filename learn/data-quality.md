@@ -214,7 +214,7 @@ from airflow.providers.common.sql.operators.sql import (
 
 with DAG(
     dag_id="example_dag_sql_check_operators",
-    schedule_interval='@daily',
+    schedule='@daily',
     start_date=datetime(2022, 7, 15),
     catchup=False,
     doc_md="""
@@ -445,7 +445,7 @@ from great_expectations_provider.operators.great_expectations import (
 )
 
 with DAG(
-    schedule_interval=None,
+    schedule=None,
     start_date=datetime(2022,7,1),
     dag_id="ge_example_dag",
     catchup=False,

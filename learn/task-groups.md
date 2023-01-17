@@ -87,7 +87,7 @@ from airflow.decorators import dag, task, task_group
 
 import pendulum
 
-@dag(schedule_interval=None, start_date=pendulum.datetime(2021, 1, 1, tz="UTC"), catchup=False)
+@dag(schedule=None, start_date=pendulum.datetime(2021, 1, 1, tz="UTC"), catchup=False)
 
 def task_group_example():
 

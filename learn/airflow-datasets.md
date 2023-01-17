@@ -275,7 +275,7 @@ def extract_data(homes1: Table, homes2: Table):
     FROM {{homes2}}
     """
 
-@dag(start_date=datetime(2021, 12, 1), schedule_interval="@daily", catchup=False)
+@dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
 def example_sdk_datasets():
 
     # Initial load of homes data csv's from S3 into Snowflake

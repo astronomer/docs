@@ -133,7 +133,7 @@ task_logger.warning('This log will not show up!')
 
 with DAG(dag_id='more_logs_dag',
         start_date=datetime(2022,6,5),
-        schedule_interval='@daily',
+        schedule='@daily',
         dagrun_timeout=timedelta(minutes=10),
         catchup=False) as dag:
 

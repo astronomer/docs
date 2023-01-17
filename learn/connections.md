@@ -169,7 +169,7 @@ from airflow.providers.snowflake.transfers.snowflake_to_slack import (
 with DAG(
     dag_id="snowflake_to_slack_dag",
     start_date=datetime(2022, 7, 1),
-    schedule_interval=None,
+    schedule=None,
     catchup=False
 ) as dag:
 

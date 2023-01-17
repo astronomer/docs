@@ -173,7 +173,7 @@ FROM adoption_center_2;
 with DAG('lineage-combine-postgres',
          start_date=datetime(2020, 6, 1),
          max_active_runs=1,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args = {
             'retries': 1,
             'retry_delay': timedelta(minutes=1)
@@ -214,7 +214,7 @@ GROUP BY date, type;
 with DAG('lineage-reporting-postgres',
          start_date=datetime(2020, 6, 1),
          max_active_runs=1,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args={
             'retries': 1,
             'retry_delay': timedelta(minutes=1)
