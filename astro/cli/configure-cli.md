@@ -43,18 +43,15 @@ astro config set webserver.port 8081
 | ------------------- | ----------- | --------------- |
 | `cloud.api.protocol`  | The type of protocol to use when calling the Airflow API in a local Airflow environment         | `http`, `https`             |
 | `cloud.api.port`      | The port to use when calling the Airflow API in a local environment           | Any available port             |
-| `cloud.api.ws_protocol`   | The type of WebSocket (ws) protocol to use when calling the Airflow API in a local Airflow environment           | `http`, `https`             |
-| `cloud.api.token`    | The type of API token to use when calling the Airflow API in a local Airflow environment           | Any available API token             |
+| `cloud.api.ws_protocol`   | The type of WebSocket (ws) protocol to use when calling the Airflow API in a local Airflow environment           | `ws`, `wss`             |
 | `context`            | The context for your Astro project          | Any available [context](cli/astro-context-list.md)             |
-| `contexts`           | The contexts for your Astro project          | Any available [context](cli/astro-context-list.md)             |
 | `local.registry`     | The location of your local Docker container running Airflow             | Any available port             |
 | `postgres.user`      | Your username for the Postgres metadata database            | Any string             |
 | `postgres.password`  | Your password for the Postgres metadata database            | Any string             |
 | `postgres.host`      | Your hostname for the Postgres metadata database            | Any string             |
 | `postgres.port`      | Your port for the Postgres metadata database            | Any available port             |
 | `project.name`       | The name of your Astro project         | Any string             |
-| `project.workspace`       | The name of your Astro project workspace         | Any string             |
 | `webserver.port`     | The port for the web server in your local Airflow environment          | Any available port             |
 | `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment         | `true`, `false`             |
-| `skip_parse`  | Determines whether parsing is ignored when executing a Houston API call         | `true`, `false`             |
+| `skip_parse`  | Determines whether DAG parsing is ignored when deploying code to a Deployment         | `true`, `false`             |
 | `upgrade_message`  | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI         | `true`, `false`             |
