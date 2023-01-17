@@ -464,24 +464,24 @@ Using deferrable operators from the [Astronomer providers package](https://regis
 
     ```python
     from astronomer.providers.snowflake.operators.snowflake import (
-            SnowflakeOperatorAsync
-        )
+        SnowflakeOperatorAsync
+    )
     ```
 
 2. Switch out the operators used in the `load_forestfire_data` and `load_cost_data` tasks by replacing `SnowflakeOperator` with `SnowflakeOperatorAsync`:
 
     ```python
-    load_forestfire_data = SnowflakeOperatorAsync( # changed operator name
-            task_id="load_forestfire_data",
-            sql=sql_stmts.load_forestfire_data,
-            params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
-        )
+    load_forestfire_data = SnowflakeOperatorAsync(  # changed operator name
+        task_id="load_forestfire_data",
+        sql=sql_stmts.load_forestfire_data,
+        params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
+    )
 
     load_cost_data = SnowflakeOperatorAsync( # changed operator name
-            task_id="load_cost_data",
-            sql=sql_stmts.load_cost_data,
-            params={"table_name": SNOWFLAKE_COST_TABLE}
-        )
+        task_id="load_cost_data",
+        sql=sql_stmts.load_cost_data,
+        params={"table_name": SNOWFLAKE_COST_TABLE}
+    )
     ```
 
 3. Run your DAG and observe how the two load tasks go into a deferred state (purple border) before being completed.
