@@ -65,7 +65,7 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
     - [Schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html): Your Snowflake schema. 
     - Login: Your Snowflake login username.
     - Password: Your Snowflake password.
-    - Account: Your snowflake account in the format `xz12345`.
+    - Account: Your Snowflake account in the format `xz12345`.
     - [Database](https://docs.snowflake.com/en/sql-reference/sql/create-database.html): Your Snowflake database.
     - Region: Your Snowflake region, for example `us-east-1`.
 
