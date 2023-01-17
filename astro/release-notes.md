@@ -23,6 +23,12 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.9.0 ([Release notes](cli/release-notes.md))
 
+## January 17, 2023
+
+### Bug fixes
+
+- Fixed an issue in GCP clusters where a Deployment's metadata database could persist even after the Deployment was deleted.
+
 ## January 10, 2023 
 
 ### New Astro Cloud IDE cell types
