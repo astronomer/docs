@@ -21,7 +21,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 3. On the **Pipelines** page click a pipeline name to open the pipeline editor.
 
-4. Click **Add Cell** and select one of the follwoing options:
+4. Click **Add Cell** and select one of the following options:
 
     -   **SQL**: Runs a SQL query against a provided database connection and persists the results of the query in an XCom for use by other cells.
 

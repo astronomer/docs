@@ -191,7 +191,7 @@ Astronomer Software 0.31 includes new default resource limits and requests on th
 - Alertmanager
 - Elasticsearch
 - NATS
-- PostrgeSQL
+- PostgreSQL
 - STAN
 - Nginx
 - Grafana

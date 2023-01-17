@@ -19,7 +19,7 @@ To install Astro in a dedicated AWS account owned by your organization, you'll c
 - Share AWS account information with Astronomer support.
 - Create the IAM policies used by Astro. This includes a cross-account IAM role that Astro can assume and permissions boundaries for the Astro operational roles. For more information about permissions boundaries, see [Permissions boundaries for IAM entities](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html).
 
-Astronomer support will create a cluster within your AWS account to host the resources and Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
+A cluster will be created within your AWS account to host the resources and Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Prerequisites
 
@@ -58,7 +58,7 @@ If you have one or more existing AWS accounts, you can use [AWS Organizations](h
 The following options are available when your AWS resources are on a private network:
 
 - Allow traffic through the public internet and use allow-lists for communication.
-- Create a VPC Peering connection between the Astronomer VPC and the VPCs for your network.
+- Create a VPC Peering connection between the dedicated Astro data plane VPC and your existing AWS account VPCs.
 
 If you want to continue with the second option, you'll additionally need:
 
@@ -210,15 +210,16 @@ To monitor changes to the cross-account role policy and permissions boundaries, 
 
 ## Step 4: Provide setup information to Astronomer
 
-After creating the AWS account, provide Astronomer support with the following information:
+After creating the AWS account, provide Astronomer with the following information:
 
 - Your AWS Account ID.
 - Your preferred Astro cluster name.
 - The AWS region that you want to host your cluster in.
 - Your preferred node instance type.
 - Your preferred maximum node count.
+- An instance type for the Airflow metadata database.
 
-If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1`. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
+If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` and a default `db.r5.large` Amazon RDS instance type. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
 
 To provision additional clusters after completing your initial installation, see [Create a cluster](create-cluster.md).
 
@@ -240,11 +241,11 @@ If you need to VPC peer with Astronomer, provide the following information to yo
 - VPC Name/ID and region for peering with Astronomer. This is accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/).
 - The IPs of your DNS servers.
 
-## Step 5: Astronomer support creates the cluster
+## Step 5: Astronomer creates the cluster
 
-After you've created the cross-account IAM role for Astro, contact [Astronomer support](https://cloud.astronomer.io/support). Astronomer support creates the cluster in your AWS account.
+After you've created the cross-account IAM role for Astro, contact your Astronomer representative. Astronomer creates the cluster in your AWS account.
 
-This process can take some time. Wait for confirmation from Astronomer support that the cluster has been created before creating a Deployment.
+This process can take some time. Wait for confirmation from Astronomer  that the cluster has been created before creating a Deployment.
 
 If you submitted a VPC peering request, you'll need to accept the request from Astronomer after Astro is installed. To accept the request, see [Create a VPC peering connection](https://docs.aws.amazon.com/vpc/latest/peering/create-vpc-peering-connection.html).
 
@@ -255,7 +256,7 @@ When VPC peering with Astronomer is complete, configure and validate the followi
 
 ## Step 6: Create a Deployment and confirm the install
 
-When Astronomer support confirms that your Astro cluster has been created, Astronomer recommends that you create a Deployment and deploy DAGs. See [Create a Deployment](create-deployment.md). 
+When you receive confirmation that your Astro cluster has been created, Astronomer recommends that you create a Deployment and deploy DAGs. See [Create a Deployment](create-deployment.md). 
 
 To confirm a successful installation, in the Cloud UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
 

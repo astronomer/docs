@@ -37,7 +37,7 @@ By default, the `astro run` command parses all of the DAGs in your `dags` direct
 
 In Astro CLI 1.9, you can instead use the `--dag-file` flag to run a specific DAG file without parsing all other DAGs in your directory. Specifying an individual DAG file makes it easier to troubleshoot errors for that DAG and results in faster execution of the command.
 
-### Additional improvments
+### Additional improvements
 
 - When you run Airflow locally, you no longer need to enter credentials to log in to the Airflow UI.
 - When you run Airflow locally, you can now access to the Airflow UI **Configurations** page (**Admin** > **Configurations**). This page shows the current configuration for your environment, including environment variables and Astro Runtime defaults.

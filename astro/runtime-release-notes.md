@@ -408,7 +408,7 @@ For more information, see the [changelog for Apache Airflow 2.3.1](https://githu
 
 ## Astro Runtime 5.0.1
 
-- Rlease date: May 9, 2022
+- Release date: May 9, 2022
 - Airflow version: 2.3.0
 
 ### Astronomer Providers 1.2.0
