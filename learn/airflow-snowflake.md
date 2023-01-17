@@ -14,7 +14,7 @@ This tutorial covers an example of orchestrating complex Snowflake operations wi
 - Running transformations on data in Snowflake using Airflow operators. 
 - Running data quality checks on data in Snowflake. 
 
-Additionally, the [How it works](#how-it-works) sections offers further information on:
+Additionally, [How it works](#how-it-works) offers further information on:
 
 - Available operators and hooks for orchestrating actions in Snowflake.
 - Leveraging the OpenLineage Airflow integration to get data lineage and enhanced observability from your Snowflake jobs.
@@ -443,7 +443,7 @@ When running SQL statements from Airflow operators, you can store the SQL code i
     - Copies data into the production table.
     - Deletes the tables to clean up the example.
 
-    The `chain()` method at the end of the DAG sets the dependencies. This method is commonly used over bitshift operators (`>>`) to make the dependency related code of DAGs with a lot of tasks easier to read. 
+    The `chain()` method at the end of the DAG sets the dependencies. This method is commonly used over bitshift operators (`>>`) to make it easier to read dependencies between many tasks.
 
 ## Step 5: Run the DAG and review data quality results
 
@@ -455,7 +455,7 @@ When running SQL statements from Airflow operators, you can store the SQL code i
 
 ## Step 6: Use deferrable operators
 
-The `complex_snowflake_example` DAG runs several queries against the same Snowflake database in parallel. While some queries, like the ones creating tables, run quickly, larger transformation or loading queries might take longer to complete. These queries are a great use case for the deferrable version of the SnowflakeOperator, the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync). Deferrable operators use the triggerer component in your Airflow environment, which is configured automatically with the Astro CLI, to release their worker slot while they wait to for the task to be completed. This allows you to use your Airflow resources much more efficiently in production. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
+The `complex_snowflake_example` DAG runs several queries against the same Snowflake database in parallel. While some queries, like the ones creating tables, run quickly, larger transformation or loading queries might take longer to complete. These queries are a great use case for the deferrable version of the SnowflakeOperator, the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync). Deferrable operators use the triggerer component in your Airflow environment, which is configured automatically with the Astro CLI, to release their worker slot while they wait for the task to be completed. This allows you to use your Airflow resources much more efficiently in production. Learn more about deferrable operators in our [Deferrable operators guide](deferrable-operators.md).
 
 Using deferrable operators from the [Astronomer providers package](https://registry.astronomer.io/providers/astronomer-providers) is easy, you simply have to switch out the operator class. All parameters stay the same.
 
