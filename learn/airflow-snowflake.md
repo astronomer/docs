@@ -234,11 +234,12 @@ When running SQL statements from Airflow operators, you can store the SQL code i
         """,
         doc_md=__doc__,
         start_date=datetime(2022, 12, 1),
-        schedule_interval=None,
+        schedule=None,
         # defining the directory where SQL templates are stored
         template_searchpath="/usr/local/airflow/include/sql/",
         catchup=False
     ) as dag:
+    
         """
         #### Snowflake table creation
         Create the tables to store sample data.
