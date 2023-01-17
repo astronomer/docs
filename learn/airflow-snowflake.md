@@ -477,7 +477,7 @@ Using deferrable operators from the [Astronomer providers package](https://regis
         params={"table_name": SNOWFLAKE_FORESTFIRE_TABLE}
     )
 
-    load_cost_data = SnowflakeOperatorAsync( # changed operator name
+    load_cost_data = SnowflakeOperatorAsync(  # changed operator name
         task_id="load_cost_data",
         sql=sql_stmts.load_cost_data,
         params={"table_name": SNOWFLAKE_COST_TABLE}
@@ -499,7 +499,7 @@ Several open source packages contain operators used to orchestrate Snowflake in 
 The [Snowflake provider package](https://registry.astronomer.io/providers/snowflake) contains:
 
 - [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator): Executes any SQL query in Snowflake.
-- [S3ToSnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/s3tosnowflakeoperator): Executes an COPY command to load files from s3 to Snowflake.
+- [S3ToSnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/s3tosnowflakeoperator): Executes a COPY command to load files from s3 to Snowflake.
 - [SnowflakeToSlackOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflaketoslackoperator): An operator that executes a SQL statement in Snowflake and sends the result to Slack.
 - [SnowflakeHook](https://registry.astronomer.io/providers/snowflake/modules/snowflakehook): A client to interact with Snowflake which is commonly used when building custom operators interacting with Snowflake.
 
