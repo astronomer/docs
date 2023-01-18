@@ -60,7 +60,9 @@ astro config set webserver.port 8081
 | `postgres.port`      | Your port for the Postgres metadata database            | Any available port             |
 | `project.name`       | The name of your Astro project         | Any string             |
 | `webserver.port`     | The port for the webserver in your local Airflow environment          | Any available port             |
-| `show_warnings`      | Determines whether warning messages appear when starting up a local Airflow environment         | `true`, `false`             |
+| `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment         | `true`, `false`             |
+| `skip_parse`         | Determines whether DAG parsing is ignored when deploying code to a Deployment         | `true`, `false`            | 
+| `upgrade_message`    | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI         | `true`, `false`             |
 
 </TabItem>
 
@@ -68,13 +70,11 @@ astro config set webserver.port 8081
 
 | Option              | Description | Possible Values |
 | ------------------- | ----------- | --------------- |
-| `houston.dial_timeout`       |         |             |
-| `houston.skip_verify_tls`       |          |             |
-| `interactive`       |          |             |
-| `local.houston`       |          |             |
-| `local.platform`      |                      |              |
-| `page_size`             |                       |              |
-| `verbosity`      |              |              |
+| `houston.dial_timeout`       |  The time in seconds to wait for a Houston connection. The default is 10.        |  Any integer           |
+| `houston.skip_verify_tls`       |  Determines whether the Transport Layer Security (TSL) certificate is verified when connecting to Houston. The default is `false`.        | `true`, `false`             |
+| `interactive`       | Determines whether responses are paginated in the Astro CLI when it is supported. The default is `false`         |  `true`, `false`           |
+| `page_size`             | Determines the size of the paginated response when `interactive` is set to `true`. The default is `20`                      | Any integer             |
+| `verbosity`      | Determines the Astro CLI log level type. The default is `warning`             | `debug`, `info`, `warning`, `error`             |
 
 </TabItem>
 </Tabs>
