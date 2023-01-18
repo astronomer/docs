@@ -82,9 +82,9 @@ The `configuration` section contains all settings that you can configure from th
 
 #### `deployment.environment_variables`
 
-The `environment_variables` section contains configurations Deployment environment variables. See [Environment variables](environment-variables.md).
+The `environment_variables` section contains configurations for Deployment environment variables. See [Environment variables](environment-variables.md).
 
-You can set `environment_variables.is_secret: true` on any new or existing environment variables to set them as secret, but you won't be able to retrieve the secret value from the Deployment once you push your configuration. Astronomer recommends that you avoid committing Deployment files containing secret values to GitHub repositories. If you are committing these files to continually update deployments, update secret values manually and leave them blank in the file.
+You can set `environment_variables.is_secret: true` on any new or existing environment variables to set them as secret, but you won't be able to retrieve the secret value from the Deployment once you push your configuration. Astronomer recommends that you avoid committing Deployment files containing secret values to GitHub repositories. If you are committing these files to continually update a Deployment, update the secret values manually in the Cloud UI and leave them blank in the file.
 
 #### `deployment.worker_queues`
 
