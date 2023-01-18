@@ -26,7 +26,7 @@ In most cases, you only need to modify these settings in the case of debugging a
 Run the following command in an Astro project:
 
 ```sh
-astro config set <configuration> <value>
+astro config set <configuration-option> <value>
 ```
 
 This command applies your configuration to `.astro/config.yaml` in your current Astro project. Configurations do not persist between Astro projects.
@@ -51,7 +51,8 @@ astro config set webserver.port 8081
 | ------------------- | ----------- | --------------- |
 | `cloud.api.protocol`  | The type of protocol to use when calling the Airflow API in a local Airflow environment         | `http`, `https`             |
 | `cloud.api.port`      | The port to use when calling the Airflow API in a local environment           | Any available port             |
-| `context`           | The context for your Astro project          | Any available [context](cli/astro-context-list.md)             |
+| `cloud.api.ws_protocol`   | The type of WebSocket (ws) protocol to use when calling the Airflow API in a local Airflow environment           | `ws`, `wss`             |
+| `context`            | The context for your Astro project          | Any available [context](cli/astro-context-list.md)             |
 | `local.registry`     | The location of your local Docker container running Airflow             | Any available port             |
 | `postgres.user`      | Your username for the Postgres metadata database            | Any string             |
 | `postgres.password`  | Your password for the Postgres metadata database            | Any string             |
