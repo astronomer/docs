@@ -66,7 +66,13 @@ Scheduler settings control how the scheduler parses DAG files and creates DAG ru
 
 - `dag_dir_list_interval`: The frequency that the DAGs directory is scanned for new files, in seconds. The lower the value, the faster new DAGs are processed and the higher the CPU usage. The default value is 300 seconds (5 minutes). 
 
-  It is helpful to know how long it takes to parse your DAGs (`dag_processing.total_parse_time`) to know what values to choose for `min_file_process_interval` and `dag_dir_list_interval`. If your `dag_dir_list_interval` is less than the amount of time it takes to parse each DAG, performance issues can occur.
+    It's helpful to know how long it takes to parse your DAGs (`dag_processing.total_parse_time`) to know what values to choose for `min_file_process_interval` and `dag_dir_list_interval`. If your `dag_dir_list_interval` is less than the amount of time it takes to parse each DAG, performance issues can occur. 
+  
+  :::tip
+
+  If you have less than 200 DAGs in a Deployment on Astro, it's safe to set `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=30` (30 seconds) as a Deployment-level [environment variable](https://docs.astronomer.io/astro/environment-variables.md).
+
+  ::: 
 
 - `parsing_processes` (formerly `max_threads`): How many processes the scheduler can run in parallel to parse DAGs. Astronomer recommends setting a value that is twice your available vCPUs. Increasing this value can help serialize a large number of DAGs more efficiently. If you are running multiple schedulers, this value applies to each of them. The default value is 2. 
 

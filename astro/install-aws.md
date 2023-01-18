@@ -17,11 +17,10 @@ import TabItem from '@theme/TabItem';
 
 The Astro data plane on Amazon Web Services (AWS) runs on Elastic Kubernetes Service (EKS). You have two options to install Astro on AWS:
 
-- Self-hosted -  Create an Astro cluster in a dedicated AWS account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
-- Astronomer-hosted - Create an Astro cluster in a dedicated AWS account that's hosted and owned by Astronomer. This removes the complexity of adding another AWS account to your network.
+- Bring Your Own Cloud -  Create an Astro cluster in a dedicated AWS account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
+- Hosted - Create an Astro cluster in a dedicated AWS account that's hosted and owned by Astronomer. This removes the complexity of adding another AWS account to your network.
 
 With the two options, the user experience is identical and Astronomer is responsible for managing Astro. The differences between the two options are security and networking.
-
 
 For a list of the AWS resources and configurations that Astronomer supports, see [AWS resource reference](resource-reference-aws.md). For more information about the shared responsibility model, see [Shared responsibility model](shared-responsibility-model.md).
 
@@ -31,8 +30,8 @@ For a list of the AWS resources and configurations that Astronomer supports, see
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Self-hosted', value: 'byoc'},
-        {label: 'Astronomer-hosted', value: 'astronomer hosted data plane'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
+        {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
 
@@ -309,16 +308,13 @@ Wait for confirmation that the installation is successful before you access Astr
 
 </Tabs>
 
+### Create a Deployment and confirm the install
 
+When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). 
 
-### Confirm the install
+To confirm a successful installation, in the Cloud UI select a Workspace and on the **Deployments** page click **Deployment**. The Astro cluster created by Astronomer support appears as an option in the **Cluster** list.
 
-When Astronomer support confirms that your Astro cluster has been created, you can create a Deployment and start deploying DAGs. See [Create a Deployment](create-deployment.md). When you create your Deployment, the Astro cluster created by Astronomer support appears as an option in the **Cluster** list as shown in the following image.
-
-![Cloud UI New Deployment screen](/img/docs/create-new-deployment-select-cluster.png)
-
-## Related documentation
-
+## Next steps
 
 - [Set up an identity provider](configure-idp.md)
 - [Install CLI](cli/overview.md)

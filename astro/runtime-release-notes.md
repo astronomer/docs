@@ -14,9 +14,71 @@ import {siteVariables} from '@site/src/versions';
 
 <!--version-specific-->
 
+<p>
+    <a href="/astro-runtime-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
+
 Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. Note that some changes to Runtime might be omitted based on their availability in Astro.
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+## Astro Runtime 7.1.0
+
+- Release date: December 21, 2022
+- Airflow version: 2.5.0
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.13.0, which includes a collection of minor enhancements and bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1130-2022-12-16). 
+- Upgraded `openlineage-airflow` to 0.18.0, which includes new support for Airflow operators like the `SQLExecuteQueryOperator`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.18.0) for more information. 
+- Upgraded `apache-airflow-providers-microsoft-azure` to 5.0.1, which includes a bug fix to revert `offset` and `length` to be optional arguments.
+- Upgraded `certifi` to 2022.12.7.
+- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Cloud UI.
+
+## Astro Runtime 7.0.0 
+
+- Release date: December 2, 2022 
+- Airflow version: 2.5.0
+
+### Airflow 2.5.0
+
+Astro Runtime 7.0.0 includes same-day support for Airflow 2.5.0, which includes a collection of new features, bug fixes, automatic changes, and deprecations. Features include:
+
+- Add comments to task instances and DAG runs in the Airflow UI ([#26457](https://github.com/apache/airflow/pull/26457))
+- Clear all task instances in a task group with one click in the Airflow UI ([#26658](https://github.com/apache/airflow/pull/26658)), [#28003](https://github.com/apache/airflow/pull/28003))
+- Trigger a task when at least one upstream tasks is successful with new `one_done` trigger rule [#26146](https://github.com/apache/airflow/pull/26146)
+- New **Parsed at** metric in the DAG view of the Airflow UI [#27573](https://github.com/apache/airflow/pull/27573)
+- Filter datasets in Airflow UI based on recent update events [#26942](https://github.com/apache/airflow/pull/26942)
+
+To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/blog/whats-new-in-apache-airflow-2-5/) and the [Apache Airflow 2.5.0 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-0-2022-12-02).
+
+### Additional improvements 
+
+- In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
+- Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
+- Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
+
+## Astro Runtime 6.1.0
+
+- Release date: December 21, 2022
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Make DagRun state updates for paused DAGs faster ([#27725](https://github.com/apache/airflow/pull/27725))
+- Fix deadlock when chaining multiple empty mapped tasks ([#27964](https://github.com/apache/airflow/pull/27964))
+
+### Additional improvements 
+
+- Upgraded `astronomer-providers` to 1.13.0, which includes a collection of minor enhancements and bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1130-2022-12-16). 
+- Upgraded `openlineage-airflow` to 0.18.0, which includes new support for Airflow operators like the `SQLExecuteQueryOperator`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.18.0) for more information.
+- Upgraded `apache-airflow-providers-microsoft-azure` to 5.0.1, which includes a bug fix to revert `offset` and `length` to be optional arguments.
+- You can now run Astro Runtime images on Red Hat OpenShift.
+- In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
+- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Cloud UI.
+- You can now add comments to the `packages.txt` file of an Astro project.
 
 ## Astro Runtime 6.0.4
 
@@ -27,7 +89,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 :::caution
 
-To deploy a project using Astro Runtime 6.0.4 from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the Astro CLI](cli/install-cli.md).
+To deploy a project using Astro Runtime 6.0.4 or later from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the Astro CLI](cli/install-cli.md).
 
 :::
 
@@ -50,7 +112,6 @@ For a complete list of the changes, see the [Apache Airflow 2.4.3 release notes]
 
 - Upgraded `openlineage-airflow` to 0.16.1. This release includes the `DefaultExtractor`, which allows you to extract the default available OpenLineage data for external operators without needing to write a custom extractor. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.16.1) for more information. 
 - Upgraded `astronomer-providers` to 1.11.1, which includes bug fixes. For a complete list of the changes, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1111-2022-10-28).
-
 
 ## Astro Runtime 6.0.3
 
@@ -86,13 +147,11 @@ For a complete list of commits, see the [Apache Airflow 2.4.1 release notes](htt
 
 ### Early access Airflow bug fixes
 
-Astro Runtime 6.0.2 includes the following bug fixes:
+Astro Runtime 6.0.2 includes the following bug fixes from Apache Airflow 2.4.2:
 
 - Remove DAG parsing from StandardTaskRunner ([#26750](https://github.com/apache/airflow/pull/26750))
 - Fix airflow tasks run --local when dags_folder differs from that of processor ([#26509](https://github.com/apache/airflow/pull/26509))
 - Add fixture for CLI tests requiring sample dags ([#26536](https://github.com/apache/airflow/pull/26536))
-
-These changes were backported from Apache Airflow 2.4.2, which is not yet generally available.
 
 ### Additional improvements
 
@@ -129,6 +188,35 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 
 - Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of the operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
 - Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
+
+## Astro Runtime 5.1.0
+
+- Release date: January 4, 2023
+- Airflow version: 2.3.4
+
+### Additional improvements
+
+- Upgraded `astronomer-providers` to 1.13.0, which includes a collection of minor enhancements and bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1130-2022-12-16). 
+- Upgraded `openlineage-airflow` to 0.18.0, which includes new support for Airflow operators like the `SQLExecuteQueryOperator`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.18.0) for more information. 
+- Airflow environments hosted on Astro now include a **Back to Astro** button in the Airflow UI. Use this button to return to the Deployment hosting the Airflow environment in the Cloud UI.
+
+## Astro Runtime 5.0.13
+
+- Release date: December 12, 2022
+- Airflow version: 2.3.4
+
+### Backported Airflow bug fixes
+
+Astro Runtime 5.0.13 includes the following bug fixes from later Apache Airflow releases:
+
+- Change the template to use human readable task_instance description ([#25960](https://github.com/apache/airflow/pull/25960))
+- Fix deadlock when chaining multiple empty mapped tasks ([#27964](https://github.com/apache/airflow/pull/27964))
+
+### Additional improvements
+
+- You can now run Astro Runtime images on Red Hat OpenShift.
+- You can now add comments to the `packages.txt` file of an Astro project.
+- In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
 
 ## Astro Runtime 5.0.12
 
@@ -320,7 +408,7 @@ For more information, see the [changelog for Apache Airflow 2.3.1](https://githu
 
 ## Astro Runtime 5.0.1
 
-- Rlease date: May 9, 2022
+- Release date: May 9, 2022
 - Airflow version: 2.3.0
 
 ### Astronomer Providers 1.2.0
@@ -355,6 +443,23 @@ Astro Runtime 5.0.0 provides support for [Airflow 2.3.0](https://airflow.apache.
 - The ability to [reuse a decorated task function](https://airflow.apache.org/docs/apache-airflow/2.3.0/tutorial_taskflow_api.html#reusing-a-decorated-task) between DAGs.
 
 For more information on Airflow 2.3, see ["Apache Airflow 2.3 — Everything You Need to Know"](https://www.astronomer.io/blog/apache-airflow-2-3-everything-you-need-to-know) by Astronomer.
+
+## Astro Runtime 4.2.9
+
+- Release date: December 12, 2022
+- Airflow version: 2.2.5
+
+### Backported Airflow bug fixes
+
+Astro Runtime 4.2.9 includes the following bug fixes from later Apache Airflow releases:
+
+- Change the template to use human readable task_instance description ([#25960](https://github.com/apache/airflow/pull/25960))
+
+### Additional improvements
+
+- You can now run Astro Runtime images on Red Hat OpenShift.
+- You can now add comments to the `packages.txt` file of an Astro project.
+- In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
 
 ## Astro Runtime 4.2.8
 

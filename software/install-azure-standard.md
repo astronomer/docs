@@ -15,7 +15,7 @@ Install Astronomer Software on Azure to deploy and scale [Apache Airflow](https:
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
 * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
-* SMTP Service & Credentials (e.g. Mailgun, Sendgrid, etc.)
+* SMTP service and credentials. For example, Mailgun or Sendgrid.
 * Permission to create and modify resources on AKS
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
 * If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
@@ -248,7 +248,11 @@ A few additional configuration notes:
 
 ## Step 8: Configure Your Helm chart
 
-> **Note:** If you want to use a third-party ingress controller for Astronomer, complete the setup steps in [Third-Party Ingress Controllers](third-party-ingress-controllers.md) in addition to this configuration.
+:::info 
+
+To use a third-party ingress controller for Astronomer, see [Third-Party Ingress Controllers](third-party-ingress-controllers.md).
+
+:::
 
 As a next step, create a file named `config.yaml` in an empty directory.
 
@@ -331,7 +335,7 @@ astronomer:
           google:
             enabled: true # Lets users authenticate with Google
     secret:
-    - envName: "<smtp_uri_secret>"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
+    - envName: "EMAIL__SMTP_URL"  # Reference to the Kubernetes secret for SMTP credentials. Can be removed if email is not used.
       secretName: "astronomer-smtp"
       secretKey: "connection"
 ```
@@ -367,10 +371,10 @@ helm repo update
 This ensures that you pull the latest image from the Astronomer Helm repository. Now, run:
 
 ```sh
-helm install -f config.yaml --version=0.30 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
+helm install -f config.yaml --version=0.31 --namespace=astronomer <your-platform-release-name> astronomer/astronomer
 ```
 
-This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.30.x`.  For example, to install Astronomer Software v0.30.0, you specify `--version=0.30.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
+This command installs the most recent patch version of Astronomer Software. To install a different patch version, add the `--version=` flag and use the format `0.31.x`.  For example, to install Astronomer Software v0.31.0, you specify `--version=0.31.0`. For more information about the available patch versions, see the [Software Release Notes](release-notes.md).
 
 When you're defining `<your-platform-release-name>`, Astronomer recommends limiting the name to 12 characters to avoid operational issues.
 

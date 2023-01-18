@@ -192,7 +192,7 @@ def days_to_now(starting_date):
 with DAG(
     dag_id="demo_template",
     start_date=datetime(2021, 1, 1),
-    schedule_interval=None,
+    schedule=None,
     user_defined_macros={
         "starting_date": datetime(2015, 5, 1),  # Macro can be a variable
         "days_to_now": days_to_now,  # Macro can also be a function
@@ -211,7 +211,7 @@ It's also possible to inject functions as Jinja [filters](https://jinja.palletsp
 with DAG(
     dag_id="bash_script_template",
     start_date=datetime(2021, 1, 1),
-    schedule_interval=None,
+    schedule=None,
     user_defined_filters={"days_to_now": days_to_now},  # Set user_defined_filters to use function as pipe-operation
     user_defined_macros={"starting_date": datetime(2015, 5, 1)},
 ) as dag:
@@ -247,7 +247,7 @@ sum_numbers("1", "2", "3")  # TypeError: unsupported operand type(s) for +=: 'in
 Consider a scenario where you're passing a list of values to this function by triggering a DAG with a config that holds some numbers:
 
 ```python
-with DAG(dag_id="failing_template", start_date=datetime.datetime(2021, 1, 1), schedule_interval=None) as dag:
+with DAG(dag_id="failing_template", start_date=datetime.datetime(2021, 1, 1), schedule=None) as dag:
     sumnumbers = PythonOperator(
         task_id="sumnumbers",
         python_callable=sum_numbers,
@@ -282,7 +282,7 @@ def sum_numbers(*args):
 with DAG(
     dag_id="native_templating",
     start_date=datetime.datetime(2021, 1, 1),
-    schedule_interval=None,
+    schedule=None,
     render_template_as_native_obj=True,  # Render templates using Jinja NativeEnvironment
 ) as dag:
     sumnumbers = PythonOperator(

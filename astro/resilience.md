@@ -11,4 +11,4 @@ Astro leverages AZs for both the control and data planes. The control plane leve
 
 In the case of a full region failure of the control plane, the services and data would be recovered in an alternate region by Astronomer. In the case of a full region failure of the data plane, clusters impacted by a full regional outage will be restored to an alternate region (see [Disaster recovery](disaster-recovery.md) for details).
 
-Astro also provides DDoS protection with always-on traffic monitoring, detection, and automatic attack mitigations for all inbound network traffic, along with suspicious IP throttling and brute-force protection as part of our secure authentication service.
+Astro also provides DDoS protection with always-on traffic monitoring, detection, and automatic attack mitigation for all inbound network traffic, along with suspicious IP throttling and brute-force protection as part of our secure authentication service.

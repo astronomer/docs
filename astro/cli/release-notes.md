@@ -9,16 +9,102 @@ id: release-notes
   <meta name="og:description" content="This is where you’ll find information about the latest Astro command-line interface (CLI) commands and bug fixes. Check in regularly to know when issues are resolved and new commands are added." />
 </head>
 
+<p>
+    <a href="/astro-cli-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
 
-This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md).
+This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
+## Astro CLI 1.9.0
+
+Release date: January 13, 2023
+
+### Manage Astro Deployments as code
+
+Astro CLI version 1.9 includes three new commands that make it possible to programmatically create and update Deployments:
+
+- `astro deployment inspect --template`: Create a template file in YAML for an existing Deployment. This template file includes all information about the Deployment in its current state, including worker queue configurations, environment variables, and Astro Runtime version.
+- `astro deployment create --deployment-file`: Create a new Deployment with the configurations specified in a template file.
+- `astro deployment update --deployment-file`: Update an existing Deployment based on the values in a Deployment file.
+
+You can use template and Deployment files to define Astro Deployments as code. For example, if your team regularly creates and deletes Deployments for testing, you can use template files to avoid manually copying configurations in the Cloud UI. For more information, see [Astro CLI command reference](cli/astro-deployment-create.md).
+
+### New `--dag-file` flag for `astro run`
+
+By default, the `astro run` command parses all of the DAGs in your `dags` directory even if you are only running one DAG.
+
+In Astro CLI 1.9, you can instead use the `--dag-file` flag to run a specific DAG file without parsing all other DAGs in your directory. Specifying an individual DAG file makes it easier to troubleshoot errors for that DAG and results in faster execution of the command.
+
+### Additional improvements
+
+- When you run Airflow locally, you no longer need to enter credentials to log in to the Airflow UI.
+- When you run Airflow locally, you can now access to the Airflow UI **Configurations** page (**Admin** > **Configurations**). This page shows the current configuration for your environment, including environment variables and Astro Runtime defaults.
+- The Astro CLI now reminds you when a new version of the Astro CLI is available. To turn this feature off, run `astro config set -g upgrade_message false`.
+
+## Astro CLI 1.8.4
+
+Release date: December 12, 2022
+
+### Additional improvements
+
+- The `__pycache__/` directory is now included in the `.gitignore` file of an Astro project by default. `__pycache__/` includes compiled versions of DAG and Python files that are automatically generated and should not be committed to Git.
+- Clarified the message that appears when you run `astro deployment update --dag-deploy enable` and DAG-only deploys were already enabled for the Deployment.
+
+### Bug fixes
+
+- Fixed an issue related to the [SQLAlchemy connection](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#sql-alchemy-conn) ([`sql_alchemy_conn`]) in local Airflow environments. Now, users running Airflow 2.3 or above do not see deprecation warnings for SQLAlchemy in logs for locally running Airflow components.
+
+## Astro CLI 1.8.3
+
+Release date: November 28, 2022
+
+### Additional improvements
+
+- Improved error handling for `astro login`.
+- Added minor performance improvements to `astro run`
+
+### Bug fixes
+
+- Fixed an issue where `astro run` could not locate `airflow_settings.yaml` when running a local Airflow environment. 
+- Fixed an issue were the Airflow settings file created by `astro dev object export` was not compatible with `astro run`.
+
+## Astro CLI 1.8.1
+
+Release date: November 23, 2022
+
+### Bug fixes
+
+- Fixed an issue where you could not use `astro deploy` if you did not have an `.env` file in your Astro project.
+
+## Astro CLI 1.8.0
+
+Release date: November 23, 2022
+
+### New `astro run` command
+
+You can now use the `astro run` command to run and debug a DAG from the command line without starting a local Airflow environment. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations. You can see task success or failure, as well as task logs, directly in your terminal.
+
+This command is an alternative to running `astro dev restart` every time you make a change to your DAG. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test data pipelines.
+
+To learn more, see [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
+
+### Additional improvements
+
+- When you run `astro deploy` with an empty `dags` folder, the CLI excludes your `dags` folder when building and pushing an image of your project to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
+- The `deployment inspect` command now includes a `dag-deploy-enabled` field, and the fields are now ordered in logical groupings instead of by alphabetical order.
+
+### Bug fixes
+
+- Fixed an issue where configurations specified in the `docker-compose.override.yaml` file of an Astro project were not properly applied. 
+- Fixed an issue where `astro login` didn’t recognize some valid domains.
 
 ## Astro CLI 1.7.0
 
 Release date: November 9, 2022 
 
-## Deploy only DAGs with `astro deploy -—dags`
+### Deploy only DAGs with `astro deploy -—dags`
 
 Use `astro deploy -—dags` with the Astro CLI to push only the `dags` directory of your Astro project to a Deployment on Astro. This is an additional option to `astro deploy`, which pushes all files in your Astro project every time you deploy your code to Astro.
 
@@ -32,20 +118,20 @@ When you make changes to other files in your Astro project that aren't in the `d
 
 To use this feature, you must enable it for each Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only). For example CI/CD workflows with this feature enabled, see [CI/CD](ci-cd.md).
 
-## New `astro deployment inspect` command
+### New `astro deployment inspect` command
 
 You can now run `astro deployment inspect` to return a Deployment's current state and configuration as a JSON or YAML object. This includes worker queue settings, Astro Runtime version, and more. Use this command to quickly understand the state of your Deployment as code and as an alternative to viewing it in the Cloud UI.
 
 For more information, see the [CLI command reference](cli/astro-deployment-inspect.md).
 
-## Additional improvements
+### Additional improvements
 
 - The outputs for `astro dev parse` and `astro dev pytest` commands have improved legibility by no longer including Docker container logs.
 - The `astro organization switch` command now includes a `-—login-link` flag that you can use to manually log in if you don't have access to a web browser.
 - You can now provide either an Organization name or ID when running `astro organization switch`.
 - `astro dev start` now times out if the Airflow webserver does not become healthy within a set period of time. Use the `-—wait` flag to specify a wait time in seconds or minutes.
 
-## Bug fixes
+### Bug fixes
 
 - Fixed an issue where `astro deploy` with `colima` was failing due to an issue with registry authentication
 - Fixed an issue where `astro deployment list` didn't display the Workspace ID for a Deployment

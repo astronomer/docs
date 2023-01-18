@@ -4,6 +4,7 @@ title: Astro Cloud IDE
 id: overview
 description: Learn how to build pipelines with the Cloud IDE.
 slug: /cloud-ide
+pagination_next: cloud-ide/quickstart
 ---
 
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
@@ -28,37 +29,6 @@ One of the biggest barriers to using Airflow is writing boilerplate code for bas
 In the following image, you can see how you can use the Astro Cloud IDE to write a DAG by only writing SQL. The Astro Cloud IDE automatically generates a DAG with dependencies based only on the Jinja templating in each SQL query. All connections, package dependencies, and DAG metadata are configured with the UI.
 
 ![Product Screenshot](/img/cloud-ide/pipeline-editor.png)
-
-<!-- insert demo video -->
-
-## Cloud IDE Features
-
-<LinkCardGrid>
-  <LinkCard
-    label="Focus on task logic"
-    description="Turn everyday Python and SQL into Airflow-ready DAG files that follow the latest best practices."
-  />
-  <LinkCard
-    label="Handle data seamlessly"
-    description="Pass data directly from one task to another using a notebook-style interface. No configuration required."
-  />
-  <LinkCard
-    label="Move between SQL and Python"
-    description="Use SQL tables as dataframes by referencing your upstream query name, and query your dataframes directly from SQL."
-  />
-  <LinkCard
-    label="Auto-generate your DAG"
-    description="Your dependency graph and DAG file are auto-generated based on data references in your SQL and Python code."
-  />
-  <LinkCard
-    label="Source control your changes"
-    description="Push your pipeline to a Git repository with a built-in Git integration."
-  />
-  <LinkCard
-    label="Deploy directly to Astro"
-    description="Use the included CI/CD script to deploy your code to a production Deployment on Astro."
-  />
-</LinkCardGrid>
 
 ## Documentation
 

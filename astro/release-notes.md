@@ -9,13 +9,97 @@ id: release-notes
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
 </head>
 
+<p>
+    <a href="/astro-release-notes.xml" target="_blank">
+        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+    </a>
+</p>
+
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 6.0.4 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.1.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.7.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.9.0 ([Release notes](cli/release-notes.md))
+
+## January 10, 2023 
+
+### New Astro Cloud IDE cell types
+
+The following cell types have been added to the Astro Cloud IDE:
+
+- **SQL**: Runs a SQL query against an existing database connection and persists the results of the query in an XCom file for use by other cells. Use this cell type to run smaller queries and store the results in Airflow for quick access in other cells.
+- **Warehouse SQL**: Runs a SQL query against an existing database connection and stores the results in your data warehouse. Use this cell type for data operations that require more storage and a higher level of reliability.
+- **Markdown**: Adds documentation as in-line comments to your generated DAG code. Use this cell to make it easier for team members to collaborate on the same pipeline.
+
+### Additional improvements
+
+- To reduce the time it takes for Airflow to parse new DAG files, the default value for `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` has been reduced from 5 minutes to 30 seconds for all Deployments regardless of Runtime version. For most users, this means that you will see new DAGs appear in the Airflow UI faster.
+- In the Cloud UI, a banner now appears if there is an incident reported on the [Astro status page](https://status.astronomer.io/).
+
+### Bug fixes 
+
+- Sorting the **Organization Role** column in the **People** tab of the Cloud UI now works as expected.
+- Fixed an issue where lineage groups would occasionally not collapse as expected in the **Lineage Graph** view. 
+
+## December 20, 2022 
+
+### Additional improvements 
+
+- You can now configure OneLogin and Ping Identity as identity providers on Astro. See [Configure your identity provider](configure-idp.md#configure-your-identity-provider).
+- Workspace Members can now view **Workspace settings** in the Cloud UI.
+- Node groups that are collapsed in the lineage graph in the Cloud UI now show only the total number of connected **Jobs** and **Datasets**, instead of listing each job and dataset. This makes the lineage graph easier to navigate.
+
+    ![Collapsed node in lineage graph of Cloud UI](/img/release-notes/collapsed-lineage-node.png)
+
+### Bug fixes 
+
+- Fixed an issue where the lineage UI did not show dataset metrics when a dataset had no column-level metrics.
+- Fixed an issue where some instances of a dataset's name were inconsistent in the lineage UI.
+
+## December 13, 2022 
+
+### Improvements to the Cloud IDE
+
+The [Cloud IDE](cloud-ide/overview.md) includes several new features which improve DAG authoring and testing:
+
+- There is a new **Commit** button in the Cloud UI that is separate from the **Configuring GitHub** menu.
+- The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Deploying DAG changes to Astro using the CI/CD pipeline is now significantly faster.
+- The **Configure GitHub** menu in the Cloud UI now includes a **Clone Repo** settings menu. Enabling this option makes other files in your GitHub repository, such as helper functions in the `include` folder of your project, accessible when you run DAGs in the Cloud IDE.
+- You can now explicitly mark upstream dependencies for a task cell from the cell's configuration menu.
+
+For more information about configuring GitHub and deploying code with the Cloud IDE, see [Deploy a project from the Cloud IDE to Astro](deploy-project.md).
+
+### Support for n2 worker types on GCP
+
+You can now configure worker queues with the following `n2` worker types on Google Cloud Platform (GCP) clusters:
+
+- `n2-standard-4`
+- `n2-standard-8`
+- `n2-standard-16`
+- `n2-highmem-4`
+- `n2-highmem-8`
+- `n2-highmem-16`
+- `n2-highcpu-4`
+- `n2-highcpu-8`
+- `n2-highcpu-16`
+
+For more information about these worker types, see [N2 machine series](https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines). For a list of all worker types available on GCP, see [Worker node size resource reference](resource-reference-gcp.md#worker-node-size-resource-reference).
+
+### Additional improvements 
+
+- In the **Clusters** tab of the Cloud UI, you can now click a cluster entry to see details about the cluster configuration, including which **Worker Types** are enabled for the cluster.
+- The Deployment details page in the Cloud UI now includes an **ID** pane. A Deployment ID is required when you deploy code using a CI/CD process.
+- The **OpenLineage URL** for your Organization is now available on the **Settings** page in the Cloud UI. An OpenLineage URL is required to [integrate data lineage from some external systems](set-up-data-lineage.md).
+- Workspaces are now sorted alphabetically in the Cloud UI.
+- In Astro CLI version 1.8.0 or later, running `astro deploy` with an empty or missing `dags` folder does not erase or override existing DAGs. Instead, the directory is excluded from the build and push process to Astro. This lets you manage your DAGs and project files in separate repositories when using [DAG-only deploys](deploy-code.md#deploy-dags-only).
+
+### Bug fixes 
+
+- Fixed an issue where Astro temporarily stored DAGs for DAG-only deploys in a new directory named `/usr/local/airflow/dags/current`, which could cause import errors in user code.
+- Fixed an issue where task runs triggered in the Cloud IDE did not have access to project environment variables.
+- Fixed an issue where Deployment metrics for memory usage were not always accurate.  
 
 ## November 15, 2022
 

@@ -17,7 +17,6 @@ Airflow 2 was built to be fast, reliable, and infinitely scalable. Among the hun
 
 - [Refactored Airflow Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/scheduler.html#running-more-than-one-scheduler) for enhanced performance and high-availability.
 - [Full REST API](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) that enables more opportunities for automation.
-- [Smart Sensors](https://airflow.apache.org/docs/apache-airflow/stable/smart-sensor.html) that execute as single, long-running tasks.
 - [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html#taskflow-api) for a simpler way to pass information between tasks.
 - [Independent Providers](https://github.com/apache/airflow/tree/master/airflow/providers) for improved usability and a more agile release cadence.
 - Simplified KubernetesExecutor for ultimate flexibility in configuration.
@@ -29,8 +28,8 @@ Airflow 2.3 subsequently introduced several powerful features, the most notable 
 
 This setup requires:
 
-- The [Astro CLI](install-cli.md).
-- An Astro project running Airflow 1.10.15. If your Astro project uses Airflow 1.10.14 or earlier, upgrade to 1.10.15 using the [standard upgrade process](manage-airflow-versions.md) before following these steps.
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- An Astro project running Airflow 1.10.15. If your Astro project uses Airflow 1.10.14 or earlier, upgrade to 1.10.15 using the [standard upgrade process](manage-airflow-versions.md).
 
 ## Step 1: Run the Airflow upgrade check script
 
@@ -85,11 +84,11 @@ To upgrade to Airflow 2.3.0,
 1. Initialize the Airflow upgrade process via the Astronomer UI or CLI.
 2. Depending on what distribution of Airflow you want to use, add one of the following lines to your project's `Dockerfile`:
 
-    ```dockerfile
+    ```docker
     FROM quay.io/astronomer/astro-runtime:5.0.4
     ```
 
-    ```dockerfile
+    ```docker
     FROM quay.io/astronomer/ap-airflow:2.3.0-onbuild
     ```
 

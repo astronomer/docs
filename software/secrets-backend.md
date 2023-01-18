@@ -69,7 +69,7 @@ In this section, you'll learn how to use [Hashicorp Vault](https://www.vaultproj
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md) on Astronomer.
-- [The Astro CLI](install-cli.md).
+- [The Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - A [Hashicorp Vault server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started).
 - An Astro project initialized with `astro dev init`.
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
@@ -141,7 +141,7 @@ apache-airflow-providers-hashicorp
 
 Then, add the following environment variables to your `Dockerfile`:
 
-```dockerfile
+```docker
 # Make sure to replace `<your-approle-id>` and `<your-approle-secret>` with your own values.
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}
@@ -178,7 +178,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
@@ -217,7 +217,7 @@ In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter St
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - An Astro project initialized with `astro dev init`.
 - Access to AWS SSM Parameter Store.
 - A valid AWS Access Key ID and Secret Access Key.
@@ -240,7 +240,7 @@ apache-airflow-providers-amazon
 
 Then, add the following environment variables to your project's `Dockerfile`:
 
-```dockerfile
+```docker
 # Make sure to replace `<your-aws-key>` and `<your-aws-secret-key>` with your own values.
 ENV AWS_ACCESS_KEY_ID="<your-aws-key>"
 ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-key>"
@@ -272,16 +272,18 @@ To test Parameter Store, write a simple DAG which calls your secret and add this
 For example, you can use the following DAG to print the value of an Airflow variable to your task logs:
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
+
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
+
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
@@ -320,7 +322,7 @@ In this section, you'll learn how to use [Google Cloud Secret Manager](https://c
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - An Astro project initialized with `astro dev init`.
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
 - A Google Cloud environment with [Secret Manager](https://cloud.google.com/secret-manager/docs/configuring-secret-manager) configured.
@@ -356,7 +358,7 @@ apache-airflow-providers-google
 
 Then, add the following environment variables to your project's Dockerfile:
 
-```dockerfile
+```docker
 ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
 ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "gcp_keyfile_dict": <your-key-file>}
 ```
@@ -376,16 +378,18 @@ To test Secret Manager, [create a secret](https://cloud.google.com/secret-manage
 Once you create a test secret, write a simple DAG which calls the secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
+
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
+
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
 
@@ -425,7 +429,7 @@ In this section, you'll learn how to use [Azure Key Vault](https://cloud.google.
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md).
-- The [Astro CLI](install-cli.md).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - An Astro project initialized with `astro dev init`.
 - An existing Azure Key Vault linked to a resource group.
 - Your Key Vault URL. To find this, go to your Key Vault overview page > **Vault URI**.
@@ -457,7 +461,7 @@ apache-airflow-providers-microsoft-azure
 
 In your `Dockerfile`, add the following environment variables with your own values:
 
-```dockerfile
+```docker
 ENV AZURE_CLIENT_ID="<your-client-id>" # Found on App Registration page > 'Application (Client) ID'
 ENV AZURE_TENANT_ID="<your-tenant-id>" # Found on App Registration page > 'Directory (tenant) ID'
 ENV AZURE_CLIENT_SECRET="<your-client-secret>" # Found on App Registration Page > Certificates and Secrets > Client Secrets > 'Value'
@@ -483,16 +487,18 @@ To test your Key Vault setup on Astronomer locally, [create a new secret](https:
 Once you create a test secret, write a simple DAG which calls the secret and add this DAG to your project's `dags` directory. For example, you can use the following DAG to print the value of a variable to your task logs:
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
-from airflow.hooks.base_hook import BaseHook
+
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
+
 
 def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',

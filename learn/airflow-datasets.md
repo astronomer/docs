@@ -43,6 +43,7 @@ with DAG(
     dag_id='dataset_upstream1',
     start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
     schedule='@daily',
+    catchup=False
 ) as dag1:
 
     BashOperator(
@@ -80,7 +81,7 @@ with DAG(
     )
 ```
 
-Any number of datasets can be provided to the `schedule` parameter as a list. The DAG is triggered after all tasks that update those datasets have completed.
+Any number of datasets can be provided to the `schedule` parameter as a list. The DAG is triggered after all of the datasets have received at least one update due to a producing task completing successfully. 
 
 When you work with datasets, keep the following considerations in mind:
 
@@ -98,7 +99,7 @@ On the **DAGs** view, you can see that your `dataset_downstream_1_2` DAG is sche
 
 ![DAGs View](/img/guides/dags_view_dataset_schedule.png)
 
-The new **Datasets** tab shows a list of all datasets in your Airflow environment and a graph showing how your DAGs and datasets are connected.
+The **Datasets** tab shows a list of all datasets in your Airflow environment and a graph showing how your DAGs and datasets are connected. You can filter the lists of Datasets by recent updates.
 
 ![Datasets View](/img/guides/datasets_view_overview.png)
 
@@ -274,7 +275,7 @@ def extract_data(homes1: Table, homes2: Table):
     FROM {{homes2}}
     """
 
-@dag(start_date=datetime(2021, 12, 1), schedule_interval="@daily", catchup=False)
+@dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
 def example_sdk_datasets():
 
     # Initial load of homes data csv's from S3 into Snowflake

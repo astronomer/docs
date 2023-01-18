@@ -123,7 +123,7 @@ with DAG(
     'trigger-dagrun-dag',
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval='@daily',
+    schedule='@daily',
     default_args=default_args,
     catchup=False
 ) as dag:
@@ -307,7 +307,7 @@ with DAG(
     'api-dag',
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval='@daily',
+    schedule='@daily',
     catchup=False
 ) as dag:
 
@@ -365,7 +365,7 @@ When DAGs are scheduled depending on datasets, both the DAG containing the produ
 
 In Airflow 2.4 an additional **Datasets** tab was added, which shows all dependencies between datasets and DAGs.
 
-![DAG Dependencies View Datasets](/img/guides/2_4_Datasets.png)
+![DAG Dependencies View Datasets](/img/guides/2_5_Datasets.png)
 
 ## Cross-deployment dependencies
 

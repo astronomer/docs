@@ -93,7 +93,7 @@ with DAG(
     default_args={
         'retries': 0
     },
-    schedule_interval='0 0 * * *',
+    schedule='0 0 * * *',
     start_date=datetime(2022, 10, 1),
     template_searchpath='/usr/local/airflow/include',
     catchup=False

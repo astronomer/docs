@@ -115,7 +115,7 @@ You can use Telescope to observe both Apache Airflow environments and standalone
         Port <your-connection-port> # Chose any available port on the machine
     ```
 
-3. Optional. Add additional configurations, such as an SSH key. See [Linuxize](https://linuxize.com/post/using-the-ssh-config-file/).
+3. Optional. Add additional configurations, such as an SSH key. See [Using the SSH Config File](https://linuxize.com/post/using-the-ssh-config-file/).
 4. Optional. Repeat steps 1 through 3 for any additional remote machines that you want to observe with Telescope.
 5. On your local machine, create a file named `hosts.yaml` and open it.
 6. Add the following configuration to the file:

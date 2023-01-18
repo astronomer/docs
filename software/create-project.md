@@ -9,7 +9,7 @@ This is where you'll find information about creating a project and running it in
 
 ## Prerequisites
 
-Creating an Astro project requires the [Astro CLI](install-cli.md).
+Creating an Astro project requires the [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 
 ## Step 1: Create a project directory
 
@@ -29,6 +29,7 @@ This generates the following files:
 
 ```py
 .
+├── .env # Local environment variables
 ├── dags # Where your DAGs go
 │   └── example-dag.py # An example DAG that comes with the initialized project
 ├── Dockerfile # For the Astronomer Runtime Docker image and runtime overrides

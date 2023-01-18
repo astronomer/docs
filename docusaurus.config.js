@@ -33,6 +33,9 @@ module.exports = {
 
       //... other Algolia params
     },
+    prism: {
+      additionalLanguages: ['docker'],
+    },
     colorMode: {
       disableSwitch: false,
     },
@@ -98,9 +101,14 @@ module.exports = {
     softwareNav: {
       items: [
         {
-          label: '0.30 (Latest)',
+          label: '0.31 (Latest)',
           to: '/software/',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+        },
+        {
+          label: '0.30',
+          to: '/software/0.30/',
+          activeBaseRegex: '(software\/0.30)+',
         },
         {
           label: '0.29',
@@ -113,9 +121,9 @@ module.exports = {
           activeBaseRegex: '(software\/0.28)+',
         },
         {
-          label: '0.25',
-          to: '/software/0.25/overview',
-          activeBaseRegex: '(software\/0.25)+',
+          label: 'Archive',
+          to: '/software/documentation-archive',
+          activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
       ],
     },
@@ -192,7 +200,6 @@ module.exports = {
         sitemap: {
           id: 'default',
           changefreq: 'daily',
-          ignorePatterns: ['/software/0.29/**', '/software/0.28/**', '/software/0.27/**', '/software/0.26/**', '/software/0.25/**', '/software/0.23/**', '/software/0.16/**'],
           filename: 'sitemap.xml',
         },
         theme: {
@@ -215,7 +222,7 @@ module.exports = {
         lastVersion: 'current',
         versions: {
           current: {
-            label: '0.30',
+            label: '0.31',
             path: '',
             banner: 'none',
           },
@@ -239,7 +246,6 @@ module.exports = {
       {
         id: 'learn',
         changefreq: 'daily',
-        ignorePatterns: ['/software/0.29/**', '/software/0.28/**', '/software/0.27/**', '/software/0.26/**', '/software/0.25/**', '/software/0.23/**', '/software/0.16/**'],
         filename: 'sitemap.xml',
       },
     ],
@@ -266,5 +272,8 @@ module.exports = {
       "data-domain": 'docs.astronomer.io',
       defer: true,
     }
+  ],
+  clientModules: [
+    require.resolve('./segment-page.mjs'),
   ],
 };
