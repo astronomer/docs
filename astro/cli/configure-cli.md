@@ -39,6 +39,14 @@ astro config set webserver.port 8081
 
 ## Available CLI configurations
 
+<Tabs
+    defaultValue="astro"
+    values={[
+        {label: 'Astro', value: 'astro'},
+        {label: 'Software', value: 'software'},
+    ]}>
+<TabItem value="astro">
+
 | Option              | Description | Possible Values |
 | ------------------- | ----------- | --------------- |
 | `cloud.api.protocol`  | The type of protocol to use when calling the Airflow API in a local Airflow environment         | `http`, `https`             |
@@ -52,3 +60,20 @@ astro config set webserver.port 8081
 | `project.name`       | The name of your Astro project         | Any string             |
 | `webserver.port`     | The port for the webserver in your local Airflow environment          | Any available port             |
 | `show_warnings`      | Determines whether warning messages appear when starting up a local Airflow environment         | `true`, `false`             |
+
+</TabItem>
+
+<TabItem value="software">
+
+| Option              | Description | Possible Values |
+| ------------------- | ----------- | --------------- |
+| `houston.dial_timeout`       |         |             |
+| `houston.skip_verify_tls`       |          |             |
+| `interactive`       |          |             |
+| `local.houston`       |          |             |
+| `local.platform`      |                      |              |
+| `page_size`             |                       |              |
+| `verbosity`      |              |              |
+
+</TabItem>
+</Tabs>
