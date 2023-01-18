@@ -93,12 +93,17 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
 
 ## Step 4: Add Airflow Variables
 
-Add an Airflow variable that will be used by your DAG. In the Airflow UI, go to **Admin** -> **Variables**.
+Add two Airflow variables that will be used by your DAG. In the Airflow UI, go to **Admin** -> **Variables**.
 
 1. Add a variable with the ARN of the role you created in Step 1.
 
     - **Key**: `role`
     - **Val**: `<your-role-arn>`
+
+2. Add a variable with the name of the S3 bucket you created in Step 2.
+
+    - **Key**: `s3_bucket`
+    - **Val**: `<your-s3-bucket-name>`
 
 ## Step 5: Add an Airflow connection to SageMaker
 
@@ -169,7 +174,6 @@ import os
 data_url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"  # URL for Iris data API
 date = "{{ ts_nodash }}"  # Date for transform job name
 
-bucket = "my_bucket"
 input_s3_key = 'iris/processed-input-data'  # Train and test data S3 path
 output_s3_key = 'iris/results'  # S3 path for output data
 model_name = f"Iris-KNN-{date}"  # Name of model to create
@@ -214,7 +218,7 @@ with DAG('sagemaker_pipeline',
         os.remove('iris_train.csv')
         os.remove('iris_test.csv')
 
-    data_prep = data_prep(data_url, bucket, input_s3_key, aws_conn_id="aws-sagemaker")
+    data_prep = data_prep(data_url, "{{ var.value.get('s3_bucket') }}", input_s3_key)
 
     train_model = SageMakerTrainingOperatorAsync(
         task_id='train_model',
