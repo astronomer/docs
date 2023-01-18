@@ -24,9 +24,11 @@ Create a Deployment template file to programmatically create new Deployments bas
 
 To create a template file from an existing Deployment, run the following command. Replace `<deployment-template>` with your preferred name for the new template file.
 
-``sh
+```sh
 astro deployment inspect <deployment-id> > <deployment-template> --template
-``
+```
+
+The Astro CLI generates a template file that includes all templatable configurations from your Deployment. See the following section for information about each template key and value.
 
 ### Template file contents
 
