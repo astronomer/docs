@@ -27,7 +27,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Bug fixes
 
-- Fixed an issue in GCP clusters where a Deployment's metadata database could persist even after the Deployment was deleted.
+- Fixed an issue with Google Cloud Platform (GCP) clusters where the metadata database for a Deployment could persist after the Deployment was deleted.
 
 ## January 10, 2023 
 
