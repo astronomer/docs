@@ -56,9 +56,6 @@ $ astro deployment create
 # Create a Deployment with all required information specified. The CLI will not prompt you for more information
 $ astro deployment create -d="My Deployment Description" --name="My Deployment Name" --cluster-id="ckwqkz36200140ror6axh8p19"
 
-# Specify 50 AU for the Deployment's workers. The Astro CLI prompts you for required information
-$ astro deployment create -a=50
-
 # Specify the new Deployment's configuration with a yaml file
 $ astro deployment create --deployment-file deployment.yaml
 ```
