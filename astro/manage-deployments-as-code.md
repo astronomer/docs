@@ -9,13 +9,14 @@ id: manage-deployments-as-code
   <meta name="og:description" content="Manage an Astro Deployment with JSON or YAML Deployment file. This Deployment file can be used to store, create, or update a Deployment's configuration." />
 </head>
 
-After you configure your Astro Deployment, it can be stored, created or updated using a JSON or YAML Deployment file. Using Deployment files to manage your Deployments provides the following benefits:
+After you configure your Astro Deployment, its unique configurations can be stored as a JSON or YAML Deployment file.
 
-- Quickly update Deployments with a large number of worker queues or environment variables.
-- Manage Deployments as files from a Github repository.
-- Transfer existing configuration settings to new Deployments. 
-- Share environment variables and worker queues between Deployments.
-- Create Deployment templates for specific use cases. For example, the worker queues and environment variables in an existing machine learning Deployment template can be repurposed in a machine learning Deployment.
+You can use Deployment files to manage your Deployment as code. Specifically:
+
+- Create a template file from an existing Deployment and use it to programmatically create another Deployment with the same configurations. This is an alternative to creating a new Deployment in the Cloud UI and manually copying configurations.
+- Update existing Deployments faster and more easily than doing so with the Cloud UI or individual Astro CLI flags.
+- Manage Deployment configurations from a GitHub repository and in a single place.
+- Create a single source of truth for Deployments with a particular use case. For example, standardize your team's configuration of sandbox environments.
 
 ## Create a template file from a Deployment
 
