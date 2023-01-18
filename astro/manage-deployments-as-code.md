@@ -22,7 +22,11 @@ You can use Deployment files to manage your Deployment as code. Specifically:
 
 Create a Deployment template file to programmatically create new Deployments based on configurations from an existing Deployment. A template file is a YAML configuration file that includes all information about a Deployment except for its name, description field, and metadata.
 
-To create a template file, run the following command. Replace `<deployment-template>` with your preferred name for the new template file.
+To create a template file from an existing Deployment, run the following command. Replace `<deployment-template>` with your preferred name for the new template file.
+
+``sh
+astro deployment inspect <deployment-id> > <deployment-template> --template
+``
 
 ### Template file contents
 
