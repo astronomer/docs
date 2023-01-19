@@ -33,7 +33,7 @@ If you want to read more on the concept of data lineage and why it’s important
 
 Visually, your data lineage graph might look similar to this:
 
-![Lineage Graph](/img/guides/example_lineage_graph.png)
+![Lineage Graph](/img/guides/lineage_complex_snowflake_example.png)
 
 If you are using data lineage, you will likely have a lineage tool that collects lineage metadata, as well as a front end for visualizing the lineage graph. There are paid tools (including Astro) that provide these services, or there are open source options that can be integrated with Airflow: namely OpenLineage (the lineage tool) and [Marquez](https://marquezproject.github.io/marquez/) (the lineage front end).
 
