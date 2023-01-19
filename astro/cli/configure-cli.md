@@ -41,7 +41,7 @@ astro config set webserver.port 8081
 
 :::info 
 
-The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change between product contexts.
+The Astronomer product you're using determines the format and behavior of the configuration commands. Select one of the following tabs to change product contexts.
 
 :::
 
