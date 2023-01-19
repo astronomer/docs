@@ -71,7 +71,7 @@ astro config set webserver.port 8081
 | Option              | Description | Possible Values |
 | ------------------- | ----------- | --------------- |
 | `houston.dial_timeout`       |  The time in seconds to wait for a Houston connection. The default is 10.        |  Any integer           |
-| `houston.skip_verify_tls`       |  Determines whether the Transport Layer Security (TSL) certificate is verified when connecting to Houston. The default is `false`.        | `true`, `false`             |
+| `houston.skip_verify_tls`       |  Determines whether the Transport Layer Security (TLS) certificate is verified when connecting to Houston. The default is `false`.        | `true`, `false`             |
 | `interactive`       | Determines whether responses are paginated in the Astro CLI when it is supported. The default is `false`         |  `true`, `false`           |
 | `page_size`             | Determines the size of the paginated response when `interactive` is set to `true`. The default is `20`                      | Any integer             |
 | `verbosity`      | Determines the Astro CLI log level type. The default is `warning`             | `debug`, `info`, `warning`, `error`             |
