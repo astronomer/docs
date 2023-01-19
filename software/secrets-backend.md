@@ -213,7 +213,6 @@ Now, any Airflow variable or connection that you write to your Vault server can 
 
 <TabItem value="secretsmanager">
 
-
 #### Prerequisites
 
 - A [Deployment](configure-deployment.md).
