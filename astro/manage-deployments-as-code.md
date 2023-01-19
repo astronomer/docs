@@ -165,7 +165,7 @@ To update a Deployment using a Deployment file:
 1. Inspect an existing Deployment and create a Deployment file for its current configurations:
 
   ```sh
-  astro deployment inspect -n <deployment-name> <your-deployment-file-name>
+  astro deployment inspect -n <deployment-name> > <your-deployment-file-name>
   ```
 
 2. Modify the Deployment file and save your changes. You can modify any value in the `environment_variables` and `worker_queues` sections, and most values in the `configuration` section.
