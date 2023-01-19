@@ -48,6 +48,7 @@ After setting the variables, this command works for a Deployment and you don't n
 | Option                         | Description                                                                            | Possible Values                                                                |
 | ------------------------------ | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
 | `--dag-deploy` |Enable or disable DAG-only deploys for the Deployment.                                                                                                                         | Either `enable` or `disable`. Contact [Astronomer support](https://cloud.astronomer.io/support) before using `disable` to disable the feature.                                                             |
+| `--deployment-file`        | Location of the Deployment file to update the Deployment with. The file format can be JSON or YAML. See [Create a Deployment with a Deployment File](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment).                                                                                                        | A valid file path to any YAML or JSON Deployment file             |
 | `<deployment-id>` (_Required_) | The ID of the Deployment to update                                                               | Any valid Deployment ID                                                        |
 | `--deployment-name` | The name of the Deployment to update. Use as an alternative to `<deployment-id>`. | Any valid Deployment name                                            |
 | `-d`,`--description`           | The description for the Deployment                                                     | Any string. Multiple-word descriptions should be specified in quotations (`"`) |
@@ -66,6 +67,9 @@ $ astro deployment update cl03oiq7d80402nwn7fsl3dmv -d="My Deployment Descriptio
 
 # Force update a Deployment
 $ astro deployment update cl03oiq7d80402nwn7fsl3dmv -d="My Deployment Description" --force
+
+# Update the Deployment according to the configurations specified in the YAML Deployment file
+$ astro deployment update --deployment-file deployment.yaml
 ```
 
 </TabItem>

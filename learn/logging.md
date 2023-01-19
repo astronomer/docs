@@ -75,7 +75,7 @@ If you run Airflow locally, logging information is accessible in the following l
 
 - Scheduler: Logs are printed to the console and accessible in `$AIRFLOW_HOME/logs/scheduler`.
 - Webserver and Triggerer: Logs are printed to the console.
-- Task: Logs can be viewed in the Airflow UI or at `$AIRFLOW_HOME/logs/`.
+- Task: Logs can be viewed in the Airflow UI or at `$AIRFLOW_HOME/logs/`. To view task logs directly in your terminal, run `astro dev run tasks test <dag_id> <task_id>` with the [Astro CLI](https://docs.astronomer.io/astro/cli/overview) or `airflow tasks test <dag_id> <task_id>` if you are running Airflow with other tools.
 - Metadata database: Logs are handled differently depending on which database you use.
 
 ### Docker Airflow environment

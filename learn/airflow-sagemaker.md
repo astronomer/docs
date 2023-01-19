@@ -35,7 +35,13 @@ To complete this tutorial, you need:
 
 ## Step 1: Create a role to access SageMaker
 
-For this tutorial, you will need to access SageMaker from your Airflow environment. There are multiple ways to do this, but for this tutorial you will create an AWS role that can access SageMaker and create temporary credentials for that role.
+For this tutorial, you will need to access SageMaker from your Airflow environment.  There are multiple ways to do this, but for this tutorial you will create an AWS role that can access SageMaker and create temporary credentials for that role.
+
+:::info
+
+If you are uncertain which method you use to connect to AWS, contact your AWS Administrator. These steps may not fit your desired authentication mechanism.
+
+:::
 
 1. From the AWS web console, go to **IAM** service page and create a new execution role for SageMaker. See [Create execution roles](https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html#sagemaker-roles-create-execution-role) in the AWS documentation.
 
@@ -78,6 +84,7 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
 
     These variables ensure that all SageMaker operators will work in your Airflow environment. Some require XCom pickling to be turned on in order to work because they return objects that are not JSON serializable. 
 
+
 4. Run the following command to start your project in a local environment:
 
     ```sh
@@ -112,6 +119,12 @@ In the **Extra** field, provide your AWS session token generated in Step 1 using
 }
 ```
 
+:::warning
+
+Your AWS credentials will only last one day using this authentication method. If you return to this step after your credentials have expired, you will need to edit the details in the connection with updated credentials.
+
+:::
+
 Your connection should look like this:
 
 ![SageMaker Connection](/img/guides/sagemaker_connection.png)
@@ -124,9 +137,21 @@ As mentioned in Step 1, there are multiple ways of connecting Airflow to AWS res
 
 ## Step 6: Create your DAG
 
-In your Astro project `dags/` folder, create a new file called `sagemaker-pipeline.py`. Paste the following code into the file:
+In your Astro project `dags/` folder, create a new file called `sagemaker_pipeline.py`. Paste the following code into the file:
 
 ```python
+"""
+This DAG shows an example implementation of machine learning model orchestration using Airflow
+and AWS SageMaker. Using the AWS provider's SageMaker operators, Airflow orchestrates getting data
+from an API endpoint and pre-processing it (task-decorated function), training the model (SageMakerTrainingOperatorAsync),
+creating the model with the training results (SageMakerModelOperator), and testing the model using
+a batch transform job (SageMakerTransformOperatorAsync).
+
+The example use case shown here is using a built-in SageMaker K-nearest neighbors algorithm to make
+predictions on the Iris dataset. To use the DAG, add Airflow variables for `role` (Role ARN to execute SageMaker jobs) 
+then fill in the information directly below with the target AWS S3 locations, and model and training job names.
+"""
+import textwrap
 from airflow import DAG
 from airflow.decorators import task
 from airflow.providers.amazon.aws.operators.sagemaker import SageMakerModelOperator
@@ -136,25 +161,14 @@ from astronomer.providers.amazon.aws.operators.sagemaker import (
     SageMakerTransformOperatorAsync
 )
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+from sagemaker import image_uris
 
-from datetime import datetime, timedelta
+from datetime import datetime
 import requests
 import io
 import pandas as pd
 import numpy as np
-
-"""
-This DAG shows an example implementation of machine learning model orchestration using Airflow
-and AWS SageMaker. Using the AWS provider's SageMaker operators, Airflow orchestrates getting data
-from an API endpoint and pre-processing it (task-decorated function), training the model (SageMakerTrainingOperatorAsync),
-creating the model with the training results (SageMakerModelOperator), and testing the model using
-a batch transform job (SageMakerTransformOperatorAsync).
-
-The example use case shown here is using a built-in SageMaker K-nearest neighbors algorithm to make
-predictions on the Iris dataset. To use the DAG, add Airflow variables for `s3_bucket` (S3 Bucket used with SageMaker 
-instance) and `role` (Role ARN to execute SageMaker jobs) then fill in the information directly below with the target
-AWS S3 locations, and model and training job names.
-"""
+import os
 
 # Define variables used in configs
 data_url = "https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data"  # URL for Iris data API
@@ -162,22 +176,20 @@ date = "{{ ts_nodash }}"  # Date for transform job name
 
 input_s3_key = 'iris/processed-input-data'  # Train and test data S3 path
 output_s3_key = 'iris/results'  # S3 path for output data
-model_name = "Iris-KNN-{}".format(date)  # Name of model to create
-training_job_name = 'train-iris-{}'.format(date)  # Name of training job
+model_name = f"Iris-KNN-{date}"  # Name of model to create
+training_job_name = f'train-iris-{date}'  # Name of training job
+region = "us-east-2"
 
 with DAG('sagemaker_pipeline',
-         start_date=datetime(2021, 7, 31),
+         start_date=datetime(2022, 1, 1),
          max_active_runs=1,
          schedule=None,
-         default_args={
-             'retries': 0,
-             'retry_delay': timedelta(minutes=1),
-             'aws_conn_id': 'aws-sagemaker'
-         },
+         default_args={'retries': 0, },
          catchup=False,
-         ) as dag:
+         doc_md=__doc__
+) as dag:
     @task
-    def data_prep(data_url, s3_bucket, input_s3_key):
+    def data_prep(data_url, s3_bucket, input_s3_key, aws_conn_id):
         """
         Grabs the Iris dataset from API, splits into train/test splits, and saves CSV's to S3 using S3 Hook
         """
@@ -198,18 +210,32 @@ with DAG('sagemaker_pipeline',
         # Save files to S3
         iris_train.to_csv('iris_train.csv', index=False, header=False)
         iris_test.to_csv('iris_test.csv', index=False, header=False)
-        s3_hook = S3Hook(aws_conn_id='aws-sagemaker')
-        s3_hook.load_file('iris_train.csv', '{0}/train.csv'.format(input_s3_key), bucket_name=s3_bucket, replace=True)
-        s3_hook.load_file('iris_test.csv', '{0}/test.csv'.format(input_s3_key), bucket_name=s3_bucket, replace=True)
-
+        s3_hook = S3Hook(aws_conn_id=aws_conn_id)
+        s3_hook.load_file('iris_train.csv', f'{input_s3_key}/train.csv', bucket_name=s3_bucket, replace=True)
+        s3_hook.load_file('iris_test.csv', f'{input_s3_key}/test.csv', bucket_name=s3_bucket, replace=True)
+        
+        # cleanup
+        os.remove('iris_train.csv')
+        os.remove('iris_test.csv')
 
     data_prep = data_prep(data_url, "{{ var.value.get('s3_bucket') }}", input_s3_key)
 
     train_model = SageMakerTrainingOperatorAsync(
         task_id='train_model',
+        doc_md=textwrap.dedent("""
+        Train the KNN algorithm on the data using the `SageMakerTrainingOperatorAsync`. We use a deferrable version of this operator to save resources on potentially long-running training jobs. The configuration for this operator requires:
+        - Information about the algorithm being used.
+        - Any required hyper parameters.
+        - The input data configuration.
+        - The output data configuration.
+        - Resource specifications for the machine running the training job.
+        - The Role ARN for execution.
+        For more information about submitting a training job, check out the [API documentation](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html).
+        """), 
+        aws_conn_id='aws-sagemaker',
         config={
             "AlgorithmSpecification": {
-                "TrainingImage": "404615174143.dkr.ecr.us-east-2.amazonaws.com/knn",
+                "TrainingImage": image_uris.retrieve(framework='knn',region=region),
                 "TrainingInputMode": "File"
             },
             "HyperParameters": {
@@ -223,7 +249,7 @@ with DAG('sagemaker_pipeline',
                  "DataSource": {
                      "S3DataSource": {
                          "S3DataType": "S3Prefix",
-                         "S3Uri": "s3://{0}/{1}/train.csv".format("{{ var.value.get('s3_bucket') }}", input_s3_key)
+                         "S3Uri": f"s3://{bucket}/{input_s3_key}/train.csv"
                      }
                  },
                  "ContentType": "text/csv",
@@ -231,13 +257,14 @@ with DAG('sagemaker_pipeline',
                  }
             ],
             "OutputDataConfig": {
-                "S3OutputPath": "s3://{0}/{1}".format("{{ var.value.get('s3_bucket') }}", output_s3_key)
+                "S3OutputPath": f"s3://{bucket}/{output_s3_key}"
             },
             "ResourceConfig": {
                 "InstanceCount": 1,
                 "InstanceType": "ml.m5.large",
                 "VolumeSizeInGB": 1
             },
+            # We are using a Jinja Template to fetch the Role name dynamically at runtime via looking up the Airflow Variable
             "RoleArn": "{{ var.value.get('role') }}",
             "StoppingCondition": {
                 "MaxRuntimeInSeconds": 6000
@@ -249,12 +276,23 @@ with DAG('sagemaker_pipeline',
 
     create_model = SageMakerModelOperator(
         task_id='create_model',
+        aws_conn_id='aws-sagemaker',
+        doc_md=textwrap.dedent("""
+        Create a SageMaker model based on the training results using the `SageMakerModelOperator`. This step creates a model artifact in SageMaker that can be called on demand to provide inferences. The configuration for this operator requires:
+        - A name for the model.
+        - The Role ARN for execution.
+        - The image containing the algorithm (in this case the pre-built SageMaker image for KNN).
+        - The S3 path to the model training artifact.
+        For more information on creating a model, check out the API documentation [here](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateModel.html).
+        """),
         config={
+            # We are using a Jinja Template to fetch the Role name dynamically at runtime via looking up the Airflow Variable
             "ExecutionRoleArn": "{{ var.value.get('role') }}",
             "ModelName": model_name,
             "PrimaryContainer": {
                 "Mode": "SingleModel",
-                "Image": "404615174143.dkr.ecr.us-east-2.amazonaws.com/knn",
+                "Image": image_uris.retrieve(framework='knn',region=region),
+                # We are using a Jinja Template to pull the XCom output of the 'train_model' task to use as input for this task 
                 "ModelDataUrl": "{{ ti.xcom_pull(task_ids='train_model')['Training']['ModelArtifacts']['S3ModelArtifacts'] }}"
             },
         }
@@ -262,20 +300,29 @@ with DAG('sagemaker_pipeline',
 
     test_model = SageMakerTransformOperatorAsync(
         task_id='test_model',
+        doc_md=textwrap.dedent("""
+        Evaluate the model on the test data created in task 1 using the `SageMakerTransformOperatorAsync`. This step runs a batch transform to get inferences on the test data from the model created in task 3. The DAG uses a deferrable version of `SageMakerTransformOperator` to save resources on potentially long-running transform jobs. The configuration for this operator requires:
+        - Information about the input data source.
+        - The output results path.
+        - Resource specifications for the machine running the training job.
+        - The name of the model.
+        For more information on submitting a batch transform job, check out the [API documentation](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html).
+        """),
+        aws_conn_id='aws-sagemaker',
         config={
-            "TransformJobName": "test-knn-{0}".format(date),
+            "TransformJobName": f"test-knn-{date}",
             "TransformInput": {
                 "DataSource": {
                     "S3DataSource": {
                         "S3DataType": "S3Prefix",
-                        "S3Uri": "s3://{0}/{1}/test.csv".format("{{ var.value.get('s3_bucket') }}", input_s3_key)
+                        "S3Uri": f"s3://{bucket}/{input_s3_key}/test.csv"
                     }
                 },
                 "SplitType": "Line",
                 "ContentType": "text/csv",
             },
             "TransformOutput": {
-                "S3OutputPath": "s3://{0}/{1}".format("{{ var.value.get('s3_bucket') }}", output_s3_key)
+                "S3OutputPath": f"s3://{bucket}/{output_s3_key}"
             },
             "TransformResources": {
                 "InstanceCount": 1,
