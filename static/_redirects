@@ -6,6 +6,13 @@
 # redirect current released Software version to 'latest' for customers who always want versioned docs. Version-specific
 /software/0.31/* /software/:splat
 
+# redirect relative links for deprecated Software docs to archive page. Version-specific
+/software/0.16/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.16/:splat.md 301
+/software/0.23/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.23/:splat.md 301
+/software/0.25/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.25/:splat.md 301
+/software/0.26/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.26/:splat.md 301
+/software/0.27/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.27/:splat.md 301
+
 # redirect base cloud path to astro overview
 /cloud /astro 301
 

@@ -7,7 +7,7 @@ description: Install OS-level and Python-level packages for Airflow using Astron
 
 :::caution
 
-Astronomer will no longer release new versions of AC starting with the release of Apache Airflow 2.6. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
+Astronomer will no longer release new versions of AC starting with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
 
 :::
 
@@ -20,7 +20,7 @@ Depending on your use case and distribution of Astronomer Certified, you might w
 
 If you use the Astronomer Certified Docker image to run Airflow, you can install packages directly onto your image via your `Dockerfile`. To install OS-level packages, you can specify them using a `RUN` directive with `apt-get`. For example, the following `Dockerfile` would install `your-os-package` on the image:
 
-```dockerfile
+```docker
 FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
@@ -38,7 +38,7 @@ apt-get install <your-os-package>=<version> -V
 
 To install a Python-level package, specify the package using a `RUN` directive with `pip install` instead. For example:
 
-```dockerfile
+```docker
 FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild
 RUN pip install --no-cache-dir --user <your-python-package>
 ```

@@ -9,6 +9,29 @@ description: Astronomer Software release notes.
 
 0.31 is the latest stable version of Astronomer Software, while 0.30 remains the latest long-term support (LTS) release. To upgrade to 0.31, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.31.1
+
+Release date: December 23, 2022
+
+### Additional improvements 
+
+- You can now configure `extraFlags` for the Prometheus startup command in the Prometheus Helm chart.
+
+### Bug fixes 
+
+- Fixed an issue where logging sidecars would occasionally fail to terminate.
+- Fixed the following vulnerabilities:
+    - [CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848)
+    - [CVE-2021-44716](https://nvd.nist.gov/vuln/detail/CVE-2021-44716)
+    - [CVE-2022-27191](https://nvd.nist.gov/vuln/detail/CVE-2022-27191)
+    - [CVE-2022-27664](https://nvd.nist.gov/vuln/detail/CVE-2022-27664)
+    - [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-41717)
+    - [CVE-2022-37454](https://nvd.nist.gov/vuln/detail/CVE-2022-37454)
+    - [CVE-2022-41717](https://nvd.nist.gov/vuln/detail/CVE-2022-41717)
+    - [CVE-2022-42919](https://nvd.nist.gov/vuln/detail/CVE-2022-42919)
+    - [CVE-2022-45061](https://nvd.nist.gov/vuln/detail/CVE-2022-45061)
+    - [CVE-2022-46146](https://nvd.nist.gov/vuln/detail/CVE-2022-46146)
+
 ## 0.31.0
 
 Release date: December 7, 2022

@@ -46,8 +46,7 @@ To dynamically create DAGs from a file, you need to define a Python function tha
 
 ```python
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime
+from airflow.operators.python import PythonOperator
 
 
 def create_dag(dag_id,
@@ -60,7 +59,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -75,9 +74,10 @@ def create_dag(dag_id,
 In this example, the input parameters can come from any source that the Python script can access. You can then set a simple loop (`range(1, 4)`) to generate these unique parameters and pass them to the global scope, thereby registering them as valid DAGs with the Airflow scheduler:
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
 from datetime import datetime
+
+from airflow import DAG
+from airflow.operators.python import PythonOperator
 
 
 def create_dag(dag_id,
@@ -90,7 +90,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -131,10 +131,11 @@ As mentioned previously, the input parameters don't have to exist in the DAG fil
 You can retrieve this value by importing the Variable class and passing it into your `range`. The `default_var` is set to 3 because you want the interpreter to register this file as valid regardless of whether the variable exists.
 
 ```python
+from datetime import datetime
+
 from airflow import DAG
 from airflow.models import Variable
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime
+from airflow.operators.python import PythonOperator
 
 
 def create_dag(dag_id,
@@ -147,7 +148,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -190,10 +191,12 @@ To implement this method, you pull the connections from your Airflow metadata da
 ![List of connections in the Airflow UI](/img/guides/connections.png)
 
 ```python
+from datetime import datetime
+
 from airflow import DAG, settings
 from airflow.models import Connection
-from airflow.operators.python_operator import PythonOperator
-from datetime import datetime
+from airflow.operators.python import PythonOperator
+
 
 def create_dag(dag_id,
                schedule,
@@ -205,7 +208,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -267,16 +270,18 @@ One way of implementing a multiple-file method is using a Python script to gener
 To start, you'll create a DAG 'template' file that defines the DAG's structure. This looks just like a regular DAG file, but specific variables have been added to define where the information is going to be dynamically generated, namely `dag_id`, `scheduletoreplace`, and `querytoreplace`. 
 
 ```python
+from datetime import datetime
+
 from airflow import DAG
 from airflow.providers.postgres.operators.postgres import PostgresOperator
-from datetime import datetime
+
 
 default_args = {'owner': 'airflow',
                 'start_date': datetime(2021, 1, 1)
                 }
 
 with DAG(dag_id,
-            schedule_interval=scheduletoreplace,
+            schedule=scheduletoreplace,
             default_args=default_args,
             catchup=False) as dag:
 
@@ -326,15 +331,16 @@ for filename in os.listdir(config_filepath):
 To generate your DAG files, you can either run this script on demand or as part of your CI/CD workflow. After running the script, your final directory will appear similar to the example below, where the `include/` directory contains the files from the previous example, and the `dags/` directory contains the two dynamically generated DAGs:
 
 ```bash
-dags/
-├── dag_file_1.py
-├── dag_file_2.py
-include/
-├── dag-template.py
-├── generate-dag-files.py
-└── dag-config
-    ├── dag1-config.json
-    └── dag2-config.json
+.
+├── dags
+│   ├── dag_file_1.py
+│   └── dag_file_2.py
+└── include
+    ├── dag-template.py
+    ├── generate-dag-files.py
+    └── dag-config
+        ├── dag1-config.json
+        └── dag2-config.json
 ```
 
 This is a straightforward example that works only if all of the DAGs follow the same pattern. However, it could be expanded upon to have dynamic inputs for tasks, dependencies, different operators, and so on.

@@ -29,14 +29,12 @@ Airflow decorators were introduced as part of the TaskFlow API, which also handl
 Using decorators to define your Python functions as tasks is easy. Let's take a before and after example. In the "traditional" DAG below, there is a basic ETL flow with tasks to get data from an API, process the data, and store it.
 
 ```python
-from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
-
-from datetime import datetime
-import json
-from typing import Dict
-import requests
 import logging
+from datetime import datetime
+
+import requests
+from airflow import DAG
+from airflow.operators.python import PythonOperator
 
 API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
 
@@ -53,7 +51,7 @@ def _store_data(ti):
     data = ti.xcom_pull(task_ids='process_data', key='processed_data')
     logging.info(f"Store: {data['usd']} with change {data['change']}")
 
-with DAG('classic_dag', schedule_interval='@daily', start_date=datetime(2021, 12, 1), catchup=False) as dag:
+with DAG('classic_dag', schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False) as dag:
     
     extract_bitcoin_price = PythonOperator(
         task_id='extract_bitcoin_price',
@@ -76,17 +74,17 @@ with DAG('classic_dag', schedule_interval='@daily', start_date=datetime(2021, 12
 You can now rewrite this DAG using decorators, which will eliminate the need to explicitly instantiate `PythonOperators`. 
 
 ```python
-from airflow.decorators import dag, task
-
+import logging
 from datetime import datetime
 from typing import Dict
+
 import requests
-import logging
+from airflow.decorators import dag, task
 
 API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
 
 
-@dag(schedule_interval='@daily', start_date=datetime(2021, 12, 1), catchup=False)
+@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
 def taskflow():
 
     @task(task_id='extract', retries=2)
@@ -130,17 +128,17 @@ Here are some other things to keep in mind when using decorators:
 If you have a DAG that uses `PythonOperator` and other operators that don't have decorators, you can easily combine decorated functions and traditional operators in the same DAG. For example, you can add an `EmailOperator` to the previous example by updating your code to the following:
 
 ```python
-from airflow.decorators import dag, task
-from airflow.operators.email_operator import EmailOperator
-
+import logging
 from datetime import datetime
 from typing import Dict
+
 import requests
-import logging
+from airflow.decorators import dag, task
+from airflow.operators.email import EmailOperator
 
 API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
 
-@dag(schedule_interval='@daily', start_date=datetime(2021, 12, 1), catchup=False)
+@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
 def taskflow():
 
     @task(task_id='extract', retries=2)
@@ -181,23 +179,19 @@ To use the Astro Python SDK, you need to install the `astro-sdk-python` package 
 To show the Astro Python SDK in action, we'll use a simple ETL example. We have homes data in two different CSVs that we need to aggregate, clean, transform, and append to a reporting table. Some of these tasks are better suited to SQL, and some to Python, but we can easily combine both using `astro-sdk-python` functions. The DAG looks like this:
 
 ```python
-import os
 from datetime import datetime
 
 import pandas as pd
 from airflow.decorators import dag
-
 from astro.files import File
 from astro.sql import (
     append,
-    cleanup,
     dataframe,
-    drop_table,
     load_file,
     run_raw_sql,
     transform,
 )
-from astro.sql.table import Metadata, Table
+from astro.sql.table import Table
 
 SNOWFLAKE_CONN_ID = "snowflake_conn"
 FILE_PATH = "/usr/local/airflow/include/"
@@ -245,7 +239,7 @@ def create_table():
     );
     """
 
-@dag(start_date=datetime(2021, 12, 1), schedule_interval="@daily", catchup=False)
+@dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
 def example_snowflake_partial_table_with_append():
 
     # Initial load of homes data csv's into Snowflake

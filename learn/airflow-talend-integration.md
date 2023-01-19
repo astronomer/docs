@@ -89,10 +89,11 @@ The host name should be the Talend Cloud API URL. This can vary depending on whi
 Next create and run the example DAG.
 
 ```python
-from airflow import DAG
-from airflow.operators.http_operator import SimpleHttpOperator
-from datetime import datetime, timedelta
 import json
+from datetime import datetime, timedelta
+
+from airflow import DAG
+from airflow.providers.http.operators.http import SimpleHttpOperator
 
 default_args = {
     'owner': 'airflow',
@@ -105,7 +106,7 @@ default_args = {
 }
 
 with DAG('talend_api_jobs',
-          schedule_interval='@once',
+          schedule='@once',
           default_args=default_args
           ) as dag:
 
@@ -177,11 +178,12 @@ Once your Talend jobs are containerized and pushed to a registry, you can create
 This example DAG executes two Talend jobs, one of which is dependent on the other, and then sends an email notification if the jobs are successful:
 
 ```python
-from airflow import DAG
 from datetime import datetime, timedelta
-from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow.operators.email_operator import EmailOperator
+
+from airflow import DAG
 from airflow import configuration as conf
+from airflow.operators.email import EmailOperator
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 
 default_args = {
     'owner': 'airflow',
@@ -208,7 +210,7 @@ else:
 email_to = ["noreply@astronomer.io"]
 
 with DAG('talend_jobs',
-          schedule_interval='@once',
+          schedule='@once',
           default_args=default_args
           ) as dag:
 

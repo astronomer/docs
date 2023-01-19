@@ -193,7 +193,7 @@ def transform_dataframe(df: DataFrame):
 dag = DAG(
     dag_id="astro_orders",
     start_date=datetime(2019, 1, 1),
-    schedule_interval="@daily",
+    schedule="@daily",
     catchup=False,
 )
 

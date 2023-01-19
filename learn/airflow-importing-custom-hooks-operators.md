@@ -58,15 +58,15 @@ By default, Airflow adds the `dags/` and `plugins/` directories in a project to 
 ```bash
 .
 ├── dags/                    
-│   ├── example-dag.py
+│   └── example-dag.py
 ├── Dockerfile                  
 ├── include/                 
 │   └── sql/
 │       └── transforms.sql
 ├── packages.txt     
 ├── plugins/             
-│   └── operators/
-│       └── my_operator.py
+│   ├── operators/
+│   │   └── my_operator.py
 │   └── sensors/
 │       └── my_sensor.py
 └── requirements.txt    
@@ -101,7 +101,7 @@ default_args = {
 
 with DAG('example_dag',
 		 max_active_runs=3,
-		 schedule_interval='@once',
+		 schedule='@once',
 		 default_args=default_args) as dag:
 
 	sens = MySensor(

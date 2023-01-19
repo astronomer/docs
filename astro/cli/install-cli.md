@@ -197,7 +197,7 @@ brew install astro
 
 <TabItem value="windowswithwinget">
 
-Starting with Astro CLI version 1.6, you can use the winget command line tool to upgrade the Astro CLI. If you're upgrading from Astro CLI version 1.5.1 o earlier to a later Astro CLI version, you'll need to follow the [alternate Windows upgrade process](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#upgrade-the-cli).
+Starting with Astro CLI version 1.6, you can use the winget command line tool to upgrade the Astro CLI. If you're upgrading from Astro CLI version 1.5.1 or earlier to a later Astro CLI version, you'll need to follow the [alternate Windows upgrade process](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#upgrade-the-cli).
 
 To upgrade the Astro CLI to the latest version, open Windows PowerShell as an administrator and run the following command:
 

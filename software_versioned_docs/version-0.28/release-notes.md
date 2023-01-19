@@ -38,7 +38,7 @@ Release date: September 21, 2022
 ### Additional improvements
 
 - You can now specify `authUrlParams` for your identity provider (IdP) in `config.yaml`
-- Added support for [Kubernetes 1.22](https://kubernetes.io/blog/2021/08/04/kubernetes-1-22-release-announcement/)
+- Added support for Kubernetes 1.21, 1.22, and 1.23
 - Upgraded Prometheus to the LTS release of 2.37.0
 
 ### Bug fixes

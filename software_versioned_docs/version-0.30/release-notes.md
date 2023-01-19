@@ -9,6 +9,48 @@ description: Astronomer Software release notes.
 
 0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md).
 
+## 0.30.5
+
+Release date: January 11, 2023
+
+### Additional improvements 
+
+- You can now set `timeoutSeconds` for both `readinessProbe` and `livenessProbe` in the Prometheus Helm chart.
+- You can now roll back from Software version 0.30 to 0.28.
+
+### Bug fixes 
+
+- Fixed the following vulnerabilities: 
+  
+    - [CVE-2022-3996](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-3996)
+    - [CVE-2022-43551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-43551)
+    - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716)
+    - [CVE-2022-2625](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2625)
+    - [CVE-2022-37454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37454)
+    - [CVE-2022-42919](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42919)
+    - [CVE-2022-45061](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-45061)
+    - [CVE-2022-43680](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-43680)
+    - [CVE-2017-11468](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-11468)
+    - [CVE-2022-21698](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21698)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2022-46146](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46146)
+    - [CVE-2022-32149](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2022-27191](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27191)
+    - [CVE-2022-37601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37601)
+    - [CVE-2021-43565](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43565)
+    - [CVE-2021-38561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561)
+
+- Fixed an issue where PgBouncer didn't work if you pulled its image from a private registry.
+- Fixed an issue where the Software UI would occasionally show an incorrect **Extra AU** number for Deployments. 
+- Fixed an issue where users who had access to more than 100 Deployments could not access the Astronomer Software Docker registry.
+- Fixed an issue where Deployments with multiple DAGs could not be successfully upgraded due to a short timeout.
+- Fixed an issue where users couldn't log in through Azure Active Directory (AD) if they belonged to more than 100 teams.
+- Fixed an issue where service accounts with System Admin permissions could not create Deployments for deprecated Airflow versions. 
+- Fixed an issue where you could not set `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER` in a Deployment if you were using an Astronomer Certified image.
+- Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts resulted in an error.
+- Fixed an issue where logging sidecars would occasionally fail to terminate.
+- Fixed an issue where NATS would send false Deployment alert emails.
+
 ## 0.30.4 
 
 Release date: November 3, 2022 

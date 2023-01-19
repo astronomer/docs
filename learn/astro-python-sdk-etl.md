@@ -112,7 +112,7 @@ def create_reporting_table():
       value number
     );
     """
-@dag(start_date=datetime(2021, 12, 1), schedule_interval="@daily", catchup=False)
+@dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
 def example_s3_to_snowflake_etl():
     # Initial load of homes data csv's from S3 into Snowflake
     homes_data1 = aql.load_file(
@@ -211,7 +211,7 @@ def transform_data(xcom: str) -> str:
     # Save results to Amazon S3 so they can be loaded back to Snowflake
     s3_hook = S3Hook(aws_conn_id="s3_conn")
     s3_hook.load_string(melted_str, 'transformed_file_name.csv', bucket_name=S3_BUCKET, replace=True)
-@dag(start_date=datetime(2021, 12, 1), schedule_interval='@daily', catchup=False)
+@dag(start_date=datetime(2021, 12, 1), schedule='@daily', catchup=False)
 def classic_etl_dag():
     load_data = S3ToSnowflakeOperator(
         task_id='load_homes_data',
