@@ -19,7 +19,7 @@ body:
         - Typo
     validations:
       required: true
-  - type: textarea
+  - type: input
     id: doc
     attributes:
       label: Where does the issue occur?
