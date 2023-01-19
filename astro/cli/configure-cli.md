@@ -39,6 +39,12 @@ astro config set webserver.port 8081
 
 ## Available CLI configurations
 
+:::info 
+
+The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change between product contexts.
+
+:::
+
 <Tabs
     defaultValue="astro"
     values={[
@@ -60,7 +66,7 @@ astro config set webserver.port 8081
 | `postgres.port`      | Your port for the Postgres metadata database            | Any available port             |
 | `project.name`       | The name of your Astro project         | Any string             |
 | `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment         | `true`, `false`             |
-| `skip_parse`         | Determines whether DAG parsing is ignored when deploying code to a Deployment         | `true`, `false`            | 
+| `skip_parse`         | Determines whether the CLI parses DAGs before pushing code to a Deployment         | `true`, `false`            | 
 | `upgrade_message`    | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI         | `true`, `false`             |
 | `webserver.port`     | The port for the webserver in your local Airflow environment          | Any available port             |
 
