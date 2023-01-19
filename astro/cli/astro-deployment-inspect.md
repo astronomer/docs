@@ -33,7 +33,7 @@ See [Template file contents](manage-deployments-as-code#template-file-contents) 
 | `--workspace-id`          | Specify a Workspace to run this command for a Deployment that is outside of your current Workspace.                                               | Any valid Workspace ID   |
 | `-k`, `--key`             | Return only a specific configuration key for a Deployment. For example `--key configuration.cluster_id` to get a Deployment's cluster ID.       | Any valid Deployment configuration key   |
 | `-o`, `--output`          | Output format can be one of: YAML or JSON. By default, inspecting a Deployment returns  a file in YAML format. | `yaml` or `json`             |
-| `-t`, `--template`          | Create a template file for the inspected Deployment. A template file is a YAML configuration file that includes all information about a Deployment except for its name, description field, and unique metadata. | None            |
+| `-t`, `--template`          | Create a template file for the inspected Deployment. A template file is a configuration file that includes all information about a Deployment except for its name, description field, and unique metadata. | None            |
 
 ## Examples
 
@@ -45,10 +45,13 @@ $ astro deployment inspect
 $ astro deployment inspect <deployment-id>
 
 # Shows a specific Deployment's health status
-$ astro deployment inspect <deployment-id> --key information.status
+$ astro deployment inspect <deployment-id> --key metadata.status
 
-# Save the current state of a Deployment to a Deployment file
+# Save the current state of a Deployment to a YAML Deployment file
 $ astro deployment inspect <deployment-id> > deployment.yaml
+
+# Save a Deployment as a JSON template file
+$ astro deployment inspect <deployment-id> --template -o json > deployment.json
 ```
 
 ## Related Commands

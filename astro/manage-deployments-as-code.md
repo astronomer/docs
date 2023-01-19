@@ -1,13 +1,10 @@
 ---
-sidebar_label: 'Manage Deployments as Code'
-title: 'Manage Deployments as Code'
+sidebar_label: 'Manage Deployments as code'
+title: 'Manage Deployments as code'
 id: manage-deployments-as-code
+description: "Manage an Astro Deployment with a JSON or YAML file."
 ---
 
-<head>
-  <meta name="description" content="Manage an Astro Deployment with JSON or YAML Deployment file. This Deployment file can be used to store, create, or update a Deployment's configuration." />
-  <meta name="og:description" content="Manage an Astro Deployment with JSON or YAML Deployment file. This Deployment file can be used to store, create, or update a Deployment's configuration." />
-</head>
 
 After you create an Astro Deployment, you can create a file with the Astro CLI that contains its unique configurations represented as code. That includes worker queues, environment variables, and Astro Runtime version. You can use Deployment files to create and manage Deployments programmatically on Astro.
 
@@ -55,7 +52,7 @@ When you inspect a Deployment and create a template file, the file will contain 
 - `worker_queues`
 - `alert_emails`
 
-When you use a template file to create a new Deployment, you might choose to change these values. All information in the template file is also available in the Cloud UI. See the following template file as an example.
+All information in the template file is also available in the Cloud UI. See the following template file as an example.
 
 ```yaml
 deployment:
@@ -119,7 +116,7 @@ See [Worker queues](configure-worker-queues.md).
 
 ## Create a Deployment from a template file
 
-You can create a Deployment in the Astro CLI according to the configurations specified in a given template file. Before you do so, keep the following in mind:
+You can create a Deployment in the Astro CLI according to the configurations specified in a given template file. Before you do, keep the following in mind:
 
 - Deployment names must be unique within a single Workspace. Make sure that you replace the `name` field in the file with the desired name of your new Deployment.
 - The `name` and `cluster_name` fields are the only fields required to create a Deployment. The CLI will create the Deployment using default values for each unspecified configuration. These default values are the same default values that are used when you create a Deployment from the Cloud UI.
@@ -134,6 +131,7 @@ To create a new Deployment from an existing template file:
     ```bash
     astro deployment create --deployment-file <deployment-template-file-name>
     ```
+
 3. Optional. Confirm that your Deployment was successfuly created by running the following command in your current Workspace:
 
    ```bash
@@ -150,7 +148,7 @@ You must push a complete Deployment file that lists all valid configurations whe
 
 :::
 
-A Deployment file is a complete snapshot of an existing Deployment at the point you inspected it. It's similar to a template file, but additionally contains your Deployment's name, description, and metadata. In the same way you use a template file to create a new Deployment, you use a Deployment file to update an existing Deployment with a new set of configurations.
+A Deployment file is a complete snapshot of an existing Deployment at the point you inspected it. It's similar to a template file, but also contains your Deployment's name, description, and metadata. In the same way you use a template file to create a new Deployment, you use a Deployment file to update an existing Deployment with a new set of configurations.
 
 You can create a Deployment file by inspecting a Deployment file and not specifying the `--template-file` flag on the command. After you create a Deployment file, you can modify most Deployment configurations.
 
