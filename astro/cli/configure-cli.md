@@ -59,10 +59,10 @@ astro config set webserver.port 8081
 | `postgres.host`      | Your hostname for the Postgres metadata database            | Any string             |
 | `postgres.port`      | Your port for the Postgres metadata database            | Any available port             |
 | `project.name`       | The name of your Astro project         | Any string             |
-| `webserver.port`     | The port for the webserver in your local Airflow environment          | Any available port             |
 | `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment         | `true`, `false`             |
 | `skip_parse`         | Determines whether DAG parsing is ignored when deploying code to a Deployment         | `true`, `false`            | 
 | `upgrade_message`    | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI         | `true`, `false`             |
+| `webserver.port`     | The port for the webserver in your local Airflow environment          | Any available port             |
 
 </TabItem>
 
@@ -73,8 +73,17 @@ astro config set webserver.port 8081
 | `houston.dial_timeout`       |  The time in seconds to wait for a Houston connection. The default is 10.        |  Any integer           |
 | `houston.skip_verify_tls`       |  Determines whether the Transport Layer Security (TLS) certificate is verified when connecting to Houston. The default is `false`.        | `true`, `false`             |
 | `interactive`       | Determines whether responses are paginated in the Astro CLI when it is supported. The default is `false`         |  `true`, `false`           |
+| `postgres.user`      | Your username for the Postgres metadata database            | Any string             |
+| `postgres.password`  | Your password for the Postgres metadata database            | Any string             |
+| `postgres.host`      | Your hostname for the Postgres metadata database            | Any string             |
+| `postgres.port`      | Your port for the Postgres metadata database            | Any available port             |
+| `project.name`       | The name of your Astro project         | Any string             |
+| `webserver.port`     | The port for the webserver in your local Airflow environment          | Any available port             |
+| `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment         | `true`, `false`             |
+| `upgrade_message`    | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI         | `true`, `false`             |
 | `page_size`             | Determines the size of the paginated response when `interactive` is set to `true`. The default is `20`                      | Any integer             |
 | `verbosity`      | Determines the Astro CLI log level type. The default is `warning`             | `debug`, `info`, `warning`, `error`             |
+| `webserver.port`     | The port for the webserver in your local Airflow environment          | Any available port             |
 
 </TabItem>
 </Tabs>
