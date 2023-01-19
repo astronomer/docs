@@ -142,7 +142,7 @@ To create a new Deployment from an existing template file:
 
 ## Update a Deployment using a Deployment file
 
-:::danger 
+:::warning 
 
 You must push a complete Deployment file that lists all valid configurations whenever you update a Deployment with a Deployment file. If a configuration exists on Astro but doesn't exist in your Deployment file, such as a worker queue, that configuration is deleted when you push your Deployment file. 
 
