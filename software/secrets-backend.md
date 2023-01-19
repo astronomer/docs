@@ -213,7 +213,6 @@ Now, any Airflow variable or connection that you write to your Vault server can 
 
 <TabItem value="secretsmanager">
 
-In this section, you'll learn how to use [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) as a secrets backend on Astronomer Software.
 
 #### Prerequisites
 
@@ -291,8 +290,6 @@ with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None)
       python_callable=print_var,
 )
 ```
-
-You can do the same for any Airflow connection.
 
 To test your changes:
 
