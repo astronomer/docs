@@ -14,7 +14,7 @@ After you create an Astro Deployment, you can create a file with the Astro CLI t
 Specifically, you can:
 
 - Create a template file from an existing Deployment and use it to create another Deployment with the same configurations. This is an alternative to creating a new Deployment in the Cloud UI and manually copying configurations.
-- Store a Deployment file that represents the configurations of an existing Deployment. You can make changes to this file to update a Deployment faster and more easily than doing so with the Cloud UI or individual Astro CLI flags.
+- Store a Deployment file that represents the configurations of an existing Deployment. You can make changes to this file to update a Deployment faster and more easily than doing so with the Cloud UI or individual Astro CLI commands.
 - Save a template file in a central GitHub repository and use it as a source of truth for new Deployments that fit a particular use case. For example, you can standardize your team's development environments by creating a template file with configurations for that type of Deployment.
 
 ## Inspect a Deployment
@@ -24,7 +24,12 @@ You can inspect an existing Deployment with the Astro CLI to create a template f
 To create a template file, run the following command. Replace `<deployment-template-file-name>` with your preferred name for the new template file. For example, `dev-deployment.yaml` or `dev-deployment.json`.
 
 ```sh
-astro deployment inspect <deployment-name> <deployment-template-file-name> --template
+# save the template to a YAML file
+astro deployment inspect <deployment-name>  --template  > <deployment-template-file-name>
+# save the template to a JSON file
+astro deployment inspect <deployment-name>  --template --output json > <deployment-template-file-name>
+# print the template to your terminal
+astro deployment inspect <deployment-name>  --template
 ```
 
 For more information about inspecting a Deployment, see [Astro CLI command reference](/cli/astro-deployment-inspect.md).
@@ -60,7 +65,7 @@ deployment:
           value: Dev
         - is_secret: true
           key: AWS_ACCESS_KEY_ID
-          value: "
+          value: ""
     configuration:
         # Name and description are replaced with placeholder values (`""`) in a template file. Manually specify these values when you create a new Deployment.
         name: ""
