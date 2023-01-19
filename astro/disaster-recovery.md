@@ -9,8 +9,6 @@ The Astro Data Plane is designed to withstand and survive in-region Availability
 
 To withstand a full region outage and achieve near real-time recovery, Astronomer recommends provisioning at least two Astro clusters in alternate regions. For example, one cluster in AWS `us-east-1` and another in `us-west-2`. To ensure that both the primary and secondary clusters are in sync, we recommend deploying all changes to both.
 
-To simplify the responsibility of maintaining two Clusters, Astronomer plans to invest in cluster and Deployment syncing strategies in 2022. If you're interested in this functionality, please reach out and share feedback with [Astronomer support](https://support.astronomer.io/).
-
 ## Full region outages
 
 In the case of a full region outage, Astronomer can re-provision your Cluster(s) and all Deployments in an alternate region. The re-provisioning includes:
