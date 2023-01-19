@@ -138,7 +138,13 @@ You can now run a DAG locally to check that your variables are accessible using 
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"} --secret
     ```
 
-2. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials. Note:- Secret Manager backend won't work locally after deleting the `.env` file.
+2. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials. 
+
+    :::info
+    
+    If you delete the `.env` file, the Secrets Manager backend won't work locally.
+
+    :::
  
 To further customize the Airflow and AWS SSM Parameter Store integration, see the [full list of available kwargs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/_api/airflow/providers/amazon/aws/secrets/systems_manager/index.html).
 
