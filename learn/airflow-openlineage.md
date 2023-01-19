@@ -33,7 +33,7 @@ If you want to read more on the concept of data lineage and why it’s important
 
 Visually, your data lineage graph might look similar to this:
 
-![Lineage Graph](/img/guides/lineage_complex_snowflake_example.png)
+![Lineage Graph](/img/guides/example_lineage_graph.png)
 
 If you are using data lineage, you will likely have a lineage tool that collects lineage metadata, as well as a front end for visualizing the lineage graph. There are paid tools (including Astro) that provide these services, or there are open source options that can be integrated with Airflow: namely OpenLineage (the lineage tool) and [Marquez](https://marquezproject.github.io/marquez/) (the lineage front end).
 
@@ -85,5 +85,5 @@ If you are working with open source tools, you can run OpenLineage with Airflow 
 OpenLineage is rapidly evolving, and new functionality and integrations are being added all the time. At the time of writing, the following are limitations when using OpenLineage with Airflow:
 
 - You must be running Airflow 2.3.0+ with OpenLineage 0.8.1+ to get lineage data for *failed* task runs.
-- Only some operators have bundled extractors (needed to collect lineage data out of the box). To see which extractors currently exist, check out the [OpenLineage repo](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow/openlineage/airflow/extractors). To get lineage data from other operators, you can create your own [custom extractor](https://openlineage.io/blog/extractors/).
+- Only some operators have bundled extractors (needed to collect lineage data out of the box). To see which extractors currently exist, check out the [OpenLineage repo](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow/openlineage/airflow/extractors). To get lineage data from other operators, you can create your own [custom extractor](https://openlineage.io/blog/extractors/) or leverage the [default extractor](https://openlineage.io/docs/integrations/airflow/operator) (in Airflow 2.3+) to modify your Airflow operators to gather lineage data.
 - To get lineage data from an external system connected to Airflow, such as [Apache Spark](https://openlineage.io/integration/apache-spark/), you'll need to configure an [OpenLineage integration](https://openlineage.io/integration) with that system in addition to Airflow.
