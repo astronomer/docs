@@ -19,7 +19,7 @@ astro deployment inspect
 When using the `--key` flag, specify the complete path of the key you want to return the value for, excluding `deployment`. For example, to return the `cluster_id` for a specific Deployment, you would run:
 
 ```sh
-astro deployment inspect <deployment-name> --key configuration.cluster_id
+astro deployment inspect -n <deployment-name> --key metadata.cluster_id
 ```
 
 See [Template file contents](manage-deployments-as-code#template-file-contents) for all possible values to return. 
