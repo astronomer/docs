@@ -23,7 +23,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.9.0 ([Release notes](cli/release-notes.md))
 
-## January 17, 2023
+## January 18, 2023
 
 ### Bug fixes
 
