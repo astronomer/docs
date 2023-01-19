@@ -70,6 +70,9 @@ Setting Airflow connections via secrets requires knowledge of how to generate Ai
 
 This topic provides setup steps for configuring [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) as a secrets backend on Astro.
 
+ For more information about Airflow and AWS connections, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
+
+
 #### Prerequisites
 
 - A [Deployment](create-deployment.md).
@@ -127,7 +130,6 @@ AWS_SECRET_ACCESS_KEY=<secret key>
 ```
 
 You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
-
 #### Deploy environment variables to Astro
 
 1. Run the following commands to export your secrets backend configurations as environment variables to Astro.
