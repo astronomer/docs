@@ -145,7 +145,7 @@ Run the following command to install the latest version of the Astro CLI directl
 curl -sSL install.astronomer.io | sudo bash -s
 ```
 
-To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install For more information on Astro CLI version ${siteVariables.cliVersion} of the CLI, you would run:
+To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install version ${siteVariables.cliVersion} of the CLI, you would run:
 
 ```sh
 curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}
