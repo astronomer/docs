@@ -321,7 +321,7 @@ If you configured databases in your SQL CLI project, you must manually reconfigu
 :::
 
 
-### Deploy a SQL workflow to Astro Cloud
+### Deploy a SQL workflow to Astro
 
 The first time a user deploys a SQL workflow, they will need to do some configuration. This won't be necessary in the following deployments.
 
