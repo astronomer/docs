@@ -39,6 +39,6 @@ body:
     id: notes
     attributes:
       label: Additional information
-      description:  Add additional information here that can help the docs team understand the requirements.
+      description:  Share any internal or external docs that provide context for the feature. Productboard tickets, GitHub issues, Slack messages are all welcome and encouraged!
 
   

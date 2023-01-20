@@ -8,16 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        If you need to document a new feature, use the [new feature documentation template](https://github.com/astronomer/docs/blob/main/new-feature-template.md).
-  - type: dropdown
-    id: impact
-    attributes:
-      label: What kind of change is it? 
-      multiple: false
-      options:
-        - New feature
-        - Change to an existing feature
-        - Automatic change to the data plane
+        Want to document the new feature yourself? Use the [new feature documentation template](https://github.com/astronomer/docs/blob/main/new-feature-template.md).
     validations:
       required: true
   - type: textarea
@@ -25,6 +16,12 @@ body:
     attributes:
       label: What is the new feature and who is it for?
       description: Why is the new feature or functionality significant? What benefit does it provide? Why should customers care about this feature or functionality?
+    validations:
+      required: true
+  - type: input
+    id: reviewer
+    attributes:
+      label: Who should review the change?
     validations:
       required: true
   - type: textarea
@@ -36,10 +33,6 @@ body:
     attributes:
       label: When will the new feature be released?
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
-  - type: input
-    id: reviewer
-    attributes:
-      label: Who should review the change?
   - type: textarea
     id: notes
     attributes:

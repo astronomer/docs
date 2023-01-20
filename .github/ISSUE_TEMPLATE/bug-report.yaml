@@ -22,7 +22,7 @@ body:
   - type: input
     id: doc
     attributes:
-      label: Where does the issue occur?
+      label: Where do you see this issue?
       description: Share a link to the document(s) where the issue exists.
       placeholder: For example, 'https://docs.astronomer.io/astro/develop-project', 'All CLI docs', 'Release notes'
     validations:
