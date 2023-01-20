@@ -373,23 +373,7 @@ It is also possible to have schedules triggered by other datasets, by using:
     ```
 
 5. If you haven't yet installed the Astro Python SDK in your Astro project, the CLI prompts you to update `requirements.txt` in your Astro project. Enter `yes` to have the CLI automatically install the dependency.
-The first time a user is deploying to a specific environment, the user will also be prompted to configure said environment:
-
-```sh
-Which Astro Cloud workspace should be associated with default?
- #     NAME                                  ID                              
- 1     Customer Data Science                 ckrle8xs41161887hz3x33w21bff7     
- 2     Customer Analytics                    cl285h9qr314571g06sehvwbdfag      
-```
-
-and
-
-```sh
-Which Astro Cloud deployment should be associated withdefault?
- #     DEPLOYMENT NAME                 RELEASE NAME                 DEPLOYMENT ID                   
- 1     customer-ds-dev                 universal-wave-2402          cl8bqua474573873jwenjhb6pab     
- 2     customer-ds-stage               galactian-meteoroid-2760     clczsjio0134626cs2uy2xd9ads 
-```
+5. Follow the CLI instructions to select a Workspace and Deployment for your SQL environment. Now when you run `astro flow deploy <workflow-name> --env <env>`, the CLI automatically deploys your workflow to the Deployment associated with your SQL environment.
 
 6. The CLI generates links for viewing the Deployment and Airflow UI. Use these links to confirm that the code deploy was successful.  
 
