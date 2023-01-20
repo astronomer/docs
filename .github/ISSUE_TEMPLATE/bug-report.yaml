@@ -14,8 +14,8 @@ body:
       label: What's the issue? 
       multiple: true
       options:
-        - Inaccurate or incorrect content
-        - Missing information
+        - Inaccurate content
+        - Misleading
         - Typo
     validations:
       required: true
@@ -23,14 +23,14 @@ body:
     id: doc
     attributes:
       label: Where does the issue occur?
-      description: Share a link to the document(s) where the issue exists
+      description: Share a link to the document(s) where the issue exists.
       placeholder: For example, 'https://docs.astronomer.io/astro/develop-project', 'All CLI docs', 'Release notes'
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
-      label: Describe the issue
+      label: What needs to be fixed, added, or removed?
       description: Describe the issue and how it should be fixed.
       placeholder:  Be as descriptive as possible. If there is existing documentation or related issues, link to them here. If you're not sot sure how best to proceed with your request, contact the docs team.
     validations:

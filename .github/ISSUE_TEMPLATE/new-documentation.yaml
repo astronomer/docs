@@ -13,13 +13,13 @@ body:
       options:
         - Setup steps for an existing feature or supported configuration
         - Best practices or recommendations
-        - Technical overview 
+        - Technical overview or reference
     validations:
       required: true
   - type: textarea
     id: description
     attributes:
-      label: Describe the documentation you're requesting
+      label: What kind of doc do you want us to write, and why?
     validations:
       required: true
   - type: textarea
@@ -29,7 +29,7 @@ body:
   - type: textarea
     id: reviewers
     attributes:
-      label: When is the documentation required?
+      label: When do you need the documentation?
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: input
     id: deadline

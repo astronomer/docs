@@ -23,7 +23,7 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Describe the new change
+      label: What is the new feature and who is it for?
       description: Why is the new feature or functionality significant? What benefit does it provide? Why should customers care about this feature or functionality?
     validations:
       required: true
@@ -34,7 +34,7 @@ body:
   - type: textarea
     id: deadline
     attributes:
-      label: When is the documentation required?
+      label: When will the new feature be released?
       placeholder: For example, 'Q2 2023', '2/12/2023', 'Within the next month'
   - type: input
     id: reviewer
