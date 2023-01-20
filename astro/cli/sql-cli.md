@@ -124,7 +124,7 @@ AWS_ACCESS_KEY_ID=<your-aws-access-key-id>
 AWS_SECRET_ACCESS_KEY=<your-aws-access-key-secret>
 ```
 
-You can call these values in a `configuration.yml` file using the format `$ENVIRONMENT_VARIABLE_KEY`. For example:
+You can call these values in a `configuration.yml` file using the format `$ENVIRONMENT_VARIABLE_KEY`.
 
 ```yaml
 connections:
