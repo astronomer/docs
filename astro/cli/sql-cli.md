@@ -337,13 +337,42 @@ Running SQL workflows on Astro lets you regularly test and schedule your queries
     astro login
     ```
 
-3.  Run the following command to deploy a SQL workflow to Astro:
+3. (optional) Create the `workflow.yml` inside the desired workflow folder including scheduling details.
+
+Example:
+
+    ```yaml
+    workflow:
+      catchup: true
+      description: "Sample workflow used to load data from a AWS S3 file into a Snowflake database"
+      schedule: "@hourly"
+      start_date: "2015-12-1"
+      is_paused_upon_creation: false
+      tags:
+        - AWS
+        - S3
+        - Snowflake
+    ```
+
+It is also possible to have schedules triggered by other datasets, by using:
+
+    ```yaml
+    workflow:
+      schedule:
+        - dataset:
+           uri: s3://some-dataset/upstream1.parquet
+        - dataset:
+           uri: s3://some-dataset/upstream2.parquet
+    ```
+
+
+4. Run the following command to deploy a SQL workflow to Astro:
 
     ```sh
     astro flow deploy <workflow-name> --env <env>
     ```
 
-4. If you haven't yet installed the Astro Python SDK in your Astro project, the CLI prompts you to update `requirements.txt` in your Astro project. Enter `yes` to have the CLI automatically install the dependency.
+5. If you haven't yet installed the Astro Python SDK in your Astro project, the CLI prompts you to update `requirements.txt` in your Astro project. Enter `yes` to have the CLI automatically install the dependency.
 The first time a user is deploying to a specific environment, the user will also be prompted to configure said environment:
 
 ```sh
