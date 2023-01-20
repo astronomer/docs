@@ -115,44 +115,32 @@ connections:
       database: Database
 ```
 
-An alternative to adding sensitive information such as passwords in the `configuration.yml` files is to use environment variables. This can be done by declaring the connections which reference environment variables, such as:
+To store sensitive credentials in your `configuration.yml` files, such as API keys or user logins, create a file named `.env` in the root of your SQL project and define your credentials there. You can then reference these values in your `configuration.yml` files as environment variables. 
 
+For example, consider the following `.env` file:
+
+```text
+AWS_ACCESS_KEY_ID=<your-aws-access-key-id>
+AWS_SECRET_ACCESS_KEY=<your-aws-access-key-secret>
 ```
+
+You can call these values in a `configuration.yml` file using the format `$ENVIRONMENT_VARIABLE_KEY`. For example:
+
+```yaml
 connections:
   - conn_id: aws_conn
     conn_type: aws
     login: $AWS_ACCESS_KEY_ID
     password: $AWS_SECRET_ACCESS_KEY
-  - conn_id: snowflake_conn
-    conn_type: snowflake
-    host: $SNOWFLAKE_HOST
-    port: 443
-    login: $SNOWFLAKE_ACCOUNT_NAME
-    password: $SNOWFLAKE_PASSWORD
-    schema: $SNOWFLAKE_SCHEMA
-    extra: '{"account": "$SNOWFLAKE_ACCOUNT", "region": "$SNOWFLAKE_REGION", "role": "$SNOWFLAKE_ROLE", "warehouse": "$SNOWFLAKE_WAREHOUSE", "database": "$SNOWFLAKE_DATABASE"}'
-
 ```
 
-And defining the environment variables within a `.env` file, in the root of the SQL project, similar to:
-```
-AWS_ACCESS_KEY_ID=some-value
-AWS_SECRET_ACCESS_KEY=another-value
-SNOWFLAKE_ACCOUNT_NAME=SOMEUSER
-SNOWFLAKE_PASSWORD=SomePassword
-SNOWFLAKE_SCHEMA=SCHEMA
-SNOWFLAKE_HOST=https://gp33.us-east-1.snowflakecomputing.com/
-SNOWFLAKE_ACCOUNT=gp33
-SNOWFLAKE_REGION=us-east-1
-SNOWFLAKE_ROLE=SOME_ROLE
-SNOWFLAKE_DATABASE=SOME_DATABASE
-SNOWFLAKE_WAREHOUSE=SOME_WAREHOUSE
-```
+:::
 
+:::info 
 
-More examples of connections configuration can be found at the file [config/default/configuration.yml.example](https://github.com/astronomer/astro-sdk/blob/4e0dabbc24fdd8072eba018a909a1713e02fac5f/sql-cli/sql_cli/include/base/config/default/configuration.yml).
+An Astro CLI/Cloud project can't access the connections configured in this directory. Similarly, a SQL project can't access connections configured in an Astro CLI/Cloud project, nor can it access the Astro project `.env` file. Features for unifying these two project structures will be available in upcoming releases.
 
-An Astro CLI/Cloud project can't access the connections configured in this directory. Similarly, a SQL project can't access connections configured in an Astro CLI/Cloud project. Features for unifying these two project structures will be available in upcoming releases.
+:::
 
 #### Test database connections
 
