@@ -343,13 +343,7 @@ Running SQL workflows on Astro lets you regularly test and schedule your queries
     astro flow deploy <workflow-name> --env <env>
     ```
 
-
-The first time this command it is run, it will make sure that your Astro Airflow environment has the necessary dependencies to be able to run SQL Workflows. If not, it will prompt:
-
-```sh
-Would you like to add the required version of Python SDK dependency to requirements.txt? Otherwise, the deployment will not proceed? 
-```
-
+4. If you haven't yet installed the Astro Python SDK in your Astro project, the CLI prompts you to update `requirements.txt` in your Astro project. Enter `yes` to have the CLI automatically install the dependency.
 The first time a user is deploying to a specific environment, the user will also be prompted to configure said environment:
 
 ```sh
