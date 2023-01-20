@@ -335,7 +335,7 @@ To uninstall `astrocloud` on Linux:
 
 </Tabs>
 
-### Step 2: Install Astro CLI v1.0+
+### Step 2: Install Astro CLI version ${siteVariables.cliVersion}
 
 Install the latest version of `astro` on your machine. See [Install the CLI](cli/install-cli.md).
 
