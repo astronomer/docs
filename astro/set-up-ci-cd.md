@@ -31,19 +31,18 @@ You can set up CI/CD pipelines to manage multiple Deployments and repositories b
 
 When deciding on a strategy, keep the size of your data team in mind while answering the following questions:
 
-- How many branches of a project do you want to host on Astro? 
-- Do you need to deploy a single production branch to a Deployment, or do you also need to deploy a development branch?
+- How many different environments do you need to adequately test your DAGs before deploying them to production?
 - How many repositories do you want to host your project? Will different parts of your team work on different parts of your project?
 
 Read the following topics to learn which combination of branches and repositories is right for your team. Advanced data teams might follow a custom CI/CD strategy that is not described here and is optimized for a particular use case or team structure. If you're not sure which CI/CD strategy is right for you, contact your customer success representative.
 
-### Single branch vs. multiple branch repositories
+### Single environment versus multiple environment repositories
 
-When you create a CI/CD pipeline, you first must determine if you want to deploy one or multiple project branches to Astro through CI/CD.
+When you create a CI/CD pipeline, you first must determine how many environments you need to test your DAGs in. Each environment requires its own GitHub branch and implementation in your CI/CD pipeline. 
 
-#### Single branch
+#### Single environment
 
-The most cost-effective way to get started with CI/CD on Astro is to maintain a single Git repository that corresponds to a single Astro project and Deployment.
+The most cost-effective way to get started with CI/CD on Astro is to maintain a single Git repository that corresponds to a single Astro project and Deployment. This solution is best for simple projects where you can tolerate testing and bug fixing in production.
 
 This method assumes that you have:
 
@@ -72,9 +71,9 @@ flowchart LR;
 
 Running all of your data pipelines in a single environment means that you don't have to pay for the infrastructure of multiple Deployments, but it limits your ability to test changes on Astro or on development datasets before they are deployed. Astronomer does not recommend this method for production use cases.
 
-#### Multiple branches
+#### Multiple environments
 
-For small to medium-sized data teams running data pipelines in production, Astronomer recommends developing a CI/CD pipeline for multiple branches. With this method, you maintain one Git repository that has permanent branches for different versions of your Astro project. You also have multiple Astro Deployments for each of your branches. If you work at a larger organization, you can adapt this method by creating a Workspace for each team or business use case.
+For data teams running DAGs which are critical to your business, Astronomer recommends developing a CI/CD pipeline that supports multiple environments for running and testing different versions of your project. With this method, you maintain one Git repository that has permanent branches for different versions of your Astro project. You also have multiple Astro Deployments for each of your branches. If you work at a larger organization, you can adapt this method by creating a Workspace for each team or business use case.
 
 The multiple environment method assumes that you have:
 
