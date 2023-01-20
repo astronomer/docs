@@ -372,8 +372,4 @@ Once the deployment is completed, the following will be printed:
 
 From this moment, the user will be able to see/interact with the SQL workflows using the Airflow UI in Astro Cloud.
 
-:::warning 
-
-At the moment, the user is expected to configure the connections in the Astro deployment. There are plans to automate this step in the roadmap.
-
-:::
+7. Reconfigure any connections from your local SQL project in the Airflow UI for your Deployment. See [Connections](https://docs.astronomer.io/learn/connections).
