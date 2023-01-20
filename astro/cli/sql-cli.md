@@ -362,14 +362,6 @@ Which Astro Cloud deployment should be associated withdefault?
  2     customer-ds-stage               galactian-meteoroid-2760     clczsjio0134626cs2uy2xd9ads 
 ```
 
-This will associate an Astro Cloud deployment/workspace to a SQL environment.
-
-Once the deployment is completed, the following will be printed:
-```sh
- Deployment View: cloud.astronomer.io/cl6geh889308371i01vscssm3q/deployments/clckomt0o4731434yw5f0fcz47b/analytics
- Airflow UI: astronomer.astronomer.run/d0fcz47b?orgId=org_0FGQMRjnZdcx3EDk
-```
-
-From this moment, the user will be able to see/interact with the SQL workflows using the Airflow UI in Astro Cloud.
+6. The CLI generates links for viewing the Deployment and Airflow UI. Use these links to confirm that the code deploy was successful.  
 
 7. Reconfigure any connections from your local SQL project in the Airflow UI for your Deployment. See [Connections](https://docs.astronomer.io/learn/connections).
