@@ -15,7 +15,12 @@ Use Astro CLI SQL commands to run SQL workflows without writing Python code or s
 
 ## Prerequisites 
 
-- [Astro CLI](install-cli.md) version 1.7 or later.
+- The latest prerelease of the [Astro CLI](install-cli.md). To install the prerelease, run:
+
+   ```sh
+   sudo bash < <(curl -sSL https://install.astronomer.io) -s v1.10.0
+   ```
+
 - [Docker Desktop](https://www.docker.com/).
 - One of the following databases, hosted either locally or on an external service:
   
