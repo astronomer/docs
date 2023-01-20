@@ -323,7 +323,7 @@ If you configured databases in your SQL CLI project, you must manually reconfigu
 
 ### Deploy a SQL workflow to Astro
 
-The first time a user deploys a SQL workflow, they will need to do some configuration. This won't be necessary in the following deployments.
+Running SQL workflows on Astro lets you regularly test and schedule your queries as Airflow DAGs.
 
 The first requirement is that the SQL project should also be an Astro CLI project:
 ```sh
