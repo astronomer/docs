@@ -152,15 +152,6 @@ astro flow validate --env=<env-directory-name>
 
 This command runs a connection test for all databases configured in the `configuration.yml` file of your environment subfolder. 
 
-Example of output:
-
-```sh
-Validating connection(s) for environment 'default'
-Validating connection sqlite_conn               PASSED
-Validating connection aws_conn                  PASSED
-Validating connection snowflake_conn            PASSED
-```
-
 You can also test individual databases within an environment. For example, to test a `snowflake_conn` connection in the `dev/configuration.yml`, you run the following command to test the connection:
 
 ```sh
