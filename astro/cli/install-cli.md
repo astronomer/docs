@@ -121,10 +121,10 @@ Open Windows PowerShell as an administrator and then run the following command:
 winget install -e --id Astronomer.Astro
 ```
 
-To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command installs Astro CLI version 1.6:
+To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command installs Astro CLI version ${siteVariables.cliVersion}:
 
 ```sh
-winget install -e --id Astronomer.Astro -v 1.6.0
+winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}
 ```
 
 </TabItem>
@@ -145,10 +145,10 @@ Run the following command to install the latest version of the Astro CLI directl
 curl -sSL install.astronomer.io | sudo bash -s
 ```
 
-To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install v1.1.0 of the CLI, you would run:
+To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install For more information on Astro CLI version ${siteVariables.cliVersion} of the CLI, you would run:
 
 ```sh
-curl -sSL install.astronomer.io | sudo bash -s -- v1.1.0
+curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
@@ -280,7 +280,7 @@ The `astrocloud` executable is no longer maintained by Astronomer. Complete this
 - You are an Astro user.
 - You're currently using the `astrocloud` CLI executable.
 
-For more information on Astro CLI version 1.0.0, see [Astro CLI Release Notes](cli/release-notes.md).
+For more information about Astro CLI version 1.0.0, see [Astro CLI Release Notes](cli/release-notes.md).
 
 ### Step 1: Uninstall `astrocloud`
 
