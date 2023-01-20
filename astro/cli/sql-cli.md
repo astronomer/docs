@@ -325,22 +325,24 @@ If you configured databases in your SQL CLI project, you must manually reconfigu
 
 Running SQL workflows on Astro lets you regularly test and schedule your queries as Airflow DAGs.
 
-The first requirement is that the SQL project should also be an Astro CLI project:
-```sh
-astro dev init
-```
+1. Run the following command to create an Astro project at the root of your SQL project:
 
-The second requirement is that user should login to Astro Cloud:
+    ```sh
+    astro dev init
+    ```
 
-```
-astro login
-```
+2. Run the following command to log in to Astro:
 
-Once those two conditions are met, it is possible to deploy a SQL workflow to Astro Cloud by using the command `astro flow deploy`:
+    ```sh
+    astro login
+    ```
 
-```sh
-astro flow deploy <workflow-name> --env <env>
-```
+3.  Run the following command to deploy a SQL workflow to Astro:
+
+    ```sh
+    astro flow deploy <workflow-name> --env <env>
+    ```
+
 
 The first time this command it is run, it will make sure that your Astro Airflow environment has the necessary dependencies to be able to run SQL Workflows. If not, it will prompt:
 
