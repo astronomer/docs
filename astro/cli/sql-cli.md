@@ -54,19 +54,29 @@ This command uses Docker, and it can take up to five minutes to complete if this
 ```sh
 new_proj/
 ├── config
-│   ├── default
-│   │   └── configuration.yml
-│   └── dev
-│       └── configuration.yml
+│   ├── default
+│   │   └── configuration.yml
+│   ├── dev
+│   │   └── configuration.yml
+│   └── global.yml
 ├── data
-│   ├── imdb.db
-│   └── retail.db
+│   ├── imdb.db
+│   └── retail.db
 └── workflows
     ├── example_basic_transform
-    │   └── top_animations.sql
+    │   └── top_animations.sql
+    ├── example_deploy
+    │   ├── orders.yaml
+    │   ├── subset.sql
+    │   └── workflow.yml
+    ├── example_load_file
+    │   ├── load_imdb_movies.yaml
+    │   └── transform_imdb_movies.sql
     └── example_templating
         ├── filtered_orders.sql
         └── joint_orders_customers.sql
+
+
 ```
 
 Each SQL project is composed of three directories:
@@ -105,7 +115,44 @@ connections:
       database: Database
 ```
 
-An Astro project can't access the connections configured in this directory. Similarly, a SQL project can't access connections configured in an Astro project. Features for unifying these two project structures will be available in upcoming releases.
+An alternative to adding sensitive information such as passwords in the `configuration.yml` files is to use environment variables. This can be done by declaring the connections which reference environment variables, such as:
+
+```
+connections:
+  - conn_id: aws_conn
+    conn_type: aws
+    login: $AWS_ACCESS_KEY_ID
+    password: $AWS_SECRET_ACCESS_KEY
+  - conn_id: snowflake_conn
+    conn_type: snowflake
+    host: $SNOWFLAKE_HOST
+    port: 443
+    login: $SNOWFLAKE_ACCOUNT_NAME
+    password: $SNOWFLAKE_PASSWORD
+    schema: $SNOWFLAKE_SCHEMA
+    extra: '{"account": "$SNOWFLAKE_ACCOUNT", "region": "$SNOWFLAKE_REGION", "role": "$SNOWFLAKE_ROLE", "warehouse": "$SNOWFLAKE_WAREHOUSE", "database": "$SNOWFLAKE_DATABASE"}'
+
+```
+
+And defining the environment variables within a `.env` file, in the root of the SQL project, similar to:
+```
+AWS_ACCESS_KEY_ID=some-value
+AWS_SECRET_ACCESS_KEY=another-value
+SNOWFLAKE_ACCOUNT_NAME=SOMEUSER
+SNOWFLAKE_PASSWORD=SomePassword
+SNOWFLAKE_SCHEMA=SCHEMA
+SNOWFLAKE_HOST=https://gp33.us-east-1.snowflakecomputing.com/
+SNOWFLAKE_ACCOUNT=gp33
+SNOWFLAKE_REGION=us-east-1
+SNOWFLAKE_ROLE=SOME_ROLE
+SNOWFLAKE_DATABASE=SOME_DATABASE
+SNOWFLAKE_WAREHOUSE=SOME_WAREHOUSE
+```
+
+
+More examples of connections configuration can be found at the file [config/default/configuration.yml.example](https://github.com/astronomer/astro-sdk/blob/4e0dabbc24fdd8072eba018a909a1713e02fac5f/sql-cli/sql_cli/include/base/config/default/configuration.yml).
+
+An Astro CLI/Cloud project can't access the connections configured in this directory. Similarly, a SQL project can't access connections configured in an Astro CLI/Cloud project. Features for unifying these two project structures will be available in upcoming releases.
 
 #### Test database connections
 
@@ -116,6 +163,15 @@ astro flow validate --env=<env-directory-name>
 ```
 
 This command runs a connection test for all databases configured in the `configuration.yml` file of your environment subfolder. 
+
+Example of output:
+
+```sh
+Validating connection(s) for environment 'default'
+Validating connection sqlite_conn               PASSED
+Validating connection aws_conn                  PASSED
+Validating connection snowflake_conn            PASSED
+```
 
 You can also test individual databases within an environment. For example, to test a `snowflake_conn` connection in the `dev/configuration.yml`, you run the following command to test the connection:
 
@@ -282,5 +338,67 @@ You can now run the SQL workflow as a DAG from your Astro project. See [Build an
 :::info 
 
 If you configured databases in your SQL CLI project, you must manually reconfigure these databases in your Astro project through the Airflow UI. See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections).
+
+:::
+
+
+### Deploy a SQL workflow to Astro Cloud
+
+The first time a user deploys a SQL workflow, they will need to do some configuration. This won't be necessary in the following deployments.
+
+The first requirement is that the SQL project should also be an Astro CLI project:
+```sh
+astro dev init
+```
+
+The second requirement is that user should login to Astro Cloud:
+
+```
+astro login
+```
+
+Once those two conditions are met, it is possible to deploy a SQL workflow to Astro Cloud by using the command `astro flow deploy`:
+
+```sh
+astro flow deploy <workflow-name> --env <env>
+```
+
+The first time this command it is run, it will make sure that your Astro Airflow environment has the necessary dependencies to be able to run SQL Workflows. If not, it will prompt:
+
+```sh
+Would you like to add the required version of Python SDK dependency to requirements.txt? Otherwise, the deployment will not proceed? 
+```
+
+The first time a user is deploying to a specific environment, the user will also be prompted to configure said environment:
+
+```sh
+Which Astro Cloud workspace should be associated with default?
+ #     NAME                                  ID                              
+ 1     Customer Data Science                 ckrle8xs41161887hz3x33w21bff7     
+ 2     Customer Analytics                    cl285h9qr314571g06sehvwbdfag      
+```
+
+and
+
+```sh
+Which Astro Cloud deployment should be associated withdefault?
+ #     DEPLOYMENT NAME                 RELEASE NAME                 DEPLOYMENT ID                   
+ 1     customer-ds-dev                 universal-wave-2402          cl8bqua474573873jwenjhb6pab     
+ 2     customer-ds-stage               galactian-meteoroid-2760     clczsjio0134626cs2uy2xd9ads 
+```
+
+This will associate an Astro Cloud deployment/workspace to a SQL environment.
+
+Once the deployment is completed, the following will be printed:
+```sh
+ Deployment View: cloud.astronomer.io/cl6geh889308371i01vscssm3q/deployments/clckomt0o4731434yw5f0fcz47b/analytics
+ Airflow UI: astronomer.astronomer.run/d0fcz47b?orgId=org_0FGQMRjnZdcx3EDk
+```
+
+From this moment, the user will be able to see/interact with the SQL workflows using the Airflow UI in Astro Cloud.
+
+:::warning 
+
+At the moment, the user is expected to configure the connections in the Astro deployment. There are plans to automate this step in the roadmap.
 
 :::
