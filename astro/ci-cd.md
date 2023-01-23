@@ -787,7 +787,7 @@ Use the following template to implement DAG-only deploys with Jenkins.
                 tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
                 files=($(git diff-tree HEAD --name-only --no-commit-id))
                 find="dags"
-                if [[ ${files[*]} =~ (^|[[:space:]])"$find"($|[[:space:]]) && ${#files[@]} -eq 1 ]]; then
+                if [[ ${siteVariables.jenkinsenv1} =~ (^|[[:space:]])"$find"($|[[:space:]]) && ${siteVariables.jenkinsenv2} -eq 1 ]]; then
                   ./astro deploy --dags;
                 else
                   ./astro deploy;
