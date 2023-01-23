@@ -25,7 +25,7 @@ export default function useAlgoliaContextualFacetFilters() {
   tagsFilter = ['docusaurus_tag:docs-default-current', 'docusaurus_tag:docs-learn-current']
  }
  else {
-  tagsFilter = ['docusaurus_tag:docs-default-current', 'docusaurus_tag:docs-learn-current', 'docusaurus_tag:${currentSoftwareTag}']
+  tagsFilter = ['docusaurus_tag:docs-default-current', 'docusaurus_tag:docs-learn-current', 'docusaurus_tag:docs-software-current']
  }
   return [languageFilter, tagsFilter];
 }
