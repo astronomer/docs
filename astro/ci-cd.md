@@ -674,10 +674,12 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
               }
              }
              steps {
-               script {
-                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh "./astro deploy ${siteVariables.deploymentid} -f"
+                 checkout scm
+                 sh '''
+                   curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                   tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                   ./astro deploy
+                 '''
                }
              }
            }
@@ -736,11 +738,12 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
            }
            stage('Deploy to Astronomer') {
              steps {
-               script {
-                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh "./astro deploy ${siteVariables.deploymentid} -f"
-               }
+                 checkout scm
+                 sh '''
+                   curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                   tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                   ./astro deploy
+                 '''
              }
            }
          }
