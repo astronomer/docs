@@ -22,8 +22,8 @@ This is where you'll find information about installing, upgrading, and uninstall
     groupId= "install-the-astro-cli"
     values={[
         {label: 'Mac', value: 'mac'},
-        {label: 'Windows', value: 'windows'},
         {label: 'Windows with winget', value: 'windowswithwinget'},
+        {label: 'Windows (Manual)', value: 'windows'},
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="mac">
@@ -73,31 +73,6 @@ If you specify only a major version, this command installs the latest minor or p
 
 </TabItem>
 
-<TabItem value="windows">
-
-This is where you'll find information about installing the Astro CLI on a Windows operating system. Starting with Astro CLI version 1.6, you can use the Windows Package Manager winget command-line tool to install the Astro CLI. See [Windows with winget](install-cli.md?tab=windows%20with%20winget#install-the-astro-cli).
-
-#### Prerequisites
-
-- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or later).
-- [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
-- Windows 10 or Windows 11.
-
-#### Installation
-
-1. Go to the [Releases page](https://github.com/astronomer/astro-cli/releases) of the Astro CLI GitHub repository, scroll to a CLI version, and then download the `.exe` file that matches the CPU architecture of your machine.
-
-    For example, to install v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.exe`.
-
-2. Rename the file to `astro.exe`.
-
-3. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` is stored in `C:\Users\username\astro.exe`, you add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.html).
-
-4. Restart your machine.
-
-</TabItem>
-
 <TabItem value="windowswithwinget">
 
 Starting with Astro CLI version 1.6, you can use the Windows Package Manager winget command-line tool to install the Astro CLI. To install an older version of the Astro CLI, you'll need to follow the [alternate Windows installation process](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#install-the-astro-cli).
@@ -124,8 +99,33 @@ winget install -e --id Astronomer.Astro
 To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command specifies the latest available version of the Astro CLI:
 
 ```sh
-winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}
+<pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}`}</code></pre>
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+This is where you'll find information about installing the Astro CLI on a Windows operating system. Starting with Astro CLI version 1.6, you can use the Windows Package Manager winget command-line tool to install the Astro CLI. See [Windows with winget](install-cli.md?tab=windows%20with%20winget#install-the-astro-cli).
+
+#### Prerequisites
+
+- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
+- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or later).
+- [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
+- Windows 10 or Windows 11.
+
+#### Installation
+
+1. Go to the [Releases page](https://github.com/astronomer/astro-cli/releases) of the Astro CLI GitHub repository, scroll to a CLI version, and then download the `.exe` file that matches the CPU architecture of your machine.
+
+    For example, to install v1.0.0 of the Astro CLI on a Windows machine with an AMD 64 architecture, download `astro_1.0.0-converged_windows_amd64.exe`.
+
+2. Rename the file to `astro.exe`.
+
+3. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` is stored in `C:\Users\username\astro.exe`, you add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [How do I set or change the PATH system variable?](https://www.java.com/en/download/help/path.html).
+
+4. Restart your machine.
 
 </TabItem>
 
@@ -145,10 +145,10 @@ Run the following command to install the latest version of the Astro CLI directl
 curl -sSL install.astronomer.io | sudo bash -s
 ```
 
-To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install the the most recent release of the CLI, you would run:
+To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install the most recent release of the CLI, you would run:
 
 ```sh
-curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}
+<pre><code parentName="pre">{`curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}`}</code></pre>
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
