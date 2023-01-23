@@ -641,7 +641,7 @@ If your Astro project requires additional build-time arguments to build an image
 </TabItem>
 </Tabs>
 
-### Jenkins
+### Jenkins (Image-only deploys)
 
 <Tabs
     defaultValue="jenkinsstandard"
@@ -756,6 +756,52 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
 
 </TabItem>
 </Tabs>
+
+### Jenkins (DAG-based deploy)
+
+Use the following template to implement DAG-only deploys with Jenkins.
+
+1. In your Jenkins pipeline configuration, add the following parameters:
+
+    - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
+    - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
+    - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
+
+    Be sure to set the values for your API credentials as secret.
+
+2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+
+    <pre><code parentName="pre">pipeline {
+    agent any
+      stages {
+        stage('Dag Only Deploy to Astronomer') {
+          when {
+           expression {
+             return env.GIT_BRANCH == "origin/main"
+           }
+          }
+          steps {
+              checkout scm
+              sh '''
+                curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                files=($(git diff-tree HEAD --name-only --no-commit-id))
+                find="dags"
+                if [[ ${files[*]} =~ (^|[[:space:]])"$find"($|[[:space:]]) && ${#files[@]} -eq 1 ]]; then
+                  ./astro deploy --dags;
+                else
+                  ./astro deploy;
+                fi
+              '''
+          }
+        }
+      }
+    post {
+      always {
+        cleanWs()
+      }
+    }
+  }</code></pre>
 
 ### AWS CodeBuild
 
