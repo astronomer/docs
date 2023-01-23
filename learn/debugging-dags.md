@@ -50,7 +50,7 @@ To troubleshoot infrastructure issues when running Airflow in other forms like o
 
 ## Common DAG issues
 
-In this section we will go over common issues related to DAGs.
+In this section we will go over common issues related to DAGs you might encounter when developping locally.
 
 ### DAGs don't appear in the Airflow UI
 
@@ -62,17 +62,33 @@ This error message should help you troubleshoot and resolve the issue. In the ex
 
 If you don't see an import error message, here are some debugging steps you can try:
 
-- Airflow scans the `dags_folder` for new DAGs every [`dag_dir_list_interval`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval), which defaults to 5 minutes but can be modified. You might have to wait until this interval has passed before a new DAG appears in the Airflow UI or restart your Airflow environment.
+- Make sure your DAG file is located in the `dags` folder.
+- Airflow scans the `dags` folder for new DAGs every [`dag_dir_list_interval`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval), which defaults to 5 minutes but can be modified. You might have to wait until this interval has passed before a new DAG appears in the Airflow UI or restart your Airflow environment. 
 - Ensure that you have permission to see the DAGs, and that the permissions on the DAG file are correct.
-- Ensure that your DAG is located in the `dags` folder of your Airflow project and has a unique `dag_id`.
 - Run `airflow dags list` with the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html) to make sure that Airflow has registered the DAG in the metastore. If the DAG appears in the list, try restarting the webserver.
 - Try restarting the scheduler with `astro dev restart`.
-
 - If you see an error similar to the following image indicating that the scheduler is not running, check the scheduler logs to see if something in the DAG file is causing the scheduler to crash. If you are using the Astro CLI, run `astro dev logs -s` and then try restarting.
 
     ![No Scheduler](/img/guides/scheduler_not_running_2.png)
 
-### DAGs are not running 
+At the code level ensure that:
+
+- Each DAG has a unique `dag_id`.
+- Each DAG contains either the word `airflow` or `dag` (the scheduler will only parse files fulfilling this condition).
+- Each DAG defined with the `@dag` decorator is called. See also [Introduction to Airflow decorators](airflow-decorators.md).
+
+### DAGs are not running correctly
+
+If your DAGs are either not running or running different than you intended consider checking the following common causes.
+
+- DAGs need to be unpaused in order to run according to their schedule. You can unpause a DAG by clicking the toggle on the lefthand side of the Airflow UI or via the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#unpause).
+- Double check that each DAG has a unique `dag_id`. If two DAGs with the same id are present in one Airflow instance the scheduler will pick one at random every 30 seconds to display.
+- Make sure your DAG has a `start_date` in the past.
+- Test the DAG using `astro dev dags test <dag_id>`.
+- If no DAGs are running, check the state of your scheduler 
+using `astro dev logs -s`. 
+
+If your DAG is running but not at the schedule you intended take a look at the [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) guide.
 
 ### Dependency conflicts
 
