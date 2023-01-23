@@ -121,7 +121,7 @@ Open Windows PowerShell as an administrator and then run the following command:
 winget install -e --id Astronomer.Astro
 ```
 
-To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command installs Astro CLI version ${siteVariables.cliVersion}:
+To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command specifies the latest available version of the Astro CLI:
 
 ```sh
 winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}
@@ -145,7 +145,7 @@ Run the following command to install the latest version of the Astro CLI directl
 curl -sSL install.astronomer.io | sudo bash -s
 ```
 
-To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install version ${siteVariables.cliVersion} of the CLI, you would run:
+To install a specific version of the CLI, specify the version number as a flag at the end of the command. For example, to install the the most recent release of the CLI, you would run:
 
 ```sh
 curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}
@@ -335,7 +335,7 @@ To uninstall `astrocloud` on Linux:
 
 </Tabs>
 
-### Step 2: Install Astro CLI version ${siteVariables.cliVersion}
+### Step 2: Install the Astro CLI 
 
 Install the latest version of `astro` on your machine. See [Install the CLI](cli/install-cli.md).
 
