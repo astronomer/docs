@@ -1,44 +1,78 @@
 ---
 title: "Debug DAGs"
 sidebar_label: "Debug DAGs"
-description: "Resolve issues with your Airflow DAGs"
+description: "Troubleshoot Airflow DAGs in a local environment"
 id: debugging-dags
 ---
 
-This guide provides information that will help you resolve common Airflow DAG issues. If you're new to Airflow, you should review the [Intro To Data Orchestration With Airflow](https://www.astronomer.io/events/webinars/intro-to-data-orchestration-with-airflow) webinar.
+This guide explains how to identify and resolve common Airflow DAG issues, as well as steps to take if you cannot find a solution to your issue.
 
-This guide focuses on [Airflow 2.0 and later](https://www.astronomer.io/events/webinars/intro-to-data-orchestration-with-airflow). For older Airflow versions, the debugging steps might be different.
+This guide was written for Airflow 2+, if you are running pre-2.0 Airflow we highly recommend upgrading in order to prevent compatibility issues and become able to use state of the art Airflow features. For assistance in upgrading see the documentation on [Upgrading from 1.10 to 2](https://airflow.apache.org/docs/apache-airflow/stable/howto/upgrading-from-1-10/index.html).
 
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
 
-- Basic Airflow concepts. See [Introduction to Apache Airflow](intro-to-airflow.md).
+- Basic Airflow concepts. See [Get started with Airflow tutorial](get-started-with-airflow.md).
+- Basic knowledge of Airflow DAGs. See [Introduction to Airflow DAGs](dags.md)
 
-## DAGs don't appear in the Airflow UI
+## General Airflow debugging approach
+
+With Airflow being a multifunctional tool at the heart of the data engineering stack it is impossible to list all issues that can arise. These questions will give you a starting point when troubleshooting.
+
+- Is the problem with Airflow or with another system Airflow connects to? Test if the action can be performed in the external system from its UI, a script or the command-line.
+- What is the state of your [Airflow components](airflow-components.md)? Inspect the logs of each component and restart your Airflow environment.
+- Does Airflow have access to all relevant files? This is especially relevant when running Airflow in Docker, like with the Astro CLI.
+- Are the [Airflow connections](connections.md) set correctly with correct credentials?
+- Is the issue with all DAGs or isolated to one DAG?
+- Can you collect the relevant logs? For more information on log location and configuration see the [Airflow logging](logging.md) guide.
+- Which versions of Airflow and Airflow providers are you using? Check if the documentation you are following matches your package versions.
+- Can you reproduce the problem in a new local Airflow instance using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli)?
+
+Answering these questions will help you narrow down what kind of issue your dealing with and inform your next steps. 
+
+## Airflow is not starting
+
+The 3 most common ways to run Airflow locally are the [Astro CLI]((https://docs.astronomer.io/astro/cli/install-cli)), a [standalone instance](https://airflow.apache.org/docs/apache-airflow/stable/start.html) or running [Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). 
+
+To first get started we recommend using the free and open-source Astro CLI, which in most cases is easy to set up. The most common causes for issues when starting the Astro CLI are:
+
+- The Astro CLI was not correctly installed. Run `astro version` and consider upgrading if your version is outdated.
+- The Docker Daemon is not running. Make sure to start Docker Desktop before starting the Astro CLI.
+- Issues caused by custom commands in the Dockerfile, conflicts or dependencies in the packages located in `packages.txt` and `requirements.txt`. 
+- The components are in a crash-loop because of errors in custom code in features like plugins or a custom XCom backend. Check out the scheduler logs with `astro dev logs -s` to troubleshoot.
+
+:::info
+
+To troubleshoot infrastructure issues when running Airflow in other forms like on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or managed services please refer to the relevant documentation.
+
+:::
+
+## Common DAG issues
+
+In this section we will go over common issues related to DAGs.
+
+### DAGs don't appear in the Airflow UI
 
 If a DAG isn't appearing in the Airflow UI, it's typically because Airflow is unable to parse the DAG. If this is the case, you'll see an `Import Error` in the Airflow UI. 
 
-![Import Error](/img/guides/import_error.png)
+![Import Error](/img/guides/import_error_2.png)
 
-This error message should help you troubleshoot and resolve the issue. 
+This error message should help you troubleshoot and resolve the issue. In the example above a task is missing the mandatory `task_id` parameter.
 
 If you don't see an import error message, here are some debugging steps you can try:
 
-- Airflow scans the `dags_folder` for new DAGs every `dag_dir_list_interval`, which defaults to 5 minutes but can be modified. You might have to wait until this interval has passed before a new DAG appears in the Airflow UI.
+- Airflow scans the `dags_folder` for new DAGs every [`dag_dir_list_interval`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval), which defaults to 5 minutes but can be modified. You might have to wait until this interval has passed before a new DAG appears in the Airflow UI or restart your Airflow environment.
 - Ensure that you have permission to see the DAGs, and that the permissions on the DAG file are correct.
+- Ensure that your DAG is located in the `dags` folder of your Airflow project and has a unique `dag_id`.
 - Run `airflow dags list` with the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html) to make sure that Airflow has registered the DAG in the metastore. If the DAG appears in the list, try restarting the webserver.
-- Try restarting the scheduler. If you're using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview), run `astro dev restart`.
-- If you see an error similar to the following image indicating that the scheduler is not running, check the scheduler logs to see if something in the DAG file is causing the scheduler to crash. If you are using the Astro CLI, run `astro dev logs --scheduler` and then try restarting.
+- Try restarting the scheduler with `astro dev restart`.
 
-    ![No Scheduler](/img/guides/scheduler_not_running.png)
+- If you see an error similar to the following image indicating that the scheduler is not running, check the scheduler logs to see if something in the DAG file is causing the scheduler to crash. If you are using the Astro CLI, run `astro dev logs -s` and then try restarting.
 
-If DAGs don't appear in the Airflow UI when working from an Astronomer Airflow Deployment, there are a few additional things you can check:
+    ![No Scheduler](/img/guides/scheduler_not_running_2.png)
 
-- Ensure your Dockerfile Runtime and Astronomer Certified version matches the Airflow version of your Deployment. A mismatch can cause DAGs not to appear after deployment.
-- For Astronomer Certified images, ensure that you are using the `onbuild` image. For example, `FROM quay.io/astronomer/ap-airflow:2.2.2-buster-onbuild`. Images without `onbuild` will not bundle files in the `dags/` folder when deployed.
-- Ensure that the permissions on your local files aren't too restrictive. See [
-DAGs aren’t showing up in my Astronomer deployment, but I see them locally](https://forum.astronomer.io/t/dags-arent-showing-up-in-my-astronomer-deployment-but-i-see-them-locally/146). 
+### DAGs are not running 
 
 ### Dependency conflicts
 
