@@ -77,6 +77,26 @@ At the code level ensure that:
 - Each DAG contains either the word `airflow` or `dag` (the scheduler will only parse files fulfilling this condition).
 - Each DAG defined with the `@dag` decorator is called. See also [Introduction to Airflow decorators](airflow-decorators.md).
 
+### Import Errors due to dependency conflicts
+
+A frequent cause of DAG import errors is not having the necessary packages installed in your Airflow environment. For example additional [provider packages](https://registry.astronomer.io/providers) from which you are using operators or hooks or packages used in Airflow tasks.
+
+Install OS level packages by adding their name to the `packages.txt` file. Python packages which are needed by Airflow tasks can be installed by adding them to the `requirements.txt` file. 
+
+To prevent compatibility issues when new packages are released it is best practice to pin the version you want to work with like this: `astronomer-providers[all]==1.14.0`. If no version is pinned Airflow will always use the latest version available.
+
+If you are using the Astro CLI packages will be installed in the scheduler container. You can confirm that a package is installed correctly by running:
+
+```
+astro dev bash --scheduler "pip freeze | grep <package-name>"
+```
+
+If you need conflicting package versions or a different Python version for different Airflow tasks you have a variety of options:
+
+- [KubernetesPodOperator](kubepod-operator.md): to run a task in a separate Kubernetes Pod.
+- [ExternalPythonOperator](external-python-operator): to run a task in a predefined virtual environment.
+- [PythonVirtualEnvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator): to run a task in a temporary virtual environment. 
+
 ### DAGs are not running correctly
 
 If your DAGs are either not running or running different than you intended consider checking the following common causes.
@@ -90,15 +110,7 @@ using `astro dev logs -s`.
 
 If your DAG is running but not at the schedule you intended take a look at the [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) guide.
 
-### Dependency conflicts
 
-A frequent cause of DAG import errors is not having supporting packages installed in your Airflow environment. For example, [provider packages](https://registry.astronomer.io/providers?page=1) that your DAGs use for hooks and operators must be installed separately.
-
-How you install supporting Python or OS packages is determined by your Airflow setup. If you are working with an [Astronomer project](https://docs.astronomer.io/astro/create-project), you can add Python and OS packages to your `requirements.txt` and `packages.txt` files respectively, and they will be automatically installed when your Docker image builds when you deploy or start a project locally.
-
-One thing to watch for, especially with Python packages, is dependency conflicts. If you are running Airflow using Docker, these conflicts can cause errors when you build your image. With the Astro CLI, errors and warnings are printed in your terminal when you run `astro dev start`, and you might see import errors for your DAGs in the Airflow UI when packages fail to install. In general, all packages you install should be available in your scheduler pod. To confirm you packages were installed successfully, see [Confirm your package was installed](https://docs.astronomer.io/astro/develop-project#confirm-your-package-was-installed).
-
-If you're unable to resolve package conflicts, add your DAGs to multiple projects that are run on separate Airflow deployments so that DAGs requiring conflicting packages are not in the same environment. For example, you might have a set of DAGs that require package X that run on Airflow Deployment A, and another set of DAGs that require package Y (which conflicts with package X) that run on Airflow Deployment B. Alternatively, you can use the [Kubernetes Pod Operator](https://registry.astronomer.io/providers/kubernetes/modules/kubernetespodoperator) to isolate package dependencies to a specific task and avoid conflicts in your Airflow environment.
 
 ## Tasks aren't running
 
