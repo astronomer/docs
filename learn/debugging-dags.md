@@ -14,7 +14,7 @@ This guide was written for Airflow 2+, if you are running pre-2.0 Airflow we hig
 To get the most out of this guide, you should have an understanding of:
 
 - Basic Airflow concepts. See [Get started with Airflow tutorial](get-started-with-airflow.md).
-- Basic knowledge of Airflow DAGs. See [Introduction to Airflow DAGs](dags.md)
+- Basic knowledge of Airflow DAGs. See [Introduction to Airflow DAGs](dags.md).
 
 ## General Airflow debugging approach
 
@@ -44,13 +44,13 @@ To first get started we recommend using the free and open-source Astro CLI, whic
 
 :::info
 
-To troubleshoot infrastructure issues when running Airflow in other forms like on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or managed services please refer to the relevant documentation.
+To troubleshoot infrastructure issues when running Airflow in other forms like on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or on managed services please refer to the relevant documentation and customer support.
 
 :::
 
 ## Common DAG issues
 
-In this section we will go over common issues related to DAGs you might encounter when developping locally.
+This section covers common issues related to DAGs you might encounter when developing locally.
 
 ### DAGs don't appear in the Airflow UI
 
@@ -60,22 +60,28 @@ If a DAG isn't appearing in the Airflow UI, it's typically because Airflow is un
 
 This error message should help you troubleshoot and resolve the issue. In the example above a task is missing the mandatory `task_id` parameter.
 
+:::tip
+
+You can fetch import errors by running `astro dev run dags list-import-errors`.
+
+:::
+
 If you don't see an import error message, here are some debugging steps you can try:
 
 - Make sure your DAG file is located in the `dags` folder.
 - Airflow scans the `dags` folder for new DAGs every [`dag_dir_list_interval`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval), which defaults to 5 minutes but can be modified. You might have to wait until this interval has passed before a new DAG appears in the Airflow UI or restart your Airflow environment. 
 - Ensure that you have permission to see the DAGs, and that the permissions on the DAG file are correct.
-- Run `airflow dags list` with the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/usage-cli.html) to make sure that Airflow has registered the DAG in the metastore. If the DAG appears in the list, try restarting the webserver.
+- Run `astro dev run dags list` with the to make sure that Airflow has registered the DAG in the metadata database. If the DAG appears in the list but not in the UI, try restarting the webserver.
 - Try restarting the scheduler with `astro dev restart`.
 - If you see an error similar to the following image indicating that the scheduler is not running, check the scheduler logs to see if something in the DAG file is causing the scheduler to crash. If you are using the Astro CLI, run `astro dev logs -s` and then try restarting.
 
     ![No Scheduler](/img/guides/scheduler_not_running_2.png)
 
-At the code level ensure that:
+At the code level ensure that each DAG:
 
-- Each DAG has a unique `dag_id`.
-- Each DAG contains either the word `airflow` or `dag` (the scheduler will only parse files fulfilling this condition).
-- Each DAG defined with the `@dag` decorator is called. See also [Introduction to Airflow decorators](airflow-decorators.md).
+- Has a unique `dag_id`.
+- Contains either the word `airflow` or `dag` (the scheduler will only parse files fulfilling this condition).
+- Defined with the `@dag` decorator is called. See also [Introduction to Airflow decorators](airflow-decorators.md).
 
 ### Import Errors due to dependency conflicts
 
@@ -85,7 +91,7 @@ Install OS level packages by adding their name to the `packages.txt` file. Pytho
 
 To prevent compatibility issues when new packages are released it is best practice to pin the version you want to work with like this: `astronomer-providers[all]==1.14.0`. If no version is pinned Airflow will always use the latest version available.
 
-If you are using the Astro CLI packages will be installed in the scheduler container. You can confirm that a package is installed correctly by running:
+If you are using the Astro CLI, packages will be installed in the scheduler container. You can confirm that a package is installed correctly by running:
 
 ```
 astro dev bash --scheduler "pip freeze | grep <package-name>"
@@ -93,62 +99,103 @@ astro dev bash --scheduler "pip freeze | grep <package-name>"
 
 If you need conflicting package versions or a different Python version for different Airflow tasks you have a variety of options:
 
-- [KubernetesPodOperator](kubepod-operator.md): to run a task in a separate Kubernetes Pod.
-- [ExternalPythonOperator](external-python-operator): to run a task in a predefined virtual environment.
-- [PythonVirtualEnvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator): to run a task in a temporary virtual environment. 
+- [KubernetesPodOperator](kubepod-operator.md): runs a task in a separate Kubernetes Pod.
+- [ExternalPythonOperator](external-python-operator): runs a task in a predefined virtual environment.
+- [PythonVirtualEnvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator): runs a task in a temporary virtual environment. 
 
 ### DAGs are not running correctly
 
 If your DAGs are either not running or running different than you intended consider checking the following common causes.
 
 - DAGs need to be unpaused in order to run according to their schedule. You can unpause a DAG by clicking the toggle on the lefthand side of the Airflow UI or via the [Airflow CLI](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#unpause).
+
+    ![Paused DAG](/img/guides/paused_dag_2.png)
+
+    DAGs are paused by default as shown in the screenshot, you can change this behavior by setting [`dags_are_paused_at_creation=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) in your Airflow config. If you do this, be aware of the `catchup` parameter in your DAGs.
+
+    In Airflow 2.2 and later, paused DAGs are unpaused automatically when you manually trigger them.
+
 - Double check that each DAG has a unique `dag_id`. If two DAGs with the same id are present in one Airflow instance the scheduler will pick one at random every 30 seconds to display.
 - Make sure your DAG has a `start_date` in the past.
 - Test the DAG using `astro dev dags test <dag_id>`.
 - If no DAGs are running, check the state of your scheduler 
 using `astro dev logs -s`. 
+- If many runs of your DAG are being scheduled after you unpause it, you most likely need to set the DAG parameter `catchup=False`.
 
-If your DAG is running but not at the schedule you intended take a look at the [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) guide.
+If your DAG is running but not at the schedule you intended take a look at the [DAG scheduling and timetables in Airflow](scheduling-in-airflow.md) guide. If you are using a custom timetable, ensure that the data interval for your DAG run does not precede the DAG start date.
 
+## Common Task issues
 
+This section covers common issues related to tasks within DAGs you might encounter when developing locally. If a whole DAG is not running, please refer to the [DAGs are not running correctly](#dags-are-not-running-correctly) section above.
 
-## Tasks aren't running
+### Tasks are not running correctly
 
-Your DAG is visible in the Airflow UI, but your tasks don't run when you trigger the DAG. This is a common issue and the cause can be very simple or complex. The following are some debugging steps you can try:
+Your DAG is running at its intended schedule but one of more of your tasks are not. 
 
-- Make sure your DAG is unpaused. If your DAG is paused when you trigger it, the tasks will not run. 
-
-    ![Paused DAG](/img/guides/paused_dag.png)
-
-    DAGs are paused by default, but you can change this behavior by setting `dags_are_paused_at_creation=False` in your Airflow config. If you do this, be aware of the `catchup` parameter in your DAGs.
-
-    In Airflow 2.2 and later, paused DAGs are unpaused automatically when you manually trigger them.
-
-- Ensure your DAG has a start date that is in the past. If your start date is in the future, triggering the DAG results in a successful DAG run even though no tasks ran.
-- A DAG run is automatically triggered when you unpause the DAG if the start date and end of the data interval are both in the past, and `catchup=True`. For more details on data intervals and DAG scheduling, see [Scheduling and Timetables in Airflow](scheduling-in-airflow.md).
-- If you are using a [custom timetable](scheduling-in-airflow.md), ensure that the data interval for your DAG run does not precede the DAG start date.
+- Double check your DAGs `start_date` is in the past. A future `start_date` will result in a successful DAG run even though no tasks ran.
 - If your tasks stay in a `scheduled` or `queued` state, ensure your scheduler is running properly. If needed, restart the scheduler or increase scheduler resources in your Airflow infrastructure.
 - If you added tasks to an existing DAG that has `depends_on_past=True`, those newly added tasks won't run until their state is set for prior task runs.
+- When running many instances of a task or DAG be mindful of scaling parameters and configurations. Airflow has default settings that limit the amount of concurrently running DAGs and tasks. See [Scaling Airflow to optimize performance](airflow-scaling-workers.md) to learn more.
+- If you are using task decorators and your tasks are not showing up in the Graph and Grid view make sure you are calling your tasks. See also [Introduction to Airflow decorators](airflow-decorators.md).
+- Double check your task dependencies and trigger rules. See also [Manage DAG and task dependencies in Airflow](managing-dependencies.md). Consider recreating your DAG structure with [EmptyOperators](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/operators/empty/index.html).
+- If you are using the CeleryExecutor and tasks get stuck in the `queued` state consider turning on [`stalled_task_timeout`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#stalled-task-timeout).
 
-## Tasks have a failure status
+### Tasks are failing 
 
-To view task run failure information, go to the **Tree View** or the **Graph View** in the Airflow UI. Failed task runs appear as red squares.
+There are many possible reasons for tasks to end in a failed state. 
 
-![Tree View Task Failure](/img/guides/tree_view_task_failure.png)
+On a high level most of task failure issues fall into one of 3 categories:
 
-Task logs are your best resource to determine the cause of failures. To access the logs, click the failed task in the **Tree View** or the **Graph View** and click the **Log**. 
+- Issues with operator parameter inputs.
+- Issues within the operator.
+- Issues in an external system.
 
-![Get Logs](/img/guides/access_logs.png)
+Failed tasks appear as red squares in the Grid view, where you can also directly access task logs.
+
+![Grid View Task failure](/img/guides/grid_view_task_failure.png)
+
+Task logs can also be accessed from the Graph view and have plenty of configuration options. Learn more in the [Airflow Logging](logging.md) guide.
+
+![Get Logs](/img/guides/access_logs_grid_view.png)
 
 The task logs provide information about the error that caused the failure. 
 
-![Error Log](/img/guides/error_log.png)
+![Error Log](/img/guides/error_log_2.png)
 
 To help identify and resolve task failures, you can set up error notifications. See [Error Notifications in Airflow](error-notifications-in-airflow.md).
 
 Task failures in newly developed DAGs with error messages such as `Task exited with return code Negsignal.SIGKILL` or containing a `-9` error code are often caused by a lack of memory. Increase the resources for your scheduler, webserver, or pod, depending on whether you're running the Local, Celery, or Kubernetes executors respectively.
 
-## Logs aren't appearing
+:::info
+
+After resolving your issue you may want to rerun your DAGs or tasks, see [Rerunning DAGs](rerunning-dags.md). 
+
+:::
+
+### Issues with dynamically mapped tasks
+
+[Dynamic task mapping](dynamic-tasks.md) is a powerful feature that was introduced in Airflow 2.3 to allow you to dynamically adjust the number of tasks based on changing input parameters at runtime. Starting with Airflow 2.5.0 you can even dynamically map over task groups.
+
+Common reasons for errors when dealing with dynamically mapped tasks are:
+
+- Make sure you are providing a keyword argument to the `.expand()` function. 
+- When using `.expand_kwargs()` provide the mapped parameters in the form of a `List(Dict)`.
+- Attempting to map over an empty list will cause the mapped task to be skipped.
+- The limit for how many mapped task instances can be created of a task depends on the Airflow core config [`max_map_length`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#max-map-length) and is 1024 by default. 
+- The number of mapped task instances of a specific task that can run in parallel across all runs of a given DAG depend on the task level parameter `max_active_tis_per_dag`.  
+- Not all parameters are mappeable. If a parameter does not support mapping you will receive an Import Error like in the screenshot below.
+
+    ![Unmappeable Error](/img/guides/error_unmappeable.png)
+
+When creating complex patterns with dynamically mapped tasks we recommend to first create your DAG structure using EmptyOperators and decorated Python operators. Once the structure works as intended you can start adding your tasks. Refer to the [Create dynamic Airflow tasks](dynamic-tasks.md) guide for code examples.
+
+:::tip
+
+It is very common that the output of an upstream operator is in a slightly different format than what you need to map over. Use [`.map()`](https://docs.astronomer.io/learn/dynamic-tasks#transform-outputs-with-map) to transform elements in a list using a Python function. 
+
+:::
+
+## Missing Logs
 
 When you check your task logs to debug a failure, you may not see any logs. On the log page in the Airflow UI, you may see a spinning wheel, or you may just see a blank file. 
 
@@ -159,7 +206,7 @@ Generally, logs fail to appear when a process dies in your scheduler or worker a
 - Increase the resources available to your workers (if using the Celery executor) or scheduler (if using the local executor).
 - If you're using the Kubernetes executor and a task fails very quickly (in less than 15 seconds), the pod running the task spins down before the webserver has a chance to collect the logs from the pod. If possible, try building in some wait time to your task depending on which operator you're using. If that isn't possible, try to diagnose what could be causing a near-immediate failure in your task. This is often related to either lack of resources or an error in the task configuration.
 - Increase the CPU or memory for the task.
-- Ensure that your logs are retained until you need to access them. The default log retention period on Astronomer is 15 days, so any logs outside of the retention period are not available.
+- Ensure that your logs are retained until you need to access them. The default log retention period on Astronomer is 15 days, so any logs outside of the retention period are not available. 
 - Check your scheduler and webserver logs for any errors that might indicate why your task logs aren't appearing.
 
 ## Troubleshooting connections
@@ -170,19 +217,40 @@ While the specific error associated with a poorly defined connection can vary wi
 
 The following are some debugging steps you can try:
 
-- Review [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html) to learn how connections work.
-- Change the `default` connection to use your connection details or define a new connection with a different name and pass that to the hook or operator.
-- Upgrade to Airflow 2.2 or later to use the test connections feature in the Airflow UI or API.
+- Review the [Manage connections in Apache Airflow](connections.md) guide to learn how connections work.
+- Make sure you have the necessary provider packages installed in order to be able to use a specific connection type.
+- Change the `default` connection to use your connection details or define a new connection with a different name and pass the new name to the hook or operator.
+- Define connections using Airflow environment variables instead of adding them in the Airflow UI. Make sure you're not defining the same connection in multiple places. If you do, the environment variable takes precedence.
+- Test if your credentials work when used in a direct API call to the external tool.
+- Use the test connection feature that many connection types have available.
 
     ![Test Connections](/img/guides/test_connections.png)
 
-- Every hook and operator has its own way of using a connection, and it can be difficult determining what parameters are required. Go to the [Astronomer Registry](https://registry.astronomer.io/) to determine what connections are required for hooks and operators.
-- Define connections using Airflow environment variables instead of adding them in the Airflow UI. Make sure you're not defining the same connection in multiple places. If you do, the environment variable takes precedence.
+To find information about what parameters are required for a specific connection:
 
-## Recover from failures
+1. Use the Docs tab of your provider in the Astronomer Registry to access the Apache Airflow documentation for the provider. Most commonly used providers will have documentation on each of their associated connection types. For example, you can find information on how to set up different connections to Azure in the Azure provider docs.
+2. Check the documentation of the external tool you are connecting to and see if it offers guidance on how to authenticate.
+3. Refer to the source code of the hook that is being used by your operator.
 
-If you've made any changes to your code, make sure to redeploy and use the code view in the Airflow UI to make sure that your changes have been captured by Airflow.
+## I need more help
 
-To rerun your DAG or a specific task after you've made changes, see [Rerunning Tasks](rerunning-dags.md#rerun-tasks). 
+The information provided here should help you resolve the most common issues. If your issue was not covered in this guide and you are looking for more assistance we recommend the following avenues:
 
-The information provided here should help you resolve the most common issues. For help with more complex issues, consider joining the [Apache Airflow Slack](https://airflow.apache.org/community/) or [contact Astronomer support](https://www.astronomer.io/get-astronomer/).
+- Post your question to [Stackoverflow](https://stackoverflow.com/), tagged with `airflow` and other relevant tools you are using. Using Stackoverflow is ideal when you are unsure which tool is causing the error, since experts for different tools will be able to see your question.
+- Join the Apache Airflow Slack and open a thread in `#newbie-questions` or `#troubleshooting`. The Airflow slack is the best place to get answers to more complex Airflow specific questions. 
+- If you found a bug in Airflow or one of its core providers, please open an issue in the [Airflow GitHub repository](https://github.com/apache/airflow/issues). For bugs in Astronomer open source tools please open an issue in the relevant [Astronomer repository](https://github.com/astronomer).
+
+To help the helpers and get more tailored answers, please include the following information in your question or issue:
+
+- The way you are running Airflow (Astro CLI, standalone, Docker, managed services).
+- Your Airflow version and the version of relevant providers.
+- The full error with the error trace if applicable. 
+- The full code of the DAG causing the error if applicable.
+- What you are trying to accomplish in as much detail as possible.
+- If something has worked before and stopped working: what has recently changed?
+
+::: info
+
+Found an error in one of our guides, tutorials or docs? Please tell us via an issue in the [Astronomer docs repository](https://github.com/astronomer/docs/issues). :)
+
+:::
