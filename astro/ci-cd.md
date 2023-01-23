@@ -772,11 +772,11 @@ Use the following template to implement DAG-only deploys with Jenkins.
 2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
     <pre><code parentName="pre">pipeline {
-    agent any
-      stages {
-        stage('Dag Only Deploy to Astronomer') {
-          when {
-           expression {
+       agent any
+         stages {
+          stage('Dag Only Deploy to Astronomer') {
+            when {
+            expression {
              return env.GIT_BRANCH == "origin/main"
            }
           }
@@ -795,14 +795,14 @@ Use the following template to implement DAG-only deploys with Jenkins.
               '''
           }
         }
+        }
+         post {
+           always {
+           cleanWs()
       }
-    post {
-      always {
-        cleanWs()
-      }
-    }
-  }</code></pre>
-  
+     }
+     }</code></pre>
+
 
 ### AWS CodeBuild
 
