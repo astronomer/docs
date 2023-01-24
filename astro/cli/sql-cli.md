@@ -15,7 +15,12 @@ Use Astro CLI SQL commands to run SQL workflows without writing Python code or s
 
 ## Prerequisites 
 
-- [Astro CLI](install-cli.md) version 1.7 or later.
+- The latest prerelease of the [Astro CLI](install-cli.md). To install the prerelease, run:
+
+   ```sh
+   sudo bash < <(curl -sSL https://install.astronomer.io) -s v1.10.0
+   ```
+
 - [Docker Desktop](https://www.docker.com/).
 - One of the following databases, hosted either locally or on an external service:
   
@@ -240,7 +245,7 @@ To run a query against data hosted outside of your project, you create a `YAML` 
     LIMIT 5;
     ```
 
-    - Reference the table name directly in your queries. For example: 
+    - Reference the table name directly in your queries. When you run your workflow, the CLI automatically uses the configured data source in your `YAML` file for all queries. This option does not work if you have multiple configured data sources in your workflow. For example: 
 
     ```sql
     ---
@@ -250,8 +255,6 @@ To run a query against data hosted outside of your project, you create a `YAML` 
     FROM <your-input-table>
     LIMIT 5;
     ```
-    
-    When you run your workflow, the CLI automatically uses the configured data source in your `YAML` file for all queries. This option does not work if you have multiple configured data sources in your workflow.
 
 ## Run a SQL workflow
 
