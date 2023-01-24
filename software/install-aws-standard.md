@@ -21,6 +21,9 @@ To install Astronomer on EKS, you'll need access to the following tools and perm
 * Permission to create and modify resources on AWS.
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
 * An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
+* Starting from Kubernetes version 1.23, the Amazon EBS CSI driver is required to manage the lifecycle of Amazon EBS volumes for persistent volumes.
+
+> **Note:** `eksctl` is an useful tool to create and manage clusters on EKS. Learn more [here](https://eksctl.io/)
 
 ## Step 1: Choose a base domain
 
@@ -48,6 +51,7 @@ As you follow the guide linked above, keep in mind:
 * Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, see the Astronomer [Version Compatibility Reference](version-compatibility-reference.md).
 * Astronomer recommends running the EKS control plane in a single security group. The worker nodes you spin up should have the same setup as the EKS control plane.
 * All security and access settings needed for your worker nodes should be configured in your Cloud Formation template.
+* Astronomer recommends configuring [Autoscaling](https://docs.aws.amazon.com/eks/latest/userguide/autoscaling.html) to automatically scale your resources up or down to meet changing demands.
 * If you create an EKS cluster from the UI, `kubectl` access will be limited to the user who created the cluster by default.
     * To give more users `kubectl` access, you'll have to do so manually.
     * [This post](https://web.archive.org/web/20190323035848/http://marcinkaszynski.com/2018/07/12/eks-auth.html) goes through how IAM plays with EKS.
@@ -116,25 +120,79 @@ Depending on your organization, you may receive either a globally trusted certif
 
 ### Option 3: Use the AWS Certificate Manager as the certificate provider
 
-1. Run the following command to generate a private and public RSA key pair:
+> **Important Note**:
+> In contrast with the other two options described above, AWS Certificate Manager does not issue certificate files and private keys. 
+> Instead, it relies on annotations attached to Kubernetes resources.
+> 
+> Moreover, AWS Certificate Manager will encrypt traffic up to the Load Balancer, but will not encrypt the internal traffic inside the cluster.
+> 
+> If there is no strict requirement for an officially issued certificate for internal traffic encryption, you may use a self-signed certificate.
+> Otherwise, you may use [AWS Certificate Manager Private CA](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/) or [Let's Encrypt](renew-tls-cert.md#automatically-renew-tls-certificates-using-lets-encrypt) to generate a certificate for internal traffic encryption.
 
-    ```sh
-    $ openssl genrsa -out private.pem 4096  
-    $ openssl rsa -in private.pem -outform PEM -pubout -out public.pem  
+
+1. Run the following commands to generate a self-signed certificate:
+    To create a self-signed SSL certificate, we need a private key and certificating signing request. 
+    
+    > ⚠️When the `openssl req` command asks for a "challenge password", press return to leave the password empty. Kubernetes does not natively support challenge passwords for certificates stored as Secrets.
+    
+    Run the following set of commands, and answer the questions when prompted. The `Common Name` must match the DNS chosen for the site at Step 1 above, such as (for example) `*.astro.example.com`. 
+    
+    Create a private key. By default, a password must be provided. 
+    ```bash
+    openssl genrsa -aes256 -passout pass:gsahdg -out server.pass.key 4096
     ```
-2.  Open the `values.yaml` file and add this entry:
+   
+    Create a password-less second key based on the first key.
+    ```bash
+    openssl rsa -passin pass:gsahdg -in server.pass.key -out server.key
+    ```
+    
+    Remove the first key file. 
+    ```bash
+    rm server.pass.key
+    ```
+    
+    Create a Certificate Signing Request using the password-less private key.
+    ```bash
+    openssl req -new -key server.key -out server.csr
+    ```
+    
+    The self-signed SSL certificate is generated from the private key (`server.key`) and certificate signing request (`server.csr`) files.
+    
+    Make sure to add the appropriate `Subject Alternative Name` (SAN) in the extfile. 
+    SAN records must match the DNS entries for the base domain chosen at Step 1 above, such as (for example) `*.astro.example.com`.
+    
+    ```bash
+    openssl x509 -req -sha256 -days 365 -in server.csr \
+    -signkey server.key -out server.crt \
+    -extfile <(printf "subjectAltName=DNS:*.astro.example.com,DNS:astro.example.com")
+    ```
+    
+    Once the certificate is created, you can inspect its content with the following command:
+    
+    ```bash
+    openssl x509 -in  server.crt -text -noout
+    ```
+    
+    Make sure that the `X509v3 Subject Alternative Name` section of this report includes the base domain (`BASEDOMAIN.COM`) as well as the wildcard domain (`*.BASEDOMAIN.COM`).
+    If you are not using a wildcard domain, add SAN entries for each subdomain listed in Step 2 above.
+
+2.  Note the following configuration block for when you configure your Helm chart in Step 8. 
+    Update the `ACM Certificate ARN` field with the ARN of your ACM certificate.
 
     ```yaml
     nginx:
       loadBalancerIP: ~
-      privateLoadBalancer: true  # this does affect aws-load-balancer-type: external ingressAnnotations:
+      privateLoadBalancer: true  # this does affect aws-load-balancer-type: external 
+      ingressAnnotations:
         service.beta.kubernetes.io/aws-load-balancer-type: external
         service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
         service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "\"true\""
         service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <ACM Certificate ARN>
         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: ssl
     ```
-#### Confirm certificate chain order
+
+### Confirm certificate chain order
 
 If your organization is using a private certificate authority, you'll need to confirm that your certificate chain is ordered correctly. To determine your certificate chain order, run the following command using the `openssl` CLI:
 
@@ -152,10 +210,16 @@ If the certificate order is correct, proceed to step 5.
 
 ## Step 5: Create a Kubernetes TLS Secret
 
-If you received a globally trusted certificate, such as one generated by Let's Encrypt, run the following command and then proceed to Step 6:
+If you received a globally trusted certificate or if you created a self-signed certificate, create a Kubernetes TLS secret using the following command and then proceed to Step 6:
 
 ```sh
 kubectl create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath> -n astronomer
+```
+
+If you created a certificate using Let's Encrypt, the `astronomer-tls` secret is already present in your Kubernetes cluster.
+You can confirm with the following command:
+```bash
+kubectl describe secret astronomer-tls --namespace astronomer
 ```
 
 If you received a certificate from a private CA, follow these steps instead:
@@ -188,13 +252,13 @@ smtps://USERNAME:PASSWORD@HOST/?pool=true
 
 The following table contains examples of what the URI will look like for some of the most popular SMTP services:
 
-| Provider          | Example SMTP URL                                                                               |
-| ----------------- | ---------------------------------------------------------------------------------------------- |
+| Provider          | Example SMTP URL                                                                                 |
+|-------------------|--------------------------------------------------------------------------------------------------|
 | AWS SES           | `smtp://AWS_SMTP_Username:AWS_SMTP_Password@email-smtp.us-east-1.amazonaws.com/?requireTLS=true` |
 | SendGrid          | `smtps://apikey:SG.sometoken@smtp.sendgrid.net:465/?pool=true`                                   |
-| Mailgun           | `smtps://xyz%40example.com:password@smtp.mailgun.org/?pool=true`                               |
-| Office365         | `smtp://xyz%40example.com:password@smtp.office365.com:587/?requireTLS=true`                   |
-| Custom SMTP-relay | `smtp://smtp-relay.example.com:25/?ignoreTLS=true`                                      |
+| Mailgun           | `smtps://xyz%40example.com:password@smtp.mailgun.org/?pool=true`                                 |
+| Office365         | `smtp://xyz%40example.com:password@smtp.office365.com:587/?requireTLS=true`                      |
+| Custom SMTP-relay | `smtp://smtp-relay.example.com:25/?ignoreTLS=true`                                               |
 
 If your SMTP provider is not listed, refer to the provider's documentation for information on creating an SMTP URI.
 
@@ -281,11 +345,13 @@ global:
 nginx:
   # IP address the nginx ingress should bind to
   loadBalancerIP: ~
-  #  Set to 'true' when deploying to a private EKS cluster
+  #  Set to 'true' when deploying to a private EKS cluster.
   privateLoadBalancer: false
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations: {service.beta.kubernetes.io/aws-load-balancer-type: nlb} # Change to 'elb' if your node group is private and doesn't utilize a NAT gateway
-
+  # If all subnets are private, auto-discovery may fail.
+  # You must enter the subnet IDs manually in the annotation below. 
+  # service.beta.kubernetes.io/aws-load-balancer-subnets: subnet-id-1,subnet-id-2
 astronomer:
   houston:
     config:
@@ -318,6 +384,8 @@ These are the minimum values you need to configure for installing Astronomer. Fo
 If you are installing Astronomer in an airgapped environment without access to the public internet, complete all of the setup in [Install in an Airgapped Environment](install-airgapped.md) and then skip directly to Step 10 in this document.
 
 :::
+
+
 
 ## Step 9: Install Astronomer
 
@@ -456,6 +524,8 @@ astronomer-registry                  ClusterIP      172.20.100.102   <none>     
 
 You will need to create a new CNAME record through your DNS provider using the ELB CNAME listed above. You can create a single wildcard CNAME record such as `*.astro.mydomain.com`, or alternatively create individual CNAME records for the following routes:
 
+[Follow the steps here if you are using Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
+
 ```sh
 app.astro.mydomain.com
 deployments.astro.mydomain.com
@@ -520,8 +590,8 @@ If you have Airflow pods in an `ImagePullBackoff` state, check the pod descripti
 ## What's next
 
 To help you make the most of Astronomer Software, check out the following additional resources:
-
-* [Renew TLS Certificates on Astronomer Software](renew-tls-cert.md/)
+* [Login as the root user](manage-root-user.md)
+* [Renew TLS Certificates on Astronomer Software](renew-tls-cert.md)
 * [Integrating an Auth System](integrate-auth-system.md)
 * [Configuring Platform Resources](configure-platform-resources.md)
 * [Managing Users on Astronomer Software](manage-platform-users.md)
