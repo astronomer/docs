@@ -49,7 +49,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | `eastasia`         | East Asia          | ✔️                            |                     |
 | `eastus`           | East US            | ✔️                            |                     |
 | `eastus2`          | East US 2          | ✔️                            | ✔️ (Private Preview) |
-| `francecentral`    | France Central     | ✔️                            | ✔️ (Private Preview) |
+| `francecentral`    | France Central     | ✔️                            |                     |
 | `japaneast`        | Japan East         | ✔️                            |                     |
 | `koreacentral`     | Korea Central      | ✔️                            |                     |
 | `northeurope`      | North Europe       | ✔️                            | ✔️                   |
