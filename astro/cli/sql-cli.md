@@ -319,10 +319,13 @@ If you configured databases in your SQL CLI project, you must manually reconfigu
 
 :::
 
-
 ### Deploy a SQL workflow to Astro
 
-Running SQL workflows on Astro lets you regularly test and schedule your queries as Airflow DAGs.
+Running SQL workflows on Astro lets you regularly test and schedule your queries as Airflow DAGs. When you deploy your workflow to Astro, the SQL CLI:
+
+- Generates a DAG based on your workflow.
+- Builds a Docker image for an Astro project that includes your DAG.
+- Deploys the image to a Deployment on Astro.
 
 1. Run the following command to create an Astro project at the root of your SQL project:
 
@@ -336,23 +339,21 @@ Running SQL workflows on Astro lets you regularly test and schedule your queries
     astro login
     ```
 
-3. Create the `workflow.yml` inside the desired workflow folder including scheduling details.
-
-Example:
+3. Optional. In your workflow folder, create a file named `workflow.yml` that defines when your workflow should run. You can also use this file to define metadata for the generated DAG. For example, the following configuration runs a SQL workflow hourly and will backfill all workflow runs until December 2021. 
 
     ```yaml
     workflow:
       catchup: true
       description: "Sample workflow used to load data from a AWS S3 file into a Snowflake database"
       schedule: "@hourly"
-      start_date: "2015-12-1"
+      start_date: "2021-12-1"
       is_paused_upon_creation: false
       tags:
         - AWS
         - S3
         - Snowflake
     ```
-
+    
     Alternatively, set your schedule based on when another DAG in your Deployment updates a [dataset](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Specify the dataset URI that your workflow should listen to as follows:
 
     ```yaml
@@ -365,6 +366,8 @@ Example:
     ```
     
     Your SQL workflow triggers whenever the provided dataset is updated by any DAG in your Deployment. For more information about datasets, see [Datasets and data-aware scheduling in Airflow](https://docs.astronomer.io/learn/airflow-datasets).
+    
+    If you don't create a `workflow.yml` file, the generated DAG runs your workflow daily starting one day before you deploy the workflow to Astro. 
 
 4. Run the following command to deploy a SQL workflow to Astro:
 
