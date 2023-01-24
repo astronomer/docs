@@ -339,7 +339,7 @@ Running SQL workflows on Astro lets you regularly test and schedule your queries
     astro login
     ```
 
-3. Optional. In your workflow folder, create a file named `workflow.yml` that defines when your workflow should run. You can also use this file to define metadata for the generated DAG. For example, the following configuration runs a SQL workflow hourly and will backfill all workflow runs until December 2021. 
+3. Optional. In your workflow folder, create a file named `workflow.yml` that defines when your workflow should run. You can also use this file to define metadata for the generated DAG. For example, the following configuration runs a SQL workflow hourly and backfills all workflow runs until December 2021. 
 
     ```yaml
     workflow:
