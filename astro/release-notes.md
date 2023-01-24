@@ -23,6 +23,17 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.9.0 ([Release notes](cli/release-notes.md))
 
+## January 24, 2023
+
+### Additional improvements
+
+- You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
+- Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
+
+### Bug fixes 
+
+- Fixed [CVE-2022-48195](https://avd.aquasec.com/nvd/2022/cve-2022-48195/)
+
 ## January 18, 2023
 
 ### Bug fixes
