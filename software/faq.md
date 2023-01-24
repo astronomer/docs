@@ -6,7 +6,7 @@ description: Commonly asked questions and answers for Astronomer Software.
 
 ## Networking
 
-### Does Astronomer Software require any ports/services to be configured in order to operate? Does it require us to provide an IP?
+### Do ports or services need to be configured when installing Astronomer Software? Do I need to provide an IP address?
 
 Yes. You must provide an IP for the NAT gateway to access the Astronomer and Airflow user interfaces, and also to interact with the platform with the astro-cli tool. Reviewing our Terraform scripts and installation guides are helpful to better understand this requirement.
 
@@ -35,7 +35,7 @@ Beyond that, the platform does not need to connect to outside domains for routin
 
 You can find a list of all components used by the platform in the [Astronomer Platform - Docker images](https://docs.google.com/spreadsheets/d/1jE8EA4YapKEghVvk0-4K_MdwoVe6-O7v4uCI03ke6yg/edit#gid=0) Google Sheet.
 
-## System-Level access requirements
+## System-level access requirements
 
 ### Does the platform need root access to the Kubernetes cluster?
 
@@ -54,11 +54,11 @@ No. Astronomer makes use of Kubernetes cluster-level features (including K8s RBA
 
 ### How can we restrict the application from getting full access?
 
-Astronomer defines the exact Roles or ClusterRoles that are need for the. The default mode requires a ClusterRole that has access to create namespaces and other objects for new Airflow deployments.
+Astronomer defines the required Roles or ClusterRoles. The default mode requires a ClusterRole that has access to create namespaces and other objects for new Airflow deployments.
 
-### Are there default settings we need to be aware of (including user names and passwords)?
+### What are the default usernames and passwords?
 
-When you install Astronomer Software, a root user with all permissions is automatically created. The root user's username is `root@<your-basedomain>`, and the password is stored as a Kubernetes secret on your installation. See [Manage the root user](manage-root-user.md). There are no other default users or passwords. 
+When you install Astronomer Software, the root user `root@<your-basedomain>` with all permissions is automatically created. The password is stored as a Kubernetes secret on your installation. See [Manage the root user](manage-root-user.md). There are no other default users or passwords. 
 
 ### Are there separate credentials or accesses that Astronomer provisions?
 
@@ -68,13 +68,13 @@ No. Review the [Astronomer Helm chart repo](https://github.com/astronomer/astron
 
 ### What scripts are used for deployment?
 
-The default method for installing and upgrading Astronomer is using the Astronomer Helm chart located at `https://helm.astronomer.io`. See the Astronomer Software installation guides ([AWS](install-aws-standard.md), [GCP](install-gcp-standard.md), and [Azure](install-azure-standard.md)) and [Upgrade Astronomer](upgrade-astronomer.md).
+The default method for installing and upgrading Astronomer Software is using the Astronomer Helm chart located at `https://helm.astronomer.io`. See the Astronomer Software installation guides ([AWS](install-aws-standard.md), [GCP](install-gcp-standard.md), and [Azure](install-azure-standard.md)) and [Upgrade Astronomer](upgrade-astronomer.md).
 
 ## Authentication
 
 ### How can we get multi-factor auth?
 
-Astronomer has a flexible [auth front end](integrate-auth-system.md) with pre-built integrations for Google Auth, Okta, Auth0, and others.
+Astronomer provides an [authentication front end](integrate-auth-system.md) with pre-built integrations for Google Auth, Okta, Auth0, and others.
 
 ### How can implement RBAC with this solution?
 
@@ -84,7 +84,7 @@ Astronomer has [built-in Airflow RBAC support](workspace-permissions.md).
 
 ### If the platform is scanned by a vulnerability scanner, virus scanners, will there be any ill effects that we need to be aware of?
 
-No. Astronomer continuously scans all code and Docker images with modern vulnerability assessment software. The only circumstance that could result in concerns would be if your software blocks critical pods from launching.
+No. Astronomer continuously scans all code and Docker images with vulnerability assessment software. Issues can occur when your software blocks critical pods from launching.
 
 ## Malware defenses
 
@@ -96,15 +96,15 @@ The Astronomer and Airflow UIs sanitize and verify inputs according to modern st
 
 ### Does Astronomer allow for encrypted sessions?
 
-Yes. TLS is utilized throughout, and is configured automatically with Astronomer setup scripts.
+Yes. The Transport Layer Security (TLS) encryption protocol is configured automatically with Astronomer setup scripts.
 
 ### Is there a session limitation?
 
-Yes. Sessions are terminated after 24 hours of inactivity for both the web UI and CLI by default.
+Yes. Sessions are terminated after 24 hours of inactivity for both Astronomer Software and CLI by default.
 
 ### How can we turn on SSL and use our own CA?
 
-Astronomer Software uses SSL throughout by default. During installation, a wildcard certificate for the base domain must be provided.
+Astronomer Software uses the Secure Sockets Layer (SSL) encryption protocol by default. During installation, a wildcard certificate for the base domain must be provided.
 
 ## External monitoring
 
@@ -126,7 +126,7 @@ The platform API and web UI are served over a single highly available AWS load b
 
 ### What level of auditing is natively available? What logs/audit artifacts are produced?
 
-Logs from each service that Astronomer utilizes are accessible to you through your cloud provider. Astronomer does not yet generate audit logs for the Astronomer platform itself.
+Logs from each Astronomer service are accessible to you through your cloud provider. Astronomer does not generate audit logs for the Astronomer platform.
 
 ### What kind of management is available for security logs?
 
@@ -140,8 +140,8 @@ Astronomer's Software offering has a robust logging structure sitting atop Airfl
 
 ### How are security updates handled on Astronomer? How are users notified of a critical update?
 
-You can upgrade your Airflow Deployments separately from platform upgrades. Astronomer recommends updating both your Deployment's Airflow versions and the platform so that you are always using a supported version. See [Astronomer Software and lifecycle policy](release-lifecycle-policy.md).
+You can upgrade your Airflow Deployments separately from your platform upgrades. Astronomer recommends updating your Deployment's Airflow versions and the platform frequently so that your organization is always using a supported version. See [Astronomer Software and lifecycle policy](release-lifecycle-policy.md).
 
 ### How does patching work for this setup?
 
-Kubernetes and node upgrades are generally managed by the customer. Platform version upgrades are performed with Helm and assisted by Astronomer support team if required. See [Upgrade Astronomer](upgrade-astronomer.md).
+Kubernetes and node upgrades are typically managed by your organization. Platform version upgrades are performed with Helm and with the assistance of Astronomer support when required. See [Upgrade Astronomer](upgrade-astronomer.md).
