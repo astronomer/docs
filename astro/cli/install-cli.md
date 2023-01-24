@@ -161,8 +161,8 @@ If you specify only a major version, this command installs the latest minor or p
     groupId= "upgrade-the-cli"
     values={[
         {label: 'Mac', value: 'mac'},
-        {label: 'Windows', value: 'windows'},
         {label: 'Windows with winget', value: 'windowswithwinget'},
+        {label: 'Windows (Manual)', value: 'windows'},
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="mac">
@@ -171,6 +171,18 @@ To upgrade the Astro CLI to the latest version, run the following command:
 
 ```sh
 brew install astro
+```
+
+</TabItem>
+
+<TabItem value="windowswithwinget">
+
+Starting with Astro CLI version 1.6, you can use the winget command line tool to upgrade the Astro CLI. If you're upgrading from Astro CLI version 1.5.1 or earlier to a later Astro CLI version, you'll need to follow the [alternate Windows upgrade process](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#upgrade-the-cli).
+
+To upgrade the Astro CLI to the latest version, open Windows PowerShell as an administrator and run the following command:
+
+```sh
+winget install -e --id Astronomer.Astro
 ```
 
 </TabItem>
@@ -188,18 +200,6 @@ brew install astro
 4. Add the filepath for the directory containing the new `astro.exe` as a PATH environment variable. For example, if `astro.exe` was stored in `C:\Users\username\astro.exe`, you would add `C:\Users\username` as your PATH environment variable. To learn more about configuring the PATH environment variable, see [Java documentation](https://www.java.com/en/download/help/path.html).
 
 5. Restart your machine.
-
-</TabItem>
-
-<TabItem value="windowswithwinget">
-
-Starting with Astro CLI version 1.6, you can use the winget command line tool to upgrade the Astro CLI. If you're upgrading from Astro CLI version 1.5.1 or earlier to a later Astro CLI version, you'll need to follow the [alternate Windows upgrade process](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#upgrade-the-cli).
-
-To upgrade the Astro CLI to the latest version, open Windows PowerShell as an administrator and run the following command:
-
-```sh
-winget install -e --id Astronomer.Astro
-```
 
 </TabItem>
 
@@ -222,8 +222,8 @@ curl -sSL install.astronomer.io | sudo bash -s
     groupId= "uninstall-the-cli"
     values={[
         {label: 'Mac', value: 'mac'},
-        {label: 'Windows', value: 'windows'},
         {label: 'Windows with winget', value: 'windowswithwinget'},
+        {label: 'Windows (Manual)', value: 'windows'},
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="mac">
@@ -236,15 +236,6 @@ brew uninstall astro
 
 </TabItem>
 
-<TabItem value="windows">
-
-To uninstall the Astro CLI on Windows:
-
-1. Delete the filepath for `astro.exe` from your Windows PATH environment variable.
-2. Delete `astro.exe`.
-
-</TabItem>
-
 <TabItem value="windowswithwinget">
 
 Starting with Astro CLI version 1.6, you can use the winget command line tool to uninstall the Astro CLI. To uninstall an older version of the Astro CLI, you'll need to follow the [alternate Windows uninstall process](https://docs.astronomer.io/astro/cli/install-cli?tab=windows#uninstall-the-cli).
@@ -254,6 +245,15 @@ To uninstall the Astro CLI, open Windows PowerShell as an administrator and run 
 ```sh
 winget uninstall -e --id Astronomer.Astro
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+To uninstall the Astro CLI on Windows:
+
+1. Delete the filepath for `astro.exe` from your Windows PATH environment variable.
+2. Delete `astro.exe`.
 
 </TabItem>
 
@@ -285,8 +285,8 @@ For more information about Astro CLI version 1.0.0, see [Astro CLI Release Notes
     groupId= "step-1-uninstall-astrocloud"
     values={[
         {label: 'Mac', value: 'mac'},
-        {label: 'Windows', value: 'windows'},
         {label: 'Windows with winget', value: 'windowswithwinget'},
+        {label: 'Windows (Manual)', value: 'windows'},
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="mac">
@@ -299,15 +299,6 @@ brew uninstall astronomer/cloud/astrocloud
 
 </TabItem>
 
-<TabItem value="windows">
-
-To uninstall `astrocloud` on Windows:
-
-1. Delete the filepath for `astrocloud.exe` from your Windows PATH environment variable.
-2. Delete `astrocloud.exe` from your machine.
-
-</TabItem>
-
 <TabItem value="windowswithwinget">
 
 Starting with Astro CLI version 1.6, you can use the winget command line tool to uninstall the Astro CLI.
@@ -317,6 +308,15 @@ To uninstall the Astro CLI, open Windows PowerShell as an administrator and run 
 ```sh
 winget uninstall -e --id Astronomer.Astro
 ```
+
+</TabItem>
+
+<TabItem value="windows">
+
+To uninstall `astrocloud` on Windows:
+
+1. Delete the filepath for `astrocloud.exe` from your Windows PATH environment variable.
+2. Delete `astrocloud.exe` from your machine.
 
 </TabItem>
 
