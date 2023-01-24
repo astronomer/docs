@@ -235,7 +235,7 @@ To find information about what parameters are required for a specific connection
 The information provided here should help you resolve the most common issues. If your issue was not covered in this guide and you are looking for more assistance we recommend the following avenues:
 
 - Post your question to [Stackoverflow](https://stackoverflow.com/), tagged with `airflow` and other relevant tools you are using. Using Stackoverflow is ideal when you are unsure which tool is causing the error, since experts for different tools will be able to see your question.
-- Join the Apache Airflow Slack and open a thread in `#newbie-questions` or `#troubleshooting`. The Airflow slack is the best place to get answers to more complex Airflow specific questions. 
+- Join the [Apache Airflow Slack](https://apache-airflow-slack.herokuapp.com/) and open a thread in `#newbie-questions` or `#troubleshooting`. The Airflow slack is the best place to get answers to more complex Airflow specific questions. 
 - If you found a bug in Airflow or one of its core providers, please open an issue in the [Airflow GitHub repository](https://github.com/apache/airflow/issues). For bugs in Astronomer open source tools please open an issue in the relevant [Astronomer repository](https://github.com/astronomer).
 
 To help the helpers and get more tailored answers, please include the following information in your question or issue:
@@ -247,7 +247,7 @@ To help the helpers and get more tailored answers, please include the following 
 - What you are trying to accomplish in as much detail as possible.
 - If something has worked before and stopped working: what has recently changed?
 
-::: info
+:::info
 
 Found an error in one of our guides, tutorials or docs? Please tell us via an issue in the [Astronomer docs repository](https://github.com/astronomer/docs/issues). :)
 
