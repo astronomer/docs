@@ -46,7 +46,7 @@ The rest of this guide describes how to create a service account and what your C
 
 :::info
 
-If you're using BuildKit with the Buildx plugin, you need to add the `-provenance=false` setting to your `config.yaml` file.
+If you're using BuildKit with the [Buildx plugin](https://github.com/docker/buildx), you need to add the `--provenance=false` flag to your `docker buildx build` commands.
 
 :::
 
