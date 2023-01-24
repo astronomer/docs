@@ -115,7 +115,7 @@ astro workspace service-account create --workspace-id=<your-workspace> --label=<
 #### Related documentation
 
 - [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Deploy to Astronomer via CI/CD](https://docs.astronomer.io/software/ci-cd)
+- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
 
 ### astro workspace service-account delete
 
@@ -136,7 +136,7 @@ astro workspace service-account delete <your-service-account-id>
 #### Related documentation
 
 - [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Deploy to Astronomer via CI/CD](ci-cd.md)
+- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
 
 ### astro workspace service-account get
 
@@ -155,7 +155,7 @@ Run `astro deployment service-account get <service-account-id> --workspace-id=<y
 #### Related documentation
 
 - [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Deploy to Astronomer via CI/CD](ci-cd.md)
+- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
 
 ### astro workspace switch
 
@@ -276,7 +276,7 @@ At least one flag must be specified.
 
 ### astro workspace user add
 
-Creates a new user in your current Workspace. If the user has already authenticated to Astronomer, they will automatically be granted access to the Workspace. If the user does not have an account on Astronomer, they will receive an invitation to the platform via email.
+Creates a new user in your current Workspace. If the user has already authenticated to Astronomer, they will automatically be granted access to the Workspace. If the user does not have an account on Astronomer, they will receive an email invitation to the platform.
 
 #### Usage
 

@@ -132,7 +132,7 @@ To create a new Deployment from an existing template file:
     astro deployment create --deployment-file <deployment-template-file-name>
     ```
 
-3. Optional. Confirm that your Deployment was successfuly created by running the following command in your current Workspace:
+3. Optional. Confirm that your Deployment was successfully created by running the following command in your current Workspace:
 
    ```bash
    astro deployment list
@@ -156,7 +156,7 @@ When you update a Deployment with a Deployment file, keep in mind that:
 
 - You can’t change the cluster or Workspace the Deployment runs on. To transfer a Deployment to a different Workspace, see [Transfer a Deployment](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
 - You can't change the Astro Runtime version of the Deployment. To upgrade Astro Runtime, you must update the Dockerfile in your Astro project. See [Upgrade Astro Runtime](upgrade-runtime.md).
-- Worker queues and environment variables are updated to match the corresponding sections in the Deployment file. Any existing worker queues or environemnt variables that are specified in the Cloud UI but not in the Deployment file are deleted.
+- Worker queues and environment variables are updated to match the corresponding sections in the Deployment file. Any existing worker queues or environment variables that are specified in the Cloud UI but not in the Deployment file are deleted.
 
 To update a Deployment using a Deployment file:
 

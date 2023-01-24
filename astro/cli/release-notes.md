@@ -420,7 +420,7 @@ Release date: April 14, 2022
 
 ### New command to create and update environment variables
 
-`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually via the Cloud UI.
+`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
 
 For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 
@@ -441,7 +441,7 @@ Release date: April 11, 2022
 ### Additional improvements
 
 - Improved the performance of `astro dev start`
-- When you successfully push code to a Deployment via `astro deploy`, the CLI now provides URLs for accessing the Deployment's Cloud UI and Airflow UI pages.
+- When you successfully push code to a Deployment with `astro deploy`, the CLI now provides URLs for accessing the Deployment's Cloud UI and Airflow UI pages.
 
 ## 1.3.3 (`astrocloud`)
 

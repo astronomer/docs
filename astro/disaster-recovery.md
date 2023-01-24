@@ -23,11 +23,11 @@ In the case of a full region outage, Astronomer can re-provision your Cluster(s)
 
 Astronomer will not be able to restore:
 
-- VPC Routes configured by customers via AWS console.
-- VPC Security Group rules configured by customers via AWS console.
+- VPC Routes configured by customers with the AWS console.
+- VPC Security Group rules configured by customers with the AWS console.
 - DAG history and task logs.
 - XComs.
-- Airflow configurations (Variables, Connections, Pools) configured via the Airflow UI. Any configurations set via your deployed Astro project image can still be recovered.
+- Airflow configurations (Variables, Connections, Pools) configured with the Airflow UI. Any configurations set with your deployed Astro project image can be recovered.
 
 Organization settings, Workspace settings, and user management configured in Astro's control plane will be unaffected by a region failure in the data plane.
 

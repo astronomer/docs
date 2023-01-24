@@ -31,7 +31,7 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Airflow 2.5.1
 
-Astro Runtime 7.2.0 includes same-day support for Airflow 2.5.1. Airflow 2.5.1 contains a number of bug fixes including:
+Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.1. Airflow 2.5.1 contains a number of bug fixes including:
 
 - Return list of tasks that will be queued ([28066](https://github.com/apache/airflow/pull/28066))
 - Fix masking of non-sensitive environment variables ([28802](https://github.com/apache/airflow/pull/28802))
@@ -46,11 +46,11 @@ To learn more about the Astro Python SDK, see [Astro Python SDK ReadTheDocs](htt
 
 ### Early access Airflow bug fixes
 
-In anticipation of Kubernetes executor support on Astro, Astro Runtime includes the following bug fixes from Airflow 2.5.2:
+In anticipation of adding support for the Kubernetes executor on Astro, Astro Runtime includes the following bug fixes from Airflow 2.5.2:
 
 - Be more selective when adopting pods with KubernetesExecutor ([28899](https://github.com/apache/airflow/pull/28899))
-- KubenetesExecutor sends state even when successful ([28871](https://github.com/apache/airflow/pull/28871))
-- Annotate KubernetesExecutor pods that we don't delete ([28844](https://github.com/apache/airflow/pull/28844))
+- KubernetesExecutor sends state even when successful ([28871](https://github.com/apache/airflow/pull/28871))
+- Annotate KubeExecutor pods that we don't delete ([28844](https://github.com/apache/airflow/pull/28844))
 
 ### Additional improvements
 

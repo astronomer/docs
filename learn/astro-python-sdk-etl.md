@@ -62,9 +62,9 @@ Using the Astro Python SDK requires configuring a few things in your Airflow pro
 
 For a guided experience to get started, see the [Astro Python SDK tutorial](astro-python-sdk.md).
 
-## Example
+## Before and after the Astro Python SDK
 
-The following DAG is a complete implementation of an ETL pipeline using the Astro Python SDK. In order, the DAG:
+To highlight how the Astro Python SDK results in simpler DAG code, we'll show a direct comparison of a DAG written with the SDK to one written with traditional operators. The following DAG is a complete implementation of an ETL pipeline using the Astro Python SDK. In order, the DAG:
 
 - Loads .csv files from Amazon S3 into two tables that contain data about the housing market. Tables are objects that contain all of the necessary functionality to pass database contexts between functions without reconfiguration.
 - Combines the two tables of home data using `aql.transform`.
@@ -148,38 +148,61 @@ example_s3_to_snowflake_etl_dag = example_s3_to_snowflake_etl()
 
 ![Astro Graph](/img/guides/astro_sdk_graph.png)
 
-This Astro SDK implementation is different from a standard TaskFlow implementation in the following ways:
+The following sections break down each step of this DAG and compare the Astro Python SDK implementation to one using traditional operators.
 
-- The `load_file` and `append` functions take care of loading your raw data from Amazon S3 and appending data to your reporting table. You don't have to write any extra code to get the data into Snowflake. A `load_file` task exists for each file instead of one task for all files in Amazon S3, which supports atomicity.
-- Using the `transform` function, you can execute SQL to combine your data from multiple tables. The results are automatically stored in a Snowflake table. You don't have to use the `SnowflakeHook` in Airflow or write any of the code to execute the query.
-- You can run a transformation in Python with the `dataframe` function, meaning that you don't need to explicitly convert the results of your previous task to a Pandas DataFrame. You can then write output of your transformation to your aggregated reporting table in Snowflake using the `target_table parameter`, so you don't have to worry about storing the data in XCom.
-- You don't have to redefine your Airflow connections in any tasks that are downstream of your original definitions, including `load_file` and `create_reporting_table`. Any downstream task that inherits from a task with a defined connection can use the same connection without additional configuration.
-- You can run common SQL queries using Python alone. The SDK includes Python functions for some of the most common actions in SQL.
+### Load data
 
-Overall, your DAG with the Astro Python SDK is shorter, simpler to implement, and easier to read. This allows you to implement even more complicated use cases easily while focusing on the movement of your data.
-
-### The DAG before the Astro Python SDK
-
-To showcase the difference in performing this exact same use case without the help of the Astro Python SDK, here is what your DAG would look like:
+The first step in the pipeline is to load the data from S3 to Snowflake. With the Astro Python SDK, the `load_file` and `append` functions take care of loading your raw data from Amazon S3 and appending data to your reporting table. You don't have to write any extra code to get the data into Snowflake.
 
 ```python
-from datetime import datetime
-import pandas as pd
-from airflow.decorators import dag, task
-from airflow.providers.snowflake.hooks.snowflake import SnowflakeHook
-from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
-from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeOperator
-from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-S3_BUCKET = 'bucket_name'
-S3_FILE_PATH = '</path/to/file/'
-SNOWFLAKE_CONN_ID = 'snowflake'
-SNOWFLAKE_SCHEMA = 'schema_name'
-SNOWFLAKE_STAGE = 'stage_name'
-SNOWFLAKE_WAREHOUSE = 'warehouse_name'
-SNOWFLAKE_DATABASE = 'database_name'
-SNOWFLAKE_ROLE = 'role_name'
-SNOWFLAKE_SAMPLE_TABLE = 'sample_table'
-SNOWFLAKE_RESULTS_TABLE = 'result_table'
+homes_data1 = aql.load_file(
+    task_id="load_homes1",
+    input_file=File(path="s3://airflow-kenten/homes1.csv", conn_id=AWS_CONN_ID),
+    output_table=Table(name="HOMES1", conn_id=SNOWFLAKE_CONN_ID)
+)
+homes_data2 = aql.load_file(
+    task_id="load_homes2",
+    input_file=File(path="s3://airflow-kenten/homes2.csv", conn_id=AWS_CONN_ID),
+    output_table=Table(name="HOMES2", conn_id=SNOWFLAKE_CONN_ID)
+)
+```
+
+Without the SDK, the easiest way to accomplish this is using the traditional `S3ToSnowflakeOperator`.
+
+```python
+def classic_etl_dag():
+    load_data = S3ToSnowflakeOperator(
+        task_id='load_homes_data',
+        snowflake_conn_id=SNOWFLAKE_CONN_ID,
+        s3_keys=[S3_FILE_PATH + '/homes.csv'],
+        table=SNOWFLAKE_SAMPLE_TABLE,
+        schema=SNOWFLAKE_SCHEMA,
+        stage=SNOWFLAKE_STAGE,
+        file_format="(type = 'CSV',field_delimiter = ',')",
+    )
+```
+
+While this operator is straight-forward, it requires knowledge of Snowflake and S3-specific parameters. The Astro Python SDK takes care of all of nuances of different systems for you under the hood.
+
+### Combine data
+
+The next step in the pipeline is to combine data. With the Astro Python SDK `transform` function, you can execute SQL to combine your data from multiple tables. The results are automatically stored in a Snowflake table. 
+
+```python
+@aql.transform
+def combine_tables(homes1: Table, homes2: Table):
+    return """
+    SELECT *
+    FROM {{homes1}}
+    UNION
+    SELECT *
+    FROM {{homes2}}
+    """
+```
+
+Without the SDK, you need to write explicit code to complete this step.
+
+```python
 @task(task_id='extract_data')
 def extract_data():
     # Join data from two tables and save to dataframe to process
@@ -200,6 +223,38 @@ def extract_data():
     df = pd.DataFrame(results)
     df.columns = column_names
     return df.to_json()
+```
+
+Since there is no way to pass results from the [`SnowflakeOperator`](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) query to the next task, you have to write a query in a `_DecoratedPythonOperator` function using the [`SnowflakeHook`](https://registry.astronomer.io/providers/snowflake/modules/snowflakehook) and explicitly do the conversion from SQL to a dataframe yourself.
+
+### Transform data
+
+The third step in the pipeline is transforming the data. The transformations required for this pipeline are easier to implement in Python than in SQL. With the Astro Python SDK, you can run a transformation in Python with the `dataframe` function, meaning that you don't need to explicitly convert the results of your previous task to a Pandas DataFrame. You can then write output of your transformation to your aggregated reporting table in Snowflake using the `target_table parameter`, so you don't have to worry about storing the data in XCom.
+
+```python
+@aql.dataframe
+def transform_data(df: pd.DataFrame):
+    df.columns = df.columns.str.lower()
+    melted_df = df.melt(
+        id_vars=["sell", "list"], value_vars=["living", "rooms", "beds", "baths", "age"]
+    )
+    return melted_df
+
+transformed_data = transform_data(
+        df=extracted_data, output_table=Table(name="homes_data_long")
+    )
+# Append transformed data to reporting table
+# Dependency is inferred by passing the previous `transformed_data` task to `source_table` param
+record_results = aql.append(
+    source_table=transformed_data,
+    target_table=Table(name="homes_reporting", conn_id=SNOWFLAKE_CONN_ID),
+    columns=["sell", "list", "variable", "value"],
+)
+```
+
+Implementing this transformation without the SDK is more challenging. 
+
+```python
 @task(task_id='transform_data')
 def transform_data(xcom: str) -> str:
     # Transform data by melting
@@ -211,52 +266,21 @@ def transform_data(xcom: str) -> str:
     # Save results to Amazon S3 so they can be loaded back to Snowflake
     s3_hook = S3Hook(aws_conn_id="s3_conn")
     s3_hook.load_string(melted_str, 'transformed_file_name.csv', bucket_name=S3_BUCKET, replace=True)
-@dag(start_date=datetime(2021, 12, 1), schedule='@daily', catchup=False)
-def classic_etl_dag():
-    load_data = S3ToSnowflakeOperator(
-        task_id='load_homes_data',
-        snowflake_conn_id=SNOWFLAKE_CONN_ID,
-        s3_keys=[S3_FILE_PATH + '/homes.csv'],
-        table=SNOWFLAKE_SAMPLE_TABLE,
-        schema=SNOWFLAKE_SCHEMA,
-        stage=SNOWFLAKE_STAGE,
-        file_format="(type = 'CSV',field_delimiter = ',')",
-    )
-    create_reporting_table = SnowflakeOperator(
-        task_id="create_reporting_table",
-        snowflake_conn_id=SNOWFLAKE_CONN_ID,
-        sql='''
-        CREATE TABLE IF NOT EXISTS homes_reporting (
-            sell number, 
-            list number, 
-            variable varchar,
-            value number
-            );'''
-    )
-    load_transformed_data = S3ToSnowflakeOperator(
-        task_id='load_transformed_data',
-        snowflake_conn_id=SNOWFLAKE_CONN_ID,
-        s3_keys=[S3_FILE_PATH + '/transformed_file_name.csv'],
-        table=SNOWFLAKE_RESULTS_TABLE,
-        schema=SNOWFLAKE_SCHEMA,
-        stage=SNOWFLAKE_STAGE,
-        file_format="(type = 'CSV',field_delimiter = ',')",
-    )
-    extracted_data = extract_data()
-    transformed_data = transform_data(extracted_data)
-    load_subscription_data >> extracted_data >> transformed_data >> load_transformed_data
-    create_reporting_table >> load_transformed_data
-classic_etl_dag = classic_etl_dag()
+
+load_transformed_data = S3ToSnowflakeOperator(
+    task_id='load_transformed_data',
+    snowflake_conn_id=SNOWFLAKE_CONN_ID,
+    s3_keys=[S3_FILE_PATH + '/transformed_file_name.csv'],
+    table=SNOWFLAKE_RESULTS_TABLE,
+    schema=SNOWFLAKE_SCHEMA,
+    stage=SNOWFLAKE_STAGE,
+    file_format="(type = 'CSV',field_delimiter = ',')",
+)
 ```
 
-![Classic Graph](/img/guides/classic_graph.png)
+Transitioning between Python to complete the transformation and SQL to load the results back to Snowflake requires extra boilerplate code to explicitly make the conversions. You also have to use a S3 as intermediary storage for the results and implement another `S3ToSnowflakeOperator` to load them, because there is no traditional operator to load data from a Pandas dataframe directly to Snowflake.
 
-Although you achieved your ETL goal with the DAG, the following limitations made this implementation more complicated:
-
-- Since there is no way to pass results from the [`SnowflakeOperator`](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) query to the next task, you had to write a query in a `_DecoratedPythonOperator` function using the [`SnowflakeHook`](https://registry.astronomer.io/providers/snowflake/modules/snowflakehook) and explicitly do the conversion from SQL to a dataframe yourself.
-- Some of the transformations are better suited to SQL, and others are better suited to Python, but transitioning between the two requires extra boilerplate code to explicitly make the conversions.
-- While the TaskFlow API makes it easier to pass data between tasks, it stores the resulting dataframes as XComs by default. This means that you need to worry about the size of your data. You could implement a custom XCom backend, but that would require additional configuration.
-- Loading data back to Snowflake after the transformation is complete requires writing extra code to store an intermediate CSV in Amazon S3.
+Overall, your DAG with the Astro Python SDK is shorter, simpler to implement, and easier to read. This allows you to implement even more complicated use cases easily while focusing on the movement of your data.
 
 ## Learn more
 

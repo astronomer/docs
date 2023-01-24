@@ -74,7 +74,7 @@ $ astro deploy
 
 :::info
 
-All image-only templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy via CI/CD. These templates will not work if you use the `astrocloud` executable. To upgrade, see [Install the Astro CLI](cli/install-cli.md).
+All image-only templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy CI/CD pipelines. These templates will not work if you use the `astrocloud` executable. To upgrade, see [Install the Astro CLI](cli/install-cli.md).
 
 :::
 
@@ -898,7 +898,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
                 curl -sSL install.astronomer.io | sudo bash -s
                 astro deploy -f
 
-    # Invoke jobs via workflows
+    # Invoke jobs with workflows
     # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
     workflows:
       version: 2.1
