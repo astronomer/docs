@@ -124,7 +124,7 @@ AWS_ACCESS_KEY_ID=<your-aws-access-key-id>
 AWS_SECRET_ACCESS_KEY=<your-aws-access-key-secret>
 ```
 
-You can call these values in a `configuration.yml` file using the format `$ENVIRONMENT_VARIABLE_KEY`.
+You can call these values in a `configuration.yml` file using the format `$ENVIRONMENT_VARIABLE_KEY`. For example: 
 
 ```yaml
 connections:
@@ -375,7 +375,8 @@ Running SQL workflows on Astro lets you regularly test and schedule your queries
     astro flow deploy <workflow-name> --env <env>
     ```
 
-5. If you haven't yet installed the Astro Python SDK in your Astro project, the CLI prompts you to update `requirements.txt` in your Astro project. Enter `yes` to have the CLI automatically install the dependency.
+    If you haven't yet installed the Astro Python SDK in your Astro project, the CLI prompts you to update `requirements.txt` in your Astro project. Enter `yes` to have the CLI automatically install the dependency.
+   
 5. Follow the CLI instructions to select a Workspace and Deployment for your SQL environment. Now when you run `astro flow deploy <workflow-name> --env <env>`, the CLI automatically deploys your workflow to the Deployment associated with your SQL environment.
 
 6. The CLI generates links for viewing the Deployment and Airflow UI. Use these links to confirm that the code deploy was successful.  
