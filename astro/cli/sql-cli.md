@@ -244,7 +244,6 @@ To run a query against data hosted outside of your project, you create a `YAML` 
 
     - Reference the table name directly in your queries. For example: 
 
-
     ```sql
     ---
     conn_id: redshift_conn
@@ -337,7 +336,7 @@ Running SQL workflows on Astro lets you regularly test and schedule your queries
     astro login
     ```
 
-3. (optional) Create the `workflow.yml` inside the desired workflow folder including scheduling details.
+3. Create the `workflow.yml` inside the desired workflow folder including scheduling details.
 
 Example:
 
@@ -354,17 +353,18 @@ Example:
         - Snowflake
     ```
 
-It is also possible to have schedules triggered by other datasets, by using:
+    Alternatively, set your schedule based on when another DAG in your Deployment updates a [dataset](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Specify the dataset URI that your workflow should listen to as follows:
 
     ```yaml
     workflow:
       schedule:
         - dataset:
-           uri: s3://some-dataset/upstream1.parquet
+           uri: <your-dataset-uri>
         - dataset:
-           uri: s3://some-dataset/upstream2.parquet
+           uri: <your-dataset-uri>
     ```
-
+    
+    Your SQL workflow triggers whenever the provided dataset is updated by any DAG in your Deployment. For more information about datasets, see [Datasets and data-aware scheduling in Airflow](https://docs.astronomer.io/learn/airflow-datasets).
 
 4. Run the following command to deploy a SQL workflow to Astro:
 
