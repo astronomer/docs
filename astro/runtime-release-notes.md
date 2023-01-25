@@ -38,15 +38,15 @@ Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.1. Airflow 
 
 For a complete list of the changes, see the [Apache Airflow 2.5.1 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-1-2023-01-20).
 
-### Astro Python SDK now included in Astro Runtime
+### The Astro Python SDK is now included with Astro Runtime
 
-Astro Runtime now includes the Astro Python SDK, an open source tool and Python package (`astro-sdk-python`) for DAG development that is built and maintained by Astronomer. For Astro Runtime versions 7.2.0 and above, you don't have to explicitly add the SDK to your Astro project in order to use it.
+Astro Runtime now includes the Astro Python SDK, an open source tool and Python package (`astro-sdk-python`) for DAG development that is built and maintained by Astronomer. With Astro Runtime versions 7.2.0 and later, you don't have to add the Astro Python SDK to your Astro project to use it.
 
 To learn more about the Astro Python SDK, see [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/) and [The Astro Python SDK Tutorial for ETL](https://docs.astronomer.io/learn/astro-python-sdk-etl).
 
 ### Early access Airflow bug fixes
 
-In anticipation of adding support for the Kubernetes executor on Astro, Astro Runtime includes the following bug fixes from Airflow 2.5.2:
+In anticipation of future support for the Kubernetes executor on Astro, Astro Runtime includes the following bug fixes from Airflow 2.5.2:
 
 - Be more selective when adopting pods with KubernetesExecutor ([28899](https://github.com/apache/airflow/pull/28899))
 - KubernetesExecutor sends state even when successful ([28871](https://github.com/apache/airflow/pull/28871))
