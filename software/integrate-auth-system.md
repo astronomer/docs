@@ -422,17 +422,21 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 <TabItem value="azuread">
 
-This setup assumes you have already registered Astronomer Software as an application on Azure AD. See [Azure AD](#azure-ad).
-
-1. If user provisioning isn't available on your existing Astronomer Software application, create a new application using the **Azure Databricks SCIM Provisioning Connector**. See [Configure SCIM provisioning using Microsoft Azure Active Directory](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application).
+1. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
    
-2. In your Astronomer Software application on Azure AD, go to **Manage** > **Provisioning**.
-
-3. Click **Provisioning Mode** > **Automatic**.
-
-4. In the **Tenant URL** field, enter `https://BASEDOMAIN.astronomer.io/v1/scim/microsoft`. This is the Astronomer SCIM endpoint URL.
+2. In the left menu, select **Enterprise applications**, then go to **+ New application** > **+ Create your own application**.
    
-5. In your `config.yaml` file, add the following configuration to create a unique token that Astronomer Software uses to authenticate requests from Azure AD:
+3. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
+   
+4. Click **Add** to create an app object. Azure AD opens the application management menu for your new application.
+   
+5. In the application management menu for your new application, go to **Manage** > **Provisioning**.
+
+6. Click **Provisioning Mode** > **Automatic**.
+
+7. In the **Tenant URL** field, enter `https://BASEDOMAIN.astronomer.io/v1/scim/microsoft`. This is the Astronomer SCIM endpoint URL.
+   
+8. In your `config.yaml` file, add the following configuration to create a unique token that Astronomer Software uses to authenticate requests from Azure AD:
 
     ```yaml
     astronomer:
@@ -444,21 +448,21 @@ This setup assumes you have already registered Astronomer Software as an applica
 
     Copy this token for Step 7.
 
-6. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+9.  Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
    
-7. In the **Provisioning** menu for your Azure application, paste your token into the **Secret Token** field. If this field is left blank, Azure AD includes an OAuth bearer token issued from Azure AD with each request.
+10. In the **Provisioning** menu for your Azure application, paste your token into the **Secret Token** field. If this field is left blank, Azure AD includes an OAuth bearer token issued from Azure AD with each request.
 
-8. Click **Test connection** to confirm your connection to the SCIM endpoint.
+11. Click **Test connection** to confirm your connection to the SCIM endpoint.
 
-9.  Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
+12. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
 
-10. Click **Manage** > **Provisioning** > **Settings**.
+13. Click **Manage** > **Provisioning** > **Settings**.
 
-11. In the **Scope** setting list, select **Sync only assigned users and groups**.
+14. In the **Scope** setting list, select **Sync only assigned users and groups**.
    
-12. Click the *Provisioning status** toggle to turn provisioning status on.
+15. Click the *Provisioning status** toggle to turn provisioning status on.
 
-13. Click **Save**.
+16. Click **Save**.
 
 </TabItem>
 </Tabs>
