@@ -105,7 +105,7 @@ deployment:
         webserver_url: 
 ```
 
-The following sections in this guide include information about each key and value within these sections in the template file.
+Read the following sections to learn about each available key and value in the template file.
 
 #### `deployment.environment_variables`
 
