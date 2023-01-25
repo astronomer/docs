@@ -24,3 +24,5 @@ Use Markdown cells to document your pipeline and make it easier for Workspace me
 5. In the body of the cell, write your documentation in Markdown format. 
    
 6. Click out of the cell to save your changes. You can now view the rendered Markdown in your pipeline editor. Optionally, open the **Code** to view your cell as raw Markdown in your DAG.
+
+![Rendered Markdown cell in the Cloud IDE](/img/cloud-ide/markdown-cell.png)
