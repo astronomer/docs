@@ -6,7 +6,7 @@ description: "Manage an Astro Deployment with a JSON or YAML file."
 ---
 
 
-After you create an Astro Deployment, you can create a file with the Astro CLI that contains its unique configurations represented as code. That includes worker queues, environment variables, and Astro Runtime version. You can use Deployment files to create and manage Deployments programmatically on Astro.
+After you create an Astro Deployment, you can create a file with the Astro CLI that contains its unique configurations represented as code. That includes worker queues, environment variables, and Astro Runtime version. You can use Deployment files to manage Deployments programmatically on Astro.
 
 Specifically, you can:
 
@@ -14,7 +14,7 @@ Specifically, you can:
 - Store a Deployment file that represents the configurations of an existing Deployment. You can make changes to this file to update a Deployment faster and more easily than doing so with the Cloud UI or individual Astro CLI commands.
 - Use a template file from an existing Deployment to create another Deployment with the same configurations. This is an alternative to creating a new Deployment in the Cloud UI and manually copying configurations.
 
-Astro supports updating a Deployment programmatically with [Deployment API keys](api-keys.md), but you cannot currently automate creating a Deployment as part of a CI/CD workflow. You also cannot programmatically update or copy Airflow connections and variables across Deployments. Support for both of these features is coming soon.
+Astro supports updating a Deployment programmatically with [Deployment API keys](api-keys.md), but you cannot currently automate creating a Deployment as part of a CI/CD workflow. Support for both of these features is coming soon.
 
 ## Inspect a Deployment
 
@@ -47,7 +47,7 @@ The output of this command includes the name, description, and metadata that is 
 
 ### Template file reference
 
-When you inspect a Deployment and create a template file, the file will contain the following sections:
+When you inspect a Deployment, aa template file is created with the following sections:
 
 - `environment_variables`
 - `configuration`
@@ -90,6 +90,19 @@ deployment:
     alert_emails:
         - paola@cosmicenergy.io
         - viraj@cosmicenergy.io
+# This section is only populated when inspecting a Deployment without creating a template. 
+# Do not configure metadata when you create a new Deployment from a template. 
+    metadata:
+        deployment_id: 
+        workspace_id: 
+        cluster_id: 
+        release_name: 
+        airflow_version: 
+        status: 
+        created_at: 
+        updated_at: 
+        deployment_url: 
+        webserver_url: 
 ```
 
 The following sections in this guide include information about each key and value within these sections in the template file.
@@ -142,6 +155,8 @@ To create a new Deployment from an existing template file:
    
    You can also go to the Workspace page in the Cloud UI.
 
+4. Optional. Reconfigure any Airflow connections or variables from the Deployment which you copied into the template file. Airflow connections and variables cannot be configured using template files. See [Manage connections in Airflow](https://docs.astronomer.io/learn/connections).
+
 ## Update a Deployment using a Deployment file
 
 :::warning 
@@ -181,7 +196,7 @@ To update a Deployment using a Deployment file:
   ```sh
   astro deployment inspect -n <deployment-name>
   ```
-  
+
 ## See also
 
 - [Manage Deployment API keys](api-keys.md)
