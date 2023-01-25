@@ -1,11 +1,11 @@
 ---
 sidebar_label: Document your pipeline
-title: Add documentation to an Astro Cloud IDE pipeline
+title: Add Markdown cells to your Astro Cloud IDE pipeline
 id: document-pipeline
 description: Learn how to add documentation to your pipeline and individual cells in the Astro Cloud IDE. 
 ---
 
-Use Markdown cells to document your pipeline and make it easier for team members to collaborate on the same code. Your Markdown cell appears as a top-level comment in the generated DAG for your data pipeline. It does not appear in the Airflow UI and is not related to the features described in [Create DAG documentation in Apache Airflow](https://docs.astronomer.io/learn/custom-airflow-ui-docs-tutorial).
+Use Markdown cells to document your pipeline and make it easier for Workspace members to collaborate on the same code. The content of a Markdown cell appears as rendered Markdown in your pipeline editor, as well as a top-level comment in your pipeline DAG. It does not appear in the Airflow UI and is not related to the features described in [Create DAG documentation in Apache Airflow](https://docs.astronomer.io/learn/custom-airflow-ui-docs-tutorial).
 
 ## Prerequisites 
 
@@ -22,5 +22,5 @@ Use Markdown cells to document your pipeline and make it easier for team members
 4. Click **Add Cell** > **Markdown**.
 
 5. In the body of the cell, write your documentation in Markdown format. 
-
-6. Optional. Click **Code** to view your documentation within the context of an Airflow DAG.
+   
+6. Click out of the cell to save your changes. You can now view the rendered Markdown in your pipeline editor. Optionally, open the **Code** to view your cell as raw Markdown in your DAG.
