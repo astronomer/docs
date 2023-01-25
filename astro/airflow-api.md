@@ -57,23 +57,15 @@ If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generatin
 
 ### Retrieve the Deployment URL
 
-The Deployment URL includes the name of your Organization and a short Deployment ID. For example, the Deployment URL for an Organization named `mycompany` with the Deployment ID `dhbhijp0` is `https://mycompany.astronomer.run/dhbhijp0`. The Deployment URL provides access to the Airflow UI and not the Cloud UI.
+The Deployment URL includes the name of your Organization and a short Deployment ID. For example, the Deployment URL for an Organization named `mycompany` with the Deployment ID `dhbhijp0` is `https://mycompany.astronomer.run/dhbhijp0`. The Deployment URL provides access to the Airflow UI and not the Cloud UI. 
 
-#### Astro CLI
+Astronomer recommends using the Astro CLI to retrieve the Deployment URL. To retrieve the Deployment URL in the Airflow UI, select a Deployment in the Cloud UI, open Airflow, and then copy the URL up to `/home`.
 
-1. Run the following command:
+In the Astro CLI, Run the following command:
 
-    ```sh
-    astro deployment inspect <deployment-name> --key metadata.webserver_url
-    ```
-#### Airflow UI
-
-1. In the Cloud UI, select a Workspace and then a Deployment.
-
-2. Click **Open Airflow**.
-
-3. When the Airflow UI opens in your browser, copy the URL up to `/home`.
-
+```sh
+astro deployment inspect <deployment-name> --key metadata.webserver_url
+```
 
 ## Step 2: Make an Airflow API request
 
