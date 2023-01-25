@@ -33,7 +33,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### New Astro Cloud IDE cell types
 
-To simplify and speed the creation of new tasks, the following new cell types are now available in the Astro Cloud IDE:
+To simplify the creation of new tasks, the following new cell types are now available in the Astro Cloud IDE:
 
 - **SQL**: Run a SQL query against an existing database connection and save the query results in an XCom file for use by other cells. Use this cell type to run smaller queries and store the results in Airflow for quick access by other cells.
 - **Warehouse SQL**: Run a SQL query against an existing database connection and store the query results in your data warehouse. Use this cell type for data operations that require more storage and reliability.
