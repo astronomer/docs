@@ -359,7 +359,7 @@ To complete this setup, you need:
 </TabItem>
 </Tabs>
 
-### GitHub Actions (DAG-based deploy)
+### GitHub Actions (DAG-based deploys)
 
 The following templates are examples of how to implement DAG-only deploys in GitHub Actions. These templates can be modified to run on other CI/CD tools.
 
