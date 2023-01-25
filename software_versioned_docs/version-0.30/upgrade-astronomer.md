@@ -85,18 +85,19 @@ RELEASE_NAME=<astronomer-platform-release-name>
 NAMESPACE=<astronomer-platform-namespace>
 ASTRO_VERSION=<astronomer-version>
 
-helm3 repo add astronomer https://helm.astronomer.io
-helm3 repo update
+helm repo add astronomer https://helm.astronomer.io
+helm repo update
 
 # upgradeDeployments false ensures that Airflow charts are not upgraded when this script is ran
 # If you deployed a config change that is intended to reconfigure something inside Airflow,
 # then you may set this value to "true" instead. When it is "true", then each Airflow chart will
 # restart. Note that some stable version upgrades require setting this value to true regardless of your own configuration.
 # If you are currently on Astronomer Software 0.25, 0.26, or 0.27, you must upgrade to version 0.28 before upgrading to 0.29. A direct upgrade to 0.29 from a version lower than 0.28 is not possible.
-helm3 upgrade --namespace $NAMESPACE \
+helm upgrade --namespace $NAMESPACE \
             -f ./config.yaml \
             --reset-values \
             --version $ASTRO_VERSION \
+            --timeout 20m \
             --set astronomer.houston.upgradeDeployments.enabled=false \
             $RELEASE_NAME \
             astronomer/astronomer
