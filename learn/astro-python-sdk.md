@@ -9,7 +9,7 @@ This tutorial demonstrates how to write an Extract, Transform, Load (ETL) pipeli
 
 The pipeline you build in this tutorial will:
 
-- **Extract** a file into a Snowflake relational table.
+- **Extract** data from an S3 bucket and load it into a Snowflake relational table.
 - **Transform** that table.
 - **Load** the transformed table into a reporting table.
 
@@ -198,8 +198,8 @@ dag = DAG(
 )
 
 with dag:
-    # Extract a file with a header from S3 into a temporary Table, referenced by the
-    # variable `orders_data`
+    # Load a file with a header from S3 into a temporary Table, referenced by the
+    # variable `orders_data`. This simulated the `extract` step of the ETL pipeline.
     orders_data = aql.load_file(
         # Data file needs to have a header row. The input and output table can be replaced with any
         # valid file and connection ID.
@@ -241,7 +241,7 @@ with dag:
     aql.cleanup()
 ```
 
-This DAG extracts the data you loaded into S3 and runs a few simple SQL statements to clean the data, load it into a reporting table on Snowflake, and transform it into a dataframe so that you can print various table details to Airflow logs using Python.
+This DAG extracts the data from S3, loads it into a Snowflake table and runs a few simple SQL statements to clean the data, load it into a reporting table, and transform it into a dataframe so that you can print various table details to Airflow logs using Python.
 
 Much of this DAG's functionality comes from the Python functions that use task decorators from the Python SDK. See [How it works](#how-it-works) for more information about these decorators and the benefits of using the SDK for this implementation.  
 
@@ -274,12 +274,12 @@ The Astro SDK takes this abstraction a step further while providing more flexibi
 
 Now that you understand the core qualities of the Astro SDK, let's look at it in the context of the example DAG by walking through each step in your ETL pipeline.
 
-### Extract
+### Load
 
-To extract from S3 into a SQL Table, you only need to specify the location of the data on S3 and an Airflow connection for the destination SQL table in Snowflake.
+To load data from S3 into a SQL Table, you only need to specify the location of the data on S3 and an Airflow connection for the destination SQL table in Snowflake.
 
 ```python
-# Extract a file with a header from S3 into a temporary Table, referenced by the
+# Load a file with a header from S3 into a temporary Table, referenced by the
 # variable `orders_data`
 orders_data = aql.load_file(
     # data file needs to have a header row

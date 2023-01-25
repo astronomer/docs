@@ -10,9 +10,11 @@ After you create an Astro Deployment, you can create a file with the Astro CLI t
 
 Specifically, you can:
 
-- Create a template file from an existing Deployment and use it to create another Deployment with the same configurations. This is an alternative to creating a new Deployment in the Cloud UI and manually copying configurations.
+- Create a template file in a central GitHub repository and use it as a source of truth for new Deployments that fit a particular use case. For example, you can standardize your team's development environments by creating a template file with configurations for that type of Deployment.
 - Store a Deployment file that represents the configurations of an existing Deployment. You can make changes to this file to update a Deployment faster and more easily than doing so with the Cloud UI or individual Astro CLI commands.
-- Save a template file in a central GitHub repository and use it as a source of truth for new Deployments that fit a particular use case. For example, you can standardize your team's development environments by creating a template file with configurations for that type of Deployment.
+- Use a template file from an existing Deployment to create another Deployment with the same configurations. This is an alternative to creating a new Deployment in the Cloud UI and manually copying configurations.
+
+Astro supports updating a Deployment programmatically with [Deployment API keys](api-keys.md), but you cannot currently automate creating a Deployment as part of a CI/CD workflow. You also cannot programmatically update or copy Airflow connections and variables across Deployments. Support for both of these features is coming soon.
 
 ## Inspect a Deployment
 

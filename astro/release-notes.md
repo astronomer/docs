@@ -19,7 +19,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 7.1.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.2.0 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.9.0 ([Release notes](cli/release-notes.md))
 
@@ -33,11 +33,13 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### New Astro Cloud IDE cell types
 
-The following cell types have been added to the Astro Cloud IDE:
+To simplify the creation of new tasks, the following new cell types are now available in the Astro Cloud IDE:
 
-- **SQL**: Runs a SQL query against an existing database connection and persists the results of the query in an XCom file for use by other cells. Use this cell type to run smaller queries and store the results in Airflow for quick access in other cells.
-- **Warehouse SQL**: Runs a SQL query against an existing database connection and stores the results in your data warehouse. Use this cell type for data operations that require more storage and a higher level of reliability.
-- **Markdown**: Adds documentation as in-line comments to your generated DAG code. Use this cell to make it easier for team members to collaborate on the same pipeline.
+- **SQL**: Run a SQL query against an existing database connection and save the query results in an XCom file for use by other cells. Use this cell type to run smaller queries and store the results in Airflow for quick access by other cells.
+- **Warehouse SQL**: Run a SQL query against an existing database connection and store the query results in your data warehouse. Use this cell type for data operations that require more storage and reliability.
+- **Markdown**: Add inline Markdown comments to your generated DAG code. Use this cell type to document code decisions and to make it easier for team members to collaborate on shared pipelines.
+
+For more information about a specific cell type, see [Run SQL in the Astro Cloud IDE](cloud-ide/run-sql.md), [Run Python in the Cloud IDE](cloud-ide/run-python.md), and [Add documentation to an Astro Cloud IDE pipeline](cloud-ide/document-pipeline.md).
 
 ### Additional improvements
 
@@ -46,9 +48,8 @@ The following cell types have been added to the Astro Cloud IDE:
 
 ### Bug fixes 
 
-- When you click **Clear** or **Mark Success** for a task instance in the Airflow UI, you are now correctly redirected to the **DAGs** home page instead of the **Grid** view.
 - Sorting the **Organization Role** column in the **People** tab of the Cloud UI now works as expected.
-- Fixed an issue where lineage groups would occasionally not collapse as expected in the **Lineage Graph** view. 
+- Fixed an issue where lineage groups would occasionally not collapse as expected in the **Lineage Graph** view.
 
 ## December 20, 2022 
 
