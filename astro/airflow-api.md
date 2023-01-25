@@ -64,7 +64,7 @@ Astronomer recommends using the Astro CLI to retrieve the Deployment URL. To ret
 In the Astro CLI, Run the following command:
 
 ```sh
-astro deployment inspect <deployment-name> --key metadata.webserver_url
+astro deployment inspect <deployment-id> --key metadata.webserver_url
 ```
 
 ## Step 2: Make an Airflow API request
