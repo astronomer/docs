@@ -54,7 +54,7 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 
 ### Additional improvements
 
-- Upgraded `astronomer-providers` to 1.14.0, which includes support for using a role ARN with `AwsBaseHookAsync`. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.13.0/CHANGELOG.rst) for a complete list of changes.
+- Upgraded `astronomer-providers` to 1.14.0, which includes support for using a role Amazon Resource Name (ARN) with `AwsBaseHookAsync`. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.13.0/CHANGELOG.rst) for a complete list of changes.
 - Upgraded `openlineage-airflow` to 0.19.2, which includes new support for Airflow operators like the `S3FileTransformOperator` and additional facets for task runs. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.19.2) for a complete list of changes.
 
 ## Astro Runtime 7.1.0
@@ -100,7 +100,7 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 
 ### Early access Airflow bug fixes
 
-In anticipation of future support for the Kubernetes executor on Astro, Astro Runtime includes the following bug fixes from Airflow 2.5.2:
+In anticipation of future support for the Kubernetes executor on Astro, Astro Runtime includes the following bug fixes from Apache Airflow:
 
 - Fix bad pods pickled in executor_config ([28454](https://github.com/apache/airflow/pull/28454))
 - Be more selective when adopting pods with KubernetesExecutor ([28899](https://github.com/apache/airflow/pull/28899))
@@ -109,7 +109,7 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 ### Additional improvements 
 
 - Upgraded `astronomer-providers` to 1.14.0, which includes support for using a role ARN with `AwsBaseHookAsync`. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.13.0/CHANGELOG.rst) for a complete list of changes.
-- Upgraded `openlineage-airflow` to 0.19.2, which includes new support for Airflow operators like the `S3FileTransformOperator` and additional facets for task runs. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.19.2) for a complete list of changes.
+- Upgraded `openlineage-airflow` to 0.19.2, which includes new support for Airflow operators such as the `S3FileTransformOperator` and additional facets for task runs. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.19.2) for a complete list of changes.
 
 ## Astro Runtime 6.1.0
 
@@ -247,7 +247,7 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 
 ### Early access Airflow bug fixes
 
-In anticipation of future support for the Kubernetes executor on Astro, Astro Runtime includes the following bug fixes from Airflow 2.5.2:
+In anticipation of future support for the Kubernetes executor on Astro, Astro Runtime includes the following bug fixes from Apache Airflow:
 
 - Fix bad pods pickled in executor_config ([28454](https://github.com/apache/airflow/pull/28454))
 - Be more selective when adopting pods with KubernetesExecutor ([28899](https://github.com/apache/airflow/pull/28899))
