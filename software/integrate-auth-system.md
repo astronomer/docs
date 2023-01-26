@@ -422,33 +422,37 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 <TabItem value="azuread">
 
-1. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
-   
-2. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
-   
-3. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
-   
-4. Click **Add** to create an app object. Azure AD opens the application management menu for your new application.
-   
-5. In the application management menu for your new application, go to **Manage** > **Provisioning**.
-
-6. Click **Provisioning Mode** > **Automatic**.
-
-7. In the **Tenant URL** field, enter `https://astro.BASEDOMAIN/v1/scim/microsoft`. This is the Astronomer SCIM endpoint URL.
-
-8. Retrieve an OAuth bearer token from your token issuer and add this token to the **Secret Token** field. 
-   
-9. In your `config.yaml` file, add the following configuration. Replace `<your-secret-token>` with the token from Step 8.
+1. In your `config.yaml` file, add the following configuration. Replace `<your-generated-secret-code>` with a randomly generated string. 
 
     ```yaml
     astronomer:
       houston: 
         config:
-          microsoft:
-            scimAuthCode: <your-secret-token>
+          auth:
+            openidConnect:
+              microsoft:
+                scimAuthCode: <your-generated-secret-code>
     ```
+   
+    **Note**: If you have already configured Open ID Connect with Azure AD, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
 
-10. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+2. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
+
+3. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
+   
+4. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
+   
+5. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
+  
+6. Click **Create** to create an app object. Azure AD opens the application management menu for your new application.
+  
+7. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
+
+8. Click **Provisioning Mode** > **Automatic**.
+
+9. In the **Tenant URL** field, enter `https://houston.BASEDOMAIN/v1/scim/v2/microsoft`. This is the Astronomer SCIM endpoint URL.
+
+10. Paste the `scimAuthCode` generated at step 1 above into the **Secret Token** field.
 
 11. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
 
