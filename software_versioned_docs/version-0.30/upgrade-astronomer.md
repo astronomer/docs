@@ -97,6 +97,7 @@ helm upgrade --namespace $NAMESPACE \
             -f ./config.yaml \
             --reset-values \
             --version $ASTRO_VERSION \
+            --debug \
             --timeout 20m \
             --set astronomer.houston.upgradeDeployments.enabled=false \
             $RELEASE_NAME \

@@ -97,6 +97,7 @@ helm upgrade --namespace $NAMESPACE \
             -f ./config.yaml \
             --reset-values \
             --version $ASTRO_VERSION \
+            --debug \
             --timeout 20m \
             --set astronomer.houston.upgradeDeployments.enabled=false \
             $RELEASE_NAME \
@@ -173,7 +174,7 @@ To avoid extended service disruptions, Astronomer recommends upgrading Astronome
 
 ### Supported upgrade paths 
 
-If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you follow the correct upgrade path to your target version. If your combination of **Current version** and **Target version** isn't listed, then it's safe to directly upgrade from your current version to the target version. 
+If you're upgrading through multiple Astronomer Software versions in a single upgrade process, review the following table to ensure that you're following the correct upgrade path. If your combination of **Current version** and **Target version** isn't listed, you can upgrade directly from your current version to the target version. 
 
 | Current version | Target version | Upgrade path                |
 | --------------- | -------------- | --------------------------- |
