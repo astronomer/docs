@@ -25,6 +25,18 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## January 24, 2023
 
+### New Workspace homepage 
+
+When you open a Workspace in the Cloud UI, you now enter the Workspace **Home** page. On this page, you can:
+
+- Check the status of your Deployments at a glance.
+- Jump back in to the Deployments and Cloud IDE projects you most recently accessed. 
+- View release notes for all primary Astro products.
+
+[Workspace home page in the Cloud UI](/img/release-notes/workspace-home.png)
+
+The previous default Workspace page is now accessible in **Deployments**.
+
 ### Additional improvements
 
 - Ingress to clusters in the data plane is now limited only to IPs from the control plane. This change will arrive to all clusters over the next few weeks.
