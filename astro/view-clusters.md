@@ -28,7 +28,7 @@ The **Worker Types** tab displays the following information:
 | Value              | Description                                                                                                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | Node instance type | The instance type used for the cluster's worker nodes                                                                       |
-| ID                 | The ID of the cloud provider account that hosts the cluster. This is either an AWS account ID or a Google Cloud project ID  |
+| ID                 | The ID of the node instance type used for the cluster's worker nodes                                                        |
 | Max node count     | The maximum number of worker nodes supported across all Deployments in the cluster                                          |
 
 The **Workspace Authorization** tab lets you define what Workspaces can create Deployments on the cluster.
@@ -45,7 +45,7 @@ The **Details** tab displays the following information:
 | Value              | Description                                                                                                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
 | Name               | The name of the cluster                                                                                                     |
-| Account ID         | The AWS account ID, Azure account ID, or Google Cloud project ID of the account that hosts the cluster.                     |
+| Account ID         | The AWS account ID, Azure account ID, or Google Cloud project ID of the account that hosts the cluster                     |
 | External IPs       | The public IP addresses for connecting the cluster to external services                                                     |
 | Template Version   | The template version used to create the cluster                                                                             |
 | Region             | The cloud provider region where the cluster is hosted                                                                       |
