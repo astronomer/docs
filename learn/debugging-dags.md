@@ -1,11 +1,12 @@
 ---
 title: "Debug DAGs"
 sidebar_label: "Debug DAGs"
-description: "Troubleshoot Airflow DAGs in a local environment"
+description: "Troubleshoot Airflow DAGs"
 id: debugging-dags
 ---
 
-This guide explains how to identify and resolve common Airflow DAG issues. It also includes resources to try out if you can't find a solution to an Airflow issue. 
+This guide explains how to identify and resolve common Airflow DAG issues. It also includes resources to try out if you can't find a solution to an Airflow issue.
+While the focus of the troubleshooting steps provider lies on local development, much of the information is also relevant for running Airflow in a production context.
 
 This guide was written for Airflow 2. If you are running Airflow 1.15 or earlier, we highly recommend upgrading to prevent compatibility issues and receive the latest bug fixes. For assistance in upgrading see the documentation on [Upgrading from 1.10 to 2](https://airflow.apache.org/docs/apache-airflow/stable/howto/upgrading-from-1-10/index.html).
 
@@ -22,8 +23,8 @@ To give yourself the best possible chance of fixing a bug in Airflow, contextual
 
 - Is the problem with Airflow, or is it with an external system connected to Airflow? Test if the action can be completed in the external system without using Airflow.
 - What is the state of your [Airflow components](airflow-components.md)? Inspect the logs of each component and restart your Airflow environment if necessary.
-- Does Airflow have access to all relevant files? This is especially relevant when running Airflow in Docker or when using the Astro CLI.
-- Are your [Airflow connections](connections.md) set correctly with correct credentials? See [Troubleshooting connections](#troubleshooting-connections).
+- Does Airflow have access to all relevant files? This is especially relevant when running Airflow in Docker or when using the [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- Are your [Airflow connections](connections.md) set up correctly with correct credentials? See [Troubleshooting connections](#troubleshooting-connections).
 - Is the issue with all DAGs, or is it isolated to one DAG?
 - Can you collect the relevant logs? For more information on log location and configuration, see the [Airflow logging](logging.md) guide.
 - Which versions of Airflow and Airflow providers are you using? Make sure that you're using the correct version of the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/index.html).
@@ -33,20 +34,16 @@ Answering these questions will help you narrow down what kind of issue you're de
 
 ## Airflow is not starting on the Astro CLI
 
-The 3 most common ways to run Airflow locally are using the [Astro CLI]((https://docs.astronomer.io/astro/cli/install-cli)), running a [standalone instance](https://airflow.apache.org/docs/apache-airflow/stable/start.html), or running [Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). This guide focuses on troubleshooting the Astro CLI, which is an open source tool for quickly running Airflow on a local machine. 
+The 3 most common ways to run Airflow locally are using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli), running a [standalone instance](https://airflow.apache.org/docs/apache-airflow/stable/start.html), or running [Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/howto/docker-compose/index.html). This guide focuses on troubleshooting the Astro CLI, which is an open source tool for quickly running Airflow on a local machine. 
 
 The most common issues related to the Astro CLI are:
 
 - The Astro CLI was not correctly installed. Run `astro version` to confirm that you can successfully run Astro CLI commands. If a newer version is available, consider upgrading. 
 - The Docker Daemon is not running. Make sure to start Docker Desktop before starting the Astro CLI.
-- Errors caused by custom commands in the Dockerfile, or conflicts with the packages in `packages.txt` and `requirements.txt`. 
+- There are errors caused by custom commands in the Dockerfile, or dependency conflicts with the packages in `packages.txt` and `requirements.txt`. 
 - Airflow components are in a crash-loop because of errors in custom plugins or XCom backends. View scheduler logs using `astro dev logs -s` to troubleshoot.
 
-:::info
-
 To troubleshoot infrastructure issues when running Airflow on other platforms, for example in Docker, on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or on managed services, please refer to the relevant documentation and customer support.
-
-:::
 
 ## Common DAG issues
 
@@ -76,8 +73,8 @@ If you don't see an import error message but your DAGs still don't work, try the
 At the code level, ensure that each DAG:
 
 - Has a unique `dag_id`.
-- Contains either the word `airflow` or the word `dag` (the scheduler will only parse files fulfilling this condition).
-- Contains a call of the function defined with the `@dag` decorator. See also [Introduction to Airflow decorators](airflow-decorators.md).
+- Contains either the word `airflow` or the word `dag`. The scheduler only parses files fulfilling this condition.
+- Is called when defined with the `@dag` decorator. See also [Introduction to Airflow decorators](airflow-decorators.md).
 
 ### Import errors due to dependency conflicts
 
@@ -97,7 +94,9 @@ If you have conflicting package versions or need to run multiple Python versions
 
 - [KubernetesPodOperator](kubepod-operator.md): Runs a task in a separate Kubernetes Pod.
 - [ExternalPythonOperator](external-python-operator): Runs a task in a predefined virtual environment.
-- [PythonVirtualEnvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator): Runs a task in a temporary virtual environment. 
+- [PythonVirtualEnvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator): Runs a task in a temporary virtual environment.
+
+If many Airflow tasks share a set of alternate package and version requirements a common pattern is to run sets two or more separate Airflow deployments. 
 
 ### DAGs are not running correctly
 
@@ -107,10 +106,10 @@ If your DAGs are either not running or running differently than you intended, co
 
     ![Location of unpause toggle in the Airflow UI](/img/guides/paused_dag_2.png)
 
-    If you want all DAGs unpaused by default, you can set [`dags_are_paused_at_creation=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) in your Airflow config. If you do this, remember to set `catchup=False` in your DAGs to prevent automatic backfilling of DAG runs.
+    If you want all DAGs unpaused by default, you can set [`dags_are_paused_at_creation=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) in your Airflow config. If you do this, remember to set `catchup=False` in your DAGs to prevent automatic backfilling of DAG runs. In Airflow 2.2 and later, paused DAGs are unpaused automatically when you manually trigger them.
 
 - Double check that each DAG has a unique `dag_id`. If two DAGs with the same id are present in one Airflow instance the scheduler will pick one at random every 30 seconds to display.
-- Make sure your DAG has a `start_date` in the past.
+- Make sure your DAG has a `start_date` in the past. A DAG with a `start_date` in the future will result in a successful DAG run with no task runs.
 - Test the DAG using `astro dev dags test <dag_id>`. With the Airflow CLI, run `airflow dags test <dag_id>`.
 - If no DAGs are running, check the state of your scheduler 
 using `astro dev logs -s`. 
@@ -120,11 +119,11 @@ If your DAG is running but not on the schedule you expected, review the [DAG sch
 
 ## Common task issues
 
-This section covers common issues related to individual tasks you might encounter when developing locally. If your entire DAG is not working, see [DAGs are not running correctly](#dags-are-not-running-correctly) section above.
+This section covers common issues related to individual tasks you might encounter. If your entire DAG is not working, see [DAGs are not running correctly](#dags-are-not-running-correctly) section above.
 
 ### Tasks are not running correctly
 
-If your DAG is starting but one of more of your tasks are not running as intended, try the following debugging methods:
+It is possible for a DAG to start but its tasks to be stuck in various states or to not run in the desired order. If your tasks are not running as intended, try the following debugging methods:
 
 - Double check that your DAG's `start_date` is in the past. A future `start_date` will result in a successful DAG run even though no tasks ran.
 - If your tasks stay in a `scheduled` or `queued` state, ensure your scheduler is running properly. If needed, restart the scheduler or increase scheduler resources in your Airflow infrastructure.
@@ -165,7 +164,7 @@ After resolving your issue you may want to rerun your DAGs or tasks, see [Rerunn
 
 ### Issues with dynamically mapped tasks
 
-[Dynamic task mapping](dynamic-tasks.md) is a powerful feature that was introduced in Airflow 2.3 to allow you to dynamically adjust the number of tasks based on changing input parameters at runtime. Starting with Airflow 2.5.0 you can also dynamically map over task groups.
+[Dynamic task mapping](dynamic-tasks.md) is a powerful feature that was introduced in Airflow 2.3 to allow you to dynamically adjust the number of tasks at runtime based on changing input parameters. Starting with Airflow 2.5.0 you can also dynamically map over task groups.
 
 Things to be aware of when working with dynamically mapped tasks include:
 
@@ -197,7 +196,7 @@ Generally, logs fail to appear when a process dies in your scheduler or worker a
 - Increase the resources available to your workers (if using the Celery executor) or scheduler (if using the local executor).
 - If you're using the Kubernetes executor and a task fails very quickly (in less than 15 seconds), the pod running the task spins down before the webserver has a chance to collect the logs from the pod. If possible, try building in some wait time to your task depending on which operator you're using. If that isn't possible, try to diagnose what could be causing a near-immediate failure in your task. This is often related to either lack of resources or an error in the task configuration.
 - Increase the CPU or memory for the task.
-- Ensure that your logs are retained until you need to access them. The default log retention period on Astronomer is 15 days, so any logs outside of the retention period are not available. 
+- Ensure that your logs are retained until you need to access them. If you are an Astronomer customer see our documentation on how to [View logs](https://docs.astronomer.io/astro/view-logs).
 - Check your scheduler and webserver logs for any errors that might indicate why your task logs aren't appearing.
 
 ## Troubleshooting connections
@@ -213,7 +212,7 @@ The following are some debugging steps you can try:
 - Change the `default` connection to use your connection details or define a new connection with a different name and pass the new name to the hook or operator.
 - Define connections using Airflow environment variables instead of adding them in the Airflow UI. Make sure you're not defining the same connection in multiple places. If you do, the environment variable takes precedence.
 - Test if your credentials work when used in a direct API call to the external tool.
-- Use the test connection feature that many connection types have available.
+- Use the test connection feature added in Airflow 2.2 that many connection types have available.
 
     ![Test Connections](/img/guides/test_connections_2.png)
 
@@ -227,6 +226,7 @@ To find information about what parameters are required for a specific connection
 
 The information provided here should help you resolve the most common issues. If your issue was not covered in this guide, try the following resources:
 
+- If you are an Astronomer customer contact our [customer support](https://support.astronomer.io/).
 - Post your question to [Stack Overflow](https://stackoverflow.com/), tagged with `airflow` and other relevant tools you are using. Using Stack Overflow is ideal when you are unsure which tool is causing the error, since experts for different tools will be able to see your question.
 - Join the [Apache Airflow Slack](https://apache-airflow-slack.herokuapp.com/) and open a thread in `#newbie-questions` or `#troubleshooting`. The Airflow slack is the best place to get answers to more complex Airflow specific questions. 
 - If you found a bug in Airflow or one of its core providers, please open an issue in the [Airflow GitHub repository](https://github.com/apache/airflow/issues). For bugs in Astronomer open source tools please open an issue in the relevant [Astronomer repository](https://github.com/astronomer).
@@ -239,9 +239,3 @@ To get more specific answers to your question, include the following information
 - The full code of the DAG causing the error if applicable.
 - What you are trying to accomplish in as much detail as possible.
 - What you changed in your environment when the problem started.
-
-:::info
-
-Found an error in one of our guides, tutorials or docs? Please tell us via an issue in the [Astronomer docs repository](https://github.com/astronomer/docs/issues). :)
-
-:::
