@@ -27,6 +27,8 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Additional improvements
 
+- Ingress to clusters in the data plane is now limited only to IPs from the control plane. This change will arrive to all clusters over the next few weeks.
+- You can now request custom tags for your clusters through [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by going to **Clusters**, selecting a cluster, and clicking **Details**. See [View clusters](view-clusters.md).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
 
