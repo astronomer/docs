@@ -424,7 +424,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 1. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
    
-2. In the left menu, select **Enterprise applications**, then go to **+ New application** > **+ Create your own application**.
+2. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
    
 3. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
    
@@ -434,7 +434,7 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 6. Click **Provisioning Mode** > **Automatic**.
 
-7. In the **Tenant URL** field, enter `https://BASEDOMAIN.astronomer.io/v1/scim/microsoft`. This is the Astronomer SCIM endpoint URL.
+7. In the **Tenant URL** field, enter `https://astro.BASEDOMAIN/v1/scim/microsoft`. This is the Astronomer SCIM endpoint URL.
 
 8. Retrieve an OAuth bearer token from your token issuer and add this token to the **Secret Token** field. 
    
