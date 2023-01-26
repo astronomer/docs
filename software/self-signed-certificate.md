@@ -1,5 +1,6 @@
 ---
-title: 'Generate Self-signed TLS certificates'
+title: 'Generate self-signed TLS certificates'
+
 sidebar_label: 'Generate self-signed certificates'
 id: self-signed-certificate
 description: Generate a self-signed certificate to use with Astronomer Software.
@@ -9,21 +10,9 @@ This guide describes the steps to generate a self-signed certificate to use with
 
 ## Prerequisites
 
-The openssl library is required to generate your own certificate. Run the following command in your local environment to see if you already have openssl installed installed.
+- [openssl](https://www.openssl.org/). You can install it through [Homebrew](https://formulae.brew.sh/formula/openssl@1.1) on MacOs, [Windows installer](http://gnuwin32.sourceforge.net/packages/openssl.htm) on Windows, or [`apt-get`](https://www.misterpki.com/how-to-install-openssl-on-ubuntu/) on Linux.
 
-```bash
-which openssl
-```
-
-If the which command does not return a path, you will need to install openssl yourself:
-
-| Operating System | Install instructions                                                      |
-|------------------|---------------------------------------------------------------------------|
-| Mac OS X         | brew install openssl                                                      |
-| Windows          | [Windows installer](http://gnuwin32.sourceforge.net/packages/openssl.htm) |
-| Ubuntu Linux     | apt-get install openssl                                                   |
-
-# Generate a self-signed certificate
+## Setup
 
 Run the following commands to generate a self-signed certificate:
 To create a self-signed SSL certificate, we need a private key and certificating signing request. 

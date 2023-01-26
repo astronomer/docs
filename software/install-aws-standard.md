@@ -21,9 +21,8 @@ To install Astronomer on EKS, you'll need access to the following tools and perm
 * Permission to create and modify resources on AWS.
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
 * An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
-* Starting from Kubernetes version 1.23, the Amazon EBS CSI driver is required to manage the lifecycle of Amazon EBS volumes for persistent volumes.
-
-> **Note:** `eksctl` is an useful tool to create and manage clusters on EKS. Learn more [here](https://eksctl.io/)
+* If you use Kubernetes version 1.23 or later, the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
+* Optional. [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.
 
 ## Step 1: Choose a base domain
 
@@ -51,7 +50,7 @@ As you follow the guide linked above, keep in mind:
 * Each version of Astronomer Software is compatible with only a particular set of Kubernetes versions. For more information, see the Astronomer [Version Compatibility Reference](version-compatibility-reference.md).
 * Astronomer recommends running the EKS control plane in a single security group. The worker nodes you spin up should have the same setup as the EKS control plane.
 * All security and access settings needed for your worker nodes should be configured in your Cloud Formation template.
-* Astronomer recommends configuring [Autoscaling](https://docs.aws.amazon.com/eks/latest/userguide/autoscaling.html) to automatically scale your resources up or down to meet changing demands.
+* Astronomer recommends configuring [Autoscaling](https://docs.aws.amazon.com/eks/latest/userguide/autoscaling.html) to automatically scale your resources up or down based on changing usage.
 * If you create an EKS cluster from the UI, `kubectl` access will be limited to the user who created the cluster by default.
     * To give more users `kubectl` access, you'll have to do so manually.
     * [This post](https://web.archive.org/web/20190323035848/http://marcinkaszynski.com/2018/07/12/eks-auth.html) goes through how IAM plays with EKS.
@@ -120,17 +119,15 @@ Depending on your organization, you may receive either a globally trusted certif
 
 ### Option 3: Use the AWS Certificate Manager as the certificate provider
 
-> **Important Note**:
-> AWS Certificate Manager terminates TLS at the Load Balancer level and does not encrypt the internal traffic inside the cluster. 
-> The ingress controller requires an astronomer-tls secret with a certificate and private key to encrypt internal traffic. 
-> Because ACM relies on annotations attached to Kubernetes resources and does not issue certificates and private key files, use one of the following options to fulfill this requirement:
-> 
-> - [Self-signed certificate](self-signed-certificate.md)
-> - [AWS Certificate Manager Private CA](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/)[AWS Certificate Manager Private CA](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/)
-> - [Let's Encrypt](renew-tls-cert.md#automatically-renew-tls-certificates-using-lets-encrypt)
+AWS Certificate Manager (ACM) terminates TLS at the Load Balancer level and does not encrypt the internal traffic inside the cluster. The ACM ingress controller requires an `astronomer-tls` secret with a certificate and private key to encrypt internal traffic. 
 
-Note the following configuration block for when you configure your Helm chart in Step 8. 
-    Update the `ACM Certificate ARN` field with the ARN of your ACM certificate.
+Because ACM relies on annotations attached to Kubernetes resources and does not issue certificates or private key files, you must complete one of the following options to create the `astronomer-tls` secret:
+ 
+- Create a [self-signed certificate](self-signed-certificate.md).
+- Create a certificate with [AWS Certificate Manager Private CA](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/).
+- Create a certificate with [Let's Encrypt](renew-tls-cert.md#automatically-renew-tls-certificates-using-lets-encrypt).
+
+After you create the certificate, add the following configuration block to your Helm chart in Step 8, making sure to replace the `<ACM-Certificate-ARN>` field with the ARN of your ACM certificate.
 
     ```yaml
     nginx:
@@ -140,7 +137,7 @@ Note the following configuration block for when you configure your Helm chart in
         service.beta.kubernetes.io/aws-load-balancer-type: external
         service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
         service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "\"true\""
-        service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <ACM Certificate ARN>
+        service.beta.kubernetes.io/aws-load-balancer-ssl-cert: <ACM-Certificate-ARN>
         service.beta.kubernetes.io/aws-load-balancer-backend-protocol: ssl
     ```
 
@@ -162,14 +159,13 @@ If the certificate order is correct, proceed to step 5.
 
 ## Step 5: Create a Kubernetes TLS Secret
 
-If you received a globally trusted certificate or if you created a self-signed certificate, create a Kubernetes TLS secret using the following command and then proceed to Step 6:
+If you received a globally trusted certificate or created a self-signed certificate, create a Kubernetes TLS secret using the following command and then proceed to Step 6:
 
 ```sh
 kubectl create secret tls astronomer-tls --cert <your-certificate-filepath> --key <your-private-key-filepath> -n astronomer
 ```
 
-If you created a certificate using Let's Encrypt, the `astronomer-tls` secret is already present in your Kubernetes cluster.
-You can confirm with the following command:
+If you created a certificate using Let's Encrypt, the `astronomer-tls` secret already exists in your Kubernetes cluster. Run the following command to confirm it exists: 
 ```bash
 kubectl describe secret astronomer-tls --namespace astronomer
 ```
@@ -337,8 +333,6 @@ If you are installing Astronomer in an airgapped environment without access to t
 
 :::
 
-
-
 ## Step 9: Install Astronomer
 
 <!--- Version-specific -->
@@ -474,9 +468,9 @@ astronomer-prometheus                ClusterIP      172.20.72.196    <none>     
 astronomer-registry                  ClusterIP      172.20.100.102   <none>                                                                    5000/TCP                                     24d
 ```
 
-You will need to create a new CNAME record through your DNS provider using the ELB CNAME listed above. You can create a single wildcard CNAME record such as `*.astro.mydomain.com`, or alternatively create individual CNAME records for the following routes:
+You will need to create a new CNAME record through your DNS provider using the ELB CNAME listed above. If you're using Amazon Route 53, see [Creating records by using the Amazon Route 53 console](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html).
 
-[Follow the steps here if you are using Route53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-creating.html)
+You can create a single wildcard CNAME record such as `*.astro.mydomain.com`, or alternatively create individual CNAME records for the following routes:
 
 ```sh
 app.astro.mydomain.com
