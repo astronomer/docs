@@ -14,7 +14,7 @@ Specifically, you can:
 - Store a Deployment file that represents the configurations of an existing Deployment. You can make changes to this file to update a Deployment faster and more easily than doing so with the Cloud UI or individual Astro CLI commands.
 - Use a template file from an existing Deployment to create another Deployment with the same configurations. This is an alternative to creating a new Deployment in the Cloud UI and manually copying configurations.
 
-Astro supports updating a Deployment programmatically with [Deployment API keys](api-keys.md), but you cannot currently automate creating a Deployment as part of a CI/CD workflow. Support for both of these features is coming soon.
+Astro supports updating a Deployment programmatically with [Deployment API keys](api-keys.md), but you can't  automate creating a Deployment as part of a CI/CD workflow.
 
 ## Inspect a Deployment
 
@@ -47,7 +47,7 @@ The output of this command includes the name, description, and metadata that is 
 
 ### Template file reference
 
-When you inspect a Deployment, aa template file is created with the following sections:
+When you inspect a Deployment, a template file is created with the following sections:
 
 - `environment_variables`
 - `configuration`
@@ -105,7 +105,6 @@ deployment:
         webserver_url: 
 ```
 
-Read the following sections to learn about each available key and value in the template file.
 
 #### `deployment.environment_variables`
 
@@ -155,7 +154,7 @@ To create a new Deployment from an existing template file:
    
    You can also go to the Workspace page in the Cloud UI.
 
-4. Optional. Reconfigure any Airflow connections or variables from the Deployment which you copied into the template file. Airflow connections and variables cannot be configured using template files. See [Manage connections in Airflow](https://docs.astronomer.io/learn/connections).
+4. Optional. Reconfigure any Airflow connections or variables from the Deployment that you copied into the template file. Airflow connections and variables cannot be configured using template files. See [Manage connections in Airflow](https://docs.astronomer.io/learn/connections).
 
 ## Update a Deployment using a Deployment file
 
