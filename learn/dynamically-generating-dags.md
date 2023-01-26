@@ -17,6 +17,12 @@ Because everything in Airflow is code, you can dynamically generate DAGs using P
 
 All code used in this guide is located in the [Astronomer Registry](https://github.com/astronomer/dynamic-dags-tutorial).
 
+:::tip
+
+As of Airflow 2.3, you can use [dynamic task mapping](dynamic-tasks.md) to write DAGs that dynamically generate parallel tasks at runtime. Dynamic task mapping is a first-class Airflow feature, and is suitable for many dynamic use cases. Due to its higher degree of support and stability, we recommend exploring dynamic task mapping for your use case before implementing the dynamic DAG generation methods described in this guide.
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:

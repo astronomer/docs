@@ -35,6 +35,8 @@ When you select a Workspace in the Cloud UI, the **Home** page now appears first
 
 ![Workspace home page in the Cloud UI](/img/release-notes/workspace-home.png)
 
+See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blog/introducing-astros-new-workspace-homepage/) for more information. 
+
 ### Additional improvements
 
 - Data plane cluster access is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
