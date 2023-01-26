@@ -25,22 +25,21 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## January 24, 2023
 
-### New Workspace home page 
+### New Workspace Home page 
 
-When you open a Workspace in the Cloud UI, you now enter the Workspace **Home** page. On this page, you can:
+When you select a Workspace in the Cloud UI, the **Home** page now appears first. On this page, you can:
 
-- Check the status of your Deployments at a glance.
-- Jump back in to the Deployments and Cloud IDE projects you most recently accessed. 
-- View release notes for all primary Astro products.
+- Check the status of your Deployments.
+- Quickly access your most recently viewed Deployments and Cloud IDE projects. 
+- View release notes for all Astro products.
 
 [Workspace home page in the Cloud UI](/img/release-notes/workspace-home.png)
 
-The previous default Workspace page is now accessible in **Deployments**.
 
 ### Additional improvements
 
-- Ingress to clusters in the data plane is now limited only to IPs from the control plane. This change will arrive to all clusters over the next few weeks.
-- You can now request custom tags for your clusters through [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by going to **Clusters**, selecting a cluster, and clicking **Details**. See [View clusters](view-clusters.md).
+- Data plane cluster access is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
+- You can now request custom tags for your clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](view-clusters.md).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
 
