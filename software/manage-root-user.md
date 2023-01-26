@@ -15,7 +15,7 @@ When you install Astronomer Software, a root user with the username `root` and a
     kubectl get secret astronomer-root-admin-credentials -o jsonpath='{.data.password}' -n <your-platform-namespace> | base64 --decode
     ```
 
-2. Click **Root Admin Login** on the Astronomer Software log in page.
+2. Log in to your Astronomer Software instance with the root username and password.
 
 ## Customize the root user's password
 
