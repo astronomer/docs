@@ -19,7 +19,7 @@ When you install Astronomer Software, a root user with the username `root` and a
 
 ## Customize the root user's password
 
-You might want to use a custom root user password to ensure that someone who has recently left your organization no longer has access to the root user. 
+You can create a custom root user password to limit access to the root user account. 
 
 To configure a custom password for the root user, run the following command: 
 
@@ -27,23 +27,25 @@ To configure a custom password for the root user, run the following command:
 kubectl patch secret -n <your-platform-namespace> astronomer-root-admin-credentials --type=json -p='[{ "op" : "replace" , "path" : "/data/password" , "value" : "'$(echo -n "<your-new-password>" | base64)'"}]' && kubectl create job --from=cronjob/<your-release-name>-update-root-admin-password-cronjob manual3 -n <your-platform-namespace>
 ```
 
-## Limit System-level user creation
+## Limit system-level user creation
 
-A common use case for having a root user is to limit system-level user creation to a single user. To configure your system this way, add the following lines to your `config.yaml` file:
+A common use case for having a root user is to limit system-level user creation to a single user. To learn more about customizing role permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).
 
-```yaml
-astronomer:
-  houston:
-    config:
-      roles:
-        SYSTEM_ADMIN:
-          permissions:
-            system.iam.updateSystemLevelPermissions: false
-        SYSTEM_ROOT_ADMIN:
-          permissions:
-            system.iam.updateSystemLevelPermissions: true
-```
+1. Add the following lines to your `config.yaml` file:
 
-After saving your changes, apply the configuration change. See [Apply a config change](apply-platform-config.md).
+    ```yaml
+    astronomer:
+      houston:
+        config:
+          roles:
+            SYSTEM_ADMIN:
+              permissions:
+                system.iam.updateSystemLevelPermissions: false
+            SYSTEM_ROOT_ADMIN:
+              permissions:
+                system.iam.updateSystemLevelPermissions: true
+    ```
 
-To learn more about customizing role permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions) .
+2. Save your changes and then apply them. See [Apply a Software platform configuration change](apply-platform-config.md).
+
+
