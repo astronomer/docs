@@ -5,7 +5,7 @@ id: manage-root-user
 description: Learn how to manage the root user role with all permissions on Astronomer Software
 ---
 
-When you install Astronomer Software, a root user with all permissions is automatically created. The root user's username is `root@<your-basedomain>`, and the password is stored as a Kubernetes secret on your installation.
+When you install Astronomer Software, a root user with all permissions is automatically created. The root user's username is `root`, and the password is stored as a Kubernetes secret on your installation.
 
 ## Log in as the root user
 
