@@ -35,6 +35,9 @@ module.exports = {
           items: [
             "cloud-ide/overview",
             "cloud-ide/quickstart",
+            "cloud-ide/run-python",
+            "cloud-ide/run-sql",
+            "cloud-ide/document-pipeline",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
           ],
@@ -58,6 +61,7 @@ module.exports = {
         "api-keys",
         "environment-variables",
         "secrets-backend",
+        "manage-deployments-as-code",
       ],
     },
     {

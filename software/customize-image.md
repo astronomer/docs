@@ -258,7 +258,7 @@ Depending on where your private packages are stored, use one of the following se
     ]}>
 <TabItem value="github">
 
-## Install Python packages from a private GitHub repository
+### Install Python packages from a private GitHub repository
 
 This topic provides instructions for building your Astro project with Python packages from a private GitHub repository.  At a high level, this setup entails specifying your private packages in `requirements.txt`, creating a custom Docker image that mounts a GitHub SSH key for your private GitHub repositories, and building your project with this Docker image.
 
@@ -270,7 +270,7 @@ The following setup has been validated only with a single SSH key. Due to the na
 
 :::
 
-### Prerequisites
+#### Prerequisites
 
 To install Python packages from a private GitHub repository on Astronomer Software, you need:
 
@@ -288,8 +288,7 @@ If your organization enforces SAML single sign-on (SSO), you must first authoriz
 
 This setup assumes that each custom Python package is hosted within its own private GitHub repository. Installing multiple packages from a single private GitHub repository is not supported.
 
-
-### Step 1: Specify the private repository in your project
+#### Step 1: Specify the private repository in your project
 
 To add a Python package from a private repository to your Software project, specify the repository's SSH URL in your project's `requirements.txt` file. This URL should be formatted as `git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git`.
 
@@ -303,7 +302,7 @@ numpy==1.22.1
 
 This example assumes that the name of each of your Python packages is identical to the name of its corresponding GitHub repository. In other words,`mypackage1` is both the name of the package and the name of the repository.
 
-### Step 2. Create Dockerfile.build
+#### Step 2. Create Dockerfile.build
 
 1. In your Astro project, create a duplicate of your `Dockerfile` and name it `Dockerfile.build`.
 
@@ -360,7 +359,7 @@ This example assumes that the name of each of your Python packages is identical 
 
   :::
 
-### Step 3. Build a custom Docker image
+#### Step 3. Build a custom Docker image
 
 1. Run the following command to create a new Docker image from your `Dockerfile.build` file, making sure to replace `<ssh-key>` with your SSH private key file name and `<your-image>` with your Astronomer image:
 
@@ -398,7 +397,7 @@ Your Software project can now utilize Python packages from your private GitHub r
 
 <TabItem value="pypi">
 
-#### Install Python packages from a private PyPI index
+### Install Python packages from a private PyPI index
 
 This topic provides instructions for building your Astro project using Python packages from a private PyPI index. In some organizations, python packages are prebuilt and pushed to a hosted private pip server (such as pypiserver or Nexus Repository) or managed service (such as PackageCloud or Gitlab). At a high level, this setup requires specifying your private packages in `requirements.txt`, creating a custom Docker image that changes where pip looks for packages, and building your project with this Docker image.
 
@@ -500,42 +499,6 @@ Ensure that the name of the package on the private repository does not clash wit
 
 </TabItem>
 </Tabs>
-
-## Build with a different Python version (_Astronomer Certified only_)
-
-:::info
-
-To use a different Python version with Astro Runtime, you have to run your tasks using the KubernetesPodOperator. See [Run the KubernetesPodOperator on Astronomer Software](kubepodoperator.md).
-
-:::
-
-While the Astronomer Certified (AC) Python Wheel supports Python versions 3.6, 3.7, and 3.8, AC Docker images have been tested and built only for Python 3.7.
-
-To run Astronomer Certified on Docker with Python versions 3.6 or 3.8, you need to create a custom version of the image, specify the `PYTHON_MAJOR_MINOR_VERSION` build argument, and push the custom image to an existing Docker registry. To do so:
-
-1. Using `docker build`, build a custom [Astronomer Certified Docker image](https://github.com/astronomer/ap-airflow) and specify `PYTHON_MAJOR_MINOR_VERSION` for the version of Python you'd like to support. For example, the command for building a custom Astronomer Certified image for Airflow 2.0.0 with Python 3.8 would look something like this:
-
-    ```sh
-    docker build --build-arg PYTHON_MAJOR_MINOR_VERSION=3.8 -t <your-registry>/ap-airflow:<image-tag> https://github.com/astronomer/ap-airflow.git#master:2.0.0/buster
-    ```
-
-    We recommend using an image tag that indicates the image is using a different Python version, such as `2.0.0-buster-python3.8`.
-
-    > **Note:** To use a different version of Airflow, update the URL to point towards the desired Airflow version. For instance, if you're running Airflow 1.10.14, the GitHub URL here would be: `https://github.com/astronomer/ap-airflow.git#master:1.10.14/buster`
-
-2. Push the custom image to your Docker registry. Based on the example in the previous step, the command to do so would look something like this:
-
-    ```sh
-    docker push <your-registry>/ap-airflow:<image-tag>
-    ```
-
-3. Update the `FROM` line of your `Dockerfile` to reference the custom image. Based on the previous example, the line would read:
-
-    ```
-    FROM <your-registry>/ap-airflow:<image-tag>
-    ```
-
-> **Note:** Astronomer Certified Docker images for Apache Airflow 1.10.14+ are Debian-based only. To run Docker images based on Alpine-Linux for Airflow versions 1.10.7, 1.10.10, or 1.10.12, specify `alpine3.10` instead of `buster` in the GitHub URL.
 
 ## Add a CA certificate to an Astro Runtime image
 

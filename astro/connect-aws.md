@@ -100,7 +100,7 @@ If Astronomer creates a new transit gateway in your AWS account for Astro, keep 
 
 <TabItem value="AWS PrivateLink">
 
-Use AWS PrivateLink to create private connections from Astro to your AWS services without exposing your data to the public internet. 
+Use AWS PrivateLink to create private connections from Astro to your AWS services without exposing your data to the public internet. If your AWS services are located in a different region than Astro, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 Astro clusters are pre-configured with the following AWS PrivateLink endpoint services:
 

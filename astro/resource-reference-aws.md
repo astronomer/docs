@@ -17,7 +17,7 @@ Read the following document for a reference of our default resources as well as 
 
 ## Default cluster values
 
-| Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                       | Configurable? |
+| Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                        | Configurable |
 | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------- |
 | [EKS Cluster](https://aws.amazon.com/eks)                                                           | An EKS cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                                                            | 1x                                            |               |
 | Worker node pool                                                                                    | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | ✔️             |
@@ -42,31 +42,33 @@ To create a new cluster on Astro with a specified configuration, see [Create a c
 
 ### Cluster regions
 
-You can host Astro clusters in the following AWS regions:
+Depending on how you installed Astro, you can host Astro clusters in the following AWS regions:
 
-- `af-south-1` - Africa (Cape Town)
-- `ap-east-1` - Asia Pacific (Hong Kong)
-- `ap-northeast-1` - Asia Pacific (Tokyo)
-- `ap-northeast-2` - Asia Pacific (Seoul)
-- `ap-northeast-3` - Asia Pacific (Osaka)
-- `ap-southeast-1` - Asia Pacific (Singapore)
-- `ap-southeast-2` - Asia Pacific (Sydney)
-- `ap-south-1` - Asia Pacific (Mumbai)
-- `ca-central-1` - Canada (Central)
-- `eu-central-1` - Europe (Frankfurt)
-- `eu-north-1` - Europe (Stockholm)
-- `eu-south-1` - Europe (Milan)
-- `eu-west-1` - Europe (Ireland)
-- `eu-west-2` - Europe (London)
-- `eu-west-3` - Europe (Paris)
-- `me-south-1` - Middle East (Bahrain)
-- `sa-east-1` - South America (São Paulo)
-- `us-east-1` - US East (N. Virginia)
-- `us-east-2` - US East (Ohio)
-- `us-west-1` - US West (N. California)
-- `us-west-2` - US West (Oregon)
+| Code             | Name                      | Astro - Bring Your Own Cloud | Astro - Hosted |
+| ---------------- | ------------------------- | ---------------------------- | -------------- |
+| `af-south-1`     | Africa (Cape Town)        | ✔️                            |                |
+| `ap-east-1`      | Asia Pacific (Hong Kong)  | ✔️                            |                |
+| `ap-northeast-1` | Asia Pacific (Tokyo)      | ✔️                            |                |
+| `ap-northeast-2` | Asia Pacific (Seoul)      | ✔️                            |                |
+| `ap-northeast-3` | Asia Pacific (Osaka)      | ✔️                            |                |
+| `ap-southeast-1` | Asia Pacific (Singapore)  | ✔️                            |                |
+| `ap-southeast-2` | Asia Pacific (Sydney)     | ✔️                            |                |
+| `ap-south-1`     | Asia Pacific (Mumbai)     | ✔️                            | ✔️              |
+| `ca-central-1`   | Canada (Central)          | ✔️                            |                |
+| `eu-central-1`   | Europe (Frankfurt)        | ✔️                            | ✔️              |
+| `eu-north-1`     | Europe (Stockholm)        | ✔️                            |                |
+| `eu-south-1`     | Europe (Milan)            | ✔️                            |                |
+| `eu-west-1`      | Europe (Ireland)          | ✔️                            | ✔️              |
+| `eu-west-2`      | Europe (London)           | ✔️                            |                |
+| `eu-west-3`      | Europe (Paris)            | ✔️                            |                |
+| `me-south-1`     | Middle East (Bahrain)     | ✔️                            |                |
+| `sa-east-1`      | South America (São Paulo) | ✔️                            |                |
+| `us-east-1`      | US East (N. Virginia)     | ✔️                            | ✔️              |
+| `us-east-2`      | US East (Ohio)            | ✔️                            |                |
+| `us-west-1`      | US West (N. California)   | ✔️                            |                |
+| `us-west-2`      | US West (Oregon)          | ✔️                            | ✔️              |
 
-Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that is not on this list, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ### RDS instance type
 

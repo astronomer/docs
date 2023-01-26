@@ -101,7 +101,7 @@ default_args = {
 
 with DAG('example_dag',
 		 max_active_runs=3,
-		 schedule_interval='@once',
+		 schedule='@once',
 		 default_args=default_args) as dag:
 
 	sens = MySensor(

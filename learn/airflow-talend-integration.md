@@ -106,7 +106,7 @@ default_args = {
 }
 
 with DAG('talend_api_jobs',
-          schedule_interval='@once',
+          schedule='@once',
           default_args=default_args
           ) as dag:
 
@@ -210,7 +210,7 @@ else:
 email_to = ["noreply@astronomer.io"]
 
 with DAG('talend_jobs',
-          schedule_interval='@once',
+          schedule='@once',
           default_args=default_args
           ) as dag:
 

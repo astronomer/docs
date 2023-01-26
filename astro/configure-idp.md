@@ -36,7 +36,7 @@ This guide provides setup steps for integrating both of these identity providers
 
 :::info
 
-Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in via the [Cloud UI](https://cloud.astronomer.io/). IdP-initiated SSO is coming soon.
+Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in to the [Cloud UI](https://cloud.astronomer.io/).
 
 :::
 

@@ -32,7 +32,7 @@ To create an Astro cluster on AWS, Microsoft Azure, or Google Cloud Platform (GC
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Bring your own cloud', value: 'byoc'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
@@ -104,7 +104,7 @@ To create a cluster in one of these regions, complete the following additional s
     ```
 
 2. In the AWS Management Console, enable the desired region as described in [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable).
-3. Upgrade your [global endpoint session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-manage-tokens) to version 2, which is valid in all AWS regions, by running the following command via the [AWS CLI](https://aws.amazon.com/cli/):
+3. Upgrade your [global endpoint session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-manage-tokens) to version 2, which is valid in all AWS regions, by running the following command in the [AWS CLI](https://aws.amazon.com/cli/):
 
     ```sh
     aws iam set-security-token-service-preferences --global-endpoint-token-version v2Token
@@ -135,7 +135,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Bring your own cloud', value: 'byoc'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
@@ -184,7 +184,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Bring your own cloud', value: 'byoc'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">

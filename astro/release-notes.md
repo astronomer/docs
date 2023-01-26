@@ -19,9 +19,37 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 7.1.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.2.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.8.4 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.9.0 ([Release notes](cli/release-notes.md))
+
+## January 18, 2023
+
+### Bug fixes
+
+- Fixed an issue with Google Cloud Platform (GCP) clusters where the metadata database for a Deployment could persist after the Deployment was deleted.
+
+## January 10, 2023 
+
+### New Astro Cloud IDE cell types
+
+To simplify the creation of new tasks, the following new cell types are now available in the Astro Cloud IDE:
+
+- **SQL**: Run a SQL query against an existing database connection and save the query results in an XCom file for use by other cells. Use this cell type to run smaller queries and store the results in Airflow for quick access by other cells.
+- **Warehouse SQL**: Run a SQL query against an existing database connection and store the query results in your data warehouse. Use this cell type for data operations that require more storage and reliability.
+- **Markdown**: Add inline Markdown comments to your generated DAG code. Use this cell type to document code decisions and to make it easier for team members to collaborate on shared pipelines.
+
+For more information about a specific cell type, see [Run SQL in the Astro Cloud IDE](cloud-ide/run-sql.md), [Run Python in the Cloud IDE](cloud-ide/run-python.md), and [Add documentation to an Astro Cloud IDE pipeline](cloud-ide/document-pipeline.md).
+
+### Additional improvements
+
+- To reduce the time it takes for Airflow to parse new DAG files, the default value for `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` has been reduced from 5 minutes to 30 seconds for all Deployments regardless of Runtime version. For most users, this means that you will see new DAGs appear in the Airflow UI faster.
+- In the Cloud UI, a banner now appears if there is an incident reported on the [Astro status page](https://status.astronomer.io/).
+
+### Bug fixes 
+
+- Sorting the **Organization Role** column in the **People** tab of the Cloud UI now works as expected.
+- Fixed an issue where lineage groups would occasionally not collapse as expected in the **Lineage Graph** view.
 
 ## December 20, 2022 
 

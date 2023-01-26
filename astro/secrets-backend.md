@@ -37,7 +37,7 @@ Secrets backend integrations are configured individually with each Astro Deploym
 
 :::info
 
-If you enable a secrets backend on Astro, you can continue to define Airflow variables and connections either [as environment variables](environment-variables.md#add-airflow-connections-and-variables-via-environment-variables) or in the Airflow UI as needed. If set via the Airflow UI, variables and connections are stored as encrypted values in Airflow's metadata database.
+If you enable a secrets backend on Astro, you can continue to define Airflow variables and connections either [as environment variables](environment-variables.md) or in the Airflow UI. If you set set Airflow variables and connections in the Airflow UI, they are stored as encrypted values in the Airflow metadata database.
 
 Airflow checks for the value of an Airflow variable or connection in the following order:
 
@@ -49,7 +49,7 @@ Airflow checks for the value of an Airflow variable or connection in the followi
 
 :::tip
 
-Setting Airflow connections via secrets requires knowledge of how to generate Airflow connection URIs. If you plan to store Airflow connections on your secrets backend, read the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-uri-format) for guidance on how to generate a connection URI.
+Using secrets to set Airflow connections requires knowledge of how to generate Airflow connection URIs. If you plan to store Airflow connections on your secrets backend, see [URI format](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-uri-format) for guidance on how to generate a connection URI.
 
 :::
 
@@ -316,7 +316,7 @@ This topic provides setup steps for configuring [Google Cloud Secret Manager](ht
 
 #### Create an Airflow variable or connection in Google Cloud Secret Manager
 
-To start, create an Airflow variable or connection in Google Cloud Secret Manager that you want to store as a secret. You can do so via the Cloud Console or the gcloud CLI.
+To start, create an Airflow variable or connection in Google Cloud Secret Manager that you want to store as a secret. You can use the Cloud Console or the gcloud CLI.
 
 Secrets must be formatted such that:
 - Airflow variables are set as `airflow-variables-<variable-key>`.

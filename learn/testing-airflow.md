@@ -56,7 +56,7 @@ def test_retries_present():
         assert retries == 2, error_msg
 ```
 
-To see an example of running these tests as part of a CI/CD workflow, see the [airflow-testing-guide](https://github.com/astronomer/airflow-testing-guide)repository.
+To see an example of running these tests as part of a CI/CD workflow, see the [airflow-testing-guide](https://github.com/astronomer/airflow-testing-guide) repository.
 
 ## Unit testing
 
@@ -187,7 +187,7 @@ with DAG(
     "adf_great_expectations",
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
-    schedule_interval="@daily",
+    schedule="@daily",
     default_args=default_args,
     catchup=False,
 ) as dag:

@@ -28,7 +28,7 @@ If you're using the Astronomer Houston API and you're migrating from Astronomer 
 
 ## Getting started
 
-The Astronomer Houston API is available in a [GraphQL Playground](https://www.apollogplatformraphql.com/docs/apollo-server/testing/graphql-playground/), "a graphical, interactive, in-browser GraphQL IDE, created by [Prisma](https://www.prisma.io/) and based on GraphiQL." [GraphQL](https://graphql.org/) itself is an open source query language for APIs that makes for an easy and simple way to manage data.
+The Astronomer Houston API is available in a [GraphQL Playground](https://www.apollogplatformraphql.com/docs/apollo-server/testing/graphql-playground/), "a graphical, interactive, in-browser GraphQL IDE, created by [Prisma](https://www.prisma.io/) and based on GraphQL." [GraphQL](https://graphql.org/) itself is an open source query language for APIs that makes for an easy and simple way to manage data.
 
 In short, the Playground is a portal that allows you to write GraphQL queries directly against the API within your browser.
 
@@ -344,7 +344,7 @@ If you're assigning a user a different System-Level Role, replace `SYSTEM_ADMIN`
 
 ### Create a service account
 
-You can create Deployment and Workspace-level accounts in the Software UI as described in [Deploy to Astronomer via CI/CD](ci-cd.md). Alternatively, you can create platform-level service accounts programatically via the Houston API. To create a service account via the Houston API, run the following in your GraphQL Playground:
+You can create Deployment and Workspace-level accounts in the Software UI as described in [Deploy to Astronomer via CI/CD](ci-cd.md). Alternatively, you can create platform-level service accounts programmatically via the Houston API. To create a service account via the Houston API, run the following in your GraphQL Playground:
 
 ```graphql
 mutation CreateSystemServiceAccount {

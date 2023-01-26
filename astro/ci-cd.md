@@ -74,7 +74,7 @@ $ astro deploy
 
 :::info
 
-All image-only templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy via CI/CD. These templates will not work if you use the `astrocloud` executable. To upgrade, see [Install the Astro CLI](cli/install-cli.md).
+All image-only templates use [Astro CLI v1.0+](cli/release-notes.md) to deploy CI/CD pipelines. These templates will not work if you use the `astrocloud` executable. To upgrade, see [Install the Astro CLI](cli/install-cli.md).
 
 :::
 
@@ -359,7 +359,7 @@ To complete this setup, you need:
 </TabItem>
 </Tabs>
 
-### GitHub Actions (DAG-based deploy)
+### GitHub Actions (DAG-based deploys)
 
 The following templates are examples of how to implement DAG-only deploys in GitHub Actions. These templates can be modified to run on other CI/CD tools.
 
@@ -601,7 +601,7 @@ If your Astro project requires additional build-time arguments to build an image
 
             echo "DAGS_ONLY=$dags_only" >> $GITHUB_OUTPUT
           id: deployment-type
-        # If only DAGs changed do a DAG Deplo
+        # If only DAGs changed do a DAG Deploy
         - name: DAG Deploy to Astro
           if: steps.deployment-type.outputs.DAGS_ONLY == 1
           run: |
@@ -641,7 +641,7 @@ If your Astro project requires additional build-time arguments to build an image
 </TabItem>
 </Tabs>
 
-### Jenkins
+### Jenkins (Image-only deploys)
 
 <Tabs
     defaultValue="jenkinsstandard"
@@ -674,10 +674,12 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
               }
              }
              steps {
-               script {
-                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh "./astro deploy ${siteVariables.deploymentid} -f"
+                 checkout scm
+                 sh '''
+                   curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                   tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                   ./astro deploy
+                 '''
                }
              }
            }
@@ -736,11 +738,12 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
            }
            stage('Deploy to Astronomer') {
              steps {
-               script {
-                 sh 'curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh 'tar xzf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz'
-                 sh "./astro deploy ${siteVariables.deploymentid} -f"
-               }
+                 checkout scm
+                 sh '''
+                   curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                   tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                   ./astro deploy
+                 '''
              }
            }
          }
@@ -756,6 +759,53 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
 
 </TabItem>
 </Tabs>
+
+### Jenkins (DAG-based deploys)
+
+Use the following template to implement DAG-only deploys with Jenkins.
+
+1. In your Jenkins pipeline configuration, add the following parameters:
+
+    - `ASTRONOMER_KEY_ID`: Your Deployment API key ID
+    - `ASTRONOMER_KEY_SECRET`: Your Deployment API key secret
+    - `ASTRONOMER_DEPLOYMENT_ID`: The Deployment ID of your production deployment
+
+    Be sure to set the values for your API credentials as secret.
+
+2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+
+    <pre><code parentName="pre">{`pipeline {
+       agent any
+         stages {
+          stage('Dag Only Deploy to Astronomer') {
+            when {
+            expression {
+             return env.GIT_BRANCH == "origin/main"
+           }
+          }
+          steps {
+              checkout scm
+              sh '''
+                curl -LJO https://github.com/astronomer/astro-cli/releases/download/v${siteVariables.cliVersion}/astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                tar -zxvf astro_${siteVariables.cliVersion}_linux_amd64.tar.gz astro && rm astro_${siteVariables.cliVersion}_linux_amd64.tar.gz
+                files=($(git diff-tree HEAD --name-only --no-commit-id))
+                find="dags"
+                if [[ ${siteVariables.jenkinsenv1} =~ (^|[[:space:]])"$find"($|[[:space:]]) && ${siteVariables.jenkinsenv2} -eq 1 ]]; then
+                  ./astro deploy --dags;
+                else
+                  ./astro deploy;
+                fi
+              '''
+          }
+        }
+        }
+         post {
+           always {
+           cleanWs()
+      }
+     }
+    }`}</code></pre>
+
 
 ### AWS CodeBuild
 
@@ -898,7 +948,7 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
                 curl -sSL install.astronomer.io | sudo bash -s
                 astro deploy -f
 
-    # Invoke jobs via workflows
+    # Invoke jobs with workflows
     # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
     workflows:
       version: 2.1

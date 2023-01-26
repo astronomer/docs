@@ -81,7 +81,7 @@ import os
 with DAG(
     dag_id="bash_two_commands_example_dag",
     start_date=datetime(2022,8,1),
-    schedule_interval=None,
+    schedule=None,
     catchup=False
 ) as dag:
 
@@ -147,7 +147,7 @@ import os
 with DAG(
     dag_id="bash_script_example_dag",
     start_date=datetime(2022,8,1),
-    schedule_interval=None,
+    schedule=None,
     catchup=False
 ) as dag:
 
@@ -247,7 +247,7 @@ from datetime import datetime
 with DAG(
     dag_id="print_ISS_info_dag",
     start_date=datetime(2022,8,1),
-    schedule_interval=None,
+    schedule=None,
     catchup=False
 ) as dag:
 

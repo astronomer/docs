@@ -53,7 +53,7 @@ For example, in the DAG snippet below `task_a` and `task_b` are both assigned to
 ```python
 with DAG('pool_dag',
          start_date=datetime(2021, 8, 1),
-         schedule_interval=timedelta(minutes=30),
+         schedule=timedelta(minutes=30),
          catchup=False,
          default_args=default_args
          ) as dag:
@@ -99,13 +99,12 @@ from airflow.operators.python import PythonOperator
 
 
 def api_function(**kwargs):
-    url = 'https://covidtracking.com/api/v1/states/'
-    filename = '{0}/{1}.csv'.format('wa', '2020-03-31')
-    res = requests.get(url+filename)
+    url = 'http://catfact.ninja/fact'
+    res = requests.get(url)
 
 with DAG('pool_priority_dag',
          start_date=datetime(2021, 8, 1),
-         schedule_interval=timedelta(minutes=30),
+         schedule=timedelta(minutes=30),
          catchup=False,
          default_args={
              'pool': 'api_pool',
@@ -145,13 +144,12 @@ from airflow.operators.python import PythonOperator
 
 
 def api_function(**kwargs):
-    url = 'https://covidtracking.com/api/v1/states/'
-    filename = '{0}/{1}.csv'.format('wa', '2020-03-31')
-    res = requests.get(url+filename)
+    url = 'http://catfact.ninja/fact'
+    res = requests.get(url)
 
 with DAG('pool_unimportant_dag',
          start_date=datetime(2021, 8, 1),
-         schedule_interval=timedelta(minutes=30),
+         schedule=timedelta(minutes=30),
          catchup=False,
          default_args={
              'retries': 1,

@@ -59,7 +59,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -90,7 +90,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -148,7 +148,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -208,7 +208,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -281,7 +281,7 @@ default_args = {'owner': 'airflow',
                 }
 
 with DAG(dag_id,
-            schedule_interval=scheduletoreplace,
+            schedule=scheduletoreplace,
             default_args=default_args,
             catchup=False) as dag:
 

@@ -52,6 +52,7 @@ Setting Airflow connections with secrets requires knowledge of how to generate A
     defaultValue="hashicorp"
     values={[
         {label: 'Hashicorp Vault', value: 'hashicorp'},
+        {label: 'AWS Secrets Manager', value: 'secretsmanager'},
         {label: 'AWS Parameter Store', value: 'paramstore'},
         {label: 'Google Cloud Secret Manager', value: 'gcp'},
         {label: 'Azure Key Vault', value: 'azure'},
@@ -178,7 +179,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
@@ -207,6 +208,107 @@ Once you've confirmed that the integration with Vault works locally, you can com
 3. [Deploy your changes](deploy-cli.md) to Astronomer Software.
 
 Now, any Airflow variable or connection that you write to your Vault server can be successfully accessed and pulled by any DAG in your Deployment on Astronomer Software.
+
+</TabItem>
+
+<TabItem value="secretsmanager">
+
+#### Prerequisites
+
+- A [Deployment](configure-deployment.md).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
+- An Astro project initialized with `astro dev init`.
+- Access to AWS Secrets Manager.
+- A valid AWS Access Key ID and Secret Access Key.
+
+#### Step 1: Write an Airflow variable or connection to AWS Secrets Manager
+
+To start, add an Airflow variable or connection as a secret to Secrets Manager for testing. For instructions, see the [AWS documentation](https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_secret.html) on how to do so using the AWS Secrets Manager Console, CLI or SDK.
+
+Variables and connections should live at `/airflow/variables` and `/airflow/connections`, respectively. For example, if you're setting a secret variable with the key `my_secret`, it should exist at `/airflow/connections/my_secret`.
+
+#### Step 2: Set up AWS Secrets Manager locally
+
+To test AWS Secrets Manager locally, configure it as a secrets backend in your Astro project.
+
+First, install the [Airflow provider for Amazon](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/index.html) by adding the following to your project's `requirements.txt` file:
+
+```
+apache-airflow-providers-amazon
+```
+
+Then, add the following environment variables to your project's `Dockerfile`:
+
+```docker
+# Make sure to replace `<your-aws-key>` and `<your-aws-secret-key>` with your own values.
+ENV AWS_ACCESS_KEY_ID="<your-aws-key>"
+ENV AWS_SECRET_ACCESS_KEY="<your-aws-secret-key>"
+ENV AWS_DEFAULT_REGION="<your-aws-region>"
+ENV AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
+ENV AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables"}
+```
+
+In the next step, you'll test that this configuration is valid locally.
+
+:::warning
+
+If you want to deploy your project to a hosted Git repository before deploying to Astronomer Software, be sure to save `<your-aws-key>` and `<your-aws-secret-key>` in a secure manner. When you deploy to Astronomer Software, use the Software UI to set these values as secrets.
+
+:::
+
+:::tip
+
+If you'd like to reference an AWS profile, you can also add the `profile` param to `ENV AIRFLOW__SECRETS__BACKEND_KWARGS`.
+
+To further customize the integration between Airflow and AWS Secrets Manager, reference Airflow documentation with the [full list of available kwargs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/_api/airflow/providers/amazon/aws/secrets/secrets_manager/index.html).
+
+:::
+
+#### Step 3: Run an example DAG to test AWS Secrets Manager locally
+
+To test Secrets Manager, write a simple DAG which calls your secret and add this DAG to your Astro project's `dags` directory.
+
+For example, you can use the following DAG to print the value of an Airflow variable to your task logs:
+
+```python
+from datetime import datetime
+
+from airflow import DAG
+from airflow.models import Variable
+from airflow.operators.python import PythonOperator
+
+
+def print_var():
+    my_var = Variable.get("<your-variable-key>")
+    print(f'My variable is: {my_var}')
+
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
+
+  test_task = PythonOperator(
+      task_id='test-task',
+      python_callable=print_var,
+)
+```
+
+To test your changes:
+
+1. Run `astro dev restart` to push your changes to your local Airflow environment.
+2. In the Airflow UI (`http://localhost:8080/admin/`), trigger your new DAG.
+3. Click on `test-task` > **View Logs**. If you ran the example DAG above, you should see the contents of your secret in the task logs:
+
+    ```text
+    {logging_mixin.py:109} INFO - My variable is: my-test-variable
+    ```
+
+#### Step 4: Deploy to Astronomer Software
+
+Once you've confirmed that the integration with AWS Secrets Manager works locally, you can complete a similar set-up with a Deployment on Astronomer Software.
+
+1. In the Software UI, add the same environment variables found in your `Dockerfile` to your Deployment [environment variables](environment-variables.md). Specify both `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` as **secret** ensure that your credentials are stored securely.
+2. In your Astro project, delete the environment variables from your `Dockerfile`.
+3. [Deploy your changes](deploy-cli.md) to Astronomer Software.
+
+Now, any Airflow variable or connection that you write to AWS Secrets Manager can be automatically pulled by any DAG in your Deployment on Astronomer Software.
 
 </TabItem>
 
@@ -283,7 +385,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
@@ -389,7 +491,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
 
@@ -498,7 +600,7 @@ def print_var():
     my_var = Variable.get("<your-variable-key>")
     print(f'My variable is: {my_var}')
 
-with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule_interval=None) as dag:
+with DAG('example_secrets_dags', start_date=datetime(2022, 1, 1), schedule=None) as dag:
 
   test_task = PythonOperator(
       task_id='test-task',
