@@ -104,7 +104,18 @@ Yes. Sessions are terminated after 24 hours of inactivity for both Astronomer So
 
 ### How can we turn on SSL and use our own CA?
 
-Astronomer Software uses the Secure Sockets Layer (SSL) encryption protocol by default. During installation, a wildcard certificate for the base domain must be provided.
+Astronomer Software uses the Secure Sockets Layer (SSL) encryption protocol by default. During installation, you must provide either a wildcard certificate or a certificate for the following domains:
+
+- `BASEDOMAIN`
+- `app.BASEDOMAIN`
+- `deployments.BASEDOMAIN`
+- `registry.BASEDOMAIN`
+- `houston.BASEDOMAIN`
+- `grafana.BASEDOMAIN`
+- `kibana.BASEDOMAIN`
+- `install.BASEDOMAIN`
+- `alertmanager.BASEDOMAIN`
+- `prometheus.BASEDOMAIN`
 
 ## External monitoring
 
