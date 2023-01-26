@@ -1,23 +1,21 @@
 ---
-title: 'Manage the root user on Astronomer Software'
+title: 'Manage the Astronomer Software root user'
 sidebar_label: 'Manage the root user'
 id: manage-root-user
 description: Learn how to manage the root user role with all permissions on Astronomer Software
 ---
 
-When you install Astronomer Software, a root user with all permissions is automatically created. The root user's username is `root`, and the password is stored as a Kubernetes secret on your installation.
+When you install Astronomer Software, a root user with the username `root` with all permissions is automatically created. The password for the `root` user is stored as a Kubernetes secret on your Astronomer Software installation.
 
 ## Log in as the root user
 
-By default, Astronomer generates a password for your root user. The password is stored as a Kubernetes secret on your Astronomer installation.
+1. Run the following command to retrieve the default password created by Astronomer: 
 
-To retrieve the password, run the following command: 
+    ```sh
+    kubectl get secret astronomer-root-admin-credentials -o jsonpath='{.data.password}' -n <your-platform-namespace> | base64 --decode
+    ```
 
-```sh
-kubectl get secret astronomer-root-admin-credentials -o jsonpath='{.data.password}' -n <your-platform-namespace> | base64 --decode
-```
-
-To log in to Astronomer Software as the root user, retrieve the password and click **Root Admin Login** on the Software login page.
+2. Click **Root Admin Login** on the Astronomer Software log in page.
 
 ## Customize the root user's password
 
