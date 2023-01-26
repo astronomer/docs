@@ -25,7 +25,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## January 24, 2023
 
-### New Workspace homepage 
+### New Workspace home page 
 
 When you open a Workspace in the Cloud UI, you now enter the Workspace **Home** page. On this page, you can:
 
