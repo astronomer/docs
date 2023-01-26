@@ -79,7 +79,7 @@ def my_dependent_tasks():
     return task_a(task_b(task_c()))
 ```
 
-The following DAG shows a full example implementation of the task groupp decorator, including passing data between tasks before and after the task group:
+The following DAG shows a full example implementation of the task group decorator, including passing data between tasks before and after the task group:
 
 ```python
 import json
