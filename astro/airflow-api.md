@@ -57,7 +57,7 @@ If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generatin
 
 ### Retrieve the Deployment URL
 
-In the Astro CLI, run the following command:
+Run the following command to retrieve a Deployment URL:
 
 ```sh
 astro deployment inspect -n <deployment-name> -k metadata.webserver_url
