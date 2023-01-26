@@ -33,8 +33,7 @@ When you select a Workspace in the Cloud UI, the **Home** page now appears first
 - Quickly access your most recently viewed Deployments and Cloud IDE projects. 
 - View release notes for all Astro products.
 
-[Workspace home page in the Cloud UI](/img/release-notes/workspace-home.png)
-
+![Workspace home page in the Cloud UI](/img/release-notes/workspace-home.png)
 
 ### Additional improvements
 
