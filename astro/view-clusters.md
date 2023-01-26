@@ -33,7 +33,7 @@ The **Worker Types** tab displays the following information:
 
 The **Workspace Authorization** tab lets you define what Workspaces can create Deployments on the cluster.
 
-The **Tags** tab displays the following information about the custom tags created by Astronomer support:
+The **Tags** tab displays custom tags for the cluster created by Astronomer support.
 
 | Value              | Description                                                                                                                 |
 | ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
