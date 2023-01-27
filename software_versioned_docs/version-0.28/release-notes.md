@@ -41,10 +41,10 @@ Release date: January 26, 2023
     - [CVE-2022-37601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37601)
     - [CVE-2022-43680](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-43680)
 
-- Fixed an issue where service accounts with System Admin permissions could not create Deployments for deprecated Airflow versions.
+- Fixed an issue where service accounts with System Admin permissions couldn't create Deployments on deprecated Airflow versions.
 - Fixed an issue where you could not upgrade a Deployment from an unsupported version of Astronomer Certified (AC) to another unsupported version of AC.
-- Fixed an issue where Deployments with multiple DAGs could not be successfully upgraded due to a short timeout.
-- Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts resulted in an error.
+- Fixed an issue where Deployments with many DAGs could not be successfully upgraded due to a short timeout.
+- Fixed an issue in the Software UI where an error message appeared after refreshing pages listing Workspace or Deployment service accounts.
 - Fixed an issue where you could not view Deployment-level service accounts in the Software UI.
 
 ## v0.28.7
