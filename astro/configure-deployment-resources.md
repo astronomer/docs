@@ -56,7 +56,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
-4. Optional. Update the Deployment executor.
+4. Optional. Select an executor in the **Executor** list. See [Update the Deployment executor](#update-the-deployment-executor).
 5. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
 6. Click **Update**.
 
@@ -69,8 +69,8 @@ The executor determines which worker resources run your scheduled tasks. The Cel
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
-4. Select an executor.
-5. Optional. Edit the scheduler settings.
+4. Select an executor in the **Executor** list.
+5. Optional. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
 6. Click **Update**.
 
 ## Update a Deployment name and description
