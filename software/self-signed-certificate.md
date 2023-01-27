@@ -8,6 +8,9 @@ description: Generate a self-signed certificate to use with Astronomer Software.
 
 This guide describes the steps to generate a self-signed certificate to use with Astronomer Software.
 
+Self-signed certificates are best used in privately hosted internal applications and in development and testing environments.
+Avoid using self-signed certificates in situations where trust and identity of the certificate issuer are important.
+
 ## Prerequisites
 
 - [openssl](https://www.openssl.org/). You can install it through [Homebrew](https://formulae.brew.sh/formula/openssl@1.1) on MacOs, [Windows installer](http://gnuwin32.sourceforge.net/packages/openssl.htm) on Windows, or [`apt-get`](https://www.misterpki.com/how-to-install-openssl-on-ubuntu/) on Linux.
