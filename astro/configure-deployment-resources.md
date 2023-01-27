@@ -40,7 +40,7 @@ See [Configure worker queues](configure-worker-queues.md).
 
 ### Scheduler resources
 
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. The executor type you select determines what scheduler resource settings can be adjusted. You can select a Celery or a Kubernetes executor. The executor determines determines which worker resources run your scheduled tasks.
+The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. The executor type you select determines what scheduler resource settings can be adjusted. You can select a Celery or a Kubernetes executor. The executor determines which worker resources run your scheduled tasks.
 
 You can adjust the following scheduler resource settings:
 
