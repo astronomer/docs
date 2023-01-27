@@ -6,7 +6,7 @@ id: debugging-dags
 ---
 
 This guide explains how to identify and resolve common Airflow DAG issues. It also includes resources to try out if you can't find a solution to an Airflow issue.
-While the focus of the troubleshooting steps provider lies on local development, much of the information is also relevant for running Airflow in a production context.
+While the focus of the troubleshooting steps provided lies on local development, much of the information is also relevant for running Airflow in a production context.
 
 This guide was written for Airflow 2. If you are running Airflow 1.15 or earlier, we highly recommend upgrading to prevent compatibility issues and receive the latest bug fixes. For assistance in upgrading see the documentation on [Upgrading from 1.10 to 2](https://airflow.apache.org/docs/apache-airflow/stable/howto/upgrading-from-1-10/index.html).
 
@@ -59,7 +59,7 @@ The message in the import error can help you troubleshoot and resolve the issue.
 
 To view import errors in your terminal, run `astro dev run dags list-import-errors` with the Astro CLI, or run `airflow dags list-import-errors` with the Airflow CLI.
 
-If you don't see an import error message but your DAGs still don't work, try these debugging steps:
+If you don't see an import error message but your DAGs still don't appear in the UI, try these debugging steps:
 
 - Make sure all of your DAG files are located in the `dags` folder.
 - Airflow scans the `dags` folder for new DAGs every [`dag_dir_list_interval`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval), which defaults to 5 minutes but can be modified. You might have to wait until this interval has passed before a new DAG appears in the Airflow UI or restart your Airflow environment. 
@@ -82,7 +82,7 @@ A frequent cause of DAG import errors is not having the necessary packages insta
 
 In an Astro project, you can install OS-level packages by adding them to your `packages.txt` file. You can install Python-level packages, such as provider packages, by adding them to your `requirements.txt` file. If you need to install packages using a specific package manager, consider doing so by adding a bash command to your Dockerfile.
 
-To prevent compatibility issues when new packages are release, Astronomer recommends pinning a package version to your project. For example, adding `astronomer-providers[all]==1.14.0` to your `requirements.txt` file ensures that no future releases of `astronomer-providers` cause compatibility issues. If no version is pinned, Airflow will always use the latest available version.
+To prevent compatibility issues when new packages are released, Astronomer recommends pinning a package version to your project. For example, adding `astronomer-providers[all]==1.14.0` to your `requirements.txt` file ensures that no future releases of `astronomer-providers` causes compatibility issues. If no version is pinned, Airflow will always use the latest available version.
 
 If you are using the Astro CLI, packages are installed in the scheduler Docker container. You can confirm that a package is installed correctly by running:
 
@@ -96,7 +96,7 @@ If you have conflicting package versions or need to run multiple Python versions
 - [ExternalPythonOperator](external-python-operator): Runs a task in a predefined virtual environment.
 - [PythonVirtualEnvOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonvirtualenvoperator): Runs a task in a temporary virtual environment.
 
-If many Airflow tasks share a set of alternate package and version requirements a common pattern is to run sets two or more separate Airflow deployments. 
+If many Airflow tasks share a set of alternate package and version requirements a common pattern is to run them in two or more separate Airflow deployments. 
 
 ### DAGs are not running correctly
 
@@ -119,7 +119,7 @@ If your DAG is running but not on the schedule you expected, review the [DAG sch
 
 ## Common task issues
 
-This section covers common issues related to individual tasks you might encounter. If your entire DAG is not working, see [DAGs are not running correctly](#dags-are-not-running-correctly) section above.
+This section covers common issues related to individual tasks you might encounter. If your entire DAG is not working, see the [DAGs are not running correctly](#dags-are-not-running-correctly) section above.
 
 ### Tasks are not running correctly
 
@@ -166,12 +166,12 @@ After resolving your issue you may want to rerun your DAGs or tasks, see [Rerunn
 
 [Dynamic task mapping](dynamic-tasks.md) is a powerful feature that was introduced in Airflow 2.3 to allow you to dynamically adjust the number of tasks at runtime based on changing input parameters. Starting with Airflow 2.5.0 you can also dynamically map over task groups.
 
-Things to be aware of when working with dynamically mapped tasks include:
+Possible causes of issues when working with dynamically mapped tasks include:
 
 - You did not provide a keyword argument to the `.expand()` function. 
 - When using `.expand_kwargs()`, you did not provide mapped parameters in the form of a `List(Dict)`.
 - You tried to map over an empty list, which causes the mapped task to be skipped.
-- You exceeded the limit for how many mapped task instances you can create. This depends on the Airflow core config [`max_map_length`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#max-map-length) and is 1024 by default. 
+- You exceeded the limit for how many mapped task instances you can create. This limit depends on the Airflow core config [`max_map_length`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#max-map-length) and is 1024 by default. 
 - The number of mapped task instances of a specific task that can run in parallel across all runs of a given DAG depend on the task level parameter `max_active_tis_per_dag`.  
 - Not all parameters are mappeable. If a parameter does not support mapping you will receive an Import Error like in the screenshot below.
 
@@ -209,7 +209,7 @@ The following are some debugging steps you can try:
 
 - Review [Manage connections in Apache Airflow](connections.md) to learn how connections work.
 - Make sure you have the necessary provider packages installed to be able to use a specific connection type.
-- Change the `default` connection to use your connection details or define a new connection with a different name and pass the new name to the hook or operator.
+- Change the `<external tool>_default` connection to use your connection details or define a new connection with a different name and pass the new name to the hook or operator.
 - Define connections using Airflow environment variables instead of adding them in the Airflow UI. Make sure you're not defining the same connection in multiple places. If you do, the environment variable takes precedence.
 - Test if your credentials work when used in a direct API call to the external tool.
 - Use the test connection feature added in Airflow 2.2 that many connection types have available.
@@ -220,7 +220,7 @@ To find information about what parameters are required for a specific connection
 
 - Read provider documentation in the [Astronomer Registry](https://registry.astronomer.io/providers?page=1) to access the Apache Airflow documentation for the provider. Most commonly used providers will have documentation on each of their associated connection types. For example, you can find information on how to set up different connections to Azure in the Azure provider docs.
 - Check the documentation of the external tool you are connecting to and see if it offers guidance on how to authenticate.
-- View the the source code of the hook that is being used by your operator.
+- View the source code of the hook that is being used by your operator.
 
 ## I need more help
 
