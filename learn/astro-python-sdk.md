@@ -6,7 +6,7 @@ description: 'Write an ETL pipeline for Amazon S3 and Snowflake with the Astro S
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import AstroPythonSDK from '!!raw-loader!../samples/astro-python-sdk.py';
+import AstroPythonSDK from '!!raw-loader!../samples/dags/astro-python-sdk.py';
 
 This tutorial demonstrates how to write an Extract, Transform, Load (ETL) pipeline on your local machine with the Astro Python SDK. The Astro SDK is maintained by Astronomer and simplifies the pipeline authoring process with native Python functions for common data orchestration use cases.
 
