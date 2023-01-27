@@ -109,7 +109,7 @@ If your DAGs are either not running or running differently than you intended, co
     If you want all DAGs unpaused by default, you can set [`dags_are_paused_at_creation=False`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#dag-dir-list-interval) in your Airflow config. If you do this, remember to set `catchup=False` in your DAGs to prevent automatic backfilling of DAG runs. In Airflow 2.2 and later, paused DAGs are unpaused automatically when you manually trigger them.
 
 - Double check that each DAG has a unique `dag_id`. If two DAGs with the same id are present in one Airflow instance the scheduler will pick one at random every 30 seconds to display.
-- Make sure your DAG has a `start_date` in the past. A DAG with a `start_date` in the future will result in a successful DAG run with no task runs.
+- Make sure your DAG has a `start_date` in the past. A DAG with a `start_date` in the future will result in a successful DAG run with no task runs. Do not use `datetime.now()` as a `start_date`.
 - Test the DAG using `astro dev dags test <dag_id>`. With the Airflow CLI, run `airflow dags test <dag_id>`.
 - If no DAGs are running, check the state of your scheduler 
 using `astro dev logs -s`. 
