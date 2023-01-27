@@ -5,7 +5,7 @@ id: manage-root-user
 description: Learn how to manage the root user role with all permissions on Astronomer Software
 ---
 
-When you install Astronomer Software, a root user with the username `root` and all permissions is automatically created. The password for the `root` user is stored as a Kubernetes secret on your Astronomer Software installation.
+When you install Astronomer Software, a root user with the username `root` and all permissions is automatically created. The password for the root user is stored as a Kubernetes secret on your Astronomer Software installation.
 
 ## Log in as the root user
 
@@ -19,7 +19,7 @@ When you install Astronomer Software, a root user with the username `root` and a
 
 ## Customize the root user's password
 
-You can create a custom root user password to limit access to the root user account. 
+You can use a custom root user password to prevent employees who leave your organization from accessing the root user account.
 
 To configure a custom password for the root user, run the following command: 
 
@@ -29,7 +29,7 @@ kubectl patch secret -n <your-platform-namespace> astronomer-root-admin-credenti
 
 ## Limit system-level user creation
 
-A common use case for having a root user is to limit system-level user creation to a single user. To learn more about customizing role permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).
+A common use case for the customization of root user permissions is limiting system-level user creation to a single user. To learn more about customizing role permissions, see [Customize role permissions](manage-platform-users.md#customize-role-permissions).
 
 1. Add the following lines to your `config.yaml` file:
 
