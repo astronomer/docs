@@ -14,52 +14,55 @@ This guide describes the steps to generate a self-signed certificate to use with
 
 ## Setup
 
-Run the following commands to generate a self-signed certificate:
-To create a self-signed SSL certificate, we need a private key and certificating signing request. 
-
-> ⚠️When the `openssl req` command asks for a "challenge password", press return to leave the password empty. Kubernetes does not natively support challenge passwords for certificates stored as Secrets.
 
 Run the following set of commands, and answer the questions when prompted. The `Common Name` must match the DNS chosen for the site at Step 1 above, such as (for example) `*.astro.example.com`. 
 
-Create a private key. By default, a password must be provided. 
-```bash
-openssl genrsa -aes256 -passout pass:gsahdg -out server.pass.key 4096
-```
+1. Run the following command to create a private key:
 
-Create a password-less second key based on the first key.
-```bash
-openssl rsa -passin pass:gsahdg -in server.pass.key -out server.key
-```
+    ```bash
+    openssl genrsa -aes256 -passout pass:gsahdg -out server.pass.key 4096
+    ```
 
-Remove the first key file. 
-```bash
-rm server.pass.key
-```
+2. Run the following command to make a password-less second key based on the first key you created:
 
-Create a Certificate Signing Request using the password-less private key.
-```bash
-openssl req -new -key server.key -out server.csr
-```
+    ```bash
+    openssl rsa -passin pass:gsahdg -in server.pass.key -out server.key
+    ```
 
-The self-signed SSL certificate is generated from the private key (`server.key`) and certificate signing request (`server.csr`) files.
+3. Run the following command to delete the first key file: 
 
-Make sure to add the appropriate `Subject Alternative Name` (SAN) in the extfile. 
-SAN records must match the DNS entries for the base domain chosen at Step 1 above, such as (for example) `*.astro.example.com`.
+    ```bash
+    rm server.pass.key
+    ```
 
-```bash
-openssl x509 -req -sha256 -days 365 -in server.csr \
--signkey server.key -out server.crt \
--extfile <(printf "subjectAltName=DNS:*.astro.example.com,DNS:astro.example.com")
-```
+3. Run the following command to create a certificate signing request using the password-less private key.
 
-The certificate file `server.crt` and private key file `server.key` can now be used to configure Astronomer Software.
+    ```bash
+    openssl req -new -key server.key -out server.csr
+    ```
 
-# Inspect the generated self-signed certificate
-Once the certificate is created, you can inspect its content with the following command:
+    When openssl asks for a challenge password, press Enter to leave the password empty. Kubernetes does not natively support challenge passwords for certificates stored as Secrets.
+
+    The self-signed SSL certificate is generated from the private key (`server.key`) and certificate signing request (`server.csr`) files.
+
+4. Run the following command to sign the certificate you created:
+
+    ```bash
+    openssl x509 -req -sha256 -days 365 -in server.csr \
+    -signkey server.key -out server.crt \
+    -extfile <(printf "subjectAltName=DNS:*.astro.<your-basedomain>,DNS:astro.<your-basedomain>")
+    ```
+
+    The certificate file `server.crt` and private key file `server.key` can now be used in your Astronomer Software installation.
+
+## Inspect your self-signed certificate
+
+Run the following command to inspect your self-signed certificate:
 
 ```bash
 openssl x509 -in  server.crt -text -noout
 ```
 
-Make sure that the `X509v3 Subject Alternative Name` section of this report includes your Astronomer domain (`my-domain.com`) as well as the wildcard domain (`*.my-domain.com`).
-If you are not using a wildcard domain, add SAN entries for all related Astronomer subdomains.
+Confirm that the `X509v3 Subject Alternative Name` section of the certificate includes your Astronomer base domain (`<your-basedomain>`) as well as the wildcard domain (`*.<your-basedomain>`).
+
+If you're not using a wildcard domain, add SAN entries for all related Astronomer subdomains to the `X509v3 Subject Alternative Name` section.
