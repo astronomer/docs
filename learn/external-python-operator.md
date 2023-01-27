@@ -6,7 +6,7 @@ id: external-python-operator
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import ExternalPythonOperator from '!!raw-loader!../samples/dags/external-python-operator.py';
+import ExternalPythonOperator from '!!raw-loader!../samples/dags/external_python_operator.py';
 
 It is very common to run a task with different dependencies than your Airflow environment. Your task might need a different Python version than core Airflow, or it has packages that conflict with your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
 
