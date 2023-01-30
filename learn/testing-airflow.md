@@ -37,7 +37,7 @@ Reasons for using DAG validation testing include:
 
 - Developing DAGs without access to a local Airflow environment.
 - Ensuring that custom DAG requirements are systematically checked and fulfilled.
-- Including automatic DAG validation testing in a [CI/CD pipeline](#cicd).
+- Including automatic DAG validation testing in a CI/CD pipeline.
 - Enabling power users to test DAGs from the CLI.
 
 DAG validation tests apply to all DAGs in your Airflow environment, so you only need to create one test suite.
