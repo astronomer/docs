@@ -10,6 +10,12 @@ While the focus of the troubleshooting steps provided lies on local development,
 
 This guide was written for Airflow 2. If you are running Airflow 1.15 or earlier, we highly recommend upgrading to prevent compatibility issues and receive the latest bug fixes. For assistance in upgrading see the documentation on [Upgrading from 1.10 to 2](https://airflow.apache.org/docs/apache-airflow/stable/howto/upgrading-from-1-10/index.html).
 
+:::tip
+
+Consider implementing systematic testing of your DAGs to prevent common issues. See the [Test Airflow DAGs](testing-airflow.md) guide.
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
