@@ -369,25 +369,25 @@ workflows:
 
 ```yaml
 pipeline {
- agent any
-   stages {
-     stage('Deploy to astronomer') {
-       when { branch 'master' }
-       steps {
-         script {
-           sh 'docker build -t registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER} .'
-           sh 'docker run --rm registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER} /bin/bash -c "pytest tests'
-           sh 'docker login registry.$BASE_DOMAIN -u _ -p $SERVICE_ACCOUNT_KEY'
-           sh 'docker push registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER}'
-         }
-       }
-     }
-   }
- post {
-   always {
-     cleanWs()
-   }
- }
+    agent any
+    stages {
+        stage('Deploy to astronomer') {
+            when { branch 'master' }
+            steps {
+                script {
+                    sh 'docker build -t registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER} .'
+                    sh 'docker run --rm registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER} /bin/bash -c "pytest tests'
+                    sh 'docker login registry.$BASE_DOMAIN -u _ -p $SERVICE_ACCOUNT_KEY'
+                    sh 'docker push registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER}'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
 ```
 
