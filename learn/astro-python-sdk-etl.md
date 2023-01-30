@@ -41,11 +41,24 @@ For a full list of functions, see the [Astro Python SDK README in GitHub](https:
 
 ## Installation
 
-Install the Astro Python SDK package in your Airflow environment. If you're using the Astro CLI, add the following to the `requirements.txt` file of your Astro project:
+1. Install the Astro Python SDK package in your Airflow environment. If you're using the Astro CLI, add the following to the `requirements.txt` file of your Astro project:
 
-```
-astro-sdk-python
-```
+    ```
+    astro-sdk-python
+    ```
+
+2. Set the following environment variables. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
+
+    ```
+    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID=<your_aws_conn>
+    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL='s3://<your-bucket>/xcom/'
+    ```
+    
+    If you're using Airflow 2.4 or earlier, additionally set the following environment variable to use a required custom XCom backend:
+    
+    ```
+    AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
+    ```
 
 For a guided experience to get started, see the [Astro Python SDK tutorial](astro-python-sdk.md).
 
