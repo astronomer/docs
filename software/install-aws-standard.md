@@ -123,7 +123,7 @@ AWS Certificate Manager (ACM) terminates TLS at the Load Balancer level and does
 
 Because ACM relies on annotations attached to Kubernetes resources and does not issue certificates or private key files, you must complete one of the following options to create the `astronomer-tls` secret:
  
-- Create a [self-signed certificate](self-signed-certificate.md).
+- Create a [self-signed certificate](self-signed-certificate.md). Self-signed certificates are ideal for privately hosted internal applications, as well as in development and testing environments. Avoid using self-signed certificates in installations where the trust and identity of the certificate issuer are important.
 - Create a certificate with [AWS Certificate Manager Private CA](https://aws.amazon.com/blogs/containers/setting-up-end-to-end-tls-encryption-on-amazon-eks-with-the-new-aws-load-balancer-controller/).
 - Create a certificate with [Let's Encrypt](renew-tls-cert.md#automatically-renew-tls-certificates-using-lets-encrypt).
 
@@ -166,6 +166,7 @@ kubectl create secret tls astronomer-tls --cert <your-certificate-filepath> --ke
 ```
 
 If you created a certificate using Let's Encrypt, the `astronomer-tls` secret already exists in your Kubernetes cluster. Run the following command to confirm it exists: 
+
 ```bash
 kubectl describe secret astronomer-tls --namespace astronomer
 ```

@@ -6,17 +6,15 @@ id: self-signed-certificate
 description: Generate a self-signed certificate to use with Astronomer Software.
 ---
 
-This guide describes the steps to generate a self-signed certificate to use with Astronomer Software.
+This guide describes the steps to generate a self-signed certificate to use with Astronomer Software. You might want to complete this setup as part of [installing Astronomer Software on AWS](install-aws.md).
 
-Self-signed certificates are best used in privately hosted internal applications and in development and testing environments.
-Avoid using self-signed certificates in situations where trust and identity of the certificate issuer are important.
+Self-signed certificates are ideal for privately hosted internal applications, as well as in development and testing environments. Avoid using self-signed certificates in installations where the trust and identity of the certificate issuer are important.
 
 ## Prerequisites
 
 - [openssl](https://www.openssl.org/). You can install it through [Homebrew](https://formulae.brew.sh/formula/openssl@1.1) on MacOs, [Windows installer](http://gnuwin32.sourceforge.net/packages/openssl.htm) on Windows, or [`apt-get`](https://www.misterpki.com/how-to-install-openssl-on-ubuntu/) on Linux.
 
 ## Setup
-
 
 Run the following set of commands, and answer the questions when prompted.
 
@@ -48,7 +46,6 @@ Run the following set of commands, and answer the questions when prompted.
 
     When openssl asks for a challenge password, press Enter to leave the password empty. Kubernetes does not natively support challenge passwords for certificates stored as Secrets.
 
-
 5. Run the following command to create the certificate from your private key and signing request:
 
     ```bash
@@ -56,9 +53,8 @@ Run the following set of commands, and answer the questions when prompted.
     -signkey server.key -out server.crt \
     -extfile <(printf "subjectAltName=DNS:*.astro.<your-basedomain>,DNS:astro.<your-basedomain>")
     ```
-    Make sure the Subject Alternative Name matches the required domain and subdomains.
-    To generate a wildcard certificate, both the base domain and the wildcard domain must be included.
-    To generate a limited multi-domain certificate, add individual SAN entries for each subdomain.
+
+    Make sure the Subject Alternative Name matches the required domain and subdomains. To generate a wildcard certificate, both the base domain and the wildcard domain must be included. To generate a limited multi-domain certificate, add individual SAN entries for each subdomain.
 
 The certificate file `server.crt` and private key file `server.key` can now be used in your Astronomer Software installation.
 
@@ -67,7 +63,8 @@ The certificate file `server.crt` and private key file `server.key` can now be u
 Run the following command to inspect your self-signed certificate:
 
 ```bash
-openssl x509 -in  server.crt -text -noout
+openssl x509 -in server.crt -text -noout
+
 ```
 
 Confirm that the `X509v3 Subject Alternative Name` section of the certificate includes your Astronomer base domain (`<your-basedomain>`) as well as the wildcard domain (`*.<your-basedomain>`).
