@@ -224,7 +224,7 @@ If you are using the Astro CLI you can run all Airflow CLI commands without ente
 astro dev run dags test my_dag '2023-01-29'
 ```
 
-## CI/CD with the Astro CLI
+### CI/CD with the Astro CLI
 
 You can use any CI/CD tool on Airflow code. A common use case is to run the `astro dev pytest` for all pytests in the `tests` directory every time a push or PR to a specific branch in your source control is made. 
 
