@@ -80,8 +80,21 @@ Now that you have a staging table in Snowflake and some example data ready to lo
     ```
 
     This installs the SDK package as well as the Snowflake and Amazon providers, which are required for any DAG that loads data to or from Amazon S3 and Snowflake. If you build this pipeline with different database services, you'll have to modify this line.
+    
+3. Set the following environment variables. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
 
-3. Run the following command to start your project in a local environment:
+    ```
+    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID=<your_aws_conn>
+    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL='s3://<your-bucket>/xcom/'
+    ```
+    
+    If you're using Airflow 2.4 or earlier, additionally set the following environment variable to use a required custom XCom backend:
+    
+    ```
+    AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
+    ```
+
+4. Run the following command to start your project in a local environment:
 
     ```sh
     astro dev start
