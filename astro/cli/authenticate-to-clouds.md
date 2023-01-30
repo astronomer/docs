@@ -33,7 +33,6 @@ Using these credentials allows you to access information from your cloud, like s
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - Optional. Access to a secrets backend hosted on AWS, such as AWS Secrets Manager or AWS Parameter Store.
 
-
 #### Retrieve AWS user credentials locally
 
 Run the following command to obtain your user credentials locally:
@@ -58,7 +57,6 @@ The location of these files depends on your operating system:
 #### Configure your Astro project
 
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount the `.aws` folder as a volume in Docker.
-
 
 1. Run the following commands to create an Astro project:
 
@@ -310,7 +308,6 @@ The default location of the Azure configuration folder depends on your operating
 
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount the .azure folder as a volume in Docker.
 
-
 1. Run the following commands to create an Astro project:
 
     ```sh
@@ -388,14 +385,12 @@ If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.a
 
 If you're using an M1 Mac, you must use the`linux/amd64` Runtime image distribution. Replace the first line in your Astro project Dockerfile with `FROM --platform=linux/amd64 quay.io/astronomer/astro-runtime:<version>`. 
 
-
 :::
 
 4. Add the following environment variable to your `.env` file. Make sure the file path is the same volume location you configured in `docker-compose.override.yml`
    
     ```text
     AZURE_CONFIG_DIR=/usr/local/airflow/.azure
-
     ```
 
 When you run Airflow locally, all Azure connections without defined credentials automatically fall back to your user credentials when connecting to Azure. Airflow applies and overrides user credentials for Azure connections in the following order:
@@ -436,7 +431,6 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
 2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/secrets-backends/aws-secrets-manager.html).
 
-
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SecretsManagerBackend
     AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables", "region_name": "<your-aws-region>"}
@@ -453,7 +447,6 @@ Now that Airflow has access to your user credentials, you can use them to connec
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
 6. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id> from the secrets backend and print it to the terminal:
-
 
     ```python
     from airflow import DAG
@@ -482,7 +475,6 @@ Now that Airflow has access to your user credentials, you can use them to connec
 7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
 8. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
 
-
 </TabItem>
 <TabItem value="gcp">
 
@@ -493,15 +485,12 @@ Now that Airflow has access to your user credentials, you can use them to connec
     
      For example when adding the secret variable `my_secret_var` you will need to give the secret the name `airflow-variables-my_secret_var`.
 
-
-
 2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/secrets-backends/google-cloud-secret-manager-backend.html)):
 
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
     AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "project_id": "<my-project-id>"}
-
     ```
 
 3. Run the following command to start Airflow locally:
@@ -514,8 +503,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
    When you use this connection in your DAG, it will fall back to using your configured user credentials. 
 
-5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id> from the secrets backend and print it to the terminal:
-
+5. Add a DAG  which uses the secrets backend to your Astro project `dags` directory. You can use the following example DAG to retrieve `<my_variable_name>` and `<my_connection_id>` from the secrets backend and print it to the terminal:
 
     ```python
     from airflow import DAG
@@ -544,7 +532,6 @@ Now that Airflow has access to your user credentials, you can use them to connec
 6. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
 7. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging). 
 
-
 </TabItem>
 
 <TabItem value="azure">
@@ -556,9 +543,7 @@ Now that Airflow has access to your user credentials, you can use them to connec
     
     For example, to use a secret named `mysecretvar` in your DAG, you must name the secret `airflow-variables-mysecretvar`.
 
-    
     You will need to store your connection in [URI format](https://docs.astronomer.io/learn/connections#define-connections-with-environment-variables). 
-
 
 2. In your Astro project, add the following line to Astro project `requirements.txt` file:
 
@@ -617,7 +602,6 @@ Now that Airflow has access to your user credentials, you can use them to connec
 
 7. In the Airflow UI, unpause your DAG and click **Play** to trigger a DAG run. 
 8. View logs for your DAG run. If the connection was successful, your masked secrets appear in your logs. See [Airflow logging](https://docs.astronomer.io/learn/logging).
-
 
 </TabItem>
 </Tabs>
