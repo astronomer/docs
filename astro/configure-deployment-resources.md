@@ -64,12 +64,12 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 ### Update the Deployment executor
 
-The executor determines which worker resources run your scheduled tasks. The Celery executor runs multiple tasks on a single pod and is a good option for most uses cases. The Kubernetes executor runs individual tasks in an isolated Kubernetes pod and is a good option when few seconds of latency during start up isn't a concern. For more information about the Celery and Kubernetes executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained#kubernetes-executor).
+The executor determines which worker resources run your scheduled tasks. The Celery executor runs multiple tasks on a single pod and is a good option for most uses cases. The Kubernetes executor runs individual tasks in an isolated Kubernetes pod and is a good option when a few seconds of latency during start up isn't a concern. For more information about the Celery and Kubernetes executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained#kubernetes-executor).
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
-4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted.
+4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
 5. Optional. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
 6. Click **Update**.
 
