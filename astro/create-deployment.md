@@ -26,7 +26,7 @@ Every Deployment is hosted on a single Astro cluster with its own dedicated reso
 If you prefer, you can also run the `astro deployment create` command in the Astro CLI to create a Deployment. See [CLI Command Reference](cli/astro-deployment-create.md).
 :::
 
-1. In the Cloud UI select a Workspace.
+1. In the Cloud UI, select a Workspace.
 
 2. On the **Deployments** page, click **Deployment**.
 
@@ -39,7 +39,7 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
 
     - **Description**: Optional. Enter a description for your Deployment.
     - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
-    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks on a single pod and is a good option for most uses cases. The Kubernetes executor runs individual tasks is an isolated Kubernetes pod and is a good option when few seconds of latency during start up isn't a concern.
+    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks on a single pod and is a good option for most uses cases. The Kubernetes executor runs individual tasks in an isolated Kubernetes pod and is a good option when few seconds of latency during start up isn't a concern. For more information about the Celery and Kubernetes executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained#kubernetes-executor).
     - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
 
 4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with:
