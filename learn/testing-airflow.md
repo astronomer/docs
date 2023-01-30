@@ -331,7 +331,7 @@ There are many ways you can integrate data checks into your DAG:
 
 - [SQL check operators](airflow-sql-data-quality.md): Airflow-native operators that run highly customizeable data quality checks on a wide variety of relational databases.
 - [Great Expectations](airflow-great-expectations.md): A data quality testing suite with an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) offering the ability to define data quality checks in JSON to run on relational databases, Spark and Pandas dataframes.
-- [Soda Core](https://docs.astronomer.io/learn/soda-data-quality): 
+- [Soda Core](https://docs.astronomer.io/learn/soda-data-quality): An framework to check data quality using YAML configuration to define data quality checks to run on relational databases and Spark dataframes.
 
 Learn more about how to approach data quality within Airflow: 
 
