@@ -42,19 +42,9 @@ Reasons for using DAG validation testing include:
 
 DAG validation tests apply to all DAGs in your Airflow environment, so you only need to create one test suite.
 
-### Astro dev pytest
+### Common DAG validation tests
 
-Airflow allows you to define testing suites using any Python test runner. You can run these suites by executing `python my_test_suite.py` from the command line within your Airflow environment (locally if you are running a standalone Airflow instance, within the Docker container if you are running Airflow in Docker).
-
-When using the [Astro CLI]((https://docs.astronomer.io/astro/cli/install-cli)) every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_integrity.py` script containing several examples of using `pytest` with Airflow.
-
-You can run 
-
-```sh
-astro dev pytest
-```
-
-to run all pytest test suites in the `test` directory of your current Airflow project (see also the [Astro CLI reference](https://docs.astronomer.io/astro/cli/astro-dev-pytest)). Airflow does not need to be running to use this command.
+This section covers the most common types of DAG validation tests with full code examples.
 
 #### Prevent Import Errors
 
@@ -131,6 +121,14 @@ def test_dag_tags(dag_id, dag, fileloc):
         assert not set(dag.tags) - APPROVED_TAGS
 ```
 
+:::tip
+
+You can view the attributes and methods available for the `dag` model in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html).
+
+:::
+
+#### Set custom task requirements
+
 You can also set requirements at the task level by accessing the `tasks` attribute within the `dag` model, which contains a list of all task objects of a DAG. The test below checks that all DAGs contain at least one task and all tasks use `trigger_rule="all_success"`.
 
 ```python
@@ -147,15 +145,21 @@ def test_dag_tags(dag_id, dag, fileloc):
         assert t_rule == "all_success", f"{task} in {dag_id} has the trigger rule {t_rule}"
 ```
 
-:::tip
+### Implementing DAG validation tests
 
-You can view the attributes and methods available for the `dag` model in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html).
+Airflow offers different ways to run DAG validation tests. This section gives an overview over the most common implementation methods. If you are new to testing Airflow DAGs we recommend to use `astro dev pytest` in combination with the common DAG validation tests from the previous section.
 
-:::
+#### Astro dev pytest
 
-### dag.test()
+Airflow allows you to define testing suites using any Python test runner. You can run these suites by executing `python my_test_suite.py` from the command line within your Airflow environment (locally if you are running a standalone Airflow instance, within the Docker container if you are running Airflow in Docker).
 
-Airflow 2.5.0 introduced the `dag.test()` command, which runs directly in the DAG file and allows you to run all tasks in a DAG within a single serialized Python process. This allows for faster iteration when developing DAGs.
+When using the [Astro CLI]((https://docs.astronomer.io/astro/cli/install-cli)) every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_integrity.py` script containing several examples of using `pytest` with Airflow.
+
+You can run `astro dev pytest` to run all pytest test suites in the `test` directory of your current Airflow project (see also the [Astro CLI reference](https://docs.astronomer.io/astro/cli/astro-dev-pytest)). Airflow does not need to be running to use this command.
+
+#### dag.test()
+
+Airflow 2.5.0 introduced the `dag.test()` method, which runs directly in the DAG file and allows you to run all tasks in a DAG within a single serialized Python process. This allows for faster iteration when developing DAGs.
 
 You can set up `dag.test()` by adding two lines at the end of the DAG file. If you are using a traditional DAG context, call `.test()` on the object the context is assigned to. If you are using the `@dag` decorator, call the method on a call of the decorated function. 
 
@@ -210,7 +214,7 @@ python -m pdb <path to dag file>.py
 
 This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 
-### Airflow CLI 
+#### Airflow CLI 
 
 The Airflow CLI offers two commands related to local testing:
 
@@ -248,6 +252,12 @@ jobs:
         curl -sSL install.astronomer.io | sudo bash -s
         astro dev pytest
 ```
+
+:::info
+
+If you are an Astronomer customer you can find further information on how to set up CI/CD with your Astro deployment in [our docs](https://docs.astronomer.io/astro/ci-cd).
+
+:::
 
 ## Unit testing
 
