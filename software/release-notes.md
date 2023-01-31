@@ -9,6 +9,49 @@ description: Astronomer Software release notes.
 
 0.31 is the latest stable version of Astronomer Software, while 0.30 remains the latest long-term support (LTS) release. To upgrade to 0.31, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.31.2
+
+Release date: January 31, 2023
+
+### Additional improvements
+
+- Added support for [Kubernetes 1.25](https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/).
+- You can now configure custom annotations for Houston ingress by setting `astronomer.houston.ingress.annotation` in your `config.yaml` file. 
+- The System Admin **Deployments** list in the Astronomer UI is now paginated. 
+- PgBouncer now utilizes graceful shutdowns.
+- Errors related to the git-sync Kubernetes pod now appear in the Astro UI (potentially not in release)
+- You can now tune the git-sync relay service's resource usage by setting the following values in your `config.yaml` file:
+
+    - `astronomer.gitSyncRelay.gitSyncResources`
+    - `astronomer.gitSyncRelay.gitDaemonResources`
+    - `astronomer.gitSyncRelay.securityContext`
+
+- You can now set `timeoutSeconds` for both `readinessProbe` and `livenessProbe` in the Prometheus Helm chart.
+- Fixed an issue where Deployments with many DAGs could not be successfully upgraded due to a short timeout.
+- Houston API now logs an installation's deployed image versions whenever a GraphQL mutation is completed.
+
+### Bug fixes 
+
+- Fixed an issue where a user deactivated through SCIM would leave behind orphan Deployments and Workspaces. 
+- Service accounts and users can no longer create users through the Houston API when SCIm is enabled. 
+- Database migrations for a Deployment now use the same amount of resources as configured for the Deployment's scheduler. This should limit OOM errors when migrating large DAGs.
+- Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts resulted in an error.
+- Fixed an issue where PgBouncer didn't work if you pulled its image from a private registry.
+- When you view a user through a Teams list as a System Admin and return to the list, you now return to the Teams list instead of the System Admin users list. 
+- Fixed the following vulnerabilities:
+    - [CVE-2022-23529](https://nvd.nist.gov/vuln/detail/CVE-2022-23529)
+    - [CVE-2021-44906](https://nvd.nist.gov/vuln/detail/CVE-2021-44906)
+    - [CVE-2022-23540](https://nvd.nist.gov/vuln/detail/CVE-2022-23540)
+    - [CVE-2022-23541](https://nvd.nist.gov/vuln/detail/CVE-2022-23541)
+    - [CVE-2022-3996](https://nvd.nist.gov/vuln/detail/CVE-2022-3996)
+    - [CVE-2022-43551](https://nvd.nist.gov/vuln/detail/CVE-2022-43551)
+    - [CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848)
+    - [CVE-2022-21698](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21698)
+    - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2021-43565](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43565)
+    - [CVE-2021-38561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561)
+
 ## 0.31.1
 
 Release date: December 23, 2022
@@ -70,18 +113,18 @@ If your current usage is expected and higher than the default resource limits, u
 ### Additional improvements 
 
 - You can now set a custom security context for `es-client` by setting `elasticsearch.client.securityContext.capabilities.add={}` in the ElasticSearch Helm chart.
-- The **Deployment users** page is now paginated in the Software UI.
+- The **Deployment users** page is now paginated in the Astronomer UI.
 - You can now set `astronomer.registry.logLevel` to filter which types of logs appear in your Docker registry.
 - The default Git-sync interval is now 1 instead of 0.
 - You can now configure a Deployment to have 0 triggerer components.
-- You can now set `astronomer.houston.config.useAutoCompleteForSensativeFields=false` to disable autocomplete on sensitive fields in the Software UI.
+- You can now set `astronomer.houston.config.useAutoCompleteForSensativeFields=false` to disable autocomplete on sensitive fields in the Astronomer UI.
 - You can now set `astronomer.houston.config.shouldLogUsername=true` to include user email addresses in audit logs for logins through the Houston API.
 - [Git sync-based Deployments](deploy-git-sync.md) now have a dedicated git-sync relay pod, service, and network policy.
   
 ### Bug fixes
 
-- The Software UI now stores user tokens with `httpOnly` and `secure` flags.
-- Fixed an issue where the Software UI would occasionally show an incorrect **Extra AU** number for Deployments. 
+- The Astronomer UI now stores user tokens with `httpOnly` and `secure` flags.
+- Fixed an issue where the Astronomer UI would occasionally show an incorrect **Extra AU** number for Deployments. 
 - Fixed the following vulnerabilities:
 
     - [CVE-2022-37601](https://security.snyk.io/vuln/SNYK-JS-LOADERUTILS-3043105)
@@ -89,6 +132,6 @@ If your current usage is expected and higher than the default resource limits, u
     - [CVE-2022-40674](https://nvd.nist.gov/vuln/detail/CVE-2022-40674)
   
 - Fixed an issue where you could not access Astronomer Software's Docker registry if you had access to more than 100 Deployments. 
-- Fixed an issue where the Software UI did not show the correct last used dates for service accounts. 
+- Fixed an issue where the Astronomer UI did not show the correct last used dates for service accounts. 
 - Fixed an issue where NATS would send false Deployment alert emails.
 - Fixed an issue where the configuration in `astronomer.houston.updateRuntimeCheck.url` was ignored if not all supported Deployment image versions were present in the destination URL. 
