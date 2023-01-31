@@ -23,6 +23,12 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.9.0 ([Release notes](cli/release-notes.md))
 
+## January 31, 2023
+
+### Bug fixes 
+
+- Fixed [CVE-2022-48195](https://avd.aquasec.com/nvd/2022/cve-2022-48195/)
+
 ## January 24, 2023
 
 ### New Workspace Home page 
@@ -46,7 +52,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 
 ### Bug fixes 
 
-- Fixed [CVE-2022-48195](https://avd.aquasec.com/nvd/2022/cve-2022-48195/)
+- Fixed [CVE-2022-41721](https://avd.aquasec.com/nvd/2022/cve-2022-41721/).
 
 ## January 18, 2023
 
