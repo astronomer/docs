@@ -27,7 +27,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Bug fixes 
 
-- Fixed [CVE-2022-41721](https://avd.aquasec.com/nvd/2022/cve-2022-41721/)
+- Fixed [CVE-2022-41721](https://avd.aquasec.com/nvd/2022/cve-2022-41721/).
 
 ## January 24, 2023
 
