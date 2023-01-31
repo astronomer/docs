@@ -23,7 +23,7 @@ Depending on your organization's needs ,use the following docs to complete addit
 
 ## Key DAG author actions
 
-If you regularly write and deploy DAGs, use the following docs as your core reference:
+If you primarily write and deploy DAGs, use the following docs as your core reference:
 
 - [Log in to Astronomer Software](log-in-to-software.md)
 - [Create an Astro project](create-project.md)
@@ -33,7 +33,7 @@ If you regularly write and deploy DAGs, use the following docs as your core refe
 
 ## Key administrator actions
 
-If you need to regularly manage users and cloud resources for Astronomer Software, use the following docs as your core reference:
+If you regularly manage users and cloud resources for Astronomer Software, use the following docs as your core reference:
 
 - [Apply a platform configuration changes](apply-platform-config.md)
 - [Manage users on Astronomer Software](workspace-permissions.md)
@@ -43,6 +43,8 @@ If you need to regularly manage users and cloud resources for Astronomer Softwar
 - [Upgrade Astronomer](upgrade-astronomer.md)
 
 ## Keep up to date on releases and compatibility
+
+The following docs are frequently updated with the latest release and compatibility information: 
 
 - [Astronomer Software release notes](release-notes.md)
 - [Version compatibility reference](version-compatibility-reference.md)
