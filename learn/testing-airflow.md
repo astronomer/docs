@@ -27,11 +27,11 @@ There are multiple test runners available for Python, including:
 - [`pytest`](https://docs.pytest.org/en/stable/index.html)
 - [`nose2`](https://docs.nose2.io/en/latest/getting_started.html)
 
-All types of test runners can be used with Airflow, in this guide we will use `pytest`.
+All types of test runners can be used with Airflow. In this guide we will use `pytest`.
 
 ## DAG validation testing
 
-DAG validation tests are designed to ensure that your DAG objects fulfill a list of criteria. It is recommended to include at least one test, designed to [prevent import errors](#prevent-import-errors). Additional tests often check custom logic, like ensuring that `catchup` is set to False for every DAG in your Airflow instance or making sure only `tags` from a defined list are used in the DAGs.
+DAG validation tests are designed to ensure that your DAG objects fulfill a list of criteria. We recommend at a minimum including a DAG validation test to check for [import errors](#prevent-import-errors). Additional tests can check things like custom logic, ensuring that `catchup` is set to False for every DAG in your Airflow instance, or making sure only `tags` from a defined list are used in the DAGs.
 
 Reasons for using DAG validation testing include:
 
@@ -54,11 +54,11 @@ You can run
 astro dev pytest
 ```
 
-to run all pytest test suites in the `test` directory of your current Airflow project (see also the [Astro CLI reference](https://docs.astronomer.io/astro/cli/astro-dev-pytest)). Airflow does not need to be running for using this command.
+to run all pytest test suites in the `test` directory of your current Airflow project (see also the [Astro CLI reference](https://docs.astronomer.io/astro/cli/astro-dev-pytest)). Airflow does not need to be running to use this command.
 
 #### Prevent Import Errors
 
-The most commonly run DAG validation test is to check for import errors using the `.import_errors` attribute of the initialized `DagBag` model. The code below shows a complete testing suite collecting DAG import errors. 
+The most common DAG validation test is to check for import errors using the `.import_errors` attribute of the initialized `DagBag` model. The code below shows a complete testing suite collecting DAG import errors. 
 
 ```python
 import os
@@ -155,9 +155,9 @@ You can view the attributes and methods available for the `dag` model in the [Ai
 
 ### dag.test()
 
-Airflow 2.5.0 introduced the possibility to set up the `dag.test()` command directly in the DAG file to run through all tasks in a DAG within a single serialized Python process, allowing for faster fails in case of an issue with a task.
+Airflow 2.5.0 introduced the `dag.test()` command, which runs directly in the DAG file and allows you to run all tasks in a DAG within a single serialized Python process. This allows for faster iteration when developing DAGs.
 
-You can set up `dag.test()` by adding two lines at the end of the DAG file. If you are using a traditional DAG context call `.test()` on the object the context is assigned to, if you are using the `@dag` decorator call the method on a call of the decorated function. 
+You can set up `dag.test()` by adding two lines at the end of the DAG file. If you are using a traditional DAG context, call `.test()` on the object the context is assigned to. If you are using the `@dag` decorator, call the method on a call of the decorated function. 
 
 ```python
 from airflow import DAG
@@ -199,15 +199,14 @@ if __name__ == "__main__":
     my_dag().test()
 ```
 
-You can run the `.test()` method on all tasks in an individual DAG by executing `python <path to dag file>.py` from the command line within your Airflow environment (locally if you are running a standalone Airflow instance, within the Docker container if you are running Airflow in Docker).
+You can run the `.test()` method on all tasks in an individual DAG by executing `python <path to dag file>.py` from the command line within your Airflow environment, locally if you are running a standalone Airflow instance, or within the Docker container if you are running Airflow in Docker.
 
-In order to get an interactive debugging experience use
+To take advantage of `pdb` ([The Python Debugger](https://docs.python.org/3/library/pdb.html)), an interactive source code debugger, and get an interactive debugging experience, you can run:
 
 ```sh
 python -m pdb <path to dag file>.py
 ```
 
-`pdb` is [The Python Debugger](https://docs.python.org/3/library/pdb.html), an interactive source code debugger.
 
 This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 
@@ -215,10 +214,10 @@ This functionality replaces the deprecated DebugExecutor. Learn more in the [Air
 
 The Airflow CLI offers two commands related to local testing:
 
-- [airflow dags test](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test): Executes one single DagRun for a given DAG and execution date and writes the result to the metadata database. This command is useful to create manual Dagruns from the command line to test full DAGs.
-- [airflow tasks test](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test_repeat1): Tests one specific task instance without checking for dependencies or recording the outcome in the metadata database. This command is useful to troubleshoot issues with specific tasks.
+- [`airflow dags test`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test): Executes one single DagRun for a given DAG and execution date and writes the result to the metadata database. This command is useful for testing full DAGs by creating manual Dagruns from the command line.
+- [`airflow tasks test`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test_repeat1): Tests one specific task instance without checking for dependencies or recording the outcome in the metadata database. This command is useful for troubleshooting issues with specific tasks.
 
-If you are using the Astro CLI you can run all Airflow CLI commands without entering the Docker container by using [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run). For example to run `airflow dags test` on the DAG `my_dag` for the execution date of `2023-01-29` run:
+With the Astro CLI, you can run all Airflow CLI commands without entering the Docker container by using [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run). For example, to run `airflow dags test` on the DAG `my_dag` for the execution date of `2023-01-29` run:
 
 ```sh
 astro dev run dags test my_dag '2023-01-29'
