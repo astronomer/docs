@@ -6,7 +6,7 @@ id: "astro-python-sdk-etl"
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import AstroPythonSDKETL from '!!raw-loader!../samples/dags/astro_python_sdk_etl.py';
+import astro_python_sdk_etl from '!!raw-loader!../code-samples/dags/astro-python-sdk-etl/astro_python_sdk_etl.py';
 
 The [Astro Python SDK](https://github.com/astronomer/astro-sdk/) is an open source tool and Python package for DAG development that is built and maintained by Astronomer. The purpose of the SDK is to remove the complexity of writing DAGs in Apache Airflow, particularly in the context of Extract, Load, Transform (ELT) use cases. This enables pipeline authors to focus more on writing business logic in Python, and less on setting Airflow configurations.
 
@@ -75,7 +75,7 @@ To highlight how the Astro Python SDK results in simpler DAG code, we'll show a 
 - Creates a new reporting table in Snowflake using `aql.run_raw_sql`.
 - Appends the table of transformed home data to a reporting table with `aql.append`.
 
-<CodeBlock language="python">{AstroPythonSDKETL}</CodeBlock>
+<CodeBlock language="python">{astro_python_sdk_etl}</CodeBlock>
 
 ![Astro Graph](/img/guides/astro_sdk_graph.png)
 

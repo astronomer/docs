@@ -6,8 +6,8 @@ sidebar_label: Snowflake
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import AirflowSnowflakeDAG from '!!raw-loader!../samples/dags/airflow_snowflake_dag.py';
-import AirflowSnowflakeDAG2 from '!!raw-loader!../samples/dags/airflow_snowflake_dag_2.py';
+import airflow_snowflake_complex from '!!raw-loader!../code-samples/dags/airflow-snowflake/airflow_snowflake_complex.py';
+import airflow_snowflake_sdk from '!!raw-loader!../code-samples/dags/airflow-snowflake/airflow_snowflake_sdk.py';
 
 [Snowflake](https://www.snowflake.com/) is one of the most commonly used data warehouses. Orchestrating Snowflake queries as part of a data pipeline is one of the most common Airflow use cases. Using Airflow with Snowflake is straightforward, and there are multiple open source packages, tools, and integrations that can help you realize the full potential of your existing Snowflake instance.
 
@@ -210,7 +210,7 @@ When running SQL statements from Airflow operators, you can store the SQL code i
 
 2. Copy and paste the code below into the file:
 
-    <CodeBlock language="python">{AirflowSnowflakeDAG}</CodeBlock>
+    <CodeBlock language="python">{airflow_snowflake_complex}</CodeBlock>
 
     This complex DAG implements a write, audit, publish pattern showcasing loading data into Snowflake and running [data quality](data-quality.md) checks on the data that has been written. 
 
@@ -319,7 +319,7 @@ The Astro Python SDK is an open source DAG authoring tool maintained by Astronom
 
 The Astro Python SDK supports Snowflake as a data warehouse and can be used to simplify ETL workflows with Snowflake. For example, the following DAG moves data from Amazon S3 into Snowflake, performs some data transformations, and loads the resulting data into a reporting table.
 
-<CodeBlock language="python">{AirflowSnowflakeDAG2}</CodeBlock>
+<CodeBlock language="python">{airflow_snowflake_sdk}</CodeBlock>
 
 Using Astro SDK `aql` functions, you are able to seamlessly transition between SQL transformations (`filter_orders` and `join_orders_customers`) to Python dataframe transformations (`transform_dataframe`). All intermediary data created by each task is automatically stored in Snowflake and made available to downstream tasks.
 

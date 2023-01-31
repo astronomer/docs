@@ -6,7 +6,7 @@ description: 'Write an ETL pipeline for Amazon S3 and Snowflake with the Astro S
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import AstroPythonSDK from '!!raw-loader!../samples/dags/astro_python_sdk.py';
+import astro_python_sdk_s3_snowflake from '!!raw-loader!../code-samples/dags/astro-python-sdk/astro_python_sdk_s3_snowflake.py';
 
 This tutorial demonstrates how to write an Extract, Transform, Load (ETL) pipeline on your local machine with the Astro Python SDK. The Astro SDK is maintained by Astronomer and simplifies the pipeline authoring process with native Python functions for common data orchestration use cases.
 
@@ -152,7 +152,7 @@ Create some auxiliary tables in Snowflake and populate them with a small amount 
 
 Use your favorite code editor or text editor to copy-paste the following code into a `.py` file in your project's `dags` directory:
 
-<CodeBlock language="python">{AstroPythonSDK}</CodeBlock>
+<CodeBlock language="python">{astro_python_sdk_s3_snowflake}</CodeBlock>
 
 This DAG extracts the data from S3, loads it into a Snowflake table and runs a few simple SQL statements to clean the data, load it into a reporting table, and transform it into a dataframe so that you can print various table details to Airflow logs using Python.
 

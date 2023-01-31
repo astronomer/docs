@@ -9,9 +9,9 @@ id: airflow-passing-data-between-tasks
   <meta name="og:description" content="Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom." />
 </head>
 
-import AirflowXComDAG from '!!raw-loader!../samples/dags/airflow_passing_data_between_tasks_dag.py';
-import AirflowTaskAPIDAG from '!!raw-loader!../samples/dags/airflow_passing_data_between_tasks_dag_2.py';
-import AirflowS3HookDAG from '!!raw-loader!../samples/dags/airflow_passing_data_between_tasks_dag_3.py';
+import airflow_passing_data_between_tasks_xcom from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_xcom.py';
+import airflow_passing_data_between_tasks_taskflow from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_taskflow.py';
+import airflow_passing_data_between_tasks_s3 from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_s3.py';
 
 
 Sharing data between tasks is a very common use case in Airflow. If you've been writing DAGs, you probably know that breaking them up into smaller tasks is a best practice for debugging and recovering quickly from failures. What do you do when one of your downstream tasks requires metadata about an upstream task, or processes the results of the task immediately before it?
@@ -81,7 +81,7 @@ You can see that these limits aren't very big. And even if you think your data m
 
 In this section, you'll review a DAG that uses XCom to pass data between tasks. The DAG uses XComs to analyze cat facts that are retrieved from an API. To implement this use case, the first task makes a request to the [cat facts API](http://catfact.ninja/fact) and pulls the `fact` parameter from the results. The second task takes the results from the first task and performs an analysis. This is a valid use case for XCom, because the data being passed between the tasks is a short string.
 
-<CodeBlock language="python">{AirflowXComDAG}</CodeBlock>
+<CodeBlock language="python">{airflow_passing_data_between_tasks_xcom}</CodeBlock>
 
 In this DAG there are two `PythonOperator` tasks which share data using the `xcom_push` and `xcom_pull` functions. In the `get_a_cat_fact` function, the `xcom_push` method was used to allow the `key` name to be specified. Alternatively, the function could be configured to return the `cat_fact` value, because any value returned by an operator in Airflow is automatically pushed to XCom.
 
@@ -100,7 +100,7 @@ In the logs for the `analyze_data` task, you can see the value from the prior ta
 
 Another way to implement the previous DAG is to use the [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html) that was released with Airflow 2.0. With the TaskFlow API, returned values are pushed to XCom as usual, but XCom values can be pulled simply by adding the key as an input to the function as shown in the following DAG:
 
-<CodeBlock language="python">{AirflowTaskAPIDAG}</CodeBlock>
+<CodeBlock language="python">{airflow_passing_data_between_tasks_taskflow}</CodeBlock>
 
 This DAG is functionally the same as the previous one, but thanks to the TaskFlow API there is less code required overall, and no additional code required for passing the data between the tasks using XCom.
 
@@ -116,6 +116,6 @@ While this is a great way to pass data that is too large to be managed with XCom
 
 Building on the previous cat fact example, you are now interested in getting more cat facts and processing them. This case would not be ideal for XCom, but since the data returned is a small dataframe, it can be processed with Airflow.
 
-<CodeBlock language="python">{AirflowS3HookDAG}</CodeBlock>
+<CodeBlock language="python">{airflow_passing_data_between_tasks_s3}</CodeBlock>
 
 In this DAG you used the [S3Hook](https://registry.astronomer.io/providers/amazon/modules/s3hook) to save data retrieved from the API to a CSV on S3 in the `generate_file` task. The `process_data` task then takes the data from S3, converts it to a dataframe for processing, and then saves the processed data back to a new CSV on S3.

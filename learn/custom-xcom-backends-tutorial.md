@@ -6,7 +6,7 @@ description: 'Use this tutorial to learn how to set up a custom XCom backend in 
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import CustomXComBackends from '!!raw-loader!../samples/dags/simple_xcom_dag.py';
+import simple_xcom from '!!raw-loader!../code-samples/dags/xcom-backend-tutorial/simple_xcom.py';
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -643,7 +643,7 @@ To test your custom XCom backend you will run a simple DAG which pushes a random
 
 2. Copy and paste the code below into the file.
 
-    <CodeBlock language="python">{CustomXComBackends}</CodeBlock>
+    <CodeBlock language="python">{simple_xcom}</CodeBlock>
 
 3. Run the DAG.
 

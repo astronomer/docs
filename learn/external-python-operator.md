@@ -6,7 +6,7 @@ id: external-python-operator
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import ExternalPythonOperator from '!!raw-loader!../samples/dags/external_python_operator.py';
+import external_python_operator from '!!raw-loader!../code-samples/dags/external-python-operator/external_python_operator.py';
 
 It is very common to run a task with different dependencies than your Airflow environment. Your task might need a different Python version than core Airflow, or it has packages that conflict with your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
 
@@ -192,7 +192,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
 In your Astro project `dags` folder, create a new file called `external-python-pipeline.py`. Paste the following code into the file:
 
-<CodeBlock language="python">{ExternalPythonOperator}</CodeBlock>
+<CodeBlock language="python">{external_python_operator}</CodeBlock>
 
 This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in [Step 3](#step-3-configure-your-astro-project). The ExternalPythonOperator task also prints a list of packages installed in the virtual environment, which can be helpful for debugging.
 
