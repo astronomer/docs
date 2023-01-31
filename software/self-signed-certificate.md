@@ -1,6 +1,5 @@
 ---
 title: 'Generate self-signed TLS certificates'
-
 sidebar_label: 'Generate self-signed certificates'
 id: self-signed-certificate
 description: Generate a self-signed certificate to use with Astronomer Software.
@@ -64,7 +63,6 @@ Run the following command to inspect your self-signed certificate:
 
 ```bash
 openssl x509 -in server.crt -text -noout
-
 ```
 
 Confirm that the `X509v3 Subject Alternative Name` section of the certificate includes your Astronomer base domain (`<your-basedomain>`) as well as the wildcard domain (`*.<your-basedomain>`).
