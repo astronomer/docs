@@ -8,23 +8,21 @@ description: Integrate your internal authentication server with Astronomer Softw
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Astronomer Software by default allows users to create an account with and authenticate using one of the 3 methods below:
+Astronomer Software by default allows users to create an account with and authenticate using one of the following methods:
 
 - Google OAuth
 - GitHub OAuth
 - Local username/password
 
-Authentication methods are entirely customizable. In addition to the 3 defaults above, we provide the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
+Authentication methods are entirely customizable. In addition to the default methods, Astronomer provides the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
 
 - [Microsoft Azure Active Directory (AD)](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc)
 - [Okta](https://www.okta.com)
 - [Auth0](https://auth0.com/)
 
-The doc below will walk through how to both enable local authentication and configure any OIDC provider, including step-by-step instructions for the 3 providers listed above.
-
 :::info
 
-The following setups assume that you are using Astronomer's default [implicit flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.2) as your authorization flow. To implement a custom authorization flow, read [Configure a Custom OAuth Flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
+The following setups assume that you are using the default Astronomer [implicit flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.2) as your authorization flow. To implement a custom authorization flow, see [Configure a Custom OAuth Flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
 
 :::
 
@@ -65,6 +63,53 @@ astronomer:
 ```
 
 Replace the values above with those of the provider of your choice. If you want to configure Azure AD, Okta or Auth0 read below for specific guidelines.
+
+## Store and encrypt identity provider secrets
+
+Secrets such as passwords, authorization tokens, and security keys are used to protect and restrict access to confidential data. Encrypting this data prevents it from accidentally being exposed and used by unauthorized users.
+
+Okta is the identity provider (IDP) used in the following example. Auth0, Google, Active Directory Federation Services, Azure Active Directory, and custom identity providers are also supported.
+ 
+ 1. In the cluster where your Astronomer Software instance is installed, create a new file with the following contents:
+
+    ```javascript
+      Okta Secret
+      kind: Secret
+      apiVersion: v1
+      metadata:
+        name: okta-secret
+        labels:
+          release: {{ .Release.Name }}
+          chart: {{ .Chart.Name }}
+          heritage: {{ .Release.Service }}
+          component: {{ template "houston.backendSecret" . }}
+      type: Opaque
+      data:
+        secret_okta: {{ "<okta-secret-value>" | b64enc | quote }}
+        req.end();
+  ```
+2. Optional. Replace instances of Okta with the name of your identity provider and then save the file.
+
+3. Open your `config.yaml` file in the `astronomer/` directory and add the following entry:
+
+    ```yaml
+     astronomer:
+        houston:
+          secret:
+            envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
+            secretName: "okta-secret"
+            secretKey: "secret_okta"
+      ```
+4. Optional. Replace the `envName` value with one of the following values:
+
+    - Auth0: `AUTH__OPENID_CONNECT__AUTH0__CLIENT_SECRET`
+    - Azure Active Directory: `AUTH__OPENID_CONNECT__MICROSOFT__CLIENT_SECRET`
+    - Active Directory Federation Services: `AUTH__OPENID_CONNECT__ADFS__CLIENT_SECRET`
+    - Custom IDP: `AUTH__OPENID_CONNECT__CUSTOM__CLIENT_SECRET`
+
+5. Optional. Replace the `secretName` and `secretKey` values with the values from the file you created in step 1.
+
+6. Save and push your changes. See [Apply a config change](apply-platform-config.md).
 
 ## AWS Cognito
 
