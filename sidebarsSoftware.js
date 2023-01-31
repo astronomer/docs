@@ -18,6 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get started',
       items: [
+      'documentation-overview',
       'log-in-to-software',
       'create-project',
       ],
