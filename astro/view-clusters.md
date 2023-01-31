@@ -25,8 +25,6 @@ The **Worker Types** tab displays the following information:
 - **ID**: The ID of the node instance type used for the cluster's worker nodes
 - **Max Node Count**: The maximum number of worker nodes supported across all Deployments in the cluster
 
-The **Workspace Authorization** tab lets you define what Workspaces can create Deployments on the cluster.
-
 The **Tags** tab displays custom tags for the cluster created by Astronomer support.
 
 The **Details** tab displays the following information:
