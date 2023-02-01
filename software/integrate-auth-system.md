@@ -66,50 +66,47 @@ Replace the values above with those of the provider of your choice. If you want 
 
 ## Store and encrypt identity provider secrets
 
-Secrets such as passwords, authorization tokens, and security keys are used to protect and restrict access to confidential data. Encrypting this data prevents it from accidentally being exposed and used by unauthorized users.
+You can prevent your identity provider passwords, authorization tokens, and security keys from being exposed as plain text by encrypting them in Kubernetes secrets.
 
-Okta is the identity provider (IDP) used in the following example. Auth0, Google, Active Directory Federation Services, Azure Active Directory, and custom identity providers are also supported.
+This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow).
+
  
- 1. In the cluster where your Astronomer Software instance is installed, create a new file with the following contents:
-
-    ```javascript
-      Okta Secret
-      kind: Secret
-      apiVersion: v1
-      metadata:
-        name: okta-secret
-        labels:
-          release: {{ .Release.Name }}
-          chart: {{ .Chart.Name }}
-          heritage: {{ .Release.Service }}
-          component: {{ template "houston.backendSecret" . }}
-      type: Opaque
-      data:
-        secret_okta: {{ "<okta-secret-value>" | b64enc | quote }}
-        req.end();
-  ```
-2. Optional. Replace instances of Okta with the name of your identity provider and then save the file.
-
-3. Open your `config.yaml` file in the `astronomer/` directory and add the following entry:
+1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). The following example encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
 
     ```yaml
-     astronomer:
+    # Required configuration for all secrets
+    kind: Secret
+    apiVersion: v1
+    metadata:
+         name: okta-secret
+         labels:
+            release: {{ .Release.Name }}
+            chart: {{ .Chart.Name }}
+            heritage: {{ .Release.Service }}
+            component: {{ template "houston.backendSecret" . }}
+    type: Opaque
+    # Specify a key and value for the data you want to encrypt
+    data:
+        okta_client_secret: {{ "<okta-secret-value>" | b64enc | quote }}
+    ```
+2. Run the following command to apply your secret to your Astronomer cluster:
+
+    ```sh
+    kubectl apply -f ./secret.yaml
+    ```
+
+
+3. Reference your secret name, key, and the environment variable you want the key to apply towards in your `config.yaml` file. To configure the example secret from Step 1 as an Okta client secret, you would add the following:
+
+    ```yaml
+    astronomer:
         houston:
-          secret:
-            envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
-            secretName: "okta-secret"
-            secretKey: "secret_okta"
+            secret:
+             - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
+               secretName: "okta-secret"
+               secretKey: "okta_client_secret"
       ```
-4. Optional. Replace the `envName` value with one of the following values:
-
-    - Auth0: `AUTH__OPENID_CONNECT__AUTH0__CLIENT_SECRET`
-    - Azure Active Directory: `AUTH__OPENID_CONNECT__MICROSOFT__CLIENT_SECRET`
-    - Active Directory Federation Services: `AUTH__OPENID_CONNECT__ADFS__CLIENT_SECRET`
-    - Custom IDP: `AUTH__OPENID_CONNECT__CUSTOM__CLIENT_SECRET`
-
-5. Optional. Replace the `secretName` and `secretKey` values with the values from the file you created in step 1.
-
-6. Save and push your changes. See [Apply a config change](apply-platform-config.md).
+4. Save and push your changes. See [Apply a config change](apply-platform-config.md).
 
 ## AWS Cognito
 
