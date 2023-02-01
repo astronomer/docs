@@ -494,6 +494,7 @@ This setup is primarily used for encrypting the required secrets for [configurin
     data:
         okta_client_secret: {{ "<okta-secret-value>" | b64enc | quote }}
     ```
+
 2. Run the following command to apply your secret to your Astronomer cluster:
 
     ```sh
