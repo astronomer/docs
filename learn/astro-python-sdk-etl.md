@@ -17,10 +17,9 @@ These functions make your DAGs easier to write and read with less code. In this 
 
 :::info
 
-This guide is based on the latest version of the Astro SDK. If you're using an earlier version of the Astro SDK, you might need to modify the configuration steps or code. See the [Astro Python SDK Changelog](https://astro-sdk-python.readthedocs.io/en/1.4/CHANGELOG.html#) for a complete list of changes in each version.
+This guide is based on the latest version of the Astro SDK. If you're using an earlier version of the Astro SDK, you might need to modify the configuration steps or code. See the [Astro Python SDK Changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#) for a complete list of changes in each version.
 
 :::
-
 
 ## Assumed knowledge
 
@@ -32,7 +31,12 @@ The Astro Python SDK makes implementing ELT use cases easier by allowing you to 
 
 More specifically, the Astro Python SDK includes several functions that are helpful when implementing an ETL framework:
 
-- `load_file`: Loads a given file into a SQL table. The file format should be CSV, JSON, or Parquet and the files should be stored in Amazon S3, Google Drive, or Google Cloud Storage (GCS).
+- `load_file`: Loads a given file into a SQL table. You can load data from many file types including CSV and JSON. For a list of all supported file types, database types, and storage locations, see the following pages in Astro SDK documentation:
+
+    - [Supported databases](https://astro-sdk-python.readthedocs.io/en/latest/supported_databases.html)
+    - [Supported file types](https://astro-sdk-python.readthedocs.io/en/latest/supported_file.html#supported-file-type)
+    - [Supported file locations](https://astro-sdk-python.readthedocs.io/en/latest/supported_file.html)
+
 - `transform`: Applies a SQL select statement to a source table and saves the result to a destination table. This function allows you to transform your data with a SQL query. It uses a `SELECT` statement that you define to automatically store your results in a new table. By default, the `output_table` is given a unique name each time the DAG runs, but you can overwrite this behavior by defining a specific `output_table` in your function. You can then pass the results of the `transform` downstream to the next task as if it were a native Python object.
 - `dataframe`: Exports a specific SQL table into an in-memory pandas DataFrame. Similar to `transform` for SQL, the `dataframe` function allows you to implement a transformation of your data using Python. You can easily store the results of the `dataframe` function in your database by specifying an `output_table`, which is useful if you want to switch back to SQL in the next step or load your final results to your database.
 - `append`: Inserts rows from the source SQL table into the destination SQL table, if there are no conflicts. This function allows you to take resulting data from another function and append it to an existing table in your database. It is particularly useful in ETL scenarios and when dealing with reporting data.
@@ -47,18 +51,27 @@ For a full list of functions, see the [Astro Python SDK README in GitHub](https:
     astro-sdk-python
     ```
 
-2. Set the following environment variables. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
-
+2. If you're using Airflow 2.4 or earlier, set the following environment variable to use a required custom XCom backend. If you're using the Astro CLI, add this environment variable to the `.env` file of your Astro project
+    
+    ```text
+    AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
     ```
+
+3. Optional. Create an [Airflow connection](connections.md) to the database where you want to store the temporary tables created by the Astro SDK. After you have successfully tested your connection, set the following environment variables to configure your database as an Astro SDK storage backend. If you're using the Astro CLI, add these environment variables to the `.env` file of your Astro project:
+
+    ```text
+    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID='<your-database-connection-id>'
+    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL='<your-storage-folder-name>'
+    ```
+
+    For example, to use S3 as your storage backend, you would add the following environment variables:
+
+    ```text
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID=<your_aws_conn>
     AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL='s3://<your-bucket>/xcom/'
     ```
     
-    If you're using Airflow 2.4 or earlier, additionally set the following environment variable to use a required custom XCom backend:
-    
-    ```
-    AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
-    ```
+    If you don't configure an external XCom backend, you will only be able to process small amounts of data with the SDK.
 
 For a guided experience to get started, see the [Astro Python SDK tutorial](astro-python-sdk.md).
 
