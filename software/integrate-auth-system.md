@@ -95,7 +95,6 @@ This setup is primarily used for encrypting the required secrets for [configurin
     kubectl apply -f ./secret.yaml
     ```
 
-
 3. Reference your secret name, key, and the environment variable you want the key to apply towards in your `config.yaml` file. To configure the example secret from Step 1 as an Okta client secret, you would add the following:
 
     ```yaml
@@ -106,6 +105,7 @@ This setup is primarily used for encrypting the required secrets for [configurin
                secretName: "okta-secret"
                secretKey: "okta_client_secret"
       ```
+
 4. Save and push your changes. See [Apply a config change](apply-platform-config.md).
 
 ## AWS Cognito
