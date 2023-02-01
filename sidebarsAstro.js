@@ -102,7 +102,6 @@ module.exports = {
           type: "category",
           label: "Manage clusters",
           items: [
-            "view-clusters",
             "create-cluster",
             "modify-cluster",
             {

@@ -34,13 +34,7 @@ Read the following document for a reference of our default resources as well as 
 | [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html)                    | Stores Airflow task logs.                                                                                                                                                                                                                                                                                                                                | 1x                                            |
 | Maximum Node Count                                                                                  | The maximum number of EC2 worker nodes that a particular worker node pool can scale to. This value applies to each worker node pool and does not apply to other node pools. When this limit is reached, your cluster can't auto-scale and worker Pods may fail to schedule.                                                                              | 20                                            | ✔️             |
 
-## Supported cluster configurations
-
-You might need to modify configurations of a new or existing cluster on Astro. This section provides a reference for cluster configuration options.
-
-To create a new cluster on Astro with a specified configuration, see [Create a cluster](create-cluster.md). To request a change to an existing Cluster, see [Modify a cluster](modify-cluster.md). Astronomer is currently responsible for completing all cluster configuration changes.
-
-### Cluster regions
+## Supported cluster regions
 
 Depending on how you installed Astro, you can host Astro clusters in the following AWS regions:
 
@@ -70,13 +64,11 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 
 Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-### RDS instance type
-
-Every Astro cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the data plane and powers the metadata database of all Astro Deployments within a single cluster. During the cluster creation process, you are asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
+## Supported RDS instance types
 
 Astro supports a variety of AWS RDS instance types. Each instance type has varying amounts of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-#### db.r5
+### db.r5
 
 - db.r5.large (_default_)
 - db.r5.xlarge
@@ -87,7 +79,7 @@ Astro supports a variety of AWS RDS instance types. Each instance type has varyi
 - db.r5.16xlarge
 - db.r5.24xlarge
 
-#### db.m5
+### db.m5
 
 - db.m5.large
 - db.m5.xlarge
@@ -98,17 +90,7 @@ Astro supports a variety of AWS RDS instance types. Each instance type has varyi
 - db.m5.16xlarge
 - db.m5.24xlarge
 
-### Worker node pools
-
-A node pool is a group of nodes within a cluster that all have the same configuration. On Astro, worker nodes are responsible for running the Pods that execute Airflow tasks. Each worker node pool can be configured with a node instance type and a maximum node count. All Astro clusters have one worker node pool by default, but you can configure additional node pools to optimize resource use.
-
-If your cluster has multiple worker node pools with different worker node instance types, users in your organization can configure tasks to run on those worker types using [worker queues](configure-deployment-resources.md#worker-queues). To enable a new worker type for your cluster, contact [Astronomer support](https://cloud.astronomer.io/support) with a request to create a new node pool or modify an existing node pool.
-
-Astronomer monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and provide recommendations for updating your node pools to optimize your infrastructure spend or increase the efficiency of your tasks.
-
-For information about each available instance type, see the following resource reference and [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/).
-
-### Worker node resource reference
+## Supported worker node pool instance types
 
 Each worker in a worker node pool runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead.
 
@@ -186,10 +168,3 @@ If you need to pass significant data between Airflow tasks, Astronomer recommend
 
 :::
 
-### Maximum node count
-
-Each Astro cluster has a limit on how many nodes it can run at once. This maximum includes worker nodes as well as system nodes managed by Astronomer.
-
-The default maximum node count for all nodes across your cluster is 20. A cluster's node count is most affected by the number of worker Pods that are executing Airflow tasks. See [Worker autoscaling logic](configure-worker-queues.md#worker-autoscaling-logic).
-
-If the node count for your cluster reaches the maximum node count, new tasks might not run or get scheduled. Astronomer monitors maximum node count and is responsible for contacting your organization if it is reached. To check your cluster's current node count, contact [Astronomer Support](https://cloud.astronomer.io/support).
