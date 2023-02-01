@@ -22,6 +22,16 @@ To get the most out of this guide, you should have an understanding of:
 - CI/CD for Python scripts. See [Continuous Integration with Python: An Introduction](https://realpython.com/python-continuous-integration/).
 - Basic Airflow and [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) concepts. See [Get started with Airflow tutorial](get-started-with-airflow.md).
 
+## Python test runners
+
+There are multiple test runners available for Python, including:
+
+- [`unittest`](https://docs.python.org/3/library/unittest.html)
+- [`pytest`](https://docs.pytest.org/en/stable/index.html)
+- [`nose2`](https://docs.nose2.io/en/latest/getting_started.html)
+
+All types of test runners can be used with Airflow. In this guide we will use `pytest`.
+
 ## DAG validation testing
 
 DAG validation tests ensure that your DAGs fulfill a list of criteria. Using validation tests can help you:
@@ -34,14 +44,6 @@ DAG validation tests ensure that your DAGs fulfill a list of criteria. Using val
 We recommend at a minimum including a DAG validation test to check for [import errors](#prevent-import-errors). Additional tests can check things like custom logic, ensuring that `catchup` is set to False for every DAG in your Airflow instance, or making sure only `tags` from a defined list are used in the DAGs.
 
 DAG validation tests apply to all DAGs in your Airflow environment, so you only need to create one test suite.
-
-There are multiple test runners available for Python, including:
-
-- [`unittest`](https://docs.python.org/3/library/unittest.html)
-- [`pytest`](https://docs.pytest.org/en/stable/index.html)
-- [`nose2`](https://docs.nose2.io/en/latest/getting_started.html)
-
-All types of test runners can be used with Airflow. In this guide we will use `pytest`.
 
 ### Common DAG validation tests
 
