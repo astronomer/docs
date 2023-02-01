@@ -168,3 +168,7 @@ If you need to pass significant data between Airflow tasks, Astronomer recommend
 
 :::
 
+## Related documentation
+
+- [Create a new cluster on Astro](create-cluster.md)
+- [Manage and modify clusters](modify-cluster.md)

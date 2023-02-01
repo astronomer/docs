@@ -100,3 +100,8 @@ The following table lists all available instance types for worker node pools, as
 
 If your Organization is interested in using an instance type that supports a larger worker size, contact [Astronomer support](https://cloud.astronomer.io/support). For more information about configuring worker size on Astro, see [Configure a Deployment](configure-deployment-resources.md).
 
+## Related documentation
+
+- [Create a new cluster on Astro](create-cluster.md)
+- [Manage and modify clusters](modify-cluster.md)
+
