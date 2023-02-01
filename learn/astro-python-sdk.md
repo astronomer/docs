@@ -17,7 +17,7 @@ The example DAG in this tutorial uses Amazon S3 and Snowflake, but you can repla
 
 :::info
 
-This guide is based on the latest version of the Astro SDK. If you're using an earlier version of the Astro SDK, you might need to modify the configuration steps or code. See the [Astro Python SDK Changelog](https://astro-sdk-python.readthedocs.io/en/1.4/CHANGELOG.html#) for a complete list of changes in each version.
+This guide is based on the latest version of the Astro SDK. If you're using an earlier version of the Astro SDK, you might need to modify the configuration steps or code. See the [Astro Python SDK Changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#) for a complete list of changes in each version.
 
 :::
 
