@@ -15,30 +15,29 @@ Release date: January 31, 2023
 
 ### Additional improvements
 
-- Added support for [Kubernetes 1.25](https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/).
+- Support for Kubernetes [1.25](https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/) and [1.26](https://kubernetes.io/blog/2022/12/09/kubernetes-v1-26-release/).
 - You can now configure custom annotations for Houston ingress by setting `astronomer.houston.ingress.annotation` in your `config.yaml` file. 
 - The System Admin **Deployments** list in the Astronomer UI is now paginated. 
-- PgBouncer now utilizes graceful shutdowns.
-- Errors related to the git-sync Kubernetes pod now appear in the Astro UI (potentially not in release)
-- You can now tune the git-sync relay service's resource usage by setting the following values in your `config.yaml` file:
-
+- You can now use the following values in your `config.yaml` file to configure resource allocation for the git-sync relay service:
+  
     - `astronomer.gitSyncRelay.gitSyncResources`
     - `astronomer.gitSyncRelay.gitDaemonResources`
     - `astronomer.gitSyncRelay.securityContext`
 
-- You can now set `timeoutSeconds` for both `readinessProbe` and `livenessProbe` in the Prometheus Helm chart.
+- You can now set `timeoutSeconds` for `readinessProbe` and `livenessProbe` in the Prometheus Helm chart.
 - Fixed an issue where Deployments with many DAGs could not be successfully upgraded due to a short timeout.
 - Houston API now logs an installation's deployed image versions whenever a GraphQL mutation is completed.
 
 ### Bug fixes 
 
-- Fixed an issue where a user deactivated through SCIM would leave behind orphan Deployments and Workspaces. 
-- Service accounts and users can no longer create users through the Houston API when SCIm is enabled. 
-- Database migrations for a Deployment now use the same amount of resources as configured for the Deployment's scheduler. This should limit OOM errors when migrating large DAGs.
-- Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts resulted in an error.
+- Fixed an issue where orphan Deployments and Workspaces remained when users were deactivated with SCIM. 
+- When SCIM is enabled, service accounts and users can no longer create users through the Houston API. 
+- To limit Out of Memory (OOM) errors when migrating large DAGs, Deployment database migrations now use the same resources as the Deployment's scheduler.
+- Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts returned an error.
 - Fixed an issue where PgBouncer didn't work if you pulled its image from a private registry.
 - When you view a user through a Teams list as a System Admin and return to the list, you now return to the Teams list instead of the System Admin users list. 
 - Fixed the following vulnerabilities:
+  
     - [CVE-2022-23529](https://nvd.nist.gov/vuln/detail/CVE-2022-23529)
     - [CVE-2021-44906](https://nvd.nist.gov/vuln/detail/CVE-2021-44906)
     - [CVE-2022-23540](https://nvd.nist.gov/vuln/detail/CVE-2022-23540)

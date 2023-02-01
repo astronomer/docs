@@ -18,7 +18,7 @@ While the tables below reference the minimum compatible versions, we typically r
 | v0.28               | 1.19[^1], 1.20[^1], 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
 | v0.29               | 1.19[^1], 1.20[^1], 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 | v0.30               | 1.19[^1], 1.20[^1], 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
-| v0.31               | 1.21, 1.22, 1.23, 1.24 , 1.25[^2] | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| v0.31               | 1.21, 1.22, 1.23, 1.24 , 1.25[^2], 1.26[^2] | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 
 
 Astronomer recommends using the latest available version of the Astro CLI for all Software versions in most cases. To upgrade from an earlier version of the CLI to the latest, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
@@ -27,7 +27,7 @@ Astronomer recommends using the latest available version of the Astro CLI for al
 
 [^1]: Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.28.7, 0.29.5, and 0.30.4.
 
-[^2]: To use Kubernetes 1.25 on Azure, you must set `nginx.ingressAnnotations.service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"` in your `config.yaml` file. 
+[^2]: To use Kubernetes 1.25 and later on Azure, you must set `nginx.ingressAnnotations.service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"` in your `config.yaml` file. 
 
 :::
 
