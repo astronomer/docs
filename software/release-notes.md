@@ -19,7 +19,7 @@ Release date: December 23, 2022
 
 ### Bug fixes 
 
-- When you mark a task as success or cleared in a Deployment's Airflow UI, you are now correctly redirected to the DAG's **Tree** view instead of the **DAGs** homepage.  
+- When you mark a task as **Success** or **Cleared** in a Deployment's Airflow UI, you are now correctly redirected to the DAG's **Tree** view instead of the **DAGs** homepage.  
 - Fixed an issue where logging sidecars would occasionally fail to terminate.
 - Fixed the following vulnerabilities:
     - [CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848)
