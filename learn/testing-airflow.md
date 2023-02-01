@@ -218,7 +218,7 @@ You can set up `dag.test()` by adding two lines at the end of the DAG file. If y
     ]}>
 <TabItem value="traditional">
 
-```python{14-15}
+```python {13-14}
 from airflow import DAG
 from pendulum import datetime
 from airflow.operators.empty import EmptyOperator
@@ -240,7 +240,7 @@ if __name__ == "__main__":
 
 <TabItem value="decorator">
 
-```python
+```python {16-17}
 from airflow.decorators import dag
 from pendulum import datetime
 from airflow.operators.empty import EmptyOperator
