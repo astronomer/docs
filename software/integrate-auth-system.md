@@ -69,7 +69,6 @@ Replace the values above with those of the provider of your choice. If you want 
 You can prevent your identity provider passwords, authorization tokens, and security keys from being exposed as plain text by encrypting them in Kubernetes secrets.
 
 This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow).
-
  
 1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). The following example encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
 
