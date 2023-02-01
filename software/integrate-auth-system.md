@@ -509,6 +509,6 @@ This setup is primarily used for encrypting the required secrets for [configurin
              - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
                secretName: "okta-secret"
                secretKey: "okta_client_secret"
-      ```
+    ```
 
 4. Save and push your changes. See [Apply a config change](apply-platform-config.md).
