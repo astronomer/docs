@@ -33,12 +33,12 @@ All types of test runners can be used with Airflow. In this guide we will use `p
 
 DAG validation tests are designed to ensure that your DAG objects fulfill a list of criteria. We recommend at a minimum including a DAG validation test to check for [import errors](#prevent-import-errors). Additional tests can check things like custom logic, ensuring that `catchup` is set to False for every DAG in your Airflow instance, or making sure only `tags` from a defined list are used in the DAGs.
 
-Reasons for using DAG validation testing include:
+DAG validation tests ensure that your DAGs fulfill a list of criteria. Using validation tests can help you:
 
-- Developing DAGs without access to a local Airflow environment.
-- Ensuring that custom DAG requirements are systematically checked and fulfilled.
-- Including automatic DAG validation testing in a CI/CD pipeline.
-- Enabling power users to test DAGs from the CLI.
+- Develop DAGs without access to a local Airflow environment.
+- Ensure that custom DAG requirements are systematically checked and fulfilled.
+- Test DAGs automatically in a CI/CD pipeline.
+- Enable power users to test DAGs from the CLI.
 
 DAG validation tests apply to all DAGs in your Airflow environment, so you only need to create one test suite.
 
@@ -46,9 +46,9 @@ DAG validation tests apply to all DAGs in your Airflow environment, so you only 
 
 This section covers the most common types of DAG validation tests with full code examples.
 
-#### Prevent Import Errors
+#### Check for import errors
 
-The most common DAG validation test is to check for import errors using the `.import_errors` attribute of the initialized `DagBag` model. The code below shows a complete testing suite collecting DAG import errors. 
+The most common DAG validation test is to check for import errors. Checking for import errors through a validation test is faster than starting your Airflow environment and checking for errors in the Airflow UI. In the following test, `get_import_errors` checks the `.import_errors` attribute of the current [`DagBag`](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dagbag/index.html#).
 
 ```python
 import os
@@ -66,7 +66,7 @@ def get_import_errors():
     def strip_path_prefix(path):
         return os.path.relpath(path, os.environ.get("AIRFLOW_HOME"))
 
-    # we prepend "(None,None)" to ensure that a test object is always created even if its a no op.
+    # prepend "(None,None)" to ensure that a test object is always created even if it's a no op.
     return [(None, None)] + [
         (strip_path_prefix(k), v.strip()) for k, v in dag_bag.import_errors.items()
     ]
@@ -81,11 +81,11 @@ def test_file_imports(rel_path, rv):
         raise Exception(f"{rel_path} failed to import with message \n {rv}")
 ```
 
-#### Set custom DAG requirements
+#### Check for custom code requirements
 
 Airflow allows a great deal of DAG customization. It is common for data engineering teams to define best practices and custom rules around how their DAGs should be written and create DAG validation tests to ensure those standards are met.
 
-The code snippet below shows a test which checks that all DAGs have their `tags` parameter set to one or more of the `APPROVED_TAGS`.
+The code snippet below includes a test which checks that all DAGs have their `tags` parameter set to one or more of the `APPROVED_TAGS`.
 
 ```python
 import os
@@ -127,8 +127,6 @@ You can view the attributes and methods available for the `dag` model in the [Ai
 
 :::
 
-#### Set custom task requirements
-
 You can also set requirements at the task level by accessing the `tasks` attribute within the `dag` model, which contains a list of all task objects of a DAG. The test below checks that all DAGs contain at least one task and all tasks use `trigger_rule="all_success"`.
 
 ```python
@@ -145,12 +143,12 @@ def test_dag_tags(dag_id, dag, fileloc):
         assert t_rule == "all_success", f"{task} in {dag_id} has the trigger rule {t_rule}"
 ```
 
-### Implementing DAG validation tests
+## Implement DAG validation tests
 
 Airflow offers different ways to run DAG validation tests using any Python test runner. This section gives an overview of the most common implementation methods. 
 If you are new to testing Airflow DAGs we recommend to get started using the commands provided by the Astro CLI.
 
-#### The Astro CLI
+### The Astro CLI
 
 The Astro CLI includes two commands to run DAG validation tests. Airflow does not need to be running to use these commands.
 
@@ -159,13 +157,13 @@ The Astro CLI includes two commands to run DAG validation tests. Airflow does no
 
 Every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_integrity.py` script defining several examples of using `pytest` with Airflow, see also the Astro documentation's [Test and troubleshoot locally](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#test-dags-with-the-astro-cli).
 
-#### dag.test()
+### dag.test()
 
 Airflow 2.5.0 introduced the `dag.test()` method, which runs directly in the DAG file and allows you to run all tasks in a DAG within a single serialized Python process. This allows for faster iteration when developing DAGs.
 
 You can set up `dag.test()` by adding two lines at the end of the DAG file. If you are using a traditional DAG context, call `.test()` on the object the context is assigned to. If you are using the `@dag` decorator, call the method on a call of the decorated function. 
 
-```python
+```python{14-15}
 from airflow import DAG
 from pendulum import datetime
 from airflow.operators.empty import EmptyOperator
@@ -179,7 +177,6 @@ with DAG(
 
     t1 = EmptyOperator(task_id="t1")
 
-# Added statement at the end of the DAG
 if __name__ == "__main__":
     dag.test()
 ```
@@ -200,40 +197,38 @@ def my_dag():
 
 my_dag()
 
-# Added statement at the end of the DAG
 if __name__ == "__main__":
     my_dag().test()
 ```
 
-You can run the `.test()` method on all tasks in an individual DAG by executing `python <path to dag file>.py` from the command line within your Airflow environment, locally if you are running a standalone Airflow instance, or within the Docker container if you are running Airflow in Docker.
+You can run the `.test()` method on all tasks in an individual DAG by executing `python <path-to-dag-file>` from the command line within your Airflow environment. You would execute this locally if you are running a standalone Airflow instance, or within the Docker container if you are running Airflow in Docker.
 
-To take advantage of `pdb` ([The Python Debugger](https://docs.python.org/3/library/pdb.html)), an interactive source code debugger, and get an interactive debugging experience, you can run:
+Use `pdb` ([The Python Debugger](https://docs.python.org/3/library/pdb.html)), an interactive source code debugger, by running:
 
 ```sh
 python -m pdb <path to dag file>.py
 ```
 
-
 This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 
-#### Airflow CLI 
+### Airflow CLI 
 
 The Airflow CLI offers two commands related to local testing:
 
-- [`airflow dags test`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test): Executes one single DagRun for a given DAG and execution date and writes the result to the metadata database. This command is useful for testing full DAGs by creating manual Dagruns from the command line.
-- [`airflow tasks test`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test_repeat1): Tests one specific task instance without checking for dependencies or recording the outcome in the metadata database. This command is useful for troubleshooting issues with specific tasks.
+- [`airflow dags test`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test): Given a DAG ID and execution date, this command writes the results of a single DAG run to the metadata database. This command is useful for testing full DAGs by creating manual DAG runs from the command line.
+- [`airflow tasks test`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test_repeat1): This command tests one specific task instance without checking for dependencies or recording the outcome in the metadata database.
 
-With the Astro CLI, you can run all Airflow CLI commands without entering the Docker container by using [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run). For example, to run `airflow dags test` on the DAG `my_dag` for the execution date of `2023-01-29` run:
+With the Astro CLI, you can run all Airflow CLI commands using [`astro dev run`](https://docs.astronomer.io/astro/cli/astro-dev-run). For example, to run `airflow dags test` on the DAG `my_dag` for the execution date of `2023-01-29` run:
 
 ```sh
 astro dev run dags test my_dag '2023-01-29'
 ```
 
-### CI/CD with the Astro CLI
+### Test DAGs in a CI/CD pipeline
 
-You can use any CI/CD tool on Airflow code. A common use case is to run the `astro dev pytest` for all pytests in the `tests` directory every time a push or PR to a specific branch in your source control is made. 
+You can use any CI/CD tool on Airflow code. A common use case is to run the `astro dev pytest` for all pytests in the `tests` directory every time someone pushes code to a specific branch in your repository.
 
-Below shows an example of a GitHub Action workflow which will install the Astro CLI and use it to run `astro dev pytest` on every push to the `main` branch.
+The following is an example GitHub Action workflow which installs the Astro CLI and runs `astro dev pytest` on every push to the `main` branch.
 
 ```yaml
 name: Airflow CI - Run pytests
@@ -257,7 +252,7 @@ jobs:
 
 :::info
 
-If you are an Astronomer customer you can find further information on how to set up CI/CD with your Astro deployment in [our docs](https://docs.astronomer.io/astro/ci-cd).
+If you are an Astro customer, you can find further information on how to set up CI/CD to your Astro deployment in [CI/CD](https://docs.astronomer.io/astro/ci-cd).
 
 :::
 
