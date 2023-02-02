@@ -21,19 +21,25 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 Release date: February 2, 2023
 
-### New User Commands to Manage Users Across your Organization and Workspaces
+### New commands to manage Astro users
 
-This release includes 7 new commands to help Admins manage users:
+Astro CLI 1.10 includes several new commands to help you manage users across your Organization:
 
-- `astro organization user invite` (Previously `astro user invite`)
-- `astro organization user update`
-- `astro organization user list`
-- `astro workspace user add`
-- `astro workspace user update`
-- `astro workspace user list`
-- `astro workspace user remove`
+- `astro organization user invite`: Invite a new user to your Astronomer Organization. 
+- `astro organization user update`: Update a user's Organization role.
+- `astro organization user list`: List all users in your Organization.
+- `astro workspace user add`: Add a user to a Workspace.
+- `astro workspace user update`: Update a user's role in a Workspace.
+- `astro workspace user list`: List all users in a Workspace.
+- `astro workspace user remove`: Remove a user from a Workspace.
 
-Please note that `astro user invite` still exists in this release but will be deprecated in future releases.
+:::info
+
+`astro organization user invite` is identical to the existing `astro user invite` command. `astro user invite` will be deprecated in a future release.
+
+:::
+
+For more information, see the [`astro organization`](cli/astro-organization.md) and [`astro workspace`](cli/astro-organization.md) command references.
 
 ## Astro CLI 1.9.0
 
