@@ -200,7 +200,7 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
     vault write -f auth/approle/role/<your-approle>/secret-id
     ```
 
-    Save these values for later in the setup.
+    Save these values. You'll use them later to complete the setup.
   
 #### Create an Airflow variable or connection in Vault
 
