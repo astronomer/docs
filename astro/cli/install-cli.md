@@ -43,26 +43,6 @@ To install the latest version of the Astro CLI, run the following command:
 brew install astro
 ```
 
-If Homebrew doesn't install the latest version of the CLI when you run this command:
-
-1. Run the following command to update all package definitions (formulae) and Homebrew:
-
-    ```sh
-    brew update
-    ```
-
-2. Run the following command to install the latest version of the Astro CLI:
-
-    ```sh
-    brew install astro
-    ```
-
-3. Run the following command to verify the correct Astro CLI version was installed:
-
-    ```sh
-    astro version
-    ```
-
 To install a specific version of the Astro CLI, specify the version you want to install at the end of the command:
 
 ```sh
@@ -70,6 +50,30 @@ brew install astro@<major.minor.patch-version>
 ```
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md). If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
+
+Complete the following procedure if Homebrew doesn't install the latest version of the CLI when you run the installation command, or the error message `No formulae or casks found for astro@<major.minor.patch-version>` appears when installing a specific version of the Astro CLI.
+
+1. Run the following command to update all package definitions (formulae) and Homebrew:
+
+    ```sh
+    brew update
+    ```
+
+2. Run one of the following commands to install the latest version of the Astro CLI, or install a specific version of the Astro CLI:
+
+    ```sh
+    brew install astro
+    ```
+
+    ```sh
+    brew install astro@<major.minor.patch-version>
+    ```
+
+3. Run the following command to verify the correct Astro CLI version was installed:
+
+    ```sh
+    astro version
+    ```
 
 </TabItem>
 
