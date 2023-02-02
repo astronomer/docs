@@ -79,7 +79,7 @@ astro login mycompany.astromomer.io
 # The CLI prompts you for a username and password, or to leave the prompt empty for OAuth authentication
 
 astro login mycompany.astromomer.io -o
-# The CLI does not prompt you for a username and password and instead directly prompys you for an OAuth login token
+# The CLI does not prompt you for a username and password and instead directly prompts you for an OAuth login token
 ```
 
 
