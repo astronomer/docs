@@ -51,18 +51,18 @@ Add a new user to your current Astronomer Workspace. The CLI prompts you for the
 #### Options
 
 | `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
-| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_VIEWER` |
+| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`.|
 
 ### astro workspace user update
 
-Update a user's permissions in your current Astronomer Workspace. The CLI prompts you for the user's email.
+Update a user's permissions in your current Astronomer Workspace. The CLI prompts you for the user's email and new role.
 
 #### Options
 
 | Option    | Description                                                  | Possible Values                                                                                                                             |
 | --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
-| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. Default is `WORKSPACE_ADMIN` |
+| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_ADMIN`. |
 
 ### astro workspace user list
 

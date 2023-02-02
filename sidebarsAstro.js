@@ -264,6 +264,8 @@ module.exports = {
         'cli/astro-run',
         'cli/astro-team',
         'cli/astro-user',
+        'cli/astro-user-create',
+        'cli/astro-user-invite',
         'cli/astro-version',
         'cli/astro-workspace',],
     },
