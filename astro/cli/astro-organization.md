@@ -13,7 +13,7 @@ Manage users in your current Astro Organization.
 This command includes five subcommands:
 
 - `astro organization user list`: List all users in your Organization.
-- `astro organization user invite`: Invite a new user to your Astronomer Organization. The CLI prompts you for the user's email.
+- `astro organization user invite`: Invite a new user to your Astronomer Organization.
 - `astro organization user update`: Update a user's Organization role.
 - `astro organization list`: View a list of Organizations that you can access on Astro. Only the Organizations you have been invited to by a System Admin appear on this list.
 - `astro organization switch`: Switch to a different Organization that you have access to in Astro.
