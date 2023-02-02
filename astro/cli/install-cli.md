@@ -49,7 +49,7 @@ To install a specific version of the Astro CLI, specify the version you want to 
 brew install astro@<major.minor.patch-version>
 ```
 
-If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md). If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
+If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](/astro/cli/release-notes.md).
 
 Complete the following procedure if Homebrew doesn't install the latest version of the CLI when you run the installation command, or the error message `No formulae or casks found for astro@<major.minor.patch-version>` appears when installing a specific version of the Astro CLI.
 
@@ -152,7 +152,7 @@ To install a specific version of the CLI, specify the version number as a flag a
 
 <pre><code parentName="pre">{`curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}`}</code></pre>
 
-If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
+If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](/astro/cli/release-notes.md).
 
 </TabItem>
 
@@ -281,7 +281,7 @@ The `astrocloud` executable is no longer maintained by Astronomer. Complete this
 - You are an Astro user.
 - You're currently using the `astrocloud` CLI executable.
 
-For more information about Astro CLI version 1.0.0, see [Astro CLI Release Notes](cli/release-notes.md).
+For more information about Astro CLI version 1.0.0, see [Astro CLI Release Notes](/astro/cli/release-notes.md).
 
 ### Step 1: Uninstall `astrocloud`
 
