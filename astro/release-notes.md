@@ -27,7 +27,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Bug fixes 
 
-- When you mark a task as **Success** or **Cleared** in a Deployment's Airflow UI, you are now correctly redirected to the DAG's **Tree** view instead of the **DAGs** homepage.
+- When you select **Mark Success** or **Clear** for Deployment task actions in the Airflow UI, you are now correctly redirected to the DAG **Tree** view instead of the **DAGs** homepage.
 - Fixed [CVE-2022-41721](https://avd.aquasec.com/nvd/2022/cve-2022-41721/).
 
 ## January 24, 2023
