@@ -59,6 +59,8 @@ Update a user's permissions in your current Astronomer Workspace. The CLI prompt
 
 #### Options
 
+| Option    | Description                                                  | Possible Values                                                                                                                             |
+| --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
 | `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. Default is `WORKSPACE_ADMIN` |
 
@@ -70,9 +72,15 @@ List all users in your current Workspace.
 
 Remove a user from your current Workspace.  The CLI prompts you for the user's email.
 
-### Options
+#### Options
 
+| Option    | Description                                                  | Possible Values                                                                                                                             |
+| --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
+
+## Related commands
+
+- [astro user](cli/astro-user.md)
 
 </TabItem>
 <TabItem value="software">
