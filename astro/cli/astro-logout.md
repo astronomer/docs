@@ -6,7 +6,7 @@ description: Reference documentation for astro logout.
 hide_table_of_contents: true
 ---
 
-Unauthenticate from the Astro CLI. Note that this command does not affect your current login session in the Cloud UI.
+Log out of the Astro CLI. This command does not affect your current login session in the Cloud UI.
 
 ## Usage
 
