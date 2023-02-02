@@ -36,15 +36,15 @@ This command includes two subcommands:
 
 This command has several subcommands.
 
-### astro workspace create
+### `astro workspace create`
 
 List all Workspaces.
 
-### astro workspace switch
+### `astro workspace switch`
 
 Switch between Workspaces.
 
-### astro workspace user add
+### `astro workspace user add`
 
 Invite an existing user to your current Astronomer Workspace.
 
@@ -53,7 +53,7 @@ Invite an existing user to your current Astronomer Workspace.
 | `<email>` | The email for the user you want to invite or update. | Any valid email                                                                                                                             |
 | `--role`  | The user's role in the Workspace.                          | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`.|
 
-### astro workspace user update
+### `astro workspace user update`
 
 Update a user's permissions in your current Astronomer Workspace. The CLI prompts you for the user's email and new role.
 
@@ -64,11 +64,11 @@ Update a user's permissions in your current Astronomer Workspace. The CLI prompt
 | `<email>` | The email for the user you want to invite or update.  | Any valid email                                                                                                                             |
 | `--role`  | The user's role in the Workspace.                          | Valid values are `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
-### astro workspace user list
+### `astro workspace user list`
 
 List all users in your current Workspace.
 
-### astro workspace user remove
+### `astro workspace user remove`
 
 Remove a user from your current Workspace. 
 
