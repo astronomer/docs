@@ -59,10 +59,10 @@ Update a user's permissions in your current Astronomer Workspace. The CLI prompt
 
 #### Options
 
-| Option    | Description                                                  | Possible Values                                                                                                                             |
+| Option    | Description                                                  | Valid Values                                                                                                                             |
 | --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
 | `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
-| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_ADMIN`. |
+| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Valid values are `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ### astro workspace user list
 
