@@ -37,7 +37,7 @@ Install the Astro CLI on a Mac operating system with a single command.
 
 #### Installation
 
-To install the latest version of the Astro CLI, run the following command:
+1. To install the latest version of the Astro CLI, run the following command:
 
 ```sh
 brew install astro
@@ -49,32 +49,31 @@ To install a specific version of the Astro CLI, specify the version you want to 
 brew install astro@<major.minor.patch-version>
 ```
 
+To install Astro CLI version 1.10.0, for example, run:
+
+```
+brew install astro@1.10.0
+```
+
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](/astro/cli/release-notes.md).
 
-Complete the following procedure if Homebrew doesn't install the latest version of the CLI when you run the installation command, or the error message `No formulae or casks found for astro@<major.minor.patch-version>` appears when installing a specific version of the Astro CLI.
+2. Verify that the correct Astro CLI version was installed:
 
-1. Run the following command to update all package definitions (formulae) and Homebrew:
+```
+astro version
+```
 
-    ```sh
-    brew update
-    ```
+:::tip
 
-2. To install the latest version of the Astro CLI, run the following command:
+If Homebrew fails to install the latest version or the error `No formulae or casks found for astro@<major.minor.patch-version>` appears, run the following command to update all package definitions (formulae) and Homebrew:
 
-    ```sh
-    brew install astro
-    ```
-3. To install a specific version of the Astro CLI, run the following command:
+```sh
+brew update
+```
 
-    ```sh
-    brew install astro@<major.minor.patch-version>
-    ```
+Then, try to install the Astro CLI again by following steps 1-2 in [Installation](astro/cli/install-cli.md?tab=mac#installation Astro CLI) above.
 
-4. Run the following command to verify the correct Astro CLI version was installed:
-
-    ```sh
-    astro version
-    ```
+:::
 
 </TabItem>
 
@@ -157,7 +156,6 @@ If you specify only a major version, this command installs the latest minor or p
 </TabItem>
 
 </Tabs>
-
 
 ## Upgrade the CLI
 
