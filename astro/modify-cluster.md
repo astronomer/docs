@@ -27,9 +27,9 @@ If your cluster has multiple worker node pools with different worker node instan
 
 Astronomer monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and provide recommendations for updating your node pools to optimize your infrastructure spend or increase the efficiency of your tasks.
 
-## RDS instance type
+## Relational databases
 
-Astro clusters are created with and require an RDS instance. RDS serves as a primary relational database for the data plane and powers the metadata database of all Astro Deployments within a single cluster. During the cluster creation process, you are asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
+Astro clusters are created with and require a relational database. A relational database is required for the data plane and it powers the metadata database of all Astro Deployments within a single cluster. During the cluster creation process, you are asked to specify an relational database instance type according to your use case and expected workload, but it can be modified at any time.
 
 ## Modify a cluster
 
