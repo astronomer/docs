@@ -57,7 +57,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 
 Modifying the region of an existing Astro cluster isn't supported. If you're interested in a region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-For detailed information on each instance type, see [Virtual machines in Azure](https://docs.microsoft.com/en-us/azure/virtual-machines/). If you're interested in a machine type that isn't on this list, contact [Astronomer support](https://cloud.astronomer.io/support). Not all machine types are supported in all regions.
+¹ If you want to host Astro in a dedicated AWS account owned by your organization (Bring Your Own Cloud) in one of these regions, you'll need to contact [Microsoft Azure Support](https://support.microsoft.com/en-us/topic/contact-microsoft-azure-support-2315e669-8b1f-493b-5fb1-d88a8736ffe4) to enable the regions. If you require clarification about this requirement, contact [Astronomer support](https://cloud.astronomer.io/support). 
 
 ## Supported worker node pool instance types
 
