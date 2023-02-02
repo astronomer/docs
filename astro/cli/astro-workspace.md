@@ -46,12 +46,12 @@ Switch between Workspaces.
 
 ### astro workspace user add
 
-Add a new user to your current Astronomer Workspace.
+Invite an existing user to your current Astronomer Workspace.
 
 #### Options
 
-| `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
-| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`.|
+| `<email>` | The email for the user you want to invite or update. | Any valid email                                                                                                                             |
+| `--role`  | The user's role in the Workspace.                          | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`.|
 
 ### astro workspace user update
 
@@ -61,8 +61,8 @@ Update a user's permissions in your current Astronomer Workspace. The CLI prompt
 
 | Option    | Description                                                  | Valid Values                                                                                                                             |
 | --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
-| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Valid values are `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `<email>` | The email for the user you want to invite or update.  | Any valid email                                                                                                                             |
+| `--role`  | The user's role in the Workspace.                          | Valid values are `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ### astro workspace user list
 
@@ -76,11 +76,11 @@ Remove a user from your current Workspace.
 
 | Option    | Description                                                  | Possible Values                                                                                                                             |
 | --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
+| `<email>` | The email for the user you want to remove. | Any valid email                                                                                                                             |
 
 ## Related commands
 
-- [astro user](cli/astro-user.md)
+- [astro organization](cli/astro-organization.md)
 
 </TabItem>
 <TabItem value="software">
