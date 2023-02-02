@@ -19,9 +19,9 @@ Effectively testing DAGs requires an understanding of their structure and their 
 To get the most out of this guide, you should have an understanding of:
 
 - Python testing basics. See [Getting Started with Testing in Python](https://realpython.com/python-testing/).
-- At least one Python test runner. This guide mostly uses [pytest](https://docs.pytest.org/en/stable/index.html), but you can use others including [`nose2`](https://docs.nose2.io/en/latest/getting_started.html) and [`unittest`](https://docs.python.org/3/library/unittest.html).
+- At least one Python test runner. This guide mostly uses [`pytest`](https://docs.pytest.org/en/stable/index.html), but you can use others including [`nose2`](https://docs.nose2.io/en/latest/getting_started.html) and [`unittest`](https://docs.python.org/3/library/unittest.html).
 - CI/CD for Python scripts. See [Continuous Integration with Python: An Introduction](https://realpython.com/python-continuous-integration/).
-- Basic Airflow and [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) concepts. See [Get started with Airflow tutorial](get-started-with-airflow.md).
+- Basic Airflow and [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) concepts. See [Get started with Airflow](get-started-with-airflow.md).
 
 ## Write DAG validation tests
 
@@ -252,7 +252,7 @@ if __name__ == "__main__":
 
 </Tabs>
 
-You can run the `.test()` method on all tasks in an individual DAG by executing `python <path-to-dag-file>` from the command line within your Airflow environment. You can also run this command locally if you are running a standalone Airflow instance, or within the scheduler container if you are running Airflow in Docker.
+You can run the `.test()` method on all tasks in an individual DAG by executing `python <path-to-dag-file>` from the command line within your Airflow environment. You can run this command locally if you are running a standalone Airflow instance, or within the scheduler container if you are running Airflow in Docker.
 
 Astro CLI users can use the `.test()` method by running:
 
@@ -346,11 +346,11 @@ Testing your DAG ensures that your code fulfills your requirements. But even if 
 
 Data quality checks differ from code-related testing because the data is not static like your DAG code. It is best practice to incorporate data quality checks into your DAGs and use [Airflow dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) to handle what should happen in the event of a data quality issue, from halting the pipeline to [sending notifications](error-notifications-in-airflow.md) to data quality stakeholders.
 
-There are many ways you can integrate data checks into your DAG:
+There are many ways you can integrate data quality checks into your DAG:
 
 - [SQL check operators](airflow-sql-data-quality.md): Airflow-native operators that run highly customizable data quality checks on a wide variety of relational databases.
 - [Great Expectations](airflow-great-expectations.md): A data quality testing suite with an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) offering the ability to define data quality checks in JSON to run on relational databases, Spark and Pandas dataframes.
-- [Soda Core](https://docs.astronomer.io/learn/soda-data-quality): An framework to check data quality using YAML configuration to define data quality checks to run on relational databases and Spark dataframes.
+- [Soda Core](https://docs.astronomer.io/learn/soda-data-quality): A framework to check data quality using YAML configuration to define data quality checks to run on relational databases and Spark dataframes.
 
 Data quality checks work better at scale if you design your DAGs to load or process data incrementally. To learn more about incremental loading, see [DAG Writing Best Practices in Apache Airflow](dag-best-practices.md). Processing smaller, incremental chunks of data in each DAG Run ensures that any data quality issues have a limited effect.
 
