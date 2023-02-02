@@ -30,9 +30,9 @@ There are multiple test runners available for Python, including:
 - [`pytest`](https://docs.pytest.org/en/stable/index.html)
 - [`nose2`](https://docs.nose2.io/en/latest/getting_started.html)
 
-All types of test runners can be used with Airflow. In this guide we will use `pytest`.
+All types of test runners can be used with Airflow. The examples in this guide use `pytest`.
 
-## DAG validation testing
+## Write DAG validation tests
 
 DAG validation tests ensure that your DAGs fulfill a list of criteria. Using validation tests can help you:
 
@@ -41,7 +41,7 @@ DAG validation tests ensure that your DAGs fulfill a list of criteria. Using val
 - Test DAGs automatically in a CI/CD pipeline.
 - Enable power users to test DAGs from the CLI.
 
-We recommend at a minimum including a DAG validation test to check for [import errors](#prevent-import-errors). Additional tests can check things like custom logic, ensuring that `catchup` is set to False for every DAG in your Airflow instance, or making sure only `tags` from a defined list are used in the DAGs.
+At a minimum, you should run DAG validation tests to check for [import errors](#prevent-import-errors). Additional tests can check things like custom logic, ensuring that `catchup` is set to False for every DAG in your Airflow instance, or making sure only `tags` from a defined list are used in the DAGs.
 
 DAG validation tests apply to all DAGs in your Airflow environment, so you only need to create one test suite.
 
@@ -86,7 +86,7 @@ def test_file_imports(rel_path, rv):
 
 #### Check for custom code requirements
 
-Airflow allows a great deal of DAG customization. It is common for data engineering teams to define best practices and custom rules around how their DAGs should be written and create DAG validation tests to ensure those standards are met.
+Airflow DAGs support many types of custom plugins and code. It is common for data engineering teams to define best practices and custom rules around how their DAGs should be written and create DAG validation tests to ensure those standards are met.
 
 The code snippet below includes a test which checks that all DAGs have their `tags` parameter set to one or more of the `APPROVED_TAGS`.
 
@@ -148,8 +148,7 @@ def test_dag_tags(dag_id, dag, fileloc):
 
 ## Implement DAG validation tests
 
-Airflow offers different ways to run DAG validation tests using any Python test runner. This section gives an overview of the most common implementation methods. 
-If you are new to testing Airflow DAGs we recommend to get started using the commands provided by the Astro CLI.
+Airflow offers different ways to run DAG validation tests using any Python test runner. This section gives an overview of the most common implementation methods. If you are new to testing Airflow DAGs, you can quickly get started by using Astro CLI commands.
 
 ### The Astro CLI
 
@@ -158,7 +157,7 @@ The Astro CLI includes two commands to run DAG validation tests. Airflow does no
 - [`astro dev parse`](https://docs.astronomer.io/astro/cli/astro-dev-parse): will quickly parse your DAGs to find any Python syntax or DAG import errors.
 - [`astro dev pytest`](https://docs.astronomer.io/astro/cli/astro-dev-pytest): will run all pytest test suites in the `test` directory of your current Airflow project.
 
-Every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_integrity.py` script defining several examples of using `pytest` with Airflow, see also the Astro documentation's [Test and troubleshoot locally](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#test-dags-with-the-astro-cli).
+Every new Astro project will be initialized with a `test/dags` folder in your Astro project directory. This folder contains the `test_dag_integrity.py` script defining several examples of using `pytest` with Airflow. For more information on the Astro CLI's testing capabilities, see [Test and troubleshoot locally](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#test-dags-with-the-astro-cli).
 
 ### Airflow CLI 
 
@@ -175,7 +174,7 @@ astro dev run dags test my_dag '2023-01-29'
 
 ### Test DAGs in a CI/CD pipeline
 
-You can use any CI/CD tool on Airflow code. A common use case is to run the `astro dev pytest` for all pytests in the `tests` directory every time someone pushes code to a specific branch in your repository.
+You can use CI/CD tools to test and deploy your Airflow code. A common use case is to run the `astro dev pytest` for all pytests in the `tests` directory every time someone pushes code to a specific branch in your repository.
 
 The following is an example GitHub Action workflow which installs the Astro CLI and runs `astro dev pytest` on every push to the `main` branch.
 
@@ -199,17 +198,13 @@ jobs:
         astro dev pytest
 ```
 
-:::info
-
 If you are an Astro customer, you can find further information on how to set up CI/CD to your Astro deployment in [CI/CD](https://docs.astronomer.io/astro/ci-cd).
 
-:::
-
-## Interactive debugging with dag.test()
+## Debug interactively with dag.test()
 
 Airflow 2.5.0 introduced the `dag.test()` method, which runs directly in the DAG file and allows you to run all tasks in a DAG within a single serialized Python process. This allows for faster iteration when developing DAGs.
 
-You can set up `dag.test()` by adding two lines at the end of the DAG file. If you are using a traditional DAG context, call `.test()` on the object the context is assigned to. If you are using the `@dag` decorator, call the method on a call of the decorated function. 
+To set up `dag.test()`, you only need to add few lines of code to the end of your DAG file. If you are using a traditional DAG context, call `.test()` on the object the context is assigned to. If you are using the `@dag` decorator, call the method on a call of the decorated function. 
 
 <Tabs
     defaultValue="traditional"
@@ -266,7 +261,7 @@ if __name__ == "__main__":
 
 </Tabs>
 
-You can run the `.test()` method on all tasks in an individual DAG by executing `python <path-to-dag-file>` from the command line within your Airflow environment. You would execute this locally if you are running a standalone Airflow instance, or within the Scheduler container if you are running Airflow in Docker.
+You can run the `.test()` method on all tasks in an individual DAG by executing `python <path-to-dag-file>` from the command line within your Airflow environment. You can also run this command locally if you are running a standalone Airflow instance, or within the scheduler container if you are running Airflow in Docker.
 
 Astro CLI users can use the `.test()` method by running:
 
@@ -356,13 +351,13 @@ Many [Airflow tests](https://github.com/apache/airflow/tree/master/tests) use mo
 
 ## Data quality checks
 
-Testing your DAG ensures that your code fulfills your requirements. But you also have to take ensure that data quality issues do not break or negatively affect your pipelines. Airflow, being at the center of the modern data engineering stack, is the ideal tool to include data quality checks into your system as a first-class citizen.
+Testing your DAG ensures that your code fulfills your requirements. But even if your code is perfect, data quality issues can break or negatively affect your pipelines. Airflow, being at the center of the modern data engineering stack, is the ideal tool for checking data quality.
 
 Data quality checks differ from code-related testing because the data is not static like your DAG code. It is best practice to incorporate data quality checks into your DAGs and use [Airflow dependencies](managing-dependencies.md) and [branching](airflow-branch-operator.md) to handle what should happen in the event of a data quality issue, from halting the pipeline to [sending notifications](error-notifications-in-airflow.md) to data quality stakeholders.
 
 There are many ways you can integrate data checks into your DAG:
 
-- [SQL check operators](airflow-sql-data-quality.md): Airflow-native operators that run highly customizeable data quality checks on a wide variety of relational databases.
+- [SQL check operators](airflow-sql-data-quality.md): Airflow-native operators that run highly customizable data quality checks on a wide variety of relational databases.
 - [Great Expectations](airflow-great-expectations.md): A data quality testing suite with an [Airflow provider](https://registry.astronomer.io/providers/great-expectations) offering the ability to define data quality checks in JSON to run on relational databases, Spark and Pandas dataframes.
 - [Soda Core](https://docs.astronomer.io/learn/soda-data-quality): An framework to check data quality using YAML configuration to define data quality checks to run on relational databases and Spark dataframes.
 
