@@ -11,7 +11,7 @@ description: Astronomer Software release notes.
 
 ## 0.31.2
 
-Release date: February 1, 2023
+Release date: February 2, 2023
 
 ### Additional improvements
 
@@ -30,8 +30,6 @@ Release date: February 1, 2023
 
 ### Bug fixes 
 
-- Fixed an issue where orphan Deployments and Workspaces remained when users were deactivated with SCIM. 
-- When SCIM is enabled, service accounts and users can no longer create users through the Houston API. 
 - To limit Out of Memory (OOM) errors when migrating large DAGs, Deployment database migrations now use the same resources as the Deployment's scheduler.
 - Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts returned an error.
 - Fixed an issue where PgBouncer didn't work if you pulled its image from a private registry.
