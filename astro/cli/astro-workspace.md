@@ -23,30 +23,65 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-
 Manage Workspaces on Astro.
 
 ## Usage
 
 This command includes two subcommands:
 
-```sh
-# List all workspaces
-astro workspace list 
+- `astro workspace list`: List all Workspaces.
+- `astro workspace switch`: Switch between Workspaces.
 
-# Switch between workspaces
-astro workspace switch
-```
+## Usage
+
+This command has several subcommands.
+
+### astro workspace create
+
+List all Workspaces.
+
+### astro workspace switch
+
+Switch between Workspaces. The CLI prompts you to select a Workspace in your current Organization.
+
+### astro workspace user add
+
+Add a new user to your current Astronomer Workspace. The CLI prompts you for the user's email.
+
+#### Options
+
+| `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
+| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_OWNER`. Default is `WORKSPACE_VIEWER` |
+
+### astro workspace user update
+
+Update a user's permissions in your current Astronomer Workspace. The CLI prompts you for the user's email.
+
+#### Options
+
+| `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
+| `--role`  | The user's role in the Workspace. Use only with `astro user update` and `astro user invite`.                         | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. Default is `WORKSPACE_ADMIN` |
+
+### astro workspace user list
+
+List all users in your current Workspace.
+
+### astro workspace user remove
+
+Remove a user from your current Workspace.  The CLI prompts you for the user's email.
+
+### Options
+
+| `<email>` | Specify the email for the user you want to invite or update. Use only with `astro user update` and `astro user invite`. | Any valid email                                                                                                                             |
 
 </TabItem>
 <TabItem value="software">
-
 
 Manage Workspaces on Astronomer Software.
 
 ## Usage
 
-This command has several subcommands. Read the following sections to learn how to use each subcommand.
+This command has several subcommands.
 
 ### astro workspace create
 
@@ -60,10 +95,10 @@ astro workspace create --label=<new-workspace-name>
 
 #### Options
 
-| Option                 | Description | Possible Values                        |
-| ---------------------- | ----------- | -------------------------------------- |
-| `--label` (_required_) |   The label or name for the new Workspace.  | Any string |
-| `--description`        | The description for the new Workspace. | Any string |
+| Option                 | Description                              | Possible Values |
+| ---------------------- | ---------------------------------------- | --------------- |
+| `--label` (_required_) | The label or name for the new Workspace. | Any string      |
+| `--description`        | The description for the new Workspace.   | Any string      |
 
 #### Related documentation
 
