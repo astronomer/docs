@@ -23,7 +23,7 @@ Release date: February 2, 2023
 
 ### New commands to manage Astro users
 
-To help you manage users in your Organization, Astro CLI 1.10.0 includes the following new commands :
+To help you manage users in your Organization, Astro CLI 1.10.0 includes the following new commands:
 
 - `astro organization user invite`: Invite a new user to your Astronomer Organization. 
 - `astro organization user update`: Update a user's Organization role.
