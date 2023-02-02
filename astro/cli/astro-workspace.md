@@ -42,11 +42,11 @@ List all Workspaces.
 
 ### astro workspace switch
 
-Switch between Workspaces. The CLI prompts you to select a Workspace in your current Organization.
+Switch between Workspaces.
 
 ### astro workspace user add
 
-Add a new user to your current Astronomer Workspace. The CLI prompts you for the user's email.
+Add a new user to your current Astronomer Workspace.
 
 #### Options
 
@@ -70,7 +70,7 @@ List all users in your current Workspace.
 
 ### astro workspace user remove
 
-Remove a user from your current Workspace.  The CLI prompts you for the user's email.
+Remove a user from your current Workspace. 
 
 #### Options
 
