@@ -10,9 +10,9 @@ id: airflow-dbt
 </head>
 
 import CodeBlock from '@theme/CodeBlock';
-import airflow_dbt_dag_simple from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_simple.py';
-import airflow_dbt_dag_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
-import airflow_dbt_dag_model from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_model.py';
+import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_simple.py';
+import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
+import airflow_dbt_model from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_model.py';
 
 [dbt](https://getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation. As ephemeral compute becomes more readily available in data warehouses thanks to tools like [Snowflake](https://snowflake.com/), dbt has become a key component of the modern data engineering workflow. Now, data engineers can use dbt to write, organize, and run in-warehouse transformations of raw data.
 
