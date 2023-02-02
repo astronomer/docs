@@ -19,18 +19,9 @@ Effectively testing DAGs requires an understanding of their structure and their 
 To get the most out of this guide, you should have an understanding of:
 
 - Python testing basics. See [Getting Started with Testing in Python](https://realpython.com/python-testing/).
+- At least one Python test runner. This guide mostly uses [pytest](https://docs.pytest.org/en/stable/index.html), but you can use others including [`nose2`](https://docs.nose2.io/en/latest/getting_started.html) and [`unittest`](https://docs.python.org/3/library/unittest.html).
 - CI/CD for Python scripts. See [Continuous Integration with Python: An Introduction](https://realpython.com/python-continuous-integration/).
 - Basic Airflow and [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) concepts. See [Get started with Airflow tutorial](get-started-with-airflow.md).
-
-## Python test runners
-
-There are multiple test runners available for Python, including:
-
-- [`unittest`](https://docs.python.org/3/library/unittest.html)
-- [`pytest`](https://docs.pytest.org/en/stable/index.html)
-- [`nose2`](https://docs.nose2.io/en/latest/getting_started.html)
-
-All types of test runners can be used with Airflow. The examples in this guide use `pytest`.
 
 ## Write DAG validation tests
 
