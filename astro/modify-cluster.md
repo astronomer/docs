@@ -11,7 +11,7 @@ Use the information provided here to manage and modify your existing clusters. T
 
 In the Cloud UI, click the **Clusters** tab to view a list of the clusters owned by your Organization. Click a cluster and then click a tab to view cluster information. 
 
-## Maximum node count
+## Adjust maximum node count
 
 Each Astro cluster has a limit on how many nodes it can run at a time. This limit includes the worker nodes and system nodes managed by Astronomer.
 
@@ -19,7 +19,7 @@ The default maximum node count for all nodes across your cluster is 20. A cluste
 
 If the node count for your cluster reaches the maximum node count, new tasks might not run or get scheduled. Astronomer support monitors the maximum node count and will contact your organization if it is reached. To check your cluster's current node count, contact [Astronomer Support](https://cloud.astronomer.io/support).
 
-## Worker node pools
+## Create worker node pools
 
 A node pool is a group of nodes within a cluster that all have the same configuration. On Astro, worker nodes are responsible for running the Pods that execute Airflow tasks. Each worker node pool can be configured with a node instance type and a maximum node count. All Astro clusters have one worker node pool by default, but you can configure additional node pools to optimize resource usage.
 
@@ -27,9 +27,9 @@ If your cluster has multiple worker node pools with different worker node instan
 
 Astronomer monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and provide recommendations for updating your node pools to optimize your infrastructure spend or increase the efficiency of your tasks.
 
-## Relational databases
+## Configure your relational database
 
-Astro clusters are created with and require a relational database. A relational database is required for the data plane and it powers the metadata database of all Astro Deployments within a single cluster. During the cluster creation process, you are asked to specify an relational database instance type according to your use case and expected workload, but it can be modified at any time.
+Astro clusters are created with and require a relational database. A relational database is required for the data plane and it powers the metadata database of all Astro Deployments within a single cluster. During the cluster creation process, you are asked to specify an relational database instance type according to your use case and expected workload. To modify a cluster's database type, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Modify a cluster
 
