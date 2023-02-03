@@ -9,6 +9,9 @@ id: airflow-branch-operator
   <meta name="og:description" content="Learn about the options available in Airflow for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 When designing your data pipelines, you may encounter use cases that require more complex task flows than "Task A > Task B > Task C". For example, you may have a use case where you need to decide between multiple tasks to execute based on the results of an upstream task. Or you may have a case where part of your pipeline should only run under certain external conditions. Fortunately, Airflow has multiple options for building conditional logic and/or branching into your DAGs.
 
 In this guide, you'll learn how you can use `@task.branch` (`BranchPythonOperator`) and `@task.short_circuit` (`ShortCircuitOperator`), other available branching operators, and additional resources to implement conditional logic in your Airflow DAGs.
