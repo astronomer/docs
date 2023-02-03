@@ -9,6 +9,11 @@ id: airflow-dbt
   <meta name="og:description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud with Airflow. Learn use cases for orchestrating dbt Core using the BashOperator." />
 </head>
 
+import CodeBlock from '@theme/CodeBlock';
+import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_simple.py';
+import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
+import airflow_dbt_model from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_model.py';
+
 [dbt](https://getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation. As ephemeral compute becomes more readily available in data warehouses thanks to tools like [Snowflake](https://snowflake.com/), dbt has become a key component of the modern data engineering workflow. Now, data engineers can use dbt to write, organize, and run in-warehouse transformations of raw data.
 
 Organizations can use Airflow to orchestrate and execute dbt models as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models only after every prerequisite task is met. Airflow also gives you fine-grained control over dbt tasks such that teams have observability over every step in their dbt models.
@@ -52,57 +57,7 @@ To use the dbt Cloud provider in your DAGs, you'll need to complete the followin
 
 In the DAG below, you'll review a simple implementation of the dbt Cloud provider. This example showcases how to run a dbt Cloud job from Airflow, while adding an operational check to ensure the dbt Cloud job is not running prior to triggering. The `DbtCloudHook` provides a `list_job_runs()` method which can be used to retrieve all runs for a given job. The operational check uses this method to retrieve the latest triggered run for a job and check its status. If the job is currently not in a state of 10 (Success), 20 (Error), or 30 (Canceled), the pipeline will not try to trigger another run.
 
-```python
-from pendulum import datetime
-
-from airflow.decorators import dag
-from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import ShortCircuitOperator
-from airflow.providers.dbt.cloud.hooks.dbt import DbtCloudHook, DbtCloudJobRunStatus
-from airflow.providers.dbt.cloud.operators.dbt import DbtCloudRunJobOperator
-from airflow.utils.edgemodifier import Label
-
-DBT_CLOUD_CONN_ID = "dbt"
-JOB_ID = "{{ var.value.dbt_cloud_job_id }}"
-
-def _check_job_not_running(job_id):
-    """
-    Retrieves the last run for a given dbt Cloud job and checks to see if the job is not currently running.
-    """
-    hook = DbtCloudHook(DBT_CLOUD_CONN_ID)
-    runs = hook.list_job_runs(job_definition_id=job_id, order_by="-id")
-    latest_run = runs[0].json()["data"][0]
-
-    return DbtCloudJobRunStatus.is_terminal(latest_run["status"])
-
-@dag(
-    start_date=datetime(2022, 2, 10),
-    schedule="@daily",
-    catchup=False,
-    default_view="graph",
-    doc_md=__doc__,
-)
-def check_before_running_dbt_cloud_job():
-    begin, end = [EmptyOperator(task_id=id) for id in ["begin", "end"]]
-
-    check_job = ShortCircuitOperator(
-        task_id="check_job_is_not_running",
-        python_callable=_check_job_not_running,
-        op_kwargs={"job_id": JOB_ID},
-    )
-
-    trigger_job = DbtCloudRunJobOperator(
-        task_id="trigger_dbt_cloud_job",
-        dbt_cloud_conn_id=DBT_CLOUD_CONN_ID,
-        job_id=JOB_ID,
-        check_interval=600,
-        timeout=3600,
-    )
-
-    begin >> check_job >> Label("Job not currently running. Proceeding.") >> trigger_job >> end
-
-dag = check_before_running_dbt_cloud_job()
-```
+<CodeBlock language="python">{airflow_dbt_simple}</CodeBlock>
 
 In the `DbtCloudRunJobOperator` you must provide the dbt connection ID as well as the `job_id` of the job you are triggering.
 
@@ -124,32 +79,7 @@ For this example you'll use the `BashOperator`, which simply executes a shell co
 
 The DAG below uses the `BashOperator` to run a dbt project and the models' associated tests, each in a single Task:
 
-```python
-from datetime import datetime, timedelta
-
-from airflow import DAG
-from airflow.operators.bash import BashOperator
-
-
-with DAG(
-    dag_id='dbt_dag',
-    start_date=datetime(2021, 12, 23),
-    description='An Airflow DAG to invoke simple dbt commands',
-    schedule=timedelta(days=1),
-) as dag:
-
-    dbt_run = BashOperator(
-        task_id='dbt_run',
-        bash_command='dbt run'
-    )
-
-    dbt_test = BashOperator(
-        task_id='dbt_test',
-        bash_command='dbt test'
-    )
-
-    dbt_run >> dbt_test
-```
+<CodeBlock language="python">{airflow_dbt_bashoperator}</CodeBlock>
 
 Using the `BashOperator` to run `dbt run` and `dbt test` is a working solution for simple use cases or when you would rather have dbt manage dependencies between models. If you need something quick to develop and deploy that has the full power of dbt behind it, then this is the solution for you. However, running dbt at the project-level has several issues:
 
@@ -164,81 +94,7 @@ To make this work, you need a file that's generated by dbt called `manifest.json
 
 Our DAG will read the `manifest.json` file, parse it, create the necessary `BashOperator` Airflow tasks, and then set the dependencies to match those of your dbt project. The end result is that each model in your dbt project maps to two tasks in your Airflow DAG: one task to run the model, and another task to run the tests associated with that model. All of these models will run in the appropriate order thanks to the task dependencies you've set. You implement this workflow using the following DAG:
 
-```python
-from datetime import datetime, timedelta
-import json
-
-from airflow import DAG
-from airflow.operators.bash import BashOperator
-
-
-dag = DAG(
-    dag_id='dbt_dag',
-    start_date=datetime(2020, 12, 23),
-    description='A dbt wrapper for Airflow',
-    schedule=timedelta(days=1),
-)
-
-def load_manifest():
-    local_filepath = "/usr/local/airflow/dags/dbt/target/manifest.json"
-    with open(local_filepath) as f:
-        data = json.load(f)
-
-    return data
-
-def make_dbt_task(node, dbt_verb):
-    """Returns an Airflow operator either run and test an individual model"""
-    DBT_DIR = "/usr/local/airflow/dags/dbt"
-    GLOBAL_CLI_FLAGS = "--no-write-json"
-    model = node.split(".")[-1]
-
-    if dbt_verb == "run":
-        dbt_task = BashOperator(
-            task_id=node,
-            bash_command=f"""
-            cd {DBT_DIR} &&
-            dbt {GLOBAL_CLI_FLAGS} {dbt_verb} --target prod --models {model}
-            """,
-            dag=dag,
-        )
-
-    elif dbt_verb == "test":
-        node_test = node.replace("model", "test")
-        dbt_task = BashOperator(
-            task_id=node_test,
-            bash_command=f"""
-            cd {DBT_DIR} &&
-            dbt {GLOBAL_CLI_FLAGS} {dbt_verb} --target prod --models {model}
-            """,
-            dag=dag,
-        )
-
-    return dbt_task
-
-data = load_manifest()
-
-dbt_tasks = {}
-for node in data["nodes"].keys():
-    if node.split(".")[0] == "model":
-        node_test = node.replace("model", "test")
-
-        dbt_tasks[node] = make_dbt_task(node, "run")
-        dbt_tasks[node_test] = make_dbt_task(node, "test")
-
-for node in data["nodes"].keys():
-    if node.split(".")[0] == "model":
-
-        # Set dependency to run tests on a model after model runs finishes
-        node_test = node.replace("model", "test")
-        dbt_tasks[node] >> dbt_tasks[node_test]
-
-        # Set all model -> model dependencies
-        for upstream_node in data["nodes"][node]["depends_on"]["nodes"]:
-
-            upstream_node_type = upstream_node.split(".")[0]
-            if upstream_node_type == "model":
-                dbt_tasks[upstream_node] >> dbt_tasks[node]
-```
+<CodeBlock language="python">{airflow_dbt_model}</CodeBlock>
 
 :::info
 

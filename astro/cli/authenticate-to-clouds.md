@@ -8,9 +8,9 @@ id: authenticate-to-clouds
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-When you develop Apache Airflow DAGs locally with the Astro CLI, testing with local data is the easiest way to get started. For more complex data pipelines, you might need to test DAGs locally with data that's stored in your organization's cloud.
+When you develop Apache Airflow DAGs locally with the Astro CLI, testing with local data is the easiest way to get started. For more complex data pipelines, you might need to test DAGs locally with data that's stored in your organization's cloud, such as secret values in a secrets backend service.
 
-To access data on the cloud while developing locally with the Astro CLI, export your cloud account user credentials to a secure configuration file and mount that file in the Docker containers running your local Airflow environment. After you configure this file, you can connect your cloud without needing to configure additional credentials in Airflow connections. 
+To access data on the cloud while developing locally with the Astro CLI, export your cloud account user credentials to a secure configuration file and mount that file in the Docker containers running your local Airflow environment. After you configure this file, you can connect to your cloud without needing to configure additional credentials in Airflow connections. 
 
 ## Setup
 
@@ -260,12 +260,6 @@ For example, if you completed the configuration in this document and then create
 - [An Astro project](astro/create-project.md)
 - If you're using Windows, [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/install).
 
-:::caution
-
-There is an open issue with `DefaultAzureCredential` forcing the installation of the Azure CLI inside Astro Runtime. See [Azure on GitHub](https://github.com/Azure/azure-sdk-for-net/issues/19167#issuecomment-1127081646).
-
-:::
-
 #### Retrieve Azure user credentials locally
     
 Run the following command to obtain your user credentials locally:
@@ -274,7 +268,7 @@ Run the following command to obtain your user credentials locally:
 az login
 ```
 
-The CLI provides you with a link to a webpage where you authenticate to your Azure account. Once you complete the login, the CLI stores your user credentials in your local Azure configuration folder. The developer account credentials are used in place of the credentials associated with the Registrated Application (Service Principal) in Azure AD.
+The CLI provides you with a link to a webpage where you authenticate to your Azure account. Once you complete the login, the CLI stores your user credentials in your local Azure configuration folder. The developer account credentials are used in place of the credentials associated with the Registered Application (Service Principal) in Azure AD.
     
 The default location of the Azure configuration folder depends on your operating system:
 
@@ -369,12 +363,12 @@ When you run Airflow locally, all Azure connections without defined credentials 
 - Configurations in `azure_client_id`, `azure_tenant_id`, and `azure_client_secret`.
 - An explicit username & password provided in the connection.
 
-For example, if you completed the configuration in this document and then created a new AWS connection with its own username and password, Airflow would use those credentials instead of the credentials in `~/.aws/config`.
+For example, if you completed the configuration in this document and then created a new Azure connection with its own username and password, Airflow would use those credentials instead of the credentials in `~/.azure/config`.
 
 </TabItem>
 </Tabs>
 
-## (Optional) Test your credentials with a secrets backend
+## Test your credentials with a secrets backend
 
 Now that Airflow has access to your user credentials, you can use them to connect to your cloud services. Use the following example setup to test your credentials by pulling values from different secrets backends. 
 

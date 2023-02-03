@@ -85,7 +85,6 @@ Use the information provided here to set up lineage collection for Spark running
 5. In the cluster configuration page for your Databricks cluster, specify the following [Spark configuration](https://docs.databricks.com/clusters/configure.html#spark-configuration):
 
    ```sh
-      bash
    spark.driver.extraJavaOptions -Djava.security.properties=
    spark.executor.extraJavaOptions -Djava.security.properties=
    spark.openlineage.url https://<your-astro-base-domain>
