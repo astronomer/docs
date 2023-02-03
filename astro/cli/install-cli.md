@@ -69,7 +69,7 @@ Follow this procedure when Homebrew fails to install the latest Astro CLI versio
     brew update
     ```
 
-2. Install the Astro CLI. See [Installation](astro/cli/install-cli.md?tab=mac#installation). 
+2. Install the Astro CLI. See [Installation](cli/install-cli.md?tab=mac#installation). 
 
 </TabItem>
 
@@ -147,7 +147,7 @@ To install a specific version of the CLI, specify the version number as a flag a
 
 <pre><code parentName="pre">{`curl -sSL install.astronomer.io | sudo bash -s -- v${siteVariables.cliVersion}`}</code></pre>
 
-If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](/astro/cli/release-notes.md).
+If you specify only a major version, this command installs the latest minor or patch version available for the major version. If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](cli/release-notes.md).
 
 </TabItem>
 
