@@ -15,6 +15,11 @@ toc_max_heading_level: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+You have two options to install Astro on Azure:
+
+- Bring Your Own Cloud -  Create an Astro cluster in a dedicated Azure account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
+- Hosted - Create an Astro cluster in a dedicated Azure account that's hosted and owned by Astronomer. This removes the complexity of adding another Azure account to your network.
+
 To complete the installation process, you'll:
 
 - Add the Astronomer Service Principal to your Azure Active Directory (Azure AD) instance.
