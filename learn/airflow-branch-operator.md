@@ -264,6 +264,7 @@ with DAG(
 ```
 
 </TabItem>
+</Tabs>
 
 In this DAG there are two short circuits, one which will always return `True` and one which will return `False`. When you run the DAG, you can see that tasks downstream of the `True` condition operator ran, while tasks downstream of the `False` condition operator were skipped.
 
