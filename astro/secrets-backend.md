@@ -16,6 +16,12 @@ Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable
 
 While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
 
+:::tip
+
+This document describes how to set up a secrets backend on the Astro data plane for production use. To quickly test a secrets backend locally using your own cloud credentials and the Astro CLI, see [Authenticate to cloud services](cli/authenticate-to-clouds.md).
+
+:::
+
 ## Benefits
 
 Integrating a secrets backend tool with Astro allows you to:
@@ -47,11 +53,7 @@ Airflow checks for the value of an Airflow variable or connection in the followi
 
 :::
 
-:::tip
-
 Using secrets to set Airflow connections requires knowledge of how to generate Airflow connection URIs. If you plan to store Airflow connections on your secrets backend, see [URI format](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-uri-format) for guidance on how to generate a connection URI.
-
-:::
 
 ## Setup
 

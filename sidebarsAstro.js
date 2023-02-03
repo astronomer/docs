@@ -215,6 +215,11 @@ module.exports = {
     },
     {
       type: "doc",
+      label: "Authenticate to cloud services",
+      id: "cli/authenticate-to-clouds",
+    },
+    {
+      type: "doc",
       label: "Release notes",
       id: "cli/release-notes",
     },
