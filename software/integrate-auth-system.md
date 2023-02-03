@@ -422,43 +422,49 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 <TabItem value="azuread">
 
-This setup assumes you have already registered Astronomer Software as an application on Azure AD. See [Azure AD](#azure-ad).
-
-1. If user provisioning isn't available on your existing Astronomer Software application, create a new application using the **Azure Databricks SCIM Provisioning Connector**. See [Configure SCIM provisioning using Microsoft Azure Active Directory](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application).
-   
-2. In your Astronomer Software application on Azure AD, go to **Manage** > **Provisioning**.
-
-3. Click **Provisioning Mode** > **Automatic**.
-
-4. In the **Tenant URL** field, enter `https://BASEDOMAIN.astronomer.io/v1/scim/microsoft`. This is the Astronomer SCIM endpoint URL.
-   
-5. In your `config.yaml` file, add the following configuration to create a unique token that Astronomer Software uses to authenticate requests from Azure AD:
+1. In your `config.yaml` file, add the following configuration. Replace `<your-generated-secret-code>` with a randomly generated string. 
 
     ```yaml
     astronomer:
       houston: 
         config:
-          microsoft:
-            scimAuthCode: <your-secret-token>
+          auth:
+            openidConnect:
+              microsoft:
+                scimAuthCode: <your-generated-secret-code>
     ```
-
-    Copy this token for Step 7.
-
-6. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
    
-7. In the **Provisioning** menu for your Azure application, paste your token into the **Secret Token** field. If this field is left blank, Azure AD includes an OAuth bearer token issued from Azure AD with each request.
+    **Note**: If you have already configured Open ID Connect with Azure AD, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
 
-8. Click **Test connection** to confirm your connection to the SCIM endpoint.
+2. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
-9.  Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
-
-10. Click **Manage** > **Provisioning** > **Settings**.
-
-11. In the **Scope** setting list, select **Sync only assigned users and groups**.
+3. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
    
-12. Click the *Provisioning status** toggle to turn provisioning status on.
+4. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
+   
+5. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
+  
+6. Click **Create** to create an app object. Azure AD opens the application management menu for your new application.
+  
+7. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
 
-13. Click **Save**.
+8. Click **Provisioning Mode** > **Automatic**.
+
+9. In the **Tenant URL** field, enter `https://houston.BASEDOMAIN/v1/scim/v2/microsoft`. This is the Astronomer SCIM endpoint URL.
+
+10. Paste the `scimAuthCode` generated at step 1 above into the **Secret Token** field.
+
+11. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+
+12. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
+
+13. Click **Manage** > **Provisioning** > **Settings**.
+
+14. In the **Scope** setting list, select **Sync only assigned users and groups**.
+   
+15. Click the *Provisioning status** toggle to turn provisioning status on.
+
+16. Click **Save**.
 
 </TabItem>
 </Tabs>

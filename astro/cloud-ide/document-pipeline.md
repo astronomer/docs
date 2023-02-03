@@ -9,7 +9,7 @@ Use Markdown cells to add comments to your code and make it easier for Workspace
 
 ## Prerequisites 
 
-- An IDE project and pipeline. See [Step 2: Create a pipeline](cloud-ide.md/quickstart#step-2-create-a-pipeline).
+- An IDE project and pipeline. See [Step 2: Create a pipeline](/astro/cloud-ide/quickstart.md#step-2-create-a-pipeline).
 
 ## Create pipeline documentation
 

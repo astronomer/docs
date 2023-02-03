@@ -6,7 +6,7 @@ description: Reference documentation for astro user invite.
 hide_table_of_contents: true
 ---
 
-Invite a new user to the Organization you're currently authenticated to. You must have Organization Owner permissions to run this command.  
+Invite a new user to the Organization you're currently authenticated to. You must have Organization Owner permissions to run this command. This command is identical to [`astro organization user invite`](cli/astro-organizatin.md).
 
 ## Usage
 

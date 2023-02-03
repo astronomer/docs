@@ -21,6 +21,32 @@ This document includes all release notes for Astronomer Software v0.28.
 
 All Astronomer Software versions are tested for scale, reliability and security on Amazon EKS, Google GKE, and Azure AKS. If you have questions or an issue to report, contact [Astronomer support](https://support.astronomer.io).
 
+## v0.28.8
+
+Release date: January 26, 2023
+
+### Bug fixes
+
+- Fixed the following vulnerabilities: 
+
+    - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2022-2625](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-2625)
+    - [CVE-2022-37454](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37454)
+    - [CVE-2022-42919](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-42919)
+    - [CVE-2022-45061](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-45061)
+    - [CVE-2022-46146](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46146)
+    - [CVE-2022-27191](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-46146)
+    - [CVE-2022-32149](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32149)
+    - [CVE-2022-37601](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-37601)
+    - [CVE-2022-43680](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-43680)
+
+- Fixed an issue where service accounts with System Admin permissions couldn't create Deployments on deprecated Airflow versions.
+- Fixed an issue where you could not upgrade a Deployment from an unsupported version of Astronomer Certified (AC) to another unsupported version of AC.
+- Fixed an issue where Deployments with many DAGs could not be successfully upgraded due to a short timeout.
+- Fixed an issue in the Software UI where an error message appeared after refreshing pages listing Workspace or Deployment service accounts.
+- Fixed an issue where you could not view Deployment-level service accounts in the Software UI.
+
 ## v0.28.7
 
 Release date: October 14, 2022
