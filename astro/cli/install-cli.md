@@ -68,7 +68,7 @@ Follow this procedure when Homebrew fails to install the latest Astro CLI versio
     brew update
     ```
 
-2. Install the Astro CLI. See [Installation](astro/cli/install-cli.md?tab=mac#installation Astro CLI). 
+2. Install the Astro CLI. See [Installation](astro/cli/install-cli.md?tab=mac#installation). 
 
 </TabItem>
 
