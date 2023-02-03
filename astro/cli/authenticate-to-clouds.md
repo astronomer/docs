@@ -8,13 +8,8 @@ id: authenticate-to-clouds
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-When you develop Apache Airflow DAGs locally with the Astro CLI, testing your DAGs with data that's local to your computer is the easiest way to get started. However, as your data pipelines grow and become business critical, you might need to test DAGs locally with data from your organization that is stored in data services on the cloud. For example, you might need to:
-
-- Test your DAGs using Airflow connections that are stored in a secrets backend like AWS Secrets Manager.
-- Test your DAGs with data that's stored in an Amazon Redshift instance on AWS.
-- Test your DAGs with data that's stored in an Azure Blob storage instance on Azure.
-
-To access data services on the cloud while developing locally with the Astro CLI, Astronomer recommends exporting your cloud account user credentials into a secure configuration file and adding that configuration file to your Astro project. When you test DAGs locally, you can then reference 
+When you develop Apache Airflow DAGs locally with the Astro CLI, testing with local data is the easiest way to get started. With more complex data pipelines, you might need to test DAGs locally with data that's stored in the cloud. For example, you might need to:
+To access data on the cloud while developing locally with the Astro CLI, export your cloud account user credentials to a secure configuration file and mount that file in the Docker containers running your local Airflow environment. After you configure this file, you can connect your cloud without needing to configure additional credentials in Airflow connections. 
 
 ## Setup
 
