@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.31.2</title><link>https://docs.astronomer.io/software/release-notes#0312</link><description><![CDATA[<p>Release date: February 1, 2023</p><h3>Additional improvements</h3><ul>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-software-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Software Release Notes</title><link>https://docs.astronomer.io/software/release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Software.</description><language>en-US</language><item><title>0.31.2</title><link>https://docs.astronomer.io/software/release-notes#0312</link><description><![CDATA[<p>Release date: February 2, 2023</p><h3>Additional improvements</h3><ul>
 <li>
 <p>Support for Kubernetes <a href="https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/">1.25</a> and <a href="https://kubernetes.io/blog/2022/12/09/kubernetes-v1-26-release/">1.26</a>.</p>
 </li>
@@ -26,12 +26,6 @@
 <p>Houston API now logs an installation's deployed image versions whenever a GraphQL mutation is completed.</p>
 </li>
 </ul><h3>Bug fixes</h3><ul>
-<li>
-<p>Fixed an issue where orphan Deployments and Workspaces remained when users were deactivated with SCIM.</p>
-</li>
-<li>
-<p>When SCIM is enabled, service accounts and users can no longer create users through the Houston API.</p>
-</li>
 <li>
 <p>To limit Out of Memory (OOM) errors when migrating large DAGs, Deployment database migrations now use the same resources as the Deployment's scheduler.</p>
 </li>

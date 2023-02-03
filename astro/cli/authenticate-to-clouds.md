@@ -57,74 +57,73 @@ The location of these files depends on your operating system:
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential files, you'll mount the `.aws` folder as a volume in Docker.
 
 1. In your Astro project, create a file named `docker-compose.override.yml` with the following configuration: 
+    
+    <Tabs
+        defaultValue="mac"
+        groupId= "configure-your-astro-project"
+        values={[
+            {label: 'Mac', value: 'mac'},
+            {label: 'Linux', value: 'linux'},
+            {label: 'Windows', value: 'windows'},
+        ]}>
+    <TabItem value="mac">
+    
+    ```yaml
+    version: "3.1"
+    services:
+        scheduler:
+            volumes:
+            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+        webserver:
+            volumes:
+            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+        triggerer:
+            volumes:
+            - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
+    ```
+    
+    </TabItem>
+    <TabItem value="linux">
+    
+    ```yaml
+    version: "3.1"
+    services:
+        scheduler:
+            volumes:
+            - /home/<username>/.aws:/usr/local/airflow/.aws:ro
+        webserver:
+            volumes:
+            - /home/<username>/.aws:/usr/local/airflow/.aws:ro
+        triggerer:
+            volumes:
+            - /home/<username>/.aws:/usr/local/airflow/.aws:ro
+    ```
+    
+    </TabItem>
+    <TabItem value="windows">
+    
+    ```yaml
+    version: "3.1"
+    services:
+        scheduler:
+            volumes:
+            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
+        webserver:
+            volumes:
+            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
+        triggerer:
+            volumes:
+            - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
+    ```
 
-<Tabs
-    defaultValue="mac"
-    groupId= "configure-your-astro-project"
-    values={[
-        {label: 'Mac', value: 'mac'},
-        {label: 'Linux', value: 'linux'},
-        {label: 'Windows', value: 'windows'},
-    ]}>
-<TabItem value="mac">
-
-```yaml
-version: "3.1"
-services:
-    scheduler:
-        volumes:
-        - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
-    webserver:
-        volumes:
-        - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
-    triggerer:
-        volumes:
-        - /Users/<username>/.aws:/usr/local/airflow/.aws:ro
-```
-
-</TabItem>
-<TabItem value="linux">
-
-```yaml
-version: "3.1"
-services:
-    scheduler:
-        volumes:
-        - /home/<username>/.aws:/usr/local/airflow/.aws:ro
-    webserver:
-        volumes:
-        - /home/<username>/.aws:/usr/local/airflow/.aws:ro
-    triggerer:
-        volumes:
-        - /home/<username>/.aws:/usr/local/airflow/.aws:ro
-```
-
-</TabItem>
-<TabItem value="windows">
-
-```yaml
-version: "3.1"
-services:
-    scheduler:
-        volumes:
-        - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
-    webserver:
-        volumes:
-        - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
-    triggerer:
-        volumes:
-        - /c/Users/<username>/.aws:/usr/local/airflow/.aws:ro
-```
-
-</TabItem>
-</Tabs>
+    </TabItem>
+    </Tabs>
 
 :::info
 
 Depending on your Docker configurations, you might have to make your `.aws` folder accessible to Docker. To do this, open **Preferences** in Docker Desktop and go to **Resources** -> **File Sharing**. Add the full path of your `.aws` folder to the list of shared folders.
 
 :::
-
 
 2. In your Astro project's `.env` file, add the following environment variables. Make sure that the volume path is the same as the one you configured in the `docker-compose.override.yml`.
 
@@ -173,68 +172,68 @@ The location of this file depends on your operating system:
 The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access to your credential file, mount it as a Docker volume.
 
 1. In your Astro project, create a file named `docker-compose.override.yml` to your project with the following configuration: 
-   
-<Tabs
-    defaultValue="mac"
-    groupId= "configure-your-astro-project"
-    values={[
-        {label: 'Mac', value: 'mac'},
-        {label: 'Linux', value: 'linux'},
-        {label: 'Windows', value: 'windows'},
-    ]}>
-<TabItem value="mac">
-
-```yaml
-version: "3.1"
-services:
-    scheduler:
-        volumes:
-        - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-    webserver:
-        volumes:
-        - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-    triggerer:
-        volumes:
-        - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-```
-
-</TabItem>
-<TabItem value="linux">
-
-```yaml
-version: "3.1"
-services:
-    scheduler:
-        volumes:
-        - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-    webserver:
-        volumes:
-        - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-    triggerer:
-        volumes:
-        - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-```
-
-</TabItem>
-<TabItem value="windows">
-
-```yaml
-version: "3.1"
-services:
-    scheduler:
-        volumes:
-        - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-    webserver:
-        volumes:
-        - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-    triggerer:
-        volumes:
-        - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
-```
-
-</TabItem>
-</Tabs>
-
+       
+    <Tabs
+        defaultValue="mac"
+        groupId= "configure-your-astro-project"
+        values={[
+            {label: 'Mac', value: 'mac'},
+            {label: 'Linux', value: 'linux'},
+            {label: 'Windows', value: 'windows'},
+        ]}>
+    <TabItem value="mac">
+    
+    ```yaml
+    version: "3.1"
+    services:
+        scheduler:
+            volumes:
+            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+        webserver:
+            volumes:
+            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+        triggerer:
+            volumes:
+            - /Users/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+    ```
+    
+    </TabItem>
+    <TabItem value="linux">
+    
+    ```yaml
+    version: "3.1"
+    services:
+        scheduler:
+            volumes:
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+        webserver:
+            volumes:
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+        triggerer:
+            volumes:
+            - /home/<username>/.config/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+    ```
+    
+    </TabItem>
+    <TabItem value="windows">
+    
+    ```yaml
+    version: "3.1"
+    services:
+        scheduler:
+            volumes:
+            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+        webserver:
+            volumes:
+            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+        triggerer:
+            volumes:
+            - /c/Users/<username>/AppData/Roaming/gcloud/application_default_credentials.json:/usr/local/airflow/gcloud/application_default_credentials.json:ro
+    ```
+    
+    </TabItem>
+    </Tabs>
+    
 2. In your Astro project's `.env` file, add the following environment variable. Ensure that this volume path is the same as the one you configured in `docker-compose.override.yml`.
 
     
@@ -289,60 +288,59 @@ The Astro CLI runs Airflow in a Docker-based environment. To give Airflow access
 
 1. In your Astro project, create a file named `docker-compose.override.yml` with the following configuration: 
 
-<Tabs
-    defaultValue="mac"
-    groupId= "step-2-configure-your-airflow-project"
-    values={[
-        {label: 'Mac', value: 'mac'},
-        {label: 'Windows and Linux', value: 'windowslinux'},
-        {label: 'Windows', value: 'windows'},
-    ]}>
-<TabItem value="mac">
-
-```yaml
-version: "3.1"
-services:
-    scheduler:
-        volumes:
-        - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
-    webserver:
-        volumes:
-        - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
-    triggerer:
-        volumes:
-        - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
-```
-
-</TabItem>
-<TabItem value="azure">
-
-```yaml
-version: "3.1"
-services:
-    scheduler:
-        volumes:
-        - /home/<username>/.azure:/usr/local/airflow/.azure
-    webserver:
-        volumes:
-        - /home/<username>/.azure:/usr/local/airflow/.azure
-    triggerer:
-        volumes:
-        - /home/<username>/.azure:/usr/local/airflow/.azure
-
-```
-
-:::info 
-
-In Azure CLI versions 2.30.0 and later on Windows systems, credentials generated by the CLI are saved in an encrypted file and cannot be accessed from Astro Runtime Docker containers. See [MSAL-based Azure CLI](https://learn.microsoft.com/en-us/cli/azure/msal-based-azure-cli).
+    <Tabs
+        defaultValue="mac"
+        groupId= "configure-your-airflow-project"
+        values={[
+            {label: 'Mac', value: 'mac'},
+            {label: 'Windows and Linux', value: 'windowslinux'},
+        ]}>
+    <TabItem value="mac">
     
-To work around this limitation on a Windows computer, use Windows Subsystem Linux (WSL) when completing this setup.
-  
-If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.azure` file path in your volume points to the configuration file for the Azure CLI installed in WSL.
-
-:::
-
-</TabItem>
-</Tabs>    
+    ```yaml
+    version: "3.1"
+    services:
+        scheduler:
+            volumes:
+            - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
+        webserver:
+            volumes:
+            - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
+        triggerer:
+            volumes:
+            - /Users/<username>/.azure:/usr/local/airflow/.azure:ro
+    ```
+    
+    </TabItem>
+    <TabItem value="windowslinux">
+    
+    ```yaml
+    version: "3.1"
+    services:
+        scheduler:
+            volumes:
+            - /home/<username>/.azure:/usr/local/airflow/.azure
+        webserver:
+            volumes:
+            - /home/<username>/.azure:/usr/local/airflow/.azure
+        triggerer:
+            volumes:
+            - /home/<username>/.azure:/usr/local/airflow/.azure
+    
+    ```
+    
+    :::info 
+    
+    In Azure CLI versions 2.30.0 and later on Windows systems, credentials generated by the CLI are saved in an encrypted file and cannot be accessed from Astro Runtime Docker containers. See [MSAL-based Azure CLI](https://learn.microsoft.com/en-us/cli/azure/msal-based-azure-cli).
+        
+    To work around this limitation on a Windows computer, use Windows Subsystem Linux (WSL) when completing this setup.
+      
+    If you installed the Azure CLI both in Windows and WSL, make sure that the `~/.azure` file path in your volume points to the configuration file for the Azure CLI installed in WSL.
+    
+    :::
+    
+    </TabItem>
+    </Tabs>    
 
 2. Add the following lines after the `FROM` line in your `Dockerfile` to install the Azure CLI inside your Astro Runtime image:
 
@@ -397,7 +395,6 @@ Now that Airflow has access to your user credentials, you can use them to connec
     - `airflow/connections/<my_connection_id>`
     
     For example when adding the secret variable `my_secret_var` you will need to give the secret the name `airflow/variables/my_secret_var`.
-
 
     When setting the secret type, choose `Other type of secret` and select the `Plaintext` option. If you're creating a connection URI or a non-dict variable as a secret, remove the brackets and quotations that are pre-populated in the plaintext field.
 
@@ -458,7 +455,6 @@ Now that Airflow has access to your user credentials, you can use them to connec
      For example when adding the secret variable `my_secret_var` you will need to give the secret the name `airflow-variables-my_secret_var`.
 
 2. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-google/stable/secrets-backends/google-cloud-secret-manager-backend.html)):
-
 
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.google.cloud.secrets.secret_manager.CloudSecretManagerBackend
@@ -524,17 +520,13 @@ Now that Airflow has access to your user credentials, you can use them to connec
     ```
 
 3. Add the following environment variables to your Astro project `.env` file. For additional configuration options, see the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers-microsoft-azure/stable/secrets-backends/azure-key-vault.html): 
-
-
   
     ```text
     AIRFLOW__SECRETS__BACKEND=airflow.providers.microsoft.azure.secrets.key_vault.AzureKeyVaultBackend
-
     AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow-connections", "variables_prefix": "airflow-variables", "vault_url": "<your-vault-url>"}
     ```
 
     By default, this setup requires that you prefix any secret names in Key Vault with `airflow-connections` or `airflow-variables`. If you don't want to use prefixes in your Key Vault secret names, set the values for `"connections_prefix"` and `"variables_prefix"` to `""` within `AIRFLOW__SECRETS__BACKEND_KWARGS`. The `vault_url` can be found on the overview page of your Key vault under `Vault URI`.
-
 
 4. Run the following command to start Airflow locally:
 
