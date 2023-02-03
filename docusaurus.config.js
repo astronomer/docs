@@ -33,6 +33,9 @@ module.exports = {
 
       //... other Algolia params
     },
+    prism: {
+      additionalLanguages: ['docker'],
+    },
     colorMode: {
       disableSwitch: false,
     },
@@ -105,7 +108,7 @@ module.exports = {
         {
           label: '0.30',
           to: '/software/0.30/',
-          activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+          activeBaseRegex: '(software\/0.30)+',
         },
         {
           label: '0.29',
@@ -118,9 +121,9 @@ module.exports = {
           activeBaseRegex: '(software\/0.28)+',
         },
         {
-          label: '0.25',
-          to: '/software/0.25/overview',
-          activeBaseRegex: '(software\/0.25)+',
+          label: 'Archive',
+          to: '/software/documentation-archive',
+          activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
       ],
     },

@@ -25,6 +25,7 @@ During this initial setup, you can configure a Workspace's name and description.
 
 To to enter your Workspace, click the Workspace in the **Overview** tab. When you click into a Workspace and see a list of that Workspace's Deployments, you are in the **Workspace view** of the Cloud UI. The Workspace view contains several pages for managing your Workspace which are accessible from a sidebar on the left of the screen:
 
+- **Home**: View the status of your Deployments and select recently accessed Deployments. 
 - **Deployments:** Create new Deployments and see key metrics about existing Deployments in the Workspace. For more information, see [Create a Deployment](create-deployment.md).
 - **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment metrics](deployment-metrics.md#dag-runs).
 - **Workspace Settings:** Update Workspace details, including Workspace user permissions, the Workspace name, and the Workspace description.

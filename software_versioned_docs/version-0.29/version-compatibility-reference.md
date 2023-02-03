@@ -15,10 +15,11 @@ While the tables below reference the minimum compatible versions, we typically r
 
 | Astronomer Platform | Kubernetes                           | Postgres | Python                                    | Astronomer Certified / Astro Runtime         | Helm |
 | ------------------- | ------------------------------------ | -------- | ----------------------------------------- | -------------------------------------------- | ---- |
-| v0.25               | 1.17¹, 1.18¹, 1.19¹, 1.20¹, 1.21     | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions*            | 3.6  |
 | v0.28               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
 | v0.29               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 | v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| v0.31               | 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+
 
 Astronomer recommends using the latest available version of the Astro CLI for all Software versions in most cases. To upgrade from an earlier version of the CLI to the latest, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
 
@@ -26,9 +27,7 @@ Astronomer recommends using the latest available version of the Astro CLI for al
 
 ¹ Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
 
-- Support for Kubernetes 1.17 ends with Astronomer Software 0.25.12.
-- Support for Kubernetes 1.18 ends with Astronomer Software 0.25.13.
-- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.25.15, 0.28.7, 0.29.5, and 0.30.4.
+- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.28.7, 0.29.5, and 0.30.4.
 
 :::
 
@@ -45,12 +44,6 @@ Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/doc
 
 :::
 
-:::info
-
-While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow triggerer is available only in Astronomer v0.26 and later. To use [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), that require the Airflow triggerer, you must upgrade.
-
-:::
-
 ### Kubernetes version support policy
 
 In general, Astronomer Software will support a given version of Kubernetes through its End of Life. This includes Kubernetes upstream and cloud-managed variants like GKE, AKS, and EKS. When a version of Kubernetes reaches End of Life, support will be removed in the next major or minor release of Astronomer Software. For more information on Kubernetes versioning and release policies, refer to [Kubernetes Release History](https://kubernetes.io/releases/) or your cloud provider.
@@ -60,7 +53,7 @@ For more information on upgrading Kubernetes versions, follow the guidelines off
 - [Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html)
 - [Azure AKS](https://docs.microsoft.com/en-us/azure/aks/upgrade-cluster)
 - [Google GKE](https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-upgrades)
-- [RedHat OpenShift](https://docs.openshift.com/container-platform/4.6/updating/updating-cluster-between-minor.html)
+- [RedHat OpenShift](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.11/html/updating_clusters/index)
 
 ## Astronomer Certified
 

@@ -63,12 +63,12 @@ After clicking **Create**, the IDE opens the pipeline editor. This is where you'
 
 ## Step 3: Create a Python cell
 
-Cells are the building blocks for pipelines. Cells can be created with either Python or SQL code. For this quickstart, you'll write a Python cell named `hello_world`.
+Cells are the building blocks for pipelines. They can complete a unit of work, such as a Python function or SQL query, or they can define assets for use throughout your pipeline. For this quickstart, you'll write a Python cell named `hello_world`.
 
 1. In the **Pipeline** list, click the name of the pipeline you created in step 2.
-2. Click **Add Cell** and select **Python**. A new cell named `cell_1` appears.
+2. Click **Add Cell** and select **Python**. A new cell named `python_1` appears.
 3. Click the cell's name and rename the cell `hello_world`.
-4. Click the editing window where it says `# Write your code here…`, then replace that line with the following code:
+4. Add the following code to the cell:
 
    ```python
    return "Hello, world!"
@@ -102,8 +102,8 @@ To create a SQL cell and execute SQL, first create a database to run your SQL qu
 
   :::info
 
-  SQL cell query results are stored as temporary tables in the database you're querying. The schema field in your connection object determines where these end up. Astronomer recommends setting this field to `TMP_ASTRO` for easy cleanup.
-
+  SQL cell query results are stored in XComs and are not accessible outside of your data pipeline. To save the results of a SQL query, run it in a SQL warehouse cell. See [Run SQL](cloud-ide/run-sql.md).
+  
   :::
 
 4. Optional. Click **Test Connection**. The Astro Cloud IDE runs a quick connection test and returns a status message. You can still create the connection if the test is unsuccessful.
@@ -115,11 +115,10 @@ To create a SQL cell and execute SQL, first create a database to run your SQL qu
 You can now write and run SQL cells with your database connection.
 
 1. In the **Pipeline** list, click the name of the pipeline you created in step 2.
-
-2. Click **Add Cell** and select **SQL**. A new cell named `cell_1` appears.
+2. Click **Add Cell** and select **SQL**. A new cell named `sql_1` appears.
 3. Click the cell name and rename it `hello_sql`.
 4. In the **Select Connection** list, select the connection you created in step 5.
-5. Replace `-- Write your SQL query here` with the following code:
+5. Add the following code to the cell:
 
    ```sql
    SELECT 1 AS hello_world;
@@ -166,40 +165,12 @@ To create a potential dependency to a Python cell, the upstream Python cell must
 
    ![New dependency graph](/img/cloud-ide/data-dependency.png)
 
-You can generate dependencies between any two types of cells.
+You can generate data dependencies between any two cell types. To learn more about data dependencies, see the following documentation:
 
-### Use the results of a SQL cell in a SQL cell
-
-You can make a SQL cell downstream dependent of a SQL cell as long as the upstream SQL cell includes a `SELECT` statement. To do so, reference the name of the SQL cell in your SQL cell using double curly braces, also known as jinja templating.
-
-The following cell is downstream of a SQL cell named `my_table`.
-
-```sql
-select * from {{my_table}} -- my_table is another SQL cell
-```
-
-### Use the results of a SQL cell in a Python cell
-
-You can make a Python cell downstream dependent of a SQL cell as long as the SQL cell includes a `SELECT` statement. To do so, create a variable in the Python cell that points to the name of the SQL cell. SQL tables are automatically converted to pandas DataFrames for use in Python cells.
-
-The following Python cell is downstream of a SQL cell named `my_sql_cell`.
-
-```python
-df = my_sql_cell # my_sql_cell is a SQL cell which gets converted to a pandas DataFrame by default
-df['col_a'] = df['col_a'] + 1
-return df
-```
-
-### Use the results of a Python cell in a SQL cell
-
-You can make a SQL cell downstream dependent of a Python cell as long as the Python cell returns a pandas DataFrame. To do so, reference the name of the Python cell in your SQL cell using double curly braces, also known as jinja templating. Pandas DataFrames are automatically converted to SQL tables for use in SQL cells.
-
-The following SQL cell is downstream of a Python cell named `my_dataframe`.
-
-```sql
-select * from {{my_dataframe}} -- my_dataframe is a Python cell
-where col_a > 10
-```
+- [Pass a value from a Python cell to another Python cell](cloud-ide/run-python.md#pass-a-value-from-a-python-cell-to-another-python-cell)
+- [Pass a value from a SQL cell to a Python cell](cloud-ide/run-python.md#pass-a-value-from-a-SQL-cell-to-a-python-cell)
+- [Pass a value from a SQL cell to another SQL cell](cloud-ide/run-sql.md#pass-a-value-from-a-sql-cell-to-another-sql-cell)
+- [Pass a value from a Python cell to a SQL cell](cloud-ide/run-sql.md#pass-a-value-from-a-python-cell-to-a-sql-cell)
 
 ## Step 9: Run your pipeline
 

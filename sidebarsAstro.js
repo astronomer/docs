@@ -35,6 +35,9 @@ module.exports = {
           items: [
             "cloud-ide/overview",
             "cloud-ide/quickstart",
+            "cloud-ide/run-python",
+            "cloud-ide/run-sql",
+            "cloud-ide/document-pipeline",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
           ],
@@ -58,6 +61,7 @@ module.exports = {
         "api-keys",
         "environment-variables",
         "secrets-backend",
+        "manage-deployments-as-code",
       ],
     },
     {
@@ -260,8 +264,7 @@ module.exports = {
         'cli/astro-dev-restart',
         'cli/astro-login',
         'cli/astro-logout',
-        'cli/astro-organization-list',
-        'cli/astro-organization-switch',
+        'cli/astro-organization',
         'cli/astro-run',
         'cli/astro-team',
         'cli/astro-user-create',

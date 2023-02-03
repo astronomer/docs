@@ -36,13 +36,19 @@ Automating the deploy process to Astronomer starts with creating a Service Accou
 
 From there, you'll write a script that allows your service account to do the following:
 
-1. Build and tag a Docker Image
-2. Authenticate to a Docker Registry
-3. Push your image to that Docker Registry
+- Build and tag a Docker Image
+- Authenticate to a Docker Registry
+- Push your image to that Docker Registry
 
 From there, a webhook triggers an update to your Airflow Deployment using the CI/CD tool of your choice. The Astro CLI completes an authentication and push for every manual `$ astro deploy` command.
 
 The rest of this guide describes how to create a service account and what your CI/CD script should look like based on the tool you're using.
+
+:::info
+
+If you're using BuildKit with the [Buildx plugin](https://github.com/docker/buildx), you need to add the `--provenance=false` flag to your `docker buildx build` commands.
+
+:::
 
 ## Prerequisites
 
@@ -363,25 +369,25 @@ workflows:
 
 ```yaml
 pipeline {
- agent any
-   stages {
-     stage('Deploy to astronomer') {
-       when { branch 'master' }
-       steps {
-         script {
-           sh 'docker build -t registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER} .'
-           sh 'docker run --rm registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER} /bin/bash -c "pytest tests'
-           sh 'docker login registry.$BASE_DOMAIN -u _ -p $SERVICE_ACCOUNT_KEY'
-           sh 'docker push registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER}'
-         }
-       }
-     }
-   }
- post {
-   always {
-     cleanWs()
-   }
- }
+    agent any
+    stages {
+        stage('Deploy to astronomer') {
+            when { branch 'master' }
+            steps {
+                script {
+                    sh 'docker build -t registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER} .'
+                    sh 'docker run --rm registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER} /bin/bash -c "pytest tests'
+                    sh 'docker login registry.$BASE_DOMAIN -u _ -p $SERVICE_ACCOUNT_KEY'
+                    sh 'docker push registry.$BASE_DOMAIN/$RELEASE_NAME/airflow:ci-${BUILD_NUMBER}'
+                }
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 }
 ```
 

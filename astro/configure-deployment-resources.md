@@ -26,6 +26,12 @@ To ensure that your tasks have the CPU and memory required to complete successfu
 
 Worker and scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
 
+:::cli
+
+If you prefer, you can set Deployment resources using the Astro CLI and a local Deployment configuration file. See [Deployments as Code](manage-deployments-as-code.md).
+
+:::
+
 ### Worker queues 
 
 Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks.
@@ -42,7 +48,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 #### Edit scheduler settings 
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
 4. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
@@ -52,7 +58,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 ## Update a Deployment name and description
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**.
 4. Update the Deployment name or description. 
@@ -62,7 +68,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 Alert emails assigned to a Deployment are used by Astronomer support to notify recipients in the case of an issue with the Deployment. This can include a problem with your scheduler or workers. Automated email alerts are coming soon.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. To add an alert email:
     - Click **Edit Emails** in the **Alert Emails** area.
@@ -82,7 +88,7 @@ To transfer a Deployment from one Workspace to another, the Workspaces must be i
 
 Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin or Editor in both the original Workspace and the target Workspace.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu and select **Transfer Deployment**. 
 
     ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
@@ -94,7 +100,7 @@ Only the users who are members of the target Workspace can access the Deployment
 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted from your data plane. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
     ![Delete Deployment in options menu](/img/docs/delete-deployment.png)
@@ -105,3 +111,4 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 - [Set environment variables on Astro](environment-variables.md).
 - [Manage Deployment API keys](api-keys.md).
+- [Manage Deployments as Code](manage-deployments-as-code.md)

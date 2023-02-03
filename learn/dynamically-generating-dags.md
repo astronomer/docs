@@ -17,6 +17,12 @@ Because everything in Airflow is code, you can dynamically generate DAGs using P
 
 All code used in this guide is located in the [Astronomer Registry](https://github.com/astronomer/dynamic-dags-tutorial).
 
+:::tip
+
+As of Airflow 2.3, you can use [dynamic task mapping](dynamic-tasks.md) to write DAGs that dynamically generate parallel tasks at runtime. Dynamic task mapping is a first-class Airflow feature, and is suitable for many dynamic use cases. Due to its higher degree of support and stability, we recommend exploring dynamic task mapping for your use case before implementing the dynamic DAG generation methods described in this guide.
+
+:::
+
 ## Assumed knowledge
 
 To get the most out of this guide, you should have an understanding of:
@@ -59,7 +65,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -90,7 +96,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -148,7 +154,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -208,7 +214,7 @@ def create_dag(dag_id,
         print('This is DAG: {}'.format(str(dag_number)))
 
     dag = DAG(dag_id,
-              schedule_interval=schedule,
+              schedule=schedule,
               default_args=default_args)
 
     with dag:
@@ -281,7 +287,7 @@ default_args = {'owner': 'airflow',
                 }
 
 with DAG(dag_id,
-            schedule_interval=scheduletoreplace,
+            schedule=scheduletoreplace,
             default_args=default_args,
             catchup=False) as dag:
 
@@ -331,15 +337,16 @@ for filename in os.listdir(config_filepath):
 To generate your DAG files, you can either run this script on demand or as part of your CI/CD workflow. After running the script, your final directory will appear similar to the example below, where the `include/` directory contains the files from the previous example, and the `dags/` directory contains the two dynamically generated DAGs:
 
 ```bash
-dags/
-├── dag_file_1.py
-├── dag_file_2.py
-include/
-├── dag-template.py
-├── generate-dag-files.py
-└── dag-config
-    ├── dag1-config.json
-    └── dag2-config.json
+.
+├── dags
+│   ├── dag_file_1.py
+│   └── dag_file_2.py
+└── include
+    ├── dag-template.py
+    ├── generate-dag-files.py
+    └── dag-config
+        ├── dag1-config.json
+        └── dag2-config.json
 ```
 
 This is a straightforward example that works only if all of the DAGs follow the same pattern. However, it could be expanded upon to have dynamic inputs for tasks, dependencies, different operators, and so on.

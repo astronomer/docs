@@ -89,7 +89,7 @@ from datetime import datetime, timedelta
 with DAG('azure_container_instances',
          start_date=datetime(2020, 12, 1),
          max_active_runs=1,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args = {
             'retries': 1,
             'retry_delay': timedelta(minutes=1)

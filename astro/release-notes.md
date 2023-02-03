@@ -19,9 +19,69 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 7.1.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.2.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.8.4 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.10.0 ([Release notes](cli/release-notes.md))
+
+## January 31, 2023
+
+### Bug fixes 
+
+- When you select **Mark Success** or **Clear** for Deployment task actions in the Airflow UI, you are now correctly redirected to the DAG **Tree** view instead of the **DAGs** homepage.
+- Fixed [CVE-2022-41721](https://avd.aquasec.com/nvd/2022/cve-2022-41721/).
+
+## January 24, 2023
+
+### New Workspace Home page 
+
+When you select a Workspace in the Cloud UI, the **Home** page now appears first. On this page, you can:
+
+- Check the status of your Deployments.
+- Quickly access your most recently viewed Deployments and Cloud IDE projects. 
+- View release notes for all Astro products.
+
+![Workspace home page in the Cloud UI](/img/release-notes/workspace-home.png)
+
+See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blog/introducing-astros-new-workspace-homepage/) for more information. 
+
+### Additional improvements
+
+- Data plane cluster access is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
+- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](view-clusters.md).
+- You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
+- Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
+
+### Bug fixes 
+
+- Fixed [CVE-2022-48195](https://avd.aquasec.com/nvd/2022/cve-2022-48195/).
+
+## January 18, 2023
+
+### Bug fixes
+
+- Fixed an issue with Google Cloud Platform (GCP) clusters where the metadata database for a Deployment could persist after the Deployment was deleted.
+
+## January 10, 2023 
+
+### New Astro Cloud IDE cell types
+
+To simplify the creation of new tasks, the following new cell types are now available in the Astro Cloud IDE:
+
+- **SQL**: Run a SQL query against an existing database connection and save the query results in an XCom file for use by other cells. Use this cell type to run smaller queries and store the results in Airflow for quick access by other cells.
+- **Warehouse SQL**: Run a SQL query against an existing database connection and store the query results in your data warehouse. Use this cell type for data operations that require more storage and reliability.
+- **Markdown**: Add inline Markdown comments to your generated DAG code. Use this cell type to document code decisions and to make it easier for team members to collaborate on shared pipelines.
+
+For more information about a specific cell type, see [Run SQL in the Astro Cloud IDE](cloud-ide/run-sql.md), [Run Python in the Cloud IDE](cloud-ide/run-python.md), and [Add documentation to an Astro Cloud IDE pipeline](cloud-ide/document-pipeline.md).
+
+### Additional improvements
+
+- To reduce the time it takes for Airflow to parse new DAG files, the default value for `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL` has been reduced from 5 minutes to 30 seconds for all Deployments regardless of Runtime version. For most users, this means that you will see new DAGs appear in the Airflow UI faster.
+- In the Cloud UI, a banner now appears if there is an incident reported on the [Astro status page](https://status.astronomer.io/).
+
+### Bug fixes 
+
+- Sorting the **Organization Role** column in the **People** tab of the Cloud UI now works as expected.
+- Fixed an issue where lineage groups would occasionally not collapse as expected in the **Lineage Graph** view.
 
 ## December 20, 2022 
 

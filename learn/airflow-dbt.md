@@ -77,7 +77,7 @@ def _check_job_not_running(job_id):
 
 @dag(
     start_date=datetime(2022, 2, 10),
-    schedule_interval="@daily",
+    schedule="@daily",
     catchup=False,
     default_view="graph",
     doc_md=__doc__,
@@ -135,7 +135,7 @@ with DAG(
     dag_id='dbt_dag',
     start_date=datetime(2021, 12, 23),
     description='An Airflow DAG to invoke simple dbt commands',
-    schedule_interval=timedelta(days=1),
+    schedule=timedelta(days=1),
 ) as dag:
 
     dbt_run = BashOperator(
@@ -176,7 +176,7 @@ dag = DAG(
     dag_id='dbt_dag',
     start_date=datetime(2020, 12, 23),
     description='A dbt wrapper for Airflow',
-    schedule_interval=timedelta(days=1),
+    schedule=timedelta(days=1),
 )
 
 def load_manifest():
@@ -393,7 +393,7 @@ To add this functionality, you can take a group of models defined by some select
   ```python
     with DAG(
        dag_id="dbt_dag",
-       schedule_interval="@daily",
+       schedule="@daily",
        max_active_runs=1,
        catchup=False,
        start_date=datetime(2021, 1, 1)

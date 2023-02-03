@@ -32,8 +32,8 @@ To create an Astro cluster on AWS, Microsoft Azure, or Google Cloud Platform (GC
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Self-hosted', value: 'byoc'},
-        {label: 'Astronomer-hosted', value: 'astronomer hosted data plane'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
+        {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
 
@@ -104,7 +104,7 @@ To create a cluster in one of these regions, complete the following additional s
     ```
 
 2. In the AWS Management Console, enable the desired region as described in [AWS documentation](https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable).
-3. Upgrade your [global endpoint session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-manage-tokens) to version 2, which is valid in all AWS regions, by running the following command via the [AWS CLI](https://aws.amazon.com/cli/):
+3. Upgrade your [global endpoint session token](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html#sts-regions-manage-tokens) to version 2, which is valid in all AWS regions, by running the following command in the [AWS CLI](https://aws.amazon.com/cli/):
 
     ```sh
     aws iam set-security-token-service-preferences --global-endpoint-token-version v2Token
@@ -116,7 +116,7 @@ To create a cluster in one of these regions, complete the following additional s
 
 ### Submit a request to Astronomer support
 
-To create a new Astro cluster on the Astronomer-hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
 - Your preferred cluster installation region. See [Supported regions](resource-reference-aws.md#aws-region).
 - Optional. Your preferred worker instance type for your first cluster. See [Worker node types](resource-reference-aws.md#worker-node-types).
@@ -135,8 +135,8 @@ If you don't specify your configuration preferences, Astronomer support creates 
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Self-hosted', value: 'byoc'},
-        {label: 'Astronomer-hosted', value: 'astronomer hosted data plane'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
+        {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
 
@@ -165,7 +165,7 @@ This feature is currently Private Preview. Contact [Astronomer support](https://
 
 ### Submit a request to Astronomer support
 
-To create a new Astro cluster on the Astronomer-hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
 - Your preferred cluster installation region. See [Supported regions](resource-reference-azure.md#supported-regions).
 - Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-azure#worker-node-pools).
@@ -184,8 +184,8 @@ If you don't specify your configuration preferences, Astronomer support creates 
     defaultValue="byoc"
     groupId= "byoc"
     values={[
-        {label: 'Self-hosted', value: 'byoc'},
-        {label: 'Astronomer-hosted', value: 'astronomer hosted data plane'},
+        {label: 'Bring Your Own Cloud', value: 'byoc'},
+        {label: 'Hosted', value: 'astronomer hosted data plane'},
     ]}>
 <TabItem value="byoc">
 
@@ -214,7 +214,7 @@ This feature is currently Private Preview. Contact [Astronomer support](https://
 
 ### Submit a request to Astronomer support
 
-To create a new Astro cluster on the Astronomer-hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
+To create a new Astro cluster on the hosted cloud, submit a request to [Astronomer support](astro-support.md). In your request, provide the following information for every new cluster that you want to provision:
 
 - Your preferred cluster installation region. See [Supported regions](resource-reference-gcp.md#supported-regions).
 - Optional. Your preferred worker instance type for your first cluster. See [Worker node pools](resource-reference-gcp.md#worker-node-pools).
