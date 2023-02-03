@@ -111,6 +111,7 @@ module.exports = {
           'integrate-auth-system',
           'custom-image-registry',
           'third-party-ingress-controllers',
+          'self-signed-certificate',
           'renew-tls-cert',
           ],
         },

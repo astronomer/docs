@@ -80,7 +80,7 @@ If you run Airflow locally, logging information is accessible in the following l
 
 ### Docker Airflow environment
 
-If you run Airflow in Docker using the [Astro CLI](https://docs.astronomer.io/software/install-cli) or by [following the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html)), you can find the logs for each Airflow component in the following locations:
+If you run Airflow in Docker using the [Astro CLI](https://docs.astronomer.io/software/install-cli) or by [following the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html), you can find the logs for each Airflow component in the following locations:
 
 - Scheduler: Logs are in `/usr/local/airflow/logs/scheduler` within the scheduler Docker container by default. To enter a docker container in a bash session, run `docker exec -it <container_id> /bin/bash`.
 - Webserver: Logs appear in the console by default. You can access the logs by running `docker logs <webserver_container_id>`.

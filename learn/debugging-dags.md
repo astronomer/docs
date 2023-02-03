@@ -8,7 +8,13 @@ id: debugging-dags
 This guide explains how to identify and resolve common Airflow DAG issues. It also includes resources to try out if you can't find a solution to an Airflow issue.
 While the focus of the troubleshooting steps provided lies on local development, much of the information is also relevant for running Airflow in a production context.
 
-This guide was written for Airflow 2. If you are running Airflow 1.15 or earlier, we highly recommend upgrading to prevent compatibility issues and receive the latest bug fixes. For assistance in upgrading see the documentation on [Upgrading from 1.10 to 2](https://airflow.apache.org/docs/apache-airflow/stable/howto/upgrading-from-1-10/index.html).
+This guide was written for Airflow 2. If you are running Airflow 1.15 or earlier, upgrade to prevent compatibility issues and receive the latest bug fixes. For assistance in upgrading see the documentation on [Upgrading from 1.10 to 2](https://airflow.apache.org/docs/apache-airflow/stable/howto/upgrading-from-1-10/index.html).
+
+:::tip
+
+Consider implementing systematic testing of your DAGs to prevent common issues. See the [Test Airflow DAGs](testing-airflow.md) guide.
+
+:::
 
 ## Assumed knowledge
 
@@ -44,6 +50,8 @@ The most common issues related to the Astro CLI are:
 - Airflow components are in a crash-loop because of errors in custom plugins or XCom backends. View scheduler logs using `astro dev logs -s` to troubleshoot.
 
 To troubleshoot infrastructure issues when running Airflow on other platforms, for example in Docker, on Kubernetes using the [Helm Chart](https://airflow.apache.org/docs/helm-chart/stable/index.html) or on managed services, please refer to the relevant documentation and customer support.
+
+You can learn more about [Test and troubleshooting locally](https://docs.astronomer.io/astro/test-and-troubleshoot-locally#test-dags-with-the-astro-cli) with the Astro CLI in the Astro documentation.
 
 ## Common DAG issues
 
