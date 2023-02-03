@@ -159,6 +159,8 @@
 /astro/cli-reference/astrocloud-workspace-list /astro/cli/astro-workspace-list 301
 /astro/cli-reference/astrocloud-workspace-switch /astro/cli/astro-workspace-switch 301
 /astro/cli/get-started /astro/cli/install-cli 301
+/astro/cli/astro-organization-list /astro/cli/astro-organization 301
+/astro/cli/astro-organization-switch /astro/cli/astro-organization 301
 
 # redirect enterprise paths to software
 /enterprise /software 301
