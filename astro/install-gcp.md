@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 This is where you'll find instructions for installing Astro on the Google Cloud Platform (GCP). You have two options to install Astro on GCP:
 
 - Bring Your Own Cloud -  Create an Astro cluster in a dedicated GCP account that's hosted and owned by your organization. This ensures that all data remains within your network and allows your organization to manage infrastructure billing.
-- Hosted - Create an Astro cluster in a dedicated GCP account that's hosted and owned by Astronomer. This removes the complexity of adding another AWS account to your network.
+- Hosted - Create an Astro cluster in a dedicated GCP account that's hosted and owned by Astronomer. This removes the complexity of adding another GCP account to your network.
 
 To complete the installation process, you'll:
 
