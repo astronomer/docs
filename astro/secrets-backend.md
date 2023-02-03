@@ -151,7 +151,7 @@ After you configure an Airflow connection to AWS, can run a DAG locally to check
 
   :::
 
-3. Open the Airflow UI for your Deployment and create an [Amazon Web Services connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) with the no credentials. When you use this connection in a DAG, Airflow will automatically fall back to using the credentials in your configured environment variables. 
+3. Open the Airflow UI for your Deployment and create an [Amazon Web Services connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) without credentials. When you use this connection in a DAG, Airflow will automatically fall back to using the credentials in your configured environment variables. 
  
 To further customize the Airflow and AWS SSM Parameter Store integration, see the [full list of available kwargs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/_api/airflow/providers/amazon/aws/secrets/systems_manager/index.html).
 
