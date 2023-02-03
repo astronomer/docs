@@ -58,6 +58,7 @@ To verify that the correct Astro CLI version was installed, run:
 ```sh
 astro version
 ```
+
 #### Resolve installation issues
 
 Follow this procedure when Homebrew fails to install the latest Astro CLI version or the error `No formulae or casks found for astro@<major.minor.patch-version>` appears. To troubleshoot other Homebrew issues, see [Common Issues](https://docs.brew.sh/Common-Issues) in the Homebrew documentation.
