@@ -25,7 +25,7 @@ Most cluster modifications take only a few minutes to complete and don't require
 
 In the Cloud UI, click the **Clusters** tab to view a list of the clusters owned by your Organization. Click a cluster and then click a tab to view cluster information. 
 
-## Create worker node pools
+## Manage worker node pools
 
 A node pool is a group of nodes within a cluster that all have the same configuration. On Astro, worker nodes are responsible for running the Pods that execute Airflow tasks. Each worker node pool can be configured with a node instance type and a maximum node count. All Astro clusters have one worker node pool by default, but you can configure additional node pools to optimize resource usage. The following resources are available to help you determine which node pool is suitable for your business needs:
 
