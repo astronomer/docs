@@ -51,25 +51,24 @@ brew install astro@<major.minor.patch-version>
 
 If you specify only a major version, this command installs the latest minor or patch version available for the major version. For a list of all available versions, see the [CLI release notes](/astro/cli/release-notes.md).
 
-::: tip
-
-If Homebrew fails to install the latest version or the error `No formulae or casks found for astro@<major.minor.patch-version>` appears, run the following command to update Homebrew and all package definitions (formulae):
-
-```sh
-brew update
-```
-
-Then, try to install the Astro CLI again by following steps 1-2 in [Installation](astro/cli/install-cli.md?tab=mac#installation Astro CLI) above. For help troubleshooting other issues with Homebrew, see [Common Issues](https://docs.brew.sh/Common-Issues) in Homebrew documentation.
-
-:::
-
-#### Confirm the installation
+#### Confirmation
 
 To verify that the correct Astro CLI version was installed, run:
 
-```
+```sh
 astro version
 ```
+#### Resolve installation issues
+
+Follow this procedure when Homebrew fails to install the latest Astro CLI version or the error `No formulae or casks found for astro@<major.minor.patch-version>` appears. To troubleshoot other Homebrew issues, see [Common Issues](https://docs.brew.sh/Common-Issues) in the Homebrew documentation.
+
+1. Run the following command to update Homebrew and all package definitions (formulae):
+
+    ```sh
+    brew update
+    ```
+
+2. Install the Astro CLI. See [Installation](astro/cli/install-cli.md?tab=mac#installation Astro CLI). 
 
 </TabItem>
 
