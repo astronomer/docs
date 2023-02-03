@@ -48,7 +48,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 #### Edit scheduler settings 
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
 4. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
@@ -58,7 +58,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 ## Update a Deployment name and description
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**.
 4. Update the Deployment name or description. 
@@ -68,7 +68,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 Alert emails assigned to a Deployment are used by Astronomer support to notify recipients in the case of an issue with the Deployment. This can include a problem with your scheduler or workers. Automated email alerts are coming soon.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. To add an alert email:
     - Click **Edit Emails** in the **Alert Emails** area.
@@ -88,7 +88,7 @@ To transfer a Deployment from one Workspace to another, the Workspaces must be i
 
 Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin or Editor in both the original Workspace and the target Workspace.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu and select **Transfer Deployment**. 
 
     ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
@@ -100,7 +100,7 @@ Only the users who are members of the target Workspace can access the Deployment
 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted from your data plane. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
     ![Delete Deployment in options menu](/img/docs/delete-deployment.png)

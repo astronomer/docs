@@ -17,6 +17,30 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.10.0
+
+Release date: February 2, 2023
+
+### New commands to manage Astro users
+
+To help you manage users in your Organization, Astro CLI 1.10.0 includes the following new commands:
+
+- `astro organization user invite`: Invite a new user to your Astronomer Organization. 
+- `astro organization user update`: Update a user's Organization role.
+- `astro organization user list`: List all users in your Organization.
+- `astro workspace user add`: Add a user to a Workspace.
+- `astro workspace user update`: Update a user's role in a Workspace.
+- `astro workspace user list`: List all users in a Workspace.
+- `astro workspace user remove`: Remove a user from a Workspace.
+
+:::info
+
+`astro organization user invite` is identical to the existing `astro user invite` command. `astro user invite` will be deprecated in a future release.
+
+:::
+
+For more information, see the [`astro organization`](cli/astro-organization.md) and [`astro workspace`](cli/astro-workspace.md) command references.
+
 ## Astro CLI 1.9.0
 
 Release date: January 13, 2023
@@ -420,7 +444,7 @@ Release date: April 14, 2022
 
 ### New command to create and update environment variables
 
-`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually via the Cloud UI.
+`astro deployment variable create` is a new Astro CLI command that allows you to create and update [environment variables](environment-variables.md) for a Deployment on Astro. New environment variables can be loaded from a file (e.g. `.env`) or specified as inputs to the CLI command itself. If you already set environment variables [via a `.env` file locally](develop-project.md#set-environment-variables-via-env-local-development-only), this command allows you to set environment variables on Astro from that file as well. More generally, this command makes it easy to automate creating or modifying environment variables instead of setting them manually in the Cloud UI.
 
 For more information about this command and its options, see the [Astro CLI command reference](cli/astro-deployment-variable-create.md).
 
@@ -441,7 +465,7 @@ Release date: April 11, 2022
 ### Additional improvements
 
 - Improved the performance of `astro dev start`
-- When you successfully push code to a Deployment via `astro deploy`, the CLI now provides URLs for accessing the Deployment's Cloud UI and Airflow UI pages.
+- When you successfully push code to a Deployment with `astro deploy`, the CLI now provides URLs for accessing the Deployment's Cloud UI and Airflow UI pages.
 
 ## 1.3.3 (`astrocloud`)
 

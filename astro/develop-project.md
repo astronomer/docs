@@ -621,3 +621,9 @@ Your Astro project can now utilize Python packages from your private PyPi index.
 
 </TabItem>
 </Tabs>
+
+## Unsupported project configurations 
+
+You can't use `airflow.cfg` or `airflow_local_settings.py` files in an Astro project. `airflow_local_settings.py` has no effect on Astro Deployments, and `airflow.cfg` has no effect on local environments and Astro Deployments. 
+
+An alternative to using `airflow.cfg` is to set Airflow environment variables in your `.env` file. See [Set environment variables locally](#set-environment-variables-locally).

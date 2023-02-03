@@ -14,6 +14,7 @@ The following are some of the cluster and Deployment-level modifications that re
 - Create a new node pool. This enables a new worker type for all Deployments in the cluster. See [Cluster settings reference](https://docs.astronomer.io/astro/category/cluster-settings-reference).
 - Update an existing worker node pool, including its node instance type or maximum node count.
 - Create a VPC connection or a transit gateway connection between a cluster and a target VPC. See [Connect Astro to external data sources](https://docs.astronomer.io/astro/category/connect-astro).
+- Apply custom tags _(AWS only)_
 
 To modify a cluster, you'll need the following:
 

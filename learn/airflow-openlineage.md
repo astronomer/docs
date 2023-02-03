@@ -1,7 +1,7 @@
 ---
 title: "Integrate OpenLineage and Airflow"
 sidebar_label: "OpenLineage"
-description: "Use OpenLineage and Marquez to get lineage data from your Airflow DAGs."
+description: "Learn about OpenLineage concepts and benefits of integrating with Airflow."
 id: airflow-openlineage
 tags: [Lineage]
 ---
@@ -10,7 +10,7 @@ tags: [Lineage]
 
 It follows that data lineage has a natural integration with Apache Airflow. Airflow is often used as a one-stop-shop orchestrator for an organization’s data pipelines, which makes it an ideal platform for integrating data lineage to understand the movement and interactions of your data.
 
-In this guide, you’ll learn about core data lineage concepts, understand how lineage works with Airflow, and implement an example local integration of Airflow and OpenLineage for tracking data movement in Postgres.
+In this guide, you’ll learn about core data lineage concepts and understand how lineage works with Airflow.
 
 Astro offers robust support for extracting and visualizing data lineage. To learn more, see [Data lineage on Astro](https://docs.astronomer.io/astro/data-lineage).
 
@@ -26,16 +26,16 @@ To get the most out of this guide, make sure you have an understanding of:
 Data lineage is a way of tracing the complex set of relationships that exist among datasets within an ecosystem.  The concept of data lineage encompasses:
 
 - Lineage metadata - describes your datasets (a table in Snowflake, for example) and jobs (tasks in your DAG, for example).
-- A Lineage backend - stores and processes lineage metadata.
+- A lineage backend - stores and processes lineage metadata.
 - A lineage frontend - allows you to view and interact with your lineage metadata, including a graph that visualizes your jobs and datasets and shows how they are connected.
 
 If you want to read more on the concept of data lineage and why it’s important, see this [Astronomer blog post](https://www.astronomer.io/blog/what-is-data-lineage).
 
 Visually, your data lineage graph might look similar to this:
 
-![Lineage Graph](/img/guides/example_lineage_graph.png)
+![Lineage Graph](/img/guides/lineage_complex_snowflake_example.png)
 
-If you are using data lineage, you will likely have a lineage tool that collects lineage metadata, as well as a front end for visualizing the lineage graph. There are paid tools (including Astro) that provide these services, but in this guide the focus is on the open source options that can be integrated with Airflow: namely OpenLineage (the lineage tool) and [Marquez](https://marquezproject.github.io/marquez/) (the lineage front end).
+If you are using data lineage, you will likely have a lineage tool that collects lineage metadata, as well as a front end for visualizing the lineage graph. There are paid tools (including Astro) that provide these services, or there are open source options that can be integrated with Airflow: namely OpenLineage (the lineage tool) and [Marquez](https://marquezproject.github.io/marquez/) (the lineage front end).
 
 ### OpenLineage
 
@@ -58,7 +58,7 @@ The following terms are used frequently when discussing data lineage and OpenLin
 
 ## Why OpenLineage with Airflow?
 
-In the previous section above, you learned *what* lineage is, but a question remains *why* you would want to have data lineage in conjunction with Airflow. Using OpenLineage with Airflow allows you to have more insight into complex data ecosystems and can lead to better data governance. Airflow is a natural place to integrate data lineage, because it is often used as a one-stop-shop orchestrator that touches data across many parts of an organization.
+In the previous section, you learned *what* lineage is, but a question remains *why* you would want to have data lineage in conjunction with Airflow. Using OpenLineage with Airflow allows you to have more insight into complex data ecosystems and can lead to better data governance. Airflow is a natural place to integrate data lineage, because it is often used as a one-stop-shop orchestrator that touches data across many parts of an organization.
 
 More specifically, OpenLineage with Airflow provides the following capabilities:
 
@@ -74,199 +74,16 @@ These capabilities translate into real world benefits by:
 
 ## Lineage on Astro
 
-For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage integration is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your Organization. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io/openlineage). 
+For Astronomer customers using [Astro](https://www.astronomer.io/product/), OpenLineage integration is built in. The **Lineage** tab in the Astronomer UI provides multiple pages that can help you troubleshoot issues with your data pipelines and understand the movement of data across your organization. For more on lineage capabilities with Astro, see [View lineage on Astro](https://docs.astronomer.io/astro/data-lineage) or [contact Astronomer](https://www.astronomer.io). 
 
-## Example OSS integration
+## Getting started
 
-In this example, you'll learn how to run OpenLineage with Airflow locally using Marquez as a lineage front end. You'll then learn how to use and interpret the lineage data generated by a simple DAG that processes data in Postgres. All of the tools used in this example are open source.
-
-### Running Marquez and Airflow locally
-
-For this example, you’ll run Airflow with OpenLineage and Marquez locally. You will need to install Docker and the [Astro CLI](https://docs.astronomer.io/cloud/install-cli) before starting.
-
-1. Run Marquez locally using the quickstart in the [Marquez README](https://github.com/MarquezProject/marquez#quickstart).
-2. Start an Astro project using the CLI by creating a new directory and running `astro dev init`. In this example the directory name is `openlineage`.
-3. Add `openlineage-airflow` to your `requirements.txt` file. If you are using Astro Runtime 4.2.1 or greater, this package is already included.
-4. Add the environment variables below to your `.env` file to allow Airflow to connect with the OpenLineage API and send your lineage data to Marquez.
-    
-    ```bash
-    OPENLINEAGE_URL=http://host.docker.internal:5000
-    OPENLINEAGE_NAMESPACE=example
-    AIRFLOW__LINEAGE__BACKEND=openlineage.lineage_backend.OpenLineageBackend
-    ```
-    
-    By default, Marquez uses port 5000 when you run it using Docker. If you are using a different OpenLineage front end instead of Marquez, or you are running Marquez remotely, you can modify the `OPENLINEAGE_URL` as needed.
-    
-5. Modify your `config.yaml` in the `.astro/` directory to choose a different port for Postgres. Marquez also uses Postgres, so you will need to have Airflow use a different port than the default 5432, which is already allocated.
-    
-    ```yaml
-    project:
-      name: openlineage
-    postgres:
-      port: 5435
-    ```
-    
-6. Run `astro dev start` to run Airflow locally.
-7. Confirm Airflow is running by going to `http://localhost:8080`, and Marquez is running by going to `http://localhost:3000`.
-
-### Generate and view lineage data
-
-To show the lineage data that can result from Airflow DAG runs, you'll use two sample DAGs that process data in Postgres. To run this example in your own environment, complete the following steps:
-
-1. Ensure you have a running Postgres database (separate from the Airflow and Marquez metastores). If you are working with the Astro CLI, you can create a database locally in the same container as the Airflow metastore using `psql`:
-
-    ```bash
-    psql -h localhost -p 5435 -U postgres
-    <enter password `postgres` when prompted>
-    create database lineagedemo;
-    ```
-
-2. Create and populate two source tables that will be used in the example DAGs below. You can alternatively update the table names and schemas in the DAG to reference existing tables in your own environment. To use the given example DAGs, run the following queries:
-
-    ```sql
-    CREATE TABLE IF NOT EXISTS adoption_center_1
-    (date DATE, type VARCHAR, name VARCHAR, age INTEGER);
-
-    CREATE TABLE IF NOT EXISTS adoption_center_2
-    (date DATE, type VARCHAR, name VARCHAR, age INTEGER);
-
-    INSERT INTO
-        adoption_center_1 (date, type, name, age)
-    VALUES
-        ('2022-01-01', 'Dog', 'Bingo', 4),
-        ('2022-02-02', 'Cat', 'Bob', 7),
-        ('2022-03-04', 'Fish', 'Bubbles', 2);
-
-    INSERT INTO
-        adoption_center_2 (date, type, name, age)
-    VALUES
-        ('2022-06-10', 'Horse', 'Seabiscuit', 4),
-        ('2022-07-15', 'Snake', 'Stripes', 8),
-        ('2022-08-07', 'Rabbit', 'Hops', 3);
-
-    ```
-
-3. Create an [Airflow connection](connections.md) to the Postgres database you created in Step 1.
-
-With those prerequisites met, you can move on to the example DAGs. The first DAG creates and populates a table (`animal_adoptions_combined`) with data aggregated from the two source tables (`adoption_center_1` and `adoption_center_2`). You might want to make adjustments to this DAG if you are working with different source tables, or if your Postgres connection id is not `postgres_default`.
-
-```python
-from airflow import DAG
-from airflow.providers.postgres.operators.postgres import PostgresOperator
-
-from datetime import datetime, timedelta
-
-create_table_query= '''
-CREATE TABLE IF NOT EXISTS animal_adoptions_combined (date DATE, type VARCHAR, name VARCHAR, age INTEGER);
-'''
-
-combine_data_query= '''
-INSERT INTO animal_adoptions_combined (date, type, name, age) 
-SELECT * 
-FROM adoption_center_1
-UNION 
-SELECT *
-FROM adoption_center_2;
-'''
-
-
-with DAG('lineage-combine-postgres',
-         start_date=datetime(2020, 6, 1),
-         max_active_runs=1,
-         schedule='@daily',
-         default_args = {
-            'retries': 1,
-            'retry_delay': timedelta(minutes=1)
-        },
-         catchup=False
-         ) as dag:
-
-    create_table = PostgresOperator(
-        task_id='create_table',
-        postgres_conn_id='postgres_default',
-        sql=create_table_query
-    ) 
-
-    insert_data = PostgresOperator(
-        task_id='combine',
-        postgres_conn_id='postgres_default',
-        sql=combine_data_query
-    ) 
-
-    create_table >> insert_data
-```
-
-The second DAG creates and populates a reporting table (`adoption_reporting_long`) using data from the aggregated table (`animal_adoptions_combined`) created in your first DAG:
-
-```python
-from airflow import DAG
-from airflow.providers.postgres.operators.postgres import PostgresOperator
-
-from datetime import datetime, timedelta
-
-aggregate_reporting_query = '''
-INSERT INTO adoption_reporting_long (date, type, number)
-SELECT c.date, c.type, COUNT(c.type)
-FROM animal_adoptions_combined c
-GROUP BY date, type;
-'''
-
-with DAG('lineage-reporting-postgres',
-         start_date=datetime(2020, 6, 1),
-         max_active_runs=1,
-         schedule='@daily',
-         default_args={
-            'retries': 1,
-            'retry_delay': timedelta(minutes=1)
-        },
-         catchup=False
-         ) as dag:
-
-    create_table = PostgresOperator(
-        task_id='create_reporting_table',
-        postgres_conn_id='postgres_default',
-        sql='CREATE TABLE IF NOT EXISTS adoption_reporting_long (date DATE, type VARCHAR, number INTEGER);',
-    ) 
-
-    insert_data = PostgresOperator(
-        task_id='reporting',
-        postgres_conn_id='postgres_default',
-        sql=aggregate_reporting_query
-    ) 
-
-    create_table >> insert_data
-```
-
-If you run these DAGs in Airflow, and then go to Marquez, you will see a list of your jobs, including the four tasks from the previous DAGs.
-
-![Marquez Jobs](/img/guides/marquez_jobs.png)
-
-Then, if you click one of the jobs from your DAGs, you see the full lineage graph.
-
-![Marquez Graph](/img/guides/marquez_lineage_graph.png)
-
-The lineage graph shows:
-
-- Two origin datasets that are used to populate the combined data table;
-- The two jobs (tasks) from your DAGs that result in new datasets: `combine` and `reporting`;
-- Two new datasets that are created by those jobs.
-
-The lineage graph shows you how these two DAGs are connected and how data flows through the entire pipeline, giving you insight you wouldn't have if you were to view these DAGs in the Airflow UI alone.
+If you are working with open source tools, you can run OpenLineage with Airflow locally using Marquez as the lineage front end. See [Integrate OpenLineage and Airflow locally with Marquez](marquez.md) tutorial to get started.
 
 ## Limitations
 
 OpenLineage is rapidly evolving, and new functionality and integrations are being added all the time. At the time of writing, the following are limitations when using OpenLineage with Airflow:
 
-- The OpenLineage integration with Airflow 2 is currently experimental.
 - You must be running Airflow 2.3.0+ with OpenLineage 0.8.1+ to get lineage data for *failed* task runs.
-- Only the following operators have bundled extractors (needed to collect lineage data out of the box):
-
-    - `PostgresOperator`
-    - `SnowflakeOperator`
-    - `BigQueryOperator`
-    - `MySqlOperator`
-    - `GreatExpectationsOperator`
-    - `PythonOperator`
-    
-    To get lineage data from other operators, you can create your own custom extractor.
+- Only some operators have bundled extractors (needed to collect lineage data out of the box). To see which extractors currently exist, check out the [OpenLineage repo](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow/openlineage/airflow/extractors). To get lineage data from other operators, you can create your own [custom extractor](https://openlineage.io/blog/extractors/) or leverage the [default extractor](https://openlineage.io/docs/integrations/airflow/operator) (in Airflow 2.3+) to modify your Airflow operators to gather lineage data.
 - To get lineage data from an external system connected to Airflow, such as [Apache Spark](https://openlineage.io/integration/apache-spark/), you'll need to configure an [OpenLineage integration](https://openlineage.io/integration) with that system in addition to Airflow.

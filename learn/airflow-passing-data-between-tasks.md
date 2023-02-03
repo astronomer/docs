@@ -74,74 +74,60 @@ You can see that these limits aren't very big. And even if you think your data m
 
 ### Example DAG using XComs
 
-In this section, you'll review a DAG that uses XCom to pass data between tasks. The DAG uses XComs to analyze the increase in total number of Covid tests for the current day for a particular state. To implement this use case, the first task makes a request to the [Covid Tracking API](https://covidtracking.com/data/api) and pulls the `totalTestResultsIncrease` parameter from the results. The second task takes the results from the first task and performs an analysis. This is a valid use case for XCom, because the data being passed between the tasks is a single integer.
+In this section, you'll review a DAG that uses XCom to pass data between tasks. The DAG uses XComs to analyze cat facts that are retrieved from an API. To implement this use case, the first task makes a request to the [cat facts API](http://catfact.ninja/fact) and pulls the `fact` parameter from the results. The second task takes the results from the first task and performs an analysis. This is a valid use case for XCom, because the data being passed between the tasks is a short string.
 
 ```python
 import json
 from datetime import datetime, timedelta
-
 import requests
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-url = 'https://covidtracking.com/api/v1/states/'
-state = 'wa'
+def get_a_cat_fact(ti):
+    """
+    Gets a cat fact from the CatFacts API
+    """
+    url = 'http://catfact.ninja/fact'
+    res = requests.get(url)
+    ti.xcom_push(key='cat_fact', value=json.loads(res.text)['fact'])
 
-def get_testing_increase(state, ti):
+def analyze_cat_facts(ti):
     """
-    Gets totalTestResultsIncrease field from Covid API for given state and returns value
+    Prints the cat fact
     """
-    res = requests.get(url+'{0}/current.json'.format(state))
-    testing_increase = json.loads(res.text)['totalTestResultsIncrease']
-
-    ti.xcom_push(key='testing_increase', value=testing_increase)
-
-def analyze_testing_increases(state, ti):
-    """
-    Evaluates testing increase results
-    """
-    testing_increases=ti.xcom_pull(key='testing_increase', task_ids='get_testing_increase_data_{0}'.format(state))
-    print('Testing increases for {0}:'.format(state), testing_increases)
+    cat_fact=ti.xcom_pull(key='cat_fact', task_ids='get_a_cat_fact')
+    print('Cat fact for today:', cat_fact)
     #run some analysis here
-
-# Default settings applied to all tasks
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5)
-}
 
 with DAG('xcom_dag',
          start_date=datetime(2021, 1, 1),
          max_active_runs=2,
          schedule=timedelta(minutes=30),
-         default_args=default_args,
+         default_args={
+            'retries': 1,
+            'retry_delay': timedelta(minutes=5)
+        },
          catchup=False
          ) as dag:
 
-    opr_get_covid_data = PythonOperator(
-        task_id = 'get_testing_increase_data_{0}'.format(state),
-        python_callable=get_testing_increase,
-        op_kwargs={'state':state}
+    get_a_cat_fact = PythonOperator(
+        task_id = 'get_a_cat_fact',
+        python_callable=get_a_cat_fact
     )
 
-    opr_analyze_testing_data = PythonOperator(
+    analyze_cat_data = PythonOperator(
         task_id = 'analyze_data',
-        python_callable=analyze_testing_increases,
-				op_kwargs={'state':state}
+        python_callable=analyze_cat_facts
     )
 
-    opr_get_covid_data >> opr_analyze_testing_data
+    get_cat_data >> analyze_cat_data
 ```
 
-In this DAG there are two `PythonOperator` tasks which share data using the `xcom_push` and `xcom_pull` functions. In the `get_testing_increase` function, the `xcom_push` method was used to allow the `key` name to be specified. Alternatively, the function could be configured to return the `testing_increase` value, because any value returned by an operator in Airflow is automatically pushed to XCom. If this method was used, the XCom key would be "returned_value".
+In this DAG there are two `PythonOperator` tasks which share data using the `xcom_push` and `xcom_pull` functions. In the `get_a_cat_fact` function, the `xcom_push` method was used to allow the `key` name to be specified. Alternatively, the function could be configured to return the `cat_fact` value, because any value returned by an operator in Airflow is automatically pushed to XCom.
 
-For the `xcom_pull` call in the `analyze_testing_increases` function, you specify the `key` and `task_ids` associated with the XCom you want to retrieve. This allows you to pull any XCom value (or multiple values) at any time into a task. It does not need to be from the task immediately prior as shown in this example.
+For the `xcom_pull` call in the `analyze_cat_facts` function, you specify the `key` and `task_ids` associated with the XCom you want to retrieve. This allows you to pull any XCom value (or multiple values) at any time into a task. It does not need to be from the task immediately prior as shown in this example.
 
-If you run this DAG and then go to the XComs page in the Airflow UI, you'll see that a new row has been added for your `get_testing_increase_data_wa` task with the key `testing_increase` and Value returned from the API.
+If you run this DAG and then go to the XComs page in the Airflow UI, you'll see that a new row has been added for your `get_a_cat_fact` task with the key `cat_fact` and Value returned from the API.
 
 ![Example XCom](/img/guides/example_xcom.png)
 
@@ -161,8 +147,7 @@ from datetime import datetime
 import requests
 import json
 
-url = 'https://covidtracking.com/api/v1/states/'
-state = 'wa'
+url = 'http://catfact.ninja/fact'
 
 default_args = {
     'start_date': datetime(2021, 1, 1)
@@ -172,22 +157,23 @@ default_args = {
 def taskflow():
 
     @task
-    def get_testing_increase(state):
+    def get_a_cat_fact():
         """
-        Gets totalTestResultsIncrease field from Covid API for given state and returns value
+        Gets a cat fact from the CatFacts API
         """
-        res = requests.get(url+'{0}/current.json'.format(state))
-        return{'testing_increase': json.loads(res.text)['totalTestResultsIncrease']}
+        res = requests.get(url)
+        return{'cat_fact': json.loads(res.text)['fact']}
 
     @task
-    def analyze_testing_increases(testing_increase: int):
+    def print_the_cat_fact(cat_fact: str):
         """
-        Evaluates testing increase results
+        Prints the cat fact
         """
-        print('Testing increases for {0}:'.format(state), testing_increase)
-        #run some analysis here
+        print('Cat fact for today:', cat_fact)
+        #run some further cat analysis here
 
-    analyze_testing_increases(get_testing_increase(state))
+    # Invoke functions to create tasks and define dependencies
+    print_the_cat_fact(get_a_cat_fact())
 
 dag = taskflow()
 ```
@@ -204,7 +190,7 @@ While this is a great way to pass data that is too large to be managed with XCom
 
 ### Example DAG
 
-Building on the previous COVID example, you are now interested in getting all of the daily COVID data for a state and processing it. This case would not be ideal for XCom, but since the data returned is a small dataframe, it can be processed with Airflow.
+Building on the previous cat fact example, you are now interested in getting more cat facts and processing them. This case would not be ideal for XCom, but since the data returned is a small dataframe, it can be processed with Airflow.
 
 ```python
 from datetime import datetime, timedelta
@@ -218,66 +204,57 @@ from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 
 s3_conn_id = 's3-conn'
 bucket = 'astro-workshop-bucket'
-state = 'wa'
-date = '{{ yesterday_ds_nodash }}'
 
-def upload_to_s3(state, date):
-    '''Grabs data from Covid endpoint and saves to flat file on S3
-    '''
-    # Connect to S3
-    s3_hook = S3Hook(aws_conn_id=s3_conn_id)
+def upload_to_s3(cat_fact_number):
+    # Instantiate
+    s3_hook = S3Hook(aws_conn_id=S3_CONN_ID)
 
-    # Get data from API
-    url = 'https://covidtracking.com/api/v1/states/'
-    res = requests.get(url+'{0}/{1}.csv'.format(state, date))
+    # Base URL
+    url = 'http://catfact.ninja/fact'
 
-    # Save data to CSV on S3
-    s3_hook.load_string(res.text, '{0}_{1}.csv'.format(state, date), bucket_name=bucket, replace=True)
+    # Grab data
+    res = requests.get(url)
 
-def process_data(state, date):
+    # Take string, upload to S3 using predefined method
+    s3_hook.load_string(res.text, 'cat_fact_{0}.csv'.format(cat_fact_number), bucket_name=BUCKET, replace=True)
+
+def process_data(cat_fact_number):
     '''Reads data from S3, processes, and saves to new S3 file
     '''
     # Connect to S3
     s3_hook = S3Hook(aws_conn_id=s3_conn_id)
 
     # Read data
-    data = StringIO(s3_hook.read_key(key='{0}_{1}.csv'.format(state, date), bucket_name=bucket))
+    data = StringIO(s3_hook.read_key(key='cat_fact_{0}.csv'.format(cat_fact_number), bucket_name=bucket))
     df = pd.read_csv(data, sep=',')
 
     # Process data
-    processed_data = df[['date', 'state', 'positive', 'negative']]
+    processed_data = df[['fact']]
 
     # Save processed data to CSV on S3
-    s3_hook.load_string(processed_data.to_string(), '{0}_{1}_processed.csv'.format(state, date), bucket_name=bucket, replace=True)
-
-# Default settings applied to all tasks
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1)
-}
+    s3_hook.load_string(processed_data.to_string(), 'cat_fact_{0}_processed.csv'.format(cat_fact_number), bucket_name=bucket, replace=True)
 
 with DAG('intermediary_data_storage_dag',
          start_date=datetime(2021, 1, 1),
          max_active_runs=1,
          schedule='@daily',
-         default_args=default_args,
+         default_args={
+            'retries': 1,
+            'retry_delay': timedelta(minutes=1)
+            },
          catchup=False
          ) as dag:
 
     generate_file = PythonOperator(
         task_id='generate_file_{0}'.format(state),
         python_callable=upload_to_s3,
-        op_kwargs={'state': state, 'date': date}
+        op_kwargs={'cat_fact_number': 1}
     )
 
     process_data = PythonOperator(
         task_id='process_data_{0}'.format(state),
         python_callable=process_data,
-        op_kwargs={'state': state, 'date': date}
+        op_kwargs={'cat_fact_number': 1}
     )
 
     generate_file >> process_data

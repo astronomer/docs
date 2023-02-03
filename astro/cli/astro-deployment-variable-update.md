@@ -6,12 +6,12 @@ description: Reference documentation for astro deployment variable update.
 hide_table_of_contents: true
 ---
 
-For a given Deployment on Astro, use `astro deployment variable update` to update the value of an existing environment variable via the Astro CLI. To do so, you can either:
+For a given Deployment on Astro, use `astro deployment variable update` to update the value of an existing environment variable with the Astro CLI. To do so, you can either:
 
 - Manually enter a new `key=value` pair for an existing key directly in the command.
 - Modify the value of one or more environment variables in a `.env` file and load that file with `--load`.
 
-This command is functionally identical to editing and saving the value of an existing environment variable via the Cloud UI. For more information on environment variables, see [Set environment variables on Astro](environment-variables.md).
+This command is functionally identical to editing and saving the value of an existing environment variable in the Cloud UI. For more information on environment variables, see [Set environment variables on Astro](environment-variables.md).
 
 ## Usage
 

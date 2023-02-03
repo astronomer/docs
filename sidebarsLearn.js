@@ -31,6 +31,7 @@ module.exports = {
             'airflow-sql',
             'managing-dependencies',
             'managing-airflow-code',
+            'airflow-openlineage',
           ],
         },
         {
@@ -144,8 +145,8 @@ module.exports = {
         'airflow-dbt',
         'airflow-great-expectations',
         'execute-notebooks',
+        'marquez',
         'airflow-mongodb',
-        'airflow-openlineage',
         'airflow-snowflake',
         'soda-data-quality',
         'airflow-talend-integration',

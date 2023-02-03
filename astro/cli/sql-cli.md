@@ -15,7 +15,12 @@ Use Astro CLI SQL commands to run SQL workflows without writing Python code or s
 
 ## Prerequisites 
 
-- [Astro CLI](install-cli.md) version 1.7 or later.
+- The latest prerelease of the [Astro CLI](install-cli.md). To install the prerelease, run:
+
+   ```sh
+   sudo bash < <(curl -sSL https://install.astronomer.io) -s v1.10.0
+   ```
+
 - [Docker Desktop](https://www.docker.com/).
 - One of the following databases, hosted either locally or on an external service:
   
@@ -54,19 +59,29 @@ This command uses Docker, and it can take up to five minutes to complete if this
 ```sh
 new_proj/
 ├── config
-│   ├── default
-│   │   └── configuration.yml
-│   └── dev
-│       └── configuration.yml
+│   ├── default
+│   │   └── configuration.yml
+│   ├── dev
+│   │   └── configuration.yml
+│   └── global.yml
 ├── data
-│   ├── imdb.db
-│   └── retail.db
+│   ├── imdb.db
+│   └── retail.db
 └── workflows
     ├── example_basic_transform
-    │   └── top_animations.sql
+    │   └── top_animations.sql
+    ├── example_deploy
+    │   ├── orders.yaml
+    │   ├── subset.sql
+    │   └── workflow.yml
+    ├── example_load_file
+    │   ├── load_imdb_movies.yaml
+    │   └── transform_imdb_movies.sql
     └── example_templating
         ├── filtered_orders.sql
         └── joint_orders_customers.sql
+
+
 ```
 
 Each SQL project is composed of three directories:
@@ -105,7 +120,30 @@ connections:
       database: Database
 ```
 
-An Astro project can't access the connections configured in this directory. Similarly, a SQL project can't access connections configured in an Astro project. Features for unifying these two project structures will be available in upcoming releases.
+To store sensitive credentials in your `configuration.yml` files, such as API keys or user logins, create a file named `.env` in the root of your SQL project and define your credentials there. You can then reference these values in your `configuration.yml` files as environment variables. 
+
+For example, consider the following `.env` file:
+
+```text
+AWS_ACCESS_KEY_ID=<your-aws-access-key-id>
+AWS_SECRET_ACCESS_KEY=<your-aws-access-key-secret>
+```
+
+You can call these values in a `configuration.yml` file using the format `$ENVIRONMENT_VARIABLE_KEY`. For example: 
+
+```yaml
+connections:
+  - conn_id: aws_conn
+    conn_type: aws
+    login: $AWS_ACCESS_KEY_ID
+    password: $AWS_SECRET_ACCESS_KEY
+```
+
+:::info 
+
+An Astro CLI/Cloud project can't access the connections configured in this directory. Similarly, a SQL project can't access connections configured in an Astro CLI/Cloud project, nor can it access the Astro project `.env` file. Features for unifying these two project structures will be available in upcoming releases.
+
+:::
 
 #### Test database connections
 
@@ -207,8 +245,7 @@ To run a query against data hosted outside of your project, you create a `YAML` 
     LIMIT 5;
     ```
 
-    - Reference the table name directly in your queries. For example: 
-
+    - Reference the table name directly in your queries. When you run your workflow, the CLI automatically uses the configured data source in your `YAML` file for all queries. This option does not work if you have multiple configured data sources in your workflow. For example: 
 
     ```sql
     ---
@@ -218,8 +255,6 @@ To run a query against data hosted outside of your project, you create a `YAML` 
     FROM <your-input-table>
     LIMIT 5;
     ```
-    
-    When you run your workflow, the CLI automatically uses the configured data source in your `YAML` file for all queries. This option does not work if you have multiple configured data sources in your workflow.
 
 ## Run a SQL workflow
 
@@ -270,11 +305,11 @@ After you run this command, you can add the DAG to an existing Astro project and
 Export a SQL workflow to an Astro project to locally test the workflow as a DAG and view execution information in the Airflow UI. 
 
 1. In the `config/global.yml` file of your SQL project, set `dags_folder` to the absolute file path of your Astro project `dags` folder. Set `data_dir` to the absolute file path of your Astro project `include` folder.
-2. To export a DAG from an existing SQL project, copy the contents your SQL project `data` folder into your Astro project `include` folder. To export a DAG from a new SQL CLI project, run `astro flow init --data-dir` to copy the contents of the default `data` folder into your Astro project.
+2. To export a DAG from an existing SQL project, copy the contents from your SQL project `data` folder to your Astro project `include` folder. To export a DAG from a new SQL CLI project, run `astro flow init --data-dir` to copy the contents of the default `data` folder into your Astro project.
 3. Run the following command to execute your SQL workflow and export the DAG to your Astro CLI `dags` folder:
 
     ```sh
-    astro flow run <your-workflow> --project-dir <filepath-to-astro-project-directory>`
+    astro flow run <your-workflow> --project-dir <filepath-to-astro-project-directory>
     ```
 
 You can now run the SQL workflow as a DAG from your Astro project. See [Build and run a project locally](https://docs.astronomer.io/astro/develop-project#build-and-run-a-project-locally).
@@ -284,3 +319,67 @@ You can now run the SQL workflow as a DAG from your Astro project. See [Build an
 If you configured databases in your SQL CLI project, you must manually reconfigure these databases in your Astro project through the Airflow UI. See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections).
 
 :::
+
+### Deploy a SQL workflow to Astro
+
+Running SQL workflows on Astro lets you regularly test and schedule your queries as Airflow DAGs. When you deploy your workflow to Astro, the SQL CLI:
+
+- Generates a DAG based on your workflow.
+- Builds a Docker image for an Astro project that includes your DAG.
+- Deploys the image to a Deployment on Astro.
+
+1. Run the following command to create an Astro project at the root of your SQL project:
+
+    ```sh
+    astro dev init
+    ```
+
+2. Run the following command to log in to Astro:
+
+    ```sh
+    astro login
+    ```
+
+3. Optional. In your workflow folder, create a file named `workflow.yml` that defines when your workflow should run. You can also use this file to define metadata for the generated DAG. For example, the following configuration runs a SQL workflow hourly and backfills all workflow runs until December 2021. 
+
+    ```yaml
+    workflow:
+      catchup: true
+      description: "Sample workflow used to load data from a AWS S3 file into a Snowflake database"
+      schedule: "@hourly"
+      start_date: "2021-12-1"
+      is_paused_upon_creation: false
+      tags:
+        - AWS
+        - S3
+        - Snowflake
+    ```
+    
+    Alternatively, set your schedule based on when another DAG in your Deployment updates a [dataset](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Specify the dataset URI that your workflow should listen to as follows:
+
+    ```yaml
+    workflow:
+      schedule:
+        - dataset:
+           uri: <your-dataset-uri>
+        - dataset:
+           uri: <your-dataset-uri>
+    ```
+    
+    Your SQL workflow triggers whenever the provided dataset is updated by any DAG in your Deployment. For more information about datasets, see [Datasets and data-aware scheduling in Airflow](https://docs.astronomer.io/learn/airflow-datasets).
+    
+    If you don't create a `workflow.yml` file, the generated DAG runs your workflow daily starting one day before you deploy the workflow to Astro. 
+
+4. Run the following command to deploy a SQL workflow to Astro:
+
+    ```sh
+    astro flow deploy <workflow-name> --env <env>
+    ```
+
+    If you haven't yet installed the Astro Python SDK in your Astro project, the CLI prompts you to update `requirements.txt` in your Astro project. Enter `yes` to have the CLI automatically install the dependency.
+   
+5. Follow the CLI instructions to select a Workspace and Deployment for your SQL environment. Now when you run `astro flow deploy <workflow-name> --env <env>`, the CLI automatically deploys your workflow to the Deployment associated with your SQL environment.
+
+6. The CLI generates links for viewing the Deployment and Airflow UI. Use these links to confirm that the code deploy was successful.  
+
+7. Reconfigure any connections from your local SQL project in the Airflow UI for your Deployment. See [Connections](https://docs.astronomer.io/learn/connections).

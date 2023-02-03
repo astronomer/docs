@@ -29,7 +29,7 @@ If you prefer to work with the Astro CLI, you can create and update environment 
 
 :::
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Variables** tab.
 
@@ -45,7 +45,7 @@ If you prefer to work with the Astro CLI, you can create and update environment 
 
 After you set an environment variable key, only the environment variable value can be modified. You can modify environment variables that are set as secret. However, the variable value is never shown. When you modify a secret environment variable, you'll be prompted to enter a new value.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Variables** tab.
 

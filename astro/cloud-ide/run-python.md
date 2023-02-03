@@ -9,7 +9,7 @@ A Python cell contains a Python function that you can run in isolation or as a d
 
 ## Prerequisites 
 
-- An IDE project and pipeline. See [Step 2: Create a pipeline](cloud-ide.md/quickstart#step-2-create-a-pipeline).
+- An IDE project and pipeline. See [Step 2: Create a pipeline](/astro/cloud-ide/quickstart.md#step-2-create-a-pipeline).
 
 ## Create a Python cell
 

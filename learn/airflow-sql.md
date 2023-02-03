@@ -238,7 +238,7 @@ The next example loads data from an external source into a  database table. You'
 
 This example uses the [S3toSnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/s3tosnowflakeoperator) to limit the code that you have to write.
 
-First, create a DAG that pulls COVID data from an [API endpoint](https://covidtracking.com/data/api) for California, Colorado, Washington, and Oregon, saves the data to comma-separated values (CSVs) on S3, and loads each of those CSVs to Snowflake using the transfer operator. Here's the DAG code:
+First, create a DAG that pulls cat facts from an [API endpoint](http://catfact.ninja/fact), saves the data to comma-separated values (CSVs) on S3, and loads each of those CSVs to Snowflake using the transfer operator. Here's the DAG code:
 
 ```python
 from datetime import datetime, timedelta
@@ -252,58 +252,51 @@ from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeO
 
 S3_CONN_ID = 'astro-s3-workshop'
 BUCKET = 'astro-workshop-bucket'
-name = 'covid_data'  # swap your name here
+name = 'cat_data'  # swap your name here
 
-def upload_to_s3(endpoint, date):
+def upload_to_s3(cat_fact_number):
     # Instantiate
     s3_hook = S3Hook(aws_conn_id=S3_CONN_ID)
 
     # Base URL
-    url = 'https://covidtracking.com/api/v1/states/'
+    url = 'http://catfact.ninja/fact'
 
     # Grab data
-    res = requests.get(url+'{0}/{1}.csv'.format(endpoint, date))
+    res = requests.get(url)
 
     # Take string, upload to S3 using predefined method
-    s3_hook.load_string(res.text, '{0}_{1}.csv'.format(endpoint, date), bucket_name=BUCKET, replace=True)
+    s3_hook.load_string(res.text, 'cat_fact_{0}.csv'.format(cat_fact_number), bucket_name=BUCKET, replace=True)
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5)
-}
 
-endpoints = ['ca', 'co', 'wa', 'or']
+number_of_cat_facts = 3
 
-date = '{{ yesterday_ds_nodash }}'
-
-with DAG('covid_data_s3_to_snowflake',
+with DAG('cat_data_s3_to_snowflake',
          start_date=datetime(2020, 6, 1),
          max_active_runs=3,
          schedule='@daily',
-         default_args=default_args,
+         default_args={
+            'retries': 1,
+            'retry_delay': timedelta(minutes=5)
+        },
          catchup=False
          ) as dag:
 
     t0 = EmptyOperator(task_id='start')   
 
-    for endpoint in endpoints:
+    for i in range(number_of_cat_facts):
         generate_files = PythonOperator(
-            task_id='generate_file_{0}'.format(endpoint),
+            task_id='generate_file_{0}'.format(i),
             python_callable=upload_to_s3,
-            op_kwargs={'endpoint': endpoint, 'date': date}
+            op_kwargs={'cat_fact_number': i}
         )
 
         snowflake = S3ToSnowflakeOperator(
-            task_id='upload_{0}_snowflake'.format(endpoint),
-            s3_keys=['{0}_{1}.csv'.format(endpoint, date)],
-            stage='covid_stage',
-            table='STATE_DATA',
+            task_id='upload_{0}_snowflake'.format(i),
+            s3_keys=['cat_fact_{0}.csv'.format(i)],
+            stage='cat_stage',
+            table='CAT_DATA',
             schema='SANDBOX_KENTEND',
-            file_format='covid_csv',
+            file_format='cat_csv',
             snowflake_conn_id='snowflake'
         )
 
@@ -312,103 +305,23 @@ with DAG('covid_data_s3_to_snowflake',
 
 This image shows a graph view of the DAG:
 
-![Covid-to-Snowflake Graph](/img/guides/covid_to_snowflake_graph_view.png)
+![Cat-to-Snowflake Graph](/img/guides/sql_cat_to_snowflake.png)
 
 There are a few things you need to configure in Snowflake to make this DAG work:
 
-- A table that will receive the data (`STATE_DATA` in this example).
-- A defined Snowflake stage (`covid_stage`) and file format (`covid_csv`). See the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/data-load-s3.html).
+- A table that will receive the data (`CAT_DATA` in this example).
+- A defined Snowflake stage (`cat_stage`) and file format (`cat_csv`). See the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/data-load-s3.html).
 
 Next, set up your Airflow connections. This example requires two connections:
 
 - A connection to S3 (established using `astro-s3-workshop` in the DAG above).
 - A connection to Snowflake (established using `snowflake`. See Example 1 for a screenshot of what the connection should look like).
 
-After this setup, you're ready to run the DAG! After a successful run, you can see the new data for today's date in your table.
-
-![Snowflake Data](/img/guides/snowflake_data_populated.png)
+After this setup, you're ready to run the DAG!
 
 Note that while this example is specific to Snowflake, the concepts apply to any database you might be using. If a transfer operator doesn't exist for your specific source and destination tools, you can always write your own (and maybe contribute it back to the Airflow project)!
 
-## Example 4: Use pandas
-
-While Astronomer recommends using SQL-related operators and keeping any data transformations in SQL, for some use cases this doesn't work. For instance, pivoting data into a new format for a report can be difficult to complete with SQL alone. In this next example, you'll make use of Python libraries to integrate your SQL operator into a Python function.
-
-The following DAG pivots a table of data in Snowflake into a wide format for a report using Python:
-
-```python
-from datetime import datetime, timedelta
-
-import pandas as pd
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-from airflow.providers.snowflake.hooks.snowflake import SnowflakeHook
-from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeOperator
-
-filename = 'pivoted_data'
-S3_CONN_ID = 'astro-s3-workshop'
-BUCKET = 'astro-workshop-bucket'
-
-def pivot_data(**kwargs):
-    #Make connection to Snowflake
-    hook = SnowflakeHook(snowflake_conn_id='snowflake')
-    conn = hook.get_conn()
-
-    #Define SQL query
-    query = 'SELECT DATE, STATE, POSITIVE FROM STATE_DATA;'
-
-    #Read data into pandas dataframe
-    df = pd.read_sql(query, conn)
-
-    #Pivot dataframe into new format
-    pivot_df = df.pivot(index='DATE', columns='STATE', values='POSITIVE').reset_index()
-
-    #Save dataframe to S3
-    s3_hook = S3Hook(aws_conn_id=S3_CONN_ID)
-    s3_hook.load_string(pivot_df.to_csv(index=False),
-                        '{0}.csv'.format(filename),
-                        bucket_name=BUCKET,
-                        replace=True)
-
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1)
-}
-
-with DAG('pandas_processing',
-         start_date=datetime(2020, 6, 1),
-         max_active_runs=1,
-         schedule='@daily',
-         default_args=default_args,
-         catchup=False
-         ) as dag:
-
-        opr_pivot_data = PythonOperator(
-            task_id='pivot_data',
-            python_callable=pivot_data
-        )
-
-        opr_load_data = S3ToSnowflakeOperator(
-            task_id='load_data',
-            s3_keys=['{0}.csv'.format(filename)],
-            stage='covid_stage',
-            table='PIVOT_STATE_DATA',
-            schema='SANDBOX_KENTEND',
-            file_format='covid_csv',
-            snowflake_conn_id='snowflake'
-        )
-
-        opr_pivot_data >> opr_load_data
-```
-
-In the DAG, the Python function `pivot_data` executes the SQL query and saves the results in a pandas dataframe using the `read_sql` function. It then pivots the data to the desired format and saves it to Amazon S3. Lastly, the downstream task `opr_load_data`  loads that data back to Snowflake using the transfer operator described in Example 3.
-
-## Example 5 - Use dag-factory
+### Example 4 - Use dag-factory
 
 If you're unfamiliar with Airflow or Python, you can use [dag-factory](https://github.com/ajbosco/dag-factory) to generate DAGs using a YAML configuration file.
 

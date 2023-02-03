@@ -24,7 +24,7 @@ The behavior and format of this command differs depending on what Astronomer pro
 <TabItem value="astro">
 
 
-Update the configuration for a Deployment on Astro. This command is functionally identical to modifying a Deployment in the Cloud UI via the **Edit Configuration** button.
+Update the configuration for a Deployment on Astro. This command is functionally identical to using **Edit Configuration** to modify a Deployment in the Cloud UI.
 
 ## Usage
 

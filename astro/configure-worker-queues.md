@@ -88,7 +88,7 @@ If you prefer, you can also run the `astro deployment worker-queue create` comma
 
 :::
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Worker Queues** tab and then click **Worker Queue**.
 
@@ -140,7 +140,7 @@ You can update worker queue configurations at any time. The worker queue name ca
 
 If you need to change the worker type of an existing worker queue, Astronomer recommends making the change at a time when it will not affect production pipelines. After you've changed a worker type, Astronomer recommends waiting a minimum of five minutes before pushing new code to your Deployment.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Worker Queues** tab.
 
@@ -158,7 +158,7 @@ If you prefer, you can also run the `astro deployment worker-queue delete` comma
 
 All scheduled tasks that are assigned to a worker queue after the worker queue is deleted remain in a `queued` state indefinitely and won't execute. To avoid stalled task runs, ensure that you reassign all tasks from a worker queue before deleting it. You can either remove the worker queue argument or assign the task to a different queue.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
 2. Click the **Worker Queues** tab.
 
