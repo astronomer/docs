@@ -14,11 +14,11 @@ import TabItem from '@theme/TabItem';
 
 Apache Airflow [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) and [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#) often contain sensitive information about your external systems that should be kept [secret](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/secrets/index.html) in a secure, centralized location that complies with your organization's security requirements.
 
-While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool.
+While secret values of Airflow variables and connections are encrypted in the Airflow metadata database of every Deployment, Astronomer recommends integrating with a secrets backend tool. This guide explains how to configure connections to various secrets backend tools on Astro.
 
 :::tip
 
-This document describes how to set up a secrets backend on the Astro data plane for production use. To quickly test a secrets backend locally using your own cloud credentials and the Astro CLI, see [Authenticate to cloud services](cli/authenticate-to-clouds.md).
+If you only need a local connection to your cloud for testing purposes, consider mounting your own AWS user credentials to a local Airflow environment. While this implementation is not recommended for deployed environments, lets you quickly test pipelines with data hosted in your cloud. See [Authenticate to cloud services](authenticate-to-clouds.md).
 
 :::
 
@@ -72,8 +72,7 @@ Using secrets to set Airflow connections requires knowledge of how to generate A
 
 This topic provides setup steps for configuring [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) as a secrets backend on Astro.
 
- For more information about Airflow and AWS connections, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
-
+For more information about Airflow and AWS connections, see [Amazon Web Services Connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html).
 
 #### Prerequisites
 
@@ -99,6 +98,7 @@ Secret names must correspond with the `connections_prefix` and `variables_prefix
     ```
 
 - The `<variable-key>` is how you will retrieve that variable's value in a DAG. For example:
+
     ```python
     my_var = Variable.get("variable-key>")
     ```
@@ -131,7 +131,8 @@ AWS_ACCESS_KEY_ID=<Access Key> # Make sure the user has the permission to access
 AWS_SECRET_ACCESS_KEY=<secret key>
 ```
 
-You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
+After you configure an Airflow connection to AWS, can run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
+
 #### Deploy environment variables to Astro
 
 1. Run the following commands to export your secrets backend configurations as environment variables to Astro.
@@ -144,11 +145,13 @@ You can now run a DAG locally to check that your variables are accessible using 
 
 2. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials. 
 
-    :::info
+  :::info
     
-    If you delete the `.env` file, the Secrets Manager backend won't work locally.
+  If you delete the `.env` file, the Secrets Manager backend won't work locally.
 
-    :::
+  :::
+
+3. Open the Airflow UI for your Deployment and create an [Amazon Web Services connection](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html) with the no credentials. When you use this connection in a DAG, Airflow will automatically fall back to using the credentials in your configured environment variables. 
  
 To further customize the Airflow and AWS SSM Parameter Store integration, see the [full list of available kwargs](https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/_api/airflow/providers/amazon/aws/secrets/systems_manager/index.html).
 
