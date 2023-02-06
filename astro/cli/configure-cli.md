@@ -74,7 +74,7 @@ The Astronomer product you're using determines the format and behavior of the co
 
 <TabItem value="software">
 
-| Option              | Description | Default Value   | Possible Values   |
+| Option              | Description | Default value   | Valid values   |
 | ------------------- | ----------- | --------------- | --------------- |
 | `houston.dial_timeout`       |  The time in seconds to wait for a Houston connection.        | `10` |  Any integer           |
 | `houston.skip_verify_tls`       |  Determines whether the Transport Layer Security (TLS) certificate is verified when connecting to Houston.       | `false` | `true`, `false`             |
