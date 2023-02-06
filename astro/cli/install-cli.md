@@ -82,8 +82,6 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
 #### Prerequisites
 
 - [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or later).
-- [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
 - Astro CLI version 1.6 or later.
 - The latest version of the Windows [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-ca&gl=ca).
 - Windows 10 1709 (build 16299) or later or Windows 11.
@@ -109,8 +107,6 @@ This is where you'll find information about installing the Astro CLI on a Window
 #### Prerequisites
 
 - [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or later).
-- [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
 - Windows 10 or Windows 11.
 
 #### Installation
