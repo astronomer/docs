@@ -98,6 +98,10 @@ To install a specific version of the Astro CLI, specify the version you want to 
 
 <pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}`}</code></pre>
 
+#### Resolve installation issues
+
+If an error message appears indicating that the term winget is not recognized as an internal or external command when you attempt to run winget commands, see this [troubleshooting document](https://github.com/microsoft/winget-cli/tree/master/doc/troubleshooting#common-issues) provided by Microsoft. 
+
 </TabItem>
 
 <TabItem value="windows">
