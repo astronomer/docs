@@ -1117,6 +1117,7 @@ When you create environment variables that will be used in multiple branches, yo
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
+          - apk add jq
         script:
           - (curl -sSL install.astronomer.io | bash -s)
           - astro deploy -f
@@ -1134,6 +1135,7 @@ When you create environment variables that will be used in multiple branches, yo
         before_script:
           - apk add --update curl && rm -rf /var/cache/apk/*
           - apk add bash
+          - apk add jq
         script:
           - (curl -sSL install.astronomer.io | bash -s)
           - astro deploy -f
