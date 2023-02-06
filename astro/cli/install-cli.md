@@ -82,7 +82,6 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
 #### Prerequisites
 
 - [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- Astro CLI version 1.6 or later.
 - The latest version of the Windows [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-ca&gl=ca).
 - Windows 10 1709 (build 16299) or later or Windows 11.
 
