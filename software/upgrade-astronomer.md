@@ -188,10 +188,10 @@ If you're upgrading through multiple Astronomer Software versions in a single up
 
 In Kubernetes 1.25, [PodSecurityPolicies (PSPs)](https://kubernetes.io/blog/2021/04/06/podsecuritypolicy-deprecation-past-present-and-future/) were deprecated in favor of [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/). If you were using PSPs on your Astronomer Software installation, consider the following options for moving away from PSPs on Kubernetes 1.25:
 
-- Run the following command to set a baseline policy for all Pods in your Astronomer namespace:
+- Run the following command to set a baseline Pod Security Standard for all Pods in your Astronomer namespace:
 
     ```sh
-    kubectl label --overwrite ns my-existing-namespace \
+    kubectl label --overwrite ns <your-namespace> \
     pod-security.kubernetes.io/enforce=baseline \
     pod-security.kubernetes.io/enforce-version=v1.25
     ```
