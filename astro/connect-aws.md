@@ -218,3 +218,13 @@ To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a 
 #### Create a connection to confirm connectivity (optional)
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+
+### DNS Domain Name System forwarding
+
+You can use Domain Name System (DNS) forwarding as an alternate to using Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. DNS forwarding can provide better security as your sensitive data isn't shared with an external cloud account.
+
+To use this solution, make sure Astro is installed on the same  VPC peering or transit gateway subnets as the DNS server and then submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the following information:
+
+- The domain name for forwarding requests
+- The IP address of the DNS server where requests are forwarded
+
