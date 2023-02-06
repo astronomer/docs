@@ -53,7 +53,7 @@ The Astronomer product you're using determines the format and behavior of the co
     ]}>
 <TabItem value="astro">
 
-| Option              | Description | Default Value | Possible Values |
+| Option              | Description | Default value | Valid values |
 | ------------------- | ----------- | --------------- |---------------  |
 | `cloud.api.protocol`  | The type of protocol to use when calling the Airflow API in a local Airflow environment.         | `https` |`http`, `https`             |
 | `cloud.api.port`      | The port to use when calling the Airflow API in a local environment.           | `443` | Any available port             |
