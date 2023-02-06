@@ -50,7 +50,7 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, contact 
 
 After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
 
-### DNS Domain Name System forwarding
+#### DNS Domain Name System forwarding
 
 You can use Domain Name System (DNS) forwarding as an alternate to using Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. With DNS forwarding, you don't need to share your sensitive data with an external cloud account.
 
