@@ -14,7 +14,7 @@ Most cluster and Deployment level modifications can't be completed in the Cloud 
 - Create a new node pool. This enables a new worker type for all Deployments in the cluster. See [Cluster settings reference](https://docs.astronomer.io/astro/category/cluster-settings-reference).
 - Update an existing worker node pool, including its node instance type or maximum node count.
 - Create a VPC connection or a transit gateway connection between a cluster and a target VPC. See [Connect Astro to external data sources](https://docs.astronomer.io/astro/category/connect-astro).
-- Apply custom tags _(AWS only)_
+- Apply custom tags _(AWS only)_.
 
 When Astronomer support receives your change request, it will be reviewed and you'll be notified before it's implemented.
 For modifications that do require downtime, such as changing your cluster's node instance type, Astronomer support will inform you of the expected impact and ask you to confirm if you want to proceed.
@@ -47,9 +47,9 @@ The default maximum node count for new node pools is 20. A cluster's node count 
 
 To check the maximum node count for each worker node pool in a Cluster, go to the **Clusters** tab, select a cluster, and click **Worker Types**. To adjust the maximum node count for a node pool, contact [Astronomer Support](https://cloud.astronomer.io/support).
 
-## Configure your relational database
+## Configure your relational database (AWS only)
 
-Astro clusters are created with and require a relational database. A relational database is required for the data plane and it powers the metadata database of all Astro Deployments within a single cluster. During the cluster creation process, you are asked to specify an relational database instance type according to your use case and expected workload. 
+Astro clusters are created with and require a relational database. A relational database is required for the data plane and powers the metadata database of all Astro Deployments within a single cluster. On AWS, you can configure different types of relational databases to optimize resource usage on your clusters. For a complete list of supported database types, see [AWS cluster settings](resource-reference-aws.md#rds-instance-type).
 
 To modify a cluster's database type, contact [Astronomer support](https://cloud.astronomer.io/support).
 
