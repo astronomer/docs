@@ -196,7 +196,10 @@ If you're upgrading through multiple Astronomer Software versions in a single up
     pod-security.kubernetes.io/enforce-version=v1.25
     ```
 
-    If you chose this option, you will also need to update Astronomer Software's default Fluentd and ElasticSearch configuration to satisfy the baseline policy. 
+    If you chose this option, complete the following additional setup to satisfy the baseline policy:
+
+    - [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars)
+    - [Use an external Elasticsearch instance for Airflow task log management](export-task-logs.md#use-an-external-elasticsearch-instance-for-airflow-task-log-management)
 
 - Implement Pod Security through a third-party Open Policy Agent tool such as [GateKeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/).
 
