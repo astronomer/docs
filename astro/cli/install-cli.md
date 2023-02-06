@@ -110,7 +110,8 @@ This is where you'll find information about installing the Astro CLI on a Window
 
 #### Prerequisites
 
-- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
+- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) with Microsoft Hyper-V enabled.
+
 - Windows 10 or Windows 11.
 
 #### Installation
