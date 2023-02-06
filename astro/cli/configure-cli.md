@@ -65,7 +65,7 @@ The Astronomer product you're using determines the format and behavior of the co
 | `postgres.host`      | The hostname for the Postgres metadata database.            | `postgres` |Any string             |
 | `postgres.port`      | The port for the Postgres metadata database.            | `5432` | Any available port             |
 | `project.name`       | The name of your Astro project.         | Empty string | Any string             |
-| `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment. For example, when set to `true`, you'll receive a warning when a new version of Astro Runtime is available and when your Astro project doesn't have any DAGs.        | `true` | `true`, `false`             |
+| `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment. For example, when set to `true`, you'll receive warnings when a new version of Astro Runtime is available and when your Astro project doesn't have any DAGs.        | `true` | `true`, `false`             |
 | `skip_parse`         | Determines whether the CLI parses DAGs before pushing code to a Deployment.         | `false` | `true`, `false`            | 
 | `upgrade_message`    | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI.         | `true` | `true`, `false`             |
 | `webserver.port`     | The port for the webserver in your local Airflow environment.          | `8080` | Any available port             |
@@ -85,7 +85,7 @@ The Astronomer product you're using determines the format and behavior of the co
 | `postgres.host`      | The hostname for the Postgres metadata database.            | `postgres` | Any string             |
 | `postgres.port`      | The port for the Postgres metadata database.            | `5432` | Any available port             |
 | `project.name`       | The name of your Astro project.         | Empty string | Any string             |
-| `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment. For example, when set to `true`, you'll receive a warning when a new version of Astro Runtime is available and when your Astro project doesn't have any DAGs.         | `true` | `true`, `false`             |
+| `show_warnings`      | Determines whether warning messages appear when starting a local Airflow environment. For example, when set to `true`, you'll receive warnings when a new version of Astro Runtime is available and when your Astro project doesn't have any DAGs.         | `true` | `true`, `false`             |
 | `upgrade_message`    | Determines whether a message indicating the availability of a new Astro CLI version displays in the Astro CLI.        | `true` | `true`, `false`             |
 | `verbosity`      | Determines the Astro CLI log level type.             | `warning` | `debug`, `info`, `warning`, `error`             |
 | `webserver.port`     | The port for the webserver in your local Airflow environment.          |  `8080`| Any available port             |
