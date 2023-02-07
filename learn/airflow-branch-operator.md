@@ -65,9 +65,9 @@ def choose_branch(result):
     return ['task_c']
 
 branching = BranchPythonOperator(
-        task_id='branching',
-        python_callable=choose_branch,
-        op_args=[result]
+    task_id='branching',
+    python_callable=choose_branch,
+    op_args=[result]
 )
 ```
 
