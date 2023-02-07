@@ -72,6 +72,7 @@ branching = BranchPythonOperator(
 ```
 
 </TabItem>
+</Tabs>
 
 In general, the `@task.branch` decorator is a good choice if your branching logic can be easily implemented in a simple Python function. Whether you want to use the decorated version or the traditional operator is a question of personal preference.
 
