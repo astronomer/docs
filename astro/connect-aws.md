@@ -187,13 +187,13 @@ Astronomer recommends using an external secrets backend to store your AWS access
 Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service.
 
 <Tabs
-    defaultValue="Amazon Route 53"
+    defaultValue="Shared resolver rule"
     groupId="hostname-resolution-options"
     values={[
-        {label: 'Amazon Route 53', value: 'Amazon Route 53'},
+        {label: 'Shared resolver rule', value: 'Shared resolver rule'},
         {label: 'Domain Name System forwarding', value: 'Domain Name System forwarding'},
     ]}>
-<TabItem value="Amazon Route 53">
+<TabItem value="Shared resolver rule">
 
 Use Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises.
 
