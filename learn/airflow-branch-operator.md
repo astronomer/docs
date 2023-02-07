@@ -28,7 +28,7 @@ To get the most out of this guide, you should have an understanding of:
 
 One of the simplest ways to implement branching in Airflow is to use the `@task.branch` decorator, which is a decorated version of the [BranchPythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchpythonoperator). `@task.branch` accepts any Python function as an input as long as the function returns a list of valid IDs for Airflow tasks that the DAG should run after the function completes. 
 
-For example, we can pass the following function that returns one set of task IDs if the result is greater than 0.5 and a different set if the result is less than or equal to 0.5:
+In the following example we use a `choose_branch` function that returns one set of task IDs if the result is greater than 0.5 and a different set if the result is less than or equal to 0.5:
 
 <Tabs
     defaultValue="taskflow"
