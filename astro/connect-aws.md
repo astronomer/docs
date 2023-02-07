@@ -50,15 +50,6 @@ To create a VPC peering connection between an Astro VPC and an AWS VPC, contact 
 
 After receiving your request, Astronomer support initiates a peering request and creates the routing table entries in the Astro VPC. To allow multidirectional traffic between Airflow and your organization's data sources, the owner of the target VPC needs to accept the peering request and create the routing table entries in the target VPC.
 
-#### DNS Domain Name System forwarding
-
-You can use Domain Name System (DNS) forwarding as an alternate to using Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. With DNS forwarding, you don't need to share your sensitive data with an external cloud account.
-
-To use this solution, make sure Astro is installed on the same  VPC peering or transit gateway subnets as the DNS server and then submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the following information:
-
-- The domain name for forwarding requests
-- The IP address of the DNS server where requests are forwarded
-
 #### DNS considerations for VPC peering
 
 To resolve DNS hostnames from your target VPC, every Astro VPC has **DNS Hostnames**, **DNS Resolutions**, and **Requester DNS Resolution** enabled. See AWS [Peering Connection settings](https://docs.aws.amazon.com/vpc/latest/peering/modify-peering-connections.html).
@@ -228,4 +219,11 @@ To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a 
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
+### Domain Name System forwarding
 
+You can use Domain Name System (DNS) forwarding as an alternate to using Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. With DNS forwarding, you don't need to share your sensitive data with an external cloud account. To learn more about Amazon Route 53 DNS forwarding, see [Forwarding outbound DNS queries to your network](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-forwarding-outbound-queries.html).
+
+To use this solution, make sure Astro can connect to the DNS server using a VPC peering or transit gateway connection and then submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the following information:
+
+- The domain name for forwarding requests
+- The IP address of the DNS server where requests are forwarded
