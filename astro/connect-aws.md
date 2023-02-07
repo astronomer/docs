@@ -218,11 +218,11 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 7. Click **Create resource share**.
 
-#### Contact Astronomer support for rule verification
+### Contact Astronomer support for rule verification
 
 To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
-#### Create a connection to confirm connectivity (optional)
+### Create a connection to confirm connectivity (optional)
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
