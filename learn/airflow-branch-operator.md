@@ -35,7 +35,7 @@ In the following example we use a `choose_branch` function that returns one set 
     groupId= "operator-use-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operators', value: 'traditional'},
+        {label: 'Traditional Operator', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -68,7 +68,7 @@ branching = BranchPythonOperator(
         task_id='branching',
         python_callable=choose_branch,
         op_args=[result]
-    )
+)
 ```
 
 </TabItem>
