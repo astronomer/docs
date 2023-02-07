@@ -3,6 +3,8 @@ sidebar_label: 'AWS'
 title: 'Connect Astro to AWS data sources'
 id: connect-aws
 description: Connect your Astro data plane to AWS.
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 sidebar_custom_props: { icon: 'img/aws.png' }
 ---
 
