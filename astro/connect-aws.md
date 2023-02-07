@@ -239,7 +239,7 @@ To use this solution, make sure Astro can connect to the DNS server using a VPC 
 
 ### Create a connection to confirm connectivity (optional)
 
-When Astronomer support confirms that DNS forwarding was successfully implemented, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+When Astronomer support confirms that DNS forwarding was successfully implemented, you can create a connection to the shared resource. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
 </TabItem>
 
