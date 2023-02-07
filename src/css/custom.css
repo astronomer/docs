@@ -364,8 +364,9 @@ html .DocSearch {
 
 html .DocSearch-Button-Placeholder {
   font-size: 0.85rem;
-  color: #bfafeb;
 }
+
+html .DocSearch-Button-Placeholder,
 html .DocSearch-Button .DocSearch-Search-Icon {
   color: #BFAFEB;
 }
