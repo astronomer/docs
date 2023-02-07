@@ -184,6 +184,15 @@ Astronomer recommends using an external secrets backend to store your AWS access
 
 Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service.
 
+<Tabs
+    defaultValue="Amazon Route 53"
+    groupId="resolving-services"
+    values={[
+        {label: 'Amazon Route 53', value: 'Amazon Route 53'},
+        {label: 'Domain Name System forwarding', value: 'Domain Name System forwarding'},
+    ]}>
+<TabItem value="Amazon Route 53">
+
 ### Amazon Route 53
 
 Use Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises.
@@ -219,6 +228,10 @@ To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a 
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
+</TabItem>
+
+<TabItem value="Domain Name System forwarding">
+
 ### Domain Name System forwarding
 
 You can use Domain Name System (DNS) forwarding as an alternate to using Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. With DNS forwarding, you don't need to share your sensitive data with an external cloud account. To learn more about Amazon Route 53 DNS forwarding, see [Forwarding outbound DNS queries to your network](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-forwarding-outbound-queries.html).
@@ -227,3 +240,11 @@ To use this solution, make sure Astro can connect to the DNS server using a VPC 
 
 - The domain name for forwarding requests
 - The IP address of the DNS server where requests are forwarded
+
+#### Create a connection to confirm connectivity (optional)
+
+When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+
+</TabItem>
+
+</Tabs>
