@@ -5,6 +5,9 @@ description: "An overview of Airflow decorators and how they can improve the DAG
 id: airflow-decorators
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Since Airflow 2.0, decorators have been available for some functions as an alternative DAG authoring experience to traditional operators. In Python, [decorators](https://realpython.com/primer-on-python-decorators/) are functions that take another function as an argument and extend the behavior of that function. In the context of Airflow, decorators provide a simpler, cleaner way to define your tasks and DAG. 
 
 In this guide, you'll learn about the benefits of decorators, the decorators available in Airflow, and decorators provided in the Astronomer open source Astro Python SDK library. You'll also review examples and learn when you should use decorators and how you can combine them with traditional operators in a DAG.
@@ -27,6 +30,52 @@ In general, whether to use decorators is a matter of developer preference and st
 Airflow decorators were introduced as part of the TaskFlow API, which also handles passing data between tasks using XCom and inferring task dependencies automatically. To learn more about the TaskFlow API, check out this [Astronomer webinar](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0) or this Apache Airflow [TaskFlow API tutorial](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html#tutorial-on-the-taskflow-api). 
 
 Using decorators to define your Python functions as tasks is easy. Let's take a before and after example. In the "traditional" DAG below, there is a basic ETL flow with tasks to get data from an API, process the data, and store it.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "decorator-example"
+    values={[
+        {label: 'Decorators', value: 'taskflow'},
+        {label: 'Traditional Operators', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+import logging
+from datetime import datetime
+from typing import Dict
+
+import requests
+from airflow.decorators import dag, task
+
+API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
+
+
+@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
+def taskflow():
+
+    @task(task_id='extract', retries=2)
+    def extract_bitcoin_price() -> Dict[str, float]:
+        return requests.get(API).json()['bitcoin']
+
+    @task(multiple_outputs=True)
+    def process_data(response: Dict[str, float]) -> Dict[str, float]:
+        logging.info(response)
+        return {'usd': response['usd'], 'change': response['usd_24h_change']}
+
+    @task
+    def store_data(data: Dict[str, float]):
+        logging.info(f"Store: {data['usd']} with change {data['change']}")
+
+    store_data(process_data(extract_bitcoin_price()))
+
+taskflow()
+```
+
+</TabItem>
+
+<TabItem value="taskflow">
 
 ```python
 import logging
@@ -71,39 +120,12 @@ with DAG('classic_dag', schedule='@daily', start_date=datetime(2021, 12, 1), cat
     extract_bitcoin_price >> process_data >> store_data
 ```
 
+</TabItem>
+
 You can now rewrite this DAG using decorators, which will eliminate the need to explicitly instantiate `PythonOperators`. 
 
-```python
-import logging
-from datetime import datetime
-from typing import Dict
 
-import requests
-from airflow.decorators import dag, task
-
-API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
-
-
-@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
-def taskflow():
-
-    @task(task_id='extract', retries=2)
-    def extract_bitcoin_price() -> Dict[str, float]:
-        return requests.get(API).json()['bitcoin']
-
-    @task(multiple_outputs=True)
-    def process_data(response: Dict[str, float]) -> Dict[str, float]:
-        logging.info(response)
-        return {'usd': response['usd'], 'change': response['usd_24h_change']}
-
-    @task
-    def store_data(data: Dict[str, float]):
-        logging.info(f"Store: {data['usd']} with change {data['change']}")
-
-    store_data(process_data(extract_bitcoin_price()))
-
-dag = taskflow()
-```
+</Tabs>
 
 The resulting DAG has much less code and is easier to read. Notice that it also doesn't require using `ti.xcom_pull` and `ti.xcom_push` to pass data between tasks. This is all handled by the TaskFlow API when you define your task dependencies with `store_data(process_data(extract_bitcoin_price()))`. 
 
