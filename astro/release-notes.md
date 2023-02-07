@@ -32,7 +32,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 ### Bug fixes
 
 - Removed broken date filtering functionality from the Lineage UI.
-- Fixed an issue where a you could unintentionally turn off DAG deploys on a Deployment by triggering an image deploy from older versions of the Astro CLI.
+- Fixed an issue where a you could unintentionally turn off DAG deploys on a Deployment by triggering an image deploy from an older version of the Astro CLI.
 
 ## January 31, 2023
 
