@@ -186,7 +186,7 @@ Securely connect your Astro data plane to resources running in other VPCs or on-
 
 <Tabs
     defaultValue="Amazon Route 53"
-    groupId="resolving-services"
+    groupId="hostname-resolution-options"
     values={[
         {label: 'Amazon Route 53', value: 'Amazon Route 53'},
         {label: 'Domain Name System forwarding', value: 'Domain Name System forwarding'},
