@@ -19,6 +19,8 @@ An environment variable on Astro is a key-value configuration that is applied to
 - Integrate with Datadog or other third-party tooling to [export Deployment metrics](deployment-metrics.md#export-airflow-metrics-to-datadog).
 - Set [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html?), such as default timezone and maximum active runs per DAG.
 
+You can use Astro environment variables to configure the same keys and values that you would configure as [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/index.html). However, Astro environment variables are stored and managed differently than Airflow variables. See [How environment variables are stored on Astro](#how-environment-variables-are-stored-on-astro).
+
 Some environment variables on Astro are set globally and cannot be overridden for individual Deployments. For more information on these environment variables, see [Global environment variables](platform-variables.md).
 
 ## Set environment variables in the Cloud UI
@@ -113,16 +115,16 @@ On Astro, environment variables are applied and overridden in the following orde
 
 For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence.
 
-## Call environment variables in a DAG
+## Fetch Astro environment variables in a DAG
 
-You can use the following methods to call environment variables in your DAG code:
+To fetch a Deployment environment variable value from a DAG, you must format the variable key as `AIRFLOW_VAR_<VAR_NAME>`.
 
-- `Variable.get('<environment-variable-key>')`
-- `os.getenv('<environment-variable-key>', '<default_value>')`
+You can then use the following Python functions to fetch the variable value in the top level of your DAG code.
 
-If your environment variable contains a secret value, Astronomer recommends using `Variable.get` to ensure that secret values are not present as plain text in your DAG code. However, with this method, requests to the Airflow metadata database can occur every time your DAGs are parsed. Typically, requests occur every 1 to 5 seconds and a significant number of requests could negatively affect database performance. For more information about retrieving Airflow variables using this method, see [Variables](https://airflow.apache.org/docs/apache-airflow/stable/concepts/variables.html).
+- `Variable.get('<VAR_NAME>')`: This method is more secure for fetching secret values. However, this method can inhibit performance because it makes a request Airflow metadata database every time your DAGs are parsed, which can occur every 30 seconds. See [DAG writing best practices](https://docs.astronomer.io/learn/dag-best-practices#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
+- `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. 
 
-For non-secret values, Astronomer recommends using `os.getenv('<environment-variable-key>', '<default_value>')` to reduce the number of Airflow metadata database requests.  Replace `environment-variable-key` with the key for your environment variable on Astro and `default_value` with the default value for the key. Typically, `default_value` is the value you defined for the environment variable in the Cloud UI. When your DAG queries an environment variable that doesn't exist, `default_value` is used.
+    Astronomer does not recommend using `os.getenv` with secret values because calling these values with the function can print them to your logs. Replace `default_value` a default value to use if Airflow can't find the environment variable. Typically, this is the value you defined for the environment variable in the Cloud UI. 
 
 ## Add Airflow connections and variables using environment variables
 
