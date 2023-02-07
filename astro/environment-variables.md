@@ -122,9 +122,9 @@ To fetch a Deployment environment variable value from a DAG, you must format the
 You can then use the following Python functions to fetch the variable value in the top level of your DAG code.
 
 - `Variable.get('<VAR_NAME>')`: This method is more secure for fetching secret values. However, this method can inhibit performance because it makes a request Airflow metadata database every time your DAGs are parsed, which can occur every 30 seconds. See [DAG writing best practices](https://docs.astronomer.io/learn/dag-best-practices#avoid-top-level-code-in-your-dag-file) for more information about avoiding repeated requests in top level code.
-- `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. 
+- `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. Astronomer does not recommend using `os.getenv` with secret values because calling these values with the function can print them to your logs. 
 
-    Astronomer does not recommend using `os.getenv` with secret values because calling these values with the function can print them to your logs. Replace `default_value` a default value to use if Airflow can't find the environment variable. Typically, this is the value you defined for the environment variable in the Cloud UI. 
+    Replace `default_value` a default value to use if Airflow can't find the environment variable. Typically, this is the value you defined for the environment variable in the Cloud UI. 
 
 ## Add Airflow connections and variables using environment variables
 
