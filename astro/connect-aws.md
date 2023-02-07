@@ -154,7 +154,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
 6. Click **Edit trust policy** and update the `arn` value:
 
     ```text {8}
-        {
+    {
         "Version": "2012-10-17",
         "Statement": [
             {
@@ -165,7 +165,7 @@ To grant an Astro cluster access to a service that is running in an AWS account 
                     ]
                 },
                 "Action": "sts:AssumeRole"
-            },
+            }
         ]
     }
     ```
