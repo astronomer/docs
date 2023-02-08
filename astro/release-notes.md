@@ -27,7 +27,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Additional improvements 
 
-- The page for new Astro users who are not yet part of an Organization has been updated to provide more clear first steps.
+- The instructions on the welcome page for new Astro users who are not yet part of an Organization have been improved to make getting started easier.
 
 ### Bug fixes
 
