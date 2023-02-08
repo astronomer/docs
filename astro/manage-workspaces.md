@@ -21,7 +21,7 @@ To create a Workspace, click the **Add Workspace** button from the **Overview** 
 
 During this initial setup, you can configure a Workspace's name and description. All further Workspace configuration is completed in the Workspace view.
 
-## Workspace View
+## Workspace view
 
 To to enter your Workspace, click the Workspace in the **Overview** tab. When you click into a Workspace and see a list of that Workspace's Deployments, you are in the **Workspace view** of the Cloud UI. The Workspace view contains several pages for managing your Workspace which are accessible from a sidebar on the left of the screen:
 
@@ -30,7 +30,7 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 - **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment metrics](deployment-metrics.md#dag-runs).
 - **Workspace Settings:** Update Workspace details, including Workspace user permissions, the Workspace name, and the Workspace description.
 
-## Manage Workspace Users
+## Manage Workspace users
 
 As a Workspace Admin, you can add or remove users from your Workspace at any time. Before adding a user, make sure that the user is an existing member of your Organization. If the user is not, [invite them to Astro](add-user.md#add-a-user-to-an-organization) before following the steps below.
 
@@ -40,7 +40,7 @@ As a Workspace Admin, you can add or remove users from your Workspace at any tim
 
 After adding the user, the user will see the Workspace listed on the **Overview** page of the Cloud UI. They will also appear as an active Workspace member in the **Access** tab. For more information about inviting users to Astronomer, see [Add a user](add-user.md).
 
-### Update or Remove a Workspace User
+### Update or remove a Workspace user
 
 1. In the Cloud UI, select a Workspace.
    
@@ -50,7 +50,9 @@ After adding the user, the user will see the Workspace listed on the **Overview*
 
     ![Edit Workspace user button](/img/docs/edit-workspace-user.png)
 
-4. Edit the user's name or role and then click **Update Member**.
+4. Optional. Edit the user's name and role. 
+   
+5. If you're updating the user's role, click **Update Member**. If you're deleting the user, click **Remove member**.
    
 ## Update Workspace details
 

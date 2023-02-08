@@ -23,11 +23,6 @@ An Organization role grants a user some level of access to an Astro Organization
 | Invite a new user to an Organization                        |                         |                                | ✔️                      |
 | Remove a user from an Organization                          |                         |                                | ✔️                      |
 
-### Update Organization roles
-
-1. In the Cloud UI, click the **People** tab.
-2. Find the user in the table and click **Edit**. The **Members** table lists all users that have been added to a Workspace in your Organization. If you can't find a user, it might be because they haven't been invited to a Workspace or accepted their invite.
-
 ## Workspace roles
 
 A Workspace role grants a user some level of access to a specific Workspace. The following table lists the available Workspace roles:
