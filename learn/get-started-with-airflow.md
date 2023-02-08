@@ -34,7 +34,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 - [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - An integrated development environment (IDE) for Python development, such as [VSCode](https://code.visualstudio.com/).
-- Local installation of [Python 3](https://www.python.org/downloads/) is recommended to improve your local developer experience (e.g. with syntax highlighting), but not strictly necessary to use the Astro CLI.
+- Optional. A local installation of [Python 3](https://www.python.org/downloads/) to improve your Python developer experience.
 
 ## Step 1: Create an Astro project
 
