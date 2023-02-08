@@ -1,4 +1,69 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Release Notes</title><link>https://docs.astronomer.io/astro/release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro.</description><language>en-US</language><item><title>November 15, 2022</title><link>https://docs.astronomer.io/astro/release-notes#november-15-2022</link><description><![CDATA[<h3>Additional improvements</h3><ul>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Release Notes</title><link>https://docs.astronomer.io/astro/release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro.</description><language>en-US</language><item><title>January 31, 2023</title><link>https://docs.astronomer.io/astro/release-notes#january-31-2023</link><description><![CDATA[<h3>Bug fixes</h3><ul>
+<li>When you select <strong>Mark Success</strong> or <strong>Clear</strong> for Deployment task actions in the Airflow UI, you are now correctly redirected to the DAG <strong>Tree</strong> view instead of the <strong>DAGs</strong> homepage.</li>
+<li>Fixed <a href="https://avd.aquasec.com/nvd/2022/cve-2022-41721/">CVE-2022-41721</a>.</li>
+</ul>]]></description></item><item><title>January 24, 2023</title><link>https://docs.astronomer.io/astro/release-notes#january-24-2023</link><description><![CDATA[<h3>New Workspace Home page</h3><p>When you select a Workspace in the Cloud UI, the <strong>Home</strong> page now appears first. On this page, you can:</p><ul>
+<li>Check the status of your Deployments.</li>
+<li>Quickly access your most recently viewed Deployments and Cloud IDE projects.</li>
+<li>View release notes for all Astro products.</li>
+</ul><p><img src="/img/release-notes/workspace-home.png" alt="Workspace home page in the Cloud UI"></p><p>See <a href="https://www.astronomer.io/blog/introducing-astros-new-workspace-homepage/">Introducing Astro’s New Workspace Homepage</a> for more information.</p><h3>Additional improvements</h3><ul>
+<li>Data plane cluster access is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.</li>
+<li>You can now request custom tags for your AWS clusters by submitting a support request to <a href="https://cloud.astronomer.io/support">Astronomer support</a>. You can view your cluster tags in the Cloud UI by selecting <strong>Clusters</strong>, selecting a cluster, and then clicking the <strong>Details</strong> tab. See <a href="view-clusters.md">View clusters</a>.</li>
+<li>You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.</li>
+<li>Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed <a href="https://avd.aquasec.com/nvd/2022/cve-2022-48195/">CVE-2022-48195</a>.</li>
+</ul>]]></description></item><item><title>January 18, 2023</title><link>https://docs.astronomer.io/astro/release-notes#january-18-2023</link><description><![CDATA[<h3>Bug fixes</h3><ul>
+<li>Fixed an issue with Google Cloud Platform (GCP) clusters where the metadata database for a Deployment could persist after the Deployment was deleted.</li>
+</ul>]]></description></item><item><title>January 10, 2023</title><link>https://docs.astronomer.io/astro/release-notes#january-10-2023</link><description><![CDATA[<h3>New Astro Cloud IDE cell types</h3><p>To simplify the creation of new tasks, the following new cell types are now available in the Astro Cloud IDE:</p><ul>
+<li><strong>SQL</strong>: Run a SQL query against an existing database connection and save the query results in an XCom file for use by other cells. Use this cell type to run smaller queries and store the results in Airflow for quick access by other cells.</li>
+<li><strong>Warehouse SQL</strong>: Run a SQL query against an existing database connection and store the query results in your data warehouse. Use this cell type for data operations that require more storage and reliability.</li>
+<li><strong>Markdown</strong>: Add inline Markdown comments to your generated DAG code. Use this cell type to document code decisions and to make it easier for team members to collaborate on shared pipelines.</li>
+</ul><p>For more information about a specific cell type, see <a href="cloud-ide/run-sql.md">Run SQL in the Astro Cloud IDE</a>, <a href="cloud-ide/run-python.md">Run Python in the Cloud IDE</a>, and <a href="cloud-ide/document-pipeline.md">Add documentation to an Astro Cloud IDE pipeline</a>.</p><h3>Additional improvements</h3><ul>
+<li>To reduce the time it takes for Airflow to parse new DAG files, the default value for <code>AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL</code> has been reduced from 5 minutes to 30 seconds for all Deployments regardless of Runtime version. For most users, this means that you will see new DAGs appear in the Airflow UI faster.</li>
+<li>In the Cloud UI, a banner now appears if there is an incident reported on the <a href="https://status.astronomer.io/">Astro status page</a>.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Sorting the <strong>Organization Role</strong> column in the <strong>People</strong> tab of the Cloud UI now works as expected.</li>
+<li>Fixed an issue where lineage groups would occasionally not collapse as expected in the <strong>Lineage Graph</strong> view.</li>
+</ul>]]></description></item><item><title>December 20, 2022</title><link>https://docs.astronomer.io/astro/release-notes#december-20-2022</link><description><![CDATA[<h3>Additional improvements</h3><ul>
+<li>
+<p>You can now configure OneLogin and Ping Identity as identity providers on Astro. See <a href="configure-idp.md#configure-your-identity-provider">Configure your identity provider</a>.</p>
+</li>
+<li>
+<p>Workspace Members can now view <strong>Workspace settings</strong> in the Cloud UI.</p>
+</li>
+<li>
+<p>Node groups that are collapsed in the lineage graph in the Cloud UI now show only the total number of connected <strong>Jobs</strong> and <strong>Datasets</strong>, instead of listing each job and dataset. This makes the lineage graph easier to navigate.</p>
+<p><img src="/img/release-notes/collapsed-lineage-node.png" alt="Collapsed node in lineage graph of Cloud UI"></p>
+</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where the lineage UI did not show dataset metrics when a dataset had no column-level metrics.</li>
+<li>Fixed an issue where some instances of a dataset's name were inconsistent in the lineage UI.</li>
+</ul>]]></description></item><item><title>December 13, 2022</title><link>https://docs.astronomer.io/astro/release-notes#december-13-2022</link><description><![CDATA[<h3>Improvements to the Cloud IDE</h3><p>The <a href="cloud-ide/overview.md">Cloud IDE</a> includes several new features which improve DAG authoring and testing:</p><ul>
+<li>There is a new <strong>Commit</strong> button in the Cloud UI that is separate from the <strong>Configuring GitHub</strong> menu.</li>
+<li>The default CI/CD pipeline included in the Cloud IDE project supports DAG-only deploys. Deploying DAG changes to Astro using the CI/CD pipeline is now significantly faster.</li>
+<li>The <strong>Configure GitHub</strong> menu in the Cloud UI now includes a <strong>Clone Repo</strong> settings menu. Enabling this option makes other files in your GitHub repository, such as helper functions in the <code>include</code> folder of your project, accessible when you run DAGs in the Cloud IDE.</li>
+<li>You can now explicitly mark upstream dependencies for a task cell from the cell's configuration menu.</li>
+</ul><p>For more information about configuring GitHub and deploying code with the Cloud IDE, see <a href="deploy-project.md">Deploy a project from the Cloud IDE to Astro</a>.</p><h3>Support for n2 worker types on GCP</h3><p>You can now configure worker queues with the following <code>n2</code> worker types on Google Cloud Platform (GCP) clusters:</p><ul>
+<li><code>n2-standard-4</code></li>
+<li><code>n2-standard-8</code></li>
+<li><code>n2-standard-16</code></li>
+<li><code>n2-highmem-4</code></li>
+<li><code>n2-highmem-8</code></li>
+<li><code>n2-highmem-16</code></li>
+<li><code>n2-highcpu-4</code></li>
+<li><code>n2-highcpu-8</code></li>
+<li><code>n2-highcpu-16</code></li>
+</ul><p>For more information about these worker types, see <a href="https://cloud.google.com/compute/docs/general-purpose-machines#n2_machines">N2 machine series</a>. For a list of all worker types available on GCP, see <a href="resource-reference-gcp.md#worker-node-size-resource-reference">Worker node size resource reference</a>.</p><h3>Additional improvements</h3><ul>
+<li>In the <strong>Clusters</strong> tab of the Cloud UI, you can now click a cluster entry to see details about the cluster configuration, including which <strong>Worker Types</strong> are enabled for the cluster.</li>
+<li>The Deployment details page in the Cloud UI now includes an <strong>ID</strong> pane. A Deployment ID is required when you deploy code using a CI/CD process.</li>
+<li>The <strong>OpenLineage URL</strong> for your Organization is now available on the <strong>Settings</strong> page in the Cloud UI. An OpenLineage URL is required to <a href="set-up-data-lineage.md">integrate data lineage from some external systems</a>.</li>
+<li>Workspaces are now sorted alphabetically in the Cloud UI.</li>
+<li>In Astro CLI version 1.8.0 or later, running <code>astro deploy</code> with an empty or missing <code>dags</code> folder does not erase or override existing DAGs. Instead, the directory is excluded from the build and push process to Astro. This lets you manage your DAGs and project files in separate repositories when using <a href="deploy-code.md#deploy-dags-only">DAG-only deploys</a>.</li>
+</ul><h3>Bug fixes</h3><ul>
+<li>Fixed an issue where Astro temporarily stored DAGs for DAG-only deploys in a new directory named <code>/usr/local/airflow/dags/current</code>, which could cause import errors in user code.</li>
+<li>Fixed an issue where task runs triggered in the Cloud IDE did not have access to project environment variables.</li>
+<li>Fixed an issue where Deployment metrics for memory usage were not always accurate.</li>
+</ul>]]></description></item><item><title>November 15, 2022</title><link>https://docs.astronomer.io/astro/release-notes#november-15-2022</link><description><![CDATA[<h3>Additional improvements</h3><ul>
 <li>In the Cloud UI, the <strong>People</strong> page now shows the IDs of users belonging to your Organization.</li>
 <li>In the Cloud UI, the <strong>Deployments</strong> page now shows the user or API key that most recently updated each Deployment and when they updated it.</li>
 </ul><h3>Bug fixes</h3><ul>

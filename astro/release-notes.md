@@ -21,7 +21,14 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest Astro Runtime Version**: 7.2.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.9.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.10.0 ([Release notes](cli/release-notes.md))
+
+## January 31, 2023
+
+### Bug fixes 
+
+- When you select **Mark Success** or **Clear** for Deployment task actions in the Airflow UI, you are now correctly redirected to the DAG **Tree** view instead of the **DAGs** homepage.
+- Fixed [CVE-2022-41721](https://avd.aquasec.com/nvd/2022/cve-2022-41721/).
 
 ## January 24, 2023
 
@@ -46,7 +53,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 
 ### Bug fixes 
 
-- Fixed [CVE-2022-48195](https://avd.aquasec.com/nvd/2022/cve-2022-48195/)
+- Fixed [CVE-2022-48195](https://avd.aquasec.com/nvd/2022/cve-2022-48195/).
 
 ## January 18, 2023
 

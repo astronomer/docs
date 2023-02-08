@@ -46,7 +46,7 @@ For example, adding the following receiver to `receivers.platformCritical` would
 alertmanager:
   receivers:
     # Configs for platform alerts
-    platform:
+    platform: 
       email_configs:
         - smarthost: smtp.sendgrid.net:587
           from: <your-astronomer-alert-email@company.com>
@@ -94,7 +94,7 @@ prometheus:
   additionalAlerts:
     # Additional rules for the 'platform' alert group
     # Provide as a block string in yaml list form
-    platform:
+    platform: |
       - alert: ExamplePlatformAlert
         # If greater than 10% task failure
         expr: count(rate(airflow_scheduler_heartbeat{}[1m]) <= 0) > 2

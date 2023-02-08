@@ -311,8 +311,8 @@ There are a limited number of decorators available to use with Airflow, although
 - Python Virtual Env decorator (`@task.virtualenv()`), which runs your Python task in a virtual environment
 - Docker decorator (`@task.docker()`), which creates a `DockerOperator` task
 - TaskGroup decorator (`@task_group()`), which creates a TaskGroup
-- Short circuit decorator (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False
-- Branch decorator (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition
+- [Short circuit decorator](airflow-branch-operator.md#taskshortcircuit-and-shortcircuitoperator) (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False
+- [Branch decorator](airflow-branch-operator.md#taskbranch-and-branchpythonoperator) (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition
 - Kubernetes pod decorator (`@task.kubernetes()`), which runs a KubernetesPodOperator task
 - [Sensor decorator](what-is-a-sensor.md#sensor-decorator) (`@task.sensor()`), which turns a Python funtion into a sensor. This sensor was introduced in Airflow 2.5.
 

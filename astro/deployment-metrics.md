@@ -190,7 +190,15 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 4. Optional. Add the following environment variable if your organization doesn't use the default Datadog site datadoghq.com:
    - **Key:** `DATADOG_SITE`
    - **Value:** `<Your-Datadog-Site>`
-5. Click **Save variable**.
+5. Optional. Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
+
+   - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
+   - **Value** `True`
+
+   - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
+   - **Value** `<key-1>:<value-1>,<key-2>:<value-2>`
+   
+6. Click **Save variable**.
 
 After you complete this setup, Astro automatically launches a sidecar container in your Deployment that runs [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent). This container works with your Deployment's existing infrastructure to export Airflow metrics to the Datadog instance associated with your API key.
 
