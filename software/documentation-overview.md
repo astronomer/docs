@@ -2,28 +2,28 @@
 sidebar_label: 'Documentation overview'
 title: 'Astronomer Software documentation overview'
 id: documentation-overview
-description: A list of all key documents for using and maintaining Astronomer Software.
+description: An overview of the documentation available to install and manage Astronomer Software.
 ---
 
-Use this page to quickly access the most important docs for using and maintaining Astronomer Software.
+Use this reference to learn what documentation resources are available to help you install and manage Astronomer Software.
 
 ## Install Astronomer Software 
 
-Use the following guides as the core reference for configuring a new installation of Astronomer Software
+The following topics will help you install and configure a new Astronomer Software installation: 
 
 - [Install Astronomer on AWS](install-aws.md)
 - [Install Astronomer on GCP](install-gcp.md)
 - [Install Astronomer on Azure](install-azure.md)
 
-Depending on your organization's needs ,use the following docs to complete additional, optional configuration during your installation. 
+The following topics are recommended when your organization needs optional configurations during the Astronomer Software installation: 
 
 - [Generate a self-signed certificate](self-signed-certificate.md)
 - [Renew TLS certificates on Astronomer Software](renew-tls-cert.md)
 - [Install Astronomer on an airgapped system](install-airgapped.md)
 
-## Key DAG author actions
+## DAG authoring
 
-If you primarily write and deploy DAGs, use the following docs as your core reference:
+If you primarily write and deploy DAGs, the following topics can help you get started:
 
 - [Log in to Astronomer Software](log-in-to-software.md)
 - [Create an Astro project](create-project.md)
@@ -31,9 +31,9 @@ If you primarily write and deploy DAGs, use the following docs as your core refe
 - [Set environment variables](environment-variables.md)
 - [Upgrade Airflow](manage-airflow-versions.md)
 
-## Key administrator actions
+## Administration
 
-If you regularly manage users and cloud resources for Astronomer Software, use the following docs as your core reference:
+If you're an Astronomer Software administrator, the following topics can help you get started:
 
 - [Apply a platform configuration changes](apply-platform-config.md)
 - [Manage users on Astronomer Software](workspace-permissions.md)
@@ -42,9 +42,9 @@ If you regularly manage users and cloud resources for Astronomer Software, use t
 - [Configure a Deployment on Astronomer Software](configure-deployment.md)
 - [Upgrade Astronomer](upgrade-astronomer.md)
 
-## Keep up to date on releases and compatibility
+## Keep current
 
-The following docs are frequently updated with the latest release and compatibility information: 
+The following topics are available to help make sure you're aware of the latest Astronomer Software functionality and what's required to run Astronomer Software: 
 
 - [Astronomer Software release notes](release-notes.md)
 - [Version compatibility reference](version-compatibility-reference.md)
