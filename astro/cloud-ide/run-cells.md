@@ -5,11 +5,17 @@ id: run-cells
 description: Execute cells in the Cloud IDE's isolated testing environment to check your code works before running it as a DAG.
 ---
 
-Test your data pipeline as a whole or in parts using the Astro Cloud IDE's dedicated and isolated testing environment. If a cell contains code, you can run it in the IDE.
+Test your data pipeline as a whole or in parts using a dedicated and isolated testing environment in the Astro Cloud IDE. If a cell contains code, you can run it in the IDE.
 
 ## Run a cell
 
-In your pipeline editor, go to a cell and click **Run** to run the cell and check that your code works as expected. 
+1. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
+   
+2. Select a project on the **Projects** page.
+   
+3. Select a pipeline in the **Pipelines** list.
+   
+4. In the pipeline editor, go to a cell and click **Run**. 
 
 ![Running a Cloud IDE cell](/img/cloud-ide/run-cell.png)
 
@@ -21,7 +27,7 @@ When you run a cell, the Cloud IDE sends a request to an isolated worker in the 
 
 ### Run cells with their dependencies
 
-You can run a cell with its upstream or downstream dependencies to test parts of your data pipeline that should run together. To run a cell and either its upstream or downstream dependencies, click the menu next to the **Run** button and select an option.
+You can run a cell with its upstream or downstream dependencies to test parts of your data pipeline that should run together. To run a cell and its upstream or downstream dependencies, click the menu next to **Run** and then select an option.
 
 ![Button to run a cell and its dependencies](/img/cloud-ide/run-dependencies.png)
 
@@ -33,15 +39,17 @@ To test your entire data pipeline in a single run, click **Run** in the top righ
 
 ## Configure a GitHub repo for running cells
 
-You can run your code with additional dependencies that aren't configurable within the Cloud IDE, such as helper functions in an `include` folder, using the Astro Cloud IDE GitHub integration. The Cloud IDE loads files from your GitHub repository into the testing environment so that your cells have access to all required files. 
+You can use the Astro Cloud IDE GitHub integration to run your code with additional dependencies that aren't configurable within the Cloud IDE, such as helper functions in an `include` folder. The Astro Cloud IDE loads files from your GitHub repository into the testing environment so that your cells can access all of the required files. 
 
-1. If you haven't already, deploy your project to GitHub. See [Deploy a project](deploy-project.md).
-2. Open your project in the Astro Cloud IDE. In the **GitHub Repo** pane, click **Configure**.
-3. Configure the following values: 
+1. Deploy your Astro Cloud IDE project to GitHub if you haven't already. See [Deploy a project](deploy-project.md).
+2. In the Cloud UI, select a Workspace and then click **Cloud IDE**.
+3. Select a project on the **Projects** page.
+4. In the **GitHub Repo** pane, click **Configure**.
+5. Configure the following values: 
 
     - **Clone GitHub repo during cell execution**: Click the toggle to allow the Cloud IDE to access your GitHub repository files when executing cells. Turn on this feature if you have cells that depend on helper files, such as helper functions in `include`.
     - **Disable auto sync in favor of manual sync**: Optional. Click the toggle to sync your repository only on a manual basis. When you click the toggle, a button appears in the pane that you can use to manually sync your GitHub repository to your Cloud IDE environment.
 
 ## Troubleshoot cell runs
 
-If you receive the error `Could not connect to cell execution environment` after running a cell, check the [Astro status page](https://status.astronomer.io/) to see whether the Astro control plane is currently experiencing issues. If the control plane is fully operational, contact [Astronomer support](https://cloud.astronomer.io/support) and share the error. Astronomer support might need to set up additional cloud infrastructure for the IDE to enable cell runs. 
+If the error message `Could not connect to cell execution environment` appears after running a cell, check the [Astro status page](https://status.astronomer.io/) to determine the operational status of the Astro control plane. If the control plane is operational, contact [Astronomer support](https://cloud.astronomer.io/support) and share the error. To enable cell runs, Astronomer support might need to set up additional cloud infrastructure for the IDE.

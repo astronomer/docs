@@ -23,7 +23,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 4. Click **Add Cell** and select one of the following options:
 
-    - **SQL**: Runs a SQL query against a provided database connection and persists the results of the query in an XCom for use by other cells.
+    - **SQL**: Runs a SQL query against a provided database connection and stores the results of the query in an XCom for use by other cells.
 
     - **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
 
