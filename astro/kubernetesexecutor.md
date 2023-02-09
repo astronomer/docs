@@ -39,7 +39,7 @@ The Kubernetes executor runs as a process in the Airflow Scheduler. You select a
 
 ## Manage task CPU and memory
 
-Astro automatically allocates resources to Pods created by the Kubernetes executor. Resources used by the Kubernetes executor are not defined with a [Pod template file](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates). Instead, you use the following DAG to define these settings:
+Astro automatically allocates resources to Pods created by the Kubernetes executor. By default, Pods are configured to use 1 cpu and 512Mi.  A `pod_template_file` can't be used on Astro to override the default settings. The following example shows how you can use `pod_override` within a Kubernetes V1pod to override these settings to meet your specific requirements:
 
 ```python {20}
 import pendulum
