@@ -9,11 +9,11 @@ id: kubernetesexecutor
   <meta name="og:description" content="Learn how to run the Kubernetes executor on Astro. This executor dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
 </head>
 
-Like the [KubernetesPodOperator](kubernetespodoperator.md), the [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. In addition, the KubernetesPodOperator and the Kubernetes executor can use the Kubernetes API to create Pods for running tasks. However, the Kubernetes executor is implemented at the configuration level of the Airflow instance, which means a new Kubernetes Pod is created for every task instance. The Kubernetes executor is recommended when you need to control resource optimization.
+Like the [KubernetesPodOperator](kubernetespodoperator.md), the [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. In addition, the KubernetesPodOperator and the Kubernetes executor can use the Kubernetes API to create Pods for running tasks. However, the Kubernetes executor is implemented at the configuration level of the Airflow instance, which means a new Kubernetes Pod is created for every task instance. The Kubernetes executor is recommended when you need: to control resource optimization, fully isolate workloads, or have a work load with long stretches of non-executing tasks. 
+
 
 ## Benefits
 
-- Fault tolerance.  A task that fails doesn't cause other tasks to fail.
 - Run tasks in a Kubernetes cluster outside of the Astro data plane. This can be helpful when you need to run individual tasks on infrastructure that isn't currently supported by Astro, such as GPU nodes or other third-party services.
 - Specify CPU and memory limits or minimums to optimize performance and reduce costs.
 - Task isolation. A task uses only the resources allocated to it and it can't consume resources allocated to other tasks. 
@@ -23,7 +23,7 @@ On Astro, the Kubernetes infrastructure required to run the Kubernetes executor 
 
 ## Known limitations
 
-- Tasks take longer to start and this causes task latency.
+- Tasks take longer to start and have slightly increased execution times. 
 - Cross-account service accounts are not supported on Pods launched in an Astro cluster. To allow access to external data sources, you can provide credentials and secrets to tasks.
 - PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
 - The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, customized values are overridden when they are required by Astronomer and your tasks will fail. Astronomer recommends using `python-kubernetes-sdk`. See [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/).
