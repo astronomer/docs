@@ -29,6 +29,7 @@ module.exports = {
       items: [
         "develop-project",
         "kubernetespodoperator",
+        "kubernetesexecutor",
         {
           type: "category",
           label: "Cloud IDE",
