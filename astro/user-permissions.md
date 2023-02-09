@@ -5,9 +5,14 @@ id: user-permissions
 description: Learn about Astronomer's RBAC system and how to assign roles to users.
 ---
 
-To better protect your data pipelines and cloud infrastructure, Astro provides hierarchical role based access control for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Hierarchical role based access control is not available for Deployments.
+To better protect your data pipelines and cloud infrastructure, Astro provides role based access control for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Role based access control is not available for Deployments.
 
-With hierarchical role based access control, roles inherit permissions from other roles. Users with senior roles have their own permissions in addition to the permissions granted to roles lower in the hierarchy. For example, users with Organization Owner permissions inherit Organization Billing Admin and Organization Member permissions because the roles are lower in the hierarchy. Organization Billing Admins inherit the permissions of Organization Members, but not Organization Owner permissions because the role is higher in the hierarchy. The Astro role hierarchy in order of prominence is: Organization Owner > Organization Billing Admin > Organization Member > Workspace Admin > Workspace Editor > Workspace Viewer.
+Astro has hierarchical role based access control. Within a given Workspace or Organization, users with senior roles have their own permissions in addition to the permissions granted to lower roles. For example, users with Organization Owner permissions inherit Organization Billing Admin and Organization Member permissions because the roles are lower in the hierarchy. 
+
+The Astro role hierarchies in order of inheritance are: 
+
+- Organization Owner > Organization Billing Admin > Organization Member 
+- Workspace Admin > Workspace Editor > Workspace Viewer
 
 ## Organization roles
 
