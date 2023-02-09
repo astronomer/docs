@@ -37,6 +37,53 @@ On Astro, the Kubernetes infrastructure required to run the Kubernetes executor 
 
 The Kubernetes executor runs as a process in the Airflow Scheduler. You select and modify Kubernetes executor settings in the Cloud UI. Astro automatically allocates resources to Pods created by the Kubernetes executor, but you can adjust them to meet your requirements. See [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
 
+## Manage task CPU and memory
+
+Astro automatically allocates resources to Pods created by the Kubernetes executor. Resources used by the Kubernetes executor are not defined with a [Pod template file](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates). Instead, you use the following DAG to define these settings:
+
+```python {20}
+import pendulum
+import time
+
+from airflow import DAG
+from airflow.decorators import task
+from airflow.example_dags.libs.helper import print_stuff
+from kubernetes.client import models as k8s
+
+
+k8s_exec_config_resource_requirements = {
+    "pod_override": k8s.V1Pod(
+        spec=k8s.V1PodSpec(
+            containers=[
+                k8s.V1Container(
+                    name="base",
+                    resources=k8s.V1ResourceRequirements(
+                        requests={"cpu": 0.5, "memory": "1024Mi"},
+                        limits={"cpu": 0.5, "memory": "1024Mi"}
+                    )
+                )
+            ]
+        )
+    )
+}
+
+with DAG(
+    dag_id="example_kubernetes_executor_pod_override_sources",
+    schedule=None,
+    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
+    catchup=False
+) as dag:
+
+    @task(executor_config=k8s_exec_config_resource_requirements)
+    def resource_requirements_override_example():
+        print_stuff()
+        time.sleep(60)
+
+    resource_requirements_override_example()
+```
+
+When this DAG runs, it launches a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
+
 ## Related documentation
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
