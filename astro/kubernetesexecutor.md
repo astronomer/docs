@@ -39,7 +39,7 @@ On Astro, the Kubernetes infrastructure required to run the Kubernetes executor 
 
 ## Set up the Kubernetes executor
 
-The Kubernetes executor runs as a process in the Airflow Scheduler. You can select and modify the Kubernetes executor in the Cloud UI. See [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
+The Kubernetes executor runs as a process in the Airflow Scheduler. You select and modify the Kubernetes executor in the Cloud UI. See [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
 
 ## Related documentation
 
