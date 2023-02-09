@@ -16,7 +16,7 @@ global:
   taskUsageMetricsEnabled: true
 ```
 
-After you set this configuration, Astronomer Software begins to run a cron job for collecting task usage metrics at the 57th minute of every hour, sending them to Astronomer support, and displaying them in the Astronomer UI every. By default, your Astronomer installation retains this data for 90 days. 
+After you set this configuration, Astronomer Software begins to run a cron job for collecting task usage metrics at the 57th minute of every hour, sending them to Astronomer support, and displaying them in the Software UI every. By default, your Astronomer installation retains this data for 90 days. 
 
 ## Set up task usage metrics on a Deployment (_Required only for Astronomer Certified and Astro Runtime < 7.2_)
 
@@ -34,8 +34,8 @@ To install the plug-in on a Deployment using Astronomer Certified or Astro Runti
 
 ## View task usage metrics
 
-Depending on your permissions, you can view task usage metrics for a given installation, Workspace, or Deployment in the Astronomer UI.
+Depending on your permissions, you can view task usage metrics for a given installation, Workspace, or Deployment in the Software UI.
 
-- View an installation's task usage: In the Astronomer UI, go to **System Admin** > **Task Usage**. This page shows total task runs, as well as task runs per Workspace.
-- View a Workspace's task usage: In the Astronomer UI, select a Workspace and go to **Task Usage**. This page shows the Workspace's total task runs, as well as task runs per Deployment.
-- View a Deployment's task usage: In the Astronomer UI, select open a Workspace, select a Deployment in the Workspace, and go to **Task Usage**. This page shows the Deployment's total task runs, as well as task runs per day.
+- View an installation's task usage: In the Software UI, go to **System Admin** > **Task Usage**. This page shows total task runs, as well as task runs per Workspace.
+- View a Workspace's task usage: In the Software UI, select a Workspace and go to **Task Usage**. This page shows the Workspace's total task runs, as well as task runs per Deployment.
+- View a Deployment's task usage: In the Software UI, select open a Workspace, select a Deployment in the Workspace, and go to **Task Usage**. This page shows the Deployment's total task runs, as well as task runs per day.
