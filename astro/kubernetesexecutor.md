@@ -47,6 +47,7 @@ import time
 
 from airflow import DAG
 from airflow.decorators import task
+from airflow.operators.python import PythonOperator
 from airflow.example_dags.libs.helper import print_stuff
 from kubernetes.client import models as k8s
 
@@ -70,9 +71,10 @@ k8s_exec_config_resource_requirements = {
 with DAG(
     dag_id="example_kubernetes_executor_pod_override_sources",
     schedule=None,
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
+    start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
     catchup=False
-) as dag:
+):
+
 
     @task(executor_config=k8s_exec_config_resource_requirements)
     def resource_requirements_override_example():
