@@ -35,7 +35,7 @@ The Astro CLI is open source and built for data practitioners everywhere. The bi
 
 <LinkCardGrid>
   <LinkCard label="Preconfigured project directory" description="An Astro project includes all of the files required to run Airflow, including dedicated folders for your DAGs, packages, and unit tests." />
-  <LinkCard label="Run Airflow locally" description="Using the Astro CLI, you can run a local Airflow environment, apply code changes, and view logs for all Airflow components." />
+  <LinkCard label="Local Airflow environment" description="Using the Astro CLI, you can run a local Airflow environment, apply code changes, and view logs for all Airflow components." />
   <LinkCard label="Example pytests and DAGs" description="The Astro CLI includes example DAGs which showcase important Airflow best practices and help your team learn quickly." />
   <LinkCard label="Browser-based authentication" description="Access browser-based authentication for Astro and Astronomer Software." />
   <LinkCard label="Astro Cloud UI compatible" description="A robust set of commands matches functionality in the Cloud UI, including Deployment creation and user management." />

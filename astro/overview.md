@@ -26,7 +26,7 @@ import AstroCard from '@site/src/components/AstroCard';
 ## Get started
 
 <LinkCardGrid>
-  <LinkCard label="I'm unfamiliar with Astro and Apache Airflow" description="Use tutorials and concepts to learn everything you need to know about Apache Airflow and Astro." href="/learn/overview" icon="/img/airflow-logo.png" />
+  <LinkCard label="I'm unfamiliar with Apache Airflow" description="Use tutorials and concepts to learn everything you need to know about running Airflow." href="/learn/overview" icon="/img/airflow-logo.png" />
   <LinkCard label="I'm ready to create my first project" description="Learn how to create an Astro project and run it locally with the Astro command-line interface (CLI)." href="/astro/create-project" icon="/img/astro-monogram.svg" />
 </LinkCardGrid>
 
@@ -35,5 +35,5 @@ import AstroCard from '@site/src/components/AstroCard';
 <LinkCardGrid>
   <LinkCard truncate label="Develop your Astro project" description="Add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." href="/astro/develop-project" />
   <LinkCard truncate label="Automate code deploys with CI/CD" description="Configure your Airflow environments to run faster and cost less." href="/astro/ci-cd" />
-  <LinkCard truncate label="Deploy code to Astro" description="Use the Astro CLI to push your Astro project and your DAG code to a Deployment" href="/astro/deploy-code" />
+  <LinkCard truncate label="Deploy code to Astro" description="Use the Astro CLI to push your Astro project to a Deployment" href="/astro/deploy-code" />
 </LinkCardGrid>
