@@ -26,6 +26,7 @@ On Astro, the Kubernetes infrastructure required to run the Kubernetes executor 
 
 ## Known limitations
 
+- Tasks take longer to start and this causes task latency
 - Cross-account service accounts are not supported on Pods launched in an Astro cluster. To allow access to external data sources, you can provide credentials and secrets to tasks.
 - PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
 - You cannot run a Kubernetes executor task in a worker queue or node pool that is different than the worker queue of its parent worker. For example, a Kubernetes executor task that is triggered by an `m5.4xlarge` worker on AWS will also be run on an `m5.4xlarge` node. To run a task on a different node instance type, you must launch it in a Kubernetes cluster outside of the Astro data plane. If you need assistance launching Kubernetes executor tasks in external Kubernetes clusters, contact [Astronomer support](https://support.astronomer.io).
@@ -58,7 +59,6 @@ Kubernetes executor(
     get_logs=True,
 )
 ```
-
 For each instantiation of the Kubernetes executor, you must specify the following values:
 
 - `namespace = conf.get("kubernetes", "NAMESPACE")`: Every Deployment runs on its own Kubernetes namespace within a cluster. Information about this namespace can be programmatically imported as long as you set this variable.
@@ -138,85 +138,6 @@ To run a task run the Kubernetes executor that utilizes ephemeral storage:
         volumes=[volume],
     )
     ```
- 
-## Run images from a private registry
-
-By default, the Kubernetes executor expects to pull a Docker image that's hosted publicly on Docker Hub. If you want to execute a Docker image that's hosted in a private registry, you'll need to create a Kubernetes Secret and then specify the Kubernetes Secret in your DAG. If your Docker image is hosted in an Amazon Elastic Container Registry (ECR) repository, see [Docker images hosted in private Amazon ECR repositories](#docker-images-hosted-in-private-amazon-ecr-repositories)
-
-### Prerequisites
-
-- An [Astro project](create-project.md).
-- An [Astro Deployment](configure-deployment-resources.md).
-- Access to a private Docker registry.
-- [kubectl](https://kubernetes.io/docs/reference/kubectl/), the command line tool for Kubernetes.
-
-### Step 1: Create a Kubernetes Secret
-
-To run Docker images from a private registry on Astro, a Kubernetes Secret that contains credentials to your registry must be created. Injecting this secret into your Deployment's namespace will give your tasks access to Docker images within your private registry.
-
-1. Log in to your Docker registry and follow the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#log-in-to-docker-hub) to produce a `/.docker/config.json` file.
-2. In the Cloud UI, select a Workspace and then select the Deployment you want to use the Kubernetes executor with.
-3. Copy the value in the **NAMESPACE** field.
-4. Contact [Astronomer support](https://cloud.astronomer.io/support) and provide the namespace of the Deployment.
-
-Astronomer Support will give you instructions on how to securely send the output of your `/.docker/config.json` file. Do not send this file by email, as it contains sensitive credentials to your registry. Astronomer will use this file to create a Kubernetes secret and inject it into your Deployment's namespace.
-
-### Step 2: Specify the Kubernetes Secret in your DAG
-
-Once Astronomer has added the Kubernetes secret to your Deployment, you will be notified and provided with the name of the secret.
-
-After you receive the name of your Kubernetes secret from Astronomer, you can run images from your private registry by importing `models` from `kubernetes.client` and configuring `image_pull_secrets` in your Kubernetes executor instantiation:
-
-```python {1,5}
-from kubernetes.client import models as k8s
-
-Kubernetes executor(
-    namespace=namespace,
-    image_pull_secrets=[k8s.V1LocalObjectReference("<your-secret-name>")],
-    image="<your-docker-image>",
-    cmds=["<commands-for-image>"],
-    arguments=["<arguments-for-image>"],
-    labels={"<pod-label>": "<label-name>"},
-    name="<pod-name>",
-    task_id="<task-name>",
-    get_logs=True,
-)
-```
-### Docker images hosted in private Amazon ECR repositories
-
-If your Docker image is hosted in an Amazon ECR repository, add a permissions policy to the repository to allow the Kubernetes executor to pull the Docker image. You don't need to create a Kubernetes secret, or specify the Kubernetes secret in your DAG. Docker images hosted on Amazon ECR repositories can only be pulled from AWS clusters.
-
-1. Log in to the Amazon ECR Dashboard and then select **Menu** > **Repositories**.
-2. Click the **Private** tab and then click the name of the repository that hosts the Docker image. 
-3. Click **Permissions** in the left menu.
-4. Click **Edit policy JSON**.
-5. Copy and paste the following policy into the **Edit JSON** pane:
-
-    ```json
-    {
-        "Version": "2008-10-17",
-        "Statement": [
-            {
-                "Sid": "AllowImagePullAstro",
-                "Effect": "Allow",
-                "Principal": {
-                    "AWS": "arn:aws:iam::<AstroAccountID>:root"
-                },
-                "Action": [
-                    "ecr:GetDownloadUrlForLayer",
-                    "ecr:BatchGetImage"
-                ]
-            }
-        ]
-    }
-    ```
-6. Replace `<AstroAccountID>` with your Astro AWS account ID. 
-7. Click **Save** to create a new permissions policy named **AllowImagePullAstro**.
-8. [Set up the Kubernetes executor](#set-up-the-Kubernetes executor).
-9. Replace `<your-docker-image>` in the instantiation of the Kubernetes executor with the Amazon ECR repository URI that hosts the Docker image. To locate the URI:
-
-    - In the Amazon ECR Dashboard, click **Repositories** in the left menu.
-    - Click the **Private** tab and then copy the URI of the repository that hosts the Docker image.
 
 ## Related documentation
 
