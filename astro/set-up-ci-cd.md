@@ -161,8 +161,8 @@ flowchart LR;
     classDef subgraph_padding fill:none,stroke:none
     classDef astro fill:#dbcdf6,stroke:#333,stroke-width:2px;
     id1[Admin's local Astro project]-->|Push project changes|id5[Git repository]
-    id4[DAG author's local Astro project]-->|Push DAG changes|id2[S3 bucket]
-    id2-->|"DAG-only deploy </br>(Lambda function)" | id3[Astro Deployment]
+    id4[DAG author's local Astro project]-->|Push DAG changes|id2[DAG bucket]
+    id2-->|"DAG-only deploy" | id3[Astro Deployment]
     id5-->|"Full project deploy </br> (CI/CD)"|id3
 ```
 
