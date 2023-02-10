@@ -487,7 +487,7 @@ If your Astro project requires additional build-time arguments to build an image
 </TabItem>
 </Tabs>
 
-### Jenkins (Image-only deploys)
+## Jenkins (Image-only deploys)
 
 <Tabs
     defaultValue="jenkinsstandard"
@@ -604,7 +604,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
 </TabItem>
 </Tabs>
 
-### Jenkins (DAG-based deploys)
+## Jenkins (DAG-based deploys)
 
 Use the following template to implement DAG-only deploys with Jenkins.
 
@@ -651,7 +651,7 @@ Use the following template to implement DAG-only deploys with Jenkins.
     }`}</code></pre>
 
 
-### AWS CodeBuild
+## AWS CodeBuild
 
 <Tabs
     defaultValue="awscodebuildstandard"
@@ -748,7 +748,7 @@ Your buildspec.yml file now triggers a code push to an Astro Deployment every ti
 </TabItem>
 </Tabs>
 
-### CircleCI
+## CircleCI
 
 To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
 
@@ -807,11 +807,11 @@ To automate code deploys to a Deployment using [CircleCI](https://circleci.com/)
                     - main
     ```
 
-### Drone
+## Drone
 
 To automate code deploys to a Deployment using a Docker-based [Drone CI](https://www.drone.io/) pipeline, complete the following setup in a Git-based repository that hosts an Astro project.
 
-#### Prerequisites
+### Prerequisites
 
 This pipeline configuration requires:
 
@@ -882,7 +882,7 @@ This pipeline configuration requires:
       - push
     ```
 
-### GitLab
+## GitLab
 
 
 :::info
@@ -992,7 +992,7 @@ When you create environment variables that will be used in multiple branches, yo
 </TabItem>
 </Tabs>
 
-### Bitbucket
+## Bitbucket
 
 To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org/), complete the following setup in a Git-based repository that hosts an Astro project:
 
@@ -1018,7 +1018,7 @@ To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org
     ```
 
 
-### Azure DevOps
+## Azure DevOps
 
 To automate code deploys to a Deployment using [Azure DevOps](https://dev.azure.com/), complete the following setup in a Git-based repository that hosts an Astro project:
 
