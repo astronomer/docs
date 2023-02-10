@@ -126,7 +126,7 @@ For most teams, Astronomer recommends creating a single Git repository for each 
 This strategy is recommended if:
 
 - A single team is responsible for both developing DAGs and maintaining Deployments on Astro.
-- Your don't require a dedicated repository for DAGs across your organization.
+- You don't require a dedicated repository for DAGs across your organization.
 - Less than 30 people interact with or contribute to your Astro project.
   
 #### Multiple repositories
