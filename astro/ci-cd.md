@@ -2,6 +2,8 @@
 sidebar_label: 'CI/CD Templates'
 title: 'Automate code deploys with CI/CD'
 id: ci-cd
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 ---
 
 <head>
@@ -487,7 +489,11 @@ If your Astro project requires additional build-time arguments to build an image
 </TabItem>
 </Tabs>
 
-## Jenkins (Image-only deploys)
+## Deploy with Jenkins
+
+Automate code deploys to a single Deployment, or implement DAG-only deploys with [Jenkins](https://www.jenkins.io/).
+
+### Jenkins (Image-only deploys)
 
 <Tabs
     defaultValue="jenkinsstandard"
@@ -604,7 +610,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
 </TabItem>
 </Tabs>
 
-## Jenkins (DAG-based deploys)
+### Jenkins (DAG-based deploys)
 
 Use the following template to implement DAG-only deploys with Jenkins.
 
