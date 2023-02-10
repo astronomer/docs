@@ -24,12 +24,14 @@ Unlike other tools that directly access the [Kubernetes etcd database](https://k
 
 ## Backup
 
-To recover the Astronomer platform in the case of an incident, there are two main components that need to be backed up:
+To recover the Astronomer platform in the case of an incident, back up the following resources in order of priority:
 
-1. The Kubernetes cluster state
-2. The Astronomer Postgres database
+- The Kubernetes cluster state and Astronomer Postgres database.
+- ElasticSearch, Prometheus, and Alertmanager persistent volume claims (PVCs).
 
-Read below for specific instructions for how to backup both components.
+You should never back up Redis PVCs. Restoring Redis can result in conflicting Airflow and Celery task state information.
+
+Read below for specific instructions for how to backup these components.
 
 ### Kubernetes cluster backup
 

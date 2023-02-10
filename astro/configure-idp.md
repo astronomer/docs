@@ -8,6 +8,14 @@ description: Configure federated authentication from a variety of third party id
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
+import PremiumBadge from '@site/src/components/PremiumBadge';
+
+There are 4 ways users can to authenticate to Astro:
+
+- Basic authentication
+- Google social login
+- GitHub social login
+- 3rd-party identity provider (IdP) login
 
 Identity Providers (IdPs) are services that manage user accounts. As organizations grow, it's common for teams to integrate internal tooling with a third-party IdP. This allows administrators to monitor application access, user permissions, and security policies from a single place. It also makes it easy for individual users to access the tools they need.
 
@@ -28,7 +36,7 @@ This guide provides setup steps for integrating both of these identity providers
 
 :::info
 
-Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in via the [Cloud UI](https://cloud.astronomer.io/). IdP-initiated SSO is coming soon.
+Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in to the [Cloud UI](https://cloud.astronomer.io/).
 
 :::
 
@@ -315,3 +323,11 @@ When a user assigned to the application accesses Astro, they are automatically s
 </TabItem>
 
 </Tabs>
+
+## Restrict authentication options 
+
+<PremiumBadge />
+
+By default, users have access to all possible authentication methods when logging into Astro. You can remove specific authentication options so that users can use only the methods that your team wants to support, such as your third party identity provider.
+
+To restrict which authentication options are available on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).

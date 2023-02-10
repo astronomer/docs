@@ -58,7 +58,7 @@ from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeO
 with DAG(
     's3_to_snowflake',
     start_date=datetime(2020, 6, 1),
-    schedule_interval='@daily',
+    schedule='@daily',
     default_args={
         'retries': 1,
         'retry_delay': timedelta(minutes=5)
@@ -111,7 +111,7 @@ from datetime import datetime, timedelta
 from airflow.decorators import dag, task
 
 @dag(
-    schedule_interval="@daily",
+    schedule="@daily",
     start_date=datetime(2021, 1, 1),
     catchup=False,
     default_args={
@@ -184,7 +184,7 @@ In the previous example, DAG parameters were set within the `@dag()` function ca
 ```python
 @dag(
     'example_dag',
-    schedule_interval="@daily",
+    schedule="@daily",
     start_date=datetime(2021, 1, 1),
     catchup=False,
     default_args={
@@ -196,14 +196,14 @@ In the previous example, DAG parameters were set within the `@dag()` function ca
 These parameters define:
 
 - How the DAG is identified: `example_dag` (provided in this case as a positional argument without the `dag_id` parameter name) and `tags`
-- When the DAG will run: `schedule_interval`
+- When the DAG will run: `schedule`
 - What periods the DAG runs for: `start_date` and `catchup`
 - How failures are handled for all tasks in the DAG: `retries`
 
-Every DAG requires a `dag_id` and a `schedule_interval`. All other parameters are optional. The following parameters are relevant for most use cases:
+Every DAG requires a `dag_id` and a `schedule`. All other parameters are optional. The following parameters are relevant for most use cases:
 
 - `dag_id`: The name of the DAG. This must be unique for each DAG in the Airflow environment. This parameter is required.
-- `schedule_interval`: A timedelta expression defining how often a DAG runs. This parameter is required. If the DAG should only be run on demand, `None` can be provided. Alternatively the schedule interval can be provided as a CRON expression or as a macro like `@daily`.
+- `schedule`: A timedelta expression defining how often a DAG runs. This parameter is required. If the DAG should only be run on demand, `None` can be provided. Alternatively the schedule interval can be provided as a CRON expression or as a macro like `@daily`.
 - `start_date`: The date for which the first DAG run should occur. If a DAG is added after the `start_date`, the scheduler will attempt to backfill all missed DAG runs provided `catchup` (see below) is not set to `False`.
 - `end_date`: The date beyond which no further DAG runs will be scheduled. Defaults to `None`.
 - `catchup`: Whether the scheduler should backfill all missed DAG runs between the current date and the start date when the DAG is added. Defaults to `True`.

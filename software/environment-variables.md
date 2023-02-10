@@ -90,18 +90,18 @@ This should output all environment variables that are running locally, some of w
 
 The CLI will look for `.env` by default, but if you want to specify multiple files, make `.env` a top-level directory and create sub-files within that folder.
 
-In other words,your project might look like the following:
+In other words, your project might look like the following:
 
 ```
 my_project
-  ├── Dockerfile
-  └──  dags
-    └── my_dag
-  ├── plugins
-    └── my_plugin
-  ├── airflow_settings.yaml
-  ├── .env
-    └── dev.env
+├── Dockerfile
+├── dags
+│   └── my_dag
+├── plugins
+│   └── my_plugin
+├── airflow_settings.yaml
+└── .env
+    ├── dev.env
     └── prod.env
 ```
 
@@ -109,11 +109,11 @@ my_project
 
 If you're working on an Astro project locally but intend to deploy to Astronomer and want to commit your environment variables to your source control tool, you can set them in your `Dockerfile`. This file was automatically created when you first initialized your Astro project on Astronomer (via `$ astro dev init`).
 
-> **Note:** Given that this file will be committed upstream, we strongly recommend witholding environment variables containing sensitive credentials from your `Dockerfile` and instead inserting them via your `.env` file locally (while adding the file to your `.gitignore`) or setting them as 'secret' via the Software UI, as described in a dedicated section below.
+> **Note:** Given that this file will be committed upstream, we strongly recommend withholding environment variables containing sensitive credentials from your `Dockerfile` and instead inserting them via your `.env` file locally (while adding the file to your `.gitignore`) or setting them as 'secret' via the Software UI, as described in a dedicated section below.
 
 To add environment variables, insert the value and key in your `Dockerfile` beginning with `ENV`, ensuring all-caps for all characters. With your Airflow image commonly referenced as a "FROM" statement at the top, your Dockerfile might look like this:
 
-```dockerfile
+```docker
 FROM quay.io/astronomer/astro-runtime:7.1.0
 ENV AIRFLOW__CORE__MAX_ACTIVE_RUNS_PER_DAG=1
 ENV AIRFLOW__CORE__DAG_CONCURRENCY=5

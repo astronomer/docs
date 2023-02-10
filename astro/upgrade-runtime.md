@@ -99,7 +99,7 @@ Once you upgrade to a Deployment on Astro to a new version of Astro Runtime, you
 
 ## Confirm your upgrade on Astro
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click **Open Airflow**.
 3. In the Airflow UI, scroll to the bottom of any page. You should see your new Runtime version in the footer:
 

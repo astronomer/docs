@@ -179,7 +179,7 @@ else:
 
 with DAG(
     dag_id='example_kubernetes_pod', 
-    schedule_interval='@once', 
+    schedule='@once', 
     default_args=default_args
 ) as dag:
     KubernetesPodOperator(
@@ -306,7 +306,7 @@ main = do
 
 The Dockerfile creates the necessary environment to run the script and then executes it with a `CMD` command:
 
-```Dockerfile
+```docker
 FROM haskell
 WORKDIR /opt/hello_name
 RUN cabal update
@@ -336,7 +336,7 @@ name = 'your_name'
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_different_language_example_dag'
 ) as dag:
 
@@ -378,7 +378,7 @@ The following example DAG shows an ETL pipeline with an `extract_data` task that
 
 The `transform` task is a KubernetesPodOperator which requires that the XCom data is pushed from the upstream task before it, and then launches an image created with the following Dockerfile:
 
-```dockerfile
+```docker
 FROM python
 
 WORKDIR /
@@ -432,7 +432,7 @@ namespace = conf.get("kubernetes", "NAMESPACE")
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_XComs_example_dag'
 ) as dag:
 
@@ -605,7 +605,7 @@ To access your cluster from a local instance of Apache Airflow, install `awscli`
 
 To access the cluster from Airflow using the Astro CLI, add the following line to your Dockerfile to copy your `config` and `credentials` file from `/include/.aws` into the container:
 
-```dockerfile
+```docker
 COPY --chown=astro:astro include/.aws /home/astro/.aws
 ```
 
@@ -694,7 +694,7 @@ class EKSCreateNodegroupWithNodesOperator(EKSCreateNodegroupOperator):
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_remote_EKS_cluster_example_dag'
 ) as dag:
 

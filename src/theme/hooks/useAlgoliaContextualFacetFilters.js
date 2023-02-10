@@ -17,7 +17,7 @@ export default function useAlgoliaContextualFacetFilters() {
   const currentSoftwareTag = tags.find(tag => tag.includes('software'));
   // limit search results to current docset
  if (currentPath.includes('software')) {
-  tagsFilter = [`docusaurus_tag:${currentSoftwareTag}`,`docusaurus_tag:docs-learn-current`]
+  tagsFilter = [`docusaurus_tag:${currentSoftwareTag}`]
 } else if (currentPath.includes('astro')) {
   tagsFilter = ['docusaurus_tag:docs-default-current', 'docusaurus_tag:docs-learn-current']
  }
@@ -25,7 +25,7 @@ export default function useAlgoliaContextualFacetFilters() {
   tagsFilter = ['docusaurus_tag:docs-default-current', 'docusaurus_tag:docs-learn-current']
  }
  else {
-  tagsFilter = ['docusaurus_tag:docs-default-current', 'docusaurus_tag:docs-learn-current']
+  tagsFilter = ['docusaurus_tag:docs-default-current', 'docusaurus_tag:docs-learn-current', 'docusaurus_tag:docs-software-current']
  }
   return [languageFilter, tagsFilter];
 }

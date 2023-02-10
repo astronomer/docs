@@ -94,7 +94,7 @@ The default GitHub action provided by the Astro Cloud IDE will:
 
 These actions are not dependent on each other, meaning that you can modify the following steps to deploy only a single production or development Deployment. 
 
-1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. A Deployment's ID can be found in the URL when you select the Deployment in the Cloud UI. For example, if your Deployment URL is `https://cloud.astronomer.io/cku7t3fvx59046554xr4g0siv7r/deployments/cl9redx5196158bqytlww0mqz2/analytics`, the Deployment ID is `cl9redx5196158bqytlww0mqz2`.
+1. Identify a Deployment for production and a Deployment for development. Note the Deployment ID for each Deployment. To retrieve a Deployment ID, open your Deployment in the Cloud UI and copy the value in the **ID** section of the Deployment page.
 2. Create a Deployment API key for your Deployments. See [Create an API key](api-keys.md#create-an-api-key). Note the API key and secret for each Deployment.
 3. Configure the following GitHub secrets in your GitHub repository:
    

@@ -50,8 +50,14 @@ Please read the [Docusaurus documentation](https://docusaurus.io/docs/installati
 
 To serve a local version of the docs site with your changes, run:
 
-```console
+```sh
 yarn start
+```
+
+You might also need to install `fs-extra` before you can build the site locally. To install it, run:
+
+```sh
+yarn add fs-extra
 ```
 
 This command both builds and serves your local changes. By default, your local build is accessible at `localhost:3000`. From here, any changes you save in your text editor will render on this local site in real time.

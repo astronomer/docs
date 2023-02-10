@@ -51,7 +51,7 @@ def _store_data(ti):
     data = ti.xcom_pull(task_ids='process_data', key='processed_data')
     logging.info(f"Store: {data['usd']} with change {data['change']}")
 
-with DAG('classic_dag', schedule_interval='@daily', start_date=datetime(2021, 12, 1), catchup=False) as dag:
+with DAG('classic_dag', schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False) as dag:
     
     extract_bitcoin_price = PythonOperator(
         task_id='extract_bitcoin_price',
@@ -84,7 +84,7 @@ from airflow.decorators import dag, task
 API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
 
 
-@dag(schedule_interval='@daily', start_date=datetime(2021, 12, 1), catchup=False)
+@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
 def taskflow():
 
     @task(task_id='extract', retries=2)
@@ -138,7 +138,7 @@ from airflow.operators.email import EmailOperator
 
 API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
 
-@dag(schedule_interval='@daily', start_date=datetime(2021, 12, 1), catchup=False)
+@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
 def taskflow():
 
     @task(task_id='extract', retries=2)
@@ -239,7 +239,7 @@ def create_table():
     );
     """
 
-@dag(start_date=datetime(2021, 12, 1), schedule_interval="@daily", catchup=False)
+@dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
 def example_snowflake_partial_table_with_append():
 
     # Initial load of homes data csv's into Snowflake
@@ -311,8 +311,8 @@ There are a limited number of decorators available to use with Airflow, although
 - Python Virtual Env decorator (`@task.virtualenv()`), which runs your Python task in a virtual environment
 - Docker decorator (`@task.docker()`), which creates a `DockerOperator` task
 - TaskGroup decorator (`@task_group()`), which creates a TaskGroup
-- Short circuit decorator (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False
-- Branch decorator (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition
+- [Short circuit decorator](airflow-branch-operator.md#taskshortcircuit-and-shortcircuitoperator) (`@task.short_circuit()`), which evaluates a condition and skips downstream tasks if the condition is False
+- [Branch decorator](airflow-branch-operator.md#taskbranch-and-branchpythonoperator) (`@task.branch()`), which creates a branch in your DAG based on an evaluated condition
 - Kubernetes pod decorator (`@task.kubernetes()`), which runs a KubernetesPodOperator task
 - [Sensor decorator](what-is-a-sensor.md#sensor-decorator) (`@task.sensor()`), which turns a Python funtion into a sensor. This sensor was introduced in Airflow 2.5.
 

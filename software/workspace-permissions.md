@@ -215,7 +215,7 @@ To edit a user's role using the Astro CLI, run:
 astro deployment user update <email> --deployment-id=<deployment-id> --role=<deployment-role>
 ```
 
-> **Note:** A deployment-level role cannot be edited while a Workspace invitation to that user is pending. If you invite a user to a Workpace, you will not be able to modify their permissions until they accept the Workspace invite.
+> **Note:** A deployment-level role cannot be edited while a Workspace invitation to that user is pending. If you invite a user to a Workspace, you will not be able to modify their permissions until they accept the Workspace invite.
 
 #### Remove Deployment user
 
@@ -253,7 +253,7 @@ Below a Workspace _Admin_, an _Editor_:
 - Cannot manage other users in the Workspace
 - Cannot delete the Workspace
 
-#### Workpace Viewer
+#### Workspace Viewer
 
 A Workspace _Viewer_ is limited to read-only mode. _Viewers_:
 

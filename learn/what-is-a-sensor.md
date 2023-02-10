@@ -73,7 +73,7 @@ def _failure_criteria(record):
         return True if not record else False
 
 @dag(description='DAG in charge of processing partner data',
-     start_date=datetime(2021, 1, 1), schedule_interval='@daily', catchup=False)
+     start_date=datetime(2021, 1, 1), schedule='@daily', catchup=False)
 def partner():
     
     waiting_for_partner = SqlSensor(

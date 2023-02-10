@@ -18,6 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get started',
       items: [
+      'documentation-overview',
       'log-in-to-software',
       'create-project',
       ],
@@ -111,6 +112,7 @@ module.exports = {
           'integrate-auth-system',
           'custom-image-registry',
           'third-party-ingress-controllers',
+          'self-signed-certificate',
           'renew-tls-cert',
           ],
         },

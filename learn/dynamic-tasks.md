@@ -447,7 +447,7 @@ with DAG(
     start_date=datetime(2022, 4, 2),
     catchup=False,
     template_searchpath='/usr/local/airflow/include',
-    schedule_interval='@daily'
+    schedule='@daily'
 ) as dag:
 
     copy_to_snowflake = S3ToSnowflakeOperator.partial(

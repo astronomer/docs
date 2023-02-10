@@ -79,7 +79,7 @@ def my_dependent_tasks():
     return task_a(task_b(task_c()))
 ```
 
-The following DAG shows a full example implementation of the task groupp decorator, including passing data between tasks before and after the task group:
+The following DAG shows a full example implementation of the task group decorator, including passing data between tasks before and after the task group:
 
 ```python
 import json
@@ -87,7 +87,7 @@ from airflow.decorators import dag, task, task_group
 
 import pendulum
 
-@dag(schedule_interval=None, start_date=pendulum.datetime(2021, 1, 1, tz="UTC"), catchup=False)
+@dag(schedule=None, start_date=pendulum.datetime(2021, 1, 1, tz="UTC"), catchup=False)
 
 def task_group_example():
 

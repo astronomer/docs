@@ -15,7 +15,7 @@ Astro operates on a model of shared responsibility, which means that both the As
 
 ## Architecture
 
-Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. It optimizes for security whilst relieving your team of operational overhead. For more information, see [Architecture](overview.md#architecture).
+Astro boasts a hybrid deployment model founded on a control plane hosted by Astronomer and a data plane that is hosted in your cloud environment. It optimizes for security whilst relieving your team of operational overhead. For more information, see [Architecture](astro-architecture.md).
 
 ## Resilience
 

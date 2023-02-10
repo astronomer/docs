@@ -187,10 +187,24 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
    - **Key:** `DATADOG_API_KEY`
    - **Value:** `<Your-Datadog-API-key>`.
    Select the **Secret?** checkbox. This ensures that your Datadog API key is saved securely and is not available to Workspace users in plain text.
-4. Default Datadog site specified in Astro is **datadoghq.com**. Only if you use different one, extra variable has to be created:
+4. Optional. Add the following environment variable if your organization doesn't use the default Datadog site datadoghq.com:
    - **Key:** `DATADOG_SITE`
    - **Value:** `<Your-Datadog-Site>`
-5. Click **Save variable**.
+5. Optional. Add the following environment variables to create [custom Datadog tags](https://docs.datadoghq.com/getting_started/tagging/) associated with your Deployment:
+
+   - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_ENABLED`
+   - **Value** `True`
+
+   - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
+   - **Value** `<key-1>:<value-1>,<key-2>:<value-2>`
+
+  :::info
+  
+  If you're configuring custom Datadog tags for a Deployment using Astro Runtime 5 or earlier, you must additionally add `datadog` to your Astro project `requirements.txt` file.
+  
+  :::
+   
+6. Click **Save variable**.
 
 After you complete this setup, Astro automatically launches a sidecar container in your Deployment that runs [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent). This container works with your Deployment's existing infrastructure to export Airflow metrics to the Datadog instance associated with your API key.
 

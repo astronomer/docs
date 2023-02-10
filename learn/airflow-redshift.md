@@ -88,7 +88,7 @@ from airflow.providers.amazon.aws.operators.redshift_sql import RedshiftSQLOpera
 
 with DAG(
     dag_id=f"example_dag_redshift",
-    schedule_interval="@daily",
+    schedule="@daily",
     start_date=datetime(2008, 1, 1),
     end_date=datetime(2008, 1, 7),
     max_active_runs=1,
@@ -149,7 +149,7 @@ from airflow.providers.amazon.aws.transfers.s3_to_redshift import S3ToRedshiftOp
 
 with DAG(
     dag_id=f"example_dag_redshift",
-    schedule_interval="@daily",
+    schedule="@daily",
     start_date=datetime(2008, 1, 1),
     end_date=datetime(2008, 1, 7),
     max_active_runs=1,
@@ -191,7 +191,7 @@ from airflow.providers.amazon.aws.transfers.redshift_to_s3 import RedshiftToS3Op
 
 with DAG(
     dag_id=f"example_dag_redshift",
-    schedule_interval="@daily",
+    schedule="@daily",
     start_date=datetime(2008, 1, 1),
     end_date=datetime(2008, 1, 7),
     max_active_runs=1,
@@ -246,7 +246,7 @@ from airflow.providers.amazon.aws.sensors.redshift_cluster import RedshiftCluste
 
 with DAG(
     dag_id=f"example_dag_redshift",
-    schedule_interval="@daily",
+    schedule="@daily",
     start_date=datetime(2008, 1, 1),
     end_date=datetime(2008, 1, 7),
     max_active_runs=1,

@@ -102,7 +102,7 @@ with DAG(
     start_date=datetime(2021, 7, 7),
     description="""A sample Airflow DAG to load data from csv files to S3
                  and then Redshift, with data integrity and quality checks.""",
-    schedule_interval=None,
+    schedule=None,
     template_searchpath="/usr/local/airflow/include/sql/redshift_examples/",
     catchup=False,
 ) as dag:

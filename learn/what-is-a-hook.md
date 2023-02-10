@@ -149,7 +149,7 @@ def post_to_slack(sum_check_result):
 # implementing the DAG
 with DAG(dag_id='hook_tutorial',
         start_date=datetime(2022,5,20),
-        schedule_interval='@daily',
+        schedule='@daily',
         catchup=False,
         ) as dag:
 

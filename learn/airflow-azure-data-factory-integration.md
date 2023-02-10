@@ -119,7 +119,7 @@ from airflow.utils.edgemodifier import Label
 with DAG(
     dag_id="example_adf_run_pipeline",
     start_date=datetime(2021, 8, 13),
-    schedule_interval="@daily",
+    schedule="@daily",
     catchup=False,
     default_args={
         "retries": 1,

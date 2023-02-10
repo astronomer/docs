@@ -91,7 +91,7 @@ with DAG(
    "sync_dag",
    start_date=datetime(2021, 12, 22, 20, 0),
    end_date=datetime(2021, 12, 22, 20, 19),
-   schedule_interval="* * * * *",
+   schedule="* * * * *",
    catchup=True,
    max_active_runs=32,
    max_active_tasks=32
@@ -116,7 +116,7 @@ with DAG(
    "async_dag",
    start_date=datetime(2021, 12, 22, 20, 0),
    end_date=datetime(2021, 12, 22, 20, 19),
-   schedule_interval="* * * * *",
+   schedule="* * * * *",
    catchup=True,
    max_active_runs=32,
    max_active_tasks=32
