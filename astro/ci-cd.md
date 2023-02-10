@@ -489,9 +489,9 @@ If your Astro project requires additional build-time arguments to build an image
 </TabItem>
 </Tabs>
 
-## Deploy with Jenkins
+## Jenkins
 
-Automate code deploys to a single Deployment, or implement DAG-only deploys with [Jenkins](https://www.jenkins.io/).
+You can automate code deploys to a single Deployment (image-only), or implement DAG-only deploys with [Jenkins](https://www.jenkins.io/).
 
 ### Jenkins (Image-only deploys)
 
