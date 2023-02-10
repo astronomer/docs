@@ -86,19 +86,29 @@ These metrics contain information about your Deployment's configured [Airflow po
 
 ## Deployment health
 
-Deployment health appears as a real-time status at the top of your Deployment's information page. Deployment health is meant to show whether or not the most important components within your Deployment are running as expected.
+When you create a Deployment in the Cloud UI, a confirmation message appears indicating that it's in progress:
+
+![Deployment creation confirmation](/img/docs/deployment-creation-message.png)
+
+Selecting the **Deployments** link returns you to the Deployments page where a pulsating, blue background and the status message **Creating** are used to indicate that Deployment creation is in progress:
+
+![Deployment creation progress](/img/docs/deployment-creation-progress.png)
+
+When the Deployment is created, its real-time health status appears at the top of the Deployment information page. Deployment health indicates if the components within your Deployment are running as expected.
 
 ![Deployment Health status](/img/docs/deployment-health.png)
 
-Deployment health can have one of two statuses:
+The following are the available Deployment health statuses:
 
+- **Creating** (Grey): The Deployment is being created.
 - **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
 - **Unhealthy** (Red): This status can mean one of two things:
 
     - Your Deployment was recently created and the Airflow webserver and scheduler are still spinning up.
     - Your Deployment's webserver and/or scheduler are restarting or otherwise not in a healthy, running state.
+- **Unknown** (Grey): The Deployment status can't be determined.
 
-If your Deployment is unhealthy, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, [review the scheduler logs](view-logs.md#view-airflow-scheduler-logs) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/support).
+If your Deployment is unhealthy or the status can't be determined, check the status of your tasks and wait for a few minutes. If your Deployment is unhealthy for more than five minutes, [review the scheduler logs](view-logs.md#view-airflow-scheduler-logs) in the Cloud UI or contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Deployment overview
 
