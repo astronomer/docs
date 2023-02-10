@@ -90,7 +90,7 @@ When you create a Deployment in the Cloud UI, a confirmation message appears ind
 
 ![Deployment creation confirmation](/img/docs/deployment-creation-message.png)
 
-Selecting the **Deployments** link returns you to the Deployments page where a pulsating, blue background and the status message **Creating** are used to indicate that Deployment creation is in progress:
+Selecting the **Deployments** link returns you to the **Deployments** page where a pulsating, blue background and the status message **Creating** are used to indicate that Deployment creation is in progress:
 
 ![Deployment creation progress](/img/docs/deployment-creation-progress.png)
 
