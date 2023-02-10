@@ -9,7 +9,7 @@ id: kubernetesexecutor
   <meta name="og:description" content="Learn how to run the Kubernetes executor on Astro. This executor dynamically launches a Pod in Kubernetes for each task and terminates each Pod when the task is complete." />
 </head>
 
-Like the [KubernetesPodOperator](kubernetespodoperator.md), the [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. In addition, the KubernetesPodOperator and the Kubernetes executor can use the Kubernetes API to create Pods for running tasks. However, the Kubernetes executor is implemented at the configuration level of the Airflow instance, which means a new Kubernetes Pod is created for every task instance. The Kubernetes executor is recommended when you need to control resource optimization.
+Like the [KubernetesPodOperator](kubernetespodoperator.md), the [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. In addition, the KubernetesPodOperator and the Kubernetes executor can use the Kubernetes API to create Pods for running tasks. However, the Kubernetes executor is implemented at the configuration level of the Airflow instance, which means a new Kubernetes Pod is created for every task instance. The Kubernetes executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
 
 ## Benefits
 
