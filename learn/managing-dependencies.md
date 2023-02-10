@@ -9,7 +9,7 @@ id: managing-dependencies
   <meta name="og:description" content="Learn how to manage dependencies between tasks and TaskGroups in Apache Airflow, including how to set dynamic dependencies." />
 </head>
 
-[Dependencies](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#relationships) are a powerful and popular Airflow feature. In Airflow, your pipelines are defined as Directed Acyclic Graphs (DAGs). Each task is a node in the graph and dependencies are the directed edges that determine how to move through the graph. Because of this, dependencies are key to following data engineering best practices because they help you define flexible pipelines with atomic tasks.
+[Dependencies](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#relationships) are a powerful and popular Airflow feature. In Airflow, your pipelines are defined as Directed Acyclic Graphs (DAGs). Each task is a node in the graph and dependencies are the directed edges that determine how to move through the graph. Because of this, dependencies are key to following data engineering best practices because they help you define flexible pipelines with atomic tasks.
 
 Throughout this guide, the following terms are used to describe task dependencies:
 
@@ -154,7 +154,7 @@ This image shows the resulting DAG:
 
 ## Task group dependencies
 
-[Task groups](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#taskgroups) are a UI-based grouping concept available in Airflow 2.0 and later. For more information on task groups, including how to create them and when to use them, see [Using Task Groups in Airflow](task-groups.md).
+[Task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) are a UI-based grouping concept available in Airflow 2.0 and later. For more information on task groups, including how to create them and when to use them, see [Using Task Groups in Airflow](task-groups.md).
 
 When working with task groups, it is important to note that dependencies can be set both inside and outside of the group. For example, in the following DAG code there is a start task, a task group with two dependent tasks, and an end task that needs to happen sequentially. The dependencies between the two tasks in the task group are set within the task group's context (`t1 >> t2`). The dependencies between the task group and the start and end tasks are set within the DAG's context (`t0 >> tg1 >> t3`).
 
@@ -181,7 +181,7 @@ This image shows the resulting DAG:
 
 ## TaskFlow API dependencies
 
-The [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/concepts/taskflow.html), available in Airflow 2.0 and later, lets you turn Python functions into Airflow tasks using the `@task` decorator. 
+The [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html), available in Airflow 2.0 and later, lets you turn Python functions into Airflow tasks using the `@task` decorator. 
 
 If your DAG has only Python functions that are all defined with the decorator, invoke Python functions to set dependencies. For example, in the following DAG there are two dependent tasks, `get_a_cat_fact` and `print_the_cat_fact`. To set the dependencies, you invoke the function `print_the_cat_fact(get_a_cat_fact())`:
 
@@ -269,7 +269,7 @@ with DAG('sagemaker_model',
 
 ## Trigger rules
 
-When you set dependencies between tasks, the default Airflow behavior is to run a task only when all upstream tasks have succeeded. You can use [trigger rules](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#concepts-trigger-rules) to change this default behavior.
+When you set dependencies between tasks, the default Airflow behavior is to run a task only when all upstream tasks have succeeded. You can use [trigger rules](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#trigger-rules) to change this default behavior.
 
 The following options are available:
 

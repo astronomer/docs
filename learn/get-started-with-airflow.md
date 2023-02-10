@@ -114,7 +114,7 @@ After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG
 
 ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
 
-These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
+These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
 
 ## Step 5: Explore the Airflow UI
 

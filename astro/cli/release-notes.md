@@ -604,7 +604,7 @@ For users making quick and continuous changes to an Astro project locally, the A
 
 ### Support for the triggerer in local Airflow environments
 
-The Astro CLI now supports the Apache Airflow [triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
+The Astro CLI now supports the Apache Airflow [triggerer component](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html?) in a local environment. This means that you can test DAGs that use [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators) locally before pushing them to a Deployment on Astronomer. Additionally, triggerer logs appear alongside webserver and scheduler logs when you run `astro dev logs`.
 
 The triggerer will only be created in local environments running Astro Runtime 4.0.0+.
 

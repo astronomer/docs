@@ -5,7 +5,7 @@ id: deferrable-operators
 description: Run deferrable operators to improve performance and and reduce costs.
 ---
 
-[Apache Airflow 2.2](https://airflow.apache.org/blog/airflow-2.2.0/) introduced [**deferrable operators**](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), a powerful type of Airflow operator that's optimized for lower resource costs and improved performance. In Airflow, it's common to use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/concepts/sensors.html) and some [operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/operators.html) to configure tasks that wait for some external condition to be met before executing or triggering another task. While tasks using standard operators and sensors take up a worker slot when checking if an external condition has been met, deferrable operators suspend themselves during that process. This releases the worker to take on other tasks.
+[Apache Airflow 2.2](https://airflow.apache.org/blog/airflow-2.2.0/) introduced [**deferrable operators**](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html), a powerful type of Airflow operator that's optimized for lower resource costs and improved performance. In Airflow, it's common to use [sensors](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) and some [operators](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/operators.html) to configure tasks that wait for some external condition to be met before executing or triggering another task. While tasks using standard operators and sensors take up a worker slot when checking if an external condition has been met, deferrable operators suspend themselves during that process. This releases the worker to take on other tasks.
 
 Deferrable operators rely on a new Airflow component called the triggerer, which can be enabled on Astronomer Software. To ensure that you can test your DAGs locally, the triggerer is also built into the Astro CLI.
 
@@ -31,7 +31,7 @@ Tasks that are defined with a deferrable operator run according to the following
 - The triggerer runs the task's Trigger periodically to check whether the condition has been met.
 - Once the Trigger condition succeeds, the task is again queued by the Scheduler. This time, when the task is picked up by a worker, it begins to complete its main function.
 
-For more information on how deferrable operators work and how to use them, see the [Airflow Guide for Deferrable operators](deferrable-operators.md) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html).
+For more information on how deferrable operators work and how to use them, see the [Airflow Guide for Deferrable operators](deferrable-operators.md) or the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html).
 
 ## Astro Runtime prerequisites
 

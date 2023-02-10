@@ -69,7 +69,7 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
 
 ### Pools
 
-These metrics contain information about your Deployment's configured [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html). They can give you insight into how your DAGs are handling concurrency.
+These metrics contain information about your Deployment's configured [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html). They can give you insight into how your DAGs are handling concurrency.
 
 ![Pool analytics in the Cloud UI](/img/docs/analytics-pools.png)
 
@@ -129,7 +129,7 @@ The bolded value above the graph denotes the total number of DAG runs that have 
 
 ### Task instances
 
-The **Tasks** chart records successful and failed task instances over hour-long intervals. A [task instance](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#task-instances) is defined as an instantiation of a task at a specific point in time.
+The **Tasks** chart records successful and failed task instances over hour-long intervals. A [task instance](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) is defined as an instantiation of a task at a specific point in time.
 
 You can hover over each bar to see the corresponding hour interval displayed in both UTC and your local timezone. Below that, you can see the number of successful and failed task instances. If a bar is partially or fully red, it means that one or more task instances failed within that hour interval.
 

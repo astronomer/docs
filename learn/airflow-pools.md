@@ -5,7 +5,7 @@ description: "Use pools to control Airflow task parallelism."
 id: airflow-pools
 ---
 
-One of the benefits of Apache Airflow is that it is built to scale. With the right supporting infrastructure, you can run many tasks in parallel seamlessly. Unfortunately, horizontal scalability also necessitates some guardrails. For example, you might have many tasks that interact with the same source system, such as an API or database, that you don't want to overwhelm with requests. Airflow [pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html) are designed for exactly this use case.
+One of the benefits of Apache Airflow is that it is built to scale. With the right supporting infrastructure, you can run many tasks in parallel seamlessly. Unfortunately, horizontal scalability also necessitates some guardrails. For example, you might have many tasks that interact with the same source system, such as an API or database, that you don't want to overwhelm with requests. Airflow [pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html) are designed for exactly this use case.
 
 Pools allow you to limit parallelism for an arbitrary set of tasks, allowing you to control when your tasks are run. They are often used in cases where you want to limit the number of parallel tasks that do a certain thing. For example, tasks that make requests to the same API or database, or tasks that run on a GPU node of a Kubernetes cluster.
 
@@ -46,7 +46,7 @@ When tasks are assigned to a pool, they are scheduled as normal until all of the
 
 If you assign a task to a pool that doesn't exist, then the task isn't scheduled when the DAG runs. There are currently no errors or checks for this in the Airflow UI, so be sure to double check the name of the pool that you're assigning a task to.
 
-You can control which tasks within the pool are run first by assigning [priority weights](https://airflow.apache.org/docs/apache-airflow/stable/concepts/priority-weight.html#concepts-priority-weight). These are assigned at the pool level with the `priority_weights` parameter. The values can be any arbitrary integer (the default is 1), and higher values get higher priority in the executor queue.
+You can control which tasks within the pool are run first by assigning [priority weights](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/priority-weight.html). These are assigned at the pool level with the `priority_weights` parameter. The values can be any arbitrary integer (the default is 1), and higher values get higher priority in the executor queue.
 
 For example, in the DAG snippet below `task_a` and `task_b` are both assigned to the `single_task_pool` which has one slot. `task_b` has a priority weight of 2, while `task_a` has the default priority weight of 1. Therefore, `task_b` is executed first.
 
