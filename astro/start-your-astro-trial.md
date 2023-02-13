@@ -105,22 +105,26 @@ After you create your Organization and Workspace, Astro opens the homepage for y
         ```sh
         az login
         ```
+
     2. Run the following command to select your Azure subscription:
     
         ```sh
         az account set -s <subscription-id>
         ```
+
     3. Run the following command to add the Astronomer Service Principal to Azure AD:
     
         ```sh
         az ad sp create --id a67e6057-7138-4f78-bbaf-fd9db7b8aab0
         ```
+
     4. Run the following commands to get details about the Azure subscription and create a new role assignment for the Astronomer service principal:
     
         ```sh
         subid=$(az account show --query id --output tsv)
         az role assignment create --assignee a67e6057-7138-4f78-bbaf-fd9db7b8aab0 --role Owner --scope /subscriptions/$subid
         ```
+
     5. Run the following commands to register the `EncryptionAtHost` feature:
     
         ```sh
