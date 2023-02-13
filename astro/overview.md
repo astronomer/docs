@@ -23,17 +23,17 @@ import AstroCard from '@site/src/components/AstroCard';
   <LinkCard topIcon label="Automate with CI/CD" description="Push code to Astro using templates for popular CI/CD tools." href="/astro/ci-cd" icon="/img/automation.svg" />
 </LinkCardGrid>
 
-## Not sure where to start?
+## Get started
 
 <LinkCardGrid>
-  <LinkCard label="Get started with Apache Airflow" description="Learn how to run Apache Airflow locally with open source tools." href="/learn/get-started-with-airflow" icon="/img/airflow-logo.png" />
-  <LinkCard label="Write a DAG with the Astro Python SDK" description="Learn how to write an ETL pipeline with the Astro Python SDK." href="/learn/astro-python-sdk" icon="/img/astro-monogram.svg" />
+  <LinkCard label="I'm unfamiliar with Apache Airflow" description="Use tutorials and concepts to learn everything you need to know about running Airflow." href="/learn/overview" icon="/img/airflow-logo.png" />
+  <LinkCard label="I'm ready to create my first project" description="Learn how to create an Astro project and run it locally with the Astro command-line interface (CLI)." href="/astro/create-project" icon="/img/astro-monogram.svg" />
 </LinkCardGrid>
 
 ## Featured Astro docs
 
 <LinkCardGrid>
-  <LinkCard truncate label="Create a project" description="Create all of the necessary files to run Airflow locally or on Astro." href="/astro/create-project" />
-  <LinkCard truncate label="Configure Deployment resources" description="Fine-tune your Airflow environments to run faster and cost less." href="/astro/ci-cd" />
-  <LinkCard truncate label="Add and remove Astro users" description="Manage your team's roles and permissions on Astro." href="/astro/add-user" />
+  <LinkCard truncate label="Develop your Astro project" description="Add Airflow dependencies and customize an Astro project to meet the unique requirements of your organization." href="/astro/develop-project" />
+  <LinkCard truncate label="Automate code deploys with CI/CD" description="Configure your Airflow environments to run faster and cost less." href="/astro/ci-cd" />
+  <LinkCard truncate label="Deploy code to Astro" description="Use the Astro CLI to push your Astro project to a Deployment" href="/astro/deploy-code" />
 </LinkCardGrid>

@@ -4,32 +4,31 @@ from datetime import datetime
 import requests
 import json
 
-url = 'http://catfact.ninja/fact'
+url = "http://catfact.ninja/fact"
 
-default_args = {
-    'start_date': datetime(2021, 1, 1)
-}
+default_args = {"start_date": datetime(2021, 1, 1)}
 
-@dag('xcom_taskflow_dag', schedule='@daily', default_args=default_args, catchup=False)
+
+@dag("xcom_taskflow_dag", schedule="@daily", default_args=default_args, catchup=False)
 def taskflow():
-
     @task
     def get_a_cat_fact():
         """
         Gets a cat fact from the CatFacts API
         """
         res = requests.get(url)
-        return{'cat_fact': json.loads(res.text)['fact']}
+        return {"cat_fact": json.loads(res.text)["fact"]}
 
     @task
     def print_the_cat_fact(cat_fact: str):
         """
         Prints the cat fact
         """
-        print('Cat fact for today:', cat_fact)
-        #run some further cat analysis here
+        print("Cat fact for today:", cat_fact)
+        # run some further cat analysis here
 
     # Invoke functions to create tasks and define dependencies
     print_the_cat_fact(get_a_cat_fact())
+
 
 dag = taskflow()

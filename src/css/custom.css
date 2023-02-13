@@ -364,15 +364,19 @@ html .DocSearch {
 
 html .DocSearch-Button-Placeholder {
   font-size: 0.85rem;
-  color: #6E6F73;
 }
+
+html .DocSearch-Button-Placeholder,
 html .DocSearch-Button .DocSearch-Search-Icon {
   color: #BFAFEB;
 }
 
 .DocSearch-Button:active .DocSearch-Search-Icon,
 .DocSearch-Button:focus .DocSearch-Search-Icon,
-.DocSearch-Button:hover .DocSearch-Search-Icon {
+.DocSearch-Button:hover .DocSearch-Search-Icon,
+.DocSearch-Button:active .DocSearch-Button-Placeholder,
+.DocSearch-Button:focus .DocSearch-Button-Placeholder,
+.DocSearch-Button:hover .DocSearch-Button-Placeholder, {
   color: black;
 }
 

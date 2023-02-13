@@ -18,6 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get started',
       items: [
+      'documentation-overview',
       'log-in-to-software',
       'create-project',
       ],
@@ -99,6 +100,7 @@ module.exports = {
           'grafana-metrics',
           'kibana-logging',
           'platform-alerts',
+          'task-usage-metrics',
           'logs-to-s3',
           'export-task-logs',
           ],
