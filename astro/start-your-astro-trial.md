@@ -1,5 +1,4 @@
 ---
-sidebar_label: 'Start your trial'
 title: 'Start your Astro trial'
 id: start-your-astro-trial
 ---
@@ -62,7 +61,7 @@ After you create your Organization and Workspace, Astro opens the homepage for y
    
 8. Click **Create cluster**. 
    
-9. Wait for Astronomer to finish provisioning the cluster. You'll receive a notification from your user email once the process is complete. 
+9. Wait for Astronomer to finish creating the cluster. You'll receive a notification from your user email once the process is complete. 
 
 </TabItem>
 <TabItem value="gcp">
@@ -81,14 +80,14 @@ After you create your Organization and Workspace, Astro opens the homepage for y
    
 7. Click **Create cluster**. 
    
-8. Wait for Astronomer to finish provisioning the cluster. You'll receive a notification from your user email once the process is complete. 
+8. Wait for Astronomer to finish creating the cluster. You'll receive a notification from your user email once the process is complete. 
 
 </TabItem>
 <TabItem value="azure">
 
-1. Create a dedicated [Azure subscription](https://learn.microsoft.com/en-us/dynamics-nav/how-to--sign-up-for-a-microsoft-azure-subscription) for Astro. Astro uses this account to provision and manage your cluster resources. The subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview). Copy the subscription ID for step
+1. Create a dedicated [Azure subscription](https://learn.microsoft.com/en-us/dynamics-nav/how-to--sign-up-for-a-microsoft-azure-subscription) for Astro. Astro uses this account to provision and manage your cluster resources. The subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview). Copy the subscription ID for step 5.
 
-2. In the Azure portal for your subscription, find and copy your [Azure Tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant#find-tenant-id-through-the-azure-portal) for step x.
+2. In the Azure portal for your subscription, find and copy your [Azure Tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant#find-tenant-id-through-the-azure-portal) for step 4.
 
 3. Grant Astronomer access to your Azure subscription through either the Azure CLI or Powershell.
 
@@ -184,7 +183,35 @@ After you create your Organization and Workspace, Astro opens the homepage for y
     </TabItem>
     </Tabs>
 
+4. Back on the cluster creation screen in the Cloud UI, enter your Azure Tenant ID in **Azure Tenant ID**.
+
+5. Enter your Azure Subscription ID in **Azure Subscription ID**.
+   
+6. In **Region**, select the region that you want to host your cluster in. For trials, Astronomer recommends choosing the region that's closest to you.
+   
+7. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your Azure subscription through VPC peering. 
+   
+8. Click **Create cluster**. 
+   
+9. Wait for Astronomer to finish creating the cluster. You'll receive a notification from your user email once the process is complete. 
 
 </TabItem>
 </Tabs>
+
+## Deploy DAGs to Astro 
+
+After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro! Follow these steps to get your first DAG up and running on Astro in under 30 minutes. 
+
+1. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is Astronomer's command line interface for testing Airflow both locally and on Astro.
+2. [Create an Astro project](create-project.md). An Astro project contains all of the files you need to run Airflow, including example DAGs.
+3. [Create a Deployment](create-deployment.md). A Deployment is Astronomer's mechanism for managing an Airflow deployment in your cluster.
+4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to deploy code in just a few minutes. 
+
+## Next steps
+
+After you get the hang of deploying code to Astro, see the following documentation for more information about Astro features and tools:
+
+- [Astro Cloud IDE quickstart](cloud-ide/quickstart.md): Learn how to use Astro's IDE to write data pipelines directly in the Cloud UI. For a more advanced introduction, see the [Write and schedule a simple ML pipeline using the Astro Cloud IDE](https://docs.astronomer.io/learn/cloud-ide-tutorial).
+- [Set up CI/CD](set-up-ci-cd.md): Learn how you can use the Astro CLI to automate code deploys to Astro. 
+- [Manage environment variables](environment-variables.md): Use the Cloud UI to set both OS-level configurations and Airflow variables on your Deployment.
 
