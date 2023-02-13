@@ -48,7 +48,7 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
 
 5. Click **Create Deployment**.
 
-    The initial status of all new Deployments is `UNHEALTHY`. This indicates that the webserver and scheduler for the Deployment are being created in your Astro cluster. In a few minutes, the status changes to `HEALTHY`.
+    A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page where a pulsating background and the status message **Creating** are used to indicate that Deployment creation is in progress. For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
 
 ## Next steps
 
