@@ -78,7 +78,7 @@ Release date: December 7, 2022
 
 ### View and export task usage metrics
 
-You can now view and export task usage metrics from the Software UI.
+You can now view task usage metrics from the Software UI.
 
 Task usage metrics provide an overview of your Airflow task runs and can help you quickly identify Deployments where more tasks are running or failing than expected. 
 
