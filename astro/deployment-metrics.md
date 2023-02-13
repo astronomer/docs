@@ -100,7 +100,7 @@ After you create a Deployment, its real-time health status appears at the top of
 
 The following are the possible Deployment health statuses:
 
-- **Creating** (Grey): Astro is still provisioning the resources for the Deployment. It is not yet available to run DAGs.
+- **Creating** (Grey): Astro is still provisioning the resources for the Deployment. It is not yet available to run DAGs. See [Create a Deployment](create-deployment.md).
 - **Deploying** (Grey): A code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
 - **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
 - **Unhealthy** (Red): Your Deployment webserver or scheduler are restarting or otherwise not in a healthy, running state.
