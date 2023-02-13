@@ -184,7 +184,9 @@ Astronomer recommends using an external secrets backend to store your AWS access
 
 ## Hostname resolution options
 
-Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service.
+Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service. 
+
+Using Route 53 requires sharing a resolver rule with your Astro account. If this is a security concern, Astronomer recommends using Domain Name System (DNS) forwarding.
 
 <Tabs
     defaultValue="Shared resolver rule"
@@ -232,16 +234,16 @@ When Astronomer support confirms that the Amazon Route 53 Resolver rule was succ
 
 <TabItem value="Domain Name System forwarding">
 
-You can use Domain Name System (DNS) forwarding as an alternate to using Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. With DNS forwarding, you don't need to share your sensitive data with an external cloud account. To learn more about DNS forwarding, see [Forwarding outbound DNS queries to your network](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-forwarding-outbound-queries.html).
+Use Domain Name System (DNS) forwarding to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. Unlike Route 53, you don't need to share sensitive configuration data with your Astro account. To learn more about DNS forwarding, see [Forwarding outbound DNS queries to your network](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-forwarding-outbound-queries.html).
 
 To use this solution, make sure Astro can connect to the DNS server using a VPC peering or transit gateway connection and then submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the following information:
 
 - The domain name for forwarding requests
 - The IP address of the DNS server where requests are forwarded
 
-### Create a connection to confirm connectivity (optional)
+### Create an Airflow connection to confirm connectivity (optional)
 
-When Astronomer support confirms that DNS forwarding was successfully implemented, you can create a connection to the shared resource. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+When Astronomer support confirms that DNS forwarding was successfully implemented, you can confirm that it works by creating an Airflow connection to a resource running in a VPC or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
 </TabItem>
 
