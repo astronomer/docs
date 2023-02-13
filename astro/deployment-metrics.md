@@ -86,21 +86,13 @@ These metrics contain information about your Deployment's configured [Airflow po
 
 ## Deployment health
 
-When you create a Deployment in the Cloud UI, a confirmation message appears indicating that it's in progress:
-
-![Deployment creation confirmation](/img/docs/deployment-creation-message.png)
-
-Selecting the **Deployments** link returns you to the **Deployments** page where a pulsating background and the status message **Creating** are used to indicate that Deployment creation is in progress:
-
-![Deployment creation progress](/img/docs/deployment-creation-progress.png)
-
 After you create a Deployment, its real-time health status appears at the top of the Deployment information page. Deployment health indicates if the components within your Deployment are running as expected.
 
 ![Deployment Health status](/img/docs/deployment-health.png)
 
 The following are the possible Deployment health statuses:
 
-- **Creating** (Grey): Astro is still provisioning the resources for the Deployment. It is not yet available to run DAGs. See [Create a Deployment](create-deployment.md).
+- **Creating** (Grey): A pulsating background and the status message **Creating** are used to indicate that Astro is still provisioning the resources for the Deployment. It is not yet available to run DAGs. See [Create a Deployment](create-deployment.md).
 - **Deploying** (Grey): A code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
 - **Healthy** (Green): The Airflow webserver and scheduler are both healthy and running as expected.
 - **Unhealthy** (Red): Your Deployment webserver or scheduler are restarting or otherwise not in a healthy, running state.
