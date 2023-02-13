@@ -16,7 +16,7 @@ Visit `cloud.astronomer.io/onboarding` to activate your 14 day trial. You'll be 
 
 After you create your user account, you'll be asked to create an Organization and your first Workspace. 
 
-An **Organization** is the highest level of management on Astro. For companies using Astro, all Airflow environments belong to a single Organization. An Organization contains **Workspaces**, which are collections of Airflow environments that are typically owned by a single team or function. 
+An **Organization** is the highest level of management on Astro. All Airflow environments belong to a single Organization. An Organization contains **Workspaces**, which are collections of Airflow environments that are typically owned by a single team. 
 
 For your trial, feel free to use any name for your Organization and first Workspace. You can always update these names from the Cloud UI after you finish activating your trial. If you're planning to migrate your data pipelines straight away to Astro, Astronomer recommends naming your Workspace after your data team or core function.
 
