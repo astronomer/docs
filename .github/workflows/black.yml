@@ -12,5 +12,5 @@ jobs:
       - uses: actions/checkout@v2
       - uses: psf/black@stable
         with:
-          options: "--diff"
+          options: "--check --diff"
           src: "./code-samples/dags"
