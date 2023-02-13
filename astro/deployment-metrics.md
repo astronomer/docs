@@ -197,6 +197,12 @@ Astro does not export any [service checks](https://docs.datadoghq.com/integratio
 
    - **Key** `AIRFLOW__METRICS__STATSD_DATADOG_TAGS`
    - **Value** `<key-1>:<value-1>,<key-2>:<value-2>`
+
+  :::info
+  
+  If you're configuring custom Datadog tags for a Deployment using Astro Runtime 5 or earlier, you must additionally add `datadog` to your Astro project `requirements.txt` file.
+  
+  :::
    
 6. Click **Save variable**.
 

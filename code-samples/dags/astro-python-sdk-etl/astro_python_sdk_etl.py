@@ -5,8 +5,11 @@ from airflow.decorators import dag
 from astro.files import File
 from astro import sql as aql
 from astro.sql.table import Metadata, Table
+
 SNOWFLAKE_CONN_ID = "snowflake_conn"
 AWS_CONN_ID = "aws_conn"
+
+
 # The first transformation combines data from the two source tables
 @aql.transform
 def combine_tables(homes1: Table, homes2: Table):
@@ -17,6 +20,8 @@ def combine_tables(homes1: Table, homes2: Table):
     SELECT *
     FROM {{homes2}}
     """
+
+
 # Switch to Python (Pandas) for melting transformation to get data into long format
 @aql.dataframe
 def transform_data(df: pd.DataFrame):
@@ -25,6 +30,8 @@ def transform_data(df: pd.DataFrame):
         id_vars=["sell", "list"], value_vars=["living", "rooms", "beds", "baths", "age"]
     )
     return melted_df
+
+
 # Run a raw SQL statement to create the reporting table if it doesn't already exist
 @aql.run_raw_sql
 def create_reporting_table():
@@ -37,18 +44,20 @@ def create_reporting_table():
       value number
     );
     """
+
+
 @dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
 def example_s3_to_snowflake_etl():
     # Initial load of homes data csv's from S3 into Snowflake
     homes_data1 = aql.load_file(
         task_id="load_homes1",
         input_file=File(path="s3://airflow-kenten/homes1.csv", conn_id=AWS_CONN_ID),
-        output_table=Table(name="HOMES1", conn_id=SNOWFLAKE_CONN_ID)
+        output_table=Table(name="HOMES1", conn_id=SNOWFLAKE_CONN_ID),
     )
     homes_data2 = aql.load_file(
         task_id="load_homes2",
         input_file=File(path="s3://airflow-kenten/homes2.csv", conn_id=AWS_CONN_ID),
-        output_table=Table(name="HOMES2", conn_id=SNOWFLAKE_CONN_ID)
+        output_table=Table(name="HOMES2", conn_id=SNOWFLAKE_CONN_ID),
     )
     # Define task dependencies
     extracted_data = combine_tables(
@@ -68,4 +77,6 @@ def example_s3_to_snowflake_etl():
         columns=["sell", "list", "variable", "value"],
     )
     record_results.set_upstream(create_results_table)
+
+
 example_s3_to_snowflake_etl_dag = example_s3_to_snowflake_etl()

@@ -23,6 +23,17 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.10.0 ([Release notes](cli/release-notes.md))
 
+## February 7, 2023
+
+### Additional improvements 
+
+- The instructions on the welcome page for new Astro users who are not yet part of an Organization have been improved to make getting started easier.
+
+### Bug fixes
+
+- Removed nonfunctioning date filtering functionality from the Lineage UI.
+- Fixed an issue where triggering an image deploy from an older version of the Astro CLI could unintentionally turn off DAG deploys on a Deployment.
+
 ## January 31, 2023
 
 ### Bug fixes 
