@@ -7,7 +7,7 @@ description: Configure details about your Astro Organization including user auth
 
 Organizations are the highest level user group on Astro. All Astro users belong to at least one Organization and have an Organization role. See [Manage user permissions](user-permissions.md#organization-roles)
 
-As an Organization Owner, you can manage Organization authentication and users from the Astro UI and through Astronomer support.
+As an Organization Owner, you can manage Organization authentication and users from the Astro UI and through Astronomer support. This document explains how to configure Organization details. To manage Organization users, see [Manage Astro users](add-user.md).
 
 ## Invite a user to an Organization
 
@@ -20,18 +20,6 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 3. Enter the user's email address and select their role. 
    
 4. Click **Invite member**.
-
-## Update or remove a user from an Organization
-
-See [User permissions](user-permissions.md) to view the permissions for each available Organization role.
-
-1. In the Cloud UI, click the **People** tab.
-   
-2. Find the user in the **mMembers** table and click **Edit**.
-   
-3. Optional. Edit the user's role. 
-   
-4. If you're updating the user's role, click **Update Member**. If you're deleting the user, click **Remove member**.
 
 ## Configure just-in-time provisioning for single sign-on
 
