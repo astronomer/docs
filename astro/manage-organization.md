@@ -9,21 +9,9 @@ Organizations are the highest level user group on Astro. All Astro users belong 
 
 As an Organization Owner, you can manage Organization authentication and users from the Astro UI and through Astronomer support. This document explains how to configure Organization details. To manage Organization users, see [Manage Astro users](add-user.md).
 
-## Invite a user to an Organization
-
-See [User permissions](user-permissions.md) to view the permissions for each available Organization role.
-
-1. In the Cloud UI, click the **People** tab.
-   
-2. Click **Invite member**.
-   
-3. Enter the user's email address and select their role. 
-   
-4. Click **Invite member**.
-
 ## Configure just-in-time provisioning for single sign-on
 
-Astro supports just-in-time provisioning by default for all single sign-on (SSO) integrations. This means that if someone without an Astronomer account tries logging into Astronomer with an email address from a domain that you manage, they are automatically granted a default role in your Organization without needing an invite. Users with emails outside of this domain still need to be invited to your Organization before they can access it. 
+Astro supports just-in-time provisioning by default for all [single sign-on (SSO) integrations](configure-idp.md). This means that if someone without an Astronomer account tries logging into Astronomer with an email address from a domain that you manage, they are automatically granted a default role in your Organization without needing an invite. Users with emails outside of this domain still need to be invited to your Organization before they can access it. 
 
 Contact [Astronomer support](https://astronomer.io/support) to configure the following for just-in-time provisioning:
 

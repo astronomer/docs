@@ -17,7 +17,9 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 ## Add a user to an Organization
 
-You can invite a user to an Organization only if their email address' domain is in your Organization's allowlist. To add a domain to your Organization's allowlist, contact [Astronomer support](https://cloud.astronomer.io/support).
+If your Organization has a configured identity provider, then by default anyone who has an email from a domain that you manage can join your Organization as an Organization Member without an invite. See [Configure just-in-time provisioning for single sign-on](manage-organization.md#configure-just-in-time-provisioning-for-single-sign-on).
+
+If you want to invite a user to an Organization from a domain that you don't own, such as a third party consultant, or you want to invite someone from your company to Astro with a higher level role, follow these steps.
 
 1. In the Cloud UI Organization view, click the **People** tab.
 
@@ -27,7 +29,7 @@ You can invite a user to an Organization only if their email address' domain is 
 
 3. Enter the user's email.
 
-4. Set an Organization role for the user.
+4. Set an Organization role for the user. See [User permissions](user-permissions.md).
 
 5. Click **Add member**.
 
@@ -41,7 +43,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
    
 2. Find the user in the **mMembers** table and click **Edit**.
    
-3. Optional. Edit the user's role. 
+3. Optional. Edit the user's role. See [User permissions](user-permissions.md). 
    
 4. If you're updating the user's role, click **Update Member**. If you're deleting the user, click **Remove member**.
 
@@ -57,7 +59,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 4. Select the user's name and email address in the **Organization Member** list.
    
-5. Select a role for the user and then click **Add Member**.
+5. Select a role for the user and then click **Add Member**. See [User permissions](user-permissions.md).
 
 6. Click **Add member**.
 
@@ -73,6 +75,6 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
     ![Edit Workspace user button](/img/docs/edit-workspace-user.png)
 
-4. Optional. Edit the user's name and role. 
+4. Optional. Edit the user's name and role. See [User permissions](user-permissions.md).
    
 5. If you're updating the user's role, click **Update Member**. If you're deleting the user, click **Remove member**.
