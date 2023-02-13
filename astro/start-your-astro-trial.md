@@ -169,6 +169,7 @@ After you create your Organization and Workspace, Astro opens the homepage for y
         ```sh
         $ra = New-AzRoleAssignment -ObjectId $sp.id -RoleDefinitionName Owner -Scope "/subscriptions/$subid"
         ```
+
     5. Run the following commands to register the `EncryptionAtHost` feature:
     
         ```sh
