@@ -147,7 +147,7 @@ Airflow connections set with environment variables do not appear in the Airflow 
 
 ### Airflow variables
 
-Use environment variables to store values you would normally store as [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/index.html) to have better control of custom values and configurations. To fetch a Deployment environment variable value from a DAG, you must format the variable key as `AIRFLOW_VAR_<VAR_NAME>`.
+Use environment variables to store values you would normally store as [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/index.html). This gives you better control and security of custom values. To fetch a Deployment environment variable value from a DAG, you must format the variable key as `AIRFLOW_VAR_<VAR_NAME>`.
 
 For example, consider the following Airflow variable:
 
