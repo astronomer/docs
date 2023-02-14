@@ -89,11 +89,10 @@ from airflow.providers.amazon.aws.operators.redshift_sql import RedshiftSQLOpera
 with DAG(
     dag_id=f"example_dag_redshift",
     schedule="@daily",
-    start_date=datetime(2008, 1, 1),
-    end_date=datetime(2008, 1, 7),
+    start_date=datetime(2023, 1, 1),
     max_active_runs=1,
     template_searchpath='/usr/local/airflow/include/example_dag_redshift',
-    catchup=True
+    catchup=False
 ) as dag:
 
     t = RedshiftSQLOperator(
@@ -150,11 +149,10 @@ from airflow.providers.amazon.aws.transfers.s3_to_redshift import S3ToRedshiftOp
 with DAG(
     dag_id=f"example_dag_redshift",
     schedule="@daily",
-    start_date=datetime(2008, 1, 1),
-    end_date=datetime(2008, 1, 7),
+    start_date=datetime(2023, 1, 1),
     max_active_runs=1,
     template_searchpath='/usr/local/airflow/include/example_dag_redshift',
-    catchup=True
+    catchup=False
 ) as dag:
 
     s3_to_redshift = S3ToRedshiftOperator(
@@ -192,11 +190,10 @@ from airflow.providers.amazon.aws.transfers.redshift_to_s3 import RedshiftToS3Op
 with DAG(
     dag_id=f"example_dag_redshift",
     schedule="@daily",
-    start_date=datetime(2008, 1, 1),
-    end_date=datetime(2008, 1, 7),
+    start_date=datetime(2023, 1, 1),
     max_active_runs=1,
     template_searchpath='/usr/local/airflow/include/example_dag_redshift',
-    catchup=True
+    catchup=False
 ) as dag:
   
     redshift_to_s3 = RedshiftToS3Operator(
@@ -247,11 +244,10 @@ from airflow.providers.amazon.aws.sensors.redshift_cluster import RedshiftCluste
 with DAG(
     dag_id=f"example_dag_redshift",
     schedule="@daily",
-    start_date=datetime(2008, 1, 1),
-    end_date=datetime(2008, 1, 7),
+    start_date=datetime(2023, 1, 1),
     max_active_runs=1,
     template_searchpath='/usr/local/airflow/include/example_dag_redshift',
-    catchup=True
+    catchup=False
 ) as dag:
   
     pause_redshift = RedshiftPauseClusterOperator(
