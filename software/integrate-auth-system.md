@@ -83,8 +83,6 @@ Once the pool and app client are created, head over to the `App integration` >`A
 
 Then switch over to the `Domain name` tab and select a unique domain name to use for your hosted Cognito components.
 
-This should give you a minimally working user pool configuration.
-
 #### Edit your Astronomer configuration
 
 Add the following values to your `config.yaml` file in the `astronomer/` directory:
@@ -105,23 +103,31 @@ astronomer:
 
 Your Cognito pool ID can be found in the `General settings` tab of the Cognito portal. Your client ID is found in the `App clients` tab.
 
-Once you've saved your `config.yaml` file with these values, push it to your platform as described in [Apply a config change](apply-platform-config.md).
+Once you've saved your `config.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
 
 ### Azure AD
 
+Follow these steps to configure Azure AD as your OIDC provider. 
+
 #### Register the Application using `App Registrations` on Azure
 
-1. In the Azure portal, click **New registration**. 
-2. Configure the application as follows:
+1. In Azure Active Directory, click **App registrations** > **New registration**. 
+2.Complete the following sections:
   
     - **Name**: Any
     - **Supported account types**: Accounts in this organizational directory only (Astronomer only - single tenant)
     - **Redirect URI**: Web / `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
 
-    Replace `BASEDOMAIN` with your own. For example, if your base domain were `mycompany.com`, your redirect URI would be https://houston.mycompany.com/v1/oauth/redirect/
+    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URI is https://houston.mycompany.com/v1/oauth/redirect/
 
-3. In your Azure AD application management left menu, click **Authentication**.
-4. Ensure that Access Tokens and ID Tokens are enabled, as well as to verify the redirect URI.
+3. Click **Register**.
+
+4. Click **Authentication** in the left menu.
+5. In the **Web** area, confirm the redirect URI is correct.
+
+6. In the **Implicit grant and hybrid flows** area, select **Access tokens** and **ID tokens**.
+
+7. Click **Save**.
 
 ![authentication.png](/img/software/azure-authentication.png)
 
@@ -129,8 +135,12 @@ Once you've saved your `config.yaml` file with these values, push it to your pla
 
 1. In your Azure AD application management left menu, click **Certificates & secrets**.
 2. Click **New client secret**.
-3. Create a new client secret. Copy both the client ID and secret. 
-4. In your Azure AD application management left menu, click **API permissions**.
+3. Enter a description in the **Description** field and then select an expiry period in the **Expires** list. 
+
+4. Click **Add**.
+
+5. Copy the values in the **Value** and **Secret ID** columns. 
+6. Click **API permissions** in the left menu.
 5. At a minimum, grant your application the following permissions:
 
     - `email`
@@ -139,15 +149,17 @@ Once you've saved your `config.yaml` file with these values, push it to your pla
     - `profile`
     - `User.Read`
 
-5. In your Azure AD application management left menu, click **Token configuration**.
+5. Click **Token configuration** in the left menu.
 6. Click **Add groups claim**. And configure a groups claim as follows:
 
-    - In **Select group types to include in Access, ID, and SAML tokens**, check every check box. 
-    - In **Customize token properties by type**, select **Group ID** for all types.
+    - In the **Select group types to include in Access, ID, and SAML tokens** area, select every option. 
+    - In **Customize token properties by type** area, expand **ID**, **Access**, and **SAML** and then select **Group ID** for each type.
+    
+7. Click **Add**.
 
 #### Enable Azure AD in your config.yaml file
 
-Make sure the `config.yaml` file in your `astronomer` directory is updated with the proper values:
+Add the following values to the `config.yaml` file in your `astronomer` directory:
 
 ```yaml
 astronomer:
@@ -167,13 +179,12 @@ astronomer:
         github:
           enabled: false
 ```
-Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
 ### Okta
 
-To integrate Okta with Astronomer, you'll need to make configuration changes both within Okta and on Astronomer.
+To integrate Okta with Astronomer, you'll need to make configuration changes in Okta and Astronomer.
 
-Follow the steps below.
 
 #### Okta configuration
 
@@ -187,7 +198,7 @@ Follow the steps below.
 
 5. Save the `Client ID` generated for this Okta app for use in the next steps.
 
-6. To ensure that an Okta tile appears, set `Initiate Login URI` to `https://houston.BASEDOMAIN/v1/oauth/start?provider=okta`  (_Optional_).
+6. Optional. To ensure that an Okta tile appears, set `Initiate Login URI` to `https://houston.BASEDOMAIN/v1/oauth/start?provider=okta`.
 
 #### Enable Okta in your config.yaml file
 
@@ -207,7 +218,7 @@ astronomer:
 
 Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
->> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
+> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
 
 ### Auth0
 
