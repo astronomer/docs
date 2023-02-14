@@ -9,6 +9,10 @@ module.exports = {
   noIndex: false,
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   favicon: 'img/favicon.svg',
   organizationName: 'astronomer', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.

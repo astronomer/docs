@@ -46,7 +46,7 @@ For example, adding the following receiver to `receivers.platformCritical` would
 alertmanager:
   receivers:
     # Configs for platform alerts
-    platform:
+    platform: |
       email_configs:
         - smarthost: smtp.sendgrid.net:587
           from: <your-astronomer-alert-email@company.com>

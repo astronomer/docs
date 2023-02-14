@@ -94,7 +94,7 @@ prometheus:
   additionalAlerts:
     # Additional rules for the 'platform' alert group
     # Provide as a block string in yaml list form
-    platform:
+    platform: |
       - alert: ExamplePlatformAlert
         # If greater than 10% task failure
         expr: count(rate(airflow_scheduler_heartbeat{}[1m]) <= 0) > 2

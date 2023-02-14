@@ -43,7 +43,7 @@ Release date: January 11, 2023
 - Fixed an issue where PgBouncer didn't work if you pulled its image from a private registry.
 - Fixed an issue where the Software UI would occasionally show an incorrect **Extra AU** number for Deployments. 
 - Fixed an issue where users who had access to more than 100 Deployments could not access the Astronomer Software Docker registry.
-- Fixed an issue where Deployments with multiple DAGs could not be successfully upgraded due to a short timeout.
+- Fixed an issue where Deployments with many DAGs could not be successfully upgraded due to a short timeout.
 - Fixed an issue where users couldn't log in through Azure Active Directory (AD) if they belonged to more than 100 teams.
 - Fixed an issue where service accounts with System Admin permissions could not create Deployments for deprecated Airflow versions. 
 - Fixed an issue where you could not set `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER` in a Deployment if you were using an Astronomer Certified image.

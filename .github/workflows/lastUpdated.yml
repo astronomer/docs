@@ -24,6 +24,3 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: 'eu-west-2' 
         SOURCE_DIR: '.github/metrics' 
-    - name: Removing unnecessary files
-      run: rm -r .github/metrics/log.csv
-      shell: bash

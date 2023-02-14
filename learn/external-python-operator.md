@@ -5,6 +5,9 @@ description: "Learn how to run a Snowpark query in a virtual Python environment 
 id: external-python-operator
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import external_python_operator from '!!raw-loader!../code-samples/dags/external-python-operator/external_python_operator.py';
+
 It is very common to run a task with different dependencies than your Airflow environment. Your task might need a different Python version than core Airflow, or it has packages that conflict with your other tasks. In these cases, running tasks in an isolated environment can help manage dependency conflicts and enable compatibility with your execution environments.
 
 In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator) to run a task that leverages the [Snowpark API](https://www.snowflake.com/snowpark/) for data transformations. Snowpark allows you to run queries and transformations on your data using different programming languages, making it a flexible addition to traditional Snowflake operators. 
@@ -189,90 +192,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
 In your Astro project `dags` folder, create a new file called `external-python-pipeline.py`. Paste the following code into the file:
 
-```python
-from __future__ import annotations
-
-import logging
-import os
-import sys
-import tempfile
-import time
-import shutil
-from pprint import pprint
-
-import pendulum
-
-from airflow import DAG
-from airflow.decorators import task
-
-log = logging.getLogger(__name__)
-
-PYTHON = sys.executable
-
-BASE_DIR = tempfile.gettempdir()
-
-with DAG(
-    dag_id='py_virtual_env',
-    schedule=None,
-    start_date=pendulum.datetime(2022, 10, 10, tz="UTC"),
-    catchup=False,
-    tags=['pythonvirtualenv']
-):
-    
-    @task(task_id='print_the_context')
-    def print_context(ds=None, **kwargs):
-        """Print the Airflow context and ds variable from the context."""
-        print(kwargs)
-        print(ds)
-        return 'Whatever you return gets printed in the logs'
-
-    @task.external_python(
-        task_id='external_python',
-        python='/home/astro/.pyenv/versions/snowpark_env/bin/python'
-    )
-    def callable_external_python():
-        from time import sleep
-        import pkg_resources
-        from snowflake.snowpark import Session
-
-        import boto3
-        import json
-        
-        ## Checking for the correct venv packages - this is useful for debugging	
-        installed_packages = pkg_resources.working_set
-        installed_packages_list = sorted(['%s==%s' % (i.key, i.version)
-                for i in installed_packages])
-        print(installed_packages_list)
-
-        # Retrieving connection information from the external secrets manager
-        ssm = boto3.client('ssm', region_name='us-east-1')
-        parameter = ssm.get_parameter(Name='/airflow/connections/snowflake', WithDecryption=True)
-        conn = json.loads(parameter['Parameter']['Value'])
-
-        # Defining parameters for Airflow's Snowpark connection
-        connection_parameters = {
-            "account": conn['extra']['account'],
-            "user": conn['login'],
-            "password": conn['password'],
-            "role": conn['extra']['role'],
-            "warehouse": conn['extra']['warehouse'],
-            "database": conn['extra']['database'],
-            "schema": conn['schema'],
-            "region": conn['extra']['region']
-        }
-        # Creating a connection session between Snowpark and Airflow
-        session = Session.builder.configs(connection_parameters).create()
-        # Running a SQL query in Snowpark
-        df = session.sql('select avg(reps_upper), avg(reps_lower) from dog_intelligence;')
-        print(df.collect())
-        # Closing the connection session
-        session.close()
-
-    task_print = print_context()
-    task_external_python = callable_external_python()
-
-    task_print >> task_external_python
-```
+<CodeBlock language="python">{external_python_operator}</CodeBlock>
 
 This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in [Step 3](#step-3-configure-your-astro-project). The ExternalPythonOperator task also prints a list of packages installed in the virtual environment, which can be helpful for debugging.
 

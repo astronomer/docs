@@ -50,7 +50,7 @@ module.exports = {
     {
       type: "category",
       label: "Deploy",
-      items: ["deploy-code", "ci-cd"],
+      items: ["deploy-code", "set-up-ci-cd", "ci-cd"],
     },
     {
       type: "category",
@@ -214,6 +214,11 @@ module.exports = {
     },
     {
       type: "doc",
+      label: "Authenticate to cloud services",
+      id: "cli/authenticate-to-clouds",
+    },
+    {
+      type: "doc",
       label: "Release notes",
       id: "cli/release-notes",
     },
@@ -258,8 +263,7 @@ module.exports = {
         'cli/astro-dev-restart',
         'cli/astro-login',
         'cli/astro-logout',
-        'cli/astro-organization-list',
-        'cli/astro-organization-switch',
+        'cli/astro-organization',
         'cli/astro-run',
         'cli/astro-team',
         'cli/astro-user-create',
