@@ -148,7 +148,7 @@ Follow these steps to configure Azure AD as your OIDC provider.
     - `User.Read`
 
 5. Click **Token configuration** in the left menu.
-6. Click **Add groups claim**. And configure a groups claim as follows:
+6. Click **Add groups claim** and select the following options:
 
     - In the **Select group types to include in Access, ID, and SAML tokens** area, select every option. 
     - In **Customize token properties by type** area, expand **ID**, **Access**, and **SAML** and then select **Group ID** for each type.
