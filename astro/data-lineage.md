@@ -83,7 +83,7 @@ Click a node to populate the information pane with detailed information about th
 
 ## View metrics for a specific run or dataset
 
-On the **Lineage** page, the following tabs appear below the lineage graph:
+On the **Lineage Graph** page for a DAG, the following tabs appear below the lineage graph:
 
 - **Info**: Shows the code and facets for a run or the schema for a dataset. Also shows the difference between runs when you create a comparison in the **Compare** tab.
 - **Inputs/Outputs**: Shows the inputs and outputs for a run or dataset. This information is equivalent to the upstream and downstream nodes in the graph view.
