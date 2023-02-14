@@ -136,12 +136,10 @@ Follow these steps to configure Azure AD as your OIDC provider.
 1. In your Azure AD application management left menu, click **Certificates & secrets**.
 2. Click **New client secret**.
 3. Enter a description in the **Description** field and then select an expiry period in the **Expires** list. 
-
 4. Click **Add**.
-
 5. Copy the values in the **Value** and **Secret ID** columns. 
 6. Click **API permissions** in the left menu.
-5. At a minimum, grant your application the following permissions:
+5. Click **Microsoft Graph** and add the following minimum permissions for Microsoft Graph:
 
     - `email`
     - `Group.Read.All`
