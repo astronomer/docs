@@ -19,7 +19,7 @@ An environment variable on Astro is a key-value configuration that is applied to
 - Integrate with Datadog or other third-party tooling to [export Deployment metrics](deployment-metrics.md#export-airflow-metrics-to-datadog).
 - Set [Airflow configurations](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html?), such as default timezone and maximum active runs per DAG.
 
-You can use environment variables to configure the same keys and values that you would configure as [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/index.html). However, environment variables are exposed as environment variables and managed differently than Airflow variables. For more information, see [How environment variables are stored on Astro](#how-environment-variables-are-stored-on-astro).
+You can use environment variables to configure the same keys and values that you would configure as [Airflow variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/index.html). However, the variables that you configure in Astro are exposed as environment variables and managed differently than Airflow variables. For more information, see [How environment variables are stored on Astro](#how-environment-variables-are-stored-on-astro).
 
 Some environment variables on Astro are set globally and cannot be overridden for individual Deployments. For more information on these environment variables, see [Global environment variables](platform-variables.md).
 
