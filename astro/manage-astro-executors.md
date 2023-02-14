@@ -9,7 +9,7 @@ id: 'manage-astro-executors'
   <meta name="og:description" content="Learn how to select and manage Astro executors." />
 </head>
 
-Executors are responsible for executing tasks within your DAGs. You can select Celery or Kubernetes executors in Astro. Selecting an appropriate executor can often be challenging and the intent of this topic is to provide you with the information you need to make an informed choice. If you're new to Astro and executors, see [Airflow Executors](/learn/airflow-executors-explained).
+Executors are responsible for executing tasks within your DAGs. You can select Celery or Kubernetes executors in Astro. Selecting an appropriate executor can often be challenging. The intent of this topic is to provide you with the information you need to make an informed choice. If you're new to Astro and executors, see [Airflow Executors](/learn/airflow-executors-explained).
 
 A single executor is assigned to each Deployment and you can change the executor assignment at any time. To assign an executor or modify its resource settings, see [Configure a Deployment](configure-deployment-resources.md).
 
@@ -38,10 +38,10 @@ The Celery executor works with a pool of workers and communicates with them to d
 
 You select and modify Celery executor settings in the Cloud UI. Astro automatically allocates resources to workers created by the Celery executor, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md). The settings you can adjust include:
 
-- Default Max Tasks Per Worker - The maximum number of tasks that a single worker can process simultaneously.This is equivalent to worker concurrency in Airflow.
-- Default Worker Count - The minimum and maximum number of workers that can run in parallel in the worker queue. 
-- Scheduler Resources - The total CPU and memory allocated to each scheduler in your Deployment.
-- Scheduler count - The number of Airflow schedulers available in your Deployment.
+- **Default Max Tasks Per Worker&** - The maximum number of tasks that a single worker can process simultaneously.This is equivalent to worker concurrency in Airflow.
+- **Default Worker Count** - The minimum and maximum number of workers that can run in parallel in the worker queue. 
+- **Scheduler Resources** - The total CPU and memory allocated to each scheduler in your Deployment.
+- **Scheduler Count** - The number of Airflow schedulers available in your Deployment.
 
 Worker settings are defined with worker queues. See [Configure worker queues](configure-worker-queues.md).
 
