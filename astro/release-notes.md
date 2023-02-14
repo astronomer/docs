@@ -23,6 +23,20 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.10.0 ([Release notes](cli/release-notes.md))
 
+## February 14, 2023
+
+### View OpenLineage facets for lineage job runs
+
+[OpenLineage facets](https://openlineage.io/docs/spec/facets/) are JSON objects that provide additional context about a given job run. By default, a job run includes facets that show what kind of job was completed, whether the job run was successful, and who owns the job. 
+
+You can now view all available facets for a job run, including [custom facets](https://openlineage.io/docs/spec/facets/custom-facets), by selecting the job run on the **Lineage** page in the Cloud UI. Use the **Info** tab to check the status of your facets, including whether they are correctly formatted, so that you can better understand potential issues in your data pipelines.
+
+![Example OpenLineage facet page in the Cloud UI](/img/release-notes/view-facets.png)
+
+### Bug fixes
+
+- Fixed [CVE-2023-0286](https://avd.aquasec.com/nvd/2022/cve-2023-0286/).
+
 ## February 7, 2023
 
 ### Additional improvements 
