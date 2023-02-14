@@ -48,7 +48,9 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
 
 5. Click **Create Deployment**.
 
-    A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page where a pulsating background and the status message **Creating** are used to indicate that Deployment creation is in progress. For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
+     A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page. The status of your Deployment is **CREATING** and the background pulsates until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is not available and you cannot deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **HEALTHY**.
+    
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
 
 ## Next steps
 
