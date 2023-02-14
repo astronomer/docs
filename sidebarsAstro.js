@@ -29,6 +29,7 @@ module.exports = {
       items: [
         "develop-project",
         "kubernetespodoperator",
+        "manage-astro-executors",
         {
           type: "category",
           label: "Cloud IDE",
