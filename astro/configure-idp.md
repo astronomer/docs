@@ -111,15 +111,15 @@ On the page for your Okta app integration, click **View Setup Instructions**. Co
 - Your **X.509 Certificate**.
 - A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, make a request through Astronomer support.
 
-From here, Astronomer support will configure your Organization's integration with Okta and send you a validation link. Save this link for the next step.
+Astronomer support configures your Organization's integration with Okta and sends you a validation link that you'll use in step 4.
 
 #### Step 4: Confirm the integration 
 
-Using the link provided by Astronomer support, test your Okta integration by logging in to Astro with your own credentials. If your authentication is successful, Astro finalizes the integration. 
+Open the validation link provided by Astronomer support and then log in to Astro with your credentials. After you validate that authentication works, Astro finalizes the integration. 
 
 #### Step 5: Assign users to your Okta application
 
-On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, read [Okta documentation](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
+On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, see [Assign applications to users](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
 
 </TabItem>
 
@@ -172,13 +172,13 @@ Reach out to [Astronomer support](https://cloud.astronomer.io/support) and provi
 
 - **Microsoft Azure AD Domain**: Retrieve this from your Azure AD directory's overview page in the Microsoft Azure portal.
 - **Application (client) ID**: Retrieve this from the **Overview** page of your application.
-- A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, make a request through Astronomer support.
+- A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-From here, Astronomer support will configure your Organization's integration with Azure AD and send you a validation link. Save this link for the next step.
+Astronomer support configures your Organization's integration with Okta and sends you a validation link that you'll use in step 5.
 
 #### Step 5: Confirm the integration 
 
-Using the link provided by Astronomer support, test your Okta integration by logging in to Astro with your own credentials. If your authentication is successful, Astro finalizes the integration. 
+Open the validation link provided by Astronomer support and then log in to Astro with your credentials. After you validate that authentication works, Astro finalizes the integration. 
 
 #### Step 6: Assign users to your Azure AD application
 

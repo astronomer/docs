@@ -41,11 +41,11 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 1. In the Cloud UI, click the **People** tab.
    
-2. Find the user in the **mMembers** table and click **Edit**.
+2. Find the user in the **Members** list and then click **Edit**.
    
 3. Optional. Edit the user's role. See [User permissions](user-permissions.md). 
    
-4. If you're updating the user's role, click **Update Member**. If you're deleting the user, click **Remove member**.
+4. If you updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
 ## Add a user to a Workspace
 
@@ -59,11 +59,11 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 4. Select the user's name and email address in the **Organization Member** list.
    
-5. Select a role for the user and then click **Add Member**. See [User permissions](user-permissions.md).
+5. Select a role for the user and then click **Add member**. See [User permissions](user-permissions.md).
 
 6. Click **Add member**.
 
-    After you add the user, their information appears in the **Access** tab as a new entry in the **Members** table. To access the Workspace, the user needs to accept the invitation sent by email and log in.
+    After you add the user, their information appears in the **Access** tab as a new entry in the **Members** list. To access the Workspace, the user needs to accept the invitation sent by email and log in.
 
 ## Update or remove a Workspace user
 
@@ -77,4 +77,4 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 4. Optional. Edit the user's name and role. See [User permissions](user-permissions.md).
    
-5. If you're updating the user's role, click **Update Member**. If you're deleting the user, click **Remove member**.
+5. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
