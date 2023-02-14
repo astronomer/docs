@@ -38,7 +38,7 @@ module.exports = {
             "cloud-ide/run-python",
             "cloud-ide/run-sql",
             "cloud-ide/document-pipeline",
-            "cloud-ide/configure-project",
+            "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
           ],
