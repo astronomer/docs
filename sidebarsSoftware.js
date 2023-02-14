@@ -100,6 +100,7 @@ module.exports = {
           'grafana-metrics',
           'kibana-logging',
           'platform-alerts',
+          'task-usage-metrics',
           'logs-to-s3',
           'export-task-logs',
           ],

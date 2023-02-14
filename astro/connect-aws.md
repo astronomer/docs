@@ -3,6 +3,8 @@ sidebar_label: 'AWS'
 title: 'Connect Astro to AWS data sources'
 id: connect-aws
 description: Connect your Astro data plane to AWS.
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 sidebar_custom_props: { icon: 'img/aws.png' }
 ---
 
@@ -180,20 +182,29 @@ Astronomer recommends using an external secrets backend to store your AWS access
 
 </Tabs>
 
-## Resolving services
+## Hostname resolution options
 
-Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service.
+Securely connect your Astro data plane to resources running in other VPCs or on-premises through a resolving service. 
 
-### Amazon Route 53
+Using Route 53 requires sharing a resolver rule with your Astro account. If this is a security concern, Astronomer recommends using Domain Name System (DNS) forwarding.
+
+<Tabs
+    defaultValue="Shared resolver rule"
+    groupId="hostname-resolution-options"
+    values={[
+        {label: 'Shared resolver rule', value: 'Shared resolver rule'},
+        {label: 'Domain Name System forwarding', value: 'Domain Name System forwarding'},
+    ]}>
+<TabItem value="Shared resolver rule">
 
 Use Route 53 Resolver rules to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises.
 
-#### Prerequisites
+### Prerequisites
 
 - An Amazon Route 53 Resolver rule. See [Managing forwarding rules](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-rules-managing.html).
 - Permission to share resources using the AWS Resource Access Manager (RAM)
 
-#### Share the Amazon Route 53 Resolver rule
+### Share the Amazon Route 53 Resolver rule
 
 To allow Astro to access a private hosted zone, you need to share your Amazon Route 53 Resolver rule with your Astro AWS account.
 
@@ -211,10 +222,29 @@ To allow Astro to access a private hosted zone, you need to share your Amazon Ro
 
 7. Click **Create resource share**.
 
-#### Contact Astronomer support for rule verification
+### Contact Astronomer support for rule verification
 
 To verify that the Amazon Route 53 Resolver rule was shared correctly, submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the Amazon Route 53 Resolver rule ID. To locate the Resolver rule ID, open the Route 53 Dashboard, and in the left menu click **Rules** below **Resolver**. Copy the value in the Resolver **ID** column.
 
-#### Create a connection to confirm connectivity (optional)
+### Create a connection to confirm connectivity (optional)
 
 When Astronomer support confirms that the Amazon Route 53 Resolver rule was successfully associated with the Astro VPC, you can create a connection to the resource that is resolved by the shared rule. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+
+</TabItem>
+
+<TabItem value="Domain Name System forwarding">
+
+Use Domain Name System (DNS) forwarding to allow Astro to resolve DNS queries for resources running in other VPCs or on-premises. Unlike Route 53, you don't need to share sensitive configuration data with your Astro account. To learn more about DNS forwarding, see [Forwarding outbound DNS queries to your network](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver-forwarding-outbound-queries.html).
+
+To use this solution, make sure Astro can connect to the DNS server using a VPC peering or transit gateway connection and then submit a request to [Astronomer support](https://cloud.astronomer.io/support). With your request, include the following information:
+
+- The domain name for forwarding requests
+- The IP address of the DNS server where requests are forwarded
+
+### Create an Airflow connection to confirm connectivity (optional)
+
+When Astronomer support confirms that DNS forwarding was successfully implemented, you can confirm that it works by creating an Airflow connection to a resource running in a VPC or on-premises. See [Managing Connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
+
+</TabItem>
+
+</Tabs>
