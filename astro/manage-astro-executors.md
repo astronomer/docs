@@ -37,7 +37,7 @@ The Celery executor works with a pool of workers and communicates with them to d
 
 ### Adjust worker settings
 
-You select and modify Celery executor settings in the Cloud UI. Astro automatically allocates resources to workers created by the Celery executor, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md). The settings you can adjust include:
+Modify the Celery executor resource settings when you need to add or remove Celery workers or change the resources the workers use. The settings you can adjust include:
 
 - **Default Max Tasks Per Worker** - The maximum number of tasks that a single worker can process simultaneously.This is equivalent to worker concurrency in Airflow.
 - **Default Worker Count** - The minimum and maximum number of workers that can run in parallel in the worker queue. 
