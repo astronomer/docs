@@ -78,8 +78,7 @@ You can configure Airflow connections in the Astro Cloud IDE in the same way tha
 
 The connection appears in the **Connections** list. To edit the connection, click **Edit** in the **Connections** list.
 
-### Use connections in SQL cells
-
+### Use connections in cells
 
 To use a connection in a Python cell, pass the connection ID to any function that accepts an Airflow connection as an argument, such as a [hook](https://docs.astronomer.io/learn/what-is-a-hook).
 
