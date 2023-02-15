@@ -19,12 +19,9 @@ You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, D
 
 ## Log in to the Cloud UI
 
-1. Go to `https://cloud.astronomer.io`, enter your email address, and then click **Continue**.
+1. Go to `https://cloud.astronomer.io`, and select one of the following options to access the Cloud UI:
 
-2. Select one of the following options to access the Cloud UI:
-
-    - Enter your password and click **Continue**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. Your role is set by the Organization Owner.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.  With this log in option, an invitation is not mandatory. By default, you are assigned the Organization Member role after authentication. To integrate an IdP with Astro, see [Set up an identity provider](configure-idp.md).
+    - To authenticate with single sign-on (SSO), enter your email and click **Continue**. If your Organization has SSO enabled, you'll be redirected to your identity provider authentication screen.
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
 
@@ -39,6 +36,7 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
     ```sh
     astro login
     ```
+
 2. Enter your email address and press **Enter**.
 
 3. Press **Enter** to connect your account to Astronomer.
@@ -48,7 +46,6 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
  4. Select one of the following options to access the Cloud UI:
 
     - Enter your password and click **Continue**.
-    - To authenticate with an identity provider (IdP), click **Continue with SSO**, enter your username and password, and then click **Sign In**.
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
@@ -94,3 +91,13 @@ You can belong to more than one Astro Organization. Having a role in an Organiza
 2. In the top navigation bar, click the name of your current Organization.
 3. Click **Switch Organization**.
 4. Select the Organization that you want to switch to.
+
+## Frequently asked questions
+
+### Where is the option to log in using single sign-on (SSO)?
+
+If SSO is enabled for your domain, then you can enter your email on the `https://cloud.astronomer.io` login page and click **Continue** to access Astro through your IdP login page.
+
+### I no longer see the option to login with a username and password. Is that expected?
+
+If SSO is enabled for your domain, then authenticating with a username and password is no longer an option. This allows your team manage users only through your identity provider.
