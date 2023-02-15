@@ -4,6 +4,8 @@ title: 'Astro release notes'
 id: release-notes
 ---
 
+import PremiumBadge from '@site/src/components/PremiumBadge'
+
 <head>
   <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
