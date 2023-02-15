@@ -112,7 +112,7 @@ Follow these steps to configure Azure AD as your OIDC provider.
 #### Register the Application using `App Registrations` on Azure
 
 1. In Azure Active Directory, click **App registrations** > **New registration**. 
-2.Complete the following sections:
+2. Complete the following sections:
   
     - **Name**: Any
     - **Supported account types**: Accounts in this organizational directory only (Astronomer only - single tenant)
