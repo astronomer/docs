@@ -5,48 +5,50 @@ id: configure-project-environment
 description: Learn how to configure environment variables, connections, and dependencies for use in your Astro cloud IDE pipelines.
 ---
 
-Configure your Astro Cloud IDE project environment, including Airflow dependencies, variables, and connections, directly in the cloud UI. You can use your environment configurations in any pipeline within your project.
+Configure your Astro Cloud IDE project environment, including Airflow dependencies, variables, and connections, in the Cloud UI. You can use your environment configurations in any pipeline within your project.
 
-Environment configuration in the Astro Cloud IDE is similar Astro project and Airflow configuration, but includes more options for specifying values that minimize the time you spend configuring through text files. 
+Environment configuration in the Astro Cloud IDE is similar to Astro project and Airflow configuration, but more options are provided to minimize the time you spend configuring text files. 
 
 ## Limitations
 
-- You can't currently set OS-level dependencies through the Astro Cloud IDE.
-- Only a subset of Airflow connections can be configured from the Astro Cloud IDE.
-- Airflow connections configured through the Astro Cloud IDE can be used only to configure external databases for SQL and Warehouse SQL cells.
+- You can't set OS-level dependencies with the Astro Cloud IDE.
+- Only a subset of Airflow connections can be configured through Astro Cloud IDE templates. All other connections must be configured through a generic connection template.
+- Airflow connections configured with the Astro Cloud IDE can only be used to configure external databases for SQL and Warehouse SQL cells.
 - Environment configurations are not saved when you export a data pipeline as a DAG. To run your data pipeline outside of the Astro Cloud IDE, you must reconfigure these values in the Airflow environment where you exported your data pipeline.
 
 ## Add Python package requirements
 
 Setting Python package requirements in the Astro Cloud IDE is equivalent to setting them in the Astro project `requirements.txt` file or running `pip install <package>`.
 
-1. In the Cloud UI, select a Workspace and then select Cloud IDE.
+1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 
 3. Click **Requirements**, then click **+ Requirement** to add a new requirement.
    
-4. Enter the name and version for the Python package. 
+4. Enter a Python package name, and then select a package version. 
 
 5. Click **Add**.
 
-The package requirement appears in the **Requirements** table. To edit the Python package dependency, click **Edit** in the **Requirements** table.
+The package requirement appears in the **Requirements** list. To edit the Python package dependency, click **Edit** in the **Requirements** list.
 
 ## Configure environment variables
 
-You can configure environment variables in the Astro Cloud IDE in the same way that you can for Astro Deployments. Similarly, Astro Cloud IDE environment variables are stored and retrieved in the same way as Deployment environment variables. See [How environment variables are stored on Astro](environment-variables.md#how-environment-variables-are-stored-on-astro).
+The process for configuring environment variables in the Astro Cloud IDE and in Deployments is similar, and Astro Cloud IDE environment variables are stored and retrieved in the same way as Deployment environment variables. See [How environment variables are stored on Astro](environment-variables.md#how-environment-variables-are-stored-on-astro).
 
-Additionally, the Astro Cloud IDE lets you specify whether an environment variable should be used as either an Airflow variable or a system level environment variable.
+In the Astro Cloud IDE, you can additionally specify whether an environment variable should be used as an Airflow variable or a system level environment variable.
 
-1. In the Cloud UI, select a Workspace and then select Cloud IDE.
+1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 
-3. Click **Variables**, then click **+ Variable** to add a new environment variable.
+3. Click the **Variables** tab, and then click **Variable**.
 
-4. Configure the following values:
+4. Complete the following fields:
 
-    - **Type**: Select the purpose of the environment variable. Select **Environment** if you want to configure a system-level environment variable for your runtime environment, such as `AIRFLOW__CORE__DEFAULT_TASK_EXECUTION_TIMEOUT`. Select **Airflow** if you want to call the variable key from a Python cell using `Variable.get('<variable-name>')`. If you select **Airflow**, do not specify your environment variable key with `AIRFLOW_VAR_`. 
+    - **Type**: Select the purpose of the environment variable. 
+        - Select **Environment** if you want to configure a system-level environment variable for your runtime environment, such as `AIRFLOW__CORE__DEFAULT_TASK_EXECUTION_TIMEOUT`. 
+        - Select **Airflow** if you want to call the variable key from a Python cell using `Variable.get('<variable-name>')`. If you select **Airflow**, do not specify your environment variable key with `AIRFLOW_VAR_`. 
     - **Key**: They key for your environment variable.
     - **Value**: The value for your environment variable.
 
@@ -54,41 +56,40 @@ Additionally, the Astro Cloud IDE lets you specify whether an environment variab
 
 6. Click **Create Variable**.
 
-The environment variable appears in the **Variables** table. To edit the environment variable, click **Edit** in the **Variables** table.
+The environment variable appears in the **Variables** list. To edit the environment variable, click **Edit** in the **Variables** list.
 
 ## Configure Airflow connections
 
 You can configure Airflow connections in the Astro Cloud IDE in the same way that you can in the [Airflow UI](https://docs.astronomer.io/learn/connections). You can then reference the connection in your Python cells as code or in SQL cells as a configuration
 
-1. In the Cloud UI, select a Workspace and then select Cloud IDE.
+1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 
-3. Click **Connections**, then click **+ Connection** to add a new environment variable.
+3. Click the **Connections** tab, and then click **Connection**.
 
-4. Choose a connection type.
+4. Select a connection type.
 
 5. Configure the connection. 
    
-6. Optional. Click **Test connection** to check that the you correctly configured the connection. 
+6. Optional. Click **Test connection** to check that you configured the connection correctly. Note that you cannot test generic connections.
 
 7. Click **Create Connection**.
 
-The connection appears in the **Connections** table. To edit the connection, click **Edit** in the **Connections** table.
+The connection appears in the **Connections** list. To edit the connection, click **Edit** in the **Connections** list.
 
 ### Use connections in SQL cells
 
-Currently, Airflow connections configured through the Astro Cloud IDE can be used only to configure external databases for SQL and Warehouse SQL cells. To specify a connection in one of these cell types:
 
 1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
 
-3. On the **Pipelines** page click a pipeline name to open the pipeline editor.
+3. Click the **Pipelines** tab, and then click a pipeline name to open the pipeline editor.
 
 4. In a SQL or Warehouse SQL cell, click **Select connection** and select the connection you want to use to store the results of the cell. If you are configuring a Warehouse SQL cell, additionally configure the **Output Table** where you want to permanently store the results of the cell query. 
 
-You can then use jinja templating to call your configured database connection from your SQL cell queries. For example:
+5. Optional. Use jinja templating to call your configured database connection from your SQL cell queries. For example:
 
 ```sql
 SELECT * FROM {{<connection-id>}};
