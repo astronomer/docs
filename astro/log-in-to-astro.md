@@ -107,6 +107,6 @@ If SSO is enabled for your domain, then authenticating with a username and passw
 
 It's likely that your Organization has not configured SSO for your email domain. If this is the case, you can authenticate using Google, GitHub, or username/password as long as you've been invited to the Organization.
 
-## Why do I see the error “User is not assigned to this application” when I log in through SSO?
+### Why do I see the error “User is not assigned to this application” when I log in through SSO?
 
 This error indicates that your Organization has not enabled just-in-time provisioning and you have not assigned to Astro through your IdP. Contact your administrator to be added either through your IdP or through an Astro invite.
