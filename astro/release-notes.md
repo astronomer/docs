@@ -120,7 +120,7 @@ The [Cloud IDE](cloud-ide/overview.md) includes several new features which impro
 - The **Configure GitHub** menu in the Cloud UI now includes a **Clone Repo** settings menu. Enabling this option makes other files in your GitHub repository, such as helper functions in the `include` folder of your project, accessible when you run DAGs in the Cloud IDE.
 - You can now explicitly mark upstream dependencies for a task cell from the cell's configuration menu.
 
-For more information about configuring GitHub and deploying code with the Cloud IDE, see [Deploy a project from the Cloud IDE to Astro](deploy-project.md).
+For more information about configuring GitHub and deploying code with the Cloud IDE, see [Deploy a project from the Cloud IDE to Astro](cloud-ide/deploy-project.md).
 
 ### Support for n2 worker types on GCP
 

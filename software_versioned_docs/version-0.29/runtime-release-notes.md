@@ -132,7 +132,7 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 
 :::caution
 
-To deploy a project using Astro Runtime 6.0.4 or later from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the Astro CLI](cli/install-cli.md).
+To deploy a project using Astro Runtime 6.0.4 or later from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the Astro CLI](https://docs.astronomer.io/astro/cli/install-cli.md).
 
 :::
 
@@ -140,7 +140,7 @@ Astro Runtime images now support both AMD64 and ARM64 processor architectures fo
 
 If you run the Astro CLI on a Mac computer that uses an ARM-based [Apple M1 Silicon chip](https://www.apple.com/newsroom/2020/11/apple-unleashes-m1/), you will see a significant performance improvement when running Airflow locally. For example, the time it takes to run `astro dev start` on average has decreased from over 5 minutes to less than 2 minutes.
 
-For more information on developing locally with the Astro CLI, see [Develop a Project](develop-project.md).
+For more information on developing locally with the Astro CLI, see [Develop a Project](customize-image.md).
 
 ### Airflow 2.4.3 
 
@@ -383,7 +383,6 @@ These changes were backported from Apache Airflow 2.3.4, which is not yet genera
 
 ### Additional improvements
 
-- The Cloud UI no longer shows source code for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) by default. To reenable this feature for a given Deployment, create an [environment variable](environment-variables.md) with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`.
 - Upgraded `openlineage-airflow` to version `0.12.0`, which includes support for Spark 3.3.0 and Apache Flink. For a list of all changes, see the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 - Upgraded `astronomer-providers` to version `1.7.1`, which includes new deferrable operators and improvements to documentation. For more information, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.7.1/CHANGELOG.rst).
 - Upgraded `apache-airflow-providers-amazon` to version `4.1.0`, which includes a bug fix for integrating with AWS Secrets Manager.

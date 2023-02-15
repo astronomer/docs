@@ -21,7 +21,7 @@ To modify a cluster, you'll need the following:
 - A cluster on Astro.
 - Permissions to make changes to cluster configurations.
 
-If you don't have a cluster on Astro, see [Install Astro](install-astro.md). If you have an existing cluster and you want to create additional clusters, see [Create a cluster](create-cluster.md). To view the current configuration for a cluster, see [View Astro clusters](view-clusters.md).
+If you don't have a cluster on Astro, see [Install Astro](https://docs.astronomer.io/astro/category/install-astro). If you have an existing cluster and you want to create additional clusters, see [Create a cluster](create-cluster.md). To view the current configuration for a cluster, see [View Astro clusters](view-clusters.md).
 
 ## Request and confirm a cluster change
 

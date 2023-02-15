@@ -40,7 +40,7 @@ The Cloud IDE includes a robust GitHub integration for managing different versio
 
 ### Prerequisites 
 
-- A Cloud IDE project. See the [Quickstart](/astro/cloud-ide/quickstart.md).
+- A Cloud IDE project. See the [Quickstart](/cloud-ide/quickstart.md).
 - A GitHub account with a personal access token. See [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ### Setup

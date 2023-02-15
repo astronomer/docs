@@ -13,7 +13,7 @@ By default, the Software installation process requires accessing public reposito
 
 If you cannot rely on public repositories and networks for your installation, you can install Astronomer in an airgapped environment. An airgapped environment is a locked-down environment with no access to or from the public internet.
 
-This guide explains how to configure your system to install Astronomer without access to the public internet. The steps in this guide should be followed in addition to Steps 1 to 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) installation guide.
+This guide explains how to configure your system to install Astronomer without access to the public internet. The steps in this guide should be followed in addition to Steps 1 to 8 in the [AWS](install-aws), [Azure](install-azure), or [GCP](install-gcp) installation guide.
 
 > **Note:** If you have some means to allow traffic to the public internet, e.g. a proxy that allows a list of accepted destinations/sources, that will make the airgapped installation much easier. This page assumes an environment without any possibility of accessing the public internet.
 
@@ -25,7 +25,7 @@ To complete this setup, you need:
 - Private Kubernetes.
 - A Postgres instance accessible from that environment.
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
-- A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
+- A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws#step-8-configure-your-helm-chart), [Azure](install-azure#step-8-configure-your-helm-chart), [GCP](install-gcp#step-8-configure-your-helm-chart) standard installation guides.
 
 ## Step 1: Configure a private Docker registry
 
@@ -287,7 +287,7 @@ astronomer:
 Before completing this step, double-check that the following statements are true:
 
 - You made Astronomer's Docker images, Airflow Helm chart, and updates JSON accessible inside your network.
-- You completed Steps 1 through 8 in the [AWS](install-aws-standard.md), [Azure](install-azure-standard.md), or [GCP](install-gcp-standard.md) install guide.
+- You completed Steps 1 through 8 in the [AWS](install-aws), [Azure](install-azure), or [GCP](install-gcp) install guide.
 
 After this check, you can install the Astronomer Helm chart by running the following commands, making sure to replace `<your-image-tag>` with the version of Astronomer that you want to install:
 
@@ -301,4 +301,4 @@ helm pull astronomer/astronomer
 helm install astronomer -f config.yaml -n astronomer astronomer.tgz
 ```
 
-After these commands finish, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws-standard.md#step-10-verify-pods-are-up), [Azure](install-azure-standard.md#step-10-verify-all-pods-are-up), or [GCP](install-gcp-standard.md#step-10-verify-that-all-pods-are-up) installation guide.
+After these commands finish, continue your installation with Step 10 (Verify pods are up) in the [AWS](install-aws#step-10-verify-pods-are-up), [Azure](install-azure#step-10-verify-all-pods-are-up), or [GCP](install-gcp#step-10-verify-that-all-pods-are-up) installation guide.

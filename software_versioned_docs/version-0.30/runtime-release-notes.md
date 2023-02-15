@@ -128,17 +128,9 @@ In anticipation of future support for the Kubernetes executor on Astro, Astro Ru
 
 ### ARM64-based images for faster local development with Apple M1
 
-:::caution
-
-To deploy a project using Astro Runtime 6.0.4 or later from an Apple M1 computer to Astro, you must use Astro CLI version 1.4.0 or later or else the deploy will fail. See [Install the Astro CLI](cli/install-cli.md).
-
-:::
-
 Astro Runtime images now support both AMD64 and ARM64 processor architectures for local development. When you install Astro Runtime 6.0.4 or later, Docker automatically runs the correct architecture based on the computer you're using.
 
 If you run the Astro CLI on a Mac computer that uses an ARM-based [Apple M1 Silicon chip](https://www.apple.com/newsroom/2020/11/apple-unleashes-m1/), you will see a significant performance improvement when running Airflow locally. For example, the time it takes to run `astro dev start` on average has decreased from over 5 minutes to less than 2 minutes.
-
-For more information on developing locally with the Astro CLI, see [Develop a Project](develop-project.md).
 
 ### Airflow 2.4.3 
 
