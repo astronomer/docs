@@ -68,7 +68,7 @@ All Astro Runtime images have the following open source provider packages pre-in
 - Celery [`apache-airflow-providers-celery`](https://pypi.org/project/apache-airflow-providers-celery/)
 - Google [`apache-airflow-providers-google`](https://pypi.org/project/apache-airflow-providers-google/)
 - HTTP [`apache-airflow-providers-http`](https://pypi.org/project/apache-airflow-providers-http/)
-- Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-cncf.kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
+- Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
 - StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
