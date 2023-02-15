@@ -32,39 +32,41 @@ If you prefer, you can set Deployment resources using the Astro CLI and a local 
 
 :::
 
-### Worker queues 
-
-Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks.
-
-See [Configure worker queues](configure-worker-queues.md).
-
 ### Scheduler resources
 
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. The executor type you select determines what scheduler resource settings can be adjusted. You can select a Celery or a Kubernetes executor. The executor determines which worker resources run your scheduled tasks.
+The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. 
 
 You can adjust the following scheduler resource settings:
 
-- **Default Max Tasks Per Worker**: Celery executor only. Move the slider to select the number of tasks that a worker can process simultaneously. 
-- **Default Worker Count**: Celery executor only. Move the slider to select the number of can run in parallel in the worker queue.
 - **Scheduler Resources**: Select the number of Astronomer Units (AU) assigned to the schedulers. Alternatively, move the CPU and memory slider to use specific CPU and memory values to automatically define the scheduler AU assignment. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. One AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning five AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory. 
 - **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to ten AU and **Scheduler Count** to two, your Deployment will run with two Airflow schedulers using ten AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers. 
 
 If you experience delays in task execution, which you can track with the Gantt Chart view of the Airflow UI, Astronomer recommends increasing the allocated AU value. The default resource allocation is ten AU. 
 
-#### Edit scheduler settings 
+#### Worker queues 
+
+Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks.
+
+You can adjust the following worker queue settings:
+
+- **Default Max Tasks Per Worker**: Celery executor only. Move the slider to select the number of tasks that a worker can process simultaneously. 
+- **Default Worker Count**: Celery executor only. Move the slider to select the number of can run in parallel in the worker queue.
+
+See [Configure worker queues](configure-worker-queues.md).
+
+#### Edit Deployment settings 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
-4. Optional. Select an executor in the **Executor** list. See [Update the Deployment executor](#update-the-deployment-executor).
-5. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
-6. Click **Update**.
+4. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
+5. Click **Update**.
 
-    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete (Celery executor only) before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
 ### Update the Deployment executor
 
-The executor determines which worker resources run your scheduled tasks. The Celery executor runs multiple tasks on a single pod and is a good option for most uses cases. The Kubernetes executor runs individual tasks in an isolated Kubernetes pod and is a good option when a few seconds of latency during start up isn't a concern. For more information about the Celery and Kubernetes executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained#kubernetes-executor).
+The executor determines which worker resources run your scheduled tasks. The Celery executor runs multiple tasks using a pool of worker nodes and is a good option for most uses cases. The Kubernetes executor runs individual tasks in an isolated Kubernetes Pod and is a good option when task isolation and reliability are the priority and startup latency isn't a concern. For more information about the how to configure a Deployment to use the Celery or Kubernetes executors, see [Manage executors](manage-astro-executors.md).
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
