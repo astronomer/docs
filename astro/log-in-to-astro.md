@@ -72,6 +72,7 @@ For Astro users, the base domain is `cloud.astronomer.io`. For Astronomer Softwa
     ```
     astro context list
     ```
+
 2. In the Astro CLI, run the following command to re-authenticate to the target base domain:
 
     ```
@@ -100,4 +101,12 @@ If SSO is enabled for your domain, then you can enter your email on the `https:/
 
 ### I no longer see the option to login with a username and password. Is that expected?
 
-If SSO is enabled for your domain, then authenticating with a username and password is no longer an option. This allows your team manage users only through your identity provider.
+If SSO is enabled for your domain, then authenticating with a username and password is no longer an option. This allows your team to manage users only through your IdP.
+
+### After I enter my email and click Continue, I am prompted for a password. Is this expected?
+
+It's likely that your Organization has not configured SSO for your email domain. If this is the case, you can authenticate using Google, GitHub, or username/password as long as you've been invited to the Organization.
+
+## Why do I see the error “User is not assigned to this application” when I log in through SSO?
+
+This error indicates that your Organization has not enabled just-in-time provisioning and you have not assigned to Astro through your IdP. Contact your administrator to be added either through your IdP or through an Astro invite.
