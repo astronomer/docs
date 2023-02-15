@@ -45,7 +45,7 @@ Astronomer uses refresh tokens to make sure that you don’t need to log in to t
 
  4. Select one of the following options to access the Cloud UI:
 
-    - Enter your password and click **Continue**.
+    - Enter your email and click **Continue**.
     - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**.
     - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**.
 
