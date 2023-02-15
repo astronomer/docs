@@ -35,17 +35,6 @@ The Celery executor works with a pool of workers and communicates with them to d
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
-### Adjust worker settings
-
-You select and modify Celery executor settings in the Cloud UI. Astro automatically allocates resources to workers created by the Celery executor, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md). The settings you can adjust include:
-
-- **Default Max Tasks Per Worker** - The maximum number of tasks that a single worker can process simultaneously.This is equivalent to worker concurrency in Airflow.
-- **Default Worker Count** - The minimum and maximum number of workers that can run in parallel in the worker queue. 
-- **Scheduler Resources** - The total CPU and memory allocated to each scheduler in your Deployment.
-- **Scheduler Count** - The number of Airflow schedulers available in your Deployment.
-
-Worker settings are defined with worker queues. See [Configure worker queues](configure-worker-queues.md).
-
 ### Worker autoscaling logic
 
 The following values are used to determine the number of workers that run for each Deployment worker queue at a given time:
@@ -65,14 +54,13 @@ These calculations are computed by KEDA every 10 seconds. For more information o
 
 ## Kubernetes executor
 
-The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The Kubernetes executor can use the Kubernetes API to create Pods for running tasks. The Kubernetes executor is implemented at the configuration level of the Airflow instance, which means a new Kubernetes Pod is created for every task instance. The Kubernetes executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
+The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The Kubernetes executor leverages the Kubernetes API to create Pods for running tasks. The Kubernetes executor is implemented at the configuration level of the Airflow instance, which means a new Kubernetes Pod is created for every task instance. The Kubernetes executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
 
-The Kubernetes executor runs as a process in the Airflow Scheduler. You select and modify Kubernetes executor settings in the Cloud UI. Astro automatically allocates resources to Pods created by the Kubernetes executor, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md).
+You select and modify Kubernetes executor settings in the Cloud UI. Astro automatically allocates resources to Pods created by the Kubernetes executor, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md).
 
 ### Benefits
 
 - Fault tolerance.  A task that fails doesn't cause other tasks to fail.
-- Run tasks in a Kubernetes cluster outside of the Astro data plane. This can be helpful when you need to run individual tasks on infrastructure that isn't currently supported by Astro, such as GPU nodes or other third-party services.
 - Specify CPU and memory limits or minimums to optimize performance and reduce costs.
 - Task isolation. A task uses only the resources allocated to it and it can't consume resources allocated to other tasks. 
 - Running tasks are not interrupted when a deploy is pushed.
@@ -82,9 +70,8 @@ On Astro, the Kubernetes infrastructure required to run the Kubernetes executor 
 ### Known limitations
 
 - Tasks take longer to start and this causes task latency.
-- Cross-account service accounts are not supported on Pods launched in an Astro cluster. To allow access to external data sources, you can provide credentials and secrets to tasks.
 - PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
-- The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, customized values are overridden when they are required by Astronomer and your tasks will fail. Astronomer recommends using `python-kubernetes-sdk`. See [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/).
+- The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, the DAG is rejected and a broken DAG error message appears in teh Airflow UI. Astronomer recommends using `python-kubernetes-sdk`. See [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/).
 
 ### Prerequisites
 
@@ -138,7 +125,18 @@ with DAG(
     resource_requirements_override_example()
 ```
 
-When this DAG runs, it launches a Kubernetes Pod with exactly 800m of CPU and 3Gi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
+When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
+
+## Adjust scheduler settings
+
+You select and modify executor settings in the Cloud UI. Astro automatically allocates resources to workers and Pods created by the executors, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md). The settings you can adjust include:
+
+- **Default Max Tasks Per Worker** - The maximum number of tasks that a single worker can process simultaneously. This is equivalent to worker concurrency in Airflow.
+- **Default Worker Count** - The minimum and maximum number of workers that can run in parallel in the worker queue. 
+- **Scheduler Resources** - The total CPU and memory allocated to each scheduler in your Deployment.
+- **Scheduler Count** - The number of Airflow schedulers available in your Deployment.
+
+Worker settings are defined with worker queues. See [Configure worker queues](configure-worker-queues.md).
 
 ## Related documentation
 
