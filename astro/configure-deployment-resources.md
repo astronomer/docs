@@ -72,8 +72,7 @@ The executor determines which worker resources run your scheduled tasks. The Cel
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
 4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
-5. Optional. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
-6. Click **Update**.
+5. Click **Update**.
 
 ## Update a Deployment name and description
 
