@@ -29,7 +29,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 :::info
 
-This feature in [Public Preview](feature-previews.md).
+This is a [Public Preview](feature-previews.md) feature.
 
 :::
 
