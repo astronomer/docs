@@ -11,22 +11,22 @@ id: 'manage-astro-executors'
 
 When managing executors on Astro, you need to choose the right executor for your Deployment and then manage your DAGs and Deployment resources to maximize executor efficiency and performance. The information provided here is intended to provide you with a better understanding of the benefits and limitations of the Celery and Kubernetes executors and how you can make adjustments to improve operational efficiency. For more information about the available Airflow executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained).
 
-
 A single executor is assigned to each Deployment and you can change the executor assignment at any time. To assign an executor or modify its resource settings, see [Configure a Deployment](configure-deployment-resources.md). The executor type you select determines what scheduler resource settings can be adjusted. The executor determines which worker resources run your scheduled tasks.
 
 ## Celery executor
 
-The Celery executor works with a pool of workers and communicates with them to delegate tasks. Workers are statically configured and running all the time regardless of workload. 
+The Celery executor works with a pool of workers and communicates with them to delegate tasks. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](#worker-autoscaling-logic). 
 
 ### Benefits
 
-- High availability.
+- Worker queues with higher demand are automatically allocated additional workers.
 - Allows additional workers to be added to cope with higher demand (horizontal scaling).
 - Provides a grace period for worker termination.
+- Running tasks are not terminated.
 
 ### Known limitations
 
-- Expense.
+- Execution speed is prioritized over task reliability.
 - Complicated set up.
 - More maintenance.
 
@@ -39,7 +39,7 @@ The Celery executor works with a pool of workers and communicates with them to d
 
 You select and modify Celery executor settings in the Cloud UI. Astro automatically allocates resources to workers created by the Celery executor, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md). The settings you can adjust include:
 
-- **Default Max Tasks Per Worker&** - The maximum number of tasks that a single worker can process simultaneously.This is equivalent to worker concurrency in Airflow.
+- **Default Max Tasks Per Worker** - The maximum number of tasks that a single worker can process simultaneously.This is equivalent to worker concurrency in Airflow.
 - **Default Worker Count** - The minimum and maximum number of workers that can run in parallel in the worker queue. 
 - **Scheduler Resources** - The total CPU and memory allocated to each scheduler in your Deployment.
 - **Scheduler Count** - The number of Airflow schedulers available in your Deployment.
