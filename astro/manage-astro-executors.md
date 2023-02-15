@@ -9,7 +9,8 @@ id: 'manage-astro-executors'
   <meta name="og:description" content="Learn how to select and manage Astro executors." />
 </head>
 
-Executors are responsible for executing tasks within your DAGs. You can select Celery or Kubernetes executors in Astro. Selecting an appropriate executor can often be challenging. The intent of this topic is to provide you with the information you need to make an informed choice. If you're new to Astro and executors, see [Airflow Executors](/learn/airflow-executors-explained).
+When managing executors on Astro, you need to choose the right executor for your Deployment and then manage your DAGs and Deployment resources to maximize executor efficiency and performance. The information provided here is intended to provide you with a better understanding of the benefits and limitations of the Celery and Kubernetes executors and how you can make adjustments to improve operational efficiency. For more information about the available Airflow executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained).
+
 
 A single executor is assigned to each Deployment and you can change the executor assignment at any time. To assign an executor or modify its resource settings, see [Configure a Deployment](configure-deployment-resources.md). The executor type you select determines what scheduler resource settings can be adjusted. The executor determines which worker resources run your scheduled tasks.
 
