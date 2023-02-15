@@ -5,6 +5,8 @@ id: modify-cluster
 description: Learn what changes are supported on existing Astro clusters.
 ---
 
+import PremiumBadge from '@site/src/components/PremiumBadge';
+
 New clusters on Astro are created with a default configuration that is suitable for standard use cases. However, your organization might need modifications to an existing cluster to meet specific business requirements. 
 
 The following are some of the cluster and Deployment-level modifications that require Astronomer support and can't be completed in the Cloud UI or with the Astro CLI:
@@ -32,3 +34,23 @@ When Astronomer support receives your change request, it will be reviewed and yo
 For modifications that do require downtime, such as changing your cluster's node instance type, Astronomer support will inform you of the expected impact and ask you to confirm if you want to proceed.
 
 To confirm a modification was completed, open the **Clusters** tab in the Cloud UI. You should see the updated configuration in the table entry for your cluster.
+
+### Authorize Workspaces to a Cluster
+
+<PremiumBadge />
+
+As an Organization Owner, you can keep teams and projects isolated by authorizing Workspaces only to specific Clusters. Gain greater management over cloud resources by ensuring that only authorized pipelines are running on specific clusters.
+
+1. In the Cloud UI, go to the **Clusters** tab, select a cluster, go to **Workspace Authorization**, and then click **Edit Workspace Authorization**.
+2. Click **Restricted** and select the Workspaces that you want to map to the cluster. 
+3. Click **Update**.
+
+After you authorize Workspaces to a cluster, Astro treats the cluster as restricted. Restricted clusters appear as an option when creating a new Deployment only if the Deployment's Workspace is authorized to the cluster. 
+
+:::info 
+
+A cluster with authorized Workspaces can't host Deployments from any Workspaces that aren't authorized to the cluster. To map Workspaces to a cluster, you must first transfer any existing Deployments on the cluster to one of these Workspace.
+
+Similarly, to unauthorize a Workspace but keep its Deployments in the cluster, you must transfer your Deployments to a Workspace which is still authorized to the cluster. See [Transfer a Deployment to another Workspace](configure-deployment-resources.md#transfer-a-deployment-to-another-workspace).
+
+:::

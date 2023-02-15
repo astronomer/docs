@@ -35,9 +35,9 @@ This feature in [Public Preview](feature-previews.md).
 
 <PremiumBadge />
 
-You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. After you enable Workspace authorization for a cluster, only authorized Workspaces can host Deployments in the cluster. Use this feature to gain manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
+You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
 
-Configure Workspace authorization in the **Clusters** tab of the Cloud UI.
+To authorize Workspaces to clusters, see [Authorize Workspaces to a Cluster](modify-cluster.md#authorize-workspaces-to-a-cluster)
 
 ### New Deployment health statuses and information in the Cloud UI
 
