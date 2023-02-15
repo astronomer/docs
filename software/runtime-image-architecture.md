@@ -41,7 +41,7 @@ This table lists Astro Runtime releases and their associated Apache Airflow vers
 | 7.0.x         | 2.5.0            |
 
 :::info
-Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](runtime-release-notes.md).
+Each Runtime version in a given minor series supports only a single version of Apache Airflow. For specific version compatibility information, see [Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes).
 :::
 
 ## Provider packages
