@@ -81,6 +81,9 @@ The connection appears in the **Connections** list. To edit the connection, clic
 ### Use connections in SQL cells
 
 
+To use a connection in a Python cell, pass the connection ID to any function that accepts an Airflow connection as an argument, such as a [hook](https://docs.astronomer.io/learn/what-is-a-hook).
+
+To use a connection in a SQL or Warehouse SQL cell:
 1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
@@ -89,18 +92,18 @@ The connection appears in the **Connections** list. To edit the connection, clic
 
 4. In a SQL or Warehouse SQL cell, click **Select connection** and select the connection you want to use to store the results of the cell. If you are configuring a Warehouse SQL cell, additionally configure the **Output Table** where you want to permanently store the results of the cell query. 
 
-5. Optional. Use jinja templating to call your configured database connection from your SQL cell queries. For example:
+5. Optional. Call a table from your database in your SQL query. For example:
 
 ```sql
-SELECT * FROM {{<connection-id>}};
+SELECT * FROM table_name;
 ```
 
 ## View environment configurations from the pipeline editor
 
-Environment configurations apply to all pipelines in a given project. To view your configurations from the pipeline editor, click **Environment**. The **Use in your pipeline…** menu shows all configurations which apply to your current pipeline. You can also use this menu to add, delete, or modify environment configurations.
+Environment configurations apply to all pipelines in a project. To view your configurations in the pipeline editor, click **Environment**. The **Use in your pipeline** pane shows all configurations that apply to your current pipeline. You can add, delete, or modify environment configurations in the pane.
 
 :::info
 
-Because environment configurations exist at the project level, modifying them from your pipeline editor will update the configurations for all pipelines in your project. To run a data pipeline with different environment configurations from its existing IDE project, you must recreate it in a new IDE project. 
+Environment configurations exist at the project level. Modifying them in your pipeline editor updates the configurations for all pipelines in your project. To run a data pipeline with different environment configurations from its existing IDE project, you must recreate it in a new IDE project. 
 
 :::
