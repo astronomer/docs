@@ -25,6 +25,16 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## February 14, 2023
 
+### New Deployment health statuses and information in the Cloud UI
+
+The Cloud UI now includes three additional [Deployment health statuses](deployment-metrics.md#deployment-health) that you might see when creating or pushing code to a Deployment. 
+
+- The **Creating** status indicates that Astro is still provisioning the resources for the Deployment.
+- The **Deploying** status indicates that a code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
+- The **Unknown** status indicates that Deployment status can't be determined.
+
+Additionally, the Deployment information page in the Cloud UI now includes fields for **Docker Image** and **DAG Bundle Version** that show unique timestamps and tags based on your latest code deploy. Use this information as the source of truth for which version of your code is currently running on the Deployment. See [Deploy code](deploy-code.md#step-3-validate-your-changes).
+
 ### View OpenLineage facets for lineage job runs
 
 [OpenLineage facets](https://openlineage.io/docs/spec/facets/) are JSON objects that provide additional context about a given job run. By default, a job run includes facets that show what kind of job was completed, whether the job run was successful, and who owns the job. 
