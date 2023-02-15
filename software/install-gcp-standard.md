@@ -21,6 +21,13 @@ To install Astronomer on GCP, you'll need access to the following tools and perm
 * Permission to create and modify resources on Google Cloud Platform
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
 
+:::info
+
+There is a known bug on GCP GKE Dataplane V2 clusters that affects Astronomer Software installations. When Astronomer Software is installed on a GCP GKE Dataplane V2 cluster, the interaction between the Astronomer Nginx ingress controller and Cilium can cause dropped connections, dropped packets, and intermittent 504 timeout errors when accessing the Astronomer UI or Houston API.
+
+To avoid these issues, Astronomer recommends installing Astronomer Software on a GKE Dataplane V1 cluster. 
+
+:::
 
 ## Step 1: Choose a base domain
 

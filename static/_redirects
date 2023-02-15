@@ -19,6 +19,9 @@
 # redirect old software overview to new url
 /software/overview /software
 
+# redirect to converged Runtime docs
+/software/*/runtime-release-notes /astro/runtime-release-notes 301
+
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
 /astro/connect-external-services https://docs.astronomer.io/astro/category/connect-astro 301
