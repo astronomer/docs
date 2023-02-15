@@ -9,26 +9,11 @@ id: 'manage-astro-executors'
   <meta name="og:description" content="Learn how to select and manage Astro executors." />
 </head>
 
-When managing executors on Astro, you need to choose the right executor for your Deployment and then manage your DAGs and Deployment resources to maximize executor efficiency and performance. The information provided here is intended to provide you with a better understanding of the benefits and limitations of the Celery and Kubernetes executors and how you can make adjustments to improve operational efficiency. For more information about the available Airflow executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained).
-
-A single executor is assigned to each Deployment and you can change the executor assignment at any time. To assign an executor or modify its resource settings, see [Configure a Deployment](configure-deployment-resources.md). The executor type you select determines what scheduler resource settings can be adjusted. The executor determines which worker resources run your scheduled tasks.
+When you select an executor on Astro, you need to choose the right executor for your Deployment and then manage your DAGs and Deployment resources to maximize its efficiency and performance. The information provided here is intended to provide you with a an overview of the Celery and Kubernetes executors. For more information about the available Airflow executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained). To assign an executor, modify its resource settings, or get a better understanding of its benefits and limitations, see [Configure a Deployment](configure-deployment-resources.md). 
 
 ## Celery executor
 
 The Celery executor works with a pool of workers and communicates with them to delegate tasks. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](#worker-autoscaling-logic). 
-
-### Benefits
-
-- Worker queues with higher demand are automatically allocated additional workers.
-- Allows additional workers to be added to cope with higher demand (horizontal scaling).
-- Provides a grace period for worker termination.
-- Running tasks are not terminated.
-
-### Known limitations
-
-- Execution speed is prioritized over task reliability.
-- Complicated set up.
-- More maintenance.
 
 ### Prerequisites
 
@@ -57,21 +42,6 @@ These calculations are computed by KEDA every 10 seconds. For more information o
 The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The Kubernetes executor leverages the Kubernetes API to create Pods for running tasks. The Kubernetes executor is implemented at the configuration level of the Airflow instance, which means a new Kubernetes Pod is created for every task instance. The Kubernetes executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
 
 You select and modify Kubernetes executor settings in the Cloud UI. Astro automatically allocates resources to Pods created by the Kubernetes executor, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md).
-
-### Benefits
-
-- Fault tolerance. A task that fails doesn't cause other tasks to fail.
-- Specify CPU and memory limits or minimums to optimize performance and reduce costs.
-- Task isolation. A task uses only the resources allocated to it and it can't consume resources allocated to other tasks. 
-- Running tasks are not interrupted when a deploy is pushed.
-
-On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every cluster in the data plane and is managed by Astronomer.
-
-### Known limitations
-
-- Tasks take longer to start and this causes task latency.
-- PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
-- The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, the DAG is rejected and a broken DAG error message appears in teh Airflow UI. Astronomer recommends using `python-kubernetes-sdk`. See [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/).
 
 ### Prerequisites
 

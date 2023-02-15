@@ -14,8 +14,57 @@ After you create an Astro Deployment, you can modify its settings to meet the un
 - Allocate resources for the Airflow scheduler and workers.
 - Update a Deployment name and description.
 - Add or delete a Deployment alert email.
+- Change the Deployment executor.
 - Transfer a Deployment to another Workspace in your Organization.
 - Delete a Deployment.
+
+## Choose an executor
+
+The executor you select determines which worker resources run your scheduled tasks. A single executor is assigned to each Deployment and you can update the executor assignment at any time. The executor type you select determines what scheduler resource settings can be adjusted and which worker resources run your scheduled tasks.
+
+### Celery executor
+
+The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most uses cases. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](#worker-autoscaling-logic). 
+
+#### Benefits
+
+- Worker queues with higher demand are automatically allocated additional workers.
+- Allows additional workers to be added to cope with higher demand (horizontal scaling).
+- Provides a grace period for worker termination.
+- Running tasks are not terminated.
+
+#### Limitations
+
+- Execution speed is prioritized over task reliability.
+- Complicated set up.
+- More maintenance.
+
+### Kubernetes executor
+
+The Kubernetes executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
+
+#### Benefits
+
+- Fault tolerance. A task that fails doesn't cause other tasks to fail.
+- Specify CPU and memory limits or minimums to optimize performance and reduce costs.
+- Task isolation. A task uses only the resources allocated to it and it can't consume resources allocated to other tasks. 
+- Running tasks are not interrupted when a deploy is pushed.
+
+On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every cluster in the data plane and is managed by Astronomer.
+
+#### Limitations
+
+- Tasks take longer to start and this causes task latency.
+- PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
+- The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, the DAG is rejected and a broken DAG error message appears in teh Airflow UI. Astronomer recommends using `python-kubernetes-sdk`. See [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/).
+
+### Update the Deployment executor
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Details** tab.
+3. Click **Edit Details**. 
+4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
+5. Click **Update**.
 
 ## Set Deployment resources
 
@@ -63,16 +112,6 @@ See [Configure worker queues](configure-worker-queues.md).
 5. Click **Update**.
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete (Celery executor only) before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
-
-### Update the Deployment executor
-
-The executor determines which worker resources run your scheduled tasks. The Celery executor runs multiple tasks using a pool of worker nodes and is a good option for most uses cases. The Kubernetes executor runs individual tasks in an isolated Kubernetes Pod and is a good option when task isolation and reliability are the priority and startup latency isn't a concern. For more information about the how to configure a Deployment to use the Celery or Kubernetes executors, see [Manage executors](manage-astro-executors.md).
-
-1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click the **Details** tab.
-3. Click **Edit Details**. 
-4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
-5. Click **Update**.
 
 ## Update a Deployment name and description
 

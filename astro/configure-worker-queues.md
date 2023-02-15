@@ -54,23 +54,6 @@ If you don’t change any settings in the default worker queue:
 
 You can change all settings of the default worker queue except for its name.
 
-## Worker autoscaling logic
-
-The number of workers running per worker queue on your Deployment at a given time is based on two values:
-
-- The total number of tasks in a `queued` or `running` state
-- The worker queue's setting for **Maximum Tasks per Worker**
-
-The calculation is made based on the following expression:
-
-`[Number of workers]= ([Queued tasks]+[Running tasks])/(Maximum tasks per worker)`
-
-The number of workers subsequently determines the Deployment's [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is the maximum number of tasks which can run concurrently within a single Deployment and across worker queues. To ensure that you can always run as many tasks as your workers allow, parallelism is calculated with the following expression:
-
-`[Parallelism]= ([Total number of running workers for all worker queues] * [The sum of all **Maximum tasks per worker*** values for all worker queues])`.
-
-These calculations are computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, read [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
-
 ## Request a worker type
 
 Your organization can enable up to 10 different worker types for each cluster. After a worker type is enabled on an Astro cluster, the worker type becomes available to any Deployment in that cluster and appears in the **Worker Type** menu of the Cloud UI.
