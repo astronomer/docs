@@ -45,7 +45,7 @@ Generally speaking, the backup operation does the following:
 *   Uploads a tarball of copied Kubernetes objects into cloud object storage.
 *   Calls the cloud provider API to make disk snapshots of persistent volumes, if specified.
 
-We’ll cover both on-demand and scheduled backups below. For more information, see [How Velero Works](https://velero.io/docs/v1.10/how-velero-works/)
+We’ll cover both on-demand and scheduled backups below. For more information, see [How Velero Works](https://velero.io/docs/main/how-velero-works/)
 
 #### Prerequisites
 
@@ -55,7 +55,7 @@ The following instructions assume you have:
 * The Velero CLI
 * `kubectl` access to your cluster
 
-If you do not have Velero or the Velero CLI installed, see [How Velero Works](https://velero.io/docs/v1.10/how-velero-works/).
+If you do not have Velero or the Velero CLI installed, see [How Velero Works](https://velero.io/docs/main/how-velero-works/).
 
 #### On-demand backup
 
