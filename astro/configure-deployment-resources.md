@@ -9,7 +9,7 @@ id: configure-deployment-resources
   <meta name="og:description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
 </head>
 
-After you create an Astro, you can modify its settings to meet the unique requirements of your organization. On Astro, you can:
+After you create an Astro Deployment, you can modify its settings to meet the unique requirements of your organization. On Astro, you can:
 
 - Allocate resources for the Airflow scheduler and workers.
 - Update a Deployment name and description.
