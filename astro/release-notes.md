@@ -25,6 +25,20 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## February 14, 2023
 
+### Authorize Workspaces to clusters
+
+:::info
+
+This feature in [Public Preview](feature-previews.md).
+
+:::
+
+<PremiumBadge />
+
+You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. After you enable Workspace authorization for a cluster, only authorized Workspaces can host Deployments in the cluster. Use this feature to gain manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
+
+Configure Workspace authorization in the **Clusters** tab of the Cloud UI.
+
 ### New Deployment health statuses and information in the Cloud UI
 
 The Cloud UI now includes three additional [Deployment health statuses](deployment-metrics.md#deployment-health) that you might see when creating or pushing code to a Deployment. 
