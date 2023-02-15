@@ -60,7 +60,7 @@ You select and modify Kubernetes executor settings in the Cloud UI. Astro automa
 
 ### Benefits
 
-- Fault tolerance.  A task that fails doesn't cause other tasks to fail.
+- Fault tolerance. A task that fails doesn't cause other tasks to fail.
 - Specify CPU and memory limits or minimums to optimize performance and reduce costs.
 - Task isolation. A task uses only the resources allocated to it and it can't consume resources allocated to other tasks. 
 - Running tasks are not interrupted when a deploy is pushed.
