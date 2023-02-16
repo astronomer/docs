@@ -16,6 +16,8 @@ Use worker queues to create optimized execution environments for different types
 
 By default, all tasks run in a default worker queue that does not require configuration or code. To enable worker types or configurations for different groups of tasks, you can create additional worker queues in the Cloud UI and assign tasks to queues in your DAG code.
 
+Although you can select Celery or Kubernetes executors on Astro, multiple worker queues can only be used with the Celery executor. You can only configure a single default worker queue for the Kubernetes executor and worker scaling works differently from the Celery executor. To configure Celery worker scaling, see [Configure Celery worker scaling](manage-astro-executors.md#configure-celery-worker-scaling).
+
 ## Benefits
 
 Worker queues can enhance performance, decrease cost, and increase the reliability of task execution in your Deployment. Specifically:
