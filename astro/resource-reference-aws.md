@@ -48,12 +48,12 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | ---------------- | ------------------------- | ---------------------------- | -------------- |
 | `af-south-1`     | Africa (Cape Town)        | ✔️                            |                |
 | `ap-east-1`      | Asia Pacific (Hong Kong)  | ✔️                            |                |
-| `ap-northeast-1` | Asia Pacific (Tokyo)      | ✔️                            |                |
+| `ap-northeast-1` | Asia Pacific (Tokyo)      | ✔️                            | ✔️              |
 | `ap-northeast-2` | Asia Pacific (Seoul)      | ✔️                            |                |
 | `ap-northeast-3` | Asia Pacific (Osaka)      | ✔️                            |                |
 | `ap-southeast-1` | Asia Pacific (Singapore)  | ✔️                            |                |
-| `ap-southeast-2` | Asia Pacific (Sydney)     | ✔️                            |                |
-| `ap-south-1`     | Asia Pacific (Mumbai)     | ✔️                            | ✔️              |
+| `ap-southeast-2` | Asia Pacific (Sydney)     | ✔️                            | ✔️              |
+| `ap-south-1`     | Asia Pacific (Mumbai)     | ✔️                            |                |
 | `ca-central-1`   | Canada (Central)          | ✔️                            |                |
 | `eu-central-1`   | Europe (Frankfurt)        | ✔️                            | ✔️              |
 | `eu-north-1`     | Europe (Stockholm)        | ✔️                            |                |
