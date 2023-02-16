@@ -44,7 +44,7 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
 
 4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with:
 
-    - A worker queue named `default` that runs a maximum of 10 workers (Celery executor). Each of these workers can run a maximum of 16 tasks can run at a time.
+    - A worker queue named `default` that runs a maximum of 10 workers (Celery executor). Each of these workers can run a maximum of 16 tasks at a time.
     - A single scheduler with 0.5 CPUs and 1.88 GiB of memory.
 
 5. Click **Create Deployment**.
