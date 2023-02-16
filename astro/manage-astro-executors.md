@@ -89,7 +89,7 @@ See [Manage task CPU and memory](#manage-task-cpu-and-memory) for an example `po
 
 One of the most common uses cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for your task. The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
-```python {20}
+```python
 import pendulum
 import time
 
