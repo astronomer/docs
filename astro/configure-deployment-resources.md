@@ -18,17 +18,19 @@ After you create an Astro Deployment, you can modify its settings to meet the un
 - Transfer a Deployment to another Workspace in your Organization.
 - Delete a Deployment.
 
+For advanced Deployment resource configurations, see [Manage Deployment executors](manage-astro-executors.md) and [Configure worker queues](configure-worker-queues.md).
+
 ## Choose an executor
 
-The executor you select determines which worker resources run your scheduled tasks. A single executor is assigned to each Deployment and you can update the executor assignment at any time. The executor type you select determines what scheduler resource settings can be adjusted and which worker resources run your scheduled tasks.
+The executor type you select determines which worker resources run your scheduled tasks. A single executor is assigned to each Deployment and you can update the executor assignment at any time. 
 
 ### Celery executor
 
-The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most uses cases. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](#worker-autoscaling-logic). 
+The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most uses cases. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic). 
 
 #### Benefits
 
-- Worker queues with higher demand are automatically allocated additional workers.
+- Worker queues let you assign tasks to different worker types. See [Configure worker queues](configure-worker-queues.md)
 - Allows additional workers to be added to cope with higher demand (horizontal scaling).
 - Provides a grace period for worker termination.
 - Running tasks are not terminated.
@@ -103,7 +105,7 @@ You can adjust the following worker queue settings:
 
 See [Configure worker queues](configure-worker-queues.md).
 
-#### Edit Deployment settings 
+### Edit scheduler settings 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
@@ -111,7 +113,7 @@ See [Configure worker queues](configure-worker-queues.md).
 4. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
 5. Click **Update**.
 
-    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete (Celery executor only) before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+    The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code and triggers a rebuild of your Deployment image. If you're using the Celery executor, currently running tasks have 24 hours to complete before their running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
 ## Update a Deployment name and description
 

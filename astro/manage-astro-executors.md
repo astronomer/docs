@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Manage executors on Astro'
-title: 'Manage executors on Astro'
+sidebar_label: 'Manage Deployment executors'
+title: 'Manage Deployment executors'
 id: 'manage-astro-executors'
 ---
 
@@ -9,18 +9,20 @@ id: 'manage-astro-executors'
   <meta name="og:description" content="Learn how to select and manage Astro executors." />
 </head>
 
-When you select an executor on Astro, you need to choose the right executor for your Deployment and then manage your DAGs and Deployment resources to maximize its efficiency and performance. The information provided here is intended to provide you with a an overview of the Celery and Kubernetes executors. For more information about the available Airflow executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained). To assign an executor, modify its resource settings, or get a better understanding of its benefits and limitations, see [Configure a Deployment](configure-deployment-resources.md). 
+After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. This document provides you with an overview of how to configure the Celery and Kubernetes executors on Astro. To choose an executor for your Deployment, see [Choose an executor](configure-deployment-resouces.md#choose-an-executor) and [Airflow executors](https://docs.astronomer.io/learn/airflow-executors-explained).
 
-## Celery executor
+## Manage the Celery executor
 
-The Celery executor works with a pool of workers and communicates with them to delegate tasks. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](#worker-autoscaling-logic). 
+The Celery executor assigns tasks to workers with preset amounts of CPU and memory based on the cloud instance type they run on. On Astro, workers are organized into pools called worker queues that automatically scale worker count based on how many tasks you're running. Each Deployment running the Celery executor has a default worker queue that requires no additional configuration to start running tasks. 
+
+This topic discusses basic Celery executor configurations for scaling workers in a worker queue. For advanced resource configuration steps, including how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
 
 ### Prerequisites
 
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
-### Worker autoscaling logic
+### Celery worker autoscaling logic
 
 The following values are used to determine the number of workers that run for each Deployment worker queue at a given time:
 
@@ -36,6 +38,12 @@ The number of workers determines Deployment [parallelism](https://airflow.apache
 `[Parallelism]= ([Total number of running workers for all worker queues] * [The sum of all **Maximum tasks per worker*** values for all worker queues])`.
 
 These calculations are computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+### Configure Celery worker scaling
+
+Celery worker scaling is configured at the worker queue level. Changing how Celery workers scale ensures that your Deployment always has enough resources to run tasks, but never too much that you pay for unnecessary infrastructure.
+
+- **Max Tasks Per Worker**: The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. It is 16 by default.
+- **Worker Count (Min-Max)**: The minimum and maximum number of workers that can run at a time. The number of running workers changes regularly based on **Maximum Tasks per Worker** and the current number of tasks in a queued or running state. By default, the minimum number of workers is 1 and the maximum is 10.
 
 ## Kubernetes executor
 
@@ -97,16 +105,6 @@ with DAG(
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
 
-## Adjust scheduler settings
-
-You select and modify executor settings in the Cloud UI. Astro automatically allocates resources to workers and Pods created by the executors, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md). The settings you can adjust include:
-
-- **Default Max Tasks Per Worker** - The maximum number of tasks that a single worker can process simultaneously. This is equivalent to worker concurrency in Airflow.
-- **Default Worker Count** - The minimum and maximum number of workers that can run in parallel in the worker queue. 
-- **Scheduler Resources** - The total CPU and memory allocated to each scheduler in your Deployment.
-- **Scheduler Count** - The number of Airflow schedulers available in your Deployment.
-
-Worker settings are defined with worker queues. See [Configure worker queues](configure-worker-queues.md).
 
 ## Related documentation
 
