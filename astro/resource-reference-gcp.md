@@ -47,7 +47,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | `asia-south2`             | Delhi, Asia                   | ✔️                            |                |
 | `asia-southeast1`         | Singapore, Asia               | ✔️                            |                |
 | `asia-southeast2`         | Jakarta, Asia                 | ✔️                            |                |
-| `australia-southeast1`    | Sydney, Australia             | ✔️                            |                |
+| `australia-southeast1`    | Sydney, Australia             | ✔️                            | ✔️              |
 | `australia-southeast2`    | Melbourne, Australia          | ✔️                            |                |
 | `europe-central2`         | Warsaw, Europe                | ✔️                            |                |
 | `europe-north1`           | Finland, Europe               | ✔️                            |                |
