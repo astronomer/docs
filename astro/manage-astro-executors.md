@@ -9,7 +9,7 @@ id: 'manage-astro-executors'
   <meta name="og:description" content="Learn how to select and manage Astro executors." />
 </head>
 
-After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. This document provides you with an overview of how to configure the Celery and Kubernetes executors on Astro. To choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor) and [Airflow executors](https://docs.astronomer.io/learn/airflow-executors-explained).
+After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. This document provides you with an overview of how to configure the Celery and Kubernetes executors on Astro. To choose and select an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
 
 ## Manage the Celery executor
 
@@ -19,7 +19,6 @@ This topic discusses basic Celery executor configurations for scaling workers in
 
 ### Prerequisites
 
-- An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
 ### Celery worker autoscaling logic
@@ -38,27 +37,57 @@ The number of workers determines Deployment [parallelism](https://airflow.apache
 `[Parallelism]= ([Total number of running workers for all worker queues] * [The sum of all **Maximum tasks per worker*** values for all worker queues])`.
 
 These calculations are computed by KEDA every 10 seconds. For more information on how workers are affected by changes to a Deployment, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+
 ### Configure Celery worker scaling
 
-Celery worker scaling is configured at the worker queue level. Changing how Celery workers scale ensures that your Deployment always has enough resources to run tasks, but never too much that you pay for unnecessary infrastructure.
+Celery worker scaling is configured at the worker queue level. Changing how Celery workers scale ensures that your Deployment always has enough resources to run tasks, but never too much that you pay for unnecessary infrastructure. To update the worker scaling behavior for a worker queue:
 
-- **Max Tasks Per Worker**: The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. It is 16 by default.
-- **Worker Count (Min-Max)**: The minimum and maximum number of workers that can run at a time. The number of running workers changes regularly based on **Maximum Tasks per Worker** and the current number of tasks in a queued or running state. By default, the minimum number of workers is 1 and the maximum is 10.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+
+2. Click the **Worker Queues** tab and then click **Edit** to edit a worker queue.
+
+3. Configure the following settings:
+
+    - **Max Tasks Per Worker**: The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. It is 16 by default.
+    - **Worker Count (Min-Max)**: The minimum and maximum number of workers that can run at a time. The number of running workers changes regularly based on **Maximum Tasks per Worker** and the current number of tasks in a queued or running state. By default, the minimum number of workers is 1 and the maximum is 10.
+    
+4. Click **Update Queue**.
 
 ## Kubernetes executor
 
-The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The Kubernetes executor leverages the Kubernetes API to create Pods for running tasks. The Kubernetes executor is implemented at the configuration level of the Airflow instance, which means a new Kubernetes Pod is created for every task instance. The Kubernetes executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
+The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor spins up a new Kubernetes Pod to execute each individual task run, then spins down the Pod when the task run is complete. This executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
 
-You select and modify Kubernetes executor settings in the Cloud UI. Astro automatically allocates resources to Pods created by the Kubernetes executor, but you can adjust them to meet your requirements. See [Configure a Deployment](configure-deployment-resources.md).
+By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queed tasks in new Pods.
 
 ### Prerequisites
 
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
+### Run tasks in a custom Kubernetes worker Pod
+
+:::warning
+
+While you can technically customize all possible values for a worker Pod, Astronomer strongly recommends against configuring complex Kuberntes infrastructure in your Pods such as sidecars. These configurations have not been tested by Astronomer.
+
+:::
+
+You can configure multiple different custom worker Pods to override the default Kubernetes worker Pod on a per-task basis. You might complete this setup to change how many resources the Pod uses, or to create an `empty_dir` for tasks to store temporary files.
+
+1. Add the following import to your DAG file:
+
+    ```sh
+    from kubernetes.client import models as k8s
+    ```
+
+2. Add a `pod_override` configuration to the DAG file containing the task. See the [`kubernetes-client`](https://github.com/kubernetes-client/python/blob/master/kubernetes/docs/V1Container.md) GitHub for a list of all possible settings you can include in the configuration.
+3. Specify the `pod_override` in the task's parameters.
+
+See [Manage task CPU and memory](#manage-task-cpu-and-memory) for an example `pod_override` configuration. 
+
 ### Manage task CPU and memory
 
-Astro automatically allocates resources to Pods created by the Kubernetes executor. By default, Pods are configured to use 1 cpu and 512Mi.  A `pod_template_file` can't be used on Astro to override the default settings. The following example shows how you can use `pod_override` within a Kubernetes V1pod to override these settings to meet your specific requirements:
+One of the most common uses cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for your task. The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
 ```python {20}
 import pendulum
@@ -105,6 +134,17 @@ with DAG(
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
 
+### Change the worker node type your Pods run on
+
+A Deployment using the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker node that this queue uses from the Cloud UI.
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+
+2. Click the **Worker Queues** tab and then click **Edit** to edit the `default` worker queue.
+
+3. In **Worker Type**, select the type of worker node that you want to run your worker Pods on.
+
+4. Click **Update Queue**.
 
 ## Related documentation
 
