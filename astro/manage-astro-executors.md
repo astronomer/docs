@@ -19,7 +19,6 @@ This topic discusses basic Celery executor configurations for scaling workers in
 
 ### Prerequisites
 
-- An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
 ### Celery worker autoscaling logic
