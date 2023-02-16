@@ -42,9 +42,9 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
     - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks on a single pod. The Kubernetes executor runs individual tasks in an isolated Kubernetes pod and is a good option when when task reliability and running tasks in an isolated environment are the main priorities. The Celery and Kubernetes executors are good options for most uses cases. For more information about the Celery and Kubernetes executors, see [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained#kubernetes-executor).
     - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
 
-4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with:
+4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with the following resources:
 
-    - A worker queue named `default` that runs a maximum of 10 workers (Celery executor). Each of these workers can run a maximum of 16 tasks at a time.
+    - If you're running the Celery executor, a worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
     - A single scheduler with 0.5 CPUs and 1.88 GiB of memory.
 
 5. Click **Create Deployment**.
