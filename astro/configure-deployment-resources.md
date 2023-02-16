@@ -77,7 +77,6 @@ The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/co
     If you experience delays in task execution, which you can track with the Gantt Chart view of the Airflow UI, Astronomer recommends increasing the allocated AU value. The default resource allocation is ten AU. 
 
 - **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to ten AU and **Scheduler Count** to two, your Deployment will run with two Airflow schedulers using ten AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers. 
-- The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
 
 Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
 
