@@ -47,8 +47,10 @@ In the Astro Cloud IDE, you can additionally specify whether an environment vari
 4. Complete the following fields:
 
     - **Type**: Select the purpose of the environment variable. 
+
         - Select **Environment** if you want to configure a system-level environment variable for your runtime environment, such as `AIRFLOW__CORE__DEFAULT_TASK_EXECUTION_TIMEOUT`. 
-        - Select **Airflow** if you want to call the variable key from a Python cell using `Variable.get('<variable-name>')`. If you select **Airflow**, do not specify your environment variable key with `AIRFLOW_VAR_`. 
+        - Select **Airflow** if you want to call the variable value in a Python, SQL, or Warehouse SQL cell. Unlike in open source Airflow, do not specify your environment variable key with `AIRFLOW_VAR_`. 
+  
     - **Key**: They key for your environment variable.
     - **Value**: The value for your environment variable.
 
@@ -57,6 +59,21 @@ In the Astro Cloud IDE, you can additionally specify whether an environment vari
 6. Click **Create Variable**.
 
 The environment variable appears in the **Variables** list. To edit the environment variable, click **Edit** in the **Variables** list.
+
+### Call Airflow variables in cells 
+
+Call Airflow variable values in Python cells using `Variable.get('<variable-key>')`. For example:
+
+```python
+value = Variable.get('MY_KEY')
+print(value)
+```
+
+Call Airflow variables in SQL or Warehouse SQL cells using jinja templating. For example, if your environment variable stored the name of a column, you could run:
+
+```sql
+SELECT {{ var.value.MY_KEY }} FROM Mytable;
+```
 
 ## Configure Airflow connections
 
