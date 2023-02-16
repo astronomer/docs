@@ -17,7 +17,7 @@ From the **Lineage** tab on Astro, you can access the following four pages:
 
 :::info
 
-Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/concepts/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage datasets are extracted and generated using lineage metadata. The Cloud UI currently does not show information about Airflow datasets.
+Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage datasets are extracted and generated using lineage metadata. The Cloud UI currently does not show information about Airflow datasets.
 
 :::
 
