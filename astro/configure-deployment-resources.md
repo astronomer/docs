@@ -22,8 +22,62 @@ For advanced Deployment resource configurations, see [Manage Deployment executor
 
 ## Choose an executor
 
-- The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
-- Workers, which are responsible for executing tasks that have been scheduled and queued by the scheduler.
+The executor type you select determines which worker resources run your scheduled tasks. A single executor is assigned to each Deployment and you can update the executor assignment at any time. 
+
+### Celery executor
+
+The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most uses cases. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic). 
+
+#### Benefits
+
+- Worker queues let you assign tasks to different worker types. See [Configure worker queues](configure-worker-queues.md)
+- Allows additional workers to be added to cope with higher demand (horizontal scaling).
+- Provides a grace period for worker termination.
+- Running tasks are not terminated.
+
+#### Limitations
+
+- Execution speed is prioritized over task reliability.
+- Complicated set up.
+- More maintenance.
+
+### Kubernetes executor
+
+The Kubernetes executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
+
+#### Benefits
+
+- Fault tolerance. A task that fails doesn't cause other tasks to fail.
+- Specify CPU and memory limits or minimums to optimize performance and reduce costs.
+- Task isolation. A task uses only the resources allocated to it and it can't consume resources allocated to other tasks. 
+- Running tasks are not interrupted when a deploy is pushed.
+
+On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every cluster in the data plane and is managed by Astronomer.
+
+#### Limitations
+
+- Tasks take longer to start and this causes task latency.
+- PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
+- The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, the DAG is rejected and a broken DAG error message appears in teh Airflow UI. Astronomer recommends using `python-kubernetes-sdk`. See [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/).
+
+### Update the Deployment executor
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Details** tab.
+3. Click **Edit Details**. 
+4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
+5. Click **Update**.
+
+## Set scheduler resources
+
+The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. To ensure that your tasks have the CPU and memory required to complete successfully, you can configure:
+
+- **Scheduler Resources**: Select the number of Astronomer Units (AU) assigned to the schedulers. Alternatively, move the CPU and memory slider to use specific CPU and memory values to automatically define the scheduler AU assignment. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. One AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning five AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory.
+
+    If you experience delays in task execution, which you can track with the Gantt Chart view of the Airflow UI, Astronomer recommends increasing the allocated AU value. The default resource allocation is ten AU. 
+
+- **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to ten AU and **Scheduler Count** to two, your Deployment will run with two Airflow schedulers using ten AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers. 
+- The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
 
 Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
 
@@ -33,21 +87,7 @@ If you prefer, you can set Deployment resources using the Astro CLI and a local 
 
 :::
 
-### Worker queues 
-
-Worker queues are a set of configurations that apply to a group of workers in your Deployment. Each Deployment includes a `default` worker queue for running tasks, but you can configure additional worker queues to define CPU and memory limits for your tasks.
-
-See [Configure worker queues](configure-worker-queues.md).
-
-### Scheduler resources
-
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. By adjusting the **Scheduler Count** slider in the **Configuration** tab of the Cloud UI, you can configure up to 4 schedulers, each of which will be provisioned with the Astronomer Units (AU) specified in **Resources**. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. 1 AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning 5 AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory. You can view the CPU and memory allocations for schedulers on the Deployment **Details** page in the Cloud UI.
-
-For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each.
-
-If you experience delays in task execution, which you can track with the Gantt Chart view of the Airflow UI, Astronomer recommends increasing the AU allocated towards the scheduler. The default resource allocation is 10 AU.
-
-#### Edit scheduler settings 
+### Edit scheduler settings 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
