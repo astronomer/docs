@@ -66,9 +66,9 @@ astronomer:
 
 Replace the values above with those of the provider of your choice. If you want to configure Azure AD, Okta or Auth0 read below for specific guidelines.
 
-## AWS Cognito
+### AWS Cognito
 
-### Create a user pool in Cognito
+#### Create a user pool in Cognito
 
 Start by creating a user pool in Cognito. You can either review the default settings or step through them to customize.
 
@@ -83,9 +83,7 @@ Once the pool and app client are created, head over to the `App integration` >`A
 
 Then switch over to the `Domain name` tab and select a unique domain name to use for your hosted Cognito components.
 
-This should give you a minimally working user pool configuration.
-
-### Edit your Astronomer configuration
+#### Edit your Astronomer configuration
 
 Add the following values to your `config.yaml` file in the `astronomer/` directory:
 
@@ -105,32 +103,61 @@ astronomer:
 
 Your Cognito pool ID can be found in the `General settings` tab of the Cognito portal. Your client ID is found in the `App clients` tab.
 
-Once you've saved your `config.yaml` file with these values, push it to your platform as described in [Apply a config change](apply-platform-config.md).
+Once you've saved your `config.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
 
-## Azure AD
+### Azure AD
 
-### Register the Application using `App Registrations` on Azure
+Follow these steps to configure Azure AD as your OIDC provider. 
 
-To start, register the application. As you do so, make sure to specify the Redirect URI as `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
+#### Register the Application using `App Registrations` on Azure
 
-Replace `BASEDOMAIN` with your own. For example, if your basedomain were `astronomer-development.com`, your registration would look like the following:
+1. In Azure Active Directory, click **App registrations** > **New registration**. 
+2. Complete the following sections:
+  
+    - **Name**: Any
+    - **Supported account types**: Accounts in this organizational directory only (Astronomer only - single tenant)
+    - **Redirect URI**: Web / `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
 
-![application](/img/software/azure-application.png)
+    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URI is https://houston.mycompany.com/v1/oauth/redirect/
 
-### Enable Access and ID Tokens
+3. Click **Register**.
 
-From there, head over to 'Authentication' to:
+4. Click **Authentication** in the left menu.
+5. In the **Web** area, confirm the redirect URI is correct.
 
-- Make sure that Access Tokens and ID tokens are enabled
-- Verify the Redirect URI
+6. In the **Implicit grant and hybrid flows** area, select **Access tokens** and **ID tokens**.
 
-Example:
+7. Click **Save**.
 
 ![authentication.png](/img/software/azure-authentication.png)
 
-### Enable Azure AD in your config.yaml file
+#### Create a client secret
 
-Make sure the `config.yaml` file in your `astronomer` directory is updated with the proper values:
+1. In your Azure AD application management left menu, click **Certificates & secrets**.
+2. Click **New client secret**.
+3. Enter a description in the **Description** field and then select an expiry period in the **Expires** list. 
+4. Click **Add**.
+5. Copy the values in the **Value** and **Secret ID** columns. 
+6. Click **API permissions** in the left menu.
+5. Click **Microsoft Graph** and add the following minimum permissions for Microsoft Graph:
+
+    - `email`
+    - `Group.Read.All`
+    - `openid`
+    - `profile`
+    - `User.Read`
+
+5. Click **Token configuration** in the left menu.
+6. Click **Add groups claim** and select the following options:
+
+    - In the **Select group types to include in Access, ID, and SAML tokens** area, select every option. 
+    - In **Customize token properties by type** area, expand **ID**, **Access**, and **SAML** and then select **Group ID** for each type.
+    
+7. Click **Add**.
+
+#### Enable Azure AD in your config.yaml file
+
+Add the following values to the `config.yaml` file in your `astronomer` directory:
 
 ```yaml
 astronomer:
@@ -142,20 +169,22 @@ astronomer:
             enabled: false
           microsoft:
             enabled: true
-            clientId: <client_id>
+            clientId: <your-client-id>
             discoveryUrl: https://login.microsoftonline.com/<tenant-id>/v2.0/
+            clientSecret: <your-client-secret>
+            authUrlParams:
+              audience: <cyour-client-id>
         github:
           enabled: false
 ```
-Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
-## Okta
+### Okta
 
-To integrate Okta with Astronomer, you'll need to make configuration changes both within Okta and on Astronomer.
+To integrate Okta with Astronomer, you'll need to make configuration changes in Okta and Astronomer.
 
-Follow the steps below.
 
-### Okta configuration
+#### Okta configuration
 
 1. If you haven't already, create an [Okta account](https://www.okta.com/).
 
@@ -167,9 +196,9 @@ Follow the steps below.
 
 5. Save the `Client ID` generated for this Okta app for use in the next steps.
 
-6. To ensure that an Okta tile appears, set `Initiate Login URI` to `https://houston.BASEDOMAIN/v1/oauth/start?provider=okta`  (_Optional_).
+6. Optional. To ensure that an Okta tile appears, set `Initiate Login URI` to `https://houston.BASEDOMAIN/v1/oauth/start?provider=okta`.
 
-### Enable Okta in your config.yaml file
+#### Enable Okta in your config.yaml file
 
 Add the following to your `config.yaml` file in your `astronomer` directory:
 
@@ -187,11 +216,9 @@ astronomer:
 
 Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
->> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
+> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
 
-## Auth0
-
-### Auth0 Configuration
+### Auth0
 
 #### Create an Auth0 account
 
@@ -234,7 +261,7 @@ For instructions, navigate to Auth0's [connection guides](https://auth0.com/docs
 * Under `Identifier`, enter `astronomer-ee`.
 * Leave the value under `Signing Algorithm` as `RS256`.
 
-### Enable Auth0 in your config.yaml file
+#### Enable Auth0 in your config.yaml file
 
 Add the following to your `config.yaml` file in your `astronomer` directory:
 

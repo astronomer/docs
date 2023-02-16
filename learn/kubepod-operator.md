@@ -5,6 +5,9 @@ description: "Use the KubernetesPodOperator in Airflow to run tasks in Kubernete
 id: kubepod-operator
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 The KubernetesPodOperator (KPO) runs a Docker image in a dedicated Kubernetes Pod. By abstracting calls to the Kubernetes API, the KubernetesPodOperator lets you start and run Pods from Airflow using DAG code.
 
 In this guide, you'll learn:
