@@ -243,7 +243,7 @@
 /software/0.25/upgrade-to-0-25 /software/0.25/upgrade-astronomer 301
 
 # redirect links to renamed files
-astro/configure-worker-queues#worker-autoscaling-logic astro/manage-astro-executors#celery-worker-autoscaling-logic 301
+/astro/configure-worker-queues#worker-autoscaling-logic /astro/manage-astro-executors#celery-worker-autoscaling-logic 301
 /astro/connect-aws#resolving-services /astro/connect-aws#hostname-resolution-options 301
 /astro/configure-deployment /astro/configure-deployment-resources 301
 /astro/scheduler-logs /astro/view-logs 301
