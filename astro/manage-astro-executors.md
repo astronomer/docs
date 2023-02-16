@@ -40,7 +40,7 @@ These calculations are computed by KEDA every 10 seconds. For more information o
 
 ### Configure Celery worker scaling
 
-Celery worker scaling is configured at the worker queue level. Changing how Celery workers scale ensures that your Deployment always has enough resources to run tasks, but never too much that you pay for unnecessary infrastructure. To update the worker scaling behavior for a worker queue:
+Celery worker scaling is configured at the worker queue level. Changing how Celery workers scale ensures that your Deployment always has enough resources to run tasks, but never too much that you pay for unnecessary infrastructure.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -55,9 +55,9 @@ Celery worker scaling is configured at the worker queue level. Changing how Cele
 
 ## Kubernetes executor
 
-The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor spins up a new Kubernetes Pod to execute each individual task run, then spins down the Pod when the task run is complete. This executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
+The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
 
-By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queed tasks in new Pods.
+By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
 ### Prerequisites
 
@@ -68,7 +68,7 @@ By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and
 
 :::warning
 
-While you can technically customize all possible values for a worker Pod, Astronomer strongly recommends against configuring complex Kuberntes infrastructure in your Pods such as sidecars. These configurations have not been tested by Astronomer.
+While you can technically customize all values for a worker Pod, Astronomer recommends against configuring complex Kubernetes infrastructure in your Pods such as sidecars. These configurations have not been tested by Astronomer.
 
 :::
 
@@ -134,7 +134,7 @@ with DAG(
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
 
-### Change the worker node type your Pods run on
+### Change the Pod worker node type
 
 A Deployment using the Kubernetes executor runs worker Pods on a single `default` worker queue. You can change the type of worker node that this queue uses from the Cloud UI.
 
@@ -142,7 +142,7 @@ A Deployment using the Kubernetes executor runs worker Pods on a single `default
 
 2. Click the **Worker Queues** tab and then click **Edit** to edit the `default` worker queue.
 
-3. In **Worker Type**, select the type of worker node that you want to run your worker Pods on.
+3. In the  **Worker Type** list, select the type of worker node to run your worker Pods on.
 
 4. Click **Update Queue**.
 
