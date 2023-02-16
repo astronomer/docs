@@ -201,7 +201,7 @@ For more information about these worker types, see [N2 machine series](https://c
 
 ### Bug fixes
 
-- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks) and less volatility across workers. AZ rebalancing is enabled for other system components on Astro.
+- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks) and less volatility across workers. AZ rebalancing is enabled for other system components on Astro.
 - The **Updated at** field for a transferred Deployment now displays the correct time.
 - `astro deploy --dags` now handles deferrable tasks correctly.
 
@@ -544,7 +544,7 @@ For more information about the installation process and supported configurations
 
 This release introduces two changes that ensure a higher level of reliability for Deployments on Astro:
 
-- [PgBouncer](https://www.pgbouncer.org/), a microservice that increases resilience by pooling database connections, is now considered highly available on Astro. Every Deployment must now have 2 PgBouncer Pods instead of 1, each assigned to a different node within the cluster. This change protects against pod-level connection issues resulting in [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks), which was previously seen during cluster downscaling events. PgBouncer is fully managed by Astronomer and is not configurable.
+- [PgBouncer](https://www.pgbouncer.org/), a microservice that increases resilience by pooling database connections, is now considered highly available on Astro. Every Deployment must now have 2 PgBouncer Pods instead of 1, each assigned to a different node within the cluster. This change protects against pod-level connection issues resulting in [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks), which was previously seen during cluster downscaling events. PgBouncer is fully managed by Astronomer and is not configurable.
 
 - The Airflow scheduler is now configured with an [anti-affinity policy](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to limit the possibility of all schedulers for a single Deployment being impacted by an incident within a single node on an Astro cluster. For users who set **Scheduler Count** in the Cloud UI to 2, this means that those 2 scheduler Pods cannot be assigned to the same node and instead require a minimum of 2 nodes total. To avoid significant increases in cost, 3 or 4 schedulers can share the same 2 nodes and will not necessarily result in a higher node count minimum.
 

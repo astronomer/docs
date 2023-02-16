@@ -161,7 +161,7 @@ Other pages on the **Admin** tab include:
 - **Configurations:** View the contents of your `airflow.cfg` file. Note that this can be disabled by your Airflow admin for security reasons.
 - **Plugins:** View any [Airflow plugins](https://airflow.apache.org/docs/apache-airflow/stable/plugins.html) defined in your environment.
 - **Providers:** View all [Airflow providers](https://airflow.apache.org/docs/apache-airflow-providers/) included in your Airflow environment with their version number.
-- **Pools:** View and manage [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html).
+- **Pools:** View and manage [Airflow pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html).
 
 ## Docs
 

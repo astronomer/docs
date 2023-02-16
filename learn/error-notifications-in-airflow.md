@@ -288,9 +288,9 @@ In the following example, you'll use the [Slack provider](https://registry.astro
 
 ## Airflow service-level agreements
 
-[Airflow service-level agreements (SLAs)](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#slas) are a type of notification that you can use if your tasks take longer than expected to complete. If a task takes longer than the maximum amount of time to complete as defined in the SLA, the SLA will be missed and notifications are triggered. This can be useful when you have long-running tasks that might require user intervention after a certain period of time, or if you have tasks that need to complete within a certain period. 
+[Airflow service-level agreements (SLAs)](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#slas) are a type of notification that you can use if your tasks take longer than expected to complete. If a task takes longer than the maximum amount of time to complete as defined in the SLA, the SLA will be missed and notifications are triggered. This can be useful when you have long-running tasks that might require user intervention after a certain period of time, or if you have tasks that need to complete within a certain period. 
 
-Exceeding an SLA does not stop a task from running. If you want tasks to stop running after a certain time, use [timeouts](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#timeouts).
+Exceeding an SLA does not stop a task from running. If you want tasks to stop running after a certain time, use [timeouts](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#timeouts).
 
 You can set an SLA for all tasks in your DAG by defining `'sla'` as a default argument, as shown in the following example DAG:
 
