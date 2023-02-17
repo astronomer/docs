@@ -26,11 +26,11 @@ The executor type you select determines which worker resources run your schedule
 
 ### Celery executor
 
-The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most uses cases. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic). 
+The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most use cases. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic). 
 
 #### Benefits
 
-- Worker queues let you assign tasks to different worker types. See [Configure worker queues](configure-worker-queues.md)
+- Support multiple worker queues, which lets you assign tasks to different worker node types. See [Configure worker queues](configure-worker-queues.md)
 - Allows additional workers to be added to cope with higher demand (horizontal scaling).
 - Provides a grace period for worker termination.
 - Running tasks are not terminated.

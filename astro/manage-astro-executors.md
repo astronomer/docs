@@ -9,11 +9,13 @@ id: 'manage-astro-executors'
   <meta name="og:description" content="Learn how to select and manage Astro executors." />
 </head>
 
-After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. This document provides you with an overview of how to configure the Celery and Kubernetes executors on Astro. To choose and select an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
+After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. This document provides you with an overview of how to configure the Celery and Kubernetes executors on Astro. To choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
 
 ## Manage the Celery executor
 
-The Celery executor assigns tasks to workers with preset amounts of CPU and memory based on the cloud instance type they run on. On Astro, workers are organized into pools called worker queues that automatically scale worker count based on how many tasks you're running. Each Deployment running the Celery executor has a default worker queue that requires no additional configuration to start running tasks. 
+The Celery executor assigns tasks to workers with preset amounts of CPU and memory. 
+
+On Astro, each Celery worker utilizes an entire worker node instance on your cloud and can run multiple tasks at once. Workers are organized into pools called worker queues that automatically scale worker count based on how many tasks you're running. Each Deployment running the Celery executor has a default worker queue that requires no additional configuration to start running tasks. 
 
 This topic discusses basic Celery executor configurations for scaling workers in a worker queue. For advanced resource configuration steps, including how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
 
@@ -40,7 +42,7 @@ These calculations are computed by KEDA every 10 seconds. For more information o
 
 ### Configure Celery worker scaling
 
-Celery worker scaling is configured at the worker queue level. Changing how Celery workers scale ensures that your Deployment always has enough resources to run tasks, but never too much that you pay for unnecessary infrastructure.
+Celery worker scaling is configured at the worker queue level. Changing worker scaling behavior ensures that your Deployment always has enough resources to run tasks, but never so much that you pay for unnecessary infrastructure.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -53,7 +55,7 @@ Celery worker scaling is configured at the worker queue level. Changing how Cele
     
 4. Click **Update Queue**.
 
-## Kubernetes executor
+## Manage the Kubernetes executor
 
 The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
 
@@ -72,7 +74,7 @@ While you can technically customize all values for a worker Pod, Astronomer reco
 
 :::
 
-You can configure multiple different custom worker Pods to override the default Kubernetes worker Pod on a per-task basis. You might complete this setup to change how many resources the Pod uses, or to create an `empty_dir` for tasks to store temporary files.
+You can configure multiple different custom worker Pods to override the default Astro worker Pod on a per-task basis. You might complete this setup to change how many resources the Pod uses, or to create an `empty_dir` for tasks to store temporary files.
 
 1. Add the following import to your DAG file:
 
