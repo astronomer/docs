@@ -41,12 +41,12 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | ---------------- | ------------------------- | ---------------------------- | -------------- |
 | `af-south-1`     | Africa (Cape Town)        | ✔️                            |                |
 | `ap-east-1`      | Asia Pacific (Hong Kong)  | ✔️                            |                |
-| `ap-northeast-1` | Asia Pacific (Tokyo)      | ✔️                            |                |
+| `ap-northeast-1` | Asia Pacific (Tokyo)      | ✔️                            | ✔️              |
 | `ap-northeast-2` | Asia Pacific (Seoul)      | ✔️                            |                |
 | `ap-northeast-3` | Asia Pacific (Osaka)      | ✔️                            |                |
 | `ap-southeast-1` | Asia Pacific (Singapore)  | ✔️                            |                |
-| `ap-southeast-2` | Asia Pacific (Sydney)     | ✔️                            |                |
-| `ap-south-1`     | Asia Pacific (Mumbai)     | ✔️                            | ✔️              |
+| `ap-southeast-2` | Asia Pacific (Sydney)     | ✔️                            | ✔️              |
+| `ap-south-1`     | Asia Pacific (Mumbai)     | ✔️                            |                |
 | `ca-central-1`   | Canada (Central)          | ✔️                            |                |
 | `eu-central-1`   | Europe (Frankfurt)        | ✔️                            | ✔️              |
 | `eu-north-1`     | Europe (Stockholm)        | ✔️                            |                |
@@ -163,7 +163,7 @@ With the exception of `m5d` and `m6id` nodes, all supported node types have a ma
 
 The ability to provision ephemeral storage for all node instance types is coming soon.
 
-If you need to pass significant data between Airflow tasks, Astronomer recommends using an [XCom backend](https://airflow.apache.org/docs/apache-airflow/stable/concepts/xcoms.html) such as [AWS S3](https://aws.amazon.com/s3/) or [Google Cloud Storage (GCS)](https://cloud.google.com/storage). For more information and best practices, see the Airflow Guide on [Passing Data Between Airflow Tasks](https://docs.astronomer.io/learn/airflow-passing-data-between-tasks).
+If you need to pass significant data between Airflow tasks, Astronomer recommends using an [XCom backend](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html#custom-xcom-backends) such as [AWS S3](https://aws.amazon.com/s3/) or [Google Cloud Storage (GCS)](https://cloud.google.com/storage). For more information and best practices, see the Airflow Guide on [Passing Data Between Airflow Tasks](https://docs.astronomer.io/learn/airflow-passing-data-between-tasks).
 
 :::
 

@@ -29,7 +29,7 @@ For more detail on changes between Software versions, see [Astronomer Software R
 
 > **Note:** Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/dockershim-faq/), Azure does not support private CAs starting with Kubernetes 1.19. If you use a private CA, contact [Astronomer Support](https://support.astronomer.io) before upgrading to Kubernetes 1.19 on AKS.
 
-> **Note:** While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow Triggerer is available only in Astronomer v0.26+. To use [Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), which require the Airflow Triggerer, you must upgrade.
+> **Note:** While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow Triggerer is available only in Astronomer v0.26+. To use [Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html), which require the Airflow Triggerer, you must upgrade.
 
 ### Kubernetes Version Support Policy
 

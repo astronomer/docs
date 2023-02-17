@@ -45,7 +45,7 @@ Generally speaking, the backup operation does the following:
 *   Uploads a tarball of copied Kubernetes objects into cloud object storage.
 *   Calls the cloud provider API to make disk snapshots of persistent volumes, if specified.
 
-We’ll cover both on-demand and scheduled backups below. For more information on the above, refer to [“How Velero Works.”](https://velero.io/docs/v1.4/how-velero-works/)
+We’ll cover both on-demand and scheduled backups below. For more information, see [How Velero Works](https://velero.io/docs/main/how-velero-works/)
 
 #### Prerequisites
 
@@ -55,11 +55,11 @@ The following instructions assume you have:
 * The Velero CLI
 * `kubectl` access to your cluster
 
-If you do not already have both, reference [Velero's documentation](https://velero.io/docs/v1.4/).
+If you do not have Velero or the Velero CLI installed, see [How Velero Works](https://velero.io/docs/main/how-velero-works/).
 
 #### On-demand backup
 
-If you need to create a backup on demand, run the following via the Velero CLI:
+If you need to create a backup on demand, run the following in the Velero CLI:
 
 ```
 velero backup create <BACKUP NAME>
@@ -87,14 +87,14 @@ The command above will schedule a daily backup of the entire cluster at 1am UTC.
 
 ### Database backup
 
-There are two ways to backup the Astronomer Database:
+You can use one of the following methods to backup the Astronomer database:
 
-1. Enable Automatic Backups via your Cloud Provider (Preferred)
-2. Traditional Backup Tools (e.g. [pg_dump](https://www.postgresql.org/docs/12/app-pgdump.html) for Postgresql)
+- Enable automatic backups with your cloud provider (Preferred)
+- Use traditional backup tools such as [pg_dump](https://www.postgresql.org/docs/12/app-pgdump.html) for Postgresql
 
 #### Enable automatic backups with your cloud provider
 
-The easiest and most reliable way to ensure the database is backed up  is to enable automatic backups via your cloud provider. This will create daily backups of your Astronomer Postgresql database.
+The easiest and most reliable way to ensure the database is backed up  is to enable automatic backups with your cloud provider. This will create daily backups of your Astronomer Postgresql database.
 
 Refer to the following links to Cloud Provider documentation for creating Postgres Database Backups:
 
@@ -112,7 +112,7 @@ To run `pg_dump` successfully, someone with “read” access to the Astronomer 
 *   Username
 *   Password
 
-The connection string, which includes username and password, can be obtained via the following command:
+Run the following command to return the connection string with the username and password:
 
 ```
 kubectl -n astronomer get secret  astronomer-houston-backend -o jsonpath='{.data.connection}' | base64 -D
@@ -133,7 +133,7 @@ The steps below are valid for the Astronomer Platform on Helm3 (Astronomer v0.14
 
 #### Non-deleted Airflow Deployment
 
-To restore a previous version of a deployment that has NOT been deleted via the Software UI (or CLI/API) and that has been backed up with Velero, follow the steps below.
+To restore a previous version of a deployment that has not been deleted in the Astronomer Software UI (or CLI/API) and that has been backed up with Velero, follow the steps below.
 
 1. Identify the Velero backup you intend to use by running:
 
@@ -153,7 +153,7 @@ To restore a previous version of a deployment that has NOT been deleted via the 
 
 #### Deleted Airflow Deployment
 
-To restore a single Airflow Deployment that _was_ deleted via the Software UI (or CLI/API), first perform the steps detailed above for restoring its namespace with Velero.
+To restore a single Airflow Deployment that _was_ deleted in the Astronomer Software UI (or CLI/API), perform the previous steps to restore its Velero namespace.
 
 Once that is complete, the Astronomer Database needs to be updated to mark that release as not deleted. Follow the steps below.
 

@@ -49,7 +49,7 @@ Due to the [deprecation of Dockershim](https://kubernetes.io/blog/2020/12/02/doc
 
 :::info
 
-While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow triggerer is available only in Astronomer v0.26 and later. To use [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html), that require the Airflow triggerer, you must upgrade.
+While Astronomer v0.25 is compatible with Astronomer Certified 2.2.0, support for the Airflow triggerer is available only in Astronomer v0.26 and later. To use [deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html), that require the Airflow triggerer, you must upgrade.
 
 :::
 

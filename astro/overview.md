@@ -26,7 +26,7 @@ import AstroCard from '@site/src/components/AstroCard';
 ## Get started
 
 <LinkCardGrid>
-  <LinkCard label="I'm unfamiliar with Apache Airflow" description="Use tutorials and concepts to learn everything you need to know about running Airflow." href="/learn/overview" icon="/img/airflow-logo.png" />
+  <LinkCard label="I'm unfamiliar with Apache Airflow" description="Use tutorials and concepts to learn everything you need to know about running Airflow." href="/learn/" icon="/img/airflow-logo.png" />
   <LinkCard label="I'm ready to create my first project" description="Learn how to create an Astro project and run it locally with the Astro command-line interface (CLI)." href="/astro/create-project" icon="/img/astro-monogram.svg" />
 </LinkCardGrid>
 
