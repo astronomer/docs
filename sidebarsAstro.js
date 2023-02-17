@@ -29,7 +29,6 @@ module.exports = {
       items: [
         "develop-project",
         "kubernetespodoperator",
-        "manage-astro-executors",
         {
           type: "category",
           label: "Cloud IDE",
@@ -58,6 +57,7 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "configure-deployment-resources",
+        "manage-astro-executors",
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
