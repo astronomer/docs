@@ -65,7 +65,7 @@ Modifying the region of an existing cluster on Astro is not supported. If you're
 
 ## Supported RDS instance types
 
-The following AWS RDS instance types re supported on Astro:
+The following AWS RDS instance types are supported on Astro:
 
 ### db.r5
 
