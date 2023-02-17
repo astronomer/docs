@@ -59,6 +59,11 @@ You can now view all available facets for a job run, including [custom facets](h
 
 ![Example OpenLineage facet page in the Cloud UI](/img/release-notes/view-facets.png)
 
+### Additional improvements
+
+- You can now create AWS clusters in `ap-northeast-1` and `ap-southeast-2` on an Astro - Hosted installation.
+- You can now create GCP clusters in `australia-southeast1` on an Astro - Hosted installation.
+
 ### Security fixes
 
 - Fixed [CVE-2023-0286](https://avd.aquasec.com/nvd/2022/cve-2023-0286/).
