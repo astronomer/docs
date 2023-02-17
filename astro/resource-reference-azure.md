@@ -67,7 +67,7 @@ The following Azure Database for PostgreSQL instance types are supported on Astr
 - Standard_E2ds_v4 (CPU 2, 16 GiB MEM)
 - Standard_E4ds_v4 (CPU 4, 32 GiB MEM)
 
-For more information about configuring Azure Database for PostgreSQL, see the [Azure Database for PostgreSQL documentation)](https://learn.microsoft.com/en-us/azure/postgresql/).
+For more information about configuring Azure Database for PostgreSQL, see the [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/).
 
 ## Supported worker node pool instance types
 

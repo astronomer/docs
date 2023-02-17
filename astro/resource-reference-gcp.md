@@ -77,7 +77,7 @@ The following Cloud SQL instance types are supported on Astro:
 - Small Memory Optimized (CPU 2, 12 GiB MEM)
 - Medium Memory Optimized (CPU 4, 24 GiB MEM)
 
-For more information about configuring Cloud SQL, see the [Cloud SQL documentation)](https://cloud.google.com/sql).
+For more information about configuring Cloud SQL, see the [Cloud SQL documentation](https://cloud.google.com/sql).
 
 ## Supported worker node pool instance types
 
