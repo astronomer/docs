@@ -109,4 +109,4 @@ It's likely that your Organization has not configured SSO for your email domain.
 
 ### Why do I see the error “User is not assigned to this application” when I log in through SSO?
 
-This error indicates that your Organization has not enabled just-in-time provisioning and you have not assigned to Astro through your IdP. Contact your administrator to be added either through your IdP or through an Astro invite.
+This error indicates that your Organization you have not been assigned to Astro through your IdP. Contact your administrator to be added either through your IdP or through an Astro invite.
