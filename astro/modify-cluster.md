@@ -22,14 +22,14 @@ If you don't have a cluster on Astro, see [Install Astro](https://docs.astronome
 
 ## View clusters
 
-In the Cloud UI, click the **Clusters** tab to view a list of the clustersthat are available to your Organization. Click a cluster and then click the **Worker Types**, **Workspace Authorization**, or **Details** tabs to view cluster information including:
+In the Cloud UI, click the **Clusters** tab to view a list of the clusters that are available to your Organization. Click a cluster and then click the **Worker Types**, **Workspace Authorization**, or **Details** tabs to view cluster information including:
 
 - The region for the cluster.
 - The cloud provider Account ID associated with the cluster.
 - The size and type of the cluster's database.
 - When the cluster was created and last updated.
 
-Some of the configurations in the Cloud UI cannot be changed. Only the listed configurations can be modified by your team.
+Some of the configurations in the Cloud UI cannot be changed. Only the listed configurations in this topic can be modified by your team.
 
 ## Manage worker types
 
@@ -37,11 +37,11 @@ On Astro, worker nodes execute Airflow tasks. Workers are organized through work
 
 To have a Deployment run Airflow tasks with a specific worker type, you need to work with Astronomer support to create a worker node pool for that worker type on the cluster hosting the Deployment. Then, you can configure a Deployment worker queue to use that worker type. Contact [Astronomer support](https://support.astronomer.io) with the name of the worker type(s) you want to enable in your cluster. For example, `m6i.2xlarge`.
 
-To confirm a modification was completed, click the **Clusters** tab in the Cloud UI and then click the **Worker Types** tab to view updated configuration information.
+To confirm that the worker type was added, click the **Clusters** tab in the Cloud UI, click a cluster name, and then click the **Worker Types** tab to view your new worker type.
 
 ### About worker node pools
 
-All Astro clusters have one worker node pool for one worker type by default, but you can configure up to 30 additional worker types. After Astronomer creates a worker node pool for a cluster, your team can configure a worker queue in any Deployment with that worker type. The worker type appears as a new option on the **Worker Type** page of the Cloud UI and as an option in the Astro CLI. If your cluster only has one worker type, all tasks across Deployments in your cluster can only run on that type of worker.
+All Astro clusters have one worker node pool for one worker type by default, but you can configure up to 30 additional worker types. After Astronomer creates a worker node pool for a cluster, your team can configure a worker queue in any Deployment with that worker type. The worker type appears as a new option on the **Worker Queue** page of your Deployment configuration page and as an option in the Astro CLI. If your cluster only has one worker type, all tasks across Deployments in your cluster can only run on that type of worker.
 
 Individual worker nodes run only on a single Deployment, but a worker node pool can have worker nodes spread across multiple Deployments.
 
@@ -50,10 +50,9 @@ Creating a worker node pool does not necessarily mean that the infrastructure is
 - There are no Deployments in your cluster that have worker queues configured with the worker type.
 - There are no default worker queues configured with the worker type. The default worker queue cannot scale to zero workers, but additional worker queues can scale to zero.
 
-
 ### Configure node instance type
 
-Each worker type on Astro is configured with a node instance type that is defined by your cloud provider. For example, `m5.2xlarge` on AWS, `Standard_D8_v5` on Azure, or `e2-standard-8` on GCP. Node instance types are comprised of varying combinations of CPU, memory, storage, and networking capacity. By choosing a node instance type, you can provide the appropriate balance of resources for your Airflow tasks.
+Each worker type on Astro is configured with a node instance type that is defined by your cloud provider. For example, `m5.2xlarge` on AWS, `Standard_D8_v5` on Azure, or `e2-standard-8` on GCP. Node instance types are comprised of varying combinations of CPU, memory, storage, and networking capacity. By choosing an instance type and having workers with different instance types, you can provide the appropriate balance of resources for your Airflow tasks. This might make your DAGs execute faster and more reliably.
 
 How your Airflow tasks use the capacity of a worker node depends on which executor is selected for your Deployment. With the Celery executor, each worker node runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead. With the Kubernetes executor, each worker node can run an unlimited number of Pods as long as the sum of all requests from each Pod doesn't exceed the total capacity of the node minus Astro's system overhead.
 
@@ -95,7 +94,7 @@ For the list of database instance types available on Astro, see [AWS](resource-r
 
 <PremiumBadge />
 
-As an Organization Owner, you can keep teams and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over cloud your resources by ensuring that only authorized pipelines are running on specific clusters.
+As an Organization Owner, you can keep teams and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over your cloud resources by ensuring that only authorized pipelines are running on specific clusters. For example, you can authorize only production Workspaces to a specific cluster to ensure that no development Workspaces compromise the cluster through bugs or excess resource usage.
 
 1. In the Cloud UI, click the **Clusters** tab and then select a cluster.
 2. Click the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
