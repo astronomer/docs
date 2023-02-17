@@ -60,7 +60,14 @@ Modifying the region of an existing Astro cluster isn't supported. If you're int
 
 ## DB Instance Type
 
-Azure Database for PostgreSQL is supported on Astro. See [Azure Database for PostgreSQL documentation)](https://learn.microsoft.com/en-us/azure/postgresql/).
+The following Azure Database for PostgreSQL instance types are supported on Astro: 
+
+- Standard_D4ds_v4 (CPU 4, 16 GiB MEM)
+- Standard_D2ds_v4 (CPU 2, 8 GiB MEM)
+- Standard_E2ds_v4 (CPU 2, 16 GiB MEM)
+- Standard_E4ds_v4 (CPU 4, 32 GiB MEM)
+
+For more information about configuring Azure Database for PostgreSQL, see the [Azure Database for PostgreSQL documentation)](https://learn.microsoft.com/en-us/azure/postgresql/).
 
 ## Supported worker node pool instance types
 

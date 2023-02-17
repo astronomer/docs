@@ -70,7 +70,14 @@ Modifying the region of an existing Astro cluster isn't supported. If you're int
 
 ## DB Instance Type
 
-Cloud SQL is supported on Astro. See [Cloud SQL)](https://cloud.google.com/sql).
+The following Cloud SQL instance types are supported on Astro:
+
+- Small General Purpose (CPU 2, 8 GiB MEM)
+- Medium General Purpose (CPU 4, 16 GiB MEM)
+- Small Memory Optimized (CPU 2, 12 GiB MEM)
+- Medium Memory Optimized (CPU 4, 24 GiB MEM)
+
+For more information about configuring Cloud SQL, see the [Cloud SQL documentation)](https://cloud.google.com/sql).
 
 ## Supported worker node pool instance types
 
