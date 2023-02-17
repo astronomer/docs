@@ -48,7 +48,7 @@ Creating a worker node pool does not necessarily mean that the infrastructure is
 - There are no Deployments in your cluster that have worker queues configured with the worker type.
 - There are no default worker queues configured with the worker type. The default worker queue cannot scale to zero workers, but additional worker queues can scale to zero.
 
-To create or modify a worker type, contact [Astronomer Support](https://cloud.support.astronomer.io). To learn more about worker queues, see [Worker queues](worker-queues.md).
+To create or modify a worker type, contact [Astronomer Support](https://cloud.support.astronomer.io). To learn more about worker queues, see [Configure worker queues](configure-worker-queues.md).
 
 ### Configure node instance type
 
