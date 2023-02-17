@@ -58,6 +58,10 @@ Modifying the region of an existing Astro cluster isn't supported. If you're int
 
 ¹ If you want to host Astro in a dedicated account owned by your organization (Bring Your Own Cloud) in one of these regions, you'll need to contact [Microsoft Azure Support](https://support.microsoft.com/en-us/topic/contact-microsoft-azure-support-2315e669-8b1f-493b-5fb1-d88a8736ffe4) to enable the regions. If you require clarification about this requirement, contact [Astronomer support](https://cloud.astronomer.io/support). 
 
+## DB Instance Type
+
+Azure Database for PostgreSQL is supported on Astro. See [Azure Database for PostgreSQL documentation)](https://learn.microsoft.com/en-us/azure/postgresql/).
+
 ## Supported worker node pool instance types
 
 Each worker node in a pool runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead.

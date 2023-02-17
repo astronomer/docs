@@ -68,6 +68,10 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 
 Modifying the region of an existing Astro cluster isn't supported. If you're interested in a GCP region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## DB Instance Type
+
+Cloud SQL is supported on Astro. See [Cloud SQL)](https://cloud.google.com/sql).
+
 ## Supported worker node pool instance types
 
 Each worker node in a pool runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead.
