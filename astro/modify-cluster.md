@@ -33,7 +33,9 @@ Some of the configurations in the Cloud UI cannot be changed. Only the listed co
 
 ## Manage worker types
 
-A worker type on Astro is a node pool in your cluster that consists of worker nodes of the same node instance type. On Astro, worker nodes execute Airflow tasks. Each worker node pool can be configured with a node instance type and a maximum node count. Contact [Astronomer support](https://support.astronomer.io) with the name of the worker type(s) you want to enable in your cluster. For example, `m6i.2xlarge`.
+On Astro, worker nodes execute Airflow tasks. Workers are organized through worker node pools, which are sets of configurations that Astro uses to scale up and down workers of a specific instance type. Each worker node pool can be configured with a node instance type and a maximum node count. 
+
+To have a Deployment run Airflow tasks with a specific worker type, you need to work with Astronomer support to create a worker node pool for that worker type on the cluster hosting the Deployment. Then, you can configure a Deployment worker queue to use that worker type. Contact [Astronomer support](https://support.astronomer.io) with the name of the worker type(s) you want to enable in your cluster. For example, `m6i.2xlarge`.
 
 To confirm a modification was completed, click the **Clusters** tab in the Cloud UI and then click the **Worker Types** tab to view updated configuration information.
 
