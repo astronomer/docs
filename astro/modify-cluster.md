@@ -88,7 +88,6 @@ During the cluster creation process, you are asked to specify a **DB Instance Ty
 
 For the list of database instance types available on Astro, see [AWS](resource-reference-aws.md#rds-instance-type), [Azure](resource-reference-azure.md#db-instance-type), or [GCP](resource-reference-gcp.md#db-instance-type). To request a different database instance type, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-
 ## Authorize Workspaces to a Cluster
 
 <PremiumBadge />
