@@ -1,8 +1,8 @@
 ---
-sidebar_label: 'Manage and modify clusters'
+sidebar_label: 'Configure a cluster'
 title: "Manage and modify clusters"
 id: modify-cluster
-description: Learn what changes are supported on existing Astro clusters.
+description: Learn what you can configure on an existing Astro cluster.
 ---
 
 import PremiumBadge from '@site/src/components/PremiumBadge';
