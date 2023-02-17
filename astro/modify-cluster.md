@@ -22,7 +22,7 @@ If you don't have a cluster on Astro, see [Install Astro](https://docs.astronome
 
 ## View clusters
 
-In the Cloud UI, click the **Clusters** tab to view a list of the clustersthat are available to your Organization. Click a cluster and then click the **Worker Types**, **Workspace Authorization**, or **Details** tabs to view cluster information including:
+In the Cloud UI, click the **Clusters** tab to view a list of the clusters that are available to your Organization. Click a cluster and then click the **Worker Types**, **Workspace Authorization**, or **Details** tabs to view cluster information including:
 
 - The region for the cluster.
 - The cloud provider Account ID associated with the cluster.
