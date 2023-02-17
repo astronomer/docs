@@ -63,9 +63,9 @@ To modify the node instance type of an existing worker node pool, contact [Astro
 
 Each worker node pool on Astro must be configured with a **Maximum Node Count**, which represents the maximum total number of nodes that a worker node pool can have at any given time across Deployments. The default maximum node count for each worker node pool is 20. When this limit is reached, the worker node pool can't auto-scale and worker Pods may fail to schedule. A cluster's node count is most affected by the number of tasks that are running at the same time across your cluster, and the number of worker Pods that are executing those tasks. See [Worker autoscaling logic](configure-worker-queues.md#worker-autoscaling-logic).
 
-Maximum node count is different than **Maximum Worker Count**, which is configured for each worker queue and determines the maximum total number of nodes that a worker queue within a single Deployment can scale to. Maximum node count for a worker pool in your cluster must always be equal to or greater than the sum of all maximum worker count values for all worker queues that are configured with that worker type.
+Maximum node count is different than **Maximum Worker Count**, which is configured within the Cloud UI for each worker queue and determines the maximum total number of nodes that the worker queue can scale to. Maximum node count for a node pool must always be equal to or greater than the sum of all maximum possible workers across all worker queues that are configured with that worker node type.
 
-For example, if:
+For example, consider the following configurations within a cluster:
 
 - You have 3 Deployments that each have 1 worker queue configured with the `m5.2xlarge` worker type for a total of 3 worker queues.
 - 1 of the 3 worker queues has a maximum worker count of 10.
