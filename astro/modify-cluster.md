@@ -48,7 +48,6 @@ Creating a worker node pool does not necessarily mean that the infrastructure is
 - There are no Deployments in your cluster that have worker queues configured with the worker type.
 - There are no default worker queues configured with the worker type. The default worker queue cannot scale to zero workers, but additional worker queues can scale to zero.
 
-
 ### Configure node instance type
 
 Each worker type on Astro is configured with a node instance type that is defined by your cloud provider. For example, `m5.2xlarge` on AWS, `Standard_D8_v5` on Azure, or `e2-standard-8` on GCP. Node instance types are comprised of varying combinations of CPU, memory, storage, and networking capacity. By choosing a node instance type, you can provide the appropriate balance of resources for your Airflow tasks.
