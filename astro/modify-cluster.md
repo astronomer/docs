@@ -70,9 +70,11 @@ For example, consider the following configurations within a cluster:
 - You have 3 Deployments that each have 1 worker queue configured with the `m5.2xlarge` worker type for a total of 3 worker queues.
 - 1 of the 3 worker queues has a maximum worker count of 10.
 - 2 of the 3 worker queues have a maximum worker count of 5.
-- The maximum node count for the `m5.2xlarge` node pool in your cluster must be equal to or greater than 15 to make sure that each worker queue can scale to its limit.
+
+In this scenario, the maximum node count for the `m5.2xlarge` node pool in your cluster must be equal to or greater than 15 to make sure that each worker queue can scale to its limit.
 
 Astronomer regularly monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and recommend that you increase or decrease your maximum node count to limit infrastructure cost or ensure that you can support a growing number of tasks and Deployments. If your maximum node count is reached, you will be contacted.
+
 To change the maximum node count for a node pool, contact [Astronomer Support](https://cloud.astronomer.io/support).
 
 ## Configure a Database instance type
