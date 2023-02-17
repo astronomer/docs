@@ -45,12 +45,11 @@ All Astro clusters have one worker node pool for one worker type by default, but
 
 Individual worker nodes run only on a single Deployment, but a worker node pool can have worker nodes spread across multiple Deployments.
 
-Creating a worker node pool does not necessarily mean that the infrastructure is created in your cluster. For example, you can create a worker node pool to allow your team to use that worker type when it is needed. A worker node pool has zero nodes if any of the following is true:
+Creating a worker node pool does not necessarily mean that the infrastructure is created in your cluster. A worker node pool has zero nodes if any of the following are true:
 
 - There are no Deployments in your cluster that have worker queues configured with the worker type.
 - There are no default worker queues configured with the worker type. The default worker queue cannot scale to zero workers, but additional worker queues can scale to zero.
 
-To create or modify a worker type, contact [Astronomer Support](https://cloud.support.astronomer.io). To learn more about worker queues, see [Configure worker queues](configure-worker-queues.md).
 
 ### Configure node instance type
 
