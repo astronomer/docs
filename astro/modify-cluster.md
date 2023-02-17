@@ -86,7 +86,7 @@ Astro uses the following databases:
 
 During the cluster creation process, you are asked to specify a **DB Instance Type** according to your use case and expected workload, but it can be modified at any time. Each database instance type costs a different amount of money and comprises of varying combinations of CPU, memory, and network performance.
 
-For the list of database instance types available on Astro, see [AWS](resource-reference-aws.md#rds-instance-type), [Azure](resource-reference-azure.md#db-instance-type), or [GCP](resource-reference-gcp.md#db-instance-type). To request a different database instance type, contact [Astronomer support](https://cloud.astronomer.io/support).
+For the list of database instance types available on Astro, see [Supported RDS instance types](resource-reference-aws.md#supported-rds-instance-types), [Azure DB Instance Type](resource-reference-azure.md#db-instance-type), or [GCP DB Instance Type](resource-reference-gcp.md#db-instance-type). To request a different database instance type, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Authorize Workspaces to a Cluster
 
