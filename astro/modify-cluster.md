@@ -18,9 +18,9 @@ Most of these modifications can't be completed in the Cloud UI or with the Astro
 
 The information provided here will help you determine which modifications you can make to your clusters on Astro and how to request or apply the modifications. To create a new cluster, see [Create a cluster](create-cluster.md).
 
-## View clusters
-
 If you don't have a cluster on Astro, see [Install Astro](https://docs.astronomer.io/astro/category/install-astro). If you have an existing cluster and you want to create additional clusters, see [Create a cluster](create-cluster.md).
+
+## View clusters
 
 In the Cloud UI, click the **Clusters** tab to view a list of the clustersthat are available to your Organization. Click a cluster and then click the **Worker Types**, **Workspace Authorization**, or **Details** tabs to view cluster information including:
 
