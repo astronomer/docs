@@ -92,7 +92,7 @@ For the list of database instance types available on Astro, see [Supported RDS i
 
 <PremiumBadge />
 
-As an Organization Owner, you can keep teams and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over cloud your resources by ensuring that only authorized pipelines are running on specific clusters.
+As an Organization Owner, you can keep teams and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over your cloud resources by ensuring that only authorized pipelines are running on specific clusters.
 
 1. In the Cloud UI, click the **Clusters** tab and then select a cluster.
 2. Click the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
