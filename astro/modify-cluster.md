@@ -55,7 +55,7 @@ Each worker type on Astro is configured with a node instance type that is define
 
 How your Airflow tasks use the capacity of a worker node depends on which executor is selected for your Deployment. With the Celery executor, each worker node runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead. With the Kubernetes executor, each worker node can run an unlimited number of Pods as long as the sum of all requests from each Pod doesn't exceed the total capacity of the node minus Astro's system overhead.
 
-To modify the node instance type of an existing worker node pool, contact [Astronomer Support](https://cloud.support.astronomer.io). For the list of worker types available on Astro, see [AWS](resource-reference-aws.md#worker-node-pools), [Azure](resource-reference-azure.md#worker-node-pools), or [GCP](resource-reference-gcp.md#worker-node-pools).
+To modify the node instance type of an existing worker node pool, contact [Astronomer Support](https://cloud.support.astronomer.io). For the list of worker node pool instance types available on Astro, see [AWS supported worker node pool instance types](resource-reference-aws.md#supported-worker-node-pool-instance-types), [Azure supported worker node pool instance types](resource-reference-azure.md#supported-worker-node-pool-instance-types), or [GCP supported worker node pool instance types](resource-reference-gcp.md#supported-worker-node-pool-instance-types).
 
 ### Configure maximum node count
 
