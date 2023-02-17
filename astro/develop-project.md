@@ -403,7 +403,7 @@ This setup assumes that each custom Python package is hosted within its own priv
 
 #### Step 1: Specify the private repository in your project
 
-To add a Python package from a private repository to your Astro project, specify the repository’s SSH URL in a new `private-requirements.txt` file. The URL should use the following format:
+To add a Python package from a private repository to your Astro project, specify the Secure Shell (SSH) URL for the repository in a new `private-requirements.txt` file. Use the following format for the SSH URL:
 
 ```
 git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git
@@ -437,14 +437,14 @@ This example assumes that the name of each of your Python packages is identical 
 
     In order, these instructions:
 
-    - Adds the fingerprint for GitHub to known_hosts
-    - Copies you private-requirements.txt file into the image
-    - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. Note, this securely mounts your SSH key at build time. This ensures that the key itself is not stored in the resulting Docker image filesystem or metadata.
-    - Adds the user bin directory onto PATH
+    - Add the fingerprint for GitHub to `known_hosts`
+    - Copy your `private-requirements.txt` file into the image
+    - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. Tthis securely mounts your SSH key at build time, ensuring that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Add the user bin directory onto `PATH`
 
   :::info
 
-  If your repository is not hosted on GitHub, replace the fingerprint with one from where the package is hosted. `ssh-keyscan` can be used to generate the fingerprint, if you don't already know it.
+  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint.
 
   :::
 
