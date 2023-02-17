@@ -62,12 +62,12 @@ Modifying the region of an existing Astro cluster isn't supported. If you're int
 
 The following Azure Database for PostgreSQL instance types are supported on Astro: 
 
-- Standard_D4ds_v4 (CPU 4, 16 GiB MEM)
-- Standard_D2ds_v4 (CPU 2, 8 GiB MEM)
-- Standard_E2ds_v4 (CPU 2, 16 GiB MEM)
-- Standard_E4ds_v4 (CPU 4, 32 GiB MEM)
+- Standard_D2ds_v4 (2 CPU, 8 GiB MEM)
+- Standard_D4ds_v4 (4 CPU, 16 GiB MEM)
+- Standard_E2ds_v4 (2 CPU, 16 GiB MEM)
+- Standard_E4ds_v4 (4 CPU, 32 GiB MEM)
 
-For more information about configuring Azure Database for PostgreSQL, see the [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/).
+To meet your specific business requirements, each instance type has varying amounts of CPU, memory, storage, and networking capacity. For detailed information about each instance type, see the [Azure Database for PostgreSQL documentation](https://learn.microsoft.com/en-us/azure/postgresql/). If you're interested in an Azure Database for PostgreSQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Supported worker node pool instance types
 

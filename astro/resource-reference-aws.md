@@ -65,7 +65,7 @@ Modifying the region of an existing cluster on Astro is not supported. If you're
 
 ## Supported RDS instance types
 
-Astro supports a variety of AWS RDS instance types. Each instance type has varying amounts of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer support](https://cloud.astronomer.io/support).
+The following AWS RDS instance types re supported on Astro:
 
 ### db.r5
 
@@ -88,6 +88,8 @@ Astro supports a variety of AWS RDS instance types. Each instance type has varyi
 - db.m5.12xlarge
 - db.m5.16xlarge
 - db.m5.24xlarge
+
+To meet your specific business requirements, each instance type has varying amounts of CPU, memory, storage, and networking capacity. For detailed information about each instance type, see [Amazon RDS Instance Types](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Supported worker node pool instance types
 

@@ -72,12 +72,12 @@ Modifying the region of an existing Astro cluster isn't supported. If you're int
 
 The following Cloud SQL instance types are supported on Astro:
 
-- Small General Purpose (CPU 2, 8 GiB MEM)
-- Medium General Purpose (CPU 4, 16 GiB MEM)
-- Small Memory Optimized (CPU 2, 12 GiB MEM)
-- Medium Memory Optimized (CPU 4, 24 GiB MEM)
+- Small General Purpose (2 CPU, 8 GiB MEM)
+- Medium General Purpose (4 CPU, 16 GiB MEM)
+- Small Memory Optimized (2 CPU, 12 GiB MEM)
+- Medium Memory Optimized (4 CPU, 24 GiB MEM)
 
-For more information about configuring Cloud SQL, see the [Cloud SQL documentation](https://cloud.google.com/sql).
+To meet your specific business requirements, each instance type has varying amounts of CPU, memory, storage, and networking capacity. For detailed information about each instance type see the [Cloud SQL documentation](https://cloud.google.com/sql). If you're interested in an Cloud SQL instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Supported worker node pool instance types
 
