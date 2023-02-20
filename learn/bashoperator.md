@@ -73,17 +73,18 @@ In this example, you run two bash commands in a single task:
 The second command uses an environment variable from the Airflow environment, `AIRFLOW_HOME`. This is only possible because `append_env` is set to `True`.
 
 ```python
-from airflow import DAG
+from airflow.decorators import dag
 from airflow.operators.bash import BashOperator
-from datetime import datetime
+from pendulum import datetime
 import os
 
-with DAG(
-    dag_id="bash_two_commands_example_dag",
-    start_date=datetime(2022,8,1),
+
+@dag(
+    start_date=datetime(2022, 8, 1),
     schedule=None,
     catchup=False
-) as dag:
+)
+def bash_two_commands_example_dag():
 
     say_hello_and_create_a_sectet_number = BashOperator(
         task_id="say_hello_and_create_a_sectet_number",
@@ -95,6 +96,10 @@ with DAG(
         },
         append_env=True
     )
+
+
+bash_two_commands_example_dag()
+
 ```
 
 It is also possible to use two separate BashOperators to run the two commands, which can be useful if you want to assign different dependencies to the tasks.
@@ -139,17 +144,18 @@ Astronomer recommends running this command in your Dockerfile for production bui
 After making the script available to Airflow, you only have to provide the path to the script in the `bash_command` parameter. Be sure to add a space character at the end of the filepath, or else the task will fail with a Jinja exception!
 
 ```python
-from airflow import DAG
+from airflow.decorators import dag
 from airflow.operators.bash import BashOperator
 from datetime import datetime
 import os
 
-with DAG(
-    dag_id="bash_script_example_dag",
+
+@dag(
     start_date=datetime(2022,8,1),
     schedule=None,
     catchup=False
-) as dag:
+)
+def bash_script_example_dag():
 
     execute_my_script = BashOperator(
         task_id="execute_my_script",
@@ -159,6 +165,10 @@ with DAG(
         # BashOperator has access to the environment variables of the Airflow
         # instance like AIRFLOW_HOME
     )
+
+
+bash_script_example_dag()
+
 ```
 
 ## Example: Run a script in another programming language
@@ -240,16 +250,18 @@ To run these scripts using the BashOperator, ensure that they are accessible to 
 The DAG uses the BashOperator to execute both files defined above sequentially.
 
 ```python
-from airflow import DAG
+from airflow.decorators import dag
 from airflow.operators.bash import BashOperator
 from datetime import datetime
 
-with DAG(
+
+@dag(
     dag_id="print_ISS_info_dag",
     start_date=datetime(2022,8,1),
     schedule=None,
     catchup=False
-) as dag:
+)
+def print_ISS_info_dag():
 
     # Use the node command to execute the JavaScript file from the command line
     get_ISS_coordinates = BashOperator(
@@ -273,6 +285,10 @@ with DAG(
     )
 
     get_ISS_coordinates >> print_ISS_coordinates
+
+
+print_ISS_info_dag()
+
 ```
 
 The logs from the second task include a statement with the current ISS location:
