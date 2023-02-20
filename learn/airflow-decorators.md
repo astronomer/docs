@@ -52,7 +52,11 @@ from airflow.decorators import dag, task
 API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
 
 
-@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
+@dag(
+    schedule='@daily',
+    start_date=datetime(2021, 12, 1),
+    catchup=False
+)
 def taskflow():
 
     @task(task_id='extract', retries=2)
@@ -69,6 +73,7 @@ def taskflow():
         logging.info(f"Store: {data['usd']} with change {data['change']}")
 
     store_data(process_data(extract_bitcoin_price()))
+
 
 taskflow()
 ```
@@ -87,8 +92,10 @@ from airflow.operators.python import PythonOperator
 
 API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
 
+
 def _extract_bitcoin_price():
     return requests.get(API).json()['bitcoin']
+
 
 def _process_data(ti):
     response = ti.xcom_pull(task_ids='extract_bitcoin_price')
@@ -96,11 +103,18 @@ def _process_data(ti):
     processed_data = {'usd': response['usd'], 'change': response['usd_24h_change']}
     ti.xcom_push(key='processed_data', value=processed_data)
 
+
 def _store_data(ti):
     data = ti.xcom_pull(task_ids='process_data', key='processed_data')
     logging.info(f"Store: {data['usd']} with change {data['change']}")
 
-with DAG('classic_dag', schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False) as dag:
+
+with DAG(
+    'classic_dag',
+    schedule='@daily',
+    start_date=datetime(2021, 12, 1),
+    catchup=False
+):
     
     extract_bitcoin_price = PythonOperator(
         task_id='extract_bitcoin_price',
@@ -158,32 +172,38 @@ from airflow.operators.email import EmailOperator
 
 API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
 
-@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
+
+@dag(
+    schedule="@daily",
+    start_date=datetime(2021, 12, 1),
+    catchup=False
+)
 def taskflow():
 
-    @task(task_id='extract', retries=2)
+    @task(task_id="extract", retries=2)
     def extract_bitcoin_price() -> Dict[str, float]:
-        return requests.get(API).json()['bitcoin']
+        return requests.get(API).json()["bitcoin"]
 
     @task(multiple_outputs=True)
     def process_data(response: Dict[str, float]) -> Dict[str, float]:
         logging.info(response)
-        return {'usd': response['usd'], 'change': response['usd_24h_change']}
+        return {"usd": response["usd"], "change": response["usd_24h_change"]}
 
     @task
     def store_data(data: Dict[str, float]):
         logging.info(f"Store: {data['usd']} with change {data['change']}")
 
     email_notification = EmailOperator(
-        task_id='email_notification',
-        to='noreply@astronomer.io',
-        subject='dag completed',
-        html_content='the dag has finished'
+        task_id="email_notification",
+        to="noreply@astronomer.io",
+        subject="dag completed",
+        html_content="the dag has finished"
     )
 
     store_data(process_data(extract_bitcoin_price())) >> email_notification
 
-dag = taskflow()
+
+taskflow()
 ```
 
 Note that when adding traditional operators, dependencies are still defined using bitshift operators.
@@ -259,7 +279,12 @@ def create_table():
     );
     """
 
-@dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
+
+@dag(
+    start_date=datetime(2021, 12, 1),
+    schedule="@daily",
+    catchup=False
+)
 def example_snowflake_partial_table_with_append():
 
     # Initial load of homes data csv's into Snowflake
@@ -307,7 +332,8 @@ def example_snowflake_partial_table_with_append():
     )
     record_results.set_upstream(create_results_table)
 
-example_snowflake_partial_table_dag = example_snowflake_partial_table_with_append()
+
+example_snowflake_partial_table_with_append()
 ```
 
 ![Astro ETL](/img/guides/astro_etl_graph.png)
