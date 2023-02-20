@@ -121,11 +121,9 @@ with DAG('classic_dag', schedule='@daily', start_date=datetime(2021, 12, 1), cat
 ```
 
 </TabItem>
+</Tabs>
 
 You can now rewrite this DAG using decorators, which will eliminate the need to explicitly instantiate `PythonOperators`. 
-
-
-</Tabs>
 
 The resulting DAG has much less code and is easier to read. Notice that it also doesn't require using `ti.xcom_pull` and `ti.xcom_push` to pass data between tasks. This is all handled by the TaskFlow API when you define your task dependencies with `store_data(process_data(extract_bitcoin_price()))`. 
 
