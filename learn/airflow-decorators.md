@@ -36,7 +36,7 @@ Using decorators to define your Python functions as tasks is easy. Let's take a 
     groupId= "decorator-example"
     values={[
         {label: 'Decorators', value: 'taskflow'},
-        {label: 'Traditional Operators', value: 'traditional'},
+        {label: 'Traditional Syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

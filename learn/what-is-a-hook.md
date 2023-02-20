@@ -94,7 +94,7 @@ The following example DAG completes the following steps:
     groupId= "operator-use-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional Syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
