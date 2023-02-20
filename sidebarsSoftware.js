@@ -18,6 +18,7 @@ module.exports = {
       type: 'category',
       label: 'Get started',
       items: [
+      'documentation-overview',
       'log-in-to-software',
       'create-project',
       ],
@@ -99,6 +100,7 @@ module.exports = {
           'grafana-metrics',
           'kibana-logging',
           'platform-alerts',
+          'task-usage-metrics',
           'logs-to-s3',
           'export-task-logs',
           ],
@@ -176,8 +178,12 @@ module.exports = {
         type: 'link',
         label: 'Astro CLI',
         href: 'https://docs.astronomer.io/astro/cli/release-notes',
-     },
-      'runtime-release-notes',
+      },
+      {
+        type: 'link',
+        label: 'Astro Runtime',
+        href: 'https://docs.astronomer.io/astro/runtime-release-notes',
+      },
     ],
     },
     {

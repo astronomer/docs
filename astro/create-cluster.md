@@ -230,3 +230,11 @@ If you don't specify your configuration preferences, Astronomer support creates 
 ## Astronomer support confirmation
 
 Astronomer support sends you a notification when your cluster is created. After your cluster is created, you can create a new Deployment in the cluster and start deploying pipelines. See [Create a Deployment](create-deployment.md).
+
+## Related documentation
+
+- [Manage and modify clusters](modify-cluster.md)
+- [AWS cluster settings](resource-reference-aws.md)
+- [Microsoft Azure cluster settings](resource-reference-azure.md)
+- [GCP cluster settings](resource-reference-gcp.md)
+

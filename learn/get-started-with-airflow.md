@@ -31,10 +31,10 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - A terminal that accepts bash commands. This is pre-installed on most operating systems.
-- [Python 3](https://www.python.org/downloads/).
 - [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - An integrated development environment (IDE) for Python development, such as [VSCode](https://code.visualstudio.com/).
+- Optional. A local installation of [Python 3](https://www.python.org/downloads/) to improve your Python developer experience.
 
 ## Step 1: Create an Astro project
 
@@ -114,7 +114,7 @@ After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG
 
 ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
 
-These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
+These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
 
 ## Step 5: Explore the Airflow UI
 

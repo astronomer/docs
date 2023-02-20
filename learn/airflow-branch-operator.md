@@ -9,10 +9,12 @@ id: airflow-branch-operator
   <meta name="og:description" content="Learn about the options available in Airflow for building conditional logic and branching within DAGs, including the BranchPythonOperator and ShortCircuitOperator." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-When designing your data pipelines, you may encounter use cases that require more complex task flows than "Task A > Task B > Task C." For example, you may have a use case where you need to decide between multiple tasks to execute based on the results of an upstream task. Or you may have a case where part of your pipeline should only run under certain external conditions. Fortunately, Airflow has multiple options for building conditional logic and/or branching into your DAGs.
+When designing your data pipelines, you may encounter use cases that require more complex task flows than "Task A > Task B > Task C". For example, you may have a use case where you need to decide between multiple tasks to execute based on the results of an upstream task. Or you may have a case where part of your pipeline should only run under certain external conditions. Fortunately, Airflow has multiple options for building conditional logic and/or branching into your DAGs.
 
-In this guide, you'll learn how you can use the `BranchPythonOperator` and `ShortCircuitOperator`, other available branching operators, and additional resources to implement conditional logic in your Airflow DAGs.
+In this guide, you'll learn how you can use `@task.branch` (BranchPythonOperator) and `@task.short_circuit` (ShortCircuitOperator), other available branching operators, and additional resources to implement conditional logic in your Airflow DAGs.
 
 ## Assumed knowledge
 
@@ -20,49 +22,147 @@ To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Dependencies in Airflow. See [Managing Dependencies in Apache Airflow](managing-dependencies.md).
+- Using Airflow decorators. See [Introduction to Airflow decorators](airflow-decorators.md).
 
-## BranchPythonOperator
+## `@task.branch` (BranchPythonOperator)
 
-One of the simplest ways to implement branching in Airflow is to use the [BranchPythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchpythonoperator). Like the [`PythonOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/pythonoperator), the `BranchPythonOperator` takes a Python function as an input. However, the `BranchPythonOperator's` input function must return a list of task IDs that the DAG should proceed with based on some logic. 
+One of the simplest ways to implement branching in Airflow is to use the `@task.branch` decorator, which is a decorated version of the [BranchPythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchpythonoperator). `@task.branch` accepts any Python function as an input as long as the function returns a list of valid IDs for Airflow tasks that the DAG should run after the function completes. 
 
-For example, we can pass the following function that returns one set of task IDs if the result is greater than 0.5 and a different set if the result is less than or equal to 0.5:
+In the following example we use a `choose_branch` function that returns one set of task IDs if the result is greater than 0.5 and a different set if the result is less than or equal to 0.5:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "operator-use-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Operator', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
 
 ```python
-def choose_branch(**kwargs, result):
+result = 1
+
+@task.branch
+def choose_branch(result):
     if result > 0.5:
         return ['task_a', 'task_b']
     return ['task_c']
+
+choose_branch(result)
 ```
 
-In general, the `BranchPythonOperator` is a good choice if your branching logic can be easily implemented in a simple Python function.
+</TabItem>
 
-:::info
+<TabItem value="traditional">
 
-The full example code in this section, as well as other examples using the `BranchPythonOperator`, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/example-branch-operator).
+```python
+result = 1
 
-:::
+def choose_branch(result):
+    if result > 0.5:
+        return ['task_a', 'task_b']
+    return ['task_c']
 
-Looking at how to use this operator in a DAG, consider the following example:
+branching = BranchPythonOperator(
+    task_id='branching',
+    python_callable=choose_branch,
+    op_args=[result]
+)
+```
+
+</TabItem>
+</Tabs>
+
+In general, the `@task.branch` decorator is a good choice if your branching logic can be easily implemented in a simple Python function. Whether you want to use the decorated version or the traditional operator is a question of personal preference.
+
+The code below shows a full example of how to use `@task.branch` in a DAG:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "example-branch"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Operators', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+"""Example DAG demonstrating the usage of the `@task.branch`
+TaskFlow API decorator."""
+
+from airflow.decorators import dag, task
+from airflow.operators.empty import EmptyOperator
+from airflow.utils.edgemodifier import Label
+
+import random
+from pendulum import datetime
+
+
+@dag(
+    start_date=datetime(2023, 1, 1),
+    catchup=False,
+    schedule="@daily"
+)
+def branch_python_operator_decorator_example():
+
+    run_this_first = EmptyOperator(task_id="run_this_first")
+
+    options = ["branch_a", "branch_b", "branch_c", "branch_d"]
+
+    @task.branch(task_id="branching")
+    def random_choice(choices):
+        return random.choice(choices)
+
+    random_choice_instance = random_choice(choices=options)
+
+    run_this_first >> random_choice_instance
+
+    join = EmptyOperator(
+        task_id="join",
+        trigger_rule="none_failed_min_one_success"
+    )
+
+    for option in options:
+
+        t = EmptyOperator(
+            task_id=option
+        )
+
+        empty_follow = EmptyOperator(
+            task_id="follow_" + option
+        )
+
+        # Label is optional here, but it can help identify more complex branches
+        random_choice_instance >> Label(option) >> t >> empty_follow >> join
+
+
+branch_python_operator_decorator_example()
+```
+
+</TabItem>
+
+<TabItem value="traditional">
 
 ```python
 """Example DAG demonstrating the usage of the BranchPythonOperator."""
-
-import random
-from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import BranchPythonOperator
 from airflow.utils.edgemodifier import Label
-from airflow.utils.trigger_rule import TriggerRule
+
+import random
+from pendulum import datetime
 
 with DAG(
-    dag_id='example_branch_operator',
-    start_date=datetime(2021, 1, 1),
+    dag_id='branch_python_operator_example',
+    start_date=datetime(2023, 1, 1),
     catchup=False,
-    schedule="@daily",
-    tags=['example', 'example2'],
+    schedule="@daily"
 ) as dag:
+
     run_this_first = EmptyOperator(
         task_id='run_this_first',
     )
@@ -73,14 +173,16 @@ with DAG(
         task_id='branching',
         python_callable=lambda: random.choice(options),
     )
+
     run_this_first >> branching
 
     join = EmptyOperator(
         task_id='join',
-        trigger_rule=TriggerRule.NONE_FAILED_MIN_ONE_SUCCESS,
+        trigger_rule="none_failed_min_one_success",
     )
 
     for option in options:
+
         t = EmptyOperator(
             task_id=option,
         )
@@ -93,37 +195,97 @@ with DAG(
         branching >> Label(option) >> t >> empty_follow >> join
 ```
 
-In this DAG, we have a simple `lambda` function that randomly chooses between four branches. In the following DAG run screenshot, where `branch_b` was randomly chosen, we see that the two tasks in `branch_b` were successfully run while the others were skipped.
+</TabItem>
+</Tabs>
 
-![Branching](/img/guides/branching.png)
+In this DAG, `random.choice()` returns one random option out of a list of four branches. In the following screenshot, where `branch_b` was randomly chosen, the two tasks in `branch_b` were successfully run while the others were skipped.
 
-If you have downstream tasks that need to run regardless of which branch is taken, like the `join` task in our example above, you need to update the trigger rule appropriately. The default trigger rule in Airflow is `ALL_SUCCESS`, which means that if upstream tasks are skipped, then the downstream task will not run. In this case, we chose `NONE_FAILED_MIN_ONE_SUCCESS` to indicate that the task should run as long as one upstream task succeeded and no tasks failed.
+![Branching Graph View](/img/guides/branching_decorator_graph.png)
 
-Finally, note that with the `BranchPythonOperator`, your Python callable *must* return at least one task ID for whichever branch is chosen (i.e. it can't return nothing). If one of the paths in your branching should do nothing, you can use a `EmptyOperator` in that branch.
+If you have downstream tasks that need to run regardless of which branch is taken, like the `join` task in the previous example, you need to update the trigger rule. The default trigger rule in Airflow is `all_success`, which means that if upstream tasks are skipped, then the downstream task will not run. In the previous example, `none_failed_min_one_success` is specified to indicate that the task should run as long as one upstream task succeeded and no tasks failed.
 
-## ShortCircuitOperator
+Finally, note that with the `@task.branch` decorator your Python function *must* return at least one task ID for whichever branch is chosen (i.e. it can't return nothing). If one of the paths in your branching should do nothing, you can use an EmptyOperator in that branch.
 
-Another option for implementing conditional logic in your DAGs is the [ShortCircuitOperator](https://registry.astronomer.io/providers/apache-airflow/modules/shortcircuitoperator). This operator also takes a Python callable that returns `True` or `False` based on logic implemented for your use case. If `True` is returned, the DAG will continue, and if `False` is returned, all downstream tasks will be skipped.
+:::info
 
-The `ShortCircuitOperator` is best used in cases where you know that part of your DAG runs only occasionally. For example, maybe your DAG runs daily, but some tasks should only run on Sundays. Or maybe your DAG orchestrates a machine learning model, and tasks that publish the model should only be run if a certain accuracy is reached after training. This type of logic can also be implemented with the `BranchPythonOperator`, but that operator requires a task ID to be returned. The `ShortCircuitOperator` can be cleaner in cases where the conditional logic equates to "run or not" as opposed to "run this or that".
+More examples using the `@task.branch` decorator, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/example-branch-python-dop-operator-3).
 
-The following DAG shows an example of how to implement the `ShortCircuitOperator`:
+:::
+
+## `@task.short_circuit` (ShortCircuitOperator)
+
+Another option for implementing conditional logic in your DAGs is the `@task.short_circuit` decorator, which is a decorated version of the [ShortCircuitOperator](https://registry.astronomer.io/providers/apache-airflow/modules/shortcircuitoperator). This operator takes a Python function that returns `True` or `False` based on logic implemented for your use case. If `True` is returned, the DAG continues, and if `False` is returned, all downstream tasks are skipped.
+
+`@task.short_circuit` is useful when you know that some tasks in your DAG should run only occasionally. For example, maybe your DAG runs daily, but some tasks should only run on Sundays. Or maybe your DAG orchestrates a machine learning model, and tasks that publish the model should only be run if a certain accuracy is reached after training. This type of logic can also be implemented with `@task.branch`, but that operator requires a task ID to be returned. Using the `@task.short_circuit` decorator can be cleaner in cases where the conditional logic equates to "run or not" as opposed to "run this or that".
+
+The following DAG shows an example of how to implement `@task.short_circuit`:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "example-short-circuit"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Operators', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+"""Example DAG demonstrating the usage of the @task.short_circuit decorator."""
+
+from airflow.decorators import dag, task
+from airflow.models.baseoperator import chain
+from airflow.operators.empty import EmptyOperator
+
+from pendulum import datetime
+
+
+@dag(
+    start_date=datetime(2023, 1, 1),
+    schedule="@daily",
+    catchup=False,
+)
+def short_circuit_operator_decorator_example():
+
+    @task.short_circuit
+    def condition_is_True():
+        return True
+
+    @task.short_circuit
+    def condition_is_False():
+        return False
+
+    ds_true = [EmptyOperator(task_id='true_' + str(i)) for i in [1, 2]]
+    ds_false = [EmptyOperator(task_id='false_' + str(i)) for i in [1, 2]]
+
+    chain(condition_is_True(), *ds_true)
+    chain(condition_is_False(), *ds_false)
+
+
+short_circuit_operator_decorator_example()
+```
+
+</TabItem>
+
+<TabItem value="traditional">
 
 ```python
 """Example DAG demonstrating the usage of the ShortCircuitOperator."""
-from datetime import datetime
 
 from airflow import DAG
 from airflow.models.baseoperator import chain
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import ShortCircuitOperator
 
+from pendulum import datetime
+
 with DAG(
-    dag_id='example_short_circuit_operator',
-    start_date=datetime(2021, 1, 1),
+    dag_id='short_circuit_operator_example',
+    start_date=datetime(2023, 1, 1),
+    schedule="@daily",
     catchup=False,
-    tags=['example'],
 ) as dag:
+
     cond_true = ShortCircuitOperator(
         task_id='condition_is_True',
         python_callable=lambda: True,
@@ -139,26 +301,28 @@ with DAG(
 
     chain(cond_true, *ds_true)
     chain(cond_false, *ds_false)
-
 ```
+
+</TabItem>
+</Tabs>
+
+In this DAG there are two short circuits, one which always returns `True` and one which always returns `False`. When you run the DAG, you can see that tasks downstream of the `True` condition operator ran, while tasks downstream of the `False` condition operator were skipped.
+
+![Short Circuit](/img/guides/short_circuit_decorator_graph.png)
 
 :::info
 
-The full example code in this section, as well as other examples using the `ShortCircuitOperator`, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/example-short-circuit-operator).
+Another example using the ShortCircuitOperator, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/example-short-circuit-operator).
 
 :::
 
-In this DAG we have two short circuits, one which will always return `True` and one which will return `False`. When we run the DAG, we can see that tasks downstream of the `True` condition operator ran, while tasks downstream of the `False` condition operator were skipped.
-
-![Short Circuit](/img/guides/short_circuit.png)
-
 ## Other branch operators
 
-Airflow offers a few other branching operators that work similarly to the `BranchPythonOperator` but for more specific contexts: 
+Airflow offers a few other branching operators that work similarly to the BranchPythonOperator but for more specific contexts: 
 
-- [`BranchSQLOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`
-- [`BranchDayOfWeekOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/branchdayofweekoperator): Branches based on whether the current day of week is equal to a given `week_day` parameter
-- [`BranchDateTimeOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/branchdatetimeoperator): Branches based on whether the current time is between `target_lower` and `target_upper` times
+- [BranchSQLOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
+- [BranchDayOfWeekOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdayofweekoperator): Branches based on whether the current day of week is equal to a given `week_day` parameter.
+- [BranchDateTimeOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdatetimeoperator): Branches based on whether the current time is between `target_lower` and `target_upper` times.
 
 All of these operators take `follow_task_ids_if_true` and `follow_task_ids_if_false` parameters which provide the list of task(s) to include in the branch based on the logic returned by the operator.
 

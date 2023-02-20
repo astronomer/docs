@@ -9,6 +9,7 @@ id: airflow-passing-data-between-tasks
   <meta name="og:description" content="Learn more about the most common methods to implement data sharing between your Airflow tasks, including an in-depth explanation of XCom." />
 </head>
 
+import CodeBlock from '@theme/CodeBlock';
 import airflow_passing_data_between_tasks_xcom from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_xcom.py';
 import airflow_passing_data_between_tasks_taskflow from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_taskflow.py';
 import airflow_passing_data_between_tasks_s3 from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_s3.py';
@@ -51,7 +52,7 @@ The first method for passing data between Airflow tasks is to use XCom, which is
 
 ### What is XCom
 
-[XCom](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html?highlight=xcom#concepts-xcom) is a built-in Airflow feature. XComs allow tasks to exchange task metadata or small amounts of data. They are defined by a key, value, and timestamp.
+[XCom](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html) is a built-in Airflow feature. XComs allow tasks to exchange task metadata or small amounts of data. They are defined by a key, value, and timestamp.
 
 XComs can be "pushed", meaning sent by a task, or "pulled", meaning received by a task. When an XCom is pushed, it is stored in the Airflow metadata database and made available to all other tasks. Any time a task returns a value (for example, when your Python callable for your [PythonOperator](https://registry.astronomer.io/providers/apache-airflow/modules/pythonoperator) has a return), that value is automatically pushed to XCom. Tasks can also be configured to push XComs by calling the `xcom_push()` method. Similarly, `xcom_pull()` can be used in a task to receive an XCom.
 
@@ -75,7 +76,7 @@ You can see that these limits aren't very big. And even if you think your data m
 
 ### Custom XCom backends
 
-[Custom XCom Backends](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html?highlight=xcom#custom-xcom-backend) are a new feature available in Airflow 2.0 and greater. Using an XCom backend means you can push and pull XComs to and from an external system such as S3, GCS, or HDFS rather than the default of Airflow's metadata database. You can also implement your own serialization and deserialization methods to define how XComs are handled. This is a concept in its own right and you can learn more by reading [Custom XCom Backends](custom-xcom-backends-tutorial.md).
+[Custom XCom Backends](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html#custom-xcom-backends) are a new feature available in Airflow 2.0 and greater. Using an XCom backend means you can push and pull XComs to and from an external system such as S3, GCS, or HDFS rather than the default of Airflow's metadata database. You can also implement your own serialization and deserialization methods to define how XComs are handled. This is a concept in its own right and you can learn more by reading [Custom XCom Backends](custom-xcom-backends-tutorial.md).
 
 ### Example DAG using XComs
 

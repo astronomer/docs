@@ -44,7 +44,7 @@ This tutorial takes approximately 1.5 hours to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- XCom basics. See the [Airflow documentation on XCom](https://airflow.apache.org/docs/apache-airflow/stable/concepts/xcoms.html).
+- XCom basics. See the [Airflow documentation on XCom](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html).
 - Passing data between tasks. See [Passing data between Airflow tasks](airflow-passing-data-between-tasks.md).
 - The TaskFlow API. See [the TaskFlow API in Airflow 2.0](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0/).
 

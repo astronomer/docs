@@ -18,7 +18,7 @@ While secret values of Airflow variables and connections are encrypted in the Ai
 
 :::tip
 
-If you only need a local connection to your cloud for testing purposes, consider mounting your user credentials to a local Airflow environment. While this implementation is not recommended for deployed environments, it lets you quickly test pipelines with data hosted in your cloud. See [Authenticate to cloud services](authenticate-to-clouds.md).
+If you only need a local connection to your cloud for testing purposes, consider mounting your user credentials to a local Airflow environment. While this implementation is not recommended for deployed environments, it lets you quickly test pipelines with data hosted in your cloud. See [Authenticate to cloud services](cli/authenticate-to-clouds.md).
 
 :::
 
@@ -257,7 +257,7 @@ For more information on the Airflow provider for Hashicorp Vault and how to furt
     ```sh
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
   
-    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"} --secret
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}' --secret
     ```
   
 2. Run the following command to push your updated `requirements.txt` file to Astro:
@@ -453,7 +453,7 @@ By default, this setup requires that you prefix any secret names in Key Vault wi
     astro deploy --deployment-id <your-deployment-id> 
     ```
 
-3. Set the values of `AZURE_CLIENT_ID`, `AZURE_CLIENT_ID`, and `AZURE_CLIENT_ID` as secret in the Cloud UI. See [Set environment variables in the CLoud UI](environment-variables.md#set-environment-variables-in-the-cloud-ui).
+3. Set the values of `AZURE_CLIENT_ID`, `AZURE_CLIENT_ID`, and `AZURE_CLIENT_ID` as secret in the Cloud UI. See [Set environment variables in the CLoud UI](https://docs.astronomer.io/astro/environment-variables#set-environment-variables-in-the-cloud-ui).
   
 4. Optional. Remove the environment variables from your `.env` file or store your `.env` file in a safe location to protect your credentials.
 

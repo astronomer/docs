@@ -50,7 +50,7 @@ module.exports = {
     {
       type: "category",
       label: "Deploy",
-      items: ["deploy-code", "ci-cd"],
+      items: ["deploy-code", "set-up-ci-cd", "ci-cd"],
     },
     {
       type: "category",
@@ -102,7 +102,6 @@ module.exports = {
           type: "category",
           label: "Manage clusters",
           items: [
-            "view-clusters",
             "create-cluster",
             "modify-cluster",
             {

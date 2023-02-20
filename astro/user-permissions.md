@@ -1,11 +1,20 @@
 ---
 sidebar_label: "User permissions"
-title: "Manage user permissions in Astro"
+title: "Manage Astro user permissions"
 id: user-permissions
 description: Learn about Astronomer's RBAC system and how to assign roles to users.
 ---
 
-To better protect your data pipelines and cloud infrastructure, Astro offers role-based access control for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Role-based access control is not available for Deployments.
+To better protect your data pipelines and cloud infrastructure, Astro provides role based access control for Organizations and Workspaces. Each Astro user has a Workspace role in each Workspace they belong to, plus a single Organization role. Role based access control is not available for Deployments.
+
+Astro has hierarchical role based access control. Within a given Workspace or Organization, users with senior roles have their own permissions in addition to the permissions granted to lower roles. For example, users with Organization Owner permissions inherit Organization Billing Admin and Organization Member permissions because the roles are lower in the hierarchy. 
+
+The Astro role hierarchies in order of inheritance are: 
+
+- Organization Owner > Organization Billing Admin > Organization Member 
+- Workspace Admin > Workspace Editor > Workspace Viewer
+
+Users with Organization Owner permissions also inherit Workspace Admin permissions on all Workspaces.
 
 ## Organization roles
 
