@@ -69,10 +69,10 @@ value = Variable.get('MY_KEY')
 print(value)
 ```
 
-Call Airflow variables in SQL or Warehouse SQL cells using jinja templating. For example, if your environment variable stored the name of a column, you could run:
+Call Airflow variables in SQL or Warehouse SQL cells using jinja templating. For example, if your environment variable value is the name of a column in `mytable`, you could run:
 
 ```sql
-SELECT {{ var.value.MY_KEY }} FROM Mytable;
+SELECT {{ var.value.MY_KEY }} FROM mytable;
 ```
 
 ## Configure Airflow connections
