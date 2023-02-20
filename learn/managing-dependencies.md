@@ -9,6 +9,9 @@ id: managing-dependencies
   <meta name="og:description" content="Learn how to manage dependencies between tasks and TaskGroups in Apache Airflow, including how to set dynamic dependencies." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [Dependencies](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#relationships) are a powerful and popular Airflow feature. In Airflow, your pipelines are defined as Directed Acyclic Graphs (DAGs). Each task is a node in the graph and dependencies are the directed edges that determine how to move through the graph. Because of this, dependencies are key to following data engineering best practices because they help you define flexible pipelines with atomic tasks.
 
 Throughout this guide, the following terms are used to describe task dependencies:
@@ -99,6 +102,7 @@ from airflow.operators.empty import EmptyOperator
 from airflow.models.baseoperator import chain
 from pendulum import datetime
 
+
 @dag(
     start_date=datetime(2023, 1, 1),
     schedule="@daily",
@@ -177,6 +181,40 @@ This image shows the resulting DAG:
 
 When working with task groups, it is important to note that dependencies can be set both inside and outside of the group. For example, in the following DAG code there is a start task, a task group with two dependent tasks, and an end task that needs to happen sequentially. The dependencies between the two tasks in the task group are set within the task group's context (`t1 >> t2`). The dependencies between the task group and the start and end tasks are set within the DAG's context (`t0 >> tg1 >> t3`).
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "taskgroup-dependencies"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+t0 = EmptyOperator(task_id="start")
+
+# Start Task Group definition
+@task_group(
+    group_id="group1"
+)
+def tg1():
+    t1 = EmptyOperator(task_id="task1")
+    t2 = EmptyOperator(task_id="task2")
+
+    t1 >> t2
+# End Task Group definition
+
+t3 = EmptyOperator(task_id="end")
+
+# Set Task Group's (tg1) dependencies
+t0 >> tg1() >> t3
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
 ```python
 t0 = EmptyOperator(task_id="start")
 
@@ -193,6 +231,9 @@ t3 = EmptyOperator(task_id="end")
 # Set Task Group's (tg1) dependencies
 t0 >> tg1 >> t3
 ```
+
+</TabItem>
+</Tabs>
 
 This image shows the resulting DAG:
 
