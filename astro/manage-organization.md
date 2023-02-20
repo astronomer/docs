@@ -35,3 +35,11 @@ An SSO bypass link allows you to authenticate to an Organization without using S
 3. Optional. When you finish using the bypass link, Astronomer recommends clicking **Regenerate** to create a new bypass link and void the old one. 
 
     If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
+
+## Restrict authentication options 
+
+<PremiumBadge />
+
+By default, users have access to all possible authentication methods when logging into Astro. You can remove specific authentication options so that users can use only the methods that your Organization wants to support, such as your third party identity provider.
+
+To restrict which authentication options are available on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).

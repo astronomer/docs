@@ -101,7 +101,7 @@ If SSO is enabled for your domain, then you can enter your email on the `https:/
 
 ### I no longer see the option to login with a username and password. Is that expected?
 
-If SSO is enabled for your domain, then authenticating with a username and password is no longer an option. This allows your team to manage users only through your IdP.
+If SSO is enabled for your email domain, then authenticating with a username and password is no longer an option. This allows your team to manage users only through your IdP.
 
 ### After I enter my email and click Continue, I am prompted for a password. Is this expected?
 

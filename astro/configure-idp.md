@@ -242,19 +242,25 @@ These values are required for Step 2.
 
 #### Step 3: Provide Astronomer support with your integration information
 
-Send the X.509 certificate and SAML 2.0 endpoint (HTTP) information you copied in step 2 to [Astronomer support](https://cloud.astronomer.io/support).
+Send the following information to [Astronomer support](https://cloud.astronomer.io/support).
 
-Astronomer support will finalize your organization's integration with OneLogin.
+- The X.509 certificate you downloaded in Step 2 
+- SAML 2.0 endpoint (HTTP) information that you copied in step 2 
+- A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, make a request through Astronomer support.
 
-#### Step 4: Assign users to your OneLogin Astro application
+Astronomer support configures your Organization's integration with OneLogin and sends you a validation link that you'll use in step 4.
+
+#### Step 4: Confirm the integration 
+
+Open the validation link provided by Astronomer support and then log in to Astro with your credentials. After you validate that authentication works, Astro finalizes the integration. 
+
+#### Step 5: Assign users to your OneLogin Astro application
 
 1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Astro**.
 
 2. Click **Users** in the left menu.
 
-3. Make sure that all users who are using Astro are assigned to the Astronomer application.
-
-    When a user assigned to the application accesses Astro, they are automatically signed in to OneLogin after entering their email in the Cloud UI.
+3. Make sure that all users who need to use Astro are assigned to the Astronomer application.
 
 </TabItem>
 
@@ -320,11 +326,19 @@ Save these values for Step 2.
 
 #### Step 3: Provide Astronomer support with your integration information
 
-Send the X.509 certificate and the single sign on service URL you copied in step 2 to [Astronomer support](https://cloud.astronomer.io/support).
+Send the following information to [Astronomer support](https://cloud.astronomer.io/support).
 
-From here, Astronomer support will finalize your organization's integration with Okta.
+- The X.509 certificate you downloaded in Step 2.
+- The single sign on service URL that you copied in step 2.
+- A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, make a request through Astronomer support.
 
-#### Step 4: Assign users to your Ping Identity application
+Astronomer support configures your Organization's integration with Ping and sends you a validation link that you'll use in step 4.
+
+#### Step 4: Confirm the integration 
+
+Open the validation link provided by Astronomer support and then log in to Astro with your credentials. After you validate that authentication works, Astro finalizes the integration. 
+
+#### Step 5: Assign users to your Ping Identity application
 
 Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
 
@@ -333,11 +347,3 @@ When a user assigned to the application accesses Astro, they are automatically s
 </TabItem>
 
 </Tabs>
-
-## Restrict authentication options 
-
-<PremiumBadge />
-
-By default, users have access to all possible authentication methods when logging into Astro. You can remove specific authentication options so that users can use only the methods that your team wants to support, such as your third party identity provider.
-
-To restrict which authentication options are available on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).
