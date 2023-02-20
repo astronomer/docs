@@ -75,7 +75,7 @@ taskflow()
 
 </TabItem>
 
-<TabItem value="taskflow">
+<TabItem value="traditional">
 
 ```python
 import logging
