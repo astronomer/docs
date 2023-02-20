@@ -22,7 +22,7 @@ Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integra
 
 The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage data to the **Lineage** page on Astro. 
 
-Each operator generates different lineage data based its default extractor. For more information about operators with default extractors and what lineage data they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
+Each operator generates different lineage data based on its default extractor. For more information about operators with default extractors and what lineage data they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
 
 ## Extract lineage from Airflow operators using custom extractors
 
@@ -48,9 +48,11 @@ To specify inlets and outlets, see the [OpenLineage documentation](https://openl
 
 ## Extract lineage data from external systems to Astro
 
-When you integrate an external data lineage system with Astro or you are working with Astro locally and are not using a supported Airflow operator, you need to provide a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to the correct place in Astro. 
+To send lineage data integrate from an external system to Astro, you need to configure the external system's OpenLineage integration with a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to your Astro lineage backend.
 
-To locate the your Deployment namespace in the Cloud UI, select a Workspace and then copy the value with the format `<text>-<text>-<four-digit-number>` next to the Deployment name. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
+To locate your Deployment namespace in the Cloud UI, select a Workspace and then copy the value with the format `<text>-<text>-<four-digit-number>` next to the Deployment name. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
+
+Use the following topics to configure these values in supported external systems and send lineage data from those systems to Astro.
 
 ### Snowflake and OpenLineage with Airflow
 
@@ -111,7 +113,7 @@ Use the information provided here to set up lineage collection for Spark running
    spark.openlineage.namespace <NAMESPACE_NAME> // Astronomer recommends using a meaningful namespace like `spark-dev`or `spark-prod`.
    ```
 
-> **Note:** You override the JVM security properties for the spark _driver_ and _executor_ with an _empty_ string as some TLS algorithms are disabled by default. For a more information, see [this](https://docs.microsoft.com/en-us/answers/questions/170730/handshake-fails-trying-to-connect-from-azure-datab.html) discussion.
+> **Note:** You override the JVM security properties for the spark _driver_ and _executor_ with an _empty_ string as some TLS algorithms are disabled by default. For more information, see [this](https://docs.microsoft.com/en-us/answers/questions/170730/handshake-fails-trying-to-connect-from-azure-datab.html) discussion.
 
 After you save this configuration, lineage is enabled for all Spark jobs running on your cluster.
 
