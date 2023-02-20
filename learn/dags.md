@@ -54,7 +54,7 @@ The following example DAG loads data from Amazon S3 to Snowflake, runs a Snowfla
     groupId= "dag-definition-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional Syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -191,7 +191,7 @@ The following DAG consists of 3 tasks and its TaskFlow API version is generated 
     groupId= "example-dag-basic"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional Syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -381,10 +381,10 @@ In the previous example, DAG parameters were set within the `@dag()` function ca
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "operator-use-example"
+    groupId= "dag-parameters-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional Syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
