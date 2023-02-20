@@ -42,7 +42,7 @@ To write a custom extractor, see [OpenLineage documentation](https://openlineage
 
 ## Extract lineage data from Airflow operators using custom inlets and outlets
 
-An alternative to writing a custom extractor is to specify dataset inlets and outlets directly in your task parameters. These inlets and outlets will render as dependency lines on the lineage graph for the DAG. This option is suitable if your main priority is rendering an accurate lineage graph of your DAG, and you don't need to generate specific facets from your operators.
+An alternative to writing a custom extractor is to specify dataset inlets and outlets directly in your task parameters. These inlets and outlets appear as dependency lines on the lineage graph for your DAG. This option is suitable if your main priority is rendering an accurate lineage graph of your DAG, and you don't need to generate specific facets from your operators.
 
 To specify inlets and outlets, see the [OpenLineage documentation](https://openlineage.io/docs/integrations/airflow/manual) and [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/lineage.html). Note that OpenLineage only supports specifying inlets and outlets using `Table` objects.
 
