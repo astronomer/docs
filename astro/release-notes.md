@@ -25,6 +25,41 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.10.0 ([Release notes](cli/release-notes.md))
 
+## February 21, 2023
+
+### New identity-first authentication model
+
+Astro has migrated to an identity-first authentication model. Users now authenticate to the Astro platform rather than to individual Organizations, and Organizations can set permissions for how those users can modify and access resources. This model prioritizes verifying the identity of users and enforcing authentication policies for user email domains.
+
+For all users logging in to Astro, this migration has the following effects:
+
+- Instead of being redirected to separate login pages for each Organization, all Astro users log in through a universal login page. 
+- If you belong to multiple Organizations and log in with single sign-on (SSO), you no longer have to log in again when switching Organizations. 
+- You no longer need to enter your email on a separate page before logging into the Cloud UI.
+- If your Organization enforces SSO, you can now authenticate to Astro with a username and password only if your email domain is not enforced to use SSO.
+
+For Organization Owners, this migration has the following additional effects:
+
+- You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted for any reason.
+- Your Organization now has an associated list of owned email domains that will be referenced when enforcing SSO. Astronomer might ask you to prove that you own these domains.
+- You can now use just-in-time provisioning. If you assign a user to Astro through your identity provider, that user can join your Organization without an explicit invite as an Organization Member. To change this behavior, contact [Astronomer support](https://cloud.astronomer.io/support).
+- When you configure a new identity provider, you can now test and activate the integration without assistance from Astronomer support.
+
+For more information about how this can affect logging in, see the [Login FAQ]`log-in-to-astro.md#frequently-asked-questions`. To configure authentication behavior, see [Manage an Organization on Astro]`manage-organization.md`
+
+### Additional improvements 
+
+The default CIDR ranges for new GCP clusters have been reduced. The new CIDR ranges are:
+
+- **Subnet CIDR**: `172.20.0.0/22`
+- **Pod CIDR**: `172.21.0.0/19`
+- **Service Address CIDR**: `172.22.0.0/22`
+- **Service VPC Peering**: `172.23.0.0/20`
+
+### Bug fixes 
+
+On the **Lineage** page, you can now see the run lengths for shorter runs in the dropdown menu that appears in **Compare** mode.
+
 ## February 14, 2023
 
 ### Authorize Workspaces to clusters
