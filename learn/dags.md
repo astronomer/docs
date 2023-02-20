@@ -10,6 +10,9 @@ id: dags
   <meta name="og:description" content="Learn how to write DAGs and get tips on how to define an Airflow DAG in Python. Learn all about DAG parameters and their settings." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 In Airflow, data pipelines are defined in Python code as directed acyclic graphs, also known as DAGs. Within a graph, each node represents a task which completes a unit of work, and each edge represents a dependency between tasks.
 
 In this guide, you'll learn DAG basics and about DAG parameters and how to define a DAG in Python.
@@ -46,47 +49,119 @@ Most DAGs follow this general flow within a Python script:
 
 The following example DAG loads data from Amazon S3 to Snowflake, runs a Snowflake query, and then sends an email.
 
-```python
-from datetime import datetime, timedelta
+<Tabs
+    defaultValue="taskflow"
+    groupId= "dag-definition-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Operator', value: 'traditional'},
+    ]}>
 
-from airflow import DAG
+<TabItem value="taskflow">
+
+```python
+from airflow.decorators import dag
 from airflow.operators.email import EmailOperator
 from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
-from airflow.providers.snowflake.transfers.s3_to_snowflake import S3ToSnowflakeOperator
+from airflow.providers.snowflake.transfers.s3_to_snowflake import (
+    S3ToSnowflakeOperator
+)
 
-# Instantiate DAG
-with DAG(
-    's3_to_snowflake',
-    start_date=datetime(2020, 6, 1),
-    schedule='@daily',
+from pendulum import datetime, duration
+
+
+# Decorate your DAG function with @dag
+@dag(
+    dag_id="s3_to_snowflake",
+    start_date=datetime(2023, 1, 1),
+    schedule="@daily",
     default_args={
-        'retries': 1,
-        'retry_delay': timedelta(minutes=5)
+        "retries": 1,
+        "retry_delay": duration(minutes=5)
     },
     catchup=False
-) as dag:
+)
+def my_dag():
 
-    # Instantiate tasks within the DAG context
+    # Instantiate tasks within the function decorated with @dag
     load_file = S3ToSnowflakeOperator(
-        task_id='load_file',
-        s3_keys=['key_name.csv'],
-        stage='snowflake_stage',
-        table='my_table',
-        schema='my_schema',
-        file_format='csv',
-        snowflake_conn_id='snowflake_default'
+        task_id="load_file",
+        s3_keys=["key_name.csv"],
+        stage="snowflake_stage",
+        table="my_table",
+        schema="my_schema",
+        file_format="csv",
+        snowflake_conn_id="snowflake_default"
     )
 
     snowflake_query = SnowflakeOperator(
         task_id="run_query",
-        sql='SELECT COUNT(*) FROM my_table'
+        sql="SELECT COUNT(*) FROM my_table"
     )
 
     send_email = EmailOperator(
-        task_id='send_email',
-        to='noreply@astronomer.io',
-        subject='Snowflake DAG',
-        html_content='<p>The Snowflake DAG completed successfully.<p>'
+        task_id="send_email",
+        to="noreply@astronomer.io",
+        subject="Snowflake DAG",
+        html_content="<p>The Snowflake DAG completed successfully.<p>"
+    )
+
+    # Define dependencies
+    load_file >> snowflake_query >> send_email
+
+
+# when using the @dag decorator call the decorated function after the
+# function definition
+my_dag()
+
+```
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+from airflow import DAG
+from airflow.operators.email import EmailOperator
+from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
+from airflow.providers.snowflake.transfers.s3_to_snowflake import (
+    S3ToSnowflakeOperator
+)
+
+from pendulum import datetime, duration
+
+# Instantiate DAG
+with DAG(
+    dag_id="s3_to_snowflake",
+    start_date=datetime(2023, 1, 1),
+    schedule="@daily",
+    default_args={
+        "retries": 1,
+        "retry_delay": duration(minutes=5)
+    },
+    catchup=False
+):
+
+    # Instantiate tasks within the DAG context
+    load_file = S3ToSnowflakeOperator(
+        task_id="load_file",
+        s3_keys=["key_name.csv"],
+        stage="snowflake_stage",
+        table="my_table",
+        schema="my_schema",
+        file_format="csv",
+        snowflake_conn_id="snowflake_default"
+    )
+
+    snowflake_query = SnowflakeOperator(
+        task_id="run_query",
+        sql="SELECT COUNT(*) FROM my_table"
+    )
+
+    send_email = EmailOperator(
+        task_id="send_email",
+        to="noreply@astronomer.io",
+        subject="Snowflake DAG",
+        html_content="<p>The Snowflake DAG completed successfully.<p>"
     )
 
     # Define dependencies
@@ -94,36 +169,53 @@ with DAG(
 
 ```
 
+</TabItem>
+</Tabs>
+
 The example DAG makes use of the [Snowflake provider package](https://registry.astronomer.io/providers/snowflake). Providers are Python packages separate from core Airflow that contain hooks, operators, and sensors to integrate Airflow with third party services. The [Astronomer Registry](https://registry.astronomer.io/) is the best place to go to learn about available Airflow providers.
 
-Astronomer recommends creating one Python file for each DAG. Some advanced use cases might require dynamically generating DAG files, which can also be accomplished using Python.
+Astronomer recommends creating one Python file for each DAG. Some advanced use cases might require [dynamically generating DAG files](dynamically-generating-dags.md), which can also be accomplished using Python.
 
 ### Writing DAGs with the TaskFlow API
 
-In Airflow 2.0 and later, you can use the TaskFlow API as an alternative to the operators shown in the previous example DAG. With the TaskFlow API, you can define your DAG and any PythonOperator tasks using decorators. The purpose of decorators in Airflow is to simplify the DAG authoring experience by eliminating boilerplate code. How you author your DAGs is a matter of preference and style. 
+Additionally to using operators as shown in the previous example, you can use Airflow [decorators](airflow-decorators.md) to define tasks. One of the most commonly used decorator is the `@task` decorator that allows you to replace the traditional PythonOperator. The purpose of decorators in Airflow is to simplify the DAG authoring experience by eliminating boilerplate code. How you author your DAGs is a matter of preference and style. 
 
-For example, the following DAG is generated when you initialize an Astro project with the Astro CLI:
+The following DAG consists of 3 tasks and its TaskFlow API version is generated as `example_dag_basic` when you initiate a new project with the Astro CLI. Compare the code between the TaskFlow API syntax and the traditional syntax.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "example-dag-basic"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Operator', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
 
 ```python
 import json
-from datetime import datetime, timedelta
+from pendulum import datetime
 
 from airflow.decorators import dag, task
 
+
 @dag(
+    "example_dag_basic",
     schedule="@daily",
-    start_date=datetime(2021, 1, 1),
+    start_date=datetime(2023, 1, 1),
     catchup=False,
     default_args={
         "retries": 2
     },
-    tags=['example'])
+    tags=["example"]
+)
 def example_dag_basic():
     """
     ### Basic ETL Dag
     This is a simple ETL data pipeline example that demonstrates the use of
     the TaskFlow API using three simple tasks for extract, transform, and load.
-    For more information on Airflow's TaskFlow API, reference documentation here:
+    For more information on Airflow's TaskFlow API, reference
+    documentation here:
     https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html
     """
 
@@ -140,12 +232,15 @@ def example_dag_basic():
         order_data_dict = json.loads(data_string)
         return order_data_dict
 
-    @task(multiple_outputs=True) # multiple_outputs=True unrolls dictionaries into separate XCom values
+    @task(
+        multiple_outputs=True  # multiple_outputs=True unrolls dictionaries
+                               # into separate XCom values
+    )
     def transform(order_data_dict: dict):
         """
         #### Transform task
-        A simple "transform" task which takes in the collection of order data and
-        computes the total order value.
+        A simple "transform" task which takes in the collection of order data
+        and computes the total order value.
         """
         total_order_value = 0
 
@@ -158,8 +253,8 @@ def example_dag_basic():
     def load(total_order_value: float):
         """
         #### Load task
-        A simple "load" task that takes in the result of the "transform" task and prints it out,
-        instead of saving it to end user review
+        A simple "load" task that takes in the result of the "transform" task
+        and prints it out, instead of saving it to end user review.
         """
 
         print(f"Total order value is: {total_order_value:.2f}")
@@ -169,29 +264,159 @@ def example_dag_basic():
     order_summary = transform(order_data)
     load(order_summary["total_order_value"])
 
+
 # Call the dag function to register the DAG
-example_dag_basic = example_dag_basic()
+example_dag_basic()
+
+```
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+import json
+from pendulum import datetime
+
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+
+with DAG(
+    "example_dag_basic",
+    schedule="@daily",
+    start_date=datetime(2023, 1, 1),
+    catchup=False,
+    default_args={
+        "retries": 2
+    },
+    tags=["example"],
+    # Render templates using Jinja NativeEnvironment
+    render_template_as_native_obj=True
+):
+    """
+    ### Basic ETL Dag
+    This is a simple ETL data pipeline example that uses the traditional
+    PythonOperator instead of TaskFlowAPI decorators to accomplish the same
+    simple extract, transform and load steps as the example_dag_basic
+    generated by the Astro CLI.
+    For more information on the PythonOperator, reference the registry here:
+    https://registry.astronomer.io/providers/apache-airflow/modules/pythonoperator
+    """
+
+    def extract_function():
+        """
+        #### Extract task
+        A simple "extract" task to get data ready for the rest of the
+        pipeline. In this case, getting data is simulated by reading from a
+        hardcoded JSON string.
+        """
+        data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
+
+        order_data_dict = json.loads(data_string)
+        return order_data_dict
+
+    extract_task = PythonOperator(
+        task_id="extract",
+        python_callable=extract_function
+    )
+
+    def transform_function(order_data_dict: dict):
+        """
+        #### Transform task
+        A simple "transform" task which takes in the collection of order data
+        and computes the total order value.
+        """
+        total_order_value = 0
+
+        for value in order_data_dict.values():
+            total_order_value += value
+
+        return {"total_order_value": total_order_value}
+
+    transform_task = PythonOperator(
+        task_id="transform",
+        python_callable=transform_function,
+        op_kwargs={
+            "order_data_dict": "{{ ti.xcom_pull(task_ids='extract', \
+                key='return_value') }}"
+        }
+    )
+
+    def load_function(total_order_value: float):
+        """
+        #### Load task
+        A simple "load" task that takes in the result of the "transform" task
+        and prints it out, instead of saving it to end user review.
+        """
+
+        print(f"Total order value is: {total_order_value:.2f}")
+
+    load_task = PythonOperator(
+        task_id="load",
+        python_callable=load_function,
+        op_kwargs={
+            "total_order_value": "{{ ti.xcom_pull(task_ids='transform', \
+                key='return_value')['total_order_value'] }}"
+        }
+    )
+
+    # Define task dependencies
+    extract_task >> transform_task >> load_task
+
 ```
 
-In this example DAG, tasks are instantiated using the `@task` decorator, and the DAG is instantiated using the `@dag` decorator. When using decorators, you must call the DAG and task functions in the DAG script for Airflow to register them.
+</TabItem>
+</Tabs>
+
+Keep in mind: when using decorators, you must call the DAG and task functions in the DAG script for Airflow to register them.
 
 ## DAG parameters
 
 In Airflow, you can configure when and how your DAG runs by setting parameters in the DAG object. DAG-level parameters affect how the entire DAG behaves, as opposed to task-level parameters which only affect a single task.
 
-In the previous example, DAG parameters were set within the `@dag()` function call:
+In the previous example, DAG parameters were set within the `@dag()` function call and the `DAG` object:
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "operator-use-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Operator', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
 
 ```python
 @dag(
-    'example_dag',
+    "example_dag",
     schedule="@daily",
-    start_date=datetime(2021, 1, 1),
+    start_date=datetime(2023, 1, 1),
     catchup=False,
     default_args={
         "retries": 2
     },
-    tags=['example'])
+    tags=["example"]
+)
 ```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+with DAG(
+    "example_dag",
+    schedule="@daily",
+    start_date=datetime(2023, 1, 1),
+    catchup=False,
+    default_args={
+        "retries": 2
+    },
+    tags=["example"]
+):
+```
+
+</TabItem>
+</Tabs>
 
 These parameters define:
 
