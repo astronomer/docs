@@ -16,7 +16,7 @@ toc_max_heading_level: 2
 
 This guide provides information about how lineage data is automatically extracted from Apache Airflow tasks on Astro and how to integrate external systems, including Databricks and dbt, that require additional configuration. To learn about how to view data lineage on Astro, see [View data lineage](data-lineage.md).
 
-## Extract lineage from Airflow operators using supported extractors
+## Extract lineage data from Airflow operators using supported extractors
 
 Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/extractors/default-extractors) for popular Airflow operators.
 
@@ -24,7 +24,7 @@ The latest version of the OpenLineage Airflow library is installed on [Astro Run
 
 Each operator generates different lineage data based on its default extractor. For more information about operators with default extractors and what lineage data they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
 
-## Extract lineage from Airflow operators using custom extractors
+## Extract lineage data from Airflow operators using custom extractors
 
 If you want to extract lineage data from an Airflow operator that doesn't have a default extractor, you can write a custom extractor and add it to your Astro project.
 
@@ -40,7 +40,7 @@ To write a custom extractor, see [OpenLineage documentation](https://openlineage
 
     If you are importing only one custom extractor, do not include a semicolon after the file path. 
 
-## Extract lineage from Airflow operators using custom inlets and outlets
+## Extract lineage data from Airflow operators using custom inlets and outlets
 
 An alternative to writing a custom extractor is to specify dataset inlets and outlets directly in your task parameters. These inlets and outlets will render as dependency lines on the lineage graph for the DAG. This option is suitable if your main priority is rendering an accurate lineage graph of your DAG, and you don't need to generate specific facets from your operators.
 

@@ -53,7 +53,7 @@ By default, when you access the **Lineage** page from the left menu, the last li
 
 :::info
 
-A lineage graph with a single node indicates that the run you selected didn't emit any information about input or output datasets. Typically, this occurs when an Airflow task isn't using a [supported Airflow operator](data-lineage-support-and-compatibility.md). You can still view the duration of this run over time.
+A lineage graph with a single node indicates that the run you selected didn't emit any information about input or output datasets. Typically, this occurs when an Airflow task isn't using a [supported Airflow operator](https://openlineage.io/docs/integrations/about#capability-matrix). You can still view the duration of this run over time.
 
 :::
 
