@@ -85,7 +85,7 @@ Click a node to populate the information pane with detailed information about th
 
 On the **Lineage Graph** page for a DAG, the following tabs appear below the lineage graph:
 
-- **Info**: Shows the code and facets for a run or the schema for a dataset. Also shows the difference between runs when you create a comparison in the **Compare** tab.
+- **Info**: Shows source code, standard facets, and custom facets for a run, or shows the schema for a dataset. Also shows the difference between runs when you are in [**Compare** mode](data-lineage.md#compare-lineage-graphs-from-previous-runs).
 - **Inputs/Outputs**: Shows the inputs and outputs for a run or dataset. This information is equivalent to the upstream and downstream nodes in the graph view.
 - **Quality (Dataset only)**: Shows the data quality checks performed on each element of a dataset. Expand a listed dataset element to view more information about a specific quality check.
 - **Duration (Run only)**: Shows the duration of upstream runs in descending order. To view run durations relative to the average duration across all runs, click the blue arrow next to the name of your most recent run and then click **Maximize** at the bottom of the list.
@@ -138,7 +138,7 @@ To see details on the assertions that have passed or failed, hover over a given 
 
 ### Compare lineage graphs from previous runs
 
-The **Compare** view shows a list of past instances for a given run. Using this view, you can select two different run instances to see what changed in your pipelines between the two run instances.
+**Compare** mode shows a list of past instances for a given run. Using this mode, you can select two different run instances to see what changed in your pipelines between the two run instances.
 
 1. Click a run on the graph.
    
