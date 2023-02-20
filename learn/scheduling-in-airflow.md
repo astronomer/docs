@@ -9,6 +9,9 @@ id: scheduling-in-airflow
   <meta name="og:description" content="Get to know Airflow scheduling concepts and different ways to schedule a DAG. Learn how timetables in Airflow 2.2 bring new flexibility to DAG scheduling." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 One of the fundamental features of Apache Airflow is the ability to schedule jobs. Historically, Airflow users scheduled their DAGs by specifying a `schedule` with a cron expression, a timedelta object, or a preset Airflow schedule. Timetables, released in Airflow 2.2, allow users to create their own custom schedules using Python, effectively eliminating the limitations of cron. With timetables, you can now schedule DAGs to run at any time. Datasets, introduced in Airflow 2.4, let you schedule your DAGs on updates to a dataset rather than a time-based schedule. For more information about datasets, see [Datasets and Data-Aware Scheduling in Airflow](airflow-datasets.md).
 
 In this guide, you'll learn Airflow scheduling concepts and the different ways you can schedule a DAG with a focus on timetables. For a video overview of these concepts, see [Scheduling in Airflow webinar](https://www.astronomer.io/events/webinars/trigger-dags-any-schedule).  
@@ -262,7 +265,36 @@ class UnevenIntervalsTimetablePlugin(AirflowPlugin):
 
 Because timetables are plugins, you'll need to restart the Airflow Scheduler and Webserver after adding or updating them.
 
-In the DAG, you can import the custom timetable plugin and use it to schedule the DAG by setting the `timetable` parameter:
+In the DAG, you can import the custom timetable plugin and use it to schedule the DAG by setting the `schedule` parameter (in pre-2.4 Airflow you will need to use the `timetable` parameter):
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "timetable-use"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+from uneven_intervals_timetable import UnevenIntervalsTimetable
+
+@dag(
+    dag_id="example_timetable_dag",
+    start_date=datetime(2021, 10, 9),
+    max_active_runs=1,
+    schedule=UnevenIntervalsTimetable(),
+    default_args={
+        "retries": 1,
+        "retry_delay": duration(minutes=3),
+    },
+    catchup=True
+)
+```
+</TabItem>
+
+<TabItem value="traditional">
 
 ```python
 from uneven_intervals_timetable import UnevenIntervalsTimetable
@@ -271,14 +303,17 @@ with DAG(
     dag_id="example_timetable_dag",
     start_date=datetime(2021, 10, 9),
     max_active_runs=1,
-    timetable=UnevenIntervalsTimetable(),
+    schedule=UnevenIntervalsTimetable(),
     default_args={
         "retries": 1,
-        "retry_delay": timedelta(minutes=3),
+        "retry_delay": duration(minutes=3),
     },
     catchup=True
-) as dag:
+):
 ```
+
+</TabItem>
+</Tabs>
 
 Looking at the Tree View in the UI, you can see that this DAG has run twice per day at 6:00 and 16:30 since the start date of 2021-10-09.
 
@@ -307,6 +342,33 @@ There are some limitations to keep in mind when implementing custom timetables:
 
 Datasets and data-driven DAG dependencies were introduced in Airflow 2.4. You can now make Airflow detect when a task in a DAG updates a data object. Using that awareness, other DAGs can be scheduled depending on updates to these datasets. To create a dataset-based schedule, you pass the names of the datasets as a list to the `schedule` parameter. For example:
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "datasets-schedule-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Operators', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+dataset1 = Dataset(f"{DATASETS_PATH}/dataset_1.txt")
+dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
+
+@dag(
+    dag_id='dataset_dependent_example_dag',
+    catchup=False,
+    start_date=datetime(2022, 8, 1),
+    schedule=[dataset1, dataset2],
+    tags=['consumes', 'dataset-scheduled'],
+)
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
 ```python
 dataset1 = Dataset(f"{DATASETS_PATH}/dataset_1.txt")
 dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
@@ -317,8 +379,11 @@ with DAG(
     start_date=datetime(2022, 8, 1),
     schedule=[dataset1, dataset2],
     tags=['consumes', 'dataset-scheduled'],
-) as dag:
+):
 ```
+
+</TabItem>
+</Tabs>
 
 This DAG runs only when `dataset1` and `dataset2` are updated. These updates can occur by tasks in different DAGs as long as they are located in the same Airflow environment.
 
