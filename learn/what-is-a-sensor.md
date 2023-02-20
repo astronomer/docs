@@ -9,6 +9,9 @@ id: what-is-a-sensor
   <meta name="og:description" content="Get an overview of Airflow sensors and see the new sensor-related features included in Airflow 2. Learn best practices for implementing sensors in production." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 [Apache Airflow sensors](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) are a special kind of operator that are designed to wait for something to happen. When sensors run, they check to see if a certain condition is met before they are marked successful and let their downstream tasks execute. When used properly, they can be a great tool for making your DAGs more event driven.
 
 In this guide, you'll learn how sensors are used in Airflow, best practices for implementing sensors in production, and how to use deferrable versions of sensors.
@@ -231,7 +234,8 @@ def sensor_decorator():
             print(f"Shibe URL returned the status code {r.status_code}")
 
         # the function has to return a PokeReturnValue
-        # if is_done = True the sensor will exit successfully, if is_done=False, the sensor will either poke or be rescheduled
+        # if is_done = True the sensor will exit successfully, if 
+        # is_done=False, the sensor will either poke or be rescheduled
         return PokeReturnValue(is_done=condition_met, xcom_value=operator_return_value)
 
 

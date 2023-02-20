@@ -82,13 +82,11 @@ The environment variable used for the connection must be formatted as `AIRFLOW_C
 [URI](https://en.wikipedia.org/wiki/Uniform_Resource_Identifier) is a format designed to contain all necessary connection information in one string, starting with the connection type, followed by login, password, and host. In many cases a specific port, schema, and additional parameters must be added.
 
 ```docker
-
 # the general format of a URI connection that is defined in your Dockerfile
 ENV AIRFLOW_CONN_MYCONNID='my-conn-type://login:password@host:port/schema?param1=val1&param2=val2'
 
 # an example of a connection to snowflake defined as a URI
 ENV AIRFLOW_CONN_SNOWFLAKE_CONN='snowflake://LOGIN:PASSWORD@/?account=xy12345&region=eu-central-1'
-
 ```
 
 In Airflow 2.3+, connections can be provided to an environment variable as a JSON dictionary:
@@ -160,18 +158,19 @@ Click **Test** to test the connection.
 The last step is writing the DAG using the `SnowflakeToSlackOperator` to run a SQL query on a Snowflake table and post the result as a message to a Slack channel. The `SnowflakeToSlackOperator` requires both the connection id for the Snowflake connection (`snowflake_conn_id`) and the connection id for the Slack connection (`slack_conn_id`).
 
 ```python
-from airflow import DAG
-from datetime import datetime
+from airflow.decorators import dag
+from pendulum import datetime
 from airflow.providers.snowflake.transfers.snowflake_to_slack import (
     SnowflakeToSlackOperator
 )
 
-with DAG(
-    dag_id="snowflake_to_slack_dag",
+
+@dag(
     start_date=datetime(2022, 7, 1),
     schedule=None,
     catchup=False
-) as dag:
+)
+def snowflake_to_slack_dag():
 
     transfer_task = SnowflakeToSlackOperator(
         task_id="transfer_task",
@@ -194,4 +193,7 @@ with DAG(
             => {{ results_df.ROW_COUNT[0] }} entries
             => with a total price of {{results_df.SUM_PRICE[0]}}"""
     )
+
+
+snowflake_to_slack_dag()
 ```
