@@ -172,6 +172,10 @@ with DAG(
 </TabItem>
 </Tabs>
 
+In the **Graph** view you can see the example DAG consisting of 3 tasks:
+
+![s3_to_snowflake example DAG](/img/guides/s3_to_snowflake_example.png)
+
 The example DAG makes use of the [Snowflake provider package](https://registry.astronomer.io/providers/snowflake). Providers are Python packages separate from core Airflow that contain hooks, operators, and sensors to integrate Airflow with third party services. The [Astronomer Registry](https://registry.astronomer.io/) is the best place to go to learn about available Airflow providers.
 
 Astronomer recommends creating one Python file for each DAG. Some advanced use cases might require [dynamically generating DAG files](dynamically-generating-dags.md), which can also be accomplished using Python.
