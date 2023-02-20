@@ -347,7 +347,7 @@ Datasets and data-driven DAG dependencies were introduced in Airflow 2.4. You ca
     groupId= "datasets-schedule-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operators', value: 'traditional'},
+        {label: 'Traditional Syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

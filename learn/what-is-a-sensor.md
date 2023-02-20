@@ -59,50 +59,135 @@ To review the available Airflow sensors, go to the [Astronomer Registry](https:/
 
 The following example DAG shows how you might use the `SqlSensor` sensor: 
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "sql-sensor-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
 ```python
 from airflow.decorators import task, dag
 from airflow.sensors.sql import SqlSensor
 
 from typing import Dict
-from datetime import datetime
+from pendulum import datetime
+
 
 def _success_criteria(record):
-        return record
+    return record
+
 
 def _failure_criteria(record):
-        return True if not record else False
+    return True if not record else False
 
-@dag(description='DAG in charge of processing partner data',
-     start_date=datetime(2021, 1, 1), schedule='@daily', catchup=False)
+
+@dag(
+    description="DAG in charge of processing partner data",
+    start_date=datetime(2021, 1, 1),
+    schedule="@daily",
+    catchup=False
+)
 def partner():
-    
+
     waiting_for_partner = SqlSensor(
-        task_id='waiting_for_partner',
-        conn_id='postgres',
-        sql='sql/CHECK_PARTNER.sql',
+        task_id="waiting_for_partner",
+        conn_id="postgres",
+        sql="sql/CHECK_PARTNER.sql",
         parameters={
-            'name': 'partner_a'
+            "name": "partner_a"
         },
         success=_success_criteria,
         failure=_failure_criteria,
         fail_on_empty=False,
         poke_interval=20,
-        mode='reschedule',
+        mode="reschedule",
         timeout=60 * 5
     )
-    
+
     @task
     def validation() -> Dict[str, str]:
-        return {'partner_name': 'partner_a', 'partner_validation': True}
-    
+        return {"partner_name": "partner_a", "partner_validation": True}
+
     @task
     def storing():
-        print('storing')
-    
+        print("storing")
+
     waiting_for_partner >> validation() >> storing()
-    
-dag = partner()
+
+
+partner()
+
 ```
+
+</TabItem>
+<TabItem value="traditional">
+
+```python
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from airflow.sensors.sql import SqlSensor
+
+from typing import Dict
+from pendulum import datetime
+
+
+def _success_criteria(record):
+    return record
+
+
+def _failure_criteria(record):
+    return True if not record else False
+
+
+with DAG(
+    dag_id="partner",
+    description="DAG in charge of processing partner data",
+    start_date=datetime(2021, 1, 1),
+    schedule="@daily",
+    catchup=False
+):
+
+    waiting_for_partner = SqlSensor(
+        task_id="waiting_for_partner",
+        conn_id="postgres",
+        sql="sql/CHECK_PARTNER.sql",
+        parameters={
+            "name": "partner_a"
+        },
+        success=_success_criteria,
+        failure=_failure_criteria,
+        fail_on_empty=False,
+        poke_interval=20,
+        mode="reschedule",
+        timeout=60 * 5
+    )
+
+    def validation_function() -> Dict[str, str]:
+        return {"partner_name": "partner_a", "partner_validation": True}
+
+    validation = PythonOperator(
+        task_id="validation",
+        python_callable=validation_function
+    )
+
+    def storing_function():
+        print("storing")
+
+    storing = PythonOperator(
+        task_id="storing",
+        python_callable=storing_function
+    )
+
+    waiting_for_partner >> validation >> storing
+
+```
+
+</TabItem>
+</Tabs>
 
 This DAG waits for data to be available in a Postgres database before running validation and storing tasks. The `SqlSensor` runs a SQL query and is marked successful when that query returns data. Specifically, when the result is not in the set (0, '0', '', None). The `SqlSensor` task in the example DAG (`waiting_for_partner`) runs the `CHECK_PARTNER.sql` script every 20 seconds (the `poke_interval`) until the data is returned. The `mode` is set to `reschedule`, meaning between each 20 second interval the task will not take a worker slot. The `timeout` is set to 5 minutes, and the task fails if the data doesn't arrive within that time. When the `SqlSensor` criteria is met, the DAG moves to the downstream tasks. You can find the full code for this example in the [webinar-sensors repo](https://github.com/marclamberti/webinar-sensors).
 
@@ -111,20 +196,19 @@ This DAG waits for data to be available in a Postgres database before running va
 Starting in Airflow 2.5, you can use the `@task.sensor` decorator from the TaskFlow API to use any Python function that returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The following DAG shows how to use the sensor decorator:
 
 ```python
-from airflow import DAG
-from airflow.decorators import task
+from airflow.decorators import dag, task
 from pendulum import datetime
 import requests
 
 # importing the PokeReturnValue
 from airflow.sensors.base import PokeReturnValue
 
-with DAG(
-    dag_id="sensor_decorator",
+@dag(
     start_date=datetime(2022, 12, 1),
     schedule="@daily",
     catchup=False
-):
+)
+def sensor_decorator():
 
     # supply inputs to the BaseSensorOperator parameters in the decorator
     @task.sensor(
@@ -158,6 +242,9 @@ with DAG(
 
 
     print_shibe_picture_url(check_shibe_availability())
+
+
+sensor_decorator()
 ```
 
 Here, `@task.sensor` decorates the `check_shibe_availability()` function, which checks if a given API returns a 200 status code. If the API returns a 200 status code, the sensor task is marked as successful. If any other status code is returned, the sensor pokes again after the `poke_interval` has passed.
