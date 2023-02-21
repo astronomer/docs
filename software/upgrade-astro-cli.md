@@ -50,7 +50,7 @@ This topic does not include information about new features and changes that are 
 
 ### Podman is not supported in version 1.0+
 
-[Running the Astro CLI with Podman containers](/astro/cli/cli-podman.md) is currently unsupported in version 1.0+. Podman functionality is still actively maintained in patches for versions 0.29 and 0.28. To continue using Podman to run the Astro CLI, do not upgrade to version 1.0+ until further support is announced.
+[Running the Astro CLI with Podman containers](astro/cli/cli-podman.md) is currently unsupported in version 1.0+. Podman functionality is still actively maintained in patches for versions 0.29 and 0.28. To continue using Podman to run the Astro CLI, do not upgrade to version 1.0+ until further support is announced.
 
 ### `astro dev init`: New `--use-astronomer-certified` Flag Required for All New Projects Deployed to Software
 
