@@ -29,26 +29,26 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### New identity-first authentication model
 
-Astro has migrated to an identity-first authentication model. Users now authenticate to the Astro platform rather than to individual Organizations, and Organizations can set permissions for how those users can modify and access resources. This model prioritizes verifying the identity of users and enforcing authentication policies for user email domains.
+Astro has migrated to an identity-first authentication model. Users now authenticate to the Astro platform instead of individual Organizations, and Organizations can set permissions for how users can modify and access resources. This model prioritizes identity verification and enforces authentication policies for user email domains.
 
 For all users logging in to Astro, this migration has the following effects:
 
 - Instead of being redirected to separate login pages for each Organization, all Astro users log in through a universal login page. 
-- If you belong to multiple Organizations, you no longer have to log in again when switching Organizations.
-- You no longer need to enter your email on a separate page before logging into the Cloud UI.
-- If your Organization enforces SSO, you can now authenticate to Astro with a username and password only if your email domain is not enforced to use SSO.
+- Users belonging to multiple Organizations no longer have to log in again when switching Organizations.
+- Users no longer need to enter their email on a separate page before they log in to the Cloud UI.
+- If your Organization enforces single sign-on (SSO), users can now authenticate to Astro with a username and password when your email domain doesn't enforce SSO.
 
 For Organization Owners, this migration has the following additional effects:
 
-- You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted for any reason.
+- You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.
 - Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
-- You can now use just-in-time provisioning. If you assign a user to Astro through your identity provider, that user can join your Organization without an explicit invite as an Organization Member. To change this behavior, contact [Astronomer support](https://cloud.astronomer.io/support).
+- Your Organization now has just-in-time provisioning enabled. If you assign a user to Astro through your identity provider, that user can join your Organization as an Organization Member without being invited. To change this behavior, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-For more information about how this can affect logging in, see the [Login FAQ]`log-in-to-astro.md#frequently-asked-questions`. To configure authentication behavior, see [Manage an Organization on Astro]`manage-organization.md`
+For more information about how these changes can affect the Astro log in experience, see the [Login FAQ]`log-in-to-astro.md#frequently-asked-questions`. To configure authentication behavior, see [Manage an Organization on Astro]`manage-organization.md`
 
 ### Additional improvements 
 
-The default CIDR ranges for new GCP clusters have been reduced. The new CIDR ranges are:
+The default CIDR ranges for new GCP clusters have been reduced. The following are the new CIDR ranges:
 
 - **Subnet CIDR**: `172.20.0.0/22`
 - **Pod CIDR**: `172.21.0.0/19`
@@ -57,7 +57,7 @@ The default CIDR ranges for new GCP clusters have been reduced. The new CIDR ran
 
 ### Bug fixes 
 
-On the **Lineage** page, you can now see the run lengths for shorter runs in the dropdown menu that appears in **Compare** mode.
+In the Cloud UI, when using **Compare** on the **Lineage Graph** page, you can now compare shorter run lengths.
 
 ## February 14, 2023
 
