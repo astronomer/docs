@@ -5,6 +5,9 @@ description: "How to dynamically create tasks at runtime in your Airflow DAGs."
 id: dynamic-tasks
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 With the release of [Airflow 2.3](https://airflow.apache.org/blog/airflow-2.3.0/), you can write DAGs that dynamically generate parallel tasks at runtime. This feature, known as dynamic task mapping, is a paradigm shift for DAG design in Airflow.
 
 Prior to Airflow 2.3, tasks could only be generated dynamically at the time that the DAG was parsed, meaning you had to change your DAG code if you needed to adjust tasks based on some external factor. With dynamic task mapping, you can easily write DAGs that create tasks based on your current runtime environment.
@@ -32,6 +35,16 @@ Airflow 2.4 allowed the mapping of multiple keyword argument sets. This type of 
 
 In the following example, the task uses both of these functions to dynamically generate three task runs:
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "basic-dynamic-task-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
 ```python
 @task
 def add(x: int, y: int):
@@ -39,6 +52,27 @@ def add(x: int, y: int):
 
 added_values = add.partial(y=10).expand(x=[1, 2, 3])
 ```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+def add_function(x: int, y: int):
+    return x + y
+
+added_values = PythonOperator.partial(
+    task_id="add",
+    python_callable=add_function,
+    op_kwargs={"y": 10}
+).expand(op_args=[[1],[2],[3]])
+
+added_values
+```
+
+</TabItem>
+
+</Tabs>
 
 This `expand` function creates three mapped `add` tasks, one for each entry in the `x` input list. The `partial` function specifies a value for `y` that remains constant in each task.
 
@@ -324,24 +358,24 @@ The add_nums task will have three mapped instances with the following results:
 As of Airflow 2.5, you can dynamically map over a task group that uses the `@task_group` decorator. The syntax for dynamically mapping over a task group is the same as dynamically mapping over a single task.
 
 ```python
-    # creating a task group using the decorator with the dynamic input my_num
-    @task_group(
-        group_id="group1"
-    )
-    def tg1(my_num):
+# creating a task group using the decorator with the dynamic input my_num
+@task_group(
+    group_id="group1"
+)
+def tg1(my_num):
 
-        @task
-        def print_num(num):
-            return num
-        
-        @task
-        def add_42(num):
-            return num + 42
-        
-        print_num(my_num) >> add_42(my_num)
+    @task
+    def print_num(num):
+        return num
+    
+    @task
+    def add_42(num):
+        return num + 42
+    
+    print_num(my_num) >> add_42(my_num)
 
-    # creating 6 mapped task group instances of the task group group1
-    tg1_object = tg1.expand(my_num=[19, 23, 42, 8, 7, 108])
+# creating 6 mapped task group instances of the task group group1
+tg1_object = tg1.expand(my_num=[19, 23, 42, 8, 7, 108])
 ```
 
 You can also dynamically map over multiple task group input parameters as you would for regular tasks using a cross-product, `zip` function, or sets of keyword arguments. For more on this, see [Mapping over multiple parameters](#mapping-over-multiple-parameters).
@@ -361,6 +395,16 @@ The code snippet below shows how to use `.map()` to skip specific mapped tasks b
 - `list_strings` is the upstream task returning a list of strings.
 -`skip_strings_starting_with_skip` transforms a list of strings into a list of modified strings and `AirflowSkipExceptions`. In this DAG, the function transforms `list_strings` into a new list called `transformed_list`. This function will not appear as an Airflow task.
 - `mapped_printing_task` dynamically maps over the `transformed_list` object.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "map-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
 
 ```python
 # an upstream task returns a list of outputs in a fixed format
@@ -393,6 +437,50 @@ def mapped_printing_task(string):
 mapped_printing_task.partial().expand(string=transformed_list)
 ```
 
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+# an upstream task returns a list of outputs in a fixed format
+def list_strings():
+    return ["skip_hello", "hi", "skip_hallo", "hola", "hey"]
+
+listed_strings = PythonOperator(
+    task_id="list_strings",
+    python_callable=list_strings,
+)
+
+# the function used to transform the upstream output before
+# a downstream task is dynamically mapped over it
+def skip_strings_starting_with_skip(string):
+    if len(string) < 4:
+        return string + "!"
+    elif string[:4] == "skip":
+        raise AirflowSkipException(
+            f"Skipping {string}; as I was told!"
+        )
+    else:
+        return string + "!"
+
+# Transforming the output of the first task with the map function.
+transformed_list = listed_strings.output.map(
+    skip_strings_starting_with_skip
+)
+
+# the task using dynamic task mapping on the transformed list of strings
+# note how you have to use the TaskFlow API in order to be able to let 
+# mappings be skipped with the AirflowSkipException
+@task
+def mapped_printing_task(string):
+    return "Say " + string
+
+mapped_printing_task.partial().expand(string=transformed_list)
+```
+
+</TabItem>
+</Tabs>
+
 In the grid view you can see how the mapped task instances 0 and 2 have been skipped.
 
 ![Skipped Mapped Tasks](/img/guides/skip_mapped_tasks.png)
@@ -411,9 +499,18 @@ The example DAG completes the following steps:
 - Simultaneously runs a Snowflake query that transforms the data. The query is located in a separate SQL file in our `include/` directory.
 - Deletes the folder of daily files now that it has been moved to `processed/` for record keeping.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "s3-to-snowflake-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
 ```python
-from airflow import DAG
-from airflow.decorators import task
+from airflow.decorators import dag, task
 from airflow.providers.snowflake.transfers.s3_to_snowflake import (
     S3ToSnowflakeOperator
 )
@@ -426,7 +523,7 @@ from airflow.providers.amazon.aws.operators.s3_delete_objects import (
     S3DeleteObjectsOperator
 )
 
-from datetime import datetime
+from pendulum import datetime
 
 @task
 def get_s3_files(current_prefix):
@@ -442,13 +539,13 @@ def get_s3_files(current_prefix):
     return [[file] for file in current_files]
 
 
-with DAG(
-    dag_id='mapping_elt',
+@dag(
     start_date=datetime(2022, 4, 2),
     catchup=False,
     template_searchpath='/usr/local/airflow/include',
     schedule='@daily'
-) as dag:
+)
+def mapping_elt():
 
     copy_to_snowflake = S3ToSnowflakeOperator.partial(
         task_id='load_files_to_snowflake',
@@ -485,7 +582,101 @@ with DAG(
 
     copy_to_snowflake >> [move_s3, transform_in_snowflake]
     move_s3 >> delete_landing_files
+
+
+mapping_elt()
+
 ```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+from airflow import DAG
+from airflow.operators.python import PythonOperator
+from airflow.providers.snowflake.transfers.s3_to_snowflake import (
+    S3ToSnowflakeOperator
+)
+from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
+from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+from airflow.providers.amazon.aws.operators.s3_copy_object import (
+    S3CopyObjectOperator
+)
+from airflow.providers.amazon.aws.operators.s3_delete_objects import (
+    S3DeleteObjectsOperator
+)
+
+from pendulum import datetime
+
+
+def get_s3_files(current_prefix):
+
+    s3_hook = S3Hook(aws_conn_id='s3')
+
+    current_files = s3_hook.list_keys(
+        bucket_name='my-bucket',
+        prefix=current_prefix+"/",
+        start_after_key=current_prefix+"/"
+    )
+
+    return [[file] for file in current_files]
+
+
+with DAG(
+    "mapping_elt",
+    start_date=datetime(2022, 4, 2),
+    catchup=False,
+    template_searchpath='/usr/local/airflow/include',
+    schedule='@daily'
+):
+
+    get_s3_files_task = PythonOperator(
+        task_id="get_s3_files",
+        python_callable=get_s3_files,
+        op_kwargs={"current_prefix": "{{ ds_nodash }}"}
+    )
+
+    copy_to_snowflake = S3ToSnowflakeOperator.partial(
+        task_id='load_files_to_snowflake',
+        stage='MY_STAGE',
+        table='COMBINED_HOMES',
+        schema='MYSCHEMA',
+        file_format="(type = 'CSV',field_delimiter = ',', skip_header=1)",
+        snowflake_conn_id='snowflake'
+    ).expand(
+        s3_keys=get_s3_files_task.output
+    )
+
+    move_s3 = S3CopyObjectOperator(
+        task_id='move_files_to_processed',
+        aws_conn_id='s3',
+        source_bucket_name='my-bucket',
+        source_bucket_key="{{ ds_nodash }}"+"/",
+        dest_bucket_name='my-bucket',
+        dest_bucket_key="processed/"+"{{ ds_nodash }}"+"/"
+    )
+
+    delete_landing_files = S3DeleteObjectsOperator(
+        task_id='delete_landing_files',
+        aws_conn_id='s3',
+        bucket='my-bucket',
+        prefix="{{ ds_nodash }}"+"/"
+    )
+
+    transform_in_snowflake = SnowflakeOperator(
+        task_id='run_transformation_query',
+        sql='/transformation_query.sql',
+        snowflake_conn_id='snowflake'
+    )
+
+    copy_to_snowflake >> [move_s3, transform_in_snowflake]
+    move_s3 >> delete_landing_files
+
+```
+
+</TabItem>
+</Tabs>
 
 The Graph View for the DAG looks similar to this image:
 
