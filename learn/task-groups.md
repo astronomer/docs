@@ -142,16 +142,15 @@ There are a few things to consider when using the task group decorator:
 As of Airflow 2.5, you can use [dynamic task mapping](dynamic-tasks.md) with the `@task_group` decorator to dynamically map over task groups. The following DAG shows how you can dynamically maps over a task group with different inputs for a given parameter.
 
 ```python
-from airflow import DAG
-from airflow.decorators import task_group, task
+from airflow.decorators import dag, task_group, task
 from pendulum import datetime
 
-with DAG(
-    dag_id="task_group_mapping_example",
+@dag(
     start_date=datetime(2022, 12, 1),
     schedule=None,
     catchup=False,
-):
+)
+def task_group_mapping_example():
 
     # creating a task group using the decorator with the dynamic input my_num
     @task_group(
@@ -189,6 +188,10 @@ with DAG(
 
     # setting dependencies
     tg1_object >> pull_xcom()
+
+
+task_group_mapping_example()
+
 ```
 
 This DAG dynamically maps over the task group `group1` with different inputs for the `my_num` parameter. 6 mapped task group instances are created, one for each input. Within each mapped task group instance two tasks will run using that instances' value for `my_num` as an input. The `pull_xcom()` task downstream of the dynamically mapped task group shows how to access a specific [XCom](airflow-passing-data-between-tasks.md) value from a list of mapped task group instances (`map_indexes`).
@@ -201,24 +204,62 @@ By default, using a loop to generate your task groups will put them in parallel.
 
 In the following example, the third task group generated in the loop has a foreign key constraint on both previously generated task groups (first and second iteration of the loop), so you'll want to process it last. To do this, you'll create an empty list and append your task Group objects as they are generated. Using this list, you can reference the task groups and define their dependencies to each other:
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "order-task-groups"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
 ```python
 groups = []
 for g_id in range(1,4):
-    tg_id = f'group{g_id}'
-    with TaskGroup(group_id=tg_id) as tg1:
-        t1 = EmptyOperator(task_id='task1')
-        t2 = EmptyOperator(task_id='task2')
+    tg_id = f"group{g_id}"
+
+    @task_group(group_id=tg_id)
+    def tg1():
+        t1 = EmptyOperator(task_id="task1")
+        t2 = EmptyOperator(task_id="task2")
 
         t1 >> t2
 
-        if tg_id == 'group1':
-            t3 = EmptyOperator(task_id='task3')
+        if tg_id == "group1":
+            t3 = EmptyOperator(task_id="task3")
+            t1 >> t3
+                
+    groups.append(tg1())
+
+[groups[0] , groups[1]] >> groups[2]
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+groups = []
+for g_id in range(1,4):
+    tg_id = f"group{g_id}"
+    with TaskGroup(group_id=tg_id) as tg1:
+        t1 = EmptyOperator(task_id="task1")
+        t2 = EmptyOperator(task_id="task2")
+
+        t1 >> t2
+
+        if tg_id == "group1":
+            t3 = EmptyOperator(task_id="task3")
             t1 >> t3
                 
         groups.append(tg1)
 
 [groups[0] , groups[1]] >> groups[2]
 ```
+
+</TabItem>
+</Tabs>
 
 The following image shows how these task groups appear in the Airflow UI:
 
@@ -234,18 +275,56 @@ For additional complexity, you can nest task groups. Building on our previous ET
 
 In the following code, your top-level task groups represent your new and updated record processing, while the nested task groups represent your API endpoint processing:
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "nest-task-groups"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+    groups = []
+    for g_id in range(1,3):
+        @task_group(group_id=f"group{g_id}")
+        def tg1():
+            t1 = EmptyOperator(task_id="task1")
+            t2 = EmptyOperator(task_id="task2")
+
+            sub_groups = []
+            for s_id in range(1,3):
+                @task_group(group_id=f"sub_group{s_id}")
+                def tg2():
+                    st1 = EmptyOperator(task_id="task1")
+                    st2 = EmptyOperator(task_id="task2")
+
+                    st1 >> st2
+                sub_groups.append(tg2())
+
+            t1 >> sub_groups >> t2
+        groups.append(tg1())
+
+    groups[0] >> groups[1]
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
 ```python
 groups = []
 for g_id in range(1,3):
-    with TaskGroup(group_id=f'group{g_id}') as tg1:
-        t1 = EmptyOperator(task_id='task1')
-        t2 = EmptyOperator(task_id='task2')
+    with TaskGroup(group_id=f"group{g_id}") as tg1:
+        t1 = EmptyOperator(task_id="task1")
+        t2 = EmptyOperator(task_id="task2")
 
         sub_groups = []
         for s_id in range(1,3):
-            with TaskGroup(group_id=f'sub_group{s_id}') as tg2:
-                st1 = EmptyOperator(task_id='task1')
-                st2 = EmptyOperator(task_id='task2')
+            with TaskGroup(group_id=f"sub_group{s_id}") as tg2:
+                st1 = EmptyOperator(task_id="task1")
+                st2 = EmptyOperator(task_id="task2")
 
                 st1 >> st2
                 sub_groups.append(tg2)
@@ -255,6 +334,9 @@ for g_id in range(1,3):
 
 groups[0] >> groups[1]
 ```
+
+</TabItem>
+</Tabs>
 
 The following image shows the expanded view of the nested task groups in the Airflow UI:
 
