@@ -3,14 +3,14 @@ from io import StringIO
 
 import pandas as pd
 import requests
-from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.decorators import dag, task
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 
 S3_CONN_ID = "aws_conn"
 BUCKET = "myexamplebucketone"
 
 
+@task
 def upload_to_s3(cat_fact_number):
     # Instantiate
     s3_hook = S3Hook(aws_conn_id=S3_CONN_ID)
@@ -34,6 +34,7 @@ def upload_to_s3(cat_fact_number):
     )
 
 
+@task
 def process_data(cat_fact_number):
     """Reads data from S3, processes, and saves to new S3 file"""
     # Connect to S3
@@ -60,25 +61,16 @@ def process_data(cat_fact_number):
     )
 
 
-with DAG(
-    "intermediary_data_storage_dag",
+@dag(
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
     schedule="@daily",
     default_args={"retries": 1, "retry_delay": timedelta(minutes=1)},
     catchup=False,
-) as dag:
+)
+def intermediary_data_storage_dag():
 
-    generate_file_task = PythonOperator(
-        task_id="generate_file",
-        python_callable=upload_to_s3,
-        op_kwargs={"cat_fact_number": 1},
-    )
+    upload_to_s3(cat_fact_number=1) >> process_data(cat_fact_number=1)
 
-    process_data_task = PythonOperator(
-        task_id="process_data",
-        python_callable=process_data,
-        op_kwargs={"cat_fact_number": 1},
-    )
 
-    generate_file_task >> process_data_task
+intermediary_data_storage_dag()

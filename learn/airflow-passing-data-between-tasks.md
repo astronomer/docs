@@ -13,6 +13,7 @@ import CodeBlock from '@theme/CodeBlock';
 import airflow_passing_data_between_tasks_xcom from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_xcom.py';
 import airflow_passing_data_between_tasks_taskflow from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_taskflow.py';
 import airflow_passing_data_between_tasks_s3 from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_s3.py';
+import airflow_passing_data_between_tasks_s3_decorator from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/airflow_passing_data_between_tasks_s3_decorator.py';
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -89,7 +90,7 @@ In this section, you'll review a DAG that uses XCom to pass data between tasks. 
     groupId= "xcom-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional Syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -133,6 +134,25 @@ While this is a great way to pass data that is too large to be managed with XCom
 
 Building on the previous cat fact example, you are now interested in getting more cat facts and processing them. This case would not be ideal for XCom, but since the data returned is a small dataframe, it can be processed with Airflow.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "intermediary-storage-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+<CodeBlock language="python">{airflow_passing_data_between_tasks_s3_decorator}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
 <CodeBlock language="python">{airflow_passing_data_between_tasks_s3}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 In this DAG you used the [S3Hook](https://registry.astronomer.io/providers/amazon/modules/s3hook) to save data retrieved from the API to a CSV on S3 in the `generate_file` task. The `process_data` task then takes the data from S3, converts it to a dataframe for processing, and then saves the processed data back to a new CSV on S3.
