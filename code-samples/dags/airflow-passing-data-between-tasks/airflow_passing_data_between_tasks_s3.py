@@ -68,7 +68,6 @@ with DAG(
     default_args={"retries": 1, "retry_delay": timedelta(minutes=1)},
     catchup=False,
 ) as dag:
-
     generate_file_task = PythonOperator(
         task_id="generate_file",
         python_callable=upload_to_s3,

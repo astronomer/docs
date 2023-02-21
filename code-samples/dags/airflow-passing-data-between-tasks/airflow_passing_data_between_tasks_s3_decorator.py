@@ -69,7 +69,6 @@ def process_data(cat_fact_number):
     catchup=False,
 )
 def intermediary_data_storage_dag():
-
     upload_to_s3(cat_fact_number=1) >> process_data(cat_fact_number=1)
 
 

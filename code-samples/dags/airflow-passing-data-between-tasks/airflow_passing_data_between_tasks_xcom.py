@@ -34,7 +34,6 @@ with DAG(
     },
     catchup=False,
 ) as dag:
-
     get_cat_data = PythonOperator(
         task_id="get_a_cat_fact", python_callable=get_a_cat_fact
     )
