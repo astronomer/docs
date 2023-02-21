@@ -5,6 +5,10 @@ id: cli-podman
 description: Use Podman instead of Docker to run specific Astro CLI commands.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
 If your Organization is already using [Podman](https://podman.io/) to run and manage containers, you can use it to execute Astro CLI commands including:
 
 - `astro dev [...]`: For running an Airflow environment on your local machine
