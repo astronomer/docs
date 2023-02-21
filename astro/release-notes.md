@@ -34,7 +34,7 @@ Astro has migrated to an identity-first authentication model. Users now authenti
 For all users logging in to Astro, this migration has the following effects:
 
 - Instead of being redirected to separate login pages for each Organization, all Astro users log in through a universal login page. 
-- If you belong to multiple Organizations and log in with single sign-on (SSO), you no longer have to log in again when switching Organizations. 
+- If you belong to multiple Organizations, you no longer have to log in again when switching Organizations.
 - You no longer need to enter your email on a separate page before logging into the Cloud UI.
 - If your Organization enforces SSO, you can now authenticate to Astro with a username and password only if your email domain is not enforced to use SSO.
 
