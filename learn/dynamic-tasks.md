@@ -528,10 +528,10 @@ from pendulum import datetime
 @task
 def get_s3_files(current_prefix):
 
-    s3_hook = S3Hook(aws_conn_id='s3')
+    s3_hook = S3Hook(aws_conn_id="s3")
 
     current_files = s3_hook.list_keys(
-        bucket_name='my-bucket',
+        bucket_name="my-bucket",
         prefix=current_prefix+"/",
         start_after_key=current_prefix+"/"
     )
@@ -542,42 +542,42 @@ def get_s3_files(current_prefix):
 @dag(
     start_date=datetime(2022, 4, 2),
     catchup=False,
-    template_searchpath='/usr/local/airflow/include',
-    schedule='@daily'
+    template_searchpath="/usr/local/airflow/include",
+    schedule="@daily"
 )
 def mapping_elt():
 
     copy_to_snowflake = S3ToSnowflakeOperator.partial(
-        task_id='load_files_to_snowflake',
-        stage='MY_STAGE',
-        table='COMBINED_HOMES',
-        schema='MYSCHEMA',
+        task_id="load_files_to_snowflake",
+        stage="MY_STAGE",
+        table="COMBINED_HOMES",
+        schema="MYSCHEMA",
         file_format="(type = 'CSV',field_delimiter = ',', skip_header=1)",
-        snowflake_conn_id='snowflake'
+        snowflake_conn_id="snowflake"
     ).expand(
         s3_keys=get_s3_files(current_prefix="{{ ds_nodash }}")
     )
 
     move_s3 = S3CopyObjectOperator(
-        task_id='move_files_to_processed',
-        aws_conn_id='s3',
-        source_bucket_name='my-bucket',
+        task_id="move_files_to_processed",
+        aws_conn_id="s3",
+        source_bucket_name="my-bucket",
         source_bucket_key="{{ ds_nodash }}"+"/",
-        dest_bucket_name='my-bucket',
+        dest_bucket_name="my-bucket",
         dest_bucket_key="processed/"+"{{ ds_nodash }}"+"/"
     )
 
     delete_landing_files = S3DeleteObjectsOperator(
-        task_id='delete_landing_files',
-        aws_conn_id='s3',
-        bucket='my-bucket',
+        task_id="delete_landing_files",
+        aws_conn_id="s3",
+        bucket="my-bucket",
         prefix="{{ ds_nodash }}"+"/"
     )
 
     transform_in_snowflake = SnowflakeOperator(
-        task_id='run_transformation_query',
-        sql='/transformation_query.sql',
-        snowflake_conn_id='snowflake'
+        task_id="run_transformation_query",
+        sql="/transformation_query.sql",
+        snowflake_conn_id="snowflake"
     )
 
     copy_to_snowflake >> [move_s3, transform_in_snowflake]
@@ -612,10 +612,10 @@ from pendulum import datetime
 
 def get_s3_files(current_prefix):
 
-    s3_hook = S3Hook(aws_conn_id='s3')
+    s3_hook = S3Hook(aws_conn_id="s3")
 
     current_files = s3_hook.list_keys(
-        bucket_name='my-bucket',
+        bucket_name="my-bucket",
         prefix=current_prefix+"/",
         start_after_key=current_prefix+"/"
     )
@@ -627,8 +627,8 @@ with DAG(
     "mapping_elt",
     start_date=datetime(2022, 4, 2),
     catchup=False,
-    template_searchpath='/usr/local/airflow/include',
-    schedule='@daily'
+    template_searchpath="/usr/local/airflow/include",
+    schedule="@daily"
 ):
 
     get_s3_files_task = PythonOperator(
@@ -638,36 +638,36 @@ with DAG(
     )
 
     copy_to_snowflake = S3ToSnowflakeOperator.partial(
-        task_id='load_files_to_snowflake',
-        stage='MY_STAGE',
-        table='COMBINED_HOMES',
-        schema='MYSCHEMA',
+        task_id="load_files_to_snowflake",
+        stage="MY_STAGE",
+        table="COMBINED_HOMES",
+        schema="MYSCHEMA",
         file_format="(type = 'CSV',field_delimiter = ',', skip_header=1)",
-        snowflake_conn_id='snowflake'
+        snowflake_conn_id="snowflake"
     ).expand(
         s3_keys=get_s3_files_task.output
     )
 
     move_s3 = S3CopyObjectOperator(
-        task_id='move_files_to_processed',
-        aws_conn_id='s3',
-        source_bucket_name='my-bucket',
+        task_id="move_files_to_processed",
+        aws_conn_id="s3",
+        source_bucket_name="my-bucket",
         source_bucket_key="{{ ds_nodash }}"+"/",
-        dest_bucket_name='my-bucket',
+        dest_bucket_name="my-bucket",
         dest_bucket_key="processed/"+"{{ ds_nodash }}"+"/"
     )
 
     delete_landing_files = S3DeleteObjectsOperator(
-        task_id='delete_landing_files',
-        aws_conn_id='s3',
-        bucket='my-bucket',
+        task_id="delete_landing_files",
+        aws_conn_id="s3",
+        bucket="my-bucket",
         prefix="{{ ds_nodash }}"+"/"
     )
 
     transform_in_snowflake = SnowflakeOperator(
-        task_id='run_transformation_query',
-        sql='/transformation_query.sql',
-        snowflake_conn_id='snowflake'
+        task_id="run_transformation_query",
+        sql="/transformation_query.sql",
+        snowflake_conn_id="snowflake"
     )
 
     copy_to_snowflake >> [move_s3, transform_in_snowflake]
