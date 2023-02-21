@@ -367,9 +367,66 @@ One common scenario where you might need to implement trigger rules is if your D
 
 In the following example DAG there is a simple branch with a downstream task that needs to run if either of the branches are followed. With the `all_success` rule, the `end` task never runs because all but one of the `branch` tasks is always ignored and therefore doesn't have a success state. If you change the trigger rule to `one_success`, then the `end` task can run so long as one of the branches successfully completes.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId= "example-branch"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
 ```python
 import random
-from airflow.decorators import dag
+from airflow.decorators import dag, task
+from airflow.operators.empty import EmptyOperator
+from datetime import datetime
+from airflow.utils.trigger_rule import TriggerRule
+
+
+@dag(
+    start_date=datetime(2021, 1, 1),
+    max_active_runs=1,
+    schedule=None,
+    catchup=False
+)
+def branching_dag():
+
+    # EmptyOperators to start and end the DAG
+    start = EmptyOperator(task_id="start")
+    end = EmptyOperator(
+        task_id="end",
+        trigger_rule=TriggerRule.ONE_SUCCESS
+    )
+
+    # Branching task
+    @task.branch
+    def branching(**kwargs):
+        branches = ["branch_0", "branch_1", "branch_2"]
+        return random.choice(branches)
+
+    branching_task = branching()
+
+    start >> branching_task
+
+    # set dependencies
+    for i in range(0, 3):
+        d = EmptyOperator(task_id="branch_{0}".format(i))
+        branching_task >> d >> end
+
+
+branching_dag()
+
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+import random
+from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import BranchPythonOperator
 from datetime import datetime
@@ -379,13 +436,13 @@ def return_branch(**kwargs):
     branches = ["branch_0", "branch_1", "branch_2"]
     return random.choice(branches)
 
-@dag(
+with DAG(
+    dag_id="branching_dag",
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
     schedule=None,
     catchup=False
-)
-def branch():
+):
 
     # EmptyOperators to start and end the DAG
     start = EmptyOperator(task_id="start")
@@ -408,11 +465,11 @@ def branch():
         d = EmptyOperator(task_id="branch_{0}".format(i))
         branching >> d >> end
 
-
-branch()
-
 ```
+
+</TabItem>
+</Tabs>
 
 This image shows the resulting DAG:
 
-![Branch Dependencies](/img/guides/branch.png)
+![Branch Dependencies](/img/guides/branch_2.png)
