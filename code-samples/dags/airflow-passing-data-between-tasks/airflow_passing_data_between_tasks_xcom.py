@@ -28,10 +28,7 @@ with DAG(
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
     schedule=duration(minutes=30),
-    default_args={
-        "retries": 1,
-        "retry_delay": duration(minutes=5)
-    },
+    default_args={"retries": 1, "retry_delay": duration(minutes=5)},
     catchup=False,
 ) as dag:
     get_cat_data = PythonOperator(

@@ -9,11 +9,7 @@ url = "http://catfact.ninja/fact"
 default_args = {"start_date": datetime(2021, 1, 1)}
 
 
-@dag(
-    schedule="@daily",
-    default_args=default_args,
-    catchup=False
-)
+@dag(schedule="@daily", default_args=default_args, catchup=False)
 def xcom_taskflow_dag():
     @task
     def get_a_cat_fact():
