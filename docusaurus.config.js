@@ -205,6 +205,7 @@ module.exports = {
           id: 'default',
           changefreq: 'daily',
           filename: 'sitemap.xml',
+          ignorePatterns: ['/astro/kubernetes-executor', '/astro/cli/sql-cli', '/astro/cross-account-role-setup']
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -251,6 +252,7 @@ module.exports = {
         id: 'learn',
         changefreq: 'daily',
         filename: 'sitemap.xml',
+        ignorePatterns: ['/astro/kubernetes-executor', '/astro/cli/sql-cli', '/astro/cross-account-role-setup']
       },
     ],
   ],
