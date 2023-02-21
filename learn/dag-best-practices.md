@@ -91,28 +91,33 @@ Airflow executes all code in the `dags_folder` on every `min_file_process_interv
 The following DAG example dynamically generates `PostgresOperator` tasks based on records pulled from a database. For example, the `hook` and `result` variables which are written outside of an operator instantiation:
 
 ```python
-from airflow import DAG
+from airflow.decorators import dag
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.providers.postgres.hooks.postgres import PostgresHook
-from datetime import datetime, timedelta
+from pendulum import datetime
 
-hook = PostgresHook('database_conn')
+hook = PostgresHook("database_conn")
 result = hook.get_records("SELECT * FROM grocery_list;")
 
-with DAG('bad_practices_dag_1',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=3,
-         schedule='@daily',
-         default_args=default_args,
-         catchup=False
-         ) as dag:
+
+@dag(
+    start_date=datetime(2023, 1, 1),
+    max_active_runs=3,
+    schedule="@daily",
+    catchup=False
+)
+def bad_practices_dag_1():
 
     for grocery_item in result:
         query = PostgresOperator(
-            task_id='query_{0}'.format(result),
-            postgres_conn_id='postgres_default',
+            task_id="query_{0}".format(result),
+            postgres_conn_id="postgres_default",
             sql="INSERT INTO purchase_order VALUES (value1, value2, value3);"
         )
+
+
+bad_practices_dag_1()
+
 ```
 
 When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table to construct the operators in the DAG. This query is run on every Scheduler heartbeat, which can cause performance issues. A better implementation leverages [dynamic task mapping](dynamic-tasks.md) to have a task that gets the required information from the `grocery_list` table and dynamically maps downstream tasks based on the result. Dynamic task mapping is available in Airflow 2.3 and later.
@@ -124,37 +129,38 @@ Including code that isn't part of your DAG or operator instantiations in your DA
 The following example DAG demonstrates what you shouldn't do. A SQL query is provided directly in the `PostgresOperator` `sql` param:
 
 ```python
-from airflow import DAG
+from airflow.decorators import dag
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.postgres.operators.postgres import PostgresOperator
-from datetime import datetime, timedelta
+from pendulum import datetime, duration
 
 #Default settings applied to all tasks
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1)
+    "owner": "airflow",
+    "depends_on_past": False,
+    "email_on_failure": False,
+    "email_on_retry": False,
+    "retries": 1,
+    "retry_delay": duration(minutes=1)
 }
 
 #Instantiate DAG
-with DAG('bad_practices_dag_2',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=3,
-         schedule='@daily',
-         default_args=default_args,
-         catchup=False
-         ) as dag:
+@dag(
+    start_date=datetime(2021, 1, 1),
+    max_active_runs=3,
+    schedule="@daily",
+    default_args=default_args,
+    catchup=False
+)
+def bad_practices_dag_2():
 
-    t0 = EmptyOperator(task_id='start')  
+    t0 = EmptyOperator(task_id="start")  
 
     #Bad example with SQL query directly in the DAG file
     query_1 = PostgresOperator(
-        task_id='covid_query_wa',
-        postgres_conn_id='postgres_default',
-        sql='''WITH yesterday_covid_data AS (
+        task_id="covid_query_wa",
+        postgres_conn_id="postgres_default",
+        sql="""WITH yesterday_covid_data AS (
                 SELECT *
                 FROM covid_state_data
                 WHERE date = {{ params.today }}
@@ -177,44 +183,55 @@ with DAG('bad_practices_dag_2',
             JOIN today_covid_data AS b
             ON a.state=b.state
             JOIN two_day_rolling_avg AS c
-            ON a.state=b.two_day_avg;''',
-            params={'today': today, 'yesterday':yesterday}
+            ON a.state=b.two_day_avg;""",
+        params={"today": today, "yesterday": yesterday}
     )
+
+
+bad_practices_dag_2()
+
 ```
 
 Keeping the query in the DAG file like this makes the DAG harder to read and maintain. In the following DAG, the DAG-level configuration includes `template_searchpath` and the `PostgresOperator` specifies a `covid_state_query.sql` file that contains the same query as in the previous example:
 
 ```python
-from airflow import DAG
+from airflow.decorators import dag
 from airflow.providers.postgres.operators.postgres import PostgresOperator
-from datetime import datetime, timedelta
+from pendulum import datetime, duration
 
 #Default settings applied to all tasks
 default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1)
+    "owner": "airflow",
+    "depends_on_past": False,
+    "email_on_failure": False,
+    "email_on_retry": False,
+    "retries": 1,
+    "retry_delay": duration(minutes=1)
 }
 
 #Instantiate DAG
-with DAG('good_practices_dag_1',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=3,
-         schedule='@daily',
-         default_args=default_args,
-         catchup=False,
-         template_searchpath='/usr/local/airflow/include' #include path to look for external files
-         ) as dag:
+@dag(
+    start_date=datetime(2023, 1, 1),
+    max_active_runs=3,
+    schedule="@daily",
+    default_args=default_args,
+    catchup=False,
+    #include path to look for external files
+    template_searchpath="/usr/local/airflow/include" 
+)
+def good_practices_dag_1():
 
         query = PostgresOperator(
-            task_id='covid_query_{0}'.format(state),
-            postgres_conn_id='postgres_default',
-            sql='covid_state_query.sql', #reference query kept in separate file
-            params={'state': "'" + state + "'"}
+            task_id="covid_query_{0}".format(state),
+            postgres_conn_id="postgres_default",
+            #reference query kept in separate file
+            sql="covid_state_query.sql",
+            params={"state": "'" + state + "'"}
         )
+
+
+good_practices_dag_1()
+
 ```
 
 ### Use a consistent method for task dependencies
