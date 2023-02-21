@@ -222,7 +222,7 @@ A common use case is to directly connect a blob storage (for example an Amazon S
 
 A common use case is to run a downstream task when a specific message appears in your Kafka topic. The AwaitKafkaMessageOperator is a deferrable operator that will listen to your Kafka topic for a message that fulfills a specific criteria.
 
-A deferrable operator is a sensor that will go into a deferred state in between checking for its condition in the target system. While in the deferred state the operator does not take up a worker slot, offering a significant efficiency improvement. See [Deferrable operators]((https://docs.astronomer.io/learn/deferrable-operators)).
+A deferrable operator is a sensor that will go into a deferred state in between checking for its condition in the target system. While in the deferred state the operator does not take up a worker slot, offering a significant efficiency improvement. See [Deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
 1. In `kafka_example_dag_1`, add the following import statement:
 

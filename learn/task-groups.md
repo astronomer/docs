@@ -9,7 +9,7 @@ id: task-groups
   <meta name="og:description" content="Follow Astronomer’s step-by-step guide to to use task groups for organizing tasks within the graph view of the Airflow user interface." />
 </head>
 
-Use [task groups](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#taskgroups) to organize tasks in the Airflow UI DAG graph view.
+Use [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) to organize tasks in the Airflow UI DAG graph view.
 
 In this guide, you'll learn how to create task groups and review some example DAGs that demonstrate their scalability.
 

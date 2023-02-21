@@ -432,7 +432,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/actions/deploy@v0.1
+          uses: astronomer/deploy-action@v0.1
     ```
 
 </TabItem>
@@ -479,7 +479,7 @@ This setup assumes the following prerequisites:
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/actions/deploy@v0.1
+          uses: astronomer/deploy-action@v0.1
       prod-push:
         if: github.event.action == 'closed' && github.event.pull_request.merged == true
         env:
@@ -489,7 +489,7 @@ This setup assumes the following prerequisites:
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/actions/deploy@v0.1
+          uses: astronomer/deploy-action@v0.1
     ```
 
 </TabItem>
@@ -643,7 +643,7 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/actions/deploy@v0.1
+          uses: astronomer/deploy-action@v0.1
           with:
             dag-deploy-enabled: true
     ```
@@ -694,7 +694,7 @@ This setup assumes the following prerequisites:
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/actions/deploy@v0.1
+          uses: astronomer/deploy-action@v0.1
           with:
             dag-deploy-enabled: true
         
@@ -707,7 +707,7 @@ This setup assumes the following prerequisites:
         runs-on: ubuntu-latest
         steps:
         - name: Deploy to Astro
-          uses: astronomer/actions/deploy@v0.1
+          uses: astronomer/deploy-action@v0.1
           with:
             dag-deploy-enabled: true
     ```

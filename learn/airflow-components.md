@@ -24,7 +24,7 @@ To get the most out of this guide, you should have an understanding of:
 The following Apache Airflow core components are running at all times: 
 
 - **Webserver:** A Flask server running with Gunicorn that serves the [Airflow UI](airflow-ui.md).
-- **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html):** A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
+- **[Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html):** A Daemon responsible for scheduling jobs. This is a multi-threaded Python process that determines what tasks need to be run, when they need to be run, and where they are run.
 - **[Database](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-up-database.html):** A database where all DAG and task metadata are stored. This is typically a Postgres database, but MySQL, MsSQL, and SQLite are also supported.
 - **[Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/index.html):** The mechanism for running tasks. An executor is running within the scheduler whenever Airflow is operational.
 
@@ -33,7 +33,7 @@ If you run Airflow locally using the [Astro CLI](https://docs.astronomer.io/astr
 In addition to these core components, there are a few situational components that are used only to run tasks or make use of certain features:
 
 - **Worker:** The process that executes tasks, as defined by the executor. Depending on which executor you choose, you may or may not have workers as part of your Airflow infrastructure.
-- **[Triggerer](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html):** A separate process which supports [deferrable operators](deferrable-operators.md). This component is optional and must be run separately. It is needed only if you plan to use deferrable (or "asynchronous") operators. 
+- **[Triggerer](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html):** A separate process which supports [deferrable operators](deferrable-operators.md). This component is optional and must be run separately. It is needed only if you plan to use deferrable (or "asynchronous") operators. 
 
 The following diagram illustrates component interaction:
 
@@ -70,4 +70,4 @@ Scalability is also an important consideration when setting up your production A
 
 Airflow can be made highly available, which makes it suitable for large organizations with critical production workloads. Airflow 2 introduced a highly available scheduler, meaning that you can run multiple Scheduler replicas in an active-active model. This makes the scheduler more performant and resilient, eliminating a single point of failure within your Airflow environment. 
 
-Running multiple schedulers requires additional database configuration. See [Running More Than One Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html#running-more-than-one-scheduler).
+Running multiple schedulers requires additional database configuration. See [Running More Than One Scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#running-more-than-one-scheduler).
