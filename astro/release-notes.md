@@ -42,9 +42,38 @@ For Organization Owners, this migration has the following additional effects:
 
 - You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.
 - Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
-- Your Organization now has just-in-time provisioning enabled. If you assign a user to Astro through your identity provider, that user can join your Organization as an Organization Member without being invited. To change this behavior, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 For more information about how these changes can affect the Astro log in experience, see the [Login FAQ]`log-in-to-astro.md#frequently-asked-questions`. To configure authentication behavior, see [Manage an Organization on Astro]`manage-organization.md`
+
+### New Hosted regions available
+
+You can now create clusters in the following regions on an Astro - Hosted installation.
+
+- AWS
+    - `ap-northeast-1`
+    - `ap-southeast-2`
+    - `eu-central-1`
+    - `eu-west-1`
+    - `us-east-1`
+    - `us-west-2`
+
+- Google Cloud
+
+    - `asia-northeast1`
+    - `australia-southeast1`
+    - `europe-west1`
+    - `europe-west2`
+    - `us-central1`
+    - `us-east4`
+
+- Microsoft Azure
+
+    - `australiaeast`
+    - `japaneast`
+    - `northeurope`
+    - `westeurope`
+    - `eastus2`
+    - `westus2`
 
 ### Additional improvements 
 
