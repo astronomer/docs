@@ -63,6 +63,8 @@ If you are using a deferrable operator that is part of the [Astronomer Providers
    from astronomer.providers.snowflake.operators.snowflake import SnowflakeOperatorAsync as SnowflakeOperator
    ```
 
+Note that importing the asynchronous operator using the alias of the analogous traditional operator (e.g. `import SnowflakeOperatorAsync as SnowflakeOperator`) is simply to make updating existing DAGs easier. This is not required, and may not be preferrable when authoring a new DAG.
+
 There are numerous benefits to using deferrable operators including:
 
 - Reduced resource consumption: Depending on the available resources and the workload of your triggers, you can run hundreds to thousands of deferred tasks in a single triggerer process. This can lead to a reduction in the number of workers needed to run tasks during periods of high concurrency. With less workers needed, you are able to scale down the underlying infrastructure of your Airflow environment.
