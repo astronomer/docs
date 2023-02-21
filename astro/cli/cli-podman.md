@@ -136,8 +136,35 @@ Set up Podman on a Windows operating system so you can run the Astro CLI in Podm
 ### Prerequisites
 
 - Podman 3.1.0 or later installed on your local machine.
+- Windows 10 version 2004 and later, or Windows 11
 
 ### Installation
+
+1. Enable the Windows Subsystem for Linux and Virtual Machine Platform features on your computer:
+
+    - Click **Start**, enter `windows feature`, and then click **Turn Windows features on or off**.
+    - Select **Virtual Machine Platform** and **Windows Subsystem for Linux**.
+    - Click **OK** and then restart your computer.
+
+2. Install the [Windows Subsystem for Linux (WSL)](https://apps.microsoft.com/store/detail/windows-subsystem-for-linux/9P9TQF7MRM4R). 
+
+3. Install and open [Ubuntu 22.04.2 LTS)](https://apps.microsoft.com/store/detail/ubuntu-22042-lts/9PN20MSR04DW?hl=en-ca&gl=ca&rtc=1). When the username and password prompts appear, enter a username and a password. They do not have to match your Windows username and password.
+
+4. Run the following command to confirm WSL2 is installed:
+
+    ```sh
+    wsl -l -v
+    ```
+    If WSL2 is not installed, repeat step 2.
+
+5. Open Ubuntu and run the following command to install Podman:
+
+    ```sh
+    sudo apt-get update && sudo apt-get install podman -y
+    ```
+    If a password prompt appears, enter the password you created in step 3.
+
+6. - installation issues started here -
 
 </TabItem>
 
