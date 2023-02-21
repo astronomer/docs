@@ -41,7 +41,7 @@ For all users logging in to Astro, this migration has the following effects:
 For Organization Owners, this migration has the following additional effects:
 
 - You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted for any reason.
-- Your Organization now has an associated list of owned email domains that will be referenced when enforcing SSO. Astronomer might ask you to prove that you own these domains.
+- Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
 - You can now use just-in-time provisioning. If you assign a user to Astro through your identity provider, that user can join your Organization without an explicit invite as an Organization Member. To change this behavior, contact [Astronomer support](https://cloud.astronomer.io/support).
 - When you configure a new identity provider, you can now test and activate the integration without assistance from Astronomer support.
 
