@@ -5,51 +5,31 @@ id: cli-podman
 description: Use Podman instead of Docker to run specific Astro CLI commands.
 ---
 
-By default, the Astro CLI uses Docker to execute a few specific commands:
+If your Organization is already using [Podman](https://podman.io/) to run and manage containers, you can use it to execute Astro CLI commands including:
 
 - `astro dev [...]`: For running an Airflow environment on your local machine
 - `astro login`: For authenticating to Astronomer Software
 - `astro deploy`: For pushing code to a Deployment
 
-Alternatively, you can use [Podman](https://podman.io/) to execute these same commands.
+Many Organizations use Podman because of the security advantages it provides over Docker. Podman can run rootless and daemonless.
 
-## Prerequisites
+<Tabs
+    defaultValue="mac"
+    groupId= "cli-podman"
+    values={[
+        {label: 'Mac', value: 'mac'},
+        {label: 'Windows with WSL2 and Ubuntu LTS', value: 'windows'},
+        {label: 'Linux', value: 'linux'},
+    ]}>
+<TabItem value="mac">
 
-To complete this setup, you need:
+Set up Podman on a Mac operating system so you can run the Astro CLI in Podman containers.
 
-- Podman 3.1.0+ installed on your local machine.
-- A pre-1.0 version of the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli), such as version 0.29.1.
+### Prerequisites
 
-## Linux setup
+- Podman 3.1.0 or later installed on your local machine.
 
-1. Run the following command to start the Podman API service:
-
-    ```sh
-    podman system service -t 0 &
-    ```
-
-    :::warning
-    Avoid running this command from a directory containing a Dockerfile.
-    :::
-
-2. Run the following command to create a new Astro project:
-
-    ```sh
-    astro dev init
-    ```
-
-3. Run the following command to specify Podman as the CLI's primary container engine:
-
-    ```sh
-    astro config set container.engine podman
-    ```
-
-4. Run `astro dev start` to confirm that Podman is running the containers for your local Airflow environment.
-
-## Mac setup
-
-To set up Podman for an Astro project:
-
+### Installation
 
 1. Run the following commands to start Podman:
 
@@ -143,7 +123,57 @@ To set up Podman for an Astro project:
         name: airflow-include-dir
     ```
 
-You can now run the Astro CLI in Podman containers for this Astro project.
+</TabItem>
+
+<TabItem value="windows">
+
+Set up Podman on a Windows operating system so you can run the Astro CLI in Podman containers.
+
+### Prerequisites
+
+- Podman 3.1.0 or later installed on your local machine.
+
+### Installation
+
+</TabItem>
+
+<TabItem value="linux">
+
+Set up Podman on a Linux operating system so you can run the Astro CLI in Podman containers.
+
+### Prerequisites
+
+- Podman 3.1.0 or later installed on your local machine.
+
+### Installation
+
+1. Run the following command to start the Podman API service:
+
+    ```sh
+    podman system service -t 0 &
+    ```
+
+    :::warning
+    Avoid running this command from a directory containing a Dockerfile.
+    :::
+
+2. Run the following command to create a new Astro project:
+
+    ```sh
+    astro dev init
+    ```
+
+3. Run the following command to specify Podman as the CLI's primary container engine:
+
+    ```sh
+    astro config set container.engine podman
+    ```
+
+4. Run `astro dev start` to confirm that Podman is running the containers for your local Airflow environment.
+
+</TabItem>
+
+</Tabs>
 
 ## Switch between using Docker and Podman
 
