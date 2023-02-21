@@ -22,7 +22,7 @@ Many Organizations use Podman because of the security advantages it provides ove
     groupId= "cli-podman"
     values={[
         {label: 'Mac', value: 'mac'},
-        {label: 'Windows with WSL2 and Ubuntu LTS', value: 'windows'},
+        {label: 'Windows', value: 'windows'},
         {label: 'Linux', value: 'linux'},
     ]}>
 <TabItem value="mac">
