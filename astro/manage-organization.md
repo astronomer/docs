@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Manage an Organization on Astro"
-title: "Manage an Organization"
+sidebar_label: "Manage Organization settings"
+title: "Manage Organization settings"
 id: manage-organization
 description: Configure details about your Astro Organization including user authentication methods and Organization membership
 ---
