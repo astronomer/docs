@@ -296,7 +296,7 @@ For instructions, see the [AWS Systems Manager Console](https://docs.aws.amazon.
 Add the following environment variables to your Astro project's `.env` file:
 
 ```text 
-AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SystemsManagerParameterStoreBackend
+AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.systems_manager.SystemsManagerParameterStoreBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"}
 ```
 
@@ -307,7 +307,7 @@ You can now run a DAG locally to check that your variables are accessible using 
 1. Run the following commands to export your secrets backend configurations as environment variables to Astro.
 
     ```sh
-    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.secrets_manager.SystemsManagerParameterStoreBackend
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.amazon.aws.secrets.systems_manager.SystemsManagerParameterStoreBackend
 
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_prefix": "airflow/connections", "variables_prefix": "airflow/variables",  "role_arn": "<your-role-arn>", "region_name": "<your-region>"} --secret
     ```
