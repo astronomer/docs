@@ -179,7 +179,7 @@ Set up Podman on a Linux operating system so you can run the Astro CLI in Podman
 
 </Tabs>
 
-## Switch between using Docker and Podman
+## Switch between Docker and Podman
 
 Once you set up the Astro CLI to use Podman on your local machine, the CLI automatically runs Podman containers whenever you run a command that requires them. To revert to the default behavior and run CLI commands in Docker containers, run the following command:
 
