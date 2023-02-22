@@ -23,7 +23,7 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-Authenticate to Astro. After you run this command, the CLI prompts you for your login email address. Using the provided email address, the CLI assumes your organization and redirects you to a web browser where you can log in via the Cloud UI. Once you are logged in via the web browser, the CLI automatically recognizes this and authenticates to your account.
+Authenticate to Astro. After you run this command, the CLI prompts you for your login email address. Using the provided email address, the CLI assumes your organization and redirects you to a web browser where you can log in to the Cloud UI. After you log in, the CLI automatically recognizes this and authenticates your account.
 
 ## Usage
 
@@ -79,7 +79,7 @@ astro login mycompany.astromomer.io
 # The CLI prompts you for a username and password, or to leave the prompt empty for OAuth authentication
 
 astro login mycompany.astromomer.io -o
-# The CLI does not prompt you for a username and password and instead directly prompys you for an OAuth login token
+# The CLI does not prompt you for a username and password and instead directly prompts you for an OAuth login token
 ```
 
 

@@ -101,7 +101,7 @@ adx_query = '''StormEvents
 with DAG('azure_data_explorer',
          start_date=datetime(2020, 12, 1),
          max_active_runs=1,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args={
             'depends_on_past': False,
             'retries': 0,

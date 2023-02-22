@@ -5,6 +5,9 @@ description: "Use the KubernetesPodOperator in Airflow to run tasks in Kubernete
 id: kubepod-operator
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 The KubernetesPodOperator (KPO) runs a Docker image in a dedicated Kubernetes Pod. By abstracting calls to the Kubernetes API, the KubernetesPodOperator lets you start and run Pods from Airflow using DAG code.
 
 In this guide, you'll learn:
@@ -179,7 +182,7 @@ else:
 
 with DAG(
     dag_id='example_kubernetes_pod', 
-    schedule_interval='@once', 
+    schedule='@once', 
     default_args=default_args
 ) as dag:
     KubernetesPodOperator(
@@ -306,7 +309,7 @@ main = do
 
 The Dockerfile creates the necessary environment to run the script and then executes it with a `CMD` command:
 
-```Dockerfile
+```docker
 FROM haskell
 WORKDIR /opt/hello_name
 RUN cabal update
@@ -336,7 +339,7 @@ name = 'your_name'
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_different_language_example_dag'
 ) as dag:
 
@@ -372,13 +375,13 @@ with DAG(
 
 ## Example: Use the KubernetesPodOperator with XComs
 
-[XCom](https://airflow.apache.org/docs/apache-airflow/stable/concepts/xcoms.html) is a commonly used Airflow feature for passing small amounts of data between tasks. You can use the KubernetesPodOperator to both receive values stored in XCom and push values to XCom.
+[XCom](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html) is a commonly used Airflow feature for passing small amounts of data between tasks. You can use the KubernetesPodOperator to both receive values stored in XCom and push values to XCom.
 
 The following example DAG shows an ETL pipeline with an `extract_data` task that runs a query on a database and returns a value. The [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html#tutorial-on-the-taskflow-api) automatically pushes the return value to XComs.  
 
 The `transform` task is a KubernetesPodOperator which requires that the XCom data is pushed from the upstream task before it, and then launches an image created with the following Dockerfile:
 
-```dockerfile
+```docker
 FROM python
 
 WORKDIR /
@@ -432,7 +435,7 @@ namespace = conf.get("kubernetes", "NAMESPACE")
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_XComs_example_dag'
 ) as dag:
 
@@ -605,7 +608,7 @@ To access your cluster from a local instance of Apache Airflow, install `awscli`
 
 To access the cluster from Airflow using the Astro CLI, add the following line to your Dockerfile to copy your `config` and `credentials` file from `/include/.aws` into the container:
 
-```dockerfile
+```docker
 COPY --chown=astro:astro include/.aws /home/astro/.aws
 ```
 
@@ -694,7 +697,7 @@ class EKSCreateNodegroupWithNodesOperator(EKSCreateNodegroupOperator):
 with DAG(
     start_date=datetime(2022,6,1),
     catchup=False,
-    schedule_interval='@daily',
+    schedule='@daily',
     dag_id='KPO_remote_EKS_cluster_example_dag'
 ) as dag:
 

@@ -15,9 +15,7 @@ For information about creating an Astro project, see [Create an Astro project](c
 
 ## Run a DAG with `astro run`
 
-Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can see task logs and task success or failure directly in your terminal and without needing to go to the Airflow UI. You can only run one DAG at a time. 
-
-This command is an alternative to running `astro dev restart` every time you make a change to your DAG and want to run it again. Running DAGs without a scheduler or webserver improves the speed at which you can develop and test data pipelines.
+Use the `astro run` command to run a DAG from the command line. When you run the command, the CLI compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations, including your `Dockerfile`, DAG utility files, Python requirements, and environment variables. You can review task logs and whether a task succeeded or failed in your terminal without opening the Airflow UI. You can only run one DAG at a time. Running DAGs without a scheduler or webserver can help reduce the time required to develop and test data pipelines.
 
 To run a DAG located within your local `/dags` directory run:
 
@@ -174,9 +172,9 @@ The Astro CLI does not support overrides to environment variables that are requi
 
 :::
 
-1. Reference the Astro CLI's default [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go) (`composeyml.go`) and determine one or more configurations to override.
+1. Reference the Astro CLI's default [Docker Compose file](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.yml) (`composeyml.yml`) and determine one or more configurations to override.
 2. Add a `docker-compose.override.yml` file to your Astro project.
-3. Specify your new configuration values in `docker-compose.override.yml` file using the same format as in `composeyml.go`.
+3. Specify your new configuration values in `docker-compose.override.yml` file using the same format as in `composeyml.yml`.
 
 For example, to add another volume mount for a directory named `custom_dependencies`, add the following to your `docker-compose.override.yml` file:
 

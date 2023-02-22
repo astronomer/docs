@@ -107,7 +107,7 @@ To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
 1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
 2. Mount and [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
 
-    ```python{5-14,26-27}
+    ```python {5-14,26-27}
     from airflow.configuration import conf
     from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
     from kubernetes.client import models as k8s
@@ -124,17 +124,17 @@ To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
     ]
 
     example_volume_test = KubernetesPodOperator(
-    namespace=namespace,
-    image="<your-docker-image>",
-    cmds=["<commands-for-image>"],
-    arguments=["<arguments-for-image>"],
-    labels={"<pod-label>": "<label-name>"},
-    name="<pod-name>",
-    resources=compute_resources,
-    task_id="<task-name>",
-    get_logs=True,
-    volume_mounts=volume_mounts,
-    volumes=[volume],
+        namespace=namespace,
+        image="<your-docker-image>",
+        cmds=["<commands-for-image>"],
+        arguments=["<arguments-for-image>"],
+        labels={"<pod-label>": "<label-name>"},
+        name="<pod-name>",
+        resources=compute_resources,
+        task_id="<task-name>",
+        get_logs=True,
+        volume_mounts=volume_mounts,
+        volumes=[volume],
     )
     ```
  
@@ -191,22 +191,22 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 4. Click **Edit policy JSON**.
 5. Copy and paste the following policy into the **Edit JSON** pane:
 
-    ```JSON   
+    ```json
     {
-    "Version": "2008-10-17",
-    "Statement": [
-        {
-        "Sid": "AllowImagePullAstro",
-        "Effect": "Allow",
-        "Principal": {
-            "AWS": "arn:aws:iam::<AstroAccountID>:root"
-        },
-        "Action": [
-            "ecr:GetDownloadUrlForLayer",
-            "ecr:BatchGetImage"
+        "Version": "2008-10-17",
+        "Statement": [
+            {
+                "Sid": "AllowImagePullAstro",
+                "Effect": "Allow",
+                "Principal": {
+                    "AWS": "arn:aws:iam::<AstroAccountID>:root"
+                },
+                "Action": [
+                    "ecr:GetDownloadUrlForLayer",
+                    "ecr:BatchGetImage"
+                ]
+            }
         ]
-        }
-    ]
     }
     ```
 6. Replace `<AstroAccountID>` with your Astro AWS account ID. 

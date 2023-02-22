@@ -9,9 +9,80 @@ description: Astronomer Software release notes.
 
 0.31 is the latest stable version of Astronomer Software, while 0.30 remains the latest long-term support (LTS) release. To upgrade to 0.31, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.31.2
+
+Release date: February 2, 2023
+
+### Additional improvements
+
+- Support for Kubernetes [1.25](https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/) and [1.26](https://kubernetes.io/blog/2022/12/09/kubernetes-v1-26-release/).
+- You can now configure custom annotations for Houston ingress by setting `astronomer.houston.ingress.annotation` in your `config.yaml` file. 
+- The System Admin **Deployments** list in the Software UI is now paginated. 
+- You can now use the following values in your `config.yaml` file to configure resource allocation for the git-sync relay service:
+  
+    - `astronomer.gitSyncRelay.gitSyncResources`
+    - `astronomer.gitSyncRelay.gitDaemonResources`
+    - `astronomer.gitSyncRelay.securityContext`
+
+- You can now set `timeoutSeconds` for `readinessProbe` and `livenessProbe` in the Prometheus Helm chart.
+- Fixed an issue where Deployments with many DAGs could not be successfully upgraded due to a short timeout.
+- Houston API now logs an installation's deployed image versions whenever a GraphQL mutation is completed.
+
+### Bug fixes 
+
+- To limit Out of Memory (OOM) errors when migrating large DAGs, Deployment database migrations now use the same resources as the Deployment's scheduler.
+- Fixed an issue in the Software UI where refreshing pages listing Workspace or Deployment service accounts returned an error.
+- Fixed an issue where PgBouncer didn't work if you pulled its image from a private registry.
+- When you view a user through a Teams list as a System Admin and return to the list, you now return to the Teams list instead of the System Admin users list. 
+- Fixed the following vulnerabilities:
+  
+    - [CVE-2022-23529](https://nvd.nist.gov/vuln/detail/CVE-2022-23529)
+    - [CVE-2021-44906](https://nvd.nist.gov/vuln/detail/CVE-2021-44906)
+    - [CVE-2022-23540](https://nvd.nist.gov/vuln/detail/CVE-2022-23540)
+    - [CVE-2022-23541](https://nvd.nist.gov/vuln/detail/CVE-2022-23541)
+    - [CVE-2022-3996](https://nvd.nist.gov/vuln/detail/CVE-2022-3996)
+    - [CVE-2022-43551](https://nvd.nist.gov/vuln/detail/CVE-2022-43551)
+    - [CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848)
+    - [CVE-2022-21698](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-21698)
+    - [CVE-2021-44716](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44716)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2021-43565](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-43565)
+    - [CVE-2021-38561](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-38561)
+
+## 0.31.1
+
+Release date: December 23, 2022
+
+### Additional improvements 
+
+- You can now configure `extraFlags` for the Prometheus startup command in the Prometheus Helm chart.
+
+### Bug fixes 
+
+- Fixed an issue where logging sidecars would occasionally fail to terminate.
+- Fixed the following vulnerabilities:
+    - [CVE-2021-46848](https://nvd.nist.gov/vuln/detail/CVE-2021-46848)
+    - [CVE-2021-44716](https://nvd.nist.gov/vuln/detail/CVE-2021-44716)
+    - [CVE-2022-27191](https://nvd.nist.gov/vuln/detail/CVE-2022-27191)
+    - [CVE-2022-27664](https://nvd.nist.gov/vuln/detail/CVE-2022-27664)
+    - [CVE-2022-32149](https://nvd.nist.gov/vuln/detail/CVE-2022-41717)
+    - [CVE-2022-37454](https://nvd.nist.gov/vuln/detail/CVE-2022-37454)
+    - [CVE-2022-41717](https://nvd.nist.gov/vuln/detail/CVE-2022-41717)
+    - [CVE-2022-42919](https://nvd.nist.gov/vuln/detail/CVE-2022-42919)
+    - [CVE-2022-45061](https://nvd.nist.gov/vuln/detail/CVE-2022-45061)
+    - [CVE-2022-46146](https://nvd.nist.gov/vuln/detail/CVE-2022-46146)
+
 ## 0.31.0
 
 Release date: December 7, 2022
+
+### View and export task usage metrics
+
+You can now view task usage metrics from the Software UI.
+
+Task usage metrics provide an overview of your Airflow task runs and can help you quickly identify Deployments where more tasks are running or failing than expected. 
+
+To configure the feature, see [Set up task usage metrics](task-usage-metrics.md).
 
 ### New root user role
 
@@ -21,7 +92,7 @@ See [Manage the root user](manage-root-user.md).
 
 ### Manage Astronomer users through a SCIM integration 
 
-Astronomer Software now supports managing users through System for Cross-domain Identity Management (SCIM), which allows you to automatically provision and deprovision users based on templates for access and permissions. See [Manage users with SCIM](integrate-auth-system.md#manage-users-with-scim).
+Astronomer Software now supports managing users through System for Cross-domain Identity Management (SCIM), which allows you to automatically provision and deprovision users based on templates for access and permissions. See [Manage users with SCIM](integrate-auth-system.md#manage-users-and-teams-with-scim).
 
 ### Invite users only through Teams
 

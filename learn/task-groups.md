@@ -9,7 +9,7 @@ id: task-groups
   <meta name="og:description" content="Follow Astronomer’s step-by-step guide to to use task groups for organizing tasks within the graph view of the Airflow user interface." />
 </head>
 
-Use [task groups](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html#taskgroups) to organize tasks in the Airflow UI DAG graph view.
+Use [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) to organize tasks in the Airflow UI DAG graph view.
 
 In this guide, you'll learn how to create task groups and review some example DAGs that demonstrate their scalability.
 
@@ -79,7 +79,7 @@ def my_dependent_tasks():
     return task_a(task_b(task_c()))
 ```
 
-The following DAG shows a full example implementation of the task groupp decorator, including passing data between tasks before and after the task group:
+The following DAG shows a full example implementation of the task group decorator, including passing data between tasks before and after the task group:
 
 ```python
 import json
@@ -87,7 +87,7 @@ from airflow.decorators import dag, task, task_group
 
 import pendulum
 
-@dag(schedule_interval=None, start_date=pendulum.datetime(2021, 1, 1, tz="UTC"), catchup=False)
+@dag(schedule=None, start_date=pendulum.datetime(2021, 1, 1, tz="UTC"), catchup=False)
 
 def task_group_example():
 

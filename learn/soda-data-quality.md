@@ -136,7 +136,7 @@ SODA_PATH="<filepath>" # can be specified as an env variable
 
 with DAG(
     dag_id="soda_example_dag",
-    schedule_interval='@daily',
+    schedule='@daily',
     start_date=datetime(2022,8,1),
     catchup=False
 ) as dag:

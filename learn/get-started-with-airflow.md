@@ -31,10 +31,10 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - A terminal that accepts bash commands. This is pre-installed on most operating systems.
-- [Python 3](https://www.python.org/downloads/).
 - [Docker Desktop](https://docs.docker.com/get-docker/) (v18.09 or higher).
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli).
 - An integrated development environment (IDE) for Python development, such as [VSCode](https://code.visualstudio.com/).
+- Optional. A local installation of [Python 3](https://www.python.org/downloads/) to improve your Python developer experience.
 
 ## Step 1: Create an Astro project
 
@@ -114,7 +114,7 @@ After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG
 
 ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
 
-These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
+These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
 
 ## Step 5: Explore the Airflow UI
 
@@ -182,7 +182,7 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
     with DAG(
         dag_id="my_first_dag",
         start_date=datetime(2022,7,28),
-        schedule_interval=timedelta(minutes=30),
+        schedule=timedelta(minutes=30),
         catchup=False,
         tags= ["tutorial"],
         default_args={
@@ -197,7 +197,7 @@ Now that we can run DAGs and navigate the UI, let's write our own DAG and run it
 
     - `dag_id` (Required): The name of the DAG that appears in the Airflow UI. Each DAG must have a unique name, and Astronomer recommends using the same name for the DAG file and the `dag_id`.
     - `start_date` (Required): The date and time when the DAG is scheduled to start running, given as a datetime object. In this example, the DAG is triggered on its schedule as long as the current time is 0:00 UTC on July 28th, 2022 or later.
-    - `schedule_interval`: The frequency the DAG runs. You can define this as a timedelta object, a [CRON expression](https://crontab.guru/), or as a macro such as "@daily". If you don't set this value, the DAG runs every 24 hours after the `start_date`.
+    - `schedule`: The frequency the DAG runs. You can define this as a timedelta object, a [CRON expression](https://crontab.guru/), or as a macro such as "@daily". If you don't set this value, the DAG runs every 24 hours after the `start_date`.
     - `catchup`: Defines whether the DAG reruns all DAG runs that were scheduled before today's date. The default value is `True`, but it is recommended that you set this argument to `False` unless you are explicitly running your DAG to backfill runs.
     - `tags`: Defines the **Tags** that appear in the **DAGs** page of the Airflow UI. These can help you organize DAGs in more complex projects.
     - `default_args`: A list of configurations for the DAG's behavior. In this DAG, these arguments change the owner of the DAG, give the DAG a maximum of two retries in case of failure, and tell the DAG to wait five minutes before retrying. Many more arguments can be passed to a DAG at instantiation. See [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/models/dag/index.html) for a complete list.

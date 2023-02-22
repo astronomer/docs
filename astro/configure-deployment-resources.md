@@ -21,10 +21,16 @@ After you create an Astro Deployment, you can modify its settings to meet the un
 
 To ensure that your tasks have the CPU and memory required to complete successfully, you can set resources for:
 
-- The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
+- The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
 - Workers, which are responsible for executing tasks that have been scheduled and queued by the scheduler.
 
 Worker and scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
+
+:::cli
+
+If you prefer, you can set Deployment resources using the Astro CLI and a local Deployment configuration file. See [Deployments as Code](manage-deployments-as-code.md).
+
+:::
 
 ### Worker queues 
 
@@ -34,7 +40,7 @@ See [Configure worker queues](configure-worker-queues.md).
 
 ### Scheduler resources
 
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. By adjusting the **Scheduler Count** slider in the **Configuration** tab of the Cloud UI, you can configure up to 4 schedulers, each of which will be provisioned with the Astronomer Units (AU) specified in **Resources**. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. 1 AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning 5 AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory. You can view the CPU and memory allocations for schedulers on the Deployment **Details** page in the Cloud UI.
+The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. By adjusting the **Scheduler Count** slider in the **Configuration** tab of the Cloud UI, you can configure up to 4 schedulers, each of which will be provisioned with the Astronomer Units (AU) specified in **Resources**. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. 1 AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning 5 AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory. You can view the CPU and memory allocations for schedulers on the Deployment **Details** page in the Cloud UI.
 
 For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each.
 
@@ -42,7 +48,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 #### Edit scheduler settings 
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**. 
 4. Edit the scheduler resource settings. See [Scheduler resources](#scheduler-resources).
@@ -52,7 +58,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 ## Update a Deployment name and description
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**.
 4. Update the Deployment name or description. 
@@ -62,7 +68,7 @@ If you experience delays in task execution, which you can track with the Gantt C
 
 Alert emails assigned to a Deployment are used by Astronomer support to notify recipients in the case of an issue with the Deployment. This can include a problem with your scheduler or workers. Automated email alerts are coming soon.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. To add an alert email:
     - Click **Edit Emails** in the **Alert Emails** area.
@@ -82,7 +88,7 @@ To transfer a Deployment from one Workspace to another, the Workspaces must be i
 
 Only the users who are members of the target Workspace can access the Deployment after it is transferred. To transfer a Deployment, you must be a Workspace Admin or Editor in both the original Workspace and the target Workspace.
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu and select **Transfer Deployment**. 
 
     ![Transfer Deployment in options menu](/img/docs/transfer-deployment.png)
@@ -94,7 +100,7 @@ Only the users who are members of the target Workspace can access the Deployment
 
 When you delete a Deployment, all infrastructure resources assigned to the Deployment are immediately deleted from your data plane. However, the Kubernetes namespace and metadata database for the Deployment are retained for 30 days. Deleted Deployments can't be restored. If you accidentally delete a Deployment, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-1. In the Cloud UI, select a Workspace and then select a Deployment.
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Options** menu of the Deployment you want to delete, and select **Delete Deployment**.
 
     ![Delete Deployment in options menu](/img/docs/delete-deployment.png)
@@ -105,3 +111,4 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 - [Set environment variables on Astro](environment-variables.md).
 - [Manage Deployment API keys](api-keys.md).
+- [Manage Deployments as Code](manage-deployments-as-code.md)

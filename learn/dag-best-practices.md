@@ -102,7 +102,7 @@ result = hook.get_records("SELECT * FROM grocery_list;")
 with DAG('bad_practices_dag_1',
          start_date=datetime(2021, 1, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False
          ) as dag:
@@ -143,7 +143,7 @@ default_args = {
 with DAG('bad_practices_dag_2',
          start_date=datetime(2021, 1, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False
          ) as dag:
@@ -203,7 +203,7 @@ default_args = {
 with DAG('good_practices_dag_1',
          start_date=datetime(2021, 1, 1),
          max_active_runs=3,
-         schedule_interval='@daily',
+         schedule='@daily',
          default_args=default_args,
          catchup=False,
          template_searchpath='/usr/local/airflow/include' #include path to look for external files
@@ -256,7 +256,7 @@ Astronomer recommends that you consider the size of your data now and in the fut
 
 - Ensure your Airflow infrastructure has the necessary resources.
 - Use the Kubernetes Executor to isolate task processing and have more control over resources at the task level.
-- Use a [custom XCom backend](custom-xcom-backends.md) if you need to pass any data between the tasks so you don't overload your metadata database.
+- Use a [custom XCom backend](custom-xcom-backends-tutorial.md) if you need to pass any data between the tasks so you don't overload your metadata database.
 
 ### Use intermediary data storage
 
@@ -278,7 +278,7 @@ Having a consistent file structure for Airflow projects keeps things organized a
 
 ```bash
 ├── dags/ # Where your DAGs go
-│   ├── example-dag.py # An example dag that comes with the initialized project
+│   └── example-dag.py # An example dag that comes with the initialized project
 ├── Dockerfile # For Astronomer's Docker image and runtime overrides
 ├── include/ # For any other files you'd like to include
 ├── plugins/ # For any custom or community Airflow plugins

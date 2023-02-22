@@ -33,7 +33,7 @@ Astronomer uses the following project structure:
 .
 ├── dags                        # Folder where all your DAGs go
 │   ├── example-dag.py
-│   ├── redshift_transforms.py
+│   └── redshift_transforms.py
 ├── Dockerfile                  # For Astronomer's Docker image and runtime overrides
 ├── include                     # For any scripts that your DAGs might need to access
 │   └── sql

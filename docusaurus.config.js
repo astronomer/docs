@@ -7,8 +7,12 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   favicon: 'img/favicon.svg',
   organizationName: 'astronomer', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
@@ -32,6 +36,9 @@ module.exports = {
       },
 
       //... other Algolia params
+    },
+    prism: {
+      additionalLanguages: ['docker'],
     },
     colorMode: {
       disableSwitch: false,
@@ -105,7 +112,7 @@ module.exports = {
         {
           label: '0.30',
           to: '/software/0.30/',
-          activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
+          activeBaseRegex: '(software\/0.30)+',
         },
         {
           label: '0.29',
@@ -118,9 +125,9 @@ module.exports = {
           activeBaseRegex: '(software\/0.28)+',
         },
         {
-          label: '0.25',
-          to: '/software/0.25/overview',
-          activeBaseRegex: '(software\/0.25)+',
+          label: 'Archive',
+          to: '/software/documentation-archive',
+          activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
         },
       ],
     },
@@ -198,6 +205,7 @@ module.exports = {
           id: 'default',
           changefreq: 'daily',
           filename: 'sitemap.xml',
+          ignorePatterns: ['/astro/kubernetes-executor', '/astro/cli/sql-cli', '/astro/cross-account-role-setup']
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -244,6 +252,7 @@ module.exports = {
         id: 'learn',
         changefreq: 'daily',
         filename: 'sitemap.xml',
+        ignorePatterns: ['/astro/kubernetes-executor', '/astro/cli/sql-cli', '/astro/cross-account-role-setup']
       },
     ],
   ],
@@ -269,5 +278,8 @@ module.exports = {
       "data-domain": 'docs.astronomer.io',
       defer: true,
     }
+  ],
+  clientModules: [
+    require.resolve('./segment-page.mjs'),
   ],
 };

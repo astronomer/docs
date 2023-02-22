@@ -10,6 +10,7 @@ id: develop-project
 </head>
 
 import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
 An Astro project contains all of the files necessary to test and run DAGs in a local Airflow environment and on Astro. This guide provides information about adding and organizing Astro project files, including:
@@ -74,6 +75,29 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 :::
 
+### Ignore files with `.airflowignore`
+
+You can create an `.airflowignore` file in the `dags` directory of your Astro project to identify the files to ignore when you deploy to Astro or develop locally. This can be helpful if your team has a single Git repository that contains DAGs for multiple projects.
+
+The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. Files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler and the DAGs listed in the file don't appear in the Airflow UI.
+
+For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#airflowignore). To learn more about the code deploy process, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+
+1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
+
+2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. You should list the path for each file or directory relative to the `dags` directory. For example: 
+
+    ```text
+    mydag.py
+    data-team-dags
+    some-dags/ignore-this-dag.py
+    ``` 
+    
+3. Save your changes locally or deploy to Astro.
+
+    Your local Airflow environment is automatically updated as soon as you save your changes to `.airflowignore`. To apply your change in Astro, you need to deploy. See [Deploy code](deploy-code.md).
+
+
 ### Add DAG helper functions
 
 Use the `include` folder to store additional utilities required by your DAGs. For example, templated SQL scripts or a custom helper function that's used in an operator and that you can reference in multiple DAGs.
@@ -83,20 +107,20 @@ Astronomer recommends storing the `include` folder inside the `dags` directory o
 Here is how the recommended directory structure might appear:
 
 ```bash
-    ├── airflow_settings.yaml
-    ├── dags
-    │   └── include
-            └── helper_functions
-                └── helper.py
-            └── templated_SQL_scripts
-    │       └── custom_operators
-    ├── Dockerfile
-    ├── tests
-    │   └── test_dag_integrity.py
-    ├── packages.txt
-    ├── plugins
-    │   └── example-plugin.py
-    └── requirements.txt
+├── airflow_settings.yaml
+├── dags
+│   └── include
+│       ├── helper_functions
+│       │   └── helper.py
+│       ├── templated_SQL_scripts
+│       └── custom_operators
+├── Dockerfile
+├── tests
+│   └── test_dag_integrity.py
+├── packages.txt
+├── plugins
+│   └── example-plugin.py
+└── requirements.txt
 ```
 
 If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
@@ -105,7 +129,7 @@ If you do not use DAG-only deploys or you decide to keep the `include` directory
 
 Airflow connections connect external applications such as databases and third-party services to Apache Airflow. See [Manage connections in Apache Airflow](https://docs.astronomer.io/learn/connections#airflow-connection-basics) or [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html).
 
-To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/concepts/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you have the following options:
+To add Airflow [connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html), [pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html), and [variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html) to your local Airflow environment, you have the following options:
 
 - Use the Airflow UI. In **Admin**, click **Connections**, **Variables** or **Pools**, and then add your values. These values are stored in the metadata database and are deleted when you run the [`astro dev kill` command](cli/astro-dev-kill.md), which can sometimes be used for troubleshooting.
 - Modify the `airflow_settings.yaml` file of your Astro project. This file is included in every Astro project and permanently stores your values in plain-text. To prevent you from committing sensitive credentials or passwords to your version control tool, Astronomer recommends adding this file to `.gitignore`.
@@ -247,14 +271,14 @@ A project with multiple `.env` files might look like the following:
 
 ```
 my_project
-  ├── Dockerfile
-  └──  dags
-    └── my_dag
-  ├── plugins
-    └── my_plugin
-  ├── airflow_settings.yaml
-  ├── .env
-    └── dev.env
+├── Dockerfile
+├── dags
+│   └── my_dag
+├── plugins
+│   └── my_plugin
+├── airflow_settings.yaml
+└── .env
+    ├── dev.env
     └── prod.env
 ```
 
@@ -282,6 +306,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
     RUN update-ca-certificates
     USER astro
     ```
+    
 2. Optional. Add additional `COPY` statements before the `RUN update-ca-certificates` stanza for each CA certificate your organization is using for external access.
 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment) or deploy to Astro. See [Deploy code](deploy-code.md).
@@ -379,18 +404,17 @@ This setup assumes that each custom Python package is hosted within its own priv
 
 #### Step 1: Specify the private repository in your project
 
-To add a Python package from a private repository to your Astro project, specify the repository’s SSH URL in your project’s `requirements.txt` file. The URL should use the following format:
+To add a Python package from a private repository to your Astro project, specify the Secure Shell (SSH) URL for the repository in a new `private-requirements.txt` file. Use the following format for the SSH URL:
 
 ```
 git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git
 ```
 
-For example, to install `mypackage1` and `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to your `requirements.txt` file:
+For example, to install `mypackage1` and `mypackage2` from `myorganization`, you would add the following to your `private-requirements.txt` file:
 
 ```
 git+ssh://git@github.com/myorganization/mypackage1.git
 git+ssh://git@github.com/myorganization/mypackage2.git
-numpy==1.22.1
 ```
 
 This example assumes that the name of each of your Python packages is identical to the name of its corresponding GitHub repository. In other words,`mypackage1` is both the name of the package and the name of the repository.
@@ -399,74 +423,31 @@ This example assumes that the name of each of your Python packages is identical 
 
 1. Optional. Copy and save any existing build steps in your `Dockerfile`.
 
-2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+2. Add `openssh-client` and `git` to your `packages.txt` file.
 
-   ```text
-   FROM quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
-   ```
-
-  :::info
-
-  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-image-architecture.md#distribution).
-
-  :::
-
-3. After the `FROM` line specifying your Runtime image, add the following configuration:
+3. In your Dockerfile, add the following instructions:
 
     ```docker
-    LABEL maintainer="Astronomer <humans@astronomer.io>"
-    ARG BUILD_NUMBER=-1
-    LABEL io.astronomer.docker=true
-    LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
-    LABEL io.astronomer.docker.airflow.onbuild=true
-    # Install OS-Level packages
-    COPY packages.txt .
-    RUN apt-get update && cat packages.txt | xargs apt-get install -y
+    RUN mkdir -p -m 0700 ~/.ssh && \
+        echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" >> ~/.ssh/known_hosts
 
-    FROM stage1 AS stage2
-    USER root
-    RUN apt-get -y install git python3 openssh-client \
-      && mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
-    # Install Python packages
-    COPY requirements.txt .
-    RUN --mount=type=ssh,id=github pip install --no-cache-dir -q -r requirements.txt
-
-    FROM stage1 AS stage3
-    # Copy requirements directory
-    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
-    COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
-
-    COPY . .
+    COPY private-requirements.txt .
+    RUN --mount=type=ssh,id=github pip install --no-cache-dir --requirement private-requirements.txt
+    ENV PATH="/home/astro/.local/bin:$PATH"
     ```
 
-    In order, these commands:
+    In order, these instructions:
 
-    - Install any OS-level packages specified in `packages.txt`.
-    - Securely mount your SSH key at build time. This ensures that the key itself is not stored in the resulting Docker image filesystem or metadata.
-    - Install Python-level packages from your private repository as specified in your `requirements.txt` file.
-
-  :::tip
-
-  This example `Dockerfile` assumes Python 3.9, but some versions of Astro Runtime may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile` with the correct Python version.
-
-  To identify the Python version in your Astro Runtime image, run:
-
-     ```
-     docker run quay.io/astronomer/astro-runtime:<runtime-version>-base python --version
-     ```
-
-  Make sure to replace `<runtime-version>` with your own.
-
-  :::
+    - Add the fingerprint for GitHub to `known_hosts`
+    - Copy your `private-requirements.txt` file into the image
+    - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. Tthis securely mounts your SSH key at build time, ensuring that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Add the user bin directory onto `PATH`
 
   :::info
 
-  If your repository is not hosted on GitHub, replace the domain in the `ssh-keyscan` command with the domain where the package is hosted.
+  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint.
 
   :::
-
-4. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
 #### Step 3: Build a custom Docker image
 
@@ -479,7 +460,7 @@ This example assumes that the name of each of your Python packages is identical 
 2. Run the following command to create a new Docker image from your `Dockerfile`. Replace `<ssh-key>` with your SSH private key file name.
 
     ```sh
-    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github=“$HOME/.ssh/<ssh-key>” -t $image_name .
+    DOCKER_BUILDKIT=1 docker build -f Dockerfile --progress=plain --ssh=github="$HOME/.ssh/<ssh-key>" -t $image_name .
     ```
 
 3. Optional. Test your DAGs locally. See [Restart your local environment](develop-project.md#restart-your-local-environment).
@@ -536,14 +517,16 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
 3. After the `FROM` line specifying your Runtime image, add the following configuration:
 
     ```docker
-    LABEL maintainer=“Astronomer <humans@astronomer.io>”
+    LABEL maintainer="Astronomer <humans@astronomer.io>"
     ARG BUILD_NUMBER=-1
     LABEL io.astronomer.docker=true
     LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
     LABEL io.astronomer.docker.airflow.onbuild=true
     # Install OS-Level packages
     COPY packages.txt .
+    USER root
     RUN apt-get update && cat packages.txt | xargs apt-get install -y
+    USER astro
 
     FROM stage1 AS stage2
     # Install Python packages
@@ -556,7 +539,7 @@ Make sure that the name of any privately hosted Python package doesn’t conflic
     # Copy requirements directory
     COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
     COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH=“/home/astro/.local/bin:$PATH”
+    ENV PATH="/home/astro/.local/bin:$PATH"
 
     COPY . .
     ```
@@ -595,3 +578,9 @@ Your Astro project can now utilize Python packages from your private PyPi index.
 
 </TabItem>
 </Tabs>
+
+## Unsupported project configurations 
+
+You can't use `airflow.cfg` or `airflow_local_settings.py` files in an Astro project. `airflow_local_settings.py` has no effect on Astro Deployments, and `airflow.cfg` has no effect on local environments and Astro Deployments. 
+
+An alternative to using `airflow.cfg` is to set Airflow environment variables in your `.env` file. See [Set environment variables locally](#set-environment-variables-locally).

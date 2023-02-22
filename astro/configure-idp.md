@@ -8,6 +8,14 @@ description: Configure federated authentication from a variety of third party id
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
+import PremiumBadge from '@site/src/components/PremiumBadge';
+
+There are 4 ways users can to authenticate to Astro:
+
+- Basic authentication
+- Google social login
+- GitHub social login
+- 3rd-party identity provider (IdP) login
 
 Identity Providers (IdPs) are services that manage user accounts. As organizations grow, it's common for teams to integrate internal tooling with a third-party IdP. This allows administrators to monitor application access, user permissions, and security policies from a single place. It also makes it easy for individual users to access the tools they need.
 
@@ -28,7 +36,7 @@ This guide provides setup steps for integrating both of these identity providers
 
 :::info
 
-Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in via the [Cloud UI](https://cloud.astronomer.io/). IdP-initiated SSO is coming soon.
+Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in to the [Cloud UI](https://cloud.astronomer.io/).
 
 :::
 
@@ -58,7 +66,7 @@ To set up Okta as your IdP, submit a request to [Astronomer support](https://clo
 - A Single Sign-On (SSO) URL
 - An Audience URI
 
-Save these values for Step 2.
+These values are required for Step 2.
 
 #### Step 2: Configure Okta
 
@@ -97,15 +105,21 @@ Save these values for Step 2.
 
 #### Step 3: Provide Astronomer support with your integration information
 
-On the page for your Okta app integration, click **View Setup Instructions**. Copy the values for `Single Sign-on URL` and `X.509 Certificate` that appear and send them to Astronomer Support.
+On the page for your Okta app integration, click **View Setup Instructions**. Copy the values for **Single Sign-on URL** and **X.509 Certificate** that appear. Then, send the following information to Astronomer support:
 
-From here, Astronomer support will finalize your organization's integration with Okta.
+- Your **Single Sign-on URL**.
+- Your **X.509 Certificate**.
+- A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, make a request through Astronomer support.
 
-#### Step 4: Assign users to your Okta application
+Astronomer support configures your Organization's integration with Okta and sends you a validation link that you'll use in step 4.
 
-On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, read [Okta documentation](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
+#### Step 4: Confirm the integration 
 
-When a user assigned to the integration accesses Astro, they will be brought automatically to Okta after entering their email in the Cloud UI.
+Open the validation link provided by Astronomer support and then log in to Astro with your credentials. After you validate that authentication works, Astro finalizes the integration. 
+
+#### Step 5: Assign users to your Okta application
+
+On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, see [Assign applications to users](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
 
 </TabItem>
 
@@ -158,11 +172,15 @@ Reach out to [Astronomer support](https://cloud.astronomer.io/support) and provi
 
 - **Microsoft Azure AD Domain**: Retrieve this from your Azure AD directory's overview page in the Microsoft Azure portal.
 - **Application (client) ID**: Retrieve this from the **Overview** page of your application.
-- **Client secret**: Use the value of your client secret from Step 2.
+- A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-From here, Astronomer will complete the integration and add Azure as your organization's IdP.
+Astronomer support configures your Organization's integration with Okta and sends you a validation link that you'll use in step 5.
 
-#### Step 5: Assign users to your Azure AD application
+#### Step 5: Confirm the integration 
+
+Open the validation link provided by Astronomer support and then log in to Astro with your credentials. After you validate that authentication works, Astro finalizes the integration. 
+
+#### Step 6: Assign users to your Azure AD application
 
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
 
@@ -181,6 +199,11 @@ To integrate OneLogin as your IdP for Astro, you must have a [OneLogin account](
 #### Step 1: Contact Astronomer support
 
 To set up OneLogin as your IdP, submit a request to [Astronomer support](https://cloud.astronomer.io/support). After receiving your request, Astronomer support will provide you with the following:
+
+- A Single Sign-On (SSO) URL
+- An Audience URI
+
+These values are required for Step 2.
 
 #### Step 2: Create the OneLogin Astro application
 
@@ -219,19 +242,25 @@ To set up OneLogin as your IdP, submit a request to [Astronomer support](https:/
 
 #### Step 3: Provide Astronomer support with your integration information
 
-Send the X.509 certificate and SAML 2.0 endpoint (HTTP) information you copied in step 2 to [Astronomer support](https://cloud.astronomer.io/support).
+Send the following information to [Astronomer support](https://cloud.astronomer.io/support).
 
-Astronomer support will finalize your organization's integration with OneLogin.
+- The X.509 certificate you downloaded in Step 2 
+- SAML 2.0 endpoint (HTTP) information that you copied in step 2 
+- A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, make a request through Astronomer support.
 
-#### Step 4: Assign users to your OneLogin Astro application
+Astronomer support configures your Organization's integration with OneLogin and sends you a validation link that you'll use in step 4.
+
+#### Step 4: Confirm the integration 
+
+Open the validation link provided by Astronomer support and then log in to Astro with your credentials. After you validate that authentication works, Astro finalizes the integration. 
+
+#### Step 5: Assign users to your OneLogin Astro application
 
 1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Astro**.
 
 2. Click **Users** in the left menu.
 
-3. Make sure that all users who are using Astro are assigned to the Astronomer application.
-
-    When a user assigned to the application accesses Astro, they are automatically signed in to OneLogin after entering their email in the Cloud UI.
+3. Make sure that all users who need to use Astro are assigned to the Astronomer application.
 
 </TabItem>
 
@@ -297,11 +326,19 @@ Save these values for Step 2.
 
 #### Step 3: Provide Astronomer support with your integration information
 
-Send the X.509 certificate and the single sign on service URL you copied in step 2 to [Astronomer support](https://cloud.astronomer.io/support).
+Send the following information to [Astronomer support](https://cloud.astronomer.io/support).
 
-From here, Astronomer support will finalize your organization's integration with Okta.
+- The X.509 certificate you downloaded in Step 2.
+- The single sign on service URL that you copied in step 2.
+- A list of domains that you own and should be authorized to access your Astro Organization. After the integration is complete, any new user that logs in to Astro with an email address from one of these domains is automatically granted a new Astro account and access to your Organization through just-in-time provisioning. To disable just-in-time provisioning, make a request through Astronomer support.
 
-#### Step 4: Assign users to your Ping Identity application
+Astronomer support configures your Organization's integration with Ping and sends you a validation link that you'll use in step 4.
+
+#### Step 4: Confirm the integration 
+
+Open the validation link provided by Astronomer support and then log in to Astro with your credentials. After you validate that authentication works, Astro finalizes the integration. 
+
+#### Step 5: Assign users to your Ping Identity application
 
 Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
 

@@ -31,6 +31,7 @@ module.exports = {
             'airflow-sql',
             'managing-dependencies',
             'managing-airflow-code',
+            'airflow-openlineage',
           ],
         },
         {
@@ -48,6 +49,7 @@ module.exports = {
             'airflow-importing-custom-hooks-operators',
             'astro-python-sdk-etl',
             'debugging-dags',
+            'dynamic-tasks',
             'task-groups',
             'rerunning-dags',
             'templating',
@@ -83,13 +85,11 @@ module.exports = {
           },
           items: [
             'testing-airflow',
-            'custom-xcom-backends',
             'logging',
             'kubepod-operator',
             'data-quality',
             'airflow-sql-data-quality',
             'dynamically-generating-dags',
-            'dynamic-tasks',
             'airflow-datasets',
             'using-airflow-plugins',
             'deferrable-operators',
@@ -99,10 +99,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Tutorials',
+      label: 'Airflow tutorials',
       link: {
         type:'generated-index',
-        title: 'Tutorials',
+        title: 'Airflow tutorials',
         description: 'Step-by-step guides for writing DAGs and running Airflow.'
       },
       items: [
@@ -123,6 +123,7 @@ module.exports = {
         'custom-airflow-ui-docs-tutorial',
         'external-python-operator',
         'operator-extra-link-tutorial',
+        'xcom-backend-tutorial'
       ],
     },
     {
@@ -136,6 +137,7 @@ module.exports = {
       items: [
         'airflow-redshift',
         'airflow-sagemaker',
+        'airflow-kafka',
         'airflow-azure-container-instances',
         'airflow-azure-data-explorer',
         'airflow-azure-data-factory-integration',
@@ -143,12 +145,11 @@ module.exports = {
         'airflow-dbt',
         'airflow-great-expectations',
         'execute-notebooks',
+        'marquez',
         'airflow-mongodb',
-        'airflow-openlineage',
         'airflow-snowflake',
         'soda-data-quality',
         'airflow-talend-integration',
-        'airflow-kafka',
      ],
     },
   ],

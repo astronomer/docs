@@ -10,7 +10,7 @@ let astro = await fs.readFile('./astro/release-notes.md', 'utf8');
 let astroRuntime = await fs.readFile('./astro/runtime-release-notes.md', 'utf8');
 let astroCLI = await fs.readFile('./astro/cli/release-notes.md', 'utf8');
 let software = await fs.readFile('./software/release-notes.md', 'utf8');
-let softwareRuntime = await fs.readFile('./software/runtime-release-notes.md', 'utf8');
+let softwareRuntime = await fs.readFile('./astro/runtime-release-notes.md', 'utf8');
 
 
 // function to get all elements between two elements

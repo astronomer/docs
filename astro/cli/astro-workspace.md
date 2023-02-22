@@ -23,30 +23,73 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-
 Manage Workspaces on Astro.
 
 ## Usage
 
 This command includes two subcommands:
 
-```sh
-# List all workspaces
-astro workspace list 
+- `astro workspace list`: List all Workspaces.
+- `astro workspace switch`: Switch between Workspaces.
 
-# Switch between workspaces
-astro workspace switch
-```
+## Usage
+
+This command has several subcommands.
+
+### `astro workspace create`
+
+List all Workspaces.
+
+### `astro workspace switch`
+
+Switch between Workspaces.
+
+### `astro workspace user add`
+
+Invite an existing user to your current Astronomer Workspace.
+
+#### Options
+
+| `<email>` | The email for the user you want to invite or update. | Any valid email                                                                                                                             |
+| `--role`  | The user's role in the Workspace.                          | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`.|
+
+### `astro workspace user update`
+
+Update a user's permissions in your current Astronomer Workspace. The CLI prompts you for the user's email and new role.
+
+#### Options
+
+| Option    | Description                                                  | Valid Values                                                                                                                             |
+| --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<email>` | The email for the user you want to invite or update.  | Any valid email                                                                                                                             |
+| `--role`  | The user's role in the Workspace.                          | Valid values are `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+
+### `astro workspace user list`
+
+List all users in your current Workspace.
+
+### `astro workspace user remove`
+
+Remove a user from your current Workspace. 
+
+#### Options
+
+| Option    | Description                                                  | Possible Values                                                                                                                             |
+| --------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| `<email>` | The email for the user you want to remove. | Any valid email                                                                                                                             |
+
+## Related commands
+
+- [astro organization](cli/astro-organization.md)
 
 </TabItem>
 <TabItem value="software">
-
 
 Manage Workspaces on Astronomer Software.
 
 ## Usage
 
-This command has several subcommands. Read the following sections to learn how to use each subcommand.
+This command has several subcommands.
 
 ### astro workspace create
 
@@ -60,10 +103,10 @@ astro workspace create --label=<new-workspace-name>
 
 #### Options
 
-| Option                 | Description | Possible Values                        |
-| ---------------------- | ----------- | -------------------------------------- |
-| `--label` (_required_) |   The label or name for the new Workspace.  | Any string |
-| `--description`        | The description for the new Workspace. | Any string |
+| Option                 | Description                              | Possible Values |
+| ---------------------- | ---------------------------------------- | --------------- |
+| `--label` (_required_) | The label or name for the new Workspace. | Any string      |
+| `--description`        | The description for the new Workspace.   | Any string      |
 
 #### Related documentation
 
@@ -115,7 +158,7 @@ astro workspace service-account create --workspace-id=<your-workspace> --label=<
 #### Related documentation
 
 - [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Deploy to Astronomer via CI/CD](https://docs.astronomer.io/software/ci-cd)
+- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
 
 ### astro workspace service-account delete
 
@@ -136,7 +179,7 @@ astro workspace service-account delete <your-service-account-id>
 #### Related documentation
 
 - [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Deploy to Astronomer via CI/CD](ci-cd.md)
+- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
 
 ### astro workspace service-account get
 
@@ -155,7 +198,7 @@ Run `astro deployment service-account get <service-account-id> --workspace-id=<y
 #### Related documentation
 
 - [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
-- [Deploy to Astronomer via CI/CD](ci-cd.md)
+- [Configure CI/CD on Astronomer Software](https://docs.astronomer.io/software/ci-cd)
 
 ### astro workspace switch
 
@@ -276,7 +319,7 @@ At least one flag must be specified.
 
 ### astro workspace user add
 
-Creates a new user in your current Workspace. If the user has already authenticated to Astronomer, they will automatically be granted access to the Workspace. If the user does not have an account on Astronomer, they will receive an invitation to the platform via email.
+Creates a new user in your current Workspace. If the user has already authenticated to Astronomer, they will automatically be granted access to the Workspace. If the user does not have an account on Astronomer, they will receive an email invitation to the platform.
 
 #### Usage
 
@@ -358,7 +401,7 @@ astro workspace user update --email <user-email-address>
 
 | Option    | Description                           | Possible Values                                                                                                       |
 | --------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `--email` | The user's email.                     | Any valud email address                                                                                               |
+| `--email` | The user's email.                     | Any valid email address                                                                                               |
 | `--role`  | The role you're updating the user to. | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, or `WORKSPACE_ADMIN`. Default value is `WORKSPACE_VIEWER` |
 
 #### Related documentation

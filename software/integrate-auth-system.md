@@ -30,7 +30,7 @@ The following setups assume that you are using Astronomer's default [implicit fl
 
 ## Local auth
 
-To let users authenticate to Astronomer with a local username and password", follow the steps below."
+To let users authenticate to Astronomer with a local username and password, follow the steps below.
 
 1. Enable Local Auth in your `config.yaml` file:
 ```yaml
@@ -66,9 +66,9 @@ astronomer:
 
 Replace the values above with those of the provider of your choice. If you want to configure Azure AD, Okta or Auth0 read below for specific guidelines.
 
-## AWS Cognito
+### AWS Cognito
 
-### Create a user pool in Cognito
+#### Create a user pool in Cognito
 
 Start by creating a user pool in Cognito. You can either review the default settings or step through them to customize.
 
@@ -83,9 +83,7 @@ Once the pool and app client are created, head over to the `App integration` >`A
 
 Then switch over to the `Domain name` tab and select a unique domain name to use for your hosted Cognito components.
 
-This should give you a minimally working user pool configuration.
-
-### Edit your Astronomer configuration
+#### Edit your Astronomer configuration
 
 Add the following values to your `config.yaml` file in the `astronomer/` directory:
 
@@ -105,32 +103,61 @@ astronomer:
 
 Your Cognito pool ID can be found in the `General settings` tab of the Cognito portal. Your client ID is found in the `App clients` tab.
 
-Once you've saved your `config.yaml` file with these values, push it to your platform as described in [Apply a config change](apply-platform-config.md).
+Once you've saved your `config.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
 
-## Azure AD
+### Azure AD
 
-### Register the Application using `App Registrations` on Azure
+Follow these steps to configure Azure AD as your OIDC provider. 
 
-To start, register the application. As you do so, make sure to specify the Redirect URI as `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
+#### Register the Application using `App Registrations` on Azure
 
-Replace `BASEDOMAIN` with your own. For example, if your basedomain were `astronomer-development.com`, your registration would look like the following:
+1. In Azure Active Directory, click **App registrations** > **New registration**. 
+2. Complete the following sections:
+  
+    - **Name**: Any
+    - **Supported account types**: Accounts in this organizational directory only (Astronomer only - single tenant)
+    - **Redirect URI**: Web / `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
 
-![application](/img/software/azure-application.png)
+    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URI is https://houston.mycompany.com/v1/oauth/redirect/
 
-### Enable Access and ID Tokens
+3. Click **Register**.
 
-From there, head over to 'Authentication' to:
+4. Click **Authentication** in the left menu.
+5. In the **Web** area, confirm the redirect URI is correct.
 
-- Make sure that Access Tokens and ID tokens are enabled
-- Verify the Redirect URI
+6. In the **Implicit grant and hybrid flows** area, select **Access tokens** and **ID tokens**.
 
-Example:
+7. Click **Save**.
 
 ![authentication.png](/img/software/azure-authentication.png)
 
-### Enable Azure AD in your config.yaml file
+#### Create a client secret
 
-Make sure the `config.yaml` file in your `astronomer` directory is updated with the proper values:
+1. In your Azure AD application management left menu, click **Certificates & secrets**.
+2. Click **New client secret**.
+3. Enter a description in the **Description** field and then select an expiry period in the **Expires** list. 
+4. Click **Add**.
+5. Copy the values in the **Value** and **Secret ID** columns. 
+6. Click **API permissions** in the left menu.
+5. Click **Microsoft Graph** and add the following minimum permissions for Microsoft Graph:
+
+    - `email`
+    - `Group.Read.All`
+    - `openid`
+    - `profile`
+    - `User.Read`
+
+5. Click **Token configuration** in the left menu.
+6. Click **Add groups claim** and select the following options:
+
+    - In the **Select group types to include in Access, ID, and SAML tokens** area, select every option. 
+    - In **Customize token properties by type** area, expand **ID**, **Access**, and **SAML** and then select **Group ID** for each type.
+    
+7. Click **Add**.
+
+#### Enable Azure AD in your config.yaml file
+
+Add the following values to the `config.yaml` file in your `astronomer` directory:
 
 ```yaml
 astronomer:
@@ -142,20 +169,22 @@ astronomer:
             enabled: false
           microsoft:
             enabled: true
-            clientId: <client_id>
+            clientId: <your-client-id>
             discoveryUrl: https://login.microsoftonline.com/<tenant-id>/v2.0/
+            clientSecret: <your-client-secret>
+            authUrlParams:
+              audience: <cyour-client-id>
         github:
           enabled: false
 ```
-Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
-## Okta
+### Okta
 
-To integrate Okta with Astronomer, you'll need to make configuration changes both within Okta and on Astronomer.
+To integrate Okta with Astronomer, you'll need to make configuration changes in Okta and Astronomer.
 
-Follow the steps below.
 
-### Okta configuration
+#### Okta configuration
 
 1. If you haven't already, create an [Okta account](https://www.okta.com/).
 
@@ -167,9 +196,9 @@ Follow the steps below.
 
 5. Save the `Client ID` generated for this Okta app for use in the next steps.
 
-6. To ensure that an Okta tile appears, set `Initiate Login URI` to `https://houston.BASEDOMAIN/v1/oauth/start?provider=okta`  (_Optional_).
+6. Optional. To ensure that an Okta tile appears, set `Initiate Login URI` to `https://houston.BASEDOMAIN/v1/oauth/start?provider=okta`.
 
-### Enable Okta in your config.yaml file
+#### Enable Okta in your config.yaml file
 
 Add the following to your `config.yaml` file in your `astronomer` directory:
 
@@ -187,11 +216,9 @@ astronomer:
 
 Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
->> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
+> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
 
-## Auth0
-
-### Auth0 Configuration
+### Auth0
 
 #### Create an Auth0 account
 
@@ -234,7 +261,7 @@ For instructions, navigate to Auth0's [connection guides](https://auth0.com/docs
 * Under `Identifier`, enter `astronomer-ee`.
 * Leave the value under `Signing Algorithm` as `RS256`.
 
-### Enable Auth0 in your config.yaml file
+#### Enable Auth0 in your config.yaml file
 
 Add the following to your `config.yaml` file in your `astronomer` directory:
 
@@ -422,43 +449,49 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 <TabItem value="azuread">
 
-This setup assumes you have already registered Astronomer Software as an application on Azure AD. See [Azure AD](#azure-ad).
-
-1. If user provisioning isn't available on your existing Astronomer Software application, create a new application using the **Azure Databricks SCIM Provisioning Connector**. See [Configure SCIM provisioning using Microsoft Azure Active Directory](https://learn.microsoft.com/en-us/azure/databricks/administration-guide/users-groups/scim/aad#step-2-configure-the-enterprise-application).
-   
-2. In your Astronomer Software application on Azure AD, go to **Manage** > **Provisioning**.
-
-3. Click **Provisioning Mode** > **Automatic**.
-
-4. In the **Tenant URL** field, enter `https://BASEDOMAIN.astronomer.io/v1/scim/microsoft`. This is the Astronomer SCIM endpoint URL.
-   
-5. In your `config.yaml` file, add the following configuration to create a unique token that Astronomer Software uses to authenticate requests from Azure AD:
+1. In your `config.yaml` file, add the following configuration. Replace `<your-generated-secret-code>` with a randomly generated string. 
 
     ```yaml
     astronomer:
       houston: 
         config:
-          microsoft:
-            scimAuthCode: <your-secret-token>
+          auth:
+            openidConnect:
+              microsoft:
+                scimAuthCode: <your-generated-secret-code>
     ```
-
-    Copy this token for Step 7.
-
-6. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
    
-7. In the **Provisioning** menu for your Azure application, paste your token into the **Secret Token** field. If this field is left blank, Azure AD includes an OAuth bearer token issued from Azure AD with each request.
+    **Note**: If you have already configured Open ID Connect with Azure AD, the `scimAuthCode` key should be on the same level as `clientId` and `discoveryUrl`
 
-8. Click **Test connection** to confirm your connection to the SCIM endpoint.
+2. Push the configuration change. See [Apply a config change](https://docs.astronomer.io/software/apply-platform-config).
 
-9.  Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
-
-10. Click **Manage** > **Provisioning** > **Settings**.
-
-11. In the **Scope** setting list, select **Sync only assigned users and groups**.
+3. Sign in to the [Azure AD portal](https://aad.portal.azure.com/). 
    
-12. Click the *Provisioning status** toggle to turn provisioning status on.
+4. In the left menu, select **Enterprise applications**, and then click **New application** > **Create your own application**.
+   
+5. Enter a name for your application and select **Integrate any other application you don't find in the gallery**.
+  
+6. Click **Create** to create an app object. Azure AD opens the application management menu for your new application.
+  
+7. In the application management menu for your new application, go to **Manage** > **Provisioning** and click **Get Started**.
 
-13. Click **Save**.
+8. Click **Provisioning Mode** > **Automatic**.
+
+9. In the **Tenant URL** field, enter `https://houston.BASEDOMAIN/v1/scim/v2/microsoft`. This is the Astronomer SCIM endpoint URL.
+
+10. Paste the `scimAuthCode` generated at step 1 above into the **Secret Token** field.
+
+11. Click **Test connection** in the Azure AD application management menu to confirm your connection to the SCIM endpoint.
+
+12. Create mappings for your Astronomer users and roles. See [Tutorial - Customize user provisioning attribute-mappings for SaaS applications in Azure Active Directory](https://learn.microsoft.com/en-us/azure/active-directory/app-provisioning/customize-application-attributes).
+
+13. Click **Manage** > **Provisioning** > **Settings**.
+
+14. In the **Scope** setting list, select **Sync only assigned users and groups**.
+   
+15. Click the *Provisioning status** toggle to turn provisioning status on.
+
+16. Click **Save**.
 
 </TabItem>
 </Tabs>

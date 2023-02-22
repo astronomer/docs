@@ -124,7 +124,7 @@ else:
     in_cluster = True
     config_file = None
 
-dag = DAG("example_kubernetes_pod", schedule_interval="@once", default_args=default_args)
+dag = DAG("example_kubernetes_pod", schedule="@once", default_args=default_args)
 
 # This is where you define your resource allocation.
 compute_resources = k8s.V1ResourceRequirements(

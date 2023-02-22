@@ -49,7 +49,7 @@ To emit lineage data from Snowflake:
 When you run an Airflow task with the `SnowflakeOperator`, the following data is collected:
 
 - Task duration
-- SQL queries. Only CREATE statements are currently supported
+- SQL queries. For a list of supported queries, see the [OpenLineage `tests` repository](https://github.com/OpenLineage/OpenLineage/tree/main/integration/sql/impl/tests).
 - Query duration. This is different from the Airflow task duration
 - Input datasets
 - Output datasets
@@ -85,7 +85,6 @@ Use the information provided here to set up lineage collection for Spark running
 5. In the cluster configuration page for your Databricks cluster, specify the following [Spark configuration](https://docs.databricks.com/clusters/configure.html#spark-configuration):
 
    ```sh
-      bash
    spark.driver.extraJavaOptions -Djava.security.properties=
    spark.executor.extraJavaOptions -Djava.security.properties=
    spark.openlineage.url https://<your-astro-base-domain>
