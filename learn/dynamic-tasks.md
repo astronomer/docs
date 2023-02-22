@@ -8,6 +8,10 @@ id: dynamic-tasks
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import CodeBlock from '@theme/CodeBlock';
+import mapping_elt_taskflow from '!!raw-loader!../code-samples/dags/dynamic-tasks/mapping_elt_taskflow.py';
+import mapping_elt_traditional from '!!raw-loader!../code-samples/dags/dynamic-tasks/mapping_elt_traditional.py';
+
 With the release of [Airflow 2.3](https://airflow.apache.org/blog/airflow-2.3.0/), you can write DAGs that dynamically generate parallel tasks at runtime. This feature, known as dynamic task mapping, is a paradigm shift for DAG design in Airflow.
 
 Prior to Airflow 2.3, tasks could only be generated dynamically at the time that the DAG was parsed, meaning you had to change your DAG code if you needed to adjust tasks based on some external factor. With dynamic task mapping, you can easily write DAGs that create tasks based on your current runtime environment.
@@ -285,11 +289,21 @@ The `zip()` function takes in an arbitrary number of iterables and uses their el
 - `zip(["a", "b"], [1], ["hi", "bye"], [19, 23], ["x", "y", "z"])` results in a zip object containing only one tuple: `("a", 1, "hi", 19, "x")`. This is because the shortest list provided only contains one element.
 - It is also possible to zip together different types of iterables. `zip(["a", "b"], {"hi", "bye"}, (19, 23))` results in a zip object containing: `('a', 'hi', 19), ('b', 'bye', 23)`.
 
-The following code snippet shows how a list of zipped arguments can be provided to the `expand()` function in order to create mapped tasks over sets of positional arguments. Each set of positional arguments is passed to the keyword argument `zipped_x_y_z`.
+The following code snippet shows how a list of zipped arguments can be provided to the `expand()` function in order to create mapped tasks over sets of positional arguments. In the TaskFlow API version of the DAG, each set of positional arguments is passed to the argument `zipped_x_y_z`. In the DAG using a traditional PythonOperator each set of positional arguments is unpacked due to `op_args` expecting an iterable and passed to the arguments `x`, `y` and `z`.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "xcom-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
 
 ```python
 # use the zip function to create three-tuples out of three lists
-zipped_arguments = list(zip([1,2,3], [10,20,30], [100,200,300]))
+zipped_arguments = list(zip([1, 2, 3], [10, 20, 30], [100, 200, 300]))
 # zipped_arguments contains: [(1,10,100), (2,20,200), (3,30,300)]
 
 # creating the mapped task instances using the TaskFlow API
@@ -300,6 +314,29 @@ def add_numbers(zipped_x_y_z):
 add_numbers.expand(zipped_x_y_z=zipped_arguments)
 ```
 
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+# use the zip function to create three-tuples out of three lists
+zipped_arguments = list(zip([1, 2, 3], [10, 20, 30], [100, 200, 300]))
+# zipped_arguments contains: [(1,10,100), (2,20,200), (3,30,300)]
+
+# function for the PythonOperator
+def add_numbers_function(x, y, z):
+    return x + y + z
+
+# dynamically mapped PythonOperator
+add_numbers = PythonOperator.partial(
+    task_id="add_numbers",
+    python_callable=add_numbers_function,
+).expand(op_args=zipped_arguments)
+```
+
+</TabItem>
+</Tabs>
+
 The task `add_numbers` will have three mapped task instances one for each tuple of positional arguments:
 
 - Map index 0: `111`
@@ -308,44 +345,88 @@ The task `add_numbers` will have three mapped task instances one for each tuple 
 
 #### Provide positional arguments with XComArg.zip()
 
-It is also possible to zip `XComArg` objects. If the upstream task has been defined using the TaskFlow API, provide the function call. If the upstream task uses a traditional operator, provide the `XComArg(task_object)`. In the following example, you can see the results of two TaskFlow API tasks and one traditional operator being zipped together to form the `zipped_arguments` (`[(1,10,100), (2,1000,200), (1000,1000,300)]`).
+It is also possible to zip `XComArg` objects. If the upstream task has been defined using the TaskFlow API, provide the function call. If the upstream task uses a traditional operator, provide `task_object.output` or `XcomArg(task_object)`. In the following example, you can see the results of three tasks being zipped together to form the `zipped_arguments` (`[(1, 10, 100), (2, 1000, 200), (1000, 1000, 300)]`).
 
-To mimic the behavior of the [`zip_longest()`](https://docs.python.org/3/library/itertools.html#itertools.zip_longest) function, you can add the optional `fillvalue` keyword argument to the `.zip()` method. If you specify a default value with `fillvalue`, the method produces as many tuples as the longest input has elements and fills in missing elements with the default value. If `fillvalue` was not specified in the example below, `zipped_arguments` would only contain one tuple `[(1,10,100)]` since the shortest list provided to the `.zip()` method is only one element long.
+To mimic the behavior of the [`zip_longest()`](https://docs.python.org/3/library/itertools.html#itertools.zip_longest) function, you can add the optional `fillvalue` keyword argument to the `.zip()` method. If you specify a default value with `fillvalue`, the method produces as many tuples as the longest input has elements and fills in missing elements with the default value. If `fillvalue` was not specified in the example below, `zipped_arguments` would only contain one tuple `[(1, 10, 100)]` since the shortest list provided to the `.zip()` method is only one element long.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId= "xcom-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional Syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
 
 ```python
-from airflow import XComArg
-
 @task
 def one_two_three():
-    return [1,2]
+    return [1, 2]
 
 @task
 def ten_twenty_thirty():
     return [10]
 
+@task
 def one_two_three_hundred():
-    return [100,200,300]
-
-one_two_three_hundred_task = PythonOperator(
-    task_id="one_two_three_hundred_task",
-    python_callable=one_two_three_hundred
-)
+    return [100, 200, 300]
 
 zipped_arguments = one_two_three().zip(
-    ten_twenty_thirty(),
-    XComArg(one_two_three_hundred_task),
-    fillvalue=1000
+    ten_twenty_thirty(), one_two_three_hundred(), fillvalue=1000
 )
-# zipped_arguments contains [(1,10,100), (2,1000,200), (1000,1000,300)]
+# zipped_arguments contains [(1, 10, 100), (2, 1000, 200), (1000, 1000, 300)]
 
 # creating the mapped task instances using the TaskFlow API
 @task
 def add_nums(zipped_x_y_z):
-    print(zipped_x_y_z)
     return zipped_x_y_z[0] + zipped_x_y_z[1] + zipped_x_y_z[2]
 
 add_nums.expand(zipped_x_y_z=zipped_arguments)
 ```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+def one_two_three_function():
+    return [1, 2]
+
+def ten_twenty_thirty_function():
+    return [10]
+
+def one_two_three_hundred_function():
+    return [100, 200, 300]
+
+one_two_three = PythonOperator(
+    task_id="one_two_three", python_callable=one_two_three_function
+)
+
+ten_twenty_thirty = PythonOperator(
+    task_id="ten_twenty_thirty", python_callable=ten_twenty_thirty_function
+)
+
+one_two_three_hundred = PythonOperator(
+    task_id="one_two_three_hundred", python_callable=one_two_three_hundred_function
+)
+
+zipped_arguments = one_two_three.output.zip(
+    ten_twenty_thirty.output, one_two_three_hundred.output, fillvalue=1000
+)
+# zipped_arguments contains [(1, 10, 100), (2, 1000, 200), (1000, 1000, 300)]
+
+# function that will be used in the dynamically mapped PythonOperator
+def add_nums_function(x, y, z):
+    return x + y + z
+
+add_nums = PythonOperator.partial(
+    task_id="add_nums", python_callable=add_nums_function
+).expand(op_args=zipped_arguments)
+```
+
+</TabItem>
+</Tabs>
 
 The add_nums task will have three mapped instances with the following results:
 
@@ -359,19 +440,16 @@ As of Airflow 2.5, you can dynamically map over a task group that uses the `@tas
 
 ```python
 # creating a task group using the decorator with the dynamic input my_num
-@task_group(
-    group_id="group1"
-)
+@task_group(group_id="group1")
 def tg1(my_num):
-
     @task
     def print_num(num):
         return num
-    
+
     @task
     def add_42(num):
         return num + 42
-    
+
     print_num(my_num) >> add_42(my_num)
 
 # creating 6 mapped task group instances of the task group group1
@@ -418,15 +496,11 @@ def skip_strings_starting_with_skip(string):
     if len(string) < 4:
         return string + "!"
     elif string[:4] == "skip":
-        raise AirflowSkipException(
-            f"Skipping {string}; as I was told!"
-        )
+        raise AirflowSkipException(f"Skipping {string}; as I was told!")
     else:
         return string + "!"
 
-# Transforming the output of the first task with the map function.
-# For non-TaskFlow operators, use
-# my_upstream_traditional_operator.output.map(mapping_function)
+# transforming the output of the first task with the map function.
 transformed_list = list_strings().map(skip_strings_starting_with_skip)
 
 # the task using dynamic task mapping on the transformed list of strings
@@ -455,27 +529,25 @@ listed_strings = PythonOperator(
 # a downstream task is dynamically mapped over it
 def skip_strings_starting_with_skip(string):
     if len(string) < 4:
-        return string + "!"
+        return [string + "!"]
     elif string[:4] == "skip":
-        raise AirflowSkipException(
-            f"Skipping {string}; as I was told!"
-        )
+        raise AirflowSkipException(f"Skipping {string}; as I was told!")
     else:
-        return string + "!"
+        return [string + "!"]
 
-# Transforming the output of the first task with the map function.
-transformed_list = listed_strings.output.map(
-    skip_strings_starting_with_skip
-)
+# transforming the output of the first task with the map function.
+# since `op_args` expects a list of lists it is important
+# each element of the list is wrapped in a list in the map function.
+transformed_list = listed_strings.output.map(skip_strings_starting_with_skip)
 
-# the task using dynamic task mapping on the transformed list of strings
-# note how you have to use the TaskFlow API in order to be able to let 
-# mappings be skipped with the AirflowSkipException
-@task
-def mapped_printing_task(string):
+# function to use in the dynamically mapped PythonOperator
+def mapped_printing_function(string):
     return "Say " + string
 
-mapped_printing_task.partial().expand(string=transformed_list)
+mapped_printing = PythonOperator.partial(
+    task_id="mapped_printing",
+    python_callable=mapped_printing_function,
+).expand(op_args=transformed_list)
 ```
 
 </TabItem>
@@ -509,171 +581,13 @@ The example DAG completes the following steps:
 
 <TabItem value="taskflow">
 
-```python
-from airflow.decorators import dag, task
-from airflow.providers.snowflake.transfers.s3_to_snowflake import (
-    S3ToSnowflakeOperator
-)
-from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
-from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-from airflow.providers.amazon.aws.operators.s3_copy_object import (
-    S3CopyObjectOperator
-)
-from airflow.providers.amazon.aws.operators.s3_delete_objects import (
-    S3DeleteObjectsOperator
-)
-
-from pendulum import datetime
-
-@task
-def get_s3_files(current_prefix):
-
-    s3_hook = S3Hook(aws_conn_id="s3")
-
-    current_files = s3_hook.list_keys(
-        bucket_name="my-bucket",
-        prefix=current_prefix+"/",
-        start_after_key=current_prefix+"/"
-    )
-
-    return [[file] for file in current_files]
-
-
-@dag(
-    start_date=datetime(2022, 4, 2),
-    catchup=False,
-    template_searchpath="/usr/local/airflow/include",
-    schedule="@daily"
-)
-def mapping_elt():
-
-    copy_to_snowflake = S3ToSnowflakeOperator.partial(
-        task_id="load_files_to_snowflake",
-        stage="MY_STAGE",
-        table="COMBINED_HOMES",
-        schema="MYSCHEMA",
-        file_format="(type = 'CSV',field_delimiter = ',', skip_header=1)",
-        snowflake_conn_id="snowflake"
-    ).expand(
-        s3_keys=get_s3_files(current_prefix="{{ ds_nodash }}")
-    )
-
-    move_s3 = S3CopyObjectOperator(
-        task_id="move_files_to_processed",
-        aws_conn_id="s3",
-        source_bucket_name="my-bucket",
-        source_bucket_key="{{ ds_nodash }}"+"/",
-        dest_bucket_name="my-bucket",
-        dest_bucket_key="processed/"+"{{ ds_nodash }}"+"/"
-    )
-
-    delete_landing_files = S3DeleteObjectsOperator(
-        task_id="delete_landing_files",
-        aws_conn_id="s3",
-        bucket="my-bucket",
-        prefix="{{ ds_nodash }}"+"/"
-    )
-
-    transform_in_snowflake = SnowflakeOperator(
-        task_id="run_transformation_query",
-        sql="/transformation_query.sql",
-        snowflake_conn_id="snowflake"
-    )
-
-    copy_to_snowflake >> [move_s3, transform_in_snowflake]
-    move_s3 >> delete_landing_files
-
-
-mapping_elt()
-
-```
+<CodeBlock language="python">{mapping_elt_taskflow}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional">
 
-```python
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.providers.snowflake.transfers.s3_to_snowflake import (
-    S3ToSnowflakeOperator
-)
-from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
-from airflow.providers.amazon.aws.hooks.s3 import S3Hook
-from airflow.providers.amazon.aws.operators.s3_copy_object import (
-    S3CopyObjectOperator
-)
-from airflow.providers.amazon.aws.operators.s3_delete_objects import (
-    S3DeleteObjectsOperator
-)
-
-from pendulum import datetime
-
-
-def get_s3_files(current_prefix):
-
-    s3_hook = S3Hook(aws_conn_id="s3")
-
-    current_files = s3_hook.list_keys(
-        bucket_name="my-bucket",
-        prefix=current_prefix+"/",
-        start_after_key=current_prefix+"/"
-    )
-
-    return [[file] for file in current_files]
-
-
-with DAG(
-    "mapping_elt",
-    start_date=datetime(2022, 4, 2),
-    catchup=False,
-    template_searchpath="/usr/local/airflow/include",
-    schedule="@daily"
-):
-
-    get_s3_files_task = PythonOperator(
-        task_id="get_s3_files",
-        python_callable=get_s3_files,
-        op_kwargs={"current_prefix": "{{ ds_nodash }}"}
-    )
-
-    copy_to_snowflake = S3ToSnowflakeOperator.partial(
-        task_id="load_files_to_snowflake",
-        stage="MY_STAGE",
-        table="COMBINED_HOMES",
-        schema="MYSCHEMA",
-        file_format="(type = 'CSV',field_delimiter = ',', skip_header=1)",
-        snowflake_conn_id="snowflake"
-    ).expand(
-        s3_keys=get_s3_files_task.output
-    )
-
-    move_s3 = S3CopyObjectOperator(
-        task_id="move_files_to_processed",
-        aws_conn_id="s3",
-        source_bucket_name="my-bucket",
-        source_bucket_key="{{ ds_nodash }}"+"/",
-        dest_bucket_name="my-bucket",
-        dest_bucket_key="processed/"+"{{ ds_nodash }}"+"/"
-    )
-
-    delete_landing_files = S3DeleteObjectsOperator(
-        task_id="delete_landing_files",
-        aws_conn_id="s3",
-        bucket="my-bucket",
-        prefix="{{ ds_nodash }}"+"/"
-    )
-
-    transform_in_snowflake = SnowflakeOperator(
-        task_id="run_transformation_query",
-        sql="/transformation_query.sql",
-        snowflake_conn_id="snowflake"
-    )
-
-    copy_to_snowflake >> [move_s3, transform_in_snowflake]
-    move_s3 >> delete_landing_files
-
-```
+<CodeBlock language="python">{mapping_elt_traditional}</CodeBlock>
 
 </TabItem>
 </Tabs>
