@@ -3,7 +3,7 @@ sidebar_label: 'CI/CD Templates'
 title: 'Automate code deploys with CI/CD'
 id: ci-cd
 toc_min_heading_level: 2
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 <head>
