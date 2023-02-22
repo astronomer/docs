@@ -325,6 +325,26 @@ tell_me_what_to_do = PythonOperator(
 
     ![All Task Docs](/img/guides/task_docs_all.png)
 
+## Step 5: Add notes to a task instance and DAG run
+
+Another way of adding information to your DAGs and tasks is to add notes to task instances and DAG runs from the Grid View in the Airflow UI. This feature is useful if you need to add information specific to a single run of your DAG. 
+
+1. Go to the **Grid View** of the `docs_example_dag.py` DAG you created in [Step 2](#step-2-create-a-new-dag).
+
+2. Select a task instance or DAG run.
+
+3. Click **Details** > **Task Instance Notes** or **DAG Run notes** > **Add Note**.
+
+4. Write a note and click **Save Note**.
+
+ ![Add task note](/img/guides/2_5_task_notes.png)
+
+:::note
+
+This feature is only available in Airflow version 2.5+. Ensure your Dockerfile is using at least version 7.0 of Astro runtime to complete this step.
+
+:::
+
 ## Conclusion
 
 Congratulations! You now know how to add fancy documentation to both your DAGs and your Airflow tasks.
