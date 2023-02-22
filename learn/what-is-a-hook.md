@@ -85,8 +85,8 @@ The following example DAG uses [Airflow Decorators](https://docs.astronomer.io/l
 
 The following example DAG completes the following steps:
 
-- A decorated Python operator with a manually implemented `S3Hook` reads three specific keys from Amazon S3 with the `read_key` method and then returns a dictionary with the file contents converted to integers.
-- A second decorated Python operator completes a simple sum check using the results from the first task. 
+- A Python task with a manually implemented `S3Hook` reads three specific keys from Amazon S3 with the `read_key` method and then returns a dictionary with the file contents converted to integers.
+- A second Python task completes a simple sum check using the results from the first task. 
 - The SlackHook `call` method posts the sum check results to a Slack channel and returns the response from the Slack API.
 
 <Tabs
