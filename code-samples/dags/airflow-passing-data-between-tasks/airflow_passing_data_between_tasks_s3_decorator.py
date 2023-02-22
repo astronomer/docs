@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from pendulum import datetime, duration
 from io import StringIO
 
 import pandas as pd
@@ -65,7 +65,7 @@ def process_data(cat_fact_number):
     start_date=datetime(2021, 1, 1),
     max_active_runs=1,
     schedule="@daily",
-    default_args={"retries": 1, "retry_delay": timedelta(minutes=1)},
+    default_args={"retries": 1, "retry_delay": duration(minutes=1)},
     catchup=False,
 )
 def intermediary_data_storage_dag():

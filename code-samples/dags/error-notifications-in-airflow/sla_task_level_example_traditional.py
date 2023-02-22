@@ -1,5 +1,5 @@
 import time
-from datetime import datetime, timedelta
+from pendulum import datetime, duration
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
@@ -24,16 +24,16 @@ with DAG(
     "sla-dag",
     start_date=datetime(2023, 1, 1),
     max_active_runs=1,
-    schedule=timedelta(minutes=2),
+    schedule=duration(minutes=2),
     default_args=default_args,
     catchup=False,
 ) as dag:
-    t0 = EmptyOperator(task_id="start", sla=timedelta(seconds=50))
-    t1 = EmptyOperator(task_id="end", sla=timedelta(seconds=500))
+    t0 = EmptyOperator(task_id="start", sla=duration(seconds=50))
+    t1 = EmptyOperator(task_id="end", sla=duration(seconds=500))
     sla_task = PythonOperator(
         task_id="sla_task",
         python_callable=my_custom_function,
-        sla=timedelta(seconds=5),
+        sla=duration(seconds=5),
     )
 
     t0 >> sla_task >> t1

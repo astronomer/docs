@@ -1,5 +1,5 @@
 import time
-from datetime import datetime, timedelta
+from pendulum import datetime, duration
 
 from airflow.decorators import dag, task
 from airflow.operators.empty import EmptyOperator
@@ -18,7 +18,7 @@ default_args = {
     "email_on_failure": True,
     "email": "noreply@astronomer.io",
     "email_on_retry": False,
-    "sla": timedelta(seconds=30),
+    "sla": duration(seconds=30),
 }
 
 
@@ -26,7 +26,7 @@ default_args = {
     "sla-dag",
     start_date=datetime(2023, 1, 1),
     max_active_runs=1,
-    schedule=timedelta(minutes=2),
+    schedule=duration(minutes=2),
     default_args=default_args,
     catchup=False,
 )

@@ -1,10 +1,9 @@
-import os
-from datetime import datetime
+from pendulum import datetime
 import pandas as pd
 from airflow.decorators import dag
 from astro.files import File
 from astro import sql as aql
-from astro.sql.table import Metadata, Table
+from astro.sql.table import Table
 
 SNOWFLAKE_CONN_ID = "snowflake_conn"
 AWS_CONN_ID = "aws_conn"

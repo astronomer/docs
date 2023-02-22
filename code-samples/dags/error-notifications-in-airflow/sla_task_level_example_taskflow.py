@@ -1,11 +1,11 @@
 import time
-from datetime import datetime, timedelta
+from pendulum import datetime, duration
 
 from airflow.decorators import dag, task
 from airflow.operators.empty import EmptyOperator
 
 
-@task(task_id="sla_task", sla=timedelta(seconds=5))
+@task(task_id="sla_task", sla=duration(seconds=5))
 def my_custom_function():
     print("task is sleeping")
     time.sleep(40)
@@ -24,13 +24,13 @@ default_args = {
 @dag(
     start_date=datetime(2023, 1, 1),
     max_active_runs=1,
-    schedule=timedelta(minutes=2),
+    schedule=duration(minutes=2),
     default_args=default_args,
     catchup=False,
 )
 def sla_dag_task_level():
-    t0 = EmptyOperator(task_id="start", sla=timedelta(seconds=50))
-    t1 = EmptyOperator(task_id="end", sla=timedelta(seconds=500))
+    t0 = EmptyOperator(task_id="start", sla=duration(seconds=50))
+    t1 = EmptyOperator(task_id="end", sla=duration(seconds=500))
     sla_task = my_custom_function()
 
     t0 >> sla_task >> t1
