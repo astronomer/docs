@@ -50,6 +50,7 @@ For more information about how these changes can affect the Astro log in experie
 You can now create clusters in the following regions on an Astro - Hosted installation.
 
 - AWS
+  
     - `ap-northeast-1`
     - `ap-southeast-2`
     - `eu-central-1`
