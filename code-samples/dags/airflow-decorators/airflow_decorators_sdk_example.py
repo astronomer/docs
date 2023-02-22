@@ -15,6 +15,7 @@ from astro.sql.table import Table
 SNOWFLAKE_CONN_ID = "snowflake_conn"
 FILE_PATH = "/usr/local/airflow/include/"
 
+
 # The first transformation combines data from the two source csv's
 @transform
 def extract_data(homes1: Table, homes2: Table):
