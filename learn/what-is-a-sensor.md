@@ -72,122 +72,12 @@ The following example DAG shows how you might use the `SqlSensor` sensor:
 
 <TabItem value="taskflow">
 
-```python
-from airflow.decorators import task, dag
-from airflow.sensors.sql import SqlSensor
-
-from typing import Dict
-from pendulum import datetime
-
-
-def _success_criteria(record):
-    return record
-
-
-def _failure_criteria(record):
-    return True if not record else False
-
-
-@dag(
-    description="DAG in charge of processing partner data",
-    start_date=datetime(2021, 1, 1),
-    schedule="@daily",
-    catchup=False
-)
-def partner():
-
-    waiting_for_partner = SqlSensor(
-        task_id="waiting_for_partner",
-        conn_id="postgres",
-        sql="sql/CHECK_PARTNER.sql",
-        parameters={
-            "name": "partner_a"
-        },
-        success=_success_criteria,
-        failure=_failure_criteria,
-        fail_on_empty=False,
-        poke_interval=20,
-        mode="reschedule",
-        timeout=60 * 5
-    )
-
-    @task
-    def validation() -> Dict[str, str]:
-        return {"partner_name": "partner_a", "partner_validation": True}
-
-    @task
-    def storing():
-        print("storing")
-
-    waiting_for_partner >> validation() >> storing()
-
-
-partner()
-
-```
+<CodeBlock language="python">{sql_sensor_example_taskflow}</CodeBlock>
 
 </TabItem>
 <TabItem value="traditional">
 
-```python
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.sensors.sql import SqlSensor
-
-from typing import Dict
-from pendulum import datetime
-
-
-def _success_criteria(record):
-    return record
-
-
-def _failure_criteria(record):
-    return True if not record else False
-
-
-with DAG(
-    dag_id="partner",
-    description="DAG in charge of processing partner data",
-    start_date=datetime(2021, 1, 1),
-    schedule="@daily",
-    catchup=False
-):
-
-    waiting_for_partner = SqlSensor(
-        task_id="waiting_for_partner",
-        conn_id="postgres",
-        sql="sql/CHECK_PARTNER.sql",
-        parameters={
-            "name": "partner_a"
-        },
-        success=_success_criteria,
-        failure=_failure_criteria,
-        fail_on_empty=False,
-        poke_interval=20,
-        mode="reschedule",
-        timeout=60 * 5
-    )
-
-    def validation_function() -> Dict[str, str]:
-        return {"partner_name": "partner_a", "partner_validation": True}
-
-    validation = PythonOperator(
-        task_id="validation",
-        python_callable=validation_function
-    )
-
-    def storing_function():
-        print("storing")
-
-    storing = PythonOperator(
-        task_id="storing",
-        python_callable=storing_function
-    )
-
-    waiting_for_partner >> validation >> storing
-
-```
+<CodeBlock language="python">{sql_sensor_example_traditional}</CodeBlock>
 
 </TabItem>
 </Tabs>
@@ -198,58 +88,7 @@ This DAG waits for data to be available in a Postgres database before running va
 
 Starting in Airflow 2.5, you can use the `@task.sensor` decorator from the TaskFlow API to use any Python function that returns a `PokeReturnValue` as an instance of the BaseSensorOperator. The following DAG shows how to use the sensor decorator:
 
-```python
-from airflow.decorators import dag, task
-from pendulum import datetime
-import requests
-
-# importing the PokeReturnValue
-from airflow.sensors.base import PokeReturnValue
-
-@dag(
-    start_date=datetime(2022, 12, 1),
-    schedule="@daily",
-    catchup=False
-)
-def sensor_decorator():
-
-    # supply inputs to the BaseSensorOperator parameters in the decorator
-    @task.sensor(
-        poke_interval=30,
-        timeout=3600,
-        mode="poke"
-    )
-    def check_shibe_availability() -> PokeReturnValue:
-
-        r = requests.get("http://shibe.online/api/shibes?count=1&urls=true")
-        print(r.status_code)
-
-        # set the condition to True if the API response was 200
-        if r.status_code == 200:
-            condition_met=True
-            operator_return_value=r.json()
-        else:
-            condition_met=False
-            operator_return_value=None
-            print(f"Shibe URL returned the status code {r.status_code}")
-
-        # the function has to return a PokeReturnValue
-        # if is_done = True the sensor will exit successfully, if 
-        # is_done=False, the sensor will either poke or be rescheduled
-        return PokeReturnValue(is_done=condition_met, xcom_value=operator_return_value)
-
-
-    # print the URL to the picture
-    @task
-    def print_shibe_picture_url(url):
-        print(url)
-
-
-    print_shibe_picture_url(check_shibe_availability())
-
-
-sensor_decorator()
-```
+<CodeBlock language="python">{sensor_decorator_example}</CodeBlock>
 
 Here, `@task.sensor` decorates the `check_shibe_availability()` function, which checks if a given API returns a 200 status code. If the API returns a 200 status code, the sensor task is marked as successful. If any other status code is returned, the sensor pokes again after the `poke_interval` has passed.
 
