@@ -12,7 +12,6 @@ from pendulum import datetime
 
 @task
 def get_s3_files(current_prefix):
-
     s3_hook = S3Hook(aws_conn_id="s3")
 
     current_files = s3_hook.list_keys(
