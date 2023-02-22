@@ -12,6 +12,10 @@ id: task-groups
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import CodeBlock from '@theme/CodeBlock';
+import task_group_example from '!!raw-loader!../code-samples/dags/task-groups/task_group_example.py';
+import task_group_mapping_example from '!!raw-loader!../code-samples/dags/task-groups/task_group_mapping_example.py';
+
 Use [task groups](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#taskgroups) to organize tasks in the Airflow UI DAG graph view.
 
 In this guide, you'll learn how to create task groups and review some example DAGs that demonstrate their scalability.
@@ -84,52 +88,7 @@ def my_dependent_tasks():
 
 The following DAG shows a full example implementation of the task group decorator, including passing data between tasks before and after the task group:
 
-```python
-import json
-from airflow.decorators import dag, task, task_group
-
-import pendulum
-
-@dag(schedule=None, start_date=pendulum.datetime(2021, 1, 1, tz="UTC"), catchup=False)
-
-def task_group_example():
-
-    @task(task_id='extract', retries=2)
-    def extract_data():
-        data_string = '{"1001": 301.27, "1002": 433.21, "1003": 502.22}'
-        order_data_dict = json.loads(data_string)
-        return order_data_dict
-
-    @task()
-    def transform_sum(order_data_dict: dict):
-        total_order_value = 0
-        for value in order_data_dict.values():
-            total_order_value += value
-
-        return {"total_order_value": total_order_value}
-
-    @task()
-    def transform_avg(order_data_dict: dict):
-        total_order_value = 0
-        for value in order_data_dict.values():
-            total_order_value += value
-            avg_order_value = total_order_value / len(order_data_dict)
-
-        return {"avg_order_value": avg_order_value}
-
-    @task_group
-    def transform_values(order_data_dict):
-        return {'avg': transform_avg(order_data_dict), 'total': transform_sum(order_data_dict)}
-
-    @task()
-    def load(order_values: dict):
-        print(f"Total order value is: {order_values['total']['total_order_value']:.2f} and average order value is: {order_values['avg']['avg_order_value']:.2f}")
-
-    load(transform_values(extract_data()))
-
-    
-task_group_example = task_group_example()
-```
+<CodeBlock language="python">{task_group_example}</CodeBlock>
 
 The resulting DAG looks similar to this image:
 
@@ -144,58 +103,7 @@ There are a few things to consider when using the task group decorator:
 
 As of Airflow 2.5, you can use [dynamic task mapping](dynamic-tasks.md) with the `@task_group` decorator to dynamically map over task groups. The following DAG shows how you can dynamically maps over a task group with different inputs for a given parameter.
 
-```python
-from airflow.decorators import dag, task_group, task
-from pendulum import datetime
-
-@dag(
-    start_date=datetime(2022, 12, 1),
-    schedule=None,
-    catchup=False,
-)
-def task_group_mapping_example():
-
-    # creating a task group using the decorator with the dynamic input my_num
-    @task_group(
-        group_id="group1"
-    )
-    def tg1(my_num):
-
-        @task
-        def print_num(num):
-            return num
-        
-        @task
-        def add_42(num):
-            return num + 42
-        
-        print_num(my_num) >> add_42(my_num)
-
-    # a downstream task to print out resulting XComs
-    @task
-    def pull_xcom(**context):
-
-        pulled_xcom = context["ti"].xcom_pull(
-            # reference a task in a task group with task_group_id.task_id
-            task_ids=['group1.add_42'], 
-            # only pull xcom from specific mapped task group instances (2.5 feature)
-            map_indexes=[2, 3], 
-            key="return_value"
-        )
-
-        # will print out a list of results from map index 2 and 3 of the add_42 task 
-        print(pulled_xcom)
-
-    # creating 6 mapped task group instances of the task group group1 (2.5 feature)
-    tg1_object = tg1.expand(my_num=[19, 23, 42, 8, 7, 108])
-
-    # setting dependencies
-    tg1_object >> pull_xcom()
-
-
-task_group_mapping_example()
-
-```
+<CodeBlock language="python">{task_group_mapping_example}</CodeBlock>
 
 This DAG dynamically maps over the task group `group1` with different inputs for the `my_num` parameter. 6 mapped task group instances are created, one for each input. Within each mapped task group instance two tasks will run using that instances' value for `my_num` as an input. The `pull_xcom()` task downstream of the dynamically mapped task group shows how to access a specific [XCom](airflow-passing-data-between-tasks.md) value from a list of mapped task group instances (`map_indexes`).
 
