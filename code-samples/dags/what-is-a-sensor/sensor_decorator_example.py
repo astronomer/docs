@@ -11,7 +11,6 @@ def sensor_decorator():
     # supply inputs to the BaseSensorOperator parameters in the decorator
     @task.sensor(poke_interval=30, timeout=3600, mode="poke")
     def check_shibe_availability() -> PokeReturnValue:
-
         r = requests.get("http://shibe.online/api/shibes?count=1&urls=true")
         print(r.status_code)
 
