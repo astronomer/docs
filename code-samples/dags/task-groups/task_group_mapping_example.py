@@ -24,7 +24,6 @@ def task_group_mapping_example():
     # a downstream task to print out resulting XComs
     @task
     def pull_xcom(**context):
-
         pulled_xcom = context["ti"].xcom_pull(
             # reference a task in a task group with task_group_id.task_id
             task_ids=["group1.add_42"],
