@@ -28,7 +28,6 @@ with DAG(
     default_args=default_args,
     catchup=False,
 ) as dag:
-
     t0 = EmptyOperator(task_id="start", sla=timedelta(seconds=50))
     t1 = EmptyOperator(task_id="end", sla=timedelta(seconds=500))
     sla_task = PythonOperator(
