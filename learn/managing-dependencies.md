@@ -15,6 +15,8 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import dependencies_example_1 from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_example_1.py';
 import dependencies_example_2_taskflow from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_example_2_taskflow.py';
+import dependencies_branch_example_taskflow from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_branch_example_taskflow.py';
+import dependencies_branch_example_traditional from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_branch_example_traditional.py';
 
 [Dependencies](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#relationships) are a powerful and popular Airflow feature. In Airflow, your pipelines are defined as Directed Acyclic Graphs (DAGs). Each task is a node in the graph and dependencies are the directed edges that determine how to move through the graph. Because of this, dependencies are key to following data engineering best practices because they help you define flexible pipelines with atomic tasks.
 
