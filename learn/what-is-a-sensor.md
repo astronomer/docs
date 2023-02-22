@@ -12,6 +12,11 @@ id: what-is-a-sensor
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+import CodeBlock from '@theme/CodeBlock';
+import sensor_decorator_example from '!!raw-loader!../code-samples/dags/what-is-a-sensor/sensor_decorator_example.py';
+import sql_sensor_example_taskflow from '!!raw-loader!../code-samples/dags/what-is-a-sensor/sql_sensor_example_taskflow.py';
+import sql_sensor_example_traditional from '!!raw-loader!../code-samples/dags/what-is-a-sensor/sql_sensor_example_traditional.py';
+
 [Apache Airflow sensors](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/sensors.html) are a special kind of operator that are designed to wait for something to happen. When sensors run, they check to see if a certain condition is met before they are marked successful and let their downstream tasks execute. When used properly, they can be a great tool for making your DAGs more event driven.
 
 In this guide, you'll learn how sensors are used in Airflow, best practices for implementing sensors in production, and how to use deferrable versions of sensors.
