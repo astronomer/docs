@@ -45,7 +45,6 @@ def cat_data_s3_to_snowflake():
     t0 = EmptyOperator(task_id="start")
 
     for i in range(number_of_cat_facts):
-
         snowflake = S3ToSnowflakeOperator(
             task_id="upload_{0}_snowflake".format(i),
             s3_keys=["cat_fact_{0}.csv".format(i)],

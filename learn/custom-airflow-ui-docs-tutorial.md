@@ -272,7 +272,7 @@ To add documentation to your task, follow these steps:
     defaultValue="TaskFlowAPI"
     groupId= "code-variations"
     values={[
-        {label: 'TaskFlowAPI', value: 'TaskFlowAPI'},
+        {label: 'TaskFlow API', value: 'TaskFlowAPI'},
         {label: 'Traditional Syntax', value: 'traditional'},
     ]}>
 

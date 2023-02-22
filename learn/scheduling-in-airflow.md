@@ -267,16 +267,6 @@ Because timetables are plugins, you'll need to restart the Airflow Scheduler and
 
 In the DAG, you can import the custom timetable plugin and use it to schedule the DAG by setting the `schedule` parameter (in pre-2.4 Airflow you will need to use the `timetable` parameter):
 
-<Tabs
-    defaultValue="taskflow"
-    groupId= "timetable-use"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
-    ]}>
-
-<TabItem value="taskflow">
-
 ```python
 from uneven_intervals_timetable import UnevenIntervalsTimetable
 
@@ -292,28 +282,6 @@ from uneven_intervals_timetable import UnevenIntervalsTimetable
     catchup=True
 )
 ```
-</TabItem>
-
-<TabItem value="traditional">
-
-```python
-from uneven_intervals_timetable import UnevenIntervalsTimetable
-
-with DAG(
-    dag_id="example_timetable_dag",
-    start_date=datetime(2021, 10, 9),
-    max_active_runs=1,
-    schedule=UnevenIntervalsTimetable(),
-    default_args={
-        "retries": 1,
-        "retry_delay": duration(minutes=3),
-    },
-    catchup=True
-):
-```
-
-</TabItem>
-</Tabs>
 
 Looking at the Tree View in the UI, you can see that this DAG has run twice per day at 6:00 and 16:30 since the start date of 2021-10-09.
 
