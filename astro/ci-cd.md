@@ -586,6 +586,196 @@ Your buildspec.yml file now triggers a code push to an Astro Deployment every ti
 </TabItem>
 </Tabs>
 
+## Azure DevOps
+
+To automate code deploys to a Deployment using [Azure DevOps](https://dev.azure.com/), complete the following setup in a Git-based repository that hosts an Astro project:
+
+1. Set the following environment variables as [DevOps pipeline variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch):
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. Create a new YAML file in `astro-devops-cicd.yaml` at the root of the repository that includes the following configuration:
+
+    ```
+    trigger:
+    - main
+
+    pr: none
+
+    stages:
+    - stage: deploy
+      jobs:
+      - job: deploy_image
+        pool:
+          vmImage: 'Ubuntu-latest'
+        steps:
+        - script: |
+            curl -sSL install.astronomer.io | sudo bash -s
+            astro deploy
+          env:
+            ASTRONOMER_KEY_ID: $(ASTRONOMER_KEY_ID)
+            ASTRONOMER_KEY_SECRET: $(ASTRONOMER_KEY_SECRET)
+    ```
+
+## Bitbucket
+
+To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org/), complete the following setup in a Git-based repository that hosts an Astro project:
+
+1. Set the following environment variables as [Bitbucket pipeline variables](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. Create a new YAML file in `bitbucket-pipelines.yml` at the root of the repository that includes the following configuration:
+
+    ```
+    pipelines:
+      pull-requests: # The branch pattern under pull requests defines the *source* branch.
+        dev:
+          - step:
+              name: Deploy to Production
+              deployment: Production
+              script:
+                - curl -sSL install.astronomer.io | sudo bash -s
+                - astro deploy
+              services:
+                - docker
+    ```
+
+
+## CircleCI
+
+To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
+
+1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
+
+    ```
+    # Use the latest CircleCI pipeline process engine version.
+    # See: https://circleci.com/docs/2.0/configuration-reference
+    version: 2.1
+
+    orbs:
+      docker: circleci/docker@2.0.1
+      github-cli: circleci/github-cli@2.0.0
+
+    # Define a job to be invoked later in a workflow.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+    jobs:
+
+      build_image_and_deploy:
+        docker:
+          - image: cimg/base:stable
+        # Add steps to the job
+        # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+        steps:
+          - setup_remote_docker:
+              version: 20.10.11
+          - checkout
+          - run:
+              name: "Setup custom environment variables"
+              command: |
+                echo export ASTRONOMER_KEY_ID=${ASTRONOMER_KEY_ID} >> $BASH_ENV
+                echo export ASTRONOMER_KEY_SECRET=${ASTRONOMER_KEY_SECRET} >> $BASH_ENV
+          - run:
+              name: "Deploy to Astro"
+              command: |
+                curl -sSL install.astronomer.io | sudo bash -s
+                astro deploy -f
+
+    # Invoke jobs with workflows
+    # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+    workflows:
+      version: 2.1
+      build-and-deploy-prod:
+        jobs:
+          - build_image_and_deploy:
+              context:
+                 - <YOUR-CIRCLE-CI-CONTEXT>
+              filters:
+                branches:
+                  only:
+                    - main
+    ```
+
+## Drone
+
+To automate code deploys to a Deployment using a Docker-based [Drone CI](https://www.drone.io/) pipeline, complete the following setup in a Git-based repository that hosts an Astro project.
+
+This pipeline configuration requires:
+
+- A functional Drone [server](https://docs.drone.io/server/overview/) and [Docker runner](https://docs.drone.io/runner/docker/overview/).
+- A user with admin privileges to your Drone server.
+
+1. Set the following environment variables as repository-level [secrets](https://docs.drone.io/secret/repository/) on Drone:
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. In your Drone server, open your Astro project repository and go to **Settings** > **General**. Under **Project Settings**, turn on the **Trusted** setting.
+
+3. In the top level of your Git repository, create a file called `.drone.yml` that includes the following configuration:
+
+    ```
+    ---
+    kind: pipeline
+    type: docker
+    name: deploy
+
+    steps:
+      - name: install
+        image: debian
+        commands:
+        - apt-get update
+        - apt-get -y install curl
+        - curl -sSL install.astronomer.io | sudo bash -s
+      - name: wait
+        image: docker:dind
+        volumes:
+        - name: dockersock
+          path: /var/run
+        commands:
+        - sleep 5
+      - name: deploy
+        image: docker:dind
+        volumes:
+        - name: dockersock
+          path: /var/run
+        commands:
+        - astro deploy -f
+        depends on:
+        - wait
+
+        environment:
+          ASTRONOMER_KEY_ID:
+            from_secret: ASTRONOMER_KEY_ID
+          ASTRONOMER_KEY_SECRET:
+            from_secret: ASTRONOMER_KEY_SECRET
+
+    services:
+    - name: docker
+      image: docker:dind
+      privileged: true
+      volumes:
+      - name: dockersock
+        path: /var/run
+
+    volumes:
+    - name: dockersock
+      temp: {}
+
+    trigger:
+      branch:
+      - main
+      event:
+      - push
+    ```
+
 ## GitLab
 
 
@@ -862,192 +1052,3 @@ Use the following template to implement DAG-only deploys with Jenkins.
         }
     }`}</code></pre>
 
-## Azure DevOps
-
-To automate code deploys to a Deployment using [Azure DevOps](https://dev.azure.com/), complete the following setup in a Git-based repository that hosts an Astro project:
-
-1. Set the following environment variables as [DevOps pipeline variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch):
-
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-
-2. Create a new YAML file in `astro-devops-cicd.yaml` at the root of the repository that includes the following configuration:
-
-    ```
-    trigger:
-    - main
-
-    pr: none
-
-    stages:
-    - stage: deploy
-      jobs:
-      - job: deploy_image
-        pool:
-          vmImage: 'Ubuntu-latest'
-        steps:
-        - script: |
-            curl -sSL install.astronomer.io | sudo bash -s
-            astro deploy
-          env:
-            ASTRONOMER_KEY_ID: $(ASTRONOMER_KEY_ID)
-            ASTRONOMER_KEY_SECRET: $(ASTRONOMER_KEY_SECRET)
-    ```
-
-## Bitbucket
-
-To automate code deploys to a Deployment using [Bitbucket](https://bitbucket.org/), complete the following setup in a Git-based repository that hosts an Astro project:
-
-1. Set the following environment variables as [Bitbucket pipeline variables](https://support.atlassian.com/bitbucket-cloud/docs/variables-and-secrets/):
-
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-
-2. Create a new YAML file in `bitbucket-pipelines.yml` at the root of the repository that includes the following configuration:
-
-    ```
-    pipelines:
-      pull-requests: # The branch pattern under pull requests defines the *source* branch.
-        dev:
-          - step:
-              name: Deploy to Production
-              deployment: Production
-              script:
-                - curl -sSL install.astronomer.io | sudo bash -s
-                - astro deploy
-              services:
-                - docker
-    ```
-
-
-## CircleCI
-
-To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
-
-1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
-
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-
-2. Create a new YAML file in `.circleci/config.yml` that includes the following configuration:
-
-    ```
-    # Use the latest CircleCI pipeline process engine version.
-    # See: https://circleci.com/docs/2.0/configuration-reference
-    version: 2.1
-
-    orbs:
-      docker: circleci/docker@2.0.1
-      github-cli: circleci/github-cli@2.0.0
-
-    # Define a job to be invoked later in a workflow.
-    # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
-    jobs:
-
-      build_image_and_deploy:
-        docker:
-          - image: cimg/base:stable
-        # Add steps to the job
-        # See: https://circleci.com/docs/2.0/configuration-reference/#steps
-        steps:
-          - setup_remote_docker:
-              version: 20.10.11
-          - checkout
-          - run:
-              name: "Setup custom environment variables"
-              command: |
-                echo export ASTRONOMER_KEY_ID=${ASTRONOMER_KEY_ID} >> $BASH_ENV
-                echo export ASTRONOMER_KEY_SECRET=${ASTRONOMER_KEY_SECRET} >> $BASH_ENV
-          - run:
-              name: "Deploy to Astro"
-              command: |
-                curl -sSL install.astronomer.io | sudo bash -s
-                astro deploy -f
-
-    # Invoke jobs with workflows
-    # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-    workflows:
-      version: 2.1
-      build-and-deploy-prod:
-        jobs:
-          - build_image_and_deploy:
-              context:
-                 - <YOUR-CIRCLE-CI-CONTEXT>
-              filters:
-                branches:
-                  only:
-                    - main
-    ```
-
-## Drone
-
-To automate code deploys to a Deployment using a Docker-based [Drone CI](https://www.drone.io/) pipeline, complete the following setup in a Git-based repository that hosts an Astro project.
-
-This pipeline configuration requires:
-
-- A functional Drone [server](https://docs.drone.io/server/overview/) and [Docker runner](https://docs.drone.io/runner/docker/overview/).
-- A user with admin privileges to your Drone server.
-
-1. Set the following environment variables as repository-level [secrets](https://docs.drone.io/secret/repository/) on Drone:
-
-    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
-    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
-
-2. In your Drone server, open your Astro project repository and go to **Settings** > **General**. Under **Project Settings**, turn on the **Trusted** setting.
-
-3. In the top level of your Git repository, create a file called `.drone.yml` that includes the following configuration:
-
-    ```
-    ---
-    kind: pipeline
-    type: docker
-    name: deploy
-
-    steps:
-      - name: install
-        image: debian
-        commands:
-        - apt-get update
-        - apt-get -y install curl
-        - curl -sSL install.astronomer.io | sudo bash -s
-      - name: wait
-        image: docker:dind
-        volumes:
-        - name: dockersock
-          path: /var/run
-        commands:
-        - sleep 5
-      - name: deploy
-        image: docker:dind
-        volumes:
-        - name: dockersock
-          path: /var/run
-        commands:
-        - astro deploy -f
-        depends on:
-        - wait
-
-        environment:
-          ASTRONOMER_KEY_ID:
-            from_secret: ASTRONOMER_KEY_ID
-          ASTRONOMER_KEY_SECRET:
-            from_secret: ASTRONOMER_KEY_SECRET
-
-    services:
-    - name: docker
-      image: docker:dind
-      privileged: true
-      volumes:
-      - name: dockersock
-        path: /var/run
-
-    volumes:
-    - name: dockersock
-      temp: {}
-
-    trigger:
-      branch:
-      - main
-      event:
-      - push
-    ```
