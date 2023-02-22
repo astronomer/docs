@@ -94,16 +94,6 @@ When the catchup parameter for a DAG is set to `True`, at the time the DAG is tu
 
 Catchup can be controlled by setting the parameter in your DAG's arguments. By default, catchup is set to `True`. This example DAG doesn't use catchup:
 
-<Tabs
-    defaultValue="taskflow"
-    groupId= "catchup-example"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
-    ]}>
-
-<TabItem value="taskflow">
-
 ```python
 @dag(
     dag_id="example_dag",
@@ -117,26 +107,6 @@ Catchup can be controlled by setting the parameter in your DAG's arguments. By d
     catchup=False
 )
 ```
-
-</TabItem>
-<TabItem value="traditional">
-
-```python
-with DAG(
-    dag_id="example_dag",
-    start_date=datetime(2021, 10, 9), 
-    max_active_runs=1,
-    schedule=UnevenIntervalsTimetable(),
-    default_args={
-        "retries": 1,
-        "retry_delay": timedelta(minutes=3),
-    },
-    catchup=False
-) as dag:
-```
-
-</TabItem>
-</Tabs>
 
 Catchup is a powerful feature, but it should be used with caution. For example, if you deploy a DAG that runs every 5 minutes with a start date of 1 year ago and don't set catchup to `False`, Airflow will schedule numerous DAG runs all at once. When using catchup, keep in mind what resources Airflow has available and how many DAG runs you can support at one time. To avoid overloading your scheduler or external systems, you can use the following parameters in conjunction with catchup: 
 
