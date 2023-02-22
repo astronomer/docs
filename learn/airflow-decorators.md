@@ -37,8 +37,6 @@ Airflow decorators were introduced as part of the TaskFlow API, which also handl
 
 Using decorators to define your Python functions as tasks is easy. Let's take a before and after example. Under the **Traditional Syntax** tab below, there is a basic ETL DAG with tasks to get data from an API, process the data, and store it. Click on the **Decorators** tab to see the same DAG written using Airflow decorators.
 
-The decorated version of the DAG eliminates the need to explicitly instantiate the PythonOperator, has much less code and is easier to read. Notice that it also doesn't require using `ti.xcom_pull` and `ti.xcom_push` to pass data between tasks. This is all handled by the TaskFlow API when you define your task dependencies with `store_data(process_data(extract_bitcoin_price()))`. 
-
 <Tabs
     defaultValue="traditional"
     groupId= "decorator-example"
@@ -59,6 +57,8 @@ The decorated version of the DAG eliminates the need to explicitly instantiate t
 
 </TabItem>
 </Tabs>
+
+The decorated version of the DAG eliminates the need to explicitly instantiate the PythonOperator, has much less code and is easier to read. Notice that it also doesn't require using `ti.xcom_pull` and `ti.xcom_push` to pass data between tasks. This is all handled by the TaskFlow API when you define your task dependencies with `store_data(process_data(extract_bitcoin_price()))`. 
 
 Here are some other things to keep in mind when using decorators:
 
