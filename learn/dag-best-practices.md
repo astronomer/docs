@@ -9,6 +9,9 @@ id: dag-best-practices
   <meta name="og:description" content="Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration." />
 </head>
 
+import CodeBlock from '@theme/CodeBlock';
+import bad_practices_dag_1 from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/bad_practices_dag_1.py';
+
 Because Airflow is 100% code, knowing the basics of Python is all it takes to get started writing DAGs. However, writing DAGs that are efficient, secure, and scalable requires some Airflow-specific finesse. In this guide, you'll learn how you can develop DAGs that make the most of what Airflow has to offer.
 
 In general, best practices fall into one of two categories: 
@@ -90,35 +93,7 @@ Airflow executes all code in the `dags_folder` on every `min_file_process_interv
 
 The following DAG example dynamically generates `PostgresOperator` tasks based on records pulled from a database. For example, the `hook` and `result` variables which are written outside of an operator instantiation:
 
-```python
-from airflow.decorators import dag
-from airflow.providers.postgres.operators.postgres import PostgresOperator
-from airflow.providers.postgres.hooks.postgres import PostgresHook
-from pendulum import datetime
-
-hook = PostgresHook("database_conn")
-result = hook.get_records("SELECT * FROM grocery_list;")
-
-
-@dag(
-    start_date=datetime(2023, 1, 1),
-    max_active_runs=3,
-    schedule="@daily",
-    catchup=False
-)
-def bad_practices_dag_1():
-
-    for grocery_item in result:
-        query = PostgresOperator(
-            task_id="query_{0}".format(result),
-            postgres_conn_id="postgres_default",
-            sql="INSERT INTO purchase_order VALUES (value1, value2, value3);"
-        )
-
-
-bad_practices_dag_1()
-
-```
+<CodeBlock language="python">{bad_practices_dag_1}</CodeBlock>
 
 When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table to construct the operators in the DAG. This query is run on every Scheduler heartbeat, which can cause performance issues. A better implementation leverages [dynamic task mapping](dynamic-tasks.md) to have a task that gets the required information from the `grocery_list` table and dynamically maps downstream tasks based on the result. Dynamic task mapping is available in Airflow 2.3 and later.
 
@@ -128,111 +103,10 @@ Including code that isn't part of your DAG or operator instantiations in your DA
 
 The following example DAG demonstrates what you shouldn't do. A SQL query is provided directly in the `PostgresOperator` `sql` param:
 
-```python
-from airflow.decorators import dag
-from airflow.operators.empty import EmptyOperator
-from airflow.providers.postgres.operators.postgres import PostgresOperator
-from pendulum import datetime, duration
-
-#Default settings applied to all tasks
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "email_on_failure": False,
-    "email_on_retry": False,
-    "retries": 1,
-    "retry_delay": duration(minutes=1)
-}
-
-#Instantiate DAG
-@dag(
-    start_date=datetime(2021, 1, 1),
-    max_active_runs=3,
-    schedule="@daily",
-    default_args=default_args,
-    catchup=False
-)
-def bad_practices_dag_2():
-
-    t0 = EmptyOperator(task_id="start")  
-
-    #Bad example with SQL query directly in the DAG file
-    query_1 = PostgresOperator(
-        task_id="covid_query_wa",
-        postgres_conn_id="postgres_default",
-        sql="""WITH yesterday_covid_data AS (
-                SELECT *
-                FROM covid_state_data
-                WHERE date = {{ params.today }}
-                AND state = 'WA'
-            ),
-            today_covid_data AS (
-                SELECT *
-                FROM covid_state_data
-                WHERE date = {{ params.yesterday }}
-                AND state = 'WA'
-            ),
-            two_day_rolling_avg AS (
-                SELECT AVG(a.state, b.state) AS two_day_avg
-                FROM yesterday_covid_data AS a
-                JOIN yesterday_covid_data AS b 
-                ON a.state = b.state
-            )
-            SELECT a.state, b.state, c.two_day_avg
-            FROM yesterday_covid_data AS a
-            JOIN today_covid_data AS b
-            ON a.state=b.state
-            JOIN two_day_rolling_avg AS c
-            ON a.state=b.two_day_avg;""",
-        params={"today": today, "yesterday": yesterday}
-    )
-
-
-bad_practices_dag_2()
-
-```
+<CodeBlock language="python">{bad_practices_dag_2}</CodeBlock>
 
 Keeping the query in the DAG file like this makes the DAG harder to read and maintain. In the following DAG, the DAG-level configuration includes `template_searchpath` and the `PostgresOperator` specifies a `covid_state_query.sql` file that contains the same query as in the previous example:
-
-```python
-from airflow.decorators import dag
-from airflow.providers.postgres.operators.postgres import PostgresOperator
-from pendulum import datetime, duration
-
-#Default settings applied to all tasks
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "email_on_failure": False,
-    "email_on_retry": False,
-    "retries": 1,
-    "retry_delay": duration(minutes=1)
-}
-
-#Instantiate DAG
-@dag(
-    start_date=datetime(2023, 1, 1),
-    max_active_runs=3,
-    schedule="@daily",
-    default_args=default_args,
-    catchup=False,
-    #include path to look for external files
-    template_searchpath="/usr/local/airflow/include" 
-)
-def good_practices_dag_1():
-
-        query = PostgresOperator(
-            task_id="covid_query_{0}".format(state),
-            postgres_conn_id="postgres_default",
-            #reference query kept in separate file
-            sql="covid_state_query.sql",
-            params={"state": "'" + state + "'"}
-        )
-
-
-good_practices_dag_1()
-
-```
+<CodeBlock language="python">{good_practices_dag_1}</CodeBlock>
 
 ### Use a consistent method for task dependencies
 
@@ -251,7 +125,6 @@ Try to be consistent with something like this:
 ```python
 task_1 >> task_2 >> [task_3, task_4]
 ```
-
 
 ## Leverage Airflow features
 
