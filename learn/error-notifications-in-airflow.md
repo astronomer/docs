@@ -207,7 +207,6 @@ In the following example, you'll use the [Slack provider](https://registry.astro
     ```python
     from airflow.providers.slack.operators.slack_webhook import SlackWebhookOperator
 
-
     def slack_notification(context):
         slack_msg = """
                 :red_circle: Task Failed. 
