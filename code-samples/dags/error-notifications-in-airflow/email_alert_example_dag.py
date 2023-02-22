@@ -13,7 +13,6 @@ default_args = {
 with DAG(
     "sample_dag", default_args=default_args, schedule="@daily", catchup=False
 ) as dag:
-
     wont_email = EmptyOperator(task_id="wont_email")
 
     will_email = EmptyOperator(task_id="will_email", email_on_failure=True)
