@@ -9,13 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-If your Organization is already using [Podman](https://podman.io/) to run and manage containers, you can use it to execute Astro CLI commands including:
-
-- `astro dev [...]`: For running an Airflow environment on your local machine
-- `astro login`: For authenticating to Astronomer Software
-- `astro deploy`: For pushing code to a Deployment
-
-Many Organizations use Podman because of the security advantages it provides over Docker. Podman can run rootless and daemonless.
+If your Organization is already using [Podman](https://podman.io/) to run and manage containers, you can use it to run Airflow locally and deploy to Astronomer using the Astro CLI.
 
 <Tabs
     defaultValue="mac"
@@ -31,15 +25,24 @@ Set up Podman on a Mac operating system so you can run the Astro CLI in Podman c
 
 ### Prerequisites
 
-- Podman 3.1.0 or later installed on your local machine.
+- A running instance of Podman 3 or later on your local machine. You can confirm that Podman is running using `podman ps`.
 
-### Installation
+If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-1. Run the following commands to start Podman:
+### Setup
+
+1. Run the following command to confirm that Podman has access to Astro images at `docker.io`:
 
     ```sh
-    $ podman machine init
-    $ podman machine start
+    podman run --rm -it postgres:12.6 whoami
+    ```
+
+    If this command fails, run the following command to change Podman's default image registry location to `docker.io`:
+
+    ```sh
+    cat << EOF | sudo tee -a /etc/containers/registries.conf.d/shortnames.conf
+    "postgres" = "docker.io/postgres"
+    EOF
     ```
 
 2. Run the following command to pick up the Identity and connection URI for your `podman-machine-default`:
@@ -57,150 +60,127 @@ Set up Podman on a Mac operating system so you can run the Astro CLI in Podman c
 
     Copy the `Identity` and `URI` from `podman-machine-default*` for the next two steps.
 
-3. Run the following commands to set system environment variables for Podman:
+3. Run the following command to set the connection URI from the Astro CLI:
 
     ```sh
-    # Store the Identity for your Podman instance
-    $ export CONTAINER_SSHKEY=<your-podman-identity>
-    # Ensure that all images created using `podman build` are readable by Software Deployments.
-    # Primarily for use in CI/CD pipelines which require use of the Podman CLI.
-    $ export BUILDAH_FORMAT=docker
+    astro config set -g container.binary podman
     ```
 
-4. Run the following command to set the connection URI from the Astro CLI:
+    Additionally run the following command if you're using Podman 3:
 
     ```sh
-    astro config set podman.connection_uri <your-podman-uri>
-    ```
-
-5. Enable [Remote Login](https://support.apple.com/en-gb/guide/mac-help/mchlp1066/mac#:~:text=Set%20up%20Remote%20Login%20on,Sharing%20%2C%20then%20select%20Remote%20Login.&text=Select%20the%20Remote%20Login%20tickbox,access%20for%20remote%20users%E2%80%9D%20checkbox.) on your Mac.
-
-6. In a separate terminal window, complete the following set of commands and configurations to mount your local Astro project directory to the Podman machine:
-
-    ```sh
-    $ podman machine --log-level=debug ssh -- exit 2>&1 | grep Executing
-    # copy ssh command from above output for the next command, for example:
-    # 49671 core@localhost
-
-    $ ssh -i /Users/user/.ssh/podman-machine-default -R 10000:$(hostname):22 -p <ssh-command>
-    $ ssh-keygen -t rsa
-    $ ssh-copy-id -p 10000 <user>@127.0.0.1
-    $ sudo mkdir -p airflow-dir
-    $ sudo chown core:core airflow-dir
-    $ sudo vi /etc/fuse.conf
-    # uncomment the user_allow_other line in /etc/fuse.conf and save the file
-    $ sshfs -p 10000 -o allow_other <user>@127.0.0.1:<local_airflow_dir_path> airflow-dir
-
-    # check if sshfs is working fine or not
-    $ cd airflow-dir
-    $ ls # you should be able to see all the files present in your local airflow directory
-    $ pwd
-
-    #keep the session running
-    ```
-
-    Copy the output of `pwd` for step 7.
-
-7. Open a new terminal window. In an empty directory, run the following commands to create a new Astro project, set Podman as your primary container engine, and generate a `pod-config.yml` file for your project:
-
-    ```sh
-    $ astro dev init --use-astronomer-certified
-    $ astro config set container.engine podman
-    $ astro dev start
-    ```
-
-8. In the `pod-config.yml` file, replace the default configuration with the following values:
-
-    ```yaml
-    volumes:
-      - hostPath:
-          path: <pwd-output>/dags
-          type: Directory
-        name: airflow-dags-dir
-      - hostPath:
-          path: <pwd-output>/plugins
-          type: Directory
-        name: airflow-plugins-dir
-      - hostPath:
-          path: <pwd-output>/include
-          type: Directory
-        name: airflow-include-dir
+    astro config set -g duplicate_volumes false
     ```
 
 </TabItem>
 
 <TabItem value="windows">
 
-Set up Podman on a Windows operating system so you can run the Astro CLI in Podman containers.
+Set up Podman on Windows so you can run the Astro CLI in Podman containers.
 
 ### Prerequisites
 
-- Podman 3.1.0 or later installed on your local machine.
-- Windows 10 version 2004 and later, or Windows 11
+- A running instance of Podman 3 or later on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. You can confirm that Podman is running using `podman ps`.
 
-### Installation
+If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-1. Enable the Windows Subsystem for Linux and Virtual Machine Platform features on your computer:
+### Setup
 
-    - Click **Start**, enter `windows feature`, and then click **Turn Windows features on or off**.
-    - Select **Virtual Machine Platform** and **Windows Subsystem for Linux**.
-    - Click **OK** and then restart your computer.
-
-2. Install the [Windows Subsystem for Linux (WSL)](https://apps.microsoft.com/store/detail/windows-subsystem-for-linux/9P9TQF7MRM4R). 
-
-3. Install and open [Ubuntu 22.04.2 LTS)](https://apps.microsoft.com/store/detail/ubuntu-22042-lts/9PN20MSR04DW?hl=en-ca&gl=ca&rtc=1). When the username and password prompts appear, enter a username and a password. They do not have to match your Windows username and password.
-
-4. Run the following command to confirm WSL2 is installed:
+1. In a WSL 2 terminal, run the following command to confirm that Podman has access to Astro images at `docker.io`:
 
     ```sh
-    wsl -l -v
+    podman run --rm -it postgres:12.6 whoami
     ```
-    If WSL2 is not installed, repeat step 2.
 
-5. Open Ubuntu and run the following command to install Podman:
+    If this command fails, run the following command to change Podman's default image registry location to `docker.io`:
 
     ```sh
-    sudo apt-get update && sudo apt-get install podman -y
+    cat << EOF | sudo tee -a /etc/containers/registries.conf.d/shortnames.conf
+    "postgres" = "docker.io/postgres"
+    EOF
     ```
-    If a password prompt appears, enter the password you created in step 3.
 
-6. - installation issues started here -
+2. Run the following command to pick up the Identity and connection URI for your `podman-machine-default`:
+
+    ```sh
+    podman system connection ls
+    ```
+
+    The output should look like the following:
+
+    ```text
+    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
+    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
+    ```
+
+    Copy the `Identity` and `URI` from `podman-machine-default*` for the next two steps.
+
+3. Run the following command to set the connection URI from the Astro CLI:
+
+    ```sh
+    astro config set -g container.binary podman
+    ```
+
+    Additionally run the following command if you're using Podman 3:
+
+    ```sh
+    astro config set -g duplicate_volumes false
+    ```
 
 </TabItem>
 
 <TabItem value="linux">
 
-Set up Podman on a Linux operating system so you can run the Astro CLI in Podman containers.
+Set up Podman on Linux so you can run the Astro CLI in Podman containers.
 
 ### Prerequisites
 
-- Podman 3.1.0 or later installed on your local machine.
+- A running instance of Podman 3 or later on Ubuntu 22.04 or later. You can confirm that Podman is running using `podman ps`.
 
-### Installation
+If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-1. Run the following command to start the Podman API service:
+### Setup
 
-    ```sh
-    podman system service -t 0 &
-    ```
-
-    :::warning
-    Avoid running this command from a directory containing a Dockerfile.
-    :::
-
-2. Run the following command to create a new Astro project:
+1. Run the following command to confirm that Podman has access to Astro images at `docker.io`:
 
     ```sh
-    astro dev init
+    podman run --rm -it postgres:12.6 whoami
     ```
 
-3. Run the following command to specify Podman as the CLI's primary container engine:
+    If this command fails, run the following command to change Podman's default image registry location to `docker.io`:
 
     ```sh
-    astro config set container.engine podman
+    cat << EOF | sudo tee -a /etc/containers/registries.conf.d/shortnames.conf
+    "postgres" = "docker.io/postgres"
+    EOF
     ```
 
-4. Run `astro dev start` to confirm that Podman is running the containers for your local Airflow environment.
+2. Run the following command to pick up the Identity and connection URI for your `podman-machine-default`:
+
+    ```sh
+    podman system connection ls
+    ```
+
+    The output should look like the following:
+
+    ```text
+    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
+    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
+    ```
+
+    Copy the `Identity` and `URI` from `podman-machine-default*` for the next two steps.
+
+3. Run the following command to set the connection URI from the Astro CLI:
+
+    ```sh
+    astro config set -g container.binary podman
+    ```
+
+    Additionally run the following command if you're using Podman 3:
+
+    ```sh
+    astro config set -g duplicate_volumes false
+    ```
 
 </TabItem>
 
@@ -208,14 +188,14 @@ Set up Podman on a Linux operating system so you can run the Astro CLI in Podman
 
 ## Switch between Docker and Podman
 
-Once you set up the Astro CLI to use Podman on your local machine, the CLI automatically runs Podman containers whenever you run a command that requires them. To revert to the default behavior and run CLI commands in Docker containers, run the following command:
+After you set up the Astro CLI to use Podman on your local machine, the CLI automatically runs Podman containers whenever you run a command that requires them. To revert to the default behavior and run CLI commands in Docker containers, run the following command:
 
 ```sh
-astro config set container.engine docker
+astro config set container.binary docker
 ```
 
 If you need to switch back to using Podman again, run the following command:
 
 ```sh
-astro config set container.engine podman
+astro config set container.binary podman
 ```
