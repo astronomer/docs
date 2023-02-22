@@ -37,7 +37,7 @@ Airflow tasks have two new functions available to implement the map portion of d
 
 Airflow 2.4 allowed the mapping of multiple keyword argument sets. This type of mapping uses the function `expand_kwargs()` instead of `expand()`.
 
-In the following example, the task uses both of these functions to dynamically generate three task runs:
+In the following example, the task uses both, `.partial()` and `.expand()`, to dynamically generate three task runs:
 
 <Tabs
     defaultValue="taskflow"
