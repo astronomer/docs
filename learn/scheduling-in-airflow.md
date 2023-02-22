@@ -310,16 +310,6 @@ There are some limitations to keep in mind when implementing custom timetables:
 
 Datasets and data-driven DAG dependencies were introduced in Airflow 2.4. You can now make Airflow detect when a task in a DAG updates a data object. Using that awareness, other DAGs can be scheduled depending on updates to these datasets. To create a dataset-based schedule, you pass the names of the datasets as a list to the `schedule` parameter. For example:
 
-<Tabs
-    defaultValue="taskflow"
-    groupId= "datasets-schedule-example"
-    values={[
-        {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
-    ]}>
-
-<TabItem value="taskflow">
-
 ```python
 dataset1 = Dataset(f"{DATASETS_PATH}/dataset_1.txt")
 dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
@@ -332,26 +322,6 @@ dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
     tags=['consumes', 'dataset-scheduled'],
 )
 ```
-
-</TabItem>
-
-<TabItem value="traditional">
-
-```python
-dataset1 = Dataset(f"{DATASETS_PATH}/dataset_1.txt")
-dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
-
-with DAG(
-    dag_id='dataset_dependent_example_dag',
-    catchup=False,
-    start_date=datetime(2022, 8, 1),
-    schedule=[dataset1, dataset2],
-    tags=['consumes', 'dataset-scheduled'],
-):
-```
-
-</TabItem>
-</Tabs>
 
 This DAG runs only when `dataset1` and `dataset2` are updated. These updates can occur by tasks in different DAGs as long as they are located in the same Airflow environment.
 
