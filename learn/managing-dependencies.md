@@ -14,6 +14,7 @@ import TabItem from '@theme/TabItem';
 
 import CodeBlock from '@theme/CodeBlock';
 import dependencies_example_1 from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_example_1.py';
+import dependencies_example_2_taskflow from '!!raw-loader!../code-samples/dags/managing-dependencies/dependencies_example_2_taskflow.py';
 
 [Dependencies](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#relationships) are a powerful and popular Airflow feature. In Airflow, your pipelines are defined as Directed Acyclic Graphs (DAGs). Each task is a node in the graph and dependencies are the directed edges that determine how to move through the graph. Because of this, dependencies are key to following data engineering best practices because they help you define flexible pipelines with atomic tasks.
 
@@ -220,49 +221,7 @@ The [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/core-co
 
 If your DAG has only Python functions that are all defined with the decorator, invoke Python functions to set dependencies. For example, in the following DAG there are two dependent tasks, `get_a_cat_fact` and `print_the_cat_fact`. To set the dependencies, you invoke the function `print_the_cat_fact(get_a_cat_fact())`:
 
-```python
-from airflow.decorators import dag, task
-from datetime import datetime
-
-import requests
-import json
-
-url = "http://catfact.ninja/fact"
-
-default_args = {
-    "start_date": datetime(2021, 1, 1)
-}
-
-@dag(
-    schedule="@daily",
-    default_args=default_args,
-    catchup=False
-)
-def xcom_taskflow_dag():
-
-    @task
-    def get_a_cat_fact(state):
-        """
-        Gets a cat fact from the CatFacts API
-        """
-        res = requests.get(url)
-        return{"cat_fact": json.loads(res.text)["fact"]}
-
-    @task
-    def print_the_cat_fact(cat_fact: str):
-        """
-        Prints the cat fact
-        """
-        print("Cat fact for today:", cat_fact)
-        #run some further cat analysis here
-
-    # Invoke functions to create tasks and define dependencies
-    print_the_cat_fact(get_a_cat_fact())
-
-
-xcom_taskflow_dag()
-
-```
+<CodeBlock language="python">{dependencies_example_2_taskflow}</CodeBlock>
 
 This image shows the resulting DAG:
 
@@ -352,95 +311,13 @@ In the following example DAG there is a simple branch with a downstream task tha
 
 <TabItem value="taskflow">
 
-```python
-import random
-from airflow.decorators import dag, task
-from airflow.operators.empty import EmptyOperator
-from datetime import datetime
-from airflow.utils.trigger_rule import TriggerRule
-
-
-@dag(
-    start_date=datetime(2021, 1, 1),
-    max_active_runs=1,
-    schedule=None,
-    catchup=False
-)
-def branching_dag():
-
-    # EmptyOperators to start and end the DAG
-    start = EmptyOperator(task_id="start")
-    end = EmptyOperator(
-        task_id="end",
-        trigger_rule=TriggerRule.ONE_SUCCESS
-    )
-
-    # Branching task
-    @task.branch
-    def branching(**kwargs):
-        branches = ["branch_0", "branch_1", "branch_2"]
-        return random.choice(branches)
-
-    branching_task = branching()
-
-    start >> branching_task
-
-    # set dependencies
-    for i in range(0, 3):
-        d = EmptyOperator(task_id="branch_{0}".format(i))
-        branching_task >> d >> end
-
-
-branching_dag()
-
-```
+<CodeBlock language="python">{dependencies_branch_example_taskflow}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional">
 
-```python
-import random
-from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import BranchPythonOperator
-from datetime import datetime
-from airflow.utils.trigger_rule import TriggerRule
-
-def return_branch(**kwargs):
-    branches = ["branch_0", "branch_1", "branch_2"]
-    return random.choice(branches)
-
-with DAG(
-    dag_id="branching_dag",
-    start_date=datetime(2021, 1, 1),
-    max_active_runs=1,
-    schedule=None,
-    catchup=False
-):
-
-    # EmptyOperators to start and end the DAG
-    start = EmptyOperator(task_id="start")
-    end = EmptyOperator(
-        task_id="end",
-        trigger_rule=TriggerRule.ONE_SUCCESS
-    )
-
-    # Branching task
-    branching = BranchPythonOperator(
-        task_id="branching",
-        python_callable=return_branch,
-        provide_context=True
-    )
-
-    start >> branching
-
-    # set dependencies
-    for i in range(0, 3):
-        d = EmptyOperator(task_id="branch_{0}".format(i))
-        branching >> d >> end
-
-```
+<CodeBlock language="python">{dependencies_branch_example_traditional}</CodeBlock>
 
 </TabItem>
 </Tabs>

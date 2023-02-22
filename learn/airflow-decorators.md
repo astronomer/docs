@@ -44,7 +44,7 @@ The decorated version of the DAG eliminates the need to explicitly instantiate t
     groupId= "decorator-example"
     values={[
         {label: 'Traditional Syntax', value: 'traditional'},
-        {label: 'Decorators', value: 'taskflow'},
+        {label: 'TaskFlow API', value: 'taskflow'},
     ]}>
 
 <TabItem value="traditional">
