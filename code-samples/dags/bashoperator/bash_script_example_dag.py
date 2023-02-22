@@ -2,6 +2,7 @@ from airflow.decorators import dag
 from airflow.operators.bash import BashOperator
 from pendulum import datetime
 
+
 @dag(start_date=datetime(2022, 8, 1), schedule=None, catchup=False)
 def bash_script_example_dag():
     execute_my_script = BashOperator(
