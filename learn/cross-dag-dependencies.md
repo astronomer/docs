@@ -110,7 +110,7 @@ The following example DAG implements the TriggerDagRunOperator to trigger the `d
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "xcom-example"
+    groupId= "triggerdagrun-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional Syntax', value: 'traditional'},
@@ -149,7 +149,7 @@ The following example DAG uses three ExternalTaskSensors at the start of three p
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "xcom-example"
+    groupId= "external-task-sensor-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional Syntax', value: 'traditional'},
@@ -192,7 +192,7 @@ Using the API to trigger a downstream DAG can be implemented within a DAG by usi
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "xcom-example"
+    groupId= "rest-api-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional Syntax', value: 'traditional'},

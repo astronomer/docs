@@ -293,7 +293,7 @@ The following code snippet shows how a list of zipped arguments can be provided 
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "xcom-example"
+    groupId= "zip-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional Syntax', value: 'traditional'},
@@ -351,7 +351,7 @@ To mimic the behavior of the [`zip_longest()`](https://docs.python.org/3/library
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "xcom-example"
+    groupId= "zip-fillvalue-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional Syntax', value: 'traditional'},
