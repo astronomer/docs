@@ -10,7 +10,9 @@ id: dag-best-practices
 </head>
 
 import CodeBlock from '@theme/CodeBlock';
-import bad_practices_dag_1 from '!!raw-loader!../code-samples/dags/airflow-passing-data-between-tasks/bad_practices_dag_1.py';
+import bad_practices_dag_1 from '!!raw-loader!../code-samples/dags/dag-best-practices/bad_practices_dag_1.py';
+import bad_practices_dag_2 from '!!raw-loader!../code-samples/dags/dag-best-practices/bad_practices_dag_2.py';
+import good_practices_dag_1 from '!!raw-loader!../code-samples/dags/dag-best-practices/good_practices_dag_1.py';
 
 Because Airflow is 100% code, knowing the basics of Python is all it takes to get started writing DAGs. However, writing DAGs that are efficient, secure, and scalable requires some Airflow-specific finesse. In this guide, you'll learn how you can develop DAGs that make the most of what Airflow has to offer.
 

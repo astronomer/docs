@@ -14,6 +14,7 @@ default_args = {
 
 state = "Ohio"
 
+
 # Instantiate DAG
 @dag(
     start_date=datetime(2023, 1, 1),
@@ -25,7 +26,6 @@ state = "Ohio"
     template_searchpath="/usr/local/airflow/include",
 )
 def good_practices_dag_1():
-
     query = PostgresOperator(
         task_id="covid_query_{0}".format(state),
         postgres_conn_id="postgres_default",
