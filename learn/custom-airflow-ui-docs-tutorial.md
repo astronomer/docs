@@ -329,7 +329,7 @@ tell_me_what_to_do = PythonOperator(
 
 Another way of adding information to your DAGs and tasks is to add notes to task instances and DAG runs from the Grid View in the Airflow UI. This feature is useful if you need to add information specific to a single run of your DAG. 
 
-1. Go to the **Grid View** of the `docs_example_dag.py` DAG you created in [Step 2](#step-2-create-a-new-dag).
+1. Go to the **Grid View** of the `docs_example_dag` DAG you created in [Step 2](#step-2-create-a-new-dag).
 
 2. Select a task instance or DAG run.
 
