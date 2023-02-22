@@ -13,8 +13,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 import CodeBlock from '@theme/CodeBlock';
-import operator_example_taskflow from '!!raw-loader!../code-samples/dags/what-is-a-operator/operator_example_taskflow.py';
-import operator_example_traditional from '!!raw-loader!../code-samples/dags/what-is-a-operator/operator_example_traditional.py';
+import operator_example_taskflow from '!!raw-loader!../code-samples/dags/what-is-an-operator/operator_example_taskflow.py';
+import operator_example_traditional from '!!raw-loader!../code-samples/dags/what-is-an-operator/operator_example_traditional.py';
 
 Operators are the building blocks of Airflow DAGs. They contain the logic of how data is processed in a pipeline. Each task in a DAG is defined by instantiating an operator.
 
