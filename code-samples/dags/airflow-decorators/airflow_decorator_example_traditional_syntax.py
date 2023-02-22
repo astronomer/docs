@@ -27,7 +27,6 @@ def _store_data(ti):
 with DAG(
     "classic_dag", schedule="@daily", start_date=datetime(2021, 12, 1), catchup=False
 ):
-
     extract_bitcoin_price = PythonOperator(
         task_id="extract_bitcoin_price", python_callable=_extract_bitcoin_price
     )
