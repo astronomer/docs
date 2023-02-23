@@ -209,7 +209,6 @@ To start, create an Airflow variable or connection in Vault that you want to sto
 To store an Airflow variable in Vault as a secret, run the following Vault CLI command with your own values:
 
 ```sh
-vault secrets disable secret
 vault secrets enable -path=secret -version=2 kv
 vault kv put secret/variables/<your-variable-key> value=<your-variable-value>
 ```
@@ -217,7 +216,6 @@ vault kv put secret/variables/<your-variable-key> value=<your-variable-value>
 To store a connection in Vault as a secret, run the following Vault CLI command with your own values:
 
 ```sh
-vault secrets disable secret
 vault secrets enable -path=secret -version=2 kv
 vault kv put secret/connections/<your-connection-id> conn_uri=<connection-type>://<connection-login>:<connection-password>@<connection-host>:5432
 ```
