@@ -95,7 +95,7 @@ The following example DAG completes the following steps:
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "operator-use-example"
+    groupId= "hook-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
