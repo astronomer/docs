@@ -191,7 +191,7 @@ First, create a DAG that pulls cat facts from an [API endpoint](http://catfact.n
     groupId= "snowflake-load-data"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

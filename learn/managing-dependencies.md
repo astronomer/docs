@@ -164,7 +164,7 @@ When working with task groups, it is important to note that dependencies can be 
     groupId= "taskgroup-dependencies"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -308,7 +308,7 @@ In the following example DAG there is a simple branch with a downstream task tha
     groupId= "example-branch"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

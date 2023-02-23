@@ -72,7 +72,7 @@ The following example DAG shows how you might use the `SqlSensor` sensor:
     groupId= "sql-sensor-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

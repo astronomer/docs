@@ -82,7 +82,7 @@ The following code shows how each of the operators is instantiated in a DAG file
     groupId= "operator-use-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

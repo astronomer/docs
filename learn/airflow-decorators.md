@@ -35,13 +35,13 @@ In general, whether to use decorators is a matter of developer preference and st
 
 Airflow decorators were introduced as part of the TaskFlow API, which also handles passing data between tasks using XCom and inferring task dependencies automatically. To learn more about the TaskFlow API, check out this [Astronomer webinar](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0) or this Apache Airflow [TaskFlow API tutorial](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html#tutorial-on-the-taskflow-api). 
 
-Using decorators to define your Python functions as tasks is easy. Let's take a before and after example. Under the **Traditional Syntax** tab below, there is a basic ETL DAG with tasks to get data from an API, process the data, and store it. Click on the **Decorators** tab to see the same DAG written using Airflow decorators.
+Using decorators to define your Python functions as tasks is easy. Let's take a before and after example. Under the **Traditional syntax** tab below, there is a basic ETL DAG with tasks to get data from an API, process the data, and store it. Click on the **Decorators** tab to see the same DAG written using Airflow decorators.
 
 <Tabs
     defaultValue="traditional"
     groupId= "decorator-example"
     values={[
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
         {label: 'TaskFlow API', value: 'taskflow'},
     ]}>
 
