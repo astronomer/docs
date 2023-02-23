@@ -176,7 +176,7 @@ Set up Podman on Windows so you can run the Astro CLI in Podman containers.
 
 :::tip
 
-If you receive an error after running `podman ps`, you might need to set the system-level `DOCKER_HOST` environment variable to be the location of your Podman service socket. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
+If you receive an error after running `podman ps`, you might need to set the `DOCKER_HOST` environment variable in WSL 2 to be the location of your Podman service socket. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
 
 :::
 
