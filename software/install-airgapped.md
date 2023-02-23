@@ -23,7 +23,8 @@ To complete this setup, you need:
 
 - A VPC.
 - Private Kubernetes.
-- A Postgres instance accessible from that environment.
+- A PostgreSQL instance accessible from that environment.
+- PostgreSQL superuser permissions.
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
 - A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
 
