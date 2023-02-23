@@ -25,6 +25,70 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.10.0 ([Release notes](cli/release-notes.md))
 
+## February 21, 2023
+
+### New identity-first authentication model
+
+Astro has migrated to an identity-first authentication model. Users now authenticate to the Astro platform instead of individual Organizations, and Organizations can set permissions for how users can modify and access resources. This model prioritizes identity verification and enforces authentication policies for user email domains.
+
+For all users logging in to Astro, this migration has the following effects:
+
+- Instead of being redirected to separate login pages for each Organization, all Astro users log in through a universal login page. 
+- Users belonging to multiple Organizations no longer have to log in again when switching Organizations.
+- Users no longer need to enter their email on a separate page before they log in to the Cloud UI.
+- If your Organization enforces single sign-on (SSO), users can now authenticate to Astro with a username and password when your email domain doesn't enforce SSO.
+
+For Organization Owners, this migration has the following additional effects:
+
+- You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.
+- Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
+
+For more information about how these changes can affect the Astro log in experience, see the [Login FAQ]`log-in-to-astro.md#frequently-asked-questions`. To configure authentication behavior, see [Manage an Organization on Astro]`manage-organization.md`
+
+### New Hosted regions available
+
+You can now create clusters in the following regions on an Astro - Hosted installation.
+
+- AWS
+  
+    - `ap-northeast-1`
+    - `ap-southeast-2`
+    - `eu-central-1`
+    - `eu-west-1`
+    - `us-east-1`
+    - `us-west-2`
+
+- Google Cloud
+
+    - `asia-northeast1`
+    - `australia-southeast1`
+    - `europe-west1`
+    - `europe-west2`
+    - `us-central1`
+    - `us-east4`
+
+- Microsoft Azure
+
+    - `australiaeast`
+    - `japaneast`
+    - `northeurope`
+    - `westeurope`
+    - `eastus2`
+    - `westus2`
+
+### Additional improvements 
+
+The default CIDR ranges for new GCP clusters have been reduced. The following are the new CIDR ranges:
+
+- **Subnet CIDR**: `172.20.0.0/22`
+- **Pod CIDR**: `172.21.0.0/19`
+- **Service Address CIDR**: `172.22.0.0/22`
+- **Service VPC Peering**: `172.23.0.0/20`
+
+### Bug fixes 
+
+In the Cloud UI, when using **Compare** on the **Lineage Graph** page, you can now compare shorter run lengths.
+
 ## February 14, 2023
 
 ### Authorize Workspaces to clusters
@@ -58,6 +122,11 @@ Additionally, the Deployment information page in the Cloud UI now includes field
 You can now view all available facets for a job run, including [custom facets](https://openlineage.io/docs/spec/facets/custom-facets), by opening the job run's **Lineage Graph** and then selecting the **Info** tab. You can check the status of your facets, including whether they are correctly formatted, so that you can resolve potential issues in your data pipelines. See [View metrics for a specific run or dataset](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
 
 ![Example OpenLineage facet page in the Cloud UI](/img/release-notes/view-facets.png)
+
+### Additional improvements
+
+- You can now create AWS clusters in `ap-northeast-1` and `ap-southeast-2` on an Astro - Hosted installation.
+- You can now create GCP clusters in `australia-southeast1` on an Astro - Hosted installation.
 
 ### Security fixes
 
@@ -98,7 +167,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 ### Additional improvements
 
 - Data plane cluster access is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
-- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](view-clusters.md).
+- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](modify-cluster.md#view-clusters).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
 

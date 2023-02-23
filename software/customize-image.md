@@ -175,7 +175,7 @@ If you're interested in running any extra commands when your Airflow image build
 For example, if you wanted to run `ls` when your image builds, your `Dockerfile` would look like this:
 
 ```
-FROM quay.io/astronomer/runtime-5.0.6
+FROM quay.io/astronomer/astro-runtime-5.0.6
 RUN ls
 ```
 
@@ -309,7 +309,7 @@ This example assumes that the name of each of your Python packages is identical 
 2. In `Dockerfile.build`, add `AS stage` to the `FROM` line which specifies your Astronomer image. For example, if you use Astro Runtime 5.0.6, your `FROM` line would be:
 
    ```text
-   FROM quay.io/astronomer/runtime:5.0.6-base AS stage1
+   FROM quay.io/astronomer/astro-runtime:5.0.6-base AS stage1
    ```
 
   :::caution

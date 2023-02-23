@@ -17,30 +17,23 @@ Read the following document for a reference of our default resources as well as 
 
 ## Default cluster values
 
-| Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                        | Configurable |
-| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ------------- |
-| [EKS Cluster](https://aws.amazon.com/eks)                                                           | An EKS cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                                                            | 1x                                            |               |
-| Worker node pool                                                                                    | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | ✔️             |
-| Airflow node pool                                                                                   | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of m5.xlarge nodes                    |               |
-| Astro system node pool                                                                              | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all other system components required in Astro. The availability zone determines how many nodes are created.  This node pool is fully managed by Astronomer.                                                                                                         | 1x pool of m5.xlarge nodes                    |               |
-| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                          | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster.                                                                                                                                                                                                                       | 1x db.r5.large                                | ✔️             |
-| [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)    | Required for connectivity with the Astro control plane and other public services.                                                                                                                                                                                                                                                                        | 2x                                            |               |
-| [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)                        | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes.                                        | 2x /26 (public) and 1x /20 + 1x /21 (private) | ✔️             |
-| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)      | Required for connectivity with the control plane and other public services.                                                                                                                                                                                                                                                                              | 1x                                            |               |
-| [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)               | NAT Gateways translate outbound traffic from private subnets to public subnets.                                                                                                                                                                                                                                                                          | 2x                                            |               |
-| [Routes](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-table-routes) | Routes are necessary to direct network traffic from the subnets and gateways.                                                                                                                                                                                                                                                                            | 2x                                            |               |
-| [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)              | Home for the routes.                                                                                                                                                                                                                                                                                                                                     | 2x                                            |               |
-| [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)                     | Virtual network for launching and hosting AWS resources.                                                                                                                                                                                                                                                                                                 | 1x /19                                        | ✔️             |
-| [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html)                    | Stores Airflow task logs.                                                                                                                                                                                                                                                                                                                                | 1x                                            |
-| Maximum Node Count                                                                                  | The maximum number of EC2 worker nodes that a particular worker node pool can scale to. This value applies to each worker node pool and does not apply to other node pools. When this limit is reached, your cluster can't auto-scale and worker Pods may fail to schedule.                                                                              | 20                                            | ✔️             |
+| Resource                                                                                            | Description                                                                                                                                                                                                                                                                                                                                              | Quantity/ Default Size                        | Configurable                                                                                         |
+| --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [EKS Cluster](https://aws.amazon.com/eks)                                                           | An EKS cluster is required to run the Astro data plane, which hosts the resources and data required to execute Airflow tasks.                                                                                                                                                                                                                            | 1x                                            |                                                                                                      |
+| Worker node pool                                                                                    | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | Yes. See [Manage worker node pools](modify-cluster.md#manage-worker-node-pools).                     |
+| Airflow node pool                                                                                   | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of m5.xlarge nodes                    |                                                                                                      |
+| Astro system node pool                                                                              | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all other system components required in Astro. The availability zone determines how many nodes are created.  This node pool is fully managed by Astronomer.                                                                                                         | 1x pool of m5.xlarge nodes                    |                                                                                                      |
+| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                          | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster.                                                                                                                                                                                                                       | 1x db.r5.large                                | Yes. See [Configure your relational database](modify-cluster.md#configure-your-relational-database). |
+| [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)    | Required for connectivity with the Astro control plane and other public services.                                                                                                                                                                                                                                                                        | 2x                                            |                                                                                                      |
+| [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)                        | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes.                                        | 2x /26 (public) and 1x /20 + 1x /21 (private) | Yes. See [Connect Astro to AWS data sources](connect-aws.md).                                        |
+| [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)      | Required for connectivity with the control plane and other public services.                                                                                                                                                                                                                                                                              | 1x                                            |                                                                                                      |
+| [NAT Gateways](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)               | NAT Gateways translate outbound traffic from private subnets to public subnets.                                                                                                                                                                                                                                                                          | 2x                                            |                                                                                                      |
+| [Routes](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html#route-table-routes) | Routes are necessary to direct network traffic from the subnets and gateways.                                                                                                                                                                                                                                                                            | 2x                                            |                                                                                                      |
+| [Route Tables](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html)              | Home for the routes.                                                                                                                                                                                                                                                                                                                                     | 2x                                            |                                                                                                      |
+| [VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)                     | Virtual network for launching and hosting AWS resources.                                                                                                                                                                                                                                                                                                 | 1x /19                                        | Yes. See [Connect Astro to AWS data sources](connect-aws.md).                                        |
+| [Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide//Welcome.html)                    | Stores Airflow task logs.                                                                                                                                                                                                                                                                                                                                | 1x                                            |                                                                                                      |
 
-## Supported cluster configurations
-
-You might need to modify configurations of a new or existing cluster on Astro. This section provides a reference for cluster configuration options.
-
-To create a new cluster on Astro with a specified configuration, see [Create a cluster](create-cluster.md). To request a change to an existing Cluster, see [Modify a cluster](modify-cluster.md). Astronomer is currently responsible for completing all cluster configuration changes.
-
-### Cluster regions
+## Supported cluster regions
 
 Depending on how you installed Astro, you can host Astro clusters in the following AWS regions:
 
@@ -48,12 +41,12 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | ---------------- | ------------------------- | ---------------------------- | -------------- |
 | `af-south-1`     | Africa (Cape Town)        | ✔️                            |                |
 | `ap-east-1`      | Asia Pacific (Hong Kong)  | ✔️                            |                |
-| `ap-northeast-1` | Asia Pacific (Tokyo)      | ✔️                            |                |
+| `ap-northeast-1` | Asia Pacific (Tokyo)      | ✔️                            | ✔️              |
 | `ap-northeast-2` | Asia Pacific (Seoul)      | ✔️                            |                |
 | `ap-northeast-3` | Asia Pacific (Osaka)      | ✔️                            |                |
 | `ap-southeast-1` | Asia Pacific (Singapore)  | ✔️                            |                |
-| `ap-southeast-2` | Asia Pacific (Sydney)     | ✔️                            |                |
-| `ap-south-1`     | Asia Pacific (Mumbai)     | ✔️                            | ✔️              |
+| `ap-southeast-2` | Asia Pacific (Sydney)     | ✔️                            | ✔️              |
+| `ap-south-1`     | Asia Pacific (Mumbai)     | ✔️                            |                |
 | `ca-central-1`   | Canada (Central)          | ✔️                            |                |
 | `eu-central-1`   | Europe (Frankfurt)        | ✔️                            | ✔️              |
 | `eu-north-1`     | Europe (Stockholm)        | ✔️                            |                |
@@ -70,13 +63,11 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 
 Modifying the region of an existing cluster on Astro is not supported. If you're interested in an AWS region that isn't listed, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-### RDS instance type
+## Supported RDS instance types
 
-Every Astro cluster on AWS is created with and requires an [RDS instance](https://aws.amazon.com/rds/). RDS serves as a primary relational database for the data plane and powers the metadata database of all Astro Deployments within a single cluster. During the cluster creation process, you are asked to specify an RDS instance type according to your use case and expected workload, but it can be modified at any time.
+The following AWS RDS instance types are supported on Astro:
 
-Astro supports a variety of AWS RDS instance types. Each instance type has varying amounts of CPU, memory, storage, and networking capacity. For detailed information on each instance type, reference [AWS documentation](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, reach out to [Astronomer support](https://cloud.astronomer.io/support).
-
-#### db.r5
+### db.r5
 
 - db.r5.large (_default_)
 - db.r5.xlarge
@@ -87,7 +78,7 @@ Astro supports a variety of AWS RDS instance types. Each instance type has varyi
 - db.r5.16xlarge
 - db.r5.24xlarge
 
-#### db.m5
+### db.m5
 
 - db.m5.large
 - db.m5.xlarge
@@ -98,17 +89,9 @@ Astro supports a variety of AWS RDS instance types. Each instance type has varyi
 - db.m5.16xlarge
 - db.m5.24xlarge
 
-### Worker node pools
+For detailed information about each instance type, see [Amazon RDS Instance Types](https://aws.amazon.com/rds/instance-types/). If you're interested in an RDS instance type that is not on this list, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-A node pool is a group of nodes within a cluster that all have the same configuration. On Astro, worker nodes are responsible for running the Pods that execute Airflow tasks. Each worker node pool can be configured with a node instance type and a maximum node count. All Astro clusters have one worker node pool by default, but you can configure additional node pools to optimize resource use.
-
-If your cluster has multiple worker node pools with different worker node instance types, users in your organization can configure tasks to run on those worker types using [worker queues](configure-deployment-resources.md#worker-queues). To enable a new worker type for your cluster, contact [Astronomer support](https://cloud.astronomer.io/support) with a request to create a new node pool or modify an existing node pool.
-
-Astronomer monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and provide recommendations for updating your node pools to optimize your infrastructure spend or increase the efficiency of your tasks.
-
-For information about each available instance type, see the following resource reference and [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/).
-
-### Worker node resource reference
+## Supported worker node pool instance types
 
 Each worker in a worker node pool runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead.
 
@@ -186,10 +169,7 @@ If you need to pass significant data between Airflow tasks, Astronomer recommend
 
 :::
 
-### Maximum node count
+## Related documentation
 
-Each Astro cluster has a limit on how many nodes it can run at once. This maximum includes worker nodes as well as system nodes managed by Astronomer.
-
-The default maximum node count for all nodes across your cluster is 20. A cluster's node count is most affected by the number of worker Pods that are executing Airflow tasks. See [Worker autoscaling logic](configure-worker-queues.md#worker-autoscaling-logic).
-
-If the node count for your cluster reaches the maximum node count, new tasks might not run or get scheduled. Astronomer monitors maximum node count and is responsible for contacting your organization if it is reached. To check your cluster's current node count, contact [Astronomer Support](https://cloud.astronomer.io/support).
+- [Create a new cluster on Astro](create-cluster.md)
+- [Manage and modify clusters](modify-cluster.md)

@@ -8,23 +8,21 @@ description: Integrate your internal authentication server with Astronomer Softw
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Astronomer Software by default allows users to create an account with and authenticate using one of the 3 methods below:
+Astronomer Software by default allows users to create an account with and authenticate using one of the following methods:
 
 - Google OAuth
 - GitHub OAuth
 - Local username/password
 
-Authentication methods are entirely customizable. In addition to the 3 defaults above, we provide the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
+Authentication methods are entirely customizable. In addition to the default methods, Astronomer provides the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
 
 - [Microsoft Azure Active Directory (AD)](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc)
 - [Okta](https://www.okta.com)
 - [Auth0](https://auth0.com/)
 
-The doc below will walk through how to both enable local authentication and configure any OIDC provider, including step-by-step instructions for the 3 providers listed above.
-
 :::info
 
-The following setups assume that you are using Astronomer's default [implicit flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.2) as your authorization flow. To implement a custom authorization flow, read [Configure a Custom OAuth Flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
+The following setups assume that you are using the default Astronomer [implicit flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.2) as your authorization flow. To implement a custom authorization flow, see [Configure a Custom OAuth Flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
 
 :::
 
@@ -359,7 +357,7 @@ To use a custom Oauth authorization code flow:
 
     3. Push your configuration changes to your platform as described in [Apply a config change](apply-platform-config.md).
 
-:::info
+:::tip
 
 You can also pass your auth configurations as environment variables in the Houston section of your `config.yaml` file. If you choose to configure your installation this way, set the following variables in the `astronomer.houston.env` list instead of setting values in `astronomer.auth`:
 
@@ -374,6 +372,9 @@ AUTH__OPENID_CONNECT__FLOW="implicit" # or "code"
 AUTH__OPENID_CONNECT__<idp-provider>__BASE_DOMAIN="<base-domain>"
 AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME="Custom OAuth" # Only used for custom flows
 ```
+
+For further security, you can specify the values of these environment variables as Kubernetes secrets in the `astronomer.houston.secret` list. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
+
 :::
 
 ### Step 2: Configure your identity provider
@@ -495,3 +496,47 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 </TabItem>
 </Tabs>
+
+## Store and encrypt identity provider secrets
+
+You can prevent your identity provider passwords, authorization tokens, and security keys from being exposed as plain text by encrypting them in Kubernetes secrets.
+
+This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow).
+ 
+1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). The following example encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
+
+    ```yaml
+    # Required configuration for all secrets
+    kind: Secret
+    apiVersion: v1
+    metadata:
+         name: okta-secret
+         labels:
+            release: {{ .Release.Name }}
+            chart: {{ .Chart.Name }}
+            heritage: {{ .Release.Service }}
+            component: {{ template "houston.backendSecret" . }}
+    type: Opaque
+    # Specify a key and value for the data you want to encrypt
+    data:
+        okta_client_secret: {{ "<okta-secret-value>" | b64enc | quote }}
+    ```
+
+2. Run the following command to apply your secret to your Astronomer cluster:
+
+    ```sh
+    kubectl apply -f ./secret.yaml
+    ```
+
+3. Reference your secret name, key, and the environment variable you want the key to apply towards in your `config.yaml` file. To configure the example secret from Step 1 as an Okta client secret, you would add the following:
+
+    ```yaml
+    astronomer:
+        houston:
+            secret:
+             - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
+               secretName: "okta-secret"
+               secretKey: "okta_client_secret"
+    ```
+
+4. Save and push your changes. See [Apply a config change](apply-platform-config.md).

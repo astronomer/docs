@@ -94,6 +94,7 @@ module.exports = {
           items: ["install-aws", "install-azure", "install-gcp"],
         },
         "manage-workspaces",
+        "manage-organization",
         {
           type: "category",
           label: "User access",
@@ -103,7 +104,6 @@ module.exports = {
           type: "category",
           label: "Manage clusters",
           items: [
-            "view-clusters",
             "create-cluster",
             "modify-cluster",
             {

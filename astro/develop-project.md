@@ -404,18 +404,17 @@ This setup assumes that each custom Python package is hosted within its own priv
 
 #### Step 1: Specify the private repository in your project
 
-To add a Python package from a private repository to your Astro project, specify the repository’s SSH URL in your project’s `requirements.txt` file. The URL should use the following format:
+To add a Python package from a private repository to your Astro project, specify the Secure Shell (SSH) URL for the repository in a new `private-requirements.txt` file. Use the following format for the SSH URL:
 
 ```
 git+ssh://git@github.com/<your-github-organization-name>/<your-private-repository>.git
 ```
 
-For example, to install `mypackage1` and `mypackage2` from `myorganization`, as well as `numpy v 1.22.1`, you would add the following to your `requirements.txt` file:
+For example, to install `mypackage1` and `mypackage2` from `myorganization`, you would add the following to your `private-requirements.txt` file:
 
 ```
 git+ssh://git@github.com/myorganization/mypackage1.git
 git+ssh://git@github.com/myorganization/mypackage2.git
-numpy==1.22.1
 ```
 
 This example assumes that the name of each of your Python packages is identical to the name of its corresponding GitHub repository. In other words,`mypackage1` is both the name of the package and the name of the repository.
@@ -424,74 +423,31 @@ This example assumes that the name of each of your Python packages is identical 
 
 1. Optional. Copy and save any existing build steps in your `Dockerfile`.
 
-2. In your `Dockerfile`, add `AS stage` to the `FROM` line which specifies your Runtime image. For example, if you use Runtime 5.0.0, your `FROM` line would be:
+2. Add `openssh-client` and `git` to your `packages.txt` file.
 
-   ```text
-   FROM quay.io/astronomer/astro-runtime:5.0.0-base AS stage1
-   ```
-
-  :::info
-
-  If you currently use the default distribution of Astro Runtime, replace your existing image with its corresponding `-base` image. The `-base` distribution is built to be customizable and does not include default build logic. For more information on Astro Runtime distributions, see [Distributions](runtime-image-architecture.md#distribution).
-
-  :::
-
-3. After the `FROM` line specifying your Runtime image, add the following configuration:
+3. In your Dockerfile, add the following instructions:
 
     ```docker
-    LABEL maintainer="Astronomer <humans@astronomer.io>"
-    ARG BUILD_NUMBER=-1
-    LABEL io.astronomer.docker=true
-    LABEL io.astronomer.docker.build.number=$BUILD_NUMBER
-    LABEL io.astronomer.docker.airflow.onbuild=true
-    # Install OS-Level packages
-    COPY packages.txt .
-    RUN apt-get update && cat packages.txt | xargs apt-get install -y
+    RUN mkdir -p -m 0700 ~/.ssh && \
+        echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" >> ~/.ssh/known_hosts
 
-    FROM stage1 AS stage2
-    USER root
-    RUN apt-get -y install git python3 openssh-client \
-      && mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
-    # Install Python packages
-    COPY requirements.txt .
-    RUN --mount=type=ssh,id=github pip install --no-cache-dir -q -r requirements.txt
-
-    FROM stage1 AS stage3
-    # Copy requirements directory
-    COPY --from=stage2 /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
-    COPY --from=stage2 /usr/local/bin /home/astro/.local/bin
-    ENV PATH='/home/astro/.local/bin:$PATH'
-
-    COPY . .
+    COPY private-requirements.txt .
+    RUN --mount=type=ssh,id=github pip install --no-cache-dir --requirement private-requirements.txt
+    ENV PATH="/home/astro/.local/bin:$PATH"
     ```
 
-    In order, these commands:
+    In order, these instructions:
 
-    - Install any OS-level packages specified in `packages.txt`.
-    - Securely mount your SSH key at build time. This ensures that the key itself is not stored in the resulting Docker image filesystem or metadata.
-    - Install Python-level packages from your private repository as specified in your `requirements.txt` file.
-
-  :::tip
-
-  This example `Dockerfile` assumes Python 3.9, but some versions of Astro Runtime may be based on a different version of Python. If your image is based on a version of Python that is not 3.9, replace `python 3.9` in the **COPY** commands listed under the `## Copy requirements directory` section of your `Dockerfile` with the correct Python version.
-
-  To identify the Python version in your Astro Runtime image, run:
-
-     ```
-     docker run quay.io/astronomer/astro-runtime:<runtime-version>-base python --version
-     ```
-
-  Make sure to replace `<runtime-version>` with your own.
-
-  :::
+    - Add the fingerprint for GitHub to `known_hosts`
+    - Copy your `private-requirements.txt` file into the image
+    - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. Tthis securely mounts your SSH key at build time, ensuring that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Add the user bin directory onto `PATH`
 
   :::info
 
-  If your repository is not hosted on GitHub, replace the domain in the `ssh-keyscan` command with the domain where the package is hosted.
+  If your repository isn't hosted on GitHub, replace the fingerprint with one from where the package is hosted. Use `ssh-keyscan` to generate the fingerprint.
 
   :::
-
-4. Optional. If you had any other commands in your original `Dockerfile`, add them after the line `FROM stage1 AS stage3`.
 
 #### Step 3: Build a custom Docker image
 

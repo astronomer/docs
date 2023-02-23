@@ -1,49 +1,109 @@
 ---
-sidebar_label: 'Modify a cluster'
-title: "Modify a cluster"
+sidebar_label: 'Configure a cluster'
+title: "Manage and modify clusters"
 id: modify-cluster
-description: Learn what changes are supported on existing Astro clusters.
+description: Learn what you can configure on an existing Astro cluster.
 ---
 
 import PremiumBadge from '@site/src/components/PremiumBadge';
 
-New clusters on Astro are created with a default configuration that is suitable for standard use cases. However, your organization might need modifications to an existing cluster to meet specific business requirements. 
+New clusters on Astro typically have default configurations that are suitable for standard use cases. However, your organization might need to modify an existing cluster to meet certain networking, governance, or use case requirements. For example, you might need to:
 
-The following are some of the cluster and Deployment-level modifications that require Astronomer support and can't be completed in the Cloud UI or with the Astro CLI:
+- Add a worker type, which creates a new worker node pool in your cluster and allows your team to select that worker type in a Deployment.
+- Authorize a Workspace to a cluster, which ensures that your cluster only host Deployments from a specific Workspace or set of Workspaces.
+- Create a VPC connection or a transit gateway connection between your Astro cluster and a target VPC.
+- Apply custom tags, which can help your team identify your Astro clusters and associate them with a particular purpose or owner within your cloud provider ecosystem. (AWS only)
 
-- [Create a new cluster](create-cluster.md).
-- Delete a cluster.
-- Create a new node pool. This enables a new worker type for all Deployments in the cluster. See [Cluster settings reference](https://docs.astronomer.io/astro/category/cluster-settings-reference).
-- Update an existing worker node pool, including its node instance type or maximum node count.
-- Create a VPC connection or a transit gateway connection between a cluster and a target VPC. See [Connect Astro to external data sources](https://docs.astronomer.io/astro/category/connect-astro).
-- Apply custom tags _(AWS only)_
+Most of these modifications can't be completed in the Cloud UI or with the Astro CLI and require you to contact [Astronomer support](https://support.astronomer.io). Cluster modifications typically take only a few minutes to complete and don't require downtime. In these cases, the Airflow UI and Cloud UI continue to be available and your Airflow tasks are not interrupted.
 
-To modify a cluster, you'll need the following:
+The information provided here will help you determine which modifications you can make to your clusters on Astro and how to request or apply the modifications. To create a new cluster, see [Create a cluster](create-cluster.md).
 
-- A cluster on Astro.
-- Permissions to make changes to cluster configurations.
+If you don't have a cluster on Astro, see [Install Astro](https://docs.astronomer.io/astro/category/install-astro). If you have an existing cluster and you want to create additional clusters, see [Create a cluster](create-cluster.md).
 
-If you don't have a cluster on Astro, see [Install Astro](https://docs.astronomer.io/astro/category/install-astro). If you have an existing cluster and you want to create additional clusters, see [Create a cluster](create-cluster.md). To view the current configuration for a cluster, see [View Astro clusters](view-clusters.md).
+## View clusters
 
-## Request and confirm a cluster change
+In the Cloud UI, click the **Clusters** tab to view a list of the clusters that are available to your Organization. Click a cluster and then click the **Worker Types**, **Workspace Authorization**, or **Details** tabs to view cluster information including:
 
-Before you request a change to a cluster, make sure it's supported. To view the default and supported cluster configuration values for your cloud provider, see [Cluster settings reference](https://docs.astronomer.io/astro/category/cluster-settings-reference). After you've confirmed the change you want to make is supported, contact [Astronomer support](https://cloud.astronomer.io/support).
+- The region for the cluster.
+- The cloud provider Account ID associated with the cluster.
+- The size and type of the cluster's database.
+- When the cluster was created and last updated.
 
-When Astronomer support receives your change request, it will be reviewed and you'll be notified before it's implemented. Most modifications to an existing cluster take only a few minutes to complete and don't require downtime. In these cases, the Airflow UI and Cloud UI continue to be available and your Airflow tasks are not interrupted.
+Some of the configurations in the Cloud UI cannot be changed. Only the listed configurations can be modified by your team.
 
-For modifications that do require downtime, such as changing your cluster's node instance type, Astronomer support will inform you of the expected impact and ask you to confirm if you want to proceed.
+## Manage worker types
 
-To confirm a modification was completed, open the **Clusters** tab in the Cloud UI. You should see the updated configuration in the table entry for your cluster.
+On Astro, worker nodes execute Airflow tasks. Workers are organized through worker node pools, which are sets of configurations that Astro uses to scale up and down workers of a specific instance type. Each worker node pool can be configured with a node instance type and a maximum node count. 
 
-## Authorize Workspaces to a Cluster
+To have a Deployment run Airflow tasks with a specific worker type, you need to work with Astronomer support to create a worker node pool for that worker type on the cluster hosting the Deployment. Then, you can configure a Deployment worker queue to use that worker type. Contact [Astronomer support](https://support.astronomer.io) with the name of the worker type(s) you want to enable in your cluster. For example, `m6i.2xlarge`.
+
+To confirm a modification was completed, click the **Clusters** tab in the Cloud UI and then click the **Worker Types** tab to view updated configuration information.
+
+### About worker node pools
+
+All Astro clusters have one worker node pool for one worker type by default, but you can configure up to 30 additional worker types. After Astronomer creates a worker node pool for a cluster, your team can configure a worker queue in any Deployment with that worker type. The worker type appears as a new option on the **Worker Type** page of the Cloud UI and as an option in the Astro CLI. If your cluster only has one worker type, all tasks across Deployments in your cluster can only run on that type of worker. Individual worker nodes run only on a single Deployment, but a worker node pool can have worker nodes spread across multiple Deployments.
+
+Creating a worker node pool does not necessarily mean that the infrastructure is created in your cluster. A worker node pool has zero nodes if any of the following are true:
+
+- There are no Deployments in your cluster that have worker queues configured with the worker type.
+- There are no default worker queues configured with the worker type. The default worker queue cannot scale to zero workers, but additional worker queues can scale to zero.
+
+### Configure node instance type
+
+Each worker type on Astro is configured with a node instance type that is defined by your cloud provider. For example, `m5.2xlarge` on AWS, `Standard_D8_v5` on Azure, or `e2-standard-8` on GCP. Node instance types are comprised of varying combinations of CPU, memory, storage, and networking capacity. By choosing a node instance type, you can provide the appropriate balance of resources for your Airflow tasks.
+
+How your Airflow tasks use the capacity of a worker node depends on which executor is selected for your Deployment. With the Celery executor, each worker node runs a single worker Pod. A worker Pod's actual available size is equivalent to the total capacity of the instance type minus Astro’s system overhead. With the Kubernetes executor, each worker node can run an unlimited number of Pods as long as the sum of all requests from each Pod doesn't exceed the total capacity of the node minus Astro's system overhead.
+
+To modify the node instance type of an existing worker node pool, contact [Astronomer Support](https://cloud.support.astronomer.io). For the list of worker node pool instance types available on Astro, see [AWS supported worker node pool instance types](resource-reference-aws.md#supported-worker-node-pool-instance-types), [Azure supported worker node pool instance types](resource-reference-azure.md#supported-worker-node-pool-instance-types), or [GCP supported worker node pool instance types](resource-reference-gcp.md#supported-worker-node-pool-instance-types).
+
+### Configure maximum node count
+
+Each worker node pool on Astro has a **Maximum Node Count**, which represents the maximum total number of nodes that a worker node pool can have at any given time across Deployments. The default maximum node count for each worker node pool is 20. When this limit is reached, the worker node pool can't auto-scale and worker Pods may fail to schedule. A cluster's node count is most affected by the number of tasks that are running at the same time across your cluster, and the number of worker Pods that are executing those tasks. See [Worker autoscaling logic](configure-worker-queues.md#worker-autoscaling-logic).
+
+Maximum node count is different than **Maximum Worker Count**, which is configured within the Cloud UI for each worker queue and determines the maximum total number of nodes that the worker queue can scale to. Maximum node count for a node pool must always be equal to or greater than the sum of all maximum possible workers across all worker queues that are configured with that worker node type.
+
+For example, consider the following configurations within a cluster:
+
+- You have 3 Deployments that each have 1 worker queue configured with the `m5.2xlarge` worker type for a total of 3 worker queues.
+- 1 of the 3 worker queues has a maximum worker count of 10.
+- 2 of the 3 worker queues have a maximum worker count of 5.
+
+In this scenario, the maximum node count for the `m5.2xlarge` node pool in your cluster must be equal to or greater than 15 to make sure that each worker queue can scale to its limit.
+
+Astronomer regularly monitors your usage and the number of nodes deployed in your cluster. As your usage of Airflow increases, Astronomer support might contact you and recommend that you increase or decrease your maximum node count to limit infrastructure cost or ensure that you can support a growing number of tasks and Deployments. If your maximum node count is reached, you will be contacted.
+
+To change the maximum node count for a node pool, contact [Astronomer Support](https://cloud.astronomer.io/support).
+
+## Configure a Database instance type
+
+Every Astro cluster is created with and requires a managed PostgreSQL database. This database serves as a primary relational database for the data plane and powers the metadata database of each Astro Deployment within a single cluster.
+
+Astro uses the following databases:
+
+- AWS: [Amazon RDS](https://aws.amazon.com/rds/)
+- GCP: [Cloud SQL](https://cloud.google.com/sql)
+- Azure: [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/products/postgresql/)
+
+During the cluster creation process, you are asked to specify a **DB Instance Type** according to your use case and expected workload, but it can be modified at any time. Each database instance type costs a different amount of money and comprises of varying combinations of CPU, memory, and network performance.
+
+For the list of database instance types available on Astro, see: 
+
+- [Supported RDS instance types](resource-reference-aws.md#supported-rds-instance-types)
+- [Supported Cloud SQL instance types](resource-reference-gcp.md#supported-cloud-sql-instance-types).
+- [Supported Azure Database for PostgreSQL instance types](resource-reference-azure.md#supported-azure-database-for-postgresql-instance-types)
+
+To request support for a different database instance type, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+## Authorize Workspaces to a cluster
 
 <PremiumBadge />
 
-As an Organization Owner, you can keep teams and projects isolated by authorizing Workspaces only to specific Clusters. Gain greater management over cloud resources by ensuring that only authorized pipelines are running on specific clusters.
+As an Organization Owner, you can keep teams, resources, and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over your cloud resources by ensuring that only authorized pipelines are running on specific clusters.
 
-1. In the Cloud UI, go to the **Clusters** tab, select a cluster, go to **Workspace Authorization**, and then click **Edit Workspace Authorization**.
-2. Click **Restricted** and select the Workspaces that you want to map to the cluster. 
-3. Click **Update**.
+1. In the Cloud UI, click the **Clusters** tab and then select a cluster.
+2. Click the **Workspace Authorization** tab and then click **Edit Workspace Authorization**.
+3. Click **Restricted** and select the Workspaces that you want to map to the cluster. 
+4. Click **Update**.
 
 After you authorize Workspaces to a cluster, Astro treats the cluster as restricted. Restricted clusters appear as an option when creating a new Deployment only if the Deployment's Workspace is authorized to the cluster. 
 

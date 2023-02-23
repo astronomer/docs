@@ -53,7 +53,7 @@ Because Astro Runtime releases more frequently than Apache Airflow, a Runtime im
 By default, the Docker image in your Dockerfile is:
 
 ```
-FROM quay.io/astronomer/runtime:<latest-runtime-version>
+FROM quay.io/astronomer/astro-runtime:<latest-runtime-version>
 ```
 
 This command installs a Debian-based Astro Runtime image that supports the latest version of Airflow. To use a specific Airflow version, read [Upgrade Airflow](manage-airflow-versions.md).

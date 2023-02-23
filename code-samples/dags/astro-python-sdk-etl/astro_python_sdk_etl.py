@@ -77,6 +77,8 @@ def example_s3_to_snowflake_etl():
         columns=["sell", "list", "variable", "value"],
     )
     record_results.set_upstream(create_results_table)
+    # Delete temporary and unnamed tables
+    aql.cleanup()
 
 
 example_s3_to_snowflake_etl_dag = example_s3_to_snowflake_etl()
