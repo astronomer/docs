@@ -9,7 +9,7 @@ id: 'manage-astro-executors'
   <meta name="og:description" content="Learn how to select and manage Astro executors." />
 </head>
 
-After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. This document provides you with an overview of how to configure the Celery and Kubernetes executors on Astro. To choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
+After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro. To choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
 
 ## Manage the Celery executor
 
@@ -135,6 +135,48 @@ with DAG(
 ```
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
+
+### Create temporary storage
+
+Workers on the Astro data plane have limited temporary storage for Airflow tasks. Creating or storing files in the Airflow local file system is not recommended, as it is unlikely that there will be sufficient storage for your tasks and it will be available to other worker Pods. To create or store Airflow files, Astronomer recommends creating an Airflow connection to an external storage service such as Amazon S3 and using it instead of local file storage. The following example shows how you can add temporary storage to a `pod_override` configuration in your DAG code:
+
+```python
+from kubernetes.client import models as k8s
+import pendulum
+import time
+
+from airflow import DAG
+from airflow.decorators import task
+from airflow.example_dags.libs.helper import print_stuff
+
+
+volumes = [k8s.V1Volume(name="cache-volume", empty_dir=k8s.V1EmptyDirVolumeSource())]
+
+volume_mounts = [k8s.V1VolumeMount(mount_path="/cache", name="cache-volume")]
+
+executor_config = {
+    "pod_override": k8s.V1Pod(
+        spec=k8s.V1PodSpec(
+            containers=[k8s.V1Container(name="base", volume_mounts=volume_mounts)],
+            volumes=volumes,
+        )
+    )
+}
+
+with DAG(
+    dag_id="empty_dir_example_dag",
+    schedule=None,
+    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
+    catchup=False,
+) as dag:
+
+    @task(executor_config=executor_config)
+    def empty_dir_example():
+        print_stuff()
+        time.sleep(60)
+
+    empty_dir_example()
+```
 
 ### Change the Pod worker node type
 
