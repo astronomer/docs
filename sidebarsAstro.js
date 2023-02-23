@@ -210,8 +210,8 @@ module.exports = {
     },
     {
       type: "doc",
-      label: "Run the Astro CLI in Podman containers",
-      id: "cli/cli-podman",
+      label: "Configure the CLI",
+      id: "cli/configure-cli",
     },
     {
       type: "doc",
