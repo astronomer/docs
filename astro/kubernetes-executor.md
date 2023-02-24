@@ -11,7 +11,7 @@ This feature is in [Private Preview](https://docs.astronomer.io/astro/feature-pr
 
 The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
 
-By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can’t run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
+By default, each task on Astro runs in a dedicated Kubernetes Pod with up to 1 CPU and 256Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can’t run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
 ## Prerequisites
 
