@@ -44,7 +44,7 @@ In the following example, the task uses both, `.partial()` and `.expand()`, to d
     groupId= "basic-dynamic-task-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -296,7 +296,7 @@ The following code snippet shows how a list of zipped arguments can be provided 
     groupId= "zip-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -354,7 +354,7 @@ To mimic the behavior of the [`zip_longest()`](https://docs.python.org/3/library
     groupId= "zip-fillvalue-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -479,7 +479,7 @@ The code snippet below shows how to use `.map()` to skip specific mapped tasks b
     groupId= "map-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -576,7 +576,7 @@ The example DAG completes the following steps:
     groupId= "s3-to-snowflake-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

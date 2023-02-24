@@ -90,7 +90,7 @@ In this section, you'll review a DAG that uses XCom to pass data between tasks. 
     groupId= "xcom-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -139,7 +139,7 @@ Building on the previous cat fact example, you are now interested in getting mor
     groupId= "intermediary-storage-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

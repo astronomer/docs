@@ -113,7 +113,7 @@ The following example DAG implements the TriggerDagRunOperator to trigger the `d
     groupId= "triggerdagrun-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -152,7 +152,7 @@ The following example DAG uses three ExternalTaskSensors at the start of three p
     groupId= "external-task-sensor-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -195,7 +195,7 @@ Using the API to trigger a downstream DAG can be implemented within a DAG by usi
     groupId= "rest-api-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Syntax', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
