@@ -339,12 +339,6 @@ Starting in Airflow 2.5, you can add notes to task instances and DAG runs from t
 
  ![Add task note](/img/guides/2_5_task_notes.png)
 
-:::note
-
-This feature is only available in Airflow version 2.5+. Ensure your Dockerfile is using at least version 7.0 of Astro runtime to complete this step.
-
-:::
-
 ## Conclusion
 
 Congratulations! You now know how to add fancy documentation to both your DAGs and your Airflow tasks.
