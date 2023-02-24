@@ -5,9 +5,6 @@ description: "How to catchup, backfill, and clear task instances in Airflow."
 id: rerunning-dags
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 Running DAGs whenever you want is one of the most powerful and flexible features of Airflow. Scheduling DAGs can ensure future DAG runs happen at the right time, but you also have options for running DAGs in the past. For example, you might need to run a DAG in the past if:
 
 - You need to rerun a failed task for one or multiple DAG runs.
