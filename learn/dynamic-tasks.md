@@ -123,95 +123,97 @@ In this section you'll learn how to pass mapping information to a downstream tas
 - The upstream task is defined using a traditional operator and the downstream task is defined using the TaskFlow API.
 - Both tasks are defined using traditional operators.
 
-### Map inputs when both tasks are defined with the TaskFlow API
+<Tabs
+    defaultValue="two-flow"
+    groupId= "mapping-over-results"
+    values={[
+        {label: 'TaskFlow over TraskFlow', value: 'two-flow'},
+        {label: 'TaskFlow over Traditional operator', value: 'flow-traditional'},
+        {label: 'Traditional operator over TaskFlow', value: 'traditional-flow'},
+        {label: 'Traditional operator over Traditional operator', value: 'two-traditional'},
+    ]}>
+
+<TabItem value="two-flow">
 
 If both tasks are defined using the TaskFlow API, you can provide a function call to the upstream task as the argument for the `expand()` function.
 
 ```python
 @task
 def one_two_three_TF():
-    return [1,2,3]
+    return [1, 2, 3]
 
 @task
 def plus_10_TF(x):
-    return x+10
+    return x + 10
 
 plus_10_TF.partial().expand(x=one_two_three_TF())
 ```
+</TabItem>
+<TabItem value="flow-traditional">
 
-### Map inputs to a traditional operator-defined task from a TaskFlow API-defined task
+If you are mapping over the results of a traditional operator, you need to provide the argument for `expand()` using the `.output` attribute of the task object.
 
-The format of the mapping information returned by the upstream TaskFlow API task might need to be modified to be accepted by the `op_args` argument of the traditional PythonOperator.
+```python
+def one_two_three_traditional():
+    return [1, 2, 3]
+
+@task
+def plus_10_TF(x):
+    return x + 10
+
+one_two_three_task = PythonOperator(
+    task_id="one_two_three_task", python_callable=one_two_three_traditional
+)
+
+plus_10_TF.partial().expand(x=one_two_three_task.output)
+```
+
+</TabItem>
+<TabItem value="traditional-flow">
+
+When mapping a traditional PythonOperator over results from an upstream TaskFlow task you need to modify the format of the output to be accepted by the `op_args` argument of the traditional PythonOperator.
 
 ```python
 @task
 def one_two_three_TF():
     # this adjustment is due to op_args expecting each argument as a list
-    return [[1],[2],[3]]  
+    return [[1], [2], [3]]
 
 def plus_10_traditional(x):
-    return x+10
+    return x + 10
 
 plus_10_task = PythonOperator.partial(
-    task_id="plus_10_task",
-    python_callable=plus_10_traditional
-).expand(
-    op_args=one_two_three_TF()
-)
+    task_id="plus_10_task", python_callable=plus_10_traditional
+).expand(op_args=one_two_three_TF())
 ```
 
-### Map inputs to TaskFlow API-defined task from a traditional operator-defined task
+</TabItem>
+<TabItem value="two-traditional">
 
-If you are mapping over the results of a traditional operator, you need to format the argument for `expand()` using the `XComArg` object.
-
-```python
-from airflow import XComArg
-
-def one_two_three_traditional():
-    return [1,2,3]
-
-@task
-def plus_10_TF(x):
-    return x+10
-
-one_two_three_task = PythonOperator(
-    task_id="one_two_three_task",
-    python_callable=one_two_three_traditional
-)
-
-plus_10_TF.partial().expand(x=XComArg(one_two_three_task))
-```
-
-### Map inputs when both tasks are defined with traditional operators
-
-
-The `XComArg` object can also be used to map a traditional operator over the results of another traditional operator.
+When mapping a traditional PythonOperator over the result of another PythonOperator use the `.output` attribute on the task object and make sure the format returned by the upstream task matches the format expected by the `op_args` parameter.
 
 ```python
-from airflow import XComArg
-
 def one_two_three_traditional():
     # this adjustment is due to op_args expecting each argument as a list
-    return [[1],[2],[3]]
+    return [[1], [2], [3]]
 
 def plus_10_traditional(x):
-    return x+10
+    return x + 10
 
 one_two_three_task = PythonOperator(
-    task_id="one_two_three_task",
-    python_callable=one_two_three_traditional
+    task_id="one_two_three_task", python_callable=one_two_three_traditional
 )
 
 plus_10_task = PythonOperator.partial(
-    task_id="plus_10_task",
-    python_callable=plus_10_traditional
-).expand(
-    op_args=XComArg(one_two_three_task)
-)
+    task_id="plus_10_task", python_callable=plus_10_traditional
+).expand(op_args=one_two_three_task.output)
 
 # when only using traditional operators, define dependencies explicitly
 one_two_three_task >> plus_10_task
 ```
+
+</TabItem>
+</Tabs>
 
 ## Mapping over multiple parameters
 
