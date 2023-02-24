@@ -131,7 +131,7 @@ Follow these steps to configure Azure AD as your OIDC provider.
 
 #### Create a client secret (Optional)
 
-Complete this setup only if you are importing groups of users to Astronomer Software as [Teams](import-idp-groups.md).
+Complete this setup only if you want to import Azure AD groups to Astronomer Software as [Teams](import-idp-groups.md).
 
 1. In your Azure AD application management left menu, click **Certificates & secrets**.
 2. Click **New client secret**.
