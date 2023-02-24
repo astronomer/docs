@@ -221,7 +221,7 @@ Using the `--no-hooks` flag in [Step 7](#step-7-run-astronomers-upgrade-script) 
 
 If you do specify the `--no-hooks` flag, the upgrade script will return a success message even though it failed, resulting in broken behavior in your upgraded environment.
 
-#### Upgrading to 0.30 when using Azure Database for PostgreSQL
+#### PostgreSQL requirements for Astronomer Software 0.30
 
 The `trgm` extension for PosgreSQL was enabled in Astronomer Software 0.30. Superuser permissions are required to run the extension. To apply PostgreSQL superuser permissions to an existing user, run the following SQL command:
 
