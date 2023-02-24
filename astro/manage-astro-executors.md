@@ -136,9 +136,9 @@ with DAG(
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
 
-### Create temporary storage
+### Create temporary storage for tasks
 
-Workers on the Astro data plane have limited temporary storage for Airflow tasks. Creating or storing files in the Airflow local file system is not recommended, as it is unlikely that there will be sufficient storage for your tasks and it will be available to other worker Pods. To create or store Airflow files, Astronomer recommends creating an Airflow connection to an external storage service such as Amazon S3 and using it instead of local file storage. The following example shows how you can add temporary storage to a `pod_override` configuration in your DAG code:
+The Airflow metadata database has limited temporary storage for Airflow tasks. Creating or storing files in the metadata database system is not recommended, as it is unlikely that there will be sufficient storage for your tasks and the data will be available to other worker Pods. To create or store temporary files for task execution, Astronomer recommends creating a temporary folder for each task worker Pod. The following example shows how you can add a temporary folder to a Pod using a `pod_override` configuration:
 
 ```python
 from kubernetes.client import models as k8s
