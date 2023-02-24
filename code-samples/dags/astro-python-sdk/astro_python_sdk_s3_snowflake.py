@@ -62,13 +62,26 @@ with dag:
             path=S3_FILE_PATH + "/orders_data_header.csv", conn_id=S3_CONN_ID
         ),
         output_table=Table(
-        conn_id=SNOWFLAKE_CONN_ID
-        columns=[
-                 sqlalchemy.Column("order_id", sqlalchemy.String(60), primary_key=True),
-                 sqlalchemy.Column("customer_id", sqlalchemy.String(60), nullable=False, key="customer_id"),
-                 sqlalchemy.Column("purchase_date", sqlalchemy.String(60), nullable=False, key="purchase_date"),
-                 sqlalchemy.Column("amount", sqlalchemy.Integer, nullable=False, key="amount"),
-            ],),
+            conn_id=SNOWFLAKE_CONN_ID,
+            columns=[
+                sqlalchemy.Column("order_id", sqlalchemy.String(60), primary_key=True),
+                sqlalchemy.Column(
+                    "customer_id",
+                    sqlalchemy.String(60),
+                    nullable=False,
+                    key="customer_id",
+                ),
+                sqlalchemy.Column(
+                    "purchase_date",
+                    sqlalchemy.String(60),
+                    nullable=False,
+                    key="purchase_date",
+                ),
+                sqlalchemy.Column(
+                    "amount", sqlalchemy.Integer, nullable=False, key="amount"
+                ),
+            ],
+        ),
     )
 
     # Create a Table object for customer data in the Snowflake database
