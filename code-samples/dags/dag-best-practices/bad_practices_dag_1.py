@@ -8,21 +8,28 @@ from pendulum import datetime
 
 # Bad practice: top-level code in a DAG file
 hook = PostgresHook("database_conn")
-result = hook.get_records("SELECT * FROM grocery_list;")
+results = hook.get_records("SELECT * FROM grocery_list;")
+
+sql_queries = []
+
+for result in results:
+
+    grocery = result[0]
+    amount = result[1]
+    sql_query = f"INSERT INTO purchase_order VALUES ('{grocery}', {amount});"
+
+    sql_queries.append(sql_query)
 
 
 @dag(
     start_date=datetime(2023, 1, 1), max_active_runs=3, schedule="@daily", catchup=False
 )
 def bad_practices_dag_1():
-    for grocery_item in result:
-        query = PostgresOperator(
-            task_id="query_{0}".format(grocery_item),
-            postgres_conn_id="postgres_default",
-            sql="INSERT INTO purchase_order VALUES (value1, value2, value3);",
-        )
 
-        query
+    insert_into_purchase_order_postgres = PostgresOperator.partial(
+        task_id="insert_into_purchase_order_postgres",
+        postgres_conn_id="postgres_default",
+    ).expand(sql=sql_queries)
 
 
 bad_practices_dag_1()

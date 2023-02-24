@@ -9,10 +9,14 @@ id: dag-best-practices
   <meta name="og:description" content="Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import CodeBlock from '@theme/CodeBlock';
 import bad_practices_dag_1 from '!!raw-loader!../code-samples/dags/dag-best-practices/bad_practices_dag_1.py';
 import bad_practices_dag_2 from '!!raw-loader!../code-samples/dags/dag-best-practices/bad_practices_dag_2.py';
 import good_practices_dag_1 from '!!raw-loader!../code-samples/dags/dag-best-practices/good_practices_dag_1.py';
+import good_practices_dag_2 from '!!raw-loader!../code-samples/dags/dag-best-practices/good_practices_dag_2.py';
 
 Because Airflow is 100% code, knowing the basics of Python is all it takes to get started writing DAGs. However, writing DAGs that are efficient, secure, and scalable requires some Airflow-specific finesse. In this guide, you'll learn how you can develop DAGs that make the most of what Airflow has to offer.
 
@@ -93,22 +97,61 @@ In the context of Airflow, top-level code refers to any code that isn't part of 
 
 Airflow executes all code in the `dags_folder` on every `min_file_process_interval`, which defaults to 30 seconds. You can read more about this parameter in the [Airflow docs](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#min-file-process-interval)). Because of this, top-level code that makes requests to external systems, like an API or a database, or makes function calls outside of your tasks can cause performance issues since these requests and connections are being made every 30 seconds rather than only when the DAG is scheduled to run. 
 
-The following DAG example dynamically generates `PostgresOperator` tasks based on records pulled from a database. For example, the `hook` and `result` variables which are written outside of an operator instantiation:
+The following DAG example dynamically generates tasks using the PostgresOperator based on records pulled from a different database. 
+
+In the **Bad practice** example the connection to the other database is made outside of an operator instantiation as top-level code. When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table. This query is run on every Scheduler heartbeat, which can cause performance issues. 
+
+
+The version shown under the **Good practice** DAG wraps the connection to the database into its own task, the `get_list_of_results` task. Now the connection is only made at when the DAG actually runs, preventing performance issues.
+
+<Tabs
+    defaultValue="bad-practice"
+    groupId= "top-level-code-example"
+    values={[
+        {label: 'Bad practice', value: 'bad-practice'},
+        {label: 'Good practice', value: 'good-practice'},
+    ]}>
+
+<TabItem value="bad-practice">
 
 <CodeBlock language="python">{bad_practices_dag_1}</CodeBlock>
 
-When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table to construct the operators in the DAG. This query is run on every Scheduler heartbeat, which can cause performance issues. A better implementation leverages [dynamic task mapping](dynamic-tasks.md) to have a task that gets the required information from the `grocery_list` table and dynamically maps downstream tasks based on the result. Dynamic task mapping is available in Airflow 2.3 and later.
+</TabItem>
+
+<TabItem value="good-practice">
+
+<CodeBlock language="python">{good_practices_dag_1}</CodeBlock>
+
+</TabItem>
+</Tabs>
+
 
 ### Treat your DAG file like a config file
 
 Including code that isn't part of your DAG or operator instantiations in your DAG file makes the DAG harder to read, maintain, and update. When possible, leave all of the heavy lifting to the hooks and operators that you instantiate within the file. If your DAGs need to access additional code such as a SQL script or a Python function, consider keeping that code in a separate file that can be read into a DAG run.
 
-The following example DAG demonstrates what you shouldn't do. A SQL query is provided directly in the `PostgresOperator` `sql` param:
+The following example DAGs demonstrate the difference between providing a SQL query directly to the PostgresOperator as shown in the tab **Bad practice** and referencing a separate SQL file under the tab **Good practice**. In the good practice DAG, the DAG-level configuration includes `template_searchpath` and the PostgresOperator specifies a `covid_state_query.sql` file that contains the same query as was directly provided to the PostgresOperator in the bad practice DAG.
+
+<Tabs
+    defaultValue="bad-practice"
+    groupId= "dag-as-config-file-examples"
+    values={[
+        {label: 'Bad practice', value: 'bad-practice'},
+        {label: 'Good practice', value: 'good-practice'},
+    ]}>
+
+<TabItem value="bad-practice">
 
 <CodeBlock language="python">{bad_practices_dag_2}</CodeBlock>
 
-Keeping the query in the DAG file like this makes the DAG harder to read and maintain. In the following DAG, the DAG-level configuration includes `template_searchpath` and the `PostgresOperator` specifies a `covid_state_query.sql` file that contains the same query as in the previous example:
-<CodeBlock language="python">{good_practices_dag_1}</CodeBlock>
+</TabItem>
+
+<TabItem value="good-practice">
+
+<CodeBlock language="python">{good_practices_dag_2}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 ### Use a consistent method for task dependencies
 

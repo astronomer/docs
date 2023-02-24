@@ -1,40 +1,33 @@
-from airflow.decorators import dag
+from airflow.decorators import dag, task
 from airflow.providers.postgres.operators.postgres import PostgresOperator
-from pendulum import datetime, duration
-
-# Default settings applied to all tasks
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "email_on_failure": False,
-    "email_on_retry": False,
-    "retries": 1,
-    "retry_delay": duration(minutes=1),
-}
-
-state = "Ohio"
+from airflow.providers.postgres.hooks.postgres import PostgresHook
+from pendulum import datetime
 
 
-# Instantiate DAG
 @dag(
-    start_date=datetime(2023, 1, 1),
-    max_active_runs=3,
-    schedule="@daily",
-    default_args=default_args,
-    catchup=False,
-    # include path to look for external files
-    template_searchpath="/usr/local/airflow/include",
+    start_date=datetime(2023, 1, 1), max_active_runs=3, schedule="@daily", catchup=False
 )
 def good_practices_dag_1():
-    query = PostgresOperator(
-        task_id="covid_query_{0}".format(state),
-        postgres_conn_id="postgres_default",
-        # reference query kept in separate file
-        sql="covid_state_query.sql",
-        params={"state": "'" + state + "'"},
-    )
+    @task
+    def get_list_of_results():
+        # good practice: wrap database connections into a task
+        hook = PostgresHook("database_conn")
+        results = hook.get_records("SELECT * FROM grocery_list;")
+        return results
 
-    query
+    @task
+    def create_sql_query(result):
+        grocery = result[0]
+        amount = result[1]
+        sql = f"INSERT INTO purchase_order VALUES ('{grocery}', {amount});"
+        return sql
+
+    sql_queries = create_sql_query.expand(result=get_list_of_results())
+
+    insert_into_purchase_order_postgres = PostgresOperator.partial(
+        task_id="insert_into_purchase_order_postgres",
+        postgres_conn_id="postgres_default",
+    ).expand(sql=sql_queries)
 
 
 good_practices_dag_1()
