@@ -8,8 +8,8 @@ id: airflow-pools
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
-import pool_example_1_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_1_traditional.py';
-import pool_example_1_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_1_taskflow.py';
+import pools_example_1_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pools_example_1_traditional.py';
+import pools_example_1_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pools_example_1_taskflow.py';
 import pools_example_2_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pools_example_2_traditional.py';
 import pools_example_2_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pools_example_2_taskflow.py';
 
@@ -175,13 +175,13 @@ In the `pool_priority_dag` below, all three of the tasks hit the API endpoint an
 
 <TabItem value="taskflow">
 
-<CodeBlock language="python">{pool_example_1_taskflow}</CodeBlock>
+<CodeBlock language="python">{pools_example_1_taskflow}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional">
 
-<CodeBlock language="python">{pool_example_1_tradtional}</CodeBlock>
+<CodeBlock language="python">{pools_example_1_tradtional}</CodeBlock>
 
 </TabItem>
 </Tabs>
