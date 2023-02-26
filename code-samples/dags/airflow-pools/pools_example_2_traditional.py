@@ -18,7 +18,6 @@ with DAG(
     catchup=False,
     default_args={"retries": 1, "retry_delay": duration(minutes=5)},
 ) as dag:
-
     task_w = EmptyOperator(task_id="start")
 
     task_x = PythonOperator(

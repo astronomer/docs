@@ -8,9 +8,7 @@ with DAG(
     end_date=datetime(2021, 12, 22, 20, 19),
     schedule="* * * * *",
     catchup=True,
-
 ) as dag:
-
     sync_sensor = DateTimeSensor(
         task_id="sync_task",
         target_time="""{{ macros.datetime.utcnow() + macros.timedelta(minutes=20) }}""",

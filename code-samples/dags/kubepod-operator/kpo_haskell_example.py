@@ -18,7 +18,6 @@ with DAG(
     schedule="@daily",
     dag_id="KPO_different_language_example_dag",
 ) as dag:
-
     say_hello_name_in_haskell = KubernetesPodOperator(
         # unique id of the task within the DAG
         task_id="say_hello_name_in_haskell",

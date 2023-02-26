@@ -23,7 +23,6 @@ with DAG(
         "priority_weight": 3,
     },
 ) as dag:
-
     task_a = PythonOperator(task_id="task_a", python_callable=api_function)
 
     task_b = PythonOperator(task_id="task_b", python_callable=api_function)

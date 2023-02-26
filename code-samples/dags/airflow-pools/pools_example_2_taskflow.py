@@ -18,7 +18,6 @@ def api_function(**kwargs):
     default_args={"retries": 1, "retry_delay": duration(minutes=5)},
 )
 def pool_unimportant_dag():
-
     task_w = EmptyOperator(task_id="start")
 
     task_x = api_function.override(

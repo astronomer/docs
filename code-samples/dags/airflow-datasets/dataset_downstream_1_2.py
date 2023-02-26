@@ -12,5 +12,4 @@ with DAG(
     schedule=[dag1_dataset, dag2_dataset],
     tags=["downstream"],
 ) as dag3:
-
     BashOperator(task_id="downstream_2", bash_command="sleep 5")

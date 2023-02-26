@@ -16,6 +16,7 @@ from airflow.providers.amazon.aws.operators.eks import (
 )
 from airflow.providers.amazon.aws.sensors.eks import EKSNodegroupStateSensor
 
+
 # custom class to create a node group with Nodes on EKS
 class EKSCreateNodegroupWithNodesOperator(EKSCreateNodegroupOperator):
     def execute(self, context):
@@ -46,7 +47,6 @@ with DAG(
     schedule="@daily",
     dag_id="KPO_remote_EKS_cluster_example_dag",
 ) as dag:
-
     # task 1 creates the node group
     create_gpu_nodegroup = EKSCreateNodegroupWithNodesOperator(
         task_id="create_gpu_nodegroup",

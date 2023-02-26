@@ -13,7 +13,6 @@ with DAG(
     schedule="@daily",
     catchup=False,
 ) as dag1:
-
     BashOperator(
         task_id="upstream_task_1",
         bash_command="sleep 5",

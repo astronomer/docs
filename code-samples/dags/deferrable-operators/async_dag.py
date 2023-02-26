@@ -9,7 +9,6 @@ with DAG(
     schedule="* * * * *",
     catchup=True,
 ) as dag:
-
     async_sensor = DateTimeSensorAsync(
         task_id="async_task",
         target_time="""{{ macros.datetime.utcnow() + macros.timedelta(minutes=20) }}""",

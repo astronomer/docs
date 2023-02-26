@@ -55,7 +55,6 @@ with DAG(
     },
     catchup=False,
 ) as dag:
-
     predict = SageMakerTransformOperator(task_id="predict", config=transform_config)
 
     results_to_redshift = S3ToRedshiftOperator(

@@ -10,6 +10,7 @@ from astro.sql.table import Table
 SNOWFLAKE_CONN_ID = "snowflake_conn"
 AWS_CONN_ID = "aws_conn"
 
+
 # The first transformation combines data from the two source tables
 @transform
 def extract_data(homes1: Table, homes2: Table):
@@ -24,7 +25,6 @@ def extract_data(homes1: Table, homes2: Table):
 
 @dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
 def example_sdk_datasets():
-
     # Initial load of homes data csv's from S3 into Snowflake
     homes_data1 = load_file(
         task_id="load_homes1",

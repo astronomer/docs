@@ -23,7 +23,6 @@ def api_function(**kwargs):
     },
 )
 def pool_priority_dag():
-
     api_function.override(task_id="task_a")()
 
     api_function.override(task_id="task_b")()
