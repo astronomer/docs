@@ -7,6 +7,7 @@ sidebar_label: "Data quality"
 
 import CodeBlock from '@theme/CodeBlock';
 import example_dag_sql_check_operators from '!!raw-loader!../code-samples/dags/data-quality/example_dag_sql_check_operators.py';
+import gx_example_dag from '!!raw-loader!../code-samples/dags/data-quality/gx_example_dag.py';
 
 ## Overview
 

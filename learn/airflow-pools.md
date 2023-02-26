@@ -181,7 +181,7 @@ In the `pool_priority_dag` below, all three of the tasks hit the API endpoint an
 
 <TabItem value="traditional">
 
-<CodeBlock language="python">{pool_example_1_tradtional}</CodeBlock>
+<CodeBlock language="python">{pool_example_1_traditional}</CodeBlock>
 
 </TabItem>
 </Tabs>
@@ -207,7 +207,7 @@ To prioritize `task_x` over `task_y` while keeping both at a lower priority than
 
 <TabItem value="traditional">
 
-<CodeBlock language="python">{pool_example_2_tradtional}</CodeBlock>
+<CodeBlock language="python">{pool_example_2_traditional}</CodeBlock>
 
 </TabItem>
 </Tabs>

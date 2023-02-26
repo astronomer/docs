@@ -11,7 +11,7 @@ id: dynamically-generating-dags
 
 import CodeBlock from '@theme/CodeBlock';
 import create_dag_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/create_dag_example.py';
-import dag_from_var_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dag_from_var_example.py';
+import dags_from_var_example from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_var_example.py';
 import dags_from_connections from '!!raw-loader!../code-samples/dags/dynamically-generating-dags/dags_from_connections.py';
 
 In Airflow, [DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html) are defined as Python code. Airflow executes all Python code in the `dags_folder` and loads any `DAG` objects that appear in `globals()`. The simplest way to create a DAG is to write it as a static Python file. 
@@ -91,7 +91,7 @@ As mentioned previously, the input parameters don't have to exist in the DAG fil
 
 You can retrieve this value by importing the Variable class and passing it into your `range`. The `default_var` is set to 3 because you want the interpreter to register this file as valid regardless of whether the variable exists.
 
-<CodeBlock language="python">{dag_from_var_example}</CodeBlock>
+<CodeBlock language="python">{dags_from_var_example}</CodeBlock>
 
 The DAGs appear in the Airflow UI:
 
@@ -105,7 +105,7 @@ To implement this method, you pull the connections from your Airflow metadata da
 
 ![List of connections in the Airflow UI](/img/guides/connections.png)
 
-<CodeBlock language="python">{dag_from_connections}</CodeBlock>
+<CodeBlock language="python">{dags_from_connections}</CodeBlock>
 
 You are accessing the Models library to bring in the `Connection` class (as you did previously with the `Variable` class). You are also accessing the `Session()` class from `settings`, which will allow us to query the current database session.
 
