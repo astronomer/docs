@@ -18,6 +18,7 @@ with DAG(
     schedule="@daily",
     dag_id="KPO_XComs_example_dag",
 ) as dag:
+
     @task
     def extract_data():
         # simulating querying from a database

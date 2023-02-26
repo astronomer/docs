@@ -23,7 +23,6 @@ with DAG(
     """,
     default_args={"conn_id": example_connection},
 ) as dag:
-
     start = EmptyOperator(task_id="start")
     end = EmptyOperator(task_id="end")
 

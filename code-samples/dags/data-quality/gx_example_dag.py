@@ -11,7 +11,6 @@ with DAG(
     dag_id="gx_example_dag",
     catchup=False,
 ) as dag:
-
     # task running the Expectation Suite defined in the JSON above
     ge_test = GreatExpectationsOperator(
         task_id="gx_test",
