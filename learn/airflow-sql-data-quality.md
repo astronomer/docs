@@ -75,23 +75,21 @@ In the example below, 5 checks are performed on 3 different columns using the `S
 
 ```python
 check_columns = SQLColumnCheckOperator(
-        task_id="check_columns",
-        conn_id="MY_DB_CONNECTION",
-        table="MY_TABLE",
-        column_mapping={
-            "MY_DATE_COL": {
-                "unique_check": {"equal_to": 0}
-            },
-            "MY_TEXT_COL": {
-                "distinct_check": {"geq_to": 10},
-                "null_check": {"equal_to": 0}
-            },
-            "MY_NUM_COL": {
-                "min": {"less_than": 10},
-                "max": {"equal_to": 100, "tolerance": 0.1}
-            },
-        }
-    )
+    task_id="check_columns",
+    conn_id="MY_DB_CONNECTION",
+    table="MY_TABLE",
+    column_mapping={
+        "MY_DATE_COL": {"unique_check": {"equal_to": 0}},
+        "MY_TEXT_COL": {
+            "distinct_check": {"geq_to": 10},
+            "null_check": {"equal_to": 0},
+        },
+        "MY_NUM_COL": {
+            "min": {"less_than": 10},
+            "max": {"equal_to": 100, "tolerance": 0.1},
+        },
+    },
+)
 ```
 
 The `SQLColumnCheckOperator` offers 5 options for column checks which are abstractions over SQL statements:
@@ -160,24 +158,17 @@ Both of the above checks only run on rows that fulfill the operator-level partit
 
 ```python
 column_checks = SQLColumnCheckOperator(
-        task_id="column_checks",
-        conn_id="MY_DB_CONNECTION",
-        table="MY_TABLE",
-        partition_clause="CUSTOMER_NAME IS NOT NULL",
-        column_mapping={
-            "MY_NUM_COL_1": {
-                "min": {
-                    "greater_than": 10
-                }
-            },
-            "MY_NUM_COL_2": {
-                "max": {
-                    "less_than": 300,
-                    "partition_clause": "CUSTOMER_STATUS = 'active'"
-                }
-            }
-        }
-    )
+    task_id="column_checks",
+    conn_id="MY_DB_CONNECTION",
+    table="MY_TABLE",
+    partition_clause="CUSTOMER_NAME IS NOT NULL",
+    column_mapping={
+        "MY_NUM_COL_1": {"min": {"greater_than": 10}},
+        "MY_NUM_COL_2": {
+            "max": {"less_than": 300, "partition_clause": "CUSTOMER_STATUS = 'active'"}
+        },
+    },
+)
 ```
 
 ## Example: SQLTableCheckOperator
@@ -200,19 +191,17 @@ table_checks = SQLTableCheckOperator(
     task_id="table_checks",
     conn_id="MY_DB_CONNECTION",
     table="MY_TABLE",
-    partition_clause="START_DATE >= '2022-01-01'"
+    partition_clause="START_DATE >= '2022-01-01'",
     checks={
-        "my_row_count_check": {
-            "check_statement": "COUNT(*) >= 1000"
-            },
+        "my_row_count_check": {"check_statement": "COUNT(*) >= 1000"},
         "my_column_sum_comparison_check": {
             "check_statement": "SUM(MY_COL_1) < SUM(MY_COL_2)",
-            "partition_clause": "MY_COL_4 > 100"
-            },
+            "partition_clause": "MY_COL_4 > 100",
+        },
         "my_column_addition_check": {
             "check_statement": "MY_COL_1 + MY_COL_2 = MY_COL_3"
-            }
-    }
+        },
+    },
 )
 ```
 
@@ -231,7 +220,7 @@ The following code snippet shows you how to use the operator in a DAG:
 
 ```python
 yellow_tripdata_row_quality_check = SQLCheckOperator(
-    conn_id=example_conn,
+    conn_id="example_conn",
     task_id="yellow_tripdata_row_quality_check",
     sql="row_quality_yellow_tripdata_check.sql",
     params={"pickup_datetime": "2021-01-01"},
