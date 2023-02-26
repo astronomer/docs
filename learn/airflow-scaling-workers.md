@@ -99,8 +99,9 @@ There are three primary DAG-level Airflow settings that you can define in code:
 You can define any DAG-level settings within your DAG definition. For example:
 
 ```python
-  # Allow a maximum of concurrent 10 tasks across a max of 3 active DAG runs
-  dag = DAG('my_dag_id', concurrency=10,  max_active_runs=3)
+# Allow a maximum of concurrent 10 tasks across a max of 3 active DAG runs
+@dag("my_dag_id", concurrency=10, max_active_runs=3)
+def my_dag():
 ```
 
 ### Task-level Airflow settings
@@ -115,7 +116,7 @@ There are two primary task-level Airflow settings users can define in code:
 The parameters above are inherited from the `BaseOperator`, so you can set them in any operator definition. For example:
 
 ```python
-  t1 = PythonOperator(task_id='t1', pool='my_custom_pool', max_active_tis_per_dag=14)
+t1 = PythonOperator(task_id="t1", pool="my_custom_pool", max_active_tis_per_dag=14)
 ```
 
 ## Executors and scaling
