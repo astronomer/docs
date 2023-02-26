@@ -164,7 +164,6 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
             # render the HTML file from the templates directory with content
             return self.render_template("test.html", content="awesome")
 
-
     # instantiate MyBaseView
     my_view = MyBaseView()
 

@@ -117,7 +117,7 @@ By leveraging a **Deferrable operator** for this sensor, the `DateTimeSensorAsyn
         {label: 'Deferrable operator', value: 'deferrable'},
     ]}>
 
-<TabItem value="taskflow">
+<TabItem value="classical">
 
 ![Classic Tree View](/img/guides/classic_sensor_slot_taking.png)
 
@@ -127,7 +127,7 @@ Because worker slots are held during task execution time, when using the classic
 
 </TabItem>
 
-<TabItem value="traditional">
+<TabItem value="deferrable">
 
 ![Deferrable Tree View](/img/guides/deferrable_grid_view.png)
 
