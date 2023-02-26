@@ -11,7 +11,8 @@ import CodeBlock from '@theme/CodeBlock';
 import dataset_upstream1 from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_upstream1.py';
 import dataset_downstream_1_2 from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_downstream_1_2.py';
 import datasets_ml_example_consume from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_consume.py';
-import datasets_ml_example_publish from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_publish.py';
+import datasets_ml_example_publish_taskflow from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_publish_taskflow.py';
+import datasets_ml_example_publish_traditional from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_publish_traditional.py';
 import example_sdk_datasets from '!!raw-loader!../code-samples/dags/airflow-datasets/example_sdk_datasets.py';
 
 Datasets and data-aware scheduling were made available in [Airflow 2.4](https://airflow.apache.org/docs/apache-airflow/2.4.0/release_notes.html#airflow-2-4-0-2022-09-19). DAGs that access the same data now have explicit, visible relationships, and DAGs can be scheduled based on updates to these datasets. This feature helps make Airflow data-aware and expands Airflow scheduling capabilities beyond time-based methods such as cron.
@@ -90,7 +91,7 @@ The following is an example of the data engineering team's DAG:
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "ml-datasets-example-publish"
+    groupId="ml-datasets-example-publish"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
