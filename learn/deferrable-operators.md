@@ -5,6 +5,13 @@ description: "Implement deferrable operators to save cost and resources with Air
 id: deferrable-operators
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import CodeBlock from '@theme/CodeBlock';
+import sync_dag from '!!raw-loader!../code-samples/dags/deferrable-operators/sync_dag.py';
+import async_dag from '!!raw-loader!../code-samples/dags/deferrable-operators/async_dag.py';
+
 With Airflow 2.2 and later, you can use deferrable operators to run tasks in your Airflow environment. These operators leverage the Python [asyncio](https://docs.python.org/3/library/asyncio.html) library to efficiently run tasks waiting for an external resource to finish. This frees up your workers and allows you to utilize resources more effectively. In this guide, you'll review deferrable operator concepts and learn which operators are deferrable.
 
 ## Assumed knowledge
@@ -60,7 +67,9 @@ If you are using a deferrable operator that is part of the [Astronomer Providers
    # Remove this import:
    # from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
    # Replace with:
-   from astronomer.providers.snowflake.operators.snowflake import SnowflakeOperatorAsync as SnowflakeOperator
+   from astronomer.providers.snowflake.operators.snowflake import (
+      SnowflakeOperatorAsync as SnowflakeOperator,
+   )
    ```
 
 Note that importing the asynchronous operator using the alias of the analogous traditional operator (e.g. `import SnowflakeOperatorAsync as SnowflakeOperator`) is simply to make updating existing DAGs easier. This is not required, and may not be preferrable when authoring a new DAG.
@@ -95,57 +104,37 @@ For a full list of deferrable operators and sensors available in the `astronomer
 
 ## Example workflow
 
-In this sample DAG, a sensor is scheduled to run every minute and each task can take up to 20 minutes. When the default settings with 1 worker are used, there are 16 tasks running after 20 minutes, and each task occupies a worker slot:
+The example DAG below is scheduled to run once for every minute within a defined time-frame (between its `start_date` and its `end_date`). Every DAG run contains one task using sensor that will potentially take up to 20 minutes to complete. 
+When using the **Classical sensor** `DateTimeSensor` with default settings one worker slot is taking up by every sensor that runs, causing 16 DAG instances to run, with the most recent ones waiting in the `scheduled` state.
 
-![Classic Tree View](/img/guides/classic_tree_view.png)
+By leveraging a **Deferrable operator** for this sensor, the `DateTimeSensorAsync` you can achieve full concurrency while allowing your worker to complete additional work across your Airflow environment. The screenshot shows all 20 tasks entered a deferred state (violet square), which indicates that the triggers are registered to run in the triggerer process.
 
-Because worker slots are held during task execution time, you need a minimum of 20 worker slots to ensure that future runs are not delayed. To increase concurrency, you need to add additional resources such as a worker pod to your Airflow infrastructure. 
+<Tabs
+    defaultValue="classical"
+    groupId= "datetime-async"
+    values={[
+        {label: 'Classical sensor', value: 'classical'},
+        {label: 'Deferrable operator', value: 'deferrable'},
+    ]}>
 
-```python
-from datetime import datetime
-from airflow import DAG
-from airflow.sensors.date_time import DateTimeSensor
- 
-with DAG(
-   "sync_dag",
-   start_date=datetime(2021, 12, 22, 20, 0),
-   end_date=datetime(2021, 12, 22, 20, 19),
-   schedule="* * * * *",
-   catchup=True,
-   max_active_runs=32,
-   max_active_tasks=32
-) as dag:
- 
-   sync_sensor = DateTimeSensor(
-       task_id="sync_task",
-       target_time="""{{ macros.datetime.utcnow() + macros.timedelta(minutes=20) }}""",
-   )
-```
+<TabItem value="taskflow">
 
-By leveraging a deferrable operator for this sensor, you can achieve full concurrency while allowing your worker to complete additional work across your Airflow environment. With the following updated sample DAG, all 20 tasks enter a deferred state. This indicates that the triggers are registered to run in the triggerer process.
+![Classic Tree View](/img/guides/classic_sensor_slot_taking.png)
 
-![Deferrable Tree View](/img/guides/deferrable_tree_view.png)
+<CodeBlock language="python">{sync_dag}</CodeBlock>
 
-```python
-from datetime import datetime
-from airflow import DAG
-from airflow.sensors.date_time import DateTimeSensorAsync
- 
-with DAG(
-   "async_dag",
-   start_date=datetime(2021, 12, 22, 20, 0),
-   end_date=datetime(2021, 12, 22, 20, 19),
-   schedule="* * * * *",
-   catchup=True,
-   max_active_runs=32,
-   max_active_tasks=32
-) as dag:
- 
-   async_sensor = DateTimeSensorAsync(
-       task_id="async_task",
-       target_time="""{{ macros.datetime.utcnow() + macros.timedelta(minutes=20) }}""",
-   )
-```
+Because worker slots are held during task execution time, when using the classical sensor in this DAG you need a minimum of 20 worker slots to ensure that future runs are not delayed. To increase concurrency, you need to add additional resources such as a worker pod to your Airflow infrastructure by increasing the value of the `max_active_runs` and `max_active_task` parameters.
+
+</TabItem>
+
+<TabItem value="traditional">
+
+![Deferrable Tree View](/img/guides/deferrable_grid_view.png)
+
+<CodeBlock language="python">{async_dag}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 ## Run deferrable tasks
 
