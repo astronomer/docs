@@ -100,7 +100,7 @@ def get_dags():
     return [(k, v, strip_path_prefix(v.fileloc)) for k, v in dag_bag.dags.items()]
 
 
-APPROVED_TAGS = {'customer_success', 'op_analytics', 'product'}
+APPROVED_TAGS = {"customer_success", "op_analytics", "product"}
 
 
 @pytest.mark.parametrize(
@@ -134,7 +134,9 @@ def test_dag_tags(dag_id, dag, fileloc):
     assert dag.tasks, f"{dag_id} in {fileloc} has no tasks"
     for task in dag.tasks:
         t_rule = task.trigger_rule
-        assert t_rule == "all_success", f"{task} in {dag_id} has the trigger rule {t_rule}"
+        assert (
+            t_rule == "all_success"
+        ), f"{task} in {dag_id} has the trigger rule {t_rule}"
 ```
 
 ## Implement DAG validation tests
@@ -228,10 +230,11 @@ if __name__ == "__main__":
 
 <TabItem value="decorator">
 
-```python {16-17}
+```python {18-20}
 from airflow.decorators import dag
 from pendulum import datetime
 from airflow.operators.empty import EmptyOperator
+
 
 @dag(
     start_date=datetime(2023, 1, 1),
@@ -242,10 +245,12 @@ def my_dag():
 
     t1 = EmptyOperator(task_id="t1")
 
+
 my_dag()
 
 if __name__ == "__main__":
     my_dag().test()
+
 ```
 
 </TabItem>
@@ -285,6 +290,7 @@ If you are using custom hooks or operators, Astronomer recommends using unit tes
 ```python
 from airflow.models import BaseOperator
 
+
 class EvenNumberCheckOperator(BaseOperator):
     def __init__(self, my_operator_param, *args, **kwargs):
         self.operator_param = my_operator_param
@@ -295,6 +301,7 @@ class EvenNumberCheckOperator(BaseOperator):
             return True
         else:
             return False
+
 ```
 
 You then write a `test_evencheckoperator.py` file with unit tests similar to the following example:
@@ -307,27 +314,34 @@ from airflow.models import TaskInstance
 
 DEFAULT_DATE = datetime(2021, 1, 1)
 
-class EvenNumberCheckOperator(unittest.TestCase):
 
+class EvenNumberCheckOperator(unittest.TestCase):
     def setUp(self):
         super().setUp()
-        self.dag = DAG('test_dag', default_args={'owner': 'airflow', 'start_date': DEFAULT_DATE})
+        self.dag = DAG(
+            "test_dag", default_args={"owner": "airflow", "start_date": DEFAULT_DATE}
+        )
         self.even = 10
         self.odd = 11
 
     def test_even(self):
         """Tests that the EvenNumberCheckOperator returns True for 10."""
-        task = EvenNumberCheckOperator(my_operator_param=self.even, task_id='even', dag=self.dag)
+        task = EvenNumberCheckOperator(
+            my_operator_param=self.even, task_id="even", dag=self.dag
+        )
         ti = TaskInstance(task=task, execution_date=datetime.now())
         result = task.execute(ti.get_template_context())
         assert result is True
 
     def test_odd(self):
         """Tests that the EvenNumberCheckOperator returns False for 11."""
-        task = EvenNumberCheckOperator(my_operator_param=self.odd, task_id='odd', dag=self.dag)
+        task = EvenNumberCheckOperator(
+            my_operator_param=self.odd, task_id="odd", dag=self.dag
+        )
         ti = TaskInstance(task=task, execution_date=datetime.now())
         result = task.execute(ti.get_template_context())
         assert result is False
+
 ```
 
 If your DAGs contain `PythonOperators` that execute your own Python functions, it is recommended that you write unit tests for those functions as well. 
