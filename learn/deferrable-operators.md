@@ -104,10 +104,9 @@ For a full list of deferrable operators and sensors available in the `astronomer
 
 ## Example workflow
 
-The example DAG below is scheduled to run once for every minute within a defined time-frame (between its `start_date` and its `end_date`). Every DAG run contains one task using sensor that will potentially take up to 20 minutes to complete. 
-When using the **Classical sensor** `DateTimeSensor` with default settings one worker slot is taking up by every sensor that runs, causing 16 DAG instances to run, with the most recent ones waiting in the `scheduled` state.
+The example DAG below is scheduled to run once for every minute within a defined time-frame (between its `start_date` and its `end_date`). Every DAG run contains one task using sensor that will potentially take up to 20 minutes to complete.
 
-By leveraging a **Deferrable operator** for this sensor, the `DateTimeSensorAsync` you can achieve full concurrency while allowing your worker to complete additional work across your Airflow environment. The screenshot shows all 20 tasks entered a deferred state (violet square), which indicates that the triggers are registered to run in the triggerer process.
+When using the **Classical sensor** `DateTimeSensor` with default settings one worker slot is taken up by every sensor that runs. By leveraging a **Deferrable operator** for this sensor, the `DateTimeSensorAsync` you can achieve full concurrency while allowing your workers to complete additional work across your Airflow environment. 
 
 <Tabs
     defaultValue="classical"
@@ -119,22 +118,35 @@ By leveraging a **Deferrable operator** for this sensor, the `DateTimeSensorAsyn
 
 <TabItem value="classical">
 
+The screenshot below shows 16 running DAG instances, each taking up one worker slot.
+
 ![Classic Tree View](/img/guides/classic_sensor_slot_taking.png)
+
+The DAG code uses a classic sensor and default configuration of concurrency:
 
 <CodeBlock language="python">{sync_dag}</CodeBlock>
 
-Because worker slots are held during task execution time, when using the classical sensor in this DAG you need a minimum of 20 worker slots to ensure that future runs are not delayed. To increase concurrency, you need to add additional resources such as a worker pod to your Airflow infrastructure by increasing the value of the `max_active_runs` and `max_active_task` parameters.
-
 </TabItem>
+
+The screenshot below shows 16 DAG instances running, each with one task in a deferred state (violet square) which does not take up a worker slot. Tasks in other DAGs can use the available worker slots making the version using a deferrable operator more cost and time-efficient.
 
 <TabItem value="deferrable">
 
 ![Deferrable Tree View](/img/guides/deferrable_grid_view.png)
 
+The only difference in the DAG code is using the deferrable operator `DateTimeSensorAsync` over `DateTimeSensor`:
+
 <CodeBlock language="python">{async_dag}</CodeBlock>
 
 </TabItem>
 </Tabs>
+
+By default only 16 active DAG runs will be scheduled and only 16 tasks can be active (not in a deferred state) in a DAG. To increase concurrency, increase the value of the DAG following parameters:
+
+- `max_active_runs` to allow for more active DAG runs 
+- `max_active_task` to allow for more active tasks per DAG run.
+
+Learn more about concurrency and parallelism parameters in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
 
 ## Run deferrable tasks
 
