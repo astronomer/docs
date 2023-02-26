@@ -5,6 +5,8 @@ description: "Using datasets to implement DAG dependencies and scheduling in Air
 id: airflow-datasets
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import dataset_upstream1 from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_upstream1.py';
 import dataset_downstream_1_2 from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_downstream_1_2.py';
@@ -86,7 +88,28 @@ Using datasets, the data science team can schedule their DAG to run only when th
 
 The following is an example of the data engineering team's DAG:
 
-<CodeBlock language="python">{datasets_ml_example_publish}</CodeBlock>
+<Tabs
+    defaultValue="taskflow"
+    groupId= "ml-datasets-example-publish"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+<CodeBlock language="python">{datasets_ml_example_publish_taskflow}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{datasets_ml_example_publish_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
+
+
 
 This DAG has a single task, `upload_data_to_s3`, that publishes the data. An outlet dataset is defined in the `@task` decorator using `outlets=Dataset(dataset_uri)` where the dataset URI is defined at the top of the DAG script.
 
