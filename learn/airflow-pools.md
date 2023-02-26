@@ -8,10 +8,10 @@ id: airflow-pools
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
-import pools_example_1_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pools_example_1_traditional.py';
-import pools_example_1_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pools_example_1_taskflow.py';
-import pools_example_2_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pools_example_2_traditional.py';
-import pools_example_2_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pools_example_2_taskflow.py';
+import pool_example_1_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_1_traditional.py';
+import pool_example_1_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_1_taskflow.py';
+import pool_example_2_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_2_traditional.py';
+import pool_example_2_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_2_taskflow.py';
 
 One of the benefits of Apache Airflow is that it is built to scale. With the right supporting infrastructure, you can run many tasks in parallel seamlessly. Unfortunately, horizontal scalability also necessitates some guardrails. For example, you might have many tasks that interact with the same source system, such as an API or database, that you don't want to overwhelm with requests. Airflow [pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html) are designed for exactly this use case.
 
@@ -175,13 +175,13 @@ In the `pool_priority_dag` below, all three of the tasks hit the API endpoint an
 
 <TabItem value="taskflow">
 
-<CodeBlock language="python">{pools_example_1_taskflow}</CodeBlock>
+<CodeBlock language="python">{pool_example_1_taskflow}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional">
 
-<CodeBlock language="python">{pools_example_1_tradtional}</CodeBlock>
+<CodeBlock language="python">{pool_example_1_tradtional}</CodeBlock>
 
 </TabItem>
 </Tabs>
@@ -201,13 +201,13 @@ To prioritize `task_x` over `task_y` while keeping both at a lower priority than
 
 <TabItem value="taskflow">
 
-<CodeBlock language="python">{pools_example_2_taskflow}</CodeBlock>
+<CodeBlock language="python">{pool_example_2_taskflow}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional">
 
-<CodeBlock language="python">{pools_example_2_tradtional}</CodeBlock>
+<CodeBlock language="python">{pool_example_2_tradtional}</CodeBlock>
 
 </TabItem>
 </Tabs>
