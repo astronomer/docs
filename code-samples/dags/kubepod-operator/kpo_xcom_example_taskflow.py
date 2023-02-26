@@ -10,6 +10,7 @@ import random
 # get the current Kubernetes namespace Airflow is running in
 namespace = conf.get("kubernetes", "NAMESPACE")
 
+
 # instantiate the DAG
 @dag(
     start_date=datetime(2022, 6, 1),
