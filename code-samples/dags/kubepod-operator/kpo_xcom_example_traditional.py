@@ -4,26 +4,38 @@ from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
     KubernetesPodOperator,
 )
 from airflow.configuration import conf
-from airflow.decorators import task
+from airflow.operators.python import PythonOperator
 
 import random
 
 # get the current Kubernetes namespace Airflow is running in
 namespace = conf.get("kubernetes", "NAMESPACE")
 
+
+def extract_data_function():
+    # simulating querying from a database
+    data_point = random.randint(0, 100)
+    return data_point
+
+
+def load_data_function(**context):
+    # pull the XCom value that has been pushed by the KubernetesPodOperator
+    transformed_data_point = context["ti"].xcom_pull(
+        task_ids="transform", key="return_value"
+    )
+    print(transformed_data_point)
+
+
 # instantiate the DAG
 with DAG(
+    dag_id="KPO_XComs_example_dag",
     start_date=datetime(2022, 6, 1),
     catchup=False,
     schedule="@daily",
-    dag_id="KPO_XComs_example_dag",
-) as dag:
-
-    @task
-    def extract_data():
-        # simulating querying from a database
-        data_point = random.randint(0, 100)
-        return data_point
+):
+    extract_data = PythonOperator(
+        task_id="extract_data", python_callable=extract_data_function
+    )
 
     transform = KubernetesPodOperator(
         # set task id
@@ -53,13 +65,10 @@ with DAG(
         do_xcom_push=True,
     )
 
-    @task
-    def load_data(**context):
-        # pull the XCom value that has been pushed by the KubernetesPodOperator
-        transformed_data_point = context["ti"].xcom_pull(
-            task_ids="transform", key="return_value"
-        )
-        print(transformed_data_point)
+    load_data = PythonOperator(
+        task_id="load_data",
+        python_callable=load_data_function,
+    )
 
     # set dependencies (tasks defined using Decorators need to be called)
-    extract_data() >> transform >> load_data()
+    extract_data >> transform >> load_data

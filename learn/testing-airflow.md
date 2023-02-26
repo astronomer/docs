@@ -230,7 +230,7 @@ if __name__ == "__main__":
 
 <TabItem value="decorator">
 
-```python {18-20}
+```python {18-19}
 from airflow.decorators import dag
 from pendulum import datetime
 from airflow.operators.empty import EmptyOperator

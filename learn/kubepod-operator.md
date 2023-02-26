@@ -10,7 +10,8 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import kpo_example_1 from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_example_1.py';
 import kpo_haskell_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_haskell_example.py';
-import kpo_xcom_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example.py';
+import kpo_xcom_example_taskflow from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_taskflow.py';
+import kpo_xcom_example_traditional from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_traditional.py';
 import kpo_separate_cluster_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_separate_cluster_example.py';
 
 The KubernetesPodOperator (KPO) runs a Docker image in a dedicated Kubernetes Pod. By abstracting calls to the Kubernetes API, the KubernetesPodOperator lets you start and run Pods from Airflow using DAG code.
@@ -331,7 +332,26 @@ The `load_data` task pulls the XCom returned from the `transform` task and print
 
 The full DAG code is provided in the following example. To avoid task failure, turn on `do_xcom_push` after you create the `airflow/xcom/return.json` within the Docker container run by the KubernetesPodOperator.
 
-<CodeBlock language="python">{kpo_xcom_example}</CodeBlock>
+<Tabs
+    defaultValue="taskflow"
+    groupId= "name-of-my-section"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+<CodeBlock language="python">{kpo_xcom_example_taskflow}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{kpo_xcom_example_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 ## Example: Use KubernetesPodOperator to run a Pod in a separate cluster
 
