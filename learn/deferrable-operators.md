@@ -128,9 +128,9 @@ The DAG code uses a classic sensor and default configuration of concurrency:
 
 </TabItem>
 
-The screenshot below shows 16 DAG instances running, each with one task in a deferred state (violet square) which does not take up a worker slot. Tasks in other DAGs can use the available worker slots making the version using a deferrable operator more cost and time-efficient.
-
 <TabItem value="deferrable">
+
+The screenshot below shows 16 DAG instances running, each with one task in a deferred state (violet square) which does not take up a worker slot. Tasks in other DAGs can use the available worker slots making the version using a deferrable operator more cost and time-efficient.
 
 ![Deferrable Tree View](/img/guides/deferrable_grid_view.png)
 
