@@ -6,7 +6,7 @@ id: start-your-astro-trial
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
- This guide will help you get started with Astro, a fully managed Airflow service. 
+Use this guide to get started with Astro, the fully managed Airflow service by Astronomer. 
 
 ## Activate your trial
 
