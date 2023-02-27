@@ -21,7 +21,7 @@ After you create an Astro Deployment, you can modify its settings to meet the un
 
 To ensure that your tasks have the CPU and memory required to complete successfully, you can set resources for:
 
-- The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
+- The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html), which is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met.
 - Workers, which are responsible for executing tasks that have been scheduled and queued by the scheduler.
 
 Worker and scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
@@ -40,7 +40,7 @@ See [Configure worker queues](configure-worker-queues.md).
 
 ### Scheduler resources
 
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. By adjusting the **Scheduler Count** slider in the **Configuration** tab of the Cloud UI, you can configure up to 4 schedulers, each of which will be provisioned with the Astronomer Units (AU) specified in **Resources**. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. 1 AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning 5 AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory. You can view the CPU and memory allocations for schedulers on the Deployment **Details** page in the Cloud UI.
+The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. By adjusting the **Scheduler Count** slider in the **Configuration** tab of the Cloud UI, you can configure up to 4 schedulers, each of which will be provisioned with the Astronomer Units (AU) specified in **Resources**. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. 1 AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning 5 AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory. You can view the CPU and memory allocations for schedulers on the Deployment **Details** page in the Cloud UI.
 
 For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each.
 

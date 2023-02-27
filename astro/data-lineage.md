@@ -17,7 +17,7 @@ From the **Lineage** tab on Astro, you can access the following four pages:
 
 :::info
 
-Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/concepts/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage datasets are extracted and generated using lineage metadata. The Cloud UI currently does not show information about Airflow datasets.
+Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage datasets are extracted and generated using lineage metadata. The Cloud UI currently does not show information about Airflow datasets.
 
 :::
 
@@ -83,9 +83,9 @@ Click a node to populate the information pane with detailed information about th
 
 ## View metrics for a specific run or dataset
 
-On the **Lineage** page, the following tabs appear below the lineage graph:
+On the **Lineage Graph** page for a DAG, the following tabs appear below the lineage graph:
 
-- **Info**: Shows the code for a run or the schema for a dataset. Also shows the difference between runs when you create a comparison in the **Compare** tab.
+- **Info**: Shows the code and facets for a run or the schema for a dataset. Also shows the difference between runs when you create a comparison in the **Compare** tab.
 - **Inputs/Outputs**: Shows the inputs and outputs for a run or dataset. This information is equivalent to the upstream and downstream nodes in the graph view.
 - **Quality (Dataset only)**: Shows the data quality checks performed on each element of a dataset. Expand a listed dataset element to view more information about a specific quality check.
 - **Duration (Run only)**: Shows the duration of upstream runs in descending order. To view run durations relative to the average duration across all runs, click the blue arrow next to the name of your most recent run and then click **Maximize** at the bottom of the list.

@@ -25,7 +25,7 @@ import AstroCard from '@site/src/components/AstroCard';
 <LinkCardGrid>
   <LinkCard topIcon label="Get started with the Astro CLI" description="The Astro CLI is the command line interface for data orchestration. It's the easiest way to get started with Apache Airflow and can be used with all Astronomer products." href="/astro/cli/overview" icon="/img/code-icon.svg" />
   <LinkCard topIcon label="Understand Airflow concepts" description="Learn about the fundamentals of how Airflow works and best practices for running it at scale." href="/learn/category/airflow-concepts" icon="/img/airflow-logo-85x85.png" />
-  <LinkCard topIcon label="Explore tutorials" description="Follow step-by-step instructions to get Airflow up and running for any use case." href="/learn/category/tutorials" icon="/img/doc-icon.svg" />
+  <LinkCard topIcon label="Explore Airflow tutorials" description="Follow step-by-step instructions to get Airflow up and running for any use case." href="/learn/category/airflow-tutorials" icon="/img/doc-icon.svg" />
 </LinkCardGrid>
 
 ## What's new?

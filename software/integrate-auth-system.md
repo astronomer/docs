@@ -8,23 +8,21 @@ description: Integrate your internal authentication server with Astronomer Softw
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Astronomer Software by default allows users to create an account with and authenticate using one of the 3 methods below:
+Astronomer Software by default allows users to create an account with and authenticate using one of the following methods:
 
 - Google OAuth
 - GitHub OAuth
 - Local username/password
 
-Authentication methods are entirely customizable. In addition to the 3 defaults above, we provide the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
+Authentication methods are entirely customizable. In addition to the default methods, Astronomer provides the option to integrate any provider that follows the [Open Id Connect (OIDC)](https://openid.net/connect/) protocol. This includes (but is not limited to):
 
 - [Microsoft Azure Active Directory (AD)](https://docs.microsoft.com/en-us/azure/active-directory/develop/v2-protocols-oidc)
 - [Okta](https://www.okta.com)
 - [Auth0](https://auth0.com/)
 
-The doc below will walk through how to both enable local authentication and configure any OIDC provider, including step-by-step instructions for the 3 providers listed above.
-
 :::info
 
-The following setups assume that you are using Astronomer's default [implicit flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.2) as your authorization flow. To implement a custom authorization flow, read [Configure a Custom OAuth Flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
+The following setups assume that you are using the default Astronomer [implicit flow](https://datatracker.ietf.org/doc/html/rfc6749#section-4.2) as your authorization flow. To implement a custom authorization flow, see [Configure a Custom OAuth Flow](integrate-auth-system.md#configure-a-custom-oauth-flow).
 
 :::
 
@@ -66,9 +64,9 @@ astronomer:
 
 Replace the values above with those of the provider of your choice. If you want to configure Azure AD, Okta or Auth0 read below for specific guidelines.
 
-## AWS Cognito
+### AWS Cognito
 
-### Create a user pool in Cognito
+#### Create a user pool in Cognito
 
 Start by creating a user pool in Cognito. You can either review the default settings or step through them to customize.
 
@@ -83,9 +81,7 @@ Once the pool and app client are created, head over to the `App integration` >`A
 
 Then switch over to the `Domain name` tab and select a unique domain name to use for your hosted Cognito components.
 
-This should give you a minimally working user pool configuration.
-
-### Edit your Astronomer configuration
+#### Edit your Astronomer configuration
 
 Add the following values to your `config.yaml` file in the `astronomer/` directory:
 
@@ -105,32 +101,64 @@ astronomer:
 
 Your Cognito pool ID can be found in the `General settings` tab of the Cognito portal. Your client ID is found in the `App clients` tab.
 
-Once you've saved your `config.yaml` file with these values, push it to your platform as described in [Apply a config change](apply-platform-config.md).
+Once you've saved your `config.yaml` file with these values, push it to your platform. See [Apply a config change](apply-platform-config.md).
 
-## Azure AD
+### Azure AD
 
-### Register the Application using `App Registrations` on Azure
+Follow these steps to configure Azure AD as your OIDC provider. 
 
-To start, register the application. As you do so, make sure to specify the Redirect URI as `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
+#### Register the Application using `App Registrations` on Azure
 
-Replace `BASEDOMAIN` with your own. For example, if your basedomain were `astronomer-development.com`, your registration would look like the following:
+1. In Azure Active Directory, click **App registrations** > **New registration**. 
+2. Complete the following sections:
+  
+    - **Name**: Any
+    - **Supported account types**: Accounts in this organizational directory only (Astronomer only - single tenant)
+    - **Redirect URI**: Web / `https://houston.BASEDOMAIN/v1/oauth/redirect/`.
 
-![application](/img/software/azure-application.png)
+    Replace `BASEDOMAIN` with your own. For example, if your base domain is `mycompany.com`, your redirect URI is https://houston.mycompany.com/v1/oauth/redirect/
 
-### Enable Access and ID Tokens
+3. Click **Register**.
 
-From there, head over to 'Authentication' to:
+4. Click **Authentication** in the left menu.
+5. In the **Web** area, confirm the redirect URI is correct.
 
-- Make sure that Access Tokens and ID tokens are enabled
-- Verify the Redirect URI
+6. In the **Implicit grant and hybrid flows** area, select **Access tokens** and **ID tokens**.
 
-Example:
+7. Click **Save**.
 
 ![authentication.png](/img/software/azure-authentication.png)
 
-### Enable Azure AD in your config.yaml file
+#### Create a client secret (Optional)
 
-Make sure the `config.yaml` file in your `astronomer` directory is updated with the proper values:
+Complete this setup only if you want to import Azure AD groups to Astronomer Software as [Teams](import-idp-groups.md).
+
+1. In your Azure AD application management left menu, click **Certificates & secrets**.
+2. Click **New client secret**.
+3. Enter a description in the **Description** field and then select an expiry period in the **Expires** list. 
+4. Click **Add**.
+5. Copy the values in the **Value** and **Secret ID** columns. 
+6. Click **API permissions** in the left menu.
+5. Click **Microsoft Graph** and add the following minimum permissions for Microsoft Graph:
+
+    - `email`
+    - `Group.Read.All`
+    - `openid`
+    - `profile`
+    - `User.Read`
+
+5. Click **Token configuration** in the left menu.
+6. Click **Add groups claim** and select the following options:
+
+    - In the **Select group types to include in Access, ID, and SAML tokens** area, select every option. 
+    - In **Customize token properties by type** area, expand **ID**, **Access**, and **SAML** and then select **Group ID** for each type.
+    
+7. Click **Add**.
+8. Encrypt the secret value you copied as a Kubernetes Secret on your Astronomer installation. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
+
+#### Enable Azure AD in your config.yaml file
+
+Add the following values to the `config.yaml` file in your `astronomer` directory:
 
 ```yaml
 astronomer:
@@ -142,20 +170,23 @@ astronomer:
             enabled: false
           microsoft:
             enabled: true
-            clientId: <client_id>
+            clientId: <your-client-id>
             discoveryUrl: https://login.microsoftonline.com/<tenant-id>/v2.0/
+            # Configure a secret only if you're importing Azure AD user groups as Teams
+            clientSecret: <your-client-secret>
+            authUrlParams:
+              audience: <your-client-id>
         github:
           enabled: false
 ```
-Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
+Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
 
-## Okta
+### Okta
 
-To integrate Okta with Astronomer, you'll need to make configuration changes both within Okta and on Astronomer.
+To integrate Okta with Astronomer, you'll need to make configuration changes in Okta and Astronomer.
 
-Follow the steps below.
 
-### Okta configuration
+#### Okta configuration
 
 1. If you haven't already, create an [Okta account](https://www.okta.com/).
 
@@ -167,9 +198,9 @@ Follow the steps below.
 
 5. Save the `Client ID` generated for this Okta app for use in the next steps.
 
-6. To ensure that an Okta tile appears, set `Initiate Login URI` to `https://houston.BASEDOMAIN/v1/oauth/start?provider=okta`  (_Optional_).
+6. Optional. To ensure that an Okta tile appears, set `Initiate Login URI` to `https://houston.BASEDOMAIN/v1/oauth/start?provider=okta`.
 
-### Enable Okta in your config.yaml file
+#### Enable Okta in your config.yaml file
 
 Add the following to your `config.yaml` file in your `astronomer` directory:
 
@@ -187,11 +218,9 @@ astronomer:
 
 Then, push the configuration change to your platform as described in [Apply a config change](apply-platform-config.md).
 
->> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
+> **Note:** `okta-base-domain` will be different from the basedomain of your Software installation. You can read [Okta's docs on finding your domain](https://developer.okta.com/docs/api/getting_started/finding_your_domain/) if you are unsure what this value should be.
 
-## Auth0
-
-### Auth0 Configuration
+### Auth0
 
 #### Create an Auth0 account
 
@@ -234,7 +263,7 @@ For instructions, navigate to Auth0's [connection guides](https://auth0.com/docs
 * Under `Identifier`, enter `astronomer-ee`.
 * Leave the value under `Signing Algorithm` as `RS256`.
 
-### Enable Auth0 in your config.yaml file
+#### Enable Auth0 in your config.yaml file
 
 Add the following to your `config.yaml` file in your `astronomer` directory:
 
@@ -332,7 +361,7 @@ To use a custom Oauth authorization code flow:
 
     3. Push your configuration changes to your platform as described in [Apply a config change](apply-platform-config.md).
 
-:::info
+:::tip
 
 You can also pass your auth configurations as environment variables in the Houston section of your `config.yaml` file. If you choose to configure your installation this way, set the following variables in the `astronomer.houston.env` list instead of setting values in `astronomer.auth`:
 
@@ -347,6 +376,9 @@ AUTH__OPENID_CONNECT__FLOW="implicit" # or "code"
 AUTH__OPENID_CONNECT__<idp-provider>__BASE_DOMAIN="<base-domain>"
 AUTH__OPENID_CONNECT__CUSTOM__DISPLAY_NAME="Custom OAuth" # Only used for custom flows
 ```
+
+For further security, you can specify the values of these environment variables as Kubernetes secrets in the `astronomer.houston.secret` list. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
+
 :::
 
 ### Step 2: Configure your identity provider
@@ -468,3 +500,47 @@ See [Add SCIM provisioning to app integrations](https://help.okta.com/en-us/Cont
 
 </TabItem>
 </Tabs>
+
+## Store and encrypt identity provider secrets
+
+You can prevent your identity provider passwords, authorization tokens, and security keys from being exposed as plain text by encrypting them in Kubernetes secrets.
+
+This setup is primarily used for encrypting the required secrets for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow).
+ 
+1. Create a file named `secret.yaml` that contains the value you want to encrypt as a [Kubernetes secret](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-config-file/#create-the-config-file). The following example encrypts the required client secret for [configuring a custom OAuth flow](#configure-a-custom-oauth-flow) for Okta. 
+
+    ```yaml
+    # Required configuration for all secrets
+    kind: Secret
+    apiVersion: v1
+    metadata:
+         name: okta-secret
+         labels:
+            release: {{ .Release.Name }}
+            chart: {{ .Chart.Name }}
+            heritage: {{ .Release.Service }}
+            component: {{ template "houston.backendSecret" . }}
+    type: Opaque
+    # Specify a key and value for the data you want to encrypt
+    data:
+        okta_client_secret: {{ "<okta-secret-value>" | b64enc | quote }}
+    ```
+
+2. Run the following command to apply your secret to your Astronomer cluster:
+
+    ```sh
+    kubectl apply -f ./secret.yaml
+    ```
+
+3. Reference your secret name, key, and the environment variable you want the key to apply towards in your `config.yaml` file. To configure the example secret from Step 1 as an Okta client secret, you would add the following:
+
+    ```yaml
+    astronomer:
+        houston:
+            secret:
+             - envName: "AUTH__OPENID_CONNECT__OKTA__CLIENT_SECRET"
+               secretName: "okta-secret"
+               secretKey: "okta_client_secret"
+    ```
+
+4. Save and push your changes. See [Apply a config change](apply-platform-config.md).

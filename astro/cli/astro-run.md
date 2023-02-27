@@ -37,4 +37,4 @@ $ astro run example_dag_basic --env dev.env
 - [`astro dev start`](cli/astro-dev-start.md)
 - [`astro dev restart`](cli/astro-dev-restart.md)
 - [`astro dev stop`](cli/astro-dev-stop.md)
-- [`astro deploy`](cli/deploy.md)
+- [`astro deploy`](cli/astro-deploy.md)

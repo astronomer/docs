@@ -187,7 +187,7 @@ To update a Deployment using a Deployment file:
 3. Update your Deployment according to the configurations in the Deployment file:
 
   ```sh
-  astro deployment update -d <deployment-name> --deployment-file <your-deployment-file>
+  astro deployment update <deployment-name> --deployment-file <your-deployment-file>
   ```
 
 4. Optional. Confirm that your Deployment was updated successfully by running the following command. You can also go to the Deployment page in the Cloud UI to confirm the new values.

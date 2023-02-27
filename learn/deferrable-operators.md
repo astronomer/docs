@@ -37,7 +37,7 @@ With deferrable operators, worker slots are released when a task is polling for 
 
 Deferrable operators should be used whenever you have tasks that occupy a worker slot while polling for a condition in an external system. For example, using deferrable operators for sensor tasks can provide efficiency gains and reduce operational costs. Smart Sensors were deprecated in Airflow 2.2.4, and were removed in Airflow 2.4.0. Use deferrable operators instead of Smart Sensors because they provide greater functionality and they are supported by Airflow.
 
-To use a deferrable version of an existing operator in your DAG, you only need to replace the import statement for the existing operator. For example, Airflow's `TimeSensorAsync` is a replacement of the non-deferrable `TimeSensor` ([source](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)). To use `TimeSensorAsync`, remove your existing `import` and replace it with the following:
+To use a deferrable version of a core Airflow operator in your DAG, you only need to replace the import statement for the existing operator. For example, Airflow's `TimeSensorAsync` is a replacement of the non-deferrable `TimeSensor` ([source](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)). To use `TimeSensorAsync`, remove your existing `import` and replace it with the following:
 
 ```python
 # Remove this import:
@@ -45,6 +45,25 @@ To use a deferrable version of an existing operator in your DAG, you only need t
 # Replace with:
 from airflow.sensors.time_sensor import TimeSensorAsync as TimeSensor
 ```
+
+If you are using a deferrable operator that is part of the [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package, you will also need to ensure that package is installed in your Airflow environment. For example, to use the Snowflake deferrable operator:
+
+1. Add the following to your `requirements.txt` file:
+
+   ```python
+   astronomer-providers[snowflake]
+   ```
+
+2. Update the import statement in your DAG:
+
+   ```python
+   # Remove this import:
+   # from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
+   # Replace with:
+   from astronomer.providers.snowflake.operators.snowflake import SnowflakeOperatorAsync as SnowflakeOperator
+   ```
+
+Note that importing the asynchronous operator using the alias of the analogous traditional operator (e.g. `import SnowflakeOperatorAsync as SnowflakeOperator`) is simply to make updating existing DAGs easier. This is not required, and may not be preferrable when authoring a new DAG.
 
 There are numerous benefits to using deferrable operators including:
 
@@ -140,8 +159,8 @@ As tasks are raised into a deferred state, triggers are registered in the trigge
 
 ### High availability
 
-Triggers are designed to be highly available. You can implement this by starting multiple triggerer processes. Similar to the [HA scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html#running-more-than-one-scheduler) introduced in Airflow 2.0, Airflow ensures that they co-exist with correct locking and high availability. See [High Availability](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html#high-availability) for more information on this topic.
+Triggers are designed to be highly available. You can implement this by starting multiple triggerer processes. Similar to the [HA scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#running-more-than-one-scheduler) introduced in Airflow 2.0, Airflow ensures that they co-exist with correct locking and high availability. See [High Availability](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#high-availability) for more information on this topic.
 
 ### Create a deferrable operator
 
-If you have an operator that would benefit from being asynchronous but does not yet exist in OSS Airflow or Astronomer Providers, you can create your own. See [Writing Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html#writing-deferrable-operators).
+If you have an operator that would benefit from being asynchronous but does not yet exist in OSS Airflow or Astronomer Providers, you can create your own. See [Writing Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#writing-deferrable-operators).

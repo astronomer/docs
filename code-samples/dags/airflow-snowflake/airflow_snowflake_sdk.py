@@ -42,7 +42,6 @@ with DAG(
     schedule="@daily",
     catchup=False,
 ) as dag:
-
     # Extract a file with a header from S3 into a Table object
     orders_data = aql.load_file(
         # data file needs to have a header row

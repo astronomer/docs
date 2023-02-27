@@ -154,7 +154,11 @@
       "items": [
         "release-notes",
         "cli-release-notes",
-        "runtime-release-notes"
+        {
+          "type": "link",
+          "label": "Astro Runtime",
+          "href": "https://docs.astronomer.io/astro/runtime-release-notes"
+        }
       ]
     },
     {
