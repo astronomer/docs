@@ -48,10 +48,6 @@ This topic contains all information related to breaking changes included in Astr
 
 This topic does not include information about new features and changes that are not breaking. For a summary of all changes, see the [CLI release notes](cli-release-notes.md).
 
-### Podman is not supported in version 1.0+
-
-[Running the Astro CLI with Podman containers](cli-podman.md) is currently unsupported in version 1.0+. Podman functionality is still actively maintained in patches for versions 0.29 and 0.28. To continue using Podman to run the Astro CLI, do not upgrade to version 1.0+ until further support is announced.
-
 ### `astro dev init`: New `--use-astronomer-certified` Flag Required for All New Projects Deployed to Software
 
 When you create a new Astro project with the `astro dev init` command, you must now specify the `--use-astronomer-certified` flag if you want to [deploy the project](deploy-cli.md) to a Deployment on Astronomer Software. This flag initializes your project with the latest Astronomer Certified version.
