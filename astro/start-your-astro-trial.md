@@ -84,7 +84,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 8. Click **Create cluster**. 
    
-8. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete.
+9. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete.
 
 </TabItem>
 <TabItem value="azure">
