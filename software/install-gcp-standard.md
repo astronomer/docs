@@ -20,6 +20,7 @@ To install Astronomer on GCP, you'll need access to the following tools and perm
 * An SMTP service and credentials. For example, Mailgun or Sendgrid.
 * Permission to create and modify resources on Google Cloud Platform
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
+* PostgreSQL superuser permissions
 
 :::info
 

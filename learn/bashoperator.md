@@ -9,6 +9,11 @@ sidebar_label: BashOperator
   <meta name="og:description" content="Learn how to use the BashOperator to run bash commands and bash scripts. Review examples of how to run scripts in other languages than Python." />
 </head>
 
+import CodeBlock from '@theme/CodeBlock';
+import bash_two_commands_example_dag from '!!raw-loader!../code-samples/dags/bashoperator/bash_two_commands_example_dag.py';
+import bash_script_example_dag from '!!raw-loader!../code-samples/dags/bashoperator/bash_script_example_dag.py';
+import print_ISS_info_dag from '!!raw-loader!../code-samples/dags/bashoperator/print_ISS_info_dag.py';
+
 The [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) is one of the most commonly used operators in Airflow. It executes bash commands or a bash script from within your Airflow DAG.
 
 In this guide you'll learn:
@@ -72,30 +77,7 @@ In this example, you run two bash commands in a single task:
 
 The second command uses an environment variable from the Airflow environment, `AIRFLOW_HOME`. This is only possible because `append_env` is set to `True`.
 
-```python
-from airflow import DAG
-from airflow.operators.bash import BashOperator
-from datetime import datetime
-import os
-
-with DAG(
-    dag_id="bash_two_commands_example_dag",
-    start_date=datetime(2022,8,1),
-    schedule=None,
-    catchup=False
-) as dag:
-
-    say_hello_and_create_a_sectet_number = BashOperator(
-        task_id="say_hello_and_create_a_sectet_number",
-        bash_command="echo Hello $MY_NAME! && echo $A_LARGE_NUMBER | rev  2>&1\
-                     | tee $AIRFLOW_HOME/include/my_secret_number.txt",
-        env={
-            "MY_NAME": "<my name>",
-            "A_LARGE_NUMBER": "231942"
-        },
-        append_env=True
-    )
-```
+<CodeBlock language="python">{bash_two_commands_example_dag}</CodeBlock>
 
 It is also possible to use two separate BashOperators to run the two commands, which can be useful if you want to assign different dependencies to the tasks.
 
@@ -138,28 +120,7 @@ Astronomer recommends running this command in your Dockerfile for production bui
 
 After making the script available to Airflow, you only have to provide the path to the script in the `bash_command` parameter. Be sure to add a space character at the end of the filepath, or else the task will fail with a Jinja exception!
 
-```python
-from airflow import DAG
-from airflow.operators.bash import BashOperator
-from datetime import datetime
-import os
-
-with DAG(
-    dag_id="bash_script_example_dag",
-    start_date=datetime(2022,8,1),
-    schedule=None,
-    catchup=False
-) as dag:
-
-    execute_my_script = BashOperator(
-        task_id="execute_my_script",
-        # Note the space at the end of the command!
-        bash_command="$AIRFLOW_HOME/include/my_bash_script.sh "
-        # since the env argument is not specified, this instance of the
-        # BashOperator has access to the environment variables of the Airflow
-        # instance like AIRFLOW_HOME
-    )
-```
+<CodeBlock language="python">{bash_script_example_dag}</CodeBlock>
 
 ## Example: Run a script in another programming language
 
@@ -239,44 +200,4 @@ To run these scripts using the BashOperator, ensure that they are accessible to 
 
 The DAG uses the BashOperator to execute both files defined above sequentially.
 
-```python
-from airflow import DAG
-from airflow.operators.bash import BashOperator
-from datetime import datetime
-
-with DAG(
-    dag_id="print_ISS_info_dag",
-    start_date=datetime(2022,8,1),
-    schedule=None,
-    catchup=False
-) as dag:
-
-    # Use the node command to execute the JavaScript file from the command line
-    get_ISS_coordinates = BashOperator(
-        task_id="get_ISS_coordinates",
-        bash_command="node $AIRFLOW_HOME/include/my_java_script.js"
-    )
-
-    # Use the Rscript command to execute the R file which is being provided
-    # with the result from task one via an environment variable via XComs
-    print_ISS_coordinates = BashOperator(
-        task_id="print_ISS_coordinates",
-        bash_command="Rscript $AIRFLOW_HOME/include/my_R_script.R $ISS_COORDINATES",
-        env={
-            "ISS_COORDINATES": "{{ task_instance.xcom_pull(\
-                               task_ids='get_ISS_coordinates', \
-                               key='return_value') }}"
-        },
-        # set append_env to True to be able to use env variables
-        # like AIRFLOW_HOME from the Airflow environment
-        append_env=True
-    )
-
-    get_ISS_coordinates >> print_ISS_coordinates
-```
-
-The logs from the second task include a statement with the current ISS location:
-
-```text
-[2022-08-10, 18:54:30 UTC] {subprocess.py:92} INFO - [1] "The current ISS location: lat: 23.0801 / long: 163.5282."
-```
+<CodeBlock language="python">{print_ISS_info_dag}</CodeBlock>

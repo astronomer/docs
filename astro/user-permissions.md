@@ -20,22 +20,25 @@ Users with Organization Owner permissions also inherit Workspace Admin permissio
 
 An Organization role grants a user some level of access to an Astro Organization, including all of the Workspaces within that Organization. All users have an Organization role regardless of whether they belong to a Workspace. The following table lists the available Organization roles:
 
-| Permission                                                  | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
-| ----------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
-| View Organization details and user membership               | ✔️                       | ✔️                              | ✔️                      |
-| View lineage metadata in the **Lineage** tab                    | ✔️                       | ✔️                              | ✔️                      |
-| Create a new Workspace                                      | ✔️                       | ✔️                              | ✔️                      |
-| Update Organization billing information and settings        |                         | ✔️                              | ✔️                      |
-| View usage for all Workspaces in the **Usage** tab          |                         | ✔️                              | ✔️                      |
-| Workspace Admin permissions to all Workspaces               |                         |                                | ✔️                      |
-| Update roles and permissions of existing Organization users |                         |                                | ✔️                      |
-| Invite a new user to an Organization                        |                         |                                | ✔️                      |
-| Remove a user from an Organization                          |                         |                                | ✔️                      |
-
 ### Update Organization roles
 
 1. In the Cloud UI, click the **People** tab.
 2. Find the user in the table and click **Edit**. The **Members** table lists all users that have been added to a Workspace in your Organization. If you can't find a user, it might be because they haven't been invited to a Workspace or accepted their invite.
+
+| Permission                                                       | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
+| ---------------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
+| View Organization details and user membership                    | ✔️                       | ✔️                              | ✔️                      |
+| View lineage metadata in the **Lineage** tab                     | ✔️                       | ✔️                              | ✔️                      |
+| Create a new Workspace                                           | ✔️                       | ✔️                              | ✔️                      |
+| Update Organization billing information and settings             |                         | ✔️                              | ✔️                      |
+| View usage for all Workspaces in the **Usage** tab               |                         | ✔️                              | ✔️                      |
+| Workspace Admin permissions to all Workspaces                    |                         |                                | ✔️                      |
+| Update roles and permissions of existing Organization users      |                         |                                | ✔️                      |
+| Invite a new user to an Organization                             |                         |                                | ✔️                      |
+| Remove a user from an Organization                               |                         |                                | ✔️                      |
+| Access, regenerate, and delete single sign-on (SSO) bypass links |                         |                                | ✔️                      |
+
+To update user Organization roles, see [Manage users](add-user.md).
 
 ## Workspace roles
 
@@ -62,12 +65,4 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Update Airflow connections and Variables            |                      |                      | ✔️                   |
 | Invite users to a Workspace                         |                      |                      | ✔️                   |
 
-### Update Workspace roles
-
-Workspace Admins can set user roles on the **Access** tab in the Cloud UI. See [Manage Workspaces](manage-workspaces.md#manage-workspace-users).
-
-:::info
-
-If a user changes Workspace roles, it can take a maximum of 10 minutes for corresponding Airflow permission changes to take effect.
-
-:::
+To update user Workspace roles, see [Manage users](add-user.md).

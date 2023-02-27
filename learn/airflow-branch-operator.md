@@ -32,10 +32,10 @@ In the following example we use a `choose_branch` function that returns one set 
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "operator-use-example"
+    groupId= "branch-operator-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operator', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -80,10 +80,10 @@ The code below shows a full example of how to use `@task.branch` in a DAG:
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "example-branch"
+    groupId= "full-branch-dag-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operators', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">
@@ -222,10 +222,10 @@ The following DAG shows an example of how to implement `@task.short_circuit`:
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "example-short-circuit"
+    groupId= "short-circuit-operator-example"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
-        {label: 'Traditional Operators', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="taskflow">

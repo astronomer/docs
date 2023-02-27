@@ -30,6 +30,8 @@
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
 /tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2 301
 /tutorials/astro-python-sdk /learn/astro-python-sdk 301
+/learn/category/tutorials /learn/category/airflow-tutorials 301
+
 
 # CLI migration redirects 
 /software/cli-reference /astro/cli/reference 301

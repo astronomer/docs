@@ -5,6 +5,15 @@ description: "An overview of Airflow decorators and how they can improve the DAG
 id: airflow-decorators
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import airflow_decorator_example_traditional_syntax from '!!raw-loader!../code-samples/dags/airflow-decorators/airflow_decorator_example_traditional_syntax.py';
+import airflow_decorator_example from '!!raw-loader!../code-samples/dags/airflow-decorators/airflow_decorator_example.py';
+import airflow_decorators_traditional_mixing from '!!raw-loader!../code-samples/dags/airflow-decorators/airflow_decorators_traditional_mixing.py';
+import airflow_decorators_sdk_example from '!!raw-loader!../code-samples/dags/airflow-decorators/airflow_decorators_sdk_example.py';
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 Since Airflow 2.0, decorators have been available for some functions as an alternative DAG authoring experience to traditional operators. In Python, [decorators](https://realpython.com/primer-on-python-decorators/) are functions that take another function as an argument and extend the behavior of that function. In the context of Airflow, decorators provide a simpler, cleaner way to define your tasks and DAG. 
 
 In this guide, you'll learn about the benefits of decorators, the decorators available in Airflow, and decorators provided in the Astronomer open source Astro Python SDK library. You'll also review examples and learn when you should use decorators and how you can combine them with traditional operators in a DAG.
@@ -26,86 +35,30 @@ In general, whether to use decorators is a matter of developer preference and st
 
 Airflow decorators were introduced as part of the TaskFlow API, which also handles passing data between tasks using XCom and inferring task dependencies automatically. To learn more about the TaskFlow API, check out this [Astronomer webinar](https://www.astronomer.io/events/webinars/taskflow-api-airflow-2.0) or this Apache Airflow [TaskFlow API tutorial](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html#tutorial-on-the-taskflow-api). 
 
-Using decorators to define your Python functions as tasks is easy. Let's take a before and after example. In the "traditional" DAG below, there is a basic ETL flow with tasks to get data from an API, process the data, and store it.
+Using decorators to define your Python functions as tasks is easy. Let's take a before and after example. Under the **Traditional syntax** tab below, there is a basic ETL DAG with tasks to get data from an API, process the data, and store it. Click on the **Decorators** tab to see the same DAG written using Airflow decorators.
 
-```python
-import logging
-from datetime import datetime
+<Tabs
+    defaultValue="traditional"
+    groupId= "decorator-example"
+    values={[
+        {label: 'Traditional syntax', value: 'traditional'},
+        {label: 'TaskFlow API', value: 'taskflow'},
+    ]}>
 
-import requests
-from airflow import DAG
-from airflow.operators.python import PythonOperator
+<TabItem value="traditional">
 
-API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
+<CodeBlock language="python">{airflow_decorator_example_traditional_syntax}</CodeBlock>
 
-def _extract_bitcoin_price():
-    return requests.get(API).json()['bitcoin']
+</TabItem>
 
-def _process_data(ti):
-    response = ti.xcom_pull(task_ids='extract_bitcoin_price')
-    logging.info(response)
-    processed_data = {'usd': response['usd'], 'change': response['usd_24h_change']}
-    ti.xcom_push(key='processed_data', value=processed_data)
+<TabItem value="taskflow">
 
-def _store_data(ti):
-    data = ti.xcom_pull(task_ids='process_data', key='processed_data')
-    logging.info(f"Store: {data['usd']} with change {data['change']}")
+<CodeBlock language="python">{airflow_decorator_example}</CodeBlock>
 
-with DAG('classic_dag', schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False) as dag:
-    
-    extract_bitcoin_price = PythonOperator(
-        task_id='extract_bitcoin_price',
-        python_callable=_extract_bitcoin_price
-    )
+</TabItem>
+</Tabs>
 
-    process_data = PythonOperator(
-        task_id='process_data',
-        python_callable=_process_data
-    )
-
-    store_data = PythonOperator(
-        task_id='store_data',
-        python_callable=_store_data
-    )
-
-    extract_bitcoin_price >> process_data >> store_data
-```
-
-You can now rewrite this DAG using decorators, which will eliminate the need to explicitly instantiate `PythonOperators`. 
-
-```python
-import logging
-from datetime import datetime
-from typing import Dict
-
-import requests
-from airflow.decorators import dag, task
-
-API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
-
-
-@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
-def taskflow():
-
-    @task(task_id='extract', retries=2)
-    def extract_bitcoin_price() -> Dict[str, float]:
-        return requests.get(API).json()['bitcoin']
-
-    @task(multiple_outputs=True)
-    def process_data(response: Dict[str, float]) -> Dict[str, float]:
-        logging.info(response)
-        return {'usd': response['usd'], 'change': response['usd_24h_change']}
-
-    @task
-    def store_data(data: Dict[str, float]):
-        logging.info(f"Store: {data['usd']} with change {data['change']}")
-
-    store_data(process_data(extract_bitcoin_price()))
-
-dag = taskflow()
-```
-
-The resulting DAG has much less code and is easier to read. Notice that it also doesn't require using `ti.xcom_pull` and `ti.xcom_push` to pass data between tasks. This is all handled by the TaskFlow API when you define your task dependencies with `store_data(process_data(extract_bitcoin_price()))`. 
+The decorated version of the DAG eliminates the need to explicitly instantiate the PythonOperator, has much less code and is easier to read. Notice that it also doesn't require using `ti.xcom_pull` and `ti.xcom_push` to pass data between tasks. This is all handled by the TaskFlow API when you define your task dependencies with `store_data(process_data(extract_bitcoin_price()))`. 
 
 Here are some other things to keep in mind when using decorators:
 
@@ -127,44 +80,7 @@ Here are some other things to keep in mind when using decorators:
 
 If you have a DAG that uses `PythonOperator` and other operators that don't have decorators, you can easily combine decorated functions and traditional operators in the same DAG. For example, you can add an `EmailOperator` to the previous example by updating your code to the following:
 
-```python
-import logging
-from datetime import datetime
-from typing import Dict
-
-import requests
-from airflow.decorators import dag, task
-from airflow.operators.email import EmailOperator
-
-API = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true&include_last_updated_at=true"
-
-@dag(schedule='@daily', start_date=datetime(2021, 12, 1), catchup=False)
-def taskflow():
-
-    @task(task_id='extract', retries=2)
-    def extract_bitcoin_price() -> Dict[str, float]:
-        return requests.get(API).json()['bitcoin']
-
-    @task(multiple_outputs=True)
-    def process_data(response: Dict[str, float]) -> Dict[str, float]:
-        logging.info(response)
-        return {'usd': response['usd'], 'change': response['usd_24h_change']}
-
-    @task
-    def store_data(data: Dict[str, float]):
-        logging.info(f"Store: {data['usd']} with change {data['change']}")
-
-    email_notification = EmailOperator(
-        task_id='email_notification',
-        to='noreply@astronomer.io',
-        subject='dag completed',
-        html_content='the dag has finished'
-    )
-
-    store_data(process_data(extract_bitcoin_price())) >> email_notification
-
-dag = taskflow()
-```
+<CodeBlock language="python">{airflow_decorators_traditional_mixing}</CodeBlock>
 
 Note that when adding traditional operators, dependencies are still defined using bitshift operators.
 
@@ -178,117 +94,7 @@ To use the Astro Python SDK, you need to install the `astro-sdk-python` package 
 
 To show the Astro Python SDK in action, we'll use a simple ETL example. We have homes data in two different CSVs that we need to aggregate, clean, transform, and append to a reporting table. Some of these tasks are better suited to SQL, and some to Python, but we can easily combine both using `astro-sdk-python` functions. The DAG looks like this:
 
-```python
-from datetime import datetime
-
-import pandas as pd
-from airflow.decorators import dag
-from astro.files import File
-from astro.sql import (
-    append,
-    dataframe,
-    load_file,
-    run_raw_sql,
-    transform,
-)
-from astro.sql.table import Table
-
-SNOWFLAKE_CONN_ID = "snowflake_conn"
-FILE_PATH = "/usr/local/airflow/include/"
-
-# The first transformation combines data from the two source csv's
-@transform
-def extract_data(homes1: Table, homes2: Table):
-    return """
-    SELECT *
-    FROM {{homes1}}
-    UNION 
-    SELECT *
-    FROM {{homes2}}
-    """
-
-# Switch to Python (Pandas) for melting transformation to get data into long format
-@dataframe
-def transform_data(df: pd.DataFrame):
-    df.columns = df.columns.str.lower()
-    melted_df = df.melt(
-        id_vars=["sell", "list"], value_vars=["living", "rooms", "beds", "baths", "age"]
-    )
-
-    return melted_df
-
-
-# Back to SQL to filter data
-@transform
-def filter_data(homes_long: Table):
-    return """
-    SELECT * 
-    FROM {{homes_long}}
-    WHERE SELL > 200
-    """
-
-@run_raw_sql
-def create_table():
-    """Create the reporting data which will be the target of the append method"""
-    return """
-    CREATE TABLE IF NOT EXISTS homes_reporting (
-      sell number,
-      list number,
-      variable varchar,
-      value number
-    );
-    """
-
-@dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
-def example_snowflake_partial_table_with_append():
-
-    # Initial load of homes data csv's into Snowflake
-    homes_data1 = load_file(
-        input_file=File(path=FILE_PATH + "homes.csv"),
-        output_table=Table(
-            name="HOMES",
-            conn_id=SNOWFLAKE_CONN_ID
-        ),
-    )
-
-    homes_data2 = load_file(
-        task_id="load_homes2",
-        input_file=File(path=FILE_PATH + "homes2.csv"),
-        output_table=Table(
-            name="HOMES2",
-            conn_id=SNOWFLAKE_CONN_ID
-        ),
-    )
-
-    # Define task dependencies
-    extracted_data = extract_data(
-        homes1=homes_data1,
-        homes2=homes_data2,
-        output_table=Table(name="combined_homes_data"),
-    )
-
-    transformed_data = transform_data(
-        df=extracted_data, output_table=Table(name="homes_data_long")
-    )
-    
-    filtered_data = filter_data(
-        homes_long=transformed_data,
-        output_table=Table(name="expensive_homes_long"),
-    )
-
-    create_results_table = create_table(conn_id=SNOWFLAKE_CONN_ID)
-
-    # Append transformed & filtered data to reporting table
-    # Dependency is inferred by passing the previous `filtered_data` task to `append_table` param
-    record_results = append(
-        source_table=filtered_data,
-        target_table=Table(name="homes_reporting", conn_id=SNOWFLAKE_CONN_ID),
-        columns=["sell", "list", "variable", "value"],
-    )
-    record_results.set_upstream(create_results_table)
-
-example_snowflake_partial_table_dag = example_snowflake_partial_table_with_append()
-```
+<CodeBlock language="python">{airflow_decorators_sdk_example}</CodeBlock>
 
 ![Astro ETL](/img/guides/astro_etl_graph.png)
 

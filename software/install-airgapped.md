@@ -5,7 +5,7 @@ description: "Infrastructure considerations and Helm configuration to install As
 id: install-airgapped
 ---
 
-By default, the Software installation process requires accessing public repositories to download various components:
+By default, the Software installation process requires accessing public repositories to download the following components:
 
 - Docker images from `quay.io/astronomer` or `docker.io`
 - Astronomer Helm charts from `helm.astronomer.io`
@@ -23,7 +23,8 @@ To complete this setup, you need:
 
 - A VPC.
 - Private Kubernetes.
-- A Postgres instance accessible from that environment.
+- A PostgreSQL instance accessible from that environment.
+- PostgreSQL superuser permissions.
 - A VPN (or other means) set up to access, at a minimum, Kubernetes and DNS from inside your VPC.
 - A Helm configuration file for Astronomer named `config.yaml`. You can find sample `config.yaml` files in the [AWS](install-aws-standard.md#step-8-configure-your-helm-chart), [Azure](install-azure-standard.md#step-8-configure-your-helm-chart), [GCP](install-gcp-standard.md#step-8-configure-your-helm-chart) standard installation guides.
 

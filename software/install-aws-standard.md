@@ -20,6 +20,7 @@ To install Astronomer on EKS, you'll need access to the following tools and perm
 * An SMTP service and credentials. For example, Mailgun or Sendgrid.
 * Permission to create and modify resources on AWS.
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains.
+* PostgreSQL superuser permissions.
 * An AWS Load Balancer Controller for the IP target type is required for all private Network Load Balancers (NLBs). See [Installing the AWS Load Balancer Controller add-on](https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html).  
 * If you use Kubernetes version 1.23 or later, the [Amazon EBS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html).
 * Optional. [`eksctl`](https://eksctl.io/) for creating and managing your Astronomer cluster on EKS.

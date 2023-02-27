@@ -24,6 +24,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 - A Deployment on Astro.
 - A [Deployment API key](api-keys.md).
 - [cURL](https://curl.se/).
+- The [Astro CLI](cli/overview.md).
 
 ## Step 1: Retrieve an access token and Deployment URL
 
@@ -48,7 +49,7 @@ curl --location --request POST "https://auth.astronomer.io/oauth/token" \
 
 :::info
 
-Note that this token is only valid for 24 hours. If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
+The token is only valid for 24 hours. If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
 
 If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generating an access token manually, Astronomer recommends that you automate the API request to generate a new access token.
 
@@ -56,11 +57,13 @@ If you've configured a [CI/CD process](ci-cd.md) and you want to avoid generatin
 
 ### Retrieve the Deployment URL
 
-The Deployment URL includes the name of your Organization and a short Deployment ID. For example, a Deployment with an ID `dhbhijp0` that is part of an Organization called `mycompany` would have a Deployment URL of `https://mycompany.astronomer.run/dhbhijp0`.
+Run the following command to retrieve a Deployment URL:
 
-1. In the Cloud UI, select a Workspace and then a Deployment.
-2. Click **Open Airflow**.
-3. When the Airflow UI opens in your browser, copy the URL up to `/home`.
+```sh
+astro deployment inspect -n <deployment-name> -k metadata.webserver_url
+```
+
+The Deployment URL includes the name of your Organization and a short Deployment ID. For example, the Deployment URL for an Organization named `mycompany` with the Deployment ID `dhbhijp0` is `https://mycompany.astronomer.run/dhbhijp0`.
 
 ## Step 2: Make an Airflow API request
 
