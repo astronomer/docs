@@ -89,11 +89,13 @@ After you've created your Organization and Workspace, your new Workspace homepag
 </TabItem>
 <TabItem value="azure">
 
-1. Create a dedicated [Azure subscription](https://learn.microsoft.com/en-us/dynamics-nav/how-to--sign-up-for-a-microsoft-azure-subscription) for Astro. Astro uses this account to provision and manage your cluster resources. The subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview). Copy the subscription ID for step 5.
+1. Create a dedicated [Azure subscription](https://learn.microsoft.com/en-us/dynamics-nav/how-to--sign-up-for-a-microsoft-azure-subscription) for Astro. Astro uses this account to provision and manage your cluster resources. The subscription must be included in an Azure management group that doesn't apply Azure policies. See [What are Azure management groups](https://docs.microsoft.com/en-us/azure/governance/management-groups/overview).
 
-2. In the Azure portal for your subscription, find and copy your [Azure Tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant#find-tenant-id-through-the-azure-portal) for step 4.
+2. Copy the subscription ID for step 5.
 
-3. Grant Astronomer access to your Azure subscription through either the Azure CLI or Powershell.
+3. In the Azure portal for your subscription, find and copy your [Azure Tenant ID](https://learn.microsoft.com/en-us/azure/active-directory/fundamentals/active-directory-how-to-find-tenant#find-tenant-id-through-the-azure-portal) for step 5.
+
+4. Grant Astronomer access to your Azure subscription through either the Azure CLI or Powershell.
 
     <Tabs
         defaultValue="azure"
@@ -198,11 +200,11 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 7. In the **Region** list, select the region where you want to host your cluster. For trials, Astronomer recommends choosing the region that's closest to you.
    
-7. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your Azure subscription through VPC peering. 
+8. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your Azure subscription through VPC peering. 
    
-8. Click **Create cluster**. 
+9. Click **Create cluster**. 
    
-9. Wait for Astronomer to finish creating the cluster. You'll receive a notification from your user email once the process is complete. 
+10. Wait for Astronomer to finish creating the cluster.  You'll receive an email notification when the process is complete.  
 
 </TabItem>
 </Tabs>
@@ -218,7 +220,7 @@ After Astronomer creates your cluster, you're ready to start deploying and runni
 
 ## Next steps
 
-After you get the hang of deploying code to Astro, see the following documentation for more information about Astro features and tools:
+After you've become more familiar with deploying code to Astro, see the following documentation for more information about Astro features and tools:
 
 - [Astro Cloud IDE quickstart](cloud-ide/quickstart.md): Learn how to use Astro's IDE to write data pipelines directly in the Cloud UI. For a more advanced introduction, see the [Write and schedule a simple ML pipeline using the Astro Cloud IDE](https://docs.astronomer.io/learn/cloud-ide-tutorial).
 - [Set up CI/CD](set-up-ci-cd.md): Learn how you can use the Astro CLI to automate code deploys to Astro. 
