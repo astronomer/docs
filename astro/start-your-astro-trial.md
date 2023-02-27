@@ -59,9 +59,9 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 7. In the **Region** list , select the region where your cluster will be hosted. For trials, Astronomer recommends choosing the region that's closest to you.
    
-7. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your AWS account through VPC peering. 
+8. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your AWS account through VPC peering. 
    
-8. Click **Create cluster**. 
+9. Click **Create cluster**. 
    
 10. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete. 
 
@@ -74,17 +74,17 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 3. In the Cloud UI, click **Launch Google Cloud Shell** on the cluster creation screen.
    
-3. In your cloud shell, run `/bootstrap.sh` and follow the steps to grant Astro access to your GCP project. 
+4. In your cloud shell, run `/bootstrap.sh` and follow the steps to grant Astro access to your GCP project. 
    
 5. In the Cloud UI cluster creation screen, enter your GCP Project ID in **GCP Project ID**.
    
 6. In the **Region** list, select the region where you want to host your cluster. For trials, Astronomer recommends choosing the region that's closest to you.
    
-6. Optional. Click **Advanced** and configure VPC subnet ranges for Astro to connect to your GCP project through VPC peering. 
+7. Optional. Click **Advanced** and configure VPC subnet ranges for Astro to connect to your GCP project through VPC peering. 
    
-7. Click **Create cluster**. 
+8. Click **Create cluster**. 
    
-8. Wait for Astronomer to finish creating the cluster. You'll receive a notification from your user email once the process is complete. 
+8. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete.
 
 </TabItem>
 <TabItem value="azure">
@@ -192,11 +192,11 @@ After you've created your Organization and Workspace, your new Workspace homepag
     </TabItem>
     </Tabs>
 
-4. Back on the cluster creation screen in the Cloud UI, enter your Azure Tenant ID in **Azure Tenant ID**.
+5. In the Cloud UI cluster creation screen, enter your Azure Tenant ID in the **Azure Tenant ID** field.
 
-5. Enter your Azure Subscription ID in **Azure Subscription ID**.
+6. Enter your Azure Subscription ID in **Azure Subscription ID** field.
    
-6. In **Region**, select the region that you want to host your cluster in. For trials, Astronomer recommends choosing the region that's closest to you.
+7. In the **Region** list, select the region where you want to host your cluster. For trials, Astronomer recommends choosing the region that's closest to you.
    
 7. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your Azure subscription through VPC peering. 
    
@@ -209,7 +209,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 ## Deploy DAGs to Astro 
 
-After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro! Follow these steps to get your first DAG up and running on Astro in under 30 minutes. 
+After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
 
 1. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is Astronomer's command line interface for testing Airflow both locally and on Astro.
 2. [Create an Astro project](create-project.md). An Astro project contains all of the files you need to run Airflow, including example DAGs.
