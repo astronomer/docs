@@ -12,7 +12,7 @@ Once you set up a TLS certificate for Astronomer, you'll need to establish a pro
 
 :::warning
 
-When renewing a TLS certificate with Let's Encrypt or Certbot, you must specify the RSA key type. If you don't specify the RSA key type, image pushes fail and error messages appear in the registry and Houston logs. When you use the `docker run` command, you must include `-key-type rsa --rsa-key-size 2048` . To specify the RSA key type, run the following command:
+When renewing a TLS certificate with Let's Encrypt or Certbot, you must specify the RSA key type. If you don't specify the RSA key type, deploys fail and error messages appear in the registry and Houston logs. When you use the `docker run` command, you must include `-key-type rsa --rsa-key-size 2048` . To specify the RSA key type, run the following command:
 
 ```sh
 sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rsa
