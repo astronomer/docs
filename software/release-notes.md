@@ -16,16 +16,16 @@ Release date: February 24, 2023
 ### Additional improvements
 
 - You can now configure `extraVolumes` and `extraVolumeMounts` in the Alertmanager Helm chart, which can be useful for storing secret credentials for services that read your alerts.
-- You can now configure custom ingress annotations for Houston using `astronomer.houston.ingress.annotation` in the Astronomer Helm chart.
-- You can now upgrade the Airflow Helm chart for individual Deployments by SSHing into Houston and running `yarn upgrade-deployments <deployment-id>`.
+- You can now use `astronomer.houston.ingress.annotation` in the Astronomer Helm chart to configure custom ingress annotations for Houston.
+- You can now upgrade the Airflow Helm chart for individual Deployments by running `yarn upgrade-deployments <deployment-id>` from within the Houston Pod.
 
 ### Bug fixes 
 
 - Fixed an issue where you could not set `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER` in a Deployment if you were using an Astronomer Certified image.
-- Fixed an issue where removing a user imported from an IdP group when SCIM is enabled can result in orphaned Deployments and Workspaces.
+- Fixed an issue where removing a user imported from an identity provider (IdP) group with SCIM enabled caused orphaned Deployments and Workspaces.
 - Fixed a security vulnerability where you could query Elasticsearch logs for a Deployment from a different Deployment.
 - Fixed an issue where authentication tokens were visible in NGinx logs produced by the Software UI.
-- Fixed an issue where deploying an image using the `docker/build-push-action` GitHub action could produce errors in Houston that affect the entire Astronomer installation.
+- Fixed an issue where deploying an image with the `docker/build-push-action` GitHub action could produce errors in Houston that affected the entire Astronomer Software installation.
 - Fixed the following vulnerabilities:
   
     - [CVE-2023-24807](https://nvd.nist.gov/vuln/detail/CVE-2023-24807)
