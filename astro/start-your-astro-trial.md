@@ -28,7 +28,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 <Tabs
     defaultValue="aws"
-    groupId= "create-a-cluster"
+    groupId= "create-an-astro-cloud-account-and-cluster"
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
