@@ -197,7 +197,7 @@ To load data from S3 into a SQL Table, you only need to specify the location of 
 
 Because the content of `orders_data` isn't needed after the DAG is completed, it's specified without a name. When you define a `Table` object without a preexisting name, that table is considered a temporary table. The Astro SDK deletes all temporary tables after you run `aql.cleanup` in your DAG.
 
-In this example, the temporary table is defined with a schema because Snowflake will merge a temporary table only if that table has constraints. However, this is not a requirement for all databases. To see which databases require temporary tables to have restraints, see the [Astro Python SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/merge.html#prerequisites).
+In this example, a schema is used to define the temporary table because a temporary table can only be merged in Snowflake when it includes constraints. Not all databases require constraints for temporary tables. For a list of databases that require constraints for temporary tables, see the [Astro Python SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/merge.html#prerequisites).
 
 ```python
 # Load a file with a header from S3 into a temporary Table, referenced by the
