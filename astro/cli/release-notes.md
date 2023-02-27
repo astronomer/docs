@@ -25,13 +25,13 @@ Release date: February 24, 2023
 
 You can now configure the Astro CLI to run Airflow locally and deploy to Astro using [Podman](https://podman.io/). Podman is an alternative container engine to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
-To configure the CLI to use Podman, see [Run the Astro CLI using Podman](configure-cli.md#run-the-astro-cli-using-podman).
+To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](configure-cli.md#run-the-astro-cli-using-podman).
 
 ### Bug fixes 
 
 - Fixed an issue where API keys wouldn't work if you logged out of your personal account using `astro logout`.
-- Fixed an issue where you couldn't set the minimum worker count for a worker queue to 0.
-- Fixed an issue where deploys would not throw an error if you specified a Deployment name that didn't exist.
+- Fixed an issue where you couldn't set the minimum worker count for a worker queue to zero.
+- Fixed an issue where deploys would not return an error when you specified a Deployment name that didn't exist.
 - Fixed an issue where you could not update a Deployment with a file using a Deployment API key.
 
 ## Astro CLI 1.10.0
