@@ -7,8 +7,18 @@ description: Update and auto-renew your organization's TLS certificate for Astro
 
 Once you set up a TLS certificate for Astronomer, you'll need to establish a process for periodically renewing the certificate. This can be done in one of two ways:
 
-* **Automatic renewal**: Let's Encrypt provides a service that automatically renews your TLS certificate every 90 days. We recommend this option for smaller organizations where the DNS administrator and cluster administrator are either the same person or on the same team.
-* **Manual renewal**: Manual renewal works similarly to the initial certificate creation process, except that you replace your existing certificate by creating a new certificate. We recommend this method for large organizations that have their own processes for issuing certificates.
+* **Automatic renewal**: Let's Encrypt provides a service that automatically renews your TLS certificate every 90 days. Astronomer recommends this option for smaller organizations where the DNS administrator and cluster administrator are either the same person or on the same team.
+* **Manual renewal**: Manual renewal works similarly to the initial certificate creation process, except that you replace your existing certificate by creating a new certificate. Astronomer recommends this method for large organizations that have their own processes for issuing certificates.
+
+:::warning
+
+When renewing a TLS certificate with Let's Encrypt or Certbot, you must specify the RSA key type. If you don't specify the RSA key type, image pushes fail and error messages appear in the registry and Houston logs. When you use the `docker run` command, you must include `-key-type rsa --rsa-key-size 2048` . To specify the RSA key type, run the following command:
+
+```sh
+sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rsa
+```
+
+:::
 
 ## Automatically renew TLS certificates Using Let's Encrypt
 
@@ -119,7 +129,7 @@ Once you set up a TLS certificate for Astronomer, you'll need to establish a pro
 
 ## Manually renew TLS certificates
 
-Larger organizations with dedicated security teams will likely have their own processes for requesting and renewing TLS certificates. Regardless, there are specific steps you have to complete for Astronomer when renewing TLS certificates:
+Use a manual process to renew TLS certificates when your organization has its own process for requesting and renewing TLS certificates.
 
 1. Delete your current TLS certificate by running the following command:
    ```sh
