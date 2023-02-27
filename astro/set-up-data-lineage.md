@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Integrate lineage'
-title: "Send lineage data to Astro"
+title: "Send lineage metadata to Astro"
 id: set-up-data-lineage
 description: Configure Airflow and external systems to emit OpenLineage data to Astro with Apache Airflow.
 toc_min_heading_level: 2
@@ -14,19 +14,19 @@ toc_max_heading_level: 2
 - Manage personally identifiable information (PII).
 - Ensure compliance with data regulations.
 
-This guide provides information about how lineage data is automatically extracted from Apache Airflow tasks on Astro and how to integrate external systems, including Databricks and dbt, that require additional configuration. To learn about how to view data lineage on Astro, see [View data lineage](data-lineage.md).
+This guide provides information about how lineage metadata is automatically extracted from Apache Airflow tasks on Astro and how to integrate external systems, including Databricks and dbt, that require additional configuration. To learn about how to view data lineage on Astro, see [View data lineage](data-lineage.md).
 
-## Extract lineage data from Airflow operators using supported extractors
+## Extract lineage metadata from Airflow operators using supported extractors
 
 Astro uses the [OpenLineage Airflow library](https://openlineage.io/docs/integrations/airflow/) (`openlineage-airflow`) to extract lineage from Airflow tasks and stores that data in the Astro control plane. This package includes [default extractors](https://openlineage.io/docs/integrations/airflow/extractors/default-extractors) for popular Airflow operators.
 
-The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage data to the **Lineage** page on Astro. 
+The latest version of the OpenLineage Airflow library is installed on [Astro Runtime](runtime-image-architecture.md) by default, meaning that you can use all default extractors without additional configuration. If you use an Airflow operator that includes a default extractor in your DAG, the operator automatically generates lineage metadata to the **Lineage** page on Astro. 
 
-Each operator generates different lineage data based on its default extractor. For more information about operators with default extractors and what lineage data they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
+Each operator generates different lineage metadata based on its default extractor. For more information about operators with default extractors and what lineage metadata they generate, see [OpenLineage documentation](https://openlineage.io/docs/integrations/about#capability-matrix).
 
-## Extract lineage data from Airflow operators using custom extractors
+## Extract lineage metadata from Airflow operators using custom extractors
 
-If you want to extract lineage data from an Airflow operator that doesn't have a default extractor, you can write a custom extractor and add it to your Astro project.
+If you want to extract lineage metadata from an Airflow operator that doesn't have a default extractor, you can write a custom extractor and add it to your Astro project.
 
 To write a custom extractor, see [OpenLineage documentation](https://openlineage.io/docs/integrations/airflow/extractors/custom-extractors). To add a custom extractor to an Astro Deployment:
 
@@ -40,19 +40,19 @@ To write a custom extractor, see [OpenLineage documentation](https://openlineage
 
     If you are importing only one custom extractor, do not include a semicolon after the file path. 
 
-## Extract lineage data from Airflow operators using custom inlets and outlets
+## Extract lineage metadata from Airflow operators using custom inlets and outlets
 
 An alternative to writing a custom extractor is to specify dataset inlets and outlets directly in your task parameters. These inlets and outlets appear as dependency lines on the lineage graph for your DAG. This option is suitable if your main priority is rendering an accurate lineage graph of your DAG, and you don't need to generate specific facets from your operators.
 
 To specify inlets and outlets, see the [OpenLineage documentation](https://openlineage.io/docs/integrations/airflow/manual) and [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/lineage.html). Note that OpenLineage only supports specifying inlets and outlets using `Table` objects.
 
-## Extract lineage data from external systems to Astro
+## Extract lineage metadata from external systems to Astro
 
-To send lineage data integrate from an external system to Astro, you need to configure the external system's OpenLineage integration with a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to your Astro lineage backend.
+To send lineage metadata integrate from an external system to Astro, you need to configure the external system's OpenLineage integration with a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to your Astro lineage backend.
 
 To locate your Deployment namespace in the Cloud UI, select a Workspace and then copy the value with the format `<text>-<text>-<four-digit-number>` next to the Deployment name. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
 
-Use the following topics to configure these values in supported external systems and send lineage data from those systems to Astro.
+Use the following topics to configure these values in supported external systems and send lineage metadata from those systems to Astro.
 
 ### Snowflake and OpenLineage with Airflow
 
@@ -60,10 +60,10 @@ Lineage data emitted from [Snowflake](https://www.snowflake.com/en/) is similar 
 
 When you run a task in Airflow that interacts with Snowflake, the query tag allows each task to be directly matched with the Snowflake query or queries that are run by that task. If the task fails, for example, you can look up the Snowflake query that was executed by that task and reduce the time required to troubleshoot the task failure.
 
-To emit lineage data from Snowflake:
+To emit lineage metadata from Snowflake:
 
 1. Add a Snowflake connection to Airflow. See [Snowflake connection](https://airflow.apache.org/docs/apache-airflow-providers-snowflake/stable/connections/snowflake.html).
-2. Run an Airflow DAG or task with the [`SnowflakeOperator`](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) or `SnowflakeOperatorAsync`. This operator is officially supported by OpenLineage and does not require additional configuration. If you don't run Airflow on Astro, see [Extract lineage data from external systems to Astro](#extract-lineage-data-from-external-systems-to-Astro).
+2. Run an Airflow DAG or task with the [`SnowflakeOperator`](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator) or `SnowflakeOperatorAsync`. This operator is officially supported by OpenLineage and does not require additional configuration. If you don't run Airflow on Astro, see [Extract lineage metadata from external systems to Astro](#extract-lineage-data-from-external-systems-to-Astro).
 
 #### Data collected
 

@@ -23,7 +23,7 @@ An Organization role grants a user some level of access to an Astro Organization
 | Permission                                                  | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
 | ----------------------------------------------------------- | ----------------------- | ------------------------------ | ---------------------- |
 | View Organization details and user membership               | ✔️                       | ✔️                              | ✔️                      |
-| View lineage data in the **Lineage** tab                    | ✔️                       | ✔️                              | ✔️                      |
+| View lineage metadata in the **Lineage** tab                    | ✔️                       | ✔️                              | ✔️                      |
 | Create a new Workspace                                      | ✔️                       | ✔️                              | ✔️                      |
 | Update Organization billing information and settings        |                         | ✔️                              | ✔️                      |
 | View usage for all Workspaces in the **Usage** tab          |                         | ✔️                              | ✔️                      |

@@ -9,7 +9,7 @@ The **Lineage** tab in the Cloud UI can help you troubleshoot issues with your d
 
 From the **Lineage** tab on Astro, you can access the following four pages:
 
-- **Runs**: A real-time overview of all runs that emit data lineage across your Organization. A run can be an Airflow task run or any other process configured to emit lineage data to Astronomer, such as a Spark job.
+- **Runs**: A real-time overview of all runs that emit data lineage across your Organization. A run can be an Airflow task run or any other process configured to emit lineage metadata to Astronomer, such as a Spark job.
 - **Datasets**: A real-time overview of all recent **datasets** that your DAGs have read or written to.
 - **Issues**: A view of potential issues or statistical inconsistencies related to your runs or datasets.
 - **Lineage**: A graph view that visualizes data lineage.
@@ -17,7 +17,7 @@ From the **Lineage** tab on Astro, you can access the following four pages:
 
 :::info
 
-Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage datasets are extracted and generated using lineage metadata. The Cloud UI currently does not show information about Airflow datasets.
+Lineage datasets are different from Airflow's [datasets feature](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/datasets.html). Airflow datasets are defined explicitly in your DAG code, whereas lineage metadatasets are extracted and generated using lineage metadata. The Cloud UI currently does not show information about Airflow datasets.
 
 :::
 
@@ -27,13 +27,13 @@ For more information on data lineage and related concepts, see [Data lineage con
 
 :::caution
 
-All members of your Astro Organization can view the **Lineage** tab regardless of their Workspace permissions. The **Lineage** tab could contain plain-text SQL and Python code from any system that emits lineage data to Astro. If this is a security concern for your organization, reach out to [Astronomer support](https://support.astronomer.io/).
+All members of your Astro Organization can view the **Lineage** tab regardless of their Workspace permissions. The **Lineage** tab could contain plain-text SQL and Python code from any system that emits lineage metadata to Astro. If this is a security concern for your organization, reach out to [Astronomer support](https://support.astronomer.io/).
 
 :::
 
 ## Prerequisites
 
-To view lineage data for Deployments, you must configure Airflow and your external systems to emit lineage data. See [Enable data lineage for external systems](set-up-data-lineage.md).
+To view lineage metadata for Deployments, you must configure Airflow and your external systems to emit lineage metadata. See [Enable data lineage for external systems](set-up-data-lineage.md).
 
 ## View the lineage graph for a data pipeline
 
@@ -43,7 +43,7 @@ You can use the search field at the top of the Cloud UI to view the lineage grap
 
 The search results include the namespace that emitted the matching event. When an Astro Deployment emits the lineage event, the namespace matches the Deployment namespace shown in the **Deployments** page of the Cloud UI. Clicking a search result opens the **Lineage** page and shows the lineage graph for the selected job or dataset. You can also access the lineage graph for a recent job run in the **Runs** page below **Most Recent Runs**.
 
-The **Lineage** page shows lineage data only for the most recent run of a given data pipeline. To explore lineage data from previous runs, see [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
+The **Lineage** page shows lineage metadata only for the most recent run of a given data pipeline. To explore lineage metadata from previous runs, see [Compare lineage graphs from previous runs](data-lineage.md#compare-lineage-graphs-from-previous-runs).
 
 :::info
 

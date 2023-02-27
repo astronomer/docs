@@ -166,7 +166,7 @@ For more information on data lineage and setting up OpenLineage with Airflow, se
 
 :::
 
-Both the `SQLColumnCheckOperator` and the `SQLTableCheckOperator` have OpenLineage extractors that emit lineage data. While the other SQL Check operators will show up on the lineage graph, they do not emit test data to the OpenLineage backend. The `GreatExpectationsOperator` will automatically trigger the OpenLineage action if an OpenLineage environment is recognized. If you are working with open source tools, you can view the resulting lineage from the extractors using Marquez.
+Both the `SQLColumnCheckOperator` and the `SQLTableCheckOperator` have OpenLineage extractors that emit lineage metadata. While the other SQL Check operators will show up on the lineage graph, they do not emit test data to the OpenLineage backend. The `GreatExpectationsOperator` will automatically trigger the OpenLineage action if an OpenLineage environment is recognized. If you are working with open source tools, you can view the resulting lineage from the extractors using Marquez.
 
 The output from the `SQLColumnCheckOperator` contains each individual check and whether or not it succeeded:
 
