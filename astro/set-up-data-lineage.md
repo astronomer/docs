@@ -35,20 +35,20 @@ To write a custom extractor, see [OpenLineage documentation](https://openlineage
 3. Set the following [environment variable](environment-variables.md) in your Astro Deployment:
 
     ```text
-    OPENLINEAGE_EXTRACTORS='<path-to-extractor-class-1>;<path-to-extractor-class-2>;<path-to-extractor-class-x>
+    OPENLINEAGE_EXTRACTORS='<path-to-extractor-class-1>;<path-to-extractor-class-2>;<path-to-extractor-class-x>'
     ```
 
-    If you are importing only one custom extractor, do not include a semicolon after the file path. 
+    Specify the path to your extractor class as relative to the base of your Astro project directory (for example, `include/myExtractorClass`). If you are importing only one custom extractor, do not include a semicolon after the file path. 
 
 ## Extract lineage metadata from Airflow operators using custom inlets and outlets
 
-An alternative to writing a custom extractor is to specify dataset inlets and outlets directly in your task parameters. These inlets and outlets appear as dependency lines on the lineage graph for your DAG. This option is suitable if your main priority is rendering an accurate lineage graph of your DAG, and you don't need to generate specific facets from your operators.
+An alternative to writing a custom extractor is to specify dataset inlets and outlets directly in your task parameters. These inlets and outlets appear as dependency lines on the lineage graph for your DAG. This option is suitable if your priority is rendering an accurate lineage graph of your DAG, and you don't need to generate specific facets from your operators.
 
 To specify inlets and outlets, see the [OpenLineage documentation](https://openlineage.io/docs/integrations/airflow/manual) and [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/lineage.html). Note that OpenLineage only supports specifying inlets and outlets using `Table` objects.
 
 ## Extract lineage metadata from external systems to Astro
 
-To send lineage metadata integrate from an external system to Astro, you need to configure the external system's OpenLineage integration with a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to your Astro lineage backend.
+To send lineage metadata from an external system to Astro, you need to configure the external system's OpenLineage integration with a Deployment namespace, your Organization's OpenLineage URL, and your organization's OpenLineage API key. This information is used to send OpenLineage data to your Astro lineage backend.
 
 To locate your Deployment namespace in the Cloud UI, select a Workspace and then copy the value with the format `<text>-<text>-<four-digit-number>` next to the Deployment name. To locate your Organization's OpenLineage URL and OpenLineage API key, go to `https://cloud.<your-astro-base-domain>.io/settings` and copy the values in the **Lineage API Key** and **OpenLineage URL** fields.
 
