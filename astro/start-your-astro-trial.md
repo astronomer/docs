@@ -10,7 +10,7 @@ Use this guide to get started with Astro, the fully managed Airflow service by A
 
 ## Activate your trial
 
-Visit `cloud.astronomer.io/onboarding` to activate your 14 day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
+Visit `https://cloud.astronomer.io/onboarding` to activate your free 14 day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
 
 ## Create an Organization and Workspace
 
@@ -38,7 +38,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 1. Create a dedicated [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) for Astro. Astro uses this account to provision and manage your cluster resources. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. 
 
-2. Copy the Account ID for Step 3.
+2. Copy the **Account ID** for Step 3.
 
     When creating your account, specify the following [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html):
     
@@ -57,7 +57,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 6. In the Cloud UI cluster creation screen, enter your Astro AWS account ID in **AWS Account ID**.
    
-7. In the **Region** list , select the region where your cluster will be hosted. For trials, Astronomer recommends choosing the region that's closest to you.
+7. In the **Region** list, select the region where your cluster will be hosted. For trials, Astronomer recommends choosing the region that's closest to you.
    
 8. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your AWS account through VPC peering. 
    
@@ -220,7 +220,7 @@ After Astronomer creates your cluster, you're ready to start deploying and runni
 
 ## Next steps
 
-After you've become more familiar with deploying code to Astro, see the following documentation for more information about Astro features and tools:
+After you've become more familiar with deploying DAGs to Astro, see the following documentation for more information about Astro features and tools:
 
 - [Astro Cloud IDE quickstart](cloud-ide/quickstart.md): Learn how to use Astro's IDE to write data pipelines directly in the Cloud UI. For a more advanced introduction, see the [Write and schedule a simple ML pipeline using the Astro Cloud IDE](https://docs.astronomer.io/learn/cloud-ide-tutorial).
 - [Set up CI/CD](set-up-ci-cd.md): Learn how you can use the Astro CLI to automate code deploys to Astro. 
