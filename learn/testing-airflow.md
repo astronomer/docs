@@ -199,7 +199,7 @@ To set up `dag.test()`, you only need to add few lines of code to the end of you
 
 <Tabs
     defaultValue="traditional"
-    groupId= "dag-test-examples"
+    groupId="debug-interactively-with-dagtest"
     values={[
         {label: 'Traditional DAG context', value: 'traditional'},
         {label: '@dag decorator', value: 'decorator'},

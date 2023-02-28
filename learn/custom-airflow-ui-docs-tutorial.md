@@ -60,7 +60,7 @@ To run Airflow locally, you first need to create an Astro project.
 
 <Tabs
     defaultValue="TaskFlowAPI"
-    groupId= "code-variations"
+    groupId="step-2-create-a-new-dag"
     values={[
         {label: 'TaskFlow API', value: 'TaskFlowAPI'},
         {label: 'Traditional operators', value: 'traditional'},
@@ -154,7 +154,7 @@ You can add Markdown-based documentation to your DAGs that will render in the **
 
 <Tabs
     defaultValue="TaskFlowAPI"
-    groupId= "code-variations"
+    groupId="step-3-add-docs-to-your-dag"
     values={[
         {label: 'TaskFlow API', value: 'TaskFlowAPI'},
         {label: 'Traditional operators', value: 'traditional'},
@@ -270,7 +270,7 @@ To add documentation to your task, follow these steps:
 
 <Tabs
     defaultValue="TaskFlowAPI"
-    groupId= "code-variations"
+    groupId="step-4-add-docs-to-a-task"
     values={[
         {label: 'TaskFlowAPI', value: 'TaskFlowAPI'},
         {label: 'Traditional operators', value: 'traditional'},
