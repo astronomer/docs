@@ -168,7 +168,7 @@ The following example DAG uses three ExternalTaskSensors at the start of three p
 </TabItem>
 </Tabs>
 
-In this DAG
+In this DAG:
 
 - `ets_branch_1` waits for the `my_task` task of `upstream_dag_1` to complete before moving on to execute `task_branch_1`.
 - `ets_branch_2` waits for the `my_task` task of `upstream_dag_2` to complete before moving on to execute `task_branch_2`.

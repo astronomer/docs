@@ -119,9 +119,9 @@ You can use the output of an upstream operator as the input data for a dynamical
 In this section you'll learn how to pass mapping information to a downstream task for each of the following scenarios:
 
 - **TaskFlow over TraskFlow**: Both tasks are defined using the TaskFlow API.
-- **TaskFlow over Traditional operator**: The upstream task is defined using a traditional operator and the downstream task is defined using the TaskFlow API.
+- **TaskFlow over traditional operator**: The upstream task is defined using a traditional operator and the downstream task is defined using the TaskFlow API.
 - **Traditional operator over TaskFlow**: The upstream task is defined using the TaskFlow API and the downstream task is defined using a traditional operator.
-- **Traditional operator over Traditional operator**: Both tasks are defined using traditional operators.
+- **Traditional operator over traditional operator**: Both tasks are defined using traditional operators.
 
 <Tabs
     defaultValue="two-flow"

@@ -101,7 +101,6 @@ The following DAG example dynamically generates tasks using the PostgresOperator
 
 In the **Bad practice** example the connection to the other database is made outside of an operator instantiation as top-level code. When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table. This query is run on every Scheduler heartbeat, which can cause performance issues. 
 
-
 The version shown under the **Good practice** DAG wraps the connection to the database into its own task, the `get_list_of_results` task. Now the connection is only made at when the DAG actually runs, preventing performance issues.
 
 <Tabs
@@ -130,7 +129,7 @@ The version shown under the **Good practice** DAG wraps the connection to the da
 
 Including code that isn't part of your DAG or operator instantiations in your DAG file makes the DAG harder to read, maintain, and update. When possible, leave all of the heavy lifting to the hooks and operators that you instantiate within the file. If your DAGs need to access additional code such as a SQL script or a Python function, consider keeping that code in a separate file that can be read into a DAG run.
 
-The following example DAGs demonstrate the difference between providing a SQL query directly to the PostgresOperator as shown in the tab **Bad practice** and referencing a separate SQL file under the tab **Good practice**. In the good practice DAG, the DAG-level configuration includes `template_searchpath` and the PostgresOperator specifies a `covid_state_query.sql` file that contains the same query as was directly provided to the PostgresOperator in the bad practice DAG.
+The following example DAGs demonstrate the difference between the bad and good practices of including code in your DAGs. In the **Bad practice** DAG, a SQL query is provided directly to the PostgresOpertator, which unnecessarily exposes code in your DAG. In the **Good practice** DAG, the DAG-level configuration includes `template_searchpath` and the PostgresOperator specifies a `covid_state_query.sql` file that contains the query to execute. 
 
 <Tabs
     defaultValue="bad-practice"
