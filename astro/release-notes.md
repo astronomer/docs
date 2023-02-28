@@ -23,6 +23,12 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
 
+## February 28, 2023
+
+### Bug fixes
+
+- Fixed an issue where a user could be provisioned multiple accounts if they logged in using differently cased characters in their login email address.
+
 ## February 21, 2023
 
 ### New identity-first authentication model
