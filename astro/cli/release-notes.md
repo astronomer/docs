@@ -17,6 +17,23 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.11.0
+
+Release date: February 27, 2023
+
+### Support for Podman
+
+You can now configure the Astro CLI to run Airflow locally and deploy to Astro using [Podman](https://podman.io/). Podman is an alternative container engine to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
+
+To configure the Astro CLI to use Podman, see [Run the Astro CLI using Podman](configure-cli.md#run-the-astro-cli-using-podman).
+
+### Bug fixes 
+
+- Fixed an issue where you couldn't run Astro CLI commands with a Deployment API key if you logged out of your personal account using `astro logout`.
+- Fixed an issue where you couldn't set the minimum worker count for a worker queue to zero.
+- Fixed an issue where running `astro deploy` would not return an error when you specified a Deployment name that didn't exist.
+- Fixed an issue where you could not update a Deployment with a file using a Deployment API key.
+
 ## Astro CLI 1.10.0
 
 Release date: February 2, 2023

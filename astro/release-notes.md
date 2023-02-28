@@ -4,8 +4,6 @@ title: 'Astro release notes'
 id: release-notes
 ---
 
-import PremiumBadge from '@site/src/components/PremiumBadge'
-
 <head>
   <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
@@ -21,9 +19,73 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 7.2.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.3.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.10.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
+
+## February 21, 2023
+
+### New identity-first authentication model
+
+Astro has migrated to an identity-first authentication model. Users now authenticate to the Astro platform instead of individual Organizations, and Organizations can set permissions for how users can modify and access resources. This model prioritizes identity verification and enforces authentication policies for user email domains.
+
+For all users logging in to Astro, this migration has the following effects:
+
+- Instead of being redirected to separate login pages for each Organization, all Astro users log in through a universal login page. 
+- Users belonging to multiple Organizations no longer have to log in again when switching Organizations.
+- Users no longer need to enter their email on a separate page before they log in to the Cloud UI.
+- If your Organization enforces single sign-on (SSO), users can now authenticate to Astro with a username and password when your email domain doesn't enforce SSO.
+
+For Organization Owners, this migration has the following additional effects:
+
+- You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.
+- Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
+
+For more information about how these changes can affect the Astro log in experience, see the [Login FAQ](log-in-to-astro.md#frequently-asked-questions). To configure authentication behavior, see [Manage an Organization on Astro](manage-organization.md).
+
+### New Hosted regions available
+
+You can now create clusters in the following regions on an Astro - Hosted installation.
+
+- AWS
+  
+    - `ap-northeast-1`
+    - `ap-southeast-2`
+    - `eu-central-1`
+    - `eu-west-1`
+    - `us-east-1`
+    - `us-west-2`
+
+- Google Cloud
+
+    - `asia-northeast1`
+    - `australia-southeast1`
+    - `europe-west1`
+    - `europe-west2`
+    - `us-central1`
+    - `us-east4`
+
+- Microsoft Azure
+
+    - `australiaeast`
+    - `japaneast`
+    - `northeurope`
+    - `westeurope`
+    - `eastus2`
+    - `westus2`
+
+### Additional improvements 
+
+The default CIDR ranges for new GCP clusters have been reduced. The following are the new CIDR ranges:
+
+- **Subnet CIDR**: `172.20.0.0/22`
+- **Pod CIDR**: `172.21.0.0/19`
+- **Service Address CIDR**: `172.22.0.0/22`
+- **Service VPC Peering**: `172.23.0.0/20`
+
+### Bug fixes 
+
+In the Cloud UI, when using **Compare** on the **Lineage Graph** page, you can now compare shorter run lengths.
 
 ## February 14, 2023
 
@@ -34,8 +96,6 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 This is a [Public Preview](feature-previews.md) feature.
 
 :::
-
-<PremiumBadge />
 
 You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
 
@@ -704,7 +764,7 @@ To learn more about data lineage and how you can configure it on Astro, see:
 - [Integrate Airflow and OpenLineage](https://docs.astronomer.io/learn/airflow-openlineage)
 - [Enable data lineage for External Services](set-up-data-lineage.md)
 - [Data lineage on Astro](data-lineage.md)
-- [Data lineage Support and Compatibility](data-lineage-support-and-compatibility.md)
+- [OpenLineage Compatibility Matrix](https://openlineage.io/docs/integrations/about#capability-matrix)
 
 :::info
 

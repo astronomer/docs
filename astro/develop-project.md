@@ -319,9 +319,9 @@ The Astro CLI lets you quickly apply and test changes to your Astro project. Som
 
 Changes made to the following directories in your Astro project don’t require rebuilding your project:
 
-- `dags`
-- `plugins`
-- `include`
+- `dags` (the storage location for your DAG code)
+- `plugins` (the storage location for your custom or community Airflow plugins)
+- `include` (the storage location for additional project files)
 
 #### Apply changes
 

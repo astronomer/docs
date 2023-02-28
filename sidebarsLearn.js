@@ -99,10 +99,10 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Tutorials',
+      label: 'Airflow tutorials',
       link: {
         type:'generated-index',
-        title: 'Tutorials',
+        title: 'Airflow tutorials',
         description: 'Step-by-step guides for writing DAGs and running Airflow.'
       },
       items: [

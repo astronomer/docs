@@ -38,6 +38,8 @@ module.exports = {
             "cloud-ide/run-python",
             "cloud-ide/run-sql",
             "cloud-ide/document-pipeline",
+            "cloud-ide/run-cells",
+            "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
           ],
@@ -93,6 +95,7 @@ module.exports = {
           items: ["install-aws", "install-azure", "install-gcp"],
         },
         "manage-workspaces",
+        "manage-organization",
         {
           type: "category",
           label: "User access",
@@ -178,7 +181,6 @@ module.exports = {
         },
         'platform-variables',
         "feature-previews",
-        'data-lineage-support-and-compatibility',
         {
           type: "category",
           label: "Security",

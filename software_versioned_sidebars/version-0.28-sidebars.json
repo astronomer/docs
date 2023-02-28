@@ -31,7 +31,6 @@
             "kubernetes-executor"
           ]
         },
-        "cli-podman",
         "upgrade-astro-cli"
       ]
     },

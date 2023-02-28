@@ -30,6 +30,8 @@
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
 /tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2 301
 /tutorials/astro-python-sdk /learn/astro-python-sdk 301
+/learn/category/tutorials /learn/category/airflow-tutorials 301
+
 
 # CLI migration redirects 
 /software/cli-reference /astro/cli/reference 301
@@ -48,6 +50,7 @@
 
 # deprecated docs
 /astro/known-limitations /astro 301
+/astro/data-lineage-support-and-compatibility /astro/set-up-data-lineage 301
 
 # redirect base domain cloud links to astro path
 /add-user /astro/add-user 301
@@ -252,7 +255,8 @@
 /astro/configure-deployment /astro/configure-deployment-resources 301
 /astro/scheduler-logs /astro/view-logs 301
 /software/manage-platform-users#reference-system-permissions /software/role-permission-reference 301
-
+/software/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
+/software/*/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301
