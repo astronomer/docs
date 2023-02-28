@@ -140,7 +140,7 @@ If you receive an error after running `podman ps`, there is likely a problem wit
     
 2. Copy the value in the `URI` column from `podman-machine-default*`. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
 
-3. Set your system-level `DOCKER_HOST` environment variable to the value of the URI.
+3. Set your `DOCKER_HOST` environment variable to the value of the URI.
 
 For more information, see [Podman documentation](https://docs.podman.io/en/latest/).
 
@@ -184,7 +184,26 @@ If you're interested in running a different version of Podman that's unsupported
 
 :::tip
 
-If you receive an error after running `podman ps`, you might need to set the `DOCKER_HOST` environment variable in WSL 2 to be the location of your Podman service socket. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
+If you receive an error after running `podman ps`, there is likely a problem with your Podman connection. You might need to set the system-level `DOCKER_HOST` environment variable to be the location of your Podman service socket:
+
+1. In WSL 2, run the following command to identify the connection URI for `podman-machine-default`:
+
+    ```sh
+    podman system connection ls
+    ```
+    
+    The output should look like the following:
+    
+    ```text
+    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
+    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
+    ```
+    
+2. Copy the value in the `URI` column from `podman-machine-default*`. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
+
+3. Set your `DOCKER_HOST` environment variable to the value of the URI.
+
+For more information, see [Podman documentation](https://docs.podman.io/en/latest/).
 
 :::
 
@@ -231,7 +250,26 @@ If you're interested in running a different version of Podman that's unsupported
 
 :::tip
 
-If you receive an error after running `podman ps`, you might need to set the system-level `DOCKER_HOST` environment variable to be the location of your Podman service socket. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
+If you receive an error after running `podman ps`, there is likely a problem with your Podman connection. You might need to set the system-level `DOCKER_HOST` environment variable to be the location of your Podman service socket:
+
+1. Run the following command to identify the connection URI for `podman-machine-default`:
+
+    ```sh
+    podman system connection ls
+    ```
+    
+    The output should look like the following:
+    
+    ```text
+    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
+    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
+    ```
+    
+2. Copy the value in the `URI` column from `podman-machine-default*`. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
+
+3. Set your `DOCKER_HOST` environment variable to the value of the URI.
+
+For more information, see [Podman documentation](https://docs.podman.io/en/latest/).
 
 :::
 
