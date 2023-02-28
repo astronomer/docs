@@ -89,7 +89,9 @@ See [Manage task CPU and memory](#manage-task-cpu-and-memory) for an example `po
 
 ### Manage task CPU and memory
 
-One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for your task. The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
+One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for your task. When requesting resources, make sure that your requests don't exceed the available resources in your current [Pod worker node type](#change-the-pod-worker-node-type).
+
+The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
 ```python
 import pendulum
@@ -138,7 +140,9 @@ When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 10
 
 ### Create temporary storage for tasks
 
-The Airflow metadata database has limited temporary storage for Airflow tasks. Creating or storing files in the metadata database system is not recommended, as it is unlikely that there will be sufficient storage for your tasks and the data will be available to other worker Pods. To create or store temporary files for task execution, Astronomer recommends creating a temporary folder for each task worker Pod. The following example shows how you can add a temporary folder to a Pod using a `pod_override` configuration:
+The Airflow metadata database has limited temporary storage for Airflow tasks. Creating or storing files in the metadata database system is not recommended, as it is unlikely that there will be sufficient storage for your tasks and the data will be available to other worker Pods. To create or store temporary files for task execution, Astronomer recommends creating a temporary folder for each task worker Pod.
+
+The following example shows how you can add a temporary folder to a Pod using a `pod_override` configuration:
 
 ```python
 from kubernetes.client import models as k8s
@@ -172,8 +176,14 @@ with DAG(
 
     @task(executor_config=executor_config)
     def empty_dir_example():
-        print_stuff()
-        time.sleep(60)
+    """
+    Tests whether the volume has been mounted.
+    """
+    with open('/cache/volume_mount_test.txt', 'w') as foo:
+        foo.write('Hello')
+
+    return_code = os.system("cat /cache/volume_mount_test.txt")
+    assert return_code == 0
 
     empty_dir_example()
 ```
