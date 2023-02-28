@@ -186,7 +186,7 @@ If you're interested in running a different version of Podman that's unsupported
 
 If you receive an error after running `podman ps`, there is likely a problem with your Podman connection. You might need to set the system-level `DOCKER_HOST` environment variable to be the location of your Podman service socket:
 
-1. In WSL 2, run the following command to identify the connection URI for `podman-machine-default`:
+1. In a WSL 2 terminal, run the following command to identify the connection URI for `podman-machine-default`:
 
     ```sh
     podman system connection ls
