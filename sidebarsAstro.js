@@ -39,6 +39,7 @@ module.exports = {
             "cloud-ide/run-sql",
             "cloud-ide/document-pipeline",
             "cloud-ide/run-cells",
+            "cloud-ide/configure-project-environment",
             "cloud-ide/deploy-project",
             "cloud-ide/security",
           ],
@@ -51,7 +52,7 @@ module.exports = {
     {
       type: "category",
       label: "Deploy",
-      items: ["deploy-code", "ci-cd"],
+      items: ["deploy-code", "set-up-ci-cd", "ci-cd"],
     },
     {
       type: "category",
@@ -94,6 +95,7 @@ module.exports = {
           items: ["install-aws", "install-azure", "install-gcp"],
         },
         "manage-workspaces",
+        "manage-organization",
         {
           type: "category",
           label: "User access",
@@ -103,7 +105,6 @@ module.exports = {
           type: "category",
           label: "Manage clusters",
           items: [
-            "view-clusters",
             "create-cluster",
             "modify-cluster",
             {
@@ -180,7 +181,6 @@ module.exports = {
         },
         'platform-variables',
         "feature-previews",
-        'data-lineage-support-and-compatibility',
         {
           type: "category",
           label: "Security",

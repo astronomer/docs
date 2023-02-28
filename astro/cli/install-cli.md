@@ -81,10 +81,8 @@ The winget command line tool is supported on Windows 10 1709 (build 16299) or la
 
 #### Prerequisites
 
-- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or later).
-- [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
-- Astro CLI version 1.6 or later.
+- [Docker Desktop](https://docs.docker.com/desktop/windows/install/).
+- Microsoft Hyper-V enabled. See [How to Enable Hyper-V On Windows](https://www.wintips.org/how-to-enable-hyper-v-on-windows-10-11-home/).
 - The latest version of the Windows [App Installer](https://apps.microsoft.com/store/detail/app-installer/9NBLGGH4NNS1?hl=en-ca&gl=ca).
 - Windows 10 1709 (build 16299) or later or Windows 11.
 
@@ -100,6 +98,10 @@ To install a specific version of the Astro CLI, specify the version you want to 
 
 <pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}`}</code></pre>
 
+#### Resolve installation issues
+
+If an error message appears indicating that the term winget is not recognized as an internal or external command when you attempt to run winget commands, see this [troubleshooting document](https://github.com/microsoft/winget-cli/tree/master/doc/troubleshooting#common-issues) provided by Microsoft. 
+
 </TabItem>
 
 <TabItem value="windows">
@@ -108,9 +110,8 @@ This is where you'll find information about installing the Astro CLI on a Window
 
 #### Prerequisites
 
-- [Docker Desktop](https://docs.docker.com/desktop/windows/install/) for Windows.
-- [Docker Engine](https://docs.docker.com/engine/install/) (v1.13.1 or later).
-- [WSL](https://docs.microsoft.com/en-us/windows/wsl/install) enabled on your local machine.
+- [Docker Desktop](https://docs.docker.com/desktop/windows/install/).
+- Microsoft Hyper-V enabled. See [How to Enable Hyper-V On Windows](https://www.wintips.org/how-to-enable-hyper-v-on-windows-10-11-home/).
 - Windows 10 or Windows 11.
 
 #### Installation

@@ -63,7 +63,7 @@ To run Airflow locally, you first need to create an Astro project.
     groupId= "code-variations"
     values={[
         {label: 'TaskFlow API', value: 'TaskFlowAPI'},
-        {label: 'Traditional operators', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="TaskFlowAPI">
@@ -157,7 +157,7 @@ You can add Markdown-based documentation to your DAGs that will render in the **
     groupId= "code-variations"
     values={[
         {label: 'TaskFlow API', value: 'TaskFlowAPI'},
-        {label: 'Traditional operators', value: 'traditional'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="TaskFlowAPI">
@@ -272,8 +272,8 @@ To add documentation to your task, follow these steps:
     defaultValue="TaskFlowAPI"
     groupId= "code-variations"
     values={[
-        {label: 'TaskFlowAPI', value: 'TaskFlowAPI'},
-        {label: 'Traditional operators', value: 'traditional'},
+        {label: 'TaskFlow API', value: 'TaskFlowAPI'},
+        {label: 'Traditional syntax', value: 'traditional'},
     ]}>
 
 <TabItem value="TaskFlowAPI">
@@ -324,6 +324,20 @@ tell_me_what_to_do = PythonOperator(
 6. See the docs under their respective attribute:
 
     ![All Task Docs](/img/guides/task_docs_all.png)
+
+## Step 5: Add notes to a task instance and DAG run
+
+Starting in Airflow 2.5, you can add notes to task instances and DAG runs from the **Grid** view in the Airflow UI. This feature is useful if you need to share contextual information about a DAG or task run with your team, such as why a specific run failed.
+
+1. Go to the **Grid View** of the `docs_example_dag` DAG you created in [Step 2](#step-2-create-a-new-dag).
+
+2. Select a task instance or DAG run.
+
+3. Click **Details** > **Task Instance Notes** or **DAG Run notes** > **Add Note**.
+
+4. Write a note and click **Save Note**.
+
+ ![Add task note](/img/guides/2_5_task_notes.png)
 
 ## Conclusion
 

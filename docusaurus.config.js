@@ -7,8 +7,12 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
+  markdown: {
+    mermaid: true,
+  },
+  themes: ['@docusaurus/theme-mermaid'],
   favicon: 'img/favicon.svg',
   organizationName: 'astronomer', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
@@ -201,6 +205,7 @@ module.exports = {
           id: 'default',
           changefreq: 'daily',
           filename: 'sitemap.xml',
+          ignorePatterns: ['/astro/kubernetes-executor', '/astro/cli/sql-cli', '/astro/cross-account-role-setup']
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -247,6 +252,7 @@ module.exports = {
         id: 'learn',
         changefreq: 'daily',
         filename: 'sitemap.xml',
+        ignorePatterns: ['/astro/kubernetes-executor', '/astro/cli/sql-cli', '/astro/cross-account-role-setup']
       },
     ],
   ],

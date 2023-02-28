@@ -6,7 +6,6 @@ id: 'cross-account-role-setup'
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-
 :::caution
 
 This feature is in [Private Preview](feature-previews.md) and is an alternative to the standard AWS installation process. For the standard installation, see [Install Astro on AWS](install-aws.md)

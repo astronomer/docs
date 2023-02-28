@@ -9,6 +9,12 @@ id: what-is-a-hook
   <meta name="og:description" content="Learn about hooks and how they should be used in Apache Airflow. See an example of implementing two different hooks in a DAG." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import CodeBlock from '@theme/CodeBlock';
+import hook_tutorial_taskflow from '!!raw-loader!../code-samples/dags/what-is-a-hook/hook_tutorial_taskflow.py';
+import hook_tutorial_traditional from '!!raw-loader!../code-samples/dags/what-is-a-hook/hook_tutorial_traditional.py';
 
 A hook is an abstraction of a specific API that allows Airflow to interact with an external system. Hooks are built into many operators, but they can also be used directly in DAG code.
 
@@ -83,78 +89,27 @@ The following example DAG uses [Airflow Decorators](https://docs.astronomer.io/l
 
 The following example DAG completes the following steps:
 
-- A decorated Python operator with a manually implemented `S3Hook` reads three specific keys from Amazon S3 with the `read_key` method and then returns a dictionary with the file contents converted to integers.
-- A second decorated Python operator completes a simple sum check using the results from the first task. 
+- A Python task with a manually implemented `S3Hook` reads three specific keys from Amazon S3 with the `read_key` method and then returns a dictionary with the file contents converted to integers.
+- A second Python task completes a simple sum check using the results from the first task. 
 - The SlackHook `call` method posts the sum check results to a Slack channel and returns the response from the Slack API.
 
-```python
-# importing necessary packages
-import os
-from datetime import datetime
-from airflow import DAG
-from airflow.decorators import task
-from airflow.providers.slack.hooks.slack import SlackHook
-from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+<Tabs
+    defaultValue="taskflow"
+    groupId= "hook-example"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-# import environmental variables for privacy (set in Dockerfile)
-S3BUCKET_NAME = os.environ.get('S3BUCKET_NAME')
-S3_EXAMPLE_FILE_NAME_1 = os.environ.get('S3_EXAMPLE_FILE_NAME_1')
-S3_EXAMPLE_FILE_NAME_2 = os.environ.get('S3_EXAMPLE_FILE_NAME_2')
-S3_EXAMPLE_FILE_NAME_3 = os.environ.get('S3_EXAMPLE_FILE_NAME_3')
+<TabItem value="taskflow">
 
-# task to read 3 keys from your S3 bucket
-@task.python
-def read_keys_form_s3():
-    s3_hook = S3Hook(aws_conn_id='hook_tutorial_s3_conn')
-    response_file_1 = s3_hook.read_key(key=S3_EXAMPLE_FILE_NAME_1,
-            bucket_name=S3BUCKET_NAME)
-    response_file_2 = s3_hook.read_key(key=S3_EXAMPLE_FILE_NAME_2,
-            bucket_name=S3BUCKET_NAME)
-    response_file_3 = s3_hook.read_key(key=S3_EXAMPLE_FILE_NAME_3,
-            bucket_name=S3BUCKET_NAME)
+<CodeBlock language="python">{hook_tutorial_taskflow}</CodeBlock>
 
-    response = {'num1' : int(response_file_1),
-                'num2' : int(response_file_2),
-                'num3' : int(response_file_3)}
+</TabItem>
 
-    return response
+<TabItem value="traditional">
 
-# task running a check on the data retrieved from your S3 bucket
-@task.python
-def run_sum_check(response):
-    if response['num1'] + response['num2'] == response['num3']:
-        return (True, response['num3'])
-    return (False, response['num3'])
+<CodeBlock language="python">{hook_tutorial_traditional}</CodeBlock>
 
-# task posting to slack depending on the outcome of the above check
-# and returning the server response
-@task.python
-def post_to_slack(sum_check_result):
-    slack_hook = SlackHook(slack_conn_id='hook_tutorial_slack_conn')
-
-    if sum_check_result[0] == True:
-        server_response = slack_hook.call(api_method='chat.postMessage',
-                        json={"channel": "#test-airflow",
-                        "text": f"""All is well in your bucket!
-                        Correct sum: {sum_check_result[1]}!"""})
-    else:
-        server_response = slack_hook.call(api_method='chat.postMessage',
-                        json={"channel": "#test-airflow",
-                        "text": f"""A test on your bucket contents failed!
-                        Target sum not reached: {sum_check_result[1]}"""})
-
-    # return the response of the API call (for logging or use downstream)
-    return server_response
-
-# implementing the DAG
-with DAG(dag_id='hook_tutorial',
-        start_date=datetime(2022,5,20),
-        schedule='@daily',
-        catchup=False,
-        ) as dag:
-
-    # the dependencies are automatically set by XCom
-    response = read_keys_form_s3()
-    sum_check_result = run_sum_check(response)
-    post_to_slack(sum_check_result)
-```
+</TabItem>
+</Tabs>

@@ -25,6 +25,10 @@ A Python cell contains a Python function that you can run in isolation or as a d
 
 6. Add your Python code to the cell body.
 
+## Run a Python cell
+
+See [Run cells in the Astro Cloud IDE](run-cells.md).
+
 ## Create explicit dependencies for a Python cell
 
 In a Python cell, click **Dependencies** and select a cell to make it an explicit upstream dependency of your Python cell. When you run your entire pipeline, the Python cell cannot begin running until the selected upstream cell finishes running.
