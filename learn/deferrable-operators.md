@@ -120,7 +120,7 @@ When using the standard `DateTimeSensor` with default settings, one worker slot 
 
 The screenshot below shows 16 running DAG instances, each taking up one worker slot.
 
-![Classic Tree View](/img/guides/classic_sensor_slot_taking.png)
+![Standard sensor Grid View](/img/guides/classic_sensor_slot_taking.png)
 
 The DAG code uses a standard sensor and default configuration of concurrency:
 
@@ -132,7 +132,7 @@ The DAG code uses a standard sensor and default configuration of concurrency:
 
 The screenshot below shows 16 DAG instances running, each with one task in a deferred state (violet square) which does not take up a worker slot. Tasks in other DAGs can use the available worker slots making the version using a deferrable operator more cost and time-efficient.
 
-![Deferrable Tree View](/img/guides/deferrable_grid_view.png)
+![Deferrable sensor Grid View](/img/guides/deferrable_grid_view.png)
 
 The only difference in the DAG code is using the deferrable operator `DateTimeSensorAsync` over `DateTimeSensor`:
 
