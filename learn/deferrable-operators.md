@@ -104,15 +104,15 @@ For a full list of deferrable operators and sensors available in the `astronomer
 
 ## Example workflow
 
-The example DAG below is scheduled to run once for every minute within a defined time-frame (between its `start_date` and its `end_date`). Every DAG run contains one task using sensor that will potentially take up to 20 minutes to complete.
+The example DAG below is scheduled to run once for every minute within a defined time-frame (between its `start_date` and its `end_date`). Every DAG run contains one sensor task that will potentially take up to 20 minutes to complete.
 
-When using the **Classical sensor** `DateTimeSensor` with default settings one worker slot is taken up by every sensor that runs. By leveraging a **Deferrable operator** for this sensor, the `DateTimeSensorAsync` you can achieve full concurrency while allowing your workers to complete additional work across your Airflow environment. 
+When using the standard `DateTimeSensor` with default settings, one worker slot is taken up by every sensor that runs. By leveraging a deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while allowing your workers to complete additional work across your Airflow environment. 
 
 <Tabs
-    defaultValue="classical"
+    defaultValue="standard"
     groupId= "datetime-async"
     values={[
-        {label: 'Classical sensor', value: 'classical'},
+        {label: 'Standard sensor', value: 'standard'},
         {label: 'Deferrable operator', value: 'deferrable'},
     ]}>
 
@@ -122,7 +122,7 @@ The screenshot below shows 16 running DAG instances, each taking up one worker s
 
 ![Classic Tree View](/img/guides/classic_sensor_slot_taking.png)
 
-The DAG code uses a classic sensor and default configuration of concurrency:
+The DAG code uses a standard sensor and default configuration of concurrency:
 
 <CodeBlock language="python">{sync_dag}</CodeBlock>
 
