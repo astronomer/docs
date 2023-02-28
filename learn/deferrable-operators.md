@@ -120,7 +120,7 @@ When using the standard `DateTimeSensor` with default settings, one worker slot 
 
 The screenshot below shows 16 running DAG instances, each taking up one worker slot.
 
-![Standard sensor Grid View](/img/guides/classic_sensor_slot_taking.png)
+![Standard sensor Grid View](/img/guides/standard_sensor_slot_taking.png)
 
 The DAG code uses a standard sensor and default configuration of concurrency:
 
