@@ -104,27 +104,27 @@ For a full list of deferrable operators and sensors available in the `astronomer
 
 ## Example workflow
 
-The example DAG below is scheduled to run every minute between its `start_date` and its `end_date`. Every DAG run contains one sensor task that will potentially take up to 20 minutes to complete.
-
-Using `DateTimeSensor`, one worker slot is taken up by every sensor that runs. By using the deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while freeing up your workers to complete additional tasks across your Airflow environment. 
-
-The screenshot below shows 16 running DAG instances, each containing one active `DateTimeSensor` taking up one worker slot.
-
-![Standard sensor Grid View](/img/guides/standard_sensor_slot_taking.png)
-
-The DAG code using the `DateTimeSensor`:
+The following example DAG is scheduled to run every minute between its `start_date` and its `end_date`. Every DAG run contains one sensor task that will potentially take up to 20 minutes to complete.
 
 <CodeBlock language="python">{sync_dag}</CodeBlock>
 
-Switching out the `DateTimeSensor` for `DateTimeSensorAsync` will create 16 running DAG instances, each with one task in a deferred state (violet square) which does not take up a worker slot. Tasks in other DAGs can use the available worker slots making the version using a deferrable operator more cost and time-efficient.
+Using `DateTimeSensor`, one worker slot is taken up by every sensor that runs. By using the deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while freeing up your workers to complete additional tasks across your Airflow environment. 
 
-![Deferrable sensor Grid View](/img/guides/deferrable_grid_view.png)
+In the following screenshot, running the DAG produces 16 running task instances, each containing one active `DateTimeSensor` taking up one worker slot.
 
-The only difference in the DAG code is using the deferrable operator `DateTimeSensorAsync` over `DateTimeSensor`:
+![Standard sensor Grid View](/img/guides/standard_sensor_slot_taking.png)
+
+Because Airflow imposes default limits on the number of active runs of the same DAG or number of active tasks in a DAG across all runs, you'll have to scale up Airflow to concurrently run any other DAGs and tasks as described in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
+
+
+Switching out the `DateTimeSensor` for `DateTimeSensorAsync` will create 16 running DAG instances, but the tasks for these DAGs are in a deferred state which does not take up a worker slot. The only difference in the DAG code is using the deferrable operator `DateTimeSensorAsync` over `DateTimeSensor`:
 
 <CodeBlock language="python">{async_dag}</CodeBlock>
 
-Because Airflow imposes default limits on the number of active runs of the same DAG or number of active tasks in a DAG across all runs, you might have to scale up Airflow to run your desired amount of DAGs and tasks, as described in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
+In the following screenshot, all tasks are shown in a deferred (violet) state. Tasks in other DAGs can use the available worker slots, making the deferrable operator more cost and time-efficient.
+
+![Deferrable sensor Grid View](/img/guides/deferrable_grid_view.png)
+
 
 ## Run deferrable tasks
 
