@@ -262,7 +262,6 @@ If you receive an error after running `podman ps`, you might need to set the sys
     ```sh
     astro config set -g duplicate_volumes false
     ```
-    
 
 </TabItem>
 
