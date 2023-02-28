@@ -27,6 +27,17 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Bug fixes
 
+- To protect Astro's monitoring functionality, you can no longer override the values of the following environment variables:
+  
+    - `AIRFLOW__METRICS__STATSD_ON` 
+    - `AIRFLOW__METRICS__STATSD_HOST`
+    - `AIRFLOW__METRICS__STATSD_PORT`
+    - `AIRFLOW__METRICS__STATSD_ALLOW_LIST` 
+    - `AIRFLOW__METRICS__STATSD_STATSD_CUSTOM_CLIENT_PATH`
+    - `AIRFLOW__METRICS__STATSD_PREFIX`
+
+    See [Platform variables](platform-variables.md).
+  
 - Fixed an issue where a user could be provisioned multiple accounts if they logged in using differently cased characters in their login email address.
 
 ## February 21, 2023
