@@ -110,7 +110,7 @@ When using the standard `DateTimeSensor` with default settings, one worker slot 
 
 <Tabs
     defaultValue="standard"
-    groupId= "datetime-async"
+    groupId="example-workflow"
     values={[
         {label: 'Standard sensor', value: 'standard'},
         {label: 'Deferrable operator', value: 'deferrable'},

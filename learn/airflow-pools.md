@@ -44,7 +44,7 @@ By default, all tasks in Airflow get assigned to the `default_pool` which has 12
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "assign-to-pool"
+    groupId="assign-tasks-to-a-pool"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -80,7 +80,7 @@ For example, in the DAG snippet below `task_a` and `task_b` are both assigned to
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "priority-weights"
+    groupId="assign-tasks-to-a-pool"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -167,7 +167,7 @@ In the `pool_priority_dag` below, all three of the tasks hit the API endpoint an
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "pools-example-1"
+    groupId="example-limit-tasks-hitting-an-api-endpoint"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -193,7 +193,7 @@ To prioritize `task_x` over `task_y` while keeping both at a lower priority than
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "pools-example-2"
+    groupId="example-limit-tasks-hitting-an-api-endpoint"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},

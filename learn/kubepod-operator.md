@@ -334,7 +334,7 @@ The full DAG code is provided in the following example. To avoid task failure, t
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "name-of-my-section"
+    groupId="example-use-the-kubernetespodoperator-with-xcoms"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},

@@ -91,7 +91,7 @@ The following is an example of the data engineering team's DAG:
 
 <Tabs
     defaultValue="taskflow"
-    groupId="ml-datasets-example-publish"
+    groupId="example-implementation"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},

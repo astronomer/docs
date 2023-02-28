@@ -107,7 +107,7 @@ The following example DAG shows how to instantiate an object using the existing 
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "add-custom-logs"
+    groupId="add-custom-task-logs-from-a-dag"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
