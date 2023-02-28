@@ -182,7 +182,7 @@ with DAG(
         with open('/cache/volume_mount_test.txt', 'w') as foo:
             foo.write('Hello')
 
-        return_code = os.system("cat /foo/volume_mount_test.txt")
+        return_code = os.system("cat /cache/volume_mount_test.txt")
         if return_code != 0:
             raise ValueError(f"Error when checking volume mount. Return code {return_code}")
 
