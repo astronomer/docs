@@ -108,31 +108,15 @@ The example DAG below is scheduled to run every minute between its `start_date` 
 
 Using `DateTimeSensor`, one worker slot is taken up by every sensor that runs. By using the deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while freeing up your workers to complete additional tasks across your Airflow environment. 
 
-Switch between the following tabs to see the difference in implementations and performance between the standard sensor and the deferrable operator.
-
-<Tabs
-    defaultValue="standard"
-    groupId="example-workflow"
-    values={[
-        {label: 'Standard sensor', value: 'standard'},
-        {label: 'Deferrable operator', value: 'deferrable'},
-    ]}>
-
-<TabItem value="standard">
-
-The screenshot below shows 16 running DAG instances, each taking up one worker slot.
+The screenshot below shows 16 running DAG instances, each containing one active `DateTimeSensor` taking up one worker slot.
 
 ![Standard sensor Grid View](/img/guides/standard_sensor_slot_taking.png)
 
-The DAG code uses a standard sensor and default configuration of concurrency:
+The DAG code using the `DateTimeSensor`:
 
 <CodeBlock language="python">{sync_dag}</CodeBlock>
 
-</TabItem>
-
-<TabItem value="deferrable">
-
-The screenshot below shows 16 DAG instances running, each with one task in a deferred state (violet square) which does not take up a worker slot. Tasks in other DAGs can use the available worker slots making the version using a deferrable operator more cost and time-efficient.
+Switching out the `DateTimeSensor` for `DateTimeSensorAsync` will create 16 running DAG instances, each with one task in a deferred state (violet square) which does not take up a worker slot. Tasks in other DAGs can use the available worker slots making the version using a deferrable operator more cost and time-efficient.
 
 ![Deferrable sensor Grid View](/img/guides/deferrable_grid_view.png)
 
@@ -140,15 +124,7 @@ The only difference in the DAG code is using the deferrable operator `DateTimeSe
 
 <CodeBlock language="python">{async_dag}</CodeBlock>
 
-</TabItem>
-</Tabs>
-
-By default only 16 active DAG runs will be scheduled and only 16 tasks can be active (not in a deferred state) in a DAG. To increase concurrency, increase the value of the following DAG parameters:
-
-- `max_active_runs` to allow for more active DAG runs.
-- `max_active_task` to allow for more active tasks per DAG run.
-
-Learn more about concurrency and parallelism parameters in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
+Because Airflow imposes default limits on the number of active runs of the same DAG or number of active tasks in a DAG across all runs, you might have to scale up Airflow to run your desired amount of DAGs and tasks, as described in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
 
 ## Run deferrable tasks
 
