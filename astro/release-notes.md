@@ -36,7 +36,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
     - `AIRFLOW__METRICS__STATSD_STATSD_CUSTOM_CLIENT_PATH`
     - `AIRFLOW__METRICS__STATSD_PREFIX`
 
-    See [Platform variables](platform-variables.md).
+    You can still set new values for these variables, but those values are automatically overwritten in the Astro data plane. See [Platform variables](platform-variables.md).
   
 - Fixed an issue where a user could be provisioned multiple accounts if they logged in using differently cased characters in their login email address.
 
