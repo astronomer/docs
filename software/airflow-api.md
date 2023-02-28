@@ -26,18 +26,21 @@ If you just need to call the Airflow REST API once, you can create a temporary A
 
 ### Create a service account using the Software UI
 
-To create a service account using the Software UI:
-
 1. Log in to the Software UI.
-2. Go to **Deployment** > **Service Accounts**.
-   ![New Service Account](/img/software/ci-cd-new-service-account.png)
-3. Give your service account a **Name**, **User Role**, and **Category** (_Optional_).
-   > **Note:** In order for a service account to have permission to push code to your Airflow Deployment, it must have either the Editor or Admin role. For more information on Workspace roles, refer to [Roles and Permissions](workspace-permissions.md).
 
-   ![Name Service Account](/img/software/ci-cd-name-service-account.png)
-4. Save the API key that was generated. Depending on your use case, you may want to store this key in an Environment Variable or secret management tool of choice.
+2. Select a Deployment and then click the **Service Accounts** tab.
 
-   ![Service Account](/img/software/ci-cd-api-key.png)
+3. Click **New Service Account** and then complete the following fields:
+
+   - **Name**: Enter a meaningful name for the service account.
+   - **Category**: Optional. Enter an optional category name or description for the service account. Categories can help you locate and sort service accounts.
+   - **Permissions**: Select the permissions for the service account. To push code to your Airflow Deployment, the service account must have Deployment Editor or Deployment Admin permissions. For more information about user permissions, see [Manage user permissions on Astronomer Software](workspace-permissions.md).
+
+4. Click **Create Service Account**.
+
+5. Copy and save the API key in the **API Key** field. You can store this key in an environment variable or in a secrets management tool.
+
+6. Click **Service Accounts** to return to the Service Accounts page.
 
 ### Create a service account with the Astro CLI
 
@@ -65,7 +68,7 @@ To use the Astro CLI to create a Deployment-level Service Account:
 
 ## Step 2: Make an Airflow REST API request
 
-With the information from Step 1, you can now execute requests against any supported endpoints in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) via the following base URL:
+With the information from Step 1, you can now execute requests against any supported endpoints in the [Airflow Rest API Reference](https://airflow.apache.org/docs/apache-airflow/stable/stable-rest-api-ref.html) at the following base URL:
 
 ```
 https://deployments.<BASE-DOMAIN>/<DEPLOYMENT-NAME>/airflow/api/v1
@@ -81,7 +84,7 @@ In the following examples, replace the following values with your own:
 - `<DAG-ID>`: Name of your DAG (_case-sensitive_).
 
 
-The example requests listed below are made via cURL and Python, but you can make requests via any standard method. In all cases, your request will have the same permissions as the role of the service account you created on Astronomer.
+The example requests listed below are made with cURL and Python, but you can make requests with any standard method. In all cases, your request will have the same permissions as the role of the service account you created on Astronomer.
 
 ### Trigger DAG
 
