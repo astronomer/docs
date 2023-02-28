@@ -156,7 +156,7 @@ from airflow.example_dags.libs.helper import print_stuff
 
 volumes = [k8s.V1Volume(name="cache-volume", empty_dir=k8s.V1EmptyDirVolumeSource())]
 
-volume_mounts = [k8s.V1VolumeMount(mount_path="/cache", name="cache-volume")]
+volume_mounts = [k8s.V1VolumeMount(mount_path="/cache/", name="cache-volume")]
 
 executor_config = {
     "pod_override": k8s.V1Pod(
@@ -182,8 +182,9 @@ with DAG(
         with open('/cache/volume_mount_test.txt', 'w') as foo:
             foo.write('Hello')
 
-        return_code = os.system("cat /cache/volume_mount_test.txt")
-        assert return_code == 0
+        return_code = os.system("cat /foo/volume_mount_test.txt")
+        if return_code != 0:
+            raise ValueError(f"Error when checking volume mount. Return code {return_code}")
 
     empty_dir_example()
 ```
