@@ -27,7 +27,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Bug fixes
 
-- To protect Astro's monitoring functionality, you can no longer override the values of the following environment variables:
+- To ensure the reliability of Astro monitoring, you can no longer override the values of the following environment variables:
   
     - `AIRFLOW__METRICS__STATSD_ON` 
     - `AIRFLOW__METRICS__STATSD_HOST`
