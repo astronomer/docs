@@ -176,14 +176,14 @@ with DAG(
 
     @task(executor_config=executor_config)
     def empty_dir_example():
-    """
-    Tests whether the volume has been mounted.
-    """
-    with open('/cache/volume_mount_test.txt', 'w') as foo:
-        foo.write('Hello')
+        """
+        Tests whether the volume has been mounted.
+        """
+        with open('/cache/volume_mount_test.txt', 'w') as foo:
+            foo.write('Hello')
 
-    return_code = os.system("cat /cache/volume_mount_test.txt")
-    assert return_code == 0
+        return_code = os.system("cat /cache/volume_mount_test.txt")
+        assert return_code == 0
 
     empty_dir_example()
 ```
