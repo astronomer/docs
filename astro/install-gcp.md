@@ -64,7 +64,7 @@ If any of your GCP resources are on a private network, you can access them using
 - [Private Services Connect](https://cloud.google.com/vpc/docs/private-service-connect)
 - A [VPC Peering connection](https://cloud.google.com/vpc/docs/vpc-peering) between Astronomer's VPC and the VPCs for your broader network
 
-Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) of `/19` or better for the following services:
+Astro uses 4 different CIDR blocks for creating the infrastructure for your Astronomer cluster.  If you plan on peering with an existing VPC and want to use custom values for your CIDRs, then you must additionally provide your own CIDR ranges (RFC 1918 IP Space) for the following services. The size of each range must match or better the default sizes for each service below:
 
 - **Subnet CIDR**: Used by nodes in your GKE cluster (Default: `172.20.0.0/22`)
 - **Pod CIDR**: Used by GKE pods (Default: `172.21.0.0/19`)
