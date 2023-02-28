@@ -98,7 +98,7 @@ The Astronomer product you're using determines the format and behavior of the co
 
 ## Run the Astro CLI using Podman
 
-If your Organization is already using [Podman](https://podman.io/) to run and manage containers, you can use it to run Airflow locally and deploy to Astronomer using the Astro CLI.
+If your organization is interested in or is already using [Podman](https://podman.io/) to run and manage containers or, you can use it to run Airflow locally and deploy to Astronomer using the Astro CLI. Podman is a secure, free, and open source alternative to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
 <Tabs
     defaultValue="mac"
