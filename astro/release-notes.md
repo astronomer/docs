@@ -38,7 +38,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
     You can still set new values for these variables, but those values are automatically overwritten in the Astro data plane. See [Platform variables](platform-variables.md).
   
-- Fixed an issue where a user could be provisioned multiple accounts if they logged in using differently cased characters in their login email address.
+- Fixed an issue where a user could provision multiple accounts when their login email address included differently cased characters.
 
 ## February 21, 2023
 
