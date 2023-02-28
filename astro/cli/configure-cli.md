@@ -98,7 +98,9 @@ The Astronomer product you're using determines the format and behavior of the co
 
 ## Run the Astro CLI using Podman
 
-If your organization is interested in or is already using [Podman](https://podman.io/) to run and manage containers, you can use it to run Airflow locally and deploy to Astronomer using the Astro CLI. Podman is a secure, free, and open source alternative to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
+The Astro CLI requires a container management engine to run Apache Airflow components on your local machine and deploy to Astro. For example, the `astro dev start` and `astro deploy` commands both require containers.
+
+By default, the Astro CLI uses [Docker](https://www.docker.com/) as its container management engine. However, if your organization uses [Podman](https://podman.io/) to run and manage containers, you can configure the Astro CLI to use it instead. Podman is a secure, free, and open source alternative to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
 <Tabs
     defaultValue="mac"
@@ -135,22 +137,7 @@ If you receive an error after running `podman ps`, you might need to set the sys
 
     If this command fails, use [Podman Desktop](https://podman-desktop.io/) to change Podman's default image registry location to `docker.io`. See [Provide pre-defined registries](https://podman-desktop.io/blog/podman-desktop-release-0.11#provide-pre-defined-registries-1201).
 
-2. Run the following command to pick up the identity and connection URI for your `podman-machine-default`:
-
-    ```sh
-    podman system connection ls
-    ```
-
-    The output should look like the following:
-
-    ```text
-    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
-    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
-    ```
-
-    Copy the `Identity` and `URI` from `podman-machine-default*` for the next two steps.
-
-3. Run the following command to set the connection URI from the Astro CLI:
+2. Run the following command to set the connection URI from the Astro CLI:
 
     ```sh
     astro config set -g container.binary podman
