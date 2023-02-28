@@ -12,7 +12,7 @@ After you set up a transport layer security (TLS) certificate for Astronomer, yo
 
 :::caution
 
-When renewing a TLS certificate with Let's Encrypt or Certbot, you must specify the RSA key type and include `-key-type rsa --rsa-key-size 2048` when using the `docker run` command. If you don't specify the RSA key type, deploys fail and error messages appear in the registry and Houston logs. To specify the RSA key type, run the following command:
+By default, [Certbot](https://certbot.eff.org/) uses Elliptic Curve Digital Signature Algorithm (ECDSA) keys to sign certificates. If you're using Certbot to renew your TLS certificate, you must include `-key-type rsa --rsa-key-size 2048` in your command to sign your certificate with an RSA key. If you don't use RSA keys, deploys fail and error messages appear in the registry and Houston logs. For example, you can run the following command to sign your certificate with an RSA key:
 
 ```sh
 sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rsa
