@@ -10,7 +10,7 @@ After you set up a transport layer security (TLS) certificate for Astronomer, yo
 * **Automatic renewal**: Let's Encrypt provides a service that automatically renews your TLS certificate every 90 days. Astronomer recommends this option for smaller organizations where the DNS administrator and cluster administrator are either the same person or on the same team.
 * **Manual renewal**: Manual renewal works similarly to the initial certificate creation process, except that you replace your existing certificate by creating a new certificate. Astronomer recommends this method for large organizations that have their own processes for issuing certificates.
 
-:::warning
+:::caution
 
 When renewing a TLS certificate with Let's Encrypt or Certbot, you must specify the RSA key type and include `-key-type rsa --rsa-key-size 2048` when using the `docker run` command. If you don't specify the RSA key type, deploys fail and error messages appear in the registry and Houston logs. To specify the RSA key type, run the following command:
 
