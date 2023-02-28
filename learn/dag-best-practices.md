@@ -129,7 +129,7 @@ The version shown under the **Good practice** DAG wraps the connection to the da
 
 Including code that isn't part of your DAG or operator instantiations in your DAG file makes the DAG harder to read, maintain, and update. When possible, leave all of the heavy lifting to the hooks and operators that you instantiate within the file. If your DAGs need to access additional code such as a SQL script or a Python function, consider keeping that code in a separate file that can be read into a DAG run.
 
-The following example DAGs demonstrate the difference between the bad and good practices of including code in your DAGs. In the **Bad practice** DAG, a SQL query is provided directly to the PostgresOpertator, which unnecessarily exposes code in your DAG. In the **Good practice** DAG, the DAG-level configuration includes `template_searchpath` and the PostgresOperator specifies a `covid_state_query.sql` file that contains the query to execute. 
+The following example DAGs demonstrate the difference between the bad and good practices of including code in your DAGs. In the **Bad practice** DAG, a SQL query is provided directly to the PostgresOperator, which unnecessarily exposes code in your DAG. In the **Good practice** DAG, the DAG-level configuration includes `template_searchpath` and the PostgresOperator specifies a `covid_state_query.sql` file that contains the query to execute.
 
 <Tabs
     defaultValue="bad-practice"

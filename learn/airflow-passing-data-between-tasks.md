@@ -95,21 +95,21 @@ In this section, you'll review a DAG that uses XCom to pass data between tasks. 
 
 <TabItem value="taskflow">
 
-<CodeBlock language="python">{airflow_passing_data_between_tasks_taskflow}</CodeBlock>
-
 You can use the [TaskFlow API](https://airflow.apache.org/docs/apache-airflow/stable/tutorial_taskflow_api.html) to push and pull values to and from XCom. To push a value to XCom return it at the end of your task as with traditional operators. To retrieve a value from XCom provide the object created by the upstream task as an input to your downstream task.
 
 Using the TaskFlow API usually requires less code to pass data between tasks than working with the traditional syntax.
+
+<CodeBlock language="python">{airflow_passing_data_between_tasks_taskflow}</CodeBlock>
 
 </TabItem>
 
 <TabItem value="traditional">
 
-<CodeBlock language="python">{airflow_passing_data_between_tasks_xcom}</CodeBlock>
-
 In this DAG using traditional syntax, there are two `PythonOperator` tasks which share data using the `xcom_push` and `xcom_pull` functions. In the `get_a_cat_fact` function, the `xcom_push` method was used to allow the `key` name to be specified. Alternatively, the function could be configured to return the `cat_fact` value, because any value returned by an operator in Airflow is automatically pushed to XCom.
 
 For the `xcom_pull` call in the `analyze_cat_facts` function, you specify the `key` and `task_ids` associated with the XCom you want to retrieve. This allows you to pull any XCom value (or multiple values) at any time into a task. It does not need to be from the task immediately prior as shown in this example.
+
+<CodeBlock language="python">{airflow_passing_data_between_tasks_xcom}</CodeBlock>
 
 </TabItem>
 </Tabs>
