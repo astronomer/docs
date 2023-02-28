@@ -7,9 +7,13 @@ description: Run an upgrade progress to migrate your Software Deployment from As
 
 import {siteVariables} from '@site/src/versions';
 
-Astro Runtime builds on the reliability of Astronomer Certified (AC) with new features that center on usability and performance. Astro Runtime is available with Astronomer Software 0.29 and later.
+Astro Runtime builds on the reliability of Astronomer Certified (AC) with new features that center on usability and performance.
 
 Migrating a Deployment to Astro Runtime is similar to the standard upgrade process. There are no known disruptions when migrating a Deployment from AC to the equivalent version of Astro Runtime.
+
+## Prerequisites
+
+To migrate to Astro Runtime, you must have Astronomer Software 0.29 or later. See [Upgrade Astronomer](upgrade-astronomer.md).
 
 ## Differences between Astro Runtime and Astronomer Certified
 
