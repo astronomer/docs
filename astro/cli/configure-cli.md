@@ -263,22 +263,6 @@ If you receive an error after running `podman ps`, you might need to set the sys
     astro config set -g duplicate_volumes false
     ```
     
-:::tip
-    
-    Run the following command to pick up the Identity and connection URI for your `podman-machine-default`:
-
-    ```sh
-    podman system connection ls
-    ```
-
-    The output should look like the following:
-
-    ```text
-    podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
-    podman-machine-default-root  /Users/user/.ssh/podman-machine-default  ssh://root@localhost:54523/run/podman/podman.sock
-    ```
-
-:::
 
 </TabItem>
 
