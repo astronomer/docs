@@ -131,7 +131,7 @@ If you receive an error after running `podman ps`, there is likely a problem wit
     podman system connection ls
     ```
     
-The output should look like the following:
+    The output should look like the following:
     
     ```text
     podman-machine-default*      /Users/user/.ssh/podman-machine-default  ssh://core@localhost:54523/run/user/1000/podman/podman.sock
