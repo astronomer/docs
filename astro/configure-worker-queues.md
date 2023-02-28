@@ -54,6 +54,13 @@ If you don’t change any settings in the default worker queue:
 
 You can change all settings of the default worker queue except for its name.
 
+#### Scaling default worker queue to zero
+If you configure your default worker queue to have a minimum workers of zero there is a subtle additional side effect:
+the Astronomer monitoring DAG will be configured to run on separate queue that is listened to only by a tiny worker sidecar
+in the scheduler pod. The monitoring DAG will still serve it's purpose of making sure tasks are able to run on your deployment.
+The reason for this subtle difference, is that the default worker queue cannot effectively scale to zero if the monitoring DAG
+is creating tasks every 5 mins.
+
 ## Worker autoscaling logic
 
 The number of workers running per worker queue on your Deployment at a given time is based on two values:
