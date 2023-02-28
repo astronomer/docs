@@ -98,7 +98,7 @@ The Astronomer product you're using determines the format and behavior of the co
 
 ## Run the Astro CLI using Podman
 
-If your organization is interested in or is already using [Podman](https://podman.io/) to run and manage containers or, you can use it to run Airflow locally and deploy to Astronomer using the Astro CLI. Podman is a secure, free, and open source alternative to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
+If your organization is interested in or is already using [Podman](https://podman.io/) to run and manage containers, you can use it to run Airflow locally and deploy to Astronomer using the Astro CLI. Podman is a secure, free, and open source alternative to Docker that doesn't require root access and orchestrates containers without using a centralized daemon.
 
 <Tabs
     defaultValue="mac"
@@ -110,20 +110,20 @@ If your organization is interested in or is already using [Podman](https://podma
     ]}>
 <TabItem value="mac">
 
-Set up Podman on a Mac operating system so you can run the Astro CLI in Podman containers.
+Set up Podman on a Mac operating system so you can run Apache Airflow locally and deploy to Astro with Podman containers.
 
 ### Prerequisites
 
 - Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
-- A running Podman machine with at least 4 GB of RAM. You can confirm that Podman is running using `podman ps`. 
+- A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`.
+
+If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 :::tip
 
 If you receive an error after running `podman ps`, you might need to set the system-level `DOCKER_HOST` environment variable to be the location of your Podman service socket. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
 
 :::
-
-If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ### Setup
 
@@ -135,7 +135,7 @@ If you're interested in running a different version of Podman that's unsupported
 
     If this command fails, use [Podman Desktop](https://podman-desktop.io/) to change Podman's default image registry location to `docker.io`. See [Provide pre-defined registries](https://podman-desktop.io/blog/podman-desktop-release-0.11#provide-pre-defined-registries-1201).
 
-2. Run the following command to pick up the Identity and connection URI for your `podman-machine-default`:
+2. Run the following command to pick up the identity and connection URI for your `podman-machine-default`:
 
     ```sh
     podman system connection ls
@@ -166,21 +166,21 @@ If you're interested in running a different version of Podman that's unsupported
 
 <TabItem value="windows">
 
-Set up Podman on Windows so you can run the Astro CLI in Podman containers.
+Set up Podman on Windows so you can run Apache Airflow locally and deploy to Astro with Podman containers.
 
 ### Prerequisites
 
 - Podman 3 or later installed on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. See [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Getting started with Podman](https://podman.io/getting-started/).
-- A running Podman machine with at least 4 GB of RAM. You can confirm that Podman is running by using `podman ps` in your Linux terminal. 
+- A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps` in your Linux terminal. 
 - The Astro CLI Linux distribution installed on WSL 2. See [Install the Astro CLI on Linux](https://docs.astronomer.io/astro/cli/install-cli?tab=linux#install-the-astro-cli).
+
+If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 :::tip
 
 If you receive an error after running `podman ps`, you might need to set the `DOCKER_HOST` environment variable in WSL 2 to be the location of your Podman service socket. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
 
 :::
-
-If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ### Setup
 
@@ -229,20 +229,20 @@ If you're interested in running a different version of Podman that's unsupported
 
 <TabItem value="linux">
 
-Set up Podman on Linux so you can run the Astro CLI in Podman containers.
+Set up Podman on Linux so you can run Apache Airflow locally and deploy to Astro with Podman containers.
 
 ### Prerequisites
 
 - Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
-- A running Podman machine with at least 4 GB of RAM. You can confirm that Podman is running using `podman ps`. 
+- A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`. 
+
+If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 :::tip
 
 If you receive an error after running `podman ps`, you might need to set the system-level `DOCKER_HOST` environment variable to be the location of your Podman service socket. This is typically `unix:///run/podman/podman.sock`, but it can vary based on your installation.
 
 :::
-
-If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ### Setup
 
