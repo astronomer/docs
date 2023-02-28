@@ -104,9 +104,11 @@ For a full list of deferrable operators and sensors available in the `astronomer
 
 ## Example workflow
 
-The example DAG below is scheduled to run once for every minute within a defined time-frame (between its `start_date` and its `end_date`). Every DAG run contains one sensor task that will potentially take up to 20 minutes to complete.
+The example DAG below is scheduled to run every minute between its `start_date` and its `end_date`. Every DAG run contains one sensor task that will potentially take up to 20 minutes to complete.
 
-When using the standard `DateTimeSensor` with default settings, one worker slot is taken up by every sensor that runs. By leveraging a deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while allowing your workers to complete additional work across your Airflow environment. 
+Using `DateTimeSensor`, one worker slot is taken up by every sensor that runs. By using the deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while freeing up your workers to complete additional tasks across your Airflow environment. 
+
+Switch between the following tabs to see the difference in implementations and performance between the standard sensor and the deferrable operator.
 
 <Tabs
     defaultValue="standard"
@@ -141,9 +143,9 @@ The only difference in the DAG code is using the deferrable operator `DateTimeSe
 </TabItem>
 </Tabs>
 
-By default only 16 active DAG runs will be scheduled and only 16 tasks can be active (not in a deferred state) in a DAG. To increase concurrency, increase the value of the DAG following parameters:
+By default only 16 active DAG runs will be scheduled and only 16 tasks can be active (not in a deferred state) in a DAG. To increase concurrency, increase the value of the following DAG parameters:
 
-- `max_active_runs` to allow for more active DAG runs 
+- `max_active_runs` to allow for more active DAG runs.
 - `max_active_task` to allow for more active tasks per DAG run.
 
 Learn more about concurrency and parallelism parameters in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
