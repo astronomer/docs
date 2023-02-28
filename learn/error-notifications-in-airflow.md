@@ -239,7 +239,7 @@ You can set an SLA for all tasks in your DAG by defining `'sla'` as a default ar
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "sla-dag-level-example"
+    groupId="airflow-service-level-agreements"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -266,7 +266,7 @@ SLAs have some unique behaviors that you should consider before you implement th
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "sla-task-level-example"
+    groupId="airflow-service-level-agreements"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},

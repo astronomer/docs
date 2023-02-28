@@ -117,7 +117,7 @@ In the following example, the third task group generated in the loop has a forei
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "order-task-groups"
+    groupId="order-task-groups"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -188,7 +188,7 @@ In the following code, your top-level task groups represent your new and updated
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "nest-task-groups"
+    groupId="nest-task-groups"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},

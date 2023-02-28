@@ -41,7 +41,7 @@ In the following example, the task uses both, `.partial()` and `.expand()`, to d
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "basic-dynamic-task-example"
+    groupId="dynamic-task-concepts"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -125,7 +125,7 @@ In this section you'll learn how to pass mapping information to a downstream tas
 
 <Tabs
     defaultValue="two-flow"
-    groupId= "mapping-over-results"
+    groupId="mapping-over-the-result-of-another-operator"
     values={[
         {label: 'TaskFlow over TraskFlow', value: 'two-flow'},
         {label: 'TaskFlow over Traditional operator', value: 'flow-traditional'},
@@ -295,7 +295,7 @@ The following code snippet shows how a list of zipped arguments can be provided 
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "zip-example"
+    groupId="provide-positional-arguments-with-the-built-in-python-zip"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -353,7 +353,7 @@ To mimic the behavior of the [`zip_longest()`](https://docs.python.org/3/library
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "zip-fillvalue-example"
+    groupId="provide-positional-arguments-with-xcomargzip"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -478,7 +478,7 @@ The code snippet below shows how to use `.map()` to skip specific mapped tasks b
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "map-example"
+    groupId="transform-outputs-with-map"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},
@@ -575,7 +575,7 @@ The example DAG completes the following steps:
 
 <Tabs
     defaultValue="taskflow"
-    groupId= "s3-to-snowflake-example"
+    groupId="example-implementation"
     values={[
         {label: 'TaskFlow API', value: 'taskflow'},
         {label: 'Traditional syntax', value: 'traditional'},

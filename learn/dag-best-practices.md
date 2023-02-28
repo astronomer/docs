@@ -106,7 +106,7 @@ The version shown under the **Good practice** DAG wraps the connection to the da
 
 <Tabs
     defaultValue="bad-practice"
-    groupId= "top-level-code-example"
+    groupId="avoid-top-level-code-in-your-dag-file"
     values={[
         {label: 'Bad practice', value: 'bad-practice'},
         {label: 'Good practice', value: 'good-practice'},
@@ -134,7 +134,7 @@ The following example DAGs demonstrate the difference between providing a SQL qu
 
 <Tabs
     defaultValue="bad-practice"
-    groupId= "dag-as-config-file-examples"
+    groupId="treat-your-dag-file-like-a-config-file"
     values={[
         {label: 'Bad practice', value: 'bad-practice'},
         {label: 'Good practice', value: 'good-practice'},
