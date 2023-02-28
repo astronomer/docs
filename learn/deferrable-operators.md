@@ -116,7 +116,7 @@ When using the standard `DateTimeSensor` with default settings, one worker slot 
         {label: 'Deferrable operator', value: 'deferrable'},
     ]}>
 
-<TabItem value="classical">
+<TabItem value="standard">
 
 The screenshot below shows 16 running DAG instances, each taking up one worker slot.
 
