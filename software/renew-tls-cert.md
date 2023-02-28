@@ -22,7 +22,7 @@ sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rs
 
 ## Automatically renew TLS certificates Using Let's Encrypt
 
-[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that provides free, 90-day certificates using the ACME protocol. You can use the Cert Manager project for Kubernetes to automatically renew certificates.
+[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that provides free, 90-day certificates using the ACME protocol. You can use the Cert Manager project for Kubernetes to automatically renew certificates. When you renew a TLS certificate with Let's Encrypt, you must specify the RSA key type to sign certificates or your deploys will fail and error messages will appear in the registry and Houston logs.
 
 1. Install the Kubernetes Cert Manager by following [the official installation guide](https://cert-manager.io/docs/installation/).
 
@@ -129,7 +129,7 @@ sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rs
 
 ## Manually renew TLS certificates
 
-Use a manual process to renew TLS certificates when your organization has its own process for requesting and renewing TLS certificates.
+Use a manual process to renew TLS certificates when your organization has its own process for requesting and renewing TLS certificates. When you renew a TLS certificate with Let's Encrypt, you must specify the RSA key type to sign certificates or your deploys will fail and error messages will appear in the registry and Houston logs.
 
 1. Delete your current TLS certificate by running the following command:
    ```sh
