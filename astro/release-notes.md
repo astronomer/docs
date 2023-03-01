@@ -27,7 +27,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Access Astronomer through the Okta dashboard
 
-If your Organization uses Okta as your Astro identity provider, you can now log in to Astro directly from your [Okta apps dashboard](https://help.okta.com/eu/en-us/Content/Topics/end-user/dashboard-overview.htm). If you're already authenticated through Okta, you no longer have to reauthenticate in Astro if you access it through your dashboard.
+If your Organization uses Okta as your Astro identity provider, you can now log in to Astro directly from your [Okta Apps dashboard](https://help.okta.com/eu/en-us/Content/Topics/end-user/dashboard-overview.htm). If you've been authenticated by Okta, you no longer need to be authenticated by Astro when you access it through your dashboard.
 
 If you want users to always authenticate through Astro, you can disable this feature. See [Restrict identity provider initiated logins](manage-organization.md#restrict-identity-provider-initiated-logins).
 
