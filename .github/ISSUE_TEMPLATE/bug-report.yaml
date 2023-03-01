@@ -17,6 +17,7 @@ body:
         - Inaccurate content
         - Misleading
         - Typo
+        - Bug / broken link
     validations:
       required: true
   - type: input
