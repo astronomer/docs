@@ -48,6 +48,8 @@ Switch between Workspaces.
 
 Invite an existing user to your current Astronomer Workspace.
 
+You can use this command to invite multiple users at once to a Workspace. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
+
 #### Options
 
 | `<email>` | The email for the user you want to invite or update. | Any valid email                                                                                                                             |

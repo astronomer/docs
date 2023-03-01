@@ -79,7 +79,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
    
 5. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
 
-## Add a group of users using the Astro CLI
+## Add a group of users to Astro using the Astro CLI
 
 You can use the Astro CLI and shell scripting to add multiple users at once to an Organization or Workspace. Because the shell script reads from a text file, you can automate this process by generating the text file and running the shell script for each new batch of users that need to be assigned to an Organization or Workspace.
 
@@ -110,7 +110,7 @@ You can use the Astro CLI and shell scripting to add multiple users at once to a
         email=$(echo "$line" | cut -d' ' -f1)
         role=$(echo "$line" | cut -d' ' -f2)
         echo "Inviting $email as $role..."
-        astro workspace user invite "$email" --role "$role"
+        astro workspace user add "$email" --role "$role"
     done < "$1"
     ```
 
