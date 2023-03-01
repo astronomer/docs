@@ -25,6 +25,10 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ## February 28, 2023
 
+### Additional improvements
+
+- Ingress to GCP and Azure clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
+
 ### Bug fixes
 
 - To protect the functionality of Astro monitoring services, you can no longer override the values of the following environment variables:
@@ -179,7 +183,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 
 ### Additional improvements
 
-- Data plane cluster access is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
+- Ingress to AWS clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
 - You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](modify-cluster.md#view-clusters).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
