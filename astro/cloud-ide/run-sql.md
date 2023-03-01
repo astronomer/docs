@@ -37,7 +37,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
   | I am going to use the output of the query only in my external database.                              |          | ✔️                  |
   | I am querying a large amount of data.                                                                |          | ✔️                  |
 
-  Regardless of which cell type you choose, you can use the results of your queries in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the results from XComs.
+  Regardless of which cell type you choose, you can use the results of your queries in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the output of a SQL cell from XComs.
 
   :::
 
