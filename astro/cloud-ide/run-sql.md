@@ -87,3 +87,7 @@ select * from {{my_table}} -- my_table is another SQL cell
 ## View complete code for SQL cells
 
 To view your SQL cell within the context of an Airflow DAG, click **Code**. The Airflow DAG includes your SQL query as well as all of the code required to run it on Airflow.
+
+## How SQL cells work
+
+SQL cells use the Astro SDK to execute your queries. A standard SQL cell executes your query using `aql.run_raw_sql` and stores the results in XComs. A Warehouse SQL cell runs your SQL query using `aql.transform` and loads the results in your data warehouse. See [Astro SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/raw_sql.html) for more information about these operators.
