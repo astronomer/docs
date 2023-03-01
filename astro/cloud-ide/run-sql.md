@@ -23,19 +23,32 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 4. Click **Add Cell** and select one of the following options:
 
-    - **SQL**: Runs a SQL query against a provided database connection and stores the results of the query in an XCom for use by other cells.
-
+    - **SQL**: Runs a SQL query against a provided database connection and stores the results of the query in an XCom for use in other cells.
     - **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
 
-    Regardless of which cell type you choose, you can use the results of your queries in downstream SQL and Python cells.
+  :::tip Choose between SQL and Warehouse SQL cells
 
-5. Click the cell name and enter a name for the cell.
+  SQL and Warehouse SQL cells both execute SQL queries, but there are some scenarios where you should use one type of cell over the other. The following table contains all scenarios where Astronomer recommends using a specific type of SQL cell.
 
-6. Add your SQL query to the cell body.
+  | Scenario                                                                                             | SQL cell | Warehouse SQL cell |
+  | ---------------------------------------------------------------------------------------------------- | -------- | ------------------ |
+  | I don't have write access to an external database.                                                   | ✔️        |                    |
+  | I am going to use the output of the query outside of my external database, such as in a Python cell. | ✔️        |                    |
+  | I am going to use the output of the query only in my external database.                              |          | ✔️                  |
+  | I am querying a large amount of data.                                                                |          | ✔️                  |
 
-7. In the **Select Connection** list, select the connection for the database you want to query against.
+  Regardless of which cell type you choose, you can use the results of your queries in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the results from XComs.
 
-8. If you're using Warehouse SQL cells, configure the **Output Table** for storing the results of your query. This table must be accessible from your configured connection.
+  :::
+
+1. Click the cell name and enter a name for the cell.
+
+2. Add your SQL query to the cell body.
+
+3. In the **Select Connection** list, select the connection for the database you want to query against.
+
+4. If you're using Warehouse SQL cells, configure the **Output Table** for storing the results of your query. This table must be accessible from your configured connection.
+
 
 ## Run a SQL cell
 
