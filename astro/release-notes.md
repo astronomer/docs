@@ -23,7 +23,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
 
-## February 28, 2023
+## March 1, 2023
 
 ### Access Astronomer through the Okta dashboard
 
