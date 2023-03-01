@@ -1,26 +1,43 @@
-from airflow.decorators import dag
-from pendulum import datetime, duration
-from operators.my_operator import MyOperator
-from sensors.my_sensor import MySensor
-
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "start_date": datetime(2023, 1, 1),
-    "email_on_failure": False,
-    "email_on_retry": False,
-    "retries": 1,
-    "retry_delay": duration(minutes=5),
-}
+from pendulum import datetime
+from airflow.decorators import dag, task
+from include.basic_math_operator import MyBasicMathOperator
+from include.cat_fact_hook import CatFactHook
 
 
-@dag(max_active_runs=3, schedule="@once", default_args=default_args)
-def example_dag():
-    sens = MySensor(task_id="taskA")
+@dag(
+    schedule_interval="@daily",
+    start_date=datetime(2021, 1, 1),
+    # render Jinja template as native Python object
+    render_template_as_native_obj=True,
+    catchup=False,
+)
+def my_math_cat_dag():
 
-    op = MyOperator(task_id="taskB", my_field="some text")
+    add = MyBasicMathOperator(
+        task_id="add",
+        first_number=23,
+        second_number=19,
+        operation="+",
+        # any BaseOperator arguments can be used with the custom operator too
+        doc_md="Addition Task.",
+    )
 
-    sens >> op
+    multiply = MyBasicMathOperator(
+        task_id="multiply",
+        # use the return value from the add task as the first_number, pulling from XCom
+        first_number="{{ ti.xcom_pull(task_ids='add', key='return_value') }}",
+        second_number=35,
+        operation="-",
+    )
+
+    @task
+    def use_cat_fact_hook(number):
+        num_catfacts_needed = round(number)
+        # instatiating a CatFactHook at runtime of this task
+        hook = CatFactHook("cat_fact_conn")
+        hook.log_cat_facts(num_catfacts_needed)
+
+    add >> multiply >> use_cat_fact_hook(multiply.output)
 
 
-example_dag()
+my_math_cat_dag()
