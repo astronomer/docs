@@ -15,16 +15,16 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 ## Choose a SQL cell type
 
-Both SQL and Warehouse SQL cells run SQL queries. A SQL cell runs a SQL query on a database connection and stores the results of the query in an XCom file for use in other cells. A Warehouse SQL cell runs a SQL query on an external database and stores the results in your data warehouse.
+A SQL cell runs a SQL query on a database connection and stores the results of the query in an XCom file for use in other cells. A Warehouse SQL cell runs a SQL query on an external database and stores the results in your data warehouse.
 
 Both cell types execute SQL queries, but there are some scenarios where the use of one cell type is preferable. The following table lists the scenarios where Astronomer recommends using a specific type of SQL cell.
   
-| Scenario                                                                                            | SQL cell | Warehouse SQL cell |
-| --------------------------------------------------------------------------------------------------- | -------- | ------------------ |
-| I don't have write access to an external database.                                                  | ✔️        |                    |
-| I'm going to use the output of the query outside of my external database, such as in a Python cell. | ✔️        |                    |
-| I'm going to use the output of the query only in my external database.                              |          | ✔️                  |
-| I'm querying a large amount of data.                                                                |          | ✔️                  |
+| Scenario                                                                                            |     Cell type      |
+| --------------------------------------------------------------------------------------------------- | :----------------: |
+| I don't have write access to an external database.                                                  |      SQL cell      |
+| I'm going to use the output of the query outside of my external database, such as in a Python cell. |      SQL cell      |
+| I'm going to use the output of the query only in my external database.                              | Warehouse SQL cell |
+| I'm querying a large amount of data.                                                                | Warehouse SQL cell |
   
 Regardless of the cell type you choose, you can use your query results in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the output of a SQL cell with XComs.
 
@@ -87,5 +87,3 @@ select * from {{my_table}} -- my_table is another SQL cell
 ## View complete code for SQL cells
 
 To view your SQL cell within the context of an Airflow DAG, click **Code**. The Airflow DAG includes your SQL query as well as all of the code required to run it on Airflow.
-
-SQL cells use the Astro SDK to execute your queries. A standard SQL cell executes your query using `aql.run_raw_sql` and stores the results in XComs. A Warehouse SQL cell runs your SQL query using `aql.transform` and loads the results in your data warehouse. See [Astro SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/raw_sql.html).
