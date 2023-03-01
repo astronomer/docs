@@ -46,7 +46,7 @@ If you want users to always authenticate through Astro, you can disable this fea
     - `AIRFLOW__METRICS__STATSD_STATSD_CUSTOM_CLIENT_PATH`
     - `AIRFLOW__METRICS__STATSD_PREFIX`
 
-    You can still set new values for these variables, but those values are automatically overwritten in the Astro data plane. See [Platform variables](platform-variables.md).
+    You can still set new values for these variables, but the values will be automatically overwritten in the Astro data plane. See [Platform variables](platform-variables.md).
   
 - Fixed an issue where a user could provision multiple accounts when their login email address included differently cased characters.
 
