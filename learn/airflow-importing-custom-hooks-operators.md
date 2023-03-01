@@ -174,7 +174,7 @@ class MyBasicMathOperator(BaseOperator):
             return res
 ```
 
-Additionally to a custom operator the example DAG will be using a custom hook to connect to the CatFactAPI. This hook abstracts retrieving the API URL from an [Airflow connection](connections.md) as well as making several calls to the API in a loop. 
+Additionally to a custom operator the example DAG will be using a custom hook to connect to the CatFactAPI. This hook abstracts retrieving the API URL from an [Airflow connection](connections.md) as well as making several calls to the API in a loop. Copy and paste the code below into a file called `cat_fact_hook.py` in the `include` directory.
 
 ```python
 """This module allows you to connect to the CatFactAPI."""

@@ -12,7 +12,6 @@ from include.cat_fact_hook import CatFactHook
     catchup=False,
 )
 def my_math_cat_dag():
-
     add = MyBasicMathOperator(
         task_id="add",
         first_number=23,
