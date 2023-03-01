@@ -83,8 +83,8 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 You can use the Astro CLI and a shell script to add multiple users to an Organization or Workspace. Because the shell script reads from a text file, you can automate user management by generating the text file and running the shell script for each new batch of users that need to be assigned to an Organization or Workspace.
 
-1. Create a file called `users.txt`.
-2. Add list of email addresses for users that you want to add to a given Organization or Workspace. Each email address should be followed by the desired role for the user. For example, the list to add users to a Workspace might look like the following:
+1. Create a text file named `users.txt`.
+2. Open the text file and add a list of user email addresses that you want to invite to an Organization or Workspace. Every email address should include the user's assigned role. The following is an example of how you can write a list for adding users to a Workspace:
 
     ```sh
     user1@astronomer.io WORKSPACE_VIEWER
@@ -93,7 +93,7 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
     user4@astronomer.io WORKSPACE_OWNER
     ```
 
-3. Create a file called `add-users.sh` and add the following script to it:
+3. Create a file named `add-users.sh` and then add the following script to it:
 
     ```sh
     #!/bin/bash
@@ -116,7 +116,7 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
 
     Replace the Astro CLI command with `astro organization user invite "$email" --role "$role"` if you're inviting a group of users to an Organization.
 
-4. Ensure that you're authenticated to the Astro CLI using `astro login`, then ensure that you are in the correct Workspace and Organization using `astro workspace list` and `astro organization list`.
+4. Log in to the Astro CLI using `astro login`, and then run `astro workspace list` or `astro organization list` to ensure that you're in the same Workspace or Organization where you want to add the users.
 5. Run the following command to execute the shell script:
 
     ```sh
