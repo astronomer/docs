@@ -5,7 +5,7 @@ id: run-sql
 description: Learn how to run SQL queries by creating and configuring SQL cells in the Astro Cloud IDE.
 ---
 
-A SQL cell contains a SQL query that you can run in isolation or as a dependency in your pipeline. Create SQL cells to execute SQL as part of your data pipeline. 
+A SQL cell contains a SQL query that you can run in isolation or as a dependency in your pipeline. Create SQL cells and Warehouse SQL cells to execute SQL as part of your data pipeline. 
 
 ## Prerequisites 
 
@@ -13,20 +13,22 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 - A database connection. See [Step 5: Create a database connection](/astro/cloud-ide/quickstart.md#step-5-create-a-database-connection).
 - For Warehouse SQL cells, you need write permissions to the data warehouse in your database connection. 
 
-## Create a SQL cell
+## Choose a SQL cell type
 
-You can use SQL and Warehouse SQL cells to query SQL. A SQL cell runs a SQL query on a database connection and stores the results of the query in an XCOM file for use in other cells. A Warehouse SQL cell runs a SQL query on an external database and stores the results in your data warehouse.
+Both SQL and Warehouse SQL cells run SQL queries. A SQL cell runs a SQL query on a database connection and stores the results of the query in an XCom file for use in other cells. A Warehouse SQL cell runs a SQL query on an external database and stores the results in your data warehouse.
 
-Both cell types execute SQL queries, but there are some scenarios where the use of one cell type is preferable. The following table lists the scenarios where the use of a specific type of SQL cell is recommended.
+Both cell types execute SQL queries, but there are some scenarios where the use of one cell type is preferable. The following table lists the scenarios where Astronomer recommends using a specific type of SQL cell.
   
-| Scenario                                                                                             | SQL cell | Warehouse SQL cell |
-| ---------------------------------------------------------------------------------------------------- | -------- | ------------------ |
-| I don't have write access to an external database.                                                   | ✔️        |                    |
+| Scenario                                                                                            | SQL cell | Warehouse SQL cell |
+| --------------------------------------------------------------------------------------------------- | -------- | ------------------ |
+| I don't have write access to an external database.                                                  | ✔️        |                    |
 | I'm going to use the output of the query outside of my external database, such as in a Python cell. | ✔️        |                    |
 | I'm going to use the output of the query only in my external database.                              |          | ✔️                  |
 | I'm querying a large amount of data.                                                                |          | ✔️                  |
   
-Regardless of the cell type you choose, you can use your query results in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the output of a SQL cell with XCOM.
+Regardless of the cell type you choose, you can use your query results in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the output of a SQL cell with XComs.
+
+## Create a SQL cell
 
 1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
 
