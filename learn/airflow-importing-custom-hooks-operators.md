@@ -5,8 +5,11 @@ description: "How to correctly import custom hooks and operators."
 id: airflow-importing-custom-hooks-operators
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
-import custom_operator_example from '!!raw-loader!../code-samples/dags/airflow-importing-custom-hooks-operators/custom_operator_example.py';
+import custom_operator_example_taskflow from '!!raw-loader!../code-samples/dags/airflow-importing-custom-hooks-operators/custom_operator_example_taskflow.py';
+import custom_operator_example_traditional from '!!raw-loader!../code-samples/dags/airflow-importing-custom-hooks-operators/custom_operator_example_traditional.py';
 
 One of the great benefits of Airflow is its vast network of provider packages that provide hooks, operators, and sensors for many common use cases. Another great benefit of Airflow is that it is highly customizable because everything is defined in Python code. If a hook, operator, or sensor you need doesn't exist in the open source, you can easily define your own. 
 
@@ -241,4 +244,25 @@ The CatFactHook needs a `cat_fact_conn` to be defined. Create an Airflow connect
 
 The DAG file located in the `dags` directory contains an import statement importing the custom operator the custom hook. Note how Jinja templating can be used with parameters that were listed in the custom operators `templated_fields` attribute.
 
-<CodeBlock language="python">{custom_operator_example}</CodeBlock>
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-implementation"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+<CodeBlock language="python">{custom_operator_example_taskflow}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{custom_operator_example_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
+
+
