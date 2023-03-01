@@ -41,14 +41,13 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
   :::
 
-1. Click the cell name and enter a name for the cell.
+5. Click the cell name and enter a name for the cell.
 
-2. Add your SQL query to the cell body.
+6. Add your SQL query to the cell body.
 
-3. In the **Select Connection** list, select the connection for the database you want to query against.
+7. In the **Select Connection** list, select the connection for the database you want to query against.
 
-4. If you're using Warehouse SQL cells, configure the **Output Table** for storing the results of your query. This table must be accessible from your configured connection.
-
+8. If you're using Warehouse SQL cells, configure the **Output Table** for storing the results of your query. This table must be accessible from your configured connection.
 
 ## Run a SQL cell
 
