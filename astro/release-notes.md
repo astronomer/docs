@@ -33,7 +33,7 @@ If you want users to always authenticate through Astro, you can disable this fea
 
 ### Additional improvements
 
-- Ingress to GCP and Azure clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
+- Access to Google Cloud Platform (GCP) and Azure clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
 
 ### Bug fixes
 
