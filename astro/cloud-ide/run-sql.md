@@ -15,6 +15,19 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 ## Create a SQL cell
 
+When you can use two different types of cells to query SQL: SQL and Warehouse SQL cells. A SQL cell runs a SQL query against a provided database connection and stores the results of the query in an XCom for use in other cells. A Warehouse SQL cell runs a SQL query against a provided external database and stores the results in your data warehouse.
+
+Both cell types execute SQL queries, but there are some scenarios where you should use one cell type over the other. The following table contains all scenarios where Astronomer recommends using a specific type of SQL cell.
+  
+| Scenario                                                                                             | SQL cell | Warehouse SQL cell |
+| ---------------------------------------------------------------------------------------------------- | -------- | ------------------ |
+| I don't have write access to an external database.                                                   | ✔️        |                    |
+| I am going to use the output of the query outside of my external database, such as in a Python cell. | ✔️        |                    |
+| I am going to use the output of the query only in my external database.                              |          | ✔️                  |
+| I am querying a large amount of data.                                                                |          | ✔️                  |
+  
+Regardless of which cell type you choose, you can use the results of your queries in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the output of a SQL cell from XComs.
+
 1. In the Cloud UI, select a Workspace and then select **Cloud IDE**.
 
 2. Select a project.
@@ -25,21 +38,6 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
     - **SQL**: Runs a SQL query against a provided database connection and stores the results of the query in an XCom for use in other cells.
     - **Warehouse SQL**: Runs a SQL query against a provided database connection and stores the results in your data warehouse.
-
-  :::tip Choose between SQL and Warehouse SQL cells
-
-  SQL and Warehouse SQL cells both execute SQL queries, but there are some scenarios where you should use one type of cell over the other. The following table contains all scenarios where Astronomer recommends using a specific type of SQL cell.
-
-  | Scenario                                                                                             | SQL cell | Warehouse SQL cell |
-  | ---------------------------------------------------------------------------------------------------- | -------- | ------------------ |
-  | I don't have write access to an external database.                                                   | ✔️        |                    |
-  | I am going to use the output of the query outside of my external database, such as in a Python cell. | ✔️        |                    |
-  | I am going to use the output of the query only in my external database.                              |          | ✔️                  |
-  | I am querying a large amount of data.                                                                |          | ✔️                  |
-
-  Regardless of which cell type you choose, you can use the results of your queries in downstream cells. However, using the output of a Warehouse cell in a downstream cell requires fetching the output from your external database, which can take longer than fetching the output of a SQL cell from XComs.
-
-  :::
 
 5. Click the cell name and enter a name for the cell.
 

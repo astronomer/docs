@@ -1,4 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Release Notes</title><link>https://docs.astronomer.io/astro/release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro.</description><language>en-US</language><item><title>February 14, 2023</title><link>https://docs.astronomer.io/astro/release-notes#february-14-2023</link><description><![CDATA[<h3>Authorize Workspaces to clusters</h3><p>:::info</p><p>This is a <a href="feature-previews.md">Public Preview</a> feature.</p><p>:::</p><p>&lt;PremiumBadge /&gt;</p><p>You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.</p><p>To authorize Workspaces to clusters, see <a href="modify-cluster.md#authorize-workspaces-to-a-cluster">Authorize Workspaces to a Cluster</a>.</p><h3>New Deployment health statuses and information in the Cloud UI</h3><p>The Cloud UI now includes three additional <a href="deployment-metrics.md#deployment-health">Deployment health statuses</a> that you might see when creating or pushing code to a Deployment.</p><ul>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Release Notes</title><link>https://docs.astronomer.io/astro/release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro.</description><language>en-US</language><item><title>February 21, 2023</title><link>https://docs.astronomer.io/astro/release-notes#february-21-2023</link><description><![CDATA[<h3>New identity-first authentication model</h3><p>Astro has migrated to an identity-first authentication model. Users now authenticate to the Astro platform instead of individual Organizations, and Organizations can set permissions for how users can modify and access resources. This model prioritizes identity verification and enforces authentication policies for user email domains.</p><p>For all users logging in to Astro, this migration has the following effects:</p><ul>
+<li>Instead of being redirected to separate login pages for each Organization, all Astro users log in through a universal login page.</li>
+<li>Users belonging to multiple Organizations no longer have to log in again when switching Organizations.</li>
+<li>Users no longer need to enter their email on a separate page before they log in to the Cloud UI.</li>
+<li>If your Organization enforces single sign-on (SSO), users can now authenticate to Astro with a username and password when your email domain doesn't enforce SSO.</li>
+</ul><p>For Organization Owners, this migration has the following additional effects:</p><ul>
+<li>You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.</li>
+<li>Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.</li>
+</ul><p>For more information about how these changes can affect the Astro log in experience, see the <a href="log-in-to-astro.md#frequently-asked-questions">Login FAQ</a>. To configure authentication behavior, see <a href="manage-organization.md">Manage an Organization on Astro</a>.</p><h3>New Hosted regions available</h3><p>You can now create clusters in the following regions on an Astro - Hosted installation.</p><ul>
+<li>
+<p>AWS</p>
+<ul>
+<li><code>ap-northeast-1</code></li>
+<li><code>ap-southeast-2</code></li>
+<li><code>eu-central-1</code></li>
+<li><code>eu-west-1</code></li>
+<li><code>us-east-1</code></li>
+<li><code>us-west-2</code></li>
+</ul>
+</li>
+<li>
+<p>Google Cloud</p>
+<ul>
+<li><code>asia-northeast1</code></li>
+<li><code>australia-southeast1</code></li>
+<li><code>europe-west1</code></li>
+<li><code>europe-west2</code></li>
+<li><code>us-central1</code></li>
+<li><code>us-east4</code></li>
+</ul>
+</li>
+<li>
+<p>Microsoft Azure</p>
+<ul>
+<li><code>australiaeast</code></li>
+<li><code>japaneast</code></li>
+<li><code>northeurope</code></li>
+<li><code>westeurope</code></li>
+<li><code>eastus2</code></li>
+<li><code>westus2</code></li>
+</ul>
+</li>
+</ul><h3>Additional improvements</h3><p>The default CIDR ranges for new GCP clusters have been reduced. The following are the new CIDR ranges:</p><ul>
+<li><strong>Subnet CIDR</strong>: <code>172.20.0.0/22</code></li>
+<li><strong>Pod CIDR</strong>: <code>172.21.0.0/19</code></li>
+<li><strong>Service Address CIDR</strong>: <code>172.22.0.0/22</code></li>
+<li><strong>Service VPC Peering</strong>: <code>172.23.0.0/20</code></li>
+</ul><h3>Bug fixes</h3><p>In the Cloud UI, when using <strong>Compare</strong> on the <strong>Lineage Graph</strong> page, you can now compare shorter run lengths.</p>]]></description></item><item><title>February 14, 2023</title><link>https://docs.astronomer.io/astro/release-notes#february-14-2023</link><description><![CDATA[<h3>Authorize Workspaces to clusters</h3><p>:::info</p><p>This is a <a href="feature-previews.md">Public Preview</a> feature.</p><p>:::</p><p>You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.</p><p>To authorize Workspaces to clusters, see <a href="modify-cluster.md#authorize-workspaces-to-a-cluster">Authorize Workspaces to a Cluster</a>.</p><h3>New Deployment health statuses and information in the Cloud UI</h3><p>The Cloud UI now includes three additional <a href="deployment-metrics.md#deployment-health">Deployment health statuses</a> that you might see when creating or pushing code to a Deployment.</p><ul>
 <li>The <strong>Creating</strong> status indicates that Astro is still provisioning the resources for the Deployment.</li>
 <li>The <strong>Deploying</strong> status indicates that a code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.</li>
 <li>The <strong>Unknown</strong> status indicates that Deployment status can't be determined.</li>
@@ -266,7 +313,7 @@
 <li><a href="https://docs.astronomer.io/learn/airflow-openlineage">Integrate Airflow and OpenLineage</a></li>
 <li><a href="set-up-data-lineage.md">Enable data lineage for External Services</a></li>
 <li><a href="data-lineage.md">Data lineage on Astro</a></li>
-<li><a href="data-lineage-support-and-compatibility.md">Data lineage Support and Compatibility</a></li>
+<li><a href="https://openlineage.io/docs/integrations/about#capability-matrix">OpenLineage Compatibility Matrix</a></li>
 </ul><p>:::info</p><p>This functionality is still early access and under active development. If you have any questions or feedback about this feature, reach out to <a href="https://cloud.astronomer.io/support">Astronomer support</a>.</p><p>:::</p><h3>Support for Astro on Google Cloud Platform (GCP)</h3><p>Astro now officially supports Astro clusters on Google Cloud Platform (GCP). This includes support for an initial set of GCP regions as well as <a href="https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers">Workload Identity</a> for secure connection to other GCP data services in your ecosystem.</p><p>For more information about the installation process and supported configurations, see <a href="install-gcp.md">Install Astro on GCP</a> and <a href="resource-reference-gcp.md">Resource Reference GCP</a>.</p><h3>Support for Organization-Level user invites</h3><p>You can now <a href="add-user.md#add-a-user-to-an-organization">invite users to an Astro Organization</a> without having to first invite them to a specific Workspace. Users invited to an Organization will receive an activation email which brings them directly to the Organization view of the Cloud UI.</p><h3>Additional improvements</h3><ul>
 <li>Improved the templated emails sent out for user invites with clear instructions for how to get started on Astro</li>
 <li>Improved error messaging behavior on the <strong>DAGs</strong> and <strong>Usage</strong> pages of the Cloud UI</li>
