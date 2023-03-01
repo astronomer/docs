@@ -33,7 +33,7 @@ If you want users to always authenticate through Astro, you can disable this fea
 
 ### Additional improvements
 
-- Access to Google Cloud Platform (GCP) and Azure clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
+- Ingress to the Kubernetes API on Google Cloud Platform (GCP) and Azure clusters is now limited to Astro control plane IPs. This change will be implemented on all clusters in the coming weeks.
 
 ### Bug fixes
 
@@ -189,7 +189,7 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 
 ### Additional improvements
 
-- Ingress to AWS clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
+- Ingress to the Airflow UI and API on Astro clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
 - You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](modify-cluster.md#view-clusters).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
