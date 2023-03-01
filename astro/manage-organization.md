@@ -38,6 +38,10 @@ An SSO bypass link allows you to authenticate to an Organization without using S
 
 ## Restrict authentication options 
 
-By default, users have access to all possible authentication methods when logging into Astro. You can remove specific authentication options so that users can use only the methods that your Organization wants to support, such as your third party identity provider.
+By default, users have access to all possible authentication methods when logging into Astro. You can remove specific authentication options, such as GitHub or Google, so that users can use only the methods that your Organization wants to support, such as your third party identity provider.
 
 To restrict which authentication options are available on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+## Restrict identity provider initiated logins
+
+By default, Astro supports users logging in to Astro directly from your identity provider (IdP) platform. To force users to log in only from Astro, contact [Astronomer support](https://cloud.astronomer.io/support).
