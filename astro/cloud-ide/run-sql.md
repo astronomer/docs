@@ -57,6 +57,8 @@ See [Run cells in the Astro Cloud IDE](run-cells.md).
 
 In your SQL cell, click **Dependencies** and select a cell to be upstream of your SQL cell. When you run your entire pipeline, the SQL cell cannot begin running until the selected upstream cell finishes running.
 
+![Button for specifying an explicit dependency](/img/cloud-ide/create-dependency.png)
+
 To make your SQL cell an upstream dependency for another cell, click **Dependencies** for the other cell and select the name of your SQL cell. 
 
 ## Create data dependencies for a SQL cell
