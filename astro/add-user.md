@@ -78,3 +78,47 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 4. Optional. Edit the user's name and role. See [User permissions](user-permissions.md).
    
 5. If you've updated the user's role, click **Update member**. To delete the user, click **Remove member**.
+
+## Add a group of users using the Astro CLI
+
+You can use the Astro CLI and shell scripting to add multiple users at once to an Organization or Workspace. Because the shell script reads from a text file, you can automate this process by generating the text file and running the shell script for each new batch of users that need to be assigned to an Organization or Workspace.
+
+1. Create a file called `users.txt`.
+2. Add list of email addresses for users that you want to add to a given Organization or Workspace. Each email address should be followed by the desired role for the user. For example, the list to add users to a Workspace might look like the following:
+
+    ```sh
+    user1@astronomer.io WORKSPACE_VIEWER
+    user2@astronomer.io WORKSPACE_OWNER
+    user3@astronomer.io WORKSPACE_ADMIN
+    user4@astronomer.io WORKSPACE_OWNER
+    ```
+
+3. Create a file called `add-users.sh` and add the following script to it:
+
+    ```sh
+    #!/bin/bash
+
+    # Check if a file was provided as an argument
+    if [ $# -ne 1 ]; then
+        echo "Usage: $0 <file>"
+        exit 1
+    fi
+    
+    # Read each line in the file and invite the user. 
+    # Replace 'workspace' with 'organization' if you're inviting users to an Organization.
+    while read line; do
+        email=$(echo "$line" | cut -d' ' -f1)
+        role=$(echo "$line" | cut -d' ' -f2)
+        echo "Inviting $email as $role..."
+        astro workspace user invite "$email" --role "$role"
+    done < "$1"
+    ```
+
+    Replace the Astro CLI command with `astro organization user invite "$email" --role "$role"` if you're inviting a group of users to an Organization.
+
+4. Ensure that you're authenticated to the Astro CLI using `astro login`, then ensure that you are in the correct Workspace and Organization using `astro workspace list` and `astro organization list`.
+5. Run the following command to execute the shell script:
+
+    ```sh
+    sh path/to/add-users.sh path/to/users.txt
+    ```
