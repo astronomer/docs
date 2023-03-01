@@ -15,7 +15,7 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 
 ## Choose a SQL cell type
 
-A SQL cell runs a SQL query on a database connection and stores the results of the query in an XCom value for use in other cells. A Warehouse SQL cell runs a SQL query on an external database and stores the results in your data warehouse. For more information about how these cells work, see [How SQL cells work](#how-sql-cells-work).
+A SQL cell runs a SQL query against a database connection and stores the results of the query in an XCom value for use in other cells. A Warehouse SQL cell runs a SQL query against a database connection and stores the results in your data warehouse. For more information about how these cells work, see [How SQL cells work](#how-sql-cells-work).
 
 Both cell types execute SQL queries, but there are some scenarios where the use of one cell type is preferable. The following table lists the scenarios where Astronomer recommends using a specific type of SQL cell.
   
