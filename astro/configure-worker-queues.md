@@ -69,7 +69,7 @@ A Deployment's [parallelism](https://airflow.apache.org/docs/apache-airflow/stab
 
 `[Parallelism]= ([The sum of all 'Max Worker Count' values for all worker queues] * [The sum of all 'Maximum tasks per worker' values for all worker queues])`.
 
-These calculations are computed by KEDA every ten seconds. When KEDA determines that it can scale down, it waits for five minutes after the last running task on the worker finishes before terminating that worker Pod.
+These calculations are computed by KEDA every ten seconds. When KEDA determines that it can scale down a worker, it waits for five minutes after the last running task on the worker finishes before terminating that worker Pod.
 
 To learn more about how changes to a Deployment can affect worker resource allocation, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
