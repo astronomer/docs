@@ -43,7 +43,7 @@ To install Astro in a dedicated AWS account owned by your organization, you'll c
 
 A cluster will be created within your AWS account to host the resources and Airflow components necessary to deploy DAGs and execute tasks. If you need more than one Astro cluster, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-## Prerequisites
+### Prerequisites
 
 - A dedicated AWS account with the minimum EC2 service quotas.
 - A subscription to the [Astro Status Page](https://status.astronomer.io/). This ensures that you'll be notified when there are incidents or when maintenance is scheduled.
@@ -75,7 +75,7 @@ If you have one or more existing AWS accounts, you can use [AWS Organizations](h
 
 :::
 
-### VPC peering prerequisites (Optional)
+#### VPC peering prerequisites (Optional)
 
 The following options are available when your AWS resources are on a private network:
 
@@ -88,7 +88,7 @@ If you want to continue with the second option, you'll additionally need:
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
 - The IP addresses of your DNS servers.
 
-## Access Astro
+### Access Astro
 
 1. Go to https://cloud.astronomer.io/ and create an account, or enter your email address, and then click **Continue**.
 
@@ -101,7 +101,7 @@ If you want to continue with the second option, you'll additionally need:
 
     If you're the first person in your Organization to authenticate, you'll be granted Organization owner permissions. You can create a Workspace and add other team members to the Workspace without the assistance of Astronomer support. See [Create a Workspace](manage-workspaces.md#create-a-workspace) and [Add a user](add-user.md). To integrate an identity provider (IdP) with Astro, see [Set up an identity provider](configure-idp.md).
 
-## Retrieve an external ID from the Cloud UI
+### Retrieve an external ID from the Cloud UI
 
 You must be an Organization Owner to view the external ID. If you are not an Organization Owner, the **AWS External ID** field will not appear in the Cloud UI.
 
@@ -111,7 +111,7 @@ You must be an Organization Owner to view the external ID. If you are not an Org
 
 3. Save the external ID as a secret or in another secure format. See [How to use an external ID when granting access to your AWS resources to a third party](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html).
 
-## Create a cross-account role
+### Create a cross-account role
 
 Use the external ID to create a cross-account IAM role for Astro.
 
@@ -148,7 +148,7 @@ To monitor changes to the cross-account role policy and permissions boundaries, 
 { ($.eventName = AttachRolePolicy || $.eventName = DetachRolePolicy || $.eventName = SetPolicyVersion) && ($.requestParameters.policyArn = "*OperationalBoundary*" || $.requestParameters.policyArn = "*AstronomerCrossAccountRole"  || $.requestParameters.roleName = astronomer-remote-management) }
 ```
 
-## Provide setup information to Astronomer
+### Provide setup information to Astronomer
 
 After creating the AWS account, provide Astronomer with the following information:
 
@@ -173,7 +173,7 @@ If you're setting up your first cluster in any of these regions, you need to com
 
 :::
 
-### Provide VPC peering information (optional)
+#### Provide VPC peering information (optional)
 
 If you need to VPC peer with Astronomer, provide the following information to your Astronomer representative:
 
@@ -181,7 +181,7 @@ If you need to VPC peer with Astronomer, provide the following information to yo
 - VPC Name/ID and region for peering with Astronomer. This is accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/).
 - The IPs of your DNS servers.
 
-## Astronomer creates the cluster
+### Astronomer creates the cluster
 
 After you've created the cross-account IAM role for Astro, contact your Astronomer representative. Astronomer creates the cluster in your AWS account.
 
