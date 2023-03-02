@@ -119,8 +119,6 @@ Set up Podman on a Mac operating system so you can run Apache Airflow locally an
 - Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`.
 
-If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
-
 :::tip
 
 If you receive an error after running `podman ps`, there is likely a problem with your Podman connection. You might need to set the system-level `DOCKER_HOST` environment variable to be the location of your Podman service socket:
@@ -177,8 +175,6 @@ Set up Podman on Windows so you can run Apache Airflow locally and deploy to Ast
 - Podman 3 or later installed on Windows Subsystem for Linux version 2 (WSL 2) using Ubuntu 22.04 or later. See [Install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) and [Getting started with Podman](https://podman.io/getting-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps` in your Linux terminal. 
 - The Astro CLI Linux distribution installed on WSL 2. See [Install the Astro CLI on Linux](https://docs.astronomer.io/astro/cli/install-cli?tab=linux#install-the-astro-cli).
-
-If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 :::tip
 
@@ -241,8 +237,6 @@ Set up Podman on Linux so you can run Apache Airflow locally and deploy to Astro
 
 - Podman 3 or later. See [Getting started with Podman](https://podman.io/getting-started/).
 - A running Podman machine with at least 4 GB of RAM. To confirm that Podman is running, run `podman ps`. 
-
-If you're interested in running a different version of Podman that's unsupported, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 :::tip
 
