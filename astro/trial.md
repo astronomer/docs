@@ -1,6 +1,6 @@
 ---
 title: 'Start your Astro trial'
-id: astro-trial
+id: trial
 sidebar_label: 'Start a trial'
 ---
 
@@ -31,7 +31,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 <Tabs
     defaultValue="aws"
-    groupId= "create-an-astro-cloud-account-and-cluster"
+    groupId= "create-a-cluster"
     values={[
         {label: 'AWS', value: 'aws'},
         {label: 'GCP', value: 'gcp'},
@@ -64,7 +64,9 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 8. Click **Create cluster**. 
    
-9.  Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete. 
+9. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete. 
+
+    The cluster is created with a default set of resources that are suitable for most use cases. See [AWS cluster settings](resource-reference-aws.md#default-cluster-values) for a list of all default resources.
 
 </TabItem>
 <TabItem value="gcp">
@@ -83,9 +85,11 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 7. Optional. Click **Advanced** and configure VPC subnet ranges for Astro to connect to your GCP project through VPC peering. 
    
-8. Click **Create cluster**. 
+8. Click **Create cluster**.
    
-9. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete.
+9. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete. 
+
+    The cluster is created with a default set of resources that are suitable for most use cases. See [GCP cluster settings](resource-reference-gcp.md#default-cluster-values) for a list of all default resources.
 
 </TabItem>
 <TabItem value="azure">
@@ -149,25 +153,25 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
     <TabItem value="powershell">
 
-    1. Run the following command to log in to your Azure account:
+    6. Run the following command to log in to your Azure account:
     
         ```sh
         Connect-AzAccount
         ```
     
-    2. Run the following command to select your Azure subscription:
+    7. Run the following command to select your Azure subscription:
     
         ```sh
         Set-AzContext -SubscriptionId <subscription-id>
         ```
 
-    3. Run the following command to create the Astronomer service principal:
+    8. Run the following command to create the Astronomer service principal:
     
         ```sh
         $sp = New-AzADServicePrincipal -AppId a67e6057-7138-4f78-bbaf-fd9db7b8aab0
         ```
 
-    4. Run the following commands to get details about the Azure subscription and create a new role assignment for the Astronomer service principal:
+    9. Run the following commands to get details about the Azure subscription and create a new role assignment for the Astronomer service principal:
     
         ```sh
         $sp = Get-AzADServicePrincipal -ApplicationId a67e6057-7138-4f78-bbaf-fd9db7b8aab0
@@ -181,7 +185,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
         $ra = New-AzRoleAssignment -ObjectId $sp.id -RoleDefinitionName Owner -Scope "/subscriptions/$subid"
         ```
 
-    5. Run the following commands to register the `EncryptionAtHost` feature:
+    10. Run the following commands to register the `EncryptionAtHost` feature:
     
         ```sh
         Register-AzProviderFeature -FeatureName EncryptionAtHost -ProviderNamespace Microsoft.Compute
@@ -205,7 +209,9 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 9. Click **Create cluster**. 
    
-10. Wait for Astronomer to finish creating the cluster.  You'll receive an email notification when the process is complete.  
+10. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete.
+
+    The cluster is created with a default set of resources that are suitable for most use cases. See [Azure cluster settings](resource-reference-azure.md#default-cluster-values) for a list of all default resources.
 
 </TabItem>
 </Tabs>
