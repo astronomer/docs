@@ -6,12 +6,6 @@ id: 'cross-account-role-setup'
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-:::caution
-
-This feature is in [Private Preview](feature-previews.md) and is an alternative to the standard AWS installation process. For the standard installation, see [Install Astro on AWS](install-aws.md)
-
-:::
-
 To install Astro in a dedicated AWS account owned by your organization, you'll complete the following tasks:
 
 - Create an account on Astro.
@@ -90,16 +84,7 @@ You must be an Organization Owner to view the external ID. If you are not an Org
 
 ## Step 3: Create a cross-account role
 
-Use the external ID to create a cross-account IAM role for Astro. Astronomer recommends using the AWS Management Console to create the role.
-
-<Tabs
-    defaultValue="managementconsole"
-    groupId= "step-3-create-a-cross-account-iam-role-for-astro"
-    values={[
-        {label: 'AWS Management Console', value: 'managementconsole'},
-        {label: 'AWS Command Line', value: 'commandline'},
-    ]}>
-<TabItem value="managementconsole">
+Use the external ID to create a cross-account IAM role for Astro.
 
 1. Log in to your AWS CloudFormation instance.
 
@@ -111,90 +96,17 @@ Use the external ID to create a cross-account IAM role for Astro. Astronomer rec
 
 5. Click **Create Stack**.
 
-</TabItem>
+#### Cross-account role modifications
 
-<TabItem value="commandline">
+When new features or functionality are added to Astro, Astronomer might need to modify cross-account role permissions. When setting permissions, Astronomer adheres to the least-privilege permissions standard and adds only the permissions necessary to use the new feature or functionality.
 
-1. Create a command line-level environment variable named `EXTERNAL_ID` that contains the External ID you copied in step 2.
-2. Run the following command to create the Astronomer remote management role.
-    
-    ```sh
-    #!/bin/sh
-
-    set -eo pipefail
-
-    if [ -z "$EXTERNAL_ID" ]
-    then
-      echo 'Missing required variable EXTERNAL_ID' >&2
-      exit 1
-    fi
-
-    POLICY_NAME='AstronomerCrossAccountRole'
-    POLICY_DESCRIPTION='Permissions boundary for Astronomer cross-account management role'
-    POLICY_URL='https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/customer-account-prerelease.json'
-    POLICY_FILE='/tmp/policy.json'
-
-    if [ ! -f "$POLICY_FILE" ]
-    then
-      echo "Download $POLICY_NAME policy document"
-
-      ACCOUNT_ID="$(aws sts get-caller-identity --query 'Account' --output text)"
-      curl "$POLICY_URL" | sed "s/{{.AWSAccount}}/$ACCOUNT_ID/" > "$POLICY_FILE"
-    fi
-
-    echo "Create $POLICY_NAME policy"
-    # Retrieve the new policy's ARN, but also print the output of aws iam create-policy to stdout
-    { POLICY_ARN=$( \
-      aws iam create-policy --policy-name "$POLICY_NAME" --policy-document "$(cat "$POLICY_FILE")" --description "$POLICY_DESCRIPTION" \
-      | tee /dev/fd/3 \
-      | sed -rn 's/"Arn"://p' \
-      | tr -d '[:space:]",'); } 3>&1
-
-    ROLE_NAME='astronomer-remote-management'
-    ASSUME_ROLE_POLICY=$(cat << EOF
-    {
-      "Version": "2012-10-17",
-      "Statement": [
-        {
-          "Effect": "Allow",
-          "Principal": {
-            "AWS": "arn:aws:iam::406882777402:root"
-          },
-          "Action": "sts:AssumeRole",
-          "Condition": {
-            "StringEquals": {
-            "sts:ExternalId": "$EXTERNAL_ID"
-            }
-          }
-        }
-      ]
-    }
-    EOF
-    )
-
-    echo "Create $ROLE_NAME role"
-    aws iam create-role --role-name "$ROLE_NAME" --assume-role-policy-document "$ASSUME_ROLE_POLICY"
-
-    echo "Attach $POLICY_NAME to $ROLE_NAME"
-    aws iam attach-role-policy --policy-arn "$POLICY_ARN" --role-name "$ROLE_NAME"
-
-    echo 'Setup complete'
-    ```
-
-</TabItem>
-</Tabs>
-
-#### Notification of changes to the cross-account role 
-
-Occasionally, Astronomer makes changes to its policies to ensure the continued operation and development of Astro. 
-
-Users with an Organization Owner role will receive an email notification from Astronomer 14 days before any changes are made to the policies that expand user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
+Astronomer support notifies your Organization when any changes are made to the policies that expand user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
 
 Astronomer can reduce the access available to the policies without notification.
 
 #### Monitor the policies for changes (optional)
 
-You can use CloudTrail to monitor changes to Astro policies.  Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor. 
+You can use CloudTrail to monitor changes to Astro policies. Access to CloudTrail has been limited to prevent the accidental modification or deletion of CloudTrail logs by Astronomer support. The following table lists the events that you should monitor. 
 
 | Event Names                              | Resource                                                         |
 | ---------------------------------------- | ---------------------------------------------------------------- |
