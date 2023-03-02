@@ -13,7 +13,7 @@ Install Astronomer Software on Azure to deploy and scale [Apache Airflow](https:
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-* A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
+* A compatible version of Kubernetes and PostgreSQL as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
 * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
 * SMTP service and credentials. For example, Mailgun or Sendgrid.
 * Permission to create and modify resources on AKS
