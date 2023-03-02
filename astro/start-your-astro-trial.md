@@ -6,11 +6,11 @@ id: start-your-astro-trial
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Use this guide to get started with Astro, the fully managed Airflow service by Astronomer. 
+Use this guide to get started with Astro, the best place to run Apache Airflow.
 
-## Activate your trial
+## Start a trial
 
-Visit `https://cloud.astronomer.io/onboarding` to activate your free 14 day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
+Go to [Try Astro](https://www.astronomer.io/try-astro/) to activate your free 14-day trial. To create your Astro user account, you'll need to provide a valid email address and create a password.
 
 ## Create an Organization and Workspace
 
@@ -20,9 +20,11 @@ An **Organization** is the highest Astro management level. All Airflow environme
 
 During your trial, you can use any name for your Organization and first Workspace. You can update these names in the Cloud UI after you finish activating your trial. If you're going to migrate your data pipelines to Astro immediately, Astronomer recommends naming your Workspace after your data team or core function.
 
-## Create an Astro cloud account and cluster
+## Create a cluster
 
-To run Airflow on your cloud, you'll need to set up an Astro cluster. An Astro cluster contains all of the components you need to create and run multiple Airflow environments at scale. Additionally, you'll need a dedicated account on your cloud that Astronomer can access. This account allows Astronomer to provision and manage your cluster resources. 
+To run Astro in your cloud, you'll need to set up an Astro cluster. An Astro cluster is a set of infrastructure resources within your organization's data plane that hosts Deployments, or Airflow environments on Astro.
+
+To create a cluster, you first need a dedicated account with your cloud provider that Astronomer can access. This account allows Astronomer to fully manage the infrastructure resources required to run Airflow at scale for your team.
 
 After you've created your Organization and Workspace, your new Workspace homepage appears. Click **Create Cluster** and then complete the setup for your cloud provider.
 
@@ -36,7 +38,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
     ]}>
 <TabItem value="aws">
 
-1. Create a dedicated [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) for Astro. Astro uses this account to provision and manage your cluster resources. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. 
+1. Create a dedicated [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) for Astro. Astro uses this account to provision and manage your cluster resources. For security reasons, you cannot currently create an Astro cluster within an AWS account that has other tooling running in it.
 
 2. Copy the **Account ID** for Step 3.
 
@@ -213,10 +215,10 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
 
-1. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is Astronomer's command line interface for testing Airflow both locally and on Astro.
+1. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is the command line interface for running Airflow DAGs on your local computer and on Astro.
 2. [Create an Astro project](create-project.md). An Astro project contains all of the files you need to run Airflow, including example DAGs.
-3. [Create a Deployment](create-deployment.md). A Deployment is Astronomer's mechanism for managing an Airflow deployment in your cluster.
-4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to deploy code in just a few minutes. 
+3. [Create a Deployment](create-deployment.md). A Deployment is a configurable Apache Airflow environment on Astro where you can run DAGs.
+4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to deploy code in just a few minutes.
 
 ## Next steps
 
@@ -225,4 +227,3 @@ After you've become more familiar with deploying DAGs to Astro, see the followin
 - [Astro Cloud IDE quickstart](cloud-ide/quickstart.md): Learn how to use Astro's IDE to write data pipelines directly in the Cloud UI. For a more advanced introduction, see the [Write and schedule a simple ML pipeline using the Astro Cloud IDE](https://docs.astronomer.io/learn/cloud-ide-tutorial).
 - [Set up CI/CD](set-up-ci-cd.md): Learn how you can use the Astro CLI to automate code deploys to Astro. 
 - [Manage environment variables](environment-variables.md): Use the Cloud UI to set both OS-level configurations and Airflow variables on your Deployment.
-
