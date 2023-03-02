@@ -40,7 +40,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 1. Create a dedicated [AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/) for Astro. Astro uses this account to provision and manage your cluster resources. For security reasons, you cannot currently create an Astro cluster within an AWS account that has other tooling running in it.
 
-2. Copy the **Account ID** for Step 3.
+2. Copy the **Account ID** for Step 5.
 
     When creating your account, specify the following [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html):
     
@@ -53,30 +53,28 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 3. On the Astro cluster creation screen, click **Launch AWS stack creation**. 
    
-4. In AWS CloudFormation, enter your Astro AWS account ID in **AstroAccountId**.
+4. In AWS CloudFormation, click **Create stack**. A cross-account Identity and Access Management (IAM) role is created to provide Astronomer support with access to the Astro AWS account.
    
-5. Click **Create stack**. A cross-account Identity and Access Management (IAM) role is created to provide Astronomer support with administrator access to the Astro AWS account.
+5. In the Cloud UI cluster creation screen, enter your AWS account ID in **AWS Account ID**.
    
-6. In the Cloud UI cluster creation screen, enter your Astro AWS account ID in **AWS Account ID**.
+6. In the **Region** list, select the region where your cluster will be hosted. For trials, Astronomer recommends choosing the region that's closest to you.
    
-7. In the **Region** list, select the region where your cluster will be hosted. For trials, Astronomer recommends choosing the region that's closest to you.
+7. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your AWS account through VPC peering. 
    
-8. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your AWS account through VPC peering. 
+8. Click **Create cluster**. 
    
-9. Click **Create cluster**. 
-   
-10. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete. 
+9.  Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete. 
 
 </TabItem>
 <TabItem value="gcp">
 
 1. Create a dedicated [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) for Astro with billing enabled. Astro uses this account to provision and manage your cluster resources. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it. 
 
-2. Copy the project ID for step 4.
+2. Copy the project ID for step 5.
    
 3. In the Cloud UI, click **Launch Google Cloud Shell** on the cluster creation screen.
    
-4. In your cloud shell, run `/bootstrap.sh` and follow the steps to grant Astro access to your GCP project. 
+4. In your cloud shell, run `./bootstrap.sh` and follow the steps to grant Astro access to your GCP project. 
    
 5. In the Cloud UI cluster creation screen, enter your GCP Project ID in **GCP Project ID**.
    
@@ -202,7 +200,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 7. In the **Region** list, select the region where you want to host your cluster. For trials, Astronomer recommends choosing the region that's closest to you.
    
-8. Optional. Click **Advanced** and configure a VPC subnet range for Astro to connect to your Azure subscription through VPC peering. 
+8. Optional. Click **Advanced** and configure a VNet subnet range for Astro to connect to your Azure subscription through VPC peering. 
    
 9. Click **Create cluster**. 
    
