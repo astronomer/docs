@@ -77,9 +77,9 @@ If you have one or more existing AWS accounts, you can use [AWS Organizations](h
 
 #### VPC peering prerequisites (Optional)
 
-The following options are available when your AWS resources are on a private network:
+The following options are available to connect Astro to AWS resources on a private network:
 
-- Allow traffic through the public internet and use allow-lists for communication.
+- Allow traffic through the public internet and use allowlists for communication.
 - Create a VPC Peering connection between the dedicated Astro data plane VPC and your existing AWS account VPCs.
 
 If you want to continue with the second option, you'll additionally need:
@@ -127,7 +127,7 @@ Use the external ID to create a cross-account IAM role for Astro.
 
 #### Cross-account role modifications
 
-When new features or functionality are added to Astro, Astronomer might need to modify cross-account role permissions. When setting permissions, Astronomer adheres to the least-privilege permissions standard and adds only the permissions necessary to use the new feature or functionality.
+When new features or functionality are added to Astro, Astronomer might need to modify cross-account role permissions. When setting permissions, Astronomer adheres to the least-privilege permissions standard and adds only the permissions necessary for new features or functionality.
 
 Astronomer support notifies your Organization when any changes are made to the policies that expand cross-account role access. Notifications will include an explanation of the changes being made and why the change was necessary. 
 
