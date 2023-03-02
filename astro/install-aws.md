@@ -58,7 +58,7 @@ A cluster will be created within your AWS account to host the resources and Airf
     - `https://updates.astronomer.io/`
     - `https://install.astronomer.io/`
 
-Astro requires a clean AWS account with the minimum EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other tooling running in it. For instructions on creating a new AWS account, see [How do I create and activate a new AWS account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
+Astro requires a dedicated AWS account with the minimum EC2 service quotas. For security reasons, the install process is not currently supported on an AWS account that has other resources running in it. For instructions on creating a new AWS account, see [How do I create and activate a new AWS account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
 
 The following table lists the required [EC2 service quotas](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html).
 
@@ -115,7 +115,7 @@ You must be an Organization Owner to view the external ID. If you are not an Org
 
 Use the external ID to create a cross-account IAM role for Astro.
 
-1. Log in to your AWS CloudFormation instance.
+1. Log in to your [AWS CloudFormation console](https://console.aws.amazon.com/cloudformation).
 
 2. Open the [Astronomer cross-account role CloudFormation template](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/create/review?templateURL=https://astro-cross-account-role-template.s3.us-east-2.amazonaws.com/astronomer-remote-management-stack.yaml&stackName=AstroCrossAccountRole).
 
@@ -129,7 +129,7 @@ Use the external ID to create a cross-account IAM role for Astro.
 
 When new features or functionality are added to Astro, Astronomer might need to modify cross-account role permissions. When setting permissions, Astronomer adheres to the least-privilege permissions standard and adds only the permissions necessary to use the new feature or functionality.
 
-Astronomer support notifies your Organization when any changes are made to the policies that expand user access. Notifications will include an explanation of the changes being made and why the change was necessary. 
+Astronomer support notifies your Organization when any changes are made to the policies that expand cross-account role access. Notifications will include an explanation of the changes being made and why the change was necessary. 
 
 Astronomer can reduce the access available to the policies without notification.
 
