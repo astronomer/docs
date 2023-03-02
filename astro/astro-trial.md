@@ -1,6 +1,7 @@
 ---
 title: 'Start your Astro trial'
-id: start-your-astro-trial
+id: astro-trial
+sidebar_label: 'Start a trial'
 ---
 
 import Tabs from '@theme/Tabs';
