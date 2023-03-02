@@ -22,13 +22,13 @@ More specifically, this doc includes instructions for how to:
 
 > **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](https://docs.astronomer.io/astro/cli/install-cli).
 
-## Add python and OS-level packages
+## Add Python and OS-level dependencies
 
-To build Python and OS-level packages into your Airflow Deployment, add them to your `requirements.txt` and `packages.txt` files on Astronomer. Both files were automatically generated when you initialized an Astro project locally via `$ astro dev init`. Steps below.
+To build Python and OS-level packages into your Airflow Deployment, add them to the deployment's `requirements.txt` and `packages.txt` files, respectively. Both files were automatically generated when you initialized an Astro project locally via `$ astro dev init`.
 
-### Add your python or OS-Level package
+### Add Python dependencies
 
-Add all Python packages to your `requirements.txt` and any OS-level packages you'd like to include to your `packages.txt` file.
+Add all Python packages to your `requirements.txt` file and they will be automatically built into your Airflow deployment.
 
 To pin a version of that package, use the following syntax:
 
@@ -43,6 +43,9 @@ pymongo==3.7.2
 ```
 
 If you do _not_ pin a package to a version, the latest version of the package that's publicly available will be installed by default.
+
+### Add OS-level dependencies
+Add any OS-level packages you'd like to include to your `packages.txt` file.
 
 ### Rebuild your image
 
