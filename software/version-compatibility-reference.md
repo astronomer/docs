@@ -15,8 +15,6 @@ While the tables below reference the minimum compatible versions, we typically r
 
 | Astronomer Platform | Kubernetes                           | Postgres | Python                                    | Astronomer Certified / Astro Runtime         | Helm |
 | ------------------- | ------------------------------------ | -------- | ----------------------------------------- | -------------------------------------------- | ---- |
-| v0.28               | 1.19¹, 1.20¹, 1.21, 1.22¹, 1.23¹, 1.24¹ | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
-| v0.29               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 | v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 | v0.31               | 1.21, 1.22, 1.23, 1.24 , 1.25², 1.26² | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 
@@ -24,8 +22,8 @@ While the tables below reference the minimum compatible versions, we typically r
 
 ¹: Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
 
-- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.28.7, 0.29.5, and 0.30.4.
-- Support for Kubernetes 1.22 and later starts in Astronomer Software 0.28.6.
+- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software 0.30.4.
+- Support for Kubernetes 1.25 and 1.26 and later starts in Astronomer Software 0.31.2.
 
 :::
 
