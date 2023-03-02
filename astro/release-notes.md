@@ -33,6 +33,7 @@ If you want users to always authenticate through Astro, you can disable this fea
 
 ### Additional improvements
 
+- Astro no longer requires administrator access to AWS clusters. Instead, Astro now assumes a cross-account IAM role with the minimum necessary permissions for running and managing Airflow. See [Install Astro on AWS](install-aws.md) for more information.
 - Ingress to the Kubernetes API on Google Cloud Platform (GCP) and Azure clusters is now limited to Astro control plane IPs. This change will be implemented on all clusters in the coming weeks.
 
 ### Bug fixes
