@@ -24,7 +24,7 @@ More specifically, this doc includes instructions for how to:
 
 ## Add Python and OS-level dependencies
 
-To build Python and OS-level packages into your Airflow Deployment, add them to the deployment's `requirements.txt` and `packages.txt` files, respectively. Both files were automatically generated when you initialized an Astro project locally via `$ astro dev init`.
+To add Python packages to an Airflow Deployment, add the packages to the Deployment `requirements.txt` file. To add OS-level packages to an Airflow Deployment, add them to the Deployment `packages.txt` file. The `requirements.txt` and `packages.txt`  files were automatically generated after running `astro dev init` to initialize your local Astro project.
 
 ### Add Python dependencies
 
