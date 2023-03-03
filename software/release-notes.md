@@ -22,9 +22,9 @@ Release date: February 24, 2023
 ### Bug fixes 
 
 - Fixed an issue where you could not set `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER` in a Deployment if you were using an Astronomer Certified image.
-- Fixed an issue where removing a user imported from an identity provider (IdP) group with SCIM enabled caused orphaned Deployments and Workspaces.
+- Astronomer Software now filters orphaned Deployments and Workspaces owned by users who were removed from an identity provider (IdP) group with SCIM enabled.
 - Fixed a security vulnerability where you could query Elasticsearch logs for a Deployment from a different Deployment.
-- Fixed an issue where authentication tokens were visible in NGinx logs produced by the Software UI.
+- Fixed an issue where authentication tokens were visible in Nginx logs produced by the Software UI.
 - Fixed an issue where deploying an image with the `docker/build-push-action` GitHub action could produce errors in Houston that affected the entire Astronomer Software installation.
 - Fixed the following vulnerabilities:
   
