@@ -37,7 +37,7 @@ At a high level, creating a custom operator is straightforward. At a minimum, al
 - Define a `Constructor` method which will be run when the DAG is parsed.
 - Define a `.execute` method which will run once the task defined using this operator runs.
 
-View the `MyOperator` class below for an example of the structure of a custom operator:
+The code below shows an example of the structure of a custom operator called `MyOperator`:
 
 ```python
 # import the operator to inherit from
@@ -75,7 +75,7 @@ If your custom operator is modifying functionality of an existing operator, your
 
 After you've defined your custom operator, you need to make it available to your DAGs. Some legacy Airflow documentation or forums may reference registering your custom operator as an Airflow plugin, but this is not necessary. To import a custom operator into your DAGs, the file containing your custom operator needs to be in a directory that is present in your `PYTHONPATH` (check out the Apache Airflow [Module Management docs](https://airflow.apache.org/docs/apache-airflow/stable/modules_management.html) for more info).
 
-When using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) simply add your file containing the custom operator to the `include` directory. Consider adding sub-folders to make your `include` directory easier to navigate.
+When using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) you can add your file containing the custom operator to the `include` directory. Consider adding sub-folders to make your `include` directory easier to navigate.
 
 ```text
 .
@@ -101,7 +101,7 @@ When using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) sim
 
 For more details on why Astronomer recommends this project structure, see the [Managing Airflow Code guide](managing-airflow-code.md).
 
-Using the project structure shown in the text above, you can import the `MyOperator` class from the `my_operator.py` file and `MyHook` from `my_hook.py` with the following import statements:
+Using the project structure shown above, you can import the `MyOperator` class from the `my_operator.py` file and `MyHook` from `my_hook.py` in your DAGs with the following import statements:
 
 ```
 from include.custom_operators.my_operator import MyOperator
@@ -110,7 +110,7 @@ from include.custom_hooks.my_hook import MyHook
 
 ## Example implementation
 
-The code below defines the `MyBasicMathOperator` class. A simple operator that inherits from the BaseOperator and can perform arithmetic with two numbers and an operation provided. This code is saved in the include folder in a file called `basic_math_operator.py`.
+The code below defines the `MyBasicMathOperator` class, an operator that inherits from the BaseOperator and can perform arithmetic with two numbers and an operation provided. This code is saved in the `include` folder in a file called `basic_math_operator.py`.
 
 ```python
 from airflow.models.baseoperator import BaseOperator
@@ -177,7 +177,7 @@ class MyBasicMathOperator(BaseOperator):
             return res
 ```
 
-Additionally to a custom operator the example DAG will be using a custom hook to connect to the CatFactAPI. This hook abstracts retrieving the API URL from an [Airflow connection](connections.md) as well as making several calls to the API in a loop. Copy and paste the code below into a file called `cat_fact_hook.py` in the `include` directory.
+In addition to the `MyBasicMathOperator` custom operator, the example DAG will use a custom hook to connect to the CatFactAPI. This hook abstracts retrieving the API URL from an [Airflow connection](connections.md) and makes several calls to the API in a loop. This code should also be placed in the `include` directory in a file called `cat_fact_hook.py`.
 
 ```python
 """This module allows you to connect to the CatFactAPI."""
@@ -238,11 +238,11 @@ class CatFactHook(BaseHook):
 
 ```
 
-The CatFactHook needs a `cat_fact_conn` to be defined. Create an Airflow connection with the connection ID `cat_fact_conn`, the connection type `HTTP` and the Host `http://catfact.ninja/fact`. Credentials are not necessary.
+To use this custom hook, we need to create an Airflow connection with the connection ID `cat_fact_conn`, the connection type `HTTP` and the Host `http://catfact.ninja/fact`.
 
 ![Cat fact connection](/img/guides/cat_fact_conn.png)
 
-The DAG file located in the `dags` directory contains an import statement importing the custom operator the custom hook. Note how Jinja templating can be used with parameters that were listed in the custom operators `templated_fields` attribute.
+We can then import our custom operator and custom hook into our DAG. The DAG code below also highlights how Jinja templating can be used with parameters that were listed in the custom operator's `templated_fields` attribute.
 
 <Tabs
     defaultValue="taskflow"
