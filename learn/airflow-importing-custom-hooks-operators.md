@@ -47,7 +47,6 @@ from airflow.models.baseoperator import BaseOperator
 class MyOperator(BaseOperator):
     """
     Simple example operator that logs one parameter and returns a string saying hi.
-    This is a docstring explaining what the operator does and listing params.
     :param my_parameter: (required) parameter taking any input.
     """
 
@@ -217,6 +216,7 @@ class CatFactHook(BaseHook):
         return conn.host
 
     def log_cat_facts(self, number_of_cat_facts_needed: int = 1):
+        """Function that logs between 1 to 10 catfacts depending on its input."""
         if number_of_cat_facts_needed < 1:
             self.log.info(
                 "You will need at least one catfact! Setting request number to 1."
