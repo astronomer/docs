@@ -17,13 +17,13 @@ Go to [Try Astro](https://www.astronomer.io/try-astro/) to activate your free 14
 
 After you've created your Astro user account, you'll be asked to create an Organization and your first Workspace. 
 
-An **Organization** is the highest Astro management level. All Airflow environments belong to a single Organization. An Organization contains **Workspaces**, which are collections of Airflow environments that are typically owned by a single team. 
+An **Organization** is the highest management level on Astro. An Organization contains **Workspaces**, which are collections of Deployments, or Airflow environments, that are typically owned by a single team. You can manage user roles and permissions both at the Organization and Workspace levels.
 
-During your trial, you can use any name for your Organization and first Workspace. You can update these names in the Cloud UI after you finish activating your trial. If you're going to migrate your data pipelines to Astro immediately, Astronomer recommends naming your Workspace after your data team or core function.
+To start your trial, Astronomer recommends using the name of your company as the name of your Organization and naming your first Workspace after your data team or initial business use case with Airflow. You can update these names in the Cloud UI after you finish activating your trial. 
 
 ## Create a cluster
 
-To run Astro in your cloud, you'll need to set up an Astro cluster. An Astro cluster is a set of infrastructure resources within your organization's data plane that hosts Deployments, or Airflow environments on Astro.
+To run Astro in your cloud, you'll need to create an Astro cluster. An Astro cluster is a set of infrastructure resources within your organization's data plane that hosts Deployments, or Airflow environments on Astro.
 
 To create a cluster, you first need a dedicated account with your cloud provider that Astronomer can access. This account allows Astronomer to fully manage the infrastructure resources required to run Airflow at scale for your team.
 
@@ -50,9 +50,9 @@ After you've created your Organization and Workspace, your new Workspace homepag
     | L-1216C47A | Running On-Demand Standard (A, C, D, H, I, M, R, T, Z) instances | 40             |
     | L-34B43A08 | All Standard (A, C, D, H, I, M, R, T, Z) Spot Instance Requests  | 40             |
     
-    These quotas ensure a smooth onboarding experience on Astro. If you need to modify or increase a specific quota, see Amazon’s documentation on [requesting a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html).
+    These quotas ensure a smooth onboarding experience on Astro. If you need to modify or increase a specific quota, see [Request a quota increase](https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html)in Amazon’s documentation.
 
-3. On the Astro cluster creation screen, click **Launch AWS stack creation**. 
+3. On the Astro cluster creation screen, click **Launch AWS stack creation**.
    
 4. In AWS CloudFormation, click **Create stack**. A cross-account Identity and Access Management (IAM) role is created to provide Astronomer support with access to the Astro AWS account.
    
@@ -220,16 +220,16 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
 
-1. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is the command line interface for running Airflow DAGs on your local computer and on Astro.
-2. [Create an Astro project](create-project.md). An Astro project contains all of the files you need to run Airflow, including example DAGs.
-3. [Create a Deployment](create-deployment.md). A Deployment is a configurable Apache Airflow environment on Astro where you can run DAGs.
-4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to deploy code in just a few minutes.
+1. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is an open source command line interface for developing Airflow DAGs on your local machine and deploying them to Astro
+2. [Create an Astro project](create-project.md). An Astro project contains the set of files that you need to run Airflow on Astro. It includes dedicated folders for your Python packages and DAGs.
+3. [Create a Deployment](create-deployment.md). A Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow and where you can run DAGs.
+4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to push code to a Deployment on Astro in just a few minutes.
 
 ## After your trial
 
 After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Cloud UI. You can still access your user account page and Astronomer support forms. Any DAGs you deployed will continue to run for an additional 7-day grace period.
 
-After the 7-day grace period, your clusters are automatically deleted. Any code deployed hosted on the cluster will be lost. If you need additional time for evaluating Astro, or you need to copy your configuration for future use, you have a few options:
+After the 7-day grace period, your cluster and all Deployments within it are automatically deleted. Any code that you deployed to Astro will be lost. If you need additional time to evaluate Astro, or you need to copy your configuration for future use, you can:
 
 - Schedule a call with your point of contact from Astronomer.
 - Go to the Cloud UI and schedule a 15 minute call with an Astronomer engineer. This option is available only after your 14-day trial ends.
