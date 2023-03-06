@@ -27,13 +27,6 @@ Manage Workspaces on Astro.
 
 ## Usage
 
-This command includes two subcommands:
-
-- `astro workspace list`: List all Workspaces.
-- `astro workspace switch`: Switch between Workspaces.
-
-## Usage
-
 This command has several subcommands.
 
 ### `astro workspace create`
