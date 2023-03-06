@@ -201,7 +201,7 @@ To use `dag.test()`, your environment must have:
 
 - At least [Airflow 2.5.0](https://airflow.apache.org/docs/apache-airflow/stable/start.html). You can verify the installation by running `airflow version`.
 - All provider packages that your DAG uses.
-- An [Airflow metastore](airflow-database.md), if your DAG uses elements of the metastore like XCom. The Airflow metastore is created when Airflow is first run in an environment.
+- An [Airflow metastore](airflow-database.md), if your DAG uses elements of the metastore like XCom. The Airflow metastore is created when Airflow is first run in an environment and you can verify its existence by running `airflow db check`.
 
 You may wish to install these requirements and test your DAGs in a [virtualenv](https://virtualenv.pypa.io/en/latest/) to avoid dependency conflicts in your local environment.
 
