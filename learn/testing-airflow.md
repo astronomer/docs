@@ -195,11 +195,11 @@ If you are an Astro customer, you can find further information on how to set up 
 
 ## Debug interactively with dag.test()
 
-Airflow 2.5.0 introduced the `dag.test()` method, which runs allows you to run all tasks in a DAG within a single serialized Python process without an Airflow Executor or Scheduler component being active. This allows for faster iteration when developing DAGs and use of IDE debugging tools.
+Airflow 2.5.0 introduced the `dag.test()` method which allows you to run all tasks in a DAG within a single serialized Python process without needing an Airflow Scheduler to be running. The `.test()` method allows for faster iteration when developing DAGs and use of IDE debugging tools.
 
 The prerequisites to use `dag.test()` are that you are operating in an environment that has:
 
-- At least Airflow 2.5.0 installed, you can verify this by running `airflow version`.
+- At least [Airflow 2.5.0 installed](https://airflow.apache.org/docs/apache-airflow/stable/start.html), you can verify the installation by running `airflow version`.
 - All necessary provider packages installed (for example in a [virtualenv](https://virtualenv.pypa.io/en/latest/)).
 - An [Airflow metastore](airflow-database.md) available if your DAG uses elements of the metastore for example by using XCom. The Airflow metastore is created when Airflow is first run in an environment.
 
@@ -256,7 +256,6 @@ dag_object = my_dag()
 
 if __name__ == "__main__":
     dag_object.test()
-
 ```
 
 </TabItem>
@@ -269,18 +268,13 @@ You can run the `.test()` method with popular debugging tools such as:
 - [PyCharm debugging](https://www.jetbrains.com/help/pycharm/debugging-your-first-python-application.html)
 - Debugging from the command line by running `python <path-to-dag-file>` using tools like [The Python Debugger](https://docs.python.org/3/library/pdb.html) and the built-in [`breakpoint()`](https://docs.python.org/3/library/functions.html#breakpoint) function.
 
+This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
+
 :::note
 
-Users who use the Astro CLI exclusively and do not have the airflow package installed locally can still benefit from the advanced `dag.test()` debugging by entering the running Docker container of their Astro project and executing the relevant commands within:
-
-```sh
-astro dev bash -s
-python <path-to-dag-file>.py
-```
+Users who use the Astro CLI exclusively and do not have the `airflow` package installed locally can still benefit from `dag.test()` debugging by running `astro dev start`, enter the scheduler container with `astro dev bash -s` and executing `python <path-to-dag-file>` from within the Docker container.
 
 :::
-
-This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 
 ### Use variables and connections in dag.test()
 
