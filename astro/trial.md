@@ -224,3 +224,13 @@ After Astronomer creates your cluster, you're ready to start deploying and runni
 2. [Create an Astro project](create-project.md). An Astro project contains all of the files you need to run Airflow, including example DAGs.
 3. [Create a Deployment](create-deployment.md). A Deployment is a configurable Apache Airflow environment on Astro where you can run DAGs.
 4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to deploy code in just a few minutes.
+
+## After your trial
+
+After your 14-day trial ends, you can no longer access your Deployments and Workspaces from the Cloud UI. You can still access your user account page and Astronomer support forms. Any DAGs you deployed will continue to run for an additional 7-day grace period.
+
+After the 7-day grace period, your clusters are automatically deleted. Any code deployed hosted on the cluster will be lost. If you need additional time for evaluating Astro, or you need to copy your configuration for future use, you have a few options:
+
+- Schedule a call with your point of contact from Astronomer.
+- Go to the Cloud UI and schedule a 15 minute call with an Astronomer engineer. This option is available only after your 14-day trial ends.
+- Contact [Astronomer support](https://cloud.astronomer.io/support).
