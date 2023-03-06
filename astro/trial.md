@@ -216,7 +216,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
 </TabItem>
 </Tabs>
 
-## Deploy DAGs to Astro 
+## Next steps
 
 After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
 
@@ -224,11 +224,3 @@ After Astronomer creates your cluster, you're ready to start deploying and runni
 2. [Create an Astro project](create-project.md). An Astro project contains all of the files you need to run Airflow, including example DAGs.
 3. [Create a Deployment](create-deployment.md). A Deployment is a configurable Apache Airflow environment on Astro where you can run DAGs.
 4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to deploy code in just a few minutes.
-
-## Next steps
-
-After you've become more familiar with deploying DAGs to Astro, see the following documentation for more information about Astro features and tools:
-
-- [Astro Cloud IDE quickstart](cloud-ide/quickstart.md): Learn how to use Astro's IDE to write data pipelines directly in the Cloud UI. For a more advanced introduction, see the [Write and schedule a simple ML pipeline using the Astro Cloud IDE](https://docs.astronomer.io/learn/cloud-ide-tutorial).
-- [Set up CI/CD](set-up-ci-cd.md): Learn how you can use the Astro CLI to automate code deploys to Astro. 
-- [Manage environment variables](environment-variables.md): Use the Cloud UI to set both OS-level configurations and Airflow variables on your Deployment.
