@@ -23,38 +23,37 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
+Outputs a list of all users with access to your current Workspace.
 
-Invite an existing user to your current Astronomer Workspace.
+## Usage
 
-#### Options
+```sh
+astro workspace user list
+```
 
-| Option    | Description                                          | Valid Values                                                                               |
-| --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `<email>` | The email for the user you want to invite or update. | Any valid email                                                                            |
-| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+Outputs a list of all users with access to your current Workspace.
 
 </TabItem>
 <TabItem value="software">
 
-### astro workspace user add
-
-Creates a new user in your current Workspace. If the user has already authenticated to Astronomer, they will automatically be granted access to the Workspace. If the user does not have an account on Astronomer, they will receive an email invitation to the platform.
-
-#### Usage
+## Usage
 
 ```sh
-astro workspace user add --email <user-email-address> 
+astro workspace user list
 ```
 
-#### Options
+## Options
 
-| Option                 | Description                                                                                                                                           | Possible Values                                                                                                         |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `--email` (_Required_) | The user's email                                                                                                                                      | Any valid email address                                                                                                 |
-| `--workspace-id`       | The Workspace that the user is added to. Specify this flag if you want to create a user in a Workspace that is different than your current Workspace. | Any valid Workspace ID                                                                                                  |
-| `--role`               | The role assigned to the user.                                                                                                                        | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, and `WORKSPACE_ADMIN`. Default value is `WORKSPACE_VIEWER`. |
+| Option           | Description                                                                                                                                             | Possible Values        |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| `--workspace-id` | The Workspace that you're searching in. Specify this flag if you want to search for users in a Workspace that is different than your current Workspace. | Any valid Workspace ID |
+| `--email`        | The email for the user you're searching for.                                                                                                            | Any string             |
+| `--name`         | The name of the user to search for.                                                                                                                     | Any string             |
+| `--paginated `   | Paginate the list of users. If `--page-size` is not specified, the default page size is 20.                                                             | None                   |
+| `--page-size`    | The page size for paginated lists.                                                                                                                      | Any integer            |
 
-#### Related documentation
+
+## Related documentation
 
 - [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
 - [Manage User Permissions on Astronomer](https://docs.astronomer.io/software/workspace-permissions)

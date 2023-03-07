@@ -23,10 +23,9 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-
 Invite an existing user to your current Astronomer Workspace.
 
-#### Options
+## Options
 
 | Option    | Description                                          | Valid Values                                                                               |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
@@ -36,17 +35,15 @@ Invite an existing user to your current Astronomer Workspace.
 </TabItem>
 <TabItem value="software">
 
-### astro workspace user add
-
 Creates a new user in your current Workspace. If the user has already authenticated to Astronomer, they will automatically be granted access to the Workspace. If the user does not have an account on Astronomer, they will receive an email invitation to the platform.
 
-#### Usage
+## Usage
 
 ```sh
 astro workspace user add --email <user-email-address> 
 ```
 
-#### Options
+## Options
 
 | Option                 | Description                                                                                                                                           | Possible Values                                                                                                         |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
@@ -54,7 +51,7 @@ astro workspace user add --email <user-email-address>
 | `--workspace-id`       | The Workspace that the user is added to. Specify this flag if you want to create a user in a Workspace that is different than your current Workspace. | Any valid Workspace ID                                                                                                  |
 | `--role`               | The role assigned to the user.                                                                                                                        | Possible values are `WORKSPACE_VIEWER`, `WORKSPACE_EDITOR`, and `WORKSPACE_ADMIN`. Default value is `WORKSPACE_VIEWER`. |
 
-#### Related documentation
+## Related documentation
 
 - [Manage Workspaces and Deployments on Astronomer](https://docs.astronomer.io/software/manage-workspaces)
 - [Manage User Permissions on Astronomer](https://docs.astronomer.io/software/workspace-permissions)
