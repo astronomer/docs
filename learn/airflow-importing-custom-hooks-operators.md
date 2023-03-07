@@ -39,6 +39,7 @@ The following is an example of a custom operator called `MyOperator`:
 # import the operator to inherit from
 from airflow.models.baseoperator import BaseOperator
 
+
 # define the class inheriting from an existing operator class
 class MyOperator(BaseOperator):
     """
@@ -78,26 +79,32 @@ At a minimum, a custom hook must:
 In many hooks, a `.get_conn()` method is defined that retrieves information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method.
 
 ```python
+# import the hook to inherit from
 from airflow.hooks.base import BaseHook
 
 
+# define the class inheriting from an existing hook class
 class MyHook(BaseHook):
     """
     Interact with <external tool>.
-
     :param my_conn_id: ID of the connection to <external tool>
     """
 
+    # define global class variables
     conn_name_attr = "my_conn_id"
     default_conn_name = "my_conn_default"
     conn_type = "general"
     hook_name = "MyHook"
 
+    # define the .__init__() method that runs when the DAG is parsed
     def __init__(
         self, my_conn_id: str = default_conn_name, *args, **kwargs
     ) -> None:
+        # initialize the parent hook
         super().__init__(*args, **kwargs)
+        # assign class variables
         self.my_conn_id = my_conn_id
+        # (optional) call the '.get_conn()' method upon initialization
         self.get_conn()
 
     def get_conn(self):
@@ -108,7 +115,7 @@ class MyHook(BaseHook):
 
         return conn
 
-    # add additional methods interacting to define interactions with <external tool>
+    # add additional methods to define interactions with <external tool>
 ```
 
 ## Import custom hooks and operators
