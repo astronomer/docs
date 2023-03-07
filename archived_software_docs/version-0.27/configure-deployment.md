@@ -96,7 +96,7 @@ To increase the speed at which tasks are scheduled and ensure high-availability,
 
 ### Triggerer
 
-Airflow 2.2 introduces the Triggerer, which is a component for running tasks with [Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html). Like the Scheduler, the Triggerer is highly-available: If a Triggerer shuts down unexpectedly, the tasks it was deferring can be recovered and moved to another Triggerer.
+Airflow 2.2 introduces the Triggerer, which is a component for running tasks with [Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html). Like the Scheduler, the Triggerer is highly-available: If a Triggerer shuts down unexpectedly, the tasks it was deferring can be recovered and moved to another Triggerer.
 
 By adjusting the **Triggerer** slider in the Software UI, you can provision up to 2 Triggerers on any Deployment running Airflow 2.2+. To take advantage of the Triggerer's high availability, we recommend provisioning 2 Triggerers for production Deployments.
 
@@ -172,7 +172,7 @@ These can include setting Airflow Parallelism, an SMTP service for Alerts, or a 
 
 Environment Variables can be set for your Airflow Deployment either in the **Variables** tab of the Software UI or in your `Dockerfile`. If you're developing locally, they can also be added to a local `.env` file. For more information on configuring Environment Variables, read [Environment Variables on Astronomer](environment-variables.md).
 
-> **Note**: Environment Variables are distinct from [Airflow Variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html?highlight=variables) and [XComs](https://airflow.apache.org/docs/apache-airflow/stable/concepts.html?highlight=xcom#concepts-xcom), which you can configure directly via the Airflow UI and are used for inter-task communication.
+> **Note**: Environment Variables are distinct from [Airflow Variables](https://airflow.apache.org/docs/apache-airflow/stable/howto/variable.html?highlight=variables) and [XComs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/xcoms.html), which you can configure directly via the Airflow UI and are used for inter-task communication.
 
 ## Customize Release Names
 

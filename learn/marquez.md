@@ -1,16 +1,16 @@
 ---
 title: "Integrate OpenLineage and Airflow with Marquez"
 sidebar_label: "Marquez"
-description: "Use OpenLineage and Marquez to get lineage data locally from your Airflow DAGs."
+description: "Use OpenLineage and Marquez to get lineage metadata locally from your Airflow DAGs."
 id: marquez
 tags: [Lineage]
 ---
 
 [OpenLineage](https://openlineage.io/) is the open source industry standard framework for data lineage. Integrating OpenLineage with Airflow gives you greater observability over your data pipelines and helps with everything from data governance to tracking the blast radius of a task failure across DAGs to managing PII.
 
-Viewing and interacting with lineage data requires running a lineage front end. [Marquez](https://github.com/MarquezProject/marquez) is the most common open source choice for this purpose, and integrates easily with Airflow.
+Viewing and interacting with lineage metadata requires running a lineage front end. [Marquez](https://github.com/MarquezProject/marquez) is the most common open source choice for this purpose, and integrates easily with Airflow.
 
-In this tutorial, you'll run OpenLineage with Airflow locally using Marquez as a lineage front end. You'll then generate and interpret lineage data using two DAGs that process data in Postgres.
+In this tutorial, you'll run OpenLineage with Airflow locally using Marquez as a lineage front end. You'll then generate and interpret lineage metadata using two DAGs that process data in Postgres.
 
 ## Time to complete
 
@@ -63,7 +63,7 @@ Use the Astro CLI to create and run an Airflow project locally that will integra
     AIRFLOW__LINEAGE__BACKEND=openlineage.lineage_backend.OpenLineageBackend
     ```
 
-    These variables allow Airflow to connect with the OpenLineage API and send your lineage data to Marquez.
+    These variables allow Airflow to connect with the OpenLineage API and send your lineage metadata to Marquez.
     
     By default, Marquez uses port 5000 when you run it using Docker. If you are using a different OpenLineage front end instead of Marquez, or you are running Marquez remotely, you can modify the `OPENLINEAGE_URL` as needed.
     
@@ -84,7 +84,7 @@ Use the Astro CLI to create and run an Airflow project locally that will integra
 
 ## Step 3: Configure your database
 
-To show the lineage data that can result from Airflow DAG runs, you'll use two sample DAGs that process data in Postgres. To run this example in your local environment, complete the following steps:
+To show the lineage metadata that can result from Airflow DAG runs, you'll use two sample DAGs that process data in Postgres. To run this example in your local environment, complete the following steps:
 
 1. Using `psql`, create a local Postgres database in the same container as the Airflow metastore:
 
@@ -138,7 +138,7 @@ The connection you configure will connect to the Postgres database you created i
 
 ## Step 5: Create your DAGs
 
-For this tutorial you will create two DAGs to generate and interpret lineage data. 
+For this tutorial you will create two DAGs to generate and interpret lineage metadata. 
 
 1. In your Astro project `dags` folder, create a new file called `lineage-combine.py`. Paste the following code into the file:
 
@@ -245,9 +245,9 @@ The first DAG creates and populates a table (`animal_adoptions_combined`) with d
 
 You might want to make adjustments to these DAGs if you are working with different source tables, or if your Postgres connection id is not `postgres_default`.
 
-## Step 6: Run your DAGs and view lineage data
+## Step 6: Run your DAGs and view lineage metadata
 
-You can trace the data through the DAGs you created in Step 5 by viewing their lineage data in Marquez.
+You can trace the data through the DAGs you created in Step 5 by viewing their lineage metadata in Marquez.
 
 1. Run the `lineage-combine-postgres` DAG.
 
@@ -271,4 +271,4 @@ The lineage graph shows you how these two DAGs are connected and how data flows 
 
 ## Conclusion
 
-Congratulations! You are now able to run Marquez and Airflow locally and trace data through your DAGs by viewing their lineage. A great next step is to try other Airflow operators that generate lineage data, or, if you are an Astronomer customer, check out [lineage in the Astro UI](https://docs.astronomer.io/astro/data-lineage).
+Congratulations! You are now able to run Marquez and Airflow locally and trace data through your DAGs by viewing their lineage. A great next step is to try other Airflow operators that generate lineage metadata, or, if you are an Astronomer customer, check out [lineage in the Astro UI](https://docs.astronomer.io/astro/data-lineage).

@@ -15,13 +15,20 @@ The Cloud IDE is currently in [Public Preview](feature-previews.md). If you have
 
 The Cloud IDE is a fully managed service that runs in an Astronomer-managed private cluster. All infrastructure is managed by Astronomer. Infrastructure is tightly scoped to organizations, so your code and data is never exposed to other organizations.
 
-Astronomer's role-based access control (RBAC) system ensures that only users with the correct permissions can perform certain actions in the Astro Cloud IDE. See [User permissions](user-permissions.md)
+Astronomer role-based access control (RBAC) ensures that only users with the correct permissions can perform certain actions in the Astro Cloud IDE. See [User permissions](user-permissions.md).
 
 ## Data governance
 
 The Cloud IDE stores Python cell outputs in an encrypted S3 bucket. SQL cell outputs are stored in the corresponding connection database under the schema you configure.
 
-If you would like to provide your own S3 bucket for storing Python cell outputs, contact [Astronomer support](https://cloud.astronomer.io/support).
+## Networking
+
+Astro Cloud IDE requests can come from the following IP addresses:
+
+- `20.237.27.58`
+- `40.76.151.37`
+
+Add these IP addresses to your allowlist to run the Astro Cloud IDE in a private network. These IP addresses are subject to change. 
 
 ## Execution
 

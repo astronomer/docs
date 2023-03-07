@@ -11,9 +11,9 @@ Use this reference to learn what documentation resources are available to help y
 
 The following topics will help you install and configure a new Astronomer Software installation: 
 
-- [Install Astronomer on AWS](install-aws.md)
-- [Install Astronomer on GCP](install-gcp.md)
-- [Install Astronomer on Azure](install-azure.md)
+- [Install Astronomer on AWS](install-aws-standard.md)
+- [Install Astronomer on GCP](install-gcp-standard.md)
+- [Install Astronomer on Azure](install-azure-standard.md)
 
 The following topics are recommended when your organization needs optional configurations during the Astronomer Software installation: 
 

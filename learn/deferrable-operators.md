@@ -5,6 +5,13 @@ description: "Implement deferrable operators to save cost and resources with Air
 id: deferrable-operators
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import CodeBlock from '@theme/CodeBlock';
+import sync_dag from '!!raw-loader!../code-samples/dags/deferrable-operators/sync_dag.py';
+import async_dag from '!!raw-loader!../code-samples/dags/deferrable-operators/async_dag.py';
+
 With Airflow 2.2 and later, you can use deferrable operators to run tasks in your Airflow environment. These operators leverage the Python [asyncio](https://docs.python.org/3/library/asyncio.html) library to efficiently run tasks waiting for an external resource to finish. This frees up your workers and allows you to utilize resources more effectively. In this guide, you'll review deferrable operator concepts and learn which operators are deferrable.
 
 ## Assumed knowledge
@@ -37,7 +44,7 @@ With deferrable operators, worker slots are released when a task is polling for 
 
 Deferrable operators should be used whenever you have tasks that occupy a worker slot while polling for a condition in an external system. For example, using deferrable operators for sensor tasks can provide efficiency gains and reduce operational costs. Smart Sensors were deprecated in Airflow 2.2.4, and were removed in Airflow 2.4.0. Use deferrable operators instead of Smart Sensors because they provide greater functionality and they are supported by Airflow.
 
-To use a deferrable version of an existing operator in your DAG, you only need to replace the import statement for the existing operator. For example, Airflow's `TimeSensorAsync` is a replacement of the non-deferrable `TimeSensor` ([source](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)). To use `TimeSensorAsync`, remove your existing `import` and replace it with the following:
+To use a deferrable version of a core Airflow operator in your DAG, you only need to replace the import statement for the existing operator. For example, Airflow's `TimeSensorAsync` is a replacement of the non-deferrable `TimeSensor` ([source](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/sensors/time_sensor/index.html?highlight=timesensor#module-contents)). To use `TimeSensorAsync`, remove your existing `import` and replace it with the following:
 
 ```python
 # Remove this import:
@@ -45,6 +52,27 @@ To use a deferrable version of an existing operator in your DAG, you only need t
 # Replace with:
 from airflow.sensors.time_sensor import TimeSensorAsync as TimeSensor
 ```
+
+If you are using a deferrable operator that is part of the [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package, you will also need to ensure that package is installed in your Airflow environment. For example, to use the Snowflake deferrable operator:
+
+1. Add the following to your `requirements.txt` file:
+
+   ```python
+   astronomer-providers[snowflake]
+   ```
+
+2. Update the import statement in your DAG:
+
+   ```python
+   # Remove this import:
+   # from airflow.providers.snowflake.operators.snowflake import SnowflakeOperator
+   # Replace with:
+   from astronomer.providers.snowflake.operators.snowflake import (
+      SnowflakeOperatorAsync as SnowflakeOperator,
+   )
+   ```
+
+Note that importing the asynchronous operator using the alias of the analogous traditional operator (e.g. `import SnowflakeOperatorAsync as SnowflakeOperator`) is simply to make updating existing DAGs easier. This is not required, and may not be preferrable when authoring a new DAG.
 
 There are numerous benefits to using deferrable operators including:
 
@@ -76,57 +104,27 @@ For a full list of deferrable operators and sensors available in the `astronomer
 
 ## Example workflow
 
-In this sample DAG, a sensor is scheduled to run every minute and each task can take up to 20 minutes. When the default settings with 1 worker are used, there are 16 tasks running after 20 minutes, and each task occupies a worker slot:
+The following example DAG is scheduled to run every minute between its `start_date` and its `end_date`. Every DAG run contains one sensor task that will potentially take up to 20 minutes to complete.
 
-![Classic Tree View](/img/guides/classic_tree_view.png)
+<CodeBlock language="python">{sync_dag}</CodeBlock>
 
-Because worker slots are held during task execution time, you need a minimum of 20 worker slots to ensure that future runs are not delayed. To increase concurrency, you need to add additional resources such as a worker pod to your Airflow infrastructure. 
+Using `DateTimeSensor`, one worker slot is taken up by every sensor that runs. By using the deferrable version of this sensor, `DateTimeSensorAsync`, you can achieve full concurrency while freeing up your workers to complete additional tasks across your Airflow environment. 
 
-```python
-from datetime import datetime
-from airflow import DAG
-from airflow.sensors.date_time import DateTimeSensor
- 
-with DAG(
-   "sync_dag",
-   start_date=datetime(2021, 12, 22, 20, 0),
-   end_date=datetime(2021, 12, 22, 20, 19),
-   schedule="* * * * *",
-   catchup=True,
-   max_active_runs=32,
-   max_active_tasks=32
-) as dag:
- 
-   sync_sensor = DateTimeSensor(
-       task_id="sync_task",
-       target_time="""{{ macros.datetime.utcnow() + macros.timedelta(minutes=20) }}""",
-   )
-```
+In the following screenshot, running the DAG produces 16 running task instances, each containing one active `DateTimeSensor` taking up one worker slot.
 
-By leveraging a deferrable operator for this sensor, you can achieve full concurrency while allowing your worker to complete additional work across your Airflow environment. With the following updated sample DAG, all 20 tasks enter a deferred state. This indicates that the triggers are registered to run in the triggerer process.
+![Standard sensor Grid View](/img/guides/standard_sensor_slot_taking.png)
 
-![Deferrable Tree View](/img/guides/deferrable_tree_view.png)
+Because Airflow imposes default limits on the number of active runs of the same DAG or number of active tasks in a DAG across all runs, you'll have to scale up Airflow to concurrently run any other DAGs and tasks as described in the [Scaling Airflow to optimize performance](airflow-scaling-workers.md) guide.
 
-```python
-from datetime import datetime
-from airflow import DAG
-from airflow.sensors.date_time import DateTimeSensorAsync
- 
-with DAG(
-   "async_dag",
-   start_date=datetime(2021, 12, 22, 20, 0),
-   end_date=datetime(2021, 12, 22, 20, 19),
-   schedule="* * * * *",
-   catchup=True,
-   max_active_runs=32,
-   max_active_tasks=32
-) as dag:
- 
-   async_sensor = DateTimeSensorAsync(
-       task_id="async_task",
-       target_time="""{{ macros.datetime.utcnow() + macros.timedelta(minutes=20) }}""",
-   )
-```
+
+Switching out the `DateTimeSensor` for `DateTimeSensorAsync` will create 16 running DAG instances, but the tasks for these DAGs are in a deferred state which does not take up a worker slot. The only difference in the DAG code is using the deferrable operator `DateTimeSensorAsync` over `DateTimeSensor`:
+
+<CodeBlock language="python">{async_dag}</CodeBlock>
+
+In the following screenshot, all tasks are shown in a deferred (violet) state. Tasks in other DAGs can use the available worker slots, making the deferrable operator more cost and time-efficient.
+
+![Deferrable sensor Grid View](/img/guides/deferrable_grid_view.png)
+
 
 ## Run deferrable tasks
 
@@ -140,8 +138,8 @@ As tasks are raised into a deferred state, triggers are registered in the trigge
 
 ### High availability
 
-Triggers are designed to be highly available. You can implement this by starting multiple triggerer processes. Similar to the [HA scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html#running-more-than-one-scheduler) introduced in Airflow 2.0, Airflow ensures that they co-exist with correct locking and high availability. See [High Availability](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html#high-availability) for more information on this topic.
+Triggers are designed to be highly available. You can implement this by starting multiple triggerer processes. Similar to the [HA scheduler](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/scheduler.html#running-more-than-one-scheduler) introduced in Airflow 2.0, Airflow ensures that they co-exist with correct locking and high availability. See [High Availability](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#high-availability) for more information on this topic.
 
 ### Create a deferrable operator
 
-If you have an operator that would benefit from being asynchronous but does not yet exist in OSS Airflow or Astronomer Providers, you can create your own. See [Writing Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html#writing-deferrable-operators).
+If you have an operator that would benefit from being asynchronous but does not yet exist in OSS Airflow or Astronomer Providers, you can create your own. See [Writing Deferrable Operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html#writing-deferrable-operators).

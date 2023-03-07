@@ -1,10 +1,9 @@
-import os
-from datetime import datetime
+from pendulum import datetime
 import pandas as pd
 from airflow.decorators import dag
 from astro.files import File
 from astro import sql as aql
-from astro.sql.table import Metadata, Table
+from astro.sql.table import Table
 
 SNOWFLAKE_CONN_ID = "snowflake_conn"
 AWS_CONN_ID = "aws_conn"
@@ -77,6 +76,8 @@ def example_s3_to_snowflake_etl():
         columns=["sell", "list", "variable", "value"],
     )
     record_results.set_upstream(create_results_table)
+    # Delete temporary and unnamed tables
+    aql.cleanup()
 
 
 example_s3_to_snowflake_etl_dag = example_s3_to_snowflake_etl()

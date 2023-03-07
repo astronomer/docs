@@ -9,6 +9,15 @@ id: dag-best-practices
   <meta name="og:description" content="Keep up to date with the best practices for developing efficient, secure, and scalable DAGs using Airflow. Learn about DAG design and data orchestration." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import CodeBlock from '@theme/CodeBlock';
+import bad_practices_dag_1 from '!!raw-loader!../code-samples/dags/dag-best-practices/bad_practices_dag_1.py';
+import bad_practices_dag_2 from '!!raw-loader!../code-samples/dags/dag-best-practices/bad_practices_dag_2.py';
+import good_practices_dag_1 from '!!raw-loader!../code-samples/dags/dag-best-practices/good_practices_dag_1.py';
+import good_practices_dag_2 from '!!raw-loader!../code-samples/dags/dag-best-practices/good_practices_dag_2.py';
+
 Because Airflow is 100% code, knowing the basics of Python is all it takes to get started writing DAGs. However, writing DAGs that are efficient, secure, and scalable requires some Airflow-specific finesse. In this guide, you'll learn how you can develop DAGs that make the most of what Airflow has to offer.
 
 In general, best practices fall into one of two categories: 
@@ -88,134 +97,60 @@ In the context of Airflow, top-level code refers to any code that isn't part of 
 
 Airflow executes all code in the `dags_folder` on every `min_file_process_interval`, which defaults to 30 seconds. You can read more about this parameter in the [Airflow docs](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#min-file-process-interval)). Because of this, top-level code that makes requests to external systems, like an API or a database, or makes function calls outside of your tasks can cause performance issues since these requests and connections are being made every 30 seconds rather than only when the DAG is scheduled to run. 
 
-The following DAG example dynamically generates `PostgresOperator` tasks based on records pulled from a database. For example, the `hook` and `result` variables which are written outside of an operator instantiation:
+The following DAG example dynamically generates tasks using the PostgresOperator based on records pulled from a different database. 
 
-```python
-from airflow import DAG
-from airflow.providers.postgres.operators.postgres import PostgresOperator
-from airflow.providers.postgres.hooks.postgres import PostgresHook
-from datetime import datetime, timedelta
+In the **Bad practice** example the connection to the other database is made outside of an operator instantiation as top-level code. When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table. This query is run on every Scheduler heartbeat, which can cause performance issues. 
 
-hook = PostgresHook('database_conn')
-result = hook.get_records("SELECT * FROM grocery_list;")
+The version shown under the **Good practice** DAG wraps the connection to the database into its own task, the `get_list_of_results` task. Now the connection is only made at when the DAG actually runs, preventing performance issues.
 
-with DAG('bad_practices_dag_1',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=3,
-         schedule='@daily',
-         default_args=default_args,
-         catchup=False
-         ) as dag:
+<Tabs
+    defaultValue="bad-practice"
+    groupId="avoid-top-level-code-in-your-dag-file"
+    values={[
+        {label: 'Bad practice', value: 'bad-practice'},
+        {label: 'Good practice', value: 'good-practice'},
+    ]}>
 
-    for grocery_item in result:
-        query = PostgresOperator(
-            task_id='query_{0}'.format(result),
-            postgres_conn_id='postgres_default',
-            sql="INSERT INTO purchase_order VALUES (value1, value2, value3);"
-        )
-```
+<TabItem value="bad-practice">
 
-When the scheduler parses this DAG, it will use the `hook` and `result` variables to query the `grocery_list` table to construct the operators in the DAG. This query is run on every Scheduler heartbeat, which can cause performance issues. A better implementation leverages [dynamic task mapping](dynamic-tasks.md) to have a task that gets the required information from the `grocery_list` table and dynamically maps downstream tasks based on the result. Dynamic task mapping is available in Airflow 2.3 and later.
+<CodeBlock language="python">{bad_practices_dag_1}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="good-practice">
+
+<CodeBlock language="python">{good_practices_dag_1}</CodeBlock>
+
+</TabItem>
+</Tabs>
+
 
 ### Treat your DAG file like a config file
 
 Including code that isn't part of your DAG or operator instantiations in your DAG file makes the DAG harder to read, maintain, and update. When possible, leave all of the heavy lifting to the hooks and operators that you instantiate within the file. If your DAGs need to access additional code such as a SQL script or a Python function, consider keeping that code in a separate file that can be read into a DAG run.
 
-The following example DAG demonstrates what you shouldn't do. A SQL query is provided directly in the `PostgresOperator` `sql` param:
+The following example DAGs demonstrate the difference between the bad and good practices of including code in your DAGs. In the **Bad practice** DAG, a SQL query is provided directly to the PostgresOperator, which unnecessarily exposes code in your DAG. In the **Good practice** DAG, the DAG-level configuration includes `template_searchpath` and the PostgresOperator specifies a `covid_state_query.sql` file that contains the query to execute.
 
-```python
-from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-from airflow.providers.postgres.operators.postgres import PostgresOperator
-from datetime import datetime, timedelta
+<Tabs
+    defaultValue="bad-practice"
+    groupId="treat-your-dag-file-like-a-config-file"
+    values={[
+        {label: 'Bad practice', value: 'bad-practice'},
+        {label: 'Good practice', value: 'good-practice'},
+    ]}>
 
-#Default settings applied to all tasks
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1)
-}
+<TabItem value="bad-practice">
 
-#Instantiate DAG
-with DAG('bad_practices_dag_2',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=3,
-         schedule='@daily',
-         default_args=default_args,
-         catchup=False
-         ) as dag:
+<CodeBlock language="python">{bad_practices_dag_2}</CodeBlock>
 
-    t0 = EmptyOperator(task_id='start')  
+</TabItem>
 
-    #Bad example with SQL query directly in the DAG file
-    query_1 = PostgresOperator(
-        task_id='covid_query_wa',
-        postgres_conn_id='postgres_default',
-        sql='''WITH yesterday_covid_data AS (
-                SELECT *
-                FROM covid_state_data
-                WHERE date = {{ params.today }}
-                AND state = 'WA'
-            ),
-            today_covid_data AS (
-                SELECT *
-                FROM covid_state_data
-                WHERE date = {{ params.yesterday }}
-                AND state = 'WA'
-            ),
-            two_day_rolling_avg AS (
-                SELECT AVG(a.state, b.state) AS two_day_avg
-                FROM yesterday_covid_data AS a
-                JOIN yesterday_covid_data AS b 
-                ON a.state = b.state
-            )
-            SELECT a.state, b.state, c.two_day_avg
-            FROM yesterday_covid_data AS a
-            JOIN today_covid_data AS b
-            ON a.state=b.state
-            JOIN two_day_rolling_avg AS c
-            ON a.state=b.two_day_avg;''',
-            params={'today': today, 'yesterday':yesterday}
-    )
-```
+<TabItem value="good-practice">
 
-Keeping the query in the DAG file like this makes the DAG harder to read and maintain. In the following DAG, the DAG-level configuration includes `template_searchpath` and the `PostgresOperator` specifies a `covid_state_query.sql` file that contains the same query as in the previous example:
+<CodeBlock language="python">{good_practices_dag_2}</CodeBlock>
 
-```python
-from airflow import DAG
-from airflow.providers.postgres.operators.postgres import PostgresOperator
-from datetime import datetime, timedelta
-
-#Default settings applied to all tasks
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=1)
-}
-
-#Instantiate DAG
-with DAG('good_practices_dag_1',
-         start_date=datetime(2021, 1, 1),
-         max_active_runs=3,
-         schedule='@daily',
-         default_args=default_args,
-         catchup=False,
-         template_searchpath='/usr/local/airflow/include' #include path to look for external files
-         ) as dag:
-
-        query = PostgresOperator(
-            task_id='covid_query_{0}'.format(state),
-            postgres_conn_id='postgres_default',
-            sql='covid_state_query.sql', #reference query kept in separate file
-            params={'state': "'" + state + "'"}
-        )
-```
+</TabItem>
+</Tabs>
 
 ### Use a consistent method for task dependencies
 
@@ -234,7 +169,6 @@ Try to be consistent with something like this:
 ```python
 task_1 >> task_2 >> [task_3, task_4]
 ```
-
 
 ## Leverage Airflow features
 
@@ -256,7 +190,7 @@ Astronomer recommends that you consider the size of your data now and in the fut
 
 - Ensure your Airflow infrastructure has the necessary resources.
 - Use the Kubernetes Executor to isolate task processing and have more control over resources at the task level.
-- Use a [custom XCom backend](custom-xcom-backends.md) if you need to pass any data between the tasks so you don't overload your metadata database.
+- Use a [custom XCom backend](custom-xcom-backends-tutorial.md) if you need to pass any data between the tasks so you don't overload your metadata database.
 
 ### Use intermediary data storage
 

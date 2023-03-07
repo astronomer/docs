@@ -48,7 +48,9 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
 
 5. Click **Create Deployment**.
 
-    The initial status of all new Deployments is `UNHEALTHY`. This indicates that the webserver and scheduler for the Deployment are being created in your Astro cluster. In a few minutes, the status changes to `HEALTHY`.
+     A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
+    
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
 
 ## Next steps
 

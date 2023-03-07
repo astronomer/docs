@@ -127,16 +127,17 @@ ENDPOINT_URL = "http://localhost:8080/"
 
 # in this example env variables were used to store login information
 # you will need to provide your own credentials
-user_name = os.environ['USERNAME_AIRFLOW_INSTANCE']
-password = os.environ['PASSWORD_AIRFLOW_INSTANCE']
+user_name = os.environ["USERNAME_AIRFLOW_INSTANCE"]
+password = os.environ["PASSWORD_AIRFLOW_INSTANCE"]
 
 # query the API for successful task instances from all dags and all dag runs (~)
 req = requests.get(
-  f"{ENDPOINT_URL}/api/v1/dags/~/dagRuns/~/taskInstances?state=success",  
-  auth=(user_name, password))
+    f"{ENDPOINT_URL}/api/v1/dags/~/dagRuns/~/taskInstances?state=success",
+    auth=(user_name, password),
+)
 
 # from the API response print the value for "total entries"
-print(req.json()['total_entries'])
+print(req.json()["total_entries"])
 ```
 
 It is also possible to navigate to **Browse** -> **Task Instances** in the Airflow UI and filter the task instances for all with a state of `success`. The `Record Count` will be on the right side of your screen.
@@ -159,18 +160,20 @@ ENDPOINT_URL = "http://localhost:8080/"
 
 # in this example env variables were used to store login information
 # you will need to provide your own credentials
-user_name = os.environ['USERNAME_AIRFLOW_INSTANCE']
-password = os.environ['PASSWORD_AIRFLOW_INSTANCE']
+user_name = os.environ["USERNAME_AIRFLOW_INSTANCE"]
+password = os.environ["PASSWORD_AIRFLOW_INSTANCE"]
 
 # data to update, for unpausing, simply set this to False
-update= {"is_paused": True}
+update = {"is_paused": True}
 # specify the dag to pause/unpause
-dag_id = example_dag_basic
+dag_id = "example_dag_basic"
 
 # query the API to patch all tasks as paused
 req = requests.patch(
-  f"{ENDPOINT_URL}/api/v1/dags/{dag_id}?update_mask=is_paused", json=update,
-  auth=(user_name, password))
+    f"{ENDPOINT_URL}/api/v1/dags/{dag_id}?update_mask=is_paused",
+    json=update,
+    auth=(user_name, password),
+)
 
 # print the API response
 print(req.text)
@@ -192,19 +195,20 @@ ENDPOINT_URL = "http://localhost:8080/"
 
 # in this example env variables were used to store login information
 # you will need to provide your own credentials
-user_name = os.environ['USERNAME_AIRFLOW_INSTANCE']
-password = os.environ['PASSWORD_AIRFLOW_INSTANCE']
+user_name = os.environ["USERNAME_AIRFLOW_INSTANCE"]
+password = os.environ["PASSWORD_AIRFLOW_INSTANCE"]
 
 # specify which dag to delete
-dag_id = 'dag_to_delete'
+dag_id = "dag_to_delete"
 
 # send the deletion request
 req = requests.delete(
-  f"{ENDPOINT_URL}/api/v1/dags/{dag_id}",
-  auth=(user_name, password))
+    f"{ENDPOINT_URL}/api/v1/dags/{dag_id}", auth=(user_name, password)
+)
 
 # print the API response
 print(req.text)
+
 ```
 
 ### Retrieve all DAG dependencies
@@ -221,15 +225,16 @@ import os
 
 # retrieving your SQL Alchemy connection
 # if you are using Astro CLI this env variable will be set up automatically
-sql_alchemy_conn = os.environ['AIRFLOW__CORE__SQL_ALCHEMY_CONN']
+sql_alchemy_conn = os.environ["AIRFLOW__CORE__SQL_ALCHEMY_CONN"]
 
-conn_url = f'{sql_alchemy_conn}/postgres'
+conn_url = f"{sql_alchemy_conn}/postgres"
 
 engine = create_engine(conn_url)
 
 with Session(engine) as session:
     result = session.query(SerializedDagModel).first()
     print(result.get_dag_dependencies())
+
 ```
 
 ### Retrieve alembic version
@@ -245,9 +250,9 @@ import os
 
 # retrieving your SQL Alchemy connection
 # if you are using Astro CLI this env variable will be set up automatically
-sql_alchemy_conn = os.environ['AIRFLOW__CORE__SQL_ALCHEMY_CONN']
+sql_alchemy_conn = os.environ["AIRFLOW__CORE__SQL_ALCHEMY_CONN"]
 
-conn_url = f'{sql_alchemy_conn}/postgres'
+conn_url = f"{sql_alchemy_conn}/postgres"
 
 engine = create_engine(conn_url)
 
@@ -258,4 +263,5 @@ stmt = """SELECT version_num
 with Session(engine) as session:
     result = session.execute(stmt)
     print(result.all()[0][0])
+
 ```

@@ -19,9 +19,143 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 7.2.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.3.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.10.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
+
+## March 1, 2023
+
+### Astro no longer requires administrator access on AWS
+
+Astro no longer requires administrator permissions for its dedicated AWS account. Instead, Astro now assumes a cross-account IAM role with the minimum necessary permissions for running and managing clusters. See [Install Astro on AWS](install-aws.md) for more information.
+
+### IdP-initiated logins through the Okta dashboard
+
+If your Organization uses Okta as your Astro identity provider, you can now log in to Astro directly from your [Okta Apps dashboard](https://help.okta.com/eu/en-us/Content/Topics/end-user/dashboard-overview.htm). If you've been authenticated by Okta, you no longer need to be authenticated by Astro when you access it through your dashboard.
+
+### Additional improvements
+
+- Ingress to the Kubernetes API on Google Cloud Platform (GCP) and Azure clusters is now limited to Astro control plane IPs. This change will be implemented on all clusters in the coming weeks.
+
+### Bug fixes
+
+- To protect the functionality of Astro monitoring services, you can no longer override the values of the following environment variables:
+  
+    - `AIRFLOW__METRICS__STATSD_ON` 
+    - `AIRFLOW__METRICS__STATSD_HOST`
+    - `AIRFLOW__METRICS__STATSD_PORT`
+    - `AIRFLOW__METRICS__STATSD_ALLOW_LIST` 
+    - `AIRFLOW__METRICS__STATSD_STATSD_CUSTOM_CLIENT_PATH`
+    - `AIRFLOW__METRICS__STATSD_PREFIX`
+
+    You can still set new values for these variables, but the values will be automatically overwritten in the Astro data plane. See [Platform variables](platform-variables.md).
+  
+- Fixed an issue where a user could provision multiple accounts when their login email address included differently cased characters.
+
+## February 21, 2023
+
+### New identity-first authentication model
+
+Astro has migrated to an identity-first authentication model. Users now authenticate to the Astro platform instead of individual Organizations, and Organizations can set permissions for how users can modify and access resources. This model prioritizes identity verification and enforces authentication policies for user email domains.
+
+For all users logging in to Astro, this migration has the following effects:
+
+- Instead of being redirected to separate login pages for each Organization, all Astro users log in through a universal login page. 
+- Users belonging to multiple Organizations no longer have to log in again when switching Organizations.
+- Users no longer need to enter their email on a separate page before they log in to the Cloud UI.
+- If your Organization enforces single sign-on (SSO), users can now authenticate to Astro with a username and password when your email domain doesn't enforce SSO.
+
+For Organization Owners, this migration has the following additional effects:
+
+- You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.
+- Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
+
+For more information about how these changes can affect the Astro log in experience, see the [Login FAQ](log-in-to-astro.md#frequently-asked-questions). To configure authentication behavior, see [Manage an Organization on Astro](manage-organization.md).
+
+### New Hosted regions available
+
+You can now create clusters in the following regions on an Astro - Hosted installation.
+
+- AWS
+  
+    - `ap-northeast-1`
+    - `ap-southeast-2`
+    - `eu-central-1`
+    - `eu-west-1`
+    - `us-east-1`
+    - `us-west-2`
+
+- Google Cloud
+
+    - `asia-northeast1`
+    - `australia-southeast1`
+    - `europe-west1`
+    - `europe-west2`
+    - `us-central1`
+    - `us-east4`
+
+- Microsoft Azure
+
+    - `australiaeast`
+    - `japaneast`
+    - `northeurope`
+    - `westeurope`
+    - `eastus2`
+    - `westus2`
+
+### Additional improvements 
+
+The default CIDR ranges for new GCP clusters have been reduced. The following are the new CIDR ranges:
+
+- **Subnet CIDR**: `172.20.0.0/22`
+- **Pod CIDR**: `172.21.0.0/19`
+- **Service Address CIDR**: `172.22.0.0/22`
+- **Service VPC Peering**: `172.23.0.0/20`
+
+### Bug fixes 
+
+In the Cloud UI, when using **Compare** on the **Lineage Graph** page, you can now compare shorter run lengths.
+
+## February 14, 2023
+
+### Authorize Workspaces to clusters
+
+:::info
+
+This is a [Public Preview](feature-previews.md) feature.
+
+:::
+
+You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
+
+To authorize Workspaces to clusters, see [Authorize Workspaces to a Cluster](modify-cluster.md#authorize-workspaces-to-a-cluster).
+
+### New Deployment health statuses and information in the Cloud UI
+
+The Cloud UI now includes three additional [Deployment health statuses](deployment-metrics.md#deployment-health) that you might see when creating or pushing code to a Deployment. 
+
+- The **Creating** status indicates that Astro is still provisioning the resources for the Deployment.
+- The **Deploying** status indicates that a code deploy is in progress. Hover over the status indicator to view specific information about the deploy, including whether it was an image deploy or a DAG-only deploy.
+- The **Unknown** status indicates that Deployment status can't be determined.
+
+Additionally, the Deployment information page in the Cloud UI now includes fields for **Docker Image** and **DAG Bundle Version** that show unique timestamps and tags based on your latest code deploy. Use this information as the source of truth for which version of your code is currently running on the Deployment. See [Deploy code](deploy-code.md#step-3-validate-your-changes).
+
+### View OpenLineage facets for lineage job runs
+
+[OpenLineage facets](https://openlineage.io/docs/spec/facets/) are JSON objects that provide additional context about a given job run. By default, a job run includes facets that show what kind of job was completed, whether the job run was successful, and who owns the job. 
+
+You can now view all available facets for a job run, including [custom facets](https://openlineage.io/docs/spec/facets/custom-facets), by opening the job run's **Lineage Graph** and then selecting the **Info** tab. You can check the status of your facets, including whether they are correctly formatted, so that you can resolve potential issues in your data pipelines. See [View metrics for a specific run or dataset](data-lineage.md#view-metrics-for-a-specific-run-or-dataset).
+
+![Example OpenLineage facet page in the Cloud UI](/img/release-notes/view-facets.png)
+
+### Additional improvements
+
+- You can now create AWS clusters in `ap-northeast-1` and `ap-southeast-2` on an Astro - Hosted installation.
+- You can now create GCP clusters in `australia-southeast1` on an Astro - Hosted installation.
+
+### Security fixes
+
+- Fixed [CVE-2023-0286](https://avd.aquasec.com/nvd/2022/cve-2023-0286/).
 
 ## February 7, 2023
 
@@ -57,8 +191,8 @@ See [Introducing Astro’s New Workspace Homepage](https://www.astronomer.io/blo
 
 ### Additional improvements
 
-- Data plane cluster access is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
-- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](view-clusters.md).
+- Ingress to the Airflow UI and API on Astro clusters is now limited to control plane IPs. This change will be implemented on all clusters in the coming weeks.
+- You can now request custom tags for your AWS clusters by submitting a support request to [Astronomer support](https://cloud.astronomer.io/support). You can view your cluster tags in the Cloud UI by selecting **Clusters**, selecting a cluster, and then clicking the **Details** tab. See [View clusters](modify-cluster.md#view-clusters).
 - You can now create new clusters in France Central for Bring Your Own Cloud installations of Astro on Azure.
 - Improved the speed of DAGs appearing in the Airflow after completing a DAG-only deploy.
 
@@ -120,7 +254,7 @@ The [Cloud IDE](cloud-ide/overview.md) includes several new features which impro
 - The **Configure GitHub** menu in the Cloud UI now includes a **Clone Repo** settings menu. Enabling this option makes other files in your GitHub repository, such as helper functions in the `include` folder of your project, accessible when you run DAGs in the Cloud IDE.
 - You can now explicitly mark upstream dependencies for a task cell from the cell's configuration menu.
 
-For more information about configuring GitHub and deploying code with the Cloud IDE, see [Deploy a project from the Cloud IDE to Astro](deploy-project.md).
+For more information about configuring GitHub and deploying code with the Cloud IDE, see [Deploy a project from the Cloud IDE to Astro](cloud-ide/deploy-project.md).
 
 ### Support for n2 worker types on GCP
 
@@ -161,7 +295,7 @@ For more information about these worker types, see [N2 machine series](https://c
 
 ### Bug fixes
 
-- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks) and less volatility across workers. AZ rebalancing is enabled for other system components on Astro.
+- Availability zone (AZ) rebalancing has been disabled for worker node pools on AWS clusters. This change should result in fewer [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks) and less volatility across workers. AZ rebalancing is enabled for other system components on Astro.
 - The **Updated at** field for a transferred Deployment now displays the correct time.
 - `astro deploy --dags` now handles deferrable tasks correctly.
 
@@ -504,7 +638,7 @@ For more information about the installation process and supported configurations
 
 This release introduces two changes that ensure a higher level of reliability for Deployments on Astro:
 
-- [PgBouncer](https://www.pgbouncer.org/), a microservice that increases resilience by pooling database connections, is now considered highly available on Astro. Every Deployment must now have 2 PgBouncer Pods instead of 1, each assigned to a different node within the cluster. This change protects against pod-level connection issues resulting in [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/concepts/tasks.html#zombie-undead-tasks), which was previously seen during cluster downscaling events. PgBouncer is fully managed by Astronomer and is not configurable.
+- [PgBouncer](https://www.pgbouncer.org/), a microservice that increases resilience by pooling database connections, is now considered highly available on Astro. Every Deployment must now have 2 PgBouncer Pods instead of 1, each assigned to a different node within the cluster. This change protects against pod-level connection issues resulting in [zombie tasks](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#zombie-undead-tasks), which was previously seen during cluster downscaling events. PgBouncer is fully managed by Astronomer and is not configurable.
 
 - The Airflow scheduler is now configured with an [anti-affinity policy](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity) to limit the possibility of all schedulers for a single Deployment being impacted by an incident within a single node on an Astro cluster. For users who set **Scheduler Count** in the Cloud UI to 2, this means that those 2 scheduler Pods cannot be assigned to the same node and instead require a minimum of 2 nodes total. To avoid significant increases in cost, 3 or 4 schedulers can share the same 2 nodes and will not necessarily result in a higher node count minimum.
 
@@ -593,7 +727,7 @@ Support requests can now be created and submitted in the Cloud UI. You no longer
 
 To better scale concurrent task runs, Astro now dynamically calculates [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is an Airflow configuration that determines the maximum number of tasks that can run concurrently within a single Deployment.
 
-A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-deployment-resources.md#worker-autoscaling-logic) for more information.
+Deployment `parallelism` is now equal to the maximum allowable number of workers multiplied by [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency). This change ensures that your task runs aren't limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-worker-queues.md#worker-autoscaling-logic) for more information.
 
 Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
 
@@ -659,7 +793,7 @@ To learn more about data lineage and how you can configure it on Astro, see:
 - [Integrate Airflow and OpenLineage](https://docs.astronomer.io/learn/airflow-openlineage)
 - [Enable data lineage for External Services](set-up-data-lineage.md)
 - [Data lineage on Astro](data-lineage.md)
-- [Data lineage Support and Compatibility](data-lineage-support-and-compatibility.md)
+- [OpenLineage Compatibility Matrix](https://openlineage.io/docs/integrations/about#capability-matrix)
 
 :::info
 

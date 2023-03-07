@@ -13,21 +13,17 @@ While the tables below reference the minimum compatible versions, we typically r
 
 <!--- Version-specific -->
 
-| Astronomer Platform | Kubernetes                           | Postgres | Python                                    | Astronomer Certified / Astro Runtime         | Helm |
-| ------------------- | ------------------------------------ | -------- | ----------------------------------------- | -------------------------------------------- | ---- |
-| v0.28               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified versions             | 3.6  |
-| v0.29               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
-| v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
-| v0.31               | 1.21, 1.22, 1.23, 1.24 | 9.6+     | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
-
-
-Astronomer recommends using the latest available version of the Astro CLI for all Software versions in most cases. To upgrade from an earlier version of the CLI to the latest, see [Upgrade to Astro CLI version 1.0+](upgrade-astro-cli.md).
+| Astronomer Platform | Kubernetes                                         | Postgres | Python                                    | Astronomer Certified / Astro Runtime         | Helm |
+| ------------------- | -------------------------------------------------- | -------- | ----------------------------------------- | -------------------------------------------- | ---- |
+| v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24, 1.25¹, 1.26¹ | 11.19+   | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| v0.31               | 1.21, 1.22, 1.23, 1.24 , 1.25¹, 1.26¹              | 11.19+   | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
 
 :::info
 
-¹ Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
+¹: Support for some Kubernetes versions is limited to specific Astronomer Software patch versions.
 
-- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software versions 0.28.7, 0.29.5, and 0.30.4.
+- Support for Kubernetes 1.19 and 1.20 ends with Astronomer Software 0.30.4.
+- Support for Kubernetes 1.25 and 1.26 starts in Astronomer Software versions 0.30.6 and 0.31.2.
 
 :::
 

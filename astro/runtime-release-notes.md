@@ -20,9 +20,30 @@ import {siteVariables} from '@site/src/versions';
     </a>
 </p>
 
-Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. Note that some changes to Runtime might be omitted based on their availability in Astro.
+Astro Runtime is a Docker image built and published by Astronomer that extends the Apache Airflow project to provide a differentiated data orchestration experience. This document provides a summary of changes made to each available version of Astro Runtime. 
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
+
+## Astro Runtime 7.3.0
+
+- Release date: February 14, 2023
+- Airflow version: 2.5.1
+
+### Early access Airflow bug fixes
+
+- Use time not tries for queued & running re-checks ([28586](https://github.com/apache/airflow/pull/28586))
+
+### Additional improvements 
+
+- Installed the following OS-level packages to support the Astro Python SDK MSSQL integration:
+
+    - `postgresql-client`
+    - `freetds-dev`
+    - `libssl-dev`
+    - `libkrb5-dev`
+    
+- Upgraded `astro-sdk-python` to 1.5.0, which includes support for Microsoft SQL and DuckDB. See the [Astro Python SDK changelog](https://github.com/astronomer/astro-sdk/blob/main/python-sdk/docs/CHANGELOG.md#150) for a complete list of changes.
+- Upgraded `openlineage-airflow` to 0.20.4, which includes a new extractor for the GCSToGCSOperator. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for a complete list of changes. 
 
 ## Astro Runtime 7.2.0
 
@@ -92,6 +113,19 @@ To learn more, see [What's New in Apache Airflow 2.5](https://www.astronomer.io/
 - In the Airflow UI for Astro Deployments, the **Audit Logs** page now shows the Astro user who performed a given action in the **Owner** column.
 - Upgraded `astronomer-providers` to 1.11.2, which includes a collection of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1112-2022-11-19). 
 - Upgraded `openlineage-airflow` to 0.17.0, which includes improvements to the OpenLineage spark integration and additional facets for the OpenLineage Python client. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for more information.  
+
+## Astro Runtime 6.3.0
+
+- Release date: February 14, 2023
+- Airflow version: 2.4.3
+
+### Early access Airflow bug fixes
+
+- Use time not tries for queued & running re-checks ([28586](https://github.com/apache/airflow/pull/28586))
+
+### Additional improvements 
+
+- Upgraded `openlineage-airflow` to 0.20.4, which includes a new extractor for the GCSToGCSOperator. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for a complete list of changes. 
 
 ## Astro Runtime 6.2.1
 
@@ -251,6 +285,19 @@ For a complete list of commits, see the [Apache Airflow 2.4.0 release notes](htt
 - Upgraded `astronomer-providers` to 1.9.0, which includes two new deferrable versions of the operators from the dbt provider package. See the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.9.0/CHANGELOG.rst).
 - Upgraded `openlineage-airflow` to version `0.14.1`. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 
+## Astro Runtime 5.3.0
+
+- Release date: February 14, 2023
+- Airflow version: 2.3.4
+
+### Early access Airflow bug fixes
+
+- Use time not tries for queued & running re-checks ([28586](https://github.com/apache/airflow/pull/28586))
+
+### Additional improvements 
+
+- Upgraded `openlineage-airflow` to 0.20.4, which includes a new extractor for the GCSToGCSOperator. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.17.0) for a complete list of changes. 
+
 ## Astro Runtime 5.2.1
 
 - Release date: January 26, 2023
@@ -404,7 +451,7 @@ These changes were backported from Apache Airflow 2.3.4, which is not yet genera
 
 ### Additional improvements
 
-- The Cloud UI no longer shows source code for [supported Airflow operators](data-lineage-support-and-compatibility.md#supported-airflow-operators) by default. To reenable this feature for a given Deployment, create an [environment variable](environment-variables.md) with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`.
+- The Cloud UI no longer shows source code for [supported Airflow operators](https://openlineage.io/docs/integrations/about#capability-matrix) by default. To reenable this feature for a given Deployment, create an [environment variable](environment-variables.md) with a key of `OPENLINEAGE_AIRFLOW_DISABLE_SOURCE_CODE` and a value of `False`.
 - Upgraded `openlineage-airflow` to version `0.12.0`, which includes support for Spark 3.3.0 and Apache Flink. For a list of all changes, see the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/blob/main/CHANGELOG.md).
 - Upgraded `astronomer-providers` to version `1.7.1`, which includes new deferrable operators and improvements to documentation. For more information, see the [Astronomer Providers changelog](https://github.com/astronomer/astronomer-providers/blob/1.7.1/CHANGELOG.rst).
 - Upgraded `apache-airflow-providers-amazon` to version `4.1.0`, which includes a bug fix for integrating with AWS Secrets Manager.
@@ -830,7 +877,7 @@ For more information on using timetables, read the [Apache Airflow Documentation
 
 #### Deferrable operators
 
-[Deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/concepts/deferring.html) are a new type of Airflow operator that promises improved performance and lower resource costs. While standard operators and sensors take up a worker slot even when they are waiting for an external trigger, deferrable operators are designed to suspend themselves and free up that worker slot while they wait. This is made possible by a new, lightweight Airflow component called the triggerer.
+[Deferrable operators](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/deferring.html) are a new type of Airflow operator that promises improved performance and lower resource costs. While standard operators and sensors take up a worker slot even when they are waiting for an external trigger, deferrable operators are designed to suspend themselves and free up that worker slot while they wait. This is made possible by a new, lightweight Airflow component called the triggerer.
 
 Existing Airflow operators have to be re-written according to the deferrable operator framework. In addition to supporting those available in the open source project, Astronomer has built an exclusive collection of deferrable operators in Runtime 4.0.0. This collection includes the `DatabricksSubmitRunOperator`, the `DatabricksRunNowOperator`, and the `ExternalTaskSensor`. These are designed to be drop-in replacements for corresponding operators currently in use.
 

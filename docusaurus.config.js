@@ -7,8 +7,8 @@ module.exports = {
   baseUrl: '/',
   trailingSlash: false,
   noIndex: false,
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
   markdown: {
     mermaid: true,
   },
@@ -115,16 +115,6 @@ module.exports = {
           activeBaseRegex: '(software\/0.30)+',
         },
         {
-          label: '0.29',
-          to: '/software/0.29/overview',
-          activeBaseRegex: '(software\/0.29)+',
-        },
-        {
-          label: '0.28',
-          to: '/software/0.28/overview',
-          activeBaseRegex: '(software\/0.28)+',
-        },
-        {
           label: 'Archive',
           to: '/software/documentation-archive',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
@@ -205,6 +195,7 @@ module.exports = {
           id: 'default',
           changefreq: 'daily',
           filename: 'sitemap.xml',
+          ignorePatterns: ['/astro/kubernetes-executor', '/astro/cli/sql-cli', '/astro/cross-account-role-setup']
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -251,6 +242,7 @@ module.exports = {
         id: 'learn',
         changefreq: 'daily',
         filename: 'sitemap.xml',
+        ignorePatterns: ['/astro/kubernetes-executor', '/astro/cli/sql-cli', '/astro/cross-account-role-setup']
       },
     ],
   ],

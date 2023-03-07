@@ -14,13 +14,21 @@ To install Astronomer on GCP, you'll need access to the following tools and perm
 
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [Google Cloud SDK](https://cloud.google.com/sdk/install)
-* A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
+* A compatible version of Kubernetes and PostgreSQL as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
 * An SMTP service and credentials. For example, Mailgun or Sendgrid.
 * Permission to create and modify resources on Google Cloud Platform
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
+* PostgreSQL superuser permissions
 
+:::info
+
+There is a known bug on GCP GKE Dataplane V2 clusters that affects Astronomer Software installations. When Astronomer Software is installed on a GCP GKE Dataplane V2 cluster, the interaction between the Astronomer Nginx ingress controller and Cilium can cause dropped connections, dropped packets, and intermittent 504 timeout errors when accessing the Astronomer UI or Houston API.
+
+To avoid these issues, Astronomer recommends installing Astronomer Software on a GKE Dataplane V1 cluster. 
+
+:::
 
 ## Step 1: Choose a base domain
 

@@ -5,6 +5,9 @@ description: "How to correctly import custom hooks and operators."
 id: airflow-importing-custom-hooks-operators
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import custom_operator_example from '!!raw-loader!../code-samples/dags/airflow-importing-custom-hooks-operators/custom_operator_example.py';
+
 One of the great benefits of Airflow is its vast network of provider packages that provide hooks, operators, and sensors for many common use cases. Another great benefit of Airflow is that it is highly customizable because everything is defined in Python code. If a hook, operator, or sensor you need doesn't exist in the open source, you can easily define your own. 
 
 In this guide, you'll learn how to define your own custom code. Then, you'll make your custom code available to your DAGs. You'll be using custom operators in your primary example, but the same concepts are applicable to custom hooks and sensors.
@@ -82,38 +85,6 @@ If you use an IDE and don't want to see import errors, add the `plugins` directo
 
 After you've added your custom operators to the project, you can import them into your DAG like you would any other Python package:
 
-```python
-from airflow import DAG
-from datetime import datetime, timedelta
-from operators.my_operator import MyOperator
-from sensors.my_sensor import MySensor
-
-default_args = {
-	'owner': 'airflow',
-	'depends_on_past': False,
-	'start_date': datetime(2018, 1, 1),
-	'email_on_failure': False,
-	'email_on_retry': False,
-	'retries': 1,
-	'retry_delay': timedelta(minutes=5),
-}
-
-
-with DAG('example_dag',
-		 max_active_runs=3,
-		 schedule='@once',
-		 default_args=default_args) as dag:
-
-	sens = MySensor(
-		task_id='taskA'
-	)
-
-	op = MyOperator(
-		task_id='taskB',
-		my_field='some text'
-	)
-
-	sens >> op
-```
+<CodeBlock language="python">{custom_operator_example}</CodeBlock>
 
 And that's it! Your DAG will use `MyOperator` and `MySensor` when it runs, giving you full flexibility over what happens in your pipelines.

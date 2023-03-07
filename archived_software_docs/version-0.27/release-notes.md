@@ -84,7 +84,7 @@ global:
 
 ### CLI Support for Podman
 
-By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](cli-podman.md).
+By default, the Astronomer CLI uses Docker to execute a few specific commands. As an alternative, you can now configure the Astronomer CLI to use Podman instead. For more information, read [Run the CLI with Podman](https://docs.astronomer.io/astro/cli/configure-cli#run-the-astro-cli-using-podman).
 
 ### Bug Fixes
 

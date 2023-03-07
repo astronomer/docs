@@ -5,6 +5,17 @@ description: "How to implement dependencies between your Airflow DAGs."
 id: cross-dag-dependencies
 ---
 
+import CodeBlock from '@theme/CodeBlock';
+import triggerdagrun_example_traditional from '!!raw-loader!../code-samples/dags/cross-dag-dependencies/triggerdagrun_example_traditional.py';
+import triggerdagrun_example_taskflow from '!!raw-loader!../code-samples/dags/cross-dag-dependencies/triggerdagrun_example_taskflow.py';
+import external_task_sensor_example_taskflow from '!!raw-loader!../code-samples/dags/cross-dag-dependencies/external_task_sensor_example_taskflow.py';
+import external_task_sensor_example_traditional from '!!raw-loader!../code-samples/dags/cross-dag-dependencies/external_task_sensor_example_traditional.py';
+import rest_api_example_traditional from '!!raw-loader!../code-samples/dags/cross-dag-dependencies/rest_api_example_traditional.py';
+import rest_api_example_taskflow from '!!raw-loader!../code-samples/dags/cross-dag-dependencies/rest_api_example_taskflow.py';
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 When designing Airflow DAGs, it is often best practice to put all related tasks in the same DAG. However, it's sometimes necessary to create dependencies between your DAGs. In this scenario, one node of a DAG is its own complete DAG, rather than just a single task. Throughout this guide, the following terms are used to describe DAG dependencies:
 
 - **Upstream DAG**: A DAG that must reach a specified state before a downstream DAG can run
@@ -97,57 +108,26 @@ A common use case for this implementation is when an upstream DAG fetches new te
 
 The following example DAG implements the TriggerDagRunOperator to trigger the `dependent-dag` between two other tasks. The `trigger-dagrun-dag` waits until `dependent-dag` is finished its run before running `end_task`, since `wait_for_completion` in the `TriggerDagRunOperator` has been set to `True`.
 
-```python
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.operators.trigger_dagrun import TriggerDagRunOperator
-from datetime import datetime, timedelta
+<Tabs
+    defaultValue="taskflow"
+    groupId="triggerdagrunoperator"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-def print_task_type(**kwargs):
-    """
-    Example function to call before and after dependent DAG.
-    """
-    print(f"The {kwargs['task_type']} task has completed.")
+<TabItem value="taskflow">
 
-# Default settings applied to all tasks
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5)
-}
+<CodeBlock language="python">{triggerdagrun_example_taskflow}</CodeBlock>
 
-with DAG(
-    'trigger-dagrun-dag',
-    start_date=datetime(2021, 1, 1),
-    max_active_runs=1,
-    schedule='@daily',
-    default_args=default_args,
-    catchup=False
-) as dag:
+</TabItem>
 
-    start_task = PythonOperator(
-        task_id='starting_task',
-        python_callable=print_task_type,
-        op_kwargs={'task_type': 'starting'}
-    )
+<TabItem value="traditional">
 
-    trigger_dependent_dag = TriggerDagRunOperator(
-        task_id="trigger_dependent_dag",
-        trigger_dag_id="dependent-dag",
-        wait_for_completion=True
-    )
+<CodeBlock language="python">{triggerdagrun_example_traditional}</CodeBlock>
 
-    end_task = PythonOperator(
-        task_id='end_task',
-        python_callable=print_task_type,
-        op_kwargs={'task_type': 'ending'}
-    )
-
-    start_task >> trigger_dependent_dag >> end_task
-```
+</TabItem>
+</Tabs>
 
 In the following image, you can see that the `trigger_dependent_dag` task in the middle is the TriggerDagRunOperator, which runs the `dependent-dag`.
 
@@ -167,91 +147,28 @@ In Airflow 2.2 and later, a deferrable version of the ExternalTaskSensor is avai
 
 The following example DAG uses three ExternalTaskSensors at the start of three parallel branches in the same DAG.
 
-```python
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.sensors.external_task import ExternalTaskSensor
-from airflow.operators.empty import EmptyOperator
-from datetime import datetime, timedelta
+<Tabs
+    defaultValue="taskflow"
+    groupId="externaltasksensor"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-def downstream_function_branch_1():
-    print('Upstream DAG 1 has completed. Starting tasks of branch 1.')
+<TabItem value="taskflow">
 
-def downstream_function_branch_2():
-    print('Upstream DAG 2 has completed. Starting tasks of branch 2.')
+<CodeBlock language="python">{external_task_sensor_example_taskflow}</CodeBlock>
 
-def downstream_function_branch_3():
-    print('Upstream DAG 3 has completed. Starting tasks of branch 3.')
+</TabItem>
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5)
-}
+<TabItem value="traditional">
 
-with DAG(
-    'external-task-sensor-dag',
-    start_date=datetime(2022, 8, 1),
-    max_active_runs=3,
-    schedule='*/1 * * * *',
-    catchup=False
-) as dag:
+<CodeBlock language="python">{external_task_sensor_example_traditional}</CodeBlock>
 
-    start = EmptyOperator(task_id="start")
-    end = EmptyOperator(task_id="end")
+</TabItem>
+</Tabs>
 
-    ets_branch_1 = ExternalTaskSensor(
-        task_id="ets_branch_1",
-        external_dag_id='upstream_dag_1',
-        external_task_id='my_task',
-        allowed_states=['success'],
-        failed_states=['failed', 'skipped']
-    )
-
-    task_branch_1 = PythonOperator(
-        task_id='task_branch_1',
-        python_callable=downstream_function_branch_1,
-    )
-
-    ets_branch_2 = ExternalTaskSensor(
-        task_id="ets_branch_2",
-        external_dag_id='upstream_dag_2',
-        external_task_id='my_task',
-        allowed_states=['success'],
-        failed_states=['failed', 'skipped']
-    )
-
-    task_branch_2 = PythonOperator(
-        task_id='task_branch_2',
-        python_callable=downstream_function_branch_2,
-    )
-
-    ets_branch_3 = ExternalTaskSensor(
-        task_id="ets_branch_3",
-        external_dag_id='upstream_dag_3',
-        external_task_id='my_task',
-        allowed_states=['success'],
-        failed_states=['failed', 'skipped']
-    )
-
-    task_branch_3 = PythonOperator(
-        task_id='task_branch_3',
-        python_callable=downstream_function_branch_3,
-    )
-
-    start >> [ets_branch_1, ets_branch_2, ets_branch_3]
-
-    ets_branch_1 >> task_branch_1
-    ets_branch_2 >> task_branch_2
-    ets_branch_3 >> task_branch_3
-
-    [task_branch_1, task_branch_2, task_branch_3] >> end
-```
-
-In this DAG
+In this DAG:
 
 - `ets_branch_1` waits for the `my_task` task of `upstream_dag_1` to complete before moving on to execute `task_branch_1`.
 - `ets_branch_2` waits for the `my_task` task of `upstream_dag_2` to complete before moving on to execute `task_branch_2`.
@@ -273,67 +190,26 @@ This method is useful if your dependent DAGs live in different Airflow environme
 
 Using the API to trigger a downstream DAG can be implemented within a DAG by using the [SimpleHttpOperator](https://registry.astronomer.io/providers/http/modules/simplehttpoperator) as shown in the example DAG below:
 
-```python
-from airflow import DAG
-from airflow.operators.python import PythonOperator
-from airflow.providers.http.operators.http import SimpleHttpOperator
-from datetime import datetime, timedelta
-import json
+<Tabs
+    defaultValue="taskflow"
+    groupId="airflow-api"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-# Define body of POST request for the API call to trigger another DAG
-date = '{{ execution_date }}'
-request_body = {
-  "execution_date": date
-}
-json_body = json.dumps(request_body)
+<TabItem value="taskflow">
 
-def print_task_type(**kwargs):
-    """
-    Example function to call before and after downstream DAG.
-    """
-    print(f"The {kwargs['task_type']} task has completed.")
-    print(request_body)
+<CodeBlock language="python">{rest_api_example_taskflow}</CodeBlock>
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5)
-}
+</TabItem>
 
-with DAG(
-    'api-dag',
-    start_date=datetime(2021, 1, 1),
-    max_active_runs=1,
-    schedule='@daily',
-    catchup=False
-) as dag:
+<TabItem value="traditional">
 
-    start_task = PythonOperator(
-        task_id='starting_task',
-        python_callable=print_task_type,
-        op_kwargs={'task_type': 'starting'}
-    )
+<CodeBlock language="python">{rest_api_example_traditional}</CodeBlock>
 
-    api_trigger_dependent_dag = SimpleHttpOperator(
-        task_id="api_trigger_dependent_dag",
-        http_conn_id='airflow-api',
-        endpoint='/api/v1/dags/dependent-dag/dagRuns',
-        method='POST',
-        headers={'Content-Type': 'application/json'},
-        data=json_body
-    )
-
-    end_task = PythonOperator(
-        task_id='end_task',
-        python_callable=print_task_type,
-        op_kwargs={'task_type': 'ending'}
-    )
-
-    start_task >> api_trigger_dependent_dag >> end_task
-```
+</TabItem>
+</Tabs>
 
 This DAG has a similar structure to the TriggerDagRunOperator DAG, but instead uses the SimpleHttpOperator to trigger the `dependent-dag` using the Airflow API. The graph view appears similar to the following image:
 

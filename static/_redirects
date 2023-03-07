@@ -12,12 +12,17 @@
 /software/0.25/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.25/:splat.md 301
 /software/0.26/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.26/:splat.md 301
 /software/0.27/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.27/:splat.md 301
+/software/0.28/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.28/:splat.md 301
+/software/0.29/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.29/:splat.md 301
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
 
 # redirect old software overview to new url
 /software/overview /software
+
+# redirect to converged Runtime docs
+/software/*/runtime-release-notes /astro/runtime-release-notes 301
 
 # redirect renamed pages
 /runtime-versioning /astro/runtime-version-lifecycle-policy 301
@@ -27,6 +32,8 @@
 /tutorials/get-started-with-airflow /learn/get-started-with-airflow 301
 /tutorials/get-started-with-airflow-part-2 /learn/get-started-with-airflow-part-2 301
 /tutorials/astro-python-sdk /learn/astro-python-sdk 301
+/learn/category/tutorials /learn/category/airflow-tutorials 301
+
 
 # CLI migration redirects 
 /software/cli-reference /astro/cli/reference 301
@@ -45,6 +52,7 @@
 
 # deprecated docs
 /astro/known-limitations /astro 301
+/astro/data-lineage-support-and-compatibility /astro/set-up-data-lineage 301
 
 # redirect base domain cloud links to astro path
 /add-user /astro/add-user 301
@@ -240,10 +248,18 @@
 /software/0.25/upgrade-to-0-25 /software/0.25/upgrade-astronomer 301
 
 # redirect links to renamed files
+
+/astro/view-clusters /astro/modify-cluster#view-clusters 301
+/astro/resource-reference-aws#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
+/astro/resource-reference-azure#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
+/astro/resource-reference-gcp#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
+/astro/connect-aws#resolving-services /astro/connect-aws#hostname-resolution-options 301
 /astro/configure-deployment /astro/configure-deployment-resources 301
 /astro/scheduler-logs /astro/view-logs 301
+/astro/cross-account-role-setup /astro/install-aws 301
 /software/manage-platform-users#reference-system-permissions /software/role-permission-reference 301
-
+/software/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
+/software/*/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301
