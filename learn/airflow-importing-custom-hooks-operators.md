@@ -112,7 +112,7 @@ class MyHook(BaseHook):
 
     def get_conn(self):
         """Function that initiates a new connection to your external tool."""
-        # retrieve the name of the parameter containing the passed connection id
+        # retrieve the passed connection id
         conn_id = getattr(self, self.conn_name_attr)
         # get the connection object from the Airflow connection
         conn = self.get_connection(conn_id)
