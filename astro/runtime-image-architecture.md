@@ -73,9 +73,7 @@ All Astro Runtime images have the following open source provider packages pre-in
 - Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
-- StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
-- Snowflake [`apache-airflow-snowflake`](https://pypi.org/project/apache-airflow-snowflake/)
-- Virtualenv [`apache-airflow-virtualenv`](https://pypi.org/project/virtualenv/)
+- Snowflake [`apache-airflow-providers-snowflake`](https://pypi.org/project/apache-airflow-providers-snowflake/)
 - OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
 

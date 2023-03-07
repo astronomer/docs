@@ -7,7 +7,39 @@ description: Astronomer Software release notes.
 
 <!--- Version-specific -->
 
-0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md).
+0.30 is the latest stable and long-term support (LTS) version of Astronomer Software. To upgrade to 0.30, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](cli-release-notes.md). For more Astronomer Software release notes, see:
+
+- [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes)
+- [Astro Runtime release notes](https://docs.astronomer.io/astro/runtime-release-notes)
+- [Astronomer Software 0.31 release notes](https://docs.astronomer.io/software/release-notes)
+- [Astronomer Software documentation archive](documentation-archive.md)
+
+## 0.30.6
+
+Release date: March 2, 2023
+
+### Additional improvements
+
+- Support for Kubernetes [1.25](https://kubernetes.io/blog/2022/08/23/kubernetes-v1-25-release/) and [1.26](https://kubernetes.io/blog/2022/12/09/kubernetes-v1-26-release/).
+- You can now configure `extraVolumes` and `extraVolumeMounts` in the Alertmanager Helm chart, which can be useful for storing secret credentials for services that read your alerts.
+
+### Bug fixes 
+
+- Fixed a security vulnerability where you could query Elasticsearch logs for a Deployment from a different Deployment.
+- Fixed an issue where deploying an image with the `docker/build-push-action` GitHub action could produce errors in Houston that affected the entire Astronomer Software installation.
+- Fixed an issue where authentication tokens were visible in Nginx logs produced by the Software UI.
+- Fixed the following vulnerabilities: 
+  
+    - [CVE-2023-24807](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-24807)
+    - [CVE-2023-0286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-0286)
+    - [CVE-2023-25881](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-25881)
+    - [CVE-2022-27664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-27664)
+    - [CVE-2022-41721](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-41721)
+    - [CVE-2022-32149](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-32149)
+    - [CVE-2022-23529](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23529)
+    - [CVE-2021-44906](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-44906)
+    - [CVE-2022-23540](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23540)
+    - [CVE-2022-23541](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2022-23541)
 
 ## 0.30.5
 
