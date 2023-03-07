@@ -117,7 +117,7 @@ To add a teammate to an existing support request, cc them when replying on the s
 
 ## Book office hours in the Cloud UI
 
-If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines. Office hours are ideal if:
+If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines. Office hours are recommended if:
 
 - You have questions about best practices for an action in Airflow or on Astro.
 - You have a feature request related to Astro or Airflow.
