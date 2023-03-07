@@ -197,11 +197,13 @@ If you are an Astro customer, you can find further information on how to set up 
 
 Airflow 2.5.0 introduced the `dag.test()` method which allows you to run all tasks in a DAG within a single serialized Python process without running the Airflow scheduler. The `.test()` method allows for faster iteration and use of IDE debugging tools when developing DAGs.
 
+This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
+
 ### Prerequisites
 
 - [Airflow 2.5.0](https://airflow.apache.org/docs/apache-airflow/stable/start.html) or later. You can check your version by running `airflow version`.
-- All provider packages that your DAG uses.
-- An initialized [Airflow metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metastore is created when Airflow is first run in an environment. You can check that it exists by running `airflow db check`.
+- All provider packages that your DAG uses need to be installed in the environment in which you are using `dag.test()`.
+- An initialized [Airflow metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metadata database is created when Airflow is first run in an environment. You can check that it exists by running `airflow db check` and initialize a new database with `airflow db init`.
 
 You may wish to install these requirements and test your DAGs in a [virtualenv](https://virtualenv.pypa.io/en/latest/) to avoid dependency conflicts in your local environment.
 
@@ -271,8 +273,6 @@ You can run the `.test()` method with popular debugging tools such as:
 - [VSCode](https://code.visualstudio.com/docs/editor/debugging).
 - [PyCharm](https://www.jetbrains.com/help/pycharm/debugging-your-first-python-application.html).
 - Tools like [The Python Debugger](https://docs.python.org/3/library/pdb.html) and the built-in [`breakpoint()`](https://docs.python.org/3/library/functions.html#breakpoint) function. These allow you to run `dag.test()` from the command line by running `python <path-to-dag-file>`.
-
-This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 
 ### Use `dag.test()` with the Astro CLI
 
