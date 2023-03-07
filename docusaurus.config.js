@@ -94,7 +94,7 @@ module.exports = {
       buttons: {
         primary: {
           label: "Try Astro",
-          href: "https://www.astronomer.io/get-started?referral=docs-what-astro-banner"
+          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner"
         },
         secondary: {
           label: "Learn about Astronomer",
