@@ -56,7 +56,7 @@ To help you manage users in your Organization, Astro CLI 1.10.0 includes the fol
 
 :::
 
-For more information, see the [`astro organization`](cli/astro-organization.md) and [`astro workspace`](cli/astro-workspace.md) command references.
+For more information, see the [`astro organization`](cli/astro-organization.md) and [`astro workspace`](cli/astro-workspace-user-add.md) command references.
 
 ## Astro CLI 1.9.0
 

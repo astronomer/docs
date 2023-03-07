@@ -38,4 +38,4 @@ astro organization user update --role ORGANIZATION_MEMBER
 ## Related Commands
 
 - [`astro login`](cli/astro-login.md)
-- [`astro workspace`](cli/astro-workspace.md)
+- [`astro workspace switch`](cli/astro-workspace-switch.md)
