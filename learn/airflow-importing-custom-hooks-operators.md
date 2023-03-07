@@ -148,7 +148,7 @@ When using the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) you
 
 For more details on why Astronomer recommends this project structure, see the [Managing Airflow Code guide](managing-airflow-code.md).
 
-Using the project structure shown above, you can import the `MyOperator` class from the `my_operator.py` file in your DAGs with the following import statement:
+Using the project structure shown above, you can import the `MyOperator` class from the `my_operator.py` file and the `MyHook` class from the `my_hook.py` file in your DAGs with the following import statements:
 
 ```
 from include.custom_operators.my_operator import MyOperator
