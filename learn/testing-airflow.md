@@ -195,17 +195,19 @@ If you are an Astro customer, you can find further information on how to set up 
 
 ## Debug interactively with dag.test()
 
-Airflow 2.5.0 introduced the `dag.test()` method which allows you to run all tasks in a DAG within a single serialized Python process without needing an Airflow Scheduler to be running. The `.test()` method allows for faster iteration and use of IDE debugging tools when developing DAGs.
+Airflow 2.5.0 introduced the `dag.test()` method which allows you to run all tasks in a DAG within a single serialized Python process without running the Airflow scheduler. The `.test()` method allows for faster iteration and use of IDE debugging tools when developing DAGs.
 
-To use `dag.test()`, your environment must have:
+### Prerequisites
 
-- At least [Airflow 2.5.0](https://airflow.apache.org/docs/apache-airflow/stable/start.html). You can verify the installation by running `airflow version`.
+- [Airflow 2.5.0](https://airflow.apache.org/docs/apache-airflow/stable/start.html) or later. You can check your version by running `airflow version`.
 - All provider packages that your DAG uses.
-- An [Airflow metastore](airflow-database.md), if your DAG uses elements of the metastore like XCom. The Airflow metastore is created when Airflow is first run in an environment and you can verify its existence by running `airflow db check`.
+- An initialized [Airflow metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metastore is created when Airflow is first run in an environment. You can check that it exists by running `airflow db check`.
 
 You may wish to install these requirements and test your DAGs in a [virtualenv](https://virtualenv.pypa.io/en/latest/) to avoid dependency conflicts in your local environment.
 
-To set up `dag.test()`, you only need to add a few lines of code to the end of your DAG file. If you are using a traditional DAG context, call `.test()` on the object the context is assigned to. If you are using the `@dag` decorator, assign the called DAG function to an object (`dag_object` in the example code) and call the method on that object. 
+### Setup
+
+To use `dag.test()`, you only need to add a few lines of code to the end of your DAG file. If you are using a traditional DAG context, call `.test()` on the object the context is assigned to. If you are using the `@dag` decorator, assign the called DAG function to an object (`dag_object` in the example code) and call the method on that object. 
 
 <Tabs
     defaultValue="traditional"
@@ -266,28 +268,26 @@ if __name__ == "__main__":
 
 You can run the `.test()` method with popular debugging tools such as:
 
-- [VSCode debugging](https://code.visualstudio.com/docs/editor/debugging)
-- [PyCharm debugging](https://www.jetbrains.com/help/pycharm/debugging-your-first-python-application.html)
-- Debugging from the command line by running `python <path-to-dag-file>` using tools like [The Python Debugger](https://docs.python.org/3/library/pdb.html) and the built-in [`breakpoint()`](https://docs.python.org/3/library/functions.html#breakpoint) function.
+- [VSCode](https://code.visualstudio.com/docs/editor/debugging).
+- [PyCharm](https://www.jetbrains.com/help/pycharm/debugging-your-first-python-application.html).
+- Tools like [The Python Debugger](https://docs.python.org/3/library/pdb.html) and the built-in [`breakpoint()`](https://docs.python.org/3/library/functions.html#breakpoint) function. These allow you to run `dag.test()` from the command line by running `python <path-to-dag-file>`.
 
 This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 
-:::note
+### Use `dag.test()` with the Astro CLI
 
-Users who use the Astro CLI exclusively and do not have the `airflow` package installed locally can still benefit from `dag.test()` debugging by running `astro dev start`, entering the scheduler container with `astro dev bash -s`, and executing `python <path-to-dag-file>` from within the Docker container.
-
-:::
+If you use the Astro CLI exclusively and do not have the `airflow` package installed locally, you can still debug using `dag.test()` by running `astro dev start`, entering the scheduler container with `astro dev bash -s`, and executing `python <path-to-dag-file>` from within the Docker container. Unlike using the base `airflow` package, this testing method requires starting up a complete Airflow environment. 
 
 ### Use variables and connections in dag.test()
 
-The `dag.test()` method allows for passing of the following Airflow elements:
+To debug your DAGs in a more realistic environment, you can pass the following Airflow environment configurations to `dag.test()`:
 
-- `execution_date`: as a `pendulum.datetime` object.
-- [Airflow connections](connections.md): configured in a `.yaml` file.
-- Airflow variables: configured in a `.yaml` file.
-- DAG configuration: passed as a dictionary.
+- `execution_date` passed as a `pendulum.datetime` object.
+- [Airflow connections](connections.md) passed as a `.yaml` file.
+- Airflow variables passed as a `.yaml` file.
+- DAG configuration passed as a dictionary.
 
-This is useful for quickly testing your DAG for different dates or with different connections and configurations. The code snippet below shows the syntax for passing parameters to `.test()`.
+This is useful for testing your DAG for different dates or with different connections and configurations. The following code snippet shows the syntax for passing various parameters to `.test()`:
 
 ```python
 from pendulum import datetime 
@@ -305,13 +305,13 @@ if __name__ == "__main__":
     )
 ```
 
-The `connections.yaml` file should list connections with their properties as shown below:
+The `connections.yaml` file should list connections with their properties as shown in the following example:
 
 ```yaml
 my_aws_conn:
   conn_type: amazon
-  login: <your AWS key>
-  password: <your AWS secret>
+  login: <your-AWS-key>
+  password: <your-AWS-secret>
   conn_id: my_aws_conn
 ```
 
