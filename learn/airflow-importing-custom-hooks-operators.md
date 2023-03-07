@@ -30,7 +30,7 @@ A custom operator is a Python class which can be imported into your DAG file. Li
 At a minimum, a custom operator must:
 
 - Inherit from the `BaseOperator` or any other existing operator.
-- Define a `.__init__()` method which runs when the DAG is parsed.
+- Define an `.__init__()` method which runs when the DAG is parsed.
 - Define an `.execute()` method which runs when a task uses this operator.
 
 The following is an example of a custom operator called `MyOperator`:
@@ -76,7 +76,7 @@ At a minimum, a custom hook must:
 - Inherit from the `BaseHook` or any other existing hook.
 - Define an `.__init__()` method which runs when the DAG is parsed. 
 
-Many hooks include a `.get_conn()` method wrapping around a call to the BaseHook method `get_connection()` to retrieve information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method. The following is the minimum recommended code to start with for most custom hooks:
+Many hooks include a `.get_conn()` method wrapping around a call to the BaseHook method `.get_connection()` to retrieve information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method. The following is the minimum recommended code to start with for most custom hooks:
 
 ```python
 # import the hook to inherit from
