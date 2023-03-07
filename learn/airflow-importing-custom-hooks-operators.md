@@ -69,14 +69,14 @@ If your custom operator is modifying functionality of an existing operator, your
 
 ## Create a custom hook
 
-A custom hook is a Python class which can be imported into your DAG file. Like regular hooks, custom hooks can be used to create connections to external tools within Python functions used with the `@task` decorator or the PythonOperator. Custom hooks often contain methods that interact with an external API and it is common to use them in custom operators over direct API calls.
+A custom hook is a Python class which can be imported into your DAG file. Like regular hooks, custom hooks can be used to create connections to external tools from within your task code. Custom hooks often contain methods that interact with an external API, which makes them better to use in custom operators than direct API calls.
 
 At a minimum, a custom hook must:
 
 - Inherit from the `BaseHook` or any other existing hook.
-- Define a `.__init__()` method which runs when the DAG is parsed. 
+- Define an `.__init__()` method which runs when the DAG is parsed. 
 
-In many hooks, a `.get_conn()` method is defined that retrieves information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method.
+Many hooks include a `.get_conn()` to retrieve information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method. The following is the minimum recommended code to start with for most custom hooks:
 
 ```python
 # import the hook to inherit from
@@ -108,14 +108,14 @@ class MyHook(BaseHook):
         self.get_conn()
 
     def get_conn(self):
-        """Function that initiates a new connection to <external tool>."""
+        """Function that initiates a new connection to your external tool."""
 
         # get the connection object from the Airflow connection
         conn = self.get_connection(self.my_conn_id)
 
         return conn
 
-    # add additional methods to define interactions with <external tool>
+    # add additional methods to define interactions with your external tool
 ```
 
 ## Import custom hooks and operators
@@ -290,7 +290,7 @@ To use this custom hook, you need to create an Airflow connection with the conne
 
 ![Cat fact connection](/img/guides/cat_fact_conn.png)
 
-You can then import the custom operator and custom hook into your DAG. The DAG code below also highlights how Jinja templating can be used with parameters that were listed in the custom operator's `templated_fields` attribute.
+You can then import the custom operator and custom hook into your DAG. Because the custom has defined `first_value` and `second_value` as `template_fields`, you can pass values from other tasks to these parameters using Jinja templating.
 
 <Tabs
     defaultValue="taskflow"
