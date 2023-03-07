@@ -119,6 +119,6 @@ To add a teammate to an existing support request, cc them when replying on the s
 
 ## Book office hours in the Cloud UI
 
-An alternative to submitting a support ticket is meeting with the Astronomer data engineering team during office hours. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
+If you don't require break-fix support, an alternative to submitting a support ticket is meeting with the Astronomer Data Engineering team during office hours. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
 
-To book an office hour meeting, open the Cloud UI and click **Help** > **Book Office Hours**. Use the provided Calendly page to schedule a 30-minute office hour meeting. 
+To book an office hour meeting, open the Cloud UI and click **Help** > **Book Office Hours**. Use the provided Calendly form to schedule a 30-minute office hour meeting. In the form, provide details about prior support tickets or new issues and questions that you want to discuss during the meeting.

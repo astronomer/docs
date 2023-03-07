@@ -27,11 +27,13 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 ### Get expert advice on Astro and Airflow in office hours
 
-Office hours are a new way for Astro customers to meet with the Astronomer data engineering team. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
+Office hours are a new way for Astro customers to meet with the Astronomer Data Engineering team. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
 
 You can now schedule a 30-minute office hour meeting in the **Help** menu next to your user profile in the Cloud UI.
 
 ![Button to book office hours in the Cloud UI](/img/release-notes/office-hours.png)
+
+For more information, see [Book office hours in the Cloud UI](astro-support.md#book-office-hours-in-the-cloud-ui).
 
 ### Additional improvements 
 
