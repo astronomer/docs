@@ -76,7 +76,7 @@ At a minimum, a custom hook must:
 - Inherit from the `BaseHook` or any other existing hook.
 - Define an `.__init__()` method which runs when the DAG is parsed. 
 
-Many hooks include a `.get_conn()` to retrieve information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method. The following is the minimum recommended code to start with for most custom hooks:
+Many hooks include a `.get_conn()` method wrapping around a call to the BaseHook method `get_connection()` to retrieve information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method. The following is the minimum recommended code to start with for most custom hooks:
 
 ```python
 # import the hook to inherit from
@@ -90,10 +90,13 @@ class MyHook(BaseHook):
     :param my_conn_id: ID of the connection to <external tool>
     """
 
-    # define global class variables
+    # provide the name of the parameter which receives the connection id
     conn_name_attr = "my_conn_id"
+    # provide a default connection id
     default_conn_name = "my_conn_default"
+    # provide the connection type
     conn_type = "general"
+    # provide the name of the hook
     hook_name = "MyHook"
 
     # define the .__init__() method that runs when the DAG is parsed
@@ -109,9 +112,10 @@ class MyHook(BaseHook):
 
     def get_conn(self):
         """Function that initiates a new connection to your external tool."""
-
+        # retrieve the name of the parameter containing the passed connection id
+        conn_id = getattr(self, self.conn_name_attr)
         # get the connection object from the Airflow connection
-        conn = self.get_connection(self.my_conn_id)
+        conn = self.get_connection(conn_id)
 
         return conn
 
@@ -290,7 +294,7 @@ To use this custom hook, you need to create an Airflow connection with the conne
 
 ![Cat fact connection](/img/guides/cat_fact_conn.png)
 
-You can then import the custom operator and custom hook into your DAG. Because the custom has defined `first_value` and `second_value` as `template_fields`, you can pass values from other tasks to these parameters using Jinja templating.
+You can then import the custom operator and custom hook into your DAG. Because the custom operator has defined `first_value` and `second_value` as `template_fields`, you can pass values from other tasks to these parameters using Jinja templating.
 
 <Tabs
     defaultValue="taskflow"
