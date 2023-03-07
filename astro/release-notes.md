@@ -23,6 +23,20 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
 
+## March 7, 2023
+
+### Book office hours from the Cloud UI
+
+Office hours are a new way for Astro customers to meet with the Astronomer data engineering team. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
+
+You can now schedule a 30-minute office hour meeting in the **Help** menu next to your user profile in the Cloud UI.
+
+![Button to book office hours in the Cloud UI](/img/release-notes/office-hours.png)
+
+### Bug fixes
+
+- Fixed an issue where deploying an Astro project with a custom Docker image tag resulted in the Deployment always having the **Deploying** status in the Cloud UI.
+
 ## March 1, 2023
 
 ### Astro no longer requires administrator access on AWS

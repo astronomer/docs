@@ -87,6 +87,7 @@ The following table lists all available instance types for worker node pools, as
 
 | Node Instance Type | CPU     | Memory      |
 | ------------------ | ------- | ----------- |
+| e2-standard-4      | 2 CPUs  | 8 GiB MEM  |
 | e2-standard-4      | 3 CPUs  | 13 GiB MEM  |
 | e2-standard-8      | 7 CPUs  | 29 GiB MEM  |
 | e2-standard-16     | 15 CPUs | 61 GiB MEM  |

@@ -116,3 +116,9 @@ If you've submitted your support request on the Astronomer support portal, sign 
 To add a teammate to an existing support request, cc them when replying on the support ticket email thread.
 
 :::
+
+## Book office hours in the Cloud UI
+
+An alternative to submitting a support ticket is meeting with the Astronomer data engineering team during office hours. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines.
+
+To book an office hour meeting, open the Cloud UI and click **Help** > **Book Office Hours**. Use the provided Calendly page to schedule a 30-minute office hour meeting. 
