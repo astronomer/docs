@@ -25,11 +25,13 @@ To get the most out of this guide, you should have an understanding of:
 
 ## Create a custom operator
 
+A custom operator is a Python class which can be imported into your DAG file. Like regular operators, instantiating a custom operator will create an Airflow task.
+
 At a minimum, a custom operator must:
 
 - Inherit from the `BaseOperator` or any other existing operator.
-- Define a `Constructor` method which runs when the DAG is parsed.
-- Define an `.execute` method which runs when a task uses this operator.
+- Define a `.__init__()` method which runs when the DAG is parsed.
+- Define an `.execute()` method which runs when a task uses this operator.
 
 The following is an example of a custom operator called `MyOperator`:
 
@@ -44,24 +46,70 @@ class MyOperator(BaseOperator):
     :param my_parameter: (required) parameter taking any input.
     """
 
-    # Define the constructor method that runs when the DAG is parsed!
+    # define the .__init__() method that runs when the DAG is parsed
     def __init__(self, my_parameter, *args, **kwargs):
         # initialize the parent operator
         super().__init__(*args, **kwargs)
         # assign class variables
         self.my_parameter = my_parameter
 
-    # define the execute method that runs when a task uses this operator. The Airflow context must always be passed to '.execute', so make
+    # define the .execute() method that runs when a task uses this operator.
+    # The Airflow context must always be passed to '.execute()', so make
     # sure to include the 'context' kwarg.
     def execute(self, context):
         # write to Airflow task logs
         self.log.info(self.my_parameter)
-        # the return value of '.execute' will be pushed to XCom by default
+        # the return value of '.execute()' will be pushed to XCom by default
         return "hi :)"
 
 ```
 
 If your custom operator is modifying functionality of an existing operator, your class can inherit from the operator you are building on instead of the `BaseOperator`. For more detailed instructions see [Creating a custom Operator](https://airflow.apache.org/docs/apache-airflow/stable/howto/custom-operator.html).
+
+## Create a custom hook
+
+A custom hook is a Python class which can be imported into your DAG file. Like regular hooks, custom hooks can be used to create connections to external tools within Python functions used with the `@task` decorator or the PythonOperator. Custom hooks often contain methods that interact with an external API and it is common to use them in custom operators over direct API calls.
+
+At a minimum, a custom hook must:
+
+- Inherit from the `BaseHook` or any other existing hook.
+- Define a `.__init__()` method which runs when the DAG is parsed. 
+
+In many hooks, a `.get_conn()` method is defined that retrieves information from an Airflow connection. It is common to call the `.get_conn()` method within the `.__init__()` method.
+
+```python
+from airflow.hooks.base import BaseHook
+
+
+class MyHook(BaseHook):
+    """
+    Interact with <external tool>.
+
+    :param my_conn_id: ID of the connection to <external tool>
+    """
+
+    conn_name_attr = "my_conn_id"
+    default_conn_name = "my_conn_default"
+    conn_type = "general"
+    hook_name = "MyHook"
+
+    def __init__(
+        self, my_conn_id: str = default_conn_name, *args, **kwargs
+    ) -> None:
+        super().__init__(*args, **kwargs)
+        self.my_conn_id = my_conn_id
+        self.get_conn()
+
+    def get_conn(self):
+        """Function that initiates a new connection to <external tool>."""
+
+        # get the connection object from the Airflow connection
+        conn = self.get_connection(self.my_conn_id)
+
+        return conn
+
+    # add additional methods interacting to define interactions with <external tool>
+```
 
 ## Import custom hooks and operators
 
@@ -184,7 +232,7 @@ class CatFactHook(BaseHook):
 
     Performs a connection to the CatFactAPI and retrieves a cat fact client.
 
-    :param number_of_cat_facts_needed: Number of cat facts to retrieve. Integer between 1 and 10. Default=1.
+    :cat_fact_conn_id: Connection ID to retrieve the CatFactAPI url.
     """
 
     conn_name_attr = "cat_conn_id"
