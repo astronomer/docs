@@ -1,8 +1,8 @@
 ---
-sidebar_label: "astro workspace"
-title: "astro workspace"
-id: astro-workspace
-description: Reference documentation for astro workspace.
+sidebar_label: "astro workspace team"
+title: "astro workspace team"
+id: astro-workspace-team
+description: Reference documentation for astro workspace team.
 hide_table_of_contents: true
 ---
 
