@@ -84,13 +84,13 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 You can use the Astro CLI and a shell script to add multiple users to an Organization or Workspace. Because the shell script reads from a text file, you can automate user management by generating the text file and running the shell script for each new batch of users that need to be assigned to an Organization or Workspace.
 
 1. Create a text file named `users.txt`.
-2. Open the text file and add a list of user email addresses that you want to invite to an Organization or Workspace. Every email address should include the user's assigned role. The following is an example of how you can write a list for adding users to a Workspace:
+2. Open the text file and add a list of user email addresses that you want to invite to an Organization or Workspace. Every email address should include the user's assigned role. The following is an example of how you can write a list for inviting users to an Organization:
 
     ```sh
-    user1@astronomer.io WORKSPACE_VIEWER
-    user2@astronomer.io WORKSPACE_OWNER
-    user3@astronomer.io WORKSPACE_ADMIN
-    user4@astronomer.io WORKSPACE_OWNER
+    user1@astronomer.io ORGANIZATION_VIEWER
+    user2@astronomer.io ORGANIZATION_OWNER
+    user3@astronomer.io ORGANIZATION_ADMIN
+    user4@astronomer.io ORGANIZATION_OWNER
     ```
 
 3. Create a file named `add-users.sh` and then add the following script to it:
@@ -105,16 +105,16 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
     fi
     
     # Read each line in the file and invite the user. 
-    # Replace 'workspace' with 'organization' if you're inviting users to an Organization.
+    # Replace 'organization invite' with 'organization add' if you're inviting users to an Organization.
     while read line; do
         email=$(echo "$line" | cut -d' ' -f1)
         role=$(echo "$line" | cut -d' ' -f2)
         echo "Inviting $email as $role..."
-        astro workspace user add "$email" --role "$role"
+        astro organization invite "$email" --role "$role"
     done < "$1"
     ```
 
-    Replace the Astro CLI command with `astro organization user invite "$email" --role "$role"` if you're inviting a group of users to an Organization.
+    Replace the Astro CLI command with `astro workspace user add "$email" --role "$role"` if you're inviting a group of users to an Organization. Note that users must be first invited to an Organization before they can be added to a Workspace. 
 
 4. Log in to the Astro CLI using `astro login`, and then run `astro workspace list` or `astro organization list` to ensure that you're in the same Workspace or Organization where you want to add the users.
 5. Run the following command to execute the shell script:
