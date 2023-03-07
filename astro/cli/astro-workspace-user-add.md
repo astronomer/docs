@@ -25,12 +25,23 @@ The behavior and format of this command differs depending on what Astronomer pro
 
 Invite an existing user to your current Astronomer Workspace.
 
+## Usage
+
+```sh
+astro workspace user add <email> 
+```
+
 ## Options
 
 | Option    | Description                                          | Valid Values                                                                               |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `<email>` | The email for the user you want to invite or update. | Any valid email                                                                            |
 | `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+
+## Related commands
+
+- [`astro workspace user update`](cli/astro-workspace-user-update.md)
+- [`astro organization user add`](cli/astro-organization.md)
 
 </TabItem>
 <TabItem value="software">

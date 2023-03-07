@@ -31,10 +31,16 @@ Outputs a list of all users with access to your current Workspace.
 astro workspace user list
 ```
 
-Outputs a list of all users with access to your current Workspace.
+## Related commands
+
+- [`astro workspace user update`](cli/astro-workspace-user-update.md)
+- [`astro workspace user remove`](cli/astro-workspace-user-remove.md)
+- [`astro organization user list`](cli/astro-organization.md)
 
 </TabItem>
 <TabItem value="software">
+
+Outputs a list of all users with access to your current Workspace.
 
 ## Usage
 

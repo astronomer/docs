@@ -12,6 +12,6 @@ Generates a list of all Workspaces that you have access to.
 
 Run `astro workspace list` to see the name and Workspace ID for each Workspace to which you have access.
 
-## Related Commands
+## Related commands
 
 - [`astro workspace switch`](cli/astro-workspace-switch.md)

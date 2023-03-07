@@ -21,6 +21,6 @@ Switch between Workspaces.
 
 Run `astro workspace switch <workspace-id>` to switch between Workspaces. On Astro, you can run `astro workspace` and the CLI prompts you to select from a list of Workspaces to which you have access.
 
-## Related Commands
+## Related commands
 
 - [`astro workspace list`](cli/astro-workspace-list.md)

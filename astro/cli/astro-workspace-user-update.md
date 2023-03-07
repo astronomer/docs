@@ -38,6 +38,11 @@ astro workspace user update --role <user-role>
 | `<email>`             | The email for the user you want to invite or update. | Any valid email                                                                  |
 | `--role` (_Required_) | The user's role in the Workspace.                    | Valid values are `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
+## Related commands
+
+- [`astro workspace user add`](cli/astro-workspace-user-add.md)
+- [`astro organization user update`](cli/astro-organization.md)
+
 </TabItem>
 <TabItem value="software">
 

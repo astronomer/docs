@@ -37,6 +37,10 @@ astro workspace user remove
 | --------- | ------------------------------------------ | --------------- |
 | `<email>` | The email for the user you want to remove. | Any valid email |
 
+## Related commands
+
+- [`astro workspace user add`](cli/astro-workspace-user-add.md)
+- [`astro organization user remove`](cli/astro-organization.md)
 
 </TabItem>
 <TabItem value="software">
