@@ -125,8 +125,8 @@ module.exports = {
       bottomNav: {
         items: [
           {
-            label: 'Get a demo',
-            href: 'https://www.astronomer.io/events/weekly-demo/?referral=docs-sidebar',
+            label: 'Book Office Hours',
+            href: 'https://calendly.com/d/yy2-tvp-xtv/astro-data-engineering-office-hours-ade',
           },
           {
             label: 'Watch a webinar',
