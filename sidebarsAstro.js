@@ -94,6 +94,7 @@ module.exports = {
           },
           items: ["install-aws", "install-azure", "install-gcp"],
         },
+        "migration",
         "manage-workspaces",
         "manage-organization",
         {
