@@ -1,11 +1,8 @@
 ---
 sidebar_label: 'Migration'
 title: 'Migrating to Astro'
-id: install-gcp
-description: Get started on Astro by creating your first Astro cluster on Google Cloud Platform (GCP).
-sidebar_custom_props: { icon: 'img/gcp.png' }
-toc_min_heading_level: 2
-toc_max_heading_level: 2
+id: migration 
+description: Get started on Astro by migrating your Airflow instance from Google Cloud Composer or Amazon Managed Workflows for Apache Airflow
 ---
 
 import Tabs from '@theme/Tabs';
