@@ -93,7 +93,7 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 ## Add utility files
 
-To reference utility files from your DAG code, such as Python scripts and SQL queries, create a folder in `dags` named `utils` and add the files to this folder. If you're running Airflow locally, apply the changes by refreshing the Airflow UI.
+To reference utility files from your DAG code, such as Python scripts and SQL queries, create a folder in `dags` named `utils` and add the files to this folder. If you're running Airflow locally, apply these changes to your environment by refreshing the Airflow UI.
 
 If you're using [DAG-only deploys](https://docs.astronomer.io/astro/deploy-code#deploy-dags-only) on Astro, changes to this folder are deployed when you run `astro deploy --dags` and do not require restarting your Deployment. 
 
@@ -101,7 +101,7 @@ If you're using [DAG-only deploys](https://docs.astronomer.io/astro/deploy-code#
 
 Airflow plugins enable custom features in Airflow, such as new pages in the Airflow UI or custom alerting and monitoring tools. To use an Airflow plugin, add your plugin files to the `plugins` folder of your Astro project. See [Airflow plugins](https://docs.astronomer.io/learn/using-airflow-plugins) for examples of creating and using Airflow plugins.
 
-To apply changes to this folder, [restart your local environment](develop-project.md#restart-your-local-environment).
+To apply changes from this folder to a local Airflow environment, [restart your local environment](develop-project.md#restart-your-local-environment).
 
 ## Add Airflow connections, pools, variables
 
