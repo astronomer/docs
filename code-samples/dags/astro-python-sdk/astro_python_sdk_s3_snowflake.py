@@ -63,6 +63,8 @@ with dag:
         ),
         output_table=Table(
             conn_id=SNOWFLAKE_CONN_ID,
+            # apply constraints to the columns of the temporary output table,
+            # which is a requirement for running the '.merge' function later in the DAG.
             columns=[
                 sqlalchemy.Column("order_id", sqlalchemy.String(60), primary_key=True),
                 sqlalchemy.Column(
