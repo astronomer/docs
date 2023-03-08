@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Migration'
+sidebar_label: 'Migrating to Astro'
 title: 'Migrating to Astro'
 id: migration 
 description: Get started on Astro by migrating your Airflow instance from Google Cloud Composer or Amazon Managed Workflows for Apache Airflow
@@ -12,8 +12,7 @@ This is where you'll find instructions for migrating to Astro from another manag
 cover migrating from:
 
 - (GCC) [Google Cloud Composer](https://cloud.google.com/composer/docs/concepts/overview)
-- (
-  MWAA) [Amazon Managed Workflows for Apache Airflow](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html)
+- (MWAA) [Amazon Managed Workflows for Apache Airflow](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html)
 - Other Astronomer products like Astronomer Nebula
 
 To complete the migration process, you will:
@@ -63,6 +62,7 @@ The Starship migration utility can either function as an Airflow Plugin with a u
 
 
 #### Starship Compatability Matrix
+
 | Source Airflow      | [Starship Plugin](https://github.com/astronomer/starship/tree/master/astronomer-starship) | Starship Operator |
 | --- | --- | --- |
 | Airflow 1.x | ❌ | ❌ |
@@ -75,18 +75,15 @@ The Starship migration utility can either function as an Airflow Plugin with a u
 | Astronomer Software | ✅ |  |
 
 #### Installation 
-<Tabs defaultValue="plugin" values="{[{label: 'MWAA', value: 'mwaa'}, {label: 'Cloud Composer', value: 'gcc'}]}" >
+<Tabs defaultValue="plugin" values="{[{label: 'MWAA', value: 'mwaa'}, {label: 'Cloud Composer', value: 'gcc'}]}">
 <TabItem value="mwaa">
-To install `astronomer-starship` to your MWAA instance, you'll need to edit the `requirements.txt` file in your S3 Bucket. You can find more [detailed instructions here.](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways).
-
+To install `astronomer-starship` to your MWAA instance, you'll need to edit the `requirements.txt` file in your S3 Bucket. You can find more [detailed instructions here.](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways)
 You'll want to add `astronomer-starship` on a new line, in your `requirements.txt` file, then re-upload the file to your S3 bucket, and edit your Airflow Environment to refer to the new version of this file.
 </TabItem>
 <TabItem value="gcc">
-::: caution 
-
+::: caution
 [//]: # (TODO )
 https://cloud.google.com/composer/docs/composer-2/install-python-dependencies
-
 :::
 </TabItem>
 </Tabs>
@@ -125,10 +122,7 @@ See [Create a Deployment](create-deployment.md).
     - Some Airflow versions are not supported - lowest supported version is Airflow 2.2.x
     - Reference runtime release notes [here](https://docs.astronomer.io/astro/runtime-release-notes) to determine which Airflow version corresponds with which runtime version
     
-    <aside>
     💡 At this point, understand the `Dockerfile` and it’s purpose, modification beyond setting the version will not be needed in these migrations.
-    
-    </aside>
     
 3. Add `requirements.txt` , as needed.
 
