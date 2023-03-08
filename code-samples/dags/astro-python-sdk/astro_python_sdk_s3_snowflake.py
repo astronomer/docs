@@ -38,7 +38,7 @@ def join_orders_customers(filtered_orders_table: Table, customers_table: Table):
 def transform_dataframe(df: DataFrame):
     purchase_dates = df.loc[:, "purchase_date"]
     print("purchase dates:", purchase_dates)
-    return purchase_dates
+    return purchase_dates.to_json()
 
 
 # Basic DAG definition. Run the DAG starting January 1st, 2019 on a daily schedule.
