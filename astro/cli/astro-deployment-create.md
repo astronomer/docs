@@ -31,11 +31,7 @@ Create a Deployment on Astro. This command is functionally identical to using th
 astro deployment create
 ```
 
-:::tip
-
-To create a deployment with a custom worker queue use a deployment file and the `--deployment-file` flag. See [Deployments as Code documentation](manage-deployments-as-code.md) for more information
-
-:::
+Some Deployment configurations can be set only by using the `--deployment-file` flag to apply a Deployment file. See [Manage Deployments as code](manage-deployments-as-code.md).
 
 ## Options
 
