@@ -75,22 +75,37 @@ The Starship migration utility can either function as an Airflow Plugin with a u
 | Astronomer Software | ✅ |  |
 
 #### Installation 
-<Tabs defaultValue="plugin" values="{[{label: 'MWAA', value: 'mwaa'}, {label: 'Cloud Composer', value: 'gcc'}]}">
+
+<Tabs
+    defaultValue="mwaa"
+    groupId="installation"
+    values={[
+        {label: 'MWAA', value: 'mwaa'},
+        {label: 'Cloud Composer', value: 'gcc'},
+    ]}>
 <TabItem value="mwaa">
+
 To install `astronomer-starship` to your MWAA instance, you'll need to edit the `requirements.txt` file in your S3 Bucket. You can find more [detailed instructions here.](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways)
 You'll want to add `astronomer-starship` on a new line, in your `requirements.txt` file, then re-upload the file to your S3 bucket, and edit your Airflow Environment to refer to the new version of this file.
+
 </TabItem>
+
 <TabItem value="gcc">
+
 ::: caution
-[//]: # (TODO )
+
+(TODO )
 https://cloud.google.com/composer/docs/composer-2/install-python-dependencies
+
 :::
+
 </TabItem>
 </Tabs>
 
 We will cover usage of the Starship migration utility later in this document
 
-[//]: # (TODO )
+(TODO )
+
 ### Create Astro Workspace
 - Create Workspaces in the Astro UI
 - Add users and set permissions accordingly
@@ -102,7 +117,9 @@ Create Target deployments in the recently created workspace in Astro UI with the
 See [Create a Deployment](create-deployment.md).
 
 ## Migrate Airflow Metadata
+
 ### Migrate Airflow Metadata with Starship from Source Environment
+
 - Migrate Connections
 - Migrate Variables
 - Test connections via Starship when possible
@@ -141,7 +158,6 @@ Test the environment locally with the CLI using `astro dev parse`  and `astro de
 
 ### Deploy
 Deploy with astro deploy 
-
 
 ## Test and Cutover
 ### **Test and Cutover**
