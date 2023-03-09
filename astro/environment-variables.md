@@ -162,3 +162,16 @@ You can then use the following Python functions in the top level of your DAG cod
 - `os.getenv('AIRFLOW_VAR_<VAR_NAME>','<default-value>')`: This method is faster because it reduces the number of Airflow metadata database requests. However, it's less secure. Astronomer does not recommend using `os.getenv` with secret values because calling these values with the function can print them to your logs. 
 
     Replace `<default_value>` with a default value to use if Airflow can't find the environment variable. Typically, this is the value you defined for the environment variable in the Cloud UI. 
+
+## Add Airflow configurations using environment variables
+Similarly to how you can set Airflow Connections and Variables using Environment Variables and the methods described above,
+you can also configure some core Airflow settings. As mentioned in [here](develop-project#unsupported-project-configurations),
+you cannot use `airflow.cfg` nor `airflow_local_settings.py` in an Astronomer Deployment. 
+
+You can set Airflow Configuration settings via an environmental variable, such as: 
+```dotenv
+AIRFLOW__CORE__PARALLELISM=64
+```
+This would set Airflow's global task parallelism to 64.
+The [Configurations Reference page](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) in Airflow has descriptions of all the Airflow Configuration settings and their Environment Variable key form.
+
