@@ -81,7 +81,6 @@ deployment:
           min_worker_count: 1
           worker_concurrency: 16
           worker_type: m5.xlarge
-         worker_queues:
         - name: machine-learning-tasks
           max_worker_count: 4
           min_worker_count: 0
