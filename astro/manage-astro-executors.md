@@ -74,7 +74,7 @@ While you can technically customize all values for a worker Pod, Astronomer reco
 
 :::
 
-You can configure multiple different custom worker Pods to override the default Astro worker Pod on a per-task basis. You might complete this setup to change how many resources the Pod uses, or to create an `empty_dir` for tasks to store temporary files.
+You can configure multiple different custom worker Pods to override the default Astro worker Pod on a per-task basis. You might complete this setup to change how many resources the Pod uses.
 
 1. Add the following import to your DAG file:
 
@@ -137,57 +137,6 @@ with DAG(
 ```
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
-
-### Create temporary storage for tasks
-
-The Airflow metadata database has limited temporary storage for Airflow tasks. Creating or storing files in the metadata database system is not recommended, as it is unlikely that there will be sufficient storage for your tasks and the data will be available to other worker Pods. To create or store temporary files for task execution, Astronomer recommends creating a temporary folder for each task worker Pod.
-
-The following example shows how you can add a temporary folder to a Pod using a `pod_override` configuration:
-
-```python
-from kubernetes.client import models as k8s
-import pendulum
-import time
-
-from airflow import DAG
-from airflow.decorators import task
-from airflow.example_dags.libs.helper import print_stuff
-
-
-volumes = [k8s.V1Volume(name="cache-volume", empty_dir=k8s.V1EmptyDirVolumeSource())]
-
-volume_mounts = [k8s.V1VolumeMount(mount_path="/cache/", name="cache-volume")]
-
-executor_config = {
-    "pod_override": k8s.V1Pod(
-        spec=k8s.V1PodSpec(
-            containers=[k8s.V1Container(name="base", volume_mounts=volume_mounts)],
-            volumes=volumes,
-        )
-    )
-}
-
-with DAG(
-    dag_id="empty_dir_example_dag",
-    schedule=None,
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
-    catchup=False,
-) as dag:
-
-    @task(executor_config=executor_config)
-    def empty_dir_example():
-        """
-        Tests whether the volume has been mounted.
-        """
-        with open('/cache/volume_mount_test.txt', 'w') as foo:
-            foo.write('Hello')
-
-        return_code = os.system("cat /cache/volume_mount_test.txt")
-        if return_code != 0:
-            raise ValueError(f"Error when checking volume mount. Return code {return_code}")
-
-    empty_dir_example()
-```
 
 ### Change the Pod worker node type
 
