@@ -81,7 +81,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 ## Add a group of users to Astro using the Astro CLI
 
-You can use the Astro CLI and a shell script to add multiple users to an Organization or Workspace. Because the shell script reads from a text file, you can automate user management by generating the text file and running the shell script for each new batch of users that need to be assigned to an Organization or Workspace.
+You can use the Astro CLI and a shell script to add multiple users to an Organization or Workspace at a time using a shell script. The shell script reads from a text file that your team creates which contains user information. To automate adding users to Astro, generate the text file for each new batch of users that need to assigned to an Organization or Workspace and run the script with the Astro CLI.
 
 1. Create a text file named `users.txt`.
 2. Open the text file and add a list of user email addresses that you want to invite to an Organization or Workspace. Every email address should include the user's assigned role. The following is an example of how you can write a list for inviting users to an Organization:
