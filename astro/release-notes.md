@@ -1305,7 +1305,7 @@ All user configurations can be found by clicking your user profile picture in th
 ### Additional improvements
 
 - In the Cloud UI, the **Open Airflow** button is now disabled until the Airflow UI of the Deployment is available.
-- Workspace Admin can now edit user permissions and remove users within a given Workspace.
+- Workspace Admins can now edit user permissions and remove users within a given Workspace.
 
 ## September 28, 2021
 
