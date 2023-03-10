@@ -74,7 +74,7 @@ After you configure a GitHub repository, you can use the **Commit** button in th
 
 On the first GitHub commit of your project, the Astro Cloud IDE automatically pushes a Github action named `astro_deploy.yaml` to your repository that includes steps for deploying to Astro. You can then configure your GitHub repository to push your Astro Cloud IDE project to a Deployment when you commit to specific branches. 
 
-You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring a destination Deployment in GitHub. However, if you don't configure any destination Deployments, `astro_deploy.yaml` fails and you can't deploy your changes to Astro.
+You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring destination Deployments in GitHub. However, if you don't configure any destination Deployment, `astro_deploy.yaml` fails and your changes aren't deployed to Astro.
 
 :::caution
 
