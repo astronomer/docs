@@ -1,8 +1,6 @@
 from airflow.decorators import dag, task
-from airflow.models import Variable
 from pendulum import datetime
 from fivetran_provider_async.operators import FivetranOperatorAsync
-from airflow.providers.github.sensors.github import GithubTagSensor
 import logging
 
 # get the airflow.task logger
@@ -17,28 +15,8 @@ TAG_NAME = "sync-metadata"
 @dag(start_date=datetime(2023, 1, 1), schedule="@daily", catchup=False)
 def my_fivetran_dag():
     @task
-    def generate_tag_to_await():
-        """
-        Retrieves the current number associated with the TAG_NAME Airflow
-        Variable. If the Variable is not set, sets the number to 1 and creates
-        the Variable.
-        """
-
-        try:
-            number = Variable.get(f"{TAG_NAME}")
-        except KeyError as err:
-            task_logger.info(f"{err}" + " setting expected release number to 1.")
-            number = 1
-            Variable.set(f"{TAG_NAME}", number)
-
-        return f"{TAG_NAME}/{number}"
-
-    wait_for_tag = GithubTagSensor(
-        task_id="wait_for_tag",
-        github_conn_id="github_conn",
-        repository_name=GITHUB_REPOSITORY,
-        tag_name="{{ ti.xcom_pull(task_ids='generate_tag_to_await', key='return_value') }}",
-    )
+    def upstream():
+        return "Hello"
 
     run_fivetran_sync = FivetranOperatorAsync(
         task_id="run_fivetran_sync",
@@ -47,18 +25,10 @@ def my_fivetran_dag():
     )
 
     @task
-    def increase_tag_var():
-        """
-        Increases the number associated with the Airflow Variable TAG_NAME by 1.
-        """
+    def downstream():
+        return "Goodbye"
 
-        old_num = Variable.get(f"{TAG_NAME}")
-        new_num = int(old_num) + 1
-        Variable.set(f"{TAG_NAME}", new_num)
-        task_logger.info(f"Set Variable '{TAG_NAME}' to {new_num}")
-        return new_num
-
-    (generate_tag_to_await() >> wait_for_tag >> run_fivetran_sync >> increase_tag_var())
+    upstream() >> run_fivetran_sync >> downstream()
 
 
 my_fivetran_dag()
