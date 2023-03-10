@@ -6,7 +6,7 @@ description: Reference documentation for astro workspace list.
 hide_table_of_contents: true
 ---
 
-Generates a list of all Workspaces that you have access to.
+Generates a list of all Workspaces within your current Organization that you have access to.
 
 ## Usage
 

@@ -23,7 +23,7 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-Update a user's permissions in your current Astrp Workspace. The CLI prompts you for the user's email.
+Update the role of an existing user in your current Workspace. The CLI prompts you for the user's email.
 
 ## Usage
 
@@ -35,7 +35,7 @@ astro workspace user update --role <user-role>
 
 | Option                | Description                                          | Valid Values                                                                     |
 | --------------------- | ---------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `<email>`             | The email for the user you want to invite or update. | Any valid email                                                                  |
+| `<email>`             | The email address of the user whose role you want to update. | Any valid email                                                                  |
 | `--role` (_Required_) | The user's role in the Workspace.                    | Valid values are `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands

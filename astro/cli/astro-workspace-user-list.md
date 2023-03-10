@@ -52,8 +52,8 @@ astro workspace user list
 
 | Option           | Description                                                                                                                                             | Possible Values        |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
-| `--workspace-id` | The Workspace that you're searching in. Specify this flag if you want to search for users in a Workspace that is different than your current Workspace. | Any valid Workspace ID |
-| `--email`        | The email for the user you're searching for.                                                                                                            | Any string             |
+| `--workspace-id` | The Workspace for which you want to list users. Specify this flag if you want to search for users in a Workspace that is different than your current Workspace. | Any valid Workspace ID |
+| `--email`        | The email address for the user you're searching for.                                                                                                            | Any string             |
 | `--name`         | The name of the user to search for.                                                                                                                     | Any string             |
 | `--paginated `   | Paginate the list of users. If `--page-size` is not specified, the default page size is 20.                                                             | None                   |
 | `--page-size`    | The page size for paginated lists.                                                                                                                      | Any integer            |

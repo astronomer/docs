@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 :::info  
 
-The behavior and format of this command differs depending on what Astronomer product you're using. Use the following tabs to change product contexts. 
+The behavior and format of this command differs depending on which Astronomer product you're using. Use the following tabs to change product contexts. 
 
 :::
 
@@ -23,7 +23,7 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-Invite an existing user to your current Astronomer Workspace.
+Add an existing Organization user to your current Astronomer Workspace. You must be a Workspace Admin to perform this action.
 
 ## Usage
 
@@ -35,7 +35,7 @@ astro workspace user add <email>
 
 | Option    | Description                                          | Valid Values                                                                               |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `<email>` | The email for the user you want to invite or update. | Any valid email                                                                            |
+| `<email-address>` | The email address of the user that you want to add to the Workspace. | Any valid email address                                                                            |
 | `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands
