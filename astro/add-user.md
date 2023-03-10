@@ -10,7 +10,7 @@ As a Workspace Admin or Organization Owner, you can add new team members to Astr
 ## Prerequisites
 
 - To add, edit, or remove Organization users, you need Organization Owner permissions.
-- To add edit, or remove Workspace users, you need Workspace Admin permissions for a given Workspace. The user must also already be a part of the Organization that hosts the Workspace.
+- To add edit, or remove Workspace users, you need Workspace Owner permissions for a given Workspace. The user must also already be a part of the Organization that hosts the Workspace.
 - To remove yourself from an Organization as an Organization Owner, one or more Organization Owners must be assigned to the Organization. If you're the only Organization Owner for your Organization, you'll need to assign another Organization Owner before removing yourself from the Organization.
 
 For more information on user roles, see [Manage user permissions on Astro](user-permissions.md).

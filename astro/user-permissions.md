@@ -12,9 +12,9 @@ Astro has hierarchical role based access control. Within a given Workspace or Or
 The Astro role hierarchies in order of inheritance are: 
 
 - Organization Owner > Organization Billing Admin > Organization Member 
-- Workspace Admin > Workspace Editor > Workspace Viewer
+- Workspace Owner > Workspace Editor > Workspace Viewer
 
-Users with Organization Owner permissions also inherit Workspace Admin permissions on all Workspaces.
+Users with Organization Owner permissions also inherit Workspace Owner permissions on all Workspaces.
 
 ## Organization roles
 
@@ -32,7 +32,7 @@ An Organization role grants a user some level of access to an Astro Organization
 | Create a new Workspace                                           | ✔️                       | ✔️                              | ✔️                      |
 | Update Organization billing information and settings             |                         | ✔️                              | ✔️                      |
 | View usage for all Workspaces in the **Usage** tab               |                         | ✔️                              | ✔️                      |
-| Workspace Admin permissions to all Workspaces                    |                         |                                | ✔️                      |
+| Workspace Owner permissions to all Workspaces                    |                         |                                | ✔️                      |
 | Update roles and permissions of existing Organization users      |                         |                                | ✔️                      |
 | Invite a new user to an Organization                             |                         |                                | ✔️                      |
 | Remove a user from an Organization                               |                         |                                | ✔️                      |
@@ -44,7 +44,7 @@ To update user Organization roles, see [Manage users](add-user.md).
 
 A Workspace role grants a user some level of access to a specific Workspace. The following table lists the available Workspace roles:
 
-| Permission                                          | **Workspace Viewer** | **Workspace Editor** | **Workspace Admin** |
+| Permission                                          | **Workspace Viewer** | **Workspace Editor** | **Workspace Owner** |
 | --------------------------------------------------- | -------------------- | -------------------- | ------------------- |
 | View Workspace users                                | ✔️                    | ✔️                    | ✔️                   |
 | View all Deployments in the Cloud UI                | ✔️                    | ✔️                    | ✔️                   |

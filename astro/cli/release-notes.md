@@ -367,7 +367,7 @@ If your CI/CD pipelines currently define one or more Deployment IDs, you may rem
 
 ### Bug fixes
 
-- Fixed an issue where only Workspace Admins could create Deployments
+- Fixed an issue where only Workspace Owners could create Deployments
 
 ## Astro CLI 1.0.1
 
