@@ -37,7 +37,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - An Astro account. If you are not an Astronomer customer yet and want to learn more about Astro, you can [join the weekly demo](https://www.astronomer.io/events/weekly-demo/) or [contact us directly](https://www.astronomer.io/try-astro/?referral=docs-content-link).
-- A Workspace in which you are either a Workspace Editor or a Workspace Owner.
+- A Workspace in which you are either a Workspace Editor or a Workspace Admin.
 - An account in one of the following database services, which are currently supported in the Astro Cloud IDE: [GCP BigQuery](https://cloud.google.com/bigquery/docs/quickstarts), [Postgres](https://www.postgresql.org/docs/current/tutorial-start.html), [Snowflake](https://docs.snowflake.com/en/user-guide-getting-started.html) or [AWS Redshift](https://docs.aws.amazon.com/redshift/latest/gsg/getting-started.html). Additionally you will need your login credentials to create the connection to your database.
 - A GitHub account with access to a private or public repository that contains an Airflow Project created by the [Astro CLI](https://docs.astronomer.io/astro/cli/install-cli) 
 - A Personal Access Token for your GitHub account. To create a personal access token, see the [official GitHub documentation](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
