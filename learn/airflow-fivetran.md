@@ -133,9 +133,9 @@ For this tutorial you will create a DAG that triggers your Fivetran sync to inge
 
     This DAG contains three tasks: 
 
-    - The `upstream` task runs before the Fivetran sync job is run.
+    - The `upstream` task runs before the Fivetran sync job is run. This task could contain a sensor or deferrable operator waiting for an action to be completed in another data tool.
     - The `run_fivetran_sync` task uses the FivetranOperatorAsync to trigger the Fivetran connector specified as `FIVETRAN_CONNECTOR_ID` as soon as the `upstream` task has completed successfully.
-    - The `downstream` task runs after the Fivetran sync job has finished.
+    - The `downstream` task runs after the Fivetran sync job has finished. Commonly, tasks containing data transformations on the data loaded into your Fivetran destination will be set as downstream tasks.
 
 4. Update the `FIVETRAN_CONNECTOR_ID` variable with the ID of your connector. You can find the ID of your connector in the Fivetran UI under the **Setup** tab:
 
