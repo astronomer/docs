@@ -631,7 +631,7 @@ You can now [create an Astro cluster on GCP](create-cluster.md) in the following
 
 The following user roles have new and modified permissions:
 
-- Organization Owners now have Workspace Owner permissions for all Workspaces in their Organization. This role can now access Organization Workspaces, Deployments, and usage data.
+- Organization Owners now have Workspace Admin permissions for all Workspaces in their Organization. This role can now access Organization Workspaces, Deployments, and usage data.
 - Organization Billing Admins can now view [usage](deployment-metrics.md#astro-usage) for all Workspaces in their Organization regardless of their Workspace permissions.
 - Workspace Editors can now delete any Deployment in their Workspace.
 
@@ -1018,7 +1018,7 @@ The following Organization-level roles are now supported on Astro:
 
 - **Organization Member**: This role can view Organization details and membership. This includes everything in the **People**, **Clusters**, and **Settings** page of the Cloud UI. Organization members can create new Workspaces and invite new users to an Organization.
 - **Organization Billing Admin:** This role has all of the Organization Member's permissions, plus the ability to manage Organization-level settings and billing. Organization Billing Admins can access the **Usage** tab of the Cloud UI and view all Workspaces across the Organization.
-- **Organization Owner:** This role has all of the Organization Billing Admin's permissions, plus the ability to manage and modify anything within the entire Organization. This includes Deployments, Workspaces, Clusters, and users. Organization Owners have Workspace Owner permissions to all Workspaces within the Organization.
+- **Organization Owner:** This role has all of the Organization Billing Admin's permissions, plus the ability to manage and modify anything within the entire Organization. This includes Deployments, Workspaces, Clusters, and users. Organization Owners have Workspace Admin permissions to all Workspaces within the Organization.
 
 Organization roles can be updated by an Organization Owner in the **People** tab of the Cloud UI. For more information about these roles, see [User permissions](user-permissions.md).
 
@@ -1028,7 +1028,7 @@ All users can now create a new Workspace directly from the **Overview** tab of t
 
 ![Create Workspace button](/img/release-notes/add-workspace.png)
 
-When you create a new Workspace, you will automatically become a Workspace Owner within it and can create Deployments. For more information about managing Workspaces, see [Manage Workspaces](manage-workspaces.md).
+When you create a new Workspace, you will automatically become a Workspace Admin within it and can create Deployments. For more information about managing Workspaces, see [Manage Workspaces](manage-workspaces.md).
 
 ### Bug fixes
 
@@ -1060,7 +1060,7 @@ For more information about the **DAGs** page, see [Deployment metrics](deploymen
 
 ### Support for third-party identity providers
 
-You can now integrate both Azure AD and Okta as identity providers (IdPs) for federated authentication on Astro. By setting up a third-party identity provider, a user in your organization will be automatically logged in to Astro if they're already logged in via your IdP. By adding new Astro users through your IdP's own user management system, Workspace Owners can automatically add new users to their Workspace without those users needing to individually sign up for Astro.
+You can now integrate both Azure AD and Okta as identity providers (IdPs) for federated authentication on Astro. By setting up a third-party identity provider, a user in your organization will be automatically logged in to Astro if they're already logged in via your IdP. By adding new Astro users through your IdP's own user management system, Workspace Admins can automatically add new users to their Workspace without those users needing to individually sign up for Astro.
 
 For more information about this feature read [Set up an identity provider](configure-idp.md).
 
@@ -1305,7 +1305,7 @@ All user configurations can be found by clicking your user profile picture in th
 ### Additional improvements
 
 - In the Cloud UI, the **Open Airflow** button is now disabled until the Airflow UI of the Deployment is available.
-- Workspace Owners can now edit user permissions and remove users within a given Workspace.
+- Workspace Admins can now edit user permissions and remove users within a given Workspace.
 
 ## September 28, 2021
 
