@@ -78,7 +78,7 @@ You can commit changes from the Astro Cloud IDE to your GitHub repository withou
 
 :::caution
 
-When the `astro_deploy.yaml` first runs, it automatically enables DAG-only deploys on your Deployment. DAG-only deploying is a feature that changes how DAGs and configurations are pushed to a Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+When the `astro_deploy.yaml` first runs, it automatically enables DAG-only deploys on your Deployment. DAG-only deploying is a feature that allows you to deploy your DAGs directory independently of the rest of your Astro project. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 :::
 
