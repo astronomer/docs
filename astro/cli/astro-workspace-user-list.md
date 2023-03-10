@@ -23,7 +23,7 @@ The behavior and format of this command differs depending on what Astronomer pro
     ]}>
 <TabItem value="astro">
 
-Outputs a list of all users with access to your current Workspace.
+List all users with access to your current Workspace.
 
 ## Usage
 
