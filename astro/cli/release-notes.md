@@ -311,7 +311,7 @@ For more information about this command, see the [CLI command reference](cli/ast
 By default, `astro deploy` automatically parses the DAGs in your Astro project for syntax and import errors. To develop more quickly, you can now configure the Astro CLI to automatically skip parsing DAGs before a deploy by updating one of the following configurations:
 
 - Add `skip_parse: true` to your `.astro/config.yaml` file.
-- Add `ASTRONOMER_SKIP_PARSE=true` as en environment variable to your local environment or CI/CD pipeline.
+- Add `ASTRONOMER_SKIP_PARSE=true` as an environment variable to your local environment or CI/CD pipeline.
 
 For more information on parsing DAGs, see [Parse DAGs](test-and-troubleshoot-locally.md#parse-dags). For more information about deploying to Astro, see [Deploy code](deploy-code.md).
 ### Additional improvements
@@ -367,7 +367,7 @@ If your CI/CD pipelines currently define one or more Deployment IDs, you may rem
 
 ### Bug fixes
 
-- Fixed an issue where only Workspace Admins could create Deployments
+- Fixed an issue where only Workspace Owners could create Deployments
 
 ## Astro CLI 1.0.1
 

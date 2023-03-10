@@ -94,7 +94,7 @@ module.exports = {
       buttons: {
         primary: {
           label: "Try Astro",
-          href: "https://www.astronomer.io/get-started?referral=docs-what-astro-banner"
+          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner"
         },
         secondary: {
           label: "Learn about Astronomer",
@@ -125,8 +125,8 @@ module.exports = {
       bottomNav: {
         items: [
           {
-            label: 'Get a demo',
-            href: 'https://www.astronomer.io/events/weekly-demo/?referral=docs-sidebar',
+            label: 'Book Office Hours',
+            href: 'https://calendly.com/d/yy2-tvp-xtv/astro-data-engineering-office-hours-ade',
           },
           {
             label: 'Watch a webinar',
