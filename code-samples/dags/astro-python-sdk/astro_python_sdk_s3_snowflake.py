@@ -8,6 +8,9 @@ from astro import sql as aql
 from astro.files import File
 from astro.sql.table import Table
 
+# Import SQLAlchemy to set constraints on some temporary tables
+import sqlalchemy
+
 # Define constants for interacting with external systems
 S3_FILE_PATH = "s3://<aws-bucket-name>"
 S3_CONN_ID = "aws_default"
@@ -58,7 +61,29 @@ with dag:
         input_file=File(
             path=S3_FILE_PATH + "/orders_data_header.csv", conn_id=S3_CONN_ID
         ),
-        output_table=Table(conn_id=SNOWFLAKE_CONN_ID),
+        output_table=Table(
+            conn_id=SNOWFLAKE_CONN_ID,
+            # apply constraints to the columns of the temporary output table,
+            # which is a requirement for running the '.merge' function later in the DAG.
+            columns=[
+                sqlalchemy.Column("order_id", sqlalchemy.String(60), primary_key=True),
+                sqlalchemy.Column(
+                    "customer_id",
+                    sqlalchemy.String(60),
+                    nullable=False,
+                    key="customer_id",
+                ),
+                sqlalchemy.Column(
+                    "purchase_date",
+                    sqlalchemy.String(60),
+                    nullable=False,
+                    key="purchase_date",
+                ),
+                sqlalchemy.Column(
+                    "amount", sqlalchemy.Integer, nullable=False, key="amount"
+                ),
+            ],
+        ),
     )
 
     # Create a Table object for customer data in the Snowflake database

@@ -195,19 +195,41 @@ Now that you understand the core qualities of the Astro SDK, let's look at it in
 
 To load data from S3 into a SQL Table, you only need to specify the location of the data on S3 and an Airflow connection for the destination SQL table in Snowflake.
 
+Because the content of `orders_data` isn't needed after the DAG is completed, it's specified without a name. When you define a `Table` object without a preexisting name, that table is considered a temporary table. The Astro SDK deletes all temporary tables after you run `aql.cleanup` in your DAG.
+
+In this example, a schema is used to define the temporary table because a temporary table can only be merged in Snowflake when it includes constraints. Not all databases require constraints for temporary tables. For a list of databases that require constraints for temporary tables, see the [Astro Python SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/merge.html#prerequisites).
+
 ```python
 # Load a file with a header from S3 into a temporary Table, referenced by the
 # variable `orders_data`
 orders_data = aql.load_file(
     # data file needs to have a header row
     input_file=File(path=S3_FILE_PATH + "/orders_data_header.csv", conn_id=S3_CONN_ID),
-    output_table=Table(conn_id=SNOWFLAKE_CONN_ID),
+    output_table=Table(
+        conn_id=SNOWFLAKE_CONN_ID,
+        output_table=Table(
+            conn_id=SNOWFLAKE_CONN_ID,
+            columns=[
+                sqlalchemy.Column("order_id", sqlalchemy.String(60), primary_key=True),
+                sqlalchemy.Column(
+                    "customer_id",
+                    sqlalchemy.String(60),
+                    nullable=False,
+                    key="customer_id",
+                ),
+                sqlalchemy.Column(
+                    "purchase_date",
+                    sqlalchemy.String(60),
+                    nullable=False,
+                    key="purchase_date",
+                ),
+                sqlalchemy.Column(
+                    "amount", sqlalchemy.Integer, nullable=False, key="amount"
+                ),
+            ],
+        ),   
 )
 ```
-
-Because the content of `orders_data` isn't needed after the DAG is completed, it's specified without a name. When you define a `Table` object without a preexisting name, that table is considered a temporary table.
-
-The Astro SDK deletes all temporary tables after you run `aql.cleanup` in your DAG.
 
 ### Transform
 

@@ -18,6 +18,8 @@ This command includes five subcommands:
 - `astro organization list`: View a list of Organizations that you can access on Astro. Only the Organizations you have been invited to by a System Admin appear on this list.
 - `astro organization switch`: Switch to a different Organization that you have access to in Astro.
 
+You can use `astro organization user invite` to invite multiple users to an Organization at a time. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
+
 ## Options 
 
 | Option    | Description                                                                                                                                       | Valid Values                                                                                                                             |

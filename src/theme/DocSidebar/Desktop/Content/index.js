@@ -46,7 +46,7 @@ export default function DocSidebarDesktopContent({ path, sidebar, className }) {
         {!path.indexOf('/software') > -1 && (
           <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list', styles.menu__listBottom)}>
             <li>
-              <a href="https://www.astronomer.io/events/weekly-demo/?referral=docs-sidebar">Get a demo</a>
+              <a href="https://calendly.com/d/yy2-tvp-xtv/astro-data-engineering-office-hours-ade">Book Office Hours</a>
             </li>
             <li>
               <a href="https://www.astronomer.io/events/webinars/?referral=docs-sidebar">Watch a webinar</a>

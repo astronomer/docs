@@ -1,5 +1,5 @@
 ---
-title: "Dynamically generating DAGs in Airflow"
+title: "Dynamically generate DAGs in Airflow"
 sidebar_label: "Dynamically generate DAGs"
 id: dynamically-generating-dags
 ---
