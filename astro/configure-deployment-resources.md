@@ -37,13 +37,11 @@ The Celery executor works with a pool of workers and communicates with them to d
 
 #### Limitations
 
-- Execution speed is prioritized over task reliability.
-- Complicated set up.
-- More maintenance.
+- Tasks can run on the same worker, meaning that it's possible for a task use resources intended for another task.
 
 ### Kubernetes executor
 
-The Kubernetes executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
+The Kubernetes executor runs all tasks in individual Kubernetes Pods. You can specify the configuration for these Pods using `pod_override` files which you can then apply to specific tasks. This executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
 
 #### Benefits
 
@@ -56,9 +54,11 @@ On Astro, the Kubernetes infrastructure required to run the Kubernetes executor 
 
 #### Limitations
 
-- Tasks take longer to start and this causes task latency.
-- PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster.
-- The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, the DAG is rejected and a broken DAG error message appears in teh Airflow UI. Astronomer recommends using `python-kubernetes-sdk`. See [Astro Python SDK ReadTheDocs](https://astro-sdk-python.readthedocs.io/en/stable/).
+- Tasks take longer to start, which can cause task latency.
+- PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster
+- The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, the DAG is rejected and a broken DAG error message appears in the Airflow UI.
+
+If you want to run only specific tasks in a Kubernetes Pod, consider using the [KubernetesPodOperator](kubernetespodoperator.md).
 
 ### Update the Deployment executor
 
