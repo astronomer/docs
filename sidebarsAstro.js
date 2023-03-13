@@ -21,7 +21,11 @@ module.exports = {
     {
       type: "category",
       label: "Get started",
-      items: ["trial", "create-project", "log-in-to-astro", "create-deployment"],
+      items: [
+        'trial', 
+        'create-project', 
+        'log-in-to-astro', 
+        'create-deployment'],
     },
     {
       type: "category",
@@ -93,6 +97,15 @@ module.exports = {
             description: 'Install Astro on the Astronomer-hosted cloud or your existing cloud instance.'
           },
           items: ["install-aws", "install-azure", "install-gcp"],
+        },
+        {
+          type: "category",
+          label: "Migrate to Astro",
+          link: {
+            type: 'category',
+            label: 'Migrate to Astro',
+          },
+          items: ["migrate-mwaa", "migrate-gcc", "migrate-oss"],
         },
         "migration",
         "manage-workspaces",
