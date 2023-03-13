@@ -31,9 +31,8 @@ The Celery executor works with a pool of workers and communicates with them to d
 #### Benefits
 
 - Supports multiple worker queues, which lets you assign tasks to different worker node types. See [Configure worker queues](configure-worker-queues.md)
-- Allows additional workers to be added to cope with higher demand (horizontal scaling).
+- Workers scale with higher demand.
 - Provides a grace period for worker termination.
-- Running tasks are not terminated.
 
 #### Limitations
 
