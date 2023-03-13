@@ -43,54 +43,35 @@ If you're working on a change in Software docs, you should work primarily in `so
 If you want to submit a screenshot, GIF, or a new documentation file, we recommend building and testing your documentation change locally. Astronomer docs are built with [Docusaurus](https://docusaurus.io/), which is our static site generator. Read the following sections for instructions on how to build and test your documentation changes locally with Docusaurus.
 
 #### Installation
-To build docs locally, you need to install both Node and Yarn. However, starting in 2020, the Yarn binaries are bundled in Node within [Corepacks](https://nodejs.org/api/corepack.html) instead of a separate distribution. 
+To build docs locally, you need to install both Node and Yarn. While Yarn is included in Node, starting in 2020, the Yarn binaries are bundled within [Corepack](https://nodejs.org/api/corepack.html). If you're installing Node for the first time, you need to manually enable Corepacks before you can use Yarn.
 
 1. Install Node. Corepacks is included in Node for versions greater than 16.10. 
 
-```sh
-node -version
-```
-
-If you don't have Node installed, download the installer or binaries from [Nodejs](https://nodejs.org/en/download/). If you use a package manager to install Node, it can add extra steps for you to enable Corepacks.
-
-2. After your install Node, enable `corepacks`. This automatically makes Yarn available to you. 
-
-```sh
-corepacks enable
-```
+    ```sh
+    node -version
+    ```
+2. Run the following command to enable `corepacks` and make Yarn available:
+    ```sh
+    corepack enable
+    ```
+If used an alternative package manager to install Node, such as `npm` or `homebrew`, you might need to troubleshoot your install.
 
 If you didn't use the Node installer or binaries, but used `npm` or `homebrew` instead, you might need to troubleshoot your install.
 
 #### Troubleshoot Yarn installations
 
 1. Run the following command to check which version of Node you have. 
-```sh
-node --version
-```
-This output of this command determines whether you need to install both Node and Corepacks or only Corepacks. 
+    ```sh
+    node --version
+    ```
+    
+2. Adjust your installation based on the output of the command: 
+    - **Node and yarn are installed, but need to be updated**: Use a package manager like [npm or nvm](https://www.freecodecamp.org/news/how-to-update-node-and-npm-to-the-latest-version/) to update your version, or download the installer from the [Node.js](https://nodejs.org/en/) site.
+    - **Node is installed, but you cannot enable Corepack**: If you installed Node using a package manager, and it's above version 16.10, but Corepack isn't available, follow the instructions for installing [Corepack with npm](https://github.com/nodejs/corepack#manual-installs) or installing [Corepack with Homebrew or nvm](https://stackoverflow.com/questions/70082424/command-not-found-corepack-when-installing-yarn-on-node-v17-0-1), then run the following command to enable Corepack:
 
-2. Adjust your Node installation
-- **Node and yarn are installed, but need to be updated**: Use a package manager like [npm or nvm](https://www.freecodecamp.org/news/how-to-update-node-and-npm-to-the-latest-version/) to update your version, or download the installer from the [Node.js](https://nodejs.org/en/) site.
-
-- **Node is installed, but you cannot enable Corepacks**: If you have Node installed using a package manager, and it's above version 16.10, but Corepacks isn't avialble, follow the Corepacks instructions for installing [Corepacks with npm](https://github.com/nodejs/corepack#manual-installs) or installing [Corepacks with Homebrew or nvm](https://stackoverflow.com/questions/70082424/command-not-found-corepack-when-installing-yarn-on-node-v17-0-1).
-
-For  installing Corepacks with Homebrew, you explicitly install corepacks using Homebrew. 
-```sh
-brew install corepacks
-```
-Then you can enable Corepacks. 
-
-```sh
-corepacks enable
-```
-
-- **Node is not installed, and you just need corepacks for local docs**: If you do not have Node installed and only need yarn to build docs locally, you can install directly with a package manager, such as hHmebrew, to install both Node and Corepacks. This can cause errors with shim order for certain development scenarios, but if you only need a local docs environment for testing purposes, it works.
-
-```sh
-brew install node
-brew install corepacks
-corepacks enable
-``` 
+    ```sh
+    corepack enable
+    ```
 
 After you install Node and enable Yarn with Corepacks, Docusaurus commands are available when you open the `docs` directory from your terminal. 
 
