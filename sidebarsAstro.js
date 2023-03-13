@@ -101,9 +101,8 @@ module.exports = {
         {
           type: "category",
           label: "Migrate to Astro",
-          items: ["migrate-mwaa", "migrate-gcc", "migrate-oss"],
+          items: ["migrate-mwaa", "migrate-gcc", "migrate-apache-airflow"],
         },
-        "migration",
         "manage-workspaces",
         "manage-organization",
         {
