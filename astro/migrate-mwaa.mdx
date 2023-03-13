@@ -7,7 +7,7 @@ description: Get started on Astro by migrating your Airflow code from Amazon Man
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import MigrationSteps from './_markdown-setup.mdx';
+import MigrationSteps from './_migration-setup.mdx';
 
 This is where you'll find instructions for migrating to Astro from Amazon Managed Workflows for Apache Airflow (MWAA).
 
@@ -92,4 +92,4 @@ aws mwaa update-environment $MWAA_NAME --requirements-s3-object-version=""$(aws 
 
 We will cover usage of the Starship migration utility later in this document
 
-<PartialExample />
+<MigrationSteps />
