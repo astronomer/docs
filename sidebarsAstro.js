@@ -101,10 +101,6 @@ module.exports = {
         {
           type: "category",
           label: "Migrate to Astro",
-          link: {
-            type: 'category',
-            label: 'Migrate to Astro',
-          },
           items: ["migrate-mwaa", "migrate-gcc", "migrate-oss"],
         },
         "migration",
