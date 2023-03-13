@@ -26,12 +26,14 @@ The executor type you select determines which worker resources run your schedule
 
 ### Celery executor
 
-The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most use cases. Astronomer uses worker autoscaling logic to determine how many workers run on each worker queue on your Deployment at a given time. See [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic). 
+The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most use cases. Astronomer uses [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic) to determine how many workers run on each worker queue on your Deployment at a given time. 
+
+See [Manage the Celery executor](manage-astro-executors.md#manage-the-celery-executor) for more information about configuring and running the Kubernetes executor on a Deployment. 
 
 #### Benefits
 
 - Supports multiple worker queues, which lets you assign tasks to different worker node types. See [Configure worker queues](configure-worker-queues.md)
-- Workers scale with higher demand.
+- Scales workers with higher demand.
 - Provides a grace period for worker termination.
 
 #### Limitations
@@ -40,7 +42,9 @@ The Celery executor works with a pool of workers and communicates with them to d
 
 ### Kubernetes executor
 
-The Kubernetes executor runs all tasks in individual Kubernetes Pods. You can specify the configuration for these Pods using `pod_override` files which you can then apply to specific tasks. This executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
+The Kubernetes executor runs all tasks in individual Kubernetes Pods. You can specify the configuration for these Pods using `pod_override` files which you can then apply to specific tasks. This executor is recommended when you need to control resource optimization, isolate your workloads, run tasks for extended periods, or have extended periods without without task runs.
+
+See [Manage the Kubernetes executor](manage-astro-executors.md#manage-the-kubernetes-executor) for more information about configuring and running the Kubernetes executor on a Deployment. 
 
 #### Benefits
 

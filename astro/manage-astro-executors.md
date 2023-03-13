@@ -57,7 +57,7 @@ Celery worker scaling is configured at the worker queue level. Changing worker s
 
 ## Manage the Kubernetes executor
 
-The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, maintain long periods without running tasks, or run tasks for extended periods during deployments.
+The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, run tasks for extended periods, or have extended periods without without task runs
 
 By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
@@ -66,7 +66,7 @@ By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and
 - An [Astro project](create-project.md).
 - An Astro [Deployment](create-deployment.md).
 
-### Run tasks in a custom Kubernetes worker Pod
+### Customize the Kubernetes worker Pod for a task
 
 :::warning
 
@@ -74,7 +74,7 @@ While you can technically customize all values for a worker Pod, Astronomer reco
 
 :::
 
-You can configure multiple different custom worker Pods to override the default Astro worker Pod on a per-task basis. You might complete this setup to change how many resources the Pod uses.
+You can configure different custom worker Pods to override the default Astro worker Pod on a per-task basis. You might complete this setup to change how many resources the Pod uses.
 
 1. Add the following import to your DAG file:
 
@@ -87,9 +87,9 @@ You can configure multiple different custom worker Pods to override the default 
 
 See [Manage task CPU and memory](#manage-task-cpu-and-memory) for an example `pod_override` configuration. 
 
-### Manage task CPU and memory
+### Configure limits and requests for worker Pod CPU and memory
 
-One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for your task. When requesting resources, make sure that your requests don't exceed the available resources in your current [Pod worker node type](#change-the-pod-worker-node-type).
+One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for a task. When requesting resources, make sure that your requests don't exceed the available resources in your current [Pod worker node type](#change-the-pod-worker-node-type).
 
 The following example shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
 
@@ -146,7 +146,7 @@ A Deployment using the Kubernetes executor runs worker Pods on a single `default
 
 2. Click the **Worker Queues** tab and then click **Edit** to edit the `default` worker queue.
 
-3. In the  **Worker Type** list, select the type of worker node to run your worker Pods on.
+3. In the **Worker Type** list, select the type of worker node to run your worker Pods on.
 
 4. Click **Update Queue**.
 
