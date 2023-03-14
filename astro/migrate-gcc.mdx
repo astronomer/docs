@@ -5,15 +5,29 @@ id: migrate-gcc
 description: Get started on Astro by migrating your Airflow code from Google Cloud Composer (GCC).
 ---
 
-import Intro from './migration-partials/intro.mdx';
-import Prereq from './migration-partials/prereqs.mdx';
+import Intro from './migration-partials/intro.md';
+import Prerequisites from './migration-partials/prereqs.mdx';
 import Requirements from './migration-partials/requirements.mdx';
 import Starship from './migration-partials/starship.mdx';
-import Usage from './migration-partials/starship_usage.mdx';
-import Workspaces from './migration-partials/workspaces.mdx';
+import Usage from './migration-partials/starship-usage.mdx';
+import Workspaces from './migration-partials/workspaces.md';
 import Deployments from './migration-partials/deployments.mdx';
-import DAGs from './migration-partials/directory_setup.mdx';
-import RuntimeVersionInfo from './migration-partials/runtime_version_info.mdx'
+import DAGs from './migration-partials/directory-setup.md';
+import RuntimeVersionInfo from './migration-partials/runtime-version-info.md'
+import CutOver from './migration-partials/cutover.mdx'
+import FinalStep from './migration-partials/final-step.md'
+import ConfirmConnectionsVariables from './migration-partials/confirm-connections-variables.md'
+import TestValidateDAGs from './migration-partials/test-validate-dags.md'
+import MonitorAnalytics from './migration-partials/monitor-analytics.md'
+import InstanceTypes from './migration-partials/instance-types.md'
+import DAGsOnly from './migration-partials/dags-only.md'
+import CICD from './migration-partials/cicd.md'
+import TestLocally from './migration-partials/test-locally.md'
+import Deploy from './migration-partials/deploy.md'
+import AirflowConfiguration from './migration-partials/airflow-configuration.md'
+import SecretsBackend from './migration-partials/secrets-backend.md'
+import Push from './migration-partials/push.md'
+import WrapUp from './migration-partials/push.md'
 
 
 This is where you'll find instructions for migrating to Astro from another managed Airflow environment. This guide will
@@ -23,7 +37,7 @@ cover migrating an Airflow Instance from [Google Cloud Composer (GCC)](https://c
 
 ## Prerequisites
 
-<Prereq />
+<Prerequisites />
 
 ### Requirements
 
@@ -39,9 +53,9 @@ You can additionally utilize `gcloud` CLI to expedite some steps in this guide.
 
 #### Starship Compatability Matrix
 
-| Source Airflow      | Starship Plugin | Starship Operator |
-|---------------------|-----------------|-------------------|
-| Airflow 1.x         | ❌               | ❌                 |
+| Source Airflow                 | Starship Plugin | Starship Operator |
+|--------------------------------|-----------------|-------------------|
+| Airflow 1.x                    | ❌               | ❌                 |
 | Cloud Composer 1 - Airflow 2.x |                 | ✔️️               |
 | Cloud Composer 2 - Airflow 2.x | ✔️️             |                   |
 
@@ -51,11 +65,13 @@ To install Starship to your Cloud Composer 1 or Cloud Composer 2 instance, you'l
 There you can add `astronomer-starship` as an entry by clicking `Edit`.
 You can find more [detailed instructions here.](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies)
 
-:::cli
+:::cli gcloud
+
 You can accomplish this easily with the `gcloud` CLI, in a terminal (make sure to change `[GCC_NAME]` below):
 ```sh
 gcloud composer environments update [GCC_NAME] --update-pypi-package=astronomer-starship
 ```
+
 :::
 
 We will cover usage of the Starship migration utility later in this document
@@ -85,26 +101,103 @@ Additionally - you should utilize Starship to test connections as you migrate th
     <RuntimeVersionInfo />
 
     :::info
+
     The `Dockerfile` is the backing system that all of your Airflow components run in.
     You can customize that in a variety of ways, and might
     modify it to copy special things like certificates or keys to be available in your environment.
 
     You shouldn't need to modify your `Dockerfile` beyond this, for the purposes of this migration, but may in the future.
+
     :::
-2. Add `requirements.txt` , as needed.
-    :::cli
-    You can do this with the CLI
+2. Fill in your new `requirements.txt` file. You can do this by navigating to `PYPI Packages` in the source instance and copying those to the file
+    :::cli gcloud
+
+    You can easily copy this with the `gcloud` CLI:
+    ```shell
+    gcloud composer environments describe [GCC_NAME] --format="value(config.softwareConfig.pypiPackages)" > requirements.txt
+    ```
+    Make sure to review the output after running this command
+
     :::
 
-3. Copy `/dags` folder from source control or blob storage
-    :::cli
-    You can do this with the CLI
+3. Copy your `/dags` folder from source control or the GCS Bucket by navigating to either and downloading/moving the entire folder into your local Astro project.
+    :::cli gcloud
+
+    You can easily copy this with the `gcloud` CLI:
+    ```
+    gcloud composer environments storage dags export --destination=dags
+    ```
+    Make sure to review the output after running this command
+
     :::
 
 ### Step 7: Copy accessory Airflow code
-Following recommended [project structure](https://docs.astronomer.io/learn/managing-airflow-code#project-structure):
+Following the recommended [project structure](https://docs.astronomer.io/learn/managing-airflow-code#project-structure), we will move any files to our Astro project.
 
-- Copy `/plugins` folder from source control or blob storage, as needed
-:::cli
-You can do this with the CLI
-:::
+1. If you have utilized the `/plugins` folder in your Composer storage bucket, copy it from source control or GCS Bucket to the local `/plugins` folder
+    :::cli gcloud
+
+    You can easily copy this with the `gcloud` CLI:
+    ```
+    gcloud composer environments storage plugins export --destination=plugins
+    ```
+    Make sure to review the output after running this command
+
+    :::
+2. If you have utilized data storage with Cloud Composer, you can copy that into `/include`
+    :::cli gcloud
+
+    You can easily copy this with the `gcloud` CLI:
+    ```
+    gcloud composer environments storage data export --destination=include
+    ```
+    Make sure to review the output after running this command
+
+    :::
+
+### Step 8: Configure Additional Components
+<Push />
+
+#### CI/CD
+<CICD />
+
+#### Secrets Backend
+<SecretsBackend />
+
+#### Instance Permissions and Trust Policies
+You can utilize Workload Identity or Service Account Keys to grant your Astro Deployment the same level of access to Google Services as your source Airflow
+by following the [Connect GCP - Authorization options](connect-gcp.md#authentication-options) documentation
+
+### Step 9: Test locally and check for import errors
+<TestLocally />
+
+### Step 10: Deploy
+<Deploy />
+
+## Validate, Cut-over and Tune Process
+<FinalStep />
+
+#### Confirm Migration of Connections and Variables
+<ConfirmConnectionsVariables />
+
+#### Test and Validate DAGs
+<TestValidateDAGs />
+
+#### Utilize Starship to cut-over DAGs
+<CutOver />
+
+### Tune and Optimize Deployment
+#### Monitor Analytics
+<MonitorAnalytics />
+
+#### Modify Instance Types or utilize Worker Queues
+<InstanceTypes />
+
+#### Set Airflow Configurations
+<AirflowConfiguration />
+
+#### DAGs-only Deployments
+<DAGsOnly />
+
+# Wrapping up
+<WrapUp />
