@@ -5,91 +5,117 @@ id: migrate-mwaa
 description: Get started on Astro by migrating your Airflow code from Amazon Managed Workflows for Apache Airflow (MWAA).
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import MigrationSteps from './_migration-setup.mdx';
+import Intro from './migration-partials/intro.mdx';
+import Prereq from './migration-partials/prereqs.mdx';
+import Requirements from './migration-partials/requirements.mdx';
+import Starship from './migration-partials/starship.mdx';
+import Usage from './migration-partials/starship_usage.mdx';
+import Workspaces from './migration-partials/workspaces.mdx';
+import Deployments from './migration-partials/deployments.mdx';
+import RuntimeVersionInfo from './migration-partials/runtime_version_info.mdx'
+import DAGs from './migration-partials/directory_setup.mdx';
 
-This is where you'll find instructions for migrating to Astro from Amazon Managed Workflows for Apache Airflow (MWAA).
+This is where you'll find instructions for migrating to Astro from another managed Airflow environment. This guide will
+cover migrating an Airflow Instance from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html)
 
-To complete the migration process, you will:
-
-- Prepare your source Airflow environment and setup your Astro Airflow environment.
-- Migrate metadata from your source Airflow environment.
-- Migrate DAGs and additional Airflow components.
-- Cut over your workflows from MWAA to Astro.
+<Intro />
 
 ## Prerequisites
-This process should be undertaken with assistance from your Astronomer Data Engineer, and these steps should be started after your cluster has been activated. [Networking connectivity](connect-aws.md) should already be established during activation, and an [IDP should already be configured](configure-idp.md) if it is desired. Contact your Astronomer  representative if this is not the case.
+
+<Prereq/>
 
 ### Requirements
 
-To complete this guide, you will need:
-- Access to your Astro organization and the [ability to create workspaces](manage-workspaces.md)
-- `astro` CLI is [installed](cli/install-cli.md) and [configured](log-in-to-astro.md)
-    - *note that* the `astro` CLI requires a functional `docker` installation
-- Access to the source Airflow environment to migrate
-    - you can utilize cloud provider CLIs such as `aws` and `gcloud` to expedite some steps in this guide
-    - *note that* you may also need access to a cloud storage bucket utilized by the source environment
-- Read access to any source control supporting your source Airflow environment (e.g. Github)
-- Create access for new source control repositories for your new Astro Airflow
-- Access to Secrets Backend credentials, *if in use in the source Airflow*
-- Administrative access to create new CI/CD, *if in use in the source Airflow*
+<Requirements />
 
-### Not supported 
+You can additionally utilize the `aws` CLI to expedite some steps in this guide.
 
-This process supports **Airflow 2.x**. Your source Airflow environment will need to be upgraded prior to migration 
-if they are in the **Airflow 1.x** series, and Astronomer Professional services can help you with that process.
+## Prepare Source and Setup Astro Airflow
 
-:::caution
-
-How do we not have a link for this???
-
-:::
-
-### Step 1: Install Astronomer Starship to MWAA
-
-On the selected source Airflow environment, install the [Astronomer Starship](https://pypi.org/project/astronomer-starship/) migration utility.
-
-This utility will connect to both your source and Astro Airflow deployment to migrate Airflow Connections,
-Variables, and assist in migrating your DAGs between instances.
-
-The Starship migration utility can either function as a [plugin](https://github.com/astronomer/starship/tree/master/astronomer-starship) with a user interface, or an Airflow operator if you are migrating from a more restricted Airflow environment. 
-
-Please refer to the table below for compatability:
+### Step 1: Install Astronomer Starship
+<Starship />
 
 #### Starship Compatability Matrix
 
 | Source Airflow      | Starship Plugin | Starship Operator |
 |---------------------|-----------------|-------------------|
 | Airflow 1.x         | ❌               | ❌                 |
-| GCC 1 - Airflow 2.x |                 | ☑️                |
-| GCC 2 - Airflow 2.x | ☑️              |                   |
-| MWAA v2.0.2         |                 | ☑️                |
-| MWAA v2.2.2         | ☑️              |                   |
-| OSS Airflow VM      | ☑️              |                   |
-| Astronomer Nebula   | ☑️              |                   |
-| Astronomer Software | ☑️              |                   |
+| MWAA v2.0.2         |                 | ✔️️               |
+| MWAA v2.2.2         | ✔️️             |                   |
+| MWAA v2.4.3         | ✔️️             |                   |
 
-#### Installation 
-
-To install Starship to your MWAA instance, you'll need to edit the `requirements.txt` file in your S3 Bucket. 
+#### Installation
+To install Starship to your MWAA instance, you'll need to edit the `requirements.txt` file in your S3 Bucket.
 You can find more [detailed instructions here.](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways)
-You'll want to add `astronomer-starship` on a new line, in your `requirements.txt` file, then re-upload the file to your S3 bucket, 
-and edit your Airflow Environment to refer to the new version of this file.
+
+1. Download your existing `requirements.txt` file from S3
+2. Add `astronomer-starship` on a new line in your `requirements.txt` file
+3. Re-upload the file to your S3 bucket
+4. Edit your Airflow Environment to refer to the new version of this file.
 
 :::cli
 You can accomplish this easily with the `aws` CLI, in a terminal:
+
+Modify these values:
 ```sh
-# Modify these values:
-export MWAA_NAME=<MWAA>
-export MWAA_BUCKET=<MWAA BUCKET>
+export MWAA_NAME="MWAA"
+export MWAA_BUCKET="MWAA BUCKET"
+```
+then, in a terminal, run:
+```shell
 aws s3 cp "s3://$MWAA_BUCKET/requirements.txt" requirements.txt
 echo 'astronomer-starship' >> requirements.txt
-aws s3 cp requirements.txt s3://<MWAA BUCKET>/requirements.txt
-aws mwaa update-environment $MWAA_NAME --requirements-s3-object-version=""$(aws s3api head-object --bucket=$MWAA_BUCKET --key=requirements.txt --query="VersionId")""
+aws s3 cp requirements.txt "s3://$MWAA_BUCKET/requirements.txt"
+aws mwaa update-environment "$MWAA_NAME" --requirements-s3-object-version="$(aws s3api head-object --bucket=$MWAA_BUCKET --key=requirements.txt --query="VersionId")"
 ```
 :::
 
 We will cover usage of the Starship migration utility later in this document
 
-<MigrationSteps />
+### Step 2: Create Astro Workspace
+
+<Workspaces />
+
+
+### Step 3: Create Astro Deployment
+
+<Deployments />
+
+## Migrate Airflow Metadata
+In this step we will migrate Airflow Metadata with Starship from Source Environment
+
+### Step 4: Use Starship to Migrate Airflow Connections and Variables
+<Usage />
+
+## Migrate DAGs
+### Step 5: Initialize new repository skeleton
+<DAGs />
+
+### Step 6: Copy core Airflow code
+1. Edit `Dockerfile` to match Astro Runtime version to customer’s Source environment Airflow version
+    <RuntimeVersionInfo />
+    :::info
+    The `Dockerfile` creates the backing environment that all of your Airflow components run in.
+    You can customize that in a variety of ways, and might
+    modify it to copy special things like certificates or keys to be available in your environment.
+
+    You shouldn't need to modify your `Dockerfile` beyond this, for the purposes of this migration, but may in the future.
+    :::
+2. Add `requirements.txt` , as needed.
+    :::cli
+    You can do this with the CLI
+    :::
+
+3. Copy `/dags` folder from source control or blob storage
+    :::cli
+    You can do this with the CLI
+    :::
+
+
+### Step 7: Copy accessory Airflow code
+Following recommended [project structure](https://docs.astronomer.io/learn/managing-airflow-code#project-structure):
+
+- Copy `/plugins` folder from source control or blob storage, as needed
+:::cli
+You can do this with the CLI
+:::
