@@ -190,7 +190,7 @@ The `airflow_settings.yaml` file includes a template with the default values for
 ## Add Python, OS-level packages, and Airflow providers
 
 :::info
-Python manages dependencies, typically, using a library called `pip` and a file called `requirements.txt`. You can read more about this file and it's format [here](https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format). Python dependencies can be browsed at [pypi.org](https://pypi.org/). Airflow providers can be browser at the [Astronomer Registry](https://registry.astronomer.io/)
+Python manages dependencies, typically, using a library called `pip` and a file called `requirements.txt`. You can read more about this file and it's format [here](https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format). Python dependencies can be browsed at [pypi.org](https://pypi.org/). Airflow providers can be browsed at the [Astronomer Registry](https://registry.astronomer.io/)
 :::
 
 Most DAGs need a Python package or OS-level package to run. If you’re using Airflow for a data science project, for example, you might need to install popular data science libraries such as [pandas](https://pandas.pydata.org/) or [NumPy (`numpy`)](https://numpy.org/). Adding a Python package to your Astro project is equivalent to running `pip install`.
