@@ -45,27 +45,34 @@ If you want to submit a screenshot, GIF, or a new documentation file, we recomme
 #### Installation
 To build docs locally, you need to install both Node and Yarn. While Yarn is included in Node, starting in 2020, the Yarn binaries are bundled within [Corepack](https://nodejs.org/api/corepack.html). If you're installing Node for the first time, you need to manually enable Corepacks before you can use Yarn.
 
-1. Install Node. Corepacks is included in Node for versions greater than 16.10. 
+1.  Follow the instructions on [Nodejs](https://nodejs.org/en/download/) to install Node, then confirm that you successfully installed Node by running the following command:
+
 
     ```sh
     node -version
     ```
+
 2. Run the following command to enable `corepacks` and make Yarn available:
+
     ```sh
     corepack enable
     ```
-If used an alternative package manager to install Node, such as `npm` or `homebrew`, you might need to troubleshoot your install.
+After you install Node and enable Yarn with Corepacks, Docusaurus commands are available when you open the `docs` directory from your terminal. 
 
-If you didn't use the Node installer or binaries, but used `npm` or `homebrew` instead, you might need to troubleshoot your install.
+Please read the [Docusaurus documentation](https://docusaurus.io/docs/installation#requirements) for information on installing other tools you'll need to work with Docusaurus locally.
+
+If you used an alternative package manager to install Node, such as `npm` or `homebrew`, you might need to troubleshoot your install.
 
 #### Troubleshoot Yarn installations
 
-1. Run the following command to check which version of Node you have. 
+1. Run the following command to check your Node version:
+
     ```sh
     node --version
     ```
     
 2. Adjust your installation based on the output of the command: 
+
     - **Node and yarn are installed, but need to be updated**: Use a package manager like [npm or nvm](https://www.freecodecamp.org/news/how-to-update-node-and-npm-to-the-latest-version/) to update your version, or download the installer from the [Node.js](https://nodejs.org/en/) site.
     - **Node is installed, but you cannot enable Corepack**: If you installed Node using a package manager, and it's above version 16.10, but Corepack isn't available, follow the instructions for installing [Corepack with npm](https://github.com/nodejs/corepack#manual-installs) or installing [Corepack with Homebrew or nvm](https://stackoverflow.com/questions/70082424/command-not-found-corepack-when-installing-yarn-on-node-v17-0-1), then run the following command to enable Corepack:
 
@@ -73,9 +80,6 @@ If you didn't use the Node installer or binaries, but used `npm` or `homebrew` i
     corepack enable
     ```
 
-After you install Node and enable Yarn with Corepacks, Docusaurus commands are available when you open the `docs` directory from your terminal. 
-
-Please read the [Docusaurus documentation](https://docusaurus.io/docs/installation#requirements) for information on installing other tools you'll need to work with Docusaurus locally.
 
 #### Local Development
 
