@@ -42,7 +42,7 @@ You can now configure a GitLab repository in your Astro Cloud IDE project. Confi
 ### Additional improvements
 
 - Clusters on an Astro - Hosted installation no longer retain Airflow logs which are older than 90 days.
-- The Airflow node pool instance type on GCP clusters has been reduced from `n2-standard-4` to `n2-standard-2`.
+- The Data Plane System node pool instance type on GCP clusters has been reduced from `n2-standard-4` to `n2-standard-2`.
 
 ## March 7, 2023
 
