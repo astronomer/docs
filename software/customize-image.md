@@ -28,7 +28,7 @@ To add Python packages to an Airflow Deployment, add the packages to the Deploym
 
 ### Add Python dependencies
 
-Add all Python packages to your `requirements.txt` file and they will be automatically built into your Airflow deployment.
+To add all Python packages to an Airflow Deployment, add the packages to the Deployment `requirements.txt` file.
 
 To pin a version of that package, use the following syntax:
 
@@ -45,7 +45,7 @@ pymongo==3.7.2
 If you do _not_ pin a package to a version, the latest version of the package that's publicly available will be installed by default.
 
 ### Add OS-level dependencies
-Add any OS-level packages you'd like to include to your `packages.txt` file.
+To add OS-level packages to an Airflow Deployment, add them to the Deployment `packages.txt` file.
 
 ### Rebuild your image
 
