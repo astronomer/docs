@@ -36,7 +36,7 @@ Astro Cloud IDE projects use the same structure as Astro projects created with t
 
 ## Commit your project to a Git repository
 
-The Cloud IDE includes Git vendor integrations for managing different versions and features of your Cloud IDE projects. Configuring a Git repository is also the first step to deploying Cloud IDE project to Astro. Astronomer recommends setting up a separate Git repository for every Cloud IDE project.
+The Cloud IDE includes Git vendor integrations for managing different versions and features of your Cloud IDE projects. Configuring a Git repository is also the first step to deploying your Cloud IDE project to Astro. Astronomer recommends setting up a separate Git repository for every Cloud IDE project.
 
 ### Prerequisites 
 
