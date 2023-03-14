@@ -82,7 +82,7 @@ In your Astro project `dags/` folder, create a new file called `aci-pipeline.py`
 
 ```python
 from airflow import DAG
-from airflow.providers.microsoft.azure.operators.azure_container_instances import AzureContainerInstancesOperator
+from airflow.providers.microsoft.azure.operators.container_instances import AzureContainerInstancesOperator
 from datetime import datetime, timedelta
 
 
