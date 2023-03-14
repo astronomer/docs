@@ -23,6 +23,27 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
 
+## March 14, 2023
+
+### Simplified Organization management in the Cloud UI
+
+The Cloud UI has been redesigned so that Organization settings tabs are now available in the left menu. Use this new menu to switch between pages as you can for Workspace settings.
+
+While most tabs were migrated directly to the left menu with the same name, some pages have been renamed and moved:
+
+- Formerly located in **Overview**, your Workspace list is now available in **Workspaces**.
+- Formerly located in the **People** tab, Organization user management settings are now in **Settings** > **Access Management**.
+- Formerly located in the **Settings** tab, general Organization settings are now in **Settings** > **General**.
+
+### New Astro Cloud IDE integration with GitLab
+
+You can now configure a GitLab repository in your Astro Cloud IDE project. Configuring a GitLab repository allows you to commit your pipelines and deploy them to Astro directly from the Astro Cloud IDE. See [link].
+
+### Additional improvements
+
+- Clusters on an Astro - Hosted installation no longer retain Airflow logs which are older than 90 days.
+- The Airflow node pool instance type on GCP clusters has been reduced from `n2-standard-4` to `n2-standard-2`.
+
 ## March 7, 2023
 
 ### Get expert advice on Astro and Airflow in office hours
