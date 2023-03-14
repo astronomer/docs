@@ -7,6 +7,7 @@ import {
 } from '@docusaurus/theme-common/internal';
 import DocSidebarItems from '@theme/DocSidebarItems';
 import SelectNav from '@site/src/components/SelectNav';
+import NewsletterForm from '@site/src/components/NewsletterForm';
 import styles from './styles.module.css';
 function useShowAnnouncementBar() {
   const { isActive } = useAnnouncementBar();
@@ -43,6 +44,7 @@ export default function DocSidebarDesktopContent({ path, sidebar, className }) {
         <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list')}>
           <DocSidebarItems items={sidebar} activePath={path} level={1} />
         </ul>
+        <NewsletterForm />
         {!path.indexOf('/software') > -1 && (
           <ul className={clsx(ThemeClassNames.docs.docSidebarMenu, 'menu__list', styles.menu__listBottom)}>
             <li>

@@ -1,0 +1,79 @@
+.newsletterForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 2rem 0;
+  background-color: var(--purple-100);
+  padding: 1.5rem;
+  border-radius: 6px;
+}
+
+aside .newsletterForm {
+  background-color: transparent;
+  position: relative;
+  bottom: 2rem;
+  padding: 0 0.75rem;
+}
+
+.newsletterForm h2 {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.newsletterForm input {
+  padding: 8px 10px;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  border: 1px solid var(--gray-500);
+  border-right: none;
+  width: 100%;
+}
+
+.newsletterForm button {
+  color: var(--gray-800);
+  background-color: var(--mint-300);
+  border: 1px solid var(--gray-500);
+  border-left: none;
+  padding: 8px 10px;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  min-width: 25%;
+}
+
+aside .newsletterForm button {
+  background-color: white;
+}
+
+.newsletterForm p {
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+.newsletterForm + [class*="theme-doc-sidebar-menu"] {
+  display: none;
+}
+
+.newsletterForm__inputWrapper {
+  display: flex;
+}
+
+.newsletterForm__inputWrapper  > * {
+  flex: 0 1 auto;
+}
+
+/* don't show sidebar newsletter signup when on Astro release notes page */
+[class*="docs-doc-id-release-notes"] aside .newsletterForm {
+  display: none;
+}
+
+html[data-theme="dark"] .newsletterForm {
+  background-color: var(--purple-700);
+}
+
+html[data-theme="dark"] .newsletterForm a {
+  color: var(--blue-400);
+}
