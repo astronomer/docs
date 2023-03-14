@@ -96,7 +96,7 @@ Fivetran needs at least one [connector](https://fivetran.com/docs/getting-starte
 
 6. Click **SAVE & TEST**. After your connection has been tested click **CONTINUE**.
 
-7. Click **Start Sync** to start your initial sync. This initial synchronization will load all historic metadata from your GitHub repository and has to be completed in Fivetran for the sync to become active. Once the Fivetran sync is active, you can set the sync frequency under the **Setup** tab or run the sync using the Fivetran API in Airflow.
+7. Click **Start Sync** to start your initial sync. This initial synchronization will load all historic metadata from your GitHub repository and has to be completed in Fivetran for the sync to become active. Once the Fivetran sync is active, you can set the sync frequency under the **Setup** tab or run the sync using the Fivetran API.
 
 ## Step 5: Generate a Fivetran API key
 
@@ -144,7 +144,7 @@ For this tutorial you will create a DAG that triggers your Fivetran sync to inge
 
 6. Save your DAG file with the changed variable names.
 
-The FivetranOperatorAsync is one of many [deferrable operators](deferrable-operators.md). Instead of taking up a worker slot, these operators will hand their task to the Airflow Triggerer component while waiting for a condition to be fulfilled. For longer running tasks, this can result in cost savings and greater scalability as more worker slots area available.
+The FivetranOperatorAsync is one of many [deferrable operators](deferrable-operators.md). Instead of taking up a worker slot, these operators will hand their task to the Airflow Triggerer component while waiting for a condition to be fulfilled. For longer running tasks, this can result in cost savings and greater scalability as more worker slots are available.
 
 ## Step 8: Run your DAG
 

@@ -1,11 +1,6 @@
 from airflow.decorators import dag, task
 from pendulum import datetime
 from fivetran_provider_async.operators import FivetranOperatorAsync
-import logging
-
-# get the airflow.task logger
-task_logger = logging.getLogger("airflow.task")
-
 
 FIVETRAN_CONNECTOR_ID = "<your Fivetran connector ID>"
 GITHUB_REPOSITORY = "<your GitHub handle>/airflow-fivetran-tutorial"
