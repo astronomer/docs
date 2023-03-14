@@ -5,7 +5,6 @@ id: migrate-mwaa
 description: Get started on Astro by migrating your Airflow code from Amazon Managed Workflows for Apache Airflow (MWAA).
 ---
 
-
 import Intro from './migration-partials/intro.md';
 import Prerequisites from './migration-partials/prereqs.mdx';
 import Requirements from './migration-partials/requirements.mdx';
@@ -15,20 +14,11 @@ import Workspaces from './migration-partials/workspaces.md';
 import Deployments from './migration-partials/deployments.mdx';
 import DAGs from './migration-partials/directory-setup.md';
 import RuntimeVersionInfo from './migration-partials/runtime-version-info.md'
-import CutOver from './migration-partials/cutover.mdx'
-import FinalStep from './migration-partials/final-step.md'
-import ConfirmConnectionsVariables from './migration-partials/confirm-connections-variables.md'
-import TestValidateDAGs from './migration-partials/test-validate-dags.md'
-import MonitorAnalytics from './migration-partials/monitor-analytics.md'
-import InstanceTypes from './migration-partials/instance-types.md'
-import DAGsOnly from './migration-partials/dags-only.md'
-import CICD from './migration-partials/cicd.md'
+import FinalStep from './migration-partials/final-step.mdx'
 import TestLocally from './migration-partials/test-locally.md'
 import Deploy from './migration-partials/deploy.md'
-import AirflowConfiguration from './migration-partials/airflow-configuration.md'
-import SecretsBackend from './migration-partials/secrets-backend.md'
-import Push from './migration-partials/push.md'
-import WrapUp from './migration-partials/push.md'
+import Additional from './migration-partials/additional.md'
+import WrapUp from './migration-partials/wrap-up.md'
 
 This is where you'll find instructions for migrating to Astro from another managed Airflow environment. This guide will
 cover migrating an Airflow Instance from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html)
@@ -111,6 +101,7 @@ In this step we will migrate Airflow Metadata with Starship from Source Environm
 ### Step 6: Copy core Airflow code
 1. Edit `Dockerfile` to match Astro Runtime version to customer’s Source environment Airflow version
     <RuntimeVersionInfo />
+
     :::info
 
     The `Dockerfile` creates the backing environment that all of your Airflow components run in.
@@ -120,6 +111,7 @@ In this step we will migrate Airflow Metadata with Starship from Source Environm
     You shouldn't need to modify your `Dockerfile` beyond this, for the purposes of this migration, but may in the future.
 
     :::
+
 2. Fill in your new `requirements.txt` file. You can do this by navigating to your S3 Bucket and downloading the file.
     :::cli aws
 
@@ -158,19 +150,8 @@ Make sure to review the output after running this command
 
 :::
 
-
 ### Step 8: Configure Additional Components
-<Push />
-
-#### CI/CD
-<CICD />
-
-#### Secrets Backend
-<SecretsBackend />
-
-#### Instance Permissions and Trust Policies
-You can utilize IAM Roles or AWS Access Keys to grant your Astro Deployment the same level of access to AWS Services as your source Airflow
-by following the [Connect AWS - Authorization options](connect-aws.md#authentication-options) documentation
+<Additional />
 
 ### Step 9: Test locally and check for import errors
 <TestLocally />
@@ -181,27 +162,5 @@ by following the [Connect AWS - Authorization options](connect-aws.md#authentica
 ## Validate, Cut-over and Tune Process
 <FinalStep />
 
-#### Confirm Migration of Connections and Variables
-<ConfirmConnectionsVariables />
-
-#### Test and Validate DAGs
-<TestValidateDAGs />
-
-#### Utilize Starship to cut-over DAGs
-<CutOver />
-
-### Tune and Optimize Deployment
-#### Monitor Analytics
-<MonitorAnalytics />
-
-#### Modify Instance Types or utilize Worker Queues
-<InstanceTypes />
-
-#### Set Airflow Configurations
-<AirflowConfiguration />
-
-#### DAGs-only Deployments
-<DAGsOnly />
-
-# Wrapping up
+## Wrapping up
 <WrapUp />

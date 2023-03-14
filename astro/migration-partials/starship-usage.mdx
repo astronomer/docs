@@ -14,7 +14,9 @@ migrate those to Astro with Starship.
 <TabItem value="plugin" label="Starship Plugin" default>
 
 1. Once your source environment installs `astronomer-starship` via the `requirements.txt`, you will see a new Astronomer menu. Hover over that menu and select the `Migration Tool 🚀` option
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/menu-item.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/menu-item.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/menu-item.png"></img>
+</details>
 
 2. After opening the plugin page, you will need to authenticate to Astronomer. To do this, please:
     1. Click the `Get Token` button
@@ -31,26 +33,38 @@ migrate those to Astro with Starship.
 To migrate connections from your source Airflow meta-database:
 
 1. Click on the `Connections` tab:
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-tab.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-tab.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-tab.png"></img>
+</details>
 
 2. In the table displaying the connections that can be migrated, click the `Migrate` button for each connection that needs to be sent to the Target Deployment:
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-migrate.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-migrate.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-migrate.png"></img>
+</details>
 
 3. Once the `Migrate` button is clicked, the connection will be sent to the Target Deployment and will show as `Migrated ✅` in the plugin UI:
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-migrate-complete.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-migrate-complete.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/connections-migrate-complete.png"></img>
+</details>
 
 #### Migrating Airflow Variables
 
 To migrate variables from your source Airflow meta-database:
 
 1. Click on the `Variables` tab:
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-tab.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-tab.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-tab.png"></img>
+</details>
 
 2. In the table displaying the variables that can be migrated, click the `Migrate` button for each connection that needs to be sent to the Target Deployment
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-migrate.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-migrate.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-migrate.png"></img>
+</details>
 
 3. Once the `Migrate` button is clicked, the variable will be sent to the Target Deployment and will show as `Migrated ✅` in the plugin UI:
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-migrate-complete.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-migrate-complete.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/variables-migrate-complete.png"></img>
+</details>
 
 #### Migrating Environment Variables
 :::caution
@@ -60,40 +74,37 @@ Not all Environmental Variables or Airflow Settings are [configurable on Astro](
 To migrate environment variables from your source Airflow:
 
 1. Click on the `Environment Variables` tab:
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-tab.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-tab.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-tab.png"></img>
+</details>
 
 2. In the table displaying the environment variables that can be migrated, ensure the checkbox is ticked for each environment variable that needs to be sent to the Target Deployment
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate.png"></img>
+</details>
 
 3. Once all of the desired environment variable checkboxes have been selected, click the `Migrate` button in the table header
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate-button.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate-button.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate-button.png"></img>
+</details>
 
 4. After clicking the `Migrate` button in the table header, each selected environment variable will be sent to the Target Deployment and the ticked checkbox will display `Migrated `✅
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate-complete.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate-complete.png)
-
-#### Utilizing DAGs Cutover Tab
-The DAGs Cutover Tab can be utilized to pause DAGs in the source environment and unpause DAGs in the target environment (as long as the DAG id in both the source and target environment match). To do so, please:
-
-1. Click on the `DAGs Cutover` tab:
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-tab.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-tab.png)
-
-2. In the table displaying the DAGs present in both the source and target environments, click the Pause icon under `Loca`l
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-pause-local.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-pause-local.png)
-
-3. In the table displaying the DAGs present in both the source and target environments, click the Start icon under `Remot`e
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-start-remote.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-start-remote.png)
-
-4. After completing this process, you will see the DAG is paused in the `Local` environment (so you will see a Start Icon) and is unpaused in the `Remote` environment (so you will see a Pause icon)
-    ![https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-complete.png](https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-complete.png)
+<details>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate-complete.png"></img>
+</details>
 
 </TabItem>
 <TabItem value="operator" label="Starship Operator">
 
 :::info
+
 Refer to the [Configuration](https://github.com/astronomer/starship/tree/master/astronomer-starship-provider#configuration) instructions for the operator before running.
+
 :::
 :::caution
+
 Not all Environmental Variables or Airflow Settings are [configurable on Astro](https://docs.astronomer.io/astro/platform-variables)
+
 :::
 
 1. Add the following DAG to your source environment:

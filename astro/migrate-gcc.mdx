@@ -14,20 +14,11 @@ import Workspaces from './migration-partials/workspaces.md';
 import Deployments from './migration-partials/deployments.mdx';
 import DAGs from './migration-partials/directory-setup.md';
 import RuntimeVersionInfo from './migration-partials/runtime-version-info.md'
-import CutOver from './migration-partials/cutover.mdx'
-import FinalStep from './migration-partials/final-step.md'
-import ConfirmConnectionsVariables from './migration-partials/confirm-connections-variables.md'
-import TestValidateDAGs from './migration-partials/test-validate-dags.md'
-import MonitorAnalytics from './migration-partials/monitor-analytics.md'
-import InstanceTypes from './migration-partials/instance-types.md'
-import DAGsOnly from './migration-partials/dags-only.md'
-import CICD from './migration-partials/cicd.md'
+import FinalStep from './migration-partials/final-step.mdx'
 import TestLocally from './migration-partials/test-locally.md'
 import Deploy from './migration-partials/deploy.md'
-import AirflowConfiguration from './migration-partials/airflow-configuration.md'
-import SecretsBackend from './migration-partials/secrets-backend.md'
-import Push from './migration-partials/push.md'
-import WrapUp from './migration-partials/push.md'
+import Additional from './migration-partials/additional.md'
+import WrapUp from './migration-partials/wrap-up.md'
 
 
 This is where you'll find instructions for migrating to Astro from another managed Airflow environment. This guide will
@@ -109,6 +100,7 @@ Additionally - you should utilize Starship to test connections as you migrate th
     You shouldn't need to modify your `Dockerfile` beyond this, for the purposes of this migration, but may in the future.
 
     :::
+
 2. Fill in your new `requirements.txt` file. You can do this by navigating to `PYPI Packages` in the source instance and copying those to the file
     :::cli gcloud
 
@@ -156,13 +148,7 @@ Following the recommended [project structure](https://docs.astronomer.io/learn/m
     :::
 
 ### Step 8: Configure Additional Components
-<Push />
-
-#### CI/CD
-<CICD />
-
-#### Secrets Backend
-<SecretsBackend />
+<Additional />
 
 #### Instance Permissions and Trust Policies
 You can utilize Workload Identity or Service Account Keys to grant your Astro Deployment the same level of access to Google Services as your source Airflow
@@ -177,27 +163,5 @@ by following the [Connect GCP - Authorization options](connect-gcp.md#authentica
 ## Validate, Cut-over and Tune Process
 <FinalStep />
 
-#### Confirm Migration of Connections and Variables
-<ConfirmConnectionsVariables />
-
-#### Test and Validate DAGs
-<TestValidateDAGs />
-
-#### Utilize Starship to cut-over DAGs
-<CutOver />
-
-### Tune and Optimize Deployment
-#### Monitor Analytics
-<MonitorAnalytics />
-
-#### Modify Instance Types or utilize Worker Queues
-<InstanceTypes />
-
-#### Set Airflow Configurations
-<AirflowConfiguration />
-
-#### DAGs-only Deployments
-<DAGsOnly />
-
-# Wrapping up
+## Wrapping up
 <WrapUp />
