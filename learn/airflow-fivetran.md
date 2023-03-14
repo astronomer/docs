@@ -15,7 +15,7 @@ In this tutorial, you'll learn how to install and use the Airflow Fivetran provi
 
 ## Time to complete
 
-This tutorial takes approximately 1.5 hours to complete.
+This tutorial takes approximately 1 hour to complete.
 
 ## Assumed knowledge
 
@@ -42,11 +42,10 @@ An Astro project contains all of the files you need to run Airflow locally.
     $ astro dev init
     ```
 
-2. Add the following packages to your `requirements.txt` file:
+2. Add the [Fivetran provider package](https://registry.astronomer.io/providers/fivetran) to your `requirements.txt` file:
 
     ```text
     airflow-provider-fivetran-async
-    apache-airflow-providers-github
     ```
 
 3. Run the following command to start your project in a local environment:
@@ -88,8 +87,8 @@ Fivetran needs at least one [connector](https://fivetran.com/docs/getting-starte
 
 3. Configure the GitHub Connector: 
     
-    **Destination schema**: `in_github`
-    **Authentication mode**: Either [OAuth or a Personal Access Token](https://fivetran.com/docs/applications/github/setup-guide), then click **AUTHORIZE**. In this tutorial, we use OAuth authentication. 
+    - **Destination schema**: `in_github`
+    - **Authentication mode**: Either [OAuth or a Personal Access Token](https://fivetran.com/docs/applications/github/setup-guide), then click **AUTHORIZE**. In this tutorial, we use OAuth authentication. 
 
 4. Authenticate Fivetran to your Github Account.
 
