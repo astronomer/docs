@@ -23,7 +23,20 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
 
-## March 14, 2023
+## March 15, 2023
+
+### Run the Kubernetes executor in Astro
+
+You can now configure your Deployments to use the Kubernetes executor for executing tasks. Using the Kubernetes executor, you can:
+
+- Ensure that tasks running longer than 24 hours are not interrupted when your team deploys code.
+- Run tasks with different version dependencies in the same Astro project.
+- Request specific amounts of CPU and memory for individual tasks.
+- Automatically down your resources when no tasks are running.
+
+The Kubernetes executor runs each task in its own Kubernetes Pod instead of in shared Celery workers. Astronomer fully manages the infrastructure required to run the executor and automatically spins Pods up and down for each of your task runs. This executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks. 
+
+To learn whether the Kubernetes executor works for your use case, see [Configure Deployment resources]. To configure the Kubernetes executor for a task or Deployment, see [Configure the Kubernetes executor].
 
 ### Simplified Organization management in the Cloud UI
 
