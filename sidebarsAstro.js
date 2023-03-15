@@ -57,7 +57,7 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "configure-deployment-resources",
-        "configure-executors",
+        "executors",
         "configure-worker-queues",
         "api-keys",
         "environment-variables",

@@ -5,7 +5,7 @@ id: configure-worker-queues
 description: Learn how to create and configure worker queues to create best-fit execution environments for your tasks.
 ---
 
-By default, all tasks run in a default worker queue that does not require configuration or code. If you're using the Celery executor, you can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to queues in your DAG code. For more information about Airflow executors on Astro, see [Manage executors](configure-executors.md).
+By default, all tasks run in a default worker queue that does not require configuration or code. If you're using the Celery executor, you can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to queues in your DAG code. For more information about Airflow executors on Astro, see [Manage executors](executors.md).
 
 Use worker queues to create optimized execution environments for different types of tasks in the same Deployment. You can use worker queues to:
 

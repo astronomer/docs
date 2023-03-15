@@ -1,7 +1,7 @@
 ---
 sidebar_label: 'Configure an executor'
 title: 'Configure a Deployment executor'
-id: 'configure-executors'
+id: 'executors'
 ---
 
 <head>
