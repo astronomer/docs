@@ -39,14 +39,14 @@ Use the following topics to understand the benefits and limitations of each exec
 
 The Celery executor is the default for all new Deployments. It uses a group of workers, each of which can run multiple tasks at a time. Astronomer uses [worker autoscaling logic](executors.md#worker-autoscaling-logic) to determine how many workers run on your Deployment at a given time.
 
-The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your team if:
+The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your Deployment if:
 
 - You're just getting started with Airflow.
 - You want to use multiple worker queues. This allows you to use multiple worker node types for different types of tasks and optimize for task performance. See [Configure worker queues](configure-worker-queues.md).
 - You have a high number of short-running tasks and want to ensure low latency between tasks.
 - You don't often experience conflicts between Python or OS-level packages and don't require dependency isolation.
 
-If your team regularly experiences dependency conflicts or finds that resource intensive tasks consume the resources of other tasks and cause them to fail, Astronomer recommends implementing worker queues or moving to the Kubernetes executor.
+If you regularly experience dependency conflicts or find that some tasks consume the resources of other tasks and cause them to fail, Astronomer recommends implementing worker queues or moving to the Kubernetes executor.
 
 See [Manage the Celery executor](executors.md#manage-the-celery-executor) to learn more about how to configure the Celery executor.
 
@@ -54,12 +54,12 @@ See [Manage the Celery executor](executors.md#manage-the-celery-executor) to lea
 
 The Kubernetes executor runs each task in an individual Kubernetes Pod instead of in shared Celery workers. For each task that needs to run, the executor calls the Kubernetes API to dynamically launch a Pod for the task. You can specify the configuration of the task and Pod, including CPU and memory, in a `pod_override` file. When the task completes, the Pod terminates. On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
 
-The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks. Specifically, the Kubernetes executor is a good fit for your team if:
+The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
-- You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when your team deploys code.
+- You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when you deploys code.
 - You experience a high number of dependency conflicts between tasks and could benefit from task isolation. For example, one task in your Deployment requires a different version of pandas than another task.
 - You have a strong understanding of the CPU and memory that your tasks require and would benefit from being able to allocate and optimize infrastructure resources at the task level.
-- Your team has had issues running certain tasks reliably with the Celery executor.
+- You have had issues running certain tasks reliably with the Celery executor.
   
 The primary limitation with the Kubernetes executor is that each task takes up to 1 minute to start running once scheduled. If you're running short-running tasks and cannot tolerate high latency, Astronomer recommends the Celery executor. To learn more, see [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) in Airflow documentation or [Manage the Kubernetes executor on Astro](executors.md#manage-the-kubernetes-executor).
 

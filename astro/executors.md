@@ -1,13 +1,8 @@
 ---
 sidebar_label: 'Configure an executor'
-title: 'Configure a Deployment executor'
+title: 'Configure your Airflow executor on Astro'
 id: 'executors'
 ---
-
-<head>
-  <meta name="description" content="Learn how to select and manage Astro executors." />
-  <meta name="og:description" content="Learn how to select and manage Astro executors." />
-</head>
 
 The Airflow executor determines which worker resources run your scheduled tasks. The executor you choose primarily affects the infrastructure cost of a Deployment and how efficiently and reliably your tasks execute. The difference between executors is primarily based on how tasks are distributed across worker resources.
 
@@ -15,7 +10,7 @@ On Astro, every Deployment requires an executor and you can update the executor 
 
 For guidance on how to choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor). To learn more about executors in Airflow, see [Airflow executors](https://docs.astronomer.io/learn/airflow-executors-explained).
 
-## Manage the Celery executor
+## Configure the Celery executor
 
 On Astro, you can configure Celery executor in the following ways:
 
@@ -59,7 +54,7 @@ Celery worker scaling is configured at the worker queue level. Changing worker s
     
 4. Click **Update Queue**.
 
-## Manage the Kubernetes executor
+## Configure the Kubernetes executor
 
 The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, run tasks for extended periods, or have extended periods without without task runs.
 
