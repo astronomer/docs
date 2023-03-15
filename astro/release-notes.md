@@ -616,7 +616,7 @@ A new **Maximum Tasks per Worker** configuration is now available in the Deploym
 
 Previously, maximum tasks per worker was permanently set to 16 and was not configurable on Astro. Now, you can set maximum tasks per worker anywhere between 1 and 64 based on the needs of your tasks. It can be set per worker queue on a Deployment.
 
-To learn more, see [Worker autoscaling logic](configure-deployment-resources.md#worker-autoscaling-logic).
+To learn more, see [Worker autoscaling logic](executors.md#celery-worker-autoscaling-logic).
 
 ### New Worker Count (Min-Max) setting
 
@@ -784,7 +784,7 @@ Support requests can now be created and submitted in the Cloud UI. You no longer
 
 To better scale concurrent task runs, Astro now dynamically calculates [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is an Airflow configuration that determines the maximum number of tasks that can run concurrently within a single Deployment.
 
-Deployment `parallelism` is now equal to the maximum allowable number of workers multiplied by [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency). This change ensures that your task runs aren't limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-worker-queues.md#worker-autoscaling-logic) for more information.
+A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](executors.md#celery-worker-autoscaling-logic) for more information.
 
 Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
 
