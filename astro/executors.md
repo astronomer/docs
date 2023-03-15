@@ -12,7 +12,7 @@ To learn more about executors in Airflow, see [Airflow executors](https://docs.a
 
 ## Choose an executor
 
-The difference between executors is based on how exactly tasks are distributed across worker resources. The executor you choose primarily affects the infrastructure cost of a Deployment and how efficiently your tasks execute. Astro currently supports two executors, both of which are available in the Apache Airflow open source project:
+The difference between executors is based on how tasks are distributed across worker resources. The executor you choose affects the infrastructure cost of a Deployment and how efficiently your tasks execute. Astro currently supports two executors, both of which are available in the Apache Airflow open source project:
 
 - Celery executor
 - Kubernetes executor
@@ -104,7 +104,7 @@ For each worker queue on your Deployment, you have to specify certain settings t
 On Astro, you can configure Kubernetes executor in the following ways:
 
 - Customize individual tasks, including CPU and memory requests, using a `pod_override` configuration. 
-- Change worker node size and type on which your Pods run.
+- Change the worker node type on which your Pods run.
 
 By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 256Mi of memory. These Pods run on a worker node in your Astro data plane. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
