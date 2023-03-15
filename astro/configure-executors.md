@@ -11,9 +11,9 @@ id: 'configure-executors'
 
 The Airflow executor determines which worker resources run your scheduled tasks. The executor you choose primarily affects the infrastructure cost of a Deployment and how efficiently and reliably your tasks execute. The difference between executors is primarily based on how tasks are distributed across worker resources.
 
-On Astro, a single executor is assigned to each Deployment and you can update the executor assignment at any time. After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro.
+On Astro, every Deployment requires an executor and you can update the executor at any time. After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro.
 
-To choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor). To learn more about executors in Airflow, see [Airflow executors](https://docs.astronomer.io/learn/airflow-executors-explained).
+For guidance on how to choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor). To learn more about executors in Airflow, see [Airflow executors](https://docs.astronomer.io/learn/airflow-executors-explained).
 
 ## Manage the Celery executor
 
