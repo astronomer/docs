@@ -1,24 +1,24 @@
 ---
-sidebar_label: 'Migrate to Astro from MWAA'
-title: 'Migrating to Astro from MWAA'
+sidebar_label: "Migrate to Astro from MWAA"
+title: "Migrating to Astro from MWAA"
 id: migrate-mwaa
 description: Get started on Astro by migrating your Airflow code from Amazon Managed Workflows for Apache Airflow (MWAA).
 ---
 
-import Intro from './migration-partials/intro.md';
-import Prerequisites from './migration-partials/prereqs.mdx';
-import Requirements from './migration-partials/requirements.mdx';
-import Starship from './migration-partials/starship.mdx';
-import Usage from './migration-partials/starship-usage.mdx';
-import Workspaces from './migration-partials/workspaces.md';
-import Deployments from './migration-partials/deployments.mdx';
-import DAGs from './migration-partials/directory-setup.md';
-import RuntimeVersionInfo from './migration-partials/runtime-version-info.md'
-import FinalStep from './migration-partials/final-step.mdx'
-import TestLocally from './migration-partials/test-locally.md'
-import Deploy from './migration-partials/deploy.md'
-import Additional from './migration-partials/additional.md'
-import WrapUp from './migration-partials/wrap-up.md'
+import Intro from "./migration-partials/intro.md";
+import Prerequisites from "./migration-partials/prereqs.mdx";
+import Requirements from "./migration-partials/requirements.mdx";
+import Starship from "./migration-partials/starship.mdx";
+import Usage from "./migration-partials/starship-usage.mdx";
+import Workspaces from "./migration-partials/workspaces.md";
+import Deployments from "./migration-partials/deployments.mdx";
+import DAGs from "./migration-partials/directory-setup.md";
+import RuntimeVersionInfo from "./migration-partials/runtime-version-info.md";
+import FinalStep from "./migration-partials/final-step.mdx";
+import TestLocally from "./migration-partials/test-locally.md";
+import Deploy from "./migration-partials/deploy.md";
+import Additional from "./migration-partials/additional.md";
+import WrapUp from "./migration-partials/wrap-up.md";
 
 This is where you'll find instructions for migrating to Astro from another managed Airflow environment. This guide will
 cover migrating an Airflow Instance from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html)
@@ -27,7 +27,7 @@ cover migrating an Airflow Instance from [Amazon Managed Workflows for Apache Ai
 
 ## Prerequisites
 
-<Prerequisites/>
+<Prerequisites />
 
 You can additionally utilize the `aws` CLI to expedite some steps in this guide.
 
@@ -35,98 +35,102 @@ You can additionally utilize the `aws` CLI to expedite some steps in this guide.
 
 <Starship />
 
-### Starship Compatibility Matrix
+| Source Airflow environment | Starship plugin | Starship operator |
+| -------------------------- | --------------- | ----------------- |
+| Airflow 1.x                | ❌              | ❌                |
+| MWAA v2.0.2                |                 | ✔️️                 |
+| MWAA v2.2.2                | ✔️️               |                   |
+| MWAA v2.4.3                | ✔️️               |                   |
 
-| Source Airflow      | Starship Plugin | Starship Operator |
-|---------------------|-----------------|-------------------|
-| Airflow 1.x         | ❌               | ❌                 |
-| MWAA v2.0.2         |                 | ✔️️               |
-| MWAA v2.2.2         | ✔️️             |                   |
-| MWAA v2.4.3         | ✔️️             |                   |
+To install Starship to your MWAA instance as a plugin:
 
-### Installation
+1. Download your existing `requirements.txt` file for your source Airflow environment from S3. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways).
+2. Add `astronomer-starship` on a new line to your `requirements.txt` file.
+3. Re-upload the file to your S3 bucket.
+4. Edit your Airflow environment to refer to the new version of this file.
 
-To install Starship to your MWAA instance, you'll need to edit the `requirements.txt` file in your S3 Bucket.
-You can find more [detailed instructions here.](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways)
+:::tip
 
-1. Download your existing `requirements.txt` file from S3
-2. Add `astronomer-starship` on a new line in your `requirements.txt` file
-3. Re-upload the file to your S3 bucket
-4. Edit your Airflow Environment to refer to the new version of this file.
+You can alternatively complete this installation with the `aws` CLI. 
 
-:::cli aws
+1. Run the following commands to set environment variables on your local machine:
 
-You can accomplish this easily with the `aws` CLI, in a terminal:
+    ```sh
+    export MWAA_NAME="MWAA"
+    export MWAA_BUCKET="MWAA BUCKET"
+    ```
 
-Modify these values:
-```sh
-export MWAA_NAME="MWAA"
-export MWAA_BUCKET="MWAA BUCKET"
-```
-then, in a terminal, run:
-```shell
-aws s3 cp "s3://$MWAA_BUCKET/requirements.txt" requirements.txt
-echo 'astronomer-starship' >> requirements.txt
-aws s3 cp requirements.txt "s3://$MWAA_BUCKET/requirements.txt"
-aws mwaa update-environment "$MWAA_NAME" --requirements-s3-object-version="$(aws s3api head-object --bucket=$MWAA_BUCKET --key=requirements.txt --query="VersionId")"
-```
+2. Run the following commands to install Starship:
+
+    ```shell
+    aws s3 cp "s3://$MWAA_BUCKET/requirements.txt" requirements.txt
+    echo 'astronomer-starship' >> requirements.txt
+    aws s3 cp requirements.txt "s3://$MWAA_BUCKET/requirements.txt"
+    aws mwaa update-environment "$MWAA_NAME" --requirements-s3-object-version="$(aws s3api head-object --bucket=$MWAA_BUCKET --key=requirements.txt --query="VersionId")"
+    ```
 
 :::
-
-We will cover usage of the Starship migration utility later in this document
 
 ## Step 2: Create Astro Workspace
 
 <Workspaces />
-
 
 ## Step 3: Create Astro Deployment
 
 <Deployments />
 
 ## Step 4: Use Starship to Migrate Airflow Connections and Variables
+
 <Usage />
 
 ## Step 5: Initialize new repository skeleton
+
 <DAGs />
 
 ## Step 6: Copy core Airflow code
+
 1. Edit `Dockerfile` to match Astro Runtime version to customer’s Source environment Airflow version
-    <RuntimeVersionInfo />
 
-    :::info
+   <RuntimeVersionInfo />
 
-    The `Dockerfile` creates the backing environment that all of your Airflow components run in.
-    You can customize that in a variety of ways, and might
-    modify it to copy special things like certificates or keys to be available in your environment.
+   :::info
 
-    You shouldn't need to modify your `Dockerfile` beyond this, for the purposes of this migration, but may in the future.
+   The `Dockerfile` creates the backing environment that all of your Airflow components run in.
+   You can customize that in a variety of ways, and might
+   modify it to copy special things like certificates or keys to be available in your environment.
 
-    :::
+   You shouldn't need to modify your `Dockerfile` beyond this, for the purposes of this migration, but may in the future.
+
+   :::
 
 2. Fill in your new `requirements.txt` file. You can do this by navigating to your S3 Bucket and downloading the file.
-    :::cli aws
+   :::cli aws
 
-    You can easily copy this with the ` aws` CLI:
-    ```shell
-    aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
-    ```
-    Make sure to review the output after running this command
+   You can easily copy this with the ` aws` CLI:
 
-    :::
+   ```shell
+   aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
+   ```
+
+   Make sure to review the output after running this command
+
+   :::
 
 3. Copy your `/dags` folder from source control or S3 by navigating to either and downloading/moving the entire folder into your local Astro project.
-    :::cli aws
+   :::cli aws
 
-    You can easily copy this with the ` aws` CLI:
-    ```
-     aws s3 cp --recursive s3://[BUCKET]/dags dags
-    ```
-    Make sure to review the output after running this command
+   You can easily copy this with the ` aws` CLI:
 
-    :::
+   ```
+    aws s3 cp --recursive s3://[BUCKET]/dags dags
+   ```
+
+   Make sure to review the output after running this command
+
+   :::
 
 ## Step 7: Copy accessory Airflow code
+
 Following the recommended [project structure](https://docs.astronomer.io/learn/managing-airflow-code#project-structure), we will move any files to our Astro project.
 
 - If you have utilized the `/plugins` folder in your S3 Bucket, copy it from source control or the S3 Bucket to the local `/plugins` folder
@@ -134,25 +138,32 @@ Following the recommended [project structure](https://docs.astronomer.io/learn/m
 :::cli aws
 
 You can easily copy this with the ` aws` CLI:
+
 ```
 aws s3 cp --recursive s3://[BUCKET]/plugins.zip plugins.zip
 unzip plugins.zip
 ```
+
 Make sure to review the output after running this command
 
 :::
 
 ## Step 8: Configure Additional Components
+
 <Additional />
 
 ## Step 9: Test locally and check for import errors
+
 <TestLocally />
 
 ## Step 10: Deploy
+
 <Deploy />
 
 ## Validate, Cut-over and Tune Process
+
 <FinalStep />
 
 ## Wrapping up
+
 <WrapUp />
