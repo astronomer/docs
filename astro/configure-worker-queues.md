@@ -5,7 +5,7 @@ id: configure-worker-queues
 description: Learn how to create and configure worker queues to create best-fit execution environments for your tasks.
 ---
 
-A worker queue is a set of configurations that apply to a group of workers in your Deployment. In Apache Airflow, a worker is responsible for executing tasks that have been scheduled and queued by the scheduler. On Astro, each worker is a Kubernetes Pod that is hosted within a Kubernetes node in your Astro cluster.
+By default, all tasks run in a default worker queue that does not require configuration or code. If you're using the Celery executor, you can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to queues in your DAG code. For more information about Airflow executors on Astro, see [Manage executors](manage-astro-executors.md).
 
 Use worker queues to create optimized execution environments for different types of tasks in the same Deployment. You can use worker queues to:
 
@@ -13,10 +13,6 @@ Use worker queues to create optimized execution environments for different types
 - Separate short-running tasks from long-running tasks.
 - Isolate a single task from other tasks in your Deployment.
 - Allow some workers to scale to zero but keep a minimum of 1 for other types of workers.
-
-By default, all tasks run in a default worker queue that does not require configuration or code. To enable worker types or configurations for different groups of tasks, you can create additional worker queues in the Cloud UI and assign tasks to queues in your DAG code.
-
-Both the Celery and Kubernetes executors run tasks in worker queues. However, you can only configure multiple worker queues when using the Celery executor. To configure the `default` Kubernetes executor worker pool, see [Manage the Kubernetes executor](manage-astro-executors.md#manage-the-kubernetes-executor).
 
 ## Benefits
 

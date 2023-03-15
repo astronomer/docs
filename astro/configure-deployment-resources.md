@@ -9,7 +9,7 @@ id: configure-deployment-resources
   <meta name="og:description" content="Modify the resource settings of a Deployment to make sure that your tasks have the CPU and memory required to complete successfully." />
 </head>
 
-After you create an Astro Deployment, you can modify its settings to meet the unique requirements of your organization. On Astro, you can:
+After you create an Astro Deployment, you can modify its settings to meet the unique requirements of your organization. Through the Cloud UI and Astro CLI, you can:
 
 - Allocate resources for the Airflow scheduler and workers.
 - Update a Deployment name and description.
@@ -20,46 +20,50 @@ After you create an Astro Deployment, you can modify its settings to meet the un
 
 For advanced Deployment resource configurations, see [Manage Deployment executors](manage-astro-executors.md) and [Configure worker queues](configure-worker-queues.md).
 
+:::cli
+
+This document focuses on configuring Deployments through the Cloud UI. For steps and best practices for configuring Deployments as code using the Astro CLI, see [Manage Deployments as code](manage-deployments-as-code.md).
+
+:::
+
 ## Choose an executor
 
-The executor type you select determines which worker resources run your scheduled tasks. A single executor is assigned to each Deployment and you can update the executor assignment at any time. 
+A Deployment's executor type determines which worker resources run your scheduled tasks. Every Deployment requires an executor and you can update the executor at any time. Astro supports two executors, both of which are available in the Apache Airflow open source project:
+
+- Celery executor
+- Kubernetes executor
+
+Use the following topics to understand the benefits and limitations of each executor to determine which one is right for your Deployment. 
 
 ### Celery executor
 
-The Celery executor works with a pool of workers and communicates with them to delegate tasks and it's a good option for most use cases. Astronomer uses [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic) to determine how many workers run on each worker queue on your Deployment at a given time. 
+The Celery executor is the default for all new Deployments. It utilizes a pool of workers and communicates with them to delegate tasks. Astronomer uses [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic) to determine how many workers run on each worker queue on your Deployment at a given time. 
 
-See [Manage the Celery executor](manage-astro-executors.md#manage-the-celery-executor) for more information about configuring and running the Kubernetes executor on a Deployment. 
+The Celery executor manages a pool of worker Pods that are each allocated a certain amount of CPU and memory. A single worker Pod can run multiple tasks at a time. Astronomer uses [Worker autoscaling logic](manage-astro-executors.md#worker-autoscaling-logic) to determine how many workers run on each worker queue on your Deployment at a given time.
 
-#### Benefits
+The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your team if:
 
-- Supports multiple worker queues, which lets you assign tasks to different worker node types. See [Configure worker queues](configure-worker-queues.md)
-- Scales workers with higher demand.
-- Provides a grace period for worker termination.
+- You're just getting started with Airflow.
+- You want to use multiple worker queues. This allows you to use multiple worker node types for different types of tasks and optimize for task performance. See [Configure worker queues](configure-worker-queues.md).
+- You have a high number of short-running tasks and want to ensure low latency between tasks.
+- You don't often experience conflicts between Python or OS-level packages and don't require dependency isolation.
 
-#### Limitations
+If your team regularly experiences dependency conflicts or finds that resource intensive tasks consume the resources of other tasks and cause them to fail, Astronomer recommends implementing worker queues or moving to the Kubernetes executor.
 
-- Tasks can run on the same worker, meaning that it's possible for a task use resources intended for another task.
+See [Manage the Celery executor](manage-astro-executors.md#manage-the-celery-executor) to learn more about how to configure the Celery executor.
 
 ### Kubernetes executor
 
-The Kubernetes executor runs all tasks in individual Kubernetes Pods. You can specify the configuration for these Pods using `pod_override` files which you can then apply to specific tasks. This executor is recommended when you need to control resource optimization, isolate your workloads, run tasks for extended periods, or have extended periods without without task runs.
+The Kubernetes executor runs each task in an individual Kubernetes Pod instead of in shared Celery workers. For each task that needs to run, the executor calls the Kubernetes API to dynamically launch a Pod for the task. You can specify the configuration of the task and Pod, including CPU and memory, in a `pod_override` file. When the task completes, the Pod terminates. On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
 
-See [Manage the Kubernetes executor](manage-astro-executors.md#manage-the-kubernetes-executor) for more information about configuring and running the Kubernetes executor on a Deployment. 
+The Kubernetes executor is a good fit for teams that need fine-grained configurations for each of their tasks. Specifically, the Kubernetes executor is a good fit for your team if:
 
-#### Benefits
-
-- Fault tolerance. A task that fails doesn't cause other tasks to fail.
-- Specify CPU and memory limits or minimums to optimize performance and reduce costs.
-- Task isolation. A task uses only the resources allocated to it and it can't consume resources allocated to other tasks. 
-- Running tasks are not interrupted when a deploy is pushed.
-
-On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every cluster in the data plane and is managed by Astronomer.
-
-#### Limitations
-
-- Tasks take longer to start, which can cause task latency.
-- PersistentVolumes (PVs) are not supported on Pods launched in an Astro cluster
-- The `pod_template_file` argument is not supported on Pods launched in an Astro cluster. If you use the `pod_template_file` argument, the DAG is rejected and a broken DAG error message appears in the Airflow UI.
+- You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when your team deploys code.
+- You experience a high number of dependency conflicts between tasks and could benefit from task isolation. For example, one task in your Deployment requires a different version of pandas than another task.
+- You have a strong understanding of the CPU and memory that your tasks require and would benefit from being able to allocate and optimize infrastructure resources at the task level.
+- Your team has had issues running certain tasks reliably with the Celery executor.
+  
+The primary limitation with the Kubernetes executor is that each task takes up to 1 minute to start running once scheduled. If you're running short-running tasks and cannot tolerate high latency, Astronomer recommends the Celery executor. To learn more, see [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) in Airflow documentation or [Manage the Kubernetes executor on Astro](manage-astro-executors.md#manage-the-kubernetes-executor).
 
 If you want to run only specific tasks in a Kubernetes Pod, consider using the [KubernetesPodOperator](kubernetespodoperator.md).
 
@@ -71,25 +75,17 @@ If you want to run only specific tasks in a Kubernetes Pod, consider using the [
 4. Select **Celery** or **Kubernetes** in the **Executor** list. If you're moving from the Celery to the Kubernetes executor, all existing worker queues are deleted. Running tasks stop gracefully and all new tasks start with the selected executor.
 5. Click **Update**.
 
-## Set scheduler resources
+## Scheduler resources
 
-The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. To ensure that your tasks have the CPU and memory required to complete successfully, you can set resources for:
+The [Airflow scheduler](https://airflow.apache.org/docs/apache-airflow/stable/concepts/scheduler.html) is responsible for monitoring task execution and triggering downstream tasks when the dependencies are met. To ensure that your tasks have the CPU and memory required to complete successfully on Astro, you can set:
 
-- **Scheduler Resources**: Select the number of Astronomer Units (AU) assigned to the schedulers. Alternatively, move the CPU and memory slider to use specific CPU and memory values to automatically define the scheduler AU assignment. An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. One AU is equivalent to 0.1 CPU and 0.375 GiB of memory. Assigning five AUs to a scheduler is equivalent to 0.5 CPUs and 1.88 GiB of memory. 
+- **Scheduler Resources**: Determine the total CPU and memory allocated to each scheduler in your Deployment, defined as Astronomer Units (AU). One AU is equivalent to 0.1 CPU and 0.375 GiB of memory. The default scheduler size is 5 AU, or .5 CPU and 1.88 GiB memory. The number of schedulers running in your Deployment is determined by **Scheduler Count**, but all schedulers are created with the same CPU and memory allocations.
 
-    If you experience delays in task execution, which you can track with the Gantt Chart view of the Airflow UI, Astronomer recommends increasing the allocated AU value. The default resource allocation is ten AU. 
-
-- **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to ten AU and **Scheduler Count** to two, your Deployment will run with two Airflow schedulers using ten AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers. 
+- **Scheduler Count**: Move the slider to select the number of schedulers for the Deployment. Each scheduler is provisioned with the AU you specified in the **Scheduler Resources** field. For example, if you set scheduler resources to 10 AU and **Scheduler Count** to 2, your Deployment will run with 2 Airflow schedulers using 10 AU each. For high availability, Astronomer recommends selecting a minimum of two schedulers. 
 
 Scheduler resources must be set for each Deployment and are managed separately from cluster-level infrastructure. Any additional components that Astro requires, including PgBouncer, KEDA, and the triggerer, are managed by Astronomer.
 
-:::cli
-
-If you prefer, you can set Deployment resources using the Astro CLI and a local Deployment configuration file. See [Deployments as Code](manage-deployments-as-code.md).
-
-:::
-
-### Edit scheduler settings 
+### Update scheduler settings 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.

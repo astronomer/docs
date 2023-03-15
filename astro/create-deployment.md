@@ -39,12 +39,13 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
 
     - **Description**: Optional. Enter a description for your Deployment.
     - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
-    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks on a single pod. The Kubernetes executor runs individual tasks in an isolated Kubernetes pod and is a good option when when task reliability and running tasks in an isolated environment are the main priorities. For more information about the benefits and limitations of each executor, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
+    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks in a single worker and is a good choice for most teams. The Kubernetes executor runs each task in an isolated Kubernetes Pod and is a good option for teams that have long-running tasks or have had trouble running tasks reliably with the Celery executor. For more information about the benefits and limitations of each executor, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
     - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
 
 4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with the following resources:
 
-    - If you're running the Celery executor, a worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
+    - The celery executor
+    - A worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
     - A single scheduler with 0.5 CPUs and 1.88 GiB of memory.
 
 5. Click **Create Deployment**.

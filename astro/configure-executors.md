@@ -1,7 +1,7 @@
 ---
-sidebar_label: 'Manage Deployment executors'
-title: 'Manage Deployment executors'
-id: 'manage-astro-executors'
+sidebar_label: 'Configure an executor'
+title: 'Configure a Deployment executor'
+id: 'configure-executors'
 ---
 
 <head>
@@ -9,19 +9,23 @@ id: 'manage-astro-executors'
   <meta name="og:description" content="Learn how to select and manage Astro executors." />
 </head>
 
-After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro. To choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
+The executor determines which worker resources run your scheduled tasks. The difference between executors is primarily based on how tasks are distributed across worker resources.
+
+On Astro, a single executor is assigned to each Deployment and you can update the executor assignment at any time. After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro.
+
+To choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor). To learn more about executors in Airflow, see [Airflow executors](/learn/airflow-executors-explained.md).
 
 ## Manage the Celery executor
 
-The Celery executor assigns tasks to workers with preset amounts of CPU and memory. 
+On Astro, you can configure Celery executor in the following ways:
 
-On Astro, each Celery worker utilizes an entire worker node instance on your cloud and can run multiple tasks at once. Workers are organized into pools called worker queues that automatically scale worker count based on how many tasks you're running. Each Deployment running the Celery executor has a default worker queue that requires no additional configuration to start running tasks. 
+- The type and size of your workers.
+- The minimum and maximum number of workers that your Deployment can run at a time.
+- The number of tasks that each worker can run at a time.
 
-This topic discusses basic Celery executor configurations for scaling workers in a worker queue. For advanced resource configuration steps, including how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md).
+You can set these configurations per worker queue, which is a set of configurations that apply to a group of workers in your Deployment. With the celery executor, you can configure multiple worker queues for different types of tasks and assign tasks to those queues in your DAG code.
 
-### Prerequisites
-
-- An Astro [Deployment](create-deployment.md).
+This topic discusses basic Celery executor configurations for a single worker queue. For instructions on how to configure multiple worker queues, see [Configure worker queues](configure-worker-queues.md). To add more worker types to your Deployment, see [Manage worker types](modify-cluster.md#manage-worker-types).
 
 ### Celery worker autoscaling logic
 
@@ -60,11 +64,6 @@ Celery worker scaling is configured at the worker queue level. Changing worker s
 The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, run tasks for extended periods, or have extended periods without without task runs
 
 By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
-
-### Prerequisites
-
-- An [Astro project](create-project.md).
-- An Astro [Deployment](create-deployment.md).
 
 ### Customize the Kubernetes worker Pod for a task
 
