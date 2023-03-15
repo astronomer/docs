@@ -1,5 +1,19 @@
-This process should be undertaken with assistance from your Astronomer Data Engineer, and these steps should already be completed:
+The migration process should be completed with assistance from your Astronomer Data Engineer. Before you meet with your Astronomer Data Engineer, ensure that the following steps are completed:
 
-- A cluster has been [activated](https://docs.astronomer.io/astro/category/install-astro)
-- [Networking connectivity](connect-aws.md) has been established
-- an [IDP](configure-idp.md) Sign-On Method is configured, if it is desired
+- Astronomer has [activated your installation](https://docs.astronomer.io/astro/category/install-astro).
+- You have [connected your cloud resources](https://docs.astronomer.io/astro/category/connect-astro) to Astro.
+- Optional. You have [configured your identity provider (IdP)](configure-idp.md).
+
+On your local machine, make sure you have the following:
+
+- An [Astro account](log-in-to-astro.md).
+- The [Astro CLI](cli/install-cli.md).
+
+On the cloud service from which you're migrating, ensure that you have:
+
+- Read access to the source Airflow environment.
+- Read access to the any cloud storage buckets that store your DAGs.
+- Read access to any source control tool that hosts your current Airflow code, such as GitHub.
+- Permission to create new repositories on your source control tool.
+- Access to any secrets backend credentials.
+- Optional. Permission to create new CI/CD pipelines. 

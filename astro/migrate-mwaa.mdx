@@ -29,18 +29,13 @@ cover migrating an Airflow Instance from [Amazon Managed Workflows for Apache Ai
 
 <Prerequisites/>
 
-### Requirements
-
-<Requirements />
-
 You can additionally utilize the `aws` CLI to expedite some steps in this guide.
 
-## Prepare Source and Setup Astro Airflow
+## Step 1: Install Astronomer Starship
 
-### Step 1: Install Astronomer Starship
 <Starship />
 
-#### Starship Compatability Matrix
+### Starship Compatibility Matrix
 
 | Source Airflow      | Starship Plugin | Starship Operator |
 |---------------------|-----------------|-------------------|
@@ -49,7 +44,8 @@ You can additionally utilize the `aws` CLI to expedite some steps in this guide.
 | MWAA v2.2.2         | ✔️️             |                   |
 | MWAA v2.4.3         | ✔️️             |                   |
 
-#### Installation
+### Installation
+
 To install Starship to your MWAA instance, you'll need to edit the `requirements.txt` file in your S3 Bucket.
 You can find more [detailed instructions here.](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways)
 
@@ -79,26 +75,22 @@ aws mwaa update-environment "$MWAA_NAME" --requirements-s3-object-version="$(aws
 
 We will cover usage of the Starship migration utility later in this document
 
-### Step 2: Create Astro Workspace
+## Step 2: Create Astro Workspace
 
 <Workspaces />
 
 
-### Step 3: Create Astro Deployment
+## Step 3: Create Astro Deployment
 
 <Deployments />
 
-## Migrate Airflow Metadata
-In this step we will migrate Airflow Metadata with Starship from Source Environment
-
-### Step 4: Use Starship to Migrate Airflow Connections and Variables
+## Step 4: Use Starship to Migrate Airflow Connections and Variables
 <Usage />
 
-## Migrate DAGs
-### Step 5: Initialize new repository skeleton
+## Step 5: Initialize new repository skeleton
 <DAGs />
 
-### Step 6: Copy core Airflow code
+## Step 6: Copy core Airflow code
 1. Edit `Dockerfile` to match Astro Runtime version to customer’s Source environment Airflow version
     <RuntimeVersionInfo />
 
@@ -134,7 +126,7 @@ In this step we will migrate Airflow Metadata with Starship from Source Environm
 
     :::
 
-### Step 7: Copy accessory Airflow code
+## Step 7: Copy accessory Airflow code
 Following the recommended [project structure](https://docs.astronomer.io/learn/managing-airflow-code#project-structure), we will move any files to our Astro project.
 
 - If you have utilized the `/plugins` folder in your S3 Bucket, copy it from source control or the S3 Bucket to the local `/plugins` folder
@@ -150,13 +142,13 @@ Make sure to review the output after running this command
 
 :::
 
-### Step 8: Configure Additional Components
+## Step 8: Configure Additional Components
 <Additional />
 
-### Step 9: Test locally and check for import errors
+## Step 9: Test locally and check for import errors
 <TestLocally />
 
-### Step 10: Deploy
+## Step 10: Deploy
 <Deploy />
 
 ## Validate, Cut-over and Tune Process
