@@ -65,11 +65,11 @@ The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/
 
 By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
-### Customize the Kubernetes worker Pod for a task
+### Customize Kubernetes Pods for tasks
 
 :::warning
 
-While you can technically customize all values for a worker Pod, Astronomer recommends against configuring complex Kubernetes infrastructure in your Pods such as sidecars. These configurations have not been tested by Astronomer.
+While you can customize all values for a worker Pod, Astronomer does not recommend configuring complex Kubernetes infrastructure in your Pods, such as sidecars. These configurations have not been tested by Astronomer.
 
 :::
 
@@ -86,7 +86,7 @@ You can configure different custom worker Pods to override the default Astro wor
 
 See [Manage task CPU and memory](#manage-task-cpu-and-memory) for an example `pod_override` configuration. 
 
-### Configure limits and requests for worker Pod CPU and memory
+### Example Pod configuration: Configure limits and requests for worker Pod CPU and memory
 
 One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for a task. When requesting resources, make sure that your requests don't exceed the available resources in your current [Pod worker node type](#change-the-pod-worker-node-type).
 
