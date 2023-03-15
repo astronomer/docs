@@ -140,7 +140,7 @@ A Deployment using the Kubernetes executor runs worker Pods on a single `default
 
 2. Click the **Worker Queues** tab and then click **Edit** to edit the `default` worker queue.
 
-3. In the **Worker Type** list, select the type of worker node to run your worker Pods on.
+3. In the **Worker Type** list, select the type of worker node to run your Pods on.
 
 4. Click **Update Queue**.
 
