@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, timedelta
+from pendulum import datetime, duration
 import requests
 from airflow import DAG
 from airflow.operators.python import PythonOperator
@@ -27,11 +27,11 @@ with DAG(
     "xcom_dag",
     start_date=datetime(2021, 1, 1),
     max_active_runs=2,
-    schedule=timedelta(minutes=30),
-    default_args={"retries": 1, "retry_delay": timedelta(minutes=5)},
+    schedule=duration(minutes=30),
+    default_args={"retries": 1, "retry_delay": duration(minutes=5)},
     catchup=False,
 ) as dag:
-    get_a_cat_fact = PythonOperator(
+    get_cat_data = PythonOperator(
         task_id="get_a_cat_fact", python_callable=get_a_cat_fact
     )
 

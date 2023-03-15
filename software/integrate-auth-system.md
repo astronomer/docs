@@ -129,7 +129,9 @@ Follow these steps to configure Azure AD as your OIDC provider.
 
 ![authentication.png](/img/software/azure-authentication.png)
 
-#### Create a client secret
+#### Create a client secret (Optional)
+
+Complete this setup only if you want to import Azure AD groups to Astronomer Software as [Teams](import-idp-groups.md).
 
 1. In your Azure AD application management left menu, click **Certificates & secrets**.
 2. Click **New client secret**.
@@ -152,6 +154,7 @@ Follow these steps to configure Azure AD as your OIDC provider.
     - In **Customize token properties by type** area, expand **ID**, **Access**, and **SAML** and then select **Group ID** for each type.
     
 7. Click **Add**.
+8. Encrypt the secret value you copied as a Kubernetes Secret on your Astronomer installation. See [Store and encrypt identity provider secrets](#store-and-encrypt-identity-provider-secrets).
 
 #### Enable Azure AD in your config.yaml file
 
@@ -169,9 +172,10 @@ astronomer:
             enabled: true
             clientId: <your-client-id>
             discoveryUrl: https://login.microsoftonline.com/<tenant-id>/v2.0/
+            # Configure a secret only if you're importing Azure AD user groups as Teams
             clientSecret: <your-client-secret>
             authUrlParams:
-              audience: <cyour-client-id>
+              audience: <your-client-id>
         github:
           enabled: false
 ```

@@ -36,7 +36,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | Code               | Name               | Astro - Bring Your Own Cloud | Astro - Hosted      |
 | ------------------ | ------------------ | ---------------------------- | ------------------- |
 | `australiaeast`    | Australia East     | ✔️                            | ✔️                   |
-| `canadacentral`    | Canada Central     | ✔️                            | ✔️                   |
+| `canadacentral`    | Canada Central     | ✔️                            |                     |
 | `centralindia`     | Central India      | ✔️                            |                     |
 | `centralus`        | Central US         | ✔️                            |                     |
 | `eastasia`         | East Asia          | ✔️                            |                     |
@@ -48,7 +48,7 @@ Depending on how you installed Astro, you can host Astro clusters in the followi
 | `northeurope`      | North Europe       | ✔️                            | ✔️                   |
 | `southafricanorth` | South Africa North | ✔️                            |                     |
 | `southcentralus`   | South Central US   | ✔️                            |                     |
-| `southeastasia`    | South East Asia    | ✔️ ¹                          | ✔️ (Private Preview) |
+| `southeastasia`    | South East Asia    | ✔️ ¹                          |                     |
 | `uksouth`          | UK South           | ✔️                            |                     |
 | `westeurope`       | West Europe        | ✔️  ¹                         | ✔️                   |
 | `westus2`          | West US 2          | ✔️ ¹                          | ✔️                   |

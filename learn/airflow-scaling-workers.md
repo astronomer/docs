@@ -46,7 +46,9 @@ You should modify environment-level settings if you want to tune performance acr
 
 Core settings control the number of processes running concurrently and how long processes run across an entire Airflow environment. The associated environment variables for all parameters in this section are formatted as `AIRFLOW__CORE__PARAMETER_NAME`.
 
-- `parallelism`: The maximum number of tasks that can run concurrently on each scheduler within a single Airflow environment. For example, if this setting is set to 32, and there are two schedulers, then no more than 64 tasks can be in a running or queued state at once across all DAGs. If your tasks remain in a scheduled state for an extended period, you might want to increase this value. The default value is 32.
+- `parallelism`: The maximum number of tasks that can run concurrently on each scheduler within a single Airflow environment. For example, if this setting is set to 32, and there are two schedulers, then no more than 64 tasks can be in a running or queued state at once across all DAGs. If your tasks remain in a scheduled state for an extended period, you might want to increase this value. The default value is 32. 
+
+    On Astro, this value is [set automatically](https://docs.astronomer.io/astro/configure-worker-queues#worker-autoscaling-logic) based on your maximum worker count, meaning that you don't have to configure it.
 
 - `max_active_tasks_per_dag` (formerly `dag_concurrency`): The maximum number of tasks that can be scheduled at once, per DAG. Use this setting to prevent any one DAG from taking up too many of the available slots from parallelism or your pools. The default value is 16.
 
@@ -99,8 +101,9 @@ There are three primary DAG-level Airflow settings that you can define in code:
 You can define any DAG-level settings within your DAG definition. For example:
 
 ```python
-  # Allow a maximum of concurrent 10 tasks across a max of 3 active DAG runs
-  dag = DAG('my_dag_id', concurrency=10,  max_active_runs=3)
+# Allow a maximum of concurrent 10 tasks across a max of 3 active DAG runs
+@dag("my_dag_id", concurrency=10, max_active_runs=3)
+def my_dag():
 ```
 
 ### Task-level Airflow settings
@@ -115,7 +118,7 @@ There are two primary task-level Airflow settings users can define in code:
 The parameters above are inherited from the `BaseOperator`, so you can set them in any operator definition. For example:
 
 ```python
-  t1 = PythonOperator(task_id='t1', pool='my_custom_pool', max_active_tis_per_dag=14)
+t1 = PythonOperator(task_id="t1", pool="my_custom_pool", max_active_tis_per_dag=14)
 ```
 
 ## Executors and scaling

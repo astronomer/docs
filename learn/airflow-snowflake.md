@@ -292,7 +292,7 @@ The [Astronomer Providers](https://github.com/astronomer/astronomer-providers) p
 
 ### Snowflake and enhanced observability with OpenLineage
 
-The [OpenLineage project](https://openlineage.io/) integration with Airflow lets you obtain and view lineage data from your Airflow tasks. As long as an extractor exists for the operator being used, lineage data is generated automatically from each task instance. For an overview of how OpenLineage works with Airflow, see [OpenLineage and Airflow](airflow-openlineage.md).
+The [OpenLineage project](https://openlineage.io/) integration with Airflow lets you obtain and view lineage metadata from your Airflow tasks. As long as an extractor exists for the operator being used, lineage metadata is generated automatically from each task instance. For an overview of how OpenLineage works with Airflow, see [OpenLineage and Airflow](airflow-openlineage.md).
 
 The SnowflakeOperator, SnowflakeOperatorAsync, SQLColumnCheckOperator and SQLTableCheckOperator all have an extractor, which allows you to use lineage metadata to answer the following questions across DAGs:
 
@@ -305,7 +305,7 @@ This image shows an overview of the interaction between OpenLineage, Airflow, an
 
 ![Snowflake OpenLineage](/img/guides/snowflake_openlineage_architecture.png)
 
-To view lineage data from your DAGs, you need to have OpenLineage installed in your Airflow environment and a lineage front end running. If you're using [Astro](https://docs.astronomer.io/astro/data-lineage), lineage is enabled automatically. If you're using open source tools, you can run Marquez locally and connect it to your Airflow environment. See [OpenLineage and Airflow](airflow-openlineage.md).
+To view lineage metadata from your DAGs, you need to have OpenLineage installed in your Airflow environment and a lineage front end running. If you're using [Astro](https://docs.astronomer.io/astro/data-lineage), lineage is enabled automatically. If you're using open source tools, you can run Marquez locally and connect it to your Airflow environment. See [OpenLineage and Airflow](airflow-openlineage.md).
 
 To show an example of lineage resulting from Snowflake orchestration, you'll look at the write, audit, publish DAG from the previous example. The following image shows the Lineage UI integrated with Astro.
 

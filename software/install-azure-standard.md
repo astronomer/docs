@@ -13,12 +13,19 @@ Install Astronomer Software on Azure to deploy and scale [Apache Airflow](https:
 * [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 * [Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 * [Kubernetes CLI (kubectl)](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-* A compatible version of Kubernetes as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
+* A compatible version of Kubernetes and PostgreSQL as described in Astronomer's [Version compatibility reference](version-compatibility-reference.md)
 * [Helm (minimum v3.6)](https://helm.sh/docs/intro/install)
 * SMTP service and credentials. For example, Mailgun or Sendgrid.
 * Permission to create and modify resources on AKS
 * Permission to generate a certificate (not self-signed) that covers a defined set of subdomains
+* PostgreSQL superuser permissions
 * If your organization uses Azure Database for PostgreSQL as the database backend, you need to enable the `pg_trgm` extension using the Azure portal or the Azure CLI before you install Astronomer Software. If you don't enable the `pg_trgm` extension, the install will fail. For more information about enabling the `pg_trgm` extension, see [PostgreSQL extensions in Azure Database for PostgreSQL - Flexible Server](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+
+:::caution
+
+Astronomer Software is not compatible with Azure Single Server.
+
+:::
 
 ## Step 1: Choose a base domain
 

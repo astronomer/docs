@@ -5,6 +5,16 @@ description: "Using datasets to implement DAG dependencies and scheduling in Air
 id: airflow-datasets
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import dataset_upstream1 from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_upstream1.py';
+import dataset_downstream_1_2 from '!!raw-loader!../code-samples/dags/airflow-datasets/dataset_downstream_1_2.py';
+import datasets_ml_example_consume from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_consume.py';
+import datasets_ml_example_publish_taskflow from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_publish_taskflow.py';
+import datasets_ml_example_publish_traditional from '!!raw-loader!../code-samples/dags/airflow-datasets/datasets_ml_example_publish_traditional.py';
+import example_sdk_datasets from '!!raw-loader!../code-samples/dags/airflow-datasets/example_sdk_datasets.py';
+
 Datasets and data-aware scheduling were made available in [Airflow 2.4](https://airflow.apache.org/docs/apache-airflow/2.4.0/release_notes.html#airflow-2-4-0-2022-09-19). DAGs that access the same data now have explicit, visible relationships, and DAGs can be scheduled based on updates to these datasets. This feature helps make Airflow data-aware and expands Airflow scheduling capabilities beyond time-based methods such as cron.
 
 Datasets can help resolve common issues. For example, consider a data engineering team with a DAG that creates a dataset and an analytics team with a DAG that analyses the dataset. Using datasets, the data analytics DAG runs only when the data engineering team's DAG publishes the dataset.
@@ -31,55 +41,13 @@ You can reference the dataset in a task by passing it to the task's `outlets` pa
 
 When you define a task's `outlets` parameter, Airflow labels the task as a producer task that updates the datasets. It is up to you to determine which tasks should be considered producer tasks for a dataset. As long as a task has an outlet dataset, Airflow considers it a producer task even if that task doesn't operate on the referenced dataset. In the following example, Airflow treats both `upstream_task_1` and `upstream_task_2` as producer tasks even though they only run `sleep` in a bash shell.
 
-```python
-from airflow import DAG, Dataset
-
-# Define datasets
-dag1_dataset = Dataset('s3://dataset1/output_1.txt')
-dag2_dataset = Dataset('s3://dataset2/output_2.txt')
-
-
-with DAG(
-    dag_id='dataset_upstream1',
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
-    schedule='@daily',
-    catchup=False
-) as dag1:
-
-    BashOperator(
-        task_id='upstream_task_1', 
-        bash_command="sleep 5",
-        outlets=[dag1_dataset] # Define which dataset is updated by this task
-    )
-
-    BashOperator(
-        task_id='upstream_task_2', 
-        bash_command="sleep 5",
-        outlets=[dag2_dataset] # Define which dataset is updated by this task
-    )
-```
+<CodeBlock language="python">{dataset_upstream1}</CodeBlock>
 
 After a dataset is defined in one or more producer tasks, consumer DAGs in your Airflow environment listen to the producer tasks and run whenever the task completes, rather than running on a time-based schedule. For example, if you have a DAG that should run when `dag1_dataset` and `dag2_dataset` are updated, you define the DAG's schedule using the names of the datasets.
 
 Any task that is scheduled with a dataset is considered a consumer task even if that task doesn't consume the referenced dataset. In other words, it is up to you as the DAG author to correctly reference and use the dataset that the consumer DAG is scheduled on.
 
-```python
-dag1_dataset = Dataset('s3://dataset1/output_1.txt')
-dag2_dataset = Dataset('s3://dataset2/output_2.txt')
-
-with DAG(
-    dag_id='dataset_downstream_1_2',
-    catchup=False,
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
-    schedule=[dag1_dataset, dag2_dataset],
-    tags=['downstream'],
-) as dag3:
-
-    BashOperator(
-        task_id='downstream_2',
-        bash_command="sleep 5"
-    )
-```
+<CodeBlock language="python">{dataset_downstream_1_2}</CodeBlock>
 
 Any number of datasets can be provided to the `schedule` parameter as a list. The DAG is triggered after all of the datasets have received at least one update due to a producing task completing successfully. 
 
@@ -121,121 +89,34 @@ Using datasets, the data science team can schedule their DAG to run only when th
 
 The following is an example of the data engineering team's DAG:
 
-```python
-from airflow import Dataset
-from airflow.decorators import task, dag
-from airflow.providers.amazon.aws.hooks.s3 import S3Hook
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-implementation"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-import pendulum
+<TabItem value="taskflow">
 
-s3_bucket = 'sagemaker-us-east-2-559345414282'
-test_s3_key = 'demo-sagemaker-xgboost-adult-income-prediction/test/test.csv'
-dataset_uri = 's3://' + test_s3_key
+<CodeBlock language="python">{datasets_ml_example_publish_taskflow}</CodeBlock>
+
+</TabItem>
+
+<TabItem value="traditional">
+
+<CodeBlock language="python">{datasets_ml_example_publish_traditional}</CodeBlock>
+
+</TabItem>
+</Tabs>
 
 
-@dag(
-    schedule='@daily',
-    start_date=pendulum.datetime(2021, 1, 1, tz="UTC"),
-    catchup=False,
-)
-def datasets_ml_example_publish():
-
-    @task(outlets=Dataset(dataset_uri))
-    def upload_data_to_s3(s3_bucket, test_s3_key):
-        """
-        Uploads validation data to S3 from /include/data
-        """
-        s3_hook = S3Hook(aws_conn_id='aws-sagemaker')
-
-        #  Upload the file using the .load_file() method
-        s3_hook.load_file(
-            filename='include/data/test.csv',
-            key=test_s3_key,
-            bucket_name=s3_bucket,
-            replace=True
-        )
-
-    upload_data = upload_data_to_s3(s3_bucket, test_s3_key)
-
-datasets_ml_example_publish = datasets_ml_example_publish()
-```
 
 This DAG has a single task, `upload_data_to_s3`, that publishes the data. An outlet dataset is defined in the `@task` decorator using `outlets=Dataset(dataset_uri)` where the dataset URI is defined at the top of the DAG script.
 
 The data science team can then provide that same dataset URI to the `schedule` parameter in their DAG:
 
-```python
-from airflow import DAG, Dataset
-from airflow.providers.amazon.aws.operators.sagemaker_transform import (
-    SageMakerTransformOperator
-)
-from airflow.providers.amazon.aws.transfers.s3_to_redshift import (
-    S3ToRedshiftOperator
-)
-
-from datetime import datetime, timedelta
-
-# Define variables used in config and Python function
-date = '{{ ds_nodash }}'                                                     # Date for transform job name
-s3_bucket = 'sagemaker-us-east-2-559345414282'                               # S3 Bucket used with SageMaker instance
-test_s3_key = 'demo-sagemaker-xgboost-adult-income-prediction/test/test.csv' # Test data S3 key
-output_s3_key = 'demo-sagemaker-xgboost-adult-income-prediction/output/'     # Model output data S3 key
-sagemaker_model_name = "sagemaker-xgboost-2021-08-03-23-25-30-873"           # SageMaker model name
-dataset_uri = 's3://' + test_s3_key
-
-# Define transform config for the SageMakerTransformOperator
-transform_config = {
-        "TransformJobName": "test-sagemaker-job-{0}".format(date),
-        "TransformInput": {
-            "DataSource": {
-                "S3DataSource": {
-                    "S3DataType": "S3Prefix",
-                    "S3Uri": "s3://{0}/{1}".format(s3_bucket, test_s3_key)
-                }
-            },
-            "SplitType": "Line",
-            "ContentType": "text/csv",
-        },
-        "TransformOutput": {
-            "S3OutputPath": "s3://{0}/{1}".format(s3_bucket, output_s3_key)
-        },
-        "TransformResources": {
-            "InstanceCount": 1,
-            "InstanceType": "ml.m5.large"
-        },
-        "ModelName": sagemaker_model_name
-}
-
-
-with DAG(
-    'datasets_ml_example_consume',
-    start_date=datetime(2021, 7, 31),
-    max_active_runs=1,
-    schedule=[Dataset(dataset_uri)], # Schedule based on the dataset published in another DAG
-    default_args={
-        'retries': 1,
-        'retry_delay': timedelta(minutes=1),
-        'aws_conn_id': 'aws-sagemaker'
-    },
-    catchup=False
-) as dag:
-
-    predict = SageMakerTransformOperator(
-        task_id='predict',
-        config=transform_config
-    )
-
-    results_to_redshift = S3ToRedshiftOperator(
-            task_id='save_results',
-            s3_bucket=s3_bucket,
-            s3_key=output_s3_key,
-            schema="PUBLIC",
-            table="results",
-            copy_options=['csv'],
-        )
-
-    predict >> results_to_redshift
-```
+<CodeBlock language="python">{datasets_ml_example_consume}</CodeBlock>
  
 The dependency between the two DAGs is straightforward to implement and can be viewed alongside the dataset in the Airflow UI.
 
@@ -247,60 +128,6 @@ If you are using the [Astro Python SDK](https://docs.astronomer.io/tutorials/ast
 
 The following example DAG results in three registered datasets: one for each `load_file` function and one for the resulting data from the `transform` function.
 
-```python
-import os
-from datetime import datetime
-
-import pandas as pd
-from airflow.decorators import dag
-
-from astro.files import File
-from astro.sql import (
-    load_file,
-    transform,
-)
-from astro.sql.table import Table
-
-SNOWFLAKE_CONN_ID = "snowflake_conn"
-AWS_CONN_ID = "aws_conn"
-
-# The first transformation combines data from the two source tables
-@transform
-def extract_data(homes1: Table, homes2: Table):
-    return """
-    SELECT *
-    FROM {{homes1}}
-    UNION
-    SELECT *
-    FROM {{homes2}}
-    """
-
-@dag(start_date=datetime(2021, 12, 1), schedule="@daily", catchup=False)
-def example_sdk_datasets():
-
-    # Initial load of homes data csv's from S3 into Snowflake
-    homes_data1 = load_file(
-        task_id="load_homes1",
-        input_file=File(path="s3://airflow-kenten/homes1.csv", conn_id=AWS_CONN_ID),
-        output_table=Table(name="HOMES1", conn_id=SNOWFLAKE_CONN_ID),
-        if_exists='replace'
-    )
-
-    homes_data2 = load_file(
-        task_id="load_homes2",
-        input_file=File(path="s3://airflow-kenten/homes2.csv", conn_id=AWS_CONN_ID),
-        output_table=Table(name="HOMES2", conn_id=SNOWFLAKE_CONN_ID),
-        if_exists='replace'
-    )
-
-    # Define task dependencies
-    extracted_data = extract_data(
-        homes1=homes_data1,
-        homes2=homes_data2,
-        output_table=Table(name="combined_homes_data"),
-    )
-
-example_sdk_datasets = example_sdk_datasets()
-```
+<CodeBlock language="python">{example_sdk_datasets}</CodeBlock>
 
 ![SDK datasets](/img/guides/sdk_datasets.png)

@@ -171,7 +171,7 @@ This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.i
 
 - A [Deployment](create-deployment.md) on Astro.
 - [The Astro CLI](cli/overview.md).
-- A [Hashicorp Vault server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started).
+- A local or hosted Vault server. See [Starting the Server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) or [Create a Vault Cluster on HCP](https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault).
 - An [Astro project](create-project.md).
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
 - Your Vault Server's URL. If you're using a local server, this should be `http://127.0.0.1:8200/`.
@@ -185,26 +185,38 @@ If you do not already have a Vault server deployed but would like to test this f
 
 To use Vault as a secrets backend, Astronomer recommends configuring a Vault AppRole with a policy that grants only the minimum necessary permissions for Astro. To do this:
 
-1. [Create a Vault policy](https://www.vaultproject.io/docs/concepts/policies) with the following permissions:
+1. Run the following command to [create a Vault policy](https://www.vaultproject.io/docs/concepts/policies) that Astro can use to access a Vault server:
 
     ```hcl
-    path "secret/data/variables/*" {
-      capabilities = ["read", "list"]
+    vault auth enable approle
+    vault policy write astro_policy - <<EOF
+    path "secret/*" {
+      capabilities = ["create", "read", "update", "patch", "delete", "list"]
     }
-
-    path "secret/data/connections/*" {
-      capabilities = ["read", "list"]
-    }
+    EOF
     ```
 
-2. [Create a Vault AppRole](https://www.vaultproject.io/docs/auth/approle) and attach the policy you just created to it.
-   
-3. Retrieve the `role-id` and `secret-id` for your AppRole by running the following commands:
+2. Run the following command to [create a Vault AppRole](https://www.vaultproject.io/docs/auth/approle):
+
+    ```hcl
+    vault auth enable approle
+    vault write auth/approle/role/astro_role \
+        secret_id_ttl=0 \
+        secret_id_num_uses=0 \
+        token_num_uses=0 \
+        token_ttl=24h \
+        token_max_ttl=24h
+    ```
+
+3. Add the policy you created to your AppRole. See [Associate Policies to Auth Methods](https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-policies#associate-policies-to-auth-methods).     
+4. Run the following commands to retrieve the `role-id` and `secret-id` for your AppRole:
 
     ```sh
     vault read auth/approle/role/<your-approle>/role-id
     vault write -f auth/approle/role/<your-approle>/secret-id
     ```
+
+    Save these values. You'll use them later to complete the setup.
   
 #### Create an Airflow variable or connection in Vault
 
@@ -213,12 +225,14 @@ To start, create an Airflow variable or connection in Vault that you want to sto
 To store an Airflow variable in Vault as a secret, run the following Vault CLI command with your own values:
 
 ```sh
+vault secrets enable -path=secret -version=2 kv
 vault kv put secret/variables/<your-variable-key> value=<your-variable-value>
 ```
 
 To store a connection in Vault as a secret, run the following Vault CLI command with your own values:
 
 ```sh
+vault secrets enable -path=secret -version=2 kv
 vault kv put secret/connections/<your-connection-id> conn_uri=<connection-type>://<connection-login>:<connection-password>@<connection-host>:5432
 ```
 
@@ -235,7 +249,7 @@ $ vault kv get secret/connections/<your-connection-id>
 
 In your Astro project, add the [Hashicorp Airflow provider](https://airflow.apache.org/docs/apache-airflow-providers-hashicorp/stable/index.html) to your project by adding the following to your `requirements.txt` file:
 
-```
+```text
 apache-airflow-providers-hashicorp
 ```
 
@@ -245,6 +259,15 @@ Then, add the following environment variables to your `.env` file:
 AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
 AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}
 ```
+
+:::info 
+
+If you run Vault on Hashicorp Cloud Platform (HCP):
+ 
+- Replace `http://host.docker.internal:8200` with `https://<your-cluster>.hashicorp.cloud:8200`.
+- Add `"namespace": "admin"` as an argument after `url`.
+
+:::
 
 This tells Airflow to look for variable and connection information at the `secret/variables/*` and `secret/connections/*` paths in your Vault server. You can now run a DAG locally to check that your variables are accessible using `Variable.get("<your-variable-key>")`.
 

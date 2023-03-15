@@ -5,8 +5,6 @@ id: modify-cluster
 description: Learn what you can configure on an existing Astro cluster.
 ---
 
-import PremiumBadge from '@site/src/components/PremiumBadge';
-
 New clusters on Astro typically have default configurations that are suitable for standard use cases. However, your organization might need to modify an existing cluster to meet certain networking, governance, or use case requirements. For example, you might need to:
 
 - Add a worker type, which creates a new worker node pool in your cluster and allows your team to select that worker type in a Deployment.
@@ -95,8 +93,6 @@ For the list of database instance types available on Astro, see:
 To request support for a different database instance type, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ## Authorize Workspaces to a cluster
-
-<PremiumBadge />
 
 As an Organization Owner, you can keep teams, resources, and projects isolated by authorizing Workspaces only to specific clusters. You can gain greater control over your cloud resources by ensuring that only authorized pipelines are running on specific clusters.
 

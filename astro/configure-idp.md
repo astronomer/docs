@@ -8,7 +8,6 @@ description: Configure federated authentication from a variety of third party id
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
-import PremiumBadge from '@site/src/components/PremiumBadge';
 
 There are 4 ways users can to authenticate to Astro:
 

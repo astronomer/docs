@@ -7,11 +7,14 @@ description: Create Deployment API keys to make requests to Airflow's REST API a
 
 An API key is a unique key ID and secret pair that you can use as an alternative to manual user authentication for some Astro actions. You can also use API keys to automate common actions on Astro that require manual inputs.
 
-You can use Deployment API keys to complete the following actions:
+You can use Deployment API keys to complete the following actions without authenticating as a user:
 
-- Automate deploying code to Astro [in CI/CD](ci-cd.md) with tools such as GitHub Actions or Circle CI.
-- Automate updating [environment variables](environment-variables.md).
+- Deploy code to Astro [through CI/CD](ci-cd.md) with tools such as GitHub Actions or Circle CI.
+- Update Deployment [environment variables](environment-variables.md).
+- Update Deployment resources. See [Manage Deployments as code](manage-deployments-as-code.md)
 - Fetch a short-lived access token that assumes the permissions of the Deployment API key. This access token can be used to make requests to the [Airflow REST API](airflow-api.md).
+
+You can't use a Deployment API key to [create Deployments](create-deployment.md) or manage users within a Deployment's Workspace.
 
 ## Use API keys
 
@@ -21,14 +24,6 @@ When using a Deployment API key, keep the following in mind:
 - Deployment API keys are deleted permanently if their corresponding Deployment is deleted.
 - A Deployment API key is not bound to the user who creates it. When a user who created the API key is removed from the Workspace, or their permissions change, the Deployment and CI/CD workflows that use the API key are not affected.
 - Any user or service with access to an API key and secret can access the corresponding Deployment. The only way to delete this access is to [delete the API key](api-keys.md#delete-an-api-key) or [delete the Deployment](configure-deployment-resources.md#delete-a-deployment).
-
-:::info
-
-You can't use API keys to automate the creation and updating of Deployments or Workspaces, or inviting and removing users.
-
-A new API key framework to unlock advanced automation workflows will soon be available in Astro. If you're interested in learning more about this feature or have questions, contact [Astronomer support](https://cloud.astronomer.io/support).
-
-:::
 
 ## Create an API key
 

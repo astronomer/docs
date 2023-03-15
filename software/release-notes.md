@@ -9,6 +9,29 @@ description: Astronomer Software release notes.
 
 0.31 is the latest stable version of Astronomer Software, while 0.30 remains the latest long-term support (LTS) release. To upgrade to 0.31, see [Upgrade Astronomer](upgrade-astronomer.md). For more information about Software release channels, see [Release and lifecycle policies](release-lifecycle-policy.md). To read release notes specifically for the Astro CLI, see [Astro CLI release notes](https://docs.astronomer.io/astro/cli/release-notes).
 
+## 0.31.3
+
+Release date: February 24, 2023
+
+### Additional improvements
+
+- You can now configure `extraVolumes` and `extraVolumeMounts` in the Alertmanager Helm chart, which can be useful for storing secret credentials for services that read your alerts.
+- You can now use `astronomer.houston.ingress.annotation` in the Astronomer Helm chart to configure custom ingress annotations for Houston.
+- You can now upgrade the Airflow Helm chart for individual Deployments by running `yarn upgrade-deployments <deployment-id>` from within the Houston Pod.
+
+### Bug fixes 
+
+- Fixed an issue where you could not set `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER` in a Deployment if you were using an Astronomer Certified image.
+- Astronomer Software now filters orphaned Deployments and Workspaces owned by users who were removed from an identity provider (IdP) group with SCIM enabled.
+- Fixed a security vulnerability where you could query Elasticsearch logs for a Deployment from a different Deployment.
+- Fixed an issue where authentication tokens were visible in Nginx logs produced by the Software UI.
+- Fixed an issue where deploying an image with the `docker/build-push-action` GitHub action could produce errors in Houston that affected the entire Astronomer Software installation.
+- Fixed the following vulnerabilities:
+  
+    - [CVE-2023-24807](https://nvd.nist.gov/vuln/detail/CVE-2023-24807)
+    - [CVE-2022-25881](https://nvd.nist.gov/vuln/detail/CVE-2023-25881)
+    - [CVE-2023-8286](https://nvd.nist.gov/vuln/detail/CVE-2023-8286)
+
 ## 0.31.2
 
 Release date: February 2, 2023

@@ -57,9 +57,7 @@ Examples:
 Examples:
 
 - There are package incompatibilities caused by a specific, complex use case.
-- You have questions about best practices for an action in Airflow or on Astro.
 - You have an inquiry or a small bug report for a Public Preview feature.
-- You have a feature request related to Astro or Airflow.
 
 ### Be as descriptive as possible
 
@@ -116,3 +114,12 @@ If you've submitted your support request on the Astronomer support portal, sign 
 To add a teammate to an existing support request, cc them when replying on the support ticket email thread.
 
 :::
+
+## Book office hours in the Cloud UI
+
+If you don't require break-fix support, Astronomer recommends scheduling a meeting with the Astronomer Data Engineering team during office hours. In an office hour meeting, you can ask questions, make feature requests, or get expert advice for your data pipelines. Office hours are recommended if:
+
+- You have questions about best practices for an action in Airflow or on Astro.
+- You have a feature request related to Astro or Airflow.
+
+To book an office hour meeting, open the Cloud UI and click **Help** > **Book Office Hours**. Use the provided Calendly form to schedule a 30-minute office hour meeting. In the form, provide details about the new issues and questions that you want to discuss during the meeting.

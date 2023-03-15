@@ -94,7 +94,7 @@ module.exports = {
       buttons: {
         primary: {
           label: "Try Astro",
-          href: "https://www.astronomer.io/get-started?referral=docs-what-astro-banner"
+          href: "https://www.astronomer.io/try-astro/?referral=docs-what-astro-banner"
         },
         secondary: {
           label: "Learn about Astronomer",
@@ -115,16 +115,6 @@ module.exports = {
           activeBaseRegex: '(software\/0.30)+',
         },
         {
-          label: '0.29',
-          to: '/software/0.29/overview',
-          activeBaseRegex: '(software\/0.29)+',
-        },
-        {
-          label: '0.28',
-          to: '/software/0.28/overview',
-          activeBaseRegex: '(software\/0.28)+',
-        },
-        {
           label: 'Archive',
           to: '/software/documentation-archive',
           activeBaseRegex: `software(?!(\/${versions.join('|\\/')}))`,
@@ -135,8 +125,8 @@ module.exports = {
       bottomNav: {
         items: [
           {
-            label: 'Get a demo',
-            href: 'https://www.astronomer.io/events/weekly-demo/?referral=docs-sidebar',
+            label: 'Book Office Hours',
+            href: 'https://calendly.com/d/yy2-tvp-xtv/astro-data-engineering-office-hours-ade',
           },
           {
             label: 'Watch a webinar',
@@ -175,7 +165,7 @@ module.exports = {
           id: 'cookiePref',
         },
       ],
-      copyright: '© Astronomer 2022. Various trademarks held by their respective owners.',
+      copyright: '© Astronomer 2023. Various trademarks held by their respective owners.',
     },
   },
   presets: [

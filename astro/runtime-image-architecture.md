@@ -12,7 +12,7 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 - Timely support for new patch, minor, and major versions of Apache Airflow. This includes bug fixes that have not been released by the open source project but are backported to Astro Runtime and available to users earlier.
 - Exclusive features to enrich the task execution experience, including smart task concurrency defaults and high availability configurations.
 - The `astronomer-providers` package. This package is an open source collection of Apache Airflow providers and modules maintained by Astronomer. It includes deferrable versions of popular operators such as `ExternalTaskSensor`, `DatabricksRunNowOperator`, and `SnowflakeOperator`. See [Astronomer Providers documentation](https://astronomer-providers.readthedocs.io/en/stable/index.html)
-- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage data, and how data lineage data is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](https://docs.astronomer.io/learn/airflow-openlineage/).
+- The `openlineage-airflow` package. [OpenLineage](https://openlineage.io/) standardizes the definition of data lineage, the metadata that forms lineage metadata, and how data lineage metadata is collected from external systems. This package enables data lineage on Astro. See [OpenLineage and Airflow](https://docs.astronomer.io/learn/airflow-openlineage/).
 - A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane.
 - A custom security manager that enforces user roles and permissions as defined by Astro. See [User permissions](user-permissions.md).
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
@@ -74,9 +74,7 @@ All Astro Runtime images have the following open source provider packages pre-in
 - Cloud Native Computing Foundation (CNCF) Kubernetes [`apache-airflow-providers-cncf-kubernetes`](https://pypi.org/project/apache-airflow-providers-cncf-kubernetes/)
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
-- StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
-- Snowflake [`apache-airflow-snowflake`](https://pypi.org/project/apache-airflow-snowflake/)
-- Virtualenv [`apache-airflow-virtualenv`](https://pypi.org/project/virtualenv/)
+- Snowflake [`apache-airflow-providers-snowflake`](https://pypi.org/project/apache-airflow-providers-snowflake/)
 - OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
 - Microsoft Azure [`apache-airflow-providers-microsoft-azure`](https://pypi.org/project/apache-airflow-providers-microsoft-azure/)
 
@@ -100,7 +98,7 @@ If you're currently using the `KubernetesPodOperator` or the `PythonVirtualenvOp
 
 In Airflow, the executor is responsible for determining how and where a task is completed.
 
-In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html). On Astro, Astro Runtime exclusively supports the [Celery executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html).
+In all local environments created with the Astro CLI, Astro Runtime runs the [Local executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/local.html). On Astro, Astro Runtime exclusively supports the [Celery executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/celery.html). Support for the Kubernetes executor is currently in Private Preview.
 
 Soon, Astronomer will provide a new executor with intelligent worker packing, task-level resource requests, improved logging, and Kubernetes-like task isolation.
 

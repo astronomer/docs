@@ -262,22 +262,22 @@ class UnevenIntervalsTimetablePlugin(AirflowPlugin):
 
 Because timetables are plugins, you'll need to restart the Airflow Scheduler and Webserver after adding or updating them.
 
-In the DAG, you can import the custom timetable plugin and use it to schedule the DAG by setting the `timetable` parameter:
+In the DAG, you can import the custom timetable plugin and use it to schedule the DAG by setting the `schedule` parameter (in pre-2.4 Airflow you will need to use the `timetable` parameter):
 
 ```python
 from uneven_intervals_timetable import UnevenIntervalsTimetable
 
-with DAG(
+@dag(
     dag_id="example_timetable_dag",
     start_date=datetime(2021, 10, 9),
     max_active_runs=1,
-    timetable=UnevenIntervalsTimetable(),
+    schedule=UnevenIntervalsTimetable(),
     default_args={
         "retries": 1,
-        "retry_delay": timedelta(minutes=3),
+        "retry_delay": duration(minutes=3),
     },
     catchup=True
-) as dag:
+)
 ```
 
 Looking at the Tree View in the UI, you can see that this DAG has run twice per day at 6:00 and 16:30 since the start date of 2021-10-09.
@@ -311,13 +311,13 @@ Datasets and data-driven DAG dependencies were introduced in Airflow 2.4. You ca
 dataset1 = Dataset(f"{DATASETS_PATH}/dataset_1.txt")
 dataset2 = Dataset(f"{DATASETS_PATH}/dataset_2.txt")
 
-with DAG(
+@dag(
     dag_id='dataset_dependent_example_dag',
     catchup=False,
     start_date=datetime(2022, 8, 1),
     schedule=[dataset1, dataset2],
     tags=['consumes', 'dataset-scheduled'],
-) as dag:
+)
 ```
 
 This DAG runs only when `dataset1` and `dataset2` are updated. These updates can occur by tasks in different DAGs as long as they are located in the same Airflow environment.

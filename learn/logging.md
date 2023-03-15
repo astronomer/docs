@@ -5,6 +5,12 @@ description: "An introduction to Airflow logging."
 id: logging
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import custom_logs_taskflow from '!!raw-loader!../code-samples/dags/logging/custom_logs_taskflow.py';
+import custom_logs_traditional from '!!raw-loader!../code-samples/dags/logging/custom_logs_traditional.py';
+
 Airflow provides an extensive logging system for monitoring and debugging your data pipelines. Your webserver, scheduler, metadata database, and individual tasks all generate logs. You can export these logs to a local file, your console, or to a specific remote storage solution.
 
 In this guide, you'll learn the basics of Airflow logging, including:
@@ -98,59 +104,27 @@ The advantage of using a logger over print statements is that you can log at dif
 
 The following example DAG shows how to instantiate an object using the existing `airflow.task` logger, add logging statements of different severity levels from within a Python function, and what the log output would be with default Airflow logging settings. There are many use cases for adding additional logging statements from within DAGs ranging from logging warnings when a specific set of conditions appear over additional debugging messages to catching exceptions but still keeping a record of them having occurred.
 
-```python
-from datetime import datetime, timedelta
-from airflow import DAG
-from airflow.decorators import task
-from airflow.operators.bash import BashOperator
 
-# import the logging module
-import logging
+<Tabs
+    defaultValue="taskflow"
+    groupId="add-custom-task-logs-from-a-dag"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-# get the airflow.task logger
-task_logger = logging.getLogger('airflow.task')
+<TabItem value="taskflow">
 
-@task.python
-def extract():
+<CodeBlock language="python">{custom_logs_taskflow}</CodeBlock>
 
-    # with default airflow logging settings, DEBUG logs are ignored
-    task_logger.debug('This log is at the level of DEBUG')
+</TabItem>
 
-    # each of these lines produces a log statement
-    print('This log is created with a print statement')
-    task_logger.info('This log is informational')
-    task_logger.warning('This log is a warning')
-    task_logger.error('This log shows an error!')
-    task_logger.critical('This log shows a critical error!')
+<TabItem value="traditional">
 
-    data = {'a': 19, 'b': 23, 'c': 42}
+<CodeBlock language="python">{custom_logs_traditional}</CodeBlock>
 
-    # Using the Task flow API to push to XCom by returning a value
-    return data
-
-# logs outside of tasks will not be processed
-task_logger.warning('This log will not show up!')
-
-with DAG(dag_id='more_logs_dag',
-        start_date=datetime(2022,6,5),
-        schedule='@daily',
-        dagrun_timeout=timedelta(minutes=10),
-        catchup=False) as dag:
-
-    # command to create a file and write the data from the extract task into it
-    # these commands use Jinja templating within {{}}
-    commands= """
-        touch /usr/local/airflow/{{ds}}.txt
-        echo {{ti.xcom_pull(task_ids='extract')}} > /usr/local/airflow/{{ds}}.txt
-        """
-
-    write_to_file = BashOperator(task_id='write_to_file', bash_command=commands)
-
-    # logs outside of tasks will not be processed
-    task_logger.warning('This log will not show up!')
-
-    extract() >> write_to_file
-```
+</TabItem>
+</Tabs>
 
 For the previous DAG, the logs for the `extract` task show the following lines under the default Airflow logging configuration (set at the level of `INFO`):
 
@@ -284,26 +258,27 @@ from airflow.config_templates.airflow_local_settings import DEFAULT_LOGGING_CONF
 LOGGING_CONFIG = deepcopy(DEFAULT_LOGGING_CONFIG)
 
 # add an additional handler
-LOGGING_CONFIG['handlers']['secondary_s3_task_handler'] = {
+LOGGING_CONFIG["handlers"]["secondary_s3_task_handler"] = {
     # you can import your own custom handler here
-    'class': 'airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler',
+    "class": "airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler",
     # you can add a custom formatter here
-    'formatter': 'airflow',
+    "formatter": "airflow",
     # the following env variables were set in the dockerfile
-    'base_log_folder': os.environ['BASE_LOG_FOLDER'],
-    's3_log_folder': os.environ['AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER_2'],
-    'filename_template':
-        # providing a custom structure for log directory and filename
-        "{{ ti.dag_id }}/{{ ti.task_id }}_{{ ts }}_{{ try_number }}.log",
+    "base_log_folder": os.environ["BASE_LOG_FOLDER"],
+    "s3_log_folder": os.environ["AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER_2"],
+    "filename_template":
+    # providing a custom structure for log directory and filename
+    "{{ ti.dag_id }}/{{ ti.task_id }}_{{ ts }}_{{ try_number }}.log",
     # if needed, custom filters can be added here
-    "filters":[
-    "mask_secrets"
-    ]
+    "filters": ["mask_secrets"],
 }
 
 # this line adds the "secondary_s3_task_handler" as a handler to airflow.task
-LOGGING_CONFIG['loggers']['airflow.task']['handlers'] = ["task",
-                                                  "secondary_s3_task_handler"]
+LOGGING_CONFIG["loggers"]["airflow.task"]["handlers"] = [
+    "task",
+    "secondary_s3_task_handler",
+]
+
 ```
 
 This modified version of `DEFAULT_LOGGING_CONFIG` creates a second S3TaskHandler using the Amazon S3 location provided as `AIRFLOW__LOGGING__REMOTE_BASE_LOG_FOLDER_2`. It is configured with a custom `filename_template`, further customization is of course possible with regards to formatting, log level, and additional filters.

@@ -9,6 +9,17 @@ id: error-notifications-in-airflow
   <meta name="og:description" content="Master the basics of Apache Airflow notifications. Learn how to set up automatic email and Slack notifications to be alerted of events in your DAGs." />
 </head>
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+import CodeBlock from '@theme/CodeBlock';
+import email_alert_example_dag from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/email_alert_example_dag.py';
+import callbacks_example_dag from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/callbacks_example_dag.py';
+import sla_dag_level_example_taskflow from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_dag_level_example_taskflow.py';
+import sla_dag_level_example_traditional from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_dag_level_example_traditional.py';
+import sla_task_level_example_taskflow from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_task_level_example_taskflow.py';
+import sla_task_level_example_traditional from '!!raw-loader!../code-samples/dags/error-notifications-in-airflow/sla_task_level_example_traditional.py';
+
 When you're using a data orchestration tool, how do you know when something has gone wrong? Airflow users can check the Airflow UI to determine the status of their DAGs, but this is an inefficient way of managing errors systematically, especially if certain failures need to be addressed promptly or by multiple team members. Fortunately, Airflow has built-in notification mechanisms that can be leveraged to configure error notifications in a way that works for your organization. 
 
 In this guide, you'll learn the basics of Airflow notifications and how to set up common notification mechanisms including email, Slack, and SLAs. You'll also learn how to make the most of Airflow alerting when using Astro.
@@ -33,53 +44,26 @@ Sometimes, it's helpful to standardize notifications across your entire DAG. Not
 In the following DAG example, `email_on_failure` is set to `True`, meaning any task in this DAG's context will send a failure email to all addresses in the `email` array.
 
 ```python
-from datetime import datetime
+from pendulum import datetime
 from airflow import DAG
 
 default_args = {
-	'owner': 'airflow',
-	'start_date': datetime(2018, 1, 30),
-	'email': ['noreply@astronomer.io'],
-	'email_on_failure': True
+    "owner": "airflow",
+    "start_date": datetime(2018, 1, 30),
+    "email": ["noreply@astronomer.io"],
+    "email_on_failure": True,
 }
 
-with DAG('sample_dag',
-	default_args=default_args,
-	schedule='@daily',
-	catchup=False) as dag:
+with DAG(
+    "sample_dag", default_args=default_args, schedule="@daily", catchup=False
+) as dag:
 
 ...
 ```
 
 Sometimes, it's helpful to limit notifications to specific tasks. The `BaseOperator` includes support for built-in notification arguments. So, you can configure each task individually. In the following example DAG, email notifications are turned off by default at the DAG level, but are enabled for the `will_email` task.
 
-```python
-from datetime import datetime
-from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-
-default_args = {
-	'owner': 'airflow',
-	'start_date': datetime(2018, 1, 30),
-	'email_on_failure': False,
-	'email': ['noreply@astronomer.io'],
-	'retries': 1
-}
-
-with DAG('sample_dag',
-	default_args=default_args,
-	schedule='@daily',
-	catchup=False) as dag:
-
-	wont_email = EmptyOperator(
-		task_id='wont_email'
-	)
-	
-	will_email = EmptyOperator(
-		task_id='will_email',
-		email_on_failure=True
-	)
-```
+<CodeBlock language="python">{email_alert_example_dag}</CodeBlock>
 
 ### Notification triggers
 
@@ -88,24 +72,23 @@ The most common trigger for notifications in Airflow is a task failure. However,
 Emails on retries can be useful for debugging indirect failures; if a task needed to retry but eventually succeeded, this might indicate that the problem was caused by extraneous factors like load on an external system. To turn on email notifications for retries, simply set the `email_on_retry` parameter to `True` as shown in the DAG below.
 
 ```python
-from datetime import datetime, timedelta
+from pendulum import datetime, duration
 from airflow import DAG
 
 default_args = {
-	'owner': 'airflow',
-	'start_date': datetime(2018, 1, 30),
-	'email': ['noreply@astronomer.io'],
-	'email_on_failure': True,
-	'email_on_retry': True,
-	'retry_exponential_backoff': True,
-	'retry_delay': timedelta(seconds=300),
-	'retries': 3
+    "owner": "airflow",
+    "start_date": datetime(2018, 1, 30),
+    "email": ["noreply@astronomer.io"],
+    "email_on_failure": True,
+    "email_on_retry": True,
+    "retry_exponential_backoff": True,
+    "retry_delay": duration(seconds=300),
+    "retries": 3,
 }
 
-with DAG('sample_dag',
-	default_args=default_args,
-	schedule='@daily',
-	catchup=False) as dag:
+with DAG(
+    "sample_dag", default_args=default_args, schedule="@daily", catchup=False
+) as dag:
 
 ...
 ```
@@ -118,46 +101,7 @@ The email notification parameters shown in the previous sections are examples of
 
 You can define your own notifications to customize how Airflow alerts you about failures or successes. The most straightforward way of doing this is by defining `on_failure_callback` and `on_success_callback` Python functions. These functions can be set at the DAG or task level, and the functions are called when tasks fail or complete successfully. The following example DAG has a custom `on_failure_callback` function set at the DAG level and an `on_success_callback` function for the `success_task`.
 
-```python
-from datetime import datetime
-
-from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-
-
-def custom_failure_function(context):
-    "Define custom failure notification behavior"
-    dag_run = context.get("dag_run")
-    task_instances = dag_run.get_task_instances()
-    print("These task instances failed:", task_instances)
-
-
-def custom_success_function(context):
-    "Define custom success notification behavior"
-    dag_run = context.get("dag_run")
-    task_instances = dag_run.get_task_instances()
-    print("These task instances succeeded:", task_instances)
-
-default_args = {
-    "owner": "airflow",
-    "start_date": datetime(2018, 1, 30),
-    "on_failure_callback": custom_failure_function,
-    "retries": 1,
-}
-
-with DAG(
-    "sample_dag",
-    default_args=default_args,
-    schedule="@daily",
-    catchup=False,
-) as dag:
-    failure_task = EmptyOperator(task_id="failure_task")
-
-    success_task = EmptyOperator(
-        task_id="success_task",
-        on_success_callback=custom_success_function,
-    )
-```
+<CodeBlock language="python">{callbacks_example_dag}</CodeBlock>
 
 Custom notification functions can also be used to send email notifications. For example, if you want to send emails for successful task runs, you can define an email function in your `on_success_callback`. For example:
 
@@ -165,7 +109,7 @@ Custom notification functions can also be used to send email notifications. For 
 from airflow.utils.email import send_email
 
 def success_email_function(context):
-    dag_run = context.get('dag_run')
+    dag_run = context.get("dag_run")
 
     msg = "DAG ran successfully"
     subject = f"DAG {dag_run} has completed"
@@ -271,16 +215,15 @@ In the following example, you'll use the [Slack provider](https://registry.astro
                 *Execution Time*: {exec_date}  
                 *Log Url*: {log_url} 
                 """.format(
-                task=context.get('task_instance').task_id,
-                dag=context.get('task_instance').dag_id,
-                ti=context.get('task_instance'),
-                exec_date=context.get('execution_date'),
-                log_url=context.get('task_instance').log_url,
-            )
+            task=context.get("task_instance").task_id,
+            dag=context.get("task_instance").dag_id,
+            ti=context.get("task_instance"),
+            exec_date=context.get("execution_date"),
+            log_url=context.get("task_instance").log_url,
+        )
         failed_alert = SlackWebhookOperator(
-            task_id='slack_notification',
-            http_conn_id='slack_webhook',
-            message=slack_msg)
+            task_id="slack_notification", http_conn_id="slack_webhook", message=slack_msg
+        )
         return failed_alert.execute(context=context)
     ```
 
@@ -294,46 +237,26 @@ Exceeding an SLA does not stop a task from running. If you want tasks to stop ru
 
 You can set an SLA for all tasks in your DAG by defining `'sla'` as a default argument, as shown in the following example DAG:
 
-```python
-import time
-from datetime import datetime, timedelta
+<Tabs
+    defaultValue="taskflow"
+    groupId="airflow-service-level-agreements"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonOperator
+<TabItem value="taskflow">
 
+<CodeBlock language="python">{sla_dag_level_example_taskflow}</CodeBlock>
 
-def my_custom_function(ts, **kwargs):
-    print("task is sleeping")
-    time.sleep(40)
+</TabItem>
 
+<TabItem value="traditional">
 
-# Default settings applied to all tasks
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "email_on_failure": True,
-    "email": "noreply@astronomer.io",
-    "email_on_retry": False,
-    "sla": timedelta(seconds=30),
-}
+<CodeBlock language="python">{sla_dag_level_example_traditional}</CodeBlock>
 
-# Using a DAG context manager, you don't have to specify the dag property of each task
-with DAG(
-    "sla-dag",
-    start_date=datetime(2021, 1, 1),
-    max_active_runs=1,
-    schedule=timedelta(minutes=2),
-    default_args=default_args,
-    catchup=False,
-) as dag:
-
-    t0 = EmptyOperator(task_id="start")
-    t1 = EmptyOperator(task_id="end")
-    sla_task = PythonOperator(task_id="sla_task", python_callable=my_custom_function)
-
-    t0 >> sla_task >> t1
-```
+</TabItem>
+</Tabs>
 
 SLAs have some unique behaviors that you should consider before you implement them:
 
@@ -341,49 +264,26 @@ SLAs have some unique behaviors that you should consider before you implement th
 - SLAs will only be evaluated on scheduled DAG Runs. They will not be evaluated on manually triggered DAG Runs.
 - SLAs can be set at the task level if a different SLA is required for each task. In the previous example, all task SLAs are still relative to the DAG execution date. For example, in the DAG below, `t1` has an SLA of 500 seconds. If the upstream tasks (`t0` and `sla_task`) combined take 450 seconds to complete, and `t1` takes 60 seconds to complete, then `t1` will miss its SLA even though the task did not take more than 500 seconds to execute.
 
-```python
-import time
-from datetime import datetime, timedelta
+<Tabs
+    defaultValue="taskflow"
+    groupId="airflow-service-level-agreements"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonOperator
+<TabItem value="taskflow">
 
+<CodeBlock language="python">{sla_task_level_example_taskflow}</CodeBlock>
 
-def my_custom_function(ts, **kwargs):
-    print("task is sleeping")
-    time.sleep(40)
+</TabItem>
 
+<TabItem value="traditional">
 
-# Default settings applied to all tasks
-default_args = {
-    "owner": "airflow",
-    "depends_on_past": False,
-    "email_on_failure": True,
-    "email": "noreply@astronomer.io",
-    "email_on_retry": False,
-}
+<CodeBlock language="python">{sla_task_level_example_traditional}</CodeBlock>
 
-# Using a DAG context manager, you don't have to specify the dag property of each task
-with DAG(
-    "sla-dag",
-    start_date=datetime(2021, 1, 1),
-    max_active_runs=1,
-    schedule=timedelta(minutes=2),
-    default_args=default_args,
-    catchup=False,
-) as dag:
-
-    t0 = EmptyOperator(task_id="start", sla=timedelta(seconds=50))
-    t1 = EmptyOperator(task_id="end", sla=timedelta(seconds=500))
-    sla_task = PythonOperator(
-        task_id="sla_task",
-        python_callable=my_custom_function,
-        sla=timedelta(seconds=5),
-    )
-
-    t0 >> sla_task >> t1
-```
+</TabItem>
+</Tabs>
 
 Missed SLAs are shown in the Airflow UI. To view them, go to **Browse** > **SLA Misses**:
 

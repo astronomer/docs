@@ -7,6 +7,12 @@ id: kubepod-operator
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import kpo_example_1 from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_example_1.py';
+import kpo_haskell_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_haskell_example.py';
+import kpo_xcom_example_taskflow from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_taskflow.py';
+import kpo_xcom_example_traditional from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_traditional.py';
+import kpo_separate_cluster_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_separate_cluster_example.py';
 
 The KubernetesPodOperator (KPO) runs a Docker image in a dedicated Kubernetes Pod. By abstracting calls to the Kubernetes API, the KubernetesPodOperator lets you start and run Pods from Airflow using DAG code.
 
@@ -109,25 +115,26 @@ The latest versions of Docker for Windows and Mac let you run a single node Kube
 1. Go to the `$HOME/.kube` directory that was created when you enabled Kubernetes in Docker and copy the `config` file into the `/include/.kube/` folder in your Astro project. The `config` file contains all the information the KubernetesPodOperator uses to connect to your cluster. For example:
 
      ```apiVersion: v1
-        clusters:
-        - cluster:
-            certificate-authority-data: <certificate-authority-data>
-            server: https://kubernetes.docker.internal:6443/
-          name: docker-desktop
-        contexts:
-        - context:
-            cluster: docker-desktop
-            user: docker-desktop
-          name: docker-desktop
-        current-context: docker-desktop
-        kind: Config
-        preferences: {}
-        users:
-        - name: docker-desktop
-          user:
-            client-certificate-data: <client-certificate-data>
-            client-key-data: <client-key-data>
+    clusters:
+    - cluster:
+        certificate-authority-data: <certificate-authority-data>
+        server: https://kubernetes.docker.internal:6443/
+        name: docker-desktop
+    contexts:
+    - context:
+        cluster: docker-desktop
+        user: docker-desktop
+        name: docker-desktop
+    current-context: docker-desktop
+    kind: Config
+    preferences: {}
+    users:
+    - name: docker-desktop
+        user:
+        client-certificate-data: <client-certificate-data>
+        client-key-data: <client-key-data>
      ```
+    
     The cluster `name` should be searchable as `docker-desktop` in your local `$HOME/.kube/config` file. Do not add any additional data to the `config` file.
 
 2. Update the `<certificate-authority-data>`, `<client-authority-data>`, and `<client-key-data>` values in the `config` file with the values for your organization.
@@ -154,50 +161,7 @@ This example DAG runs a `hello-world` Docker image. The namespace is determined 
 
 Once you've updated the definition of KubernetesPodOperator tasks in your Astro project, run `astro dev start` with the Astro CLI to test your DAGs in a local Airflow environment.
 
-```python
-from datetime import datetime, timedelta
-from airflow import DAG
-from airflow.configuration import conf
-from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
-
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2022, 1, 1),
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
-}
-
-namespace = conf.get('kubernetes', 'NAMESPACE')
-# This will detect the default namespace locally and read the
-# environment namespace when deployed to Astronomer.
-if namespace =='default':
-    config_file = '/usr/local/airflow/include/.kube/config'
-    in_cluster = False
-else:
-    in_cluster = True
-    config_file = None
-
-with DAG(
-    dag_id='example_kubernetes_pod', 
-    schedule='@once', 
-    default_args=default_args
-) as dag:
-    KubernetesPodOperator(
-        namespace=namespace,
-        image="hello-world",
-        labels={"<pod-label>": "<label-name>"},
-        name="airflow-test-pod",
-        task_id="task-one",
-        in_cluster=in_cluster,  # if set to true, will look in the cluster, if false, looks for file
-        cluster_context="docker-desktop",  # is ignored when in_cluster is set to True
-        config_file=config_file,
-        is_delete_operator_pod=True,
-        get_logs=True,
-    )
-```
+<CodeBlock language="python">{kpo_example_1}</CodeBlock>
 
 #### Step 4: View Kubernetes logs
 
@@ -322,56 +286,7 @@ CMD ["haskell_example"]
 
 After making the Docker image available, it can be run from the KubernetesPodOperator with the `image` argument. The following example DAG showcases a variety of arguments of the KubernetesPodOperator, including how to pass `NAME_TO_GREET` to the Haskell code.
 
-```python
-from airflow import DAG
-from datetime import datetime
-from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
-                                                        KubernetesPodOperator)
-from airflow.configuration import conf
-
-# get the current Kubernetes namespace Airflow is running in
-namespace = conf.get("kubernetes", "NAMESPACE")
-
-# set the name that will be printed
-name = 'your_name'
-
-# instantiate the DAG
-with DAG(
-    start_date=datetime(2022,6,1),
-    catchup=False,
-    schedule='@daily',
-    dag_id='KPO_different_language_example_dag'
-) as dag:
-
-    say_hello_name_in_haskell = KubernetesPodOperator(
-        # unique id of the task within the DAG
-        task_id='say_hello_name_in_haskell',
-        # the Docker image to launch
-        image='<image location>',
-        # launch the Pod on the same cluster as Airflow is running on
-        in_cluster=True,
-        # launch the Pod in the same namespace as Airflow is running in
-        namespace=namespace,
-
-        # Pod configuration
-        # name the Pod
-        name='my_pod',
-        # give the Pod name a random suffix, ensure uniqueness in the namespace
-        random_name_suffix=True,
-        # attach labels to the Pod, can be used for grouping
-        labels={'app':'backend', 'env':'dev'},
-        # reattach to worker instead of creating a new Pod on worker failure
-        reattach_on_restart=True,
-        # delete Pod after the task is finished
-        is_delete_operator_pod=True,
-        # get log stdout of the container as task logs
-        get_logs=True,
-        # log events in case of Pod failure
-        log_events_on_failure=True,
-        # pass your name as an environment var
-        env_vars={"NAME_TO_GREET": f"{name}"}
-        )
-```
+<CodeBlock language="python">{kpo_haskell_example}</CodeBlock>
 
 ## Example: Use the KubernetesPodOperator with XComs
 
@@ -401,14 +316,14 @@ When using XComs with the KubernetesPodOperator, you must create the file `airfl
 import os
 
 # import the result of the previous task as an environment variable
-data_point = os.environ['DATA_POINT']
+data_point = os.environ["DATA_POINT"]
 
 # multiply the data point by 23 and package the result into a json
 multiplied_data_point = str(23 * int(data_point))
-return_json = {"return_value":f"{multiplied_data_point}"}
+return_json = {"return_value": f"{multiplied_data_point}"}
 
 # write to the file checked by Airflow for XComs
-f = open('./airflow/xcom/return.json', 'w')
+f = open("./airflow/xcom/return.json", "w")
 f.write(f"{return_json}")
 f.close()
 ```
@@ -417,73 +332,26 @@ The `load_data` task pulls the XCom returned from the `transform` task and print
 
 The full DAG code is provided in the following example. To avoid task failure, turn on `do_xcom_push` after you create the `airflow/xcom/return.json` within the Docker container run by the KubernetesPodOperator.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-use-the-kubernetespodoperator-with-xcoms"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-```python
-from airflow import DAG
-from datetime import datetime
-from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
-                                                          KubernetesPodOperator)
-from airflow.configuration import conf
-from airflow.decorators import task
+<TabItem value="taskflow">
 
-import random
+<CodeBlock language="python">{kpo_xcom_example_taskflow}</CodeBlock>
 
-# get the current Kubernetes namespace Airflow is running in
-namespace = conf.get("kubernetes", "NAMESPACE")
+</TabItem>
 
-# instantiate the DAG
-with DAG(
-    start_date=datetime(2022,6,1),
-    catchup=False,
-    schedule='@daily',
-    dag_id='KPO_XComs_example_dag'
-) as dag:
+<TabItem value="traditional">
 
-    @task
-    def extract_data():
-        # simulating querying from a database
-        data_point = random.randint(0,100)
-        return data_point
+<CodeBlock language="python">{kpo_xcom_example_traditional}</CodeBlock>
 
-    transform = KubernetesPodOperator(
-        # set task id
-        task_id='transform',
-        # specify the Docker image to launch
-        image='<image location>',
-
-        # launch the Pod on the same cluster as Airflow is running on
-        in_cluster=True,
-        # launch the Pod in the same namespace as Airflow is running in
-        namespace=namespace,
-
-        # Pod configuration
-        # naming the Pod
-        name='my_pod',
-        # log stdout of the container as task logs
-        get_logs=True,
-        # log events in case of Pod failure
-        log_events_on_failure=True,
-        # pull a variable from XComs using Jinja templating and provide it
-        # to the Pod as an environment variable
-        env_vars={"DATA_POINT": """{{ ti.xcom_pull(task_ids='extract_data',
-                                                 key='return_value') }}"""},
-        # push the contents from xcom.json to Xcoms. Remember to only set this
-        # argument to True if you have created the `airflow/xcom/return.json`
-        # file within the Docker container run by the KubernetesPodOperator.
-        do_xcom_push=True
-        )
-
-    @task
-    def load_data(**context):
-        # pull the XCom value that has been pushed by the KubernetesPodOperator
-        transformed_data_point = context['ti'].xcom_pull(
-                                               task_ids='transform',
-                                               key='return_value')
-        print(transformed_data_point)
-
-    # set dependencies (tasks defined using Decorators need to be called)
-    extract_data() >> transform >> load_data()
-```
+</TabItem>
+</Tabs>
 
 ## Example: Use KubernetesPodOperator to run a Pod in a separate cluster
 
@@ -648,126 +516,7 @@ The example DAG contains 5 consecutive tasks:
 - Delete the node group.
 - Verify that the node group has been deleted.
 
-```python
-# import DAG object and utility packages
-from airflow import DAG
-from datetime import datetime
-from airflow.configuration import conf
-
-# import the KubernetesPodOperator
-from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import (
-                                                        KubernetesPodOperator)
-
-# import EKS related packages from the Amazon Provider
-from airflow.providers.amazon.aws.hooks.eks import EKSHook, NodegroupStates
-from airflow.providers.amazon.aws.operators.eks import (
-                      EKSCreateNodegroupOperator, EKSDeleteNodegroupOperator)
-from airflow.providers.amazon.aws.sensors.eks import EKSNodegroupStateSensor
-
-# custom class to create a node group with Nodes on EKS
-class EKSCreateNodegroupWithNodesOperator(EKSCreateNodegroupOperator):
-
-    def execute(self, context):
-        # instantiating an EKSHook on the basis of the AWS connection (Step 5)
-        eks_hook = EKSHook(
-            aws_conn_id=self.aws_conn_id,
-            region_name=self.region,
-        )
-
-        # define the Node group to create
-        eks_hook.create_nodegroup(
-            clusterName=self.cluster_name,
-            nodegroupName=self.nodegroup_name,
-            subnets=self.nodegroup_subnets,
-            nodeRole=self.nodegroup_role_arn,
-            scalingConfig={
-                'minSize': 1,
-                'maxSize': 1,
-                'desiredSize': 1
-            },
-            diskSize=20,
-            instanceTypes=['g4dn.xlarge'],
-            amiType='AL2_x86_64_GPU',   # get GPU resources
-            updateConfig={
-                'maxUnavailable': 1
-            },
-        )
-
-# instantiate the DAG
-with DAG(
-    start_date=datetime(2022,6,1),
-    catchup=False,
-    schedule='@daily',
-    dag_id='KPO_remote_EKS_cluster_example_dag'
-) as dag:
-
-    # task 1 creates the node group
-    create_gpu_nodegroup=EKSCreateNodegroupWithNodesOperator(
-        task_id='create_gpu_nodegroup',
-        cluster_name='<your cluster name>',  
-        nodegroup_name='gpu-nodes',
-        nodegroup_subnets=['<your subnet>', '<your subnet>'],
-        nodegroup_role_arn='<arn of your EKS role>',
-        aws_conn_id='<your aws conn id>',
-        region='<your region>'
-    )
-
-    # task 2 check for node group status, if it is up and running
-    check_nodegroup_status=EKSNodegroupStateSensor(
-        task_id='check_nodegroup_status',
-        cluster_name='<your cluster name>',
-        nodegroup_name='gpu-nodes',
-        mode='reschedule',
-        timeout=60 * 30,
-        exponential_backoff=True,
-        aws_conn_id='<your aws conn id>',
-        region='<your region>'
-    )
-
-    # task 3 the KubernetesPodOperator running a task
-    # here, cluster_context and the config_file are defined at the task level
-    # it is of course also possible to abstract these values
-    # in a Kubernetes Cluster Connection
-    run_on_EKS=KubernetesPodOperator(
-        task_id="run_on_EKS",
-        cluster_context='<arn of your cluster>',
-        namespace="airflow-kpo-default",
-        name="example_pod",
-        image='ubuntu',
-        cmds=['bash', '-cx'],
-        arguments=["echo hello"],
-        get_logs=True,
-        is_delete_operator_pod=False,
-        in_cluster=False,
-        config_file='/usr/local/airflow/include/config',
-        startup_timeout_seconds=240,
-    )
-
-    # task 4 deleting the node group
-    delete_gpu_nodegroup=EKSDeleteNodegroupOperator(
-        task_id='delete_gpu_nodegroup',
-        cluster_name='<your cluster name>',  
-        nodegroup_name='gpu-nodes',
-        aws_conn_id='<your aws conn id>',
-        region='<your region>'
-    )
-
-    # task 5 checking that the node group was deleted successfully
-    check_nodegroup_termination=EKSNodegroupStateSensor(
-        task_id='check_nodegroup_termination',
-        cluster_name='<your cluster name>',
-        nodegroup_name='gpu-nodes',
-        aws_conn_id='<your aws conn id>',
-        region='<your region>',
-        mode='reschedule',
-        timeout=60 * 30,
-        target_state=NodegroupStates.NONEXISTENT
-    )
-
-    # setting the dependencies
-    create_gpu_nodegroup >> check_nodegroup_status >> run_on_EKS
-    run_on_EKS >> delete_gpu_nodegroup >> check_nodegroup_termination
-```
+<CodeBlock language="python">{kpo_separate_cluster_example}</CodeBlock>
 
 If you've configured a local command line connection to the remote cluster, you can use `kubectl` to view the remote Pod while it runs. For example:
 

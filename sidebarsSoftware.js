@@ -41,7 +41,6 @@ module.exports = {
         ],
       },
       'deploy-cli',
-      'cli-podman',
       'upgrade-astro-cli',
     ],
     },

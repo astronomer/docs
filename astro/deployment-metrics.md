@@ -49,6 +49,9 @@ Hover over the graph to view a graph legend. If a given worker queue spins a wor
 #### Available metrics
 
 - **CPU Usage Per Pod (%)**: This metric graphs the peak CPU usage for all workers and schedulers for a given interval. Different worker and scheduler Pods appear as differently colored lines on this chart. For scheduler metrics, the maximum allowable CPU for each scheduler Pod appears as a dotted red line.
+
+    The percentage value is proportional to the usage of a single CPU core by a worker Pod. For this reason, the utilization percentage value for a worker Pod with multiple CPU cores can be greater than 100%. For example, because the maximum utilization percentage value for a single CPU core is 100%, the utilization percentage value for a worker Pod with four assigned CPU cores can be as much as 400%. 
+
 - **Memory Usage Per Pod (MB)**: This metric graphs the peak memory usage for all workers and schedulers for a given interval. Different worker and scheduler Pods will appear as differently colored lines on this chart. This metric should be at or below 50% of your total allowed memory at any given time. For scheduler metrics, the maximum allowable memory for each scheduler Pod appears as a dotted red line.
 
 :::info

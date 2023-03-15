@@ -41,7 +41,12 @@ The Cloud IDE includes a robust GitHub integration for managing different versio
 ### Prerequisites 
 
 - A Cloud IDE project. See the [Quickstart](/cloud-ide/quickstart.md).
-- A GitHub account with a personal access token. See [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+- A GitHub account with a personal access token that includes the following permissions:
+
+    - `repo`: Required for reading and writing to your GitHub repository.
+    - `workflow`: Required for creating the GitHub action `astro_deploy.yaml` in your repository. This permission is optional for GitHub repositories that already have a Cloud IDE GitHub action.
+
+    See [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
 
 ### Setup
 
@@ -67,17 +72,17 @@ After you configure a GitHub repository, you can use the **Commit** button in th
 
 ## Deploy a project from GitHub to Astro
 
-On the first GitHub commit of your project, the Astro Cloud IDE automatically pushes a Github action to your repository that includes steps for deploying to Astro. You can then configure your GitHub repository to push your Astro Cloud IDE project to a Deployment when you commit to specific branches. 
+On the first GitHub commit of your project, the Astro Cloud IDE automatically pushes a Github action named `astro_deploy.yaml` to your repository that includes steps for deploying to Astro. You can then configure your GitHub repository to push your Astro Cloud IDE project to a Deployment when you commit to specific branches. 
 
-You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring Deployments in GitHub. However, you can't disable the GitHub action that the Astro Cloud IDE pushes to your repository. If you don't complete the following steps, the GitHub action fails, you can't deploy your changes to Astro, but the rest of your commit processes are successful.
+You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring destination Deployments in GitHub. However, if you don't configure any destination Deployment, `astro_deploy.yaml` fails and your changes aren't deployed to Astro.
 
 :::caution
 
-When the GitHub action first runs, it automatically enables DAG-only deploys on your Deployment. DAG-only deploys are a Public Preview feature that change how DAGs and configuration changes are pushed to the Deployment. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+When the `astro_deploy.yaml` first runs, it automatically enables DAG-only deploys on your Deployment. DAG-only deploying is a feature that allows you to deploy your DAGs directory independently of the rest of your Astro project. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 :::
 
-The following steps describe how to set up GitHub to run the default GitHub action, which assumes one `main` and one `dev` branch. You can modify these steps and the GitHub action to deploy to any number of differently named Deployments. 
+The following steps describe how to set up GitHub to run the default `astro_deploy.yaml` workflow, which assumes one `main` and one `dev` branch. You can modify these steps and the GitHub action to deploy to any number of differently named Deployments.
 
 ### Prerequisites
 
@@ -105,7 +110,7 @@ These actions are not dependent on each other, meaning that you can modify the f
    - `DEV_ASTRONOMER_KEY_SECRET` = `<your-dev-api-key-secret>`
    - `DEV_ASTRONOMER_DEPLOYMENT_ID` = `<your-dev-astro-deployment-id>`
 
-After configuring your Github actions, commits from the Cloud IDE to your `main` or `dev` branches are automatically deployed to Astro.
+After configuring your Github repository, commits from the Cloud IDE to your `main` or `dev` branches are automatically deployed to Astro.
 
 Astronomer recommends creating a feature branch for every new pipeline and creating a pull request (PR) with new changes that merge into the `dev` branch. Merging the PR triggers a push to your development Deployment, where you can confirm that your data pipeline is functional. When you confirm your changes, submit a pull request from your `dev` branch into `main`. This deploys your tested changes to your production Deployment.
 

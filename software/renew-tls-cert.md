@@ -5,14 +5,24 @@ id: renew-tls-cert
 description: Update and auto-renew your organization's TLS certificate for Astronomer Software.
 ---
 
-Once you set up a TLS certificate for Astronomer, you'll need to establish a process for periodically renewing the certificate. This can be done in one of two ways:
+After you set up a transport layer security (TLS) certificate for Astronomer, you'll need to establish a process for periodically renewing the certificate. The following methods are available for certificate renewal:
 
-* **Automatic renewal**: Let's Encrypt provides a service that automatically renews your TLS certificate every 90 days. We recommend this option for smaller organizations where the DNS administrator and cluster administrator are either the same person or on the same team.
-* **Manual renewal**: Manual renewal works similarly to the initial certificate creation process, except that you replace your existing certificate by creating a new certificate. We recommend this method for large organizations that have their own processes for issuing certificates.
+* **Automatic renewal**: Let's Encrypt provides a service that automatically renews your TLS certificate every 90 days. Astronomer recommends this option for smaller organizations where the DNS administrator and cluster administrator are either the same person or on the same team.
+* **Manual renewal**: Manual renewal works similarly to the initial certificate creation process, except that you replace your existing certificate by creating a new certificate. Astronomer recommends this method for large organizations that have their own processes for issuing certificates.
+
+:::caution
+
+By default, [Certbot](https://certbot.eff.org/) uses Elliptic Curve Digital Signature Algorithm (ECDSA) keys to sign certificates. If you're using Certbot to renew your TLS certificate, you must include `-key-type rsa --rsa-key-size 2048` in your command to sign your certificate with an RSA key. If you don't use RSA keys, deploys fail and error messages appear in the registry and Houston logs. For example, you can run the following command to sign your certificate with an RSA key:
+
+```sh
+sudo certbot certonly --manual --preferred-challenges=dns -d -d *. --key-type=rsa
+```
+
+:::
 
 ## Automatically renew TLS certificates Using Let's Encrypt
 
-[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that provides free, 90-day certificates using the ACME protocol. You can use the Cert Manager project for Kubernetes to automatically renew certificates.
+[Let's Encrypt](https://letsencrypt.org/) is a certificate authority that provides free, 90-day certificates using the ACME protocol. You can use the Cert Manager project for Kubernetes to automatically renew certificates. When you renew a TLS certificate with Let's Encrypt, you must specify the RSA key type to sign certificates or your deploys will fail and error messages will appear in the registry and Houston logs.
 
 1. Install the Kubernetes Cert Manager by following [the official installation guide](https://cert-manager.io/docs/installation/).
 
@@ -119,7 +129,7 @@ Once you set up a TLS certificate for Astronomer, you'll need to establish a pro
 
 ## Manually renew TLS certificates
 
-Larger organizations with dedicated security teams will likely have their own processes for requesting and renewing TLS certificates. Regardless, there are specific steps you have to complete for Astronomer when renewing TLS certificates:
+Use a manual process to renew TLS certificates when your organization has its own process for requesting and renewing TLS certificates. When you renew a TLS certificate with Let's Encrypt, you must specify the RSA key type to sign certificates or your deploys will fail and error messages will appear in the registry and Houston logs.
 
 1. Delete your current TLS certificate by running the following command:
    ```sh

@@ -5,6 +5,14 @@ description: "Use pools to control Airflow task parallelism."
 id: airflow-pools
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import pool_example_1_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_1_traditional.py';
+import pool_example_1_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_1_taskflow.py';
+import pool_example_2_traditional from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_2_traditional.py';
+import pool_example_2_taskflow from '!!raw-loader!../code-samples/dags/airflow-pools/pool_example_2_taskflow.py';
+
 One of the benefits of Apache Airflow is that it is built to scale. With the right supporting infrastructure, you can run many tasks in parallel seamlessly. Unfortunately, horizontal scalability also necessitates some guardrails. For example, you might have many tasks that interact with the same source system, such as an API or database, that you don't want to overwhelm with requests. Airflow [pools](https://airflow.apache.org/docs/apache-airflow/stable/administration-and-deployment/pools.html) are designed for exactly this use case.
 
 Pools allow you to limit parallelism for an arbitrary set of tasks, allowing you to control when your tasks are run. They are often used in cases where you want to limit the number of parallel tasks that do a certain thing. For example, tasks that make requests to the same API or database, or tasks that run on a GPU node of a Kubernetes cluster.
@@ -34,13 +42,33 @@ There are three ways you can create and manage pools in Airflow:
 
 By default, all tasks in Airflow get assigned to the `default_pool` which has 128 slots. You can modify the number of slots, but you can't remove the default pool. Tasks can be assigned to other pools by updating the `pool` parameter. This parameter is part of the `BaseOperator`, so it can be used with any operator.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="assign-tasks-to-a-pool"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+@task(task_id="task_a", pool="single_task_pool")
+def sleep_function():
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
 ```python
 task_a = PythonOperator(
-        task_id='task_a',
-        python_callable=sleep_function,
-        pool='single_task_pool'
-    )
+    task_id="task_a", python_callable=sleep_function, pool="single_task_pool"
+)
 ```
+
+</TabItem>
+</Tabs>
 
 When tasks are assigned to a pool, they are scheduled as normal until all of the pool's slots are filled. As slots become available, the remaining queued tasks start running. 
 
@@ -50,27 +78,74 @@ You can control which tasks within the pool are run first by assigning [priority
 
 For example, in the DAG snippet below `task_a` and `task_b` are both assigned to the `single_task_pool` which has one slot. `task_b` has a priority weight of 2, while `task_a` has the default priority weight of 1. Therefore, `task_b` is executed first.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="assign-tasks-to-a-pool"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
 ```python
-with DAG('pool_dag',
-         start_date=datetime(2021, 8, 1),
-         schedule=timedelta(minutes=30),
-         catchup=False,
-         default_args=default_args
-         ) as dag:
+@task
+def sleep_function(x):
+    time.sleep(x)
+
+
+@dag(
+    start_date=datetime(2023, 1, 1),
+    schedule="*/30 * * * *",
+    catchup=False,
+    default_args=default_args,
+)
+def pool_dag():
+    sleep_function.override(task_id="task_a", pool="single_task_pool")(5)
+    sleep_function.override(
+        task_id="task_b", pool="single_task_pool", priority_weight=2
+    )(10)
+
+
+pool_dag()
+```
+
+</TabItem>
+
+<TabItem value="traditional">
+
+```python
+def sleep_function(x):
+    time.sleep(x)
+
+
+with DAG(
+    "pool_dag",
+    start_date=datetime(2023, 1, 1),
+    schedule="*/30 * * * *",
+    catchup=False,
+    default_args=default_args,
+) as dag:
 
     task_a = PythonOperator(
-        task_id='task_a',
+        task_id="task_a",
         python_callable=sleep_function,
-        pool='single_task_pool'
+        pool="single_task_pool",
+        op_args=[5],
     )
 
     task_b = PythonOperator(
-        task_id='task_b',
+        task_id="task_b",
         python_callable=sleep_function,
-        pool='single_task_pool',
-        priority_weight=2
+        pool="single_task_pool",
+        priority_weight=2,
+        op_args=[10],
     )
+
 ```
+
+</TabItem>
+</Tabs>
 
 Additionally, you can configure the number of slots occupied by a task by updating the `pool_slots` parameter (the default is 1). Modifying this value could be useful in cases where you are using pools to manage resource utilization. 
 
@@ -90,94 +165,49 @@ In this scenario, five tasks across two different DAGs hit the API and may run c
 
 In the `pool_priority_dag` below, all three of the tasks hit the API endpoint and should all be assigned to the pool, so you define the `pool` argument in the DAG `default_args` to apply to all tasks. You also want all three of these tasks to have the same priority weight and for them to be prioritized over tasks in the second DAG, so you assign a `priority_weight` of three as a default argument. This value is arbitrary. To prioritize these tasks, you can assign any integer that is higher than the priority weights defined in the second DAG.
 
-```python
-from datetime import datetime, timedelta
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-limit-tasks-hitting-an-api-endpoint"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-import requests
-from airflow import DAG
-from airflow.operators.python import PythonOperator
+<TabItem value="taskflow">
 
+<CodeBlock language="python">{pool_example_1_taskflow}</CodeBlock>
 
-def api_function(**kwargs):
-    url = 'http://catfact.ninja/fact'
-    res = requests.get(url)
+</TabItem>
 
-with DAG('pool_priority_dag',
-         start_date=datetime(2021, 8, 1),
-         schedule=timedelta(minutes=30),
-         catchup=False,
-         default_args={
-             'pool': 'api_pool',
-             'retries': 1,
-             'retry_delay': timedelta(minutes=5),
-             'priority_weight': 3
-         }
-         ) as dag:
+<TabItem value="traditional">
 
-    task_a = PythonOperator(
-        task_id='task_a',
-        python_callable=api_function
-    )
+<CodeBlock language="python">{pool_example_1_traditional}</CodeBlock>
 
-    task_b = PythonOperator(
-        task_id='task_b',
-        python_callable=api_function
-    )
+</TabItem>
+</Tabs>
 
-    task_c = PythonOperator(
-        task_id='task_c',
-        python_callable=api_function
-    )
-```
 
 In the `pool_unimportant_dag` DAG, there are two tasks that hit the API endpoint that should be assigned to the pool, but there are also two other tasks that do not hit the API. Therefore, you assign the pool and priority weights in the `PythonOperator` instantiations. 
 
 To prioritize `task_x` over `task_y` while keeping both at a lower priority than the tasks in the first DAG, you assign `task_x` a priority weight of 2 and leave `task_y` with the default priority weight of 1. 
 
-```python
-from datetime import datetime, timedelta
+<Tabs
+    defaultValue="taskflow"
+    groupId="example-limit-tasks-hitting-an-api-endpoint"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
 
-import requests
-from airflow import DAG
-from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonOperator
+<TabItem value="taskflow">
 
+<CodeBlock language="python">{pool_example_2_taskflow}</CodeBlock>
 
-def api_function(**kwargs):
-    url = 'http://catfact.ninja/fact'
-    res = requests.get(url)
+</TabItem>
 
-with DAG('pool_unimportant_dag',
-         start_date=datetime(2021, 8, 1),
-         schedule=timedelta(minutes=30),
-         catchup=False,
-         default_args={
-             'retries': 1,
-             'retry_delay': timedelta(minutes=5)
-         }
-         ) as dag:
+<TabItem value="traditional">
 
-    task_w = EmptyOperator(
-        task_id='start'
-    )
+<CodeBlock language="python">{pool_example_2_traditional}</CodeBlock>
 
-    task_x = PythonOperator(
-        task_id='task_x',
-        python_callable=api_function,
-        pool='api_pool',
-        priority_weight=2
-    )
-
-    task_y = PythonOperator(
-        task_id='task_y',
-        python_callable=api_function,
-        pool='api_pool'
-    )
-
-    task_z = EmptyOperator(
-        task_id='end'
-    )
-
-    task_w >> [task_x, task_y] >> task_z
-```
-
+</TabItem>
+</Tabs>

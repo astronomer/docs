@@ -32,6 +32,7 @@ To add a new plugin to your Airflow instance, you need to create a Python file i
 ```python
 from airflow.plugins_manager import AirflowPlugin
 
+
 class MyAirflowPlugin(AirflowPlugin):
     # name your plugin, this is mandatory
     name = "empty"
@@ -95,7 +96,7 @@ appbuilder_mitem_toplevel = {
     "href": "https://www.apache.org/",
 }
 
-# creating a new sub-item in the Docs menu item 
+# creating a new sub-item in the Docs menu item
 appbuilder_mitem_subitem = {
     "name": "Astro SDK Docs",
     "href": "https://astro-sdk-python.readthedocs.io/en/stable/index.html",
@@ -107,10 +108,7 @@ class MyMenuItemsPlugin(AirflowPlugin):
     name = "Menu items plugin"
 
     # adding the menu items to the plugin
-    appbuilder_menu_items = [
-        appbuilder_mitem_toplevel,
-        appbuilder_mitem_subitem
-    ]
+    appbuilder_menu_items = [appbuilder_mitem_toplevel, appbuilder_mitem_subitem]
 ```
 
 The code above creates a plugin that adds two menu items.
@@ -154,7 +152,7 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
         "test_plugin",
         __name__,
         # register airflow/plugins/templates as a Jinja template folder
-        template_folder="templates"
+        template_folder="templates",
     )
 
     # create a flask appbuilder BaseView
@@ -183,7 +181,7 @@ You can add a view to render a simple templated HTML file on top of the Airflow 
         # name the plugin
         name = "My appbuilder view"
         # add the blueprint and appbuilder_views components
-        flask_blueprints=[my_blueprint]
+        flask_blueprints = [my_blueprint]
         appbuilder_views = [my_view_package]
     ```
 
@@ -208,7 +206,7 @@ from airflow.plugins_manager import AirflowPlugin
 
 # create the operator extra link
 class MyLink(BaseOperatorLink):
-    
+
     # name the link button
     name = "My extra link"
 
@@ -218,6 +216,7 @@ class MyLink(BaseOperatorLink):
     # function determining the link
     def get_link(self, operator, *, ti_key=None):
         return "http://my_link.com/"
+
 
 # add the operator extra link to a plugin
 class MyOperatorExtraLink(AirflowPlugin):
@@ -242,6 +241,7 @@ class GlobalLink(BaseOperatorLink):
     # function determining the link
     def get_link(self, operator, *, ti_key=None):
         return "https://airflow.apache.org/"
+
 
 # add the operator extra link to a plugin
 class MyGlobalLink(AirflowPlugin):
@@ -269,8 +269,10 @@ Common use cases for custom macros include:
 from airflow.plugins_manager import AirflowPlugin
 from random import randint
 
+
 def random_number_macro():
-    return randint(0,1000)
+    return randint(0, 1000)
+
 
 class MyAirflowMacro(AirflowPlugin):
     name = "my_macro_plugin"
@@ -283,9 +285,9 @@ The code above creates a macro that returns a random number between 0 and 1000. 
 
 ```python
 use_plugin_macro = BashOperator(
-        task_id="use_plugin_macro",
-        bash_command="echo {{ macros.my_macro_plugin.random_number_macro() }}"
-    )
+    task_id="use_plugin_macro",
+    bash_command="echo {{ macros.my_macro_plugin.random_number_macro() }}",
+)
 ```
 
 

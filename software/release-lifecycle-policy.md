@@ -89,8 +89,6 @@ The following tables contain the exact lifecycle for each published version of A
 
 | Software Version | Release Date    | End of Maintenance Date |
 | ---------------- | --------------- | ----------------------- |
-| 0.28             | Feb 15, 2022    | February 2023           |
-| 0.29             | June 1, 2022    | December 2022           |
 | 0.30             | August 29, 2022 | August 2023             |
 | 0.31             | Nov 29, 2022    | May 2023                |
 
@@ -98,5 +96,4 @@ The following tables contain the exact lifecycle for each published version of A
 
 | Software Version | Release Date | End of Maintenance Date |
 | ---------------- | ------------ | ----------------------- |
-| 0.28             | Feb 15, 2022 | February 2023           |
 | 0.30             | Aug 29, 2022 | August 2023             |

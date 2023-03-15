@@ -182,7 +182,32 @@ If you're upgrading through multiple Astronomer Software versions in a single up
 | 0.26            | 0.29 or later  | 0.26 > 0.28 > 0.29 or later |
 | 0.25            | 0.29 or later  | 0.25 > 0.28 > 0.29 or later |
 
-### Upgrading to Kubernetes 1.22
+### Upgrade to Kubernetes 1.25
+
+#### Deprecation of PodSecurityPolicy
+
+In Kubernetes 1.25, [PodSecurityPolicies (PSPs)](https://kubernetes.io/blog/2021/04/06/podsecuritypolicy-deprecation-past-present-and-future/) were deprecated in favor of [Pod Security Standards](https://kubernetes.io/docs/concepts/security/pod-security-standards/). If you were using PSPs on your Astronomer Software installation, consider the following options for moving away from PSPs on Kubernetes 1.25:
+
+- Run the following command to set a baseline Pod Security Standard for all Pods in your Astronomer namespace:
+
+    ```sh
+    kubectl label --overwrite ns <your-namespace> \
+    pod-security.kubernetes.io/enforce=baseline \
+    pod-security.kubernetes.io/enforce-version=v1.25
+    ```
+
+    If you chose this option, complete the following additional setup to satisfy the baseline policy:
+
+    - [Export logs using container sidecars](export-task-logs.md#export-logs-using-container-sidecars)
+    - [Use an external Elasticsearch instance for Airflow task log management](export-task-logs.md#use-an-external-elasticsearch-instance-for-airflow-task-log-management)
+
+- Implement Pod Security through a third-party Open Policy Agent tool such as [GateKeeper](https://open-policy-agent.github.io/gatekeeper/website/docs/).
+
+#### Kubernetes 1.25 on Azure
+
+To use Kubernetes 1.25 and later on Azure, you must set `nginx.ingressAnnotations.service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"` in your `config.yaml` file. See [Apply a platform config change](apply-platform-config.md).
+
+### Upgrade to Kubernetes 1.22
 
 If you're upgrading to Astronomer Software 0.29 or later and Kubernetes 1.22 at the same time, complete your upgrades in the following order:
 
@@ -221,11 +246,16 @@ Using the `--no-hooks` flag in [Step 7](#step-7-run-astronomers-upgrade-script) 
 
 If you do specify the `--no-hooks` flag, the upgrade script will return a success message even though it failed, resulting in broken behavior in your upgraded environment.
 
-#### Upgrading to 0.30 when using Azure Database for PostgreSQL
+#### PostgreSQL requirements for Astronomer Software 0.30
 
-A change in 0.30 enabled the `trgm` extension for PosgreSQL. If you use Azure Database for PostgreSQL as your database backend, you need to enable the `pg_trgm` extension before upgrading to Software 0.30 using either Azure portal or the Azure CLI. See [Azure documentation](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions) for configuration steps.
+The `trgm` extension for PosgreSQL was enabled in Astronomer Software 0.30. Superuser permissions are required to run the extension. To apply PostgreSQL superuser permissions to an existing user, run the following SQL command:
 
-If you don't complete this setup before your upgrade, the upgrade will fail.
+```sql
+`ALTER USER <username> WITH SUPERUSER;`
+```
+If you're using Azure Database for PostgreSQL as your database backend, you need to enable the `pg_trgm` extension with the the Azure portal or the Azure CLI before upgrading to Astronomer Software 0.30. To configure PostgreSQL extensions in Azure Database for PostgreSQL, see [PostgreSQL extensions in Azure Database for PostgreSQL](https://docs.microsoft.com/en-us/azure/postgresql/flexible-server/concepts-extensions).
+
+If you don't enable the `pg_trgm` extension before upgrading Astronomer Software, the upgrade will fail.
 
 ### Upgrade to Astronomer Software 0.29
 
