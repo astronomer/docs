@@ -39,7 +39,7 @@ If you prefer, you can also run the `astro deployment create` command in the Ast
 
     - **Description**: Optional. Enter a description for your Deployment.
     - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
-    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks in a single worker and is a good choice for most teams. The Kubernetes executor runs each task in an isolated Kubernetes Pod and is a good option for teams that have long-running tasks or have had trouble running tasks reliably with the Celery executor. For more information about the benefits and limitations of each executor, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
+    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks in a single worker and is a good choice for most teams. The Kubernetes executor runs each task in an isolated Kubernetes Pod and is a good option for teams that want fine-grained control over the execution environment for each of their tasks. For more information about the benefits and limitations of each executor, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
     - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
 
 4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with the following resources:

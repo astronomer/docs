@@ -56,7 +56,7 @@ Celery worker scaling is configured at the worker queue level. Changing worker s
 
 ## Configure the Kubernetes executor
 
-The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, run tasks for extended periods, or have extended periods without without task runs.
+The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, run tasks for extended periods, or have extended periods without task runs.
 
 By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
