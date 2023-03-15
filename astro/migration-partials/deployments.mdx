@@ -46,12 +46,12 @@ You will likely only have one instance type associated with your cluster at this
     :::
 
 8. After creating your Deployment - you can add [Environment Variables](environment-variables.md) in the `Variables` Tab of your new Deployment
-9. Set the [Alert Email](configure-deployment-resources#add-or-delete-a-deployment-alert-email) to your email address, or a good contact for the Airflow instance
+9. Set the [Alert Email](configure-deployment-resources.md#add-or-delete-a-deployment-alert-email) to your email address, or a good contact for the Airflow instance
 
 </TabItem>
 <TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
 
-To create your Astro Deployment via the CLI, refer to [Manage Deployments as code](manage-deployments-as-code) or the [astro deployment create](cli/astro-deployment-create) documentation.
+To create your Astro Deployment via the CLI, refer to [Manage Deployments as code](manage-deployments-as-code.md) or the [astro deployment create](cli/astro-deployment-create.md) documentation.
 
 We will begin by creating a file called `config.yaml` in a new directory.
 
@@ -94,7 +94,7 @@ deployment:
     |-----------|---------------|-----------------|
     | M5.XLARGE | E2-STANDARD-4 | STANDARD_D4D_V5 |
 
-    A more complete reference is available in the [Cluster Settings Reference](category/cluster-settings-reference).
+    A more complete reference is available in the [Cluster Settings Reference](https://docs.astronomer.io/astro/category/cluster-settings-reference).
     :::
 5. Ensure you set your **Worker Count** minimum with `[MIN WORKER COUNT]` and maximum with `[MAX WORKER COUNT]`, per the source environment
 6. Ensure the **number of Schedulers** is set on `[NUM SCHEDULERS]`, per the source environment
@@ -109,7 +109,7 @@ deployment:
     | Large  | 15  |
     :::
 8. Add [Environment Variables](environment-variables.md) `environment_variables` section, or remove the section if you have none to add.
-9. Set `[ALERT EMAIL]` to your email address, or a good contact for the Airflow instance. More information at [Add Or Delete A Deployment Alert Email](configure-deployment-resources#add-or-delete-a-deployment-alert-email)
+9. Set `[ALERT EMAIL]` to your email address, or a good contact for the Airflow instance. More information at [Add Or Delete A Deployment Alert Email](configure-deployment-resources.md#add-or-delete-a-deployment-alert-email)
 
 After you have finished creating `config.yaml` file, you can create the deployment with:
 ```shell
