@@ -4,11 +4,47 @@ title: 'Configure your Deployment executor'
 id: 'executors'
 ---
 
-The Airflow executor determines which worker resources run your scheduled tasks. The executor you choose primarily affects the infrastructure cost of a Deployment and how efficiently and reliably your tasks execute. The difference between executors is primarily based on how tasks are distributed across worker resources.
+The Airflow executor determines which worker resources run your scheduled tasks. 
 
 On Astro, every Deployment requires an executor and you can update the executor at any time. After you choose an executor for an Astro Deployment, you can configure your DAGs and Deployment resources to maximize the executor's efficiency and performance. Use the information provided in this topic to learn how to configure the Celery and Kubernetes executors on Astro.
 
-For guidance on how to choose an executor for your Deployment, see [Choose an executor](configure-deployment-resources.md#choose-an-executor). To learn more about executors in Airflow, see [Airflow executors](https://docs.astronomer.io/learn/airflow-executors-explained).
+To learn more about executors in Airflow, see [Airflow executors](https://docs.astronomer.io/learn/airflow-executors-explained).
+
+## Choose an executor
+
+The difference between executors is based on how tasks are distributed across worker resources. The executor you choose primarily affects the infrastructure cost of a Deployment and how efficiently your tasks execute.
+
+Read the following topics to learn about the benefits and limitations of each executor. After you choose an executor type for your Deployment, see [Update the Deployment executor](configure-deployment-resources.md#update-the-deployment-executor) for steps to update your Deployment executor type.
+
+### Celery executor
+
+The Celery executor is the default for all new Deployments. It uses a group of workers, each of which can run multiple tasks at a time. Astronomer uses [worker autoscaling logic](#clery-worker-autoscaling-logic) to determine how many workers run on your Deployment at a given time.
+
+The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your Deployment if:
+
+- You're just getting started with Airflow.
+- You want to use multiple worker queues. This allows you to use multiple worker node types for different types of tasks and optimize for task performance. See [Configure worker queues](configure-worker-queues.md).
+- You have a high number of short-running tasks and want to ensure low latency between tasks.
+- You don't often experience conflicts between Python or OS-level packages and don't require dependency isolation.
+
+If you regularly experience dependency conflicts or find that some tasks consume the resources of other tasks and cause them to fail, Astronomer recommends implementing worker queues or moving to the Kubernetes executor.
+
+See [Manage the Celery executor](#manage-the-celery-executor) to learn more about how to configure the Celery executor.
+
+### Kubernetes executor
+
+The Kubernetes executor runs each task in an individual Kubernetes Pod instead of in shared Celery workers. For each task that needs to run, the executor calls the Kubernetes API to dynamically launch a Pod for the task. You can specify the configuration of the task and Pod, including CPU and memory, in a `pod_override` file. When the task completes, the Pod terminates. On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
+
+The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks. Specifically, the Kubernetes executor is a good fit for your Deployment if:
+
+- You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when you deploys code.
+- You experience a high number of dependency conflicts between tasks and could benefit from task isolation. For example, one task in your Deployment requires a different version of pandas than another task.
+- You have a strong understanding of the CPU and memory that your tasks require and would benefit from being able to allocate and optimize infrastructure resources at the task level.
+- You have had issues running certain tasks reliably with the Celery executor.
+  
+The primary limitation with the Kubernetes executor is that each task takes up to 1 minute to start running once scheduled. If you're running short-running tasks and cannot tolerate high latency, Astronomer recommends the Celery executor. To learn more about using the Kubernetes executor, see [Manage the Kubernetes executor](#manage-the-kubernetes-executor).
+
+If you want to run only specific tasks in a Kubernetes Pod, consider using the Celery executor and running tasks using the [KubernetesPodOperator](kubernetespodoperator.md).
 
 ## Configure the Celery executor
 
@@ -56,7 +92,10 @@ Celery worker scaling is configured at the worker queue level. Changing worker s
 
 ## Configure the Kubernetes executor
 
-The [Kubernetes executor](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/kubernetes.html) dynamically launches and terminates Pods to run Airflow tasks. The executor starts a new Kubernetes Pod to execute each individual task run, and then shuts down the Pod when the task run completes. This executor is recommended when you need to control resource optimization, isolate your workloads, run tasks for extended periods, or have extended periods without task runs.
+On Astro, you can configure Kubernetes executor in the following ways:
+
+- Customize the Pods on which your tasks run using a `pod_override` configuration. 
+- Change worker instance type on which your Pods run.
 
 By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
@@ -147,6 +186,5 @@ A Deployment using the Kubernetes executor runs worker Pods on a single `default
 ## See also
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
-- [Choose an executor](configure-deployment-resources.md#choose-an-executor)
 - [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md)
 - [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)
