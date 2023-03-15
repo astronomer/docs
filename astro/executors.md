@@ -144,9 +144,9 @@ A Deployment using the Kubernetes executor runs worker Pods on a single `default
 
 4. Click **Update Queue**.
 
-## Related documentation
+## See also
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
-- [Kubernetes executor Airflow Guide](https://airflow.apache.org/docs/apache-airflow/2.1.2/executor/kubernetes.html)
+- [Choose an executor](configure-deployment-resources.md#choose-an-executor)
 - [Run the KubernetesPodOperator on Astro](kubernetespodoperator.md)
-- [Airflow Executors](https://docs.astronomer.io/learn/airflow-executors-explained)
+- [Airflow Executors explained](https://docs.astronomer.io/learn/airflow-executors-explained)
