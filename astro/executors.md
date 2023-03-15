@@ -106,7 +106,7 @@ On Astro, you can configure Kubernetes executor in the following ways:
 
 By default, each Kubernetes executor task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a worker node in your Astro data plane. A single worker node can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new worker Pods.
 
-### Customize Kubernetes Pods for tasks
+### Customize a task and Kubernetes Pod
 
 :::warning
 
