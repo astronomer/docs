@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Configure an executor'
-title: 'Configure your Airflow executor on Astro'
+title: 'Configure your Deployment executor'
 id: 'executors'
 ---
 
