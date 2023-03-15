@@ -82,7 +82,7 @@ You can commit changes from the Astro Cloud IDE to your GitHub repository withou
 
 ## Deploy a project from a Git repository to Astro
 
-Follow these steps to deploy to Astro whenever you merge commits to a `main` or a `dev` branch on your Git repository. You can modify these steps and the workflow to deploy to any number of Deployments from any number of branches.
+Follow these steps to deploy to Astro whenever you merge commits to a `main` or a `dev` branch on the Git repository hosting your Astro Cloud IDE project. You can modify these steps and the workflow to deploy to any number of Deployments from any number of branches.
 
 :::caution
 
@@ -118,7 +118,7 @@ These actions are not dependent on each other, meaning that you can modify the f
 
     See [GitHub](https://docs.github.com/en/actions/learn-github-actions/variables) and [GitLab](https://docs.gitlab.com/ee/ci/variables/) documentation on setting environment variables.  
 
-After configuring your repository, commits from the Cloud IDE to your `main` or `dev` branches are automatically deployed to Astro.
+After configuring your repository, commits from any source to your `main` or `dev` branches are automatically deployed to Astro.
 
 Astronomer recommends creating a feature branch for every new pipeline and creating a pull request (PR) with new changes that merge into the `dev` branch. Merging the PR triggers a push to your development Deployment, where you can confirm that your data pipeline is functional. When you confirm your changes, submit a pull request from your `dev` branch into `main`. This deploys your tested changes to your production Deployment.
 
