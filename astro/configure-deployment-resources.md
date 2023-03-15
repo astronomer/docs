@@ -37,9 +37,7 @@ Use the following topics to understand the benefits and limitations of each exec
 
 ### Celery executor
 
-The Celery executor is the default for all new Deployments. It utilizes a pool of workers and communicates with them to delegate tasks. Astronomer uses [Worker autoscaling logic](configure-executors.md#worker-autoscaling-logic) to determine how many workers run on each worker queue on your Deployment at a given time. 
-
-The Celery executor manages a pool of worker Pods that are each allocated a certain amount of CPU and memory. A single worker Pod can run multiple tasks at a time. Astronomer uses [Worker autoscaling logic](configure-executors.md#worker-autoscaling-logic) to determine how many workers run on each worker queue on your Deployment at a given time.
+The Celery executor is the default for all new Deployments. It utilizes a pool of workers and communicates with them to delegate tasks. Astronomer uses [Worker autoscaling logic](configure-executors.md#worker-autoscaling-logic) to determine how many workers run on each worker queue on your Deployment at a given time.
 
 The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your team if:
 
