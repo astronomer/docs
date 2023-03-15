@@ -12,13 +12,16 @@ To learn more about executors in Airflow, see [Airflow executors](https://docs.a
 
 ## Choose an executor
 
-The difference between executors is based on how tasks are distributed across worker resources. The executor you choose primarily affects the infrastructure cost of a Deployment and how efficiently your tasks execute.
+The difference between executors is based on how exactly tasks are distributed across worker resources. The executor you choose primarily affects the infrastructure cost of a Deployment and how efficiently your tasks execute. Astro currently supports two executors, both of which are available in the Apache Airflow open source project:
 
-Read the following topics to learn about the benefits and limitations of each executor. After you choose an executor type for your Deployment, see [Update the Deployment executor](configure-deployment-resources.md#update-the-deployment-executor) for steps to update your Deployment executor type.
+- Celery executor
+- Kubernetes executor
+
+Read the following topics to learn about the benefits and limitations of each executor. For information about how to change the executor of an existing Deployment, see [Update the Deployment executor](configure-deployment-resources.md#update-the-deployment-executor).
 
 ### Celery executor
 
-The Celery executor is the default for all new Deployments. It uses a group of workers, each of which can run multiple tasks at a time. Astronomer uses [worker autoscaling logic](#clery-worker-autoscaling-logic) to determine how many workers run on your Deployment at a given time.
+The Celery executor is the default for all new Deployments. It uses a group of workers, each of which can run multiple tasks at a time. Astronomer uses [worker autoscaling logic](#celery-worker-autoscaling-logic) to determine how many workers run on your Deployment at a given time.
 
 The Celery executor is a good option for most use cases. Specifically, the Celery executor is a good fit for your Deployment if:
 
@@ -35,7 +38,7 @@ See [Manage the Celery executor](#manage-the-celery-executor) to learn more abou
 
 The Kubernetes executor runs each task in an individual Kubernetes Pod instead of in shared Celery workers. For each task that needs to run, the executor calls the Kubernetes API to dynamically launch a Pod for the task. You can specify the configuration of the task and Pod, including CPU and memory, in a `pod_override` file. When the task completes, the Pod terminates. On Astro, the Kubernetes infrastructure required to run the Kubernetes executor is built into every Deployment and is managed by Astronomer.
 
-The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks. Specifically, the Kubernetes executor is a good fit for your Deployment if:
+The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment of each of their tasks. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
 - You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when you deploys code.
 - You experience a high number of dependency conflicts between tasks and could benefit from task isolation. For example, one task in your Deployment requires a different version of pandas than another task.
@@ -44,7 +47,11 @@ The Kubernetes executor is a good fit for teams that want fine-grained control o
   
 The primary limitation with the Kubernetes executor is that each task takes up to 1 minute to start running once scheduled. If you're running short-running tasks and cannot tolerate high latency, Astronomer recommends the Celery executor. To learn more about using the Kubernetes executor, see [Manage the Kubernetes executor](#manage-the-kubernetes-executor).
 
-If you want to run only specific tasks in a Kubernetes Pod, consider using the Celery executor and running tasks using the [KubernetesPodOperator](kubernetespodoperator.md).
+:::tip
+
+If only some of your tasks need an isolated execution environment, consider using the [KubernetesPodOperator](kubernetespodoperator.md) with the Celery executor.
+
+:::
 
 ## Configure the Celery executor
 
@@ -60,16 +67,16 @@ This topic discusses basic Celery executor configurations for a single worker qu
 
 ### Celery worker autoscaling logic
 
-The following values are used to determine the number of workers that run for each Deployment worker queue at a given time:
+The following values are used to determine the number of workers that run in a single worker queue for a Deployment at a given time:
 
 - The total number of tasks in a `queued` or `running` state
-- The **Default Max Tasks Per Worker** setting for the worker queue
+- The **Max Tasks Per Worker** setting for the worker queue
 
 The calculation is made based on the following expression:
 
 `[Number of workers]= ([Queued tasks]+[Running tasks])/(Maximum tasks per worker)`
 
-The number of workers determines Deployment [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is the maximum number of tasks which can run concurrently within a single Deployment and across worker queues. To ensure that you can always run as many tasks as your workers allow, parallelism is calculated with the following expression:
+The number of workers determines Deployment [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is the maximum number of tasks which can run concurrently within a single Deployment and across worker queues. To ensure that you can always run as many tasks as your workers allow, parallelism on Astro is automatically calculated with the following expression:
 
 `[Parallelism]= ([Total number of running workers for all worker queues] * [The sum of all **Maximum tasks per worker*** values for all worker queues])`.
 
@@ -77,7 +84,7 @@ These calculations are computed by KEDA every 10 seconds. For more information o
 
 ### Configure Celery worker scaling
 
-Celery worker scaling is configured at the worker queue level. Changing worker scaling behavior ensures that your Deployment always has enough resources to run tasks, but never so much that you pay for unnecessary infrastructure.
+For each worker queue on your Deployment, you have to specify certain settings that affect worker autoscaling behavior. If you're new to Airflow, Astronomer recommends using the defaults in Astro for each of these settings.
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 
@@ -94,10 +101,10 @@ Celery worker scaling is configured at the worker queue level. Changing worker s
 
 On Astro, you can configure Kubernetes executor in the following ways:
 
-- Customize the Pods on which your tasks run using a `pod_override` configuration. 
-- Change worker instance type on which your Pods run.
+- Customize individual tasks, including CPU and memory requests, using a `pod_override` configuration. 
+- Change worker node size and type on which your Pods run.
 
-By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a cloud worker node, which can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
+By default, each Kubernetes executor task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 512Mi of memory. These Pods run on a worker node in your Astro data plane. A single worker node can run multiple worker Pods at once. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new worker Pods.
 
 ### Customize Kubernetes Pods for tasks
 
@@ -107,7 +114,7 @@ While you can customize all values for a worker Pod, Astronomer does not recomme
 
 :::
 
-You can configure different custom worker Pods to override the default Astro worker Pod on a per-task basis. You might complete this setup to change how many resources the Pod uses.
+For each task with the Kubernetes executor, you can customize its individual worker Pod and override the defaults used in Astro by configuring a `pod_override` file.
 
 1. Add the following import to your DAG file:
 
@@ -118,9 +125,9 @@ You can configure different custom worker Pods to override the default Astro wor
 2. Add a `pod_override` configuration to the DAG file containing the task. See the [`kubernetes-client`](https://github.com/kubernetes-client/python/blob/master/kubernetes/docs/V1Container.md) GitHub for a list of all possible settings you can include in the configuration.
 3. Specify the `pod_override` in the task's parameters.
 
-See [Manage task CPU and memory](#manage-task-cpu-and-memory) for an example `pod_override` configuration. 
+See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests) for an example `pod_override` configuration. 
 
-### Example Pod configuration: Configure limits and requests for worker Pod CPU and memory
+### Example: Set CPU or memory limits and requests
 
 One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for a task. When requesting resources, make sure that your requests don't exceed the available resources in your current [Pod worker node type](#change-the-pod-worker-node-type).
 
