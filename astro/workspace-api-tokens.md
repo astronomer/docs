@@ -5,11 +5,11 @@ id: workspace-api-tokens
 description: Create and manage Workspace API tokens to automate key Workspace actions like adding users and creating Deployments. 
 ---
 
-Use Workspace API tokens to automate Workspace actions such as creating Deployments and managing users as part of your CI/CD pipelines. Using Workspace API keys, you can:
+Use Workspace API tokens to automate Workspace actions such as creating Deployments and managing users as part of your CI/CD pipelines. Using Workspace API tokens, you can automate:
 
-- [Manage Deployments as code](manage-deployments-as-code.md) in a CI/CD pipeline.
-- Add batches of users in a CI/CD pipeline. 
-- Create preview Deployments. 
+- [Managing Deployments as code](manage-deployments-as-code.md)
+- Adding batches of users to a Workspace in a CI/CD pipeline. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
+- Creating preview Deployments whenever you create a feature branch on your Astro project Git repository. 
 
 ## Create a Workspace API token
 
@@ -32,17 +32,17 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 
 ## Update or delete a Workspace API token
 
-If you delete an API key, make sure that no existing CI/CD pipelines are using it. Once deleted, an API token and secret cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
+If you delete an API token, make sure that no existing CI/CD pipelines are using it. Once deleted, an API token and secret cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
 1. In the Cloud UI, open your Workspace.
    
 2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.
 
-3. Click **Edit** next to your API key.
+3. Click **Edit** next to your API token.
 
 4. Update the name, description, workspace role, or expiration date of your token, then click **Save Changes**.
    
-5. Click **Delete API Key**, enter `Delete`, and then click **Yes, Continue**.
+5. Optional. To delete a Workspace API token, click **Delete API Token**, enter `Delete`, and then click **Yes, Continue**.
 
 ## Use a Workspace API token with the Astro CLI
 
@@ -54,15 +54,13 @@ For example, to automate Astro CLI Workspace commands on a Mac computer, run the
 export ASTRO_API_TOKEN=<your-token>
 ```
 
-After you set the variables, you can run `astro deployment` and `astro workspace` commands for your Workspace without authenticating yourself to Astronomer. Astronomer recommends storing `ASTRO_API_TOKEN` as a secret before using it to programmatically update a Deployment.
+After you set the variables, you can run `astro deployment` and `astro workspace` commands for your Workspace without authenticating yourself to Astronomer. Astronomer recommends storing `ASTRO_API_TOKEN` as a secret before using it to automate the Astro CLI for production workflows.
 
-## Use an API key for CI/CD
+## Use an API token for CI/CD
 
-You can use Workspace API keys to automate various actions in CI/CD. A few notable examples are:
+You can use Workspace API tokens to automate various Workspace and Deployment management workflows in CI/CD. 
 
-- 
-
-Regardless of your use case, you must make the following environment variable available to your CI/CD environment:
+ Regardless of your use case, you must make the following environment variable available to your CI/CD environment:
 
 ```
 ASTRO_API_TOKEN=<your-token>
