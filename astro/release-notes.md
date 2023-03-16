@@ -19,7 +19,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 7.3.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.4.0 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
 
