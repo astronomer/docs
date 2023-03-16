@@ -16,7 +16,8 @@ import {siteVariables} from '@site/src/versions';
 - [The Astro CLI](cli/install-cli.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 - A [Workspace](manage-workspaces.md)
-- An Astronomer account
+- An [Astronomer account](/astro/trial)
+- A [deployment](/astro/create-deployment) 
 
 ## Step 1: Create an Astro project
 
@@ -124,6 +125,7 @@ If you have [Deployment API key](api-keys.md) credentials set as OS-level enviro
 :::
 
 ## Step 5: Access the Astro Cloud UI
+
 
 ## Step 5: Deploy your code
 
