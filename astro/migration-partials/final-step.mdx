@@ -2,8 +2,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 
-Now that our deployment is successfully deployed to Astro Cloud, we can complete the migration by fully shifting
-our workloads off the source Airflow to our Astro Airflow. We will do this DAG by DAG. 
+With the deployment successfully deployed to Astro Cloud, the migration is completed by fully shifting
+our workloads from the source Airflow to our Astro Airflow. We will do this DAG-by-DAG.
 
 Depending on how your workloads are set up, it will be best for the owners or authors of the DAGs to determine 
 in what order to migrate and test them.
@@ -32,22 +32,22 @@ The DAGs Cutover Tab can be utilized to pause DAGs in the source environment and
 
 1. Click on the `DAGs Cutover` tab:
 <details>
-    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate.png"></img>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-tab.png"></img>
 </details>
 
 2. In the table displaying the DAGs present in both the source and target environments, click the Pause icon under `Loca`l
 <details>
-    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate.png"></img>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-pause-local.png"></img>
 </details>
 
 3. In the table displaying the DAGs present in both the source and target environments, click the Start icon under `Remot`e
 <details>
-    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate.png"></img>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-start-remote.png"></img>
 </details>
 
 4. After completing this process, you will see the DAG is paused in the `Local` environment (so you will see a Start Icon) and is unpaused in the `Remote` environment (so you will see a Pause icon)
 <details>
-    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/env-migrate.png"></img>
+    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-complete.png"></img>
 </details>
 
 </TabItem>
@@ -75,6 +75,6 @@ If any Airflow Configurations were set on your source Airflow, you should mirror
 You can read more about setting configurations [here](environment-variables.md) and
 note that not all configurations are [configurable on Astro](https://docs.astronomer.io/astro/platform-variables)
 
-#### DAGs-only Deployments
-DAGs-only deployments is a mechanism you can utilize for faster deployments - in instances where you have not modified your `Dockerfile`, `requirements.txt`, or `packages.txt` files.
-You can read more about enabling [DAGs-only deployments here](deploy-code.md#deploy-dags-only)
+#### DAGs-only Deploy
+The DAGs-only deployment mechanism can be utilized to deploy DAG code changes faster - in instances where you have not modified your `Dockerfile`, `requirements.txt`, or `packages.txt` files.
+You can read more about enabling [DAGs-only deploys here](deploy-code.md#deploy-dags-only)

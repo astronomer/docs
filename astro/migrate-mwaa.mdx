@@ -99,20 +99,24 @@ In this step we will migrate Airflow Metadata with Starship from Source Environm
 <DAGs />
 
 ### Step 6: Copy core Airflow code
-1. Edit `Dockerfile` to match Astro Runtime version to customer’s Source environment Airflow version
-    <RuntimeVersionInfo />
+1. Edit the `Dockerfile` 's Astro Runtime version to match the source Airflow version.
+    **This must match the version of the Deployment you created in [Step 3](#step-3-create-astro-deployment)**.
 
-    :::info
+    :::tip
+
+    The Astro Runtime version is at the end of the line that begins with `FROM` -
+    e.g. `FROM quay.io/astronomer/astro-runtime:1.2.3` would have a version of `1.2.3`
 
     The `Dockerfile` creates the backing environment that all of your Airflow components run in.
     You can customize that in a variety of ways, and might
     modify it to copy special things like certificates or keys to be available in your environment.
 
-    You shouldn't need to modify your `Dockerfile` beyond this, for the purposes of this migration, but may in the future.
+    You shouldn't need to modify your `Dockerfile` beyond the changes in this step, for the purposes of this migration, but may want to in the future.
 
     :::
 
 2. Fill in your new `requirements.txt` file. You can do this by navigating to your S3 Bucket and downloading the file.
+
     :::cli aws
 
     You can easily copy this with the ` aws` CLI:
@@ -124,6 +128,7 @@ In this step we will migrate Airflow Metadata with Starship from Source Environm
     :::
 
 3. Copy your `/dags` folder from source control or S3 by navigating to either and downloading/moving the entire folder into your local Astro project.
+
     :::cli aws
 
     You can easily copy this with the ` aws` CLI:
