@@ -78,7 +78,7 @@ After you configure a Git repository, you can use the **Commit** button in the C
 
 When you first make a commit to your repository, the Cloud IDE commits an additional workflow file that includes steps for pushing your code to Astro. You can then configure your GitHub repository to push your code to a Deployment whenever you commit to specific branches from the Astro Cloud IDE.
 
-You can commit changes from the Astro Cloud IDE to your GitHub repository without configuring destination Deployments in GitHub. However, if you don't configure any destination Deployments, the workflow fails and your changes aren't deployed to Astro. See [Deploy a project from a Git repository to Astro](#deploy-a-project-from-a-git-repository-to-astro) to learn how to deploy to Astro from the Astro Cloud IDE.
+You can commit changes from the Astro Cloud IDE to your Git repository without configuring destination Deployments. However, if you don't configure any destination Deployments, the workflow fails and your changes aren't deployed to Astro. See [Deploy a project from a Git repository to Astro](#deploy-a-project-from-a-git-repository-to-astro) to learn how to deploy to Astro from the Astro Cloud IDE.
 
 ## Deploy a project from a Git repository to Astro
 
