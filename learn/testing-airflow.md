@@ -195,21 +195,23 @@ If you are an Astro customer, you can find further information on how to set up 
 
 ## Debug interactively with dag.test()
 
-Airflow 2.5.0 introduced the `dag.test()` method which allows you to run all tasks in a DAG within a single serialized Python process without running the Airflow scheduler. The `.test()` method allows for faster iteration and use of IDE debugging tools when developing DAGs.
+Airflow 2.5.0 introduced the `dag.test()` method which allows you to run all tasks in a DAG within a single serialized Python process without running the Airflow scheduler. The `dag.test()` method allows for faster iteration and use of IDE debugging tools when developing DAGs.
 
 This functionality replaces the deprecated DebugExecutor. Learn more in the [Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/debug.html).
 
 ### Prerequisites
 
+Ensure that your testing environment has:
+
 - [Airflow 2.5.0](https://airflow.apache.org/docs/apache-airflow/stable/start.html) or later. You can check your version by running `airflow version`.
-- All provider packages that your DAG uses need to be installed in the environment in which you are using `dag.test()`.
-- An initialized [Airflow metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metadata database is created when Airflow is first run in an environment. You can check that it exists by running `airflow db check` and initialize a new database with `airflow db init`.
+- All provider packages that your DAG uses.
+- An initialized [Airflow metadata database](airflow-database.md), if your DAG uses elements of the metadata database like XCom. The Airflow metadata database is created when Airflow is first run in an environment. You can check that it exists with `airflow db check` and initialize a new database with `airflow db init`.
 
 You may wish to install these requirements and test your DAGs in a [virtualenv](https://virtualenv.pypa.io/en/latest/) to avoid dependency conflicts in your local environment.
 
 ### Setup
 
-To use `dag.test()`, you only need to add a few lines of code to the end of your DAG file. If you are using a traditional DAG context, call `.test()` on the object the context is assigned to. If you are using the `@dag` decorator, assign the called DAG function to an object (`dag_object` in the example code) and call the method on that object. 
+To use `dag.test()`, you only need to add a few lines of code to the end of your DAG file. If you are using a traditional DAG context, call `dag.test()` after your DAG declaration. If you are using the `@dag` decorator, assign your DAG function to a new object and call the method on that object. 
 
 <Tabs
     defaultValue="traditional"
@@ -287,7 +289,7 @@ To debug your DAGs in a more realistic environment, you can pass the following A
 - Airflow variables passed as a `.yaml` file.
 - DAG configuration passed as a dictionary.
 
-This is useful for testing your DAG for different dates or with different connections and configurations. The following code snippet shows the syntax for passing various parameters to `.test()`:
+This is useful for testing your DAG for different dates or with different connections and configurations. The following code snippet shows the syntax for passing various parameters to `dag.test()`:
 
 ```python
 from pendulum import datetime 
@@ -297,7 +299,7 @@ if __name__ == "__main__":
     variables_path = "variables.yaml"
     my_conf_var = 23
 
-    dag_object.test(
+    dag.test(
         execution_date=datetime(2023, 1, 29),
         conn_file_path=conn_path,
         variable_file_path=variables_path,
