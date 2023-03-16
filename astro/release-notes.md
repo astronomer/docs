@@ -50,7 +50,7 @@ While most tabs were migrated directly to the left menu with the same name, some
 
 ### New Astro Cloud IDE integration with GitLab
 
-You can now configure a GitLab repository in your Astro Cloud IDE project. Configuring a GitLab repository allows you to commit your pipelines and deploy them to Astro directly from the Astro Cloud IDE. See [link].
+You can now configure a GitLab repository in your Astro Cloud IDE project. Configuring a GitLab repository allows you to commit your pipelines and deploy them to Astro directly from the Astro Cloud IDE. See [Deploy a project from a Git repository to Astro](cloud-ide/deploy-project.md#deploy-a-project-from-a-git-repository-to-astro).
 
 ### Additional improvements
 
