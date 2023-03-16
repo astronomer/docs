@@ -41,7 +41,7 @@ For a complete list of the changes, see the [Apache Airflow 2.5.2 release notes]
 ### Additional improvements
 
 - Upgraded `astro-sdk-python` to 1.5.3, which includes Openlineage facets for Microsoft SQL server and restores some pandas load option classes. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
-- Upgraded `astronomer-providers` to 1.15.1, which includes a new async sensor `SnowflakeSensorAsync` and a number of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1151-2023-03-09). 
+- Upgraded `astronomer-providers` to 1.15.1, which includes a new async sensor `SnowflakeSensorAsync` and a number of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1151-2023-03-09) for a complete list of changes. 
 - Upgraded `openlineage-airflow` to 0.21.1, which includes support for capturing custom environment variables from Spark and a number of bug fixes. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.21.1) for a complete list of changes. 
 
 ## Astro Runtime 7.3.0
