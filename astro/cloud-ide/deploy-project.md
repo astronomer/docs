@@ -128,7 +128,7 @@ Astronomer recommends creating a feature branch for every new pipeline and creat
 2. Click **Commit**.
 3. In **BRANCH**, select a branch to commit to.
 4. In **COMMIT MESSAGE**, enter a commit message. This will be the commit message for committing your changes from the Astro Cloud IDE to your Git repository.
-5. Click **Commit**
+5. Click **Commit**.
 
    ![Commit Changes](/img/cloud-ide/commit.png)
 
