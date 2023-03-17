@@ -82,6 +82,9 @@ Before you create your Deployment, copy the following information from your sour
         - <alert-email>
     ```
 
+
+
+
 3. Replace the placeholder values in the configuration:
 
     - `<true-or-false>` / `<variable-name>` / `<variable-value>`: Set system-level environment variables for your Deployment and specify whether they should be secret. Repeat this configuration in the file for any additional variables you need to set.
@@ -89,19 +92,19 @@ Before you create your Deployment, copy the following information from your sour
     - `<deployment-description>`: Optional. Enter a description for your Deployment.
     - `<runtime-version>`: Select the Runtime version that's based on the Airflow version that you use in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
 
-    | Airflow Version | Runtime Version       |
-    | --------------- | --------------------- |
-    | 2.0             | 3.0.4 (Airflow 2.1.1) |
-    | 2.2             | 4.2.9 (Airflow 2.2.5) |
-    | 2.4             | 6.3.0 (Airflow 2.4.3) |
+    | Airflow Version | Runtime Version       | Note                                                                    |
+    |-----------------|-----------------------|-------------------------------------------------------------------------|
+    | 2.0             | 3.0.4 (Airflow 2.1.1) | Unsupported. The minimum supported version is Runtime 4.x / Airflow 2.2 |
+    | 2.2             | 4.2.9 (Airflow 2.2.5) |                                                                         |
+    | 2.4             | 6.3.0 (Airflow 2.4.3) |                                                                         |
 
     - `<scheduler-au>`: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your Airflow environment. 
 
-    | Environment size | AUs |
-    | ---------------- | --- |
-    | Small            | 5   |
-    | Medium           | 10  |
-    | Large            | 15  |
+    | Environment size | AUs | CPU / Memory Equivalents | Note                                       |
+    |------------------|-----|--------------------------|--------------------------------------------|
+    | Small            | 5   | .5vCPU, 1.88GiB          |                                            |
+    | Medium           | 10  | 1vCPU, 3.75GiB           | smaller than source Airflow recommendation |
+    | Large            | 15  | 1.5vCPU, 5.64GiB         | smaller than source Airflow recommendation |
 
     - `<scheduler-count>`: Specify the same number of schedulers as in your source Airflow environment.
     - `<cluster-name>`: Specify name of the Astro cluster in which you want to create this Deployment.
