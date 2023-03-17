@@ -1,52 +1,82 @@
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import RuntimeVersionInfo from './runtime-version-info.md'
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+import RuntimeVersionInfo from "./runtime-version-info.md";
 
-Deployments in Astro are your Airflow Environments.
+A Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow. This is where you can deploy and run DAGs, configure worker resources, and view metrics.
 
-You will want to retrieve the following information from your source Airflow Environment:
+Before you create your Deployment, copy the following information from your source Airflow environment:
 
-- Name
-- Airflow Version
-- Environment Class or Size
-- Number of Schedulers
-- Minimum Number of Workers
-- Maximum Number of Workers
-- Execution Role Permissions
-- Airflow Configuration modifications
-- Environment Variables
-
-You can create your Deployment in the Astro UI or Astro CLI.
+- Environment name
+- Airflow version
+- Environment class or size
+- Number of schedulers
+- Minimum number of workers
+- Maximum number of workers
+- Execution role permissions
+- Airflow configurations
+- Environment variables
 
 <Tabs>
 <TabItem value="ui" label="Option 1: Astro UI" default>
 
-Create an Astro Deployment by referring to [Create a Deployment](create-deployment.md) and [Configure Deployment Resources](configure-deployment-resources.md).
+1. In the Cloud UI, select a Workspace.
 
-1. **Name your Deployment** to match your existing environment, optionally give it a description
-2. Pick your **Cluster**
-3. Select the appropriate **Astronomer Runtime** version
-    <RuntimeVersionInfo />
-4. Set your **Worker Type**, if available, or pick the default
-:::info
-You will likely only have one instance type associated with your cluster at this point, later on you can
-[add other instance types](modify-cluster.md#manage-worker-types).
-:::
-5. Ensure you set your **Worker Count** minimum and maximum values are set, per the source environment
-6. Ensure the **number of Schedulers** is set, per the source environment
-7. Adjust the **Scheduler Size**, roughly approximate to the source environment Size by converting to AUs based on the reference above
+2. On the **Deployments** page, click **Deployment**.
+
+3. Complete the following fields:
+
+   - **Name**: Enter the same name as your source Airflow environment.
+   - **Astro Runtime**: Select the Runtime version that's based on the Airflow version that you use in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
+
+   | Airflow Version | Runtime Version       |
+   | --------------- | --------------------- |
+   | 2.0             | 3.0.4 (Airflow 2.1.1) |
+   | 2.2             | 4.2.9 (Airflow 2.2.5) |
+   | 2.4             | 6.3.0 (Airflow 2.4.3) |
+
+   - **Description**: Optional. Enter a description for your Deployment.
+   - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
+   - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
+   - **Max Tasks Per Worker**: Optional. Set maximum number of tasks that a single worker can run at a time.
+   - **Worker Count**: Set the same minimum and maximum worker count as in source Airflow environment. 
+   - **Scheduler Count**: Set to the same number of schedulers as in your source Airflow environment. `
+
+4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with:
+
+   - A worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
+   - A single scheduler with 0.5 CPUs and 1.88 GiB of memory.
+
+5. Click **Create Deployment**.
+
+   A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
+
+   For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
+
+6. **Name your Deployment** to match your existing environment, optionally give it a description
+7. Pick your **Cluster**
+8. Select the appropriate **Astronomer Runtime** version
+   <RuntimeVersionInfo />
+9. Set your **Worker Type**, if available, or pick the default
+   :::info
+   You will likely only have one instance type associated with your cluster at this point, later on you can
+   [add other instance types](modify-cluster.md#manage-worker-types).
+   :::
+10. Ensure you set your **Worker Count** minimum and maximum values are set, per the source environment
+11. Ensure the **number of Schedulers** is set, per the source environment
+12. Adjust the **Scheduler Size**, roughly approximate to the source environment Size by converting to AUs based on the reference above
     :::info
     Scheduler size is measured in AUs, our recommended equivalents are:
 
     |        | AUs |
-    |--------|-----|
+    | ------ | --- |
     | Small  | 5   |
     | Medium | 10  |
     | Large  | 15  |
+
     :::
 
-8. After creating your Deployment - you can add [Environment Variables](environment-variables.md) in the `Variables` Tab of your new Deployment
-9. Set the [Alert Email](configure-deployment-resources.md#add-or-delete-a-deployment-alert-email) to your email address, or a good contact for the Airflow instance
+13. After creating your Deployment - you can add [Environment Variables](environment-variables.md) in the `Variables` Tab of your new Deployment
+14. Set the [Alert Email](configure-deployment-resources.md#add-or-delete-a-deployment-alert-email) to your email address, or a good contact for the Airflow instance
 
 </TabItem>
 <TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
@@ -56,64 +86,71 @@ To create your Astro Deployment via the CLI, refer to [Manage Deployments as cod
 We will begin by creating a file called `config.yaml` in a new directory.
 
 Fill it with the following:
+
 ```yaml
 deployment:
-    environment_variables:
-        - is_secret: false
-          key: [VARIABLE NAME]
-          value: [VARIABLE VALUE]
-    configuration:
-        name: [NAME]
-        description: [DESCRIPTION]
-        runtime_version: [RUNTIME VERSION]
-        dag_deploy_enabled: false
-        scheduler_au: [SCHEDULER AU]
-        scheduler_count: [NUM SCHEDULERS]
-        cluster_name: [CLUSTER NAME]
-        workspace_name: [WORKSPACE NAME]
-    worker_queues:
-        - name: default
-          max_worker_count: [MAX WORKER COUNT]
-          min_worker_count: [MIN WORKER COUNT]
-          worker_concurrency: 16
-          worker_type: [WORKER TYPE]
-    alert_emails:
-        - [ALERT EMAIL]
+  environment_variables:
+    - is_secret: false
+      key: [VARIABLE NAME]
+      value: [VARIABLE VALUE]
+  configuration:
+    name: [NAME]
+    description: [DESCRIPTION]
+    runtime_version: [RUNTIME VERSION]
+    dag_deploy_enabled: false
+    scheduler_au: [SCHEDULER AU]
+    scheduler_count: [NUM SCHEDULERS]
+    cluster_name: [CLUSTER NAME]
+    workspace_name: [WORKSPACE NAME]
+  worker_queues:
+    - name: default
+      max_worker_count: [MAX WORKER COUNT]
+      min_worker_count: [MIN WORKER COUNT]
+      worker_concurrency: 16
+      worker_type: [WORKER TYPE]
+  alert_emails:
+    - [ALERT EMAIL]
 ```
 
 1. **Name your Deployment** to match your existing environment by replacing `[NAME]`, optionally replace `[DESCRIPTION]`
 2. Replace `[CLUSTER]` with the name of the **Cluster** that was previously activated with your Astronomer Representative
 3. Select the appropriate **Astronomer Runtime** version for `[RUNTIME VERSION]`
-    <RuntimeVersionInfo />
+
+   <RuntimeVersionInfo />
 
 4. Set your **Worker Type** in `[WORKER TYPE]` by picking the default, unless you have already [added other instance types](modify-cluster.md#manage-worker-types)
-    :::info
-    The default instance type for a new cluster are:
+   :::info
+   The default instance type for a new cluster are:
 
-    | AWS       | GCP           | AZ              |
-    |-----------|---------------|-----------------|
-    | M5.XLARGE | E2-STANDARD-4 | STANDARD_D4D_V5 |
+   | AWS       | GCP           | AZ              |
+   | --------- | ------------- | --------------- |
+   | M5.XLARGE | E2-STANDARD-4 | STANDARD_D4D_V5 |
 
-    A more complete reference is available in the [Cluster Settings Reference](https://docs.astronomer.io/astro/category/cluster-settings-reference).
-    :::
+   A more complete reference is available in the [Cluster Settings Reference](https://docs.astronomer.io/astro/category/cluster-settings-reference).
+   :::
+
 5. Ensure you set your **Worker Count** minimum with `[MIN WORKER COUNT]` and maximum with `[MAX WORKER COUNT]`, per the source environment
 6. Ensure the **number of Schedulers** is set on `[NUM SCHEDULERS]`, per the source environment
 7. Adjust the **Scheduler Size**, roughly approximate to the source environment Size by converting to AUs based on the reference above
-    :::info
-    Scheduler size is measured in AUs, our recommended equivalents are:
+   :::info
+   Scheduler size is measured in AUs, our recommended equivalents are:
 
-    |        | AUs |
-    |--------|-----|
-    | Small  | 5   |
-    | Medium | 10  |
-    | Large  | 15  |
-    :::
+   |        | AUs |
+   | ------ | --- |
+   | Small  | 5   |
+   | Medium | 10  |
+   | Large  | 15  |
+
+   :::
+
 8. Add [Environment Variables](environment-variables.md) `environment_variables` section, or remove the section if you have none to add.
 9. Set `[ALERT EMAIL]` to your email address, or a good contact for the Airflow instance. More information at [Add Or Delete A Deployment Alert Email](configure-deployment-resources.md#add-or-delete-a-deployment-alert-email)
 
 After you have finished creating `config.yaml` file, you can create the deployment with:
+
 ```shell
 astro deployment create --deployment-file config.yaml
 ```
+
 </TabItem>
 </Tabs>

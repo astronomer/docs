@@ -13,19 +13,19 @@ migrate those to Astro with Starship.
 <Tabs>
 <TabItem value="plugin" label="Starship Plugin" default>
 
-1. Once your source environment installs `astronomer-starship` via the `requirements.txt`, you will see a new Astronomer menu. Hover over that menu and select the `Migration Tool 🚀` option
+1. After installing `astronomer-starship`, you will see a new Astronomer menu. Hover over that menu and select the `Migration Tool 🚀` option
 <details>
     <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/menu-item.png"></img>
 </details>
 
-2. After opening the plugin page, you will need to authenticate to Astronomer. To do this, please:
+2. After opening the plugin page, authenticate to Astronomer. To do this, please:
     1. Click the `Get Token` button
     2. If you are prompted to sign-in to cloud.astronomer.io please do so
     3. Copy the access token that appears in the new tab
     4. Paste the access token into the `Authentication Token` field
     5. Click the `Sign In` button
 
-3. After authenticating to Astronomer, you will need to select the deployment that you are sending metadata to. To do this, select a deployment from the `Target Deployment` dropdown and click the `Select` button
+3. After authenticating to Astronomer, select the deployment that you are sending metadata to by selecting a deployment from the `Target Deployment` dropdown and clicking the `Select` button
 
 
 #### Migrating Airflow Connections
@@ -49,7 +49,7 @@ To migrate connections from your source Airflow meta-database:
 
 #### Migrating Airflow Variables
 
-To migrate variables from your source Airflow meta-database:
+To migrate variables from your source Airflow metadata database:
 
 1. Click on the `Variables` tab:
 <details>
@@ -67,8 +67,11 @@ To migrate variables from your source Airflow meta-database:
 </details>
 
 #### Migrating Environment Variables
+
 :::caution
+
 Not all Environmental Variables or Airflow Settings are [configurable on Astro](https://docs.astronomer.io/astro/platform-variables)
+
 :::
 
 To migrate environment variables from your source Airflow:

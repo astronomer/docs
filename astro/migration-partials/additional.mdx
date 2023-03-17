@@ -1,4 +1,4 @@
-At this point, you can create a new repository in your Source Control repository (e.g. GitHub) and push your new project up follow the instructions provided.
+At this point, you can create a new repository in your Source Control repository (e.g. GitHub) and push your new project up following any instructions by your Source Control provider.
 
 #### CI/CD
 If a CI/CD pipeline is being used to manage the source Airflow, you can follow the instructions for your CI/CD provider with the [Set-Up CI/CD](set-up-ci-cd.md) documentation.
