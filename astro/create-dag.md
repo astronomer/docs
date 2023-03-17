@@ -11,10 +11,18 @@ id: 'create-first-DAG'
 
 import {siteVariables} from '@site/src/versions';
 
+
+To run Airflow pipelines on Astro, you first need to 
+
+1. Authenticate and log in to Astro. 
+2. Create an Astro project. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. Once you've tested these files locally, the Astro project structure makes it easy to deploy your pipelines to Astro.
+3. Deploy your project to Astro.
+4. Run your DAG on Astro. 
+
 ## Prerequisites
 
-- [The Astro CLI](cli/install-cli.md)
-- [Docker](https://www.docker.com/products/docker-desktop)
+- [Install the Astro CLI](cli/install-cli.md)
+- [Install Docker](https://www.docker.com/products/docker-desktop)
 - A [Workspace](manage-workspaces.md)
 - An [Astronomer account](/astro/trial)
 - A [deployment](/astro/create-deployment) 
@@ -58,7 +66,7 @@ import {siteVariables} from '@site/src/versions';
     └── requirements.txt # For Python packages
     ```
 
-    This set of files will build into a Docker image that you can both run on your local machine and deploy to Astro.
+    This set of files builds a Docker image that you can both run on your local machine and deploy to Astro.
 
 ### Astro Runtime
 
@@ -110,6 +118,8 @@ After logging in, you should see the DAGs from your `dags` directory in the Airf
 
 ## Step 4: Authenticate to Astro
 
+Now that you've created your Airflow project and confirmed that your project runs Airflow locally, now you can log in to Astro from the CLI.
+
 Run the following command to authenticate to Astro:
 
 ```sh
@@ -126,8 +136,43 @@ If you have [Deployment API key](api-keys.md) credentials set as OS-level enviro
 
 ## Step 5: Access the Astro Cloud UI
 
+1. Go to `https://cloud.astronomer.io`, and select one of the following options to access the Cloud UI:
 
-## Step 5: Deploy your code
+    - To authenticate with single sign-on (SSO), enter your email and click **Continue**. If your Organization has SSO enabled, you'll be redirected to your identity provider authentication screen.
+    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
+    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
+
+## Step 6: Create a deployment
+
+1. In the Cloud UI, select a Workspace.
+
+2. On the **Deployments** page, click **Deployment**.
+
+3. Complete the following fields:
+
+    - **Name**: Enter a name for your Deployment.
+    - **Astro Runtime**: By default, the latest version of Astro Runtime is selected. The Astro Runtime versions provided in the Cloud UI are limited to patches for the most recent major and minor releases. Deprecated versions of Astro Runtime aren't available.
+
+        To upgrade the Astro Runtime version for your Deployment, you’ll need to update your Docker image in your Astro project directory. For more information about upgrading Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md).
+
+    - **Description**: Optional. Enter a description for your Deployment.
+    - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
+    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks in a single worker and is a good choice for most teams. The Kubernetes executor runs each task in an isolated Kubernetes Pod and is a good option for teams that want fine-grained control over the execution environment for each of their tasks. For more information about the benefits and limitations of each executor, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
+    - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
+
+4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with the following resources:
+
+    - The celery executor
+    - A worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
+    - A single scheduler with 0.5 CPUs and 1.88 GiB of memory.
+
+5. Click **Create Deployment**.
+
+     A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
+    
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
+
+## Step 7: Deploy your code
 
 When you start a code deploy to Astro, the status of the Deployment is **DEPLOYING** until it is determined that the underlying Airflow components are running the latest version of your code. During this time, you can hover over the status indicator to determine whether your entire Astro project or only DAGs were deployed .
 
@@ -141,17 +186,29 @@ To confirm a deploy was successful, verify that the running versions of your Doc
 1. In the Cloud UI, select a Workspace and then select a Deployment.
 2. Review the information in the **Docker Image** and **DAG bundle version** fields to determine the Deployment code version.
 
-## Step 6: Access the Airflow UI on the Cloud
+## Step 8: Deploy your Astro Project to your Astro Deployment
 
-Steps to go to the Airflow UI through Astro
+To deploy your Astro project, run:
 
-## Step 7: Trigger your DAG on Astro
+```sh
+astro deploy
+```
+
+This command returns a list of Deployments available in your Workspace and prompts you to pick one.
+
+After you select a Deployment, the CLI parses your DAGs to ensure that they don't contain basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails.
+
+If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
+
+## Step 9: Trigger your DAG on Astro
 
 A **DAG run** is an instance of a DAG running on a specific date. Let's trigger a run of the `example-dag-basic` DAG that was generated with your Astro project.
 
 To provide a basic demonstration of an ETL pipeline, this DAG creates an example JSON string, calculates a value based on the string, and prints the results of the calculation to the Airflow logs.
 
-1. Before you can run any DAG in Airflow, you have to unpause it. To unpause `example-dag-basic`, click the slider button next to its name. Once you unpause it, the DAG starts to run on the schedule defined in its code.
+Before you can run any DAG in Astro, you have to unpause it in your remote Airflow instance. 
+
+1. Open Airflow in the Astro UI. Then, to unpause `example-dag-basic`, click the slider button next to its name. Once you unpause it, the DAG starts to run on the schedule defined in its code.
 
     ![Pause DAG slider in the Airflow UI](/img/docs/tutorial-unpause-dag.png)
 
@@ -161,4 +218,4 @@ After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG
 
 ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
 
-These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. To get a better picture of how your DAG is running, let's explore some other views in Airflow.
+These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. 
