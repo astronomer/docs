@@ -20,7 +20,7 @@
   font-family: "Strawford", "Open Sans", sans-serif;
   left: 1rem;
   position: absolute;
-  bottom: 1rem;
+  bottom: 0;
   background: white;
   width: calc(100% - 20px);
   padding: 2rem 0;
