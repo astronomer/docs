@@ -1,5 +1,7 @@
-After you have completed the set-up of your Astro Deployment, we can prepare to begin testing.
+Depending on how thoroughly you want to test your Airflow environment, you have a few options for testing your project locally before deploying to Astro.
 
-While you are still working locally, you can utilize `astro dev parse` to see if there are any parsing errors with your DAGs.
+- In your Astro project directory, run `astro dev parse` to check for any parsing errors in your DAGs.
+- Run `astro run <dag-id>` to test a specific DAG. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
+- Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 
-You can also run a specific DAG with `astro run ...` or run an entire Airflow stack locally with `astro dev start`.
+Note that your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources. 

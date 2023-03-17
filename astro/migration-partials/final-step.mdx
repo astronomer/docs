@@ -1,80 +1,68 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+After you successfully deploy your code to Astro, you need to shift your workloads from your source Airflow environment to Astro on a DAG-by-DAG basis. 
 
-With the deployment successfully deployed to Astro Cloud, the migration is completed by fully shifting
-our workloads from the source Airflow to our Astro Airflow. We will do this DAG-by-DAG.
+Depending on how your workloads are set up, Astronomer recommends letting owners of your DAGs determine the order that you should migrate and test their DAGs.
 
-Depending on how your workloads are set up, it will be best for the owners or authors of the DAGs to determine 
-in what order to migrate and test them.
+You can complete the following steps in the next few days or weeks. Provide updates to your Astronomer Data Engineer as they continue to assist you through the process and any solve any difficulties that arise. 
 
-You can do this over the next few days or weeks and provide updates to your Astronomer Data Engineer, 
-as they continue to assist you through the process and any difficulties that are encountered.
+Continue to validate and cut over your DAGs until you have fully migrated your source Airflow instance. After you have finished migrating from your source Airflow environment, repeat the complete migration process for any other Airflow instances in your source Airflow environment. 
 
-#### Confirm Connections and Variables
-When available, utilize the `Test` button in the `Admin > Connection` dialogue for Connections that were migrated to the Airflow UI / metadata database.
+#### Confirm connections and variables
 
-Additionally, spot-check any Airflow Variables that were migrated visually in the target instance.
+In the Airflow UI for your Deployment, [test the connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections) that you migrated from your source Airflow environment. 
 
-#### Test and Validate DAGs
-Determine a strategy to test and validate DAGs, and determine what DAGs will need more or less caution in being monitored and run.
+Additionally, spot-check any Airflow variables by checking their values in **Admin** > **Variables**.
 
-Some workloads are idempotent and can easily run twice, or rerun.
-Workloads that are non-idempotent and have state that can become invalid if they are rerun should be migrated with more caution and potentially downtime.
+#### Test and Validate DAGs in Astro
 
-#### Utilize Starship to cut-over DAGs
+To create a strategy for testing DAGs, determine which of your DAGs need the most care when running and testing them.
 
-Refer to the prior step where you used Starship for instructions if you need to reconfigure or reauthenticate.
+If your DAG workflow is idempotent and can run twice or more without negative effects, you can run and test these DAGs with minimal risk. 
+
+If your DAG workflow is non-idempotent and can become invalid you rerun it, you should test the DAG with more caution and downtime. 
+
+#### Cut over DAGs to Astro using Starship
+
+Starship includes features for simultaneously pausing DAGs in your source Airflow environment and starting them on Astro. This allows you to cut over your production workflows without downtime. 
 
 <Tabs>
 <TabItem value="plugin" label="Starship Plugin" default>
-The DAGs Cutover Tab can be utilized to pause DAGs in the source environment and unpause DAGs in the target environment (as long as the DAG id in both the source and target environment match). To do so, please:
 
-1. Click on the `DAGs Cutover` tab:
-<details>
-    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-tab.png"></img>
-</details>
+For each DAG in your Astro Deployment:
 
-2. In the table displaying the DAGs present in both the source and target environments, click the Pause icon under `Loca`l
-<details>
-    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-pause-local.png"></img>
-</details>
+1. Confirm that the DAG ID in your Deployment is the same as the DAG ID in your source Airflow environment.
 
-3. In the table displaying the DAGs present in both the source and target environments, click the Start icon under `Remot`e
-<details>
-    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-start-remote.png"></img>
-</details>
+2. In the Airflow UI for your source Airflow environment, go to **Astronomer** > **Migration Tool 🚀**.
 
-4. After completing this process, you will see the DAG is paused in the `Local` environment (so you will see a Start Icon) and is unpaused in the `Remote` environment (so you will see a Pause icon)
-<details>
-    <img src="https://github.com/astronomer/starship/raw/master/astronomer-starship/images/cutover-complete.png"></img>
-</details>
+2. Click **DAGs cutover**. In the table that appears, click the Pause icon in the **Local** column for the DAG you're cutting over. 
+
+3. Click Start icon in the **Remote** column for the DAG you're cutting over. 
+
+4. After completing this cutover, the Start and Pause icons switch. If there is an issue after cutting over, click the **Remote** pause button and then the **Local** start button to move your workflow back to your source Airflow environment. 
 
 </TabItem>
 <TabItem value="operator" label="Starship Operator">
-The Starship Operator does not contain DAG Cutover functionality.
-To cutover a DAG - `Pause` the DAG in the source Airflow and `Unpause` the DAG in Astro. Monitor it's successful completion.
+The Starship Operator does not contain cut-over functionality.
+
+To cut over a DAG, pause the DAG in the source Airflow and unpause the DAG in Astro. Keep both Airflow environments open as you test and ensure that the cutover was successful.
+
 </TabItem>
 </Tabs>
 
-### Tune and Optimize Deployment
-#### Monitor Analytics
-As you cut-over DAGs, you will want to monitor the Analytics page to get a feel for your new instance
-and if you need to adjust sizing. You can read more about this page in the [Deployment Metrics](deployment-metrics.md)
-documentation.
+### Optimize Deployment resource usage
 
-#### Modify Instance Types or utilize Worker Queues
-You may need to adjust instance types from the original that were set, which you can read about
-in the [Manage Worker Types](modify-cluster.md#manage-worker-types) documentation.
-You can additionally use [Worker Queues](configure-worker-queues.md) to set different instance types for specific tasks to run on.
-Use the `Analytics` tab to help you determine changes that may be required.
+#### Monitor analytics
 
+As you cut over DAGs, view your [Deployment metrics](deployment-metrics.md) page to get a sense of how many resources your Deployment is using. You can read more about this page in the [Deployment Metrics](deployment-metrics.md). Use this information to adjust your worker queues and resource usage accordingly. 
 
-#### Set Airflow Configurations
-If any Airflow Configurations were set on your source Airflow, you should mirror them on your Astro Airflow.
-You can read more about setting configurations [here](environment-variables.md) and
-note that not all configurations are [configurable on Astro](https://docs.astronomer.io/astro/platform-variables)
+#### Modify instance types or use worker queues
 
-#### DAGs-only Deploy
-The DAGs-only deployment mechanism can be utilized to deploy DAG code changes faster - in instances where you have not modified your `Dockerfile`, `requirements.txt`, or `packages.txt` files.
-You can read more about enabling [DAGs-only deploys here](deploy-code.md#deploy-dags-only)
+If your current worker type doesn't have the right combination of resources for your workflows, see [Manage Worker Types](modify-cluster.md#manage-worker-types) to learn about adding additional worker types to your cluster.
+
+You can additionally configure [worker queues](configure-worker-queues.md) to assign each of your tasks to different worker instance types. View your [Deployment metrics](deployment-metrics.md) help you determine what changes are required. 
+
+#### Enable DAG-only deploys
+
+The DAG-only deployment mechanism can make deploys faster in cases where you haven't modified your `Dockerfile`, `requirements.txt`, or `packages.txt` files. To enable DAG-only deploys, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
