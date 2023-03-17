@@ -586,6 +586,11 @@ html[data-theme="dark"] aside.theme-doc-sidebar-container {
 }
 
 @media screen and (min-width: 997px) {
+
+  .sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
+    min-height: 100vh;
+  }
+
   .theme-doc-sidebar-container nav.menu {
     display: flex;
     flex-direction: column;
