@@ -24,6 +24,16 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 7.4.1
+
+- Release date: March 
+- Airflow version: 2.5.2
+
+### Early access Airflow bug fixes
+
+- Ensure that `dag.partial_subset` doesn't mutate task group properties ([30129](https://github.com/apache/airflow/pull/30129))
+- Revert fix for on_failure_callback when task receives a SIGTERM ([30165](https://github.com/apache/airflow/pull/30165))
+
 ## Astro Runtime 7.4.0
 
 - Release date: March 15, 2023
