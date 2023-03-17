@@ -76,31 +76,31 @@ gcloud composer environments update [GCC_NAME] --update-pypi-package=astronomer-
 
     The `Dockerfile` defines environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
 
-2. Open your Astro project `requirements.txt` file and add all Python packages that you installed in your source Airflow environment. See [Google documentation](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#view-custom) for how to view a list of Python packages in your environment. 
+2. Open your Astro project `requirements.txt` file and add all Python packages that you installed in your source Airflow environment. See [Google documentation](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#view-custom) for how to view a list of Python packages in your source Airflow environment. 
 
   :::tip
 
-  You can copy your PyPI packages from GCC directly to your `requirements.txt` file using the following command:
+  To directly copy your PyPI packages from GCC to your `requirements.txt` file, run:
 
   ```shell
-  gcloud composer environments describe <your-gcc-name> --format="value(config.softwareConfig.pypiPackages)" > requirements.txt
+  gcloud composer environments describe <your-gcc-project-name> --format="value(config.softwareConfig.pypiPackages)" > requirements.txt
   ```  
 
-  Make sure to review the output in `requirements.txt` after running this command to ensure that all packages were imported on their own line of text.   
+  Review the output in `requirements.txt` after running this command to ensure that all packages were imported on their own line of text.   
   
   :::
 
-3.`Open your Astro project `dags` folder. Copy your DAG files to `dags` from either your source control platform or GCS Bucket.
+3. Open your Astro project `dags` folder. Copy your DAG files to `dags` from either your source control platform or GCS Bucket.
 
   :::tip
 
-  You can directly copy your DAGs from Cloud Composer to your `dags` folder by running the following `gcloud` command:
+  To directly copy your DAGs from Cloud Composer to your `dags` folder, run:
 
   ```sh
   gcloud composer environments storage dags export --destination=dags
   ```
 
-  Make sure to review your DAG files in `dags` to ensure that all DAGs were successfully exported. 
+  Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported. 
 
   :::
 
@@ -132,7 +132,7 @@ gcloud composer environments update [GCC_NAME] --update-pypi-package=astronomer-
   
   :::
 
-## Step 9: Configure additional components
+## Step 7: Configure additional components
 
 <Additional />
 
@@ -140,14 +140,14 @@ gcloud composer environments update [GCC_NAME] --update-pypi-package=astronomer-
 
 You can utilize Workload Identity or Service Account Keys to grant your Astro Deployment the same level of access to Google Services as your source Airflow environment. See [Connect GCP - Authorization options](connect-gcp.md#authentication-options).
 
-## Step 10: Test locally and check for import errors
+## Step 8: Test locally and check for import errors
 
 <TestLocally />
 
-## Step 11: Deploy
+## Step 9: Deploy to Astro
 
 <Deploy />
 
-## Step 12: Cut over from your source Airflow environment to Astro
+## Step 10: Cut over from your source Airflow environment to Astro
 
 <FinalStep />

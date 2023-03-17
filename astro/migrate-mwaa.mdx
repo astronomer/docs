@@ -48,7 +48,7 @@ To install Starship to your MWAA instance as a plugin:
 
 :::tip
 
-You can alternatively complete this installation with the `aws` CLI. 
+You can alternatively complete this installation with the AWS CLI. 
 
 1. Run the following commands to set environment variables on your local machine:
 
@@ -85,85 +85,70 @@ You can alternatively complete this installation with the `aws` CLI.
 <DAGs />
 
 ### Step 6: Copy core Airflow code
-1. Edit the `Dockerfile` 's Astro Runtime version to match the source Airflow version.
-    **This must match the version of the Deployment you created in [Step 3](#step-3-create-astro-deployment)**.
 
-    :::tip
+1. Open your Astro project Dockerfile. Update the Runtime version in first line to the version you selected for your Deployment in [Step 3](#step-3-create-astro-deployment). For example, if your Runtime version was 6.3.0, your Dockerfile would look like the following:
 
-    The Astro Runtime version is at the end of the line that begins with `FROM` -
-    e.g. `FROM quay.io/astronomer/astro-runtime:1.2.3` would have a version of `1.2.3`
+    ```Dockerfile
+    FROM quay.io/astronomer/astro-runtime:6.3.0
+    ```
 
-   :::info
+    The `Dockerfile` defines environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
 
-    You shouldn't need to modify your `Dockerfile` beyond the changes in this step, for the purposes of this migration, but may want to in the future.
+2. Open your Astro project `requirements.txt` file and add all Python packages from your source Airflow environment's `requirements.txt` file. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket.
 
-   You shouldn't need to modify your `Dockerfile` beyond this, for the purposes of this migration, but may in the future.
+  :::tip 
 
-   :::
+  To directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file, run:
 
-2. Fill in your new `requirements.txt` file. You can do this by navigating to your S3 Bucket and downloading the file.
+  ```sh
+  aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
+  ```  
 
-    :::cli aws
+  Review the output in `requirements.txt` after running this command to ensure that all packages were imported on their own line of text.    
 
-   You can easily copy this with the ` aws` CLI:
+  :::
 
-   ```shell
-   aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
-   ```
+3. Open your Astro project `dags` folder. Add your DAG files from either your source control platform or S3. 
 
-   Make sure to review the output after running this command
+  :::tip
 
-   :::
+  To directly copy your DAGs from S3 to your `dags` folder, run:  
+  
+  ```sh
+  aws s3 cp --recursive s3://[BUCKET]/dags dags
+  ```  
+  
+  Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported. 
 
-3. Copy your `/dags` folder from source control or S3 by navigating to either and downloading/moving the entire folder into your local Astro project.
+  :::
 
-    :::cli aws
+4. If you utilized the [`plugins` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#folders_in_the_bucket) in your MWAA project, copy the contents of this folder from your source control platform or S3 to your Astro project `/plugins` folder.
 
-   You can easily copy this with the ` aws` CLI:
+  :::tip
+  
+  To copy your `plugins` folder contents directly to your Astro project using the AWS CLI, run:
+  
+  ```sh
+  aws s3 cp --recursive s3://[BUCKET]/plugins.zip plugins.zip
+  unzip plugins.zip
+  ```
+  
+  Review the contents of your Astro project `plugins` folder after running this command to ensure that all files were successfully exported. 
+  
+  :::
 
-   ```
-    aws s3 cp --recursive s3://[BUCKET]/dags dags
-   ```
-
-   Make sure to review the output after running this command
-
-   :::
-
-## Step 7: Copy accessory Airflow code
-
-Following the recommended [project structure](https://docs.astronomer.io/learn/managing-airflow-code#project-structure), we will move any files to our Astro project.
-
-- If you have utilized the `/plugins` folder in your S3 Bucket, copy it from source control or the S3 Bucket to the local `/plugins` folder
-
-:::cli aws
-
-You can easily copy this with the ` aws` CLI:
-
-```
-aws s3 cp --recursive s3://[BUCKET]/plugins.zip plugins.zip
-unzip plugins.zip
-```
-
-Make sure to review the output after running this command
-
-:::
-
-## Step 8: Configure Additional Components
+## Step 7: Configure additional components
 
 <Additional />
 
-## Step 9: Test locally and check for import errors
+## Step 8: Test locally and check for import errors
 
 <TestLocally />
 
-## Step 10: Deploy
+## Step 9: Deploy to Astro
 
 <Deploy />
 
-## Validate, Cut-over and Tune Process
+## Step 10: Cut over from your source Airflow environment to Astro
 
 <FinalStep />
-
-## Wrapping up
-
-<WrapUp />
