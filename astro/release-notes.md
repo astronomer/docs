@@ -4,8 +4,6 @@ title: 'Astro release notes'
 id: release-notes
 ---
 
-import NewsletterForm from '@site/src/components/NewsletterForm';
-
 <head>
   <meta name="description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
@@ -16,8 +14,6 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
         <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
     </a>
 </p>
-
-<NewsletterForm title="Sign Up for Monthly Product Updates" />
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
@@ -38,7 +34,7 @@ You can now configure your Deployments to use the Kubernetes executor for execut
 - Request specific amounts of CPU and memory for individual tasks.
 - Automatically down your resources when no tasks are running.
 
-The Kubernetes executor runs each task in its own Kubernetes Pod instead of in shared Celery workers. Astronomer fully manages the infrastructure required to run the executor and automatically spins Pods up and down for each of your task runs. This executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks. 
+The Kubernetes executor runs each task in its own Kubernetes Pod instead of in shared Celery workers. Astronomer fully manages the infrastructure required to run the executor and automatically spins Pods up and down for each of your task runs. This executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks.
 
 To learn whether the Kubernetes executor works for your use case, see [Choose an executor](executors.md#choose-an-executor). To configure the Kubernetes executor for a task or Deployment, see [Configure the Kubernetes executor](executors.md#configure-the-kubernetes-executor).
 
