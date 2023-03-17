@@ -24,6 +24,26 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 7.4.0
+
+- Release date: March 15, 2023
+- Airflow version: 2.5.2
+
+### Airflow 2.5.2
+
+Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.2. Airflow 2.5.2 contains a number of bug fixes including:
+
+- Fix validation of date-time field in API and Parameter schemas ([29395](https://github.com/apache/airflow/pull/29395))
+- DAG list sorting lost when switching page ([29756](https://github.com/apache/airflow/pull/29756))
+
+For a complete list of the changes, see the [Apache Airflow 2.5.2 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-2-2023-03-15).
+
+### Additional improvements
+
+- Upgraded `astro-sdk-python` to 1.5.3, which includes Openlineage facets for Microsoft SQL server and restores some pandas load option classes. See the [Astro Python SDK changelog](https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1) for a complete list of changes.
+- Upgraded `astronomer-providers` to 1.15.1, which includes a new async sensor `SnowflakeSensorAsync` and a number of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1151-2023-03-09) for a complete list of changes. 
+- Upgraded `openlineage-airflow` to 0.21.1, which includes support for capturing custom environment variables from Spark and a number of bug fixes. See the [OpenLineage changelog](https://github.com/OpenLineage/OpenLineage/releases/tag/0.21.1) for a complete list of changes. 
+
 ## Astro Runtime 7.3.0
 
 - Release date: February 14, 2023

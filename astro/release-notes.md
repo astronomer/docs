@@ -23,9 +23,43 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
 
-**Latest Astro Runtime Version**: 7.3.0 ([Release notes](runtime-release-notes.md))
+**Latest Astro Runtime Version**: 7.4.0 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
+
+## March 15, 2023
+
+### Run the Kubernetes executor in Astro
+
+You can now configure your Deployments to use the Kubernetes executor for executing tasks. Using the Kubernetes executor, you can:
+
+- Ensure that tasks running longer than 24 hours are not interrupted when your team deploys code.
+- Run tasks with different version dependencies in the same Astro project.
+- Request specific amounts of CPU and memory for individual tasks.
+- Automatically down your resources when no tasks are running.
+
+The Kubernetes executor runs each task in its own Kubernetes Pod instead of in shared Celery workers. Astronomer fully manages the infrastructure required to run the executor and automatically spins Pods up and down for each of your task runs. This executor is a good fit for teams that want fine-grained control over the execution environment for each of their tasks. 
+
+To learn whether the Kubernetes executor works for your use case, see [Choose an executor](executors.md#choose-an-executor). To configure the Kubernetes executor for a task or Deployment, see [Configure the Kubernetes executor](executors.md#configure-the-kubernetes-executor).
+
+### Simplified Organization management in the Cloud UI
+
+The Cloud UI has been redesigned so that Organization settings tabs are now available in the left menu. Use this new menu to switch between pages as you can for Workspace settings.
+
+While most tabs were migrated directly to the left menu with the same name, some pages have been renamed and moved:
+
+- Formerly located in **Overview**, your Workspace list is now available in **Workspaces**.
+- Formerly located in the **People** tab, Organization user management settings are now in **Settings** > **Access Management**.
+- Formerly located in the **Settings** tab, general Organization settings are now in **Settings** > **General**.
+
+### New Astro Cloud IDE integration with GitLab
+
+You can now configure a GitLab repository in your Astro Cloud IDE project. Configuring a GitLab repository allows you to commit your pipelines and deploy them to Astro directly from the Astro Cloud IDE. See [Deploy a project from a Git repository to Astro](cloud-ide/deploy-project.md#deploy-a-project-from-a-git-repository-to-astro).
+
+### Additional improvements
+
+- Clusters on an Astro - Hosted installation no longer retain Airflow logs which are older than 90 days.
+- The Data Plane System node pool instance type on GCP clusters has been reduced from `n2-standard-4` to `n2-standard-2`.
 
 ## March 7, 2023
 
@@ -146,12 +180,6 @@ In the Cloud UI, when using **Compare** on the **Lineage Graph** page, you can n
 ## February 14, 2023
 
 ### Authorize Workspaces to clusters
-
-:::info
-
-This is a [Public Preview](feature-previews.md) feature.
-
-:::
 
 You can now keep teams and projects isolated by authorizing Workspaces to specific clusters. Use this feature to better manage cloud resources by ensuring that only authorized Deployments are running on specific clusters.
 
@@ -586,7 +614,7 @@ A new **Maximum Tasks per Worker** configuration is now available in the Deploym
 
 Previously, maximum tasks per worker was permanently set to 16 and was not configurable on Astro. Now, you can set maximum tasks per worker anywhere between 1 and 64 based on the needs of your tasks. It can be set per worker queue on a Deployment.
 
-To learn more, see [Worker autoscaling logic](configure-deployment-resources.md#worker-autoscaling-logic).
+To learn more, see [Worker autoscaling logic](executors.md#celery-worker-autoscaling-logic).
 
 ### New Worker Count (Min-Max) setting
 
@@ -754,7 +782,7 @@ Support requests can now be created and submitted in the Cloud UI. You no longer
 
 To better scale concurrent task runs, Astro now dynamically calculates [`parallelism`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism), which is an Airflow configuration that determines the maximum number of tasks that can run concurrently within a single Deployment.
 
-Deployment `parallelism` is now equal to the maximum allowable number of workers multiplied by [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency). This change ensures that your task runs aren't limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](configure-worker-queues.md#worker-autoscaling-logic) for more information.
+A Deployment's `parallelism` is now equal to the current number of workers multiplied by the [`worker_concurrency`](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) value. This change ensures that your task runs won't be limited by a static parallelism limit as workers autoscale in your Deployment. See [Worker Autoscaling Logic](executors.md#celery-worker-autoscaling-logic) for more information.
 
 Note that you can still use a static `parallelism` value by setting `AIRFLOW__CORE__PARALLELISM` as an [environment variable](environment-variables.md).
 

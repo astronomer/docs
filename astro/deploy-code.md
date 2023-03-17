@@ -120,7 +120,7 @@ Enabling DAG-only deploys on Astro has a few benefits:
 
 ### Enable DAG-only deploys on a Deployment
 
-Before you complete this setup, ensure that you have access to the Deployment's Astro project and can trigger deploys from your current computer.
+Before you enable DAG-only deploys on a Deployment, ensure that you have access to the Deployment's Astro project and can trigger deploys from your current computer with the Astro CLI. You cannot enable the DAG-only deploy feature in the Cloud UI.
 
 1. Run the following command to enable the feature:
 

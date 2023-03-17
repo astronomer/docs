@@ -11,7 +11,9 @@ View Airflow task and component logs to troubleshoot your data pipelines and bet
 
 Airflow task logs for both local Airflow environments and Deployments on Astro are available in the Airflow UI. Task logs can help you troubleshoot a specific task instance that failed or retried.
 
-On Astro, Airflow task logs are stored in the data plane on your cloud. On Amazon Web Services (AWS), they are stored in S3. On Google Cloud Platform (GCP), they are stored in Cloud Storage. Task logs are stored indefinitely for existing Astro clusters. The task log retention policy is not currently configurable.
+On Astro, Airflow task logs are stored in the data plane on your cloud. On Amazon Web Services (AWS), they are stored in S3. On Google Cloud Platform (GCP), they are stored in Cloud Storage. On Azure, they are stored in Azure Blob Storage. 
+
+On clusters hosted in your own cloud, task logs are stored indefinitely. On clusters hosted in Astronomer's cloud, task logs are hosted for 90 days. The task log retention policy is not currently configurable.
 
 1.  Access the Airflow UI. To access the Airflow UI for a Deployment, open the Deployment in the Cloud UI and click **Open Airflow**. To access the Airflow UI in a local environment, open a browser and go to `http://localhost:8080`.
 2. Click a DAG.

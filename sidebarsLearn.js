@@ -143,6 +143,7 @@ module.exports = {
         'airflow-azure-data-factory-integration',
         'airflow-databricks',
         'airflow-dbt',
+        'airflow-fivetran',
         'airflow-great-expectations',
         'execute-notebooks',
         'marquez',
