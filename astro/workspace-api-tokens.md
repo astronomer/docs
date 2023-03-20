@@ -56,6 +56,12 @@ export ASTRO_API_TOKEN=<your-token>
 
 After you set the variables, you can run `astro deployment` and `astro workspace` commands for your Workspace without authenticating yourself to Astronomer. Astronomer recommends storing `ASTRO_API_TOKEN` as a secret before using it to automate the Astro CLI for production workflows.
 
+:::info
+
+If you have both `ASTRO_API_TOKEN` and `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET` set in an environment, your Astro Workspace token takes precedence and is used for all  Deployment actions. 
+
+:::
+
 ## Use an API token for CI/CD
 
 You can use Workspace API tokens to automate various Workspace and Deployment management workflows in CI/CD. 
