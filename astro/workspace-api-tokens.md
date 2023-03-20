@@ -60,9 +60,9 @@ After you set the variables, you can run `astro deployment` and `astro workspace
 
 You can use Workspace API tokens to automate various Workspace and Deployment management workflows in CI/CD. 
 
- Regardless of your use case, you must make the following environment variable available to your CI/CD environment:
+For all use cases, you must make the following environment variable available to your CI/CD environment:
 
-```
+```text
 ASTRO_API_TOKEN=<your-token>
 ```
 
