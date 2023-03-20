@@ -21,7 +21,7 @@ module.exports = {
     {
       type: "category",
       label: "Get started",
-      items: ["trial", "create-project", "log-in-to-astro", "create-deployment"],
+      items: ["trial", "create-project", "log-in-to-astro", "create-first-DAG", "create-deployment"],
     },
     {
       type: "category",
