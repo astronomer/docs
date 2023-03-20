@@ -36,8 +36,8 @@ astro login
 
 | Option                | Description                                                                                                            | Possible Values |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------- |
-| `-l`, `--login-link`  | Force the user to manually access the Cloud UI to log in instead of opening the browser automatically from the CLI.    | None            |
-| `-t`, `--token-login` | Force the user to manually enter a token generated in the Cloud UI. This flag is used primarily for browserless login. | None            |
+| `-l`, `--login-link`  | The CLI will provide you with a link to login in with instead of automatically opening up the browser | None            |
+| `-t`, `--token-login` | Login by specifing an Auth token with the flag. This flag is used primarily for browserless login | Auth Token from `cloud/astronomer.io/token` |
 
 ## Examples
 
@@ -48,8 +48,8 @@ astro login
 astro login --login-link
 # The CLI provides a link to the Cloud UI that you can manually open in a web browser.
 
-astro login --token-login
-# The CLI provides a link to the Cloud UI that you can manually open in a web browser. You then copy a generated token from the UI and enter it in the CLI. For a browserless login, you can open the link and copy the token on a separate machine from the one running the Astro CLI.
+astro login --token-login <auth-token>
+# You then copy a generated token from the UI(cloud.astronomer.io/token) and use it with this command. Use this flag for a browserless login.
 ```
 
 </TabItem>
