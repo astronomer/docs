@@ -1,6 +1,6 @@
 ---
 sidebar_label: 'Run your first DAG on Astro'
-title: 'Create and run your first DAG on Astro.'
+title: 'Create and run your first DAG on Astro'
 id: 'create-first-DAG'
 ---
 
@@ -21,11 +21,10 @@ To run Airflow pipelines on Astro, you first need to
 
 ## Prerequisites
 
-- [Install the Astro CLI](cli/install-cli.md)
-- [Install Docker](https://www.docker.com/products/docker-desktop)
-- A [Workspace](manage-workspaces.md)
+- Install the [Astro CLI](cli/install-cli.md)
+- Install [Docker](https://www.docker.com/products/docker-desktop)
 - An [Astronomer account](/astro/trial)
-- A [deployment](/astro/create-deployment) 
+- Access to a [Workspace](manage-workspaces.md)
 
 ## Step 1: Create an Astro project
 
@@ -68,15 +67,6 @@ To run Airflow pipelines on Astro, you first need to
 
     This set of files builds a Docker image that you can both run on your local machine and deploy to Astro.
 
-### Astro Runtime
-
-Your `Dockerfile` includes a reference to Astro Runtime. Packaged into a Debian-based Docker image, Astro Runtime extends the Apache Airflow open source project to provide you with differentiated functionality that centers around reliability, efficiency, and performance. For more information on what's included in Runtime and how it's versioned, see [Runtime versioning](runtime-version-lifecycle-policy.md).
-
-By default, the Docker image in your Dockerfile is:
-
-<pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}
-`}</code></pre>
-
 ## Step 2: Build your project locally
 
 To confirm that you successfully initialized an Astro project, run the following command from your project directory:
@@ -96,15 +86,9 @@ If your project builds successfully, the Airflow UI automatically opens in your 
 
 When you create an Astro project, the Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#ports-are-not-available).
 
-:::tip
-
-Use the `astro run <dag-id>` command to run and debug a DAG from the command line without starting a local Airflow environment. This is an alternative to testing your entire Astro project with the Airflow webserver and scheduler. See [Run and Debug DAGs with Astro Run](test-and-troubleshoot-locally.md#run-and-debug-dags-with-astro-run).
-
-:::
-
 ## Step 3: Locally access the Airflow UI
 
-Once your project is running, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password.
+After your project is running, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password.
 
 :::info
 
@@ -118,7 +102,7 @@ After logging in, you should see the DAGs from your `dags` directory in the Airf
 
 ## Step 4: Authenticate to Astro
 
-Now that you've created your Airflow project and confirmed that your project runs Airflow locally, now you can log in to Astro from the CLI.
+Now that you've created your Airflow project and confirmed that your project runs Airflow locally, you can log in to Astro from the CLI.
 
 Run the following command to authenticate to Astro:
 
@@ -126,13 +110,7 @@ Run the following command to authenticate to Astro:
 astro login
 ```
 
-After running this command, you are prompted to open your web browser and log in to the Cloud UI. Once you complete this login, you are automatically authenticated to the CLI.
-
-:::tip
-
-If you have [Deployment API key](api-keys.md) credentials set as OS-level environment variables on your local machine, you can deploy directly to Astro without needing to manually authenticate. This setup is required for automating code deploys with [CI/CD](ci-cd.md).
-
-:::
+After running this command, you are prompted to open your web browser and log in to the Cloud UI. Then, you are automatically authenticated to the CLI.
 
 ## Step 5: Access the Astro Cloud UI
 
@@ -144,49 +122,24 @@ If you have [Deployment API key](api-keys.md) credentials set as OS-level enviro
 
 ## Step 6: Create a deployment
 
-1. In the Cloud UI, select a Workspace.
+1. In the Cloud UI, select a **Workspace**.
 
 2. On the **Deployments** page, click **Deployment**.
 
 3. Complete the following fields:
 
     - **Name**: Enter a name for your Deployment.
-    - **Astro Runtime**: By default, the latest version of Astro Runtime is selected. The Astro Runtime versions provided in the Cloud UI are limited to patches for the most recent major and minor releases. Deprecated versions of Astro Runtime aren't available.
-
-        To upgrade the Astro Runtime version for your Deployment, you’ll need to update your Docker image in your Astro project directory. For more information about upgrading Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md).
-
-    - **Description**: Optional. Enter a description for your Deployment.
     - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
-    - **Executor**: Select an executor to run your scheduled tasks. The Celery executor runs multiple tasks in a single worker and is a good choice for most teams. The Kubernetes executor runs each task in an isolated Kubernetes Pod and is a good option for teams that want fine-grained control over the execution environment for each of their tasks. For more information about the benefits and limitations of each executor, see [Choose an executor](configure-deployment-resources.md#choose-an-executor).
-    - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
+  
+  You can leave the other fields at their default values.
 
-4. Optional. Edit additional Deployment resource settings. See [Configure Deployment resources](configure-deployment-resources.md). If you don't change any Deployment resource settings, your Deployment is created with the following resources:
-
-    - The celery executor
-    - A worker queue named `default` that runs a maximum of 10 workers. Each of these workers can run a maximum of 16 tasks can run at a time.
-    - A single scheduler with 0.5 CPUs and 1.88 GiB of memory.
-
-5. Click **Create Deployment**.
+4. Click **Create Deployment**.
 
      A confirmation message appears indicating that the Deployment is in progress. Select the **Deployments** link to go to the **Deployments** page. The Deployment status is **Creating** until all underlying components in your Astro cluster are healthy, including the Airflow webserver and scheduler. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
     
     For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
 
-## Step 7: Deploy your code
-
-When you start a code deploy to Astro, the status of the Deployment is **DEPLOYING** until it is determined that the underlying Airflow components are running the latest version of your code. During this time, you can hover over the status indicator to determine whether your entire Astro project or only DAGs were deployed .
-
-When the deploy completes, the **Docker Image** and **DAG Bundle Version** fields in the Cloud UI are updated depending on the type of deploy you completed. 
-
-- The **Docker Image** field displays a unique identifier generated by a Continuous Integration (CI) tool or a timestamp generated by the Astro CLI after you complete an image deploy. 
-- The **DAG Bundle Version** field displays a unique timestamp generated by the Astro CLI after you complete an image deploy or a DAG-only deploy. If you do not have DAG-only deploys enabled, the DAG bundle version field isn't populated.
-
-To confirm a deploy was successful, verify that the running versions of your Docker image and DAG bundle have been updated.
-
-1. In the Cloud UI, select a Workspace and then select a Deployment.
-2. Review the information in the **Docker Image** and **DAG bundle version** fields to determine the Deployment code version.
-
-## Step 8: Deploy your Astro Project to your Astro Deployment
+## Step 7: Deploy your Astro Project to your Astro Deployment
 
 To deploy your Astro project, run:
 
@@ -200,15 +153,15 @@ After you select a Deployment, the CLI parses your DAGs to ensure that they don'
 
 If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
-## Step 9: Trigger your DAG on Astro
+## Step 8: Trigger your DAG on Astro
 
-A **DAG run** is an instance of a DAG running on a specific date. Let's trigger a run of the `example-dag-basic` DAG that was generated with your Astro project.
+A **DAG run** is an instance of a DAG running at a specifically scheduled time. Now that your code has deployed, you can trigger a run of the `example-dag-basic` DAG that was generated with your Astro project.
 
 To provide a basic demonstration of an ETL pipeline, this DAG creates an example JSON string, calculates a value based on the string, and prints the results of the calculation to the Airflow logs.
 
-Before you can run any DAG in Astro, you have to unpause it in your remote Airflow instance. 
+Before you can run any DAG in Astro, you have to unpause it in your remote Airflow instance and then manually trigger a DAG run. 
 
-1. Open Airflow in the Astro UI. Then, to unpause `example-dag-basic`, click the slider button next to its name. Once you unpause it, the DAG starts to run on the schedule defined in its code.
+1. Open Airflow in the Astro UI. To unpause `example-dag-basic`, click the slider button next to its name, and the DAG starts to run on the schedule defined in its code.
 
     ![Pause DAG slider in the Airflow UI](/img/docs/tutorial-unpause-dag.png)
 
