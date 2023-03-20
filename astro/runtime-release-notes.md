@@ -24,6 +24,16 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 7.4.1
+
+- Release date: March 17, 2023
+- Airflow version: 2.5.2
+
+### Early access Airflow bug fixes
+
+- Ensure that `dag.partial_subset` doesn't mutate task group properties ([30129](https://github.com/apache/airflow/pull/30129))
+- Revert fix for on_failure_callback when task receives a SIGTERM ([30165](https://github.com/apache/airflow/pull/30165))
+
 ## Astro Runtime 7.4.0
 
 - Release date: March 15, 2023
@@ -586,7 +596,7 @@ To access the source code of this package, visit the [Astronomer Providers GitHu
 ### Additional improvements
 
 - Improved performance when upgrading to Astro Runtime 5.0.x
-- Bumped the [`openlineage-airflow` dependency](https://openlineage.io/integration/apache-airflow/) to `v0.8.1`
+- Bumped the [`openlineage-airflow` dependency](https://openlineage.io/docs/integrations/airflow/) to `v0.8.1`
 
 ## Astro Runtime 5.0.0
 
@@ -658,7 +668,7 @@ Astro Runtime 4.2.7 includes the following bug fixes from later Apache Airflow r
     - [CVE-2022-1587](https://avd.aquasec.com/nvd/2022/cve-2022-1587/)
     - [CVE-2022-3999](https://avd.aquasec.com/nvd/2022/cve-2022-3999/)
     - [CVE-2022-37434](https://avd.aquasec.com/nvd/2022/cve-2022-37434/)
-    - [CVE-2022-5197](https://avd.aquasec.com/nvd/2022/cve-2022-5197/)
+    - [DSA-5197](https://www.debian.org/security/2022/dsa-5197)
     - [CVE-2022-2509](https://avd.aquasec.com/nvd/2022/cve-2022-2509/)
     - [CVE-2022-46828](https://avd.aquasec.com/nvd/2022/cve-2022-46828/)
     - [CVE-2022-1664](https://avd.aquasec.com/nvd/2022/cve-2022-1664/)
@@ -714,7 +724,7 @@ For more information about deferrable operators and how to use them, see [Deferr
 
 ### Additional improvements
 
-- Bump the [`openlineage-airflow` provider package](https://openlineage.io/integration/apache-airflow/) to `v0.6.2`
+- Bump the [`openlineage-airflow` provider package](https://openlineage.io/docs/integrations/airflow/) to `v0.6.2`
 
 ## Astro Runtime 4.2.0
 
@@ -729,7 +739,7 @@ For more information, see [Deferrable operators](https://docs.astronomer.io/lear
 
 ### Additional improvements
 
-- Bump the [`openlineage-airflow` provider package](https://openlineage.io/integration/apache-airflow/) to `v0.6.1`
+- Bump the [`openlineage-airflow` provider package](https://openlineage.io/docs/integrations/airflow/) to `v0.6.1`
 
 ## Astro Runtime 4.1.0
 
@@ -780,7 +790,7 @@ These are all [deferrable operators](https://docs.astronomer.io/learn/deferrable
 
 ### Additional improvements
 
-- The [`openlineage-airflow` provider package](https://openlineage.io/integration/apache-airflow/) is now installed in Runtime by default.
+- The [`openlineage-airflow` provider package](https://openlineage.io/docs/integrations/airflow/) is now installed in Runtime by default.
 
 ## Astro Runtime 4.0.8
 
