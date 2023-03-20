@@ -102,10 +102,6 @@ module.exports = {
         }
       }
     },
-    newsletterForm: {
-      title: "Sign Up for Monthly Updates",
-      buttonText: "Submit"
-    },
     softwareNav: {
       items: [
         {
