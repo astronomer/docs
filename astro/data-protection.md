@@ -21,7 +21,7 @@ Every cluster in your data plane has its own certificates which were generated w
 
 All data at rest across control and data planes is encrypted with AES-256, one of the strongest block ciphers available. This is done using native cloud provider technologies.
 
-Specifically, control plane data is encrypted on disk with a platform-managed key, including backups and the temporary files created while DB queries are running. Likewise, data plane data is server-side encrypted and volume encrypted, using encryption keys managed by the cloud provider and anchored by hardware security appliances. All resources provisioned across both planes leverage cloud provider envelope encryption wherever possible in accordance with a [defense in depth security strategy](https://www.us-cert.gov/bsi/articles/knowledge/principles/defense-in-depth).
+Specifically, control plane data is encrypted on disk with a platform-managed key, including backups and the temporary files created while DB queries are running. Likewise, data plane data is server-side encrypted and volume encrypted, using encryption keys managed by the cloud provider and anchored by hardware security appliances. All resources provisioned across both planes leverage cloud provider envelope encryption wherever possible in accordance with a [defense in depth security strategy](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)).
 
 ## Deployment network isolation
 

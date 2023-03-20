@@ -43,7 +43,7 @@ If you are using data lineage, you will likely have a lineage tool that collects
 
 The purpose of a standard like OpenLineage is to create a more cohesive lineage experience across the industry and reduce duplicated work for stakeholders. It allows for a simpler, more consistent experience when integrating lineage with many different tools, similar to how Airflow providers reduce the work of DAG authoring by providing standardized modules for integrating Airflow with other tools.
 
-If you are working with lineage metadata from Airflow, the integration is built from OpenLineage using the `openlineage-airflow` package. You can read more about that integration in the [OpenLineage documentation](https://openlineage.io/integration/apache-airflow/).
+If you are working with lineage metadata from Airflow, the integration is built from OpenLineage using the `openlineage-airflow` package. You can read more about that integration in the [OpenLineage documentation](https://openlineage.io/docs/integrations/airflow/).
 
 ### Core concepts
 
@@ -86,4 +86,4 @@ OpenLineage is rapidly evolving, and new functionality and integrations are bein
 
 - You must be running Airflow 2.3.0+ with OpenLineage 0.8.1+ to get lineage metadata for *failed* task runs.
 - Only some operators have bundled extractors (needed to collect lineage metadata out of the box). To see which extractors currently exist, check out the [OpenLineage repo](https://github.com/OpenLineage/OpenLineage/tree/main/integration/airflow/openlineage/airflow/extractors). To get lineage metadata from other operators, you can create your own [custom extractor](https://openlineage.io/blog/extractors/) or leverage the [default extractor](https://openlineage.io/docs/integrations/airflow/operator) (in Airflow 2.3+) to modify your Airflow operators to gather lineage metadata.
-- To get lineage metadata from an external system connected to Airflow, such as [Apache Spark](https://openlineage.io/integration/apache-spark/), you'll need to configure an [OpenLineage integration](https://openlineage.io/integration) with that system in addition to Airflow.
+- To get lineage metadata from an external system connected to Airflow, such as [Apache Spark](https://openlineage.io/docs/integrations/spark/), you'll need to configure an [OpenLineage integration](https://openlineage.io/docs/integrations/about) with that system in addition to Airflow.

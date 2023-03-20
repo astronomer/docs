@@ -206,7 +206,7 @@ You can now view all available facets for a job run, including [custom facets](h
 
 ### Security fixes
 
-- Fixed [CVE-2023-0286](https://avd.aquasec.com/nvd/2022/cve-2023-0286/).
+- Fixed [CVE-2023-0286](https://nvd.nist.gov/vuln/detail/CVE-2023-0286).
 
 ## February 7, 2023
 
@@ -1202,7 +1202,7 @@ You can now create new clusters in:
 - `us-west-1`
 - `us-west-2`
 
-For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](https://docs.astronomer.io/resource-reference-aws.md#aws-region).
+For a full list of AWS regions supported on Astro, see [Resources required for Astro on AWS](https://docs.astronomer.io/resource-reference-aws#aws-region).
 
 ### Additional improvements
 

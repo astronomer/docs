@@ -63,7 +63,7 @@ All Astro Runtime images have the following open source provider packages pre-in
 
 - Amazon [`apache-airflow-providers-amazon`](https://pypi.org/project/apache-airflow-providers-amazon/)
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)
-- Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astronomer-sdk-python/)
+- Astro Python SDK [`astro-sdk-python`](https://pypi.org/project/astro-sdk-python/)
 - Apache Hive [`apache-airflow-providers-apache-hive`](https://pypi.org/project/apache-airflow-providers-apache-hive/)
 - Apache Livy [`apache-airflow-providers-apache-livy`](https://pypi.org/project/apache-airflow-providers-apache-livy/)
 - Databricks [`apache-airflow-providers-databricks`](https://pypi.org/project/apache-airflow-providers-databricks/)

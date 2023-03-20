@@ -173,8 +173,6 @@ On Astronomer, the equivalent of 1AU is: `requests={"cpu": "100m", "memory": "38
 
 By default, the KubernetesPodOperator will look for images hosted publicly on [Docker Hub](https://hub.docker.com/). If you want to pull images from a private registry, you may do so.
 
-> **Note:** The KubernetesPodOperator doesn't support passing in `image_pull_secrets` until [Airflow 1.10.2](https://github.com/apache/airflow/blob/master/CHANGELOG.txt#L526).
-
 To pull images from a private registry on Astronomer Software:
 
 1. Retrieve a `config.json` file that contains your Docker credentials by following the [Docker documentation](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials). The generated file should look something like this:
