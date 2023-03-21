@@ -5,6 +5,8 @@ id: jenkins
 description: Use pre-built templates to get started with automating code deploys from Jenkins to Astro 
 ---
 
+import {siteVariables} from '@site/src/versions';
+
 Use the following templates to automate code deploys to Astro using [Jenkins](https://www.jenkins.io/).
 
 ## Image-only templates

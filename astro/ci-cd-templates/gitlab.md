@@ -7,7 +7,11 @@ description: Use pre-built templates to get started with automating code deploys
 
 Use the following templates to automate code deploys to Astro using [GitLab](https://gitlab.com/).
 
-## Single branch implementation
+## Image-only templates
+
+Image-only deploy templates build a Docker image and push it to Astro whenever you update any file in your Astro project.
+
+### Single branch implementation
 
 Use this template to push code to from a GitLab repository to a single GitLab repository to Astro.
 
@@ -38,7 +42,7 @@ Use this template to push code to from a GitLab repository to a single GitLab re
        - main
    ```
 
-## Multiple branch implementation
+### Multiple branch implementation
 
 Use this template to push code to both a development and a production Deployment on Astro using [GitLab](https://gitlab.com/).
 
@@ -95,7 +99,3 @@ When you create environment variables that will be used in multiple branches, yo
         only:
           - main
    ```
-
-
-</TabItem>
-</Tabs>

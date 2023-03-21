@@ -89,6 +89,3 @@ To automate code deploys across multiple Deployments using [AWS CodeBuild](https
    3. In your AWS CodeBuild project, create a [webhook event](https://docs.aws.amazon.com/codebuild/latest/userguide/webhooks.html) for the source provider where your Astro project is hosted, such as BitBucket or GitHub. When configuring the webhook, select an event type of `PUSH`.
 
 Your `buildspec.yml` file now triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `main` branch of your repository.
-
-</TabItem>
-</Tabs>
