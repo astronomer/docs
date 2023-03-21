@@ -29,7 +29,7 @@ Release date: March 21, 2023
     astro config set airflow.expose_port true
     ```
 
-- When you trigger a DAG deploy to Astro, the CLI now includes the name of the DAG bundle version that it pushed. You can use this name to verify that your Deployment is running the correct version of your DAGs after a deploy.
+- When you trigger a DAG deploy to Astro, the CLI now includes the name of the DAG bundle version that it pushed. You can use this name to verify that your Deployment uses the correct version of your DAGs after a deploy.
 - If you add the environment variable `ASTRO_API_TOKEN=<workspace-api-token>` to your environment, the Astro CLI will use the specified Workspace API token to perform Workspace and Deployment actions without requiring you to log in. 
 - You can now disable [`astro run`](cli/astro-run.md) commands and exclude `astro-run-dag` from any images built by the CLI using the following command:
 
