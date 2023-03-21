@@ -40,7 +40,7 @@ astro workspace user remove
 ## Related commands
 
 - [`astro workspace user add`](cli/astro-workspace-user-add.md)
-- [`astro organization user remove`](cli/astro-organization.md)
+- [`astro organization user update`](cli/astro-organization-user-update.md)
 
 </TabItem>
 <TabItem value="software">
