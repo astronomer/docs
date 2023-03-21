@@ -32,7 +32,7 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 
 ## Update or delete a Workspace API token
 
-If you delete an API token, make sure that no existing CI/CD pipelines are using it. Once deleted, an API token and secret cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
+If you delete a Workspace API token, make sure that no existing CI/CD pipelines are using it. Once deleted, an API token and secret cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
 1. In the Cloud UI, open your Workspace.
    
@@ -46,9 +46,9 @@ If you delete an API token, make sure that no existing CI/CD pipelines are using
 
 ## Use a Workspace API token with the Astro CLI
 
-To use a Workspace API token with Astro CLI, you must make your API token available to the system running the Astro CLI using the `ASTRO_API_TOKEN` environment variable. 
+To use a Workspace API token with Astro CLI, specify the `ASTRO_API_TOKEN` environment variable in the system running the Astro CLI.  
 
-For example, to automate Astro CLI Workspace commands on a Mac computer, run the following command to set a temporary value for the environment variable:
+For example, to automate Astro CLI Workspace commands on a Mac, run the following command to set a temporary value for the environment variable:
 
 ```sh
 export ASTRO_API_TOKEN=<your-token>
@@ -64,7 +64,7 @@ If you have both `ASTRO_API_TOKEN` and `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRE
 
 ### Use a Workspace API token for CI/CD
 
-You can use Workspace API tokens and the Astro CLI to automate various Workspace and Deployment management workflows in CI/CD. 
+You can use Workspace API tokens and the Astro CLI to automate various Workspace and Deployment management actions in CI/CD. 
 
 For all use cases, you must make the following environment variable available to your CI/CD environment:
 
