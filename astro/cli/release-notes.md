@@ -42,7 +42,7 @@ Release date: March 21, 2023
 ### Bug fixes
 
 - Fixed an issue where the default DAG integrity test would sometimes generate an error for valid uses of `os.getenv(key,default)`.
-- Fixed a few bugs in the default Astro project DAGs.
+- Fixed bugs in the default Astro project DAGs.
 
 ## Astro CLI 1.11.0
 
