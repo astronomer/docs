@@ -98,7 +98,7 @@ Now that you have a staging table in Snowflake and some example data ready to lo
     AIRFLOW__CORE__XCOM_BACKEND='astro.custom_backend.astro_custom_backend.AstroCustomXcomBackend'
     ```
 
-    Learn more about how the Astro SDK uses XCom backends in the [Astro SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/guides/xcom_backend.html).
+    Learn more about how the Astro SDK uses XCom backends using the [Astro SDK documentation](https://astro-sdk-python.readthedocs.io/en/stable/guides/xcom_backend.html).
 
 4. Run the following command to start your project in a local environment:
 
@@ -127,7 +127,7 @@ Now that you have a staging table in Snowflake and some example data ready to lo
     - Account: `<your_account>`. This is the account name found in the URL where you can log into Snowflake, it has the format xy12345.
     - Warehouse: `ASTRO_SDK_DW`
     - Database: `ASTRO_SDK_DB`
-    - Region: `<your_region>` (something like `us-east-1` or `us-central1.gcp`)
+    - Region: `<your_region>` (for example, `us-east-1` or `us-central1.gcp`)
     - Role: `ACCOUNTADMIN`
 
 ## Step 4: Create and populate some tables in Snowflake
