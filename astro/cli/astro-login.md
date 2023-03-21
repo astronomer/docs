@@ -49,7 +49,7 @@ astro login --login-link
 # The CLI provides a link to the Cloud UI that you can manually open in a web browser.
 
 astro login --token-login <auth-token>
-# Copy a generated token from the UI (cloud.astronomer.io/token) and use it with this command. Use this flag for a browserless login.
+# Copy a generated token from the UI (cloud.astronomer.io/token) and use it with this command for browserless login.
 ```
 
 </TabItem>
