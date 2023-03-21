@@ -29,7 +29,7 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 Workspace API tokens can be used to automate actions such as adding users to a Workspace and creating new Deployments, as well as everything you can automate with a [Deployment API key](api-keys.md). You can customize the role and expiration date of the token to give it the minimum required permissions for the task it's completing.
 
-To create and use Workspace API tokens, see [Workspace API tokens]  (link to follow).
+To create and use Workspace API tokens, see [Workspace API tokens](workspace-api-tokens.md).
 
 ### Additional improvements
 
