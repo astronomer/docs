@@ -36,7 +36,7 @@ To create and use Workspace API tokens, see [Workspace API tokens]  (link to fol
 - Port 80 is no longer used for certificate management on the data plane. 
 - To switch Organizations in the Cloud UI, you now use the **Switch Organization** button next to your Organization's name.
 
-    ![Switch Organizations button](/img/release-notes/switch-organizations.md)
+    ![Switch Organizations button](/img/release-notes/switch-organizations.png)
 
 ## March 15, 2023
 
