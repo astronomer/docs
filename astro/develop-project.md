@@ -56,7 +56,7 @@ The command builds your Astro project into a Docker image and creates the follow
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
 - **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
-After the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`. As long as your Airflow environment is running, any changes you make in your `dags`, `plugins`, and `include` directories are automatically applied without needing to restart the environment. 
+After the project builds, you can access the Airflow UI at `http://localhost:8080/`. You can also access your Postgres database at `localhost:5432/postgres`. As long as your Airflow environment is running, any changes you make in your `dags`, `plugins`, and `include` directories are automatically applied without needing to restart the environment. 
 
 ### Restart your local environment
 
@@ -93,15 +93,27 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 ## Add utility files
 
-To reference utility files from your DAG code, such as Python scripts and SQL queries, create a folder in `dags` named `utils` and add the files to this folder. If you're running Airflow locally, apply these changes to your environment by refreshing the Airflow UI.
+Airflow DAGs sometimes require utility files to run workflows. For example, a DAG might need to reference a SQL file to run a query against a database. Using utility files helps make your DAGs idempotent and minimize the amount of code you have in your DAG files. 
+
+To make utility files accessible to your DAGs on Astro, you must add them to the `dags` folder of your Astro project. When adding utility files, you can both have a common `utils` folder accessible to all DAGs, as well as folders that store utility files only for specific DAGs. The following example `dags` directory includes both types of utility files:
+
+```text
+└── dags
+    ├── my_dag
+    │   ├── my_dag.py
+    │   └── my_dag_utils.py  # specific DAG utils
+    └── utils
+        └── common_utils.py # common utils
+```
+
+To reference utility files from your DAG code, such as Python scripts and SQL queries:
+
+1. To add utility files which are shared between all your DAGs, create a folder named `utils` in the `dags` directory of your Astro project. To add utility files only for a specific DAG, create a new folder in `dags` to store both your DAG file and your utility file. 
+2. Add your utility files to the folder you created.
+3. Reference your utility files in your DAG code.
+4. Apply your changes. If you're developing locally, refresh the Airflow UI in your browser.
 
 If you're using [DAG-only deploys](https://docs.astronomer.io/astro/deploy-code#deploy-dags-only) on Astro, changes to this folder are deployed when you run `astro deploy --dags` and do not require restarting your Deployment. 
-
-## Add plugins 
-
-Airflow plugins enable custom features in Airflow, such as new pages in the Airflow UI or custom alerting and monitoring tools. To use an Airflow plugin, add your plugin files to the `plugins` folder of your Astro project. See [Airflow plugins](https://docs.astronomer.io/learn/using-airflow-plugins) for examples of creating and using Airflow plugins.
-
-To apply changes from this folder to a local Airflow environment, [restart your local environment](develop-project.md#restart-your-local-environment).
 
 ## Add Airflow connections, pools, variables
 
@@ -123,7 +135,7 @@ Use the `include` folder of your Astro project to store files for testing locall
 
 If you're running Airflow locally, apply your changes by refreshing the Airflow UI.
 
-### Configure `airflow_settings.yaml` (local development only)
+### Configure `airflow_settings.yaml` (Local development only)
 
 The `airflow_settings.yaml` file includes a template with the default values for all possible configurations. To add a connection, variable, or pool, replace the default value with your own.
 
@@ -260,6 +272,12 @@ my_project
 ## Advanced configuration
 
 The following configurations are specific to advanced use cases. 
+
+### Add plugins 
+
+If you need to build a custom view in the Airflow UI or build an application on top of the Airflow metadata database, you can use Airflow plugins. To use an Airflow plugin, add your plugin files to the `plugins` folder of your Astro project. To apply changes from this folder to a local Airflow environment, [restart your local environment](develop-project.md#restart-your-local-environment).
+
+To learn more about Airflow plugins and how to build them, see [Airflow Plugins](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/plugins.html) in Airflow documentation or the Astronomer [Airflow plugins](https://docs.astronomer.io/learn/using-airflow-plugins) guide.
 
 ### Specify files to ignore
 
