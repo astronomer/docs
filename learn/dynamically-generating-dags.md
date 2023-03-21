@@ -211,11 +211,11 @@ This is a straightforward example that works only if all of the DAGs follow the 
 
 A notable tool for dynamically creating DAGs from the community is [gusty](https://github.com/chriscardillo/gusty). `gusty` is an open source Python library for dynamically generating Airflow DAGs. Tasks can be created from YAML, Python, SQL and R Markdown files, as well as Jupyter Notebooks.
 
-You can install gusty in your Airflow environment by running `pip install gusty` in your command line. Astro CLI users only need to add `gusty` to the `requirements.txt` file. 
+You can install gusty in your Airflow environment by running `pip install gusty` in the command line. Astro CLI users can use the package by adding `gusty` to the `requirements.txt` file. 
 
-To use gusty, create a new directory in your `dags` folder that will contain all gusty DAGs. All sub-directories of this folder will define DAGs. If you want to use task groups to organize your DAG add tasks within another subdirectory. 
+To use gusty, create a new directory in your `dags` folder that will contain all gusty DAGs. Subdirectories of this folder will define DAGs, while nested subdirectories will define task groups within their respective DAGs.
 
-This example file structure will lead to the creation of 2 DAGs from the contents of the `my_gusty_dags` directory. `my_dag_1` contains two tasks each defined in their own YAML file. `my_dag_2` contains one task `task_0` defined in a YAML file, as well as the two task groups `my_task_group_1` and `my_task_group_2`. The latter task group contains two tasks defined in SQL files.
+This example file structure will lead to the creation of 2 DAGs from the contents of the `my_gusty_dags` directory. `my_dag_1` contains two tasks each defined in their own YAML file. `my_dag_2` contains one task `task_0` defined from a YAML file, as well as the two task groups `my_task_group_1` and `my_task_group_2`, containing two tasks each. The latter task group contains two tasks defined from SQL files.
 
 Note that it is possible to use DAGs defined using gusty and regularly defined DAGs in the same Airflow environment by adding the regular DAGs to the `dags` directory outside of the `my_gusty_dags` folder.
 
