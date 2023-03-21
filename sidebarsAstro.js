@@ -266,7 +266,6 @@ module.exports = {
         'cli/astro-dev-restart',
         'cli/astro-login',
         'cli/astro-logout',
-        'cli/astro-organization',
         {
           type: "category",
           label: "astro organization",
