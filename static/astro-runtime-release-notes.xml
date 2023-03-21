@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 7.3.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-730</link><description><![CDATA[<ul>
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><atom:link href="https://docs.astronomer.io/astro-runtime-release-notes.rss" rel="self" type="application/rss+xml"/><title>Astro Runtime Release Notes</title><link>https://docs.astronomer.io/astro/runtime-release-notes</link><description>Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what&apos;s new, this document will provide a regular summary of all changes released to Astro Runtime.</description><language>en-US</language><item><title>Astro Runtime 7.4.1</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-741</link><description><![CDATA[<ul>
+<li>Release date: March 17, 2023</li>
+<li>Airflow version: 2.5.2</li>
+</ul><h3>Early access Airflow bug fixes</h3><ul>
+<li>Ensure that <code>dag.partial_subset</code> doesn't mutate task group properties (<a href="https://github.com/apache/airflow/pull/30129">30129</a>)</li>
+<li>Revert fix for on_failure_callback when task receives a SIGTERM (<a href="https://github.com/apache/airflow/pull/30165">30165</a>)</li>
+</ul>]]></description></item><item><title>Astro Runtime 7.4.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-740</link><description><![CDATA[<ul>
+<li>Release date: March 15, 2023</li>
+<li>Airflow version: 2.5.2</li>
+</ul><h3>Airflow 2.5.2</h3><p>Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.2. Airflow 2.5.2 contains a number of bug fixes including:</p><ul>
+<li>Fix validation of date-time field in API and Parameter schemas (<a href="https://github.com/apache/airflow/pull/29395">29395</a>)</li>
+<li>DAG list sorting lost when switching page (<a href="https://github.com/apache/airflow/pull/29756">29756</a>)</li>
+</ul><p>For a complete list of the changes, see the <a href="https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html#airflow-2-5-2-2023-03-15">Apache Airflow 2.5.2 release notes</a>.</p><h3>Additional improvements</h3><ul>
+<li>Upgraded <code>astro-sdk-python</code> to 1.5.3, which includes Openlineage facets for Microsoft SQL server and restores some pandas load option classes. See the <a href="https://astro-sdk-python.readthedocs.io/en/stable/CHANGELOG.html#id1">Astro Python SDK changelog</a> for a complete list of changes.</li>
+<li>Upgraded <code>astronomer-providers</code> to 1.15.1, which includes a new async sensor <code>SnowflakeSensorAsync</code> and a number of bug fixes. See the <a href="https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1151-2023-03-09"><code>astronomer-providers</code> changelog</a> for a complete list of changes.</li>
+<li>Upgraded <code>openlineage-airflow</code> to 0.21.1, which includes support for capturing custom environment variables from Spark and a number of bug fixes. See the <a href="https://github.com/OpenLineage/OpenLineage/releases/tag/0.21.1">OpenLineage changelog</a> for a complete list of changes.</li>
+</ul>]]></description></item><item><title>Astro Runtime 7.3.0</title><link>https://docs.astronomer.io/astro/runtime-release-notes#astro-runtime-730</link><description><![CDATA[<ul>
 <li>Release date: February 14, 2023</li>
 <li>Airflow version: 2.5.1</li>
 </ul><h3>Early access Airflow bug fixes</h3><ul>
@@ -329,7 +345,7 @@
 <li><a href="https://avd.aquasec.com/nvd/2022/cve-2022-1587/">CVE-2022-1587</a></li>
 <li><a href="https://avd.aquasec.com/nvd/2022/cve-2022-3999/">CVE-2022-3999</a></li>
 <li><a href="https://avd.aquasec.com/nvd/2022/cve-2022-37434/">CVE-2022-37434</a></li>
-<li><a href="https://avd.aquasec.com/nvd/2022/cve-2022-5197/">CVE-2022-5197</a></li>
+<li><a href="https://www.debian.org/security/2022/dsa-5197">DSA-5197</a></li>
 <li><a href="https://avd.aquasec.com/nvd/2022/cve-2022-2509/">CVE-2022-2509</a></li>
 <li><a href="https://avd.aquasec.com/nvd/2022/cve-2022-46828/">CVE-2022-46828</a></li>
 <li><a href="https://avd.aquasec.com/nvd/2022/cve-2022-1664/">CVE-2022-1664</a></li>
