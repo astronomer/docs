@@ -279,7 +279,7 @@ dependencies:
 env: {"MY_ENV_VAR": "Hello!"}
 ```
 
-Learn more about gusty features in the [repository README](https://github.com/chriscardillo/gusty/blob/main/README.md). Additionally, you can try out a two fully functional gusty environments, the [gusty-demo](https://github.com/chriscardillo/gusty-demo) and the [gusty-demo-lite](https://github.com/chriscardillo/gusty-demo-lite).
+Learn more about gusty features in the [repository README](https://github.com/chriscardillo/gusty/blob/main/README.md). Additionally, you can explore two fully functional gusty environments, the [gusty-demo](https://github.com/chriscardillo/gusty-demo) and the [gusty-demo-lite](https://github.com/chriscardillo/gusty-demo-lite) in the respective repositories.
 
 Gusty is one of several open source tools that allow you to generate DAGs. Another open source tool for DAG generations from YAML files is [dag-factory](https://github.com/ajbosco/dag-factory).
 
