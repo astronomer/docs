@@ -1,8 +1,8 @@
 ---
-sidebar_label: "astro organization list"
-title: "astro organization list"
-id: astro-organization-list
-description: Reference documentation for astro organization list command.
+sidebar_label: "astro organization switch"
+title: "astro organization switch"
+id: astro-organization-switch
+description: Reference documentation for astro organization switch command.
 hide_table_of_contents: true
 ---
 
