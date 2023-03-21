@@ -225,47 +225,43 @@ After this setup, you're ready to run the DAG!
 
 Note that while this example is specific to Snowflake, the concepts apply to any database you might be using. If a transfer operator doesn't exist for your specific source and destination tools, you can always write your own (and maybe contribute it back to the Airflow project)!
 
-### Example 4 - Use dag-factory
+### Example 4 - Use gusty
 
-If you're unfamiliar with Airflow or Python, you can use [dag-factory](https://github.com/ajbosco/dag-factory) to generate DAGs using a YAML configuration file.
+If you're unfamiliar with Airflow or Python, you can use [gusty](https://github.com/chriscardillo/gusty) to generate DAGs directly from your SQL code.
 
-Once you've installed dag-factory in your Airflow environment, you can add your SQL query tasks to a YAML configuration file and add this to your project's `include/` directory:
+Once you've installed gusty in your Airflow environment, you can add a YAML statement on top of your SQL file specifying which operator to use, operator parameters and task dependencies.
 
-```yaml
-dag_factory_query:
-  default_args:
-    owner: 'example_owner'
-    start_date: 2020-12-02
-    retries: 1
-    retry_delay_sec: 300
-  schedule: '0 3 * * *'
-  concurrency: 1
-  max_active_runs: 1
-  dagrun_timeout_sec: 60
-  default_view: 'tree'  # or 'graph', 'duration', 'gantt', 'landing_times'
-  orientation: 'LR'  # or 'TB', 'RL', 'BT'
-  tasks:
-    task_1:
-      operator: airflow.contrib.operators.snowflake_operator.SnowflakeOperator
-      snowflake_conn_id: 'snowflake'
-      sql: 'SELECT * FROM STATE_DATA'
+The example below shows how to turn a simple SQL statement into an Airflow task using the PostgresOperator with the `postgres_default` connection ID. This SQL file `task_1.sql` defines a task that will only run once `task_0` of the same DAG has completed successfully.
+
+```SQL
+---
+operator: airflow.providers.postgres.operators.postgres.PostgresOperator
+conn_id: postgres_default
+dependencies: ["task_0"]
+---
+
+SELECT column_1
+FROM table_2;
 ```
 
-Then, create a DAG file:
+Add your modified SQL files within a gusty directory structure:
 
-```python
-from airflow import DAG
-import dagfactory
-
-dag_factory = dagfactory.DagFactory("/usr/local/airflow/include/config_file.yml")
-
-dag_factory.clean_dags(globals())
-dag_factory.generate_dags(globals())
+```text
+.
+└── dags
+    ├── my_gusty_dags
+    │   ├── my_dag_1
+    │   │   ├── METADATA.yaml
+    │   │   ├── task_0.sql
+    │   │   └── task_1.sql
+    └── creating_gusty_dags.py
 ```
 
-Once you Deploy it, the DAG will show a single task the Airflow UI:
+View the [gusty section in the Dynamically generate DAGs in Airflow](dynamically-generating-dags.md#tools-for-dynamically-creating-dags) guide or the gusty documentation for example code for the `METADATA.yaml` and `creating_gusty_dags.py` files.
 
-![DAG Factory Graph](/img/guides/dag_factory_graph_view.png)
+The rendered `my_dag_1` DAG will contain two tasks defined as SQL files:
+
+![Gusty Graph](/img/guides/gusty_simple_postgres.png)
 
 ## Next steps
 
