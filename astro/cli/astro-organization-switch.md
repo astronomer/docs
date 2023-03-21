@@ -6,9 +6,6 @@ description: Reference documentation for astro organization list command.
 hide_table_of_contents: true
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
 Switch the Astro Organization where you're currently working.
 
 ## Usage
