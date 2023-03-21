@@ -46,7 +46,7 @@ If you delete an API token, make sure that no existing CI/CD pipelines are using
 
 ## Use a Workspace API token with the Astro CLI
 
-To use a Workspace API token with the Astro CLI, you must make your API token available to the system running the Astro CLI using the `ASTRO_API_TOKEN` environment variable. 
+To use a Workspace API token with Astro CLI, you must make your API token available to the system running the Astro CLI using the `ASTRO_API_TOKEN` environment variable. 
 
 For example, to automate Astro CLI Workspace commands on a Mac computer, run the following command to set a temporary value for the environment variable:
 
@@ -54,17 +54,17 @@ For example, to automate Astro CLI Workspace commands on a Mac computer, run the
 export ASTRO_API_TOKEN=<your-token>
 ```
 
-After you set the variables, you can run `astro deployment` and `astro workspace` commands for your Workspace without authenticating yourself to Astronomer. Astronomer recommends storing `ASTRO_API_TOKEN` as a secret before using it to automate the Astro CLI for production workflows.
+After you set the variable, you can run `astro deployment` and `astro workspace` commands for your Workspace without authenticating yourself to Astronomer. Astronomer recommends storing `ASTRO_API_TOKEN` as a secret before using it to automate the Astro CLI for production workflows.
 
 :::info
 
-If you have both `ASTRO_API_TOKEN` and `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET` set in an environment, your Astro Workspace token takes precedence and is used for all  Deployment actions. 
+If you have both `ASTRO_API_TOKEN` and `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET` set in an environment, your Astro Workspace token takes precedence and is used for all Deployment actions. 
 
 :::
 
-## Use an API token for CI/CD
+### Use a Workspace API token for CI/CD
 
-You can use Workspace API tokens to automate various Workspace and Deployment management workflows in CI/CD. 
+You can use Workspace API tokens and the Astro CLI to automate various Workspace and Deployment management workflows in CI/CD. 
 
 For all use cases, you must make the following environment variable available to your CI/CD environment:
 
@@ -72,5 +72,5 @@ For all use cases, you must make the following environment variable available to
 ASTRO_API_TOKEN=<your-token>
 ```
 
-For more information and examples, see [Automate code deploys with CI/CD](ci-cd.md).
+After you set this environment variable, you can run Astro CLI commands from CI/CD pipelines without needing to manually authenticate to Astro. For more information and examples, see [Automate code deploys with CI/CD](ci-cd.md).
 
