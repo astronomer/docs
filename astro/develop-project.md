@@ -95,7 +95,7 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 Airflow DAGs sometimes require utility files to run workflows. For example, a DAG might need to reference a SQL file to run a query against a database. Using utility files helps make your DAGs idempotent and minimize the amount of code you have in your DAG files. 
 
-To make utility files accessible to your DAGs on Astro, you must add them to the `dags` folder of your Astro project. When adding utility files, you can both have a common `utils` folder accessible to all DAGs, as well as folders that store utility files only for specific DAGs. The following example `dags` directory includes both types of utility files:
+As long as your utility files are in your `dags` folder, your DAGs can access them. Astronomer recommends organizing your utility files based on whether they're shared between DAGs or used only in specific DAGs. While your DAGs can still access DAG-specific utility files from other directories, this makes your project easier to manage and contribute to. In the following example, the `dags` folder includes both types of utility files:
 
 ```text
 └── dags
@@ -105,8 +105,6 @@ To make utility files accessible to your DAGs on Astro, you must add them to the
     └── utils
         └── common_utils.py # common utils
 ```
-
-To reference utility files from your DAG code, such as Python scripts and SQL queries:
 
 1. To add utility files which are shared between all your DAGs, create a folder named `utils` in the `dags` directory of your Astro project. To add utility files only for a specific DAG, create a new folder in `dags` to store both your DAG file and your utility file. 
 2. Add your utility files to the folder you created.
