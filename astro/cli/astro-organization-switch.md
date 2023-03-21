@@ -10,7 +10,7 @@ Switch the Astro Organization where you're currently working.
 
 ## Usage
 
-Run `astro organization switch <organization-id>` to switch between Organizations. In the Astro CLI, you can first run `astro organization list` to see a list of Organizations you can access and their IDs.
+Run `astro organization switch <organization-id>` to switch between Organizations. In the Astro CLI, you can first run `astro organization list` to see a list of Organizations that you can access and their IDs.
 
 
 ## Related Commands

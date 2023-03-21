@@ -271,11 +271,11 @@ module.exports = {
           type: "category",
           label: "astro organization",
           items: [
+            "cli/astro-organization-list",
+            "cli/astro-organization-switch",
             "cli/astro-organization-user-invite",
             "cli/astro-organization-user-list",
             "cli/astro-organization-user-update",
-            "cli/astro-organization-list",
-            "cli/astro-organization-switch",
           ],
         },
         'cli/astro-run',
