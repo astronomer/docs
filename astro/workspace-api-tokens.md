@@ -10,6 +10,7 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 - Creating and updating Deployments using a [Deployment file](manage-deployments-as-code.md)
 - Adding batches of users to a Workspace in a CI/CD pipeline. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
 - Creating preview Deployments whenever you create a feature branch in your Astro project Git repository. 
+- Performing Deployment-level actions on any Deployment in a Workspace, such as deploying code or making calls to the Airflow rest API. Workspace API tokens can complete the same actions as Deployment API keys for any Deployment in the Workspace. 
 
 ## Create a Workspace API token
 
@@ -22,9 +23,9 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 4. Configure the new Workspace API token:
 
     - **Name**: The name for the API token.
-    - **Description**: The Description for the API token.
+    - **Description**: Optional. The Description for the API token.
     - **Workspace Role**: The role that the API token can assume. See [User permissions](user-permissions.md#workspace-roles).
-    - **Expiration**: The duration that the API token can be used before it expires.
+    - **Expiration**: The number of days that the API token can be used before it expires.
 
 5. Click **Create API token**. A confirmation screen showing the token appears.
    
@@ -32,7 +33,7 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 
 ## Update or delete a Workspace API token
 
-If you delete a Workspace API token, make sure that no existing CI/CD pipelines are using it. Once deleted, an API token and secret cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
+If you delete a Workspace API token, make sure that no existing CI/CD pipelines are using it. Once deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
 1. In the Cloud UI, open your Workspace.
    
@@ -40,9 +41,27 @@ If you delete a Workspace API token, make sure that no existing CI/CD pipelines 
 
 3. Click **Edit** next to your API token.
 
-4. Update the name, description, workspace role, or expiration date of your token, then click **Save Changes**.
+4. Update the name, description, or Workspace role of your token, then click **Save Changes**.
    
 5. Optional. To delete a Workspace API token, click **Delete API Token**, enter `Delete`, and then click **Yes, Continue**.
+
+## Rotate a Workspace API token
+
+Rotating a Workspace API token lets you renew a token without needing to reconfigure its name, description, and permissions. You can also rotate a token if you lose your current token value and need it for additional workflows. 
+
+When you rotate a Workspace API token, you receive a new valid token that can be used in your existing workflows. The previous token value becomes invalid and any workflows using the old value stop working. 
+
+1. In the Cloud UI, open your Workspace.
+   
+2. Go to **Workspace Settings** > **Access Management** > **API Tokens**.
+
+3. Click **Edit** next to your API token.
+
+4. Click **Rotate token**. The Cloud UI rotates the token and shows the new token value. 
+
+5. Copy the new token value and store it in a safe place. You will not be able to retrieve this value from Astro again. 
+
+6. In any workflows using the token, replace the old token value with the new value you copied. 
 
 ## Use a Workspace API token with the Astro CLI
 
@@ -58,7 +77,7 @@ After you set the variable, you can run `astro deployment` and `astro workspace`
 
 :::info
 
-If you have both `ASTRO_API_TOKEN` and `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET` set in an environment, your Astro Workspace token takes precedence and is used for all Deployment actions. 
+If you have both `ASTRO_API_TOKEN` and `ASTRONOMER_KEY_ID`/`ASTRONOMER_KEY_SECRET` set in an environment, your Astro Workspace token takes precedence and is used for all Deployment actions in that Workspace. 
 
 :::
 
