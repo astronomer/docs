@@ -249,7 +249,10 @@ dag = create_dags(
     # provide the path to your gusty DAGs directory
     '/usr/local/airflow/dags/my_gusty_dags',
     # provide the namespace for gusty to use
-    globals()
+    globals(),
+    # By default, gusty places a LatestOnlyOperator at the root of the DAG.
+    # We can disable this behavior by setting latest_only=False
+    latest_only=False
 )
 ```
 
@@ -276,7 +279,8 @@ operator: airflow.operators.bash.BashOperator
 bash_command: echo $MY_ENV_VAR
 dependencies:
   - task_1
-env: {"MY_ENV_VAR": "Hello!"}
+env:
+    MY_ENV_VAR: "Hello!"
 ```
 
 Note that it is possible to use DAGs defined using `gusty` and regularly defined DAGs in the same Airflow environment by adding the regular DAGs to the `dags` directory outside of the `my_gusty_dags` folder.
