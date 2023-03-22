@@ -70,6 +70,22 @@ If you're upgrading a local Airflow environment, you don't need an Astro Deploym
 
     You must always specify the major, minor, and patch version of any given Astro Runtime version.
 
+## (Optional) Upgrade or pin provider package versions
+
+Minor Astro Runtime upgrades can include major provider package upgrades. To check the version of any provider package installed in the Runtime version you're upgrading to, run:
+
+```sh
+docker run --rm quay.io/astronomer/astro-runtime:<new-runtime-version> pip freeze | grep apache-airflow-providers
+```
+
+Run the same command for your existing Runtime version and compare provider packages between versions. If you see a package being upgraded that you're not yet ready to upgrade, pin the package version from your previous Runtime version in your Astro project `requirements.txt` file. For example, Runtime 7.4.1 has uses version 4.0.0 of `apache-airflow-providers-databricks`. To keep this version of the Databricks provider package when you upgrade to a later version of Runtime, you add the following line to your `requirements.txt` file:
+
+```text
+apache-airflow-providers-databricks==4.0.0
+```
+
+Similarly, review any currently pinned provider package versions in your `requirements.txt` file and determine whether you want to upgrade them alongside your Runtime upgrade.
+
 ## Test Astro Runtime locally
 
 Astronomer recommends testing new versions of Astro Runtime locally before upgrading a Deployment on Astro.
@@ -80,6 +96,8 @@ Astronomer recommends testing new versions of Astro Runtime locally before upgra
 4. Confirm that your local upgrade was successful by scrolling to the bottom of any page. You should see your new Astro Runtime version in the footer as well as the version of Airflow it is based on.
 
     ![Runtime Version banner - Local](/img/docs/image-tag-airflow-ui-local.png)
+
+5. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that the Astro Runtime upgrade included a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
 ## Deploy to Astronomer
 
