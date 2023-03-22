@@ -5,7 +5,7 @@ id: circleci
 description: Use pre-built templates to get started with automating code deploys from CircleCI to Astro 
 ---
 
-Use the following template to automate [single branch deploys](template-overview.md#template-types) to Astro using [CircleCI](https://circleci.com/).
+Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using [CircleCI](https://circleci.com/).
 
 ## Setup
 

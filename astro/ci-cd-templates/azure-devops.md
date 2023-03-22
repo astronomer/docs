@@ -5,7 +5,7 @@ id: azure-devops
 description: Use pre-built templates to get started with automating code deploys from Azure DevOps to Astro 
 ---
 
-Use the following template to automate [single branch deploys](template-overview.md#template-types) to Astro using [Azure DevOps](https://dev.azure.com/).
+Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using [Azure DevOps](https://dev.azure.com/).
 
 ## Setup
 

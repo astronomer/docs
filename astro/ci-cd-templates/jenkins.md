@@ -5,15 +5,25 @@ id: jenkins
 description: Use pre-built templates to get started with automating code deploys from Jenkins to Astro 
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
 Use the following templates to automate code deploys to Astro using [Jenkins](https://www.jenkins.io/).
 
 ## Image-only templates
 
-Image-only deploy templates build a Docker image and push it to Astro whenever you update any file in your Astro project.
+[Image-only deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
 
-### Single branch implementation
+<Tabs
+    defaultValue="standard"
+    groupId= "image-only-templates"
+    values={[
+        {label: 'Single branch', value: 'standard'},
+        {label: 'Multiple branch', value: 'multibranch'},
+        {label: 'Custom Image', value: 'custom'},
+    ]}>
+<TabItem value="standard">
 
 To automate code deploys to a single Deployment using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
@@ -53,9 +63,11 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
         }
     }`}</code></pre>
 
-    This Jenkinsfile triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
+    This `Jenkinsfile` triggers a code push to Astro every time a commit or pull request is merged to the `main` branch of your repository.
 
-### Multiple branch implementation
+</TabItem>
+
+<TabItem value="multibranch">
 
 To automate code deploys across multiple Deployments using [Jenkins](https://www.jenkins.io/), complete the following setup in a Git-based repository hosting an Astro project:
 
@@ -72,7 +84,7 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
 
     Be sure to set the values for your API credentials as secret.
 
-2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+2. At the root of your Git repository, add a [`Jenkinsfile`](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
     <pre><code parentName="pre">{`pipeline {
         agent any
@@ -114,7 +126,10 @@ To automate code deploys across multiple Deployments using [Jenkins](https://www
         }
     }`}</code></pre>
 
-    This Jenkinsfile triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
+    This `Jenkinsfile` triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `dev` or `main` branch of your repository.
+
+</TabItem>
+</Tabs>
 
 ## DAG-based templates
 
@@ -122,7 +137,7 @@ The DAG-based template uses the `--dags` flag in the Astro CLI to push DAG chang
 
 ### Single branch implementation
 
-Use the following template to implement DAG-only deploys with Jenkins.
+Use the following template to implement DAG-only deploys to a single Deployment using Jenkins.
 
 1. In your Jenkins pipeline configuration, add the following parameters:
 
@@ -132,7 +147,7 @@ Use the following template to implement DAG-only deploys with Jenkins.
 
     Be sure to set the values for your API credentials as secret.
 
-2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+2. At the root of your Git repository, add a [`Jenkinsfile`](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
     <pre><code parentName="pre">{`pipeline {
         agent any

@@ -5,13 +5,24 @@ id: github-actions
 description: Use GitHub Actions pre-built templates to get started with automating code deploys from GitHub to Astro 
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 GitHub templates use the Astronomer-maintained [Deploy Action](https://github.com/astronomer/deploy-action) to deploy code to Astronomer. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
 
 ## Image-only templates
 
-Image-only deploy templates build a Docker image and push it to Astro whenever you update any file in your Astro project.
+[Image-only deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
 
-### Single branch implementation
+<Tabs
+    defaultValue="standard"
+    groupId= "image-only-templates"
+    values={[
+        {label: 'Single branch', value: 'standard'},
+        {label: 'Multiple branch', value: 'multibranch'},
+        {label: 'Custom Image', value: 'custom'},
+    ]}>
+<TabItem value="standard">
 
 To automate code deploys to a single Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
 
@@ -43,7 +54,9 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
           uses: astronomer/deploy-action@v0.1
     ```
 
-### Multiple branch implementation
+</TabItem>
+
+<TabItem value="multibranch">
 
 The following template can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. 
 
@@ -98,7 +111,9 @@ The following template can be used to create a multiple branch CI/CD pipeline us
           uses: astronomer/deploy-action@v0.1
     ```
 
-### Custom image implementation
+</TabItem>
+
+<TabItem value="custom">
 
 If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
 
@@ -201,11 +216,22 @@ If your Astro project requires additional build-time arguments to build an image
 
   :::
 
+</TabItem>
+</Tabs>
+
 ## DAG-based templates
 
-The following templates are examples of how to implement DAG-only deploys in GitHub Actions. They use the [Deploy Actions](https://github.com/astronomer/deploy-action) `dag-deploy-enabled` option to implement a DAG-based deploy workflow.
+The following templates are examples of how to implement DAG-based deploys in GitHub Actions. They use the [Deploy Actions](https://github.com/astronomer/deploy-action) `dag-deploy-enabled` option to implement a DAG-based deploy workflow.
 
-### Single branch implementation
+<Tabs
+    defaultValue="standard"
+    groupId= "dag-based-templates"
+    values={[
+        {label: 'Single branch', value: 'standard'},
+        {label: 'Multiple branch', value: 'multibranch'},
+        {label: 'Custom Image', value: 'custom'},
+    ]}>
+<TabItem value="standard">
 
 To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
 
@@ -241,7 +267,9 @@ To automate code deploys to a Deployment using [GitHub Actions](https://github.c
 
 This Github Actions script checks the diff between your current commit and your `main` branch when a commit is pushed to `main`. Make sure to customize the script for your specific use case. 
 
-### Multiple branch implementation
+</TabItem>
+
+<TabItem value="multibranch">
 
 The following setup can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. The finished pipeline deploys your code to Astro as demonstrated in the following diagram:
 
@@ -301,7 +329,9 @@ This setup assumes the following prerequisites:
             dag-deploy-enabled: true
     ```
 
-### Custom image  implementation
+</TabItem>
+
+<TabItem value="custom">
 
 If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
 
@@ -362,3 +392,6 @@ If your Astro project requires additional build-time arguments to build an image
   If you need guidance configuring a CI/CD pipeline for a more complex use case involving custom Runtime images, reach out to [Astronomer support](https://support.astronomer.io/).
 
   :::
+
+</TabItem>
+</Tabs>

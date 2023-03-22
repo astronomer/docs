@@ -5,7 +5,7 @@ id: bitbucket
 description: Use pre-built templates to get started with automating code deploys from BitBucket to Astro 
 ---
 
-Use the following template to automate [single branch deploys](template-overview.md#template-types) to Astro using [BitBucket](https://bitbucket.org/product).
+Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using [BitBucket](https://bitbucket.org/product).
 
 ## Setup
 

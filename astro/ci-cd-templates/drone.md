@@ -5,7 +5,7 @@ id: drone
 description: Use pre-built templates to get started with automating code deploys from drone to Astro 
 ---
 
-Use the following template to automate [single branch deploys](template-overview.md#template-types) to Astro using [Drone CI](https://www.drone.io/).
+Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using [Drone CI](https://www.drone.io/).
 
 ## Prerequisites
 

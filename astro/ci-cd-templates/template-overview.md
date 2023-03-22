@@ -14,17 +14,17 @@ To decide which template is right for you and to learn more about CI/CD use case
 - A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - A CI/CD management tool, such as [GitHub Actions](https://docs.github.com/en/actions).
-- An [Astro project](create-project.md) that is hosted in a place that your CI/CD tool can access.
+- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
 
 ## Template types
 
-Templates allow you to configure automated workflows using popular CI/CD tools. Each template can be implemented without changes to produce a CI/CD pipeline. However, Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and processes.
+Templates allow you to configure automated workflows using popular CI/CD tools. Each template can be implemented without changes to produce a CI/CD pipeline, or you can customize them to your use case. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and processes.
 
-Template types differ based on how they push code to your Deployment when you update specific files in your project. Use
+Template types differ based on how they push code to your Deployment when you update specific files in your project.
 
 ### Image-only templates  
 
-Image-only templates build a Docker image and push it to Astro whenever you update any file in your Astro project. This type of template works well for development workflows that include complex Docker customization or logic.
+_Image-only templates_ build a Docker image and push it to Astro whenever you update any file in your Astro project. This type of template works well for development workflows that include complex Docker customization or logic.
 
 CI/CD templates that use image-only workflows do the following:
 
@@ -46,7 +46,7 @@ $ astro deploy
 
 ### DAG-based templates
 
-DAG-based templates use the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+_DAG-based templates_ use the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
 
 CI/CD templates that use the DAG-based workflow do the following:
 
@@ -91,8 +91,8 @@ fi
 
 Each template type supports a variety of implementations, some of which are documented for each tool:
 
-- Single branch: Deploys a single branch from your version control tool to Astro. This is the default template for all CI/CD tools. 
-- Multiple branch: Deploys multiple branches to separate Deployments on Astro.
-- Custom image: Deploys an Astro project with a customized Runtime image and additional build arguments.
+- _Single branch_: Deploys a single branch from your version control tool to Astro. This is the default template for all CI/CD tools. 
+- _Multiple branch_: Deploys multiple branches to separate Deployments on Astro.
+- _Custom image_: Deploys an Astro project with a customized Runtime image and additional build arguments.
 
 If a CI/CD tool has only one template listed, it is a single branch implementation of an image-only template.

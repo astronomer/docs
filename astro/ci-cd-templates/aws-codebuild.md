@@ -9,7 +9,7 @@ Use the following templates to automate code deploys to Astro using [AWS Codebui
 
 ## Image-only templates
 
-Image-only deploy templates build a Docker image and push it to Astro whenever you update any file in your Astro project.
+[Image-only deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
 
 ### Single branch implementation
 
