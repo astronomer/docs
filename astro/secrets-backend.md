@@ -55,6 +55,19 @@ Airflow checks for the value of an Airflow variable or connection in the followi
 
 Using secrets to set Airflow connections requires knowledge of how to generate Airflow connection URIs. If you plan to store Airflow connections on your secrets backend, see [URI format](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#connection-uri-format) for guidance on how to generate a connection URI.
 
+:::tip
+
+If you prefer to format your Airflow connections in the Airflow UI but you need to store them in a secrets backend, run the following command to export all connections from the metadata database of a locally running Astro project to your `.env` file as connection URIs:
+
+```sh
+astro dev object export --connections --env-export
+```
+
+You can then transfer your connections from your Astro project to your secrets backend as environment variables.
+
+:::
+
+
 ## Setup
 
 <Tabs

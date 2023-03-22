@@ -66,6 +66,8 @@ astro dev object export --connections --variables --env-export
 astro deployment variable create --deployment-name="My Deployment" --load --env .env
 ```
 
+These commands format your connections and variables as system environment variables, then push the variables to Astro. Connections are formatted as [URIs](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#uri-format).
+
 ### Manage connections and variables locally as environment variables
 
 You can use Airflow's system-level environment variables to store connections and variables for use by your DAGs. To do this locally, add each environment variable on its own line in your Astro project `.env` file. When you start your Airflow environment, the Astro CLI builds these variables into your Docker image and makes them available to your Airflow components. However, your connections and variables are not available to view in the Airflow UI. 
@@ -73,8 +75,8 @@ You can use Airflow's system-level environment variables to store connections an
 The benefits of managing Airflow connections and variables in your `.env` file are: 
 
 - If your local metadata database is corrupted or accidentally deleted, you still have access to all of your connections and variables. 
-- You can directly export the file to an Astro Deployment.
-- You can manage connections and variables as code.
+- You can export the file to an Astro Deployment using the Astro CLI.
+- You can manage connections and variables as code, allowing you to move and copy connections and variables between Deployments.
 
 The limitations of this method are:
 
@@ -113,8 +115,6 @@ If you prefer to format your Airflow connections or variables in the Airflow UI 
 astro dev object export --connections --variables --env-export
 ```
 
-Make sure to delete the previous connection from the Airflow UI after running this command. 
-
 :::
 
 #### Deploy to Astro
@@ -146,13 +146,11 @@ The limitations of this method are:
 
 :::tip
 
-If you prefer to format your Airflow connections in the Airflow UI but you want to store them as environment variables, run the following command to export all connections from the metadata database to your `.env` file:
+If you prefer to format your Airflow connections and variables in the Airflow UI but you want to store them in `airflow_settings.yaml`, run the following command to export all connections from the metadata database to your `airflow_settings.yaml` file as connection URIs:
 
 ```sh
-astro dev object export --connections --settings-file
+astro dev object export --variables --connections --settings-file
 ```
-
-Make sure to delete the previous connection from the Airflow UI after running this command. 
 
 :::
 
@@ -231,7 +229,7 @@ The benefits of managing Airflow connections and variables in your `.env` file a
 The limitations of this method are:
 
 - Connections can't be viewed or managed from the Airflow UI.
-- Connections are more difficult to format as URIs or JSON
+- Connections are more difficult to format as URIs or JSON.
 - It's not as secure or centralized as a secrets backend.
 
 #### Set Airflow connections as Astro environment variables
@@ -266,13 +264,15 @@ This command does not pull connections or variables that were set in the Airflow
 
 ### Manage connections and variables in a secrets backend
 
-If your team uses a secrets backend, Astronomer recommends storing Airflow connections and variables as the most secure method. The benefits of this method are:
+If your team uses a secrets backend, Astronomer recommends storing Airflow connections and variables as environment variables in your secrets backend. The benefits of this method are:
 
 - It's compatible with strict organization security standards.
+- You can centralize secrets management for larger teams. 
 
 The limitations of this method are:
 
-- It's complicated to set up.
+- You have to manage an external tool on top of Airflow and Astro.
+- Connections are more difficult to format as URIs or JSON.
 - There are different recommended methods for running a secrets backend locally and running one on Astro.
 
 See [Configure a secrets backend](secrets-backend.md) for setup steps. 
