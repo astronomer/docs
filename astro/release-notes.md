@@ -25,7 +25,22 @@ If you have any questions or a bug to report, reach out to [Astronomer support](
 
 **Latest Astro Runtime Version**: 7.4.1 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.11.0 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.12.0 ([Release notes](cli/release-notes.md))
+
+## March 21, 2023
+
+### Automate Workspace and Deployment actions using Workspace API tokens
+
+Use Workspace API tokens to automate Workspace actions, such as adding users to a Workspace and creating new Deployments, or for processes that a [Deployment API key](api-keys.md) can automate. You can customize the role and expiration date of the token to give it the minimum required permissions for the task it completes.
+
+To create and use Workspace API tokens, see [Workspace API tokens](workspace-api-tokens.md).
+
+### Additional improvements
+
+- Port 80 is no longer used for certificate management on the data plane. 
+- To switch Organizations in the Cloud UI, you now use the **Switch Organization** button next to your Organization's name.
+
+    ![Switch Organizations button](/img/release-notes/switch-organizations.png)
 
 ## March 15, 2023
 

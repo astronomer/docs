@@ -95,12 +95,16 @@ module.exports = {
           },
           items: ["install-aws", "install-azure", "install-gcp"],
         },
-        "manage-workspaces",
         "manage-organization",
         {
           type: "category",
           label: "User access",
           items: ["add-user", "user-permissions", "configure-idp"],
+        },
+        {
+          type: "category",
+          label: "Manage Workspaces",
+          items: ["manage-workspaces", "workspace-api-tokens"],
         },
         {
           type: "category",
