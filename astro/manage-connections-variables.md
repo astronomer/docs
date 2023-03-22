@@ -62,7 +62,7 @@ Airflow connections and variables configured in the Airflow UI are stored in you
 To export connections and variables from the Airflow UI to a Deployment on Astro, run:
 
 ```sh
-astro dev object export --connections --variables --env-export
+astro dev object export --env-export
 astro deployment variable create --deployment-name="My Deployment" --load --env .env
 ```
 
@@ -112,7 +112,7 @@ To use a connection in your DAG, you specify the connection ID like you normally
 If you prefer to format your Airflow connections or variables in the Airflow UI but you want to store them as environment variables, run the following command to export all connections from the metadata database to your `.env` file:
 
 ```sh
-astro dev object export --connections --variables --env-export
+astro dev object export --env-export
 ```
 
 :::
@@ -163,7 +163,7 @@ See [Configure `airflow_settings.yaml` (local development only)](https://docs.as
 To export connections and variables from the Airflow UI to a Deployment on Astro, run:
 
 ```sh
-astro dev object export --connections --variables --env-export
+astro dev object export --env-export
 astro deployment variable create --deployment-name="My Deployment" --load --env .env
 ```
 
