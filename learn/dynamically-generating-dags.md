@@ -211,11 +211,11 @@ This is a straightforward example that works only if all of the DAGs follow the 
 
 A notable tool for dynamically creating DAGs from the community is [gusty](https://github.com/chriscardillo/gusty). `gusty` is an open source Python library for dynamically generating Airflow DAGs. Tasks can be created from YAML, Python, SQL and R Markdown files, as well as Jupyter Notebooks.
 
-You can install gusty in your Airflow environment by running `pip install gusty` in the command line. Astro CLI users can use the package by adding `gusty` to the `requirements.txt` file. 
+You can install gusty in your Airflow environment by running `pip install gusty` from your command line. Astro CLI users can use the package by adding `gusty` to your `requirements.txt` file. 
 
 To use gusty, create a new directory in your `dags` folder that will contain all gusty DAGs. Subdirectories of this folder will define DAGs, while nested subdirectories will define task groups within their respective DAGs.
 
-This example file structure will lead to the creation of 2 DAGs from the contents of the `my_gusty_dags` directory. `my_dag_1` contains two tasks each defined in their own YAML file. `my_dag_2` contains one task `task_0` defined from a YAML file, as well as the two task groups `my_task_group_1` and `my_task_group_2`, containing two tasks each. The latter task group contains two tasks defined from SQL files.
+The following file structure will lead to the creation of 2 DAGs from the contents of the `my_gusty_dags` directory. `my_dag_1` contains two tasks each defined in their own YAML file. `my_dag_2` contains one task, `task_0`, defined from a YAML file, as well as the two task groups `my_task_group_1` and `my_task_group_2`, containing two tasks each. The latter task group contains two tasks defined from SQL files.
 
 Note that it is possible to use DAGs defined using gusty and regularly defined DAGs in the same Airflow environment by adding the regular DAGs to the `dags` directory outside of the `my_gusty_dags` folder.
 
@@ -240,7 +240,7 @@ Note that it is possible to use DAGs defined using gusty and regularly defined D
     └── my_regular_dag.py
 ```
 
-In order to create DAGs from the `my_gusty_dags` directory, a `creating_gusty_dags.py` script calling gustys `create_dags` function needs to be present.
+To create DAGs from the `my_gusty_dags` directory, you need a Python script that calls `gusty`'s `create_dags` function. In this example, a script called `creating_gusty_dags.py` in the project's root directory contains the following code.
 
 ```python
 from gusty import create_dags
@@ -269,7 +269,7 @@ default_args:
     retry_delay: !timedelta 'minutes: 5'
 ```
 
-Tasks can be defined in YAML for any existing and local operator without requiring Python knowledge. The example below shows how to use gusty to define a BashOperator task in YAML. The `dependencies` parameter was set to make this task dependent on `task_1` having completed successfully.
+Tasks can be defined in YAML for any existing and local operator. The example below shows how to use `gusty` to define a BashOperator task in YAML. The `dependencies` parameter was set to make this task dependent on `task_1` having completed successfully.
 
 ```yaml
 operator: airflow.operators.bash.BashOperator
@@ -279,7 +279,7 @@ dependencies:
 env: {"MY_ENV_VAR": "Hello!"}
 ```
 
-Learn more about gusty features in the [repository README](https://github.com/chriscardillo/gusty/blob/main/README.md). Additionally, you can explore two fully functional gusty environments, the [gusty-demo](https://github.com/chriscardillo/gusty-demo) and the [gusty-demo-lite](https://github.com/chriscardillo/gusty-demo-lite) in the respective repositories.
+Learn more about gusty features in the [repository README](https://github.com/chriscardillo/gusty/blob/main/README.md). Additionally, you can explore two fully functional gusty environments, the [gusty-demo](https://github.com/chriscardillo/gusty-demo) and the [gusty-demo-lite](https://github.com/chriscardillo/gusty-demo-lite), to see several implementation examples.
 
 Gusty is one of several open source tools that allow you to generate DAGs. Another open source tool for DAG generations from YAML files is [dag-factory](https://github.com/ajbosco/dag-factory).
 
