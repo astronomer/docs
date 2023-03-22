@@ -47,7 +47,6 @@ function getPosts(content) {
   H2s.map((h2) => {
     const postContent = nextUntil(h2, 'h2');
     const postDate = postContent.match(/(?<=Release date: ).*?(?=<.)/sg) || h2.textContent;
-    console.log(postDate)
     const post = {
       "title": h2.textContent,
       "slug": h2.textContent.toLowerCase().replace(/ /g, '-').replace(',', ''),
