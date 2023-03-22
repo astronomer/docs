@@ -109,10 +109,10 @@ To use a connection in your DAG, you specify the connection ID like you normally
 
 :::tip
 
-If you prefer to format your Airflow connections or variables in the Airflow UI but you want to store them as environment variables, run the following command to export all connections from the metadata database to your `.env` file:
+If you prefer to format your Airflow connections in the Airflow UI but you want to store them as environment variables, run the following command to export all connections  from the metadata database to your `.env` file:
 
 ```sh
-astro dev object export --env-export
+astro dev object export --connections --env-export
 ```
 
 :::
