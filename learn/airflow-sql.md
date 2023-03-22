@@ -254,13 +254,13 @@ Add your modified SQL files within a `gusty` directory structure:
 └── dags
     ├── my_gusty_dags
     │   ├── my_dag_1
-    │   │   ├── METADATA.yaml
+    │   │   ├── METADATA.yml
     │   │   ├── task_0.sql
     │   │   └── task_1.sql
     └── creating_gusty_dags.py
 ```
 
-View the `gusty` documentation for example code for the [`METADATA.yaml`](https://github.com/chriscardillo/gusty#metadata) and [`creating_gusty_dags.py`](https://github.com/chriscardillo/gusty#create_dags) files.
+View the `gusty` documentation for example code for the [`METADATA.yml`](https://github.com/chriscardillo/gusty#metadata) and [`creating_gusty_dags.py`](https://github.com/chriscardillo/gusty#create_dags) files.
 
 The rendered `my_dag_1` DAG will contain two tasks defined as SQL files:
 

@@ -224,11 +224,11 @@ The following file structure will lead to the creation of 2 DAGs from the conten
 └── dags
     ├── my_gusty_dags
     │   ├── my_dag_1
-    │   │   ├── METADATA.yaml
+    │   │   ├── METADATA.yml
     │   │   ├── task_1.yaml
     │   │   └── task_2.yaml
     │   └── my_dag_2
-    │       ├── METADATA.yaml
+    │       ├── METADATA.yml
     │       ├── task_0.yaml
     │       ├── my_taskgroup_1
     │       │   ├── task_1.yaml
@@ -256,7 +256,7 @@ dag = create_dags(
 )
 ```
 
-DAG-level parameters can be defined in the `METADATA.yaml` file:
+DAG-level parameters can be defined in the `METADATA.yml` file:
 
 ```yaml
 description: "An example of a DAG created using gusty!"
