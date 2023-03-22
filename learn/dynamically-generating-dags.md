@@ -287,9 +287,9 @@ Note that it is possible to use DAGs defined using `gusty` and regularly defined
 
 Learn more about `gusty` features in the [repository README](https://github.com/chriscardillo/gusty/blob/main/README.md). Additionally, you can explore two fully functional `gusty` environments, the [gusty-demo](https://github.com/chriscardillo/gusty-demo) and the [gusty-demo-lite](https://github.com/chriscardillo/gusty-demo-lite), to see several implementation examples.
 
-### DAG-factory
+### dag-factory
 
-Another open source tool for dynamic DAG generation is [dag-factory](https://github.com/ajbosco/dag-factory). The `dag-factory` package allows users to create DAGs from YAML files which contain both DAG and task-level parameters, removing the necessity to know about Airflow specific syntax.
+Another open source tool for dynamic DAG generation is [dag-factory](https://github.com/ajbosco/dag-factory). The `dag-factory` package allows users to create DAGs from YAML files which contain both DAG and task-level parameters, removing the necessity to know about Airflow specific syntax. For examples of how to use dag-factory see their [GitHub repository](https://github.com/ajbosco/dag-factory/tree/master/examples).
 
 ## Scalability
 
