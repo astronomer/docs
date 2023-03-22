@@ -211,7 +211,7 @@ This is a straightforward example that works only if all of the DAGs follow the 
 
 ### gusty
 
-A notable tool for dynamically creating DAGs from the community is [gusty](https://github.com/chriscardillo/gusty). `gusty` is an open source Python library for dynamically generating Airflow DAGs. Tasks can be created from YAML, Python, SQL and R Markdown files, as well as Jupyter Notebooks.
+A notable tool for dynamically creating DAGs from the community is [gusty](https://github.com/chriscardillo/gusty). `gusty` is an open source Python library for dynamically generating Airflow DAGs. Tasks can be created from YAML, Python, SQL, R Markdown, and Jupyter Notebooks.
 
 You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. Astro CLI users can use the package by adding `gusty` to your `requirements.txt` file. 
 
