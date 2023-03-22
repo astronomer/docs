@@ -266,7 +266,7 @@ The rendered `my_dag_1` DAG will contain two tasks defined as SQL files:
 
 ![gusty graph](/img/guides/gusty_simple_postgres.png)
 
-Note that by default, `gusty` will add a [LatestOnlyOperator](https://registry.astronomer.io/providers/apache-airflow/modules/latestonlyoperator) to the root of your DAG. You can disable this behavior by passing `latest_only=False` to the `create_dags` function.
+Note that by default, `gusty` will add a [LatestOnlyOperator](https://registry.astronomer.io/providers/apache-airflow/modules/latestonlyoperator) to the root of your DAG. You can disable this behavior by passing `latest_only=False` to the `create_dags` function, or setting `latest_only: False` in the `METADATA.yml`.
 
 ## Next steps
 
