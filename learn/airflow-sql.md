@@ -231,9 +231,9 @@ If you're unfamiliar with Airflow or Python, you can use [gusty](https://github.
 
 You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. Astro CLI users can use the package by adding `gusty` to your `requirements.txt` file.  
 
-Once you've installed `gusty` in your Airflow environment, you can turn your SQL files into Airflow tasks by adding YAML instructions specifying which operator to use and operator-level parameters at the start of the SQL file, referred to as the "frontmatter". The frontmatter is the section at the top of the SQL file encased in `---`.
+Once you've installed `gusty` in your Airflow environment, you can turn your SQL files into Airflow tasks by adding YAML instructions specifying which operator to use and operator-level parameters in the *frontmatter* of your SQL file. The frontmatter is the section at the top of the SQL file encased in `---`.
 
-The example below shows how to turn a simple SQL statement into an Airflow task using the PostgresOperator with the `postgres_default` connection ID. This SQL file `task_1.sql` defines a task that will only run once `task_0` of the same DAG has completed successfully.
+The example below shows how to turn a simple SQL statement into an Airflow task using the [PostgresOperator](https://registry.astronomer.io/providers/postgres/modules/postgresoperator) with the `postgres_default` connection ID. This SQL file `task_1.sql` defines a task that will only run once `task_0` of the same DAG has completed successfully.
 
 ```SQL
 ---
