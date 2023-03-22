@@ -229,7 +229,9 @@ Note that while this example is specific to Snowflake, the concepts apply to any
 
 If you're unfamiliar with Airflow or Python, you can use [gusty](https://github.com/chriscardillo/gusty) to generate DAGs directly from your SQL code.
 
-Once you've installed gusty in your Airflow environment, you can add a YAML statement on top of your SQL file specifying which operator to use, operator parameters and task dependencies.
+You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. Astro CLI users can use the package by adding `gusty` to your `requirements.txt` file.  
+
+Once you've installed `gusty` in your Airflow environment, you can turn your SQL files into Airflow tasks by adding YAML instructions specifying which operator to use and operator-level parameters at the start of the SQL file. 
 
 The example below shows how to turn a simple SQL statement into an Airflow task using the PostgresOperator with the `postgres_default` connection ID. This SQL file `task_1.sql` defines a task that will only run once `task_0` of the same DAG has completed successfully.
 
@@ -244,7 +246,7 @@ SELECT column_1
 FROM table_2;
 ```
 
-Add your modified SQL files within a gusty directory structure:
+Add your modified SQL files within a `gusty` directory structure:
 
 ```text
 .
@@ -257,11 +259,11 @@ Add your modified SQL files within a gusty directory structure:
     └── creating_gusty_dags.py
 ```
 
-View the [gusty section in the Dynamically generate DAGs in Airflow](dynamically-generating-dags.md#tools-for-dynamically-creating-dags) guide or the gusty documentation for example code for the `METADATA.yaml` and `creating_gusty_dags.py` files.
+View the `gusty` documentation for example code for the [`METADATA.yaml`](https://github.com/chriscardillo/gusty#metadata) and [`creating_gusty_dags.py`](https://github.com/chriscardillo/gusty#create_dags) files.
 
 The rendered `my_dag_1` DAG will contain two tasks defined as SQL files:
 
-![Gusty Graph](/img/guides/gusty_simple_postgres.png)
+![gusty graph](/img/guides/gusty_simple_postgres.png)
 
 ## Next steps
 
