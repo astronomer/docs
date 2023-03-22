@@ -2,7 +2,7 @@
 title: 'Create and manage Workspace API tokens'
 sidebar_label: 'Workspace API tokens'
 id: workspace-api-tokens
-description: Create and manage Workspace API tokens to automate key Workspace actions like adding users and creating Deployments. 
+description: Create and manage Workspace API tokens to automate key Workspace actions, like adding users and creating Deployments. 
 ---
 
 Use Workspace API tokens to automate Workspace actions such as creating Deployments and managing users as part of your CI/CD pipelines. Using Workspace API tokens, you can automate:
@@ -33,7 +33,7 @@ Use Workspace API tokens to automate Workspace actions such as creating Deployme
 
 ## Update or delete a Workspace API token
 
-If you delete a Workspace API token, make sure that no existing CI/CD pipelines are using it. Once deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
+If you delete a Workspace API token, make sure that no existing CI/CD pipelines are using it. After it's deleted, an API token cannot be recovered. If you unintentionally delete an API token, create a new one and update any CI/CD workflows that used the deleted API token.
 
 1. In the Cloud UI, open your Workspace.
    
@@ -49,7 +49,7 @@ If you delete a Workspace API token, make sure that no existing CI/CD pipelines 
 
 Rotating a Workspace API token lets you renew a token without needing to reconfigure its name, description, and permissions. You can also rotate a token if you lose your current token value and need it for additional workflows. 
 
-When you rotate a Workspace API token, you receive a new valid token that can be used in your existing workflows. The previous token value becomes invalid and any workflows using the old value stop working. 
+When you rotate a Workspace API token, you receive a new valid token from Astro that can be used in your existing workflows. The previous token value becomes invalid and any workflows using those previous values stop working. 
 
 1. In the Cloud UI, open your Workspace.
    
