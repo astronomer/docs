@@ -11,7 +11,7 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
   <meta name="og:description" content="This is where you’ll find information about the latest Astro features and bug fixes. Check in regularly to know when issues are resolved and new features are added." />
 </head>
 
-<p>
+<p class="rssButton">
   <a href="/astro-release-notes.xml" target="_blank">
     <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
   </a>
@@ -21,9 +21,9 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-**Latest Astro Runtime Version**: 7.4.1 ([Release notes](runtime-release-notes.md))
-
-**Latest CLI Version**: 1.12.0 ([Release notes](cli/release-notes.md))
+|**Latest Astro Runtime Version**|**Latest CLI Version**|
+|--------------|-----------|
+| 7.4.1 ([Release notes](runtime-release-notes.md)) |1.12.0 ([Release notes](cli/release-notes.md))|
 
 ## March 21, 2023
 
