@@ -12,19 +12,22 @@ id: 'create-first-DAG'
 import {siteVariables} from '@site/src/versions';
 
 
-To run Airflow pipelines on Astro, you first need to 
+To run Airflow pipelines on Astro, you need to complete the following:
 
-1. Authenticate and log in to Astro. 
-2. Create an Astro project. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. Once you've tested these files locally, the Astro project structure makes it easy to deploy your pipelines to Astro.
-3. Deploy your project to Astro.
-4. Run your DAG on Astro. 
+- Create an Astro project. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. After you've tested these files locally, the Astro project structure makes it easy to deploy your pipelines to Astro.
+- Authenticate and log in to Astro. 
+- Create a Deployment to host your Airflow environment.
+- Deploy your project to Astro.
+- Trigger your DAG on Astro. 
+
+This quickstart gives you a demonstration for how to run your first DAG on Astro by building a sample Astro project, deploying it to the Astro Cloud, and then triggering a DAG run, which is an instance of a DAG running at a specifically scheduled time. 
 
 ## Prerequisites
 
 - Install the [Astro CLI](cli/install-cli.md)
 - Install [Docker](https://www.docker.com/products/docker-desktop)
-- An [Astronomer account](/astro/trial)
-- Access to a [Workspace](manage-workspaces.md)
+- - An Astronomer account. To create your own account, see [Start your Astro trial](astro/trial.md).
+- A [cluster](create-cluster.md) and a [Workspace](manage-workspaces.md).
 
 ## Step 1: Create an Astro project
 
@@ -69,7 +72,9 @@ To run Airflow pipelines on Astro, you first need to
 
 ## Step 2: Build your project locally
 
-To confirm that you successfully initialized an Astro project, run the following command from your project directory:
+Building your project locally allows you to test your DAGs locally and confirm that your example Astro project builds correctly before you run it remotely in Astro.
+
+To start running your project in a local Airflow environment, run the following command from your project directory:
 
 ```sh
 astro dev start
@@ -82,27 +87,15 @@ This command builds your project and spins up 4 Docker containers on your machin
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
 - **Triggerer:** The Airflow component responsible for running Triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators)
 
-If your project builds successfully, the Airflow UI automatically opens in your default webserver at `https://localhost:8080/`.
+After your project builds successfully, the Airflow UI automatically opens in your default webserver at `https://localhost:8080/`.
 
-When you create an Astro project, the Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#ports-are-not-available).
-
-## Step 3: Locally access the Airflow UI
-
-After your project is running, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password.
-
-:::info
-
-It might take a few minutes for the Airflow UI to be available. As you wait for the webserver container to start up, you may need to refresh your browser.
-
-:::
-
-After logging in, you should see the DAGs from your `dags` directory in the Airflow UI.
+On the Airflow UI home page, you can see the DAGs from your `dags` directory in the Airflow UI. In this directory, you can find several example DAGs including `example-dag-basic` DAG, which was generated with your Astro project. To provide a basic demonstration of an ETL pipeline, this DAG creates an example JSON string, calculates a value based on the string, and prints the results of the calculation to the Airflow logs.
 
 ![Example DAG in the Airflow UI](/img/docs/sample-dag.png)
 
-## Step 4: Authenticate to Astro
+The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the Airflow metadata database by default. If these ports are already in use on your local computer, an error message might appear. To resolve this error message, see [Test and troubleshoot locally](test-and-troubleshoot-locally.md#ports-are-not-available).
 
-Now that you've created your Airflow project and confirmed that your project runs Airflow locally, you can log in to Astro from the CLI.
+## Step 3: Authenticate to Astro
 
 Run the following command to authenticate to Astro:
 
@@ -112,15 +105,11 @@ astro login
 
 After running this command, you are prompted to open your web browser and log in to the Cloud UI. Then, you are automatically authenticated to the CLI.
 
-## Step 5: Access the Astro Cloud UI
+## Step 4: Access the Cloud UI
 
-1. Go to `https://cloud.astronomer.io`, and select one of the following options to access the Cloud UI:
+1. Go to `https://cloud.astronomer.io`, and select one of the available options to access the Cloud UI.
 
-    - To authenticate with single sign-on (SSO), enter your email and click **Continue**. If your Organization has SSO enabled, you'll be redirected to your identity provider authentication screen.
-    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
-    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
-
-## Step 6: Create a deployment
+## Step 5: Create a Deployment
 
 1. In the Cloud UI, select a **Workspace**.
 
@@ -131,7 +120,7 @@ After running this command, you are prompted to open your web browser and log in
     - **Name**: Enter a name for your Deployment.
     - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
   
-  You can leave the other fields at their default values.
+    You can leave the other fields at their default values. This creates a basic Deployment that you can delete after you finish testing your example DAG runs. 
 
 4. Click **Create Deployment**.
 
@@ -139,7 +128,7 @@ After running this command, you are prompted to open your web browser and log in
     
     For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health).
 
-## Step 7: Deploy your Astro Project to your Astro Deployment
+## Step 5: Deploy your Astro project to your Astro Deployment
 
 To deploy your Astro project, run:
 
@@ -155,11 +144,7 @@ If your code passes the parse, the Astro CLI builds all files in your Astro proj
 
 ## Step 8: Trigger your DAG on Astro
 
-A **DAG run** is an instance of a DAG running at a specifically scheduled time. Now that your code has deployed, you can trigger a run of the `example-dag-basic` DAG that was generated with your Astro project.
-
-To provide a basic demonstration of an ETL pipeline, this DAG creates an example JSON string, calculates a value based on the string, and prints the results of the calculation to the Airflow logs.
-
-Before you can run any DAG in Astro, you have to unpause it in your remote Airflow instance and then manually trigger a DAG run. 
+Before you can run any DAG in Astro, unpause it in your remote Airflow instance and then manually trigger a DAG run. 
 
 1. Open Airflow in the Astro UI. To unpause `example-dag-basic`, click the slider button next to its name, and the DAG starts to run on the schedule defined in its code.
 
@@ -171,4 +156,6 @@ After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG
 
 ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
 
-These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs that won't make much sense until you learn more about how Airflow works. 
+These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs.
+
+
