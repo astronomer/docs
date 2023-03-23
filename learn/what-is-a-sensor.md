@@ -67,6 +67,12 @@ To review the available Airflow sensors, go to the [Astronomer Registry](https:/
 
 The following example DAG shows how you might use the `SqlSensor` sensor: 
 
+:::info
+
+The import path for the SqlSensor has changed in Airflow 2.4.0, please click the registry link above for the new import path
+
+:::
+
 <Tabs
     defaultValue="taskflow"
     groupId= "example-implementation"
