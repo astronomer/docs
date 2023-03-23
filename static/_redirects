@@ -275,3 +275,8 @@
 /enterprise/0.25/* /software/0.25/overview
 /enterprise/0.23/* /software/0.23/overview
 /enterprise/0.16/* /software/0.16/overview
+
+# redirect .rss to .xml
+/astro-runtime-release-notes.rss /astro-runtime-release-notes.xml 301
+/astro-cli-release-notes.rss /astro-cli-release-notes.xml 301
+/astro-release-notes.rss /astro-release-notes.xml 301
