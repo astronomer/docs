@@ -4,8 +4,8 @@
   flex-direction: column;
   gap: 0.75rem;
   margin: 2rem 0;
-  background-color: var(--purple-100);
-  padding: 1.25em 1.5rem;
+  background-color: var(--gray-100);
+  padding: 1em;
   border-radius: 6px;
 }
 
@@ -32,8 +32,8 @@ aside .newsletterForm {
 
 .newsletterForm button {
   color: var(--gray-800);
-  background-color: var(--mint-300);
-  border: 1px solid var(--gray-500);
+  background-color: var(--gray-300);
+  border-color: transparent;
   border-left: none;
   padding: 8px 10px;
   border-top-right-radius: 6px;
@@ -49,8 +49,9 @@ aside .newsletterForm button {
 }
 
 .newsletterForm p {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   line-height: 1.25;
+  margin: 0;
 }
 
 .newsletterForm + [class*="theme-doc-sidebar-menu"] {
@@ -71,9 +72,9 @@ aside .newsletterForm button {
 }
 
 html[data-theme="dark"] .newsletterForm {
-  background-color: var(--purple-700);
+  background-color: var(--gray-800);
 }
 
 html[data-theme="dark"] .newsletterForm a {
-  color: var(--blue-400);
+  color:  var(--ifm-link-color);
 }

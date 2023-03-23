@@ -12,9 +12,9 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
 </head>
 
 <p>
-    <a href="/astro-release-notes.xml" target="_blank">
-        <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
-    </a>
+  <a href="/astro-release-notes.xml" target="_blank">
+    <img src="/img/pic_rss.gif" width="36" height="14" alt="Subscribe to RSS Feed" />
+  </a>
 </p>
 
 <NewsletterForm title="Sign Up for Monthly Product Updates" />
@@ -37,7 +37,7 @@ To create and use Workspace API tokens, see [Workspace API tokens](workspace-api
 
 ### Additional improvements
 
-- Port 80 is no longer used for certificate management on the data plane. 
+- Port 80 is no longer used for certificate management on the data plane.
 - To switch Organizations in the Cloud UI, you now use the **Switch Organization** button next to your Organization's name.
 
     ![Switch Organizations button](/img/release-notes/switch-organizations.png)
