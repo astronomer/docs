@@ -144,6 +144,7 @@ export default function NewsletterForm(
       id="newsletterForm"
     >
       <h2>{title || content.title}</h2>
+      <p className={styles.newsletterForm__description}>Get a summary of our release notes from us once a month.</p>
       <div className={styles.newsletterForm__inputWrapper}>
         <input
           aria-label="Email Address"
@@ -159,7 +160,7 @@ export default function NewsletterForm(
         />
         <button type="submit" disabled={disableButton}>{buttonText || content.buttonText}</button>
       </div>
-      <p>You can unsubscribe at any time. <br />By proceeding you agree to our <a href="https://www.astronomer.io/privacy/" target="_blank">Privacy Policy</a>, our <a href="https://www.astronomer.io/legal/terms-of-service/" target="_blank">Website Terms</a> and to receive emails from Astronomer.</p>
+      <p className={styles.newsletterForm__disclaimer}>You can unsubscribe at any time. <br />By proceeding you agree to our <a href="https://www.astronomer.io/privacy/" target="_blank">Privacy Policy</a>, our <a href="https://www.astronomer.io/legal/terms-of-service/" target="_blank">Website Terms</a> and to receive emails from Astronomer.</p>
     </form>
   )
 }

@@ -17,7 +17,7 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
   </a>
 </p>
 
-<NewsletterForm title="Sign Up for Monthly Product Updates" />
+<NewsletterForm />
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 

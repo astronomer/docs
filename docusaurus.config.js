@@ -103,7 +103,7 @@ module.exports = {
       }
     },
     newsletterForm: {
-      title: "Sign Up for Monthly Updates",
+      title: "Sign up for Developer Updates",
       buttonText: "Submit"
     },
     softwareNav: {
