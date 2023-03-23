@@ -21,8 +21,6 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
 
 Astronomer is committed to continuous delivery of both features and bug fixes to Astro. To keep your team up to date on what's new, this document will provide a regular summary of all changes released to Astro.
 
-If you have any questions or a bug to report, reach out to [Astronomer support](https://cloud.astronomer.io/support).
-
 **Latest Astro Runtime Version**: 7.4.1 ([Release notes](runtime-release-notes.md))
 
 **Latest CLI Version**: 1.12.0 ([Release notes](cli/release-notes.md))
