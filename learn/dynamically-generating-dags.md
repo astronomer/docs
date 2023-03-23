@@ -213,9 +213,9 @@ This is a straightforward example that works only if all of the DAGs follow the 
 
 A popular tool for dynamically creating DAGs is [gusty](https://github.com/chriscardillo/gusty). gusty is an open source Python library for dynamically generating Airflow DAGs. Tasks can be created from YAML, Python, SQL, R Markdown, and Jupyter Notebooks.
 
-You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file. 
+You can install gusty in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file. 
 
-To use `gusty`, create a new directory in your `dags` folder that will contain all `gusty` DAGs. Subdirectories of this folder will define DAGs, while nested subdirectories will define task groups within their respective DAGs.
+To use gusty, create a new directory in your `dags` folder that will contain all gusty DAGs. Subdirectories of this folder will define DAGs, while nested subdirectories will define task groups within their respective DAGs.
 
 The following file structure will lead to the creation of 2 DAGs from the contents of the `my_gusty_dags` directory. `my_dag_1` contains two tasks each defined in their own YAML file. `my_dag_2` contains one task, `task_0`, defined from a YAML file, as well as the two task groups `my_task_group_1` and `my_task_group_2`, containing two tasks each. The latter task group contains two tasks defined from SQL files.
 
