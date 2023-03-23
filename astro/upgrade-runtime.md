@@ -95,7 +95,7 @@ Astronomer recommends testing new versions of Astro Runtime locally before upgra
 
     ![Runtime Version banner - Local](/img/docs/image-tag-airflow-ui-local.png)
 
-5. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that the Astro Runtime upgrade included a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
+5. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
 
 ### (Optional) Upgrade and test provider packages
 
