@@ -231,7 +231,7 @@ If you're unfamiliar with Airflow or Python, you can use [gusty](https://github.
 
 You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file. 
 
-Once you've installed `gusty` in your Airflow environment, you can turn your SQL files into Airflow tasks by adding YAML instructions to the front matter your SQL file. The front matter is the section at the top of the SQL file enclosed in `---`.
+Once you've installed gusty in your Airflow environment, you can turn your SQL files into Airflow tasks by adding YAML instructions to the front matter your SQL file. The front matter is the section at the top of the SQL file enclosed in `---`.
 
 The example below shows how to turn a simple SQL statement into an Airflow task using the [PostgresOperator](https://registry.astronomer.io/providers/postgres/modules/postgresoperator) with the `postgres_default` connection ID. This SQL file `task_1.sql` defines a task that will only run once `task_0` of the same DAG has completed successfully.
 
@@ -247,7 +247,7 @@ SELECT column_1
 FROM table_2;
 ```
 
-Add your modified SQL files within a `gusty` directory structure:
+Add your modified SQL files within a gusty directory structure:
 
 ```text
 .
@@ -260,13 +260,13 @@ Add your modified SQL files within a `gusty` directory structure:
     └── creating_gusty_dags.py
 ```
 
-See [`METADATA.yml`](https://github.com/chriscardillo/gusty#metadata) and [`creating_gusty_dags.py`](https://github.com/chriscardillo/gusty#create_dags) in the gusty documentation for example configurations.
-
 The rendered `my_dag_1` DAG will contain two tasks defined as SQL files:
 
 ![gusty graph](/img/guides/gusty_simple_postgres.png)
 
-Note that by default, `gusty` will add a [LatestOnlyOperator](https://registry.astronomer.io/providers/apache-airflow/modules/latestonlyoperator) to the root of your DAG. You can disable this behavior by passing `latest_only=False` to the `create_dags` function, or setting `latest_only: False` in the `METADATA.yml`.
+See [`METADATA.yml`](https://github.com/chriscardillo/gusty#metadata) and [`creating_gusty_dags.py`](https://github.com/chriscardillo/gusty#create_dags) in the gusty documentation for example configurations.
+
+Note that by default, gusty will add a [LatestOnlyOperator](https://registry.astronomer.io/providers/apache-airflow/modules/latestonlyoperator) to the root of your DAG. You can disable this behavior by passing `latest_only=False` to the `create_dags` function, or setting `latest_only: False` in the `METADATA.yml`.
 
 ## Next steps
 
