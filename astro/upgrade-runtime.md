@@ -64,7 +64,7 @@ If you're upgrading a local Airflow environment, you don't need an Astro Deploym
 Major Astro Runtime upgrades can include major upgrades to built-in provider packages. For the most stable upgrade path, Astronomer recommends pinning all provider package versions from your current Runtime version before upgrading. To check the version of all provider packages installed in your Runtime version, run:
 
 ```sh
-docker run --rm quay.io/astronomer/astro-runtime:<new-runtime-version> pip freeze | grep apache-airflow-providers
+docker run --rm quay.io/astronomer/astro-runtime:<current-runtime-version> pip freeze | grep apache-airflow-providers
 ```
 
 After reviewing this list, pin the version for each provider package in your Astro project `requirements.txt` file. For example, Runtime 7.4.1 uses version 4.0.0 of `apache-airflow-providers-databricks`. To pin this version of the Databricks provider package when you upgrade to a later version of Runtime, you add the following line to your `requirements.txt` file:
