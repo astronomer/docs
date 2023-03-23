@@ -67,4 +67,33 @@ If your Deployment has a DAG with syntax errors, complete one of the following a
 - Upgrade to the latest patch version Astro Runtime 5 or later. See [Upgrade Runtime](upgrade-runtime.md).
 - Upgrade to Astro CLI 1.0 or later. Later versions of the Astro CLI parse your DAGs by default and prevent your from deploying DAGs if they contain syntax errors. See [Install the CLI](cli/install-cli.md).
 
+## How do I confirm that my deploy to Astro was successful?
+
+1. Check the Astro CLI logs for your deploy. If you deployed an image to Astro, you should see the following confirmation message:
+    
+    ```text
+    Deployed Image Tag:  <new-image-tag>
+    Successfully pushed Docker image to Astronomer registry. Navigate to the Astronomer UI for confirmation that your deploy was successful.
+    ```
+
+    If you triggered a DAG-only deploy to Astro, you should see the following confirmation message:
+
+    ```text
+    Successfully uploaded DAGs with version <new-dag-bundle-version> to Astro. Navigate to the Airflow UI to confirm that your deploy was successful. The Airflow UI takes about 1 minute to update.
+    ```
+
+    If you didn't receive one of these messages and instead received an error, you might have encountered one of the following errors:
+
+    - Docker doesn't have access to your DAGs directory. Check your **File sharing** settings on Docker Desktop to confirm that Docker can access your Astro project directory. 
+    - You didn't successfully authenticate to Astro. Ensure you're in the right Organization and Workspace by running `astro organization list` and `astro workspace list`. If you're deploying from a CI/CD pipeline, ensure that your CI/CD environment has access to a valid [Deployment API key](api-keys.md#use-an-api-key-with-the-astro-cli) or [Workspace API token](workspace-api-tokens.md#use-a-workspace-api-token-with-the-astro-cli).
+    - You had a parsing error in one of your DAGs. Fix the errors or run `astro deploy --force` to deploy without checking for errors. 
+
+2. In the Cloud UI, open your Deployment and check the **Docker Image** and **DAG Bundle Version** info boxes. These fields should show the image tag or latest DAG bundle version from your most recent deploy. Both of the values include the date and time that the deploy was executed. 
+
+    Confirm that these values are the same as `<new-image-tag>` and `<new-dag-bundle-version>` from Step 1. If they aren't, and nobody else has deployed changes since your last deploy, contact [Astronomer Support](https://cloud.astronomer.io/support).
+
+3. In the Cloud UI, open your Deployment and click **Logs**. Change the **Log Level** to include **Info** level logs, then click **Apply**. After the info-level logs appear, check that Airflow is parsing the DAGs you deployed. You should see all of your deployed DAGs listed under the log titled `DAG File Processing Stats`.
+
+    If you confirmed the deploy was successful in Steps 1 and 2 but Airflow isn't parsing your DAGs, contact [Astronomer Support](https://cloud.astronomer.io/support).
+
 
