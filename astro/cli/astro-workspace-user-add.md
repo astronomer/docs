@@ -43,7 +43,7 @@ astro workspace user add <email>
 ## Related commands
 
 - [`astro workspace user update`](cli/astro-workspace-user-update.md)
-- [`astro organization user invite`](cli/astro-organization-user-add.md)
+- [`astro organization user invite`](cli/astro-organization-user-invite.md)
 - [`astro organization user update`](cli/astro-organization-user-update.md)
 
 </TabItem>
