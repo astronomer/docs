@@ -229,9 +229,9 @@ Note that while this example is specific to Snowflake, the concepts apply to any
 
 If you're unfamiliar with Airflow or Python, you can use [gusty](https://github.com/chriscardillo/gusty) to generate DAGs directly from your SQL code.
 
-You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. Astro CLI users can use the package by adding `gusty` to your `requirements.txt` file.  
+You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file. 
 
-Once you've installed `gusty` in your Airflow environment, you can turn your SQL files into Airflow tasks by adding YAML instructions specifying which operator to use and operator-level parameters in the *frontmatter* of your SQL file. The frontmatter is the section at the top of the SQL file encased in `---`.
+Once you've installed `gusty` in your Airflow environment, you can turn your SQL files into Airflow tasks by adding YAML instructions to the front matter your SQL file. The front matter is the section at the top of the SQL file enclosed in `---`.
 
 The example below shows how to turn a simple SQL statement into an Airflow task using the [PostgresOperator](https://registry.astronomer.io/providers/postgres/modules/postgresoperator) with the `postgres_default` connection ID. This SQL file `task_1.sql` defines a task that will only run once `task_0` of the same DAG has completed successfully.
 
@@ -260,7 +260,7 @@ Add your modified SQL files within a `gusty` directory structure:
     └── creating_gusty_dags.py
 ```
 
-View the `gusty` documentation for example code for the [`METADATA.yml`](https://github.com/chriscardillo/gusty#metadata) and [`creating_gusty_dags.py`](https://github.com/chriscardillo/gusty#create_dags) files.
+See [`METADATA.yml`](https://github.com/chriscardillo/gusty#metadata) and [`creating_gusty_dags.py`](https://github.com/chriscardillo/gusty#create_dags) in the gusty documentation for example configurations.
 
 The rendered `my_dag_1` DAG will contain two tasks defined as SQL files:
 

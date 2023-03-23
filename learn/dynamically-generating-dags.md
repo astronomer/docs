@@ -211,9 +211,9 @@ This is a straightforward example that works only if all of the DAGs follow the 
 
 ### gusty
 
-A notable tool for dynamically creating DAGs from the community is [gusty](https://github.com/chriscardillo/gusty). `gusty` is an open source Python library for dynamically generating Airflow DAGs. Tasks can be created from YAML, Python, SQL, R Markdown, and Jupyter Notebooks.
+A popular tool for dynamically creating DAGs is [gusty](https://github.com/chriscardillo/gusty). gusty is an open source Python library for dynamically generating Airflow DAGs. Tasks can be created from YAML, Python, SQL, R Markdown, and Jupyter Notebooks.
 
-You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. Astro CLI users can use the package by adding `gusty` to your `requirements.txt` file. 
+You can install `gusty` in your Airflow environment by running `pip install gusty` from your command line. If you use the Astro CLI, you can alternatively add `gusty` to your Astro project `requirements.txt` file. 
 
 To use `gusty`, create a new directory in your `dags` folder that will contain all `gusty` DAGs. Subdirectories of this folder will define DAGs, while nested subdirectories will define task groups within their respective DAGs.
 
@@ -240,7 +240,7 @@ The following file structure will lead to the creation of 2 DAGs from the conten
     └── my_regular_dag.py
 ```
 
-To create DAGs from the `my_gusty_dags` directory, you need a Python script that calls `gusty`'s `create_dags` function. In this example, a script called `creating_gusty_dags.py` in the project's `dags` directory contains the following code.
+To create DAGs from the `my_gusty_dags` directory, you need a Python script that calls gusty's `create_dags` function. In this example, a script called `creating_gusty_dags.py` in the project's `dags` directory contains the following code.
 
 ```python
 from gusty import create_dags
@@ -272,7 +272,7 @@ default_args:
     retry_delay: !timedelta 'minutes: 5'
 ```
 
-Tasks can be defined in YAML for any standard and custom Airflow operator. The example below shows how to use `gusty` to define a BashOperator task in YAML. The `dependencies` parameter was set to make this task dependent on `task_1` having completed successfully.
+Tasks can be defined in YAML for any standard and custom Airflow operator. The example below shows how to use gusty to define a BashOperator task in YAML. The `dependencies` parameter was set to make this task dependent on `task_1` having completed successfully.
 
 ```yaml
 operator: airflow.operators.bash.BashOperator
@@ -283,9 +283,9 @@ env:
     MY_ENV_VAR: "Hello!"
 ```
 
-Note that it is possible to use DAGs defined using `gusty` and regularly defined DAGs in the same Airflow environment by adding the regular DAGs to the `dags` directory outside of the `my_gusty_dags` folder.
+Note that to use gusty-generated DAGs and standard DAGs in the same Airflow environment, ensure that your standard DAGs are in your `dags` directory outside of the `my_gusty_dags` folder.
 
-Learn more about `gusty` features in the [repository README](https://github.com/chriscardillo/gusty/blob/main/README.md). Additionally, you can explore two fully functional `gusty` environments, the [gusty-demo](https://github.com/chriscardillo/gusty-demo) and the [gusty-demo-lite](https://github.com/chriscardillo/gusty-demo-lite), to see several implementation examples.
+Learn more about gusty features in the [repository README](https://github.com/chriscardillo/gusty/blob/main/README.md). Additionally, you can explore two fully functional gusty environments: The [gusty-demo](https://github.com/chriscardillo/gusty-demo) and the [gusty-demo-lite](https://github.com/chriscardillo/gusty-demo-lite).
 
 ### dag-factory
 
