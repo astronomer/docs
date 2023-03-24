@@ -17,6 +17,14 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.12.1
+
+Release date: March 22, 2023
+
+### Bug fixes 
+
+- Fixed an issue where you couldn't authenticate to the Astro from the Astro CLI using single sign-on (SSO).
+
 ## Astro CLI 1.12.0
 
 Release date: March 22, 2023
