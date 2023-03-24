@@ -173,6 +173,10 @@ html[data-theme="dark"] {
   }
 }
 
+#__docusaurus {
+  min-height: 100vh;
+}
+
 h1,
 h2,
 h3,
@@ -563,7 +567,7 @@ html[data-theme='dark'] .alert--cli {
 }
 
 .menu__list {
-  padding-bottom: 4rem;
+  padding-bottom: 18rem;
 }
 
 html .DocSearch {
@@ -586,6 +590,11 @@ html[data-theme="dark"] aside.theme-doc-sidebar-container {
 }
 
 @media screen and (min-width: 997px) {
+
+  div[class*="sidebar_"]{
+    min-height: 100vh;
+  }
+
   .theme-doc-sidebar-container nav.menu {
     display: flex;
     flex-direction: column;

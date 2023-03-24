@@ -15,13 +15,25 @@
   }
 }
 
-
-.menu__listBottom {
+html[data-theme="light"] .menu__listBottom {
   font-family: "Strawford", "Open Sans", sans-serif;
   left: 1rem;
-  position: relative;
-  bottom: 2rem;
-  padding: 0;
+  position: absolute;
+  background: white;
+  bottom: 0;
+  width: calc(100% - 26px);
+  padding: 2rem 0;
+}
+
+
+html[data-theme="dark"] .menu__listBottom {
+  font-family: "Strawford", "Open Sans", sans-serif;
+  left: 1rem;
+  position: absolute;
+  background: #1b1b1d;
+  bottom: 0;
+  width: calc(100% - 26px);
+  padding: 2rem 0;
 }
 
 .menu__listBottom > li + li {
