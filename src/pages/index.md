@@ -9,6 +9,7 @@ hide_table_of_contents: true
 import LinkCardGrid from '@site/src/components/LinkCardGrid';
 import LinkCard from '@site/src/components/LinkCard';
 import AstroCard from '@site/src/components/AstroCard';
+import NewsletterForm from '@site/src/components/NewsletterForm';
 
 <img src="/img/home-logos@2x.png" width="145" height="48" style={{marginBottom: "0.5rem"}} />
 
@@ -35,3 +36,5 @@ import AstroCard from '@site/src/components/AstroCard';
   <LinkCard truncate label="Worker queues" description="Run tasks in worker queues which are optimized for their execution." href="/astro/configure-worker-queues" />
   <LinkCard truncate label="Release notes" description="A complete record of the latest changes to Astro." href="/astro/release-notes" />
 </LinkCardGrid>
+
+<NewsletterForm />
