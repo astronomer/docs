@@ -161,11 +161,23 @@ These circles represent different [states](https://airflow.apache.org/docs/apach
 
 3. Click on the name of the DAG, **example-dag-basic** to open a detailed view in Airflow about the DAG, then select **Audit Log** to see a record of the actions performed and its run history. To see if your DAG ran successfully, the final event in the Audit Log should be a `success` for a `load` task.
 
+4. After you finish testing your DAGs in your Deployment, pause your DAG by opening Airflow and clickincing the slider button next to `example-dag-basic`. This prevents your example DAG from running automatically, so it won't consume resources unexpectedly.
+
 ## Step 7: View your DAG status in Astro
 
 1. Open your Astro Workspace. Since you ran your example DAG, your Workspace has summary information about your DAG runs and the health of your Deployment available.
 
 ![Summary information about your DAG runs in Astro UI](/img/docs/first-DAG-data.png)
+
+## Step 8: (Optional) Delete your Deployment
+
+You might want to delete your Deployment after you finish triggering your DAG test runs and exploring Astro. 
+
+1. Open the **Deployments** page in Astro and select your Deployment. 
+
+2. Select the ellipses to see the more options, and select **Delete**.
+
+3. When prompted, confirm the deletion by typing **DELETE**.
 
 ## Next Steps
 
