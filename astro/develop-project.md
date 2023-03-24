@@ -389,7 +389,7 @@ The following setup has been validated only with a single SSH key. You might nee
 #### Prerequisites
 
 - The [Astro CLI](cli/overview.md)
-- An [Astro project](create-project.md).
+- An [Astro project](create-dag.md#step-1-create-an-astro-project).
 - Custom Python packages that are [installable with pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 - A private GitHub repository for each of your custom Python packages
 - A [GitHub SSH private key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories
@@ -485,7 +485,7 @@ To complete this setup, you’ll specify your privately hosted Python packages i
 
 #### Prerequisites
 
-- An [Astro project](create-project.md)
+- An [Astro project](create-dag.md#step-1-create-an-astro-project)
 - A private PyPI index with a corresponding username and password
 
 #### Step 1: Add Python packages to your Astro project
