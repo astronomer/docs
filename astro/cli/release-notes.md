@@ -271,7 +271,7 @@ For more information, see the [CLI command reference](cli/astro-dev-bash.md).
 
 You can invite new users to an Astro Organization with the new `astro user invite` command. Previously, you could only invite users to Astro with the Cloud UI.
 
-For more information, see the [CLI command reference](cli/astro-user-invite.md).
+For more information, see the [CLI command reference](cli/astro-organization-user-invite.md).
 
 ### Additional improvements
 
