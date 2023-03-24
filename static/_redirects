@@ -62,7 +62,7 @@
 /cli-release-notes /astro/cli-release-notes 301
 /configure-deployment /astro/configure-deployment 301
 /create-cluster /astro/create-cluster 301
-/create-project /astro/create-project 301
+/create-project /astro/create-dag#step-1-create-an-astro-project 301
 /data-protection /astro/data-protection 301
 /deferrable-operators /astro/deferrable-operators 301
 /deploy-code /astro/deploy-code 301
@@ -95,7 +95,7 @@
 /cloud/cli-release-notes /astro/cli-release-notes 301
 /cloud/configure-deployment /astro/configure-deployment 301
 /cloud/create-cluster /astro/create-cluster 301
-/cloud/create-project /astro/create-project 301
+/cloud/create-project /astro/create-dag#step-1-create-an-astro-project 301
 /cloud/data-protection /astro/data-protection 301
 /cloud/deferrable-operators /astro/deferrable-operators 301
 /cloud/deploy-code /astro/deploy-code 301
