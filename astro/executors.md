@@ -129,7 +129,7 @@ For each task with the Kubernetes executor, you can customize its individual wor
 
 See [Manage task CPU and memory](#example-set-CPU-or-memory-limits-and-requests) for an example `pod_override` configuration. 
 
-### Example: Set CPU or memory limits and requests
+#### Example: Set CPU or memory limits and requests
 
 One of the most common use cases for customizing a Kubernetes worker Pod is to request a specific amount of resources for a task. When requesting resources, make sure that your requests don't exceed the available resources in your current [Pod worker node type](#change-the-pod-worker-node-type).
 
@@ -179,6 +179,92 @@ with DAG(
 ```
 
 When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
+
+### Mount secret environment variables to worker Pods
+
+<!-- Same content in other products -->
+
+Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the KubernetesExecutor, mount the secret to the Pod running the task.
+
+1. Add the following import to your DAG file:
+   
+    ```python
+    from airflow.kubernetes.secret import Secret
+    ```
+
+2. Define a Kubernetes `Secret` in your DAG instantiation in the following format:
+
+    ```python
+    secret_env = Secret(deploy_type="env", deploy_target="<SECRET_KEY>", secret="env-secrets", key="<SECRET_KEY>")
+    namespace = conf.get("kubernetes", "NAMESPACE")
+    ```
+
+3. Specify the `Secret` in the `secret_key_ref` section of your `pod_override` configuration.
+
+4. In the task where you want to use the secret value, add the following task-level argument:
+
+    ```python
+    op_kwargs={
+            "env_name": secret_env.deploy_target
+    },
+    ```
+
+5. In the executable for the task, call the secret value using `os.environ[env_name]`.
+
+In the following example, a secret named `MY_SECRET` is pulled from `env-secrets` and printed to logs.
+ 
+```python
+import pendulum
+from kubernetes.client import models as k8s
+
+from airflow.configuration import conf
+from airflow.kubernetes.secret import Secret
+from airflow.models import DAG
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.operators.python import PythonOperator
+
+
+def print_env(env_name):
+    import os
+    print(os.environ[env_name])
+
+with DAG(
+        dag_id='test-secret',
+        start_date=pendulum.datetime(2022, 1, 1, tz="UTC"),
+        end_date=pendulum.datetime(2022, 1, 5, tz="UTC"),
+        schedule_interval="@once",
+) as dag:
+    secret_env = Secret(deploy_type="env", deploy_target="MY_SECRET", secret="env-secrets", key="MY_SECRET")
+    namespace = conf.get("kubernetes", "NAMESPACE")
+
+    p = PythonOperator(
+        python_callable=print_env,
+        op_kwargs={
+            "env_name": secret_env.deploy_target
+        },
+        task_id='test-py-env',
+        executor_config={
+            "pod_override": k8s.V1Pod(
+                spec=k8s.V1PodSpec(
+                    containers=[
+                        k8s.V1Container(
+                            name="base",
+                            env=[
+                                k8s.V1EnvVar(
+                                    name=secret_env.deploy_target,
+                                    value_from=k8s.V1EnvVarSource(
+                                        secret_key_ref=k8s.V1SecretKeySelector(name=secret_env.secret,
+                                                                               key=secret_env.key)
+                                    ),
+                                )
+                            ],
+                        )
+                    ]
+                )
+            ),
+        }
+    )
+```
 
 ### Change the worker node type
 
