@@ -8,6 +8,12 @@ hide_table_of_contents: true
 
 Invite users to your current Astro Organization.
 
+:::caution
+
+This command will replace `astro user invite`. Any instances in your projects or automation where you use `astro user invite` needs to be updated to `astro organization user invite` before support for `astro user invite` ends.
+
+:::
+
 ## Usage
 
 Run `astro organization user invite` to invite a new user to your Astronomer Organization. You can use `astro organization user invite` to invite multiple users to an Organization at a time. By default, new users are added as an `ORGANIZATION_MEMBER`. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli). 
