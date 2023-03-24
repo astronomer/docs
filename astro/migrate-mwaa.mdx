@@ -48,7 +48,7 @@ To install Starship to your MWAA instance as a plugin:
 
 :::tip
 
-You can alternatively complete this installation with the AWS CLI. 
+You can alternatively complete this installation with the `aws` CLI by running the following commands:
 
 1. Run the following commands to set environment variables on your local machine:
 
@@ -80,11 +80,11 @@ You can alternatively complete this installation with the AWS CLI.
 
 <Usage />
 
-## Step 5: Initialize new repository skeleton
+## Step 5: Create an Astro project
 
 <DAGs />
 
-### Step 6: Copy core Airflow code
+## Step 6: Migrate project code and dependencies to your Astro project
 
 1. Open your Astro project Dockerfile. Update the Runtime version in first line to the version you selected for your Deployment in [Step 3](#step-3-create-astro-deployment). For example, if your Runtime version was 6.3.0, your Dockerfile would look like the following:
 
@@ -98,7 +98,7 @@ You can alternatively complete this installation with the AWS CLI.
 
   :::tip 
 
-  To directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file, run:
+  You can use the `aws` CLI to directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
 
   ```sh
   aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
@@ -112,7 +112,7 @@ You can alternatively complete this installation with the AWS CLI.
 
   :::tip
 
-  To directly copy your DAGs from S3 to your `dags` folder, run:  
+  You can use the `aws` CLI to directly copy your DAGs from S3 to your `dags` folder, run:
   
   ```sh
   aws s3 cp --recursive s3://[BUCKET]/dags dags
@@ -126,7 +126,7 @@ You can alternatively complete this installation with the AWS CLI.
 
   :::tip
   
-  To copy your `plugins` folder contents directly to your Astro project using the AWS CLI, run:
+  You can use the `aws` CLI to copy your `plugins` folder contents directly to your Astro project, run:
   
   ```sh
   aws s3 cp --recursive s3://[BUCKET]/plugins.zip plugins.zip

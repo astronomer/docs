@@ -27,21 +27,21 @@ Before you create your Deployment, copy the following information from your sour
     - **Name**: Enter the same name as your source Airflow environment.
     - **Astro Runtime**: Select the Runtime version that's based on the Airflow version that you use in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
 
-    | Airflow Version | Runtime Version       |
-    | --------------- | --------------------- |
+    | Airflow Version | Runtime Version        |
+    |-----------------|------------------------|
     | 2.0             | 3.0.4 (Airflow 2.1.1)* |
-    | 2.2             | 4.2.9 (Airflow 2.2.5) |
-    | 2.4             | 6.3.0 (Airflow 2.4.3) |
-   
-    > *The earliest supported Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. 
+    | 2.2             | 4.2.9 (Airflow 2.2.5)  |
+    | 2.4             | 6.3.0 (Airflow 2.4.3)  |
+
+    > *The earliest available Airflow version on Astro Runtime is 2.1.1, see here for a list of [LTS supported releases](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule). There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration.
 
     - **Description**: Optional. Enter a description for your Deployment.
     - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
-    - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
+    - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-worker-queues.md).
     - **Max Tasks Per Worker**: Optional. Set maximum number of tasks that a single worker can run at a time.
     - **Worker Count**: Set the same minimum and maximum worker count as in source Airflow environment.
     - **Scheduler Count**: Set to the same number of schedulers as in your source Airflow environment.
-    - **Scheduler Size**: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your Airflow environment.
+    - **Scheduler Size**: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
 
     | Environment size         | AUs | CPU / memory |
     | ------------------------ | --- | ------------------------ | 
@@ -49,7 +49,7 @@ Before you create your Deployment, copy the following information from your sour
     | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
     | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
 
-    > *Some of the following recommendations for CPU and memory are smaller than what you would have in an equivalent GCC/ MWAA source environment. Although you shouldn't need any more CPU or memory than what's recommended here, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+    > *Some of the following recommendations for CPU and memory are smaller than what you would have in the equivalent source environment. Although you may not need more CPU or memory than what's recommended here, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
 
 4. Click **Create Deployment**.
 5. Specify any system-level environment variables as Astro environment variables. See [Environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui).
@@ -58,7 +58,7 @@ Before you create your Deployment, copy the following information from your sour
 </TabItem>
 <TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
 
-1. On your local machine, create a file called `config.yaml`.
+1. On your local machine, create a file called `config.yaml` in a directory with the same name as the source Airflow
 2. Open `config.yaml` and add the following:
 
    ```yaml
@@ -93,23 +93,23 @@ Before you create your Deployment, copy the following information from your sour
     - `<deployment-description>`: Optional. Enter a description for your Deployment.
     - `<runtime-version>`: Select the Runtime version that's based on the Airflow version that you use in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
 
-    | Airflow Version | Runtime Version       |
-    | --------------- | --------------------- |
+    | Airflow Version | Runtime Version        |
+    |-----------------|------------------------|
     | 2.0             | 3.0.4 (Airflow 2.1.1)* |
-    | 2.2             | 4.2.9 (Airflow 2.2.5) |
-    | 2.4             | 6.3.0 (Airflow 2.4.3) |
-   
-    >*The earliest supported Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. 
+    | 2.2             | 4.2.9 (Airflow 2.2.5)  |
+    | 2.4             | 6.3.0 (Airflow 2.4.3)  |
+
+    > *The earliest available Airflow version on Astro Runtime is 2.1.1, see here for a list of [LTS supported releases](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule). There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration.
 
     - `<scheduler-au>`: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
 
     | Environment size         | AUs | CPU / memory |
-    | ------------------------ | --- | ------------------------ | 
-    | Small (Up to ~50 DAGs)   | 5   | .5vCPU, 1.88GiB          |     
+    | ------------------------ | --- | ------------------------ |
+    | Small (Up to ~50 DAGs)   | 5   | .5vCPU, 1.88GiB          |
     | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
     | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
 
-    > *Some of the following recommendations for CPU and memory are smaller than what you would have in an equivalent GCC/ MWAA source environment. Although you shouldn't need any more CPU or memory than what's recommended here, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+    > *Some of the following recommendations for CPU and memory are smaller than what you would have in the equivalent source environment. Although you may not need more CPU or memory than what's recommended here, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
 
     - `<scheduler-count>`: Specify the same number of schedulers as in your source Airflow environment.
     - `<cluster-name>`: Specify name of the Astro cluster in which you want to create this Deployment.
