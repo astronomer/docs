@@ -9,6 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@master
       name: Checkout repo
+      with:
+        token: ${{ secrets.COMMIT_KEY }}
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script

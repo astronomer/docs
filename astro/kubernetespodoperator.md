@@ -221,3 +221,4 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
 - [KubernetesPodOperator Airflow Guide](https://docs.astronomer.io/learn/kubepod-operator/)
+

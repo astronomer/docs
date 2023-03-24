@@ -69,7 +69,6 @@ flowchart LR;
     id2-->|Pull request| id3[Main branch]
     end
     id3-->|Deploy through CI/CD| id4[Astro Deployment]
-    style Git fill:#bfeaff,stroke:#333,stroke-width:2px
 ```
 
 Running all of your data pipelines in a single environment means that you don't have to pay for the infrastructure of multiple Deployments, but it limits your ability to test changes on Astro or on development datasets before they are deployed. Astronomer does not recommend this method for production use cases.
@@ -103,8 +102,6 @@ flowchart LR;
     id4
     id6
     end
-    style Astro fill:#bfeaff,stroke:#333,stroke-width:2px
-    style Git fill:#bfeaff,stroke:#333,stroke-width:2px
 ```
 
 This method provides your team with at least two environments on Astro to test before pushing changes to production. Each Deployment can contain separate versions of your code, as well as separate environment configurations. If you use Snowflake, for example, your development Deployment on Astro can use a virtual data warehouse for development (`DWH Dev`), and your production Deployment can use a different virtual data warehouse for production (`DWH Prod`).

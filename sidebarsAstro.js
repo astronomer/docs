@@ -63,6 +63,7 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "configure-deployment-resources",
+        "executors",
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
@@ -103,12 +104,16 @@ module.exports = {
           label: "Migrate to Astro",
           items: ["migrate-mwaa", "migrate-gcc"],
         },
-        "manage-workspaces",
         "manage-organization",
         {
           type: "category",
           label: "User access",
           items: ["add-user", "user-permissions", "configure-idp"],
+        },
+        {
+          type: "category",
+          label: "Manage Workspaces",
+          items: ["manage-workspaces", "workspace-api-tokens"],
         },
         {
           type: "category",
@@ -280,7 +285,21 @@ module.exports = {
         'cli/astro-user-create',
         'cli/astro-user-invite',
         'cli/astro-version',
-        'cli/astro-workspace',],
+        {
+          type: "category",
+          label: "astro workspace",
+          items: [
+            "cli/astro-workspace-list",
+            "cli/astro-workspace-service-account",
+            "cli/astro-workspace-switch",
+            "cli/astro-workspace-team",
+            "cli/astro-workspace-user-add",
+            "cli/astro-workspace-user-list",
+            "cli/astro-workspace-user-remove",
+            "cli/astro-workspace-user-update",
+          ],
+        },
+      ],
     },
   ],
 };

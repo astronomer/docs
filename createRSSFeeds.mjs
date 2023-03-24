@@ -12,6 +12,7 @@ let astroCLI = await fs.readFile('./astro/cli/release-notes.md', 'utf8');
 let software = await fs.readFile('./software/release-notes.md', 'utf8');
 let softwareRuntime = await fs.readFile('./astro/runtime-release-notes.md', 'utf8');
 
+let currentDate = new Date();
 
 // function to get all elements between two elements
 function nextUntil(elem, selector, filter) {
@@ -44,10 +45,13 @@ function getPosts(content) {
   // for each h2 create post with title, slug,
   // and get all the content between this h2 until the next h2
   H2s.map((h2) => {
+    const postContent = nextUntil(h2, 'h2');
+    const postDate = postContent.match(/(?<=Release date: ).*?(?=<.)/sg) || h2.textContent;
     const post = {
       "title": h2.textContent,
       "slug": h2.textContent.toLowerCase().replace(/ /g, '-').replace(',', ''),
-      "content": `${nextUntil(h2, 'h2')}`
+      "content": postContent,
+      "pubDate": postDate
     };
     posts.push(post);
   })
@@ -65,6 +69,9 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
             link: `${pageURL}#${post.slug.replace(/\./g, '')}`
           },
           {
+            guid: `${pageURL}#${post.slug.replace(/\./g, '')}`
+          },
+          {
             description: {
               _cdata: post.content,
             },
@@ -80,7 +87,7 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
 
   const websiteURL = "https://docs.astronomer.io/";
   const feedSlug = feedTitle.replace(/ /g, "-",).toLowerCase();
-  const feedRSSLink = websiteURL + feedSlug + '.rss';
+  const feedRSSLink = websiteURL + feedSlug + '.xml';
 
   console.log(`📡 Creating ${feedTitle} RSS feed`);
 
@@ -108,6 +115,9 @@ async function createRssFeed(feedTitle, feedDescription, feedPageURL, content) {
           },
           {
             link: feedPageURL,
+          },
+          {
+            pubDate: currentDate.toUTCString()
           },
           { description: feedDescription },
           { language: "en-US" },

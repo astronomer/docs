@@ -22,7 +22,7 @@ An Organization role grants a user some level of access to an Astro Organization
 
 ### Update Organization roles
 
-1. In the Cloud UI, click the **People** tab.
+1. In the Cloud UI, go to **Settings** > **Access Management**.
 2. Find the user in the table and click **Edit**. The **Members** table lists all users that have been added to a Workspace in your Organization. If you can't find a user, it might be because they haven't been invited to a Workspace or accepted their invite.
 
 | Permission                                                       | **Organization Member** | **Organization Billing Admin** | **Organization Owner** |
@@ -59,10 +59,10 @@ A Workspace role grants a user some level of access to a specific Workspace. The
 | Create and Delete Deployments                       |                      | ✔️                    | ✔️                   |
 | Create, Update and Delete Environment Variables     |                      | ✔️                    | ✔️                   |
 | Create, update, and delete Astro Cloud IDE projects |                      | ✔️                    | ✔️                   |
-| Create, Update and Delete API Keys                  |                      |                      | ✔️                   |
 | View Airflow connections and Variables              |                      |                      | ✔️                   |
-| Update user roles and permissions                   |                      |                      | ✔️                   |
 | Update Airflow connections and Variables            |                      |                      | ✔️                   |
+| Create, Update and Delete API Keys                  |                      |                      | ✔️                   |
+| Update user roles and permissions                   |                      |                      | ✔️                   |
 | Invite users to a Workspace                         |                      |                      | ✔️                   |
 
 To update user Workspace roles, see [Manage users](add-user.md).

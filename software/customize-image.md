@@ -22,13 +22,13 @@ More specifically, this doc includes instructions for how to:
 
 > **Note:** The guidelines below assume that you've initialized a project on Astronomer via `$ astro dev init`. If you haven't done so already, refer to our ["CLI Quickstart" doc](https://docs.astronomer.io/astro/cli/install-cli).
 
-## Add python and OS-level packages
+## Add Python and OS-level dependencies
 
-To build Python and OS-level packages into your Airflow Deployment, add them to your `requirements.txt` and `packages.txt` files on Astronomer. Both files were automatically generated when you initialized an Astro project locally via `$ astro dev init`. Steps below.
+To add Python packages to an Airflow Deployment, add the packages to the Deployment `requirements.txt` file. To add OS-level packages to an Airflow Deployment, add them to the Deployment `packages.txt` file. The `requirements.txt` and `packages.txt`  files were automatically generated after running `astro dev init` to initialize your local Astro project.
 
-### Add your python or OS-Level package
+### Add Python dependencies
 
-Add all Python packages to your `requirements.txt` and any OS-level packages you'd like to include to your `packages.txt` file.
+To add all Python packages to an Airflow Deployment, add the packages to the Deployment `requirements.txt` file.
 
 To pin a version of that package, use the following syntax:
 
@@ -43,6 +43,9 @@ pymongo==3.7.2
 ```
 
 If you do _not_ pin a package to a version, the latest version of the package that's publicly available will be installed by default.
+
+### Add OS-level dependencies
+To add OS-level packages to an Airflow Deployment, add them to the Deployment `packages.txt` file.
 
 ### Rebuild your image
 
@@ -181,7 +184,7 @@ RUN ls
 
 ## Docker Compose override
 
-The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. To override the default CLI configurations ([found here](https://github.com/astronomer/astro-cli/blob/main/airflow/include/composeyml.go)), add a `docker-compose.override.yml` file to your Astro project directory. The values in this file override the default settings when you run `$ astro dev start`.
+The Astro CLI is built on top of [Docker Compose](https://docs.docker.com/compose/), a tool for defining and running multi-container Docker applications. To override the default CLI configurations, add a `docker-compose.override.yml` file to your Astro project directory. The values in this file override the default settings when you run `$ astro dev start`.
 
 To add another volume mount for a directory named `custom_dependencies`, for example, add the following to your `docker-compose.override.yml`:
 
