@@ -29,10 +29,11 @@ Before you create your Deployment, copy the following information from your sour
 
    | Airflow Version | Runtime Version       |
    | --------------- | --------------------- |
-   | 2.0             | 3.0.4 (Airflow 2.1.1) |
+   | 2.0             | 3.0.4 (Airflow 2.1.1)* |
    | 2.2             | 4.2.9 (Airflow 2.2.5) |
    | 2.4             | 6.3.0 (Airflow 2.4.3) |
-
+   
+   >*The earliest supported Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. 
    - **Description**: Optional. Enter a description for your Deployment.
    - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
    - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-deployment-resources.md#worker-queues).
