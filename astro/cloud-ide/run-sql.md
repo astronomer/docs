@@ -47,7 +47,7 @@ Regardless of the cell type you choose, you can use your query results in downst
 
 7. In the **Select Connection** list, select the connection for the database you want to query against.
 
-8. If you're using Warehouse SQL cells, configure the following additional fields to define your output table: 
+8. (Optional) If you're using Warehouse SQL cells, configure the following additional fields to define an output table. If you don't define these values, your data pipeline will store the outputs of your cell in a temporary table.
 
     - **Database**: The database for your output table
     - **Schema**:  The schema for your output table
