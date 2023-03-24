@@ -38,7 +38,7 @@ The Astronomer Registry includes:
 
 ## Prerequisites
 
-- An [Astro project](create-project.md)
+- An [Astro project](create-dag.md#step-1-create-an-astro-project)
 - The [Astro CLI](cli/overview.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
 

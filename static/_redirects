@@ -275,3 +275,6 @@
 /enterprise/0.25/* /software/0.25/overview
 /enterprise/0.23/* /software/0.23/overview
 /enterprise/0.16/* /software/0.16/overview
+
+# redirects for getting started restructure
+/astro/create-project /astro/create-dag#step-1-create-an-astro-project 301

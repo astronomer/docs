@@ -23,9 +23,9 @@ This quickstart gives you a demonstration for how to run your first DAG on Astro
 
 ## Prerequisites
 
-- Install the [Astro CLI](cli/install-cli.md)
-- Install [Docker](https://www.docker.com/products/docker-desktop)
-- - An Astronomer account. To create your own account, see [Start your Astro trial](astro/trial.md).
+- The [Astro CLI](cli/install-cli.md)
+- [Docker](https://www.docker.com/products/docker-desktop)
+- An Astronomer account. To create your own account, see [Start your Astro trial](astro/trial.md).
 - A [cluster](create-cluster.md) and a [Workspace](manage-workspaces.md).
 
 ## Step 1: Create an Astro project
