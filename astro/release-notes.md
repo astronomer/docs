@@ -34,7 +34,6 @@ To create and use Workspace API tokens, see [Workspace API tokens](workspace-api
 ### Additional improvements
 
 - Port 80 is no longer used for certificate management on the data plane. 
-- The default CIDR range for new AWS clusters has been reduced from `/19` to `/20`.
 - To switch Organizations in the Cloud UI, you now use the **Switch Organization** button next to your Organization's name.
 
     ![Switch Organizations button](/img/release-notes/switch-organizations.png)
