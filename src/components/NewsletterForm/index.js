@@ -200,7 +200,7 @@ export default function NewsletterForm(
         <p className={styles.newsletterForm__success}>Success! ✓</p>
       }
       {error &&
-        <p className={styles.newsletterForm__success}>Success! ✓</p>
+        <p className={styles.newsletterForm__error}>Sorry, there was issue sending your email. Please try again.</p>
       }
       <p className={styles.newsletterForm__disclaimer}>You can unsubscribe at any time. <br />By proceeding you agree to our <a href="https://www.astronomer.io/privacy/" target="_blank">Privacy Policy</a>, our <a href="https://www.astronomer.io/legal/terms-of-service/" target="_blank">Website Terms</a> and to receive emails from Astronomer.</p>
     </form>

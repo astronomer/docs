@@ -70,8 +70,10 @@ aside .newsletterForm button {
 }
 
 .newsletterForm__success,
-.newsletterForm__spinner {
+.newsletterForm__spinner,
+.newssletterForm__error {
   text-align: center;
+  margin: auto;
 }
 
 .newsletterForm__success {
