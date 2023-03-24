@@ -69,6 +69,19 @@ aside .newsletterForm button {
   display: flex;
 }
 
+.newsletterForm__success,
+.newsletterForm__spinner {
+  text-align: center;
+}
+
+.newsletterForm__success {
+  color: var(--mint-600)
+}
+
+.newsletterForm__error {
+  color: var(--orange-600)
+}
+
 .newsletterForm__inputWrapper  > * {
   flex: 0 1 auto;
 }

@@ -14,31 +14,66 @@ export default function NewsletterForm(
   }
 ) {
   const [email, setEmail] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
 
   const content = useNewsletterFormConfig();
 
+  const hubspotFormID = "e9ef5932-da7d-4129-8111-472977ea943a";
+
+  function getSegmentUser() {
+    if (window && window.analytics && window.analytics.user) {
+      const { analytics } = window;
+      return analytics.user().anonymousId();
+    }
+    return null;
+  };
+
+  function getCookie(cname) {
+    if (window) {
+      const name = `${cname}=`;
+      const decodedCookie = decodeURIComponent(window.document.cookie);
+      const ca = decodedCookie.split(';');
+      for (let i = 0; i < ca.length; i++) { //eslint-disable-line
+        let c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+    }
+    return '';
+  };
+
+  function getUTMField(name) {
+    if (window) {
+      const sanitizedName = name.replace(/[\[]/, '\[').replace(/[\]]/, '\]');
+      const regex = new RegExp("[\?&]" + sanitizedName + "=([^&#]*)");
+      const results = regex.exec(window.location.search);
+
+      // if results === null first check if stored locally
+      // Otherwise if we really have nothing then return nothing
+      if (results === null) {
+        return localStorage.getItem(name) ? localStorage.getItem(name) : '';
+      } else {
+        // But always use what's in the URL if present
+        const decodeVal = decodeURIComponent(results[1].replace(/\+/g, ' '));
+        // And if we have a value, save it to localStorage for future use
+        decodeVal && localStorage.setItem(name, decodeVal);
+        return decodeVal;
+      }
+    }
+  };
+
   async function handleSubmit(e) {
     e.preventDefault();
 
+    setSubmitting(true);
     setDisableButton(true);
-
-    async function checkEmail(emailToValidate) {
-      return fetch(
-        `https://api.mailgun.net/v4/address/validate?address=${emailToValidate}`,
-        {
-          // eslint-disable-line
-          method: "GET",
-          headers: {
-            Authorization: `Basic ${btoa(
-              "api:key-396a07e6abdaf2e224a06518d7e89c26"
-            )}`,
-          },
-        }
-      )
-        .then((res) => res.json())
-        .then((json) => json.result !== "undeliverable");
-    }
 
     const referrer = (window && window.previousPath) || "";
     const spottedCompany = (window && window.spottedCompany) || "";
@@ -71,6 +106,7 @@ export default function NewsletterForm(
     const userPath = window.locations && window.locations.join(",");
 
     const body = {
+      formName: "Developer Updates",
       email,
       referrer,
       hubSpotCookie,
@@ -88,52 +124,46 @@ export default function NewsletterForm(
       submissionDate,
       submissionHour,
       userPath,
-      ip,
-      spottedCompany
+      spottedCompany,
+      hubspotFormID
     };
 
-    const isEmailDeliverable = await checkEmail(email);
+    window.analytics.track(`Submitted Developer Updates Sign Up Form`, body);
 
-    if (isEmailDeliverable) {
-      track(`Submitted Developer Updates Sign Up Form`, body);
-
-      if (isWindow && window.plausible) {
-        window.plausible("Form Submission", {
-          props: {
-            formName,
-            referrer,
-            pageName,
-            pageURI,
-            hubspotFormID,
-            source,
-            medium,
-            campaign,
-            content,
-            term,
-          },
-        });
-      }
-
-      body.anonId = getSegmentUser() || email;
-
-      fetch(`/.netlify/functions/submit-form`, {
-        // eslint-disable-line
-        method: "POST",
-        body: JSON.stringify(body),
-      })
-        .then((res) => res.json())
-        .catch((err) => {
-          console.log(err);
-        });
-
-      setTimeout(() => {
-        window.location = successURL;
-      }, 1500);
-    } else {
-      setEmail("");
-      setDisableButton(false);
-      isWindow && window.alert("Please provide a valid email address.");
+    if (window && window.plausible) {
+      window.plausible("Form Submission", {
+        props: {
+          formName: "Developer Updates",
+          referrer,
+          pageName,
+          pageURI,
+          hubspotFormID,
+          source,
+          medium,
+          campaign,
+          content,
+          term,
+        },
+      });
     }
+
+    body.anonId = getSegmentUser() || email;
+
+    fetch(`/.netlify/functions/submit-form`, {
+      // eslint-disable-line
+      method: "POST",
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setSubmitting(false);
+        setSuccess(true);
+      })
+      .catch((err) => {
+        setSubmitting(false);
+        setError(true);
+        console.log(err);
+      });
   }
 
   return (
@@ -145,21 +175,33 @@ export default function NewsletterForm(
     >
       <h2>{title || content.title}</h2>
       <p className={styles.newsletterForm__description}>Get a summary of our release notes from us once a month.</p>
-      <div className={styles.newsletterForm__inputWrapper}>
-        <input
-          aria-label="Email Address"
-          type="email"
-          name="email"
-          placeholder="you@company.com"
-          value={email}
-          autoComplete="email"
-          onChange={(e) => setEmail(e.target.value.trim().toLowerCase())}
-          pattern="^.+@.+\..+$"
-          required
-          title="you@company.com"
-        />
-        <button type="submit" disabled={disableButton}>{buttonText || content.buttonText}</button>
-      </div>
+      {!submitting && !success && !error && (
+        <div className={styles.newsletterForm__inputWrapper}>
+          <input
+            aria-label="Email Address"
+            type="email"
+            name="email"
+            placeholder="you@company.com"
+            value={email}
+            autoComplete="email"
+            onChange={(e) => setEmail(e.target.value.trim().toLowerCase())}
+            pattern="^.+@.+\..+$"
+            required
+            title="you@company.com"
+          />
+          <button type="submit" disabled={disableButton}>{buttonText || content.buttonText}</button>
+        </div>
+      )
+      }
+      {submitting &&
+        <img src="/img/spinner.gif" alt="Sending your email address to our servers..." className={styles.newsletterForm__spinner} width="20" height="20" />
+      }
+      {success &&
+        <p className={styles.newsletterForm__success}>Success! ✓</p>
+      }
+      {error &&
+        <p className={styles.newsletterForm__success}>Success! ✓</p>
+      }
       <p className={styles.newsletterForm__disclaimer}>You can unsubscribe at any time. <br />By proceeding you agree to our <a href="https://www.astronomer.io/privacy/" target="_blank">Privacy Policy</a>, our <a href="https://www.astronomer.io/legal/terms-of-service/" target="_blank">Website Terms</a> and to receive emails from Astronomer.</p>
     </form>
   )
