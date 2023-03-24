@@ -25,7 +25,9 @@ aside .newsletterForm {
   margin: 0;
 }
 
-.newsletterForm__description {
+.newsletterForm__description,
+.newsletterForm__success,
+.newsletterForm__error {
   font-size: 0.75rem;
 }
 
