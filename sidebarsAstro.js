@@ -21,7 +21,11 @@ module.exports = {
     {
       type: "category",
       label: "Get started",
-      items: ["trial", "create-project", "log-in-to-astro", "create-first-DAG", "create-deployment"],
+      items: [
+        "trial", 
+        "log-in-to-astro", 
+        "create-first-DAG" 
+        ],
     },
     {
       type: "category",
@@ -58,6 +62,7 @@ module.exports = {
       type: "category",
       label: "Manage Deployments",
       items: [
+        "create-deployment",
         "configure-deployment-resources",
         "executors",
         "configure-worker-queues",
