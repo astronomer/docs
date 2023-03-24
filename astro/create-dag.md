@@ -11,7 +11,6 @@ id: 'create-first-DAG'
 
 import {siteVariables} from '@site/src/versions';
 
-
 To run Airflow pipelines on Astro, you need to complete the following:
 
 - Create an Astro project. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. After you've tested these files locally, the Astro project structure makes it easy to deploy your pipelines to Astro.
@@ -142,11 +141,13 @@ After you select a Deployment, the CLI parses your DAGs to ensure that they don'
 
 If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro. If the DAG-only deploy feature is enabled for your Deployment, the `/dags` directory is excluded from this Docker image and pushed separately. To force a deploy even if your project has DAG errors, you can run `astro deploy --force`.
 
-## Step 8: Trigger your DAG on Astro
+## Step 6: Trigger your DAG on Astro
 
 Before you can run any DAG in Astro, unpause it in your remote Airflow instance and then manually trigger a DAG run. 
 
-1. Open Airflow in the Astro UI. To unpause `example-dag-basic`, click the slider button next to its name, and the DAG starts to run on the schedule defined in its code.
+1. Select the **Open Airflow** button in the Astro UI to open the Airflow dashboard. 
+
+2. Click the slider button next to `example-dag-basic` to unpause it, and the DAG starts to run on the schedule defined in its code.
 
     ![Pause DAG slider in the Airflow UI](/img/docs/tutorial-unpause-dag.png)
 
@@ -158,4 +159,19 @@ After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG
 
 These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs.
 
+3. Click on the name of the DAG, **example-dag-basic** to open a detailed view in Airflow about the DAG, then select **Audit Log** to see a record of the actions performed and its run history. To see if your DAG ran successfully, the final event in the Audit Log should be a `success` for a `load` task.
 
+## Step 7: View your DAG status in Astro
+
+1. Open your Astro Workspace. Since you ran your example DAG, your Workspace has summary information about your DAG runs and the health of your Deployment available.
+
+![Summary information about your DAG runs in Astro UI](/img/docs/first-DAG-data.png)
+
+## Next Steps
+
+Now that you've created and run your first DAG on Astro, you can learn more about working with Astro, Airflow, and DAGs.
+
+- [Develop a project](/astro/develop-project)
+- [Learn how to write your own DAGs](https://docs.astronomer.io/learn/category/dags)
+- [Deploy code to Astro](/astro/deploy-code)
+- [Set up CI/CD](/astro/set-up-ci-cd)
