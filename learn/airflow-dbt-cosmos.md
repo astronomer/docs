@@ -24,7 +24,7 @@ This tutorial takes approximately 1 hour to complete.
 
 To get the most out of this tutorial, make sure you have an understanding of:
 
-- The basics of dbt Core. See dbt's [What is dbt?](https://docs.getdbt.com/docs/introduction) documentation.
+- The basics of dbt Core. See [What is dbt?](https://docs.getdbt.com/docs/introduction).
 - Airflow fundamentals, such as writing DAGs and defining tasks. See [Get started with Apache Airflow](get-started-with-airflow.md).
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
 - Airflow task groups. See [Airflow task groups](task-groups.md).
@@ -32,7 +32,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli).
-- Access to an instance of one a data warehouse supported by dbt. View the [dbt documentation](https://docs.getdbt.com/docs/supported-data-platforms) for an up-to-date list of adapters. This tutorial will use a local PostgreSQL database.
+- Access to an instance of a data warehouse supported by dbt Core. View the [dbt documentation](https://docs.getdbt.com/docs/supported-data-platforms) for an up-to-date list of adapters. This tutorial will use a local [PostgreSQL](https://www.postgresql.org/) database.
 
 You do not need to have dbt Core installed locally in order to complete this tutorial.
 
@@ -82,7 +82,7 @@ This tutorial uses a subset of the following dataset: [Open Power System Data. 2
 
 In your data warehouse create a new database called `energy_db` with a schema called `energy_schema`. Refer to the documentation of the database of your choice for instructions on how to create databases and schemas. If you are using [`psql`](https://www.postgresguide.com/utilities/psql/) with a Postgres database use the commands below:
 
-```SQL
+```sql
 CREATE DATABASE energy_db;
 \connect energy_db
 CREATE SCHEMA energy_schema;
@@ -90,7 +90,7 @@ CREATE SCHEMA energy_schema;
 
 ## Step 4: Create your dbt models
 
-In this tutorial we will use an example dbt job that consists of two dbt models. The first model called `select_country` will select the data for a specific country. The second model `create_solar_pct` will use the table created by the first model to calculate the percentage of renewable and solar energy capacity in the country you selected.
+In this tutorial we will use an example dbt job that consists of two dbt models. The first model called `select_country` will select the data for a specific country. The second model `create_pct` will use the table created by the first model to calculate the percentage of renewable and solar energy capacity in the country you selected.
 
 1. Create a folder called `dbt` in your Astro project. The Astronomer dbt provider will by default look for dbt projects in a `dbt` directory inside of your `AIRFLOW_HOME` directory, this behavior can be overridden on the `DbtDAG` or `DbtTaskGroup` level by setting `dbt_root_path`.
 
@@ -125,18 +125,18 @@ In this tutorial we will use an example dbt job that consists of two dbt models.
 
 4. Within `my_energy_project` create a sub-directory called `models`.
 
-5. Create a SQL file named `select_country.sql` within the `models` folder. Copy the following dbt model into the file and specify the code of the country you want to analyze. The underlying data contains energy capacity information for european countries, you can for example use `GB` to select data from Great Britain or `FR` for data from France.
+5. Create a SQL file named `select_country.sql` within the `models` folder. Copy the following dbt model into the file and specify the code of the country you want to analyze. The underlying data contains energy capacity information for several European countries, you can for example use `GB` to select data from Great Britain or `FR` for data from France.
 
-    ```SQL
+    ```sql
     select 
         "YEAR", "COUNTRY", "SOLAR_CAPACITY", "TOTAL_CAPACITY", "RENEWABLES_CAPACITY"
     from cosmos_db.cosmos_schema.energy
     where "COUNTRY" = '<two letter country code>'
     ```
 
-6. Create a SQL file named `create_solar_pct.sql` within the `models` folder. Copy the following dbt model into the file:
+6. Create a SQL file named `create_pct.sql` within the `models` folder. Copy the following dbt model into the file:
 
-    ```SQL
+    ```sql
     select 
         "YEAR", "COUNTRY", "SOLAR_CAPACITY", "TOTAL_CAPACITY", "RENEWABLES_CAPACITY",
         "SOLAR_CAPACITY" / "TOTAL_CAPACITY" AS "SOLAR_PCT",
@@ -177,7 +177,7 @@ You should now have the following structure within your Astro project:
 │      ├── dbt_project.yml
 │      └── models
 │          ├── select_country.sql
-│          └── create_solar_pct.sql
+│          └── create_pct.sql
 ├── include
 │   └── subset_energy_capacity.csv
 └── docker-compose.override.yml
@@ -189,7 +189,7 @@ You should now have the following structure within your Astro project:
 
 2. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
 
-3. Create a new connection named `db_conn` and choose the `Postgres` connection type. Adjust the connection type and supplied parameters based on which data warehouse you are using, note that for some tools you might need to add the [relevant provider package](https://registry.astronomer.io/) to `requirements.txt` and restart Airflow, in order to have the correct connection type. For a Postgres connection, enter the following information:
+3. Create a new connection named `db_conn`. Select the connection type and supplied parameters based on which data warehouse you are using, note that for some tools you might need to add the [relevant provider package](https://registry.astronomer.io/) to `requirements.txt` and restart Airflow, in order to have the correct connection type. For a Postgres connection, enter the following information:
 
     - Connection ID: `db_conn`.
     - Connection Type: `Postgres`.
@@ -215,14 +215,13 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
     - the `transform_data` task group is created from the dbt models. Using the models defined in Step 4, the task group will contain two nested task groups with two tasks each, one for `dbt run`, the other for `dbt test`.
     - the `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to use pandas to run an analysis on the final table created through the dbt models and logs the results.
 
-3. Run the DAG and view the DAG in the graph view (double click on the task groups in order to expand them). 
+3. Run the DAG manually by clicking on the play button and view the DAG in the graph view (double click on the task groups in order to expand them). 
 
     ![Cosmos DAG graph view](/img/guides/cosmos_dag_graph_view.png)
 
 4. Navigate to the logs of the `log_data_analysis` task to see the proportional solar and renewable energy capacity development in the country you selected.
 
     ![Energy Analysis logs](/img/guides/cosmos_energy_analysis_logs.png)
-
 
 ## Conclusion
 

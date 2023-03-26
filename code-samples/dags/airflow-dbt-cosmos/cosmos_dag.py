@@ -56,7 +56,7 @@ def log_data_analysis(df: pd.DataFrame):
 
 
 @dag(
-    start_date=datetime(2022, 11, 27),
+    start_date=datetime(2023, 3, 26),
     schedule=None,
     catchup=False,
 )
@@ -93,7 +93,7 @@ def my_energy_dag():
         >> dbt_tg
         >> log_data_analysis(
             Table(
-                name="create_solar_pct",
+                name="create_pct",
                 metadata=Metadata(
                     database=DB_NAME,
                     schema=SCHEMA_NAME,
