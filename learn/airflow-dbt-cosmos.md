@@ -10,7 +10,7 @@ id: airflow-dbt-cosmos
 </head>
 
 import CodeBlock from '@theme/CodeBlock';
-import airflow_dbt_cosmos from '!!raw-loader!../code-samples/dags/airflow-dbt-cosmos/airflow_dbt_cosmos.py';
+import cosmos_dag from '!!raw-loader!../code-samples/dags/airflow-dbt-cosmos/cosmos_dag.py';
 
 [dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses.
 
@@ -207,7 +207,7 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
 
 2. Copy and paste the following DAG code into the file:
 
-    <CodeBlock language="python">{airflow_dbt_cosmos}</CodeBlock>
+    <CodeBlock language="python">{cosmos_dag}</CodeBlock>
 
     This DAG consists of 2 tasks defined with the Astro Python SDK and one `DbtTaskGroup`:
 
