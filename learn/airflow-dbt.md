@@ -1,6 +1,6 @@
 ---
-title: "Orchestrate dbt with Airflow"
-sidebar_label: "dbt"
+title: "Orchestrate dbt with the Astronomer dbt provider"
+sidebar_label: "Astronomer provider: dbt (Cosmos)"
 id: airflow-dbt
 ---
 
@@ -9,14 +9,28 @@ id: airflow-dbt
   <meta name="og:description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud with Airflow. Learn use cases for orchestrating dbt Core using the BashOperator." />
 </head>
 
+[dbt](https://getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation. Using ephemeral compute of data warehouses like [Snowflake](https://snowflake.com/), dbt has become a key component of the modern data engineering workflow. Now, data engineers can use dbt to write, organize, and run in-warehouse transformations of raw data.
+
+
+
+Organizations can use Airflow to orchestrate and execute dbt models as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models only after every prerequisite task is met. Airflow also gives you fine-grained control over dbt tasks such that teams have observability over every step in their dbt models.
+
+
+## Time to complete
+
+This tutorial takes approximately 1 hour to complete.
+
+
+DATA SOURCE: https://doi.org/10.25832/national_generation_capacity/2020-10-01
+
+Attribution should be given as follows: Open Power System Data. 2020. Data Package National generation capacity. Version 2020-10-01. https://doi.org/10.25832/national_generation_capacity/2020-10-01. (Primary data from various sources, for a complete list see URL).
+
 import CodeBlock from '@theme/CodeBlock';
 import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_simple.py';
 import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
 import airflow_dbt_model from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_model.py';
 
-[dbt](https://getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation. As ephemeral compute becomes more readily available in data warehouses thanks to tools like [Snowflake](https://snowflake.com/), dbt has become a key component of the modern data engineering workflow. Now, data engineers can use dbt to write, organize, and run in-warehouse transformations of raw data.
 
-Organizations can use Airflow to orchestrate and execute dbt models as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models only after every prerequisite task is met. Airflow also gives you fine-grained control over dbt tasks such that teams have observability over every step in their dbt models.
 
 In this guide, you'll:
 
