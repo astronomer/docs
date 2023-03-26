@@ -21,7 +21,7 @@ CSV_FILEPATH = "include/subset_energy_capacity.csv"
 DBT_PROJECT_NAME = "my_energy_project"
 
 # the path where the Astronomer dbt provider will find the dbt executable
-# in the virtual environment created in the Dockerfile 
+# in the virtual environment created in the Dockerfile
 DBT_EXECUTABLE_PATH = "/usr/local/airflow/dbt_venv/bin/dbt"
 
 
