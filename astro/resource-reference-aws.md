@@ -23,7 +23,7 @@ Read the following document for a reference of our default resources as well as 
 | Worker node pool                                                                                    | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that hosts all workers with the `default` worker type for all Deployments in the cluster. The number of nodes in the pool auto-scales based on the demand for workers in your cluster. You can configure additional worker node pools to run tasks on different worker types. | 1x pool of m5.xlarge nodes                    | Yes. See [Manage worker node pools](modify-cluster.md#manage-worker-node-pools).                     |
 | Airflow node pool                                                                                   | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all core Airflow components, including the scheduler and webserver, for all Deployments in the cluster. This node pool is fully managed by Astronomer.                                                                                                              | 1x pool of m5.xlarge nodes                    |                                                                                                      |
 | Astro system node pool                                                                              | A node pool of [EC2 instances](https://aws.amazon.com/ec2/instance-types/) that runs all other system components required in Astro. The availability zone determines how many nodes are created.  This node pool is fully managed by Astronomer.                                                                                                         | 1x pool of m5.xlarge nodes                    |                                                                                                      |
-| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                          | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster.                                                                                                                                                                                                                       | 1x db.r5.large                                | Yes. See [Configure your relational database](modify-cluster.md#configure-your-relational-database). |
+| [RDS for PostgreSQL Instance](https://aws.amazon.com/rds/)                                          | The RDS instance is the primary database of the Astro data plane. It hosts a metadata database for each Deployment in the cluster.                                                                                                                                                                                                                       | 1x db.m6g.large                                | Yes. See [Configure your relational database](modify-cluster.md#configure-your-relational-database). |
 | [Elastic IPs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)    | Required for connectivity with the Astro control plane and other public services.                                                                                                                                                                                                                                                                        | 2x                                            |                                                                                                      |
 | [Subnets](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)                        | Subnets are provisioned in 2 different [Availability Zones (AZs)](https://aws.amazon.com/about-aws/global-infrastructure/regions_az/) for redundancy, with 1 public and 1 private subnet per AZ. Public subnets are required for the NAT and Internet gateways, while private subnets are required for EC2 nodes.                                        | 2x /26 (public) and 1x /20 + 1x /21 (private) | Yes. See [Connect Astro to AWS data sources](connect-aws.md).                                        |
 | [Internet Gateway](https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html)      | Required for connectivity with the control plane and other public services.                                                                                                                                                                                                                                                                              | 1x                                            |                                                                                                      |
@@ -69,9 +69,29 @@ Modifying the region of an existing cluster on Astro is not supported. If you're
 
 The following AWS RDS instance types are supported on Astro:
 
+### db.m6g
+
+- db.m6g.large (_default_)
+- db.m6g.xlarge
+- db.m6g.2xlarge
+- db.m6g.4xlarge
+- db.m6g.8xlarge
+- db.m6g.12xlarge
+- db.m6g.16xlarge
+
+### db.r6g
+
+- db.m6g.large (_default_)
+- db.m6g.xlarge
+- db.m6g.2xlarge
+- db.m6g.4xlarge
+- db.m6g.8xlarge
+- db.m6g.12xlarge
+- db.m6g.16xlarge
+ 
 ### db.r5
 
-- db.r5.large (_default_)
+- db.r5.large
 - db.r5.xlarge
 - db.r5.2xlarge
 - db.r5.4xlarge
