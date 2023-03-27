@@ -9,6 +9,12 @@ You might have set Airflow connections and variables in the following places on 
 
 If you set your Airflow variables and connections in the Airflow UI, you can migrate those to Astro with Starship. You can check which resources will be migrated by going to **Admin** > **Variables** and **Admin** > **Connections** in the Airflow UI for your source Airflow environment.
 
+:::caution
+
+Some environment variables or Airflow Settings can't be migrated to Astro. See [Global environment variables](https://docs.astronomer.io/astro/platform-variables) for a list of variables that you can't override on Astro.
+
+:::
+
 <Tabs>
 <TabItem value="plugin" label="Starship Plugin" default>
 
@@ -28,22 +34,10 @@ If you set your Airflow variables and connections in the Airflow UI, you can mig
 11. Click **Environment variables**.
 12. In the table that appears, check the box for each environment variable that you want to migrate to Astro, then click **Migrate**. After the migration is complete, the status **Migrated ✅** appears.
 
-  :::caution
-
-  Some environment variables or Airflow Settings can't be migrated to Astro. See [Global environment variables](https://docs.astronomer.io/astro/platform-variables) for a list of variables that you can't override on Astro.
-
-  :::
-
 </TabItem>
 <TabItem value="operator" label="Starship operator">
 
 Refer to the [Configuration](https://github.com/astronomer/starship/tree/master/astronomer-starship-provider#configuration) detailed instructions on using the operator.
-
-:::caution
-
-Some environment variables or Airflow Settings can't be migrated to Astro. See [Global environment variables](https://docs.astronomer.io/astro/platform-variables) for a list of variables that you can't override on Astro.
-
-:::
 
 1. Add the following DAG to your source Airflow environment:
 
