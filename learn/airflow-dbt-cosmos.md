@@ -11,6 +11,8 @@ id: airflow-dbt-cosmos
 
 import CodeBlock from '@theme/CodeBlock';
 import cosmos_dag from '!!raw-loader!../code-samples/dags/airflow-dbt-cosmos/cosmos_dag.py';
+import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt-cosmos/airflow_dbt_bashoperator.py';
+import airflow_dbt_model from '!!raw-loader!../code-samples/dags/airflow-dbt-cosmos/airflow_dbt_model.py';
 
 [dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses.
 
@@ -222,6 +224,36 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
 4. Navigate to the logs of the `log_data_analysis` task to see the proportional solar and renewable energy capacity development in the country you selected.
 
     ![Energy Analysis logs](/img/guides/cosmos_energy_analysis_logs.png)
+
+
+## Alternative ways to run dbt Core with Airflow
+
+While using the Astronomer dbt provider is recommended, there are several other possible ways allowing you to run dbt Core with Airflow.
+
+### Using the BashOperator
+
+You can use the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) to execute specific dbt commands. You can execute `dbt run` or `dbt test` directly in Airflow as you would with any other shell.
+
+The DAG below uses the BashOperator to run a dbt project and associated tests:
+
+<CodeBlock language="python">{airflow_dbt_bashoperator}</CodeBlock>
+
+Using the `BashOperator` to run `dbt run` and `dbt test` can be useful during development. However, running dbt at the project-level has several issues:
+
+- Low observability into what execution state the project is in.
+- Failures are absolute and require the whole `dbt` group of models to be run again, which can be costly.
+
+:::info
+
+The code for this example can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/dbt-basic).
+
+:::
+
+### Using a manifest file to create BashOperator tasks
+
+An alternative way to gain more visibility into the steps dbt is running in each task if you are unable to use the Astronomer dbt provider, is to use a dbt generated `manifest.json` file. This file is generated in the target directory of your `dbt` project and contains its full representation. For more information on this file, see the [dbt documentation](https://docs.getdbt.com/reference/dbt-artifacts/).
+
+You can learn more about a manifest based dbt and Airflow project structure, view example code and read about the `DbtDagParser` in a 3-part blog post series on [Building a Scalable Analytics Architecture With Airflow and dbt](https://www.astronomer.io/blog/airflow-dbt-1/) ([Part 2](https://www.astronomer.io/blog/airflow-dbt-2/), [Part 3](https://www.astronomer.io/blog/airflow-dbt-3/)). 
 
 ## Conclusion
 

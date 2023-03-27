@@ -1,17 +1,20 @@
-from datetime import datetime, timedelta
+from pendulum import datetime
 
-from airflow import DAG
+from airflow.decorators import dag
 from airflow.operators.bash import BashOperator
 
 
-with DAG(
-    dag_id="dbt_dag",
-    start_date=datetime(2021, 12, 23),
+@dag(
+    start_date=datetime(2023, 3, 23),
     description="An Airflow DAG to invoke simple dbt commands",
-    schedule=timedelta(days=1),
-) as dag:
+    schedule="@daily",
+)
+def simple_dbt_dag():
     dbt_run = BashOperator(task_id="dbt_run", bash_command="dbt run")
 
     dbt_test = BashOperator(task_id="dbt_test", bash_command="dbt test")
 
     dbt_run >> dbt_test
+
+
+simple_dbt_dag()
