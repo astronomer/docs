@@ -12,7 +12,7 @@ id: airflow-dbt-cloud
 import CodeBlock from '@theme/CodeBlock';
 import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt-cloud/airflow_dbt_simple.py';
 
-[dbt Cloud](https://getdbt.com/) is a managed service providing a hosted architecture to run dbt, a tool that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with the Astronomer dbt provider](airflow-dbt-cosmos.md).
+[dbt Cloud](https://getdbt.com/) is a managed service providing a hosted architecture to run dbt, a tool that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with the Astronomer dbt provider](airflow-dbt.md).
 
 The [dbt Cloud provider](https://registry.astronomer.io/providers/dbt-cloud) allows user to orchestrate actions in dbt Cloud embedded in the Airflow environment. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in the whole data ecosystem. Airflow also gives you fine-grained control over dbt tasks such that teams have observability over every step in their dbt models.
 
