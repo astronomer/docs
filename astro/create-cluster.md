@@ -149,7 +149,7 @@ To create a new Astro cluster on Azure for your Organization, submit a request t
 - Your preferred node instance type.
 - Your preferred maximum node count.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with `Standard_D4d_v5 nodes`, one Postgres Flexible Server instance (`D4ds_v4`), and a maximum node count of 20 in `CentralUS`. If you're using Virtual Private Cloud (VPC) peering, a CIDR block (RFC 1918 IP Space) with the default CIDR range `172.20.0.0/20` is implemented.
+If you don't specify configuration preferences, Astronomer support creates a cluster with `Standard_D4d_v5 nodes`, one Postgres Flexible Server instance (`D4ds_v4`), and a maximum node count of 20 in `CentralUS`. If you're using Virtual Private Cloud (VPC) peering, a CIDR block (RFC 1918 IP Space) with the default CIDR range `172.20.0.0/19` is implemented.
 
 For information on all supported regions and configurations, see [Resources required for Astro on Azure](resource-reference-azure.md).  
 
