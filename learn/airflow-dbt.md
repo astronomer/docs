@@ -1,7 +1,7 @@
 ---
 title: "Orchestrate dbt Cloud with Airflow"
 sidebar_label: "dbt Cloud"
-id: airflow-dbt
+id: airflow-dbt-cloud
 ---
 
 <head>

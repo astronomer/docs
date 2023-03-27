@@ -1,7 +1,7 @@
 ---
 title: "Orchestrate dbt Core with the Astronomer dbt provider"
 sidebar_label: "dbt Core"
-id: airflow-dbt-cosmos
+id: airflow-dbt
 ---
 
 <head>
@@ -255,7 +255,7 @@ The code for this example can be found on [the Astronomer Registry](https://regi
 
 :::
 
-### Using a manifest file to create BashOperator tasks
+### Using a manifest file
 
 An alternative way to gain more visibility into the steps dbt is running in each task if you are unable to use the Astronomer dbt provider, is to use a dbt generated `manifest.json` file. This file is generated in the target directory of your `dbt` project and contains its full representation. For more information on this file, see the [dbt documentation](https://docs.getdbt.com/reference/dbt-artifacts/).
 

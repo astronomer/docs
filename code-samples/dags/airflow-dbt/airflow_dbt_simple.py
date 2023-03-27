@@ -10,7 +10,8 @@ JOB_ID = "<your dbt Cloud job id>"
 
 def _check_job_not_running(job_id):
     """
-    Retrieves the last run for a given dbt Cloud job and checks to see if the job is not currently running.
+    Retrieves the last run for a given dbt Cloud job and checks
+    to see if the job is not currently running.
     """
     hook = DbtCloudHook(DBT_CLOUD_CONN_ID)
     runs = hook.list_job_runs(job_definition_id=job_id, order_by="-id")
