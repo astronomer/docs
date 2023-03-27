@@ -11,8 +11,6 @@ id: airflow-dbt
 
 import CodeBlock from '@theme/CodeBlock';
 import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_simple.py';
-import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
-import airflow_dbt_model from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_model.py';
 
 [dbt Cloud](https://getdbt.com/) is a managed service providing a hosted architecture to run dbt, a tool that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with the Astronomer dbt provider](airflow-dbt-cosmos.md).
 
@@ -68,7 +66,6 @@ An Astro project contains all of the files you need to run Airflow locally.
     - Tenant: the URL under which your API cloud is hosted at, defaults to `cloud.getdbt.com` if left empty.
     - Account ID: (optional) default dbt account to use with this connection.
     - API Token: A dbt [User Token](https://docs.getdbt.com/docs/dbt-cloud-apis/user-tokens).
-
 
 ## Step 3: Configure a dbt Cloud job
 
