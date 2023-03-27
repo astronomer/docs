@@ -19,7 +19,148 @@ To configure these resources for a given tasks's Pod, you specify a `pod_overrid
 
 You must have an Airflow Deployment on Astronomer running with the Kubernetes executor. For more information on configuring an executor, see [Configure a Deployment](configure-deployment.md). To learn more about different executor types, see [Airflow executors explained](https://docs.astronomer.io/learn/airflow-executors-explained).
 
-## Configure Kubernetes Pods for a specific task using a `pod_override` configuration
+## Configure the default worker Pod for all Deployments
+
+By default, the Kubernetes executor launches workers based on a `podTemplate` configuration in the [Astronomer Airflow Helm chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml).
+
+You can modify the default `podTemplate` to configure the default worker Pods for all Deployments using the Kubernetes executor on your Astronomer Software installation.
+
+1. In your `config.yaml` file, copy the complete `podTemplate` configuration from your version of the [Astronomer Airflow Helm chart](https://github.com/astronomer/airflow-chart/blob/master/values.yaml). Your file should look like the following:
+
+    ```yaml
+    astronomer:
+      houston:
+        config:
+          deployments:
+            helm:
+              airflow:
+                podTemplate: |
+                    # Licensed to the Apache Software Foundation (ASF) under one
+                    # or more contributor license agreements.  See the NOTICE file
+                    # distributed with this work for additional information
+                    # regarding copyright ownership.  The ASF licenses this file
+                    # to you under the Apache License, Version 2.0 (the
+                    # "License"); you may not use this file except in compliance
+                    # with the License.  You may obtain a copy of the License at
+                    #
+                    #   http://www.apache.org/licenses/LICENSE-2.0
+                    #
+                    # Unless required by applicable law or agreed to in writing,
+                    # software distributed under the License is distributed on an
+                    # "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+                    # KIND, either express or implied.  See the License for the
+                    # specific language governing permissions and limitations
+                    # under the License.
+                    ---
+                    {{- $nodeSelector := or .Values.nodeSelector .Values.workers.nodeSelector }}
+                    {{- $affinity := or .Values.affinity .Values.workers.affinity }}
+                    {{- $tolerations := or .Values.tolerations .Values.workers.tolerations }}
+                    apiVersion: v1
+                    kind: Pod
+                    metadata:
+                      name: astronomer-pod-template-file
+                      labels:
+                        tier: airflow
+                        component: worker
+                        release: {{ .Release.Name }}
+                    {{- with .Values.labels }}
+                    {{ toYaml . | indent 4 }}
+                    {{- end }}
+                      {{- if .Values.airflowPodAnnotations }}
+                      annotations:
+                      {{- toYaml .Values.airflowPodAnnotations | nindent 4 }}
+                      {{- end }}
+                    spec:
+                      {{- if or (and .Values.dags.gitSync.enabled (not .Values.dags.persistence.enabled)) .Values.workers.extraInitContainers }}
+                      initContainers:
+                        {{- if and .Values.dags.gitSync.enabled (not .Values.dags.persistence.enabled) }}
+                        {{- include "git_sync_container" (dict "Values" .Values "is_init" "true") | nindent 4 }}
+                        {{- end }}
+                        {{- if .Values.workers.extraInitContainers }}
+                        {{- toYaml .Values.workers.extraInitContainers | nindent 4 }}
+                        {{- end }}
+                      {{- end }}
+                      containers:
+                        - args: []
+                          command: []
+                          envFrom:
+                          {{- include "custom_airflow_environment_from" . | default "\n  []" | indent 6 }}
+                          env:
+                            - name: AIRFLOW__CORE__EXECUTOR
+                              value: LocalExecutor
+                    {{- include "standard_airflow_environment" . | indent 6}}
+                    {{- include "custom_airflow_environment" . | indent 6 }}
+                          image: {{ template "pod_template_image" . }}
+                          imagePullPolicy: {{ .Values.images.airflow.pullPolicy }}
+                          name: base
+                          ports: []
+                          volumeMounts:
+                            - mountPath: {{ template "airflow_logs" . }}
+                              name: logs
+                            - name: config
+                              mountPath: {{ template "airflow_config_path" . }}
+                              subPath: airflow.cfg
+                              readOnly: true
+                    {{- if .Values.airflowLocalSettings }}
+                            - name: config
+                              mountPath: {{ template "airflow_local_setting_path" . }}
+                              subPath: airflow_local_settings.py
+                              readOnly: true
+                    {{- end }}
+                    {{- if or .Values.dags.gitSync.enabled .Values.dags.persistence.enabled }}
+                            {{- include "airflow_dags_mount" . | nindent 8 }}
+                    {{- end }}
+                    {{- if .Values.workers.extraVolumeMounts }}
+                    {{ toYaml .Values.workers.extraVolumeMounts | indent 8 }}
+                    {{- end }}
+                    {{- if .Values.workers.extraContainers }}
+                    {{- toYaml .Values.workers.extraContainers | nindent 4 }}
+                    {{- end }}
+                      hostNetwork: false
+                      {{- if or .Values.registry.secretName .Values.registry.connection }}
+                      imagePullSecrets:
+                        - name: {{ template "registry_secret" . }}
+                      {{- end }}
+                      restartPolicy: Never
+                      securityContext:
+                        runAsUser: {{ .Values.uid }}
+                        fsGroup: {{ .Values.gid }}
+                      nodeSelector: {{ toYaml $nodeSelector | nindent 4 }}
+                      affinity: {{ toYaml $affinity | nindent 4 }}
+                      tolerations: {{ toYaml $tolerations | nindent 4 }}
+                      serviceAccountName: {{ include "worker.serviceAccountName" . }}
+                      volumes:
+                      {{- if .Values.dags.persistence.enabled }}
+                      - name: dags
+                        persistentVolumeClaim:
+                          claimName: {{ template "airflow_dags_volume_claim" . }}
+                      {{- else if .Values.dags.gitSync.enabled }}
+                      - name: dags
+                        emptyDir: {}
+                      {{- end }}
+                      {{- if .Values.logs.persistence.enabled }}
+                      - name: logs
+                        persistentVolumeClaim:
+                          claimName: {{ template "airflow_logs_volume_claim" . }}
+                      {{- else }}
+                      - emptyDir: {}
+                        name: logs
+                      {{- end }}
+                      {{- if and .Values.dags.gitSync.enabled .Values.dags.gitSync.sshKeySecret }}
+                      {{- include "git_sync_ssh_key_volume" . | nindent 2 }}
+                      {{- end }}
+                      - configMap:
+                          name: {{ include "airflow_config" . }}
+                        name: config
+                      {{- if .Values.workers.extraVolumes }}
+                      {{ toYaml .Values.workers.extraVolumes | nindent 2 }}
+                      {{- end }}
+    ```
+
+2. Customize the pod template configuration based on your use case, such as by requesting default limits on CPU and memory usage. To configure these resources for each Pod, you configure a Pod template. For more information on configuring Pod template values, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
+3. Push the configuration change to your platform. See [Apply a config change](apply-platform-config.md).
+  
+## Configure the worker Pod for a specific task
 
 For each task with the Kubernetes executor, you can customize its individual worker Pod and override the defaults used in Astronomer Software by configuring a `pod_override` file.
 
