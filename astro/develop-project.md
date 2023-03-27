@@ -423,8 +423,8 @@ This example assumes that the name of each of your Python packages is identical 
 
     - Add the fingerprint for GitHub to `known_hosts`
     - Copy your `private-requirements.txt` file into the image
-    - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. Tthis securely mounts your SSH key at build time, ensuring that the key itself is not stored in the resulting Docker image filesystem or metadata.
-    - Add the user bin directory onto `PATH`
+    - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. This securely mounts your SSH key at build time, ensuring that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Add the user bin directory to `PATH`
 
   :::info
 
