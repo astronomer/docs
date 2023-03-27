@@ -226,6 +226,12 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
     ![Energy Analysis logs](/img/guides/cosmos_energy_analysis_logs.png)
 
 
+:::info
+
+To create a full DAG from your dbt models use the `DbtDag` class, as shown in the [Astronomer dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/dbt/usage.html#full-dag).
+
+:::
+
 ## Alternative ways to run dbt Core with Airflow
 
 While using the Astronomer dbt provider is recommended, there are several other possible ways allowing you to run dbt Core with Airflow.
