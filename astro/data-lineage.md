@@ -202,10 +202,10 @@ Click on the name of a dataset to show its lineage graph.
 
 ### Filter datasets by Deployment
 
-To view datasets that were read or written to by a specific Deployment:
+To view datasets that a specific Deployment read or wrote to:
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
-2. Click **Lineage**. Your Organization **Datasets** tab opens and filters to show only datasets that were read or written to by the selected Deployment.
+2. Click **Lineage**. Your Organization **Datasets** tab opens and filters to show only datasets that the selected Deployment read or wrote to.
 
 Alternatively, you can filter datasets by Deployment directly from the **Datasets** tab.
 
