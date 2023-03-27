@@ -5,7 +5,9 @@ You might have set Airflow connections and variables in the following places on 
 
 - The Airflow UI (stored in the Airflow metadata database).
 - Environment variables
-- A Secrets Backend.
+- A secrets backend.
+
+If you set your Airflow variables and connections in the Airflow UI, you can migrate those to Astro with Starship. You can check which resources will be migrated by going to **Admin** > **Variables** and **Admin** > **Connections** in the Airflow UI for your source Airflow environment.
 
 <Tabs>
 <TabItem value="plugin" label="Starship Plugin" default>
@@ -17,7 +19,7 @@ You might have set Airflow connections and variables in the following places on 
 2. Click **Get Token**.
 3. If required, sign in to [cloud.astronomer.io](https://cloud.astronomer.io).
 4. Copy the access token that appears after logging in. 
-5. In the Starship UI, paste the access token into the **Authentication Token** field.
+5. In the Airflow UI UI, paste the access token into the **Authentication Token** field.
 6. Click **Sign in**.
 7. In the **Target Deployment** menu, select the Deployment to which you want to migrate your Airflow variables and connections, then click **Select**.
 8. Click **Connections**. In the table that appears, click **Migrate** for each connection that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.
@@ -34,8 +36,6 @@ You might have set Airflow connections and variables in the following places on 
 
 </TabItem>
 <TabItem value="operator" label="Starship Operator">
-
-If you set your Airflow variables and connections in the Airflow UI, you can migrate those to Astro with Starship. You can check which resources will be migrated by going to **Admin** > **Variables** and **Admin** > **Connections** in the Airflow UI for your source Airflow environment.
 
 Refer to the [Configuration](https://github.com/astronomer/starship/tree/master/astronomer-starship-provider#configuration) detailed instructions on using the operator.
 

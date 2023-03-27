@@ -33,7 +33,7 @@ Before you create your Deployment, copy the following information from your sour
     | 2.2             | 4.2.9 (Airflow 2.2.5)  |
     | 2.4             | 6.3.0 (Airflow 2.4.3)  |
 
-    > *The earliest available Airflow version on Astro Runtime is 2.1.1, see here for a list of [LTS supported releases](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule). There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration.
+    > *The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
 
     - **Description**: Optional. Enter a description for your Deployment.
     - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
@@ -58,7 +58,7 @@ Before you create your Deployment, copy the following information from your sour
 </TabItem>
 <TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
 
-1. On your local machine, create a file called `config.yaml` in a directory with the same name as the source Airflow
+1. On your local machine, create a file called `config.yaml` in a directory with the same name as the source Airflow environment. 
 2. Open `config.yaml` and add the following:
 
    ```yaml
@@ -99,7 +99,7 @@ Before you create your Deployment, copy the following information from your sour
     | 2.2             | 4.2.9 (Airflow 2.2.5)  |
     | 2.4             | 6.3.0 (Airflow 2.4.3)  |
 
-    > *The earliest available Airflow version on Astro Runtime is 2.1.1, see here for a list of [LTS supported releases](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule). There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration.
+    > *The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
 
     - `<scheduler-au>`: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
 

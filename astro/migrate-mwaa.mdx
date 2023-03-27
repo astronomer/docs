@@ -18,19 +18,28 @@ import Deploy from "./migration-partials/deploy.mdx";
 import Additional from "./migration-partials/additional.mdx";
 
 This is where you'll find instructions for migrating to Astro from another managed Airflow environment. This guide will
-cover migrating an Airflow Instance from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://docs.aws.amazon.com/mwaa/latest/userguide/what-is-mwaa.html)
+cover migrating an Airflow Instance from [Google Cloud Composer (GCC)](https://cloud.google.com/composer/docs/concepts/overview)
 
-<Intro />
+To complete the migration process, you will:
+
+- Prepare your source Airflow and set up your Astro Airflow environment.
+- Migrate metadata from your source Airflow environment.
+- Migrate DAGs and additional Airflow components from your source Airflow environment.
+- Complete the cutover process to Astro.
 
 ## Prerequisites
 
 <Prerequisites />
 
-You can additionally utilize the `aws` CLI to expedite some steps in this guide.
+You can additionally use the [AWS CLI](https://aws.amazon.com/cli/) to expedite some steps in this guide.
 
 ## Step 1: Install Astronomer Starship
 
-<Starship />
+The [Astronomer Starship](https://pypi.org/project/astronomer-starship/) migration utility connects your source Airflow environment to your Astro Deployment and migrates your Airflow connections, Airflow variables, environment variables, and DAGs.
+
+The Starship migration utility works as a [plugin](https://github.com/astronomer/starship/tree/master/astronomer-starship) with a user interface, or as an Airflow operator if you are migrating from a more restricted Airflow environment.
+
+See the following table for information on which versions of Starship are available depending on your source Airflow environment:
 
 | Source Airflow environment | Starship plugin | Starship operator |
 | -------------------------- | --------------- | ----------------- |
@@ -98,7 +107,7 @@ You can alternatively complete this installation with the `aws` CLI by running t
 
   :::tip 
 
-  You can use the `aws` CLI to directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file:
+  To directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file, run the following AWS CLI command:
 
   ```sh
   aws s3 cp s3://[BUCKET]/requirements.txt requirements.txt
@@ -112,7 +121,7 @@ You can alternatively complete this installation with the `aws` CLI by running t
 
   :::tip
 
-  You can use the `aws` CLI to directly copy your DAGs from S3 to your `dags` folder, run:
+  To directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file, run the following AWS CLI command:
   
   ```sh
   aws s3 cp --recursive s3://[BUCKET]/dags dags
@@ -126,7 +135,7 @@ You can alternatively complete this installation with the `aws` CLI by running t
 
   :::tip
   
-  You can use the `aws` CLI to copy your `plugins` folder contents directly to your Astro project, run:
+  To directly copy your PyPI packages from AWS to your Astro project `requirements.txt` file, run the following AWS CLI command:
   
   ```sh
   aws s3 cp --recursive s3://[BUCKET]/plugins.zip plugins.zip
@@ -139,11 +148,28 @@ You can alternatively complete this installation with the `aws` CLI by running t
 
 ## Step 7: Configure additional components
 
-<Additional />
+The core migration of your project is now complete. Read the following topics to set up optional resources for deploying and resource management. 
+
+### Set up CI/CD
+
+See the following documentation to learn more about setting up CI/CD for your Astro project:
+
+- [Set-Up CI/CD](set-up-ci-cd.md)
+- [CI/CD templates](ci-cd.md)
+
+### Set up a secrets backend
+
+See [Configure a Secrets Backend](secrets-backend.md) to learn about configuring a secrets backend to store your Airflow connections and variables. This involves configuring the environment variables `AIRFLOW__SECRETS__BACKEND` and `AIRFLOW__SECRETS__BACKEND_KWARGS`.
 
 ## Step 8: Test locally and check for import errors
 
-<TestLocally />
+Depending on how thoroughly you want to test your Airflow environment, you have a few options for testing your project locally before deploying to Astro.
+
+- In your Astro project directory, run `astro dev parse` to check for any parsing errors in your DAGs.
+- Run `astro run <dag-id>` to test a specific DAG. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
+- Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+
+Note that your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources. 
 
 ## Step 9: Deploy to Astro
 
