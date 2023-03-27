@@ -167,9 +167,9 @@
 /astro/cli-reference/astrocloud-workspace-list /astro/cli/astro-workspace-list 301
 /astro/cli-reference/astrocloud-workspace-switch /astro/cli/astro-workspace-switch 301
 /astro/cli/get-started /astro/cli/install-cli 301
-/astro/cli/astro-organization-list /astro/cli/astro-organization 301
-/astro/cli/astro-organization-switch /astro/cli/astro-organization 301
 /astro/cli/astro-workspace /astro/cli/reference 301
+/astro/cli/astro-organization /astro/cli/reference 301
+/astro/cli/astro-user-invite /astro/cli/astro-organization-user-invite 301
 
 
 # redirect enterprise paths to software
@@ -250,7 +250,7 @@
 /software/0.25/upgrade-to-0-25 /software/0.25/upgrade-astronomer 301
 
 # redirect links to renamed files
-
+/astro/configure-worker-queues#worker-autoscaling-logic /astro/executors#celery-worker-autoscaling-logic 301
 /astro/view-clusters /astro/modify-cluster#view-clusters 301
 /astro/resource-reference-aws#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
 /astro/resource-reference-azure#worker-node-pools /astro/modify-cluster#about-worker-node-pools 301
@@ -259,9 +259,12 @@
 /astro/configure-deployment /astro/configure-deployment-resources 301
 /astro/scheduler-logs /astro/view-logs 301
 /astro/cross-account-role-setup /astro/install-aws 301
+/astro/cloud-ide/deploy-project.md#commit-your-project-to-github /astro/cloud-ide/deploy-project.md#commit-your-project-to-a-git-repository 301
+/configure-executors /astro/executors 301
 /software/manage-platform-users#reference-system-permissions /software/role-permission-reference 301
 /software/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
 /software/*/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
+
 
 # redirect links out in the wild (beyond our control)
 /v2/* /astro 301
@@ -272,3 +275,8 @@
 /enterprise/0.25/* /software/0.25/overview
 /enterprise/0.23/* /software/0.23/overview
 /enterprise/0.16/* /software/0.16/overview
+
+# redirect .rss to .xml
+/astro-runtime-release-notes.rss /astro-runtime-release-notes.xml 301
+/astro-cli-release-notes.rss /astro-cli-release-notes.xml 301
+/astro-release-notes.rss /astro-release-notes.xml 301

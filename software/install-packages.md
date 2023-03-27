@@ -43,7 +43,7 @@ FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild
 RUN pip install --no-cache-dir --user <your-python-package>
 ```
 
-To install a specific version of a Python-level package, include your package version in a pip [constraints file](https://pip-python3.readthedocs.io/en/latest/user_guide.html#constraints-files) and copy it into your Dockerfile. The base Docker image already has a pip constraints file which can be found [on GitHub](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/build-time-pip-constraints.txt).
+To install a specific version of a Python-level package, include your package version in a pip [constraints file](https://pip-python3.readthedocs.io/en/latest/user_guide.html#constraints-files) and copy it into your Dockerfile. 
 
 > **Note:** The process for installing dependencies is different if you are using the Astro CLI to deploy your Docker image to Astronomer. For an Astronomer platform-based setup, see [Install packages via the Astro CLI](install-packages.md#install-packages-via-the-astronomer-cli).
 

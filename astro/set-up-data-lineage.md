@@ -146,7 +146,7 @@ If your organization wants to orchestrate dbt Cloud jobs with Airflow, contact [
    $ dbt docs generate
    ```
 
-3. In your dbt project, run the [OpenLineage](https://openlineage.io/integration/dbt/) wrapper script using the `dbt run` [command](https://docs.getdbt.com/reference/commands/run):
+3. In your dbt project, run the [OpenLineage](https://openlineage.io/docs/integrations/dbt) wrapper script using the `dbt run` [command](https://docs.getdbt.com/reference/commands/run):
 
    ```bash
    $ dbt-ol run

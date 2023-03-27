@@ -5,7 +5,7 @@ id: configure-worker-queues
 description: Learn how to create and configure worker queues to create best-fit execution environments for your tasks.
 ---
 
-A worker queue is a set of configurations that apply to a group of workers in your Deployment. In Apache Airflow, a worker is responsible for executing tasks that have been scheduled and queued by the scheduler. On Astro, each worker is a Kubernetes Pod that is hosted within a Kubernetes node in your Astro cluster.
+By default, all tasks run in a default worker queue that does not require configuration or code. If you're using the Celery executor, you can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to queues in your DAG code. For more information about Airflow executors on Astro, see [Manage executors](executors.md).
 
 Use worker queues to create optimized execution environments for different types of tasks in the same Deployment. You can use worker queues to:
 
@@ -13,8 +13,6 @@ Use worker queues to create optimized execution environments for different types
 - Separate short-running tasks from long-running tasks.
 - Isolate a single task from other tasks in your Deployment.
 - Allow some workers to scale to zero but keep a minimum of 1 for other types of workers.
-
-By default, all tasks run in a default worker queue that does not require configuration or code. To enable worker types or configurations for different groups of tasks, you can create additional worker queues in the Cloud UI and assign tasks to queues in your DAG code.
 
 ## Benefits
 
@@ -53,25 +51,6 @@ If you don’t change any settings in the default worker queue:
 - A maximum of 10 workers can run at once, meaning that a maximum of 160 tasks can be in a `running` state at a time. Remaining tasks will stay in a `queued` or `scheduled` state until running tasks complete.
 
 You can change all settings of the default worker queue except for its name.
-
-## Worker autoscaling logic
-
-The number of workers running per worker queue on your Deployment at a given time is based on two values:
-
-- The total number of tasks in a `queued` or `running` state
-- The worker queue's setting for **Maximum Tasks per Worker**
-
-The calculation is made based on the following expression:
-
-`[Number of workers]= ([Queued tasks]+[Running tasks])/(Maximum tasks per worker)`
-
-Deployment [parallelism](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#parallelism) is the maximum number of tasks that can run concurrently across worker queues. To ensure that you can always run as many tasks as your worker queues allow, parallelism is calculated with the following expression:
-
-`[Parallelism]= ([The sum of all 'Max Worker Count' values for all worker queues] * [The sum of all 'Maximum tasks per worker' values for all worker queues])`.
-
-KEDA computes these calculations every ten seconds. When KEDA determines that it can scale down a worker, it waits for five minutes after the last running task on the worker finishes before terminating the worker Pod.
-
-To learn more about how changes to a Deployment can affect worker resource allocation, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
 ## Request a worker type
 

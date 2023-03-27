@@ -21,7 +21,11 @@ module.exports = {
     {
       type: "category",
       label: "Get started",
-      items: ["trial", "create-project", "log-in-to-astro", "create-deployment"],
+      items: [
+        'trial', 
+        'create-project', 
+        'log-in-to-astro', 
+        'create-deployment'],
     },
     {
       type: "category",
@@ -59,6 +63,7 @@ module.exports = {
       label: "Manage Deployments",
       items: [
         "configure-deployment-resources",
+        "executors",
         "configure-worker-queues",
         "api-keys",
         "environment-variables",
@@ -94,12 +99,21 @@ module.exports = {
           },
           items: ["install-aws", "install-azure", "install-gcp"],
         },
-        "manage-workspaces",
+        {
+          type: "category",
+          label: "Migrate to Astro",
+          items: ["migrate-mwaa", "migrate-gcc"],
+        },
         "manage-organization",
         {
           type: "category",
           label: "User access",
           items: ["add-user", "user-permissions", "configure-idp"],
+        },
+        {
+          type: "category",
+          label: "Manage Workspaces",
+          items: ["manage-workspaces", "workspace-api-tokens"],
         },
         {
           type: "category",
@@ -265,11 +279,20 @@ module.exports = {
         'cli/astro-dev-restart',
         'cli/astro-login',
         'cli/astro-logout',
-        'cli/astro-organization',
+        {
+          type: "category",
+          label: "astro organization",
+          items: [
+            "cli/astro-organization-list",
+            "cli/astro-organization-switch",
+            "cli/astro-organization-user-invite",
+            "cli/astro-organization-user-list",
+            "cli/astro-organization-user-update",
+          ],
+        },
         'cli/astro-run',
         'cli/astro-team',
         'cli/astro-user-create',
-        'cli/astro-user-invite',
         'cli/astro-version',
         {
           type: "category",

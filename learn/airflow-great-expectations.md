@@ -31,7 +31,7 @@ Typically, using Great Expectations is a two-step process:
 - Expectation Suite creation
 - Validation
 
-First, a user creates test suites, or “Expectation Suites”, using [Great Expectations methods](https://docs.greatexpectations.io/docs/reference/expectations/). These suites are usually stored in JSON and can be checked into version control, just like regular tests. The suites are then loaded by the Great Expectations framework at test runtime, for example, when processing a new batch of data in a pipeline.
+First, a user creates test suites, or “Expectation Suites”, using [Great Expectations methods](https://docs.greatexpectations.io/docs/terms/expectation/). These suites are usually stored in JSON and can be checked into version control, just like regular tests. The suites are then loaded by the Great Expectations framework at test runtime, for example, when processing a new batch of data in a pipeline.
 
 :::tip
 

@@ -33,7 +33,7 @@ All versions of AC have an equivalent version of Astro Runtime. To see the equiv
 
 ## Astronomer Houston API migration considerations 
 
-If you're using the Astronomer Houston API and you're migrating from AC to Astro Runtime, you'll need to replace `airflowVersion` arguments with `runtimeVersion` arguments in your scripts. You can use the [GraphQL Playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) to evaluate the API calls in your scripts. To access the Houston GraphQL playground, go to `https://houston.BASEDOMAIN/v1/`.
+If you're using the Astronomer Houston API and you're migrating from AC to Astro Runtime, you'll need to replace `airflowVersion` arguments with `runtimeVersion` arguments in your scripts. You can use the [GraphQL Playground](https://www.apollographql.com/docs/apollo-server/api/plugin/landing-pages/#graphql-playground-landing-page/) to evaluate the API calls in your scripts. To access the Houston GraphQL playground, go to `https://houston.BASEDOMAIN/v1/`.
 
 ## Step 1: Start the migration process
 

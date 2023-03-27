@@ -35,7 +35,6 @@ The Astronomer Registry includes:
 
 :::
 
-
 ## Prerequisites
 
 - An [Astro project](create-project.md)
@@ -44,9 +43,9 @@ The Astronomer Registry includes:
 
 ## Build and run a project locally
 
-Making changes to your Astro project and testing them locally requires an Airflow environment on your computer. To start an Astro project in a local Airflow environment, run the following command:
+Applying changes to your Astro project and testing them locally requires an Airflow environment on your computer. To start an Astro project in a local Airflow environment, run the following command:
 
-```
+```sh
 astro dev start
 ```
 
@@ -57,7 +56,24 @@ The command builds your Astro project into a Docker image and creates the follow
 - **Scheduler:** The Airflow component responsible for monitoring and triggering tasks
 - **Triggerer:** The Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators).
 
-After the project builds, you can access the Airflow UI by going to `http://localhost:8080/` and logging in with `admin` for both your username and password. You can also access your Postgres database at `localhost:5432/postgres`.
+After the project builds, you can access the Airflow UI at `http://localhost:8080/`. You can also access your Postgres database at `localhost:5432/postgres`. As long as your Airflow environment is running, any changes you make in your `dags`, `plugins`, and `include` directories are automatically applied without needing to restart the environment. 
+
+### Restart your local environment
+
+You must restart your environment to apply changes from any of the following files in your Astro project:
+
+- `packages.txt`
+- `Dockerfile`
+- `requirements.txt`
+- `airflow_settings.yaml`
+
+To restart your local Airflow environment, run:
+
+```sh
+astro dev restart
+```
+
+This command rebuilds your image and restarts the Docker containers running on your local machine with the new image. Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting your environment, then run `astro dev start` when you want to restart.
 
 ## Add DAGs
 
@@ -75,55 +91,35 @@ Use the `astro run <dag-id>` command to run and debug a DAG from the command lin
 
 :::
 
-### Ignore files with `.airflowignore`
+## Add utility files
 
-You can create an `.airflowignore` file in the `dags` directory of your Astro project to identify the files to ignore when you deploy to Astro or develop locally. This can be helpful if your team has a single Git repository that contains DAGs for multiple projects.
+Airflow DAGs sometimes require utility files to run workflows. This can include:
+ 
+- SQL files.
+- Custom Airflow operators.
+- Python functions.
+ 
+When more than one DAG in your Astro project needs a certain function or query, creating a shared utility file helps make your DAGs idempotent, more readable, and minimizes the amount of code you have in each DAG.
 
-The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. Files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler and the DAGs listed in the file don't appear in the Airflow UI.
+You can store utility files in the `/dags` directory of your Astro project. In most cases, Astronomer recommends adding your utility files to the `/dags` directory and organizing them into sub-directories based on whether they're needed for a single DAG or for multiple DAGs.
 
-For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#airflowignore). To learn more about the code deploy process, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+In the following example, the `dags` folder includes both types of utility files:
 
-1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
-
-2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. You should list the path for each file or directory relative to the `dags` directory. For example: 
-
-    ```text
-    mydag.py
-    data-team-dags
-    some-dags/ignore-this-dag.py
-    ``` 
-    
-3. Save your changes locally or deploy to Astro.
-
-    Your local Airflow environment is automatically updated as soon as you save your changes to `.airflowignore`. To apply your change in Astro, you need to deploy. See [Deploy code](deploy-code.md).
-
-
-### Add DAG helper functions
-
-Use the `include` folder to store additional utilities required by your DAGs. For example, templated SQL scripts or a custom helper function that's used in an operator and that you can reference in multiple DAGs.
-
-Astronomer recommends storing the `include` folder inside the `dags` directory of your Astro project. If you're using [DAG-only deploys](deploy-code.md#deploy-dags-only), this allows you to deploy DAG code without an image restart by running `astro deploy --dags` and makes sure that your DAGs can access your utility files when you deploy them.
-
-Here is how the recommended directory structure might appear:
-
-```bash
-├── airflow_settings.yaml
-├── dags
-│   └── include
-│       ├── helper_functions
-│       │   └── helper.py
-│       ├── templated_SQL_scripts
-│       └── custom_operators
-├── Dockerfile
-├── tests
-│   └── test_dag_integrity.py
-├── packages.txt
-├── plugins
-│   └── example-plugin.py
-└── requirements.txt
+```text
+└── dags
+    ├── my_dag
+    │   ├── my_dag.py
+    │   └── my_dag_utils.py  # specific DAG utils
+    └── utils
+        └── common_utils.py # common utils
 ```
 
-If you do not use DAG-only deploys or you decide to keep the `include` directory separate from the `dags` directory, the `include` folder in your Astro project directory is not deployed with your DAGs and is built into the Docker image with your other project files. 
+1. To add utility files which are shared between all your DAGs, create a folder named `utils` in the `dags` directory of your Astro project. To add utility files only for a specific DAG, create a new folder in `dags` to store both your DAG file and your utility file. 
+2. Add your utility files to the folder you created.
+3. Reference your utility files in your DAG code.
+4. Apply your changes. If you're developing locally, refresh the Airflow UI in your browser.
+
+Utility files in the `/dags` directory will not be parsed by Airflow, so you don't need to specify them in `.airflowignore` to prevent parsing. If you're using [DAG-only deploys](https://docs.astronomer.io/astro/deploy-code#deploy-dags-only) on Astro, changes to this folder are deployed when you run `astro deploy --dags` and do not require rebuilding your Astro project into a Docker image and restarting your Deployment. 
 
 ## Add Airflow connections, pools, variables
 
@@ -139,7 +135,13 @@ When you add Airflow objects to the Airflow UI of a local environment or to your
 
 Astronomer recommends using the `airflow_settings.yaml` file so that you don’t have to manually redefine these values in the Airflow UI every time you restart your project. To ensure the security of your data, Astronomer recommends [configuring a secrets backend](secrets-backend.md).
 
-### Configure `airflow_settings.yaml` (local development only)
+## Add test data or files for local testing
+
+Use the `include` folder of your Astro project to store files for testing locally, such as test data or a dbt project file. The files in your `include` folder are included in your deploys to Astro, but they are not parsed by Airflow. Therefore, you don't need to specify them in `.airflowignore` to prevent parsing. 
+
+If you're running Airflow locally, apply your changes by refreshing the Airflow UI.
+
+### Configure `airflow_settings.yaml` (Local development only)
 
 The `airflow_settings.yaml` file includes a template with the default values for all possible configurations. To add a connection, variable, or pool, replace the default value with your own.
 
@@ -248,10 +250,13 @@ If your environment variables contain sensitive information or credentials that 
 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment).
 4. Run the following command to confirm that your environment variables were applied locally:
+   
     ```sh
     astro dev bash --scheduler "/bin/bash && env"
     ```
+
    These commands output all environment variables that are running locally. This includes environment variables set on Astro Runtime by default.
+
 5. Optional. Run `astro deployment variable create --load` or `astro deployment variable update --load` to export environment variables from your `.env` file to a Deployment. You can view and modify the exported environment variables in the Cloud UI page for your Deployment.
 
 :::info
@@ -287,7 +292,39 @@ my_project
     └── prod.env
 ```
 
-## Run commands on build
+## Advanced configuration
+
+The following configurations are specific to advanced use cases. 
+
+### Add Airflow plugins 
+
+If you need to build a custom view in the Airflow UI or build an application on top of the Airflow metadata database, you can use Airflow plugins. To use an Airflow plugin, add your plugin files to the `plugins` folder of your Astro project. To apply changes from this folder to a local Airflow environment, [restart your local environment](develop-project.md#restart-your-local-environment).
+
+To learn more about Airflow plugins and how to build them, see [Airflow Plugins](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/plugins.html) in Airflow documentation or the Astronomer [Airflow plugins](https://docs.astronomer.io/learn/using-airflow-plugins) guide.
+
+### Use `.airflowignore`
+
+You can create an `.airflowignore` file in the `dags` directory of your Astro project to identify the files to ignore when you deploy to Astro or develop locally. This can be helpful if your team has a single Git repository that contains DAGs for multiple projects.
+
+The `.airflowignore` file and the files listed in it must be in the same `dags` directory of your Astro project. Files or directories listed in `.airflowignore` are not parsed by the Airflow scheduler and the DAGs listed in the file don't appear in the Airflow UI.
+
+For more information about `.airflowignore`, see [`.airflowignore` in the Airflow documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html#airflowignore). To learn more about the code deploy process, see [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
+
+1. In the `dags` directory of your Astro project, create a new file named `.airflowignore`.
+
+2. List the files or sub-directories you want ignored when you push code to Astro or when you are developing locally. You should list the path for each file or directory relative to the `dags` directory. For example: 
+
+    ```text
+    mydag.py
+    data-team-dags
+    some-dags/ignore-this-dag.py
+    ``` 
+    
+3. Save your changes locally or deploy to Astro.
+
+    Your local Airflow environment is automatically updated as soon as you save your changes to `.airflowignore`. To apply your change in Astro, you need to deploy. See [Deploy code](deploy-code.md).
+
+### Run commands on build
 
 To run additional commands as your Astro project is built into a Docker image, add them to your `Dockerfile` as `RUN` commands. These commands run as the last step in the image build process.
 
@@ -299,7 +336,7 @@ RUN ls
 
 This is supported both on Astro and in the context of local development.
 
-## Add a CA certificate to an Astro Runtime image
+### Add a CA certificate to an Astro Runtime image
 
 If you need your Astro Deployment to communicate securely with a remote service using a certificate signed by an untrusted or internal certificate authority (CA), you need to add the CA certificate to the trust store inside your Astro project's Docker image.
 
@@ -316,48 +353,7 @@ If you need your Astro Deployment to communicate securely with a remote service 
 
 3. [Restart your local environment](develop-project.md#restart-your-local-environment) or deploy to Astro. See [Deploy code](deploy-code.md).
 
-## Apply changes to your project
-
-The Astro CLI lets you quickly apply and test changes to your Astro project. Some file changes require a restart of your local Airflow environment.
-
-### DAG code changes
-
-Changes made to the following directories in your Astro project don’t require rebuilding your project:
-
-- `dags` (the storage location for your DAG code)
-- `plugins` (the storage location for your custom or community Airflow plugins)
-- `include` (the storage location for additional project files)
-
-#### Apply changes
-
-1. Save the latest version of the file to your local version control tool, such as VSCode.
-2. Refresh the Airflow UI in your browser.
-
-### Environment changes
-
-All changes made to the following files require rebuilding your Astro project into a Docker image and restarting your Airflow environment:
-
-- `packages.txt`
-- `Dockerfile`
-- `requirements.txt`
-- `airflow_settings.yaml`
-
-#### Apply changes
-
-1. Save the change to your local version control tool, such as VSCode.
-2. [Restart your local environment](develop-project.md#restart-your-local-environment).
-
-### Restart your local environment
-
-To restart your local Airflow environment, run:
-
-```sh
-astro dev restart
-```
-
-This command rebuilds your image and restarts the Docker containers running on your local machine with the new image. Alternatively, you can run `astro dev stop` to stop your Docker containers without restarting or rebuilding your project.
-
-## Install Python packages from private sources
+### Install Python packages from private sources
 
 Python packages can be installed into your image from public and private locations. To install packages listed on private PyPI indices or a private git-based repository, you need to complete additional configuration in your project.
 
@@ -368,7 +364,6 @@ Depending on where your private packages are stored, use one of the following se
 Deploying a custom Runtime image with a CI/CD pipeline requires additional configurations. For an example implementation, see [GitHub Actions CI/CD templates](ci-cd.md#github-actions).
 
 :::
-
 
 <Tabs
     defaultValue="github"
@@ -445,8 +440,8 @@ This example assumes that the name of each of your Python packages is identical 
 
     - Add the fingerprint for GitHub to `known_hosts`
     - Copy your `private-requirements.txt` file into the image
-    - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. Tthis securely mounts your SSH key at build time, ensuring that the key itself is not stored in the resulting Docker image filesystem or metadata.
-    - Add the user bin directory onto `PATH`
+    - Install Python-level packages from your private repository as specified in your `private-requirements.txt` file. This securely mounts your SSH key at build time, ensuring that the key itself is not stored in the resulting Docker image filesystem or metadata.
+    - Add the user bin directory to `PATH`
 
   :::info
 

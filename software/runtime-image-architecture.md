@@ -61,7 +61,7 @@ All Astro Runtime images have the following open source provider packages pre-in
 - PostgreSQL (Postgres) [`apache-airflow-providers-postgres`](https://pypi.org/project/apache-airflow-providers-postgres/)
 - Redis [`apache-airflow-providers-redis`](https://pypi.org/project/apache-airflow-providers-redis/)
 - StatsD [`apache-airflow-statsd`](https://pypi.org/project/statsd/)
-- Snowflake [`apache-airflow-snowflake`](https://pypi.org/project/apache-airflow-snowflake/)
+- Snowflake [`apache-airflow-snowflake`](https://pypi.org/project/apache-airflow-providers-snowflake/)
 - Virtualenv [`apache-airflow-virtualenv`](https://pypi.org/project/virtualenv/)
 - OpenLineage with Airflow [`openlineage-airflow`](https://pypi.org/project/openlineage-airflow/)
 - Astronomer Providers [`astronomer-providers`](https://pypi.org/project/astronomer-providers/)

@@ -134,10 +134,10 @@ The `SQLColumnCheckOperator` and `SQLTableCheckOperator` are part of the [Common
 
 - [`SQLColumnCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator): Can quickly define checks on columns of a table using a Python dictionary.
 - [`SQLTableCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator): Can run aggregated and non-aggregated statements involving several columns of a table.
-- [`SQLCheckOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/sqlcheckoperator): Can be used with any SQL statement that returns a single row of booleans.
-- [`SQLIntervalCheckOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/sqlintervalcheckoperator): Runs checks against historical data.
-- [`SQLValueCheckOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/sqlvaluecheckoperator): Compares the result of a SQL query against a value with or without a tolerance window.
-- [`SQLThresholdCheckOperator`](https://registry.astronomer.io/providers/apache-airflow/modules/sqlthresholdcheckoperator): Compares the result of a SQL query against upper and lower thresholds which may also be described as SQL queries.
+- [`SQLCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlcheckoperator): Can be used with any SQL statement that returns a single row of booleans.
+- [`SQLIntervalCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlintervalcheckoperator): Runs checks against historical data.
+- [`SQLValueCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlvaluecheckoperator): Compares the result of a SQL query against a value with or without a tolerance window.
+- [`SQLThresholdCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlthresholdcheckoperator): Compares the result of a SQL query against upper and lower thresholds which may also be described as SQL queries.
 
 The logs from SQL Check operators can be found in the regular Airflow task logs. For more details and examples of SQL Check operators and logs, see [Airflow Data Quality Checks with SQL Operators](airflow-sql-data-quality.md).
 

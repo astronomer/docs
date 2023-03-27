@@ -21,7 +21,7 @@ If your Organization has a configured identity provider (IdP), assign users to A
 
 If you want to invite a user to an Organization from a domain that you don't own, such as a third party consultant, or you want to invite someone from your company to Astro with a higher level role, follow these steps.
 
-1. In the Cloud UI Organization view, click the **People** tab.
+1. In the Cloud UI, go to **Settings** > **Access Management**.
 
 2. Click **Invite member**:
 
@@ -33,13 +33,13 @@ If you want to invite a user to an Organization from a domain that you don't own
 
 5. Click **Add member**.
 
-    After you add the user, their information appears in the **Access** tab as a new entry in the **Members** table. To access the Organization, the user needs to accept the invitation sent by email and then create an Astro account or log in.
+    After you add the user, their information appears in **Access Management** as a new entry in the **Members** table. To access the Organization, the user needs to accept the invitation sent by email and then create an Astro account or log in.
 
 ## Update or remove an Organization user
 
 See [User permissions](user-permissions.md) to view the permissions for each available Organization role.
 
-1. In the Cloud UI, click the **People** tab.
+1. In the Cloud UI, go to **Settings** > **Access Management**.
    
 2. Find the user in the **Members** list and then click **Edit**.
    
@@ -53,7 +53,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 2. Click **Workspace Settings**.
    
-3. In the **Access** tab, click **Add Member**.
+3. In the **Access Management** tab, click **Add Member**.
 
     ![Workspace user invite button](/img/docs/add-workspace-member.png)
 
@@ -63,7 +63,7 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 
 6. Click **Add member**.
 
-    After you add the user, their information appears in the **Access** tab as a new entry in the **Members** list. To access the Workspace, the user needs to accept the invitation sent by email and log in.
+    After you add the user, their information appears in the **Access Management** tab as a new entry in the **Members** list. To access the Workspace, the user needs to accept the invitation sent by email and log in.
 
 ## Update or remove a Workspace user
 
@@ -122,3 +122,4 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
     ```sh
     sh path/to/add-users.sh path/to/users.txt
     ```
+6. Optional. To use this script as part of a CI/CD pipeline, create a Workspace API token and specify the environment variable `ASTRO_API_TOKEN=<your-token>` in your CI/CD environment. See [Manage Workspace API tokens](workspace-api-tokens.md). Note that Workspace API tokens work only for inviting groups of users to a Workspace. 

@@ -320,7 +320,7 @@ Another example using the ShortCircuitOperator, can be found on the [Astronomer 
 
 Airflow offers a few other branching operators that work similarly to the BranchPythonOperator but for more specific contexts: 
 
-- [BranchSQLOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
+- [BranchSQLOperator](https://registry.astronomer.io/providers/common-sql/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
 - [BranchDayOfWeekOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdayofweekoperator): Branches based on whether the current day of week is equal to a given `week_day` parameter.
 - [BranchDateTimeOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdatetimeoperator): Branches based on whether the current time is between `target_lower` and `target_upper` times.
 

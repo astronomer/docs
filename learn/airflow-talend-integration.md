@@ -251,7 +251,7 @@ with DAG('talend_jobs',
 
 The first half of the code imports packages and sets the DAG up to work with Kubernetes. Each Talend job is its own task using the `KubernetesPodOperator`. In this case, the two tasks correlate to two Talend jobs, `talend1` and `talend2`.
 
-In each task, the `image` is the name of the image of the containerized job saved to a registry as described above. Note that in this example, the image is pulled from DockerHub. By default, this is where the `KubernetesPodOperator` looks for the provided image name. If you want to pull an image from a private registry (e.g. ECR, GCR, etc.) instead, the setup looks a little different. Refer to the [Apache Airflow documentation](https://airflow.readthedocs.io/en/latest/howto/operator/kubernetes.html#how-to-use-private-images-container-registry) for details.
+In each task, the `image` is the name of the image of the containerized job saved to a registry as described above. Note that in this example, the image is pulled from DockerHub. By default, this is where the `KubernetesPodOperator` looks for the provided image name. If you want to pull an image from a private registry (e.g. ECR, GCR, etc.) instead, the setup looks a little different. Refer to the [Apache Airflow documentation](https://airflow.apache.org/docs/docker-stack/build.html#customizing-the-image) for details.
 
 Since this example is very simple we don't need to provide any additional arguments to run the image. But if needed, these can all be specified in the operator's parameters.
 
