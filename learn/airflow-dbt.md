@@ -123,17 +123,21 @@ In this tutorial we will use an example dbt job that consists of two dbt models.
     models:
       my_energy_project:
         materialized: table
+
+    # create a variable called country_code and give it the default value "FR" (for France)
+    vars:
+      country_code: "FR"
     ```
 
 4. Within `my_energy_project` create a sub-directory called `models`.
 
-5. Create a SQL file named `select_country.sql` within the `models` folder. Copy the following dbt model into the file and specify the code of the country you want to analyze. The underlying data contains energy capacity information for several European countries, you can for example use `GB` to select data from Great Britain or `FR` for data from France.
+5. Create a SQL file named `select_country.sql` within the `models` folder. Copy the following dbt model into the file. The country for which data will be selected is retrieved from a variable called `country_code` which we'll inject from the Airflow DAG.:
 
     ```sql
     select 
         "YEAR", "COUNTRY", "SOLAR_CAPACITY", "TOTAL_CAPACITY", "RENEWABLES_CAPACITY"
-    from cosmos_db.cosmos_schema.energy
-    where "COUNTRY" = '<two letter country code>'
+    from energy_db.energy_schema.energy
+    where "COUNTRY" = '{{ var("country_code") }}'
     ```
 
 6. Create a SQL file named `create_pct.sql` within the `models` folder. Copy the following dbt model into the file:
@@ -217,11 +221,13 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
     - the `transform_data` task group is created from the dbt models. Using the models defined in Step 4, the task group will contain two nested task groups with two tasks each, one for `dbt run`, the other for `dbt test`.
     - the `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to use pandas to run an analysis on the final table created through the dbt models and logs the results.
 
-3. Run the DAG manually by clicking on the play button and view the DAG in the graph view (double click on the task groups in order to expand them). 
+3. Determine for which country your DAG will analyze data by specifying your desired `country_code` The underlying data contains energy capacity information for several European countries, you can for example use `GB` to select data from Great Britain or `DE` for data from Germany.
+
+4. Run the DAG manually by clicking on the play button and view the DAG in the graph view (double click on the task groups in order to expand them). 
 
     ![Cosmos DAG graph view](/img/guides/cosmos_dag_graph_view.png)
 
-4. Navigate to the logs of the `log_data_analysis` task to see the proportional solar and renewable energy capacity development in the country you selected.
+5. Navigate to the logs of the `log_data_analysis` task to see the proportional solar and renewable energy capacity development in the country you selected.
 
     ![Energy Analysis logs](/img/guides/cosmos_energy_analysis_logs.png)
 
