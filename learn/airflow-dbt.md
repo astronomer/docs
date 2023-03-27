@@ -221,7 +221,7 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
     - the `transform_data` task group is created from the dbt models. Using the models defined in Step 4, the task group will contain two nested task groups with two tasks each, one for `dbt run`, the other for `dbt test`.
     - the `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to use pandas to run an analysis on the final table created through the dbt models and logs the results.
 
-3. Determine for which country your DAG will analyze data by specifying your desired `country_code` The underlying data contains energy capacity information for several European countries, you can for example use `GB` to select data from Great Britain or `DE` for data from Germany.
+3. Determine for which country your DAG will analyze data by specifying your desired `country_code` in the `dbt_args` parameter of the DbtTaskGroup. The underlying data contains energy capacity information for several European countries, you can for example use `GB` to select data from Great Britain or `DE` for data from Germany.
 
 4. Run the DAG manually by clicking on the play button and view the DAG in the graph view (double click on the task groups in order to expand them). 
 
