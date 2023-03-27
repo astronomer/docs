@@ -159,7 +159,7 @@ After creating the AWS account, provide Astronomer with the following informatio
 - Your preferred maximum node count.
 - An instance type for the Airflow metadata database.
 
-If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` and a default `db.r5.large` Amazon RDS instance type. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
+If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` and a default `db.m6g.large` Amazon RDS instance type. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
 
 To provision additional clusters after completing your initial installation, see [Create a cluster](create-cluster.md).
 
