@@ -17,8 +17,7 @@ import TestLocally from "./migration-partials/test-locally.mdx";
 import Deploy from "./migration-partials/deploy.mdx";
 import Additional from "./migration-partials/additional.mdx";
 
-This is where you'll find instructions for migrating to Astro from another managed Airflow environment. This guide will
-cover migrating an Airflow Instance from [Google Cloud Composer (GCC)](https://cloud.google.com/composer/docs/concepts/overview)
+This is where you'll find instructions for migrating an Airflow environment from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://cloud.google.com/composer/docs/concepts/overview) to Astro.
 
 To complete the migration process, you will:
 
@@ -101,7 +100,7 @@ You can alternatively complete this installation with the `aws` CLI by running t
     FROM quay.io/astronomer/astro-runtime:6.3.0
     ```
 
-    The `Dockerfile` defines environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
+    The `Dockerfile` defines the environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
 
 2. Open your Astro project `requirements.txt` file and add all Python packages from your source Airflow environment's `requirements.txt` file. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html) to find this file in your S3 bucket.
 
