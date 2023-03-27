@@ -1,9 +1,7 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-After you successfully deploy your code to Astro, you need to shift your workloads from your source Airflow environment to Astro on a DAG-by-DAG basis. 
-
-Depending on how your workloads are set up, Astronomer recommends letting owners of your DAGs determine the order that you should migrate and test their DAGs.
+After you successfully deploy your code to Astro, you need to shift your workloads from your source Airflow environment to Astro on a DAG-by-DAG basis. Depending on how your workloads are set up, Astronomer recommends letting DAG owners determine the order that you should migrate and test their DAGs.
 
 You can complete the following steps in the next few days or weeks. Provide updates to your Astronomer Data Engineer as they continue to assist you through the process and any solve any difficulties that arise. 
 
@@ -11,17 +9,15 @@ Continue to validate and cut over your DAGs until you have fully migrated your s
 
 #### Confirm connections and variables
 
-In the Airflow UI for your Deployment, [test the connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections) that you migrated from your source Airflow environment. 
+In the Airflow UI for your Deployment, [test all connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections) that you migrated from your source Airflow environment. 
 
-Additionally, spot-check any Airflow variables by checking their values in **Admin** > **Variables**.
+Additionally, check Airflow variables by checking their values in **Admin** > **Variables**.
 
-#### Test and Validate DAGs in Astro
+#### Test and validate DAGs in Astro
 
 To create a strategy for testing DAGs, determine which of your DAGs need the most care when running and testing them.
 
-If your DAG workflow is idempotent and can run twice or more without negative effects, you can run and test these DAGs with minimal risk. 
-
-If your DAG workflow is non-idempotent and can become invalid you rerun it, you should test the DAG with more caution and downtime. 
+If your DAG workflow is idempotent and can run twice or more without negative effects, you can run and test these DAGs with minimal risk. If your DAG workflow is non-idempotent and can become invalid you rerun it, you should test the DAG with more caution and downtime. 
 
 #### Cut over DAGs to Astro using Starship
 
@@ -38,13 +34,14 @@ For each DAG in your Astro Deployment:
 
 2. Click **DAGs cutover**. In the table that appears, click the Pause icon in the **Local** column for the DAG you're cutting over. 
 
-3. Click Start icon in the **Remote** column for the DAG you're cutting over. 
+3. Click the Start icon in the **Remote** column for the DAG you're cutting over. 
 
-4. After completing this cutover, the Start and Pause icons switch. If there is an issue after cutting over, click the **Remote** pause button and then the **Local** start button to move your workflow back to your source Airflow environment. 
+4. After completing this cutover, the Start and Pause icons switch. If there's an issue after cutting over, click the **Remote** pause button and then the **Local** start button to move your workflow back to your source Airflow environment. 
 
 </TabItem>
 <TabItem value="operator" label="Starship Operator">
-The Starship Operator does not contain cut-over functionality.
+
+The Starship operator does not contain cut-over functionality.
 
 To cut over a DAG, pause the DAG in the source Airflow and unpause the DAG in Astro. Keep both Airflow environments open as you test and ensure that the cutover was successful.
 

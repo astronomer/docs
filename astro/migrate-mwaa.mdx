@@ -8,10 +8,10 @@ description: Get started on Astro by migrating your Airflow code from Amazon Man
 import Intro from "./migration-partials/intro.mdx";
 import Prerequisites from "./migration-partials/prereqs.mdx";
 import Starship from "./migration-partials/starship.mdx";
-import Usage from "./migration-partials/starship-usage.mdx";
+import StarshipUsage from "./migration-partials/starship-usage.mdx";
 import Workspaces from "./migration-partials/workspaces.mdx";
 import Deployments from "./migration-partials/deployments.mdx";
-import DAGs from "./migration-partials/directory-setup.mdx";
+import DirectorySetup from "./migration-partials/directory-setup.mdx";
 import FinalStep from "./migration-partials/final-step.mdx";
 import TestLocally from "./migration-partials/test-locally.mdx";
 import Deploy from "./migration-partials/deploy.mdx";
@@ -49,14 +49,14 @@ See the following table for information on which versions of Starship are availa
 
 To install Starship to your MWAA instance as a plugin:
 
-1. Download your existing `requirements.txt` file for your source Airflow environment from S3. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways).
+1. Download the `requirements.txt` file for your source Airflow environment from S3. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways).
 2. Add `astronomer-starship` on a new line to your `requirements.txt` file.
-3. Re-upload the file to your S3 bucket.
-4. Edit your Airflow environment to refer to the new version of this file.
+3. Reupload the file to your S3 bucket.
+4. Update your Airflow environment to use the new version of this file.
 
 :::tip
 
-You can alternatively complete this installation with the `aws` CLI by running the following commands:
+To complete this setup from the command line:
 
 1. Run the following commands to set environment variables on your local machine:
 
@@ -65,7 +65,7 @@ You can alternatively complete this installation with the `aws` CLI by running t
     export MWAA_BUCKET="MWAA BUCKET"
     ```
 
-2. Run the following commands to install Starship:
+2. Run the following AWS CLI commands to install Starship:
 
     ```shell
     aws s3 cp "s3://$MWAA_BUCKET/requirements.txt" requirements.txt
@@ -86,11 +86,11 @@ You can alternatively complete this installation with the `aws` CLI by running t
 
 ## Step 4: Use Starship to Migrate Airflow Connections and Variables
 
-<Usage />
+<StarshipUsage />
 
 ## Step 5: Create an Astro project
 
-<DAGs />
+<DirectorySetup />
 
 ## Step 6: Migrate project code and dependencies to your Astro project
 
