@@ -141,20 +141,20 @@ To complete this setup from the command line:
   
   :::
 
-## Step 7: Configure additional components
+## Step 7: Configure additional data pipeline infrastructure
 
-The core migration of your project is now complete. Read the following topics to set up optional resources for deploying and resource management. 
+The core migration of your project is now complete. Read the following topics to see whether you need to set up any additional infrastructure on Astro before cutting over your DAGs. 
 
 ### Set up CI/CD
 
-See the following documentation to learn more about setting up CI/CD for your Astro project:
+If you used CI/CD to deploy code to your source Airflow environment, read the following documentation to learn about setting up a similar CI/CD pipeline for your Astro project:
 
 - [Set-Up CI/CD](set-up-ci-cd.md)
 - [CI/CD templates](ci-cd.md)
 
 ### Set up a secrets backend
 
-See [Configure a Secrets Backend](secrets-backend.md) to learn about configuring a secrets backend to store your Airflow connections and variables. This involves configuring the environment variables `AIRFLOW__SECRETS__BACKEND` and `AIRFLOW__SECRETS__BACKEND_KWARGS`.
+If you currently store Airflow variables or connections in a secrets backend, you need to integrate your secrets backend with Astro to access those objects from your migrated DAGs. See [Configure a Secrets Backend](secrets-backend.md) for setup steps.
 
 ## Step 8: Test locally and check for import errors
 
