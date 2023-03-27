@@ -215,7 +215,7 @@ Adding the name of a package to the `packages.txt` or `requirements.txt` files o
     astro dev bash --scheduler "pip freeze | grep <package-name>"
     ```
 
-To learn more about the format of the `requirements.txt` file, see [Requirements File Format](https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format) in pip documentation. To browse Python libraries, see (PyPi)[pypi.org](https://pypi.org/). To browse Airflow providers, see the [Astronomer Registry](https://registry.astronomer.io/providers/).
+To learn more about the format of the `requirements.txt` file, see [Requirements File Format](https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format) in pip documentation. To browse Python libraries, see [PyPi](https://pypi.org/). To browse Airflow providers, see the [Astronomer Registry](https://registry.astronomer.io/providers/).
 
 ## Add DAG utility files
 
