@@ -84,7 +84,7 @@ def my_energy_dag():
         dbt_args={
             "dbt_executable_path": DBT_EXECUTABLE_PATH,
             "schema": SCHEMA_NAME,
-            "vars": '{"country_code": "CH"}'
+            "vars": '{"country_code": "CH"}',
         },
     )
 
