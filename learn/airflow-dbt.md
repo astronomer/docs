@@ -14,9 +14,15 @@ import cosmos_dag from '!!raw-loader!../code-samples/dags/airflow-dbt/cosmos_dag
 import airflow_dbt_bashoperator from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_bashoperator.py';
 import airflow_dbt_model from '!!raw-loader!../code-samples/dags/airflow-dbt/airflow_dbt_model.py';
 
-[dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. For a tutorial on how to use dbt Cloud with Airflow see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
+[dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
 
 The [Astronomer dbt provider](https://astronomer.github.io/astronomer-cosmos/), also known as Cosmos, allows you to automatically create Airflow tasks from dbt models, seamlessly integrating dbt jobs into your Airflow orchestration environment. Running dbt Core with Airflow allows you implement event-based scheduling of dbt and integrate with other tools in your data ecosystem, while maintaining full observability of dbt model runs from the Airflow UI.
+
+:::info
+
+For a tutorial on how to use dbt Cloud with Airflow see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
+
+:::
 
 ## Time to complete
 
@@ -75,10 +81,12 @@ An Astro project contains all of the files you need to run Airflow locally.
 
 ## Step 2: Prepare the data
 
-This tutorial uses a subset of the following dataset: [Open Power System Data. 2020. Data Package National generation capacity. Version 2020-10-01](https://doi.org/10.25832/national_generation_capacity/2020-10-01) (Primary data from various sources, for a complete list see the linked source).
+This tutorial uses an Airflow DAG to orchestrate dbt Core jobs that calculate the percentage of solar and renewable energy capacity in different years for a selected country.
 
 1. [Download the CSV file](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) from GitHub.
 2. Save the downloaded CSV file in the `include` directory of your Airflow project.
+
+This tutorial uses a subset of the original data. The full data source provided by Open Power System Data can be found [here](https://doi.org/10.25832/national_generation_capacity/2020-10-01).
 
 ## Step 3: Prepare your data warehouse
 
@@ -89,6 +97,8 @@ CREATE DATABASE energy_db;
 \connect energy_db
 CREATE SCHEMA energy_schema;
 ```
+
+If you are using a different data warehouse, your commands to create the database and schema may differ.
 
 ## Step 4: Create your dbt models
 
@@ -207,6 +217,12 @@ You should now have the following structure within your Astro project:
     - Password: Your Postgres password.
     - Port: Your Postgres port.
 
+:::info
+
+For some tools you might need to add the [relevant provider package](https://registry.astronomer.io/) to requirements.txt and restart Airflow, in order to have the correct connection type available.
+
+:::
+
 ## Step 6: Write a dbt DAG
 
 The DAG used in this tutorial shows how you can use the Astronomer dbt provider to create tasks from existing dbt models and have those task be embedded within other actions in your data ecosystem.
@@ -223,7 +239,9 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
     - the `transform_data` task group is created from the dbt models. Using the models defined in Step 4, the task group will contain two nested task groups with two tasks each, one for `dbt run`, the other for `dbt test`.
     - the `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to use pandas to run an analysis on the final table created through the dbt models and logs the results.
 
-3. (Optional) Choose which country's data to analyze by specifying your desired `country_code` in the `dbt_args` parameter of the DbtTaskGroup. Note that this dataset only contains data for several European countries.
+    The `DbtTaskGroup` of the Astronomer dbt provider package automatically scans the `dbt` folder for dbt projects and creates a task group containing one Airflow task for every dbt command run on every model in the project. Additionally, the provider can infer the model dependency within the dbt project and will set the Airflow task dependencies accordingly.
+
+3. (Optional) Choose which country's data to analyze by specifying your desired `country_code` in the `dbt_args` parameter of the DbtTaskGroup. Note that this [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) only contains data for several European countries.
 
 4. Run the DAG manually by clicking on the play button and view the DAG in the graph view (double click on the task groups in order to expand them). 
 
@@ -236,7 +254,7 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
 
 :::info
 
-To create a full DAG from your dbt models use the `DbtDag` class, as shown in the [Astronomer dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/dbt/usage.html#full-dag).
+The DbtTaskGroup class populates an Airflow task group with Airflow tasks created from dbt models inside of a normal DAG. To directly define a full DAG containing only dbt models use the `DbtDag` class, as shown in the [Astronomer dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/dbt/usage.html#full-dag).
 
 :::
 

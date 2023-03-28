@@ -1,5 +1,5 @@
 ---
-title: "Orchestrate dbt Cloud with Airflow"
+title: "Orchestrate dbt Cloud jobs with Airflow"
 sidebar_label: "dbt Cloud"
 id: airflow-dbt-cloud
 ---
@@ -12,9 +12,15 @@ id: airflow-dbt-cloud
 import CodeBlock from '@theme/CodeBlock';
 import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt-cloud/airflow_dbt_simple.py';
 
-[dbt Cloud](https://getdbt.com/) is a managed service providing a hosted architecture to run dbt, a tool that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with the Astronomer dbt provider](airflow-dbt.md).
+[dbt Cloud](https://getdbt.com/) is a managed service providing a hosted architecture to run dbt, a tool that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
 
 The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/dbt-cloud) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in the whole data ecosystem. Airflow also gives you fine-grained control over dbt tasks such that teams have observability over every step in their dbt models.
+
+:::info
+
+For a tutorial on how to use the open-source dbt Core package with Airflow see [Orchestrate dbt Core with the Astronomer dbt provider](airflow-dbt.md).
+
+:::
 
 ## Assumed knowledge
 
@@ -81,7 +87,7 @@ In the dbt Cloud UI, create one dbt Cloud job. The contents of this job do not m
 
     This DAG shows a simple implementation of using the [DbtCloudRunJobOperator](https://registry.astronomer.io/providers/dbt-cloud/modules/dbtcloudrunjoboperator) and [DbtCloudHook](https://registry.astronomer.io/providers/dbt-cloud/modules/dbtcloudhook). The DAG consists of two tasks:
 
-    - `check_job_is_not_running`: Uses the [ShortCircuitOperator](https://registry.astronomer.io/providers/apache-airflow/modules/shortcircuitoperator) to ensure that the dbt Cloud job with the specified `JOB_ID` is not currently running. The list of currently running dbt Cloud jobs is retrieved using the `list_job_runs()` method of the `DbtCloudHook`. If the job is currently not in a state of 10 (Success), 20 (Error), or 30 (Canceled), the pipeline will not try to trigger another run.
+    - `check_job_is_not_running`: Uses the [ShortCircuitOperator](https://registry.astronomer.io/providers/apache-airflow/modules/shortcircuitoperator) to ensure that the dbt Cloud job with the specified `JOB_ID` is not currently running. The list of currently running dbt Cloud jobs is retrieved using the `list_job_runs()` method of the `DbtCloudHook`. Next, the `latest_run` is selected and its `status` parameter will be evaluated for being a terminal status or not. If the status of the latest run is terminal, this means the job is not currently running and the pipeline should go ahead triggering another run of this job. If the status of the latest run is not terminal, this means that a job with the given `JOB_ID` is still runnning in the dbt Cloud. The function used in the ShortCircuitOperator will return `False` therefore causing the DAG to short circuit and skip any downstream tasks.
     - `trigger_dbt_cloud_job`: Uses the `DbtCloudRunJobOperator` to trigger a run of the dbt Cloud job with the correct `JOB_ID`.
 
 3. Run the DAG and verify that the dbt Cloud job ran in the dbt Cloud UI.
