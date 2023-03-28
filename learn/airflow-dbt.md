@@ -21,9 +21,9 @@ Organizations can use Airflow to orchestrate and execute dbt models as DAGs. Run
 In this guide, you'll:
 
 - Use the [dbt Cloud Provider](https://registry.astronomer.io/providers/dbt-cloud) to orchestrate dbt Cloud with Airflow.
-- Review two common use cases for orchestrating dbt Core with Airflow with the `BashOperator`: 
-    - At the [project](https://docs.getdbt.com/docs/building-a-dbt-project/projects) level and, 
-    - At the [model](https://docs.getdbt.com/docs/building-a-dbt-project/building-models) level. 
+- Review two common use cases for orchestrating dbt Core with Airflow with the `BashOperator`:
+    - At the [project](https://docs.getdbt.com/docs/building-a-dbt-project/projects) level and,
+    - At the [model](https://docs.getdbt.com/docs/building-a-dbt-project/building-models) level.
 - Learn how to extend the model-level use case by automating changes to a dbt model.
 
 :::info
@@ -291,7 +291,7 @@ When used as shown in the sample code below, the utility provides a shortcut to 
 with dag:
 
     start_empty = EmptyOperator(task_id='start')
-    
+
     dbt_seed = BashOperator(
         task_id='dbt_seed',
         bash_command=f'dbt {DBT_GLOBAL_CLI_FLAGS} seed --profiles-dir {DBT_PROJECT_DIR} --project-dir {DBT_PROJECT_DIR}'
@@ -322,4 +322,4 @@ With regards to the `dbt test` runs:
 
 ## Conclusion
 
-To recap, in this guide you have learned about dbt Cloud and dbt Core, how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest. For a more detailed discussion on trade-offs, limitations, and adding dbt Core or dbt Cloud to a full ELT pipeline, see our blog posts. To see more examples of how to use dbt and Airflow to build pipelines, check out our [dbt DAGs on the Registry](https://registry.astronomer.io/dags?providerName=dbt+Cloud).
+To recap, in this guide you have learned about dbt Cloud and dbt Core, how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest. For a more detailed discussion on trade-offs, limitations, and adding dbt Core or dbt Cloud to a full ELT pipeline, see our blog posts. To see more examples of how to use dbt and Airflow to build pipelines, check out our [dbt DAGs on the Registry](https://registry.astronomer.io/dags?query=dbt).
