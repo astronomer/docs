@@ -26,7 +26,7 @@ To complete the migration process, you will:
 
 <Prerequisites />
 
-(Optional) You can use the [AWS CLI](https://aws.amazon.com/cli/) to expedite some steps in this guide.
+(Optional) You can use the [AWS CLI](https://aws.amazon.com/cli/) to expedite some of the following steps in this guide.
 
 ## Step 1: Install Astronomer Starship
 
@@ -34,7 +34,7 @@ The [Astronomer Starship](https://pypi.org/project/astronomer-starship/) migrati
 
 The Starship migration utility works as a [plugin](https://github.com/astronomer/starship/tree/master/astronomer-starship) with a user interface, or as an Airflow operator if you are migrating from a more restricted Airflow environment.
 
-See the following table for information on which versions of Starship are available depending on your source Airflow environment:
+See the following table for information on which versions of Starship are available, depending on your source Airflow environment:
 
 | Source Airflow environment | Starship plugin | Starship operator |
 | -------------------------- | --------------- | ----------------- |
@@ -43,14 +43,14 @@ See the following table for information on which versions of Starship are availa
 | MWAA v2.2.2                | ✔️️               |                   |
 | MWAA v2.4.3                | ✔️️               |                   |
 
-To install Starship to your MWAA instance as a plugin:
+### Install Starship to your MWAA instance as a plugin:
 
 1. Download the `requirements.txt` file for your source Airflow environment from S3. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways).
 2. Add `astronomer-starship` on a new line to your `requirements.txt` file.
 3. Reupload the file to your S3 bucket.
 4. Update your Airflow environment to use the new version of this file.
 
-:::tip
+### (Optional) Complete Astronomer Starship installation from command line
 
 To complete this setup from the command line:
 
@@ -69,8 +69,6 @@ To complete this setup from the command line:
     aws s3 cp requirements.txt "s3://$MWAA_BUCKET/requirements.txt"
     aws mwaa update-environment "$MWAA_NAME" --requirements-s3-object-version="$(aws s3api head-object --bucket=$MWAA_BUCKET --key=requirements.txt --query="VersionId")"
     ```
-
-:::
 
 ## Step 2: Create an Astro Workspace
 
