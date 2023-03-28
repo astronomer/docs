@@ -36,8 +36,8 @@ astro login
 
 | Option                | Description                                                                                                            | Possible Values |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------- |
-| `-l`, `--login-link`  | The CLI will provide you with a link to log in with instead of automatically opening up the browser | None            |
-| `-t`, `--token-login` | Log in by specifying an auth token with the flag. This flag is used primarily for browserless login | Auth Token from `cloud/astronomer.io/token` |
+| `-l`, `--login-link`  | The CLI will provide you with a URL to the log in page of the Cloud UI instead of automatically opening your browser. Use this link to manually authenticate | None            |
+| `-t`, `--token-login` | Log in by manually specifying an authentication token. Use this command when you can't access a web browser from the machine running the CLI | A valid authentication token from `cloud.astronomer.io/token` |
 
 ## Examples
 
