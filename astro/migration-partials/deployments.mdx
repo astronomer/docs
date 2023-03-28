@@ -58,7 +58,7 @@ Before you create your Deployment, copy the following information from your sour
 </TabItem>
 <TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
 
-1. On your local machine, create a file called `config.yaml` in a directory with the same name as the source Airflow environment. 
+1. On your local machine, create a directory with the name of the source Airflow environment. In this directory, create a file called `config.yaml`. 
 2. Open `config.yaml` and add the following:
 
    ```yaml
@@ -90,8 +90,8 @@ Before you create your Deployment, copy the following information from your sour
 
     - `<true-or-false>` / `<variable-name>` / `<variable-value>`: Set system-level environment variables for your Deployment and specify whether they should be secret. Repeat this configuration in the file for any additional variables you need to set.
     - `<deployment-name>`: Enter the same name as your source Airflow environment.
-    - `<deployment-description>`: Optional. Enter a description for your Deployment.
-    - `<runtime-version>`: Select the Runtime version that's based on the Airflow version that you use in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
+    - `<deployment-description>`: (Optional) Enter a description for your Deployment.
+    - `<runtime-version>`: Select the Runtime version that's based on the Airflow version in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
 
     | Airflow Version | Runtime Version        |
     |-----------------|------------------------|
@@ -109,7 +109,7 @@ Before you create your Deployment, copy the following information from your sour
     | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
     | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
 
-    > *Some of the following recommendations for CPU and memory are smaller than what you would have in the equivalent source environment. Although you may not need more CPU or memory than what's recommended here, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+    > *Some of the following recommendations for CPU and memory are smaller than what you have in the equivalent source environment. Although you might not need more CPU or memory than what's recommended, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
 
     - `<scheduler-count>`: Specify the same number of schedulers as in your source Airflow environment.
     - `<cluster-name>`: Specify name of the Astro cluster in which you want to create this Deployment.
@@ -153,7 +153,7 @@ Before you create your Deployment, copy the following information from your sour
         - myalertemail@cosmicenergy.org
     ```
 
-4. Run the following command to push your configuration up to Astro and create your Deployment:
+4. Run the following command to push your configuration to Astro and create your Deployment:
 
     ```sh
     astro deployment create --deployment-file config.yaml
