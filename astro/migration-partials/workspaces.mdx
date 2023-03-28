@@ -1,8 +1,8 @@
-Within your Astro Organization you can create _Workspaces_, which are collections of Airflow environments that are typically owned by a single team. 
+In your Astro Organization, you can create _Workspaces_, which are collections of Airflow environments. Workspaces are typically owned by a single team. 
 
-Follow the steps in [Manage Workspaces](manage-workspaces.md) to create a Workspace in the Astro UI for your migrated Airflow environments. Astronomer recommends naming your first Workspace after your data team or initial business use case with Airflow. You can update these names in the Cloud UI after you finish the migration.
+1. Follow the steps in [Manage Workspaces](manage-workspaces.md) to create a Workspace in the Astro UI for your migrated Airflow environments. Astronomer recommends naming your first Workspace after your data team or initial business use case with Airflow. You can update these names in the Cloud UI after you finish the migration.
 
-After you create your Workspace, follow the steps in [Manage Astro users](add-user.md#add-a-user-to-a-workspace) to add users from your team to the Workspace. See [Astro user permissions](user-permissions.md#workspace-roles) for details about each available Workspace user role.
+2. After you create your Workspace, follow the steps in [Manage Astro users](add-user.md#add-a-user-to-a-workspace) to add users from your team to the Workspace. See [Astro user permissions](user-permissions.md#workspace-roles) for details about each available Workspace user role.
 
 :::cli astro
 
@@ -11,6 +11,6 @@ You can add users to a Workspace an Organization using the Astro CLI. See:
 - [`astro workspace user add`](cli/astro-workspace-user-add.md) 
 - [`astro organization user invite`](cli/astro-organization-user-invite.md)
 
-Using shell scripting, you can automate adding batches of users to Astro. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
-
 :::
+
+Using shell scripting, you can automate adding batches of users to Astro. See [Add a group of users to Astro using the Astro CLI](add-user.md#add-a-group-of-users-to-astro-using-the-astro-cli).
