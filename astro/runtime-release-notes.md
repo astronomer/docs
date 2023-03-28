@@ -31,9 +31,16 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 ### Airflow 2.5.3
 
+Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.3. Airflow 2.5.3 contains a number of bug fixes including:
+
+- Fix validation of date-time field in API and Parameter schemas ([29395](https://github.com/apache/airflow/pull/29395))
+- DAG list sorting lost when switching page ([29756](https://github.com/apache/airflow/pull/29756))
+
+For a complete list of the changes, see the [Apache Airflow 2.5.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
+
 ### Additional improvements 
 
-- Upgraded `astronomer-providers` to 1.15.3, which includes a new async sensor `SnowflakeSensorAsync` and a number of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1151-2023-03-09) for a complete list of changes. 
+- Upgraded `astronomer-providers` to 1.15.2, which includes several bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/releases/tag/1.15.2) for a complete list of changes. 
 
 ## Astro Runtime 7.4.1
 
