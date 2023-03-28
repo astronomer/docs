@@ -24,6 +24,17 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 7.5.0
+
+- Release date: 
+- Airflow version: 2.5.3
+
+### Airflow 2.5.3
+
+### Additional improvements 
+
+- Upgraded `astronomer-providers` to 1.15.3, which includes a new async sensor `SnowflakeSensorAsync` and a number of bug fixes. See the [`astronomer-providers` changelog](https://github.com/astronomer/astronomer-providers/blob/main/CHANGELOG.rst#1151-2023-03-09) for a complete list of changes. 
+
 ## Astro Runtime 7.4.1
 
 - Release date: March 17, 2023
