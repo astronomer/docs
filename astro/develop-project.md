@@ -191,12 +191,12 @@ The `airflow_settings.yaml` file includes a template with the default values for
 
 ## Add Python, OS-level packages, and Airflow providers
 
-Most Airflow DAGs need an OS-level or Python package to run. For Python packages, there are two primary kinds that you might have to add to your Astro project:
+Most DAGs need additional OS or Python packages to run. There are two primary kinds of Python packages that you might have to add to your Astro project:
 
-- Python libraries. If you’re using Airflow for a data science project, for example, you might use a popular data science library such as [pandas](https://pandas.pydata.org/) or [NumPy (`numpy`)](https://numpy.org/).
+- Python libraries. If you’re using Airflow for a data science project, for example, you might use a data science library such as [pandas](https://pandas.pydata.org/) or [NumPy (`numpy`)](https://numpy.org/).
 - Airflow providers. Airflow providers are Python packages that contain all relevant Airflow modules for a third-party service. For example, `apache-airflow-providers-amazon` includes the hooks, operators, and integrations you need to access services on Amazon Web Services (AWS) with Airflow. See [Provider packages](https://airflow.apache.org/docs/apache-airflow-providers/).
 
-Adding the name of a package to the `packages.txt` or `requirements.txt` files of your Astro project installs the package to your Airflow environment or Deployment. The `requirements.txt` file uses pip, a package manager for Python packages and modules.
+Adding the name of a package to the `packages.txt` or `requirements.txt` files of your Astro project installs the package to your Airflow environment or Deployment. Python packages are installed from your `requirements.txt` file using [pip](https://pypi.org/project/pip/).
 
 1. Add the package name to your Astro project. If it’s a Python package, add it to `requirements.txt`. If it’s an OS-level package, add it to `packages.txt`. The latest version of the package that’s publicly available is installed by default.
 
@@ -218,18 +218,6 @@ Adding the name of a package to the `packages.txt` or `requirements.txt` files o
     ```
 
 To learn more about the format of the `requirements.txt` file, see [Requirements File Format](https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format) in pip documentation. To browse Python libraries, see [PyPi](https://pypi.org/). To browse Airflow providers, see the [Astronomer Registry](https://registry.astronomer.io/providers/).
-
-## Add DAG utility files
-
-Use the `include` folder to store additional utilities required by your DAGs. For example, templated SQL scripts and custom operators.
-
-In most cases, Astronomer recommends moving the `include` folder into the `dags` directory so that your DAGs can access your utility files.
-
-:::tip
-
-When you use the `astro deploy -—dags` command to deploy to Astro, the `include` folder in the Astro project directory is not deployed with your DAGs unless it is in the `dags` directory. Instead, it is built into the Docker image with your other project files and requires running `astro deploy`. See [Deploy DAGs only](deploy-code.md#deploy-dags-only).
-
-:::
 
 ## Set environment variables locally
 
