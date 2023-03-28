@@ -390,7 +390,7 @@ This example DAG acquires and pre-processes data, trains a model, creates a mode
 
 :::info
 
-To clone the entire repo used to create this tutorial as well as an additional DAG that performs batch inference using an existing SageMaker model, check out the [Astronomer Registry](https://registry.astronomer.io/dags/sagemaker-pipeline).
+To clone the entire repo used to create this tutorial as well as an additional DAG that performs batch inference using an existing SageMaker model, check out the [Astronomer Registry](https://legacy.registry.astronomer.io/dags/sagemaker-pipeline).
 
 :::
 

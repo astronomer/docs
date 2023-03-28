@@ -11,7 +11,7 @@ You can use the ADX [Hook](https://registry.astronomer.io/providers/microsoft-az
 
 :::info
 
-All code in this tutorial can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/azure-data-explorer-tutorial).
+All code in this tutorial can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/azure-data-explorer/versions/latest).
 
 :::
 
