@@ -21,6 +21,17 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.12.1 ([Release notes](cli/release-notes.md))
 
+## March 28, 2023
+
+### Additional improvements
+
+- You can now use `db.m6g` and `db.r6g` RDS instance types on AWS clusters.
+- The default RDS instance type for new AWS clusters has been reduced from `db.r5.large` to `db.m6g.large`
+- The default CIDR range for new AWS clusters has been reduced from /19 to /20.
+- You can now submit a **Request type** in the [Cloud UI support form](https://cloud.astronomer.io/support). When you choose a request type, the form updates to help you submit the most relevant information for your support request.
+- If you scale the default worker queue to have a minimum worker count of 0 and no tasks are running, the Astronomer monitoring DAG will run in a separate dedicated worker queue.
+- You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace. 
+
 ## March 21, 2023
 
 ### Automate Workspace and Deployment actions using Workspace API tokens
