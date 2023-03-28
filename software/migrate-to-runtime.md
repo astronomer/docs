@@ -59,10 +59,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
     FROM quay.io/astronomer/astro-runtime:5.0.4
     ```
 
-    For a list of currently supported Astronomer images, see:
-
-    - [AC Lifecycle Schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
-    - [Astro Runtime Lifecycle Schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
+    For a list of currently supported Astronomer images, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
   :::warning
 
@@ -70,7 +67,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
 
   :::
 
-3. Optional. Test your migration to Astro Runtime locally by running:
+1. Optional. Test your migration to Astro Runtime locally by running:
 
     ```sh
     astro dev restart
