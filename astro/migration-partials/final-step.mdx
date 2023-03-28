@@ -1,15 +1,15 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-After you successfully deploy your code to Astro, you need to shift your workloads from your source Airflow environment to Astro on a DAG-by-DAG basis. Depending on how your workloads are set up, Astronomer recommends letting DAG owners determine the order to cut over and test DAGs.
+After you successfully deploy your code to Astro, you need to shift your workloads from your source Airflow environment to Astro on a DAG-by-DAG basis. Depending on how your workloads are set up, Astronomer recommends letting DAG owners determine the order to migrate and test DAGs.
 
 You can complete the following steps in the few days or weeks following your migration set up. Provide updates to your Astronomer Data Engineer as they continue to assist you through the process and any solve any difficulties that arise. 
 
-Continue to validate and move your DAGs until you have fully migrated your source Airflow instance. After you finish migrating from your source Airflow environment, repeat the complete migration process for any other Airflow instances in your source Airflow environment. 
+Continue to validate and move your DAGs until you have fully cut over your source Airflow instance. After you finish migrating from your source Airflow environment, repeat the complete migration process for any other Airflow instances in your source Airflow environment. 
 
 #### Confirm connections and variables
 
-In the Airflow UI for your Deployment, [test all connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections) that you cut over from your source Airflow environment. 
+In the Airflow UI for your Deployment, [test all connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections) that you migrated from your source Airflow environment. 
 
 Additionally, check Airflow variables values in **Admin** > **Variables**.
 
