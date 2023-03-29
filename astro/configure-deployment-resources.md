@@ -88,6 +88,15 @@ Alert emails assigned to a Deployment are used by Astronomer support to notify r
 
 In addition to alert emails for your Deployments, Astronomer recommends subscribing to the [Astro status page](https://status.astronomer.io). When you subscribe, you'll receive email notifications about system-wide incidents in real time.
 
+## Enforce CI/CD deploys
+
+When you enforce CI/CD deploys for a Deployment, the Deployment will accept code deploys only if the deploy was triggered using a Deployment API key or Workspace token. 
+
+1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
+2. Click the **Details** tab.
+3. Click **Edit Details**.
+4. In **CI/CD Enforcement**, click the toggle to **On**.
+
 ## Transfer a Deployment to another Workspace 
 
 Transferring a Deployment can be helpful when your team needs to change user access to a Deployment. Transferring a Deployment moves all DAGs, task history, connections, API keys, and other Astro configurations. Running tasks are not interrupted and tasks will continue to be scheduled.
