@@ -65,7 +65,7 @@ To review the available Airflow sensors, go to the [Astronomer Registry](https:/
 
 ### Example implementation
 
-The following example DAG shows how you might use the `SqlSensor` sensor: 
+The following example DAG shows how you might use the `SqlSensor` sensor:
 
 <Tabs
     defaultValue="taskflow"

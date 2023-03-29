@@ -31,6 +31,7 @@ To create and use Workspace API tokens, see [Workspace API tokens](workspace-api
 
 ### Additional improvements
 
+- In the Astro Cloud IDE, you can now specify the output table for a Warehouse SQL cell using both literal and Python expressions. See [Create a SQL cell](cloud-ide/run-sql.md#create-a-sql-cell).
 - Port 80 is no longer used for certificate management on the data plane. 
 - To switch Organizations in the Cloud UI, you now use the **Switch Organization** button next to your Organization's name.
 

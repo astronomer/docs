@@ -1,0 +1,174 @@
+---
+sidebar_label: "From GCC"
+title: "Migrate to Astro from GCC"
+id: migrate-gcc
+description: Get started on Astro by migrating your Airflow code from Google Cloud Composer (GCC).
+---
+
+import Prerequisites from "./migration-partials/prereqs.mdx";
+import StarshipUsage from "./migration-partials/starship-usage.mdx";
+import Workspaces from "./migration-partials/workspaces.mdx";
+import Deployments from "./migration-partials/deployments.mdx";
+import DirectorySetup from "./migration-partials/directory-setup.mdx";
+import FinalStep from "./migration-partials/final-step.mdx";
+import Deploy from "./migration-partials/deploy.mdx";
+
+This is where you'll find instructions for migrating an Airflow environment from [Google Cloud Composer (GCC)](https://cloud.google.com/composer/docs/concepts/overview) to Astro.
+
+To complete the migration process, you will:
+
+- Prepare your source Airflow and set up your Astro Airflow environment.
+- Migrate metadata from your source Airflow environment.
+- Migrate DAGs and additional Airflow components from your source Airflow environment.
+- Complete the cutover process to Astro.
+
+## Prerequisites
+
+<Prerequisites />
+
+You can additionally utilize `gcloud` CLI to expedite some steps in this guide.
+
+## Step 1: Install Astronomer Starship
+
+The [Astronomer Starship](https://pypi.org/project/astronomer-starship/) migration utility connects your source Airflow environment to your Astro Deployment and migrates your Airflow connections, Airflow variables, environment variables, and DAGs.
+
+The Starship migration utility works as a [plugin](https://github.com/astronomer/starship/tree/master/astronomer-starship) with a user interface, or as an Airflow operator if you are migrating from a more restricted Airflow environment.
+
+See the following table for information on which versions of Starship are available depending on your source Airflow environment:
+
+| Source Airflow environment     | Starship plugin | Starship operator |
+|--------------------------------|-----------------|-------------------|
+| Airflow 1.x                    | ❌               | ❌                 |
+| Cloud Composer 1 - Airflow 2.x |                 | ✔️️               |
+| Cloud Composer 2 - Airflow 2.x | ✔️️             |                   |
+
+To install the Starship plugin on your Cloud Composer 1 or Cloud Composer 2 instance, install the `astronomer-starship` package in your source Airflow environment. See [Install packages from PyPI](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#install-pypi)
+
+:::tip
+
+You can alternatively complete this installation with the `gcloud` CLI by running the following command:
+
+```sh
+gcloud composer environments update [GCC_NAME] --update-pypi-package=astronomer-starship
+```
+
+:::
+
+## Step 2: Create an Astro Workspace
+
+<Workspaces />
+
+## Step 3: Create an Astro Deployment
+
+<Deployments />
+
+## Step 4: Use Starship to Migrate Airflow Connections and Variables
+
+<StarshipUsage />
+
+## Step 5: Create an Astro project
+
+<DirectorySetup />
+
+## Step 6: Migrate project code and dependencies to your Astro project
+
+1. Open your Astro project Dockerfile. Update the Runtime version in first line to the version you selected for your Deployment in [Step 3](#step-3-create-astro-deployment). For example, if your Runtime version was 6.3.0, your Dockerfile would look like the following:
+
+    ```Dockerfile
+    FROM quay.io/astronomer/astro-runtime:6.3.0
+    ```
+
+    The `Dockerfile` defines environment that all your Airflow components run in. You can modify it to make certain resources available to your Airflow environment like certificates or keys. For this migration, you only need to update your Runtime version. 
+
+2. Open your Astro project `requirements.txt` file and add all Python packages that you installed in your source Airflow environment. See [Google documentation](https://cloud.google.com/composer/docs/composer-2/install-python-dependencies#view-custom) for how to view a list of Python packages in your source Airflow environment. 
+
+  :::tip
+
+  To directly copy your PyPI packages from GCC to your `requirements.txt` file, run:
+
+  ```shell
+  gcloud composer environments describe <your-gcc-project-name> --format="value(config.softwareConfig.pypiPackages)" > requirements.txt
+  ```  
+
+  Review the output in `requirements.txt` after running this command to ensure that all packages were imported on their own line of text.   
+  
+  :::
+
+3. Open your Astro project `dags` folder. Copy your DAG files to `dags` from either your source control platform or GCS Bucket.
+
+  :::tip
+
+  To directly copy your DAGs from Cloud Composer to your `dags` folder, run:
+
+  ```sh
+  gcloud composer environments storage dags export --destination=dags
+  ```
+
+  Review your DAG files in `dags` after running this command to ensure that all DAGs were successfully exported. 
+
+  :::
+
+4. If you utilized the [`plugins` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#folders_in_the_bucket) in your Cloud Composer storage bucket, copy the contents of this folder from your source control platform or GCS Bucket to your Astro project `/plugins` folder.
+
+  :::tip
+
+  To copy your `plugins` folder contents directly to your Astro project using the `gcloud` CLI, run:
+
+  ```
+  gcloud composer environments storage plugins export --destination=plugins
+  ```  
+
+  Make sure to review the contents of your Astro project `plugins` folder to ensure that all files were successfully exported. 
+
+  :::
+
+5. If you utilized the [`data` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#data) in Cloud Composer, copy the contents of that folder from your source control platform or GCS Bucket to your Astro project `include` folder.
+
+  :::tip
+
+  To copy your `data` folder contents directly to your Astro project using the `gcloud` CLI, run:
+
+  ```
+  gcloud composer environments storage data export --destination=include
+  ```  
+
+  Make sure to review the contents of your Astro project `include` folder to ensure that all files were successfully exported.   
+  
+  :::
+
+## Step 7: Configure additional data pipeline infrastructure
+
+The core migration of your project is now complete. Read the following topics to see whether you need to set up any additional infrastructure on Astro before cutting over your DAGs. 
+
+### Set up CI/CD
+
+If you used CI/CD to deploy code to your source Airflow environment, read the following documentation to learn about setting up a similar CI/CD pipeline for your Astro project:
+
+- [Set-Up CI/CD](set-up-ci-cd.md)
+- [CI/CD templates](ci-cd.md)
+
+### Set up a secrets backend
+
+If you currently store Airflow variables or connections in a secrets backend, you need to integrate your secrets backend with Astro to access those objects from your migrated DAGs. See [Configure a Secrets Backend](secrets-backend.md) for setup steps.
+
+#### Instance permissions and trust policies
+
+You can utilize Workload Identity or Service Account Keys to grant your Astro Deployment the same level of access to Google Services as your source Airflow environment. See [Connect GCP - Authorization options](connect-gcp.md#authentication-options).
+
+## Step 8: Test locally and check for import errors
+
+Depending on how thoroughly you want to test your Airflow environment, you have a few options for testing your project locally before deploying to Astro.
+
+- In your Astro project directory, run `astro dev parse` to check for any parsing errors in your DAGs.
+- Run `astro run <dag-id>` to test a specific DAG. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
+- Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
+
+Note that your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources. 
+
+## Step 9: Deploy to Astro
+
+<Deploy />
+
+## Step 10: Cut over from your source Airflow environment to Astro
+
+<FinalStep />

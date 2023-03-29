@@ -41,7 +41,7 @@ astro workspace user update --role <user-role>
 ## Related commands
 
 - [`astro workspace user add`](cli/astro-workspace-user-add.md)
-- [`astro organization user update`](cli/astro-organization.md)
+- [`astro organization user update`](cli/astro-organization-user-update.md)
 
 </TabItem>
 <TabItem value="software">
