@@ -102,11 +102,11 @@ If you are using a different data warehouse, your commands to create the databas
 
 ## Step 4: Create your dbt models
 
-In this tutorial we will use an example dbt job that consists of two dbt models. The first model, called `select_country`, will select the data for a specific country. The second model, called `create_pct`, will use the table created by the first model to calculate the percentage of renewable and solar energy capacity in the country you selected.
+In this tutorial we will use an example dbt job that consists of two dbt models. The first model, called `select_country`, will select the data for a country you select. The second model, called `create_pct`, will use the table created by the first model to calculate the percentage of renewable and solar energy capacity in that country.
 
 1. Create a folder called `dbt` in your Astro project. The Astronomer dbt provider will by default look for dbt projects in a `dbt` directory inside of your `AIRFLOW_HOME` directory. This behavior can be overridden on the `DbtDAG` or `DbtTaskGroup` level by setting `dbt_root_path`.
 
-2. In the `dbt` directory, create a sub-directory called `my_energy_project`. This folder will contain all files related to the dbt project `my_energy_project`.
+2. In the `dbt` directory, create a sub-directory called `my_energy_project`.
 
 3. Within the `my_energy_project` directory, create a YAML file called `dbt-project.yml`. Use the following YAML configuration to create a dbt project called `my_energy_project` which has its models in the `models` sub-directory.
 
@@ -219,7 +219,7 @@ You should now have the following structure within your Astro project:
 
 :::info
 
-For some tools you might need to add the [relevant provider package](https://registry.astronomer.io/) to requirements.txt and restart Airflow, in order to have the correct connection type available.
+For some databases you might need to add the [relevant provider package](https://registry.astronomer.io/) to requirements.txt and restart Airflow in order to have the correct connection type available.
 
 :::
 
@@ -235,11 +235,11 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
 
     This DAG consists of 2 tasks defined with the Astro Python SDK and one `DbtTaskGroup`:
 
-    - the `load_file` task uses the [Astro Python SDK `load file` operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) to load the contents of the local CSV file into the data warehouse.
-    - the `transform_data` task group is created from the dbt models. Using the models defined in Step 4, the task group will contain two nested task groups with two tasks each, one for `dbt run`, the other for `dbt test`.
-    - the `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to use pandas to run an analysis on the final table created through the dbt models and logs the results.
+    - The `load_file` task uses the [Astro Python SDK `load file` operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) to load the contents of the local CSV file into the data warehouse.
+    - The `transform_data` task group is created from the dbt models. Using the models defined in Step 4, the task group will contain two nested task groups with two tasks each, one for `dbt run`, the other for `dbt test`.
+    - The `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to run an analysis on the final table created through the dbt models using `pandas` and to log the results.
 
-    The `DbtTaskGroup` of the Astronomer dbt provider package automatically scans the `dbt` folder for dbt projects and creates a task group containing one Airflow task for every dbt command run on every model in the project. Additionally, the provider can infer the model dependency within the dbt project and will set the Airflow task dependencies accordingly.
+    The `DbtTaskGroup` function of the Astronomer dbt provider package automatically scans the `dbt` folder for dbt projects and creates a task group (`transform_data` in this example) containing one Airflow task for every dbt command run on every model in the project. Additionally, the provider can infer the model dependency within the dbt project and will set the Airflow task dependencies accordingly.
 
 3. (Optional) Choose which country's data to analyze by specifying your desired `country_code` in the `dbt_args` parameter of the DbtTaskGroup. Note that this [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) only contains data for several European countries.
 
