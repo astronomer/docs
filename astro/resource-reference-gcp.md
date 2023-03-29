@@ -90,32 +90,21 @@ The following table lists all available instance types for worker node pools, as
 | e2-standard-4      | 3 CPUs  | 13 GiB MEM  |
 | e2-standard-8      | 7 CPUs  | 29 GiB MEM  |
 | e2-standard-16     | 15 CPUs | 61 GiB MEM  |
-| e2-standard-32     |         |             |
 | e2-highmem-4       | 3 CPUs  | 29 GiB MEM  |
 | e2-highmem-8       | 7 CPUs  | 61 GiB MEM  |
 | e2-highmem-16      | 15 CPUs | 125 GiB MEM |
 | e2-highcpu-4       | 3 CPUs  | 1 GiB MEM   |
 | e2-highcpu-8       | 7 CPUs  | 5 GiB MEM   |
 | e2-highcpu-16      | 15 CPUs | 13 GiB MEM  |
-| e2-highcpu-32      |         |             |
 | n2-standard-4      | 3 CPUs  | 13 GiB MEM  |
 | n2-standard-8      | 7 CPUs  | 29 GiB MEM  |
 | n2-standard-16     | 15 CPUs | 61 GiB MEM  |
-| n2-standard-32     |         |             |
-| n2-standard-48     |         |             |
-| n2-standard-64     |         |             |
 | n2-highmem-4       | 3 CPUs  | 29 GiB MEM  |
 | n2-highmem-8       | 7 CPUs  | 61 GiB MEM  |
 | n2-highmem-16      | 15 CPUs | 125 GiB MEM |
-| n2-highmem-32      |         |             |
-| n2-highmem-48      |         |             |
-| n2-highmem-64      |         |             |
 | n2-highcpu-4       | 3 CPUs  | 1 GiB MEM   |
 | n2-highcpu-8       | 7 CPUs  | 5 GiB MEM   |
 | n2-highcpu-16      | 15 CPUs | 13 GiB MEM  |
-| n2-highcpu-32      |         |             |
-| n2-highcpu-48      |         |             |
-| n2-highcpu-64      |         |             |
 | c2-standard-4      | 3 CPUs  | 13 GiB MEM  |
 | c2-standard-8      | 7 CPUs  | 29 GiB MEM  |
 
