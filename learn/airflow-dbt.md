@@ -69,7 +69,7 @@ An Astro project contains all of the files you need to run Airflow locally.
 3. Add the [Astronomer dbt provider package](https://github.com/astronomer/astronomer-cosmos) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to your `requirements.txt` file. This tutorial uses the Astro Python SDK to load and analyze data transformed by dbt.
 
     ```text
-    astronomer-cosmos==0.5.0
+    astronomer-cosmos
     astro-sdk-python
     ```
 
