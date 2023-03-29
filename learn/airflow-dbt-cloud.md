@@ -5,8 +5,8 @@ id: airflow-dbt-cloud
 ---
 
 <head>
-  <meta name="description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud with Airflow." />
-  <meta name="og:description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud with Airflow." />
+  <meta name="description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud jobs with Airflow." />
+  <meta name="og:description" content="Learn how to use the dbt Cloud Provider to orchestrate dbt Cloud jobs with Airflow." />
 </head>
 
 import CodeBlock from '@theme/CodeBlock';
