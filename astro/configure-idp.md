@@ -205,8 +205,8 @@ If your Azure Active Directory is configured to require admin approval on API pe
 4. Configure the following values for your connection:
 
     - **Connection type**: Select **Azure AD**.
-    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Okta.
-    - **Automatic Membership**: Set the default role for users who join your Organization through Okta and without an explicit invite from Astro.
+    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Azure AD.
+    - **Automatic Membership**: Set the default role for users who join your Organization through Azure AD and without an explicit invite from Astro.
     - **Microsoft Azure AD Domain**: Retrieve this value from your Azure AD directory's overview page in the Microsoft Azure portal.
     - **Application (client) ID**: Retrieve this from the **Overview** page of your Azure AD application.
     - **Client ID and Client secret**: Enter the values you coped from [Step 3: Create a client secret](#step-3-create-a-client-secret)
@@ -216,8 +216,6 @@ If your Azure Active Directory is configured to require admin approval on API pe
 7. In **SSO Configuration**, click **Activate**. You are redirected to Azure AD to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 8. Click **Activate SSO**.
 9. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
-
-Astronomer support configures your Organization's integration with Okta and sends you a validation link that you'll use in step 5.
 
 #### Step 6: Assign users to your Azure AD application
 
@@ -239,7 +237,7 @@ This section provides setup steps for setting up OneLogin as your IdP on Astro. 
 
 #### Step 1: Verify your domain(s)
 
-Mapping a domain to OneLogin ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain toOneLogin to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
+Mapping a domain to OneLogin ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to OneLogin to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
 
 To map a domain to OneLogin, you must verify that you own the domain.
 
@@ -260,8 +258,8 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
 3. Configure the following values for your connection:
 
     - **Connection type**: Select **SAML**.
-    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Okta.
-    - **Automatic Membership**: Set the default role for users who join your Organization through Okta and without an explicit invite from Astro.
+    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to OneLogin.
+    - **Automatic Membership**: Set the default role for users who join your Organization through OneLogin and without an explicit invite from Astro.
 
 4. Copy the **Single Sign On URL** and **Audience URI (SP ENTITY ID)** for Step 8.
 
@@ -335,17 +333,17 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 #### Step 1: Verify your domain(s)
 
-Mapping a domain to OneLogin ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain toOneLogin to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
+Mapping a domain to Ping Identity ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to Ping Identity to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
 
-To map a domain to OneLogin, you must verify that you own the domain.
+To map a domain to Ping Identity, you must verify that you own the domain.
 
 1. In the Cloud UI, click **Settings**, then click **Authentication**.
 2. In the **Managed Domains** menu, click **Managed Domain**.
-3. In the **Domain** field, enter the domain that you want to map to OneLogin.
+3. In the **Domain** field, enter the domain that you want to map to Ping Identity.
 4. Click **Create**. The domain is added to your **Managed Domains** and marked as **Unverified**.
 5. In the entry for your domain, click **Verify**.
 6. Follow the steps provided by the Cloud UI to verify your domain. 
-7. Repeat steps 1-6 for any other domains you want to map to OneLogin.
+7. Repeat steps 1-6 for any other domains you want to map to Ping Identity.
 
 #### Step 2: Configure Ping Identity
 
@@ -356,8 +354,8 @@ To map a domain to OneLogin, you must verify that you own the domain.
 3. Configure the following values for your connection:
 
     - **Connection type**: Select **SAML**.
-    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Okta.
-    - **Automatic Membership**: Set the default role for users who join your Organization through Okta and without an explicit invite from Astro.
+    - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Ping Identity.
+    - **Automatic Membership**: Set the default role for users who join your Organization through Ping Identity and without an explicit invite from Astro.
 
 4. Copy the **Single Sign On URL** and **Audience URI (SP ENTITY ID)** for Step 8.
 
