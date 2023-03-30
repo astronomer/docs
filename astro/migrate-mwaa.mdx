@@ -50,7 +50,7 @@ See the following table for information on which versions of Starship are availa
 3. Reupload the file to your S3 bucket.
 4. Update your Airflow environment to use the new version of this file.
 
-### (Optional) Complete Astronomer Starship installation from command line
+:::tip
 
 To complete this setup from the command line:
 
@@ -69,6 +69,7 @@ To complete this setup from the command line:
     aws s3 cp requirements.txt "s3://$MWAA_BUCKET/requirements.txt"
     aws mwaa update-environment "$MWAA_NAME" --requirements-s3-object-version="$(aws s3api head-object --bucket=$MWAA_BUCKET --key=requirements.txt --query="VersionId")"
     ```
+:::
 
 ## Step 2: Create an Astro Workspace
 
