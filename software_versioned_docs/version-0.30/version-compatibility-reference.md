@@ -13,10 +13,10 @@ While the tables below reference the minimum compatible versions, we typically r
 
 <!--- Version-specific -->
 
-| Astronomer Platform | Kubernetes                                         | Postgres | Python                                    | Astronomer Certified / Astro Runtime         | Helm |
+| Astronomer Platform | Kubernetes                                         | Postgres | Python                                    | Astro Runtime         | Helm |
 | ------------------- | -------------------------------------------------- | -------- | ----------------------------------------- | -------------------------------------------- | ---- |
-| v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24, 1.25¹, 1.26¹ | 11.19+   | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
-| v0.31               | 1.21, 1.22, 1.23, 1.24 , 1.25¹, 1.26¹              | 11.19+   | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Certified and Runtime versions | 3.6  |
+| v0.30               | 1.19¹, 1.20¹, 1.21, 1.22, 1.23, 1.24, 1.25¹, 1.26¹ | 11.19+   | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Runtime versions | 3.6  |
+| v0.31               | 1.21, 1.22, 1.23, 1.24 , 1.25¹, 1.26¹              | 11.19+   | 3.6, 3.7, 3.8, 3.9 (_requires AC 2.2.0+_) | All supported Runtime versions | 3.6  |
 
 :::info
 
@@ -29,7 +29,7 @@ While the tables below reference the minimum compatible versions, we typically r
 
 For more detail about the changes in each Astronomer Software release, see the [Astronomer Software Release Notes](release-notes.md).
 
-All currently supported versions of Astronomer-distributed images are compatible with all versions of Astronomer Software. Astronomer Certified and Astro Runtime maintenance is independent of Software maintenance. For more information, see [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md).
+All currently supported versions of Astronomer-distributed images are compatible with all versions of Astronomer Software. Astro Runtime maintenance is independent of Software maintenance. For more information, see [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md).
 
 :::info
 
