@@ -26,7 +26,7 @@ To complete the migration process, you will:
 
 <Prerequisites />
 
-(Optional) You can use the [AWS CLI](https://aws.amazon.com/cli/) to expedite some of the following steps in this guide.
+(Optional) You can use the [AWS CLI](https://aws.amazon.com/cli/) to expedite some of the steps in this guide.
 
 ## Step 1: Install Astronomer Starship
 
@@ -162,7 +162,7 @@ Depending on how thoroughly you want to test your Airflow environment, you can t
 - Run `astro run <dag-id>` to test a specific DAG. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
 - Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 
-:::tip
+:::info
 
 Your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources. 
 
