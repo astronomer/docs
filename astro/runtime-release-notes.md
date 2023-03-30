@@ -33,8 +33,8 @@ To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For g
 
 Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.3. Airflow 2.5.3 contains a number of bug fixes including:
 
-- Fix validation of date-time field in API and Parameter schemas ([29395](https://github.com/apache/airflow/pull/29395))
-- DAG list sorting lost when switching page ([29756](https://github.com/apache/airflow/pull/29756))
+- Fix `TriggerRuleDep` when the mapped tasks count is 0 ([30084](https://github.com/apache/airflow/pull/30084))
+- Fix some long known Graph View UI problems ([29971](https://github.com/apache/airflow/pull/29971))
 
 For a complete list of the changes, see the [Apache Airflow 2.5.3 release notes](https://airflow.apache.org/docs/apache-airflow/stable/release_notes.html).
 
