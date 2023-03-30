@@ -90,34 +90,7 @@ The CIDR range sizes must be equal to or greater than the default range sizes fo
 
 The data plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
-1. Run the following commands in your Google Cloud Shell:
-
-    ```sh
-    export GOOGLE_CLOUD_PROJECT=$<your-project-id>
-    gcloud auth application-default login
-    gcloud services enable storage-component.googleapis.com
-    gcloud services enable storage-api.googleapis.com
-    gcloud services enable compute.googleapis.com
-    gcloud services enable container.googleapis.com
-    gcloud services enable deploymentmanager.googleapis.com
-    gcloud services enable cloudresourcemanager.googleapis.com
-    gcloud services enable cloudkms.googleapis.com
-    gcloud services enable sqladmin.googleapis.com
-    gcloud services enable servicenetworking.googleapis.com
-    gcloud services enable dns.googleapis.com
-    curl \
-    https://storage.googleapis.com/storage/v1/projects/$GOOGLE_CLOUD_PROJECT/serviceAccount \
-    --header "Authorization: Bearer `gcloud auth application-default print-access-token`"   \
-    --header 'Accept: application/json'   --compressed
-    ```
-
-2. Run the following commands in your Google Cloud Shell:
-
-    ```sh
-    export MY_PROJECT_NUMBER=$(gcloud projects describe $GOOGLE_CLOUD_PROJECT --format="value(projectNumber)")
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:$MY_PROJECT_NUMBER@cloudservices.gserviceaccount.com --role=roles/owner
-    gcloud projects add-iam-policy-binding $GOOGLE_CLOUD_PROJECT --member=serviceAccount:astronomer@astro-remote-mgmt.iam.gserviceaccount.com --role=roles/owner
-    ```
+[![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/?cloudshell_git_repo=github.com/astronomer/astro-gcp-onboarding&ephemeral=true&cloudshell_print=README.md)
 
 ### Provide setup information to Astronomer
 
