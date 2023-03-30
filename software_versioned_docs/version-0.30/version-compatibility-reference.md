@@ -29,7 +29,7 @@ While the tables below reference the minimum compatible versions, we typically r
 
 For more detail about the changes in each Astronomer Software release, see the [Astronomer Software Release Notes](release-notes.md).
 
-All currently supported Astronomer-distributed images are compatible with all versions of Astronomer Software. Astronomer Certified and Astro Runtime maintenance is independent of Software maintenance. For more information, see [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md).
+All currently supported versions of Astronomer-distributed images are compatible with all versions of Astronomer Software. Astronomer Certified and Astro Runtime maintenance is independent of Software maintenance. For more information, see [Astro Runtime maintenance and lifecycle policy](runtime-version-lifecycle-policy.md).
 
 :::info
 

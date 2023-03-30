@@ -67,7 +67,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
     <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}`}</code></pre>
 
-    For a list of currently supported Astronomer images, see [Astro Runtime lifecycle schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
+    For a list of currently supported versions of Astro Runtime, see [Astro Runtime lifecycle schedule](/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
   :::warning
 

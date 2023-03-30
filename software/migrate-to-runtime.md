@@ -59,7 +59,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
     FROM quay.io/astronomer/astro-runtime:5.0.4
     ```
 
-    For a list of currently supported Astronomer images, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
+    For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
   :::warning
 
