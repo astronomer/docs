@@ -90,12 +90,14 @@ In addition to alert emails for your Deployments, Astronomer recommends subscrib
 
 ## Enforce CI/CD deploys
 
-When you enforce CI/CD deploys for a Deployment, the Deployment will accept code deploys only if the deploy was triggered using a Deployment API key or Workspace token. 
+By default, Deployments accept code deploys from any authenticated source. When you enforce CI/CD deploys for a Deployment, the Deployment will accept code deploys only if the deploy was triggered using a Deployment API key or Workspace token. 
 
 1. In the Cloud UI, select a Workspace, click **Deployments**, and then select a Deployment.
 2. Click the **Details** tab.
 3. Click **Edit Details**.
 4. In **CI/CD Enforcement**, click the toggle to **On**.
+
+You can also update your Workspace so that any new Deployments in the Workspace enforce CI/CD deploys by default. See [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings).
 
 ## Transfer a Deployment to another Workspace 
 

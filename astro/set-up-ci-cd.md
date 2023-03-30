@@ -176,6 +176,13 @@ When you set up a CI/CD workflow on Astro, you will:
 
 If you use GitHub, Astronomer recommends using the [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action) that is maintained by Astronomer.
 
+## Enforce CI/CD
+
+One of the benefits using of a CI/CD pipeline is that all code pushes to your Deployment are tested, standardized, and observable through your pipeline. For Deployments where these qualities are a priority, Astronomer recommends enabling CI/CD enforcement so that code pushes can be completed only when using a Deployment API key or Workspace token. See:
+
+- [Enforce CI/CD deploys](configure-deployment-resources.md#enforce-cicd-deploys)
+- [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings)
+
 ## Test and validate DAGs in your CI/CD pipeline
 
 Astronomer recommends that you pytest all Python code in your DAGs. The Astro CLI includes [pytests](test-and-troubleshoot-locally.md#test-dags-with-the-astro-cli) to validate that your DAGs do not have import or syntax errors. You can implement this parse test with the [Astro CLI](cli/astro-dev-parse.md) or the [Deploy Action](https://github.com/astronomer/deploy-action).
