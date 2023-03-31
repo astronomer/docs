@@ -87,6 +87,90 @@ then
 fi
 ```
 
+### Preview Deployment templates
+
+_Preview Deployments_ are Deployments which are automatically created and deleted when you create a feature branch from your main Astro project branch. The Preview Deployment has the same configuration as the base Deployment, but it runs the code from your feature branch. When you merge or delete the branch, the preview Deployment is automatically deleted. 
+
+To implement this feature, you need four separate CI/CD actions to complete the following actions
+
+- Create the preview Deployment when you create a new branch.
+- Deploy code changes to Astro when you make updates in the branch.
+- Delete the preview Deployment when you delete the branch. 
+- Deploy your changes to your base Deployment after you merge your changes into your main branch. 
+
+On GitHub, the Astronomer-maintained [Deploy preview action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes sub-actions for each of these steps. These sub-actions are equivalent to the following four shell scripts: 
+
+#### Create a preview Deployment
+
+In a Deployment preview CI/CD pipeline, you run this script when you create a feature branch off of the main branch of your Astro project. 
+
+```sh
+# Install the Astro CLI
+curl -sSL https://install.astronomer.io | sudo bash -s
+
+# Get preview Deployment name
+DEPLOYMENT_NAME="$(astro deployment inspect $DEPLOYMENT_ID --key configuration.name)"
+BRANCH_DEPLOYMENT_NAME=$BRANCH_NAME_$DEPLOYMENT_NAME
+BRANCH_DEPLOYMENT_NAME="$BRANCH_DEPLOYMENT_NAME// /_"
+
+# Create template of Deployment to be copied
+astro deployment inspect $DEPLOYMENT_ID --template > deployment-preview-template.yaml # automatically creates deployment-preview-template.yaml file
+
+# Add name to Deployment template file
+sed -i "s|  name:.*|  name: $BRANCH_DEPLOYMENT_NAME}|g"  deployment-preview-template.yaml
+
+# Create new preview Deployment based on the Deployment template file
+astro deployment create --deployment-file deployment-preview-template.yaml
+
+# Deploy new code to the deployment preview 
+astro deploy -n $BRANCH_DEPLOYMENT_NAME
+```
+
+#### Update a preview Deployment
+
+In a Deployment preview CI/CD pipeline, you run this script whenever you make changes in your feature branch.
+
+```sh
+# Install the Astro CLI
+curl -sSL https://install.astronomer.io | sudo bash -s
+
+# Get preview Deployment name
+DEPLOYMENT_NAME="$(astro deployment inspect $DEPLOYMENT_ID --key configuration.name)"
+BRANCH_DEPLOYMENT_NAME=$BRANCH_NAME_$DEPLOYMENT_NAME
+BRANCH_DEPLOYMENT_NAME="$BRANCH_DEPLOYMENT_NAME// /_"
+
+# Deploy new code to the preview Deployment
+astro deploy -n $BRANCH_DEPLOYMENT_NAME
+```
+
+#### Delete a preview Deployment
+
+In a Deployment preview CI/CD pipeline, you run this script when you delete your feature branch.
+
+```sh
+# Install the Astro CLI
+curl -sSL https://install.astronomer.io | sudo bash -s
+
+DEPLOYMENT_NAME="$(astro deployment inspect $DEPLOYMENT_ID --key configuration.name)"
+BRANCH_DEPLOYMENT_NAME=$BRANCH_NAME_$DEPLOYMENT_NAME
+BRANCH_DEPLOYMENT_NAME="$BRANCH_DEPLOYMENT_NAME// /_"
+
+# Delete preview Deployment
+astro deployment delete -n $BRANCH_DEPLOYMENT_NAME -f
+```
+
+#### Deploy changes from a preview Deployment to a base Deployment
+
+In a Deployment preview CI/CD pipeline, you run this script when you merge your feature branch into your main branch.
+
+```sh
+# Install the Astro CLI
+curl -sSL https://install.astronomer.io | sudo bash -s
+
+# Deploy new code to base Deployment
+astro deploy $DEPLOYMENT_ID
+```
+
 ### Template implementations
 
 Each template type supports a variety of implementations, some of which are documented for each tool:
