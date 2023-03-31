@@ -28,7 +28,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - A Fivetran account. Fivetran offers a [14-day free trial](https://fivetran.com/signup) for new customers.
-- The [Astro CLI](https://docs.astronomer.io/astro/cli).
+- The [Astro CLI](https://docs.astronomer.io/astro/cli/overview).
 - A [GitHub](https://github.com/) account with the permissions for the following GitHub scopes: `repo`, `read:org`, `admin:org_hook`, `admin:repo_hook`.
 
 ## Step 1: Configure your Astro project

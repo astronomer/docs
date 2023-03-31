@@ -122,3 +122,4 @@ You can use the Astro CLI and a shell script to add multiple users to an Organiz
     ```sh
     sh path/to/add-users.sh path/to/users.txt
     ```
+6. Optional. To use this script as part of a CI/CD pipeline, create a Workspace API token and specify the environment variable `ASTRO_API_TOKEN=<your-token>` in your CI/CD environment. See [Manage Workspace API tokens](workspace-api-tokens.md). Note that Workspace API tokens work only for inviting groups of users to a Workspace. 

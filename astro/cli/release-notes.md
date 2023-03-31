@@ -17,6 +17,61 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.13.0
+
+Release date: March 30, 2023
+
+### New flag `--clean-output` for Deployment commands
+
+You can now use the `-—clean-output` flag with the `astro deployment inspect`, `create`, and `update` commands to make sure that any output comes only from the command itself. This is helpful for users automating actions with deployment files
+
+### New Environment Variable `ASTRO_HOME`
+
+The new environment variable `ASTRO_HOME` allows you to change the directory where the Astro CLI stores its global config file. This can be useful in environments where the CLI doesn’t have access to the HOME directory.
+
+### Additional improvements
+
+- The command `astro login` won’t ask for email input in the command line anymore. You can now provide your email address in the browser when you log in.
+
+### Deprection Warning
+
+The command `astro user invite` will be deprecated in Astro CLI v1.15.0. Any use of this command in your projects or automation needs to be updated to `astro organization user invite` before Astro CLI v1.15.0 is released
+
+## Astro CLI 1.12.1
+
+Release date: March 22, 2023
+
+### Bug fixes 
+
+- Fixed an issue where you couldn't authenticate to the Astro from the Astro CLI using single sign-on (SSO).
+
+## Astro CLI 1.12.0
+
+Release date: March 22, 2023
+
+### Additional improvements
+
+- You can now expose your local Airflow webserver and postgres database to all networks you're connected to using the following command:
+
+    ```sh
+    astro config set airflow.expose_port true
+    ```
+
+- When you trigger a DAG deploy to Astro, the CLI now includes the name of the DAG bundle version that it pushed. You can use this name to verify that your Deployment uses the correct version of your DAGs after a deploy.
+- If you add the environment variable `ASTRO_API_TOKEN=<workspace-api-token>` to your environment, the Astro CLI will use the specified Workspace API token to perform Workspace and Deployment actions without requiring you to log in. 
+- You can now disable [`astro run`](cli/astro-run.md) commands and exclude `astro-run-dag` from any images built by the CLI using the following command:
+
+    ```sh
+    astro config set disable_astro_run true
+    ```
+  
+- In new Astro projects, `requirements.txt` now includes a commented list of the pre-installed provider packages on Astro Runtime. 
+
+### Bug fixes
+
+- Fixed an issue where the default DAG integrity test would sometimes generate an error for valid uses of `os.getenv(key,default)`.
+- Fixed bugs in the default Astro project DAGs.
+
 ## Astro CLI 1.11.0
 
 Release date: February 27, 2023
@@ -56,7 +111,7 @@ To help you manage users in your Organization, Astro CLI 1.10.0 includes the fol
 
 :::
 
-For more information, see the [`astro organization`](cli/astro-organization.md) and [`astro workspace`](cli/astro-workspace-user-add.md) command references.
+For more information, see the [`astro organization`](cli/astro-organization-user-invite.md) and [`astro workspace`](cli/astro-workspace-user-add.md) command references.
 
 ## Astro CLI 1.9.0
 
@@ -271,7 +326,7 @@ For more information, see the [CLI command reference](cli/astro-dev-bash.md).
 
 You can invite new users to an Astro Organization with the new `astro user invite` command. Previously, you could only invite users to Astro with the Cloud UI.
 
-For more information, see the [CLI command reference](cli/astro-user-invite.md).
+For more information, see the [CLI command reference](cli/astro-organization-user-invite.md).
 
 ### Additional improvements
 

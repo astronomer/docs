@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Manage Workspaces'
-title: 'Manage Workspaces on Astro'
+sidebar_label: 'Configure Workspaces'
+title: 'Configure Workspaces on Astro'
 id: manage-workspaces
 description: Create, delete, and update Workspaces on Astro.
 ---

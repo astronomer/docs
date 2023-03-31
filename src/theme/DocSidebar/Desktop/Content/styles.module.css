@@ -21,7 +21,7 @@ html[data-theme="light"] .menu__listBottom {
   position: absolute;
   background: white;
   bottom: 0;
-  width: calc(100% - 20px);
+  width: calc(100% - 26px);
   padding: 2rem 0;
 }
 
@@ -32,7 +32,7 @@ html[data-theme="dark"] .menu__listBottom {
   position: absolute;
   background: #1b1b1d;
   bottom: 0;
-  width: calc(100% - 20px);
+  width: calc(100% - 26px);
   padding: 2rem 0;
 }
 

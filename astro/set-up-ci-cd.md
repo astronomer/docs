@@ -130,7 +130,7 @@ This strategy is recommended if:
 
 Depending on your organization, you might be required to maintain multiple repositories for a single Astro project. Data teams that implement this strategy typically manage DAGs in one repository and Astro project settings, such as Python packages and worker configuration, in another repository.
 
-his strategy is recommended if:
+This strategy is recommended if:
 
 - You have strict security requirements for who can update specific project files.  
 - You want to minimize complexity for project contributors at the expense of a more complex CI/CD pipeline. 

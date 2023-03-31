@@ -36,8 +36,8 @@ astro login
 
 | Option                | Description                                                                                                            | Possible Values |
 | --------------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------- |
-| `-l`, `--login-link`  | Force the user to manually access the Cloud UI to log in instead of opening the browser automatically from the CLI.    | None            |
-| `-t`, `--token-login` | Force the user to manually enter a token generated in the Cloud UI. This flag is used primarily for browserless login. | None            |
+| `-l`, `--login-link`  | The CLI will provide you with a URL to the log in page of the Cloud UI instead of automatically opening your browser. Use this link to manually authenticate | None            |
+| `-t`, `--token-login` | Log in by manually specifying an authentication token. Use this command when you can't access a web browser from the machine running the CLI | A valid authentication token from `cloud.astronomer.io/token` |
 
 ## Examples
 
@@ -48,8 +48,8 @@ astro login
 astro login --login-link
 # The CLI provides a link to the Cloud UI that you can manually open in a web browser.
 
-astro login --token-login
-# The CLI provides a link to the Cloud UI that you can manually open in a web browser. You then copy a generated token from the UI and enter it in the CLI. For a browserless login, you can open the link and copy the token on a separate machine from the one running the Astro CLI.
+astro login --token-login eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRmeDJYNVFNa2o3Q25ycVNyX1ZuTyJ9.eyJodHRwczovL2FzdHJvbm9tZXIuaW8vand0L2F1dGhfY29ubmVjdGlvbiI6eyJpZCI6ImNvbl9VazNBeTNDZGZ4Q1J5Z3BmIiwibmFtZSI6Imdvb2dsZS1vYXV0aDIiLCJzdHJhdGVneSI6Imdvb2dsZS1vYXV0aDIifSwiaXNzIjoiaHR0cHM6Ly9hdXRoLmFzdHJvbm9tZXIuaW8vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMTYzNjEzNTExNTY5MTg0ODg0MzEiLCJhdWQiOlsiYXN0cm9ub21lci1lZSIsImh0dHBzOi8vYXN0cm9ub21lci1wcm9kLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2NzkzODc3NDAsImV4cCI6MTY3OTQ3NDE0MCwiYXpwIjoiWXE5YXRZWFRlZjZ0ZVpZSlhrd2xRbDZsWHBOS2t6OHUiLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIG9mZmxpbmVfYWNjZXNzIiwicGVybWlzc2lvbnMiOltdfQ.mk5nkukONLjmayTL5RLytLAYO7w6PU-0PeCyNmyP7LNUBgPGlG22m3PzJ3jaLFRiIy-8sG0nJ_vmjPhBYYI_61WEFdVj3oGmIbHXc4gVlICaTn_MbbchVDFRVzp09akYcjWvD4TeXpIAp9Fc0-4b-FbCAxryETmS5W8JxyRscp1n9lOFia_yYgWXbXrETs9Guz_z6ErfYmGA71XiihJcy41ccGnb4Agf_aEn-Dwh3tCaKRJ-Mxb_yLKSZHKRyjNfZH9v_ZW1eDPfkF3oV0c4qFCIx8vHryK3q3h2jpsDw_r-_VmuNqSRxrY8ms0ixtq98PmjQ0vDvmiUYZPXnxBNOw
+# Use a token generated from cloud.astronomer.io/token to log in from a different browser
 ```
 
 </TabItem>

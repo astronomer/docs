@@ -201,22 +201,22 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
     ```hcl
     vault auth enable approle
     vault write auth/approle/role/astro_role \
+        role_id=astro_role \
         secret_id_ttl=0 \
         secret_id_num_uses=0 \
         token_num_uses=0 \
         token_ttl=24h \
-        token_max_ttl=24h
+        token_max_ttl=24h \
+        token_policies=astro_policy
     ```
 
-3. Add the policy you created to your AppRole. See [Associate Policies to Auth Methods](https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-policies#associate-policies-to-auth-methods).     
-4. Run the following commands to retrieve the `role-id` and `secret-id` for your AppRole:
+3. Run the following commands to retrieve the `secret-id` for your AppRole:
 
     ```sh
-    vault read auth/approle/role/<your-approle>/role-id
     vault write -f auth/approle/role/<your-approle>/secret-id
     ```
 
-    Save these values. You'll use them later to complete the setup.
+    Save this value. You'll use this later to complete the setup.
   
 #### Create an Airflow variable or connection in Vault
 
@@ -257,7 +257,7 @@ Then, add the following environment variables to your `.env` file:
 
 ```text
 AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
-AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}
+AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}
 ```
 
 :::info 
@@ -280,7 +280,7 @@ For more information on the Airflow provider for Hashicorp Vault and how to furt
     ```sh
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
   
-    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}' --secret
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}' --secret
     ```
   
 2. Run the following command to push your updated `requirements.txt` file to Astro:
