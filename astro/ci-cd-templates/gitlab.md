@@ -2,7 +2,7 @@
 sidebar_label: GitLab
 title: GitLab CI/CD templates
 id: gitlab
-description: Use pre-built templates to get started with automating deploys for your Apache Airflow code from GitLab to Astro  
+description: Use pre-built templates for GitLab to automate your Apache Airflow code deploys to Astro  
 ---
 
 Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).

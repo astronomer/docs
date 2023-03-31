@@ -2,7 +2,7 @@
 sidebar_label: Jenkins
 title: Jenkins CI/CD templates
 id: jenkins
-description: Use pre-built templates to get started with automating deploys for your Apache Airflow code from Jenkins to Astro 
+description: Use pre-built templates for Jankins to automate your Apache Airflow code deploys to Astro  
 ---
 
 import Tabs from '@theme/Tabs';
@@ -16,6 +16,8 @@ The following templates use [Jenkins](https://www.jenkins.io/) to automate code 
 The [DAG-based deploy template](template-overview.md#dag-based-templates) uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. 
 
 ## Prerequisites
+
+This pipeline configuration requires the following for all image-only templates and DAG-based deploy templates. 
 
 - A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
 - A [Deployment API key ID and secret](api-keys.md).
