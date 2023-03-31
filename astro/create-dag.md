@@ -11,15 +11,15 @@ id: 'create-first-DAG'
 
 import {siteVariables} from '@site/src/versions';
 
-To run Airflow pipelines on Astro, you need to complete the following:
+This quickstart gives you a demonstration for how to run your first DAG on Astro by building a sample Astro project, deploying it to the Astro Cloud, and then triggering a DAG run.
 
-- Create an Astro project. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. After you've tested these files locally, the Astro project structure makes it easy to deploy your pipelines to Astro.
+To run an Airflow DAG on Astro, you need to complete the following:
+
+- Create an _Astro project_. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. After you've tested these files locally, the Astro project structure makes it easy to deploy your pipelines to Astro.
 - Authenticate and log in to Astro. 
 - Create a Deployment to host your Airflow environment.
 - Deploy your project to Astro.
 - Trigger your DAG on Astro. 
-
-This quickstart gives you a demonstration for how to run your first DAG on Astro by building a sample Astro project, deploying it to the Astro Cloud, and then triggering a DAG run, which is an instance of a DAG running at a specifically scheduled time. 
 
 ## Prerequisites
 
