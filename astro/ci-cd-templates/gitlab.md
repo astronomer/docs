@@ -2,18 +2,28 @@
 sidebar_label: GitLab
 title: GitLab CI/CD templates
 id: gitlab
-description: Use pre-built templates to get started with automating code deploys from GitLab to Astro 
+description: Use pre-built templates to get started with automating deploys for your Apache Airflow code from GitLab to Astro  
 ---
 
-Use the following templates to automate code deploys to Astro using [GitLab](https://gitlab.com/).
+Use the following templates to automate code deploys to Astro using 
 
-## Image-only templates
+Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
 
-Image-only deploy templates build a Docker image and push it to Astro whenever you update any file in your Astro project.
+The following templates cover both Image-only deploys to automate code deploys to Astro using [GitLab](https://gitlab.com/). [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and push it to Astro whenever you update any file in your Astro project, and you can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. 
+
+## Prerequisites
+
+The following prerequisites are required for both single branch and multiple branch implementations.
+
+- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- A [Deployment API key ID and secret](api-keys.md).
+- A [GitLab](https://gitlab.com/) repository.
+- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+
 
 ### Single branch implementation
 
-Use this template to push code to from a GitLab repository to a single GitLab repository to Astro.
+Use this template to push code to from a GitLab repository to Astro.
 
 1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
 
