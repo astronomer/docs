@@ -1,6 +1,6 @@
 ---
 sidebar_label: Template overview
-title: Astro Cloud IDE
+title: Template overview
 id: template-overview
 description: Use pre-built templates to get started with automating code Deploys 
 ---
