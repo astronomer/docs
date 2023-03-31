@@ -245,22 +245,18 @@ While using the Astro dbt provider is recommended, there are several other ways 
 
 ### Using the BashOperator
 
-You can use the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) to execute specific dbt commands. You can execute `dbt run` or `dbt test` directly in Airflow as you would with any other shell.
+You can use the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) to execute specific dbt commands. Note that it is recommended to create a virtual environment with `dbt-core` and the dbt adapter for your database installed as there often are package conflicts between dbt and other packages.
 
-The DAG below uses the BashOperator to run a dbt project and associated tests:
+The DAG below uses the BashOperator to activate the virtual environment and execute `dbt_run` for a dbt project.
 
 <CodeBlock language="python">{airflow_dbt_bashoperator}</CodeBlock>
 
-Using the `BashOperator` to run `dbt run` and `dbt test` can be useful during development. However, running dbt at the project-level has several issues:
+Using the `BashOperator` to run `dbt run` and other dbt commands be useful during development. However, running dbt at the project-level has several issues:
 
 - Low observability into what execution state the project is in.
-- Failures are absolute and require the whole `dbt` group of models to be run again, which can be costly.
+- Failures are absolute and require all models in a project to be run again, which can be costly.
 
-:::info
-
-The code for this example can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/dbt-basic).
-
-:::
+Astronomer recommends to use the Astro dbt provider as shown in the tutorial above, whenever possible.
 
 ### Using a manifest file
 
