@@ -1,28 +1,24 @@
 from airflow.decorators import dag
 from cosmos.providers.dbt.task_group import DbtTaskGroup
-
-# import tools from the Astro SDK
 from astro import sql as aql
 from astro.sql.table import Table, Metadata
 from astro.files import File
-
 from pendulum import datetime
 import pandas as pd
 import logging
 
-# get the airflow.task logger
 task_logger = logging.getLogger("airflow.task")
 
-# set variables
 CONNECTION_ID = "db_conn"
 DB_NAME = "energy_db"
 SCHEMA_NAME = "energy_schema"
 CSV_FILEPATH = "include/subset_energy_capacity.csv"
 DBT_PROJECT_NAME = "my_energy_project"
-
-# the path where the Astronomer dbt provider will find the dbt executable
+# the path where the Astro dbt provider will find the dbt executable
 # in the virtual environment created in the Dockerfile
 DBT_EXECUTABLE_PATH = "/usr/local/airflow/dbt_venv/bin/dbt"
+# The path to your dbt directory
+DBT_ROOT_PATH = "/usr/local/airflow/dags/dbt"
 
 
 @aql.dataframe
@@ -81,6 +77,7 @@ def my_energy_dag():
         group_id="transform_data",
         dbt_project_name=DBT_PROJECT_NAME,
         conn_id=CONNECTION_ID,
+        dbt_root_path=DBT_ROOT_PATH,
         dbt_args={
             "dbt_executable_path": DBT_EXECUTABLE_PATH,
             "schema": SCHEMA_NAME,
@@ -88,7 +85,6 @@ def my_energy_dag():
         },
     )
 
-    # set dependencies
     (
         load_data
         >> dbt_tg

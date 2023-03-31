@@ -1,12 +1,12 @@
 ---
-title: "Orchestrate dbt Core jobs with the Astronomer dbt provider"
+title: "Orchestrate dbt Core jobs with the Astro dbt provider"
 sidebar_label: "dbt Core"
 id: airflow-dbt
 ---
 
 <head>
-  <meta name="description" content="Learn how to use the Astronomer dbt Provider to orchestrate dbt Core jobs with Airflow." />
-  <meta name="og:description" content="Learn how to use the  Astronomer dbt Provider to orchestrate dbt Core jobs with Airflow." />
+  <meta name="description" content="Learn how to use the Astro dbt provider to orchestrate dbt Core jobs with Airflow." />
+  <meta name="og:description" content="Learn how to use the  Astro dbt provider to orchestrate dbt Core jobs with Airflow." />
 </head>
 
 import CodeBlock from '@theme/CodeBlock';
@@ -16,7 +16,7 @@ import airflow_dbt_model from '!!raw-loader!../code-samples/dags/airflow-dbt/air
 
 [dbt Core](https://docs.getdbt.com/) is an open-source library for analytics engineering that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
 
-The [Astronomer dbt provider](https://astronomer.github.io/astronomer-cosmos/), also known as Cosmos, allows you to automatically create Airflow tasks from dbt models, seamlessly integrating dbt jobs into your Airflow orchestration environment. Running dbt Core with Airflow allows you implement event-based scheduling of dbt and integrate with other tools in your data ecosystem, while maintaining full observability of dbt model runs from the Airflow UI.
+The [Astro dbt provider](https://astronomer.github.io/astronomer-cosmos/), also known as Cosmos, allows you to automatically create Airflow tasks from dbt models, seamlessly integrating dbt jobs into your Airflow orchestration environment. Running dbt Core with Airflow allows you implement event-based scheduling of dbt and integrate with other tools in your data ecosystem, while maintaining full observability of dbt model runs from the Airflow UI.
 
 :::info
 
@@ -66,7 +66,7 @@ An Astro project contains all of the files you need to run Airflow locally.
 
     This code runs a bash command when the Docker image is built that creates a virtual environment called `dbt_venv` inside of the Astro CLI scheduler container. Two packages are installed in the virtual environment, `dbt-core` and `dbt-postgres`. If you are using a different data warehouse, replace `dbt-postgres` with the adapter package for your data warehouse.
 
-3. Add the [Astronomer dbt provider package](https://github.com/astronomer/astronomer-cosmos) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to your `requirements.txt` file. This tutorial uses the Astro Python SDK to load and analyze data transformed by dbt.
+3. Add the [Astro dbt provider package](https://github.com/astronomer/astronomer-cosmos) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to your `requirements.txt` file. This tutorial uses the Astro Python SDK to load and analyze data transformed by dbt.
 
     ```text
     astronomer-cosmos
@@ -104,7 +104,7 @@ If you are using a different data warehouse, your commands to create the databas
 
 In this tutorial we will use an example dbt job that consists of two dbt models. The first model, called `select_country`, will select the data for a country you select. The second model, called `create_pct`, will use the table created by the first model to calculate the percentage of renewable and solar energy capacity in that country.
 
-1. Create a folder called `dbt` in your Astro project. The Astronomer dbt provider will by default look for dbt projects in a `dbt` directory inside of your `AIRFLOW_HOME` directory. You can modify the directory in which `DbtDag` or `DbtTaskGroup` searches for dbt models by providing a different path to the `dbt_root_path` parameter.
+1. Create a folder called `dbt` in your `dags` directory. 
 
 2. In the `dbt` directory, create a sub-directory called `my_energy_project`.
 
@@ -167,38 +167,19 @@ If you are using a different data warehouse than Postgres you might need to adap
 
 :::
 
-7.  Create a file called `docker-compose.override.yml` in your Astro project folder and copy the following contents into the file:
-
-    ```yaml
-    version: "3.1"
-    services:
-      scheduler:
-        volumes:
-          - ./dbt:/usr/local/airflow/dbt
-      webserver:
-        volumes:
-          - ./dbt:/usr/local/airflow/dbt
-      triggerer:
-        volumes:
-          - ./dbt:/usr/local/airflow/dbt
-    ```
-This mounts your `dbt` folder to the Docker containers running Airflow when you start up your project.
-
-
 You should now have the following structure within your Astro project:
 
 ```text
 .
 └── dags
-├── dbt
-│   └── my_energy_project
-│      ├── dbt_project.yml
-│      └── models
-│          ├── select_country.sql
-│          └── create_pct.sql
-├── include
-│   └── subset_energy_capacity.csv
-└── docker-compose.override.yml
+│   └── dbt
+│       └── my_energy_project
+│          ├── dbt_project.yml
+│          └── models
+│              ├── select_country.sql
+│              └── create_pct.sql
+└── include
+    └── subset_energy_capacity.csv
 ```
 
 ## Step 5: Configure a data warehouse connection
@@ -225,7 +206,7 @@ For some databases you might need to add the [relevant provider package](https:/
 
 ## Step 6: Write a dbt DAG
 
-The DAG used in this tutorial shows how you can use the Astronomer dbt provider to create tasks from existing dbt models and have those task be embedded within other actions in your data ecosystem.
+The DAG used in this tutorial shows how you can use the Astro dbt provider to create tasks from existing dbt models and have those task be embedded within other actions in your data ecosystem.
 
 1. In your `dags` folder, create a file called `my_energy_dag`.
 
@@ -239,7 +220,7 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
     - The `transform_data` task group is created from the dbt models. Using the models defined in Step 4, the task group will contain two nested task groups with two tasks each, one for `dbt run`, the other for `dbt test`.
     - The `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to run an analysis on the final table created through the dbt models using `pandas` and to log the results.
 
-    The `DbtTaskGroup` function of the Astronomer dbt provider package automatically scans the `dbt` folder for dbt projects and creates a task group (`transform_data` in this example) containing Airflow tasks running and testing the project's models. Additionally, the provider can infer the model dependency within the dbt project and will set the Airflow task dependencies accordingly.
+    The `DbtTaskGroup` function of the Astro dbt provider package automatically scans the `dbt` folder for dbt projects and creates a task group (`transform_data` in this example) containing Airflow tasks running and testing the project's models. Additionally, the provider can infer the model dependency within the dbt project and will set the Airflow task dependencies accordingly.
 
 3. (Optional) Choose which country's data to analyze by specifying your desired `country_code` in the `dbt_args` parameter of the DbtTaskGroup. Note that this [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) only contains data for several European countries.
 
@@ -254,13 +235,13 @@ The DAG used in this tutorial shows how you can use the Astronomer dbt provider 
 
 :::info
 
-The DbtTaskGroup class populates an Airflow task group with Airflow tasks created from dbt models inside of a normal DAG. To directly define a full DAG containing only dbt models use the `DbtDag` class, as shown in the [Astronomer dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/dbt/usage.html#full-dag).
+The DbtTaskGroup class populates an Airflow task group with Airflow tasks created from dbt models inside of a normal DAG. To directly define a full DAG containing only dbt models use the `DbtDag` class, as shown in the [Astro dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/dbt/usage.html#full-dag).
 
 :::
 
 ## Alternative ways to run dbt Core with Airflow
 
-While using the Astronomer dbt provider is recommended, there are several other ways to run dbt Core with Airflow.
+While using the Astro dbt provider is recommended, there are several other ways to run dbt Core with Airflow.
 
 ### Using the BashOperator
 
@@ -289,4 +270,4 @@ You can learn more about a manifest-based dbt and Airflow project structure, vie
 
 ## Conclusion
 
-Congratulations! You've run a DAG using the Astronomer dbt provider to automatically create tasks from dbt models. The Astronomer dbt provider is under active development. You can learn more about it in the [Astronomer dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/index.html).
+Congratulations! You've run a DAG using the Astro dbt provider to automatically create tasks from dbt models. The Astro dbt provider is under active development. You can learn more about it in the [Astro dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/index.html).
