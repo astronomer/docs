@@ -296,7 +296,7 @@ To complete this setup, you need:
             tags: ${{ steps.image_tag.outputs.image_tag }}
             load: true
             ssh: |
-              github=${{ env.SSH_AUTH_SOCK }
+              github=${{ env.SSH_AUTH_SOCK }}
         - name: Deploy to Astro
           uses: astronomer/deploy-action@v0.1
           with:
