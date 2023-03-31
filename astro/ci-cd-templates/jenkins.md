@@ -15,8 +15,15 @@ The following templates cover both Image-only deploys and Dag-based deploys to a
 
 The [DAG-based template](template-overview.md#dag-based-templates) uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. 
 
-## Image-only templates
+## Prerequisites
 
+- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- A [Deployment API key ID and secret](api-keys.md).
+- A [Jenkins](https://www.jenkins.io/) pipeline configuration.
+- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+
+## Image-only templates
+ 
 <Tabs
     defaultValue="standard"
     groupId= "image-only-templates"
@@ -37,7 +44,7 @@ To automate code deploys to a single Deployment using [Jenkins](https://www.jenk
 
     Be sure to set the values for your API credentials as secret.
 
-2. At the root of your Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
+2. At the root of your Astro Git repository, add a [Jenkinsfile](https://www.jenkins.io/doc/book/pipeline/jenkinsfile/) that includes the following script:
 
     <pre><code parentName="pre">{`pipeline {
         agent any
