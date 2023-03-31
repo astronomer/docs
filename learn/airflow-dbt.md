@@ -104,7 +104,7 @@ If you are using a different data warehouse, your commands to create the databas
 
 In this tutorial we will use an example dbt job that consists of two dbt models. The first model, called `select_country`, will select the data for a country you select. The second model, called `create_pct`, will use the table created by the first model to calculate the percentage of renewable and solar energy capacity in that country.
 
-1. Create a folder called `dbt` in your Astro project. The Astronomer dbt provider will by default look for dbt projects in a `dbt` directory inside of your `AIRFLOW_HOME` directory. You can modify the directory in which `DbtDAG` or `DbtTaskGroup` searches for dbt models by providing a different path to the `dbt_root_path` parameter.
+1. Create a folder called `dbt` in your Astro project. The Astronomer dbt provider will by default look for dbt projects in a `dbt` directory inside of your `AIRFLOW_HOME` directory. You can modify the directory in which `DbtDag` or `DbtTaskGroup` searches for dbt models by providing a different path to the `dbt_root_path` parameter.
 
 2. In the `dbt` directory, create a sub-directory called `my_energy_project`.
 
