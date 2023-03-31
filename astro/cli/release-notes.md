@@ -19,19 +19,19 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 ## Astro CLI 1.13.0
 
-Release date: March 22, 2023
+Release date: March 30, 2023
 
 ### New flag `--clean-output` for Deployment commands
 
-You can use `-—clean-output` to make sure that the commands `astro deployment inspect`, `create`, and `update` is clean of any output not coming from the command itself. This is helpful for users automating actions with deployment files
+You can now use the `-—clean-output` flag with the `astro deployment inspect`, `create`, and `update` commands to make sure that any output comes only from the command itself. This is helpful for users automating actions with deployment files
 
 ### New Environment Variable `ASTRO_HOME`
 
-Set the environment variable `ASTRO_HOME` if you you need to change the directory were the Astro CLI stores its global config file. This can be helpful in environments were the CLI doesn’t have access to the HOME directory.
+The new environment variable `ASTRO_HOME` allows you to change the directory where the Astro CLI stores its global config file. This can be useful in environments where the CLI doesn’t have access to the HOME directory.
 
 ### Additional improvements
 
-- The command astro login won’t ask for email input in the command line anymore. This information can be inputed in the browser now.
+- The command `astro login` won’t ask for email input in the command line anymore. You can now provide your email address in the browser when you log in.
 
 ### Deprection Warning
 
