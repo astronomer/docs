@@ -118,7 +118,7 @@ You can use the output of an upstream operator as the input data for a dynamical
 
 In this section you'll learn how to pass mapping information to a downstream task for each of the following scenarios:
 
-- **TaskFlow over TraskFlow**: Both tasks are defined using the TaskFlow API.
+- **TaskFlow over TaskFlow**: Both tasks are defined using the TaskFlow API.
 - **TaskFlow over traditional operator**: The upstream task is defined using a traditional operator and the downstream task is defined using the TaskFlow API.
 - **Traditional operator over TaskFlow**: The upstream task is defined using the TaskFlow API and the downstream task is defined using a traditional operator.
 - **Traditional operator over traditional operator**: Both tasks are defined using traditional operators.
@@ -127,7 +127,7 @@ In this section you'll learn how to pass mapping information to a downstream tas
     defaultValue="two-flow"
     groupId="mapping-over-the-result-of-another-operator"
     values={[
-        {label: 'TaskFlow over TraskFlow', value: 'two-flow'},
+        {label: 'TaskFlow over TaskFlow', value: 'two-flow'},
         {label: 'TaskFlow over Traditional operator', value: 'flow-traditional'},
         {label: 'Traditional operator over TaskFlow', value: 'traditional-flow'},
         {label: 'Traditional operator over Traditional operator', value: 'two-traditional'},
