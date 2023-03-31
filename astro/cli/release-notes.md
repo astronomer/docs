@@ -21,11 +21,20 @@ This document provides a summary of all changes made to the [Astro CLI](cli/over
 
 Release date: March 30, 2023
 
+:::caution
+
+The command `astro user invite` will be deprecated in Astro CLI v1.15.0. Any use of this command in your projects or automation needs to be updated to `astro organization user invite` before Astro CLI v1.15.0 is released
+
+:::
+
 ### New flag `--clean-output` for Deployment commands
 
-You can now use the `-—clean-output` flag with the `astro deployment inspect`, `create`, and `update` commands to make sure that any output comes only from the command itself. This is helpful for users automating actions with deployment files
+You can now use the `-—clean-output` flag with the following commands to make sure that any output comes only from the command itself. This is helpful for users automating actions with deployment files.
+- `astro deployment inspect`
+- `astro deployment create`
+- `astro deployment update` 
 
-### New Environment Variable `ASTRO_HOME`
+### New environment variable `ASTRO_HOME`
 
 The new environment variable `ASTRO_HOME` allows you to change the directory where the Astro CLI stores its global config file. This can be useful in environments where the CLI doesn’t have access to the HOME directory.
 
@@ -33,9 +42,6 @@ The new environment variable `ASTRO_HOME` allows you to change the directory whe
 
 - The command `astro login` won’t ask for email input in the command line anymore. You can now provide your email address in the browser when you log in.
 
-### Deprection Warning
-
-The command `astro user invite` will be deprecated in Astro CLI v1.15.0. Any use of this command in your projects or automation needs to be updated to `astro organization user invite` before Astro CLI v1.15.0 is released
 
 ## Astro CLI 1.12.1
 
