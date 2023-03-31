@@ -5,11 +5,9 @@ id: gitlab
 description: Use pre-built templates to get started with automating deploys for your Apache Airflow code from GitLab to Astro  
 ---
 
-Use the following templates to automate code deploys to Astro using 
-
 Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
 
-The following templates cover both Image-only deploys to automate code deploys to Astro using [GitLab](https://gitlab.com/). [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and push it to Astro whenever you update any file in your Astro project, and you can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. 
+The following templates use [GitLab](https://gitlab.com/) to automate code deploys to Astro with Image-only deploy templates. [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. You can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. 
 
 ## Prerequisites
 
