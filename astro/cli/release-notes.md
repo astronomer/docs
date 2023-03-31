@@ -23,7 +23,7 @@ Release date: March 30, 2023
 
 :::caution
 
-The command `astro user invite` will be deprecated in Astro CLI v1.15.0. Any use of this command in your projects or automation needs to be updated to `astro organization user invite` before Astro CLI v1.15.0 is released
+The command `astro user invite` will be deprecated in Astro CLI v1.15.0. Any use of this command in your projects or automation needs to be updated to [`astro organization user invite`](/cli/astro-organization-user-invite.md) before Astro CLI v1.15.0 is released.
 
 :::
 
