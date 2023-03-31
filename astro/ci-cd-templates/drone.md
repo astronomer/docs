@@ -7,7 +7,9 @@ description: Use pre-built templates for Drone to automate your Apache Airflow c
 
 Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. You can use this template for [Drone CI](https://www.drone.io/) to automate code deploys to Astro with Image-only deploy templates. 
 
-[Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. You can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+[Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. You can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. 
+
+See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
 
 ## Prerequisites
 

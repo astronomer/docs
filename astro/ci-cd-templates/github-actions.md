@@ -2,13 +2,29 @@
 sidebar_label: GitHub Actions
 title: GitHub Actions CI/CD templates
 id: github-actions
-description: Use GitHub Actions pre-built templates to get started with automating code deploys from GitHub to Astro 
+description: Use pre-built GitHub Actions templates to automate Apache Airflow code deploys to Astro 
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-GitHub templates use the Astronomer-maintained [Deploy Action](https://github.com/astronomer/deploy-action) to deploy code to Astronomer. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
+
+Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools.  
+
+GitHub templates use the Astronomer-maintained [Deploy Action](https://github.com/astronomer/deploy-action) to deploy code to Astronomer as either Image-only or Dag-based deploys. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
+
+[Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and push it to Astro whenever you update any file in your Astro project, and you can choose whether to deploy to a single Deployment, called _Single branch_, or multiple Deployments, called _Multiple branch_. 
+
+The [DAG-based deploy template](template-overview.md#dag-based-templates) uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. 
+
+See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+
+## Prerequisites
+
+- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- A [Deployment API key ID and secret](api-keys.md).
+- Access to [GitHub Actions](https://github.com/features/actions).
+- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
 
 ## Image-only templates
 
@@ -60,13 +76,11 @@ To automate code deploys to a single Deployment using [GitHub Actions](https://g
 
 The following template can be used to create a multiple branch CI/CD pipeline using GitHub Actions. A multiple branch pipeline can be used to test DAGs in a development Deployment and promote them to a production Deployment. 
 
-#### Prerequisites 
+#### Configuration requirements
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
 - You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
-
-#### Setup
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
@@ -117,11 +131,9 @@ The following template can be used to create a multiple branch CI/CD pipeline us
 
 If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
 
-#### Prerequisites
+#### Configuration requirements
 
 - An Astro project that requires additional build-time arguments to build the Runtime image.
-
-#### Setup
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
@@ -275,7 +287,7 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
 
 ![Diagram showing how a multiple branch CI/CD pipeline works](/img/docs/multibranch.png)
 
-This setup assumes the following prerequisites:
+#### Configuration requirements:
 
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
@@ -335,11 +347,11 @@ This setup assumes the following prerequisites:
 
 If your Astro project requires additional build-time arguments to build an image, you need to define these build arguments using Docker's [`build-push-action`](https://github.com/docker/build-push-action).
 
-#### Prerequisites
+#### Configuration requirements
 
 - An Astro project that requires additional build-time arguments to build the Runtime image.
 
-#### Setup
+#### Implementation
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
@@ -406,7 +418,7 @@ The Astronomer [Deploy Action](https://github.com/astronomer/deploy-action/tree/
 - A [Workspace API token](workspace-api-tokens.md).
 - A [Deployment](create-deployment.md). 
 
-### Setup
+### Deployment preview implementation
 
 1. Copy and save the Deployment ID for your Astro deployment.
 2. Set the following [GitHub secret](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository) in the repository hosting your Astro project:

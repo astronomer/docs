@@ -2,16 +2,23 @@
 sidebar_label: AWS Codebuild
 title: AWS Codebuild CI/CD templates
 id: aws-codebuild
-description: Use pre-built templates to get started with automating code deploys from AWS Codebuild to Astro 
+description: Use pre-built templates for AWS Codebuild to automate your Apache Airflow code deploys to Astro 
 ---
 
-Use the following templates to automate code deploys to Astro using [AWS Codebuild](https://aws.amazon.com/codebuild/).
+Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
 
-## Image-only templates
+The following templates use [AWS Codebuild](https://aws.amazon.com/codebuild/) to automate code deploys to Astro with Image-only deploy templates. [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. You can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. 
 
-[Image-only deploy templates](template-overview.md#template-types) build a Docker image and push it to Astro whenever you update any file in your Astro project.
+See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
 
-### Single branch implementation
+## Prerequisites
+
+- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- A [Deployment API key ID and secret](api-keys.md).
+- An [AWS CodeBuild](https://aws.amazon.com/codebuild/) pipeline.
+- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+
+## Single branch implementation
 
 To automate code deploys from a single branch to a single Deployment using [AWS CodeBuild](https://aws.amazon.com/codebuild/), complete the following setup with a [supported Git-based repository](https://docs.aws.amazon.com/codebuild/latest/userguide/planning.html) hosting an Astro project:
 
@@ -48,7 +55,7 @@ To automate code deploys from a single branch to a single Deployment using [AWS 
 
 Your `buildspec.yml` file now triggers a code push to an Astro Deployment every time a commit or pull request is merged to the `main` branch of your repository.
 
-### Multiple branch implementation
+## Multiple branch implementation
 
 To automate code deploys across multiple Deployments using [AWS CodeBuild](https://aws.amazon.com/codebuild/), complete the following setup with a Git-based repository hosting an Astro project:
 

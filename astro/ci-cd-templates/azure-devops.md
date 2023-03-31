@@ -2,14 +2,29 @@
 sidebar_label: Azure DevOps
 title: Azure DevOps CI/CD templates
 id: azure-devops
-description: Use pre-built templates to get started with automating code deploys from Azure DevOps to Astro 
+description: Use pre-built templates for Azure DevOps to automate your Apache Airflow code deploys to Astro 
 ---
 
-Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using [Azure DevOps](https://dev.azure.com/).
+Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using .
 
-## Setup
+Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
+ 
+You can use this template for [Azure DevOps](https://dev.azure.com/) to automate code deploys to Astro with Image-only deploy templates using a Single branch implementation. [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. A _Single branch implementation_ allows you to deploy code to one Astro Deployment. 
 
-Complete the following setup in an Azure repository that hosts an Astro project:
+See [Template overview](template-overview.md) to decide which template is right for you. To learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+
+## Prerequisites
+
+This pipeline configuration requires the following:
+
+- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- A [Deployment API key ID and secret](api-keys.md).
+- A [Azure DevOps](https://dev.azure.com/) account.
+- An [Astro project](create-project.md) hosted in an Azure repository that your CI/CD tool can access.
+
+## Single branch implementation
+
+Complete the following set up in an Azure repository that hosts an Astro project:
 
 1. Set the following environment variables as [DevOps pipeline variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch):
 

@@ -2,12 +2,25 @@
 sidebar_label: CircleCI
 title: CircleCI CI/CD templates
 id: circleci
-description: Use pre-built templates to get started with automating code deploys from CircleCI to Astro 
+description: Use pre-built templates for CircleCI to automate your Apache Airflow code deploys to Astro  
 ---
 
-Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using [CircleCI](https://circleci.com/).
+Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
+ 
+You can use this template for [CircleCI](https://circleci.com/) to automate code deploys to Astro with Image-only deploy templates [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. A _Single branch implementation_ allows you to deploy code to one Astro Deployment. 
 
-## Setup
+See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+
+## Prerequisites
+
+This configuration requires the following:
+
+- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- A [Deployment API key ID and secret](api-keys.md).
+- A [CircleCI](https://circleci.com/) pipeline configuration.
+- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+
+## Single branch implementation
 
 To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
 

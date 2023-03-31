@@ -5,9 +5,12 @@ id: gitlab
 description: Use pre-built templates for GitLab to automate your Apache Airflow code deploys to Astro  
 ---
 
-Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
 
 The following templates use [GitLab](https://gitlab.com/) to automate code deploys to Astro with Image-only deploy templates. [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. You can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. 
+
+See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+
 
 ## Prerequisites
 
@@ -16,7 +19,7 @@ The following prerequisites are required for both single branch and multiple bra
 - A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - A [GitLab](https://gitlab.com/) repository.
-- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+- An [Astro project](create-project.md) hosted in a GitLab repository that your CI/CD tool can access.
 
 
 ### Single branch implementation
