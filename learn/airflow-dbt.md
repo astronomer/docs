@@ -24,6 +24,12 @@ For a tutorial on how to use dbt Cloud with Airflow see [Orchestrate dbt Cloud w
 
 :::
 
+:::info
+
+The DAG used in this tutorial is accessible in the Astronomer registry ADD LINK LATER and the full Astro project can be cloned from [this repository](https://github.com/astronomer/astro-dbt-provider-tutorial-example). 
+
+:::
+
 ## Time to complete
 
 This tutorial takes approximately 1 hour to complete.
