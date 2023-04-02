@@ -245,6 +245,12 @@ The DbtTaskGroup class populates an Airflow task group with Airflow tasks create
 
 :::
 
+:::tip
+
+Learn more about the Astro dbt provider in the [Astro dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/).
+
+:::
+
 ## Alternative ways to run dbt Core with Airflow
 
 While using the Astro dbt provider is recommended, there are several other ways to run dbt Core with Airflow.
