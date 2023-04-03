@@ -15,9 +15,9 @@ Astro is the industry's leading managed service for Apache Airflow. The best way
 
 Specifically, you will:
 
-- Create an _Astro project_. An Astro project contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. All new Astro projects contain two example DAGs.
+- Create an Astro project. 
 - Authenticate and log in to Astro. 
-- Create a _Deployment_. An Astro Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow, including the Airflow webserver, scheduler, and one or more workers.
+- Create a Deployment. 
 - Deploy your project to Astro with the Astro CLI.
 - Trigger a run of an example DAG in the Airflow UI. 
 
@@ -32,19 +32,23 @@ If you're the first person on your team to try Astro, see [Start your Astro tria
 
 ## Step 1: Create an Astro project
 
-1. Open your terminal and create a new directory for your Astro project:
+An _Astro project_ contains the set of files necessary to run Airflow, including dedicated folders for your DAG files, plugins, and dependencies. All new Astro projects contain two example DAGs.
+
+1. Open your terminal or IDE
+
+2. Create a new directory for your Astro project:
 
     ```sh
     mkdir <your-astro-project-name>
     ```
 
-2. Open the directory:
+3. Open the directory:
 
     ```sh
     cd <your-astro-project-name>
     ```
 
-3. Run the following Astro CLI command to initialize an Astro project in the directory:
+4. Run the following Astro CLI command to initialize an Astro project in the directory:
 
     ```sh
     astro dev init
@@ -73,7 +77,7 @@ If you're the first person on your team to try Astro, see [Start your Astro tria
 
 ## Step 2: Build your project locally
 
-Building your project locally allows you to test your DAGs locally and confirm that your example Astro project builds correctly before you run it remotely in Astro. While this step is not required for deploying and running your code on Astro, Astronomer recommends always using the Astro CLI to test locally before deploying.
+Building your project locally allows you to test your DAGs and confirm that your example Astro project builds correctly before you run it remotely in Astro. While this step is not required for deploying and running your code on Astro, Astronomer recommends always using the Astro CLI to test locally before deploying.
 
 1. To start running your project in a local Airflow environment, run the following command from your project directory:
 
@@ -116,7 +120,7 @@ The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the
 
 ## Step 5: Create a Deployment
 
-A Deployment on Astro is like an individual Apache Airflow environment on the cloud. You can have one or more Deployments within a _Workspace_, which is a collection of users that have access to the same Deployments.
+An Astro _Deployment_ is an Astro Runtime environment that is powered by the core components of Apache Airflow, including the Airflow webserver, scheduler, and one or more workers. You can have one or more Deployments within a _Workspace_, which is a collection of users that have access to the same Deployments.
 
 When you create a Deployment on Astro, infrastructure is created in your cluster that runs your DAGs with all core Apache Airflow components.
 
