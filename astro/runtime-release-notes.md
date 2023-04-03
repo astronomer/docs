@@ -24,14 +24,14 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
-## Astro Runtime 7.5.0
+## Astro Runtime 7.4.2
 
-- Release date: 
+- Release date: April 3, 2023
 - Airflow version: 2.5.3
 
 ### Airflow 2.5.3
 
-Astro Runtime 7.2.0 includes same-day support for Apache Airflow 2.5.3. Airflow 2.5.3 contains a number of bug fixes including:
+Astro Runtime 7.4.2 includes same-day support for Apache Airflow 2.5.3. Airflow 2.5.3 contains a number of bug fixes including:
 
 - Fix `TriggerRuleDep` when the mapped tasks count is 0 ([30084](https://github.com/apache/airflow/pull/30084))
 - Fix some long known Graph View UI problems ([29971](https://github.com/apache/airflow/pull/29971))
