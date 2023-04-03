@@ -102,8 +102,6 @@ In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition
 
 Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
 
-For example, all instances of this task will run in the `machine-learning-tasks` queue:
-
 <Tabs
     defaultValue="classicoperator"
     groupId= "assign-worker-queue"
