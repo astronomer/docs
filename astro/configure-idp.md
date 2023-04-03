@@ -9,23 +9,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-There are 4 ways users can to authenticate to Astro:
+Including Single Sign-On (SSO) authorization, there are 4 ways that users can to authenticate to Astro:
 
-- Basic authentication
+- Basic authentication (username and password)
 - Google social login
 - GitHub social login
 - 3rd-party identity provider (IdP) login
 
-Identity Providers (IdPs) are services that manage user accounts. As organizations grow, it's common for teams to integrate internal tooling with a third-party IdP. This allows administrators to monitor application access, user permissions, and security policies from a single place. It also makes it easy for individual users to access the tools they need.
-
-Astro supports integrations with the following IdPs:
-
-- [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
-- [Okta](https://www.okta.com/)
-- [OneLogin](https://www.onelogin.com/)
-- [Ping Identity](https://www.pingidentity.com/en.html)
-
-This guide provides setup steps for integrating both of these identity providers on Astro. Once you complete the integration for your organization:
+This guide provides the steps for integrating identity providers on Astro to enable SSO for your users. After you complete the integration for your organization:
 
 - Users will automatically be authenticated to Astro if they're already logged in to your IdP.
 - Users will no longer have to repeatedly login and remember credentials for their account.
@@ -38,6 +29,23 @@ This guide provides setup steps for integrating both of these identity providers
 Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in to the [Cloud UI](https://cloud.astronomer.io/).
 
 :::
+
+## Single Sign On (SSO) authorization identity providers
+
+Single Sign On (SSO) authorization allows users to log in using their company credentials, managed via an identity provider (IdP). This provides a streamlined login experience for your Astro users, as they are able to leverage the same credentials across multiple applications. In addition, this provides improved security and control for organizations to manage access from a single source. Astro supports integrations with the following IdPs:
+
+- [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
+- [Okta](https://www.okta.com/)
+- [OneLogin](https://www.onelogin.com/)
+- [Ping Identity](https://www.pingidentity.com/en.html)
+
+## Domain management
+
+SSO authorization policies in Astro are based on email domains, which ensures that all users with an approved email domain authenticate with the configured SSO Connection. As part of the SSO configuration process, you need to add and verify the domains that you own and manage.
+
+You can only configure a single SSO connection for a given domain. However, if you have multiple managed domains, then you can set up multiple different SSO connections, with a separate SSO connection for each domain. 
+
+!--Add about multiple managed domains--!
 
 ## Configure your identity provider
 
@@ -60,7 +68,7 @@ This section provides setup steps for setting up Okta as your IdP on Astro. Afte
 - An [Okta account](https://www.okta.com/) with administrative access.
 - A list of domains that you own and should be authorized to access your Astro Organization.
 
-#### Step 1: Verify your domain(s)
+#### Step 1: Map your domain
 
 Mapping a domain to Okta ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to Okta to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
 
@@ -151,7 +159,7 @@ To integrate Azure as your IdP for Astro you must have:
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - A list of domains that you own and should be authorized to access your Astro Organization.
 
-#### Step 1: Verify your domain(s)
+#### Step 1: Map your domain
 
 Mapping a domain to Azure AD ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to Azure AD to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
 
@@ -235,7 +243,7 @@ This section provides setup steps for setting up OneLogin as your IdP on Astro. 
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - A list of domains that you own and should be authorized to access your Astro Organization.
 
-#### Step 1: Verify your domain(s)
+#### Step 1: Map your domain
 
 Mapping a domain to OneLogin ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to OneLogin to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
 
@@ -275,11 +283,9 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
     - **ACS (Consumer) URL Validator**: `<your-sso-url>`
     - **ACS (Consumer) URL**: `<your-sso-url>`
 
-9. Select the **Sign SLO Request** and **Sign SLO Response** checkboxes. 
+9. Select the **Sign SLO Request** and **Sign SLO Response** checkboxes. Then, click **Save**.
 
-10. Click **Save**.
-
-11. Click **Parameters** in the left menu, and add the following four parameters, using the same capitalization shown in the **Value** column:
+10. Click **Parameters** in the left menu, and add the following four parameters, using the same capitalization shown in the **Value** column:
 
     | Field name | Value           |
     | ---------  | -----------------| 
@@ -305,9 +311,7 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
 
 17. Click **Create**. Your OneLogin integration appears as an entry in **SSO Configuration**.
     
-18. In **SSO Configuration**, click **Activate**. You are redirected to OneLogin to test your configuration. After you have successfully authenticated, you are redirected to Astro.
-    
-19. Click **Activate SSO**.
+18. In **SSO Configuration**, click **Activate**. You are redirected to OneLogin to test your configuration. After you have successfully authenticated, you are redirected to Astro. Then, click **Activate SSO**.
     
 20. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
 
@@ -331,7 +335,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - A list of domains that you own and should be authorized to access your Astro Organization.
 
-#### Step 1: Verify your domain(s)
+#### Step 1: Map your domain
 
 Mapping a domain to Ping Identity ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to Ping Identity to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
 
@@ -372,21 +376,17 @@ To map a domain to Ping Identity, you must verify that you own the domain.
 
 9.  Click **Save**.
 
-10. Click **Edit** on the **Overview** page, and then enter `<your-sso-url>` in the **Signon URL** field. 
+10. Click **Edit** on the **Overview** page, and then enter `<your-sso-url>` in the **Signon URL** field. Then, click **Save**.
 
-11. Click **Save**.
+11. Click the **Configuration** tab, and then click **Edit**.
 
-12. Click the **Configuration** tab, and then click **Edit**.
+12. Select **Sign Assertion & Response** and confirm `RSA_SHA256` is selected in the **Signing Algorithm** list. Then, click **Save**.
 
-13. Select **Sign Assertion & Response** and confirm `RSA_SHA256` is selected in the **Signing Algorithm** list.
+13. On the **Configuration** page, click **Download Signing Certificate** and select `X509 PEM (.crt)` to download the X.509 certificate for your application.
 
-14. Click **Save**.
+14. Copy and save the URL in the **Single Signon Service** field.
 
-15. On the **Configuration** page, click **Download Signing Certificate** and select `X509 PEM (.crt)` to download the X.509 certificate for your application.
-
-16. Copy and save the URL in the **Single Signon Service** field.
-
-17. Click the **Attribute Mappings** tab, click **Edit**, and add the following attributes, using the capitalization shown in both columns:
+15. Click the **Attribute Mappings** tab, click **Edit**, and add the following attributes, using the capitalization shown in both columns:
 
     | Astronomer        | PingOne           |
     | ------------      | ----------------| 
@@ -396,24 +396,24 @@ To map a domain to Ping Identity, you must verify that you own the domain.
     | lastName          | Family Name     |
     | name              | Formatted       |
 
-18. Click **Save**.
+16. Click **Save**.
 
-19. Click the toggle in the top right to enable the application.
+17. Click the toggle in the top right to enable the application.
     
-20. Assign yourself to Astro from Ping Identity. See [Editing a user](https://docs.pingidentity.com/r/en-us/pingone/p1_t_edituser?section=gnn1564020489010).
+18. Assign yourself to Astro from Ping Identity. See [Editing a user](https://docs.pingidentity.com/r/en-us/pingone/p1_t_edituser?section=gnn1564020489010).
     
-21. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
+19. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
 
     - **Identity Provider Single Sign-on URL**: Enter the value you copied from the **Single Signon Service** field.
     - **X.509 Certificate**: Enter the X.509 Certificate that you downloaded.
 
-22. Click **Create**. Your Ping Identity integration appears as an entry in **SSO Configuration**.
+20. Click **Create**. Your Ping Identity integration appears as an entry in **SSO Configuration**.
     
-23. In **SSO Configuration**, click **Activate**. You are redirected to Ping Identity to test your configuration. After you have successfully authenticated, you are redirected to Astro.
+21. In **SSO Configuration**, click **Activate**. You are redirected to Ping Identity to test your configuration. After you have successfully authenticated, you are redirected to Astro.
     
-24. Click **Activate SSO**.
+22. Click **Activate SSO**.
     
-25. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
+23. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
 
 #### Step 3: Assign users to your Ping Identity application
 
@@ -424,14 +424,3 @@ When a user assigned to the application accesses Astro, they are automatically s
 </TabItem>
 
 </Tabs>
-
-
-## Frequently Asked Questions
-
-### Can I use a single SSO connection for multiple managed domains?
-
-Yes.
-
-### Can I set up multiple SSO connections?
-
-Yes and no. You can only configure a single SSO connection for a given domain. However, if you have multiple managed domains, then you can set up multiple different SSO connections, with a separate SSO connection for each domain. 
