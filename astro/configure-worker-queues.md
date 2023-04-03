@@ -87,7 +87,7 @@ You can create, update, and delete multiple worker queues at once using a Deploy
 
 By default, all tasks run in the default worker queue. To run tasks on a different worker queue, assign the task to the worker queue in your DAG code.
 
-To assign an Airflow task to a worker queue:
+### Step 1: Copy the name of the Worker Queue you want to assign tasks to.
 
 1. In the Cloud UI, select a Workspace and select a Deployment.
 
@@ -95,9 +95,22 @@ To assign an Airflow task to a worker queue:
 
 3. Copy the name of the worker queue name you want to assign a task to.
 
-4. In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
 
-	For example, all instances of this task will run in the `short-running-tasks` queue:
+### Step 2: Change the DAG Code to assign the Airflow tasks to a specific Worker Queue:
+
+In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
+
+For example, all instances of this task will run in the `short-running-tasks` queue:
+
+<Tabs
+    defaultValue="classicoperator"
+    groupId= "assign-worker-queue"
+    values={[
+        {label: 'Classic Operator Example', value: 'classicoperator'},
+        {label: 'TaskFlow API Example', value: 'taskflow'},
+    ]}>
+
+<TabItem value="classicoperator">
 
 	```python
 	feature_engineering = DatabricksSubmitRunOperator(
@@ -108,6 +121,18 @@ To assign an Airflow task to a worker queue:
 		queue='short-running-tasks',
 		)
 	```
+
+</TabItem>
+    
+<TabItem value="taskflow">
+
+	```python
+	@task(task_id=f'task_welcome', queue='short-running-tasks')
+    def print_welcome_message():
+        print("Hello, fellow Airflow User!")
+	```
+
+</TabItem>
 
 ## Update a worker queue
 
