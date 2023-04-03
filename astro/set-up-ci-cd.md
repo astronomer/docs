@@ -178,7 +178,7 @@ If you use GitHub, Astronomer recommends using the [`deploy-action` GitHub actio
 
 ## Enforce CI/CD
 
-One of the benefits using of a CI/CD pipeline is that all code pushes to your Deployment are tested, standardized, and observable through your pipeline. For Deployments where these qualities are a priority, Astronomer recommends enabling CI/CD enforcement so that code pushes can be completed only when using a Deployment API key or Workspace token. See:
+When you use a CI/CD pipeline, all code pushes to your Deployment are tested, standardized, and observable through your pipeline. For Deployments where these qualities are a priority, Astronomer recommends enabling CI/CD enforcement so that code pushes can be completed only when using a Deployment API key or Workspace token. See:
 
 - [Enforce CI/CD deploys](configure-deployment-resources.md#enforce-cicd-deploys)
 - [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings)
