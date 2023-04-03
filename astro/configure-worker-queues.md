@@ -115,12 +115,10 @@ For example, all instances of this task will run in the `short-running-tasks` qu
 <TabItem value="classicoperator">
 
 	```python
-	feature_engineering = DatabricksSubmitRunOperator(
-		task_id='feature_engineering_notebook_task'
-		notebook_task={
-			'notebook_path': "/Users/{{ var.value.databricks_user }}/feature-eng_census-pred"
-		},
-		queue='short-running-tasks',
+		train_model = PythonOperator(
+			task_id = 'train_model',
+			python_callable = train_model_flights
+			queue = 'high-cpu'
 		)
 	```
 
@@ -129,9 +127,20 @@ For example, all instances of this task will run in the `short-running-tasks` qu
 <TabItem value="taskflow">
 
 	```python
-	@task(task_id=f'task_welcome', queue='short-running-tasks')
-    def print_welcome_message():
-        print("Hello, fellow Airflow User!")
+		@task(task_id='train_model', queue = 'high-cpu')
+		def train_model_flights(x_train, y_train):
+			import xgboost
+			from sklearn.preprocessing import StandardScaler
+			from sklearn.pipeline import Pipeline
+
+			xgbclf = xgboost.XGBClassifier() 
+			
+			pipe = Pipeline([('scaler', StandardScaler(with_mean=False)),
+					('xgbclf', xgbclf)])
+			
+			pipe.fit(x_train, y_train)
+
+			return pipe
 	```
 
 </TabItem>
