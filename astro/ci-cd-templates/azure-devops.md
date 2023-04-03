@@ -5,9 +5,8 @@ id: azure-devops
 description: Use pre-built templates for Azure DevOps to automate your Apache Airflow code deploys to Astro 
 ---
 
-Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using .
+Astro CI/CD templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using [Azure DevOps](https://dev.azure.com/).
 
-Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
  
 You can use this template for [Azure DevOps](https://dev.azure.com/) to automate code deploys to Astro with Image-only deploy templates using a Single branch implementation. [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. A _Single branch implementation_ allows you to deploy code to one Astro Deployment. 
 

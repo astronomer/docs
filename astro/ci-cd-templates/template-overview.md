@@ -5,9 +5,15 @@ id: template-overview
 description: Use pre-built templates to get started with automating code Deploys 
 ---
 
-Use the Astronomer CI/CD templates to automate code deployment to Astro with popular CI/CD management tools, including GitHub Actions and Circle CI. This document contains information about each general template type, including how each template is implemented.
+Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools, such as GitHub Actions or Jenkins. Use the Astronomer CI/CD templates to create a workflow that automates deploying code to Astro according to your team's CI/CD strategy and requirements. Template types differ based on which deploy method they use and how many environments they support.
 
-To decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+There are a few different types of templates that Astro supports:
+
+- _Image-only templates_ that build a Docker image and push it to Astro whenever you update any file in your Astro project.
+- _DAG-based templates_ that use the [DAG-only deploy feature](/deploy-code#deploy-dags-only) in Astro.
+- _Preview Deployment templates_ that automatically create and delete Deployments when you create a feature branch from your main Astro project branch.
+
+This document contains information about each general template type, including how each template is implemented. Astronomer recommends reconfiguring the templates to work with your own directory structures, tools, and processes. To decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
 
 ## Prerequisites
 
@@ -89,16 +95,18 @@ fi
 
 ### Preview Deployment templates
 
-_Preview Deployments_ are Deployments which are automatically created and deleted when you create a feature branch from your main Astro project branch. The Preview Deployment has the same configuration as the base Deployment, but it runs the code from your feature branch. When you merge or delete the branch, the preview Deployment is automatically deleted. 
+_Preview Deployments_ are Deployments that correspond to a temporary feature branch in your Git repository. They are automatically created when the branch is created and deleted when the branch is deleted. You can use Preview Deployments to quickly test a particular set of DAGs and avoid paying for the infrastructure cost of the Deployment when you promote your DAG code to a permanent base Deployment. The Preview Deployment has the same configuration as the base Deployment.
 
-To implement this feature, you need four separate CI/CD actions to complete the following actions
+To implement this feature, you need four separate CI/CD actions to complete the following actions:
 
 - Create the preview Deployment when you create a new branch.
 - Deploy code changes to Astro when you make updates in the branch.
 - Delete the preview Deployment when you delete the branch. 
 - Deploy your changes to your base Deployment after you merge your changes into your main branch. 
 
-On GitHub, the Astronomer-maintained [Deploy preview action](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) includes sub-actions for each of these steps. These sub-actions are equivalent to the following four shell scripts: 
+If you use GitHub Actions, Astronomer maintains a [GitHub action for Deployment previews](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates) in the GitHub Marketplace that includes sub-actions for each of these steps.
+
+These sub-actions are equivalent to the four shell scripts in the topics below.
 
 #### Create a preview Deployment
 
