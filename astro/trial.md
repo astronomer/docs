@@ -221,7 +221,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
 After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
 
 1. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is an open source command line interface for developing Airflow DAGs on your local machine and deploying them to Astro
-2. [Create an Astro project](create-dag.md#step-1-create-an-astro-project). An Astro project contains the set of files that you need to run Airflow on Astro. It includes dedicated folders for your Python packages and DAGs.
+2. [Create an Astro project](create-first-dag.md#step-1-create-an-astro-project). An Astro project contains the set of files that you need to run Airflow on Astro. It includes dedicated folders for your Python packages and DAGs.
 3. [Create a Deployment](create-deployment.md). A Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow and where you can run DAGs.
 4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to push code to a Deployment on Astro in just a few minutes.
 
