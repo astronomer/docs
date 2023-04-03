@@ -87,7 +87,7 @@ You can create, update, and delete multiple worker queues at once using a Deploy
 
 By default, all tasks run in the default worker queue. To run tasks on a different worker queue, assign the task to the worker queue in your DAG code.
 
-### Step 1: Copy the name of the Worker Queue you want to assign tasks to.
+### Step 1: Copy the name of the worker queue
 
 1. In the Cloud UI, select a Workspace and select a Deployment.
 
@@ -96,9 +96,11 @@ By default, all tasks run in the default worker queue. To run tasks on a differe
 3. Copy the name of the worker queue name you want to assign a task to.
 
 
-### Step 2: Change the DAG Code to assign the Airflow tasks to a specific Worker Queue:
+### Step 2: Assign the task in your DAG code
 
 In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
+
+Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `short-running-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
 
 For example, all instances of this task will run in the `short-running-tasks` queue:
 
