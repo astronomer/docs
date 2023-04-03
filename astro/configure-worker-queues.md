@@ -36,7 +36,7 @@ You can assign Task A to a worker queue that is configured to use the [`c6i.4xla
 
 You can configure each worker queue on Astro with the following settings:
 
-- **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks`.
+- **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks` or `high-cpu`.
 - **Worker Type:** The size and type of workers in the worker queue, defined as a node instance type that is supported by the cloud provider of your cluster. For example, a worker type might be `m5.2xlarge` or `c6i.4xlarge` for a Deployment running on an AWS cluster. A worker’s total available CPU, memory, storage, and GPU is defined by its worker type. Actual worker size is equivalent to the total capacity of the worker type minus Astro’s system overhead.
 - **Max Tasks per Worker:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. It is 16 by default.
 - **Worker Count**: The minimum and maximum number of workers that can run at a time.  The number of running workers changes regularly based on Maximum Tasks per Worker and the current number of tasks in a `queued` or `running` state. By default, the minimum number of workers is 1 and the maximum is 10.
@@ -100,9 +100,9 @@ By default, all tasks run in the default worker queue. To run tasks on a differe
 
 In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
 
-Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `short-running-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
+Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
 
-For example, all instances of this task will run in the `short-running-tasks` queue:
+For example, all instances of this task will run in the `machine-learning-tasks` queue:
 
 <Tabs
     defaultValue="classicoperator"
@@ -118,7 +118,7 @@ For example, all instances of this task will run in the `short-running-tasks` qu
 		train_model = PythonOperator(
 			task_id = 'train_model',
 			python_callable = train_model_flights
-			queue = 'high-cpu'
+			queue = 'machine-learning-tasks'
 		)
 	```
 
@@ -127,7 +127,7 @@ For example, all instances of this task will run in the `short-running-tasks` qu
 <TabItem value="taskflow">
 
 	```python
-		@task(task_id='train_model', queue = 'high-cpu')
+		@task(task_id='train_model', queue = 'machine-learning-tasks')
 		def train_model_flights(x_train, y_train):
 			import xgboost
 			from sklearn.preprocessing import StandardScaler
