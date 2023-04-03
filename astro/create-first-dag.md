@@ -151,31 +151,33 @@ After you select a Deployment, the CLI parses your DAGs to ensure that they don'
 
 ## Step 6: Trigger your DAG on Astro
 
-Before you can run any DAG in Astro, unpause it in your remote Airflow instance and then manually trigger a DAG run. 
+When you deploy your Astro project, all example DAGs will initially be paused and will not start running automatically. To run one of these example DAGs according to its schedule, you have to unpause it from the Airflow UI.
 
-1. Select the **Open Airflow** button in the Astro UI to open the Airflow dashboard. 
+1. In the Deployment page of the Cloud UI, click the **Open Airflow** button.
 
-2. Click the slider button next to `example-dag-basic` to unpause it, and the DAG starts to run on the schedule defined in its code.
+2. In the main DAGs view of the Airflow UI, click the slider button next to `example-dag-basic` to unpause it. If you hover over the DAG, it says `DAG is Active`. When you do this, the DAG starts to run on the schedule that is defined in its code.
 
     ![Pause DAG slider in the Airflow UI](/img/docs/tutorial-unpause-dag.png)
 
-3. While all DAGs can run on a schedule defined in their code, you can manually trigger a DAG run at any time from the Airflow UI. Manually trigger `example-dag-basic` by clicking the play button under the **Actions** column. During development, running DAGs on demand can help you identify and resolve issues.
+3. Manually trigger a DAG run of `example-dag-basic` by clicking the play button in the **Actions** column. When you develop DAGs on Astro, triggering a DAG run instead of waiting for the DAG schedule can help you quickly identify and resolve issues.
 
     After you press **Play**, the **Runs** and **Recent Tasks** sections for the DAG start to populate with data.
 
     ![DAG running in the Airflow UI](/img/docs/tutorial-run-dag.png)
 
-    These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. However, these are only high-level summaries of your runs.
+    These circles represent different [states](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/tasks.html#task-instances) that your DAG and task runs can be in. 
 
 4. Click on the name of the DAG, **example-dag-basic**, to open the **Grid** view for the DAG. To see if your DAG ran successfully, the most recent entry in the grid should have green squares for all of your tasks.
 
-5. After you finish testing your DAGs in your Deployment, pause your DAG by opening Airflow and clicking the slider button next to `example-dag-basic`. This prevents your example DAG from running automatically, so it won't consume resources unexpectedly.
+5. Pause your DAG by clicking the slider button next to `example-dag-basic`. This prevents your example DAG from running automatically and consuming your Deployment resources.
 
-## Step 7: View your DAG status in Astro
+## Step 7: View your DAG status in the Cloud UI
 
-Open your Astro Deployment. Because you ran your example DAG, your Deployment information page now has summary information about your DAG runs and the health of your Deployment.
+Your Airflow UI view allows you to examine your DAGs in detail, while the Cloud UI shows you information about the health of your Deployment including analytics and logs of your DAG runs.
 
-![Summary information about your DAG runs in Astro UI](/img/docs/first-DAG-data.png)
+1. Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Analytics** view for your Deployment.
+
+![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
 
 ## Step 8: (Optional) Delete your Deployment
 
