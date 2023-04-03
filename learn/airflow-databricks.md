@@ -12,7 +12,7 @@ Astronomer has many customers who use Databricks to run jobs as part of complex 
 
 :::info
 
-All code in this guide can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/databricks-tutorial).
+All code in this guide can be found on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/databricks-tutorial).
 
 :::
 

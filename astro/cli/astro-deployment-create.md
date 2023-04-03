@@ -31,7 +31,9 @@ Create a Deployment on Astro. This command is functionally identical to using th
 astro deployment create
 ```
 
-Some Deployment configurations can be set only by using the `--deployment-file` flag to apply a Deployment file. See [Manage Deployments as code](manage-deployments-as-code.md).
+When you use `astro deployment create`, it creates a Deployment with a default Worker Queue that uses default worker types.
+
+Some Deployment configurations, including worker queue and worker type, can be set only by using the `--deployment-file` flag to apply a Deployment file. See [Manage Deployments as code](manage-deployments-as-code.md).
 
 ## Options
 

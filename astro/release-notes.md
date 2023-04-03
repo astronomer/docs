@@ -19,7 +19,39 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest Astro Runtime Version**: 7.5.0 ([Release notes](runtime-release-notes.md))
 
-**Latest CLI Version**: 1.12.1 ([Release notes](cli/release-notes.md))
+**Latest CLI Version**: 1.13.0 ([Release notes](cli/release-notes.md))
+
+## March 28, 2023
+
+### New GCP node instance types available
+
+You can now use the following node instance types for worker nodes in GCP clusters:
+
+- `e2-standard-32` 
+- `e2-highcpu-32` 
+- `n2-standard-32`
+- `n2-standard-48` 
+- `n2-standard-64` 
+- `n2-highmem-32`  
+- `n2-highmem-48`  
+- `n2-highmem-64`  
+- `n2-highcpu-32`  
+- `n2-highcpu-48`  
+- `n2-highcpu-64`  
+
+For a list of all instance types available for GCP, see [Supported worker node pool instance types](resource-reference-gcp.md#supported-worker-node-pool-instance-types).
+
+### Additional improvements
+
+- You can now use `db.m6g` and `db.r6g` RDS instance types on AWS clusters.
+- The default RDS instance type for new AWS clusters has been reduced from `db.r5.large` to `db.m6g.large`
+- The default CIDR range for new AWS clusters has been reduced from /19 to /20.
+- You can now submit a **Request type** in the [Cloud UI support form](https://cloud.astronomer.io/support). When you choose a request type, the form updates to help you submit the most relevant information for your support request.
+- You can no longer delete a Workspace if there are any Astro Cloud IDE projects still in the Workspace. 
+
+### Bug fixes
+
+- Fixed an issue where you could set a Deployment's scheduler resources to less than 5 AU.
 
 ## March 21, 2023
 
@@ -31,6 +63,7 @@ To create and use Workspace API tokens, see [Workspace API tokens](workspace-api
 
 ### Additional improvements
 
+- In the Astro Cloud IDE, you can now specify the output table for a Warehouse SQL cell using both literal and Python expressions. See [Create a SQL cell](cloud-ide/run-sql.md#create-a-sql-cell).
 - Port 80 is no longer used for certificate management on the data plane. 
 - To switch Organizations in the Cloud UI, you now use the **Switch Organization** button next to your Organization's name.
 

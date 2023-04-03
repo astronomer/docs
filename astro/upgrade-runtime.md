@@ -59,6 +59,22 @@ If you're upgrading a local Airflow environment, you don't need an Astro Deploym
 
 :::
 
+## (Optional) Pin provider package versions
+
+Major Astro Runtime upgrades can include major upgrades to built-in provider packages. These package upgrades can sometimes include breaking changes for your DAGs. See the [Apache Airflow documentation](https://airflow.apache.org/docs/apache-airflow-providers/packages-ref.html) for a list of all available provider packages and their release notes. 
+
+For the most stable upgrade path, Astronomer recommends pinning all provider package versions from your current Runtime version before upgrading. To check the version of all provider packages installed in your Runtime version, run:
+
+```sh
+docker run --rm quay.io/astronomer/astro-runtime:<current-runtime-version> pip freeze | grep apache-airflow-providers
+```
+
+After reviewing this list, pin the version for each provider package in your Astro project `requirements.txt` file. For example, Runtime 7.4.1 uses version 4.0.0 of `apache-airflow-providers-databricks`. To pin this version of the Databricks provider package when you upgrade to a later version of Runtime, you add the following line to your `requirements.txt` file:
+
+```text
+apache-airflow-providers-databricks==4.0.0
+```
+
 ## Update Your Dockerfile
 
 1. In your Astro project, open your `Dockerfile`.
@@ -80,6 +96,12 @@ Astronomer recommends testing new versions of Astro Runtime locally before upgra
 4. Confirm that your local upgrade was successful by scrolling to the bottom of any page. You should see your new Astro Runtime version in the footer as well as the version of Airflow it is based on.
 
     ![Runtime Version banner - Local](/img/docs/image-tag-airflow-ui-local.png)
+
+5. (Optional) Run DAGs locally to ensure that all of your code works as expected. If you encounter errors after your upgrade, it's possible that your new Astro Runtime version includes a breaking provider package change. If you encounter one of these breaking changes, follow the steps in [Upgrade or pin provider package versions](#optional-upgrade-or-pin-provider-package-versions) to check your provider package versions and, if required, pin the provider package version from your previous Runtime version in your `requirements.txt` file.
+
+### (Optional) Upgrade and test provider packages
+
+If you pinned provider package versions before your upgrade, upgrade your provider packages by changing the pinned version in your `requirements.txt` file. Test east provider package upgrade locally before deploying to Astro. 
 
 ## Deploy to Astronomer
 
