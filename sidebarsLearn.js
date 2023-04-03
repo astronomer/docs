@@ -116,6 +116,7 @@ module.exports = {
           items: [
             'get-started-with-airflow',
             'get-started-with-airflow-part-2',
+            'airflow-quickstart',
           ],
         },
         'astro-python-sdk',
