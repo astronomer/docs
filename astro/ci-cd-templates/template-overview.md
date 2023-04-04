@@ -9,7 +9,7 @@ Astronomer CI/CD templates are customizable, pre-built code samples that can hel
 
 Template types differ based on which deploy method they use and how many branches or environments they require. This document contains information about the following template types:
 
-- _DAG-based templates_ that use the [DAG-only deploy feature](/deploy-code#deploy-dags-only) in Astro and either deploy DAGs or your entire Astro project depending on the files that you update.
+- _DAG-based templates_ that use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) in Astro and either deploy DAGs or your entire Astro project depending on the files that you update.
 - _Image-only templates_ that build a Docker image and push it to Astro whenever you update any file in your Astro project, including your DAG directory.
 - _Preview Deployment templates_ that automatically create and delete Deployments when you create or delete a feature branch from your main Astro project branch.
 
