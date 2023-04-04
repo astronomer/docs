@@ -9,6 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import kpo_example_1 from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_example_1.py';
+import kubernetes_decorator_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kubernetes_decorator_example.py';
 import kpo_haskell_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_haskell_example.py';
 import kpo_xcom_example_taskflow from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_taskflow.py';
 import kpo_xcom_example_traditional from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_traditional.py';
@@ -257,7 +258,16 @@ The following image shows how to set up a Kubernetes cluster connection in the A
 
 The components of the connection can also be set or overwritten at the task level by using the arguments `config_file` (to specify the path to the `KubeConfig` file) and `cluster_context`. Setting these parameters in `airflow.cfg` has been deprecated.
 
-### Example: Use the KubernetesPodOperator to run a script in another language
+## Use the @task.kubernetes decorator
+
+As of Airflow 2.4.0, the `@task.kubernetes` decorator was added, providing an alternative to using the traditional KubernetesPodOperator when running python scripts in within a separate Kubernetes Pod.
+XCom can be passed to the python script running within the Docker container as with regular `@task` decorated functions. The value returned by the decorated function will be pushed to XCom if `do_xcom_push` is set to `True` in the decorator parameters. You can learn more about decorators in the [Introduction to Airflow decorators](airflow-decorators.md) guide.
+
+Astronomer recommends to use the `@task.kubernetes` decorator over the KubernetesPodOperator when using XCom with Python scripts inside Docker containers.
+
+<CodeBlock language="python">{kubernetes_decorator_example}</CodeBlock>
+
+## Example: Use the KubernetesPodOperator to run a script in another language
 
 A frequent use case for the KubernetesPodOperator is running a task in a language other than Python. To do this, you build a custom Docker image containing the script.
 
