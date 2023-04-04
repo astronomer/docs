@@ -1295,6 +1295,8 @@ AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.google.cloud.xcom_backends.gcs.
 
 </Tabs>
 
+5. Restart your Astro project, then continue at [Step 7: Run a DAG passing Pandas dataframes via XCom](#step-7-run-a-dag-passing-pandas-dataframes-via-xcom) of the tutorial.
+
 
 :::info
 
