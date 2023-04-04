@@ -2,24 +2,21 @@
 sidebar_label: Azure DevOps
 title: Azure DevOps CI/CD templates
 id: azure-devops
-description: Use pre-built templates for Azure DevOps to automate your Apache Airflow code deploys to Astro 
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Azure DevOps.
 ---
 
-Astro CI/CD templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. Use the following template to automate [single branch deploys](template-overview.md#template-implementations) to Astro using [Azure DevOps](https://dev.azure.com/).
+Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [Azure DevOps](https://dev.azure.com/).
 
- 
-You can use this template for [Azure DevOps](https://dev.azure.com/) to automate code deploys to Astro with Image-only deploy templates using a Single branch implementation. [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. A _Single branch implementation_ allows you to deploy code to one Astro Deployment. 
+The templates for Azure DevOps use the [image-only deploy](template-overview.md#template-types) process with a _single branch implementation_, which requires only one Astro Deployment.
 
-See [Template overview](template-overview.md) to decide which template is right for you. To learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro or you're interested in a multiple-branch implementation, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-This pipeline configuration requires the following:
-
-- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- An [Astro project](create-project.md) hosted in a Git repository that Azure DevOps can access.
+- An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
-- A [Azure DevOps](https://dev.azure.com/) account.
-- An [Astro project](create-project.md) hosted in an Azure repository that your CI/CD tool can access.
+- Access to [Azure DevOps](https://dev.azure.com/).
 
 ## Single branch implementation
 

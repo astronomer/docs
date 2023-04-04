@@ -2,27 +2,25 @@
 sidebar_label: CircleCI
 title: CircleCI CI/CD templates
 id: circleci
-description: Use pre-built templates for CircleCI to automate your Apache Airflow code deploys to Astro  
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using CircleCI.
 ---
 
-Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
- 
-You can use this template for [CircleCI](https://circleci.com/) to automate code deploys to Astro with Image-only deploy templates [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. A _Single branch implementation_ allows you to deploy code to one Astro Deployment. 
+Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [CircleCI](https://circleci.com/).
 
-See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+The templates for CircleCI use the [image-only deploy](template-overview.md#template-types) process with a _single branch implementation_, which requires only one Astro Deployment.
+
+If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro or you're interested in a multiple-branch implementation, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-This configuration requires the following:
-
-- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- An [Astro project](create-project.md) hosted in a Git repository that CircleCI can access.
+- An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
-- A [CircleCI](https://circleci.com/) pipeline configuration.
-- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+- Access to [CircleCI](https://circleci.com/).
 
 ## Single branch implementation
 
-To automate code deploys to a Deployment using [CircleCI](https://circleci.com/), complete the following setup in a Git-based repository that hosts an Astro project:
+To automate code deploys to a Deployment using CircleCI, complete the following setup in a Git-based repository that hosts an Astro project:
 
 1. Set the following environment variables in a [CircleCI context](https://circleci.com/docs/2.0/contexts/):
 

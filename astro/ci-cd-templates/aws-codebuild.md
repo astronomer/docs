@@ -1,23 +1,24 @@
 ---
-sidebar_label: AWS Codebuild
+sidebar_label: AWS CodeBuild
 title: AWS Codebuild CI/CD templates
 id: aws-codebuild
-description: Use pre-built templates for AWS Codebuild to automate your Apache Airflow code deploys to Astro 
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using AWS CodeBuild.
 ---
 
-Astro CI/CD templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. Use the following templates to automate deploys to Astro using [AWS Codebuild](https://aws.amazon.com/codebuild/).
+Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [AWS CodeBuild](https://aws.amazon.com/codebuild/).
 
-The following templates use [AWS Codebuild](https://aws.amazon.com/codebuild/) to automate code deploys to Astro. The templates create an automated workflow that builds a Docker image and then pushes it to Astro as an [image-only deploy](template-overview.md#template-types) whenever you update any file in your Astro project. You can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_.
+The templates for AWS CodeBuild use the [image-only deploy](template-overview.md#template-types) process. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_.
 
-These templates do not use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) in Astro to set up [DAG-based workflows](astro/ci-cd#dag-based-workflows). Updated templates are coming soon. To learn more about CI/CD on Astro, see [Template overview](template-overview.md) and [Set up CI/CD](set-up-ci-cd.md).
+If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro and are interested in a DAG-based CI/CD template, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-- A Git-based repository. See [Plan a build in AWS Codebuild](https://docs.aws.amazon.com/codebuild/latest/userguide/planning.html).
-- At least 1 Astro Deployment and at least 1 branch in a Git-based repository. The number of Deployments and environments depends on your CI/CD strategy. See [Set up CI/CD](set-up-ci-cd.md).
+- An [Astro project](create-project.md) hosted in a Git repository that AWS CodeBuild can access. See [Plan a build in AWS Codebuild](https://docs.aws.amazon.com/codebuild/latest/userguide/planning.html).
+- An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md) for each Deployment.
 - Access to AWS CodeBuild. See [Getting started with CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/getting-started-overview.html).
-- An [Astro project](create-project.md) hosted in a Git repository that AWS CodeBuild can access.
+
+Each CI/CD template implementation might have additional requirements.
 
 ## Single branch implementation
 

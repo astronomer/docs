@@ -2,29 +2,32 @@
 sidebar_label: Jenkins
 title: Jenkins CI/CD templates
 id: jenkins
-description: Use pre-built templates for Jenkins to automate your Apache Airflow code deploys to Astro  
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Jenkins. 
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
+Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [Jenkins](https://www.jenkins.io/).
 
-The following templates use [Jenkins](https://www.jenkins.io/) to automate code deploys with either Image-only or Dag-based deploys. [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and push it to Astro whenever you update any file in your Astro project, and you can choose whether to deploy to a single Deployment, called _Single branch_, or multiple Deployments, called _Multiple branch_. 
+The following templates for Jenkins are available:
 
-The [DAG-based deploy template](template-overview.md#dag-based-templates) uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. 
+- [Image-only deploy templates](template-overview.md#image-only-templates)
+- [DAG-based deploy templates](template-overview.md#dag-based-templates)
 
-See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+Each template type supports multiple implementations. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
+
+For more information on each template or to configure your own, see [Template overview](template-overview.md). To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-This pipeline configuration requires the following for all image-only templates and DAG-based deploy templates. 
-
-- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- An [Astro project](create-project.md) hosted in a Git repository that Jenkins can access.
+- An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
-- A [Jenkins](https://www.jenkins.io/) pipeline configuration.
-- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+- Access to [Jenkins](https://www.jenkins.io/).
+
+Each CI/CD template implementation might have additional requirements.
 
 ## Image-only templates
  

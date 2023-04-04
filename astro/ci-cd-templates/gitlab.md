@@ -2,25 +2,22 @@
 sidebar_label: GitLab
 title: GitLab CI/CD templates
 id: gitlab
-description: Use pre-built templates for GitLab to automate your Apache Airflow code deploys to Astro  
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using GitLab.
 ---
 
-Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
+Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a [GitLab](https://gitlab.com/) repository to Astro.
 
-The following templates use [GitLab](https://gitlab.com/) to automate code deploys to Astro with Image-only deploy templates. [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. You can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. 
+The templates for GitLab use the [image-only deploy](template-overview.md#template-types) process. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_.
 
-See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
-
+If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro and are interested in a DAG-based CI/CD template, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-The following prerequisites are required for both single branch and multiple branch implementations.
+- An [Astro project](create-project.md) hosted in a GitLab repository.
+- An [Astro Deployment](create-deployment.md).
+- A [Deployment API key ID and secret](api-keys.md) for each Deployment.
 
-- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
-- A [Deployment API key ID and secret](api-keys.md).
-- A [GitLab](https://gitlab.com/) repository.
-- An [Astro project](create-project.md) hosted in a GitLab repository that your CI/CD tool can access.
-
+Each CI/CD template implementation might have additional requirements.
 
 ### Single branch implementation
 
@@ -55,7 +52,7 @@ Use this template to push code to from a GitLab repository to Astro.
 
 ### Multiple branch implementation
 
-Use this template to push code to both a development and a production Deployment on Astro using [GitLab](https://gitlab.com/).
+Use this template to push code to both a development and a production Deployment on Astro using GitLab.
 
 1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
 

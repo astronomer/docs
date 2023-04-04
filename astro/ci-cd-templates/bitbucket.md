@@ -2,23 +2,21 @@
 sidebar_label: BitBucket
 title: BitBucket CI/CD templates
 id: bitbucket
-description: Use pre-built templates for BitBucket to automate your Apache Airflow code deploys to Astro  
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using BitBucket. 
 ---
 
-Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. 
- 
-You can use this template for [BitBucket](https://bitbucket.org/product) to automate code deploys to Astro with Image-only deploy templates [Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. A _Single branch implementation_ allows you to deploy code to one Astro Deployment. 
+Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [BitBucket](https://bitbucket.org/product).
 
-See [Template overview](template-overview.md) to decide which template is right for you. To learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+The templates for BitBucket use the [image-only deploy](template-overview.md#template-types) process with a _single branch implementation_, which requires only one Astro Deployment.
+
+If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro or you're interested in a multiple-branch implementation, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-This pipeline configuration requires the following:
-
-- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- An [Astro project](create-project.md) hosted in a Git repository that BitBucket can access.
+- An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
-- A [BitBucket](https://bitbucket.org/product) pipeline configuration.
-- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+- Access to [BitBucket](https://bitbucket.org/product).
 
 ## Single branch implementation
 

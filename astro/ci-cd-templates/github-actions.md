@@ -2,29 +2,33 @@
 sidebar_label: GitHub Actions
 title: GitHub Actions CI/CD templates
 id: github-actions
-description: Use pre-built GitHub Actions templates to automate Apache Airflow code deploys to Astro 
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using GitHub Actions.
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
+Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a GitHub repository using [GitHub Actions](https://github.com/features/actions).
 
-Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools.  
+The following templates for GitHub Actions are available:
 
-GitHub templates use the Astronomer-maintained [Deploy Action](https://github.com/astronomer/deploy-action) to deploy code to Astronomer as either Image-only or Dag-based deploys. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
+- [Image-only deploy templates](template-overview.md#image-only-templates)
+- [DAG-based deploy templates](template-overview.md#dag-based-templates)
 
-[Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and push it to Astro whenever you update any file in your Astro project, and you can choose whether to deploy to a single Deployment, called _Single branch_, or multiple Deployments, called _Multiple branch_. 
+Each template type supports multiple implementations. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
 
-The [DAG-based deploy template](template-overview.md#dag-based-templates) uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. This CI/CD pipeline deploys your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. 
+GitHub Action templates use the Astronomer-maintained [Deploy Action](https://github.com/astronomer/deploy-action) in the GitHub Marketplace. See the [Deploy Action README](https://github.com/astronomer/deploy-action#readme) to learn more about using and customizing this action.
 
-See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+For more information on each template or to configure your own, see [Template overview](template-overview.md). To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- An [Astro project](create-project.md) hosted in a GitHub repository.
+- An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - Access to [GitHub Actions](https://github.com/features/actions).
-- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+
+Each CI/CD template implementation might have additional requirements.
 
 ## Image-only templates
 

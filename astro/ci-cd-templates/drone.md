@@ -2,25 +2,23 @@
 sidebar_label: Drone
 title: Drone CI/CD templates
 id: drone
-description: Use pre-built templates for Drone to automate your Apache Airflow code deploys to Astro  
+description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Drone CI.
 ---
 
-Templates are customizable, pre-built code samples that allow you to configure automated workflows using popular CI/CD tools. You can use this template for [Drone CI](https://www.drone.io/) to automate code deploys to Astro with Image-only deploy templates. 
+Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [Drone CI](https://www.drone.io/).
 
-[Image-only deploy templates](template-overview.md#template-types) create an automated workflow that builds a Docker image and then pushes it to Astro whenever you update any file in your Astro project. You can choose whether to deploy to a single Deployment, called _Single branch implementation_, or multiple Deployments, called _Multiple branch implementation_. 
+The templates for DroneCI use the [image-only deploy](template-overview.md#template-types) process with a _single branch implementation_, which requires only one Astro Deployment.
 
-See [Template overview](template-overview.md) to decide which template is right for you and to learn more about CI/CD use cases, see [Set up CI/CD](set-up-ci-cd.md).
+If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro or you're interested in a multiple-branch implementation, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-This pipeline configuration requires:
-
-- A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
+- An [Astro project](create-project.md) hosted in a Git repository that Drone can access.
+- An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - A functional Drone [server](https://docs.drone.io/server/overview/).
-- A [Docker runner](https://docs.drone.io/runner/docker/overview/).
 - A user with admin privileges to your Drone server.
-- An [Astro project](create-project.md) hosted in a Git repository that your CI/CD tool can access.
+- A [Docker runner](https://docs.drone.io/runner/docker/overview/).
 
 ## Single branch implementation
 
