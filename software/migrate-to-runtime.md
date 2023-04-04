@@ -7,7 +7,7 @@ description: Run an upgrade progress to migrate your Software Deployment from As
 
 import {siteVariables} from '@site/src/versions';
 
-All versions of Astronomer Certified (AC) are no longer supported. Astronomer recommends migrating all of your Deployments to use an Astro Runtime image as soon as possible. Astro Runtime builds on the reliability of AC with new features that center on usability and performance. 
+All versions of Astronomer Certified (AC) are no longer supported on Astronomer Software. Astronomer recommends migrating all of your Deployments to use an Astro Runtime image as soon as possible. Astro Runtime builds on the reliability of AC with new features that center on usability and performance. 
 
 Migrating a Deployment to Astro Runtime is similar to the standard upgrade process. There are no known disruptions when migrating a Deployment from AC to the equivalent version of Astro Runtime.
 
@@ -67,7 +67,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
 
   :::
 
-1. Optional. Test your migration to Astro Runtime locally by running:
+3. Optional. Test your migration to Astro Runtime locally by running:
 
     ```sh
     astro dev restart
