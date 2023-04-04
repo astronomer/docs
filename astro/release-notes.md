@@ -34,7 +34,8 @@ You can now create preview Deployments from feature branches in your Git reposit
 
 ### Additional improvements
 
-- Added the ability to enforce CI/CD deploys. You can now configure your Deployment to only accept code deploys if they are triggered by a Ceployment API key or Workspace token.
+- Added the ability to enforce CI/CD deploys. You can now configure your Deployment to only accept code deploys if they are triggered by a Deployment API key or Workspace token.
+- When you create a new cell in the Astro Cloud IDE, the editor auto-scrolls to your new cell and selects it.
 
 ### Bug fixes
 
