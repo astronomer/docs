@@ -1279,17 +1279,17 @@ To use these Astronomer's XCom backends follow these steps:
     ]}>
 <TabItem value="aws">
 
-    ```text
-    AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.amazon.aws.xcom_backends.s3.S3XComBackend
-    ```
+```text
+AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.amazon.aws.xcom_backends.s3.S3XComBackend
+```
 
 </TabItem>
 
 <TabItem value="gcp">
 
-    ```text
-    AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.google.cloud.xcom_backends.gcs.GCSXComBackend
-    ```
+```text
+AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.google.cloud.xcom_backends.gcs.GCSXComBackend
+```
 
 </TabItem>
 
