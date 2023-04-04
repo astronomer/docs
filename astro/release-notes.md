@@ -43,6 +43,7 @@ You can now create preview Deployments from feature branches in your Git reposit
 - Fixed an issues where alerts did not cache as expected.
 - Fixed a bug where the UI passed the wrong cluster type. 
 - Fixed an issue where the Deployment status shows as 'deploying' when KPOs are running.
+- Fixed a bug in the AWS templates to address NAT gateway configuration.
 
 ## March 28, 2023
 
