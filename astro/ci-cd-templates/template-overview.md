@@ -5,9 +5,9 @@ id: template-overview
 description: Use pre-built templates to get started with automating code Deploys 
 ---
 
-Astronomer CI/CD templates are customizable, pre-built code samples that can help you to configure automated workflows using popular CI/CD tools, such as GitHub Actions or Jenkins. Use the templates to create a workflow that automates deploying code to Astro according to your team's CI/CD requirements and strategy.
+Astronomer CI/CD templates are customizable, pre-built code samples that help you configure automated workflows with popular CI/CD tools, such as GitHub Actions or Jenkins. Use the templates to create a workflow that automates deploying code to Astro according to your team's CI/CD requirements and strategy.
 
-Template types differ based on which deploy method they use and how many branches or environments they require. This document contains information about the following template types:
+Template types differ based on the deploy method they use and how many branches or environments they require. This document contains information about the following template types:
 
 - _DAG-based templates_ that use the [DAG-only deploy feature](deploy-code.md#deploy-dags-only) in Astro and either deploy DAGs or your entire Astro project depending on the files that you update.
 - _Image-only templates_ that build a Docker image and push it to Astro whenever you update any file in your Astro project, including your DAG directory.
@@ -96,7 +96,7 @@ To implement this feature, you need a CI/CD workflow that:
 
 If you use GitHub Actions as your CI/CD tool, you can find preview Deployment templates as part of the [Astronomer GitHub action in the GitHub Marketplace](https://github.com/astronomer/deploy-action/tree/deployment-preview#deployment-preview-templates). This GitHub action includes sub-actions for each of these four steps. To learn more, see [GitHub Actions](ci-cd-templates/github-actions.md).
 
-To configure your own automated workflow for preview Deployments with another CI/CD tool, use the topics below. Each step required to implement this feature is equivalent to the four shell scripts in the topics below.
+To configure your own automated workflow for preview Deployments with another CI/CD tool, use the following scripts. Each of the following four shell scripts is equivalent to the steps required to implement this feature with [GitHub Actions](ci-cd-templates/github-actions.md#deployment-preview-templates).
 
 #### Create a preview Deployment
 

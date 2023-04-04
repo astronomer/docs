@@ -20,7 +20,7 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 ## Single branch implementation
 
-Complete the following set up in an Azure repository that hosts an Astro project:
+Complete the following setup in an Azure repository that hosts an Astro project:
 
 1. Set the following environment variables as [DevOps pipeline variables](https://docs.microsoft.com/en-us/azure/devops/pipelines/process/variables?view=azure-devops&tabs=yaml%2Cbatch):
 

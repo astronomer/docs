@@ -63,7 +63,7 @@ Use this template to push code to both a development and a production Deployment
 
 :::caution
 
-When you create environment variables that will be used in multiple branches, you may want to protect where you use them. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. For more information on protected branches, see [GitLab documentation](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
+When you create environment variables that will be used in multiple branches, you might want to protect where you use them. Otherwise, uncheck the `Protect variable` flag when you create the variable in GitLab. For more information on protected branches, see [GitLab documentation](https://docs.gitlab.com/ee/user/project/protected_branches.html#configure-a-protected-branch).
 
 :::
 

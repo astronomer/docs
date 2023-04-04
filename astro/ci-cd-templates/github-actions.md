@@ -14,6 +14,7 @@ The following templates for GitHub Actions are available:
 
 - [Image-only deploy templates](template-overview.md#image-only-templates)
 - [DAG-based deploy templates](template-overview.md#dag-based-templates)
+- [Preview Deployment templates](template-overview.md#preview-deployment-templates)
 
 Each template type supports multiple implementations. If you have one Deployment and one environment on Astro, use the _single branch implementation_. If you have multiple Deployments that support development and production environments, use the _multiple branch implementation_. If your team builds custom Docker images, use the _custom image_ implementation.
 
@@ -86,6 +87,8 @@ The following template can be used to create a multiple branch CI/CD pipeline us
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
 - You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
 
+#### Implementation
+
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
    - `PROD_ASTRONOMER_KEY_ID` = `<your-prod-key-id>`
@@ -138,6 +141,8 @@ If your Astro project requires additional build-time arguments to build an image
 #### Configuration requirements
 
 - An Astro project that requires additional build-time arguments to build the Runtime image.
+
+#### Implementation
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
@@ -249,6 +254,8 @@ The following templates are examples of how to implement DAG-based deploys in Gi
     ]}>
 <TabItem value="standard">
 
+#### Implementation
+
 To automate code deploys to a Deployment using [GitHub Actions](https://github.com/features/actions), complete the following setup in a Git-based repository that hosts an Astro project:
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
@@ -296,6 +303,8 @@ The following setup can be used to create a multiple branch CI/CD pipeline using
 - You have both a `dev` and `main` branch of an Astro project hosted in a single GitHub repository.
 - You have respective `dev` and `prod` Deployments on Astro where you deploy your GitHub branches to.
 - You have unique [Deployment API keys and secrets](api-keys.md) for both of your Deployments.
+
+#### Implementation
 
 1. Set the following as [GitHub secrets](https://docs.github.com/en/actions/reference/encrypted-secrets#creating-encrypted-secrets-for-a-repository):
 
