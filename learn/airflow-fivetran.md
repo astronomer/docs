@@ -3,6 +3,7 @@ title: "Use Fivetran with Apache Airflow"
 sidebar_label: "Fivetran"
 description: "Learn how to orchestrate Fivetran syncs using Airflow"
 id: airflow-fivetran
+sidebar_custom_props: { icon: 'img/integrations/fivetran.png' }
 ---
 
 import CodeBlock from '@theme/CodeBlock';
@@ -38,8 +39,8 @@ An Astro project contains all of the files you need to run Airflow locally.
 1. Create a new Astro project:
 
     ```sh
-    $ mkdir astro-fivetran-project && cd astro-fivetran-project
-    $ astro dev init
+    mkdir astro-fivetran-project && cd astro-fivetran-project
+    astro dev init
     ```
 
 2. Add the [Fivetran provider package](https://registry.astronomer.io/providers/fivetran) to your `requirements.txt` file:
@@ -65,15 +66,13 @@ For this tutorial you will use metadata from a GitHub repository as your data so
 
 Fivetran needs at least one destination to be configured in order to create syncs. A destination is a relational database where your ingested data will be loaded into.
 
-1. Log in to your [Fivetran account](https://www.fivetran.com/). 
+1. Log in to your [Fivetran account](https://www.fivetran.com/).
 
 2. Click **Destinations** in the left menu, then click **ADD DESTINATION** in the upper right corner.
 
 3. Choose either **Connect your destination** or **I don't have one**. For this tutorial you can either connect to an existing data warehouse by following the [relevant Fivetran documentation](https://fivetran.com/docs/databases), or use a [Fivetran-managed BigQuery service](https://fivetran.com/docs/destinations/bigquery/managed-bigquery). In this tutorial we will use Fivetran's managed BigQuery service by selecting **I don't have one** and then clicking **CONTINUE SETUP**.
 
-
 4. Configure your destination connection. You can choose any configuration. Astronomer recommends using UTC as your timezone in all data tools as a best practice. Click **SAVE & TEST** to save your destination.
-
 
 5. Click **Continue** to get back to the list of your destinations.
 
@@ -85,10 +84,10 @@ Fivetran needs at least one [connector](https://fivetran.com/docs/getting-starte
 
 2. Select the GitHub Connector and click **CONTINUE SETUP**.
 
-3. Configure the GitHub Connector: 
-    
+3. Configure the GitHub Connector:
+
     - **Destination schema**: `in_github`
-    - **Authentication mode**: Either [OAuth or a Personal Access Token](https://fivetran.com/docs/applications/github/setup-guide), then click **AUTHORIZE**. In this tutorial, we use OAuth authentication. 
+    - **Authentication mode**: Either [OAuth or a Personal Access Token](https://fivetran.com/docs/applications/github/setup-guide), then click **AUTHORIZE**. In this tutorial, we use OAuth authentication.
 
 4. Authenticate Fivetran to your Github Account.
 
@@ -100,11 +99,11 @@ Fivetran needs at least one [connector](https://fivetran.com/docs/getting-starte
 
 ## Step 5: Generate a Fivetran API key
 
-You have now created a Fivetran [sync](https://fivetran.com/docs/getting-started/syncoverview) that will extract new metadata from a GitHub repository and load it into a relational database on a time-based schedule. But to run the sync every time a specific event happens in your data ecosystem, you need to use Airflow for orchestration. 
+You have now created a Fivetran [sync](https://fivetran.com/docs/getting-started/syncoverview) that will extract new metadata from a GitHub repository and load it into a relational database on a time-based schedule. But to run the sync every time a specific event happens in your data ecosystem, you need to use Airflow for orchestration.
 
-To connect Airflow to Fivetran, create a Fivetran API key. 
+To connect Airflow to Fivetran, create a Fivetran API key.
 
-1. In Fivetran, open your user account and click **API Key**. 
+1. In Fivetran, open your user account and click **API Key**.
 
 2. Click **Generate API Key**. Copy the API key information to a secure place for later.
 
@@ -124,13 +123,13 @@ For this tutorial you will create a DAG that triggers your Fivetran sync to inge
 
 1. Open your `astro-fivetran-project` in a code-editor.
 
-2. In your `dags` folder add a new Python file called `my_fivetran_dag.py`. 
+2. In your `dags` folder add a new Python file called `my_fivetran_dag.py`.
 
 3. Copy and paste the following DAG code into the file:
 
     <CodeBlock language="python">{fivetran_tutorial_dag_1}</CodeBlock>
 
-    This DAG contains three tasks: 
+    This DAG contains three tasks:
 
     - The `upstream` task runs before the Fivetran sync job is run. This task could contain a sensor or deferrable operator waiting for an action to be completed in another data tool.
     - The `run_fivetran_sync` task uses the FivetranOperatorAsync to trigger the Fivetran connector specified as `FIVETRAN_CONNECTOR_ID` as soon as the `upstream` task has completed successfully.
@@ -150,7 +149,7 @@ The FivetranOperatorAsync is one of many [deferrable operators](deferrable-opera
 
 1. In the Airflow UI, unpause your DAG to start its last scheduled DAG run with a logical date of yesterday.
 
-2. Click on the `run_fivetran_sync` task in the Airflow **Grid View**. This task will be in a deferred state (violet square) until the Fivetran sync is completed. 
+2. Click on the `run_fivetran_sync` task in the Airflow **Grid View**. This task will be in a deferred state (violet square) until the Fivetran sync is completed.
 
     ![Fivetran Deferred](/img/guides/fivetran_simple_dag_grid.png)
 

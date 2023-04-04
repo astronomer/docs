@@ -3,6 +3,7 @@ title: "Run Soda Core checks with Airflow"
 description: "Learn how to orchestrate Soda Core data quality checks with your Airflow DAGs."
 id: soda-data-quality
 sidebar_label: "Soda Core"
+sidebar_custom_props: { icon: 'img/integrations/soda.png' }
 ---
 
 [Soda Core](https://www.soda.io/core) is an open source framework for checking data quality. It uses the Soda Checks Language (SodaCL) to run checks defined in a YAML file.
@@ -13,7 +14,7 @@ Soda Core lets you:
 - Provide a SQL query within the YAML file and check against a returned value if no preset checks fit your use case.
 - Integrate data quality checks with commonly used data engineering tools such as Airflow, Apache Spark, PostgreSQL, Snowflake [and more](https://www.soda.io/integrations).
 
-In this tutorial, you'll learn about the key features of Soda Core and how to use Airflow to run data quality checks on a database. 
+In this tutorial, you'll learn about the key features of Soda Core and how to use Airflow to run data quality checks on a database.
 
 ## Time to complete
 
@@ -43,8 +44,8 @@ Configure a new Astro project to run Airflow locally.
 1. Create a new Astro project:
 
     ```sh
-    $ mkdir astro-soda-tutorial && cd astro-soda-tutorial
-    $ astro dev init
+    mkdir astro-soda-tutorial && cd astro-soda-tutorial
+    astro dev init
     ```
 
 2. Add the following line to the `requirements.txt` file of your Astro project:

@@ -4,6 +4,7 @@ sidebar_label: "Marquez"
 description: "Use OpenLineage and Marquez to get lineage metadata locally from your Airflow DAGs."
 id: marquez
 tags: [Lineage]
+sidebar_custom_props: { icon: 'img/integrations/marquez.png' }
 ---
 
 [OpenLineage](https://openlineage.io/) is the open source industry standard framework for data lineage. Integrating OpenLineage with Airflow gives you greater observability over your data pipelines and helps with everything from data governance to tracking the blast radius of a task failure across DAGs to managing PII.
@@ -51,12 +52,12 @@ Use the Astro CLI to create and run an Airflow project locally that will integra
 1. Create a new Astro project:
 
     ```sh
-    $ mkdir astro-marquez-tutorial && cd astro-marquez-tutorial
-    $ astro dev init
+    mkdir astro-marquez-tutorial && cd astro-marquez-tutorial
+    astro dev init
     ```
 
 2. Add the following environment variables below to your Astro project `.env` file:
-    
+
     ```bash
     OPENLINEAGE_URL=http://host.docker.internal:5000
     OPENLINEAGE_NAMESPACE=example
@@ -64,15 +65,14 @@ Use the Astro CLI to create and run an Airflow project locally that will integra
     ```
 
     These variables allow Airflow to connect with the OpenLineage API and send your lineage metadata to Marquez.
-    
+
     By default, Marquez uses port 5000 when you run it using Docker. If you are using a different OpenLineage front end instead of Marquez, or you are running Marquez remotely, you can modify the `OPENLINEAGE_URL` as needed.
-    
+
 3. Marquez also uses Postgres, so you will need to have Airflow use a different port than the default 5432 which is already allocated to Airflow. Run the following command to use a port 5435 for Postgres:
-    
+
     ```sh
     astro config set postgres.port 5435
     ```
-
 
 4. Run the following command to start your local project:
 
@@ -138,7 +138,7 @@ The connection you configure will connect to the Postgres database you created i
 
 ## Step 5: Create your DAGs
 
-For this tutorial you will create two DAGs to generate and interpret lineage metadata. 
+For this tutorial you will create two DAGs to generate and interpret lineage metadata.
 
 1. In your Astro project `dags` folder, create a new file called `lineage-combine.py`. Paste the following code into the file:
 

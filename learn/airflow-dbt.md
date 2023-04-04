@@ -2,6 +2,7 @@
 title: "Orchestrate dbt with Airflow"
 sidebar_label: "dbt"
 id: airflow-dbt
+sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
 <head>
@@ -22,8 +23,8 @@ In this guide, you'll:
 
 - Use the [dbt Cloud Provider](https://registry.astronomer.io/providers/dbt-cloud) to orchestrate dbt Cloud with Airflow.
 - Review two common use cases for orchestrating dbt Core with Airflow with the `BashOperator`:
-    - At the [project](https://docs.getdbt.com/docs/building-a-dbt-project/projects) level and,
-    - At the [model](https://docs.getdbt.com/docs/building-a-dbt-project/building-models) level.
+  - At the [project](https://docs.getdbt.com/docs/building-a-dbt-project/projects) level and,
+  - At the [model](https://docs.getdbt.com/docs/building-a-dbt-project/building-models) level.
 - Learn how to extend the model-level use case by automating changes to a dbt model.
 
 :::info
@@ -311,7 +312,6 @@ with dag:
 ```
 
 Using the jaffleshop demo dbt project, the parser creates the following DAG including two task groups for the `dbt_run` and `dbt_test` tasks:
-
 
 One important fact to note here is that the `DbtDagParser` does not include a `dbt compile` step that updates the `manifest.json` file. Since the Airflow Scheduler parses the DAG file periodically, having a compile step as part of the DAG creation could incur some unnecessary load for the scheduler. Astronomer recommends adding a `dbt compile` step either as part of a CI/CD pipeline, or as part of a pipeline run in production before the Airflow DAG is run.
 

@@ -3,6 +3,7 @@ title: "Orchestrate Snowflake Queries with Airflow"
 description: "Get enhanced observability and compute savings while orchestrating Snowflake jobs from your Airflow DAGs."
 id: airflow-snowflake
 sidebar_label: Snowflake
+sidebar_custom_props: { icon: 'img/integrations/snowflake.png' }
 ---
 
 import CodeBlock from '@theme/CodeBlock';
@@ -15,8 +16,8 @@ This tutorial covers an example of orchestrating complex Snowflake operations wi
 
 - Creating tables.
 - Loading data into Snowflake.
-- Running transformations on data in Snowflake using Airflow operators. 
-- Running data quality checks on data in Snowflake. 
+- Running transformations on data in Snowflake using Airflow operators.
+- Running data quality checks on data in Snowflake.
 
 Additionally, [More on the Airflow Snowflake integration](#more-on-the-airflow-snowflake-integration) offers further information on:
 
@@ -49,24 +50,23 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
 1. Create a new Astro project:
 
     ```sh
-    $ mkdir astro-snowflake-tutorial && cd astro-snowflake-tutorial
-    $ astro dev init
+    mkdir astro-snowflake-tutorial && cd astro-snowflake-tutorial
+    astro dev init
     ```
-
 
 2. Run the following command to start your Airflow project:
 
     ```sh
-    $ astro dev start
+    astro dev start
     ```
 
 ## Step 2: Configure a Snowflake connection
 
-1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
+1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
 
 2. Create a new connection named `snowflake_default` and choose the `Snowflake` connection type. Enter the following information:
 
-    - [Schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html): Your Snowflake schema. 
+    - [Schema](https://docs.snowflake.com/en/sql-reference/sql/create-schema.html): Your Snowflake schema.
     - Login: Your Snowflake login username.
     - Password: Your Snowflake password.
     - Account: Your Snowflake account in the format `xy12345`.
@@ -212,15 +212,15 @@ When running SQL statements from Airflow operators, you can store the SQL code i
 
     <CodeBlock language="python">{airflow_snowflake_complex}</CodeBlock>
 
-    This complex DAG implements a write, audit, publish pattern showcasing loading data into Snowflake and running [data quality](data-quality.md) checks on the data that has been written. 
+    This complex DAG implements a write, audit, publish pattern showcasing loading data into Snowflake and running [data quality](data-quality.md) checks on the data that has been written.
 
     ![Complex Snowflake DAG](/img/guides/snowflake_complex_dag.png)
 
     The DAG completes the following steps:
 
-    - Creates three tables simultaneously using the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator). 
+    - Creates three tables simultaneously using the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator).
     - Loads data into two of the tables that were created.
-    - Runs data quality checks on the data to ensure that no erroneous data is moved to production. These checks are structured with [task groups](task-groups.md) that include column checks using the [SQLColumnCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator) and table checks using the [SQLTableCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator). The task group structure logically groups tasks which simplifies setting dependencies and collapses a set of tasks visually in the Airflow UI. 
+    - Runs data quality checks on the data to ensure that no erroneous data is moved to production. These checks are structured with [task groups](task-groups.md) that include column checks using the [SQLColumnCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator) and table checks using the [SQLTableCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator). The task group structure logically groups tasks which simplifies setting dependencies and collapses a set of tasks visually in the Airflow UI.
     - Copies data into the production table.
     - Deletes the tables to clean up the example.
 
@@ -329,7 +329,7 @@ For more detailed instructions on running this example DAG, see the [Write a DAG
 
 The following are some best practices and considerations to keep in mind when orchestrating Snowflake queries from Airflow:
 
--  To reduce costs and improve the scalability of your Airflow environment, use the deferrable version of operators.
+- To reduce costs and improve the scalability of your Airflow environment, use the deferrable version of operators.
 - Set your default Snowflake query specifications such as Warehouse, Role, Schema, and so on in the Airflow connection. Then overwrite those parameters for specific tasks as necessary in your operator definitions. This is cleaner and easier to read than adding `USE Warehouse XYZ;` statements within your queries.
 - Pay attention to which Snowflake compute resources your tasks are using, as overtaxing your assigned resources can cause slowdowns in your Airflow tasks. It is generally recommended to have different warehouses devoted to your different Airflow environments to ensure DAG development and testing does not interfere with DAGs running in production.
 - Make use of [Snowflake stages](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html) when loading data from an external system using Airflow. Transfer operators such as the `S3ToSnowflake` operator require a Snowflake stage be set up. Stages generally make it much easier to repeatedly load data in a specific format.

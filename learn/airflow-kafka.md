@@ -3,6 +3,7 @@ title: "Use Apache Kafka with Apache Airflow"
 sidebar_label: "Apache Kafka/Confluent"
 description: "How to produce to and consume from Kafka topics using the Airflow Kafka provider"
 id: airflow-kafka
+sidebar_custom_props: { icon: 'img/integrations/confluent.png' }
 ---
 
 [Apache Kafka](https://kafka.apache.org/documentation/) is an open source tool for handling event streaming. Combining Kafka and Airflow allows you to build powerful pipelines that integrate streaming data with batch processing.
@@ -50,8 +51,8 @@ You can learn more about connecting to local Kafka from within a Docker containe
 1. Create a new Astro project:
 
     ```sh
-    $ mkdir astro-kafka-tutorial && cd astro-kafka-tutorial
-    $ astro dev init
+    mkdir astro-kafka-tutorial && cd astro-kafka-tutorial
+    astro dev init
     ```
 
 2. Add the following packages to your `packages.txt` file:
@@ -163,7 +164,7 @@ The [Airflow Kafka provider package](https://github.com/astronomer/airflow-provi
 
 ## Step 3: Add a consumer task
 
-The ConsumeFromTopicOperator enables Airflow to consume messages from topics. 
+The ConsumeFromTopicOperator enables Airflow to consume messages from topics.
 
 1. Add the following import statement to `kafka_example_dag_1`.
 
@@ -340,16 +341,15 @@ You can define the following parameters for this operator:
 
 Apache Kafka is a tool optimized for streaming messages at high frequencies, for example in an IoT application. Airflow is designed to handle orchestration of data pipelines in batches.
 
-Astronomer recommends to combine these two open source tools by handling low-latency processes with Kafka and data orchestration with Airflow. 
+Astronomer recommends to combine these two open source tools by handling low-latency processes with Kafka and data orchestration with Airflow.
 
 Common patterns include:
 
-- Configuring a Kafka cluster with a blob storage like S3 as a sink. Batch process data from S3 at regular intervals. 
+- Configuring a Kafka cluster with a blob storage like S3 as a sink. Batch process data from S3 at regular intervals.
 - Using the ProduceToTopicOperator in Airflow to produce messages to a Kafka cluster as one of several producers.
 - Consuming data from a Kafka cluster via the ConsumeFromTopicOperator in batches using the apply function to extract and load information to a blob storage or data warehouse.
 - Listening for specific messages in a data stream running through a Kafka cluster using the AwaitKafkaMessageOperator to trigger downstream tasks once the message appears.
 
 ## Conclusion
 
-The Airflow Kafka provider offers 3 easy to use operators to interact with topics and messages in Kafka. You now know how to use these operators to connect Kafka and Airflow. 
-
+The Airflow Kafka provider offers 3 easy to use operators to interact with topics and messages in Kafka. You now know how to use these operators to connect Kafka and Airflow.

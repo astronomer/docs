@@ -3,6 +3,7 @@ title: "Load data to MongoDB with Apache Airflow"
 sidebar_label: "MongoDB"
 description: "Learn how to load data into MongoDB with your Apache Airflow DAGs."
 id: "airflow-mongodb"
+sidebar_custom_props: { icon: 'img/integrations/mongodb.png' }
 ---
 
 [MongoDB](https://www.mongodb.com/) is an open-source general purpose database built by developers, for developers. MongoDB's popularity is driven by its use of flexible document schemas and horizontal scalability. By leveraging the [Mongo provider](https://registry.astronomer.io/providers/mongo), you can easily orchestrate many use cases with Airflow such as:
@@ -54,8 +55,8 @@ Use the Astro CLI to create and run an Airflow project locally.
 1. Create a new Astro project:
 
     ```sh
-    $ mkdir astro-mongodb-tutorial && cd astro-mongodb-tutorial
-    $ astro dev init
+    mkdir astro-mongodb-tutorial && cd astro-mongodb-tutorial
+    astro dev init
     ```
 
 2. Add the following line to the `requirements.txt` file of your Astro project:
@@ -74,11 +75,11 @@ Use the Astro CLI to create and run an Airflow project locally.
 
 ## Step 3: Configure your Airflow connections
 
-The connections you configure will connect to MongoDB and the API providing sample data. 
+The connections you configure will connect to MongoDB and the API providing sample data.
 
 1. In the Airflow UI, go to **Admin** -> **Connections**.
 
-2. Create a new connection named `mongo_default` and choose the `MongoDB` connection type. Enter the following information: 
+2. Create a new connection named `mongo_default` and choose the `MongoDB` connection type. Enter the following information:
 
     - **Host:** Your MongoDB Atlas host name
     - **Login:** Your database user ID
