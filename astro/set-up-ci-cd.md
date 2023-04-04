@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Set up CI/CD'
-title: 'Deploy code to Astro with CI/CD'
+sidebar_label: 'Choose a CI/CD strategy'
+title: 'Choose a CI/CD Strategy for deploying code to Astro'
 id: set-up-ci-cd
 ---
 
@@ -130,7 +130,7 @@ This strategy is recommended if:
 
 Depending on your organization, you might be required to maintain multiple repositories for a single Astro project. Data teams that implement this strategy typically manage DAGs in one repository and Astro project settings, such as Python packages and worker configuration, in another repository.
 
-his strategy is recommended if:
+This strategy is recommended if:
 
 - You have strict security requirements for who can update specific project files.  
 - You want to minimize complexity for project contributors at the expense of a more complex CI/CD pipeline. 

@@ -1,0 +1,79 @@
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+You might have set Airflow connections and variables in the following places on your source Airflow environment:
+
+- The Airflow UI (stored in the Airflow metadata database).
+- Environment variables
+- A secrets backend.
+
+If you set your Airflow variables and connections in the Airflow UI, you can migrate those to Astro with Starship. You can check which resources will be migrated by going to **Admin** > **Variables** and **Admin** > **Connections** in the Airflow UI for your source Airflow environment.
+
+:::caution
+
+Some environment variables or Airflow Settings can't be migrated to Astro. See [Global environment variables](https://docs.astronomer.io/astro/platform-variables) for a list of variables that you can't override on Astro.
+
+:::
+
+<Tabs>
+<TabItem value="plugin" label="Starship Plugin" default>
+
+1. In the Airflow UI for your source Airflow environment, go to **Astronomer** > **Migration Tool 🚀**.
+
+    ![Location of the Astro migration menu in the Cloud UI](/img/docs/migration-menu.png)
+
+2. Click **Get Token**.
+3. If required, sign in to [cloud.astronomer.io](https://cloud.astronomer.io).
+4. Copy the access token that appears after logging in. 
+5. In the **Migration Tool 🚀** page of the Airflow UI, paste the access token into the **Authentication Token** field.
+6. Click **Sign in**.
+7. In the **Target Deployment** menu, select the Deployment to which you want to migrate your Airflow variables and connections, then click **Select**.
+8. Click **Connections**. In the table that appears, click **Migrate** for each connection that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.
+9. Click **Variables**.
+10. In the table that appears, click **Migrate** for each variable that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.
+11. Click **Environment variables**.
+12. In the table that appears, check the box for each environment variable that you want to migrate to Astro, then click **Migrate**. After the migration is complete, the status **Migrated ✅** appears.
+
+</TabItem>
+<TabItem value="operator" label="Starship operator">
+
+Refer to the [Configuration](https://github.com/astronomer/starship/tree/master/astronomer-starship-provider#configuration) detailed instructions on using the operator.
+
+1. Add the following DAG to your source Airflow environment:
+
+    ```python
+    from airflow import DAG
+    from astronomer.starship.operators import AstroMigrationOperator
+    from datetime import datetime
+
+    with DAG(
+      dag_id="astronomer_migration_dag",
+      start_date=datetime(1970, 1, 1),
+      schedule_interval=None,
+    ) as dag:
+      AstroMigrationOperator(
+          task_id='export_meta',
+          deployment_url='{{ dag_run.conf["deployment_url"] }}',
+          token='{{ dag_run.conf["astro_token"] }}',
+      )
+    ```
+2. Deploy this DAG to your source Airflow environment.
+3. Once the DAG is available in the Airflow UI, click **Trigger DAG**, then click **Trigger DAG w/ config**. 
+4. In **Configuration JSON**, add the following configuration:
+
+    ```json
+    {
+        "deployment_url": "<your-deployment-url>",
+        "astro_token": "<your-astro-token>"
+    }
+    ```
+
+5. Replace the following placeholder values:
+
+    - `<your-deployment-url>`: To retrieve a deployment URL, open your Astro Airflow Deployment in the Cloud UI, click **Open Airflow**, and copy the Airflow UI URL excluding `/home` on the end of the URL. For example, if your deployment URL is `https://astronomer.astronomer.run/abcdt4ry/home`, you would enter `https://astronomer.astronomer.run/abcdt4ry`.
+    - `<your-astro-token>`: To retrieve an Astronomer token, go to [cloud.astronomer.io/token](https://cloud.astronomer.io/token) and log in using your Astro credentials. After you log in, copy the token that appears and paste it as the value.
+
+6. Click **Trigger**. After the DAG successfully runs, all connections, variables, and environment variables that are available from the Airflow UI are migrated to Astronomer.
+
+</TabItem>
+</Tabs>

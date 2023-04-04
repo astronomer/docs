@@ -35,7 +35,7 @@ astro workspace user list
 
 - [`astro workspace user update`](cli/astro-workspace-user-update.md)
 - [`astro workspace user remove`](cli/astro-workspace-user-remove.md)
-- [`astro organization user list`](cli/astro-organization.md)
+- [`astro organization user list`](cli/astro-organization-user-list.md)
 
 </TabItem>
 <TabItem value="software">
