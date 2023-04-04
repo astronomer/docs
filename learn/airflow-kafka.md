@@ -3,7 +3,7 @@ title: "Use Apache Kafka with Apache Airflow"
 sidebar_label: "Apache Kafka/Confluent"
 description: "How to produce to and consume from Kafka topics using the Airflow Kafka provider"
 id: airflow-kafka
-sidebar_custom_props: { icon: 'img/integrations/confluent.png' }
+sidebar_custom_props: { icon: 'img/integrations/kafka.png' }
 ---
 
 [Apache Kafka](https://kafka.apache.org/documentation/) is an open source tool for handling event streaming. Combining Kafka and Airflow allows you to build powerful pipelines that integrate streaming data with batch processing.
