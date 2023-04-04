@@ -52,8 +52,8 @@ Use the Astro CLI to create and run an Airflow project locally that will integra
 1. Create a new Astro project:
 
     ```sh
-    mkdir astro-marquez-tutorial && cd astro-marquez-tutorial
-    astro dev init
+    $ mkdir astro-marquez-tutorial && cd astro-marquez-tutorial
+    $ astro dev init
     ```
 
 2. Add the following environment variables below to your Astro project `.env` file:

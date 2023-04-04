@@ -50,8 +50,8 @@ Use the Astro CLI to create and run an Airflow project on your local machine.
 1. Create a new Astro project:
 
     ```sh
-    mkdir astro-snowflake-tutorial && cd astro-snowflake-tutorial
-    astro dev init
+    $ mkdir astro-snowflake-tutorial && cd astro-snowflake-tutorial
+    $ astro dev init
     ```
 
 2. Run the following command to start your Airflow project:

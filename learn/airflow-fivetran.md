@@ -39,8 +39,8 @@ An Astro project contains all of the files you need to run Airflow locally.
 1. Create a new Astro project:
 
     ```sh
-    mkdir astro-fivetran-project && cd astro-fivetran-project
-    astro dev init
+    $ mkdir astro-fivetran-project && cd astro-fivetran-project
+    $ astro dev init
     ```
 
 2. Add the [Fivetran provider package](https://registry.astronomer.io/providers/fivetran) to your `requirements.txt` file:

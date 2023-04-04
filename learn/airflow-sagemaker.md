@@ -63,8 +63,8 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
 1. Create a new Astro project:
 
     ```sh
-    mkdir astro-sagemaker-tutorial && cd astro-sagemaker-tutorial
-    astro dev init
+    $ mkdir astro-sagemaker-tutorial && cd astro-sagemaker-tutorial
+    $ astro dev init
     ```
 
 2. Add the following line to the `requirements.txt` file of your Astro project:

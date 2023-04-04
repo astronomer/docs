@@ -55,8 +55,8 @@ Use the Astro CLI to create and run an Airflow project locally.
 1. Create a new Astro project:
 
     ```sh
-    mkdir astro-mongodb-tutorial && cd astro-mongodb-tutorial
-    astro dev init
+    $ mkdir astro-mongodb-tutorial && cd astro-mongodb-tutorial
+    $ astro dev init
     ```
 
 2. Add the following line to the `requirements.txt` file of your Astro project:

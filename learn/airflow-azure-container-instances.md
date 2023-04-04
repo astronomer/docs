@@ -45,8 +45,8 @@ Now that you have your Azure resources configured, you can move on to setting up
 1. Create a new Astro project:
 
     ```sh
-    mkdir astro-aci-tutorial && cd astro-aci-tutorial
-    astro dev init
+    $ mkdir astro-aci-tutorial && cd astro-aci-tutorial
+    $ astro dev init
     ```
 
 2. Add the following line to the `requirements.txt` file of your Astro project:

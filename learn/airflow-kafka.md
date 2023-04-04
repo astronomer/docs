@@ -51,8 +51,8 @@ You can learn more about connecting to local Kafka from within a Docker containe
 1. Create a new Astro project:
 
     ```sh
-    mkdir astro-kafka-tutorial && cd astro-kafka-tutorial
-    astro dev init
+    $ mkdir astro-kafka-tutorial && cd astro-kafka-tutorial
+    $ astro dev init
     ```
 
 2. Add the following packages to your `packages.txt` file:
