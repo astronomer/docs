@@ -42,6 +42,7 @@ You can now create preview Deployments from feature branches in your Git reposit
 - Fixed a bug where if a Deployment creation fails, the DB rollback tried to delete a Prisma record that had already been deleted.
 - Fixed an issues where alerts did not cache as expected.
 - Fixed a bug where the UI passed the wrong cluster type. 
+- Fixed an issue where the deployment status shows as 'deploying' when KPOs are running.
 
 ## March 28, 2023
 
