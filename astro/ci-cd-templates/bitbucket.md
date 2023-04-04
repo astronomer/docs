@@ -7,16 +7,16 @@ description: Use pre-built Astronomer CI/CD templates to automate deploying Apac
 
 Use the following CI/CD templates to automate deploying Apache Airflow DAGs from a Git repository to Astro with [Bitbucket](https://bitbucket.org/product).
 
-The templates for BitBucket use the [image-only deploy](template-overview.md#template-types) process with a _single branch implementation_, which requires only one Astro Deployment.
+The templates for Bitbucket use the [image-only deploy](template-overview.md#template-types) process with a _single branch implementation_, which requires only one Astro Deployment.
 
 If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on Astro or you're interested in a multiple-branch implementation, see [Template overview](template-overview.md) to configure your own. To learn more about CI/CD on Astro, see [Choose a CI/CD strategy](set-up-ci-cd.md).
 
 ## Prerequisites
 
-- An [Astro project](create-project.md) hosted in a Git repository that BitBucket can access.
+- An [Astro project](create-project.md) hosted in a Git repository that Bitbucket can access.
 - An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
-- Access to [BitBucket](https://bitbucket.org/product).
+- Access to [Bitbucket](https://bitbucket.org/product).
 
 ## Single branch implementation
 
