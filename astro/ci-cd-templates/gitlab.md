@@ -1,6 +1,6 @@
 ---
 sidebar_label: GitLab
-title: GitLab CI/CD templates
+title: Astro CI/CD templates for GitLab
 id: gitlab
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using GitLab.
 ---

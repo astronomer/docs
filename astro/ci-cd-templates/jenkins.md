@@ -1,6 +1,6 @@
 ---
 sidebar_label: Jenkins
-title: Jenkins CI/CD templates
+title: Astro CI/CD templates for Jenkins
 id: jenkins
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Jenkins. 
 ---

@@ -1,6 +1,6 @@
 ---
 sidebar_label: Azure DevOps
-title: Azure DevOps CI/CD templates
+title: Astro CI/CD templates for Azure DevOps
 id: azure-devops
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Azure DevOps.
 ---

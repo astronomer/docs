@@ -1,6 +1,6 @@
 ---
 sidebar_label: AWS CodeBuild
-title: AWS Codebuild CI/CD templates
+title: Astro CI/CD templates for AWS CodeBuild
 id: aws-codebuild
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using AWS CodeBuild.
 ---

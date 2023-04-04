@@ -1,6 +1,6 @@
 ---
 sidebar_label: Drone
-title: Drone CI/CD templates
+title: Astro CI/CD templates for Drone
 id: drone
 description: Use pre-built Astronomer CI/CD templates to automate deploying Apache Airflow DAGs to Astro using Drone CI.
 ---
