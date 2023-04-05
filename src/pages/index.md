@@ -36,5 +36,3 @@ import NewsletterForm from '@site/src/components/NewsletterForm';
   <LinkCard truncate label="Worker queues" description="Run tasks in worker queues which are optimized for their execution." href="/astro/configure-worker-queues" />
   <LinkCard truncate label="Release notes" description="A complete record of the latest changes to Astro." href="/astro/release-notes" />
 </LinkCardGrid>
-
-<NewsletterForm />

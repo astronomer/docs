@@ -5,15 +5,9 @@
   gap: 0.75rem;
   margin: 2rem 0;
   background-color: var(--gray-100);
+  color: var(--black);
   padding: 1em;
   border-radius: 6px;
-}
-
-aside .newsletterForm {
-  background-color: transparent;
-  position: relative;
-  bottom: 2rem;
-  padding: 0 0.75rem;
 }
 
 .newsletterForm h2 {
@@ -52,10 +46,6 @@ aside .newsletterForm {
   font-size: 0.65rem;
   font-weight: 600;
   min-width: 25%;
-}
-
-aside .newsletterForm button {
-  background-color: white;
 }
 
 .newsletterForm__disclaimer {
@@ -97,6 +87,7 @@ aside .newsletterForm button {
 
 html[data-theme="dark"] .newsletterForm {
   background-color: var(--gray-800);
+  color: var(--white);
 }
 
 html[data-theme="dark"] .newsletterForm a {
