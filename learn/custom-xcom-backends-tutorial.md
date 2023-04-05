@@ -1254,9 +1254,9 @@ def clear(
 
 ## Use pre-built XCom backends
 
-If you want to store your XCom in either AWS S3 or GCP Cloud Storage you can leverage the pre-built custom XCom backends in the [Astronomer provider](https://registry.astronomer.io/providers/astronomer-providers/versions/latest). Aside from saving your XComs in a remote storage, these XCom backends also contain custom serialization methods for Pandas dataframes and datetime date objects.
+If you want to store your XComs in either AWS S3 or GCP Cloud Storage ,you can leverage the pre-built custom XCom backends in the [Astronomer provider](https://registry.astronomer.io/providers/astronomer-providers/versions/latest) package. In addition to saving your XComs in a remote storage, these XCom backends also contain custom serialization methods for Pandas dataframes and datetime date objects.
 
-To use these Astronomer's XCom backends follow these steps:
+To use these Astronomer's XCom backends, follow these steps:
 
 1. Add the Astronomer provider to your `requirements.txt` file:
 
@@ -1300,7 +1300,7 @@ AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.google.cloud.xcom_backends.gcs.
 
 :::info
 
-The pre-built XCom backends of the Astronomer provider offer the possibility to use gzip compression for all XComs uploaded. To enable gzip compression set `UPLOAD_CONTENT_AS_GZIP=True` in your .env file.
+The pre-built XCom backends in the Astronomer provider offer the possibility of using gzip compression for all XComs uploaded. To enable gzip compression, set `UPLOAD_CONTENT_AS_GZIP=True` in your .env file.
 
 :::
 
