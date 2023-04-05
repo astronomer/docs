@@ -21,6 +21,30 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.13.0 ([Release notes](cli/release-notes.md))
 
+## April 4, 2023
+
+### Preview Deployments
+
+You can now create preview Deployments from feature branches in your Git repository. Use a [preview Deployment template](/ci-cd-templates/template-overview.md#preview-deployment-templates) or [GitHub Actions template](/ci-cd-templates/github-actions.md#deployment-preview-templates) to configure your Astro pipelines to:
+- Create the preview Deployment when you create a new branch.
+- Deploy code changes to Astro when you make updates in the branch.
+- Delete the preview Deployment when you delete the branch.
+- Deploy your changes to your base Deployment after you merge your changes into your main branch.
+
+
+### Additional improvements
+
+- Added the ability to enforce CI/CD deploys. You can now configure your Deployment to only accept code deploys if they are triggered by a Deployment API key or Workspace token.
+- When you create a new cell in the Astro Cloud IDE, the editor auto-scrolls to your new cell and selects it.
+
+### Bug fixes
+
+- Fixed a bug where if a Deployment creation fails, the DB rollback tried to delete a Prisma record that had already been deleted.
+- Fixed an issues where alerts did not cache as expected.
+- Fixed a bug where the UI passed the wrong cluster type. 
+- Fixed an issue where the Deployment status shows as 'deploying' when KPOs are running.
+- Fixed a bug in the AWS templates to address NAT gateway configuration.
+
 ## March 28, 2023
 
 ### New GCP node instance types available

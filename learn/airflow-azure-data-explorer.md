@@ -3,6 +3,7 @@ title: "Run an Azure Data Explorer query with Airflow"
 sidebar_label: "Azure Data Explorer"
 description: "Learn how to orchestrate Azure Data Explorer queries with your Apache Airflow DAGs."
 id: airflow-azure-data-explorer
+sidebar_custom_props: { icon: 'img/integrations/azure-data-explorer.png' }
 ---
 
 [Azure Data Explorer](https://azure.microsoft.com/en-us/services/data-explorer/) (ADX) is a managed data analytics service used for performing real-time analysis of large volumes of streaming data. It's particularly useful for IoT applications, big data logging platforms, and SaaS applications.
@@ -72,7 +73,7 @@ Now that you have your Azure resources configured, you can move on to setting up
 
 Add a connection that Airflow will use to connect to ADX. In the Airflow UI, go to **Admin** -> **Connections**.
 
-Create a new connection named `adx` and choose the `Azure Data Explorer` connection type. Enter the following information: 
+Create a new connection named `adx` and choose the `Azure Data Explorer` connection type. Enter the following information:
 
 - **Host:** Your cluster URL
 - **Login:** Your client ID

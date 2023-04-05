@@ -3,6 +3,7 @@ title: "Run Azure Data Factory pipelines with Airflow"
 sidebar_label: "Azure Data Factory"
 description: "Learn how to orchestrate remote jobs in Azure Data Factory with your Apache Airflow DAGs."
 id: airflow-azure-data-factory-integration
+sidebar_custom_props: { icon: 'img/integrations/azure-data-factory.png' }
 ---
 
 Azure Data Factory (ADF) is a commonly used service for constructing data pipelines and jobs. With a little preparation, it can be used in combination with Airflow to leverage the best of both tools. In this tutorial, you'll learn why you might want to use these two tools together and how to run your ADF pipeline from your Airflow DAG.
@@ -35,7 +36,7 @@ To complete this tutorial, you need:
 
 ## Step 1: Make your ADF pipelines runnable
 
-Before you can orchestrate your ADF pipelines with Airflow, you have to make the pipelines runnable by an external service. You will need to register an App with Azure Active Directory to get a **Client ID** and **Client Secret** (API Key) for your Data Factory. 
+Before you can orchestrate your ADF pipelines with Airflow, you have to make the pipelines runnable by an external service. You will need to register an App with Azure Active Directory to get a **Client ID** and **Client Secret** (API Key) for your Data Factory.
 
 1. Go to Azure Active Directory and click **Registered Apps** to see a list of registered apps. If you created a Resource group, you should already have an app registered with the same name. Otherwise you can create a new one.
 
@@ -97,7 +98,7 @@ Now that you have your Azure resources configured, you can move on to setting up
 
 Add a connection that Airflow will use to connect to ADF. In the Airflow UI, go to **Admin** -> **Connections**.
 
-Create a new connection named `azure_data_factory` and choose the `Azure Data Explorer` connection type. Enter the following information: 
+Create a new connection named `azure_data_factory` and choose the `Azure Data Explorer` connection type. Enter the following information:
 
 - **Login:** Your Azure **Client ID** from Step 1
 - **Password:** Your Azure **Client secret** from Step 1
@@ -171,7 +172,7 @@ The DAG graph should look similar to this:
 
 ## Step 5: Run your DAG to execute your ADF pipelines
 
-Go to the Airflow UI, unpause your `example_adf_run_pipeline` DAG, and trigger it to run the your ADF pipelines. 
+Go to the Airflow UI, unpause your `example_adf_run_pipeline` DAG, and trigger it to run the your ADF pipelines.
 The DAG will execute both ADF pipelines in parallel (tasks `run_pipeline1` and `run_pipeline2`), and then will use an `AzureDataFactoryPipelineRunStatusSensor` to wait until `pipeline2` has completed before finishing the DAG.
 
 To learn more about all of the ADF modules in the Microsoft Azure provider, check out the [Astronomer Registry](https://registry.astronomer.io/providers/microsoft-azure).

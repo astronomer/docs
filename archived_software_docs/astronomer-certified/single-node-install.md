@@ -5,6 +5,9 @@ id: single-node-install
 description: Configure a simple Apache Airflow environment with the Astronomer Certified Python wheel on a virtual machine.
 ---
 
+> **Warning**
+> No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
+
 The Astronomer Certified Python wheel is a distribution of Apache Airflow maintained by Astronomer. While functionally identical to Apache Airflow, the Astronomer Certified Python wheel includes additional bug and security fixes, as well as extended support from the Astronomer team.
 
 If you want to run Astronomer's distribution of Airflow without using Docker, you can install the Astronomer Certified Python wheel on either one or many virtual machines.
