@@ -4,6 +4,7 @@ sidebar_label: "Databricks"
 description: "Orchestrate Databricks jobs with your Airflow DAGs."
 id: airflow-databricks
 tags: [Integrations, DAGs]
+sidebar_custom_props: { icon: 'img/integrations/databricks.png' }
 ---
 
 [Databricks](https://databricks.com/) is a popular unified data and analytics platform built around [Apache Spark](https://spark.apache.org/) that provides users with fully managed Apache Spark clusters and interactive workspaces. Astronomer recommends using Airflow primarily as an orchestrator, and to use an execution framework like Apache Spark to do the heavy lifting of data processing. It follows that using Airflow to orchestrate Databricks jobs is a natural solution for many common use cases.

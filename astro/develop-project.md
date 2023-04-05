@@ -191,9 +191,12 @@ The `airflow_settings.yaml` file includes a template with the default values for
 
 ## Add Python, OS-level packages, and Airflow providers
 
-Most DAGs need a Python package or OS-level package to run. If you’re using Airflow for a data science project, for example, you might need to install popular data science libraries such as [pandas](https://pandas.pydata.org/) or [NumPy (`numpy`)](https://numpy.org/). Adding a Python package to your Astro project is equivalent to running `pip install`.
+Most DAGs need additional OS or Python packages to run. There are two primary kinds of Python packages that you might have to add to your Astro project:
 
-Airflow providers are Python packages that contain all relevant Airflow modules for a third-party service. For example, `apache-airflow-providers-amazon` includes all hooks, operators, and integrations you need to access services on Amazon Web Services (AWS) with Airflow. See [Provider packages](https://airflow.apache.org/docs/apache-airflow-providers/).
+- Python libraries. If you’re using Airflow for a data science project, for example, you might use a data science library such as [pandas](https://pandas.pydata.org/) or [NumPy (`numpy`)](https://numpy.org/).
+- Airflow providers. Airflow providers are Python packages that contain all relevant Airflow modules for a third-party service. For example, `apache-airflow-providers-amazon` includes the hooks, operators, and integrations you need to access services on Amazon Web Services (AWS) with Airflow. See [Provider packages](https://airflow.apache.org/docs/apache-airflow-providers/).
+
+Adding the name of a package to the `packages.txt` or `requirements.txt` files of your Astro project installs the package to your Airflow environment or Deployment. Python packages are installed from your `requirements.txt` file using [pip](https://pypi.org/project/pip/).
 
 1. Add the package name to your Astro project. If it’s a Python package, add it to `requirements.txt`. If it’s an OS-level package, add it to `packages.txt`. The latest version of the package that’s publicly available is installed by default.
 
@@ -213,6 +216,8 @@ Airflow providers are Python packages that contain all relevant Airflow modules 
     ```sh
     astro dev bash --scheduler "pip freeze | grep <package-name>"
     ```
+
+To learn more about the format of the `requirements.txt` file, see [Requirements File Format](https://pip.pypa.io/en/stable/reference/requirements-file-format/#requirements-file-format) in pip documentation. To browse Python libraries, see [PyPi](https://pypi.org/). To browse Airflow providers, see the [Astronomer Registry](https://registry.astronomer.io/providers/).
 
 ## Set environment variables locally
 

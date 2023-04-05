@@ -40,8 +40,8 @@ The Kubernetes executor runs each task in an individual Kubernetes Pod instead o
 
 The Kubernetes executor is a good fit for teams that want fine-grained control over the execution environment of each of their tasks. Specifically, the Kubernetes executor is a good fit for your Deployment if:
 
-- You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when you deploys code.
-- You experience a high number of dependency conflicts between tasks and could benefit from task isolation. For example, one task in your Deployment requires a different version of pandas than another task.
+- You have long-running tasks that require more than 24 hours to execute. The Kubernetes executor ensures that tasks longer than 24 hours are not interrupted when you deploy code.
+- Your tasks are compute-intensive or you are processing large volumes of data within the task. Kubernetes executor tasks run separately in a dedicated pod per task. 
 - You have a strong understanding of the CPU and memory that your tasks require and would benefit from being able to allocate and optimize infrastructure resources at the task level.
 - You have had issues running certain tasks reliably with the Celery executor.
   

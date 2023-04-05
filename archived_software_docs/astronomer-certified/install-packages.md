@@ -5,12 +5,8 @@ id: install-packages
 description: Install OS-level and Python-level packages for Airflow using Astronomer Certified.
 ---
 
-:::caution
-
-Astronomer will no longer release new versions of AC starting with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
-
-:::
-
+> **Warning**
+> No versions of Astronomer Certified (AC) are currently supported by Astronomer. Astronomer stopped releasing new versions of AC with the release of Apache Airflow 2.4. Astronomer recommends creating all new Deployments with Astro Runtime, as well as migrating existing Deployments from AC to Astro Runtime as soon as your organization is ready. See [Migrate to Runtime](migrate-to-runtime.md) and [Runtime image architecture](runtime-image-architecture.md).
 
 By default, the Astronomer Certified Docker image is distributed with a collection of pre-installed Python and OS-level packages to help users integrate with popular applications. Python-level packages are dependencies that Airflow uses, while OS-level packages are dependencies required for the underlying Debian OS. For the full list of built-in packages, read [Image Architecture](image-architecture.md).
 
@@ -43,7 +39,7 @@ FROM quay.io/astronomer/ap-airflow:2.2.0-buster-onbuild
 RUN pip install --no-cache-dir --user <your-python-package>
 ```
 
-To install a specific version of a Python-level package, include your package version in a pip [constraints file](https://pip-python3.readthedocs.io/en/latest/user_guide.html#constraints-files) and copy it into your Dockerfile. The base Docker image already has a pip constraints file which can be found [on GitHub](https://github.com/astronomer/ap-airflow/blob/master/2.1.0/buster/build-time-pip-constraints.txt).
+To install a specific version of a Python-level package, include your package version in a pip [constraints file](https://pip-python3.readthedocs.io/en/latest/user_guide.html#constraints-files) and copy it into your Dockerfile. 
 
 > **Note:** The process for installing dependencies is different if you are using the Astro CLI to deploy your Docker image to Astronomer. For an Astronomer platform-based setup, see [Install packages via the Astro CLI](install-packages.md#install-packages-via-the-astronomer-cli).
 

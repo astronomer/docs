@@ -24,7 +24,13 @@ The behavior and format of this command differs depending on what Astronomer pro
 <TabItem value="astro">
 
 
-Update the configuration for a Deployment on Astro. This command is functionally identical to using **Edit Configuration** to modify a Deployment in the Cloud UI.
+Update the configuration for a Deployment on Astro. 
+
+:::note
+
+To update existing worker queues or to create new queues for an existing Deployment, you must update your Deployment by using the `--deployment-file` flag to update a [Deployment file](manage-deployments-as-code.md#create-a-template-file-from-an-existing-deployment).
+
+:::
 
 ## Usage
 

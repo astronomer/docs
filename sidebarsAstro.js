@@ -56,7 +56,25 @@ module.exports = {
     {
       type: "category",
       label: "Deploy",
-      items: ["deploy-code", "set-up-ci-cd", "ci-cd"],
+      items: [
+        "deploy-code", 
+        "set-up-ci-cd", 
+        {
+          type: "category",
+          label: "CI/CD templates",
+          items: [
+            "ci-cd-templates/template-overview",
+            "ci-cd-templates/github-actions",
+            "ci-cd-templates/jenkins",
+            "ci-cd-templates/gitlab",
+            "ci-cd-templates/aws-codebuild",
+            "ci-cd-templates/azure-devops",
+            "ci-cd-templates/bitbucket",
+            "ci-cd-templates/circleci",
+            "ci-cd-templates/drone",
+          ],
+        },
+      ],
     },
     {
       type: "category",
