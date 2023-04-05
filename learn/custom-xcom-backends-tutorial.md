@@ -248,15 +248,15 @@ MINIO_IP=host.docker.internal:9000
 
 For Airflow to use your custom XCom backend, you need to define an XCom backend class which inherits from the `BaseXCom` class.
 
+:::info
+
+The Astronomer provider package contains a pre-built XCom backend for AWS S3 and GCP Cloud Storage with a set of added serialization methods. Refer to the [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details. When using a pre-built XCom backend you will not have to create any new files in the `include` folder. When using a pre-built XCom backend you do not have to create any new files in the `include` folder and you can skip [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) and Step 6 of this tutorial.
+
+:::
+
 1. In your Astro project, create a new file in the `include` directory called `xcom_backend_json.py`.
 
 2. Copy paste the following code into the file:
-
-:::info
-
-The Astronomer provider package contains a pre-built custom XCom backend for AWS S3 and GCP Cloud Storage with a set of added serialization methods. Refer to the [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details.
-
-:::
 
 <Tabs
     defaultValue="aws"
@@ -698,7 +698,8 @@ A powerful feature of custom XCom backends is the possibility to create custom s
 
 :::info
 
-The Astronomer provider package contains a pre-built custom XCom backend for AWS S3 and GCP Cloud Storage with a set of added serialization methods, including for Pandas dataframes. Refer to the [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details.
+The Astronomer provider package contains a pre-built XCom backend for AWS S3 and GCP Cloud Storage with added serialization methods for Pandas dataframes and datetime date objects. Refer to the [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details. 
+When using a pre-built XCom backend you do not have to create any new files in the `include` folder and you can skip [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) and Step 6 of this tutorial.
 
 :::
 
