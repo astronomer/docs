@@ -54,7 +54,55 @@ By default, Airflow Deployments on Astronomer use a pod template to construct ea
 
 ## Configure the Kubernetes executor for a specific task
 
-Some tasks require a more specific pod configuration than other tasks. For instance, one task might require significantly more GPU than another task. In cases like this, you can deploy a pod template to a single task within a DAG. To configure a pod template for a specific task:
+Some tasks require a more specific pod configuration than other tasks. For instance, one task might require significantly more CPU or memory than another task. This can be accomplished by using the Kubernetes Python API to create a `pod_override` (recommended) or by using pod template files.
+
+### Example: Set CPU or memory limits and requests using the Kubernetes Python API
+The following example DAG shows how you can use a `pod_override` configuration in your DAG code to request custom resources for a task:
+
+```python
+import pendulum
+import time
+
+from airflow import DAG
+from airflow.decorators import task
+from airflow.operators.python import PythonOperator
+from airflow.example_dags.libs.helper import print_stuff
+from kubernetes.client import models as k8s
+
+
+k8s_exec_config_resource_requirements = {
+    "pod_override": k8s.V1Pod(
+        spec=k8s.V1PodSpec(
+            containers=[
+                k8s.V1Container(
+                    name="base",
+                    resources=k8s.V1ResourceRequirements(
+                        requests={"cpu": 0.5, "memory": "1024Mi"},
+                        limits={"cpu": 0.5, "memory": "1024Mi"}
+                    )
+                )
+            ]
+        )
+    )
+}
+
+with DAG(
+    dag_id="example_kubernetes_executor_pod_override_sources",
+    schedule=None,
+    start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
+    catchup=False
+):
+
+
+    @task(executor_config=k8s_exec_config_resource_requirements)
+    def resource_requirements_override_example():
+        print_stuff()
+        time.sleep(60)
+
+    resource_requirements_override_example()
+```
+
+### Example: Set CPU or memory limits and requests using a  pod template file
 
 1. Add a command to your Dockerfile that copies your customized pod template into your Docker image. For instance, if your customized pod template file name is `new_pod_template.yaml`, you would add the following line to your Dockerfile:
 
