@@ -260,10 +260,10 @@ The components of the connection can also be set or overwritten at the task leve
 
 ## Use the @task.kubernetes decorator
 
-As of Airflow 2.4.0, the `@task.kubernetes` decorator was added, providing an alternative to using the traditional KubernetesPodOperator when running python scripts in within a separate Kubernetes Pod.
-XCom can be passed to the python script running within the Docker container as with regular `@task` decorated functions. The value returned by the decorated function will be pushed to XCom if `do_xcom_push` is set to `True` in the decorator parameters. You can learn more about decorators in the [Introduction to Airflow decorators](airflow-decorators.md) guide.
+The `@task.kubernetes` decorator was added in Airflow 2.4 and provides an alternative to using the traditional KubernetesPodOperator when running Python scripts in within a separate Kubernetes Pod.
+XComs can be passed to the Python script running within the Docker container as with regular `@task` decorated functions. The value returned by the decorated function will be pushed to XCom if `do_xcom_push` is set to `True` in the decorator parameters. You can learn more about decorators in the [Introduction to Airflow decorators](airflow-decorators.md) guide.
 
-Astronomer recommends to use the `@task.kubernetes` decorator over the KubernetesPodOperator when using XCom with Python scripts inside Docker containers.
+Astronomer recommends using the `@task.kubernetes` decorator over the KubernetesPodOperator when using XCom with Python scripts inside Docker containers.
 
 <CodeBlock language="python">{kubernetes_decorator_example}</CodeBlock>
 
