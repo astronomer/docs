@@ -6,7 +6,7 @@ id: airflow-quickstart
 
 A great way to explore Airflow features and use cases is using Astronomer's [Airflow Quickstart](https://github.com/astronomer/airflow-quickstart).
 
-This quickstart uses open source tools Airflow, [DuckDB](https://duckdb.org/), [Streamlit](https://streamlit.io/), and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to implement an ELT pipeline that creates an interactive dashboard showing global and local temperature changes over time.
+This quickstart uses open source tools including Airflow, [DuckDB](https://duckdb.org/), [Streamlit](https://streamlit.io/), and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to implement an ELT pipeline that creates an interactive dashboard showing global and local temperature changes over time.
 
 ![Interactive dashboard](/img/guides/quickstart_streamlit_result_1.png)
 
