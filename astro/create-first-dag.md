@@ -11,7 +11,7 @@ id: 'create-first-DAG'
 
 import {siteVariables} from '@site/src/versions';
 
-Astro is the industry's leading managed service for Apache Airflow. The best way to understand how Astro works is to run an Apache Airflow DAG with the Astro CLI. In this quickstart, you will follow the steps required to deploy an example DAG to Astro and trigger a DAG run from the Astro CLI.
+Astro is the industry's leading managed service for Apache Airflow. The best way to understand how Astro works is to run an Apache Airflow DAG with the Astro CLI. In this quickstart, follow the steps required to deploy an example DAG to Astro and trigger a DAG run from the Astro CLI.
 
 Specifically, you will:
 
@@ -108,6 +108,8 @@ The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the
 
 ## Step 3: Log in to Astro CLI and Cloud UI
 
+While you run your DAGs locally, you don't need to log in with the CLI or Cloud UI. But to run your DAGs on the Cloud UI, you need to authenticate with both the Astro CLI and Cloud UI.
+
 1. Run the following command to authenticate to Astro on the CLI:
 
     ```sh
@@ -118,7 +120,7 @@ The Astro CLI uses port `8080` for the Airflow webserver and port `5432` for the
 
 2. Go to `https://cloud.astronomer.io`, and select one of the available options to access the Cloud UI.
 
-## Step 5: Create a Deployment
+## Step 4: Create a Deployment
 
 An Astro _Deployment_ is an Astro Runtime environment that is powered by the core components of Apache Airflow, including the Airflow webserver, scheduler, and one or more workers. You can have one or more Deployments within a _Workspace_, which is a collection of users that have access to the same Deployments.
 
@@ -139,7 +141,7 @@ When you create a Deployment on Astro, infrastructure is created in your cluster
 
      A confirmation message appears indicating that the Deployment status is **Creating** until all underlying components in your Astro cluster are healthy. During this time, the Airflow UI is unavailable and you can't deploy code or modify Deployment settings. When the Deployment is ready, the status changes to **Healthy**.
     
-    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Configure a Deployment](/astro/configure-deployment-resources).
+    For more information about possible Deployment health statuses, see [Deployment health](deployment-metrics.md#deployment-health). Or, to learn more about how to customize your Deployment settings, see [Configure a Deployment](configure-deployment-resources).
 
 ## Step 5: Deploy your Astro project to your Astro Deployment
 
@@ -179,7 +181,7 @@ When you deploy your Astro project, all example DAGs will initially be paused an
 
 Your Airflow UI view allows you to examine your DAGs in detail, while the Cloud UI shows you information about the health of your Deployment including analytics and logs of your DAG runs.
 
-1. Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Analytics** view for your Deployment.
+Go back to your Deployment page in the Cloud UI. Because you ran your example DAG, your Deployment information page now has data about your Deployment and DAG runs. The following example shows an example of what you might find in the **Analytics** view for your Deployment.
 
 ![Summary information about your DAG runs in the Analytics tab of a Quickstart Deployment.](/img/docs/first-DAG-data.png)
 
