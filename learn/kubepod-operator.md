@@ -239,7 +239,7 @@ The KubernetesPodOperator can be instantiated like any other operator within the
 - `pod_template_file`: The path to a Pod template file.
 - `full_pod_spec`: A complete Pod configuration formatted as a Python `k8s` object.
 
-There are many other arguments that can be used to configure the Pod and pass information to the Docker image. For a list of the available KubernetesPodOperator arguments, see the [KubernetesPodOperator source code](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py).
+There are many other arguments that can be used to configure the Pod and pass information to the Docker image. For a list of the available KubernetesPodOperator arguments, see the [KubernetesPodOperator source code](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/pod.py).
 
 The following KubernetesPodOperator arguments can be used with Jinja templates: `image`, `cmds`, `arguments`, `env_vars`, `labels`, `config_file`, `pod_template_file`, and `namespace`.
 
