@@ -1267,7 +1267,7 @@ To use these Astronomer's XCom backends, follow these steps:
 
 2. Prepare your AWS S3 or GCP Cloud Storage as shown in [Step 2: Set up your object storage account](#step-2-set-up-your-object-storage-account).
 
-3. Create an Airflow connection as shown in [Step 3: Create a connection](#step-3-create-a-connection).
+3. Create an Airflow connection as shown in [Step 3: Create a connection](#step-3-create-a-connection). By default Astronomer's pre-built XCom backend will use the connection ID `aws_default` for a AWS S3 connection and `google_cloud_default` for a connection to GCP Cloud Storage. You can override the connection id used by setting the Airflow environment variable `CONNECTION_NAME` (AWS) or `XCOM_BACKEND_CONNECTION_NAME` (GCS).
 
 4. Open the .env file of your Astro Project and add the following line to set your XCom backend to the pre-built XCom class:
 
