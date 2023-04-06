@@ -13,7 +13,7 @@ module.exports = {
         'airflow-quickstart',
         {
           type: 'category',
-          label: 'Get started tutorials',
+          label: 'Tutorials',
           link: {
                 type: 'doc',
                 id: 'get-started-with-airflow',
