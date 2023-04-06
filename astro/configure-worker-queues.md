@@ -5,6 +5,10 @@ id: configure-worker-queues
 description: Learn how to create and configure worker queues to create best-fit execution environments for your tasks.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
 By default, all tasks run in a default worker queue that does not require configuration or code. If you're using the Celery executor, you can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to queues in your DAG code. For more information about Airflow executors on Astro, see [Manage executors](executors.md).
 
 Use worker queues to create optimized execution environments for different types of tasks in the same Deployment. You can use worker queues to:
@@ -43,7 +47,7 @@ You can configure each worker queue on Astro with the following settings:
 
 ### Default worker queue
 
-Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the default worker queue. 
+Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the default worker queue.
 
 If you don’t change any settings in the default worker queue:
 
@@ -95,7 +99,6 @@ By default, all tasks run in the default worker queue. To run tasks on a differe
 
 3. Copy the name of the worker queue name you want to assign a task to.
 
-
 ### Step 2: Assign the task in your DAG code
 
 In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
@@ -112,36 +115,38 @@ Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apac
 
 <TabItem value="classicoperator">
 
-	```python
-		train_model = PythonOperator(
-			task_id = 'train_model',
-			python_callable = train_model_flights
-			queue = 'machine-learning-tasks'
-		)
-	```
+ ```python
+  train_model = PythonOperator(
+   task_id = 'train_model',
+   python_callable = train_model_flights
+   queue = 'machine-learning-tasks'
+  )
+ ```
 
 </TabItem>
-    
+
 <TabItem value="taskflow">
 
-	```python
-		@task(task_id='train_model', queue = 'machine-learning-tasks')
-		def train_model_flights(x_train, y_train):
-			import xgboost
-			from sklearn.preprocessing import StandardScaler
-			from sklearn.pipeline import Pipeline
+ ```python
+  @task(task_id='train_model', queue = 'machine-learning-tasks')
+  def train_model_flights(x_train, y_train):
+   import xgboost
+   from sklearn.preprocessing import StandardScaler
+   from sklearn.pipeline import Pipeline
 
-			xgbclf = xgboost.XGBClassifier() 
-			
-			pipe = Pipeline([('scaler', StandardScaler(with_mean=False)),
-					('xgbclf', xgbclf)])
-			
-			pipe.fit(x_train, y_train)
+   xgbclf = xgboost.XGBClassifier() 
+   
+   pipe = Pipeline([('scaler', StandardScaler(with_mean=False)),
+     ('xgbclf', xgbclf)])
+   
+   pipe.fit(x_train, y_train)
 
-			return pipe
-	```
+   return pipe
+ ```
 
 </TabItem>
+
+</Tabs>
 
 ## Update a worker queue
 
@@ -159,9 +164,9 @@ If you need to change the worker type of an existing worker queue, Astronomer re
 
 2. Click the **Worker Queues** tab.
 
-3. Click **Edit** for the worker queue that you want to update. 
+3. Click **Edit** for the worker queue that you want to update.
 
-4. Update the worker queue settings, and then click **Update Queue**. 
+4. Update the worker queue settings, and then click **Update Queue**.
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 
