@@ -17,7 +17,7 @@ Migrate your Airflow environment from [Amazon Managed Workflows for Apache Airfl
 
 To complete the migration process, you will:
 
-- Prepare your source Airflow and set up your Astro Airflow environment.
+- Prepare your source Airflow and create a Deployment on Astro.
 - Migrate metadata from your source Airflow environment.
 - Migrate DAGs and additional Airflow components from your source Airflow environment.
 - Complete the cutover process to Astro.
@@ -42,8 +42,6 @@ See the following table for information on which versions of Starship are availa
 | MWAA v2.0.2                |                 | ✔️️                 |
 | MWAA v2.2.2                | ✔️️               |                   |
 | MWAA v2.4.3                | ✔️️               |                   |
-
-### Install Starship to your MWAA instance as a plugin:
 
 1. Download the `requirements.txt` file for your source Airflow environment from S3. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways).
 2. Add `astronomer-starship` on a new line to your `requirements.txt` file.
@@ -125,7 +123,7 @@ To complete this setup from the command line:
 
   :::
 
-4. If you used the [`plugins` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#folders_in_the_bucket) in your MWAA project, copy the contents of this folder from your source control platform or S3 to your Astro project `/plugins` folder.
+4. If you used the [`plugins` folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html) in your MWAA project, copy the contents of this folder from your source control platform or S3 to the `/plugins` folder of your Astro project.
 
   :::tip
   
@@ -142,7 +140,7 @@ To complete this setup from the command line:
 
 ## Step 7: Configure additional data pipeline infrastructure
 
-The core migration of your project is now complete. Read the following pages to decide whether you need to set up any additional infrastructure on Astro before you cut over your DAGs. 
+The core migration of your project is now complete. Read the following to decide whether you need to set up any additional infrastructure on Astro before you cut over your DAGs. 
 
 ### Set up CI/CD
 
@@ -165,7 +163,7 @@ Depending on how thoroughly you want to test your Airflow environment, you can t
 
 :::info
 
-Your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources. 
+Your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these Airflow objects. 
 
 :::
 

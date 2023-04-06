@@ -12,8 +12,4 @@
 
     This command returns a list of Deployments available in your Workspace and prompts you to pick one.
 
-    After you select a Deployment, the CLI parses your DAGs to check for basic syntax and import errors. This test is equivalent to the one that runs during `astro dev parse` in a local Airflow environment. If any of your DAGs fail this parse, the deploy to Astro also fails.
-
-    If your code passes the parse, the Astro CLI builds all files in your Astro project directory into a new Docker image and then pushes the image to your Deployment on Astro.
-
 3. In the Cloud UI, open your Deployment and click **Open Airflow**. Confirm that you can see your deployed DAGs in the Airflow UI. 

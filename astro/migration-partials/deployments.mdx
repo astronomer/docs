@@ -49,7 +49,7 @@ Before you create your Deployment, copy the following information from your sour
     | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
     | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
 
-    > *Some of the following recommendations for CPU and memory are smaller than what you have in the equivalent source environment. Although you might not need more CPU or memory than what's recommended. Some environments might parse DAGs slower than your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+> *Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource usage on Astro. See [Configure Deployment](/astro/configure-deployment-resources.md)
 
 4. Click **Create Deployment**.
 5. Specify any system-level environment variables as Astro environment variables. See [Environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui).
