@@ -442,6 +442,16 @@ It is possible to dynamically map an Airflow task over the output of another dyn
 
 The following example shows three dynamically mapped tasks.
 
+<Tabs
+    defaultValue="taskflow"
+    groupId="repeated-mapping"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
 ```python
 @task
 def multiply_by_2(num):
@@ -463,6 +473,38 @@ multiply_by_100.expand(
     )
 )
 ```
+</TabItem>
+<TabItem value="taskflow">
+
+```python
+def multiply_by_2_func(num):
+    return [num * 2]
+
+def add_10_func(num):
+    return [num + 10]
+
+def multiply_by_100_func(num):
+    return num * 100
+
+multiply_by_2 = PythonOperator.partial(
+    task_id="multiply_by_2",
+    python_callable=multiply_by_2_func
+).expand(op_args=[[1], [2], [3]])
+
+add_10 = PythonOperator.partial(
+    task_id="add_10",
+    python_callable=add_10_func
+).expand(op_args=multiply_by_2.output)
+
+multiply_by_100 = PythonOperator.partial(
+    task_id="multiply_by_100",
+    python_callable=multiply_by_100_func
+).expand(op_args=add_10.output)
+
+multiply_by_2 >> add_10 >> multiply_by_100
+```
+</TabItem>
+</Tabs>
 
 In the example above the `multiply_by_2` task is dynamically mapped over a list of 3 elements (`[1, 2, 3]`). The task has 3 dynamically mapped task instances returning the following values:
 
@@ -476,7 +518,7 @@ The `add_10` task is dynamically mapped over the output of the `multiply_by_2` t
 - Map index 1: `14` (4+10)
 - Map index 2: `16` (6+10)
 
-The `multiply_by_10` task is dynamically mapped over the output of the `add_10` task. It also has 3 dynamically mapped task instances returning the values:
+The `multiply_by_100` task is dynamically mapped over the output of the `add_10` task. It also has 3 dynamically mapped task instances returning the values:
 
 - Map index 0: `1200` (12*100)
 - Map index 1: `1400` (14*100)
