@@ -239,7 +239,7 @@ The KubernetesPodOperator can be instantiated like any other operator within the
 - `pod_template_file`: The path to a Pod template file.
 - `full_pod_spec`: A complete Pod configuration formatted as a Python `k8s` object.
 
-There are many other arguments that can be used to configure the Pod and pass information to the Docker image. For a list of the available KubernetesPodOperator arguments, see the [KubernetesPodOperator source code](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/pod.py).
+You can also use many other arguments to configure the Pod and pass information to the Docker image. For a list of the available KubernetesPodOperator arguments, see the [KubernetesPodOperator source code](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/pod.py).
 
 The following KubernetesPodOperator arguments can be used with Jinja templates: `image`, `cmds`, `arguments`, `env_vars`, `labels`, `config_file`, `pod_template_file`, and `namespace`.
 
@@ -260,11 +260,11 @@ The components of the connection can also be set or overwritten at the task leve
 
 ## Use the @task.kubernetes decorator
 
-The `@task.kubernetes` decorator was added in Airflow 2.4 and provides an alternative to using the traditional KubernetesPodOperator when running Python scripts in within a separate Kubernetes Pod. Note that the Docker image provided to the `@task.kubernetes` decorator must support the execution of Python scripts.
+The `@task.kubernetes` decorator was added in Airflow 2.4 and provides an alternative to the traditional KubernetesPodOperator when you run Python scripts in a separate Kubernetes Pod. The Docker image provided to the `@task.kubernetes` decorator must support executing Python scripts.
 
-XComs can be passed to the Python script running within the dedicated Kubernetes pod as with regular `@task` decorated functions. The value returned by the decorated function will be pushed to XCom if `do_xcom_push` is set to `True` in the decorator parameters. You can learn more about decorators in the [Introduction to Airflow decorators](airflow-decorators.md) guide.
+Like regular `@task` decorated functions, XComs can be passed to the Python script running in the dedicated Kubernetes pod. If `do_xcom_push` is set to `True` in the decorator parameters, the value returned by the decorated function is pushed to XCom. You can learn more about decorators in the [Introduction to Airflow decorators](airflow-decorators.md) guide.
 
-Astronomer recommends using the `@task.kubernetes` decorator over the KubernetesPodOperator when using XCom with Python scripts inside a dedicated Kubernetes pod.
+Astronomer recommends using the `@task.kubernetes` decorator instead of the KubernetesPodOperator when using XCom with Python scripts in a dedicated Kubernetes pod.
 
 <CodeBlock language="python">{kubernetes_decorator_example}</CodeBlock>
 
