@@ -250,7 +250,7 @@ For Airflow to use your custom XCom backend, you need to define an XCom backend 
 
 :::info
 
-The Astronomer provider package contains a pre-built XCom backend for AWS S3 and GCP Cloud Storage, with a set of added serialization methods. Refer to [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details. When you use a pre-built XCom backend, you don't need to create any new files in the `include` folder and you can skip both [Step 4](#step-4-define-a-custom-xcom-class-using-json-serialization) and Step 6 of this tutorial.
+The Astronomer provider package contains a pre-built XCom backend for AWS S3 and GCP Cloud Storage, with a set of added serialization methods. Refer to [Use pre-built XCom backends](#use-pre-built-xcom-backends) section for implementation details. When you use a pre-built XCom backend, you don't need to create any new files in the `include` folder and you can skip both Step 4 and [Step 6](#step-6-create-a-custom-serialization-method-to-handle-pandas-dataframes) of this tutorial.
 
 :::
 
@@ -1255,7 +1255,7 @@ def clear(
 
 ## Use pre-built XCom backends
 
-If you want to store your XComs in either AWS S3 or GCP Cloud Storage, you can use the pre-built custom XCom backends in the [Astronomer provider](https://registry.astronomer.io/providers/astronomer-providers/versions/latest) package. In addition to saving your XComs in a remote storage, these XCom backends also contain custom serialization methods for Pandas `dataframes` and `datetime` date objects.
+If you want to store your XComs in either AWS S3 or GCP Cloud Storage, you can use the pre-built custom XCom backends in the [Astronomer provider](https://registry.astronomer.io/providers/astronomer-providers/versions/latest) package. In addition to saving your XComs in a remote storage, these XCom backends also contain custom serialization methods for `pandas.DataFrame` and `datetime.date` objects.
 
 To use these Astronomer's XCom backends, follow these steps:
 
@@ -1296,7 +1296,9 @@ AIRFLOW__CORE__XCOM_BACKEND=astronomer.providers.google.cloud.xcom_backends.gcs.
 
 </Tabs>
 
-5. Restart your Astro project, then continue at [Step 7: Run a DAG passing Pandas dataframes via XCom](#step-7-run-a-dag-passing-pandas-dataframes-via-xcom) of the tutorial.
+5. Add a second environment variable in your .env file called `XCOM_BACKEND_BUCKET_NAME` and set it to the name of your S3 or GCS bucket.
+
+6. Restart your Astro project, then continue at [Step 7: Run a DAG passing Pandas dataframes via XCom](#step-7-run-a-dag-passing-pandas-dataframes-via-xcom) of the tutorial.
 
 
 :::info
