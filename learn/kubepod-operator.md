@@ -9,6 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import kpo_example_1 from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_example_1.py';
+import kubernetes_decorator_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kubernetes_decorator_example.py';
 import kpo_haskell_example from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_haskell_example.py';
 import kpo_xcom_example_taskflow from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_taskflow.py';
 import kpo_xcom_example_traditional from '!!raw-loader!../code-samples/dags/kubepod-operator/kpo_xcom_example_traditional.py';
@@ -238,7 +239,7 @@ The KubernetesPodOperator can be instantiated like any other operator within the
 - `pod_template_file`: The path to a Pod template file.
 - `full_pod_spec`: A complete Pod configuration formatted as a Python `k8s` object.
 
-There are many other arguments that can be used to configure the Pod and pass information to the Docker image. For a list of the available KubernetesPodOperator arguments, see the [KubernetesPodOperator source code](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/kubernetes_pod.py).
+You can also use many other arguments to configure the Pod and pass information to the Docker image. For a list of the available KubernetesPodOperator arguments, see the [KubernetesPodOperator source code](https://github.com/apache/airflow/blob/main/airflow/providers/cncf/kubernetes/operators/pod.py).
 
 The following KubernetesPodOperator arguments can be used with Jinja templates: `image`, `cmds`, `arguments`, `env_vars`, `labels`, `config_file`, `pod_template_file`, and `namespace`.
 
@@ -257,7 +258,17 @@ The following image shows how to set up a Kubernetes cluster connection in the A
 
 The components of the connection can also be set or overwritten at the task level by using the arguments `config_file` (to specify the path to the `KubeConfig` file) and `cluster_context`. Setting these parameters in `airflow.cfg` has been deprecated.
 
-### Example: Use the KubernetesPodOperator to run a script in another language
+## Use the @task.kubernetes decorator
+
+The `@task.kubernetes` decorator was added in Airflow 2.4 and provides an alternative to the traditional KubernetesPodOperator when you run Python scripts in a separate Kubernetes Pod. The Docker image provided to the `@task.kubernetes` decorator must support executing Python scripts.
+
+Like regular `@task` decorated functions, XComs can be passed to the Python script running in the dedicated Kubernetes pod. If `do_xcom_push` is set to `True` in the decorator parameters, the value returned by the decorated function is pushed to XCom. You can learn more about decorators in the [Introduction to Airflow decorators](airflow-decorators.md) guide.
+
+Astronomer recommends using the `@task.kubernetes` decorator instead of the KubernetesPodOperator when using XCom with Python scripts in a dedicated Kubernetes pod.
+
+<CodeBlock language="python">{kubernetes_decorator_example}</CodeBlock>
+
+## Example: Use the KubernetesPodOperator to run a script in another language
 
 A frequent use case for the KubernetesPodOperator is running a task in a language other than Python. To do this, you build a custom Docker image containing the script.
 
