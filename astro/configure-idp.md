@@ -1,6 +1,6 @@
 ---
-sidebar_label: "Set up an identity provider"
-title: "Set up an identity provider (IdP) for Astro"
+sidebar_label: "Set up authentication and SSO"
+title: "Set up authentication and single sign on for Astro"
 id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
 ---
@@ -24,12 +24,6 @@ This guide provides the steps for integrating identity providers on Astro to ena
 - You can enforce multi-factor authentication (MFA) for users.
 - You can use services such as [Adaptive Authentication](https://www.okta.com/identity-101/adaptive-authentication/) and [Conditional Access](https://learn.microsoft.com/en-us/azure/active-directory/conditional-access/overview) to create advanced access policies that enforce trusted IP ranges or limit access to authorized devices.
 
-:::info
-
-Astro only supports Service Provider (SP)-initiated SSO. Users are required to log in to the [Cloud UI](https://cloud.astronomer.io/).
-
-:::
-
 ## Single Sign On (SSO) authorization identity providers
 
 Single Sign On (SSO) authorization allows users to log in using their company credentials, managed via an identity provider (IdP). This provides a streamlined login experience for your Astro users, as they are able to leverage the same credentials across multiple applications. In addition, this provides improved security and control for organizations to manage access from a single source. Astro supports integrations with the following IdPs:
@@ -47,7 +41,26 @@ You can only configure a single SSO connection for a given domain. However, if y
 
 !--Add about multiple managed domains--!
 
-## Configure your identity provider
+## Map your domain
+
+Mapping a domain ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
+
+1. In the Cloud UI, click **Settings**, then click **Authentication**.
+2. In the **Managed Domains** menu, click **Managed Domain**.
+3. In the **Domain** field, enter the domain that you want to map.
+4. Click **Create**. The domain is added to your **Managed Domains** and marked as **Unverified**.
+5. In the entry for your domain, click **Verify**.
+6. After updating the DNS record, click **Verify** to notify Astro to check your DNS record.
+
+After verification is complete for at least one domain, you can [Configure SSO](#configure-your-sso-identity-provider).
+
+:::info
+
+Typically, a change in the DNS record takes only minutes to propagate; however, there are cases where it may take up to 72 hours.
+
+:::
+
+## Configure your SSO identity provider
 
 <Tabs
     defaultValue="Okta"
@@ -62,27 +75,13 @@ You can only configure a single SSO connection for a given domain. However, if y
 
 This section provides setup steps for setting up Okta as your IdP on Astro. After completing this setup, all users in your organization can use Okta to log in to Astro.
 
-#### Prerequisites
+### Prerequisites
 
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - An [Okta account](https://www.okta.com/) with administrative access.
-- A list of domains that you own and should be authorized to access your Astro Organization.
+- At least one [mapped domain](#map-your-domain).
 
-#### Step 1: Map your domain
-
-Mapping a domain to Okta ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to Okta to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
-
-To map a domain to Okta, you must verify that you own the domain.
-
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
-2. In the **Managed Domains** menu, click **Managed Domain**.
-3. In the **Domain** field, enter the domain that you want to map to Okta.
-4. Click **Create**. The domain is added to your **Managed Domains** and marked as **Unverified**.
-5. In the entry for your domain, click **Verify**.
-6. Follow the steps provided by the Cloud UI to verify your domain. 
-7. Repeat steps 1-6 for any other domains you want to map to Okta.
-
-#### Step 2: Create a SAML-based connection to Okta
+### Step 1: Create a SAML-based connection to Okta
 
 To set up Okta as your IdP, you will create a Security Assertion Markup Language (SAML) connection to Okta.
 
@@ -140,7 +139,7 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 14. Click **Activate SSO**.
 15. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
 
-#### Step 3: Assign users to your Okta application
+### Step 2: Assign users to your Okta application
 
 On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, see [Assign applications to users](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
 
@@ -150,37 +149,23 @@ On the page for your Okta app integration, open the **Assignments** tab. Ensure 
 
 This section provides setup steps for setting up Azure AD as your IdP on Astro. After completing this setup, your organization's users can use Azure AD to log in to Astro.
 
-#### Prerequisites
+### Prerequisites
 
 To integrate Azure as your IdP for Astro you must have:
 
 - An Azure subscription.
 - An [Azure AD tenant](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-create-new-tenant) with `Global Administrator` privileges.
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
-- A list of domains that you own and should be authorized to access your Astro Organization.
+- At least one [mapped domain](#map-your-domain).
 
-#### Step 1: Map your domain
-
-Mapping a domain to Azure AD ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to Azure AD to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
-
-To map a domain to Azure AD, you must verify that you own the domain.
-
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
-2. In the **Managed Domains** menu, click **Managed Domain**.
-3. In the **Domain** field, enter the domain that you want to map to Azure AD.
-4. Click **Create**. The domain is added to your **Managed Domains** and marked as **Unverified**.
-5. In the entry for your domain, click **Verify**.
-6. Follow the steps provided by the Cloud UI to verify your domain. 
-7. Repeat steps 1-6 for any other domains you want to map to Azure AD.
-
-#### Step 2: Register Astro as an application on Azure
+### Step 1: Register Astro as an application on Azure
 
 Follow [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to register a new app. When configuring the application, set the following values:
 
 - **Name** and **Supported account types**: Set these according to your organization's needs.
 - **Redirect URI**: Select **Web** and specify `https://auth.astronomer.io/login/callback`.
 
-#### Step 3: Create a client secret
+### Step 2: Create a client secret
 
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the client ID and secret value for Step 5.
 
@@ -190,7 +175,7 @@ If you configure an expiring secret, make sure to record the expiration date and
 
 :::
 
-#### Step 4: Configure API permissions
+### Step 3: Configure API permissions
 
 Follow [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-access-web-apis#add-permissions-to-access-web-apis) to add the following **Delegated** permissions to **Microsoft Graph**:
 
@@ -205,7 +190,7 @@ If your Azure Active Directory is configured to require admin approval on API pe
 
 :::
 
-#### Step 5: Create an SSO connection to Azure AD
+### Step 4: Create an SSO connection to Azure AD
 
 1. Assign yourself to Astro from Azure AD. See [Assign users and groups to an Application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal?pivots=portal).
 2. In the Cloud UI, click **Settings**, then click **Authentication**.
@@ -225,7 +210,7 @@ If your Azure Active Directory is configured to require admin approval on API pe
 8. Click **Activate SSO**.
 9. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
 
-#### Step 6: Assign users to your Azure AD application
+### Step 5: Assign users to your Azure AD application
 
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
 
@@ -237,27 +222,13 @@ When a user assigned to the application accesses Astro, they will be brought aut
 
 This section provides setup steps for setting up OneLogin as your IdP on Astro. After completing this setup, your organization's users can use OneLogin to log in to Astro.
 
-#### Prerequisites
+### Prerequisites
 
 - A [OneLogin account](https://www.onelogin.com/) with administrative access.
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
-- A list of domains that you own and should be authorized to access your Astro Organization.
+- At least one [mapped domain](#map-your-domain).
 
-#### Step 1: Map your domain
-
-Mapping a domain to OneLogin ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to OneLogin to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
-
-To map a domain to OneLogin, you must verify that you own the domain.
-
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
-2. In the **Managed Domains** menu, click **Managed Domain**.
-3. In the **Domain** field, enter the domain that you want to map to OneLogin.
-4. Click **Create**. The domain is added to your **Managed Domains** and marked as **Unverified**.
-5. In the entry for your domain, click **Verify**.
-6. Follow the steps provided by the Cloud UI to verify your domain. 
-7. Repeat steps 1-6 for any other domains you want to map to OneLogin.
-
-#### Step 2: Create a SAML-based connection to OneLogin
+### Step 1: Create a SAML-based connection to OneLogin
 
 To set up OneLogin as your IdP, you will create a Security Assertion Markup Language (SAML) connection to OneLogin.
 
@@ -329,27 +300,13 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
 
 This section provides setup steps for setting up Ping Identity as your IdP on Astro. After completing this setup, your organization's users can use Ping Identity to log in to Astro.
 
-#### Prerequisites
+### Prerequisites
 
 - A [Ping Identity account](https://www.pingidentity.com/) with administrative access.
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
-- A list of domains that you own and should be authorized to access your Astro Organization.
+- At least one [mapped domain](#map-your-domain).
 
-#### Step 1: Map your domain
-
-Mapping a domain to Ping Identity ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You must map at least one domain to Ping Identity to complete this setup. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
-
-To map a domain to Ping Identity, you must verify that you own the domain.
-
-1. In the Cloud UI, click **Settings**, then click **Authentication**.
-2. In the **Managed Domains** menu, click **Managed Domain**.
-3. In the **Domain** field, enter the domain that you want to map to Ping Identity.
-4. Click **Create**. The domain is added to your **Managed Domains** and marked as **Unverified**.
-5. In the entry for your domain, click **Verify**.
-6. Follow the steps provided by the Cloud UI to verify your domain. 
-7. Repeat steps 1-6 for any other domains you want to map to Ping Identity.
-
-#### Step 2: Configure Ping Identity
+### Step 1: Configure Ping Identity
 
 1. In the Cloud UI, click **Settings**, then click **Authentication**.
    
@@ -415,7 +372,7 @@ To map a domain to Ping Identity, you must verify that you own the domain.
     
 23. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
 
-#### Step 3: Assign users to your Ping Identity application
+### Step 2: Assign users to your Ping Identity application
 
 Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
 
