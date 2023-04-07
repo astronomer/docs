@@ -474,7 +474,7 @@ multiply_by_100.expand(
 )
 ```
 </TabItem>
-<TabItem value="taskflow">
+<TabItem value="traditional">
 
 ```python
 def multiply_by_2_func(num):
