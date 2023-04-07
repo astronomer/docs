@@ -30,7 +30,7 @@ Task run duration alerts are available with the following software versions Airf
 - Slack workspace and/or PagerDuty Service.
 
 <Tabs
-    defaultValue="standard"
+    defaultValue="slack"
     groupId= "alerts"
     values={[
         {label: 'Slack', value: 'slack'},
