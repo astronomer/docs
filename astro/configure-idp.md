@@ -39,9 +39,7 @@ SSO authorization policies in Astro are based on email domains, which ensures th
 
 You can only configure a single SSO connection for a given domain. However, if you have multiple managed domains, then you can set up multiple different SSO connections, with a separate SSO connection for each domain. 
 
-!--Add about multiple managed domains--!
-
-## Map your domain
+### Map your domain
 
 Mapping a domain ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. 
 
