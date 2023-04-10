@@ -438,7 +438,7 @@ The add_nums task will have three mapped instances with the following results:
 
 ## Repeated mapping
 
-It is possible to dynamically map an Airflow task over the output of another dynamically mapped task. In this situation the each mapped task will create one mapped task instance for every mapped task instance of the first mapped task.
+It is possible to dynamically map an Airflow task over the output of another dynamically mapped task. This results in one mapped task instance for every mapped task instance of the upstream task.
 
 The following example shows three dynamically mapped tasks.
 
@@ -506,19 +506,19 @@ multiply_by_2 >> add_10 >> multiply_by_100
 </TabItem>
 </Tabs>
 
-In the example above the `multiply_by_2` task is dynamically mapped over a list of 3 elements (`[1, 2, 3]`). The task has 3 dynamically mapped task instances returning the following values:
+In the example above, the `multiply_by_2` task is dynamically mapped over a list of 3 elements (`[1, 2, 3]`). The task has 3 mapped task instances returning the following values:
 
 - Map index 0: `2` (1*2)
 - Map index 1: `4` (2*2)
 - Map index 2: `6` (3*2)
 
-The `add_10` task is dynamically mapped over the output of the `multiply_by_2` task. It has 3 dynamically mapped task instances (one for each mapped instance of the previous task) returning the values:
+The `add_10` task is dynamically mapped over the output of the `multiply_by_2` task. It has 3 mapped task instances (one for each mapped instance of the previous task) returning the values:
 
 - Map index 0: `12` (2+10)
 - Map index 1: `14` (4+10)
 - Map index 2: `16` (6+10)
 
-The `multiply_by_100` task is dynamically mapped over the output of the `add_10` task. It also has 3 dynamically mapped task instances returning the values:
+The `multiply_by_100` task is dynamically mapped over the output of the `add_10` task. It also has 3 mapped task instances returning the values:
 
 - Map index 0: `1200` (12*100)
 - Map index 1: `1400` (14*100)
