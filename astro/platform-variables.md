@@ -48,6 +48,7 @@ If you need to set one of these variables for a particular use case, contact [As
 | `AIRFLOW__WEBSERVER__NAVBAR_COLOR`         | The color of the main navigation bar in the Airflow UI                                                               | `#4a4466`                               |
 | `AIRFLOW__WEBSERVER__EXPOSE_CONFIG`        | Exposes the **Configuration** tab of the Airflow UI and hides sensitive values                                       |  `NON-SENSITIVE-ONLY`                   |
 | `AWS_SECRET_ACCESS_KEY`                    | The key secret for accessing Astro's managed S3 bucket¹                                                              | `<s3-aws-access-key-secret>`            |
+| `INSTANCE_TYPE`                       | Provides the instance size of the node the DAG is scheduled on.    |  `(v1:metadata.labels['beta.kubernetes.io/instance-type'])`   |
 | `OPENLINEAGE_URL`                    |  The URL for your Astro lineage backend. The destination for lineage metadata sent from external systems to the OpenLineage API.                                                        |       `https://astro-<your-astro-base-domain>.datakin.com`      |
  | `OPENLINEAGE_API_KEY`                    |  Your OpenLineage API key                                                            |       `<your-lineage-api-key>`      |
 
