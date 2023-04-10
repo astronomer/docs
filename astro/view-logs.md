@@ -2,10 +2,19 @@
 title: 'View logs'
 sidebar_label: 'View logs'
 id: view-logs
-description: View logs for your data pipelines both locally and on Astro.
+description: View logs for your data pipelines both on Astro and locally.
 ---
 
-View Airflow task and component logs to troubleshoot your data pipelines and better understand the behavior of your tasks and their execution environment.
+View task and component logs for your DAGs to troubleshoot your data pipelines and better understand the behavior of your tasks and their execution environment.
+
+## Log and message types
+
+- _Scheduler logs_ can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
+
+- _Triggerer logs_
+
+- _Worker logs_ 
+
 
 ## View Airflow task logs
 
@@ -21,6 +30,40 @@ On clusters hosted in your own cloud, task logs are stored indefinitely. On clus
 4. Click a task run.
 5. Click **Instance Details**.
 6. Click **Log**.
+
+## View logs in the Cloud UI
+
+You can access scheduler, triggerer, and worker logs in the Cloud UI to find the past 24 hours of logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. 
+
+1. In the Cloud UI, select a Workspace and then a Deployment.
+
+2. Click the **Logs** tab.
+
+3. (Optional) Select one or more of the following options to filter logs and click **Apply**. 
+
+    When a Deployment generates more than 500 lines of logs in 24 hours, only the most recent 500 lines are shown. If there are no logs available for a given Deployment, the following message appears:
+
+    ```  
+    No matching events have been recorded in the past 24 hours.
+    ```
+
+    Typically, this indicates that the Deployment you selected does not currently have any DAGs running.
+
+### Filter options
+
+You can use the following options to specify the types of logs or messages that you want to view. 
+
+- **String search**: Enter a string, keyword, or phrase to find in your logs.
+
+- **Time range**: Filter the logs displayed based on time or a date range. 
+
+- **Log type**: Filter based on whether the log message is from scheduler, worker, or trigger. 
+
+- **Log Level**
+    - **Error**: Emitted when a process fails or does not complete. For example, these logs might indicate a missing DAG file, an issue with your scheduler's connection to the Airflow database, or an irregularity with your scheduler's heartbeat.
+    - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
+    - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent but can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
+
 
 ## Access Airflow component logs locally
 
@@ -41,28 +84,6 @@ By default, running `astro dev logs` shows logs for all Airflow components. To s
 To continue monitoring logs, run `astro dev logs --follow`. The `--follow` flag ensures that the latest logs continue to appear in your terminal window. For more information about this command, see [CLI Command Reference](cli/astro-dev-logs.md).
 
 Logs for the Airflow webserver, worker, and triggerer are not available for Deployments on Astro.
-
-## View Airflow scheduler logs
-
-You can access the past 24 hours of scheduler logs for any Deployment on its **Logs** page. Logs are color-coded according to their type. Scheduler logs can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
-
-1. In the Cloud UI, select a Workspace and then a Deployment.
-
-2. Click the **Logs** tab.
-
-3. Optional. Select one or more options in the **Log Level** menu and click **Apply**. These are the available options:
-
-    - **Error**: Emitted when a process fails or does not complete. For example, these logs might indicate a missing DAG file, an issue with your scheduler's connection to the Airflow database, or an irregularity with your scheduler's heartbeat.
-    - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
-    - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent but can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
-
-When a Deployment generates more than 500 lines of logs in 24 hours, only the most recent 500 lines are shown. If there are no scheduler logs available for a given Deployment, the following message appears:
-
-```  
-No matching events have been recorded in the past 24 hours.
-```
-
-Typically, this indicates that the Deployment you selected does not currently have any DAGs running.
 
 ## Export task logs to Datadog (_AWS only_)
 
