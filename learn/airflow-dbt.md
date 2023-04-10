@@ -68,10 +68,10 @@ An Astro project contains all of the files you need to run Airflow locally.
     # install dbt into a virtual environment
     # replace dbt-postgres with the adapter you need
     RUN python -m venv dbt_venv && source dbt_venv/bin/activate && \
-    pip install --no-cache-dir dbt-core dbt-postgres && deactivate
+    pip install --no-cache-dir dbt-postgres && deactivate
     ```
 
-    This code runs a bash command when the Docker image is built that creates a virtual environment called `dbt_venv` inside of the Astro CLI scheduler container. Two packages are installed in the virtual environment, `dbt-core` and `dbt-postgres`. If you are using a different data warehouse, replace `dbt-postgres` with the adapter package for your data warehouse.
+    This code runs a bash command when the Docker image is built that creates a virtual environment called `dbt_venv` inside of the Astro CLI scheduler container. The `dbt-postgres` package, which also contains `dbt-core`, is installed in the virtual environment. If you are using a different data warehouse, replace `dbt-postgres` with the adapter package for your data warehouse.
 
 3. Add the [Astro dbt provider package](https://github.com/astronomer/astronomer-cosmos) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to your `requirements.txt` file. This tutorial uses the Astro Python SDK to load and analyze data transformed by dbt.
 
