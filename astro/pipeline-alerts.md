@@ -13,13 +13,13 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-You can configure your Astro pipelines to alert you in Slack or PagerDuty if you have a DAG run failure or if a task duration exceeds a configured time, such as an SLA. 
+You can configure your Astro pipelines to alert you in Slack or PagerDuty if you have a DAG run failure or if a task duration exceeds a configured time. 
 
 Follow this guide to set up your communication channel, Slack or PagerDuty, to receive alerts from Astro and then configure your pipeline to send alerts in certain circumstances.
 
 :::important
 
-Task run duration alerts are available with the following software versions Airflow versions greater than 2.5.0. 
+Task run duration alerts are available with the following software versions Astro Runtime versions 7.1.0 and greater. 
 
 :::
 
