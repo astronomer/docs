@@ -79,18 +79,9 @@ If you've already copied task logs or Airflow component logs, send them as a par
 
     Alternatively, you can directly access the support form by going to `https://cloud.astronomer.io/support`.
 
-2. Complete the following fields:
-
-    - **Problem Statement**: Enter a description of the issue you are experiencing. Provide as much detail as possible.
-    - **Workspace**: Optional. Select the Workspace where the issue is occurring. This list is auto-populated when you submit a support request from a Workspace or a Deployment.
-    - **Deployment**: Optional. Select the Deployment where the issue is occurring. This list is auto-populated when you submit a support request from a Deployment. If you submit it from the Workspace view, you'll be prompted to select from the list of Deployments in that Workspace.
-    - **Problem Start**: Optional. Select the date and time the issue started.
-    - **Description**: Enter a thorough description of the issue. Provide as much detail as possible.
-    - **Priority**: Select the severity of your issue based on how the issue is affecting your organization. For severity level explanations, see [Best practices for submitting support requests](astro-support.md#best-practices-for-support-request-submissions).
-    - **Business Impact**: Optional. Describe how this issue is affecting your organization.
-    - **CC Emails**: Optional. Enter the email address of a team member that you want to notify about this issue. Click **Add Additional Email** to add additional email addresses.
-
-3. Click **Submit**.
+2. Select a **Request Type**. Your request type determines which other fields appear in the support request.
+3. Complete the rest of the support request. 
+4. Click **Submit**.
 
     You'll receive an email when your ticket is created and follow-up emails as Astronomer support replies to your request. To check the status of a support request, you can also sign in to the [Astronomer support portal](https://support.astronomer.io).
 

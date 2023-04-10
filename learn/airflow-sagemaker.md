@@ -3,6 +3,7 @@ title: "Train a machine learning model with SageMaker and Airflow"
 sidebar_label: "Amazon SageMaker"
 description: "Follow a step-by-step tutorial for using Airflow to orchestrate the training and testing of a SageMaker model."
 id: airflow-sagemaker
+sidebar_custom_props: { icon: 'img/integrations/sagemaker.png' }
 ---
 
 [Amazon SageMaker](https://aws.amazon.com/sagemaker/) is a comprehensive AWS machine learning (ML) service that is frequently used by data scientists to develop and deploy ML models at scale. With Airflow, you can orchestrate every step of your SageMaker pipeline, integrate with services that clean your data, and store and publish your results using only Python code.
@@ -28,9 +29,9 @@ To complete this tutorial, you need:
 
 - An AWS account with:
 
-    - Access to an S3 [storage bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). If you don't already have an account, Amazon offers 5GB of free storage in S3 for 12 months. This should be more than enough for this tutorial.
-    - Access to [AWS SageMaker](https://aws.amazon.com/sagemaker/). If you don't already use SageMaker, Amazon offers a free tier for the first month.
-    
+  - Access to an S3 [storage bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/GetStartedWithS3.html). If you don't already have an account, Amazon offers 5GB of free storage in S3 for 12 months. This should be more than enough for this tutorial.
+  - Access to [AWS SageMaker](https://aws.amazon.com/sagemaker/). If you don't already use SageMaker, Amazon offers a free tier for the first month.
+
 - The [Astro CLI](https://docs.astronomer.io/astro/cli/get-started).
 
 ## Step 1: Create a role to access SageMaker
@@ -82,8 +83,7 @@ Now that you have your AWS resources configured, you can move on to Airflow setu
     AWS_DEFAULT_REGION=us-east-2
     ```
 
-    These variables ensure that all SageMaker operators will work in your Airflow environment. Some require XCom pickling to be turned on in order to work because they return objects that are not JSON serializable. 
-
+    These variables ensure that all SageMaker operators will work in your Airflow environment. Some require XCom pickling to be turned on in order to work because they return objects that are not JSON serializable.
 
 4. Run the following command to start your project in a local environment:
 
@@ -109,7 +109,7 @@ Add two Airflow variables that will be used by your DAG. In the Airflow UI, go t
 
 Add a connection that Airflow will use to connect to SageMaker and S3. In the Airflow UI, go to **Admin** -> **Connections**.
 
-Create a new connection named `aws-sagemaker` and choose the `Amazon Web Services` connection type. Fill in the **AWS Access Key ID** and **AWS Secret Access Key** with the access key ID and secret access key you generated in Step 1. 
+Create a new connection named `aws-sagemaker` and choose the `Amazon Web Services` connection type. Fill in the **AWS Access Key ID** and **AWS Secret Access Key** with the access key ID and secret access key you generated in Step 1.
 
 In the **Extra** field, provide your AWS session token generated in Step 1 using the following format:
 
@@ -131,7 +131,7 @@ Your connection should look like this:
 
 :::info
 
-As mentioned in Step 1, there are multiple ways of connecting Airflow to AWS resources. If you are using a method other than the one described in this tutorial, such as having your Airflow environment assume an IAM role, you may need to update your connection accordingly. 
+As mentioned in Step 1, there are multiple ways of connecting Airflow to AWS resources. If you are using a method other than the one described in this tutorial, such as having your Airflow environment assume an IAM role, you may need to update your connection accordingly.
 
 :::
 
@@ -343,7 +343,7 @@ This DAG uses a decorated PythonOperator and several SageMaker operators to get 
 
 ## Step 7: Run your DAG to train the model
 
-Go to the Airflow UI, unpause your `sagemaker_pipeline` DAG, and trigger it to train, create and test the model in SageMaker. Note that the `train_model` and `test_model` tasks may take up to 10 minutes each to complete. 
+Go to the Airflow UI, unpause your `sagemaker_pipeline` DAG, and trigger it to train, create and test the model in SageMaker. Note that the `train_model` and `test_model` tasks may take up to 10 minutes each to complete.
 
 In the SageMaker console, you should see your completed training job.
 
@@ -390,7 +390,7 @@ This example DAG acquires and pre-processes data, trains a model, creates a mode
 
 :::info
 
-To clone the entire repo used to create this tutorial as well as an additional DAG that performs batch inference using an existing SageMaker model, check out the [Astronomer Registry](https://registry.astronomer.io/dags/sagemaker-pipeline).
+To clone the entire repo used to create this tutorial as well as an additional DAG that performs batch inference using an existing SageMaker model, check out the [Astronomer Registry](https://legacy.registry.astronomer.io/dags/sagemaker-pipeline).
 
 :::
 

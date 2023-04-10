@@ -47,7 +47,15 @@ Regardless of the cell type you choose, you can use your query results in downst
 
 7. In the **Select Connection** list, select the connection for the database you want to query against.
 
-8. If you're using Warehouse SQL cells, configure the **Output Table** for storing the results of your query. This table must be accessible from your configured connection.
+8. (Optional) If you're using Warehouse SQL cells, configure the following additional fields to define an output table. If you don't define these values, your data pipeline will store the outputs of your cell in a temporary table.
+
+    - **Database**: The database for your output table
+    - **Schema**:  The schema for your output table
+    - **Table name**: The name of your output table
+
+    By default, your input is formatted as a literal string and is defined in your DAG with quotation marks. To format your input as a Python expression, click **Python expression** next to the value name. If you already entered a literal string before changing this setting, remove the quotation marks that the IDE adds to your Python expression.
+    
+    After you switch to **Python expression**, your input for the value is defined in the DAG as a Python expression without quotation marks. You can use your input to call any Python value in your pipeline, such as a global import, an Airflow variable, or an environment variable. 
 
 ## Run a SQL cell
 

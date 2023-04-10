@@ -5,6 +5,10 @@ id: configure-worker-queues
 description: Learn how to create and configure worker queues to create best-fit execution environments for your tasks.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import {siteVariables} from '@site/src/versions';
+
 By default, all tasks run in a default worker queue that does not require configuration or code. If you're using the Celery executor, you can create additional worker queues to enable multiple worker types or configurations for different groups of tasks, and assign tasks to queues in your DAG code. For more information about Airflow executors on Astro, see [Manage executors](executors.md).
 
 Use worker queues to create optimized execution environments for different types of tasks in the same Deployment. You can use worker queues to:
@@ -36,14 +40,14 @@ You can assign Task A to a worker queue that is configured to use the [`c6i.4xla
 
 You can configure each worker queue on Astro with the following settings:
 
-- **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks`.
+- **Name:** The name of your worker queue. Use this name to assign tasks to the worker queue in your DAG code. Worker queue names must consist only of lowercase letters and hyphens. For example, `machine-learning-tasks` or `short-running-tasks` or `high-cpu`.
 - **Worker Type:** The size and type of workers in the worker queue, defined as a node instance type that is supported by the cloud provider of your cluster. For example, a worker type might be `m5.2xlarge` or `c6i.4xlarge` for a Deployment running on an AWS cluster. A worker’s total available CPU, memory, storage, and GPU is defined by its worker type. Actual worker size is equivalent to the total capacity of the worker type minus Astro’s system overhead.
 - **Max Tasks per Worker:** The maximum number of tasks that a single worker can run at a time. If the number of queued and running tasks exceeds this number, a new worker is added to run the remaining tasks. This value is equivalent to [worker concurrency](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html#worker-concurrency) in Apache Airflow. It is 16 by default.
 - **Worker Count**: The minimum and maximum number of workers that can run at a time.  The number of running workers changes regularly based on Maximum Tasks per Worker and the current number of tasks in a `queued` or `running` state. By default, the minimum number of workers is 1 and the maximum is 10.
 
 ### Default worker queue
 
-Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the default worker queue. 
+Each Deployment requires a worker queue named `default` to run tasks. Tasks that are not assigned to a worker queue in your DAG code are executed by workers in the default worker queue.
 
 If you don’t change any settings in the default worker queue:
 
@@ -87,7 +91,7 @@ You can create, update, and delete multiple worker queues at once using a Deploy
 
 By default, all tasks run in the default worker queue. To run tasks on a different worker queue, assign the task to the worker queue in your DAG code.
 
-To assign an Airflow task to a worker queue:
+### Step 1: Copy the name of the worker queue
 
 1. In the Cloud UI, select a Workspace and select a Deployment.
 
@@ -95,19 +99,54 @@ To assign an Airflow task to a worker queue:
 
 3. Copy the name of the worker queue name you want to assign a task to.
 
-4. In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
+### Step 2: Assign the task in your DAG code
 
-	For example, all instances of this task will run in the `short-running-tasks` queue:
+In your DAG code, add a `queue='<worker-queue-name>'` argument to the definition of the task. If a task is assigned to a queue that does not exist or is not referenced properly, the task might remain in a `queued` state and fail to execute. Make sure that the name of the queue in your DAG code matches the name of the queue in the Cloud UI.
 
-	```python
-	feature_engineering = DatabricksSubmitRunOperator(
-		task_id='feature_engineering_notebook_task'
-		notebook_task={
-			'notebook_path': "/Users/{{ var.value.databricks_user }}/feature-eng_census-pred"
-		},
-		queue='short-running-tasks',
-		)
-	```
+Astronomer recommends using Apache Airflow's [Taskflow API](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/taskflow.html) to define your task argument. The Taskflow API is feature in Airflow 2 that includes a task [decorator](learn/airflow-decorators) and makes DAGs easier to write. In the following examples, all instances of the task will run in the `machine-learning-tasks` queue. Choose an example based on whether or not you use the Taskflow API.
+
+<Tabs
+    defaultValue="classicoperator"
+    groupId= "assign-worker-queue"
+    values={[
+        {label: 'Classic Operator Example', value: 'classicoperator'},
+        {label: 'TaskFlow API Example', value: 'taskflow'},
+    ]}>
+
+<TabItem value="classicoperator">
+
+ ```python
+  train_model = PythonOperator(
+   task_id = 'train_model',
+   python_callable = train_model_flights
+   queue = 'machine-learning-tasks'
+  )
+ ```
+
+</TabItem>
+
+<TabItem value="taskflow">
+
+ ```python
+  @task(task_id='train_model', queue = 'machine-learning-tasks')
+  def train_model_flights(x_train, y_train):
+   import xgboost
+   from sklearn.preprocessing import StandardScaler
+   from sklearn.pipeline import Pipeline
+
+   xgbclf = xgboost.XGBClassifier() 
+   
+   pipe = Pipeline([('scaler', StandardScaler(with_mean=False)),
+     ('xgbclf', xgbclf)])
+   
+   pipe.fit(x_train, y_train)
+
+   return pipe
+ ```
+
+</TabItem>
+
+</Tabs>
 
 ## Update a worker queue
 
@@ -125,9 +164,9 @@ If you need to change the worker type of an existing worker queue, Astronomer re
 
 2. Click the **Worker Queues** tab.
 
-3. Click **Edit** for the worker queue that you want to update. 
+3. Click **Edit** for the worker queue that you want to update.
 
-4. Update the worker queue settings, and then click **Update Queue**. 
+4. Update the worker queue settings, and then click **Update Queue**.
 
     The Airflow components of your Deployment automatically restart to apply the updated resource allocations. This action is equivalent to deploying code to your Deployment and does not impact running tasks that have 24 hours to complete before running workers are terminated. See [What happens during a code deploy](deploy-code.md#what-happens-during-a-code-deploy).
 

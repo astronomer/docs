@@ -32,13 +32,17 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 - **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment metrics](deployment-metrics.md#dag-runs).
 - **Workspace Settings:** Update Workspace details, including Workspace user permissions, the Workspace name, and the Workspace description.
 
-## Update Workspace details
+## Update general Workspace settings
 
 1. In the Cloud UI, select a Workspace.
    
 2. Click **Workspace Settings** and then click the **Details** tab.
    
-3. Click **Edit Details**, update the Workspace name or description, and then click **Update**.
+3. Click **Edit Details**, then update the following settings as needed:
+
+    - **Name**: The name of your Workspace
+    - **Description**: The description of your Workspace
+    - **CI/CD Enforcement Default**: Determines whether new Deployments in the Workspace enforce CI/CD deploys by default. This default can be overridden at the Deployment level. See [Enforce CI/CD deploys](configure-deployment-resources.md#enforce-ci-cd-deploys).
 
 ## Delete a Workspace
 

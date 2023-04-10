@@ -22,7 +22,7 @@ Use the Astronomer CI/CD templates to automate code deployment to Astro with pop
 - A deploy strategy for your CI/CD pipeline. See [Set up CI/CD](set-up-ci-cd.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - A CI/CD management tool, such as [GitHub Actions](https://docs.github.com/en/actions).
-- An [Astro project](create-project.md) that is hosted in a place that your CI/CD tool can access.
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) that is hosted in a place that your CI/CD tool can access.
 
 ## Template types
 
@@ -296,7 +296,7 @@ To complete this setup, you need:
             tags: ${{ steps.image_tag.outputs.image_tag }}
             load: true
             ssh: |
-              github=${{ env.SSH_AUTH_SOCK }
+              github=${{ env.SSH_AUTH_SOCK }}
         - name: Deploy to Astro
           uses: astronomer/deploy-action@v0.1
           with:

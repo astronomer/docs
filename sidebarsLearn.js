@@ -3,6 +3,30 @@ module.exports = {
     'overview',
     {
       type: 'category',
+      label: 'Get started',
+      link: {
+        type: 'generated-index',
+        title: 'Get started',
+        description: 'Get started with Airflow.',
+      },
+      items: [
+        'airflow-quickstart',
+        {
+          type: 'category',
+          label: 'Tutorials',
+          link: {
+                type: 'doc',
+                id: 'get-started-with-airflow',
+           },
+          items: [
+            'get-started-with-airflow',
+            'get-started-with-airflow-part-2',
+          ],
+        },
+     ],
+    },
+    {
+      type: 'category',
       label: 'Airflow concepts',
       link: {
         type:'generated-index',
@@ -106,18 +130,6 @@ module.exports = {
         description: 'Step-by-step guides for writing DAGs and running Airflow.'
       },
       items: [
-        {
-          type: 'category',
-          label: 'Get started with Airflow',
-          link: {
-                type: 'doc',
-                id: 'get-started-with-airflow',
-           },
-          items: [
-            'get-started-with-airflow',
-            'get-started-with-airflow-part-2',
-          ],
-        },
         'astro-python-sdk',
         'cloud-ide-tutorial',
         'custom-airflow-ui-docs-tutorial',

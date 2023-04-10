@@ -2,6 +2,7 @@
 title: "Orchestrate dbt Core jobs with the Astro dbt provider"
 sidebar_label: "dbt Core"
 id: airflow-dbt
+sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
 <head>
@@ -230,6 +231,7 @@ The DAG used in this tutorial shows how you can use the Astro dbt provider to cr
 
 3. (Optional) Choose which country's data to analyze by specifying your desired `country_code` in the `dbt_args` parameter of the DbtTaskGroup. Note that this [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) only contains data for several European countries.
 
+
 4. Run the DAG manually by clicking on the play button and view the DAG in the graph view (double click on the task groups in order to expand them). 
 
     ![Cosmos DAG graph view](/img/guides/cosmos_dag_graph_view.png)
@@ -279,3 +281,4 @@ You can learn more about a manifest-based dbt and Airflow project structure, vie
 ## Conclusion
 
 Congratulations! You've run a DAG using the Astro dbt provider to automatically create tasks from dbt models. The Astro dbt provider is under active development. You can learn more about it in the [Astro dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/index.html).
+
