@@ -96,6 +96,7 @@ module.exports = {
       items: [
         "view-logs",
         "deployment-metrics",
+        "pipeline-metrics",
         {
           type: "category",
           label: "Data lineage",
