@@ -242,7 +242,7 @@ If your Astro project requires additional build-time arguments to build an image
 
 ## DAG-based templates
 
-The following templates are examples of how to implement DAG-based deploys in GitHub Actions. They use the [Deploy Actions](https://github.com/astronomer/deploy-action) `dag-deploy-enabled` option to implement a DAG-based deploy workflow.
+The following templates are examples of how to implement DAG-based deploys in GitHub Actions. They use the [Deploy action](https://github.com/astronomer/deploy-action) `dag-deploy-enabled` option to implement a DAG-based deploy workflow.
 
 <Tabs
     defaultValue="standard"

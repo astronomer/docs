@@ -146,7 +146,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
     If you are not using an external secrets manager, you can skip this step.
 
-  :::note
+  :::info
 
   There are many ways to connect your virtual environment to your secrets manager, including passing a profile with a shared credential file or having your environment assume a role that has access to your secrets manager. The access key and secret method described here is the most straight forward when working with a local project, but might not work for production in some organizations.
 
@@ -182,7 +182,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
     astro dev start
     ```
 
-  :::note
+  :::info
 
   The build of this project's Dockerfile can take up to 20 minutes due to the `pyenv` and Python 3.8 installation. If you are an Astronomer customer and will be deploying this project to Astro, you can use a `dag-only` deploy after the initial deployment to avoid rebuilding the Dockerfile when making changes to DAGs in the project.
 
