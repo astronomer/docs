@@ -96,6 +96,12 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
     Creating a `pyenv` environment within your Airflow project requires installing multiple os-level packages and a series of Docker commands. Astronomer's open source [Docker BuildKit frontend for Airflow](https://github.com/astronomer/astro-provider-venv) greatly simplifies this process and allows you to create a Python virtual environment with only two lines of code.
 
+    :::note
+
+    To modify this example for other use cases, you can update `3.8` in this Dockerfile to a different version of Python. Note that there are some limitations when using a Python version greater than the version used by Airflow. For more details, see the [project Readme](https://github.com/astronomer/astro-provider-venv#caveats).
+
+    :::
+
 4. Ensure [Docker BuildKit](https://docs.docker.com/build/buildkit/) is enabled. To enable BuildKit by default, you can update the parameter in Docker Desktop or modify your `/etc/docker/daemon.json` file with the following:
 
     ```json
@@ -143,7 +149,7 @@ In your Astro project `dags` folder, create a new file called `external-python-p
 
 This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in [Step 3](#step-3-configure-your-astro-project).
 
-## Step 5: Run your DAG to execute your Snowpark query in a virtual environment
+## Step 6: Run your DAG to execute your Snowpark query in a virtual environment
 
 Go to the Airflow UI, unpause your `py_virtual_env` DAG and trigger it to run your Snowpark query in an isolated Python virtual environment. Open your tasks logs to see the results of your query printed:
 
