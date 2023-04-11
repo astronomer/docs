@@ -21,6 +21,12 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.13.0 ([Release notes](cli/release-notes.md))
 
+## April 11, 2023
+
+### Additional improvements
+
+- The node type for running Airflow system components on GCP clusters has been reduced from `n2-standard-4`  to `e2-standard-4`.
+
 ## April 4, 2023
 
 ### Preview Deployments
