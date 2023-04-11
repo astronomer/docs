@@ -105,7 +105,7 @@ Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be
 To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
 
 1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
-2. Mount and [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
+2. Mount an [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
 
     ```python {5-14,26-27}
     from airflow.configuration import conf
