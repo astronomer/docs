@@ -40,8 +40,11 @@ Calling the Airflow REST API for a Deployment requires:
 
 To retrieve an Astro access token, run the following API request with your Deployment API key ID and secret:
 <Tabs>
+
 <TabItem value="sh" label="Shell">
+
 Using [cURL](https://curl.se/):
+
 ```sh
 curl --location --request POST "https://auth.astronomer.io/oauth/token" \
         --header "content-type: application/json" \
