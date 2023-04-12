@@ -73,6 +73,8 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 1. Create a dedicated [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) for Astro with billing enabled. Astro uses this account to provision and manage your cluster resources. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it. 
 
+    Ensure the project has a minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 48 and a minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24. To adjust your project's quota limits, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console). To view the quota limits for a project, run `gcloud services enable compute.googleapis.com` in the Google Cloud CLI.
+
 2. Copy the project ID for step 5.
    
 3. In the Cloud UI, click **Launch Google Cloud Shell** on the cluster creation screen.
@@ -87,7 +89,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
    
 8. Click **Create cluster**.
    
-9. Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete. 
+9.  Wait for Astronomer to finish creating the cluster. You'll receive an email notification when the process is complete. 
 
     The cluster is created with a default set of resources that are suitable for most use cases. See [GCP cluster settings](resource-reference-gcp.md#default-cluster-values) for a list of all default resources.
 
