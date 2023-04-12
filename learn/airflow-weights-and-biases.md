@@ -209,7 +209,7 @@ Before feature engineering and training, the data needs to be transformed. This 
 
 ## Step 4: Create a W&B API Key
 
-In your W&B account, create an API key that you will use to connect Airflow to W&B. You can create a key by going to the [authorize](wandb.ai/authorize) page, or under your user settings.
+In your W&B account, create an API key that you will use to connect Airflow to W&B. You can create a key by going to the [authorize](https://wandb.ai/authorize) page, or under your user settings.
 
 ## Step 5: Set up your connections and environment variables
 
