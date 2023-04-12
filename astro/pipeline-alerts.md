@@ -18,13 +18,13 @@ You can configure your Deployments to alert you in Slack or PagerDuty if you hav
 Follow this guide to set up your Slack or PagerDuty to receive alerts from Astro and then configure your Deployment to send alerts in certain circumstances.
 
 :::info
-Pipeline failure alerts are available with the following software versions Astro Runtime versions 7.1.0 and greater. 
+Pipeline failure alerts are available with Astro Runtime versions 7.1.0 and greater. 
 :::
 
 ## Prerequisites
 
 - An [Astro project](develop-project.md).
-- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure task run duration alerts.
+- An [Astro Deployment](create-deployment.md). Your Deployment must run Astro Runtime 7.1.0 or later to configure Pipeline failure alerts.
 - Slack workspace and/or PagerDuty service.
 
 ## Step 1: Configure your communication channel
