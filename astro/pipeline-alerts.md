@@ -30,7 +30,7 @@ Pipeline failure alerts are available with the following software versions Astro
 ## Step 1: Configure your communication channel
 
 <Tabs
-    defaultValue="slack"
+    defaultValue="Slack"
     groupId= "step-1-configure-your-communication-channel"
     values={[
         {label: 'Slack', value: 'Slack'},
