@@ -202,7 +202,6 @@ Before feature engineering and training, the data needs to be transformed. This 
         left join customer_orders on customers.customer_id = customer_orders.customer_id
         left join customer_payments on customers.customer_id = customer_payments.customer_id
     )
-
     select
     *
     from final
@@ -210,9 +209,42 @@ Before feature engineering and training, the data needs to be transformed. This 
 
 ## Step 4: Create a W&B API Key
 
-## Step 5: Set up your connections
+In your W&B account, create an API key that you will use to connect Airflow to W&B. You can create a key by going to the [authorize](wandb.ai/authorize) page, or under your user settings.
+
+## Step 5: Set up your connections and environment variables
+
+This tutorial uses environment variables to create Airflow connections to Snowflake and W&B and configure the Astro Python SDK.
+
+1. Open the `.env` file in your Astro project and paste the following code.
+
+    ```text
+    AIRFLOW_CONN_SNOWFLAKE_DEFAULT='snowflake://<USER_NAME>:<PASSWORD>@/<ROLE_NAME>?account=<ACCOUNT_NAME>&region=<REGION_NAME>&database=<DATABASE_NAME>&warehouse=<WAREHOUSE_NAME>&role=<ROLE>'
+
+    ####WANDB
+    WANDB_API_KEY='xxxxxxxxxxxxxxxxxxxxxxx'
+
+    ###SDK
+    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_URL='s3://local-xcom'
+    AIRFLOW__ASTRO_SDK__XCOM_STORAGE_CONN_ID='minio_local'
+    ```
+
+2. Update the `AIRFLOW_CONN_SNOWFLAKE_DEFAULT` variable with your Snowflake credentials.
+
+3. Update the `WANDB_API_KEY` variable with the API key you created in [Step 4](#step-4-create-a-wb-api-key).
 
 ## Step 6: Create your DAG
+
+1. Create a file in your Astro project `dags` folder called `customer_analytics.py` and copy the following code into the file:
+
+    <CodeBlock language="python">{weights_and_biases}</CodeBlock>
+
+    This DAG completes the following steps:
+
+    - The `extract_and_load` task group contains one task for each CSV in your `include/data` folder that uses the Astro Python SDK `load_file` function to load the data to Snowflake.
+    - The `transform` task group contains two tasks that transform the data using the Astro Python SDK `transform_file` function and the SQL scripts in your `include` folder.
+    - The `features` task is a Python function implemented with the Astro Python SDK `@dataframe` decorator that uses Pandas to create the features needed for the model.
+    - The `train` task is a Python function implemented with the Astro Python SDK `@dataframe` decorator that uses scikit-learn to train a Random Forest classifier model and push the results to W&B.
+    - The `predict` task completes a prediction on the model from W&B.
 
 2. Run the following command to start your project in a local environment:
 
@@ -221,3 +253,13 @@ Before feature engineering and training, the data needs to be transformed. This 
     ```
 
 ## Step 7: Run your DAG and view results
+
+1. Go to the Airflow UI, unpause the `customer_analytics` DAG, and trigger the DAG.
+
+2. The logs in the `train` and `predict` tasks will contain a link to your W&B project which shows plotted results from the training and prediction. 
+
+    ![wandb task logs](/img/guides/wandb_task_logs.png)
+
+    Go to one of the links to view the results in W&B. 
+
+    ![wandb results](/img/guides/wandb_results.png)
