@@ -163,6 +163,7 @@ module.exports = {
         'airflow-snowflake',
         'soda-data-quality',
         'airflow-talend-integration',
+        'airflow-weights-and-biases',
      ],
     },
   ],
