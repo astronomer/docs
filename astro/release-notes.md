@@ -26,6 +26,7 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 ### Additional improvements
 
 - The node type for running Airflow system components on GCP clusters has been reduced from `n2-standard-4`  to `e2-standard-4`.
+- To optimize infrastructure costs for running the Kubernetes executor, Kubernetes Executor worker Pods from different Deployments can now run on the same worker node. This occurs only when the Deployments are in the same Workspace and use the same worker node instance type.
 
 ## April 4, 2023
 
