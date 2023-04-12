@@ -18,9 +18,7 @@ You can configure your Deployments to alert you in Slack or PagerDuty if you hav
 Follow this guide to set up your Slack or PagerDuty to receive alerts from Astro and then configure your Deployment to send alerts in certain circumstances.
 
 :::important
-
 Pipeline failure alerts are available with the following software versions Astro Runtime versions 7.1.0 and greater. 
-
 :::
 
 ## Prerequisites
@@ -35,10 +33,10 @@ Pipeline failure alerts are available with the following software versions Astro
     defaultValue="slack"
     groupId= "step-1-configure-your-communication-channel"
     values={[
-        {label: 'Slack', value: 'slack'},
-        {label: 'PagerDuty', value: 'pagerduty'}
+        {label: 'Slack', value: 'Slack'},
+        {label: 'PagerDuty', value: 'PagerDuty'}
     ]}>
-<TabItem value="slack">
+<TabItem value="Slack">
 
 To set up alerts in Slack, you need to create a Slack app in your Slack workspace. After you've created your app, you can generate a webhook URL in Slack where Astro will send pipeline alerts. 
 
@@ -69,7 +67,7 @@ To set up alerts in Slack, you need to create a Slack app in your Slack workspac
 8. After your webhook is created, copy the webhook URL from the new entry in the **Webhook URLs for your Workspace** table.
 
 </TabItem>
-<TabItem value="pagerduty">
+<TabItem value="PagerDuty">
 
 To set up an alert integration with PagerDuty, you need access to your organization's PagerDuty Service. PagerDuty uses the [Events API v2](https://developer.pagerduty.com/docs/ZG9jOjExMDI5NTgw-events-api-v2-overview#getting-started) to create a new integration that connects your Service with the Astro pipeline alerts.
 
@@ -104,12 +102,12 @@ In the Cloud UI, you can enable alerts from the **Workspace Settings** page.
 6. Add your communication channel information.
 
     <Tabs>
-    <TabItem value="slack">
+    <TabItem value="Slack">
     
     Paste the Webhook URL from your Slack workspace app. If you need to find a URL for an app you've already created, go to your [Slack Apps](https://api.slack.com/apps) page, select your app, and then choose the **Incoming Webhooks** page. 
     
     </TabItem>
-    <TabItem value="pagerduty">
+    <TabItem value="PagerDuty">
 
     Paste the Integration Key from your PagerDuty Integration and select the **Severity** of the alert.
     
