@@ -90,7 +90,25 @@ The CIDR range sizes must be equal to or greater than the default range sizes fo
 
 The data plane is a collection of infrastructure components for Astro that run in your cloud and are fully managed by Astronomer. This includes a central database, storage for Airflow tasks logs, and the resources required for task execution.
 
+Click the following button to open Google Cloud Shell and run a script to activate the data plane:
+
 [![Open in Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.svg)](https://console.cloud.google.com/?cloudshell_git_repo=github.com/astronomer/astro-gcp-onboarding&ephemeral=true&cloudshell_print=README.md)
+
+The script uses your owner role to complete following actions:
+
+- Create a service account role that Astro uses to access the data plane.
+- Enable the following required services for running the data plane:
+
+    - storage-component.googleapis.com
+    - storage-api.googleapis.com
+    - compute.googleapis.com
+    - container.googleapis.com
+    - deploymentmanager.googleapis.com
+    - cloudresourcemanager.googleapis.com
+    - cloudkms.googleapis.com
+    - sqladmin.googleapis.com
+    - servicenetworking.googleapis.com 
+    - dns.googleapis.com
 
 ### Provide setup information to Astronomer
 
