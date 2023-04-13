@@ -227,7 +227,7 @@ Astro [environment variables](environment-variables.md) marked as secrets are st
     from airflow.kubernetes.secret import Secret
     ```
 
-2. Define a Kubernetes `Secret` in your DAG instantiation in the following format:
+2. Define a Kubernetes `Secret` in your DAG instantiation using the following format:
 
     ```python
     secret_env = Secret(deploy_type="env", deploy_target="<SECRET_KEY>", secret="env-secrets", key="<SECRET_KEY>")

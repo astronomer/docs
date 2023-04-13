@@ -67,7 +67,7 @@ After you set an environment variable key, only the environment variable value c
 
 Non-secret environment variables set in the Cloud UI are stored in a database that is managed by Astronomer and hosted in the Astro control plane. When you configure a secret environment variable in the Cloud UI, the following methodology is used:
 
-- Astro generates a manifest that defines a Kubernetes secret, named `env-secrets` containing your variable's key and value.
+- Astro generates a manifest that defines a Kubernetes secret, named `env-secrets`, that contains your variable's key and value.
 - Astro applies this manifest to your Deployment's namespace in the data plane.
 - After the manifest is applied, the key and value of your environment variable are stored in a managed [etcd cluster](https://etcd.io/) at rest within the Astro data plane.
 

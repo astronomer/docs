@@ -5,7 +5,7 @@ id: kubernetes-executor
 description: Run and configure the Kubernetes executor on Astronomer.
 ---
 
-The [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html) creates individual Pods that dynamically delegate work and resources to individual tasks. For each task that needs to run, the executor talks to the Kubernetes API and dynamically launches Pods which terminate when the task is completed.
+The [Kubernetes Executor](https://airflow.apache.org/docs/apache-airflow/stable/executor/kubernetes.html) creates individual Pods that dynamically delegate work and resources to individual tasks. For each task that needs to run, the executor works with the Kubernetes API and dynamically launches Pods which terminate when the task is completed.
 
 You can customize your Kubernetes Pods to scale depending on how many Airflow tasks you're running at a given time. It also means you can configure the following for each individual Airflow task:
 
@@ -13,7 +13,7 @@ You can customize your Kubernetes Pods to scale depending on how many Airflow ta
 - Service accounts
 - Airflow image
 
-To configure these resources for a given tasks's Pod, you specify a `pod_override` in your DAG code. To specify a Pod template for many or all of your tasks, you can write a helper function to construct a `pod_override` in your DAGs or configure a global For more information on configuring Pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
+To configure these resources for a given tasks's Pod, you specify a `pod_override` in your DAG code. To specify a Pod template for many or all of your tasks, you can write a helper function to construct a `pod_override` in your DAGs or configure a global setting. For more information on configuring Pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
 
 ## Prerequisites
 
@@ -222,7 +222,7 @@ with DAG(
     resource_requirements_override_example()
 ```
 
-When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
+When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 1024Mi of memory, as long as that infrastructure is available in your cluster. Once the task finishes, the Pod terminates gracefully.
 
 ## Mount secret environment variables to worker Pods
 
@@ -242,7 +242,7 @@ When this DAG runs, it launches a Kubernetes Pod with exactly 0.5m of CPU and 10
     from airflow.kubernetes.secret import Secret
     ```
 
-3. Define a Kubernetes `Secret` in your DAG instantiation in the following format:
+3. Define a Kubernetes `Secret` in your DAG instantiation using the following format:
 
     ```python
     secret_env = Secret(deploy_type="env", deploy_target="<SECRET_KEY>", secret="<release-name>-env", key="<SECRET_KEY>")
