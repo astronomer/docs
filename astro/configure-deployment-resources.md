@@ -111,7 +111,7 @@ When you delete a Deployment, all infrastructure resources assigned to the Deplo
 
 3. Enter `Delete` and click **Yes, Continue**.
 
-## Next steps
+## See also
 
 - [Set environment variables on Astro](environment-variables.md).
 - [Manage Deployment API keys](api-keys.md).
