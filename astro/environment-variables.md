@@ -164,15 +164,20 @@ You can then use the following Python functions in the top level of your DAG cod
 
     Replace `<default_value>` with a default value to use if Airflow can't find the environment variable. Typically, this is the value you defined for the environment variable in the Cloud UI. 
 
-## Add Airflow configurations using environment variables
-Similarly to how you can set Airflow Connections and Variables using Environment Variables and the methods described above,
-you can also configure some core Airflow settings. As mentioned in [here](develop-project#unsupported-project-configurations),
-you cannot use `airflow.cfg` nor `airflow_local_settings.py` in an Astronomer Deployment. 
+## Set Airflow configurations using environment variables
 
-You can set Airflow Configuration settings via an environmental variable, such as: 
-```dotenv
-AIRFLOW__CORE__PARALLELISM=64
-```
-This would set Airflow's global task parallelism to 64.
-The [Configurations Reference page](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) in Airflow has descriptions of all the Airflow Configuration settings and their Environment Variable key form.
+:::caution
+
+Some Airflow configurations should not be overridden because of how Astro uses them. See [Global environment variables](platform-variables.md) for a list of all non-configurable environment variables.
+
+:::
+
+You can use Astro environment variables to set Airflow environment variables. 
+
+For example, to set `AIRFLOW__CORE__PARALLELISM` in your Deployment, you would configure the following environment variable:
+
+- **Key**: `AIRFLOW__CORE__PARALLELISM`
+- **Value**: `64`
+
+See the [ Airflow Configurations Reference](https://airflow.apache.org/docs/apache-airflow/stable/configurations-ref.html) for a list of all possible configurations.
 
