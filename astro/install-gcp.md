@@ -99,16 +99,16 @@ The script uses your owner role to complete following actions:
 - Create a service account role that Astro uses to access the data plane.
 - Enable the following required services for running the data plane:
 
-    - storage-component.googleapis.com
-    - storage-api.googleapis.com
-    - compute.googleapis.com
-    - container.googleapis.com
-    - deploymentmanager.googleapis.com
-    - cloudresourcemanager.googleapis.com
-    - cloudkms.googleapis.com
-    - sqladmin.googleapis.com
-    - servicenetworking.googleapis.com 
-    - dns.googleapis.com
+    - `storage-component.googleapis.com`
+    - `storage-api.googleapis.com`
+    - `compute.googleapis.com`
+    - `container.googleapis.com`
+    - `deploymentmanager.googleapis.com`
+    - `cloudresourcemanager.googleapis.com`
+    - `cloudkms.googleapis.com`
+    - `sqladmin.googleapis.com`
+    - `servicenetworking.googleapis.com`
+    - `dns.googleapis.com`
 
 ### Provide setup information to Astronomer
 
