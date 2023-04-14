@@ -283,4 +283,4 @@
 
 # redirect for consolidated docs
 
-/astro/manage-organization /astro/configure-idp#manage-organizations
+/astro/manage-organization /astro/configure-idp

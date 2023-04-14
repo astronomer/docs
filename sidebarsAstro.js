@@ -104,11 +104,10 @@ module.exports = {
           label: "Migrate to Astro",
           items: ["migrate-mwaa", "migrate-gcc"],
         },
-        "manage-organization",
         {
           type: "category",
           label: "User access",
-          items: ["add-user", "user-permissions", "configure-idp"],
+          items: ["configure-idp","add-user", "user-permissions", "manage-domains"],
         },
         {
           type: "category",
