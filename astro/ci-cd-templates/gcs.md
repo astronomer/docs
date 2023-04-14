@@ -46,65 +46,55 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
 8. Add the following code to `main.py`:
 
-  ```python
-  import os
-  import tarfile
-  import subprocess
-  from google.cloud import storage
-  def untar(filename):
-      # open file
-      file = tarfile.open(filename)
-      # extracting file
-      file.extractall('/tmp/astro/')
-      file.close()
-  def run_command(cmd):
-      print("running command: ", cmd)
-      p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-      out, err = p.communicate()
-      print(out)
-      print(err)
-      p.kill()
-  def download_to_local(bucket_name, gcs_folder, local_dir=None):
-      """
-      Download the contents of a folder directory
-      Args:
-          bucket_name: the name of the gcs bucket
-          gcs_folder: the folder path in the gcs bucket
-          local_dir: a relative or absolute directory path in the local file system
-      """
-      ## create a storage client to access GCS objects
-      storage_client = storage.Client()
-      source_bucket = storage_client.bucket(bucket_name)
-      ## get a list of all the files in the bucket folder
-      blobs = source_bucket.list_blobs(prefix=gcs_folder)
-      ## download each of the dag to local
-      for blob in blobs:
-          if blob.name.endswith('/'):
-              continue
-          target = blob.name if local_dir is None \
-              else os.path.join(local_dir, os.path.relpath(blob.name, gcs_folder))
-          print(target)
-          if not os.path.exists(os.path.dirname(target)):
-              os.makedirs(os.path.dirname(target))
-          blob.download_to_filename(target)
-      print("downloaded file")
-      
-  def astro_deploy(event, context):
-      """Triggered by a change to a Cloud Storage bucket.
-      Args:
-          event (dict): Event payload.
-          context (google.cloud.functions.Context): Metadata for the event.
-      """
-      ## download dag files to temp local storage
-      download_to_local('my-demo-bucket', 'dags', '/tmp/astro/dags')
-      
-      ## download astro cli binary and move to /tmp/astro
-      download_to_local('my-demo-bucket', 'cli_binary', '/tmp/astro')
-      untar('/tmp/astro/astro_cli.tar.gz')
-      ## deploy to astro
-      os.chdir('/tmp/astro')
-      run_command('echo y | ./astro dev init')
-      run_command('./astro deploy --dags')
+```python
+import os
+import tarfile
+import subprocess
+from pathlib import Path
+
+from google.cloud import storage
+from google.cloud.functions import Context
+
+BUCKET = os.getenv("BUCKET", "my-demo-bucket")
+
+
+def untar(filename: str, destination: str) -> None:
+    with tarfile.open(filename) as file:
+        file.extractall(destination)
+
+
+def run_command(cmd: str) -> None:
+    p = subprocess.Popen("set -x; " + cmd, shell=True)
+    p.communicate()
+
+
+def download_to_local(bucket_name: str, gcs_folder: str, local_dir: str = None) -> None:
+    """Download the contents of a folder directory
+    :param bucket_name: the name of the gcs bucket
+    :param gcs_folder: the folder path in the gcs bucket
+    :param local_dir: a relative or absolute directory path in the local file system
+    """
+    storage_client = storage.Client()
+    source_bucket = storage_client.bucket(bucket_name)
+    blobs = source_bucket.list_blobs(prefix=gcs_folder)
+    for blob in blobs:
+        path = Path(local_dir) / blob.name if local_dir else Path(blob.name)
+        if not path.is_dir():
+            path.parent.mkdir(parents=True, exist_ok=True)
+            blob.download_to_filename(path.absolute())
+
+
+def astro_deploy(event: dict, context: Context) -> None:
+    """Triggered by a change to a Cloud Storage bucket.
+    :param event: Event payload.
+    :param context: Metadata for the event.
+    """
+    os.chdir('/tmp/astro')
+    download_to_local(BUCKET, 'dags', './dags')
+    download_to_local(BUCKET, 'cli_binary', '.')
+    untar('./astro_cli.tar.gz', '.')
+    run_command('echo y | ./astro dev init')
+    run_command('./astro deploy --dags')
   ```
 
 9. If you haven't already, deploy your complete Astro project to your Deployment. See [Deploy code](deploy-code.md).
