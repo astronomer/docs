@@ -3,6 +3,7 @@ sidebar_label: "Set up SSO"
 title: "Set up authentication and single sign on for Astro"
 id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
+toc_min_heading_level: 2
 ---
 
 import Tabs from '@theme/Tabs';
