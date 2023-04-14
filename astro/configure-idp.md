@@ -3,7 +3,7 @@ sidebar_label: "Set up SSO"
 title: "Set up authentication and single sign on for Astro"
 id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
-toc_min_heading_level: 2
+toc_max_heading_level: 2
 ---
 
 import Tabs from '@theme/Tabs';
@@ -291,7 +291,7 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
     
 18. In **SSO Configuration**, click **Activate**. You are redirected to OneLogin to test your configuration. After you have successfully authenticated, you are redirected to Astro. Then, click **Activate SSO**.
     
-### Step 4: Copy your SSO bypass link
+### Step 2: Copy your SSO bypass link
 
 :::caution
 
@@ -307,7 +307,7 @@ An SSO bypass link allows you to authenticate to your Organization without using
 
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
 
-#### Step 5: Assign users to your OneLogin Astro application
+#### Step 3: Assign users to your OneLogin Astro application
 
 1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Astro**.
 
