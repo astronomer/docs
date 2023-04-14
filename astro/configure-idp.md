@@ -3,7 +3,7 @@ sidebar_label: "Set up SSO"
 title: "Set up authentication and single sign on for Astro"
 id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
-toc_max_heading_level: 2
+toc_max_heading_level: 3
 ---
 
 import Tabs from '@theme/Tabs';
@@ -51,13 +51,13 @@ Single Sign On (SSO) authorization allows users to log in using their company cr
 
 This section provides setup steps for setting up Okta as your IdP on Astro. After completing this setup, all users in your organization can use Okta to log in to Astro.
 
-### Prerequisites
+#### Prerequisites
 
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - An [Okta account](https://www.okta.com/) with administrative access.
 - At least one [verified domain](manage-domains.md).
 
-### Step 1: Create a SAML-based connection to Okta
+#### Step 1: Create a SAML-based connection to Okta
 
 To set up Okta as your IdP, you will create a Security Assertion Markup Language (SAML) connection to Okta.
 
@@ -114,7 +114,7 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 13. In **SSO Configuration**, click **Activate**. You are redirected to Okta to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 14. Click **Activate SSO**.
 
-### Step 2: Copy your SSO bypass link
+#### Step 2: Copy your SSO bypass link
 
 :::caution
 
@@ -130,7 +130,7 @@ An SSO bypass link allows you to authenticate to your Organization without using
 
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
 
-### Step 3: Assign users to your Okta application
+#### Step 3: Assign users to your Okta application
 
 On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, see [Assign applications to users](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
 
@@ -140,7 +140,7 @@ On the page for your Okta app integration, open the **Assignments** tab. Ensure 
 
 This section provides setup steps for setting up Azure AD as your IdP on Astro. After completing this setup, your organization's users can use Azure AD to log in to Astro.
 
-### Prerequisites
+#### Prerequisites
 
 To integrate Azure as your IdP for Astro you must have:
 
@@ -149,14 +149,14 @@ To integrate Azure as your IdP for Astro you must have:
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - At least one [verified domain](manage-domains.md).
 
-### Step 1: Register Astro as an application on Azure
+#### Step 1: Register Astro as an application on Azure
 
 Follow [Microsoft Documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app) to register a new app. When configuring the application, set the following values:
 
 - **Name** and **Supported account types**: Set these according to your organization's needs.
 - **Redirect URI**: Select **Web** and specify `https://auth.astronomer.io/login/callback`.
 
-### Step 2: Create a client secret
+#### Step 2: Create a client secret
 
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#add-credentials) to create a client secret for your new application. Make note of the client ID and secret value for Step 5.
 
@@ -166,7 +166,7 @@ If you configure an expiring secret, make sure to record the expiration date and
 
 :::
 
-### Step 3: Configure API permissions
+#### Step 3: Configure API permissions
 
 Follow [Microsoft's documentation](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-configure-app-access-web-apis#add-permissions-to-access-web-apis) to add the following **Delegated** permissions to **Microsoft Graph**:
 
@@ -181,7 +181,7 @@ If your Azure Active Directory is configured to require admin approval on API pe
 
 :::
 
-### Step 4: Create an SSO connection to Azure AD
+#### Step 4: Create an SSO connection to Azure AD
 
 1. Assign yourself to Astro from Azure AD. See [Assign users and groups to an Application](https://learn.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal?pivots=portal).
 2. In the Cloud UI, click **Settings**, then click **Authentication**.
@@ -200,7 +200,7 @@ If your Azure Active Directory is configured to require admin approval on API pe
 7. In **SSO Configuration**, click **Activate**. You are redirected to Azure AD to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 8. Click **Activate SSO**.
 
-### Step 5: Copy your SSO bypass link
+#### Step 5: Copy your SSO bypass link
 
 :::caution
 
@@ -217,7 +217,7 @@ An SSO bypass link allows you to authenticate to your Organization without using
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
 
 
-### Step 6: Assign users to your Azure AD application
+#### Step 6: Assign users to your Azure AD application
 
 Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
 
@@ -229,13 +229,13 @@ When a user assigned to the application accesses Astro, they will be brought aut
 
 This section provides setup steps for setting up OneLogin as your IdP on Astro. After completing this setup, your organization's users can use OneLogin to log in to Astro.
 
-### Prerequisites
+#### Prerequisites
 
 - A [OneLogin account](https://www.onelogin.com/) with administrative access.
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - At least one [verified domain](manage-domains.md).
 
-### Step 1: Create a SAML-based connection to OneLogin
+#### Step 1: Create a SAML-based connection to OneLogin
 
 To set up OneLogin as your IdP, you will create a Security Assertion Markup Language (SAML) connection to OneLogin.
 
@@ -291,7 +291,7 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
     
 18. In **SSO Configuration**, click **Activate**. You are redirected to OneLogin to test your configuration. After you have successfully authenticated, you are redirected to Astro. Then, click **Activate SSO**.
     
-### Step 2: Copy your SSO bypass link
+#### Step 2: Copy your SSO bypass link
 
 :::caution
 
