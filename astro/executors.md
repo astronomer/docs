@@ -106,7 +106,7 @@ On Astro, you can configure Kubernetes executor in the following ways:
 - Customize individual tasks, including CPU and memory requests, using a `pod_override` configuration. 
 - Change the worker node type on which your Pods run.
 
-By default, each task on Astro runs in a dedicated Kubernetes Pod with 1 CPU and 256Mi of memory. These Pods run on a worker node in your Astro data plane. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
+By default, each task on Astro runs in a dedicated Pod with up to 1 CPU and 1Gi of memory. These Pods run on a worker node in your Astro data plane. If a worker node can't run any more Pods, Astro automatically provisions a new worker node to begin running any queued tasks in new Pods.
 
 ### Customize a task and Kubernetes Pod
 
