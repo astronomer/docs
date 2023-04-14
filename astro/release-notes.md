@@ -173,7 +173,7 @@ For Organization Owners, this migration has the following additional effects:
 - You can now use an SSO bypass link to log in to Astro if your SSO connection is disrupted.
 - Your Organization now has a list of owned email domains, and any users logging into Astro with one of those domains will be redirected to your configured identity provider.
 
-For more information about how these changes can affect the Astro log in experience, see the [Login FAQ](log-in-to-astro.md#frequently-asked-questions). To configure authentication behavior, see [Manage an Organization on Astro](manage-organization.md).
+For more information about how these changes can affect the Astro log in experience, see the [Login FAQ](log-in-to-astro.md#frequently-asked-questions). To configure authentication behavior, see [Configure SSO](configure-idp.md#advanced-setup).
 
 ### New Hosted regions available
 

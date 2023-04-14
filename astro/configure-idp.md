@@ -112,13 +112,8 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 12. Click **Create**. Your Okta integration appears as an entry in **SSO Configuration**.
 13. In **SSO Configuration**, click **Activate**. You are redirected to Okta to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 14. Click **Activate SSO**.
-15. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
 
-### Step 2: Assign users to your Okta application
-
-On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, see [Assign applications to users](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
-
-### Step 3: Copy your SSO bypass link
+### Step 2: Copy your SSO bypass link
 
 :::caution
 
@@ -133,6 +128,10 @@ An SSO bypass link allows you to authenticate to your Organization without using
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
+
+### Step 3: Assign users to your Okta application
+
+On the page for your Okta app integration, open the **Assignments** tab. Ensure that all users who will use Astro are assigned to the integration. For more information, see [Assign applications to users](https://help.okta.com/en/prod/Content/Topics/users-groups-profiles/usgp-assign-apps.htm).
 
 </TabItem>
 
@@ -199,15 +198,8 @@ If your Azure Active Directory is configured to require admin approval on API pe
 6. Click **Create**. Your Azure AD integration appears as an entry in **SSO Configuration**.
 7. In **SSO Configuration**, click **Activate**. You are redirected to Azure AD to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 8. Click **Activate SSO**.
-9. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
 
-### Step 5: Assign users to your Azure AD application
-
-Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
-
-When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
-
-### Step 6: Copy your SSO bypass link
+### Step 5: Copy your SSO bypass link
 
 :::caution
 
@@ -222,6 +214,13 @@ An SSO bypass link allows you to authenticate to your Organization without using
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
+
+
+### Step 6: Assign users to your Azure AD application
+
+Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/active-directory/manage-apps/assign-user-or-group-access-portal) to assign users from your organization to your new application.
+
+When a user assigned to the application accesses Astro, they will be brought automatically to Azure AD after entering their email in the Cloud UI.
 
 </TabItem>
 
@@ -291,16 +290,6 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
     
 18. In **SSO Configuration**, click **Activate**. You are redirected to OneLogin to test your configuration. After you have successfully authenticated, you are redirected to Astro. Then, click **Activate SSO**.
     
-20. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
-
-#### Step 3: Assign users to your OneLogin Astro application
-
-1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Astro**.
-
-2. Click **Users** in the left menu.
-
-3. Make sure that all users who need to use Astro are assigned to the Astronomer application.
-
 ### Step 4: Copy your SSO bypass link
 
 :::caution
@@ -316,6 +305,14 @@ An SSO bypass link allows you to authenticate to your Organization without using
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
+
+#### Step 5: Assign users to your OneLogin Astro application
+
+1. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Astro**.
+
+2. Click **Users** in the left menu.
+
+3. Make sure that all users who need to use Astro are assigned to the Astronomer application.
 
 </TabItem>
 
@@ -393,15 +390,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
     
 22. Click **Activate SSO**.
     
-23. Copy the provided **SSO bypass link** and store it somewhere safe. See [Bypass single sign-on](manage-organization.md#bypass-single-sign-on).
-
-### Step 2: Assign users to your Ping Identity application
-
-Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
-
-When a user assigned to the application accesses Astro, they are automatically signed in to Ping Identity after entering their email in the Cloud UI.
-
-### Step 3: Copy your SSO bypass link
+### Step 2: Copy your SSO bypass link
 
 :::caution
 
@@ -416,6 +405,12 @@ An SSO bypass link allows you to authenticate to your Organization without using
 2. In the **SSO Bypass Link** field, click **Copy**. Save this link for when you need to log in to Astro without using SSO.
 
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
+
+### Step 3: Assign users to your Ping Identity application
+
+Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
+
+When a user assigned to the application accesses Astro, they are automatically signed in to Ping Identity after entering their email in the Cloud UI.
 
 </TabItem>
 
