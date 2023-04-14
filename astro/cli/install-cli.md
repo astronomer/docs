@@ -94,11 +94,11 @@ By default, the Astro CLI uses Docker as its container management engine. Howeve
 
 1. Open Windows PowerShell as an administrator and then run the following command:
 
-```sh
-winget install -e --id Astronomer.Astro
-```
+    ```sh
+    winget install -e --id Astronomer.Astro
+    ```
 
-To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command specifies the latest available version of the Astro CLI:
+    To install a specific version of the Astro CLI, specify the version you want to install at the end of the command. For example, running the following command specifies the latest available version of the Astro CLI:
 
 <pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}`}</code></pre>
 
