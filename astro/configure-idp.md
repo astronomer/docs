@@ -321,13 +321,13 @@ If you don't want to maintain an SSO bypass link, click **Delete**. You can alwa
 
 This section provides setup steps for setting up Ping Identity as your IdP on Astro. After completing this setup, your organization's users can use Ping Identity to log in to Astro.
 
-### Prerequisites
+#### Prerequisites
 
 - A [Ping Identity account](https://www.pingidentity.com/) with administrative access.
 - [Organization Owner](user-permissions.md) privileges in the Organization you're configuring.
 - At least one [verified domain](manage-domains.md).
 
-### Step 1: Configure Ping Identity
+#### Step 1: Configure Ping Identity
 
 1. In the Cloud UI, click **Settings**, then click **Authentication**.
    
@@ -391,7 +391,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
     
 22. Click **Activate SSO**.
     
-### Step 2: Copy your SSO bypass link
+#### Step 2: Copy your SSO bypass link
 
 :::caution
 
@@ -407,7 +407,7 @@ An SSO bypass link allows you to authenticate to your Organization without using
 
 If you don't want to maintain an SSO bypass link, click **Delete**. You can always regenerate a link if you need one in the future. 
 
-### Step 3: Assign users to your Ping Identity application
+#### Step 3: Assign users to your Ping Identity application
 
 Assign users from your organization to your new application. See [Managing user groups](https://docs.pingidentity.com/bundle/pingcentral-19/page/awu1616596133840.html).
 
