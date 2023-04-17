@@ -219,7 +219,7 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
 
 ## Use secret environment variables with the KubernetesPodOperator
 
-Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running the KubernetesPodOperator, mount the secret to the Pod running the task.
+Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the Kubernetes executor, you pull the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
 
 1. Add the following import to your DAG file:
    
