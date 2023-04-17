@@ -230,7 +230,7 @@ Astro [environment variables](environment-variables.md) marked as secrets are st
 2. Define a Kubernetes `Secret` in your DAG instantiation using the following format:
 
     ```python
-    secret_env = Secret(deploy_type="env", deploy_target="<SECRET_KEY>", secret="env-secrets", key="<SECRET_KEY>")
+    secret_env = Secret(deploy_type="env", deploy_target="<VARIABLE_KEY>", secret="env-secrets", key="<VARIABLE_KEY>")
     namespace = conf.get("kubernetes", "NAMESPACE")
     ```
    
