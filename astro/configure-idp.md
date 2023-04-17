@@ -70,15 +70,15 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
     - **Automatic Membership**: Set the default role for users who join your Organization through Okta and without an explicit invite from Astro.
 
 4. Copy the **Single Sign On URL** and **Audience URI (SP ENTITY ID)** for the next step.
-
 5. Open a new tab and go to Okta. In the Okta Admin Console, create a SAML app integration. See [Create SAML app integrations using AIW](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm). Complete the following fields:
 
+    - **App logo**: (Optional) Use the [official Astronomer monogram asset](https://github.com/astronomer/docs/tree/main/static/img/assets/astronomer-monogram-rgb-600px.png) hosted on GitHub.
     - **Single sign on URL**: `<your-sso-url>`
     - **Audience URI (SP Entity ID)**: `<your-audience-uri>`
     - **Name ID format**: `Unspecified`
     - **Application username**: `Email`
     - **Update application username on**: `Create and update`
-
+  
 6. In the **Advanced Settings** section of your configuration, set the following values:
 
     - **Response**: `Signed`
@@ -113,6 +113,7 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 12. Click **Create**. Your Okta integration appears as an entry in **SSO Configuration**.
 13. In **SSO Configuration**, click **Activate**. You are redirected to Okta to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 14. Click **Activate SSO**.
+15. (Optional) 
 
 #### Step 2: Copy your SSO bypass link
 
