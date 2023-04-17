@@ -12,9 +12,9 @@ id: airflow-dbt-cloud
 import CodeBlock from '@theme/CodeBlock';
 import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt-cloud/airflow_dbt_simple.py';
 
-[dbt Cloud](https://getdbt.com/) is a managed service providing a hosted architecture to run dbt, a tool that helps users build interdependent SQL models for in-warehouse data transformation, using ephemeral compute of data warehouses. 
+[dbt Cloud](https://getdbt.com/) is a managed service that provides a hosted architecture to run dbt, a tool that helps you build interdependent SQL models for in-warehouse data transformation.
 
-The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/dbt-cloud) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in the whole data ecosystem. Airflow also gives you fine-grained control over dbt tasks such that teams have observability over every step in their dbt models.
+The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/dbt-cloud) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in your data ecosystem. Airflow also gives your team better observability over every step in your dbt models.
 
 :::info
 
@@ -67,21 +67,21 @@ An Astro project contains all of the files you need to run Airflow locally.
 
 1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
 
-2. Create a new connection named `dbt_conn` and choose the `dbt Cloud` connection type. Enter the following information:
+2. Create a new connection named `dbt_conn` and choose the `dbt Cloud` connection type. Configure the following values for the connection:
 
-    - Tenant: The URL under which your API cloud is hosted. This defaults to `cloud.getdbt.com` if left empty.
-    - Account ID: (optional) The default dbt account to use with this connection.
-    - API Token: A dbt [User Token](https://docs.getdbt.com/docs/dbt-cloud-apis/user-tokens).
+    - **Tenant**: The URL under which your API cloud is hosted. The default value is `cloud.getdbt.com`.
+    - **Account ID**: (Optional) The default dbt account to use with this connection.
+    - **API Token**: A dbt [user token](https://docs.getdbt.com/docs/dbt-cloud-apis/user-tokens).
 
 ## Step 3: Configure a dbt Cloud job
 
-In the dbt Cloud UI, create one dbt Cloud job. The contents of this job do not matter for this tutorial. Optionally, you can use the jaffle shop example from dbt's [Quickstart documentation](https://docs.getdbt.com/docs/quickstarts/overview). Write down the dbt Cloud `job_id` for use in the next step.
+In the dbt Cloud UI, create one dbt Cloud job. The contents of this job do not matter for this tutorial. Optionally, you can use the jaffle shop example from dbt's [Quickstart documentation](https://docs.getdbt.com/docs/quickstarts/overview). Copy the dbt Cloud `job_id` for use in the next step.
 
 ## Step 4: Write a dbt Cloud DAG
 
 1. In your `dags` folder, create a file called `check_before_running_dbt_cloud_job.py`.
 
-2. Copy the following code into the file and provide the `JOB_ID` of your dbt Cloud job:
+2. Copy the following code into the file, making sure to replace `<your dbt Cloud job id>` with the `job_id` you copied.
 
     <CodeBlock language="python">{airflow_dbt_simple}</CodeBlock>
 
@@ -92,11 +92,7 @@ In the dbt Cloud UI, create one dbt Cloud job. The contents of this job do not m
 
 3. Run the DAG and verify that the dbt Cloud job ran in the dbt Cloud UI.
 
-:::info
-
-The full code for this example, along with other DAGs that implement the dbt Cloud provider, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags?providers=dbt+Cloud&page=1). 
-
-:::
+    The full code for this example, along with other DAGs that implement the dbt Cloud provider, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags?providers=dbt+Cloud&page=1). 
 
 :::info
 
@@ -112,7 +108,3 @@ If you are orchestrating long-running dbt Cloud jobs using Airflow, you may bene
 - [DbtCloudRunJobTrigger](https://registry.astronomer.io/providers/astronomer-providers/modules/dbtcloudrunjobtrigger): Trigger class used in deferrable dbt Cloud operators.
 - [DbtCloudJobRunSensorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/dbtcloudjobrunsensorasync): Asynchronously checks the status of dbt Cloud job runs.
 - [DbtCloudRunJobOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/dbtcloudrunjoboperatorasync): Executes a dbt Cloud job asynchronously and waits for the job to reach a terminal status before completing successfully.
-
-## Conclusion
-
-Congratulations! You've run a DAG which uses the dbt Cloud provider to orchestrate a job run in dbt Cloud.

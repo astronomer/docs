@@ -47,7 +47,7 @@ To get the most out of this tutorial, make sure you have an understanding of:
 ## Prerequisites
 
 - The [Astro CLI](https://docs.astronomer.io/astro/cli).
-- Access to a data warehouse supported by dbt Core. View the [dbt documentation](https://docs.getdbt.com/docs/supported-data-platforms) for an up-to-date list of adapters. This tutorial uses a local [PostgreSQL](https://www.postgresql.org/) database.
+- Access to a data warehouse supported by dbt Core. See [dbt documentation](https://docs.getdbt.com/docs/supported-data-platforms) for all supported warehouses. This tutorial uses a local [PostgreSQL](https://www.postgresql.org/) database.
 
 You do not need to have dbt Core installed locally in order to complete this tutorial.
 
@@ -62,18 +62,18 @@ An Astro project contains all of the files you need to run Airflow locally.
     $ astro dev init
     ```
 
-2. Open the `Dockerfile` in your Airflow project directory and add the following lines at the end of the file:
+2. Open the `Dockerfile` in your Astro project directory and add the following lines to the end of the file:
 
     ```text
     # install dbt into a virtual environment
-    # replace dbt-postgres with the adapter you need
+    # replace dbt-postgres with another supported adapter if you're using a different warehouse type
     RUN python -m venv dbt_venv && source dbt_venv/bin/activate && \
     pip install --no-cache-dir dbt-postgres && deactivate
     ```
 
     This code runs a bash command when the Docker image is built that creates a virtual environment called `dbt_venv` inside of the Astro CLI scheduler container. The `dbt-postgres` package, which also contains `dbt-core`, is installed in the virtual environment. If you are using a different data warehouse, replace `dbt-postgres` with the adapter package for your data warehouse.
 
-3. Add the [Astro dbt provider package](https://github.com/astronomer/astronomer-cosmos) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to your `requirements.txt` file. This tutorial uses the Astro Python SDK to load and analyze data transformed by dbt.
+3. Add the [Astro dbt provider package](https://github.com/astronomer/astronomer-cosmos) and the [Astro Python SDK](https://astro-sdk-python.readthedocs.io/en/stable/index.html) to your Astro project `requirements.txt` file. This tutorial uses the Astro Python SDK to load and analyze data transformed by dbt.
 
     ```text
     astronomer-cosmos
@@ -91,7 +91,7 @@ An Astro project contains all of the files you need to run Airflow locally.
 This tutorial uses an Airflow DAG to orchestrate dbt Core jobs that calculate the percentage of solar and renewable energy capacity in different years for a selected country.
 
 1. [Download the CSV file](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) from GitHub.
-2. Save the downloaded CSV file in the `include` directory of your Airflow project.
+2. Save the downloaded CSV file in the `include` directory of your Astro project.
 
 This tutorial uses a subset of the original data. The full data source provided by Open Power System Data can be found [here](https://doi.org/10.25832/national_generation_capacity/2020-10-01).
 
@@ -109,13 +109,13 @@ If you are using a different data warehouse, your commands to create the databas
 
 ## Step 4: Create your dbt models
 
-In this tutorial we will use an example dbt job that consists of two dbt models. The first model, called `select_country`, will select the data for a country you select. The second model, called `create_pct`, will use the table created by the first model to calculate the percentage of renewable and solar energy capacity in that country.
+In this tutorial we will use an example dbt job that consists of two dbt models. The first model, called `select_country`, will get the data for a selected country. The second model, called `create_pct`, will use the table created by the first model to calculate the percentage of renewable and solar energy capacity in that country.
 
-1. Create a folder called `dbt` in your `dags` directory. 
+1. Create a folder called `dbt` in your `dags` folder. 
 
-2. In the `dbt` directory, create a sub-directory called `my_energy_project`.
+2. In the `dbt` folder, create a folder called `my_energy_project`.
 
-3. Within the `my_energy_project` directory, create a YAML file called `dbt-project.yml`. Use the following YAML configuration to create a dbt project called `my_energy_project` which has its models in the `models` sub-directory.
+3. In the `my_energy_project` folder, create a YAML file called `dbt-project.yml`. Add the following YAML configuration to the file. This will be used to create a dbt project called `my_energy_project`.
 
     ```yml
     name: 'my_energy_project'
@@ -146,9 +146,9 @@ In this tutorial we will use an example dbt job that consists of two dbt models.
       country_code: "FR"
     ```
 
-4. Within `my_energy_project` create a sub-directory called `models`.
+4. In `my_energy_project`, create a folder called `models`.
 
-5. Create a SQL file named `select_country.sql` within the `models` folder. Copy the following dbt model into the file. The country for which data will be selected is retrieved from a variable called `country_code` which we'll inject from the Airflow DAG.
+5. Create a SQL file named `select_country.sql` in the `models` folder. Copy the following dbt model into the file. The country for which data will be retrieved is determined by the `country_code` variable which you'll inject from your Airflow DAG.
 
     ```sql
     select 
@@ -157,7 +157,7 @@ In this tutorial we will use an example dbt job that consists of two dbt models.
     where "COUNTRY" = '{{ var("country_code") }}'
     ```
 
-6. Create a SQL file named `create_pct.sql` within the `models` folder. Copy the following dbt model into the file:
+6. Create a SQL file named `create_pct.sql` in the `models` folder. Copy the following dbt model into the file:
 
     ```sql
     select 
@@ -197,7 +197,7 @@ You should now have the following structure within your Astro project:
 
 3. Create a new connection named `db_conn`. Select the connection type and supplied parameters based on the data warehouse you are using. For a Postgres connection, enter the following information:
 
-    - Connection ID: `db_conn`.
+    - **Connection ID**: `db_conn`.
     - Connection Type: `Postgres`.
     - Host: Your Postgres host address.
     - Schema: Your Postgres database (`energy_db`). 
@@ -207,13 +207,13 @@ You should now have the following structure within your Astro project:
 
 :::info
 
-For some databases you might need to add the [relevant provider package](https://registry.astronomer.io/) to requirements.txt and restart Airflow in order to have the correct connection type available.
+If a connection type for your database isn't available, you might need to add the [relevant provider package](https://registry.astronomer.io/) to `requirements.txt` and run `astro dev restart` to have the connection type available.
 
 :::
 
-## Step 6: Write a dbt DAG
+## Step 6: Write your Airflow DAG
 
-The DAG used in this tutorial shows how you can use the Astro dbt provider to create tasks from existing dbt models and have those task be embedded within other actions in your data ecosystem.
+The DAG you'll write uses the Astro dbt provider to create tasks from existing dbt models and embeds those tasks within other actions in your data ecosystem.
 
 1. In your `dags` folder, create a file called `my_energy_dag`.
 
@@ -221,22 +221,22 @@ The DAG used in this tutorial shows how you can use the Astro dbt provider to cr
 
     <CodeBlock language="python">{cosmos_dag}</CodeBlock>
 
-    This DAG consists of 2 tasks defined with the Astro Python SDK and one `DbtTaskGroup`:
+    This DAG consists of two tasks and one task group:
 
     - The `load_file` task uses the [Astro Python SDK `load file` operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/load_file.html) to load the contents of the local CSV file into the data warehouse.
     - The `transform_data` task group is created from the dbt models. Using the models defined in Step 4, the task group will contain two nested task groups with two tasks each, one for `dbt run`, the other for `dbt test`.
-    - The `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to run an analysis on the final table created through the dbt models using `pandas` and to log the results.
+    - The `log_data_analysis` task uses the [Astro Python SDK dataframe operator](https://astro-sdk-python.readthedocs.io/en/stable/astro/sql/operators/dataframe.html) to run an analysis on the final table using `pandas` and logs the results.
 
-    The `DbtTaskGroup` function of the Astro dbt provider package automatically scans the `dbt` folder for dbt projects and creates a task group (`transform_data` in this example) containing Airflow tasks running and testing the project's models. Additionally, the provider can infer the model dependency within the dbt project and will set the Airflow task dependencies accordingly.
+    The `DbtTaskGroup` function of the Astro dbt provider package automatically scans the `dbt` folder for dbt projects and creates a task group (`transform_data` in this example) containing Airflow tasks for running and testing your dbt models. Additionally, the provider can infer dependencies within the dbt project and will set your Airflow task dependencies accordingly.
 
-3. (Optional) Choose which country's data to analyze by specifying your desired `country_code` in the `dbt_args` parameter of the DbtTaskGroup. Note that this [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) only contains data for several European countries.
+3. (Optional) Choose which country's data to analyze by specifying your desired `country_code` in the `dbt_args` parameter of the DbtTaskGroup. See the [dataset](https://github.com/astronomer/learn-tutorials-data/blob/main/subset_energy_capacity.csv) for all available country codes.
 
 
-4. Run the DAG manually by clicking on the play button and view the DAG in the graph view (double click on the task groups in order to expand them). 
+4. Run the DAG manually by clicking the play button and view the DAG in the graph view. Double click the task groups in order to expand them and see all tasks. 
 
     ![Cosmos DAG graph view](/img/guides/cosmos_dag_graph_view.png)
 
-5. Navigate to the logs of the `log_data_analysis` task to see the proportional solar and renewable energy capacity development in the country you selected.
+5. Open the logs of the `log_data_analysis` task to see the proportional solar and renewable energy capacity development in the country you selected.
 
     ![Energy Analysis logs](/img/guides/cosmos_energy_analysis_logs.png)
 
@@ -247,11 +247,6 @@ The DbtTaskGroup class populates an Airflow task group with Airflow tasks create
 
 :::
 
-:::tip
-
-Learn more about the Astro dbt provider in the [Astro dbt provider documentation](https://astronomer.github.io/astronomer-cosmos/).
-
-:::
 
 ## Alternative ways to run dbt Core with Airflow
 
@@ -259,22 +254,21 @@ While using the Astro dbt provider is recommended, there are several other ways 
 
 ### Using the BashOperator
 
-You can use the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) to execute specific dbt commands. Note that it is recommended to create a virtual environment with `dbt-core` and the dbt adapter for your database installed as there often are package conflicts between dbt and other packages.
+You can use the [BashOperator](https://registry.astronomer.io/providers/apache-airflow/modules/bashoperator) to execute specific dbt commands. It's recommended to run `dbt-core` and the dbt adapter for your database in a virtual environment because there often are dependency conflicts between dbt and other packages.
 
 The DAG below uses the BashOperator to activate the virtual environment and execute `dbt_run` for a dbt project.
 
 <CodeBlock language="python">{airflow_dbt_bashoperator}</CodeBlock>
 
-Using the `BashOperator` to run `dbt run` and other dbt commands be useful during development. However, running dbt at the project-level has several issues:
+Using the `BashOperator` to run `dbt run` and other dbt commands be useful during development. However, running dbt at the project level has a couple of issues:
 
-- Low observability into what execution state the project is in.
+- There is low observability into what execution state the project is in.
 - Failures are absolute and require all models in a project to be run again, which can be costly.
 
-Astronomer recommends to use the Astro dbt provider as shown in the tutorial above, whenever possible.
 
 ### Using a manifest file
 
-An alternative way to gain more visibility into the steps dbt is running in each task is to use a dbt-generated `manifest.json` file. This file is generated in the target directory of your `dbt` project and contains its full representation. For more information on this file, see the [dbt documentation](https://docs.getdbt.com/reference/dbt-artifacts/).
+Using a dbt-generated `manifest.json` file gives you more visibility into the steps dbt is running in each task. This file is generated in the target directory of your `dbt` project and contains its full representation. For more information on this file, see the [dbt documentation](https://docs.getdbt.com/reference/dbt-artifacts/).
 
 You can learn more about a manifest-based dbt and Airflow project structure, view example code, and read about the `DbtDagParser` in a 3-part blog post series on [Building a Scalable Analytics Architecture With Airflow and dbt](https://www.astronomer.io/blog/airflow-dbt-1/) ([Part 2](https://www.astronomer.io/blog/airflow-dbt-2/), [Part 3](https://www.astronomer.io/blog/airflow-dbt-3/)). 
 
