@@ -1255,9 +1255,9 @@ def clear(
 
 ## Use pre-built XCom backends
 
-If you want to store your XComs in either AWS S3 or GCP Cloud Storage, you can use the pre-built custom XCom backends in the [Astronomer provider](https://registry.astronomer.io/providers/astronomer-providers/versions/latest) package. In addition to saving your XComs in a remote storage, these XCom backends also contain custom serialization methods for `pandas.DataFrame` and `datetime.date` objects.
+The [Astronomer provider package](https://registry.astronomer.io/providers/astronomer-providers/versions/latest) includes alternative XComs backends for AWS S3 and GCP Cloud Storage. In addition to saving your XComs in a remote storage, these XCom backends contain custom serialization methods for `pandas.DataFrame` and `datetime.date` objects, so you don't have to write them yourself.
 
-To use these Astronomer's XCom backends, follow these steps:
+To use these Astronomer's XCom backends, modify the core tutorial with the following changes:
 
 1. Add the Astronomer provider to your `requirements.txt` file:
 
