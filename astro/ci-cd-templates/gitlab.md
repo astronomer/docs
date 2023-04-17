@@ -13,7 +13,7 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 ## Prerequisites
 
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) hosted in a GitLab repository.
+- An [Astro project](develop-project.md#create-an-astro-project) hosted in a GitLab repository.
 - An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md) for each Deployment.
 

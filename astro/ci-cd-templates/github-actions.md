@@ -24,7 +24,7 @@ For more information on each template or to configure your own, see [Template ov
 
 ## Prerequisites
 
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) hosted in a GitHub repository.
+- An [Astro project](develop-project.md#create-an-astro-project) hosted in a GitHub repository.
 - An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - Access to [GitHub Actions](https://github.com/features/actions).

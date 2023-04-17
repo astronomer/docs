@@ -37,9 +37,37 @@ The Astronomer Registry includes:
 
 ## Prerequisites
 
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project)
 - The [Astro CLI](cli/overview.md)
 - [Docker](https://www.docker.com/products/docker-desktop)
+
+## Create an Astro project
+
+To create a new Astro project, run the following command in an empty directory:
+
+```sh
+astro dev init
+```
+
+This command generates the following files in the directory:
+
+```text
+.
+├── .env # Local environment variables
+├── dags # Where your DAGs go
+│   ├── example-dag-basic.py # Example DAG that showcases a simple ETL data pipeline
+│   └── example-dag-advanced.py # Example DAG that showcases more advanced Airflow features, such as the TaskFlow API
+├── Dockerfile # For the Astro Runtime Docker image, environment variables, and overrides
+├── include # For any other files you'd like to include
+├── plugins # For any custom or community Airflow plugins
+│   └── example-plugin.py
+├── tests # For any DAG unit test files to be run with pytest
+│   └── test_dag_integrity.py # Test that checks for basic errors in your DAGs
+├── airflow_settings.yaml # For your Airflow connections, variables and pools (local only)
+├── packages.txt # For OS-level packages
+└── requirements.txt # For Python packages
+```
+
+Use the rest of this document to learn more about modifying each of these folders and files.
 
 ## Build and run a project locally
 
@@ -377,7 +405,7 @@ The following setup has been validated only with a single SSH key. You might nee
 #### Prerequisites
 
 - The [Astro CLI](cli/overview.md)
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
+- An [Astro project](develop-project.md#create-an-astro-project).
 - Custom Python packages that are [installable with pip](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 - A private GitHub repository for each of your custom Python packages
 - A [GitHub SSH private key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) authorized to access your private GitHub repositories
@@ -473,7 +501,7 @@ To complete this setup, you’ll specify your privately hosted Python packages i
 
 #### Prerequisites
 
-- An [Astro project](create-first-dag.md#step-1-create-an-astro-project)
+- An [Astro project](develop-project.md#create-an-astro-project)
 - A private PyPI index with a corresponding username and password
 
 #### Step 1: Add Python packages to your Astro project
