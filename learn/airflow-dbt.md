@@ -27,7 +27,7 @@ For a tutorial on how to use dbt Cloud with Airflow see [Orchestrate dbt Cloud w
 
 :::info
 
-The DAG used in this tutorial is accessible in the Astronomer registry ADD LINK LATER and the full Astro project can be cloned from [this repository](https://github.com/astronomer/astro-dbt-provider-tutorial-example). 
+The full Astro project used in this tutorial can be cloned from [this repository](https://github.com/astronomer/astro-dbt-provider-tutorial-example). 
 
 :::
 
@@ -198,12 +198,12 @@ You should now have the following structure within your Astro project:
 3. Create a new connection named `db_conn`. Select the connection type and supplied parameters based on the data warehouse you are using. For a Postgres connection, enter the following information:
 
     - **Connection ID**: `db_conn`.
-    - Connection Type: `Postgres`.
-    - Host: Your Postgres host address.
-    - Schema: Your Postgres database (`energy_db`). 
-    - Login: Your Postgres login username.
-    - Password: Your Postgres password.
-    - Port: Your Postgres port.
+    - **Connection Type**: `Postgres`.
+    - **Host**: Your Postgres host address.
+    - **Schema**: Your Postgres database (`energy_db`). 
+    - **Login**: Your Postgres login username.
+    - **Password**: Your Postgres password.
+    - **Port**: Your Postgres port.
 
 :::info
 

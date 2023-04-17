@@ -14,7 +14,7 @@ import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt-cl
 
 [dbt Cloud](https://getdbt.com/) is a managed service that provides a hosted architecture to run dbt, a tool that helps you build interdependent SQL models for in-warehouse data transformation.
 
-The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/dbt-cloud) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in your data ecosystem. Airflow also gives your team better observability over every step in your dbt models.
+The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/dbt-cloud) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in your data ecosystem.
 
 :::info
 
@@ -92,7 +92,10 @@ In the dbt Cloud UI, create one dbt Cloud job. The contents of this job do not m
 
 3. Run the DAG and verify that the dbt Cloud job ran in the dbt Cloud UI.
 
-    The full code for this example, along with other DAGs that implement the dbt Cloud provider, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags?providers=dbt+Cloud&page=1). 
+    The full code for this example, along with other DAGs that implement the dbt Cloud provider, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/dbt_cloud_operational_check/versions/3.0.0). 
+
+
+Congratulations! You've run a DAG which uses the dbt Cloud provider to orchestrate a job run in dbt Cloud.
 
 :::info
 
