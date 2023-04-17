@@ -26,7 +26,7 @@ Updates to the Airflow REST API are released in new Airflow versions and new rel
 
 - A Deployment on Astro.
 - A [Deployment API key](api-keys.md).
-- [cURL](https://curl.se/) or [requests](https://docs.python-requests.org/en/latest/index.html)
+- [cURL](https://curl.se/) or, if using Python, the [Requests library](https://docs.python-requests.org/en/latest/index.html).
 - The [Astro CLI](cli/overview.md).
 
 ## Step 1: Retrieve an access token and Deployment URL
@@ -38,12 +38,12 @@ Calling the Airflow REST API for a Deployment requires:
 
 ### Retrieve an access token
 
-To retrieve an Astro access token, run the following API request with your Deployment API key ID and secret:
 <Tabs groupId="retrieve-an-access-token">
 
 <TabItem value="sh" label="Shell">
 
-Using [cURL](https://curl.se/):
+To retrieve an Astro access token, run the following API request with your Deployment API key ID and secret using [cURL](https://curl.se/):
+
 
 ```sh
 curl --location --request POST "https://auth.astronomer.io/oauth/token" \
@@ -56,8 +56,10 @@ curl --location --request POST "https://auth.astronomer.io/oauth/token" \
 ```
 </TabItem>
 <TabItem value="python" label="Python">
-Using the [`requests`](https://docs.python-requests.org/en/latest/index.html) library:
-```
+
+To retrieve an Astro access token, use the [`requests`](https://docs.python-requests.org/en/latest/index.html) library to make your API request. For example, your code might look like the following:
+
+```python
 def get_api_token() -> str:
   r = requests.post(
       "https://auth.astronomer.io/oauth/token",
@@ -71,9 +73,9 @@ def get_api_token() -> str:
   r.raise_for_status()
   return r.json()
 ```
+
 </TabItem>
 </Tabs>
-  
 :::info
 
 The token is only valid for 24 hours. If you need to call the Airflow API only once, you can retrieve a single 24-hour access token at `https://cloud.astronomer.io/token` in the Cloud UI.
