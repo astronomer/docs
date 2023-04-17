@@ -17,6 +17,14 @@ id: release-notes
 
 This document provides a summary of all changes made to the [Astro CLI](cli/overview.md). For general product release notes, go to [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro CLI 1.13.2
+
+Release date: April 11, 2023
+
+### Bug fixes
+
+- The `dags/` folder is added `.dockerignore` file whenever a deploy is cancled during an image build. This can cause DAGs to disapear if you disable dags-only deploy. CLI v1.13.2 will check for and remove `dags/` from the `.dockerignore` if you are deploying to a Deployment which has dags-only deploy disabled. CLI v1.13.2 will fix any issues you are having with `dags/` folder being added to the `.dockerignore`.
+
 ## Astro CLI 1.13.0
 
 Release date: March 30, 2023
