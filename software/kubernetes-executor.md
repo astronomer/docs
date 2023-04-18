@@ -13,7 +13,7 @@ You can customize your Kubernetes Pods to scale depending on how many Airflow ta
 - Service accounts
 - Airflow image
 
-To configure these resources for a given tasks's Pod, you specify a `pod_override` in your DAG code. To specify a Pod template for many or all of your tasks, you can write a helper function to construct a `pod_override` in your DAGs or configure a global setting. For more information on configuring Pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
+To configure these resources for a given task's Pod, you specify a `pod_override` in your DAG code. To specify a Pod template for many or all of your tasks, you can write a helper function to construct a `pod_override` in your DAGs or configure a global setting. For more information on configuring Pod template values, reference the [Kubernetes documentation](https://kubernetes.io/docs/concepts/workloads/pods/#pod-templates).
 
 ## Prerequisites
 
