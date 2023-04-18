@@ -29,6 +29,8 @@ You can now manage Astro Workspaces from the Astro CLI using the following new c
 - [`astro workspace update`](cli/astro-workspace-update.md)
 - [`astro workspace delete`](cli/astro-workspace-delete.md)
 
+To automate Workspace management, you can run these commands using a [Workspace API token](workspace-api-tokens.md).
+
 ## Astro CLI 1.13.2
 
 Release date: April 11, 2023
