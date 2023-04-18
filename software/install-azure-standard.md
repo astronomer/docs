@@ -324,6 +324,7 @@ nginx:
   ingressAnnotations:
     # required for azure load balancer post Kubernetes 1.22
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
+
 astronomer:
   houston:
     config:
