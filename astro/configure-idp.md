@@ -10,16 +10,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {siteVariables} from '@site/src/versions';
 
-Including Single Sign-On (SSO) authorization, there are 4 ways that users can to authenticate to Astro:
+This guide provides the steps for integrating identity providers on Astro to enable Single Sign-On (SSO) for your users. After you complete the integration for your organization:
 
-- Basic authentication (username and password)
-- Google social login
-- GitHub social login
-- 3rd-party identity provider (IdP) login
-
-This guide provides the steps for integrating identity providers on Astro to enable SSO for your users. After you complete the integration for your organization:
-
-- Users will automatically be authenticated to Astro if they're already logged in to your IdP.
+- Users will automatically be authenticated to Astro if they're already logged in to your identity provider (IdP).
 - Users will no longer have to repeatedly login and remember credentials for their account.
 - You will have complete ownership over credential configuration and management on Astro.
 - You can enforce multi-factor authentication (MFA) for users.
@@ -27,9 +20,17 @@ This guide provides the steps for integrating identity providers on Astro to ena
 
 To manage Organization users after you have configured SSO, see [Manage Astro users](add-user.md).
 
-## SSO authorization identity providers
+In addition to SSO authorization, there are 3 ways that users can to authenticate to Astro:
 
-Single Sign On (SSO) authorization allows users to log in using their company credentials, managed via an identity provider (IdP). This provides a streamlined login experience for your Astro users, as they are able to leverage the same credentials across multiple applications. In addition, this provides improved security and control for organizations to manage access from a single source. Astro supports integrations with the following IdPs:
+- Basic authentication (username and password)
+- Google social login
+- GitHub social login
+
+To limit users to only a subset of these options, see [Restrict authentication options](#restrict-authentication-options)
+
+## Supported SSO identity providers
+
+Single Sign On (SSO) authorization allows users to log in using their company credentials, managed through an IdP. This provides a streamlined login experience for your Astro users, as they are able to leverage the same credentials across multiple applications. In addition, this provides improved security and control for organizations to manage access from a single source. Astro supports integrations with the following IdPs:
 
 - [Azure Active Directory (AD)](https://azure.microsoft.com/en-us/services/active-directory/)
 - [Okta](https://www.okta.com/)
@@ -37,6 +38,12 @@ Single Sign On (SSO) authorization allows users to log in using their company cr
 - [Ping Identity](https://www.pingidentity.com/en.html)
 
 ## Configure your SSO identity provider
+
+At a high level, to configure an SSO connection to your IdP you will:
+
+1. Create a connection between Astro and your IdP.
+2. Map a managed domain to your SSO connection.
+3. Invite users to Astro through your IdP.
 
 <Tabs
     defaultValue="Okta"
