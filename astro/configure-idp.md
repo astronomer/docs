@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Set up SSO"
-title: "Set up authentication and single sign on for Astro"
+title: "Set up authentication and single sign-on for Astro"
 id: configure-idp
 description: Configure federated authentication from a variety of third party identity providers on Astro.
 toc_max_heading_level: 3
@@ -76,7 +76,7 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
     - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Okta.
     - **Automatic Membership**: Set the default role for users who join your Organization through Okta and without an explicit invite from Astro.
 
-4. Copy the **Single Sign On URL** and **Audience URI (SP ENTITY ID)** for the next step.
+4. Copy the **Single Sign-On URL** and **Audience URI (SP ENTITY ID)** for the next step.
 5. Open a new tab and go to Okta. In the Okta Admin Console, create a SAML app integration. See [Create SAML app integrations using AIW](https://help.okta.com/en/prod/Content/Topics/Apps/Apps_App_Integration_Wizard_SAML.htm). Complete the following fields:
 
     - **App logo**: (Optional) Use the [official Astronomer monogram asset](https://github.com/astronomer/docs/tree/main/static/img/assets/astronomer-monogram-rgb-600px.png) hosted on GitHub.
@@ -110,7 +110,7 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
   :::
 
 8. Complete the remainder of the setup as documented in Okta until you finish creating your integration.
-9. On the page for your Okta app integration, click **View Setup Instructions**. Copy the values for **Single Sign-on URL** and **X.509 Certificate** that appear. 
+9. On the page for your Okta app integration, click **View Setup Instructions**. Copy the values for **Single Sign-On URL** and **X.509 Certificate** that appear. 
 10. Assign yourself to the Astro app integration from Okta. See [Assign an app integration to a user](https://help.okta.com/en-us/Content/Topics/Provisioning/lcm/lcm-assign-app-user.htm).
 11. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
 
@@ -120,7 +120,6 @@ To set up Okta as your IdP, you will create a Security Assertion Markup Language
 12. Click **Create**. Your Okta integration appears as an entry in **SSO Configuration**.
 13. In **SSO Configuration**, click **Activate**. You are redirected to Okta to test your configuration. After you have successfully authenticated, you are redirected to Astro.
 14. Click **Activate SSO**.
-15. (Optional) 
 
 #### Step 2: Copy your SSO bypass link
 
@@ -255,7 +254,7 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
     - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to OneLogin.
     - **Automatic Membership**: Set the default role for users who join your Organization through OneLogin and without an explicit invite from Astro.
 
-4. Copy the **Single Sign On URL** and **Audience URI (SP ENTITY ID)** for Step 8.
+4. Copy the **Single Sign-On URL** and **Audience URI (SP ENTITY ID)** for Step 8.
 
 5. Open a new tab and go to OneLogin. In the OneLogin administrator dashboard, click **Applications** > **Applications** and then click **Add App**.  
 
@@ -347,7 +346,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
     - **SSO Domain(s)**: Enter the verified domain(s) that you want to map to Ping Identity.
     - **Automatic Membership**: Set the default role for users who join your Organization through Ping Identity and without an explicit invite from Astro.
 
-4. Copy the **Single Sign On URL** and **Audience URI (SP ENTITY ID)** for Step 8.
+4. Copy the **Single Sign-On URL** and **Audience URI (SP ENTITY ID)** for Step 8.
 
 5. Open a new tab and go to PingIdentity. In the PingIdentity Administrator Console, click **Connections** in the left pane, and then click the **+** icon next to **Applications**.
 
@@ -362,7 +361,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 9.  Click **Save**.
 
-10. Click **Edit** on the **Overview** page, and then enter `<your-sso-url>` in the **Signon URL** field. Then, click **Save**.
+10. Click **Edit** on the **Overview** page, and then enter `<your-sso-url>` in the **Sign on URL** field. Then, click **Save**.
 
 11. Click the **Configuration** tab, and then click **Edit**.
 
@@ -370,7 +369,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 13. On the **Configuration** page, click **Download Signing Certificate** and select `X509 PEM (.crt)` to download the X.509 certificate for your application.
 
-14. Copy and save the URL in the **Single Signon Service** field.
+14. Copy and save the URL in the **Single Sign-on Service** field.
 
 15. Click the **Attribute Mappings** tab, click **Edit**, and add the following attributes, using the capitalization shown in both columns:
 
@@ -390,7 +389,7 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
     
 19. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
 
-    - **Identity Provider Single Sign-on URL**: Enter the value you copied from the **Single Signon Service** field.
+    - **Identity Provider Single Sign-on URL**: Enter the value you copied from the **Single Sign-on Service** field.
     - **X.509 Certificate**: Enter the X.509 Certificate that you downloaded.
 
 20. Click **Create**. Your Ping Identity integration appears as an entry in **SSO Configuration**.
@@ -435,9 +434,9 @@ Contact [Astronomer support](https://cloud.astronomer.io/support) for assistance
 
 ### Restrict authentication options 
 
-By default, users have access to all possible authentication methods when logging into Astro. You can remove specific authentication options, such as GitHub or Google, so that users can use only the methods that your Organization wants to support, such as your third party identity provider.
+By default, users can choose any of the [available authentication methods](#SSO-authorization-identity-providers) when logging into Astro. You can remove specific authentication options, such as GitHub or Google, so that users can use only the methods that your Organization wants to support, like your third party identity provider.
 
-To restrict which authentication options are available on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).
+To restrict available authentication options on Astro for your organization, contact [Astronomer support](https://cloud.astronomer.io/support).
 
 ### Regenerate an SSO bypass link
 

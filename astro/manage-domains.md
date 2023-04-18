@@ -24,7 +24,7 @@ Typically, a change in the DNS record takes only minutes to propagate; however, 
 
 :::
 
-After your domain is verified, you can map the domain to an SSO connection. Mapping a domain ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. See [Configure SSO](#configure-your-sso-identity-provider).
+After your domain is verified, you can map the domain to an SSO connection. Mapping a domain ensures that all users with the same email address domain have the same authentication experience when they log in to Astro. You can later use this mapping to enforce specific login methods for users with emails from a specific domain. See [Configure SSO](configure-idp.md#configure-your-sso-identity-provider).
 
 ## Delete a domain
 
