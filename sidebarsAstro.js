@@ -341,10 +341,13 @@ module.exports = {
           type: "category",
           label: "astro workspace",
           items: [
+            "cli/astro-workspace-create",
+            "cli/astro-workspace-delete",
             "cli/astro-workspace-list",
             "cli/astro-workspace-service-account",
             "cli/astro-workspace-switch",
             "cli/astro-workspace-team",
+            "cli/astro-workspace-update",
             "cli/astro-workspace-user-add",
             "cli/astro-workspace-user-list",
             "cli/astro-workspace-user-remove",
