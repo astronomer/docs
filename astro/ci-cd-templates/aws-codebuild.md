@@ -13,7 +13,7 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 ## Prerequisites
 
-- An [Astro project](create-project.md) hosted in a Git repository that AWS CodeBuild can access. See [Plan a build in AWS Codebuild](https://docs.aws.amazon.com/codebuild/latest/userguide/planning.html).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) hosted in a Git repository that AWS CodeBuild can access. See [Plan a build in AWS Codebuild](https://docs.aws.amazon.com/codebuild/latest/userguide/planning.html).
 - An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md) for each Deployment.
 - Access to AWS CodeBuild. See [Getting started with CodeBuild](https://docs.aws.amazon.com/codebuild/latest/userguide/getting-started-overview.html).

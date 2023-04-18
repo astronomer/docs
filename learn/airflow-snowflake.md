@@ -220,7 +220,7 @@ When running SQL statements from Airflow operators, you can store the SQL code i
 
     - Creates three tables simultaneously using the [SnowflakeOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflakeoperator).
     - Loads data into two of the tables that were created.
-    - Runs data quality checks on the data to ensure that no erroneous data is moved to production. These checks are structured with [task groups](task-groups.md) that include column checks using the [SQLColumnCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator) and table checks using the [SQLTableCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator). The task group structure logically groups tasks which simplifies setting dependencies and collapses a set of tasks visually in the Airflow UI.
+    - Runs data quality checks on the data to ensure that no erroneous data is moved to production. These checks are structured with [task groups](task-groups.md) that include column checks using the [SQLColumnCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcolumncheckoperator) and table checks using the [SQLTableCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqltablecheckoperator). The task group structure logically groups tasks which simplifies setting dependencies and collapses a set of tasks visually in the Airflow UI.
     - Copies data into the production table.
     - Deletes the tables to clean up the example.
 
@@ -283,10 +283,10 @@ The [Snowflake provider package](https://registry.astronomer.io/providers/snowfl
 - [SnowflakeToSlackOperator](https://registry.astronomer.io/providers/snowflake/modules/snowflaketoslackoperator): An operator that executes a SQL statement in Snowflake and sends the result to Slack.
 - [SnowflakeHook](https://registry.astronomer.io/providers/snowflake/modules/snowflakehook): A client to interact with Snowflake which is commonly used when building custom operators interacting with Snowflake.
 
-The [Common SQL provider package](https://registry.astronomer.io/providers/common-sql) contains [SQL check operators](airflow-sql-data-quality.md) that you can use to perform data quality checks against Snowflake data, namely the:
+The [Common SQL provider package](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/) contains [SQL check operators](airflow-sql-data-quality.md) that you can use to perform data quality checks against Snowflake data, namely the:
 
-- [SQLColumnCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator): Performs a data quality check against columns of a given table.
-- [SQLTableCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator): Performs a data quality check against a given table.
+- [SQLColumnCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcolumncheckoperator): Performs a data quality check against columns of a given table.
+- [SQLTableCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqltablecheckoperator): Performs a data quality check against a given table.
 
 The [Astronomer Providers](https://github.com/astronomer/astronomer-providers) package contains deferrable modules built and maintained by Astronomer, including the [SnowflakeOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakeoperatorasync) and the [SnowflakeHookAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/snowflakehookasync).
 

@@ -1,7 +1,7 @@
 import Tabs from "@theme/Tabs";
 import TabItem from "@theme/TabItem";
 
-A _Deployment_ is an Astro Runtime environment that is powered by the core components of Apache Airflow. This is where you can deploy and run DAGs, configure worker resources, and view metrics.
+A _Deployment_ is an Astro Runtime environment that is powered by the core components of Apache Airflow. In a Deployment, you can deploy and run DAGs, configure worker resources, and view metrics.
 
 Before you create your Deployment, copy the following information from your source Airflow environment:
 
@@ -24,8 +24,8 @@ Before you create your Deployment, copy the following information from your sour
 
 3. Complete the following fields:
 
-    - **Name**: Enter the same name as your source Airflow environment.
-    - **Astro Runtime**: Select the Runtime version that's based on the Airflow version that you use in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
+    - **Name**: Enter the name of your source Airflow environment.
+    - **Astro Runtime**: Select the Runtime version that's based on the Airflow version in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
 
     | Airflow Version | Runtime Version        |
     |-----------------|------------------------|
@@ -35,10 +35,10 @@ Before you create your Deployment, copy the following information from your sour
 
     > *The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
 
-    - **Description**: Optional. Enter a description for your Deployment.
-    - **Cluster**: Select the Astro cluster in which you want to create this Deployment.
+    - **Description**: (Optional) Enter a description for your Deployment.
+    - **Cluster**: Select the Astro cluster where you want to create this Deployment.
     - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-worker-queues.md).
-    - **Max Tasks Per Worker**: Optional. Set maximum number of tasks that a single worker can run at a time.
+    - **Max Tasks Per Worker**: (Optional) Set maximum number of tasks that a single worker can run at a time.
     - **Worker Count**: Set the same minimum and maximum worker count as in source Airflow environment.
     - **Scheduler Count**: Set to the same number of schedulers as in your source Airflow environment.
     - **Scheduler Size**: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
@@ -49,7 +49,7 @@ Before you create your Deployment, copy the following information from your sour
     | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
     | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
 
-    > *Some of the following recommendations for CPU and memory are smaller than what you would have in the equivalent source environment. Although you may not need more CPU or memory than what's recommended here, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+> *Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource usage on Astro. See [Configure Deployment](/astro/configure-deployment-resources.md)
 
 4. Click **Create Deployment**.
 5. Specify any system-level environment variables as Astro environment variables. See [Environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui).
@@ -58,7 +58,7 @@ Before you create your Deployment, copy the following information from your sour
 </TabItem>
 <TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
 
-1. On your local machine, create a file called `config.yaml` in a directory with the same name as the source Airflow environment. 
+1. On your local machine, create a directory with the name of the source Airflow environment. In this directory, create a file called `config.yaml`. 
 2. Open `config.yaml` and add the following:
 
    ```yaml
@@ -90,8 +90,8 @@ Before you create your Deployment, copy the following information from your sour
 
     - `<true-or-false>` / `<variable-name>` / `<variable-value>`: Set system-level environment variables for your Deployment and specify whether they should be secret. Repeat this configuration in the file for any additional variables you need to set.
     - `<deployment-name>`: Enter the same name as your source Airflow environment.
-    - `<deployment-description>`: Optional. Enter a description for your Deployment.
-    - `<runtime-version>`: Select the Runtime version that's based on the Airflow version that you use in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
+    - `<deployment-description>`: (Optional) Enter a description for your Deployment.
+    - `<runtime-version>`: Select the Runtime version that's based on the Airflow version in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
 
     | Airflow Version | Runtime Version        |
     |-----------------|------------------------|
@@ -109,7 +109,7 @@ Before you create your Deployment, copy the following information from your sour
     | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
     | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
 
-    > *Some of the following recommendations for CPU and memory are smaller than what you would have in the equivalent source environment. Although you may not need more CPU or memory than what's recommended here, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+    > *Some of the following recommendations for CPU and memory are smaller than what you have in the equivalent source environment. Although you might not need more CPU or memory than what's recommended, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
 
     - `<scheduler-count>`: Specify the same number of schedulers as in your source Airflow environment.
     - `<cluster-name>`: Specify name of the Astro cluster in which you want to create this Deployment.
@@ -153,7 +153,7 @@ Before you create your Deployment, copy the following information from your sour
         - myalertemail@cosmicenergy.org
     ```
 
-4. Run the following command to push your configuration up to Astro and create your Deployment:
+4. Run the following command to push your configuration to Astro and create your Deployment:
 
     ```sh
     astro deployment create --deployment-file config.yaml
