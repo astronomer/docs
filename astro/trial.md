@@ -73,6 +73,8 @@ After you've created your Organization and Workspace, your new Workspace homepag
 
 1. Create a dedicated [Google Cloud project](https://cloud.google.com/resource-manager/docs/creating-managing-projects) for Astro with billing enabled. Astro uses this account to provision and manage your cluster resources. For security reasons, the install process is not currently supported on a Google Cloud project that has other tooling running in it. 
 
+    Ensure the project has a minimum [CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 48 and a minimum [N2_CPU](https://cloud.google.com/compute/quotas#cpu_quota) quota of 24. To adjust your project's quota limits, see [Managing your quota using the Cloud console](https://cloud.google.com/docs/quota#managing_your_quota_console). To view the quota limits for a project, run `gcloud services enable compute.googleapis.com` in the Google Cloud CLI.
+
 2. Copy the project ID for step 5.
    
 3. In the Cloud UI, click **Launch Google Cloud Shell** on the cluster creation screen.
@@ -221,7 +223,7 @@ After you've created your Organization and Workspace, your new Workspace homepag
 After Astronomer creates your cluster, you're ready to start deploying and running DAGs on Astro. Complete the following tasks to get your first DAG up and running on Astro: 
 
 1. [Install the Astro CLI](cli/install-cli.md). The Astro CLI is an open source command line interface for developing Airflow DAGs on your local machine and deploying them to Astro
-2. [Create an Astro project](create-project.md). An Astro project contains the set of files that you need to run Airflow on Astro. It includes dedicated folders for your Python packages and DAGs.
+2. [Create an Astro project](create-first-dag.md#step-1-create-an-astro-project). An Astro project contains the set of files that you need to run Airflow on Astro. It includes dedicated folders for your Python packages and DAGs.
 3. [Create a Deployment](create-deployment.md). A Deployment is an Astro Runtime environment that is powered by the core components of Apache Airflow and where you can run DAGs.
 4. [Deploy your Astro project](deploy-code.md). Use the Astro CLI to push code to a Deployment on Astro in just a few minutes.
 

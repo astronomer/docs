@@ -2,6 +2,7 @@
 title: "Orchestrate dbt with Airflow"
 sidebar_label: "dbt"
 id: airflow-dbt
+sidebar_custom_props: { icon: 'img/integrations/dbt.png' }
 ---
 
 <head>
@@ -21,9 +22,9 @@ Organizations can use Airflow to orchestrate and execute dbt models as DAGs. Run
 In this guide, you'll:
 
 - Use the [dbt Cloud Provider](https://registry.astronomer.io/providers/dbt-cloud) to orchestrate dbt Cloud with Airflow.
-- Review two common use cases for orchestrating dbt Core with Airflow with the `BashOperator`: 
-    - At the [project](https://docs.getdbt.com/docs/building-a-dbt-project/projects) level and, 
-    - At the [model](https://docs.getdbt.com/docs/building-a-dbt-project/building-models) level. 
+- Review two common use cases for orchestrating dbt Core with Airflow with the `BashOperator`:
+  - At the [project](https://docs.getdbt.com/docs/building-a-dbt-project/projects) level and,
+  - At the [model](https://docs.getdbt.com/docs/building-a-dbt-project/building-models) level.
 - Learn how to extend the model-level use case by automating changes to a dbt model.
 
 :::info
@@ -63,7 +64,7 @@ In the `DbtCloudRunJobOperator` you must provide the dbt connection ID as well a
 
 :::info
 
-The full code for this example, along with other DAGs that implement the dbt Cloud Provider, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags?providers=dbt+Cloud&page=1).
+The full code for this example, along with other DAGs that implement the dbt Cloud Provider, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags?providerName=dbt+Cloud).
 
 :::
 
@@ -75,7 +76,7 @@ When orchestrating dbt Core with Airflow, a straightforward DAG design is to run
 
 For this example you'll use the `BashOperator`, which simply executes a shell command, because it lets us run specific dbt commands. The primary dbt interface is the command line, so the `BashOperator` is one of the best tools for managing dbt. You can execute `dbt run` or `dbt test` directly in Airflow as you would with any other shell.
 
-> **Note:** The code for this example can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/dbt-basic).
+> **Note:** The code for this example can be found on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/dbt-basic).
 
 The DAG below uses the `BashOperator` to run a dbt project and the models' associated tests, each in a single Task:
 
@@ -98,7 +99,7 @@ Our DAG will read the `manifest.json` file, parse it, create the necessary `Bash
 
 :::info
 
-The code for this example can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/dbt-advanced).
+The code for this example can be found on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/dbt-advanced).
 
 :::
 
@@ -291,7 +292,7 @@ When used as shown in the sample code below, the utility provides a shortcut to 
 with dag:
 
     start_empty = EmptyOperator(task_id='start')
-    
+
     dbt_seed = BashOperator(
         task_id='dbt_seed',
         bash_command=f'dbt {DBT_GLOBAL_CLI_FLAGS} seed --profiles-dir {DBT_PROJECT_DIR} --project-dir {DBT_PROJECT_DIR}'
@@ -312,7 +313,6 @@ with dag:
 
 Using the jaffleshop demo dbt project, the parser creates the following DAG including two task groups for the `dbt_run` and `dbt_test` tasks:
 
-
 One important fact to note here is that the `DbtDagParser` does not include a `dbt compile` step that updates the `manifest.json` file. Since the Airflow Scheduler parses the DAG file periodically, having a compile step as part of the DAG creation could incur some unnecessary load for the scheduler. Astronomer recommends adding a `dbt compile` step either as part of a CI/CD pipeline, or as part of a pipeline run in production before the Airflow DAG is run.
 
 With regards to the `dbt test` runs:
@@ -322,4 +322,4 @@ With regards to the `dbt test` runs:
 
 ## Conclusion
 
-To recap, in this guide you have learned about dbt Cloud and dbt Core, how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest. For a more detailed discussion on trade-offs, limitations, and adding dbt Core or dbt Cloud to a full ELT pipeline, see our blog posts. To see more examples of how to use dbt and Airflow to build pipelines, check out our [dbt DAGs on the Registry](https://registry.astronomer.io/dags/?query=dbt&badges=certified).
+To recap, in this guide you have learned about dbt Cloud and dbt Core, how to create and productionize dbt tasks in Airflow, and how to automatically create dbt Core tasks based on a manifest. For a more detailed discussion on trade-offs, limitations, and adding dbt Core or dbt Cloud to a full ELT pipeline, see our blog posts. To see more examples of how to use dbt and Airflow to build pipelines, check out our [dbt DAGs on the Registry](https://registry.astronomer.io/dags?query=dbt).

@@ -84,7 +84,7 @@ The following options are available to connect Astro to AWS resources on a priva
 
 If you want to continue with the second option, you'll additionally need:
 
-- A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. You must ensure it does not overlap with the AWS VPC(s) that you will be peering with later. The default CIDR range is `172.20.0.0/19`.
+- A CIDR block (RFC 1918 IP Space) no smaller than a `/20` range. You must ensure it does not overlap with the AWS VPC(s) that you will be peering with later. The default CIDR range is `172.20.0.0/20`.
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
 - The IP addresses of your DNS servers.
 
@@ -159,7 +159,7 @@ After creating the AWS account, provide Astronomer with the following informatio
 - Your preferred maximum node count.
 - An instance type for the Airflow metadata database.
 
-If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` and a default `db.r5.large` Amazon RDS instance type. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
+If you do not specify configuration preferences, Astronomer creates a cluster with `m5.xlarge` nodes and a maximum node count of 20 in `us-east-1` and a default `db.m6g.large` Amazon RDS instance type. For information on all supported regions, configurations, and defaults, see [AWS cluster configurations](resource-reference-aws.md).
 
 To provision additional clusters after completing your initial installation, see [Create a cluster](create-cluster.md).
 
@@ -220,7 +220,7 @@ If any AWS resources are on a private network, you can choose between two option
 
 If you want to continue with the second option, you'll additionally need to provide Astronomer support with:
 
-- A CIDR block (RFC 1918 IP Space) no smaller than a `/19` range. You must ensure it does not overlap with the AWS VPC(s) that you will be peering with later. The default CIDR range is `172.20.0.0/19`.
+- A CIDR block (RFC 1918 IP Space) no smaller than a `/20` range. You must ensure it does not overlap with the AWS VPC(s) that you will be peering with later. The default CIDR range is `172.20.0.0/20`.
 - VPC Name / ID for peering with Astronomer (accessible through the [AWS VPC console](https://console.aws.amazon.com/vpc/)).
 - The IP addresses of your DNS servers.
 

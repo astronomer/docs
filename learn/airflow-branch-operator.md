@@ -208,7 +208,7 @@ Finally, note that with the `@task.branch` decorator your Python function *must*
 
 :::info
 
-More examples using the `@task.branch` decorator, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/example-branch-python-dop-operator-3).
+More examples using the `@task.branch` decorator, can be found on the [Astronomer Registry](https://legacy.registry.astronomer.io/dags/example-branch-python-dop-operator-3).
 
 :::
 
@@ -312,7 +312,7 @@ In this DAG there are two short circuits, one which always returns `True` and on
 
 :::info
 
-Another example using the ShortCircuitOperator, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/example-short-circuit-operator).
+Another example using the ShortCircuitOperator, can be found on the [Astronomer Registry](https://legacy.registry.astronomer.io/dags/example-short-circuit-operator).
 
 :::
 
@@ -320,7 +320,7 @@ Another example using the ShortCircuitOperator, can be found on the [Astronomer 
 
 Airflow offers a few other branching operators that work similarly to the BranchPythonOperator but for more specific contexts: 
 
-- [BranchSQLOperator](https://registry.astronomer.io/providers/common-sql/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
+- [BranchSQLOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/branchsqloperator): Branches based on whether a given SQL query returns `true` or `false`.
 - [BranchDayOfWeekOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdayofweekoperator): Branches based on whether the current day of week is equal to a given `week_day` parameter.
 - [BranchDateTimeOperator](https://registry.astronomer.io/providers/apache-airflow/modules/branchdatetimeoperator): Branches based on whether the current time is between `target_lower` and `target_upper` times.
 

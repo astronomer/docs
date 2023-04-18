@@ -58,7 +58,7 @@ Operators typically only require a few parameters. Keep the following considerat
 
 The following example shows how to use multiple operators in a DAG to transfer data from Amazon S3 to Redshift and perform data quality checks.
 
-The code for this example is available in the [Astronomer Registry](https://registry.astronomer.io/dags/simple-redshift-3).
+The code for this example is available in the [Astronomer Registry](https://registry.astronomer.io/dags/simple_redshift_3/versions/latest).
 
 The following operators are used in this example:
 
@@ -67,7 +67,7 @@ The following operators are used in this example:
 - [LocalFilesystemToS3Operator](https://registry.astronomer.io/providers/amazon/modules/localfilesystemtos3operator): Uploads a file from a local file system to Amazon S3. Included with the [AWS provider package](https://registry.astronomer.io/providers/amazon).
 - [S3ToRedshiftOperator](https://registry.astronomer.io/providers/amazon/modules/s3toredshiftoperator): Transfers data from Amazon S3 to Redshift. Included with the [AWS provider package](https://registry.astronomer.io/providers/amazon).
 - [PostgresOperator](https://registry.astronomer.io/providers/postgres/modules/postgresoperator): Executes a query against a Postgres database. Included with the [Postgres provider package](https://registry.astronomer.io/providers/postgres).
-- [SQLCheckOperator](https://registry.astronomer.io/providers/common-sql/modules/sqlcheckoperator): Checks against a database using a SQL query. Included with Airflow.
+- [SQLCheckOperator](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcheckoperator): Checks against a database using a SQL query. Included with Airflow.
 
 There are a few things to note about the operators in this example DAG:
 

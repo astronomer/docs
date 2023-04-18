@@ -32,7 +32,7 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 
 ## Prerequisites
 
-- An [Astro project](create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
 
 ## Set up the KubernetesPodOperator
@@ -105,7 +105,7 @@ Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be
 To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
 
 1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
-2. Mount and [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
+2. Mount an [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
 
     ```python {5-14,26-27}
     from airflow.configuration import conf
@@ -144,7 +144,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 
 ### Prerequisites
 
-- An [Astro project](create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - An [Astro Deployment](configure-deployment-resources.md).
 - Access to a private Docker registry.
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/), the command line tool for Kubernetes.

@@ -1,0 +1,163 @@
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+A _Deployment_ is an Astro Runtime environment that is powered by the core components of Apache Airflow. In a Deployment, you can deploy and run DAGs, configure worker resources, and view metrics.
+
+Before you create your Deployment, copy the following information from your source Airflow environment:
+
+- Environment name
+- Airflow version
+- Environment class or size
+- Number of schedulers
+- Minimum number of workers
+- Maximum number of workers
+- Execution role permissions
+- Airflow configurations
+- Environment variables
+
+<Tabs>
+<TabItem value="ui" label="Option 1: Astro UI" default>
+
+1. In the Cloud UI, select a Workspace.
+
+2. On the **Deployments** page, click **Deployment**.
+
+3. Complete the following fields:
+
+    - **Name**: Enter the name of your source Airflow environment.
+    - **Astro Runtime**: Select the Runtime version that's based on the Airflow version in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
+
+    | Airflow Version | Runtime Version        |
+    |-----------------|------------------------|
+    | 2.0             | 3.0.4 (Airflow 2.1.1)* |
+    | 2.2             | 4.2.9 (Airflow 2.2.5)  |
+    | 2.4             | 6.3.0 (Airflow 2.4.3)  |
+
+    > *The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
+
+    - **Description**: (Optional) Enter a description for your Deployment.
+    - **Cluster**: Select the Astro cluster where you want to create this Deployment.
+    - **Worker Type**: Select the worker type for your default worker queue. See [Worker queues](configure-worker-queues.md).
+    - **Max Tasks Per Worker**: (Optional) Set maximum number of tasks that a single worker can run at a time.
+    - **Worker Count**: Set the same minimum and maximum worker count as in source Airflow environment.
+    - **Scheduler Count**: Set to the same number of schedulers as in your source Airflow environment.
+    - **Scheduler Size**: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
+
+    | Environment size         | AUs | CPU / memory |
+    | ------------------------ | --- | ------------------------ | 
+    | Small (Up to ~50 DAGs)   | 5   | .5vCPU, 1.88GiB          |     
+    | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
+    | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
+
+> *Some of the following recommendations for CPU and memory might be less than what you currently allocate to Airflow components in your source environment. If you notice significant performance differences or your Deployment on Astro parses DAGs more slowly than your source Airflow environment, adjust your resource usage on Astro. See [Configure Deployment](/astro/configure-deployment-resources.md)
+
+4. Click **Create Deployment**.
+5. Specify any system-level environment variables as Astro environment variables. See [Environment variables](environment-variables.md#set-environment-variables-in-the-cloud-ui).
+6. Set an email to receive alerts from your Deployment. See [Add Or Delete A Deployment Alert Email](configure-deployment-resources.md#add-or-delete-a-deployment-alert-email).
+
+</TabItem>
+<TabItem value="cli" label="Option 2: Astro CLI & Deployments-as-Code">
+
+1. On your local machine, create a directory with the name of the source Airflow environment. In this directory, create a file called `config.yaml`. 
+2. Open `config.yaml` and add the following:
+
+   ```yaml
+   deployment:
+     environment_variables:
+       - is_secret: <true-or-false>
+         key: <variable-name>
+         value: <variable-value>
+     configuration:
+       name: <deployment-name>
+       description: <deployment-description>
+       runtime_version: <runtime-version>
+       dag_deploy_enabled: false
+       scheduler_au: <scheduler-au>
+       scheduler_count: <scheduler-count>
+       cluster_name: <cluster-name>
+       workspace_name: <workspace-name>
+     worker_queues:
+       - name: default
+         max_worker_count: <max-worker-count>
+         min_worker_count: <min-worker-count>
+         worker_concurrency: 16
+         worker_type: <worker-type>
+     alert_emails:
+       - <alert-email>
+   ```
+
+3. Replace the placeholder values in the configuration:
+
+    - `<true-or-false>` / `<variable-name>` / `<variable-value>`: Set system-level environment variables for your Deployment and specify whether they should be secret. Repeat this configuration in the file for any additional variables you need to set.
+    - `<deployment-name>`: Enter the same name as your source Airflow environment.
+    - `<deployment-description>`: (Optional) Enter a description for your Deployment.
+    - `<runtime-version>`: Select the Runtime version that's based on the Airflow version in your source Airflow environment. See the following table to determine which version of Runtime to use. Where exact version matches are not available, the nearest Runtime version is provided with its supported Airflow version in parentheses.
+
+    | Airflow Version | Runtime Version        |
+    |-----------------|------------------------|
+    | 2.0             | 3.0.4 (Airflow 2.1.1)* |
+    | 2.2             | 4.2.9 (Airflow 2.2.5)  |
+    | 2.4             | 6.3.0 (Airflow 2.4.3)  |
+
+    > *The earliest available Airflow version on Astro Runtime is 2.1.1. There are no known risks for upgrading directly from Airflow 2.0 to Airflow 2.1.1 during migration. For a complete list of supported Airflow versions, see [Astro Runtime release and lifecycle schedule](astro/runtime-version-lifecycle-policy.md#astro-runtime-lifecycle-schedule).
+
+    - `<scheduler-au>`: Set your scheduler size in Astronomer Units (AU). An AU is a unit of CPU and memory allocated to each scheduler in a Deployment. Use the following table to determine how many AUs you need based on the size of your source Airflow environment.
+
+    | Environment size         | AUs | CPU / memory |
+    | ------------------------ | --- | ------------------------ |
+    | Small (Up to ~50 DAGs)   | 5   | .5vCPU, 1.88GiB          |
+    | Medium (Up to ~250 DAGs) | 10  | 1vCPU, 3.75GiB*           |
+    | Large (Up to ~1000 DAGs) | 15  | 1.5vCPU, 5.64GiB*         |
+
+    > *Some of the following recommendations for CPU and memory are smaller than what you have in the equivalent source environment. Although you might not need more CPU or memory than what's recommended, some environments might parse DAGs slower than in your source Airflow environment to start. Use these recommendations as a starting point, then adjust your resource usage after tracking your performance on Astro.
+
+    - `<scheduler-count>`: Specify the same number of schedulers as in your source Airflow environment.
+    - `<cluster-name>`: Specify name of the Astro cluster in which you want to create this Deployment.
+    - `<workspace-name>`: The name of the Workspace you created.
+    - `<max-worker-count>/ <min-worker-count>`: Specify the same minimum and maximum worker count as in source Airflow environment.
+    - `<worker-type>`: Specify the worker type for your default worker queue. You can see which worker types are available for your cluster in the **Clusters** menu of the Cloud UI. If you did not customize the available worker types for your cluster, the default available worker types are:
+
+    | AWS       | GCP           | Azure           |
+    | --------- | ------------- | --------------- |
+    | M5.XLARGE | E2-STANDARD-4 | STANDARD_D4D_V5 |
+
+    - `<alert-email>`: Set an email to receive alerts from your Deployment. See [Add Or Delete A Deployment Alert Email](configure-deployment-resources.md#add-or-delete-a-deployment-alert-email).
+
+    After you finish entering these values, your `config.yaml` file should look something like the following:
+
+    ```yaml
+    deployment:
+      environment_variables:
+        - is_secret: true
+          key: MY_VARIABLE_KEY
+          value: MY_VARIABLE_VALUE
+        - is_secret: false
+          key: MY_VARIABLE_KEY_2
+          value: MY_VARIABLE_VALUE_2
+      configuration:
+        name: My Deployment
+        description: The Deployment I'm using for migration.
+        runtime_version: 6.3.0
+        dag_deploy_enabled: false
+        scheduler_au: 5
+        scheduler_count: 2
+        cluster_name: My Cluster
+        workspace_name: My Workspace
+      worker_queues:
+        - name: default
+          max_worker_count: 10
+          min_worker_count: 1
+          worker_concurrency: 16
+          worker_type: E2-STANDARD-4
+      alert_emails:
+        - myalertemail@cosmicenergy.org
+    ```
+
+4. Run the following command to push your configuration to Astro and create your Deployment:
+
+    ```sh
+    astro deployment create --deployment-file config.yaml
+    ```
+
+</TabItem>
+</Tabs>

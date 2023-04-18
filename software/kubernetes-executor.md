@@ -182,14 +182,12 @@ The following example shows how you can use a `pod_override` configuration in yo
 ```python
 import pendulum
 import time
-
 from airflow import DAG
 from airflow.decorators import task
+from airflow.operators.bash import BashOperator
 from airflow.operators.python import PythonOperator
 from airflow.example_dags.libs.helper import print_stuff
 from kubernetes.client import models as k8s
-
-
 k8s_exec_config_resource_requirements = {
     "pod_override": k8s.V1Pod(
         spec=k8s.V1PodSpec(
@@ -205,13 +203,17 @@ k8s_exec_config_resource_requirements = {
         )
     )
 }
-
 with DAG(
     dag_id="example_kubernetes_executor_pod_override_sources",
     schedule=None,
     start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
     catchup=False
 ):
+    BashOperator(
+      task_id="bash_resource_requirements_override_example",
+      bash_command="echo hi",
+      executor_config=k8s_exec_config_resource_requirements
+    )
 
 
     @task(executor_config=k8s_exec_config_resource_requirements)

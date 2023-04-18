@@ -19,11 +19,11 @@ You can use the Cloud UI and the Astro CLI to view and modify your Workspaces, D
 
 ## Log in to the Cloud UI
 
-1. Go to `https://cloud.astronomer.io`, and select one of the following options to access the Cloud UI:
+Go to `https://cloud.astronomer.io`, and select one of the following options to access the Cloud UI:
 
-    - To authenticate with single sign-on (SSO), enter your email and click **Continue**. If your Organization has SSO enabled, you'll be redirected to your identity provider authentication screen.
-    - To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
-    - To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
+- To authenticate with single sign-on (SSO), enter your email and click **Continue**. If your Organization has SSO enabled, you'll be redirected to your identity provider authentication screen.
+- To authenticate with your GitHub account, click **Continue with GitHub**, enter your username or email address, enter your password, and then click **Sign in**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
+- To authenticate with your Google account, click **Continue with Google**, choose an account, enter your username and password, and then click **Sign In**. If your Organization selects this log in option, you’ll receive an email invitation from your Organization Owner. You can't access the Organization without an invitation.
 
 ## Log in to the Astro CLI
 

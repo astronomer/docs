@@ -7,9 +7,11 @@ description: Run an upgrade progress to migrate your Software Deployment from As
 
 import {siteVariables} from '@site/src/versions';
 
-Astro Runtime builds on the reliability of Astronomer Certified (AC) with new features that center on usability and performance.
+All versions of Astronomer Certified (AC) are no longer supported on Astronomer Software. Astronomer recommends migrating all of your Deployments to use an Astro Runtime image as soon as possible. Astro Runtime builds on the reliability of AC with new features that center on usability and performance. 
 
 Migrating a Deployment to Astro Runtime is similar to the standard upgrade process. There are no known disruptions when migrating a Deployment from AC to the equivalent version of Astro Runtime.
+
+If you are still using AC for some Deployments or you want to review information about AC, see the [Astronomer documentation archive](https://github.com/astronomer/docs/blob/main/archived_software_docs/astronomer-certified) for archived versions of all AC documentation.
 
 ## Prerequisites
 
@@ -57,10 +59,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
     FROM quay.io/astronomer/astro-runtime:5.0.4
     ```
 
-    For a list of currently supported Astronomer images, see:
-
-    - [AC Lifecycle Schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
-    - [Astro Runtime Lifecycle Schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
+    For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
   :::warning
 

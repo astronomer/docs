@@ -38,12 +38,13 @@ astro workspace user add <email>
 | Option    | Description                                          | Valid Values                                                                               |
 | --------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------ |
 | `<email-address>` | The email address of the user that you want to add to the Workspace. | Any valid email address                                                                            |
-| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_VIEWER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
+| `--role`  | The user's role in the Workspace.                    | Possible values are either `WORKSPACE_MEMBER`, `WORKSPACE_OPERATOR`, or `WORKSPACE_OWNER`. |
 
 ## Related commands
 
 - [`astro workspace user update`](cli/astro-workspace-user-update.md)
-- [`astro organization user add`](cli/astro-organization.md)
+- [`astro organization user invite`](cli/astro-organization-user-invite.md)
+- [`astro organization user update`](cli/astro-organization-user-update.md)
 
 </TabItem>
 <TabItem value="software">

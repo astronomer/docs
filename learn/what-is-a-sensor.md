@@ -59,13 +59,13 @@ Many Airflow provider packages contain sensors that wait for various criteria in
 - [`DateTimeSensor`](https://registry.astronomer.io/providers/apache-airflow/modules/datetimesensor): Waits for a specified date and time. This sensor is useful if you want different tasks within the same DAG to run at different times.
 - [`ExternalTaskSensor`](https://registry.astronomer.io/providers/apache-airflow/modules/externaltasksensor): Waits for an Airflow task to be completed. This sensor is useful if you want to implement [cross-DAG dependencies](cross-dag-dependencies.md) in the same Airflow environment.
 - [`HttpSensor`](https://registry.astronomer.io/providers/http/modules/httpsensor): Waits for an API to be available. This sensor is useful if you want to ensure your API requests are successful.
-- [`SqlSensor`](https://registry.astronomer.io/providers/common-sql/modules/sqlsensor): Waits for data to be present in a SQL table. This sensor is useful if you want your DAG to process data as it arrives in your database.
+- [`SqlSensor`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlsensor): Waits for data to be present in a SQL table. This sensor is useful if you want your DAG to process data as it arrives in your database.
 
 To review the available Airflow sensors, go to the [Astronomer Registry](https://registry.astronomer.io/modules?types=sensors).
 
 ### Example implementation
 
-The following example DAG shows how you might use the `SqlSensor` sensor: 
+The following example DAG shows how you might use the `SqlSensor` sensor:
 
 <Tabs
     defaultValue="taskflow"

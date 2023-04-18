@@ -73,7 +73,7 @@ To run data pipelines on Astro, you first need to create an Astro project, which
 ## Step 2: Create your DAG
 
 1. Create a new Python file in the `/dags` directory of your Astro project called `my_second_dag.py`.
-2. Copy the code from the **< > Code** tab of the [Tutorial DAG: Airflow Connections](https://registry.astronomer.io/dags/get-started-tutorial-2-dag) from the Astronomer Registry.
+2. Copy the code from the **< > Code** tab of the [Tutorial DAG: Airflow Connections](https://legacy.registry.astronomer.io/dags/get-started-tutorial-2-dag) from the Astronomer Registry.
 3. Paste the code into `my_second_dag.py`.
 
 ## Step 3: Add a provider package

@@ -118,7 +118,7 @@ You can use the output of an upstream operator as the input data for a dynamical
 
 In this section you'll learn how to pass mapping information to a downstream task for each of the following scenarios:
 
-- **TaskFlow over TraskFlow**: Both tasks are defined using the TaskFlow API.
+- **TaskFlow over TaskFlow**: Both tasks are defined using the TaskFlow API.
 - **TaskFlow over traditional operator**: The upstream task is defined using a traditional operator and the downstream task is defined using the TaskFlow API.
 - **Traditional operator over TaskFlow**: The upstream task is defined using the TaskFlow API and the downstream task is defined using a traditional operator.
 - **Traditional operator over traditional operator**: Both tasks are defined using traditional operators.
@@ -127,7 +127,7 @@ In this section you'll learn how to pass mapping information to a downstream tas
     defaultValue="two-flow"
     groupId="mapping-over-the-result-of-another-operator"
     values={[
-        {label: 'TaskFlow over TraskFlow', value: 'two-flow'},
+        {label: 'TaskFlow over TaskFlow', value: 'two-flow'},
         {label: 'TaskFlow over Traditional operator', value: 'flow-traditional'},
         {label: 'Traditional operator over TaskFlow', value: 'traditional-flow'},
         {label: 'Traditional operator over Traditional operator', value: 'two-traditional'},
@@ -435,6 +435,96 @@ The add_nums task will have three mapped instances with the following results:
 - Map index 0: `111` (1+10+100)
 - Map index 1: `1202` (2+1000+200)
 - Map index 2: `2300` (1000+1000+300)
+
+## Repeated mapping
+
+You can dynamically map an Airflow task over the output of another dynamically mapped task. This results in one mapped task instance for every mapped task instance of the upstream task.
+
+The following example shows three dynamically mapped tasks.
+
+<Tabs
+    defaultValue="taskflow"
+    groupId="repeated-mapping"
+    values={[
+        {label: 'TaskFlow API', value: 'taskflow'},
+        {label: 'Traditional syntax', value: 'traditional'},
+    ]}>
+
+<TabItem value="taskflow">
+
+```python
+@task
+def multiply_by_2(num):
+    return num * 2
+
+@task
+def add_10(num):
+    return num + 10
+
+@task
+def multiply_by_100(num):
+    return num * 100
+
+multiply_by_100.expand(
+    num=add_10.expand(
+        num=multiply_by_2.expand(
+            num=[1, 2, 3]
+        )
+    )
+)
+```
+</TabItem>
+<TabItem value="traditional">
+
+```python
+def multiply_by_2_func(num):
+    return [num * 2]
+
+def add_10_func(num):
+    return [num + 10]
+
+def multiply_by_100_func(num):
+    return num * 100
+
+multiply_by_2 = PythonOperator.partial(
+    task_id="multiply_by_2",
+    python_callable=multiply_by_2_func
+).expand(op_args=[[1], [2], [3]])
+
+add_10 = PythonOperator.partial(
+    task_id="add_10",
+    python_callable=add_10_func
+).expand(op_args=multiply_by_2.output)
+
+multiply_by_100 = PythonOperator.partial(
+    task_id="multiply_by_100",
+    python_callable=multiply_by_100_func
+).expand(op_args=add_10.output)
+
+multiply_by_2 >> add_10 >> multiply_by_100
+```
+</TabItem>
+</Tabs>
+
+In the example above, the `multiply_by_2` task is dynamically mapped over a list of three elements (`[1, 2, 3]`). The task has three mapped task instances containing the following values:
+
+- Map index 0: `2` (1*2)
+- Map index 1: `4` (2*2)
+- Map index 2: `6` (3*2)
+
+The `add_10` task is dynamically mapped over the output of the `multiply_by_2` task. It has 3 mapped task instances (one for each mapped instance of the previous task) which contain the following values:
+
+- Map index 0: `12` (2+10)
+- Map index 1: `14` (4+10)
+- Map index 2: `16` (6+10)
+
+The `multiply_by_100` task is dynamically mapped over the output of the `add_10` task, which results in three mapped task instances with the following outputs:
+
+- Map index 0: `1200` (12*100)
+- Map index 1: `1400` (14*100)
+- Map index 2: `1600` (16*100)
+
+You can chain an arbitrary number of dynamically mapped tasks in this manner. It is currently not possible to exponentially increase the number of mapped task instances.
 
 ## Mapping over task groups
 

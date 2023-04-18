@@ -3,6 +3,7 @@ title: "Orchestrate Talend Jobs with Airflow"
 description: "Orchestrate remote jobs in Talend with your Apache Airflow DAGs."
 id: airflow-talend-integration
 sidebar_label: "Talend"
+sidebar_custom_props: { icon: 'img/integrations/talend.png' }
 ---
 
 [Talend](https://www.talend.com/) is a popular tool for data integration and data management that can be easily used along with Airflow and Astronomer to have the best of multiple worlds for data management.
@@ -50,7 +51,7 @@ If you are unfamiliar with the Talend Cloud API, see the following documentation
 
 :::info
 
-The code in this example can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/talend-api).
+The code in this example can be found on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/talend-api).
 
 :::
 
@@ -137,7 +138,7 @@ You can run Talend jobs with Airflow by containerizing them and running the cont
 
 :::info
 
-The code shown in this example is also available on [the Astronomer Registry](https://registry.astronomer.io/dags/talend-containers).
+The code shown in this example is also available on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/talend-containers).
 
 :::
 

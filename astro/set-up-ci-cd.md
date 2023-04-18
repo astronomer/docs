@@ -1,6 +1,6 @@
 ---
-sidebar_label: 'Set up CI/CD'
-title: 'Deploy code to Astro with CI/CD'
+sidebar_label: 'Choose a CI/CD strategy'
+title: 'Choose a CI/CD Strategy for deploying code to Astro'
 id: set-up-ci-cd
 ---
 
@@ -130,7 +130,7 @@ This strategy is recommended if:
 
 Depending on your organization, you might be required to maintain multiple repositories for a single Astro project. Data teams that implement this strategy typically manage DAGs in one repository and Astro project settings, such as Python packages and worker configuration, in another repository.
 
-his strategy is recommended if:
+This strategy is recommended if:
 
 - You have strict security requirements for who can update specific project files.  
 - You want to minimize complexity for project contributors at the expense of a more complex CI/CD pipeline. 
@@ -175,6 +175,13 @@ When you set up a CI/CD workflow on Astro, you will:
 - Modify the Astronomer template or GitHub action to meet the requirements of your organization. 
 
 If you use GitHub, Astronomer recommends using the [`deploy-action` GitHub action](https://github.com/astronomer/deploy-action) that is maintained by Astronomer.
+
+## Enforce CI/CD
+
+When you use a CI/CD pipeline, all code pushes to your Deployment are tested, standardized, and observable through your pipeline. For Deployments where these qualities are a priority, Astronomer recommends enabling CI/CD enforcement so that code pushes can be completed only when using a Deployment API key or Workspace token. See:
+
+- [Enforce CI/CD deploys](configure-deployment-resources.md#enforce-cicd-deploys)
+- [Update general Workspace settings](manage-workspaces.md#update-general-workspace-settings)
 
 ## Test and validate DAGs in your CI/CD pipeline
 
