@@ -19,6 +19,8 @@ If you use the [DAG-only deploy feature](astro/deploy-code#deploy-dags-only) on 
 
 Each CI/CD template implementation might have additional requirements.
 
+## Image-only templates
+
 ### Single branch implementation
 
 Use this template to push code to from a GitLab repository to Astro.
@@ -28,7 +30,7 @@ Use this template to push code to from a GitLab repository to Astro.
     - `ASTRONOMER_KEY_ID` = `<your-key-id>`
     - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
 
-2. Go to the Editor option in your project's CI/CD section and commit the following:
+2. Go to the **Editor** option in your project's CI/CD section and commit the following:
 
    ```
    ---
@@ -67,7 +69,7 @@ When you create environment variables that will be used in multiple branches, yo
 
 :::
 
-2. Go to the Editor option in your project's CI/CD section and commit the following:
+2. Go to the **Editor** option in your project's CI/CD section and commit the following:
 
    ```
    ---
@@ -107,3 +109,55 @@ When you create environment variables that will be used in multiple branches, yo
         only:
           - main
    ```
+
+## DAG-based templates
+
+The DAG-based template uses the `--dags` flag in the Astro CLI to push DAG changes to Astro. These CI/CD pipelines deploy your DAGs only when files in your `dags` folder are modified, and they deploy the rest of your Astro project as a Docker image when other files or directories are modified. For more information about the benefits of this workflow, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+
+### Single branch implementation
+
+Use this template to push code to from a GitLab repository to Astro.
+
+1. In GitLab, go to **Project Settings** > **CI/CD** > **Variables** and set the following environment variables:
+
+    - `ASTRONOMER_KEY_ID` = `<your-key-id>`
+    - `ASTRONOMER_KEY_SECRET` = `<your-key-secret>`
+
+2. Go to the **Editor** option in your project's CI/CD section and commit the following:
+   
+    ```
+    publish-dags:
+      stage: publish
+      image: docker:latest
+      services:
+       - docker:dind
+      variables:
+        ASTRONOMER_KEY_ID: ${ASTRONOMER_KEY_ID}
+        ASTRONOMER_KEY_SECRET: ${ASTRONOMER_KEY_SECRET}
+        DAG_FOLDER: "/dags"
+      before_script:
+        - apk add --update curl && rm -rf /var/cache/apk/*
+        - apk add bash
+        - apk add jq
+      script:
+        - (curl -sSL install.astronomer.io | bash -s)
+        - files=$(git diff --name-only HEAD^..HEAD)
+        - dags_only=1
+        - for file in $files; do
+        -  if [[ $file != "$DAG_FOLDER"* ]]; then
+        -    echo "$file is not a dag, triggering a full image build"
+        -    dags_only=0
+        -    break
+        -  fi
+        - done
+        - if [ $dags_only == 1 ]
+        - then
+        -   astro deploy --dags
+        - fi
+        - if [ $dags_only == 0 ]
+        - then
+        -   astro deploy -f
+        - fi
+      only:
+        - main
+    ```
