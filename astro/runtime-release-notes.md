@@ -24,6 +24,20 @@ Astro Runtime is a Docker image built and published by Astronomer that extends t
 
 To upgrade Astro Runtime, see [Upgrade Astro Runtime](upgrade-runtime.md). For general product release notes, see [Astro Release Notes](release-notes.md). If you have any questions or a bug to report, contact [Astronomer support](https://cloud.astronomer.io/support).
 
+## Astro Runtime 8.0.0
+
+- Release date: TBD
+- Airflow version: 2.6.0
+
+### Airflow 2.6
+
+Astro Runtime 8 is based on Airflow 2.6, which includes a number of new features and improvements with an emphasis on observability. Most notably, Airflow 2.6 includes:
+
+- [Notifiers](https://airflow.apache.org/docs/apache-airflow/latest/howto/notifications.html), which are a new class that can be used to send notifications from a DAG to a third party application, such as Slack. This release includes the [SlackNotifier](https://airflow.apache.orgdocs/apache-airflow-providers-slack/latest/_api/airflow/providers/slack/notifications/slack_notifier/index.html#airflow.providers.slack.notifications.slack_notifier.SlackNotifier), with more notifiers coming in the future. 
+- The [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/2.4.0/howto/operator/python.html#externalpythonoperator), which can execute Python code in a virtual environment with different Python libraries and dependencies than your core Airflow environment.
+- Automatic DAG registration. You no longer need to specify `as dag` when defining a DAG object.
+- Support for [zipping](https://airflow.apache.org/docs/apache-airflow/2.4.0/concepts/dynamic-task-mapping.html#combining-upstream-data-aka-zipping) dynamically mapped tasks.
+
 ## Astro Runtime 7.4.2
 
 - Release date: April 1, 2023
