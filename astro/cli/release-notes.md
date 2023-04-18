@@ -23,7 +23,7 @@ Release date: April 11, 2023
 
 ### Bug fixes
 
-- The `dags/` folder may be accidentally added `.dockerignore` file whenever a deploy is cancled during an image build. This can cause DAGs to disapear if you disable dags-only deploy. CLI v1.13.2 will check for and remove `dags/` from the `.dockerignore` if you are deploying to a Deployment which has dags-only deploy disabled. CLI v1.13.2 will fix any issues you are having with `dags/` folder being added to the `.dockerignore`.
+- Fixed an issue where the CLI added the `dags` folder to `.dockerignore` whenever an image build was interrupted, resulting in DAGs not being deployed on the next image build.
 
 ## Astro CLI 1.13.0
 
