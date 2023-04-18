@@ -13,11 +13,11 @@ import DirectorySetup from "./migration-partials/directory-setup.mdx";
 import FinalStep from "./migration-partials/final-step.mdx";
 import Deploy from "./migration-partials/deploy.mdx";
 
-This is where you'll find instructions for migrating an Airflow environment from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://cloud.google.com/composer/docs/concepts/overview) to Astro.
+Migrate your Airflow environment from [Amazon Managed Workflows for Apache Airflow (MWAA)](https://aws.amazon.com/managed-workflows-for-apache-airflow/resources/) to Astro.
 
 To complete the migration process, you will:
 
-- Prepare your source Airflow and set up your Astro Airflow environment.
+- Prepare your source Airflow and create a Deployment on Astro.
 - Migrate metadata from your source Airflow environment.
 - Migrate DAGs and additional Airflow components from your source Airflow environment.
 - Complete the cutover process to Astro.
@@ -26,7 +26,7 @@ To complete the migration process, you will:
 
 <Prerequisites />
 
-You can additionally use the [AWS CLI](https://aws.amazon.com/cli/) to expedite some steps in this guide.
+(Optional) You can use the [AWS CLI](https://aws.amazon.com/cli/) to expedite some of the steps in this guide.
 
 ## Step 1: Install Astronomer Starship
 
@@ -34,7 +34,7 @@ The [Astronomer Starship](https://pypi.org/project/astronomer-starship/) migrati
 
 The Starship migration utility works as a [plugin](https://github.com/astronomer/starship/tree/master/astronomer-starship) with a user interface, or as an Airflow operator if you are migrating from a more restricted Airflow environment.
 
-See the following table for information on which versions of Starship are available depending on your source Airflow environment:
+See the following table for information on which versions of Starship are available, depending on your source Airflow environment:
 
 | Source Airflow environment | Starship plugin | Starship operator |
 | -------------------------- | --------------- | ----------------- |
@@ -42,8 +42,6 @@ See the following table for information on which versions of Starship are availa
 | MWAA v2.0.2                |                 | ✔️️                 |
 | MWAA v2.2.2                | ✔️️               |                   |
 | MWAA v2.4.3                | ✔️️               |                   |
-
-To install Starship to your MWAA instance as a plugin:
 
 1. Download the `requirements.txt` file for your source Airflow environment from S3. See [AWS documentation](https://docs.aws.amazon.com/mwaa/latest/userguide/best-practices-dependencies.html#best-practices-dependencies-different-ways).
 2. Add `astronomer-starship` on a new line to your `requirements.txt` file.
@@ -69,7 +67,6 @@ To complete this setup from the command line:
     aws s3 cp requirements.txt "s3://$MWAA_BUCKET/requirements.txt"
     aws mwaa update-environment "$MWAA_NAME" --requirements-s3-object-version="$(aws s3api head-object --bucket=$MWAA_BUCKET --key=requirements.txt --query="VersionId")"
     ```
-
 :::
 
 ## Step 2: Create an Astro Workspace
@@ -126,7 +123,7 @@ To complete this setup from the command line:
 
   :::
 
-4. If you utilized the [`plugins` folder](https://cloud.google.com/composer/docs/concepts/cloud-storage#folders_in_the_bucket) in your MWAA project, copy the contents of this folder from your source control platform or S3 to your Astro project `/plugins` folder.
+4. If you used the [`plugins` folder](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-folders.html) in your MWAA project, copy the contents of this folder from your source control platform or S3 to the `/plugins` folder of your Astro project.
 
   :::tip
   
@@ -143,7 +140,7 @@ To complete this setup from the command line:
 
 ## Step 7: Configure additional data pipeline infrastructure
 
-The core migration of your project is now complete. Read the following topics to see whether you need to set up any additional infrastructure on Astro before cutting over your DAGs. 
+The core migration of your project is now complete. Read the following to decide whether you need to set up any additional infrastructure on Astro before you cut over your DAGs. 
 
 ### Set up CI/CD
 
@@ -154,17 +151,21 @@ If you used CI/CD to deploy code to your source Airflow environment, read the fo
 
 ### Set up a secrets backend
 
-If you currently store Airflow variables or connections in a secrets backend, you need to integrate your secrets backend with Astro to access those objects from your migrated DAGs. See [Configure a Secrets Backend](secrets-backend.md) for setup steps.
+If you currently store Airflow variables or connections in a secrets backend, you also need to integrate your secrets backend with Astro to access those objects from your migrated DAGs. See [Configure a Secrets Backend](secrets-backend.md) for setup steps.
 
 ## Step 8: Test locally and check for import errors
 
-Depending on how thoroughly you want to test your Airflow environment, you have a few options for testing your project locally before deploying to Astro.
+Depending on how thoroughly you want to test your Airflow environment, you can test your project locally before deploying to Astro.
 
 - In your Astro project directory, run `astro dev parse` to check for any parsing errors in your DAGs.
 - Run `astro run <dag-id>` to test a specific DAG. This command compiles your DAG and runs it in a single Airflow worker container based on your Astro project configurations.
 - Run `astro dev start` to start a complete Airflow environment on your local machine. After your project starts up, you can access the Airflow UI at `localhost:8080`. See [Test and troubleshoot locally](test-and-troubleshoot-locally.md).
 
-Note that your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these resources. 
+:::info
+
+Your migrated Airflow variables and connections are not available locally. You must deploy your project to Astro to test these Airflow objects. 
+
+:::
 
 ## Step 9: Deploy to Astro
 

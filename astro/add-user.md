@@ -25,8 +25,6 @@ If you want to invite a user to an Organization from a domain that you don't own
 
 2. Click **Invite member**:
 
-    ![Organization user invite button](/img/docs/invite-org-user.png)
-
 3. Enter the user's email.
 
 4. Set an Organization role for the user. See [User permissions](user-permissions.md).
@@ -55,8 +53,6 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
    
 3. In the **Access Management** tab, click **Add Member**.
 
-    ![Workspace user invite button](/img/docs/add-workspace-member.png)
-
 4. Select the user's name and email address in the **Organization Member** list.
    
 5. Select a role for the user and then click **Add member**. See [User permissions](user-permissions.md).
@@ -72,8 +68,6 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 2. Click **Workspace Settings**.
 
 3. Click **Edit** next to the user name:
-
-    ![Edit Workspace user button](/img/docs/edit-workspace-user.png)
 
 4. Optional. Edit the user's name and role. See [User permissions](user-permissions.md).
    

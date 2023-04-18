@@ -43,7 +43,7 @@ All sensors inherit from the [`BaseSensorOperator`](https://github.com/apache/ai
 - `mode`: How the sensor operates. There are two types of modes:
     - `poke`: This is the default mode. When using `poke`, the sensor occupies a worker slot for the entire execution time and sleeps between pokes. This mode is best if you expect a short runtime for the sensor.
     - `reschedule`: When using this mode, if the criteria is not met then the sensor releases its worker slot and reschedules the next check for a later time. This mode is best if you expect a long runtime for the sensor, because it is less resource intensive and frees up workers for other tasks.
-- `poke_interval`: When using `poke` mode, this is the time in seconds that the sensor waits before checking the condition again. The default is 30 seconds.
+- `poke_interval`: When using `poke` mode, this is the time in seconds that the sensor waits before checking the condition again. The default is 60 seconds.
 - `exponential_backoff`: When set to `True`, this setting creates exponentially longer wait times between pokes in `poke` mode.
 - `timeout`: The maximum amount of time in seconds that the sensor checks the condition. If the condition is not met within the specified period, the task fails.
 - `soft_fail`: If set to `True`, the task is marked as skipped if the condition is not met by the `timeout`.
@@ -59,7 +59,7 @@ Many Airflow provider packages contain sensors that wait for various criteria in
 - [`DateTimeSensor`](https://registry.astronomer.io/providers/apache-airflow/modules/datetimesensor): Waits for a specified date and time. This sensor is useful if you want different tasks within the same DAG to run at different times.
 - [`ExternalTaskSensor`](https://registry.astronomer.io/providers/apache-airflow/modules/externaltasksensor): Waits for an Airflow task to be completed. This sensor is useful if you want to implement [cross-DAG dependencies](cross-dag-dependencies.md) in the same Airflow environment.
 - [`HttpSensor`](https://registry.astronomer.io/providers/http/modules/httpsensor): Waits for an API to be available. This sensor is useful if you want to ensure your API requests are successful.
-- [`SqlSensor`](https://registry.astronomer.io/providers/common-sql/modules/sqlsensor): Waits for data to be present in a SQL table. This sensor is useful if you want your DAG to process data as it arrives in your database.
+- [`SqlSensor`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlsensor): Waits for data to be present in a SQL table. This sensor is useful if you want your DAG to process data as it arrives in your database.
 
 To review the available Airflow sensors, go to the [Astronomer Registry](https://registry.astronomer.io/modules?types=sensors).
 
@@ -106,7 +106,7 @@ When using sensors, keep the following in mind to avoid potential performance is
 - Always define a meaningful `timeout` parameter for your sensor. The default for this parameter is seven days, which is a long time for your sensor to be running. When you implement a sensor, consider your use case and how long you expect the sensor to wait and then define the sensor's timeout accurately.
 - Whenever possible and especially for long-running sensors, use the `reschedule` mode so your sensor is not constantly occupying a worker slot. This helps avoid deadlocks in Airflow where sensors take all of the available worker slots.
 - If your `poke_interval` is very short (less than about 5 minutes), use the `poke` mode. Using `reschedule` mode in this case can overload your scheduler.
-- Define a meaningful `poke_interval` based on your use case. There is no need for a task to check a condition every 30 seconds (the default) if you know the total amount of wait time will be 30 minutes.
+- Define a meaningful `poke_interval` based on your use case. There is no need for a task to check a condition every 60 seconds (the default) if you know the total amount of wait time will be 30 minutes.
 
 ## Deferrable operators
 

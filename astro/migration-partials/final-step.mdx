@@ -1,23 +1,23 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-After you successfully deploy your code to Astro, you need to shift your workloads from your source Airflow environment to Astro on a DAG-by-DAG basis. Depending on how your workloads are set up, Astronomer recommends letting DAG owners determine the order that you should migrate and test their DAGs.
+After you successfully deploy your code to Astro, you need to migrate your workloads from your source Airflow environment to Astro on a DAG-by-DAG basis. Depending on how your workloads are set up, Astronomer recommends letting DAG owners determine the order to migrate and test DAGs.
 
-You can complete the following steps in the next few days or weeks. Provide updates to your Astronomer Data Engineer as they continue to assist you through the process and any solve any difficulties that arise. 
+You can complete the following steps in the few days or weeks following your migration set up. Provide updates to your Astronomer Data Engineer as they continue to assist you through the process and any solve any difficulties that arise. 
 
-Continue to validate and cut over your DAGs until you have fully migrated your source Airflow instance. After you have finished migrating from your source Airflow environment, repeat the complete migration process for any other Airflow instances in your source Airflow environment. 
+Continue to validate and move your DAGs until you have fully cut over your source Airflow instance. After you finish migrating from your source Airflow environment, repeat the complete migration process for any other Airflow instances in your source Airflow environment. 
 
 #### Confirm connections and variables
 
 In the Airflow UI for your Deployment, [test all connections](https://airflow.apache.org/docs/apache-airflow/stable/howto/connection.html#testing-connections) that you migrated from your source Airflow environment. 
 
-Additionally, check Airflow variables by checking their values in **Admin** > **Variables**.
+Additionally, check Airflow variable values in **Admin** > **Variables**.
 
 #### Test and validate DAGs in Astro
 
-To create a strategy for testing DAGs, determine which of your DAGs need the most care when running and testing them.
+To create a strategy for testing DAGs, determine which DAGs need the most care when running and testing them.
 
-If your DAG workflow is idempotent and can run twice or more without negative effects, you can run and test these DAGs with minimal risk. If your DAG workflow is non-idempotent and can become invalid you rerun it, you should test the DAG with more caution and downtime. 
+If your DAG workflow is idempotent and can run twice or more without negative effects, you can run and test these DAGs with minimal risk. If your DAG workflow is non-idempotent and can become invalid when you rerun it, you should test the DAG with more caution and downtime. 
 
 #### Cut over DAGs to Astro using Starship
 
@@ -62,4 +62,4 @@ You can additionally configure [worker queues](configure-worker-queues.md) to as
 
 #### Enable DAG-only deploys
 
-The DAG-only deployment mechanism can make deploys faster in cases where you haven't modified your `Dockerfile`, `requirements.txt`, or `packages.txt` files. To enable DAG-only deploys, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).
+Deploying to Astro with DAG-only deploys enabled can make deploys faster in cases where you've only modified your `dags` directory. To enable the DAG-only deploy feature, see [Deploy DAGs only](deploy-code.md#deploy-dags-only).

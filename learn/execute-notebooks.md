@@ -3,6 +3,7 @@ title: "Execute a Jupyter notebook with Airflow"
 description: "Run a parameterized Jupyter notebook using Airflow and the Astro CLI."
 sidebar_label: "Jupyter notebook"
 id: execute-notebooks
+sidebar_custom_props: { icon: 'img/integrations/jupyter.png' }
 ---
 
 Jupyter notebooks are a popular open source notebook tool for quickly developing code and presenting data visualizations. They are frequently used in exploratory data analysis, data science, analytics, and reporting. This tutorial demonstrates how to run a Jupyter notebook from Airflow using the [Papermill provider package](https://registry.astronomer.io/providers/papermill). The `PapermillOperator` contained in this package executes a notebook as an Airflow task.
@@ -23,7 +24,7 @@ This tutorial takes approximately 30 minutes to complete.
 To get the most out of this guide, you should have an understanding of:
 
 - Airflow operators. See [Operators 101](what-is-an-operator.md).
-- Creating Jupyter notebooks. See [Try Jupyter](https://docs.jupyter.org/en/latest/start/index.html). 
+- Creating Jupyter notebooks. See [Try Jupyter](https://docs.jupyter.org/en/latest/start/index.html).
 
 ## Prerequisites
 

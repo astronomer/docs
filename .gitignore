@@ -23,3 +23,8 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+static/astro-cli-release-notes.xml
+static/astro-release-notes.xml
+static/astro-runtime-release-notes.xml
+static/astro-software-release-notes.xml
+static/astro-software-runtime-release-notes.xml

@@ -14,6 +14,14 @@
 /software/0.27/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.27/:splat.md 301
 /software/0.28/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.28/:splat.md 301
 /software/0.29/* https://github.com/astronomer/docs/tree/main/archived_software_docs/version-0.29/:splat.md 301
+/software/*/ac-cve https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/ac-cve.md 301
+/software/*/ac-support-policy https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/ac-support-policy.md 301
+/software/*/image-architecture https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/image-architecture.md 301
+/software/*/install-packages https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/install-packages.md 301
+/software/*/single-node-install https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/single-node-install.md 301
+/software/*/upgrade-ac https://github.com/astronomer/docs/tree/main/archived_software_docs/astronomer-certified/upgrade-ac.md 301
+
+
 
 # redirect base cloud path to astro overview
 /cloud /astro 301
@@ -62,7 +70,7 @@
 /cli-release-notes /astro/cli-release-notes 301
 /configure-deployment /astro/configure-deployment 301
 /create-cluster /astro/create-cluster 301
-/create-project /astro/create-project 301
+/create-project /astro/create-first-dag#step-1-create-an-astro-project 301
 /data-protection /astro/data-protection 301
 /deferrable-operators /astro/deferrable-operators 301
 /deploy-code /astro/deploy-code 301
@@ -95,7 +103,7 @@
 /cloud/cli-release-notes /astro/cli-release-notes 301
 /cloud/configure-deployment /astro/configure-deployment 301
 /cloud/create-cluster /astro/create-cluster 301
-/cloud/create-project /astro/create-project 301
+/cloud/create-project /astro/create-first-dag#step-1-create-an-astro-project 301
 /cloud/data-protection /astro/data-protection 301
 /cloud/deferrable-operators /astro/deferrable-operators 301
 /cloud/deploy-code /astro/deploy-code 301
@@ -261,6 +269,7 @@
 /astro/cross-account-role-setup /astro/install-aws 301
 /astro/cloud-ide/deploy-project.md#commit-your-project-to-github /astro/cloud-ide/deploy-project.md#commit-your-project-to-a-git-repository 301
 /configure-executors /astro/executors 301
+/astro/ci-cd /astro/ci-cd-templates/template-overview 301
 /software/manage-platform-users#reference-system-permissions /software/role-permission-reference 301
 /software/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
 /software/*/cli-podman /astro/cli/configure-cli#run-the-astro-cli-using-podman 301
@@ -275,6 +284,9 @@
 /enterprise/0.25/* /software/0.25/overview
 /enterprise/0.23/* /software/0.23/overview
 /enterprise/0.16/* /software/0.16/overview
+
+# redirects for getting started restructure
+/astro/create-project /astro/create-first-dag#step-1-create-an-astro-project 301
 
 # redirect .rss to .xml
 /astro-runtime-release-notes.rss /astro-runtime-release-notes.xml 301

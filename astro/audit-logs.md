@@ -140,7 +140,7 @@ You can also export logs using the Astro CLI.
 2. Run the following command to export audit logs as a GZIP file to your current directory:
 
     ```sh
-    astro organization audit-logs --organization-name=<your-organization-name>
+    astro organization audit-logs export --organization-name="<your-organization-name>"
     ```
 
     

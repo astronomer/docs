@@ -140,18 +140,6 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Astronomer Certified',
-      items: [
-      'image-architecture',
-      'single-node-install',
-      'install-packages',
-      'upgrade-ac',
-      'ac-cve',
-      'ac-support-policy',
-      ],
-    },
-    {
-      type: 'category',
       label: 'Astro Runtime',
       items: [
       'runtime-image-architecture',

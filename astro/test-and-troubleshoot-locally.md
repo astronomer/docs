@@ -11,7 +11,7 @@ id: test-and-troubleshoot-locally
 
 As you develop data pipelines on Astro, Astronomer recommends running and testing your DAGs locally before deploying your project to a Deployment on Astro. This document provides information about testing and troubleshooting DAGs in a local Apache Airflow environment with the Astro CLI.
 
-For information about creating an Astro project, see [Create an Astro project](create-project.md). For information about adding DAGs to your Astro project and applying changes, see [Develop a project](develop-project.md).
+For information about creating an Astro project, see [Create an Astro project](create-first-dag.md#step-1-create-an-astro-project). For information about adding DAGs to your Astro project and applying changes, see [Develop a project](develop-project.md).
 
 ## Run a DAG with `astro run`
 
