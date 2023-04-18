@@ -21,6 +21,14 @@ Astronomer is committed to continuous delivery of both features and bug fixes to
 
 **Latest CLI Version**: 1.13.2 ([Release notes](cli/release-notes.md))
 
+## April 18, 2023
+
+### Self-service configuration for single sign-on (SSO) connections
+
+You can now configure SSO connections directly from the Cloud UI without assistance from Astronomer support. Use the **Authentication** page to configure different authentication environments for your Organization by creating and managing multiple SSO connections and domains.
+
+To review the new process for creating SSO connections, see [Set up authentication and SSO](configure-idp.md). To create new managed domains to map to your SSO connections, see [Manage domains](manage-domains.md).
+
 ## April 11, 2023
 
 ### Additional improvements
