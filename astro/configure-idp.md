@@ -39,7 +39,7 @@ Single Sign On (SSO) authorization allows users to log in using their company cr
 
 ## Configure your SSO identity provider
 
-At a high level, to configure an SSO connection to your IdP you will:
+At a high level, to configure an SSO identity provider (IdP) you will:
 
 1. Create a connection between Astro and your IdP.
 2. Map a managed domain to your SSO connection.
