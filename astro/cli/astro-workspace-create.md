@@ -29,3 +29,9 @@ astro workspace create <options>
 ```sh
 $ astro workspace create --name "My Deployment" --enforce-ci-cd ON
 ```
+
+## Related commands
+
+- [`astro workspace update`](cli/astro-workspace-update.md)
+- [`astro workspace delete`](cli/astro-workspace-delete.md)
+- [`astro workspace user update`](cli/astro-workspace-user-update.md)

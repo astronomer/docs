@@ -30,3 +30,8 @@ You can find a Workspace's ID by running `astro workspace list`. If you do not p
 ```sh
 $ astro workspace update --name "My Deployment" --enforce-ci-cd OFF
 ```
+
+## Related commands
+
+- [`astro workspace create`](cli/astro-workspace-create.md)
+- [`astro deployment update`](cli/astro-deployment-update.md)
