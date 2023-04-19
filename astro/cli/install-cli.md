@@ -102,7 +102,7 @@ By default, the Astro CLI uses Docker as its container management engine. Howeve
 
 <pre><code parentName="pre">{`winget install -e --id Astronomer.Astro -v ${siteVariables.cliVersion}`}</code></pre>
 
-2. Verify the `PATH` environment variable is updated by running:
+2. Run the following command to access the location of the CLI executable:
 
 ```sh
 $env:path.split(";")
