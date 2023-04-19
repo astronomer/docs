@@ -12,7 +12,7 @@ It is very common to run a task with different dependencies than your Airflow en
 
 In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator) to run a task that leverages the [Snowpark API](https://www.snowflake.com/snowpark/) for data transformations. Snowpark allows you to run queries and transformations on your data using different programming languages, making it a flexible addition to traditional Snowflake operators. 
 
-Snowpark requires Python 3.8, while [Astro runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator will run your Snowpark query in a Python 3.8 virtual environment, allowing you to use a different Python version than Airflow. You can use these same general steps for any use case for running a task in a reusable Python virtual environment.
+Snowpark requires Python 3.8, while [Astro runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator will run your Snowpark query in a Python 3.8 virtual environment, allowing you to use a different Python version for your task than in the Airflow environment. You can use these same general steps for any use case for running a task in a reusable Python virtual environment.
 
 ## Time to complete
 
@@ -60,7 +60,7 @@ For this example, you will need data in a Snowflake table to query using Snowpar
     ;
     ```
 
-## Step 3: Configure your Astro project
+## Step 2: Configure your Astro project
 
 Now that you have your Snowflake resources configured, you can set up Airflow.
 
@@ -124,7 +124,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
   :::
 
-## Step 4: Create a connection to Snowflake
+## Step 3: Create a connection to Snowflake
 
 1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
 
@@ -141,15 +141,15 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
     ![Snowflake connection](/img/guides/snowflake_tutorial_connection.png)
 
-## Step 5: Create your DAG
+## Step 4: Create your DAG
 
 In your Astro project `dags` folder, create a new file called `external-python-pipeline.py`. Paste the following code into the file:
 
 <CodeBlock language="python">{external_python_operator}</CodeBlock>
 
-This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in [Step 3](#step-3-configure-your-astro-project).
+This DAG prints the context of your Airflow environment before using the `@task.external_python` decorator to run a Snowpark query in the virtual environment you created in [Step 2](#step-2-configure-your-astro-project).
 
-## Step 6: Run your DAG to execute your Snowpark query in a virtual environment
+## Step 5: Run your DAG to execute your Snowpark query in a virtual environment
 
 Go to the Airflow UI, unpause your `py_virtual_env` DAG and trigger it to run your Snowpark query in an isolated Python virtual environment. Open your tasks logs to see the results of your query printed:
 
