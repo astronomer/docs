@@ -1,17 +1,17 @@
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-You might have set Airflow connections and variables in the following places on your source Airflow environment:
+You might have defined Airflow connections and variables in the following places on your source Airflow environment:
 
 - The Airflow UI (stored in the Airflow metadata database).
 - Environment variables
 - A secrets backend.
 
-If you set your Airflow variables and connections in the Airflow UI, you can migrate those to Astro with Starship. You can check which resources will be migrated by going to **Admin** > **Variables** and **Admin** > **Connections** in the Airflow UI for your source Airflow environment.
+If you defined your Airflow variables and connections in the Airflow UI, you can migrate those to Astro with Starship. You can check which resources will be migrated by going to **Admin** > **Variables** and **Admin** > **Connections** in the Airflow UI to find your source Airflow environment information.
 
 :::caution
 
-Some environment variables or Airflow Settings can't be migrated to Astro. See [Global environment variables](https://docs.astronomer.io/astro/platform-variables) for a list of variables that you can't override on Astro.
+Some environment variables or Airflow Settings, like global environment variable values, can't be migrated to Astro. See [Global environment variables](https://docs.astronomer.io/astro/platform-variables) for a list of variables that you can't migrate to Astro.
 
 :::
 
@@ -27,7 +27,7 @@ Some environment variables or Airflow Settings can't be migrated to Astro. See [
 4. Copy the access token that appears after logging in. 
 5. In the **Migration Tool 🚀** page of the Airflow UI, paste the access token into the **Authentication Token** field.
 6. Click **Sign in**.
-7. In the **Target Deployment** menu, select the Deployment to which you want to migrate your Airflow variables and connections, then click **Select**.
+7. In the **Target Deployment** menu, select the Deployment where you want to migrate your Airflow variables and connections, then click **Select**.
 8. Click **Connections**. In the table that appears, click **Migrate** for each connection that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.
 9. Click **Variables**.
 10. In the table that appears, click **Migrate** for each variable that you want to migrate to Astro. After the migration is complete, the status **Migrated ✅** appears.

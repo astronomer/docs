@@ -17,15 +17,13 @@ For more information on user roles, see [Manage user permissions on Astro](user-
 
 ## Add a user to an Organization
 
-If your Organization has a configured identity provider (IdP), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. See [Configure just-in-time provisioning for single sign-on](manage-organization.md#configure-just-in-time-provisioning-for-single-sign-on).
+If your Organization has a configured identity provider (IdP), assign users to Astro from your identity provider. By default, any users that you assign can join your Organization as an Organization Member without an invite. To change this behavior, see [Disable just-in-time provisioning](configure-idp.md#disable-just-in-time-provisioning).
 
 If you want to invite a user to an Organization from a domain that you don't own, such as a third party consultant, or you want to invite someone from your company to Astro with a higher level role, follow these steps.
 
 1. In the Cloud UI, go to **Settings** > **Access Management**.
 
 2. Click **Invite member**:
-
-    ![Organization user invite button](/img/docs/invite-org-user.png)
 
 3. Enter the user's email.
 
@@ -55,8 +53,6 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
    
 3. In the **Access Management** tab, click **Add Member**.
 
-    ![Workspace user invite button](/img/docs/add-workspace-member.png)
-
 4. Select the user's name and email address in the **Organization Member** list.
    
 5. Select a role for the user and then click **Add member**. See [User permissions](user-permissions.md).
@@ -72,8 +68,6 @@ See [User permissions](user-permissions.md) to view the permissions for each ava
 2. Click **Workspace Settings**.
 
 3. Click **Edit** next to the user name:
-
-    ![Edit Workspace user button](/img/docs/edit-workspace-user.png)
 
 4. Optional. Edit the user's name and role. See [User permissions](user-permissions.md).
    

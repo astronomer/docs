@@ -29,7 +29,7 @@ To access data on the cloud while developing locally with the Astro CLI, export 
 - A user account on AWS with access to AWS cloud resources.
 - The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 - The [Astro CLI](astro/cli/overview.md).
-- An [Astro project](astro/create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
     
 #### Retrieve AWS user credentials locally
 
@@ -148,7 +148,7 @@ For example, if you completed the configuration in this document and then create
 - A user account on GCP with access to GCP cloud resources.
 - The [Google Cloud SDK](https://cloud.google.com/sdk/docs/install-sdk).
 - The [Astro CLI](astro/cli/overview.md).
-- An [Astro project](astro/create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - Optional. Access to a secrets backend hosted on GCP, such as GCP Secret Manager.
 
 #### Retrieve GCP user credentials locally
@@ -257,7 +257,7 @@ For example, if you completed the configuration in this document and then create
 - A user account on Azure with access to Azure cloud resources.
 - The [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
 - The [Astro CLI](astro/cli/overview.md).
-- [An Astro project](astro/create-project.md)
+- [An Astro project](create-first-dag.md#step-1-create-an-astro-project)
 - If you're using Windows, [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/install).
 
 #### Retrieve Azure user credentials locally

@@ -22,7 +22,7 @@ For more information on each template or to configure your own, see [Template ov
 
 ## Prerequisites
 
-- An [Astro project](create-project.md) hosted in a Git repository that Jenkins can access.
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) hosted in a Git repository that Jenkins can access.
 - An [Astro Deployment](create-deployment.md).
 - A [Deployment API key ID and secret](api-keys.md).
 - Access to [Jenkins](https://www.jenkins.io/).

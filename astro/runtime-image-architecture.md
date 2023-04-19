@@ -16,6 +16,7 @@ Deploying Astro Runtime is a requirement if your organization is using Astro. As
 - A custom logging module that ensures Airflow task logs are reliably available to the Astro data plane.
 - A custom security manager that enforces user roles and permissions as defined by Astro. See [User permissions](user-permissions.md).
 - A custom Airflow UI that includes links to Astronomer resources and exposes the currently running Docker image tag in the footer of all UI pages.
+- A monitoring DAG that the Astronomer team uses to monitor the health of Astro Deployments.
 
 For more information about the features that are available in Astro Runtime releases, see the [Astro Runtime release notes](runtime-release-notes.md).
 
@@ -48,7 +49,7 @@ For version compatibility information, see the [Runtime release notes](runtime-r
 
 ## Default environment variables
 
-The following table lists the default Runtime environment variables. You can override the values of these environment variables to meet the unique requirements of your organization. For information about the global environment variables set on the Astro data plane, see [Global environment variables](platform-variables.md). To edit default environment variable values, see [Set environment variables on Astro](environment-variables.md).
+The following table lists the Airflow environment variables that have different default values on Astro Runtime. Unlike [global environment variables](platform-variables.md) set on the data plane, you can override the values of these variables for specific use cases. To edit the values of the default Airflow environment variables, see [Set environment variables on Astro](environment-variables.md).
 
 | Environment Variable                       | Description                                                                                                          | Value                                   |
 | ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
@@ -56,6 +57,17 @@ The following table lists the default Runtime environment variables. You can ove
 | `AIRFLOW__CELERY__STALLED_TASK_TIMEOUT`                        | The maximum time in seconds that tasks running with the Celery executor can remain in a `queued` state before they are automatically rescheduled.  | `600`   |
 | `AIRFLOW_CORE_PARALLELISM`                    | The maximum number of task instances that can run concurrently for each scheduler in your Deployment.                                                           | `[number-of-running-workers-for-all-worker-queues] * [max-tasks-per-worker]`           |
 | `AIRFLOW__KUBERNETES_EXECUTOR__WORKER_PODS_CREATION_BATCH_SIZE`                    | The number of worker Pods that can be created each time the scheduler parses DAGs. This setting limits the number of tasks that can be scheduled at one time.                                                           | `16`           |
+
+## Astro monitoring DAG
+
+Astro Runtime includes a monitoring DAG that is pre-installed in the Docker image and enabled for all Astro Deployments. In addition to generating Deployment health and metrics functionality, this DAG allows the Astronomer team to monitor the health of your data plane by enabling real-time visibility into whether your workers are healthy and tasks are running.
+
+The `astronomer_monitoring_dag` runs a simple bash task every 5 minutes to ensure that your Airflow scheduler and workers are functioning as expected. If the task fails twice in a row or is not scheduled within a 10-minute interval, Astronomer support receives an alert and will work with you to troubleshoot. The DAG runs and appears in the Airflow UI only on Astro Deployments. 
+
+Because this DAG is essential to Astro's managed service, you are not charged for its task runs. For the same reasons, this DAG can't be modified or disabled through the Airflow UI. To modify when this DAG runs on a Deployment, set the following [Deployment environment variable](environment-variables.md):
+
+- Key: `AIRFLOW_MONITORING_DAG_SCHEDULE_INTERVAL`
+- Value: An alternative schedule defined as a [cron expression](https://crontab.guru/)
 
 ## Provider packages
 

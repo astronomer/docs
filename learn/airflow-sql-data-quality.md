@@ -26,15 +26,15 @@ The SQL Check operators are versions of the `SQLOperator` that abstract SQL quer
 
 The following SQL Check operators are recommended for implementing data quality checks:
 
-- **[`SQLColumnCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlcolumncheckoperator)**: Runs multiple predefined data quality checks on multiple columns within the same task.
-- **[`SQLTableCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqltablecheckoperator)**: Runs multiple user-defined checks on one or more columns of a table.
-- **[`SQLCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlcheckoperator)**: Takes any SQL query and returns a single row that is evaluated to booleans. This operator is useful for more complicated checks that could span several tables of your database.
-- **[`SQLIntervalCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlintervalcheckoperator)**: Checks current data against historical data.
+- **[`SQLColumnCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcolumncheckoperator)**: Runs multiple predefined data quality checks on multiple columns within the same task.
+- **[`SQLTableCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqltablecheckoperator)**: Runs multiple user-defined checks on one or more columns of a table.
+- **[`SQLCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlcheckoperator)**: Takes any SQL query and returns a single row that is evaluated to booleans. This operator is useful for more complicated checks that could span several tables of your database.
+- **[`SQLIntervalCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlintervalcheckoperator)**: Checks current data against historical data.
 
 Additionally, two older SQL Check operators exist that can run one check at a time against a defined value or threshold:
 
-- [`SQLValueCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlvaluecheckoperator): A simpler operator that can be used when a specific, known value is being checked either as an exact value or within a percentage threshold.
-- [`SQLThresholdCheckOperator`](https://registry.astronomer.io/providers/common-sql/modules/sqlthresholdcheckoperator): An operator with flexible upper and lower thresholds, where the threshold bounds may also be described as SQL queries that return a numeric value.
+- [`SQLValueCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlvaluecheckoperator): A simpler operator that can be used when a specific, known value is being checked either as an exact value or within a percentage threshold.
+- [`SQLThresholdCheckOperator`](https://registry.astronomer.io/providers/apache-airflow-providers-common-sql/modules/sqlthresholdcheckoperator): An operator with flexible upper and lower thresholds, where the threshold bounds may also be described as SQL queries that return a numeric value.
 
 Astronomer recommends using the `SQLColumnCheckOperator` and `SQLTableCheckOperator` over the `SQLValueCheckOperator` and `SQLThresholdCheckOperator` whenever possible to improve code readability.
 

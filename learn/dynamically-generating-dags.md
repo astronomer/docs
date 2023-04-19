@@ -69,7 +69,7 @@ def create_dag(dag_id, schedule, dag_number, default_args):
 
     with dag:
         t1 = PythonOperator(
-            task_id="hello_world", python_callable=hello_world_py, dag_number=dag_number
+            task_id="hello_world", python_callable=hello_world_py
         )
 
     return dag
