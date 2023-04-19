@@ -110,7 +110,7 @@ $env:path.split(";")
 
 Copy the Winget path similar to `C:\Users\myname\AppData\Local\Microsoft\WinGet\Packages\Astronomer.Astro_Microsoft.Winget.Source_8wekyb3d8bbwe`. Go to this folder and rename the Astro executable to `astro.exe`
 
-3. Run `astro version` to confirm the Astro CLI is installed properly.
+4. Run `astro version` to confirm the Astro CLI is installed properly.
 
 #### Resolve installation issues
 
