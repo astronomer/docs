@@ -82,7 +82,13 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
     The packages in this file will be installed in your virtual environment. The `snowflake-snowpark-python` package is required to run Snowpark queries. The other packages are required to access an Airflow connection to Snowflake from within the virtual environment. If you are using a different method of connecting to Snowflake, such as a secrets manager or managing secrets locally, you can update or remove these lines.
 
-3. Update the `Dockerfile` of your Astro project to install `pyenv` and its requirements using Astronomer's Docker BuildKit frontend for Airflow:
+3. Add the following to your `packages.txt` file:
+
+    ```text
+    build-essential
+    ```
+
+4. Update the `Dockerfile` of your Astro project to install `pyenv` and its requirements using Astronomer's Docker BuildKit frontend for Airflow:
 
     ```docker
     # syntax=quay.io/astronomer/airflow-extensions:v1
@@ -94,7 +100,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
     These commands install `pyenv` in your Airflow environment and create a Python 3.8 virtual environment called `snowpark` with the required packages to run Snowpark. The `pyenv` environment is initialized when you start your Airflow project and can be used by any ExternalPythonOperator tasks. 
 
-    Creating a `pyenv` environment within your Airflow project requires installing multiple os-level packages and a series of Docker commands. Astronomer's open source [Docker BuildKit frontend for Airflow](https://github.com/astronomer/astro-provider-venv) greatly simplifies this process and allows you to create a Python virtual environment with only two lines of code.
+    Creating a `pyenv` environment within your Airflow project requires installing multiple os-level packages and a series of Docker commands. The open source [Astro BuildKit](https://github.com/astronomer/astro-provider-venv) greatly simplifies this process and allows you to create a Python virtual environment with only two lines of code.
 
     :::note
 
@@ -102,7 +108,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
     :::
 
-4. Ensure [Docker BuildKit](https://docs.docker.com/build/buildkit/) is enabled. To enable BuildKit by default, you can update the parameter in Docker Desktop or modify your `/etc/docker/daemon.json` file with the following:
+5. Ensure [Docker BuildKit](https://docs.docker.com/build/buildkit/) is enabled. To enable BuildKit by default, you can update the parameter in Docker Desktop or modify your `/etc/docker/daemon.json` file with the following:
 
     ```json
     {
@@ -112,7 +118,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
     }
     ```
 
-5. Run the following command to start your project in a local environment:
+6. Run the following command to start your project in a local environment:
 
     ```sh
     astro dev start
