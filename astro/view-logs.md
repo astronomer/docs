@@ -11,10 +11,19 @@ View task and component logs for your DAGs to troubleshoot your data pipelines a
 
 - _Scheduler logs_ can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
 
-- _Triggerer logs_
+- _Triggerer logs_ provide information about the performance of the triggerer, the Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](/learn/deferrable-operators.md).
 
-- _Worker logs_ 
+- _Worker logs_ describe the performance of the _woriker_, the process that executes tasks, as defined by the [executor](/learn/airflow-executors-explained.md#what-is-an-executor)
 
+- _Webserver logs_ relate to the health and performance of [the Airflow UI](/learn/intro-to-airflow.md#airflow-components)
+
+### Log Levels 
+
+Each log and message type is also associated with one of the following _log levels_: 
+
+    - **Error**: Emitted when a process fails or does not complete. For example, these logs might indicate a missing DAG file, an issue with your scheduler's connection to the Airflow database, or an irregularity with your scheduler's heartbeat.
+    - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
+    - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent but can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
 
 ## View Airflow task logs
 
@@ -39,8 +48,6 @@ You can access scheduler, triggerer, and worker logs in the Cloud UI to find the
 
 2. Click the **Logs** tab.
 
-3. (Optional) Select one or more of the following options to filter logs and click **Apply**. 
-
     When a Deployment generates more than 500 lines of logs in 24 hours, only the most recent 500 lines are shown. If there are no logs available for a given Deployment, the following message appears:
 
     ```  
@@ -55,15 +62,9 @@ You can use the following options to specify the types of logs or messages that 
 
 - **String search**: Enter a string, keyword, or phrase to find in your logs.
 
-- **Time range**: Filter the logs displayed based on time or a date range. 
+- **Time range**: Filter the logs displayed based on time. 
 
-- **Log type**: Filter based on whether the log message is from scheduler, worker, or trigger. 
-
-- **Log Level**
-    - **Error**: Emitted when a process fails or does not complete. For example, these logs might indicate a missing DAG file, an issue with your scheduler's connection to the Airflow database, or an irregularity with your scheduler's heartbeat.
-    - **Warn**: Emitted when Airflow detects an issue that may or may not be of concern but does not require immediate action. This often includes deprecation notices marked as `DeprecationWarning`. For example, Airflow might recommend that you upgrade your Deployment if there was a change to the Airflow database or task execution logic.
-    - **Info**: Emitted frequently by Airflow to show that a standard scheduler process, such as DAG parsing, has started. These logs are frequent but can contain useful information. If you run dynamically generated DAGs, for example, these logs will show how many DAGs were created per DAG file and how long it took the scheduler to parse each of them.
-
+- **Log type**: Filter based on whether the log message is from scheduler, worker, webserver, or trigger. 
 
 ## Access Airflow component logs locally
 
