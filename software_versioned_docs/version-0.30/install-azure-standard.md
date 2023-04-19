@@ -312,7 +312,7 @@ nginx:
   loadBalancerIP: ~
   # Dict of arbitrary annotations to add to the nginx ingress. For full configuration options, see https://docs.nginx.com/nginx-ingress-controller/configuration/ingress-resources/advanced-configuration-with-annotations/
   ingressAnnotations:
-    # required for azure load balancer post Kubernetes 1.22
+    # required only if using Kubernetes 1.23 or later
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: "/healthz"
     
 astronomer:
