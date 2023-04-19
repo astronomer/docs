@@ -11,11 +11,11 @@ View task and component logs for your DAGs to troubleshoot your data pipelines a
 
 - _Scheduler logs_ can help you understand scheduler performance and indicate if a task failed due to an issue with the scheduler. For more information on configuring the scheduler on Astro, see [Scheduler resources](configure-deployment-resources.md#scheduler-resources).
 
-- _Triggerer logs_ provide information about the performance of the triggerer, the Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](/learn/deferrable-operators.md).
+- _Triggerer logs_ provide information about the performance of the triggerer, the Airflow component responsible for running triggers and signaling tasks to resume when their conditions have been met. The triggerer is used exclusively for tasks that are run with [deferrable operators](https://docs.astronomer.io/learn/deferrable-operators.md).
 
-- _Worker logs_ describe the performance of the _woriker_, the process that executes tasks, as defined by the [executor](/learn/airflow-executors-explained.md#what-is-an-executor)
+- _Worker logs_ describe the performance of the _woriker_, the process that executes tasks, as defined by the [executor](https://docs.astronomer.io/learn/airflow-executors-explained.md#what-is-an-executor)
 
-- _Webserver logs_ relate to the health and performance of [the Airflow UI](/learn/intro-to-airflow.md#airflow-components)
+- _Webserver logs_ relate to the health and performance of [the Airflow UI](https://docs.astronomer.io/learn/intro-to-airflow.md#airflow-components)
 
 ### Log Levels 
 
