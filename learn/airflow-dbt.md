@@ -19,11 +19,7 @@ import airflow_dbt_model from '!!raw-loader!../code-samples/dags/airflow-dbt/air
 
 The [Astro dbt provider](https://astronomer.github.io/astronomer-cosmos/), also known as Cosmos, allows you to automatically create Airflow tasks from dbt models, seamlessly integrating dbt jobs into your Airflow orchestration environment. Running dbt Core with Airflow allows you implement event-based scheduling of dbt and integrate with other tools in your data ecosystem, while maintaining full observability of dbt model runs from the Airflow UI.
 
-:::info
-
 For a tutorial on how to use dbt Cloud with Airflow see [Orchestrate dbt Cloud with Airflow](airflow-dbt-cloud.md).
-
-:::
 
 :::info
 
@@ -207,7 +203,7 @@ You should now have the following structure within your Astro project:
 
 :::info
 
-If a connection type for your database isn't available, you might need to add the [relevant provider package](https://registry.astronomer.io/) to `requirements.txt` and run `astro dev restart` to have the connection type available.
+If a connection type for your database isn't available, you might need to make it available by adding the [relevant provider package](https://registry.astronomer.io/) to `requirements.txt` and running `astro dev restart`.
 
 :::
 
@@ -260,17 +256,16 @@ The DAG below uses the BashOperator to activate the virtual environment and exec
 
 <CodeBlock language="python">{airflow_dbt_bashoperator}</CodeBlock>
 
-Using the `BashOperator` to run `dbt run` and other dbt commands be useful during development. However, running dbt at the project level has a couple of issues:
+Using the `BashOperator` to run `dbt run` and other dbt commands can be useful during development. However, running dbt at the project level has a couple of issues:
 
 - There is low observability into what execution state the project is in.
 - Failures are absolute and require all models in a project to be run again, which can be costly.
-
 
 ### Using a manifest file
 
 Using a dbt-generated `manifest.json` file gives you more visibility into the steps dbt is running in each task. This file is generated in the target directory of your `dbt` project and contains its full representation. For more information on this file, see the [dbt documentation](https://docs.getdbt.com/reference/dbt-artifacts/).
 
-You can learn more about a manifest-based dbt and Airflow project structure, view example code, and read about the `DbtDagParser` in a 3-part blog post series on [Building a Scalable Analytics Architecture With Airflow and dbt](https://www.astronomer.io/blog/airflow-dbt-1/) ([Part 2](https://www.astronomer.io/blog/airflow-dbt-2/), [Part 3](https://www.astronomer.io/blog/airflow-dbt-3/)). 
+You can learn more about a manifest-based dbt and Airflow project structure, view example code, and read about the `DbtDagParser` in a 3-part blog post series on [Building a Scalable Analytics Architecture With Airflow and dbt](https://www.astronomer.io/blog/airflow-dbt-1/). 
 
 ## Conclusion
 
