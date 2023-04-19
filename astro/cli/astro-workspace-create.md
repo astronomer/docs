@@ -20,7 +20,7 @@ astro workspace create <options>
 | Option            | Description                                                                                                                             | Valid Values  |
 | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 | `--description`   | The description for the Workspace.                                                                                                      | Any string    |
-| `--enforce-ci-cd` | Determines whether users are required to deploy code to Deployments on a Workspace through a Workspace API token or Deployment API key. | `ON` or `OFF` |
+| `--enforce-ci-cd` | Determines whether users are required to use a Workspace API token or Deployment API key to deploy code.  | `ON` or `OFF` |
 | `--name`          | The name for the Workspace.                                                                                                             | Any string    |
 
 
