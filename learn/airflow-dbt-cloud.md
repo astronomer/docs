@@ -107,7 +107,7 @@ You can find more examples of how to use dbt Cloud with Airflow in [dbt's docume
 
 If you are orchestrating long-running dbt Cloud jobs using Airflow, you may benefit from leveraging [deferrable operators](deferrable-operators.md) for cost savings and scalability. The Astronomer providers package contains deferrable versions of several dbt modules:
 
-- [DbtCloudHookAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/dbtcloudhookasync): asynchronous version of the DbtCloudHook.
+- [DbtCloudHookAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/dbtcloudhookasync): Asynchronous version of the DbtCloudHook.
 - [DbtCloudRunJobTrigger](https://registry.astronomer.io/providers/astronomer-providers/modules/dbtcloudrunjobtrigger): Trigger class used in deferrable dbt Cloud operators.
 - [DbtCloudJobRunSensorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/dbtcloudjobrunsensorasync): Asynchronously checks the status of dbt Cloud job runs.
 - [DbtCloudRunJobOperatorAsync](https://registry.astronomer.io/providers/astronomer-providers/modules/dbtcloudrunjoboperatorasync): Executes a dbt Cloud job asynchronously and waits for the job to reach a terminal status before completing successfully.
