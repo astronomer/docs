@@ -44,7 +44,7 @@ The Astro CLI is open source and built for data practitioners everywhere. The bi
 
 ## Core commands
 
-- [`astro dev init`](cli/astro-dev-init.md)
-- [`astro dev start`](cli/astro-dev-start.md)
-- [`astro dev restart`](cli/astro-dev-restart.md)
-- [`astro deploy`](cli/astro-deploy.md)
+- [`astro dev init`](cli/astro-dev-init.md): Create an Astro project.
+- [`astro dev start`](cli/astro-dev-start.md): Run Airflow locally.
+- [`astro dev restart`](cli/astro-dev-restart.md): Rebuild your Astro project.
+- [`astro deploy`](cli/astro-deploy.md): Deploy your code to Astro.
