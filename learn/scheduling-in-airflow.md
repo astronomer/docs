@@ -136,7 +136,7 @@ This DAG will always be running and automatically scheduling its next run, whene
 
 :::caution
 
-Be aware that Airflow should not be used for streaming or low-latency processes. See the [Best practices](#best-practices) section for more information.
+Be aware that Airflow should not be used for streaming or low-latency processes.
 
 :::
 
