@@ -1,11 +1,18 @@
 ---
-sidebar_label: 'Manage Workspaces'
-title: 'Manage Workspaces on Astro'
+sidebar_label: 'Configure Workspaces'
+title: 'Configure Workspaces on Astro'
 id: manage-workspaces
 description: Create, delete, and update Workspaces on Astro.
 ---
 
-Workspaces are collections of Deployments that can be accessed by a specific group of users. You can use Workspaces to group Deployments that share a business use case or environment trait. For example, you might create one Workspace that stores all of your production pipelines and another Workspace that stores all of your development pipelines.
+Workspaces are collections of Deployments that can be accessed by a specific group of users. You can use Workspaces to group Deployments that share a business use case or environment trait.
+
+Some common ways to implement Workspaces are:
+
+- Using a **single Workspace** for an entire Organization, with all development and production pipelines hosted together.
+- Using a **Workspace per environment**. For example, you might have a production Workspace that stores all of your production pipelines and a development Workspace that stores all of your development pipelines.
+- Using a **Workspace per team**. For example, you might have a Workspace for your Data Science team and a separate Workspace for your Data Engineer team, with each team's Workspace hosting both production and development pipelines.
+- Using a **Workspace per project**. For example, you might have a Workspace called "Sales Analytics Project" that hosts both production and development pipelines.
 
 This document explains how to configure Workspace details. To manage Workspace users, see [Manage Astro users](add-user.md).
 
@@ -32,13 +39,17 @@ To to enter your Workspace, click the Workspace in the **Overview** tab. When yo
 - **DAGs:** View metrics about individual DAGs across your Workspace. For more information, see [Deployment metrics](deployment-metrics.md#dag-runs).
 - **Workspace Settings:** Update Workspace details, including Workspace user permissions, the Workspace name, and the Workspace description.
 
-## Update Workspace details
+## Update general Workspace settings
 
 1. In the Cloud UI, select a Workspace.
    
 2. Click **Workspace Settings** and then click the **Details** tab.
    
-3. Click **Edit Details**, update the Workspace name or description, and then click **Update**.
+3. Click **Edit Details**, then update the following settings as needed:
+
+    - **Name**: The name of your Workspace
+    - **Description**: The description of your Workspace
+    - **CI/CD Enforcement Default**: Determines whether new Deployments in the Workspace enforce CI/CD deploys by default. This default can be overridden at the Deployment level. See [Enforce CI/CD deploys](configure-deployment-resources.md#enforce-ci-cd-deploys).
 
 ## Delete a Workspace
 

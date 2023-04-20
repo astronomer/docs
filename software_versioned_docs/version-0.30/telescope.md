@@ -147,7 +147,7 @@ After Telescope observes an Airflow environment, it generates a file ending in `
 
 Telescope never collects the DAG codes or the contents of Airflow configurations such as variables and connections. To hide DAG names, use the `--dag-obfuscation` flag in your Telescope command.
 
-For all report details and functions, see the [Telescope GitHub repository](https://github.com/astronomer/telescope/blob/main/telescope/__main__.py).
+For all report details and functions, see the [Telescope GitHub repository](https://github.com/astronomer/telescope/).
 
 ## Send Telescope reports to Astronomer support
 

@@ -32,7 +32,7 @@ On Astro, the Kubernetes infrastructure required to run the KubernetesPodOperato
 
 ## Prerequisites
 
-- An [Astro project](create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - An Astro [Deployment](create-deployment.md).
 
 ## Set up the KubernetesPodOperator
@@ -105,7 +105,7 @@ Astronomer provisions `m5d` and `m6id` workers with NVMe SSD volumes that can be
 To run a task run the KubernetesPodOperator that utilizes ephemeral storage:
 
 1. Create a [worker queue](configure-worker-queues.md) with `m5d` workers. See [Modify a cluster](modify-cluster.md) for instructions on adding `m5d` workers to your cluster.
-2. Mount and [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
+2. Mount an [emptyDir volume](https://kubernetes.io/docs/concepts/storage/volumes/#emptydir-configuration-example) to the KubernetesPodOperator. For example:
 
     ```python {5-14,26-27}
     from airflow.configuration import conf
@@ -144,7 +144,7 @@ By default, the KubernetesPodOperator expects to pull a Docker image that's host
 
 ### Prerequisites
 
-- An [Astro project](create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - An [Astro Deployment](configure-deployment-resources.md).
 - Access to a private Docker registry.
 - [kubectl](https://kubernetes.io/docs/reference/kubectl/), the command line tool for Kubernetes.
@@ -217,7 +217,60 @@ If your Docker image is hosted in an Amazon ECR repository, add a permissions po
     - In the Amazon ECR Dashboard, click **Repositories** in the left menu.
     - Click the **Private** tab and then copy the URI of the repository that hosts the Docker image.
 
+## Use secret environment variables with the KubernetesPodOperator
+
+Astro [environment variables](environment-variables.md) marked as secrets are stored in a Kubernetes secret called `env-secrets`. To use a secret value in a task running on the Kubernetes executor, you pull the value from `env-secrets` and mount it to the Pod running your task as a new Kubernetes Secret.
+
+1. Add the following import to your DAG file:
+   
+    ```python
+    from airflow.kubernetes.secret import Secret
+    ```
+
+2. Define a Kubernetes `Secret` in your DAG instantiation using the following format:
+
+    ```python
+    secret_env = Secret(deploy_type="env", deploy_target="<VARIABLE_KEY>", secret="env-secrets", key="<VARIABLE_KEY>")
+    namespace = conf.get("kubernetes", "NAMESPACE")
+    ```
+   
+3. Reference the key for the environment variable, formatted as `$VARIABLE_KEY` in the task using the KubernetesPodOperator.
+
+In the following example, a secret named `MY_SECRET` is pulled from `env-secrets` and printed to logs.
+
+```python
+import pendulum
+from airflow.kubernetes.secret import Secret
+
+from airflow.models import DAG
+from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.configuration import conf
+
+with DAG(
+        dag_id='test-kube-pod-secret',
+        start_date=pendulum.datetime(2022, 1, 1, tz="UTC"),
+        end_date=pendulum.datetime(2022, 1, 5, tz="UTC"),
+        schedule_interval="@once",
+) as dag:
+
+    secret_env = Secret(deploy_type="env", deploy_target="MY_SECRET", secret="env-secrets", key="MY_SECRET")
+
+    namespace = conf.get("kubernetes", "NAMESPACE")
+
+    k = KubernetesPodOperator(
+        namespace=namespace,
+        image="ubuntu:16.04",
+        cmds=["bash", "-cx"],
+        arguments=["echo $MY_SECRET && sleep 150"],
+        name="test-name",
+        task_id="test-task",
+        get_logs=True,
+        secrets=[secret_env],
+    )
+```
+  
 ## Related documentation
 
 - [How to use cluster ConfigMaps, Secrets, and Volumes with Pods](https://airflow.apache.org/docs/apache-airflow-providers-cncf-kubernetes/stable/operators.html#how-to-use-cluster-configmaps-secrets-and-volumes-with-pod)
 - [KubernetesPodOperator Airflow Guide](https://docs.astronomer.io/learn/kubepod-operator/)
+

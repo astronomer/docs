@@ -33,7 +33,7 @@ All versions of AC have an equivalent version of Astro Runtime. To see the equiv
 
 ## Astronomer Houston API migration considerations 
 
-If you're using the Astronomer Houston API and you're migrating from AC to Astro Runtime, you'll need to replace `airflowVersion` arguments with `runtimeVersion` arguments in your scripts. You can use the [GraphQL Playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) to evaluate the API calls in your scripts. To access the Houston GraphQL playground, go to `https://houston.BASEDOMAIN/v1/`.
+If you're using the Astronomer Houston API and you're migrating from AC to Astro Runtime, you'll need to replace `airflowVersion` arguments with `runtimeVersion` arguments in your scripts. You can use the [GraphQL Playground](https://www.apollographql.com/docs/apollo-server/api/plugin/landing-pages/#graphql-playground-landing-page/) to evaluate the API calls in your scripts. To access the Houston GraphQL playground, go to `https://houston.BASEDOMAIN/v1/`.
 
 ## Step 1: Start the migration process
 
@@ -55,10 +55,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
     FROM quay.io/astronomer/astro-runtime:5.0.4
     ```
 
-    For a list of currently supported Astronomer images, see:
-
-    - [AC Lifecycle Schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
-    - [Astro Runtime Lifecycle Schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
+    For a list of currently supported versions of Astro Runtime, see [Astro Runtime Lifecycle Schedule](/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
   :::warning
 
@@ -66,7 +63,7 @@ If you prefer to use the Astro CLI, you can run `astro deployment runtime migrat
 
   :::
 
-3. Optional. Test your migration to Astro Runtime locally by running:
+1. Optional. Test your migration to Astro Runtime locally by running:
 
     ```sh
     astro dev restart

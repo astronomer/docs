@@ -67,10 +67,7 @@ The Software UI and CLI only provide Airflow versions that are later than the ve
 
     <pre><code parentName="pre">{`FROM quay.io/astronomer/astro-runtime:${siteVariables.runtimeVersion}`}</code></pre>
 
-    For a list of currently supported Astronomer images, see:
-
-    - [Astronomer Certified lifecycle schedule](ac-support-policy.md#astronomer-certified-lifecycle-schedule)
-    - [Astro Runtime lifecycle schedule](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule)
+    For a list of supported Astro Runtime versions, see [Astro Runtime maintenance and lifecycle policy](https://docs.astronomer.io/astro/runtime-version-lifecycle-policy#astro-runtime-lifecycle-schedule).
 
   :::warning
 
@@ -129,17 +126,3 @@ Airflow upgrade process has been successfully canceled. Your Deployment was not 
 ```
 
 Canceling the Airflow upgrade process does not interrupt or otherwise impact your Airflow Deployment or code that's running.
-
-## Upgrade to a hotfix version of Astronomer Certified
-
-To upgrade to the latest hotfix version of Astronomer Certified, replace the image referenced in your `Dockerfile` with a pinned version that specifies a particular hotfix. Astro Runtime does not support hotfix versions.
-
-To upgrade to the latest Astronomer Certified 2.3.0 patch fix, for example, you would:
-
-1. Check the AC [2.3.0 Changelog](https://github.com/astronomer/ap-airflow/blob/master/2.3.0/CHANGELOG.md).
-2. Identify the latest patch (e.g. `2.3.0-5`).
-3. Pin the image in your Dockerfile to that patch version. For example,  `FROM quay.io/astronomer/ap-airflow:2.3.0-5-onbuild` (Debian).
-
-> **Note:** If you're pushing code to an Airflow Deployment using the Astro CLI and install a new Astronomer Certified image for the first time _without_ pinning a specific hotfix version, the latest available version is automatically pulled.
->
-> If a hotfix release becomes available _after_ you've already built an Astronomer Certified image for the first time, subsequent code pushes do _not_ automatically pull the latest corresponding hotfix. Follow the hotfix upgrade process to pin your image to a particular version.

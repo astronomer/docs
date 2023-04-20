@@ -38,7 +38,7 @@ While SQLite is the default on Apache Airflow, Postgres is by far the most commo
 
 You should also consider the size of your metadata database when setting up your Airflow environment. Production environments typically use a managed database service, which includes features like autoscaling and automatic backups. The size you need will depend heavily on the workloads running in your Airflow instance. For reference, Apache Airflow uses a 2GB SQLite database by default, but this is intended for development purposes only. The Astro CLI starts Airflow environments with a 1GB Postgres database.
 
-Changes to the Airflow metadata database configuration and its schema are very common and happen with almost every minor update. For this reason, prior to Airflow 2.3 you should not downgrade your Airflow instance in place. With Airflow 2.3 the `db downgrade` command was added, providing an option to [downgrade Airflow](https://airflow.apache.org/docs/apache-airflow/2.3.0/usage-cli.html#downgrading-airflow).
+Changes to the Airflow metadata database configuration and its schema are very common and happen with almost every minor update. For this reason, prior to Airflow 2.3 you should not downgrade your Airflow instance in place. With Airflow 2.3 the `db downgrade` command was added, providing an option to [downgrade Airflow](https://airflow.apache.org/docs/apache-airflow/stable/howto/usage-cli.html#downgrading-airflow).
 
 ## Metadata database content
 

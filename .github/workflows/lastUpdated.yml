@@ -1,7 +1,5 @@
 name: Docs Freshness
-on:
-  schedule:
-    - cron: '5 0 * * sun'
+on: workflow_dispatch
 
 jobs:
   exportmetrics:
@@ -9,10 +7,12 @@ jobs:
     steps:
     - uses: actions/checkout@master
       name: Checkout repo
+      with:
+        token: ${{ secrets.COMMIT_KEY }}
     - name: Install ack
       run: sudo apt-get install ack
     - name: Run build script
-      run: chmod +x lastUpdated.sh
+      run: ./lastUpdated.sh
       shell: bash
     - uses: EndBug/add-and-commit@v9
       with:

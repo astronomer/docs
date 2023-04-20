@@ -18,7 +18,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with: 
-          args: --scheme 'https' --verbose --no-progress './astro/*.md' './software/*.md'  './learn/*.md'
+          args: --accept '403' --scheme 'https' --verbose --no-progress './astro/*.md' './software/*.md'  './learn/*.md'
 
       - name: Create Issue From File
         if: env.lychee_exit_code != 0
@@ -26,4 +26,3 @@ jobs:
         with:
           title: Link Checker Report
           content-filepath: ./lychee/out.md
-          labels: report, automated issue

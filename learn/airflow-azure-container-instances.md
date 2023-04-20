@@ -3,6 +3,7 @@ title: "Run a task in Azure Container Instances with Airflow"
 sidebar_label: "Azure Container Instances"
 description: "Learn how to orchestrate containers with Azure Container Instances from your Airflow DAGs."
 id: airflow-azure-container-instances
+sidebar_custom_props: { icon: 'img/integrations/azure-container-instances.png' }
 ---
 
 [Azure Container Instances](https://azure.microsoft.com/en-us/services/container-instances/) (ACI) is one service that Azure users can leverage for working with containers. In this tutorial, you'll learn how to orchestrate ACI using Airflow and create a DAG that runs a task in an ACI container.
@@ -82,7 +83,7 @@ In your Astro project `dags/` folder, create a new file called `aci-pipeline.py`
 
 ```python
 from airflow import DAG
-from airflow.providers.microsoft.azure.operators.azure_container_instances import AzureContainerInstancesOperator
+from airflow.providers.microsoft.azure.operators.container_instances import AzureContainerInstancesOperator
 from datetime import datetime, timedelta
 
 

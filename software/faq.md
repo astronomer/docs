@@ -43,7 +43,6 @@ No. Astronomer makes use of Kubernetes cluster-level features (including K8s RBA
 
 * Roles
   * [Houston](https://github.com/astronomer/astronomer/blob/master/charts/astronomer/templates/houston/api/houston-bootstrap-role.yaml)
-  * [Kubed](https://github.com/astronomer/astronomer/blob/master/charts/kubed/templates/kubed-clusterrole.yaml)
   * [NGINX](https://github.com/astronomer/astronomer/blob/master/charts/nginx/templates/nginx-role.yaml)
   * [Commander](https://github.com/astronomer/astronomer/blob/master/charts/astronomer/templates/commander/commander-role.yaml)
   * [Fluentd](https://github.com/astronomer/astronomer/blob/master/charts/fluentd/templates/fluentd-clusterrole.yaml)

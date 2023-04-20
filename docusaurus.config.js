@@ -165,7 +165,7 @@ module.exports = {
           id: 'cookiePref',
         },
       ],
-      copyright: '© Astronomer 2022. Various trademarks held by their respective owners.',
+      copyright: '© Astronomer 2023. Various trademarks held by their respective owners.',
     },
   },
   presets: [

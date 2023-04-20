@@ -15,13 +15,13 @@ All customer data flows within the control plane transit through a mTLS mesh, en
 
 All internal service communication within the data plane is transmitted using TLS 1.2 and secure ciphers.
 
-Every cluster in your data plane has its own certificates which were generated when the cluster was created and signed by the Let’s Encrypt certificate authority (CA). The certificates are automatically renewed every 90 days. To enhance the security of data plane clusters, Astronomer will soon remove public IPs and the requirement to sign certificates with a public CA.
+Every cluster in your data plane has its own certificates which were generated when the cluster was created and signed by Astronomer's certificate management platform. The certificates are automatically renewed every 90 days, and no longer require public ingress as part of the certificate signing process.
 
 ## Encryption at rest
 
 All data at rest across control and data planes is encrypted with AES-256, one of the strongest block ciphers available. This is done using native cloud provider technologies.
 
-Specifically, control plane data is encrypted on disk with a platform-managed key, including backups and the temporary files created while DB queries are running. Likewise, data plane data is server-side encrypted and volume encrypted, using encryption keys managed by the cloud provider and anchored by hardware security appliances. All resources provisioned across both planes leverage cloud provider envelope encryption wherever possible in accordance with a [defense in depth security strategy](https://www.us-cert.gov/bsi/articles/knowledge/principles/defense-in-depth).
+Specifically, control plane data is encrypted on disk with a platform-managed key, including backups and the temporary files created while DB queries are running. Likewise, data plane data is server-side encrypted and volume encrypted, using encryption keys managed by the cloud provider and anchored by hardware security appliances. All resources provisioned across both planes leverage cloud provider envelope encryption wherever possible in accordance with a [defense in depth security strategy](https://en.wikipedia.org/wiki/Defense_in_depth_(computing)).
 
 ## Deployment network isolation
 

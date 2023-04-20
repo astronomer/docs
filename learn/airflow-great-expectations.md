@@ -3,6 +3,7 @@ title: "Orchestrate Great Expectations with Airflow"
 sidebar_label: "Great Expectations"
 description: "Orchestrate Great Expectations data quality checks with your Airflow DAGs."
 id: airflow-great-expectations
+sidebar_custom_props: { icon: 'img/integrations/great-expectations.png' }
 ---
 
 :::info
@@ -31,7 +32,7 @@ Typically, using Great Expectations is a two-step process:
 - Expectation Suite creation
 - Validation
 
-First, a user creates test suites, or “Expectation Suites”, using [Great Expectations methods](https://docs.greatexpectations.io/docs/reference/expectations/). These suites are usually stored in JSON and can be checked into version control, just like regular tests. The suites are then loaded by the Great Expectations framework at test runtime, for example, when processing a new batch of data in a pipeline.
+First, a user creates test suites, or “Expectation Suites”, using [Great Expectations methods](https://docs.greatexpectations.io/docs/terms/expectation/). These suites are usually stored in JSON and can be checked into version control, just like regular tests. The suites are then loaded by the Great Expectations framework at test runtime, for example, when processing a new batch of data in a pipeline.
 
 :::tip
 
@@ -121,23 +122,23 @@ Our [demo repository](https://github.com/astronomer/airflow-data-quality-demo/) 
 
 ### Operator parameters
 
-The operator has several optional parameters, but it always requires either a `data_context_root_dir` or a `data_context_config`. Depending on how you have your project configured, other parameters may also be necessary. The less configured your project, the more parameters you'll pass. 
+The operator has several optional parameters, but it always requires either a `data_context_root_dir` or a `data_context_config`. Depending on how you have your project configured, other parameters may also be necessary. The less configured your project, the more parameters you'll pass.
 
 For example:
 
-- If your project's data context specifies data sources, all you need to pass in is the data context and the expectation suite. 
-- If your data context does not specify a data source, and you do not pass in a checkpoint, then the operator will build a checkpoint for you based on the data source you pass in and run the given expectation suite. 
+- If your project's data context specifies data sources, all you need to pass in is the data context and the expectation suite.
+- If your data context does not specify a data source, and you do not pass in a checkpoint, then the operator will build a checkpoint for you based on the data source you pass in and run the given expectation suite.
 
-The datasource can be a dataframe, as shown in the example code, or an Airflow connection using the `conn_id` parameter. Depending on how you define your data source the `data_asset_name` parameter has to be adjusted: 
+The datasource can be a dataframe, as shown in the example code, or an Airflow connection using the `conn_id` parameter. Depending on how you define your data source the `data_asset_name` parameter has to be adjusted:
 
-- If a dataframe is passed, the `data_asset_name` parameter can be any name that will help you identify the dataframe. 
+- If a dataframe is passed, the `data_asset_name` parameter can be any name that will help you identify the dataframe.
 - If a `conn_id` is supplied, the `data_asset_name` must be the name of the table the expectations suite runs on.
 
 The `data_context_root_dir` should point to the `great_expectations` project directory generated when you created the project with the CLI. If using an in-memory `data_context_config`, a `DataContextConfig` must be defined, as in [this example](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_data_context_config.py).
 
-While not a required parameter, if your project already contains Checkpoints, they too can be passed to the operator in two ways: 
+While not a required parameter, if your project already contains Checkpoints, they too can be passed to the operator in two ways:
 
-- A `checkpoint_name` may be passed with the `checkpoint_name` paramter and references a checkpoint in the project `CheckpointStore` defined in the `DataContext` (which is often in the `great_expectations/checkpoints/` path), so that `checkpoint_name = "taxi.pass.chk"` would reference the file `great_expectations/checkpoints/taxi/pass/chk.yml`. 
+- A `checkpoint_name` may be passed with the `checkpoint_name` paramter and references a checkpoint in the project `CheckpointStore` defined in the `DataContext` (which is often in the `great_expectations/checkpoints/` path), so that `checkpoint_name = "taxi.pass.chk"` would reference the file `great_expectations/checkpoints/taxi/pass/chk.yml`.
 - A `checkpoint_config` may be passed to the operator in place of a name, and can be defined like [this example](https://github.com/great-expectations/airflow-provider-great-expectations/blob/main/include/great_expectations/object_configs/example_checkpoint_config.py).
 
 Additionally, `checkpoint_kwargs` may be passed to the operator to specify additional, overwriting configurations.
@@ -156,4 +157,4 @@ The `GreatExpectationsOperator` can run a checkpoint on a dataset stored in any 
 
 ## Next steps
 
-In this guide, you learned about the purpose of Great Expectations and how to use the provider operator to create Great Expectations Airflow tasks. For more examples on how to use the `GreatExpectationsOperator` as part of an ELT pipeline, see the [Great Expectations Snowflake Example](https://registry.astronomer.io/dags/great-expectations-snowflake), [Great Expectations BigQuery Example](https://registry.astronomer.io/dags/great-expectations-bigquery), and [Great Expectations Redshift Example](https://registry.astronomer.io/dags/great-expectations-redshift) examples on the [Astronomer Registry](https://registry.astronomer.io/).
+In this guide, you learned about the purpose of Great Expectations and how to use the provider operator to create Great Expectations Airflow tasks. For more examples on how to use the `GreatExpectationsOperator` as part of an ELT pipeline, see the [Great Expectations Snowflake Example](https://legacy.registry.astronomer.io/dags/great-expectations-snowflake), [Great Expectations BigQuery Example](https://legacy.registry.astronomer.io/dags/great-expectations-bigquery), and [Great Expectations Redshift Example](https://legacy.registry.astronomer.io/dags/great-expectations-redshift) examples on the [Astronomer Registry](https://registry.astronomer.io/).

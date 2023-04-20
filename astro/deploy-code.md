@@ -28,7 +28,7 @@ If you're using Astro Runtime 6.0.5 or later on a Mac computer with an M1 chip, 
 
 - The [Astro CLI](cli/overview.md) is installed in an empty directory. If you're using an Apple M1 system with Astro Runtime 6.0.4 or later for local development, you must install Astro CLI 1.4.0 or later to deploy to Astro.
 - An Astro Workspace with at least one [Deployment](create-deployment.md).
-- An [Astro project](create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - [Docker](https://www.docker.com/products/docker-desktop).
 
 ## Step 1: Authenticate to Astro
@@ -120,7 +120,7 @@ Enabling DAG-only deploys on Astro has a few benefits:
 
 ### Enable DAG-only deploys on a Deployment
 
-Before you complete this setup, ensure that you have access to the Deployment's Astro project and can trigger deploys from your current computer.
+Before you enable DAG-only deploys on a Deployment, ensure that you have access to the Deployment's Astro project and can trigger deploys from your current computer with the Astro CLI. You cannot enable the DAG-only deploy feature in the Cloud UI.
 
 1. Run the following command to enable the feature:
 

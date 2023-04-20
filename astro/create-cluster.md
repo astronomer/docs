@@ -30,7 +30,7 @@ To create an Astro cluster on AWS, Microsoft Azure, or Google Cloud Platform (GC
 
 <Tabs
     defaultValue="byoc"
-    groupId= "byoc"
+    groupId= "aws"
     values={[
         {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
@@ -48,7 +48,7 @@ To create a new Astro cluster on AWS for your Organization, submit a request to 
 - Your preferred max node count.
 - Your preferred VPC CIDR.
 
-If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/19,`m5.xlarge` nodes, and a maximum node count of 20 in `us-east-1`. For information about supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws.md).
+If you don't specify configuration preferences, Astronomer support creates a cluster with a VPC CIDR of 172.20.0.0/20,`m5.xlarge` nodes, and a maximum node count of 20 in `us-east-1`. For information about supported regions, configurations, and defaults, see [Resources required for Astro on AWS](resource-reference-aws.md).
 
 ### Additional set up for AWS regions that are disabled by default
 
@@ -133,7 +133,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
 
 <Tabs
     defaultValue="byoc"
-    groupId= "byoc"
+    groupId= "azure"
     values={[
         {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},
@@ -182,7 +182,7 @@ If you don't specify your configuration preferences, Astronomer support creates 
 
 <Tabs
     defaultValue="byoc"
-    groupId= "byoc"
+    groupId= "gcp"
     values={[
         {label: 'Bring Your Own Cloud', value: 'byoc'},
         {label: 'Hosted', value: 'astronomer hosted data plane'},

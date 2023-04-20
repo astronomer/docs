@@ -17,7 +17,7 @@ GitHub issues are triaged by the Astronomer team and addressed promptly. Once yo
 
 If you'd like to contribute to Astronomer Docs directly, you are welcome to create a Pull Request (PR) to this repository with your suggested changes. To do so:
 
-1. Fork this repository
+1. Fork or clone this repository
 2. Create a branch off of `main`
 3. Make your changes in that branch.
 4. Submit a PR for review.
@@ -43,8 +43,43 @@ If you're working on a change in Software docs, you should work primarily in `so
 If you want to submit a screenshot, GIF, or a new documentation file, we recommend building and testing your documentation change locally. Astronomer docs are built with [Docusaurus](https://docusaurus.io/), which is our static site generator. Read the following sections for instructions on how to build and test your documentation changes locally with Docusaurus.
 
 #### Installation
+To build docs locally, you need to install both Node and Yarn. While Yarn is included in Node, starting in 2020, the Yarn binaries are bundled within [Corepack](https://nodejs.org/api/corepack.html). If you're installing Node for the first time, you need to manually enable Corepacks before you can use Yarn.
 
-Please read the [Docusaurus documentation](https://docusaurus.io/docs/installation#requirements) for information on installing the tools you'll need to work with Docusaurus locally.
+1.  Follow the instructions on [Nodejs](https://nodejs.org/en/download/) to install Node, then confirm that you successfully installed Node by running the following command:
+
+
+    ```sh
+    node -version
+    ```
+
+2. Run the following command to enable `corepacks` and make Yarn available:
+
+    ```sh
+    corepack enable
+    ```
+After you install Node and enable Yarn with Corepacks, Docusaurus commands are available when you open the `docs` directory from your terminal. 
+
+Please read the [Docusaurus documentation](https://docusaurus.io/docs/installation#requirements) for information on installing other tools you'll need to work with Docusaurus locally.
+
+If you used an alternative package manager to install Node, such as `npm` or `homebrew`, you might need to troubleshoot your install.
+
+#### Troubleshoot Yarn installations
+
+1. Run the following command to check your Node version:
+
+    ```sh
+    node --version
+    ```
+    
+2. Adjust your installation based on the output of the command: 
+
+    - **Node and yarn are installed, but need to be updated**: Use a package manager like [npm or nvm](https://www.freecodecamp.org/news/how-to-update-node-and-npm-to-the-latest-version/) to update your version, or download the installer from the [Node.js](https://nodejs.org/en/) site.
+    - **Node is installed, but you cannot enable Corepack**: If you installed Node using a package manager, and it's above version 16.10, but Corepack isn't available, follow the instructions for installing [Corepack with npm](https://github.com/nodejs/corepack#manual-installs) or installing [Corepack with Homebrew or nvm](https://stackoverflow.com/questions/70082424/command-not-found-corepack-when-installing-yarn-on-node-v17-0-1), then run the following command to enable Corepack:
+
+    ```sh
+    corepack enable
+    ```
+
 
 #### Local Development
 

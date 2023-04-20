@@ -72,7 +72,7 @@ Scheduler settings control how the scheduler parses DAG files and creates DAG ru
   
   :::tip
 
-  If you have less than 200 DAGs in a Deployment on Astro, it's safe to set `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=30` (30 seconds) as a Deployment-level [environment variable](https://docs.astronomer.io/astro/environment-variables.md).
+  If you have less than 200 DAGs in a Deployment on Astro, it's safe to set `AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL=30` (30 seconds) as a Deployment-level [environment variable](https://docs.astronomer.io/astro/environment-variables).
 
   ::: 
 

@@ -78,7 +78,7 @@ For more information about Airflow and AWS connections, see [Amazon Web Services
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-project.md) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) with `apache-airflow-providers-amazon` version 5.1.0 or later. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
 - An IAM role with the `SecretsManagerReadWrite` policy that your Astro cluster can assume. See [AWS IAM roles](https://docs.astronomer.io/astro/connect-aws?tab=AWS%20IAM%20roles#authorization-options).
 
 #### Add Airflow secrets to Secrets Manager
@@ -172,7 +172,7 @@ This topic provides steps for using [Hashicorp Vault](https://www.vaultproject.i
 - A [Deployment](create-deployment.md) on Astro.
 - [The Astro CLI](cli/overview.md).
 - A local or hosted Vault server. See [Starting the Server](https://learn.hashicorp.com/tutorials/vault/getting-started-dev-server?in=vault/getting-started) or [Create a Vault Cluster on HCP](https://developer.hashicorp.com/vault/tutorials/cloud/get-started-vault).
-- An [Astro project](create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - [The Vault CLI](https://www.vaultproject.io/docs/install).
 - Your Vault Server's URL. If you're using a local server, this should be `http://127.0.0.1:8200/`.
 
@@ -201,22 +201,22 @@ To use Vault as a secrets backend, Astronomer recommends configuring a Vault App
     ```hcl
     vault auth enable approle
     vault write auth/approle/role/astro_role \
+        role_id=astro_role \
         secret_id_ttl=0 \
         secret_id_num_uses=0 \
         token_num_uses=0 \
         token_ttl=24h \
-        token_max_ttl=24h
+        token_max_ttl=24h \
+        token_policies=astro_policy
     ```
 
-3. Add the policy you created to your AppRole. See [Associate Policies to Auth Methods](https://developer.hashicorp.com/vault/tutorials/getting-started/getting-started-policies#associate-policies-to-auth-methods).     
-4. Run the following commands to retrieve the `role-id` and `secret-id` for your AppRole:
+3. Run the following commands to retrieve the `secret-id` for your AppRole:
 
     ```sh
-    vault read auth/approle/role/<your-approle>/role-id
     vault write -f auth/approle/role/<your-approle>/secret-id
     ```
 
-    Save these values. You'll use them later to complete the setup.
+    Save this value. You'll use this later to complete the setup.
   
 #### Create an Airflow variable or connection in Vault
 
@@ -257,7 +257,7 @@ Then, add the following environment variables to your `.env` file:
 
 ```text
 AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
-AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}
+AIRFLOW__SECRETS__BACKEND_KWARGS={"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}
 ```
 
 :::info 
@@ -280,7 +280,7 @@ For more information on the Airflow provider for Hashicorp Vault and how to furt
     ```sh
     $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND=airflow.providers.hashicorp.secrets.vault.VaultBackend
   
-    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"<your-approle-id>", "secret_id":"<your-approle-secret>"}' --secret
+    $ astro deployment variable create --deployment-id <your-deployment-id> AIRFLOW__SECRETS__BACKEND_KWARGS='{"connections_path": "connections", "variables_path": "variables", "config_path": null, "url": "http://host.docker.internal:8200", "auth_type": "approle", "role_id":"astro_role", "secret_id":"<your-approle-secret>"}' --secret
     ```
   
 2. Run the following command to push your updated `requirements.txt` file to Astro:
@@ -303,7 +303,7 @@ In this section, you'll learn how to use [AWS Systems Manager (SSM) Parameter St
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-project.md) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project) with version 5.1.0+ of `apache-airflow-providers-amazon`. See [Add Python and OS-level packages](develop-project.md#add-python-and-os-level-packages).
 - An IAM role with access to the [Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-access.html) that your Astro cluster can assume. See [AWS IAM roles](connect-aws.md#AWS-IAM-roles).
 
 #### Create Airflow secrets directories in Parameter Store
@@ -347,7 +347,7 @@ This topic provides setup steps for configuring [Google Cloud Secret Manager](ht
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - [Cloud SDK](https://cloud.google.com/sdk/gcloud).
 - A Google Cloud environment with [Secret Manager](https://cloud.google.com/secret-manager/docs/configuring-secret-manager) configured.
 - A [service account](https://cloud.google.com/iam/docs/creating-managing-service-accounts) with the [Secret Manager Secret Accessor](https://cloud.google.com/secret-manager/docs/access-control) role on Google Cloud.
@@ -420,7 +420,7 @@ This topic provides setup steps for configuring [Azure Key Vault](https://azure.
 
 - A [Deployment](create-deployment.md).
 - The [Astro CLI](cli/overview.md).
-- An [Astro project](create-project.md).
+- An [Astro project](create-first-dag.md#step-1-create-an-astro-project).
 - An existing Azure Key Vault linked to a resource group.
 - Your Key Vault URL. To find this, go to your Key Vault overview page > **Vault URI**.
 

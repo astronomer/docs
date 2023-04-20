@@ -68,11 +68,14 @@ After you set an environment variable key, only the environment variable value c
 
 Non-secret environment variables set in the Cloud UI are stored in a database that is managed by Astronomer and hosted in the Astro control plane. When you configure a secret environment variable in the Cloud UI, the following methodology is used:
 
-- Astro generates a manifest that defines a Kubernetes secret containing your variable's key and value.
+- Astro generates a manifest that defines a Kubernetes secret, named `env-secrets`, that contains your variable's key and value.
 - Astro applies this manifest to your Deployment's namespace in the data plane.
 - After the manifest is applied, the key and value of your environment variable are stored in a managed [etcd cluster](https://etcd.io/) at rest within the Astro data plane.
 
-This process occurs every time you update the environment variable's key or value.
+This process occurs every time you update the environment variable's key or value. To use a secret environment variable value in a task running on the Kubernetes executor or the KubernetesPodOperator, you need to mount the value from the Astro kubernetes secret to your Kubernetes Pod. See:
+
+- [Mount secret environment variables to worker pods](executors.md#mount-secret-environment-variables-to-worker-pods)
+- [Use secret environment variables with the KubernetesPodOperator](kubernetespodoperator.md#use-secret-environment-variables-with-the-kubernetespodoperator)
 
 :::caution
 
@@ -110,9 +113,8 @@ After you add your environment variables, use one of the following options to de
 On Astro, environment variables are applied and overridden in the following order:
 
 - Cloud UI
-- [.env (local development only)](develop-project.md#set-environment-variables-local-development)
+- [.env (local development only)](develop-project.md#set-environment-variables-locally)
 - Dockerfile
-- Default Airflow values
 
 For example, if you set `AIRFLOW__CORE__PARALLELISM` with one value in the Cloud UI and you set the same environment variable with another value in your `Dockerfile`, the value set in the Cloud UI takes precedence.
 

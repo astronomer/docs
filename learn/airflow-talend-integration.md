@@ -3,6 +3,7 @@ title: "Orchestrate Talend Jobs with Airflow"
 description: "Orchestrate remote jobs in Talend with your Apache Airflow DAGs."
 id: airflow-talend-integration
 sidebar_label: "Talend"
+sidebar_custom_props: { icon: 'img/integrations/talend.png' }
 ---
 
 [Talend](https://www.talend.com/) is a popular tool for data integration and data management that can be easily used along with Airflow and Astronomer to have the best of multiple worlds for data management.
@@ -50,7 +51,7 @@ If you are unfamiliar with the Talend Cloud API, see the following documentation
 
 :::info
 
-The code in this example can be found on [the Astronomer Registry](https://registry.astronomer.io/dags/talend-api).
+The code in this example can be found on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/talend-api).
 
 :::
 
@@ -137,7 +138,7 @@ You can run Talend jobs with Airflow by containerizing them and running the cont
 
 :::info
 
-The code shown in this example is also available on [the Astronomer Registry](https://registry.astronomer.io/dags/talend-containers).
+The code shown in this example is also available on [the Astronomer Registry](https://legacy.registry.astronomer.io/dags/talend-containers).
 
 :::
 
@@ -251,7 +252,7 @@ with DAG('talend_jobs',
 
 The first half of the code imports packages and sets the DAG up to work with Kubernetes. Each Talend job is its own task using the `KubernetesPodOperator`. In this case, the two tasks correlate to two Talend jobs, `talend1` and `talend2`.
 
-In each task, the `image` is the name of the image of the containerized job saved to a registry as described above. Note that in this example, the image is pulled from DockerHub. By default, this is where the `KubernetesPodOperator` looks for the provided image name. If you want to pull an image from a private registry (e.g. ECR, GCR, etc.) instead, the setup looks a little different. Refer to the [Apache Airflow documentation](https://airflow.readthedocs.io/en/latest/howto/operator/kubernetes.html#how-to-use-private-images-container-registry) for details.
+In each task, the `image` is the name of the image of the containerized job saved to a registry as described above. Note that in this example, the image is pulled from DockerHub. By default, this is where the `KubernetesPodOperator` looks for the provided image name. If you want to pull an image from a private registry (e.g. ECR, GCR, etc.) instead, the setup looks a little different. Refer to the [Apache Airflow documentation](https://airflow.apache.org/docs/docker-stack/build.html#customizing-the-image) for details.
 
 Since this example is very simple we don't need to provide any additional arguments to run the image. But if needed, these can all be specified in the operator's parameters.
 
