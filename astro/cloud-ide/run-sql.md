@@ -75,7 +75,7 @@ To make your SQL cell an upstream dependency for another cell, click **Dependenc
 
 ## Create data dependencies for a SQL cell
 
-You can use the output of other cells in your project within a SQL function. You define these dependencies in SQL, and the Cloud IDE automatically renders the dependencies in your project code and in the **Pipeline** view of your project.
+You can use the output of other cells in your project within a SQL function. You define these dependencies in SQL using jinja templating, and the Cloud IDE automatically renders the dependencies in your project code and in the **Pipeline** view of your project.
 
 For example, if you have a SQL cell using **In-memory SQL** to query a dataframe output of a Python cell, the Python cell is automatically marked as an upstream dependency for your SQL cell.
 
