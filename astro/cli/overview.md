@@ -42,12 +42,9 @@ The Astro CLI is open source and built for data practitioners everywhere. The bi
   <LinkCard label="CI/CD" description="Configure Deployment API keys to automate CLI commands as part of CI/CD workflows." />
 </LinkCardGrid>
 
-## Featured CLI docs
+## Core commands
 
-<LinkCardGrid>
-  <LinkCard truncate label="Release Notes" description="A record of all changes to the Astro CLI." href="/astro/cli/release-notes" />
-  <LinkCard truncate label="Authenticate to cloud services" description="Configure the Astro CLI to use locally stored user credentials as the default for all connections to your cloud." href="/astro/cli/authenticate-to-clouds" />
-  <LinkCard truncate label="Astro CLI command reference" description="Reference information about every available CLI command and option." href="/astro/cli/reference" />
-</LinkCardGrid>
-
-<AstroCard />
+- [`astro dev init`](cli/astro-dev-init.md)
+- [`astro dev start`](cli/astro-dev-start.md)
+- [`astro restart`](cli/astro-restart.md)
+- [`astro deploy`](cli/astro-deploy.md)
