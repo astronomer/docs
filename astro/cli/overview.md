@@ -31,6 +31,13 @@ For alternative installation steps, see [Install the Astro CLI](install-cli.md).
  
 The Astro CLI is open source and built for data practitioners everywhere. The binary is maintained in the public [Astro CLI GitHub repository](https://github.com/astronomer/astro-cli), where pull requests and GitHub issues are welcome.
  
+## Core commands
+
+- [`astro dev init`](cli/astro-dev-init.md): Create an Astro project.
+- [`astro dev start`](cli/astro-dev-start.md): Run Airflow locally.
+- [`astro dev restart`](cli/astro-dev-restart.md): Rebuild your Astro project.
+- [`astro deploy`](cli/astro-deploy.md): Deploy your code to Astro.
+
 ## Astro CLI Features
 
 <LinkCardGrid>
@@ -41,10 +48,3 @@ The Astro CLI is open source and built for data practitioners everywhere. The bi
   <LinkCard label="Astro Cloud UI compatible" description="A robust set of commands matches functionality in the Cloud UI, including Deployment creation and user management." />
   <LinkCard label="CI/CD" description="Configure Deployment API keys to automate CLI commands as part of CI/CD workflows." />
 </LinkCardGrid>
-
-## Core commands
-
-- [`astro dev init`](cli/astro-dev-init.md): Create an Astro project.
-- [`astro dev start`](cli/astro-dev-start.md): Run Airflow locally.
-- [`astro dev restart`](cli/astro-dev-restart.md): Rebuild your Astro project.
-- [`astro deploy`](cli/astro-deploy.md): Deploy your code to Astro.
