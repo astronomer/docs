@@ -10,12 +10,15 @@ A SQL cell contains a SQL query that you can run in isolation or as a dependency
 ## Prerequisites 
 
 - An IDE project and pipeline. See [Step 2: Create a pipeline](/astro/cloud-ide/quickstart.md#step-2-create-a-pipeline).
-- A database connection. See [Step 5: Create a database connection](/astro/cloud-ide/quickstart.md#step-5-create-a-database-connection).
-- For Warehouse SQL cells, you need write permissions to the data warehouse in your database connection. 
+- For Warehouse SQL cells, you need: 
+    - A database connection. See [Configure Airflow connections](/astro/cloud-ide/configure-project-environment.md#configure-airflow-connections).
+    - Write permissions to the data warehouse in your database connection. 
 
 ## Choose a SQL cell type
 
-A SQL cell runs a SQL query against a database connection and stores the results of the query in an XCom value for use in other cells. A Warehouse SQL cell runs a SQL query against a database connection and stores the results in your data warehouse. For more information about how these cells work, see [How SQL cells work](#how-sql-cells-work).
+A SQL cell runs a SQL query against a database and, by default, stores the results of the query in an XCom value for use in other cells. A Warehouse SQL cell runs a SQL query against a database connection and stores the results in your data warehouse. For more information about how these cells work, see [How SQL cells work](#how-sql-cells-work).
+
+The Astro Cloud IDE includes a local [DuckDB](https://duckdb.org/) instance that stores the XCom outputs for all Python and SQL cells without an external database storage connections. Through this instance, SQL cells can run queries against the dataframe or table outputs of other cells. 
 
 Both cell types execute SQL queries, but there are some scenarios where the use of one cell type is preferable. The following table lists the scenarios where Astronomer recommends using a specific type of SQL cell.
   
@@ -23,6 +26,7 @@ Both cell types execute SQL queries, but there are some scenarios where the use 
 | --------------------------------------------------------------------------------------------------- | :----------------: |
 | I don't have write access to an external database.                                                  |      SQL cell      |
 | I'm going to use the output of the query outside of my external database, such as in a Python cell. |      SQL cell      |
+| I want to query a small amount of data from the output of another IDE cell.                         |      SQL cell      |
 | I'm going to use the output of the query only in my external database.                              | Warehouse SQL cell |
 | I'm querying a large amount of data.                                                                | Warehouse SQL cell |
   
@@ -45,7 +49,7 @@ Regardless of the cell type you choose, you can use your query results in downst
 
 6. Add your SQL query to the cell body.
 
-7. In the **Select Connection** list, select the connection for the database you want to query against.
+7. In the **Select Connection** list, select the connection for the database you want to query against. For SQL cells, select **In-memory SQL** if you want to query the output of another cell that was stored locally in XComs.
 
 8. (Optional) If you're using Warehouse SQL cells, configure the following additional fields to define an output table. If you don't define these values, your data pipeline will store the outputs of your cell in a temporary table.
 
