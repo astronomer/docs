@@ -132,7 +132,7 @@ In Airflow 2.6 the possibility of having a DAG run continuously with a pre-defin
 )
 ```
 
-This DAG will always be running and automatically scheduling its next run, whenever it has finished. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
+This DAG will always be running and automatically scheduling its next run, whenever it has finished, irrespective of whether the DAG run succeeded or failed. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
 
 :::caution
 
