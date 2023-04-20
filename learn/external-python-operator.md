@@ -12,7 +12,7 @@ It is very common to run a task with different dependencies than your Airflow en
 
 In this tutorial, you'll learn how to use the [ExternalPythonOperator](https://airflow.apache.org/docs/apache-airflow/stable/howto/operator/python.html#externalpythonoperator) to run a task that leverages the [Snowpark API](https://www.snowflake.com/snowpark/) for data transformations. Snowpark allows you to run queries and transformations on your data using different programming languages, making it a flexible addition to traditional Snowflake operators. 
 
-Snowpark requires Python 3.8, while [Astro runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator will run your Snowpark query in a Python 3.8 virtual environment, allowing you to use a different Python version for your task than in the Airflow environment. You can use these same general steps for any use case for running a task in a reusable Python virtual environment.
+Snowpark requires Python 3.8, while the [Astro Runtime](https://docs.astronomer.io/astro/runtime-image-architecture) uses Python 3.9. The ExternalPythonOperator can run your Snowpark query in a Python 3.8 virtual environment, allowing you to use a different Python version for your task than in the Airflow environment. You can use these same general steps for any use case for running a task in a reusable Python virtual environment.
 
 ## Time to complete
 
@@ -100,11 +100,11 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
     These commands install `pyenv` in your Airflow environment and create a Python 3.8 virtual environment called `snowpark` with the required packages to run Snowpark. The `pyenv` environment is initialized when you start your Airflow project and can be used by any ExternalPythonOperator tasks. 
 
-    Creating a `pyenv` environment within your Airflow project requires installing multiple os-level packages and a series of Docker commands. The open source [Astro BuildKit](https://github.com/astronomer/astro-provider-venv) greatly simplifies this process and allows you to create a Python virtual environment with only two lines of code.
+    Creating a `pyenv` environment in your Airflow project requires installing multiple operating system level packages and a series of Docker commands. The open source [Astro BuildKit](https://github.com/astronomer/astro-provider-venv) simplifies this process and allows you to create a Python virtual environment with only two lines of code.
 
     :::note
 
-    To modify this example for other use cases, you can update `3.8` in this Dockerfile to a different version of Python. Note that there are some limitations when using a Python version greater than the version used by Airflow. For more details, see the [project Readme](https://github.com/astronomer/astro-provider-venv#caveats).
+    To modify this example for other use cases, you can update `3.8` in the Dockerfile to a different version of Python. Note that there are some limitations when using a Python version greater than the version used by Airflow. For more details, see the [project Readme](https://github.com/astronomer/astro-provider-venv#caveats).
 
     :::
 
@@ -132,7 +132,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
 
 ## Step 3: Create a connection to Snowflake
 
-1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
+1. In the Airflow UI, go to **Admin** > **Connections** and click **+**.
 
 2. Create a new connection named `snowflake_default` and choose the `Snowflake` connection type. Enter the following information:
 
@@ -143,7 +143,7 @@ Now that you have your Snowflake resources configured, you can set up Airflow.
     - [Database](https://docs.snowflake.com/en/sql-reference/sql/create-database.html): Your Snowflake database.
     - Region: Your Snowflake region, for example `us-east-1`.
 
-    Your connection should look something like the screenshot below.
+    The following example shows an Airflow Connection configuration in the Airflow UI.
 
     ![Snowflake connection](/img/guides/snowflake_tutorial_connection.png)
 
@@ -157,7 +157,7 @@ This DAG prints the context of your Airflow environment before using the `@task.
 
 ## Step 5: Run your DAG to execute your Snowpark query in a virtual environment
 
-Go to the Airflow UI, unpause your `py_virtual_env` DAG and trigger it to run your Snowpark query in an isolated Python virtual environment. Open your tasks logs to see the results of your query printed:
+Go to the Airflow UI, unpause your `py_virtual_env` DAG, and trigger it to run your Snowpark query in an isolated Python virtual environment. Open your tasks logs to see the results of your query printed:
 
 ```text
 [2023-04-07, 17:10:50 UTC] {process_utils.py:187} INFO - <snowflake.snowpark.dataframe.DataFrame object at 0x7fb86f142a90>
