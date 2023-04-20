@@ -119,6 +119,27 @@ Custom timetables can be registered as part of an Airflow plugin. They must be a
 - `next_dagrun_info`: Returns the data interval for the DAG's regular schedule
 - `infer_manual_data_interval`: Returns the data interval when the DAG is manually triggered
 
+### Continuous timetable
+
+In Airflow 2.6 the possibility of having a DAG run continuously with a pre-defined timetable was introduced. To use the [ContinuousTimetable](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/timetables/simple/index.html#module-airflow.timetables.simple.ContinuousTimetable), set the schedule of your DAG to `"@continuous"` and make sure `max_active_runs` is set to 1.
+
+```python
+@dag(
+    start_date=datetime(2023, 4, 18),
+    schedule="@continuous",
+    max_active_runs=1,  
+    catchup=False,
+)
+```
+
+This DAG will always be running and automatically scheduling its next run, whenever it has finished. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
+
+:::caution
+
+Be aware that Airflow should not be used for streaming or low-latency processes. See the [Best practices](#best-practices) section for more information.
+
+:::
+
 ### Example custom timetable
 
 For this implementation, you'll run your DAG at 6:00 and 16:30. Because this schedule has run times with differing hours and minutes, it can't be represented by a single cron expression. So, you'll implement this schedule with a custom timetable.
