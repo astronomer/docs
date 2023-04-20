@@ -46,5 +46,5 @@ The Astro CLI is open source and built for data practitioners everywhere. The bi
 
 - [`astro dev init`](cli/astro-dev-init.md)
 - [`astro dev start`](cli/astro-dev-start.md)
-- [`astro restart`](cli/astro-restart.md)
+- [`astro dev restart`](cli/astro-dev-restart.md)
 - [`astro deploy`](cli/astro-deploy.md)
