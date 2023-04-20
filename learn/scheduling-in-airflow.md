@@ -121,7 +121,7 @@ Custom timetables can be registered as part of an Airflow plugin. They must be a
 
 ### Continuous timetable
 
-In Airflow 2.6 the possibility of having a DAG run continuously with a pre-defined timetable was introduced. To use the [ContinuousTimetable](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/timetables/simple/index.html#module-airflow.timetables.simple.ContinuousTimetable), set the schedule of your DAG to `"@continuous"` and make sure `max_active_runs` is set to 1.
+As of Airflow 2.6 you can run a DAG continuously using a pre-defined timetable. To use the [ContinuousTimetable](https://airflow.apache.org/docs/apache-airflow/stable/_api/airflow/timetables/simple/index.html#module-airflow.timetables.simple.ContinuousTimetable), set the schedule of your DAG to `"@continuous"` and make sure `max_active_runs` is set to 1.
 
 ```python
 @dag(
@@ -132,7 +132,7 @@ In Airflow 2.6 the possibility of having a DAG run continuously with a pre-defin
 )
 ```
 
-This DAG will always be running and automatically scheduling its next run, whenever it has finished, irrespective of whether the DAG run succeeded or failed. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
+This DAG will run continuously by scheduling a new run as soon as the previous run has completed, regardless of whether the previous run succeeded or failed. Using a ContinuousTimetable is especially useful when [sensors](what-is-a-sensor.md) or [deferrable operators](deferrable-operators.md) are used to wait for highly irregular events in external data tools.
 
 :::caution
 
