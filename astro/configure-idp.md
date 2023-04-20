@@ -286,7 +286,7 @@ To set up OneLogin as your IdP, you will create a Security Assertion Markup Lang
 13. Select **SHA-256** in the **SAML Signature Algorithm** list.
 
 14. Copy and save the value displayed in the **SAML 2.0 Endpoint (HTTP)** field.
-
+    
 15. Assign yourself to the Astro app integration from OneLogin. See [Assigning apps to users](https://onelogin.service-now.com/kb_view_customer.do?sysparm_article=KB0010387).
     
 16. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
@@ -385,18 +385,20 @@ This section provides setup steps for setting up Ping Identity as your IdP on As
 
 17. Click the toggle in the top right to enable the application.
     
-18. Assign yourself to Astro from Ping Identity. See [Editing a user](https://docs.pingidentity.com/r/en-us/pingone/p1_t_edituser?section=gnn1564020489010).
+18. (Optional) If you configured your application on a PingFederate server, enable the **Include the certificate in the signature <KeyInfo> element** setting for your server. See [Ping documentation](https://docs.pingidentity.com/r/en-us/pingfederate-110/help_sp_credentialstasklet_signingcertstate).
     
-19. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
+19. Assign yourself to Astro from Ping Identity. See [Editing a user](https://docs.pingidentity.com/r/en-us/pingone/p1_t_edituser?section=gnn1564020489010).
+    
+20. Return to the Cloud UI. In the configuration screen for your SAML connection, configure the following values:
 
     - **Identity Provider Single Sign-on URL**: Enter the value you copied from the **Single Sign-on Service** field.
     - **X.509 Certificate**: Enter the X.509 Certificate that you downloaded.
 
-20. Click **Create**. Your Ping Identity integration appears as an entry in **SSO Configuration**.
+21. Click **Create**. Your Ping Identity integration appears as an entry in **SSO Configuration**.
     
-21. In **SSO Configuration**, click **Activate**. You are redirected to Ping Identity to test your configuration. After you have successfully authenticated, you are redirected to Astro.
+22. In **SSO Configuration**, click **Activate**. You are redirected to Ping Identity to test your configuration. After you have successfully authenticated, you are redirected to Astro.
     
-22. Click **Activate SSO**.
+23. Click **Activate SSO**.
     
 #### Step 2: Copy your SSO bypass link
 
