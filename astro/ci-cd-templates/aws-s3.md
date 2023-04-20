@@ -83,53 +83,62 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 7. Add the following code to `lambda_function.py`
 
     ```python
-    import boto3
-    import subprocess
-    import os
-    import tarfile
-    def untar(filename):
-        # open file
-        file = tarfile.open(filename)
-        # extracting file
-        file.extractall('/tmp/astro/')
-        file.close()
-    s3 = boto3.resource('s3')
-    def run_command(cmd):
-        p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE)
-        out, err = p.communicate()
-        print(out)
-        p.kill()
-    def download_s3_folder(bucket_name, s3_folder, local_dir=None):
-        """
-        Download the contents of a folder directory
-        Args:
-            bucket_name: the name of the s3 bucket
-            s3_folder: the folder path in the s3 bucket
-            local_dir: a relative or absolute directory path in the local file system
-        """
-        bucket = s3.Bucket(bucket_name)
-        for obj in bucket.objects.filter(Prefix=s3_folder):
-            target = obj.key if local_dir is None \
-                else os.path.join(local_dir, os.path.relpath(obj.key, s3_folder))
-            if not os.path.exists(os.path.dirname(target)):
-                os.makedirs(os.path.dirname(target))
-            if obj.key[-1] == '/':
-                continue
-            bucket.download_file(obj.key, target)
-        print("downloaded file")
-    def lambda_handler(event, context):
-        print("downloading files from s3")
-        download_s3_folder('my-demo-bucket', 'dags', '/tmp/astro/dags')
-        download_s3_folder('my-demo-bucket', 'cli_binary', '/tmp/astro')
-        print("Untar Astro CLI Binary")
-        untar('/tmp/astro/astro_cli.tar.gz')
-        
-        print("Deploy to Astro")
-        os.chdir('/tmp/astro')
-        run_command('echo y | ./astro dev init')
-        run_command('./astro deploy --dags')
-        
-        return {"statusCode": 200}
+
+        import boto3
+        import subprocess
+        import os
+        import tarfile
+
+        BUCKET = os.getenv("BUCKET", "astronomer-field-engineering-demo")
+        s3 = boto3.resource('s3')
+
+        def untar(filename: str, destination: str) -> None:
+            with tarfile.open(filename) as file:
+                file.extractall(destination)
+
+
+        def run_command(cmd: str) -> None:
+            p = subprocess.Popen("set -x; " + cmd, shell=True)
+            p.communicate()
+
+
+        def download_to_local(bucket_name: str, s3_folder: str, local_dir: str = None) -> None:
+            """
+            Download the contents of a folder directory
+            Args:
+                bucket_name: the name of the s3 bucket
+                s3_folder: the folder path in the s3 bucket
+                local_dir: a relative or absolute directory path in the local file system
+            """
+            bucket = s3.Bucket(bucket_name)
+            for obj in bucket.objects.filter(Prefix=s3_folder):
+                target = obj.key if local_dir is None \
+                    else os.path.join(local_dir, os.path.relpath(obj.key, s3_folder))
+                if not os.path.exists(os.path.dirname(target)):
+                    os.makedirs(os.path.dirname(target))
+                if obj.key[-1] == '/':
+                    continue
+                bucket.download_file(obj.key, target)
+            print("downloaded file")
+
+
+        def lambda_handler(event, context) -> None:
+            """Triggered by a change to a Cloud Storage bucket.
+            :param event: Event payload.
+            :param context: Metadata for the event.
+            """
+
+            base_dir = '/tmp/astro'
+            download_to_local(BUCKET, 'mkdemo/dags/', f'{base_dir}/dags')
+            download_to_local(BUCKET, 'mkdemo/cli_binary/', base_dir)
+            
+            os.chdir(base_dir)
+            untar('./astro_cli.tar.gz', '.')
+            
+            run_command('echo y | ./astro dev init')
+            run_command('./astro deploy --dags')
+            
+            return {"statusCode": 200}
     ```
     
 8. [Create a trigger](https://docs.aws.amazon.com/lambda/latest/dg/lambda-invocation.html) for your Lambda function with the following configuration:
