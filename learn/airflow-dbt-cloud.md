@@ -14,7 +14,7 @@ import airflow_dbt_simple from '!!raw-loader!../code-samples/dags/airflow-dbt-cl
 
 [dbt Cloud](https://getdbt.com/) is a managed service that provides a hosted architecture to run dbt, a tool that helps you build interdependent SQL models for in-warehouse data transformation.
 
-The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/dbt-cloud) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in your data ecosystem.
+The [dbt Cloud Airflow provider](https://registry.astronomer.io/providers/apache-airflow-providers-dbt-cloud/) allows users to orchestrate and execute actions in dbt Cloud as DAGs. Running dbt with Airflow ensures a reliable, scalable environment for models, as well as the ability to trigger models based on upstream dependencies in your data ecosystem.
 
 :::info
 
@@ -51,7 +51,7 @@ An Astro project contains all of the files you need to run Airflow locally.
     $ astro dev init
     ```
 
-2. Add the [dbt Cloud provider](https://registry.astronomer.io/providers/dbt-cloud) to your `requirements.txt` file.
+2. Add the [dbt Cloud provider](https://registry.astronomer.io/providers/apache-airflow-providers-dbt-cloud) to your `requirements.txt` file.
 
     ```text
     apache-airflow-providers-dbt-cloud
@@ -65,7 +65,7 @@ An Astro project contains all of the files you need to run Airflow locally.
 
 ## Step 2: Configure a dbt connection
 
-1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**. 
+1. In the Airflow UI, go to **Admin** -> **Connections** and click **+**.
 
 2. Create a new connection named `dbt_conn` and choose the `dbt Cloud` connection type. Configure the following values for the connection:
 
@@ -85,14 +85,14 @@ In the dbt Cloud UI, create one dbt Cloud job. The contents of this job do not m
 
     <CodeBlock language="python">{airflow_dbt_simple}</CodeBlock>
 
-    This DAG shows a simple implementation of using the [DbtCloudRunJobOperator](https://registry.astronomer.io/providers/dbt-cloud/modules/dbtcloudrunjoboperator) and [DbtCloudHook](https://registry.astronomer.io/providers/dbt-cloud/modules/dbtcloudhook). The DAG consists of two tasks:
+    This DAG shows a simple implementation of using the [DbtCloudRunJobOperator](https://registry.astronomer.io/providers/apache-airflow-providers-dbt-cloud/modules/dbtcloudrunjoboperator) and [DbtCloudHook](https://registry.astronomer.io/providers/apache-airflow-providers-dbt-cloud/modules/dbtcloudhook). The DAG consists of two tasks:
 
     - `check_job_is_not_running`: Uses the [ShortCircuitOperator](https://registry.astronomer.io/providers/apache-airflow/modules/shortcircuitoperator) to ensure that the dbt Cloud job with the specified `JOB_ID` is not currently running. The list of currently running dbt Cloud jobs is retrieved using the `list_job_runs()` method of the `DbtCloudHook`. Next, the `latest_run` is selected and its `status` parameter will be evaluated for being a terminal status or not. If the status of the latest run is terminal, this means the job is not currently running and the pipeline should go ahead triggering another run of this job. If the status of the latest run is not terminal, this means that a job with the given `JOB_ID` is still running in the dbt Cloud. The function used in the ShortCircuitOperator will return `False`, therefore causing the DAG to short circuit and skip any downstream tasks.
     - `trigger_dbt_cloud_job`: Uses the `DbtCloudRunJobOperator` to trigger a run of the dbt Cloud job with the correct `JOB_ID`.
 
 3. Run the DAG and verify that the dbt Cloud job ran in the dbt Cloud UI.
 
-    The full code for this example, along with other DAGs that implement the dbt Cloud provider, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/dbt_cloud_operational_check/versions/3.0.0). 
+    The full code for this example, along with other DAGs that implement the dbt Cloud provider, can be found on the [Astronomer Registry](https://registry.astronomer.io/dags/dbt_cloud_operational_check/versions/3.0.0).
 
 
 Congratulations! You've run a DAG which uses the dbt Cloud provider to orchestrate a job run in dbt Cloud.
