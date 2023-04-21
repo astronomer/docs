@@ -22,7 +22,7 @@ To deploy any non-DAG code changes to Astro, you need to trigger a standard imag
 
 :::
 
-1. Download the latest Astro CLI binary from [GitHub releases](https://github.com/astronomer/astro-cli/releases), then rename the file to, `astro_cli.tar.gz`. For example, to use Astro CLI version 1.13.0 in your template, you would download `astro_1.13.0_linux_amd64.tar.gz` and rename it to `astro_cli.tar.gz`.
+1. Download the latest Astro CLI binary from [GitHub releases](https://github.com/astronomer/astro-cli/releases), then rename the file to, `astro_cli.tar.gz`. For example, to use Astro CLI version 1.13.0 in your template, download `astro_1.13.0_linux_amd64.tar.gz` and rename it to `astro_cli.tar.gz`.
 2. In your GCS bucket, create the following new folders:
 
     - `dags`
