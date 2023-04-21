@@ -23,7 +23,7 @@ Release date: April 20, 2023
 
 ### Bug fixes
 
-- Fixed an issue where the command `astro workspace user list` would fail when being used with Workspace API Tokens.
+- Fixed an issue where `astro workspace user list` didn't work when using a Workspace API token.
 
 ## Astro CLI 1.14.0
 
