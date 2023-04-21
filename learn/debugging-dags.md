@@ -221,7 +221,7 @@ The following are some debugging steps you can try:
 - Change the `<external tool>_default` connection to use your connection details or define a new connection with a different name and pass the new name to the hook or operator.
 - Define connections using Airflow environment variables instead of adding them in the Airflow UI. Make sure you're not defining the same connection in multiple places. If you do, the environment variable takes precedence.
 - Test if your credentials work when used in a direct API call to the external tool.
-- Use the test connection feature added in Airflow 2.2 that many connection types have available.
+- Use the test connection feature added in Airflow 2.2 that many connection types have available. In Airflow 2.6+ you can test connections from the CLI using the [`airflow connections test`](https://airflow.apache.org/docs/apache-airflow/stable/cli-and-env-variables-ref.html#test) command.
 
     ![Test Connections](/img/guides/test_connections_2.png)
 
